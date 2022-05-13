@@ -601,7 +601,6 @@ POIの更新は利用できません</string>
     <string name="intermediate_points_change_order">順序を変更</string>
     <string name="srtm_paid_version_msg">アプリケーションの発展を望むのであれば、Google Play上にある等高線プラグインのご購入をご検討下さい。</string>
     <string name="srtm_paid_version_title">等高線プラグイン</string>
-    <string name="av_def_action_choose">ウィジェット起動毎に選択</string>
     <string name="av_def_action_video">動画を撮影</string>
     <string name="av_def_action_audio">音声を録音</string>
     <string name="av_widget_action_descr">AVウィジェットボタン(音声・動画・写真で残すメモ機能)のデフォルト動作を指定します。</string>
@@ -722,9 +721,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_compass">コンパス</string>
     <string name="map_widget_reset">標準設定に戻す</string>
     <string name="map_widget_parking">駐車場</string>
-    <string name="map_widget_speed">速度</string>
-    <string name="map_widget_distance">目的地</string>
-    <string name="map_widget_altitude">標高</string>
     <string name="map_widget_time">出発時刻</string>
     <string name="map_widget_next_turn">次の曲がる方向</string>
     <string name="map_widget_next_turn_small">次の曲がる方向(小さいアイコン)</string>
@@ -1509,7 +1505,7 @@ POIの更新は利用できません</string>
     <string name="edit_group">グループ編集</string>
     <string name="shared_string_release">リリース</string>
     <string name="plugin_install_needs_network">このプラグインのインストールには、オンライン環境が必要です。</string>
-    <string name="get_plugin">取得</string>
+    <string name="shared_string_get">取得</string>
     <string name="osm_changes_added_to_local_edits">OSMへの変更をストレージ内変更候補に追加しました</string>
     <string name="mark_to_delete">削除用にマーク</string>
     <string name="welmode_download_maps">マップダウンロード</string>

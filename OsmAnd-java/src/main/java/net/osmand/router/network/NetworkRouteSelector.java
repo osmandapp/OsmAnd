@@ -1,5 +1,19 @@
 package net.osmand.router.network;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,22 +31,10 @@ import java.util.TreeSet;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.NativeLibrary.RenderedObject;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadRect;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 public class NetworkRouteSelector {
-	
-	private static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
+
+	public static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 
 	private static final boolean GROW_ALGORITHM = false; // not implemented fully and has flaws (should be deleted)
 	private static final int MAX_ITERATIONS = 16000;
@@ -41,7 +43,7 @@ public class NetworkRouteSelector {
 	private static final int CONNECT_POINTS_DISTANCE_STEP = 50;
 	private static final int CONNECT_POINTS_DISTANCE_MAX = 1000;
 
-	
+
 	private final NetworkRouteContext rCtx;
 	
 	// TODO - FIX & implement work with routing tags
@@ -97,7 +99,47 @@ public class NetworkRouteSelector {
 		}
 		return res;
 	}
-	
+
+	public List<NetworkRouteSegment> getFirstSegments(QuadRect rect, RouteKey selected, double searchDistance) throws IOException {
+		int y31T = MapUtils.get31TileNumberY(Math.max(rect.bottom, rect.top));
+		int y31B = MapUtils.get31TileNumberY(Math.min(rect.bottom, rect.top));
+		int x31L = MapUtils.get31TileNumberX(rect.left);
+		int x31R = MapUtils.get31TileNumberX(rect.right);
+
+		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+
+		LatLon latLon = new LatLon(rect.centerY(), rect.centerX());
+		List<NetworkRouteSegment> networkRouteSegmentList = new ArrayList<>();
+		for (RouteKey key : res.keySet()) {
+			if (selected != null && !selected.equals(key)) {
+				continue;
+			}
+			List<NetworkRouteSegment> list = res.get(key);
+			if (list.size() > 0 && isSegmentsNearPoint(list, latLon, searchDistance)) {
+				networkRouteSegmentList.add(list.get(0));
+			}
+		}
+		return networkRouteSegmentList;
+	}
+
+	private boolean isSegmentsNearPoint(List<NetworkRouteSegment> list, LatLon latLon, double searchDistance) {
+		for (NetworkRouteSegment segment : list) {
+			RouteDataObject dataObject = segment.robj;
+			if (dataObject != null) {
+				for (int i = 0; i < dataObject.getPointsLength(); i++) {
+					double lon = MapUtils.get31LongitudeX(dataObject.getPoint31XTile(i));
+					double lat = MapUtils.get31LatitudeY(dataObject.getPoint31YTile(i));
+
+					double distance = MapUtils.getDistance(latLon, lat, lon);
+					if (distance <= searchDistance) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadRoutes, RouteKey selected) throws IOException {
 		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
@@ -106,7 +148,7 @@ public class NetworkRouteSelector {
 		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
 		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
 		for (RouteKey key : res.keySet()) {
-			if(selected != null && !selected.equals(key)) {
+			if (selected != null && !selected.equals(key)) {
 				continue;
 			}
 			List<NetworkRouteSegment> list = res.get(key);
@@ -704,21 +746,32 @@ public class NetworkRouteSelector {
 		}
 
 	}
-	
+
 	public static class RouteKey {
-		
+
 		public final RouteType type;
-		public final Set<String> set = new TreeSet<String>();
-		
+		public final Set<String> set = new TreeSet<>();
+
 		public RouteKey(RouteType routeType) {
 			this.type = routeType;
+		}
+
+		public String getValue(String key) {
+			key = ROUTE_KEY_VALUE_SEPARATOR + key + ROUTE_KEY_VALUE_SEPARATOR;
+			for (String str : set) {
+				int i = str.indexOf(key);
+				if (i > 0) {
+					return str.substring(i + key.length());
+				}
+			}
+			return "";
 		}
 
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((set == null) ? 0 : set.hashCode());
+			result = prime * result + set.hashCode();
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
@@ -732,21 +785,15 @@ public class NetworkRouteSelector {
 			if (getClass() != obj.getClass())
 				return false;
 			RouteKey other = (RouteKey) obj;
-			if (set == null) {
-				if (other.set != null)
-					return false;
-			} else if (!set.equals(other.set))
+			if (!set.equals(other.set))
 				return false;
-			if (type != other.type)
-				return false;
-			return true;
+			return type == other.type;
 		}
 
 		@Override
 		public String toString() {
 			return "Route [type=" + type + ", set=" + set + "]";
 		}
-		
 	}
 	
 	public enum RouteType {

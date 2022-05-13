@@ -404,7 +404,7 @@ public class MapDataMenuController extends MenuController {
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
 					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE)
 					&& srtmDisabled) {
-				leftDownloadButtonController.caption = mapActivity.getString(R.string.get_plugin);
+				leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_get);
 				leftDownloadButtonController.clearIcon(true);
 			} else if (indexItem.isOutdated()) {
 				leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_update);

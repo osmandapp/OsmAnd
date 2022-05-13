@@ -127,7 +127,6 @@
     <string name="poi_filter_sightseeing">സൈറ്റ്സീയിങ്ങ്</string>
     <string name="map_widget_lock_screen">സ്ക്രീന്‍ പൂട്ടുക</string>
     <string name="map_widget_parking">പാര്‍ക്കിങ്ങ്</string>
-    <string name="map_widget_distance">ലക്ഷ്യസ്ഥാനം</string>
     <string name="bg_service_screen_lock">സ്ക്രീന്‍ പൂട്ടുക</string>
     <string name="osmand_parking_hours">മണിക്കുര്‍</string>
     <string name="osmand_parking_minutes">മിനിറ്റ്</string>
@@ -331,7 +330,6 @@
     <string name="auto_zoom_map">ഭൂപടം ഓട്ടോസൂമാക്കിക്കാണിക്കുക</string>
     <string name="bg_service_sleep_mode_on">"ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിക്കുന്നത് നിര്‍ത്തുക "</string>
     <string name="map_widget_back_to_loc">എവിടെയാണ് ഞാന്‍</string>
-    <string name="map_widget_altitude">ഉയരം</string>
     <string name="map_widget_next_turn">അടുത്ത തിരുവ്</string>
     <string name="map_widget_next_turn_small">അടുത്ത (ചെറു) തിരുവ്</string>
     <string name="map_widget_next_next_turn">"രണ്ടാമത്തെ  തിരുവ്"</string>
@@ -644,7 +642,6 @@
     <string name="day_night_info">പകല്‍/രാത്രി വിവരം</string>
     <string name="map_widget_show_ruler">സ്കേല്‍</string>
     <string name="bg_service_sleep_mode_off">"ആപ്പിനെ ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിപ്പിക്കുക "</string>
-    <string name="map_widget_speed">വേഗത</string>
     <string name="map_widget_time">ദൈര്‍ഘ്യം</string>
     <string name="bg_service_screen_unlock">"സ്ക്രീന്‍ തുറക്കുക "</string>
     <string name="bg_service_screen_lock_toast">"സ്ക്രീന്‍ പൂട്ടിയിരിക്കുന്നു "</string>
@@ -2098,7 +2095,6 @@
     <string name="precise_routing_mode_descr">തടസം കൂടാതെ കൃത്യമായ യാത്രാമാർഗങ്ങൾ കണക്കാക്കുക. ദൂരം കുറഞ്ഞതും വേഗത കുറഞ്ഞതും.</string>
     <string name="recording_photo_description">ഫോട്ടോ %1$s %2$s</string>
     <string name="srtm_paid_version_msg">കൂടുതല്‍ ഡെവലപ്പ്മെന്റിന് പിന്തുണ നൽകാൻ \'കോണ്ടൂർ ലൈനുകൾ\' പ്ലഗിനു വേണ്ടി പണമടയ്ക്കുക.</string>
-    <string name="av_def_action_choose">അഭ്യർത്ഥനയനുസരിച്ച് തിരഞ്ഞെടുക്കുക</string>
     <string name="recording_error">റെക്കോർഡിംഗ് പരാജയപ്പെട്ടു</string>
     <string name="recording_is_recorded">ഓഡിയോ / വീഡിയോ റെക്കോർഡുചെയ്യുന്നു. AV വിഡ്ജെറ്റ് ടാപ്പുചെയ്യുന്നതിലൂടെ നിർത്തുക.</string>
     <string name="recording_playing">റിക്കോഡിങ്ങില്‍ നിന്ന് ഒരു ഓഡിയോ പ്ളേ ചെയ്യുന്നു.
@@ -2274,7 +2270,7 @@
     <string name="poi_dialog_comment_default">POI മാറുന്നു</string>
     <string name="poi_dialog_other_tags_message">മറ്റെല്ലാ ടാഗുകളും സംരക്ഷിക്കപ്പെടും</string>
     <string name="plugin_install_needs_network">ഈ പ്ലഗിൻ ഇൻസ്റ്റാളുചെയ്യാൻ നിങ്ങൾ ഇന്റർനെറ്റിൽ കണക്റ്റുചെയ്യേണ്ടതുണ്ട്.</string>
-    <string name="get_plugin">നേടുക</string>
+    <string name="shared_string_get">നേടുക</string>
     <string name="rate_this_app">ഈ അപ്ലിക്കേഷൻ റേറ്റുചെയ്യുക</string>
     <string name="rate_this_app_long">Google Play- യിൽ OsmAnd-ന് സ്കോർ കൊടുക്കുക</string>
     <string name="poi_dialog_poi_type">POI തരം</string>

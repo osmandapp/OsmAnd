@@ -146,7 +146,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		setupSupportButton();
 		setupKeyboardListener();
 
-		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
+		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.shared_string_get);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
 
 		return view;

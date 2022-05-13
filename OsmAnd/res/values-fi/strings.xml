@@ -56,9 +56,6 @@
     <string name="map_widget_compass">Kompassi</string>
     <string name="map_widget_reset">Palauta oletusasetukset</string>
     <string name="map_widget_parking">Pysäköinti</string>
-    <string name="map_widget_speed">Nopeus</string>
-    <string name="map_widget_distance">Päämäärä</string>
-    <string name="map_widget_altitude">Korkeus</string>
     <string name="map_widget_next_turn">Seuraava käännös</string>
     <string name="map_widget_next_turn_small">Seuraava käännös (pieni)</string>
     <string name="bg_service_screen_lock">Lukitse näyttö</string>
@@ -670,7 +667,7 @@
     <string name="monitoring_settings">Matkan tallennus</string>
     <string name="plugin_ski_name">Hiihtokarttanäkymä</string>
     <string name="route_points">Reittipisteet</string>
-    <string name="get_plugin">Lataa</string>
+    <string name="shared_string_get">Lataa</string>
     <string name="plugin_nautical_name">Merikartat</string>
     <string name="osmand_distance_planning_plugin_name">Etäisyyslaskin &amp; suunnittelutyökalu</string>
     <string name="search_for">Etsi</string>
@@ -1721,7 +1718,6 @@
     <string name="route_from">Mistä:</string>
     <string name="download_using_mobile_internet">Ei yhdistetty Wi-Fi-verkkoon. Haluatko käyttää nykyistä Internet-yhteyttä lataukseen\?</string>
     <string name="precise_routing_mode_descr">Ota käyttöön reitille tarkka laskenta ilman pikkuvirheitä. Vielä etäisyysrajoitteinen ja hidas.</string>
-    <string name="av_def_action_choose">Pyynnöstä\?</string>
     <string name="av_widget_action_descr">Oletustyökalutoiminto:</string>
     <string name="av_widget_action">Oletustyökalutoiminto</string>
     <string name="av_use_external_recorder_descr">Käytä järjestelmän nauhoitinta videolle.</string>

@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.openplacereviews;
 
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -21,13 +20,14 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -102,10 +102,7 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 
 	@Override
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 

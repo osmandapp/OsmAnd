@@ -458,7 +458,7 @@ public class NativeLibrary {
 				boolean hasNumber = Character.isDigit(nm.charAt(0)) && Character.isDigit(nm.charAt(1));
 				if (hasNumber) {
 					// numeric fonts 05_NotoSans .. 65_NotoSansNastaliqUrdu
-					return Integer.parseInt(nm.substring(0,1));
+					return Integer.parseInt(nm.substring(0,2));
 				} else if (nm.contains("NotoSans".toLowerCase())) {
 					// downloaded fonts (e.g. NotoSans-Japanese.otf)
 					return 100;
@@ -479,7 +479,6 @@ public class NativeLibrary {
 			initFontType(f.getAbsolutePath(), name.substring(0, name.length() - 4), name.toLowerCase().contains("bold"),
 					name.toLowerCase().contains("italic"));
 		}
-		
 	}
 
 	public static class RenderedObject extends MapObject {
@@ -619,26 +618,6 @@ public class NativeLibrary {
 		public String getGpxFileName() {
 			for (String name : getOriginalNames()) {
 				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
-					return name;
-				}
-			}
-			return null;
-		}
-
-		public String getRouteName() {
-			for (RouteType routeType : RouteType.values()) {
-				String name = getTagValue(routeType.getTag() + "_route_name");
-				if (!Algorithms.isEmpty(name)) {
-					return name;
-				}
-			}
-			return null;
-		}
-
-		public String getRouteRef() {
-			for (RouteType routeType : RouteType.values()) {
-				String name = getTagValue(routeType.getTag() + "_route_ref");
-				if (!Algorithms.isEmpty(name)) {
 					return name;
 				}
 			}

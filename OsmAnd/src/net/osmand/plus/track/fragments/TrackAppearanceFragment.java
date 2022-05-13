@@ -1,15 +1,8 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
-import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
-import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
-import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
-
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -79,6 +72,12 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
+import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
+import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
@@ -378,14 +377,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (view != null) {
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+				if (!nightMode) {
+					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
-			} else {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
+			} else if (!nightMode){
+				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
 			}
 		}
 		return -1;
@@ -771,7 +768,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
-			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
+			addCard(container, new ShowStartFinishCard(mapActivity));
 
 			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			addCard(container, trackColoringCard);

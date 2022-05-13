@@ -10,9 +10,6 @@
     <string name="map_widget_lock_screen">Skärmlås</string>
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_speed">Hastighet</string>
-    <string name="map_widget_distance">Destination</string>
-    <string name="map_widget_altitude">Höjd</string>
     <string name="map_widget_next_turn">Nästa sväng</string>
     <string name="show_warnings_title">Visa varningar …</string>
     <string name="show_warnings_descr">Ställ in trafikvarningar (hastighetsbegränsningar, tvångsstopp, farthinder, tunnlar), varningar för fartkameror och information om körfält.</string>
@@ -887,7 +884,6 @@
     <string name="prefer_in_routing_descr">Föredra motorvägar.</string>
     <string name="item_checked">markerad</string>
     <string name="item_unchecked">ej markerad</string>
-    <string name="av_def_action_choose">På förfrågan\?</string>
     <string name="enable_plugin_monitoring_services">Aktivera insticksmodulen \"Inspelning av resa\" för att använda positionsloggningstjänster (GPX-loggning, online-spårning)</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1344,7 +1340,7 @@
     <string name="plugin_install_needs_network">Du måste vara uppkopplad för att kunna installera denna modul.</string>
     <string name="shared_string_enable">Aktivera</string>
     <string name="shared_string_disable">Inaktivera</string>
-    <string name="get_plugin">Hämta</string>
+    <string name="shared_string_get">Hämta</string>
     <string name="plugin_ski_name">Skidkartsvy</string>
     <string name="plugin_nautical_name">Sjökortsvy</string>
     <string name="world_ski_missing">Ladda ner den speciella offline-kartan för att visa skidåkning.</string>
@@ -3063,7 +3059,7 @@
     <string name="message_graph_will_be_available_after_recalculation">Vänligen vänta.
 \nGrafen kommer bli tillgänglig efter att färdvägen omberäknats.</string>
     <string name="shared_string_local_maps">Lokala kartor</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="icon_group_transport">Kollektivtrafik</string>
     <string name="icon_group_amenity">bekvämligheter</string>
@@ -3971,4 +3967,20 @@
     <string name="rendering_attr_showRunningRoutes_name">Rutter för löpning</string>
     <string name="rendering_attr_showRunningRoutes_description">Visa löprutter</string>
     <string name="routing_attr_prefer_horse_routes_description">Föredra hästvägar</string>
+    <string name="add_page">Addera sida</string>
+    <string name="apply_only_to_new_favorites">Applicera bara till nya favoriter</string>
+    <string name="change_default_appearance">Ändra standard utseende</string>
+    <string name="routeInfo_horse_scale_name">Svårigheter av häst spår</string>
+    <string name="map_widget_altitude">Den aktuella platsens höjd</string>
+    <string name="map_widget_distance_to_destination">Distans till destination</string>
+    <string name="map_widget_current_speed">Nuvarande hastighet</string>
+    <string name="page_number">Sida %1$s</string>
+    <string name="apply_to_existing_points_descr">Tillämpa ändringarna på befintliga punkter i gruppen eller bara på nya\?</string>
+    <string name="apply_to_existing_favorites_descr">Tillämpa ändringarna på gruppens befintliga favoritpunkter eller bara på nya\?</string>
+    <string name="apply_to_existing">Applicera på befintliga</string>
+    <string name="apply_only_to_new_points">Applicera bara på nya punkter</string>
+    <string name="rendering_attr_horse_scale_common_name">Allmän</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Kräver</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Svår</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>

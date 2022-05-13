@@ -31,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
@@ -39,7 +40,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsVisibilityListener;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -49,11 +52,13 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener {
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
+public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsVisibilityListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
-	private static final String INFO_LINK = "https://docs.osmand.net/en/main@latest/osmand/widgets/configure-screen";
+	private static final String INFO_LINK = "https://docs.osmand.net/docs/user/widgets/configure-screen";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -119,6 +124,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStart() {
 		super.onStart();
 		app.getQuickActionRegistry().addUpdatesListener(this);
+		widgetRegistry.addWidgetsVisibilityListener(this);
 		mapActivity.disableDrawer();
 	}
 
@@ -126,6 +132,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStop() {
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
+		widgetRegistry.removeWidgetsVisibilityListener(this);
 		mapActivity.enableDrawer();
 	}
 
@@ -268,7 +275,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		setupButtonsCard();
 	}
 
+	@Override
+	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
+		setupWidgetsCard();
+	}
+
 	private View createWidgetGroupView(@NonNull WidgetsPanel panel, boolean showShortDivider, boolean showLongDivider) {
+		boolean rtl = AndroidUtils.isLayoutRtl(app);
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
@@ -277,12 +290,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = widgetRegistry.getWidgetsForPanel(panel).size();
+		int count = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, panel).size();
 		int iconColor = count > 0 ? activeColor : defColor;
-		Drawable icon = getPaintedContentIcon(panel.getIconId(), iconColor);
+		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);
 
-		String title = getString(panel.getTitleId());
+		String title = getString(panel.getTitleId(rtl));
 		tvTitle.setText(title);
 
 		tvDesc.setVisibility(View.VISIBLE);
@@ -388,10 +401,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 

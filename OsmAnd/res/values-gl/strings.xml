@@ -382,7 +382,6 @@
     <string name="intermediate_points_change_order">Mudar a orde</string>
     <string name="srtm_paid_version_msg">Coida a posibilidade de mercar o plugin de \'Curvas de nivel\' para así apoiar o seu desenvolvemento.</string>
     <string name="srtm_paid_version_title">Plugin de curvas de nivel</string>
-    <string name="av_def_action_choose">Baixo demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar son</string>
     <string name="av_widget_action_descr">Acción predeterminada do trebello:</string>
@@ -567,9 +566,6 @@
     <string name="map_widget_compass">Compás</string>
     <string name="map_widget_reset">Restaurar valores predeterminado</string>
     <string name="map_widget_parking">Aparcamento</string>
-    <string name="map_widget_speed">Velocidade</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Tempo para chegar</string>
     <string name="map_widget_next_turn">Manobra seguinte</string>
     <string name="map_widget_next_turn_small">Manobra seguinte (pequena)</string>
@@ -1546,7 +1542,7 @@ Lon %2$s</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_release">Publicado</string>
     <string name="plugin_install_needs_network">Precisas estar conectado para instalar este plugin.</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="use_fast_recalculation_desc">Recalcular só a parte inicial da ruta, útil para viaxes longas.</string>
     <string name="do_you_like_osmand">Gosta do OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">A túa opinión e comentarios son valorados.</string>

@@ -50,9 +50,6 @@
   <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Resetuj na zadano</string>
     <string name="map_widget_parking">Parkiralište</string>
-  <string name="map_widget_speed">Brzina</string>
-  <string name="map_widget_distance">Target</string>
-  <string name="map_widget_altitude">Visina</string>
   <string name="map_widget_time">Time to go</string>
   <string name="map_widget_next_turn">Sljedeće skretanje</string>
   <string name="map_widget_next_turn_small">Sljedeće skretanje (umanjeno)</string>

@@ -7,9 +7,92 @@
 	   1. To not produce duplicate strings (check by name if a string already exists)
 	   2. Every apostrophe (quote) is preceded by a backslash.
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
+	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="routing_attr_avoid_fords_name">Avoid fords</string>
+    <string name="routing_attr_avoid_fords_description">Avoid fords</string>
+    <string name="colour_of_circles">Colour of circles</string>
+    <string name="compass_on_circles">Compass on circles</string>
+    <string name="distance_circles">Distance-circles</string>
+    <string name="circle_settings">Circle settings</string>
+    <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
+    <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD only vehicles</string>
+    <string name="bearing_secondary_desc">You can change format of displayed data in: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Coordinates format could be change in %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
+    <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
+    <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
+    <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
+    <string name="av_notes_choose_action_widget_desc">Choose action.</string>
+    <string name="fps_widget_desc">Widget show how fast map &amp; map elements are showed &amp; refreshed.</string>
+    <string name="radius_rules_widget_desc">Radius-ruler tool helps to determine the radius around the selected point on the map via displaying distance-circles on the map.</string>
+    <string name="current_time_widget_desc">This widget shows current time from your device.</string>
+    <string name="battery_widget_desc">Widget shows battery level of your device.</string>
+    <string name="gps_info_widget_desc">Widget shows a number of satellites that device detects and uses at that moment.</string>
+    <string name="altitude_widget_desc">Widget shows the height above sea level of current geolocation.</string>
+    <string name="max_speed_widget_desc">Widget shows a speed limit for a current driving road.</string>
+    <string name="current_speed_widget_desc">Widget shows your current speed detected by GPS-sensor.</string>
+    <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
+    <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
+    <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
+    <string name="lanes_widgets_desc">Lanes widget shows the current road lanes layout and highlights lanes to drive with active navigation.</string>
+    <string name="map_markers_bar_widget_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
+    <string name="street_name_widget_desc">Street name widget shows current street name with straight location arrow or next street name with the maneuver that has to be completed.</string>
+    <string name="coordinates_widget_desc">It shows the geographic coordinates of current geo-location.</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="av_def_action_choose">On request</string>
+    <string name="audio_video_notes_desc">Widgets provides quick access to start/stop taking a recording (audio, video or photo).</string>
+    <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
+    <string name="map_markers_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
+    <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
+    <string name="navigation_points">Navigation points</string>
+    <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
+    <string name="route_maneuvers">Route maneuvers</string>
+    <string name="get_altitude_information">Get Altitude information</string>
+    <string name="calculating_altitude">Calculating altitude</string>
+    <string name="calculate_online_altitude_descr">Altitude data will be calculated on OsmAnd server.</string>
+    <string name="calculate_online">Calculate online</string>
+    <string name="track_attach_to_the_roads_descr">Track will be attached to the road using offline maps, track geometry will be changed.</string>
+    <string name="get_altitude_data">Get altitude data</string>
+    <string name="calculate_altitude">Calculate altitude</string>
+    <string name="no_altitude_data">No altitude data</string>
+    <string name="shared_string_speed">Speed</string>
+    <string name="app_mode_mountain_bicycle">Mountain bicycle</string>
+    <string name="turn_on_public_transport_description">Turn on to see public transport routes on the map.</string>
+    <string name="release_4_2">
+    • Widgets redesign: new Look &amp; Feel, group by Pages, change order and combine as you want.\n\n
+    • Hiking / Cycling / Travel routes: tap on the route symbol and get full information about the route.\n\n
+    • Favorite groups: set default appearance for new points in the group\n\n
+    • Fixes: online tile-maps auto-update\n\n
+    </string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Do not go offpiste</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Only if necessary</string>
+    <string name="routing_attr_freeride_policy_allow_name">Allow</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Prefer offpiste</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">No preference</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Beginner</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermediate</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Advanced</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
+    <string name="on_with_params">%1$s on %2$s</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="no_widgets_descr">Add one or more widgets from the list of available widgets.</string>
+    <string name="no_widgets_here_yet">No widgets here yet</string>
+    <string name="available_widgets">Available widgets</string>
+    <string name="snackbar_page_removed">\"Page %1$s\" has been removed.</string>
+    <string name="map_widget_altitude">Altitude of current location</string>
+    <string name="map_widget_distance_to_destination">Distance to destination</string>
+    <string name="map_widget_current_speed">Current speed</string>
+    <string name="add_page">Add page</string>
+    <string name="page_number">Page %1$s</string>
+    <string name="apply_to_existing_points_descr">Apply changes to the existing points of the group or only to new?</string>
+    <string name="apply_to_existing_favorites_descr">Apply changes to the existing favorite points of the group or only to new?</string>
+    <string name="apply_to_existing">Apply to existing</string>
+    <string name="apply_only_to_new_points">Apply only to new points</string>
+    <string name="apply_only_to_new_favorites">Apply only to new favorites</string>
+    <string name="change_default_appearance">Change default appearance</string>
     <string name="routeInfo_horse_scale_name">Difficulty of horse trails</string>
     <string name="routeInfo_horse_scale_description">Render paths according to difficulty of horse trails</string>
     <string name="rendering_attr_horse_scale_common_name">Common</string>
@@ -73,7 +156,7 @@
     <string name="import_tracks_descr">%1$s, contains %2$s separate tracks. Choose tracks to import.</string>
     <string name="please_provide_group_name_message">Please name the group.</string>
     <string name="quick_action_add_route_descr">A button to start a route from the middle of the screen.</string>
-    <string name="gpx_no_routes_descr">You can use the \"%1$s\" tool to save the route as a file.</string>
+    <string name="gpx_no_routes_descr">You can use the \"%1$s\" tool to add route into file.</string>
     <string name="gpx_no_routes_title">There are no routes</string>
     <string name="save_track_to_gpx_descrp">Auto-start track recording while navigating and auto-save afterwards.</string>
     <string name="rendering_attr_seabedDetail_name">Seabed detail</string>
@@ -1939,7 +2022,6 @@
     <string name="yesterday">Yesterday</string>
     <string name="last_seven_days">Last 7 days</string>
     <string name="this_year">This year</string>
-    <!-- string name="widget">Widget</string if needed should be shared_string_widget -->
     <!-- string name="top_bar">Top bar</string use shared_string_topbar -->
     <string name="move_all_to_history">Move all to history</string>
     <string name="show_direction">Distance indication</string>
@@ -3301,7 +3383,6 @@
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="intermediate_points_change_order">Change order</string>
     <string name="srtm_paid_version_msg">Please consider paying for the \'Contour lines\' plugin to support further development.</string>
-    <string name="av_def_action_choose">On request?</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Default widget action:</string>
@@ -3624,9 +3705,6 @@
     <string name="map_widget_compass">Compass</string>
     <string name="map_widget_reset">Reset to default</string>
     <string name="map_widget_parking">Parking</string>
-    <string name="map_widget_speed">Speed</string>
-    <string name="map_widget_distance">Destination</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Time to go</string>
     <string name="map_widget_next_turn">Next turn</string>
     <string name="map_widget_next_turn_small">Next turn (small)</string>
@@ -4338,7 +4416,7 @@
     <string name="av_camera_pic_size_descr">Set camera picture size</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
     <string name="plugin_install_needs_network">You need to be online to install this plugin.</string>
-    <string name="get_plugin">Get</string>
+    <string name="shared_string_get">Get</string>
     <string name="use_fast_recalculation">Smart route recalculation</string>
     <string name="do_you_like_osmand">Do you like OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Your opinion and feedback is valued.</string>

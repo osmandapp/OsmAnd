@@ -118,6 +118,8 @@ import net.osmand.aidlapi.profile.ExportProfileParams;
 
 import net.osmand.aidlapi.exit.ExitAppParams;
 
+import net.osmand.aidlapi.logcat.ALogcatListenerParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -919,4 +921,18 @@ interface IOsmAndAidlInterface {
 
     boolean getPreference(inout PreferenceParams params);
 
+    /**
+     * Method to register for Logcat messages. Notifies user about new logs in application.
+     *
+     * @param subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
+     * @param callbackId (long) - id of callback, needed to unsubscribe from messages
+     * @param filterLevel (String) determines which type of logs will be returned by callback
+     * Must be one of the values below:
+     * - "D" (debug)
+     * - "I" (info)
+     * - "W" (warn)
+     * - "E" (error)
+     * @param callback (IOsmAndAidlCallback) - callback to notify user on new OsmAnd logs
+     */
+    long registerForLogcatMessages(in ALogcatListenerParams params, IOsmAndAidlCallback callback);
 }

@@ -112,7 +112,7 @@ import btools.routingapp.IBRouterService;
  */
 public class AppInitializer implements IProgress {
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-1-released";
+	public static final String LATEST_CHANGES_URL = "https://docs.osmand.net/blog/osmand-android-4-2-released/";
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);

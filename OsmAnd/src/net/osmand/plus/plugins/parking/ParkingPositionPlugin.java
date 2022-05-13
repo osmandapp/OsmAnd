@@ -9,15 +9,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
@@ -41,18 +35,23 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PARKING_POSITION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.PARKING;
 
 /**
  * 
@@ -70,8 +69,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public static final String PARKING_START_TIME = "parking_time";
 	public static final String PARKING_EVENT_ADDED = "parking_event_added";
 
-	public static final String WIDGET_PARKING = "parking";
-
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
 
@@ -88,7 +85,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public ParkingPositionPlugin(OsmandApplication app) {
 		super(app);
 		OsmandSettings set = app.getSettings();
-		ApplicationMode.regWidgetVisibility("parking", (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility(PARKING.id, (ApplicationMode[]) null);
 		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal().makeShared();
 		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal().makeShared();
 		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeShared();
@@ -235,26 +232,19 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
-			mapInfoLayer.registerWidget(WIDGET_PARKING, parkingPlaceControl,
-					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, WidgetsPanel.RIGHT);
+			mapInfoLayer.registerWidget(PARKING, parkingPlaceControl);
 			mapInfoLayer.recreateControls();
 		}
 	}
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
-											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          final double latitude, final double longitude,
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
-		ItemClickListener addListener = new ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId,
-					int pos, boolean isChecked, int[] viewCoordinates) {
-				if (resId == R.string.context_menu_item_add_parking_point) {
-					showAddParkingDialog(mapActivity, latitude, longitude);
-				}
-				return true;
-			}
+		ItemClickListener addListener = (uiAdapter, view, item, isChecked) -> {
+			showAddParkingDialog(mapActivity, latitude, longitude);
+			return true;
 		};
 		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC)
 				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)
@@ -456,7 +446,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * and the location of the parked car
 	 */
 	private TextInfoWidget createParkingPlaceInfoControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget parkingPlaceControl = new RightTextInfoWidget(mapActivity) {
+		TextInfoWidget parkingPlaceControl = new TextInfoWidget(mapActivity) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;			
 			
@@ -506,6 +496,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
+		parkingPlaceControl.updateInfo(null);
 		parkingPlaceControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -519,7 +510,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		});
 		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
+		parkingPlaceControl.setIcons(PARKING);
 		return parkingPlaceControl;
 	}
 

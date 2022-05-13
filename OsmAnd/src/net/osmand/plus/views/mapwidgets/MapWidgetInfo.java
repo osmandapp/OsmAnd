@@ -2,16 +2,15 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
@@ -19,11 +18,15 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public final String key;
 	public final MapWidget widget;
-	public final WidgetsPanel widgetPanel;
+
+	public WidgetsPanel widgetPanel;
 	public int priority;
+	public int pageIndex;
 
 	@DrawableRes
-	private final int settingsIconId;
+	private final int daySettingsIconId;
+	@DrawableRes
+	private final int nightSettingsIconId;
 	@StringRes
 	private final int messageId;
 	private final String message;
@@ -32,18 +35,22 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public MapWidgetInfo(@NonNull String key,
 	                     @NonNull MapWidget widget,
 	                     @Nullable WidgetState widgetState,
-	                     @DrawableRes int settingsIconId,
+	                     @DrawableRes int daySettingsIconId,
+	                     @DrawableRes int nightSettingsIconId,
 	                     @StringRes int messageId,
 	                     @Nullable String message,
-	                     int priority,
+	                     int page,
+	                     int order,
 	                     @NonNull WidgetsPanel widgetPanel) {
 		this.key = key;
 		this.widget = widget;
 		this.widgetState = widgetState;
-		this.settingsIconId = settingsIconId;
+		this.daySettingsIconId = daySettingsIconId;
+		this.nightSettingsIconId = nightSettingsIconId;
 		this.messageId = messageId;
 		this.message = message;
-		this.priority = priority;
+		this.pageIndex = page;
+		this.priority = order;
 		this.widgetPanel = widgetPanel;
 	}
 
@@ -53,10 +60,12 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	}
 
 	@DrawableRes
-	public int getSettingsIconId() {
-		return widgetState != null
-				? widgetState.getSettingsIconId()
-				: settingsIconId;
+	public int getSettingsIconId(boolean nightMode) {
+		if (widgetState != null) {
+			return widgetState.getSettingsIconId(nightMode);
+		} else {
+			return nightMode ? nightSettingsIconId : daySettingsIconId;
+		}
 	}
 
 	@DrawableRes
@@ -66,6 +75,19 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 			return textInfoWidget.getIconId(nightMode);
 		}
 		return 0;
+	}
+
+	public boolean isIconPainted() {
+		int dayMapIconId = getMapIconId(false);
+		int nightMapIconId = getMapIconId(true);
+		int daySettingsIconId = getSettingsIconId(false);
+		int nightSettingsIconId = getSettingsIconId(true);
+		if (dayMapIconId != 0 && nightMapIconId != 0) {
+			return dayMapIconId != nightMapIconId;
+		} else if (daySettingsIconId != 0 && nightSettingsIconId != 0) {
+			return daySettingsIconId != nightSettingsIconId;
+		}
+		return false;
 	}
 
 	@NonNull
@@ -85,26 +107,17 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 				: messageId;
 	}
 
-	public boolean isSelected(@NonNull ApplicationMode appMode) {
-		OsmandPreference<Boolean> pref = widget.getWidgetVisibilityPref();
-		if (pref != null) {
-			return pref.getModeValue(appMode);
-		} else {
-			return isVisibleCollapsed(appMode) || isVisible(appMode);
-		}
+	@Nullable
+	public String getExternalProviderPackage() {
+		return null;
 	}
 
-	public abstract boolean isVisibleCollapsed(@NonNull ApplicationMode appMode);
+	@NonNull
+	public abstract WidgetsPanel getUpdatedPanel();
 
-	public abstract boolean isVisible(@NonNull ApplicationMode appMode);
+	public abstract boolean isEnabledForAppMode(@NonNull ApplicationMode appMode);
 
-	public abstract void addVisible(@NonNull ApplicationMode appMode);
-
-	public abstract void addVisibleCollapsible(@NonNull ApplicationMode appMode);
-
-	public abstract void removeVisible(@NonNull ApplicationMode appMode);
-
-	public abstract void removeVisibleCollapsible(@NonNull ApplicationMode appMode);
+	public abstract void enableDisableForMode(@NonNull ApplicationMode appMode, boolean enabled);
 
 	@Override
 	public int hashCode() {
@@ -130,20 +143,17 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	@Override
 	public int compareTo(@NonNull MapWidgetInfo another) {
-		if (getMessageId() == 0 && another.getMessageId() == 0) {
-			if (key.equals(another.key)) {
-				return 0;
-			}
-		} else if (getMessageId() == another.getMessageId()) {
+		if (equals(another)) {
 			return 0;
 		}
-		if (priority == another.priority) {
-			if (getMessageId() == 0 && another.getMessageId() == 0) {
-				return key.compareTo(another.key);
-			} else {
-				return getMessageId() - another.getMessageId();
-			}
+		if (pageIndex != another.pageIndex) {
+			return pageIndex - another.pageIndex;
 		}
-		return priority - another.priority;
+		if (priority != another.priority) {
+			return priority - another.priority;
+		}
+		return getMessageId() == 0 && another.getMessageId() == 0
+				? key.compareTo(another.key)
+				: getMessageId() - another.getMessageId();
 	}
 }

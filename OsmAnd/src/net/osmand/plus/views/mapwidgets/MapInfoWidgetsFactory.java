@@ -9,23 +9,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.util.MapUtils;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -33,21 +21,12 @@ import java.util.LinkedList;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 public class MapInfoWidgetsFactory {
-
-	private final OsmandApplication app;
-	private final OsmAndLocationProvider locationProvider;
-
-	public MapInfoWidgetsFactory(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.locationProvider = app.getLocationProvider();
-	}
 
 	public enum TopToolbarControllerType {
 		QUICK_SEARCH,
@@ -57,130 +36,6 @@ public class MapInfoWidgetsFactory {
 		MEASUREMENT_TOOL,
 		POI_FILTER,
 		DOWNLOAD_MAP
-	}
-
-	public TextInfoWidget createAltitudeControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget altitudeControl = new RightTextInfoWidget(mapActivity) {
-			private int cachedAlt = 0;
-
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
-				Location loc = locationProvider.getLastKnownLocation();
-				if (loc != null && loc.hasAltitude()) {
-					double compAlt = loc.getAltitude();
-					if (isUpdateNeeded() || cachedAlt != (int) compAlt) {
-						cachedAlt = (int) compAlt;
-						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, app);
-						int ls = ds.lastIndexOf(' ');
-						if (ls == -1) {
-							setText(ds, null);
-						} else {
-							setText(ds.substring(0, ls), ds.substring(ls + 1));
-						}
-					}
-				} else if (cachedAlt != 0) {
-					cachedAlt = 0;
-					setText(null, null);
-				}
-			}
-
-			@Override
-			public boolean isMetricSystemDepended() {
-				return true;
-			}
-		};
-		altitudeControl.setText(null, null);
-		altitudeControl.setIcons(R.drawable.widget_altitude_day, R.drawable.widget_altitude_night);
-		return altitudeControl;
-	}
-
-	public TextInfoWidget createGPSInfoControl(@NonNull MapActivity mapActivity) {
-		TextInfoWidget gpsInfoControl = new RightTextInfoWidget(mapActivity) {
-			private int usedSatellites = -1;
-			private int foundSatellites = -1;
-
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
-				GPSInfo gpsInfo = locationProvider.getGPSInfo();
-				if (isUpdateNeeded()
-						|| gpsInfo.usedSatellites != usedSatellites
-						|| gpsInfo.foundSatellites != foundSatellites) {
-					usedSatellites = gpsInfo.usedSatellites;
-					foundSatellites = gpsInfo.foundSatellites;
-					setText(gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites, "");
-				}
-			}
-		};
-		gpsInfoControl.setIcons(R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night);
-		gpsInfoControl.setText(null, null);
-		gpsInfoControl.setOnClickListener(view -> new StartGPSStatus(mapActivity).run());
-		return gpsInfoControl;
-	}
-
-	public TextInfoWidget createRadiusRulerControl(@NonNull MapActivity mapActivity) {
-		final String title = "—";
-		final TextInfoWidget radiusRulerControl = new RightTextInfoWidget(mapActivity) {
-
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
-				Location currentLoc = locationProvider.getLastKnownLocation();
-				LatLon centerLoc = mapActivity.getMapLocation();
-
-				if (currentLoc != null && centerLoc != null) {
-					if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-						setDistanceText(0);
-					} else {
-						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
-								centerLoc.getLatitude(), centerLoc.getLongitude());
-					}
-				} else {
-					setText(title, null);
-				}
-			}
-
-			private void setDistanceText(float dist) {
-				calculateAndSetText(dist);
-			}
-
-			private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
-				float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
-				calculateAndSetText(dist);
-			}
-
-			private void calculateAndSetText(float dist) {
-				String distance = OsmAndFormatter.getFormattedDistance(dist, app);
-				int ls = distance.lastIndexOf(' ');
-				setText(distance.substring(0, ls), distance.substring(ls + 1));
-			}
-		};
-
-		radiusRulerControl.setText(title, null);
-		setRulerControlIcon(radiusRulerControl, app.getSettings().RADIUS_RULER_MODE.get());
-		radiusRulerControl.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final RadiusRulerMode mode = app.getSettings().RADIUS_RULER_MODE.get();
-				RadiusRulerMode newMode = RadiusRulerMode.FIRST;
-				if (mode == RadiusRulerMode.FIRST) {
-					newMode = RadiusRulerMode.SECOND;
-				} else if (mode == RadiusRulerMode.SECOND) {
-					newMode = RadiusRulerMode.EMPTY;
-				}
-				setRulerControlIcon(radiusRulerControl, newMode);
-				app.getSettings().RADIUS_RULER_MODE.set(newMode);
-				mapActivity.refreshMap();
-			}
-		});
-
-		return radiusRulerControl;
-	}
-
-	private void setRulerControlIcon(TextInfoWidget rulerControl, RadiusRulerMode mode) {
-		if (mode == RadiusRulerMode.FIRST || mode == RadiusRulerMode.SECOND) {
-			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
-		} else {
-			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
-		}
 	}
 
 	public static class TopToolbarController {

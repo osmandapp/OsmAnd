@@ -951,7 +951,6 @@
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
     <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la vendejo por subteni ĝian pluan evoluigon.</string>
-    <string name="av_def_action_choose">Demandi</string>
     <string name="av_def_action_video">Registri videon</string>
     <string name="av_def_action_audio">Registri sonon</string>
     <string name="av_widget_action_descr">Implicita ago de fenestraĵo:</string>
@@ -1104,9 +1103,6 @@
     <string name="map_widget_compass">Kompaso</string>
     <string name="map_widget_reset">Rekomencigi</string>
     <string name="map_widget_parking">Parkumejo</string>
-    <string name="map_widget_speed">Rapido</string>
-    <string name="map_widget_distance">Celo</string>
-    <string name="map_widget_altitude">Altitudo</string>
     <string name="map_widget_time">Plua tempo</string>
     <string name="map_widget_next_turn">Sekva kurbiĝo</string>
     <string name="map_widget_next_turn_small">Sekva kurbiĝeto</string>
@@ -1488,7 +1484,7 @@
     <string name="app_mode_car">Aŭto</string>
     <string name="app_mode_bicycle">Biciklo</string>
     <string name="app_mode_pedestrian">Piediranto</string>
-    <string name="get_plugin">Akiri</string>
+    <string name="shared_string_get">Akiri</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="access_direction_audio_feedback">Sonaj sciigoj pri direkto</string>
@@ -1503,9 +1499,9 @@
 \n 
 \nPor reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝi ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
-    <string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Kursoj kaj vojoj estas kolorigitaj laŭ facileco kaj montrataj kiel speciala ‘vintra map-aspekto kiu ŝajnas kiel neĝ-kovrita landvidaĵo. 
-\n 
-\nAktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al ‘vintro kaj skiado’, montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de ‘map-aspekto’ en la menuo ‘agordi mapon.</string>
+    <string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Skiadaj kursoj kaj vojoj estas kolorigitaj laŭ facileco.
+\n
+\nAktivigo de tiu ĉi map-vido ŝanĝas la map-aspekton al “Vintro kaj skiado”, kiu montras ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi la elekteblon “Map-aspekto” en la menuo “Agordi mapon”.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
     <string name="osmand_parking_plugin_description">Ebligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas.
 \n Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
@@ -3005,8 +3001,8 @@
     <string name="routing_attr_allow_skating_only_description">Nur skivojoj preparitaj por glitkurado (sketado), sen klasikaj skivojoj.</string>
     <string name="routing_attr_allow_classic_only_name">Permesi nur klasikajn skivojojn</string>
     <string name="routing_attr_allow_classic_only_description">Skivojoj preparitaj nur por klasika skiado sen glitkurado. Ampleksas skivojojn preparitaj per malgranda motorsledo kaj skivojoj permane preparitaj de skiistoj.</string>
-    <string name="routing_attr_difficulty_preference_name">Preferata malfacilo</string>
-    <string name="routing_attr_difficulty_preference_description">Preferi skivojojn de tiu malfacilo, sed eblas difini kurson per pli (mal)facilaj skivojoj, se la rezulta kurso estos pli mallonga.</string>
+    <string name="routing_attr_difficulty_preference_name">Preferata facilo</string>
+    <string name="routing_attr_difficulty_preference_description">Preferi skivojojn tiu ĉi facilo, sed la aplikaĵo povos difini kurson tra pli (mal)facilaj skivojoj, se la rezulta kurso estos pli mallonga.</string>
     <string name="routing_attr_freeride_policy_name">Ekster skivojoj</string>
     <string name="routing_attr_freeride_policy_description">Skivojoj malfacilegaj, neoficialaj, nepreparataj kaj nekontrolataj je vespero. Vi eniras nur sub via risko.</string>
     <string name="process_downloading_service">Servo de elŝutoj OsmAnd</string>
@@ -4545,4 +4541,75 @@
     <string name="rendering_attr_showFitnessTrails_name">Vojetoj de sportiloj</string>
     <string name="rendering_attr_showRunningRoutes_description">Montri vojetojn por kurado</string>
     <string name="rendering_attr_showRunningRoutes_name">Kuradaj kursoj</string>
+    <string name="map_widget_altitude">Altitudo de nuna pozicio</string>
+    <string name="apply_to_existing_favorites_descr">Ĉu apliki la ŝanĝojn al la ekzistaj (kaj novaj) ŝatataj punktoj de la grupo aŭ nur al novaj\?</string>
+    <string name="apply_to_existing_points_descr">Ĉu apliki la ŝanĝojn al la ekzistaj (kaj novaj) punktoj de la grupo aŭ nur al novaj\?</string>
+    <string name="shared_string_item">Elemento</string>
+    <string name="shared_string_buttons">Butonoj</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Komun-taksiaj kursoj</string>
+    <string name="map_markers_bar">Strio de map-markoj</string>
+    <string name="shared_string_visible_widgets">Videblaj fenestraĵoj</string>
+    <string name="top_widgets_panel">Supra panelo</string>
+    <string name="bottom_widgets_panel">Malsupra panelo</string>
+    <string name="configure_screen_widgets_descr">Aldoni/forigi kaj aranĝi fenestraĵoj ĉe la elektita flanko de la ekrano.</string>
+    <string name="osm_carto_render_descr">Simila al la stilo «osm-carto» (“Norma mapo”) uzata en la retejo OpenStreetMap.org</string>
+    <string name="simulation_real_mode_desc">Sur rektaj fragmentoj de vojoj, rapido estos la maksimuma permesata rapido.
+\nSur vojkruciĝoj la simulado malrapidiĝos.
+\nLa simulado eĉ pli malrapidiĝos ĉe trafiklumoj, trafiksignoj STOP, ktp.</string>
+    <string name="simulation_real_mode_title">Realisma</string>
+    <string name="speed_mode">Reĝimo de rapido</string>
+    <string name="map_widget_distance_to_destination">Distanco al celo</string>
+    <string name="map_widget_current_speed">Nuna rapido</string>
+    <string name="add_page">Aldoni paĝon</string>
+    <string name="page_number">Paĝo %1$s</string>
+    <string name="apply_to_existing">Apliki al ekzistaj</string>
+    <string name="apply_only_to_new_points">Apliki nur al novaj</string>
+    <string name="apply_only_to_new_favorites">Apliki nur al novaj ŝatataj</string>
+    <string name="change_default_appearance">Ŝanĝi implicitan aspekton</string>
+    <string name="routeInfo_horse_scale_description">Bildigi vojojn laŭ facilo de ĉevalaj vojoj</string>
+    <string name="rendering_attr_horse_scale_common_name">facila</string>
+    <string name="rendering_attr_horse_scale_demanding_name">ete malfacila</string>
+    <string name="rendering_attr_horse_scale_difficult_name">malfacila</string>
+    <string name="rendering_attr_horse_scale_critical_name">malfacilega</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">tre malfacilega</string>
+    <string name="rendering_attr_horse_scale_impossible_name">netransrajdebla</string>
+    <string name="routing_attr_carriage_restrictions_name">Aliro por kaleŝoj</string>
+    <string name="routing_attr_carriage_restrictions_description">Konsideri alirajn limigojn por veturiloj tirataj de ĉevaloj</string>
+    <string name="rendering_attr_showTramRoutes_name">Tramaj kursoj</string>
+    <string name="rendering_attr_showTrainRoutes_name">Fervojaj kursoj</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Malpez-fervojaj kursoj</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Unurel-fervojaj kursoj</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Funikularaj kursoj</string>
+    <string name="rendering_attr_showBusRoutes_name">Aŭtobusaj kursoj</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolebusaj kursoj</string>
+    <string name="routeInfo_horse_scale_name">Facilo de ĉevalaj vojoj</string>
+    <string name="simulation_constant_mode_desc">La simulado estos farita kun la konstanta elektita rapido.</string>
+    <string name="simulation_constant_mode_title">Konstanta rapido</string>
+    <string name="simulation_preview_mode_desc">Rapido de la simulado estos maksimuma sur rektaj fragmentoj kaj malrapidiĝos nur sur vojkruciĝoj.</string>
+    <string name="simulation_preview_mode_title">Rapida antaŭvido</string>
+    <string name="on_with_params">%1$s en %2$s</string>
+    <string name="shared_string_symbol">Simbolo</string>
+    <string name="no_widgets_descr">Aldonu almenaŭ unu fenestraĵon el la listo de disponeblaj fenestraĵoj.</string>
+    <string name="no_widgets_here_yet">Neniu fenestraĵo tie ĉi</string>
+    <string name="available_widgets">Disponeblaj fenestraĵoj</string>
+    <string name="snackbar_page_removed">Forigis la paĝon %1$s.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">ne eniri neoficialajn skivojojn</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">nur kiam necesa</string>
+    <string name="routing_attr_freeride_policy_allow_name">permesi</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">preferi neoficialajn skivojojn</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">neniu prefero</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">facilaj</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">malfacilaj</string>
+    <string name="routing_attr_difficulty_preference_expert_name">malfacilegaj</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">mezfacilaj</string>
+    <string name="release_4_2">• rekonstruo de fenestraĵoj: nova aspekto, eblo grupigi ilin laŭ paĝoj, ŝanĝi ordon kaj kunigi laŭ viaj bezonoj
+\n
+\n• kursoj piediradaj / biciklaj / vojaĝaj: frapetu simbolon de la kurso por akiri plenajn informojn pri la kurso
+\n
+\n• grupoj de ŝatataj punktoj: difini implicitan aspekton por novaj punktoj de la grupo
+\n
+\n• erar-riparoj: aŭtomate ĝisdatigi enretajn map-kahelojn
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">Aktivigu por vidigi kursojn de publika transporto sur la mapo.</string>
 </resources>

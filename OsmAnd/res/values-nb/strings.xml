@@ -65,9 +65,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Tilbakestill til standard</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_speed">Hastighet</string>
-    <string name="map_widget_distance">Mål</string>
-    <string name="map_widget_altitude">Høyde</string>
     <string name="map_widget_time">Resterende tid</string>
     <string name="map_widget_next_turn">Neste sving</string>
     <string name="map_widget_next_turn_small">Neste sving (liten)</string>
@@ -854,7 +851,7 @@
     <string name="use_transparent_map_theme">Gjennomsiktig drakt</string>
     <string name="keep_informing_never">Bare manuelt (trykk pil)</string>
     <string name="local_index_installed">Lokal versjon</string>
-    <string name="gpx_option_destination_point">Bruk gjeldende mål</string>
+    <string name="gpx_option_destination_point">Bruk gjeldende reisemål</string>
     <string name="error_doing_search">Kunne ikke utføre (nett)frakoblet søk.</string>
     <string name="send_location">Send posisjon</string>
     <string name="amenity_type_administrative">Administrative</string>
@@ -1117,7 +1114,7 @@
     <string name="days_behind">dager etter</string>
     <string name="settings_privacy">Personvern</string>
     <string name="download_type_to_filter">Filtrer</string>
-    <string name="get_plugin">Hent</string>
+    <string name="shared_string_get">Hent</string>
     <string name="shared_string_is_open">Åpen nå</string>
     <string name="application_dir_change_warning3">Flytt OsmAnd-datafiler til det nye målet\?</string>
     <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>
@@ -1428,7 +1425,6 @@
     <string name="local_openstreetmap_act_title">OSM-endringer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="intermediate_points_change_order">Endre rekkefølge</string>
-    <string name="av_def_action_choose">På forespørsel\?</string>
     <string name="av_def_action_video">Ta opp video</string>
     <string name="av_def_action_audio">Ta opp lyd</string>
     <string name="recording_context_menu_delete">Slett opptak</string>
@@ -2843,7 +2839,7 @@
     <string name="use_osm_live_public_transport_description">Skru på offentlig transport i OsmAnd Live-endringer.</string>
     <string name="use_osm_live_public_transport">Offentlig transport i OsmAnd Live</string>
     <string name="transfers_size">%1$d overføringer</string>
-    <string name="add_start_and_end_points">Legg til start- og sluttpunkt</string>
+    <string name="add_start_and_end_points">Legg til start- og reisemål</string>
     <string name="route_add_start_point">Legg til startpunkt</string>
     <string name="route_descr_select_start_point">Velg startpunkt</string>
     <string name="rendering_attr_surface_unpaved_name">Uten fast dekke</string>
@@ -3549,7 +3545,7 @@
     <string name="speed_camera_pois">Fotoboks-interessepunkter</string>
     <string name="shared_string_uninstall">Avinstaller</string>
     <string name="vessel_height_warning">Sett fartøyhøyde for å unngå lave broer. Hvis broen endrer høyde, brukes høyden i åpen tilstand.</string>
-    <string name="quick_action_remove_next_destination">Slett nærmeste målpunkt</string>
+    <string name="quick_action_remove_next_destination">Slett nærmeste reisemål</string>
     <string name="please_provide_point_name_error">Navngi punktet</string>
     <string name="shared_string_bearing">Peiling</string>
     <string name="item_deleted">%1$s slettet</string>
@@ -4543,4 +4539,122 @@
     <string name="rendering_attr_showFitnessTrails_description">Vis trimløyper</string>
     <string name="rendering_attr_showRunningRoutes_name">Løperuter</string>
     <string name="rendering_attr_showRunningRoutes_description">Vis løperuter</string>
+    <string name="rendering_attr_showTramRoutes_name">Trikkeruter</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybussruter</string>
+    <string name="rendering_attr_showTrainRoutes_name">Togruter</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Kabelbaneruter</string>
+    <string name="rendering_attr_showBusRoutes_name">Bussruter</string>
+    <string name="routeInfo_horse_scale_description">Tegn stier etter vanskelighetsgrad for hestetråkk</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Krevende</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritisk</string>
+    <string name="map_widget_altitude">Høyde for nåværende posisjon</string>
+    <string name="map_widget_distance_to_destination">Avstand til mål</string>
+    <string name="apply_to_existing_points_descr">Bruk endringer for eksisterende punkt i gruppen, eller kun nye\?</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Vanskelig</string>
+    <string name="page_number">Side %1$s</string>
+    <string name="shared_string_buttons">Knapper</string>
+    <string name="configure_screen_widgets_descr">Velg skjermside å legge til eller flytte rundt på miniprogrammer.</string>
+    <string name="map_markers_bar">Stolpe for kartmarkører</string>
+    <string name="apply_to_existing_favorites_descr">Bruk endringer for eksisterende favorittpunkt i gruppen, eller kun nye\?</string>
+    <string name="apply_to_existing">Bruk for eksisterende</string>
+    <string name="apply_only_to_new_points">Bruk kun for nye punkter</string>
+    <string name="apply_only_to_new_favorites">Bruk kun for nye favoritter</string>
+    <string name="simulation_preview_mode_desc">Simuleringen går fortest på rette strekk, og bruker lenger tid på kryss.</string>
+    <string name="simulation_constant_mode_title">Fastsatt hastighet</string>
+    <string name="simulation_constant_mode_desc">Simuleringen vil utføres med konstant valgt hastighet.</string>
+    <string name="simulation_real_mode_title">Realistisk simulering</string>
+    <string name="simulation_real_mode_desc">På rette veistrekk vil hastigheten være omtrent maksimalt tillatt hastighet.
+\nVed kryss vil simuleringen gå tregere.
+\nEkstra ned-sakking skjer ved trafikklys, stopp-skilt, osv.</string>
+    <string name="speed_mode">Hastighetsmodus</string>
+    <string name="map_widget_current_speed">Nåværende hastighet</string>
+    <string name="add_page">Legg til en side</string>
+    <string name="change_default_appearance">Endre forvalgt utseende</string>
+    <string name="routeInfo_horse_scale_name">Vanskelighetsgrad for hestetråkk</string>
+    <string name="rendering_attr_horse_scale_common_name">Vanlig</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Farlig</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Umulig</string>
+    <string name="routing_attr_carriage_restrictions_name">Vognbegrensninger</string>
+    <string name="routing_attr_carriage_restrictions_description">Overvei tilgangstilganger for kjøretøy som dras av hester</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Lettbanelinjer</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Énskinnebanelinje</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Skytteltrafikklinjer</string>
+    <string name="shared_string_visible_widgets">Synlige miniprogrammer</string>
+    <string name="top_widgets_panel">Topp-panel</string>
+    <string name="bottom_widgets_panel">Bunn-panel</string>
+    <string name="shared_string_item">Element</string>
+    <string name="simulation_preview_mode_title">Hurtigforhåndsvisningsmodus</string>
+    <string name="osm_carto_render_descr">Ligner stilen til OpenStreetMap-carto brukt på OSM-nettsiden</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Nybegynner</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avansert</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
+    <string name="on_with_params">%1$s på %2$s</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="no_widgets_descr">Legg til ett eller flere miniprogrammer fra listen av tilgjengelige miniprogrammer.</string>
+    <string name="no_widgets_here_yet">Ingen miniprogrammer her enda</string>
+    <string name="available_widgets">Tilgjengelige miniprogrammer</string>
+    <string name="snackbar_page_removed">«Side %1$s» har blitt fjernet.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Ikke forlat løype</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Kun hvis nødvendig</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Foretrekk frikjøring</string>
+    <string name="routing_attr_freeride_policy_allow_name">Tillat</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Ingen preferanse</string>
+    <string name="bearing_secondary_desc">Du kan endre format for vist data i: %1$s – %2$s – %3$s.</string>
+    <string name="routing_attr_avoid_4wd_only_description">Unngå veier som kun passer kjøretøy med firhjulstrekk</string>
+    <string name="coordinates_widget_secondary_desc">Koordinatformatet kan endres i %1$s – %2$s – %3$s.</string>
+    <string name="elevation_profile_widget_desc">Miniprogrammet viser høyde og helningen for nåværende rute.</string>
+    <string name="mapillary_widget_desc">Miniprogram som gir rask tilgang til Mapillary-programmer for å legge til gatenivå-bulder.</string>
+    <string name="av_notes_choose_action_widget_desc">Velg handling.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Unngå 4WD-veier</string>
+    <string name="widget_secondary_desc_part_of">En del av %1$s-programtillegget.</string>
+    <string name="parking_widget_desc">Miniprogram som viser avstanden fra skjermsenter til parkeringsplassen.</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Middels</string>
+    <string name="fps_widget_desc">Miniprogrammet viser hvor raskt kart og kartelementer vises og gjenoppfriskes.</string>
+    <string name="current_time_widget_desc">Dette miniprogrammet viser nåværende tid fra din enhet.</string>
+    <string name="radius_rules_widget_desc">Radiuslinjalverktøyet lar deg finne radius rundt valgt punkt på kartet via visning av avstandssirkler på kartet.</string>
+    <string name="max_speed_widget_desc">Miniprogram som viser en hastighetsgrense for veien du kjører på.</string>
+    <string name="current_speed_widget_desc">Miniprogram som viser nåværende hastighet registrert av GPS-sensoren.</string>
+    <string name="magnetic_bearing_widget_desc">Vinkel mellom magnetisk nord og målpunktet observert fra din posisjon.</string>
+    <string name="arrival_time_widget_desc">Tidspunkt for ankomst på reisemålet.</string>
+    <string name="time_to_go_desc">Tid i minutter eller timer til du når ditt mål.</string>
+    <string name="lanes_widgets_desc">Fil-miniprogram som viser nåværende veifiler og framhever filer å kjøre i med aktiv navigasjon.</string>
+    <string name="map_markers_bar_widget_desc">På toppen av stolpeminiprogrammet kan du se avstand og retning fra markøren til nåværende posisjon. Det er mulig å sette opp 1 eller 2 toppmarkører i miniprogrammet.</string>
+    <string name="battery_widget_desc">Miniprogram som viser batterinivå for din enhet.</string>
+    <string name="gps_info_widget_desc">Miniprogram som viser antall satellitter enheten oppdager og bruker for øyeblikket.</string>
+    <string name="altitude_widget_desc">Miniprogram som viser høyde over havnivå for nåværende geoposisjon.</string>
+    <string name="release_4_2">• Redesign av miniprogrammer: Nytt utseende og adferd, gruppering etter sider. Endre, sorter og kombiner som du ønsker.
+\n
+\n • Fottur/sykling/reiseruter: Trykk på rutesymbolet for å få full info om ruten.
+\n
+\n • Favorittgrupper: Sett forvalgt utseende for nye punkter i gruppen
+\n
+\n • Fikser: nettbaserte fliskart oppdaterer seg automatisk
+\n
+\n</string>
+    <string name="compass_on_circles">Kompass på sirkler</string>
+    <string name="shared_string_widget">Miniprogram</string>
+    <string name="av_def_action_choose">På forespørsel</string>
+    <string name="shared_string_speed">Hastighet</string>
+    <string name="app_mode_mountain_bicycle">Fjellsykkel</string>
+    <string name="calculate_online">Regn ut på nett</string>
+    <string name="get_altitude_data">Hent høydedata</string>
+    <string name="calculate_altitude">Regn ut høyde</string>
+    <string name="no_altitude_data">Ingen høydedata</string>
+    <string name="navigation_points">Navigasjonspunkter</string>
+    <string name="calculate_online_altitude_descr">Høydedata vil bli regnet ut på OsmAnd-tjeneren.</string>
+    <string name="calculating_altitude">Beregner høyde …</string>
+    <string name="get_altitude_information">Hent høydeinfo</string>
+    <string name="turn_on_public_transport_description">Viser offentlige transportruter på kartet.</string>
+    <string name="street_name_widget_desc">Gatenavnsminiprogrammet viser nåværende gatenavn, med rett posisjonspil, eller neste gatenavn med manøveren som må fullføres.</string>
+    <string name="coordinates_widget_desc">Viser geografiske koordinater for nåværende geoposisjon.</string>
+    <string name="audio_video_notes_desc">Miniprogrammer gir hurtigtilgang til start/stopp av opptak (lyd, video, eller bilde).</string>
+    <string name="route_maneuvers">Rutemanøverer</string>
+    <string name="route_maneuvers_desc">Navigasjonsminiprogrammer vises under navigasjon for å vise info som f.eks. avstand, ankomst, eller avgangstid, neste sving, retning, nåværende gatenavn, filinfo, maks. hastighet, kommende varsler, interessepunkter, og veipunkter.</string>
+    <string name="track_attach_to_the_roads_descr">Spor vil festet til vei ved bruk av frakoblede kart. Sporgeometri vil bli endret.</string>
+    <string name="colour_of_circles">Sirkelfarger</string>
+    <string name="distance_circles">Distansesirkler</string>
+    <string name="circle_settings">Sirkelinnstillinger</string>
+    <string name="bearing_desc">Retningsminiprogram som viser absolutt og relativ peiling til et mål i vinkelenheter (grader 180, grader 360, milliradianer).</string>
+    <string name="map_markers_desc">På toppstolpe-miniprogrammet kan du se avstand og retningen til markøren fra nåværende posisjon. Det er mulig å sette opp visning av 1 eller 2 toppmarkører i miniprogrammet.</string>
+    <string name="navigation_points_desc">Navigasjonsminiprogrammer vises under navigasjon for å vise info som f.eks. avstand, ankomst, eller avgangstid, neste sving, retning, nåværende gatenavn, filinfo, maks. hastighet, kommende varsler, interessepunkter, og veipunkter.</string>
 </resources>

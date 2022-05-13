@@ -7,7 +7,7 @@ import net.osmand.telegram.SHARE_TYPE_MAP_AND_TEXT
 import net.osmand.telegram.SHARE_TYPE_TEXT
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.ShareChatInfo
-import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthParamType.*
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -33,6 +33,7 @@ class TelegramHelper private constructor() {
 
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
+		private const val NOT_FOUND_ERROR_CODE = 404
 		private const val IGNORED_ERROR_CODE = 406
 		private const val MESSAGE_CANNOT_BE_EDITED_ERROR_CODE = 5
 
@@ -90,7 +91,7 @@ class TelegramHelper private constructor() {
 	private var currentUser: TdApi.User? = null
 	private var osmandBot: TdApi.User? = null
 
-	private var haveFullChatList: Boolean = false
+	private var hasSuccessfulChatsLoad: Boolean = false
 	private var needRefreshActiveLiveLocationMessages: Boolean = true
 	private var requestingActiveLiveLocationMessages: Boolean = false
 
@@ -213,7 +214,7 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
 
-	enum class TelegramAuthenticationParameterType {
+	enum class TelegramAuthParamType {
 		PHONE_NUMBER,
 		CODE,
 		PASSWORD
@@ -261,8 +262,9 @@ class TelegramHelper private constructor() {
 	}
 
 	interface TelegramAuthorizationRequestListener {
-		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType)
+		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthParamType)
 		fun onTelegramAuthorizationRequestError(code: Int, message: String)
+		fun onTelegramUnsupportedAuthorizationState(authorizationState: String)
 	}
 
 	interface TelegramSearchListener {
@@ -273,18 +275,18 @@ class TelegramHelper private constructor() {
 
 	inner class TelegramAuthorizationRequestHandler(val telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener) {
 
-		fun applyAuthenticationParameter(parameterType: TelegramAuthenticationParameterType, parameterValue: String) {
-			if (!TextUtils.isEmpty(parameterValue)) {
-				when (parameterType) {
-					PHONE_NUMBER -> client!!.send(
-						TdApi.SetAuthenticationPhoneNumber(
-							parameterValue,
-							TdApi.PhoneNumberAuthenticationSettings(false, false, false, false, null)
-						), AuthorizationRequestHandler()
-					)
-					CODE -> client!!.send(TdApi.CheckAuthenticationCode(parameterValue), AuthorizationRequestHandler())
-					PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(parameterValue), AuthorizationRequestHandler())
-				}
+		fun applyAuthParam(type: TelegramAuthParamType, value: String) {
+			if (TextUtils.isEmpty(value)) return
+			log.info("Authorization: apply parameter ${type.name}")
+			when (type) {
+				PHONE_NUMBER -> client!!.send(
+					TdApi.SetAuthenticationPhoneNumber(
+						value,
+						TdApi.PhoneNumberAuthenticationSettings(false, false, false, false, null)
+					), AuthorizationRequestHandler()
+				)
+				CODE -> client!!.send(TdApi.CheckAuthenticationCode(value), AuthorizationRequestHandler())
+				PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(value), AuthorizationRequestHandler())
 			}
 		}
 	}
@@ -435,25 +437,25 @@ class TelegramHelper private constructor() {
 		synchronized(chatList) {
 			if (reload) {
 				chatList.clear()
-				haveFullChatList = false
+				hasSuccessfulChatsLoad = false
 			}
-			if (!haveFullChatList && CHATS_LIMIT > chatList.size) {
-				client?.send(TdApi.GetChats(TdApi.ChatListMain(), Int.MAX_VALUE)) { obj ->
+			if (chatList.size < CHATS_LIMIT) {
+				client?.send(TdApi.LoadChats(TdApi.ChatListMain(), Int.MAX_VALUE)) { obj ->
 					when (obj.constructor) {
 						TdApi.Error.CONSTRUCTOR -> {
-							val error = obj as TdApi.Error
-							if (error.code != IGNORED_ERROR_CODE) {
-								listener?.onTelegramError(error.code, error.message)
-							}
-						}
-						TdApi.Chats.CONSTRUCTOR -> {
-							val chatIds = (obj as TdApi.Chats).chatIds
-							if (chatIds.isEmpty()) {
-								synchronized(chatList) {
-									haveFullChatList = true
+							synchronized(chatList) {
+								val error = obj as TdApi.Error
+								val loadedAllChats = hasSuccessfulChatsLoad && error.code == NOT_FOUND_ERROR_CODE
+								if (!loadedAllChats && error.code != IGNORED_ERROR_CODE) {
+									listener?.onTelegramError(error.code, error.message)
 								}
 							}
-							// chats had already been received through updates, let's retry request
+						}
+						TdApi.Ok.CONSTRUCTOR -> {
+							synchronized(chatList) {
+								hasSuccessfulChatsLoad = true
+							}
+							// Some chats are received through updates, try to load more chats
 							requestChats(false, this@TelegramHelper::scanChatsHistory)
 							onComplete?.invoke()
 						}
@@ -771,7 +773,8 @@ class TelegramHelper private constructor() {
 					log.debug("createPrivateChatWithUser ERROR $obj")
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
-						shareInfo.hasSharingError = true
+						shareInfo.hasTextSharingError = true
+						shareInfo.hasMapSharingError = true
 						listener?.onTelegramError(error.code, error.message)
 					}
 				}
@@ -922,7 +925,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
-					shareInfo.hasSharingError = true
+					shareInfo.hasMapSharingError = true
 					needRefreshActiveLiveLocationMessages = true
 					shareInfo.pendingMapMessage = false
 					outgoingMessagesListeners.forEach {
@@ -934,7 +937,7 @@ class TelegramHelper private constructor() {
 				if (obj is TdApi.Message) {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-							shareInfo.hasSharingError = true
+							shareInfo.hasMapSharingError = true
 							needRefreshActiveLiveLocationMessages = true
 							shareInfo.pendingMapMessage = false
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -950,7 +953,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 						else -> {
-							shareInfo.hasSharingError = false
+							shareInfo.hasMapSharingError = false
 							shareInfo.pendingMapMessage = false
 							log.debug("handleMapLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
@@ -971,7 +974,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleTextLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
-					shareInfo.hasSharingError = true
+					shareInfo.hasTextSharingError = true
 					shareInfo.pendingTextMessage = false
 					outgoingMessagesListeners.forEach {
 						it.onSendLiveLocationError(error.code, error.message, shareInfo, messageType)
@@ -982,7 +985,7 @@ class TelegramHelper private constructor() {
 				if (obj is TdApi.Message) {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-							shareInfo.hasSharingError = true
+							shareInfo.hasTextSharingError = true
 							shareInfo.pendingTextMessage = false
 							needRefreshActiveLiveLocationMessages = true
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -998,7 +1001,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 						else -> {
-							shareInfo.hasSharingError = false
+							shareInfo.hasTextSharingError = false
 							shareInfo.pendingTextMessage = false
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
@@ -1151,7 +1154,10 @@ class TelegramHelper private constructor() {
 			TdApi.AuthorizationStateClosed.CONSTRUCTOR -> {
 				log.info("Closed")
 			}
-			else -> log.error("Unsupported authorization state: " + this.authorizationState!!)
+			else -> {
+				log.error("Unsupported authorization state: " + this.authorizationState!!)
+				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onTelegramUnsupportedAuthorizationState("${this.authorizationState!!}")
+			}
 		}
 		val wasAuthorized = haveAuthorization
 		haveAuthorization = this.authorizationState?.constructor == TdApi.AuthorizationStateReady.CONSTRUCTOR

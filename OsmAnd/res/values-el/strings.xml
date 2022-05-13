@@ -91,9 +91,6 @@
     <string name="map_widget_compass">Πυξίδα</string>
     <string name="map_widget_reset">Επαναφορά στα προκαθορισμένα</string>
     <string name="map_widget_parking">Στάθμευση</string>
-    <string name="map_widget_speed">Ταχύτητα</string>
-    <string name="map_widget_distance">Προορισμός</string>
-    <string name="map_widget_altitude">Υψόμετρο</string>
     <string name="map_widget_time">Υπολειπόμενος χρόνος</string>
     <string name="map_widget_next_turn">Επόμενη στροφή</string>
     <string name="map_widget_next_turn_small">Επόμενη στροφή (μικρό)</string>
@@ -934,7 +931,6 @@
     <string name="favourites_list_activity">Επιλογή αγαπημένου</string>
     <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
     <string name="shared_string_more_actions">Άλλες ενέργειες</string>
-    <string name="av_def_action_choose">Κατόπιν αίτησης;</string>
     <string name="download_using_mobile_internet">Δεν είστε συνδεδεμένοι με ασύρματο δίκτυο. Θέλετε να χρησιμοποιήσετε την τρέχουσα διαδικτυακή σύνδεση για λήψη;</string>
     <string name="cancel_route">Απόρριψη διαδρομής</string>
     <string name="cancel_navigation">Διακοπή πλοήγησης</string>
@@ -2488,7 +2484,7 @@
     <string name="av_camera_pic_size">Μέγεθος εικόνας κάμερας</string>
     <string name="av_camera_pic_size_descr">Ορίστε μέγεθος εικόνας κάμερας</string>
     <string name="plugin_install_needs_network">Χρειάζεται να συνδεθείτε με το διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
-    <string name="get_plugin">Λήψη</string>
+    <string name="shared_string_get">Λήψη</string>
     <string name="use_fast_recalculation">Επανυπολογισμός έξυπνης διαδρομής</string>
     <string name="use_fast_recalculation_desc">Για μεγάλα ταξίδια, να επανυπολογίζεται μόνο το αρχικό μέρος της διαδρομής.</string>
     <string name="do_you_like_osmand">Σας αρέσει το OsmAnd;</string>

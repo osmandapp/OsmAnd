@@ -792,7 +792,6 @@
     <string name="intermediate_points_change_order">순서 변경</string>
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글플레이에서 플러그인을 구입하시기 바랍니다 .</string>
     <string name="srtm_paid_version_title">등고선 플러그인</string>
-    <string name="av_def_action_choose">요청에 대한 선택</string>
     <string name="av_def_action_video">영상 녹화</string>
     <string name="av_def_action_audio">소리 녹음</string>
     <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>
@@ -952,9 +951,6 @@
     <string name="map_widget_compass">나침반</string>
     <string name="map_widget_reset">기본값으로 재설정</string>
     <string name="map_widget_parking">주차</string>
-    <string name="map_widget_speed">속도</string>
-    <string name="map_widget_distance">도착지</string>
-    <string name="map_widget_altitude">고도</string>
     <string name="map_widget_time">가야할 시간</string>
     <string name="map_widget_next_turn">다음 턴</string>
     <string name="map_widget_next_turn_small">다음 턴(작은 아이콘)</string>
@@ -1332,7 +1328,7 @@
     <string name="remove_the_tag">태그를 제거</string>
     <string name="edit_group">그룹 편집</string>
     <string name="plugin_install_needs_network">이 플러그인을 설치 하려면 인터넷에 연결을 해야 합니다.</string>
-    <string name="get_plugin">가져오기</string>
+    <string name="shared_string_get">가져오기</string>
     <string name="plugin_ski_name">스키 지도 보기</string>
     <string name="plugin_nautical_name">항해 지도 보기</string>
     <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>

@@ -226,7 +226,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			app.getPoiFilters().loadSelectedPoiFilters();
-			mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleSideWidgets();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();

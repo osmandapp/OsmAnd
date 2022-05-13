@@ -999,6 +999,7 @@ public class GpxSelectionHelper {
 			return routePoints;
 		}
 
+		@NonNull
 		public List<TrkSegment> getPointsToDisplay() {
 			if (filteredSelectedGpxFile != null) {
 				return filteredSelectedGpxFile.getPointsToDisplay();

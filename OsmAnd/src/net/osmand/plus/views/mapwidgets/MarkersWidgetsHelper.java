@@ -19,8 +19,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 
 public class MarkersWidgetsHelper {
 
-	public static final String WIDGET_MAP_MARKERS = "map_markers_top";
-
 	private final MapActivity mapActivity;
 
 	private final MapMarkersBarWidget mapMarkersBarWidget;
@@ -46,9 +44,7 @@ public class MarkersWidgetsHelper {
 	}
 
 	public boolean isMapMarkersBarWidgetVisible() {
-		View view = mapMarkersBarWidget.getView();
-		return view.getVisibility() == View.VISIBLE
-				&& view.getParent() != null
+		return mapMarkersBarWidget.isViewVisible()
 				&& mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 	}
 

@@ -741,9 +741,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Скидання налаштувань</string>
     <string name="map_widget_parking">Стоянка</string>
-    <string name="map_widget_speed">Швидкість</string>
-    <string name="map_widget_distance">Пункт призначення</string>
-    <string name="map_widget_altitude">Висота</string>
     <string name="map_widget_time">Час в дорозі</string>
     <string name="map_widget_next_turn">Наступний маневр</string>
     <string name="map_widget_next_turn_small">Наступний маневр (зменшено)</string>
@@ -802,7 +799,6 @@
     <string name="recording_error">Помилка запису</string>
     <string name="recording_camera_not_available">Камера недоступна</string>
     <string name="recording_default_name">Запис</string>
-    <string name="av_def_action_choose">За запитом\?</string>
     <string name="recording_is_recorded">Аудіо/відео зараз записується. Для зупинки натисніть на AV-віджет.</string>
     <string name="recording_context_menu_arecord">Створити аудіопримітку</string>
     <string name="recording_context_menu_vrecord">Створити відеопримітку</string>
@@ -1200,7 +1196,7 @@
     <string name="lang_cy">Валлійська</string>
     <string name="index_name_canada">Північна Америка - Канада</string>
     <string name="index_name_italy">Європа - Італія</string>
-    <string name="index_name_gb">Європа - Великобританія</string>
+    <string name="index_name_gb">Європа - Велика Британія</string>
     <string name="calculate_osmand_route_without_internet">Прокладання відрізку маршруту в OsmAnd офлайн</string>
     <string name="gpx_option_calculate_first_last_segment">Прокласти маршрут в OsmAnd для першого та останнього відрізків маршруту</string>
     <string name="use_displayed_track_for_navigation">Використовувати показаний трек для навігації?</string>
@@ -1430,7 +1426,7 @@
     <string name="shared_string_enable">Увімкнути</string>
     <string name="shared_string_disable">Вимкнути</string>
     <string name="plugin_install_needs_network">Для встановлення цього втулка вам потрібне з\'єднання з Інтернетом.</string>
-    <string name="get_plugin">Отримати</string>
+    <string name="shared_string_get">Отримати</string>
     <string name="plugin_nautical_descr">Цей втулок збагачує OsmAnd морськими мапами для човнів, вітрильного спорту та інших водних видів спорту.
 \n
 \nСпеціальне розширення-мапа для OsmAnd надасть усі навігаційні знаки, як для плавання у внутрішніх водах, так і для прибережної навігації. Опис кожного навігаційного знаку містить подробиці, необхідні для їх ідентифікації, а також їх значення (категорія, форма, колір, послідовність, номер та інше).
@@ -1666,7 +1662,7 @@
     <string name="default_speed_system_descr">Вкажіть одиниці вимірювання швидкості.</string>
     <string name="default_speed_system">Одиниці вимірювання швидкості</string>
     <string name="si_nm">Морські милі</string>
-    <string name="si_kmh">Кілометрів за годину</string>
+    <string name="si_kmh">Кілометрів на годину</string>
     <string name="si_mph">Миль на годину</string>
     <string name="si_m_s">Метрів за секунду</string>
     <string name="si_min_km">Хвилин за кілометр</string>
@@ -2312,7 +2308,7 @@
 \nПриблизне охоплення та якість мап:
 \n• Західна Європа: ****
 \n• Східна Європа: ***
-\n• Росія: ***
+\n• РФ: ***
 \n• Північна Америка: ***
 \n• Південна Америка: **
 \n• Азія: **
@@ -2321,7 +2317,7 @@
 \n• Африка: **
 \n• Антарктида: *
 \nБільшість країн по всьому світу доступні для завантаження!
-\nОтримайте надійний навігатор у своїй країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша.</string>
+\nОтримайте надійний навігатор у своїй країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Велика Британія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографічний навігаційний застосунок з доступом до вільних та високоякісних даних OSM зі всього світу.
 \nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX треками, використовуючи показ ізоліній та даних про висоти, вибором між режимами для авто, вело та пішохідної навігації, редагуванням OSM та ще багато чим іншим.
 \n
@@ -2375,7 +2371,7 @@
     <string name="osmand_plus_extended_description_part8">Приблизне охоплення мап та якість:
 \n • Західна Європа: ****
 \n • Східна Європа: ***
-\n • Росія: ***
+\n • РФ: ***
 \n • Північна Америка: ***
 \n • Південна Америка: **
 \n • Азія: **
@@ -2384,7 +2380,7 @@
 \n • Африка: **
 \n • Антарктида: *
 \nБільшість країн по всьому світу доступні для завантаження!
-\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша…
+\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Велика Британія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша…
 \n</string>
     <string name="save_poi_too_many_uppercase">Назва містить забагато великих літер. Продовжити\?</string>
     <string name="shared_string_add_photos">Додати світлини</string>
@@ -4211,10 +4207,10 @@
     <string name="backup_error_size_is_exceeded">Максимальний розмір OsmAnd Cloud перевищено %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Файл слід надіслати у форматі .gzip</string>
     <string name="backup_error_file_not_available">Файл недоступний</string>
-    <string name="backup_error_token_is_not_valid">Щось не так із наданим ідентифікатором пристрою або токеном</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або його термін дії завершився</string>
+    <string name="backup_error_token_is_not_valid">Щось не так із наданим ID пристрою або токеном</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або не чинний</string>
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
-    <string name="backup_error_no_valid_subscription">Немає дійсної передплати</string>
+    <string name="backup_error_no_valid_subscription">Немає чинної передплати</string>
     <string name="approximate_route_description">Прикріпіть маршрут до доріг на мапі, щоб отримати всі повороти та додаткові дані про плавність, типи доріг тощо.</string>
     <string name="release_4_0">• Резервне копіювання в хмарі
 \n
@@ -4513,7 +4509,7 @@
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
     <string name="save_track_to_gpx_descrp">Автозапуск запису треку під час навігації та автоматичне збереження після завершення.</string>
-    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб зберегти маршрут як файл.</string>
+    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб додати маршрут у файл.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
     <string name="quick_action_add_route_descr">Кнопка запуску маршруту з середини екрана.</string>
     <string name="please_provide_group_name_message">Назвіть групу.</string>
@@ -4553,7 +4549,7 @@
     <string name="routing_attr_carriage_restrictions_name">Обмеження на перевезення</string>
     <string name="routing_attr_carriage_restrictions_description">Враховувати дозволи на доступ для кінних транспортних засобів</string>
     <string name="rendering_attr_showTrainRoutes_name">Залізничні маршрути</string>
-    <string name="rendering_attr_showLightRailRoutes_name">Легкі залізничні маршрути</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Маршрути легкорейкового транспорту</string>
     <string name="rendering_attr_showFunicularRoutes_name">Фунікулерні маршрути</string>
     <string name="rendering_attr_showBusRoutes_name">Автобусні маршрути</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Тролейбусні маршрути</string>
@@ -4569,11 +4565,11 @@
     <string name="speed_mode">Режим швидкості</string>
     <string name="routeInfo_horse_scale_name">Складність кінних стежок</string>
     <string name="rendering_attr_horse_scale_difficult_name">Складність</string>
-    <string name="routeInfo_horse_scale_description">Відображати шляхи відповідно до складності кінних стежок</string>
+    <string name="routeInfo_horse_scale_description">Показувати шляхи відповідно до складності кінних стежок</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Небезпечно</string>
     <string name="rendering_attr_showTramRoutes_name">Трамвайні маршрути</string>
-    <string name="rendering_attr_horse_scale_critical_name">Критич.</string>
-    <string name="rendering_attr_showMonorailRoutes_name">Одноколійні маршрути</string>
+    <string name="rendering_attr_horse_scale_critical_name">Критичність</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Монорейкові маршрути</string>
     <string name="top_widgets_panel">Верхня панель</string>
     <string name="bottom_widgets_panel">Нижня панель</string>
     <string name="configure_screen_widgets_descr">Виберіть сторону екрана, щоб додати або переставити віджети.</string>
@@ -4582,4 +4578,87 @@
 \nНа перехрестях симуляція сповільниться.
 \nДодаткові штрафи будуть застосовуватися на світлофорах, знаках зупинки і т.д.</string>
     <string name="simulation_real_mode_title">Реалістична симуляція</string>
+    <string name="apply_to_existing_points_descr">Застосувати зміни до наявних точок групи чи лише до нових\?</string>
+    <string name="apply_to_existing">Застосувати до наявних</string>
+    <string name="apply_to_existing_favorites_descr">Застосувати зміни до наявних вибраних точок групи чи лише до нових\?</string>
+    <string name="apply_only_to_new_points">Застосовувати лише до нових точок</string>
+    <string name="apply_only_to_new_favorites">Застосовувати лише до нових вибраних</string>
+    <string name="change_default_appearance">Змінити типовий зовнішній вигляд</string>
+    <string name="map_widget_altitude">Висота поточного розташування</string>
+    <string name="map_widget_distance_to_destination">Відстань до пункту призначення</string>
+    <string name="map_widget_current_speed">Поточна швидкість</string>
+    <string name="add_page">Додати сторінку</string>
+    <string name="page_number">Сторінка %1$s</string>
+    <string name="shared_string_symbol">Символ</string>
+    <string name="no_widgets_descr">Додайте один або кілька віджетів зі списку доступних віджетів.</string>
+    <string name="available_widgets">Доступні віджети</string>
+    <string name="snackbar_page_removed">«Сторінку %1$s» видалено.</string>
+    <string name="no_widgets_here_yet">Тут ще немає віджетів</string>
+    <string name="on_with_params">%1$s на %2$s</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходити з траси</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Лише за необхідності</string>
+    <string name="routing_attr_freeride_policy_allow_name">Дозволити</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Надавати перевагу руху поза трасою</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Не налаштовувати</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Початківець</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Досвідчений</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
+    <string name="release_4_2">• Редизайн віджетів: новий вигляд, групування за сторінками, можливість зміни їхнього порядку і поєднання.
+\n
+\n• Пішохідні / Велосипедні / Туристичні маршрути: натисніть на символ маршруту та отримайте всі дані про маршрут.
+\n
+\n• Вибрані групи: встановлюйте типовий зовнішній вигляд для нових точок у групі
+\n
+\n• Виправлення: автооновлення плиток мап онлайн
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Середня</string>
+    <string name="turn_on_public_transport_description">Увімкніть, щоб побачити маршрути громадського транспорту на мапі.</string>
+    <string name="av_def_action_choose">За запитом</string>
+    <string name="coordinates_widget_secondary_desc">Формат координат може бути змінений на %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Частина плагіну %1$s.</string>
+    <string name="elevation_profile_widget_desc">Віджет показує профіль висоти та нахилу поточного маршруту.</string>
+    <string name="parking_widget_desc">Віджет, який показує відстань від центру екрана до місця для паркування.</string>
+    <string name="mapillary_widget_desc">Віджет, який забезпечує швидкий доступ до програми Mapillary для додавання зображень у шарі вулиць.</string>
+    <string name="av_notes_choose_action_widget_desc">Виберіть дію.</string>
+    <string name="battery_widget_desc">Віджет показує рівень заряду акумулятора пристрою.</string>
+    <string name="gps_info_widget_desc">Віджет показує кількість супутників, які пристрій виявляє та використовує в цей момент.</string>
+    <string name="altitude_widget_desc">Віджет показує висоту над рівнем моря поточної геолокації.</string>
+    <string name="max_speed_widget_desc">Віджет показує обмеження швидкості для поточної дороги.</string>
+    <string name="arrival_time_widget_desc">Час прибуття в пункт призначення.</string>
+    <string name="coordinates_widget_desc">Він показує географічні координати поточної геолокації.</string>
+    <string name="shared_string_widget">Віджет</string>
+    <string name="bearing_secondary_desc">Ви можете змінити формат показуваних даних на: %1$s – %2$s – %3$s.</string>
+    <string name="radius_rules_widget_desc">Інструмент «Лінійка радіуса» допомагає визначити радіус навколо вибраної точки на мапі за допомогою кіл відстаней на мапі.</string>
+    <string name="fps_widget_desc">Віджет показує, як швидко з\'являються та оновлюються мапи та елементи на них.</string>
+    <string name="time_to_go_desc">Час у хвилинах або годинах, необхідний для досягнення пункту призначення.</string>
+    <string name="current_time_widget_desc">Цей віджет показує поточний час пристрою.</string>
+    <string name="current_speed_widget_desc">Віджет показує вашу поточну швидкість, визначену GPS-датчиком.</string>
+    <string name="magnetic_bearing_widget_desc">Кут між магнітною північчю та цільовою точкою, що визначається з місця вашого розташування.</string>
+    <string name="lanes_widgets_desc">Віджет «Смуги» показує поточне розташування доріг і виділяє смуги для їзди з активною навігацією.</string>
+    <string name="map_markers_bar_widget_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>
+    <string name="street_name_widget_desc">Віджет назви вулиць показує назву поточної вулиці зі стрілкою напрямку або назву наступної вулиці з маневром, який потрібно виконати.</string>
+    <string name="audio_video_notes_desc">Віджети надають швидкий доступ до початку/зупинки запису (аудіо, відео або фотографування).</string>
+    <string name="bearing_desc">Віджет азимуту показує абсолютний або відносний азимут до цілі в кутових одиницях (градуси 180, градуси 360, мілірадіани).</string>
+    <string name="map_markers_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>
+    <string name="navigation_points_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
+    <string name="navigation_points">Точки навігації</string>
+    <string name="route_maneuvers_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
+    <string name="get_altitude_information">Отримати дані про висоту</string>
+    <string name="calculating_altitude">Обчислення висоти</string>
+    <string name="calculate_online_altitude_descr">Дані про висоту будуть обчислені на сервері OsmAnd.</string>
+    <string name="calculate_online">Обчислити онлайн</string>
+    <string name="track_attach_to_the_roads_descr">Трек буде прив\'язаний до дороги за допомогою офлайн-мап, геометрія треку буде змінена.</string>
+    <string name="get_altitude_data">Отримати дані про висоту</string>
+    <string name="calculate_altitude">Обчислити висоту</string>
+    <string name="no_altitude_data">Немає даних про висоту</string>
+    <string name="shared_string_speed">Швидкість</string>
+    <string name="app_mode_mountain_bicycle">Гірський велосипед</string>
+    <string name="route_maneuvers">Маневри на маршруті</string>
+    <string name="routing_attr_avoid_4wd_only_description">Уникати доріг, призначених лише для автомобілів з повним приводом</string>
+    <string name="routing_attr_avoid_4wd_only_name">Уникати доріг 4х4</string>
+    <string name="colour_of_circles">Колір кіл</string>
+    <string name="compass_on_circles">Компас на колах</string>
+    <string name="distance_circles">Відстані-кола</string>
+    <string name="circle_settings">Налаштування кола</string>
 </resources>

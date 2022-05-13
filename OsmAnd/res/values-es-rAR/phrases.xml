@@ -43,7 +43,7 @@
     <string name="poi_palaeontological_site">Yacimiento paleontológico</string>
     <string name="poi_bakery">Panadería</string>
     <string name="poi_alcohol">Licorería;Tienda de licores</string>
-    <string name="poi_convenience">Almacén;Tienda de comestibles;Minimercado</string>
+    <string name="poi_convenience">Almacén;Tienda de comestibles;Minimercado;Maxikiosco;Maxiquiosco</string>
     <string name="poi_mall">Centro comercial</string>
     <string name="poi_beverages">Venta de bebidas</string>
     <string name="poi_butcher">Carnicería</string>
@@ -203,9 +203,9 @@
     <string name="poi_tram_stop">Parada de tranvía</string>
     <string name="poi_public_transport_station">Estación de transporte público</string>
     <string name="poi_bus_station">Estación de colectivos;Terminal de ómnibus;Estación de autobús</string>
-    <string name="poi_railway_station">Estación de tren</string>
-    <string name="poi_railway_platform">Andén de tren</string>
-    <string name="poi_halt">Parada de tren</string>
+    <string name="poi_railway_station">Estación ferroviaria;Estación de ferrocarril;Estación de tren</string>
+    <string name="poi_railway_platform">Andén ferroviario;Andén de ferrocarril;Andén de tren</string>
+    <string name="poi_halt">Parada ferroviaria;Parada de ferrocarril;Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de subte;Entrada de metro</string>
     <string name="poi_subway_station">Sí; Estación de subte</string>
     <string name="poi_railway_buffer_stop">Fin de vía</string>
@@ -327,7 +327,7 @@
     <string name="poi_residential">Área residencial</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Hospital</string>
-    <string name="poi_doctors">Doctor/a;Doctora;Médico;Médica</string>
+    <string name="poi_doctors">Consultorio médico;Doctor;Doctora;Médico;Médica</string>
     <string name="poi_clinic">Clínica</string>
     <string name="poi_first_aid">Primeros auxilios</string>
     <string name="poi_dentist">Dentista;Odontología</string>
@@ -3468,7 +3468,7 @@
     <string name="poi_checkpoint_type">Tipo de puesto de control</string>
     <string name="poi_checkpoint_hiking">Puesto de control para senderismo</string>
     <string name="poi_checkpoint_type_stamp">Puesto de sellado</string>
-    <string name="poi_checkpoint_type_code">Cartel</string>
+    <string name="poi_checkpoint_type_code">Código</string>
     <string name="poi_checkpoint_type_notebook">Portátil (notebook)</string>
     <string name="poi_checkpoint_type_electronic">Electrónico</string>
     <string name="poi_rock">Roca</string>
@@ -3651,8 +3651,8 @@
     <string name="poi_tourist_bus_yes">Acceso para colectivos turísticos: sí</string>
     <string name="poi_tourist_bus_designated">Acceso para colectivos turísticos: designado</string>
     <string name="poi_tourist_bus_no">Acceso para colectivos turísticos: no</string>
-    <string name="poi_coach_yes">Acceso para colectivos de larga distancia: sí</string>
-    <string name="poi_coach_no">Acceso para colectivos de larga distancia: no</string>
+    <string name="poi_coach_yes">Acceso para ómnibus: sí;Acceso para colectivos de larga distancia: sí</string>
+    <string name="poi_coach_no">Acceso para ómnibus: no;Acceso para colectivos de larga distancia: no</string>
     <string name="poi_ski_yes">Acceso para esquís: sí</string>
     <string name="poi_ski_no">Acceso para esquís: no</string>
     <string name="poi_snowmobile_private">Acceso para motonieves: privado</string>
@@ -3774,7 +3774,7 @@
     <string name="poi_booth">Tipo de cabina</string>
     <string name="poi_video_yes">Sí;Video</string>
     <string name="poi_video_no">No</string>
-    <string name="poi_traffic_signals_sound_locate">Sólo se permite al caminar</string>
+    <string name="poi_traffic_signals_sound_locate">Sólo para encontrar el poste</string>
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
     <string name="poi_tactile_paving_primitive">Primitivo</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_board_type_nature">Naturaleza</string>
     <string name="poi_fish_pass">Paso de peces</string>
     <string name="poi_laundry_service_yes">Sí</string>
+    <string name="poi_flow_rate">Caudal</string>
+    <string name="poi_golf_pin">Pin de golf</string>
 </resources>

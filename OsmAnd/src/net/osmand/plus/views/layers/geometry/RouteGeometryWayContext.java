@@ -3,14 +3,16 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Paint;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.ColoringType;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
 
-	public RouteGeometryWayContext(Context ctx, float density) {
+	public RouteGeometryWayContext(@NonNull Context ctx, float density) {
 		super(ctx, density);
 	}
 

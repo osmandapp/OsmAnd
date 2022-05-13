@@ -12,7 +12,7 @@ import net.osmand.router.RouteColorize.ColorizationType;
 
 public enum GradientScaleType {
 
-	SPEED("speed", "gradient_speed_color", R.string.map_widget_speed, R.drawable.ic_action_speed),
+	SPEED("speed", "gradient_speed_color", R.string.shared_string_speed, R.drawable.ic_action_speed),
 	ALTITUDE("altitude", "gradient_altitude_color", R.string.altitude, R.drawable.ic_action_altitude_average),
 	SLOPE("slope", "gradient_slope_color", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);
 

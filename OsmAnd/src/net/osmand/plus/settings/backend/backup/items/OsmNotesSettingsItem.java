@@ -52,7 +52,7 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 		super.init();
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
-			existingItems = osmEditingPlugin.getDBBug().getOsmbugsPoints();
+			existingItems = osmEditingPlugin.getDBBug().getOsmBugsPoints();
 		}
 	}
 

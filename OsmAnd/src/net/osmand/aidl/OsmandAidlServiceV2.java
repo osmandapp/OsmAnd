@@ -1,15 +1,5 @@
 package net.osmand.aidl;
 
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
-
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,10 +25,10 @@ import net.osmand.aidlapi.copyfile.CopyFileParams;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
-import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
+import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.customization.ProfileSettingsParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.SetWidgetsParams;
@@ -65,6 +55,7 @@ import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.lock.SetLockStateParams;
+import net.osmand.aidlapi.logcat.ALogcatListenerParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetLocationParams;
 import net.osmand.aidlapi.map.SetMapLocationParams;
@@ -123,6 +114,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_LOGCAT_MESSAGE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
 public class OsmandAidlServiceV2 extends Service implements AidlCallbackListenerV2 {
 
@@ -1514,6 +1516,30 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return false;
+			}
+		}
+
+		@Override
+		public long registerForLogcatMessages(ALogcatListenerParams params, IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForLogcatMessages");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.stopLogcatTask(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_LOGCAT_MESSAGE);
+						String filterLevel = params.getFilterLevel();
+						api.registerLogcatListener(id, filterLevel);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
 			}
 		}
 	};

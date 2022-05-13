@@ -129,9 +129,6 @@
     <string name="map_widget_lock_screen">Закључај</string>
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Врати на подразумевано</string>
-    <string name="map_widget_speed">Брзина</string>
-    <string name="map_widget_distance">Одредиште</string>
-    <string name="map_widget_altitude">Висина</string>
     <string name="map_widget_next_turn">Следеће скретање</string>
     <string name="map_widget_next_turn_small">Следеће скретање (мало)</string>
     <string name="map_widget_next_next_turn">Друго следеће скретање</string>
@@ -897,7 +894,6 @@
     <string name="precise_routing_mode_descr">Рачунање тачних путања без грешака. Радња је ограничена даљином и спора.</string>
     <string name="precise_routing_mode">Тачно рачунање путања (споро)</string>
     <string name="srtm_paid_version_msg">Размислите о плаћању додатка за „изохипсе“ ради давања подршке даљем развоју.</string>
-    <string name="av_def_action_choose">На захтев\?</string>
     <string name="av_video_format_descr">Излазни видео формат:</string>
     <string name="av_video_format">Облик излазног снимка</string>
     <string name="av_use_external_recorder_descr">Користи системску апликацију за видео снимање.</string>
@@ -2131,7 +2127,7 @@
     <string name="av_camera_focus_edof">Продужена дубина поља (EDOF)</string>
     <string name="navigation_intent_invalid">Неисправни формат: %s</string>
     <string name="plugin_install_needs_network">Морате имати интернет да бисте инсталирали овај додатак.</string>
-    <string name="get_plugin">Преузми</string>
+    <string name="shared_string_get">Преузми</string>
     <string name="use_fast_recalculation">Пмаетно прерачунавање пута</string>
     <string name="use_fast_recalculation_desc">Прерачунава само почетни део руте, корисно за дуга путовања.</string>
     <string name="do_you_like_osmand">Да ли Вам се OsmAnd свиђа?</string>
@@ -3861,7 +3857,7 @@
 \nМожете се пријавити користећи безбедан OAuth метод или користите своје корисничко име и лозинку.</string>
     <string name="use_login_password">Користите корисничко име и лозинку</string>
     <string name="login_account">Налог</string>
-    <string name="user_login">Пријавите се</string>
+    <string name="user_login">Пријава</string>
     <string name="manage_subscription">Управљајте чланарином</string>
     <string name="subscription_payment_issue_title">Постоји проблем са Вашом чланарином. Кликните на дугме да бисте отворили подешавања претплате за Гугле Плеј и да бисте поправили начин плаћања.</string>
     <string name="subscription_expired_title">Чланарина за OsmAnd уживо је истекла</string>
@@ -4095,7 +4091,7 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Избегавајте зоне ниских емисија</string>
     <string name="search_more">Претражи више…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Прављење резервних копија и враћање</string>
+    <string name="backup_and_restore">Резервна копија и враћање</string>
     <string name="last_backup">Последња резервна копија</string>
     <string name="osmand_cloud">OsmAnd облак</string>
     <string name="osmand_cloud_authorize_descr">Никада не губите податке, правите резервне копије и враћајте све информације без проблема.</string>
@@ -4106,11 +4102,11 @@
     <string name="osmand_cloud_help_descr">Потребна помоћ\? Молимо контактирајте нас на %1$s</string>
     <string name="osmand_cloud_create_account_descr">Унесите своју адресу е-поште, тамо ће вам бити послан верификациони код,
 \nи сви ваши подаци ће бити повезани са њом.</string>
-    <string name="osmand_cloud_login_descr">Унесите адресу е-поште коју сте користили за регистрацију. Послаћемо вам једнократну лозинку потребну за следећи корак.</string>
+    <string name="osmand_cloud_login_descr">Унесите адресу е-поште са којом сте се регистровали. На ту адресу биће послата једнократна лозинка за следећи.</string>
     <string name="verify_email_address">Потврдите адресу е-поште</string>
     <string name="verify_email_address_descr">Верификациони код је послат на %1$s, унесите га у поље испод.</string>
     <string name="cloud_email_not_registered">Ова адреса е-поште није регистрована за OsmAnd облак</string>
-    <string name="cloud_email_already_registered">Налог са овом е-поштом је већ регистрован.</string>
+    <string name="cloud_email_already_registered">Ова адреса е-поште је већ регистрована.</string>
     <string name="resend_verification_code">Поново пошаљи</string>
     <string name="verification_code_missing">Нисам добио верификациони код</string>
     <string name="verification_code_missing_description">Може трајати 10 минута. Користите дугме испод ако није завршио у нежељеној пошти.</string>
@@ -4538,6 +4534,54 @@
     <string name="number_of_tiles">Број плочица</string>
     <string name="stop_download_desc">Преузимање није завршено. Ако сада прекинете преузимање, само део плочица ће бити доступан за преглед.</string>
     <string name="move_map_to_select_area">Померите мапу да бисте изабрали потребну област.</string>
-    <string name="rendering_attr_showFitnessTrails_name">Покажи стазе за фитнес</string>
-    <string name="rendering_attr_showFitnessTrails_description">Показивање стаза за фитнес</string>
+    <string name="rendering_attr_showFitnessTrails_name">Фитнес стазе</string>
+    <string name="rendering_attr_showFitnessTrails_description">Приказ стаза за фитнес</string>
+    <string name="routeInfo_horse_scale_name">Тежина коњских стаза</string>
+    <string name="simulation_real_mode_desc">На правим деоницама пута брзина ће бити приближена максимално дозвољеној брзини.
+\nНа раскрсницама, симулација ће се успорити.
+\nДодатни пенали биће примењивани на саобраћајну сигнализацију, знак за заустављање итд.</string>
+    <string name="shared_string_item">Ставка</string>
+    <string name="bottom_widgets_panel">Доњи панел</string>
+    <string name="configure_screen_widgets_descr">Изаберите страну екрана да бисте додали или преуредили виџете.</string>
+    <string name="routeInfo_horse_scale_description">Приказ стаза према тежини коњских стаза</string>
+    <string name="rendering_attr_horse_scale_common_name">Заједнички</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Захтевана</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Тежа</string>
+    <string name="rendering_attr_horse_scale_critical_name">Критична</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Опасна</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Немогућа</string>
+    <string name="routing_attr_carriage_restrictions_name">Ограничења за кочије</string>
+    <string name="routing_attr_carriage_restrictions_description">Размотрите приступне дозволе за возила са коњском запрегом</string>
+    <string name="rendering_attr_showTramRoutes_name">Трамвајске руте</string>
+    <string name="rendering_attr_showTrainRoutes_name">Железничке руте</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Руте лаке железнице</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Руте са једним колосеком</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Руте жичара</string>
+    <string name="rendering_attr_showBusRoutes_name">Аутобуске руте</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Тролејбуске руте</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Такси руте</string>
+    <string name="map_markers_bar">Трака маркера на мапи</string>
+    <string name="shared_string_visible_widgets">Видљиви виџети</string>
+    <string name="top_widgets_panel">Горњи панел</string>
+    <string name="shared_string_buttons">Дугмад</string>
+    <string name="osm_carto_render_descr">Слично ОпенСтритМап-карто стилу који се користи на главном ОСМ сајту</string>
+    <string name="simulation_real_mode_title">Реалистична симулација</string>
+    <string name="simulation_constant_mode_desc">Симулација ће се изводити са константном одабраном брзином.</string>
+    <string name="simulation_constant_mode_title">Фиксна брзина</string>
+    <string name="simulation_preview_mode_desc">Брзина симулације ће бити максимална на правим деоницама и успорена само на раскрсницама.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Активне руте</string>
+    <string name="rendering_attr_showRunningRoutes_description">Приказ активних рута</string>
+    <string name="simulation_preview_mode_title">Режим брзог прегледа</string>
+    <string name="speed_mode">Режим брзине</string>
+    <string name="apply_only_to_new_points">Применити само на нове тачке</string>
+    <string name="apply_to_existing_favorites_descr">Применити промене на постојеће омиљене тачке групе или само на нове\?</string>
+    <string name="apply_to_existing">Применити на постојеће</string>
+    <string name="apply_only_to_new_favorites">Примени само на нове омиљене</string>
+    <string name="change_default_appearance">Промените подразумевани изглед</string>
+    <string name="apply_to_existing_points_descr">Применити промене на постојеће тачке групе или само на нове\?</string>
+    <string name="map_widget_altitude">Надморска висина тренутне локације</string>
+    <string name="add_page">Додај страницу</string>
+    <string name="page_number">Страница %1$s</string>
+    <string name="map_widget_distance_to_destination">Удаљеност до одредишта</string>
+    <string name="map_widget_current_speed">Тренутна брзина</string>
 </resources>

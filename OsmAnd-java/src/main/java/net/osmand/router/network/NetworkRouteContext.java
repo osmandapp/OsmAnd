@@ -57,21 +57,19 @@ public class NetworkRouteContext {
 			}
 		}
 	}
-	
+
 	public static long convertPointToLong(int x31, int y31) {
 		return (((long) x31) << 32l) + y31;
 	}
-	
+
 	public static int getXFromLong(long l) {
 		return (int) (l >> 32);
 	}
-	
+
 	public static int getYFromLong(long l) {
 		return (int) (l - ((l >> 32) << 32));
 	}
-	
-	
-	
+
 	public Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x31L, int y31T, int x31R, int y31B, RouteKey rKey)
 			throws IOException {
 		Map<RouteKey, List<NetworkRouteSegment>> map = new LinkedHashMap<>();
@@ -291,7 +289,7 @@ public class NetworkRouteContext {
 			objects.add(obj);
 		}
 	}
-	
+
 	public static class NetworkRouteContextStats {
 		
 		public int loadedTiles;
@@ -299,8 +297,7 @@ public class NetworkRouteContext {
 		public int loadedRoutes;
 		public long loadTimeNs;
 	}
-	
-	
+
 	public static class NetworkRouteSegment {
 		public final int start;
 		public final int end;
@@ -364,14 +361,28 @@ public class NetworkRouteContext {
 			return obj.getPoint31YTile(i);
 		}
 
+		public String getRouteName() {
+			String name = routeKey.getValue("name");
+			if (name.isEmpty()) {
+				name = routeKey.getValue("ref");
+			}
+			if (!name.isEmpty()) {
+				return name;
+			}
+			if (robj != null) {
+				return robj.getName();
+			}
+			return obj.getName();
+		}
+
 		public int getStartPointX() {
 			return getPoint31XTile(start);
 		}
-		
+
 		public int getStartPointY() {
 			return getPoint31YTile(start);
 		}
-		
+
 		public int getEndPointX() {
 			return getPoint31XTile(end);
 		}
@@ -389,8 +400,6 @@ public class NetworkRouteContext {
 		public NetworkRouteSegment inverse() {
 			return new NetworkRouteSegment(this, end, start);
 		}
-		
-		
 	}
 
 	private static class NetworkRoutesTile {
@@ -413,10 +422,9 @@ public class NetworkRouteContext {
 				if (i < len - 1) {
 					point.addObject(new NetworkRouteSegment(obj, rk, i, len - 1));
 				}
-			}			
+			}
 		}
-		
-		
+
 		public void add(RouteDataObject obj, RouteKey rk) {
 			int len = obj.getPointsLength();
 			for (int i = 0; i < len; i++) {
@@ -434,7 +442,7 @@ public class NetworkRouteContext {
 				if (i < len - 1) {
 					point.addObject(new NetworkRouteSegment(obj, rk, i, len - 1));
 				}
-			}			
+			}
 		}
 
 		public TLongObjectMap<NetworkRoutePoint> getRoutes() {

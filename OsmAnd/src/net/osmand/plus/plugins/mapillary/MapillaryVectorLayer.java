@@ -74,8 +74,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		paintLine = new Paint();
 		paintLine.setStyle(Paint.Style.STROKE);
 		paintLine.setAntiAlias(true);
-		paintLine.setColor(ContextCompat.getColor(view.getContext(), R.color.mapillary_color));
-		paintLine.setStrokeWidth(AndroidUtils.dpToPx(view.getContext(), 4f));
+		paintLine.setColor(ContextCompat.getColor(getContext(), R.color.mapillary_color));
+		paintLine.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 4f));
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
 
 		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
@@ -353,7 +353,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapillaryImage) {
-			String description = view.getContext().getString(R.string.mapillary_image);
+			String description = getContext().getString(R.string.mapillary_image);
 			return new PointDescription(PointDescription.POINT_TYPE_MAPILLARY_IMAGE, description);
 		}
 		return null;

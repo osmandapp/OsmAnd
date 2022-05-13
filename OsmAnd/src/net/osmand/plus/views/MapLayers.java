@@ -4,7 +4,6 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -19,6 +18,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.DialogListItemAdapter;
@@ -62,9 +62,12 @@ import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -135,7 +138,7 @@ public class MapLayers {
 		mapView.addLayer(downloadedRegionsLayer, 0.5f);
 
 		// 0.9 gpx layer
-		gpxLayer = new GPXLayer(app);
+		gpxLayer = new GPXLayer(app, -100000);
 		mapView.addLayer(gpxLayer, 0.9f);
 
 		// 1. route layer
@@ -148,10 +151,10 @@ public class MapLayers {
 
 		// 2. osm bugs layer
 		// 3. poi layer
-		poiMapLayer = new POIMapLayer(app);
+		poiMapLayer = new POIMapLayer(app, -180000);
 		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
-		mFavouritesLayer = new FavouritesLayer(app);
+		mFavouritesLayer = new FavouritesLayer(app, -160000);
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 4.6 measurement tool layer
 		measurementToolLayer = new MeasurementToolLayer(app);
@@ -197,12 +200,12 @@ public class MapLayers {
 		});
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
-		createAdditionalLayers();
+		createAdditionalLayers(null);
 	}
 
-	public void createAdditionalLayers() {
-		OsmandPlugin.createLayers(app, null);
-		app.getAppCustomization().createLayers(app, null);
+	public void createAdditionalLayers(@Nullable MapActivity mapActivity) {
+		OsmandPlugin.createLayers(app, mapActivity);
+		app.getAppCustomization().createLayers(app, mapActivity);
 		app.getAidlApi().registerMapLayers(app);
 	}
 
@@ -214,6 +217,10 @@ public class MapLayers {
 				layer.setMapActivity(null);
 			}
 			layer.setMapActivity(mapActivity);
+		}
+		MapRendererView mapRenderer = mapView.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.removeAllSymbolsProviders();
 		}
 	}
 
@@ -270,8 +277,7 @@ public class MapLayers {
 			WptPt locToShow = null;
 			for (GPXFile g : result) {
 				if (g.showCurrentTrack) {
-					if (!settings.SAVE_TRACK_TO_GPX.get() && !
-							settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+					if (!settings.SAVE_TRACK_TO_GPX.get() && !settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 						app.showToastMessage(R.string.gpx_monitoring_disabled_warn);
 					}
 					break;
@@ -285,7 +291,7 @@ public class MapLayers {
 						mapView.getZoom(), true);
 			}
 			mapView.refreshMap();
-			dashboard.refreshContent(true);
+			dashboard.refreshContent(false);
 			return true;
 		};
 		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());
@@ -304,9 +310,12 @@ public class MapLayers {
 				addFilterToList(adapter, list, f, true);
 			}
 		}
-		adapter.setProfileDependent(true);
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode());
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ViewCreator viewCreator = new ViewCreator(mapActivity, isNightMode());
+		viewCreator.setCustomControlsColor(appMode.getProfileColor(isNightMode()));
+		ContextMenuListAdapter listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
+
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final ListView listView = new ListView(themedContext);
@@ -319,7 +328,7 @@ public class MapLayers {
 				item.setSelected(!item.getSelected());
 				ItemClickListener clickListener = item.getItemClickListener();
 				if (clickListener != null) {
-					clickListener.onContextMenuClick(listAdapter, position, position, item.getSelected(), null);
+					clickListener.onContextMenuClick(listAdapter, view, item, item.getSelected());
 				}
 				listAdapter.notifyDataSetChanged();
 			}
@@ -372,7 +381,11 @@ public class MapLayers {
 			}
 		}
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode());
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ViewCreator viewCreator = new ViewCreator(mapActivity, isNightMode());
+		viewCreator.setCustomControlsColor(appMode.getProfileColor(isNightMode()));
+		ContextMenuListAdapter listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
+
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		builder.setAdapter(listAdapter, (dialog, which) -> {
@@ -415,11 +428,8 @@ public class MapLayers {
 		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {
 			item.setSelected(app.getPoiFilters().isPoiFilterSelected(f));
-			item.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
-				ContextMenuItem it = adptr.getItem(position);
-				if (it != null) {
-					it.setSelected(isChecked);
-				}
+			item.setListener((uiAdapter, view, it, isChecked) -> {
+				it.setSelected(isChecked);
 				return false;
 			});
 		}
@@ -436,10 +446,10 @@ public class MapLayers {
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           @NonNull ContextMenuItem item,
-	                           @NonNull ArrayAdapter<ContextMenuItem> adapter) {
+	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
 		selectMapLayer(mapActivity, true, mapSourceName -> {
 			item.setDescription(mapSourceName);
-			adapter.notifyDataSetChanged();
+			uiAdapter.onDataSetChanged();
 			return true;
 		});
 	}

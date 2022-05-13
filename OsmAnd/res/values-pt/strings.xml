@@ -734,7 +734,7 @@
     <string name="route_updated_loc_found">A aguardar a posição para calcular a rota</string>
     <string name="continue_follow_previous_route_auto">Continuar a navegação a seguir que ficou antes inacabada\? (%1$s segundos)</string>
     <string name="show_cameras">Radares de velocidade</string>
-    <string name="show_traffic_warnings">Avisos de moderação de velocidade</string>
+    <string name="show_traffic_warnings">Avisos para abrandar</string>
     <string name="avoid_toll_roads">Evitar estradas com portagem</string>
     <string name="map_widget_top_text">Nome da rua</string>
     <string name="map_widget_config">Configuração do ecrã</string>
@@ -743,9 +743,6 @@
     <string name="map_widget_compass">Bússola</string>
     <string name="map_widget_reset">Restaurar valores predefinidos</string>
     <string name="map_widget_parking">Estacionamento</string>
-    <string name="map_widget_speed">Velocidade</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Tempo para chegar</string>
     <string name="map_widget_next_turn">Próxima manobra</string>
     <string name="map_widget_next_turn_small">Próxima manobra (pequena)</string>
@@ -761,7 +758,7 @@
     <string name="bg_service_sleep_mode_on">Parar
 \na execução em segundo plano</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configure avisos de moderação de velocidade (limites de velocidade, portagens, lombas, passadeiras, túneis), radares e a faixa de rodagem.</string>
+    <string name="show_warnings_descr">Configure avisos para abrandar (limites de velocidade, sinal STOP, lombas, passadeiras, túneis), radares e informação da via de trânsito a tomar.</string>
     <string name="avoid_motorway">Evitar autoestradas</string>
     <string name="snap_to_road">Posicionar na estrada mais próxima</string>
     <string name="osmand_short_description_80_chars">Visualização e navegação móvel de mapas globais do OSM offline e online</string>
@@ -774,7 +771,7 @@
     <string name="map_widget_vector_attributes">Atributos de renderização</string>
     <string name="map_widget_renderer">Estilo do mapa</string>
     <string name="layer_map_appearance">Configurar ecrã</string>
-    <string name="show_lanes">Mostrar faixas de rodagem</string>
+    <string name="show_lanes">Vias de trânsito</string>
     <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
     <string name="avoid_ferries">Evitar balsas/ferries</string>
     <string name="avoid_in_routing_title">Evitar…</string>
@@ -799,7 +796,7 @@
 \n- Visualização de dia e noite, com alteração automática.
 \n- Ampliação do mapa dependente da velocidade.
 \n- Orientação do mapa de acordo com bússola ou direção do movimento.
-\n- Indicação das faixas de rodagem a seguir, aviso de limite de velocidade, vozes gravadas e vozes de conversão de texto para voz.
+\n- Indicação da via de trânsito a seguir, aviso do limite de velocidade, vozes gravadas e vozes de conversão de texto para voz.
 \n
 \nLimitações desta versão gratuita do OsmAnd:
 \n- Quantidade de descarregamentos de mapas limitado.
@@ -887,7 +884,6 @@
     <string name="intermediate_points_change_order">Alterar ordem</string>
     <string name="srtm_paid_version_msg">Por favor considere comprar o complemento \"Curvas de nível\" para apoiar o desenvolvimento.</string>
     <string name="srtm_paid_version_title">Complemento curvas de nível</string>
-    <string name="av_def_action_choose">A pedido\?</string>
     <string name="av_video_format_descr">Formato de saída de vídeo:</string>
     <string name="av_use_external_recorder_descr">Usar gravador do sistema para vídeo.</string>
     <string name="av_use_external_camera_descr">Utilizar a aplicação do sistema para tirar fotografias.</string>
@@ -966,11 +962,11 @@
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Avisar por voz…</string>
-    <string name="speak_descr">Configure os avisos por voz de nomes de ruas, avisos de moderação de velocidade (portagens, lombas, passadeiras), radares e limites de velocidade.</string>
+    <string name="speak_descr">Configure os avisos por voz de nomes de ruas, avisos para afrouxar (sinal de STOP, lombas), radares e limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares de velocidade</string>
-    <string name="speak_traffic_warnings">Avisos de moderação de velocidade</string>
+    <string name="speak_traffic_warnings">Avisos para abrandar</string>
     <string name="osb_author_or_password_not_specified">Especifique o nome de utilizador e a palavra-passe no OSM em \"Configurações\"</string>
     <string name="clear_intermediate_points">Remover destinos intermédios</string>
     <string name="keep_intermediate_points">Manter destinos intermédios</string>
@@ -1059,7 +1055,7 @@
 \n- Visualização de dia e noite, com alteração automática.
 \n- Ampliação do mapa dependente da velocidade.
 \n- Orientação do mapa de acordo com bússola ou direção do movimento.
-\n- Indicação das faixas de rodagem a seguir, aviso de limite de velocidade, vozes gravadas e vozes de conversão de texto para voz.
+\n- Indicação da via de trânsito a seguir, aviso de limite de velocidade, vozes gravadas e vozes de conversão de texto para voz.
 \n</string>
     <string name="auto_zoom_none">Sem ampliação automática</string>
     <string name="auto_zoom_close">Aproximar</string>
@@ -1240,10 +1236,10 @@
     <string name="traffic_warning_stop">Sinal de stop</string>
     <string name="traffic_warning_calming">Redutor de velocidade</string>
     <string name="traffic_warning_speed_camera">Radar de velocidade</string>
-    <string name="traffic_warning">Aviso de moderação de velocidade</string>
+    <string name="traffic_warning">Aviso para afrouxar</string>
     <string name="speak_favorites">Favoritos nas redondezas</string>
     <string name="speak_poi">POIs nas redondezas</string>
-    <string name="way_alarms">Avisos de moderação de velocidade</string>
+    <string name="way_alarms">Avisos para afrouxar</string>
     <string name="sleep_mode_stop_dialog">Parar o GPS quando em segundo plano\?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Perguntar sempre</string>
@@ -1422,7 +1418,7 @@
     <string name="wake_on_voice">Ligar o ecrã</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="shared_string_waypoints">Pontos de rota</string>
-    <string name="shared_string_dismiss">Rejeitar</string>
+    <string name="shared_string_dismiss">Cancelar</string>
     <string name="rendering_category_others">Outros atributos do mapa</string>
     <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e portagens</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
@@ -2499,16 +2495,16 @@
 \n
 \nPoderá usar o navegador visual e por voz, ver POIs (pontos de interesse), criar e gerir trilhos GPX, usar curvas de nível (através de um complemento) e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OpenStreetMap e muito mais.</string>
     <string name="osmand_extended_description_part2">Navegação GPS
-\n• Escolha entre modos offline (sem tarifa de roaming quando estiver no exterior) ou online (mais rápido)
+\n• Escolha entre modos offline (sem tarifa de roaming quando estiver no estrangeiro) ou online (mais rápido)
 \n• Orientação por voz curva a curva lhe guia ao longo do caminho (vozes gravadas e sintetizadas)
-\n• A rota é recalculada sempre que se desviar dela
-\n• Orientação de pista, nomes de ruas e tempo estimado de chegada ajudará ao longo do caminho
-\n• Para fazer a sua viagem mais segura, modo dia/noite se alterna automaticamente
-\n• Visualize limites de velocidade e receba aviso se ultrapassá-los
-\n• Ampliação do mapa se ajusta a sua velocidade
-\n• Pesquise destinos pelo endereço, tipo (p. ex.: estacionamento, restaurante, hotel, posto de gasolina, museu) ou coordenadas geográficas
-\n• Suporta pontos intermédios no seu itinerário
-\n• Grave ou envie um trilho GPX e siga-a
+\n• A rota é recalculada sempre que se desviar desta
+\n• Ajudas na orientação da via de trânsito a tomar, nomes de ruas e tempo estimado de chegada
+\n• Para fazer a sua viagem mais segura, o modo dia/noite muda automaticamente
+\n• Veja os limites de velocidade e receba aviso se os ultrapassar
+\n• Ampliação do mapa automática conforme a velocidade atual
+\n• Pesquise destinos pelo endereço, tipo (por ex.: estacionamento, restaurante, hotel, posto de gasolina, museu) ou coordenadas geográficas
+\n• Possibilidade de usar pontos intermédios no itinerário
+\n• Grave ou envie um trilho GPX e percorra-o
 \n</string>
     <string name="osmand_extended_description_part3">Mapa
 \n• Mostra POIs (ponto de interesse) perto de si.
@@ -2562,8 +2558,8 @@
     <string name="osmand_plus_extended_description_part2">Navegação
 \n• Funciona online (rápido) ou offline (sem custos de roaming quando estiver no estrangeiro)
 \n• Orientação por voz curva a curva (vozes gravadas e sintetizadas)
-\n• Orientação de trajetos opcionais, visualização do nome da rua e tempo estimado de chegada
-\n• Suporta pontos intermédios do seu itinerário
+\n• Opção de visualização da via de trânsito a tomar, visualização do nome da rua e tempo estimado de chegada
+\n• Opção de indicar pontos intermédios por onde passar no itinerário
 \n• Correção automática da rota sempre que sair da rota
 \n• Procure lugares por endereço, pelo tipo (por exemplo: restaurante, hotel, posto de gasolina, museu...) ou por coordenadas geográficas
 \n</string>
@@ -2633,7 +2629,7 @@
     <string name="poi_dialog_reopen">Reabrir</string>
     <string name="av_camera_pic_size">Tamanho da fotografia</string>
     <string name="av_camera_pic_size_descr">Definir o tamanho da imagem</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="use_fast_recalculation">Recálculo inteligente de rota</string>
     <string name="use_fast_recalculation_desc">Recalcula apenas a parte inicial da rota, útil para viagens longas.</string>
     <string name="do_you_like_osmand">Está a gostar do OsmAnd\?</string>
@@ -3093,7 +3089,7 @@
     <string name="shared_string_track_is_saved">O trilho %s está guardado</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixas emissões (proibida circulação de veículos poluentes) no mapa. Não afeta o roteamento.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baixas emissões poluentes</string>
-    <string name="temporary_conditional_routing">Considerar limitações temporárias</string>
+    <string name="temporary_conditional_routing">Aplicar limitações temporárias (obras...)</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s; tempo do roteador %2$s
 \nCálculo: %3$.1f seg; %4$d estradas; %5$d mosaicos</string>
@@ -3667,7 +3663,7 @@
 \n
 \n  • Adicionadas opções para restaurar configurações de perfis personalizados
 \n
-\n  • Rotas GPX completas das faixas de tráfego e instruções completas de curvas
+\n  • Rotas GPX completas das vias de tráfego e instruções completas de curvas
 \n
 \n  • Correção de tamanhos de interface do utilizador em tablets
 \n
@@ -3818,7 +3814,7 @@
     <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas em estradas, calcule uma rota usando \"Rota entre pontos\" para ver os gráficos.</string>
     <string name="message_graph_will_be_available_after_recalculation">Aguarde um momento.
 \nO gráfico estará disponível após a rota ser recalculada.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">O OsmAnd utiliza o MGRS, que é semelhante ao formato UTM NATO.</string>
@@ -4103,7 +4099,7 @@
     <string name="search_more">Pesquisar mais…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="backup_into_file">Fazer cópia de segurança para um ficheiro</string>
-    <string name="restore_from_file">Restaurar de um ficheiro de cópia de segurança</string>
+    <string name="restore_from_file">Restaurar de um ficheiro</string>
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Contacte-nos em %1$s</string>
     <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email. Será enviado um código de verificação para esse endereço.
 \nTodos os seus dados serão ligados a ele.</string>
@@ -4211,7 +4207,7 @@
     <string name="shared_string_view_all">Ver tudo</string>
     <string name="backup_error_user_is_already_registered">Este endereço de email está a ser utilizado noutra conta</string>
     <string name="backup_error_subscription_was_expired">Subscrição expirada</string>
-    <string name="backup_error_subscription_was_used">Subscrição ou código promocional usada por outra conta %1$s</string>
+    <string name="backup_error_subscription_was_used">Subscrição ou código promocional usado por outra conta %1$s</string>
     <string name="backup_error_size_is_exceeded">O tamanho máximo do OsmAnd Cloud excedeu %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">O ficheiro tem de ser enviado no formato .gzip</string>
     <string name="backup_error_file_not_available">Ficheiro indisponível</string>
@@ -4256,7 +4252,7 @@
     <string name="shared_string_purchased">Comprado</string>
     <string name="explore_wikipedia_offline">Explore a Wikipédia offline.</string>
     <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática e nunca perca informação.</string>
-    <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para usar cópias de segurança. Ainda pode restaurar dados da Cloud.</string>
+    <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para poder usar cópias de segurança. Ainda pode restaurar os dados da Cloud.</string>
     <string name="contour_lines_hillshades_slope">Curvas de nível, sombras de relevo, declives</string>
     <string name="backup_deleting_all_data">A eliminar todos os dados…</string>
     <string name="backup_deleted_all_data">Todos os dados eliminados.</string>
@@ -4503,11 +4499,11 @@
     <string name="shared_string_not_used">Não usado</string>
     <string name="files_with_route_restrictions">Ficheiros com restrições de rota</string>
     <string name="navigate_point_format_swiss_grid">Rede Suíça (CH1903)</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas \"fixme\"</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas fixme</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas de notas</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas de notas</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar pedidos de correções (com etiqueta \"fixme\")</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas \"note\"</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar observações ou comentários (etiqueta \"note\")</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis de cursos de água</string>
@@ -4519,7 +4515,7 @@
     <string name="rendering_attr_seabedDetail_name">Detalhes do fundo marinho</string>
     <string name="save_track_to_gpx_descrp">Iniciar a gravação do trilho automaticamente e quando terminar a faixa será guardada automaticamente.</string>
     <string name="gpx_no_routes_title">Não há rotas</string>
-    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para guardar a rota num ficheiro.</string>
+    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar a rota a um ficheiro.</string>
     <string name="please_provide_group_name_message">Por favor atribua um nome ao grupo.</string>
     <string name="quick_action_add_route_descr">Um botão para iniciar uma rota a partir do centro do ecrã.</string>
     <string name="selected_waypoints_descr">Os pontos de rotas selecionados serão adicionados ao trilho \"%1$s\"</string>
@@ -4549,5 +4545,125 @@
     <string name="number_of_tiles">Número de mosaicos</string>
     <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhos de fitness</string>
-    <string name="rendering_attr_showFitnessTrails_name">Mostrar trilhos de fitness</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trilhos de fitness</string>
+    <string name="routeInfo_horse_scale_name">Dificuldade dos percursos equestres</string>
+    <string name="routing_attr_carriage_restrictions_name">Restrições de carruagem</string>
+    <string name="rendering_attr_showTrainRoutes_name">Rotas de comboio</string>
+    <string name="simulation_real_mode_desc">Em trechos de estradas retas, a velocidade será próxima da velocidade máxima permitida.
+\nNos cruzamentos, a simulação diminui.
+\nSerão aplicadas penalidades extras em semáforos, sinais de stop, etc.</string>
+    <string name="speed_mode">Modo de velocidade</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Perigoso</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Rotas de funicular</string>
+    <string name="shared_string_buttons">Botões</string>
+    <string name="routing_attr_carriage_restrictions_description">Considerar permissões de acesso a veículos puxados a cavalo</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Rotas de comboios ligeiros</string>
+    <string name="simulation_preview_mode_desc">A velocidade na simulação será a máxima em retas e diminuirá apenas nas intersecções.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rotas para correr</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas para correr</string>
+    <string name="routeInfo_horse_scale_description">Mostrar percursos equestres de acordo com a sua dificuldade</string>
+    <string name="rendering_attr_horse_scale_common_name">Comum</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
+    <string name="rendering_attr_horse_scale_critical_name">Crítico</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossível</string>
+    <string name="rendering_attr_showTramRoutes_name">Rotas de elétrico</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Rotas de monocarril</string>
+    <string name="rendering_attr_showBusRoutes_name">Rotas de autocarro</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Rotas de troleicarro</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Rotas de vaivem</string>
+    <string name="map_markers_bar">Marcadores no mapa</string>
+    <string name="shared_string_visible_widgets">Widgets visíveis</string>
+    <string name="top_widgets_panel">Painel de cima</string>
+    <string name="bottom_widgets_panel">Painel de baixo</string>
+    <string name="shared_string_item">Item</string>
+    <string name="configure_screen_widgets_descr">Selecione o lado do ecrã para adicionar ou reorganizar os widgets.</string>
+    <string name="osm_carto_render_descr">Similar ao estilo OpenStreetMap-carto no site do OSM</string>
+    <string name="simulation_real_mode_title">Simulação realista</string>
+    <string name="simulation_constant_mode_desc">A simulação será feita na velocidade constante selecionada.</string>
+    <string name="simulation_constant_mode_title">Velocidade fixa</string>
+    <string name="simulation_preview_mode_title">Visualização rápida</string>
+    <string name="apply_to_existing_favorites_descr">Aplicar alterações aos pontos favoritos existentes do grupo ou apenas aos novos\?</string>
+    <string name="apply_to_existing">Aplicar aos existentes</string>
+    <string name="apply_only_to_new_points">Aplicar apenas aos novos</string>
+    <string name="apply_only_to_new_favorites">Aplicar apenas aos favoritos novos</string>
+    <string name="change_default_appearance">Alterar aparência predefinida</string>
+    <string name="apply_to_existing_points_descr">Aplicar alterações aos pontos existentes do grupo ou apenas aos novos\?</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="no_widgets_descr">Adicionar um ou mais widgets da lista de widgets disponíveis.</string>
+    <string name="no_widgets_here_yet">Ainda sem widgets aqui</string>
+    <string name="available_widgets">Widgets disponíveis</string>
+    <string name="snackbar_page_removed">A \"página %1$s\" foi removida.</string>
+    <string name="add_page">Adicionar página</string>
+    <string name="page_number">Página %1$s</string>
+    <string name="on_with_params">%1$s em %2$s</string>
+    <string name="map_widget_altitude">Altitude da localização atual</string>
+    <string name="map_widget_distance_to_destination">Distância até ao destino</string>
+    <string name="map_widget_current_speed">Velocidade atual</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Não sair da pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Apenas se for necessário</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avançado</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Especialista</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermédia</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferir fora de pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sem preferência</string>
+    <string name="release_4_2">• Redesenho de widgets: nova aparência, agrupar por Páginas, alterar a ordem e combinar como desejar.
+\n
+\n • Caminhadas / ciclismo / rotas de viagem: toque no símbolo da rota e obtenha informações completas sobre a rota.
+\n
+\n • Grupos de favoritos: defina a aparência predefinida para novos pontos no grupo
+\n
+\n • Correções: atualização automática de mapas de mosaicos online
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">Ative para ver as rotas de transportes públicos no mapa.</string>
+    <string name="av_def_action_choose">A pedido</string>
+    <string name="current_time_widget_desc">Este widget mostra a hora atual configurada no seu dispositivo.</string>
+    <string name="battery_widget_desc">Widget que mostra o nível da bateria do seu dispositivo.</string>
+    <string name="radius_rules_widget_desc">A ferramenta régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da visualização de círculos de distância no mapa.</string>
+    <string name="fps_widget_desc">Widget que mostra a que velocidade o mapa e os seus elementos são mostrados e atualizados.</string>
+    <string name="altitude_widget_desc">Widget que mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
+    <string name="max_speed_widget_desc">Widget que mostra a velocidade máxima na estrada em que se encontra.</string>
+    <string name="arrival_time_widget_desc">Hora de chegada ao ponto de destino.</string>
+    <string name="route_maneuvers_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
+    <string name="routing_attr_avoid_4wd_only_description">Evitar estradas adequadas apenas para viaturas todo-o-terreno com tração às 4 rodas</string>
+    <string name="bearing_secondary_desc">Pode mudar o formato ou os dados mostrados em: %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Parte do complemento %1$s.</string>
+    <string name="parking_widget_desc">Widget que mostra a distância do centro do seu ecrã ao local de estacionamento.</string>
+    <string name="mapillary_widget_desc">Widget que fornece um acesso rápido à aplicação do Mapillary para tirar fotografias ao nível da rua.</string>
+    <string name="current_speed_widget_desc">Widget que mostra a velocidade atual que o seu dispositivo se desloca detetada pelo sensor de GPS.</string>
+    <string name="magnetic_bearing_widget_desc">Ângulo entre o Norte magnético e o ponto alvo observado na sua localização.</string>
+    <string name="time_to_go_desc">Tempo em minutos ou horas necessárias para chegar ao seu destino.</string>
+    <string name="coordinates_widget_desc">Mostra as coordenadas geográficas da geolocalização atual.</string>
+    <string name="street_name_widget_desc">O widget do nome da rua mostra o nome da rua atual com uma seta de direção em frente ou então o nome da rua seguinte com a manobra que tem de ser feita para essa rua.</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="audio_video_notes_desc">Widget que permite um acesso rápido para iniciar/parar uma gravação (áudio, vídeo ou fotografia).</string>
+    <string name="navigation_points">Pontos de navegação</string>
+    <string name="route_maneuvers">Manobras de rota</string>
+    <string name="get_altitude_information">Obter informação sobre a altitude</string>
+    <string name="calculating_altitude">Cálculo da altitude</string>
+    <string name="calculate_online_altitude_descr">Os dados de altitude serão calculados no servidor OsmAnd.</string>
+    <string name="calculate_online">Calcular online</string>
+    <string name="track_attach_to_the_roads_descr">O trilho será anexado à estrada utilizando mapas offline, a geometria do trilho será alterada.</string>
+    <string name="get_altitude_data">Obter dados de altitude</string>
+    <string name="calculate_altitude">Calcular a altitude</string>
+    <string name="no_altitude_data">Sem dados de altitude</string>
+    <string name="bearing_desc">O widget de rumo mostra a direção absoluta ou relativa em relação a um alvo em unidades angulares (180 graus, 360 graus, milliradianos).</string>
+    <string name="routing_attr_avoid_4wd_only_name">Evitar estradas para todo-o-terreno 4x4</string>
+    <string name="coordinates_widget_secondary_desc">O formato de coordenadas pode ser alterado em %1$s – %2$s – %3$s.</string>
+    <string name="elevation_profile_widget_desc">O widget mostra o perfil da elevação e o declive da rota atual.</string>
+    <string name="av_notes_choose_action_widget_desc">Escolha a ação.</string>
+    <string name="gps_info_widget_desc">Widget que mostra o número de satélites que o seu dispositivo deteta nesse momento.</string>
+    <string name="map_markers_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
+    <string name="map_markers_bar_widget_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
+    <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
+    <string name="shared_string_speed">Velocidade</string>
+    <string name="app_mode_mountain_bicycle">Bicicleta de montanha</string>
+    <string name="lanes_widgets_desc">O widget das vias de trânsito mostra a disposição atual das vias de trânsito na estrada em que se encontra e destaca as vias que deve tomar para seguir a rota ativa.</string>
+    <string name="compass_on_circles">Compasso nos círculos</string>
+    <string name="distance_circles">Círculos-distância</string>
+    <string name="circle_settings">Configurações dos círculos</string>
+    <string name="colour_of_circles">Cor dos círculos</string>
 </resources>

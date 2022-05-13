@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 public abstract class MultiColoringGeometryWayContext extends GeometryWayContext {
@@ -20,7 +22,7 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 
 	private final Bitmap specialArrowBitmap;
 
-	public MultiColoringGeometryWayContext(Context ctx, float density) {
+	public MultiColoringGeometryWayContext(@NonNull Context ctx, float density) {
 		super(ctx, density);
 		borderPaint = createBorderPaint();
 		circlePaint = createCirclePaint();
@@ -59,8 +61,12 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 		return borderPaint;
 	}
 
+	public float getBorderOutlineWidth() {
+		return (hasMapRenderer() ? 1.5f : 2f) * getDensity();
+	}
+
 	public void updateBorderWidth(float routeLineWidth) {
-		borderPaint.setStrokeWidth(routeLineWidth + 2 * getDensity());
+		borderPaint.setStrokeWidth(routeLineWidth + getBorderOutlineWidth());
 	}
 
 	public Bitmap getSpecialArrowBitmap() {

@@ -47,7 +47,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -126,8 +126,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				}
 
 				@Override
-				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 					favouritesAdapter.notifyDataSetChanged();
+				}
+
+				@Override
+				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

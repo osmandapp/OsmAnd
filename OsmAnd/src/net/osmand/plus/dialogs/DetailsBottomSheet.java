@@ -1,16 +1,10 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,25 +12,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton.OnBottomBtnClickListener;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 
 public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
@@ -50,9 +48,8 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	private OsmandApplication app;
 	private List<RenderingRuleProperty> properties;
 	private List<CommonPreference<Boolean>> preferences;
-	private ArrayAdapter<?> arrayAdapter;
-	private ContextMenuAdapter adapter;
-	private int position;
+	private OnDataChangeUiAdapter uiAdapter;
+	private ContextMenuItem item;
 	private int padding;
 	private int paddingSmall;
 	private int paddingHalf;
@@ -60,16 +57,14 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	public static void showInstance(@NonNull FragmentManager fm,
 									List<RenderingRuleProperty> properties,
 									List<CommonPreference<Boolean>> preferences,
-									ArrayAdapter<?> arrayAdapter,
-									ContextMenuAdapter adapter,
-									int position) {
+									OnDataChangeUiAdapter uiAdapter,
+	                                ContextMenuItem item) {
 		if (!fm.isStateSaved()) {
 			DetailsBottomSheet bottomSheet = new DetailsBottomSheet();
 			bottomSheet.setProperties(properties);
 			bottomSheet.setPreferences(preferences);
-			bottomSheet.setAdapter(adapter);
-			bottomSheet.setPosition(position);
-			bottomSheet.setArrayAdapter(arrayAdapter);
+			bottomSheet.setUiAdapter(uiAdapter);
+			bottomSheet.setMenuItem(item);
 			bottomSheet.show(fm, TAG);
 		}
 	}
@@ -134,27 +129,19 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							.setLeftBtnSelected(!streetLightsNightPref.get())
 							.setLeftBtnTitleRes(R.string.shared_string_always)
 							.setRightBtnTitleRes(R.string.shared_string_night_map)
-							.setOnBottomBtnClickListener(new OnBottomBtnClickListener() {
-								@Override
-								public void onBottomBtnClick(boolean onLeftClick) {
-									streetLightsNightPref.set(!onLeftClick);
-								}
-							})
+							.setOnBottomBtnClickListener(onLeftClick -> streetLightsNightPref.set(!onLeftClick))
 							.setCompoundButtonColor(selectedProfileColor)
 							.setChecked(pref.get())
 							.setTitle(propertyName)
 							.setIconHidden(true)
 							.setLayoutId(R.layout.bottom_sheet_item_two_choices)
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									boolean checked = !pref.get();
-									pref.set(checked);
-									streetLightsNightPref.set(false);
-									item[0].setChecked(checked);
-									item[0].setIsLeftBtnSelected(true);
-									setupHeightAndBackground(getView());
-								}
+							.setOnClickListener(view -> {
+								boolean checked = !pref.get();
+								pref.set(checked);
+								streetLightsNightPref.set(false);
+								item[0].setChecked(checked);
+								item[0].setIsLeftBtnSelected(true);
+								setupHeightAndBackground(getView());
 							})
 							.create();
 					items.add(item[0]);
@@ -166,13 +153,10 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							.setTitle(propertyName)
 							.setIconHidden(true)
 							.setLayoutId(R.layout.bottom_sheet_item_with_switch)
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									boolean checked = !pref.get();
-									pref.set(checked);
-									item[0].setChecked(checked);
-								}
+							.setOnClickListener(view -> {
+								boolean checked = !pref.get();
+								pref.set(checked);
+								item[0].setChecked(checked);
 							})
 							.create();
 					items.add(item[0]);
@@ -216,16 +200,16 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 				selected++;
 			}
 		}
-		if (adapter != null) {
-			adapter.getItem(position).setSelected(checked);
-			adapter.getItem(position).setColor(app, checked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			adapter.getItem(position).setDescription(getString(
+		if (item != null) {
+			item.setSelected(checked);
+			item.setColor(app, checked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			item.setDescription(getString(
 					R.string.ltr_or_rtl_combine_via_slash,
 					String.valueOf(selected),
 					String.valueOf(preferences.size())));
 		}
-		if (arrayAdapter != null) {
-			arrayAdapter.notifyDataSetInvalidated();
+		if (uiAdapter != null) {
+			uiAdapter.onDataSetInvalidated();
 		}
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
@@ -244,15 +228,11 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		this.preferences = preferences;
 	}
 
-	public void setAdapter(ContextMenuAdapter adapter) {
-		this.adapter = adapter;
+	public void setUiAdapter(OnDataChangeUiAdapter uiAdapter) {
+		this.uiAdapter = uiAdapter;
 	}
 
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	public void setArrayAdapter(ArrayAdapter<?> arrayAdapter) {
-		this.arrayAdapter = arrayAdapter;
+	public void setMenuItem(ContextMenuItem item) {
+		this.item = item;
 	}
 }

@@ -36,7 +36,6 @@
     <string name="precise_routing_mode">التوجيه الدقيق (ألفا)</string>
     <string name="recording_context_menu_precord">التقاط صورة</string>
     <string name="dropbox_plugin_name">إضافة Dropbox</string>
-    <string name="av_def_action_choose">وفقا لمتطلبات ؟</string>
     <string name="recording_error">حدث خطأ أثناء التسجيل</string>
     <string name="recording_delete_confirm">حذف هذا المسار ؟</string>
     <string name="recording_unavailable">غير متاح</string>
@@ -94,9 +93,6 @@
     <string name="map_widget_top_text">اسم الشارع</string>
     <string name="map_widget_reset">إعادة التعيين إلى الافتراضي</string>
     <string name="map_widget_parking">موقف سيارات</string>
-    <string name="map_widget_speed">سرعة</string>
-    <string name="map_widget_distance">الوجهة</string>
-    <string name="map_widget_altitude">الارتفاع</string>
     <string name="map_widget_time">وقت الذهاب</string>
     <string name="map_widget_next_turn">المنعطف التالي</string>
     <string name="bg_service_screen_lock_toast">أقفلت الشاشة</string>
@@ -1255,7 +1251,7 @@
     <string name="index_name_netherlands">أوربا - هولندا</string>
     <string name="keep_informing">إعادة تعليمات الملاحة</string>
     <string name="shared_string_release">تم</string>
-    <string name="get_plugin">الحصول على</string>
+    <string name="shared_string_get">الحصول على</string>
     <string name="plugin_install_needs_network">تحتاج إلى اتصال إنترنت لثبيت الملحق.</string>
     <string name="navigation_intent_invalid">صيغة خاطئة: %s</string>
     <string name="av_camera_pic_size_descr">حدد حجم صورة الكاميرا الداخلية</string>
@@ -2069,7 +2065,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا مجاورة</string>
+    <string name="wiki_around">مقالات ويكيبيديا قريبة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">صربي (لاتيني)</string>
@@ -3156,7 +3152,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">متوسط</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">متقدم</string>
     <string name="rendering_attr_piste_difficulty_expert_name">خبير</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">الدراجات الجبلية</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">المسارات الغير منظمة</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">أقصى</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">غير محدد</string>
     <string name="routeInfo_piste_difficulty_name">صعوبة الطريق</string>
@@ -3321,8 +3317,8 @@
     <string name="routing_attr_allow_classic_only_description">تم إعداد الطرق للأسلوب الكلاسيكي فقط دون مسارات التزلج. يشمل ذلك الطرق التي يتم إعدادها بواسطة عربة ثلجية أصغر مع زحلقة مرنة ومسارات مصنوعة يدوياً بواسطة المتزلجين.</string>
     <string name="routing_attr_difficulty_preference_name">الصعوبة المفضلة</string>
     <string name="routing_attr_difficulty_preference_description">أفضل الطرق لهذه الصعوبة على الرغم من أن التوجيه علي الممرات أصعب إذا كان طويلا وأسهل إذا كان أقصر.</string>
-    <string name="routing_attr_freeride_policy_name">خارج الممر</string>
-    <string name="routing_attr_freeride_policy_description">Freeride و offpiste طرق ومسارات غير رسمية. عادة ما يكون غير مرتب ، غير مصبوغ من قبل المسؤولين ولا يتم تسجيله دخوله في المساء. الدخول على مسؤوليتك الخاصة.</string>
+    <string name="routing_attr_freeride_policy_name">خارج الطريق</string>
+    <string name="routing_attr_freeride_policy_description">الطرق الزلقة والغير منتظمة طرق ومسارات غير رسمية. عادة ما يكون غير مرتبة ، وغير مصبوغة من قبل المسؤولين ولا ينصح بالذهاب معها في المساء خاصة. الدخول على مسؤوليتك الخاصة.</string>
     <string name="collected_data">البيانات المجمعة</string>
     <string name="app_mode_ufo">طبق</string>
     <string name="rendering_attr_highway_class_track_grade1_name">الصف 1</string>
@@ -3367,7 +3363,7 @@
     <string name="reset_all_profile_settings_descr">سيتم إعادة ضبط جميع إعدادات الوضع إلى الحالة الافتراضية بعد التثبيت.</string>
     <string name="reset_all_profile_settings">استعادة الضبط الافتراضي لكل الأوضاع؟</string>
     <string name="ltr_or_rtl_combine_via_space">%2$s %1$s</string>
-    <string name="ltr_or_rtl_combine_via_colon">%2$s :%1$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="file_does_not_contain_routing_rules">\'%1$s\' لا يحتوي الملف على قواعد توجيه ،يرجى اختيار ملف آخر.</string>
     <string name="not_support_file_type_with_ext">نوع الملف غير مدعوم. تحتاج إلى تحديد ملف بامتداد %1$s .</string>
     <string name="import_from_file">استيراد من الملف</string>
@@ -3885,7 +3881,7 @@
 \nسيتوفر الرسم البياني بعد إعادة الحساب.</string>
     <string name="snowmobile_render_descr">للقيادة على الجليد مع طرق ومسارات مخصصة.</string>
     <string name="shared_string_graph">رسم بياني</string>
-    <string name="ltr_or_rtl_combine_via_dash">%2$s — %1$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">الخرائط المحلية</string>
     <string name="icon_group_amenity">راحة</string>
     <string name="icon_group_special">خاص</string>
@@ -4037,7 +4033,7 @@
     <string name="context_menu_edit_descr">تعديل الوصف</string>
     <string name="delete_waypoints">احذف الإحداثيات</string>
     <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
-    <string name="copy_to_map_favorites">نسخ للمفضلة</string>
+    <string name="copy_to_map_favorites">نسخ إلى المفضلة</string>
     <string name="upload_photo">يتم الرفع</string>
     <string name="upload_photo_completed">اكتمال الرفع</string>
     <string name="uploading_count">رفع %1$d من %2$d</string>
@@ -4167,7 +4163,7 @@
     <string name="routing_attr_avoid_low_emission_zone_name">تجنب مناطق الانبعاثات المنخفضة</string>
     <string name="search_more">بحث عن المزيد…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">نسخ احتياطي/استعادة</string>
+    <string name="backup_and_restore">النسخ الاحتياطي والاستعادة</string>
     <string name="last_backup">النسخ الاحتياطي الأخير</string>
     <string name="duration_ago">%1$s منذ</string>
     <string name="osmand_cloud">سحابة أوسماند</string>
@@ -4616,10 +4612,10 @@
     <string name="rendering_attr_showFitnessTrails_description">إظهار مسارات اللياقة البدنية</string>
     <string name="rendering_attr_showRunningRoutes_description">عرض مسارات الجري</string>
     <string name="rendering_attr_showRunningRoutes_name">مسارات الجري</string>
-    <string name="routeInfo_horse_scale_name">صعوبة مسارات الخيل</string>
-    <string name="routeInfo_horse_scale_description">إصدار المسارات وفقا لصعوبة مسارات الخيل</string>
+    <string name="routeInfo_horse_scale_name">عوائق مسارات الخيل</string>
+    <string name="routeInfo_horse_scale_description">تفضيل المسارات وفقا لصعوبة مسارات الخيل</string>
     <string name="rendering_attr_horse_scale_common_name">شائع</string>
-    <string name="rendering_attr_horse_scale_demanding_name">مطالب</string>
+    <string name="rendering_attr_horse_scale_demanding_name">مطالبة</string>
     <string name="rendering_attr_horse_scale_difficult_name">صعب</string>
     <string name="rendering_attr_horse_scale_critical_name">حرج</string>
     <string name="rendering_attr_horse_scale_dangerous_name">خطير</string>
@@ -4636,7 +4632,7 @@
     <string name="map_markers_bar">شريط علامات الخريطة</string>
     <string name="shared_string_visible_widgets">الأدوات المرئية</string>
     <string name="top_widgets_panel">الشزيط العلوي</string>
-    <string name="bottom_widgets_panel">الشزيط السفلي</string>
+    <string name="bottom_widgets_panel">الشريط السفلي</string>
     <string name="shared_string_item">غرض</string>
     <string name="shared_string_buttons">أزرار</string>
     <string name="configure_screen_widgets_descr">حدد جانب الشاشة لإضافة أدوات واجهة المستخدم أو إعادة ترتيبها.</string>
@@ -4646,4 +4642,88 @@
     <string name="simulation_preview_mode_desc">ستكون سرعة المحاكاة قصوى على طول الأقسام المستقيمة وبطيئة فقط عند التقاطعات.</string>
     <string name="simulation_preview_mode_title">وضع المعاينة السريعة</string>
     <string name="speed_mode">وضع السرعة</string>
+    <string name="map_widget_distance_to_destination">المسافة إلى الوجهة</string>
+    <string name="map_widget_current_speed">السرعة الحالية</string>
+    <string name="apply_only_to_new_favorites">تطبيق على المفضلة الجديدة فقط</string>
+    <string name="apply_to_existing_points_descr">تطبيق التغييرات على النقاط الموجودة في المجموعة أو على النقاط الجديدة فقط؟</string>
+    <string name="apply_to_existing_favorites_descr">تطبيق التغييرات على النقاط المفضلة الحالية للمجموعة أم على النقاط الجديدة فقط؟</string>
+    <string name="apply_only_to_new_points">تطبيق على النقاط الجديدة فقط</string>
+    <string name="change_default_appearance">تغيير المظهر الافتراضي</string>
+    <string name="map_widget_altitude">ارتفاع الموقع الحالي</string>
+    <string name="add_page">إضافة صفحة</string>
+    <string name="page_number">صفحة %1$s</string>
+    <string name="apply_to_existing">تطبيق على القائمة</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">مسارات الذهاب والعودة</string>
+    <string name="osm_carto_render_descr">مماثل لنمط OpenStreetMap-carto المستخدم في موقع OSM الرئيسي</string>
+    <string name="simulation_real_mode_desc">في الطرق المستقيمة ، ستصل السرعة تقريبا إلى أقصى سرعة مسموح بها.
+\nعند التقاطعات ، سوف تقل السرعة .
+\nسيتم تطبيق عقوبات إضافية على إشارات المرور وعلامات التوقف وما إلى ذلك.</string>
+    <string name="on_with_params">%1$s على %2$s</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">فقط إذا لزم الأمر</string>
+    <string name="routing_attr_freeride_policy_allow_name">السماح</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">بدون تفضيل</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">تفضيل الطرق الزلقة</string>
+    <string name="no_widgets_here_yet">لا يوجد ويدجت هنا حتى الان</string>
+    <string name="available_widgets">الويدجت المتاح</string>
+    <string name="routing_attr_difficulty_preference_expert_name">خبير</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">مبتدئ</string>
+    <string name="shared_string_symbol">رمز</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">متقدم</string>
+    <string name="no_widgets_descr">أضف أداة واحدة أو أكثر من قائمة الأدوات المتاحة.</string>
+    <string name="snackbar_page_removed">تمت إزالة \"الصفحة %1$s\".</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">لاتذهب للطرق الزلقة</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">متوسط</string>
+    <string name="release_4_2">• إعادة تصميم الويدجت: الشكل والمظهر الجديد ، والمجموعة حسب الصفحات ، وتغيير الترتيب والجمع بينهما كما تريد.
+\n
+\n• مسارات المشي لمسافات طويلة / ركوب الدراجات / السفر: اضغط على رمز الطريق واحصل على معلومات كاملة حول الطريق.
+\n
+\n• المجموعات المفضلة: تعيين المظهر الافتراضي للنقاط الجديدة في المجموعة
+\n
+\n• إصلاحات: التحديث التلقائي لخرائط البلاط عبر الإنترنت
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">قم بالتفعيل لعرض طرق النقل العام على الخريطة.</string>
+    <string name="coordinates_widget_secondary_desc">يمكن تغيير تنسيق الإحداثيات في %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">جزء من المكون الإضافي %1$s.</string>
+    <string name="mapillary_widget_desc">ويدجت الوصول السريع إلى تطبيق مابيلاري لإضافة صور على مستوى الشارع.</string>
+    <string name="fps_widget_desc">ويدجت عرض عنصر واجهة المستخدم ومدى سرعة وعرض عناصر الخريطة والخريطة وتحديثها.</string>
+    <string name="current_time_widget_desc">ويدجت عرض الوقت الحالي من جهازك.</string>
+    <string name="battery_widget_desc">ويدجت عرض مستوى بطارية جهازك.</string>
+    <string name="gps_info_widget_desc">ويدجت عرض الأقمار الصناعية التي يكتشفها الجهاز ويستخدمها في تلك اللحظة.</string>
+    <string name="altitude_widget_desc">ويدجت عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
+    <string name="time_to_go_desc">الوقت بالدقائق أو الساعات المتوقعة للوصول إلى وجهتك.</string>
+    <string name="arrival_time_widget_desc">وقت الوصول إلى وجهتك.</string>
+    <string name="map_markers_bar_widget_desc">ويدجت الشريط العلوي ، يمكنك رؤية المسافة والاتجاه المباشر من الموقع الحالي. كما يمكنك رؤية أكثر من توجيه مباشر في الأداة.</string>
+    <string name="coordinates_widget_desc">يعرض الإحداثيات الجغرافية للموقع الجغرافي الحالي.</string>
+    <string name="shared_string_widget">ويدجت</string>
+    <string name="audio_video_notes_desc">ويدجت الوصول السريع لبدء / إيقاف تسجيل (صوت أو فيديو أو صورة).</string>
+    <string name="bearing_desc">ويدجت عرض الاتجاه المطلق أو النسبي للهدف بالوحدات الزاويّة (درجات 180 ، درجات 360 ، ملي راديان).</string>
+    <string name="navigation_points">نقاط الملاحة</string>
+    <string name="route_maneuvers_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
+    <string name="route_maneuvers">نقاط الملاحة</string>
+    <string name="get_altitude_information">الحصول على معلومات الارتفاع</string>
+    <string name="calculating_altitude">حساب الارتفاع</string>
+    <string name="calculate_online">احسب عبر الإنترنت</string>
+    <string name="track_attach_to_the_roads_descr">سيتم إرفاق المسار بالطريق باستخدام الخرائط الغير متصلة بالإنترنت ، وسيتم تغيير هندسة المسار.</string>
+    <string name="calculate_altitude">حساب الارتفاع</string>
+    <string name="no_altitude_data">لا توجد بيانات ارتفاع</string>
+    <string name="shared_string_speed">السرعة</string>
+    <string name="app_mode_mountain_bicycle">دراجة جبلية</string>
+    <string name="av_def_action_choose">تحت الطلب</string>
+    <string name="elevation_profile_widget_desc">ويدجت عرض ملف تعريف الارتفاع والمنحدر للمسار الحالي.</string>
+    <string name="bearing_secondary_desc">يمكنك تغيير تنسيق البيانات المعروضة في: %1$s – %2$s – %3$s.</string>
+    <string name="parking_widget_desc">ويدجت عرض المسافة من مركز الشاشة إلى مكان وقوف السيارات.</string>
+    <string name="av_notes_choose_action_widget_desc">اختر إجراء.</string>
+    <string name="radius_rules_widget_desc">تساعد أداة مسطرة نصف القطر على تحديد نصف القطر حول النقطة المحددة على الخريطة من خلال عرض دوائر القياس على الخريطة.</string>
+    <string name="max_speed_widget_desc">ويدجت عرض الحد الأقصى للسرعة للطريق الحالي.</string>
+    <string name="current_speed_widget_desc">ويدجت عرض سرعتك الحالية التي تم الكشف عنها بواسطة مستشعر GPS.</string>
+    <string name="magnetic_bearing_widget_desc">الزاوية بين الشمال المغناطيسي ونقطة الهدف التي تم ملاحظتها من موقعك.</string>
+    <string name="lanes_widgets_desc">ويدجت عرض أداة ممرات الطريق الحالي وكشف الممرات عند القيادة باستخدام الملاحة النشطة.</string>
+    <string name="street_name_widget_desc">ويدجت عرض اسم الشارع الحالي مع سهم الموقع المستقيم أو اسم الشارع التالي مع الاتجاهات التي يجب إكمالها.</string>
+    <string name="map_markers_desc">في ويدجت الشريط العلوي ، يمكنك رؤية المسافة والاتجاه المباشر من الموقع الحالي. كما يمكنك رؤية أكثراتجاه أو اثنين أعلى الأداة.</string>
+    <string name="navigation_points_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
+    <string name="calculate_online_altitude_descr">سيتم حساب بيانات الارتفاع على سيرفر أوسماند.</string>
+    <string name="get_altitude_data">الحصول على بيانات الارتفاع</string>
+    <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
+    <string name="routing_attr_avoid_4wd_only_description">تجنب الطرق المناسبة لمركبات الدفع الرباعي فقط</string>
 </resources>

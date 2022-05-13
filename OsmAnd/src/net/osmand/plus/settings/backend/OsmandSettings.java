@@ -38,7 +38,6 @@ import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
-import net.osmand.plus.mapmarkers.MapMarkersMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
@@ -77,7 +76,6 @@ import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -113,6 +111,8 @@ import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 
 public class OsmandSettings {
 
@@ -747,12 +747,11 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public final CommonPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
 	public final CommonPreference<Boolean> SHOW_COMPASS_ALWAYS = new BooleanPreference(this, "show_compass_always", false) {
 
 		@Override
 		public Boolean getModeValue(ApplicationMode mode) {
-			boolean defaultValue = mode.isWidgetVisible(WIDGET_COMPASS);
+			boolean defaultValue = mode.isWidgetVisibleByDefault(WIDGET_COMPASS);
 			List<String> widgetsVisibility = getWidgetsVisibilityInfo(mode);
 			if (widgetsVisibility.contains(WIDGET_COMPASS)) {
 				return true;
@@ -784,7 +783,12 @@ public class OsmandSettings {
 			return new ArrayList<>(Arrays.asList(MAP_INFO_CONTROLS.getModeValue(appMode).split(SETTINGS_SEPARATOR)));
 		}
 	};
-	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeGlobal().makeShared();
+
+	public final OsmandPreference<Boolean> SHOW_RADIUS_RULER_ON_MAP = new BooleanPreference(this, "show_radius_ruler_on_map", true).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_DISTANCE_CIRCLES_ON_RADIUS_RULER = new BooleanPreference(this, "show_distance_circles_on_radius_rules", true).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
+	public final OsmandPreference<Boolean> RADIUS_RULER_NIGHT_MODE = new BooleanPreference(this, "radius_ruler_night_mode", false).makeProfile();
+
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_SLOPES_ON_ELEVATION_WIDGET = new BooleanPreference(this, "show_slopes_on_elevation_widget", false).makeProfile();
@@ -1280,8 +1284,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> ITINERARY_LAST_CALCULATED_MD5 = new StringPreference(this, "itinerary_last_calculated_md5", "").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<DayNightMode> DAYNIGHT_MODE =
-			new EnumStringPreference<DayNightMode>(this, "daynight_mode", DayNightMode.DAY, DayNightMode.values());
+	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = new EnumStringPreference<>(this, "daynight_mode", DayNightMode.DAY, DayNightMode.values());
 
 	{
 		DAYNIGHT_MODE.makeProfile().cache();
@@ -1735,31 +1738,20 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"left_widget_panel_order", TextUtils.join(",", WidgetsPanel.LEFT.getOriginalOrder()), ",").makeProfile();
+			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(",", WidgetsPanel.TOP.getOriginalOrder()), ",").makeProfile();
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"right_widget_panel_order", TextUtils.join(",", WidgetsPanel.RIGHT.getOriginalOrder()), ",").makeProfile();
+			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(",", WidgetsPanel.BOTTOM.getOriginalOrder()), ",").makeProfile();
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
-	public final OsmandPreference<Boolean> MARKERS_DISTANCE_INDICATION_ENABLED = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS_BAR_WIDGET = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
-
-	public final CommonPreference<MapMarkersMode> MAP_MARKERS_MODE =
-			new EnumStringPreference<>(this, "map_markers_mode", MapMarkersMode.TOOLBAR, MapMarkersMode.values());
-
-	{
-		MAP_MARKERS_MODE.makeProfile().cache();
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.DEFAULT, MapMarkersMode.TOOLBAR);
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.CAR, MapMarkersMode.TOOLBAR);
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, MapMarkersMode.TOOLBAR);
-		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, MapMarkersMode.TOOLBAR);
-	}
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
@@ -2687,6 +2679,9 @@ public class OsmandSettings {
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, DrawerMenuItemsSettings.getDrawerDefaultInstance())
 					.makeProfile().cache();
+
+	public final ListStringPreference COLLAPSED_CONFIGURE_MAP_CATEGORIES = (ListStringPreference)
+			new ListStringPreference(this, "collapsed_configure_map_categories", "", ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =
 			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "configure_map_items", CONFIGURE_MAP_ITEM_ID_SCHEME, new ContextMenuItemsSettings())

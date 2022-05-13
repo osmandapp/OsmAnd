@@ -20,6 +20,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -62,7 +63,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
 	private Paint paintSelected;
@@ -129,7 +129,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		app = view.getApplication();
 		rm = app.getResourceManager();
 		osmandRegions = rm.getOsmandRegions();
@@ -176,8 +177,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			@Override
-			protected List<BinaryMapDataObject> calculateResult(RotatedTileBox tileBox) {
-				return queryData(tileBox);
+			protected List<BinaryMapDataObject> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				return queryData(latLonBounds, zoom);
 			}
 		};
 	}
@@ -371,20 +372,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return new File(fileDir, regionName).exists() || new File(fileDir, roadsRegionName).exists();
 	}
 
-	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
-		if (tileBox.getZoom() >= ZOOM_AFTER_BASEMAP) {
-			if (!checkIfMapEmpty(tileBox)) {
+	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
+		if (zoom >= ZOOM_AFTER_BASEMAP) {
+			if (!checkIfMapEmpty(zoom)) {
 				return Collections.emptyList();
 			}
 		}
-		LatLon lt = tileBox.getLeftTopLatLon();
-		LatLon rb = tileBox.getRightBottomLatLon();
 
 		List<BinaryMapDataObject> result;
-		int left = MapUtils.get31TileNumberX(Math.min(lt.getLongitude(), rb.getLongitude()));
-		int right = MapUtils.get31TileNumberX(Math.max(lt.getLongitude(), rb.getLongitude()));
-		int top = MapUtils.get31TileNumberY(Math.max(lt.getLatitude(), rb.getLatitude()));
-		int bottom = MapUtils.get31TileNumberY(Math.min(lt.getLatitude(), rb.getLatitude()));
+		int left = MapUtils.get31TileNumberX(latLonBounds.left);
+		int right = MapUtils.get31TileNumberX(latLonBounds.right);
+		int top = MapUtils.get31TileNumberY(latLonBounds.top);
+		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 
 		try {
 			result = osmandRegions.query(left, right, top, bottom, false);
@@ -395,7 +394,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		Iterator<BinaryMapDataObject> it = result.iterator();
 		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
-			if (tileBox.getZoom() >= ZOOM_TO_SHOW_SELECTION) {
+			if (zoom >= ZOOM_TO_SHOW_SELECTION) {
 				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
 					it.remove();
 				}
@@ -405,10 +404,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return result;
 	}
 
-	private boolean checkIfMapEmpty(RotatedTileBox tileBox) {
+	private boolean checkIfMapEmpty(int zoom) {
 		int cState = rm.getRenderer().getCheckedRenderedState();
 		final boolean empty;
-		if (tileBox.getZoom() < ZOOM_AFTER_BASEMAP) {
+		if (zoom < ZOOM_AFTER_BASEMAP) {
 			empty = cState == 0;
 		} else {
 			empty = cState <= 1;
@@ -521,10 +520,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);
 			return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-					view.getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
+					getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
 		}
 		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-				view.getContext().getString(R.string.shared_string_map), "");
+				getContext().getString(R.string.shared_string_map), "");
 	}
 
 	@Override

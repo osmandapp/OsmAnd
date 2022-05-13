@@ -1,5 +1,5 @@
 ---
-name: "\U0001F680 Feature request"
+name: "🚀 Feature request"
 about: Suggest a feature for OsmAnd
 ---
 

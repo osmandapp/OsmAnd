@@ -894,9 +894,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Auf Voreinstellung zurücksetzen</string>
     <string name="map_widget_parking">Parken</string>
-    <string name="map_widget_speed">Geschwindigkeit</string>
-    <string name="map_widget_distance">Ziel</string>
-    <string name="map_widget_altitude">Höhe</string>
     <string name="map_widget_time">Verbleibende Zeit</string>
     <string name="map_widget_next_turn">Nächste Abzweigung</string>
     <string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>
@@ -980,7 +977,6 @@
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="av_use_external_camera_descr">System-App für Fotos verwenden.</string>
     <string name="av_use_external_camera">System-Kamera-App nutzen</string>
-    <string name="av_def_action_choose">Auf Anfrage\?</string>
     <string name="dropbox_plugin_description">Synchronisieren Sie Tracks und Audio-/Video-Notizen mit Ihrem Dropbox-Konto.</string>
     <string name="dropbox_plugin_name">Dropbox-Modul</string>
     <string name="intermediate_points_change_order">Reihenfolge ändern</string>
@@ -1449,7 +1445,7 @@
     <string name="plugin_nautical_name">Seekarte</string>
     <string name="world_ski_missing">Laden Sie die spezielle Offline-Karte zur Anzeige der Skianlagen herunter.</string>
     <string name="nautical_maps_missing">Laden Sie die spezielle Offline-Karte zur Anzeige nautischer Details herunter.</string>
-    <string name="get_plugin">Erwerben</string>
+    <string name="shared_string_get">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
@@ -2185,7 +2181,7 @@
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="shared_string_gpx_track">Track</string>
+    <string name="shared_string_gpx_track">Verfolgen</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">%1$d Punkt(e) löschen\?</string>
     <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>
@@ -4549,8 +4545,79 @@
     <string name="estimated_download_size">Geschätzte Downloadgröße</string>
     <string name="number_of_tiles">Anzahl der Kacheln</string>
     <string name="move_map_to_select_area">Bewegen Sie die Karte, um den gewünschten Bereich auszuwählen.</string>
-    <string name="rendering_attr_showFitnessTrails_description">Fitnesspfade anzeigen</string>
-    <string name="rendering_attr_showFitnessTrails_name">Fitnesspfade</string>
-    <string name="rendering_attr_showRunningRoutes_name">Laufende Routen</string>
-    <string name="rendering_attr_showRunningRoutes_description">Laufende Routen anzeigen</string>
+    <string name="rendering_attr_showFitnessTrails_description">Fitness Parcours anzeigen</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness Parcours</string>
+    <string name="rendering_attr_showRunningRoutes_name">Laufrouten</string>
+    <string name="rendering_attr_showRunningRoutes_description">Laufrouten anzeigen</string>
+    <string name="routeInfo_horse_scale_name">Schwierigkeitsgrad der Reitwege</string>
+    <string name="rendering_attr_showTrainRoutes_name">Zuglinien</string>
+    <string name="rendering_attr_showTramRoutes_name">Straßenbahnlinien</string>
+    <string name="simulation_real_mode_desc">Auf geraden Straßenabschnitten wird die Geschwindigkeit ungefähr der zulässigen Höchstgeschwindigkeit entsprechen.
+\nAn Kreuzungen wird die Simulation verlangsamt.
+\nZusätzliche Zeitzuschläge werden bei Verkehrszeichen, Stoppschildern usw. berücksichtigt.</string>
+    <string name="routeInfo_horse_scale_description">Reitwege nach ihrem Schwierigkeitsgrad darstellen</string>
+    <string name="rendering_attr_horse_scale_common_name">Anspruchslos</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Vorsicht angeraten</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Schwieriger Weg</string>
+    <string name="rendering_attr_horse_scale_critical_name">Nur für Geübte</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Gefährlich</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Unpassierbar, Lebensgefahr</string>
+    <string name="routing_attr_carriage_restrictions_name">Einschränkungen für Pferdefuhrwerke</string>
+    <string name="routing_attr_carriage_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für Pferdefuhrwerke</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Stadtbahnlinien</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Monoraillinien</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Kabelgetriebene Linien</string>
+    <string name="rendering_attr_showBusRoutes_name">Buslinien</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Oberleitungsbuslinien</string>
+    <string name="map_markers_bar">Leiste für Kartenmarkierungen</string>
+    <string name="shared_string_visible_widgets">Sichtbare Widgets</string>
+    <string name="top_widgets_panel">Oberes Paneel</string>
+    <string name="bottom_widgets_panel">Unteres Paneel</string>
+    <string name="shared_string_item">Element</string>
+    <string name="shared_string_buttons">Schaltflächen</string>
+    <string name="configure_screen_widgets_descr">Wählen Sie die Bildschirmseite aus, um Widgets hinzuzufügen oder neu anzuordnen.</string>
+    <string name="osm_carto_render_descr">Ähnlich dem OpenStreetMap-Carto-Stil, der auf der OSM-Hauptseite verwendet wird</string>
+    <string name="simulation_real_mode_title">Realistische Simulation</string>
+    <string name="simulation_constant_mode_desc">Die Simulation wird mit der gewählten konstanten Geschwindigkeit durchgeführt.</string>
+    <string name="simulation_constant_mode_title">Konstante Geschwindigkeit</string>
+    <string name="simulation_preview_mode_desc">Die Geschwindigkeit der Simulation wird auf geraden Streckenabschnitten maximal sein und sich nur an Kreuzungen verlangsamen.</string>
+    <string name="simulation_preview_mode_title">Schneller Vorschaumodus</string>
+    <string name="speed_mode">Geschwindigkeitsmodus</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Sammeltaxirouten</string>
+    <string name="map_widget_distance_to_destination">Entfernung zum Ziel</string>
+    <string name="map_widget_altitude">Höhe des aktuellen Standorts</string>
+    <string name="page_number">Seite %1$s</string>
+    <string name="map_widget_current_speed">Aktuelle Geschwindigkeit</string>
+    <string name="add_page">Seite hinzufügen</string>
+    <string name="apply_to_existing_points_descr">Änderungen auf die bestehenden Punkte der Gruppe anwenden oder nur auf neue\?</string>
+    <string name="apply_to_existing_favorites_descr">Änderungen auf die bestehenden Favoritenpunkte der Gruppe anwenden oder nur auf neue\?</string>
+    <string name="apply_to_existing">Anwenden auf bestehende</string>
+    <string name="apply_only_to_new_points">Nur auf neue anwenden</string>
+    <string name="apply_only_to_new_favorites">Nur auf neue Favoriten anwenden</string>
+    <string name="change_default_appearance">Standdardaussehen ändern</string>
+    <string name="on_with_params">%1$s auf %2$s</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Nur wenn nötig</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Anfänger</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Experte</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="no_widgets_descr">Ein oder mehrere Widgets aus der Liste der verfügbaren Widgets hinzufügen.</string>
+    <string name="no_widgets_here_yet">Noch keine Widgets hier</string>
+    <string name="routing_attr_freeride_policy_allow_name">Erlauben</string>
+    <string name="snackbar_page_removed">Die „Seite %1$s“ wurde entfernt.</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Keine Präferenz</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Fortgeschrittene</string>
+    <string name="available_widgets">Verfügbare Widgets</string>
+    <string name="release_4_2">- Neugestaltung der Widgets: neues Look &amp; Feel, nach Seiten gruppieren, Reihenfolge ändern und nach Belieben kombinieren.
+\n
+\n - Wander-/Rad-/Reiserouten: Tippen Sie auf das Routensymbol und erhalten Sie vollständige Informationen über die Route.
+\n
+\n - Favoritengruppen: Legen Sie die Standardanzeige für neue Punkte in der Gruppe fest.
+\n
+\n - Korrekturen: Online-Kachel-Karten werden automatisch aktualisiert
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">Einschalten, um die Routen der öffentlichen Verkehrsmittel auf der Karte anzuzeigen.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nicht abseits der Piste gehen</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Bevorzugt abseits der Piste</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Mittel</string>
 </resources>

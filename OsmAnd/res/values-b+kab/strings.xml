@@ -508,9 +508,6 @@
     <string name="poi_filter_restaurants">Taneččit</string>
     <string name="poi_filter_fuel">Aserɣu</string>
     <string name="map_widget_parking">Aneɣsar</string>
-    <string name="map_widget_speed">Arured</string>
-    <string name="map_widget_distance">Taniɣert</string>
-    <string name="map_widget_altitude">Awrir</string>
     <string name="osmand_parking_minutes">Tisdatin</string>
     <string name="osmand_parking_warning">Γur-k</string>
     <string name="osmand_parking_pm">MD</string>
@@ -580,7 +577,7 @@
     <string name="filter_current_poiButton">Imzizdig</string>
     <string name="edit_filter_save_as_menu_item">Sekles s yisem</string>
     <string name="email">imayl</string>
-    <string name="get_plugin">Awi</string>
+    <string name="shared_string_get">Awi</string>
     <string name="rate_this_app">Rnu tazmilt i usnas</string>
     <string name="try_again">Ɛreḍ tikkelt nniḍen</string>
     <string name="shared_string_undo">Err-d</string>
@@ -1156,7 +1153,6 @@
     <string name="map_widget_av_notes">Ameslaw/Tavidyut</string>
     <string name="recording_description">%1$S %3$S %2$S</string>
     <string name="av_settings">Ameslaw/Tavidyut</string>
-    <string name="av_def_action_choose">_Di tuttra</string>
     <string name="recording_context_menu_precord">Ṭṭef tawlaft...</string>
     <string name="av_def_action_picture">Ṭṭef tawlaft...</string>
     <string name="local_indexes_cat_av">Ameslaw/Tavidyut</string>

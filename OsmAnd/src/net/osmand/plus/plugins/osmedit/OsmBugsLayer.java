@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -57,8 +57,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class);
 	private final OsmEditingPlugin plugin;
 
-	private OsmandMapTileView view;
-
 	private final Context ctx;
 	private final OsmBugsLocalUtil local;
 	private MapLayerData<List<OpenStreetNote>> data;
@@ -84,7 +82,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
 			{
@@ -92,8 +91,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 
 			@Override
-			protected List<OpenStreetNote> calculateResult(RotatedTileBox tileBox) {
-				QuadRect bounds = tileBox.getLatLonBounds();
+			protected List<OpenStreetNote> calculateResult(@NonNull QuadRect bounds, int zoom) {
 				return loadingBugs(bounds.top, bounds.left, bounds.bottom, bounds.right);
 			}
 		};

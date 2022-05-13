@@ -86,14 +86,14 @@ public class BinaryRoutePlanner {
 		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
 				visitedDirectSegments, visitedOppositeSegments);
 
-		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
-		boolean forwardSearch = true;
 
-		PriorityQueue<RouteSegment> graphSegments = graphDirectSegments;
 
 		FinalRouteSegment finalSegment = null;
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
 		boolean onlyForward = ctx.getPlanRoadDirection() > 0;
+		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
+		PriorityQueue<RouteSegment> graphSegments = onlyForward ? graphReverseSegments : graphDirectSegments;
+		boolean forwardSearch = !onlyForward;
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 			// use accumulative approach
@@ -230,10 +230,38 @@ public class BinaryRoutePlanner {
 		} else if (segment.getSegmentStart() > 0 && positiveDirection) {
 			segment = loadSameSegment(ctx, segment, segment.getSegmentStart() - 1, reverseSearchWay);
 		}
-		if (segment == null) {
-			return null;
+		RouteSegment initSegment = null;
+		if (segment != null) {
+			initSegment = segment.initRouteSegment(positiveDirection);
 		}
-		return segment.initRouteSegment(positiveDirection);
+		if (initSegment != null) {
+			initSegment.setParentRoute(RouteSegment.NULL);
+			// compensate first segment difference
+			initSegment.distanceFromStart += initDistFromStart(ctx, initSegment, reverseSearchWay);
+		}
+		return initSegment;
+	}
+	
+	private double initDistFromStart(RoutingContext ctx, RouteSegment initSegment, boolean reverseSearchWay) {
+		int prevX = initSegment.road.getPoint31XTile(initSegment.getSegmentStart());
+		int prevY = initSegment.road.getPoint31YTile(initSegment.getSegmentStart());
+		int x = initSegment.road.getPoint31XTile(initSegment.getSegmentEnd());
+		int y = initSegment.road.getPoint31YTile(initSegment.getSegmentEnd());
+		
+		float priority = ctx.getRouter().defineSpeedPriority(initSegment.road);
+		float speed = (ctx.getRouter().defineRoutingSpeed(initSegment.road) * priority);
+		
+		if (speed == 0) {
+			speed = (ctx.getRouter().getDefaultSpeed() * priority);
+		}
+		// speed can not exceed max default speed according to A*
+		if (speed > ctx.getRouter().getMaxSpeed()) {
+			speed = ctx.getRouter().getMaxSpeed();
+		}
+		double fullDist = squareRootDist(prevX, prevY, x, y);
+		double distFromStart = squareRootDist(x, y, !reverseSearchWay ? ctx.startX : ctx.targetX, !reverseSearchWay ? ctx.startY : ctx.targetY);
+		
+		return (distFromStart - fullDist) / speed;
 	}
 
 
@@ -252,17 +280,13 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegment start, RouteSegment end,
+	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
 		RouteSegment startPos = initRouteSegment(ctx, start, true, false);
 		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
-		startPos.setParentRoute(RouteSegment.NULL);
-		startNeg.setParentRoute(RouteSegment.NULL);
-		endPos.setParentRoute(RouteSegment.NULL);
-		endNeg.setParentRoute(RouteSegment.NULL);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if (ctx.config.initialDirection != null) {
 			// mark here as positive for further check
@@ -339,20 +363,23 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-
 	private void printRoad(String prefix, RouteSegment segment, Boolean reverseWaySearch) {
-		String pr;
-		if (segment.parentRoute != null) {
-			pr = " pend=" + segment.parentRoute.segEnd + " parent=" + segment.parentRoute.road;
-		} else {
-			pr = "";
-		}
 		String p = "";
 		if (reverseWaySearch != null) {
 			p = (reverseWaySearch ? "B" : "F");
 		}
-		println(p + prefix + "" + segment.road + " ind=" + segment.getSegmentStart() + "->" + segment.getSegmentEnd() +
-				" ds=" + ((float) segment.distanceFromStart) + " es=" + ((float) segment.distanceToEnd) + pr);
+		if (segment == null) {
+			println(p + prefix + " Segment=null");
+		} else {
+			String pr;
+			if (segment.parentRoute != null) {
+				pr = " pend=" + segment.parentRoute.segEnd + " parent=" + segment.parentRoute.road;
+			} else {
+				pr = "";
+			}
+			println(p + prefix + "" + segment.road + " ind=" + segment.getSegmentStart() + "->" + segment.getSegmentEnd() +
+					" ds=" + ((float) segment.distanceFromStart) + " es=" + ((float) segment.distanceToEnd) + pr);
+		}
 	}
 
 	private float estimatedDistance(final RoutingContext ctx, int targetEndX, int targetEndY,

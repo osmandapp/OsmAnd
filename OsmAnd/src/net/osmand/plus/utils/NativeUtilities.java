@@ -13,9 +13,8 @@ import net.osmand.core.jni.SwigUtilities;
 
 public class NativeUtilities {
 	public static SWIGTYPE_p_sk_spT_SkImage_const_t createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
-		SWIGTYPE_p_sk_spT_SkImage_const_t swigImg = SwigUtilities.createSkImageARGB888With(
+		return SwigUtilities.createSkImageARGB888With(
 				inputBmp.getWidth(), inputBmp.getHeight(), AndroidUtils.getByteArrayFromBitmap(inputBmp));
-		return swigImg;
 	}
 
 	public static FColorRGB createFColorRGB(@ColorInt int color) {
@@ -28,7 +27,7 @@ public class NativeUtilities {
 		float a = (color >> 24) & 0xFF;
 		float r = (color >> 16) & 0xFF;
 		float g = (color >> 8) & 0xFF;
-		float b = (color >> 0) & 0xFF;
+		float b = (color) & 0xFF;
 		return new FColorARGB(a / 255, r / 255, g / 255, b / 255);
 	}
 
@@ -36,7 +35,14 @@ public class NativeUtilities {
 		int a = (color >> 24) & 0xFF;
 		int r = (color >> 16) & 0xFF;
 		int g = (color >> 8) & 0xFF;
-		int b = (color >> 0) & 0xFF;
+		int b = (color) & 0xFF;
 		return new ColorARGB((short)a, (short)r , (short)g, (short)b);
+	}
+
+	public static ColorARGB createColorARGB(@ColorInt int color, int alpha) {
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = (color) & 0xFF;
+		return new ColorARGB((short)alpha, (short)r , (short)g, (short)b);
 	}
 }

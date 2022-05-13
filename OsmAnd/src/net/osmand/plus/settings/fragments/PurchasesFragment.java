@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.chooseplan.ExploreOsmAndPlansCard;
 import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -40,7 +41,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
-	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
+	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/docs/user/purchases/";
 
 	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
@@ -96,7 +97,9 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		}
 
 		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
-			cardsContainer.addView(new NoPurchasesCard(activity, false).build(activity));
+			cardsContainer.addView(new NoPurchasesCard(activity).build(activity));
+		} else {
+			cardsContainer.addView(new ExploreOsmAndPlansCard(activity).build(activity));
 		}
 		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));
 	}

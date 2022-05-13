@@ -31,15 +31,15 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -60,8 +60,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
-
-	private OsmandMapTileView view;
 
 	private MarkersWidgetsHelper markersWidgetsHelper;
 
@@ -229,7 +227,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		handler = new Handler();
 		initUI();
 	}
@@ -629,7 +628,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
 			String mapObjName = marker.mapObjectName.split("_")[0];
-			return findAmenity(getApplication(), -1, Collections.singletonList(mapObjName), marker.point, 15);
+			return MapSelectionHelper.findAmenity(getApplication(), marker.point, Collections.singletonList(mapObjName), -1, 15);
 		}
 		return null;
 	}
@@ -648,11 +647,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return null;
 	}
 
-
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapMarker) {
-			return ((MapMarker) o).getPointDescription(view.getContext());
+			return ((MapMarker) o).getPointDescription(getContext());
 		}
 		return null;
 	}
@@ -677,7 +675,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
-									   @Nullable ApplyMovedObjectCallback callback) {
+	                                   @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		MapMarker newObject = null;
 		if (o instanceof MapMarker) {

@@ -71,8 +71,8 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
+import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavouritesHelper.FavoritesListener;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
@@ -876,8 +876,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 			if (gpxFile.getNonEmptySegmentsCount() > 1) {
-				Fragment targetFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapRouteInfoMenuFragment.TAG);
-				TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, targetFragment);
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
+				if (fragment == null) {
+					fragment = manager.findFragmentByTag(FollowTrackFragment.TAG);
+				}
+				TrackSelectSegmentBottomSheet.showInstance(manager, gpxFile, fragment);
 			} else {
 				mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
@@ -2476,8 +2480,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	@Override
-	public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+	public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 		updateMenu();
+	}
+
+	@Override
+	public void onFavoritePropertiesUpdated() {
 	}
 
 	@NonNull

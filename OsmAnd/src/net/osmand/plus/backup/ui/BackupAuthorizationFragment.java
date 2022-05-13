@@ -1,8 +1,5 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -32,6 +31,9 @@ import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
 public class BackupAuthorizationFragment extends BaseSettingsFragment implements InAppPurchaseListener {
 
@@ -51,10 +53,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 
 	@ColorRes
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && !isNightMode()) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), isNightMode());
 		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
 
@@ -63,6 +62,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		super.createToolbar(inflater, view);
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
+		((AppBarLayout) view.findViewById(R.id.appbar)).setOutlineProvider(null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.OSMAND_CLOUD);
 				}
 			});
-			setupDialogButton(isNightMode(), signUpButton, DialogButtonType.PRIMARY, R.string.get_plugin);
+			setupDialogButton(isNightMode(), signUpButton, DialogButtonType.PRIMARY, R.string.shared_string_get);
 		}
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}

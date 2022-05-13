@@ -685,7 +685,6 @@
     <string name="routing_attr_avoid_borders_name">Evitar lo desbòrd de frontiera</string>
     <string name="routing_attr_avoid_borders_description">Evitar de passar lei frontieras</string>
     <string name="shared_string_address">Adreiça</string>
-    <string name="map_widget_distance">Destinacion</string>
     <string name="wake_on_voice">Activar l\'ecran</string>
     <string name="osm_live_enter_email">Siatz pregar d\'intrar una adreiça electronica valida</string>
     <string name="routing_attr_freeride_policy_name">Fòra de pista</string>
@@ -934,7 +933,7 @@
     <string name="general_settings_descr">Configuratz lei paramètres generaus e de visualizacion de l\'aplicacion.</string>
     <string name="global_app_settings">Paramètres globaus de l\'aplicacion</string>
     <string name="keep_informing_descr">Tornar anonciar leis indicacions de navigacion a intervales regulars.</string>
-    <string name="get_plugin">Obtenir</string>
+    <string name="shared_string_get">Obtenir</string>
     <string name="quick_favorites_name_preset">Configuracion dau nom</string>
     <string name="quick_action_map_underlay">Modificar lo fons de la mapa</string>
     <string name="gps_filter_precision">Precision GPS</string>

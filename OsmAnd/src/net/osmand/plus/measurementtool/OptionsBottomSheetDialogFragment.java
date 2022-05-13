@@ -11,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -22,40 +20,30 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem.Builder;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-
-import org.apache.commons.logging.Log;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = OptionsBottomSheetDialogFragment.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(OptionsBottomSheetDialogFragment.class);
-
-	public static final String TRACK_SNAPPED_TO_ROAD_KEY = "track_snapped_to_road";
-	public static final String SNAP_TO_ROAD_APP_MODE_KEY = "snap_to_road_app_mode";
-	public static final String ADD_NEW_SEGMENT_ALLOWED_KEY = "add_new_segment_allowed";
-	public static final String PLAIN_TRACK_KEY = "plain_track";
-
-	private ApplicationMode routeAppMode;
+	private static final String TAG = OptionsBottomSheetDialogFragment.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Bundle args = getArguments();
-		boolean trackSnappedToRoad = false;
-		boolean addNewSegmentAllowed = false;
-		boolean plainTrack = false;
-		if (args != null) {
-			trackSnappedToRoad = args.getBoolean(TRACK_SNAPPED_TO_ROAD_KEY);
-			addNewSegmentAllowed = args.getBoolean(ADD_NEW_SEGMENT_ALLOWED_KEY);
-			routeAppMode = ApplicationMode.valueOfStringKey(args.getString(SNAP_TO_ROAD_APP_MODE_KEY), null);
-			plainTrack = args.getBoolean(PLAIN_TRACK_KEY);
+		MeasurementEditingContext editingCtx = null;
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof MeasurementToolFragment) {
+			editingCtx = ((MeasurementToolFragment) targetFragment).getEditingCtx();
 		}
-
+		if (editingCtx == null) {
+			return;
+		}
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
 		String description;
 		Drawable icon;
+		boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
 		if (trackSnappedToRoad) {
-			if (routeAppMode == null || routeAppMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
+			ApplicationMode routeAppMode = editingCtx.getAppMode();
+			if (routeAppMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
 				description = getString(R.string.routing_profile_straightline);
 				icon = getContentIcon(R.drawable.ic_action_split_interval);
 			} else {
@@ -87,7 +75,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		items.add(snapToRoadItem);
 
-		if (addNewSegmentAllowed) {
+		if (editingCtx.isAddNewSegmentAllowed()) {
 			BaseBottomSheetItem addNewSegment = new BottomSheetItemWithDescription.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_new_segment))
 					.setTitle(getString(R.string.plan_route_add_new_segment))
@@ -194,6 +182,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(attachToRoads);
 
+		boolean plainTrack = editingCtx.getPointsCount() > 0 && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
 		if (plainTrack) {
 			BaseBottomSheetItem gpsFilter = new Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_filter))
@@ -203,6 +192,22 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 						Fragment fragment = getTargetFragment();
 						if (fragment instanceof OptionsFragmentListener) {
 							((OptionsFragmentListener) fragment).gpsFilterOnClick();
+						}
+						dismiss();
+					})
+					.create();
+			items.add(gpsFilter);
+		}
+
+		GpxData gpxData = editingCtx.getGpxData();
+		if (gpxData != null && gpxData.getGpxFile() != null && !editingCtx.hasElevationData()) {
+			BaseBottomSheetItem gpsFilter = new Builder()
+					.setTitle(getString(R.string.get_altitude_information))
+					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+					.setOnClickListener(v -> {
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).getAltitudeClick();
 						}
 						dismiss();
 					})
@@ -257,25 +262,17 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		params.rightMargin = view.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment,
-									boolean trackSnappedToRoad, boolean addNewSegmentAllowed,
-	                                String routeAppModeStringKey, boolean plainTrack) {
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
-			Bundle args = new Bundle();
-			args.putBoolean(TRACK_SNAPPED_TO_ROAD_KEY, trackSnappedToRoad);
-			args.putBoolean(ADD_NEW_SEGMENT_ALLOWED_KEY, addNewSegmentAllowed);
-			args.putString(SNAP_TO_ROAD_APP_MODE_KEY, routeAppModeStringKey);
-			args.putBoolean(PLAIN_TRACK_KEY, plainTrack);
-			fragment.setArguments(args);
-			fragment.setTargetFragment(targetFragment,0);
-			fragment.show(fm, TAG);
-		}
-	}
-
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull MeasurementToolFragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 
 	interface OptionsFragmentListener {
@@ -297,6 +294,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		void attachToRoadsClick();
 
 		void gpsFilterOnClick();
+
+		void getAltitudeClick();
 
 		void clearAllOnClick();
 	}

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -48,8 +48,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private static final int startZoom = 12;
 	private static final int startZoomRoute = 10;
 
-	private OsmandMapTileView view;
-
 	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
@@ -67,9 +65,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		WindowManager wmgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 		path = new Path();
 		attrs = new RenderingLineAttributes("transport_route");
@@ -90,11 +89,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 
 			@Override
-			protected List<TransportStop> calculateResult(RotatedTileBox tileBox) {
-				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if (latLonBounds == null) {
-					return new ArrayList<>();
-				}
+			protected List<TransportStop> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
 				try {
 					List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {

@@ -4,9 +4,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -22,19 +19,20 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class LanesWidget extends MapWidget {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-	public static final String WIDGET_LANES = "lanes";
+public class LanesWidget extends MapWidget {
 
 	private static final int MAX_METERS_NOT_SPOKEN_TURN = 800;
 	private static final int MAX_METERS_SPOKEN_TURN = 1200;
+	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
 
 	private final RoutingHelper routingHelper;
 
@@ -149,7 +147,7 @@ public class LanesWidget extends MapWidget {
 			lanesImage.invalidate();
 		}
 
-		if (RouteInfoWidgetsFactory.distChanged(dist, cachedDist)) {
+		if (cachedDist == 0 || Math.abs(cachedDist - dist) > DISTANCE_CHANGE_THRESHOLD) {
 			cachedDist = dist;
 			if (dist == 0) {
 				lanesShadowText.setText("");

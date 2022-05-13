@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -25,6 +26,7 @@ public class TextInfoWidget extends MapWidget {
 	private final TextView textViewShadow;
 	private final TextView smallTextView;
 	private final TextView smallTextViewShadow;
+	private final View bottomDivider;
 
 	@DrawableRes
 	private int dayIconId;
@@ -41,6 +43,7 @@ public class TextInfoWidget extends MapWidget {
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
+		bottomDivider = view.findViewById(R.id.bottom_divider);
 	}
 
 	@Override
@@ -68,6 +71,10 @@ public class TextInfoWidget extends MapWidget {
 			imageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
 		}
 		imageView.invalidate();
+	}
+
+	public boolean setIcons(@NonNull WidgetParams widgetParams) {
+		return setIcons(widgetParams.dayIconId, widgetParams.nightIconId);
 	}
 
 	public boolean setIcons(@DrawableRes int widgetDayIcon, @DrawableRes int widgetNightIcon) {
@@ -164,6 +171,9 @@ public class TextInfoWidget extends MapWidget {
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
+
+		view.setBackgroundResource(textState.widgetBackgroundId);
+		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
 	}
 
 	@Override

@@ -26,32 +26,13 @@
 			android:layout_gravity="top|start"
 			android:visibility="gone" />
 
-		<!-- LEFT widgets colon -->
-		<LinearLayout
+		<!-- LEFT widgets panel -->
+		<net.osmand.plus.views.controls.SideWidgetsPanel
+			android:id="@+id/map_left_widgets_panel"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="top|start"
-			android:orientation="vertical">
-
-			<LinearLayout
-				android:id="@+id/map_left_widgets_panel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|start"
-				android:orientation="vertical">
-
-				<include
-					layout="@layout/map_hud_widget"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
-
-				<include layout="@layout/map_hud_widget"/>
-
-				<include layout="@layout/map_hud_widget"/>
-
-			</LinearLayout>
-
-		</LinearLayout>
+			osmand:rightSide="false" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -273,43 +254,14 @@
 
 		</LinearLayout>
 
-		<!-- RIGHT widgets colon -->
-		<FrameLayout
+		<!-- RIGHT widgets panel -->
+		<net.osmand.plus.views.controls.SideWidgetsPanel
+			android:id="@+id/map_right_widgets_panel"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="top|end">
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|end"
-				android:orientation="vertical">
-
-				<LinearLayout
-					android:id="@+id/map_right_widgets_panel"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="top|end"
-					android:orientation="vertical">
-
-					<include layout="@layout/map_hud_widget"/>
-
-					<include layout="@layout/map_hud_widget"/>
-
-				</LinearLayout>
-
-				<ImageButton
-					android:id="@+id/map_collapse_button"
-					android:contentDescription="@string/shared_string_collapse"
-					android:layout_width="@dimen/map_small_button_size"
-					android:layout_height="@dimen/map_small_button_size"
-					android:layout_gravity="top|center_horizontal"
-					android:background="@drawable/btn_inset_circle_trans"
-					osmand:srcCompat="@drawable/ic_action_remove_dark"/>
-
-			</LinearLayout>
-
-		</FrameLayout>
+			android:layout_gravity="top|end"
+			android:layout_marginTop="@dimen/content_padding_small_half"
+			osmand:rightSide="true" />
 
 	</LinearLayout>
 

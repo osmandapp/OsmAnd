@@ -1,46 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
-	android:minHeight="@dimen/bottom_sheet_list_item_height"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding"
-	android:paddingStart="@dimen/content_padding"
-	android:paddingEnd="@dimen/content_padding">
+	android:minHeight="@dimen/bottom_sheet_list_item_height">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
-		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/ic_action_coordinates_latitude"/>
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding_half"
+		tools:src="@drawable/ic_action_coordinates_latitude" />
 
-	<TextView
-		android:id="@+id/title"
+	<LinearLayout
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
 		android:layout_weight="1"
-		android:ellipsize="end"
-		android:maxLines="4"
-		android:textAppearance="@style/TextAppearance.ListItemTitle"
-		tools:text="Some Title"/>
+		android:layout_marginStart="@dimen/content_padding"
+		android:orientation="vertical">
 
-	<androidx.appcompat.widget.SwitchCompat
-		android:id="@+id/compound_button"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical|end"
-		android:background="@null"
-		android:clickable="false"
-		android:focusable="false"
-		android:focusableInTouchMode="false"
-		android:saveEnabled="false"/>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_weight="1"
+				android:layout_gravity="center_vertical|start"
+				android:ellipsize="end"
+				android:maxLines="4"
+				android:textColor="?android:textColorPrimary"
+				tools:text="Some Title" />
+
+			<androidx.appcompat.widget.SwitchCompat
+				android:id="@+id/compound_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|end"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:background="@null"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
+				android:saveEnabled="false" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/bottom_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/divider_color_basic"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+	</LinearLayout>
 
 </LinearLayout>

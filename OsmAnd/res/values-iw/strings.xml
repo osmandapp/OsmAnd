@@ -79,9 +79,6 @@
     <string name="map_widget_compass">מצפן</string>
     <string name="map_widget_reset">איפוס לבררת המחדל</string>
     <string name="map_widget_parking">חנייה</string>
-    <string name="map_widget_speed">מהירות</string>
-    <string name="map_widget_distance">יעד</string>
-    <string name="map_widget_altitude">גובה</string>
     <string name="map_widget_next_turn">הפנייה הבאה</string>
     <string name="map_widget_next_turn_small">הפנייה הבאה (קטנה)</string>
     <string name="map_widget_next_next_turn">הפנייה השנייה הבאה</string>
@@ -942,7 +939,6 @@
     <string name="prefer_motorways">העדפת כבישים סלולים</string>
     <string name="prefer_in_routing_title">העדפה…</string>
     <string name="prefer_in_routing_descr">העדפת כבישים סלולים.</string>
-    <string name="av_def_action_choose">לפי בקשה\?</string>
     <string name="item_checked">לאחר בדיקה</string>
     <string name="item_unchecked">ללא בדיקה</string>
     <string name="shared_string_map">מפה</string>
@@ -2151,7 +2147,7 @@
     <string name="av_camera_pic_size_descr">הגדרת גודל תמונת המצלמה</string>
     <string name="navigation_intent_invalid">תבנית שגויה: %s</string>
     <string name="plugin_install_needs_network">צריך חיבור לאינטרנט כדי להתקין את התוסף הזה.</string>
-    <string name="get_plugin">קבלה</string>
+    <string name="shared_string_get">קבלה</string>
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
     <string name="use_fast_recalculation_desc">לחשב מחדש רק את החלק ההתחלתי של המסלול, שימושי לטיולים ארוכים.</string>
     <string name="do_you_like_osmand">OsmAnd נושא חן בעיניך?</string>
@@ -3302,7 +3298,7 @@
     <string name="reset_confirmation_descr">נגיעה ב־%1$s תסלק את כל השינויים שערכת.</string>
     <string name="reset_all_profile_settings_descr">איפוס כל הגדרות הפרופיל לבררות המחדל של ההתקנה.</string>
     <string name="reset_all_profile_settings">לאפס את הגדרות הפרופיל\?</string>
-    <string name="ltr_or_rtl_combine_via_colon">%1$s:‏ %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="file_does_not_contain_routing_rules">אין כללי ניווט ב־‚%1$s’. נא לבחור בקובץ אחר.</string>
     <string name="not_support_file_type_with_ext">נא לבחור קובץ נתמך בסיומת %1$s במקום.</string>
@@ -3820,7 +3816,7 @@
     <string name="shared_string_graph">תרשים</string>
     <string name="message_graph_will_be_available_after_recalculation">נא להמתין.
 \nהתרשים יהיה זמין לאחר חישוב מחדש.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s ‏— %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">מפות מקומיות</string>
     <string name="icon_group_amenity">שירות לציבור</string>
     <string name="icon_group_special">מיוחד</string>
@@ -4506,7 +4502,7 @@
     <string name="rendering_value_omit_name">להשמיט</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">תגיות „לתיקון”</string>
-    <string name="gpx_no_routes_descr">אפשר להשתמש בכלי „%1$s” כדי לשמור את המסלול כקובץ.</string>
+    <string name="gpx_no_routes_descr">אפשר להשתמש בכלי „%1$s” כדי להוסיף מסלול לקובץ.</string>
     <string name="gpx_no_routes_title">אין מסלולים</string>
     <string name="save_track_to_gpx_descrp">להתחיל את הקלטת המסלול אוטומטית בעת הניווט ולשמור אוטומטית קדימה.</string>
     <string name="track_file_description">נגיעה בפעולה זו תציג חלונית לבחירה בין המסלולים הזמינים.</string>
@@ -4583,4 +4579,87 @@
     <string name="rendering_attr_horse_scale_critical_name">קריטי</string>
     <string name="simulation_preview_mode_desc">מהירות ההדמיה שתהיה מרבית במקטעים ישרים ותאט רק בצמתים.</string>
     <string name="speed_mode">מצב מהירות</string>
+    <string name="apply_to_existing_points_descr">להחיל את השינויים על הנקודות הקיימות בקבוצה או רק על חדשות\?</string>
+    <string name="apply_only_to_new_favorites">החלה רק על מועדפים חדשים</string>
+    <string name="change_default_appearance">החלפת מראה ברירת המחדל</string>
+    <string name="apply_to_existing_favorites_descr">להחיל את השינויים על הנקודות המועדפות הנוכחיות של הקבוצה או רק על חדשות\?</string>
+    <string name="apply_to_existing">החלה על הקיימות</string>
+    <string name="apply_only_to_new_points">החלה רק על נקודות חדשות</string>
+    <string name="map_widget_altitude">גובה המיקום הנוכחי</string>
+    <string name="page_number">עמוד %1$s</string>
+    <string name="map_widget_distance_to_destination">מרחק ליעד</string>
+    <string name="add_page">הוספת עמוד</string>
+    <string name="map_widget_current_speed">מהירות נוכחית</string>
+    <string name="shared_string_symbol">סמל</string>
+    <string name="no_widgets_descr">ניתן להוסיף וידג׳ט אחד או יותר מרשימת הווידג׳טים הזמינים.</string>
+    <string name="on_with_params">%1$s על %2$s</string>
+    <string name="no_widgets_here_yet">אין כאן וידג׳טים עדיין</string>
+    <string name="available_widgets">וידג׳טים זמינים</string>
+    <string name="snackbar_page_removed">„העמוד %1$s” הוסר.</string>
+    <string name="routing_attr_freeride_policy_allow_name">לאפשר</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">מתקדמים</string>
+    <string name="routing_attr_difficulty_preference_expert_name">מומחים</string>
+    <string name="release_4_2">• עיצוב וידג׳טים מחדש: מראה ותחושה חדשים, קיבוץ לפי עמודים, החלפת הסדר ויצירת כל שילוב אפשרי.
+\n
+\n • מסלולי טיול / רכיבה / סיור: נגיעה בסמל המסלול מציגה את המידע המלא על המסלול.
+\n
+\n • קבוצות מועדפים: הגדרת מראה ברירת מחדל לנקודות חדשות בקבוצה.
+\n
+\n • תיקונים: מפות אריחים מקוונות מתעדכנות אוטומטית.
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">מתקדם</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">לא לרדת מהמסלול</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">רק במידת הצורך</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">להעדיף מחוץ למסלול</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">אין העדפה</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">מתחילים</string>
+    <string name="turn_on_public_transport_description">הפעלה תציג מסלולי תחבורה ציבורית במפה.</string>
+    <string name="coordinates_widget_secondary_desc">ניתן לשנות את תבנית נקודות הציון דרך %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">חלק מהתוסף %1$s.</string>
+    <string name="elevation_profile_widget_desc">וידג׳ט מציג את פרופיל העילוי והשיפוע של המסלול הנוכחי.</string>
+    <string name="mapillary_widget_desc">וידג׳ט שמספק גישה מהירה ליישומון Mapillary כדי להוסיף תמונות ברמת רחוב.</string>
+    <string name="av_notes_choose_action_widget_desc">בחירה בפעולה.</string>
+    <string name="radius_rules_widget_desc">כלי סרגל רדיוס שמסייע לאתר את הרדיוס מסביב לנקודה הנבחרת במפה על ידי הצגת עיגולי מרחק במפה.</string>
+    <string name="current_time_widget_desc">הווידג׳ט הזה מציג את הזמן הנוכחי מהמכשיר שלך.</string>
+    <string name="battery_widget_desc">וידג׳ט שמציג את עוצמת הסוללה של המכשיר שלך.</string>
+    <string name="gps_info_widget_desc">וידג׳ט שמציג את מספר הלוויינים בהם משתמש המכשיר כרגע.</string>
+    <string name="altitude_widget_desc">וידג׳ט שמציג את גובה פני הים במיקום הנוכחי.</string>
+    <string name="current_speed_widget_desc">וידג׳ט שמציג את המהירות הנוכחית שלך לפי חיישן ה־GPS.</string>
+    <string name="magnetic_bearing_widget_desc">זווית בין הצפון המגנטי ונקודת היעד ביחס למיקום שלך.</string>
+    <string name="arrival_time_widget_desc">זמן ההגעה לנקודת היעד.</string>
+    <string name="lanes_widgets_desc">וידג׳ט הנתיבים מציג את פריסת הנתיבים בכביש הנוכחי ומדגיש באילו נתיבים ליסוע כחלק מהניווט הפעיל.</string>
+    <string name="coordinates_widget_desc">הוא מציג את נקודות הציון הגאוגרפיות של המיקום הגאוגרפי הנוכחי.</string>
+    <string name="parking_widget_desc">וידג׳ט שמציג את המרחק ממרכז המסך שלך למקום החנייה.</string>
+    <string name="bearing_secondary_desc">אפשר לשנות את תבנית הנתונים שמוצגים דרך: %1$s – %2$s – %3$s.</string>
+    <string name="fps_widget_desc">וידג׳ט שמציג את המהירות שבה המפה על רכיביה מופיעים ומתעדכנים.</string>
+    <string name="max_speed_widget_desc">וידג׳ט שמציג את מגבלת המהירות בכביש הנוכחי.</string>
+    <string name="time_to_go_desc">הזמן בדקות או שעות שנדרש להגעה ליעד שלך.</string>
+    <string name="street_name_widget_desc">וידג׳ט שם הרחוב מציג את שם הרחוב הנוכחי עם חץ מיקום ישר או ליד שם הרחוב עם המעקף שיש להשלים.</string>
+    <string name="audio_video_notes_desc">וידג׳טים מספקים גישה מהירה להתחלת/עצירת הקלטה (שמע, וידאו או תמונה).</string>
+    <string name="shared_string_widget">וידג׳ט</string>
+    <string name="av_def_action_choose">לפי בקשה</string>
+    <string name="map_markers_bar_widget_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק ואת הכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר כדי לראות סמן או שניים מובילים בווידג׳ט.</string>
+    <string name="bearing_desc">וידג׳ט התכווין מציג את התכווין המוחלט או היחסי ליעד ביחידות זווית (מעלות 180, מעלות 360, מילירדיאנים).</string>
+    <string name="navigation_points">נקודות ניווט</string>
+    <string name="map_markers_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק והכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר הצגה של סמן אחד או שניים בווידג׳ט.</string>
+    <string name="routing_attr_avoid_4wd_only_description">הימנעות מדרכים שמתאימים לרכבי ארבע על ארבע בלבד</string>
+    <string name="routing_attr_avoid_4wd_only_name">הימנעות מדרכים לארבע על ארבע</string>
+    <string name="route_maneuvers">מעקפים</string>
+    <string name="app_mode_mountain_bicycle">אופני הרים</string>
+    <string name="get_altitude_data">קבלת פרטי הגובה</string>
+    <string name="calculate_altitude">חישוב הגובה</string>
+    <string name="no_altitude_data">אין נתוני גובה</string>
+    <string name="shared_string_speed">מהירות</string>
+    <string name="get_altitude_information">קבלת פרטי הגובה</string>
+    <string name="calculating_altitude">הגובה מחושב</string>
+    <string name="calculate_online_altitude_descr">נתוני הגובה יחושבו בשרת של OsmAnd.</string>
+    <string name="calculate_online">חישוב מקוון</string>
+    <string name="navigation_points_desc">וידג׳טים ניווטיים מופעלים במהלך הניווט כדי להציג מידע כגון מרחק, זמן הגעה או עזיבה, הפניות הבאות, תכווין, שם הרחוב הנוכחי, פרטי נתיבים, מהירות מרבית, התראות הגעה, נקודות עניין, נקודות דרך.</string>
+    <string name="track_attach_to_the_roads_descr">המסלול יוצמד לכביש באמצעות מפות בלתי מקוונות, צורת המסלול תשתנה.</string>
+    <string name="compass_on_circles">מצפן על עיגולים</string>
+    <string name="distance_circles">עיגולי מרחק</string>
+    <string name="route_maneuvers_desc">וידג׳טים ניווטיים מופעלים במהלך הניווט כדי להציג מידע כגון מרחק, זמן הגעה או עזיבה, הפניות הבאות, תכווין, שם הרחוב הנוכחי, פרטי נתיבים, מהירות מרבית, התראות הגעה, נקודות עניין, נקודות דרך.</string>
+    <string name="colour_of_circles">צבע של עיגולים</string>
+    <string name="circle_settings">הגדרות עיגול</string>
 </resources>

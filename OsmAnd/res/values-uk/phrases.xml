@@ -212,7 +212,7 @@
     <string name="poi_tram_stop">Трамвайна зупинка</string>
     <string name="poi_public_transport_station">Станція громадського транспорту</string>
     <string name="poi_bus_station">Автобусна станція</string>
-    <string name="poi_railway_station">Залізничний вокзал</string>
+    <string name="poi_railway_station">Залізничний вокзал;Залізнична станція</string>
     <string name="poi_railway_platform">Залізнична платформа</string>
     <string name="poi_transport_construction">Транспортна будівля</string>
     <string name="poi_cheese">Крамниця сирів</string>
@@ -225,11 +225,11 @@
     <string name="poi_free_flying">Крамниця для стрибків з парашутом</string>
     <string name="poi_garden_furniture">Крамниця садових меблів</string>
     <string name="poi_fuel_biogas">Біогаз</string>
-    <string name="poi_halt">Залізнична зупинка</string>
+    <string name="poi_halt">Залізнична зупинка;Зупинка потяга</string>
     <string name="poi_subway_entrance">Вхід в метро</string>
     <string name="poi_subway_station">Так;Станція метро</string>
     <string name="poi_taxi">Стоянка таксі</string>
-    <string name="poi_aerodrome">Аеропорт</string>
+    <string name="poi_aerodrome">Аеропорт;Аеродром</string>
     <string name="poi_helipad">Майданчик для гелікоптера</string>
     <string name="poi_runway">Злітна смуга</string>
     <string name="poi_aeroway_terminal">Термінал</string>
@@ -3775,7 +3775,7 @@
     <string name="poi_video_yes">Так;Відео</string>
     <string name="poi_video_no">Ні</string>
     <string name="poi_internet_access_fee_customers">Доступ до Інтернету: клієнти</string>
-    <string name="poi_traffic_signals_sound_locate">Тільки коли перехід дозволено</string>
+    <string name="poi_traffic_signals_sound_locate">Лише щоб знайти стовп</string>
     <string name="poi_tactile_paving_contrasted">Контрастний</string>
     <string name="poi_tactile_paving_primitive">Примітивний</string>
     <string name="poi_tactile_paving_incorrect">Неправильний</string>
@@ -4302,7 +4302,7 @@
     <string name="poi_shop_fuel">Паливосховище</string>
     <string name="poi_printer_ink">Магазин чорнила для принтерів</string>
     <string name="poi_water_sports">Магазин для водних видів спорту</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_girocard_contactless_yes">Безконтактна Girocard</string>
     <string name="poi_payment_american_express_contactless_yes">Безконтактна American Express (AMEX)</string>
     <string name="poi_payment_maestro_contactless_yes">Безконтактна Maestro</string>
     <string name="poi_payment_mastercard_contactless_yes">Безконтактна MasterCard</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_wool">Крамниця вовни</string>
     <string name="poi_laundry_service_yes">Є</string>
     <string name="poi_laundry_service_no">Немає</string>
+    <string name="poi_flow_rate">Швидкість потоку</string>
+    <string name="poi_golf_pin">Шпилька для гольфу</string>
 </resources>

@@ -1,12 +1,13 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.router.network.NetworkRouteContext.*;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
@@ -15,7 +16,6 @@ import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -31,16 +31,16 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	private final OsmandApplication app;
 
 	private final QuadRect quadRect;
-	private final RenderedObject renderedObject;
+	private final NetworkRouteSegment routeSegment;
 	private final CallbackWithObject<GPXFile> callback;
 
 	public NetworkRouteSelectionTask(@NonNull FragmentActivity activity,
-	                                 @NonNull RenderedObject renderedObject,
+	                                 @NonNull NetworkRouteSegment routeSegment,
 	                                 @NonNull QuadRect quadRect,
 	                                 @Nullable CallbackWithObject<GPXFile> callback) {
 		super(activity);
 		this.app = (OsmandApplication) activity.getApplication();
-		this.renderedObject = renderedObject;
+		this.routeSegment = routeSegment;
 		this.quadRect = quadRect;
 		this.callback = callback;
 	}
@@ -50,8 +50,8 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
-
-		for (RouteKey routeKey : RouteType.getRouteStringKeys(renderedObject)) {
+		RouteKey routeKey = routeSegment.routeKey;
+		if (routeKey != null) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
 				Map<RouteKey, GPXFile> routes = routeSelector.getRoutes(quadRect, true, routeKey);

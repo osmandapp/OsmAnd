@@ -22,6 +22,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -56,7 +57,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelecti
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -134,9 +134,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		public boolean hasBackAction() {
 			return backAction;
 		}
-	}
-
-	public MapContextMenu() {
 	}
 
 	@Nullable
@@ -1063,7 +1060,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public ContextMenuAdapter getActionsContextMenuAdapter(boolean configure) {
 		MapActivity mapActivity = getMapActivity();
-		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(getMyApplication());
+		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(getMyApplication());
 		if (mapActivity != null) {
 			LatLon latLon = getLatLon();
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {

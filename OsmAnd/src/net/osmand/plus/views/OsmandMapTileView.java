@@ -144,7 +144,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private List<IMapLocationListener> locationListeners = new ArrayList<>();
+	private final List<IMapLocationListener> locationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -298,6 +298,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			throw new IllegalStateException(this + " not attached to MapActivity.");
 		}
 		return mapActivity;
+	}
+
+	public RotatedTileBox getRotatedTileBox() {
+		return currentViewport.copy();
 	}
 
 	public void setView(@Nullable View view) {
@@ -510,7 +514,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public float getRotate() {
 		return currentViewport.getRotate();
 	}
-
 
 	public void setLatLon(double latitude, double longitude) {
 		setLatLon(latitude, longitude, false);

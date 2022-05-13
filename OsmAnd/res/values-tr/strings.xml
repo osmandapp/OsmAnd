@@ -58,8 +58,6 @@
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
     <string name="map_widget_reset">Öntanımlı değerlere sıfırla</string>
-    <string name="map_widget_speed">Hız</string>
-    <string name="map_widget_distance">Varış Noktası</string>
     <string name="bg_service_screen_lock">Kilitle</string>
     <string name="bg_service_screen_unlock">Kilidi aç</string>
     <string name="bg_service_screen_lock_toast">Ekran kilitli</string>
@@ -210,7 +208,6 @@
     <string name="map_widget_transparent">Şeffaf widget\'lar</string>
     <string name="map_widget_config">Ekranı ayarla</string>
     <string name="map_widget_parking">Park et</string>
-    <string name="map_widget_altitude">Rakım</string>
     <string name="map_widget_time">Gitme zamanı</string>
     <string name="map_widget_next_turn">Sonraki dönüş</string>
     <string name="map_widget_next_turn_small">Sonraki dönüş (küçük)</string>
@@ -600,7 +597,6 @@
     <string name="prefer_in_routing_title">Tercih et…</string>
     <string name="prefer_in_routing_descr">Otoyolları tercih et.</string>
     <string name="max_speed_none">hiçbiri</string>
-    <string name="av_def_action_choose">İstek üzerine\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Navigasyon</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
     <string name="poi_query_by_name_matches_categories">Birkaç ilgili POI kategorisi bulundu.</string>
@@ -1386,7 +1382,7 @@
     <string name="av_camera_pic_size_descr">Kamera resim boyutunu ayarlayın</string>
     <string name="navigation_intent_invalid">Geçersiz biçim:%s</string>
     <string name="plugin_install_needs_network">Bu eklentiyi yüklemek için çevrim içi olmanız gerekmektedir.</string>
-    <string name="get_plugin">Al</string>
+    <string name="shared_string_get">Al</string>
     <string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
     <string name="use_fast_recalculation_desc">Rotanın yalnızca ilk bölümünü yeniden hesaplar, uzun yolculuklar için kullanışlıdır.</string>
     <string name="do_you_like_osmand">OsmAnd\'ı Sevdinizmi?</string>
@@ -4512,7 +4508,7 @@
     <string name="rendering_value_omit_name">Atla</string>
     <string name="rendering_attr_seabedDetail_name">Deniz dibi ayrıntısı</string>
     <string name="rendering_attr_seabedDetail_description">Deniz dibi yüzey niteliği, birleşik yüzey türleri, yabani ot veya deniz yosunu kategorisi ve sınıfı hakkında ek metin bilgileri</string>
-    <string name="gpx_no_routes_descr">Rotayı dosya olarak kaydetmek için \"%1$s\" aracını kullanabilirsiniz.</string>
+    <string name="gpx_no_routes_descr">Dosyaya güzergah eklemek için \"%1$s\" aracını kullanabilirsiniz.</string>
     <string name="gpx_no_routes_title">Rota yok</string>
     <string name="save_track_to_gpx_descrp">Navigasyon sırasında yol kaydını otomatik olarak başlatın ve bittiğinde otomatik olarak kaydedin.</string>
     <string name="quick_action_add_route_descr">Ekranın ortasından bir rota başlatmak için bir düğme.</string>
@@ -4582,4 +4578,87 @@
 \nTrafik işaretleri, dur işaretleri vb. için ek cezalar uygulanacaktır.</string>
     <string name="simulation_real_mode_title">Gerçekçi simülasyon</string>
     <string name="simulation_preview_mode_desc">Simülasyonun hızı düz kısımlarda azami olacak ve yalnızca kavşaklarda yavaşlayacaktır.</string>
+    <string name="apply_to_existing_favorites_descr">Değişiklikler grubun mevcut favori noktalarına mı uygulansın yoksa yalnızca yeni noktalara mı uygulansın\?</string>
+    <string name="change_default_appearance">Öntanımlı görünümü değiştir</string>
+    <string name="apply_to_existing_points_descr">Değişiklikler grubun mevcut noktalarına mı yoksa yalnızca yeni noktalara mı uygulansın\?</string>
+    <string name="apply_only_to_new_points">Yalnızca yeni noktalara uygula</string>
+    <string name="apply_only_to_new_favorites">Yalnızca yeni favorilere uygula</string>
+    <string name="apply_to_existing">Mevcut olanlara uygula</string>
+    <string name="add_page">Sayfa ekle</string>
+    <string name="map_widget_distance_to_destination">Varış noktasına uzaklık</string>
+    <string name="map_widget_current_speed">Geçerli hız</string>
+    <string name="page_number">Sayfa %1$s</string>
+    <string name="map_widget_altitude">Geçerli konumun rakımı</string>
+    <string name="turn_on_public_transport_description">Haritada toplu taşıma güzergahlarını görmek için açın.</string>
+    <string name="on_with_params">%1$s / %2$s</string>
+    <string name="shared_string_symbol">Simge</string>
+    <string name="no_widgets_descr">Kullanılabilir widget\'lar listesinden bir veya daha fazla widget ekleyin.</string>
+    <string name="routing_attr_freeride_policy_allow_name">İzin ver</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Pist dışını tercih et</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Tercih yok</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Başlangıç</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">İleri</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Uzman</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Pist dışına çıkma</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Yalnızca gerekirse</string>
+    <string name="no_widgets_here_yet">Burada henüz widget yok</string>
+    <string name="release_4_2">• Widget\'lar yeniden tasarlandı: yeni görünüm, sayfalara göre gruplandırın, sırayı değiştirin ve istediğiniz gibi birleştirin.
+\n
+\n • Yürüyüş / Bisiklet / Seyahat güzergahları: güzergah simgesine dokunun ve güzergah hakkında tam bilgi alın.
+\n
+\n • Sık kullanılan gruplar: gruptaki yeni noktalar için öntanımlı görünümü ayarlayın
+\n
+\n • Düzeltmeler: çevrim içi döşeme haritalarının otomatik güncellenmesi
+\n
+\n</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Orta</string>
+    <string name="available_widgets">Kullanılabilir widget\'lar</string>
+    <string name="snackbar_page_removed">\"Sayfa %1$s\" kaldırıldı.</string>
+    <string name="av_def_action_choose">İstek üzerine</string>
+    <string name="coordinates_widget_secondary_desc">Koordinat biçimi %1$s – %2$s – %3$s içinde değiştirilebilir.</string>
+    <string name="widget_secondary_desc_part_of">%1$s eklentisinin bir parçası.</string>
+    <string name="elevation_profile_widget_desc">Geçerli güzergahın yükseklik ve eğim profilini gösteren widget.</string>
+    <string name="parking_widget_desc">Ekran merkezinizden park yerine olan mesafeyi gösteren widget.</string>
+    <string name="mapillary_widget_desc">Sokak düzeyinde görüntü eklemek için Mapillary uygulamasına hızlı erişim sağlayan widget.</string>
+    <string name="av_notes_choose_action_widget_desc">Eylem seçin.</string>
+    <string name="fps_widget_desc">Harita ve harita ögelerinin ne kadar hızlı gösterildiğini ve yenilendiğini gösteren widget.</string>
+    <string name="radius_rules_widget_desc">Yarıçap cetveli aracı, harita üzerinde mesafe daireleri görüntüleyerek harita üzerinde seçilen nokta etrafındaki yarıçapın belirlenmesine yardımcı olur.</string>
+    <string name="current_time_widget_desc">Aygıtınızın geçerli saatini gösteren widget.</string>
+    <string name="battery_widget_desc">Aygıtınızın pil seviyesini gösteren widget.</string>
+    <string name="altitude_widget_desc">Geçerli coğrafi konumun deniz seviyesinden yüksekliğini gösteren widget.</string>
+    <string name="magnetic_bearing_widget_desc">Bulunduğunuz yerden gözlemlenen hedef nokta ile manyetik kuzey arasındaki açı.</string>
+    <string name="arrival_time_widget_desc">Varış noktasına ulaşma zamanı.</string>
+    <string name="lanes_widgets_desc">Şeritler widget\'ı, geçerli yol şerit düzenini gösterir ve etkin navigasyonla sürülecek şeritleri vurgular.</string>
+    <string name="street_name_widget_desc">Sokak adı widget\'ı, düz konum oku ile geçerli cadde adını veya tamamlanması gereken manevra ile bir sonraki cadde adını gösterir.</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="calculate_online">Çevrim içi hesapla</string>
+    <string name="no_altitude_data">Rakım verisi yok</string>
+    <string name="shared_string_speed">Hız</string>
+    <string name="get_altitude_information">Rakım bilgisini al</string>
+    <string name="map_markers_desc">Üst çubuk widget\'ında, geçerli konumdan işaretçiye olan mesafeyi ve yönü görebilirsiniz. Widget\'ta 1 veya 2 üst işaretçiyi görecek şekilde yapılandırmak mümkündür.</string>
+    <string name="bearing_secondary_desc">Görüntülenen verilerin biçimini şu şekilde değiştirebilirsiniz: %1$s – %2$s – %3$s.</string>
+    <string name="gps_info_widget_desc">Aygıtınızın o anda algıladığı ve kullandığı uydu sayısını gösteren widget.</string>
+    <string name="coordinates_widget_desc">Geçerli coğrafi konumun coğrafi koordinatlarını gösterir.</string>
+    <string name="track_attach_to_the_roads_descr">Parkur, çevrim dışı haritalar kullanılarak yola eklenecek, parkur geometrisi değiştirilecek.</string>
+    <string name="app_mode_mountain_bicycle">Dağ bisikleti</string>
+    <string name="max_speed_widget_desc">Geçerli sürüş yolu için hız sınırını gösteren widget.</string>
+    <string name="current_speed_widget_desc">GPS sensörü tarafından algılanan geçerli hızınızı gösteren widget.</string>
+    <string name="time_to_go_desc">Varış noktasına ulaşmak için gereken dakika veya saat cinsinden süre.</string>
+    <string name="map_markers_bar_widget_desc">Üst çubuk widget\'ında, geçerli konumdan işaretçiye olan mesafeyi ve yönü görebilirsiniz. Widget\'ta 1 veya 2 üst işaretçiyi görecek şekilde yapılandırmak mümkündür.</string>
+    <string name="audio_video_notes_desc">Kayıt (ses, video veya fotoğraf) almayı başlatmak/durdurmak için hızlı erişim sağlayan widget\'lar.</string>
+    <string name="bearing_desc">Yön widget\'ı, bir hedefin mutlak veya göreceli yönünü açısal birimlerde gösterir (Derece 180, Derece 360, Miliradyan).</string>
+    <string name="route_maneuvers_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
+    <string name="calculate_online_altitude_descr">Rakım verileri OsmAnd sunucusunda hesaplanacak.</string>
+    <string name="navigation_points">Navigasyon noktaları</string>
+    <string name="navigation_points_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
+    <string name="route_maneuvers">Güzergah manevraları</string>
+    <string name="calculating_altitude">Rakımı hesapla</string>
+    <string name="get_altitude_data">Rakım verilerini al</string>
+    <string name="calculate_altitude">Rakımı hesapla</string>
+    <string name="routing_attr_avoid_4wd_only_description">Yalnızca 4x4 araçlara uygun yollardan kaçının</string>
+    <string name="routing_attr_avoid_4wd_only_name">4x4 yollarından kaçın</string>
+    <string name="compass_on_circles">Daireler üzerinde pusula</string>
+    <string name="colour_of_circles">Dairelerin rengi</string>
+    <string name="circle_settings">Daire ayarları</string>
+    <string name="distance_circles">Mesafe daireleri</string>
 </resources>

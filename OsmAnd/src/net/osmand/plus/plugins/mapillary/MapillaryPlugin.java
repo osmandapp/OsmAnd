@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -32,17 +31,20 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.callback.OnRowItemClick;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,8 +64,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	public static final String TYPE_MAPILLARY_PHOTO = "mapillary-photo";
 	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
-
-	public static final String WIDGET_MAPILLARY = "mapillary";
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
@@ -205,26 +205,19 @@ public class MapillaryPlugin extends OsmandPlugin {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				if (itemId == R.string.street_level_imagery) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
-					return false;
-				}
-				return true;
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
+				return false;
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
-				if (itemId == R.string.street_level_imagery) {
-					SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
-					updateMapLayers(mapActivity, mapActivity, false);
-					ContextMenuItem item = adapter.getItem(pos);
-					if (item != null) {
-						item.setSelected(SHOW_MAPILLARY.get());
-						item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						adapter.notifyDataSetChanged();
-					}
-				}
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+				SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
+				updateMapLayers(mapActivity, mapActivity, false);
+				item.setSelected(SHOW_MAPILLARY.get());
+				item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				uiAdapter.onDataSetChanged();
 				return false;
 			}
 		};
@@ -243,15 +236,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		mapillaryControl = createMonitoringControl(activity);
-		mapillaryWidgetRegInfo = layer.registerWidget(WIDGET_MAPILLARY, mapillaryControl,
-				R.drawable.ic_action_mapillary, R.string.mapillary, WidgetsPanel.RIGHT);
+		mapillaryWidgetRegInfo = layer.registerWidget(WidgetParams.MAPILLARY, mapillaryControl);
 		layer.recreateControls();
 	}
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
-		mapillaryControl = new RightTextInfoWidget(map);
+		mapillaryControl = new TextInfoWidget(map);
 		mapillaryControl.setText(map.getString(R.string.mapillary), "");
-		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
+		mapillaryControl.setIcons(WidgetParams.MAPILLARY);
 		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));
 
 		return mapillaryControl;
@@ -259,9 +251,10 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
+			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
-				mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(mode, mapillaryWidgetRegInfo, visible, false);
+				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible);
 			}
 			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mil != null) {

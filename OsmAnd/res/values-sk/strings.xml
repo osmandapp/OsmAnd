@@ -55,9 +55,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Znovunastaviť štandardné</string>
     <string name="map_widget_parking">Parkovanie</string>
-    <string name="map_widget_speed">Rýchlosť</string>
-    <string name="map_widget_distance">Cieľ</string>
-    <string name="map_widget_altitude">Nadm. výška</string>
     <string name="map_widget_time">Zostávajúci čas</string>
     <string name="map_widget_next_turn">Nasledujúca odbočka</string>
     <string name="map_widget_next_turn_small">Nasled. odbočka (malá)</string>
@@ -909,7 +906,6 @@
     <string name="prefer_in_routing_descr">Uprednostniť diaľnice.</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
-    <string name="av_def_action_choose">Pri požiadaní\?</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Výpočet presnej trasy bez závad. Zatiaľ však obmedzený na menšiu vzdialenosť a je pomalší.</string>
     <string name="map_widget_gps_info">Informácie o GPS</string>
@@ -1353,7 +1349,7 @@
     <string name="gps_status">Stav GPS</string>
     <string name="edit_group">Upraviť skupinu</string>
     <string name="plugin_install_needs_network">Pre nainštalovanie tohto zásuvného modulu musíte byť pripojený na Internet.</string>
-    <string name="get_plugin">Získať</string>
+    <string name="shared_string_get">Získať</string>
     <string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>
     <string name="plugin_nautical_name">Námorný mapový pohľad</string>
     <string name="world_ski_missing">Stiahnite samostatnú lyžiarsku mapu pre zobrazenie zariadení pre lyžovanie.</string>
@@ -4577,4 +4573,39 @@
     <string name="simulation_real_mode_title">Realistická simulácia</string>
     <string name="shared_string_buttons">Tlačidlá</string>
     <string name="speed_mode">Rýchlostný režim</string>
+    <string name="apply_to_existing_points_descr">Použiť zmeny na existujúce body skupiny, alebo iba a nové\?</string>
+    <string name="apply_to_existing">Použiť na existujúce</string>
+    <string name="apply_to_existing_favorites_descr">Použiť zmeny na existujúce obľúbené body skupiny, alebo iba a nové\?</string>
+    <string name="apply_only_to_new_points">Použiť iba na nové body</string>
+    <string name="change_default_appearance">Zmeniť predvolený vzhľad</string>
+    <string name="apply_only_to_new_favorites">Použiť iba na nové obľúbené body</string>
+    <string name="on_with_params">%1$s na %2$s</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="add_page">Pridať stránku</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Neschádzať zo zjazdovky</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Len ak je potrebné</string>
+    <string name="routing_attr_freeride_policy_allow_name">Povoliť</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferovať mimo zjazdovky</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Bez preferencie</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Začiatočník</string>
+    <string name="map_widget_altitude">Nadmorská výška aktuálnej polohy</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Pokročilý</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
+    <string name="no_widgets_descr">Pridajte jeden alebo viac nástrojov zo zoznamu dostupných nástrojov.</string>
+    <string name="no_widgets_here_yet">Nie sú tu zatiaľ žiadne nástroje</string>
+    <string name="available_widgets">Dostupné nástroje</string>
+    <string name="snackbar_page_removed">\"Stránka %1$s\" bola odstránená.</string>
+    <string name="map_widget_distance_to_destination">Vzdialenosť do cieľa</string>
+    <string name="map_widget_current_speed">Súčasná rýchlosť</string>
+    <string name="page_number">Strana %1$s</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Stredne pokročilí</string>
+    <string name="release_4_2">• Prepracovanie nástrojov na obrazovke: nový vzhľad, zoskupenie na stránky, možnosť zmeny poradia a kombinácií ako potrebujete.
+\n
+\n • Turistické / cyklistické / cestovné trasy: stlačte symbol trasy a získajte informácie o trase.
+\n
+\n • Skupiny obľúbených bodov: nastavte predvolený vzhľad pre nové body v skupine.
+\n
+\n • Opravy: automatická aktualizácia online dlaždíc
+\n
+\n</string>
 </resources>

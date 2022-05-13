@@ -286,7 +286,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								String email = editText.getText().toString();
+								String email = editText.getText().toString().trim();
 								if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
 									getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
 									return;

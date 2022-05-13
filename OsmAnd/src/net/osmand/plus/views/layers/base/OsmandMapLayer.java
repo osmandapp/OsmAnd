@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers.base;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,42 +26,46 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiCategory;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class OsmandMapLayer {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
-	public int baseOrder = -1;
+	protected int baseOrder = -1;
 
 	@NonNull
 	private final Context ctx;
 	@Nullable
 	private MapActivity mapActivity;
+	protected OsmandMapTileView view;
+	protected boolean mapActivityInvalidated = false;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -77,9 +82,26 @@ public abstract class OsmandMapLayer {
 		this.ctx = ctx;
 	}
 
+	public int getBaseOrder() {
+		return baseOrder;
+	}
+
 	@NonNull
 	public Context getContext() {
 		return ctx;
+	}
+
+	@Nullable
+	public OsmandMapTileView getTileView() {
+		return view;
+	}
+
+	public boolean hasMapRenderer() {
+		return getMapRenderer() != null;
+	}
+
+	public MapRendererView getMapRenderer() {
+		return view != null ? view.getMapRenderer() : null;
 	}
 
 	@Nullable
@@ -89,6 +111,9 @@ public abstract class OsmandMapLayer {
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		if (mapActivity != null) {
+			mapActivityInvalidated = true;
+		}
 	}
 
 	@NonNull
@@ -121,7 +146,9 @@ public abstract class OsmandMapLayer {
 		return true;
 	}
 
-	public abstract void initLayer(@NonNull OsmandMapTileView view);
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		this.view = view;
+	}
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
@@ -145,8 +172,8 @@ public abstract class OsmandMapLayer {
 		return false;
 	}
 
-
-	public <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params) {
+	@SafeVarargs
+	public final <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params) {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 
@@ -256,59 +283,19 @@ public abstract class OsmandMapLayer {
 		return rf;
 	}
 
-	public Amenity findAmenity(OsmandApplication app, long id, List<String> names, LatLon latLon, int radius) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		Amenity res = null;
-		for (Amenity amenity : amenities) {
-			Long amenityId = amenity.getId() >> 1;
-			if (amenityId == id && !amenity.isClosed()) {
-				res = amenity;
-				break;
-			}
-		}
-		if (res == null && names != null && names.size() > 0) {
-			for (Amenity amenity : amenities) {
-				for (String name : names) {
-					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
-						res = amenity;
-						break;
-					}
-				}
-				if (res != null) {
-					break;
-				}
-			}
-		}
-
-		return res;
-	}
-
-	public int getDefaultRadiusPoi(RotatedTileBox tb) {
-		int r;
-		final double zoom = tb.getZoom();
+	public static int getDefaultRadiusPoi(@NonNull RotatedTileBox tileBox) {
+		int radius;
+		final double zoom = tileBox.getZoom();
 		if (zoom <= 15) {
-			r = 10;
+			radius = 10;
 		} else if (zoom <= 16) {
-			r = 14;
+			radius = 14;
 		} else if (zoom <= 17) {
-			r = 16;
+			radius = 16;
 		} else {
-			r = 18;
+			radius = 18;
 		}
-		return (int) (r * tb.getDensity());
+		return (int) (radius * tileBox.getDensity());
 	}
 
 	protected float getIconSize(OsmandApplication app) {
@@ -327,8 +314,8 @@ public abstract class OsmandMapLayer {
 		return rect;
 	}
 
-	public int getScaledTouchRadius(OsmandApplication app, int radiusPoi) {
-		float textScale = getTextScale();
+	public static int getScaledTouchRadius(@NonNull OsmandApplication app, int radiusPoi) {
+		float textScale = getTextScale(app);
 		if (textScale < 1.0f) {
 			textScale = 1.0f;
 		}
@@ -360,7 +347,11 @@ public abstract class OsmandMapLayer {
 	}
 
 	public float getTextScale() {
-		return getApplication().getOsmandMap().getTextScale();
+		return getTextScale(getApplication());
+	}
+
+	public static float getTextScale(@NonNull OsmandApplication app) {
+		return app.getOsmandMap().getTextScale();
 	}
 
 	public float getMapDensity() {
@@ -371,29 +362,231 @@ public abstract class OsmandMapLayer {
 		return getApplication().getOsmandMap().getCarScaleCoef(textScale);
 	}
 
+	public static class TileBoxRequest {
+		private final int left;
+		private final int top;
+		private final int right;
+		private final int bottom;
+		private final int width;
+		private final int height;
+		private final int zoom;
+		private final QuadRect latLonBounds;
+
+		public TileBoxRequest(@NonNull RotatedTileBox tileBox) {
+			zoom = tileBox.getZoom();
+
+			QuadRect tilesRect = tileBox.getTileBounds();
+			left = (int) Math.floor(tilesRect.left);
+			top = (int) Math.floor(tilesRect.top);
+			right = (int) Math.ceil(tilesRect.right);
+			bottom = (int) Math.ceil(tilesRect.bottom);
+			width = (int) Math.ceil(tilesRect.right - left);
+			height = (int) Math.ceil(tilesRect.bottom - top);
+
+			latLonBounds = new QuadRect(
+					MapUtils.getLongitudeFromTile(zoom, alignTile(left)),
+					MapUtils.getLatitudeFromTile(zoom, alignTile(top)),
+					MapUtils.getLongitudeFromTile(zoom, alignTile(right)),
+					MapUtils.getLatitudeFromTile(zoom, alignTile(bottom)));
+		}
+
+		private TileBoxRequest(@NonNull TileBoxRequest request, int tileExtentX, int tileExtentY) {
+			zoom = request.zoom;
+
+			left = alignTile(request.left - tileExtentX);
+			top = alignTile(request.top - tileExtentY);
+			right = alignTile(request.right + tileExtentX);
+			bottom = alignTile(request.bottom + tileExtentY);
+			width = right - left;
+			height = bottom - top;
+
+			latLonBounds = new QuadRect(
+					MapUtils.getLongitudeFromTile(zoom, alignTile((double) left)),
+					MapUtils.getLatitudeFromTile(zoom, alignTile((double) top)),
+					MapUtils.getLongitudeFromTile(zoom, alignTile((double) right)),
+					MapUtils.getLatitudeFromTile(zoom, alignTile((double) bottom)));
+		}
+
+		private double alignTile(double tile) {
+			if (tile < 0) {
+				return 0;
+			}
+			if (tile >= MapUtils.getPowZoom(zoom)) {
+				return MapUtils.getPowZoom(zoom) - .000001;
+			}
+			return tile;
+		}
+
+		private int alignTile(int tile) {
+			return tile < 0 ? 0 : Math.min(tile, (int) MapUtils.getPowZoom(zoom));
+		}
+
+		public TileBoxRequest extend(int tileExtentX, int tileExtentY) {
+			return new TileBoxRequest(this, tileExtentX, tileExtentY);
+		}
+
+		public int getLeft() {
+			return left;
+		}
+
+		public int getTop() {
+			return top;
+		}
+
+		public int getRight() {
+			return right;
+		}
+
+		public int getBottom() {
+			return bottom;
+		}
+
+		public int getWidth() {
+			return width;
+		}
+
+		public int getHeight() {
+			return height;
+		}
+
+		public int getZoom() {
+			return zoom;
+		}
+
+		public QuadRect getLatLonBounds() {
+			return latLonBounds;
+		}
+
+		public boolean contains(@Nullable TileBoxRequest request) {
+			return request != null && latLonBounds.contains(request.latLonBounds);
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			TileBoxRequest that = (TileBoxRequest) o;
+			return left == that.left && top == that.top && width == that.width
+					&& height == that.height && zoom == that.zoom;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(left, top, width, height, zoom);
+		}
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "" + latLonBounds;
+		}
+	}
+
 	public abstract class MapLayerData<T> {
+		public final long DATA_REQUEST_TIMEOUT = 10 * 1000;
 		public int ZOOM_THRESHOLD = 1;
 		public RotatedTileBox queriedBox;
+		public TileBoxRequest queriedRequest;
 		protected T results;
 		protected Task currentTask;
 		protected Task pendingTask;
+		private List<WeakReference<DataReadyCallback>> callbacks = new LinkedList<>();
+
+		public class DataReadyCallback {
+			private final TileBoxRequest request;
+			private T results;
+			private boolean ready = false;
+			private final Object sync = new Object();
+
+			public DataReadyCallback(@NonNull TileBoxRequest request) {
+				this.request = request;
+			}
+
+			public TileBoxRequest getRequest() {
+				return request;
+			}
+
+			@Nullable
+			public T getResults() {
+				return results;
+			}
+
+			public boolean isReady() {
+				return ready;
+			}
+
+			public Object getSync() {
+				return sync;
+			}
+
+			private void onDataReady(@Nullable T results) {
+				this.results = results;
+				synchronized (sync) {
+					ready = true;
+					sync.notifyAll();
+				}
+			}
+		}
 
 		public RotatedTileBox getQueriedBox() {
 			return queriedBox;
+		}
+
+		public TileBoxRequest getQueriedRequest() {
+			return queriedRequest;
 		}
 
 		public T getResults() {
 			return results;
 		}
 
+		public DataReadyCallback getDataReadyCallback(@NonNull TileBoxRequest request) {
+			return new DataReadyCallback(request);
+		}
+
+		public synchronized void addDataReadyCallback(@NonNull DataReadyCallback callback) {
+			LinkedList<WeakReference<DataReadyCallback>> ncall = new LinkedList<>(callbacks);
+			ncall.add(new WeakReference<>(callback));
+			callbacks = ncall;
+		}
+
+		public synchronized void removeDataReadyCallback(@NonNull DataReadyCallback callback) {
+			LinkedList<WeakReference<DataReadyCallback>> ncall = new LinkedList<>(callbacks);
+			Iterator<WeakReference<DataReadyCallback>> it = ncall.iterator();
+			while (it.hasNext()) {
+				DataReadyCallback c = it.next().get();
+				if (c == callback) {
+					it.remove();
+				}
+			}
+			callbacks = ncall;
+		}
+
+		public synchronized void fireDataReadyCallback(@Nullable T results) {
+			for (WeakReference<DataReadyCallback> callback : callbacks) {
+				DataReadyCallback c = callback.get();
+				if (c != null) {
+					c.onDataReady(results);
+				}
+			}
+		}
+
 		public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
 			return queriedData != null && queriedData.containsTileBox(newBox) && Math.abs(queriedData.getZoom() - newBox.getZoom()) <= ZOOM_THRESHOLD;
 		}
 
-		public void queryNewData(RotatedTileBox tileBox) {
+		public boolean queriedRequestContains(final TileBoxRequest queriedRequest, final TileBoxRequest newRequest) {
+			return queriedRequest != null && queriedRequest.contains(newRequest) && Math.abs(queriedRequest.getZoom() - newRequest.getZoom()) <= ZOOM_THRESHOLD;
+		}
+
+		public void queryNewData(@NonNull RotatedTileBox tileBox) {
 			if (!queriedBoxContains(queriedBox, tileBox)) {
 				Task ct = currentTask;
-				if (ct == null || !queriedBoxContains(ct.getDataBox(), tileBox)) {
+				if (ct == null || !queriedBoxContains(ct.getExtendedBox(), tileBox)) {
 					RotatedTileBox original = tileBox.copy();
 					RotatedTileBox extended = original.copy();
 					extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
@@ -404,7 +597,23 @@ public abstract class OsmandMapLayer {
 						pendingTask = task;
 					}
 				}
+			}
+		}
 
+		public void queryNewData(@NonNull TileBoxRequest request) {
+			if (!queriedRequestContains(queriedRequest, request)) {
+				Task ct = currentTask;
+				if (ct == null || !queriedRequestContains(ct.getExtendedBoxRequest(), request)) {
+					TileBoxRequest extendedRequest = request.extend(request.width / 2, request.height / 2);
+					Task task = new Task(request, extendedRequest);
+					if (currentTask == null) {
+						executeTaskInBackground(task);
+					} else {
+						pendingTask = task;
+					}
+				}
+			} else {
+				fireDataReadyCallback(results);
 			}
 		}
 
@@ -418,31 +627,58 @@ public abstract class OsmandMapLayer {
 			return pendingTask != null;
 		}
 
-		protected abstract T calculateResult(RotatedTileBox tileBox);
+		protected abstract T calculateResult(@NonNull QuadRect latLonBounds, int zoom);
 
+		@SuppressLint("StaticFieldLeak")
 		public class Task extends AsyncTask<Object, Object, T> {
-			private final RotatedTileBox dataBox;
-			private final RotatedTileBox requestedBox;
+			private final RotatedTileBox originalBox;
+			private final RotatedTileBox extendedBox;
+			private final TileBoxRequest originalBoxRequest;
+			private final TileBoxRequest extendedBoxRequest;
 
-			public Task(RotatedTileBox requestedBox, RotatedTileBox dataBox) {
-				this.requestedBox = requestedBox;
-				this.dataBox = dataBox;
+			public Task(@NonNull RotatedTileBox originalBox, @NonNull RotatedTileBox extendedBox) {
+				this.originalBox = originalBox;
+				this.extendedBox = extendedBox;
+				this.originalBoxRequest = null;
+				this.extendedBoxRequest = null;
+			}
+
+			public Task(@NonNull TileBoxRequest originalBoxRequest, @NonNull TileBoxRequest extendedBoxRequest) {
+				this.originalBoxRequest = originalBoxRequest;
+				this.extendedBoxRequest = extendedBoxRequest;
+				this.originalBox = null;
+				this.extendedBox = null;
 			}
 
 			public RotatedTileBox getOriginalBox() {
-				return requestedBox;
+				return originalBox;
 			}
 
-			public RotatedTileBox getDataBox() {
-				return dataBox;
+			public RotatedTileBox getExtendedBox() {
+				return extendedBox;
+			}
+
+			public TileBoxRequest getOriginalBoxRequest() {
+				return originalBoxRequest;
+			}
+
+			public TileBoxRequest getExtendedBoxRequest() {
+				return extendedBoxRequest;
 			}
 
 			@Override
 			protected T doInBackground(Object... params) {
-				if (queriedBoxContains(queriedBox, dataBox)) {
-					return null;
+				if (extendedBoxRequest != null) {
+					if (queriedRequestContains(queriedRequest, extendedBoxRequest)) {
+						return null;
+					}
+					return calculateResult(extendedBoxRequest.getLatLonBounds(), extendedBoxRequest.getZoom());
+				} else {
+					if (queriedBoxContains(queriedBox, extendedBox)) {
+						return null;
+					}
+					return calculateResult(extendedBox.getLatLonBounds(), extendedBox.getZoom());
 				}
-				return calculateResult(dataBox);
 			}
 
 			@Override
@@ -454,7 +690,8 @@ public abstract class OsmandMapLayer {
 			@Override
 			protected void onPostExecute(T result) {
 				if (result != null) {
-					queriedBox = dataBox;
+					queriedBox = extendedBox;
+					queriedRequest = extendedBoxRequest;
 					results = result;
 				}
 				currentTask = null;
@@ -462,6 +699,7 @@ public abstract class OsmandMapLayer {
 					executeTaskInBackground(pendingTask);
 					pendingTask = null;
 				} else {
+					fireDataReadyCallback(results);
 					layerOnPostExecute();
 				}
 			}
@@ -470,9 +708,8 @@ public abstract class OsmandMapLayer {
 		public void clearCache() {
 			results = null;
 			queriedBox = null;
-
+			queriedRequest = null;
 		}
-
 	}
 
 	public static class RenderingLineAttributes {
@@ -495,7 +732,7 @@ public abstract class OsmandMapLayer {
 		public Paint paint_1;
 		public boolean isPaint_1;
 		public int defaultWidth_1 = 0;
-		private String renderingAttribute;
+		private final String renderingAttribute;
 
 		public RenderingLineAttributes(String renderingAttribute) {
 			this.renderingAttribute = renderingAttribute;

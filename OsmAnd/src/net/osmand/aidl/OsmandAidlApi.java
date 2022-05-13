@@ -1,24 +1,5 @@
 package net.osmand.aidl;
 
-import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
-import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
-import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
-import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
-import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
-import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -34,9 +15,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -61,6 +39,7 @@ import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.info.GetTextParams;
+import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
@@ -91,6 +70,8 @@ import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.LogcatAsyncTask;
+import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
@@ -100,6 +81,7 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -122,8 +104,8 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
@@ -153,6 +135,28 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+
 public class OsmandAidlApi {
 
 	AidlCallbackListener aidlCallbackListener = null;
@@ -163,6 +167,9 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
 	public static final int KEY_ON_VOICE_MESSAGE = 8;
 	public static final int KEY_ON_KEY_EVENT = 16;
+	public static final int KEY_ON_LOGCAT_MESSAGE = 32;
+
+	public static final String WIDGET_ID_PREFIX = "aidl_widget_";
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -232,8 +239,11 @@ public class OsmandAidlApi {
 	private final OsmandApplication app;
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
+	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private final Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, LogcatAsyncTask> logcatAsyncTasks = new ConcurrentHashMap<>();
 
 	private MapActivity mapActivity;
 
@@ -372,17 +382,20 @@ public class OsmandAidlApi {
 				if (mapActivity != null && widgetId != null && packName != null) {
 					ConnectedApp connectedApp = connectedApps.get(packName);
 					if (connectedApp != null) {
-						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(widgetId);
+						AidlMapWidgetWrapper widgetData = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-						if (widget != null && layer != null) {
-							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
-							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
-							connectedApp.getWidgetControls().put(widgetId, control);
+						if (widgetData != null && layer != null) {
+							ApplicationMode.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							connectedApp.getWidgetControls().put(widgetId, widget);
 
-							int iconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
+							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-							String widgetKey = "aidl_widget_" + widgetId;
-							layer.registerWidget(widgetKey, control, menuIconId, widget.getMenuTitle(), WidgetsPanel.RIGHT, widget.getOrder());
+							String widgetKey = WIDGET_ID_PREFIX + widgetId;
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+							layer.registerExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), connectedApp.getPack(), defaultPanel,
+									widgetData.getOrder());
 							layer.recreateControls();
 						}
 					}
@@ -988,7 +1001,9 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(colorTag)) {
 			color = ColorDialogs.getColorByTag(colorTag);
 		}
-		favoritesHelper.addEmptyCategory(name, color, visible);
+		FavoriteGroup group = favoritesHelper.addFavoriteGroup(name, color);
+		group.setVisible(visible);
+
 		return true;
 	}
 
@@ -1006,16 +1021,16 @@ public class OsmandAidlApi {
 
 	boolean updateFavoriteGroup(String prevGroupName, String newGroupName, String colorTag, boolean visible) {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavoriteGroup g : groups) {
-			if (g.getName().equals(prevGroupName)) {
-				int color = 0;
-				if (!Algorithms.isEmpty(colorTag)) {
-					color = ColorDialogs.getColorByTag(colorTag);
-				}
-				favoritesHelper.editFavouriteGroup(g, newGroupName, color, visible);
-				return true;
-			}
+		FavoriteGroup group = favoritesHelper.getGroup(prevGroupName);
+		if (group != null) {
+			int color = Algorithms.isEmpty(colorTag) ? 0 : ColorDialogs.getColorByTag(colorTag);
+
+			favoritesHelper.updateGroupColor(group, color, true, false);
+			favoritesHelper.updateGroupVisibility(group, visible, false);
+			favoritesHelper.updateGroupName(group, newGroupName, false);
+
+			favoritesHelper.saveCurrentPointsIntoFile();
+			return true;
 		}
 		return false;
 	}
@@ -1914,6 +1929,7 @@ public class OsmandAidlApi {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
+	@Nullable
 	public ConnectedApp getConnectedApp(@NonNull String pack) {
 		List<ConnectedApp> connectedApps = getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {
@@ -2038,8 +2054,6 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(pluginId, newState);
 	}
 
-	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
-
 	void registerForNavigationUpdates(long id) {
 		final NextDirectionInfo baseNdi = new NextDirectionInfo();
 		IRoutingDataUpdateListener listener = () -> {
@@ -2131,8 +2145,37 @@ public class OsmandAidlApi {
 	}
 
 	public void unregisterFromVoiceRouterMessages(long id) {
-		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
-		voiceRouterMessageCallbacks.remove(id);
+		VoiceMessageListener callback = voiceRouterMessageCallbacks.remove(id);
+		if (callback != null) {
+			app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(callback);
+		}
+	}
+
+	public void registerLogcatListener(long id, String filterLevel) {
+		LogcatMessageListener listener = (_filterLevel, logs) -> {
+			if (aidlCallbackListenerV2 != null) {
+				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0) {
+						try {
+							cb.getCallback().onLogcatMessage(new OnLogcatMessageParams(_filterLevel, logs));
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+			}
+		};
+		stopLogcatTask(id);
+		LogcatAsyncTask task = new LogcatAsyncTask(listener, filterLevel);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		logcatAsyncTasks.put(id, task);
+	}
+
+	public void stopLogcatTask(long id) {
+		LogcatAsyncTask task = logcatAsyncTasks.remove(id);
+		if (task != null) {
+			task.stop();
+		}
 	}
 
 	public Map<String, AidlContextMenuButtonsWrapper> getContextMenuButtonsParams() {
@@ -2661,8 +2704,6 @@ public class OsmandAidlApi {
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
 	}
-
-	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
 
 	public boolean onKeyEvent(KeyEvent event) {
 		if (aidlCallbackListenerV2 != null) {

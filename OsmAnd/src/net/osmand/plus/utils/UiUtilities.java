@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -165,25 +164,26 @@ public class UiUtilities {
 		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
+	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
+		int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, alpha);
+		return getColoredSelectableDrawable(ctx, colorWithAlpha);
+	}
+
+	public static Drawable getColoredSelectableDrawable(Context ctx, int color) {
+		Drawable drawable = null;
+		Drawable bg = getSelectableDrawable(ctx);
+		if (bg != null) {
+			drawable = tintDrawable(bg, color);
+		}
+		return drawable;
+	}
+
 	public static Drawable getSelectableDrawable(Context ctx) {
 		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
 		if (bgResId != 0) {
 			return AppCompatResources.getDrawable(ctx, bgResId);
 		}
 		return null;
-	}
-
-	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
-		Drawable drawable = null;
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			Drawable bg = getSelectableDrawable(ctx);
-			if (bg != null) {
-				drawable = tintDrawable(bg, ColorUtilities.getColorWithAlpha(color, alpha));
-			}
-		} else {
-			drawable = AndroidUtils.createPressedStateListDrawable(new ColorDrawable(Color.TRANSPARENT), new ColorDrawable(ColorUtilities.getColorWithAlpha(color, alpha)));
-		}
-		return drawable;
 	}
 
 	public static Drawable createTintedDrawable(Context context, @DrawableRes int resId, @ColorInt int color) {
@@ -397,7 +397,8 @@ public class UiUtilities {
 		}
 		try {
 			snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE);
-		} catch (Throwable e) { }
+		} catch (Throwable e) {
+		}
 	}
 
 	public static void rotateImageByLayoutDirection(ImageView image) {
@@ -683,50 +684,37 @@ public class UiUtilities {
 
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, CharSequence buttonText, int iconResId) {
 		Context ctx = buttonView.getContext();
-		TextViewEx buttonTextView = (TextViewEx) buttonView.findViewById(R.id.button_text);
-		boolean v21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+		TextViewEx buttonTextView = buttonView.findViewById(R.id.button_text);
 		View buttonContainer = buttonView.findViewById(R.id.button_container);
 		int textAndIconColorResId = INVALID_ID;
 		switch (buttonType) {
 			case PRIMARY:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
 				break;
 			case PRIMARY_HARMFUL:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(buttonView, AppCompatResources.getDrawable(ctx, R.drawable.dlg_btn_primary_harmfull));
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
 				break;
 			case SECONDARY:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 			case SECONDARY_HARMFUL:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
 				textAndIconColorResId = R.color.color_osm_edit_delete;
 				break;
 			case SECONDARY_ACTIVE:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 			case STROKED:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-				}
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;

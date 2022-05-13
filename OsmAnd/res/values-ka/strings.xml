@@ -736,9 +736,6 @@
     <string name="map_widget_compass">კომპასი</string>
     <string name="map_widget_reset">ნაგულისხმევზე დაბრუნება</string>
     <string name="map_widget_parking">პარკინგი</string>
-    <string name="map_widget_speed">სიჩქარე</string>
-    <string name="map_widget_distance">მიზანი</string>
-    <string name="map_widget_altitude">სიმაღლე</string>
     <string name="map_widget_time">წასვლის დროა</string>
     <string name="map_widget_next_turn">შემდეგი შესახვევი</string>
     <string name="map_widget_next_turn_small">შემდეგი შესახვევი (პატარა)</string>
@@ -1003,7 +1000,6 @@
     <string name="max_speed_none">არა</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="local_indexes_cat_srtm">კონტურული ხაზები</string>
-    <string name="av_def_action_choose">მოთხოვნისას\?</string>
     <string name="av_use_external_camera_descr">ფოტოებისათვის სისტემური აპლიკაციის გამოყენება.</string>
     <string name="av_use_external_camera">კამერის აპლიკაციის გამოყენება</string>
     <string name="osmand_play_title_30_chars">OsmAnd რუკები &amp; ნავიგაცია</string>
@@ -2130,7 +2126,7 @@
     <string name="plugin_settings">დამატებები</string>
     <string name="osmand_parking_overdue">გადაცილებულია</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="get_plugin">გადმოწერა</string>
+    <string name="shared_string_get">გადმოწერა</string>
     <string name="version_settings">ქვევერსია</string>
     <string name="proxy_pref_title">პროქსი</string>
     <string name="download_tab_local">ადგილობრივი</string>

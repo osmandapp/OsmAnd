@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import static net.osmand.plus.render.TextRenderer.TextDrawInfo;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -34,6 +33,7 @@ import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.render.TextDrawInfo;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
@@ -54,8 +54,6 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public class StreetNameWidget extends MapWidget {
-
-	public static final String WIDGET_STREET_NAME = "street_name";
 
 	private static final int MAX_MARKER_DISTANCE = 50;
 
@@ -289,7 +287,7 @@ public class StreetNameWidget extends MapWidget {
 
 		Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
-		Paint paint = setupTextPaint(textRenderer.getPaintText(), rreq);
+		Paint paint = setupTextPaint(app, textRenderer.getPaintText(), rreq);
 
 		float centerX = xSize / 2f;
 		float centerY = ySize / 2f - paint.getFontMetrics().ascent / 2f;
@@ -302,7 +300,8 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@NonNull
-	private Paint setupTextPaint(@NonNull Paint paint, @NonNull RenderingRuleSearchRequest request) {
+	public static Paint setupTextPaint(@NonNull OsmandApplication app, @NonNull Paint paint,
+	                                   @NonNull RenderingRuleSearchRequest request) {
 		paint.setTypeface(Typeface.create(TextRenderer.DROID_SERIF, Typeface.BOLD));
 
 		if (request.isSpecified(request.ALL.R_TEXT_COLOR)) {
@@ -360,8 +359,9 @@ public class StreetNameWidget extends MapWidget {
 		if (specialPosition) {
 			specialContainer.removeAllViews();
 
+			boolean coordinatesVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof CoordinatesWidget) {
+				if (widget instanceof CoordinatesWidget && coordinatesVisible) {
 					specialPosition = false;
 					break;
 				}

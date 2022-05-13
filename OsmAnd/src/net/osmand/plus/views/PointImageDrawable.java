@@ -17,12 +17,13 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.data.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -294,5 +295,83 @@ public class PointImageDrawable extends Drawable {
 			this.overlayIconId = overlayIconId;
 			this.backgroundType = backgroundType;
 		}
+	}
+
+	@Nullable
+	public Bitmap getBigMergedBitmap(float textScale, boolean history) {
+		setScale(textScale);
+		int width = getBigMergedBitmapWidth();
+		int height = getBigMergedBitmapHeight();
+		if (width == 0 || height == 0) {
+			return null;
+		}
+		Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		//get ready bitmap into bitmapResult
+		drawPoint(canvas, width / 2.0f, height / 2.0f, scale, history);
+		return bitmapResult;
+	}
+
+	private int getBigMergedBitmapWidth() {
+		int width = 0;
+		if (withShadow) {
+			width = Math.max(width, mapIconBackgroundBottom.getWidth());
+			width = Math.max(width, mapIconBackgroundCenter.getWidth());
+			width = Math.max(width, mapIconBackgroundTop.getWidth());
+			width = Math.max(width, mapIconBitmap.getWidth());
+		} else {
+			Bitmap background = getBitmapFromVectorDrawable(uiBackgroundIcon);
+			Bitmap listIcon = getBitmapFromVectorDrawable(uiListIcon);
+			width = Math.max(width, background.getWidth());
+			width = Math.max(width, listIcon.getWidth());
+		}
+		return width;
+	}
+
+	private int getBigMergedBitmapHeight() {
+		int height = 0;
+		if (withShadow) {
+			height = Math.max(height, mapIconBackgroundBottom.getHeight());
+			height = Math.max(height, mapIconBackgroundCenter.getHeight());
+			height = Math.max(height, mapIconBackgroundTop.getHeight());
+			height = Math.max(height, mapIconBitmap.getHeight());
+		} else {
+			Bitmap background = getBitmapFromVectorDrawable(uiBackgroundIcon);
+			Bitmap listIcon = getBitmapFromVectorDrawable(uiListIcon);
+			height = Math.max(height, background.getHeight());
+			height = Math.max(height, listIcon.getHeight());
+		}
+		return height;
+	}
+
+	@Nullable
+	public Bitmap getSmallMergedBitmap(float textScale) {
+		setScale(textScale);
+		int width = getSmallMergedBitmapWidth();
+		int height = getSmallMergedBitmapHeight();
+		if (width == 0 || height == 0) {
+			return null;
+		}
+		Bitmap bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		//get ready bitmap into bitmapResult
+		drawSmallPoint(canvas, width / 2.0f, height / 2.0f, textScale);
+		return bitmapResult;
+	}
+
+	private int getSmallMergedBitmapWidth() {
+		int width = 0;
+		width = Math.max(width, mapIconBackgroundBottomSmall.getWidth());
+		width = Math.max(width, mapIconBackgroundCenterSmall.getWidth());
+		width = Math.max(width, mapIconBackgroundTopSmall.getWidth());
+		return width;
+	}
+
+	private int getSmallMergedBitmapHeight() {
+		int height = 0;
+		height = Math.max(height, mapIconBackgroundBottomSmall.getHeight());
+		height = Math.max(height, mapIconBackgroundCenterSmall.getHeight());
+		height = Math.max(height, mapIconBackgroundTopSmall.getHeight());
+		return height;
 	}
 }

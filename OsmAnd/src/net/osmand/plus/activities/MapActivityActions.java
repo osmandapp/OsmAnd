@@ -1,44 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_VERSION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARKER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SHARE_ID;
-import static net.osmand.plus.widgets.cmadapter.ContextMenuArrayAdapter.PROFILES_CHOSEN_PROFILE_TAG;
-import static net.osmand.plus.widgets.cmadapter.ContextMenuArrayAdapter.PROFILES_CONTROL_BUTTON_TAG;
-import static net.osmand.plus.widgets.cmadapter.ContextMenuArrayAdapter.PROFILES_NORMAL_PROFILE_TAG;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -50,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -114,10 +74,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.widgets.cmadapter.ContextMenuAdapter;
-import net.osmand.plus.widgets.cmadapter.callback.ItemClickListener;
-import net.osmand.plus.widgets.cmadapter.item.ContextMenuItem;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
@@ -131,6 +93,45 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_VERSION_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARKER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SHARE_ID;
+import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CHOSEN_PROFILE_TAG;
+import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CONTROL_BUTTON_TAG;
+import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_NORMAL_PROFILE_TAG;
 
 
 public class MapActivityActions extends MapActions implements DialogProvider {
@@ -375,7 +376,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 
-		ItemClickListener listener = (adapter1, resId, pos, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (callback, view, item, isChecked) -> {
+			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_add_waypoint) {
 				mapActivity.getContextMenu().addWptPt();
 			} else if (resId == R.string.context_menu_item_edit_waypoint) {
@@ -416,8 +418,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setOrder(AVOID_ROAD_ITEM_ORDER));
 	}
 
-	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
-		ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(app) : iadapter;
+	public void contextMenuPoint(double latitude, double longitude, ContextMenuAdapter _adapter, Object selectedObj) {
+		ContextMenuAdapter adapter = _adapter == null ? new ContextMenuAdapter(app) : _adapter;
 		addActionsToAdapter(latitude, longitude, adapter, selectedObj, false);
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(latitude, longitude, adapter));
 	}
@@ -428,17 +430,18 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
 	}
 
-	public ContextMenuItemClickListener getContextMenuItemClickListener(final double latitude, final double longitude, final ContextMenuAdapter adapter) {
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, settings.isLightContent());
+	public ContextMenuItemClickListener getContextMenuItemClickListener(double latitude, double longitude, ContextMenuAdapter adapter) {
+		ViewCreator viewCreator = new ViewCreator(mapActivity, !settings.isLightContent());
+		ContextMenuListAdapter listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
 
 		return new AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener() {
 			@Override
-			public void onItemClick(int position) {
+			public void onItemClick(View view, int position) {
 				ContextMenuItem item = adapter.getItem(position);
 				int standardId = item.getTitleId();
 				ItemClickListener click = item.getItemClickListener();
 				if (click != null) {
-					click.onContextMenuClick(listAdapter, standardId, position, false, null);
+					click.onContextMenuClick(listAdapter, view, item, false);
 				} else if (standardId == R.string.context_menu_item_search) {
 					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
@@ -587,7 +590,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 					.setTag(tag)
 					.setTitle(appMode.toHumanString())
 					.setDescription(modeDescription)
-					.setListener((arrayAdapter, itemId, position, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.getSettings().setApplicationMode(appMode);
 						updateDrawerMenu();
 						return false;
@@ -599,7 +602,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setColor(ColorUtilities.getActiveColor(app, nightMode))
 				.setTag(PROFILES_CONTROL_BUTTON_TAG)
 				.setTitle(getString(R.string.shared_string_manage))
-				.setListener((arrayAdapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
 					return true;
 				}));
@@ -614,18 +617,18 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_DASHBOARD_ID)
 				.setTitleId(R.string.home, mapActivity)
 				.setIcon(R.drawable.ic_dashboard)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_dashboard_open");
 					MapActivity.clearPrevActivityIntent();
 					mapActivity.closeDrawer();
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD, viewCoordinates);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD, AndroidUtils.getCenterViewCoordinates(view));
 					return true;
 				}));
 
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_MAP_MARKERS_ID)
 				.setTitleId(R.string.map_markers, mapActivity)
 				.setIcon(R.drawable.ic_action_flag)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_markers_open");
 					MapActivity.clearPrevActivityIntent();
 					MapMarkersDialogFragment.showInstance(mapActivity);
@@ -635,7 +638,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_MY_PLACES_ID)
 				.setTitleId(R.string.shared_string_my_places, mapActivity)
 				.setIcon(R.drawable.ic_action_favorite)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_myplaces_open");
 					Intent newIntent = new Intent(mapActivity, app.getAppCustomization()
 							.getFavoritesActivity());
@@ -660,7 +663,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_BACKUP_RESTORE_ID)
 				.setTitleId(R.string.backup_and_restore, mapActivity)
 				.setIcon(R.drawable.ic_action_cloud_upload)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_backup_restore_open");
 					if (app.getBackupHelper().isRegistered()) {
 						BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
@@ -673,7 +676,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_SEARCH_ID)
 				.setTitleId(R.string.search_button, mapActivity)
 				.setIcon(R.drawable.ic_action_search_dark)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_search_open");
 					mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 					return true;
@@ -684,7 +687,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 			optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_TRIP_RECORDING_ID)
 					.setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setIcon(R.drawable.ic_action_track_recordable)
-					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.logEvent("trip_recording_open");
 						MapActivity.clearPrevActivityIntent();
 						if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
@@ -699,7 +702,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_DIRECTIONS_ID)
 				.setTitleId(R.string.shared_string_navigation, mapActivity)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_directions_open");
 					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 					if (mapControlsLayer != null) {
@@ -711,10 +714,10 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_CONFIGURE_MAP_ID)
 				.setTitleId(R.string.configure_map, mapActivity)
 				.setIcon(R.drawable.ic_action_layers)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_config_map_open");
 					MapActivity.clearPrevActivityIntent();
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, viewCoordinates);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
 				}));
 
@@ -728,7 +731,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_DOWNLOAD_MAPS_ID)
 				.setTitleId(R.string.welmode_download_maps, null)
 				.setTitle(d).setIcon(R.drawable.ic_type_archive)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_download_maps_open");
 					Intent newIntent = new Intent(mapActivity, app.getAppCustomization().getDownloadActivity());
 					newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -739,7 +742,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_LIVE_UPDATES_ID)
 				.setTitleId(R.string.live_updates, mapActivity)
 				.setIcon(R.drawable.ic_action_map_update)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					LiveUpdatesFragment.showInstance(mapActivity.getSupportFragmentManager(), null);
 					return true;
 				}));
@@ -747,7 +750,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_TRAVEL_GUIDES_ID)
 				.setTitle(getString(R.string.shared_string_travel_guides) + " (Beta)")
 				.setIcon(R.drawable.ic_action_travel)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					MapActivity.clearPrevActivityIntent();
 					TravelHelper travelHelper = app.getTravelHelper();
 					travelHelper.initializeDataOnAppStartup();
@@ -764,7 +767,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_MEASURE_DISTANCE_ID)
 				.setTitleId(R.string.plan_route, mapActivity)
 				.setIcon(R.drawable.ic_action_plan_route)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 					return true;
 				}));
@@ -777,7 +780,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_CONFIGURE_SCREEN_ID)
 				.setTitleId(R.string.layer_map_appearance, mapActivity)
 				.setIcon(R.drawable.ic_configure_screen_dark)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_config_screen_open");
 					MapActivity.clearPrevActivityIntent();
 					ConfigureScreenFragment.showInstance(mapActivity);
@@ -787,7 +790,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_PLUGINS_ID)
 				.setTitleId(R.string.prefs_plugins, mapActivity)
 				.setIcon(R.drawable.ic_extension_dark)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_plugins_open");
 					PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 					return true;
@@ -796,7 +799,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_SETTINGS_ID)
 				.setTitle(getString(R.string.shared_string_settings))
 				.setIcon(R.drawable.ic_action_settings)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_settings_new_open");
 					mapActivity.showSettings();
 					return true;
@@ -805,7 +808,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_HELP_ID)
 				.setTitleId(R.string.shared_string_help, mapActivity)
 				.setIcon(R.drawable.ic_action_help)
-				.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_help_open");
 					Intent intent = new Intent(mapActivity, HelpActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -841,7 +844,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setColor(currentMode.getProfileColor(nightMode))
 				.setTitle(currentMode.toHumanString())
 				.setDescription(modeDescription)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					drawerMode = nextMode;
 					updateDrawerMenu();
 					return false;
@@ -850,7 +853,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setLayout(R.layout.main_menu_drawer_btn_configure_profile)
 				.setColor(currentMode.getProfileColor(nightMode))
 				.setTitle(getString(R.string.configure_profile))
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					mapActivity.dismissSettingsScreens();
 					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE);
 					return true;
@@ -873,11 +876,11 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	}
 
 	private void addMyPlacesTabToDrawer(ContextMenuAdapter adapter, @StringRes int titleRes,
-										@DrawableRes int iconRes, String drawerId) {
+	                                    @DrawableRes int iconRes, String drawerId) {
 		adapter.addItem(new ContextMenuItem(drawerId)
 				.setTitleId(titleRes, mapActivity)
 				.setIcon(iconRes)
-				.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					String itemLogName = drawerId.replace(DRAWER_ITEM_ID_SCHEME, "");
 					app.logEvent("drawer_" + itemLogName + "_open");
 					Intent newIntent = new Intent(mapActivity, app.getAppCustomization()
@@ -903,7 +906,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				.setLayout(R.layout.main_menu_drawer_osmand_version)
 				.setTitle(osmAndVersion)
 				.setDescription(releaseText)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					String text = releaseText == null
 							? osmAndVersion
 							: app.getString(R.string.ltr_or_rtl_combine_via_comma, osmAndVersion, releaseText);
@@ -968,9 +971,12 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 			menuItemsListView.addHeaderView(drawerLogoHeader);
 		}
 		menuItemsListView.setDivider(null);
-		ContextMenuAdapter adapter = createMainOptionsMenu();
-		adapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
-		ArrayAdapter<ContextMenuItem> simpleListAdapter = adapter.createListAdapter(mapActivity, !nightMode);
+
+		ContextMenuAdapter cma = createMainOptionsMenu();
+		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
+		viewCreator.setDefaultLayoutId(R.layout.simple_list_menu_item);
+		ContextMenuListAdapter simpleListAdapter = cma.toListAdapter(mapActivity, viewCreator);
+
 		menuItemsListView.setAdapter(simpleListAdapter);
 		menuItemsListView.setOnItemClickListener((parent, view, position, id) -> {
 			mapActivity.dismissCardDialog();
@@ -983,10 +989,9 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				}
 			} else {
 				position -= menuItemsListView.getHeaderViewsCount();
-				ContextMenuItem item = adapter.getItem(position);
+				ContextMenuItem item = cma.getItem(position);
 				ItemClickListener click = item.getItemClickListener();
-				if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
-						position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+				if (click != null && click.onContextMenuClick(simpleListAdapter, view, item, false)) {
 					mapActivity.closeDrawer();
 				}
 			}

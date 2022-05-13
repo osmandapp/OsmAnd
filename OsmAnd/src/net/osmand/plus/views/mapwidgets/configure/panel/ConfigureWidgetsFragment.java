@@ -13,14 +13,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
-
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 import com.google.android.material.tabs.TabLayout;
@@ -31,22 +23,44 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment.WidgetsOrderListener;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener, OnOffsetChangedListener {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener,
+		OnOffsetChangedListener, AddWidgetListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
-	private static final String INFO_LINK = "https://docs.osmand.net/en/main@latest/osmand/widgets";
+	private static final String INFO_LINK = "https://docs.osmand.net/docs/user/widgets/";
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
@@ -61,6 +75,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private Toolbar toolbar;
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
+	private WidgetsTabAdapter widgetsTabAdapter;
 	private View compensationView;
 
 	private boolean nightMode;
@@ -143,8 +158,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	private void setupTabLayout() {
-		WidgetsTabAdapter tabAdapter = new WidgetsTabAdapter(this);
-		viewPager.setAdapter(tabAdapter);
+		widgetsTabAdapter = new WidgetsTabAdapter(this);
+		viewPager.setAdapter(widgetsTabAdapter);
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
 			@Override
 			public void onPageSelected(int position) {
@@ -182,7 +197,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			WidgetsPanel panel = panels.get(i);
 			if (tab != null) {
 				tab.setTag(panel);
-				tab.setIcon(panel.getIconId());
+				tab.setIcon(panel.getIconId(AndroidUtils.isLayoutRtl(app)));
 			}
 		}
 
@@ -212,17 +227,87 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	@Override
 	public void onWidgetsOrderApplied() {
-		if (selectedFragment != null) {
-			selectedFragment.updateContent();
+		// TODO widgets: update only current fragment after adding duplicates
+		widgetsTabAdapter.updateFragmentsContent();
+	}
+
+	@Override
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		for (String widgetId : widgetsIds) {
+			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			if (widgetInfo != null) {
+				addWidgetToEnd(widgetInfo, widgetsPanel);
+				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true);
+			}
+		}
+
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.recreateControls();
+		}
+
+		// TODO widgets: update only current fragment after adding duplicates
+		widgetsTabAdapter.updateFragmentsContent();
+	}
+
+	private void addWidgetToEnd(@NonNull MapWidgetInfo targetWidget, @NonNull WidgetsPanel widgetsPanel) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+
+		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, widgetsPanel);
+
+		widgetRegistry.getWidgetsForPanel(targetWidget.widgetPanel).remove(targetWidget);
+		targetWidget.widgetPanel = widgetsPanel;
+
+		for (MapWidgetInfo widget : enabledWidgets) {
+			int page = widget.pageIndex;
+			List<String> orders = pagedOrder.get(page);
+			if (orders == null) {
+				orders = new ArrayList<>();
+				pagedOrder.put(page, orders);
+			}
+			orders.add(widget.key);
+		}
+
+		if (Algorithms.isEmpty(pagedOrder)) {
+			targetWidget.pageIndex = 0;
+			targetWidget.priority = 0;
+			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+
+			List<List<String>> flatOrder = new ArrayList<>();
+			flatOrder.add(Collections.singletonList(targetWidget.key));
+			widgetsPanel.setWidgetsOrder(selectedAppMode, flatOrder, settings);
+		} else {
+			List<Integer> pages = new ArrayList<>(pagedOrder.keySet());
+			List<List<String>> orders = new ArrayList<>(pagedOrder.values());
+			List<String> lastPageOrder = orders.get(orders.size() - 1);
+
+			lastPageOrder.add(targetWidget.key);
+
+			String previousLastWidgetId = lastPageOrder.get(lastPageOrder.size() - 2);
+			MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId);
+			int lastPage;
+			int lastOrder;
+			if (previousLastVisibleWidgetInfo != null) {
+				lastPage = previousLastVisibleWidgetInfo.pageIndex;
+				lastOrder = previousLastVisibleWidgetInfo.priority + 1;
+			} else {
+				lastPage = pages.get(pages.size() - 1);
+				lastOrder = lastPageOrder.size() - 1;
+			}
+
+			targetWidget.pageIndex = lastPage;
+			targetWidget.priority = lastOrder;
+			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+
+			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);
 		}
 	}
 
 	@Override
 	public int getStatusBarColorId() {
-		View view = getView();
-		if (view != null && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 

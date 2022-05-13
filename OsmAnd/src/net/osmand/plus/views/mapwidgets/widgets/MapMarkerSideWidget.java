@@ -2,9 +2,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.graphics.drawable.Drawable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -20,7 +17,12 @@ import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 
 import java.util.List;
 
-public class MapMarkerSideWidget extends RightTextInfoWidget {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+
+public class MapMarkerSideWidget extends TextInfoWidget {
 
 	private final MapMarkersHelper mapMarkersHelper;
 
@@ -40,6 +42,7 @@ public class MapMarkerSideWidget extends RightTextInfoWidget {
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
+		setIcons(SIDE_MARKER_1);
 		setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, firstMarker ? 0 : 1));
 	}
 
@@ -81,9 +84,7 @@ public class MapMarkerSideWidget extends RightTextInfoWidget {
 		boolean updateIcon = colorIndex != -1
 				&& (colorIndex != cachedMarkerColorIndex || cachedNightMode != isNightMode());
 		if (updateIcon) {
-			int backgroundIconId = isNightMode()
-					? R.drawable.widget_marker_night
-					: R.drawable.widget_marker_day;
+			int backgroundIconId = getIconId();
 			int foregroundColorId = MapMarker.getColorId(marker.colorIndex);
 			Drawable drawable = iconsCache.getLayeredIcon(backgroundIconId,
 					R.drawable.widget_marker_triangle, 0, foregroundColorId);

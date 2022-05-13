@@ -496,20 +496,29 @@ public class TileSourceManager {
 		public String getRule() {
 			return rule;
 		}
-		
+
 		public String calculateTileId(int x, int y, int zoom) {
 			StringBuilder builder = new StringBuilder(getName());
 			builder.append('/');
 			builder.append(zoom).append('/').append(x).append('/').append(y).append(getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
 			return builder.toString();
 		}
-		
+
+		@Override
+		public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles) {
+			File en = new File(dirWithTiles, calculateTileId(x, y, zoom));
+			if (en.exists()) {
+				return en.lastModified();
+			}
+			return System.currentTimeMillis();
+		}
+
 		@Override
 		public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
 			File f = new File(dirWithTiles, calculateTileId(x, y, zoom));
 			if (!f.exists())
 				return null;
-			
+
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
 			FileInputStream fis = new FileInputStream(f);
 			Algorithms.streamCopy(fis, bous);

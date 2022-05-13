@@ -4,6 +4,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -12,9 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
@@ -29,6 +32,8 @@ public abstract class MapWidget {
 	protected final OsmandSettings settings;
 	protected final MapActivity mapActivity;
 	protected final UiUtilities iconsCache;
+	protected final OsmAndLocationProvider locationProvider;
+	protected final RoutingHelper routingHelper;
 
 	private boolean nightMode;
 
@@ -39,6 +44,8 @@ public abstract class MapWidget {
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
 		this.iconsCache = app.getUIUtilities();
+		this.locationProvider = app.getLocationProvider();
+		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode();
 		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 	}
@@ -60,6 +67,13 @@ public abstract class MapWidget {
 		container.addView(view);
 	}
 
+	public void detachView() {
+		ViewParent parent = view.getParent();
+		if (parent instanceof ViewGroup) {
+			((ViewGroup) parent).removeView(view);
+		}
+	}
+
 	public boolean isNightMode() {
 		return nightMode;
 	}
@@ -74,6 +88,10 @@ public abstract class MapWidget {
 
 	protected boolean updateVisibility(boolean visible) {
 		return AndroidUiHelper.updateVisibility(view, visible);
+	}
+
+	public boolean isViewVisible() {
+		return view.getVisibility() == View.VISIBLE;
 	}
 
 	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
@@ -101,5 +119,10 @@ public abstract class MapWidget {
 	@NonNull
 	protected String getString(@StringRes int stringId, Object... args) {
 		return app.getString(stringId, args);
+	}
+
+	@NonNull
+	public OsmandApplication getMyApplication() {
+		return app;
 	}
 }

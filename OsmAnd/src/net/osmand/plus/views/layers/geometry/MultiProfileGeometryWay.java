@@ -161,18 +161,22 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 	}
 
 	@Override
-	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon,
+	protected boolean shouldAddLocation(@Nullable TByteArrayList simplification, double leftLon, double rightLon,
 	                                    double bottomLat, double topLat, GeometryWayProvider provider,
 	                                    int previousVisible, int currLocationIdx) {
 		double currLat = provider.getLatitude(currLocationIdx);
 		double currLon = provider.getLongitude(currLocationIdx);
 
 		int nextSurvivedIdx = currLocationIdx;
-		for (int i = nextSurvivedIdx + 1; i < simplification.size(); i++) {
-			if (simplification.getQuick(i) == 1) {
-				nextSurvivedIdx = i;
-				break;
+		if (simplification != null) {
+			for (int i = nextSurvivedIdx + 1; i < simplification.size(); i++) {
+				if (simplification.getQuick(i) == 1) {
+					nextSurvivedIdx = i;
+					break;
+				}
 			}
+		} else if (provider.getSize() > nextSurvivedIdx + 1) {
+			nextSurvivedIdx++;
 		}
 
 		double nextLat = provider.getLatitude(nextSurvivedIdx);

@@ -450,7 +450,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="intermediate_points_change_order">Źmianіć paradak</string>
     <string name="srtm_paid_version_msg">Kali laska, padumajcie pra nabyccio dadatku «Contour lines» dlia padtrymki daliejšaj raspracoŭki.</string>
     <string name="srtm_paid_version_title">Modul Іzalinіі vyšyń</string>
-    <string name="av_def_action_choose">Vybar pa zapycie</string>
     <string name="av_def_action_video">Zapіs vіdea</string>
     <string name="av_def_action_audio">Zapіs aŭdyjo</string>
     <string name="av_widget_action_descr">Vybierycie ahadanaje dziejannie vidžeta.</string>
@@ -635,9 +634,6 @@ Zachod: %2$s</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Viarnucca da standartnych</string>
     <string name="map_widget_parking">Parkoŭka</string>
-    <string name="map_widget_speed">Chutkaść</string>
-    <string name="map_widget_distance">Miesca pryznačeńnia</string>
-    <string name="map_widget_altitude">Vyšynia</string>
     <string name="map_widget_time">Čas u darozie</string>
     <string name="map_widget_next_turn">Nastupny pavarot</string>
     <string name="map_widget_next_turn_small">Nastupny pavarot (mały)</string>
@@ -1848,7 +1844,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="poi_action_delete">vydalić</string>
     <string name="poi_dialog_reopen">Pieraadkryć</string>
     <string name="plugin_install_needs_network">Vam nieabchodna padlučennie da Internetu, kab ustaliavać hety dadatak.</string>
-    <string name="get_plugin">Atrymać</string>
+    <string name="shared_string_get">Atrymać</string>
     <string name="use_fast_recalculation">Razumny pieraraźlik maršrutu</string>
     <string name="use_fast_recalculation_desc">Pierarazličvać toĺki pačatak maršrutu dlia doŭhich pajezdak.</string>
     <string name="do_you_like_osmand">Vam padabajecca OsmAnd?</string>

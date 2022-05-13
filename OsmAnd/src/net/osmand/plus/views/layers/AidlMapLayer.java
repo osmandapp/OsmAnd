@@ -57,8 +57,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final int SMALL_ICON_SIZE_DP = 20;
 	private static final int BIG_ICON_SIZE_DP = 40;
 
-	private OsmandMapTileView view;
-
 	private final String packName;
 	private final AidlMapLayerWrapper aidlLayer;
 
@@ -102,7 +100,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 
 		Resources res = view.getResources();
 		boolean night = getApplication().getDaynightHelper().isNightMode();

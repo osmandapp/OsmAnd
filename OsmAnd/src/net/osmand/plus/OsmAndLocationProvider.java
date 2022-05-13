@@ -793,7 +793,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			updateLocation(this.location);
 		}
 	}
-	
+
 	public void setLocationFromSimulation(net.osmand.Location location) {
 		setLocation(location);
 	}
@@ -904,6 +904,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
+	@Nullable
 	public net.osmand.Location getLastKnownLocation() {
 		net.osmand.Location loc = this.location;
 		if (loc != null) {

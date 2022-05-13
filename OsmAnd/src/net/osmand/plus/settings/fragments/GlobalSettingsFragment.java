@@ -17,7 +17,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.dialogs.ConfigureMapUtils;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
@@ -332,6 +332,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				"hsb",
 				"hu",
 				"hy",
+				"id",
 				"is",
 				"it",
 				"ja",
@@ -395,6 +396,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				ctx.getString(R.string.lang_hsb) + incompleteSuffix,
 				ctx.getString(R.string.lang_hu),
 				ctx.getString(R.string.lang_hy),
+				ctx.getString(R.string.lang_id),
 				ctx.getString(R.string.lang_is),
 				ctx.getString(R.string.lang_it),
 				ctx.getString(R.string.lang_ja),
