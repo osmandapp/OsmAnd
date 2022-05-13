@@ -773,6 +773,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapActivity.getTrackMenuFragment() != null) {
 			mapActivity.getTrackMenuFragment().dismiss();
+			MapActivity.clearPrevActivityIntent();
 			return true;
 		}
 		if (multiSelectionMenu != null && multiSelectionMenu.isVisible()) {
