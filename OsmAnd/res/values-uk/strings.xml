@@ -4666,4 +4666,15 @@
     <string name="rendering_attr_weatherTempContours_name">Ізолінії температури</string>
     <string name="rendering_attr_weatherPressureContours_name">Ізолінії тиску</string>
     <string name="rendering_attr_horseScale_name">Складність кінних стежок</string>
+    <string name="routing_attr_allow_private_for_truck_name">Дозволити приватний доступ (вантажівка)</string>
+    <string name="map_widget_trip_recording_uphill">Підйом</string>
+    <string name="routing_attr_hazmat_category_description">Категорія небезпечних матеріалів / Розгляньте дозволи на доступ до небезпечних матеріалів</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Без обмежень</string>
+    <string name="routing_attr_avoid_fords_description">Уникати броди</string>
+    <string name="routing_attr_avoid_fords_name">Уникати броди</string>
+    <string name="map_widget_trip_recording_duration">Тривалість</string>
+    <string name="routing_attr_allow_private_for_truck_description">Дозволити доступ до приватних зон для вантажівок.</string>
+    <string name="map_widget_trip_recording_downhill">Спуск</string>
+    <string name="map_widget_trip_recording_distance">Відстань</string>
+    <string name="routing_attr_hazmat_category_name">Категорія небезпеки</string>
 </resources>
