@@ -39,12 +39,12 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHIL
 
 public enum WidgetGroup {
 
-	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets#next-turns"),
-	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets/#navigation-points"),
-	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day, "https://docs.osmand.net/docs/user/widgets/markers"),
-	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets#bearing"),
-	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, "https://docs.osmand.net/docs/user/widgets/info-widgets/#-trip-recording-widget"),
-	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, "https://docs.osmand.net/docs/user/widgets/info-widgets#-audio-video-notes-widget-android");
+	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
+	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, R.string.docs_widget_navigation_points),
+	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day, R.string.docs_widget_markers),
+	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, R.string.docs_widget_bearing),
+	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
+	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes);
 
 	@StringRes
 	public final int titleId;
@@ -54,19 +54,19 @@ public enum WidgetGroup {
 	public final int dayIconId;
 	@DrawableRes
 	public final int nightIconId;
-	@NonNull
-	public String docsUrl;
+	@StringRes
+	public int docsUrlId;
 
 	WidgetGroup(@StringRes int titleId,
 	            @StringRes int descId,
 	            @DrawableRes int dayIconId,
 	            @DrawableRes int nightIconId,
-	            @NonNull String docsUrl) {
+	            @StringRes int docsUrlId) {
 		this.titleId = titleId;
 		this.descId = descId;
 		this.dayIconId = dayIconId;
 		this.nightIconId = nightIconId;
-		this.docsUrl = docsUrl;
+		this.docsUrlId = docsUrlId;
 	}
 
 	@NonNull

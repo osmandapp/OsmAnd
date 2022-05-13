@@ -152,14 +152,14 @@ public class WidgetDataHolder {
 		return 0;
 	}
 
-	@Nullable
-	public String getDocsUrl() {
+	@StringRes
+	public int getDocsUrl() {
 		if (widgetGroup != null) {
-			return widgetGroup.docsUrl;
+			return widgetGroup.docsUrlId;
 		} else if (widgetParams != null) {
-			return widgetParams.getDocsUrl();
+			return widgetParams.docsUrlId;
 		}
-		return null;
+		return 0;
 	}
 
 	public void saveState(@NonNull Bundle outState) {
