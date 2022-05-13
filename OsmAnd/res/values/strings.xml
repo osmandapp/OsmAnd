@@ -11,6 +11,13 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for trucks.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Allow private access (truck)</string>
+    <string name="rendering_attr_weatherTempContours_name">Temperature isolines</string>
+    <string name="rendering_attr_weatherPressureContours_name">Pressure isolines</string>
+    <string name="rendering_attr_horseScale_name">Difficulty of horse trails</string>
+    <string name="routing_attr_avoid_highway_name">Avoid highways</string>
+    <string name="routing_attr_avoid_highway_description">Avoid highways</string>
     <string name="map_widget_trip_recording_downhill">Downhill</string>
     <string name="map_widget_trip_recording_uphill">Uphill</string>
     <string name="map_widget_trip_recording_duration">Duration</string>

@@ -4666,4 +4666,6 @@
     <string name="circle_settings">Настройки окружностей</string>
     <string name="distance_circles">Окружности-расстояния</string>
     <string name="colour_of_circles">Окраска окружностей</string>
+    <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
+    <string name="routing_attr_avoid_highway_description">Избегать автомагистрали</string>
 </resources>
