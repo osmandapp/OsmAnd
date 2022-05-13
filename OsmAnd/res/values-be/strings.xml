@@ -500,7 +500,7 @@
     <string name="settings_direction_style">Стыль напрамку</string>
     <string name="settings_direction_style_descr">Абярыце стыль адлюстроўвання адносных напрамкаў падчас руху</string>
     <string name="auto_announce_on">Уключыць аўтаматычнае агалошванне</string>
-    <string name="auto_announce_off">Выключыць аўтаматычнае агалошванне</string>
+    <string name="auto_announce_off">Адключыць аўтаматычнае агалошванне</string>
     <string name="i_am_here">Я тут</string>
     <string name="zoom_by_trackball_descr">Змяняць маштаб гарызантальнымі рухамі трэкболу.</string>
     <string name="zoom_by_trackball">Карыстацца трэкболам для змены маштабу</string>
@@ -763,7 +763,7 @@
     <string name="items_were_selected">{0} абрана</string>
     <string name="filter_existing_indexes">Спампаванае</string>
     <string name="fast_route_mode">Найхутчэйшы шлях</string>
-    <string name="fast_route_mode_descr">Уключыць, каб разлічваць найхутчэйшы шлях, ці выключыць для паліўна-ашчаднага шляху.</string>
+    <string name="fast_route_mode_descr">Уключыць, каб разлічваць найхутчэйшы шлях, ці адключыць для паліўна-ашчаднага шляху.</string>
     <string name="tiles_to_download_estimated_size">На маштабе {0} спампаваць {1} фрагментаў ({2} МБ)</string>
     <string name="shared_string_download_map">Спампаваць мапу</string>
     <string name="select_max_zoom_preload_area">Максімальны маштаб для папярэдняй загрузкі</string>
@@ -837,7 +837,7 @@
     <string name="show_poi_filter">Паказаць фільтр</string>
     <string name="search_poi_filter">Фільтраваць</string>
     <string name="menu_mute_off">Гук уключаны</string>
-    <string name="menu_mute_on">Гук выключаны</string>
+    <string name="menu_mute_on">Гук адключаны</string>
     <string name="voice_provider_descr">Абярыце галасавыя падказкі для навігацыі.</string>
     <string name="voice_provider">Галасавыя падказкі</string>
     <string name="voice_data_initializing">Ініцыялізуюцца галасавыя даныя …</string>
@@ -1290,7 +1290,7 @@
     <string name="distance">Адлегласць</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты аўтобусаў, тралейбусаў і таксі</string>
     <string name="save_track_interval_globally">Інтэрвал запісу</string>
-    <string name="save_track_to_gpx_globally_descr">Запіс месцазнаходжання ў GPX-файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX мапе.</string>
+    <string name="save_track_to_gpx_globally_descr">Запіс месцазнаходжання ў GPX-файл можа быць уключаны або адключаны з дапамогай кнопкі запісу GPX на мапе.</string>
     <string name="confirm_every_run">Пытацца заўсёды</string>
     <string name="save_global_track_interval">Агульны інтэрвал запісу</string>
     <string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
@@ -1335,7 +1335,7 @@
     <string name="rendering_category_hide">Схаваць</string>
     <string name="wake_on_voice">Уключэнне экрана</string>
     <string name="wake_on_voice_descr">Уключаць экран прылады пры набліжэнні да павароту.</string>
-    <string name="lock_screen_request_explanation">%1$s патрабуе дазволу на выключэнне экрану для энергазберажэння.</string>
+    <string name="lock_screen_request_explanation">%1$s патрабуе дазволу на выключэнне экрана для энергазберажэння.</string>
     <string name="home_button">Дом</string>
     <string name="map_update">Даступны абнаўленні для %1$s мапаў</string>
     <string name="search_for">Шукаць</string>
@@ -1405,11 +1405,11 @@
     <string name="notes">Нататкі аўдыё/відэа</string>
     <string name="online_map">Сеціўная мапа</string>
     <string name="share_note">Падзяліцца нататкаю</string>
-    <string name="plugin_nautical_descr">Актывацыя гэтага стылю змяняе выгляд мапы на Марскую, на якой паказваюцца ўсе навігацыйныя знакі і сімвалы. 
+    <string name="plugin_nautical_descr">Актывацыя гэтага стылю змяняе выгляд мапы на Марскую, на якой паказваюцца ўсе навігацыйныя знакі і сімвалы.
 \n
-\nФайл з данымі змяшчае ўсе навігацыйныя сімвалы ў выглядзе адзінага файла з назвай \"World seamarks\". 
+\nФайл з данымі змяшчае ўсе навігацыйныя сімвалы ў выглядзе адзінага файла з назвай \"World seamarks\".
 \n
-\nГэты стыль можа быць скасаваны шляхам яго выключэння тут або зменаю ў пункце \"Стыль мапы\" меню \"Налады мапы\" на патрэбны.</string>
+\nГэты стыль можа быць скасаваны адключэннем тут або зменаю ў пункце \"Стыль мапы\" меню \"Налады мапы\" на патрэбны.</string>
     <string name="back_to_map">Вярнуцца да мапы</string>
     <string name="track_segments">Адрэзкі следу</string>
     <string name="track_points">Пункты следу</string>
@@ -1421,13 +1421,13 @@
     <string name="shared_string_yes">Так</string>
     <string name="shared_string_no">Не</string>
     <string name="shared_string_on">Укл</string>
-    <string name="shared_string_off">Выкл</string>
+    <string name="shared_string_off">Адкл</string>
     <string name="shared_string_previous">Папярэдні</string>
     <string name="shared_string_next">Далей</string>
     <string name="shared_string_enable">Уключыць</string>
-    <string name="shared_string_disable">Выключыць</string>
+    <string name="shared_string_disable">Адключыць</string>
     <string name="shared_string_enabled">Уключана</string>
-    <string name="shared_string_disabled">Выключана</string>
+    <string name="shared_string_disabled">Адключана</string>
     <string name="shared_string_selected">Абрана</string>
     <string name="shared_string_selected_lowercase">абрана</string>
     <string name="shared_string_never">Ніколі</string>
@@ -1567,7 +1567,7 @@
     <string name="use_fast_recalculation">Разумны пераразлік маршруту</string>
     <string name="use_fast_recalculation_desc">Пераразлічваецца толькі пачатковы адрэзак маршруту. Карысна для доўгіх паездак.</string>
     <string name="shared_string_logoff">Выйсці</string>
-    <string name="rendering_value_disabled_name">Выключана</string>
+    <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка па пешаходнаму сімвалу OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна прыналежнасці сеткі</string>
     <string name="osm_edit_context_menu_delete">Выдаліць праўку OSM</string>
@@ -1578,7 +1578,7 @@
     <string name="local_recordings_delete_all_confirm">Сапраўды хочаце выдаліць %1$d нататак\?</string>
     <string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
     <string name="disable_recording_once_app_killed">Прадухіліць аўтаномны запіс</string>
-    <string name="gps_network_not_enabled">Служба вызначэння месцазнаходжання выключаная. Уключыць яе\?</string>
+    <string name="gps_network_not_enabled">Служба вызначэння месцазнаходжання адключаная. Уключыць яе\?</string>
     <string name="archive_wikipedia_data">Даныя Вікіпедыі састарэлі і больш непрыдатныя. Заархіваваць іх\?</string>
     <string name="download_wikipedia_files">Спампаваць дадатковыя даныя Вікіпедыі (%1$s МБ)\?</string>
     <string name="lang_th">Тайская</string>
@@ -1708,14 +1708,14 @@
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
-    <string name="srtm_plugin_disabled">Контурныя лініі выключаныя</string>
+    <string name="srtm_plugin_disabled">Контурныя лініі адключаныя</string>
     <string name="downloading_number_of_files">Спампоўванне файла %1$d…</string>
     <string name="show_free_version_banner_description">Паказваць банер бясплатнай версіі нават у платнай версіі.</string>
     <string name="show_free_version_banner">Паказваць банэр бясплатнай версіі</string>
     <string name="buy">Набыць</string>
     <string name="later">Пазней</string>
     <string name="get_full_version">Поўная версія</string>
-    <string name="hillshade_layer_disabled">Зацяненне рэльефу выключана</string>
+    <string name="hillshade_layer_disabled">Зацяненне рэльефу адключана</string>
     <string name="activate_srtm_plugin">Калі ласка, ўключыце ўбудову «Контурныя лініі»</string>
     <string name="activate_seamarks_plugin">Калі ласка, ўключяце ўбудову «Прагляд марской мапы»</string>
     <string name="regions">Рэгіёны</string>
@@ -1735,7 +1735,7 @@
     <string name="application_dir_description">Абярыце, дзе вы хочаце захоўваць мапы і іншыя файлы даных.</string>
     <string name="share_menu_location">Падзяліцца месцазнаходжаннем</string>
     <string name="share_geo">геа:</string>
-    <string name="show_on_start_description">\"Выключана\" наўпрост запускае мапу.</string>
+    <string name="show_on_start_description">\"Адключана\" непасрэдна запускае мапу.</string>
     <string name="simulate_initial_startup">Імітаваць першы запуск праграмы</string>
     <string name="shared_string_qr_code">QR-код</string>
     <string name="map_downloaded">Мапа спампаваная</string>
@@ -1914,7 +1914,7 @@
     <string name="active_markers">Актыўныя адзнакі</string>
     <string name="map_markers">Адзнакі мапы</string>
     <string name="map_marker">Адзнака мапы</string>
-    <string name="consider_turning_polygons_off">Рэкамендуецца выключыць адмалёўку палігонаў.</string>
+    <string name="consider_turning_polygons_off">Рэкамендуецца адключыць адмалёўванне палігонаў.</string>
     <string name="osm_live_subscription">Падпіска OsmAnd Live</string>
     <string name="osm_live_active">Актыўны</string>
     <string name="osm_live_not_active">Не актыўны</string>
@@ -2039,7 +2039,7 @@
     <string name="search_my_location">Знайсці маю пазіцыю</string>
     <string name="get_for">Атрымаць за %1$s</string>
     <string name="get_it">Атрымаць</string>
-    <string name="osm_live_banner_desc">Атрымайце неабмежаваную колькасць спампоўванняў мапаў у дадатак да штотыднёвых, штодзённых і нават штогадзінных абнаўленняў.</string>
+    <string name="osm_live_banner_desc">Атрымайце неабмежаваную колькасць спампоўванняў мапаў разам са штотыднёвымі, штодзённымі і нават штогадзіннымі абнаўленнямі.</string>
     <string name="osmand_plus_banner_desc">Неабмежаваная колькасць спамоўванняў мапаў, абнаўленняў і ўбудова Wikipedia.</string>
     <string name="si_mi_meters">Мілі/метры</string>
     <string name="osm_live_payment_desc">Плата за падпіску спаганяецца за абраны перыяд. Скасаваць яе на Google Play можна у любы момант.</string>
@@ -2237,7 +2237,7 @@
     <string name="driving_region_automatic">Аўтаматычна</string>
     <string name="restore_purchases">Аднаўленне пакупак</string>
     <string name="fonts_header">Шрыфты мапы</string>
-    <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/выкл</string>
+    <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/адкл</string>
     <string name="nearest_cities">Бліжэйшыя гарады</string>
     <string name="select_city">Абраць горад</string>
     <string name="select_postcode">Пошук паштовага індэкса</string>
@@ -2246,13 +2246,13 @@
     <string name="quick_action_add_first_intermediate">Дадаць прамежкавы пункт</string>
     <string name="subscribe_email_error">Памылка</string>
     <string name="quick_action_auto_zoom_on">Уключыць аўтамаштабаванне мапы</string>
-    <string name="quick_action_auto_zoom_off">Выключыць аўтамаштабаванне мапы</string>
+    <string name="quick_action_auto_zoom_off">Адключыць аўтамаштабаванне мапы</string>
     <string name="select_street">Абярыце вуліцу</string>
     <string name="shared_string_in_name">у %1$s</string>
     <string name="type_address">Увядзіце адрас</string>
     <string name="type_city_town">Увядзіце горад/населены пункт/мясціну</string>
     <string name="type_postcode">Увядзіце паштовы індэкс</string>
-    <string name="quick_action_auto_zoom_desc">Кнопка для ўключэння/выключэння аўтамаштабавання мапы ў залежнасці ад хуткасці.</string>
+    <string name="quick_action_auto_zoom_desc">Кнопка для ўключэння/адключэння аўтамаштабавання мапы ў залежнасці ад хуткасці.</string>
     <string name="quick_action_add_destination_desc">Гэтай кнопкай можна зрабіць пункт у цэнтры экрана пунктам прызначэння, а папярэдні пункт прызначэння стане апошнім прамежкавым пунктам.</string>
     <string name="quick_action_replace_destination_desc">Кнопка для прызначэння цэнтра экрана пунктам прызначэння, замяняючы папярэдні пункт прызначэння, калі ён ёсць.</string>
     <string name="quick_action_add_first_intermediate_desc">Гэтай кнопкай можна зрабіць пункт у цэнтры экрана першым прамежкавым пунктам.</string>
@@ -2509,7 +2509,7 @@
     <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання\?</string>
     <string name="do_not_use_animations">Без анімацыі</string>
-    <string name="do_not_use_animations_descr">Выключэнне анімацыі мапы.</string>
+    <string name="do_not_use_animations_descr">Адключэнне анімацыі мапы.</string>
     <string name="move_all_to_history">Перамясціць усё ў гісторыю</string>
     <string name="show_direction">Індыкацыя адлегласці</string>
     <string name="sort_by">Сартаваць па</string>
@@ -2641,7 +2641,7 @@
     <string name="shared_string_without_name">Без назвы</string>
     <string name="lang_lo">Лаоская</string>
     <string name="rendering_attr_hidePOILabels_name">Назвы POI</string>
-    <string name="day_off_label">выкл</string>
+    <string name="day_off_label">адкл</string>
     <string name="winter_and_ski_renderer">Зімовы/лыжны</string>
     <string name="touring_view_renderer">Турыстычны выгляд</string>
     <string name="nautical_renderer">Марскі</string>
@@ -2970,7 +2970,7 @@
     <string name="app_mode_offroad">Бездарожжа</string>
     <string name="edit_profile_setup_title">Наладзіць профіль</string>
     <string name="edit_profile_setup_subtitle">У кожнага профілю свае налады</string>
-    <string name="turn_screen_on_time_descr">Вызначце час, цягам якога экран не будзе выключацца.</string>
+    <string name="turn_screen_on_time_descr">Вызначце час, на працягу якога экран не будзе выключацца.</string>
     <string name="turn_screen_on_sensor">Выкарыстоўваць датчык адлегласці</string>
     <string name="turn_screen_on_sensor_descr">Уключаць экран правёўшы па яму рукой.</string>
     <string name="rendering_attr_winter_road_name">Зімовая дарога</string>
@@ -3235,7 +3235,7 @@
     <string name="suggested_maps_descr">Гэтыя мапы патрабуюцца для убудовы.</string>
     <string name="added_profiles">Дададзеныя профілі</string>
     <string name="added_profiles_descr">Профілі, якія дададзеныя ўбудовамі</string>
-    <string name="shared_string_turn_off">Выключыць</string>
+    <string name="shared_string_turn_off">Адключыць</string>
     <string name="new_plugin_added">Дададзена новая ўбудова</string>
     <string name="join_segments">Аб’яднаць сегменты</string>
     <string name="add_new_profile_q">Дадаць новы профіль \"%1$s\"\?</string>
@@ -3619,10 +3619,10 @@
     <string name="osm_edits_view_descr">Тут паказваюцца ўсе вашыя неадпраўленыя праўкі і хібы OSM, яшчэ не адпраўленыя ў %1$s. Адпраўленыя змены не паказваюцца.</string>
     <string name="live_monitoring_adress_descr">Пазначце сеціўны адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_distance_descr_recommendation">Рэкамендацыя: наладка ў 5 метраў можа вас задаволіць, калі вам не патрэбна фіксаваць больш кароткія перамяшчэнні, і вы не хочаце відавочна збіраць даныя ў стане спакою.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Пабочныя эфекты: перыяды ў стане спакою не запісваюцца наогул альбо па адным пункце кожны. Невялікія (у рэальным свеце) перамяшчэнні (напрыклад, убок, што адзначаюць магчымы паварот у вашай паездцы) могуць быць адфільтраваныя. Файл змяшчае менш інфармацыі для наступнай апрацоўкі і мае горшую статыстыку, адфільтроўваючы відавочна лішнія пункты падчас запісу. Пры гэтым патэнцыйна захоўваюцца артэфакты, выкліканыя дрэнным прыёмам альбо эфектамі модуля GPS.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Пабочныя эфекты: перыяды ў стане спакою не запісваюцца наогул альбо па адным пункце кожны. Невялікія (у рэальным свеце) перамяшчэнні (напрыклад, убок, што адзначаюць магчымы паварот у вашай паездцы) могуць быць адфільтраваныя. Файл змяшчае менш інфармацыі для наступнага апрацоўвання і мае горшую статыстыку, адфільтроўваючы відавочна лішнія пункты падчас запісу. Пры гэтым патэнцыйна захоўваюцца артэфакты, якія з\'яўляюцца з прычыны дрэннага прыёму альбо эфектаў модуля GPS.</string>
     <string name="monitoring_min_distance_descr">Гэты фільтр дазваляе пазбегнуць запісу паўторных пунктаў, паміж якімі магло быць занадта мала руху, і робіць больш прыемным выгляд слядоў.</string>
     <string name="monitoring_min_accuracy_descr_remark">Нататка: калі GPS быў адключаны непасрэдна перад запісам, дакладнасць вымярэння першага пункта можа быць нізкай, таму мы разглядаем магчымасць дадання секунднай затрымкі перад запісам першага пункта (альбо запісу лепшага з 3 паслядоўных пунктаў), але гэта яшчэ не рэалізавана.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">Рэкамендацыя: цяжка прадбачыць, што будзе запісана, а што не. Магчыма, лепш выключыць гэты фільтр.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Рэкамендацыя: цяжка прадбачыць, што будзе запісана, а што не. Магчыма, лепш адключыць гэты фільтр.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Пабочны эфект: у выніку фільтрацыі па дакладнасці пункты могуць цалкам адсутнічаць, напрыклад, пад мастамі, пад дрэвамі, паміж высокімі будынкамі альбо пры пэўным надвор\'і.</string>
     <string name="monitoring_min_accuracy_descr">У гэтым выпадку будуць запісвацца толькі пункты, вымераныя з мінімальнай дакладнасцю (у метрах / футах паводле налад прылады). Дакладнасць - гэта набліжэнне вымярэнняў да сапраўднага становішча, яна не мае дачынення да дакладнасці, што ўяўляе сабой мноства паўторных вымярэнняў.</string>
     <string name="monitoring_min_speed_descr_remark">Нататка: праверка хуткасці&gt; 0: большасць модуляў GPS паведамляюць значэнне хуткасці толькі ў тым выпадку, калі алгарытм вызначае, што вы рухаецеся, і нічога не паведамляюць, калі вы не рухаецеся. Такім чынам, выкарыстанне ў гэтым фільтры параметра \"&gt; 0\" у пэўным сэнсе ёсць выяўленне руху модуля GPS. Але нават калі падчас запісу нічога не фільтруецца, то ўсё адно гэтая функцыя выкарыстоўваецца ў аналізе GPX для вызначэння скарэктаванай адлегласці. Гэта азначае, што значэнне, якое адлюстроўваецца ў гэтым полі - гэта адлегласць, запісаная падчас руху.</string>
