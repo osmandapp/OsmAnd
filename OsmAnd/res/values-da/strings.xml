@@ -3321,8 +3321,8 @@
     <string name="save_track_logging_accuracy">Lognøjagtighed</string>
     <string name="tracks_view_descr">Dine optagede spor er i %1$s eller i OsmAnd-mappen.</string>
     <string name="multimedia_notes_view_descr">Noter er i %1$s.</string>
-    <string name="video_notes">Video noter</string>
-    <string name="photo_notes">Foto noter</string>
+    <string name="video_notes">Videonoter</string>
+    <string name="photo_notes">Fotonoter</string>
     <string name="route_recalculation">Genberegning af rute</string>
     <string name="accessibility_announce">Annoncere</string>
     <string name="login_and_pass">Brugernavn og adgangskode</string>
@@ -4667,4 +4667,20 @@
     <string name="compass_on_circles">Kompas på cirkler</string>
     <string name="distance_circles">Afstandscirkler</string>
     <string name="circle_settings">Cirkelindstillinger</string>
+    <string name="map_widget_trip_recording_uphill">Op ad bakke</string>
+    <string name="map_widget_trip_recording_duration">Varighed</string>
+    <string name="routing_attr_allow_private_for_truck_description">Tillad adgang til private områder for lastbiler.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Tillad privat adgang (lastbil)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Tryk-isolinjer</string>
+    <string name="routing_attr_avoid_highway_name">Undgå motorveje</string>
+    <string name="rendering_attr_horseScale_name">Sværhedsgraden af hestestier</string>
+    <string name="map_widget_trip_recording_distance">Afstand</string>
+    <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
+    <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
+    <string name="map_widget_trip_recording_downhill">Ned ad bakke</string>
+    <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
+    <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
+    <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
+    <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
 </resources>
