@@ -3903,7 +3903,7 @@
     <string name="shared_string_last_used">Último usado</string>
     <string name="routing_attr_prefer_hiking_routes_description">Prefiere rutas de senderismo</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>
-    <string name="routing_attr_allow_streams_description">Permite arroyos y desagües</string>
+    <string name="routing_attr_allow_streams_description">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_intermittent_description">Permite cursos de agua intermitentes</string>
     <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
@@ -4496,7 +4496,7 @@
     <string name="navigate_point_format_swiss_grid">Red Suiza (CH1903)</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
     <string name="save_track_to_gpx_descrp">Inicia automáticamente la grabación de trazas mientras navega y las guarda automáticamente después.</string>
-    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para guardar la ruta como un archivo.</string>
+    <string name="gpx_no_routes_descr">Puedes usar la herramienta «%1$s» para añadir la ruta a un archivo.</string>
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">No esconde los túneles de las vías fluviales</string>
     <string name="rendering_attr_seabedDetail_description">Información adicional de texto sobre la calificación de la superficie del fondo marino, tipos de superficies combinados, categoría y taxón de plantas o praderas submarinas</string>
@@ -4592,22 +4592,6 @@
 \n
 \n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
-\n• Nuevos widgets: rumbo verdadero. Grabación del viaje: descenso, ascenso, duración.
-\n
-\n• Teselas SRTM en línea.
-\n
-\n• Ahora se admiten coordenadas de la red suiza CH1903 / CH1903+.
-\n
-\n• Reemplazo de coordenadas UTM como 31T en lugar de 31N.
-\n
-\n• Gráficos: el análisis en el mapa ahora muestra los datos de dos ejes.
-\n
-\n• El estilo de mapa «Mapnik» fue reemplazado por el nuevo estilo «OSM-Carto».
-\n
-\n• Todos los elementos relacionados con OpenStreetMap se han combinado en un solo grupo en el menú «Configurar mapa».
-\n
-\n• Wikipedia: se ha corregido la visibilidad de las imágenes en hebreo.
-\n
 \n</string>
     <string name="simulation_real_mode_desc">En los tramos rectos, la velocidad será aproximada a la máxima permitida.
 \nEn las intersecciones, la simulación reducirá la velocidad.
@@ -4630,4 +4614,19 @@
     <string name="routing_attr_difficulty_preference_beginner_name">Principiante</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermedio</string>
     <string name="turn_on_public_transport_description">Activar para ver las rutas de transporte público en el mapa.</string>
+    <string name="time_to_go_desc">Tiempo en minutos u horas necesarios para alcanzar su destino.</string>
+    <string name="map_widget_trip_recording_duration">Duración</string>
+    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Sin restricciones</string>
+    <string name="calculate_online">Calcular en línea</string>
+    <string name="calculate_altitude">Calcular altitud</string>
+    <string name="shared_string_speed">Velocidad</string>
+    <string name="app_mode_mountain_bicycle">Bicicleta de montaña</string>
+    <string name="get_altitude_data">Obtener datos de altitud</string>
+    <string name="no_altitude_data">No hay datos de altitud</string>
+    <string name="av_def_action_choose">Bajo petición</string>
+    <string name="get_altitude_information">Obtener información de altitud</string>
+    <string name="calculating_altitude">Calculando altitud</string>
+    <string name="av_notes_choose_action_widget_desc">Elegir acción.</string>
+    <string name="navigation_points">Puntos de navegación</string>
 </resources>
