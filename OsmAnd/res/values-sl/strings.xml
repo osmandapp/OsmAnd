@@ -4653,4 +4653,16 @@
     <string name="compass_on_circles">Kompas na krogih</string>
     <string name="colour_of_circles">Barva krogov</string>
     <string name="routing_attr_width_description">Navedi dovoljeno širino vozila na poteh.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Dovoli dostop zasebnih površin (tovornjak)</string>
+    <string name="rendering_attr_weatherTempContours_name">Izoterme</string>
+    <string name="rendering_attr_weatherPressureContours_name">Izobare</string>
+    <string name="rendering_attr_horseScale_name">Zahtevnost konjskih poti</string>
+    <string name="routing_attr_avoid_highway_name">Izogibaj se avtocest</string>
+    <string name="routing_attr_avoid_highway_description">Izogibaj se avtocest</string>
+    <string name="map_widget_trip_recording_downhill">Navzdol</string>
+    <string name="map_widget_trip_recording_uphill">Navkreber</string>
+    <string name="map_widget_trip_recording_duration">Trajanje</string>
+    <string name="map_widget_trip_recording_distance">Razdalja</string>
+    <string name="routing_attr_hazmat_category_name">Kategorija Hazmat</string>
+    <string name="routing_attr_allow_private_for_truck_description">Dovoli dostop do zasebnih površin za tovornjake.</string>
 </resources>
