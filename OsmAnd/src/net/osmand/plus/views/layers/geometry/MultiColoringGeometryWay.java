@@ -103,20 +103,16 @@ public abstract class MultiColoringGeometryWay
 			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
 			return;
 		}
-
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-
 		for (int i = 0; i < colors.size(); ) {
 			int color = colors.get(i);
 			GeometrySolidWayStyle<?> style = getSolidWayStyle(color);
 			styleMap.put(i, style);
-
 			i++;
 			while (i < colors.size() && colors.get(i) == color) {
 				i++;
 			}
 		}
-
 		updateWay(locations, styleMap, tileBox);
 	}
 

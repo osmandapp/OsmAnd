@@ -76,7 +76,6 @@ public class RouteGeometryWay extends
 			this.route = route;
 			coloringChanged = false;
 			List<Location> locations = route.getImmutableAllLocations();
-
 			if (coloringType.isGradient()) {
 				updateGradientWay(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {

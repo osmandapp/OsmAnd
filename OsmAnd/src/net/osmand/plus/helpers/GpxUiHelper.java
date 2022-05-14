@@ -2364,7 +2364,6 @@ public class GpxUiHelper {
 	                                              float distanceToPoint, boolean preciseLocation,
 	                                              boolean joinSegments) {
 		double passedDistance = 0;
-
 		if (!segment.generalSegment || joinSegments) {
 			WptPt prevPoint = null;
 			for (int i = 0; i < segment.points.size(); i++) {
@@ -2381,13 +2380,13 @@ public class GpxUiHelper {
 			}
 		}
 
+		passedDistance = 0;
 		double passedSegmentsPointsDistance = 0;
 		WptPt prevPoint = null;
 		for (Track track : gpxFile.tracks) {
 			if (track.generalTrack) {
 				continue;
 			}
-
 			for (TrkSegment seg : track.segments) {
 				if (Algorithms.isEmpty(seg.points)) {
 					continue;
@@ -2397,7 +2396,6 @@ public class GpxUiHelper {
 						passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon,
 								currPoint.lat, currPoint.lon);
 					}
-
 					if (passedSegmentsPointsDistance + currPoint.distance >= distanceToPoint
 							|| Math.abs(passedDistance - distanceToPoint) < 0.1) {
 						return preciseLocation && prevPoint != null

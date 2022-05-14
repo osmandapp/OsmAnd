@@ -157,7 +157,7 @@ public class MapLayers {
 		mFavouritesLayer = new FavouritesLayer(app, -160000);
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 4.6 measurement tool layer
-		measurementToolLayer = new MeasurementToolLayer(app);
+		measurementToolLayer = new MeasurementToolLayer(app, -190000);
 		mapView.addLayer(measurementToolLayer, 4.6f);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer(app);

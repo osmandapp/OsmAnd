@@ -188,7 +188,7 @@ public class AndroidUtils {
 		return createScaledBitmap(drawable, width, height);
 	}
 
-	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {
+	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, int width, int height) {
 		return scaleBitmap(drawableToBitmap(drawable), width, height, false);
 	}
 
@@ -857,12 +857,9 @@ public class AndroidUtils {
 			}
 		}
 
-		Bitmap bitmap = null;
-		if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-		} else {
-			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-		}
+		Bitmap bitmap = drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0
+				? Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+				: Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
 
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
