@@ -258,6 +258,8 @@ public class OsmandApplication extends MultiDexApplication {
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
+		OsmandPlugin.createLayers(this, null);
+		osmandMap.getMapLayers().updateLayers(null);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
