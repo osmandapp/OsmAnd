@@ -3952,4 +3952,21 @@
     <string name="av_notes_choose_action_widget_desc">Seleccioneu l\'acció.</string>
     <string name="colour_of_circles">Color dels cercles</string>
     <string name="coordinates_widget_secondary_desc">El format de les coordenades es pot canviar a %1$s - %2$s - %3$s.</string>
+    <string name="rendering_attr_weatherTempContours_name">Línies isotermes</string>
+    <string name="rendering_attr_weatherPressureContours_name">Línies isòbares</string>
+    <string name="rendering_attr_horseScale_name">Dificultat de les rutes eqüestres</string>
+    <string name="routing_attr_avoid_highway_description">Evita les autopistes</string>
+    <string name="map_widget_trip_recording_uphill">Ascens</string>
+    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="routing_attr_hazmat_category_name">Categoria de matèries perilloses</string>
+    <string name="routing_attr_hazmat_category_description">Categoria de materials perillosos / Considereu les restriccions d\'accés</string>
+    <string name="routing_attr_avoid_fords_name">Evita els guals</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permet l\'accés a zones privades per a camions.</string>
+    <string name="routing_attr_avoid_highway_name">Evita les autopistes</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permet l\'accés privat (camió)</string>
+    <string name="map_widget_trip_recording_downhill">Descens</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Sense restriccions</string>
+    <string name="map_widget_trip_recording_duration">Durada</string>
+    <string name="routing_attr_avoid_fords_description">Evita els guals</string>
+    <string name="fps_widget_desc">El giny mostra la velocitat de càrrega i actualització del mapa i dels elements auxiliars.</string>
 </resources>
