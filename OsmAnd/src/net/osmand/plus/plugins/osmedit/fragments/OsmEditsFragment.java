@@ -442,7 +442,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		osmEdits = new ArrayList<>();
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
-		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
+		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmBugsPoints();
 		osmEdits.addAll(l1);
 		osmEdits.addAll(l2);
 		ListView listView = getListView();

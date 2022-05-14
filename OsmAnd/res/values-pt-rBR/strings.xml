@@ -3084,7 +3084,7 @@
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixa emissão no mapa. Não afeta o roteamento.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baixa emissão</string>
-    <string name="temporary_conditional_routing">Considere limitações temporárias</string>
+    <string name="temporary_conditional_routing">Aplicar limitações temporárias (obras...)</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s, tempo do roteador %2$s
 \nCálculo: %3$.1f seg; %4$d estradas; %5$d mosaicos)</string>
@@ -4529,4 +4529,20 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Prefira fora da pista</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Sem preferência</string>
     <string name="shared_string_symbol">Símbolo</string>
+    <string name="bearing_secondary_desc">Você pode alterar o formato dos dados exibidos em: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">O formato das coordenadas pode ser alterado em %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Parte do plug-in %1$s.</string>
+    <string name="elevation_profile_widget_desc">Este widget mostra o perfil de elevação e inclinação da rota atual.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Evitar estradas 4x4</string>
+    <string name="routing_attr_avoid_4wd_only_description">Evite estradas adequadas apenas para veículos 4x4</string>
+    <string name="parking_widget_desc">Este widget que mostra a distância do centro da tela até o estacionamento.</string>
+    <string name="mapillary_widget_desc">Este widget fornece acesso rápido ao aplicativo Mapillary para adicionar imagens de nível de rua.</string>
+    <string name="current_time_widget_desc">Este widget mostra a hora atual do seu dispositivo.</string>
+    <string name="gps_info_widget_desc">Este widget mostra uma série de satélites que o dispositivo detecta e usa naquele momento.</string>
+    <string name="altitude_widget_desc">Este widget mostra a altura acima do nível do mar da geolocalização atual.</string>
+    <string name="max_speed_widget_desc">Este widget mostra um limite de velocidade para uma estrada em que se encontra.</string>
+    <string name="fps_widget_desc">Este widget mostra a rapidez com que os elementos do mapa são mostrados e atualizados.</string>
+    <string name="battery_widget_desc">Este widget mostra o nível da bateria do seu dispositivo.</string>
+    <string name="radius_rules_widget_desc">A ferramenta Régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da exibição de círculos de distância no mapa.</string>
+    <string name="current_speed_widget_desc">Este widget mostra sua velocidade atual detectada pelo sensor GPS.</string>
 </resources>

@@ -240,7 +240,7 @@ public abstract class SettingsHelper {
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			List<OsmNotesPoint> notesPointList = settingsTypes == null || settingsTypes.contains(ExportSettingsType.OSM_NOTES)
-					? osmEditingPlugin.getDBBug().getOsmbugsPoints()
+					? osmEditingPlugin.getDBBug().getOsmBugsPoints()
 					: Collections.emptyList();
 			if (!notesPointList.isEmpty() || addEmptyItems) {
 				myPlacesItems.put(ExportSettingsType.OSM_NOTES, notesPointList);

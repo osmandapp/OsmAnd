@@ -64,13 +64,8 @@ public class GPXUtilities {
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
 	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
-	private static final SimpleDateFormat GPX_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-	private static final SimpleDateFormat GPX_TIME_FORMAT_MILLIS = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-
-	static {
-		GPX_TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
-		GPX_TIME_FORMAT_MILLIS.setTimeZone(TimeZone.getTimeZone("UTC"));
-	}
+	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
@@ -2131,7 +2126,7 @@ public class GPXUtilities {
 		}
 		writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
 		if (file.metadata.time != 0) {
-			writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(file.metadata.time)));
+			writeNotNullText(serializer, "time", formatTime(file.metadata.time));
 		}
 		writeNotNullText(serializer, "keywords", file.metadata.keywords);
 		if (file.metadata.bounds != null) {
@@ -2282,7 +2277,7 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "ele", DECIMAL_FORMAT.format(p.ele));
 		}
 		if (p.time != 0) {
-			writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(p.time)));
+			writeNotNullText(serializer, "time", formatTime(p.time));
 		}
 		writeNotNullText(serializer, "name", p.name);
 		writeNotNullText(serializer, "desc", p.desc);
@@ -2415,11 +2410,12 @@ public class GPXUtilities {
 	}
 
 	public static String formatTime(long time) {
-		return GPX_TIME_FORMAT.format(new Date(time));
+		SimpleDateFormat format = getTimeFormatter();
+		return format.format(new Date(time));
 	}
 
 	public static long parseTime(String text) {
-		return parseTime(text, GPX_TIME_FORMAT, GPX_TIME_FORMAT_MILLIS);
+		return parseTime(text, getTimeFormatter(), getTimeFormatterMills());
 	}
 
 	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
@@ -2436,6 +2432,18 @@ public class GPXUtilities {
 			}
 		}
 		return time;
+	}
+
+	private static SimpleDateFormat getTimeFormatter() {
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
+	}
+
+	private static SimpleDateFormat getTimeFormatterMills() {
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_MILLIS_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
 	}
 
 	public static GPXFile loadGPXFile(File file) {

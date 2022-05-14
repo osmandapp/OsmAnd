@@ -765,7 +765,7 @@ public class RoutePlannerFrontEnd {
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
 			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
 			ctx.targetY = MapUtils.get31TileNumberY(end.getLatitude());
-			RouteSegment recalculationEnd = getRecalculationEnd(ctx);
+			RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 			if (recalculationEnd != null) {
 				ctx.initTargetPoint(recalculationEnd);
 			}
@@ -896,7 +896,7 @@ public class RoutePlannerFrontEnd {
 
 	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 	                                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
-		RouteSegment recalculationEnd = getRecalculationEnd(ctx);
+		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
 			ctx.initStartAndTargetPoints(start, recalculationEnd);
 		} else {
@@ -924,8 +924,8 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public RouteSegment getRecalculationEnd(final RoutingContext ctx) {
-		RouteSegment recalculationEnd = null;
+	public RouteSegmentPoint getRecalculationEnd(final RoutingContext ctx) {
+		RouteSegmentPoint recalculationEnd = null;
 		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
 				&& ctx.config.recalculateDistance != 0;
 		if (runRecalculation) {
@@ -947,7 +947,7 @@ public class RoutePlannerFrontEnd {
 					if (previous != null) {
 						previous.setParentRoute(segment);
 					} else {
-						recalculationEnd = segment;
+						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0); 
 					}
 					previous = segment;
 				}

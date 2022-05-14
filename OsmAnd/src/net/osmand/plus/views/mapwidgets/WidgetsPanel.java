@@ -16,6 +16,7 @@ import java.util.List;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.annotation.Nullable;
 
 public enum WidgetsPanel {
 
@@ -155,7 +156,7 @@ public enum WidgetsPanel {
 	}
 
 	public boolean isPagingAllowed() {
-		return this == RIGHT;
+		return this == LEFT || this == RIGHT;
 	}
 
 	@NonNull
@@ -170,5 +171,27 @@ public enum WidgetsPanel {
 			return settings.BOTTOM_WIDGET_PANEL_ORDER;
 		}
 		throw new IllegalStateException("Unsupported panel");
+	}
+
+	@NonNull
+	public WidgetsPanel[] getMergedPanels() {
+		if (this == LEFT || this == RIGHT) {
+			return new WidgetsPanel[] {LEFT, RIGHT};
+		} else if (this == TOP) {
+			return new WidgetsPanel[] {TOP};
+		} else if (this == BOTTOM) {
+			return new WidgetsPanel[] {BOTTOM};
+		}
+		throw new IllegalStateException("Unsupported widgets panel");
+	}
+
+	@Nullable
+	public WidgetsPanel getSharedPanel() {
+		if (this == LEFT) {
+			return RIGHT;
+		} else if (this == RIGHT) {
+			return LEFT;
+		}
+		return null;
 	}
 }

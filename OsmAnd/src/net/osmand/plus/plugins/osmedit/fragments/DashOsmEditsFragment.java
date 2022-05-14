@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -36,8 +38,6 @@ import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * Created by Denis
@@ -192,7 +192,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
-		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
+		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmBugsPoints();
 		if (l1.isEmpty()) {
 			int i = 0;
 			for (OsmPoint point : l2) {

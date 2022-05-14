@@ -392,9 +392,10 @@ public class OsmandAidlApi {
 							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							layer.registerExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), connectedApp.getPack(),
-									WidgetsPanel.RIGHT, widgetData.getOrder());
+									widgetData.getMenuTitle(), connectedApp.getPack(), defaultPanel,
+									widgetData.getOrder());
 							layer.recreateControls();
 						}
 					}
@@ -1684,7 +1685,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.startGPXMonitoring(null);
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
@@ -1694,7 +1695,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.stopRecording();
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;

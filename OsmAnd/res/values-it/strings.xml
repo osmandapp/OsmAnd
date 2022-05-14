@@ -4603,4 +4603,42 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Attiva per vedere i percorsi del trasporto pubblico sulla mappa.</string>
+    <string name="current_time_widget_desc">Il widget mostra l\'orario del tuo dispositivo.</string>
+    <string name="av_def_action_choose">Su richiesta</string>
+    <string name="coordinates_widget_desc">Mostra le coordinate geografiche della localizzazione attuale.</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="audio_video_notes_desc">I widget forniscono un accesso veloce per avviare/fermare l\'acquisizione di una registrazione (audio, video, foto).</string>
+    <string name="street_name_widget_desc">Il widget dei nomi delle strade mostra il nome della strada corrente con la freccia di direzione o con il nome della manovra che si sta completando.</string>
+    <string name="colour_of_circles">Colore dei cerchi</string>
+    <string name="distance_circles">Distanza dei cerchi</string>
+    <string name="compass_on_circles">Bussola nei cerchi</string>
+    <string name="routing_attr_avoid_4wd_only_description">Evita le strade percorribili solo con veicoli 4WD</string>
+    <string name="bearing_secondary_desc">Puoi cambiare il formato della data visualizza in: %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Parte di %1$s componente aggiuntivo.</string>
+    <string name="elevation_profile_widget_desc">Il widget mostra il profilo altimetrico e della pendenza dell\'attuale percorso.</string>
+    <string name="parking_widget_desc">Widget che mostra la distanza dall centro dello schermo alla posizione di parcheggio.</string>
+    <string name="av_notes_choose_action_widget_desc">Scegli l\'azione.</string>
+    <string name="gps_info_widget_desc">Il widget mostra il numero di satelliti che il dispositivo ha rilevato e che usa in questo momento.</string>
+    <string name="max_speed_widget_desc">Il widget mostra il limite di velocità della strada che si sta percorrendo.</string>
+    <string name="current_speed_widget_desc">Il widget mostra la velocità determinata dal GPS.</string>
+    <string name="mapillary_widget_desc">Widget che fornisce un accesso veloce all\'app Mapillary per aggiungere Immagini-Stradali.</string>
+    <string name="time_to_go_desc">Tempo necessario per raggiungere la tua destinazione in ore e minuti.</string>
+    <string name="arrival_time_widget_desc">Orario di arrivo alla destinazione.</string>
+    <string name="navigation_points">Punti di navigazione</string>
+    <string name="route_maneuvers">Indicazioni del percorso</string>
+    <string name="get_altitude_information">Ottieni l\'informazione sull\'altitudine</string>
+    <string name="calculating_altitude">Sto calcolando l\'altitudine</string>
+    <string name="calculate_online">Calcola online</string>
+    <string name="get_altitude_data">Ottieni i dati dell\'altitudine</string>
+    <string name="calculate_altitude">Calcola l\'altitudine</string>
+    <string name="magnetic_bearing_widget_desc">Angolo tra il nord magnetico e la destinazione osservato dalla tua localizzazione.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Evita le strade 4WD</string>
+    <string name="coordinates_widget_secondary_desc">Il formato delle coordinate può essere cambiato in %1$s – %2$s – %3$s.</string>
+    <string name="circle_settings">Impostazioni del cerchio</string>
+    <string name="battery_widget_desc">Il widget mostra il livello della batteria del tuo dispositivo.</string>
+    <string name="altitude_widget_desc">Il widget mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
+    <string name="calculate_online_altitude_descr">I dati dell\'altitudine saranno calcolati nel server OsmAnd.</string>
+    <string name="fps_widget_desc">Il widget mostra con che velocità la mappa e i suoi elementi sono mostrati e aggiornati.</string>
+    <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia la corsia da utilizzare per la navigazione attuale.</string>
+    <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>
 </resources>

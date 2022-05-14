@@ -4655,4 +4655,26 @@
     <string name="calculating_altitude">Rakımı hesapla</string>
     <string name="get_altitude_data">Rakım verilerini al</string>
     <string name="calculate_altitude">Rakımı hesapla</string>
+    <string name="routing_attr_avoid_4wd_only_description">Yalnızca 4x4 araçlara uygun yollardan kaçının</string>
+    <string name="routing_attr_avoid_4wd_only_name">4x4 yollarından kaçın</string>
+    <string name="compass_on_circles">Daireler üzerinde pusula</string>
+    <string name="colour_of_circles">Dairelerin rengi</string>
+    <string name="circle_settings">Daire ayarları</string>
+    <string name="distance_circles">Mesafe daireleri</string>
+    <string name="routing_attr_avoid_highway_name">Otoyollardan kaçın</string>
+    <string name="routing_attr_avoid_highway_description">Otoyollardan kaçının</string>
+    <string name="map_widget_trip_recording_duration">Süre</string>
+    <string name="routing_attr_hazmat_category_description">Tehlikeli madde kategorisi / Tehlikeli madde erişim izinlerini göz önünde bulundurun</string>
+    <string name="routing_attr_avoid_fords_name">Nehir geçişlerinden kaçın</string>
+    <string name="routing_attr_allow_private_for_truck_description">Kamyonlar için özel alanlara erişime izin verin.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Özel erişime izin ver (kamyon)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Basınç eş değer eğrileri</string>
+    <string name="rendering_attr_horseScale_name">At parkurlarının zorluğu</string>
+    <string name="rendering_attr_weatherTempContours_name">Sıcaklık eş değer eğrileri</string>
+    <string name="map_widget_trip_recording_downhill">Yokuş aşağı</string>
+    <string name="map_widget_trip_recording_uphill">Yokuş yukarı</string>
+    <string name="map_widget_trip_recording_distance">Mesafe</string>
+    <string name="routing_attr_hazmat_category_name">Tehlikeli madde kategorisi</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Kısıtlama yok</string>
+    <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>
 </resources>

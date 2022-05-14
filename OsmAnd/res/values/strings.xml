@@ -11,6 +11,26 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for trucks.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Allow private access (truck)</string>
+    <string name="rendering_attr_weatherTempContours_name">Temperature isolines</string>
+    <string name="rendering_attr_weatherPressureContours_name">Pressure isolines</string>
+    <string name="rendering_attr_horseScale_name">Difficulty of horse trails</string>
+    <string name="routing_attr_avoid_highway_name">Avoid highways</string>
+    <string name="routing_attr_avoid_highway_description">Avoid highways</string>
+    <string name="map_widget_trip_recording_downhill">Downhill</string>
+    <string name="map_widget_trip_recording_uphill">Uphill</string>
+    <string name="map_widget_trip_recording_duration">Duration</string>
+    <string name="map_widget_trip_recording_distance">Distance</string>
+    <string name="routing_attr_hazmat_category_name">Hazmat category</string>
+    <string name="routing_attr_hazmat_category_description">Hazardous materials category / Consider hazmat access permissions</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">No restrictions</string>
+    <string name="routing_attr_avoid_fords_name">Avoid fords</string>
+    <string name="routing_attr_avoid_fords_description">Avoid fords</string>
+    <string name="colour_of_circles">Colour of circles</string>
+    <string name="compass_on_circles">Compass on circles</string>
+    <string name="distance_circles">Distance-circles</string>
+    <string name="circle_settings">Circle settings</string>
     <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
     <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD only vehicles</string>
     <string name="bearing_secondary_desc">You can change format of displayed data in: %1$s – %2$s – %3$s.</string>

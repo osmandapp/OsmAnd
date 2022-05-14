@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:text="@string/map_markers_bar_widget_desc"
+		android:textColor="?android:textColorSecondary" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding"
+		android:background="?divider_color_basic" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:text="@string/active_markers"
+		android:textColor="?android:textColorPrimary" />
+
+	<include layout="@layout/custom_radio_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:text="@string/active_markers_descr"
+		android:textColor="?android:textColorSecondary" />
+
+</LinearLayout>

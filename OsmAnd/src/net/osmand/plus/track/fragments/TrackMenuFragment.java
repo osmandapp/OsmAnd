@@ -3,7 +3,6 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController.getIconForRouteObject;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
@@ -85,6 +84,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -93,6 +93,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
@@ -155,12 +156,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String OPEN_TAB_NAME = "open_tab_name";
+	public static final String CHART_TAB_NAME = "chart_tab_name";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
+	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
+	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	private OsmandApplication app;
+	private UiUtilities uiUtilities;
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
 	private GPXTrackAnalysis analyses;
@@ -193,6 +198,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String gpxTitle;
 	private String returnScreenName;
 	private String callingFragmentTag;
+	private GPXTabItemType chartTabToOpen;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
 	private NetworkRouteSegment routeSegment;
@@ -282,7 +288,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		displayHelper = new TrackDisplayHelper(app);
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		uiUtilities = app.getUIUtilities();
+		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
@@ -397,6 +404,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.adjustMapPosition = adjustMapPosition;
 	}
 
+	public void setChartTabToOpen(@Nullable GPXTabItemType chartTabToOpen) {
+		this.chartTabToOpen = chartTabToOpen;
+	}
+
 	private void setAnalyses(@Nullable GPXTrackAnalysis analyses) {
 		this.analyses = analyses;
 	}
@@ -467,11 +478,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
 
-		Drawable icon = null;
-		if (routeSegment != null) {
-			icon = getIconForRouteObject(app, routeSegment);
-		}
-		headerIcon.setImageDrawable(icon != null ? icon : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		Drawable icon = routeSegment != null ? new NetworkRouteDrawable(app, routeSegment, isNightMode())
+				: uiUtilities.getThemedIcon(R.drawable.ic_action_polygom_dark);
+		headerIcon.setImageDrawable(icon);
 	}
 
 	@NonNull
@@ -694,7 +703,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (segmentsCard != null && segmentsCard.getView() != null) {
 					reattachCard(cardsContainer, segmentsCard);
 				} else {
-					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, selectedGpxFile, this);
+					segmentsCard = new SegmentsCard(mapActivity, displayHelper, gpxPoint, selectedGpxFile,
+							this, chartTabToOpen);
 					segmentsCard.setListener(this);
 					cardsContainer.addView(segmentsCard.build(mapActivity));
 				}
@@ -902,7 +912,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			View view = overviewCard.getView();
 			TextView distanceText = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);
-			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
+			uiUtilities.updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
 		}
 	}
 
@@ -1438,12 +1448,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
 			Menu menu = optionsPopupMenu.getMenu();
 			optionsPopupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
-			menu.findItem(R.id.action_edit).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_edit_dark));
-			menu.findItem(R.id.action_delete).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
+			menu.findItem(R.id.action_edit).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_edit_dark));
+			menu.findItem(R.id.action_delete).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_remove_dark));
 			if (getGpx().showCurrentTrack) {
 				menu.findItem(R.id.split_interval).setVisible(false);
 			} else {
-				menu.findItem(R.id.split_interval).setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_split_interval));
+				menu.findItem(R.id.split_interval).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_split_interval));
 			}
 			optionsPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 				@Override
@@ -1651,16 +1661,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static void showInstance(@NonNull MapActivity mapActivity,
 	                                @Nullable String path,
 	                                boolean showCurrentTrack,
-	                                @Nullable final String returnScreenName,
-	                                @Nullable final String callingFragmentTag,
-	                                @Nullable final String tabToOpenName) {
+	                                @Nullable String returnScreenName,
+	                                @Nullable String callingFragmentTag,
+	                                @Nullable String tabToOpenName) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 			@Override
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, tabToOpenName, true, null, null);
+					Bundle params = new Bundle();
+					params.putString(RETURN_SCREEN_NAME, returnScreenName);
+					params.putString(CALLING_FRAGMENT_TAG, callingFragmentTag);
+					params.putString(OPEN_TAB_NAME, tabToOpenName);
+					showInstance(mapActivity, selectedGpxFile, null, null, null, params);
 				}
 				return true;
 			}
@@ -1670,18 +1684,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, null, false, null, null);
+		Bundle params = new Bundle();
+		params.putBoolean(ADJUST_MAP_POSITION, false);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, params);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint,
-	                                   @Nullable String returnScreenName,
-	                                   @Nullable String callingFragmentTag,
-	                                   @Nullable String tabToOpenName,
-	                                   boolean adjustMapPosition,
 	                                   @Nullable GPXTrackAnalysis analyses,
-	                                   @Nullable NetworkRouteSegment routeSegment) {
+	                                   @Nullable NetworkRouteSegment routeSegment,
+	                                   @Nullable Bundle params) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
@@ -1692,12 +1705,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setAnalyses(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
-			fragment.setReturnScreenName(returnScreenName);
 			fragment.setRouteSegment(routeSegment);
-			fragment.setCallingFragmentTag(callingFragmentTag);
-			fragment.setAdjustMapPosition(adjustMapPosition);
-			if (tabToOpenName != null) {
-				fragment.setMenuType(TrackMenuType.valueOf(tabToOpenName));
+
+			if (params != null) {
+				fragment.setReturnScreenName(params.getString(RETURN_SCREEN_NAME, null));
+				fragment.setCallingFragmentTag(params.getString(CALLING_FRAGMENT_TAG, null));
+				String tabToOpenName = params.getString(OPEN_TAB_NAME, null);
+				if (!Algorithms.isEmpty(tabToOpenName)) {
+					fragment.setMenuType(TrackMenuType.valueOf(tabToOpenName));
+				}
+				fragment.setAdjustMapPosition(params.getBoolean(ADJUST_MAP_POSITION, true));
+				String chartTabToOpenName = params.getString(CHART_TAB_NAME);
+				if (!Algorithms.isEmpty(chartTabToOpenName)) {
+					fragment.setChartTabToOpen(GPXTabItemType.valueOf(chartTabToOpenName));
+				}
 			}
 
 			if (gpxPoint != null) {

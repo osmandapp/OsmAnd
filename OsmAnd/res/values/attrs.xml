@@ -223,6 +223,10 @@
 		<attr name="chipBgDisabledColor" format="reference" />
 	</declare-styleable>
 
+	<declare-styleable name="SideWidgetsPanel">
+		<attr name="rightSide" format="boolean" />
+	</declare-styleable>
+
     <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
     <declare-styleable name="SwitchEx" parent="ButtonEx" />-->
 </resources>

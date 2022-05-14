@@ -17,8 +17,10 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder.ActionButtonInfo;
@@ -44,12 +46,14 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItemMoveCallback, ItemMovableCallback {
 
 	private final OsmandApplication app;
 	private final ReorderWidgetsAdapterHelper reorderHelper;
 	private final List<ListItem> items = new ArrayList<>();
+	private final WidgetsPanel panel;
 
 	private WidgetAdapterDragListener dragListener;
 	private WidgetsAdapterActionsListener actionsListener;
@@ -77,6 +81,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		this.app = app;
 		this.nightMode = nightMode;
 		this.reorderHelper = new ReorderWidgetsAdapterHelper(app, this, dataHolder, items, nightMode);
+		this.panel = dataHolder.getSelectedPanel();
 
 		ApplicationMode mode = app.getSettings().getApplicationMode();
 		profileColor = mode.getProfileColor(nightMode);
@@ -265,6 +270,17 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	@NonNull
 	private List<String> listAddedGroupWidgets(@NonNull WidgetGroup widgetGroup) {
 		List<String> addedGroupWidgets = new ArrayList<>();
+		WidgetsPanel sharedPanel = panel.getSharedPanel();
+		if (sharedPanel != null) {
+			// TODO widgets: remove after adding duplicates
+			MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+			ApplicationMode appMode = app.getSettings().getApplicationMode();
+			for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(appMode, ENABLED_MODE, sharedPanel)) {
+				if (widgetGroup.containsWidget(widget.key)) {
+					addedGroupWidgets.add(widget.key);
+				}
+			}
+		}
 		for (ListItem listItem : items) {
 			if (listItem.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
@@ -341,14 +357,23 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	@Override
 	public long getItemId(int position) {
 		ListItem item = items.get(position);
-		if (item.value instanceof AddedWidgetUiInfo) {
+		if (item.value instanceof PageUiInfo) {
+			int page = ((PageUiInfo) item.value).index;
+			return app.getString(R.string.page_number, String.valueOf(page)).hashCode();
+		} else if (item.value instanceof AddedWidgetUiInfo) {
 			return ((AddedWidgetUiInfo) item.value).key.hashCode();
+		} else if (item.type == ItemType.ADD_PAGE_BUTTON) {
+			return R.string.add_page;
 		} else if (item.value instanceof ActionButtonInfo) {
 			return ((ActionButtonInfo) item.value).title.hashCode();
+		} else if (item.value instanceof WidgetGroup) {
+			return ((WidgetGroup) item.value).titleId;
+		} else if (item.value instanceof AvailableWidgetUiInfo) {
+			return ((AvailableWidgetUiInfo) item.value).key.hashCode();
 		} else if (item.value != null) {
 			return item.value.hashCode();
 		}
-		return item.hashCode();
+		return (item.type.name() + position).hashCode();
 	}
 
 	@Override

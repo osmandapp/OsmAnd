@@ -58,7 +58,7 @@
     <string name="change_color">Выбрать цвет</string>
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
-    <string name="routing_attr_allow_private_name">Разрешить частные зоны</string>
+    <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
     <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
@@ -3302,7 +3302,7 @@
     <string name="added_profiles_descr">Профили, добавленные плагином</string>
     <string name="shared_string_turn_off">Выключить</string>
     <string name="new_plugin_added">Добавлен новый плагин</string>
-    <string name="reset_confirmation_descr">Нажатие %1$s отменит все сделанные изменения.</string>
+    <string name="reset_confirmation_descr">Нажатие «%1$s» отменит все сделанные изменения.</string>
     <string name="reset_all_profile_settings_descr">Все настройки профиля будут сброшены в значения по умолчанию после установки.</string>
     <string name="reset_all_profile_settings">Сбросить все настройки профиля\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -4515,7 +4515,7 @@
     <string name="rendering_value_omit_name">Пропустить</string>
     <string name="save_track_to_gpx_descrp">Автозапуск записи трека во время навигации и автосохранение по окончании.</string>
     <string name="gpx_no_routes_title">Нет маршрутов</string>
-    <string name="gpx_no_routes_descr">Для сохранения маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
+    <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
     <string name="please_provide_group_name_message">Укажите название группы.</string>
     <string name="quick_action_add_route_descr">Кнопка для начала построения маршрута из центра экрана.</string>
     <string name="import_tracks_descr">%1$s содержит отдельные треки (%2$s шт.). Выберите треки для импорта.</string>
@@ -4618,7 +4618,7 @@
 \n• Исправления: автообновление тайловых онлайн-карт
 \n
 \n</string>
-    <string name="turn_on_public_transport_description">Включите, чтобы увидеть на карте маршруты общественного транспорта.</string>
+    <string name="turn_on_public_transport_description">Включите для отображения на карте маршрутов общественного транспорта.</string>
     <string name="av_def_action_choose">По запросу</string>
     <string name="widget_secondary_desc_part_of">Часть плагина «%1$s».</string>
     <string name="elevation_profile_widget_desc">Виджет показывает профиль высоты и уклона текущего маршрута.</string>
@@ -4649,15 +4649,37 @@
     <string name="no_altitude_data">Нет данных о высоте</string>
     <string name="app_mode_mountain_bicycle">Горный велосипед</string>
     <string name="coordinates_widget_secondary_desc">Формат координат может быть изменён через меню: %1$s - %2$s - %3$s.</string>
-    <string name="parking_widget_desc">Виджет, показывающий расстояние от центра экрана до места парковки.</string>
+    <string name="parking_widget_desc">Виджет показывает расстояние от центра экрана до места парковки.</string>
     <string name="fps_widget_desc">Виджет показывает, как быстро отображаются и обновляются элементы карты.</string>
     <string name="battery_widget_desc">Виджет показывает уровень заряда батареи вашего устройства.</string>
-    <string name="radius_rules_widget_desc">Инструмент «Радиус-линейка» помогает определить радиус вокруг выбранной точки на карте с помощью кругов расстояний на карте.</string>
+    <string name="radius_rules_widget_desc">Инструмент «Радиус-линейка» помогает определить радиус вокруг выбранной точки на карте с помощью окружностей-расстояний.</string>
     <string name="max_speed_widget_desc">Виджет показывает ограничение скорости для текущей дороги.</string>
     <string name="bearing_secondary_desc">Вы можете изменить формат отображаемых данных через меню: %1$s - %2$s - %3$s.</string>
     <string name="magnetic_bearing_widget_desc">Угол между магнитным севером и целевой точкой, наблюдаемой из вашего местоположения.</string>
     <string name="arrival_time_widget_desc">Время прибытия в пункт назначения.</string>
-    <string name="map_markers_bar_widget_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="map_markers_bar_widget_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="coordinates_widget_desc">Виджет показывает географические координаты текущего местоположения.</string>
-    <string name="map_markers_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="map_markers_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="routing_attr_avoid_4wd_only_description">Избегать дорог, подходящих только для полноприводных автомобилей</string>
+    <string name="routing_attr_avoid_4wd_only_name">Без дорог 4WD</string>
+    <string name="compass_on_circles">Компас на окружности</string>
+    <string name="circle_settings">Настройки окружностей</string>
+    <string name="distance_circles">Окружности-расстояния</string>
+    <string name="colour_of_circles">Окраска окружностей</string>
+    <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
+    <string name="routing_attr_avoid_highway_description">Избегать автомагистрали</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ грузовых автомобилей на частную территорию.</string>
+    <string name="map_widget_trip_recording_duration">Продолжительность</string>
+    <string name="map_widget_trip_recording_uphill">Подъём</string>
+    <string name="routing_attr_hazmat_category_name">Категория опасности</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Без ограничений</string>
+    <string name="map_widget_trip_recording_distance">Расстояние</string>
+    <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
+    <string name="routing_attr_avoid_fords_name">Без бродов</string>
+    <string name="routing_attr_allow_private_for_truck_name">Разрешить частный доступ (грузовик)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Изобары</string>
+    <string name="rendering_attr_weatherTempContours_name">Изотермы</string>
+    <string name="routing_attr_avoid_fords_description">Избегать броды</string>
+    <string name="rendering_attr_horseScale_name">Сложность конных маршрутов</string>
+    <string name="map_widget_trip_recording_downhill">Спуск</string>
 </resources>

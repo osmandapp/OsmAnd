@@ -18,6 +18,10 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.TripRecordingDownhillWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.TripRecordingUphillWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingTimeWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -26,11 +30,9 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -49,7 +51,10 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
@@ -61,15 +66,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private final LiveMonitoringHelper liveMonitoringHelper;
 
 	private MapActivity mapActivity;
-	private TextInfoWidget monitoringControl;
 	private boolean isSaving;
 	private boolean showDialogWhenActivityResumed;
+
+	private TextInfoWidget distanceWidget;
+	private TextInfoWidget timeWidget;
+	private TextInfoWidget uphillWidget;
+	private TextInfoWidget downhillWidget;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		super(app);
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
-		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
-		ApplicationMode.regWidgetVisibility(TRIP_RECORDING.id, am.toArray(new ApplicationMode[0]));
+		registerWidgetsVisibility();
 		settings = app.getSettings();
 		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
 		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
@@ -85,6 +93,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.LIVE_MONITORING_URL);
 		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
 		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
+	}
+
+	private void registerWidgetsVisibility() {
+		for (WidgetParams widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
+			ApplicationMode[] appModes = widget == TRIP_RECORDING_DISTANCE ? null : new ApplicationMode[] {};
+			ApplicationMode.regWidgetVisibility(widget.id, appModes);
+		}
 	}
 
 	@Override
@@ -138,34 +153,61 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		if (mapActivity != null) {
-			registerWidget(mapActivity);
+			registerWidgets(mapActivity);
 		}
-	}
-
-	private void registerWidget(@NonNull MapActivity activity) {
-		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		monitoringControl = createMonitoringControl(activity);
-
-		layer.registerWidget(TRIP_RECORDING, monitoringControl, WidgetsPanel.RIGHT);
-		layer.recreateControls();
 	}
 
 	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		if (mapActivity != null) {
 			if (isActive()) {
-				if (monitoringControl == null) {
-					registerWidget(mapActivity);
-				}
+				registerWidgets(mapActivity);
 			} else {
-				if (monitoringControl != null) {
-					MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-					layer.removeSideWidget(monitoringControl);
-					layer.recreateControls();
-					monitoringControl = null;
-				}
+				unregisterWidgets(mapActivity);
 			}
 		}
+	}
+
+	private void registerWidgets(@NonNull MapActivity mapActivity) {
+		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+		if (distanceWidget == null) {
+			distanceWidget = new TripRecordingDistanceWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_DISTANCE, distanceWidget);
+		}
+		if (timeWidget == null) {
+			timeWidget = new TripRecordingTimeWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_TIME, timeWidget);
+		}
+		if (uphillWidget == null) {
+			uphillWidget = new TripRecordingUphillWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_UPHILL, uphillWidget);
+		}
+		if (downhillWidget == null) {
+			downhillWidget = new TripRecordingDownhillWidget(mapActivity);
+			layer.registerWidget(TRIP_RECORDING_DOWNHILL, downhillWidget);
+		}
+		layer.recreateControls();
+	}
+
+	private void unregisterWidgets(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+		if (distanceWidget != null) {
+			mapInfoLayer.removeSideWidget(distanceWidget);
+			distanceWidget = null;
+		}
+		if (timeWidget != null) {
+			mapInfoLayer.removeSideWidget(timeWidget);
+			timeWidget = null;
+		}
+		if (uphillWidget != null) {
+			mapInfoLayer.removeSideWidget(uphillWidget);
+			uphillWidget = null;
+		}
+		if (downhillWidget != null) {
+			mapInfoLayer.removeSideWidget(downhillWidget);
+			downhillWidget = null;
+		}
+		mapInfoLayer.recreateControls();
 	}
 
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
@@ -182,125 +224,21 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getString(R.string.monitoring_prefs_descr);
 	}
 
-	/**
-	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
-	 */
-	private TextInfoWidget createMonitoringControl(@NonNull MapActivity mapActivity) {
-		monitoringControl = new RightTextInfoWidget(mapActivity) {
-			long lastUpdateTime;
-
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
-				if (isSaving) {
-					setText(getString(R.string.shared_string_save), "");
-					setIcons(R.drawable.widget_monitoring_rec_big_day, R.drawable.widget_monitoring_rec_big_night);
-					return;
-				}
-
-				String txt = getString(R.string.monitoring_control_start);
-				String subtxt = null;
-				int dn;
-				int d;
-				long last = lastUpdateTime;
-				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-				final boolean isRecording = app.getSavingTrackHelper().getIsRecording();
-				float dist = app.getSavingTrackHelper().getDistance();
-
-				//make sure widget always shows recorded track distance if unsaved track exists
-				if (dist > 0) {
-					last = app.getSavingTrackHelper().getLastTimeUpdated();
-					String ds = OsmAndFormatter.getFormattedDistance(dist, app);
-					int ls = ds.lastIndexOf(' ');
-					if (ls == -1) {
-						txt = ds;
-					} else {
-						txt = ds.substring(0, ls);
-						subtxt = ds.substring(ls + 1);
-					}
-				}
-
-				final boolean liveMonitoringEnabled = liveMonitoringHelper.isLiveMonitoringEnabled();
-				if (globalRecord) {
-					//indicates global recording (+background recording)
-					if (liveMonitoringEnabled) {
-						dn = R.drawable.widget_live_monitoring_rec_big_night;
-						d = R.drawable.widget_live_monitoring_rec_big_day;
-					} else {
-						dn = R.drawable.widget_monitoring_rec_big_night;
-						d = R.drawable.widget_monitoring_rec_big_day;
-					}
-				} else if (isRecording) {
-					//indicates (profile-based, configured in settings) recording (looks like is only active during nav in follow mode)
-					if (liveMonitoringEnabled) {
-						dn = R.drawable.widget_live_monitoring_rec_small_night;
-						d = R.drawable.widget_live_monitoring_rec_small_day;
-					} else {
-						dn = R.drawable.widget_monitoring_rec_small_night;
-						d = R.drawable.widget_monitoring_rec_small_day;
-					}
-				} else {
-					dn = R.drawable.widget_monitoring_rec_inactive_night;
-					d = R.drawable.widget_monitoring_rec_inactive_day;
-				}
-
-				setText(txt, subtxt);
-				setIcons(d, dn);
-				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
-					lastUpdateTime = last;
-					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
-					if (liveMonitoringEnabled) {
-						dn = R.drawable.widget_live_monitoring_rec_small_night;
-						d = R.drawable.widget_live_monitoring_rec_small_day;
-					} else {
-						dn = R.drawable.widget_monitoring_rec_small_night;
-						d = R.drawable.widget_monitoring_rec_small_day;
-					}
-					setIcons(d, dn);
-
-					app.runInUIThread(() -> {
-						int dn1;
-						int d1;
-						if (globalRecord) {
-							if (liveMonitoringEnabled) {
-								dn1 = R.drawable.widget_live_monitoring_rec_big_night;
-								d1 = R.drawable.widget_live_monitoring_rec_big_day;
-							} else {
-								dn1 = R.drawable.widget_monitoring_rec_big_night;
-								d1 = R.drawable.widget_monitoring_rec_big_day;
-							}
-						} else {
-							if (liveMonitoringEnabled) {
-								dn1 = R.drawable.widget_live_monitoring_rec_small_night;
-								d1 = R.drawable.widget_live_monitoring_rec_small_day;
-							} else {
-								dn1 = R.drawable.widget_monitoring_rec_small_night;
-								d1 = R.drawable.widget_monitoring_rec_small_day;
-							}
-						}
-						setIcons(d1, dn1);
-					}, 500);
-				}
-			}
-		};
-		monitoringControl.updateInfo(null);
-
-		// monitoringControl.addView(child);
-		monitoringControl.setOnClickListener(v -> controlDialog(mapActivity));
-		return monitoringControl;
-	}
-
 	@Override
 	public void mapActivityResume(MapActivity activity) {
 		this.mapActivity = activity;
 		if (showDialogWhenActivityResumed) {
 			showDialogWhenActivityResumed = false;
-			controlDialog(mapActivity);
+			showTripRecordingDialog(mapActivity);
 		}
 	}
 
 	@Override
 	public void mapActivityPause(MapActivity activity) {
-		this.monitoringControl = null;
+		this.distanceWidget = null;
+		this.timeWidget = null;
+		this.uphillWidget = null;
+		this.downhillWidget = null;
 		this.mapActivity = null;
 	}
 
@@ -327,7 +265,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
-	public void controlDialog(@NonNull Activity activity) {
+	public void showTripRecordingDialog(@NonNull Activity activity) {
 		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
@@ -360,7 +298,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			protected void onPreExecute() {
 				isSaving = true;
-				updateControl();
+				updateWidgets();
 			}
 
 			@Override
@@ -380,7 +318,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			protected void onPostExecute(SaveGpxResult result) {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
-				updateControl();
+				updateWidgets();
 
 				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
 				GPXFile gpxFile = null;
@@ -426,9 +364,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	public void updateControl() {
-		if (monitoringControl != null) {
-			monitoringControl.updateInfo(null);
+	public void updateWidgets() {
+		if (distanceWidget != null) {
+			distanceWidget.updateInfo(null);
+		}
+		if (timeWidget != null) {
+			timeWidget.updateInfo(null);
+		}
+		if (uphillWidget != null) {
+			uphillWidget.updateInfo(null);
+		}
+		if (downhillWidget != null) {
+			downhillWidget.updateInfo(null);
 		}
 	}
 
@@ -437,6 +384,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 		}
+	}
+
+	public boolean isSaving() {
+		return isSaving;
+	}
+
+	public boolean isLiveMonitoringEnabled() {
+		return liveMonitoringHelper.isLiveMonitoringEnabled();
 	}
 
 	public void startGPXMonitoring(final Activity map) {

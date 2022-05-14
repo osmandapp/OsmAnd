@@ -5,6 +5,7 @@ import android.content.Context;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,14 +32,19 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
 
 public enum WidgetGroup {
 
-	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets#next-turns"),
-	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets/#navigation-points"),
-	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day, "https://docs.osmand.net/docs/user/widgets/markers"),
-	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, "https://docs.osmand.net/docs/user/widgets/nav-widgets#bearing"),
-	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, "https://docs.osmand.net/docs/user/widgets/info-widgets#-audio-video-notes-widget-android");
+	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
+	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, R.string.docs_widget_navigation_points),
+	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day, R.string.docs_widget_markers),
+	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, R.string.docs_widget_bearing),
+	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
+	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes);
 
 	@StringRes
 	public final int titleId;
@@ -48,19 +54,19 @@ public enum WidgetGroup {
 	public final int dayIconId;
 	@DrawableRes
 	public final int nightIconId;
-	@NonNull
-	public String docsUrl;
+	@StringRes
+	public int docsUrlId;
 
 	WidgetGroup(@StringRes int titleId,
 	            @StringRes int descId,
 	            @DrawableRes int dayIconId,
 	            @DrawableRes int nightIconId,
-	            @NonNull String docsUrl) {
+	            @StringRes int docsUrlId) {
 		this.titleId = titleId;
 		this.descId = descId;
 		this.dayIconId = dayIconId;
 		this.nightIconId = nightIconId;
-		this.docsUrl = docsUrl;
+		this.docsUrlId = docsUrlId;
 	}
 
 	@NonNull
@@ -74,11 +80,22 @@ public enum WidgetGroup {
 			return Arrays.asList(SIDE_MARKER_1, SIDE_MARKER_2);
 		} else if (this == BEARING) {
 			return Arrays.asList(RELATIVE_BEARING, MAGNETIC_BEARING);
+		} else if (this == TRIP_RECORDING) {
+			return Arrays.asList(TRIP_RECORDING_DISTANCE, TRIP_RECORDING_TIME, TRIP_RECORDING_UPHILL, TRIP_RECORDING_DOWNHILL);
 		} else if (this == AUDIO_VIDEO_NOTES) {
 			return Arrays.asList(AV_NOTES_ON_REQUEST, AV_NOTES_RECORD_AUDIO, AV_NOTES_RECORD_VIDEO, AV_NOTES_TAKE_PHOTO);
 		} else {
 			throw new IllegalStateException("Unsupported widgets group");
 		}
+	}
+
+	public boolean containsWidget(@NonNull String widgetId) {
+		for (WidgetParams widget : getWidgets()) {
+			if (widgetId.equals(widget.id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@DrawableRes
@@ -93,6 +110,8 @@ public enum WidgetGroup {
 			String generalSettings = context.getString(R.string.general_settings_2);
 			String angularUnit = context.getString(R.string.angular_measeurement);
 			return context.getString(R.string.bearing_secondary_desc, configureProfile, generalSettings, angularUnit);
+		} else if (this == TRIP_RECORDING) {
+			return getPartOfPluginDesc(context, OsmandMonitoringPlugin.class);
 		} else if (this == AUDIO_VIDEO_NOTES) {
 			return getPartOfPluginDesc(context, AudioVideoNotesPlugin.class);
 		}
@@ -103,14 +122,14 @@ public enum WidgetGroup {
 	public int getSecondaryIconId() {
 		if (this == BEARING) {
 			return R.drawable.ic_action_help;
-		} else if (this == AUDIO_VIDEO_NOTES) {
+		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;
 	}
 
 	public int getOrder() {
-		return getWidgets().get(0).getDefaultOrder();
+		return getWidgets().get(0).ordinal();
 	}
 
 	@Nullable

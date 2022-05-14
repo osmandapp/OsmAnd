@@ -4,7 +4,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
@@ -18,7 +18,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_AUDI
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_VIDEO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_TAKE_PHOTO;
 
-public class AudioVideoNotesWidget extends RightTextInfoWidget {
+public class AudioVideoNotesWidget extends TextInfoWidget {
 
 	private final int actionId;
 
@@ -35,7 +35,7 @@ public class AudioVideoNotesWidget extends RightTextInfoWidget {
 				if (plugin.isRecording()) {
 					plugin.stopRecording(mapActivity, false);
 				} else {
-					plugin.defaultAction(mapActivity);
+					plugin.makeAction(mapActivity, actionId);
 				}
 			}
 		});

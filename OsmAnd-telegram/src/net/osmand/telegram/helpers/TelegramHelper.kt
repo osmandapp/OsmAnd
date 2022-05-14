@@ -33,6 +33,7 @@ class TelegramHelper private constructor() {
 
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
+		private const val NOT_FOUND_ERROR_CODE = 404
 		private const val IGNORED_ERROR_CODE = 406
 		private const val MESSAGE_CANNOT_BE_EDITED_ERROR_CODE = 5
 
@@ -90,7 +91,7 @@ class TelegramHelper private constructor() {
 	private var currentUser: TdApi.User? = null
 	private var osmandBot: TdApi.User? = null
 
-	private var haveFullChatList: Boolean = false
+	private var hasSuccessfulChatsLoad: Boolean = false
 	private var needRefreshActiveLiveLocationMessages: Boolean = true
 	private var requestingActiveLiveLocationMessages: Boolean = false
 
@@ -436,25 +437,25 @@ class TelegramHelper private constructor() {
 		synchronized(chatList) {
 			if (reload) {
 				chatList.clear()
-				haveFullChatList = false
+				hasSuccessfulChatsLoad = false
 			}
-			if (!haveFullChatList && CHATS_LIMIT > chatList.size) {
-				client?.send(TdApi.GetChats(TdApi.ChatListMain(), Int.MAX_VALUE)) { obj ->
+			if (chatList.size < CHATS_LIMIT) {
+				client?.send(TdApi.LoadChats(TdApi.ChatListMain(), Int.MAX_VALUE)) { obj ->
 					when (obj.constructor) {
 						TdApi.Error.CONSTRUCTOR -> {
-							val error = obj as TdApi.Error
-							if (error.code != IGNORED_ERROR_CODE) {
-								listener?.onTelegramError(error.code, error.message)
-							}
-						}
-						TdApi.Chats.CONSTRUCTOR -> {
-							val chatIds = (obj as TdApi.Chats).chatIds
-							if (chatIds.isEmpty()) {
-								synchronized(chatList) {
-									haveFullChatList = true
+							synchronized(chatList) {
+								val error = obj as TdApi.Error
+								val loadedAllChats = hasSuccessfulChatsLoad && error.code == NOT_FOUND_ERROR_CODE
+								if (!loadedAllChats && error.code != IGNORED_ERROR_CODE) {
+									listener?.onTelegramError(error.code, error.message)
 								}
 							}
-							// chats had already been received through updates, let's retry request
+						}
+						TdApi.Ok.CONSTRUCTOR -> {
+							synchronized(chatList) {
+								hasSuccessfulChatsLoad = true
+							}
+							// Some chats are received through updates, try to load more chats
 							requestChats(false, this@TelegramHelper::scanChatsHistory)
 							onComplete?.invoke()
 						}

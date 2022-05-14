@@ -27,7 +27,7 @@
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
     <string name="recording_default_name">Optager</string>
-    <string name="map_widget_av_notes">lyd-/videonoter</string>
+    <string name="map_widget_av_notes">Lyd-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">Udvidelse for offline højdekurver</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
@@ -2821,7 +2821,7 @@
     <string name="routeInfo_surface_name">Overflade</string>
     <string name="routeInfo_smoothness_name">Jævnhed</string>
     <string name="routeInfo_steepness_name">Stejlhed</string>
-    <string name="run_full_osmand_msg">Der bruges {0} kort leveret af OsmAnd. Start den fulde version\?</string>
+    <string name="run_full_osmand_msg">Du bruger {0} kort, som er leveret af OsmAnd. Ønsker du at starte den fulde OsmAnd-version\?</string>
     <string name="shared_string_swap">Byt rundt</string>
     <string name="show_more">Vis mere</string>
     <string name="tracks_on_map">Viste spor</string>
@@ -3321,8 +3321,8 @@
     <string name="save_track_logging_accuracy">Lognøjagtighed</string>
     <string name="tracks_view_descr">Dine optagede spor er i %1$s eller i OsmAnd-mappen.</string>
     <string name="multimedia_notes_view_descr">Noter er i %1$s.</string>
-    <string name="video_notes">Video noter</string>
-    <string name="photo_notes">Foto noter</string>
+    <string name="video_notes">Videonoter</string>
+    <string name="photo_notes">Fotonoter</string>
     <string name="route_recalculation">Genberegning af rute</string>
     <string name="accessibility_announce">Annoncere</string>
     <string name="login_and_pass">Brugernavn og adgangskode</string>
@@ -4574,7 +4574,7 @@
     <string name="configure_screen_widgets_descr">Vælg skærmside for at tilføje eller omarrangere moduler.</string>
     <string name="simulation_real_mode_title">Realistisk simulering</string>
     <string name="simulation_preview_mode_title">Hurtig forhåndsvisningstilstand</string>
-    <string name="speed_mode">Hastighedsindstilling</string>
+    <string name="speed_mode">Hastighedstilstand</string>
     <string name="routeInfo_horse_scale_name">Hestestiers sværhedsgrad</string>
     <string name="rendering_attr_horse_scale_impossible_name">Umulig</string>
     <string name="simulation_preview_mode_desc">Hastigheden i simuleringen er maksimal på lige strækninger og sænkes kun ved kryds.</string>
@@ -4582,7 +4582,7 @@
     <string name="simulation_real_mode_desc">På lige vejstrækninger vil hastigheden være omtrent den maksimalt tilladte hastighed.
 \nVed kryds sænkes hastigheden i simuleringen.
 \nDer vil blive anvendt ekstra sanktioner ved trafiksignaler, stopskilte osv.</string>
-    <string name="simulation_constant_mode_desc">Simuleringen vil blive udført med valgt, konstant hastighed.</string>
+    <string name="simulation_constant_mode_desc">Simuleringen vil blive udført med en konstant, valgt hastighed.</string>
     <string name="simulation_constant_mode_title">Fast hastighed</string>
     <string name="apply_to_existing">Anvend på eksisterende</string>
     <string name="apply_to_existing_points_descr">Anvend ændringer på de eksisterende punkter i gruppen eller kun på nye\?</string>
@@ -4661,4 +4661,26 @@
     <string name="calculate_altitude">Beregn højde</string>
     <string name="no_altitude_data">Ingen højdedata</string>
     <string name="av_def_action_choose">På forespørgsel</string>
+    <string name="routing_attr_avoid_4wd_only_name">Undgå 4WD-veje</string>
+    <string name="routing_attr_avoid_4wd_only_description">Undgå veje, der kun er egnet til køretøjer med firehjulstræk</string>
+    <string name="colour_of_circles">Farve på cirkler</string>
+    <string name="compass_on_circles">Kompas på cirkler</string>
+    <string name="distance_circles">Afstandscirkler</string>
+    <string name="circle_settings">Cirkelindstillinger</string>
+    <string name="map_widget_trip_recording_uphill">Op ad bakke</string>
+    <string name="map_widget_trip_recording_duration">Varighed</string>
+    <string name="routing_attr_allow_private_for_truck_description">Tillad adgang til private områder for lastbiler.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Tillad privat adgang (lastbil)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Tryk-isolinjer</string>
+    <string name="routing_attr_avoid_highway_name">Undgå motorveje</string>
+    <string name="rendering_attr_horseScale_name">Sværhedsgraden af hestestier</string>
+    <string name="map_widget_trip_recording_distance">Afstand</string>
+    <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
+    <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
+    <string name="map_widget_trip_recording_downhill">Ned ad bakke</string>
+    <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
+    <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
+    <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
+    <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
 </resources>

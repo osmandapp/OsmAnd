@@ -16,7 +16,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL
 import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
 
-public abstract class NavigationTimeWidget extends RightTextInfoWidget {
+public abstract class NavigationTimeWidget extends TextInfoWidget {
 
 	private final RoutingHelper routingHelper;
 	private final boolean intermediate;
@@ -67,10 +67,10 @@ public abstract class NavigationTimeWidget extends RightTextInfoWidget {
 			if (shouldUpdate) {
 				cachedTime = arrivalTime;
 				if (DateFormat.is24HourFormat(app)) {
-					setText(DateFormat.format("k:mm", leftSeconds).toString(), null);
+					setText(DateFormat.format("k:mm", arrivalTime).toString(), null);
 				} else {
-					setText(DateFormat.format("h:mm", leftSeconds).toString(),
-							DateFormat.format("aa", leftSeconds).toString());
+					setText(DateFormat.format("h:mm", arrivalTime).toString(),
+							DateFormat.format("aa", arrivalTime).toString());
 				}
 			}
 		}
