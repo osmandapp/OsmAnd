@@ -4654,4 +4654,20 @@
     <string name="compass_on_circles">Boussole sur les cercles</string>
     <string name="circle_settings">Paramètres des cercles</string>
     <string name="colour_of_circles">Couleur des cercles</string>
+    <string name="rendering_attr_weatherTempContours_name">Lignes isothermes</string>
+    <string name="rendering_attr_weatherPressureContours_name">Lignes isobares</string>
+    <string name="routing_attr_avoid_fords_description">Éviter les gués</string>
+    <string name="routing_attr_hazmat_category_description">Catégorie matières dangereuses / Prenez en compte les interdictions d\'accès</string>
+    <string name="routing_attr_avoid_highway_name">Éviter les autoroutes</string>
+    <string name="routing_attr_avoid_fords_name">Éviter les gués</string>
+    <string name="routing_attr_allow_private_for_truck_description">Zones privées autorisées aux camions.</string>
+    <string name="routing_attr_avoid_highway_description">Éviter les autoroutes</string>
+    <string name="rendering_attr_horseScale_name">Difficulté des sentiers équestres</string>
+    <string name="map_widget_trip_recording_distance">Distance</string>
+    <string name="routing_attr_allow_private_for_truck_name">Autoriser l\'accès privé (camion)</string>
+    <string name="map_widget_trip_recording_uphill">Montée</string>
+    <string name="map_widget_trip_recording_duration">Durée</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Aucune restriction</string>
+    <string name="map_widget_trip_recording_downhill">Descente</string>
+    <string name="routing_attr_hazmat_category_name">Catégorie matières dangereuses</string>
 </resources>
