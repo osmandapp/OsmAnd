@@ -34,11 +34,11 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 
 	private static final String KEY_SHOW_DISTANCE_CIRCLES = "show_distance_circles";
 	private static final String KEY_SHOW_COMPASS = "show_compass";
-	private static final String KEY_NIGHT_RADIUS_RULER = "night_radius_ruler";
+	private static final String KEY_NIGHT_MODE_RADIUS_RULER = "night_mode_radius_ruler";
 
 	private boolean showDistanceCircles;
 	private boolean showCompass;
-	private boolean nightRadiusRuler;
+	private boolean nightModeRadiusRuler;
 
 	@NonNull
 	@Override
@@ -52,11 +52,11 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 
 		boolean defaultShowDistanceCircles = settings.SHOW_DISTANCE_CIRCLES_ON_RADIUS_RULER.getModeValue(appMode);
 		boolean defaultShowCompass = settings.SHOW_COMPASS_ON_RADIUS_RULER.getModeValue(appMode);
-		boolean defaultNightRadiusRuler = settings.RADIUS_RULER_NIGHT_MODE.getModeValue(appMode);
+		boolean defaultNightModeRadiusRuler = settings.RADIUS_RULER_NIGHT_MODE.getModeValue(appMode);
 
 		showDistanceCircles = bundle.getBoolean(KEY_SHOW_DISTANCE_CIRCLES, defaultShowDistanceCircles);
 		showCompass = bundle.getBoolean(KEY_SHOW_COMPASS, defaultShowCompass);
-		nightRadiusRuler = bundle.getBoolean(KEY_NIGHT_RADIUS_RULER, defaultNightRadiusRuler);
+		nightModeRadiusRuler = bundle.getBoolean(KEY_NIGHT_MODE_RADIUS_RULER, defaultNightModeRadiusRuler);
 	}
 
 	@Override
@@ -128,31 +128,31 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 		LinearLayout nightModeToggleView = view.findViewById(R.id.custom_radio_buttons);
 		TextToggleButton nightModeToggle = new TextToggleButton(app, nightModeToggleView, nightMode);
 		nightModeToggle.setItems(listRadioItems());
-		nightModeToggle.setSelectedItem(nightRadiusRuler ? 1 : 0);
+		nightModeToggle.setSelectedItem(nightModeRadiusRuler ? 0 : 1);
 	}
 
 	@NonNull
 	private List<TextRadioItem> listRadioItems() {
-		TextRadioItem lightColorItem = new TextRadioItem(getString(R.string.light_theme));
-		lightColorItem.setOnClickListener((radioItem, view1) -> {
-			nightRadiusRuler = false;
+		TextRadioItem nightModeColorItem = new TextRadioItem(getString(R.string.light_theme));
+		nightModeColorItem.setOnClickListener((radioItem, view1) -> {
+			nightModeRadiusRuler = true;
 			return true;
 		});
 
-		TextRadioItem darkColorItem = new TextRadioItem(getString(R.string.dark_theme));
-		darkColorItem.setOnClickListener((radioItem, view1) -> {
-			nightRadiusRuler = true;
+		TextRadioItem dayModeColorItem = new TextRadioItem(getString(R.string.dark_theme));
+		dayModeColorItem.setOnClickListener((radioItem, view1) -> {
+			nightModeRadiusRuler = false;
 			return true;
 		});
 
-		return Arrays.asList(lightColorItem, darkColorItem);
+		return Arrays.asList(nightModeColorItem, dayModeColorItem);
 	}
 
 	@Override
 	protected void applySettings() {
 		settings.SHOW_DISTANCE_CIRCLES_ON_RADIUS_RULER.setModeValue(appMode, showDistanceCircles);
 		settings.SHOW_COMPASS_ON_RADIUS_RULER.setModeValue(appMode, showCompass);
-		settings.RADIUS_RULER_NIGHT_MODE.setModeValue(appMode, nightRadiusRuler);
+		settings.RADIUS_RULER_NIGHT_MODE.setModeValue(appMode, nightModeRadiusRuler);
 
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
@@ -169,6 +169,6 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(KEY_SHOW_DISTANCE_CIRCLES, showDistanceCircles);
 		outState.putBoolean(KEY_SHOW_COMPASS, showCompass);
-		outState.putBoolean(KEY_NIGHT_RADIUS_RULER, nightRadiusRuler);
+		outState.putBoolean(KEY_NIGHT_MODE_RADIUS_RULER, nightModeRadiusRuler);
 	}
 }
