@@ -123,7 +123,7 @@ public class MapLayers {
 		// 5.95 all labels
 		mapView.addLayer(mapTextLayer, 5.95f);
 		// 8. context menu layer 
-		contextMenuLayer = new ContextMenuLayer(app);
+		contextMenuLayer = new ContextMenuLayer(app, -210000);
 		mapView.addLayer(contextMenuLayer, 8);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		mapTileLayer = new MapTileLayer(app, true);
@@ -164,7 +164,7 @@ public class MapLayers {
 		mapView.addLayer(transportStopsLayer, 5);
 		// 5.95 all text labels
 		// 6. point location layer 
-		locationLayer = new PointLocationLayer(app);
+		locationLayer = new PointLocationLayer(app, -206000);
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(app, -207000);

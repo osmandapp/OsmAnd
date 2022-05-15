@@ -846,10 +846,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void setHighlightedPointMarkerLocation(LatLon latLon) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && highlightedPointMarker != null) {
-			//mapRenderer.suspendSymbolsUpdate();
 			highlightedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
 					MapUtils.get31TileNumberY(latLon.getLatitude())));
-			//while (!mapRenderer.resumeSymbolsUpdate());
 		}
 	}
 

@@ -914,10 +914,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				}
 			} else if (highlightedPositionChanged) {
 				if (highlightedPointMarker != null) {
-					//mapRenderer.suspendSymbolsUpdate();
 					highlightedPointMarker.setPosition(highlightedPosition);
 					highlightedPointMarker.setIsHidden(false);
-					//while (!mapRenderer.resumeSymbolsUpdate());
 				}
 			}
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
