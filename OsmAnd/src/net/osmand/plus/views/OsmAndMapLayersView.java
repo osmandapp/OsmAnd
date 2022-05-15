@@ -84,7 +84,7 @@ public class OsmAndMapLayersView extends View {
 		mapView.drawOverMap(canvas, mapView.getCurrentRotatedTileBox().copy(), drawSettings);
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		if (mapRenderer != null) {
-			mapRenderer.requestRender();
+			//mapRenderer.requestRender();
 		}
 	}
 
