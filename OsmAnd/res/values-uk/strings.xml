@@ -4006,7 +4006,7 @@
     <string name="track_recording_title">Запис треку зупинено</string>
     <string name="track_recording_description">Припинити записування\?
 \nУсі незбережені дані буде втрачено.</string>
-    <string name="on_pause">Під час паузи</string>
+    <string name="on_pause">Призупинено</string>
     <string name="app_restart_required">Щоб увімкнути деякі налаштування, необхідно перезапустити застосунок.</string>
     <string name="routing_attr_height_obstacles_description">Маршрут може оминати круті підйоми.</string>
     <string name="quick_action_coordinates_widget_descr">Перемикач для показу або приховування віджета Координати на мапі.</string>
