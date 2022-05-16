@@ -1,22 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -73,6 +56,23 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
 
 
 public class RoutingOptionsHelper {
@@ -451,7 +451,8 @@ public class RoutingOptionsHelper {
 		}
 
 		LocalRoutingParameter rp;
-		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters();
+		String derivedProfile = am.getDerivedProfile();
+		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters(derivedProfile);
 		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameterId);
 
 		if (routingParameter != null) {
@@ -459,7 +460,7 @@ public class RoutingOptionsHelper {
 			rp.routingParameter = routingParameter;
 		} else {
 			LocalRoutingParameterGroup rpg = null;
-			for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
+			for (GeneralRouter.RoutingParameter r : parameters.values()) {
 				if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN
 						&& !Algorithms.isEmpty(r.getGroup()) && r.getGroup().equals(parameterId)) {
 					if (rpg == null) {
@@ -531,7 +532,9 @@ public class RoutingOptionsHelper {
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
-		for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
+		String derivedProfile = am.getDerivedProfile();
+		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters(derivedProfile);
+		for (GeneralRouter.RoutingParameter r : parameters.values()) {
 			if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 				if ("relief_smoothness_factor".equals(r.getGroup())) {
 					continue;
@@ -596,6 +599,7 @@ public class RoutingOptionsHelper {
 				rp.activeIconId = R.drawable.ic_action_avoid_motorways;
 				break;
 			case GeneralRouter.ALLOW_PRIVATE:
+			case GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK:
 				rp.activeIconId = R.drawable.ic_action_allow_private_access;
 				rp.disabledIconId = R.drawable.ic_action_forbid_private_access;
 				break;
@@ -619,7 +623,9 @@ public class RoutingOptionsHelper {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
+			String derivedProfile = applicationMode.getDerivedProfile();
+			Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters(derivedProfile);
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String param = e.getKey();
 				GeneralRouter.RoutingParameter routingParameter = e.getValue();
 				if (param.startsWith("avoid_")) {
@@ -635,7 +641,8 @@ public class RoutingOptionsHelper {
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {
-			parameter = router.getParameters().get(parameterId);
+			String derivedProfile = applicationMode.getDerivedProfile();
+			parameter = router.getParameters(derivedProfile).get(parameterId);
 		}
 
 		return parameter;

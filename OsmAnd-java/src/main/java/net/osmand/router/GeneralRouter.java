@@ -35,6 +35,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
+	public static final String ALLOW_PRIVATE_FOR_TRUCK = "allow_private_for_truck";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 	public static final String DEFAULT_SPEED = "default_speed";
 	public static final String MIN_SPEED = "min_speed";
@@ -225,6 +226,17 @@ public class GeneralRouter implements VehicleRouter {
 		return parameters;
 	}
 
+	public Map<String, RoutingParameter> getParameters(String derivedProfile) {
+		Map<String, RoutingParameter> parameters = new HashMap<>();
+		for (Entry<String, RoutingParameter> entry : getParameters().entrySet()) {
+			String[] profiles = entry.getValue().getProfiles();
+			if (profiles == null || Algorithms.equalsToAny(derivedProfile, (Object[]) profiles)) {
+				parameters.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return parameters;
+	}
+
 	public void addAttribute(String k, String v) {
 		attributes.put(k, v);
 		if (k.equals("restrictionsAware")) {
@@ -249,27 +261,29 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 
-	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
+	public void registerBooleanParameter(String id, String group, String name, String description, String[] profiles, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
+		rp.id = id;
 		rp.group = group;
 		rp.name = name;
 		rp.description = description;
-		rp.id = id;
+		rp.profiles = profiles;
 		rp.type = RoutingParameterType.BOOLEAN;
 		rp.defaultBoolean = defaultValue;
 		parameters.put(rp.id, rp);
 		
 	}
 
-	public void registerNumericParameter(String id, String name, String description, Double[] vls, String[] vlsDescriptions) {
+	public void registerNumericParameter(String id, String name, String description, String[] profiles, Double[] vls, String[] vlsDescriptions) {
 		RoutingParameter rp = new RoutingParameter();
 		rp.name = name;
 		rp.description = description;
 		rp.id = id;
+		rp.profiles = profiles;
 		rp.possibleValues = vls;
 		rp.possibleValueDescriptions = vlsDescriptions;
 		rp.type = RoutingParameterType.NUMERIC;
-		parameters.put(rp.id, rp);		
+		parameters.put(rp.id, rp);
 	}
 
 	@Override
@@ -710,6 +724,7 @@ public class GeneralRouter implements VehicleRouter {
 		private RoutingParameterType type;
 		private Object[] possibleValues;
 		private String[] possibleValueDescriptions;
+		private String[] profiles;
 		private boolean defaultBoolean;
 		
 		public String getId() {
@@ -736,6 +751,9 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
+		}
+		public String[] getProfiles() {
+			return profiles;
 		}
 	}
 	

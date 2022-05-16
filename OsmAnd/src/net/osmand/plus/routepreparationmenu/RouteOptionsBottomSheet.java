@@ -1,15 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -27,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -85,6 +74,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment implements CalculateAltitudeListener {
 
@@ -724,7 +723,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
-			Map<String, RoutingParameter> parameters = router.getParameters();
+			String derivedProfile = applicationMode.getDerivedProfile();
+			Map<String, RoutingParameter> parameters = router.getParameters(derivedProfile);
 			for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
 				RoutingParameter routingParameter = entry.getValue();
 				if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
@@ -818,6 +818,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				GpxLocalRoutingParameter.KEY,
 				DividerItem.KEY,
 				GeneralRouter.ALLOW_PRIVATE,
+				GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK,
 				GeneralRouter.USE_SHORTEST_WAY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,

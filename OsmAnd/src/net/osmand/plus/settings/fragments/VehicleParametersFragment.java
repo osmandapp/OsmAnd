@@ -63,8 +63,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
+				String derivedProfile = mode.getDerivedProfile();
 				GeneralRouterProfile routerProfile = router.getProfile();
-				Map<String, RoutingParameter> parameters = router.getParameters();
+				Map<String, RoutingParameter> parameters = router.getParameters(derivedProfile);
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);

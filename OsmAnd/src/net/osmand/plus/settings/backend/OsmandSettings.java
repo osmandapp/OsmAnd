@@ -1092,6 +1092,13 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> PARENT_APP_MODE = new StringPreference(this, "parent_app_mode", null).makeProfile().cache();
 
+	public final CommonPreference<String> DERIVED_PROFILE = new StringPreference(this, "derived_profile", "default").makeProfile().cache();
+
+	{
+		DERIVED_PROFILE.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "motorcycle");
+		DERIVED_PROFILE.setModeDefaultValue(ApplicationMode.TRUCK, "truck");
+	}
+
 	public final CommonPreference<String> ROUTING_PROFILE = new StringPreference(this, "routing_profile", "").makeProfile().cache();
 
 	{

@@ -28,6 +28,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 
 import org.apache.commons.logging.Log;
@@ -78,7 +79,9 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		super.onCreate(savedInstanceState);
 
-		Map<String, RoutingParameter> routingParameterMap = app.getRouter(appMode).getParameters();
+		GeneralRouter router = app.getRouter(appMode);
+		String derivedProfile = appMode.getDerivedProfile();
+		Map<String, RoutingParameter> routingParameterMap = router.getParameters(derivedProfile);
 		RoutingParameter parameter = routingParameterMap.get(USE_HEIGHT_OBSTACLES);
 		if (parameter != null) {
 			useHeightPref = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());

@@ -1,5 +1,11 @@
 package net.osmand.plus.settings.backend;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -24,12 +30,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
@@ -438,6 +438,14 @@ public class ApplicationMode {
 		if (!Algorithms.isEmpty(userProfileName)) {
 			app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
 		}
+	}
+
+	public String getDerivedProfile() {
+		return app.getSettings().DERIVED_PROFILE.getModeValue(this);
+	}
+
+	public String getDefaultDerivedProfile() {
+		return app.getSettings().DERIVED_PROFILE.getProfileDefaultValue(this);
 	}
 
 	public String getRoutingProfile() {
