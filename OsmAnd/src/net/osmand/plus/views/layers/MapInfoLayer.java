@@ -29,6 +29,7 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
+import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentTimeWidget;
@@ -82,6 +83,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRUE_BEARING;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -285,11 +287,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		MapWidget marker = markersWidgetsHelper.getMapMarkerSideWidget(true);
 		registerWidget(SIDE_MARKER_1, marker);
 
-		MapWidget relativeBearing = new BearingWidget(mapActivity, true);
+		MapWidget relativeBearing = new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING);
 		registerWidget(RELATIVE_BEARING, relativeBearing);
 
-		MapWidget magneticBearing = new BearingWidget(mapActivity, false);
+		MapWidget magneticBearing = new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING);
 		registerWidget(MAGNETIC_BEARING, magneticBearing);
+
+		MapWidget trueBearing = new BearingWidget(mapActivity, BearingType.TRUE_BEARING);
+		registerWidget(TRUE_BEARING, trueBearing);
 
 		MapWidget marker2nd = markersWidgetsHelper.getMapMarkerSideWidget(false);
 		registerWidget(SIDE_MARKER_2, marker2nd);

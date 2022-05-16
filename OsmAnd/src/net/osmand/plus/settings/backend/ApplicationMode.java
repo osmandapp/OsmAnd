@@ -51,6 +51,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRUE_BEARING;
 
 public class ApplicationMode {
 
@@ -241,6 +242,7 @@ public class ApplicationMode {
 		regWidgetAvailability(BATTERY.id, all);
 		regWidgetAvailability(RELATIVE_BEARING.id, all);
 		regWidgetAvailability(MAGNETIC_BEARING.id, all);
+		regWidgetAvailability(TRUE_BEARING.id, all);
 		regWidgetAvailability(RADIUS_RULER.id, all);
 		regWidgetAvailability(CURRENT_TIME.id, all);
 	}
