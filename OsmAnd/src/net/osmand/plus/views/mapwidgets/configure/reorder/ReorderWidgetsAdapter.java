@@ -285,7 +285,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			if (listItem.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
 				WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-				if (widgetParams != null && widgetGroup.equals(widgetParams.getGroup())) {
+				if (widgetParams != null && widgetGroup == widgetParams.group) {
 					addedGroupWidgets.add(widgetParams.id);
 				}
 			}

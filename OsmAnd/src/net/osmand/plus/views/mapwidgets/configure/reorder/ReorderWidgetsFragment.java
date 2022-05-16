@@ -343,7 +343,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
 			boolean defaultWidget = widgetParams != null;
 			if (defaultWidget) {
-				WidgetGroup group = widgetParams.getGroup();
+				WidgetGroup group = widgetParams.group;
 				if (group != null && !availableGroups.contains(group)) {
 					availableGroups.add(group);
 					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));

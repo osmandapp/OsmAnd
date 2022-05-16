@@ -41,7 +41,7 @@ public class ReorderWidgetsAdapterHelper {
 	public void deleteWidget(@NonNull AddedWidgetUiInfo addedWidgetUiInfo, int position) {
 		if (position != RecyclerView.NO_POSITION) {
 			WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-			WidgetGroup widgetGroup = widgetParams != null ? widgetParams.getGroup() : null;
+			WidgetGroup widgetGroup = widgetParams != null ? widgetParams.group : null;
 			if (widgetGroup != null) {
 				boolean addGroupItem = areAllGroupWidgetsAdded(widgetGroup);
 				if (addGroupItem) {
@@ -347,8 +347,8 @@ public class ReorderWidgetsAdapterHelper {
 		insertToEndOfAddedWidgets(new ListItem(ItemType.ADDED_WIDGET, addedWidgetUiInfo));
 
 		WidgetParams widgetParams = WidgetParams.getById(widgetId);
-		if (widgetParams != null && widgetParams.getGroup() != null) {
-			WidgetGroup group = widgetParams.getGroup();
+		if (widgetParams != null && widgetParams.group != null) {
+			WidgetGroup group = widgetParams.group;
 			if (areAllGroupWidgetsAdded(group)) {
 				int indexToRemove = getIndexOfAvailableGroup(group);
 				if (indexToRemove != -1) {
@@ -381,7 +381,7 @@ public class ReorderWidgetsAdapterHelper {
 			if (listItem.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
 				WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-				if (widgetParams != null && group.equals(widgetParams.getGroup())) {
+				if (widgetParams != null && group == widgetParams.group) {
 					addedGroupWidgetsCount++;
 				}
 			}
