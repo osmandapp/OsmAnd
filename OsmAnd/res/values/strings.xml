@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="map_widget_true_bearing">True bearing</string>
     <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for trucks.</string>
     <string name="routing_attr_allow_private_for_truck_name">Allow private access (truck)</string>
     <string name="rendering_attr_weatherTempContours_name">Temperature isolines</string>

@@ -36,6 +36,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTA
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRUE_BEARING;
 
 public enum WidgetGroup {
 
@@ -79,7 +80,7 @@ public enum WidgetGroup {
 		} else if (this == MAP_MARKERS) {
 			return Arrays.asList(SIDE_MARKER_1, SIDE_MARKER_2);
 		} else if (this == BEARING) {
-			return Arrays.asList(RELATIVE_BEARING, MAGNETIC_BEARING);
+			return Arrays.asList(RELATIVE_BEARING, MAGNETIC_BEARING, TRUE_BEARING);
 		} else if (this == TRIP_RECORDING) {
 			return Arrays.asList(TRIP_RECORDING_DISTANCE, TRIP_RECORDING_TIME, TRIP_RECORDING_UPHILL, TRIP_RECORDING_DOWNHILL);
 		} else if (this == AUDIO_VIDEO_NOTES) {
