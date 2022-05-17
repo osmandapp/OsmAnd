@@ -4662,4 +4662,10 @@
     <string name="route_maneuvers_desc">וידג׳טים ניווטיים מופעלים במהלך הניווט כדי להציג מידע כגון מרחק, זמן הגעה או עזיבה, הפניות הבאות, תכווין, שם הרחוב הנוכחי, פרטי נתיבים, מהירות מרבית, התראות הגעה, נקודות עניין, נקודות דרך.</string>
     <string name="colour_of_circles">צבע של עיגולים</string>
     <string name="circle_settings">הגדרות עיגול</string>
+    <string name="routing_attr_allow_private_for_truck_description">לאפשר גישה לאזורים פרטיים למשאיות.</string>
+    <string name="rendering_attr_weatherTempContours_name">קווי מתאר טמפרטורה</string>
+    <string name="rendering_attr_weatherPressureContours_name">קווי מתאר לחץ</string>
+    <string name="rendering_attr_horseScale_name">קושי מסלולי הסוסים</string>
+    <string name="map_widget_true_bearing">תכווין אמיתי</string>
+    <string name="routing_attr_allow_private_for_truck_name">לאפשר גישה לשטח פרטי (משאית)</string>
 </resources>
