@@ -99,6 +99,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
 			cardsContainer.addView(new NoPurchasesCard(activity).build(activity));
 		} else {
+			View.inflate(activity, R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new ExploreOsmAndPlansCard(activity).build(activity));
 		}
 		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));

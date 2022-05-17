@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="explore_plans">Explore Plans</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
     <string name="map_widget_true_bearing">True bearing</string>
