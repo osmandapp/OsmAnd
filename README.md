@@ -12,6 +12,12 @@ You are welcome to discuss any question regarding the project at the Google grou
 <img src="https://github.com/osmandapp/osmandapp.github.io/blob/master/website/images/help/badge_store_appstore.png" alt="Get it on AppStore" height="60"/></a>
 
 
+<p>
+<a href="https://hosted.weblate.org/engage/osmand/">
+<img src="https://hosted.weblate.org/widgets/osmand/-/svg-badge.svg" alt="Translation status" />
+</a>
+</p>
+
 Functionality
 -------------
 **OsmAnd (OSM Automated Navigation Directions)** is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) database.
