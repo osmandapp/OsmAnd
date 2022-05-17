@@ -4693,4 +4693,5 @@
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
     <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
+    <string name="map_widget_true_bearing">Rumbo verdadero</string>
 </resources>
