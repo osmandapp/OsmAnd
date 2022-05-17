@@ -29,6 +29,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
@@ -210,8 +211,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			GeneralRouter router = app.getRouter(am);
 			clearParameters();
 			if (router != null) {
-				String derivedProfile = am.getDerivedProfile();
-				Map<String, RoutingParameter> parameters = router.getParameters(derivedProfile);
+				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, router);
 				if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 					screen.addPreference(fastRoute);
 				}

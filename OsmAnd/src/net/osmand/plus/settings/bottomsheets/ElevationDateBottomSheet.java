@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
@@ -80,8 +81,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 
 		GeneralRouter router = app.getRouter(appMode);
-		String derivedProfile = appMode.getDerivedProfile();
-		Map<String, RoutingParameter> routingParameterMap = router.getParameters(derivedProfile);
+		Map<String, RoutingParameter> routingParameterMap = RoutingHelperUtils.getParametersForDerivedProfile(appMode, router);
 		RoutingParameter parameter = routingParameterMap.get(USE_HEIGHT_OBSTACLES);
 		if (parameter != null) {
 			useHeightPref = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());

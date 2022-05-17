@@ -23,6 +23,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
@@ -489,7 +490,8 @@ public class TransportRoutingHelper {
 			String derivedProfile = params.mode.getDerivedProfile();
 			GeneralRouter router = config.getRouter(params.mode.getRoutingProfile());
 			OsmandSettings settings = params.ctx.getSettings();
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters(derivedProfile).entrySet()) {
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(params.mode, router);
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String key = e.getKey();
 				GeneralRouter.RoutingParameter pr = e.getValue();
 				String vl;

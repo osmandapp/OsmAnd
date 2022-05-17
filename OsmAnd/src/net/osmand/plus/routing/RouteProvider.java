@@ -763,9 +763,8 @@ public class RouteProvider {
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 	                                                     GeneralRouter generalRouter) throws IOException, FileNotFoundException {
-		String derivedProfile = params.mode.getDerivedProfile();
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
-		for (Map.Entry<String, RoutingParameter> e : generalRouter.getParameters(derivedProfile).entrySet()) {
+		for (Map.Entry<String, RoutingParameter> e : RoutingHelperUtils.getParametersForDerivedProfile(params.mode, generalRouter).entrySet()) {
 			String key = e.getKey();
 			RoutingParameter pr = e.getValue();
 			String vl;
@@ -795,6 +794,7 @@ public class RouteProvider {
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
+		String derivedProfile = params.mode.getDerivedProfile();
 		if (!Algorithms.isEmpty(derivedProfile)) {
 			paramsR.put("profile_"+ derivedProfile, String.valueOf(true));
 		}

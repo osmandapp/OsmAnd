@@ -48,6 +48,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditional
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -723,8 +724,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
-			String derivedProfile = applicationMode.getDerivedProfile();
-			Map<String, RoutingParameter> parameters = router.getParameters(derivedProfile);
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);
 			for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
 				RoutingParameter routingParameter = entry.getValue();
 				if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {

@@ -226,17 +226,6 @@ public class GeneralRouter implements VehicleRouter {
 		return parameters;
 	}
 
-	public Map<String, RoutingParameter> getParameters(String derivedProfile) {
-		Map<String, RoutingParameter> parameters = new HashMap<>();
-		for (Entry<String, RoutingParameter> entry : getParameters().entrySet()) {
-			String[] profiles = entry.getValue().getProfiles();
-			if (profiles == null || Algorithms.equalsToAny(derivedProfile, (Object[]) profiles)) {
-				parameters.put(entry.getKey(), entry.getValue());
-			}
-		}
-		return parameters;
-	}
-
 	public void addAttribute(String k, String v) {
 		attributes.put(k, v);
 		if (k.equals("restrictionsAware")) {
@@ -392,8 +381,6 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return 0;
 	}
-	
-	TIntArrayList filteredRules = new TIntArrayList();
 	
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {

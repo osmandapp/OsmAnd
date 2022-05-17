@@ -32,6 +32,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -451,8 +452,7 @@ public class RoutingOptionsHelper {
 		}
 
 		LocalRoutingParameter rp;
-		String derivedProfile = am.getDerivedProfile();
-		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters(derivedProfile);
+		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
 		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameterId);
 
 		if (routingParameter != null) {
@@ -532,8 +532,7 @@ public class RoutingOptionsHelper {
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
-		String derivedProfile = am.getDerivedProfile();
-		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters(derivedProfile);
+		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
 		for (GeneralRouter.RoutingParameter r : parameters.values()) {
 			if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 				if ("relief_smoothness_factor".equals(r.getGroup())) {
@@ -623,8 +622,7 @@ public class RoutingOptionsHelper {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
-			String derivedProfile = applicationMode.getDerivedProfile();
-			Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters(derivedProfile);
+			Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);
 			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String param = e.getKey();
 				GeneralRouter.RoutingParameter routingParameter = e.getValue();
@@ -641,8 +639,7 @@ public class RoutingOptionsHelper {
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {
-			String derivedProfile = applicationMode.getDerivedProfile();
-			parameter = router.getParameters(derivedProfile).get(parameterId);
+			parameter = RoutingHelperUtils.getParameterForDerivedProfile(parameterId, applicationMode, router);
 		}
 
 		return parameter;
