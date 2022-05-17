@@ -248,19 +248,16 @@ public class OsmandApplication extends MultiDexApplication {
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
-//		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
-//			targetPointsHelper.clearPointToNavigate(false);
-//		}
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
-		osmandMap.getMapLayers().updateLayers(null);
-
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		OsmandPlugin.createLayers(this, null);
-		osmandMap.getMapLayers().updateLayers(null);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
+		osmandMap.getMapLayers().updateLayers(null);
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
 		BackupHelper.DEBUG = true;//OsmandPlugin.isDevelopment();
