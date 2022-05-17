@@ -4669,4 +4669,5 @@
     <string name="routing_attr_avoid_highway_description">Autópályák nélkül</string>
     <string name="routing_attr_hazmat_category_description">Veszélyes anyagok kategória / Vegye figyelembe a kategória hozzáférési engedélyeit</string>
     <string name="routing_attr_hazmat_category_name">Vesz.anyag kategória</string>
+    <string name="map_widget_true_bearing">Valódi irány</string>
 </resources>
