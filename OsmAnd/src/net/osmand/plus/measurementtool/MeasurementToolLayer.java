@@ -200,9 +200,20 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			boolean pointSelected = showPointsMinZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {
-				pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				if (singleTapListener != null) {
-					singleTapListener.onAddPoint();
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					PointI pos31 = new PointI(0, 0);
+					if (mapRenderer.getLocationFromScreenPoint(new PointI((int) point.x, (int) point.y), pos31)) {
+						pressedPointLatLon = new LatLon(MapUtils.get31LatitudeY(pos31.getY()), MapUtils.get31LongitudeX(pos31.getX()));
+						if (singleTapListener != null) {
+							singleTapListener.onAddPoint();
+						}
+					}
+				} else {
+					pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+					if (singleTapListener != null) {
+						singleTapListener.onAddPoint();
+					}
 				}
 			}
 		}
