@@ -19,6 +19,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -64,7 +65,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
 				GeneralRouterProfile routerProfile = router.getProfile();
-				Map<String, RoutingParameter> parameters = router.getParameters();
+				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);

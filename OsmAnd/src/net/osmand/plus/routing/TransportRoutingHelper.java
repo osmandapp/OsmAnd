@@ -23,6 +23,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
@@ -31,6 +32,7 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.router.TransportRoutingContext;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -485,8 +487,11 @@ public class TransportRoutingHelper {
 			RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
+			String derivedProfile = params.mode.getDerivedProfile();
+			GeneralRouter router = config.getRouter(params.mode.getRoutingProfile());
 			OsmandSettings settings = params.ctx.getSettings();
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getRoutingProfile()).getParameters().entrySet()) {
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(params.mode, router);
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String key = e.getKey();
 				GeneralRouter.RoutingParameter pr = e.getValue();
 				String vl;
@@ -500,6 +505,9 @@ public class TransportRoutingHelper {
 				if (vl != null && vl.length() > 0) {
 					params.params.put(key, vl);
 				}
+			}
+			if (!Algorithms.isEmpty(derivedProfile)) {
+				params.params.put("profile_"+ derivedProfile, String.valueOf(true));
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
