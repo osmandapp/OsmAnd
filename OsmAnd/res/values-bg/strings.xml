@@ -94,7 +94,7 @@
     <string name="recording_photo_description">Снимка %1$s %2$s</string>
     <string name="av_def_action_picture">Направете снимка</string>
     <string name="recording_context_menu_precord">Направете снимка</string>
-    <string name="dropbox_plugin_description">Dropbox приставката ви позволява да синхронизирате следите и аудио/видео бележките с вашия dropbox акаунт.</string>
+    <string name="dropbox_plugin_description">Синхронизирайте трасета и аудио или видео бележки чрез Dropbox.</string>
     <string name="dropbox_plugin_name">Приставка Dropbox</string>
     <string name="intermediate_points_change_order">Смяна на реда</string>
     <string name="srtm_paid_version_msg">Можете да закупите добавката Contour lines чрез Market и да подпомогнете нейното бъдещо развитие.</string>
@@ -447,7 +447,7 @@
     <string name="shared_string_accessibility">Достъпност</string>
     <string name="rendering_out_of_memory">Няма достатъчно памет за избрания район</string>
     <string name="use_fluorescent_overlays">Светещ допълнителен слой</string>
-    <string name="use_fluorescent_overlays_descr">Използване на ярки цветове за осветяване на пътища и маршрути</string>
+    <string name="use_fluorescent_overlays_descr">Използват се електрикови цветове за трасета и маршрути.</string>
     <string name="offline_edition">Офлайн редактиране</string>
     <string name="offline_edition_descr">Винаги ползвай офлайн редактиране</string>
     <string name="update_poi_does_not_change_indexes">Промените в забележителностите (POI) вътре в приложението не влияят върху изтеглените карти. Тези промени се записват в отделен файл.</string>
@@ -728,7 +728,7 @@
     <string name="transport_search_again">Нулиране на търсенето за общ. транспорт</string>
     <string name="voice">Записан глас</string>
     <string name="no_vector_map_loaded">Не са заредени векторни карти</string>
-    <string name="gpx_files_not_found">Не са открити файлове GPX в папката за следи</string>
+    <string name="gpx_files_not_found">В папката за трасета не са открити файлове на GPX</string>
     <string name="error_reading_gpx">Грешка при четене на GPX данни</string>
     <string name="vector_data">Офлайн векторни карти</string>
     <string name="transport_context_menu">Търсене за общ. транспорт на тази спирка</string>
@@ -773,7 +773,7 @@
     <string name="background_service_int">Интервал за събуждане на GPS</string>
     <string name="background_service_provider_descr">Метод за опредрляне на местоположението от фоновата услуга:</string>
     <string name="background_service_provider">Доставчик на позиция</string>
-    <string name="background_router_service_descr">Стартира OsmAnd във фонов режим за запис на пътуването при изключен екран</string>
+    <string name="background_router_service_descr">Местоположението се следи и при изключен екран.</string>
     <string name="background_router_service">Работа на OsmAnd във фонов режим</string>
     <string name="off_router_service_no_gps_available">Навигацията във фонов режим изисква да бъде включено определянето на мястото.</string>
     <string name="hide_poi_filter">Скрий филтъра</string>
@@ -894,7 +894,7 @@
     <string name="loading_data">Зареждане на данни…</string>
     <string name="reading_indexes">Четене на локални данни…</string>
     <string name="previous_run_crashed">Последният път OsmAnd се срина. Записан е лог-файл в {0}. Моля, докладвайте за срива и приложете лог-файла.</string>
-    <string name="saving_gpx_tracks">Запис на GPX следите в SD…</string>
+    <string name="saving_gpx_tracks">Файлът на GPX се запазва…</string>
     <string name="finished_task">Приключено</string>
     <string name="use_online_routing_descr">Използване на Интернет за изчисляване на дистанцията</string>
     <string name="use_online_routing">Използване на онлайн навигация</string>
@@ -2692,4 +2692,11 @@
     <string name="shared_string_edited">Променено</string>
     <string name="add_favourites_group_to_markers_descr">Определете категория от избраните, която да бъде добавяна към маркерите.</string>
     <string name="favourites_group">Категория от избраните</string>
+    <string name="routing_attr_allow_skating_only_description">Маршрути, подготвени само за свободен стил или пързаляне без класическо трасе.</string>
+    <string name="gpx_no_tracks_title_folder">Също можете да добавите фсйлове с трасета към папката</string>
+    <string name="osmand_extended_description_part7">Принос към OSM
+\n - Докладване на грешки в информацията
+\n - Качване на трасета от приложението директно в OSM
+\n - Добавяне на точки на интерес и директното им качване в OSM (или по-късно, ако сте без мрежа)
+\n</string>
 </resources>
