@@ -1463,7 +1463,7 @@
     <string name="shared_string_favorite">Favorit</string>
     <string name="shared_string_favorites">Favoritter</string>
     <string name="shared_string_add_to_favorites">Føj til \'Favoritter\'</string>
-    <string name="shared_string_my_places">Foretrukne</string>
+    <string name="shared_string_my_places">Mine steder</string>
     <string name="shared_string_audio">Lyd</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
@@ -2608,7 +2608,7 @@
     <string name="rendering_attr_hidePOILabels_name">IP-etiketter</string>
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
     <string name="copy_location_name">Kopiér placering/IP-navn</string>
-    <string name="toast_empty_name_error">Unavngiven placering</string>
+    <string name="toast_empty_name_error">Unavngivet placering</string>
     <string name="show_closed_notes">Vis lukkede noter</string>
     <string name="switch_osm_notes_visibility_desc">Vis eller skjul OSM-noter på kortet.</string>
     <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM-redigeringsværktøjer.</string>
@@ -3361,7 +3361,7 @@
     <string name="accessibility_mode_disabled">Tilgængelighedstilstand er deaktiveret i dit Android -system.</string>
     <string name="use_system_screen_timeout">Brug systemets skærmtimeout</string>
     <string name="clear_recorded_data">Ryd optagede data</string>
-    <string name="copy_coordinates">Kopier koordinater</string>
+    <string name="copy_coordinates">Kopiér koordinater</string>
     <string name="routing_profile_direct_to">Direkte-til-punkt</string>
     <string name="sort_by_category">Sorter efter kategori</string>
     <string name="please_provide_profile_name_message">Angiv et navn til profilen</string>
@@ -4683,4 +4683,5 @@
     <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
+    <string name="map_widget_true_bearing">Sande pejling</string>
 </resources>
