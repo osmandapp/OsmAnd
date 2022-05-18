@@ -4678,4 +4678,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">Kısıtlama yok</string>
     <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>
     <string name="map_widget_true_bearing">Gerçek yön</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Askeri alanları gizleyin</string>
+    <string name="explore_plans">Planları Keşfet</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Askeri alanları gizle</string>
 </resources>
