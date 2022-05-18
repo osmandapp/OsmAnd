@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,8 +56,6 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsVisibilityListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
-
-	private static final String INFO_LINK = "https://docs.osmand.net/docs/user/widgets/configure-screen";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -167,7 +164,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		infoButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AndroidUtils.openUrl(activity, Uri.parse(INFO_LINK), nightMode);
+				AndroidUtils.openUrl(activity, R.string.docs_widget_configure_screen, nightMode);
 			}
 		});
 	}

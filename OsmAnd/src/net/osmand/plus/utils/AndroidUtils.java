@@ -1175,6 +1175,14 @@ public class AndroidUtils {
 		return null;
 	}
 
+	public static void openUrl(@NonNull Context context, int urlStringId, boolean nightMode) {
+		openUrl(context, context.getString(urlStringId), nightMode);
+	}
+
+	public static void openUrl(@NonNull Context context, @NonNull String url, boolean nightMode) {
+		openUrl(context, Uri.parse(url), nightMode);
+	}
+
 	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
 		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
 				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
@@ -1186,7 +1194,5 @@ public class AndroidUtils {
 			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
-
-
 
 }

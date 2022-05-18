@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -46,7 +45,6 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	public static final String TAG = SelectedPlanFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SelectedPlanFragment.class);
 
-	private static final String PURCHASES_INFO = "https://docs.osmand.net/docs/user/purchases/android";
 	public static final String SELECTED_PRICE_BTN_ID = "selected_price_btn_id";
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
@@ -127,8 +125,9 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		backBtn.setOnClickListener(v -> dismiss());
 
 		ImageView helpBtn = mainView.findViewById(R.id.button_help);
-		helpBtn.setOnClickListener(v ->
-				AndroidUtils.openUrl(requireActivity(), Uri.parse(PURCHASES_INFO), nightMode));
+		helpBtn.setOnClickListener(v -> {
+			AndroidUtils.openUrl(requireActivity(), R.string.docs_purchases_android, nightMode);
+		});
 	}
 
 	@Override
