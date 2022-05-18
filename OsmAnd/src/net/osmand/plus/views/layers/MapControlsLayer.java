@@ -22,16 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.slider.Slider;
 
 import net.osmand.Location;
@@ -45,6 +35,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -79,6 +70,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
@@ -866,7 +866,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		//routePlanningBtn.setIconResId(isRouteFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_gdirections_dark);
 		updateRoutePlaningButton(rh, isRoutePlanningMode);
 
-		boolean showBottomMenuButtons = (shouldShowRouteCalculationControls || !isRouteFollowingMode) && vh.shouldShowBottomMenuButtons();
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
+		boolean showBottomMenuButtons = vh.shouldShowBottomMenuButtons()
+				&& (shouldShowRouteCalculationControls || !isRouteFollowingMode || androidAutoAttached);
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
