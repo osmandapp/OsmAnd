@@ -11,6 +11,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -100,6 +101,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
 
+	private AndroidAutoMapPlaceholderView androidAutoMapPlaceholderView;
+
 	private DrawSettings drawSettings;
 	private int themeId = -1;
 
@@ -132,6 +135,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsContainer = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
+			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
 
 			appModeChangeListener = createAppModeChangeListener();
 			settings.APPLICATION_MODE.addListener(appModeChangeListener);
@@ -151,6 +155,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			leftWidgetsPanel = null;
 			rightWidgetsPanel = null;
 			mapRulerLayout = null;
+			androidAutoMapPlaceholderView = null;
 
 			alarmControl = null;
 			rulerWidgets = null;
@@ -463,6 +468,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 			}
+
+			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
 	}
 
