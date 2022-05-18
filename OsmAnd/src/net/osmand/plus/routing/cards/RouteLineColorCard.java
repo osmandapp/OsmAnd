@@ -22,13 +22,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.fragments.HeaderInfo;
@@ -54,7 +54,7 @@ import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
 public class RouteLineColorCard extends MapBaseCard implements CardListener, ColorPickerListener, HeaderInfo {
 
-	private static final String SELECTED_MAP_THEME = "selected_map_theme";
+	private static final String IS_NIGHT_MAP_THEME = "is_night_map_theme";
 
 	private static final int DAY_TITLE_ID = R.string.day;
 	private static final int NIGHT_TITLE_ID = R.string.night;
@@ -74,7 +74,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private ColoringType selectedType;
 	private String selectedRouteInfoAttribute;
 	private final PreviewRouteLineInfo previewRouteLineInfo;
-	private DayNightMode selectedMapTheme;
+	private boolean isNightMapTheme;
 	private final ApplicationMode appMode;
 
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
@@ -90,13 +90,16 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		this.appMode = appMode;
 		selectedType = previewRouteLineInfo.getRouteColoringType();
 		selectedRouteInfoAttribute = previewRouteLineInfo.getRouteInfoAttribute();
+
+		Boolean nightMapTheme = null;
 		if (savedInstanceState != null) {
-			String themeKey = savedInstanceState.getString(SELECTED_MAP_THEME);
-			selectedMapTheme = DayNightMode.valueOf(themeKey);
-		} else {
-			OsmandSettings settings = app.getSettings();
-			selectedMapTheme = settings.DAYNIGHT_MODE.getModeValue(appMode);
+			nightMapTheme = savedInstanceState.getBoolean(IS_NIGHT_MAP_THEME);
 		}
+		if (nightMapTheme == null) {
+			DayNightHelper themeHelper = app.getDaynightHelper();
+			nightMapTheme = themeHelper.isNightModeForMapControls();
+		}
+		isNightMapTheme = nightMapTheme;
 	}
 
 	@Override
@@ -163,13 +166,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(day, night);
 
-		radioGroup.setSelectedItem(selectedMapTheme.isDay() ? day : night);
+		radioGroup.setSelectedItem(isNightMapTheme ? night : day);
 	}
 
 	private TextRadioItem createMapThemeButton(final boolean isNight) {
 		TextRadioItem item = new TextRadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
 		item.setOnClickListener((radioItem, view) -> {
-			selectedMapTheme = isNight ? DayNightMode.NIGHT : DayNightMode.DAY;
+			isNightMapTheme = isNight;
 			onMapThemeChanged();
 			updateDescription();
 			return true;
@@ -286,7 +289,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private boolean isNightMap() {
 		if (selectedType.isCustomColor()) {
-			return selectedMapTheme.isNight();
+			return isNightMapTheme;
 		} else {
 			return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
 		}
@@ -306,12 +309,14 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) { }
 
 	public void saveToBundle(@NonNull Bundle outState) {
-		outState.putString(SELECTED_MAP_THEME, selectedMapTheme.name());
+		outState.putBoolean(IS_NIGHT_MAP_THEME, isNightMapTheme);
 	}
 
 	@Nullable
 	public DayNightMode getSelectedMapTheme() {
-		return selectedType.isCustomColor() ? selectedMapTheme : null;
+		return selectedType.isCustomColor() ?
+				isNightMapTheme ? DayNightMode.NIGHT : DayNightMode.DAY
+				: null;
 	}
 
 	private class ColorTypeAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
