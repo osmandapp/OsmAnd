@@ -107,6 +107,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void destroyLayer() {
+		clearOsmBugsTileProvider();
 	}
 
 	@Override
