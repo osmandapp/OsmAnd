@@ -795,7 +795,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		String[] olcTextParts = olcText.split(" ");
 		if (olcTextParts.length > 1) {
 			olcTextCode = olcTextParts[0];
-			cityName = olcTextParts[1];
+			String[] addressParts = olcText.substring(olcTextCode.length() + 1).split(",");
+			cityName = addressParts[0];
 		} else {
 			olcTextCode = olcText;
 		}
