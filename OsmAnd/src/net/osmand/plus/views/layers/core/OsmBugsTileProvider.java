@@ -1,12 +1,9 @@
 package net.osmand.plus.views.layers.core;
 
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.MapRendererView;
@@ -24,15 +21,12 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionPoint;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -42,43 +36,36 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class POITileProvider extends interface_MapTiledCollectionProvider {
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+
+public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
 	private final TextRasterizer.Style textStyle;
 	private final float textScale;
-	private final float density;
+	private static boolean showClosed = false;
+	private final int minZoom;
 
-	private final OsmandMapLayer.MapLayerData<List<Amenity>> layerData;
+	private final OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData;
 	private MapTiledCollectionProvider providerInstance;
 
-	private static class POICollectionPoint extends interface_MapTiledCollectionPoint {
+	private static class OsmBugsCollectionPoint extends interface_MapTiledCollectionPoint {
 
 		private final Context ctx;
-		private final Amenity amenity;
+		private final OsmBugsLayer.OpenStreetNote osmNote;
 		private final float textScale;
 		private final PointI point31;
 
-		public POICollectionPoint(@NonNull Context ctx, @NonNull Amenity amenity, float textScale) {
+		public OsmBugsCollectionPoint(@NonNull Context ctx, @NonNull OsmBugsLayer.OpenStreetNote osmNote, float textScale) {
 			this.ctx = ctx;
-			this.amenity = amenity;
+			this.osmNote = osmNote;
 			this.textScale = textScale;
-			LatLon latLon = amenity.getLocation();
-			this.point31 = new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
-					MapUtils.get31TileNumberY(latLon.getLatitude()));
-		}
-
-		private int getColor() {
-			int color = 0;
-			if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
-				String colorStr = amenity.getColor();
-				if (colorStr != null) {
-					color = ColorDialogs.getColorByTag(colorStr);
-				}
-			}
-			return color != 0 ? color : ContextCompat.getColor(ctx, R.color.osmand_orange);
+			int x = MapUtils.get31TileNumberX(osmNote.getLongitude());
+			int y = MapUtils.get31TileNumberY(osmNote.getLatitude());
+			this.point31 = new PointI(x, y);
 		}
 
 		@Override
@@ -90,54 +77,60 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(boolean isFullSize) {
 			Bitmap bitmap = null;
 			if (isFullSize) {
-				String id = amenity.getGpxIcon();
-				if (id == null) {
-					id = RenderingIcons.getIconNameForAmenity(amenity);
+				int iconId;
+				int backgroundColorRes;
+				if (osmNote.isOpened()) {
+					iconId = R.drawable.mx_special_symbol_remove;
+					backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
+				} else {
+					iconId = R.drawable.mx_special_symbol_check_mark;
+					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
-				if (id != null) {
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(),
-							true, RenderingIcons.getResId(id));
-					pointImageDrawable.setAlpha(0.8f);
-					bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
-				}
+				BackgroundType backgroundType = BackgroundType.COMMENT;
+				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+						ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
+						backgroundType);
+				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 			} else {
-				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(), true);
-				pointImageDrawable.setAlpha(0.8f);
-				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				if (osmNote.isOpened() || showClosed) {
+					int backgroundColorRes;
+					if (osmNote.isOpened()) {
+						backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
+					} else {
+						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
+					}
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+							ContextCompat.getColor(ctx, backgroundColorRes), true,
+							false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
+					bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				}
 			}
 			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 		}
 
 		@Override
 		public String getCaption() {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			if (amenity.getType().isWiki()) {
-				if (Algorithms.isEmpty(locale)) {
-					locale = app.getLanguage();
-				}
-				locale = OsmandPlugin.onGetMapObjectsLocale(amenity, locale);
-			}
-			return amenity.getName(locale, app.getSettings().MAP_TRANSLITERATE_NAMES.get());
+			return "";
 		}
 	}
 
-	public POITileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<Amenity>> layerData,
-	                       int baseOrder, boolean textVisible, @Nullable TextRasterizer.Style textStyle,
-	                       float textScale, float density) {
+	public OsmBugsTileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData,
+                               int baseOrder, boolean showClosed, int minZoom) {
 		this.ctx = context;
 		this.layerData = layerData;
 		this.baseOrder = baseOrder;
-		this.textVisible = textVisible;
-		this.textStyle = textStyle != null ? textStyle : new TextRasterizer.Style();
-		this.textScale = textScale;
-		this.density = density;
+		this.textVisible = false;
+		this.textStyle = new TextRasterizer.Style();
+		this.textScale = 1.0f;
+		OsmBugsTileProvider.showClosed = showClosed;
+		this.minZoom = minZoom;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
+
 		mapRenderer.addSymbolsProvider(providerInstance);
 	}
 
@@ -170,7 +163,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public double getCaptionTopSpace() {
-		return -4.0 * density;
+		return 0.0d;
 	}
 
 	@Override
@@ -188,7 +181,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
-		OsmandMapLayer.MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
+		OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
 		layerData.addDataReadyCallback(dataReadyCallback);
 		long[] start = {System.currentTimeMillis()};
 		app.runInUIThread(() -> {
@@ -207,7 +200,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			}
 		}
 		layerData.removeDataReadyCallback(dataReadyCallback);
-		List<Amenity> results = dataReadyCallback.getResults();
+		List<OsmBugsLayer.OpenStreetNote> results = dataReadyCallback.getResults();
 		if (Algorithms.isEmpty(results)) {
 			return new QListMapTiledCollectionPoint();
 		}
@@ -218,11 +211,10 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 				MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX()),
 				MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY()));
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
-		for (Amenity amenity : results) {
-			LatLon latLon = amenity.getLocation();
-			if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
-					latLon.getLongitude(), latLon.getLatitude())) {
-				POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale);
+		for (OsmBugsLayer.OpenStreetNote osmNote : results) {
+			if (latLonBounds.contains(osmNote.getLongitude(), osmNote.getLatitude(),
+					osmNote.getLongitude(), osmNote.getLatitude())) {
+				OsmBugsCollectionPoint point = new OsmBugsCollectionPoint(ctx, osmNote, textScale);
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
@@ -252,7 +244,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public ZoomLevel getMinZoom() {
-		return ZoomLevel.ZoomLevel9;
+		return ZoomLevel.swigToEnum(minZoom);
 	}
 
 	@Override
@@ -260,10 +252,9 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		return ZoomLevel.MaxZoomLevel;
 	}
 
-
 	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
-		return MapMarker.PinIconVerticalAlignment.CenterVertical;
+		return MapMarker.PinIconVerticalAlignment.Top;
 	}
 
 	@Override

@@ -75,13 +75,14 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	private PointI movableObject;
 	private boolean poiTypesInitialized = false;
 
-	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
+	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin, int baseOrder) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
 		app = getApplication();
 		mOsmChangeUtil = plugin.getPoiModificationLocalUtil();
 		mOsmBugsUtil = plugin.getOsmNotesLocalUtil();
+		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -467,7 +468,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 			if (m.getPosition().getX() == x && m.getPosition().getY() == y) {
 				m.setIsHidden(true);
 				movableObject = m.getPosition();
-				mapRenderer.suspendSymbolsUpdate();
 				break;
 			}
 		}
@@ -488,7 +488,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				m.setPosition(new PointI(x, y));
 				m.setIsHidden(false);
 				movableObject = null;
-				mapRenderer.resumeSymbolsUpdate();
 				break;
 			}
 		}
