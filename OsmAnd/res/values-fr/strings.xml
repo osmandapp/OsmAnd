@@ -4673,4 +4673,5 @@
     <string name="map_widget_true_bearing">Relèvement vrai</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
+    <string name="explore_plans">Explorer les plans</string>
 </resources>
