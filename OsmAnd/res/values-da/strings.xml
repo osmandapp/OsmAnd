@@ -4684,4 +4684,6 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Skjul militære områder</string>
 </resources>

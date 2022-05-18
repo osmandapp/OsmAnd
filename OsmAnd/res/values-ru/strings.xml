@@ -4683,4 +4683,6 @@
     <string name="rendering_attr_horseScale_name">Сложность конных маршрутов</string>
     <string name="map_widget_trip_recording_downhill">Спуск</string>
     <string name="map_widget_true_bearing">Истинный пеленг</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Скрыть военные зоны</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Военные зоны</string>
 </resources>
