@@ -4671,4 +4671,6 @@
     <string name="map_widget_trip_recording_downhill">Descente</string>
     <string name="routing_attr_hazmat_category_name">Catégorie matières dangereuses</string>
     <string name="map_widget_true_bearing">Relèvement vrai</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
 </resources>
