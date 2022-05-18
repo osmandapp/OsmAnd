@@ -4670,6 +4670,6 @@
     <string name="routing_attr_hazmat_category_description">Veszélyes anyagok kategória / Vegye figyelembe a kategória hozzáférési engedélyeit</string>
     <string name="routing_attr_hazmat_category_name">Vesz.anyag kategória</string>
     <string name="map_widget_true_bearing">Valódi irány</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Nem mutatja a katonai területeket</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Nem jeleníti meg a katonai területeket</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Katonai területek elrejtése</string>
 </resources>
