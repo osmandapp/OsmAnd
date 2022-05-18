@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.plus.views.layers.geometry.GeometryWayDrawer.VECTOR_LINE_SCALE_COEF;
 
 import android.Manifest;
 import android.content.Context;
@@ -32,6 +33,12 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListVectorLine;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorDouble;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
@@ -53,6 +60,7 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -95,11 +103,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean mInAddGpxPointMode;
 
 	// OpenGl
+	private VectorLinesCollection outlineCollection;
 	private MapMarkersCollection contextMarkerCollection;
 	private net.osmand.core.jni.MapMarker contextCoreMarker;
 	private Bitmap contextMarkerImage;
 
 	private Object selectedObject;
+	private Object selectedObjectCached;
 
 	public ContextMenuLayer(@NonNull Context context, int baseOrder) {
 		super(context);
@@ -131,6 +141,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		clearContextMarkerCollection();
+		clearOutlineCollection();
 	}
 
 	@Override
@@ -180,6 +192,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			recreateContextMarkerCollection();
 		}
 		boolean markerCustomized = false;
+		boolean clearSelectedObject = true;
 		if (selectedObject != null) {
 			TIntArrayList x = null;
 			TIntArrayList y = null;
@@ -195,17 +208,44 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {
-				float px, py, prevX, prevY;
-				prevX = box.getPixXFrom31(x.get(0), y.get(0));
-				prevY = box.getPixYFrom31(x.get(0), y.get(0));
-				for (int i = 1; i < x.size(); i++) {
-					px = box.getPixXFrom31(x.get(i), y.get(i));
-					py = box.getPixYFrom31(x.get(i), y.get(i));
-					canvas.drawLine(prevX, prevY, px, py, outlinePaint);
-					prevX = px;
-					prevY = py;
+				if (hasMapRenderer) {
+					clearSelectedObject = false;
+					if (selectedObject != selectedObjectCached) {
+						clearOutlineCollection();
+						VectorLinesCollection outlineCollection = new VectorLinesCollection();
+						QVectorPointI points = new QVectorPointI();
+						for (int i = 0; i < x.size(); i++) {
+							points.add(new PointI(x.get(i), y.get(i)));
+						}
+						VectorLineBuilder builder = new VectorLineBuilder();
+						builder.setPoints(points)
+								.setIsHidden(false)
+								.setLineId(1)
+								.setLineWidth(outlinePaint.getStrokeWidth() * VECTOR_LINE_SCALE_COEF)
+								.setFillColor(NativeUtilities.createFColorARGB(outlinePaint.getColor()))
+								.setApproximationEnabled(false)
+								.setBaseOrder(baseOrder);
+						builder.buildAndAddToCollection(outlineCollection);
+						this.outlineCollection = outlineCollection;
+						mapRenderer.addSymbolsProvider(outlineCollection);
+					}
+				} else {
+					float px, py, prevX, prevY;
+					prevX = box.getPixXFrom31(x.get(0), y.get(0));
+					prevY = box.getPixYFrom31(x.get(0), y.get(0));
+					for (int i = 1; i < x.size(); i++) {
+						px = box.getPixXFrom31(x.get(i), y.get(i));
+						py = box.getPixYFrom31(x.get(i), y.get(i));
+						canvas.drawLine(prevX, prevY, px, py, outlinePaint);
+						prevX = px;
+						prevY = py;
+					}
 				}
 			}
+		}
+		selectedObjectCached = selectedObject;
+		if (clearSelectedObject && hasMapRenderer) {
+			clearOutlineCollection();
 		}
 		float textScale = selectionHelper.hasPressedLatLon() ? getTextScale() : 1f;
 		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getPressedLatLonSmall().entrySet()) {
@@ -331,6 +371,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mapRenderer != null && contextMarkerCollection != null) {
 			mapRenderer.removeSymbolsProvider(contextMarkerCollection);
 			contextMarkerCollection = null;
+		}
+	}
+
+	private void clearOutlineCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && outlineCollection != null) {
+			mapRenderer.removeSymbolsProvider(outlineCollection);
+			outlineCollection = null;
 		}
 	}
 

@@ -31,7 +31,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	protected static final int LINE_ID = 1;
 	protected static final int OUTLINE_ID = 1000;
-	private static final float VECTOR_LINE_SCALE_COEF = 2.0f;
+	public static final float VECTOR_LINE_SCALE_COEF = 2.0f;
 
 	private final T context;
 

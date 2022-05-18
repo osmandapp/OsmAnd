@@ -31,6 +31,7 @@ import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
+import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
@@ -301,6 +302,13 @@ class MapSelectionHelper {
 								names.add(obfMapObject.getCaptionInNativeLanguage());
 								long id = obfMapObject.getId().getId().longValue() >> 7;
 								amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
+								if (amenity != null && mapObject.getPoints31().size() > 1) {
+									QVectorPointI points31 = mapObject.getPoints31();
+									for (int k = 0; k < points31.size(); k++) {
+										amenity.getX().add(points31.get(k).getX());
+										amenity.getY().add(points31.get(k).getY());
+									}
+								}
 							}
 						}
 					}
