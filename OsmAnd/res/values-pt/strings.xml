@@ -3611,9 +3611,9 @@
 \nUm dia são 1440 minutos, uma semana 10080, um mês 43829.</string>
     <string name="tiles_storage_descr">Escolha como os mosaicos descarregados serão armazenados.</string>
     <string name="default_screen_timeout">Tempo limite padrão do ecrã</string>
-    <string name="width_limit_description">Forneça a largura do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos largos.</string>
-    <string name="height_limit_description">Forneça a altura do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos altos.</string>
-    <string name="weight_limit_description">Forneça o peso do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos pesados.</string>
+    <string name="width_limit_description">Configure a largura do seu veículo para evitar estradas proibidas a veículos com largura superior a essa.</string>
+    <string name="height_limit_description">Configure a altura do seu veículo para evitar estradas proibidas a veículos com altura superior a essa.</string>
+    <string name="weight_limit_description">Configure o peso do seu veículo para evitar estradas proibidas a veículos com peso superior a esse.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Exporte ou importe ações rápidas com os perfis da aplicação.</string>
     <string name="shared_string_delete_all_q">Eliminar tudo\?</string>
     <string name="delete_all_actions_message_q">Eliminar de forma permanente %d ações rápidas\?</string>
@@ -3642,7 +3642,7 @@
     <string name="search_download_wikipedia_maps">Descarregar mapas da Wikipédia</string>
     <string name="additional_actions_descr">Aceda a estas ações tocando no botão “%1$s”.</string>
     <string name="shared_string_uninstall">Desinstalar</string>
-    <string name="lenght_limit_description">Forneça o comprimento do seu veículo, podem ser aplicadas algumas restrições de rota a veículos longos.</string>
+    <string name="lenght_limit_description">Configure o comprimento do seu veículo para evitar estradas proibidas a veículos com comprimento superior a esse.</string>
     <string name="use_volume_buttons_as_zoom">Botões de volume mudam a ampliação</string>
     <string name="speed_cameras_restart_descr">Reinicie a aplicação para eliminar os dados da câmara de velocidade.</string>
     <string name="item_deleted">%1$s eliminado</string>
@@ -4683,4 +4683,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">Sem restrições</string>
     <string name="routing_attr_avoid_fords_description">Evitar vaus (passagens em riachos baixos)</string>
     <string name="map_widget_true_bearing">Rumo verdadeiro</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares, normalmente de acesso proibido a civis</string>
+    <string name="explore_plans">Explorar planos</string>
 </resources>
