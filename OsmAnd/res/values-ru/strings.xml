@@ -4060,7 +4060,7 @@
 \n• Обновлен диалог «Запись маршрута».
 \n
 \n</string>
-    <string name="empty_purchases_description">Если ваши покупки не отображаются здесь, нажмите на «%1$s» или свяжитесь с нашей службой поддержки.</string>
+    <string name="empty_purchases_description">Если ваши покупки не отображаются здесь, нажмите «%1$s» или свяжитесь с нашей службой поддержки.</string>
     <string name="contact_support">Служба поддержки</string>
     <string name="troubleshooting">Устранение неполадок</string>
     <string name="troubleshooting_description">Перейдите по этой ссылке, если у вас есть какие-либо проблемы с покупками.</string>
@@ -4685,4 +4685,5 @@
     <string name="map_widget_true_bearing">Истинный пеленг</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Скрыть военные зоны</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Военные зоны</string>
+    <string name="explore_plans">Ознакомиться с планами</string>
 </resources>
