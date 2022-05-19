@@ -16,6 +16,7 @@ import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -94,8 +95,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_0_03 = 4003;
 	// 4004 - 4.0-04 (Migrate Radius ruler widget preference)
 	public static final int VERSION_4_0_04 = 4004;
+	// 4005 - 4.0-05 (Revert Radius ruler widget preference migration)
+	public static final int VERSION_4_0_05 = 4005;
 
-	public static final int LAST_APP_VERSION = VERSION_4_0_04;
+	public static final int LAST_APP_VERSION = VERSION_4_0_05;
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -204,8 +207,8 @@ class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_0_03) {
 					migrateStateDependentWidgets();
 				}
-				if (prevAppVersion < VERSION_4_0_04) {
-					migrateRadiusRulerWidgetPreference();
+				if (prevAppVersion == VERSION_4_0_04) {
+					revertRadiusRulerWidgetPreferenceMigration();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -554,19 +557,25 @@ class AppVersionUpgradeOnInit {
 		settings.MAP_INFO_CONTROLS.setModeValue(appMode, newWidgetsVisibilityString.toString());
 	}
 
-	private void migrateRadiusRulerWidgetPreference() {
+	private void revertRadiusRulerWidgetPreferenceMigration() {
 		OsmandSettings settings = app.getSettings();
-		CommonPreference<RadiusRulerMode> radiusRulerModePref = new EnumStringPreference<>(settings,
-				"ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeGlobal().makeShared();
-		if (radiusRulerModePref.isSet()) {
-			RadiusRulerMode radiusRulerMode = radiusRulerModePref.get();
-			for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-				boolean radiusRulerEnabled = radiusRulerMode == RadiusRulerMode.FIRST
-						|| radiusRulerMode == RadiusRulerMode.SECOND;
-				boolean radiusRulerNightMode = radiusRulerMode == RadiusRulerMode.SECOND;
-
-				settings.SHOW_RADIUS_RULER_ON_MAP.setModeValue(appMode, radiusRulerEnabled);
-				settings.RADIUS_RULER_NIGHT_MODE.setModeValue(appMode, radiusRulerNightMode);
+		OsmandPreference<Boolean> showRadiusRulerOnMap =
+				new BooleanPreference(settings, "show_radius_ruler_on_map", true).makeProfile();
+		OsmandPreference<Boolean> showDistanceCircles =
+				new BooleanPreference(settings, "show_distance_circles_on_radius_rules", true).makeProfile();
+		OsmandPreference<Boolean> radiusRulerNightMode =
+				new BooleanPreference(settings, "radius_ruler_night_mode", false).makeProfile();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			boolean radiusRulerDisabled = showRadiusRulerOnMap.isSetForMode(appMode)
+					&& !showRadiusRulerOnMap.getModeValue(appMode);
+			boolean distanceCirclesDisabled = showDistanceCircles.isSetForMode(appMode)
+					&& !showDistanceCircles.isSetForMode(appMode);
+			if (radiusRulerDisabled || distanceCirclesDisabled) {
+				settings.RADIUS_RULER_MODE.setModeValue(appMode, RadiusRulerMode.EMPTY);
+			} else if (radiusRulerNightMode.isSetForMode(appMode)) {
+				boolean nightMode = radiusRulerNightMode.getModeValue(appMode);
+				RadiusRulerMode radiusRulerMode = nightMode ? RadiusRulerMode.SECOND : RadiusRulerMode.FIRST;
+				settings.RADIUS_RULER_MODE.setModeValue(appMode, radiusRulerMode);
 			}
 		}
 	}
