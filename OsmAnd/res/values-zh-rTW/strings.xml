@@ -4671,4 +4671,7 @@
     <string name="map_widget_true_bearing">真方位</string>
     <string name="map_widget_trip_recording_duration">持續時間</string>
     <string name="routing_attr_hazmat_category_name">危險品分類</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">隱藏軍事區域</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">隱藏軍事區域</string>
+    <string name="explore_plans">探索方案</string>
 </resources>
