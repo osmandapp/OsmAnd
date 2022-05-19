@@ -4669,4 +4669,8 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Kaŝi armeajn areojn</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ne montri transversajn ruĝajn liniojn sur armeaj areoj</string>
     <string name="get_altitude_information">Akiri informojn pri altitudo</string>
+    <string name="calculating_altitude">Kalkulado de altitudo</string>
+    <string name="calculate_online">Kalkuli enrete</string>
+    <string name="calculate_online_altitude_descr">Datumoj de altitudo estos kalkulitaj ĉe la OsmAnd-servilo.</string>
+    <string name="explore_plans">Esplori planojn</string>
 </resources>
