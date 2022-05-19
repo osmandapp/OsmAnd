@@ -26,7 +26,6 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
-import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -567,6 +566,7 @@ public class SearchUICore {
 		});
 	}
 
+	
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
