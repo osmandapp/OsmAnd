@@ -566,7 +566,7 @@ public class SearchUICore {
 		});
 	}
 
-	
+
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
