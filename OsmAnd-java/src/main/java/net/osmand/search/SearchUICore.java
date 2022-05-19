@@ -460,7 +460,7 @@ public class SearchUICore {
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, final SearchSettings searchSettings) {
 		final int request = requestNumber.incrementAndGet();
-		final SearchPhrase phrase = this.phrase.generateNewPhrase(filterOlcRequest(text), searchSettings);
+		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
 		if (debugMode) {
 			LOG.info("Prepare search <" + phrase + ">");
@@ -566,15 +566,6 @@ public class SearchUICore {
 			}
 		});
 	}
-
-	private String filterOlcRequest(final String text) {
-		String[] addressParts = text.split(" ");
-		if (addressParts.length > 0 && LocationParser.isValidOLC(addressParts[0])) {
-			return text.split(",")[0];
-		}
-		return text;
-	}
-
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
