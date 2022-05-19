@@ -1139,7 +1139,7 @@ public class OsmandSettings {
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
-	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().storeLastModifiedTime();
+	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().makeShared().storeLastModifiedTime();
 
 	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
 
