@@ -4663,6 +4663,10 @@
     <string name="map_widget_trip_recording_uphill">Navkreber</string>
     <string name="map_widget_trip_recording_duration">Trajanje</string>
     <string name="map_widget_trip_recording_distance">Razdalja</string>
-    <string name="routing_attr_hazmat_category_name">Kategorija Hazmat</string>
+    <string name="routing_attr_hazmat_category_name">Kategorija nevarnih snovi</string>
     <string name="routing_attr_allow_private_for_truck_description">Dovoli dostop do zasebnih površin za tovornjake.</string>
+    <string name="routing_attr_hazmat_category_description">Kategorija nevarnih snovi / Upoštevaj dovoljenja za dostop do nevarnih snovi</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Brez omejitev</string>
+    <string name="routing_attr_avoid_fords_name">Izogibaj se plitvin</string>
+    <string name="routing_attr_avoid_fords_description">Izogibaj se plitvin</string>
 </resources>

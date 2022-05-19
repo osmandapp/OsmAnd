@@ -3751,7 +3751,7 @@
     <string name="access_hint_enter_address">Введите адрес</string>
     <string name="plan_route_trim_before">Обрезать перед</string>
     <string name="plan_route_trim_after">Обрезать после</string>
-    <string name="plan_route_change_route_type_before">Изменить тип маршрута до</string>
+    <string name="plan_route_change_route_type_before">Изменить тип маршрута перед</string>
     <string name="plan_route_change_route_type_after">Изменить тип маршрута после</string>
     <string name="simplified_track">Упрощённый трек</string>
     <string name="simplified_track_description">Будет сохранена только линия маршрута, без путевых точек.</string>
@@ -3884,7 +3884,7 @@
     <string name="app_mode_light_aircraft">Лёгкий самолёт</string>
     <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
     <string name="plan_route_join_segments">Объединить сегменты</string>
-    <string name="plan_route_split_before">Разделить до</string>
+    <string name="plan_route_split_before">Разделить перед</string>
     <string name="plan_route_split_after">Разделить после</string>
     <string name="profile_type_user_string">Профиль пользователя</string>
     <string name="profile_type_osmand_string">Профиль OsmAnd</string>
@@ -4682,4 +4682,7 @@
     <string name="routing_attr_avoid_fords_description">Избегать броды</string>
     <string name="rendering_attr_horseScale_name">Сложность конных маршрутов</string>
     <string name="map_widget_trip_recording_downhill">Спуск</string>
+    <string name="map_widget_true_bearing">Истинный пеленг</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Скрыть военные зоны</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Военные зоны</string>
 </resources>

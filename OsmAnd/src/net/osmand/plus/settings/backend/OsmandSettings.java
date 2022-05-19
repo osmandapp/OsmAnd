@@ -946,6 +946,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
+
 		public boolean setValue(Object prefs, DrivingRegion val) {
 			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
 			if (overrideMetricSystem && val != null) {
@@ -958,16 +959,26 @@ public class OsmandSettings {
 			return DrivingRegion.getDrivingRegionByLocale();
 		}
 
+		@Override
+		public DrivingRegion getProfileDefaultValue(ApplicationMode mode) {
+			return DrivingRegion.getDrivingRegionByLocale();
+		}
+
 	}.makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final EnumStringPreference<MetricsConstants> METRIC_SYSTEM = (EnumStringPreference<MetricsConstants>) new EnumStringPreference<MetricsConstants>(this,
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()) {
+
 		public MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		}
 
+		@Override
+		public MetricsConstants getProfileDefaultValue(ApplicationMode mode) {
+			return DRIVING_REGION.getModeValue(mode).defMetrics;
+		}
 	}.makeProfile();
 
 	//public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeGlobal();
@@ -1091,6 +1102,13 @@ public class OsmandSettings {
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference(this, "user_profile_name", "").makeProfile().cache();
 
 	public final CommonPreference<String> PARENT_APP_MODE = new StringPreference(this, "parent_app_mode", null).makeProfile().cache();
+
+	public final CommonPreference<String> DERIVED_PROFILE = new StringPreference(this, "derived_profile", "default").makeProfile().cache();
+
+	{
+		DERIVED_PROFILE.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "motorcycle");
+		DERIVED_PROFILE.setModeDefaultValue(ApplicationMode.TRUCK, "truck");
+	}
 
 	public final CommonPreference<String> ROUTING_PROFILE = new StringPreference(this, "routing_profile", "").makeProfile().cache();
 

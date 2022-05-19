@@ -4641,4 +4641,24 @@
     <string name="fps_widget_desc">Il widget mostra con che velocità la mappa e i suoi elementi sono mostrati e aggiornati.</string>
     <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia la corsia da utilizzare per la navigazione attuale.</string>
     <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permetti agli autotreni l\'accesso alle aree private.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permetti l\'accesso alle aree private (autotreni)</string>
+    <string name="rendering_attr_weatherTempContours_name">Isoterme</string>
+    <string name="rendering_attr_weatherPressureContours_name">Isobare</string>
+    <string name="rendering_attr_horseScale_name">Difficoltà dei percorsi ippici</string>
+    <string name="routing_attr_avoid_highway_name">Evita autostrade</string>
+    <string name="routing_attr_avoid_highway_description">Evita autostrade</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Nessuna restrizione</string>
+    <string name="routing_attr_avoid_fords_name">Evita i guadi</string>
+    <string name="routing_attr_avoid_fords_description">Evita i guadi</string>
+    <string name="map_widget_trip_recording_downhill">Discesa</string>
+    <string name="map_widget_trip_recording_uphill">Salita</string>
+    <string name="map_widget_trip_recording_duration">Durata</string>
+    <string name="map_widget_trip_recording_distance">Distanza</string>
+    <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi/ Considera i permessi di accesso materiali pericolosi</string>
+    <string name="radius_rules_widget_desc">Il righello radiale aiuta a determinare il raggio attorno al punto selezionato nella mappa attraverso dei cerchi di distanza sulla mappa.</string>
+    <string name="no_altitude_data">Nessun dato di altitudine</string>
+    <string name="shared_string_speed">Velocità</string>
+    <string name="track_attach_to_the_roads_descr">La traccia sarà incollata alla strada utilizzando le mappe offline, la geometria della traccia sarà cambiata.</string>
+    <string name="map_widget_true_bearing">Angolo reale</string>
 </resources>

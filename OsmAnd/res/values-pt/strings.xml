@@ -1515,7 +1515,7 @@
     <string name="go_to_map">Mostrar mapa</string>
     <string name="simulate_initial_startup_descr">A próxima vez que abrir a aplicação serão mostrados os ecrãs de primeira instalação, mantém todas as outras configurações inalteradas.</string>
     <string name="simulate_initial_startup">Simular arranque inicial da aplicação</string>
-    <string name="share_geo">Outras aplicações de mapas</string>
+    <string name="share_geo">geo:</string>
     <string name="share_menu_location">Partilhar localização</string>
     <string name="shared_string_send">Enviar</string>
     <string name="osmand_running_in_background">Executar em segundo plano</string>
@@ -1923,7 +1923,7 @@
     <string name="favorite_group_name">Nome do grupo</string>
     <string name="change_color">Alterar cor</string>
     <string name="edit_name">Editar nome</string>
-    <string name="animate_my_location">Animar a minha posição</string>
+    <string name="animate_my_location">Animar deslocação no mapa</string>
     <string name="animate_my_location_desc">Ativar animação da deslocação do mapa da \"Minha posição\" durante a navegação.</string>
     <string name="shared_string_overview">Visão geral</string>
     <string name="select_street">Selecionar rua</string>
@@ -2768,7 +2768,7 @@
     <string name="touring_view_renderer">Vista de turismo</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="copy_location_name">Copiar local/nome do POI</string>
-    <string name="toast_empty_name_error">Local sem nome</string>
+    <string name="toast_empty_name_error">Localização sem nome</string>
     <string name="tunnel_warning">Túnel à frente</string>
     <string name="show_tunnels">Túneis</string>
     <string name="download_wikipedia_description">Descarregar artigos da Wikipédia de %1$s para lê-los offline.</string>
@@ -3841,7 +3841,7 @@
     <string name="sign_in_with_open_street_map">Iniciar sessão com OpenStreetMap</string>
     <string name="use_login_password">Usar o nome do utilizador e palavra-passe</string>
     <string name="login_account">Conta</string>
-    <string name="user_login">Utilizador</string>
+    <string name="user_login">Login</string>
     <string name="markers_history">Histórico de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar ficheiro de GPX para o OpenStreetMap</string>
     <string name="enter_text_separated">Introduza etiquetas separadas por vírgula.</string>
@@ -4682,4 +4682,5 @@
     <string name="routing_attr_avoid_fords_name">Evitar vaus</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">Sem restrições</string>
     <string name="routing_attr_avoid_fords_description">Evitar vaus (passagens em riachos baixos)</string>
+    <string name="map_widget_true_bearing">Rumo verdadeiro</string>
 </resources>

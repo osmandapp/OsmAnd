@@ -45,7 +45,7 @@ public enum WidgetParams {
 	SIDE_MARKER_2("map_marker_2nd", R.string.map_marker_2nd, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
 	RELATIVE_BEARING("relative_bearing", R.string.map_widget_bearing, 0, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
 	MAGNETIC_BEARING("magnetic_bearing", R.string.map_widget_magnetic_bearing, R.string.magnetic_bearing_widget_desc, R.drawable.widget_bearing_day, R.drawable.widget_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
-	TRUE_BEARING("true_bearing", R.string.map_widget_true_bearing, 0, R.drawable.widget_bearing_day, R.drawable.widget_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
+	TRUE_BEARING("true_bearing", R.string.map_widget_true_bearing, 0, R.drawable.widget_true_bearing_day, R.drawable.widget_true_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
 	CURRENT_SPEED("speed", R.string.map_widget_current_speed, R.string.current_speed_widget_desc, R.drawable.widget_speed_day, R.drawable.widget_speed_night, R.string.docs_widget_current_speed, null, RIGHT),
 	MAX_SPEED("max_speed", R.string.map_widget_max_speed, R.string.max_speed_widget_desc, R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night, R.string.docs_widget_max_speed, null, RIGHT),
 	ALTITUDE("altitude", R.string.map_widget_altitude, R.string.altitude_widget_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, R.string.docs_widget_altitude, null, RIGHT),

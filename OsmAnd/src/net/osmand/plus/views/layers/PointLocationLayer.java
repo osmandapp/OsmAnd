@@ -395,7 +395,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 		if (hasMapRenderer()) {
 			boolean markersRecreated = false;
-			if (markersInvalidated) {
+			if (markersInvalidated || markersCollection == null) {
 				markersRecreated = recreateMarkerCollection();
 				markersInvalidated = false;
 			}

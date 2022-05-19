@@ -4654,4 +4654,21 @@
     <string name="compass_on_circles">圓圈上的指南針</string>
     <string name="distance_circles">距離圓圈</string>
     <string name="circle_settings">圓圈設定</string>
+    <string name="routing_attr_allow_private_for_truck_description">允取卡車進入私人區域。</string>
+    <string name="routing_attr_allow_private_for_truck_name">允許私人進入（卡車）</string>
+    <string name="rendering_attr_weatherTempContours_name">等溫線</string>
+    <string name="rendering_attr_weatherPressureContours_name">等壓線</string>
+    <string name="rendering_attr_horseScale_name">馬道難度</string>
+    <string name="routing_attr_avoid_highway_name">避開高速公路</string>
+    <string name="routing_attr_avoid_highway_description">避開高速公路</string>
+    <string name="map_widget_trip_recording_downhill">下坡</string>
+    <string name="routing_attr_avoid_fords_name">避免涉水</string>
+    <string name="map_widget_trip_recording_distance">距離</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">無限制</string>
+    <string name="routing_attr_hazmat_category_description">危險物質分類 / 考慮危險物品進入權限</string>
+    <string name="map_widget_trip_recording_uphill">上坡</string>
+    <string name="routing_attr_avoid_fords_description">避免涉水</string>
+    <string name="map_widget_true_bearing">真方位</string>
+    <string name="map_widget_trip_recording_duration">持續時間</string>
+    <string name="routing_attr_hazmat_category_name">危險品分類</string>
 </resources>
