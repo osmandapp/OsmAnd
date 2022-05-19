@@ -1278,4 +1278,8 @@
     <string name="poi_square">Trg</string>
     <string name="poi_denomination_unitarian">Unitaristična</string>
     <string name="poi_denomination_tibetan">Tibetanska</string>
+    <string name="poi_seamark_light_float">Plavajoči svetilnik, pomorska oznaka</string>
+    <string name="poi_seamark_light_minor">Manjši svetilnik, pomorska oznaka</string>
+    <string name="poi_seamark_light_vessel">Ladja-svetilnik, pomorska oznaka</string>
+    <string name="poi_seamark_light_major">Večji svetilnik, pomorska oznaka</string>
 </resources>
