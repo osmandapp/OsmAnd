@@ -4696,4 +4696,5 @@
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="explore_plans">Explorar planes</string>
 </resources>
