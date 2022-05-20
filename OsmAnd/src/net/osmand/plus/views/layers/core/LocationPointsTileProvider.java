@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapTiledCollectionPoint;
@@ -119,5 +120,16 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
    @Override
    public ZoomLevel getMaxZoom() {
       return ZoomLevel.MaxZoomLevel;
+   }
+
+
+   @Override
+   public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
+      return MapMarker.PinIconVerticalAlignment.CenterVertical;
+   }
+
+   @Override
+   public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
+      return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
    }
 }
