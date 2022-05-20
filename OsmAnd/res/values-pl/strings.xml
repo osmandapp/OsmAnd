@@ -2158,7 +2158,7 @@
     <string name="rendering_attr_depthContours_name">Izobaty</string>
     <string name="routing_attr_height_obstacles_name">Używanie danych wysokościowych</string>
     <string name="route_altitude">Wysokość trasy</string>
-    <string name="altitude_descent">Zjazd</string>
+    <string name="altitude_descent">Z górki</string>
     <string name="altitude_ascent">Pod górę</string>
     <string name="altitude_range">Zakres wysokości</string>
     <string name="average_altitude">Średnia wysokość</string>
@@ -3380,7 +3380,7 @@
 \n - Dodana mapa Antarktydy
 \n
 \n</string>
-    <string name="copy_coordinates">Kopiuj współrzędne</string>
+    <string name="copy_coordinates">Skopiuj współrzędne</string>
     <string name="please_provide_profile_name_message">Proszę wprowadzić nazwę dla profilu</string>
     <string name="open_settings">Otwórz ustawienia</string>
     <string name="plugin_disabled">Wtyczka wyłączona</string>
@@ -3961,7 +3961,7 @@
     <string name="context_menu_edit_descr">Edytuj opis</string>
     <string name="delete_waypoints">Usuń punkty trasy</string>
     <string name="copy_to_map_markers">Skopiuj do znaczników mapy</string>
-    <string name="copy_to_map_favorites">Skopiuj do ulubionych</string>
+    <string name="copy_to_map_favorites">Skopiuj do Ulubionych</string>
     <string name="upload_photo">Wysyłanie</string>
     <string name="upload_photo_completed">Przesyłanie zakończone</string>
     <string name="uploading_count">Przesyłanie %1$d z %2$d</string>
@@ -4091,7 +4091,7 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Unikaj stref niskiej emisji</string>
     <string name="search_more">Wyszukaj więcej…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Kopia i przywracanie</string>
+    <string name="backup_and_restore">Utwórz kopię zapasową i przywróć</string>
     <string name="last_backup">Ostatnia kopia zapasowa</string>
     <string name="duration_ago">%1$s temu</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4109,7 +4109,7 @@
     <string name="cloud_email_not_registered">Ten adres e-mail nie jest zarejestrowany w OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Ten adres e-mail jest już zarejestrowany.</string>
     <string name="resend_verification_code">Wyślij ponownie</string>
-    <string name="verification_code_missing">Nie otrzymałem kodu weryfikacyjnego</string>
+    <string name="verification_code_missing">Nie otrzymałem kodu uwierzytelniającego</string>
     <string name="verification_code_missing_description">Może zająć 10 minut. Użyj przycisku poniżej, jeśli nie znajduje się w folderze ze spamem.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="select_nav_profile_dialog_message">„Rodzaj nawigacji” wybiera sposób obliczania tras z dostępnymi silnikami wyznaczania tras offline i online.</string>
@@ -4535,7 +4535,7 @@
     <string name="routeInfo_horse_scale_name">Trudność szlaków konnych</string>
     <string name="top_widgets_panel">Panel górny</string>
     <string name="shared_string_item">Pozycja</string>
-    <string name="routeInfo_horse_scale_description">Renderowanie ścieżek według trudności szlaków konnych</string>
+    <string name="routeInfo_horse_scale_description">Twórz trasy na podstawie trudności przejazdu z końmi</string>
     <string name="rendering_attr_horse_scale_difficult_name">Trudna</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Niebezpieczna</string>
     <string name="map_markers_bar">Pasek znaczników mapy</string>
@@ -4550,8 +4550,8 @@
     <string name="shared_string_buttons">Przyciski</string>
     <string name="configure_screen_widgets_descr">Wybierz stronę ekranu, aby dodać lub zmienić rozmieszczenie widżetów.</string>
     <string name="simulation_real_mode_title">Realistyczna symulacja</string>
-    <string name="simulation_constant_mode_desc">Symulacja będzie wykonywana ze stałą wybraną prędkością.</string>
-    <string name="simulation_constant_mode_title">Stała prędkość</string>
+    <string name="simulation_constant_mode_desc">Symulacja będzie przeprowadzana w ciągłej wyznaczonej prędkości.</string>
+    <string name="simulation_constant_mode_title">Wyznaczona prędkość</string>
     <string name="speed_mode">Tryb prędkości</string>
     <string name="map_widget_altitude">Wysokość nad poziomem morza w bieżącej lokalizacji</string>
     <string name="map_widget_distance_to_destination">Odległość do celu</string>
@@ -4578,7 +4578,7 @@
     <string name="import_tracks_descr">%1$s, zawiera %2$s oddzielne ścieżki. Wybierz ścieżki do zaimportowania.</string>
     <string name="page_number">Strona %1$s</string>
     <string name="apply_only_to_new_points">Zastosuj tylko do nowych punktów</string>
-    <string name="simulation_preview_mode_desc">Prędkość symulacji będzie maksymalna na prostych odcinkach i zwolni tylko na skrzyżowaniach.</string>
+    <string name="simulation_preview_mode_desc">Prędkość symulacji będzie maksymalnie szybka na prostych drogach i zwalniać będzie jedynie na skrzyżowaniach.</string>
     <string name="simulation_preview_mode_title">Tryb szybkiego podglądu</string>
     <string name="on_with_params">%1$s na %2$s</string>
     <string name="no_widgets_descr">Dodaj jeden lub więcej widżetów z listy dostępnych widżetów.</string>
@@ -4620,4 +4620,25 @@
     <string name="shared_string_speed">Prędkość</string>
     <string name="coordinates_widget_desc">Pokazuje współrzędne geograficzne bieżącej lokalizacji geograficznej.</string>
     <string name="app_mode_mountain_bicycle">Rower górski</string>
+    <string name="routing_attr_allow_private_for_truck_description">Zezwól na dostęp do obszarów prywatnych dla ciężarówek.</string>
+    <string name="rendering_attr_weatherPressureContours_name">Izolinie ciśnienia</string>
+    <string name="routing_attr_avoid_highway_description">Unikaj autostrad</string>
+    <string name="map_widget_trip_recording_downhill">Zjazd</string>
+    <string name="map_widget_trip_recording_uphill">Podjazd</string>
+    <string name="map_widget_trip_recording_duration">Czas trwania</string>
+    <string name="routing_attr_hazmat_category_name">Kategoria zagrożenia</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Brak ograniczeń</string>
+    <string name="routing_attr_avoid_fords_name">Unikaj brodów</string>
+    <string name="routing_attr_avoid_fords_description">Unikaj brodów</string>
+    <string name="colour_of_circles">Kolor okręgów</string>
+    <string name="compass_on_circles">Kompas na okręgach</string>
+    <string name="routing_attr_avoid_4wd_only_description">Unikaj dróg nadających się tylko dla pojazdów z napędem na 4 koła</string>
+    <string name="map_widget_trip_recording_distance">Odległość</string>
+    <string name="rendering_attr_horseScale_name">Trudność szlaków konnych</string>
+    <string name="routing_attr_avoid_highway_name">Unikaj autostrad</string>
+    <string name="rendering_attr_weatherTempContours_name">Izolinie temperatury</string>
+    <string name="circle_settings">Ustawienia okręgu</string>
+    <string name="routing_attr_hazmat_category_description">Kategoria materiałów niebezpiecznych / Uwzględnić zezwolenia na dostęp do materiałów niebezpiecznych</string>
+    <string name="routing_attr_avoid_4wd_only_name">Unikaj dróg dla pojazdów z napędem na 4 koła</string>
+    <string name="distance_circles">Okręgi odległości</string>
 </resources>

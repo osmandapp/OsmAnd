@@ -4651,4 +4651,25 @@
     <string name="routing_attr_avoid_4wd_only_description">Csak 4-kerék meghajtású járművek számára alkalmas utak elkerülése</string>
     <string name="circle_settings">Kör beállításai</string>
     <string name="colour_of_circles">A körök színe</string>
+    <string name="compass_on_circles">Iránytű a körökön</string>
+    <string name="distance_circles">Távolság-körök</string>
+    <string name="routing_attr_avoid_fords_description">Gázlók nélkül</string>
+    <string name="map_widget_trip_recording_downhill">Dombnak le</string>
+    <string name="map_widget_trip_recording_duration">Időtartam</string>
+    <string name="map_widget_trip_recording_distance">Távolság</string>
+    <string name="map_widget_trip_recording_uphill">Dombnak fel</string>
+    <string name="routing_attr_avoid_fords_name">Gázlók nélkül</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Nincs korlátozás</string>
+    <string name="rendering_attr_weatherTempContours_name">Hőmérsékleti vonalak</string>
+    <string name="routing_attr_allow_private_for_truck_description">Tehergépjárművek számára a magánterületre való behajtás engedélyezése.</string>
+    <string name="rendering_attr_horseScale_name">Lovas utak nehézségi foka</string>
+    <string name="routing_attr_allow_private_for_truck_name">Behajtás magánterületre (tehergépjármű)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Légnyomás izobár vonalak</string>
+    <string name="routing_attr_avoid_highway_name">Autópályák nélkül</string>
+    <string name="routing_attr_avoid_highway_description">Autópályák nélkül</string>
+    <string name="routing_attr_hazmat_category_description">Veszélyes anyagok kategória / Vegye figyelembe a kategória hozzáférési engedélyeit</string>
+    <string name="routing_attr_hazmat_category_name">Vesz.anyag kategória</string>
+    <string name="map_widget_true_bearing">Valódi irány</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Nem jeleníti meg a katonai területeket</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Katonai területek elrejtése</string>
 </resources>

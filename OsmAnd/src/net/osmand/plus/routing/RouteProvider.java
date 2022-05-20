@@ -762,23 +762,23 @@ public class RouteProvider {
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
-			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
+	                                                     GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
-		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
+		for (Map.Entry<String, RoutingParameter> e : RoutingHelperUtils.getParametersForDerivedProfile(params.mode, generalRouter).entrySet()) {
 			String key = e.getKey();
 			RoutingParameter pr = e.getValue();
 			String vl;
-			if(key.equals(GeneralRouter.USE_SHORTEST_WAY)) {
+			if (key.equals(GeneralRouter.USE_SHORTEST_WAY)) {
 				Boolean bool = !settings.FAST_ROUTE_MODE.getModeValue(params.mode);
 				vl = bool ? "true" : null;
-			} else if(pr.getType() == RoutingParameterType.BOOLEAN) {
+			} else if (pr.getType() == RoutingParameterType.BOOLEAN) {
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
 				Boolean bool = pref.getModeValue(params.mode);
 				vl = bool ? "true" : null;
 			} else {
 				vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
 			}
-			if(vl != null && vl.length() > 0) {
+			if (vl != null && vl.length() > 0) {
 				paramsR.put(key, vl);
 			}
 		}
@@ -793,6 +793,10 @@ public class RouteProvider {
 		Float maxSpeed = params.mode.getMaxSpeed();
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
+		}
+		String derivedProfile = params.mode.getDerivedProfile();
+		if (!Algorithms.isEmpty(derivedProfile)) {
+			paramsR.put("profile_"+ derivedProfile, String.valueOf(true));
 		}
 		OsmandApplication app = settings.getContext();
 		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidRoadsHelper();

@@ -5,12 +5,12 @@ import android.hardware.GeomagneticField;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -18,8 +18,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.TRUE_BEARING;
 
 public class BearingWidget extends TextInfoWidget {
 
@@ -27,18 +28,18 @@ public class BearingWidget extends TextInfoWidget {
 	private static final int INVALID_BEARING = -1000;
 
 	private final OsmAndLocationProvider locationProvider;
-	private final boolean relative;
+	private final BearingType bearingType;
 
 	private int cachedBearing;
 
-	public BearingWidget(@NonNull MapActivity mapActivity, boolean relative) {
+	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType) {
 		super(mapActivity);
 		this.locationProvider = app.getLocationProvider();
-		this.relative = relative;
+		this.bearingType = bearingType;
 
 		setText(null, null);
-		setIcons(relative ? RELATIVE_BEARING : MAGNETIC_BEARING);
-		setContentTitle(relative ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing);
+		setIcons(bearingType.widget);
+		setContentTitle(bearingType.widget.titleId);
 	}
 
 	@Override
@@ -48,7 +49,9 @@ public class BearingWidget extends TextInfoWidget {
 		if (isUpdateNeeded() || bearingChanged) {
 			cachedBearing = bearing;
 			if (bearing != INVALID_BEARING) {
-				setText(OsmAndFormatter.getFormattedAzimuth(bearing, app) + (relative ? "" : " M"), null);
+				String formattedAzimuth = OsmAndFormatter.getFormattedAzimuth(bearing, app);
+				String postfix = bearingType == MAGNETIC_BEARING ? " M" : "";
+				setText(formattedAzimuth + postfix, null);
 			} else {
 				setText(null, null);
 			}
@@ -63,12 +66,21 @@ public class BearingWidget extends TextInfoWidget {
 			return INVALID_BEARING;
 		}
 
-		GeomagneticField destGf = getGeomagneticField(destination);
-		float bearingToDest = destination.getBearing() - destGf.getDeclination();
+		float trueBearing = destination.getBearing();
+		if (bearingType == TRUE_BEARING) {
+			return (int) trueBearing;
+		}
 
-		return relative
-				? getRelativeBearing(myLocation, bearingToDest)
-				: (int) bearingToDest;
+		GeomagneticField destGf = getGeomagneticField(destination);
+		float magneticBearing = trueBearing - destGf.getDeclination();
+
+		if (bearingType == MAGNETIC_BEARING) {
+			return (int) magneticBearing;
+		} else if (bearingType == RELATIVE_BEARING) {
+			return getRelativeBearing(myLocation, magneticBearing);
+		} else {
+			throw new IllegalStateException("Unsupported bearing type");
+		}
 	}
 
 	@Nullable
@@ -93,7 +105,7 @@ public class BearingWidget extends TextInfoWidget {
 		return null;
 	}
 
-	private int getRelativeBearing(@NonNull Location myLocation, float bearingToDest) {
+	private int getRelativeBearing(@NonNull Location myLocation, float magneticBearingToDest) {
 		float bearing = INVALID_BEARING;
 		Float heading = locationProvider.getHeading();
 
@@ -105,13 +117,13 @@ public class BearingWidget extends TextInfoWidget {
 		}
 
 		if (bearing > INVALID_BEARING) {
-			bearingToDest -= bearing;
-			if (bearingToDest > 180f) {
-				bearingToDest -= 360f;
-			} else if (bearingToDest < -180f) {
-				bearingToDest += 360f;
+			magneticBearingToDest -= bearing;
+			if (magneticBearingToDest > 180f) {
+				magneticBearingToDest -= 360f;
+			} else if (magneticBearingToDest < -180f) {
+				magneticBearingToDest += 360f;
 			}
-			return (int) bearingToDest;
+			return (int) magneticBearingToDest;
 		}
 
 		return INVALID_BEARING;
@@ -128,5 +140,18 @@ public class BearingWidget extends TextInfoWidget {
 	@Override
 	public boolean isAngularUnitsDepended() {
 		return true;
+	}
+
+	public enum BearingType {
+
+		RELATIVE_BEARING(WidgetParams.RELATIVE_BEARING),
+		MAGNETIC_BEARING(WidgetParams.MAGNETIC_BEARING),
+		TRUE_BEARING(WidgetParams.TRUE_BEARING);
+
+		public final WidgetParams widget;
+
+		BearingType(@NonNull WidgetParams widget) {
+			this.widget = widget;
+		}
 	}
 }

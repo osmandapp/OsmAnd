@@ -1,17 +1,6 @@
 package net.osmand.router;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-
-import gnu.trove.list.array.TIntArrayList;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
@@ -24,6 +13,18 @@ import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class RoutePlannerFrontEnd {
 
@@ -702,8 +703,7 @@ public class RoutePlannerFrontEnd {
 	private boolean needRequestPrivateAccessRouting(RoutingContext ctx, List<LatLon> points) throws IOException {
 		boolean res = false;
 		GeneralRouter router = (GeneralRouter) ctx.getRouter();
-		if (router != null && !router.isAllowPrivate() && 
-				router.getParameters().containsKey(GeneralRouter.ALLOW_PRIVATE)) {
+		if (router != null && !router.isAllowPrivate() && router.getParameters().containsKey(GeneralRouter.ALLOW_PRIVATE)) {
 			ctx.unloadAllData();
 			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
 			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");

@@ -43,9 +43,10 @@
 					android:contentDescription="@string/shared_string_map"
 					android:visibility="gone" />
 
-				<include
+				<net.osmand.plus.auto.AndroidAutoMapPlaceholderView
 					android:id="@+id/AndroidAutoPlaceholder"
-					layout="@layout/android_auto_map_placeholder"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
 					android:visibility="gone" />
 
 			</FrameLayout>

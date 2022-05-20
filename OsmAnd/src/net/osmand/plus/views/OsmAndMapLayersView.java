@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -75,14 +76,17 @@ public class OsmAndMapLayersView extends View {
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if(mapView == null) {
+		if (mapView == null) {
 			return;
 		}
 		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode();
 		DrawSettings drawSettings = new DrawSettings(nightMode, false);
 		mapView.drawOverMap(canvas, mapView.getCurrentRotatedTileBox().copy(), drawSettings);
+		MapRendererView mapRenderer = mapView.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.requestRender();
+		}
 	}
-	
 
 	public OsmandMapTileView getMapView() {
 		return mapView;

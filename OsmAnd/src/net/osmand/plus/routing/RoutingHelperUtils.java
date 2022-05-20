@@ -8,9 +8,16 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.MapUtils;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class RoutingHelperUtils {
 
@@ -176,5 +183,21 @@ public class RoutingHelperUtils {
 			LatLon newStartLocation = new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude());
 			checkAndUpdateStartLocation(app, newStartLocation, force);
 		}
+	}
+
+	public static RoutingParameter getParameterForDerivedProfile(@NonNull String id, @NonNull ApplicationMode appMode, @NonNull GeneralRouter router) {
+		return getParametersForDerivedProfile(appMode, router).get(id);
+	}
+
+	public static Map<String, RoutingParameter> getParametersForDerivedProfile(@NonNull ApplicationMode appMode, @NonNull GeneralRouter router) {
+		String derivedProfile = appMode.getDerivedProfile();
+		Map<String, RoutingParameter> parameters = new HashMap<>();
+		for (Entry<String, RoutingParameter> entry : router.getParameters().entrySet()) {
+			String[] profiles = entry.getValue().getProfiles();
+			if (profiles == null || Arrays.asList(profiles).contains(derivedProfile)) {
+				parameters.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return parameters;
 	}
 }

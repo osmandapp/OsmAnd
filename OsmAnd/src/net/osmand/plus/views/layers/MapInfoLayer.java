@@ -11,6 +11,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -29,6 +30,7 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
+import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentTimeWidget;
@@ -82,6 +84,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRUE_BEARING;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -97,6 +100,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private AlarmWidget alarmControl;
 	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
+
+	private AndroidAutoMapPlaceholderView androidAutoMapPlaceholderView;
 
 	private DrawSettings drawSettings;
 	private int themeId = -1;
@@ -130,6 +135,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsContainer = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
+			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
 
 			appModeChangeListener = createAppModeChangeListener();
 			settings.APPLICATION_MODE.addListener(appModeChangeListener);
@@ -149,6 +155,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			leftWidgetsPanel = null;
 			rightWidgetsPanel = null;
 			mapRulerLayout = null;
+			androidAutoMapPlaceholderView = null;
 
 			alarmControl = null;
 			rulerWidgets = null;
@@ -285,11 +292,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		MapWidget marker = markersWidgetsHelper.getMapMarkerSideWidget(true);
 		registerWidget(SIDE_MARKER_1, marker);
 
-		MapWidget relativeBearing = new BearingWidget(mapActivity, true);
+		MapWidget relativeBearing = new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING);
 		registerWidget(RELATIVE_BEARING, relativeBearing);
 
-		MapWidget magneticBearing = new BearingWidget(mapActivity, false);
+		MapWidget magneticBearing = new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING);
 		registerWidget(MAGNETIC_BEARING, magneticBearing);
+
+		MapWidget trueBearing = new BearingWidget(mapActivity, BearingType.TRUE_BEARING);
+		registerWidget(TRUE_BEARING, trueBearing);
 
 		MapWidget marker2nd = markersWidgetsHelper.getMapMarkerSideWidget(false);
 		registerWidget(SIDE_MARKER_2, marker2nd);
@@ -458,6 +468,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 			}
+
+			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
 	}
 

@@ -1310,6 +1310,14 @@ public class GPXUtilities {
 		}
 	}
 
+	public static int calculateTrackPoints(List<TrkSegment> segments) {
+		int result = 0;
+		for (TrkSegment segment : segments) {
+			result += segment.points.size();
+		}
+		return result;
+	}
+
 	public static class GPXFile extends GPXExtensions {
 
 		public String author;

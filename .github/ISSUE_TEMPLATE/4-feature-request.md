@@ -15,7 +15,7 @@ So by opening an issue, please know that your issue will be sent out to all deve
 Comments on the closed issues are also sent to all developers, so you definitely will be heard.
 However, there is no guarantee that a developer will pick up the issue to work on it.
 
-Please be sure to read our [FAQ](https://osmand.net/help-online) before creating an issue here.
+Please be sure to read our [FAQ](https://osmand.net/docs/user/troubleshooting/) before creating an issue here.
 
 🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅-->
 

@@ -259,17 +259,17 @@
     <string name="animate_route_off">Animasyonu durdur</string>
     <string name="animate_route">Animasyonu başlat</string>
     <string name="file_can_not_be_renamed">Dosya yeniden adlandırılamadı.</string>
-    <string name="file_with_name_already_exists">Bu isimde bir dosya zaten var.</string>
+    <string name="file_with_name_already_exists">Bu ada sahip bir dosya zaten var.</string>
     <string name="poi_filter_by_name">İsme göre ara</string>
     <string name="shared_string_rename">Yeniden adlandır</string>
     <string name="search_position_address">Adres…</string>
     <string name="search_position_favorites">Favoriler…</string>
-    <string name="file_with_name_already_exist">Aynı isimli dosya zaten var.</string>
+    <string name="file_with_name_already_exist">Aynı ada sahip dosya zaten var.</string>
     <string name="shared_string_save">Kaydet</string>
     <string name="favorite_home_category">Ev</string>
     <string name="favorite_friends_category">Arkadaşlar</string>
     <string name="favorite_places_category">Yerler</string>
-    <string name="shared_string_name">İsim</string>
+    <string name="shared_string_name">Ad</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Hayır, teşekkürler</string>
     <string name="shared_string_download">İndir</string>
@@ -364,7 +364,7 @@
     <string name="update_tile">Haritayı güncelle</string>
     <string name="mark_point">Hedef</string>
     <string name="shared_string_add_to_favorites">\'Sık Kullanılanlar\'a ekle</string>
-    <string name="use_english_names">Haritalarda İngilizce isimler kullanın</string>
+    <string name="use_english_names">Haritalarda İngilizce adlar kullanın</string>
     <string name="map_view_3d_descr">Haritanın 3D görünümünü etkinleştirin.</string>
     <string name="show_poi_over_map">POI üst katmanını göster</string>
     <string name="map_source">Harita kaynağı</string>
@@ -652,8 +652,8 @@
     <string name="driving_region_europe_asia">Avrupa, Asya, Latin Amerika ve benzeri</string>
     <string name="driving_region_uk">Birleşik Krallık (İngiltere), Hindistan ve benzeri</string>
     <string name="speak_title">Bildir…</string>
-    <string name="speak_descr">Sokak isimleri, trafik uyarıları (zorunlu duruşlar, hız tümsekleri), hız kamerası uyarıları ve hız sınırları duyurularını ayarlayın.</string>
-    <string name="speak_street_names">Cadde isimleri (TTS)</string>
+    <string name="speak_descr">Sokak adları, trafik uyarıları (zorunlu duruşlar, hız tümsekleri), hız kamerası uyarıları ve hız sınırları duyurularını ayarlayın.</string>
+    <string name="speak_street_names">Cadde adları (TTS)</string>
     <string name="speak_speed_limit">Hız sınırı</string>
     <string name="speak_cameras">Hız kameraları</string>
     <string name="speak_traffic_warnings">Trafik uyarıları</string>
@@ -1155,7 +1155,7 @@
     <string name="rendering_value_pedestrian_name">Yürüyerek</string>
     <string name="pause_navigation">Yolbulu duraklat</string>
     <string name="continue_navigation">Navigasyona Devam Et</string>
-    <string name="local_map_names">Yerel isimler</string>
+    <string name="local_map_names">Yerel adlar</string>
     <string name="home">Pano</string>
     <string name="rendering_attr_hideBuildings_name">Binalar</string>
     <string name="rendering_attr_hideText_name">Yazı</string>
@@ -1395,7 +1395,7 @@
     <string name="shared_string_skip">Atla</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Çevrim Dışı Haritalar\n&amp; Yolbul</string>
-    <string name="use_english_names_descr">Yerel ve İngilizce isimler arasında seçim yapın.</string>
+    <string name="use_english_names_descr">Yerel ve İngilizce adlar arasında seçim yapın.</string>
     <string name="show_view_angle">Ekran görüntüleme yönü</string>
     <string name="show_poi_over_map_description">Son kullanılan POI üst katmanını göster.</string>
     <string name="map_tile_source_descr">Çevrim içi veya önbelleğe alınmış harita döşemeleri kaynağını seçin.</string>
@@ -1429,7 +1429,7 @@
     <string name="opening_changeset">Değişiklik listesi açılıyor…</string>
     <string name="closing_changeset">Değişiklik listesi kapatılıyor…</string>
     <string name="commiting_node">Düğüm işleniyor …</string>
-    <string name="converting_names">Yerel/İngilizce isimler dönüştürülüyor…</string>
+    <string name="converting_names">Yerel/İngilizce adlar dönüştürülüyor…</string>
     <string name="previous_run_crashed">Son OsmAnd çalıştırması çöktü. Günlük kaydı dosyası {0} konumunda. Lütfen sorunu bildirin ve günlük kaydı dosyasını ekleyin.</string>
     <string name="osm_settings_descr">OSM gönderimleri için gereken OpenStreetMap.org (OSM) ayarlarını belirtin.</string>
     <string name="reload_tile">Sayfaya kiremit</string>
@@ -2107,7 +2107,7 @@
     <string name="import_as_favorites">Sık Kullanılanlar olarak içe aktar</string>
     <string name="import_file">Dosyayı içe aktar</string>
     <string name="wrong_input">Yanlış girdi</string>
-    <string name="enter_new_name">Yeni isim gir</string>
+    <string name="enter_new_name">Yeni ad gir</string>
     <string name="shared_string_back">Geri</string>
     <string name="shared_string_view">Görünüm</string>
     <string name="wrong_format">Yanlış biçim</string>
@@ -2601,7 +2601,7 @@
     <string name="show_compass_ruler">Pusula cetvelini göster</string>
     <string name="hide_compass_ruler">Pusula cetvelini gizle</string>
     <string name="profile_alert_need_routing_type_msg">Lütfen yeni uygulama profili için bir navigasyon türü seçin</string>
-    <string name="profile_alert_duplicate_name_msg">Bu isimde zaten bir profil var</string>
+    <string name="profile_alert_duplicate_name_msg">Bu ada sahip bir profil zaten var</string>
     <string name="last_launch_crashed">OsmAnd\'ın son çalıştırması çöktü. Lütfen hata mesajını paylaşarak OsmAnd\'ı geliştirmemize yardımcı olun.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• Uygulama profilleri: Özel bir simge ve renk ile kendi ihtiyaçlarınız için özel bir profil oluşturun 
@@ -2707,7 +2707,7 @@
     <string name="clear_tile_data">Tüm döşemeleri temizle</string>
     <string name="get_for">%1$s için alın</string>
     <string name="lang_kab">Cezayir Berbericesi</string>
-    <string name="translit_names">İsimlere harf çevirisi yap</string>
+    <string name="translit_names">Adlara harf çevirisi yap</string>
     <string name="translit_name_if_miss">%1$s adı eksikse harf çevirisi yap</string>
     <string name="rendering_value_light_brown_name">Açık kahverengi</string>
     <string name="rendering_value_dark_brown_name">Koyu kahverengi</string>
@@ -2777,7 +2777,7 @@
     <string name="will_close_at">Kapanır</string>
     <string name="will_open_at">Açılış saati</string>
     <string name="will_open_on">Açılış saati</string>
-    <string name="shared_string_without_name">İsim olmadan</string>
+    <string name="shared_string_without_name">Ad olmadan</string>
     <string name="lang_lo">Laoca</string>
     <string name="rendering_attr_hidePOILabels_name">POI etiketleri</string>
     <string name="will_open_tomorrow_at">Yarın şu saatte açılıyor</string>
@@ -2944,7 +2944,7 @@
     <string name="quick_action_edit_action">Eylemi düzenle</string>
     <string name="quick_actions_delete">Eylemi sil</string>
     <string name="quick_actions_delete_text">\"%s\" eylemi silinsin mi\?</string>
-    <string name="quick_favorites_name_preset">İsim hazır ayarı</string>
+    <string name="quick_favorites_name_preset">Ad hazır ayarı</string>
     <string name="favorite_autofill_toast_text">" kaydedildi "</string>
     <string name="favorite_empty_place_name">Yer</string>
     <string name="quick_action_duplicate">Hızlı eylem adı yinelenen</string>
@@ -3004,7 +3004,7 @@
     <string name="osmand_extended_description_part6">Yürüyüş, doğa yürüyüşü, şehir turu
 \n • Harita size yürüyüş ve doğa yürüyüşü yollarını gösterir.
 \n • Tercih ettiğiniz dilde Wikipedia, şehir gezisi sırasında size çok şey söyleyebilir
-\n • Hat isimleri de dahil olmak üzere toplu taşıma durakları (otobüs, tramvay, tren) yeni bir şehirde gezinmeye yardımcı olur
+\n • Hat adları da dahil olmak üzere toplu taşıma durakları (otobüs, tramvay, tren) yeni bir şehirde gezinmeye yardımcı olur
 \n • Yaya modunda GPS navigasyonu, yürüyüş yollarını kullanarak rotanızı oluşturur
 \n • Bir GPX rotası yükleyin ve izleyin veya kendinizinkini kaydedin ve paylaşın.
 \n</string>
@@ -3057,12 +3057,12 @@
 \n • İsteğe bağlı hıza göre yakınlaştırma
 \n • Arkadaşlarınızın sizi bulabilmesi için konumunuzu paylaşma
 \n</string>
-    <string name="osmand_plus_extended_description_part6">Bisiklet ve Yaya Özellikleri 
-\n • Açık hava etkinlikleri için mükemmel olan yaya, yürüyüş ve bisiklet yollarını görüntüleme 
-\n • Bisiklet ve yaya için özel yönlendirme ve görüntüleme modları 
-\n • İsteğe bağlı hat isimleri dahil toplu taşıma durakları (otobüs, tramvay, tren) 
-\n • İsteğe bağlı yerel GPX dosyasına veya çevrim içi hizmete gezi kaydı 
-\n • İsteğe bağlı hız ve irtifa göstergesi 
+    <string name="osmand_plus_extended_description_part6">Bisiklet ve Yaya Özellikleri
+\n • Açık hava etkinlikleri için mükemmel olan yaya, yürüyüş ve bisiklet yollarını görüntüleme
+\n • Bisiklet ve yaya için özel yönlendirme ve görüntüleme modları
+\n • İsteğe bağlı hat adları dahil toplu taşıma durakları (otobüs, tramvay, tren)
+\n • İsteğe bağlı yerel GPX dosyasına veya çevrim içi hizmete gezi kaydı
+\n • İsteğe bağlı hız ve irtifa göstergesi
 \n • Eş yükselti eğrileri ve tepe gölgelendirme (ilave eklenti aracılığıyla) gösterimi</string>
     <string name="osmand_plus_extended_description_part7">Doğrudan OSM\'ye katkıda bulunun 
 \n • Veri hatalarını bildirin 
@@ -3085,7 +3085,7 @@
 \n Dünyadaki çoğu ülke indirmeye hazır
 \n Afganistan\'dan Zimbabve\'ye, Avustralya\'dan ABD\'ye. Arjantin, Brezilya, Kanada, Fransa, Almanya, Meksika, İngiltere, İspanya, …
 \n</string>
-    <string name="save_poi_too_many_uppercase">İsim çok fazla büyük harf içermektedir. Devam et\?</string>
+    <string name="save_poi_too_many_uppercase">Ad çok fazla büyük harf içeriyor. Devam edilsin mi\?</string>
     <string name="route_is_too_long_v2">Uzun mesafeler için: 10 dakika içinde hiçbir rota bulunmuyorsa, lütfen ara hedefleri ekleyin.</string>
     <string name="live_monitoring_max_interval_to_send">Çevrim içi izleme için zaman tamponu</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Bağlantı olmadan gönderilecek konumları tutmak için bir zaman tamponu belirtin</string>
@@ -3110,7 +3110,7 @@
     <string name="touring_view_renderer">Gezi görünümü</string>
     <string name="nautical_renderer">Deniz</string>
     <string name="copy_location_name">Konum/POI adını kopyala</string>
-    <string name="toast_empty_name_error">İsimsiz konum</string>
+    <string name="toast_empty_name_error">Adsız konum</string>
     <string name="tunnel_warning">İleride tünel var</string>
     <string name="show_tunnels">Tüneller</string>
     <string name="download_wikipedia_description">Çevrim dışı okumak üzere %1$s için Wikipedia makalelerini indirin.</string>
@@ -3293,7 +3293,7 @@
     <string name="edit_profiles_descr">OsmAnd öntanımlı profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
     <string name="edit_profiles">Profilleri düzenle</string>
     <string name="profile_appearance">Profil görünümü</string>
-    <string name="choose_icon_color_name">Simge, renk ve isim</string>
+    <string name="choose_icon_color_name">Simge, renk ve ad</string>
     <string name="reorder_profiles">Profil listesini düzenle</string>
     <string name="selected_profile">Seçilen profil</string>
     <string name="reset_confirmation_descr">%1$s düğmesine dokunmak tüm değişikliklerinizi atar.</string>
@@ -3310,7 +3310,7 @@
     <string name="monitoring_prefs_descr">Navigasyon, kayıt tutma doğruluğu</string>
     <string name="multimedia_notes_prefs_descr">Resim boyutu, ses ve video kalitesi</string>
     <string name="osm_editing_prefs_descr">Oturum açma, parola, çevrim dışı düzenleme</string>
-    <string name="accessibility_prefs_descr">Simge, renk ve isim seç</string>
+    <string name="accessibility_prefs_descr">Simge, renk ve ad seçin</string>
     <string name="live_monitoring_descr">Yolculuk kaydını kullanarak mevcut konumun paylaşılmasını sağlar.</string>
     <string name="live_monitoring">Çevrim içi izleme</string>
     <string name="save_track_logging_accuracy">Kayıt tutma doğruluğu</string>
@@ -3783,8 +3783,8 @@
 \n
 \n</string>
     <string name="sort_last_modified">Son değiştirme</string>
-    <string name="sort_name_descending">İsim: Z – A</string>
-    <string name="sort_name_ascending">İsim: A – Z</string>
+    <string name="sort_name_descending">Ad: Z – A</string>
+    <string name="sort_name_ascending">Ad: A – Z</string>
     <string name="start_finish_icons">Başlangıç ve bitiş simgeleri</string>
     <string name="contour_lines_thanks">\'Eş yükselti eğrileri\'ni satın aldığınız için teşekkürler</string>
     <string name="osm_live_payment_desc_hw">Abonelik seçilen dönem başına ücretlendirilir. İstediğiniz zaman AppGallery\'den iptal edin.</string>
@@ -4468,7 +4468,7 @@
     <string name="routing_attr_prefer_horse_routes_name">At rotalarını tercih et</string>
     <string name="routing_attr_prefer_horse_routes_description">At rotalarını tercih edin</string>
     <string name="exit_pan_mode_descr">Kaydırma modundan çıkmak için Seç düğmesine basın</string>
-    <string name="upload_gpx_description_hint">Boş bırakın, yol isimleri açıklama olarak kullanılacaktır. Girilen açıklama her yol için uygulanacaktır.</string>
+    <string name="upload_gpx_description_hint">Boş bırakın, yol adları açıklama olarak kullanılacaktır. Girilen açıklama her yol için uygulanacaktır.</string>
     <string name="search_title">Ara: %1$s</string>
     <string name="routing_attr_allow_gate_description">Kapıların kullanımına izin verin</string>
     <string name="routing_attr_only_permitted_streets_name">Açıkça izin verilen sokaklar</string>
@@ -4661,4 +4661,24 @@
     <string name="colour_of_circles">Dairelerin rengi</string>
     <string name="circle_settings">Daire ayarları</string>
     <string name="distance_circles">Mesafe daireleri</string>
+    <string name="routing_attr_avoid_highway_name">Otoyollardan kaçın</string>
+    <string name="routing_attr_avoid_highway_description">Otoyollardan kaçının</string>
+    <string name="map_widget_trip_recording_duration">Süre</string>
+    <string name="routing_attr_hazmat_category_description">Tehlikeli madde kategorisi / Tehlikeli madde erişim izinlerini göz önünde bulundurun</string>
+    <string name="routing_attr_avoid_fords_name">Nehir geçişlerinden kaçın</string>
+    <string name="routing_attr_allow_private_for_truck_description">Kamyonlar için özel alanlara erişime izin verin.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Özel erişime izin ver (kamyon)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Basınç eş değer eğrileri</string>
+    <string name="rendering_attr_horseScale_name">At parkurlarının zorluğu</string>
+    <string name="rendering_attr_weatherTempContours_name">Sıcaklık eş değer eğrileri</string>
+    <string name="map_widget_trip_recording_downhill">Yokuş aşağı</string>
+    <string name="map_widget_trip_recording_uphill">Yokuş yukarı</string>
+    <string name="map_widget_trip_recording_distance">Mesafe</string>
+    <string name="routing_attr_hazmat_category_name">Tehlikeli madde kategorisi</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Kısıtlama yok</string>
+    <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>
+    <string name="map_widget_true_bearing">Gerçek yön</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Askeri alanları gizleyin</string>
+    <string name="explore_plans">Planları Keşfet</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Askeri alanları gizle</string>
 </resources>

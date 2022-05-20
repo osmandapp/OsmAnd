@@ -28,6 +28,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -112,6 +113,7 @@ public class UiUtilities {
 		return d;
 	}
 
+	@Nullable
 	private Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
 		Drawable drawable = null;
 		if (resId != 0) {
@@ -129,6 +131,7 @@ public class UiUtilities {
 		return drawable;
 	}
 
+	@Nullable
 	public Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		return getPaintedDrawable(id, color);
 	}

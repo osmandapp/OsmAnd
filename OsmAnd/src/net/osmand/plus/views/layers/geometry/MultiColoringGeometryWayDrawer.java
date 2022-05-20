@@ -146,7 +146,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, pointBitmap, (float) pxStep, colorizationMapping, style.getColorizationScheme(),
+				pointBitmap, pointBitmap, (float) pxStep, true, colorizationMapping, style.getColorizationScheme(),
 				pathsData);
 	}
 

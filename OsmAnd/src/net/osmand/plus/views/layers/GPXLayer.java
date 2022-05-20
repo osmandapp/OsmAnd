@@ -179,7 +179,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private LocationPointsTileProvider trackChartPointsProvider;
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
-	private SWIGTYPE_p_void highlightedPointMarkerOnSurfaceKey;
 	private LatLon highlightedPointLocationCached;
 
 	private ContextMenuLayer contextMenuLayer;
@@ -845,7 +844,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void setHighlightedPointMarkerLocation(LatLon latLon) {
-		if (highlightedPointMarker != null) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && highlightedPointMarker != null) {
 			highlightedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
 					MapUtils.get31TileNumberY(latLon.getLatitude())));
 		}
@@ -927,9 +927,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			builder.setBaseOrder(baseOrder - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
-			highlightedPointMarkerOnSurfaceKey = SwigUtilities.getOnSurfaceIconKey(1);
-			builder.addOnMapSurfaceIcon(highlightedPointMarkerOnSurfaceKey,
-					NativeUtilities.createSkImageFromBitmap(highlightedPointImage));
+			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(highlightedPointImage));
 			highlightedPointMarker = builder.buildAndAddToCollection(highlightedPointCollection);
 			mapRenderer.addSymbolsProvider(highlightedPointCollection);
 		}

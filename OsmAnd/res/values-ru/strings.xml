@@ -58,7 +58,7 @@
     <string name="change_color">Выбрать цвет</string>
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
-    <string name="routing_attr_allow_private_name">Разрешить частные зоны</string>
+    <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
     <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
@@ -3751,7 +3751,7 @@
     <string name="access_hint_enter_address">Введите адрес</string>
     <string name="plan_route_trim_before">Обрезать перед</string>
     <string name="plan_route_trim_after">Обрезать после</string>
-    <string name="plan_route_change_route_type_before">Изменить тип маршрута до</string>
+    <string name="plan_route_change_route_type_before">Изменить тип маршрута перед</string>
     <string name="plan_route_change_route_type_after">Изменить тип маршрута после</string>
     <string name="simplified_track">Упрощённый трек</string>
     <string name="simplified_track_description">Будет сохранена только линия маршрута, без путевых точек.</string>
@@ -3884,7 +3884,7 @@
     <string name="app_mode_light_aircraft">Лёгкий самолёт</string>
     <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
     <string name="plan_route_join_segments">Объединить сегменты</string>
-    <string name="plan_route_split_before">Разделить до</string>
+    <string name="plan_route_split_before">Разделить перед</string>
     <string name="plan_route_split_after">Разделить после</string>
     <string name="profile_type_user_string">Профиль пользователя</string>
     <string name="profile_type_osmand_string">Профиль OsmAnd</string>
@@ -4060,7 +4060,7 @@
 \n• Обновлен диалог «Запись маршрута».
 \n
 \n</string>
-    <string name="empty_purchases_description">Если ваши покупки не отображаются здесь, нажмите на «%1$s» или свяжитесь с нашей службой поддержки.</string>
+    <string name="empty_purchases_description">Если ваши покупки не отображаются здесь, нажмите «%1$s» или свяжитесь с нашей службой поддержки.</string>
     <string name="contact_support">Служба поддержки</string>
     <string name="troubleshooting">Устранение неполадок</string>
     <string name="troubleshooting_description">Перейдите по этой ссылке, если у вас есть какие-либо проблемы с покупками.</string>
@@ -4618,7 +4618,7 @@
 \n• Исправления: автообновление тайловых онлайн-карт
 \n
 \n</string>
-    <string name="turn_on_public_transport_description">Включите, чтобы увидеть на карте маршруты общественного транспорта.</string>
+    <string name="turn_on_public_transport_description">Включите для отображения на карте маршрутов общественного транспорта.</string>
     <string name="av_def_action_choose">По запросу</string>
     <string name="widget_secondary_desc_part_of">Часть плагина «%1$s».</string>
     <string name="elevation_profile_widget_desc">Виджет показывает профиль высоты и уклона текущего маршрута.</string>
@@ -4657,13 +4657,33 @@
     <string name="bearing_secondary_desc">Вы можете изменить формат отображаемых данных через меню: %1$s - %2$s - %3$s.</string>
     <string name="magnetic_bearing_widget_desc">Угол между магнитным севером и целевой точкой, наблюдаемой из вашего местоположения.</string>
     <string name="arrival_time_widget_desc">Время прибытия в пункт назначения.</string>
-    <string name="map_markers_bar_widget_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="map_markers_bar_widget_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="coordinates_widget_desc">Виджет показывает географические координаты текущего местоположения.</string>
-    <string name="map_markers_desc">На виджете верхней панели можно увидеть расстояние и направление до маркера от текущего местоположения. Можно настроить отображение одного или двух верхних маркеров.</string>
+    <string name="map_markers_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегать дорог, подходящих только для полноприводных автомобилей</string>
     <string name="routing_attr_avoid_4wd_only_name">Без дорог 4WD</string>
     <string name="compass_on_circles">Компас на окружности</string>
     <string name="circle_settings">Настройки окружностей</string>
     <string name="distance_circles">Окружности-расстояния</string>
     <string name="colour_of_circles">Окраска окружностей</string>
+    <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
+    <string name="routing_attr_avoid_highway_description">Избегать автомагистрали</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ грузовых автомобилей на частную территорию.</string>
+    <string name="map_widget_trip_recording_duration">Продолжительность</string>
+    <string name="map_widget_trip_recording_uphill">Подъём</string>
+    <string name="routing_attr_hazmat_category_name">Категория опасности</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Без ограничений</string>
+    <string name="map_widget_trip_recording_distance">Расстояние</string>
+    <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
+    <string name="routing_attr_avoid_fords_name">Без бродов</string>
+    <string name="routing_attr_allow_private_for_truck_name">Разрешить частный доступ (грузовик)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Изобары</string>
+    <string name="rendering_attr_weatherTempContours_name">Изотермы</string>
+    <string name="routing_attr_avoid_fords_description">Избегать броды</string>
+    <string name="rendering_attr_horseScale_name">Сложность конных маршрутов</string>
+    <string name="map_widget_trip_recording_downhill">Спуск</string>
+    <string name="map_widget_true_bearing">Истинный пеленг</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Скрыть военные зоны</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Военные зоны</string>
+    <string name="explore_plans">Ознакомиться с планами</string>
 </resources>

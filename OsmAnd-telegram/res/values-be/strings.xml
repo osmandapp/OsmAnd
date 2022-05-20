@@ -36,7 +36,7 @@
     <string name="shared_string_status">Статус</string>
     <string name="no_gps_connection">Злучэнне з GPS адсутнічае</string>
     <string name="no_internet_connection">Злучэнне з Інтэрнэтам адсутнічае</string>
-    <string name="shared_string_disable">Выключыць</string>
+    <string name="shared_string_disable">Адключыць</string>
     <string name="shared_string_save">Захаваць</string>
     <string name="add_device">Дадаць прыладу</string>
     <string name="share_location_as">Падзяліцца месцазнаходжаннем як</string>
@@ -87,7 +87,7 @@
     <string name="get_telegram_description_continue">Калі ласка, ўсталюйце Тэлеграм і наладзьце акаўнт.</string>
     <string name="get_telegram_after_creating_account">Пасля гэтага вы зможаце выкарыстоўваць праграму.</string>
     <string name="shared_string_all">Усе</string>
-    <string name="shared_string_off">Выкл</string>
+    <string name="shared_string_off">Адкл</string>
     <string name="already_registered_in_telegram">Вам неабходна мець акаўнт Тэлеграм і нумар тэлефона</string>
     <string name="do_not_have_telegram">У мяне няма акаўнта Тэлеграм</string>
     <string name="enter_phone_number">Увядзіце нумар тэлефона</string>
@@ -271,4 +271,8 @@
     <string name="shared_string_export">Экспартаваць</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="logcat_buffer_descr">Праверце і падзяліцеся падрабязнымі журналамі праграмы</string>
+    <string name="send_live_location_error">Падчас адпраўлення месцазнаходжання адбылася памылка: %1$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="shared_string_error">Памылка</string>
 </resources>

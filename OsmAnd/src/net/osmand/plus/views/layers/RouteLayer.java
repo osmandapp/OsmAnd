@@ -90,7 +90,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private LocationPointsTileProvider trackChartPointsProvider;
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
-	private SWIGTYPE_p_void highlightedPointMarkerOnSurfaceKey;
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 
@@ -238,7 +237,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private void setHighlightedPointMarkerLocation(LatLon latLon) {
-		if (highlightedPointMarker != null) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && highlightedPointMarker != null) {
 			highlightedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
 					MapUtils.get31TileNumberY(latLon.getLatitude())));
 		}
@@ -269,10 +269,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			builder.setBaseOrder(baseOrder - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
-			highlightedPointMarkerOnSurfaceKey = SwigUtilities.getOnSurfaceIconKey(1);
-			Bitmap highlightedPointImage = chartPointsHelper.createHighlightedPointBitmap();
-			builder.addOnMapSurfaceIcon(highlightedPointMarkerOnSurfaceKey,
-					NativeUtilities.createSkImageFromBitmap(highlightedPointImage));
+			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(
+					chartPointsHelper.createHighlightedPointBitmap()));
 			highlightedPointMarker = builder.buildAndAddToCollection(highlightedPointCollection);
 			mapRenderer.addSymbolsProvider(highlightedPointCollection);
 		}

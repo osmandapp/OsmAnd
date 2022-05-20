@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.plus.views.layers.geometry.GeometryWayDrawer.VECTOR_LINE_SCALE_COEF;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -26,6 +28,17 @@ import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.AidlMapPointWrapper;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListVectorLine;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorDouble;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
@@ -40,15 +53,18 @@ import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -86,10 +102,18 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
 
-	private Object selectedObject;
+	// OpenGl
+	private VectorLinesCollection outlineCollection;
+	private MapMarkersCollection contextMarkerCollection;
+	private net.osmand.core.jni.MapMarker contextCoreMarker;
+	private Bitmap contextMarkerImage;
 
-	public ContextMenuLayer(@NonNull Context context) {
+	private Object selectedObject;
+	private Object selectedObjectCached;
+
+	public ContextMenuLayer(@NonNull Context context, int baseOrder) {
 		super(context);
+		this.baseOrder = baseOrder;
 		selectionHelper = new MapSelectionHelper(context);
 	}
 
@@ -117,6 +141,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		clearContextMarkerCollection();
+		clearOutlineCollection();
 	}
 
 	@Override
@@ -126,11 +152,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		Context context = getContext();
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));
+		Drawable markerDrawable = AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu);
+		contextMarker.setImageDrawable(markerDrawable);
 		contextMarker.setClickable(true);
 		int minw = contextMarker.getDrawable().getMinimumWidth();
 		int minh = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, minw, minh);
+
+		contextMarkerImage = AndroidUtils.drawableToBitmap(markerDrawable);
 
 		paint = new Paint();
 		paint.setColor(0x7f000000);
@@ -157,7 +186,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mapActivity == null) {
 			return;
 		}
+		MapRendererView mapRenderer = getMapRenderer();
+		boolean hasMapRenderer = mapRenderer != null;
+		if (contextMarkerCollection == null || mapActivityInvalidated) {
+			recreateContextMarkerCollection();
+		}
 		boolean markerCustomized = false;
+		boolean clearSelectedObject = true;
 		if (selectedObject != null) {
 			TIntArrayList x = null;
 			TIntArrayList y = null;
@@ -173,17 +208,44 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {
-				float px, py, prevX, prevY;
-				prevX = box.getPixXFrom31(x.get(0), y.get(0));
-				prevY = box.getPixYFrom31(x.get(0), y.get(0));
-				for (int i = 1; i < x.size(); i++) {
-					px = box.getPixXFrom31(x.get(i), y.get(i));
-					py = box.getPixYFrom31(x.get(i), y.get(i));
-					canvas.drawLine(prevX, prevY, px, py, outlinePaint);
-					prevX = px;
-					prevY = py;
+				if (hasMapRenderer) {
+					clearSelectedObject = false;
+					if (selectedObject != selectedObjectCached) {
+						clearOutlineCollection();
+						VectorLinesCollection outlineCollection = new VectorLinesCollection();
+						QVectorPointI points = new QVectorPointI();
+						for (int i = 0; i < x.size(); i++) {
+							points.add(new PointI(x.get(i), y.get(i)));
+						}
+						VectorLineBuilder builder = new VectorLineBuilder();
+						builder.setPoints(points)
+								.setIsHidden(false)
+								.setLineId(1)
+								.setLineWidth(outlinePaint.getStrokeWidth() * VECTOR_LINE_SCALE_COEF)
+								.setFillColor(NativeUtilities.createFColorARGB(outlinePaint.getColor()))
+								.setApproximationEnabled(false)
+								.setBaseOrder(baseOrder);
+						builder.buildAndAddToCollection(outlineCollection);
+						this.outlineCollection = outlineCollection;
+						mapRenderer.addSymbolsProvider(outlineCollection);
+					}
+				} else {
+					float px, py, prevX, prevY;
+					prevX = box.getPixXFrom31(x.get(0), y.get(0));
+					prevY = box.getPixYFrom31(x.get(0), y.get(0));
+					for (int i = 1; i < x.size(); i++) {
+						px = box.getPixXFrom31(x.get(i), y.get(i));
+						py = box.getPixYFrom31(x.get(i), y.get(i));
+						canvas.drawLine(prevX, prevY, px, py, outlinePaint);
+						prevX = px;
+						prevY = py;
+					}
 				}
 			}
+		}
+		selectedObjectCached = selectedObject;
+		if (clearSelectedObject && hasMapRenderer) {
+			clearOutlineCollection();
 		}
 		float textScale = selectionHelper.hasPressedLatLon() ? getTextScale() : 1f;
 		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getPressedLatLonSmall().entrySet()) {
@@ -215,17 +277,34 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return;
 		}
 
+		boolean showMarker = false;
 		if (mInChangeMarkerPositionMode) {
 			if (menu != null && menu.getObject() == null) {
-				canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
-				contextMarker.draw(canvas);
+				if (hasMapRenderer) {
+					PointI loc31 = new PointI(0, 0);
+					if (mapRenderer.getLocationFromScreenPoint(new PointI(box.getPixWidth() / 2, box.getPixHeight() / 2), loc31)) {
+						contextCoreMarker.setPosition(loc31);
+						showMarker = true;
+					}
+				} else {
+					canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
+					contextMarker.draw(canvas);
+				}
 			}
 			if (mMoveMarkerBottomSheetHelper != null) {
 				mMoveMarkerBottomSheetHelper.onDraw(box);
 			}
 		} else if (mInAddGpxPointMode) {
-			canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
-			contextMarker.draw(canvas);
+			if (hasMapRenderer) {
+				PointI loc31 = new PointI(0, 0);
+				if (mapRenderer.getLocationFromScreenPoint(new PointI(box.getPixWidth() / 2, box.getPixHeight() / 2), loc31)) {
+					contextCoreMarker.setPosition(loc31);
+					showMarker = true;
+				}
+			} else {
+				canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
+				contextMarker.draw(canvas);
+			}
 			if (mAddGpxPointBottomSheetHelper != null) {
 				mAddGpxPointBottomSheetHelper.onDraw(box);
 			}
@@ -237,12 +316,24 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				latLon = mapActivity.getTrackMenuFragment().getLatLon();
 			}
 			if (latLon != null) {
-				int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
-				contextMarker.draw(canvas);
+				if (hasMapRenderer) {
+					PointI loc31 = new PointI(
+							MapUtils.get31TileNumberX(latLon.getLongitude()),
+							MapUtils.get31TileNumberY(latLon.getLatitude()));
+					contextCoreMarker.setPosition(loc31);
+					showMarker = true;
+				} else {
+					int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
+					contextMarker.draw(canvas);
+				}
 			}
 		}
+		if (hasMapRenderer) {
+			contextCoreMarker.setIsHidden(!showMarker);
+		}
+		mapActivityInvalidated = false;
 	}
 
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
@@ -255,6 +346,39 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				selectedObjectContextMenuProvider = (IContextMenuProvider) layer;
 				break;
 			}
+		}
+	}
+
+	private void recreateContextMarkerCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			clearContextMarkerCollection();
+
+			contextMarkerCollection = new MapMarkersCollection();
+			MapMarkerBuilder builder = new MapMarkerBuilder();
+			builder.setBaseOrder(getBaseOrder() - 100);
+			builder.setIsAccuracyCircleSupported(false);
+			builder.setIsHidden(true);
+			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(contextMarkerImage));
+			builder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top);
+			contextCoreMarker = builder.buildAndAddToCollection(contextMarkerCollection);
+			mapRenderer.addSymbolsProvider(contextMarkerCollection);
+		}
+	}
+
+	private void clearContextMarkerCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && contextMarkerCollection != null) {
+			mapRenderer.removeSymbolsProvider(contextMarkerCollection);
+			contextMarkerCollection = null;
+		}
+	}
+
+	private void clearOutlineCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && outlineCollection != null) {
+			mapRenderer.removeSymbolsProvider(outlineCollection);
+			outlineCollection = null;
 		}
 	}
 
@@ -773,6 +897,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapActivity.getTrackMenuFragment() != null) {
 			mapActivity.getTrackMenuFragment().dismiss();
+			MapActivity.clearPrevActivityIntent();
 			return true;
 		}
 		if (multiSelectionMenu != null && multiSelectionMenu.isVisible()) {

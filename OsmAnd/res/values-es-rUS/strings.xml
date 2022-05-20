@@ -64,8 +64,8 @@
     <string name="shared_string_enable">Activar</string>
     <string name="shared_string_disable">Desactivar</string>
     <string name="shared_string_ok">Aceptar</string>
-    <string name="shared_string_on">Sí</string>
-    <string name="shared_string_off">No</string>
+    <string name="shared_string_on">Activado</string>
+    <string name="shared_string_off">Desactivado</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
     <string name="shared_string_selected">Marcado</string>
@@ -3531,7 +3531,7 @@
     <string name="lang_zhminnan">Min del Sur</string>
     <string name="lang_yo">Yoruba</string>
     <string name="lang_war">Waray</string>
-    <string name="lang_uz">Uzbeko</string>
+    <string name="lang_uz">Uzbeco</string>
     <string name="lang_ur">Urdu</string>
     <string name="lang_tt">Tártaro</string>
     <string name="lang_tg">Tayiko</string>
@@ -3548,8 +3548,8 @@
     <string name="lang_ky">Kirguís</string>
     <string name="lang_kk">Kazajo</string>
     <string name="lang_jv">Javanés</string>
-    <string name="lang_gu">Gujaratí</string>
-    <string name="lang_cv">Chuvash</string>
+    <string name="lang_gu">Guyaratí</string>
+    <string name="lang_cv">Chuvasio</string>
     <string name="lang_ce">Checheno</string>
     <string name="lang_bar">Bávaro</string>
     <string name="lang_ba">Bashkir</string>
@@ -3581,7 +3581,7 @@
     <string name="additional_actions_descr">Accede a estas acciones pulsando el botón «%1$s».</string>
     <string name="quick_action_transport_descr">Botón que muestra u oculta el transporte público en el mapa.</string>
     <string name="create_edit_poi">Crear o editar PDI</string>
-    <string name="parking_positions">Puestos de estacionamiento</string>
+    <string name="parking_positions">Posiciones de estacionamiento</string>
     <string name="add_edit_favorite">Añadir o editar favorito</string>
     <string name="reset_deafult_order">Restaurar el orden de los elementos predefinidos</string>
     <string name="back_to_editing">Volver a la edición</string>
@@ -4409,9 +4409,9 @@
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
     <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
-    <string name="map_marker_options">Opciones del marcador de mapa</string>
+    <string name="map_marker_options">Opciones del marcador del mapa</string>
     <string name="add_to_group">Añadir al grupo</string>
-    <string name="app_modes_options">Eligir modos de aplicación</string>
+    <string name="app_modes_options">Elegir modos de aplicación</string>
     <string name="shared_string_memory">Memoria</string>
     <string name="reading_files">Leyendo archivos…</string>
     <string name="no_items_selected_warning">Marca al menos un elemento</string>
@@ -4477,18 +4477,18 @@
     <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
     <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas «fixme» (arréglame)</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas «note» (nota)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Mostrar los túneles fluviales</string>
-    <string name="shared_string_used">Usados</string>
+    <string name="shared_string_used">Usado</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
     <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
     <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
-    <string name="shared_string_not_used">Sin uso</string>
+    <string name="shared_string_not_used">Sin usar</string>
     <string name="waypoint_appearance">Aspecto del punto de referencia</string>
     <string name="files_with_route_restrictions">Archivos con restricciones de ruta</string>
     <string name="track_file">Archivo de la traza</string>
@@ -4510,7 +4510,7 @@
     <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
     <string name="gpx_no_routes_title">Sin rutas</string>
     <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para añadir la ruta al archivo.</string>
-    <string name="points_selection_descr">¿Cerrar y se perder todos los cambios\?</string>
+    <string name="points_selection_descr">¿Cerrar y perder todos los cambios\?</string>
     <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
 \n
 \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
@@ -4610,6 +4610,22 @@
 \n
 \n• Correcciones: actualización automática de teselas en los mapas en línea.
 \n
+\n• Nuevos widgets: rumbo verdadero. Grabación del viaje: descenso, ascenso, duración.
+\n
+\n• Teselas SRTM en línea.
+\n
+\n• Ahora se admiten coordenadas de la red suiza CH1903 / CH1903+.
+\n
+\n• Reemplazo de coordenadas UTM como 31T en lugar de 31N.
+\n
+\n• Gráficos: el análisis en el mapa ahora muestra los datos de dos ejes.
+\n
+\n• El estilo de mapa «Mapnik» fue reemplazado por el nuevo estilo «OSM-Carto».
+\n
+\n• Todos los elementos relacionados con OpenStreetMap se han combinado en un solo grupo en el menú «Configurar mapa».
+\n
+\n• Wikipedia: se ha corregido la visibilidad de las imágenes en hebreo.
+\n
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermedia</string>
     <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
@@ -4660,4 +4676,24 @@
     <string name="app_mode_mountain_bicycle">Bicicleta de montaña</string>
     <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
     <string name="av_def_action_choose">A petición</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permitir el acceso a áreas privadas para camiones.</string>
+    <string name="rendering_attr_weatherTempContours_name">Isolíneas de temperatura</string>
+    <string name="rendering_attr_weatherPressureContours_name">Isolíneas de presión</string>
+    <string name="map_widget_true_bearing">Rumbo verdadero</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permitir el acceso privado (camión)</string>
+    <string name="map_widget_trip_recording_duration">Duración</string>
+    <string name="rendering_attr_horseScale_name">Dificultad de los senderos ecuestres</string>
+    <string name="routing_attr_avoid_highway_name">Evitar los caminos</string>
+    <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
+    <string name="explore_plans">Explorar planes</string>
+    <string name="map_widget_trip_recording_downhill">Descenso</string>
+    <string name="map_widget_trip_recording_uphill">Ascenso</string>
+    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Sin restricciones</string>
+    <string name="routing_attr_avoid_fords_name">Evitar vados</string>
+    <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
+    <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
 </resources>

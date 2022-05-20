@@ -420,7 +420,7 @@ public class AnimateDraggingMapThread {
 	private void resumeUpdate() {
 		final MapRendererView mapRenderer = tileView.getMapRenderer();
 		if (mapRenderer != null) {
-			mapRenderer.resumeSymbolsUpdate();
+			while (!mapRenderer.resumeSymbolsUpdate());
 		}
 	}
 

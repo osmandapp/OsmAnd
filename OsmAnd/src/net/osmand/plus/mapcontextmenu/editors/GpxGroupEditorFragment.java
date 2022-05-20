@@ -63,7 +63,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 
 	@Override
 	public void addNewGroup() {
-
+		pointsGroup = new PointsGroup(groupName, getIconName(), getBackgroundType().getTypeName(), getColor(), 0);
 	}
 
 	@Override

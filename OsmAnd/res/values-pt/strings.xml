@@ -670,12 +670,12 @@
     <string name="specified_dir_doesnt_exist">Não foi possível encontrar a pasta especificada.</string>
     <string name="application_dir">Local de armazenamento</string>
     <string name="osmand_net_previously_installed">Todos os dados offline na aplicação instalada antiga serão suportados pela nova, mas os pontos Favoritos devem ser exportados da aplicação antiga e depois importados na nova.</string>
-    <string name="build_installed">A compilação {0} foi instalada ({1}).</string>
-    <string name="downloading_build">A descarregar a compilação…</string>
+    <string name="build_installed">A versão de teste {0} foi instalada ({1}).</string>
+    <string name="downloading_build">A descarregar a versão de teste…</string>
     <string name="install_selected_build">Instalar OsmAnd - {0} de {1} {2} MB \?</string>
-    <string name="loading_builds_failed">Não foi possível obter a lista de compilações do OsmAnd</string>
-    <string name="loading_builds">A carregar compilações do OsmAnd…</string>
-    <string name="select_build_to_install">Selecionar a compilação a instalar</string>
+    <string name="loading_builds_failed">Não foi possível obter a lista de versões de teste diárias do OsmAnd</string>
+    <string name="loading_builds">A carregar versões de teste do OsmAnd…</string>
+    <string name="select_build_to_install">Selecionar a versão de teste a instalar</string>
     <string name="contribution_activity">Instalar versão</string>
     <string name="navigate_point_format_D">GGG.GGGGG</string>
     <string name="navigate_point_format_DM">GGG MM.MMM</string>
@@ -1337,7 +1337,7 @@
     <string name="shared_string_go">Ir</string>
     <string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">Configurações gerais</string>
-    <string name="version_settings_descr">Descarregar compilações noturnas.</string>
+    <string name="version_settings_descr">Descarregar versões de teste diárias.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="dash_download_manage">Gerir</string>
     <string name="rendering_category_transport">Transportes públicos</string>
@@ -1411,7 +1411,7 @@
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, tem de descarregar o mapa offline especial.</string>
     <string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamento</string>
-    <string name="version_settings">Compilações</string>
+    <string name="version_settings">Versões de teste</string>
     <string name="navigation_over_track">Iniciar a navegação ao longo do trilho\?</string>
     <string name="rendering_attr_transportStops_name">Paragens de transporte</string>
     <string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em aparelhos muito antigos).</string>
@@ -1515,7 +1515,7 @@
     <string name="go_to_map">Mostrar mapa</string>
     <string name="simulate_initial_startup_descr">A próxima vez que abrir a aplicação serão mostrados os ecrãs de primeira instalação, mantém todas as outras configurações inalteradas.</string>
     <string name="simulate_initial_startup">Simular arranque inicial da aplicação</string>
-    <string name="share_geo">Outras aplicações de mapas</string>
+    <string name="share_geo">geo:</string>
     <string name="share_menu_location">Partilhar localização</string>
     <string name="shared_string_send">Enviar</string>
     <string name="osmand_running_in_background">Executar em segundo plano</string>
@@ -1799,7 +1799,7 @@
     <string name="search_another_country">Selecionar outra região</string>
     <string name="shared_string_change">Alterar</string>
     <string name="storage_directory_card">Cartão de memória</string>
-    <string name="skip_map_downloading_desc">Não tem nenhum mapa offline instalado. Pode escolher um mapa na lista ou descarregar mapas mais tarde em \"Menu\" → \"%1$s\".</string>
+    <string name="skip_map_downloading_desc">Não tem nenhum mapa offline instalado. Pode escolher um mapa na lista ou descarregar mapas mais tarde em \"Menu &gt; %1$s\".</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
@@ -1813,7 +1813,7 @@
     <string name="shared_string_finish">Terminar</string>
     <string name="plan_route">Planear rota</string>
     <string name="shared_string_sort">Ordenar</string>
-    <string name="coordinate_input">Introdução de coordenadas</string>
+    <string name="coordinate_input">Introduzir coordenadas</string>
     <string name="marker_save_as_track_descr">Exporte os seus marcadores para o seguinte ficheiro GPX:</string>
     <string name="move_to_history">Mover para histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo será removido na próxima vez que iniciar a aplicação.</string>
@@ -1923,8 +1923,8 @@
     <string name="favorite_group_name">Nome do grupo</string>
     <string name="change_color">Alterar cor</string>
     <string name="edit_name">Editar nome</string>
-    <string name="animate_my_location">Animar a própria posição</string>
-    <string name="animate_my_location_desc">Ativar animação panorâmica do mapa da \"Minha posição\" durante navegação.</string>
+    <string name="animate_my_location">Animar deslocação no mapa</string>
+    <string name="animate_my_location_desc">Ativar animação da deslocação do mapa da \"Minha posição\" durante a navegação.</string>
     <string name="shared_string_overview">Visão geral</string>
     <string name="select_street">Selecionar rua</string>
     <string name="shared_string_in_name">em %1$s</string>
@@ -2768,7 +2768,7 @@
     <string name="touring_view_renderer">Vista de turismo</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="copy_location_name">Copiar local/nome do POI</string>
-    <string name="toast_empty_name_error">Local sem nome</string>
+    <string name="toast_empty_name_error">Localização sem nome</string>
     <string name="tunnel_warning">Túnel à frente</string>
     <string name="show_tunnels">Túneis</string>
     <string name="download_wikipedia_description">Descarregar artigos da Wikipédia de %1$s para lê-los offline.</string>
@@ -3163,7 +3163,7 @@
     <string name="route_parameters">Parâmetros da rota</string>
     <string name="application_profile_changed">Perfil da aplicação alterado para \"%s\"</string>
     <string name="logcat_buffer">Buffer de logcat</string>
-    <string name="plugins_settings">Configurações do complemento</string>
+    <string name="plugins_settings">Configurações dos complementos</string>
     <string name="app_mode_camper">Campista</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="shared_string_by_default">Por predefinição</string>
@@ -3281,7 +3281,7 @@
     <string name="route_start_point">Ponto de partida</string>
     <string name="track_saved">Trilho guardado</string>
     <string name="empty_filename">O nome do ficheiro está vazio</string>
-    <string name="shared_string_revert">Reverter</string>
+    <string name="shared_string_revert">Repor</string>
     <string name="quick_action_directions_from_desc">Um botão para centrar o ecrã no ponto de partida. Em seguida, solicitará para definir o destino ou acionar o cálculo da rota.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
@@ -3611,9 +3611,9 @@
 \nUm dia são 1440 minutos, uma semana 10080, um mês 43829.</string>
     <string name="tiles_storage_descr">Escolha como os mosaicos descarregados serão armazenados.</string>
     <string name="default_screen_timeout">Tempo limite padrão do ecrã</string>
-    <string name="width_limit_description">Forneça a largura do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos largos.</string>
-    <string name="height_limit_description">Forneça a altura do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos altos.</string>
-    <string name="weight_limit_description">Forneça o peso do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos pesados.</string>
+    <string name="width_limit_description">Configure a largura do seu veículo para evitar estradas proibidas a veículos com largura superior a essa.</string>
+    <string name="height_limit_description">Configure a altura do seu veículo para evitar estradas proibidas a veículos com altura superior a essa.</string>
+    <string name="weight_limit_description">Configure o peso do seu veículo para evitar estradas proibidas a veículos com peso superior a esse.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Exporte ou importe ações rápidas com os perfis da aplicação.</string>
     <string name="shared_string_delete_all_q">Eliminar tudo\?</string>
     <string name="delete_all_actions_message_q">Eliminar de forma permanente %d ações rápidas\?</string>
@@ -3642,7 +3642,7 @@
     <string name="search_download_wikipedia_maps">Descarregar mapas da Wikipédia</string>
     <string name="additional_actions_descr">Aceda a estas ações tocando no botão “%1$s”.</string>
     <string name="shared_string_uninstall">Desinstalar</string>
-    <string name="lenght_limit_description">Forneça o comprimento do seu veículo, podem ser aplicadas algumas restrições de rota a veículos longos.</string>
+    <string name="lenght_limit_description">Configure o comprimento do seu veículo para evitar estradas proibidas a veículos com comprimento superior a esse.</string>
     <string name="use_volume_buttons_as_zoom">Botões de volume mudam a ampliação</string>
     <string name="speed_cameras_restart_descr">Reinicie a aplicação para eliminar os dados da câmara de velocidade.</string>
     <string name="item_deleted">%1$s eliminado</string>
@@ -3841,7 +3841,7 @@
     <string name="sign_in_with_open_street_map">Iniciar sessão com OpenStreetMap</string>
     <string name="use_login_password">Usar o nome do utilizador e palavra-passe</string>
     <string name="login_account">Conta</string>
-    <string name="user_login">Utilizador</string>
+    <string name="user_login">Login</string>
     <string name="markers_history">Histórico de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar ficheiro de GPX para o OpenStreetMap</string>
     <string name="enter_text_separated">Introduza etiquetas separadas por vírgula.</string>
@@ -4283,7 +4283,7 @@
     <string name="reset_to_original">Repor o original</string>
     <string name="benefits_for_contributors">Benefícios para contribuidores do OpenStreetMap ativos</string>
     <string name="benefits_for_contributors_primary_descr">Os colaboradores ativos do OpenStreetMap.org podem ter direito a atualizações de mapas a cada hora ilimitadas.</string>
-    <string name="benefits_for_contributors_secondary_descr">Autentique-se no OpenStreetMap e verifique se está qualificado para obter atualizações de mapas mensais e a cada hora ilimitadas.</string>
+    <string name="benefits_for_contributors_secondary_descr">Autentique-se com a sua conta do OpenStreetMap e veja se está qualificado para obter atualizações de mapas mensais e a cada hora ilimitadas.</string>
     <string name="use_login_and_password">Usar nome de utilizador e palavra-passe</string>
     <string name="available_until">Disponível até %1$s</string>
     <string name="enough_contributions_descr">Parabéns! Fez contribuições suficientes para o OpenStreetMap e pode desfrutar de atualizações ilimitadas de mapas.</string>
@@ -4558,7 +4558,7 @@
     <string name="shared_string_buttons">Botões</string>
     <string name="routing_attr_carriage_restrictions_description">Considerar permissões de acesso a veículos puxados a cavalo</string>
     <string name="rendering_attr_showLightRailRoutes_name">Rotas de comboios ligeiros</string>
-    <string name="simulation_preview_mode_desc">A velocidade na simulação será a máxima em retas e diminuirá apenas nas intersecções.</string>
+    <string name="simulation_preview_mode_desc">A velocidade da simulação será a máxima em retas e diminuirá apenas nos cruzamentos.</string>
     <string name="rendering_attr_showRunningRoutes_name">Rotas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas para correr</string>
     <string name="routeInfo_horse_scale_description">Mostrar percursos equestres de acordo com a sua dificuldade</string>
@@ -4666,4 +4666,24 @@
     <string name="distance_circles">Círculos-distância</string>
     <string name="circle_settings">Configurações dos círculos</string>
     <string name="colour_of_circles">Cor dos círculos</string>
+    <string name="rendering_attr_weatherTempContours_name">Isolinhas de temperatura</string>
+    <string name="rendering_attr_weatherPressureContours_name">Isolinhas de pressão</string>
+    <string name="rendering_attr_horseScale_name">Dificuldade de trilhos para cavalos</string>
+    <string name="map_widget_trip_recording_downhill">Descida</string>
+    <string name="map_widget_trip_recording_uphill">Subida</string>
+    <string name="routing_attr_avoid_highway_name">Evitar autoestradas</string>
+    <string name="routing_attr_avoid_highway_description">Evitar autoestradas</string>
+    <string name="routing_attr_hazmat_category_name">Categoria de material perigoso</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permitir acesso para camiões a áreas privadas.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permitir acesso privado (camião)</string>
+    <string name="map_widget_trip_recording_duration">Duração</string>
+    <string name="map_widget_trip_recording_distance">Distância</string>
+    <string name="routing_attr_hazmat_category_description">Categoria de materiais perigosos / aplicar as permissões de acesso com materiais perigosos</string>
+    <string name="routing_attr_avoid_fords_name">Evitar vaus</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Sem restrições</string>
+    <string name="routing_attr_avoid_fords_description">Evitar vaus (passagens em riachos baixos)</string>
+    <string name="map_widget_true_bearing">Rumo verdadeiro</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares, normalmente de acesso proibido a civis</string>
+    <string name="explore_plans">Explorar planos</string>
 </resources>

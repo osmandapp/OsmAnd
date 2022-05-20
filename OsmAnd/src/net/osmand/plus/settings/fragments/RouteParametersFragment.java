@@ -1,10 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +29,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
@@ -59,6 +55,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -88,19 +89,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		booleanRoutingPrefListener = new StateChangedListener<Boolean>() {
-			@Override
-			public void stateChanged(Boolean change) {
-				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
-			}
-		};
-		customRoutingPrefListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
-			}
-		};
+		booleanRoutingPrefListener = change -> app.runInUIThread(this::recalculateRoute);
+		customRoutingPrefListener = change -> app.runInUIThread(this::recalculateRoute);
 	}
 
 	@Override
@@ -221,7 +211,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			GeneralRouter router = app.getRouter(am);
 			clearParameters();
 			if (router != null) {
-				Map<String, RoutingParameter> parameters = router.getParameters();
+				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, router);
 				if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 					screen.addPreference(fastRoute);
 				}
@@ -584,7 +574,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	@Override
 	public void onPreferenceChanged(String prefId) {
 		if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId) || PREFER_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
-			recalculateRoute(app, getSelectedAppMode());
+			recalculateRoute();
 		}
 	}
 
@@ -652,16 +642,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		return multiSelectPref;
 	}
 
-	private static void recalculateRoute(@NonNull OsmandApplication app, ApplicationMode mode) {
-		app.getRoutingHelper().onSettingsChanged(mode);
-	}
-
 	private void clearParameters() {
 		avoidParameters.clear();
 		preferParameters.clear();
 		drivingStyleParameters.clear();
 		reliefFactorParameters.clear();
 		otherRoutingParameters.clear();
+	}
+
+	private void recalculateRoute() {
+		recalculateRoute(app, getSelectedAppMode());
 	}
 
 	public static String getRoutingParameterTitle(Context context, RoutingParameter parameter) {
@@ -696,9 +686,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
+	private static void recalculateRoute(@NonNull OsmandApplication app, ApplicationMode mode) {
+		app.getRoutingHelper().onSettingsChanged(mode);
+	}
+
 	private Drawable getRoutingPrefIcon(String prefId) {
 		switch (prefId) {
 			case GeneralRouter.ALLOW_PRIVATE:
+			case GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK:
 				return getPersistentPrefIcon(R.drawable.ic_action_private_access);
 			case GeneralRouter.USE_SHORTEST_WAY:
 				return getPersistentPrefIcon(R.drawable.ic_action_fuel);

@@ -13,6 +13,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -65,7 +66,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.customWidth != trackWidth) {
 			updateStylesWidth(trackWidth);
 		}
-		if (this.dashPattern != dashPattern) {
+		if (!Arrays.equals(this.dashPattern, dashPattern)) {
 			updateStylesDashPattern(dashPattern);
 		}
 		if (this.drawDirectionArrows != drawDirectionArrows) {

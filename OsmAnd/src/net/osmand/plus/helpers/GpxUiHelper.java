@@ -669,7 +669,7 @@ public class GpxUiHelper {
 							confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 							confirm.show();
 						} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							monitoringPlugin.controlDialog(activity);
+							monitoringPlugin.showTripRecordingDialog(activity);
 						}
 					}
 				} else {
@@ -2240,8 +2240,10 @@ public class GpxUiHelper {
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
-					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null,
-							null, null, false, trackAnalysis, routeSegment);
+					Bundle params = new Bundle();
+					params.putBoolean(TrackMenuFragment.ADJUST_MAP_POSITION, false);
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
+							trackAnalysis, routeSegment, params);
 				} else {
 					LOG.error(errorMessage);
 				}
@@ -2364,7 +2366,6 @@ public class GpxUiHelper {
 	                                              float distanceToPoint, boolean preciseLocation,
 	                                              boolean joinSegments) {
 		double passedDistance = 0;
-
 		if (!segment.generalSegment || joinSegments) {
 			WptPt prevPoint = null;
 			for (int i = 0; i < segment.points.size(); i++) {
@@ -2381,13 +2382,13 @@ public class GpxUiHelper {
 			}
 		}
 
+		passedDistance = 0;
 		double passedSegmentsPointsDistance = 0;
 		WptPt prevPoint = null;
 		for (Track track : gpxFile.tracks) {
 			if (track.generalTrack) {
 				continue;
 			}
-
 			for (TrkSegment seg : track.segments) {
 				if (Algorithms.isEmpty(seg.points)) {
 					continue;
@@ -2397,7 +2398,6 @@ public class GpxUiHelper {
 						passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon,
 								currPoint.lat, currPoint.lon);
 					}
-
 					if (passedSegmentsPointsDistance + currPoint.distance >= distanceToPoint
 							|| Math.abs(passedDistance - distanceToPoint) < 0.1) {
 						return preciseLocation && prevPoint != null

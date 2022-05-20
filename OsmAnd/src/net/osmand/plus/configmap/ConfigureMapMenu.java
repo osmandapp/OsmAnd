@@ -562,12 +562,12 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE));
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				UI_CATEGORY_DETAILS, adapter, activity, true, DETAILS_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_DETAILS, activity, true, DETAILS_ID, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				UI_CATEGORY_HIDE, adapter, activity, true, HIDE_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_HIDE, activity, true, HIDE_ID, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -585,12 +585,13 @@ public class ConfigureMapMenu {
 											 @StringRes final int strId,
 											 @DrawableRes final int icon,
 											 final String category,
-											 final ContextMenuAdapter adapter,
 											 final MapActivity activity,
 											 final boolean useDescription,
 											 final String id,
 											 final boolean nightMode,
 											 @ColorInt final int selectedProfileColor) {
+		OsmandApplication app = activity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -600,9 +601,7 @@ public class ConfigureMapMenu {
 			RenderingRuleProperty p = it.next();
 			if (category.equals(p.getCategory()) && p.isBoolean()) {
 				ps.add(p);
-				final CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
-						.getCustomRenderBooleanProperty(p.getAttrName());
-				prefs.add(pref);
+				prefs.add(settings.getCustomRenderBooleanProperty(p.getAttrName()));
 				it.remove();
 			}
 		}
