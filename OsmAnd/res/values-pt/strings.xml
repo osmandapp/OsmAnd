@@ -3281,7 +3281,7 @@
     <string name="route_start_point">Ponto de partida</string>
     <string name="track_saved">Trilho guardado</string>
     <string name="empty_filename">O nome do ficheiro está vazio</string>
-    <string name="shared_string_revert">Reverter</string>
+    <string name="shared_string_revert">Repor</string>
     <string name="quick_action_directions_from_desc">Um botão para centrar o ecrã no ponto de partida. Em seguida, solicitará para definir o destino ou acionar o cálculo da rota.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
