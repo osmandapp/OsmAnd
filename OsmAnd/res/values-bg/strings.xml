@@ -159,7 +159,7 @@
     <string name="safe_mode">Безопасен режим</string>
     <string name="native_library_not_running">Приложението работи в безопасен режим (можете да го изключите от Настройки).</string>
     <string name="background_service_is_enabled_question">Услугата на OsmAnd все още работи във фонов режим. Искате ли да изключите и нея също?</string>
-    <string name="close_changeset">Затвори списъка с промени</string>
+    <string name="close_changeset">Затваряне на списъка с промени</string>
     <string name="zxing_barcode_scanner_not_found">Апликацията ZXing скенер не е инсталирана. Да потърся ли в Market?</string>
     <string name="rendering_attr_roadColors_description">Избор на схема за оцветяване на пътищата:</string>
     <string name="rendering_attr_roadColors_name">Схема на оцветяването на пътищата</string>
@@ -871,7 +871,7 @@
     <string name="mark_final_location_first">Моля, изберете първо крайна цел</string>
     <string name="get_directions">Указания</string>
     <string name="opening_hours">Работно време</string>
-    <string name="opening_changeset">Отваряне на списъка с промени…</string>
+    <string name="opening_changeset">Отваряне на списък с промени…</string>
     <string name="closing_changeset">Затваряне на списъка с промени…</string>
     <string name="commiting_node">Изпращане на точка…</string>
     <string name="loading_poi_obj">Зареждане на POI…</string>
@@ -1415,7 +1415,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Оцветяване спрямо обхвата</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Излизане</string>
-    <string name="osm_changes_added_to_local_edits">Промените в OSM бяха добавени към списъка с промени</string>
+    <string name="osm_changes_added_to_local_edits">Промените в OSM са добавени към списъка с промени</string>
     <string name="save_as_favorites_points">Запиши като група от любими места</string>
     <string name="int_days">дни</string>
     <string name="osm_edit_context_menu_delete">Изтриване на OSM редакцията</string>
@@ -1609,7 +1609,7 @@
     <string name="osn_add_dialog_success">Бележката беше създадена</string>
     <string name="osn_add_dialog_error">Бележката не беше създадена.</string>
     <string name="osn_close_dialog_success">Бележката беше затворена</string>
-    <string name="osn_close_dialog_error">Бележката не може да се затвори.</string>
+    <string name="osn_close_dialog_error">Бележката не е затворена.</string>
     <string name="shared_string_commit">Изпращане на данни до OSM</string>
     <string name="context_menu_item_delete_waypoint">Изтриване на GPX точка?</string>
     <string name="context_menu_item_edit_waypoint">Редактиране на GPX точка</string>
