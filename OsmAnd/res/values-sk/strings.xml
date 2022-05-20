@@ -4505,7 +4505,7 @@
     <string name="rendering_value_category_name">Kategória</string>
     <string name="save_track_to_gpx_descrp">Automaticky spustiť nahrávanie stopy počas navigácie a potom uložiť.</string>
     <string name="gpx_no_routes_title">Neexistujú žiadne trasy</string>
-    <string name="gpx_no_routes_descr">Pre uloženie cesty do súboru môžete použiť nástroj \"%1$s\".</string>
+    <string name="gpx_no_routes_descr">Môžete použiť nástroj \"%1$s\" pre pridanie trasy do súboru.</string>
     <string name="quick_action_add_route_descr">Tlačidlo na začatie trasy v strede obrazovky.</string>
     <string name="select_suggested_points">Zvoľte navrhované body</string>
     <string name="selected_waypoints_descr">Zvolené body trasy budú pridané do stopy \"%1$s\"</string>
@@ -4608,4 +4608,5 @@
 \n • Opravy: automatická aktualizácia online dlaždíc
 \n
 \n</string>
+    <string name="av_def_action_choose">Na vyžiadanie</string>
 </resources>
