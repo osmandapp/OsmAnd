@@ -317,7 +317,7 @@
     <string name="lang_de">Alemán</string>
     <string name="lang_el">Griego</string>
     <string name="lang_iw">Hebreo</string>
-    <string name="lang_hi">Hindi</string>
+    <string name="lang_hi">Hindú</string>
     <string name="lang_hu">Húngaro</string>
     <string name="lang_id">Indonesio</string>
     <string name="lang_it">Italiano</string>
@@ -1546,7 +1546,7 @@
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandés</string>
-    <string name="lang_ms">Malayo</string>
+    <string name="lang_ms">Malasio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estonio</string>
@@ -2868,7 +2868,7 @@
     <string name="rendering_attr_highway_class_motorway_name">Autopista</string>
     <string name="rendering_attr_highway_class_state_road_name">Carretera o ruta estatal</string>
     <string name="rendering_attr_highway_class_road_name">Carretera principal</string>
-    <string name="rendering_attr_highway_class_street_name">Calle residencial</string>
+    <string name="rendering_attr_highway_class_street_name">Calle</string>
     <string name="rendering_attr_highway_class_service_name">Vía de servicio</string>
     <string name="rendering_attr_highway_class_footway_name">Vereda o acera</string>
     <string name="rendering_attr_highway_class_track_name">Camino rural</string>
@@ -3937,7 +3937,7 @@
     <string name="toast_select_edits_for_upload">Marcar ediciones a subir</string>
     <string name="start_recording">Iniciar grabación</string>
     <string name="show_track_on_map">Mostrar traza en el mapa</string>
-    <string name="shared_string_turn">Girar</string>
+    <string name="shared_string_turn">Giro</string>
     <string name="shared_string_sec">seg</string>
     <string name="routing_engine_vehicle_type_wheelchair">Silla de ruedas</string>
     <string name="routing_engine_vehicle_type_walking">Peatón</string>
@@ -4075,7 +4075,7 @@
     <string name="output">Salida</string>
     <string name="shared_string_feet">pies</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
-    <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provee datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
@@ -4280,7 +4280,7 @@
 \n
 \nQuizás algunos mapas no están cargados, puedes ejecutar una comprobación en línea para los mapas necesarios.</string>
     <string name="online_maps_searching_descr">Buscando mapas en línea…</string>
-    <string name="reset_to_original">Restablecer al original</string>
+    <string name="reset_to_original">Reiniciar al original</string>
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
