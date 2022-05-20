@@ -4340,4 +4340,40 @@
     <string name="storage_found_files_descr">Націсніце «%1$s», каб скапіяваць файлы %2$s з «%3$s» у «%4$s». Гэта можа заняць некаторы час.</string>
     <string name="benefits_for_contributors_secondary_descr">Увайдзіце ў OpenStreetMap, каб праверыць, ці маеце вы права на неабмежаваную колькасць штомесячных і штогадзінных абнаўленняў мапаў.</string>
     <string name="empty_purchases_description">Калі вашы пакупкі не з\'явіліся тут, націсніце на «%1$s» або звярніцеся ў нашу службу падтрымкі.</string>
+    <string name="markers_history_is_disabled_descr">Уключыце гісторыю, каб запомніць спіс наведаных адзнак на мапе.</string>
+    <string name="history_is_disabled_descr">Уключыце гісторыю, каб атрымаць больш хуткі доступ да апошніх выкарыстаных вынікаў.</string>
+    <string name="backup_version_history_delete_descr">Выдаліць журнал змен для састарэлых тыпаў даных з OsmAnd Cloud\?</string>
+    <string name="direct_line_maps_required_descr">Разлік маршруту займае больш часу, чым звычайна.
+\n
+\nМагчыма, не загружаныя некаторыя мапы.</string>
+    <string name="storage_migration_wrong_folder_warning">У абраным каталозе даныя OsmAnd не знойдзены. Калі ласка, паспрабуйце яшчэ раз.</string>
+    <string name="use_external_timestamps_description">Выкарыстоўваць пазнакі часу анлайн-маршрутызатара для падладжвання прыблізнага часу і сярэдняй хуткасці</string>
+    <string name="routing_attr_driving_style_description">Абярыце тып маршруту, каб атрымаць карацейшы, найхутчэйшы або найбяспечнейшы маршрут</string>
+    <string name="track_file_description">Націсканне на гэтую кнопку адкрые дыялогавае акно выбару даступных слядоў.</string>
+    <string name="verify_email_address_descr">Код праверкі адпраўлены на %1$s. Калі ласка, увядзіце яго ў поле ніжэй.</string>
+    <string name="osmand_cloud_authorize_descr">Ніколі не губляйце свае даныя. Лёгка стварайце рэзервовую копію і аднаўляйце ўсю інфармацыю.</string>
+    <string name="temporary_conditional_routing_descr">Выкарыстоўваць дарожныя абмежаванні, якія зараз дзейнічаюць на мапе</string>
+    <string name="android_auto_purchase_request_title">Набудзьце OsmAnd Pro або Maps+, каб выкарыстоўваць OsmAnd з Android Auto</string>
+    <string name="troubleshooting_description">Калі ў вас узніклі праблемы з пакупкамі, перайдзіце па гэтай спасылцы.</string>
+    <string name="live_update_frequency_hour_variant">Абнаўленні мапы будуць правяраецца штогадзіну. Наступны раз %1$s у %2$s.</string>
+    <string name="live_update_frequency_week_variant">Абнаўленні мапы будуць правярацца штотыдзень. Наступны раз %1$s у %2$s.</string>
+    <string name="approx_safe_mode_description">Выканаць апраксімацыю GPX, выкарыстоўваючы больш павольны код Android замест убудаванага.</string>
+    <string name="quick_action_coordinates_widget_descr">Пераключальнік для адлюстравання або скрыцця віджэту каардынатаў на мапе.</string>
+    <string name="live_update_frequency_day_variant">Абнаўленні мапы будуць правярацца штодня. Наступны раз %1$s у %2$s.</string>
+    <string name="map_orientation_threshold_descr">Не паварочваць прагляд мапы, калі хуткасць меншая за гранічную</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Колер маршрутаў у залежнасці ад тыпу сеткі вузлоў (міжнародная, рэгіянальная, лакальная).</string>
+    <string name="benefits_for_contributors_primary_descr">Актыўныя ўдзельнікі OpenStreetMap.org маюць права на неабмежаваную колькасць штогадзінных абнаўленняў мапаў.</string>
+    <string name="mapillary_menu_filter_description_new">Фільтраваць выявы паводле даты або тыпу. Працуе толькі на буйных маштабах.</string>
+    <string name="shared_storage_third_step">Дайце дазвол на доступ да каталога. Без гэтага OsmAnd не можа капіяваць файлы.</string>
+    <string name="android_auto_map_placeholder_descr">Адключыце прыладу ад Android Auto, каб праглядзець мапу ў праграме.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Атрымайце неабмежаваную колькасць загрузак пазасеткавых мапаў для ўсіх кантынентаў і рэгіёнаў.</string>
+    <string name="routeInfo_smoothness_description">Класіфікацыя прыдатнасці дарогі/пешаходнай дарожкі для колавых транспартных сродкаў, у прыватнасці, адносна роўнасці/раўнамернасці паверхні.</string>
+    <string name="routeInfo_winter_ice_road_description">Колер маршрута або следу паводле класіфікацыі зімовых дарог.</string>
+    <string name="clear_all_history_warning">Ачысціць усе запісы гісторыі з праграмы, уключаючы пошук, навігацыю і гісторыю адзак\?</string>
+    <string name="osmand_online_routing_promo">Выкарыстоўвайце прадвызначаныя шаблоны або дадайце OSRM, GraphHopper, openrouteservice або анлайн-маршрутызацыю GPX.</string>
+    <string name="backup_delete_old_data_descr">Бягучыя версіі вашых даных будуць захаваны ў OsmAnd Cloud</string>
+    <string name="gpx_no_routes_descr">Вы можаце выкарыстоўваць \"%1$s\", каб дадаць маршрут у файл.</string>
+    <string name="quick_action_add_route_descr">Кнопка для запуску маршрута з сярэдзіны экрана.</string>
+    <string name="shared_app_storage_description">Агульная памяць больш недаступная з-за змены палітыкі доступу да сховішча ў Android.</string>
+    <string name="contact_support_description">Калі ў вас ёсць якія-небудзь пытанні, калі ласка, звяжыцеся з намі па адрасе %1$s.</string>
 </resources>

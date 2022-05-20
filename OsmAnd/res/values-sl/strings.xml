@@ -4669,4 +4669,8 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">Brez omejitev</string>
     <string name="routing_attr_avoid_fords_name">Izogibaj se plitvin</string>
     <string name="routing_attr_avoid_fords_description">Izogibaj se plitvin</string>
+    <string name="map_widget_true_bearing">Prava usmeritev</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Skrij vojaška območja</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Skrij vojaška območja</string>
+    <string name="explore_plans">Razišči načrte</string>
 </resources>
