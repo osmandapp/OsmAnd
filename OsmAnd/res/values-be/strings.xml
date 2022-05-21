@@ -4376,4 +4376,30 @@
     <string name="quick_action_add_route_descr">Кнопка для запуску маршрута з сярэдзіны экрана.</string>
     <string name="shared_app_storage_description">Агульная памяць больш недаступная з-за змены палітыкі доступу да сховішча ў Android.</string>
     <string name="contact_support_description">Калі ў вас ёсць якія-небудзь пытанні, калі ласка, звяжыцеся з намі па адрасе %1$s.</string>
+    <string name="osm_carto_render_descr">Падобны стылю OpenStreetMap-carto, які выкарыстоўваецца на галоўным сайце OSM</string>
+    <string name="cloud_email_not_registered">Гэты адрас электроннай пошты не зарэгістраваны для OsmAnd Cloud</string>
+    <string name="use_routing_fallback_description">Выкарыстоўваць пазасеткавую маршрутызацыю, пакуль анлайн -маршрутызацыя недаступная.</string>
+    <string name="search_history_is_disabled_descr">Вы можаце ўключыць гісторыю пошуку ў наладах.</string>
+    <string name="offline_maps_required_descr">Некаторыя пазасеткавыя мапы, неабходныя для гэтага маршруту, адсутнічаюць.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Атрымайце доступ да рэгулярных штомесячных абнаўленняў для пазасеткавых мапаў.</string>
+    <string name="backup_error_token_is_not_valid">Нешта не так з прадстаўленым ідэнтыфікатарам прылады або токенам</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Вывучыце тарыфныя планы OsmAnd, каб знайсці адпаведны вашым патрэбам.</string>
+    <string name="simulation_constant_mode_desc">Мадэляванне будзе выконвацца з абранай пастаяннай хуткасцю.</string>
+    <string name="history_preferences_descr">Вы можаце адключыць запіс гісторыі асобна для кожнага тыпу гісторыі.</string>
+    <string name="track_recording_description">Спыніць запіс\?
+\nУсе незахаваныя даныя будуць страчаныя.</string>
+    <string name="routing_attr_only_permitted_ways_description">"Выкарыстоўвайце толькі выразна дазволеныя шляхі (дарожкі, сцежкі і г.  д.)."</string>
+    <string name="routeInfo_roadClass_description">Расфарбуйце маршрут або след паводле класіфікацыі дарог.</string>
+    <string name="setting_supported_by_style">Гэты параметр падтрымліваецца стылем карты \"%1$s\"</string>
+    <string name="purchases_feature_desc_pro_widgets">Атрымайце доступ да функцый OsmAnd Pro: расфарбоўка маршрутаў і многае іншае.</string>
+    <string name="language_description">Абярыце пажаданую мову і тып галасавых падказак.</string>
+    <string name="selected_waypoints_descr">Абраныя маршрутныя кропкі будуць дададзеныя да следу \"%1$s\"</string>
+    <string name="turn_arrows_descr">Абярыце, ці паказваць стрэлкі павароту на лініі маршруту.</string>
+    <string name="local_backup_descr">Рэзервовае капіраванне або аднаўленне даных з лакальнага файла.</string>
+    <string name="predefined_waypoint_appearance_description">Націсканне на кнопку аўтаматычна захавае кропку маршруту з загадзя вызначанымі параметрамі.</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Атрымайце «%1$s» у рамках тарыфнага плана %2$s. Параўнанне:</string>
+    <string name="import_tracks_descr">%1$s, змяшчае %2$s асобныя сляды. Выберыце сляды для імпартавання.</string>
+    <string name="backup_error_gzip_only_supported_upload">Файл павінен быць адпраўлены ў фармаце .gzip</string>
+    <string name="backup_error_subscription_was_used">Падпіска або промакод выкарыстоўваюцца іншым уліковым запісам %1$s</string>
+    <string name="migration_files_present">У абраным месцы \"%3$s\" ёсць файлы %1$d (%2$s).</string>
 </resources>
