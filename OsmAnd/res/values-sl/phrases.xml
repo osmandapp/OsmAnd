@@ -1239,7 +1239,7 @@
     <string name="poi_seamark_bridge">Pomorska točka: most</string>
     <string name="poi_buoy_cardinal">Kardinalna boja</string>
     <string name="poi_buoy_installation">Boja za namestitev</string>
-    <string name="poi_buoy_isolated_danger">Bojo, izolirana nevarnost</string>
+    <string name="poi_buoy_isolated_danger">Boja, izolirana nevarnost</string>
     <string name="poi_buoy_lateral">Bočna boja</string>
     <string name="poi_buoy_safe_water">Boja za varno vodo</string>
     <string name="poi_fog_signal">Signal za meglo</string>
@@ -1282,4 +1282,16 @@
     <string name="poi_seamark_light_minor">Manjši svetilnik, pomorska oznaka</string>
     <string name="poi_seamark_light_vessel">Ladja-svetilnik, pomorska oznaka</string>
     <string name="poi_seamark_light_major">Večji svetilnik, pomorska oznaka</string>
+    <string name="poi_pile">Kup</string>
+    <string name="poi_small_craft_facility">Objekt male obrti</string>
+    <string name="poi_signal_station_warning">Signalna postaja, opozorilo</string>
+    <string name="poi_radar_transponder">Radarski oddajnik, pomorska oznaka</string>
+    <string name="poi_radio_station">Radijska postaja, pomorska oznaka</string>
+    <string name="poi_daymark">Dnevna oznaka</string>
+    <string name="poi_signal_station_traffic">Signalna postaja, promet</string>
+    <string name="poi_seamark_rock">Skala, pomorska oznaka</string>
+    <string name="poi_seamark_wreck">Ladijske razbitine, pomorska oznaka</string>
+    <string name="poi_recycling_hardcore">Inertni gradbeni odpadki</string>
+    <string name="poi_lock_basin">Zaporna komora</string>
+    <string name="poi_notice">Obvestilo, pomorska oznaka</string>
 </resources>
