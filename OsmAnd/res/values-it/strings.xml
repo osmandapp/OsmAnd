@@ -4610,7 +4610,7 @@
     <string name="audio_video_notes_desc">I widget forniscono un accesso veloce per avviare/fermare l\'acquisizione di una registrazione (audio, video, foto).</string>
     <string name="street_name_widget_desc">Il widget dei nomi delle strade mostra il nome della strada corrente con la freccia di direzione o con il nome della manovra che si sta completando.</string>
     <string name="colour_of_circles">Colore dei cerchi</string>
-    <string name="distance_circles">Distanza dei cerchi</string>
+    <string name="distance_circles">Cerchi di distanza</string>
     <string name="compass_on_circles">Bussola nei cerchi</string>
     <string name="routing_attr_avoid_4wd_only_description">Evita le strade percorribili solo con veicoli 4WD</string>
     <string name="bearing_secondary_desc">Puoi cambiare il formato della data visualizza in: %1$s – %2$s – %3$s.</string>
