@@ -32,15 +32,15 @@
 
 	<include
 		android:id="@+id/hide_mode_container"
-		layout="@layout/radius_ruler_mode_item" />
+		layout="@layout/widget_settings_radio_item" />
 
 	<include
 		android:id="@+id/dark_mode_container"
-		layout="@layout/radius_ruler_mode_item" />
+		layout="@layout/widget_settings_radio_item" />
 
 	<include
 		android:id="@+id/light_mode_container"
-		layout="@layout/radius_ruler_mode_item" />
+		layout="@layout/widget_settings_radio_item" />
 
 	<View
 		android:layout_width="match_parent"
