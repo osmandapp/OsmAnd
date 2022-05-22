@@ -34,11 +34,11 @@
     <string name="poi_public_transport_platform_bus">Bussholdeplass</string>
     <string name="poi_bus_stop">Bussholdeplass</string>
     <string name="poi_bus_station">Busstasjon</string>
-    <string name="poi_railway_station">Jernbanestasjon</string>
-    <string name="poi_railway_platform">Jernbaneperrong</string>
+    <string name="poi_railway_station">Jernbanestasjon;Togstasjon</string>
+    <string name="poi_railway_platform">Jernbaneperrong;Togperrong</string>
     <string name="poi_subway_station">Ja;T-banestasjon</string>
     <string name="poi_taxi">Taxiholdeplass</string>
-    <string name="poi_aerodrome">Flyplass</string>
+    <string name="poi_aerodrome">Flyplass;Lufthavn</string>
     <string name="poi_ferry_terminal">Fergeterminal</string>
     <string name="poi_lighthouse">Fyrtårn</string>
     <string name="poi_bicycle_rental">Sykkelutleie</string>
@@ -305,7 +305,7 @@
     <string name="poi_diet_gluten_free_no">Glutenfri: nei</string>
     <string name="poi_traffic_signals">Trafikklys</string>
     <string name="poi_car_wash">Bilvask</string>
-    <string name="poi_halt">Jernbanestoppested</string>
+    <string name="poi_halt">Jernbaneholdeplass;Togholdeplass</string>
     <string name="poi_water_works">Vannverk</string>
     <string name="poi_pier">Molo</string>
     <string name="poi_works">Fabrikk</string>
