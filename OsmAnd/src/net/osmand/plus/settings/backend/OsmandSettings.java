@@ -76,6 +76,7 @@ import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -784,10 +785,8 @@ public class OsmandSettings {
 		}
 	};
 
-	public final OsmandPreference<Boolean> SHOW_RADIUS_RULER_ON_MAP = new BooleanPreference(this, "show_radius_ruler_on_map", true).makeProfile();
-	public final OsmandPreference<Boolean> SHOW_DISTANCE_CIRCLES_ON_RADIUS_RULER = new BooleanPreference(this, "show_distance_circles_on_radius_rules", true).makeProfile();
+	public final OsmandPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
-	public final OsmandPreference<Boolean> RADIUS_RULER_NIGHT_MODE = new BooleanPreference(this, "radius_ruler_night_mode", false).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();
@@ -1139,7 +1138,7 @@ public class OsmandSettings {
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
-	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().storeLastModifiedTime();
+	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().makeShared().storeLastModifiedTime();
 
 	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
 

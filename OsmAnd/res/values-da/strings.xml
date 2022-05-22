@@ -4686,4 +4686,5 @@
     <string name="map_widget_true_bearing">Sande pejling</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Skjul militære områder</string>
+    <string name="explore_plans">Udforsk planer</string>
 </resources>

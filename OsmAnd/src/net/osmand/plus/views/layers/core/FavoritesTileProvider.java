@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapTiledCollectionPoint;
@@ -164,6 +165,17 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	@Override
 	public ZoomLevel getMaxZoom() {
 		return ZoomLevel.MaxZoomLevel;
+	}
+
+
+	@Override
+	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
+		return MapMarker.PinIconVerticalAlignment.CenterVertical;
+	}
+
+	@Override
+	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
+		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
 	}
 
 	public void addToData(@NonNull FavouritePoint favorite, int colorSmallPoint, int colorBigPoint, boolean withShadow,

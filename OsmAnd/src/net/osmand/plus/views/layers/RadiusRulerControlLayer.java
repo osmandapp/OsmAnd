@@ -34,8 +34,10 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
@@ -161,14 +163,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 			final QuadPoint center = tb.getCenterPixelPoint();
 
-			boolean showRadiusRuler = settings.SHOW_RADIUS_RULER_ON_MAP.get();
-			boolean showDistanceCircles = settings.SHOW_DISTANCE_CIRCLES_ON_RADIUS_RULER.get();
+			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
+			boolean showRadiusRuler = radiusRulerMode == RadiusRulerMode.FIRST || radiusRulerMode == RadiusRulerMode.SECOND;
 			boolean showCompass = settings.SHOW_COMPASS_ON_RADIUS_RULER.get() && tb.getZoom() >= SHOW_COMPASS_MIN_ZOOM;
-			boolean darkRadiusRuler = settings.RADIUS_RULER_NIGHT_MODE.get();
 
-			drawCenterIcon(canvas, tb, center, drawSettings.isNightMode(), darkRadiusRuler);
+			boolean radiusRulerNightMode = radiusRulerMode == RadiusRulerMode.SECOND;
+			drawCenterIcon(canvas, tb, center, drawSettings.isNightMode(), radiusRulerNightMode);
 
-			if (showRadiusRuler && (showDistanceCircles || showCompass)) {
+			if (showRadiusRuler) {
 				updateData(tb, center);
 
 				if (showCompass) {
@@ -176,12 +178,12 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 					resetDrawingPaths();
 				}
 
-				RenderingLineAttributes attrs = darkRadiusRuler ? circleAttrsAlt : circleAttrs;
+				RenderingLineAttributes attrs = radiusRulerNightMode ? circleAttrsAlt : circleAttrs;
 				int compassCircleIndex = getCompassCircleIndex(tb, center);
 				for (int circleIndex = 1; circleIndex <= cacheDistances.size(); circleIndex++) {
 					if (showCompass && circleIndex == compassCircleIndex) {
 						drawCompassCircle(canvas, tb, compassCircleIndex, center, attrs);
-					} else if (showDistanceCircles) {
+					} else {
 						drawCircle(canvas, tb, circleIndex, center, attrs);
 					}
 				}
@@ -243,9 +245,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center,
-								boolean nightMode, boolean darkRadiusRuler) {
+								boolean nightMode, boolean radiusRulerNightMode) {
 		canvas.rotate(-tb.getRotate(), center.x, center.y);
-		if (nightMode || darkRadiusRuler) {
+		if (nightMode || radiusRulerNightMode) {
 			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2f,
 					center.y - centerIconNight.getHeight() / 2f, bitmapPaint);
 		} else {
@@ -637,8 +639,25 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	public enum RadiusRulerMode {
-		FIRST,
-		SECOND,
-		EMPTY
+
+		FIRST(R.string.dark_theme, R.drawable.ic_action_ruler_circle_dark),
+		SECOND(R.string.light_theme, R.drawable.ic_action_ruler_circle_light),
+		EMPTY(R.string.shared_string_hide, R.drawable.ic_action_hide);
+
+		@StringRes
+		public final int titleId;
+		@DrawableRes
+		public final int iconId;
+
+		RadiusRulerMode(@StringRes int titleId, @DrawableRes int iconId) {
+			this.titleId = titleId;
+			this.iconId = iconId;
+		}
+
+		@NonNull
+		public RadiusRulerMode next() {
+			int nextItemIndex = (ordinal() + 1) % values().length;
+			return values()[nextItemIndex];
+		}
 	}
 }

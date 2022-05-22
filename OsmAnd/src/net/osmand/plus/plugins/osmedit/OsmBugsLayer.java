@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -39,6 +41,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.core.OsmBugsTileProvider;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -63,11 +66,16 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private int startZoom;
 
-	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
+	//OpenGL
+	private OsmBugsTileProvider osmBugsTileProvider;
+	private float textScale = 1f;
+
+	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin, int baseOrder) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
 		local = plugin.getOsmNotesLocalUtil();
+		this.baseOrder = baseOrder;
 	}
 
 	public OsmBugsUtil getOsmBugsUtil(OpenStreetNote bug) {
@@ -99,6 +107,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void destroyLayer() {
+		clearOsmBugsTileProvider();
 	}
 
 	@Override
@@ -110,6 +119,23 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		OsmandApplication app = getApplication();
 		startZoom = plugin.SHOW_OSM_BUGS_MIN_ZOOM.get();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (tileBox.getZoom() >= startZoom) {
+				float textScale = app.getOsmandMap().getTextScale();
+				boolean textScaleChanged = this.textScale != textScale;
+				if (osmBugsTileProvider == null || textScaleChanged || mapActivityInvalidated) {
+					clearOsmBugsTileProvider();
+					boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
+					osmBugsTileProvider = new OsmBugsTileProvider(ctx, data, baseOrder, showClosed, startZoom);
+					osmBugsTileProvider.drawSymbols(mapRenderer);
+				}
+			} else {
+				clearOsmBugsTileProvider();
+			}
+			return;
+		}
+
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			data.queryNewData(tileBox);
@@ -492,6 +518,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			return new LatLon(((OpenStreetNote) o).getLatitude(), ((OpenStreetNote) o).getLongitude());
 		}
 		return null;
+	}
+
+	private void clearOsmBugsTileProvider() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && osmBugsTileProvider != null) {
+			osmBugsTileProvider.clearSymbols(mapRenderer);
+			osmBugsTileProvider = null;
+		}
 	}
 
 	public static class OpenStreetNote implements Serializable {
