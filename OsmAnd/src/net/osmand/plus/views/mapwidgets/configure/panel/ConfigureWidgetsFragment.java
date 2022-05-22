@@ -34,7 +34,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
-import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment.WidgetsOrderListener;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener,
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
 		OnOffsetChangedListener, AddWidgetListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
@@ -226,7 +225,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onWidgetsOrderApplied() {
+	public void onWidgetsConfigurationChanged() {
 		// TODO widgets: update only current fragment after adding duplicates
 		widgetsTabAdapter.updateFragmentsContent();
 	}

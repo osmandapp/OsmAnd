@@ -225,7 +225,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
-						WidgetSettingsBaseFragment.showFragment(fragmentManager, selectedAppMode, settingsFragment);
+						Fragment target = getParentFragment();
+						WidgetSettingsBaseFragment.showFragment(fragmentManager, target, selectedAppMode, settingsFragment);
 					}
 				});
 			} else {

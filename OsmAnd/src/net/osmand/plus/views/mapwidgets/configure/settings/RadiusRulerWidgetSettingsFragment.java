@@ -109,8 +109,7 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 		});
 
 		container.setOnClickListener(v -> visibilitySwitch.setChecked(!visibilitySwitch.isChecked()));
-		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
-		container.setBackground(UiUtilities.getColoredSelectableDrawable(context, activeColor));
+		container.setBackground(getPressedStateDrawable());
 	}
 
 	private void updateIcon(@NonNull ImageView icon,

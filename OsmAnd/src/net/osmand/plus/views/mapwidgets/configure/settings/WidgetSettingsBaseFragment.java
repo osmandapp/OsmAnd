@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,12 +18,14 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -136,7 +139,14 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
 	}
 
+	@NonNull
+	protected Drawable getPressedStateDrawable() {
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		return UiUtilities.getColoredSelectableDrawable(app, activeColor);
+	}
+
 	public static void showFragment(@NonNull FragmentManager fragmentManager,
+	                                @NonNull Fragment target,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull WidgetSettingsBaseFragment fragment) {
 		String tag = fragment.getClass().getSimpleName();
@@ -144,6 +154,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 			Bundle args = new Bundle();
 			args.putString(KEY_APP_MODE, appMode.getStringKey());
 			fragment.setArguments(args);
+			fragment.setTargetFragment(target, 0);
 
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, tag)

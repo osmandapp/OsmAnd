@@ -10,6 +10,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment.TimeToDestinationSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment.TimeToIntermediateSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
 import androidx.annotation.DrawableRes;
@@ -36,11 +38,9 @@ public enum WidgetParams {
 	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, TOP),
 	// Right panel
 	DISTANCE_TO_DESTINATION("distance", R.string.map_widget_distance_to_destination, 0, R.drawable.widget_target_day, R.drawable.widget_target_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
-	INTERMEDIATE_DESTINATION("intermediate_distance", R.string.map_widget_intermediate_distance, 0, R.drawable.widget_intermediate_day, R.drawable.widget_intermediate_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
-	INTERMEDIATE_ARRIVAL_TIME("intermediate_arrival_time", R.string.access_intermediate_arrival_time, 0, R.drawable.widget_intermediate_time_day, R.drawable.widget_intermediate_time_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
-	INTERMEDIATE_TIME_TO_GO("intermediate_time_time_to_go", R.string.map_widget_intermediate_time, 0, R.drawable.widget_intermediate_time_day, R.drawable.widget_intermediate_time_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
-	ARRIVAL_TIME("arrival_time", R.string.access_arrival_time, R.string.arrival_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
-	TIME_TO_GO("time_to_go", R.string.map_widget_time, R.string.time_to_go_desc, R.drawable.widget_time_to_distance_day, R.drawable.widget_time_to_distance_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
+	INTERMEDIATE_DESTINATION("intermediate_distance", R.string.map_widget_distance_to_intermediate, 0, R.drawable.widget_intermediate_day, R.drawable.widget_intermediate_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
+	TIME_TO_INTERMEDIATE("time_to_intermediate", R.string.map_widget_time_to_intermediate, 0, R.drawable.widget_intermediate_time_day, R.drawable.widget_intermediate_time_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
+	TIME_TO_DESTINATION("time_to_destination", R.string.map_widget_time_to_destination, 0, R.drawable.widget_time_to_distance_day, R.drawable.widget_time_to_distance_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
 	SIDE_MARKER_1("map_marker_1st", R.string.map_marker_1st, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
 	SIDE_MARKER_2("map_marker_2nd", R.string.map_marker_2nd, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
 	RELATIVE_BEARING("relative_bearing", R.string.map_widget_bearing, 0, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
@@ -71,6 +71,10 @@ public enum WidgetParams {
 	public static final String NAVIGATION_TIME_WIDGET_LEGACY = "time";
 	public static final String BEARING_WIDGET_LEGACY = "bearing";
 	public static final String AV_NOTES_WIDGET_LEGACY = "audionotes";
+	public static final String INTERMEDIATE_ARRIVAL_TIME_LEGACY = "intermediate_arrival_time";
+	public static final String INTERMEDIATE_TIME_TO_GO_LEGACY = "intermediate_time_time_to_go";
+	public static final String ARRIVAL_TIME_LEGACY = "arrival_time";
+	public static final String TIME_TO_GO_LEGACY = "time_to_go";
 
 	@NonNull
 	public final String id;
@@ -164,6 +168,10 @@ public enum WidgetParams {
 			return new MapMarkersBarWidgetSettingFragment();
 		} else if (this == RADIUS_RULER) {
 			return new RadiusRulerWidgetSettingsFragment();
+		} else if (this == TIME_TO_INTERMEDIATE) {
+			return new TimeToIntermediateSettingsFragment();
+		} else if (this == TIME_TO_DESTINATION) {
+			return new TimeToDestinationSettingsFragment();
 		}
 		return null;
 	}

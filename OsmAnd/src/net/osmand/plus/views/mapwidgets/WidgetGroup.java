@@ -58,6 +58,15 @@ public enum WidgetGroup {
 		return widgets;
 	}
 
+	@NonNull
+	public List<String> getWidgetsIds() {
+		List<String> widgetsIds = new ArrayList<>();
+		for (WidgetParams widget : getWidgets()) {
+			widgetsIds.add(widget.id);
+		}
+		return widgetsIds;
+	}
+
 	public boolean containsWidget(@NonNull String widgetId) {
 		for (WidgetParams widget : getWidgets()) {
 			if (widgetId.equals(widget.id)) {

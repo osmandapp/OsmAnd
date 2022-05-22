@@ -39,12 +39,10 @@ public class SideWidgetInfo extends MapWidgetInfo {
 		super(key, widget, widgetState, daySettingsIconId, nightSettingsIconId, messageId, message,
 				page, order, widgetPanel);
 
-		if (message != null) {
-			widget.setContentTitle(message);
-		} else if (messageId != MapWidgetInfo.INVALID_ID) {
-			widget.setContentTitle(messageId);
-		} else if (widgetState != null) {
-			widget.setContentTitle(widgetState.getMenuTitleId());
+		if (getMessage() != null) {
+			widget.setContentTitle(getMessage());
+		} else if (getMessageId() != MapWidgetInfo.INVALID_ID) {
+			widget.setContentTitle(getMessageId());
 		}
 	}
 

@@ -2866,10 +2866,10 @@ public class OsmandSettings {
 	public final ListStringPreference DISPLAYED_TRANSPORT_SETTINGS = (ListStringPreference)
 			new ListStringPreference(this, "displayed_transport_settings", null, ",").makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
+	public final OsmandPreference<Boolean> DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO =
 			new BooleanPreference(this, "show_arrival_time", true).makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
+	public final OsmandPreference<Boolean> INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO =
 			new BooleanPreference(this, "show_intermediate_arrival_time", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
