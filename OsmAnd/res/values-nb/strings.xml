@@ -707,7 +707,7 @@
     <string name="rendering_attr_showAccess_name">Vis adgangsrestriksjoner og veiavgifter</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis veikvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
-    <string name="select_destination_and_intermediate_points">Velg reisemål</string>
+    <string name="select_destination_and_intermediate_points">Angi reisemål</string>
     <string name="layer_amenity_label">Punktpåskrifter (interessepunkter, favoritter)</string>
     <string name="shared_string_waypoint">Rutepunkt</string>
     <string name="voice_pref_title">Tale</string>
@@ -2839,7 +2839,7 @@
     <string name="use_osm_live_public_transport_description">Skru på offentlig transport i OsmAnd Live-endringer.</string>
     <string name="use_osm_live_public_transport">Offentlig transport i OsmAnd Live</string>
     <string name="transfers_size">%1$d overføringer</string>
-    <string name="add_start_and_end_points">Legg til start- og reisemål</string>
+    <string name="add_start_and_end_points">Legg til startsted og reisemål</string>
     <string name="route_add_start_point">Legg til startpunkt</string>
     <string name="route_descr_select_start_point">Velg startpunkt</string>
     <string name="rendering_attr_surface_unpaved_name">Uten fast dekke</string>
@@ -4544,7 +4544,7 @@
     <string name="rendering_attr_showTrainRoutes_name">Togruter</string>
     <string name="rendering_attr_showFunicularRoutes_name">Kabelbaneruter</string>
     <string name="rendering_attr_showBusRoutes_name">Bussruter</string>
-    <string name="routeInfo_horse_scale_description">Tegn stier etter vanskelighetsgrad for hestetråkk</string>
+    <string name="routeInfo_horse_scale_description">Tegn stier i henhold til vanskelighetsgrad på rideveier</string>
     <string name="rendering_attr_horse_scale_demanding_name">Krevende</string>
     <string name="rendering_attr_horse_scale_critical_name">Kritisk</string>
     <string name="map_widget_altitude">Høyde for nåværende posisjon</string>
@@ -4554,8 +4554,8 @@
     <string name="page_number">Side %1$s</string>
     <string name="shared_string_buttons">Knapper</string>
     <string name="configure_screen_widgets_descr">Velg skjermside å legge til eller flytte rundt på miniprogrammer.</string>
-    <string name="map_markers_bar">Stolpe for kartmarkører</string>
-    <string name="apply_to_existing_favorites_descr">Bruk endringer for eksisterende favorittpunkt i gruppen, eller kun nye\?</string>
+    <string name="map_markers_bar">Kartmarkørlinje</string>
+    <string name="apply_to_existing_favorites_descr">Bruke endringer på gruppens eksisterende favorittpunkter eller kun på nye\?</string>
     <string name="apply_to_existing">Bruk for eksisterende</string>
     <string name="apply_only_to_new_points">Bruk kun for nye punkter</string>
     <string name="apply_only_to_new_favorites">Bruk kun for nye favoritter</string>
@@ -4563,19 +4563,19 @@
     <string name="simulation_constant_mode_title">Fastsatt hastighet</string>
     <string name="simulation_constant_mode_desc">Simuleringen vil utføres med konstant valgt hastighet.</string>
     <string name="simulation_real_mode_title">Realistisk simulering</string>
-    <string name="simulation_real_mode_desc">På rette veistrekk vil hastigheten være omtrent maksimalt tillatt hastighet.
-\nVed kryss vil simuleringen gå tregere.
-\nEkstra ned-sakking skjer ved trafikklys, stopp-skilt, osv.</string>
+    <string name="simulation_real_mode_desc">På rette veistrekninger vil hastigheten være omtrent maksimalt tillatt hastighet.
+\nVed kryss vil simuleringen gå langsommere.
+\nEkstra tidstillegg blir brukt ved trafikklys, stoppskilt osv.</string>
     <string name="speed_mode">Hastighetsmodus</string>
     <string name="map_widget_current_speed">Nåværende hastighet</string>
     <string name="add_page">Legg til en side</string>
     <string name="change_default_appearance">Endre forvalgt utseende</string>
-    <string name="routeInfo_horse_scale_name">Vanskelighetsgrad for hestetråkk</string>
+    <string name="routeInfo_horse_scale_name">Vanskelighetsgrad for rideveier</string>
     <string name="rendering_attr_horse_scale_common_name">Vanlig</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Farlig</string>
     <string name="rendering_attr_horse_scale_impossible_name">Umulig</string>
     <string name="routing_attr_carriage_restrictions_name">Vognbegrensninger</string>
-    <string name="routing_attr_carriage_restrictions_description">Overvei tilgangstilganger for kjøretøy som dras av hester</string>
+    <string name="routing_attr_carriage_restrictions_description">Overvei adgangstillatelser for hestekjøretøy</string>
     <string name="rendering_attr_showLightRailRoutes_name">Lettbanelinjer</string>
     <string name="rendering_attr_showMonorailRoutes_name">Énskinnebanelinje</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Skytteltrafikklinjer</string>
@@ -4635,22 +4635,22 @@
     <string name="shared_string_widget">Miniprogram</string>
     <string name="av_def_action_choose">På forespørsel</string>
     <string name="shared_string_speed">Hastighet</string>
-    <string name="app_mode_mountain_bicycle">Fjellsykkel</string>
+    <string name="app_mode_mountain_bicycle">Terrengsykkel</string>
     <string name="calculate_online">Regn ut på nett</string>
     <string name="get_altitude_data">Hent høydedata</string>
     <string name="calculate_altitude">Regn ut høyde</string>
     <string name="no_altitude_data">Ingen høydedata</string>
     <string name="navigation_points">Navigasjonspunkter</string>
     <string name="calculate_online_altitude_descr">Høydedata vil bli regnet ut på OsmAnd-tjeneren.</string>
-    <string name="calculating_altitude">Beregner høyde …</string>
+    <string name="calculating_altitude">Beregner høyde</string>
     <string name="get_altitude_information">Hent høydeinfo</string>
-    <string name="turn_on_public_transport_description">Viser offentlige transportruter på kartet.</string>
+    <string name="turn_on_public_transport_description">Slå på for å vise offentlige transportruter på kartet.</string>
     <string name="street_name_widget_desc">Gatenavnsminiprogrammet viser nåværende gatenavn, med rett posisjonspil, eller neste gatenavn med manøveren som må fullføres.</string>
     <string name="coordinates_widget_desc">Viser geografiske koordinater for nåværende geoposisjon.</string>
     <string name="audio_video_notes_desc">Miniprogrammer gir hurtigtilgang til start/stopp av opptak (lyd, video, eller bilde).</string>
-    <string name="route_maneuvers">Rutemanøverer</string>
+    <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="route_maneuvers_desc">Navigasjonsminiprogrammer vises under navigasjon for å vise info som f.eks. avstand, ankomst, eller avgangstid, neste sving, retning, nåværende gatenavn, filinfo, maks. hastighet, kommende varsler, interessepunkter, og veipunkter.</string>
-    <string name="track_attach_to_the_roads_descr">Spor vil festet til vei ved bruk av frakoblede kart. Sporgeometri vil bli endret.</string>
+    <string name="track_attach_to_the_roads_descr">Spor vil festes til veien ved bruk av frakoblede kart. Sporgeometri vil bli endret.</string>
     <string name="colour_of_circles">Sirkelfarger</string>
     <string name="distance_circles">Distansesirkler</string>
     <string name="circle_settings">Sirkelinnstillinger</string>
@@ -4668,4 +4668,7 @@
     <string name="map_widget_trip_recording_duration">Varighet</string>
     <string name="map_widget_trip_recording_distance">Avstand</string>
     <string name="explore_plans">Utforsk planer</string>
+    <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
+    <string name="rendering_attr_weatherPressureContours_name">Lufttrykk-isolinjer</string>
+    <string name="rendering_attr_horseScale_name">Vanskelighetsgrad for rideveier</string>
 </resources>
