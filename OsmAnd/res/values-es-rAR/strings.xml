@@ -64,8 +64,8 @@
     <string name="shared_string_enable">Activar</string>
     <string name="shared_string_disable">Desactivar</string>
     <string name="shared_string_ok">Aceptar</string>
-    <string name="shared_string_on">Sí</string>
-    <string name="shared_string_off">No</string>
+    <string name="shared_string_on">Activado</string>
+    <string name="shared_string_off">Desactivado</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
     <string name="shared_string_selected">Marcado</string>
@@ -317,7 +317,7 @@
     <string name="lang_de">Alemán</string>
     <string name="lang_el">Griego</string>
     <string name="lang_iw">Hebreo</string>
-    <string name="lang_hi">Hindi</string>
+    <string name="lang_hi">Hindú</string>
     <string name="lang_hu">Húngaro</string>
     <string name="lang_id">Indonesio</string>
     <string name="lang_it">Italiano</string>
@@ -1546,7 +1546,7 @@
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandés</string>
-    <string name="lang_ms">Malayo</string>
+    <string name="lang_ms">Malasio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estonio</string>
@@ -3513,7 +3513,7 @@
     <string name="lang_zhminnan">Min del Sur</string>
     <string name="lang_yo">Yoruba</string>
     <string name="lang_war">Waray</string>
-    <string name="lang_uz">Uzbeko</string>
+    <string name="lang_uz">Uzbeco</string>
     <string name="lang_ur">Urdu</string>
     <string name="lang_tt">Tártaro</string>
     <string name="lang_tg">Tayiko</string>
@@ -3529,8 +3529,8 @@
     <string name="lang_ky">Kirguís</string>
     <string name="lang_kk">Kazajo</string>
     <string name="lang_jv">Javanés</string>
-    <string name="lang_gu">Gujaratí</string>
-    <string name="lang_cv">Chuvash</string>
+    <string name="lang_gu">Guyaratí</string>
+    <string name="lang_cv">Chuvasio</string>
     <string name="lang_ce">Checheno</string>
     <string name="lang_bar">Bávaro</string>
     <string name="lang_ba">Bashkir</string>
@@ -4076,7 +4076,7 @@
     <string name="output">Salida</string>
     <string name="shared_string_feet">pies</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
-    <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provee datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
     <string name="shared_string_max_height">Altura máx.</string>
@@ -4281,7 +4281,7 @@
 \n
 \nQuizás algunos mapas no están cargados, puedes ejecutar una comprobación en línea para los mapas necesarios.</string>
     <string name="online_maps_searching_descr">Buscando mapas en línea…</string>
-    <string name="reset_to_original">Restablecer al original</string>
+    <string name="reset_to_original">Reiniciar al original</string>
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>

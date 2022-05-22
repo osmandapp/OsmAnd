@@ -6,6 +6,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.MapUtils;
 
@@ -18,20 +19,22 @@ public class RadiusRulerWidget extends TextInfoWidget {
 
 	private static final String DASH = "—";
 
-	private boolean cachedShowRadiusRuler;
+	private RadiusRulerMode cachedRadiusRulerMode;
 
 	public RadiusRulerWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
+		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
 
-		setIcons(settings.SHOW_RADIUS_RULER_ON_MAP.get());
+		updateIcons();
 		setText(DASH, null);
 		setOnClickListener(v -> switchRadiusRulerMode());
 	}
 
 	private void switchRadiusRulerMode() {
-		boolean newShowRadiusRuler = !settings.SHOW_RADIUS_RULER_ON_MAP.get();
-		setIcons(newShowRadiusRuler);
-		settings.SHOW_RADIUS_RULER_ON_MAP.set(newShowRadiusRuler);
+		RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
+		cachedRadiusRulerMode = radiusRulerMode.next();
+		updateIcons();
+		settings.RADIUS_RULER_MODE.set(cachedRadiusRulerMode);
 		mapActivity.refreshMap();
 	}
 
@@ -40,9 +43,10 @@ public class RadiusRulerWidget extends TextInfoWidget {
 		Location currentLocation = locationProvider.getLastKnownLocation();
 		LatLon centerLocation = mapActivity.getMapLocation();
 
-		boolean showRadiusRuler = settings.SHOW_RADIUS_RULER_ON_MAP.get();
-		if (showRadiusRuler != cachedShowRadiusRuler) {
-			setIcons(showRadiusRuler);
+		RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
+		if (radiusRulerMode != cachedRadiusRulerMode) {
+			cachedRadiusRulerMode = radiusRulerMode;
+			updateIcons();
 		}
 
 		if (currentLocation != null && centerLocation != null) {
@@ -59,9 +63,8 @@ public class RadiusRulerWidget extends TextInfoWidget {
 		}
 	}
 
-	private void setIcons(boolean showRadiusRuler) {
-		cachedShowRadiusRuler = showRadiusRuler;
-		if (showRadiusRuler) {
+	private void updateIcons() {
+		if (cachedRadiusRulerMode == RadiusRulerMode.FIRST || cachedRadiusRulerMode == RadiusRulerMode.SECOND) {
 			setIcons(RADIUS_RULER);
 		} else {
 			setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);

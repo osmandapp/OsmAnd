@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="radius_ruler_mode_desc">You can switch \“Radius ruler\” mode by taping on widget.</string>
     <string name="explore_plans">Explore Plans</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
@@ -37,19 +39,19 @@
     <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
     <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD only vehicles</string>
     <string name="bearing_secondary_desc">You can change format of displayed data in: %1$s – %2$s – %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Coordinates format could be change in %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Coordinates format could be changed in %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
     <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
     <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
     <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
-    <string name="fps_widget_desc">Widget show how fast map &amp; map elements are showed &amp; refreshed.</string>
+    <string name="fps_widget_desc">Widget show how fast map &amp; map elements are shown &amp; refreshed.</string>
     <string name="radius_rules_widget_desc">Radius-ruler tool helps to determine the radius around the selected point on the map via displaying distance-circles on the map.</string>
     <string name="current_time_widget_desc">This widget shows current time from your device.</string>
     <string name="battery_widget_desc">Widget shows battery level of your device.</string>
     <string name="gps_info_widget_desc">Widget shows a number of satellites that device detects and uses at that moment.</string>
     <string name="altitude_widget_desc">Widget shows the height above sea level of current geolocation.</string>
-    <string name="max_speed_widget_desc">Widget shows a speed limit for a current driving road.</string>
+    <string name="max_speed_widget_desc">Widget shows a speed limit for the currently driven road.</string>
     <string name="current_speed_widget_desc">Widget shows your current speed detected by GPS-sensor.</string>
     <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
     <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
@@ -60,7 +62,7 @@
     <string name="coordinates_widget_desc">It shows the geographic coordinates of current geo-location.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="av_def_action_choose">On request</string>
-    <string name="audio_video_notes_desc">Widgets provides quick access to start/stop taking a recording (audio, video or photo).</string>
+    <string name="audio_video_notes_desc">Widget provides quick access to start/stop taking a recording (audio, video or photo).</string>
     <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
     <string name="map_markers_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
     <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>

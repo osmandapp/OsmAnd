@@ -138,7 +138,7 @@
     <string name="poi_public_transport_station">Estación de transporte público</string>
     <string name="poi_bus_station">Estación de autobús;Terminal de ómnibus</string>
     <string name="poi_railway_station">Estación de ferrocarril;Estación ferroviaria;Estación de tren</string>
-    <string name="poi_halt">Parada de tren</string>
+    <string name="poi_halt">Parada ferroviaria;Parada de ferrocarril;Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de metro</string>
     <string name="poi_subway_station">Sí; Estación de metro</string>
     <string name="poi_aerodrome">Aeropuerto;Aeródromo</string>
@@ -403,7 +403,7 @@
     <string name="poi_parking_entrance">Entrada al aparcamiento</string>
     <string name="poi_garages">Cocheras;Garajes</string>
     <string name="poi_public_transport_stop_position">Punto de detención de transporte público</string>
-    <string name="poi_railway_platform">Andén de tren</string>
+    <string name="poi_railway_platform">Andén ferroviario;Andén de ferrocarril;Andén de tren;Plataforma ferroviaria</string>
     <string name="poi_aeroway_gate">Puerta de embarque</string>
     <string name="poi_slipway">Rampa</string>
     <string name="poi_aerialway_station">Estación de transporte elevado</string>

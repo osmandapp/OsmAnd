@@ -4614,11 +4614,11 @@
     <string name="compass_on_circles">Bussola nei cerchi</string>
     <string name="routing_attr_avoid_4wd_only_description">Evita le strade percorribili solo con veicoli 4WD</string>
     <string name="bearing_secondary_desc">Puoi cambiare il formato della data visualizza in: %1$s – %2$s – %3$s.</string>
-    <string name="widget_secondary_desc_part_of">Parte di %1$s componente aggiuntivo.</string>
+    <string name="widget_secondary_desc_part_of">Parte del componente aggiuntivo %1$s.</string>
     <string name="elevation_profile_widget_desc">Il widget mostra il profilo altimetrico e della pendenza dell\'attuale percorso.</string>
-    <string name="parking_widget_desc">Widget che mostra la distanza dall centro dello schermo alla posizione di parcheggio.</string>
+    <string name="parking_widget_desc">Widget che mostra la distanza dal centro dello schermo alla posizione di parcheggio.</string>
     <string name="av_notes_choose_action_widget_desc">Scegli l\'azione.</string>
-    <string name="gps_info_widget_desc">Il widget mostra il numero di satelliti che il dispositivo ha rilevato e che usa in questo momento.</string>
+    <string name="gps_info_widget_desc">Il widget mostra il numero di satelliti che il dispositivo ha rilevato e che usa in quel momento.</string>
     <string name="max_speed_widget_desc">Il widget mostra il limite di velocità della strada che si sta percorrendo.</string>
     <string name="current_speed_widget_desc">Il widget mostra la velocità determinata dal GPS.</string>
     <string name="mapillary_widget_desc">Widget che fornisce un accesso veloce all\'app Mapillary per aggiungere Immagini-Stradali.</string>
@@ -4639,7 +4639,7 @@
     <string name="altitude_widget_desc">Il widget mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
     <string name="calculate_online_altitude_descr">I dati dell\'altitudine saranno calcolati nel server OsmAnd.</string>
     <string name="fps_widget_desc">Il widget mostra con che velocità la mappa e i suoi elementi sono mostrati e aggiornati.</string>
-    <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia la corsia da utilizzare per la navigazione attuale.</string>
+    <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia quella da utilizzare per la navigazione attuale.</string>
     <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>
     <string name="routing_attr_allow_private_for_truck_description">Permetti agli autotreni l\'accesso alle aree private.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permetti l\'accesso alle aree private (autotreni)</string>
@@ -4662,8 +4662,8 @@
     <string name="track_attach_to_the_roads_descr">La traccia sarà incollata alla strada utilizzando le mappe offline, la geometria della traccia sarà cambiata.</string>
     <string name="map_widget_true_bearing">Angolo reale</string>
     <string name="routing_attr_hazmat_category_name">Categoria materiale pericoloso</string>
-    <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale del marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori nel widget.</string>
-    <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza tempo di arrivo o il tempo rimanente, prossime svolte, angolo, il nome della strada attuale, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
+    <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori nel widget.</string>
+    <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, l\'orario di arrivo o il tempo rimanente, le prossime svolte, il nome della strada attuale, l\'angolo, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Nascondi le aree militari</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nascondi le aree militari</string>
     <string name="map_markers_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale del marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori nel widget.</string>
