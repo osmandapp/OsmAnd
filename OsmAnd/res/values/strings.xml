@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="radius_ruler_mode_desc">You can switch \“Radius ruler\” mode by taping on widget.</string>
     <string name="explore_plans">Explore Plans</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
