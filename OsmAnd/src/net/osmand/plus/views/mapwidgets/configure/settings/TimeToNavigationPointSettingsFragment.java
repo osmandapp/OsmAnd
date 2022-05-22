@@ -12,13 +12,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
-import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.DESTINATION_ARRIVAL_TIME;
 import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.INTERMEDIATE_ARRIVAL_TIME;
@@ -98,16 +95,6 @@ public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettin
 	@Override
 	protected void applySettings() {
 		arrivalTimeOtherwiseTimeToGoPref.setModeValue(appMode, arrivalTimeOtherwiseTimeToGo);
-
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateControls();
-		}
-
-		Fragment target = getTargetFragment();
-		if (target instanceof WidgetsConfigurationChangeListener) {
-			((WidgetsConfigurationChangeListener) target).onWidgetsConfigurationChanged();
-		}
 	}
 
 	@Override

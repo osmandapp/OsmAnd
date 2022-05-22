@@ -379,6 +379,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	public void recreateControls() {
 		ApplicationMode appMode = settings.getApplicationMode();
+		updateWidgetsInfo(appMode);
 		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
 		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
 		leftWidgetsPanel.update();
@@ -517,10 +518,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
-			if (mapInfoControls != null) {
-				ApplicationMode appMode = settings.getApplicationMode();
-				mapInfoControls.updateWidgetsInfo(appMode, drawSettings);
-			}
+			updateWidgetsInfo(settings.getApplicationMode());
 			leftWidgetsPanel.update();
 			rightWidgetsPanel.update();
 			topToolbarView.updateInfo();
@@ -529,6 +527,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateInfo(tileBox);
 			}
+		}
+	}
+
+	private void updateWidgetsInfo(@NonNull ApplicationMode appMode) {
+		if (mapInfoControls != null) {
+			mapInfoControls.updateWidgetsInfo(appMode, drawSettings);
 		}
 	}
 

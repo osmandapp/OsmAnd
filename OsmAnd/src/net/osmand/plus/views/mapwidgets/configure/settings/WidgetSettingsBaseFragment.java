@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -21,7 +22,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -113,6 +116,14 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		View applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
 			applySettings();
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateControls();
+			}
+			Fragment target = getTargetFragment();
+			if (target instanceof WidgetsConfigurationChangeListener) {
+				((WidgetsConfigurationChangeListener) target).onWidgetsConfigurationChanged();
+			}
 			dismiss();
 		});
 		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
@@ -143,6 +154,12 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	protected Drawable getPressedStateDrawable() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		return UiUtilities.getColoredSelectableDrawable(app, activeColor);
+	}
+
+	@Nullable
+	protected MapActivity getMapActivity() {
+		Activity activity = getActivity();
+		return activity != null ? ((MapActivity) activity) : null;
 	}
 
 	public static void showFragment(@NonNull FragmentManager fragmentManager,

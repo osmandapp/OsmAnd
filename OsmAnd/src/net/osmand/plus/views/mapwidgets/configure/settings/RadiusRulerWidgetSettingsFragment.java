@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 
@@ -157,13 +155,9 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 		settings.RADIUS_RULER_MODE.setModeValue(appMode, radiusRulerMode);
 		settings.SHOW_COMPASS_ON_RADIUS_RULER.setModeValue(appMode, showCompass);
 
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).refreshMap();
-		}
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateControls();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMap();
 		}
 	}
 

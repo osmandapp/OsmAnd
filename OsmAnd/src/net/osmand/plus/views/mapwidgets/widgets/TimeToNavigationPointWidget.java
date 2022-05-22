@@ -38,33 +38,26 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 		setOnClickListener(v -> {
 			arrivalTimeOtherwiseTimeToGoPref.set(!arrivalTimeOtherwiseTimeToGoPref.get());
 			updateInfo(null);
-			updateIcons();
-			updateContentTitle();
 			mapActivity.refreshMap();
 		});
-	}
-
-	private void updateIcons() {
-		TimeToNavigationPointState state = getCurrentState();
-		setIcons(state.dayIconId, state.nightIconId);
-	}
-
-	private void updateContentTitle() {
-		String title = getCurrentState().getTitle(app);
-		setContentTitle(title);
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		int leftSeconds = 0;
 
+		boolean timeModeUpdated = arrivalTimeOtherwiseTimeToGoPref.get() != cachedArrivalTimeOtherwiseTimeToGo;
+		if (timeModeUpdated) {
+			cachedArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.get();
+			updateIcons();
+			updateContentTitle();
+		}
+
 		if (routingHelper.isRouteCalculated()) {
 			leftSeconds = intermediate ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
 			boolean updateIntervalPassed = Math.abs(leftSeconds - cachedLeftSeconds) > UPDATE_INTERVAL_SECONDS;
-			boolean timeModeUpdated = arrivalTimeOtherwiseTimeToGoPref.get() != cachedArrivalTimeOtherwiseTimeToGo;
 			if (leftSeconds != 0 && (updateIntervalPassed || timeModeUpdated)) {
 				cachedLeftSeconds = leftSeconds;
-				cachedArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.get();
 				if (arrivalTimeOtherwiseTimeToGoPref.get()) {
 					updateArrivalTime(leftSeconds);
 				} else {
@@ -77,6 +70,16 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 			cachedLeftSeconds = 0;
 			setText(null, null);
 		}
+	}
+
+	private void updateIcons() {
+		TimeToNavigationPointState state = getCurrentState();
+		setIcons(state.dayIconId, state.nightIconId);
+	}
+
+	private void updateContentTitle() {
+		String title = getCurrentState().getTitle(app);
+		setContentTitle(title);
 	}
 
 	private void updateArrivalTime(int leftSeconds) {
