@@ -125,18 +125,18 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			if (tileBox.getZoom() >= startZoom) {
 				float textScale = app.getOsmandMap().getTextScale();
 				boolean textScaleChanged = this.textScale != textScale;
-                boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
-                this.textScale = textScale;
+				boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
+				this.textScale = textScale;
 				if (osmBugsTileProvider == null || textScaleChanged || mapActivityInvalidated || this.showClosed != showClosed) {
 					clearOsmBugsTileProvider();
-                    osmBugsTileProvider = new OsmBugsTileProvider(ctx, data, baseOrder, showClosed, startZoom, textScale);
+					osmBugsTileProvider = new OsmBugsTileProvider(ctx, data, baseOrder, showClosed, startZoom, textScale);
 					osmBugsTileProvider.drawSymbols(mapRenderer);
-                    this.showClosed = showClosed;
+					this.showClosed = showClosed;
 				}
 			} else {
 				clearOsmBugsTileProvider();
 			}
-            mapActivityInvalidated = false;
+			mapActivityInvalidated = false;
 			return;
 		}
 
