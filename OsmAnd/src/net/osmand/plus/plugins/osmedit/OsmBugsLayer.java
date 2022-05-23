@@ -69,7 +69,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	//OpenGL
 	private OsmBugsTileProvider osmBugsTileProvider;
 	private float textScale = 1f;
-    private boolean showClosed = false;
+	private boolean showClosed = false;
 
 	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin, int baseOrder) {
 		super(context);

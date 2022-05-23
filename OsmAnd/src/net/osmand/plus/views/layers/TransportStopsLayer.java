@@ -195,15 +195,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		if (!mapsInitialized) {
+			return;
+		}
 		List<TransportStop> objects = null;
 		boolean nightMode = settings.isNightMode();
 		OsmandApplication app = getApplication();
 		MapRendererView mapRenderer = getMapRenderer();
-		hasMapRenderer();
 		if (mapRenderer != null) {
-			if (!mapsInitialized) {
-				return;
-			}
 			float textScale = getTextScale();
 			int stopRouteDist = stopRoute != null ? stopRoute.distance : 0;
 			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
@@ -422,7 +421,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		List<TransportStop> transportStops = stopRoute.route.getForwardStops();
 		String transportRouteType = stopRoute.route.getType();
 		if (transportStops.size() > 0) {
-			int baseOrder = getBaseOrder() + 1;
+			int baseOrder = getBaseOrder() - 1;
 			mapMarkersCollection = new MapMarkersCollection();
 			for (TransportStop ts : transportStops) {
 				StopsCollectionPoint collectionPoint =

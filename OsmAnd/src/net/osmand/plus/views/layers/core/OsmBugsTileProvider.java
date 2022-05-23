@@ -117,7 +117,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	public OsmBugsTileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData,
-							   int baseOrder, boolean showClosed, int minZoom, float textScale) {
+	                           int baseOrder, boolean showClosed, int minZoom, float textScale) {
 		this.ctx = context;
 		this.layerData = layerData;
 		this.baseOrder = baseOrder;
