@@ -4,8 +4,10 @@ package net.osmand.search.core;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
+import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -568,7 +570,14 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+
+			QuadRect bbox;
+			if (LocationParser.isValidOLC(phrase.getFirstUnknownSearchWord())) {
+				bbox = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+			} else {
+				bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+			}
+
 			final Set<String> ids = new HashSet<String>();
 
 			ResultMatcher<Amenity> rawDataCollector = null;
@@ -1531,23 +1540,8 @@ public class SearchCoreFactory {
 				if (latLon == null && !parsedCode.isFull() && !Algorithms.isEmpty(parsedCode.getPlaceName())) {
 					List<SearchResult> requestResults = resultMatcher.getRequestResults();
 					if (requestResults.size() > 0) {
-						LatLon searchLocation = null;
-						for (SearchResult sr : requestResults) {
-							switch (sr.objectType) {
-								case POI:
-									Amenity a = (Amenity) sr.object;
-									if (citySubTypes.contains(a.getSubType())) {
-										searchLocation = sr.location;
-									}
-									break;
-								default:
-									searchLocation = sr.location;
-									break;
-							}
-							if (searchLocation != null) {
-								break;
-							}
-						}
+						sortCities(requestResults, phrase.getUnknownWordToSearch());
+						LatLon searchLocation = requestResults.get(0).location;
 						if (searchLocation != null) {
 							latLon = parsedCode.recover(searchLocation);
 						}
@@ -1576,6 +1570,82 @@ public class SearchCoreFactory {
 					}
 				}
 			}
+		}
+
+		private void sortCities(List<SearchResult> cities, final String phraseName) {
+			final Collator collator = OsmAndCollator.primaryCollator();
+
+			Collections.sort(cities, new Comparator<Object>() {
+				@Override
+				public int compare(Object obj1, Object obj2) {
+					String str1;
+					String str2;
+
+					SearchResult searchResultA = ((SearchResult) obj1);
+					switch (searchResultA.objectType) {
+						case POI:
+							Amenity a = (Amenity) searchResultA.object;
+							str1 = a.getName();
+							if (citySubTypes.contains(a.getSubType())) {
+								if ((a.getSubType()).equals("city")) {
+									str1 = "!!!" + str1;
+								} else {
+									str1 = "!!" + str1;
+								}
+								if ((a.getName()).equals(phraseName)) {
+									str1 = "!!" + str1;
+								} else {
+									for (String name : a.getOtherNames(true)) {
+										if (name.equals(phraseName)) {
+											str1 = "!!" + str1;
+											break;
+										}
+									}
+								}
+							}
+							break;
+						default:
+							str1 = searchResultA.localeName;
+							if (searchResultA.location != null) {
+								str1 = "!" + str1;
+							}
+							break;
+					}
+
+					SearchResult searchResultB = ((SearchResult) obj2);
+					switch (searchResultB.objectType) {
+						case POI:
+							Amenity b = (Amenity) searchResultB.object;
+							str2 = b.getName();
+							if (citySubTypes.contains(b.getSubType())) {
+								if ((b.getSubType()).equals("city")) {
+									str2 = "!!!" + str2;
+								} else {
+									str2 = "!!" + str2;
+								}
+								if ((b.getName()).equals(phraseName)) {
+									str2 = "!!" + str2;
+								} else {
+									for (String name : b.getOtherNames(true)) {
+										if (name.equals(phraseName)) {
+											str2 = "!!" + str2;
+											break;
+										}
+									}
+								}
+							}
+							break;
+						default:
+							str2 = searchResultB.localeName;
+							if (searchResultA.location != null) {
+								str2 = "!" + str2;
+							}
+							break;
+					}
+
+					return collator.compare(str1, str2);
+				}
+			});
 		}
 
 		private void publishLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher, String lw, LatLon l) {
