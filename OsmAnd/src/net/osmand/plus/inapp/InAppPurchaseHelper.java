@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -36,12 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -61,9 +59,7 @@ public abstract class InAppPurchaseHelper {
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
-
-	private static final String ANDROID_AUTO_START_DATE = "01.01.2022";
-	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
 	protected boolean isDeveloperVersion;
 	protected String token = "";
@@ -185,25 +181,20 @@ public abstract class InAppPurchaseHelper {
 				|| isSubscribedToOsmAndPro(ctx);
 	}
 
-	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
+	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
 		long time = System.currentTimeMillis();
-		long calTime = getStartAndroidAutoTime();
-		if (time >= calTime) {
-			return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		long installTime = getInstallTime(app);
+		if (time >= installTime + ANDROID_AUTO_START_DATE_MS) {
+			return Version.isDeveloperBuild(app) || Version.isPaidVersion(app);
 		}
 		return true;
 	}
 
-	private static long getStartAndroidAutoTime() {
-		try {
-			Date date = SIMPLE_DATE_FORMAT.parse(ANDROID_AUTO_START_DATE);
-			if (date != null) {
-				return date.getTime();
-			}
-		} catch (ParseException e) {
-			LOG.error(e);
-		}
-		return 0;
+	private static long getInstallTime(@NonNull OsmandApplication app) {
+		AppInitializer initializer = app.getAppInitializer();
+		long updateVersionTime = initializer.getUpdateVersionTime();
+		long firstInstalledTime = initializer.getFirstInstalledTime();
+		return Math.max(updateVersionTime, firstInstalledTime);
 	}
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
