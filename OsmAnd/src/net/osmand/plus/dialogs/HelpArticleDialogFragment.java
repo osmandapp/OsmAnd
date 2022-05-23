@@ -93,8 +93,9 @@ public class HelpArticleDialogFragment extends DialogFragment {
 			webView.setWebViewClient(new WebViewClient() {
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
-					if (url.startsWith("https://osmand.net/features?id=")) {
-						String id = url.substring("https://osmand.net/features?id=".length());
+					String featuresUrl = getString(R.string.osmand_features) + "?id=";
+					if (url.startsWith(featuresUrl)) {
+						String id = url.substring(featuresUrl.length());
 						dismiss();
 						instantiateWithAsset("feature_articles/" + id + ".html", getString(R.string.shared_string_help))
 								.show(getActivity().getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");

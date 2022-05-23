@@ -37,8 +37,6 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.text.MessageFormat;
 
-import static net.osmand.plus.plugins.rastermaps.DownloadTilesFragment.HELP_URI;
-
 public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements TilesDownloadListener {
 
 	public static final String TAG = TilesDownloadProgressFragment.class.getSimpleName();
@@ -144,7 +142,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		helpButton.setOnClickListener(v -> {
 			Context context = getContext();
 			if (context != null) {
-				AndroidUtils.openUrl(context, HELP_URI, nightMode);
+				AndroidUtils.openUrl(context, R.string.docs_map_download_tiles, nightMode);
 			}
 		});
 	}

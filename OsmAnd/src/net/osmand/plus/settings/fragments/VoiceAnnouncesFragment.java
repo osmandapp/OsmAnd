@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,26 +14,24 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
-
-	private static final String OSMAND_VOICE_NAVIGATION_URL = "https://docs.osmand.net/docs/user/troubleshooting/navigation#voice-navigation";
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -60,12 +57,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		View view = getView();
 		ImageView profileIcon = view.findViewById(R.id.profile_icon);
 		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, ColorUtilities.getDefaultIconColorId(isNightMode())));
-		profileIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (getContext() != null) {
-					AndroidUtils.openUrl(getContext(), Uri.parse(OSMAND_VOICE_NAVIGATION_URL), isNightMode());
-				}
+		profileIcon.setOnClickListener(v -> {
+			if (getContext() != null) {
+				AndroidUtils.openUrl(getContext(), R.string.docs_troubleshooting_voice_navigation, isNightMode());
 			}
 		});
 		updateToolbarSwitch();

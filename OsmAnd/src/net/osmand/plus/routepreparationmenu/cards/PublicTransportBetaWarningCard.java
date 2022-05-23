@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.net.Uri;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
@@ -9,8 +7,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class PublicTransportBetaWarningCard extends WarningCard {
-
-	private static final String OSMAND_BLOG_LINK = "https://osmand.net/blog/guideline-pt";
 
 	public PublicTransportBetaWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -23,6 +19,6 @@ public class PublicTransportBetaWarningCard extends WarningCard {
 
 	@Override
 	protected void onLinkClicked() {
-		AndroidUtils.openUrl(mapActivity, Uri.parse(OSMAND_BLOG_LINK), nightMode);
+		AndroidUtils.openUrl(mapActivity, R.string.blog_guideline, nightMode);
 	}
 }

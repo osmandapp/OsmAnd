@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +13,13 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
@@ -39,18 +45,9 @@ import net.osmand.plus.views.layers.base.BaseMapLayer;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.util.Pair;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
-
-	public static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/docs/user/map/raster-maps#download--update-tiles");
 
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
@@ -166,7 +163,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		helpButton.setOnClickListener(v -> {
 			Context context = getContext();
 			if (context != null) {
-				AndroidUtils.openUrl(context, HELP_URI, nightMode);
+				AndroidUtils.openUrl(context, R.string.docs_map_download_tiles, nightMode);
 			}
 		});
 	}

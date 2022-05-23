@@ -1,8 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -130,10 +127,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+
 public class OsmandApplication extends MultiDexApplication {
 
 	public static final String EXCEPTION_PATH = "exception.log";
-	public static final String OSMAND_PRIVACY_POLICY_URL = "https://osmand.net/help-online/privacy-policy";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
