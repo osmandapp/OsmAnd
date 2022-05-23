@@ -209,11 +209,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
 			if (this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated
 					|| tb.getZoom() < startZoomRoute || this.stopRouteDist != stopRouteDist
-					|| this.stopRouteType != stopRouteType) {
+					|| this.stopRouteType != stopRouteType || !showTransportStops.get()) {
 				clearTransportRouteCollections();
 				clearTransportStopsTileProvider();
 			}
-			if (tb.getZoom() >= startZoomRoute) {
+			if (tb.getZoom() >= startZoomRoute && showTransportStops.get()) {
 				if (stopRoute != null) {
 					initTransportRouteCollections();
 				} else {
