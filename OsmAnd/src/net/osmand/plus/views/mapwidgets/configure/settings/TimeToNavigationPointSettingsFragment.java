@@ -42,12 +42,11 @@ public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettin
 	@Override
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.time_to_navigation_point_widget_settings_fragment, container);
+		updateToolbarIcon();
 		setupTimeModeSelector();
 	}
 
 	private void setupTimeModeSelector() {
-		boolean intermediate = getWidget() == WidgetParams.TIME_TO_INTERMEDIATE;
-
 		View timeToGoContainer = view.findViewById(R.id.time_to_go_container);
 		View arrivalTimeContainer = view.findViewById(R.id.arrival_time_container);
 		CompoundButton timeToGoButton = timeToGoContainer.findViewById(R.id.compound_button);
@@ -60,10 +59,11 @@ public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettin
 			} else {
 				arrivalTimeButton.setChecked(false);
 			}
+			updateToolbarIcon();
 		};
 
-		TimeToNavigationPointState timeToGoState = TimeToNavigationPointState.getState(intermediate, false);
-		TimeToNavigationPointState arrivalTimeState = TimeToNavigationPointState.getState(intermediate, true);
+		TimeToNavigationPointState timeToGoState = getWidgetState(false);
+		TimeToNavigationPointState arrivalTimeState = getWidgetState(true);
 
 		setupTimeModeItem(timeToGoState, timeToGoContainer, callback, !arrivalTimeOtherwiseTimeToGo);
 		setupTimeModeItem(arrivalTimeState, arrivalTimeContainer, callback, arrivalTimeOtherwiseTimeToGo);
@@ -90,6 +90,18 @@ public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettin
 
 		container.setOnClickListener(v -> compoundButton.setChecked(true));
 		container.setBackground(getPressedStateDrawable());
+	}
+
+	private void updateToolbarIcon() {
+		ImageView icon = view.findViewById(R.id.icon);
+		int iconId = getWidgetState(arrivalTimeOtherwiseTimeToGo).getIconId(nightMode);
+		icon.setImageDrawable(getIcon(iconId));
+	}
+
+	@NonNull
+	private TimeToNavigationPointState getWidgetState(boolean arrivalTimeOtherwiseTimeToGo) {
+		boolean intermediate = getWidget() == WidgetParams.TIME_TO_INTERMEDIATE;
+		return TimeToNavigationPointState.getState(intermediate, arrivalTimeOtherwiseTimeToGo);
 	}
 
 	@Override
