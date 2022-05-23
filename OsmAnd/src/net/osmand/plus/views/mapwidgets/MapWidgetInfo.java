@@ -92,19 +92,18 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	@NonNull
 	public String getTitle(@NonNull Context ctx) {
+		String message = getMessage();
 		return message != null ? message : ctx.getString(getMessageId());
 	}
 
 	@Nullable
 	public String getMessage() {
-		return message;
+		return widgetState != null ? widgetState.getTitle() : message;
 	}
 
 	@StringRes
 	public int getMessageId() {
-		return widgetState != null
-				? widgetState.getMenuTitleId()
-				: messageId;
+		return messageId;
 	}
 
 	@Nullable

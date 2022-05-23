@@ -23,6 +23,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -43,20 +44,20 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_A
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_ON_REQUEST;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_AUDIO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_VIDEO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_TAKE_PHOTO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_WIDGET_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.BEARING_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_WIDGET_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME_WIDGET_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 
@@ -97,8 +98,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_0_04 = 4004;
 	// 4005 - 4.0-05 (Revert Radius ruler widget preference migration)
 	public static final int VERSION_4_0_05 = 4005;
+	// 4006 - 4.0-06 (Merge widgets: Intermediate time to go and Intermediate arrival time, Time to go and Arrival time)
+	public static final int VERSION_4_0_06 = 4006;
 
-	public static final int LAST_APP_VERSION = VERSION_4_0_05;
+	public static final int LAST_APP_VERSION = VERSION_4_0_06;
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -209,6 +212,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion == VERSION_4_0_04) {
 					revertRadiusRulerWidgetPreferenceMigration();
+				}
+				if (prevAppVersion < VERSION_4_0_06) {
+					mergeTimeToNavigationPointWidgets();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -421,89 +427,35 @@ class AppVersionUpgradeOnInit {
 	private void migrateStateDependentWidgets() {
 		OsmandSettings settings = app.getSettings();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			WidgetsIdsMapper idsMapper = new WidgetsIdsMapper();
+			idsMapper.addReplacement(INTERMEDIATE_TIME_WIDGET_LEGACY, getIntermediateTimeWidgetId(appMode));
+			idsMapper.addReplacement(NAVIGATION_TIME_WIDGET_LEGACY, getTimeWidgetId(appMode));
+			idsMapper.addReplacement(BEARING_WIDGET_LEGACY, getBearingWidgetId(appMode));
+			idsMapper.addReplacement(AV_NOTES_WIDGET_LEGACY, getAudioVideoNotesWidgetId(appMode));
+
 			if (settings.MAP_INFO_CONTROLS.isSetForMode(appMode)) {
-				replaceWidgetIds(settings.MAP_INFO_CONTROLS, appMode, SETTINGS_SEPARATOR, null);
+				replaceWidgetIds(settings.MAP_INFO_CONTROLS, appMode, idsMapper, SETTINGS_SEPARATOR, null);
 				hideNotReplacedWidgets(appMode);
 			}
 			if (settings.RIGHT_WIDGET_PANEL_ORDER.isSetForMode(appMode)) {
-				replaceWidgetIds(settings.RIGHT_WIDGET_PANEL_ORDER, appMode, PAGE_SEPARATOR, WIDGET_SEPARATOR);
+				replaceWidgetIds(settings.RIGHT_WIDGET_PANEL_ORDER, appMode, idsMapper, PAGE_SEPARATOR, WIDGET_SEPARATOR);
 			}
 		}
-	}
-
-	private void replaceWidgetIds(@NonNull CommonPreference<String> preference,
-	                              @NonNull ApplicationMode appMode,
-	                              @NonNull String firstLevelSeparator,
-	                              @Nullable String secondLevelSeparator) {
-		Map<String, String> replacements = new HashMap<>();
-		replacements.put(INTERMEDIATE_TIME_WIDGET_LEGACY, getIntermediateTimeWidgetId(appMode));
-		replacements.put(NAVIGATION_TIME_WIDGET_LEGACY, getTimeWidgetId(appMode));
-		replacements.put(BEARING_WIDGET_LEGACY, getBearingWidgetId(appMode));
-		replacements.put(AV_NOTES_WIDGET_LEGACY, getAudioVideoNotesWidgetId(appMode));
-
-		String oldValue = preference.getModeValue(appMode);
-		List<String> firstLevelSplits = new ArrayList<>(Arrays.asList(oldValue.split(firstLevelSeparator)));
-		StringBuilder newValue = new StringBuilder();
-
-		for (int i = 0; i < firstLevelSplits.size(); i++) {
-			String firstLevelSplit = firstLevelSplits.get(i);
-			if (!Algorithms.isEmpty(secondLevelSeparator) && firstLevelSplit.contains(secondLevelSeparator)) {
-				List<String> secondLevelSplits = new ArrayList<>(Arrays.asList(firstLevelSplit.split(secondLevelSeparator)));
-				for (int j = 0; j < secondLevelSplits.size(); j++) {
-					String newWidgetId = getUpdatedWidgetId(secondLevelSplits.get(j), replacements);
-					newValue.append(newWidgetId);
-					boolean last = j + 1 == secondLevelSplits.size();
-					newValue.append(last ? "" : secondLevelSeparator);
-				}
-				newValue.append(firstLevelSeparator);
-			} else {
-				String newWidgetId = getUpdatedWidgetId(firstLevelSplit, replacements);
-				newValue.append(newWidgetId).append(firstLevelSeparator);
-			}
-		}
-
-		preference.setModeValue(appMode, newValue.toString());
-	}
-
-	@NonNull
-	private String getUpdatedWidgetId(@NonNull String widgetId, @NonNull Map<String, String> replacements) {
-		String newWidgetId = replacements.get(widgetId);
-		if (newWidgetId != null) {
-			return newWidgetId;
-		}
-
-		if (widgetId.indexOf(COLLAPSED_PREFIX) == 0) {
-			String widgetIdNoPredix = widgetId.replaceFirst("\\" + COLLAPSED_PREFIX, "");
-			String newWidgetIdNoPrefix = replacements.get(widgetIdNoPredix);
-			if (newWidgetIdNoPrefix != null) {
-				return newWidgetIdNoPrefix; // Without prefix, collapse is no longer supported
-			}
-		}
-
-		if (widgetId.indexOf(HIDE_PREFIX) == 0) {
-			String widgetIdNoPrefix = widgetId.replaceFirst(HIDE_PREFIX, "");
-			String newWidgetIdNoPrefix = replacements.get(widgetIdNoPrefix);
-			if (newWidgetIdNoPrefix != null) {
-				return HIDE_PREFIX + newWidgetIdNoPrefix;
-			}
-		}
-
-		return widgetId;
 	}
 
 	@NonNull
 	private String getIntermediateTimeWidgetId(@NonNull ApplicationMode appMode) {
 		boolean intermediateArrival = app.getSettings()
-				.SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.getModeValue(appMode);
+				.INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO.getModeValue(appMode);
 		return intermediateArrival
-				? INTERMEDIATE_ARRIVAL_TIME.id
-				: INTERMEDIATE_TIME_TO_GO.id;
+				? INTERMEDIATE_ARRIVAL_TIME_LEGACY
+				: INTERMEDIATE_TIME_TO_GO_LEGACY;
 	}
 
 	@NonNull
 	private String getTimeWidgetId(@NonNull ApplicationMode appMode) {
-		boolean arrival = app.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.getModeValue(appMode);
-		return arrival ? ARRIVAL_TIME.id : TIME_TO_GO.id;
+		boolean arrival = app.getSettings().DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO.getModeValue(appMode);
+		return arrival ? ARRIVAL_TIME_LEGACY : TIME_TO_GO_LEGACY;
 	}
 
 	@NonNull
@@ -535,18 +487,18 @@ class AppVersionUpgradeOnInit {
 		String widgetsVisibilityString = settings.MAP_INFO_CONTROLS.getModeValue(appMode);
 		List<String> widgetsVisibility = new ArrayList<>(Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR)));
 
-		List<WidgetParams> newWidgets = new ArrayList<>();
-		newWidgets.addAll(Arrays.asList(INTERMEDIATE_ARRIVAL_TIME, INTERMEDIATE_TIME_TO_GO, ARRIVAL_TIME, TIME_TO_GO));
-		newWidgets.addAll(WidgetGroup.BEARING.getWidgets());
-		newWidgets.addAll(WidgetGroup.AUDIO_VIDEO_NOTES.getWidgets());
+		List<String> newWidgetsIds = new ArrayList<>();
+		newWidgetsIds.addAll(Arrays.asList(INTERMEDIATE_ARRIVAL_TIME_LEGACY, INTERMEDIATE_TIME_TO_GO_LEGACY,
+				ARRIVAL_TIME_LEGACY, TIME_TO_GO_LEGACY));
+		newWidgetsIds.addAll(WidgetGroup.BEARING.getWidgetsIds());
+		newWidgetsIds.addAll(WidgetGroup.AUDIO_VIDEO_NOTES.getWidgetsIds());
 
-		for (WidgetParams widget : newWidgets) {
-			String id = widget.id;
-			boolean visibilityDefined = widgetsVisibility.contains(id)
-					|| widgetsVisibility.contains(COLLAPSED_PREFIX + id)
-					|| widgetsVisibility.contains(HIDE_PREFIX + id);
-			if (!visibilityDefined && appMode.isWidgetVisibleByDefault(id)) {
-				widgetsVisibility.add(HIDE_PREFIX + id);
+		for (String widgetId : newWidgetsIds) {
+			boolean visibilityDefined = widgetsVisibility.contains(widgetId)
+					|| widgetsVisibility.contains(COLLAPSED_PREFIX + widgetId)
+					|| widgetsVisibility.contains(HIDE_PREFIX + widgetId);
+			if (!visibilityDefined && appMode.isWidgetVisibleByDefault(widgetId)) {
+				widgetsVisibility.add(HIDE_PREFIX + widgetId);
 			}
 		}
 
@@ -578,5 +530,72 @@ class AppVersionUpgradeOnInit {
 				settings.RADIUS_RULER_MODE.setModeValue(appMode, radiusRulerMode);
 			}
 		}
+	}
+
+	private void mergeTimeToNavigationPointWidgets() {
+		OsmandSettings settings = app.getSettings();
+		WidgetsIdsMapper idsMapper = new WidgetsIdsMapper();
+		List<String> oldIntermediate = Arrays.asList(INTERMEDIATE_ARRIVAL_TIME_LEGACY, INTERMEDIATE_TIME_TO_GO_LEGACY);
+		List<String> oldDestination = Arrays.asList(ARRIVAL_TIME_LEGACY, TIME_TO_GO_LEGACY);
+		idsMapper.addReplacement(oldIntermediate, WidgetParams.TIME_TO_INTERMEDIATE.id);
+		idsMapper.addReplacement(oldDestination, WidgetParams.TIME_TO_DESTINATION.id);
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+
+			idsMapper.resetAppliedVisibleReplacements();
+			if (settings.LEFT_WIDGET_PANEL_ORDER.isSet()) {
+				replaceWidgetIds(settings.LEFT_WIDGET_PANEL_ORDER, appMode, idsMapper, PAGE_SEPARATOR, WIDGET_SEPARATOR);
+			}
+			if (settings.RIGHT_WIDGET_PANEL_ORDER.isSet()) {
+				replaceWidgetIds(settings.RIGHT_WIDGET_PANEL_ORDER, appMode, idsMapper, PAGE_SEPARATOR, WIDGET_SEPARATOR);
+			}
+
+			idsMapper.resetAppliedVisibleReplacements();
+			if (settings.MAP_INFO_CONTROLS.isSet()) {
+				replaceWidgetIds(settings.MAP_INFO_CONTROLS, appMode, idsMapper, SETTINGS_SEPARATOR, null);
+			}
+		}
+	}
+
+	private void replaceWidgetIds(@NonNull CommonPreference<String> preference,
+	                              @NonNull ApplicationMode appMode,
+	                              @NonNull WidgetsIdsMapper idsMapper,
+	                              @NonNull String firstLevelSeparator,
+	                              @Nullable String secondLevelSeparator) {
+		String oldValue = preference.getModeValue(appMode);
+		List<String> firstLevelSplits = new ArrayList<>(Arrays.asList(oldValue.split(firstLevelSeparator)));
+		StringBuilder newValue = new StringBuilder();
+
+		int newFirstLevelsCount = 0;
+
+		for (int i = 0; i < firstLevelSplits.size(); i++) {
+			String firstLevelSplit = firstLevelSplits.get(i);
+			if (Algorithms.isEmpty(secondLevelSeparator) || !firstLevelSplit.contains(secondLevelSeparator)) {
+				String newWidgetId = idsMapper.mapId(firstLevelSplit);
+				if (newWidgetId != null) {
+					newValue.append(newFirstLevelsCount > 0 ? firstLevelSeparator : "")
+							.append(newWidgetId);
+					newFirstLevelsCount++;
+				}
+			} else {
+				List<String> secondLevelSplits = new ArrayList<>(Arrays.asList(firstLevelSplit.split(secondLevelSeparator)));
+				int newSecondLevelsCount = 0;
+
+				for (int j = 0; j < secondLevelSplits.size(); j++) {
+					String oldWidgetId = secondLevelSplits.get(j);
+					String newWidgetId = idsMapper.mapId(oldWidgetId);
+					if (newWidgetId != null) {
+						newValue.append(newSecondLevelsCount > 0 ? secondLevelSeparator : "")
+								.append(newWidgetId);
+						newSecondLevelsCount++;
+					}
+				}
+
+				newValue.append(newFirstLevelsCount > 0 ? firstLevelSeparator : "");
+				newFirstLevelsCount++;
+			}
+		}
+
+		preference.setModeValue(appMode, newValue.toString());
 	}
 }

@@ -7,17 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.OsmandApplication;
@@ -41,6 +30,7 @@ import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.WidgetAdapterDragListener;
@@ -57,6 +47,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 
@@ -238,8 +239,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		applyWidgetsConfiguration();
 
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof WidgetsOrderListener) {
-			((WidgetsOrderListener) fragment).onWidgetsOrderApplied();
+		if (fragment instanceof WidgetsConfigurationChangeListener) {
+			((WidgetsConfigurationChangeListener) fragment).onWidgetsConfigurationChanged();
 		}
 		dismiss();
 	}
@@ -343,7 +344,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
 			boolean defaultWidget = widgetParams != null;
 			if (defaultWidget) {
-				WidgetGroup group = widgetParams.getGroup();
+				WidgetGroup group = widgetParams.group;
 				if (group != null && !availableGroups.contains(group)) {
 					availableGroups.add(group);
 					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));
@@ -501,9 +502,5 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	public interface WidgetsOrderListener {
-		void onWidgetsOrderApplied();
 	}
 }

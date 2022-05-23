@@ -206,7 +206,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			title.setText(widgetInfo.getTitle(app));
 
 			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
-			WidgetGroup widgetGroup = widgetParams == null ? null : widgetParams.getGroup();
+			WidgetGroup widgetGroup = widgetParams == null ? null : widgetParams.group;
 			if (widgetGroup != null) {
 				TextView description = view.findViewById(R.id.description);
 				description.setText(widgetGroup.titleId);
@@ -225,7 +225,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
-						WidgetSettingsBaseFragment.showFragment(fragmentManager, selectedAppMode, settingsFragment);
+						Fragment target = getParentFragment();
+						WidgetSettingsBaseFragment.showFragment(fragmentManager, target, selectedAppMode, settingsFragment);
 					}
 				});
 			} else {
@@ -269,7 +270,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		List<WidgetGroup> visitedGroups = new ArrayList<>();
 		List<WidgetParams> matchingWidgets = new ArrayList<>();
 		for (WidgetParams widget : widgets) {
-			WidgetGroup group = widget.getGroup();
+			WidgetGroup group = widget.group;
 			if (group != null && !visitedGroups.contains(group)) {
 				visitedGroups.add(group);
 				matchingWidgets.add(widget);
@@ -288,7 +289,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 		for (int i = 0; i < widgets.size(); i++) {
 			WidgetParams widget = widgets.get(i);
-			WidgetGroup widgetGroup = widget.getGroup();
+			WidgetGroup widgetGroup = widget.group;
 
 			View view = inflater.inflate(R.layout.configure_screen_list_item_available_widget,
 					availableWidgetsContainer, false);
