@@ -213,7 +213,7 @@ class AppVersionUpgradeOnInit {
 				if (prevAppVersion == VERSION_4_0_04) {
 					revertRadiusRulerWidgetPreferenceMigration();
 				}
-				if (prevAppVersion < VERSION_4_0_05) {
+				if (prevAppVersion < VERSION_4_0_06) {
 					mergeTimeToNavigationPointWidgets();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
