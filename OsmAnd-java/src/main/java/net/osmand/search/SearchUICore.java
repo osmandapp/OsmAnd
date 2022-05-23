@@ -632,10 +632,6 @@ public class SearchUICore {
 						o2.getSearchPriority(phrase));
 			}
 		});
-
-//		for (int i = lst.size()-1; i >= 0; i --) {
-//			SearchCoreAPI api = lst.get(i);
-
 		for (SearchCoreAPI api : lst) {
 			if (matcher.isCancelled()) {
 				break;
