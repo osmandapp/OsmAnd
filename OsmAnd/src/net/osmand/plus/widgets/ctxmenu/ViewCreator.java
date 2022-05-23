@@ -20,12 +20,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -259,9 +259,12 @@ public class ViewCreator {
 		TextView feedbackButton = view.findViewById(R.id.feedbackButton);
 		Drawable pollIcon = iconsCache.getThemedIcon(R.drawable.ic_action_big_poll);
 		feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
-		feedbackButton.setOnClickListener(v -> HelpArticleDialogFragment
-				.instantiateWithUrl(HelpActivity.OSMAND_POLL_HTML, ctx.getString(R.string.feedback))
-				.show(((FragmentActivity) ctx).getSupportFragmentManager(), null));
+		feedbackButton.setOnClickListener(v -> {
+			String name = ctx.getString(R.string.feedback);
+			String url = ctx.getString(R.string.osmand_poll);
+			FragmentManager fm = ((FragmentActivity) ctx).getSupportFragmentManager();
+			HelpArticleDialogFragment.instantiateWithUrl(url, name).show(fm, null);
+		});
 		TextView contactUsButton = view.findViewById(R.id.contactUsButton);
 		Drawable contactUsIcon = iconsCache.getThemedIcon(R.drawable.ic_action_big_feedback);
 		contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,

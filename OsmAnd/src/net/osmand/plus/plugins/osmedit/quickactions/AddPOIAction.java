@@ -210,11 +210,11 @@ public class AddPOIAction extends QuickAction {
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
-		final View view = LayoutInflater.from(parent.getContext())
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
+		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_poi_layout, parent, false);
 
-		final OsmandApplication application = mapActivity.getMyApplication();
+		OsmandApplication application = mapActivity.getMyApplication();
 		boolean isLightTheme = application.getSettings().isLightContent();
 		final boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
 		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
@@ -328,7 +328,8 @@ public class AddPOIAction extends QuickAction {
 
 		ImageButton onlineDocumentationButton = view.findViewById(R.id.onlineDocumentationButton);
 		onlineDocumentationButton.setOnClickListener(v -> {
-			Uri uri = Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features");
+			String url = application.getString(R.string.url_osm_wiki_map_features);
+			Uri uri = Uri.parse(url);
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 			AndroidUtils.startActivityIfSafe(mapActivity, intent);
 		});
