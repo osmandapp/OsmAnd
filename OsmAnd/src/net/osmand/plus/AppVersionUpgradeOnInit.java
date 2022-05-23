@@ -67,6 +67,7 @@ class AppVersionUpgradeOnInit {
 	public static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
 	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
 	public static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
+	public static final String UPDATE_TIME_MS = "UPDATE_TIME_MS"; //$NON-NLS-1$
 
 	// 22 - 2.2
 	public static final int VERSION_2_2 = 22;
@@ -123,6 +124,9 @@ class AppVersionUpgradeOnInit {
 		}
 		if (!startPrefs.contains(FIRST_INSTALLED)) {
 			startPrefs.edit().putLong(FIRST_INSTALLED, System.currentTimeMillis()).commit();
+		}
+		if (!startPrefs.contains(UPDATE_TIME_MS)) {
+			startPrefs.edit().putLong(UPDATE_TIME_MS, System.currentTimeMillis()).commit();
 		}
 		if (!startPrefs.contains(FIRST_TIME_APP_RUN)) {
 			firstTime = true;
@@ -218,6 +222,7 @@ class AppVersionUpgradeOnInit {
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+				startPrefs.edit().putLong(UPDATE_TIME_MS, System.currentTimeMillis()).commit();
 				appVersionChanged = true;
 			}
 		}
@@ -249,12 +254,16 @@ class AppVersionUpgradeOnInit {
 	}
 
 	public long getFirstInstalledDays(SharedPreferences startPrefs) {
-		if (startPrefs == null) {
-			return 0;
-		}
-		long nd = startPrefs.getLong(FIRST_INSTALLED, 0);
+		long time = getFirstInstalledTime(startPrefs);
+		return (System.currentTimeMillis() - time) / (1000L * 24L * 60L * 60L);
+	}
 
-		return (System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l);
+	public long getFirstInstalledTime(SharedPreferences startPrefs) {
+		return startPrefs != null ? startPrefs.getLong(FIRST_INSTALLED, 0) : 0;
+	}
+
+	public long getUpdateVersionTime(SharedPreferences startPrefs) {
+		return startPrefs != null ? startPrefs.getLong(UPDATE_TIME_MS, 0) : 0;
 	}
 
 	public boolean isFirstTime() {
