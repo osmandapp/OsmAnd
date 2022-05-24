@@ -1993,4 +1993,8 @@
     <string name="poi_resource_beryl">Beril</string>
     <string name="poi_resource_dimension_stone">Klesanec</string>
     <string name="poi_wiki_lang_el">Grški wiki</string>
+    <string name="poi_resource_gravel">Grušč</string>
+    <string name="poi_resource_oil">Olje</string>
+    <string name="poi_resource_mineral_oil">Mineralno olje</string>
+    <string name="poi_resource_slate_iron_ore_copper">Skrilavec;železova ruda;baker</string>
 </resources>
