@@ -1779,7 +1779,7 @@
     <string name="av_audio_format_descr">選擇音訊輸出格式。</string>
     <string name="av_audio_bitrate">音訊位元傳輸速率</string>
     <string name="av_audio_bitrate_descr">選擇音訊位元傳輸速率。</string>
-    <string name="shared_string_near">附近</string>
+    <string name="shared_string_near">鄰近</string>
     <string name="no_address_found">沒有確定地址</string>
     <string name="looking_up_address">查尋地址</string>
     <string name="rendering_attr_horseRoutes_name">馬道</string>
@@ -3075,7 +3075,7 @@
     <string name="rendering_attr_tracktype_grade5_name">鬆軟</string>
     <string name="routeInfo_tracktype_name">表面硬度</string>
     <string name="shared_string_file_is_saved">%s 已儲存</string>
-    <string name="shared_string_open_track">開放軌道</string>
+    <string name="shared_string_open_track">打開軌道</string>
     <string name="shared_string_track_is_saved">軌道 %s 已儲存</string>
     <string name="gpx_join_gaps">加入 gaps</string>
     <string name="app_mode_camper">露營車</string>

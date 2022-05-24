@@ -882,7 +882,7 @@
     <string name="route_duration">时间：</string>
     <string name="route_distance">距离：</string>
     <string name="no_address_found">没有确定地址</string>
-    <string name="shared_string_near">附近</string>
+    <string name="shared_string_near">邻近</string>
     <string name="shared_string_hide">隐藏</string>
     <string name="av_video_quality_low">最低品质</string>
     <string name="av_video_quality_high">最高品质</string>
@@ -1675,7 +1675,7 @@
     <string name="traffic_warning_calming">交通稳静化</string>
     <string name="traffic_warning_speed_camera">测速摄像机</string>
     <string name="traffic_warning">交通警告</string>
-    <string name="speak_favorites">收藏附近</string>
+    <string name="speak_favorites">附近的收藏</string>
     <string name="speak_poi">附近的 POI</string>
     <string name="way_alarms">交通警告</string>
     <string name="sleep_mode_stop_dialog">停止 GPS 背景模式吗？</string>
@@ -4246,4 +4246,5 @@
     <string name="map_widget_current_speed">当前速度</string>
     <string name="map_widget_distance_to_destination">距目的地距离</string>
     <string name="exit_import">是否退出？</string>
+    <string name="shared_string_open_track">打开轨迹</string>
 </resources>
