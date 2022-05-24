@@ -195,7 +195,8 @@ public abstract class OsmandMapLayer {
 
 	/**
 	 * This method returns whether canvas should be rotated as
-	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.data.RotatedTileBox, OsmandMapLayer.DrawSettings)}.
+	 * map rotated before {@link #onDraw(Canvas, RotatedTileBox, DrawSettings)} and
+	 * {@link #onPrepareBufferImage(Canvas, RotatedTileBox, DrawSettings)}.
 	 * If the layer draws simply layer over screen (not over map)
 	 * it should return true.
 	 */
