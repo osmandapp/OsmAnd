@@ -36,6 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -57,6 +58,8 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.importfiles.ui.ImportTracksFragment;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
+import net.osmand.plus.measurementtool.GpxData;
+import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -522,8 +525,14 @@ public class ImportHelper {
 		}
 	}
 
-	private void showPlanRouteFragment(GPXFile result) {
-		MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), result);
+	private void showPlanRouteFragment(@NonNull GPXFile gpxFile) {
+		GpxData gpxData = new GpxData(gpxFile);
+		MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
+		editingContext.setGpxData(gpxData);
+
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		int mode = MeasurementToolFragment.PLAN_ROUTE_MODE;
+		MeasurementToolFragment.showInstance(fragmentManager, editingContext, mode, false);
 	}
 
 	protected void importGpxOrFavourites(final GPXFile gpxFile, final String fileName, final long fileSize,
