@@ -865,7 +865,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		@Override
 		protected List<Amenity> doInBackground(Void... voids) {
 			List<Amenity> results = new ArrayList<>(searchCities(app, region));
-			sortCities(results);
+			sortCities(results, region);
 			return results;
 		}
 
@@ -928,7 +928,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			return amenities;
 		}
 
-		private void sortCities(List<Amenity> cities) {
+		private void sortCities(List<Amenity> cities, String phraseName) {
 			final Collator collator = OsmAndCollator.primaryCollator();
 			final String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 			final boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
@@ -943,13 +943,14 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					if ((a.getSubType()).equals("city")) {
 						str1 = "!" + str1;
 					}
-					if ((a.getName(lang, transliterate)).equals(region)) {
+					if ((a.getName(lang, transliterate)).equals(phraseName)) {
 						str1 = "!" + str1;
-					}
-					for (String name : a.getOtherNames(true)) {
-						if (name.equals(region)) {
-							str1 = "!" + str1;
-							break;
+					} else {
+						for (String name : a.getOtherNames(true)) {
+							if (name.equals(phraseName)) {
+								str1 = "!" + str1;
+								break;
+							}
 						}
 					}
 
@@ -958,15 +959,17 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					if ((b.getSubType()).equals("city")) {
 						str2 = "!" + str2;
 					}
-					if ((b.getName(lang, transliterate)).equals(region)) {
+					if ((b.getName(lang, transliterate)).equals(phraseName)) {
 						str2 = "!" + str2;
-					}
-					for (String name : b.getOtherNames(true)) {
-						if (name.equals(region)) {
-							str2 = "!" + str2;
-							break;
+					} else {
+						for (String name : b.getOtherNames(true)) {
+							if (name.equals(phraseName)) {
+								str2 = "!" + str2;
+								break;
+							}
 						}
 					}
+
 					return collator.compare(str1, str2);
 				}
 			});
