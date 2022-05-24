@@ -1072,8 +1072,8 @@
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر الأخرى</string>
     <string name="map_widget_top">شريط المعلومات</string>
-    <string name="map_widget_right">العدادات على اليسار</string>
-    <string name="map_widget_left">العدادات على اليمين</string>
+    <string name="map_widget_right">العدادات على اليمين</string>
+    <string name="map_widget_left">العدادات على اليسار</string>
     <string name="search_radius_proximity">ضمن</string>
     <string name="anonymous_user">مستخدم مجهول</string>
     <string name="logged_as">سجل الدخول ب %1$s</string>
@@ -4750,4 +4750,10 @@
     <string name="rendering_attr_hideMilitaryAreas_description">إخفاء المناطق العسكرية</string>
     <string name="explore_plans">استكشف الخطط</string>
     <string name="map_widget_true_bearing">تأثير حقيقي</string>
+    <string name="map_widget_time_to_destination">وقت الوصول</string>
+    <string name="map_widget_time_to_intermediate">متوسط وقت الوصول</string>
+    <string name="map_widget_distance_to_intermediate">مسافة متوسط وقت الوصول</string>
+    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الأداة.</string>
+    <string name="shared_string_mode">نمط</string>
+    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الأداة.</string>
 </resources>
