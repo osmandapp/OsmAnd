@@ -630,6 +630,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				infoTypeBtn.setSelectedItem(graphBtn);
 			} else if ((isFollowTrackMode() || isAttachRoadsMode()) && isShowSnapWarning()) {
 				enterApproximationMode(mapActivity);
+			} else if (gpxData != null) {
+				adjustMapPosition(gpxData);
 			}
 		} else {
 			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
@@ -1445,11 +1447,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void addNewGpxData(GPXFile gpxFile) {
 		GpxData gpxData = setupGpxData(gpxFile);
 		initMeasurementMode(gpxData, true);
+		if (gpxData != null) {
+			adjustMapPosition(gpxData);
+		}
+	}
+
+	private void adjustMapPosition(@NonNull GpxData gpxData) {
 		MapActivity mapActivity = getMapActivity();
-		if (adjustMapPosition && mapActivity != null && gpxData != null) {
-			QuadRect qr = gpxData.getRect();
-			mapActivity.getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom,
-					(int) qr.width(), (int) qr.height(), 0);
+		if (adjustMapPosition && mapActivity != null) {
+			QuadRect quadRect = gpxData.getRect();
+			mapActivity.getMapView().fitRectToMap(quadRect.left, quadRect.right, quadRect.top, quadRect.bottom,
+					((int) quadRect.width()), ((int) quadRect.height()), 0);
 		}
 		adjustMapPosition = true;
 	}
@@ -2150,13 +2158,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.fileName = fileName;
 		fragment.adjustMapPosition = adjustMapPosition;
-		fragment.setMode(PLAN_ROUTE_MODE, true);
-		return showFragment(fragment, fragmentManager);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager, GPXFile gpxFile) {
-		MeasurementToolFragment fragment = new MeasurementToolFragment();
-		fragment.addNewGpxData(gpxFile);
 		fragment.setMode(PLAN_ROUTE_MODE, true);
 		return showFragment(fragment, fragmentManager);
 	}
