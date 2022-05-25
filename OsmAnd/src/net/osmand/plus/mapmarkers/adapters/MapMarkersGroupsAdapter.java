@@ -30,6 +30,7 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
@@ -586,7 +587,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		if (!visible && selectedGpxFile != null && selectedGpxFile.selectedByUser) {
 			return;
 		}
-		gpxHelper.selectGpxFile(gpxFile, visible, false, false, false, false);
+		GpxSelectionParams params = GpxSelectionParams.newInstance().saveSelection();
+		if (visible) {
+			params.showOnMap().selectedAutomatically();
+		} else {
+			params.hideFromMap();
+		}
+		gpxHelper.selectGpxFile(gpxFile, params);
 	}
 
 	public void hideSnackbar() {

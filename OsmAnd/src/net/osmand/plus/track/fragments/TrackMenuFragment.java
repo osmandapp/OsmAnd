@@ -1,29 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -104,6 +80,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.cards.DescriptionCard;
@@ -145,6 +122,30 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -312,7 +313,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (selectedGpxFile != null) {
 			onSelectedGpxFileAvailable();
 			if (FileUtils.isTempFile(app, getGpx().path)) {
-				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), true, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.showOnMap().selectedByUser().syncGroup()
+						.addToMarkers().addToHistory().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
 			}
 		}
 
@@ -1061,8 +1065,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					onFileMove(srcFile, destFIle);
 					gpxFile = getGpx();
 				} else {
-					boolean gpxFileSelected = !isGpxFileSelected(app, gpxFile);
-					app.getSelectedGpxHelper().selectGpxFile(gpxFile, gpxFileSelected, false);
+					GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+					if (!isGpxFileSelected(app, gpxFile)) {
+						params.showOnMap().selectedByUser().addToHistory().addToMarkers();
+					} else {
+						params.hideFromMap();
+					}
+					app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 				}
 				updateContent();
 				mapActivity.refreshMap();
@@ -1118,7 +1127,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					osmEditingPlugin.sendGPXFiles(mapActivity, this, gpxInfo);
 				}
 			} else if (buttonIndex == EDIT_BUTTON_INDEX) {
-				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.showOnMap().selectedByUser().syncGroup().addToMarkers()
+						.addToHistory().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 				dismiss();
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 				MeasurementToolFragment.showInstance(fragmentManager, fileName, false);
@@ -1513,7 +1525,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			GPXFile gpx = displayHelper.getGpx();
 			if (gpx != null) {
 				boolean showOnMap = GpxSelectionHelper.isGpxFileSelected(app, gpx);
-				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+				if (showOnMap) {
+					params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				} else {
+					params.hideFromMap();
+				}
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 				saveGpx(showOnMap ? selectedGpxFile : null, gpx);
 			}
 		}
@@ -1640,19 +1658,19 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				progress[0] = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
 			}
 			final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-			GpxFileLoaderTask gpxFileLoaderTask = new GpxFileLoaderTask(new File(path), new CallbackWithObject<GPXFile>() {
-				@Override
-				public boolean processResult(GPXFile result) {
-					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
-					if (selectedGpxFile != null) {
-						callback.processResult(selectedGpxFile);
-					}
-					MapActivity mapActivity = mapActivityRef.get();
-					if (progress[0] != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-						progress[0].dismiss();
-					}
-					return true;
+			GpxFileLoaderTask gpxFileLoaderTask = new GpxFileLoaderTask(new File(path), result -> {
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.showOnMap().syncGroup().selectedByUser().addToHistory()
+						.addToMarkers().saveSelection();
+				SelectedGpxFile selectedGpxFile1 = app.getSelectedGpxHelper().selectGpxFile(result, params);
+				if (selectedGpxFile1 != null) {
+					callback.processResult(selectedGpxFile1);
 				}
+				MapActivity mapActivity1 = mapActivityRef.get();
+				if (progress[0] != null && AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
+					progress[0].dismiss();
+				}
+				return true;
 			});
 			gpxFileLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}

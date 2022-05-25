@@ -1,19 +1,5 @@
 package net.osmand.plus.helpers;
 
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -104,6 +90,7 @@ import net.osmand.plus.track.ChartLabel;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxMarkerView;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
@@ -145,6 +132,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class GpxUiHelper {
 
@@ -887,7 +888,10 @@ public class GpxUiHelper {
 					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
-							app.getSelectedGpxHelper().selectGpxFile(result, true, false);
+							GpxSelectionParams params = GpxSelectionParams.newInstance()
+									.showOnMap().syncGroup().selectedByUser().addToMarkers()
+									.addToHistory().saveSelection();
+							app.getSelectedGpxHelper().selectGpxFile(result, params);
 							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, result.path);
 						}
 					}
@@ -2237,13 +2241,16 @@ public class GpxUiHelper {
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (errorMessage == null) {
 					OsmandApplication app = mapActivity.getMyApplication();
-					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+					GpxSelectionParams params = GpxSelectionParams.newInstance()
+							.showOnMap().syncGroup().selectedByUser().addToMarkers()
+							.addToHistory().saveSelection();
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 					GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 					SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
-					Bundle params = new Bundle();
-					params.putBoolean(TrackMenuFragment.ADJUST_MAP_POSITION, false);
+					Bundle bundle = new Bundle();
+					bundle.putBoolean(TrackMenuFragment.ADJUST_MAP_POSITION, false);
 					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							trackAnalysis, routeSegment, params);
+							trackAnalysis, routeSegment, bundle);
 				} else {
 					LOG.error(errorMessage);
 				}

@@ -1,8 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
-import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
-
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -40,6 +37,7 @@ import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -48,6 +46,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
+import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
 
 public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		implements OnTrackFileMoveListener, OnTrackFolderAddListener {
@@ -302,7 +303,13 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			if (gpxFile.error != null) {
 				return;
 			}
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+			if (showOnMap) {
+				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+			} else {
+				params.hideFromMap();
+			}
+			app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 		}
 	}
 

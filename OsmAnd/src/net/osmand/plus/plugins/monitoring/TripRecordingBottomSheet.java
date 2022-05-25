@@ -1,13 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.createGpxTabsView;
-import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_SPEED;
-import static net.osmand.plus.utils.AndroidUtils.setPadding;
-import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -57,6 +49,7 @@ import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
@@ -76,6 +69,14 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.createGpxTabsView;
+import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.utils.AndroidUtils.setPadding;
+import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -399,7 +400,13 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		buttonShowTrack.setOnClickListener(v -> {
 			boolean checked = !showTrackCompound.isChecked();
 			showTrackCompound.setChecked(checked);
-			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), checked, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+			if (checked) {
+				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+			} else {
+				params.hideFromMap();
+			}
+			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), params);
 			setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
 			createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
 		});

@@ -68,6 +68,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -1223,19 +1224,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				isChecked = selectedGpxFile != null;
 			}
 			checkItem.setChecked(isChecked);
-			checkItem.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					selectedGpxHelper.selectGpxFile(child.gpx, !isChecked, false);
-					notifyDataSetChanged();
+			checkItem.setOnClickListener(view -> {
+				GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+				if (!isChecked) {
+					params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				} else {
+					params.hideFromMap();
 				}
+				selectedGpxHelper.selectGpxFile(child.gpx, params);
+				notifyDataSetChanged();
 			});
 
-			v.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onChildClick(null, v, groupPosition, childPosition, 0);
-				}
+			v.setOnClickListener(view -> {
+				onChildClick(null, view, groupPosition, childPosition, 0);
 			});
 			return v;
 		}

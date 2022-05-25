@@ -23,6 +23,8 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.plus.track.GpxMarkerView;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -276,7 +278,10 @@ public class TrackDetailsMenu {
 		if (mapActivity != null) {
 			if (gpxItem != null && gpxItem.chartPointLayer == ChartPointLayer.GPX && gpxItem.wasHidden
 					&& gpxItem.group != null && gpxItem.group.getGpx() != null) {
-				mapActivity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxItem.group.getGpx(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
+				helper.selectGpxFile(gpxItem.group.getGpx(), params);
 			}
 			TrackDetailsBarController toolbarController = this.toolbarController;
 			if (toolbarController != null) {

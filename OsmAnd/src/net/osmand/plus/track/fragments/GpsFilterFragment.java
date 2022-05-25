@@ -30,6 +30,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.GpsFilterScreensAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
@@ -441,7 +442,13 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		if (error != null) {
 			LOG.error(error);
 		} else if (mapActivity != null) {
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+			if (showOnMap) {
+				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+			} else {
+				params.hideFromMap();
+			}
+			app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			SavedTrackBottomSheetDialogFragment.showInstance(fragmentManager, gpxFile.path, false);
@@ -455,7 +462,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 		boolean isGpxFileExist = new File(selectedGpxFile.getGpxFile().path).exists();
 		if (app != null && !isGpxFileExist) {
-			app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance().hideFromMap().syncGroup().saveSelection();
+			app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
 		}
 		gpsFilterHelper.clearListeners();
 
