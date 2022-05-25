@@ -4104,7 +4104,7 @@
     <string name="arrival_time_widget_desc">Čas prihoda na ciljno točko.</string>
     <string name="lanes_widgets_desc">Gradnik Pasovi prikazuje trenutno razporeditev cestnih pasov in označuje pasove za vožnjo z aktivno navigacijo.</string>
     <string name="coordinates_widget_desc">Prikazuje geografske koordinate trenutne zemljepisne lege.</string>
-    <string name="audio_video_notes_desc">Pripomočki omogočajo hiter dostop do začetka/ustavitve snemanja (zvoka, videoposnetka ali fotografije).</string>
+    <string name="audio_video_notes_desc">Gradnik omogoča hiter dostop do začetka/ustavitve snemanja (zvoka, videoposnetka ali fotografije).</string>
     <string name="navigation_points">Navigacijske točke</string>
     <string name="route_maneuvers_desc">Navigacijski gradniki so omogočeni med navigacijo in prikazujejo informacije, kot so razdalja, čas prihoda ali odhoda, naslednji zavoji, smer, ime trenutne ulice, informacije o voznih pasovih, omejitve hitrosti, opozorila o približevanju, POI, točke poti.</string>
     <string name="route_maneuvers">Manevri na poti</string>
@@ -4673,4 +4673,10 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Skrij vojaška območja</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Skrij vojaška območja</string>
     <string name="explore_plans">Razišči načrte</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Način lahko preklopiš tako, da tapneš na gradnik.</string>
+    <string name="map_widget_time_to_destination">Čas do cilja</string>
+    <string name="map_widget_time_to_intermediate">Čas do vmesne točke</string>
+    <string name="map_widget_distance_to_intermediate">Razdalja do vmesne točke</string>
+    <string name="radius_ruler_mode_desc">Način ravnila polmera lahko preklopiš tako, da tapneš na gradnik.</string>
+    <string name="shared_string_mode">Način</string>
 </resources>
