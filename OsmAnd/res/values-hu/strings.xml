@@ -4672,4 +4672,11 @@
     <string name="map_widget_true_bearing">Valódi irány</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nem jeleníti meg a katonai területeket</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Katonai területek elrejtése</string>
+    <string name="explore_plans">Díjcsomagok</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Módot válthat a widgetet megérintve.</string>
+    <string name="map_widget_time_to_destination">Hátralévő idő az úticélig</string>
+    <string name="map_widget_time_to_intermediate">Hátralévő idő a köztespontig</string>
+    <string name="map_widget_distance_to_intermediate">Távolság a köztespontig</string>
+    <string name="radius_ruler_mode_desc">A Sugárvonalzó módja megváltoztatható a widget megérintésével.</string>
+    <string name="shared_string_mode">Mód</string>
 </resources>

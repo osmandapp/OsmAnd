@@ -4670,4 +4670,10 @@
     <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza tempo di arrivo o il tempo rimanente, prossime svolte, angolo, il nome della strada attuale, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
     <string name="explore_plans">Esplora i Piani</string>
+    <string name="shared_string_mode">Modalità</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Puoi cambiare la modalità tappando il widget.</string>
+    <string name="map_widget_time_to_destination">Tempo alla destinazione</string>
+    <string name="map_widget_time_to_intermediate">Tempo all\'intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distanza all\'intermedio</string>
+    <string name="radius_ruler_mode_desc">Puoi cambiare la modalità del righello radiale tappando il widget.</string>
 </resources>

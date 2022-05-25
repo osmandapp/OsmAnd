@@ -1707,7 +1707,7 @@
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
     <string name="application_dir_description">Vælg hvor kort- og andre datafiler skal gemmes.</string>
-    <string name="show_on_start_description">\'Fra\' starter direkte på kortet.</string>
+    <string name="show_on_start_description">Hvis slået fra, startes direkte op med kortet.</string>
     <string name="map_downloaded">Kort hentet</string>
     <string name="map_downloaded_descr">%1$s kortet er klar til brug.</string>
     <string name="go_to_map">Vis kort</string>
@@ -1777,7 +1777,7 @@
     <string name="dashboard_or_drawer_description">En valgmulighed til kontrol af OsmAnd tilbydes via det fleksibel betjeningspanel eller en statisk menu. Valget kan ændres i indstillinger for betjeningspanel .</string>
     <string name="use_dashboard_btn">Brug betjeningspanel</string>
     <string name="use_drawer_btn">Brug menuen</string>
-    <string name="access_from_map_description">Menuknappen viser betjeningspanelet, i stedet for menuen</string>
+    <string name="access_from_map_description">Menuknappen viser betjeningspanelet i stedet for menuen</string>
     <string name="access_from_map">Adgang fra kort</string>
     <string name="please_specify_poi_type_only_from_list">Angiv den korrekte IP-type eller spring over.</string>
     <string name="routing_attr_avoid_stairs_name">Ingen trapper</string>
@@ -4620,7 +4620,7 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Slå til for at se ruter med offentlige transport på kortet.</string>
-    <string name="coordinates_widget_secondary_desc">Koordinaters format kan være ændring i %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Koordinaters format kan være ændret i %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
     <string name="elevation_profile_widget_desc">Modul viser højden og hældningsprofilen for den aktuelle rute.</string>
     <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringspladsen.</string>
@@ -4628,7 +4628,7 @@
     <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
     <string name="map_markers_bar_widget_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, om der skal vises 1 eller 2 topmarkører i modulet.</string>
     <string name="coordinates_widget_desc">Det viser de geografiske koordinater for den aktuelle geografiske placering.</string>
-    <string name="audio_video_notes_desc">Moduler giver hurtig adgang til at starte/stoppe en optagelse (lyd, video eller foto).</string>
+    <string name="audio_video_notes_desc">Modul giver hurtig adgang til at starte/stoppe en optagelse (lyd, video eller foto).</string>
     <string name="navigation_points">Navigationspunkter</string>
     <string name="route_maneuvers_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
@@ -4648,7 +4648,7 @@
     <string name="radius_rules_widget_desc">Radiusmålerværktøjet hjælper med at bestemme radius omkring det valgte punkt på kortet ved at vise afstandscirkler på kortet.</string>
     <string name="current_time_widget_desc">Dette modul viser den aktuelle tid fra din enhed.</string>
     <string name="battery_widget_desc">Modul viser batteriniveauet på din enhed.</string>
-    <string name="max_speed_widget_desc">Modul viser en hastighedsgrænse for en aktuel kørevej.</string>
+    <string name="max_speed_widget_desc">Modul viser en hastighedsgrænse for vejen, der aktuelt køres på.</string>
     <string name="current_speed_widget_desc">Mmodul viser din aktuelle hastighed, som den er registreret af GPS-sensoren.</string>
     <string name="magnetic_bearing_widget_desc">Vinkel mellem magnetisk nord og det målpunkt, der observeres fra din position.</string>
     <string name="lanes_widgets_desc">Bane-modulet viser det aktuelle vejbanelayout og fremhæver de baner, der skal køres i med aktiv navigation.</string>
@@ -4687,4 +4687,10 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Skjul militære områder</string>
     <string name="explore_plans">Udforsk planer</string>
+    <string name="radius_ruler_mode_desc">Du kan skifte radiusmålertilstand ved at trykke på modul.</string>
+    <string name="map_widget_time_to_destination">Tid til destination</string>
+    <string name="map_widget_distance_to_intermediate">Afstand til mellemliggende</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Du kan skifte tilstand ved at trykke på modul.</string>
+    <string name="map_widget_time_to_intermediate">Tid til mellemliggende</string>
+    <string name="shared_string_mode">Tilstand</string>
 </resources>
