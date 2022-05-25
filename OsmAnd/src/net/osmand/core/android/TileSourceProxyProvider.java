@@ -1,5 +1,7 @@
 package net.osmand.core.android;
 
+import android.graphics.Bitmap;
+
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
@@ -12,6 +14,7 @@ import net.osmand.core.jni.interface_ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.srtm.TerrainLayer;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
 
@@ -62,21 +65,26 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 			rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
 
-			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
-					zoom, true, requestTimestamp) == null) {
-				synchronized (tileReadyCallback.getSync()) {
-					if (tileReadyCallback.isReady()) {
-						break;
-					}
-					try {
-						tileReadyCallback.getSync().wait(50);
-					} catch (InterruptedException e) {
+			String dirWithTiles = null;
+			if (tileSource.couldBeDownloadedFromInternet()) {
+				dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
+				while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
+						zoom, true, requestTimestamp) == null) {
+					synchronized (tileReadyCallback.getSync()) {
+						if (tileReadyCallback.isReady()) {
+							break;
+						}
+						try {
+							tileReadyCallback.getSync().wait(50);
+						} catch (InterruptedException ignored) {
+						}
 					}
 				}
+				rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
+			} else {
+				rm.getBitmapTilesCache().get(tileFilename, requestTimestamp);
 			}
-			rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
-
-			image = tileSource.getBytes(tileX, tileY, zoom, app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
+			image = tileSource.getBytes(tileX, tileY, zoom, dirWithTiles);
 		} catch (Exception e) {
 			return SwigUtilities.emptyQByteArray();
 		}
