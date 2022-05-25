@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -14,7 +13,6 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -172,7 +170,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private SelectedGpxFile selectedGpxFile;
 	private GPXTrackAnalysis analyses;
 
-	private TrackMenuType menuType = TrackMenuType.OVERVIEW;
+	private TrackMenuTab menuType = TrackMenuTab.OVERVIEW;
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
@@ -218,13 +216,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
 
-	public enum TrackMenuType {
+	public enum TrackMenuTab {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
 		TRACK(R.id.action_track, R.string.shared_string_gpx_tracks),
 		POINTS(R.id.action_points, R.string.shared_string_gpx_points),
 		OPTIONS(R.id.action_options, R.string.shared_string_options);
 
-		TrackMenuType(int menuItemId, @StringRes int titleId) {
+		TrackMenuTab(int menuItemId, @StringRes int titleId) {
 			this.menuItemId = menuItemId;
 			this.titleId = titleId;
 		}
@@ -233,7 +231,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		public final int titleId;
 	}
 
-	public void setMenuType(TrackMenuType menuType) {
+	public void setMenuType(TrackMenuTab menuType) {
 		this.menuType = menuType;
 	}
 
@@ -462,7 +460,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		updateHeadersBottomShadow();
 		setupButtons(view);
 		updateCardsLayout();
-		if (menuType == TrackMenuType.OVERVIEW && isPortrait()) {
+		if (menuType == TrackMenuTab.OVERVIEW && isPortrait()) {
 			calculateLayoutAndShowOverview();
 		} else {
 			calculateLayoutAndUpdateMenuState(null);
@@ -473,7 +471,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		updateHeaderCard();
 		headerTitle.setText(getHeaderTitle());
 
-		if (menuType == TrackMenuType.POINTS) {
+		if (menuType == TrackMenuTab.POINTS) {
 			AndroidUiHelper.updateVisibility(searchButton, true);
 		} else {
 			AndroidUiHelper.updateVisibility(toolbarTextView, true);
@@ -481,7 +479,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			AndroidUiHelper.updateVisibility(searchContainer, false);
 		}
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
-		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuType.OPTIONS);
+		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuTab.OPTIONS);
 
 		Drawable icon = routeSegment != null ? new NetworkRouteDrawable(app, routeSegment, isNightMode())
 				: uiUtilities.getThemedIcon(R.drawable.ic_action_polygom_dark);
@@ -490,10 +488,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@NonNull
 	private CharSequence getHeaderTitle() {
-		if (menuType == TrackMenuType.TRACK) {
+		if (menuType == TrackMenuTab.TRACK) {
 			String title = app.getString(R.string.shared_string_gpx_track) + "\n" + gpxTitle;
 			return UiUtilities.createCustomFontSpannable(FontCache.getRobotoRegular(app), title, gpxTitle);
-		} else if (menuType == TrackMenuType.OPTIONS) {
+		} else if (menuType == TrackMenuTab.OPTIONS) {
 			return app.getString(menuType.titleId);
 		} else {
 			return gpxTitle;
@@ -502,7 +500,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void updateHeadersBottomShadow() {
 		View scrollView = getBottomScrollView();
-		if (menuType == TrackMenuType.OVERVIEW) {
+		if (menuType == TrackMenuTab.OVERVIEW) {
 			updateBottomHeaderShadowVisibility(scrollView.canScrollVertically(-1));
 			bottomScrollChangedListener = () -> {
 				boolean scrollableToTop = scrollView.canScrollVertically(-1);
@@ -514,7 +512,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 
 		if (segmentsCard != null) {
-			if (menuType == TrackMenuType.TRACK) {
+			if (menuType == TrackMenuTab.TRACK) {
 				updateBottomHeaderShadowVisibility(segmentsCard.isScrollToTopAvailable());
 				segmentsCard.setScrollAvailabilityListener(this::updateBottomHeaderShadowVisibility);
 			} else {
@@ -522,7 +520,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 		}
 
-		if (menuType != TrackMenuType.OVERVIEW && menuType != TrackMenuType.TRACK) {
+		if (menuType != TrackMenuTab.OVERVIEW && menuType != TrackMenuTab.TRACK) {
 			updateBottomHeaderShadowVisibility(true);
 		}
 	}
@@ -535,7 +533,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateHeaderCard() {
-		if (menuType == TrackMenuType.POINTS && !Algorithms.isEmpty(pointsCard.getGroups())) {
+		if (menuType == TrackMenuTab.POINTS && !Algorithms.isEmpty(pointsCard.getGroups())) {
 			addPointsGroupsCardToHeader();
 		} else {
 			removeCardViewFromHeader(groupsCard);
@@ -573,41 +571,32 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		toolbarTextView.setText(gpxTitle);
 
 		ImageView closeButton = toolbarContainer.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (menuType == TrackMenuType.POINTS) {
-					AndroidUiHelper.updateVisibility(toolbarTextView, true);
-					AndroidUiHelper.updateVisibility(searchButton, true);
-					AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
-					AndroidUiHelper.updateVisibility(searchContainer, false);
-				}
-				openMenuHeaderOnly();
+		closeButton.setOnClickListener(v -> {
+			if (menuType == TrackMenuTab.POINTS) {
+				AndroidUiHelper.updateVisibility(toolbarTextView, true);
+				AndroidUiHelper.updateVisibility(searchButton, true);
+				AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
+				AndroidUiHelper.updateVisibility(searchContainer, false);
 			}
+			openMenuHeaderOnly();
 		});
 		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(toolbarContainer.getContext()));
 
-		searchButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AndroidUiHelper.updateVisibility(searchContainer, true);
-				AndroidUiHelper.updateVisibility(searchButton, false);
-				AndroidUiHelper.updateVisibility(displayGroupsButton, false);
-				AndroidUiHelper.updateVisibility(toolbarTextView, false);
-			}
+		searchButton.setOnClickListener(v -> {
+			AndroidUiHelper.updateVisibility(searchContainer, true);
+			AndroidUiHelper.updateVisibility(searchButton, false);
+			AndroidUiHelper.updateVisibility(displayGroupsButton, false);
+			AndroidUiHelper.updateVisibility(toolbarTextView, false);
 		});
 		searchEditText = toolbarContainer.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_poi_filter);
 		searchEditText.addTextChangedListener(
 				new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
 					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
-					}
+					public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
 					@Override
 					public void afterTextChanged(Editable s) {
@@ -618,16 +607,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 		);
 		ImageView clearButton = toolbarContainer.findViewById(R.id.clearButton);
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!Algorithms.isEmpty(searchEditText.getText())) {
-					searchEditText.setText("");
-					searchEditText.setSelection(0);
-				}
-				if (pointsCard != null) {
-					pointsCard.updateContent();
-				}
+		clearButton.setOnClickListener(v -> {
+			if (!Algorithms.isEmpty(searchEditText.getText())) {
+				searchEditText.setText("");
+				searchEditText.setSelection(0);
+			}
+			if (pointsCard != null) {
+				pointsCard.updateContent();
 			}
 		});
 		backButtonContainer.setOnClickListener(v -> {
@@ -704,7 +690,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
-			if (menuType == TrackMenuType.TRACK) {
+			if (menuType == TrackMenuTab.TRACK) {
 				if (segmentsCard != null && segmentsCard.getView() != null) {
 					reattachCard(cardsContainer, segmentsCard);
 				} else {
@@ -713,7 +699,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					segmentsCard.setListener(this);
 					cardsContainer.addView(segmentsCard.build(mapActivity));
 				}
-			} else if (menuType == TrackMenuType.OPTIONS) {
+			} else if (menuType == TrackMenuTab.OPTIONS) {
 				if (optionsCard != null && optionsCard.getView() != null) {
 					reattachCard(cardsContainer, optionsCard);
 				} else {
@@ -721,7 +707,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					optionsCard.setListener(this);
 					cardsContainer.addView(optionsCard.build(mapActivity));
 				}
-			} else if (menuType == TrackMenuType.OVERVIEW) {
+			} else if (menuType == TrackMenuTab.OVERVIEW) {
 				if (overviewCard != null && overviewCard.getView() != null) {
 					reattachCard(cardsContainer, overviewCard);
 				} else {
@@ -753,7 +739,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					gpxInfoCard = new GpxInfoCard(getMapActivity(), displayHelper.getGpx());
 					cardsContainer.addView(gpxInfoCard.build(mapActivity));
 				}
-			} else if (menuType == TrackMenuType.POINTS) {
+			} else if (menuType == TrackMenuTab.POINTS) {
 				if (pointsCard != null && pointsCard.getView() != null) {
 					reattachCard(cardsContainer, pointsCard);
 				} else {
@@ -779,7 +765,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			return;
 		}
 		int colorId;
-		if (menuType == TrackMenuType.OPTIONS) {
+		if (menuType == TrackMenuTab.OPTIONS) {
 			colorId = ColorUtilities.getListBgColorId(isNightMode());
 		} else {
 			colorId = ColorUtilities.getActivityBgColorId(isNightMode());
@@ -832,7 +818,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
 		super.onContextMenuYPosChanged(fragment, y, needMapAdjust, animated);
-		if (animated && menuType == TrackMenuType.OVERVIEW) {
+		if (animated && menuType == TrackMenuTab.OVERVIEW) {
 			if (y != overviewInitialPosY) {
 				overviewInitialHeight = false;
 			}
@@ -905,12 +891,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateLocationUi() {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				updateDistanceDirection();
-			}
-		});
+		app.runInUIThread(this::updateDistanceDirection);
 	}
 
 	private void updateDistanceDirection() {
@@ -930,7 +911,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			app.getLocationProvider().addLocationListener(this);
 			updateLocationUi();
 		}
-		if (overviewCard != null && menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
+		if (overviewCard != null && menuType == TrackMenuTab.OVERVIEW && isCurrentRecordingTrack()) {
 			overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
 		}
 		if (pointsCard != null) {
@@ -1001,7 +982,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public boolean shouldShowWidgets() {
 		return Algorithms.isEmpty(returnScreenName)
-				&& menuType == TrackMenuType.OVERVIEW
+				&& menuType == TrackMenuTab.OVERVIEW
 				&& getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
 
@@ -1041,14 +1022,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-
-	}
+	public void onCardLayoutNeeded(@NonNull BaseCard card) { }
 
 	@Override
-	public void onCardPressed(@NonNull BaseCard card) {
-
-	}
+	public void onCardPressed(@NonNull BaseCard card) { }
 
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
@@ -1149,12 +1126,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				builder.setMessage(R.string.are_you_sure);
 				final String gpxFilePath = gpxFile.path;
 				builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-						R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								if (FileUtils.removeGpxFile(app, new File(gpxFilePath))) {
-									dismiss();
-								}
+						R.string.shared_string_ok, (dialog, which) -> {
+							if (FileUtils.removeGpxFile(app, new File(gpxFilePath))) {
+								dismiss();
 							}
 						});
 				builder.show();
@@ -1288,9 +1262,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		bottomNav.setItemTextColor(navColorStateList);
 		bottomNav.setSelectedItemId(menuType.menuItemId);
 		bottomNav.setOnNavigationItemSelectedListener(item -> {
-			for (TrackMenuType type : TrackMenuType.values()) {
+			for (TrackMenuTab type : TrackMenuTab.values()) {
 				if (type.menuItemId == item.getItemId()) {
-					TrackMenuType prevMenuType = menuType;
+					TrackMenuTab prevMenuType = menuType;
 					menuType = type;
 					menuTypeChanged = prevMenuType != type;
 					setupCards();
@@ -1298,7 +1272,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					updateHeadersBottomShadow();
 					updateControlsVisibility(isVisible());
 					updateCardsLayout();
-					if (type == TrackMenuType.OVERVIEW && isPortrait() && overviewInitialHeight
+					if (type == TrackMenuTab.OVERVIEW && isPortrait() && overviewInitialHeight
 							&& getCurrentMenuState() != MenuState.FULL_SCREEN) {
 						calculateLayoutAndShowOverview();
 					} else {
@@ -1311,8 +1285,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 	}
 
-	private void calculateLayoutAndUpdateMenuState(@Nullable TrackMenuType prevMenuType) {
-		if (getCurrentMenuState() == 2 && overviewInitialHeight && prevMenuType == TrackMenuType.OVERVIEW) {
+	private void calculateLayoutAndUpdateMenuState(@Nullable TrackMenuTab prevMenuType) {
+		if (getCurrentMenuState() == 2 && overviewInitialHeight && prevMenuType == TrackMenuTab.OVERVIEW) {
 			slideDown();
 		}
 		runLayoutListener(() -> {
@@ -1337,7 +1311,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateMenuState() {
-		if (menuType == TrackMenuType.OPTIONS) {
+		if (menuType == TrackMenuTab.OPTIONS) {
 			openMenuFullScreen();
 		} else {
 			openMenuHalfScreen();
@@ -1383,14 +1357,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void scrollBy(int px) {
-
-	}
+	public void scrollBy(int px) { }
 
 	@Override
-	public void onPointsDeletionStarted() {
-
-	}
+	public void onPointsDeletionStarted() { }
 
 	@Override
 	public void onPointsDeleted() {
@@ -1468,36 +1438,28 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else {
 				menu.findItem(R.id.split_interval).setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_split_interval));
 			}
-			optionsPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					int i = item.getItemId();
-					if (i == R.id.action_edit) {
-						int segmentIndex = getSegmentIndex(gpxItem);
-						openPlanRoute(segmentIndex, PLAN_ROUTE_MODE);
-						return true;
-					} else if (i == R.id.action_delete) {
-						FragmentActivity activity = getActivity();
-						if (!confirmDeletion) {
-							deleteAndSaveSegment(segment);
-						} else if (activity != null) {
-							AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-							builder.setMessage(R.string.recording_delete_confirm);
-							builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									deleteAndSaveSegment(segment);
-								}
-							});
-							builder.setNegativeButton(R.string.shared_string_cancel, null);
-							builder.show();
-						}
-						return true;
-					} else if (i == R.id.split_interval) {
-						openSplitInterval(gpxItem, segment);
+			optionsPopupMenu.setOnMenuItemClickListener(item -> {
+				int i = item.getItemId();
+				if (i == R.id.action_edit) {
+					int segmentIndex = getSegmentIndex(gpxItem);
+					openPlanRoute(segmentIndex, PLAN_ROUTE_MODE);
+					return true;
+				} else if (i == R.id.action_delete) {
+					FragmentActivity activity1 = getActivity();
+					if (!confirmDeletion) {
+						deleteAndSaveSegment(segment);
+					} else if (activity1 != null) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(activity1);
+						builder.setMessage(R.string.recording_delete_confirm);
+						builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> deleteAndSaveSegment(segment));
+						builder.setNegativeButton(R.string.shared_string_cancel, null);
+						builder.show();
 					}
-					return false;
+					return true;
+				} else if (i == R.id.split_interval) {
+					openSplitInterval(gpxItem, segment);
 				}
+				return false;
 			});
 			optionsPopupMenu.show();
 		}
@@ -1551,9 +1513,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
-			public void gpxSavingStarted() {
-
-			}
+			public void gpxSavingStarted() { }
 
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
@@ -1620,11 +1580,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
 	                             @Nullable String returnScreenName) {
-		openTrack(context, file, prevIntentParams, returnScreenName, TrackMenuType.OVERVIEW);
+		openTrack(context, file, prevIntentParams, returnScreenName, TrackMenuTab.OVERVIEW);
 	}
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
-	                             @Nullable String returnScreenName, @NonNull TrackMenuType tabToOpen) {
+	                             @Nullable String returnScreenName, @NonNull TrackMenuTab tabToOpen) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
@@ -1727,7 +1687,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				fragment.setCallingFragmentTag(params.getString(CALLING_FRAGMENT_TAG, null));
 				String tabToOpenName = params.getString(OPEN_TAB_NAME, null);
 				if (!Algorithms.isEmpty(tabToOpenName)) {
-					fragment.setMenuType(TrackMenuType.valueOf(tabToOpenName));
+					fragment.setMenuType(TrackMenuTab.valueOf(tabToOpenName));
 				}
 				fragment.setAdjustMapPosition(params.getBoolean(ADJUST_MAP_POSITION, true));
 				String chartTabToOpenName = params.getString(CHART_TAB_NAME);
