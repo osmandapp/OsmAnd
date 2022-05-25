@@ -37,6 +37,7 @@ import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilterListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -63,6 +64,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	private OsmandApplication app;
 	private GpsFilterHelper gpsFilterHelper;
+	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedGpxFile selectedGpxFile;
 
 	private int toolbarHeight;
@@ -114,6 +116,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		gpsFilterHelper = app.getGpsFilterHelper();
+		gpxSelectionHelper = app.getSelectedGpxHelper();
 		toolbarHeight = getResources().getDimensionPixelSize(R.dimen.toolbar_height);
 
 		if (savedInstanceState != null) {
@@ -285,7 +288,14 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onResume() {
 		super.onResume();
+		gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
 		app.getGpsFilterHelper().addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
 	}
 
 	@Override

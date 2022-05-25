@@ -75,6 +75,7 @@ public class GpxSelectionHelper {
 	private final SavingTrackHelper savingTrackHelper;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
+	private List<SelectedGpxFile> temporallyVisibleTracks = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
 
@@ -153,6 +154,13 @@ public class GpxSelectionHelper {
 		return selectedGPXFiles;
 	}
 
+	@NonNull
+	public List<SelectedGpxFile> getVisibleGPXFiles() {
+		List<SelectedGpxFile> result = new ArrayList<>(selectedGPXFiles);
+		result.addAll(temporallyVisibleTracks);
+		return result;
+	}
+
 	public Map<GPXFile, Long> getSelectedGpxFilesBackUp() {
 		return selectedGpxFilesBackUp;
 	}
@@ -161,6 +169,14 @@ public class GpxSelectionHelper {
 		return gpxFile != null &&
 				((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
 						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
+	}
+
+	public void addTemporallyVisibleTrack(SelectedGpxFile file) {
+		temporallyVisibleTracks.add(file);
+	}
+
+	public void removeTemporallyVisibleTrack(SelectedGpxFile file) {
+		temporallyVisibleTracks.remove(file);
 	}
 
 	@SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
@@ -588,7 +604,7 @@ public class GpxSelectionHelper {
 
 	@Nullable
 	public WptPt getVisibleWayPointByLatLon(@NonNull LatLon latLon) {
-		for (SelectedGpxFile selectedGpx : selectedGPXFiles) {
+		for (SelectedGpxFile selectedGpx : getVisibleGPXFiles()) {
 			GPXFile gpx;
 			if (selectedGpx != null && (gpx = selectedGpx.getGpxFile()) != null) {
 				for (WptPt pt : gpx.getPoints()) {

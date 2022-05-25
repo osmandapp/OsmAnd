@@ -1,14 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
-
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
@@ -42,6 +33,15 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends MapBaseCard {
 
@@ -167,15 +167,12 @@ public class OverviewCard extends MapBaseCard {
 		filled.setAlpha(0.1f);
 		setImageDrawable(icon, iconResId, iconColorDef);
 		setOnTouchItem(item, icon, filled, iconResId, iconColorDef, iconColorPres);
-		item.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					notifyButtonPressed(buttonIndex);
-					if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
-						setImageDrawable(icon, getActiveShowHideIcon(), iconColorDef);
-					}
+		item.setOnClickListener(v -> {
+			CardListener listener = getListener();
+			if (listener != null) {
+				notifyButtonPressed(buttonIndex);
+				if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
+					setImageDrawable(icon, getActiveShowHideIcon(), iconColorDef);
 				}
 			}
 		});
