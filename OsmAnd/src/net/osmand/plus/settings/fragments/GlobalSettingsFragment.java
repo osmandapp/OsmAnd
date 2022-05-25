@@ -6,9 +6,9 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Pair;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -31,6 +31,10 @@ import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
@@ -187,11 +191,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		preferredLocale.setIcon(getActiveIcon(R.drawable.ic_action_map_language));
 		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
 
-		Pair<String[], String[]> preferredLocaleInfo = getPreferredLocaleIdsAndValues(ctx);
-		if (preferredLocaleInfo != null) {
-			preferredLocale.setEntries(preferredLocaleInfo.first);
-			preferredLocale.setEntryValues(preferredLocaleInfo.second);
-		}
+		Map<String, String> preferredLanguages = getPreferredDisplayLanguages(ctx);
+		String[] languagesNames = preferredLanguages.values().toArray(new String[0]);
+		String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
+		preferredLocale.setEntries(languagesNames);
+		preferredLocale.setEntryValues(languagesIds);
+
 
 		// Add " (Display language)" to menu title in Latin letters for all non-en languages
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
@@ -290,7 +295,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupDefaultAppModePref();
 	}
 
-	public static Pair<String[], String[]> getPreferredLocaleIdsAndValues(Context ctx) {
+	@NonNull
+	private static Map<String, String> getPreferredDisplayLanguages(@NonNull Context ctx) {
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		// Hardy maintenance 2016-05-29:
 		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
@@ -298,140 +304,74 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		String incompleteSuffix = " (" + ctx.getString(R.string.incomplete_locale) + ")";
 
 		// Add " (Device language)" to system default entry in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
-		String latinSystemDefaultSuffix = " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
+		String deviceLanguageInLatin = " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
+		String systemDeviceLanguage = ctx.getString(R.string.system_locale) + deviceLanguageInLatin;
 
-		//getResources().getAssets().getLocales();
-		String[] entryValues = new String[] {
-				"",
-				"en",
-				"af",
-				"ar",
-				"ast",
-				"az",
-				"be",
-				//"be_BY",
-				"bg",
-				"ca",
-				"cs",
-				"cy",
-				"da",
-				"de",
-				"el",
-				"en_GB",
-				"eo",
-				"es",
-				"es_AR",
-				"es_US",
-				"eu",
-				"fa",
-				"fi",
-				"fr",
-				"gl",
-				"iw",
-				"hr",
-				"hsb",
-				"hu",
-				"hy",
-				"id",
-				"is",
-				"it",
-				"ja",
-				"ka",
-				"kab",
-				"kn",
-				"ko",
-				"lt",
-				"lv",
-				"ml",
-				"mr",
-				"nb",
-				"nl",
-				"nn",
-				"oc",
-				"pl",
-				"pt",
-				"pt_BR",
-				"ro",
-				"ru",
-				"sc",
-				"sk",
-				"sl",
-				"sr",
-				"sr+Latn",
-				"sv",
-				"tr",
-				"uk",
-				"vi",
-				"zh_CN",
-				"zh_TW"};
+		Map<String, String> languages = new HashMap<>();
+		languages.put("", systemDeviceLanguage);
+		languages.put("en", ctx.getString(R.string.lang_en));
+		languages.put("af", ctx.getString(R.string.lang_af) + incompleteSuffix);
+		languages.put("ar", ctx.getString(R.string.lang_ar));
+		languages.put("ast", ctx.getString(R.string.lang_ast) + incompleteSuffix);
+		languages.put("az", ctx.getString(R.string.lang_az));
+		languages.put("be", ctx.getString(R.string.lang_be));
+		languages.put("bg", ctx.getString(R.string.lang_bg));
+		languages.put("ca", ctx.getString(R.string.lang_ca));
+		languages.put("cs", ctx.getString(R.string.lang_cs));
+		languages.put("cy", ctx.getString(R.string.lang_cy) + incompleteSuffix);
+		languages.put("da", ctx.getString(R.string.lang_da));
+		languages.put("de", ctx.getString(R.string.lang_de));
+		languages.put("el", ctx.getString(R.string.lang_el));
+		languages.put("en_GB", ctx.getString(R.string.lang_en_gb));
+		languages.put("eo", ctx.getString(R.string.lang_eo));
+		languages.put("es", ctx.getString(R.string.lang_es));
+		languages.put("es_AR", ctx.getString(R.string.lang_es_ar));
+		languages.put("es_US", ctx.getString(R.string.lang_es_us));
+		languages.put("eu", ctx.getString(R.string.lang_eu));
+		languages.put("fa", ctx.getString(R.string.lang_fa));
+		languages.put("fi", ctx.getString(R.string.lang_fi) + incompleteSuffix);
+		languages.put("fr", ctx.getString(R.string.lang_fr));
+		languages.put("gl", ctx.getString(R.string.lang_gl));
+		languages.put("iw", ctx.getString(R.string.lang_he));
+		languages.put("hr", ctx.getString(R.string.lang_hr) + incompleteSuffix);
+		languages.put("hsb", ctx.getString(R.string.lang_hsb) + incompleteSuffix);
+		languages.put("hu", ctx.getString(R.string.lang_hu));
+		languages.put("hy", ctx.getString(R.string.lang_hy));
+		languages.put("id", ctx.getString(R.string.lang_id));
+		languages.put("is", ctx.getString(R.string.lang_is));
+		languages.put("it", ctx.getString(R.string.lang_it));
+		languages.put("ja", ctx.getString(R.string.lang_ja));
+		languages.put("ka", ctx.getString(R.string.lang_ka) + incompleteSuffix);
+		languages.put("kab", ctx.getString(R.string.lang_kab) + incompleteSuffix);
+		languages.put("kn", ctx.getString(R.string.lang_kn) + incompleteSuffix);
+		languages.put("ko", ctx.getString(R.string.lang_ko));
+		languages.put("lt", ctx.getString(R.string.lang_lt));
+		languages.put("lv", ctx.getString(R.string.lang_lv));
+		languages.put("ml", ctx.getString(R.string.lang_ml));
+		languages.put("mr", ctx.getString(R.string.lang_mr) + incompleteSuffix);
+		languages.put("nb", ctx.getString(R.string.lang_nb));
+		languages.put("nl", ctx.getString(R.string.lang_nl));
+		languages.put("nn", ctx.getString(R.string.lang_nn) + incompleteSuffix);
+		languages.put("oc", ctx.getString(R.string.lang_oc) + incompleteSuffix);
+		languages.put("pl", ctx.getString(R.string.lang_pl));
+		languages.put("pt", ctx.getString(R.string.lang_pt));
+		languages.put("pt_BR", ctx.getString(R.string.lang_pt_br));
+		languages.put("ro", ctx.getString(R.string.lang_ro) + incompleteSuffix);
+		languages.put("ru", ctx.getString(R.string.lang_ru));
+		languages.put("sc", ctx.getString(R.string.lang_sc));
+		languages.put("sk", ctx.getString(R.string.lang_sk));
+		languages.put("sl", ctx.getString(R.string.lang_sl));
+		languages.put("sr", ctx.getString(R.string.lang_sr));
+		languages.put("sr+Latn", ctx.getString(R.string.lang_sr_latn) + incompleteSuffix);
+		languages.put("sv", ctx.getString(R.string.lang_sv));
+		languages.put("tr", ctx.getString(R.string.lang_tr));
+		languages.put("uk", ctx.getString(R.string.lang_uk));
+		languages.put("vi", ctx.getString(R.string.lang_vi) + incompleteSuffix);
+		languages.put("zh_CN", ctx.getString(R.string.lang_zh_cn) + incompleteSuffix);
+		languages.put("zh_TW", ctx.getString(R.string.lang_zh_tw));
 
-		String[] entries = new String[] {
-				ctx.getString(R.string.system_locale) + latinSystemDefaultSuffix,
-				ctx.getString(R.string.lang_en),
-				ctx.getString(R.string.lang_af) + incompleteSuffix,
-				ctx.getString(R.string.lang_ar),
-				ctx.getString(R.string.lang_ast) + incompleteSuffix,
-				ctx.getString(R.string.lang_az),
-				ctx.getString(R.string.lang_be),
-				// getString(R.string.lang_be_by),
-				ctx.getString(R.string.lang_bg),
-				ctx.getString(R.string.lang_ca),
-				ctx.getString(R.string.lang_cs),
-				ctx.getString(R.string.lang_cy) + incompleteSuffix,
-				ctx.getString(R.string.lang_da),
-				ctx.getString(R.string.lang_de),
-				ctx.getString(R.string.lang_el),
-				ctx.getString(R.string.lang_en_gb),
-				ctx.getString(R.string.lang_eo),
-				ctx.getString(R.string.lang_es),
-				ctx.getString(R.string.lang_es_ar),
-				ctx.getString(R.string.lang_es_us),
-				ctx.getString(R.string.lang_eu),
-				ctx.getString(R.string.lang_fa),
-				ctx.getString(R.string.lang_fi) + incompleteSuffix,
-				ctx.getString(R.string.lang_fr),
-				ctx.getString(R.string.lang_gl),
-				ctx.getString(R.string.lang_he),
-				ctx.getString(R.string.lang_hr) + incompleteSuffix,
-				ctx.getString(R.string.lang_hsb) + incompleteSuffix,
-				ctx.getString(R.string.lang_hu),
-				ctx.getString(R.string.lang_hy),
-				ctx.getString(R.string.lang_id),
-				ctx.getString(R.string.lang_is),
-				ctx.getString(R.string.lang_it),
-				ctx.getString(R.string.lang_ja),
-				ctx.getString(R.string.lang_ka) + incompleteSuffix,
-				ctx.getString(R.string.lang_kab) + incompleteSuffix,
-				ctx.getString(R.string.lang_kn) + incompleteSuffix,
-				ctx.getString(R.string.lang_ko),
-				ctx.getString(R.string.lang_lt),
-				ctx.getString(R.string.lang_lv),
-				ctx.getString(R.string.lang_ml),
-				ctx.getString(R.string.lang_mr) + incompleteSuffix,
-				ctx.getString(R.string.lang_nb),
-				ctx.getString(R.string.lang_nl),
-				ctx.getString(R.string.lang_nn) + incompleteSuffix,
-				ctx.getString(R.string.lang_oc) + incompleteSuffix,
-				ctx.getString(R.string.lang_pl),
-				ctx.getString(R.string.lang_pt),
-				ctx.getString(R.string.lang_pt_br),
-				ctx.getString(R.string.lang_ro) + incompleteSuffix,
-				ctx.getString(R.string.lang_ru),
-				ctx.getString(R.string.lang_sc),
-				ctx.getString(R.string.lang_sk),
-				ctx.getString(R.string.lang_sl),
-				ctx.getString(R.string.lang_sr),
-				ctx.getString(R.string.lang_sr_latn) + incompleteSuffix,
-				ctx.getString(R.string.lang_sv),
-				ctx.getString(R.string.lang_tr),
-				ctx.getString(R.string.lang_uk),
-				ctx.getString(R.string.lang_vi) + incompleteSuffix,
-				ctx.getString(R.string.lang_zh_cn) + incompleteSuffix,
-				ctx.getString(R.string.lang_zh_tw)};
-
-		String[] valuesPl = ConfigureMapUtils.getSortedMapNamesIds(ctx, entries, entries);
-		String[] idsPl = ConfigureMapUtils.getSortedMapNamesIds(ctx, entryValues, entries);
-
-		return Pair.create(valuesPl, idsPl);
+		Map<String, String> sortedLanguages = new TreeMap<>(ConfigureMapUtils.getLanguagesComparator(languages));
+		sortedLanguages.putAll(languages);
+		return sortedLanguages;
 	}
 }
