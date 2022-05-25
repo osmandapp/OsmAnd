@@ -1,6 +1,5 @@
 package net.osmand.core.android;
 
-
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
