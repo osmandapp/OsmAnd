@@ -1,6 +1,5 @@
 package net.osmand.core.android;
 
-import android.graphics.Bitmap;
 
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
@@ -14,11 +13,9 @@ import net.osmand.core.jni.interface_ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.srtm.TerrainLayer;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
 
-import java.io.IOException;
 
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
