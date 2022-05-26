@@ -835,8 +835,7 @@ public class NetworkRouteSelector {
 		}
 
 
-		public static List<RouteKey> getRouteStringKeys(RenderedObject o) {
-			Map<String, String> tags = o.getTags();
+		public static List<RouteKey> getRouteStringKeys(Map<String, String> tags) {
 			return getRouteKeys(tags);
 		}
 		

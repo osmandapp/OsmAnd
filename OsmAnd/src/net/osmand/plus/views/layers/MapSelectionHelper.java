@@ -117,7 +117,7 @@ class MapSelectionHelper {
 
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
 		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
-			selectObjectsFromOpenGl(result, point);
+			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
 		}
@@ -194,7 +194,7 @@ class MapSelectionHelper {
 				String routeID = renderedObject.getRouteID();
 				String fileName = renderedObject.getGpxFileName();
 				String filter = routeID != null ? routeID : fileName;
-				List<RouteKey> routeKeys = RouteType.getRouteStringKeys(renderedObject);
+				List<RouteKey> routeKeys = RouteType.getRouteStringKeys(renderedObject.getTags());
 
 				boolean isTravelGpx = !Algorithms.isEmpty(filter);
 				boolean isRoute = !Algorithms.isEmpty(routeKeys);
@@ -238,7 +238,8 @@ class MapSelectionHelper {
 		}
 	}
 
-	private void selectObjectsFromOpenGl(@NonNull MapSelectionResult result, @NonNull PointF point) {
+	private void selectObjectsFromOpenGl(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox,
+	                                     @NonNull PointF point) {
 		MapRendererView rendererView = view.getMapRenderer();
 		if (rendererView != null) {
 			int delta = 20;
@@ -307,6 +308,11 @@ class MapSelectionHelper {
 									for (int k = 0; k < points31.size(); k++) {
 										amenity.getX().add(points31.get(k).getX());
 										amenity.getY().add(points31.get(k).getY());
+									}
+								} else {
+									Map<String, String> tags = getTags(obfMapObject.getTags());
+									if (!Algorithms.isEmpty(RouteType.getRouteStringKeys(tags))) {
+										addRoute(result, tileBox, point);
 									}
 								}
 							}
@@ -472,6 +478,19 @@ class MapSelectionHelper {
 			QStringList keys = set.keys();
 			for (int i = 0; i < keys.size(); i++) {
 				res.add(set.get(keys.get(i)));
+			}
+		}
+		return res;
+	}
+
+	@NonNull
+	private static Map<String, String> getTags(@Nullable QStringStringHash set) {
+		Map<String, String> res = new HashMap<>();
+		if (set != null) {
+			QStringList keys = set.keys();
+			for (int i = 0; i < keys.size(); i++) {
+				String key = keys.get(i);
+				res.put(key, set.get(key));
 			}
 		}
 		return res;
