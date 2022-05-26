@@ -58,6 +58,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 public class GpxSelectionHelper {
 
@@ -75,7 +76,7 @@ public class GpxSelectionHelper {
 	private final SavingTrackHelper savingTrackHelper;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
-	private List<SelectedGpxFile> temporallyVisibleTracks = new ArrayList<>();
+	private List<SelectedGpxFile> tmpVisibleGPXFiles = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
 
@@ -156,9 +157,20 @@ public class GpxSelectionHelper {
 
 	@NonNull
 	public List<SelectedGpxFile> getVisibleGPXFiles() {
-		List<SelectedGpxFile> result = new ArrayList<>(selectedGPXFiles);
-		result.addAll(temporallyVisibleTracks);
-		return result;
+		List<SelectedGpxFile> total = new ArrayList<>();
+		total.addAll(selectedGPXFiles);
+		total.addAll(tmpVisibleGPXFiles);
+		// filter duplicate tracks
+		Set<String> paths = new TreeSet<>();
+		List<SelectedGpxFile> unique = new ArrayList<>();
+		for (SelectedGpxFile file : total) {
+			String path = file.gpxFile != null ? file.gpxFile.path : null;
+			if (path != null && !paths.contains(path)) {
+				paths.add(path);
+				unique.add(file);
+			}
+		}
+		return unique;
 	}
 
 	public Map<GPXFile, Long> getSelectedGpxFilesBackUp() {
@@ -171,12 +183,24 @@ public class GpxSelectionHelper {
 						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
 	}
 
-	public void addTemporallyVisibleTrack(SelectedGpxFile file) {
-		temporallyVisibleTracks.add(file);
+	public void addTemporallyVisibleTrack(@NonNull SelectedGpxFile file) {
+		updateTmpVisible(true, file);
 	}
 
-	public void removeTemporallyVisibleTrack(SelectedGpxFile file) {
-		temporallyVisibleTracks.remove(file);
+	public void removeTemporallyVisibleTrack(@NonNull SelectedGpxFile file) {
+		updateTmpVisible(false, file);
+	}
+
+	private void updateTmpVisible(boolean show, @NonNull SelectedGpxFile file) {
+		List<SelectedGpxFile> tmpVisible = new ArrayList<>(tmpVisibleGPXFiles);
+		if (show) {
+			if (!tmpVisible.contains(file)) {
+				tmpVisible.add(file);
+			}
+		} else {
+			tmpVisible.remove(file);
+		}
+		tmpVisibleGPXFiles = tmpVisible;
 	}
 
 	@SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
