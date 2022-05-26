@@ -258,16 +258,16 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	public boolean isCustomParameterizedVehicle() {
-		return isCustomParameterizedVehicle(get(EngineParameter.VEHICLE_KEY));
+		return isCustomParameterizedValue(get(EngineParameter.VEHICLE_KEY));
 	}
 
 	/**
 	 * @return 'true' if the custom input has any custom parameters, 'false' - otherwise.
 	 * For example, for custom input "&profile=car&locale=en" the method returns 'true'.
 	 */
-	public boolean isCustomParameterizedVehicle(@Nullable String vehicle) {
-		if (vehicle != null) {
-			return vehicle.startsWith("&") || vehicle.indexOf("=") < vehicle.indexOf("&");
+	public boolean isCustomParameterizedValue(@Nullable String value) {
+		if (value != null) {
+			return value.startsWith("&") || value.indexOf("=") < value.indexOf("&");
 		}
 		return false;
 	}
