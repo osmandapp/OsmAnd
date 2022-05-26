@@ -1382,7 +1382,7 @@
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录音后的间隙</string>
-    <string name="auto_split_recording_descr">如果日期已更改，开始新区段在6分钟后的间隙，新轨迹在2小时后的间隙，或新文件在更长的间隙之后。</string>
+    <string name="auto_split_recording_descr">6分钟间隔后开始新区段，2小时间隔后开始新轨迹，或间隔更长时间，日期已改变则启用新文件。</string>
     <string name="rendering_attr_contourDensity_description">等高线密度</string>
     <string name="rendering_attr_contourDensity_name">等高线密度</string>
     <string name="rendering_value_high_name">高</string>
