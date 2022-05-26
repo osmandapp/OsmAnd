@@ -16,7 +16,6 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -71,7 +70,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	/**
-	 * Used only when creating a full server url
+	 * Only used when creating a full API url
 	 * @return a string that represents the type of vehicle, or an empty string
 	 * if the vehicle type not provided
 	 */
@@ -228,7 +227,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@Nullable
-	private String getSelectedVehicleName(@NonNull Context ctx) {
+	protected String getSelectedVehicleName(@NonNull Context ctx) {
+		if (isCustomParameterizedVehicle()) {
+			return CUSTOM_VEHICLE.getTitle(ctx);
+		}
 		String key = get(EngineParameter.VEHICLE_KEY);
 		VehicleType vt = getVehicleTypeByKey(key);
 		if (!vt.equals(CUSTOM_VEHICLE)) {
@@ -253,6 +255,18 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 			}
 		}
 		return CUSTOM_VEHICLE;
+	}
+
+	/**
+	 * @return 'true' if the custom input has any custom parameters, 'false' - otherwise.
+	 * For example, for custom input "&profile=car&locale=en" the method returns 'true'.
+	 */
+	public boolean isCustomParameterizedVehicle() {
+		String vehicle = get(EngineParameter.VEHICLE_KEY);
+		if (vehicle != null) {
+			return vehicle.startsWith("&") || vehicle.indexOf("=") < vehicle.indexOf("&");
+		}
+		return false;
 	}
 
 	@NonNull
