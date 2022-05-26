@@ -19,6 +19,13 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.TextRasterizer;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.aidl.AidlMapLayerWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -31,11 +38,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,11 +96,20 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final Set<String> imageRequests = new HashSet<>();
 	private final List<AidlMapPointWrapper> displayedPoints = new ArrayList<>();
 
+	//OpenGL
+	private MapMarkersCollection mapMarkersCollection;
+	private int pointImagesSize = 0;
+	private boolean nightMode = false;
+	private int radius;
+	@Nullable
+	private String selectedPointId = null;
+
 	public AidlMapLayer(@NonNull Context context, @NonNull AidlMapLayerWrapper aidlLayer,
-						@NonNull String packName) {
+						@NonNull String packName, int baseOrder) {
 		super(context);
 		this.aidlLayer = aidlLayer;
 		this.packName = packName;
+		this.baseOrder = baseOrder;
 
 		OsmandApplication app = getApplication();
 		layerPref = app.getSettings().registerBooleanPreference(packName + "_" + aidlLayer.getId(), true);
@@ -145,7 +163,25 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		boolean pointsTypeChanged = pointsType != getPointsType(tileBox.getZoom());
 		pointsType = getPointsType(tileBox.getZoom());
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (!isLayerEnabled() || pointsType == PointsType.INVISIBLE || pointsTypeChanged
+					|| nightMode != settings.isNightMode() || pointImagesSize != pointImages.size()
+					|| (pointsType == PointsType.STANDARD && radius != getRadiusPoi(tileBox))
+					|| (selectedPointId != null && !selectedPointId.equals(getSelectedContextMenuPointId()))
+					|| (selectedPointId == null && getSelectedContextMenuPointId() != null)) {
+				clearMarkersCollections();
+			}
+			pointImagesSize = pointImages.size();
+			nightMode = settings.isNightMode();
+			radius = getRadiusPoi(tileBox);
+			selectedPointId = getSelectedContextMenuPointId();
+			float density = tileBox.getDensity();
+			initMarkersCollection(density);
+			return;
+		}
 		if (pointsType == PointsType.INVISIBLE) {
 			mapTextLayer.putData(this, Collections.emptyList());
 			return;
@@ -257,6 +293,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void destroyLayer() {
+		clearMarkersCollections();
 	}
 
 	@Override
@@ -418,6 +455,134 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				}
 			}
 		}
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollection(float density) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection != null || !isLayerEnabled()) {
+			return;
+		}
+		mapMarkersCollection = new MapMarkersCollection();
+		for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
+			LatLon l = point.getLocation();
+			if (l == null) {
+				continue;
+			}
+			Bitmap image = null;
+			if (pointsType != PointsType.STANDARD) {
+				String imageUri = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
+				if (!TextUtils.isEmpty(imageUri)) {
+					image = pointImages.get(imageUri);
+					if (image == null) {
+						imageRequests.add(imageUri);
+					}
+				}
+			}
+			if (image == null) {
+				image = placeholder;
+			}
+			boolean selected = selectedPointId != null && selectedPointId.equals(point.getId());
+			Bitmap bitmapResult = getMergedBitmap(point, image, density, selected);
+
+			if (bitmapResult != null) {
+				int baseOrder = selected ? getBaseOrder() - 1 : getBaseOrder();
+				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+				int x = MapUtils.get31TileNumberX(l.getLongitude());
+				int y = MapUtils.get31TileNumberY(l.getLatitude());
+				PointI pointI = new PointI(x, y);
+				mapMarkerBuilder
+						.setPosition(pointI)
+						.setIsHidden(false)
+						.setBaseOrder(baseOrder)
+						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmapResult))
+						.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
+
+				if (selected || pointsType == PointsType.BIG_ICON) {
+					mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top);
+				} else {
+					mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
+				}
+
+				mapMarkerBuilder
+						.setCaptionStyle(getTextStyle())
+						.setCaptionTopSpace(0)
+						.setCaption(getText(point));
+
+				mapMarkerBuilder.buildAndAddToCollection(mapMarkersCollection);
+			}
+		}
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+		if (imageRequests.size() > 0) {
+			executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
+		}
+	}
+
+	/**OpenGL*/
+	@Nullable
+	private Bitmap getMergedBitmap(@NonNull AidlMapPointWrapper point, @NonNull Bitmap image, float density, boolean selected) {
+		Bitmap bitmapResult = null;
+		if (selected) {
+			Bitmap bg = isStale(point) ? bigIconBgSelectedStale : bigIconBgSelected;
+			bitmapResult = Bitmap.createBitmap(bg.getWidth(), bg.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmapResult);
+			bitmapPaint.setColorFilter(null);
+			int cx = bg.getWidth() / 2;
+			int cy = bg.getHeight() / 2;
+			canvas.drawBitmap(bg, 0, 0, bitmapPaint);
+			canvas.drawBitmap(image, null, getDstRect(cx, cy, bigIconSize / 2), bitmapPaint);
+		} else if (pointsType == PointsType.STANDARD) {
+			pointInnerCircle.setColor(point.getColor());
+			int width = (int) (2 * radius + density);
+			int height = width;
+			int cx = width / 2;
+			int cy = height / 2;
+			bitmapResult = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmapResult);
+			canvas.drawCircle(cx, cy, radius + density, pointOuterCircle);
+			canvas.drawCircle(cx, cy, radius - density, pointInnerCircle);
+		} else if (pointsType == PointsType.CIRCLE) {
+			bitmapPaint.setColorFilter(new PorterDuffColorFilter(point.getColor(), PorterDuff.Mode.MULTIPLY));
+			bitmapResult = Bitmap.createBitmap(circle.getWidth(), circle.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmapResult);
+			canvas.drawBitmap(circle, 0, 0, bitmapPaint);
+		} else if (pointsType == PointsType.SMALL_ICON) {
+			bitmapResult = Bitmap.createBitmap(smallIconBg.getWidth(), smallIconBg.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmapResult);
+			bitmapPaint.setColorFilter(new PorterDuffColorFilter(point.getColor(), PorterDuff.Mode.MULTIPLY));
+			int cx = smallIconBg.getWidth() / 2;
+			int cy = smallIconBg.getHeight() / 2;
+			canvas.drawBitmap(smallIconBg, 0, 0, bitmapPaint);
+			bitmapPaint.setColorFilter(null);
+			canvas.drawBitmap(image, null, getDstRect(cx, cy, smallIconSize / 2), bitmapPaint);
+		} else if (pointsType == PointsType.BIG_ICON) {
+			Bitmap bg = isStale(point) ? bigIconBgStale : bigIconBg;
+			bitmapResult = Bitmap.createBitmap(bg.getWidth(), bg.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmapResult);
+			bitmapPaint.setColorFilter(null);
+			int cx = bg.getWidth() / 2;
+			int cy = bg.getHeight() / 2;
+			canvas.drawBitmap(bg, 0, 0, bitmapPaint);
+			canvas.drawBitmap(image, null, getDstRect(cx, cy, bigIconSize / 2), bitmapPaint);
+		}
+		return bitmapResult;
+	}
+
+	/**OpenGL*/
+	private void clearMarkersCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (mapMarkersCollection != null) {
+			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
+			mapMarkersCollection = null;
+		}
+	}
+
+	/** OpenGL */
+	private TextRasterizer.Style getTextStyle() {
+		return MapTextLayer.getTextStyle(getContext(), nightMode, getTextScale(), view.getDensity());
 	}
 
 	private enum PointsType {
