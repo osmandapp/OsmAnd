@@ -409,14 +409,14 @@ public class OsmAndFormatter {
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = Math.round(kmh * 10f);
-			return getFormattedSpeed(kmh10 / 10f, unit, ctx);
+			return getFormattedLowSpeed(kmh10 / 10f, unit, ctx);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
 				return getFormattedSpeed(Math.round(mph), unit, ctx);
 			} else {
 				int mph10 = Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, unit, ctx);
+				return getFormattedLowSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
@@ -424,7 +424,7 @@ public class OsmAndFormatter {
 				return getFormattedSpeed(Math.round(mph), unit, ctx);
 			} else {
 				int mph10 = Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, unit, ctx);
+				return getFormattedLowSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
 			if (metersPerSeconds < 0.111111111) {
@@ -446,7 +446,7 @@ public class OsmAndFormatter {
 				return getFormattedSpeed(Math.round(minPerM), unit, ctx);
 			} else {
 				int mph10 = Math.round(minPerM * 10f);
-				return getFormattedSpeed(mph10 / 10f, unit, ctx);
+				return getFormattedLowSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else {
 			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
@@ -455,13 +455,18 @@ public class OsmAndFormatter {
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = Math.round(metersPerSeconds * 10f);
-			return getFormattedSpeed(kmh10 / 10f, metersPerSecond, ctx);
+			return getFormattedLowSpeed(kmh10 / 10f, metersPerSecond, ctx);
 		}
 	}
 
 	@NonNull
 	private static FormattedValue getFormattedSpeed(float speed, @NonNull String unit, @NonNull OsmandApplication app) {
 		return formatValue(speed, unit, false, 0, app);
+	}
+
+	@NonNull
+	private static FormattedValue getFormattedLowSpeed(float speed, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatValue(speed, unit, true, 1, app);
 	}
 
 	@NonNull

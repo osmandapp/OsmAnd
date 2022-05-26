@@ -4614,11 +4614,11 @@
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="max_speed_widget_desc">Le widget indique la limitation de vitesse de la route actuelle.</string>
+    <string name="max_speed_widget_desc">Le widget indique la limitation de vitesse pour la route actuelle.</string>
     <string name="fps_widget_desc">Widget indiquant la vitesse d\'affichage et de rafraîchissement de la carte et des éléments de la carte.</string>
     <string name="radius_rules_widget_desc">L\'outil Rayon permet de déterminer la distance autour du point sélectionné en affichant des cercles de distance sur la carte.</string>
     <string name="altitude_widget_desc">Widget indiquant la hauteur, par rapport au niveau de la mer, de la position actuelle.</string>
-    <string name="audio_video_notes_desc">Ces widgets permettent un accès rapide pour démarrer / arrêter un enregistrement (audio, vidéo ou photo).</string>
+    <string name="audio_video_notes_desc">Ce widget permet un accès rapide pour démarrer / arrêter un enregistrement (audio, vidéo ou photo).</string>
     <string name="get_altitude_data">Obtenir les données d\'altitude</string>
     <string name="current_time_widget_desc">Ce widget affiche l\'heure de votre appareil.</string>
     <string name="elevation_profile_widget_desc">Ce widget affiche le profil d’altitude et de pente pour l’itinéraire actuel.</string>
@@ -4674,4 +4674,10 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
     <string name="explore_plans">Explorer les plans</string>
+    <string name="map_widget_time_to_destination">Temps restant jusqu\'à l\'arrivée</string>
+    <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>
+    <string name="map_widget_distance_to_intermediate">Distance du point intermédiaire</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Vous pouvez basculer de mode en appuyant sur le widget.</string>
+    <string name="radius_ruler_mode_desc">Vous pouvez basculer le mode de la règle de mesure par rayon en appuyant sur le widget.</string>
+    <string name="shared_string_mode">Mode</string>
 </resources>

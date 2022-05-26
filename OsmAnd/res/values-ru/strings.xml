@@ -4686,4 +4686,10 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Скрыть военные зоны</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Военные зоны</string>
     <string name="explore_plans">Ознакомиться с планами</string>
+    <string name="map_widget_time_to_intermediate">Промежуточное время</string>
+    <string name="radius_ruler_mode_desc">Вы можете переключить режим радиус-линейки, нажав на виджет.</string>
+    <string name="shared_string_mode">Режим</string>
+    <string name="map_widget_time_to_destination">Финишное время</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Вы можете переключить режим, нажав на виджет.</string>
+    <string name="map_widget_distance_to_intermediate">Расстояние до промежуточного пункта</string>
 </resources>

@@ -42,7 +42,6 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 
 	@Override
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		Context context = requireContext();
 		View content = themedInflater.inflate(R.layout.elevation_profile_widget_settings, container, false);
 		container.addView(content);
 
@@ -59,8 +58,7 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 		});
 
 		content.setOnClickListener(v -> slopeSwitch.setChecked(!showSlope));
-		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
-		AndroidUtils.setBackground(content, UiUtilities.getColoredSelectableDrawable(context, activeColor));
+		container.setBackground(getPressedStateDrawable());
 	}
 
 	private void updateIcon(boolean showSlope) {

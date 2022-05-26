@@ -5,7 +5,6 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,16 +13,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -50,7 +49,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 	private OnTextChangedListener onTextChangedListener;
 	private boolean fieldBoxHelperTextShowed;
 
-	private ApplicationMode appMode;
+	private final ApplicationMode appMode;
 
 	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode, ApplicationMode appMode) {
 		super(mapActivity);
@@ -104,13 +103,10 @@ public class OnlineRoutingCard extends MapBaseCard {
 			}
 		});
 
-		editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					editText.setSelection(editText.getText().length());
-					AndroidUtils.showSoftKeyboard(getMapActivity(), editText);
-				}
+		editText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				editText.setSelection(editText.getText().length());
+				AndroidUtils.showSoftKeyboard(getMapActivity(), editText);
 			}
 		});
 	}
@@ -205,10 +201,15 @@ public class OnlineRoutingCard extends MapBaseCard {
 	}
 
 	public void setEditedText(@NonNull String text) {
+		setEditedText(text, true);
+	}
+
+	public void setEditedText(@NonNull String text, boolean enabled) {
 		showElements(fieldBoxContainer);
 		editText.setTag("");    // indicate that the text was edited programmatically
 		editText.setText(text);
 		editText.setTag(null);
+		editText.setEnabled(enabled);
 	}
 
 	@NonNull

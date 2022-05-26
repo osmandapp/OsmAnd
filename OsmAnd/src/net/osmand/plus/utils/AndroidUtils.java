@@ -65,6 +65,7 @@ import androidx.core.content.FileProvider;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -236,6 +237,18 @@ public class AndroidUtils {
 			LOG.error(e);
 			Toast.makeText(activity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 			return false;
+		}
+	}
+
+	public static void startActivityForResultIfSafe(@NonNull Fragment fragment, @NonNull Intent intent, int requestCode) {
+		try {
+			fragment.startActivityForResult(intent, requestCode);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e);
+			Context context = fragment.getContext();
+			if (context != null) {
+				Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
@@ -1175,6 +1188,14 @@ public class AndroidUtils {
 		return null;
 	}
 
+	public static void openUrl(@NonNull Context context, int urlStringId, boolean nightMode) {
+		openUrl(context, context.getString(urlStringId), nightMode);
+	}
+
+	public static void openUrl(@NonNull Context context, @NonNull String url, boolean nightMode) {
+		openUrl(context, Uri.parse(url), nightMode);
+	}
+
 	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
 		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
 				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
@@ -1186,7 +1207,5 @@ public class AndroidUtils {
 			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
-
-
 
 }

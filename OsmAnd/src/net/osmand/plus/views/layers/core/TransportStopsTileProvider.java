@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.MapRendererView;
@@ -21,12 +22,18 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionPoint;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
+import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -36,103 +43,33 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 
-public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
+public class TransportStopsTileProvider extends interface_MapTiledCollectionProvider {
 
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
 	private final TextRasterizer.Style textStyle;
 	private final float textScale;
-	private boolean showClosed = false;
-	private final int minZoom;
 
-	private final OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData;
+	private final OsmandMapLayer.MapLayerData<List<TransportStop>> layerData;
 	private MapTiledCollectionProvider providerInstance;
 
-	private static class OsmBugsCollectionPoint extends interface_MapTiledCollectionPoint {
-
-		private final Context ctx;
-		private final OsmBugsLayer.OpenStreetNote osmNote;
-		private final float textScale;
-		private final PointI point31;
-		private final boolean showClosed;
-
-		public OsmBugsCollectionPoint(@NonNull Context ctx, @NonNull OsmBugsLayer.OpenStreetNote osmNote, float textScale, boolean showClosed) {
-			this.ctx = ctx;
-			this.osmNote = osmNote;
-			this.textScale = textScale;
-			int x = MapUtils.get31TileNumberX(osmNote.getLongitude());
-			int y = MapUtils.get31TileNumberY(osmNote.getLatitude());
-			this.point31 = new PointI(x, y);
-			this.showClosed = showClosed;
-		}
-
-		@Override
-		public PointI getPoint31() {
-			return point31;
-		}
-
-		@Override
-		public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap = null;
-			if (isFullSize) {
-				int iconId;
-				int backgroundColorRes;
-				if (osmNote.isOpened()) {
-					iconId = R.drawable.mx_special_symbol_remove;
-					backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
-				} else {
-					iconId = R.drawable.mx_special_symbol_check_mark;
-					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
-				}
-				BackgroundType backgroundType = BackgroundType.COMMENT;
-				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
-						ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
-						backgroundType);
-				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
-			} else {
-				if (osmNote.isOpened() || showClosed) {
-					int backgroundColorRes;
-					if (osmNote.isOpened()) {
-						backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
-					} else {
-						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
-					}
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
-							ContextCompat.getColor(ctx, backgroundColorRes), true,
-							false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
-					bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
-				}
-			}
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
-		}
-
-		@Override
-		public String getCaption() {
-			return "";
-		}
-	}
-
-	public OsmBugsTileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData,
-	                           int baseOrder, boolean showClosed, int minZoom, float textScale) {
+	public TransportStopsTileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<TransportStop>> layerData,
+                                      int baseOrder, float textScale) {
 		this.ctx = context;
 		this.layerData = layerData;
 		this.baseOrder = baseOrder;
 		this.textVisible = false;
 		this.textStyle = new TextRasterizer.Style();
 		this.textScale = textScale;
-		this.showClosed = showClosed;
-		this.minZoom = minZoom;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
-
 		mapRenderer.addSymbolsProvider(providerInstance);
 	}
 
@@ -183,7 +120,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
-		OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
+		OsmandMapLayer.MapLayerData<List<TransportStop>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
 		layerData.addDataReadyCallback(dataReadyCallback);
 		long[] start = {System.currentTimeMillis()};
 		app.runInUIThread(() -> {
@@ -202,7 +139,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			}
 		}
 		layerData.removeDataReadyCallback(dataReadyCallback);
-		List<OsmBugsLayer.OpenStreetNote> results = dataReadyCallback.getResults();
+		List<TransportStop> results = dataReadyCallback.getResults();
 		if (Algorithms.isEmpty(results)) {
 			return new QListMapTiledCollectionPoint();
 		}
@@ -213,10 +150,11 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX()),
 				MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY()));
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
-		for (OsmBugsLayer.OpenStreetNote osmNote : results) {
-			if (latLonBounds.contains(osmNote.getLongitude(), osmNote.getLatitude(),
-					osmNote.getLongitude(), osmNote.getLatitude())) {
-				OsmBugsCollectionPoint point = new OsmBugsCollectionPoint(ctx, osmNote, textScale, showClosed);
+		for (TransportStop stop : results) {
+			LatLon latLon = stop.getLocation();
+			if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
+					latLon.getLongitude(), latLon.getLatitude())) {
+				StopsCollectionPoint point = new StopsCollectionPoint(ctx, stop, textScale, "");
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
@@ -246,7 +184,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public ZoomLevel getMinZoom() {
-		return ZoomLevel.swigToEnum(minZoom);
+		return ZoomLevel.ZoomLevel10;
 	}
 
 	@Override
@@ -254,13 +192,76 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		return ZoomLevel.MaxZoomLevel;
 	}
 
+
 	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
-		return MapMarker.PinIconVerticalAlignment.Top;
+		return MapMarker.PinIconVerticalAlignment.CenterVertical;
 	}
 
 	@Override
 	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
 		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+	}
+
+	public static class StopsCollectionPoint extends interface_MapTiledCollectionPoint {
+
+		private final Context ctx;
+		private final TransportStop stop;
+		private final float textScale;
+		private final PointI point31;
+		private final String transportRouteType;
+
+		public StopsCollectionPoint(@NonNull Context ctx, @NonNull TransportStop stop, float textScale, String transportRouteType) {
+			this.ctx = ctx;
+			this.stop = stop;
+			this.textScale = textScale;
+			LatLon latLon = stop.getLocation();
+			this.point31 = new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
+					MapUtils.get31TileNumberY(latLon.getLatitude()));
+			this.transportRouteType = transportRouteType;
+		}
+
+
+		@Override
+		public PointI getPoint31() {
+			return point31;
+		}
+
+		@Override
+		public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(boolean isFullSize) {
+			Bitmap bitmap = null;
+			if (isFullSize) {
+				PointImageDrawable pointImageDrawable = null;
+				if (transportRouteType.isEmpty()) {
+					pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+							ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
+							true,false, R.drawable.mx_highway_bus_stop, BackgroundType.SQUARE);
+				} else {
+					TransportStopType type = TransportStopType.findType(transportRouteType);
+					if (type != null) {
+						pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+								ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
+								true,false, RenderingIcons.getResId(type.getResName()), BackgroundType.SQUARE);
+					}
+				}
+				if (pointImageDrawable == null) {
+					return SwigUtilities.nullSkImage();
+				}
+				pointImageDrawable.setAlpha(0.9f);
+				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
+			} else {
+				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+						ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
+						true, false, 0, BackgroundType.SQUARE);
+				pointImageDrawable.setAlpha(0.9f);
+				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+			}
+			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
+		}
+
+		@Override
+		public String getCaption() {
+			return "";
+		}
 	}
 }

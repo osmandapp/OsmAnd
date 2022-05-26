@@ -1,18 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
-import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -35,34 +22,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -73,8 +42,13 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.OnLiveUpdatesForLocalChange;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -90,6 +64,32 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
 
@@ -402,14 +402,17 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter implements LocalIndexInfoAdapter {
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
 
+
 		@Override
-		public void addData(LocalIndexInfo info) {
-			mapsList.add(info);
+		public void addData(@NonNull List<LocalIndexInfo> indexes) {
+			mapsList.addAll(indexes);
+			notifyDataSetChanged();
 		}
 
 		@Override
 		public void clearData() {
 			mapsList.clear();
+			notifyDataSetChanged();
 		}
 
 		@Override

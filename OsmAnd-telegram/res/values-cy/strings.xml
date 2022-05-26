@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="si_kmh">Cilomedr yr awr</string>
+    <string name="si_mph">Milltir yr awr</string>
+    <string name="si_min_m">Munudau y filltir</string>
+    <string name="si_min_km">Munudau y cilomedr</string>
+    <string name="si_m_s">Metrau yr eiliad</string>
+    <string name="shared_string_apply">Iawn</string>
+    <string name="units_and_formats">Unedau a fformatau</string>
+    <string name="unit_of_length">Unedau hyd</string>
+    <string name="shared_string_all">Y cwbl</string>
+</resources>

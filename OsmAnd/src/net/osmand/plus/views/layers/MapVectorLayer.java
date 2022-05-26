@@ -13,7 +13,6 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -21,7 +20,6 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
-import net.osmand.util.MapUtils;
 
 public class MapVectorLayer extends BaseMapLayer {
 
@@ -140,14 +138,15 @@ public class MapVectorLayer extends BaseMapLayer {
 				updateLayerProviderAlpha(alpha);
 			}
 
-			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2f, tilesRect.getPixHeight() / 2f);
-			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
-					.getLatitude())));
-			mapRenderer.setAzimuth(-tilesRect.getRotate());
-			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
-					.getZoomFloatPart()));
-			float zoomMagnifier = getMapDensity();
-			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
+			if (mapActivityInvalidated) {
+				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
+				mapRenderer.setAzimuth(-tilesRect.getRotate());
+				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
+						.getZoomFloatPart()));
+				float zoomMagnifier = getMapDensity();
+				mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
+			}
+			mapActivityInvalidated = false;
 		} else if (visible) {
 			if (!view.isZooming()) {
 				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {

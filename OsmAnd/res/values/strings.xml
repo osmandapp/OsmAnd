@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_mode">Mode</string>
+    <string name="time_to_navigation_point_widget_settings_desc">You can switch mode by taping on widget.</string>
+    <string name="map_widget_time_to_destination">Time to destination</string>
+    <string name="map_widget_time_to_intermediate">Time to intermediate</string>
+    <string name="map_widget_distance_to_intermediate">Distance to intermediate</string>
     <string name="radius_ruler_mode_desc">You can switch \“Radius ruler\” mode by taping on widget.</string>
     <string name="explore_plans">Explore Plans</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>

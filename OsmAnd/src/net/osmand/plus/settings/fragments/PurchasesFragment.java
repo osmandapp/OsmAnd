@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +39,6 @@ import java.util.List;
 public class PurchasesFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
-
-	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/docs/user/purchases/";
 
 	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
@@ -126,7 +123,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_help_online, iconColorRes));
 		icon.setOnClickListener(v -> {
 			if (getContext() != null) {
-				AndroidUtils.openUrl(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
+				AndroidUtils.openUrl(getContext(), R.string.docs_purchases, nightMode);
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);

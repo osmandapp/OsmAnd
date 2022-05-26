@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.panel;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +11,14 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
@@ -34,7 +41,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
-import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment.WidgetsOrderListener;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -45,22 +51,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
-
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsOrderListener,
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
 		OnOffsetChangedListener, AddWidgetListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
-
-	private static final String INFO_LINK = "https://docs.osmand.net/docs/user/widgets/";
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
@@ -143,7 +139,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		infoButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AndroidUtils.openUrl(activity, Uri.parse(INFO_LINK), nightMode);
+				AndroidUtils.openUrl(activity, R.string.docs_widgets, nightMode);
 			}
 		});
 		TextView tvSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
@@ -226,7 +222,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onWidgetsOrderApplied() {
+	public void onWidgetsConfigurationChanged() {
 		// TODO widgets: update only current fragment after adding duplicates
 		widgetsTabAdapter.updateFragmentsContent();
 	}

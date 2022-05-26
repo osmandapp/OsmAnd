@@ -160,7 +160,7 @@ public class MapLayers {
 		measurementToolLayer = new MeasurementToolLayer(app, -190000);
 		mapView.addLayer(measurementToolLayer, 4.6f);
 		// 5. transport layer
-		transportStopsLayer = new TransportStopsLayer(app);
+		transportStopsLayer = new TransportStopsLayer(app, -120000);
 		mapView.addLayer(transportStopsLayer, 5);
 		// 5.95 all text labels
 		// 6. point location layer 

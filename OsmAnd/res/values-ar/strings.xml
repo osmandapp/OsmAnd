@@ -1072,8 +1072,8 @@
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر الأخرى</string>
     <string name="map_widget_top">شريط المعلومات</string>
-    <string name="map_widget_right">العدادات على اليسار</string>
-    <string name="map_widget_left">العدادات على اليمين</string>
+    <string name="map_widget_right">العدادات على اليمين</string>
+    <string name="map_widget_left">العدادات على اليسار</string>
     <string name="search_radius_proximity">ضمن</string>
     <string name="anonymous_user">مستخدم مجهول</string>
     <string name="logged_as">سجل الدخول ب %1$s</string>
@@ -1674,7 +1674,7 @@
     <string name="go_to_map">إظهار الخريطة</string>
     <string name="map_downloaded">تم تحميل الخريطة</string>
     <string name="simulate_initial_startup">محاكاة طريقة تشغيل التطبيق للمرة الأولى</string>
-    <string name="share_geo">تطبيق آخر:</string>
+    <string name="share_geo">الموقع الجغرافي:</string>
     <string name="shared_string_send">إرسال</string>
     <string name="favorite_category_name">اسم المفضلة</string>
     <string name="favorite_category_add_new_title">إضافة فئة جديدة</string>
@@ -2621,7 +2621,7 @@
     <string name="lang_lo">لغة لاو</string>
     <string name="touring_view_renderer">عرض خريطة السياحة</string>
     <string name="copy_location_name">انسخ الموقع / اسم نقطة الاهتمام</string>
-    <string name="toast_empty_name_error">ليس للمكان أي اسم</string>
+    <string name="toast_empty_name_error">موقع بدون اسم</string>
     <string name="tunnel_warning">مكان نفق</string>
     <string name="show_tunnels">الأنفاق</string>
     <string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
@@ -4749,4 +4749,11 @@
     <string name="rendering_attr_hideMilitaryAreas_name">إخفاء المناطق العسكرية</string>
     <string name="rendering_attr_hideMilitaryAreas_description">إخفاء المناطق العسكرية</string>
     <string name="explore_plans">استكشف الخطط</string>
+    <string name="map_widget_true_bearing">تأثير حقيقي</string>
+    <string name="map_widget_time_to_destination">وقت الوصول</string>
+    <string name="map_widget_time_to_intermediate">متوسط وقت الوصول</string>
+    <string name="map_widget_distance_to_intermediate">مسافة متوسط وقت الوصول</string>
+    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الأداة.</string>
+    <string name="shared_string_mode">نمط</string>
+    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الأداة.</string>
 </resources>

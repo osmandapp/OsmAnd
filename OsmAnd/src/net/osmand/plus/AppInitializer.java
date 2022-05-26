@@ -187,6 +187,14 @@ public class AppInitializer implements IProgress {
 		return appVersionUpgrade.getFirstInstalledDays(startPrefs);
 	}
 
+	public long getFirstInstalledTime() {
+		return appVersionUpgrade.getFirstInstalledTime(startPrefs);
+	}
+
+	public long getUpdateVersionTime() {
+		return appVersionUpgrade.getUpdateVersionTime(startPrefs);
+	}
+
 	public void resetFirstTimeRun() {
 		appVersionUpgrade.resetFirstTimeRun(startPrefs);
 	}

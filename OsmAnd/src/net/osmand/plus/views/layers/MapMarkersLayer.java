@@ -383,18 +383,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 
-		if (contextMenuLayer.getMoveableObject() instanceof MapMarker) {
-			MapMarker objectInMotion = (MapMarker) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			Bitmap bitmap = getMapMarkerBitmap(objectInMotion.colorIndex);
-			int marginX = bitmap.getWidth() / 6;
-			int marginY = bitmap.getHeight();
-			float locationX = pf.x;
-			float locationY = pf.y;
-			canvas.rotate(-tileBox.getRotate(), locationX, locationY);
-			canvas.drawBitmap(bitmap, locationX - marginX, locationY - marginY, bitmapPaint);
-
-		}
+		drawMovableMarker(canvas, tileBox);
 	}
 
 	private void updateBitmaps(boolean forceUpdate) {
@@ -477,6 +466,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		return false;
+	}
+
+	private void drawMovableMarker(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+		Object movableObject = contextMenuLayer.getMoveableObject();
+		if (movableObject instanceof MapMarker) {
+			MapMarker movableMarker = (MapMarker) movableObject;
+			PointF point = contextMenuLayer.getMovableCenterPoint(tileBox);
+			Bitmap bitmap = getMapMarkerBitmap(movableMarker.colorIndex);
+			int marginX = bitmap.getWidth() / 6;
+			int marginY = bitmap.getHeight();
+
+			canvas.save();
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			canvas.drawBitmap(bitmap, point.x - marginX, point.y - marginY, bitmapPaint);
+			canvas.restore();
+		}
 	}
 
 	@Override

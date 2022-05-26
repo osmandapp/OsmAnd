@@ -97,8 +97,8 @@
     <string name="dropbox_plugin_description">Синхронизирайте трасета и аудио или видео бележки чрез Dropbox.</string>
     <string name="dropbox_plugin_name">Приставка Dropbox</string>
     <string name="intermediate_points_change_order">Смяна на реда</string>
-    <string name="srtm_paid_version_msg">Можете да закупите добавката Contour lines чрез Market и да подпомогнете нейното бъдещо развитие.</string>
-    <string name="srtm_paid_version_title">Добавка за контури (Contour lines)</string>
+    <string name="srtm_paid_version_msg">Можете да купите добавката „Контурни линии“ и така да подкрепите бъдещото ѝ развитие.</string>
+    <string name="srtm_paid_version_title">Добавка за контурни линии</string>
     <string name="av_def_action_video">Запиши видео</string>
     <string name="av_def_action_audio">Запиши аудио</string>
     <string name="av_widget_action_descr">Изберете действие по подразбиране:</string>
@@ -129,23 +129,23 @@
     <string name="shared_string_control_stop">Стоп</string>
     <string name="shared_string_control_start">Старт</string>
     <string name="map_widget_av_notes">Аудио/видео бележки</string>
-    <string name="osmand_srtm_short_description_80_chars">Добавка на OsmAnd за офлайн контурни линии</string>
+    <string name="osmand_srtm_short_description_80_chars">Добавка на OsmAnd за контурни линии извън мрежа</string>
     <string name="map_widget_distancemeasurement">Измерване на дистанции</string>
     <string name="audionotes_location_not_defined">Докоснете \"Използване на мястото...\" за да добавите бележка там.</string>
     <string name="map_widget_audionotes">Аудио бележки</string>
     <string name="audionotes_plugin_description">С добавката можете да правите бележки (гласови, снимка или видео) по време на пътуване, ползвайки специалния бутон или контекстното меню.</string>
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
     <string name="index_srtm_parts">части</string>
-    <string name="index_srtm_ele">Контури</string>
+    <string name="index_srtm_ele">Контурни линии</string>
     <string name="srtm_plugin_description">Тази добавка осигурява показване на релефни контури върху офлайн картите на OsmAnd. Тази функционалност е много оценявана от спортисти, туристи, всички които се интересуват от ландшафта.
 \n
 \nГлобалните данни (между 70 градуса северна ширина и 70 градуса южна ширина) се основават на измервания от SRTM и ASTER - радари намиращи се на борда на Terra - сателит на НАСА за наблюдение на НАСА. ASTER е съвместен проект между НАСА и Япония.</string>
     <string name="srtm_plugin_name">Контурни линии</string>
     <string name="download_select_map_types">Други карти</string>
     <string name="download_roads_only_item">Само пътища</string>
-    <string name="download_srtm_maps">Контури</string>
+    <string name="download_srtm_maps">Контурни линии</string>
     <string name="download_regular_maps">Стандартна карта</string>
-    <string name="download_roads_only_maps">Карта само с пътища</string>
+    <string name="download_roads_only_maps">Пътна карта</string>
     <string name="rendering_attr_noAdminboundaries_name">Скриване на границите</string>
     <string name="rendering_attr_noAdminboundaries_description">Не показвай административни граници (admin нива 5–9)</string>
     <string name="map_widget_max_speed">Ограничение на скоростта</string>
@@ -974,8 +974,8 @@
     <string name="add_favorite_dialog_favourite_added_template">Точката „{0}“ е добавена към избраните.</string>
     <string name="favourites_context_menu_edit">Променяне на избраната</string>
     <string name="favourites_context_menu_delete">Премахване на избраната</string>
-    <string name="favourites_remove_dialog_msg">Да се изтрие ли \'%s\' от любими места?</string>
-    <string name="favourites_remove_dialog_success">Точката {0} беше успешно изтрита от любими места.</string>
+    <string name="favourites_remove_dialog_msg">Премахване на „%s“ от избраните\?</string>
+    <string name="favourites_remove_dialog_success">Точката {0} е премахната от избраните.</string>
     <string name="osb_comment_dialog_message">Съобщение</string>
     <string name="osb_comment_dialog_author">Име на автора</string>
     <string name="osb_comment_dialog_success">Коментарът беше добавен</string>
@@ -1536,7 +1536,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="poi_dialog_poi_type">Тип POI</string>
     <string name="working_days">Работни дни</string>
-    <string name="favourites">Любими</string>
+    <string name="favourites">Избрани</string>
     <string name="lang_mk">Македонски</string>
     <string name="lang_fy">фризки</string>
     <string name="lang_als">албански</string>
@@ -1692,10 +1692,10 @@
     <string name="free_downloads_used">Използвани безплатни изтегляния</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="value_downloaded_of_max">%1$.1f от %2$.1f МБ</string>
-    <string name="confirm_download_roadmaps">Сигурни ли сте, че искате да изтеглите карта само с пътища, въпреки че вече имате стандартната карта?</string>
+    <string name="confirm_download_roadmaps">Няма нужда да изтегляте пътната карта, защото вече имате стандартната (пълна) карта. Изтегляне въпреки това\?</string>
     <string name="downloads">Изтегляния</string>
     <string name="get_full_version">Пълна версия</string>
-    <string name="activate_srtm_plugin">Моля, активирайте добавката SRTM</string>
+    <string name="activate_srtm_plugin">Включете добавката „Контурни линии“</string>
     <string name="activate_seamarks_plugin">Моля, активирайте добавката за морски карти</string>
     <string name="buy">Купуване</string>
     <string name="downloading_number_of_files">Изтегляне %1$d файла…</string>
@@ -2699,4 +2699,16 @@
 \n - Качване на трасета от приложението директно в OSM
 \n - Добавяне на точки на интерес и директното им качване в OSM (или по-късно, ако сте без мрежа)
 \n</string>
+    <string name="empty_state_favourites_desc">Внесете избрани точки или ги създавайте като отбелязвате точки на картата.</string>
+    <string name="empty_state_favourites">Добавяне на избрани</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Скриване на военните зони</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Скриване на военните зони</string>
+    <string name="map_widget_trip_recording_distance">Растояние</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">Без ограничения</string>
+    <string name="routing_attr_avoid_fords_name">Избягване на брдове</string>
+    <string name="map_widget_trip_recording_downhill">Спискане</string>
+    <string name="map_widget_trip_recording_duration">Продължителност</string>
+    <string name="routing_attr_avoid_highway_description">Избягване на магистрали</string>
+    <string name="map_widget_trip_recording_uphill">Качване</string>
+    <string name="srtm_menu_download_descr">Изтеглете картата „Контурни линии“, която да ползвате в този регион.</string>
 </resources>

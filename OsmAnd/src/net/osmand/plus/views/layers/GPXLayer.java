@@ -284,14 +284,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (contextMenuLayer.getMoveableObject() instanceof WptPt) {
-			WptPt objectInMotion = (WptPt) contextMenuLayer.getMoveableObject();
-			SelectedGpxFile gpxFile = pointFileMap.get(objectInMotion);
+		drawMovableWpt(canvas, tileBox);
+	}
+
+	private void drawMovableWpt(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+		Object movableObject = contextMenuLayer.getMoveableObject();
+		if (movableObject instanceof WptPt) {
+			WptPt movableWpt = ((WptPt) movableObject);
+			SelectedGpxFile gpxFile = pointFileMap.get(movableWpt);
+
 			if (gpxFile != null) {
 				PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-				MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
+				MapMarker mapMarker = mapMarkersHelper.getMapMarker(movableWpt);
 				float textScale = getTextScale();
-				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y, mapMarker, textScale);
+
+				canvas.save();
+				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+				drawBigPoint(canvas, movableWpt, getFileColor(gpxFile), pf.x, pf.y, mapMarker, textScale);
+				canvas.restore();
 			}
 		}
 	}
