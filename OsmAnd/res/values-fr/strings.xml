@@ -4548,7 +4548,7 @@
     <string name="rendering_attr_showTramRoutes_name">Lignes de tramway</string>
     <string name="rendering_attr_showTrainRoutes_name">Voies de chemin de fer</string>
     <string name="rendering_attr_showBusRoutes_name">Lignes d\'autobus</string>
-    <string name="speed_mode">Mode rapide</string>
+    <string name="speed_mode">Mode de vitesse</string>
     <string name="map_markers_bar">Barre de marqueurs</string>
     <string name="shared_string_visible_widgets">Widgets visibles</string>
     <string name="top_widgets_panel">Panneau supérieur</string>
