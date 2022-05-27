@@ -59,7 +59,6 @@ import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -194,10 +193,9 @@ class MapSelectionHelper {
 				String routeID = renderedObject.getRouteID();
 				String fileName = renderedObject.getGpxFileName();
 				String filter = routeID != null ? routeID : fileName;
-				List<RouteKey> routeKeys = RouteType.getRouteStringKeys(renderedObject.getTags());
 
 				boolean isTravelGpx = !Algorithms.isEmpty(filter);
-				boolean isRoute = !Algorithms.isEmpty(routeKeys);
+				boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(renderedObject));
 				if (!isTravelGpx && !isRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
 					continue;
@@ -299,20 +297,21 @@ class MapSelectionHelper {
 								obfMapObject = null;
 							}
 							if (obfMapObject != null) {
-								List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
-								names.add(obfMapObject.getCaptionInNativeLanguage());
-								long id = obfMapObject.getId().getId().longValue() >> 7;
-								amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
-								if (amenity != null && mapObject.getPoints31().size() > 1) {
-									QVectorPointI points31 = mapObject.getPoints31();
-									for (int k = 0; k < points31.size(); k++) {
-										amenity.getX().add(points31.get(k).getX());
-										amenity.getY().add(points31.get(k).getY());
-									}
+								Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
+								boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
+								if (isRoute) {
+									addRoute(result, tileBox, point);
 								} else {
-									Map<String, String> tags = getTags(obfMapObject.getTags());
-									if (!Algorithms.isEmpty(RouteType.getRouteStringKeys(tags))) {
-										addRoute(result, tileBox, point);
+									List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
+									names.add(obfMapObject.getCaptionInNativeLanguage());
+									long id = obfMapObject.getId().getId().longValue() >> 7;
+									amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
+									if (amenity != null && mapObject.getPoints31().size() > 1) {
+										QVectorPointI points31 = mapObject.getPoints31();
+										for (int k = 0; k < points31.size(); k++) {
+											amenity.getX().add(points31.get(k).getX());
+											amenity.getY().add(points31.get(k).getY());
+										}
 									}
 								}
 							}
