@@ -3952,7 +3952,7 @@
     <string name="routing_engine_vehicle_type_cycling_electric">Vélo électrique</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Vélo</string>
     <string name="copy_to_map_markers">Copier vers les marques de carte</string>
-    <string name="copy_to_map_favorites">Copier vers les favoris</string>
+    <string name="copy_to_map_favorites">Copier vers favoris</string>
     <string name="delete_online_routing_engine">Retirer ce moteur de routage en ligne \?</string>
     <string name="context_menu_read_full">Lire la suite</string>
     <string name="context_menu_edit_descr">Modifier la description</string>
@@ -4556,9 +4556,9 @@
     <string name="shared_string_item">Élément</string>
     <string name="shared_string_buttons">Boutons</string>
     <string name="simulation_real_mode_title">Simulation réaliste</string>
-    <string name="simulation_constant_mode_desc">La simulation sera effectuée avec la vitesse constante sélectionnée.</string>
-    <string name="simulation_constant_mode_title">Vitesse fixe</string>
-    <string name="simulation_preview_mode_desc">La vitesse de la simulation sera maximale sur les sections droites et ralentira aux bifurcations.</string>
+    <string name="simulation_constant_mode_desc">La simulation sera performée avec la vitesse constante choisie.</string>
+    <string name="simulation_constant_mode_title">Vitesse constante</string>
+    <string name="simulation_preview_mode_desc">La vitesse de simulation sera au maximal sur les sections droites et ralentira seulement au intersections.</string>
     <string name="simulation_preview_mode_title">Mode de prévisualisation rapide</string>
     <string name="routing_attr_carriage_restrictions_name">Restrictions de chariot</string>
     <string name="routing_attr_carriage_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules hippomobiles</string>
