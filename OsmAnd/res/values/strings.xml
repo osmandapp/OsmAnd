@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="lang_sat">Santali</string>
     <string name="shared_string_mode">Mode</string>
     <string name="time_to_navigation_point_widget_settings_desc">You can switch mode by taping on widget.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>
