@@ -4556,9 +4556,9 @@
     <string name="shared_string_item">Élément</string>
     <string name="shared_string_buttons">Boutons</string>
     <string name="simulation_real_mode_title">Simulation réaliste</string>
-    <string name="simulation_constant_mode_desc">La simulation sera performée avec la vitesse constante choisie.</string>
+    <string name="simulation_constant_mode_desc">La simulation s\'effectuera à la vitesse constante indiquée.</string>
     <string name="simulation_constant_mode_title">Vitesse constante</string>
-    <string name="simulation_preview_mode_desc">La vitesse de simulation sera au maximal sur les sections droites et ralentira seulement au intersections.</string>
+    <string name="simulation_preview_mode_desc">La vitesse de simulation sera maximale sur les sections droites et diminuera aux intersections.</string>
     <string name="simulation_preview_mode_title">Mode de prévisualisation rapide</string>
     <string name="routing_attr_carriage_restrictions_name">Restrictions de chariot</string>
     <string name="routing_attr_carriage_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules hippomobiles</string>
