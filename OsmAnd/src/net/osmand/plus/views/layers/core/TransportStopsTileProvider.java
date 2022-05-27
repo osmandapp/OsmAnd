@@ -52,6 +52,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 	private final boolean textVisible;
 	private final TextRasterizer.Style textStyle;
 	private final float textScale;
+	private final PointI offset;
 
 	private final OsmandMapLayer.MapLayerData<List<TransportStop>> layerData;
 	private MapTiledCollectionProvider providerInstance;
@@ -64,6 +65,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		this.textVisible = false;
 		this.textStyle = new TextRasterizer.Style();
 		this.textScale = textScale;
+		offset = new PointI(0, 0);
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -201,6 +203,11 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 	@Override
 	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
 		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+	}
+
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
 	}
 
 	public static class StopsCollectionPoint extends interface_MapTiledCollectionPoint {

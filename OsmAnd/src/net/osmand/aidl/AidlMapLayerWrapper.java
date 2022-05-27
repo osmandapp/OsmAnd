@@ -150,4 +150,8 @@ public class AidlMapLayerWrapper {
 	public int getBigPointMaxZoom() {
 		return bigPointMaxZoom;
 	}
+
+	public int getPointsSize() {
+		return points.size();
+	}
 }
