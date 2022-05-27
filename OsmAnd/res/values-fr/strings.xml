@@ -1687,7 +1687,7 @@
     <string name="update_all">Tout mettre à jour (%1$s Mo)</string>
     <string name="free_downloads_used">Téléchargements gratuits utilisés</string>
     <string name="free_downloads_used_description">Affiche le nombre de téléchargements gratuits restants.</string>
-    <string name="share_geo">geo :</string>
+    <string name="share_geo">géo :</string>
     <string name="share_menu_location">Partager ce lieu</string>
     <string name="shared_string_send">Envoyer</string>
     <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes et autres données.</string>
@@ -3911,7 +3911,7 @@
     <string name="add_online_routing_engine">Ajouter un moteur de routage en ligne</string>
     <string name="edit_online_routing_engine">Modifier le moteur de routage en ligne</string>
     <string name="online_routing_example_hint">L\'URL avec tous les paramètres sera de la forme :</string>
-    <string name="copy_address">Copier l\'adresse</string>
+    <string name="copy_address">Copie de l\'adresse</string>
     <string name="online_routing_engine">Moteur de routage en ligne</string>
     <string name="online_routing_engines">Moteurs de routage en ligne</string>
     <string name="shared_string_folders">Dossiers</string>
@@ -4086,7 +4086,7 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
     <string name="search_more">Rechercher plus…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Sauvegarde &amp; Restauration</string>
+    <string name="backup_and_restore">Sauvegarde et restauration</string>
     <string name="last_backup">Dernière sauvegarde</string>
     <string name="duration_ago">il y a %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4098,7 +4098,7 @@
     <string name="verify_email_address_descr">Code de vérification envoyé sur %1$s. Veuillez le saisir dans le champ ci-dessous.</string>
     <string name="cloud_email_already_registered">Il existe déjà un compte pour cet email.</string>
     <string name="resend_verification_code">Renvoyer le code</string>
-    <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
+    <string name="verification_code_missing">Je n\'ai pas reçu de code de vérification</string>
     <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données. Sauvegardez et restaurez facilement toutes vos informations.</string>
     <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, un code de vérification vous sera envoyé à cette adresse,
 \net toutes vos données y seront associées.</string>
@@ -4540,7 +4540,7 @@
     <string name="simulation_real_mode_desc">Sur les sections de routes droites, la vitesse sera approximativement égale à la vitesse maximale autorisée.
 \nAux intersections, la simulation ralentira.
 \nDes pénalités supplémentaires seront appliquées sur les feux de signalisation, les panneaux stop, etc.</string>
-    <string name="routeInfo_horse_scale_description">Afficher les chemins en fonction de la difficulté des sentiers pour chevaux</string>
+    <string name="routeInfo_horse_scale_description">Colorer les chemins en fonction de la difficulté des sentiers équestres</string>
     <string name="rendering_attr_horse_scale_common_name">Commun</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigeant</string>
     <string name="rendering_attr_horse_scale_difficult_name">Difficile</string>
