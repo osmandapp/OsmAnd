@@ -73,22 +73,22 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final CommonPreference<Boolean> layerPref;
 	private final CommonPreference<Boolean> appLayersPref;
 
-	public Paint pointInnerCircle;
-	public Paint pointOuterCircle;
-	public Paint bitmapPaint;
+	private Paint pointInnerCircle;
+	private Paint pointOuterCircle;
+	private Paint bitmapPaint;
 
-	public Bitmap circle;
-	public Bitmap smallIconBg;
-	public Bitmap bigIconBg;
-	public Bitmap bigIconBgStale;
+	private Bitmap circle;
+	private Bitmap smallIconBg;
+	private Bitmap bigIconBg;
+	private Bitmap bigIconBgStale;
 	private Bitmap bigIconBgSelected;
 	private Bitmap bigIconBgSelectedStale;
 	private Bitmap placeholder;
 
-	public int smallIconSize;
-	public int bigIconSize;
+	private int smallIconSize;
+	private int bigIconSize;
 
-	public PointsType pointsType;
+	private PointsType pointsType;
 
 	private MapTextLayer mapTextLayer;
 
@@ -102,7 +102,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private AidlTileProvider aidlMapLayerProvider;
 	private int pointImagesSize = 0;
 	private boolean nightMode = false;
-	public int radius;
+	private int radius;
 	@Nullable
 	private String selectedPointId = null;
 	private int aidlPointsCount = 0;
@@ -645,5 +645,48 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		} else {
 			mapsInitialized = true;
 		}
+	}
+
+	public Paint getPointInnerCircle() {
+		return pointInnerCircle;
+	}
+
+	public Paint getPointOuterCircle() {
+		return pointOuterCircle;
+	}
+	public Paint getBitmapPaint() {
+		return bitmapPaint;
+	}
+
+	public Bitmap getCircle() {
+		return circle;
+	}
+
+	public Bitmap getSmallIconBg() {
+		return smallIconBg;
+	}
+
+	public Bitmap getBigIconBg() {
+		return bigIconBg;
+	}
+
+	public Bitmap getBigIconBgStale() {
+		return bigIconBgStale;
+	}
+
+	public PointsType getPointsType() {
+		return pointsType;
+	}
+
+	public int getBigIconSize() {
+		return bigIconSize;
+	}
+
+	public int getSmallIconSize() {
+		return smallIconSize;
+	}
+
+	public int getRadius() {
+		return radius;
 	}
 }
