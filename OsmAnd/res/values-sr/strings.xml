@@ -1215,7 +1215,7 @@
     <string name="show_polygons">Приказуј многоуглове</string>
     <string name="road_blocked">Пут је препречен</string>
     <string name="rendering_attr_horseRoutes_name">Коњске стазе</string>
-    <string name="share_geo">положај:</string>
+    <string name="share_geo">гео:</string>
     <string name="lang_br">Бретонски</string>
     <string name="hillshade_menu_download_descr">Преузмите карту слоја са сенчењем да бисте видели рељеф на карти.</string>
     <string name="hillshade_purchase_header">Инсталирајте додатак \"Изохипсе\" да прикажете нагиб вертикалних области.</string>
@@ -1864,7 +1864,7 @@
     <string name="winter_and_ski_renderer">Зима и скијање</string>
     <string name="nautical_renderer">Поморско</string>
     <string name="copy_location_name">Копирај позицију/име тачке</string>
-    <string name="toast_empty_name_error">Положај без имена</string>
+    <string name="toast_empty_name_error">Неименована локација</string>
     <string name="tunnel_warning">Тунел испред</string>
     <string name="show_tunnels">Тунели</string>
     <string name="distance_farthest">Прво најудаљенији</string>
@@ -4568,7 +4568,7 @@
     <string name="simulation_real_mode_title">Реалистична симулација</string>
     <string name="simulation_constant_mode_desc">Симулација ће се изводити са константном одабраном брзином.</string>
     <string name="simulation_constant_mode_title">Фиксна брзина</string>
-    <string name="simulation_preview_mode_desc">Брзина симулације ће бити максимална на правим деоницама и успорена само на раскрсницама.</string>
+    <string name="simulation_preview_mode_desc">Брзина симулације ће бити максимална на правим деоницама и успорити само на раскрсницама.</string>
     <string name="rendering_attr_showRunningRoutes_name">Активне руте</string>
     <string name="rendering_attr_showRunningRoutes_description">Приказ активних рута</string>
     <string name="simulation_preview_mode_title">Режим брзог прегледа</string>
@@ -4637,4 +4637,50 @@
     <string name="radius_ruler_mode_desc">Можете да промените режим Радијуса лењира тако што ћете додирнути виџет.</string>
     <string name="circle_settings">Подешавања круга</string>
     <string name="routing_attr_avoid_4wd_only_name">Избегавај 4WD путеве</string>
+    <string name="shared_string_speed">Брзина</string>
+    <string name="shared_string_widget">Виџет</string>
+    <string name="navigation_points">Навигационе тачке</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не иди ван стазе</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Само ако је неопходно</string>
+    <string name="coordinates_widget_desc">Приказује географске координате тренутне гео-локације.</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Напредни</string>
+    <string name="on_with_params">%1$s на %2$s</string>
+    <string name="no_widgets_descr">Додајте један или више виџета са листе доступних виџета.</string>
+    <string name="lang_sat">Санталски</string>
+    <string name="route_maneuvers_desc">Навигациони видгети су омогућени током навигације за приказ информација као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, информације о тракама, максимална брзина, упозорења о приближавању, ПОИ, тачке пута.</string>
+    <string name="audio_video_notes_desc">Виџет омогућава брз приступ за почетак/заустављање снимања (аудио, видео или фото).</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Средњи</string>
+    <string name="calculate_online">Рачуњање онлајн</string>
+    <string name="track_attach_to_the_roads_descr">Стаза ће бити прикачена за пут помоћу офлајн мапа, геометрија стазе ће бити промењена.</string>
+    <string name="get_altitude_data">Добави податке о надморској висини</string>
+    <string name="calculate_altitude">Рачуњање надморске висине</string>
+    <string name="no_altitude_data">Нема података о надморској висини</string>
+    <string name="app_mode_mountain_bicycle">Брдски бицикл</string>
+    <string name="bearing_desc">Виџет смера показује апсолутни или релативни смер ка циљу у угаоним јединицама (степени 180, степени 360, милирадијани).</string>
+    <string name="map_markers_desc">На виџету горње траке можете да видите растојање и правац до маркера од тренутне локације. Могуће је конфигурисати да видите 1 или 2 горња маркера у виџету.</string>
+    <string name="navigation_points_desc">Навигациони видгети су омогућени током навигације за приказ информација као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, информације о тракама, максимална брзина, упозорења о приближавању, ПОИ, тачке пута.</string>
+    <string name="turn_on_public_transport_description">Укључите да видите руте јавног превоза на мапи.</string>
+    <string name="routing_attr_freeride_policy_allow_name">Дозволи</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Почетник</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Тежи ка ван стазе</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Без преференци</string>
+    <string name="street_name_widget_desc">Виџет за назив улице приказује тренутни назив улице са правом локационом стрелицом или следећи назив улице са маневром који треба да се заврши.</string>
+    <string name="get_altitude_information">Достави информације о надморској висини</string>
+    <string name="calculate_online_altitude_descr">Подаци о надморској висини ће бити израчунати на ОсмАнд серверу.</string>
+    <string name="route_maneuvers">Маневри руте</string>
+    <string name="calculating_altitude">Израчунавање надморске висине</string>
+    <string name="no_widgets_here_yet">Овде још нема виџета</string>
+    <string name="available_widgets">Доступни виџети</string>
+    <string name="snackbar_page_removed">„Страница %1$s“ је уклоњена.</string>
+    <string name="release_4_2">• Редизајн виџета: нови изглед и осећај, груписање по страницама, промените редослед и комбинујте како желите.
+\n
+\n • Руте за пешачење / бициклизам / путовања: додирните симбол руте и добијте пуне информације о рути.
+\n
+\n • Омиљене групе: подесите подразумевани изглед за нове тачке у групи
+\n
+\n • Исправке: аутоматско ажурирање мапа плочица на мрежи
+\n
+\n</string>
+    <string name="shared_string_symbol">Симбол</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
 </resources>
