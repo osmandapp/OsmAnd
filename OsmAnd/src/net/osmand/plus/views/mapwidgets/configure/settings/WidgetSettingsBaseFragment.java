@@ -11,6 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,12 +31,6 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
@@ -163,7 +163,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showFragment(@NonNull FragmentManager fragmentManager,
-	                                @NonNull Fragment target,
+	                                @Nullable Fragment target,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull WidgetSettingsBaseFragment fragment) {
 		String tag = fragment.getClass().getSimpleName();

@@ -3,6 +3,11 @@ package net.osmand.plus.views.mapwidgets;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -12,11 +17,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.annotation.Nullable;
 
 public enum WidgetsPanel {
 

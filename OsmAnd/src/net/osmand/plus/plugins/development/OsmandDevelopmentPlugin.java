@@ -1,8 +1,15 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.FPS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,20 +21,11 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.FPS;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -93,33 +91,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static class FPSTextInfoWidget extends TextInfoWidget {
-
-		private final OsmandMapTileView mapView;
-
-		public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity);
-			this.mapView = mapActivity.getMapView();
-			updateInfo(null);
-		}
-
-		@Override
-		public void updateInfo(@Nullable DrawSettings drawSettings) {
-			if (!mapView.isMeasureFPS()) {
-				mapView.setMeasureFPS(true);
-			}
-			setText("", (int) mapView.getFPS() + "/" + (int) mapView.getSecondaryFPS() + " FPS");
-		}
-	}
-
 	private void registerWidget(@NonNull MapActivity mapActivity) {
 		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
-			FPSTextInfoWidget fps = new FPSTextInfoWidget(mapActivity);
-			fps.setIcons(FPS);
-			mapInfoLayer.registerWidget(FPS, fps);
+			MapWidget widget = createMapWidgetForParams(mapActivity, FPS);
+			mapInfoLayer.registerWidget(FPS, widget);
 			mapInfoLayer.recreateControls();
 		}
+	}
+
+	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		return new FPSTextInfoWidget(mapActivity);
 	}
 
 	@Override
