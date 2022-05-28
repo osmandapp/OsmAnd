@@ -1160,4 +1160,6 @@
     <string name="poi_aerialway_chair_lift">空中吊椅</string>
     <string name="poi_tunnel">隧道</string>
     <string name="poi_water_well">水井</string>
+    <string name="poi_watermill">水磨坊</string>
+    <string name="poi_waterway_turning_point">水路转折点</string>
 </resources>
