@@ -127,8 +127,8 @@
     <string name="poi_car_repair">汽车修理</string>
     <string name="poi_public_transport_platform_bus">公交停靠站</string>
     <string name="poi_bus_stop">公交停靠站</string>
-    <string name="poi_railway_station">火车站</string>
-    <string name="poi_aerodrome">飞机场</string>
+    <string name="poi_railway_station">火车站;火车站;火车站</string>
+    <string name="poi_aerodrome">飞机场；航空站</string>
     <string name="poi_speed_camera">测速摄像机</string>
     <string name="poi_telephone">电话</string>
     <string name="poi_recycling_clothes">衣服</string>
@@ -896,7 +896,7 @@
     <string name="poi_content_beer">内容物：啤酒</string>
     <string name="poi_abandoned">废弃的</string>
     <string name="poi_adit">矿道口</string>
-    <string name="poi_emergency_access_point">紧急接入点</string>
+    <string name="poi_emergency_access_point">紧急逃生通道</string>
     <string name="poi_grit_bin">砂箱</string>
     <string name="poi_second_hand">二手货店</string>
     <string name="poi_kiosk">售货亭</string>
@@ -930,9 +930,9 @@
     <string name="poi_abandoned_poi">废弃的对象</string>
     <string name="poi_product_beer">产品：啤酒</string>
     <string name="poi_dairy">乳品店</string>
-    <string name="poi_ship_chandler">船舶服务商</string>
+    <string name="poi_ship_chandler">船舶供给商</string>
     <string name="poi_fire_flapper">灭火拍把</string>
-    <string name="poi_ses_station">SES站点</string>
+    <string name="poi_ses_station">卫星地球站</string>
     <string name="poi_allotments">市民农园</string>
     <string name="poi_craft_beekeeper">养蜂人</string>
     <string name="poi_animal_shelter_wildlife">野生动物</string>
@@ -1044,7 +1044,7 @@
     <string name="poi_dry_cleaning_filter">干洗</string>
     <string name="poi_air_transport">航空运输</string>
     <string name="poi_water_transport">水上运输</string>
-    <string name="poi_bicycle_transport">自行车运输</string>
+    <string name="poi_bicycle_transport">自行车交通</string>
     <string name="poi_aerialway_transport">索道运输</string>
     <string name="poi_transport_construction">交通建设</string>
     <string name="poi_power">电力</string>
