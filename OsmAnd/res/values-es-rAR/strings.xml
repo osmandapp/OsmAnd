@@ -4703,4 +4703,5 @@
     <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
     <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
     <string name="radius_ruler_mode_desc">Puedes cambiar el modo de «Regla radial» pulsando en el widget.</string>
+    <string name="lang_sat">Santalí</string>
 </resources>
