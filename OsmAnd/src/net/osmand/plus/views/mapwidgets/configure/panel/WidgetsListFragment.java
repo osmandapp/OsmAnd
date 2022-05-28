@@ -1,5 +1,9 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +13,13 @@ import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.CallbackWithObject;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -27,7 +37,6 @@ import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
-import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -35,17 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener {
 
@@ -229,12 +227,12 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 						WidgetSettingsBaseFragment.showFragment(fragmentManager, target, selectedAppMode, settingsFragment);
 					}
 				});
-			} else {
-				AndroidUiHelper.updateVisibility(settingsIcon, false);
 			}
-
 			view.setOnClickListener(v -> settingsIcon.callOnClick());
 
+			AndroidUiHelper.updateVisibility(settingsIcon, settingsFragment != null);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.info_button), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
 
 			setupListItemBackground(view);
 
@@ -291,8 +289,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			WidgetParams widget = widgets.get(i);
 			WidgetGroup widgetGroup = widget.group;
 
-			View view = inflater.inflate(R.layout.configure_screen_list_item_available_widget,
-					availableWidgetsContainer, false);
+			View view = inflater.inflate(R.layout.configure_screen_widget_item, availableWidgetsContainer, false);
 
 			ImageView icon = view.findViewById(R.id.icon);
 			if (widgetGroup != null) {
@@ -323,6 +320,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			});
 			view.setOnClickListener(v -> infoButton.callOnClick());
 
+			AndroidUiHelper.updateVisibility(infoButton, true);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_icon), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
+
 			boolean last = i + 1 == widgets.size();
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !last || hasExternalWidgets);
 
@@ -340,8 +341,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		for (int i = 0; i < externalWidgets.size(); i++) {
 			MapWidgetInfo widget = externalWidgets.get(i);
 
-			View view = inflater.inflate(R.layout.configure_screen_list_item_available_widget,
-					availableWidgetsContainer, false);
+			View view = inflater.inflate(R.layout.configure_screen_widget_item, availableWidgetsContainer, false);
 
 			ImageView icon = view.findViewById(R.id.icon);
 			iconsHelper.updateWidgetIcon(icon, widget);
@@ -359,6 +359,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 							selectedAppMode, selectedPanel, widget.key, externalProviderPackage, null);
 				}
 			});
+			AndroidUiHelper.updateVisibility(infoButton, true);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_icon), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
 
 			boolean last = i + 1 == externalWidgets.size();
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !last);

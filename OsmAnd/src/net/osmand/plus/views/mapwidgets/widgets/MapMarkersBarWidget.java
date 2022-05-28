@@ -6,6 +6,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -20,16 +23,14 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-public class MapMarkersBarWidget extends MapWidget {
+public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListener {
 
 	public static final int MIN_METERS_OK_VISIBLE = 40;
 	public static final int MIN_METERS_2ND_ROW_SHOW = 150;
@@ -119,6 +120,7 @@ public class MapMarkersBarWidget extends MapWidget {
 		}
 	}
 
+	@Override
 	public void setCustomLatLon(@Nullable LatLon customLatLon) {
 		this.customLatLon = customLatLon;
 	}
@@ -151,7 +153,7 @@ public class MapMarkersBarWidget extends MapWidget {
 		updateMarker(center, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation);
 	}
 
-	public void updateSecondMarker(@NonNull LatLon center , @NonNull List<MapMarker> markers,
+	public void updateSecondMarker(@NonNull LatLon center, @NonNull List<MapMarker> markers,
 	                               @Nullable Float heading, boolean customLocation) {
 		if (markers.size() > 1 && settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2) {
 			MapMarker secondMarker = markers.get(1);

@@ -1,5 +1,8 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.OsmandAidlApi.WIDGET_ID_PREFIX;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -7,6 +10,9 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.CompoundButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -18,6 +24,8 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -31,12 +39,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidl.OsmandAidlApi.WIDGET_ID_PREFIX;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
 
@@ -184,8 +186,9 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 				String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
 				WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
-				layer.registerExternalWidget(widgetKey, widget, menuIconId, widgetData.getMenuTitle(),
-						pack, defaultPanel, widgetData.getOrder());
+				MapWidgetInfo widgetInfo = layer.registerExternalWidget(widgetKey, widget, menuIconId,
+						widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+				((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
 			}
 		}
 	}

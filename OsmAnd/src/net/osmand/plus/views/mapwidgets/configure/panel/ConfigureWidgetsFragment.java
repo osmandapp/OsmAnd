@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -29,6 +31,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -36,9 +39,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
 import net.osmand.util.Algorithms;
@@ -51,8 +56,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-
 public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
 		OnOffsetChangedListener, AddWidgetListener {
 
@@ -63,6 +66,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
+
+	private MapLayers mapLayers;
+	private MapWidgetRegistry widgetRegistry;
+	private MapWidgetsFactory widgetsFactory;
 
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
@@ -93,6 +100,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
+		mapLayers = app.getOsmandMap().getMapLayers();
+		widgetRegistry = mapLayers.getMapWidgetRegistry();
+		widgetsFactory = new MapWidgetsFactory((MapActivity) requireMyActivity());
 
 		if (savedInstanceState != null) {
 			String appModeKey = savedInstanceState.getString(APP_MODE_ATTR);
@@ -183,7 +193,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			}
 
 			@Override
-			public void onTabReselected(Tab tab) { }
+			public void onTabReselected(Tab tab) {
+			}
 
 		});
 
@@ -223,8 +234,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	@Override
 	public void onWidgetsConfigurationChanged() {
-		// TODO widgets: update only current fragment after adding duplicates
-		widgetsTabAdapter.updateFragmentsContent();
+		if (selectedFragment != null) {
+			selectedFragment.updateContent();
+		}
 	}
 
 	@Override
@@ -242,9 +254,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
 		}
-
-		// TODO widgets: update only current fragment after adding duplicates
-		widgetsTabAdapter.updateFragmentsContent();
+		onWidgetsConfigurationChanged();
 	}
 
 	private void addWidgetToEnd(@NonNull MapWidgetInfo targetWidget, @NonNull WidgetsPanel widgetsPanel) {
