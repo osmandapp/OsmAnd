@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -36,6 +38,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -155,13 +158,16 @@ public class TrackDetailsMenu {
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			if (ds != null && ds.size() > 0 && gpxItem != null && segment != null) {
+				MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 				RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox();
-				int mx = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-				int my = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+				PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude());
+				int mx = (int) pixel.x;
+				int my = (int) pixel.y;
 				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
-				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(tb, segment.points, r, mx, my);
+				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(
+						mapRenderer, tb, segment.points, r, mx, my);
 				if (points != null) {
-					LatLon latLon = tb.getLatLonFromPixel(mx, my);
+					LatLon latLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, mx, my);
 					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
 
 					float pos;

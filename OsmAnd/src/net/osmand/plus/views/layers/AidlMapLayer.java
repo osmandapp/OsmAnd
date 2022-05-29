@@ -31,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
@@ -410,9 +411,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			for (AidlMapPointWrapper p : aidlLayer.getPoints()) {
 				LatLon position = p.getLocation();
 				if (position != null) {
-					int x = (int) tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
-					int y = (int) tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
-					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, position.getLatitude(), position.getLongitude());
+					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 						points.add(p);
 					}
 				}

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.MapRendererView;
@@ -22,7 +21,6 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionPoint;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
-import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -30,8 +28,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.NativeUtilities;
@@ -42,8 +38,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
-
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 
 public class TransportStopsTileProvider extends interface_MapTiledCollectionProvider {
 
@@ -206,14 +200,12 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 	public static class StopsCollectionPoint extends interface_MapTiledCollectionPoint {
 
 		private final Context ctx;
-		private final TransportStop stop;
 		private final float textScale;
 		private final PointI point31;
 		private final String transportRouteType;
 
 		public StopsCollectionPoint(@NonNull Context ctx, @NonNull TransportStop stop, float textScale, String transportRouteType) {
 			this.ctx = ctx;
-			this.stop = stop;
 			this.textScale = textScale;
 			LatLon latLon = stop.getLocation();
 			this.point31 = new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
@@ -229,7 +221,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 
 		@Override
 		public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap = null;
+			Bitmap bitmap;
 			if (isFullSize) {
 				PointImageDrawable pointImageDrawable = null;
 				if (transportRouteType.isEmpty()) {

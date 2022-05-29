@@ -49,6 +49,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -111,7 +112,7 @@ class MapSelectionHelper {
 
 	@NonNull
 	protected MapSelectionResult selectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
-		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+		LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox, point.x, point.y);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
 
@@ -352,8 +353,10 @@ class MapSelectionHelper {
 
 	private void addRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point) {
 		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, OsmandMapLayer.getDefaultRadiusPoi(tileBox)) * 1.5f);
-		LatLon minLatLon = tileBox.getLatLonFromPixel(point.x - searchRadius, point.y - searchRadius);
-		LatLon maxLatLon = tileBox.getLatLonFromPixel(point.x + searchRadius, point.y + searchRadius);
+		LatLon minLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox,
+				point.x - searchRadius, point.y - searchRadius);
+		LatLon maxLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox,
+				point.x + searchRadius, point.y + searchRadius);
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
 

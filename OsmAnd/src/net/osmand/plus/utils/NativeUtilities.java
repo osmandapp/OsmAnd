@@ -1,6 +1,8 @@
 package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.PointF;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -14,7 +16,10 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapUtils;
+
+import org.bouncycastle.asn1.DERUTCTime;
 
 public class NativeUtilities {
 	public static SWIGTYPE_p_sk_spT_SkImage_const_t createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
@@ -77,5 +82,31 @@ public class NativeUtilities {
 			return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
 		}
 		return null;
+	}
+
+	@NonNull
+	public static LatLon getLatLonFromPixel(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox, float x, float y) {
+		LatLon latLon = mapRenderer != null ? getLatLonFromPixel(mapRenderer, new PointI((int) x, (int) y)) : null;
+		if (latLon == null) {
+			latLon = tileBox.getLatLonFromPixel(x, y);
+		}
+		return latLon;
+	}
+
+	@NonNull
+	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox, double lat, double lon) {
+		PointF point = null;
+		if (mapRenderer != null) {
+			int x31 = MapUtils.get31TileNumberX(lon);
+			int y31 = MapUtils.get31TileNumberY(lat);
+			PointI screenPoint = new PointI();
+			if (mapRenderer.getScreenPointFromLocation(new PointI(x31, y31), screenPoint, true)) {
+				point = new PointF(screenPoint.getX(), screenPoint.getY());
+			}
+		}
+		if (point == null) {
+			point = new PointF(tileBox.getPixXFromLatLon(lat, lon), tileBox.getPixYFromLatLon(lat, lon));
+		}
+		return point;
 	}
 }

@@ -37,6 +37,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -229,7 +230,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -248,9 +249,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					if (!n.isOpened() && !showClosed) {
 						continue;
 					}
-					int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-					int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
-					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
+					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 						radius = small;
 						res.add(n);
 					}

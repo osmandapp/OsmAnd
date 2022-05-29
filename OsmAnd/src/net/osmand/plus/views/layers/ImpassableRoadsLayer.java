@@ -22,6 +22,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -161,9 +162,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
 				if (location != null && road != null) {
-					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-					if (calculateBelongs(ex, ey, x, y, compare)) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, location.getLatitude(), location.getLongitude());
+					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 						compare = radius;
 						o.add(road);
 					}

@@ -39,6 +39,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
@@ -453,8 +454,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				&& !getApplication().getOsmandMap().getMapView().isCarView()) {
 			widgetHeight = markersWidgetsHelper.getMapMarkersBarWidgetHeight();
 		}
-		double tx = tb.getPixXFromLatLon(lat, lon);
-		double ty = tb.getPixYFromLatLon(lat, lon);
+		PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, lat, lon);
+		double tx = pixel.x;
+		double ty = pixel.y;
 		return tx >= -w && tx <= tb.getPixWidth() + w && ty >= widgetHeight - h && ty <= tb.getPixHeight() + h;
 	}
 
@@ -489,13 +491,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		if (!longTapDetector.onTouchEvent(event)) {
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					float x = event.getX();
 					float y = event.getY();
-					fingerLocation = tileBox.getLatLonFromPixel(x, y);
+					fingerLocation = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, x, y);
 					hasMoved = false;
 					moving = true;
 					break;
@@ -596,10 +598,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-
-					if (calculateBelongs((int) point.x, (int) point.y, x, y, r)) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, latLon.getLatitude(), latLon.getLongitude());
+					if (calculateBelongs((int) point.x, (int) point.y, (int) pixel.x, (int) pixel.y, r)) {
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
 						} else {

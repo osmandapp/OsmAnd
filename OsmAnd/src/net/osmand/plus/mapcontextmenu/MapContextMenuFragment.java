@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -73,6 +74,7 @@ import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
@@ -252,10 +254,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				origMarkerX = box.getCenterPixelX();
 				origMarkerY = box.getCenterPixelY();
 			} else {
-				double markerLat = latLon.getLatitude();
-				double markerLon = latLon.getLongitude();
-				origMarkerX = (int) box.getPixXFromLatLon(markerLat, markerLon);
-				origMarkerY = (int) box.getPixYFromLatLon(markerLat, markerLon);
+				PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
+				origMarkerX = (int) pixel.x;
+				origMarkerY = (int) pixel.y;
 			}
 		} else {
 			mapCenter = menu.getMapCenter();
@@ -979,10 +980,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void setCustomMapRatio() {
 		LatLon latLon = menu.getLatLon();
 		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-		float px = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-		float py = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-		float ratioX = px / tb.getPixWidth();
-		float ratioY = py / tb.getPixHeight();
+		PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+		float ratioX = pixel.x / tb.getPixWidth();
+		float ratioY = pixel.y / tb.getPixHeight();
 		map.setCustomMapRatio(ratioX, ratioY);
 		map.setLatLon(latLon.getLatitude(), latLon.getLongitude());
 	}
