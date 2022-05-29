@@ -41,6 +41,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
 
    private MapTiledCollectionProvider providerInstance;
+   private final PointI offset;
 
    public WptPtTileProvider(@NonNull Context context, int baseOrder, boolean textVisible,
                             @Nullable TextRasterizer.Style textStyle, float density) {
@@ -49,6 +50,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       this.textVisible = textVisible;
       this.textStyle = textStyle != null ? textStyle : new TextRasterizer.Style();
       this.density = density;
+      offset = new PointI(0,0);
    }
 
    public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -174,6 +176,11 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    @Override
    public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
       return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+   }
+
+   @Override
+   public PointI getPinIconOffset() {
+      return offset;
    }
 
    public void addToData(@NonNull WptPt wptPt, int colorBigPoint, int colorSmallPoint, boolean withShadow,

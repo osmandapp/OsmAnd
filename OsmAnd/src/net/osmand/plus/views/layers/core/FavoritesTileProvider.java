@@ -40,6 +40,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	private final boolean textVisible;
 	private final TextRasterizer.Style textStyle;
 	private final float density;
+	private final PointI offset;
 	private MapTiledCollectionProvider providerInstance;
 
 	public FavoritesTileProvider(@NonNull Context context, int baseOrder, boolean textVisible,
@@ -49,6 +50,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		this.textVisible = textVisible;
 		this.textStyle = textStyle;
 		this.density = density;
+		this.offset = new PointI(0, 0);
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -176,6 +178,11 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	@Override
 	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
 		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+	}
+
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
 	}
 
 	public void addToData(@NonNull FavouritePoint favorite, int colorSmallPoint, int colorBigPoint, boolean withShadow,

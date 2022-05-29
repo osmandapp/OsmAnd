@@ -26,6 +26,7 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
    private final QListPointI points = new QListPointI();
    private final SWIGTYPE_p_sk_spT_SkImage_const_t skPointBitmap;
    private final int baseOrder;
+   private final PointI offset;
    private MapTiledCollectionProvider providerInstance;
 
    public LocationPointsTileProvider(int baseOrder, @NonNull List<LatLon> points,
@@ -36,6 +37,7 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
                  Utilities.get31TileNumberY(latLon.getLatitude())));
       }
       skPointBitmap = NativeUtilities.createSkImageFromBitmap(pointBitmap);
+      this.offset = new PointI(0, 0);
    }
 
    public void drawPoints(@NonNull MapRendererView mapRenderer) {
@@ -131,5 +133,10 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
    @Override
    public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
       return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+   }
+
+   @Override
+   public PointI getPinIconOffset() {
+      return offset;
    }
 }

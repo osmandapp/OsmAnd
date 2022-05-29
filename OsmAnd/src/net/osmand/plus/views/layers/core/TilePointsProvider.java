@@ -38,6 +38,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	private final float density;
 	private final int minZoom;
 	private final int maxZoom;
+	private final PointI offset;
 
 	private final DataTileManager<T> points;
 	private MapTiledCollectionProvider providerInstance;
@@ -104,6 +105,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		this.density = density;
 		this.minZoom = minZoom;
 		this.maxZoom = maxZoom;
+		this.offset = new PointI(0, 0);
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -211,5 +213,10 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	@Override
 	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
 		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+	}
+
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
 	}
 }
