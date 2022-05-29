@@ -2610,7 +2610,7 @@
     <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
     <string name="copy_location_name">Ort/POI-Name kopieren</string>
-    <string name="toast_empty_name_error">Unbenannter Ort</string>
+    <string name="toast_empty_name_error">Standort ohne Name</string>
     <string name="show_closed_notes">Geschlossene Hinweise anzeigen</string>
     <string name="switch_osm_notes_visibility_desc">OSM-Hinweise auf der Karte ein- oder ausblenden.</string>
     <string name="gpx_file_desc">GPX - geeignet für den Export in JOSM oder andere OSM-Editoren.</string>
@@ -3365,7 +3365,7 @@
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
-    <string name="copy_coordinates">Koordinaten kopieren</string>
+    <string name="copy_coordinates">Kopiere Koordinaten</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
