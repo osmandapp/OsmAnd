@@ -19,17 +19,15 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.aidl.AidlMapLayerWrapper;
+import net.osmand.aidl.AidlMapPointWrapper;
+import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.aidl.AidlMapLayerWrapper;
-import net.osmand.aidl.AidlMapPointWrapper;
-import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -38,6 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -106,7 +105,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Nullable
 	private String selectedPointId = null;
 	private int aidlPointsCount = 0;
-	private boolean mapsInitialized = false;
 
 	public AidlMapLayer(@NonNull Context context, @NonNull AidlMapLayerWrapper aidlLayer,
 						@NonNull String packName, int baseOrder) {
@@ -159,7 +157,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		bigIconSize = AndroidUtils.dpToPx(getContext(), BIG_ICON_SIZE_DP);
 
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
-		addMapsInitializedListener();
 	}
 
 	@Override
@@ -168,9 +165,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (!mapsInitialized) {
-			return;
-		}
 		boolean pointsTypeChanged = pointsType != getPointsType(tileBox.getZoom());
 		pointsType = getPointsType(tileBox.getZoom());
 		MapRendererView mapRenderer = getMapRenderer();
@@ -619,30 +613,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			if (layer != null && res) {
 				layer.refresh();
 			}
-		}
-	}
-
-	private void addMapsInitializedListener() {
-		OsmandApplication app = getApplication();
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-					if (event == AppInitializer.InitEvents.MAPS_INITIALIZED) {
-						mapsInitialized = true;
-					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-				}
-			});
-		} else {
-			mapsInitialized = true;
 		}
 	}
 
