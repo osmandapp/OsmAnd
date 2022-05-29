@@ -4680,4 +4680,5 @@
     <string name="time_to_navigation_point_widget_settings_desc">Vous pouvez basculer de mode en appuyant sur le widget.</string>
     <string name="radius_ruler_mode_desc">Vous pouvez basculer le mode de la règle de mesure par rayon en appuyant sur le widget.</string>
     <string name="shared_string_mode">Mode</string>
+    <string name="lang_sat">Santali</string>
 </resources>

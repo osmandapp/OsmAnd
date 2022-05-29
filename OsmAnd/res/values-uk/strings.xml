@@ -4687,4 +4687,5 @@
     <string name="map_widget_time_to_intermediate">Час до проміжного пункту</string>
     <string name="map_widget_distance_to_intermediate">Відстань до проміжного пункту</string>
     <string name="radius_ruler_mode_desc">Ви можете перемикати режим радіусної лінійки, натиснувши на віджет.</string>
+    <string name="lang_sat">Санталі</string>
 </resources>

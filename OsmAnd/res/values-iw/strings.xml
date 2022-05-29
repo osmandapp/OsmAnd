@@ -4688,4 +4688,5 @@
     <string name="routing_attr_hazmat_category_description">קטגוריית חומרים מסוכנים / התחשבות ההגבלות גישה עקב חומרים מסוכנים</string>
     <string name="routing_attr_avoid_fords_name">המנעות מגשרים איריים</string>
     <string name="routing_attr_avoid_fords_description">המנעות מגשרים איריים</string>
+    <string name="lang_sat">סינטאלי</string>
 </resources>
