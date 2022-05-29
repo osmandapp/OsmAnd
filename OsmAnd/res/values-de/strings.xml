@@ -3923,7 +3923,7 @@
     <string name="routing_engine_vehicle_type_car">Auto</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
-    <string name="copy_address">Adresse kopieren</string>
+    <string name="copy_address">Kopiere Adresse</string>
     <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
