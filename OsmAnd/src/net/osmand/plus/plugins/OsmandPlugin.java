@@ -27,7 +27,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -64,6 +63,9 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -628,6 +630,10 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		return null;
+	}
+
 	public List<String> indexingFiles(@Nullable IProgress progress) {
 		return null;
 	}
@@ -865,6 +871,17 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerLayers(context, mapActivity);
 		}
+	}
+
+	@Nullable
+	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, params);
+			if (widget != null) {
+				return widget;
+			}
+		}
+		return null;
 	}
 
 	public static void registerMapContextMenu(@NonNull MapActivity mapActivity, double latitude, double longitude,

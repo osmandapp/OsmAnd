@@ -14,6 +14,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -21,13 +28,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 public class SideWidgetsPanel extends FrameLayout {
 
@@ -66,7 +66,7 @@ public class SideWidgetsPanel extends FrameLayout {
 		setWillNotDraw(false);
 		setupPaddings();
 		setupBorderPaint();
-		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.right_widgets_panel, this);
+		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.side_widgets_panel, this);
 		setupChildren();
 	}
 
@@ -112,7 +112,6 @@ public class SideWidgetsPanel extends FrameLayout {
 				updateDots();
 			}
 		});
-
 		updateDots();
 	}
 

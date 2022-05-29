@@ -80,4 +80,8 @@ public class MarkersWidgetsHelper {
 				? new LatLon(lastStaleKnownLocation.getLatitude(), lastStaleKnownLocation.getLongitude())
 				: mapActivity.getMapLocation();
 	}
+
+	public interface CustomLatLonListener {
+		void setCustomLatLon(@Nullable LatLon customLatLon);
+	}
 }

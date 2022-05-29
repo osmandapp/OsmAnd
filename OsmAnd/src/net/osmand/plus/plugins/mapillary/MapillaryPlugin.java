@@ -1,11 +1,19 @@
 package net.osmand.plus.plugins.mapillary;
 
+import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -33,7 +41,7 @@ import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -51,14 +59,6 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-
-import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -150,6 +150,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		return new MapillaryMapWidget(mapActivity);
+	}
+
+	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		updateMapLayers(context, mapActivity, false);
 	}
@@ -235,18 +240,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		mapillaryControl = createMonitoringControl(activity);
+		mapillaryControl = (TextInfoWidget) createMapWidgetForParams(activity, WidgetParams.MAPILLARY);
 		mapillaryWidgetRegInfo = layer.registerWidget(WidgetParams.MAPILLARY, mapillaryControl);
 		layer.recreateControls();
-	}
-
-	private TextInfoWidget createMonitoringControl(final MapActivity map) {
-		mapillaryControl = new TextInfoWidget(map);
-		mapillaryControl.setText(map.getString(R.string.mapillary), "");
-		mapillaryControl.setIcons(WidgetParams.MAPILLARY);
-		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));
-
-		return mapillaryControl;
 	}
 
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {

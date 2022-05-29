@@ -4465,4 +4465,10 @@
     <string name="list_of_groups">lijst v/d groepen</string>
     <string name="import_tracks">Tracks importeren</string>
     <string name="please_provide_group_name_message">Geef de groep een naam.</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Verberg militaire gebieden</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Verberg militaire gebieden</string>
+    <string name="map_widget_true_bearing">Echte lager</string>
+    <string name="shared_string_mode">Modus</string>
+    <string name="map_widget_time_to_destination">Tijd tot bestemming</string>
+    <string name="explore_plans">Plannen verkennen</string>
 </resources>

@@ -1,9 +1,21 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -33,6 +45,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -43,18 +56,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 
@@ -171,22 +172,38 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private void registerWidgets(@NonNull MapActivity mapActivity) {
 		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 		if (distanceWidget == null) {
-			distanceWidget = new TripRecordingDistanceWidget(mapActivity);
+			distanceWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
 			layer.registerWidget(TRIP_RECORDING_DISTANCE, distanceWidget);
 		}
 		if (timeWidget == null) {
-			timeWidget = new TripRecordingTimeWidget(mapActivity);
+			timeWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
 			layer.registerWidget(TRIP_RECORDING_TIME, timeWidget);
 		}
 		if (uphillWidget == null) {
-			uphillWidget = new TripRecordingUphillWidget(mapActivity);
+			uphillWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
 			layer.registerWidget(TRIP_RECORDING_UPHILL, uphillWidget);
 		}
 		if (downhillWidget == null) {
-			downhillWidget = new TripRecordingDownhillWidget(mapActivity);
+			downhillWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
 			layer.registerWidget(TRIP_RECORDING_DOWNHILL, downhillWidget);
 		}
 		layer.recreateControls();
+	}
+
+
+	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		switch (params) {
+			case TRIP_RECORDING_DISTANCE:
+				return new TripRecordingDistanceWidget(mapActivity);
+			case TRIP_RECORDING_TIME:
+				return new TripRecordingTimeWidget(mapActivity);
+			case TRIP_RECORDING_UPHILL:
+				return new TripRecordingUphillWidget(mapActivity);
+			case TRIP_RECORDING_DOWNHILL:
+				return new TripRecordingDownhillWidget(mapActivity);
+		}
+		return null;
 	}
 
 	private void unregisterWidgets(@NonNull MapActivity mapActivity) {
