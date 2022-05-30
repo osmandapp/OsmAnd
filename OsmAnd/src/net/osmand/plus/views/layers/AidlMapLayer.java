@@ -59,7 +59,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextProvider<AidlMapPointWrapper> {
 
-	public static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
+	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
 
 	private static final int POINT_OUTER_COLOR = 0x88555555;
 	private static final float START_ZOOM = 7;
