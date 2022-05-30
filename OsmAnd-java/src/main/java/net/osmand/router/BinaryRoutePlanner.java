@@ -1,6 +1,8 @@
 package net.osmand.router;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -94,6 +96,9 @@ public class BinaryRoutePlanner {
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		PriorityQueue<RouteSegment> graphSegments = onlyForward ? graphReverseSegments : graphDirectSegments;
 		boolean forwardSearch = !onlyForward;
+		double foundRoutingTime = -1;
+		int alternative = 0;
+		TLongSet minpathPoints = new TLongHashSet();
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 			// use accumulative approach
@@ -109,11 +114,30 @@ public class BinaryRoutePlanner {
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1 << 20)) + " mb");
 					printMemoryConsumption("Memory occupied after calculation : ");
 				}
-				finalSegment = (FinalRouteSegment) segment;
+				if (foundRoutingTime < 0) {
+					foundRoutingTime = segment.distanceFromStart;
+					finalSegment = (FinalRouteSegment) segment;
+					calcPoints(minpathPoints, finalSegment, true);
+					calcPoints(minpathPoints, finalSegment.opposite, true);
+				} else {
+					int pnts = calcPoints(minpathPoints, finalSegment, false);
+					pnts += calcPoints(minpathPoints, finalSegment.opposite, false);
+					if (pnts < minpathPoints.size() / 2) {
+						finalSegment = (FinalRouteSegment) segment;
+//						if (alternative++ == 2) {
+//							break;
+//						}
+						break;
+					}
+				}
+				
 				if (TRACE_ROUTING) {
 					println("Final segment found");
 				}
-				break;
+				if (segment.distanceFromStart > 5 * foundRoutingTime) {
+					break;
+				}
+//				break;
 			}
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95 && RoutingContext.SHOW_GC_SIZE) {
 				printMemoryConsumption("Memory occupied before exception : ");
@@ -180,6 +204,30 @@ public class BinaryRoutePlanner {
 			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
 		}
 		return finalSegment;
+	}
+
+	private static long combine2Points(int x, int y) {
+		return (((long) x) << 32) | ((long) y);
+	}
+	
+	private int calcPoints(TLongSet pointsSet, RouteSegment segment, boolean add) {
+		if (segment == null || segment.road == null) {
+			return 0;
+		}
+		int k = segment.segStart;
+		int pnts = 0;
+		while (k != segment.segEnd) {
+			int x = segment.road.getPoint31XTile(k);
+			int y = segment.road.getPoint31YTile(k);
+			if (add) {
+				pointsSet.add(combine2Points(x, y));
+				pnts++;
+			} else if (pointsSet.contains(combine2Points(x, y))) {
+				pnts++;
+			}
+			k = segment.segStart < segment.segEnd ? k + 1 : k - 1;
+		}
+		return pnts + calcPoints(pointsSet, segment.parentRoute, add);
 	}
 
 	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
