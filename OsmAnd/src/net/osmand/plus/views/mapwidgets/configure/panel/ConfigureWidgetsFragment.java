@@ -269,13 +269,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	private MapWidgetInfo createDuplicateWidget(@NonNull String widgetId, @NonNull WidgetsPanel panel) {
-		WidgetType params = WidgetType.getById(widgetId);
-		if (params != null) {
+		WidgetType widgetType = WidgetType.getById(widgetId);
+		if (widgetType != null) {
 			String id = widgetId.contains(DELIMITER) ? widgetId : getDuplicateWidgetId(widgetId);
-			MapWidget widget = widgetsFactory.createMapWidget(id, params);
+			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
 				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
-				return widgetRegistry.createCustomWidget(id, widget, params, panel);
+				return widgetRegistry.createCustomWidget(id, widget, widgetType, panel);
 			}
 		}
 		return null;

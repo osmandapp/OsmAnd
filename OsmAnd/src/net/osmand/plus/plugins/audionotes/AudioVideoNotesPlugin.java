@@ -729,16 +729,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
-		switch (params) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		switch (widgetType) {
 			case AV_NOTES_ON_REQUEST:
-				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_CHOOSE);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_CHOOSE);
 			case AV_NOTES_RECORD_AUDIO:
-				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_AUDIO);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_AUDIO);
 			case AV_NOTES_RECORD_VIDEO:
-				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_VIDEO);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_VIDEO);
 			case AV_NOTES_TAKE_PHOTO:
-				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_TAKEPICTURE);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_TAKEPICTURE);
 		}
 		return null;
 	}

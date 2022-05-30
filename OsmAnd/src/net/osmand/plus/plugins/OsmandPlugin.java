@@ -637,7 +637,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		return null;
 	}
 
@@ -887,9 +887,9 @@ public abstract class OsmandPlugin {
 	}
 
 	@Nullable
-	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
+	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, params);
+			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType);
 			if (widget != null) {
 				return widget;
 			}

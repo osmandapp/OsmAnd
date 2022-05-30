@@ -40,12 +40,12 @@ public class MapWidgetsFactory {
 	}
 
 	@Nullable
-	public MapWidget createMapWidget(@NonNull WidgetType params) {
-		return createMapWidget(null, params);
+	public MapWidget createMapWidget(@NonNull WidgetType widgetType) {
+		return createMapWidget(null, widgetType);
 	}
 
-	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType params) {
-		switch (params) {
+	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType) {
+		switch (widgetType) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
 			case SMALL_NEXT_TURN:
@@ -97,7 +97,7 @@ public class MapWidgetsFactory {
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity);
 			default:
-				return OsmandPlugin.createMapWidget(mapActivity, params);
+				return OsmandPlugin.createMapWidget(mapActivity, widgetType);
 		}
 	}
 }

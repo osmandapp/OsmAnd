@@ -35,8 +35,8 @@ public class NextTurnBaseWidget extends TextInfoWidget {
 
 	private final TurnDrawable turnDrawable;
 
-	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType params, boolean horizontalMini) {
-		super(mapActivity, params);
+	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, boolean horizontalMini) {
+		super(mapActivity, widgetType);
 		this.horizontalMini = horizontalMini;
 
 		topImageView = view.findViewById(R.id.widget_top_icon);

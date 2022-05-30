@@ -80,12 +80,12 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType params) {
-		if (params == MARKERS_TOP_BAR) {
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
+		if (widgetType == MARKERS_TOP_BAR) {
 			barWidgets.add(widgetInfo.widget);
-		} else if (params == SIDE_MARKER_1) {
+		} else if (widgetType == SIDE_MARKER_1) {
 			sideFirstWidgets.add(widgetInfo.widget);
-		} else if (params == SIDE_MARKER_2) {
+		} else if (widgetType == SIDE_MARKER_2) {
 			sideSecondWidgets.add(widgetInfo.widget);
 		}
 	}

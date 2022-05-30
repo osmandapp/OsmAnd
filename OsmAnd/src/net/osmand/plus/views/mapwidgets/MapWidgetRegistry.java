@@ -174,10 +174,10 @@ public class MapWidgetRegistry {
 		this.listeners = listeners;
 	}
 
-	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType params) {
+	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
 		if (!Algorithms.isEmpty(listeners)) {
 			for (WidgetsRegistryListener listener : listeners) {
-				listener.onWidgetRegistered(widgetInfo, params);
+				listener.onWidgetRegistered(widgetInfo, widgetType);
 			}
 		}
 	}
@@ -391,8 +391,8 @@ public class MapWidgetRegistry {
 	}
 
 	@Nullable
-	private MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory widgetsFactory, @NonNull WidgetType params, @NonNull ApplicationMode appMode) {
-		MapWidget mapWidget = widgetsFactory.createMapWidget(params);
+	private MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory widgetsFactory, @NonNull WidgetType widgetType, @NonNull ApplicationMode appMode) {
+		MapWidget mapWidget = widgetsFactory.createMapWidget(widgetType);
 		if (mapWidget != null) {
 			return createWidgetInfo(mapWidget, appMode);
 		}
@@ -406,13 +406,13 @@ public class MapWidgetRegistry {
 
 	@Nullable
 	public MapWidgetInfo createWidgetInfo(@NonNull MapWidget widget, @NonNull ApplicationMode appMode) {
-		WidgetType params = widget.getWidgetParams();
-		if (params != null) {
-			WidgetsPanel panel = params.getPanel(params.id, appMode, settings);
-			int page = panel.getWidgetPage(appMode, params.id, settings);
-			int order = panel.getWidgetOrder(appMode, params.id, settings);
-			return createWidgetInfo(params.id, widget, params.dayIconId, params.nightIconId,
-					params.titleId, null, page, order, panel);
+		WidgetType widgetType = widget.getWidgetType();
+		if (widgetType != null) {
+			WidgetsPanel panel = widgetType.getPanel(widgetType.id, appMode, settings);
+			int page = panel.getWidgetPage(appMode, widgetType.id, settings);
+			int order = panel.getWidgetOrder(appMode, widgetType.id, settings);
+			return createWidgetInfo(widgetType.id, widget, widgetType.dayIconId, widgetType.nightIconId,
+					widgetType.titleId, null, page, order, panel);
 		}
 		return null;
 	}
@@ -458,9 +458,9 @@ public class MapWidgetRegistry {
 		List<String> widgetKeys = settings.CUSTOM_WIDGETS_KEYS.getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(widgetKeys)) {
 			for (String key : widgetKeys) {
-				WidgetType params = WidgetType.getById(key);
-				if (params != null) {
-					MapWidgetInfo widgetInfo = createCustomWidget(factory, key, params, appMode);
+				WidgetType widgetType = WidgetType.getById(key);
+				if (widgetType != null) {
+					MapWidgetInfo widgetInfo = createCustomWidget(factory, key, widgetType, appMode);
 					if (widgetInfo != null) {
 						widgetInfos.add(widgetInfo);
 					}
@@ -470,11 +470,11 @@ public class MapWidgetRegistry {
 	}
 
 	private MapWidgetInfo createCustomWidget(@NonNull MapWidgetsFactory factory, @NonNull String key,
-	                                         @NonNull WidgetType params, @NonNull ApplicationMode appMode) {
-		MapWidget widget = factory.createMapWidget(key, params);
+	                                         @NonNull WidgetType widgetType, @NonNull ApplicationMode appMode) {
+		MapWidget widget = factory.createMapWidget(key, widgetType);
 		if (widget != null) {
-			WidgetsPanel panel = params.getPanel(key, appMode, settings);
-			return createCustomWidget(key, widget, params, panel);
+			WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
+			return createCustomWidget(key, widget, widgetType, panel);
 		}
 		return null;
 	}
@@ -482,12 +482,12 @@ public class MapWidgetRegistry {
 	@NonNull
 	public MapWidgetInfo createCustomWidget(@NonNull String widgetId,
 	                                        @NonNull MapWidget widget,
-	                                        @NonNull WidgetType params,
+	                                        @NonNull WidgetType widgetType,
 	                                        @NonNull WidgetsPanel panel) {
-		int page = panel.getWidgetPage(params.id, settings);
-		int order = panel.getWidgetOrder(params.id, settings);
+		int page = panel.getWidgetPage(widgetType.id, settings);
+		int order = panel.getWidgetOrder(widgetType.id, settings);
 
-		return createWidgetInfo(widgetId, widget, params.dayIconId, params.nightIconId, params.titleId, null, page, order, panel);
+		return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId, widgetType.titleId, null, page, order, panel);
 	}
 
 	@NonNull
@@ -503,7 +503,7 @@ public class MapWidgetRegistry {
 	}
 
 	public interface WidgetsRegistryListener {
-		void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType params);
+		void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType);
 
 		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);
 	}

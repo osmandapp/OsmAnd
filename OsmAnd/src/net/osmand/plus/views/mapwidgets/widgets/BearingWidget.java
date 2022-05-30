@@ -33,13 +33,13 @@ public class BearingWidget extends TextInfoWidget {
 	private int cachedBearing;
 
 	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType) {
-		super(mapActivity, bearingType.params);
+		super(mapActivity, bearingType.widgetType);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 
 		setText(null, null);
-		setIcons(bearingType.params);
-		setContentTitle(bearingType.params.titleId);
+		setIcons(bearingType.widgetType);
+		setContentTitle(bearingType.widgetType.titleId);
 	}
 
 	@Override
@@ -148,10 +148,10 @@ public class BearingWidget extends TextInfoWidget {
 		MAGNETIC_BEARING(WidgetType.MAGNETIC_BEARING),
 		TRUE_BEARING(WidgetType.TRUE_BEARING);
 
-		public final WidgetType params;
+		public final WidgetType widgetType;
 
-		BearingType(@NonNull WidgetType params) {
-			this.params = params;
+		BearingType(@NonNull WidgetType widgetType) {
+			this.widgetType = widgetType;
 		}
 	}
 }

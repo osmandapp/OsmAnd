@@ -148,8 +148,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
-		if (params == WidgetType.MAPILLARY) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		if (widgetType == WidgetType.MAPILLARY) {
 			return new MapillaryMapWidget(mapActivity);
 		}
 		return null;

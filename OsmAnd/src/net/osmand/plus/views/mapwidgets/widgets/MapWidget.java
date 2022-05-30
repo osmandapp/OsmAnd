@@ -89,7 +89,7 @@ public abstract class MapWidget {
 	}
 
 	@Nullable
-	public WidgetType getWidgetParams() {
+	public WidgetType getWidgetType() {
 		return widgetType;
 	}
 

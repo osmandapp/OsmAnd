@@ -37,8 +37,8 @@ public class TextInfoWidget extends MapWidget {
 	private Integer cachedAngularUnits = null;
 
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType params) {
-		super(mapActivity, params);
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
+		super(mapActivity, widgetType);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);

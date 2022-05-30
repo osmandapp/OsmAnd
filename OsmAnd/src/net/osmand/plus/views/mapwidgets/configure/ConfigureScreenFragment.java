@@ -275,7 +275,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType params) {
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
 
 	}
 

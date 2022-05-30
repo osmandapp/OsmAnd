@@ -25,8 +25,8 @@ public class AudioVideoNotesWidget extends TextInfoWidget {
 
 	private Boolean cachedRecording;
 
-	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType params, int actionId) {
-		super(mapActivity, params);
+	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId) {
+		super(mapActivity, widgetType);
 		this.actionId = actionId;
 
 		updateInfo(null);

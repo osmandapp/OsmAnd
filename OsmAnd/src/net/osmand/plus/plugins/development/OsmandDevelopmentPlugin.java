@@ -78,8 +78,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
-		if (params == FPS) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		if (widgetType == FPS) {
 			return new FPSTextInfoWidget(mapActivity);
 		}
 		return null;
