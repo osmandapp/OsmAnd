@@ -3,6 +3,7 @@ package net.osmand.plus.views.layers;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -17,6 +18,7 @@ import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -25,6 +27,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapMarker;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -112,6 +119,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean carView;
 	private float textScale = 1f;
 	private double markerSizePx;
+
+	//OpenGL
+	private MapMarkersCollection mapMarkersCollection;
+	private int markersCount = 0;
+	private PointI movableObject;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -240,6 +252,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
+			clearMarkersCollections();
 			return;
 		}
 
@@ -253,6 +266,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (markersCount != activeMapMarkers.size()) {
+				clearMarkersCollections();
+			}
+			initMarkersCollection();
+			markersCount = activeMapMarkers.size();
+			return;
+		}
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (route != null && route.points.size() > 0) {
@@ -339,6 +361,20 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandSettings settings = app.getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
+			clearMarkersCollections();
+			return;
+		}
+
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			Object movableObject = contextMenuLayer.getMoveableObject();
+			if (movableObject instanceof MapMarker) {
+				setMovableObject((MapMarker)movableObject);
+				drawMovableMarker(canvas, tileBox);
+			}
+			if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+				cancelMovableObject();
+			}
 			return;
 		}
 
@@ -702,5 +738,139 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (callback != null) {
 			callback.onApplyMovedObject(result, newObject == null ? o : newObject);
 		}
+		applyMovableObject(position);
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection != null) {
+			return;
+		}
+		mapMarkersCollection = new MapMarkersCollection();
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		updateBitmaps(false);
+
+		for (MapMarker marker : markersHelper.getMapMarkers()) {
+			if (!overlappedByWaypoint(marker) && !isSynced(marker)) {
+				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
+				int x = MapUtils.get31TileNumberX(marker.getLongitude());
+				int y = MapUtils.get31TileNumberY(marker.getLatitude());
+				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+				PointI pointI = new PointI(x, y);
+				int color = getColorByIndex(marker.colorIndex);
+				boolean isMoveable = isInMotion(marker);
+
+				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
+						.setBaseOrder(baseOrder)
+						.setIsHidden(isMoveable)
+						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
+					    .setPosition(pointI)
+						.setPinIconVerticalAlignment(net.osmand.core.jni.MapMarker.PinIconVerticalAlignment.Top)
+					    .setPinIconHorisontalAlignment(net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+						.setPinIconOffset(new PointI(bmp.getWidth() / 3, 0))
+					    .setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(color))
+						.buildAndAddToCollection(mapMarkersCollection);
+			}
+		}
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	/**OpenGL*/
+	private void clearMarkersCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (mapMarkersCollection != null) {
+			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
+			mapMarkersCollection = null;
+		}
+	}
+
+	/** OpenGL */
+	private void setMovableObject(@NonNull MapMarker objectInMotion) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection == null || movableObject != null) {
+			return;
+		}
+		int x = MapUtils.get31TileNumberX(objectInMotion.getLongitude());
+		int y = MapUtils.get31TileNumberY(objectInMotion.getLatitude());
+		QListMapMarker markers = mapMarkersCollection.getMarkers();
+		for (int i = 0; i < markers.size(); i++) {
+			net.osmand.core.jni.MapMarker m = markers.get(i);
+			if (m.getPosition().getX() == x && m.getPosition().getY() == y) {
+				m.setIsHidden(true);
+				movableObject = m.getPosition();
+				break;
+			}
+		}
+	}
+
+	/** OpenGL */
+	private void applyMovableObject(@NonNull LatLon newPosition) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
+			return;
+		}
+		int x = MapUtils.get31TileNumberX(newPosition.getLongitude());
+		int y = MapUtils.get31TileNumberY(newPosition.getLatitude());
+		QListMapMarker markers = mapMarkersCollection.getMarkers();
+		for (int i = 0; i < markers.size(); i++) {
+			net.osmand.core.jni.MapMarker m = markers.get(i);
+			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+				m.setPosition(new PointI(x, y));
+				m.setIsHidden(false);
+				movableObject = null;
+				break;
+			}
+		}
+	}
+
+	/** OpenGL */
+	private void cancelMovableObject() {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
+			return;
+		}
+		QListMapMarker markers = mapMarkersCollection.getMarkers();
+		for (int i = 0; i < markers.size(); i++) {
+			net.osmand.core.jni.MapMarker m = markers.get(i);
+			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+				m.setIsHidden(false);
+				movableObject = null;
+				break;
+			}
+		}
+	}
+
+	private @ColorInt int getColorByIndex(int colorIndex) {
+		int colorResId;
+		switch (colorIndex) {
+			case 1:
+				colorResId = R.color.marker_green;
+				break;
+			case 2:
+				colorResId = R.color.marker_orange;
+				break;
+			case 3:
+				colorResId = R.color.marker_red;
+				break;
+			case 4:
+				colorResId = R.color.marker_yellow;
+				break;
+			case 5:
+				colorResId = R.color.marker_teal;
+				break;
+			case 6:
+				colorResId = R.color.marker_purple;
+				break;
+			default:
+				colorResId = R.color.marker_blue;
+				break;
+		}
+		return getContext().getResources().getColor(colorResId, null);
 	}
 }

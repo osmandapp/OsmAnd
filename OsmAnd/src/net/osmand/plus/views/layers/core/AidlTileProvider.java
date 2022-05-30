@@ -64,7 +64,7 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 	private final Bitmap bigIconBgStale;
 
 
-	public AidlTileProvider(AidlMapLayer aidlMapLayer, float density, float y_offset) {
+	public AidlTileProvider(AidlMapLayer aidlMapLayer, float density, float yOffset) {
 		this.baseOrder = aidlMapLayer.getBaseOrder();
 		this.textVisible = true;
 		this.textStyle = aidlMapLayer.getTextStyle();
@@ -81,7 +81,7 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 		this.bigIconBgStale = aidlMapLayer.getBigIconBgStale();
 		this.smallIconBg = aidlMapLayer.getSmallIconBg();
 		this.offset = new PointI(0, 0);
-		this.bigIconOffset = new PointI(0, (int) y_offset);
+		this.bigIconOffset = new PointI(0, (int) yOffset);
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
