@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
 
 import android.graphics.drawable.Drawable;
 
@@ -36,7 +37,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 	private LatLon customLatLon;
 
 	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, boolean firstMarker) {
-		super(mapActivity);
+		super(mapActivity, firstMarker ? SIDE_MARKER_1 : SIDE_MARKER_2);
 		this.firstMarker = firstMarker;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 

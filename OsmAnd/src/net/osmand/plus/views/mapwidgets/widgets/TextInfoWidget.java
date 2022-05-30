@@ -16,7 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
-import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -38,12 +37,8 @@ public class TextInfoWidget extends MapWidget {
 	private Integer cachedAngularUnits = null;
 
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity) {
-		this(mapActivity, null);
-	}
-
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetState widgetState) {
-		super(mapActivity, widgetState);
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams params) {
+		super(mapActivity, params);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);

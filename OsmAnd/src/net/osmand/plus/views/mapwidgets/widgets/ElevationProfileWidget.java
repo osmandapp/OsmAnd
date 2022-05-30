@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
 import android.graphics.Typeface;
@@ -86,7 +87,7 @@ public class ElevationProfileWidget extends MapWidget {
 	};
 
 	public ElevationProfileWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, ELEVATION_PROFILE);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 	}

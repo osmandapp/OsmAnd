@@ -15,7 +15,7 @@ public class FPSTextInfoWidget extends TextInfoWidget {
 	private final OsmandMapTileView mapView;
 
 	public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, FPS);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(FPS);

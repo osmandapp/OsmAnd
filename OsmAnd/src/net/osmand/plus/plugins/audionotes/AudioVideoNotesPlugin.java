@@ -716,29 +716,29 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		MapWidget onRequestWidget = createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_ON_REQUEST, onRequestWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(onRequestWidget));
 
 		MapWidget audioWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_RECORD_AUDIO, audioWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(audioWidget));
 
 		MapWidget videoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_RECORD_VIDEO, videoWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(videoWidget));
 
 		MapWidget photoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_TAKE_PHOTO, photoWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(photoWidget));
 	}
 
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
 		switch (params) {
 			case AV_NOTES_ON_REQUEST:
-				return new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_CHOOSE);
+				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_CHOOSE);
 			case AV_NOTES_RECORD_AUDIO:
-				return new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_AUDIO);
+				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_AUDIO);
 			case AV_NOTES_RECORD_VIDEO:
-				return new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_VIDEO);
+				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_VIDEO);
 			case AV_NOTES_TAKE_PHOTO:
-				return new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_TAKEPICTURE);
+				return new AudioVideoNotesWidget(mapActivity, params, AV_DEFAULT_ACTION_TAKEPICTURE);
 		}
 		return null;
 	}

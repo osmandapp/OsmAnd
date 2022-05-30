@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.STREET_NAME;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -84,7 +85,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public StreetNameWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, STREET_NAME);
 
 		waypointHelper = app.getWaypointHelper();
 

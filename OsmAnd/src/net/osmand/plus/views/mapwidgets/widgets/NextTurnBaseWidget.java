@@ -7,18 +7,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.router.TurnType;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class NextTurnBaseWidget extends TextInfoWidget {
 
@@ -35,8 +35,8 @@ public class NextTurnBaseWidget extends TextInfoWidget {
 
 	private final TurnDrawable turnDrawable;
 
-	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
-		super(mapActivity);
+	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams params, boolean horizontalMini) {
+		super(mapActivity, params);
 		this.horizontalMini = horizontalMini;
 
 		topImageView = view.findViewById(R.id.widget_top_icon);

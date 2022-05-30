@@ -1,5 +1,11 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -12,9 +18,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public abstract class DistanceToPointWidget extends TextInfoWidget {
 
 	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
@@ -25,7 +28,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	private int cachedMeters;
 
 	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetParams widgetParams) {
-		super(mapActivity);
+		super(mapActivity, widgetParams);
 		this.view = mapActivity.getMapView();
 
 		setIcons(widgetParams);
@@ -78,7 +81,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	public static class DistanceToDestinationWidget extends DistanceToPointWidget {
 
 		public DistanceToDestinationWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity, WidgetParams.DISTANCE_TO_DESTINATION);
+			super(mapActivity, DISTANCE_TO_DESTINATION);
 		}
 
 		@Override
@@ -100,7 +103,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 		private final TargetPointsHelper targetPointsHelper;
 
 		public DistanceToIntermediateDestinationWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity, WidgetParams.INTERMEDIATE_DESTINATION);
+			super(mapActivity, INTERMEDIATE_DESTINATION);
 			targetPointsHelper = app.getTargetPointsHelper();
 		}
 

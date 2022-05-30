@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -10,10 +16,6 @@ import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class TripRecordingDistanceWidget extends TextInfoWidget {
 
 	private static final long BLINK_DELAY_MILLIS = 500;
@@ -23,7 +25,7 @@ public class TripRecordingDistanceWidget extends TextInfoWidget {
 	private long cachedLastUpdateTime;
 
 	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, TRIP_RECORDING_DISTANCE);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);

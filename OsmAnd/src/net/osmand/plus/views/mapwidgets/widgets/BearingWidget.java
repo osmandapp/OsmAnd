@@ -1,6 +1,13 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.TRUE_BEARING;
+
 import android.hardware.GeomagneticField;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -15,13 +22,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.TRUE_BEARING;
-
 public class BearingWidget extends TextInfoWidget {
 
 	private static final float MIN_SPEED = 1f;
@@ -33,13 +33,13 @@ public class BearingWidget extends TextInfoWidget {
 	private int cachedBearing;
 
 	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType) {
-		super(mapActivity);
+		super(mapActivity, bearingType.params);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 
 		setText(null, null);
-		setIcons(bearingType.widget);
-		setContentTitle(bearingType.widget.titleId);
+		setIcons(bearingType.params);
+		setContentTitle(bearingType.params.titleId);
 	}
 
 	@Override
@@ -148,10 +148,10 @@ public class BearingWidget extends TextInfoWidget {
 		MAGNETIC_BEARING(WidgetParams.MAGNETIC_BEARING),
 		TRUE_BEARING(WidgetParams.TRUE_BEARING);
 
-		public final WidgetParams widget;
+		public final WidgetParams params;
 
-		BearingType(@NonNull WidgetParams widget) {
-			this.widget = widget;
+		BearingType(@NonNull WidgetParams params) {
+			this.params = params;
 		}
 	}
 }

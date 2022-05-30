@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -63,7 +65,7 @@ public class CoordinatesWidget extends MapWidget {
 	}
 
 	public CoordinatesWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, COORDINATES);
 
 		locationProvider = app.getLocationProvider();
 

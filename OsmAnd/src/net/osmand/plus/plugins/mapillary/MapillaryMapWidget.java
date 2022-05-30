@@ -11,7 +11,7 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 public class MapillaryMapWidget extends TextInfoWidget {
 
 	public MapillaryMapWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, MAPILLARY);
 
 		setText(app.getString(R.string.mapillary), "");
 		setIcons(MAPILLARY);

@@ -1,16 +1,17 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
+
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class BatteryWidget extends TextInfoWidget {
 
@@ -19,7 +20,7 @@ public class BatteryWidget extends TextInfoWidget {
 	private long cachedTime = 0;
 
 	public BatteryWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, BATTERY);
 		setIcons(false);
 		setText(null, null);
 	}
@@ -50,7 +51,7 @@ public class BatteryWidget extends TextInfoWidget {
 		if (charging) {
 			setIcons(R.drawable.widget_battery_charging_day, R.drawable.widget_battery_charging_night);
 		} else {
-			setIcons(WidgetParams.BATTERY);
+			setIcons(BATTERY);
 		}
 	}
 }

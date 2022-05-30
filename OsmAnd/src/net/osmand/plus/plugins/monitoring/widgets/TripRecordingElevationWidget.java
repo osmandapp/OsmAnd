@@ -1,12 +1,17 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
+
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuType;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
@@ -16,17 +21,14 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 	private final SavingTrackHelper savingTrackHelper;
 
 	private double cachedElevationDiff = -1;
 
-	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams widgetParams) {
+		super(mapActivity, widgetParams);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
@@ -62,8 +64,8 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 	public static class TripRecordingUphillWidget extends TripRecordingElevationWidget {
 
 		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity);
-			setIcons(WidgetParams.TRIP_RECORDING_UPHILL);
+			super(mapActivity, TRIP_RECORDING_UPHILL);
+			setIcons(TRIP_RECORDING_UPHILL);
 		}
 
 		@Override
@@ -75,8 +77,8 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 	public static class TripRecordingDownhillWidget extends TripRecordingElevationWidget {
 
 		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity);
-			setIcons(WidgetParams.TRIP_RECORDING_DOWNHILL);
+			super(mapActivity, TRIP_RECORDING_DOWNHILL);
+			setIcons(TRIP_RECORDING_DOWNHILL);
 		}
 
 		@Override

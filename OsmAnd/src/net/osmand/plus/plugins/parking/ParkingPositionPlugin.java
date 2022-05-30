@@ -407,7 +407,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		MapWidget widget = createMapWidgetForParams(mapActivity, PARKING);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(PARKING, widget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget));
 	}
 
 	@Override

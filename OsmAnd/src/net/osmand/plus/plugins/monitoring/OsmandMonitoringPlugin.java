@@ -188,16 +188,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_DISTANCE, distanceWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(distanceWidget));
 
 		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_TIME, timeWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(timeWidget));
 
 		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_UPHILL, uphillWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(uphillWidget));
 
 		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_DOWNHILL, downhillWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(downhillWidget));
 	}
 
 	@Override

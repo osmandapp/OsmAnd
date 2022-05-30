@@ -196,53 +196,61 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	}
 
 	@NonNull
-	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, String widgetId) {
-		TextInfoWidget control = new TextInfoWidget(mapActivity) {
+	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
+		return new AidlTextInfoWidget(mapActivity, widgetId);
+	}
 
-			private boolean init = true;
-			private String cachedTxt;
-			private String cachedSubtext;
-			private Boolean cachedNight;
-			private Integer cachedIcon;
+	class AidlTextInfoWidget extends TextInfoWidget {
 
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
+		private final String widgetId;
+
+		private String cachedTxt;
+		private String cachedSubtext;
+		private Boolean cachedNight;
+		private Integer cachedIcon;
+		private boolean init = true;
+
+		public AidlTextInfoWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
+			super(mapActivity, null);
+			this.widgetId = widgetId;
+
+			updateInfo(null);
+			setOnClickListener(v -> {
 				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null) {
-					String txt = widget.getText();
-					String subtext = widget.getDescription();
-					boolean night = drawSettings != null && drawSettings.isNightMode();
-					int icon = AndroidUtils.getDrawableId(app, night ? widget.getDarkIconName() : widget.getLightIconName());
-					if (init || !Algorithms.objectEquals(txt, cachedTxt) || !Algorithms.objectEquals(subtext, cachedSubtext)
-							|| !Algorithms.objectEquals(night, cachedNight) || !Algorithms.objectEquals(icon, cachedIcon)) {
-						init = false;
-						cachedTxt = txt;
-						cachedSubtext = subtext;
-						cachedNight = night;
-						cachedIcon = icon;
-
-						setText(txt, subtext);
-						if (icon != 0) {
-							setImageDrawable(icon);
-						} else {
-							setImageDrawable(null);
-						}
-					}
-				} else {
-					setText(null, null);
-					setImageDrawable(null);
+				if (widget != null && widget.getIntentOnClick() != null) {
+					app.startActivity(widget.getIntentOnClick());
 				}
-			}
-		};
-		control.updateInfo(null);
+			});
+		}
 
-		control.setOnClickListener(v -> {
+		@Override
+		public void updateInfo(@Nullable DrawSettings drawSettings) {
 			AidlMapWidgetWrapper widget = widgets.get(widgetId);
-			if (widget != null && widget.getIntentOnClick() != null) {
-				app.startActivity(widget.getIntentOnClick());
+			if (widget != null) {
+				String txt = widget.getText();
+				String subtext = widget.getDescription();
+				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+				int icon = AndroidUtils.getDrawableId(app, nightMode ? widget.getDarkIconName() : widget.getLightIconName());
+				if (init || !Algorithms.objectEquals(txt, cachedTxt) || !Algorithms.objectEquals(subtext, cachedSubtext)
+						|| !Algorithms.objectEquals(nightMode, cachedNight) || !Algorithms.objectEquals(icon, cachedIcon)) {
+					init = false;
+					cachedTxt = txt;
+					cachedSubtext = subtext;
+					cachedNight = nightMode;
+					cachedIcon = icon;
+
+					setText(txt, subtext);
+					if (icon != 0) {
+						setImageDrawable(icon);
+					} else {
+						setImageDrawable(null);
+					}
+				}
+			} else {
+				setText(null, null);
+				setImageDrawable(null);
 			}
-		});
-		return control;
+		}
 	}
 
 	boolean addMapWidget(AidlMapWidgetWrapper widget) {

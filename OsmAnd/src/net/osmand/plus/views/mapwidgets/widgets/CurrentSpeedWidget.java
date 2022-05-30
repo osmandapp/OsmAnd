@@ -1,14 +1,15 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class CurrentSpeedWidget extends TextInfoWidget {
 
@@ -19,8 +20,8 @@ public class CurrentSpeedWidget extends TextInfoWidget {
 	private float cachedSpeed = 0;
 
 	public CurrentSpeedWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
-		setIcons(WidgetParams.CURRENT_SPEED);
+		super(mapActivity, CURRENT_SPEED);
+		setIcons(CURRENT_SPEED);
 		setText(null, null);
 	}
 

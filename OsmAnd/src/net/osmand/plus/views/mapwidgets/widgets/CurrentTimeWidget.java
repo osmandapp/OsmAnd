@@ -1,13 +1,14 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.text.format.DateFormat;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
 
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 public class CurrentTimeWidget extends TextInfoWidget {
 
@@ -16,8 +17,8 @@ public class CurrentTimeWidget extends TextInfoWidget {
 	private long cachedTime = 0;
 
 	public CurrentTimeWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
-		setIcons(WidgetParams.CURRENT_TIME);
+		super(mapActivity, CURRENT_TIME);
+		setIcons(CURRENT_TIME);
 		setText(null, null);
 	}
 

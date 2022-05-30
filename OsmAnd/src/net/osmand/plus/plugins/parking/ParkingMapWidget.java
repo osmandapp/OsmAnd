@@ -27,7 +27,7 @@ public class ParkingMapWidget extends TextInfoWidget {
 	private int cachedMeters = 0;
 
 	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, PARKING);
 		this.plugin = plugin;
 
 		setText(null, null);

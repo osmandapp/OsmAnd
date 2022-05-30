@@ -79,6 +79,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			registerAllControls(mapActivity);
 			recreateControls();
 		} else {
+			resetCashedTheme();
 			widgetRegistry.clearWidgets();
 
 			topWidgetsContainer = null;
@@ -87,14 +88,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 			mapRulerLayout = null;
 			androidAutoMapPlaceholderView = null;
 
+			drawSettings = null;
 			alarmControl = null;
 			rulerWidgets = null;
-
-			drawSettings = null;
-			themeId = -1;
-
 			topToolbarView = null;
 		}
+	}
+
+	private void resetCashedTheme() {
+		themeId = -1;
 	}
 
 	public void removeSideWidget(TextInfoWidget widget) {
@@ -152,6 +154,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
+		resetCashedTheme();
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);

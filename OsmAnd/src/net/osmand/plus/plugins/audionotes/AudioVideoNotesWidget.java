@@ -1,15 +1,5 @@
 package net.osmand.plus.plugins.audionotes;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.util.Algorithms;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
@@ -18,14 +8,25 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_AUDI
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_VIDEO;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_TAKE_PHOTO;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
+
 public class AudioVideoNotesWidget extends TextInfoWidget {
 
 	private final int actionId;
 
 	private Boolean cachedRecording;
 
-	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, int actionId) {
-		super(mapActivity);
+	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams params, int actionId) {
+		super(mapActivity, params);
 		this.actionId = actionId;
 
 		updateInfo(null);
