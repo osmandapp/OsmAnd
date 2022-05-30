@@ -1,42 +1,45 @@
 package net.osmand.plus.plugins.srtm;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.download.DownloadItem;
-import net.osmand.plus.download.SelectIndexesHelper;
-import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.callback.ProgressListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.List;
 
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.ContextMenuAdapter.*;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
@@ -51,11 +54,7 @@ public class ContourLinesMenu {
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
 		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
-		boolean nightMode = isNightMode(mapActivity.getMyApplication());
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
-		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		adapter.setProfileDependent(true);
-		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
@@ -105,15 +104,12 @@ public class ContourLinesMenu {
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 
 		OnRowItemClick l = new OnRowItemClick() {
-			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
-										  View view, int itemId, int pos) {
-				return super.onRowItemClick(adapter, view, itemId, pos);
-			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				int itemId = item.getTitleId();
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(new Runnable() {
 						@Override
@@ -131,11 +127,8 @@ public class ContourLinesMenu {
 					plugin.selectPropertyValue(mapActivity, contourLinesProp, pref, new Runnable() {
 						@Override
 						public void run() {
-							ContextMenuItem item = adapter.getItem(pos);
-							if (item != null) {
-								item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
-								adapter.notifyDataSetChanged();
-							}
+							item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
+							uiAdapter.onDataSetChanged();
 							mapActivity.refreshMapComplete();
 						}
 					});
@@ -143,11 +136,8 @@ public class ContourLinesMenu {
 					plugin.selectPropertyValue(mapActivity, colorSchemeProp, colorPref, new Runnable() {
 						@Override
 						public void run() {
-							ContextMenuItem item = adapter.getItem(pos);
-							if (item != null) {
-								item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
-								adapter.notifyDataSetChanged();
-							}
+							item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
+							uiAdapter.onDataSetChanged();
 							mapActivity.refreshMapComplete();
 						}
 					});
@@ -158,11 +148,8 @@ public class ContourLinesMenu {
 					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {
 						@Override
 						public void run() {
-							ContextMenuItem item = adapter.getItem(pos);
-							if (item != null) {
-								item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
-								adapter.notifyDataSetChanged();
-							}
+							item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
+							uiAdapter.onDataSetChanged();
 							mapActivity.refreshMapComplete();
 						}
 					});
@@ -170,11 +157,8 @@ public class ContourLinesMenu {
 					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref, new Runnable() {
 						@Override
 						public void run() {
-							ContextMenuItem item = adapter.getItem(pos);
-							if (item != null) {
-								item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
-								adapter.notifyDataSetChanged();
-							}
+							item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
+							uiAdapter.onDataSetChanged();
 							mapActivity.refreshMapComplete();
 						}
 					});
@@ -193,53 +177,55 @@ public class ContourLinesMenu {
 			toggleIconId = R.drawable.ic_action_hide;
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
 				.setIcon(toggleIconId)
 				.setColor(app, toggleIconColorId)
 				.setListener(l)
-				.setSelected(selected).createItem());
+				.setSelected(selected));
 		if (selected) {
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(showZoomLevelStringId, mapActivity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setIcon(R.drawable.ic_action_map_magnifier)
 					.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref))
-					.setListener(l).createItem());
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setListener(l));
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(colorSchemeStringId, mapActivity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setIcon(R.drawable.ic_action_appearance)
 					.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref))
-					.setListener(l).createItem());
+					.setListener(l));
 			if (contourWidthProp != null) {
-				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitle(contourWidthName)
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_action_gpx_width_thin)
 						.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref))
-						.setListener(l).createItem());
+						.setListener(l));
 			}
 			if (contourDensityProp != null) {
-				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitle(contourDensityName)
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_plugin_srtm)
 						.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref))
-						.setListener(l).createItem());
+						.setListener(l));
 			}
 		}
 
 		if (!srtmEnabled) {
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.srtm_purchase_header, mapActivity)
-					.setCategory(true).setLayout(R.layout.list_group_title_with_switch_light).createItem());
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
+					.setCategory(true)
+					.setTitleId(R.string.srtm_purchase_header, mapActivity)
+					.setLayout(R.layout.list_group_title_with_switch_light));
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.srtm_plugin_name, mapActivity)
 					.setLayout(R.layout.list_item_icon_and_right_btn)
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setColor(app, R.color.osmand_orange)
 					.setDescription(app.getString(R.string.shared_string_plugin))
-					.setListener(l).createItem());
+					.setListener(l));
 		} else {
 			final DownloadIndexesThread downloadThread = app.getDownloadThread();
 			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
@@ -250,11 +236,11 @@ public class ContourLinesMenu {
 
 			if (downloadThread.shouldDownloadIndexes()) {
 				contextMenuAdapter.addItem(createDownloadSrtmMapsItem(mapActivity));
-				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setLayout(R.layout.list_item_icon_and_download)
 						.setTitleId(R.string.downloading_list_indexes, mapActivity)
 						.setLoading(true)
-						.setListener(l).createItem());
+						.setListener(l));
 			} else {
 				try {
 					List<IndexItem> srtms = DownloadResources.findIndexItemsAt(
@@ -270,15 +256,18 @@ public class ContourLinesMenu {
 				}
 			}
 		}
+
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
+				.setLayout(R.layout.card_bottom_divider)
+				);
 	}
 
 	private static ContextMenuItem createDownloadSrtmMapsItem(MapActivity mapActivity) {
-		return new ContextMenuItem.ItemBuilder()
+		return new ContextMenuItem(null)
+				.setCategory(true)
 				.setTitleId(R.string.shared_string_download_map, mapActivity)
 				.setDescription(mapActivity.getString(R.string.srtm_menu_download_descr))
-				.setCategory(true)
-				.setLayout(R.layout.list_group_title_with_descr)
-				.createItem();
+				.setLayout(R.layout.list_group_title_with_descr);
 	}
 
 	@Nullable
@@ -299,53 +288,49 @@ public class ContourLinesMenu {
 		OsmandApplication app = mapActivity.getMyApplication();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 
-		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
+		ContextMenuItem item = new ContextMenuItem(null)
 				.setLayout(R.layout.list_item_icon_and_download)
 				.setTitle(srtmDownloadItem.getVisibleName(app, app.getRegions(), false))
 				.setDescription(DownloadActivityType.SRTM_COUNTRY_FILE.getString(app))
+				.setHideDivider(true)
 				.setIcon(DownloadActivityType.SRTM_COUNTRY_FILE.getIconResource())
 				.setListener(getOnSrtmItemClickListener(mapActivity, srtmDownloadItem))
 				.setProgressListener(getSrtmItemProgressListener(srtmDownloadItem, downloadThread));
 
 		if (srtmDownloadItem.isCurrentlyDownloading(downloadThread)) {
-			itemBuilder.setLoading(true)
+			item.setLoading(true)
 					.setProgress(downloadThread.getCurrentDownloadingItemProgress())
 					.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 		} else {
-			itemBuilder.setSecondaryIcon(R.drawable.ic_action_import);
+			item.setSecondaryIcon(R.drawable.ic_action_import);
 		}
 
-		return itemBuilder.createItem();
+		return item;
 	}
 
 	private static ItemClickListener getOnSrtmItemClickListener(MapActivity mapActivity,
 	                                                            SrtmDownloadItem srtmDownloadItem) {
-		return (adapter, itemId, position, isChecked, viewCoordinates) -> {
+		return (uiAdapter, view, item, isChecked) -> {
 
 			OsmandApplication app = mapActivity.getMyApplication();
 			DownloadIndexesThread downloadThread = app.getDownloadThread();
-			ContextMenuItem item = adapter.getItem(position);
 			IndexItem indexItem = srtmDownloadItem.getIndexItem(downloadThread);
 
 			if (downloadThread.isDownloading(indexItem)) {
 				downloadThread.cancelDownload(indexItem);
-				if (item != null) {
-					item.setProgress(ContextMenuItem.INVALID_ID);
-					item.setLoading(false);
-					item.setSecondaryIcon(R.drawable.ic_action_import);
-					adapter.notifyDataSetChanged();
-				}
+				item.setProgress(ContextMenuItem.INVALID_ID);
+				item.setLoading(false);
+				item.setSecondaryIcon(R.drawable.ic_action_import);
+				uiAdapter.onDataSetChanged();
 			} else {
 				DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
 				SelectIndexesHelper.showDialog(srtmDownloadItem, mapActivity, dateFormat, true, items -> {
 					IndexItem[] toDownload = new IndexItem[items.size()];
 					new DownloadValidationManager(app).startDownload(mapActivity, items.toArray(toDownload));
-					if (item != null) {
-						item.setProgress(ContextMenuItem.INVALID_ID);
-						item.setLoading(true);
-						item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-						adapter.notifyDataSetChanged();
-					}
+					item.setProgress(ContextMenuItem.INVALID_ID);
+					item.setLoading(true);
+					item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+					uiAdapter.onDataSetChanged();
 				});
 			}
 

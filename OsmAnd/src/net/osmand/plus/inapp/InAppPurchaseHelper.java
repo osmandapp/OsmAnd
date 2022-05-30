@@ -11,13 +11,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
-import net.osmand.plus.utils.AndroidNetworkUtils.Request;
-import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -29,6 +25,11 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.Request;
+import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -36,12 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -61,9 +59,7 @@ public abstract class InAppPurchaseHelper {
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
-
-	private static final String ANDROID_AUTO_START_DATE = "01.01.2022";
-	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
 	protected boolean isDeveloperVersion;
 	protected String token = "";
@@ -150,9 +146,13 @@ public abstract class InAppPurchaseHelper {
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
-	public static boolean isSubscribedToMaps(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_MAPS_PURCHASED.get();
+	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app) {
+		return isSubscribedToMaps(app, true);
+	}
+
+	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app)
+				|| app.getSettings().OSMAND_MAPS_PURCHASED.get();
 	}
 
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
@@ -181,29 +181,28 @@ public abstract class InAppPurchaseHelper {
 				|| isSubscribedToOsmAndPro(ctx);
 	}
 
-	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
+	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
 		long time = System.currentTimeMillis();
-		long calTime = getStartAndroidAutoTime();
-		if (time >= calTime) {
-			return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		long installTime = getInstallTime(app);
+		if (time >= installTime + ANDROID_AUTO_START_DATE_MS) {
+			return Version.isDeveloperBuild(app) || Version.isPaidVersion(app);
 		}
 		return true;
 	}
 
-	private static long getStartAndroidAutoTime() {
-		try {
-			Date date = SIMPLE_DATE_FORMAT.parse(ANDROID_AUTO_START_DATE);
-			if (date != null) {
-				return date.getTime();
-			}
-		} catch (ParseException e) {
-			LOG.error(e);
-		}
-		return 0;
+	private static long getInstallTime(@NonNull OsmandApplication app) {
+		AppInitializer initializer = app.getAppInitializer();
+		long updateVersionTime = initializer.getUpdateVersionTime();
+		long firstInstalledTime = initializer.getFirstInstalledTime();
+		return Math.max(updateVersionTime, firstInstalledTime);
 	}
 
-	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx) || ctx.getSettings().FULL_VERSION_PURCHASED.get();
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
+		return isFullVersionPurchased(app, true);
+	}
+
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app) || app.getSettings().FULL_VERSION_PURCHASED.get();
 	}
 
 	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication ctx) {

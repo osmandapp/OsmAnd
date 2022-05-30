@@ -9,25 +9,28 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
+import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.MapTileAdapter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.YandexTrafficAdapter;
@@ -39,56 +42,78 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public static final int OVERZOOM_IN = 2;
 	private static final int ADDITIONAL_TILE_CACHE = 3;
+	private static final int SHOWN_MAP_ZOOM_MAX = 20;
+	private static final int SHOWN_MAP_ZOOM_MIN = 1;
 
-	protected final boolean mainMap;
+	protected final boolean suggestOfflineMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
 
-	protected Paint paintBitmap;
+	protected Paint paintBitmap = null;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 
-	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
-	private boolean visible = true;
+
+	private boolean upscaleAllowed = true;
+
 	private boolean useSampling;
+	private boolean needUpdateProvider = true;
+	private boolean visible = true;
+	private boolean cachedVisible = true;
+	private int cachedAlpha = -1;
 	private StateChangedListener<Float> parameterListener;
 
-	public MapTileLayer(@NonNull Context context, boolean mainMap) {
+	public MapTileLayer(@NonNull Context context, boolean suggestOfflineMap) {
 		super(context);
-		this.mainMap = mainMap;
+		this.suggestOfflineMap = suggestOfflineMap;
+		this.settings = getApplication().getSettings();
+		this.resourceManager = getApplication().getResourceManager();
 	}
-	
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
-		settings = view.getSettings();
-		resourceManager = view.getApplication().getResourceManager();
-		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
+	public boolean isMapGestureAllowed(MapGestureType type) {
+		MapActivity mapActivity = getMapActivity();
+		boolean downloadingTiles = mapActivity != null && mapActivity.getDownloadTilesFragment() != null;
+		boolean rotatingOrTiltingMap = type == MapGestureType.TWO_POINTERS_ROTATION || type == MapGestureType.TWO_POINTERS_TILT;
+		return !(downloadingTiles && rotatingOrTiltingMap);
+	}
 
+	@Override
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
+
+		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
 		useSampling = Build.VERSION.SDK_INT < 28;
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
 		paintBitmap.setAlpha(getAlpha());
-		
+
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
 		}
+
+		needUpdateProvider = true;
 	}
-	
+
 	@Override
 	public void setAlpha(int alpha) {
 		super.setAlpha(alpha);
+
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
+	}
+
+	public void setUpscaleAllowed(boolean upscaleAllowed) {
+		this.upscaleAllowed = upscaleAllowed;
 	}
 
 	public void setupParameterListener() {
@@ -123,7 +148,6 @@ public class MapTileLayer extends BaseMapLayer {
 			if (paramType != ParameterType.UNDEFINED) {
 				CommonPreference<Float> paramStepPref = getParamStepPref();
 				if (paramStepPref != null) {
-					float step = paramStepPref.get();
 					float currentValue = Float.NaN;
 					String param = map.getUrlParameter(TileSourceManager.PARAMETER_NAME);
 					if (!Algorithms.isEmpty(param)) {
@@ -146,7 +170,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 
-	public void setMapTileAdapter(MapTileAdapter mapTileAdapter) {
+	public void setMapTileAdapter(@Nullable MapTileAdapter mapTileAdapter) {
 		if (this.mapTileAdapter == mapTileAdapter) {
 			return;
 		}
@@ -159,14 +183,15 @@ public class MapTileLayer extends BaseMapLayer {
 			mapTileAdapter.onInit();
 		}
 	}
-	
+
 	public void setMapForMapTileAdapter(ITileSource map, MapTileAdapter mapTileAdapter) {
 		if (mapTileAdapter == this.mapTileAdapter) {
 			this.map = map;
+			needUpdateProvider = true;
 		}
 	}
-	
-	public void setMap(ITileSource map) {
+
+	public void setMap(@Nullable ITileSource map) {
 		MapTileAdapter target = null;
 		if (map instanceof TileSourceTemplate) {
 			if (TileSourceManager.RULE_YANDEX_TRAFFIC.equals(map.getRule())) {
@@ -190,8 +215,9 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		this.map = map;
 		setMapTileAdapter(target);
+		needUpdateProvider = true;
 	}
-	
+
 	public MapTileAdapter getMapTileAdapter() {
 		return mapTileAdapter;
 	}
@@ -232,25 +258,72 @@ public class MapTileLayer extends BaseMapLayer {
 		return null;
 	}
 
+	private boolean setLayerProvider(@Nullable ITileSource map) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			int layerIndex = view.getLayerIndex(this);
+			if (map != null) {
+				TileSourceProxyProvider prov = new TileSourceProxyProvider(getApplication(), map);
+				mapRenderer.setMapLayerProvider(layerIndex, prov.instantiateProxy(true));
+				prov.swigReleaseOwnership();
+			} else {
+				mapRenderer.resetMapLayerProvider(layerIndex);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private void updateLayerProviderAlpha(int alpha) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+			mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+		}
+	}
+
 	@SuppressLint("WrongCall")
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if ((map == null && mapTileAdapter == null) || !visible) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		if (view == null) {
 			return;
 		}
-		if (mapTileAdapter != null) {
-			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
+		boolean visible = isVisible();
+		boolean visibleChanged = cachedVisible != visible;
+		cachedVisible = visible;
+
+		int alpha = getAlpha();
+		boolean alphaChanged = cachedAlpha != alpha;
+		cachedAlpha = alpha;
+
+		if (mapTileAdapter != null && visible) {
+			mapTileAdapter.onDraw(canvas, tilesRect, drawSettings);
 		}
-		drawTileMap(canvas, tileBox, drawSettings);
+
+		if (hasMapRenderer()) {
+			ITileSource map = visible ? this.map : null;
+			boolean providerUpdated = false;
+			if (needUpdateProvider) {
+				providerUpdated = setLayerProvider(map);
+				needUpdateProvider = false;
+			} else if (visibleChanged) {
+				providerUpdated = setLayerProvider(map);
+			}
+			if ((alphaChanged || providerUpdated) && map != null) {
+				updateLayerProviderAlpha(alpha);
+			}
+		} else if (visible) {
+			drawTileMap(canvas, tilesRect, drawSettings);
+		}
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		
 	}
 
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		ITileSource map = this.map; 
+		ITileSource map = this.map;
 		if (map == null) {
 			return;
 		}
@@ -289,17 +362,17 @@ public class MapTileLayer extends BaseMapLayer {
 				int y1 = tileBox.getPixYFromTileYNoRot(tileY - ellipticTileCorrection);
 				int y2 = tileBox.getPixYFromTileYNoRot(tileY + 1 - ellipticTileCorrection);
 				bitmapToDraw.set(x1, y1, x2 , y2);
-				
+
 				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
+				boolean imgExist = mgr.isTileDownloaded(ordImgTile, map, tileX, tileY, nzoom);
 				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalWillBeLoaded) {
 					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY,
 							nzoom, useInternet, drawSettings.mapRefreshTimestamp);
 				}
-				if (bmp == null) {
+				if (bmp == null && upscaleAllowed) {
 					int div = 1;
 					boolean readFromCache = originalWillBeLoaded || imgExist;
 					boolean loadIfExists = !readFromCache;
@@ -318,7 +391,7 @@ public class MapTileLayer extends BaseMapLayer {
 								break;
 							}
 						} else if (loadIfExists) {
-							if (mgr.tileExistOnFileSystem(imgTileId, map, x, y, zoom)
+							if (mgr.isTileDownloaded(imgTileId, map, x, y, zoom)
 									|| (useInternet && zoom <= maxLevel)) {
 								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, x, y,
 										zoom, useInternet, drawSettings.mapRefreshTimestamp);
@@ -335,8 +408,8 @@ public class MapTileLayer extends BaseMapLayer {
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
 						boolean useSampling = this.useSampling && kzoom > 3;
-						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0), 
-								Math.min(xZoom + tileSize / div, tileSize), 
+						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0),
+								Math.min(xZoom + tileSize / div, tileSize),
 								Math.min(yZoom + tileSize / div, tileSize));
 						if (!useSampling) {
 							canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
@@ -366,8 +439,8 @@ public class MapTileLayer extends BaseMapLayer {
 							Matrix m = new Matrix();
 							RectF dest = new RectF(0, 0, tileSize, tileSize);
 							m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
-							Bitmap sampled = Bitmap.createBitmap(bmp, 
-									bitmapToZoom.left, bitmapToZoom.top, 
+							Bitmap sampled = Bitmap.createBitmap(bmp,
+									bitmapToZoom.left, bitmapToZoom.top,
 									bitmapToZoom.width(), bitmapToZoom.height(), m, true);
 							bitmapToZoom.set(0, 0, tileSize, tileSize);
 							// very expensive that's why put in the cache
@@ -375,7 +448,7 @@ public class MapTileLayer extends BaseMapLayer {
 							canvas.drawBitmap(sampled, bitmapToZoom, bitmapToDraw, paintBitmap);
 						}
 					}
-				} else {
+				} else if (bmp != null) {
 					bitmapToZoom.set(0, 0, tileSize, tileSize);
 					canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 				}
@@ -384,42 +457,43 @@ public class MapTileLayer extends BaseMapLayer {
 				}
 			}
 		}
-		
-		if (mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
+
+		if (suggestOfflineMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
 			if (resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)) {
-				Toast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
+				getApplication().showToastMessage(R.string.switch_to_vector_map_to_see);
 				warningToSwitchMapShown++;
 			}
 		}
 	}
-	
+
 
 	@Override
 	public int getMaximumShownMapZoom() {
-		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;
+		return map == null ? SHOWN_MAP_ZOOM_MAX : map.getMaximumZoomSupported() + OVERZOOM_IN;
 	}
-	
+
 	@Override
 	public int getMinimumShownMapZoom() {
-		return map == null ? 1 : map.getMinimumZoomSupported();
+		return map == null ? SHOWN_MAP_ZOOM_MIN : map.getMinimumZoomSupported();
 	}
-		
+
 	@Override
 	public void destroyLayer() {
 		setMapTileAdapter(null);
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);
 		}
+		setLayerProvider(null);
 	}
 
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
 	public ITileSource getMap() {
 		return map;
 	}

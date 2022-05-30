@@ -1,6 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import net.osmand.plus.track.TrackDrawInfo;
 
 public class DirectionArrowsCard extends MapBaseCard {
 
-	private TrackDrawInfo trackDrawInfo;
+	private final TrackDrawInfo trackDrawInfo;
 
 	public DirectionArrowsCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
@@ -36,19 +35,12 @@ public class DirectionArrowsCard extends MapBaseCard {
 		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(trackDrawInfo.isShowArrows());
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !compoundButton.isChecked();
-				compoundButton.setChecked(checked);
-				trackDrawInfo.setShowArrows(checked);
-				mapActivity.refreshMap();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(DirectionArrowsCard.this);
-				}
-			}
+		view.setOnClickListener(v -> {
+			boolean checked = !compoundButton.isChecked();
+			compoundButton.setChecked(checked);
+			trackDrawInfo.setShowArrows(checked);
+			mapActivity.refreshMap();
+			notifyCardPressed();
 		});
 	}
 }

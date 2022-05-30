@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -47,7 +49,7 @@ public class ListStringPreference extends StringPreference {
 	public boolean containsValue(ApplicationMode appMode, String res) {
 		String vl = getModeValue(appMode);
 		String r = res + delimiter;
-		return vl.startsWith(r) || vl.contains(delimiter + r);
+		return vl != null && (vl.startsWith(r) || vl.contains(delimiter + r));
 	}
 
 	public boolean removeValue(String res) {
@@ -72,10 +74,12 @@ public class ListStringPreference extends StringPreference {
 		return false;
 	}
 
+	@Nullable
 	public List<String> getStringsList() {
 		return getStringsListForProfile(getApplicationMode());
 	}
 
+	@Nullable
 	public List<String> getStringsListForProfile(ApplicationMode appMode) {
 		final String listAsString = getModeValue(appMode);
 		if (listAsString != null) {

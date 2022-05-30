@@ -6,6 +6,10 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
@@ -15,6 +19,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay.GeometryAnchorWayStyle;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay.GeometryTransportWayStyle;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,6 +52,42 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 			attrsPT.drawPath(canvas, path);
 		} else {
 			super.drawPath(canvas, pathData);
+		}
+	}
+
+	@Override
+	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
+		int lineId = LINE_ID;
+		int outlineId = OUTLINE_ID;
+		GeometryWayStyle<?> prevStyle = null;
+		List<DrawPathData31> dataArr = new ArrayList<>();
+		RenderingLineAttributes attrsPT = getContext().getAttrsPT();
+		float width = attrsPT.paint.getStrokeWidth();
+		float outlineWidth = attrsPT.paint2.getStrokeWidth();
+		for (DrawPathData31 data : pathsData) {
+			if (prevStyle != null && (!Algorithms.objectEquals(data.style, prevStyle) || data.style.isUnique())) {
+				if (prevStyle instanceof GeometryTransportWayStyle) {
+					buildVectorOutline(collection, baseOrder--, outlineId++, prevStyle.getStrokeColor(0),
+							outlineWidth, outlineWidth - width, dataArr);
+					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, prevStyle,
+							prevStyle.getColor(0), width, null, false, dataArr);
+				} else {
+					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
+				}
+				dataArr.clear();
+			}
+			prevStyle = data.style;
+			dataArr.add(data);
+		}
+		if (!dataArr.isEmpty() && prevStyle != null) {
+			if (prevStyle instanceof GeometryTransportWayStyle) {
+				buildVectorOutline(collection, baseOrder--, outlineId, prevStyle.getStrokeColor(0),
+						outlineWidth, outlineWidth - width, dataArr);
+				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, prevStyle,
+						prevStyle.getColor(0), width, null, false, dataArr);
+			} else {
+				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
+			}
 		}
 	}
 
@@ -204,21 +245,29 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 			return (GeometryTransportWayStyle) style;
 		}
 
+		@Nullable
+		@Override
+		protected Bitmap getPointBitmap() {
+			return smallPoint
+					? getTransportWayStyle().getStopSmallBitmap()
+					: getTransportWayStyle().getStopBitmap();
+		}
 
 		@Override
-		void draw(Canvas canvas, GeometryWayContext context) {
-			Bitmap stopBitmap = smallPoint ?
-					getTransportWayStyle().getStopSmallBitmap() : getTransportWayStyle().getStopBitmap();
-			float paintH2 = stopBitmap.getHeight() / 2f;
-			float paintW2 = stopBitmap.getWidth() / 2f;
+		protected void draw(@NonNull Canvas canvas, @NonNull GeometryWayContext context) {
+			Bitmap stopBitmap = getPointBitmap();
+			if (stopBitmap != null) {
+				float paintH2 = stopBitmap.getHeight() / 2f;
+				float paintW2 = stopBitmap.getWidth() / 2f;
 
-			Matrix matrix = getMatrix();
-			matrix.reset();
-			matrix.postRotate(0f, paintW2, paintH2);
-			matrix.postTranslate(x - paintW2, y - paintH2);
-			Paint paint = context.getPaintIconCustom();
-			paint.setColorFilter(null);
-			canvas.drawBitmap(stopBitmap, matrix, paint);
+				Matrix matrix = getMatrix();
+				matrix.reset();
+				matrix.postRotate(0f, paintW2, paintH2);
+				matrix.postTranslate(x - paintW2, y - paintH2);
+				Paint paint = context.getPaintIconCustom();
+				paint.setColorFilter(null);
+				canvas.drawBitmap(stopBitmap, matrix, paint);
+			}
 		}
 	}
 }

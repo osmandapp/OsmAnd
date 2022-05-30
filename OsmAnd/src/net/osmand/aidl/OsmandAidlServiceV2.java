@@ -28,10 +28,12 @@ import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
+import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.customization.ProfileSettingsParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.SetWidgetsParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
+import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.favorite.AFavorite;
 import net.osmand.aidlapi.favorite.AddFavoriteParams;
 import net.osmand.aidlapi.favorite.RemoveFavoriteParams;
@@ -51,7 +53,9 @@ import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.lock.SetLockStateParams;
+import net.osmand.aidlapi.logcat.ALogcatListenerParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.SetLocationParams;
 import net.osmand.aidlapi.map.SetMapLocationParams;
@@ -113,6 +117,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_LOGCAT_MESSAGE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
@@ -1457,6 +1462,85 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 			}
 			return false;
+		}
+
+		@Override
+		public boolean exitApp(ExitAppParams params) {
+			try {
+				OsmandAidlApi api = getApi("exitApp");
+				return api != null && api.exitApp(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getText(GetTextParams params) {
+			try {
+				OsmandAidlApi api = getApi("getText");
+				return api != null && api.getText(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean reloadIndexes() {
+			try {
+				OsmandAidlApi api = getApi("reloadIndexes");
+				return api != null && api.reloadIndexes();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean setPreference(PreferenceParams params) {
+			try {
+				OsmandAidlApi api = getApi("setPreference");
+				return api != null && api.setPreference(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getPreference(PreferenceParams params) {
+			try {
+				OsmandAidlApi api = getApi("getPreference");
+				return api != null && api.getPreference(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public long registerForLogcatMessages(ALogcatListenerParams params, IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForLogcatMessages");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.stopLogcatTask(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_LOGCAT_MESSAGE);
+						String filterLevel = params.getFilterLevel();
+						api.registerLogcatListener(id, filterLevel);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
 		}
 	};
 

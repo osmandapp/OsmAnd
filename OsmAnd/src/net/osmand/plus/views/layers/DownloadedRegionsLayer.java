@@ -20,28 +20,30 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -62,7 +64,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
 	private Paint paintSelected;
@@ -129,7 +130,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		app = view.getApplication();
 		rm = app.getResourceManager();
 		osmandRegions = rm.getOsmandRegions();
@@ -176,8 +178,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			@Override
-			protected List<BinaryMapDataObject> calculateResult(RotatedTileBox tileBox) {
-				return queryData(tileBox);
+			protected List<BinaryMapDataObject> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				return queryData(latLonBounds, zoom);
 			}
 		};
 	}
@@ -371,20 +373,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return new File(fileDir, regionName).exists() || new File(fileDir, roadsRegionName).exists();
 	}
 
-	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
-		if (tileBox.getZoom() >= ZOOM_AFTER_BASEMAP) {
-			if (!checkIfMapEmpty(tileBox)) {
+	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
+		if (zoom >= ZOOM_AFTER_BASEMAP) {
+			if (!checkIfMapEmpty(zoom)) {
 				return Collections.emptyList();
 			}
 		}
-		LatLon lt = tileBox.getLeftTopLatLon();
-		LatLon rb = tileBox.getRightBottomLatLon();
 
 		List<BinaryMapDataObject> result;
-		int left = MapUtils.get31TileNumberX(Math.min(lt.getLongitude(), rb.getLongitude()));
-		int right = MapUtils.get31TileNumberX(Math.max(lt.getLongitude(), rb.getLongitude()));
-		int top = MapUtils.get31TileNumberY(Math.max(lt.getLatitude(), rb.getLatitude()));
-		int bottom = MapUtils.get31TileNumberY(Math.min(lt.getLatitude(), rb.getLatitude()));
+		int left = MapUtils.get31TileNumberX(latLonBounds.left);
+		int right = MapUtils.get31TileNumberX(latLonBounds.right);
+		int top = MapUtils.get31TileNumberY(latLonBounds.top);
+		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 
 		try {
 			result = osmandRegions.query(left, right, top, bottom, false);
@@ -395,7 +395,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		Iterator<BinaryMapDataObject> it = result.iterator();
 		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
-			if (tileBox.getZoom() >= ZOOM_TO_SHOW_SELECTION) {
+			if (zoom >= ZOOM_TO_SHOW_SELECTION) {
 				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
 					it.remove();
 				}
@@ -405,10 +405,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return result;
 	}
 
-	private boolean checkIfMapEmpty(RotatedTileBox tileBox) {
+	private boolean checkIfMapEmpty(int zoom) {
 		int cState = rm.getRenderer().getCheckedRenderedState();
 		final boolean empty;
-		if (tileBox.getZoom() < ZOOM_AFTER_BASEMAP) {
+		if (zoom < ZOOM_AFTER_BASEMAP) {
 			empty = cState == 0;
 		} else {
 			empty = cState <= 1;
@@ -481,7 +481,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -521,10 +521,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);
 			return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-					view.getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
+					getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
 		}
 		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-				view.getContext().getString(R.string.shared_string_map), "");
+				getContext().getString(R.string.shared_string_map), "");
 	}
 
 	@Override
@@ -556,7 +556,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION
 				&& data.getResults() != null && osmandRegions.isInitialized()) {
-			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
+			LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, point.x, point.y);
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
 

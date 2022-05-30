@@ -1,19 +1,11 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,41 +14,53 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int UPDATE_MAP_ITEM_ORDER = 12300;
 	private static final int DOWNLOAD_MAP_ITEM_ORDER = 12600;
+	private static final float ZORDER_UNDERLAY = -0.5f;
+	private static final float ZORDER_OVERLAY = 0.7f;
 
 	private final OsmandSettings settings;
 
@@ -104,15 +108,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		final CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
 		final CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty("hideWaterPolygons");
-		underlayListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				app.runInUIThread(() -> {
-					hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-					hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-				});
-			}
-		};
+		underlayListener = change -> app.runInUIThread(() -> {
+			hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+			hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+		});
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -123,22 +122,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers(@NonNull Context context) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (underlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(underlayLayer);
+			mapView.removeLayer(underlayLayer);
 		}
 		if (overlayLayer != null) {
-			app.getOsmandMap().getMapView().removeLayer(overlayLayer);
+			mapView.removeLayer(overlayLayer);
 		}
 		underlayLayer = new MapTileLayer(context, false);
-		// mapView.addLayer(underlayLayer, -0.5f);
 		overlayLayer = new MapTileLayer(context, false);
-		overlayLayerListener = new StateChangedListener<Integer>() {
-			@Override
-			public void stateChanged(Integer change) {
-				app.runInUIThread(() -> overlayLayer.setAlpha(change));
-			}
-		};
-		// mapView.addLayer(overlayLayer, 0.7f);
+		overlayLayerListener = change -> app.runInUIThread(() -> overlayLayer.setAlpha(change));
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(overlayLayerListener);
 	}
 
@@ -156,13 +149,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		overlayLayer.updateParameter();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
-			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, ZORDER_OVERLAY, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
 		}
 		if (isActive()) {
-			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
@@ -193,7 +186,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (!Algorithms.objectEquals(overlay, layer.getMap())) {
 			if (overlay == null) {
 				mapView.removeLayer(layer);
-			} else if (!mapView.isLayerVisible(layer) && mapView.getMapRenderer() == null) {
+			} else if (!mapView.isLayerExists(layer)) {
 				mapView.addLayer(layer, layerOrder);
 			}
 			layer.setMap(overlay);
@@ -287,14 +280,17 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+		ItemClickListener listener = new OnRowItemClick() {
+
 			@Override
-			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && !mapActivity.isFinishing()) {
 					int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
+					int itemId = item.getTitleId();
 					if (itemId == R.string.layer_overlay) {
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
 						return false;
@@ -307,27 +303,27 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity == null || mapActivity.isFinishing()) {
 					return false;
 				}
+				int itemId = item.getTitleId();
 				if (itemId == R.string.layer_overlay) {
 					toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
 							canceled -> {
 								MapActivity mapActv = mapActivityRef.get();
 								if (mapActv != null && !mapActv.isFinishing()) {
-									ContextMenuItem item = adapter.getItem(pos);
-									if (item != null) {
-										String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
-										boolean hasOverlayDescription = overlayMapDescr != null;
-										overlayMapDescr = hasOverlayDescription ? overlayMapDescr
-												: mapActv.getString(R.string.shared_string_none);
-										item.setDescription(overlayMapDescr);
-										item.setSelected(hasOverlayDescription);
-										item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-										adapter.notifyDataSetChanged();
-									}
+									String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
+									boolean hasOverlayDescription = overlayMapDescr != null;
+									overlayMapDescr = hasOverlayDescription ? overlayMapDescr
+											: mapActv.getString(R.string.shared_string_none);
+									item.setDescription(overlayMapDescr);
+									item.setSelected(hasOverlayDescription);
+									item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									uiAdapter.onDataSetChanged();
 								}
 							});
 					return false;
@@ -336,23 +332,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							canceled -> {
 								MapActivity mapActv = mapActivityRef.get();
 								if (mapActv != null && !mapActv.isFinishing()) {
-									ContextMenuItem item = adapter.getItem(pos);
-									if (item != null) {
-										String underlayMapDescr = settings.MAP_UNDERLAY.get();
+									String underlayMapDescr = settings.MAP_UNDERLAY.get();
 
-										boolean hasUnderlayDescription = underlayMapDescr != null;
-										underlayMapDescr = hasUnderlayDescription
-												? underlayMapDescr
-												: mapActv.getString(R.string.shared_string_none);
+									boolean hasUnderlayDescription = underlayMapDescr != null;
+									underlayMapDescr = hasUnderlayDescription
+											? underlayMapDescr
+											: mapActv.getString(R.string.shared_string_none);
 
-										item.setDescription(underlayMapDescr);
-										item.setSelected(hasUnderlayDescription);
-										item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									item.setDescription(underlayMapDescr);
+									item.setSelected(hasUnderlayDescription);
+									item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									uiAdapter.onDataSetChanged();
 
-										adapter.notifyDataSetChanged();
-
-										mapActv.refreshMapComplete();
-									}
+									mapActv.refreshMapComplete();
 								}
 							});
 					return false;
@@ -377,74 +369,61 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		boolean hasOverlayDescription = overlayMapDescr != null;
 		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
-				.setId(OVERLAY_MAP)
+		adapter.addItem(new ContextMenuItem(OVERLAY_MAP)
+				.setTitleId(R.string.layer_overlay, mapActivity)
 				.setDescription(overlayMapDescr)
 				.setSelected(hasOverlayDescription)
 				.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setItemDeleteAction(makeDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY))
-				.createItem());
+				.setItemDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY));
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
 		if (underlayMapDescr != null && underlayMapDescr.contains(".sqlitedb")) {
 			underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
 		}
 		boolean hasUnderlayDescription = underlayMapDescr != null;
 		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
-				.setId(UNDERLAY_MAP)
+		adapter.addItem(new ContextMenuItem(UNDERLAY_MAP)
+				.setTitleId(R.string.layer_underlay, mapActivity)
 				.setDescription(underlayMapDescr)
 				.setSelected(hasUnderlayDescription)
 				.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
-				.setItemDeleteAction(makeDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS))
-				.createItem());
+				.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS));
 	}
 
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
-											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          final double latitude, final double longitude,
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
-			ContextMenuItem.ItemBuilder updateMapItemBuilder = new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
-					.setId(MAP_CONTEXT_MENU_UPDATE_MAP)
-					.setIcon(R.drawable.ic_action_refresh_dark)
-					.setOrder(UPDATE_MAP_ITEM_ORDER);
-
-			ContextMenuItem.ItemBuilder downloadMapItemBuilder = new ContextMenuItem.ItemBuilder()
+			ContextMenuItem item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
-					.setId(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
 					.setIcon(R.drawable.ic_action_import)
 					.setOrder(DOWNLOAD_MAP_ITEM_ORDER);
 
 			if (mapTileLayer) {
 				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-				ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
+				ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
 					MapActivity mapActivity1 = mapActivityRef.get();
-					if (mapActivity1 != null && !mapActivity1.isFinishing()) {
-						OsmandMapTileView mapView = mapActivity1.getMapView();
-						if (resId == R.string.context_menu_item_update_map) {
-							mapActivity1.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
-						} else if (resId == R.string.shared_string_download_map) {
-							DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity1, (OsmandApplication) mapActivity1.getApplication(), mapView);
-							dlg.openDialog();
+					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
+						OsmandApplication app = mapActivity1.getMyApplication();
+						if (DownloadTilesFragment.shouldShowDialog(app)) {
+							DownloadTilesFragment.showInstance(mapActivity1.getSupportFragmentManager());
+						} else {
+							app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
 						}
 					}
 					return true;
 				};
-				updateMapItemBuilder.setListener(listener);
-				downloadMapItemBuilder.setListener(listener);
+				item.setListener(listener);
 			}
-
-			adapter.addItem(updateMapItemBuilder.createItem());
-			adapter.addItem(downloadMapItemBuilder.createItem());
+			adapter.addItem(item);
 		}
 	}
 

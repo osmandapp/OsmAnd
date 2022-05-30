@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -18,6 +16,8 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 public class SplitIntervalCard extends MapBaseCard {
@@ -52,15 +52,7 @@ public class SplitIntervalCard extends MapBaseCard {
 		TextView descriptionView = view.findViewById(R.id.description);
 		descriptionView.setText(spannableSplitInterval);
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(SplitIntervalCard.this);
-				}
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 
 	private String getSplitInterval() {
@@ -69,7 +61,7 @@ public class SplitIntervalCard extends MapBaseCard {
 		if (splitInterval == 0) {
 			intervalStr = GpxSplitType.NO_SPLIT.getHumanString(app);
 		} else if (trackDrawInfo.getSplitType() == GpxSplitType.DISTANCE.getType()) {
-			intervalStr = OsmAndFormatter.getFormattedDistanceInterval(app, trackDrawInfo.getSplitInterval());
+			intervalStr = OsmAndFormatter.getFormattedDistanceInterval(app, trackDrawInfo.getSplitInterval(), false);
 		} else if (trackDrawInfo.getSplitType() == GpxSplitType.TIME.getType()) {
 			intervalStr = OsmAndFormatter.getFormattedTimeInterval(app, splitInterval);
 		}

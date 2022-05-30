@@ -11,9 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -22,14 +23,17 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.ui.EditFavoriteGroupDialogFragment;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.openplacereviews.OPRConstants;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -38,6 +42,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -250,6 +256,16 @@ public class IntentHelper {
 				}
 				mapActivity.setIntent(null);
 			}
+			if (intent.hasExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY)) {
+				String groupName = intent.getStringExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY);
+				FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, groupName));
+
+				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup() : null;
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				FavouriteGroupEditorFragment.showInstance(manager, pointsGroup, null, true);
+
+				mapActivity.setIntent(null);
+			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:
@@ -257,7 +273,7 @@ public class IntentHelper {
 						break;
 
 					case BaseSettingsFragment.SCREEN_CONFIG:
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+						ConfigureScreenFragment.showInstance(mapActivity);
 						break;
 				}
 				mapActivity.setIntent(null);

@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -18,20 +17,17 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 	public static final String TAG = CoordinatesFormatFragment.class.getSimpleName();
-
-	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
-	private static final String MGRS_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Military_Grid_Reference_System";
 
 	private static final String FORMAT_DEGREES = "format_degrees";
 	private static final String FORMAT_MINUTES = "format_minutes";
@@ -108,7 +104,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
+						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_utm_format, isNightMode());
 					}
 				}
 
@@ -138,7 +134,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(MGRS_FORMAT_WIKI_LINK), isNightMode());
+						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_mgrs_format, isNightMode());
 					}
 				}
 

@@ -835,7 +835,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			if (activity instanceof MapActivity) {
-				((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 				((MapActivity) activity).updateApplicationModeSettings();
 			}
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();

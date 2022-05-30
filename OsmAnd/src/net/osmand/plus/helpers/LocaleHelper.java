@@ -5,45 +5,63 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class LocaleHelper {
 
 	private final OsmandApplication app;
 
-	private Locale defaultLocale;
+	private final Locale defaultLocale;
 	private Locale preferredLocale;
 	private Resources localizedResources;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.defaultLocale = Locale.getDefault();
 	}
 
 	public void checkPreferredLocale() {
 		Configuration config = app.getBaseContext().getResources().getConfiguration();
 
 		String pl = app.getSettings().PREFERRED_LOCALE.get();
-		String[] split = pl.split("_");
-		String lang = split[0];
-		String country = (split.length > 1) ? split[1] : "";
+		String[] splitScript = pl.split("\\+");
+		String script = (splitScript.length > 1) ? splitScript[1] : "";
+		String[] splitCountry = splitScript[0].split("_");
+		String lang = splitCountry[0];
+		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
 
-		if (defaultLocale == null) {
-			defaultLocale = Locale.getDefault();
-		}
 		if (!Algorithms.isEmpty(lang)) {
-			if (!Algorithms.isEmpty(country)) {
-				preferredLocale = new Locale(lang, country);
-			} else {
-				preferredLocale = new Locale(lang);
+			Locale.Builder builder = new Locale.Builder();
+			boolean isLocaleCorrect = false;
+			String langLowerCase = lang.toLowerCase();
+			for (String locale : Locale.getISOLanguages()) {
+				if (locale.toLowerCase().equals(langLowerCase)) {
+					isLocaleCorrect = true;
+					break;
+				}
 			}
+			if (isLocaleCorrect) {
+				builder.setLanguage(lang);
+			} else {
+				lang = "";
+			}
+			if (!Algorithms.isEmpty(country)) {
+				builder.setRegion(country);
+			}
+			if (!Algorithms.isEmpty(script)) {
+				builder.setScript(script);
+			}
+			preferredLocale = builder.build();
 		}
+
 		Locale selectedLocale = null;
 
 		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
@@ -52,9 +70,10 @@ public class LocaleHelper {
 			selectedLocale = defaultLocale;
 			preferredLocale = null;
 		}
+
+		updateTimeFormatting(selectedLocale != null ? selectedLocale : Locale.getDefault());
 		if (selectedLocale != null) {
 			Locale.setDefault(selectedLocale);
-			updateOpeningHoursParser(selectedLocale);
 			config.locale = selectedLocale;
 			config.setLayoutDirection(selectedLocale);
 
@@ -67,23 +86,24 @@ public class LocaleHelper {
 	}
 
 	public void setLanguage(@NonNull Context context) {
+		Locale newLocale = null;
 		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
 			String lang = preferredLocale.getLanguage();
-			if (!Algorithms.isEmpty(lang) && !config.locale.getLanguage().equals(lang)) {
-				preferredLocale = new Locale(lang);
+			boolean localeChanged = !config.locale.equals(preferredLocale);
+			if (!Algorithms.isEmpty(lang) && localeChanged) {
 				Locale.setDefault(preferredLocale);
-				updateOpeningHoursParser(preferredLocale);
 				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+				newLocale = defaultLocale;
 				Locale.setDefault(defaultLocale);
-				updateOpeningHoursParser(defaultLocale);
 				config.locale = defaultLocale;
 				Resources resources = app.getBaseContext().getResources();
 				resources.updateConfiguration(config, resources.getDisplayMetrics());
 			}
 		}
+		updateTimeFormatting(newLocale != null ? newLocale : Locale.getDefault());
 	}
 
 	@Nullable
@@ -96,7 +116,7 @@ public class LocaleHelper {
 		return preferredLocale;
 	}
 
-	@Nullable
+	@NonNull
 	public Locale getDefaultLocale() {
 		return defaultLocale;
 	}
@@ -121,7 +141,28 @@ public class LocaleHelper {
 		return lang;
 	}
 
-	private void updateOpeningHoursParser(@NonNull Locale locale) {
-		OpeningHoursParser.setTwelveHourFormattingEnabled(!DateFormat.is24HourFormat(app), locale);
+	public void updateTimeFormatting() {
+		updateTimeFormatting(Locale.getDefault());
+	}
+
+	public void updateTimeFormatting(@NonNull Locale locale) {
+		updateTimeFormatting(!DateFormat.is24HourFormat(app), locale);
+	}
+
+	public void updateTimeFormatting(boolean twelveHoursFormatting, @NonNull Locale locale) {
+		OpeningHoursParser.initLocalStrings(locale);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(twelveHoursFormatting, locale);
+		OsmAndFormatter.setTwelveHoursFormatting(twelveHoursFormatting, locale);
+	}
+
+	public Resources getLocalizedResources(@NonNull String language) {
+		return getLocalizedContext(new Locale(language)).getResources();
+	}
+
+	public Context getLocalizedContext(@NonNull Locale locale) {
+		Configuration configuration = app.getResources().getConfiguration();
+		configuration = new Configuration(configuration);
+		configuration.setLocale(locale);
+		return app.createConfigurationContext(configuration);
 	}
 }

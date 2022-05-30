@@ -16,7 +16,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
+import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -61,10 +61,14 @@ public class LauncherShortcutsHelper {
 			}
 
 			@Override
-			public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+			public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
+			}
+
+			@Override
+			public void onFavoritePropertiesUpdated() {
 			}
 		};
-		app.getFavorites().addListener(favoritesListener);
+		app.getFavoritesHelper().addListener(favoritesListener);
 	}
 
 	public void updateLauncherShortcuts() {
@@ -130,12 +134,12 @@ public class LauncherShortcutsHelper {
 
 		String shortcutId = uri.getQueryParameter("id");
 		if (Shortcut.NAVIGATE_TO_HOME.id.equals(shortcutId)) {
-			FavouritePoint home = app.getFavorites().getSpecialPoint(SpecialPointType.HOME);
+			FavouritePoint home = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.HOME);
 			if (home != null) {
 				navigateTo(mapActivity, home);
 			}
 		} else if (Shortcut.NAVIGATE_TO_WORK.id.equals(shortcutId)) {
-			FavouritePoint work = app.getFavorites().getSpecialPoint(SpecialPointType.WORK);
+			FavouritePoint work = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.WORK);
 			if (work != null) {
 				navigateTo(mapActivity, work);
 			}
@@ -207,10 +211,10 @@ public class LauncherShortcutsHelper {
 			if (this == START_RECORDING) {
 				return missing && OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
 			} else if (this == NAVIGATE_TO_HOME) {
-				boolean hasHome = app.getFavorites().getSpecialPoint(SpecialPointType.HOME) != null;
+				boolean hasHome = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.HOME) != null;
 				return missing && hasHome;
 			} else if (this == NAVIGATE_TO_WORK) {
-				boolean hasWork = app.getFavorites().getSpecialPoint(SpecialPointType.WORK) != null;
+				boolean hasWork = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.WORK) != null;
 				return missing && hasWork;
 			}
 			return missing;
@@ -223,7 +227,7 @@ public class LauncherShortcutsHelper {
 				return true;
 			} else if (this == NAVIGATE_TO_HOME || this == NAVIGATE_TO_WORK) {
 				SpecialPointType pointType = this == NAVIGATE_TO_HOME ? SpecialPointType.HOME : SpecialPointType.WORK;
-				return app.getFavorites().getSpecialPoint(pointType) == null;
+				return app.getFavoritesHelper().getSpecialPoint(pointType) == null;
 			}
 			return false;
 		}

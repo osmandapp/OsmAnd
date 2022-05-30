@@ -1,5 +1,5 @@
 ---
-name: "\U0001F6A9 Routing report"
+name: "🚩 Routing report"
 about: Report a routing issue in OsmAnd
 ---
 

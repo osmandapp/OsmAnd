@@ -25,6 +25,8 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 public class TargetPointsHelper {
 
 	private final OsmandApplication ctx;
@@ -346,9 +348,10 @@ public class TargetPointsHelper {
 		return res;
 	}
 
+	@NonNull
 	public List<TargetPoint> getIntermediatePointsWithTarget() {
 		List<TargetPoint> res = new ArrayList<>(this.intermediatePoints);
-		if(pointToNavigate != null) {
+		if (pointToNavigate != null) {
 			res.add(pointToNavigate);
 		}
 		return res;

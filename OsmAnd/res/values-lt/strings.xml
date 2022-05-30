@@ -616,7 +616,6 @@
     <string name="save_current_track">Išsaugoti dabartinę judėjimo istoriją</string>
     <string name="save_track_interval">Informacijos išsaugojimo intervalas naviguojant</string>
     <string name="save_track_interval_descr">Pasirinkti judėjimo istorijos išsaugojimo pozicijos intervalą naviguojant.</string>
-    <string name="save_track_to_gpx_descrp">Navigavimo metu judėjimo istorija bus išsaugota į track aplanką automatiškai.</string>
     <string name="save_track_to_gpx">Naviguojant išsaugoti judėjimo istoriją į GPX failą automatiškai</string>
     <string name="update_tile">Atnaujinti žemėlapį</string>
     <string name="reload_tile">Iš naujo įkelti lakštą</string>
@@ -738,9 +737,6 @@
     <string name="map_widget_compass">Kompasas</string>
     <string name="map_widget_reset">Į pradinius nustatymus</string>
     <string name="map_widget_parking">Automobilio statymas</string>
-    <string name="map_widget_speed">Greitis</string>
-    <string name="map_widget_distance">Tikslas</string>
-    <string name="map_widget_altitude">Aukštis</string>
     <string name="map_widget_time">Liko laiko</string>
     <string name="map_widget_next_turn">Kitas posūkis</string>
     <string name="map_widget_next_turn_small">Kitas posūkis (mažas)</string>
@@ -927,7 +923,6 @@
     <string name="item_checked">patikrinta</string>
     <string name="item_unchecked">nepatikrinta</string>
     <string name="shared_string_map">Žemėlapis</string>
-    <string name="av_def_action_choose">Pasirinkti paprašius\?</string>
     <string name="access_arrival_time">Atvykimo laikas</string>
     <string name="map_widget_gps_info">GPS informacija</string>
     <string name="layer_hillshade">Kalnų šešėlių sluoksnis</string>
@@ -1394,7 +1389,7 @@
     <string name="plugin_install_needs_network">Prisijunkite prie interneto, jei norite įdiegti šį priedą.</string>
     <string name="shared_string_enable">Įjungti</string>
     <string name="shared_string_disable">Išjungti</string>
-    <string name="get_plugin">Gauti</string>
+    <string name="shared_string_get">Gauti</string>
     <string name="plugin_ski_name">Slidinėjimo žemėlapiai</string>
     <string name="world_ski_missing">Tam, kad būtų atvaizduojami slidinėjimo žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>
     <string name="nautical_maps_missing">Tam, kad būtų atvaizduojami jūriniai žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>

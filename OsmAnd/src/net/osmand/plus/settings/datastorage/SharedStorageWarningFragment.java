@@ -19,18 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.documentfile.provider.DocumentFile;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -41,6 +34,11 @@ import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMi
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -50,8 +48,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener,
-		OnDismissDialogFragmentListener, FilesCollectListener, StorageSelectionListener {
+public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener, FilesCollectListener, StorageSelectionListener {
 
 	public static final String TAG = SharedStorageWarningFragment.class.getSimpleName();
 
@@ -79,7 +76,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Override
@@ -291,13 +288,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
 		}
-	}
-
-	@Override
-	public void onDismissDialogFragment(DialogFragment dialogFragment) {
-		storageHelper = new DataStorageHelper(app);
-		selectedStorage = storageHelper.getCurrentStorage();
-		updateContent();
 	}
 
 	@Override

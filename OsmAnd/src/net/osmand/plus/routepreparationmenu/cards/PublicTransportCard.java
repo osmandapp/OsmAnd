@@ -122,15 +122,7 @@ public class PublicTransportCard extends MapBaseCard {
 			int paddingBottom = info.getPaddingBottom();
 			info.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 			info.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
-			info.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					CardListener listener = getListener();
-					if (listener != null) {
-						listener.onCardPressed(PublicTransportCard.this);
-					}
-				}
-			});
+			info.setOnClickListener(v -> notifyCardPressed());
 		} else {
 			view.findViewById(R.id.badges_padding).setVisibility(View.GONE);
 		}

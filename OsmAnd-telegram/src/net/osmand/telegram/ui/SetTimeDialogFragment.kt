@@ -94,7 +94,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 						settings.shareLocationToChat(chatId, true, livePeriod)
 					}
 					userLivePeriods.forEach { (userId, livePeriod) ->
-						settings.shareLocationToUser(userId.toInt(),  livePeriod)
+						settings.shareLocationToUser(userId,  livePeriod)
 					}
 					app.shareLocationHelper.startSharingLocation()
 					targetFragment?.also {
@@ -279,7 +279,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 			}
 		}
 		userLivePeriods.keys.forEach {
-			val user = telegramHelper.getUser(it.toInt())
+			val user = telegramHelper.getUser(it)
 			if (user != null) {
 				items.add(user)
 			}

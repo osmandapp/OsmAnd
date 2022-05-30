@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,8 +13,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -20,22 +23,21 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 /**
  * Created by Denis
@@ -115,20 +117,21 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
 			ImageButton send = (ImageButton) view.findViewById(R.id.play);
 			send.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_export));
-			send.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (point.getGroup() == OsmPoint.Group.POI) {
-						selectedPoint = point;
-						if (getMyApplication().getOsmOAuthHelper().isLogged()) {
-							SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
-						} else {
-							LoginBottomSheetFragment.showInstance(getActivity().getSupportFragmentManager(),
-									DashOsmEditsFragment.this);
-						}
+			send.setOnClickListener(v -> {
+				FragmentActivity activity = getActivity();
+				if (activity == null) {
+					return;
+				}
+				if (point.getGroup() == OsmPoint.Group.POI) {
+					selectedPoint = point;
+					if (requireMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
+						SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 					} else {
-						SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
+						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
+								DashOsmEditsFragment.this);
 					}
+				} else {
+					SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);
@@ -189,7 +192,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
-		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
+		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmBugsPoints();
 		if (l1.isEmpty()) {
 			int i = 0;
 			for (OsmPoint point : l2) {

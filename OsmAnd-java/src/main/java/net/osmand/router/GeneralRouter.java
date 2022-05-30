@@ -26,6 +26,7 @@ import gnu.trove.set.hash.TLongHashSet;
 public class GeneralRouter implements VehicleRouter {
 	
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
+	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
 	public static final String AVOID_FERRIES = "avoid_ferries";
@@ -34,6 +35,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
+	public static final String ALLOW_PRIVATE_FOR_TRUCK = "allow_private_for_truck";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 	public static final String DEFAULT_SPEED = "default_speed";
 	public static final String MIN_SPEED = "min_speed";
@@ -155,7 +157,11 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		maxVehicleSpeed = maxSpeed;
 		if (shortestRoute) {
-			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			if (profile == GeneralRouterProfile.BICYCLE) {
+				maxSpeed = Math.min(BICYCLE_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			} else {
+				maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			}
 		}
 		initCaches();
 	}
@@ -244,27 +250,29 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 
-	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
+	public void registerBooleanParameter(String id, String group, String name, String description, String[] profiles, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
+		rp.id = id;
 		rp.group = group;
 		rp.name = name;
 		rp.description = description;
-		rp.id = id;
+		rp.profiles = profiles;
 		rp.type = RoutingParameterType.BOOLEAN;
 		rp.defaultBoolean = defaultValue;
 		parameters.put(rp.id, rp);
 		
 	}
 
-	public void registerNumericParameter(String id, String name, String description, Double[] vls, String[] vlsDescriptions) {
+	public void registerNumericParameter(String id, String name, String description, String[] profiles, Double[] vls, String[] vlsDescriptions) {
 		RoutingParameter rp = new RoutingParameter();
 		rp.name = name;
 		rp.description = description;
 		rp.id = id;
+		rp.profiles = profiles;
 		rp.possibleValues = vls;
 		rp.possibleValueDescriptions = vlsDescriptions;
 		rp.type = RoutingParameterType.NUMERIC;
-		parameters.put(rp.id, rp);		
+		parameters.put(rp.id, rp);
 	}
 
 	@Override
@@ -373,8 +381,6 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return 0;
 	}
-	
-	TIntArrayList filteredRules = new TIntArrayList();
 	
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
@@ -705,6 +711,7 @@ public class GeneralRouter implements VehicleRouter {
 		private RoutingParameterType type;
 		private Object[] possibleValues;
 		private String[] possibleValueDescriptions;
+		private String[] profiles;
 		private boolean defaultBoolean;
 		
 		public String getId() {
@@ -731,6 +738,9 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
+		}
+		public String[] getProfiles() {
+			return profiles;
 		}
 	}
 	

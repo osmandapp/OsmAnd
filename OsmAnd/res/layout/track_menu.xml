@@ -79,11 +79,13 @@
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/icon_view"
-						android:layout_width="@dimen/map_widget_icon"
-						android:layout_height="@dimen/map_widget_icon"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
 						android:layout_gravity="end|center_vertical"
-						android:tint="?attr/default_icon_color"
-						osmand:srcCompat="@drawable/ic_action_polygom_dark" />
+						android:minWidth="@dimen/standard_icon_size"
+						android:minHeight="@dimen/standard_icon_size"
+						osmand:srcCompat="@drawable/ic_action_polygom_dark"
+						tools:tint="?attr/default_icon_color" />
 
 				</LinearLayout>
 
@@ -168,10 +170,10 @@
 		android:id="@+id/display_groups_button_container"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_gravity="end|top"
 		android:layout_marginHorizontal="@dimen/content_padding_half"
 		android:layout_marginTop="@dimen/content_padding_half"
-		android:background="?attr/flow_toolbar_bg"
-		android:layout_gravity="end|top">
+		android:background="?attr/flow_toolbar_bg">
 
 		<LinearLayout
 			android:layout_width="wrap_content"
@@ -194,8 +196,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:gravity="center_vertical"
 				android:layout_marginStart="@dimen/content_padding_half"
+				android:gravity="center_vertical"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:minHeight="@dimen/default_title_line_height"
 				android:textColor="?active_color_basic"

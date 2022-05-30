@@ -26,7 +26,6 @@
     <string name="save_track_to_gpx_globally_descr">Rexistra a posición nun ficheiro GPX, e podes activalo ou desactivalo empregando o trebello de gravación GPX no mapa.</string>
     <string name="save_current_track_descr">Garda a pista actual coma ficheiro GPX agora.</string>
     <string name="save_current_track">Gardar a pista actual</string>
-    <string name="save_track_to_gpx_descrp">Unha pista do GPX gárdarase de xeito automático no cartafol das pistas durante a navegación.</string>
     <string name="save_track_interval_globally">Intre de rexistro</string>
     <string name="save_track_interval">Intre de rexistro durante a navegación</string>
     <string name="save_track_interval_descr">Especifica o intre de rexistro de pistas durante a navegación</string>
@@ -383,7 +382,6 @@
     <string name="intermediate_points_change_order">Mudar a orde</string>
     <string name="srtm_paid_version_msg">Coida a posibilidade de mercar o plugin de \'Curvas de nivel\' para así apoiar o seu desenvolvemento.</string>
     <string name="srtm_paid_version_title">Plugin de curvas de nivel</string>
-    <string name="av_def_action_choose">Baixo demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar son</string>
     <string name="av_widget_action_descr">Acción predeterminada do trebello:</string>
@@ -568,9 +566,6 @@
     <string name="map_widget_compass">Compás</string>
     <string name="map_widget_reset">Restaurar valores predeterminado</string>
     <string name="map_widget_parking">Aparcamento</string>
-    <string name="map_widget_speed">Velocidade</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Tempo para chegar</string>
     <string name="map_widget_next_turn">Manobra seguinte</string>
     <string name="map_widget_next_turn_small">Manobra seguinte (pequena)</string>
@@ -1547,7 +1542,7 @@ Lon %2$s</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_release">Publicado</string>
     <string name="plugin_install_needs_network">Precisas estar conectado para instalar este plugin.</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="use_fast_recalculation_desc">Recalcular só a parte inicial da ruta, útil para viaxes longas.</string>
     <string name="do_you_like_osmand">Gosta do OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">A túa opinión e comentarios son valorados.</string>
@@ -2466,7 +2461,6 @@ Lon %2$s</string>
     <string name="ski_map_render_descr">Para esquiar. Conta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa os obxectos de mapas secundarios.</string>
     <string name="light_rs_render_descr">Estilo de condución sinxelo. Modo noite suave, curvas de nivel, camiños contrastantes con aparencia laranxa, atenúa os obxectos de mapas secundarios.</string>
     <string name="topo_render_descr">Para practicar andainas, sendeirismo e ciclismo na natureza. Lexíbel ao ar libre. Camiños e obxectos naturais en contraste, diferentes tipos de percorridos, opcións avanzadas en curvas de nivel, detalles adicionais. Axustar a integridade da superficie, distingue a calidade do camiño. Sen modo noite.</string>
-    <string name="mapnik_render_descr">Antigo estilo predefinido do Mapnik. Cores semellantes ó Mapnik.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste e máximo detalle. Inclúe todas as opcións do estilo predefinido do OsmAnd, mentres que amosa tantos detalles como sexa posíbel, en camiños, sendeiros e outros xeitos de viaxe. Clara distinción do \"atlas turístico\" entre tipos de camiños. Axeitado para emprego de día, de noite e ao ar libre.</string>
     <string name="default_render_descr">Estilo de emprego xeral. Cidade densas amosadas de xeito limpo. Conta con curvas de nivel, percorridos, calidade da superficie, restricións de acceso, sinais, visualización de camiños segundo a escala SA e elementos de deportes acuáticos.</string>
     <string name="open_wikipedia_link_online">Abrir ligazón da Wikipedia en liña</string>

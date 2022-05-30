@@ -23,18 +23,13 @@ import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
 public abstract class DashBaseFragment extends Fragment {
+
 	protected DashboardOnMap dashboard;
+
+	private DismissListener defaultDismissListener;
 
 	public interface DismissListener {
 		void onDismiss();
-	}
-
-	@Nullable
-	public OsmandApplication getMyApplication() {
-		if (getActivity() == null) {
-			return null;
-		}
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	@Override
@@ -115,7 +110,9 @@ public abstract class DashBaseFragment extends Fragment {
 	}
 
 	public void closeDashboard() {
-		dashboard.hideDashboard(false);
+		if (dashboard != null) {
+			dashboard.hideDashboard(false);
+		}
 	}
 
 	@Override
@@ -153,7 +150,25 @@ public abstract class DashBaseFragment extends Fragment {
 		return dashboard.getParentView();
 	}
 
-	private DismissListener defaultDismissListener;
+	@Nullable
+	protected MapActivity getMapActivity() {
+		return getActivity() == null ? null : ((MapActivity) getActivity());
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return ((MapActivity) requireActivity());
+	}
+
+	@Nullable
+	protected OsmandApplication getMyApplication() {
+		return getActivity() == null ? null : ((OsmandApplication) getActivity().getApplication());
+	}
+
+	@NonNull
+	protected OsmandApplication requireMyApplication() {
+		return ((OsmandApplication) requireActivity().getApplication());
+	}
 
 	public static class DefaultDismissListener implements DismissListener {
 		private View parentView;

@@ -1,14 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,22 +22,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.ViewPropertyAnimatorCompat;
-import androidx.core.view.ViewPropertyAnimatorListener;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -55,17 +32,17 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -73,10 +50,12 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -91,7 +70,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -135,6 +132,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private boolean forceShowCompass;
 	private LatLon requestedLatLon;
 	private final Set<String> themeInfoProviderTags = new HashSet<>();
+	private WidgetsVisibilityHelper vh;
+	private boolean isRouteDialogOpened;
 
 	public MapControlsLayer(@NonNull Context context) {
 		super(context);
@@ -151,12 +150,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
 	}
 
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
+			vh = mapActivity.getWidgetsVisibilityHelper();
 			initTopControls();
 			initTransparencyBar();
 			initZooms();
@@ -198,7 +199,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View compassView = compassHud.iv;
 		ViewGroup parent = (ViewGroup) compassView.getParent();
 		if (parent != null) {
-			compassHud.cancelHideAnimation();
 			compassHud.compassOutside = true;
 			forceShowCompass = true;
 			parent.removeView(compassView);
@@ -310,7 +310,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
 		compassHud = createHudButton(compass, R.drawable.ic_compass, COMPASS_HUD_ID).setIconColorId(0).
 				setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		compassHud.compass = true;
+		compassHud.isCompass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(v -> app.getMapViewTrackingUtilities().switchRotateMapMode());
 
@@ -806,16 +806,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
-			if (settings.getApplicationMode() != routingHelper.getAppMode()) {
-				settings.setApplicationMode(routingHelper.getAppMode(), false);
-			}
+//			if (settings.getApplicationMode() != routingHelper.getAppMode()) {
+//				settings.setApplicationMode(routingHelper.getAppMode(), false);
+//			}
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				mapRouteInfoMenu.show();
 			} else {
 				touchEvent = 0;
 				app.logEvent("start_navigation");
-				settings.setApplicationMode(routingHelper.getAppMode(), false);
+//				settings.setApplicationMode(routingHelper.getAppMode(), false);
 				app.getMapViewTrackingUtilities().backToLocationImpl(17, true);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
@@ -853,13 +853,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
 
 		RoutingHelper rh = app.getRoutingHelper();
-		WidgetsVisibilityHelper vh = mapActivity.getWidgetsVisibilityHelper();
 
 		boolean isRoutePlanningMode = isInRoutePlanningMode();
 		boolean isRouteFollowingMode = !isRoutePlanningMode && rh.isFollowingMode();
 		boolean isTimeToShowButtons = System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS;
 		boolean shouldShowRouteCalculationControls = isRoutePlanningMode || ((app.accessibilityEnabled() || isTimeToShowButtons) && isRouteFollowingMode);
-		boolean isRouteDialogOpened = mapRouteInfoMenu.isVisible() || (shouldShowRouteCalculationControls && mapRouteInfoMenu.needShowMenu());
+		isRouteDialogOpened = mapRouteInfoMenu.isVisible() || (shouldShowRouteCalculationControls && mapRouteInfoMenu.needShowMenu());
 
 		boolean showBackToLocation = !isRouteDialogOpened && vh.shouldShowBackToLocationButton();
 		backToLocationControl.updateVisibility(showBackToLocation);
@@ -867,17 +866,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		//routePlanningBtn.setIconResId(isRouteFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_gdirections_dark);
 		updateRoutePlaningButton(rh, isRoutePlanningMode);
 
-		boolean showBottomMenuButtons = (shouldShowRouteCalculationControls || !isRouteFollowingMode) && vh.shouldShowBottomMenuButtons();
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
+		boolean showBottomMenuButtons = vh.shouldShowBottomMenuButtons()
+				&& (shouldShowRouteCalculationControls || !isRouteFollowingMode || androidAutoAttached);
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean showZoomButtons = !isRouteDialogOpened && vh.shouldShowZoomButtons();
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
-
-		boolean forceHideCompass = isRouteDialogOpened || vh.shouldHideCompass();
-		compassHud.forceHideCompass = forceHideCompass;
-		compassHud.updateVisibility(!forceHideCompass && shouldShowCompass());
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		layersHud.setIconColor(appMode.getProfileColor(isNight));
@@ -902,9 +900,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		mapRouteInfoMenu.setVisible(shouldShowRouteCalculationControls);
-		if (!forceHideCompass) {
-			updateCompass(isNight);
-		}
+
+		updateCompass(isNight);
 
 		for (MapHudButton mc : controls) {
 			if (mc.id.startsWith(BACK_TO_LOC_HUD_ID)) {
@@ -936,25 +933,27 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateCompass(boolean isNight) {
 		float mapRotate = mapView.getRotate();
-		boolean showCompass = shouldShowCompass();
 		if (mapRotate != cachedRotate) {
 			cachedRotate = mapRotate;
 			// Apply animation to image view
 			compassHud.iv.invalidate();
-			compassHud.updateVisibility(showCompass);
 		}
+
+		boolean showCompass = shouldShowCompass();
+		compassHud.updateVisibility(showCompass);
+
+		// don't update icon if compass is hidden
+		if (!showCompass) return;
+
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			compassHud.setIconResId(isNight ? R.drawable.ic_compass_niu_white : R.drawable.ic_compass_niu);
 			compassHud.iv.setContentDescription(getString(R.string.rotate_map_none_opt));
-			compassHud.updateVisibility(showCompass);
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 			compassHud.setIconResId(isNight ? R.drawable.ic_compass_bearing_white : R.drawable.ic_compass_bearing);
 			compassHud.iv.setContentDescription(getString(R.string.rotate_map_bearing_opt));
-			compassHud.updateVisibility(true);
 		} else {
 			compassHud.setIconResId(isNight ? R.drawable.ic_compass_white : R.drawable.ic_compass);
 			compassHud.iv.setContentDescription(getString(R.string.rotate_map_compass_opt));
-			compassHud.updateVisibility(true);
 		}
 	}
 
@@ -976,11 +975,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private boolean shouldShowCompass() {
-		MapActivity mapActivity = requireMapActivity();
-		float mapRotate = mapView.getRotate();
-		return forceShowCompass || mapRotate != 0
-				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
-				|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
+		if (isRouteDialogOpened || vh.shouldHideCompass()) {
+			// force hide compass
+			return false;
+		} else if (!forceShowCompass) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			return settings.SHOW_COMPASS_ALWAYS.getModeValue(appMode);
+		}
+		return true;
 	}
 
 	private void updateMyLocation(MapHudButton backToLocationControl) {
@@ -1007,12 +1009,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return mapRouteInfoMenu.onSingleTap(point, tileBox);
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		touchEvent = System.currentTimeMillis();
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isFollowingMode()) {
@@ -1172,10 +1174,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		private boolean nightMode = false;
 		private boolean f = true;
-		private boolean compass;
+		private boolean isCompass;
 		private boolean compassOutside;
-		private boolean forceHideCompass;
-		private ViewPropertyAnimatorCompat hideAnimator;
 
 		public MapHudButton setRoundTransparent() {
 			setBg(R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
@@ -1192,65 +1192,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return this;
 		}
 
-		public void hideDelayed(long msec) {
-			if (!compassOutside && (iv.getVisibility() == View.VISIBLE)) {
-				if (hideAnimator != null) {
-					hideAnimator.cancel();
-				}
-				hideAnimator = ViewCompat.animate(iv).alpha(0f).setDuration(250).setStartDelay(msec).setListener(new ViewPropertyAnimatorListener() {
-					@Override
-					public void onAnimationStart(View view) {
-					}
-
-					@Override
-					public void onAnimationEnd(View view) {
-						iv.setVisibility(View.GONE);
-						iv.setAlpha(1f);
-						hideAnimator = null;
-					}
-
-					@Override
-					public void onAnimationCancel(View view) {
-						iv.setVisibility(View.GONE);
-						iv.setAlpha(1f);
-						hideAnimator = null;
-					}
-				});
-				hideAnimator.start();
-			}
-		}
-
-		public void cancelHideAnimation() {
-			if (hideAnimator != null) {
-				hideAnimator.cancel();
-			}
-		}
-
 		public boolean updateVisibility(boolean visible) {
 			if (visible) {
 				visible = appCustomization.isFeatureEnabled(id);
 			}
 			if (!compassOutside && visible != (iv.getVisibility() == View.VISIBLE)) {
-				if (visible) {
-					if (hideAnimator != null) {
-						hideAnimator.cancel();
-					}
-					iv.setVisibility(View.VISIBLE);
-					iv.invalidate();
-				} else if (hideAnimator == null) {
-					if (compass && !forceHideCompass) {
-						hideDelayed(5000);
-					} else {
-						forceHideCompass = false;
-						iv.setVisibility(View.GONE);
-						iv.invalidate();
-					}
-				}
-				return true;
-			} else if (visible && hideAnimator != null) {
-				hideAnimator.cancel();
-				iv.setVisibility(View.VISIBLE);
+				iv.setVisibility(visible ? View.VISIBLE : View.GONE);
 				iv.invalidate();
+				return true;
 			}
 			return false;
 		}
@@ -1369,7 +1318,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 			if (iv instanceof ImageView) {
-				if (compass) {
+				if (isCompass) {
 					setMapButtonIcon((ImageView) iv, new CompassDrawable(d));
 				} else {
 					setMapButtonIcon((ImageView) iv, d);

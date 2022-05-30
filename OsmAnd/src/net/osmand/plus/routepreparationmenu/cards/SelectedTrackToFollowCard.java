@@ -71,13 +71,11 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 			reverseTrackCard.setListener(target);
 			cardsContainer.addView(reverseTrackCard.build(mapActivity));
 
-			if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-				cardsContainer.addView(buildDividerView(cardsContainer, true));
+			cardsContainer.addView(buildDividerView(cardsContainer, true));
 
-				AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
-				attachTrackCard.setListener(target);
-				cardsContainer.addView(attachTrackCard.build(mapActivity));
-			}
+			AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
+			attachTrackCard.setListener(target);
+			cardsContainer.addView(attachTrackCard.build(mapActivity));
 
 			setupNavigateOptionsCard(cardsContainer, rparams);
 		}

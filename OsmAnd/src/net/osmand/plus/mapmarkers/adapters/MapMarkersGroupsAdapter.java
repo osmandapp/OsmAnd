@@ -20,14 +20,8 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.GroupHeader;
 import net.osmand.plus.mapmarkers.ItineraryType;
@@ -36,6 +30,12 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -84,7 +84,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private void updateShowDirectionMarkers() {
-		showDirectionEnabled = app.getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
+		showDirectionEnabled = app.getSettings().SHOW_MAP_MARKERS_BAR_WIDGET.get();
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));
@@ -145,7 +145,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					MapMarker marker = groupMarkers.get(j);
 					String markerDate = dateFormat.format(new Date(marker.creationDate));
 					int currentGroupDateId;
-					MarkerGroupItem currentGroupItem = null ;
+					MarkerGroupItem currentGroupItem = null;
 					if (marker.creationDate >= currentTimeMillis || (today.equals(markerDate))) {
 						currentGroupDateId = -1;
 						currentGroupItem = MarkerGroupItem.TODAY_HEADER;
@@ -171,7 +171,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					if (previousGroupDateId != currentGroupDateId) {
 						if (currentGroupItem != null) {
 							items.add(currentGroupItem);
-						} else if(currentGroupDateId < 0) {
+						} else if (currentGroupDateId < 0) {
 							SimpleDateFormat monthdateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
 							String monthStr = monthdateFormat.format(new Date(marker.creationDate));
 							if (monthStr.length() > 1) {
@@ -205,7 +205,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					}
 				}
 				if (Algorithms.isEmpty(group.getWptCategories())) {
-					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath(app)).getPointsByCategories().keySet());
+					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath(app)).getPointsGroups().keySet());
 				}
 				populateAdapterWithGroupMarkers(group, getItemCount());
 			}
@@ -498,7 +498,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							}
 							switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
 						}
-						if(!disabled) {
+						if (!disabled) {
 							mapMarkersHelper.enableGroup(group);
 						} else {
 							mapMarkersHelper.runSynchronization(group);
@@ -646,11 +646,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		static final MarkerGroupItem YESTERDAY_HEADER = new MarkerGroupItem(R.string.yesterday);
 		static final MarkerGroupItem LAST_SEVEN_DAYS_HEADER = new MarkerGroupItem(R.string.last_seven_days);
 		static final MarkerGroupItem THIS_YEAR_HEADER = new MarkerGroupItem(R.string.this_year);
-		private @StringRes int iname;
+
+		@StringRes
+		private int nameId;
 		protected String name;
 
 		public MarkerGroupItem(@StringRes int name) {
-			this.iname = name;
+			this.nameId = name;
 		}
 
 		public MarkerGroupItem(String name) {
@@ -658,8 +660,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 
 		public String getName(OsmandApplication app) {
-			if (name == null && iname != 0) {
-				name = app.getString(iname);
+			if (name == null && nameId != 0) {
+				name = app.getString(nameId);
 			}
 			return name;
 		}

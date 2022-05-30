@@ -80,7 +80,7 @@ public class OpeningHoursParser {
 
 	private static void initTwelveHourFormatters(Locale locale) {
 		twelveHourFormatter = new SimpleDateFormat("h:mm", locale);
-		twelveHourFormatterAmPm = new SimpleDateFormat("h:mm a", locale);
+		twelveHourFormatterAmPm = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
 		TimeZone timeZone = TimeZone.getTimeZone("UTC");
 		twelveHourFormatter.setTimeZone(timeZone);
 		twelveHourFormatterAmPm.setTimeZone(timeZone);
@@ -497,7 +497,7 @@ public class OpeningHoursParser {
 		public boolean isFallBackRule(int sequenceIndex) {
 			if (sequenceIndex != ALL_SEQUENCES) {
 				ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
-				return rules.get(0).isFallbackRule();
+				return !rules.isEmpty() && rules.get(0).isFallbackRule();
 			}
 			return false;
 		}
@@ -2240,14 +2240,21 @@ public class OpeningHoursParser {
 		int endHour = (endMinute / 60) % 24;
 		boolean sameDayPart = Math.max(startHour, endHour) < 12 || Math.min(startHour, endHour) >= 12;
 		if (twelveHourFormatting && sameDayPart) {
-			formatTime(startMinute, stringBuilder, false);
-			stringBuilder.append("–");
-			formatTime(endMinute, stringBuilder, true);
+			boolean amPmOnLeft = isAmPmOnLeft(startMinute);
+			formatTime(startMinute, stringBuilder, amPmOnLeft);
+			stringBuilder.append("-");
+			formatTime(endMinute, stringBuilder, !amPmOnLeft);
 		} else {
 			formatTime(startMinute, stringBuilder);
-			stringBuilder.append("–");
+			stringBuilder.append("-");
 			formatTime(endMinute, stringBuilder);
 		}
+	}
+
+	private static boolean isAmPmOnLeft(int startMinute) {
+		StringBuilder sb = new StringBuilder();
+		formatTime(startMinute, sb);
+		return !Character.isDigit(sb.charAt(0));
 	}
 
 	private static void formatTime(int minutes, StringBuilder sb) {

@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
@@ -22,37 +21,48 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.Collator;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -66,15 +76,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.FragmentActivity;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
@@ -239,8 +240,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
+			boolean isDevPluginEnabled = OsmandPlugin.isEnabled(OsmandDevelopmentPlugin.class);
 			for (LocalIndexInfo v : values) {
-				listAdapter.addLocalIndexInfo(v);
+				if (v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA || isDevPluginEnabled) {
+					listAdapter.addLocalIndexInfo(v);
+				}
 			}
 			listAdapter.notifyDataSetChanged();
 			expandAllGroups();
@@ -514,34 +518,26 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		optionsMenuAdapter = new ContextMenuAdapter(requireMyApplication());
-		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-			                                  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-				localOptionsMenu(itemId);
-				return true;
-			}
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+			localOptionsMenu(item.getTitleId());
+			return true;
 		};
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_refresh, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
-				.setColor(getContext(), iconColorResId)
-				.createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setColor(getContext(), iconColorResId));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_delete, getContext())
 				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
-				.setColor(getContext(), iconColorResId)
-				.createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setColor(getContext(), iconColorResId));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.local_index_mi_backup, getContext())
-				.setListener(listener)
-				.createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setListener(listener));
+		optionsMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.local_index_mi_restore, getContext())
-				.setListener(listener)
-				.createItem());
+				.setListener(listener));
 		// doesn't work correctly
 		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		int max = 3;
@@ -584,7 +580,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 				ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 				if (itemId == contextMenuItem.getTitleId()) {
-					contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
+					ItemClickListener listener = contextMenuItem.getItemClickListener();
+					if (listener != null) {
+						listener.onContextMenuClick(null, null, contextMenuItem, false);
+					}
 					return true;
 				}
 			}

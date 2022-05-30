@@ -1,9 +1,12 @@
 package net.osmand.plus.measurementtool.adapter;
 
-import android.graphics.drawable.Drawable;
+import static net.osmand.plus.utils.ColorUtilities.getStrokedButtonsOutlineColor;
+import static net.osmand.plus.utils.ColorUtilities.getStrokedButtonsOutlineColorId;
+
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.text.TextUtils;
+import android.text.TextUtils.TruncateAt;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,159 +14,194 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.measurementtool.adapter.FolderListAdapter.FolderViewHolder;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.GroupsViewHolder> {
+public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 
-	private static final int VIEW_TYPE_FOOTER = 1;
-	private static final int VIEW_TYPE_CELL = 0;
-	private final List<String> items = new ArrayList<>();
+	public static final int VIEW_TYPE_ADD = 0;
+	protected static final int VIEW_TYPE_FOLDER = 1;
 
-	private String selectedItemName;
-	private final OsmandApplication app;
-	private final boolean nightMode;
-	private FolderListAdapterListener listener;
+	protected final OsmandApplication app;
+	protected final UiUtilities uiUtilities;
 
-	public FolderListAdapter(OsmandApplication app, boolean nightMode, String folderName) {
+	protected List<Object> items = new ArrayList<>();
+	protected String selectedItem;
+	protected FolderListAdapterListener listener;
+	protected final boolean nightMode;
+
+	public FolderListAdapter(@NonNull OsmandApplication app, @Nullable String selectedItem, boolean nightMode) {
 		this.app = app;
 		this.nightMode = nightMode;
-		selectedItemName = folderName;
+		this.selectedItem = selectedItem;
+		this.uiUtilities = app.getUIUtilities();
 	}
 
-	public void setSelectedFolderName(String folderName) {
-		this.selectedItemName = folderName;
+	@NonNull
+	public List<Object> getItems() {
+		return items;
 	}
 
-	public void setFolders(List<String> folders) {
-		items.clear();
-		items.addAll(folders);
+	public void setItems(@NonNull List<Object> items) {
+		this.items = items;
+	}
+
+	public void setSelectedItem(@Nullable String folderName) {
+		this.selectedItem = folderName;
+	}
+
+	public void setListener(@Nullable FolderListAdapterListener listener) {
+		this.listener = listener;
 	}
 
 	@NonNull
 	@Override
-	public GroupsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_editor_group_select_item,
-				parent, false);
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-		params.width = app.getResources().getDimensionPixelSize(R.dimen.measurement_tool_folder_select_width);
-		params.height = app.getResources().getDimensionPixelSize(R.dimen.measurement_tool_folder_select_height);
-		TextView groupName = view.findViewById(R.id.groupName);
-		groupName.setMaxLines(1);
-		groupName.setEllipsize(TextUtils.TruncateAt.END);
-		groupName.setTextColor(ContextCompat.getColor(app, activeColorRes));
-		if (viewType != VIEW_TYPE_CELL) {
-			groupName.setText(R.string.add_new_folder);
-			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
-			Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
-			ImageView groupIcon = view.findViewById(R.id.groupIcon);
-			groupIcon.setImageDrawable(iconAdd);
-			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app,
-					R.drawable.bg_select_group_button_outline);
-			if (rectContourDrawable != null) {
-				int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark
-						: R.color.stroked_buttons_and_links_outline_light);
-				rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), strokeColor);
-				((ImageView) view.findViewById(R.id.outlineRect)).setImageDrawable(rectContourDrawable);
-			}
-			((TextView) view.findViewById(R.id.groupName)).setTextColor(app.getResources().getColor(activeColorResId));
+	public FolderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
+		View view = inflater.inflate(R.layout.point_editor_group_select_item, parent, false);
+
+		FolderViewHolder holder;
+		if (VIEW_TYPE_FOLDER == viewType) {
+			holder = new FolderViewHolder(view);
+		} else if (VIEW_TYPE_ADD == viewType) {
+			holder = new AddFolderViewHolder(view);
+		} else {
+			throw new IllegalArgumentException("Unsupported view type");
 		}
-		return new FolderListAdapter.GroupsViewHolder(view);
+		Resources resources = app.getResources();
+		ViewGroup.LayoutParams params = view.getLayoutParams();
+		params.width = resources.getDimensionPixelSize(R.dimen.measurement_tool_folder_select_width);
+		params.height = resources.getDimensionPixelSize(R.dimen.measurement_tool_folder_select_height);
+
+		holder.groupName.setMaxLines(1);
+		holder.groupName.setEllipsize(TruncateAt.END);
+		holder.groupName.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+
+		return holder;
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final GroupsViewHolder holder, int position) {
-		if (position == items.size()) {
-			holder.groupButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.onAddNewItemSelected();
-					}
-				}
-			});
+	public void onBindViewHolder(@NonNull final FolderViewHolder holder, int position) {
+		if (holder instanceof AddFolderViewHolder) {
+			bindAddItem(holder);
 		} else {
-			holder.groupButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					int previousSelectedPosition = getItemPosition(selectedItemName);
-					selectedItemName = items.get(holder.getAdapterPosition());
-					notifyItemChanged(holder.getAdapterPosition());
-					notifyItemChanged(previousSelectedPosition);
-					if (listener != null) {
-						listener.onItemSelected(selectedItemName);
-					}
-				}
-			});
-			final String group = Algorithms.capitalizeFirstLetter(items.get(position));
-			holder.groupName.setText(group);
-			int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
-			int strokeColor;
-			int strokeWidth;
-			if (selectedItemName != null && selectedItemName.equals(items.get(position))) {
-				strokeColor = activeColorRes;
-				strokeWidth = 2;
-			} else {
-				strokeColor = nightMode ? R.color.stroked_buttons_and_links_outline_dark
-						: R.color.stroked_buttons_and_links_outline_light;
-				strokeWidth = 1;
-			}
-			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app,
-					R.drawable.bg_select_group_button_outline);
-			if (rectContourDrawable != null) {
-				rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, strokeWidth), ContextCompat.getColor(app, strokeColor));
-				holder.groupButton.setImageDrawable(rectContourDrawable);
-			}
-			int iconID;
-			iconID = R.drawable.ic_action_folder;
-			holder.groupIcon.setImageDrawable(app.getUIUtilities().getIcon(iconID, activeColorRes));
+			String item = (String) getItem(position);
+			boolean selected = Algorithms.objectEquals(selectedItem, item);
+			bindFolderItem(holder, item, selected);
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, holder.groupButton, nightMode, R.drawable.ripple_solid_light_6dp,
-					R.drawable.ripple_solid_dark_6dp);
+			AndroidUtils.setBackground(app, holder.groupButton, nightMode,
+					R.drawable.ripple_solid_light_6dp, R.drawable.ripple_solid_dark_6dp);
 		}
+	}
+
+	protected void bindFolderItem(@NonNull FolderViewHolder holder, @NonNull String item, boolean selected) {
+		holder.groupButton.setOnClickListener(view -> {
+			int previousSelectedPosition = getItemPosition(selectedItem);
+			selectedItem = (String) getItem(holder.getAdapterPosition());
+			notifyItemChanged(holder.getAdapterPosition());
+			notifyItemChanged(previousSelectedPosition);
+			if (listener != null) {
+				listener.onItemSelected(selectedItem);
+			}
+		});
+		holder.groupName.setText(Algorithms.capitalizeFirstLetter(item));
+
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		GradientDrawable drawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
+		if (drawable != null) {
+			int strokeWidth = selected ? 2 : 1;
+			int strokeColor = selected ? activeColorId : getStrokedButtonsOutlineColorId(nightMode);
+			drawable.setStroke(AndroidUtils.dpToPx(app, strokeWidth), ContextCompat.getColor(app, strokeColor));
+			holder.groupButton.setImageDrawable(drawable);
+		}
+		holder.groupIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_folder, activeColorId));
+	}
+
+	protected void bindAddItem(@NonNull FolderViewHolder holder) {
+		holder.groupButton.setOnClickListener(view -> {
+			if (listener != null) {
+				listener.onAddNewItemSelected();
+			}
+		});
+		GradientDrawable drawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
+		if (drawable != null) {
+			drawable.setStroke(AndroidUtils.dpToPx(app, 1), getStrokedButtonsOutlineColor(app, nightMode));
+		}
+		holder.groupButton.setImageDrawable(drawable);
+		holder.groupName.setText(R.string.add_new_folder);
+		holder.groupName.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+		holder.groupIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_add, ColorUtilities.getActiveColorId(nightMode)));
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		return (position == items.size()) ? VIEW_TYPE_FOOTER : VIEW_TYPE_CELL;
+		Object item = items.get(position);
+		if (item instanceof String) {
+			return VIEW_TYPE_FOLDER;
+		} else if (item instanceof Integer) {
+			return VIEW_TYPE_ADD;
+		} else {
+			throw new IllegalArgumentException("Unsupported view type");
+		}
 	}
 
 	@Override
 	public int getItemCount() {
-		return items == null ? 0 : items.size() + 1;
+		return items.size();
 	}
 
-	int getItemPosition(String name) {
+	protected int getItemPosition(Object name) {
 		return items.indexOf(name);
 	}
 
-	public void setListener(FolderListAdapterListener listener) {
-		this.listener = listener;
+	protected Object getItem(int position) {
+		return items.get(position);
 	}
 
-	static class GroupsViewHolder extends RecyclerView.ViewHolder {
+	public static List<String> getFolders(@NonNull File parentDir) {
+		List<File> folders = new ArrayList<>();
+		folders.add(parentDir);
+		Algorithms.collectDirs(parentDir, folders);
+		List<String> folderNames = new ArrayList<>();
+		for (File dir : folders) {
+			folderNames.add(dir.getName());
+		}
+		return folderNames;
+	}
 
-		final TextView groupName;
-		final ImageView groupIcon;
-		final ImageView groupButton;
+	public static class FolderViewHolder extends RecyclerView.ViewHolder {
 
-		GroupsViewHolder(View itemView) {
+		public final TextView groupName;
+		public final ImageView groupIcon;
+		public final ImageView groupButton;
+
+		FolderViewHolder(@NonNull View itemView) {
 			super(itemView);
 			groupName = itemView.findViewById(R.id.groupName);
 			groupIcon = itemView.findViewById(R.id.groupIcon);
 			groupButton = itemView.findViewById(R.id.outlineRect);
+		}
+	}
+
+	public static class AddFolderViewHolder extends FolderViewHolder {
+
+		AddFolderViewHolder(@NonNull View itemView) {
+			super(itemView);
 		}
 	}
 

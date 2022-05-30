@@ -31,7 +31,7 @@
     <string name="base_profile_descr_aircraft">Avion, Planador</string>
     <string name="routing_profile_geocoding">Geocodatge</string>
     <string name="routing_profile_straightline">Endrechiera</string>
-    <string name="routing_profile_broutrer">Navigacion fòra-linha</string>
+    <string name="routing_profile_broutrer">Navigacion fòra de linha</string>
     <string name="osmand_default_routing">Navigacion OsmAnd</string>
     <string name="custom_routing">Perfiu de navigacion personalizat</string>
     <string name="special_routing_type">Navigacion particulara</string>
@@ -685,7 +685,6 @@
     <string name="routing_attr_avoid_borders_name">Evitar lo desbòrd de frontiera</string>
     <string name="routing_attr_avoid_borders_description">Evitar de passar lei frontieras</string>
     <string name="shared_string_address">Adreiça</string>
-    <string name="map_widget_distance">Destinacion</string>
     <string name="wake_on_voice">Activar l\'ecran</string>
     <string name="osm_live_enter_email">Siatz pregar d\'intrar una adreiça electronica valida</string>
     <string name="routing_attr_freeride_policy_name">Fòra de pista</string>
@@ -797,7 +796,7 @@
     <string name="towards">vèrs</string>
     <string name="si_mi_feet">Milas/pè</string>
     <string name="route_tslr">Viratz leugierament a drecha e contuniatz</string>
-    <string name="route_tu">Viratz lo pè e contuniatz</string>
+    <string name="route_tu">Viratz lo pè e continuatz</string>
     <string name="in_app_purchase_desc_ex">Un còp crompada, restarà de lònga a vòstra disposicion.</string>
     <string name="favorite">Preferit</string>
     <string name="choose_auto_follow_route">Centrar automaticament la mapa</string>
@@ -928,13 +927,13 @@
     <string name="osmand_srtm_short_description_80_chars">Ajust OsmAnd per lei corbas de nivèu fòra de linha</string>
     <string name="srtm_plugin_name">Corbas de nivèu</string>
     <string name="stop_navigation_service">Arrestar</string>
-    <string name="osmand_short_description_80_chars">Visualizacion e navigacion per mobile dei mapas mondialas OSM</string>
+    <string name="osmand_short_description_80_chars">Visualizacion e navigacion dei mapas mondialas mobilas OSM</string>
     <string name="index_settings">Gestion de fichiers de mapas</string>
     <string name="general_settings">Paramètres generaus</string>
     <string name="general_settings_descr">Configuratz lei paramètres generaus e de visualizacion de l\'aplicacion.</string>
     <string name="global_app_settings">Paramètres globaus de l\'aplicacion</string>
     <string name="keep_informing_descr">Tornar anonciar leis indicacions de navigacion a intervales regulars.</string>
-    <string name="get_plugin">Obtenir</string>
+    <string name="shared_string_get">Obtenir</string>
     <string name="quick_favorites_name_preset">Configuracion dau nom</string>
     <string name="quick_action_map_underlay">Modificar lo fons de la mapa</string>
     <string name="gps_filter_precision">Precision GPS</string>
@@ -971,7 +970,7 @@
     <string name="add_group_to_markers">Ajustar un marcador a la lista</string>
     <string name="no_items_of_type_message">I a ges d\'element d\'aquesta mena</string>
     <string name="no_activity_for_intent">Installatz una aplicacion que pòsque completar l\'accion.</string>
-    <string name="shared_string_contributions">Contributions</string>
+    <string name="shared_string_contributions">Contribucions</string>
     <string name="available_until">Disponible fins a %1$s</string>
     <string name="use_login_and_password">Emplegatz vòstre nom d\'utilizator e lo senhau</string>
     <string name="copy_to_map_markers">Ajustar ai marcadors</string>
@@ -1083,7 +1082,6 @@
     <string name="turn_screen_on_navigation_instructions">Indicacions de navigacion</string>
     <string name="shared_string_resources">Ressorsas</string>
     <string name="quick_action_start_stop_navigation_descr">Boton per començar ò arrestar la navigacion.</string>
-    <string name="save_track_to_gpx_descrp">Dau temps de la navigacion, la traça GPX se sauvarà automaticament dins lo dorsier de traças.</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar lei botons de zoom dau temps de la navigacion.</string>
     <string name="delay_navigation_start">Començar la navigacion pas a pas automaticament</string>
     <string name="show_zoom_buttons_navigation">Mostrar lei botons de zoom</string>
@@ -1319,7 +1317,7 @@
     <string name="rendering_attr_appMode_description">Optimizar la mapa per</string>
     <string name="rendering_attr_appMode_name">Mòde de representacion</string>
     <string name="rendering_attr_contourLines_name">Mostrar lei corbas de nivèu</string>
-    <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalhs mostrats sus la mapa.</string>
+    <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalhs visibles sus la mapa.</string>
     <string name="quick_action_map_style">Modificar la representacion de la mapa</string>
     <string name="quick_action_map_style_switch">Representacion de la mapa modificada en \"%s\".</string>
     <string name="quick_action_map_style_action">Ajustatz un mòde de representacion de la mapa</string>
@@ -1450,7 +1448,7 @@
     <string name="shared_string_start_time">Ora de començament</string>
     <string name="shared_string_time_span">Durada de temps</string>
     <string name="shared_string_end_time">Ora de fin</string>
-    <string name="wikivoyage_offline">Wikiviatge sensa connexion</string>
+    <string name="wikivoyage_offline">Wikiviatge fòra de linha</string>
     <string name="edit_filter">Modificar lei categorias</string>
     <string name="save_filter">Sauvagardar lo filtre</string>
     <string name="shared_string_preparing">A se preparar</string>
@@ -1476,7 +1474,7 @@
     <string name="get_started">Començar</string>
     <string name="fav_point_dublicate">Avètz indicat un nom de Preferit duplicat</string>
     <string name="city_type_suburb">Quartier</string>
-    <string name="shared_string_is_open">Dobèrt desenant</string>
+    <string name="shared_string_is_open">Ara dobèrt</string>
     <string name="index_item_depth_contours_osmand_ext">Isobates</string>
     <string name="try_again">Tornatz assajar</string>
     <string name="get_unlimited_access">Obtenètz un accès illimitat</string>
@@ -1511,7 +1509,7 @@
     <string name="verify_email_address">Verificar l\'adreiça electronica</string>
     <string name="shared_string_size">Mesura</string>
     <string name="created_on">Creat lo</string>
-    <string name="use_routing_fallback">Emplegar lo rotatge de secors</string>
+    <string name="use_routing_fallback">Emplegar lo rotatge de secors fòra de linha</string>
     <string name="use_routing_fallback_description">Emplegar lo rotatge fòra de linha quand lo rotatge en linha es pas disponible.</string>
     <string name="receiving_data_from_server">A recebre lei donadas dau servidor…</string>
     <string name="backup_restore_data_descr">Restaurar lei donadas sus l\'aparelh amb l\'ajuda de sauvagardas en linha.</string>
@@ -1663,7 +1661,7 @@
     <string name="update_all_maps_added">Actualizar totei lei mapas ajustadas a %1$s \?</string>
     <string name="subscription_paused_title">L\'abonament a OsmAnd Live es estat mes en pausa</string>
     <string name="osm_live_payment_desc_hw">L\'abonament es facturat per lo periòde chausit. Annulatz-lo dins AppGallery quand volètz.</string>
-    <string name="app_restart_required">Tornar aviar l\'aplicacion es necessari per prendre en còmpte lei reglatges.</string>
+    <string name="app_restart_required">Reaviar l\'aplicacion es necessari per aplicar lei reglatges.</string>
     <string name="track_recording_save_and_stop">Sauvagardar e arrestar l\'enregistrament</string>
     <string name="track_recording_stop_without_saving">Arrestar sensa sauvagardar</string>
     <string name="temporary_conditional_routing_descr">Utilizar lei limitacions rotieras actualament activas sus la mapa</string>
@@ -1671,4 +1669,327 @@
     <string name="activity_type_offroad_name">Fòra de rota</string>
     <string name="activity_type_riding_name">Equitacion</string>
     <string name="activity_type_snowmobile_name">Motonèu</string>
+    <string name="always_ask_waypoint_appearance_description">Clicatz per dobrir l\'ecran \"Ajustar un ponch d\'etapa\", i podretz modificar lo nom e l\'aparéncia.</string>
+    <string name="waypoint_appearance">Aparéncia dau ponch d\'etapa</string>
+    <string name="track_file">Fichier de traça</string>
+    <string name="waypoint_template">Modèla de ponch d\'etapa</string>
+    <string name="predefined_waypoint_appearance_description">De clicar enregistrarà automaticament lo ponch d\'etapa amb de paramètres predefinits.</string>
+    <string name="profile_type_osmand_string">Perfiu OsmAnd</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Notar lei balisas</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icònas de zoom feble</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Galariás fluvialas</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Pas amagar lei galariá fluvialas</string>
+    <string name="shared_string_used">D\'emplegar</string>
+    <string name="track_file_description">Clicatz per mostrar la boita de dialòg e seleccionar lei traças disponiblas.</string>
+    <string name="upload_photo">A telecargar</string>
+    <string name="message_server_error">Error dau servidor : %1$s</string>
+    <string name="routing_engine_vehicle_type_truck">Camion</string>
+    <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta electrica</string>
+    <string name="announcement_time_approach">Apròcha</string>
+    <string name="change_folder">Modificar lo repertòri</string>
+    <string name="rename_track">Tornar nomar la traçar</string>
+    <string name="edit_track">Modificar la traça</string>
+    <string name="routing_engine_vehicle_type_foot">D\'a pès</string>
+    <string name="online_routing_example_hint">Lei URL amb totei lei paramètres seràn coma aquest :</string>
+    <string name="shared_string_enter_param">Intrar un paramètre</string>
+    <string name="shared_string_last_used">Darriera utilizacion</string>
+    <string name="profile_type_user_string">Perfiu d\'utilizator</string>
+    <string name="add_to_mapillary">Ajustar a Mapillary</string>
+    <string name="route_between_points_warning_desc">Alinhatz puei la traça sus la carriera permesa pus vesina amb un de vòstrei perfius de navigacion per emplegar aquesta opcion.</string>
+    <string name="shared_string_import_complete">Importacion completa</string>
+    <string name="copy_from_other_profile">Còpia d\'un autre perfiu</string>
+    <string name="announcement_time_arrive">Arrivada a destinacion</string>
+    <string name="announcement_time_prepare_long">Preparacion lònga</string>
+    <string name="copy_to_map_favorites">Còpia vèrs lei preferits</string>
+    <string name="whole_track">Tota la traça</string>
+    <string name="reverse_route">Inversar lo percors</string>
+    <string name="simplified_track_description">La linha dau percors soleta serà sauvagardada, lei ponchs d\'etapa seràn escafats.</string>
+    <string name="threshold_distance">Lindau de distància</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Veire lei balisas fixme</string>
+    <string name="files_with_route_restrictions">Fichiers amb restriccions de percors</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar lei nòtas de balisa</string>
+    <string name="shared_string_not_used">De pas emplegar</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Balisas Fixme</string>
+    <string name="upload_photo_completed">Telecargament complet</string>
+    <string name="announcement_time_title">Temps de l\'anóncia</string>
+    <string name="routing_engine_vehicle_type_wheelchair">Fautuelh corredís</string>
+    <string name="start_recording">Començar l\'enregistrament</string>
+    <string name="show_track_on_map">Mostrar lo percors sus la mapa</string>
+    <string name="use_dev_url">Utilizar dev.openstreetmap.org</string>
+    <string name="routing_engine_vehicle_type_car">Automobila</string>
+    <string name="test_route_calculation">Assajar lo calcul dau percors</string>
+    <string name="keep_it_empty_if_not">Lo mantenir vueje autrament</string>
+    <string name="shared_string_server_url">URL dau servidor</string>
+    <string name="app_mode_light_aircraft">Avioneta</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="simplified_track">Traça simplificada</string>
+    <string name="routing_engine_vehicle_type_walking">D\'a pès</string>
+    <string name="routing_engine_vehicle_type_hiking">Escorreguda</string>
+    <string name="shared_string_empty">Vuejar</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Bicicleta de corsa</string>
+    <string name="shared_string_api_key">Clau API</string>
+    <string name="shared_string_vehicle">Veïcul</string>
+    <string name="shared_string_subtype">Sotacategoria</string>
+    <string name="toast_select_edits_for_upload">Seleccionatz lei modificacions de telecargar</string>
+    <string name="uploaded_count">Telegargat %1$d de %2$d</string>
+    <string name="open_place_reviews_plugin_description">Mandatz de fòtos, de criticas e de liames sus de luòcs publics taus coma restaurants, ostalariás, musèus e etapas per donadas dobèrtas https://openplacereviews.org/data/.
+\n
+\nNe\'n saber mai sus : https://openplacereviews.org</string>
+    <string name="select_segments_description">%1$s contèn mai d\'un segment, es necessari de seleccionar la part de navigacion.</string>
+    <string name="select_segments">Seleccionar lei segments</string>
+    <string name="uploading_count">A telecargar %1$d de %2$d</string>
+    <string name="context_menu_edit_descr">Modificar la descripcion</string>
+    <string name="context_menu_read_full">Tot legir</string>
+    <string name="delete_online_routing_engine">Escafar aquest calcul de navigacion en linha \?</string>
+    <string name="message_name_is_already_exists">Lo nom ja existís</string>
+    <string name="routing_engine_vehicle_type_mtb">MTB</string>
+    <string name="routing_engine_vehicle_type_racingbike">Bicicleta de corsa</string>
+    <string name="routing_engine_vehicle_type_scooter">Motocicleta</string>
+    <string name="routing_engine_vehicle_type_small_truck">Pichon forgon</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Bicicleta de montanha</string>
+    <string name="announcement_time_descr">Lo temps de l\'anóncia deis avertiments vocaus va segon la mena de l\'avís, la velocitat de navigacion actuala e la velocitat de la navigacion per defaut.</string>
+    <string name="upload_to_openstreetmap">Telecargar vèrs OpenStreetMap</string>
+    <string name="analyze_by_intervals">Analizar per intervalles</string>
+    <string name="select_folder_descr">Seleccionar un repertòri ò ajustar-ne\'n un novèu</string>
+    <string name="shared_string_folders">Repertòris</string>
+    <string name="online_routing_engines">Calcul de la navigacion en linha</string>
+    <string name="online_routing_engine">Calcul de la navigacion en linha</string>
+    <string name="copy_address">Copiar l\'adreiça</string>
+    <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
+    <string name="routing_engine_vehicle_type_driving">A menar</string>
+    <string name="add_online_routing_engine">Ajustar un calcul de la navigacion en linha</string>
+    <string name="profile_by_default_description">Seleccionatz lo perfiu que s\'emplegarà per aviar l\'aplicacion.</string>
+    <string name="reverse_all_points">Inversar totei lei ponchs</string>
+    <string name="attach_to_the_roads">Limitar ai rotas</string>
+    <string name="follow_track">Seguir la traça</string>
+    <string name="profile_type_custom_string">Perfiu personalizat</string>
+    <string name="reset_to_default">Restablir lei valors predefinidas</string>
+    <string name="segments_count">Segment %1$d</string>
+    <string name="announcement_time_intervals">Intervalle de temps e de distància</string>
+    <string name="announcement_time_off_route">Fòra dau percors</string>
+    <string name="announcement_time_prepare">Preparar</string>
+    <string name="select_folder">Seleccionar un repertòri</string>
+    <string name="open_saved_track">Dobrir una traça enregistrada</string>
+    <string name="nearest_point">Ponch pus pròche</string>
+    <string name="edit_online_routing_engine">Modificar lo calcul de la navigacion en linha</string>
+    <string name="calculate_osmand_route_gpx">Calcul d\'un percors OsmAnd fòra de linha</string>
+    <string name="osmand_extended_description_part7">Collaboratz amb Openstreetmap (OSM)
+\n• Informant d\'errors
+\n• Telecargant de traças GPX vèrs OSM directament de l\'aplicacion
+\n• Ajustant de PDIs e lei telecargant vèrs OSM directament (ò pus tard se siatz pas connectats)
+\n</string>
+    <string name="wikivoyage_download_pics_descr">Leis imatges deis articles se pòdon teledescargar per l\'us sensa connexion.
+\nLa modificacion dei reglatges se fa dins \'Exploracion → \'Opcions\'.</string>
+    <string name="skip_map_downloading_desc">Avètz ges de mapa locala d\'installada. Podètz chausir una mapa de la lista ò teledescargar de mapas pus tard per «Menut - %1$s».</string>
+    <string name="offline_navigation_not_available">La navigacion fòra de linha OsmAnd es pas disponibla temporariament.</string>
+    <string name="first_time_msg">Grandmercé d\'emplegar OsmAnd. Teledescargatz lei donadas regionalas per un us fòra de linha dins \'Configuracion\' → \'Gestion de fichiers de mapas\' per visualizar lei mapas, localizar leis adreiças, recercar de PDIs, trobar lo transpòrt public e mai.</string>
+    <string name="index_settings_descr">Teledesgargatz e administratz lei mapas fòra de linha archivadas sus vòstre aparelh.</string>
+    <string name="switch_to_raster_map_to_see">Teledescargatz una mapa vectoriala locala per aquesta localizacion dins \'Configuracion\' (\'Gestion de fichiers de mapas\') ò modificatz l\'ajuston \'Mapas en linhas\'.</string>
+    <string name="offline_edition_descr">Sensa connexion, la modificacion es activada, mai lei cambis se devon sauvagardar localament en premier, se telecargaràn au besonh; autrament s\'actualizan immediatament.</string>
+    <string name="amenity_type_osmwiki">Wikipèdia (fòra de linha)</string>
+    <string name="data_to_search_poi_not_available">Teledescargatz lei donadas localas per recercar de PDIs.</string>
+    <string name="dash_download_msg_none">Teledescargar de mapas fòra de linha \?</string>
+    <string name="offline_edition">Modificar fòra de linha</string>
+    <string name="world_ski_missing">Teledescargatz la mapa locala particulara ais installacions d\'esquí.</string>
+    <string name="calculate_osmand_route_without_internet">Calcul fòra de linha d\'un segment de percors OsmAnd</string>
+    <string name="osmand_plus_extended_description_part4">Utiliza lei donadas OSM e de la Wikipèdia
+\n• Informacion de qualitat dei melhors projèctes collaboratius dau monde
+\n• Lei donadas OSM son disponiblas per país ò region
+\n• Lei PDI\'s de la Wikipèdia son perfèctas per far torisme
+\n• Teledescargaments illimitats e a gratis, directament de l\'aplicacion
+\n• De mapas vectorialas compactas en locau actualizadas amb una escasença mesadiera garantida
+\n
+\n• Chausida entre lei donadas completas d\'una region ò ren que lo malhum viari (Exemple: tot lo Japon ocupa 700 MB mai 200 MB solament per lei rotas soletas)</string>
+    <string name="nautical_maps_missing">Teledescargatz la mapa particulara ai donadas nauticas per un us fòra de linha.</string>
+    <string name="osm_save_offline">Sauvagardar fòra de linha</string>
+    <string name="read_wikipedia_offline">Legir Wikipèdia fòra de linha</string>
+    <string name="osmand_plus_short_description_80_chars">Visualizacion e navigacion mobila amb lei mapas mondialas OSM en linha e fòra de linha</string>
+    <string name="osmand_plus_extended_description_part2">Navigacion
+\n• Foncciona en linha (rapid) ò sensa connexion (sensa cargas de roaming quand siatz a l\'estrangier)
+\n• Indicacions de votz a cada virament (amb messatges enregistrats e sintetizats)
+\n• Orientacion opcionala dau percors, visualizacion dau nom de la via e dau temps estimat d\'arribada
+\n• Admet lei ponchs d\'etapa intermediaris
+\n• Revision automatica dau percors quand desviatz de l\'itinerari prepausat
+\n• Recèrca de luòcs per adreiça, mena(per exemple: restaurant, ostalariá, gasoliniera, musèu) ò coordenades geograficas
+\n</string>
+    <string name="osmand_plus_extended_description_part7">Collaboratz directament a OSM
+\n• Senhalatz leis errors de donadas
+\n• Telecargatz de traças GPX de l\'aplicacion directament vèrs OSM
+\n• Ajustatz de PDIs e telecargatz-lei vèrs OSM (ò faguètz-o pus tard se siatz pas connectats)
+\n• Enregistrament opcionau dau percors, emai en segon plan (mentre que l\'aparelh es inactiu)
+\nOsmAnd es un programa de còdi dobèrt que se desvelopa activament. Cadun pòt contribuir a l\'aplicacion en informant d\'errors, melhorant la traduccion ò programant de caracteristicas nòvas. Lo projècte se fondamenta tanben sus lei contribucions financiàrias per ajudar lo desvelopament de la programacion e la validacion de fonccionalitats novèlas.
+\n</string>
+    <string name="vector_data_missing">Teledescargatz (\'fòra de linha\') lei donadas per emplegar de mapas sensa connexion.</string>
+    <string name="send_logcat_log">Mandar lo jornau logcat</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizacion simplificada deis icònas a zoom feble</string>
+    <string name="in_grace_period">En periòde de gràcia</string>
+    <string name="announcement_time_passing">A passar</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s donadas disponiblas ren que sus lei rotas, calcular un percors en emplegant \'Percors entre ponchs\' per visualizar lo grafic.</string>
+    <string name="shared_string_graph">Grafic</string>
+    <string name="start_finish_icons">Icònas de partença e d\'arribada</string>
+    <string name="sort_name_ascending">Nom: A - Z</string>
+    <string name="sort_name_descending">Nom: Z - A</string>
+    <string name="shared_string_add_photo">Ajustar de fòtos</string>
+    <string name="shared_string_sec">sec</string>
+    <string name="enter_text_separated">Marcatz lei balisas separadas d\'una virgula.</string>
+    <string name="complex_routing_descr">Calcul dau percors en doas fasis per la navigacion en automobila.</string>
+    <string name="add_photos_descr">OsmAnd mòstra de fòtos de fònts divèrsas :
+\nOpenPlaceReviews - fòtos de PDIs;
+\nMapillary: imatges de carrieras ;
+\nWeb / Wikimedia: fòtos dei PDIs d\'OpenStreetMap.</string>
+    <string name="use_dev_url_descr">Per lo telecargament dei Nòtas OSM / PDI / GPX, assajatz dev.openstreetmap.org en plaça de openstreetmap.org.</string>
+    <string name="osm_edit_close_note">Clacar la nòta d\'OSM</string>
+    <string name="gpx_upload_trackable_visibility_descr">« Traçable » vòu dire que la traça pareisse pas dins ges de lista publica, mai solament lei ponchs intermediaris e son informacion temporala (que se pòdon pas associar directament amb vos) per lei teledescargaments de l\'API GPS publica.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privada\" vòu dire que la traça es pas visibla en ges de lista publica, mai lei ponchs que contèn seràn disponibles per l\'API publica GPS, desordenadas e sensa informacion temporala.</string>
+    <string name="clear_osm_token">Escafar lo testimòni OAuth d\'OpenStreetMap</string>
+    <string name="use_native_pt_desc">Bascular lo calcul dau percors de Transpòrt Public sus Java (segur)</string>
+    <string name="use_fast_recalculation_desc">Actualizar la premiera partida dau percors solament. Utile per lei viatges lòngs.</string>
+    <string name="user_password">Senhau</string>
+    <string name="approximate_file_size">Mesura aproximativa dau fichier</string>
+    <string name="select_picture">Seleccionatz l\'imatge</string>
+    <string name="backup_storage_taken">Resèrva occupada</string>
+    <string name="routing_attr_allow_intermittent_name">Permetre lei vias navigablas non permanentas</string>
+    <string name="routing_attr_allow_intermittent_description">Permetre lei vias navigablas non permanentas</string>
+    <string name="routing_attr_allow_streams_description">Permetre rius e vabres</string>
+    <string name="routing_attr_allow_streams_name">Permetre rius e vabres</string>
+    <string name="add_to_opr">Ajustar a OpenPlaceReviews</string>
+    <string name="export_not_enough_space">Pas pron d\'espaci</string>
+    <string name="select_items_for_import">Seleccionatz leis elements que s\'importaràn.</string>
+    <string name="export_not_enough_space_descr">Vòstre aparelh contèn ren que %1$s de liures. Aliberatz d\'espaci ò desseleccionatz d\'uneis articles per exportar.</string>
+    <string name="file_size_needed_for_import">Necessari per l\'importacion</string>
+    <string name="select_data_to_export">Seleccionatz lei donadas d\'exportar vèrs lo fichier.</string>
+    <string name="cannot_upload_image">L\'imatge se pòt pas telecargar, tornatz assajar pus tard</string>
+    <string name="select_groups_for_import">Seleccionatz lei grops que s\'importaràn.</string>
+    <string name="osm_login_descr">Connectatz-vos amb lo metòde OAuth ò vòstre nom d\'utilizator e lo senhau OSM.</string>
+    <string name="osm_edit_comment_note">Comentari de la nòta d\'OSM</string>
+    <string name="register_on_openplacereviews_desc">Lei fòtos son fornidas per lo projècte de donadas dobèrtas OpenPlaceReviews.org. Per poder telecargar vòstrei fòtos, vos devètz marcar sus son sit oèb.</string>
+    <string name="register_on_openplacereviews">Registratz-vos sus
+\nOpenPlaceReviews.org</string>
+    <string name="send_files_to_openstreetmap">Mandar lo fichier GPX a OpenStreetMap</string>
+    <string name="gpx_upload_public_visibility_descr">\"Public\" vòu dire que la traça se visualiza publicament dins vòstrei traças GPS, dins lei listas publicas de traças GPS amb seis informacions temporalas en forma grassa. Lei donadas fornidas per l\'API menan pas a vòstra pagina de traças. Leis informacions temporalas dei ponchs de traça son pas disponibles per l\'API GPS publica, e lei ponchs de la traça son pas ordenats segon lo temps.</string>
+    <string name="user_login">Identificant</string>
+    <string name="login_account">Còmpte</string>
+    <string name="use_login_password">Emplegar lo nom d\'utilizator e son senhau</string>
+    <string name="open_street_map_login_mode">Connectatz-vos per telecargar premier lei modificacions novèlas.
+\n
+\nEmplegatz lo metòde OAuth ò vòstre nom d\'utilizator e lo senhau OSM.</string>
+    <string name="osm_edits_view_descr">Consultatz totei leis modificacions ò errors OSM qu\'avètz pas encar telecargadas vèrs %1$s. Lei cambiaments ja mandats se veiràn plus.</string>
+    <string name="sign_in_with_open_street_map">Accès per OpenStreetMap</string>
+    <string name="login_open_street_map_org">Se connectar a OpenStreetMap.org</string>
+    <string name="login_open_street_map">Se connectar a OpenStreetMap</string>
+    <string name="plugin_global_prefs_info">La configuracion de l\'ajust es globala e afècta totei lei perfius</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Ajustatz au mens dos ponchs</string>
+    <string name="icon_group_service">Servici</string>
+    <string name="icon_group_special">Especiau</string>
+    <string name="icon_group_amenity">Equipament</string>
+    <string name="development">Desvelopament</string>
+    <string name="file_already_imported">Lo fichier es ja importat in OsmAnd</string>
+    <string name="routing_attr_avoid_footways_name">Evitar lei camins pedoniers</string>
+    <string name="use_two_phase_routing">Utiliza l\'algoritme de calcul a 2-fasi A*</string>
+    <string name="osm_edit_logout_success">Session clavada</string>
+    <string name="use_live_public_transport">Donadas d\'OsmAnd Live</string>
+    <string name="contour_lines_thanks">Grandmercé per aver crompat l\'ajuston \'Corbas de nivèu\'</string>
+    <string name="send_crash_log">Mandar lo jornau dei malacapitadas</string>
+    <string name="register_opr_create_new_account">Crear un còmpte nòu</string>
+    <string name="icon_group_transport">Transpòrt</string>
+    <string name="one_point_error">Ajustatz au mens dos ponchs.</string>
+    <string name="shared_string_is_saved">es sauvagardat</string>
+    <string name="sort_last_modified">Darriera modificacion</string>
+    <string name="shared_string_redo">Tornar far</string>
+    <string name="shared_string_search_history">Istoric de la recèrca</string>
+    <string name="register_opr_have_account">Avètz ja un còmpte</string>
+    <string name="app_mode_motorboat">Barca de motor</string>
+    <string name="use_native_pt">Desvelopament locau de Transpòrt Public</string>
+    <string name="perform_oauth_authorization">Iniciar la session per OAuth</string>
+    <string name="perform_oauth_authorization_description">Iniciatz la session per lo mejan d\'OAuth per emplegar lei fonccionalitats osmedit</string>
+    <string name="app_mode_kayak">Caiac</string>
+    <string name="icon_group_travel">Viatge</string>
+    <string name="icon_group_symbols">Simbòl</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="message_graph_will_be_available_after_recalculation">Esperatz.
+\nLo grafic serà disponible après lo recalcul dau percors.</string>
+    <string name="use_live_routing">Donadas d\'OsmAnd Live</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vòu dire que la traça se visualiza publicament dins vòstrei traças GPS e sus la lista publica de traças GPS, valent a dire, que leis autreis utilizators la podràn teledescargar en forma grassa e l\'associar amb vòstre nom d\'utilizator. Lei donadas temporalas e lei ponchs de la traça servits per l’API GPS faràn referéncia a la pagina de vòstra traça originala.</string>
+    <string name="icon_group_emergency">Urgéncia</string>
+    <string name="icon_group_sport">Espòrt</string>
+    <string name="routing_engine_vehicle_type_hgv">Mieg-pesant</string>
+    <string name="foot">ft</string>
+    <string name="routing_attr_avoid_footways_description">Evitar lei camins pedoniers</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="filter_poi_hint">Filtrar per nom</string>
+    <string name="access_hint_enter_address">Intratz l\'adreiça</string>
+    <string name="shared_string_disabled">Desactivat</string>
+    <string name="rendering_attr_seabedDetail_name">Detalh dei fons marins</string>
+    <string name="rendering_attr_seabedDetail_description">Informacions textualas suplementàrias sus la qualitat dei fons de la mar, la descripcion, la natura deis augas</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Tot</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Ciclisme regular</string>
+    <string name="shared_string_meters">mètres</string>
+    <string name="rearrange_categories">Reorganizar lei categorias</string>
+    <string name="add_custom_category">Ajustar una categoria personalizada</string>
+    <string name="lang_zh_hk">Chinés (Hong Kong)</string>
+    <string name="favorite_friends_category">Amic-ga-s</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="all_next_segments_will_be_recalc">Totei lei segments seguents se tornaràn calcular segon lo perfiu chausit.</string>
+    <string name="all_previous_segments_will_be_recalc">Totei lei segments anteriors se tornaràn calcular segon lo perfiu chausit.</string>
+    <string name="m">m</string>
+    <string name="shared_string_filters">Filtres</string>
+    <string name="app_mode_enduro_motorcycle">Mòto d\'endura</string>
+    <string name="save_global_track_interval_descr">Indicar l\'intervalle per l\'enregistrament generau dei traças (aiçò s\'activa per lo boton \'Enregistrament de percors\' sus la mapa).</string>
+    <string name="pass_whole_track_descr">Ponch de la traça per navegar</string>
+    <string name="shared_string_file_name">Nom dau Fichier</string>
+    <string name="start_of_the_track">Començament de la traça</string>
+    <string name="route_between_points_add_track_desc">Chausir lo fichier de traças en quau s\'ajustarà l\'etapa novèla.</string>
+    <string name="gpx_split_interval_none_descr">Chausir lo critèri desirat : segon lo temps ò segon la distància.</string>
+    <string name="route_between_points">Percors entre dos ponchs</string>
+    <string name="select_track_width">Seleccionar l\'ample</string>
+    <string name="set_working_days_to_continue">Indicatz lei jorns obrants per continuar</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="overwrite_track">Remplaçar la traça</string>
+    <string name="all_next_segments">Totei lei segments seguents</string>
+    <string name="import_track_descr">Chausir un fichier de traças a seguir ò l\'importar de vòstre aparelh.</string>
+    <string name="context_menu_item_add_waypoint">Ajustar un ponch d\'etapa a la traça</string>
+    <string name="shared_string_save_as_gpx">Sauvagardar per fichier de traças novèu</string>
+    <string name="all_previous_segments">Totei lei segments precedents</string>
+    <string name="show_gpx">Traças</string>
+    <string name="rendering_value_omit_name">Evitar</string>
+    <string name="previous_segment">Segment precedent</string>
+    <string name="system_default_theme">Predeterminat dau sistema</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament dei traças s\'acabarà quand l\'aplicacion serà suprimida (per leis aplicacions recentas). (Leis indicacions en segon plan d\'OsmAnd desapareisseràn de la barra de notificacions Android.)</string>
+    <string name="number_of_gpx_files_selected_pattern">%s fichiers de traças seleccionats</string>
+    <string name="add_address">Ajustar una adreiça</string>
+    <string name="navigate_to_track_descr">Navegar partent de ma posicion fins a la traça</string>
+    <string name="empty_state_my_tracks_desc">Importar ò enregistrar de fichiers de traças</string>
+    <string name="add_segment_to_the_track">Ajustar a un fichier de traças</string>
+    <string name="next_segment">Etapa novèla</string>
+    <string name="route_between_points_desc">Chausir coma connectar lei ponchs, d\'una linha drecha, ò calcular lo percors entre elei coma precisat çai-sota.</string>
+    <string name="route_between_points_next_segment_button_desc">Lo segment novèu solament serà recalculat segon lo perfiu seleccionat.</string>
+    <string name="gpx_direction_arrows">Sagetas de direccion</string>
+    <string name="gpx_split_interval_descr">Chausir l\'intervalle que lei marcas de distància ò de temps seràn visualizadas.</string>
+    <string name="add_to_a_track">Ajustar una traça</string>
+    <string name="osm_edit_closed_note">La Nòta OSM es clavada</string>
+    <string name="app_mode_go_cart">Anar-au-Panier</string>
+    <string name="app_mode_wheelchair_forward">Cadiera de ròdas vèrs l\'avant</string>
+    <string name="app_mode_wheelchair">Cadiera de ròdas</string>
+    <string name="use_volume_buttons_as_zoom">Botons de volume per lo zoom</string>
+    <string name="gpx_monitoring_start">Reprendre l\'enregistrament dau viatge</string>
+    <string name="gpx_monitoring_stop">Pausar l\'enregistrament dau viatge</string>
+    <string name="delete_address">Escafar l\'adreiça</string>
+    <string name="map_widget_monitoring">Enregistrament dau percors</string>
+    <string name="quick_action_add_gpx">Ajustar un ponch d\'etapa a la traça</string>
+    <string name="follow_track_descr">Chausir un fichier de traças a seguir</string>
+    <string name="empty_state_my_tracks">Ajustar de fichiers de traças</string>
+    <string name="shared_string_gpx_route">Traça d\'un percors</string>
+    <string name="save_track_to_gpx_globally">Enregistrar la traça dins un fichier GPX</string>
+    <string name="street_level_imagery">Imatges de carrieras</string>
+    <string name="layer_gpx_layer">Traças</string>
+    <string name="shared_string_gpx_files">Traças</string>
+    <string name="in_case_of_reverse_direction">En cas de direccion envèrsa</string>
+    <string name="route_between_points_whole_track_button_desc">Lo percors entier serà recalculat segon lo perfiu seleccionat.</string>
+    <string name="save_as_new_track">Sauvagardar per traça nòva</string>
+    <string name="add_hidden_group_info">Lo ponch ajustat se tròba dins \"1%s\". Desamagar lo grop seleccionat per lo visualizar sus la mapa.</string>
+    <string name="plugin_wikipedia_description">Obtenètz d\'informacions sus lei ponchs d\'interès de Wikipèdia, guida fòra de linha que presenta d\'articles sus lei luòcs e lei destinacions.</string>
+    <string name="please_provide_point_name_error">Nomatz lo ponch</string>
+    <string name="app_mode_motor_scooter">Motocicleta</string>
 </resources>

@@ -1,8 +1,5 @@
 package net.osmand.plus.mapmarkers;
 
-import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -20,6 +17,43 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
+import net.osmand.TspAnt;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
+import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
+import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
+import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
+import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapMarkersLayer;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarView;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -32,42 +66,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.Location;
-import net.osmand.TspAnt;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
-import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
-import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
-import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
-import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapMarkersLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.util.MapUtils;
-
-import java.util.ArrayList;
-import java.util.List;
+import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocationListener {
 
@@ -88,7 +88,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean fullScreen;
-	private boolean wasCollapseButtonVisible;
 	private boolean cancelSnapToRoad = true;
 
 	private Location location;
@@ -647,14 +646,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 					R.id.map_search_button,
 					R.id.map_quick_actions_button);
 
-			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-			if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-				wasCollapseButtonVisible = true;
-				collapseButton.setVisibility(View.INVISIBLE);
-			} else {
-				wasCollapseButtonVisible = false;
-			}
-
 			if (planRouteContext.getSnappedMode() == null) {
 				planRouteContext.setSnappedMode(ApplicationMode.DEFAULT);
 			}
@@ -716,11 +707,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 					R.id.map_layers_button,
 					R.id.map_search_button,
 					R.id.map_quick_actions_button);
-
-			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-			if (collapseButton != null && wasCollapseButtonVisible) {
-				collapseButton.setVisibility(View.VISIBLE);
-			}
 
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
@@ -963,7 +949,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private class PlanRouteToolbarController extends TopToolbarController {
 
 		PlanRouteToolbarController() {
-			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
+			super(TopToolbarController.TopToolbarControllerType.MEASUREMENT_TOOL);
 			setBackBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
@@ -974,7 +960,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		}
 
 		@Override
-		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+		public void updateToolbar(TopToolbarView view) {
 			super.updateToolbar(view);
 			View shadow = view.getShadowView();
 			if (shadow != null) {

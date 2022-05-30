@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.mapillary;
 
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,13 +10,16 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Point;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -21,27 +27,22 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.MapUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 
 public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
@@ -50,6 +51,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	public static final int MIN_POINTS_ZOOM = 17;
 	public static final double EXTENT = 4096.0;
 
+	private final MapillaryPlugin plugin;
+
 	private LatLon selectedImageLocation;
 	private Float selectedImageCameraAngle;
 	private Bitmap selectedImage;
@@ -57,10 +60,11 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	private Paint paintPoint;
 	private Paint paintLine;
 	private Bitmap point;
-	private Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
+	private Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 
 	MapillaryVectorLayer(@NonNull Context context) {
 		super(context, false);
+		plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 	}
 
 	@Override
@@ -71,8 +75,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		paintLine = new Paint();
 		paintLine.setStyle(Paint.Style.STROKE);
 		paintLine.setAntiAlias(true);
-		paintLine.setColor(ContextCompat.getColor(view.getContext(), R.color.mapillary_color));
-		paintLine.setStrokeWidth(AndroidUtils.dpToPx(view.getContext(), 4f));
+		paintLine.setColor(ContextCompat.getColor(getContext(), R.color.mapillary_color));
+		paintLine.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 4f));
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
 
 		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
@@ -117,7 +121,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		}
 
 		// recalculate for ellipsoid coordinates
-		float ellipticTileCorrection  = 0;
+		float ellipticTileCorrection = 0;
 		if (map.isEllipticYTile()) {
 			double tileEllipsoidNumberY = MapUtils.getTileEllipsoidNumberY(currentZoom, tileBox.getLatitude());
 			ellipticTileCorrection = (float) (tileEllipsoidNumberY - tileBox.getCenterTileY());
@@ -137,7 +141,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
 		Map<String, GeometryTile> tiles = new HashMap<>();
-		Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
+		Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				int tileX = (left + i) / div;
@@ -147,7 +151,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 				GeometryTile tile = tiles.get(tileId);
 				if (tile == null) {
 					// asking tile image async
-					boolean imgExist = tilesCache.tileExistOnFileSystem(tileId, map, tileX, tileY, tileZoom);
+					boolean imgExist = tilesCache.isTileDownloaded(tileId, map, tileX, tileY, tileZoom);
 					if (imgExist || useInternet) {
 						tile = tilesCache.getTileForMapAsync(tileId, map, tileX, tileY,
 								tileZoom, useInternet, drawSettings.mapRefreshTimestamp);
@@ -158,9 +162,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 						if (geometries != null) {
 							drawLines(canvas, tileBox, geometries, tileX, tileY, tileZoom);
 							if (currentZoom >= MIN_POINTS_ZOOM) {
-								Map<QuadPointDouble, Map> drawnPoints =
-										drawPoints(canvas, tileBox, geometries, tileX, tileY);
-								visiblePoints.putAll(drawnPoints );
+								Map<QuadPointDouble, Map<?, ?>> drawnPoints = drawPoints(canvas, tileBox, geometries, tileX, tileY);
+								visiblePoints.putAll(drawnPoints);
 							}
 						}
 					}
@@ -201,9 +204,9 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		Coordinate[] coordinates = line.getCoordinateSequence().toCoordinateArray();
 		draw(coordinates, canvas, tileBox, tileX, tileY, tileZoom);
 	}
-	
+
 	private void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox,
-	                    int tileX, int tileY, int tileZoom) {
+	                  int tileX, int tileY, int tileZoom) {
 		if (points.length > 1) {
 			int zoomDiff = tileBox.getZoom() - tileZoom;
 			int mult = (int) Math.pow(2.0, zoomDiff);
@@ -255,7 +258,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		}
 	}
 
-	private Map<QuadPointDouble, Map> drawPoints(Canvas canvas, RotatedTileBox tileBox,
+	private Map<QuadPointDouble, Map<?, ?>> drawPoints(Canvas canvas, RotatedTileBox tileBox,
 	                                             List<Geometry> geometries, int tileX, int tileY) {
 		int dzoom = tileBox.getZoom() - MIN_IMAGE_LAYER_ZOOM;
 		int mult = (int) Math.pow(2.0, dzoom);
@@ -267,7 +270,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		float pwd = pw / 2;
 		float phd = ph / 2;
 
-		Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
+		Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 		for (Geometry g : geometries) {
 			Map<?, ?> userData = g.getUserData() instanceof HashMap ? ((HashMap<?, ?>) g.getUserData()) : null;
 			if (g instanceof Point && !g.isEmpty() && userData != null) {
@@ -280,7 +283,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
 					canvas.drawBitmap(point, x - pwd, y - phd, paintPoint);
-					visiblePoints.put(new QuadPointDouble(tileX + px,  tileY + py), userData);
+					visiblePoints.put(new QuadPointDouble(tileX + px, tileY + py), userData);
 				}
 			}
 		}
@@ -293,11 +296,11 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return true;
 		}
 
-		boolean shouldFilter = settings.USE_MAPILLARY_FILTER.get();
-//		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
-		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
-		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
-		boolean pano = settings.MAPILLARY_FILTER_PANO.get();
+		boolean shouldFilter = plugin.USE_MAPILLARY_FILTER.get();
+//		String userKey = plugin.MAPILLARY_FILTER_USER_KEY.get();
+		long from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
+		long to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+		boolean pano = plugin.MAPILLARY_FILTER_PANO.get();
 
 		HashMap<String, Object> userData = (HashMap<String, Object>) data;
 		long capturedAt = ((Number) userData.get(CAPTURED_AT_KEY)).longValue();
@@ -351,7 +354,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapillaryImage) {
-			String description = view.getContext().getString(R.string.mapillary_image);
+			String description = getContext().getString(R.string.mapillary_image);
 			return new PointDescription(PointDescription.POINT_TYPE_MAPILLARY_IMAGE, description);
 		}
 		return null;
@@ -399,7 +402,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
-		Map<QuadPointDouble, Map> points = this.visiblePoints;
+		Map<QuadPointDouble, Map<?, ?>> points = this.visiblePoints;
 		float ex = point.x;
 		float ey = point.y;
 		final int rp = getRadius(tb);
@@ -409,13 +412,16 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		double sqDist;
 		MapillaryImage img = null;
 
-		for (Entry<QuadPointDouble, Map> entry : points.entrySet()) {
+		for (Entry<QuadPointDouble, Map<?, ?>> entry : points.entrySet()) {
 			double tileX = entry.getKey().x;
 			double tileY = entry.getKey().y;
 			Map<?, ?> userData = entry.getValue();
 
-			x = tb.getPixXFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
-			y = tb.getPixYFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+					MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileY),
+					MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileX));
+			x = pixel.x;
+			y = pixel.y;
 			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 				sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
 				if (img == null || minSqDist > sqDist) {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_mode_bus">Bus</string>
     <string name="app_mode_train">Ćah</string>
@@ -471,9 +471,6 @@
     <string name="map_widget_lock_screen">Lock screen</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_parking">Parkowanišćo</string>
-    <string name="map_widget_speed">Spěšnosć</string>
-    <string name="map_widget_distance">Cil</string>
-    <string name="map_widget_altitude">Wysokosć</string>
     <string name="map_widget_time">Zbywacy čas</string>
     <string name="show_cameras">Błyskače pokazać</string>
     <string name="show_traffic_warnings">Wobchadne warnowanja pokazać</string>
@@ -1628,4 +1625,8 @@
     <string name="base_profile_descr_aircraft">Lětadło, gliding</string>
     <string name="shared_string_track_is_saved">Čara %s je składowana</string>
     <string name="downloading_list_indexes">Sćahnu lisćinu přistupnych regionow…</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="shared_string_import_complete">Import dokónčeny</string>
+    <string name="add_description">Wopisanje dodać</string>
+    <string name="shared_string_transparency">Transparenca</string>
 </resources>

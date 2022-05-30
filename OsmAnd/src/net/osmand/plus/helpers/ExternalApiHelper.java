@@ -1,14 +1,5 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.search.core.ObjectType.CITY;
-import static net.osmand.search.core.ObjectType.HOUSE;
-import static net.osmand.search.core.ObjectType.POI;
-import static net.osmand.search.core.ObjectType.POSTCODE;
-import static net.osmand.search.core.ObjectType.STREET;
-import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
-import static net.osmand.search.core.ObjectType.VILLAGE;
-import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -25,7 +16,6 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -37,20 +27,19 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -60,8 +49,12 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.TurnType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
@@ -78,6 +71,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 public class ExternalApiHelper {
 
@@ -501,7 +503,7 @@ public class ExternalApiHelper {
 				fav.setColor(color);
 				fav.setVisible(visible);
 
-				FavouritesDbHelper helper = app.getFavorites();
+				FavouritesHelper helper = app.getFavoritesHelper();
 				helper.addFavourite(fav);
 
 				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavouritesLayer().getObjectName(fav));
@@ -780,9 +782,11 @@ public class ExternalApiHelper {
 										LatLon to, PointDescription toDesc,
 										ApplicationMode mode, boolean checkLocationPermission) {
 		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		MapViewTrackingUtilities mapViewTrackingUtilities = mapActivity.getMapViewTrackingUtilities();
 		if (gpx == null) {
-			app.getSettings().setApplicationMode(mode);
+			settings.setApplicationMode(mode);
 			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
@@ -791,15 +795,15 @@ public class ExternalApiHelper {
 		if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 			mapActivity.getMapRouteInfoMenu().show();
 		} else {
-			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
-				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
+			if (settings.APPLICATION_MODE.get() != routingHelper.getAppMode()) {
+				settings.setApplicationMode(routingHelper.getAppMode(), false);
 			}
-			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-			app.getSettings().FOLLOW_THE_ROUTE.set(true);
+			mapViewTrackingUtilities.backToLocationImpl();
+			settings.FOLLOW_THE_ROUTE.set(true);
 			routingHelper.setFollowingMode(true);
 			routingHelper.setRoutePlanningMode(false);
-			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-			app.getRoutingHelper().notifyIfRouteIsCalculated();
+			mapViewTrackingUtilities.switchToRoutePlanningMode();
+			routingHelper.notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
 		if (checkLocationPermission) {

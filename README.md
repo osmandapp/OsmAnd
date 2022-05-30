@@ -12,6 +12,12 @@ You are welcome to discuss any question regarding the project at the Google grou
 <img src="https://github.com/osmandapp/osmandapp.github.io/blob/master/website/images/help/badge_store_appstore.png" alt="Get it on AppStore" height="60"/></a>
 
 
+<p>
+<a href="https://hosted.weblate.org/engage/osmand/">
+<img src="https://hosted.weblate.org/widgets/osmand/-/svg-badge.svg" alt="Translation status" />
+</a>
+</p>
+
 Functionality
 -------------
 **OsmAnd (OSM Automated Navigation Directions)** is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) database.
@@ -71,6 +77,7 @@ All main functionalities work both online and offline (no internet needed).
  * Optional trip recording in background mode (while device is in sleep mode)
 
 
+#### Contribute to OsmAnd
 OsmAnd is open-source and actively being developed.
 Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features.
 The project experiences continuous improvement by all such forms of developer and user interaction.

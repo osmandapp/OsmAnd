@@ -1,6 +1,8 @@
 package net.osmand.plus.track.helpers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
@@ -17,20 +19,21 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -262,15 +265,15 @@ public class GpxSelectionHelper {
 		return group;
 	}
 
-	public GpxDisplayGroup buildGpxDisplayGroup(GPXFile g, int trackIndex, String name) {
-		Track t = g.tracks.get(trackIndex);
-		GpxDisplayGroup group = new GpxDisplayGroup(g);
+	public GpxDisplayGroup buildGpxDisplayGroup(@NonNull GPXFile gpxFile, int trackIndex, String name) {
+		Track t = gpxFile.tracks.get(trackIndex);
+		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
 		group.gpxName = name;
-		group.color = t.getColor(g.getColor(0));
+		group.color = t.getColor(gpxFile.getColor(0));
 		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
 		group.setTrack(t);
 		String ks = (trackIndex + 1) + "";
-		group.setName(getString(R.string.gpx_selection_track, name, g.tracks.size() == 1 ? "" : ks));
+		group.setName(getString(R.string.gpx_selection_track, name, gpxFile.tracks.size() == 1 ? "" : ks));
 		String d = "";
 		if (t.name != null && t.name.length() > 0) {
 			d = t.name + " " + d;
@@ -278,6 +281,31 @@ public class GpxSelectionHelper {
 		group.setDescription(d);
 		group.setGeneralTrack(t.generalTrack);
 		processGroupTrack(app, group);
+		return group;
+	}
+
+	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GPXFile gpxFile, @NonNull List<WptPt> points, String name) {
+		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
+		group.gpxName = name;
+		group.setType(GpxDisplayItemType.TRACK_POINTS);
+		group.setDescription(getString(R.string.gpx_selection_number_of_points, gpxFile.getPointsSize()));
+		group.setName(getString(R.string.gpx_selection_points, name));
+		List<GpxDisplayItem> list = group.getModifiableList();
+		int k = 0;
+		for (WptPt wptPt : points) {
+			GpxDisplayItem item = new GpxDisplayItem();
+			item.group = group;
+			item.description = wptPt.desc;
+			item.name = wptPt.name;
+			k++;
+			if (Algorithms.isEmpty(item.name)) {
+				item.name = getString(R.string.gpx_selection_point, k + "");
+			}
+			item.expanded = true;
+			item.locationStart = wptPt;
+			item.locationEnd = wptPt;
+			list.add(item);
+		}
 		return group;
 	}
 
@@ -304,21 +332,21 @@ public class GpxSelectionHelper {
 		return name;
 	}
 
-	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile g) {
+	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile gpxFile) {
 		List<GpxDisplayGroup> dg = new ArrayList<>();
-		String name = getGroupName(g);
-		if (g.tracks.size() > 0) {
-			for (int i = 0; i < g.tracks.size(); i++) {
-				GpxDisplayGroup group = buildGpxDisplayGroup(g, i, name);
+		String name = getGroupName(gpxFile);
+		if (gpxFile.tracks.size() > 0) {
+			for (int i = 0; i < gpxFile.tracks.size(); i++) {
+				GpxDisplayGroup group = buildGpxDisplayGroup(gpxFile, i, name);
 				if (group.getModifiableList().size() > 0) {
 					dg.add(group);
 				}
 			}
 		}
-		if (g.routes.size() > 0) {
+		if (gpxFile.routes.size() > 0) {
 			int k = 0;
-			for (Route route : g.routes) {
-				GpxDisplayGroup group = new GpxDisplayGroup(g);
+			for (Route route : gpxFile.routes) {
+				GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
 				group.gpxName = name;
 				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
 				String d = getString(R.string.gpx_selection_number_of_points, name, route.points.size());
@@ -327,7 +355,7 @@ public class GpxSelectionHelper {
 				}
 				group.setDescription(d);
 				String ks = (k++) + "";
-				group.setName(getString(R.string.gpx_selection_route_points, name, g.routes.size() == 1 ? "" : ks));
+				group.setName(getString(R.string.gpx_selection_route_points, name, gpxFile.routes.size() == 1 ? "" : ks));
 				dg.add(group);
 				List<GpxDisplayItem> list = group.getModifiableList();
 				int t = 0;
@@ -347,30 +375,9 @@ public class GpxSelectionHelper {
 				}
 			}
 		}
-
-		if (!g.isPointsEmpty()) {
-			GpxDisplayGroup group = new GpxDisplayGroup(g);
-			group.gpxName = name;
-			group.setType(GpxDisplayItemType.TRACK_POINTS);
-			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.getPointsSize()));
-			group.setName(getString(R.string.gpx_selection_points, name));
+		if (!gpxFile.isPointsEmpty()) {
+			GpxDisplayGroup group = buildPointsDisplayGroup(gpxFile, gpxFile.getPoints(), name);
 			dg.add(group);
-			List<GpxDisplayItem> list = group.getModifiableList();
-			int k = 0;
-			for (WptPt r : g.getPoints()) {
-				GpxDisplayItem item = new GpxDisplayItem();
-				item.group = group;
-				item.description = r.desc;
-				item.name = r.name;
-				k++;
-				if (Algorithms.isEmpty(item.name)) {
-					item.name = getString(R.string.gpx_selection_point, k + "");
-				}
-				item.expanded = true;
-				item.locationStart = r;
-				item.locationEnd = r;
-				list.add(item);
-			}
 		}
 		return dg;
 	}
@@ -875,6 +882,37 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	/**
+	 * @param file null if current track
+	 */
+	public static void getGpxFile(@NonNull Activity activity,
+	                              @Nullable File file,
+	                              boolean showProgress,
+	                              @NonNull CallbackWithObject<GPXFile> callback) {
+		OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		SelectedGpxFile selectedGpxFile = file == null
+				? app.getSavingTrackHelper().getCurrentTrack()
+				: app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+		if (selectedGpxFile != null) {
+			callback.processResult(selectedGpxFile.getGpxFileToDisplay());
+		} else {
+			String dialogTitle = app.getString(R.string.loading_smth, "");
+			String dialogMessage = app.getString(R.string.loading_data);
+			ProgressDialog progressDialog = showProgress && AndroidUtils.isActivityNotDestroyed(activity)
+					? ProgressDialog.show(activity, dialogTitle, dialogMessage)
+					: null;
+
+			GpxFileLoaderTask loadGpxTask = new GpxFileLoaderTask(file, gpxFile -> {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				callback.processResult(gpxFile);
+				return true;
+			});
+			loadGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
 	public static class SelectedGpxFile {
 
 		public boolean notShowNavigationDialog = false;
@@ -961,6 +999,7 @@ public class GpxSelectionHelper {
 			return routePoints;
 		}
 
+		@NonNull
 		public List<TrkSegment> getPointsToDisplay() {
 			if (filteredSelectedGpxFile != null) {
 				return filteredSelectedGpxFile.getPointsToDisplay();

@@ -1,15 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -32,38 +22,46 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.DrawerMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
 import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.RearrangeMenuAdapterItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
 
 public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		implements SelectCopyAppModeBottomSheet.CopyAppModePrefsListener {
@@ -131,8 +129,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		if (view != null && !nightMode) {
+			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 		}
 		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
 	}
@@ -184,28 +182,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private void initMainActionsIds(ApplicationMode appMode, boolean useDefaultValue) {
-		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+		List<ContextMenuItem> items = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
 		ContextMenuItemsSettings pref = getMenuItemsSettings(appMode, useDefaultValue);
 		if (pref instanceof MainContextMenuItemsSettings) {
 			mainActionItems = new ArrayList<>(((MainContextMenuItemsSettings) pref).getMainIds());
 			if (mainActionItems.isEmpty()) {
-				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < defItems.size(); i++) {
-					mainActionItems.add(defItems.get(i).getId());
+				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < items.size(); i++) {
+					mainActionItems.add(items.get(i).getId());
 				}
 			}
 		}
-	}
-
-	public static List<ContextMenuItem> getCustomizableDefaultItems(List<ContextMenuItem> defItems) {
-		List<ContextMenuItem> items = new ArrayList<>();
-		for (ContextMenuItem item : defItems) {
-			if (!APP_PROFILES_ID.equals(item.getId())
-					&& !DRAWER_CONFIGURE_PROFILE_ID.equals(item.getId())
-					&& !DRAWER_SWITCH_PROFILE_ID.equals(item.getId())) {
-				items.add(item);
-			}
-		}
-		return items;
 	}
 
 	private void instantiateContextMenuAdapter() {
@@ -270,7 +256,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+				List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
 				List<String> ids = new ArrayList<>();
 				if (!menuItemsOrder.isEmpty()) {
 					sortByCustomOrder(defItems, menuItemsOrder);
@@ -320,7 +306,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		super.onActivityCreated(savedInstanceState);
 		instantiateContextMenuAdapter();
 		if (menuItemsOrder.isEmpty()) {
-			for (ContextMenuItem item : getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems())) {
+			for (ContextMenuItem item : CtxMenuUtils.getCustomizableItems(contextMenuAdapter)) {
 				menuItemsOrder.put(item.getId(), item.getOrder());
 			}
 		}
@@ -330,7 +316,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		recyclerView.setPadding(0, 0, 0, (int) app.getResources().getDimension(R.dimen.dialog_button_ex_min_width));
 		rearrangeAdapter = new RearrangeMenuItemsAdapter(app, getAdapterItems(), nightMode);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(rearrangeAdapter));
+		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(rearrangeAdapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		MenuItemsAdapterListener listener = new MenuItemsAdapterListener() {
 			private int fromPosition;
@@ -566,7 +552,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private List<RearrangeMenuAdapterItem> getItemsForRearrangeAdapter(List<String> hiddenItemsIds, HashMap<String, Integer> itemsOrderIds, boolean hidden) {
-		List<ContextMenuItem> defItems = getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
+		List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
 		if (!itemsOrderIds.isEmpty()) {
 			sortByCustomOrder(defItems, itemsOrderIds);
 		}
@@ -592,23 +578,11 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				item.setOrder(order);
 			}
 		}
-		Collections.sort(defItems, new Comparator<ContextMenuItem>() {
-			@Override
-			public int compare(ContextMenuItem item1, ContextMenuItem item2) {
-				int order1 = item1.getOrder();
-				int order2 = item2.getOrder();
-				return (order1 < order2) ? -1 : ((order1 == order2) ? 0 : 1);
-			}
+		Collections.sort(defItems, (item1, item2) -> {
+			int order1 = item1.getOrder();
+			int order2 = item2.getOrder();
+			return Integer.compare(order1, order2);
 		});
 	}
 
-	private void resetHiddenItems(boolean profileOnly) {
-		for (ContextMenuItem item : contextMenuAdapter.getItems()) {
-			if (hiddenMenuItems.contains(item.getId())) {
-				if (item.getItemDeleteAction() != null) {
-					item.getItemDeleteAction().itemWasDeleted(appMode, profileOnly);
-				}
-			}
-		}
-	}
 }

@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers.base;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,8 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.FColorARGB;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -38,13 +38,14 @@ import org.apache.commons.logging.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	private static final Log log = PlatformUtil.getLog(BaseRouteLayer.class);
 
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 
-	protected OsmandMapTileView view;
 	protected boolean nightMode;
 
 	protected PreviewRouteLineInfo previewRouteLineInfo;
@@ -61,13 +62,19 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected Paint paintIconAction;
 	private Bitmap actionArrow;
 
+	//OpenGL
+	//kOutlineColor 150, 0, 0, 0
+	public FColorARGB kOutlineColor;
+	public static final int kOutlineWidth = 10;
+	public static final int kOutlineId = 1001;
+
 	public BaseRouteLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
 		init();
 	}
 
@@ -83,7 +90,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * density);
 		attrs.defaultWidth3 = (int) (7 * density);
-		attrs.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
+		attrs.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track);
 		attrs.paint3.setStrokeCap(Paint.Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
 		attrs.paint2.setStrokeCap(Paint.Cap.BUTT);
@@ -123,7 +130,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		}
 
 		if (routeLineColor != customColor) {
-			directionArrowsColor = ColorUtilities.getContrastColor(view.getContext(), customColor, false);
+			directionArrowsColor = ColorUtilities.getContrastColor(getContext(), customColor, false);
 		}
 		routeLineColor = customColor;
 	}
@@ -187,7 +194,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 				req.setStringFilter(ctWidth, widthKey);
 			}
 			if (req.searchRenderingAttribute("gpx")) {
-				OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
+				OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(getContext());
 				rc.setDensityValue((float) tileBox.getMapDensity());
 				resultValue = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
 			}

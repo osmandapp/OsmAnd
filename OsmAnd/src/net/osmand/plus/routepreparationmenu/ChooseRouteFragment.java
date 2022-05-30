@@ -1,12 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -42,17 +35,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -70,7 +58,13 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.router.TransportRouteResult;
@@ -87,6 +81,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
@@ -278,17 +280,15 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
-		View solidToolbarView = this.solidToolbarView;
 		if (view != null) {
-			if ((solidToolbarView != null && solidToolbarView.getVisibility() == View.VISIBLE) || !portrait) {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			boolean toolbarVisible = solidToolbarView != null && solidToolbarView.getVisibility() == View.VISIBLE;
+			if (toolbarVisible || !portrait) {
+				if (!nightMode) {
+					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
-			} else {
-				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				}
+			} else if (!nightMode) {
+				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
 			}
 		}
 		return -1;
@@ -549,10 +549,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		shareRoute.setOnClickListener(shareOnClick);
 		shareRouteFlow.setOnClickListener(shareOnClick);
 
-		if (publicTransportMode) {
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		boolean featureEnabled = customization.isFeatureEnabled(NAVIGATION_ROUTE_DETAILS_OPTIONS_ID);
+		if (publicTransportMode || !featureEnabled) {
 			view.findViewById(R.id.toolbar_options).setVisibility(View.GONE);
 		}
-		if (publicTransportMode || !portrait) {
+		if (publicTransportMode || !portrait || !featureEnabled) {
 			view.findViewById(R.id.toolbar_options_flow).setVisibility(View.GONE);
 			view.findViewById(R.id.toolbar_options_flow_bg).setVisibility(View.GONE);
 		}
@@ -793,8 +795,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
-			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
-			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+			AndroidUiHelper.setVisibility(mapActivity, visibility,
+					R.id.map_center_info,
+					R.id.map_left_widgets_panel);
 			if (!visible) {
 				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 				if (!portrait) {

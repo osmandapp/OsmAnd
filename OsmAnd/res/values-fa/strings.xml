@@ -99,9 +99,6 @@
     <string name="map_widget_compass">قطب‌نما</string>
     <string name="map_widget_reset">برگرداندن تنظیمات به حالت اولیه</string>
     <string name="map_widget_parking">پارکینگ</string>
-    <string name="map_widget_speed">سرعت</string>
-    <string name="map_widget_distance">مقصد</string>
-    <string name="map_widget_altitude">ارتفاع</string>
     <string name="map_widget_time">مدت سفر</string>
     <string name="map_widget_next_turn">پیچ بعدی</string>
     <string name="map_widget_next_turn_small">پیچ بعدی (کوچک)</string>
@@ -575,7 +572,6 @@
     <string name="settings_preset">نمایهٔ پیش‌فرض</string>
     <string name="settings_preset_descr">نمای نقشه و تنظیمات ناوبری برای هر نمایه جداگانه ذخیره می‌شود. نمایه پیش‌فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و ناوبری در پس‌زمینه را نشان می‌دهد که با ارسال پیام‌های بیدارباش متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد (با نمایشگر خاموش).</string>
-    <string name="av_def_action_choose">هنگام درخواست؟</string>
     <string name="audionotes_location_not_defined">موقعیت‌یاب را روشن کنید یا به‌طور دستی از منوی زمینه اقدام کنید.</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید نقشه‌های فقط-جاده چه زمانی نشان داده شود:</string>
     <string name="shared_string_target_points">مقصدها</string>
@@ -596,7 +592,6 @@
     <string name="save_current_track">ذخیرهٔ رد جاری</string>
     <string name="save_track_interval">تناوب ردنگاری هنگام ناوبری</string>
     <string name="save_track_interval_descr">مشخص کنید برای ضبط رد در هنگام ناوبری، تناوب ردنگاری چقدر باشد</string>
-    <string name="save_track_to_gpx_descrp">هنگام ناوبری، یک رد GPX به‌صورت خودکار ضبط و در پوشهٔ ردها (tracks) ذخیره می‌شود.</string>
     <string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
     <string name="data_settings_descr">زبان را مشخص و داده را بارگیری/دوباره بار کنید.</string>
     <string name="av_photo_play_sound">پخش صدای شاتر دوربین</string>
@@ -2046,7 +2041,7 @@
     <string name="favourites_context_menu_add">افزودن علاقه‌مندی</string>
     <string name="poi_action_delete">حذف</string>
     <string name="poi_dialog_reopen">بازگشایی</string>
-    <string name="get_plugin">دریافت</string>
+    <string name="shared_string_get">دریافت</string>
     <string name="use_fast_recalculation">محاسبهٔ مجدد هوشمند</string>
     <string name="use_fast_recalculation_desc">فقط بخش ابتدایی مسیر را مجدداً محاسبه می‌کند. سودمند برای سفرهای طولانی.</string>
     <string name="do_you_like_osmand">آیا از OsmAnd راضی هستید؟</string>
@@ -2747,7 +2742,6 @@
     <string name="ski_map_render_descr">برای اسکی. پیست‌ها، تله‌اسکی‌ها، مسیرهای کراس‌کانتری و... را به‌طور ویژه نمایش می‌دهد. اجزای ثانویهٔ نقشه کم‌فروغ هستند.</string>
     <string name="light_rs_render_descr">سبکی ساده و پادنما برای ناوبری خودرویی. دارای حالت ملایم برای شب‌هنگام، منحنی‌های میزان و جاده‌های نارنجی‌رنگ و پادنما. عارضه‌های ثانویهٔ نقشه کم‌فروغ هستند.</string>
     <string name="topo_render_descr">مخصوص پیاده‌گردی، راه‌نوردی و دوچرخه‌سواری در طبیعت. در روشنایی بیرون خواناست. جاده‌ها و عارضه‌های طبیعی پادنما، انواع مختلف مسیرها، گزینه‌های پیشرفتهٔ منحنی‌های میزان، جزئیات بیشتر. نمایش انواع سطوح که در نتیجه راه‌ها را بر اساس کیفیت سطحشان مجزا می‌کند. حالت شب ندارد.</string>
-    <string name="mapnik_render_descr">سبک پیشفرض قدیمی و مپنیک‌مانند. رنگ‌بندی مشابه سبک مپنیک.</string>
     <string name="default_render_descr">سبکی مناسب برای استفادهٔ معمولی. شهرهای متراکم واضح نمایش می‌یابند. توجه ویژه به منحنی‌های میزان، مسیرها، کیفیت سطوح، محدودیت‌های دسترسی، شمارهٔ راه‌ها، رسم مسیرها طبق درجه‌بندی SAC، خصوصیات ورزش‌های آب‌های خروشان از ویژگی‌های آن است.</string>
     <string name="read_wikipedia_offline_description">برای مطالعهٔ آفلاین مقاله‌های ویکی‌پدیا و ویکی‌سفر مشترک OsmAnd Live شوید.</string>
     <string name="how_to_open_link">پیوند چطور باز شود؟</string>
@@ -4349,4 +4343,40 @@
     <string name="routing_attr_allow_gate_name">استفاده از دروازه مجاز باشد</string>
     <string name="routing_attr_allow_gate_description">اجازه استفاده از دروازه‌ها داده شود</string>
     <string name="routeInfo_surface_description">اطلاعات بیشتری درباره سطح فیزیکی جاده‌ها/پیاده‌روها ارائه کنید.</string>
+    <string name="shared_string_item">مورد</string>
+    <string name="shared_string_buttons">دکمه‌ها</string>
+    <string name="shared_string_complete">کامل</string>
+    <string name="shared_string_shape">شکل</string>
+    <string name="rendering_value_category_name">دسته‌بندی</string>
+    <string name="rendering_value_all_name">همه</string>
+    <string name="shared_string_open_street_map">اوپن‌استریت‌مپ</string>
+    <string name="shared_string_size">اندازه</string>
+    <string name="copying_completed">کپی شد</string>
+    <string name="shared_string_migration">مهاجرت</string>
+    <string name="icon_group_nautical">دریایی</string>
+    <string name="shared_string_downhill">سراشیبی</string>
+    <string name="shared_string_memory">حافظه</string>
+    <string name="icon_group_industrial">صنعتی</string>
+    <string name="shared_string_uphill">سربالایی</string>
+    <string name="rendering_attr_horse_scale_critical_name">بحرانی</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">خطرناک</string>
+    <string name="rendering_attr_horse_scale_impossible_name">غیر ممکن</string>
+    <string name="safe_settings">بی‌خطر</string>
+    <string name="shared_string_mini">مینی</string>
+    <string name="exit_import">خروج؟</string>
+    <string name="rendering_attr_horse_scale_difficult_name">دشوار</string>
+    <string name="shared_string_symbol">نماد</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">پیشرفته</string>
+    <string name="shared_string_used">استفاده شده</string>
+    <string name="shared_string_statistics">آمار</string>
+    <string name="shared_string_articles">مقالات</string>
+    <string name="shared_string_details">جزئیات</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">مبتدی</string>
+    <string name="routing_attr_freeride_policy_allow_name">اجازه</string>
+    <string name="stop_download_desc">دانلود کامل نیست. اگر اکنون دانلود را قطع کنید، تنها بخشی از کاشی‌ها برای مشاهده در دسترس خواهد بود.</string>
+    <string name="icon_group_education">آموزش</string>
+    <string name="shared_storage_warning_description">به دلیل قوانین جدید اندروید، از نوامبر ۲۰۲۱ (OsmAnd 4.2) دسترسی به فضای ذخیره‌سازی مشترک را از دست خواهد داد.
+\n
+\nلطفا پوشه داده را از ذخیره‌سازی مشترک به حافظه در دسترس منتقل کنید، در غیر این صورت برنامه دسترسی به داده‌های شما مانند نقشه‌های آفلاین، جی‌پی‌اکس، غیره را از دست خواهد داد.</string>
+    <string name="routeInfo_tracktype_description">مسیر یا خط مسیر را با ترکیب سطح آن رنگ کنید. معمولاً زمانی اعمال می‌شود که شبکه جاده تا حد زیادی آسفالت نشده باشد.</string>
 </resources>

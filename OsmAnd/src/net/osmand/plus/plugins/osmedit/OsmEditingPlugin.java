@@ -1,13 +1,5 @@
 package net.osmand.plus.plugins.osmedit;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -16,7 +8,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,26 +15,25 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
+import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
@@ -52,32 +42,69 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapsDbHelper;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.plugins.osmedit.quickactions.AddOSMBugAction;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMBugAction;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
+	public static final String OSM_MAPPER_PREFIX = "OSMMapper";
+	public static final String RENDERING_CATEGORY_OSM_ASSISTANT = "osm_assistant";
+
+	public final OsmandPreference<String> OSM_USER_NAME_OR_EMAIL;
+	public final OsmandPreference<String> OSM_USER_DISPLAY_NAME;
+	public final CommonPreference<UploadVisibility> OSM_UPLOAD_VISIBILITY;
+
+	public final OsmandPreference<String> USER_OSM_BUG_NAME;
+	public final OsmandPreference<String> OSM_USER_PASSWORD;
+	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN;
+	public final OsmandPreference<String> OSM_USER_ACCESS_TOKEN_SECRET;
+
+	public final OsmandPreference<Boolean> OFFLINE_EDITION;
+	public final OsmandPreference<Boolean> OSM_USE_DEV_URL;
+
+	public final OsmandPreference<Boolean> SHOW_OSM_BUGS;
+	public final OsmandPreference<Boolean> SHOW_OSM_EDITS;
+	public final CommonPreference<Boolean> SHOW_CLOSED_OSM_BUGS;
+	public final CommonPreference<Integer> SHOW_OSM_BUGS_MIN_ZOOM;
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int CREATE_POI_ITEM_ORDER = 7300;
@@ -86,7 +113,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static final int OPEN_OSM_NOTE_ITEM_ORDER = 7600;
 	private static final int MODIFY_OSM_NOTE_ITEM_ORDER = 7600;
 
-	private final OsmandSettings settings;
 	private OpenstreetmapsDbHelper dbpoi;
 	private OsmBugsDbHelper dbbug;
 	private OpenstreetmapLocalUtil localUtil;
@@ -96,7 +122,23 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	public OsmEditingPlugin(OsmandApplication app) {
 		super(app);
-		settings = app.getSettings();
+
+		OSM_USER_NAME_OR_EMAIL = registerStringPreference("user_name", "").makeGlobal().makeShared();
+		OSM_USER_DISPLAY_NAME = registerStringPreference("user_display_name", "").makeGlobal().makeShared();
+		OSM_UPLOAD_VISIBILITY = registerEnumIntPreference("upload_visibility", UploadVisibility.PUBLIC, UploadVisibility.values(), UploadVisibility.class).makeGlobal().makeShared();
+
+		USER_OSM_BUG_NAME = registerStringPreference("user_osm_bug_name", "NoName/OsmAnd").makeGlobal().makeShared();
+		OSM_USER_PASSWORD = registerStringPreference("user_password", "").makeGlobal().makeShared();
+		OSM_USER_ACCESS_TOKEN = registerStringPreference("user_access_token", "").makeGlobal();
+		OSM_USER_ACCESS_TOKEN_SECRET = registerStringPreference("user_access_token_secret", "").makeGlobal();
+
+		OFFLINE_EDITION = registerBooleanPreference("offline_osm_editing", true).makeGlobal().makeShared();
+		OSM_USE_DEV_URL = registerBooleanPreference("use_dev_url", false).makeGlobal().makeShared();
+
+		SHOW_OSM_BUGS = registerBooleanPreference("show_osm_bugs", false).makeProfile().cache();
+		SHOW_OSM_EDITS = registerBooleanPreference("show_osm_edits", true).makeProfile().cache();
+		SHOW_CLOSED_OSM_BUGS = registerBooleanPreference("show_closed_osm_bugs", false).makeProfile().cache();
+		SHOW_OSM_BUGS_MIN_ZOOM = registerIntPreference("show_osm_bugs_min_zoom", 8).makeProfile().cache();
 	}
 
 	@Override
@@ -144,6 +186,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return localNotesUtil;
 	}
 
+	public String getOsmUrl() {
+		String osmUrl;
+		if (OSM_USE_DEV_URL.get()) {
+			osmUrl = "https://master.apis.dev.openstreetmap.org/";
+		} else {
+			osmUrl = "https://api.openstreetmap.org/";
+		}
+		return osmUrl;
+	}
+
 	@NonNull
 	public OsmBugsDbHelper getDBBug() {
 		if (dbbug == null) {
@@ -173,15 +225,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			if (osmBugsLayer == null) {
 				registerLayers(context, mapActivity);
 			}
-			if (mapView.getLayers().contains(osmEditsLayer) != settings.SHOW_OSM_EDITS.get()) {
-				if (settings.SHOW_OSM_EDITS.get()) {
+			if (mapView.getLayers().contains(osmEditsLayer) != SHOW_OSM_EDITS.get()) {
+				if (SHOW_OSM_EDITS.get()) {
 					mapView.addLayer(osmEditsLayer, 3.5f);
 				} else {
 					mapView.removeLayer(osmEditsLayer);
 				}
 			}
-			if (mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()) {
-				if (settings.SHOW_OSM_BUGS.get()) {
+			if (mapView.getLayers().contains(osmBugsLayer) != SHOW_OSM_BUGS.get()) {
+				if (SHOW_OSM_BUGS.get()) {
 					mapView.addLayer(osmBugsLayer, 2);
 				} else {
 					mapView.removeLayer(osmBugsLayer);
@@ -205,8 +257,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (osmEditsLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(osmEditsLayer);
 		}
-		osmBugsLayer = new OsmBugsLayer(context, this);
-		osmEditsLayer = new OsmEditsLayer(context, this);
+		osmBugsLayer = new OsmBugsLayer(context, this, -120000);
+		osmEditsLayer = new OsmEditsLayer(context, this, -120000);
 	}
 
 	public OsmEditsLayer getOsmEditsLayer(@NonNull MapActivity mapActivity) {
@@ -235,11 +287,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
-											  final double latitude,
-											  final double longitude,
-											  ContextMenuAdapter adapter,
-											  final Object selectedObj, boolean configureMenu) {
-		ContextMenuAdapter.ItemClickListener listener = (adptr, resId, pos, isChecked, viewCoordinates) -> {
+	                                          final double latitude,
+	                                          final double longitude,
+	                                          ContextMenuAdapter adapter,
+	                                          final Object selectedObj, boolean configureMenu) {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
 				//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 				EditPoiDialogFragment editPoiDialogFragment =
@@ -280,46 +333,41 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE);
 		}
 		if (isEditable) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
-					.setId(MAP_CONTEXT_MENU_CREATE_POI)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
+					.setTitleId(R.string.poi_context_menu_modify, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_POI_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
-					.setId(MAP_CONTEXT_MENU_CREATE_POI)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
+					.setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		} else {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
-					.setId(MAP_CONTEXT_MENU_CREATE_POI)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
+					.setTitleId(R.string.context_menu_item_create_poi, mapActivity)
 					.setIcon(R.drawable.ic_action_plus_dark)
 					.setOrder(CREATE_POI_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		}
 		if (selectedObj instanceof OsmNotesPoint) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
-					.setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+					.setTitleId(R.string.context_menu_item_modify_note, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_NOTE_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		} else {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
-					.setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
+					.setTitleId(R.string.context_menu_item_open_note, mapActivity)
 					.setIcon(R.drawable.ic_action_osm_note_add)
 					.setOrder(OPEN_OSM_NOTE_ITEM_ORDER)
-					.setListener(listener)
-					.createItem());
+					.setListener(listener));
 		}
 	}
 
 	public void openOsmNote(@NonNull MapActivity mapActivity, double latitude, double longitude,
-							String message, boolean autofill) {
+	                        String message, boolean autofill) {
 		if (osmBugsLayer == null) {
 			registerLayers(mapActivity, mapActivity);
 		}
@@ -342,63 +390,82 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(OSM_NOTES)
+	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
+	                                                   @NonNull MapActivity mapActivity,
+	                                                   @NonNull List<RenderingRuleProperty> customRules) {
+		adapter.addItem(new ContextMenuItem(OPEN_STREET_MAP)
+				.setCategory(true)
+				.setTitleId(R.string.shared_string_open_street_map, mapActivity)
+				.setLayout(R.layout.list_group_title_with_switch));
+
+		adapter.addItem(new ContextMenuItem(OSM_NOTES)
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
-				.setSelected(settings.SHOW_OSM_BUGS.get())
+				.setSelected(SHOW_OSM_BUGS.get())
 				.setIcon(R.drawable.ic_action_osm_note)
-				.setColor(app, settings.SHOW_OSM_BUGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setColor(app, SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+				.setListener(new OnRowItemClick() {
 
 					@Override
-					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-						if (itemId == R.string.layer_osm_bugs) {
-							mapActivity.getDashboard().setDashboardVisibility(true,
-									DashboardType.OSM_NOTES, AndroidUtils.getCenterViewCoordinates(view));
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NotNull ContextMenuItem item) {
+						if (item.getTitleId() == R.string.layer_osm_bugs) {
+							DashboardOnMap dashboard = mapActivity.getDashboard();
+							dashboard.setDashboardVisibility(true, DashboardType.OSM_NOTES, AndroidUtils.getCenterViewCoordinates(view));
 							return false;
 						}
 						return true;
 					}
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						if (itemId == R.string.layer_osm_bugs) {
-							OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
-							showOsmBugs.set(isChecked);
-							adapter.getItem(pos).setColor(app, showOsmBugs.get() ?
-									R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							adapter.notifyDataSetChanged();
+					public boolean onContextMenuClick(OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item,
+					                                  boolean isChecked) {
+						if (item.getTitleId() == R.string.layer_osm_bugs) {
+							SHOW_OSM_BUGS.set(isChecked);
+							item.setColor(app, SHOW_OSM_BUGS.get() ? R.color.osmand_orange : INVALID_ID);
+							uiAdapter.onDataSetChanged();
 							updateLayers(mapActivity, mapActivity);
 						}
 						return true;
 					}
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_BUGS))
-				.createItem());
+				.setItemDeleteAction(SHOW_OSM_BUGS));
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(OSM_EDITS)
+		adapter.addItem(new ContextMenuItem(OSM_EDITS)
 				.setTitleId(R.string.layer_osm_edits, mapActivity)
-				.setSelected(settings.SHOW_OSM_EDITS.get())
+				.setSelected(SHOW_OSM_EDITS.get())
 				.setIcon(R.drawable.ic_action_openstreetmap_logo)
-				.setColor(app, settings.SHOW_OSM_EDITS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+				.setColor(app, SHOW_OSM_EDITS.get() ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						if (itemId == R.string.layer_osm_edits) {
-							OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
-							showOsmEdits.set(isChecked);
-							adapter.getItem(pos).setColor(app, showOsmEdits.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-							adapter.notifyDataSetChanged();
-							updateLayers(mapActivity, mapActivity);
-						}
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						OsmandPreference<Boolean> showOsmEdits = SHOW_OSM_EDITS;
+						showOsmEdits.set(isChecked);
+						item.setColor(app, showOsmEdits.get() ? R.color.osmand_orange : INVALID_ID);
+						uiAdapter.onDataSetChanged();
+						updateLayers(mapActivity, mapActivity);
 						return true;
 					}
 				})
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_OSM_EDITS))
-				.createItem());
+				.setItemDeleteAction(SHOW_OSM_EDITS));
+
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
+		while (iterator.hasNext()) {
+			RenderingRuleProperty property = iterator.next();
+			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) {
+				iterator.remove();
+				String id = OPEN_STREET_MAP + property.getAttrName();
+				adapter.addItem(ConfigureMapMenu.createRenderingProperty(adapter, mapActivity, INVALID_ID, property, id, nightMode));
+			}
+		}
+	}
+
+	@Nullable
+	@Override
+	protected String getRenderPropertyPrefix() {
+		return OSM_MAPPER_PREFIX;
 	}
 
 	@Override
@@ -407,32 +474,20 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void contextMenuFragment(final FragmentActivity activity, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
-		if (fragment instanceof AvailableGPXFragment) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
-					.setListener((adptr, itemId, pos, isChecked, viewCoordinates) -> {
-						sendGPXFiles(activity, fragment, (GpxInfo) info);
-						return true;
-					}).createItem());
-		}
-	}
-
-	@Override
 	public void optionsMenuFragment(final FragmentActivity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
-			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
+			optionsMenuAdapter.addItem(new ContextMenuItem(null)
+					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setColor(app, R.color.color_white)
-					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
 								R.drawable.ic_action_upload_to_openstreetmap, items ->
 										OsmEditingPlugin.this.sendGPXFiles(activity, f,
 												items.toArray(new GpxInfo[0])));
 						return true;
-					})
-					.createItem());
+					}));
 		}
 	}
 
@@ -468,9 +523,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	public boolean sendGPXFiles(final FragmentActivity activity, Fragment fragment, GpxInfo... info) {
-		String name = settings.OSM_USER_NAME_OR_EMAIL.get();
-		String pwd = settings.OSM_USER_PASSWORD.get();
-		String authToken = settings.OSM_USER_ACCESS_TOKEN.get();
+		String name = OSM_USER_NAME_OR_EMAIL.get();
+		String pwd = OSM_USER_PASSWORD.get();
+		String authToken = OSM_USER_ACCESS_TOKEN.get();
 		if ((Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)) && Algorithms.isEmpty(authToken)) {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
@@ -579,6 +634,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 
 		return description;
+	}
+
+	public static String getOsmUrlForId(long id, int shift) {
+		long originalId = (id >> 1);
+		long relationShift = 1L << 41;
+		if (originalId > relationShift) {
+			long relationId = (originalId & ~relationShift) >> 10;
+			return "https://www.openstreetmap.org/relation/" + relationId;
+		} else if (id % 2 == MapObject.WAY_MODULO_REMAINDER) {
+			return "https://www.openstreetmap.org/way/" + (id >> shift);
+		} else {
+			return "https://www.openstreetmap.org/node/" + (id >> shift);
+		}
 	}
 
 	@Override

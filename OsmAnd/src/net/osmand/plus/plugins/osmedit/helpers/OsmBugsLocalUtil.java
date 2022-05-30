@@ -55,7 +55,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	public List<OsmNotesPoint> getOsmbugsPoints() {
-		return db.getOsmbugsPoints();
+		return db.getOsmBugsPoints();
 	}
 	
 }

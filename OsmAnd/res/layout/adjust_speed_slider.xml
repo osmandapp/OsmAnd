@@ -20,7 +20,7 @@
 			android:paddingLeft="@dimen/content_padding_small"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			tools:text="@string/map_widget_speed" />
+			tools:text="@string/shared_string_speed" />
 
 		<TextView
 			android:id="@+id/speed_text"

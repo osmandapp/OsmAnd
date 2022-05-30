@@ -11,28 +11,34 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpsFilterHelper;
-import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.GpsFilterScreensAdapter;
 import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
+import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
+import net.osmand.plus.track.helpers.GpsFilterHelper;
+import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilterListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.util.Algorithms;
@@ -40,12 +46,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
@@ -328,9 +328,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		if (view != null && !isDismissing()) {
 			boolean nightMode = isNightMode();
 			if (!nightMode) {
-				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 			}
-			return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+			return ColorUtilities.getStatusBarColorId(nightMode);
 		}
 		return -1;
 	}

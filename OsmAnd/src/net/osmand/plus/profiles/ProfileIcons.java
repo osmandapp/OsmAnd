@@ -20,6 +20,7 @@ public enum ProfileIcons {
 	ENDURO_MOTORCYCLE(R.drawable.ic_action_enduro_motorcycle, R.string.app_mode_enduro_motorcycle, "ic_action_enduro_motorcycle"),
 	MOTOR_SCOOTER(R.drawable.ic_action_motor_scooter, R.string.app_mode_motor_scooter, "ic_action_motor_scooter"),
 	BICYCLE(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark"),
+	MOUNTAIN_BICYCLE(R.drawable.ic_action_mountain_bike, R.string.app_mode_mountain_bicycle, "ic_action_mountain_bike"),
 	HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse"),
 	PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark"),
 	TREKKING(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark"),

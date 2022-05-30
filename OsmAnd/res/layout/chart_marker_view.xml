@@ -17,10 +17,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingStart="@dimen/chart_marker_horizontal_padding"
-            android:paddingLeft="@dimen/chart_marker_horizontal_padding"
-            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
-            android:paddingRight="@dimen/chart_marker_horizontal_padding"
             android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
             android:paddingBottom="@dimen/chart_marker_vertical_padding"
             android:visibility="gone"
             tools:visibility="visible">
@@ -44,16 +42,14 @@
             tools:visibility="visible"/>
 
         <LinearLayout
-            android:id="@+id/text_alt_container"
+            android:id="@+id/altitude_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
             android:paddingStart="@dimen/chart_marker_horizontal_padding"
-            android:paddingLeft="@dimen/chart_marker_horizontal_padding"
-            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
-            android:paddingRight="@dimen/chart_marker_horizontal_padding"
             android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
@@ -62,10 +58,10 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="100 "
                 android:textColor="@color/gpx_chart_blue"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="100 " />
 
             <TextView
                 android:id="@+id/text_alt_units"
@@ -73,9 +69,9 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="m"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size" />
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="m" />
 
         </LinearLayout>
 
@@ -88,16 +84,14 @@
             android:background="?attr/dashboard_divider" />
 
         <LinearLayout
-            android:id="@+id/text_spd_container"
+            android:id="@+id/speed_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
             android:paddingStart="@dimen/chart_marker_horizontal_padding"
-            android:paddingLeft="@dimen/chart_marker_horizontal_padding"
-            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
-            android:paddingRight="@dimen/chart_marker_horizontal_padding"
             android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
@@ -106,10 +100,10 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="100 "
                 android:textColor="@color/gpx_chart_orange"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="100 "/>
 
             <TextView
                 android:id="@+id/text_spd_units"
@@ -117,23 +111,21 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="km/h"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size" />
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="km/h" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/text_slp_container"
+            android:id="@+id/slope_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
             android:paddingStart="@dimen/chart_marker_horizontal_padding"
-            android:paddingLeft="@dimen/chart_marker_horizontal_padding"
-            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
-            android:paddingRight="@dimen/chart_marker_horizontal_padding"
             android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
@@ -142,10 +134,10 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="100 "
                 android:textColor="@color/gpx_chart_green"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="100 "/>
 
             <TextView
                 android:id="@+id/text_slp_units"
@@ -156,6 +148,55 @@
                 android:text="%"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/x_axis_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/x_axis_divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="?attr/dashboard_divider" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/chart_marker_horizontal_padding"
+                android:paddingTop="@dimen/chart_marker_vertical_padding"
+                android:paddingEnd="@dimen/chart_marker_horizontal_padding"
+                android:paddingBottom="@dimen/chart_marker_vertical_padding">
+
+                <TextView
+                    android:id="@+id/x_axis_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_desc_text_size"
+                    android:textStyle="bold"
+                    tools:text="100 " />
+
+                <TextView
+                    android:id="@+id/x_axis_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="m" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

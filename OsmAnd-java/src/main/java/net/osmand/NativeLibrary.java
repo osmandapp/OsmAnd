@@ -20,6 +20,7 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
+import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -63,6 +64,7 @@ public class NativeLibrary {
 			this.nativeHandler = nativeHandler;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -88,6 +90,7 @@ public class NativeLibrary {
 			this.objects = objects;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void finalize() throws Throwable {
 			deleteNativeResult();
@@ -228,7 +231,6 @@ public class NativeLibrary {
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
-//		config.router.printRules(System.out);
 		return nativeRouting(c, c.config.initialDirection == null ? -360 : c.config.initialDirection.floatValue(),
 				regions, basemap);
 	}
@@ -456,7 +458,7 @@ public class NativeLibrary {
 				boolean hasNumber = Character.isDigit(nm.charAt(0)) && Character.isDigit(nm.charAt(1));
 				if (hasNumber) {
 					// numeric fonts 05_NotoSans .. 65_NotoSansNastaliqUrdu
-					return Integer.parseInt(nm.substring(0,1));
+					return Integer.parseInt(nm.substring(0,2));
 				} else if (nm.contains("NotoSans".toLowerCase())) {
 					// downloaded fonts (e.g. NotoSans-Japanese.otf)
 					return 100;
@@ -477,10 +479,7 @@ public class NativeLibrary {
 			initFontType(f.getAbsolutePath(), name.substring(0, name.length() - 4), name.toLowerCase().contains("bold"),
 					name.toLowerCase().contains("italic"));
 		}
-		
 	}
-	
-
 
 	public static class RenderedObject extends MapObject {
 		private Map<String, String> tags = new LinkedHashMap<>();

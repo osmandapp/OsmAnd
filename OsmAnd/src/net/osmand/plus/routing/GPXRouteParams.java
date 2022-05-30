@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.plus.OsmAndLocationSimulation.*;
 import static net.osmand.plus.routing.RouteProvider.collectSegmentPointsFromGpx;
 import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 
@@ -42,6 +43,10 @@ public class GPXRouteParams {
 
 	public List<Location> getPoints() {
 		return points;
+	}
+
+	public List<RouteSegmentResult> getRoute() {
+		return route;
 	}
 
 	public List<LocationPoint> getWpt() {
@@ -217,6 +222,14 @@ public class GPXRouteParams {
 		public List<Location> getPoints(OsmandApplication app) {
 			GPXRouteParams copy = build(app);
 			return copy.getPoints();
+		}
+
+		public List<SimulatedLocation> getSimulatedLocations(OsmandApplication app) {
+			List<SimulatedLocation> locationList = new ArrayList<>();
+			for (Location l : getPoints(app)) {
+				locationList.add(new SimulatedLocation(l));
+			}
+			return locationList;
 		}
 	}
 }

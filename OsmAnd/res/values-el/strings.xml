@@ -91,9 +91,6 @@
     <string name="map_widget_compass">Πυξίδα</string>
     <string name="map_widget_reset">Επαναφορά στα προκαθορισμένα</string>
     <string name="map_widget_parking">Στάθμευση</string>
-    <string name="map_widget_speed">Ταχύτητα</string>
-    <string name="map_widget_distance">Προορισμός</string>
-    <string name="map_widget_altitude">Υψόμετρο</string>
     <string name="map_widget_time">Υπολειπόμενος χρόνος</string>
     <string name="map_widget_next_turn">Επόμενη στροφή</string>
     <string name="map_widget_next_turn_small">Επόμενη στροφή (μικρό)</string>
@@ -720,7 +717,6 @@
     <string name="save_current_track">Αποθήκευση τρέχοντος ίχνους</string>
     <string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
     <string name="save_track_interval_descr">Προσδιορίστε το διάστημα καταγραφής για την εγγραφή ιχνών κατά την πλοήγηση</string>
-    <string name="save_track_to_gpx_descrp">Το ίχνος GPX αποθηκεύεται αυτόματα στον κατάλογο ιχνών κατά την πλοήγηση.</string>
     <string name="update_tile">Ενημέρωση χάρτη</string>
     <string name="reload_tile">Ανανέωση πλακιδίου</string>
     <string name="mark_point">Στόχος</string>
@@ -935,7 +931,6 @@
     <string name="favourites_list_activity">Επιλογή αγαπημένου</string>
     <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
     <string name="shared_string_more_actions">Άλλες ενέργειες</string>
-    <string name="av_def_action_choose">Κατόπιν αίτησης;</string>
     <string name="download_using_mobile_internet">Δεν είστε συνδεδεμένοι με ασύρματο δίκτυο. Θέλετε να χρησιμοποιήσετε την τρέχουσα διαδικτυακή σύνδεση για λήψη;</string>
     <string name="cancel_route">Απόρριψη διαδρομής</string>
     <string name="cancel_navigation">Διακοπή πλοήγησης</string>
@@ -2489,7 +2484,7 @@
     <string name="av_camera_pic_size">Μέγεθος εικόνας κάμερας</string>
     <string name="av_camera_pic_size_descr">Ορίστε μέγεθος εικόνας κάμερας</string>
     <string name="plugin_install_needs_network">Χρειάζεται να συνδεθείτε με το διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
-    <string name="get_plugin">Λήψη</string>
+    <string name="shared_string_get">Λήψη</string>
     <string name="use_fast_recalculation">Επανυπολογισμός έξυπνης διαδρομής</string>
     <string name="use_fast_recalculation_desc">Για μεγάλα ταξίδια, να επανυπολογίζεται μόνο το αρχικό μέρος της διαδρομής.</string>
     <string name="do_you_like_osmand">Σας αρέσει το OsmAnd;</string>
@@ -2733,7 +2728,6 @@
     <string name="ski_map_render_descr">Για χιονοδρομία. Περιέχει πίστες, αναβατόρια, διαδρομές σκι, κλπ. Υποβαθμίζει τα δευτερεύοντα αντικείμενα στον χάρτη.</string>
     <string name="light_rs_render_descr">Για απλή οδήγηση. Απαλή νυχτερινή λειτουργία, ισοϋψείς γραμμές, εμφαίνοντας τους πορτοκαλί δρόμους, υποβαθμίζει τα δευτερεύοντα αντικείμενα στον χάρτη.</string>
     <string name="topo_render_descr">Για πεζοπορία, περπάτημα και ποδηλασία στη φύση. Ευανάγνωστο σε εξωτερικό φωτισμό. Με μεγάλη αντίθεση στους δρόμους και τα φυσικά στοιχεία, επιλογές για ανώτερες γραμμές περιγράμματος, επιπλέον λεπτομέρειες. Ρυθμίζοντας την αρτιότητα της επιφάνειας αναδεικνύει την ποιότητα των δρόμων. Δεν υπάρχει λειτουργία νύχτας.</string>
-    <string name="mapnik_render_descr">Το παλιό προεπιλεγμένο στυλ \'Mapnik\'. Παρόμοια χρώματα με το \'Mapnik\'.</string>
     <string name="default_render_descr">Μορφή γενικής χρήσης. Οι πυκνές πόλεις είναι ευδιάκριτες. Περιέχει ισοϋψείς γραμμές, διαδρομές, ποιότητα επιφάνειας, περιορισμούς πρόσβασης, οδικές πινακίδες, μονοπάτια που αποδίδονται σύμφωνα με την κλίμακα SAC, χαρακτηριστικά αθλημάτων με ορμητικό νερό.</string>
     <string name="open_wikipedia_link_online">Άνοιγμα διαδικτυακού συνδέσμου βικιπαίδειας</string>
     <string name="open_wikipedia_link_online_description">Ο σύνδεσμος θα ανοιχτεί σε περιηγητή ιστού.</string>

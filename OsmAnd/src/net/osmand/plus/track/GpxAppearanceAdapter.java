@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -22,6 +24,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 
 public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.AppearanceListItem> {
 
@@ -154,6 +158,13 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 			}
 		}
 		return items;
+	}
+
+	@ColorInt
+	public static int getTrackColor(@NonNull OsmandApplication app) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+		return parseTrackColor(renderer, prefColor.get());
 	}
 
 	public static int parseTrackColor(RenderingRulesStorage renderer, String colorName) {

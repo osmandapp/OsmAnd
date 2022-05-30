@@ -8,12 +8,16 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class TilesCache<T> {
 
@@ -40,17 +44,14 @@ public abstract class TilesCache<T> {
 		this.maxCacheSize = maxCacheSize;
 	}
 
-	public File getDirWithTiles() {
-		return dirWithTiles;
-	}
-
 	public void setDirWithTiles(File dirWithTiles) {
 		this.dirWithTiles = dirWithTiles;
 	}
 
 	public abstract boolean isTileSourceSupported(ITileSource tileSource);
 
-	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
+	@NonNull
+	public synchronized String calculateTileId(@Nullable ITileSource map, int x, int y, int zoom) {
 		builder.setLength(0);
 		if (map == null) {
 			builder.append(IndexConstants.TEMP_SOURCE_TO_LOAD);
@@ -63,61 +64,76 @@ public abstract class TilesCache<T> {
 		} else {
 			builder.append('/');
 		}
-		builder.append(zoom).append('/').append(x).append('/').append(y).
-				append(map == null ? ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
+		builder.append(zoom)
+				.append('/').append(x)
+				.append('/').append(y)
+				.append(map == null ? ".jpg" : map.getTileFormat())
+				.append(".tile");
 		return builder.toString();
 	}
 
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
-		if (!tilesOnFS.containsKey(file)) {
-			boolean ex = false;
-			if (map instanceof SQLiteTileSource){
+	public synchronized boolean isTileDownloaded(@Nullable String tileId, ITileSource map, int x, int y, int zoom) {
+		tileId = tileId == null ? calculateTileId(map, x, y, zoom) : tileId;
+		return cache.get(tileId) != null || isTileSavedOnFileSystem(tileId, map, x, y, zoom);
+	}
+
+	public synchronized boolean isTileSavedOnFileSystem(@NonNull String tileId, @Nullable ITileSource map,
+	                                                    int x, int y, int zoom) {
+		if (!tilesOnFS.containsKey(tileId)) {
+			boolean exist;
+			if (map instanceof SQLiteTileSource) {
 				if (((SQLiteTileSource) map).isLocked()){
 					return false;
 				}
-				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
+				exist = ((SQLiteTileSource) map).exists(x, y, zoom);
 			} else {
-				if (file == null){
-					file = calculateTileId(map, x, y, zoom);
-				}
-				ex = new File(dirWithTiles, file).exists();
+				exist = new File(dirWithTiles, tileId).exists();
 			}
-			if (ex) {
-				tilesOnFS.put(file, Boolean.TRUE);
-			} else {
-				tilesOnFS.put(file, null);
+			tilesOnFS.put(tileId, exist ? true : null);
+		}
+		return tilesOnFS.get(tileId) != null;
+	}
+
+	public synchronized int getTileBytesSizeOnFileSystem(@NonNull String tileId,
+	                                                     @NonNull ITileSource map,
+	                                                     int x, int y, int zoom) {
+		if (isTileDownloaded(tileId, map, x, y, zoom)) {
+			try {
+				byte[] bytes = map.getBytes(x, y, zoom, dirWithTiles.getAbsolutePath());
+				if (bytes != null) {
+					return bytes.length;
+				}
+			} catch (IOException e) {
+				log.error("Failed to get tile bytes", e);
 			}
 		}
-		return tilesOnFS.get(file) != null || cache.get(file) != null;
+		return 0;
 	}
 
 	public T getTileForMapAsync(String file, ITileSource map, int x, int y, int zoom,
-								boolean loadFromInternetIfNeeded, long timestamp) {
-		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, true, timestamp);
+	                            boolean loadFromInternetIfNeeded, long timestamp) {
+		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, timestamp);
 	}
 
 	public T getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
-							   boolean loadFromInternetIfNeeded, long timestamp) {
-		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true, timestamp);
+	                           boolean loadFromInternetIfNeeded, long timestamp) {
+		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, timestamp);
 	}
 
 	/**
 	 * @param file - null could be passed if you do not call very often with that param
 	 */
 	protected T getTileForMap(String file, ITileSource map, int x, int y, int zoom,
-							  boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs,
-							  long timestamp) {
-		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false, timestamp);
+	                          boolean loadFromInternetIfNeeded, boolean sync,
+	                          long timestamp) {
+		return getTileForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, false, timestamp);
 	}
 
 	protected synchronized T getTileForMap(String tileId, ITileSource map, int x, int y, int zoom,
-										   boolean loadFromInternetIfNeeded, boolean sync,
-										   boolean loadFromFs, boolean deleteBefore, long timestamp) {
+	                                       boolean loadFromInternetIfNeeded, boolean sync,
+	                                       boolean deleteBefore, long timestamp) {
 		if (tileId == null) {
 			tileId = calculateTileId(map, x, y, zoom);
-			if (tileId == null) {
-				return null;
-			}
 		}
 
 		if (deleteBefore) {
@@ -133,9 +149,9 @@ public abstract class TilesCache<T> {
 			tilesOnFS.put(tileId, null);
 		}
 
-		if (loadFromFs && cache.get(tileId) == null && map != null) {
+		if (map != null) {
 			boolean locked = map instanceof SQLiteTileSource && ((SQLiteTileSource) map).isLocked();
-			if (!loadFromInternetIfNeeded && !locked && !tileExistOnFileSystem(tileId, map, x, y, zoom)){
+			if (!loadFromInternetIfNeeded && !locked && !isTileDownloaded(tileId, map, x, y, zoom)) {
 				return null;
 			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
@@ -149,10 +165,12 @@ public abstract class TilesCache<T> {
 			}
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave,
 					tileId, map, x, y, zoom, timestamp, map.getReferer(), map.getUserAgent());
-			if (sync) {
-				return getRequestedTile(req);
-			} else {
-				asyncLoadingThread.requestToLoadTile(req);
+			if (cache.get(tileId) == null || isExpired(req)) {
+				if (sync) {
+					return getRequestedTile(req);
+				} else {
+					asyncLoadingThread.requestToLoadTile(req);
+				}
 			}
 		}
 		return get(tileId, timestamp);
@@ -197,12 +215,13 @@ public abstract class TilesCache<T> {
 		return get(req.tileId, req.timestamp);
 	}
 
-	protected abstract T getTileObject(TileLoadDownloadRequest req);
+	protected abstract T getTileObject(@NonNull TileLoadDownloadRequest req);
 
 	protected boolean isExpired(TileLoadDownloadRequest req) {
 		if (req.tileSource.getExpirationTimeMillis() != -1 && req.url != null && req.dirWithTiles.canRead()) {
-			File en = new File(req.dirWithTiles, req.tileId);
-			return en.exists() && isExpired(req, en.lastModified());
+			long lastModified = req.tileSource.getTileModifyTime(req.xTile, req.yTile, req.zoom,
+					req.dirWithTiles.getAbsolutePath());
+			return isExpired(req, lastModified);
 		}
 		return false;
 	}

@@ -33,7 +33,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -195,7 +194,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 				@Override
 				public void onClick(View v) {
 					if (actionButton.getUrl() != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(actionButton.getUrl()), nightMode);
+						AndroidUtils.openUrl(ctx, Uri.parse(actionButton.getUrl()), nightMode);
 					} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
 						boolean isDownloading = ctx.getDownloadThread().isDownloading(indexItem);
 						if (!isDownloading) {

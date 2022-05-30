@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/btn_inset_circle_p" android:state_pressed="true"/>
-    <item>
-        <bitmap
-            android:gravity="fill"
-            android:src="@drawable/map_bt_round_2_shadow" />
-    </item>
-</selector>

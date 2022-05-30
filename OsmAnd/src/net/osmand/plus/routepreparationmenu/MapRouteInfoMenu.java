@@ -1,6 +1,9 @@
 package net.osmand.plus.routepreparationmenu;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
+
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -38,30 +41,22 @@ import androidx.transition.Transition;
 import androidx.transition.TransitionListenerAdapter;
 import androidx.transition.TransitionManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.data.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.ValueHolder;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
@@ -69,11 +64,15 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
+import net.osmand.plus.myplaces.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
@@ -108,15 +107,20 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -301,7 +305,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
-				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+				LatLon latLon = NativeUtilities.getLatLonFromPixel(mapActivity.getMapView().getMapRenderer(), tileBox, point.x, point.y);
 				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
 				LatLon selectedPoint = pair != null ? pair.first : latLon;
 				PointDescription name = pair != null ? pair.second : null;
@@ -341,7 +345,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void choosePointTypeAction(LatLon latLon, PointType pointType, PointDescription pd, String address) {
 		OsmandApplication app = getApp();
-		FavouritesDbHelper favorites = app.getFavorites();
+		FavouritesHelper favorites = app.getFavoritesHelper();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		switch (pointType) {
 			case START:
@@ -873,8 +877,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 			if (gpxFile.getNonEmptySegmentsCount() > 1) {
-				Fragment targetFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapRouteInfoMenuFragment.TAG);
-				TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, targetFragment);
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
+				if (fragment == null) {
+					fragment = manager.findFragmentByTag(FollowTrackFragment.TAG);
+				}
+				TrackSelectSegmentBottomSheet.showInstance(manager, gpxFile, fragment);
 			} else {
 				mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
@@ -920,7 +928,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down);
 			foldButtonView.setOnClickListener(v -> expandCollapse());
 
-			mainView.findViewById(R.id.app_modes_options).setOnClickListener(v -> showProfileBottomSheetDialog());
+			OsmAndAppCustomization customization = getApp().getAppCustomization();
+			View options = mainView.findViewById(R.id.app_modes_options);
+			options.setOnClickListener(v -> showProfileBottomSheetDialog());
+			AndroidUiHelper.updateVisibility(options, customization.isFeatureEnabled(NAVIGATION_APP_MODES_OPTIONS_ID));
 		}
 	}
 
@@ -946,11 +957,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			OsmandPreference<ApplicationMode> appMode = app.getSettings().APPLICATION_MODE;
-			if (routingHelper.isFollowingMode() && appMode.get() == mode) {
-				appMode.set(next);
-			}
 			routingHelper.setAppMode(next);
+			app.getSettings().setApplicationMode(next, false);
 			app.initVoiceCommandPlayer(mapActivity, next, null, true,
 					false, false, true);
 			routingHelper.onSettingsChanged(true);
@@ -1078,6 +1086,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		updateControlButtons(mapActivity, mainView);
 		LinearLayout optionsButton = mainView.findViewById(R.id.map_options_route_button);
+
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		AndroidUiHelper.updateVisibility(optionsButton, customization.isFeatureEnabled(NAVIGATION_OPTIONS_MENU_ID));
+
 		TextView optionsTitle = mainView.findViewById(R.id.map_options_route_button_title);
 		ImageView optionsIcon = mainView.findViewById(R.id.map_options_route_button_icon);
 
@@ -1646,6 +1658,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		setupViaText(mainView);
 
 		FrameLayout viaButton = mainView.findViewById(R.id.via_button);
+		int viaContentDescId = routeParams != null ? R.string.shared_string_add : R.string.shared_string_edit;
+		viaButton.setContentDescription(app.getString(viaContentDescId));
 		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
 
 		viaButton.setOnClickListener(v -> {
@@ -2328,7 +2342,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			currentMuteState = settings.VOICE_MUTE.getModeValue(mode);
 
 			routingHelper.addListener(this);
-			app.getFavorites().addListener(this);
+			app.getFavoritesHelper().addListener(this);
 			settings.VOICE_MUTE.addListener(voiceMuteChangeListener);
 			app.getTargetPointsHelper().addListener(onStateChangedListener);
 		}
@@ -2338,7 +2352,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.getRoutingHelper().removeListener(this);
-			app.getFavorites().removeListener(this);
+			app.getFavoritesHelper().removeListener(this);
 			app.getTargetPointsHelper().removeListener(onStateChangedListener);
 			app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 		}
@@ -2469,8 +2483,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	@Override
-	public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
+	public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 		updateMenu();
+	}
+
+	@Override
+	public void onFavoritePropertiesUpdated() {
 	}
 
 	@NonNull

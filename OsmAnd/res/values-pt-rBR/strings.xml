@@ -311,7 +311,6 @@
     <string name="save_current_track_descr">Salvar a trilha atual como arquivo GPX agora.</string>
     <string name="save_current_track">Salvar a trilha atual</string>
     <string name="save_track_to_gpx">Auto-registrar a trilha durante a navegação</string>
-    <string name="save_track_to_gpx_descrp">A trilha GPX será salva automaticamente no diretório de trilhas durante a navegação.</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_interval">Intervalo de registro durante a navegação</string>
     <string name="save_track_interval_descr">Especifique o intervalo de registro para a gravação de trilha durante a navegação</string>
@@ -674,7 +673,6 @@
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
     <string name="srtm_paid_version_msg">Considere pagar pelo complemento \"Curvas de nível\" para apoiar o desenvolvimento.</string>
-    <string name="av_def_action_choose">Sob demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar áudio</string>
     <string name="av_widget_action_descr">Ação padrão do widget:</string>
@@ -750,9 +748,6 @@
     <string name="map_widget_compass">Bússola</string>
     <string name="map_widget_reset">Restaurar para predefinido</string>
     <string name="map_widget_parking">Estacionamento</string>
-    <string name="map_widget_speed">Velocidade</string>
-    <string name="map_widget_distance">Destino</string>
-    <string name="map_widget_altitude">Altitude</string>
     <string name="map_widget_time">Tempo para chegar</string>
     <string name="map_widget_next_turn">Próxima manobra</string>
     <string name="map_widget_next_turn_small">Próxima manobra (menor)</string>
@@ -1527,7 +1522,7 @@
     <string name="av_camera_pic_size_descr">Defina tamanho da foto</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_install_needs_network">Você precisa estar conectado para instalar este complemento.</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="shared_string_logoff">Desconectar</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzamentos de fronteiras nacionais</string>
     <string name="routing_attr_height_name">Limite de altura</string>
@@ -2691,7 +2686,6 @@
     <string name="coord_input_save_as_track">Salvar como trilha</string>
     <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de arquivo e toque em \"Salvar\".</string>
     <string name="topo_render_descr">Para caminhadas, trekking e ciclismo na natureza. Legível ao ar livre. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de curvas de nível, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
-    <string name="mapnik_render_descr">Antigo estilo padrão \'Mapnik\'. Cores parecidas com \'Mapnik\'.</string>
     <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta curvas de nível, rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC, itens de esporte em corredeiras.</string>
     <string name="osmand_extended_description_part8">OsmAnd é um software aberto desenvolvido ativamente. Todos podem contribuir para o app reportando bugs, melhorando traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \nCobertura de mapa e qualidade aproximada:
@@ -3090,7 +3084,7 @@
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixa emissão no mapa. Não afeta o roteamento.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baixa emissão</string>
-    <string name="temporary_conditional_routing">Considere limitações temporárias</string>
+    <string name="temporary_conditional_routing">Aplicar limitações temporárias (obras...)</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s, tempo do roteador %2$s
 \nCálculo: %3$.1f seg; %4$d estradas; %5$d mosaicos)</string>
@@ -4038,7 +4032,7 @@
     <string name="trip_recording_logging_interval_info">O intervalo de registro define o período de tempo no qual OsmAnd solicitará os dados da posição atual.</string>
     <string name="show_start_dialog">Mostrar caixa de diálogo inicial</string>
     <string name="trip_recording_show_start_dialog_setting">Se desativado, a gravação começará imediatamente após tocar no widget ou item de menu, pulando a caixa de diálogo de confirmação.</string>
-    <string name="customize_route_line">Personalizar linha de rota</string>
+    <string name="customize_route_line">Customizar linha da rota</string>
     <string name="shared_string_route_line">Linha de rota</string>
     <string name="specify_color_for_map_mode">Especifique a cor para o modo de mapa %1$s.</string>
     <string name="release_4_0_beta">• Adicionada opção para baixar curvas de níveis em pés
@@ -4081,8 +4075,8 @@
     <string name="srtm_download_list_help_message">OsmAnd fornece dados de linhas de contorno em metros e pés. Você precisará baixar novamente o arquivo para alterar o formato.</string>
     <string name="srtm_download_single_help_message">Selecione a variante. Você precisará baixar novamente o arquivo para alterar o formato.</string>
     <string name="route_line_use_gradient_coloring">A linha da rota é colorida pela inclinação da elevação.</string>
-    <string name="shared_string_min_height">Altura mínima</string>
-    <string name="shared_string_max_height">Altura máxima</string>
+    <string name="shared_string_min_height">Altura mín.</string>
+    <string name="shared_string_max_height">Altura máx.</string>
     <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
     <string name="tts_description">Text-to-Speech (TTS) pode pronunciar todos os tipos de instruções: nomes de rua, instrução de volta, nomes de POI etc.</string>
     <string name="tts_title">TTS</string>
@@ -4299,7 +4293,7 @@
     <string name="connect_track_points_as">Conectar pontos de rota</string>
     <string name="pro_features">Recursos Pro</string>
     <string name="purchases_restored">Compras restauradas</string>
-    <string name="grey_color_undefined">As partes sem dados ficam cinza.</string>
+    <string name="grey_color_undefined">As partes sem dados são mostradas em cinza.</string>
     <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado de sua conta Amazon ao confirmar a compra.
 \n
 \nEle renova a menos que seja cancelado antes do período de renovação selecionado.
@@ -4317,7 +4311,7 @@
     <string name="routeInfo_roadClass_description">Colorir a rota ou a linha da trilha por classificação rodoviária.</string>
     <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
     <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
-    <string name="start_point">Iniciar</string>
+    <string name="start_point">Começar</string>
     <string name="mapillary_menu_filter_description_new">Filtre as imagens por data ou tipo. Ativo apenas no zoom de close up.</string>
     <string name="service_is_not_available_please_try_later">O serviço não está disponível. Por favor tente novamente mais tarde.</string>
     <string name="shared_string_files">Arquivos</string>
@@ -4447,7 +4441,7 @@
     <string name="memory_allocated_for_routing">Memória alocada para roteamento</string>
     <string name="no_items_selected_warning">Selecione pelo menos um item</string>
     <string name="display_groups_visibility_dialog_description">Você pode controlar a visibilidade do grupo no mapa. Se a trilha estiver oculta, todos os grupos também serão ocultados.</string>
-    <string name="shared_string_hide_all">Esconda tudo</string>
+    <string name="shared_string_hide_all">Ocultar tudo</string>
     <string name="migration_files_present">Existem %1$d arquivos (%2$s) no local selecionado \"%3$s\".</string>
     <string name="fold_unfold">ocultar/mostrar</string>
     <string name="app_profile_type">Tipo de perfil de aplicativo</string>
@@ -4481,19 +4475,80 @@
     <string name="distance_between_points">Distância entre pontos</string>
     <string name="shared_string_size">Tamanho</string>
     <string name="created_on">Criado em</string>
-    <string name="use_routing_fallback_description">Use o roteamento offline quando o roteamento online não puder ser alcançado.</string>
-    <string name="use_routing_fallback">Use fallback de roteamento</string>
+    <string name="use_routing_fallback_description">Use o roteamento offline enquanto o roteamento online não estiver disponível.</string>
+    <string name="use_routing_fallback">Retorno de roteamento offline</string>
     <string name="waypoint_template">Modelo de ponto de trajeto</string>
     <string name="always_ask_waypoint_appearance_description">Gravar a ação abrirá a tela “Adicionar ponto de trajeto”, onde você pode alterar o nome e a aparência.</string>
     <string name="predefined_waypoint_appearance_description">Tocar na ação salvará automaticamente o ponto de trajeto com parâmetros predefinidos.</string>
     <string name="track_file">Arquivo de trilha</string>
     <string name="waypoint_appearance">Aparência do ponto de trajeto</string>
-    <string name="track_file_description">Gravar na ação mostrará um diálogo com todas as trilhas disponíveis para serem selecionadas.</string>
+    <string name="track_file_description">Tocar nesta ação mostrará um diálogo de seleção de trilhas disponíveis.</string>
     <string name="turn_arrows">Setas de volta</string>
-    <string name="turn_arrows_descr">Controle a visibilidade das setas de curva na linha de rota.</string>
+    <string name="turn_arrows_descr">Selecione se as setas de curva são indicadas na linha de rota.</string>
     <string name="navigate_point_format_swiss_grid">Rede Suíça (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Rede Suíça (CH1903+)</string>
     <string name="shared_string_used">Usado</string>
     <string name="files_with_route_restrictions">Arquivos com restrições de rota</string>
     <string name="shared_string_not_used">Não usado</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="save_track_to_gpx_descrp">Inicie a gravação da trilha automaticamente enquanto a navegação estiver em andamento. Quando terminar, a faixa será salva automaticamente.</string>
+    <string name="rendering_attr_seabedDetail_name">Detalhe do fundo do mar</string>
+    <string name="rendering_attr_seabedDetail_description">Informações de texto adicionais sobre qualificação_superfície do fundo do mar, tipos de superfície combinados, categoria e táxon de ervas daninhas ou ervas marinhas</string>
+    <string name="rendering_value_category_name">Categoria</string>
+    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_omit_name">Omitir</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Tags de observação</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar tags de observação</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em zooms baixos</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis hidroviários</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
+    <string name="gpx_no_routes_title">Não há rotas</string>
+    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
+    <string name="stop_download_desc">O download não está completo. Se você interromper o download agora, apenas parte dos blocos estará disponível para visualização.</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermediário</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avançado</string>
+    <string name="available_widgets">Widgets disponíveis</string>
+    <string name="no_widgets_descr">Adicione um ou mais widgets da lista de widgets disponíveis.</string>
+    <string name="no_widgets_here_yet">Ainda não há widgets aqui</string>
+    <string name="turn_on_public_transport_description">Ative para ver as rotas de transporte público no mapa.</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Especialista</string>
+    <string name="release_4_2">• Redesenho de widgets: novo Look &amp; Feel, agrupar por Páginas, alterar a ordem e combinar como quiser.
+\n
+\n• Caminhadas / Ciclismo / Rotas de viagem: toque no símbolo da rota e obtenha informações completas sobre a rota.
+\n
+\n• Grupos favoritos: defina a aparência padrão para novos pontos no grupo
+\n
+\n• Correções: atualização automática de mapas online
+\n
+\n</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Não saia da pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Somente se necessário</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Prefira fora da pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sem preferência</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="bearing_secondary_desc">Você pode alterar o formato dos dados exibidos em: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">O formato das coordenadas pode ser alterado em %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Parte do plug-in %1$s.</string>
+    <string name="elevation_profile_widget_desc">Este widget mostra o perfil de elevação e inclinação da rota atual.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Evitar estradas 4x4</string>
+    <string name="routing_attr_avoid_4wd_only_description">Evite estradas adequadas apenas para veículos 4x4</string>
+    <string name="parking_widget_desc">Este widget que mostra a distância do centro da tela até o estacionamento.</string>
+    <string name="mapillary_widget_desc">Este widget fornece acesso rápido ao aplicativo Mapillary para adicionar imagens de nível de rua.</string>
+    <string name="current_time_widget_desc">Este widget mostra a hora atual do seu dispositivo.</string>
+    <string name="gps_info_widget_desc">Este widget mostra uma série de satélites que o dispositivo detecta e usa naquele momento.</string>
+    <string name="altitude_widget_desc">Este widget mostra a altura acima do nível do mar da geolocalização atual.</string>
+    <string name="max_speed_widget_desc">Este widget mostra um limite de velocidade para uma estrada em que se encontra.</string>
+    <string name="fps_widget_desc">Este widget mostra a rapidez com que os elementos do mapa são mostrados e atualizados.</string>
+    <string name="battery_widget_desc">Este widget mostra o nível da bateria do seu dispositivo.</string>
+    <string name="radius_rules_widget_desc">A ferramenta Régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da exibição de círculos de distância no mapa.</string>
+    <string name="current_speed_widget_desc">Este widget mostra sua velocidade atual detectada pelo sensor GPS.</string>
+    <string name="shared_string_mode">Modo</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares</string>
+    <string name="explore_plans">Explorar planos</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Você pode alternar o modo tocando no widget.</string>
+    <string name="map_widget_time_to_destination">Tempo para o destino</string>
 </resources>

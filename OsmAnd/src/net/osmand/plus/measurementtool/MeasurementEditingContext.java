@@ -24,7 +24,7 @@ import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MeasurementModeCommand;
 import net.osmand.plus.routing.IRouteSettingsListener;
 import net.osmand.plus.routing.RouteCalculationParams;
-import net.osmand.plus.routing.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
@@ -200,12 +200,20 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		this.gpxData = gpxData;
 	}
 
+	public int getSelectedSegment() {
+		return selectedSegment;
+	}
+
 	public void setSelectedSegment(int selectedSegment) {
 		this.selectedSegment = selectedSegment;
 	}
 
 	public boolean hasRoutePoints() {
 		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().hasRtePt();
+	}
+
+	public boolean hasElevationData() {
+		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().getAnalysis(0).hasElevationData;
 	}
 
 	public CalculationMode getLastCalculationMode() {
@@ -314,7 +322,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return getBeforePoints();
 	}
 
-	public List<List<WptPt>> getPointsSegments(boolean plain, boolean route) {
+	@NonNull
+	public List<List<WptPt>> getSegmentsPoints(boolean plain, boolean route) {
 		List<List<WptPt>> res = new ArrayList<>();
 		List<WptPt> allPoints = getPoints();
 		List<WptPt> segment = new ArrayList<>();
@@ -508,7 +517,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	public void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
 			int firstPointIndex = before.points.indexOf(originalPoints.get(0));
-			int lastPointIndex = before.points.indexOf(originalPoints.get(originalPoints.size() - 1));
+			int lastPointIndex = before.points.lastIndexOf(originalPoints.get(originalPoints.size() - 1));
 			List<WptPt> newPoints = new ArrayList<>();
 			if (firstPointIndex != -1 && lastPointIndex != -1) {
 				newPoints.addAll(before.points.subList(0, firstPointIndex));
@@ -1089,14 +1098,14 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		params.mode = appMode;
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
-		params.calculationProgressCallback = new RouteCalculationProgressCallback() {
+		params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 			@Override
-			public void start() {
+			public void onCalculationStart() {
 			}
 
 			@Override
-			public void updateProgress(int progress) {
+			public void onUpdateCalculationProgress(int progress) {
 				int pairs = pointsToCalculateSize;
 				if (pairs != 0) {
 					float pairProgress = 100f / pairs;
@@ -1106,15 +1115,15 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 
 			@Override
-			public void requestPrivateAccessRouting() {
+			public void onRequestPrivateAccessRouting() {
 			}
 
 			@Override
-			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 			}
 
 			@Override
-			public void finish() {
+			public void onCalculationFinish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;
 			}
@@ -1136,7 +1145,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				pts.add(pt);
 			}
 			calculatedPairs++;
-			params.calculationProgressCallback.updateProgress(0);
+			params.calculationProgressListener.onUpdateCalculationProgress(0);
 			List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 			if (Algorithms.isEmpty(originalRoute)) {
 				originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(

@@ -61,6 +61,7 @@ public class FileUtils {
 		return null;
 	}
 
+	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File source,
 									 @NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);

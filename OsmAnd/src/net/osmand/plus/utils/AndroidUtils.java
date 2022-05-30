@@ -1,10 +1,6 @@
 package net.osmand.plus.utils;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -58,26 +54,31 @@ import android.widget.Toast;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,6 +91,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -108,7 +113,7 @@ public class AndroidUtils {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
 
-	public static void softKeyboardDelayed(final Activity activity, final View view) {
+	public static void softKeyboardDelayed(@NonNull Activity activity, @NonNull View view) {
 		view.post(() -> {
 			if (!isHardwareKeyboardAvailable(view.getContext())) {
 				showSoftKeyboard(activity, view);
@@ -116,7 +121,7 @@ public class AndroidUtils {
 		});
 	}
 
-	public static void showSoftKeyboard(final Activity activity, final View view) {
+	public static void showSoftKeyboard(@NonNull Activity activity, @NonNull View view) {
 		InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -127,7 +132,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static void hideSoftKeyboard(final Activity activity, final View input) {
+	public static void hideSoftKeyboard(@NonNull Activity activity, @Nullable View input) {
 		InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 		if (inputMethodManager != null) {
 			if (input != null) {
@@ -154,7 +159,37 @@ public class AndroidUtils {
 		return resizedBitmap;
 	}
 
-	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {
+	public static byte[] getByteArrayFromBitmap(@NonNull Bitmap bitmap) {
+		int size = bitmap.getRowBytes() * bitmap.getHeight();
+		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+		bitmap.copyPixelsToBuffer(byteBuffer);
+		return byteBuffer.array();
+	}
+
+	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
+		if (drawableIcon != null) {
+			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
+		}
+		Bitmap bitmap = drawableToBitmap(drawableIcon, true);
+		if (bitmap != null && scale != 1f && scale > 0.0f) {
+			bitmap = scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+
+		return bitmap;
+	}
+
+	public static Bitmap createScaledBitmap(Drawable drawable, float scale) {
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		width += width % 2 == 1 ? 1 : 0;
+		height += height % 2 == 1 ? 1 : 0;
+
+		return createScaledBitmap(drawable, width, height);
+	}
+
+	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, int width, int height) {
 		return scaleBitmap(drawableToBitmap(drawable), width, height, false);
 	}
 
@@ -205,6 +240,18 @@ public class AndroidUtils {
 		}
 	}
 
+	public static void startActivityForResultIfSafe(@NonNull Fragment fragment, @NonNull Intent intent, int requestCode) {
+		try {
+			fragment.startActivityForResult(intent, requestCode);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e);
+			Context context = fragment.getContext();
+			if (context != null) {
+				Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
 		return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 	}
@@ -220,7 +267,7 @@ public class AndroidUtils {
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
-									 float x, int top, int y, int bottom, Paint paint) {
+					                 float x, int top, int y, int bottom, Paint paint) {
 						Drawable drawable = getDrawable();
 						canvas.save();
 						int transY = bottom - drawable.getBounds().bottom;
@@ -455,11 +502,7 @@ public class AndroidUtils {
 	}
 
 	public static void setBackground(View view, Drawable drawable) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			view.setBackground(drawable);
-		} else {
-			view.setBackgroundDrawable(drawable);
-		}
+		view.setBackground(drawable);
 	}
 
 	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
@@ -673,6 +716,20 @@ public class AndroidUtils {
 		return coordinates;
 	}
 
+	public static int getViewOnScreenX(@NonNull View view) {
+		return getLocationOnScreen(view)[0];
+	}
+
+	public static int getViewOnScreenY(@NonNull View view) {
+		return getLocationOnScreen(view)[1];
+	}
+
+	public static int[] getLocationOnScreen(@NonNull View view) {
+		int[] locationOnScreen = new int[2];
+		view.getLocationOnScreen(locationOnScreen);
+		return locationOnScreen;
+	}
+
 	public static void enterToFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
 			requestLayout(view);
@@ -792,35 +849,30 @@ public class AndroidUtils {
 		return isLayoutRtl(ctx) ? R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
 	}
 
-	public static Drawable getDrawableForDirection(@NonNull Context ctx,
-												   @NonNull Drawable drawable) {
-		return isLayoutRtl(ctx) ? getMirroredDrawable(ctx, drawable) : drawable;
+	public static Drawable getDrawableForDirection(@NonNull Context ctx, @NonNull Drawable drawable) {
+		return isLayoutRtl(ctx) ? getMirroredDrawable(drawable) : drawable;
 	}
 
-	public static Drawable getMirroredDrawable(@NonNull Context ctx,
-											   @NonNull Drawable drawable) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			drawable.setAutoMirrored(true);
-			return drawable;
-		}
-		Bitmap bitmap = drawableToBitmap(drawable);
-		return new BitmapDrawable(ctx.getResources(), flipBitmapHorizontally(bitmap));
+	public static Drawable getMirroredDrawable(@NonNull Drawable drawable) {
+		drawable.setAutoMirrored(true);
+		return drawable;
 	}
 
 	public static Bitmap drawableToBitmap(Drawable drawable) {
-		if (drawable instanceof BitmapDrawable) {
+		return drawableToBitmap(drawable, false);
+	}
+
+	public static Bitmap drawableToBitmap(Drawable drawable, boolean noOptimization) {
+		if (drawable instanceof BitmapDrawable && !noOptimization) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
 			if (bitmapDrawable.getBitmap() != null) {
 				return bitmapDrawable.getBitmap();
 			}
 		}
 
-		Bitmap bitmap = null;
-		if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-		} else {
-			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-		}
+		Bitmap bitmap = drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0
+				? Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+				: Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
 
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -923,7 +975,7 @@ public class AndroidUtils {
 	}
 
 	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle,
-											   CharacterStyle baseStyle, CharacterStyle replaceStyle) {
+	                                           CharacterStyle baseStyle, CharacterStyle replaceStyle) {
 		int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
 		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
 			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
@@ -996,6 +1048,36 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	@NonNull
+	public static String checkEmoticons(@NonNull String name) {
+		char[] chars = name.toCharArray();
+		char ch1;
+		char ch2;
+
+		int index = 0;
+		StringBuilder builder = new StringBuilder();
+		while (index < chars.length) {
+			ch1 = chars[index];
+			if ((int) ch1 == 0xD83C) {
+				ch2 = chars[index + 1];
+				if ((int) ch2 >= 0xDF00 && (int) ch2 <= 0xDFFF) {
+					index += 2;
+					continue;
+				}
+			} else if ((int) ch1 == 0xD83D) {
+				ch2 = chars[index + 1];
+				if ((int) ch2 >= 0xDC00 && (int) ch2 <= 0xDDFF) {
+					index += 2;
+					continue;
+				}
+			}
+			builder.append(ch1);
+			++index;
+		}
+		builder.trimToSize(); // remove trailing null characters
+		return builder.toString();
 	}
 
 	@NonNull
@@ -1087,7 +1169,7 @@ public class AndroidUtils {
 	}
 
 	@Nullable
-	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
+	public static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);
 			return getStringForField(ctx, field);
@@ -1105,4 +1187,25 @@ public class AndroidUtils {
 		}
 		return null;
 	}
+
+	public static void openUrl(@NonNull Context context, int urlStringId, boolean nightMode) {
+		openUrl(context, context.getString(urlStringId), nightMode);
+	}
+
+	public static void openUrl(@NonNull Context context, @NonNull String url, boolean nightMode) {
+		openUrl(context, Uri.parse(url), nightMode);
+	}
+
+	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		try {
+			customTabsIntent.launchUrl(context, uri);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+		}
+	}
+
 }

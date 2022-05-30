@@ -92,7 +92,7 @@ public class ProfileCard extends MapBaseCard {
 		ImageView imageView = row.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
-		params.rightMargin = container.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+		params.rightMargin = getDimen(R.dimen.bottom_sheet_icon_margin_large);
 		((TextView) row.findViewById(R.id.title)).setText(title);
 		row.setOnClickListener(onClickListener);
 		row.setTag(tag);

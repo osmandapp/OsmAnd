@@ -1,18 +1,30 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
+
+import java.util.TimeZone;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
@@ -25,21 +37,11 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 import androidx.core.graphics.drawable.IconCompat;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.LanesDrawable;
-import net.osmand.plus.views.mapwidgets.TurnDrawable;
-import net.osmand.router.TurnType;
-import net.osmand.util.Algorithms;
-
-import java.util.TimeZone;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 public class TripHelper {
 
@@ -179,6 +181,17 @@ public class TripHelper {
 				}
 			}
 
+			if (deviatedFromRoute) {
+				lastCurrentRoad = null;
+			} else {
+				String streetName = defineStreetName();
+				if (!Algorithms.isEmpty(streetName)) {
+					stepBuilder.setRoad(streetName);
+					tripBuilder.setCurrentRoad(streetName);
+				}
+				lastCurrentRoad = streetName;
+			}
+
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
 			Distance stepDistance = getDistance(app, nextTurnDistance);
@@ -190,14 +203,6 @@ public class TripHelper {
 			tripBuilder.addStep(step, stepTravelEstimate);
 			lastStep = step;
 			lastStepTravelEstimate = stepTravelEstimate;
-			if (!deviatedFromRoute) {
-				nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
-				CurrentStreetName currentName = routingHelper.getCurrentName(nextDirInfo);
-				tripBuilder.setCurrentRoad(currentName.text);
-				lastCurrentRoad = currentName.text;
-			} else {
-				lastCurrentRoad = null;
-			}
 		} else {
 			lastStep = null;
 			lastStepTravelEstimate = null;
@@ -345,5 +350,22 @@ public class TripHelper {
 			default:
 				return LaneDirection.SHAPE_UNKNOWN;
 		}
+	}
+
+	@Nullable
+	private String defineStreetName() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+		CurrentStreetName currentStreetName = routingHelper.getCurrentName(nextDirInfo);
+		String streetName = currentStreetName.text;
+
+		if (Algorithms.isEmpty(streetName)) {
+			return null;
+		}
+
+		String exitRef = currentStreetName.exitRef;
+		return Algorithms.isEmpty(exitRef)
+				? streetName
+				: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, streetName);
 	}
 }

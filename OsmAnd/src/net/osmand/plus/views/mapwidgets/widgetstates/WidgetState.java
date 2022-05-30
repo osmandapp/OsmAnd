@@ -2,29 +2,25 @@ package net.osmand.plus.views.mapwidgets.widgetstates;
 
 import net.osmand.plus.OsmandApplication;
 
+import androidx.annotation.NonNull;
+
 public abstract class WidgetState {
 
-	private OsmandApplication ctx;
+	protected final OsmandApplication app;
 
-	public OsmandApplication getCtx() {
-		return ctx;
+	public WidgetState(@NonNull OsmandApplication app) {
+		this.app = app;
 	}
 
-	public WidgetState(OsmandApplication ctx) {
-		this.ctx = ctx;
+	@NonNull
+	public OsmandApplication getApp() {
+		return app;
 	}
 
-	public abstract int getMenuTitleId();
+	@NonNull
+	public abstract String getTitle();
 
-	public abstract int getMenuIconId();
-
-	public abstract int getMenuItemId();
-
-	public abstract int[] getMenuTitleIds();
-
-	public abstract int[] getMenuIconIds();
-
-	public abstract int[] getMenuItemIds();
+	public abstract int getSettingsIconId(boolean nightMode);
 
 	public abstract void changeState(int stateId);
 }

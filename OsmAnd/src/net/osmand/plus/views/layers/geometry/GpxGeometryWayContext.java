@@ -6,16 +6,18 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.ColoringType;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 
 	private final Paint strokePaint;
 
-	public GpxGeometryWayContext(Context ctx, float density) {
+	public GpxGeometryWayContext(@NonNull Context ctx, float density) {
 		super(ctx, density);
 		Paint paint = getPaintIcon();
 		paint.setStrokeCap(Paint.Cap.ROUND);

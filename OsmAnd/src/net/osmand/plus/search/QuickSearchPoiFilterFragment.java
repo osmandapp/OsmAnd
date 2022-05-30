@@ -1,5 +1,7 @@
 package net.osmand.plus.search;
 
+import static net.osmand.data.Amenity.OPENING_HOURS;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -446,7 +448,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
 			List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
 
-			if (!excludedPoiAdditionalCategories.contains("opening_hours")) {
+			if (!excludedPoiAdditionalCategories.contains(OPENING_HOURS)) {
 				String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
 				String keyNameOpen24 = app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
 				index = filterByName.indexOf(keyNameOpen24);
@@ -550,7 +552,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
 		List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
 
-		if (!excludedPoiAdditionalCategories.contains("opening_hours")) {
+		if (!excludedPoiAdditionalCategories.contains(OPENING_HOURS)) {
 			items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
 			String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
 			items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,

@@ -160,7 +160,6 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 						plugin.indexingFiles(true, true);
 					}
 					if (activity instanceof MapActivity) {
-						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 						((MapActivity) activity).updateApplicationModeSettings();
 					}
 					if (!silentImport && file != null && activity != null) {

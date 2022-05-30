@@ -1,0 +1,71 @@
+package net.osmand.plus.widgets.chips;
+
+import android.content.Context;
+import android.util.AttributeSet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
+
+import java.util.List;
+
+public class HorizontalChipsView extends RecyclerView {
+
+	final private ChipsAdapter adapter;
+	final private ChipsDataHolder holder = new ChipsDataHolder();
+	final private DefaultAttributes defAttrs;
+
+	public HorizontalChipsView(@NonNull Context context) {
+		this(context, null);
+	}
+
+	public HorizontalChipsView(@NonNull Context context,
+	                           @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public HorizontalChipsView(@NonNull Context context,
+	                           @Nullable AttributeSet attrs,
+	                           int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+
+		setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+		setClipToPadding(false);
+
+		defAttrs = DefaultAttributes.createInstance(context, attrs, defStyleAttr);
+		adapter = new ChipsAdapter(context, holder, defAttrs);
+		setAdapter(adapter);
+	}
+
+	public void setItems(@NonNull List<ChipItem> chips) {
+		holder.setItems(chips);
+	}
+
+	public void setSelected(@Nullable ChipItem chip) {
+		holder.setSelected(chip);
+	}
+
+	public void setOnSelectChipListener(@Nullable OnSelectChipListener listener) {
+		adapter.setOnSelectChipListener(listener);
+	}
+
+	public void notifyDataSetChanged() {
+		adapter.notifyDataSetChanged();
+	}
+
+	public ChipItem getChipById(@NonNull String id) {
+		return holder.getItemById(id);
+	}
+
+	public void scrollTo(@NonNull ChipItem chip) {
+		scrollToPosition(holder.indexOf(chip));
+	}
+
+	public void smoothScrollTo(@NonNull ChipItem chip) {
+		smoothScrollToPosition(holder.indexOf(chip));
+	}
+
+}

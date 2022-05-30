@@ -2,6 +2,8 @@ package net.osmand.plus.quickaction;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -14,8 +16,8 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
@@ -31,6 +33,7 @@ import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
+import net.osmand.plus.quickaction.actions.RouteAction;
 import net.osmand.plus.quickaction.actions.ShowHideCoordinatesWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
@@ -44,13 +47,12 @@ import net.osmand.util.Algorithms;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by rosty on 12/27/16.
@@ -82,8 +84,7 @@ public class QuickActionRegistry {
 	private List<QuickActionType> enabledTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
-
-	private QuickActionUpdatesListener updatesListener;
+	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
 
 	public QuickActionRegistry(OsmandSettings settings) {
 		this.settings = settings;
@@ -91,12 +92,24 @@ public class QuickActionRegistry {
 		updateActionTypes();
 	}
 
-	public void setUpdatesListener(QuickActionUpdatesListener updatesListener) {
-		this.updatesListener = updatesListener;
+	public void addUpdatesListener(@NonNull QuickActionUpdatesListener updatesListener) {
+		Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>(this.updatesListeners);
+		updatesListeners.add(updatesListener);
+		this.updatesListeners = updatesListeners;
 	}
 
-	public void notifyUpdates() {
-		if (updatesListener != null) updatesListener.onActionsUpdated();
+	public void removeUpdatesListener(@NonNull QuickActionUpdatesListener updatesListener) {
+		Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>(this.updatesListeners);
+		updatesListeners.remove(updatesListener);
+		this.updatesListeners = updatesListeners;
+	}
+
+	private void notifyUpdates() {
+		if (!Algorithms.isEmpty(updatesListeners)) {
+			for (QuickActionUpdatesListener updateListener : updatesListeners) {
+				updateListener.onActionsUpdated();
+			}
+		}
 	}
 
 	public List<QuickAction> getQuickActions() {
@@ -117,18 +130,12 @@ public class QuickActionRegistry {
 
 	public void addQuickAction(QuickAction action) {
 		quickActions.add(action);
-		saveActions();
-	}
-
-	private void saveActions() {
-		Type type = new TypeToken<List<QuickAction>>() {
-		}.getType();
-		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
+		onDataChanged();
 	}
 
 	public void deleteQuickAction(QuickAction action) {
 		quickActions.remove(action);
-		saveActions();
+		onDataChanged();
 	}
 
 	public void updateQuickAction(QuickAction action) {
@@ -136,13 +143,23 @@ public class QuickActionRegistry {
 		if (index >= 0) {
 			quickActions.set(index, action);
 		}
-		saveActions();
+		onDataChanged();
 	}
 
 	public void updateQuickActions(List<QuickAction> quickActions) {
 		this.quickActions.clear();
 		this.quickActions.addAll(quickActions);
+		onDataChanged();
+	}
+
+	private void onDataChanged() {
 		saveActions();
+		notifyUpdates();
+	}
+
+	private void saveActions() {
+		Type type = new TypeToken<List<QuickAction>>(){}.getType();
+		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
 	}
 
 	public QuickAction getQuickAction(long id) {
@@ -204,6 +221,7 @@ public class QuickActionRegistry {
 
 	public void setQuickActionFabState(boolean isOn) {
 		settings.QUICK_ACTION.set(isOn);
+		notifyUpdates();
 	}
 
 	private List<QuickAction> parseActiveActionsList(String json) {
@@ -232,6 +250,7 @@ public class QuickActionRegistry {
 		allTypes.add(FavoriteAction.TYPE);
 		allTypes.add(GPXAction.TYPE);
 		allTypes.add(MarkerAction.TYPE);
+		allTypes.add(RouteAction.TYPE);
 		// configure map
 		allTypes.add(ShowHideFavoritesAction.TYPE);
 		allTypes.add(ShowHideGpxTracksAction.TYPE);

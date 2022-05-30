@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -45,8 +47,8 @@ import static net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetails
 import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
 
-public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment implements ValidateOsmLoginListener,
-		OsmAuthorizationListener {
+public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragment
+		implements ValidateOsmLoginListener, OsmAuthorizationListener {
 
 	public static final String TAG = SendOsmNoteBottomSheetFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SendOsmNoteBottomSheetFragment.class);
@@ -58,19 +60,19 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private LinearLayout signInView;
 	private SwitchCompat uploadAnonymously;
 	private OsmandApplication app;
+	private OsmEditingPlugin plugin;
 	private EditText noteText;
 
 	private boolean isLoginOAuth() {
-		return !Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get());
+		return !Algorithms.isEmpty(plugin.OSM_USER_DISPLAY_NAME.get());
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-		settings = app.getSettings();
+		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (app == null || plugin == null) return;
+
 		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 
 		items.add(new TitleItem(getString(R.string.upload_osm_note)));
@@ -92,26 +94,20 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		View signInButton = sendOsmNoteView.findViewById(R.id.sign_in_button);
 		setupButton(signInButton, R.string.sign_in_with_open_street_map, DialogButtonType.PRIMARY,
 				R.drawable.ic_action_openstreetmap_logo);
-		signInButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Fragment fragment = getParentFragment();
-				if (fragment instanceof OsmAuthorizationListener) {
-					app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
-				}
-				app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
+		signInButton.setOnClickListener(v -> {
+			Fragment fragment = getParentFragment();
+			if (fragment instanceof OsmAuthorizationListener) {
+				app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
 			}
+			app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
 		});
 		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
 		setupButton(loginButton, R.string.use_login_password, DialogButtonType.SECONDARY, -1);
-		loginButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fragmentManager = getFragmentManager();
-				if (fragmentManager != null) {
-					OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
-							SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
-				}
+		loginButton.setOnClickListener(v -> {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
+						SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
 			}
 		});
 		updateSignIn(uploadAnonymously.isChecked());
@@ -133,15 +129,12 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			}
 		});
 		LinearLayout account = accountBlockView.findViewById(R.id.account_container);
-		account.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					showOpenStreetMapScreen(activity);
-				}
-				dismiss();
+		account.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				showOpenStreetMapScreen(activity);
 			}
+			dismiss();
 		});
 		final SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendOsmNoteView)
@@ -150,8 +143,8 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	}
 
 	private void updateAccountName() {
-		String userNameOAuth = settings.OSM_USER_DISPLAY_NAME.get();
-		String userNameOpenID = settings.OSM_USER_NAME_OR_EMAIL.get();
+		String userNameOAuth = plugin.OSM_USER_DISPLAY_NAME.get();
+		String userNameOpenID = plugin.OSM_USER_NAME_OR_EMAIL.get();
 		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
 		updateSignIn(uploadAnonymously.isChecked());
@@ -230,7 +223,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private boolean isLogged() {
 		OsmOAuthAuthorizationAdapter adapter = app.getOsmOAuthHelper().getAuthorizationAdapter();
 		return adapter.isValidToken()
-				|| !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get())
-				&& !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
+				|| !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get())
+				&& !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
 	}
 }

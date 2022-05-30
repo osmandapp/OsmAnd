@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">wobchod</string>
     <string name="poi_shop_food">žiwidłowy wobchod a superwiki</string>
@@ -82,7 +82,6 @@
     <string name="poi_doityourself">Wobchod za twaršćizny</string>
     <string name="poi_doors">Durje</string>
     <string name="poi_erotic">Seks-wobchod</string>
-    
     <string name="poi_fishing">Wudźerske potrjeby</string>
     <string name="poi_florist">Kwětkarnja</string>
     <string name="poi_frame">Wobrazowe ramiki</string>
@@ -133,7 +132,7 @@
     <string name="poi_payment_toll_type">wašnje zapłaćenja</string>
     <string name="poi_traffic_signals_sound">Zwuk</string>
     <string name="poi_subway_station_filter">zastanišćo metra</string>
-    <string name="poi_pump">Klumpa</string>
+    <string name="poi_pump">klumpa</string>
     <string name="poi_city_capital">Stolica</string>
     <string name="poi_religion_type">Nabožina</string>
     <string name="poi_denomination">Konfesija</string>
@@ -414,7 +413,7 @@
     <string name="poi_bicycle_parking_type">typ</string>
     <string name="poi_telescope_type">typ</string>
     <string name="poi_animal_training_type">typ</string>
-    <string name="poi_diplomatic_filter">typ</string>
+    <string name="poi_diplomatic_filter">diplomatiska institucija</string>
     <string name="poi_archaeological_site_type">typ</string>
     <string name="poi_information_type">typ</string>
     <string name="poi_resort_type">typ</string>
@@ -1470,7 +1469,6 @@
     <string name="poi_convenience">wobchodźik</string>
     <string name="poi_pasta">pasta</string>
     <string name="poi_sports">sportowe wuhotowanje</string>
-    
     <string name="poi_swimming_pool_shop">tekstilije</string>
     <string name="poi_games">hrajki</string>
     <string name="poi_lighthouse">swětłownja</string>
@@ -1998,4 +1996,5 @@
     <string name="poi_cash_withdrawal_bank_card">wotzběhnjenje pjenjez</string>
     <string name="poi_bath_type">typ</string>
     <string name="poi_bath_open_air">pod hołym njebjom</string>
+    <string name="poi_aerialway_heating">tepjenje</string>
 </resources>

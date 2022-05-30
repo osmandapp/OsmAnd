@@ -1,20 +1,25 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.setupGpxTabsView;
+
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.LatLon;
-import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
-import net.osmand.plus.myplaces.GPXItemPagerAdapter;
-import net.osmand.plus.myplaces.SegmentActionsListener;
-import net.osmand.plus.myplaces.SegmentGPXAdapter;
+import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.ui.SegmentActionsListener;
+import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -23,17 +28,13 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	private final TrackDisplayHelper displayHelper;
 	private final TrackChartPoints trackChartPoints;
 
 	private View view;
-	PagerSlidingTabStrip slidingTabs;
+	private PagerSlidingTabStrip slidingTabs;
 
 	public GpsFilterGraphCard(@NonNull MapActivity mapActivity,
 	                          @NonNull Fragment target,
@@ -79,15 +80,15 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 	}
 
 	private void setupGraph(@NonNull GpxDisplayItem displayItem) {
-		SegmentGPXAdapter.setupGpxTabsView(view, nightMode);
+		setupGpxTabsView(view, nightMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.list_item_divider), false);
 
 		slidingTabs = view.findViewById(R.id.sliding_tabs);
 		WrapContentHeightViewPager pager = view.findViewById(R.id.pager);
 
-		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
-				getSegmentActionsListener(), false, true);
-		pagerAdapter.setChartHMargin(app.getResources().getDimensionPixelSize(R.dimen.content_padding));
+		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, getSegmentActionsListener(), nightMode, false);
+		pagerAdapter.setHideJoinGapsBottomButtons(true);
+		pagerAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 		pager.setAdapter(pagerAdapter);
 		slidingTabs.setViewPager(pager);
 	}
@@ -127,6 +128,11 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 			@Override
 			public void openAnalyzeOnMap(@NonNull GpxDisplayItem gpxItem) {
+			}
+
+			@Override
+			public void openGetAltitudeBottomSheet(@NonNull GpxDisplayItem gpxItem) {
+
 			}
 		};
 	}

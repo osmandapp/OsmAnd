@@ -1,21 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,33 +15,35 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -71,6 +57,23 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
 
 
 public class RoutingOptionsHelper {
@@ -130,7 +133,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback, ApplicationMode applicationMode) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(app);
 
 		String[] entries;
 		final String[] entrieValues;
@@ -142,8 +145,7 @@ public class RoutingOptionsHelper {
 		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
-		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
-		adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
+		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(selectedValue)) {
 			selected = k;
 		}
@@ -152,7 +154,7 @@ public class RoutingOptionsHelper {
 			entries[k] = (s.contains("tts") ? mapActivity.getResources().getString(R.string.ttsvoice) + " " : "") +
 					FileNameTranslationHelper.getVoiceName(mapActivity, s);
 			entrieValues[k] = s;
-			adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
+			contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 			if (s.equals(selectedValue)) {
 				selected = k;
 			}
@@ -160,7 +162,7 @@ public class RoutingOptionsHelper {
 		}
 		entrieValues[k] = MORE_VALUE;
 		entries[k] = mapActivity.getResources().getString(R.string.install_more);
-		adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
+		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 
 		boolean nightMode = isNightMode(app);
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
@@ -343,7 +345,9 @@ public class RoutingOptionsHelper {
 		int i = 0;
 		int selectedIndex = -1;
 		for (LocalRoutingParameter p : group.getRoutingParameters()) {
-			adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity)).setSelected(false).createItem());
+			adapter.addItem(new ContextMenuItem(null)
+					.setTitle(p.getText(mapActivity))
+					.setSelected(false));
 			if (p.isSelected(settings)) {
 				selectedIndex = i;
 			}
@@ -360,7 +364,8 @@ public class RoutingOptionsHelper {
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
 
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, adapter.getItemNames()) {
+		List<String> names = CtxMenuUtils.getNames(adapter.getItems());
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, names) {
 			@NonNull
 			@Override
 			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
@@ -418,6 +423,8 @@ public class RoutingOptionsHelper {
 				return new DividerItem();
 			case RouteSimulationItem.KEY:
 				return new RouteSimulationItem();
+			case CalculateAltitudeItem.KEY:
+				return new CalculateAltitudeItem();
 			case ShowAlongTheRouteItem.KEY:
 				return new ShowAlongTheRouteItem();
 			case AvoidPTTypesRoutingParameter.KEY:
@@ -445,7 +452,7 @@ public class RoutingOptionsHelper {
 		}
 
 		LocalRoutingParameter rp;
-		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters();
+		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
 		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameterId);
 
 		if (routingParameter != null) {
@@ -453,7 +460,7 @@ public class RoutingOptionsHelper {
 			rp.routingParameter = routingParameter;
 		} else {
 			LocalRoutingParameterGroup rpg = null;
-			for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
+			for (GeneralRouter.RoutingParameter r : parameters.values()) {
 				if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN
 						&& !Algorithms.isEmpty(r.getGroup()) && r.getGroup().equals(parameterId)) {
 					if (rpg == null) {
@@ -525,7 +532,8 @@ public class RoutingOptionsHelper {
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
-		for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
+		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
+		for (GeneralRouter.RoutingParameter r : parameters.values()) {
 			if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 				if ("relief_smoothness_factor".equals(r.getGroup())) {
 					continue;
@@ -590,6 +598,7 @@ public class RoutingOptionsHelper {
 				rp.activeIconId = R.drawable.ic_action_avoid_motorways;
 				break;
 			case GeneralRouter.ALLOW_PRIVATE:
+			case GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK:
 				rp.activeIconId = R.drawable.ic_action_allow_private_access;
 				rp.disabledIconId = R.drawable.ic_action_forbid_private_access;
 				break;
@@ -613,7 +622,8 @@ public class RoutingOptionsHelper {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
+			Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String param = e.getKey();
 				GeneralRouter.RoutingParameter routingParameter = e.getValue();
 				if (param.startsWith("avoid_")) {
@@ -629,7 +639,7 @@ public class RoutingOptionsHelper {
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {
-			parameter = router.getParameters().get(parameterId);
+			parameter = RoutingHelperUtils.getParameterForDerivedProfile(parameterId, applicationMode, router);
 		}
 
 		return parameter;
@@ -825,6 +835,23 @@ public class RoutingOptionsHelper {
 		}
 
 		public RouteSimulationItem() {
+			super(null);
+		}
+	}
+
+	public static class CalculateAltitudeItem extends LocalRoutingParameter {
+
+		public static final String KEY = NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
+
+		public String getKey() {
+			return KEY;
+		}
+
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
+		public CalculateAltitudeItem() {
 			super(null);
 		}
 	}

@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.parking;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PARKING_POSITION;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.PARKING;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -26,46 +26,43 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 /**
- * 
  * The plugin facilitates a storage of the location of a parked car.
- * 
+ *
  * @author Alena Fedasenka
  */
 public class ParkingPositionPlugin extends OsmandPlugin {
 
-	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
-	public static final String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
-	public static final String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
-	public static final String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
-	public static final String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
-	public static final String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
-	public static final String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
+	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin";
+	public static final String PARKING_POINT_LAT = "parking_point_lat";
+	public static final String PARKING_POINT_LON = "parking_point_lon";
+	public static final String PARKING_TYPE = "parking_type";
+	public static final String PARKING_TIME = "parking_limit_time";
+	public static final String PARKING_START_TIME = "parking_time";
+	public static final String PARKING_EVENT_ADDED = "parking_event_added";
 
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
@@ -83,7 +80,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public ParkingPositionPlugin(OsmandApplication app) {
 		super(app);
 		OsmandSettings set = app.getSettings();
-		ApplicationMode.regWidgetVisibility("parking", (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility(PARKING.id, (ApplicationMode[]) null);
 		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal().makeShared();
 		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal().makeShared();
 		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeShared();
@@ -134,9 +131,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent.resetToDefault();
 		parkingStartTime.resetToDefault();
 		parkingPosition = null;
-		FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+		FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
 		if (pnt != null) {
-			app.getFavorites().deleteFavourite(pnt);
+			app.getFavoritesHelper().deleteFavourite(pnt);
 		}
 		return true;
 	}
@@ -144,7 +141,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public boolean setParkingPosition(double latitude, double longitude) {
 		parkingLat.set((float) latitude);
 		parkingLon.set((float) longitude);
-        parkingPosition = constructParkingPosition();
+		parkingPosition = constructParkingPosition();
 		return true;
 	}
 	
@@ -159,8 +156,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingTime.set(timeInMillis);
 		return true;
 	}
-	
-	public boolean setParkingStartTime(long timeInMillis) {		
+
+	public boolean setParkingStartTime(long timeInMillis) {
 		parkingStartTime.set(timeInMillis);
 		return true;
 	}
@@ -229,35 +226,26 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			parkingPlaceControl = createParkingPlaceInfoControl(activity);
-			mapInfoLayer.registerSideWidget(parkingPlaceControl,
-					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, "parking", false, 10);
+			parkingPlaceControl = (TextInfoWidget) createMapWidgetForParams(activity, PARKING);
+			mapInfoLayer.registerWidget(PARKING, parkingPlaceControl);
 			mapInfoLayer.recreateControls();
 		}
 	}
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
-											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          final double latitude, final double longitude,
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
-		ItemClickListener addListener = new ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId,
-					int pos, boolean isChecked, int[] viewCoordinates) {
-				if (resId == R.string.context_menu_item_add_parking_point) {
-					showAddParkingDialog(mapActivity, latitude, longitude);
-				}
-				return true;
-			}
+		ItemClickListener addListener = (uiAdapter, view, item, isChecked) -> {
+			showAddParkingDialog(mapActivity, latitude, longitude);
+			return true;
 		};
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
+		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC)
 				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)
-				.setId(MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC)
 				.setIcon(R.drawable.ic_action_parking_dark)
 				.setOrder(MARK_AS_PARKING_POS_ITEM_ORDER)
-				.setListener(addListener)
-				.createItem());
+				.setListener(addListener));
 
 	}
 
@@ -269,7 +257,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		Bundle args = new Bundle();
 		args.putDouble(ParkingTypeBottomSheetDialogFragment.LAT_KEY, latitude);
 		args.putDouble(ParkingTypeBottomSheetDialogFragment.LON_KEY, longitude);
-		FragmentManager fragmentManager=mapActivity.getSupportFragmentManager();
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		ParkingTypeBottomSheetDialogFragment fragment = new ParkingTypeBottomSheetDialogFragment();
 		fragment.setArguments(args);
 		fragment.show(fragmentManager, ParkingTypeBottomSheetDialogFragment.TAG);
@@ -277,7 +265,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
 		MapContextMenu menu = mapActivity.getContextMenu();
-		FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
+		FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
 		if (menu.isVisible()) {
 			menu.hide(animated);
 			menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
@@ -303,9 +291,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				showDeleteEventWarning(activity);
 				cancelParking();
 				if (activity instanceof MapActivity) {
-					FavouritePoint pnt = app.getFavorites().getSpecialPoint(SpecialPointType.PARKING);
-					if(pnt != null) {
-						app.getFavorites().deleteFavourite(pnt);
+					FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
+					if (pnt != null) {
+						app.getFavoritesHelper().deleteFavourite(pnt);
 					}
 					((MapActivity) activity).getContextMenu().close();
 				}
@@ -335,13 +323,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				cancelParking();
 			}
 		});
-		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
-		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
+		final TextView textView = setTimeParking.findViewById(R.id.parkTime);
+		final TimePicker timePicker = setTimeParking.findViewById(R.id.parking_time_picker);
 
 		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 			private static final int TIME_PICKER_INTERVAL = 5;
 			private boolean mIgnoreEvent = false;
-            private Calendar cal = Calendar.getInstance();
+			private final Calendar cal = Calendar.getInstance();
 
 
 			@Override
@@ -362,11 +350,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				long timeInMillis = cal.getTimeInMillis() + hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
 				textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add)
 						+ " " + getFormattedTime(timeInMillis));
-
 			}
 		});
-		
-		
+
 		//to set the same 24-hour or 12-hour mode as it is set in the device
 		timePicker.setIs24HourView(true);
 		timePicker.setCurrentHour(0);
@@ -382,8 +368,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
 				cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());
-				app.getFavorites().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
-				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
+				app.getFavoritesHelper().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
+				CheckBox addCalendarEvent = setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
 					addCalendarEvent(setTimeParking.getContext());
 					addOrRemoveParkingEvent(true);
@@ -420,7 +406,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			AlertDialog.Builder deleteEventWarning = new AlertDialog.Builder(activity);
 			deleteEventWarning.setTitle(activity.getString(R.string.osmand_parking_warning));
 			deleteEventWarning.setMessage(activity.getString(R.string.osmand_parking_warning_text));
-			deleteEventWarning.setNeutralButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {						
+			deleteEventWarning.setNeutralButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 				}
@@ -445,85 +431,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	private void cancelParking() {
 		clearParkingPosition();
 	}
-	
-	/**
-	 * @return the control to be added on a MapInfoLayer 
-	 * that shows a distance between 
-	 * the current position on the map 
-	 * and the location of the parked car
-	 */
-	private TextInfoWidget createParkingPlaceInfoControl(final MapActivity map) {
-		TextInfoWidget parkingPlaceControl = new TextInfoWidget(map) {
-			private float[] calculations = new float[1];
-			private int cachedMeters = 0;			
-			
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				LatLon parkingPoint = getParkingPosition();
-					if (parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
-						OsmandMapTileView view = map.getMapView();
-						int d = 0;
-						if (d == 0) {
-							net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
-							d = (int) calculations[0];
-						}
-						if (isUpdateNeeded() || distChanged(cachedMeters, d)) {
-							cachedMeters = d;
-							if (cachedMeters <= 20) {
-								cachedMeters = 0;
-								setText(null, null);
-							} else {
-								String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map.getMyApplication());
-								int ls = ds.lastIndexOf(' ');
-								if (ls == -1) {
-									setText(ds, null);
-								} else {
-									setText(ds.substring(0, ls), ds.substring(ls + 1));
-								}
-							}
-							return true;
-						}
-					} else if (cachedMeters != 0) {
-						cachedMeters = 0;
-						setText(null, null);
-						return true;
-					}
-				return false;
-			}
 
-			@Override
-			public boolean isMetricSystemDepended() {
-				return true;
-			}
-
-			/**
-			 * Utility method.
-			 * @param oldDist
-			 * @param dist
-			 * @return
-			 */
-			private boolean distChanged(int oldDist, int dist){
-				if(oldDist != 0 && Math.abs(oldDist - dist) < 30){
-					return false;
-				}
-				return true;
-			}
-		};
-		parkingPlaceControl.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OsmandMapTileView view = map.getMapView();
-				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-				LatLon parkingPoint = parkingPosition;
-				if (parkingPoint != null) {
-					int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
-					thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
-				}
-			}
-		});
-		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
-		return parkingPlaceControl;
+	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		return new ParkingMapWidget(this, mapActivity);
 	}
 
 	@Override

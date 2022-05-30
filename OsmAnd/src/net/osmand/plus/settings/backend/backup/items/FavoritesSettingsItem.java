@@ -11,11 +11,11 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
-import net.osmand.plus.myplaces.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -36,7 +36,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	private static final int APPROXIMATE_FAVOURITE_SIZE_BYTES = 470;
 
-	private FavouritesDbHelper favoritesHelper;
+	private FavouritesHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
 
 	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull List<FavoriteGroup> items) {
@@ -54,7 +54,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	protected void init() {
 		super.init();
-		favoritesHelper = app.getFavorites();
+		favoritesHelper = app.getFavoritesHelper();
 		existingItems = new ArrayList<>(favoritesHelper.getFavoriteGroups());
 	}
 
@@ -66,13 +66,13 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Override
 	public long getLocalModifiedTime() {
-		File favoritesFile = favoritesHelper.getExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		File favoritesFile = favoritesHelper.getExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getExternalFile();
 		if (favoritesFile.exists()) {
 			favoritesFile.setLastModified(lastModifiedTime);
 		}
@@ -202,7 +202,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {
-							group = new FavoriteGroup(point.getCategory(), point.isVisible(), point.getColor());
+							group = new FavoriteGroup(point);
 							flatGroups.put(group.getName(), group);
 							items.add(group);
 						}
@@ -225,7 +225,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		List<FavouritePoint> favourites = getPointsFromGroups(items);
-		GPXFile gpxFile = favoritesHelper.asGpxFile(favourites);
+		GPXFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(favourites);
 		return getGpxWriter(gpxFile);
 	}
 }

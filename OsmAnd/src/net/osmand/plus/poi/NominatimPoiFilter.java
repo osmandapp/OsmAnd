@@ -1,13 +1,5 @@
 package net.osmand.plus.poi;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
@@ -23,6 +15,14 @@ import net.osmand.util.TransliterationHelper;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class NominatimPoiFilter extends PoiUIFilter {
@@ -83,7 +83,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 		} else {
 			NOMINATIM_API = "http://nominatim.openstreetmap.org/search/";
 		}
-		currentSearchResult = new ArrayList<Amenity>();
+		currentSearchResult = new ArrayList<>();
 		if (Algorithms.isEmpty(getFilterByName())) {
 			return currentSearchResult;
 		}

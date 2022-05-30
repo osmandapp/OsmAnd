@@ -1,5 +1,17 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AUDIO_BITRATE_DEFAULT;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_EDOF;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -21,13 +33,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -37,24 +48,13 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetA
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AUDIO_BITRATE_DEFAULT;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_EDOF;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -467,7 +467,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
 			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
 			requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
@@ -498,7 +498,6 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		if (requestCode == CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE && grantResults.length > 0
 				&& permissions.length > 0 && Manifest.permission.CAMERA.equals(permissions[0])) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {

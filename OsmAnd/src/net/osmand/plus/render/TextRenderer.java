@@ -1,23 +1,6 @@
 package net.osmand.plus.render;
 
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.procedure.TIntObjectProcedure;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
-import net.osmand.util.TransliterationHelper;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,111 +14,55 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
+import net.osmand.util.TransliterationHelper;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.procedure.TIntObjectProcedure;
+
 public class TextRenderer {
 
-	private Paint paintText;
+	public static final String DROID_SERIF = "Droid Serif";
+
 	private final Context context;
-	private Paint paintIcon;
-	private Typeface defaultTypeface;
-	private Typeface boldItalicTypeface;
-	private Typeface italicTypeface;
-	private Typeface boldTypeface;
 
-	public static class TextDrawInfo {
+	private final Paint paintText = new Paint();
+	private final Paint paintIcon = new Paint();
 
-		public TextDrawInfo(String text) {
-			this.text = text;
-		}
+	private final Typeface defaultTypeface;
+	private final Typeface boldItalicTypeface;
+	private final Typeface italicTypeface;
+	private final Typeface boldTypeface;
 
-		String text = null;
-		Path drawOnPath = null;
-		QuadRect bounds = null;
-		float vOffset = 0;
-		float centerX = 0;
-		float pathRotate = 0;
-		float centerY = 0;
-		float textSize = 0;
-		float minDistance = 0;
-		int textColor = Color.BLACK;
-		int textShadow = 0;
-		int textWrap = 0;
-		boolean bold = false;
-		boolean italic = false;
-		String shieldRes = null;
-		String shieldResIcon = null;
-		int textOrder = 100;
-		int textShadowColor = Color.WHITE;
-
-		public void fillProperties(RenderingContext rc, RenderingRuleSearchRequest render, float centerX, float centerY) {
-			this.centerX = centerX;
-			// used only for draw on path where centerY doesn't play role
-			this.vOffset = (int) rc.getComplexValue(render, render.ALL.R_TEXT_DY);
-			this.centerY = centerY + this.vOffset;
-			textColor = render.getIntPropertyValue(render.ALL.R_TEXT_COLOR);
-			if (textColor == 0) {
-				textColor = Color.BLACK;
-			}
-			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE) ;
-			textShadow = (int) rc.getComplexValue(render, render.ALL.R_TEXT_HALO_RADIUS);
-			textShadowColor = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_COLOR);
-			if(textShadowColor == 0) {
-				textShadowColor = Color.WHITE;
-			}
-			textWrap = (int) rc.getComplexValue(render, render.ALL.R_TEXT_WRAP_WIDTH);
-			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
-			italic = render.getIntPropertyValue(render.ALL.R_TEXT_ITALIC, 0) > 0;
-			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE);
-			if (render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
-				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
-			}
-			if (render.isSpecified(render.ALL.R_ICON)) {
-				shieldResIcon = render.getStringPropertyValue(render.ALL.R_ICON);
-			}
-			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 100);
-		}
-
-		public float getCenterX() {
-			return centerX;
-		}
-
-		public void setCenterX(float centerX) {
-			this.centerX = centerX;
-		}
-
-		public float getCenterY() {
-			return centerY;
-		}
-
-		public void setCenterY(float centerY) {
-			this.centerY = centerY;
-		}
-
-		public String getShieldResIcon() {
-			return shieldResIcon;
-		}
-
-		public void setShieldResIcon(String shieldResIcon) {
-			this.shieldResIcon = shieldResIcon;
-		}
-	}
-
-	public TextRenderer(Context context) {
+	public TextRenderer(@NonNull Context context) {
 		this.context = context;
-		paintText = new Paint();
+
+		defaultTypeface = Typeface.create(DROID_SERIF, Typeface.NORMAL);
+		boldItalicTypeface = Typeface.create(DROID_SERIF, Typeface.BOLD_ITALIC);
+		italicTypeface = Typeface.create(DROID_SERIF, Typeface.ITALIC);
+		boldTypeface = Typeface.create(DROID_SERIF, Typeface.BOLD);
+
 		paintText.setStyle(Style.FILL);
 		paintText.setStrokeWidth(1);
 		paintText.setColor(Color.BLACK);
 		paintText.setTextAlign(Align.CENTER);
-		defaultTypeface = Typeface.create("Droid Serif", Typeface.NORMAL);
-		boldItalicTypeface = Typeface.create("Droid Serif", Typeface.BOLD_ITALIC);
-		italicTypeface = Typeface.create("Droid Serif", Typeface.ITALIC);
-		boldTypeface = Typeface.create("Droid Serif", Typeface.BOLD);
-		paintText.setTypeface(defaultTypeface); //$NON-NLS-1$
+		paintText.setTypeface(defaultTypeface);
 		paintText.setAntiAlias(true);
-
-		paintIcon = new Paint();
 		paintIcon.setStyle(Style.STROKE);
-		
 	}
 
 	public Paint getPaintText() {
@@ -145,7 +72,7 @@ public class TextRenderer {
 	private double sqr(double a) {
 		return a * a;
 	}
-	
+
 	private float fsqr(float a) {
 		return a * a;
 	}
@@ -227,8 +154,8 @@ public class TextRenderer {
 		return false;
 	}
 
-	private void drawTextOnCanvas(Canvas cv, String text, float centerX, float centerY, Paint paint, int shadowColor,
-			float textShadow) {
+	private void drawTextOnCanvas(Canvas cv, String text, float centerX, float centerY, Paint paint,
+	                              int shadowColor, float textShadow) {
 		if (textShadow > 0) {
 			int c = paintText.getColor();
 			paintText.setStyle(Style.STROKE);
@@ -263,22 +190,7 @@ public class TextRenderer {
 				if (preferredLocale.length() > 0) {
 					text.text = TransliterationHelper.transliterate(text.text);
 				}
-
-				// sest text size before finding intersection (it is used there)
-				float textSize = text.textSize * rc.textScale ;
-				paintText.setTextSize(textSize);
-				if(text.bold && text.italic) {
-					paintText.setTypeface(boldItalicTypeface);
-				} else if(text.bold) {
-					paintText.setTypeface(boldTypeface);
-				} else if(text.italic) {
-					paintText.setTypeface(italicTypeface);
-				} else {
-					paintText.setTypeface(defaultTypeface);
-				}
-				paintText.setFakeBoldText(text.bold);
-				
-				paintText.setColor(text.textColor);
+				updateTextPaint(text, rc);
 				// align center y
 				text.centerY += (-paintText.ascent());
 
@@ -290,24 +202,40 @@ public class TextRenderer {
 							paintText.setColor(text.textShadowColor);
 							paintText.setStyle(Style.STROKE);
 							paintText.setStrokeWidth(2 + text.textShadow);
-							cv.drawTextOnPath(text.text, text.drawOnPath, 0, 
-									text.vOffset - ( paintText.ascent()/2 + paintText.descent()), paintText);
+							cv.drawTextOnPath(text.text, text.drawOnPath, 0,
+									text.vOffset - (paintText.ascent() / 2 + paintText.descent()), paintText);
 							// reset
 							paintText.setStyle(Style.FILL);
 							paintText.setStrokeWidth(2);
 							paintText.setColor(text.textColor);
 						}
-						cv.drawTextOnPath(text.text, text.drawOnPath, 0, 
-								text.vOffset - ( paintText.ascent()/2 + paintText.descent()), paintText);
+						cv.drawTextOnPath(text.text, text.drawOnPath, 0,
+								text.vOffset - (paintText.ascent() / 2 + paintText.descent()), paintText);
 					} else {
 						drawShieldIcon(rc, cv, text, text.shieldRes);
 						drawShieldIcon(rc, cv, text, text.shieldResIcon);
-
-						drawWrappedText(cv, text, textSize);
+						drawWrappedText(cv, text, paintText.getTextSize());
 					}
 				}
 			}
 		}
+	}
+
+	public void updateTextPaint(TextDrawInfo text, RenderingContext rc) {
+		// set text size before finding intersection (it is used there)
+		float textSize = text.textSize * rc.textScale;
+		paintText.setTextSize(textSize);
+		if (text.bold && text.italic) {
+			paintText.setTypeface(boldItalicTypeface);
+		} else if (text.bold) {
+			paintText.setTypeface(boldTypeface);
+		} else if (text.italic) {
+			paintText.setTypeface(italicTypeface);
+		} else {
+			paintText.setTypeface(defaultTypeface);
+		}
+		paintText.setFakeBoldText(text.bold);
+		paintText.setColor(text.textColor);
 	}
 
 	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
@@ -316,16 +244,15 @@ public class TextRenderer {
 			Drawable ico = RenderingIcons.getDrawableIcon(context, sr, true);
 			if (ico != null) {
 				float left = text.centerX - ico.getIntrinsicWidth() / 2f * coef - 0.5f;
-				float top = text.centerY - ico.getIntrinsicHeight() / 2f * coef -  paintText.descent() * 1.5f;
+				float top = text.centerY - ico.getIntrinsicHeight() / 2f * coef - paintText.descent() * 1.5f;
 				cv.save();
 				cv.translate(left, top);
 				if (rc.screenDensityRatio != 1f) {
 					ico.setBounds(0, 0, (int) (ico.getIntrinsicWidth() * coef), (int) (ico.getIntrinsicHeight() * coef));
-					ico.draw(cv);
 				} else {
 					ico.setBounds(0, 0, ico.getIntrinsicWidth(), ico.getIntrinsicHeight());
-					ico.draw(cv);
 				}
+				ico.draw(cv);
 				cv.restore();
 			}
 		}
@@ -353,12 +280,13 @@ public class TextRenderer {
 					}
 					pos++;
 				}
+				float centerY = text.centerY + line * (textSize + 2);
 				if (lastSpace == -1 || pos == end) {
-					drawTextOnCanvas(cv, text.text.substring(start, pos), text.centerX, text.centerY + line * (textSize + 2), 
+					drawTextOnCanvas(cv, text.text.substring(start, pos), text.centerX, centerY,
 							paintText, text.textShadowColor, text.textShadow);
 					start = pos;
 				} else {
-					drawTextOnCanvas(cv, text.text.substring(start, lastSpace), text.centerX, text.centerY + line * (textSize + 2),
+					drawTextOnCanvas(cv, text.text.substring(start, lastSpace), text.centerX, centerY,
 							paintText, text.textShadowColor, text.textShadow);
 					start = lastSpace + 1;
 					limit += (start - pos) - 1;
@@ -370,14 +298,15 @@ public class TextRenderer {
 			drawTextOnCanvas(cv, text.text, text.centerX, text.centerY, paintText, text.textShadowColor, text.textShadow);
 		}
 	}
-	
-	private void createTextDrawInfo(final BinaryMapDataObject o, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, final float xMid, float yMid,
-			Path path, final PointF[] points, String name, String tagName) {
+
+	private void createTextDrawInfo(final BinaryMapDataObject o, RenderingRuleSearchRequest render,
+	                                RenderingContext rc, TagValuePair pair, final float xMid, float yMid,
+	                                Path path, final PointF[] points, String name, String tagName) {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, o);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 		render.setStringFilter(render.ALL.R_NAME_TAG, tagName);
-		if(render.search(RenderingRulesStorage.TEXT_RULES)){
-			if(render.getFloatPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+		if (render.search(RenderingRulesStorage.TEXT_RULES)) {
+			if (render.getFloatPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
 				final TextDrawInfo text = new TextDrawInfo(name);
 				text.fillProperties(rc, render, xMid, yMid);
 				final String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
@@ -388,14 +317,13 @@ public class TextRenderer {
 							String tagNameN2 = o.getMapIndex().decodeType(tagid).tag;
 							if (tagName2.equals(tagNameN2)) {
 								if (nname != null && nname.trim().length() > 0) {
-									text.text += " (" + nname +")";
+									text.text += " (" + nname + ")";
 								}
 								return false;
 							}
 							return true;
 						}
 					});
-
 				}
 				paintText.setTextSize(text.textSize);
 				Rect bs = new Rect();
@@ -403,27 +331,28 @@ public class TextRenderer {
 				text.bounds = new QuadRect(bs.left, bs.top, bs.right, bs.bottom);
 				text.bounds.inset(-rc.getDensityValue(3), -rc.getDensityValue(10));
 				boolean display = true;
-				if(path != null) {
+				if (path != null) {
 					text.drawOnPath = path;
-					display = calculatePathToRotate(rc, text, points, 
+					display = calculatePathToRotate(rc, text, points,
 							render.getIntPropertyValue(render.ALL.R_TEXT_ON_PATH, 0) != 0);
 				}
-				if(text.drawOnPath == null) {
+				if (text.drawOnPath == null) {
 					text.bounds.offset(text.centerX, text.centerY);
 					// shift to match alignment
-					text.bounds.offset(-text.bounds.width()/2, 0);
+					text.bounds.offset(-text.bounds.width() / 2, 0);
 				} else {
-					text.bounds.offset(text.centerX - text.bounds.width()/2, text.centerY - text.bounds.height()/2);
+					text.bounds.offset(text.centerX - text.bounds.width() / 2, text.centerY - text.bounds.height() / 2);
 				}
-				if(display) {
+				if (display) {
 					rc.textToDraw.add(text);
 				}
 			}
 		}
 	}
-	
-	public void renderText(final BinaryMapDataObject obj, final RenderingRuleSearchRequest render, final RenderingContext rc, 
-			final TagValuePair pair, final float xMid, final float yMid, final Path path, final PointF[] points) {
+
+	public void renderText(final BinaryMapDataObject obj, final RenderingRuleSearchRequest render,
+	                       final RenderingContext rc, final TagValuePair pair, final float xMid,
+	                       final float yMid, final Path path, final PointF[] points) {
 		final TIntObjectHashMap<String> map = obj.getObjectNames();
 		if (map != null) {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
@@ -437,11 +366,11 @@ public class TextRenderer {
 						if (isName && !rc.preferredLocale.isEmpty() &&
 								map.containsKey(obj.getMapIndex().nameEnEncodingType)) {
 							skip = true;
-						} 
+						}
 //						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
 //							skip = true;
 //						}
-						if(!skip) {
+						if (!skip) {
 							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, nameTag);
 						}
 					}
@@ -451,7 +380,6 @@ public class TextRenderer {
 		}
 	}
 
-	
 	boolean calculatePathToRotate(RenderingContext rc, TextDrawInfo p, PointF[] points, boolean drawOnPath) {
 		int len = points.length;
 		if (!drawOnPath) {
@@ -481,19 +409,19 @@ public class TextRenderer {
 		float normalTextLen = 1.5f * textw;
 		for (int i = 0; i < len; i++, last++) {
 			boolean inside = points[i].x >= 0 && points[i].x <= rc.width &&
-					points[i].x >= 0 && points[i].y <= rc.height;
+					points[i].y >= 0 && points[i].y <= rc.height;
 			if (i > 0) {
-				float d = (float) Math.sqrt(fsqr(points[i].x - points[i - 1].x) + 
+				float d = (float) Math.sqrt(fsqr(points[i].x - points[i - 1].x) +
 						fsqr(points[i].y - points[i - 1].y));
-				distances[i-1]= d;
+				distances[i - 1] = d;
 				roadLength += d;
-				if(inside) {
+				if (inside) {
 					visibleRoadLength += d;
-					if(!prevInside) {
+					if (!prevInside) {
 						startVisible = i - 1;
 					}
-				} else if(prevInside) {
-					if(visibleRoadLength >= normalTextLen) {
+				} else if (prevInside) {
+					if (visibleRoadLength >= normalTextLen) {
 						break;
 					}
 					visibleRoadLength = 0;
@@ -508,31 +436,31 @@ public class TextRenderer {
 		int startInd = 0;
 		int endInd = len;
 
-		if(textw < visibleRoadLength &&  last - startVisible > 1) {
+		if (textw < visibleRoadLength && last - startVisible > 1) {
 			startInd = startVisible;
 			endInd = last;
 			// display long road name in center
 			if (visibleRoadLength > 3 * textw) {
-				boolean ch ;
+				boolean ch;
 				do {
 					ch = false;
-					if(endInd - startInd > 2 && visibleRoadLength - distances[startInd] > normalTextLen){
+					if (endInd - startInd > 2 && visibleRoadLength - distances[startInd] > normalTextLen) {
 						visibleRoadLength -= distances[startInd];
 						startInd++;
 						ch = true;
 					}
-					if(endInd - startInd > 2 && visibleRoadLength - distances[endInd - 2] > normalTextLen){
+					if (endInd - startInd > 2 && visibleRoadLength - distances[endInd - 2] > normalTextLen) {
 						visibleRoadLength -= distances[endInd - 2];
 						endInd--;
 						ch = true;
 					}
-				} while(ch);
+				} while (ch);
 			}
 		}
 		// shrink path to display more text
 		if (startInd > 0 || endInd < len) {
 			// find subpath
-			Path path = new Path(); 
+			Path path = new Path();
 			for (int i = startInd; i < endInd; i++) {
 				if (i == startInd) {
 					path.moveTo(points[i].x, points[i].y);
@@ -554,7 +482,7 @@ public class TextRenderer {
 		// vector ox,oy orthogonal to px,py to measure height
 		float ox = -py;
 		float oy = px;
-		if(plen > 0) {
+		if (plen > 0) {
 			float rot = (float) (-Math.atan2(px, py) + Math.PI / 2);
 			if (rot < 0) rot += Math.PI * 2;
 			if (rot > Math.PI / 2f && rot < 3 * Math.PI / 2f) {
@@ -585,6 +513,4 @@ public class TextRenderer {
 		}
 		return true;
 	}
-
-
 }

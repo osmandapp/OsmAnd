@@ -12,17 +12,19 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.myplaces.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectFavouriteGroupBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -127,7 +129,7 @@ public class FavoriteAction extends QuickAction {
 	@Override
 	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
 
-		FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
+		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
 
 		final View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
@@ -154,7 +156,7 @@ public class FavoriteAction extends QuickAction {
 
 		} else if (helper.getFavoriteGroups().size() > 0) {
 
-			FavouritesDbHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
+			FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
 			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
 			categoryEdit.setText(group.getDisplayName(mapActivity));
@@ -172,54 +174,16 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, "0");
 		}
 
-		categoryEdit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View view) {
-
-				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
-
-				dialogFragment.show(
-						mapActivity.getSupportFragmentManager(),
-						SelectCategoryDialogFragment.TAG);
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+		categoryEdit.setOnClickListener(view -> {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			CategorySelectionListener listener = (pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color);
+			SelectFavouriteGroupBottomSheet.showInstance(manager, "", listener);
 		});
 
-		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
-
+		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-
-			dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-				@Override
-				public void onCategorySelected(String category, int color) {
-
-					fillGroupParams(root, category, color);
-				}
-			});
-
-		} else {
-
-			EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
-					mapActivity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
-
-			if (dialog != null) {
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+			dialogFragment.setListener((pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color));
 		}
 	}
 

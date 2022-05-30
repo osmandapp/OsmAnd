@@ -15,7 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint.BackgroundType;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -26,19 +28,21 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask;
+import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask.HandleBugListener;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask.HandleBugListener;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.dialogs.BugBottomSheetDialog;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.core.OsmBugsTileProvider;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -57,24 +61,28 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class);
 	private final OsmEditingPlugin plugin;
 
-	private OsmandMapTileView view;
-
 	private final Context ctx;
 	private final OsmBugsLocalUtil local;
 	private MapLayerData<List<OpenStreetNote>> data;
 
 	private int startZoom;
 
-	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
+	//OpenGL
+	private OsmBugsTileProvider osmBugsTileProvider;
+	private float textScale = 1f;
+	private boolean showClosed = false;
+
+	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin, int baseOrder) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
 		local = plugin.getOsmNotesLocalUtil();
+		this.baseOrder = baseOrder;
 	}
 
-	public OsmBugsUtil getOsmbugsUtil(OpenStreetNote bug) {
+	public OsmBugsUtil getOsmBugsUtil(OpenStreetNote bug) {
 		OsmandSettings settings = getApplication().getSettings();
-		if ((bug != null && bug.isLocal()) || settings.OFFLINE_EDITION.get()
+		if ((bug != null && bug.isLocal()) || plugin.OFFLINE_EDITION.get()
 				|| !settings.isInternetConnectionAvailable(true)) {
 			return local;
 		} else {
@@ -84,7 +92,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
 			{
@@ -92,8 +101,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 
 			@Override
-			protected List<OpenStreetNote> calculateResult(RotatedTileBox tileBox) {
-				QuadRect bounds = tileBox.getLatLonBounds();
+			protected List<OpenStreetNote> calculateResult(@NonNull QuadRect bounds, int zoom) {
 				return loadingBugs(bounds.top, bounds.left, bounds.bottom, bounds.right);
 			}
 		};
@@ -101,6 +109,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void destroyLayer() {
+		clearOsmBugsTileProvider();
 	}
 
 	@Override
@@ -111,7 +120,27 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		OsmandApplication app = getApplication();
-		startZoom = app.getSettings().SHOW_OSM_BUGS_MIN_ZOOM.get();
+		startZoom = plugin.SHOW_OSM_BUGS_MIN_ZOOM.get();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (tileBox.getZoom() >= startZoom) {
+				float textScale = app.getOsmandMap().getTextScale();
+				boolean textScaleChanged = this.textScale != textScale;
+				boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
+				this.textScale = textScale;
+				if (osmBugsTileProvider == null || textScaleChanged || mapActivityInvalidated || this.showClosed != showClosed) {
+					clearOsmBugsTileProvider();
+					osmBugsTileProvider = new OsmBugsTileProvider(ctx, data, baseOrder, showClosed, startZoom, textScale);
+					osmBugsTileProvider.drawSymbols(mapRenderer);
+					this.showClosed = showClosed;
+				}
+			} else {
+				clearOsmBugsTileProvider();
+			}
+			mapActivityInvalidated = false;
+			return;
+		}
+
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			data.queryNewData(tileBox);
@@ -124,7 +153,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
-				boolean showClosed = app.getSettings().SHOW_CLOSED_OSM_BUGS.get();
+				boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
 				for (OpenStreetNote o : objects) {
 					if (!o.isOpened() && !showClosed) {
 						continue;
@@ -201,7 +230,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -213,16 +242,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			final int rad = getScaledTouchRadius(getApplication(), getRadiusBug(tb));
 			int radius = rad * 3;
 			int small = rad * 3 / 4;
-			boolean showClosed = getApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
+			boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetNote n = objects.get(i);
 					if (!n.isOpened() && !showClosed) {
 						continue;
 					}
-					int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-					int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
-					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
+					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 						radius = small;
 						res.add(n);
 					}
@@ -255,7 +283,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	protected List<OpenStreetNote> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 
-		String SITE_API = getApplication().getSettings().getOsmUrl();
+		String SITE_API = plugin.getOsmUrl();
 
 		List<OpenStreetNote> bugs = new ArrayList<>();
 		StringBuilder b = new StringBuilder();
@@ -315,7 +343,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
 		if (autofill) {
-			executeTaskInBackground(new HandleOsmNoteAsyncTask(getOsmbugsUtil(bug), local, bug, null, message,
+			executeTaskInBackground(new HandleOsmNoteAsyncTask(getOsmBugsUtil(bug), local, bug, null, message,
 					Action.CREATE, getHandleBugListener(mapActivity)));
 		} else {
 			showBugDialog(mapActivity, bug, Action.CREATE, message);
@@ -361,7 +389,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			titleTextId = R.string.context_menu_item_open_note;
 		}
 
-		OsmBugsUtil util = getOsmbugsUtil(bug);
+		OsmBugsUtil util = getOsmBugsUtil(bug);
 		final boolean offline = util instanceof OsmBugsLocalUtil;
 
 		createBugDialog(mapActivity, offline, text, titleTextId, posButtonTextId, action, bug, null);
@@ -375,7 +403,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		if (offline) {
 			mapActivity.getContextMenu().close();
-			BugBottomSheetDialog.showInstance(mapActivity.getSupportFragmentManager(), getOsmbugsUtil(bug), local, text,
+			BugBottomSheetDialog.showInstance(mapActivity.getSupportFragmentManager(), getOsmBugsUtil(bug), local, text,
 					titleTextId, posButtonTextId, action, bug, point, getHandleBugListener(mapActivity));
 		} else {
 			OsmNotesPoint notesPoint = new OsmNotesPoint();
@@ -393,7 +421,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				return;
 			}
 			if (obj != null && obj.warning == null) {
-				if (local == getOsmbugsUtil(bug)) {
+				if (local == getOsmBugsUtil(bug)) {
 					Toast.makeText(ctx, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
 					if (obj.local != null) {
 						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
@@ -494,6 +522,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			return new LatLon(((OpenStreetNote) o).getLatitude(), ((OpenStreetNote) o).getLongitude());
 		}
 		return null;
+	}
+
+	private void clearOsmBugsTileProvider() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && osmBugsTileProvider != null) {
+			osmBugsTileProvider.clearSymbols(mapRenderer);
+			osmBugsTileProvider = null;
+		}
 	}
 
 	public static class OpenStreetNote implements Serializable {

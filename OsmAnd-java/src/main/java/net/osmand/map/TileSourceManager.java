@@ -43,7 +43,6 @@ public class TileSourceManager {
 
 	private static final String MAPNIK_URL = "https://tile.osmand.net/hd/{0}/{1}/{2}.png";
 	private static final String CYCLE_URL = "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116";
-	private static final String MAPILLARY_RASTER_URL = "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png";
 	private static final String MAPILLARY_VECTOR_URL = "https://tiles.mapillary.com/maps/vtp/mly1_public/2/{0}/{1}/{2}/?access_token="
 			+ MAPILLARY_ACCESS_TOKEN;
 
@@ -53,16 +52,11 @@ public class TileSourceManager {
 	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
 			new TileSourceTemplate("CycleMap", CYCLE_URL, ".png", 16, 1,
 					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
-	private static final TileSourceTemplate MAPILLARY_RASTER_SOURCE =
-			new TileSourceTemplate("Mapillary (raster tiles)", MAPILLARY_RASTER_URL, ".png",
-					16, 0, 256, 16, 32000);
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
 					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
 
 	static {
-		MAPILLARY_RASTER_SOURCE.setExpirationTimeMinutes(60 * 24);
-		MAPILLARY_RASTER_SOURCE.setHidden(true);
 		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(60 * 24);
 		MAPILLARY_VECTOR_SOURCE.setHidden(true);
 	}
@@ -502,20 +496,29 @@ public class TileSourceManager {
 		public String getRule() {
 			return rule;
 		}
-		
+
 		public String calculateTileId(int x, int y, int zoom) {
 			StringBuilder builder = new StringBuilder(getName());
 			builder.append('/');
 			builder.append(zoom).append('/').append(x).append('/').append(y).append(getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
 			return builder.toString();
 		}
-		
+
+		@Override
+		public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles) {
+			File en = new File(dirWithTiles, calculateTileId(x, y, zoom));
+			if (en.exists()) {
+				return en.lastModified();
+			}
+			return System.currentTimeMillis();
+		}
+
 		@Override
 		public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
 			File f = new File(dirWithTiles, calculateTileId(x, y, zoom));
 			if (!f.exists())
 				return null;
-			
+
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
 			FileInputStream fis = new FileInputStream(f);
 			Algorithms.streamCopy(fis, bous);
@@ -713,10 +716,6 @@ public class TileSourceManager {
 
 	public static TileSourceTemplate getMapnikSource(){
 		return MAPNIK_SOURCE;
-	}
-
-	public static TileSourceTemplate getMapillaryRasterSource() {
-		return MAPILLARY_RASTER_SOURCE;
 	}
 
 	public static TileSourceTemplate getMapillaryVectorSource() {

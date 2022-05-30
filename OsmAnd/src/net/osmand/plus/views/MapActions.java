@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -11,7 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.GPXRouteParams;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
@@ -35,12 +36,12 @@ public class MapActions {
 		return false;
 	}
 
-	public void setGPXRouteParams(GPXFile result) {
+	public void setGPXRouteParams(@Nullable GPXFile result) {
 		if (result == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
-			GPXRouteParams.GPXRouteParamsBuilder params = new GPXRouteParams.GPXRouteParamsBuilder(result, settings);
+			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			params.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
@@ -84,7 +85,7 @@ public class MapActions {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
-		//app.getSettings().setApplicationMode(mode, false);
+		app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
 		initVoiceCommandPlayer(mode, showMenu);
 		// save application mode controls

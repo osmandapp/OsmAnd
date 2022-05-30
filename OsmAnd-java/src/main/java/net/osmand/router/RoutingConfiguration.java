@@ -57,16 +57,28 @@ public class RoutingConfiguration {
 	
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
-	
+
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
-	
-	
+
+
 	// extra points to be inserted in ways (quad tree is based on 31 coords)
 	private QuadTree<DirectionPoint> directionPoints;
-	
+
 	public int directionPointsRadius = 30; // 30 m
-	
+
+	// ! MAIN parameter to approximate (35m good for custom recorded tracks)
+	public float minPointApproximation = 50;
+
+	// don't search subsegments shorter than specified distance (also used to step back for car turns)
+	public float minStepApproximation = 100;
+
+	// This parameter could speed up or slow down evaluation (better to make bigger for long routes and smaller for short)
+	public float maxStepApproximation = 3000;
+
+	// Parameter to smoother the track itself (could be 0 if it's not recorded track)
+	public float smoothenPointsNoRoute = 5;
+
 	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;
 	}
@@ -165,8 +177,13 @@ public class RoutingConfiguration {
 			attributes.put("routerName", router);
 			i.attributes.putAll(attributes);
 			i.initialDirection = direction;
-			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
+			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance);
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
+			i.minPointApproximation = parseSilentFloat(getAttribute(i.router, "minPointApproximation"), i.minPointApproximation);
+			i.minStepApproximation = parseSilentFloat(getAttribute(i.router, "minStepApproximation"), i.minStepApproximation);
+			i.maxStepApproximation = parseSilentFloat(getAttribute(i.router, "maxStepApproximation"), i.maxStepApproximation);
+			i.smoothenPointsNoRoute = parseSilentFloat(getAttribute(i.router, "smoothenPointsNoRoute"), i.smoothenPointsNoRoute);
+
 			i.router.addImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int memoryLimitMB = memoryLimits.memoryLimitMb;
@@ -332,19 +349,21 @@ public class RoutingConfiguration {
 		String name = parser.getAttributeValue("", "name");
 		String id = parser.getAttributeValue("", "id");
 		String type = parser.getAttributeValue("", "type");
+		String profilesList = parser.getAttributeValue("", "profiles");
+		String[] profiles = Algorithms.isEmpty(profilesList) ? null : profilesList.split(",");
 		boolean defaultValue = Boolean.parseBoolean(parser.getAttributeValue("", "default"));
 		if ("boolean".equalsIgnoreCase(type)) {
-			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, defaultValue);
+			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, profiles, defaultValue);
 		} else if ("numeric".equalsIgnoreCase(type)) {
 			String values = parser.getAttributeValue("", "values");
 			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
+			String[] vlsDesc = valueDescriptions.split(",");
 			String[] strValues = values.split(",");
 			Double[] vls = new Double[strValues.length];
 			for (int i = 0; i < vls.length; i++) {
 				vls[i] = Double.parseDouble(strValues[i].trim());
 			}
-			currentRouter.registerNumericParameter(id, name, description, vls , 
-					valueDescriptions.split(","));
+			currentRouter.registerNumericParameter(id, name, description, profiles, vls , vlsDesc);
 		} else {
 			throw new UnsupportedOperationException("Unsupported routing parameter type - " + type);
 		}

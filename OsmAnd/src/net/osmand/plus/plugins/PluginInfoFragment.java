@@ -28,6 +28,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -58,7 +59,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Override
@@ -152,7 +153,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
-		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
+		getButton.setText(plugin.isPaid() ? R.string.shared_string_get : R.string.shared_string_install);
 		getButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

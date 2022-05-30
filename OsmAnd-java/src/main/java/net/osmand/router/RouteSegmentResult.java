@@ -22,7 +22,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	// this should be bigger (50-80m) but tests need to be fixed first
-	public static final float DIST_BEARING_DETECT = 5;
+	public static final float DIST_BEARING_DETECT = 15;
 	
 	public static final float DIST_BEARING_DETECT_UNMATCHED = 50;
 	
@@ -527,23 +527,22 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public int getStartPointIndex() {
 		return startPointIndex;
 	}
-	
+
 	public int getEndPointIndex() {
 		return endPointIndex;
 	}
-	
+
 	public LatLon getPoint(int i) {
 		return convertPoint(object, i);
 	}
-	
+
 	public LatLon getEndPoint() {
 		return convertPoint(object, endPointIndex);
 	}
-	
+
 	public boolean isForwardDirection() {
 		return endPointIndex - startPointIndex > 0;
 	}
-
 
 	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));

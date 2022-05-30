@@ -62,6 +62,7 @@ public class NativeCoreContext {
 				
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
+				obfsCollection.addDirectory(app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(), false);
 				if (OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app)) {
 					obfsCollection.addDirectory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), false);
 				}

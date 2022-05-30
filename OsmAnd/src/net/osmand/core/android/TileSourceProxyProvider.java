@@ -15,7 +15,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
 
-import java.io.IOException;
 
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
@@ -48,7 +47,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public SWIGTYPE_p_QByteArray obtainImage(IMapTiledDataProvider.Request request) {
+	public SWIGTYPE_p_QByteArray obtainImageData(IMapTiledDataProvider.Request request) {
 		byte[] image;
 		try {
 			long requestTimestamp = System.currentTimeMillis();
@@ -59,25 +58,30 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			ResourceManager rm = app.getResourceManager();
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
 
-			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
-			rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
+			String dirWithTiles = null;
+			if (tileSource.couldBeDownloadedFromInternet()) {
+				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
+				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
+				dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
 
-			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
-					zoom, true, requestTimestamp) == null) {
-				synchronized (tileReadyCallback.getSync()) {
-					if (tileReadyCallback.isReady()) {
-						break;
-					}
-					try {
-						tileReadyCallback.getSync().wait(50);
-					} catch (InterruptedException e) {
+				while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
+						zoom, true, requestTimestamp) == null) {
+					synchronized (tileReadyCallback.getSync()) {
+						if (tileReadyCallback.isReady()) {
+							break;
+						}
+						try {
+							tileReadyCallback.getSync().wait(50);
+						} catch (InterruptedException ignored) {
+						}
 					}
 				}
+				rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
+			} else {
+				rm.getBitmapTilesCache().get(tileFilename, requestTimestamp);
 			}
-			rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
-
-			image = tileSource.getBytes(tileX, tileY, zoom, app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
-		} catch (IOException e) {
+			image = tileSource.getBytes(tileX, tileY, zoom, dirWithTiles);
+		} catch (Exception e) {
 			return SwigUtilities.emptyQByteArray();
 		}
 		if (image == null)
@@ -92,7 +96,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImage asyncImage) {
+	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
 		//TODO: Launch the request via manager and after image is ready (or error is ready)
 		// call asyncImage.submit()
 	}

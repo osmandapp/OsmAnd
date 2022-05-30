@@ -7,7 +7,7 @@ import net.osmand.telegram.SHARE_TYPE_MAP_AND_TEXT
 import net.osmand.telegram.SHARE_TYPE_TEXT
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.ShareChatInfo
-import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthParamType.*
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -33,6 +33,7 @@ class TelegramHelper private constructor() {
 
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
+		private const val NOT_FOUND_ERROR_CODE = 404
 		private const val IGNORED_ERROR_CODE = 406
 		private const val MESSAGE_CANNOT_BE_EDITED_ERROR_CODE = 5
 
@@ -63,10 +64,10 @@ class TelegramHelper private constructor() {
 
 	var lastTelegramUpdateTime: Int = 0
 
-	private val users = ConcurrentHashMap<Int, TdApi.User>()
-	private val contacts = ConcurrentHashMap<Int, TdApi.User>()
-	private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
-	private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
+	private val users = ConcurrentHashMap<Long, TdApi.User>()
+	private val contacts = ConcurrentHashMap<Long, TdApi.User>()
+	private val basicGroups = ConcurrentHashMap<Long, TdApi.BasicGroup>()
+	private val supergroups = ConcurrentHashMap<Long, TdApi.Supergroup>()
 	private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
 
 	private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
@@ -78,9 +79,9 @@ class TelegramHelper private constructor() {
 	// value.content can be TdApi.MessageLocation or MessageOsmAndBotLocation
 	private val usersLocationMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
-	private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
-	private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
-	private val supergroupsFullInfo = ConcurrentHashMap<Int, TdApi.SupergroupFullInfo>()
+	private val usersFullInfo = ConcurrentHashMap<Long, TdApi.UserFullInfo>()
+	private val basicGroupsFullInfo = ConcurrentHashMap<Long, TdApi.BasicGroupFullInfo>()
+	private val supergroupsFullInfo = ConcurrentHashMap<Long, TdApi.SupergroupFullInfo>()
 
 	var appDir: String? = null
 	private var libraryLoaded = false
@@ -90,7 +91,7 @@ class TelegramHelper private constructor() {
 	private var currentUser: TdApi.User? = null
 	private var osmandBot: TdApi.User? = null
 
-	private var haveFullChatList: Boolean = false
+	private var hasSuccessfulChatsLoad: Boolean = false
 	private var needRefreshActiveLiveLocationMessages: Boolean = true
 	private var requestingActiveLiveLocationMessages: Boolean = false
 
@@ -153,7 +154,7 @@ class TelegramHelper private constructor() {
 
 	fun getChat(id: Long) = chats[id]
 
-	fun getUser(id: Int) = if (id == getCurrentUserId()) currentUser else users[id]
+	fun getUser(id: Long) = if (id == getCurrentUserId()) currentUser else users[id]
 
 	fun getOsmandBot() = osmandBot
 
@@ -185,7 +186,7 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
-	fun getBasicGroupFullInfo(id: Int): TdApi.BasicGroupFullInfo? {
+	fun getBasicGroupFullInfo(id: Long): TdApi.BasicGroupFullInfo? {
 		val res = basicGroupsFullInfo[id]
 		if (res == null) {
 			requestBasicGroupFullInfo(id)
@@ -193,7 +194,7 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
-	fun getSupergroupFullInfo(id: Int): TdApi.SupergroupFullInfo? {
+	fun getSupergroupFullInfo(id: Long): TdApi.SupergroupFullInfo? {
 		val res = supergroupsFullInfo[id]
 		if (res == null) {
 			requestSupergroupFullInfo(id)
@@ -213,7 +214,7 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
 
-	enum class TelegramAuthenticationParameterType {
+	enum class TelegramAuthParamType {
 		PHONE_NUMBER,
 		CODE,
 		PASSWORD
@@ -256,13 +257,14 @@ class TelegramHelper private constructor() {
 	}
 
 	interface FullInfoUpdatesListener {
-		fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo)
-		fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo)
+		fun onBasicGroupFullInfoUpdated(groupId: Long, info: TdApi.BasicGroupFullInfo)
+		fun onSupergroupFullInfoUpdated(groupId: Long, info: TdApi.SupergroupFullInfo)
 	}
 
 	interface TelegramAuthorizationRequestListener {
-		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType)
+		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthParamType)
 		fun onTelegramAuthorizationRequestError(code: Int, message: String)
+		fun onTelegramUnsupportedAuthorizationState(authorizationState: String)
 	}
 
 	interface TelegramSearchListener {
@@ -273,18 +275,18 @@ class TelegramHelper private constructor() {
 
 	inner class TelegramAuthorizationRequestHandler(val telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener) {
 
-		fun applyAuthenticationParameter(parameterType: TelegramAuthenticationParameterType, parameterValue: String) {
-			if (!TextUtils.isEmpty(parameterValue)) {
-				when (parameterType) {
-					PHONE_NUMBER -> client!!.send(
-						TdApi.SetAuthenticationPhoneNumber(
-							parameterValue,
-							TdApi.PhoneNumberAuthenticationSettings(false, false, false)
-						), AuthorizationRequestHandler()
-					)
-					CODE -> client!!.send(TdApi.CheckAuthenticationCode(parameterValue), AuthorizationRequestHandler())
-					PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(parameterValue), AuthorizationRequestHandler())
-				}
+		fun applyAuthParam(type: TelegramAuthParamType, value: String) {
+			if (TextUtils.isEmpty(value)) return
+			log.info("Authorization: apply parameter ${type.name}")
+			when (type) {
+				PHONE_NUMBER -> client!!.send(
+					TdApi.SetAuthenticationPhoneNumber(
+						value,
+						TdApi.PhoneNumberAuthenticationSettings(false, false, false, false, null)
+					), AuthorizationRequestHandler()
+				)
+				CODE -> client!!.send(TdApi.CheckAuthenticationCode(value), AuthorizationRequestHandler())
+				PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(value), AuthorizationRequestHandler())
 			}
 		}
 	}
@@ -371,9 +373,9 @@ class TelegramHelper private constructor() {
 		else -> 0
 	}
 
-	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
+	fun isOsmAndBot(userId: Long) = users[userId]?.username == OSMAND_BOT_USERNAME
 
-	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
+	fun isBot(userId: Long) = users[userId]?.type is TdApi.UserTypeBot
 
 	fun startLiveMessagesUpdates(interval: Long) {
 		stopLiveMessagesUpdates()
@@ -390,7 +392,7 @@ class TelegramHelper private constructor() {
 		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
 	}
 
-	fun hasGrayscaleUserPhoto(userId: Int): Boolean {
+	fun hasGrayscaleUserPhoto(userId: Long): Boolean {
 		return File("$appDir/$GRAYSCALE_PHOTOS_DIR$userId$GRAYSCALE_PHOTOS_EXT").exists()
 	}
 
@@ -435,33 +437,25 @@ class TelegramHelper private constructor() {
 		synchronized(chatList) {
 			if (reload) {
 				chatList.clear()
-				haveFullChatList = false
+				hasSuccessfulChatsLoad = false
 			}
-			if (!haveFullChatList && CHATS_LIMIT > chatList.size) {
-				// have enough chats in the chat list or chat list is too small
-				var offsetOrder = java.lang.Long.MAX_VALUE
-				var offsetChatId: Long = 0
-				if (!chatList.isEmpty()) {
-					val last = chatList.last()
-					offsetOrder = last.position.order
-					offsetChatId = last.chatId
-				}
-				client?.send(TdApi.GetChats(TdApi.ChatListMain(), offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size)) { obj ->
+			if (chatList.size < CHATS_LIMIT) {
+				client?.send(TdApi.LoadChats(TdApi.ChatListMain(), Int.MAX_VALUE)) { obj ->
 					when (obj.constructor) {
 						TdApi.Error.CONSTRUCTOR -> {
-							val error = obj as TdApi.Error
-							if (error.code != IGNORED_ERROR_CODE) {
-								listener?.onTelegramError(error.code, error.message)
-							}
-						}
-						TdApi.Chats.CONSTRUCTOR -> {
-							val chatIds = (obj as TdApi.Chats).chatIds
-							if (chatIds.isEmpty()) {
-								synchronized(chatList) {
-									haveFullChatList = true
+							synchronized(chatList) {
+								val error = obj as TdApi.Error
+								val loadedAllChats = hasSuccessfulChatsLoad && error.code == NOT_FOUND_ERROR_CODE
+								if (!loadedAllChats && error.code != IGNORED_ERROR_CODE) {
+									listener?.onTelegramError(error.code, error.message)
 								}
 							}
-							// chats had already been received through updates, let's retry request
+						}
+						TdApi.Ok.CONSTRUCTOR -> {
+							synchronized(chatList) {
+								hasSuccessfulChatsLoad = true
+							}
+							// Some chats are received through updates, try to load more chats
 							requestChats(false, this@TelegramHelper::scanChatsHistory)
 							onComplete?.invoke()
 						}
@@ -474,7 +468,7 @@ class TelegramHelper private constructor() {
 		listener?.onTelegramChatsRead()
 	}
 
-	private fun requestBasicGroupFullInfo(id: Int) {
+	private fun requestBasicGroupFullInfo(id: Long) {
 		client?.send(TdApi.GetBasicGroupFullInfo(id)) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
@@ -492,7 +486,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun sendViaBotLocationMessage(userId: Int, shareInfo: ShareChatInfo, location: TdApi.Location, device: TelegramSettings.DeviceBot, shareType:String) {
+	fun sendViaBotLocationMessage(userId: Long, shareInfo: ShareChatInfo, location: TdApi.Location, device: TelegramSettings.DeviceBot, shareType:String) {
 		log.debug("sendViaBotLocationMessage - ${shareInfo.chatId}")
 		client?.send(TdApi.GetInlineQueryResults(userId, shareInfo.chatId, location, device.deviceName, "")) { obj ->
 			when (obj.constructor) {
@@ -542,7 +536,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun requestSupergroupFullInfo(id: Int) {
+	private fun requestSupergroupFullInfo(id: Long) {
 		client?.send(TdApi.GetSupergroupFullInfo(id)) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
@@ -656,7 +650,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun requestUser(id: Int) {
+	fun requestUser(id: Long) {
 		client?.send(TdApi.GetUser(id)) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
@@ -769,7 +763,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun createPrivateChatWithUser(
-		userId: Int,
+		userId: Long,
 		shareInfo: ShareChatInfo,
 		shareChatsInfo: ConcurrentHashMap<Long, ShareChatInfo>
 	) {
@@ -779,7 +773,8 @@ class TelegramHelper private constructor() {
 					log.debug("createPrivateChatWithUser ERROR $obj")
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
-						shareInfo.hasSharingError = true
+						shareInfo.hasTextSharingError = true
+						shareInfo.hasMapSharingError = true
 						listener?.onTelegramError(error.code, error.message)
 					}
 				}
@@ -930,7 +925,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
-					shareInfo.hasSharingError = true
+					shareInfo.hasMapSharingError = true
 					needRefreshActiveLiveLocationMessages = true
 					shareInfo.pendingMapMessage = false
 					outgoingMessagesListeners.forEach {
@@ -942,7 +937,7 @@ class TelegramHelper private constructor() {
 				if (obj is TdApi.Message) {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-							shareInfo.hasSharingError = true
+							shareInfo.hasMapSharingError = true
 							needRefreshActiveLiveLocationMessages = true
 							shareInfo.pendingMapMessage = false
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -958,7 +953,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 						else -> {
-							shareInfo.hasSharingError = false
+							shareInfo.hasMapSharingError = false
 							shareInfo.pendingMapMessage = false
 							log.debug("handleMapLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
@@ -979,7 +974,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleTextLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				if (error.code != IGNORED_ERROR_CODE) {
-					shareInfo.hasSharingError = true
+					shareInfo.hasTextSharingError = true
 					shareInfo.pendingTextMessage = false
 					outgoingMessagesListeners.forEach {
 						it.onSendLiveLocationError(error.code, error.message, shareInfo, messageType)
@@ -990,7 +985,7 @@ class TelegramHelper private constructor() {
 				if (obj is TdApi.Message) {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-							shareInfo.hasSharingError = true
+							shareInfo.hasTextSharingError = true
 							shareInfo.pendingTextMessage = false
 							needRefreshActiveLiveLocationMessages = true
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -1006,7 +1001,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 						else -> {
-							shareInfo.hasSharingError = false
+							shareInfo.hasTextSharingError = false
 							shareInfo.pendingTextMessage = false
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
@@ -1159,7 +1154,10 @@ class TelegramHelper private constructor() {
 			TdApi.AuthorizationStateClosed.CONSTRUCTOR -> {
 				log.info("Closed")
 			}
-			else -> log.error("Unsupported authorization state: " + this.authorizationState!!)
+			else -> {
+				log.error("Unsupported authorization state: " + this.authorizationState!!)
+				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onTelegramUnsupportedAuthorizationState("${this.authorizationState!!}")
+			}
 		}
 		val wasAuthorized = haveAuthorization
 		haveAuthorization = this.authorizationState?.constructor == TdApi.AuthorizationStateReady.CONSTRUCTOR

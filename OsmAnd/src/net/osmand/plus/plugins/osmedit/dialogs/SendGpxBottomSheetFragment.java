@@ -15,30 +15,27 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -50,6 +47,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	private GpxInfo[] gpxInfos;
 	private UploadVisibility selectedUploadVisibility;
+	private OsmEditingPlugin plugin;
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
@@ -61,23 +59,23 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
-		final OsmandSettings settings = app.getSettings();
+		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View sendGpxView = themedInflater.inflate(R.layout.send_gpx_fragment, null);
 		sendGpxView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		if (selectedUploadVisibility == null) {
-			selectedUploadVisibility = settings.OSM_UPLOAD_VISIBILITY.get();
+			selectedUploadVisibility = plugin.OSM_UPLOAD_VISIBILITY.get();
 		}
 		tagsField = sendGpxView.findViewById(R.id.tags_field);
 		messageField = sendGpxView.findViewById(R.id.message_field);
 
 		TextView accountName = sendGpxView.findViewById(R.id.user_name);
-		if (!Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get())) {
-			accountName.setText(settings.OSM_USER_DISPLAY_NAME.get());
+		if (!Algorithms.isEmpty(plugin.OSM_USER_DISPLAY_NAME.get())) {
+			accountName.setText(plugin.OSM_USER_DISPLAY_NAME.get());
 		} else {
-			accountName.setText(settings.OSM_USER_NAME_OR_EMAIL.get());
+			accountName.setText(plugin.OSM_USER_NAME_OR_EMAIL.get());
 		}
 
 		final TextView visibilityName = sendGpxView.findViewById(R.id.visibility_name);
@@ -85,26 +83,31 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		visibilityName.setText(selectedUploadVisibility.getTitleId());
 		visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 
-		List<HorizontalSelectionItem> itemsVisibility = new ArrayList<>();
+		List<ChipItem> itemsVisibility = new ArrayList<>();
 		for (UploadVisibility visibilityType : UploadVisibility.values()) {
 			String title = getString(visibilityType.getTitleId());
-			HorizontalSelectionItem item = new HorizontalSelectionAdapter.HorizontalSelectionItem(title, visibilityType);
+			ChipItem item = new ChipItem(title);
+			item.title = title;
+			item.tag = visibilityType;
 			itemsVisibility.add(item);
 		}
 
-		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
-		horizontalSelectionAdapter.setItems(itemsVisibility);
-		horizontalSelectionAdapter.setSelectedItemByTitle(getString(selectedUploadVisibility.getTitleId()));
-		horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionItem item) {
-				selectedUploadVisibility = (OsmEditingPlugin.UploadVisibility) item.getObject();
-				settings.OSM_UPLOAD_VISIBILITY.set(selectedUploadVisibility);
-				visibilityName.setText(selectedUploadVisibility.getTitleId());
-				visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
-				horizontalSelectionAdapter.notifyDataSetChanged();
-			}
+		HorizontalChipsView chipsView = sendGpxView.findViewById(R.id.selector_view);
+		chipsView.setItems(itemsVisibility);
+
+		ChipItem selected = chipsView.getChipById(getString(selectedUploadVisibility.getTitleId()));
+		chipsView.setSelected(selected);
+
+		chipsView.setOnSelectChipListener(chip -> {
+			selectedUploadVisibility = (UploadVisibility) chip.tag;
+			plugin.OSM_UPLOAD_VISIBILITY.set(selectedUploadVisibility);
+			visibilityName.setText(selectedUploadVisibility.getTitleId());
+			visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
+			chipsView.smoothScrollTo(chip);
+			return true;
 		});
+		chipsView.notifyDataSetChanged();
+
 		LinearLayout account = sendGpxView.findViewById(R.id.account_container);
 		account.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -116,10 +119,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 				dismiss();
 			}
 		});
-		RecyclerView iconCategoriesRecyclerView = sendGpxView.findViewById(R.id.description_view);
-		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
-		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		horizontalSelectionAdapter.notifyDataSetChanged();
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendGpxView)

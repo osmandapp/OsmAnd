@@ -1,7 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -13,13 +11,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
+
 
 public class WhatsNewDialogFragment extends DialogFragment {
 
@@ -35,7 +33,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		String appVersion = Version.getAppVersion(app);
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
 		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
-				.setMessage(getString(R.string.release_4_1))
+				.setMessage(getString(R.string.release_4_2))
 				.setNegativeButton(R.string.shared_string_close, (dialog, which) -> showSharedStorageWarningIfRequired());
 		builder.setPositiveButton(R.string.read_more, (dialog, which) -> {
 			showArticle();
@@ -48,9 +46,9 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			Uri uri = Uri.parse(LATEST_CHANGES_URL);
+			Uri uri = Uri.parse(app.getString(R.string.docs_latest_version));
 			boolean nightMode = !app.getSettings().isLightContent();
-			WikipediaDialogFragment.showFullArticle(mapActivity, uri, nightMode);
+			AndroidUtils.openUrl(mapActivity, uri, nightMode);
 		}
 	}
 

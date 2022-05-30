@@ -1,33 +1,5 @@
 package net.osmand.plus.render;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.NativeLibrary;
-import net.osmand.NativeLibrary.NativeSearchResult;
-import net.osmand.RenderingContext.ShadowRenderingMode;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.map.MapTileDownloader;
-import net.osmand.plus.render.TextRenderer.TextDrawInfo;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -52,6 +24,33 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.NativeSearchResult;
+import net.osmand.PlatformUtil;
+import net.osmand.RenderingContext.ShadowRenderingMode;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.map.MapTileDownloader;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class OsmandRenderer {
 	private static final Log log = PlatformUtil.getLog(OsmandRenderer.class);
@@ -84,7 +83,7 @@ public class OsmandRenderer {
 		double order;
 		double area;
 		int objectType;
-		int priority;
+		int orderByDenisty;
 	};
 
 	private static class IconDrawInfo {
@@ -155,7 +154,7 @@ public class OsmandRenderer {
 			dashes[i] = rc.getDensityValue(cachedValues[i * 2]) + cachedValues[i * 2 + 1];
 		}
 		if(!dashEffect.containsKey(dashes)){
-			dashEffect.put(dashes, new DashPathEffect(dashes, st));
+			dashEffect.put(dashes, new OsmandDashPathEffect(dashes, st));
 		}
 		return dashEffect.get(dashes);
 	}
@@ -464,13 +463,12 @@ public class OsmandRenderer {
 							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
 							boolean ignorePointArea = render.getIntPropertyValue(render.ALL.R_IGNORE_POLYGON_AS_POINT_AREA) != 0;
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-							int priority = render.getIntPropertyValue(render.ALL.R_DENSITY_PRIORITY);
 							MapDataObjectPrimitive mapObj = new MapDataObjectPrimitive();
 							mapObj.objectType = objectType;
 							mapObj.order = order;
 							mapObj.typeInd = j;
 							mapObj.obj = o;
-							mapObj.priority = priority;
+							mapObj.orderByDenisty = render.getIntPropertyValue(render.ALL.R_ORDER_BY_DENSITY);
 							if(objectType == 3) {
 								MapDataObjectPrimitive pointObj = new MapDataObjectPrimitive();
 								pointObj.order = order;
