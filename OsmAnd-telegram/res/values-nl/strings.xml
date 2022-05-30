@@ -17,7 +17,7 @@
     <string name="received_gps_points">Ontvangen GPX punten: %1$s</string>
     <string name="show_gps_points">Toon GPS punten</string>
     <string name="show_gps_points_descr">Toon totaal aan verzamelde en verstuurde GPS punten.</string>
-    <string name="please_update_osmand">Update OsmAnd aub om data op de kaart te zien</string>
+    <string name="please_update_osmand">OsmAnd alsjeblieft updaten om data op de kaart te zien</string>
     <string name="shared_string_update">Update</string>
     <string name="gps_points_in_buffer">verzonden (%1$d in buffer)</string>
     <string name="points_size">%1$d punten</string>
