@@ -89,7 +89,7 @@
     <string name="choose_osmand">Selecteer te gebruiken Osmand versie</string>
     <string name="disable_all_sharing_desc">Schakel locatie delen uit naar alle geselecteerde chats (%1$d).</string>
     <string name="disable_all_sharing">Schakel delen helemaal uit</string>
-    <string name="turn_off_all">Schakel alles uit</string>
+    <string name="turn_off_all">Alles uitschakelen</string>
     <string name="shared_string_exit">Verlaat</string>
     <string name="last_response">Laatste respons</string>
     <string name="shared_string_group">Groep</string>
