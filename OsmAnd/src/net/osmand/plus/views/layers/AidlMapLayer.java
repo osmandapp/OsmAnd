@@ -487,8 +487,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		clearAidlTileProvider();
 		imageRequests.clear();
-		float y_offset = ((float)bigIconBg.getHeight()) * (1.0f - POINT_IMAGE_VERTICAL_OFFSET);
-		aidlMapLayerProvider = new AidlTileProvider(this, density, y_offset);
+		float yOffset = ((float)bigIconBg.getHeight()) * (1.0f - POINT_IMAGE_VERTICAL_OFFSET);
+		aidlMapLayerProvider = new AidlTileProvider(this, density, yOffset);
 		mapMarkersCollection = new MapMarkersCollection();
 
 		for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
@@ -524,9 +524,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 							.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 							.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 							.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
-							.setPinIconOffset(new PointI(0, (int) y_offset))
+							.setPinIconOffset(new PointI(0, (int) yOffset))
 							.setCaptionStyle(getTextStyle())
-							.setCaptionTopSpace(y_offset)
+							.setCaptionTopSpace(yOffset)
 							.setCaption(getText(point));
 					mapMarkerBuilder.buildAndAddToCollection(mapMarkersCollection);
 				}
