@@ -28,6 +28,12 @@ public class OsmAndLocationSimulation {
 
 	public static final float PRECISION_1_M = 0.00001f;
 	public static final int DEVIATION_M = 6;
+	private final float MOTORWAY_MAX_SPEED = 120.0f;
+	private final float TRUNK_MAX_SPEED = 90.0f;
+	private final float PRIMARY_MAX_SPEED = 60.0f;
+	private final float SECONDARY_MAX_SPEED = 50.0f;
+	private final float LIVING_SPTREET_MAX_SPEED = 15.0f;
+	private final float DEFAULT_MAX_SPEED = 40.0f;
 	private Thread routeAnimation;
 	private final OsmAndLocationProvider provider;
 	private final OsmandApplication app;
@@ -256,17 +262,17 @@ public class OsmAndLocationSimulation {
 
 	private float getMaxSpeedForRoadType(String roadType) {
 		if ("motorway".equals(roadType)) {
-			return 120;
+			return MOTORWAY_MAX_SPEED;
 		} else if ("trunk".equals(roadType)) {
-			return 90;
+			return TRUNK_MAX_SPEED;
 		} else if ("primary".equals(roadType)) {
-			return 60;
+			return PRIMARY_MAX_SPEED;
 		} else if ("secondary".equals(roadType)) {
-			return 50;
+			return SECONDARY_MAX_SPEED;
 		} else if ("living_street".equals(roadType) || "service".equals(roadType)) {
-			return 15;
+			return LIVING_SPTREET_MAX_SPEED;
 		} else {
-			return 40;
+			return DEFAULT_MAX_SPEED;
 		}
 	}
 
