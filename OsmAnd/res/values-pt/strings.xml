@@ -4692,4 +4692,5 @@
     <string name="map_widget_distance_to_intermediate">Distância até ao ponto intermédio</string>
     <string name="radius_ruler_mode_desc">Pode alterar o modo de régua de raio tocando no widget.</string>
     <string name="shared_string_mode">Modo</string>
+    <string name="lang_sat">Santáli</string>
 </resources>
