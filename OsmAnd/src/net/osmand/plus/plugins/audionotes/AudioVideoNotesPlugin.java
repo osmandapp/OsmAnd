@@ -71,10 +71,10 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -120,11 +120,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static final int TAKE_AUDIO_NOTE_ITEM_ORDER = 4100;
 	private static final int TAKE_VIDEO_NOTE_ITEM_ORDER = 4300;
 	private static final int TAKE_PHOTO_NOTE_ITEM_ORDER = 4500;
-
-	private TextInfoWidget onRequestWidget;
-	private TextInfoWidget recordAudioWidget;
-	private TextInfoWidget recordVideoWidget;
-	private TextInfoWidget takePhotoWidget;
 
 	public final CommonPreference<Boolean> AV_EXTERNAL_RECORDER;
 	public final CommonPreference<Boolean> AV_EXTERNAL_PHOTO_CAM;
@@ -545,25 +540,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return -1;
 	}
 
-//	private static void initializeRemoteControlRegistrationMethods() {
-//		try {
-			// API 8
-//			if (mRegisterMediaButtonEventReceiver == null) {
-//				mRegisterMediaButtonEventReceiver = AudioManager.class.getMethod("registerMediaButtonEventReceiver",
-//						new Class[]{ComponentName.class});
-//			}
-//			if (mUnregisterMediaButtonEventReceiver == null) {
-//				mUnregisterMediaButtonEventReceiver = AudioManager.class.getMethod("unregisterMediaButtonEventReceiver",
-//						new Class[]{ComponentName.class});
-//			}
-//			/* success, this device will take advantage of better remote */
-//			/* control event handling */
-//		} catch (NoSuchMethodException nsme) {
-//			/* failure, still using the legacy behavior, but this app */
-//			/* is future-proof! */
-//		}
-//	}
-
 	@Override
 	public String getId() {
 		return PLUGIN_AUDIO_VIDEO_NOTES;
@@ -652,9 +628,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		audioNotesLayer = new AudioNotesLayer(context, this, -140000);
 		app.getOsmandMap().getMapView().addLayer(audioNotesLayer, 3.5f);
-		if (mapActivity != null) {
-			registerWidgets(mapActivity, true);
-		}
 	}
 
 	public CurrentRecording getCurrentRecording() {
@@ -731,54 +704,28 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				mapView.removeLayer(audioNotesLayer);
 				mapView.refreshMap();
 			}
-			if (mapActivity != null) {
-				registerWidgets(mapActivity, false);
-			}
-		} else {
-			if (audioNotesLayer != null) {
-				mapView.removeLayer(audioNotesLayer);
-				mapView.refreshMap();
-				audioNotesLayer = null;
-			}
-			if (mapActivity != null) {
-				removeWidgets(mapActivity);
-			}
-			clearWidgets();
+		} else if (audioNotesLayer != null) {
+			mapView.removeLayer(audioNotesLayer);
+			mapView.refreshMap();
+			audioNotesLayer = null;
 		}
 	}
 
-	private void registerWidgets(@NonNull MapActivity mapActivity, boolean recreateRegistered) {
-		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			boolean reinflateWidgets = false;
-			if (onRequestWidget == null || recreateRegistered) {
-				onRequestWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST);
-				mapInfoLayer.registerWidget(AV_NOTES_ON_REQUEST, onRequestWidget);
-				reinflateWidgets = true;
-			}
+	@Override
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
-			if (recordAudioWidget == null || recreateRegistered) {
-				recordAudioWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO);
-				mapInfoLayer.registerWidget(AV_NOTES_RECORD_AUDIO, recordAudioWidget);
-				reinflateWidgets = true;
-			}
+		MapWidget onRequestWidget = createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_ON_REQUEST, onRequestWidget));
 
-			if (recordVideoWidget == null || recreateRegistered) {
-				recordVideoWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO);
-				mapInfoLayer.registerWidget(AV_NOTES_RECORD_VIDEO, recordVideoWidget);
-				reinflateWidgets = true;
-			}
+		MapWidget audioWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_RECORD_AUDIO, audioWidget));
 
-			if (takePhotoWidget == null || recreateRegistered) {
-				takePhotoWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO);
-				mapInfoLayer.registerWidget(AV_NOTES_TAKE_PHOTO, takePhotoWidget);
-				reinflateWidgets = true;
-			}
+		MapWidget videoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_RECORD_VIDEO, videoWidget));
 
-			if (reinflateWidgets) {
-				mapInfoLayer.recreateControls();
-			}
-		}
+		MapWidget photoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(AV_NOTES_TAKE_PHOTO, photoWidget));
 	}
 
 	@Override
@@ -794,24 +741,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return new AudioVideoNotesWidget(mapActivity, AV_DEFAULT_ACTION_TAKEPICTURE);
 		}
 		return null;
-	}
-
-	private void removeWidgets(@NonNull MapActivity mapActivity) {
-		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			List<TextInfoWidget> widgets =
-					Arrays.asList(onRequestWidget, recordAudioWidget, recordVideoWidget, takePhotoWidget);
-			boolean recreateWidgets = false;
-			for (TextInfoWidget widget : widgets) {
-				if (widget != null) {
-					mapInfoLayer.removeSideWidget(widget);
-					recreateWidgets = true;
-				}
-			}
-			if (recreateWidgets) {
-				mapInfoLayer.recreateControls();
-			}
-		}
 	}
 
 	public void makeAction(@NonNull MapActivity mapActivity, int actionId) {
@@ -948,14 +877,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			finishRecording();
 		}
 		this.mapActivity = null;
-		clearWidgets();
-	}
-
-	private void clearWidgets() {
-		onRequestWidget = null;
-		recordAudioWidget = null;
-		recordVideoWidget = null;
-		takePhotoWidget = null;
 	}
 
 	@Nullable
@@ -1275,32 +1196,20 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void muteStreamMusicAndOutputGuidance() {
-        AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
-        int voiceGuidanceOutput = app.getSettings().AUDIO_MANAGER_STREAM.get();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
-                am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_MUTE, 0);
-        } else {
-            am.setStreamMute(AudioManager.STREAM_MUSIC, true);
-            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
-                am.setStreamMute(voiceGuidanceOutput, true);
-        }
-    }
+		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		int voiceGuidanceOutput = app.getSettings().AUDIO_MANAGER_STREAM.get();
+		am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+		if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+			am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_MUTE, 0);
+	}
 
-    private void unmuteStreamMusicAndOutputGuidance() {
-        AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-        int voiceGuidanceOutput = app.getSettings().AUDIO_MANAGER_STREAM.get();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
-            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
-                am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_UNMUTE, 0);
-        } else {
-            am.setStreamMute(AudioManager.STREAM_MUSIC, false);
-            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
-                am.setStreamMute(voiceGuidanceOutput, false);
-        }
-    }
+	private void unmuteStreamMusicAndOutputGuidance() {
+		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		int voiceGuidanceOutput = app.getSettings().AUDIO_MANAGER_STREAM.get();
+		am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+		if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+			am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_UNMUTE, 0);
+	}
 
 	public void takePhoto(final double lat, final double lon, @NonNull final MapActivity mapActivity,
 	                      final boolean forceInternal, final boolean forceExternal) {
@@ -1450,7 +1359,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			closeCamera();
 		}
 	}
-
 
 	private void internalShoot() {
 		requireMapActivity().getMyApplication().runInUIThread(() -> {
@@ -1956,7 +1864,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@TargetApi(Build.VERSION_CODES.M)
 	@Override
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
-											   int[] grantResults) {
+	                                           int[] grantResults) {
 		runAction = -1;
 		if (requestCode == CAMERA_FOR_VIDEO_REQUEST_CODE) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED

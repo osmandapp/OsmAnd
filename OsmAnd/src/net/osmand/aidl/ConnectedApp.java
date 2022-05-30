@@ -21,10 +21,10 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -37,6 +37,7 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -176,20 +177,21 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				.setColor(app, layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID));
 	}
 
-	void registerWidgetControls(@NonNull MapActivity mapActivity) {
+	void createWidgetControls(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
-			MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-			if (layer != null) {
-				TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
-				widgetControls.put(widgetData.getId(), widget);
-				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
-				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-				String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
-				WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
-				MapWidgetInfo widgetInfo = layer.registerExternalWidget(widgetKey, widget, menuIconId,
-						widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
-				((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
-			}
+			int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
+			int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
+			String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+			WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+
+			TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
+			MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
+					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+			((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
+
+			widgetsInfos.add(widgetInfo);
+			widgetControls.put(widgetData.getId(), widget);
 		}
 	}
 

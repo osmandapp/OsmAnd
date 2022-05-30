@@ -125,6 +125,7 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -395,8 +396,12 @@ public class OsmandAidlApi {
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
 							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
-							MapWidgetInfo widgetInfo = layer.registerExternalWidget(widgetKey, widget, menuIconId,
+
+							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
 									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+							widgetRegistry.registerWidget(widgetInfo);
+
 							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
 						}
@@ -468,9 +473,9 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
-	public void registerWidgetControls(@NonNull MapActivity mapActivity) {
+	public void createWidgetControls(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.registerWidgetControls(mapActivity);
+			connectedApp.createWidgetControls(mapActivity, widgetsInfos);
 		}
 	}
 

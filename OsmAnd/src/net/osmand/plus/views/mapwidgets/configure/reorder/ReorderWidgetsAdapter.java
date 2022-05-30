@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
+import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,6 +11,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -17,7 +24,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -39,14 +45,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
-import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItemMoveCallback, ItemMovableCallback {
 
@@ -270,27 +268,17 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	@NonNull
 	private List<String> listAddedGroupWidgets(@NonNull WidgetGroup widgetGroup) {
 		List<String> addedGroupWidgets = new ArrayList<>();
-		WidgetsPanel sharedPanel = panel.getSharedPanel();
-		if (sharedPanel != null) {
-			// TODO widgets: remove after adding duplicates
-			MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-			ApplicationMode appMode = app.getSettings().getApplicationMode();
-			for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(appMode, ENABLED_MODE, sharedPanel)) {
-				if (widgetGroup.containsWidget(widget.key)) {
-					addedGroupWidgets.add(widget.key);
+		if (!panel.isDuplicatesAllowed()) {
+			for (ListItem listItem : items) {
+				if (listItem.value instanceof AddedWidgetUiInfo) {
+					AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
+					WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
+					if (widgetParams != null && widgetGroup == widgetParams.group) {
+						addedGroupWidgets.add(widgetParams.id);
+					}
 				}
 			}
 		}
-		for (ListItem listItem : items) {
-			if (listItem.value instanceof AddedWidgetUiInfo) {
-				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
-				WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-				if (widgetParams != null && widgetGroup == widgetParams.group) {
-					addedGroupWidgets.add(widgetParams.id);
-				}
-			}
-		}
-
 		return addedGroupWidgets;
 	}
 
@@ -300,7 +288,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.addButton.setImageDrawable(getAddIcon());
 		viewHolder.addButton.setOnClickListener(v -> {
 			int pos = viewHolder.getAdapterPosition();
-			reorderHelper.addWidget(pos);
+			AvailableWidgetUiInfo widgetUiInfo = ((AvailableWidgetUiInfo) items.get(pos).value);
+			addWidget(widgetUiInfo.info);
 		});
 
 		iconsHelper.updateWidgetIcon(viewHolder.icon, widgetInfo.info);
@@ -412,7 +401,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		void onDragOrSwipeEnded(ViewHolder holder);
 	}
 
-	public interface WidgetsAdapterActionsListener{
+	public interface WidgetsAdapterActionsListener {
 
 		void onPageDeleted(int page, int position);
 

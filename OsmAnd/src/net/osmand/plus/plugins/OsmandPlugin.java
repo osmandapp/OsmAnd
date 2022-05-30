@@ -63,6 +63,8 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -493,8 +495,10 @@ public abstract class OsmandPlugin {
 		app.getQuickActionRegistry().updateActionTypes();
 		if (activity != null) {
 			if (activity instanceof MapActivity) {
-				final MapActivity mapActivity = (MapActivity) activity;
+				MapActivity mapActivity = (MapActivity) activity;
 				plugin.updateLayers(mapActivity, mapActivity);
+				MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+				mapLayers.getMapInfoLayer().recreateAllControls(mapActivity);
 				mapActivity.getDashboard().refreshDashboardFragments();
 
 				DashFragmentData fragmentData = plugin.getCardFragment();
@@ -549,6 +553,9 @@ public abstract class OsmandPlugin {
 	}
 
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+	}
+
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 	}
 
 	public void mapActivityCreate(MapActivity activity) {
@@ -873,9 +880,15 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.createWidgets(mapActivity, widgetInfos, appMode);
+		}
+	}
+
 	@Nullable
 	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, params);
 			if (widget != null) {
 				return widget;

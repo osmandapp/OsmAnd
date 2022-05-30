@@ -8,7 +8,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
@@ -42,7 +41,8 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -151,82 +151,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return "feature_articles/trip-recording-plugin.html";
 	}
 
-	@Override
-	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
-		if (mapActivity != null) {
-			registerWidgets(mapActivity);
-		}
-	}
-
-	@Override
-	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
-		if (mapActivity != null) {
-			if (isActive()) {
-				registerWidgets(mapActivity);
-			} else {
-				unregisterWidgets(mapActivity);
-			}
-		}
-	}
-
-	private void registerWidgets(@NonNull MapActivity mapActivity) {
-		MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-		if (distanceWidget == null) {
-			distanceWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
-			layer.registerWidget(TRIP_RECORDING_DISTANCE, distanceWidget);
-		}
-		if (timeWidget == null) {
-			timeWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
-			layer.registerWidget(TRIP_RECORDING_TIME, timeWidget);
-		}
-		if (uphillWidget == null) {
-			uphillWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
-			layer.registerWidget(TRIP_RECORDING_UPHILL, uphillWidget);
-		}
-		if (downhillWidget == null) {
-			downhillWidget = (TextInfoWidget) createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
-			layer.registerWidget(TRIP_RECORDING_DOWNHILL, downhillWidget);
-		}
-		layer.recreateControls();
-	}
-
-
-	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
-		switch (params) {
-			case TRIP_RECORDING_DISTANCE:
-				return new TripRecordingDistanceWidget(mapActivity);
-			case TRIP_RECORDING_TIME:
-				return new TripRecordingTimeWidget(mapActivity);
-			case TRIP_RECORDING_UPHILL:
-				return new TripRecordingUphillWidget(mapActivity);
-			case TRIP_RECORDING_DOWNHILL:
-				return new TripRecordingDownhillWidget(mapActivity);
-		}
-		return null;
-	}
-
-	private void unregisterWidgets(@NonNull MapActivity mapActivity) {
-		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-		if (distanceWidget != null) {
-			mapInfoLayer.removeSideWidget(distanceWidget);
-			distanceWidget = null;
-		}
-		if (timeWidget != null) {
-			mapInfoLayer.removeSideWidget(timeWidget);
-			timeWidget = null;
-		}
-		if (uphillWidget != null) {
-			mapInfoLayer.removeSideWidget(uphillWidget);
-			uphillWidget = null;
-		}
-		if (downhillWidget != null) {
-			mapInfoLayer.removeSideWidget(downhillWidget);
-			downhillWidget = null;
-		}
-		mapInfoLayer.recreateControls();
-	}
-
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
 	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
@@ -257,6 +181,38 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		this.uphillWidget = null;
 		this.downhillWidget = null;
 		this.mapActivity = null;
+	}
+
+	@Override
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+
+		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_DISTANCE, distanceWidget));
+
+		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_TIME, timeWidget));
+
+		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_UPHILL, uphillWidget));
+
+		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(TRIP_RECORDING_DOWNHILL, downhillWidget));
+	}
+
+	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+		switch (params) {
+			case TRIP_RECORDING_DISTANCE:
+				return new TripRecordingDistanceWidget(mapActivity);
+			case TRIP_RECORDING_TIME:
+				return new TripRecordingTimeWidget(mapActivity);
+			case TRIP_RECORDING_UPHILL:
+				return new TripRecordingUphillWidget(mapActivity);
+			case TRIP_RECORDING_DOWNHILL:
+				return new TripRecordingDownhillWidget(mapActivity);
+		}
+		return null;
 	}
 
 	@Override

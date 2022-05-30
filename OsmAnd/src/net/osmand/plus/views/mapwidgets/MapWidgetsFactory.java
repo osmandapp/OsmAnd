@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
@@ -26,17 +27,24 @@ import net.osmand.plus.views.mapwidgets.widgets.RadiusRulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 
 public class MapWidgetsFactory {
 
+	private final OsmandApplication app;
 	private final MapActivity mapActivity;
 
 	public MapWidgetsFactory(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		app = mapActivity.getMyApplication();
 	}
 
 	@Nullable
 	public MapWidget createMapWidget(@NonNull WidgetParams params) {
+		return createMapWidget(null, params);
+	}
+
+	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetParams params) {
 		switch (params) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
@@ -57,9 +65,11 @@ public class MapWidgetsFactory {
 			case INTERMEDIATE_DESTINATION:
 				return new DistanceToIntermediateDestinationWidget(mapActivity);
 			case TIME_TO_INTERMEDIATE:
-				return new TimeToNavigationPointWidget(mapActivity, true);
+				TimeToNavigationPointWidgetState state = new TimeToNavigationPointWidgetState(app, customId, true);
+				return new TimeToNavigationPointWidget(mapActivity, state);
 			case TIME_TO_DESTINATION:
-				return new TimeToNavigationPointWidget(mapActivity, false);
+				TimeToNavigationPointWidgetState widgetState = new TimeToNavigationPointWidgetState(app, customId, false);
+				return new TimeToNavigationPointWidget(mapActivity, widgetState);
 			case SIDE_MARKER_1:
 				return new MapMarkerSideWidget(mapActivity, true);
 			case SIDE_MARKER_2:

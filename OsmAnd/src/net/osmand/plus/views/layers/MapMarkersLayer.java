@@ -165,6 +165,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 			});
 		} else {
+			markersWidgetsHelper.clearListeners();
 			markersWidgetsHelper = null;
 			longTapDetector = null;
 		}

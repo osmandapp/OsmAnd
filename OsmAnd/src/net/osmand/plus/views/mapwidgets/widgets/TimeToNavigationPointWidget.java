@@ -2,15 +2,16 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class TimeToNavigationPointWidget extends TextInfoWidget {
 
@@ -23,13 +24,11 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
 	private int cachedLeftSeconds = 0;
 
-	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, boolean intermediate) {
-		super(mapActivity);
+	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState) {
+		super(mapActivity, widgetState);
 		this.routingHelper = app.getRoutingHelper();
-		this.intermediate = intermediate;
-		this.arrivalTimeOtherwiseTimeToGoPref = intermediate
-				? settings.INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO
-				: settings.DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO;
+		this.intermediate = widgetState.isIntermediate();
+		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();
 		this.cachedArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.get();
 
 		setText(null, null);
@@ -40,6 +39,15 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 			updateInfo(null);
 			mapActivity.refreshMap();
 		});
+	}
+
+	public boolean isIntermediate() {
+		return intermediate;
+	}
+
+	@NonNull
+	public OsmandPreference<Boolean> getPreference() {
+		return arrivalTimeOtherwiseTimeToGoPref;
 	}
 
 	@Override
