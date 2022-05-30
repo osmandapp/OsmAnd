@@ -4671,4 +4671,17 @@
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="rendering_attr_weatherPressureContours_name">Lufttrykk-isolinjer</string>
     <string name="rendering_attr_horseScale_name">Vanskelighetsgrad for rideveier</string>
+    <string name="map_widget_true_bearing">Sann peiling</string>
+    <string name="routing_attr_allow_private_for_truck_description">Tillat adgang til private områder for lastebiler.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Tillat privat adgang (lastebil)</string>
+    <string name="routing_attr_hazmat_category_name">Kategori for farlig gods</string>
+    <string name="routing_attr_hazmat_category_description">Kategori for farlig gods/adgangstillatelser for farlig gods</string>
+    <string name="routing_attr_avoid_highway_name">Unngå motorveier</string>
+    <string name="lang_sat">Santali</string>
+    <string name="shared_string_mode">Modus</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Du kan bytte modus ved å trykke på et miniprogram.</string>
+    <string name="map_widget_distance_to_intermediate">Avstand til mellomliggende</string>
+    <string name="map_widget_time_to_destination">Tid til mål</string>
+    <string name="map_widget_time_to_intermediate">Tid til mellomliggende</string>
+    <string name="radius_ruler_mode_desc">Bytt til radius-linjalmodus ved å trykke på miniprogrammet.</string>
 </resources>
