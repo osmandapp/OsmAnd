@@ -23,7 +23,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.List;
@@ -37,17 +37,17 @@ public abstract class MapWidget {
 	protected final OsmAndLocationProvider locationProvider;
 	protected final RoutingHelper routingHelper;
 
-	protected final WidgetParams widgetParams;
+	protected final WidgetType widgetType;
 
 	private boolean nightMode;
 
 	protected final View view;
 
-	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams widgetParams) {
+	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
-		this.widgetParams = widgetParams;
+		this.widgetType = widgetType;
 		this.iconsCache = app.getUIUtilities();
 		this.locationProvider = app.getLocationProvider();
 		this.routingHelper = app.getRoutingHelper();
@@ -89,8 +89,8 @@ public abstract class MapWidget {
 	}
 
 	@Nullable
-	public WidgetParams getWidgetParams() {
-		return widgetParams;
+	public WidgetType getWidgetParams() {
+		return widgetType;
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {

@@ -56,16 +56,16 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	@Override
 	public WidgetsPanel getUpdatedPanel() {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
-		WidgetParams widgetParams = WidgetParams.getById(key);
-		if (widgetParams != null) {
-			if (widgetParams.defaultPanel == LEFT
+		WidgetType widgetType = WidgetType.getById(key);
+		if (widgetType != null) {
+			if (widgetType.defaultPanel == LEFT
 					&& RIGHT.getWidgetOrder(key, settings) != DEFAULT_ORDER) {
 				widgetPanel = RIGHT;
-			} else if (widgetParams.defaultPanel == RIGHT
+			} else if (widgetType.defaultPanel == RIGHT
 					&& LEFT.getWidgetOrder(key, settings) != DEFAULT_ORDER) {
 				widgetPanel = LEFT;
 			} else {
-				widgetPanel = widgetParams.defaultPanel;
+				widgetPanel = widgetType.defaultPanel;
 			}
 		} else {
 			widgetPanel = LEFT.getWidgetOrder(key, settings) != DEFAULT_ORDER ? LEFT : RIGHT;

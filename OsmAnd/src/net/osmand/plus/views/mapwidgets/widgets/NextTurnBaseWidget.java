@@ -17,7 +17,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.router.TurnType;
 
 public class NextTurnBaseWidget extends TextInfoWidget {
@@ -35,7 +35,7 @@ public class NextTurnBaseWidget extends TextInfoWidget {
 
 	private final TurnDrawable turnDrawable;
 
-	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams params, boolean horizontalMini) {
+	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType params, boolean horizontalMini) {
 		super(mapActivity, params);
 		this.horizontalMini = horizontalMini;
 

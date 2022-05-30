@@ -17,7 +17,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -144,13 +144,13 @@ public class BearingWidget extends TextInfoWidget {
 
 	public enum BearingType {
 
-		RELATIVE_BEARING(WidgetParams.RELATIVE_BEARING),
-		MAGNETIC_BEARING(WidgetParams.MAGNETIC_BEARING),
-		TRUE_BEARING(WidgetParams.TRUE_BEARING);
+		RELATIVE_BEARING(WidgetType.RELATIVE_BEARING),
+		MAGNETIC_BEARING(WidgetType.MAGNETIC_BEARING),
+		TRUE_BEARING(WidgetType.TRUE_BEARING);
 
-		public final WidgetParams params;
+		public final WidgetType params;
 
-		BearingType(@NonNull WidgetParams params) {
+		BearingType(@NonNull WidgetType params) {
 			this.params = params;
 		}
 	}

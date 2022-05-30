@@ -40,7 +40,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -148,8 +148,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
-		if (params == WidgetParams.MAPILLARY) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
+		if (params == WidgetType.MAPILLARY) {
 			return new MapillaryMapWidget(mapActivity);
 		}
 		return null;
@@ -230,7 +230,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetParams.MAPILLARY);
+		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY);
 		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget));
 	}
 

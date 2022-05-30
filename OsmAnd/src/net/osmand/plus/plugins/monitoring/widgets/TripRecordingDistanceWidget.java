@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DISTANCE;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;

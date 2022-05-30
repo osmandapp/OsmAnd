@@ -39,7 +39,7 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
@@ -169,7 +169,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 
 
-		List<WidgetParams> widgets = widgetsDataHolder.getWidgetsList();
+		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
 			inflateWidgetsList(widgets);
@@ -186,11 +186,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void inflateWidgetsList(@NonNull List<WidgetParams> widgets) {
+	private void inflateWidgetsList(@NonNull List<WidgetType> widgets) {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
-		for (WidgetParams widget : widgets) {
+		for (WidgetType widget : widgets) {
 			View view = inflater.inflate(R.layout.selectable_widget_item, container, false);
 			String title = getString(widget.titleId);
 			String desc = widget.descId != 0 ? getString(widget.descId) : null;
@@ -349,12 +349,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	                                    @NonNull Fragment target,
 	                                    @NonNull ApplicationMode appMode,
 	                                    @NonNull WidgetsPanel widgetsPanel,
-	                                    @NonNull WidgetParams widgetParams,
+	                                    @NonNull WidgetType widgetType,
 	                                    @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
-		args.putString(KEY_WIDGET_ID, widgetParams.id);
+		args.putString(KEY_WIDGET_ID, widgetType.id);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);

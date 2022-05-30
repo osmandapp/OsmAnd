@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_UPHILL;
 
 import android.os.Bundle;
 
@@ -18,7 +18,7 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public abstract class TripRecordingElevationWidget extends TextInfoWidget {
@@ -27,8 +27,8 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 	private double cachedElevationDiff = -1;
 
-	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams widgetParams) {
-		super(mapActivity, widgetParams);
+	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
+		super(mapActivity, widgetType);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);

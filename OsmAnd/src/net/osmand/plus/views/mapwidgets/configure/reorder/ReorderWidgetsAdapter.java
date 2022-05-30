@@ -25,7 +25,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButtonViewHolder;
@@ -272,9 +272,9 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			for (ListItem listItem : items) {
 				if (listItem.value instanceof AddedWidgetUiInfo) {
 					AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
-					WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-					if (widgetParams != null && widgetGroup == widgetParams.group) {
-						addedGroupWidgets.add(widgetParams.id);
+					WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
+					if (widgetType != null && widgetGroup == widgetType.group) {
+						addedGroupWidgets.add(widgetType.id);
 					}
 				}
 			}
@@ -304,9 +304,9 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	private void showWidgetInfoIfPossible(@NonNull AvailableWidgetUiInfo widgetInfo) {
 		if (actionsListener != null) {
-			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
-			if (widgetParams != null) {
-				actionsListener.showWidgetInfo(widgetParams);
+			WidgetType widgetType = WidgetType.getById(widgetInfo.key);
+			if (widgetType != null) {
+				actionsListener.showWidgetInfo(widgetType);
 			} else {
 				String externalProviderPackage = widgetInfo.info.getExternalProviderPackage();
 				if (!Algorithms.isEmpty(externalProviderPackage)) {
@@ -405,7 +405,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 		void onPageDeleted(int page, int position);
 
-		void showWidgetInfo(@NonNull WidgetParams widget);
+		void showWidgetInfo(@NonNull WidgetType widget);
 
 		void showWidgetGroupInfo(@NonNull WidgetGroup widgetGroup, @NonNull List<String> addedGroupWidgetsIds);
 

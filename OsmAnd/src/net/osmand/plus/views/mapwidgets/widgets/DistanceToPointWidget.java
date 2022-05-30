@@ -1,7 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +16,7 @@ import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public abstract class DistanceToPointWidget extends TextInfoWidget {
 
@@ -27,11 +27,11 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	private final float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetParams widgetParams) {
-		super(mapActivity, widgetParams);
+	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		super(mapActivity, widgetType);
 		this.view = mapActivity.getMapView();
 
-		setIcons(widgetParams);
+		setIcons(widgetType);
 		setText(null, null);
 		setOnClickListener(v -> onClick(view));
 	}

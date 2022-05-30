@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.parking;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PARKING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.PARKING;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

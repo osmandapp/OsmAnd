@@ -34,7 +34,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
@@ -206,7 +206,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			TextView title = view.findViewById(R.id.title);
 			title.setText(widgetInfo.getTitle(app));
 
-			WidgetParams params = WidgetParams.getById(widgetInfo.key);
+			WidgetType params = WidgetType.getById(widgetInfo.key);
 			WidgetGroup widgetGroup = params == null ? null : params.group;
 			if (widgetGroup != null) {
 				TextView description = view.findViewById(R.id.description);
@@ -261,7 +261,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, selectedPanel.getMergedPanels());
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 		if (hasAvailableWidgets) {
-			List<WidgetParams> disabledDefaultWidgets = listDefaultWidgets(availableWidgets);
+			List<WidgetType> disabledDefaultWidgets = listDefaultWidgets(availableWidgets);
 			List<MapWidgetInfo> externalWidgets = listExternalWidgets(availableWidgets);
 
 			inflateAvailableDefaultWidgets(excludeGroupsDuplicated(disabledDefaultWidgets), !Algorithms.isEmpty(externalWidgets));
@@ -271,10 +271,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@NonNull
-	private List<WidgetParams> excludeGroupsDuplicated(List<WidgetParams> widgets) {
+	private List<WidgetType> excludeGroupsDuplicated(List<WidgetType> widgets) {
 		List<WidgetGroup> visitedGroups = new ArrayList<>();
-		List<WidgetParams> matchingWidgets = new ArrayList<>();
-		for (WidgetParams widget : widgets) {
+		List<WidgetType> matchingWidgets = new ArrayList<>();
+		for (WidgetType widget : widgets) {
 			WidgetGroup group = widget.group;
 			if (group != null && !visitedGroups.contains(group)) {
 				visitedGroups.add(group);
@@ -286,10 +286,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		return matchingWidgets;
 	}
 
-	private void inflateAvailableDefaultWidgets(@NonNull List<WidgetParams> widgets, boolean hasExternalWidgets) {
+	private void inflateAvailableDefaultWidgets(@NonNull List<WidgetType> widgets, boolean hasExternalWidgets) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		for (int i = 0; i < widgets.size(); i++) {
-			WidgetParams params = widgets.get(i);
+			WidgetType params = widgets.get(i);
 			WidgetGroup widgetGroup = params.group;
 
 			View view = inflater.inflate(R.layout.configure_screen_widget_item, availableWidgetsContainer, false);
@@ -371,10 +371,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@NonNull
-	private List<WidgetParams> listDefaultWidgets(@NonNull Set<MapWidgetInfo> widgets) {
-		Map<Integer, WidgetParams> defaultWidgets = new TreeMap<>();
+	private List<WidgetType> listDefaultWidgets(@NonNull Set<MapWidgetInfo> widgets) {
+		Map<Integer, WidgetType> defaultWidgets = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : widgets) {
-			WidgetParams params = WidgetParams.getById(widgetInfo.key);
+			WidgetType params = WidgetType.getById(widgetInfo.key);
 			if (params != null) {
 				defaultWidgets.put(params.ordinal(), params);
 			}
@@ -386,7 +386,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private List<MapWidgetInfo> listExternalWidgets(@NonNull Set<MapWidgetInfo> widgets) {
 		List<MapWidgetInfo> externalWidgets = new ArrayList<>();
 		for (MapWidgetInfo widgetInfo : widgets) {
-			WidgetParams params = WidgetParams.getById(widgetInfo.key);
+			WidgetType params = WidgetType.getById(widgetInfo.key);
 			if (params == null) {
 				externalWidgets.add(widgetInfo);
 			}

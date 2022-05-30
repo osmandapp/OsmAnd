@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

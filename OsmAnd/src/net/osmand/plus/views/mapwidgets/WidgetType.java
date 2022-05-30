@@ -26,7 +26,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSett
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
-public enum WidgetParams {
+public enum WidgetType {
 
 	// Left Panel
 	NEXT_TURN("next_turn", R.string.map_widget_next_turn, 0, R.drawable.widget_next_turn_day, R.drawable.widget_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, LEFT),
@@ -95,14 +95,14 @@ public enum WidgetParams {
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
-	WidgetParams(@NonNull String id,
-	             @StringRes int titleId,
-	             @StringRes int descId,
-	             @DrawableRes int dayIconId,
-	             @DrawableRes int nightIconId,
-	             @StringRes int docsUrlId,
-	             @Nullable WidgetGroup group,
-	             @NonNull WidgetsPanel defaultPanel) {
+	WidgetType(@NonNull String id,
+	           @StringRes int titleId,
+	           @StringRes int descId,
+	           @DrawableRes int dayIconId,
+	           @DrawableRes int nightIconId,
+	           @StringRes int docsUrlId,
+	           @Nullable WidgetGroup group,
+	           @NonNull WidgetsPanel defaultPanel) {
 		this.id = id;
 		this.titleId = titleId;
 		this.descId = descId;
@@ -187,8 +187,8 @@ public enum WidgetParams {
 	}
 
 	@Nullable
-	public static WidgetParams getById(@NonNull String id) {
-		for (WidgetParams widget : WidgetParams.values()) {
+	public static WidgetType getById(@NonNull String id) {
+		for (WidgetType widget : WidgetType.values()) {
 			String defaultId = getDefaultWidgetId(id);
 			if (widget.id.equals(defaultId)) {
 				return widget;

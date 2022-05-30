@@ -40,11 +40,11 @@ public class MapWidgetsFactory {
 	}
 
 	@Nullable
-	public MapWidget createMapWidget(@NonNull WidgetParams params) {
+	public MapWidget createMapWidget(@NonNull WidgetType params) {
 		return createMapWidget(null, params);
 	}
 
-	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetParams params) {
+	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType params) {
 		switch (params) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);

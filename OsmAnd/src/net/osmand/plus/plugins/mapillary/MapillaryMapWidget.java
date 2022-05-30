@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.mapillary;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAPILLARY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAPILLARY;
 
 import androidx.annotation.NonNull;
 

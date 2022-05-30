@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 
 import android.view.View;
 
@@ -80,7 +80,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetParams params) {
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType params) {
 		if (params == MARKERS_TOP_BAR) {
 			barWidgets.add(widgetInfo.widget);
 		} else if (params == SIDE_MARKER_1) {

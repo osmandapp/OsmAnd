@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -37,7 +37,7 @@ public class TextInfoWidget extends MapWidget {
 	private Integer cachedAngularUnits = null;
 
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetParams params) {
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType params) {
 		super(mapActivity, params);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
@@ -74,8 +74,8 @@ public class TextInfoWidget extends MapWidget {
 		imageView.invalidate();
 	}
 
-	public boolean setIcons(@NonNull WidgetParams widgetParams) {
-		return setIcons(widgetParams.dayIconId, widgetParams.nightIconId);
+	public boolean setIcons(@NonNull WidgetType widgetType) {
+		return setIcons(widgetType.dayIconId, widgetType.nightIconId);
 	}
 
 	public boolean setIcons(@DrawableRes int widgetDayIcon, @DrawableRes int widgetNightIcon) {

@@ -48,9 +48,9 @@ public enum WidgetGroup {
 	}
 
 	@NonNull
-	public List<WidgetParams> getWidgets() {
-		List<WidgetParams> widgets = new ArrayList<>();
-		for (WidgetParams widget : WidgetParams.values()) {
+	public List<WidgetType> getWidgets() {
+		List<WidgetType> widgets = new ArrayList<>();
+		for (WidgetType widget : WidgetType.values()) {
 			if (this == widget.group) {
 				widgets.add(widget);
 			}
@@ -61,14 +61,14 @@ public enum WidgetGroup {
 	@NonNull
 	public List<String> getWidgetsIds() {
 		List<String> widgetsIds = new ArrayList<>();
-		for (WidgetParams widget : getWidgets()) {
+		for (WidgetType widget : getWidgets()) {
 			widgetsIds.add(widget.id);
 		}
 		return widgetsIds;
 	}
 
 	public boolean containsWidget(@NonNull String widgetId) {
-		for (WidgetParams widget : getWidgets()) {
+		for (WidgetType widget : getWidgets()) {
 			if (widgetId.equals(widget.id)) {
 				return true;
 			}

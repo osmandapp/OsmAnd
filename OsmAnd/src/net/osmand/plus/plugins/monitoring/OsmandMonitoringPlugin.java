@@ -2,10 +2,10 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_DOWNHILL;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRIP_RECORDING_UPHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHILL;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_UPHILL;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -44,7 +44,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -97,7 +97,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	private void registerWidgetsVisibility() {
-		for (WidgetParams widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
+		for (WidgetType widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
 			ApplicationMode[] appModes = widget == TRIP_RECORDING_DISTANCE ? null : new ApplicationMode[] {};
 			ApplicationMode.regWidgetVisibility(widget.id, appModes);
 		}
@@ -201,7 +201,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType params) {
 		switch (params) {
 			case TRIP_RECORDING_DISTANCE:
 				return new TripRecordingDistanceWidget(mapActivity);

@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.FPS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
