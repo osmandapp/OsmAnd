@@ -28,7 +28,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
-import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
