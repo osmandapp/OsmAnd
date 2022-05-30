@@ -1,13 +1,5 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -21,13 +13,10 @@ import net.osmand.util.Algorithms;
 
 public class AudioVideoNotesWidget extends TextInfoWidget {
 
-	private final int actionId;
-
 	private Boolean cachedRecording;
 
 	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId) {
 		super(mapActivity, widgetType);
-		this.actionId = actionId;
 
 		updateInfo(null);
 		setOnClickListener(v -> {
@@ -58,20 +47,7 @@ public class AudioVideoNotesWidget extends TextInfoWidget {
 				setIcons(R.drawable.widget_icon_av_active, R.drawable.widget_icon_av_active_night);
 			} else {
 				setText(getString(R.string.shared_string_control_start), null);
-				switch (actionId) {
-					case AV_DEFAULT_ACTION_AUDIO:
-						setIcons(AV_NOTES_RECORD_AUDIO);
-						break;
-					case AV_DEFAULT_ACTION_VIDEO:
-						setIcons(AV_NOTES_RECORD_VIDEO);
-						break;
-					case AV_DEFAULT_ACTION_TAKEPICTURE:
-						setIcons(AV_NOTES_TAKE_PHOTO);
-						break;
-					default:
-						setIcons(AV_NOTES_ON_REQUEST);
-						break;
-				}
+				setIcons(widgetType);
 			}
 		}
 	}
