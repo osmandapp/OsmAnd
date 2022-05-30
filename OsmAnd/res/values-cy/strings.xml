@@ -528,7 +528,7 @@
     <string name="travel_route_types">Mathau o lwybrau</string>
     <string name="shared_string_files">Ffeiliau</string>
     <string name="remove_group_from_markers">Tynnu grŵp o\'r rhestr nodau</string>
-    <string name="no_items_of_type_message">Does dim eitemau o\'r math hwn.</string>
+    <string name="no_items_of_type_message">Nid oes gennyt eitemau o\'r math hwn.</string>
     <string name="no_activity_for_intent">Gosoda ap all gyflawni\'r weithred hon.</string>
     <string name="empty_category_name">Enw categori gwag</string>
     <string name="cancel_anytime_in_amazon_app">Gellir ei ganslo unrhyw bryd gydag ap Amazon</string>
@@ -848,7 +848,7 @@
     <string name="edit_category">Golygu categori</string>
     <string name="location_source_descr">Fel rhagosodiad, mae OsmAnd wedi\'i osod o Google Play yn defnyddio %1$s i adnabod lleoliad.
 \n
-\nOs wyt yn cael gwybodaeth lleoliad anghywir neu\'n defnyddio dyfais heb %2$s, rho gynnig ar newid i \"%3$s\".</string>
+\nOs wyt yn cael gwybodaeth lleoliad anghywir neu\'n defnyddio dyfais heb %2$s, rho gynnig ar newid i \"%3$s\"</string>
     <string name="rendering_attr_seabedDetail_description">Gwybodaeth destun ychwanegol ar surface_qualification gwely\'r môr, cyfuniad o fathau o arwyneb, categorïau a thacson chwyn a morwellt</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Dangos tagiau Fixme</string>
     <string name="rendering_value_all_name">Y cwbl</string>
@@ -889,7 +889,7 @@
     <string name="connect_track_points_as">Cysylltu pwyntiau taith</string>
     <string name="map_updates_are_unavailable_yet">Dyw diweddariadau mapiau ddim eto ar gael. :-(</string>
     <string name="contributions_may_calculate_with_delay">Gall cyfrifo cyfraniadau gymryd rhai oriau.</string>
-    <string name="enough_contributions_descr">Llongyfarchiadau! Rwyt wedi cyfrannu digon i OpenStreetMap i allu mwynhau diweddariadau di-ddiwedd o fapiau OsmAnd.</string>
+    <string name="enough_contributions_descr">Llongyfarchiadau! Rwyt wedi cyfrannu digon i OpenStreetMap i allu mwynhau diweddariadau di-ddiwedd o fapiau OsmAnd!</string>
     <string name="benefits_for_contributors_secondary_descr">Mewngofnoda i OpenStreetMap i weld os wyt ti\'n gymwys i gael diweddariadau mapiau diderfyn.</string>
     <string name="walking_route_osmc_description">Lliwio llwybrau yn ôl eu lliwiau lleol (os ar OpenStreetMap) a math (rhyngwladol, rhanbarthol, lleol).</string>
     <string name="online_direct_line_maps_link">Gwiria\'r mapiau angenrheidiol.</string>
@@ -901,7 +901,7 @@
     <string name="backup_error_no_valid_subscription">Dim tanysgrifiad dilys</string>
     <string name="backup_error_token_is_not_valid_or_expired">Tocyn annilys neu wedi dod i ben</string>
     <string name="shared_string_progress">Cynnydd</string>
-    <string name="backup_error_user_is_not_registered">Does dim defnyddiwr wedi cofrestru gyda\'r cyfeiriad e-bost hwnnw.</string>
+    <string name="backup_error_user_is_not_registered">Does dim defnyddiwr wedi cofrestru gyda\'r cyfeiriad e-bost hwnnw</string>
     <string name="backup_error_token_is_not_valid">Mae rhywbeth o\'i le gyda\'r tocyn neu ID y ddyfais</string>
     <string name="shared_string_discussion">Trafodaeth</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia a Wikivoyage all-lein</string>
@@ -1509,7 +1509,7 @@
     <string name="poi">MODd</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="quick_action_add_navigation">Llywio</string>
-    <string name="selected_waypoints_descr">Caiff y pwyntiau a awgrymir eu hychwanegu at drac \"%1$s\".</string>
+    <string name="selected_waypoints_descr">Caiff y pwyntiau a awgrymir eu hychwanegu at drac \"%1$s\"</string>
     <string name="shared_string_reading_file">Yn darllen ffeil…</string>
     <string name="all_groups">Pob grŵp</string>
     <string name="list_of_groups">Rhestr grwpiau</string>
@@ -1812,7 +1812,7 @@
     <string name="lang_ht">Creol Haiti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Rhifau tai</string>
     <string name="shared_string_show_details">Dangos manylion</string>
-    <string name="action_create"/>
+    <string name="action_create">Creu gweithred</string>
     <string name="confirmation_to_clear_history">Clirio\'r hanes\?</string>
     <string name="current_route">Llwybr cyfredol</string>
     <string name="agps_info">Gwybodaeth GPS-A</string>
@@ -2079,13 +2079,49 @@
     <string name="release_3_8">Manylion hen fersiwn; heb eu cyfieithu.
 \n
 \n</string>
-    <string name="release_3_7">"
+    <string name="release_3_7">• Mapiau Llethr all-lein newydd
 \n
-\n"</string>
+\n • Addasiad llawn o Ffefrynnau a GPX Waypoints - lliwiau cyfaddas, eiconau, siapiau
+\n
+\n • Cyfaddasu trefn eitemau yn \"Dewislen Cyd-destun\", \"Ffurfweddu Map\" a \"Dror\"
+\n
+\n • Wicipedia fel haen ar wahân ym map Ffurfweddu, dewis ieithoedd sydd eu hangen yn unig
+\n
+\n • Y gallu i greu hidlydd POI / mapiau dy hun gyda hyblygrwydd llawn
+\n
+\n • Ychwanegwyd opsiynau i adfer gosodiadau proffiliau cyfaddas
+\n
+\n • Llwybrau GPX llawn o\'r llywio\'n cefnogi lonydd traffig a chyfarwyddiadau troi llawn
+\n
+\n • Atgyweiriwyd meintiau UI ar dabledi
+\n
+\n • Trwsiwyd gwallau RTL
+\n
+\n</string>
     <string name="release_3_6">Manylion hen fersiwn; heb eu cyfieithu.
 \n
 \n</string>
-    <string name="release_3_4"></string>
+    <string name="release_3_4">• Proffiliau ap: Creu proffil arfer ar gyfer dy anghenion dy hun, gydag eicon cyfaddas a lliw
+\n
+\n • Nawr cyfaddasa gyflymderau rhagosodedig a lleiafswm/uchafswm unrhyw broffil
+\n
+\n • Ychwanegwyd teclyn ar gyfer y cyfesurynnau cyfredol
+\n
+\n • Ychwanegwyd opsiynau i ddangos y cwmpawd a mesurydd radiws ar y map
+\n
+\n • Atgyweirio logio trac cefndir
+\n
+\n • Gwell lawrlwythiadau o fapiau cefndir
+\n
+\n • Dewis \'Troi sgrin ymlaen\' wedi\'i ddychwelyd
+\n
+\n • Dewis iaith Wicipedia sefydlog
+\n
+\n • Ymddygiad botwm cwmpawd sefydlog yn ystod llywio
+\n
+\n • Trwsio gwallau eraill
+\n
+\n</string>
     <string name="lang_mk">Macedoneg</string>
     <string name="lang_es_us">Sbaeneg (UDA)</string>
     <string name="tts_missing_language_data_title">Data ar goll</string>
@@ -2402,7 +2438,7 @@
     <string name="live_update_frequency_day_variant">Caiff diweddariadau mapiau eu gwirio yn ddyddiol. Y tro nesaf %1$s ymhen %2$s.</string>
     <string name="latest_openstreetmap_update">Diweddariad diweddaraf OpenStreetMap ar gael:</string>
     <string name="select_picture">Dewiswch lun</string>
-    <string name="cannot_upload_image">Methu uwchlwytho delwedd. Ceisiwch eto\'n hwyrach.</string>
+    <string name="cannot_upload_image">Methu llwytho delwedd i fyny. Ceisiwch eto\'n hwyrach</string>
     <string name="shared_string_search_history">Hanes chwilio</string>
     <string name="register_opr_create_new_account">Creu cyfrif newydd</string>
     <string name="register_opr_have_account">Mae gen i gyfrif eisoes</string>
@@ -2437,8 +2473,8 @@
     <string name="exit_pan_mode_descr">Pwyswch Dewis i adael modd tremio</string>
     <string name="routing_attr_only_permitted_ways_name">Ffyrdd wedi\'u caniatáu yn benodol</string>
     <string name="purchases_feature_desc_monthly_map_updates">Cael mynediad at ddiweddariadau misol o fapiau all-lein.</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description"/>
-    <string name="on_hold_since"/>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Lliw y lwybrau yn ôl eu math o rwydwaith nodau (rhyngwladol, rhanbarthol, lleol).</string>
+    <string name="on_hold_since">Wedi\'i ohirio ers %1$s</string>
     <string name="explore_wikipedia_offline">Pori Wikipedia all-lein.</string>
     <string name="purchases_feature_desc_osmand_cloud">Cael OsmAnd Cloud i gadw holl ddata OsmAnd ar-lein. Dim colli data ar ôl ailosod. Cadw gwybodaeth wrth gefn a\'i hadfer yn hawdd.</string>
     <string name="purchases_feature_desc_pro_widgets">Cael mynediad at nodweddion OsmAnd Pro: Lliwio llwybrau a mwy.</string>
@@ -2527,7 +2563,7 @@
     <string name="arrived_at_destination">Rydych wedi cyrraedd.</string>
     <string name="downloads_left_template">%1$s llwyth yn weddill</string>
     <string name="downloading_number_of_files">Yn lawrlwytho %1$d ffeil…</string>
-    <string name="fav_point_emoticons_message"/>
+    <string name="fav_point_emoticons_message">Mae\'r Ffefryn wedi ei ailenwi i \'%1$s\' er mwyn cadw\'r llinynn sy\'n cynnwys gwennogluniau i ffeil.</string>
     <string name="index_item_world_basemap">Map trosolwg o\'r byd</string>
     <string name="rendering_attr_weatherPressureContours_name">Isoplethau gwasgedd</string>
     <string name="map_widget_true_bearing">Gwir gyfeiriant</string>
@@ -2782,7 +2818,7 @@
     <string name="profile_alert_duplicate_name_title">Enw dyblyg</string>
     <string name="profile_alert_duplicate_name_msg">Mae eisoes proffil gyda\'r enw honno</string>
     <string name="choose_file_type">Dewisa fath o ffeil</string>
-    <string name="upload_osm_note_description">Uwchlwytha dy nodyn OSM yn ddi-enw neu gyda dy broffil OpenStreetMap.org</string>
+    <string name="upload_osm_note_description">Llwytha dy nodyn OSM i fyny\'n ddi-enw neu gyda dy broffil OpenStreetMap.org.</string>
     <string name="profile_settings">Gosodiadau yn Benodol i\'r Proffil</string>
     <string name="plugin_global_prefs_info">Mae\'r gosodiadau ategyn hyn yn fyd-eang ac yn effeithio ar bob proffil</string>
     <string name="reset_to_default_category_button_promo">Bydd \'Ailosod i\'r rhagosodiad\' yn adfer y trefn fel yr oedd pan gafodd ei osod.</string>
@@ -2853,4 +2889,595 @@
     <string name="base_profile_descr_car">Car, lori, beic modur</string>
     <string name="routing_attr_allow_private_description">Mae\'n caniatâu mynediad i lefydd preifat.</string>
     <string name="none_region_found">Methwyd canfod unrhyw fapiau wedi\'u lawrlwytho ar y cerdyn cof.</string>
+    <string name="turn_on_public_transport_description">Tro ymlaen i weld llwybrau trafnidiaeth gyhoeddus ar y map.</string>
+    <string name="lang_zhminnan">Min Deheuol</string>
+    <string name="login_open_street_map">Mewngofnodi i OpenStreetMap</string>
+    <string name="routing_attr_length_name">Terfyn hyd</string>
+    <string name="custom_color">Lliw cyfaddas</string>
+    <string name="custom_osmand_plugin">Ategyn Custom OsmAnd</string>
+    <string name="divider_descr">Elfennau o dan y pwynt hwn wedi\'u gwahanu gan rannwr.</string>
+    <string name="shared_string_zoom_levels">Lefelau chwyddo</string>
+    <string name="shared_string_quick_actions">Gweithredoedd cyflym</string>
+    <string name="live_monitoring_time_buffer">Byffer amser</string>
+    <string name="shared_string_by_default">Rhagosodedig</string>
+    <string name="routing_attr_max_num_changes_description">Nodi terfyn uchaf y newidiadau</string>
+    <string name="routing_attr_freeride_policy_allow_name">Caniatáu</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Hoffi offpiste</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Dechreuwr</string>
+    <string name="simulation_constant_mode_title">Cyflymder sefydlog</string>
+    <string name="turn_screen_on_power_button_disabled">Analluogwyd. Mae angen \'Cadw\'r sgrin ymlaen\' o dan \'Goramser ar ôl deffro\'.</string>
+    <string name="plugin_disabled_descr">Mae\'r ategyn hwn yn ap ar wahân, nid yw ei analluogi yn ei ddileu.
+\n
+\nGellir ei ddadosod yng ngosodiadau \'Apiau\' Android.</string>
+    <string name="shared_string_include_data">Cynnwys data ychwanegol</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="select_group">Dewis grŵp</string>
+    <string name="rendering_attr_showFitnessTrails_name">Llwybrau ffitrwydd</string>
+    <string name="rendering_attr_showFitnessTrails_description">Dangos llwybrau ffitrwydd</string>
+    <string name="all_previous_segments_will_be_recalc">Bydd yr holl segmentau blaenorol yn cael eu hailgyfrifo gan ddefnyddio\'r proffil a ddewiswyd.</string>
+    <string name="context_menu_actions">Gweithredoedd dewislen cyd-destun</string>
+    <string name="login_and_pass">Enw defnyddiwr a chyfrinair</string>
+    <string name="shared_string_osmand_usage">Defnydd o OsmAnd</string>
+    <string name="plugins_settings">Gosodiadau ategyn</string>
+    <string name="navigate_point_format_utm">Safon UTM</string>
+    <string name="plugin_disabled">Dffodd ategyn</string>
+    <string name="routing_profile_direct_to">Yn syth i bwynt</string>
+    <string name="save_track_logging_accuracy">Cywirdeb logio</string>
+    <string name="speed_camera_pois">POI camerâu cyflymder</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Amhosibl</string>
+    <string name="announcement_time_descr">Mae amseriad cyhoeddi gwahanol ysgogiadau llais yn dibynnu ar y math o anogiad, cyflymder llywio cyfredol, a chyflymder y llywio rhagosodedig.</string>
+    <string name="online_routing_engines">Peiriannau llwybro ar-lein</string>
+    <string name="routing_attr_allow_intermittent_name">Caniatáu ffyrdd dŵr ysbeidiol</string>
+    <string name="routing_attr_allow_intermittent_description">Caniatáu ffyrdd dŵr ysbeidiol</string>
+    <string name="send_files_to_openstreetmap">Anfon ffeil GPX at OpenStreetMap</string>
+    <string name="manage_subscription">Rheoli tanysgrifiad</string>
+    <string name="delete_address">Dileu\'r Cyfeiriad</string>
+    <string name="app_mode_inline_skates">Esgidiau sglefrio mewn llinell</string>
+    <string name="quick_action_switch_profile_descr">Mae\'r botwm gweithredu yn newid rhwng proffiliau dethol.</string>
+    <string name="quick_action_transport_descr">Botwm yn dangos neu guddio trafnidiaeth gyhoeddus ar y map.</string>
+    <string name="download_unsupported_action">Gweithred heb ei gefnogi %1$s</string>
+    <string name="settings_item_import_error">Methu mewnforio o \'%1$s\'.</string>
+    <string name="terrain_slider_description">Gosod y lefelau chwyddo isaf ac uchaf ar gyfer dangos yr haen.</string>
+    <string name="import_duplicates_description">Mae gan OsmAnd eisoes elfennau gyda\'r un enwau â\'r rhai a fewnforiwyd.
+\n
+\nDewis gweithred.</string>
+    <string name="clear_recorded_data">Clirio\'r data a gofnodwyd</string>
+    <string name="sunset_at">Machlud am %1$s</string>
+    <string name="file_does_not_contain_routing_rules">Dim rheolau llwybro yn \'%1$s\'. Dewiswch ffeil arall.</string>
+    <string name="not_support_file_type_with_ext">Dewiswch ffeil estyniad %1$s a gefnogir yn lle hynny.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Sgil effaith: O ganlyniad i hidlo yn ôl cywirdeb, gall pwyntiau fod ar goll yn gyfan gwbl ar gyfer e.e. islaw pontydd, o dan goed, rhwng adeiladau uchel, neu gyda rhai amodau tywydd.</string>
+    <string name="empty_filename">Enw ffeil gwag</string>
+    <string name="app_mode_utv">Ochr yn Ochr</string>
+    <string name="get_discount_second_part">Yna %1$s</string>
+    <string name="cancel_subscription">Diddymu\'r tanysgrifiad</string>
+    <string name="app_mode_pickup_truck">Picyp</string>
+    <string name="shared_string_min_speed">LLeiafswm cyflymder</string>
+    <string name="shared_string_max_speed">Uchafswm cyflymder</string>
+    <string name="default_speed_setting_title">Cyflymder rhagosodedig</string>
+    <string name="default_speed_setting_descr">Newid gosodiadau cyflymder rhagosodedig</string>
+    <string name="routing_attr_avoid_toll_name">Dim toll fyrdd</string>
+    <string name="searching_gps">Chwilio am GPS</string>
+    <string name="public_transport_calc_pedestrian">Cyfrifo\'r llwybr ar droed</string>
+    <string name="public_transport_no_route_title">Yn anffodus, nid yw OsmAnd yn gallu ddod o hyd i lwybr sy\'n addas ar gyfer eich gosodiadau.</string>
+    <string name="public_transport_try_ped">Rho gynnig ar lywio ar droed.</string>
+    <string name="public_transport_try_change_settings">Ceisia newid y gosodiadau.</string>
+    <string name="routing_attr_avoid_train_name">Dim trenau</string>
+    <string name="shared_string_speed">Cyflymder</string>
+    <string name="apply_only_to_new_favorites">Gosod i ffefrynnau newydd yn unig</string>
+    <string name="change_default_appearance">Newid yr ymddangosiad rhagosodedig</string>
+    <string name="routeInfo_horse_scale_name">Anhawster llwybrau ceffylau</string>
+    <string name="routeInfo_horse_scale_description">Rendro llwybrau yn ôl anhawster llwybrau ceffylau</string>
+    <string name="rendering_attr_horse_scale_common_name">Cyffredin</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Llwybrau bws troli</string>
+    <string name="simulation_real_mode_title">Efelychiad realistig</string>
+    <string name="temporary_conditional_routing_descr">Defnyddio gyfyngiadau ffyrdd sy\'n weithredol nawr ar y map</string>
+    <string name="file_size_needed_for_import">Angenrheidiol ar gyfer mewnforio</string>
+    <string name="osm_edit_close_note">Cau Nodyn OSM</string>
+    <string name="subscription_paused_title">Mae tanysgrifiad OsmAnd Live wedi\'i oedi</string>
+    <string name="osm_edits_view_descr">Gweld dy holl olygiadau heb eu llwytho i fyny eto neu fygiau OSM yn %1$s. Ni fydd newidiadau sydd wedi\'u llwytho i fyny eisoes yn ymddangos mwyach.</string>
+    <string name="all_next_segments_will_be_recalc">Bydd yr holl segmentau dilynol yn cael eu hailgyfrifo gan ddefnyddio\'r proffil a ddewiswyd.</string>
+    <string name="shared_string_uninstall_and_restart">Dadosod ac Ailgychwyn</string>
+    <string name="quick_action_remove_next_destination">Dileu\'r pwynt cyrchfan agosaf</string>
+    <string name="routing_attr_length_description">Nodwch hyd y cerbyd sydd i\'w ganiatáu ar y llwybrau.</string>
+    <string name="select_data_to_import">Dewis y data i\'w fewnforio.</string>
+    <string name="no_recalculation_setting">Dim ailgyfrifo</string>
+    <string name="open_settings">Agor gosodiadau</string>
+    <string name="monitoring_prefs_descr">Llywio, cywirdeb logio</string>
+    <string name="paste_Osmand_data_folder_path">Gluda\'r llwybr i\'r ffolder gyda data OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Newid ffolder data OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Symud i\'r gyrchfan newydd</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parc tir</string>
+    <string name="months_3">Tri mis</string>
+    <string name="turn_screen_on_router">Deffro ar dro</string>
+    <string name="turn_screen_on_time_descr">Addasu pa mor hir y dylai\'r sgrin fod ymlaen.</string>
+    <string name="shared_string_file_is_saved">Mae %s wedi\'i gadw</string>
+    <string name="rate_dialog_descr">Rhanna dy adborth a graddio dy waith ar Google Play.</string>
+    <string name="bearing_desc">Mae\'r teclyn cyfeiriant yn dangos y cyfeiriant absoliwt neu berthynol i darged mewn unedau onglog (Graddau 180, Graddau 360, Milliradianau).</string>
+    <string name="route_maneuvers">Symudiadau ar lwybr</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Dim ond os oes angen</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="osm_carto_render_descr">Yn debyg i arddull carto OpenStreetMap a ddefnyddir ar brif safle OSM</string>
+    <string name="routeInfo_smoothness_description">Dosbarthiad symudedd ffyrdd/llwybrau troed ar gyfer cerbydau olwyn, yn enwedig o ran rheoleidd-dra/gwastadedd yr arwyneb.</string>
+    <string name="redeem_promo_code">Gwneud defnydd o\'r cod hyrwyddo</string>
+    <string name="backup_promocode">Cod hyrwyddo</string>
+    <string name="map_orientation_threshold_descr">Peidio â throi golwg y map os yw\'r cyflymder yn llai na throthwy</string>
+    <string name="online_routing_example_hint">Bydd URL gyda\'r holl baramedrau yn edrych fel hyn:</string>
+    <string name="approximate_file_size">Maint ffeil yn fras</string>
+    <string name="osm_login_descr">Mewngofnodwch gan ddefnyddio\'r dull OAuth, neu\'ch enw defnyddiwr a chyfrinair OSM.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Arhosa, os gweli\'n dda.
+\nBydd graff ar gael ar ôl ailgyfrifo\'r llwybr.</string>
+    <string name="use_live_routing">Data OsmAnd Live</string>
+    <string name="in_case_of_reverse_direction">Mewn achos o gyfeiriad gwrthdro</string>
+    <string name="gpx_direction_arrows">Saethau cyfeiriad</string>
+    <string name="screen_control">Rheoli sgrin</string>
+    <string name="lenght_limit_description">Rhoi hyd y cerbyd, efallai y bydd rhai cyfyngiadau llwybrau yn berthnasol ar gyfer cerbydau hir.</string>
+    <string name="unsupported_type_error">Math heb ei gefnogi</string>
+    <string name="parking_positions">Safleoedd parcio</string>
+    <string name="create_edit_poi">Creu neu olygu POI</string>
+    <string name="legend_item_description">Canllaw i symbolau\'r map.</string>
+    <string name="subscription_osmandlive_item">Tanysgrifiad - OsmAnd Live</string>
+    <string name="search_poi_types_descr">Cyfuno mathau POI o wahanol gategorïau. Tapio\'r switsh i ddewis pob un, tapio\'r ochr chwith i ddewis categori.</string>
+    <string name="lang_zhyue">Cantoneg</string>
+    <string name="some_articles_may_not_available_in_lang">Efallai na fydd rhai erthyglau Wicipedia ar gael yn eich iaith.</string>
+    <string name="select_wikipedia_article_langs">Dewiswch iaith erthyglau Wicipedia ar y map.​​​ Newidiwch i unrhyw iaith sydd ar gael wrth ddarllen yr erthygl.</string>
+    <string name="terrain_empty_state_text">Yn dangos cysgod bryniau neu lethrau ar y map. Darllena ragor fwy am y mathau hyn o fapiau ar ein gwefan.</string>
+    <string name="slope_read_more">Darllen rhagor am lethrau yn %1$s.</string>
+    <string name="multimedia_notes_prefs_descr">Maint llun, ansawdd sain a fideo</string>
+    <string name="shared_string_turn_off">Diffodd</string>
+    <string name="shared_string_revert">Dychwelyd</string>
+    <string name="default_speed_dialog_msg">Yn amcangyfrif yr amser cyrraedd ar gyfer mathau o ffyrdd anhysbys, ac yn cyfyngu ar gyflymder ar gyfer pob ffordd (gall effeithio ar lwybrau)</string>
+    <string name="swap_two_places">Cyfnewid %1$s a %2$s</string>
+    <string name="file_imported_successfully">%1$s wedi\'i fewnforio.</string>
+    <string name="layer_osm_edits">Golygiadau OSM</string>
+    <string name="quick_action_contour_lines_descr">Botwm yn dangos neu\'n cuddio cyfuchliniau ar y map.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Gwell ffyrdd heb balmantu</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="routeInfo_piste_difficulty_name">Anhawster piste</string>
+    <string name="download_detailed_map">Lawrlwytha fap %s manwl, i weld yr ardal hon.</string>
+    <string name="utm_format_descr">Mae OsmAnd yn defnyddio\'r Safon UTM, sy\'n debyg ond nid yn union yr un fath â fformat UTM NATO.</string>
+    <string name="map_during_navigation">Map wrth lywio</string>
+    <string name="get_discount_first_part">%1$s am y %2$s cyntaf</string>
+    <string name="app_mode_offroad">Oddi ar y ffordd</string>
+    <string name="precision_hdop">Cywirdeb llorweddol: %s</string>
+    <string name="minmax_speed_dialog_title">Gosod cyflymder isaf/uchaf</string>
+    <string name="press_again_to_change_the_map_orientation">Tapia eto i newid cyfeiriad y map</string>
+    <string name="osmand_routing_promo">Ychwanega dy fersiwn cyfaddasedig dy hun o\'r ffeil routing.xml yn ..osmand/routing</string>
+    <string name="settings_routing_mode_string">Modd: %s</string>
+    <string name="files_moved">Wedi symud %1$d ffeil (%2$s).</string>
+    <string name="dont_move_maps">Peidio â symud</string>
+    <string name="routing_attr_avoid_tram_description">Yn osgoi tramiau</string>
+    <string name="routing_attr_avoid_bus_name">Dim bysiau</string>
+    <string name="routing_attr_avoid_share_taxi_description">Yn osgoi rhannu tacsi</string>
+    <string name="routing_attr_avoid_train_description">Yn osgoi trenau</string>
+    <string name="enter_text_separated">Rhowch dagiau wedi\'u gwahanu gan goma.</string>
+    <string name="subscription_on_hold_title">Mae tanysgrifiad OsmAnd Live wedi\'i ohirio</string>
+    <string name="sign_in_with_open_street_map">Mewngofnodwch gydag OpenStreetMap</string>
+    <string name="set_working_days_to_continue">Gosod diwrnodau gwaith i barhau</string>
+    <string name="osm_edit_closed_note">Nodyn OSM caeedig</string>
+    <string name="vessel_height_warning">Gosod uchder llong i osgoi pontydd isel. Os yw\'r bont yn symudol, defnyddir yr uchder pan fydd ar agor.</string>
+    <string name="turn_screen_on_descr">Dewis opsiynau deffro sgrin (gwna\'n yn siŵr bod OsmAnd yn y blaendir pan fydd y ddyfais yn cael ei chloi):</string>
+    <string name="gpx_parse_error">Nid yw OsmAnd GPX wedi\'i ffurfio\'n dda, cysyllta â\'r tîm cymorth i ymchwilio ymhellach.</string>
+    <string name="search_poi_types">Chwiliwch am fathau o POI</string>
+    <string name="slope_download_description">Mae angen mapiau ychwanegol i weld llethrau ar y map.</string>
+    <string name="hillshade_download_description">Mae angen mapiau ychwanegol i weld cysgodion bryniau ar y map.</string>
+    <string name="shared_string_app_default_w_val">Rhagosodiad Ap (%s)</string>
+    <string name="osm_editing_prefs_descr">Mewngofnodi, cyfrinair, golygu all-lein</string>
+    <string name="change_data_storage_full_description">Symud ffeiliau data OsmAnd i\'r gyrchfan newydd\?
+\n%1$s &gt; %2$s</string>
+    <string name="mercator_projection">Tafluniad Mercator</string>
+    <string name="keep_screen_off">Cadw\'r sgrin i ffwrdd</string>
+    <string name="turn_screen_on_proximity_sensor">Synhwyrydd agosrwydd</string>
+    <string name="checking_for_duplicate_description">OsmAnd i wirio %1$s am gopïau dyblyg o eitemau sydd eisoes yn bodoli yn yr ap.
+\n
+\nGall gymryd peth amser.</string>
+    <string name="recalculate_route_distance_promo">Bydd y llwybr yn cael ei ailgyfrif os yw\'r pellter o\'r llwybr i\'r lleoliad presennol yn fwy na\'r gwerth a ddewiswyd.</string>
+    <string name="shared_string_poi_types">Mathau o POI</string>
+    <string name="shared_string_enter_param">Rhowch paramedr</string>
+    <string name="quick_action_remove_next_destination_descr">Yn dileu cyrchfan nesaf eich llwybr. Os mai dyna\'r cyrchfan olaf, bydd y llywio yn dod i ben.</string>
+    <string name="live_monitoring_adress">Cyfeiriad gwe</string>
+    <string name="join_segments">Cysylltu segmentau</string>
+    <string name="route_parameters_descr">Ffurfweddu paramedrau llwybr</string>
+    <string name="lang_sat">Santali</string>
+    <string name="routing_attr_hazmat_category_description">Categori deunyddiau peryglus / Ystyried caniatâd mynediad peryglus</string>
+    <string name="navigation_points_desc">Mae teclynnau llywio\'n cael eu galluogi yn ystod llywio i ddangos gwybodaeth fel pellter, amser cyrraedd neu adael, troadau nesaf, cyfeiriant, enw stryd cyfredol, manylion lonydd, cyflymder uchaf, rhybuddion yn agosáu, POIs, cyfeirbwyntiau.</string>
+    <string name="route_maneuvers_desc">Mae teclynnau llywio\'n cael eu galluogi yn ystod llywio i ddangos gwybodaeth fel pellter, amser cyrraedd neu adael, troadau nesaf, cyfeiriant, enw stryd cyfredol, manylion lonydd, cyflymder uchaf, rhybuddion yn agosáu, POIs, cyfeirbwyntiau.</string>
+    <string name="track_attach_to_the_roads_descr">Bydd y trac yn cael ei gysylltu â\'r ffordd gan ddefnyddio mapiau all-lein, bydd geometreg y trac yn cael ei newid.</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Dim dewisiadau</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Canolradd</string>
+    <string name="on_with_params">%1$s ar %2$s</string>
+    <string name="apply_only_to_new_points">Gosod i bwyntiau newydd yn unig</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Anodd Iawn</string>
+    <string name="rendering_attr_horse_scale_critical_name">Critigol</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Peryglus</string>
+    <string name="routing_attr_carriage_restrictions_description">Ystyried caniatâd mynediad ar gyfer cerbydau a dynnir gan geffylau</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Llwybrau monorail</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Llwybrau ffyniciwlar</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Llwybrau gwennol</string>
+    <string name="shared_string_item">Eitem</string>
+    <string name="shared_string_buttons">Botymau</string>
+    <string name="speed_mode">Modd cyflymder</string>
+    <string name="release_4_1">• Ychwanegwyd cefnogaeth gychwynnol ar gyfer Android Auto
+\n
+\n • Diweddariad rhyngwyneb defnyddiwr ar gyfer chwiliad cyfesurynnau UTM
+\n
+\n • Hidlo GPS ar gyfer Traciau GPX
+\n
+\n • Teclyn Drychiad (Pro)
+\n
+\n • Ffefrynnau: gallu ychwanegol i weld eiconau a ddefnyddiwyd yn ddiweddar
+\n
+\n • Cynllunio llwybr: bydd yn defnyddio\'r proffil a ddewiswyd ar ôl ei lansio
+\n
+\n • Haen Mapillary sefydlog, mae\'r ategyn bellach wedi\'i analluogi\'n ragosodedig
+\n
+\n • Ychwanegwyd sgrin i reoli\'r holl hanes yn y ap
+\n
+\n • Nid yw cyfeiriadedd Map yn cael ei ailosod ar ôl ailgychwyn y ap
+\n
+\n • Gwell rendrad marciwr uchder SRTM
+\n
+\n • Capsiynau map Arabeg sefydlog
+\n
+\n • Wedi datrys problemau llwybro gwahanol
+\n
+\n</string>
+    <string name="simulation_real_mode_desc">Ar rannau syth o\'r ffordd, bydd y cyflymder yn cyfateb yn fras i\'r cyflymder uchaf a ganiateir.
+\nAr groefannau, bydd yr efelychiad yn arafu.
+\nRhoddir cosbau ychwanegol ar arwyddion traffig, arwyddion stopio, ac ati.</string>
+    <string name="simulation_constant_mode_desc">Bydd yr efelychiad yn cael ei gyflawni gyda chyflymder dethol cyson.</string>
+    <string name="simulation_preview_mode_desc">Bydd cyflymder yr efelychiad yn fwyaf ar adrannau syth ac yn arafu dim ond ar groesffyrdd.</string>
+    <string name="simulation_preview_mode_title">Y modd rhagolwg cyflym</string>
+    <string name="register_on_openplacereviews_desc">Darperir lluniau gan brosiect data agored OpenPlaceReviews.org. Er mwyn llwytho\'ch lluniau i fyny mae angen i chi gofrestru ar eu gwefan.</string>
+    <string name="osm_edit_comment_note">Sylw Nodyn OSM</string>
+    <string name="gpx_upload_public_visibility_descr">Mae \"cyhoeddus\" yn golygu bod yr olrhain yn cael ei ddangos yn gyhoeddus yn eich olrhain GPS ac mewn rhestrau olrhain GPS cyhoeddus, ac yn y rhestr olrhain gyhoeddus gyda stampiau amser ar ffurf amrwd. Nid yw data a gyflwynir trwy\'r API yn cyfeirio at eich tudalen olrhain. Nid yw stampiau amser pwyntiau olrhain ar gael trwy\'r API GPS cyhoeddus, ac nid yw pwyntiau olrhain wedi\'u trefnu\'n gronolegol.</string>
+    <string name="subscription_expired_title">Mae tanysgrifiad OsmAnd Live wedi dod i ben</string>
+    <string name="release_4_0">• Cwmwl wrth gefn
+\n
+\n • Ychwanegwyd modd nos ar gyfer arddull map \"Topo\".
+\n
+\n • Ychwanegwyd opsiwn i lwytho i lawr llinellau cyfuchlin mewn troedfeddi.
+\n
+\n • Bellach gall traciau gael eu lliwio yn ôl uchder, cyflymder neu oledd
+\n
+\n • Diweddarwyd deialog \"Cofnodi taith\" 
+\n
+\n • Pellter trwy dap wedi\'i symud o\'r mesurydd Radius i opsiwn ar wahân
+\n
+\n • Cynllunio Llwybrau: Gallwch nawr newid opsiynau llywio, cyrchu ffurfweddiad y map a chwilio heb adael y cynllunio llwybrau
+\n
+\n • Sgrin \"Prynu\" newydd gyda gwybodaeth fanwl am brynu
+\n
+\n • Opsiwn ychwanegol i newid golwg llinell y llwybr
+\n
+\n • Symudwyd diweddariadau OsmAnd Live i \"Lawrlwythio &gt; Diweddariadau\"
+\n
+\n</string>
+    <string name="approximate_route_description">Cysylltu\'r llwybr â ffyrdd ar y map i gael pob troad a data ychwanegol, fel llyfnder, mathau o ffyrdd ac ati.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Sicrhau lawrlwythiadau diderfyn ar gyfer mapiau all-lein o bob cyfandir a rhanbarth.</string>
+    <string name="purchases_feature_desc_combined_wiki">Archwiliwch erthyglau Wicipedia wrth fynd, heb gysylltiad rhyngrwyd. Data all-lein wedi\'i rannu yn ôl gwledydd ac ar gael ym mhob iaith.</string>
+    <string name="purchases_feature_desc_wikipedia">Archwiliwch Wicipedia all-lein. Erthyglau wedi\'u rhannu yn ôl gwledydd a rhanbarthau ac ar gael ym mhob iaith.</string>
+    <string name="osmand_online_routing_promo">Defnyddiwch dempledi wedi\'u diffinio ymlaen llaw, neu ychwanegwch OSRM, GraphHopper, openrouteservice, neu lwybro GPX ar-lein.</string>
+    <string name="announce_when_exceeded">Cyhoeddi pan dros y terfyn</string>
+    <string name="srtm_download_single_help_message">Dewiswch yr amrywiad. Bydd angen i chi ail-lawrlwytho\'r ffeil i newid y fformat.</string>
+    <string name="in_grace_period">Mewn cyfnod o aros</string>
+    <string name="trip_recording_logging_interval_info">Mae\'r cyfwng logio yn gosod y cyfnod amser pan fydd OsmAnd yn gofyn am ddata\'r safle cyfredol.</string>
+    <string name="app_mode_motorboat">Cwch modur</string>
+    <string name="subscription_payment_issue_title">Tapiwch y botwm i osod dull talu ar Google Play i drwsio\'ch tanysgrifiad.</string>
+    <string name="message_need_calculate_route_before_show_graph">Mae data %1$s ar gael ar ffyrdd yn unig, cyfrifa lwybr gan ddefnyddio “Llwybr rhwng pwyntiau” i weld graffiau.</string>
+    <string name="use_two_phase_routing">Defnyddio algorithm llwybro 2 gam A*</string>
+    <string name="file_already_imported">Mae\'r ffeil eisoes wedi\'i mewnforio yn OsmAnd</string>
+    <string name="osm_live_payment_desc_hw">Codir tâl am y tanysgrifiad fesul y cyfnod a ddewiswyd. Gelli ei ddiddymu yn dy AppGallery ar unrhyw adeg.</string>
+    <string name="contour_lines_thanks">Diolch am brynu \'Contour lines\'</string>
+    <string name="sort_name_ascending">Enw: A - Z</string>
+    <string name="sort_name_descending">Enw: Z - A</string>
+    <string name="sort_last_modified">Newidiwyd diwethaf</string>
+    <string name="only_selected_segment_recalc">Dim ond y segment a ddewiswyd fydd yn cael ei ailgyfrifo gan ddefnyddio\'r proffil a ddewiswyd.</string>
+    <string name="previous_segment">Segment blaenorol</string>
+    <string name="attach_to_the_roads">Atodi i\'r ffyrdd</string>
+    <string name="nearest_point">Y pwynt agosaf</string>
+    <string name="plan_route_exit_dialog_descr">Hepgor pob newid yn y llwybr arfaethedig\?</string>
+    <string name="shared_string_custom">Cyfaddas</string>
+    <string name="select_track_width">Dewis lled</string>
+    <string name="app_mode_motor_scooter">Sgwter modur</string>
+    <string name="add_hidden_group_info">Mae\'r pwynt ychwanegol i\'w weld yn \"%s\". Datguddia\'r grŵp a ddewiswyd i\'w ddangos ar y map.</string>
+    <string name="plugin_wikipedia_description">Cael gwybodaeth am bwyntiau o ddiddordeb o Wikipedia, canllaw poced all-lein sy\'n cynnwys erthyglau am leoedd a chyrchfannau.</string>
+    <string name="search_download_wikipedia_maps">Lawrlwythwch mapiau Wicipedia</string>
+    <string name="vessel_height_limit_description">Gosod uchder y llong i osgoi pontydd isel. Cofia, os yw\'r bont yn symudol, byddwn yn defnyddio ei uchder yn y cyflwr agored.</string>
+    <string name="vessel_height_warning_link">Gosod uchder y llong</string>
+    <string name="clear_tiles_warning">Bydd gosod y newidiadau hyn yn clirio\'r data sydd wedi\'i storio ar gyfer y ffynhonnell teils hon</string>
+    <string name="default_screen_timeout">Goramser sgrin rhagosodedig</string>
+    <string name="screen_timeout_descr">Os yw \"%1$s\" ymlaen, bydd yr amser gweithgaredd yn dibynnu arno.</string>
+    <string name="delete_all_actions_message_q">Dileu %d gweithredoedd cyflym am byth\?</string>
+    <string name="tiles_storage_descr">Dewis sut i storio teils wedi\'u llwytho i lawr.</string>
+    <string name="expire_time_descr">Bydd teils wedi\'u storio yn cael eu hail-lwytho i lawr ar ôl y nifer penodedig o funudau. Gadewch y maes hwn yn wag i beidio byth ag adnewyddu teils ar gyfer y ffynhonnell hon.
+\n
+\nMae un diwrnod yn 1440 munud.
+\nMae un wythnos yn 10 080 munud.
+\nMae un mis yn 43 829 munud.</string>
+    <string name="map_source_zoom_levels_descr">Yn effeithio ar y sgrin pan gaiff ei ddefnyddio fel map neu droshaen/tanhaen.
+\n
+\n%1$s: Mae\'r map wedi\'i gyfyngu i\'r ystod lefel chwyddo a ddewiswyd.
+\n
+\n%2$s yw\'r lefelau y bydd y teils gwreiddiol yn weladwy, bydd uwchraddio neu israddio yn digwydd y tu allan i\'r gwerthoedd hyn.</string>
+    <string name="map_source_zoom_levels">Gosod isafswm ac uchafswm lefel chwyddo i ddangos neu lwytho\'r map ar-lein.</string>
+    <string name="storage_format">Fformat storio</string>
+    <string name="expire_time">Amser dod i ben</string>
+    <string name="edit_online_source">Golygu ffynhonnell ar-lein</string>
+    <string name="online_map_url_helper_text">Rhoi neu gludo\'r URL ar gyfer y ffynhonnell ar-lein.</string>
+    <string name="online_map_name_helper_text">Rhoi enw ar gyfer ffynhonnell y map ar-lein.</string>
+    <string name="sqlite_db_file">Ffeil SQLiteDB</string>
+    <string name="one_image_per_tile">Un ffeil delwedd fesul teilsen</string>
+    <string name="pseudo_mercator_projection">Taluniad ffug-Mercator</string>
+    <string name="keep_screen_on">Cadw\'r sgrin ymlaen</string>
+    <string name="weight_limit_description">Rhoi pwysau\'r cerbyd, efallai y bydd rhai cyfyngiadau llwybr yn berthnasol ar gyfer cerbydau trwm.</string>
+    <string name="rendering_attr_horseScale_name">Anhawster llwybrau ceffylau</string>
+    <string name="app_mode_mountain_bicycle">Beic mynydd</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Paid â mynd offpiste</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Uwch</string>
+    <string name="snackbar_page_removed">Mae \"Tudalen %1$s\" wedi\'i thynnu.</string>
+    <string name="keep_it_empty_if_not">Cadwch ef yn wag os na</string>
+    <string name="shared_string_delete_all_q">Dileu\'r cyfan\?</string>
+    <string name="quick_action_item">Gweithred gyflym</string>
+    <string name="settings_item_read_error">Methu darllen o \'%1$s\'.</string>
+    <string name="changes_applied_to_profile">Newidiadau wedi\'u gosod i broffil \'%1$s\'.</string>
+    <string name="settings_item_write_error">Methu ysgrifennu i \'%1$s\' .</string>
+    <string name="app_mode_ski_touring">Teithio sgïo</string>
+    <string name="import_duplicates_title">Mae rhai eitemau eisoes yn bodoli</string>
+    <string name="logcat_buffer">Byffyr Logcat</string>
+    <string name="route_parameters_info">Gosodiadau ar gyfer llwybro yn y proffil a ddewiswyd \"%1$s\".</string>
+    <string name="rendering_attr_ice_road_name">Ffordd iâ</string>
+    <string name="routing_attr_max_num_changes_name">Y nifer o newidiadau</string>
+    <string name="send_log">Anfon log</string>
+    <string name="routing_attr_avoid_tram_name">Dim tramiau</string>
+    <string name="osmand_purchases_item">Prynu nwyddau OsmAnd</string>
+    <string name="measure_distance_item">Mesur pellter</string>
+    <string name="radius_ruler_item">Mesurydd radiws</string>
+    <string name="extra_maps_menu_group">Mapiau ychwanegol</string>
+    <string name="osm_live_payment_subscription_management">Codir tâl o gyfrif Google Play wrth gadarnhau\'r pryniant.
+\n
+\nMae\'n adnewyddu oni bai ei fod wedi\'i ddiddymu cyn y cyfnod adnewyddu a ddewiswyd.
+\n
+\nMae modd rheoli neu ddiddymu tanysgrifiadau o osodiadau Google Play ar unrhyw adeg.</string>
+    <string name="travel_item">Teithio (Wikivoyage a Wicipedia)</string>
+    <string name="lang_nap">Napolitaneg</string>
+    <string name="lang_scn">Sicilieg</string>
+    <string name="wiki_menu_download_descr">Mae angen mapiau ychwanegol i weld POIs Wicipedia ar y map.</string>
+    <string name="shared_string_all_languages">Pob iaith</string>
+    <string name="ui_customization_description">Cyfaddasu nifer yr eitemau yn \"Drôr\", \"Ffurfweddu Map\" a \"Cyd-destun Dewislen\".
+\n
+\nDiffoddwch ategion heb eu defnyddio i guddio eu holl reolaethau. %1$s.</string>
+    <string name="select_shape">Dewis siâp</string>
+    <string name="replace_point_descr">Amnewid pwynt arall gyda hwn.</string>
+    <string name="move_inside_category">Dim ond o fewn y categori hwn y gellir symud eitemau.</string>
+    <string name="hidden_items_descr">Mae\'r eitemau hyn wedi\'u cuddio o\'r ddewislen, ond bydd yr opsiynau neu\'r ategion a gynrychiolir yn parhau i weithio.</string>
+    <string name="delete_description">Dileu disgrifiad</string>
+    <string name="quick_action_terrain_descr">Botwm i ddangos neu guddio haenen tir ar y map.</string>
+    <string name="select_distance_route_will_recalc">Dewis y pellter ar ôl hynny bydd y llwybr yn cael ei ailgyfrifo.</string>
+    <string name="profile_backup_failed">Methu â gwneud copi wrth gefn o\'r proffil.</string>
+    <string name="importing_from">Mewnforio data o %1$s</string>
+    <string name="shared_string_nothing_selected">Dim wedi\'i ddewis</string>
+    <string name="replace_all">Amnewid y cyfan</string>
+    <string name="permission_is_required">Mae angen caniatâd i ddefnyddio\'r opsiwn hwn.</string>
+    <string name="logcat_buffer_descr">Gwirio a rhannu logiau manwl o\'r ap</string>
+    <string name="monitoring_min_speed_descr_remark">Sylw: gwiriad cyflymder &gt; 0: Mae\'r rhan fwyaf o sglodion GPS yn adrodd gwerth cyflymder dim ond os yw\'r algorithm yn penderfynu eich bod yn symud, a dim os nad ydych. Felly mae defnyddio\'r gosodiad &gt; 0 yn yr hidlydd hwn mewn ffordd yn defnyddio canfod mudiant y chipset GPS. Ond hyd yn oed os na chaiff ei hidlo yma ar amser cofnodi, rydym yn dal i ddefnyddio\'r nodwedd hon yn ein dadansoddiad GPX i bennu\'r Pellter a gywirwyd, h.y. y gwerth a ddangosir yn y maes hwnnw yw\'r pellter a gofnodwyd wrth symud.</string>
+    <string name="monitoring_min_accuracy_descr">Bydd hyn yn cofnodi pwyntiau a fesurir gyda\'r isafswm cywirdeb yn unig (mewn metrau / troedfeddi, fel yr adroddwyd gan Android ar gyfer eich chipset). Cywirdeb yw agosrwydd mesuriadau i\'r gwir sefyllfa, ac nid yw\'n uniongyrchol gysylltiedig â manwl gywirdeb, sef gwasgariad mesuriadau dro ar ôl tro.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Argymhelliad: Mae\'n anodd rhagweld beth fydd yn cael ei gofnodi a beth na fydd, efallai mai\'r peth gorau fyddai diffodd yr hidlydd hwn.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Sylw: Pe bai GPS wedi bod i ffwrdd yn union cyn recordiad, efallai y bydd cywirdeb y pwynt cyntaf a fesurwyd yn llai, felly yn ein cod efallai y byddwn am aros eiliad neu ddwy cyn cofnodi pwynt (neu gofnodi\'r gorau o 3 phwynt yn olynol, ac ati .), ond nid yw hyn wedi ei weithredu eto.</string>
+    <string name="live_monitoring_adress_descr">Nodwch y cyfeiriad gwe gyda chystrawen y paramedr: lat={0}, lon={1}, timestamp={2}, hdop={3}, height={4}, speed={5}, bearing={6}.</string>
+    <string name="multimedia_photo_play_sound">Sain caead camera</string>
+    <string name="monitoring_min_distance_descr_recommendation">Argymhelliad: Gall gosodiad o 5 metr weithio’n dda i chi os nad oes angen i chi gasglu manylion yn fanylach na hynny, ac nad ydych am gipio data’n benodol tra byddwch yn gorffwys.</string>
+    <string name="osm_authorization_success">Mae\'r awdurdodiad yn llwyddiannus</string>
+    <string name="import_from_file">Mewnforio o ffeil</string>
+    <string name="live_monitoring_descr">Caniatáu rhannu lleoliad presennol gan ddefnyddio recordiad taith.</string>
+    <string name="photo_notes">Nodiadau llun</string>
+    <string name="select_navigation_icon">Lleoli eicon wrth symud</string>
+    <string name="desert_render_descr">Ar gyfer anialwch ac ardaloedd eraill prin eu poblogaeth. Mwy manwl.</string>
+    <string name="new_plugin_added">Ychwanegwyd ategyn newydd</string>
+    <string name="clear_confirmation_msg">Clirio %1$s\?</string>
+    <string name="tts_initialization_error">Methu cychwyn y peiriant testun-i-leferydd.</string>
+    <string name="quick_action_hillshade_descr">Botwm i ddangos neu guddio cysgodlenni ar y map.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Gwell ffyrdd heb balmantu na rhai wedi\'u palmantu ar gyfer llwybro.</string>
+    <string name="shared_string_memory_used_gb_desc">Wedi defnyddio %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Wedi defnyddio %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Wedi defnyddio %1$s kB</string>
+    <string name="routing_attr_prefer_unpaved_name">Gwell ffyrdd heb balmantu</string>
+    <string name="routeInfo_piste_type_name">Math piste</string>
+    <string name="map_look">Golwg map</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Awyrffordd</string>
+    <string name="enter_path_to_folder">Rho\'r llwybr i\'r ffolder</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skitour</string>
+    <string name="rendering_attr_piste_type_downhill_name">Lawr rhiw</string>
+    <string name="language_and_output">Iaith ac allbwn</string>
+    <string name="vehicle_parameters">Paramedrau cerbyd</string>
+    <string name="screen_alerts">Rhybuddion sgrin</string>
+    <string name="route_parameters">Paramedrau llwybr</string>
+    <string name="get_discount_title">Cael %1$d %2$s am %3$s i ffwrdd.</string>
+    <string name="get_discount_first_few_part">%1$s am y %2$s cyntaf</string>
+    <string name="app_mode_campervan">Fan gwersylla (RV)</string>
+    <string name="routeInfo_winter_ice_road_name">Ffyrdd gaeaf a rhew</string>
+    <string name="precision_hdop_and_vdop">Cywirdeb llorweddol: %1$s, fertigol: %2$s</string>
+    <string name="app_mode_personal_transporter">Cludwr personol</string>
+    <string name="shared_string_crash">Damwain</string>
+    <string name="move_maps">Symud mapiau</string>
+    <string name="public_transport_ped_route_title">Mae\'r llwybr ar droed oddeutu %1$s, a gall fod yn gyflymach na thrafnidiaeth gyhoeddus</string>
+    <string name="select_base_profile_dialog_message">Seilia dy broffil personol ar un o\'r proffiliau ap rhagosodedig, mae hyn yn diffinio\'r gosodiad sylfaenol fel gwelededd rhagosodedig teclynnau ac unedau cyflymder a phellter. Dyma\'r proffiliau ap rhagosodedig, ynghyd ag enghreifftiau o broffiliau personol y gellir eu hymestyn i:</string>
+    <string name="files_copied">Wedi copïo %1$d ffeil (%2$s).</string>
+    <string name="files_present">Mae %1$d ffeil (%2$s) yn bresennol yn y lleoliad blaenorol \'%3$s\'.</string>
+    <string name="routing_attr_avoid_footways_name">Osgoi llwybrau troed</string>
+    <string name="use_live_public_transport">Data OsmAnd Live</string>
+    <string name="contour_lines_and_hillshade">Cyfuchliniau a chysgod bryniau</string>
+    <string name="magnetic_bearing_widget_desc">Yr ongl rhwng gogledd magnetig a\'r pwynt targed a welwyd o dy leoliad.</string>
+    <string name="navigation_points">Pwyntiau llywio</string>
+    <string name="calculate_online">Cyfrifo ar-lein</string>
+    <string name="map_markers_bar">Bar marcwyr map</string>
+    <string name="shared_string_predefined">Rhagddiffiniwyd</string>
+    <string name="on_hold">Yn aros</string>
+    <string name="on_pause">Yn oedi</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Ychwanega o leiaf ddau bwynt</string>
+    <string name="height_limit_description">Rhoi uchder y cerbyd, efallai y bydd rhai cyfyngiadau llwybr yn berthnasol ar gyfer cerbydau uchel.</string>
+    <string name="items_added">Eitemau wedi\'u hychwanegu</string>
+    <string name="shared_string_import_complete">Mewnforio wedi ei gwblhau</string>
+    <string name="import_complete_description">Wedi mewnforio\'r holl ddata o\'r %1$s. Defnyddia\'r botymau isod i agor unrhyw ran o\'r ap i\'w reoli.</string>
+    <string name="monitoring_min_accuracy">Isafswm cywirdeb</string>
+    <string name="monitoring_min_distance">Lleiafswm dadleoli</string>
+    <string name="video_notes">Nodiadau fideo</string>
+    <string name="osm_editing">Golygu OSM</string>
+    <string name="shared_string_memory_used_tb_desc">Wedi defnyddio %1$s TB</string>
+    <string name="apply_to_existing_points_descr">Gosod newidiadau i bwyntiau presennol y grŵp neu dim ond i rai newydd\?</string>
+    <string name="add_page">Ychwanegu tudalen</string>
+    <string name="page_number">Tudalen %1$s</string>
+    <string name="apply_to_existing_favorites_descr">Gosod newidiadau i hoff bwyntiau presennol y grŵp neu dim ond i rai newydd\?</string>
+    <string name="apply_to_existing">Gosod i\'r presennol</string>
+    <string name="setting_supported_by_style">Darperir y gosodiad hwn yn ôl arddull map \'%1$s\'</string>
+    <string name="gpx_monitoring_start">Ailddechrau recordio taith</string>
+    <string name="gpx_monitoring_stop">Oedi recordio\'r daith</string>
+    <string name="lang_sco">Scoteg</string>
+    <string name="keep_both">Cadw\'r ddau</string>
+    <string name="list_of_installed_plugins">Ategion wedi\'u gosod</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Lliw y llwybrau yn ôl eu lliw lleol unigol (os yw\'n bresennol ar OpenStreetMap) a symbol tarian heicio.</string>
+    <string name="activity_type_offroad_name">Oddi ar y ffordd</string>
+    <string name="delete_online_routing_engine">Tynnu\'r injan llwybro ar-lein hwn\?</string>
+    <string name="gpx_join_gaps">Uno\'r bylchau</string>
+    <string name="rendering_attr_showLez_description">Dangos Parthau Allyriadau Isel ar y map. Nid yw\'n effeithio ar y llwybro.</string>
+    <string name="rendering_attr_winter_road_name">Ffordd y gaeaf</string>
+    <string name="settings_derived_routing_mode_string">Modd defnyddiwr, yn deillio o: %s</string>
+    <string name="routing_profile_broutrer">BRouter (all-lein)</string>
+    <string name="osmand_default_routing">Llwybro OsmA</string>
+    <string name="files_failed">Methu â chopïo %1$d ffeil (%2$s).</string>
+    <string name="item_deleted">%1$s wedi\'i ddileu</string>
+    <string name="shared_string_bearing">Cyfeiriant</string>
+    <string name="lang_lmo">Lombardeg</string>
+    <string name="complex_routing_descr">Llwybro dau gam ar gyfer llywio ceir.</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="file_import_error">Gwall mewnforio %1$s: %2$s</string>
+    <string name="routing_attr_prefer_unpaved_description">Gwell ffyrdd heb balmantu.</string>
+    <string name="update_all_maps">Diweddaru pob map</string>
+    <string name="update_all_maps_q">Diweddaru pob (%1$d) map\?</string>
+    <string name="routing_attr_avoid_bus_description">Yn osgoi bysiau a bysiau troli</string>
+    <string name="routing_attr_avoid_share_taxi_name">Dim tacsi rhannu</string>
+    <string name="routing_attr_carriage_restrictions_name">Cyfyngiadau cerbyd</string>
+    <string name="failed_loading_predefined_engines">Methu llwytho\'r rhestr o dempledi rhagddiffiniedig.
+\nGwiriwch eich cysylltiad rhyngrwyd.</string>
+    <string name="troubleshooting">Datrys problemau</string>
+    <string name="use_login_password">Defnyddio enw defnyddiwr a chyfrinair</string>
+    <string name="open_street_map_login_mode">Mewngofnodwch i lwytho i fyny newidiadau newydd neu newidiadau wedi\'u haddasu yn gyntaf.
+\n
+\nDefnyddiwch y dull OAuth, neu\'ch enw defnyddiwr a chyfrinair OSM.</string>
+    <string name="routing_attr_avoid_footways_description">Osgoi llwybrau troed</string>
+    <string name="start_finish_icons">Eiconau cychwyn a gorffen</string>
+    <string name="one_point_error">Ychwanega o leiaf ddau bwynt.</string>
+    <string name="shared_string_is_saved">wedi\'i gadw</string>
+    <string name="street_level_imagery">Delweddau ar lefel stryd</string>
+    <string name="next_segment">Y segment nesaf</string>
+    <string name="route_between_points_next_segment_button_desc">Dim ond y segment nesaf fydd yn cael ei ailgyfrifo gan ddefnyddio\'r proffil a ddewiswyd.</string>
+    <string name="turn_screen_on_wake_time_descr">Dewis y terfyn amser sgrin ar ôl deffro. ( \"%1$s\" yn gosod dim goramser.)</string>
+    <string name="system_screen_timeout_descr">Yn diffodd y sgrin yn unol â goramser sgrin y system.</string>
+    <string name="lang_war">Waray</string>
+    <string name="developer_plugin">Ategyn Datblygwr</string>
+    <string name="recalculate_route_in_deviation">Ailgyfrifo\'r llwybr rhag ofn y bydd gwyriad</string>
+    <string name="clear_recorded_data_warning">Clirio data a gofnodwyd\?</string>
+    <string name="hillshade_description">Dangos cysgod bryn ar fap gan ddefnyddio arlliwiau tywyll i ddangos llethrau, copaon ac iseldiroedd.</string>
+    <string name="import_rendering_file">Mewnforio ffeil rendro</string>
+    <string name="sunrise_at">Codiad haul am %1$s</string>
+    <string name="monitoring_min_speed">Isafswm cyflymder</string>
+    <string name="import_routing_file">Mewnforio ffeil llwybro</string>
+    <string name="multimedia_notes_view_descr">Mae eich nodiadau OSM yn %1$s.</string>
+    <string name="reset_confirmation_descr">Mae tapio %1$s yn dileu eich holl newidiadau.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Sgil effeithiau: Nid yw cyfnodau o orffwys yn cael eu cofnodi o gwbl neu o un pwynt yr un yn unig. Mae’n bosibl y bydd symudiadau bach (byd go iawn) (e.e. i’r ochr, i nodi troad posibl ar eich taith) yn cael eu hidlo allan. Mae eich ffeil yn cynnwys llai o wybodaeth ar gyfer ôl-brosesu, ac mae ganddi ystadegau gwaeth trwy hidlo pwyntiau sy\'n amlwg yn ddiangen ar amser cofnodi, tra\'n cadw o bosibl arteffactau a achosir gan dderbyniad gwael neu effeithiau chipset GPS.</string>
+    <string name="shared_string_mode">Modd</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Gelli newid modd trwy dapio ar y teclyn.</string>
+    <string name="map_widget_time_to_intermediate">Amser i ganolradd</string>
+    <string name="map_widget_distance_to_intermediate">Pellter i ganolradd</string>
+    <string name="radius_ruler_mode_desc">Gelli newid modd mesurydd Radius trwy dapio ar y teclyn.</string>
+    <string name="explore_plans">Archwilio Cynlluniau</string>
+    <string name="radius_rules_widget_desc">Mae teclyn mesur radiws yn helpu i bennu\'r radiws o amgylch y pwynt a ddewiswyd ar y map trwy ddangos cylchoedd pellter ar y map.</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Anodd</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Lliw yn ôl cysylltiad rhwydwaith.</string>
+    <string name="login_open_street_map_org">Mewngofnodi i OpenStreetMap.org</string>
+    <string name="shared_string_local_maps">Mapiau lleol</string>
+    <string name="osm_edit_logout_success">Wedi allgofnodi</string>
+    <string name="perform_oauth_authorization">Mewngofnodi trwy OAuth</string>
+    <string name="use_fast_recalculation_desc">Yn ail-gyfrifo rhan gychwynnol y llwybr yn unig, sy\'n ddefnyddiol ar gyfer teithiau hir.</string>
+    <string name="osm_live_payment_subscription_management_hw">Codir tâl o\'ch cyfrif AppGallery wrth gadarnhau\'r pryniant.
+\n
+\nMae\'n adnewyddu oni bai ei fod wedi\'i ddiddymu cyn y cyfnod adnewyddu a ddewiswyd.
+\n
+\nRheoli neu ddiddymu dy danysgrifiadau a dy osodiadau AppGallery ar unrhyw adeg.</string>
+    <string name="all_previous_segments">Pob segment blaenorol</string>
+    <string name="all_next_segments">Pob segment dilynol</string>
+    <string name="gpx_split_interval_none_descr">Dewis yr opsiwn hollti a ddymunir: yn ôl amser neu bellter.</string>
+    <string name="shared_string_night_map">Map nos</string>
+    <string name="slope_description">Mae llethr yn defnyddio lliwiau i ddelweddu serthrwydd y dirwedd.</string>
+    <string name="shared_string_angle_param">Ongl: %s°</string>
+    <string name="recalc_angle_dialog_descr">Bydd segment syth ychwanegol rhwng fy lleoliad a\'r llwybr a gyfrifwyd yn cael ei ddangos nes bod y llwybr wedi\'i ailgyfrifo</string>
+    <string name="recalc_angle_dialog_title">Isafswm ongl rhwng fy lleoliad a\'r llwybr</string>
+    <string name="listed_exist">Rhestru %1$s, yn bodoli eisoes yn OsmAnd.</string>
+    <string name="replace_all_desc">Bydd eitemau o\'r ffeil yn cymryd lle\'r eitemau cyfredol</string>
+    <string name="keep_both_desc">Bydd eitemau a fewnforiwyd yn cael eu hychwanegu gyda rhagddodiad</string>
+    <string name="route_recalculation_dist_title">Y pellter lleiaf er mwyn ailgyfrifo\'r llwybr</string>
+    <string name="route_recalculation_dist_descr">Bydd y llwybr yn cael ei ailgyfrif os yw\'r pellter i\'r llwybr yn hirach na\'r paramedr penodedig</string>
+    <string name="copy_coordinates">Copïo cyfesurynnau</string>
+    <string name="add_new_custom_category_button_promo">Ychwanegwch gategori cyfaddas newydd trwy ddewis un neu fwy o gategorïau.</string>
+    <string name="multimedia_rec_split_title">Holltiad recordiwr</string>
+    <string name="suggested_maps">Mapiau a awgrymir</string>
+    <string name="suggested_maps_descr">Mae angen y mapiau hyn ar gyfer yr ategyn.</string>
+    <string name="mgrs_format_descr">Mae OsmAnd yn defnyddio MGRS, sy\'n debyg i fformat NATO UTM.</string>
+    <string name="navigate_point_format_swiss_grid">Grid y Swistir (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Grid y Swistir (CH1903+)</string>
+    <string name="coordinates_format_info">Bydd y fformat a ddewiswyd yn cael ei osod drwy\'r ap.</string>
+    <string name="pref_selected_by_default_for_profiles">Mae\'r gosodiad hwn wedi\'i ddewis yn ragosodedig ar gyfer proffiliau: %s</string>
+    <string name="wake_time">Goramser ar ôl deffro</string>
+    <string name="turn_screen_on">Troi\'r sgrin ymlaen</string>
+    <string name="map_during_navigation_info">Map wrth lywio</string>
+    <string name="app_mode_shuttle_bus">Bws gwennol</string>
+    <string name="clear_osm_token">Clirio tocyn OAuth OpenStreetMap</string>
+    <string name="perform_oauth_authorization_description">Mewngofnodi gydag OAuth i ddefnyddio nodweddion osmedit</string>
+    <string name="use_native_pt_desc">Newid i gyfrifio llwybr Trafnidiaeth Gyhoeddus Java (diogel).</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Anniffiniedig</string>
+    <string name="promo_subscription">Tanysgrifiad hyrwyddol</string>
+    <string name="release_4_0_beta">• Ychwanegwyd opsiwn i lawrlwytho llinellau cyfuchlin mewn troedfeddi
+\n
+\n • Tirwedd Cynllunio Llwybrau: tabiau wedi\'u hychwanegu i newid rhwng pwyntiau neu graffiau
+\n
+\n • Symudwyd diweddariadau OsmAnd Live i \"Lawrlwythiadau &gt; Diweddariadau\"
+\n
+\n • Bellach gall traciau gael eu lliwio yn ôl uchder, cyflymder neu oledd.
+\n
+\n • Opsiwn ychwanegol i newid golwg llinell y llwybr.
+\n
+\n • Diweddarwyd \"Taith cofnodi\" deialog
+\n
+\n</string>
+    <string name="analyze_by_intervals">Dadansoddi cyfyngau hollt</string>
+    <string name="system_default_theme">Rhagosodiad y system</string>
+    <string name="access_hint_enter_address">Rho\'r cyfeiriad</string>
+    <string name="threshold_distance">Pellter trothwy</string>
+    <string name="route_between_points_desc">Dewis sut i gysylltu\'r pwyntiau, trwy linell syth, neu cyfrifwch lwybr rhyngddynt fel y nodir isod.</string>
+    <string name="app_mode_wheelchair_forward">Cadair olwyn ymlaen</string>
+    <string name="app_mode_enduro_motorcycle">Beic modur Enduro</string>
+    <string name="quick_action_showhide_mapillary_descr">Togl i ddangos neu guddio\'r haen Mapillary ar y map.</string>
+    <string name="vessel_width_limit_description">Gosod lled y llong i osgoi pontydd cul</string>
+    <string name="keep_active">Cadw\'n fyw</string>
+    <string name="back_to_editing">Yn ôl i olygu</string>
+    <string name="additional_actions_descr">Cyrchwch y gweithredoedd hyn trwy dapio\'r botwm “%1$s”.</string>
+    <string name="main_actions">Prif weithredoedd</string>
+    <string name="main_actions_descr">Dim ond pedwar botwm sydd ganddo.</string>
+    <string name="reorder_or_hide_from">Ad-drefnu neu guddio eitemau o\'r %1$s.</string>
+    <string name="shared_string_min">Lleiaf</string>
+    <string name="accessibility_mode_disabled">Mae modd hygyrchedd wedi\'i ddiffodd yn eich system Android.</string>
+    <string name="rearrange_categories">Aildrefnu categorïau</string>
+    <string name="shared_string_rendering_style">Arddull rendro</string>
+    <string name="save_heading">Cynnwys y pennawd</string>
+    <string name="navigate_point_format_olc">Cod Lleoliad Agored</string>
+    <string name="turn_screen_on_sensor">Defnyddio synhwyrydd agosrwydd</string>
+    <string name="turn_screen_on_sensor_descr">Bydd chwifio dy law ar draws y sgrin yn ei throi ymlaen.</string>
+    <string name="update_frequency">Amlder diweddaru</string>
+    <string name="use_native_pt">Datblygiad Cludiant Cyhoeddus Brodorol</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="selected_profile">Proffil dethol</string>
+    <string name="hide_compass_ruler">Cuddio mesurydd cwmpawd</string>
+    <string name="collected_data">Data a gasglwyd</string>
+    <string name="backup_pause_all">Oedi\'r cyfan</string>
+    <string name="tts_title">TTS</string>
 </resources>
