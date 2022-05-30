@@ -1,5 +1,10 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -10,11 +15,6 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.MapUtils;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
-
 public class RadiusRulerWidget extends TextInfoWidget {
 
 	private static final String DASH = "—";
@@ -22,7 +22,7 @@ public class RadiusRulerWidget extends TextInfoWidget {
 	private RadiusRulerMode cachedRadiusRulerMode;
 
 	public RadiusRulerWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, RADIUS_RULER);
 		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
 
 		updateIcons();

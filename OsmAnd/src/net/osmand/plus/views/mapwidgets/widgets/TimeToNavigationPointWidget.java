@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
@@ -12,22 +15,23 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 public class TimeToNavigationPointWidget extends TextInfoWidget {
 
 	private static final long UPDATE_INTERVAL_SECONDS = 30;
 
 	private final RoutingHelper routingHelper;
-	private final boolean intermediate;
+	private final TimeToNavigationPointWidgetState widgetState;
 	private final OsmandPreference<Boolean> arrivalTimeOtherwiseTimeToGoPref;
 
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
 	private int cachedLeftSeconds = 0;
 
 	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState) {
-		super(mapActivity, widgetState);
+		super(mapActivity, widgetState.isIntermediate() ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION);
+		this.widgetState = widgetState;
 		this.routingHelper = app.getRoutingHelper();
-		this.intermediate = widgetState.isIntermediate();
 		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();
 		this.cachedArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.get();
 
@@ -42,12 +46,18 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 	}
 
 	public boolean isIntermediate() {
-		return intermediate;
+		return widgetState.isIntermediate();
 	}
 
 	@NonNull
 	public OsmandPreference<Boolean> getPreference() {
 		return arrivalTimeOtherwiseTimeToGoPref;
+	}
+
+	@Nullable
+	@Override
+	public WidgetState getWidgetState() {
+		return widgetState;
 	}
 
 	@Override
@@ -62,7 +72,7 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 		}
 
 		if (routingHelper.isRouteCalculated()) {
-			leftSeconds = intermediate ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
+			leftSeconds = widgetState.isIntermediate() ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
 			boolean updateIntervalPassed = Math.abs(leftSeconds - cachedLeftSeconds) > UPDATE_INTERVAL_SECONDS;
 			if (leftSeconds != 0 && (updateIntervalPassed || timeModeUpdated)) {
 				cachedLeftSeconds = leftSeconds;
@@ -107,6 +117,6 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 
 	@NonNull
 	private TimeToNavigationPointState getCurrentState() {
-		return TimeToNavigationPointState.getState(intermediate, arrivalTimeOtherwiseTimeToGoPref.get());
+		return TimeToNavigationPointState.getState(widgetState.isIntermediate(), arrivalTimeOtherwiseTimeToGoPref.get());
 	}
 }

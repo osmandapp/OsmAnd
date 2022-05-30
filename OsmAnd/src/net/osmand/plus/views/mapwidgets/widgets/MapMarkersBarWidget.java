@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -56,7 +58,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	public MapMarkersBarWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, MARKERS_TOP_BAR);
 
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);

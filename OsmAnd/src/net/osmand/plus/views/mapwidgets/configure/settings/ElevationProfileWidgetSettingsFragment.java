@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
@@ -28,8 +26,8 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 
 	@NonNull
 	@Override
-	public WidgetParams getWidget() {
-		return WidgetParams.ELEVATION_PROFILE;
+	public WidgetType getWidget() {
+		return WidgetType.ELEVATION_PROFILE;
 	}
 
 	@Override

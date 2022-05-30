@@ -41,7 +41,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
@@ -190,7 +190,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			}
 
 			@Override
-			public void showWidgetInfo(@NonNull WidgetParams widget) {
+			public void showWidgetInfo(@NonNull WidgetType widget) {
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				if (fragmentManager != null) {
 					AddWidgetFragment.showWidgetDialog(fragmentManager, ReorderWidgetsFragment.this,
@@ -352,16 +352,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				continue;
 			}
 
-			WidgetParams widgetParams = WidgetParams.getById(widgetInfo.key);
-			boolean defaultWidget = widgetParams != null;
+			WidgetType widgetType = WidgetType.getById(widgetInfo.key);
+			boolean defaultWidget = widgetType != null;
 			if (defaultWidget) {
-				WidgetGroup group = widgetParams.group;
+				WidgetGroup group = widgetType.group;
 				if (group != null && !availableGroups.contains(group)) {
 					availableGroups.add(group);
 					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));
 				} else if (group == null) {
 					AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
-					defaultWidgetsItems.put(widgetParams.ordinal(), new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
+					defaultWidgetsItems.put(widgetType.ordinal(), new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
 				}
 			} else {
 				AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);

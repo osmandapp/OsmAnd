@@ -35,7 +35,7 @@ public enum WidgetsPanel {
 	private static final List<String> ORIGINAL_BOTTOM_ORDER = new ArrayList<>();
 
 	static {
-		for (WidgetParams widget : WidgetParams.values()) {
+		for (WidgetType widget : WidgetType.values()) {
 			String id = widget.id;
 			WidgetsPanel defaultPanel = widget.defaultPanel;
 			if (defaultPanel == LEFT) {

@@ -65,7 +65,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
@@ -637,7 +637,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		return null;
 	}
 
@@ -887,9 +887,9 @@ public abstract class OsmandPlugin {
 	}
 
 	@Nullable
-	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
+	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, params);
+			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType);
 			if (widget != null) {
 				return widget;
 			}

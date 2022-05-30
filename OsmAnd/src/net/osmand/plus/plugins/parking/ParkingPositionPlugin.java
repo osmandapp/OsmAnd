@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.parking;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PARKING_POSITION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PARKING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.PARKING;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,7 +38,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -396,8 +396,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
-		if (params == PARKING) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		if (widgetType == PARKING) {
 			return new ParkingMapWidget(this, mapActivity);
 		}
 		return null;
@@ -407,7 +407,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		MapWidget widget = createMapWidgetForParams(mapActivity, PARKING);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(PARKING, widget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget));
 	}
 
 	@Override

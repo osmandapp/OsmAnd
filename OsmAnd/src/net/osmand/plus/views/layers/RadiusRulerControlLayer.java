@@ -40,7 +40,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 public class RadiusRulerControlLayer extends OsmandMapLayer {
 

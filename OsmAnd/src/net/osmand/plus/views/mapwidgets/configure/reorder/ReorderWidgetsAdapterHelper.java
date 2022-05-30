@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.getDuplicateWidgetId;
+import static net.osmand.plus.views.mapwidgets.WidgetType.getDuplicateWidgetId;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
@@ -57,8 +57,8 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	private void updateAvailableWidget(@NonNull AddedWidgetUiInfo addedWidgetUiInfo) {
-		WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-		WidgetGroup widgetGroup = widgetParams != null ? widgetParams.group : null;
+		WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
+		WidgetGroup widgetGroup = widgetType != null ? widgetType.group : null;
 		if (widgetGroup != null) {
 			boolean addGroupItem = areAllGroupWidgetsAdded(widgetGroup);
 			if (addGroupItem) {
@@ -354,9 +354,9 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	private void removeAddedItemFromAvailable(@NonNull String widgetId) {
-		WidgetParams widgetParams = WidgetParams.getById(widgetId);
-		if (widgetParams != null && widgetParams.group != null) {
-			WidgetGroup group = widgetParams.group;
+		WidgetType widgetType = WidgetType.getById(widgetId);
+		if (widgetType != null && widgetType.group != null) {
+			WidgetGroup group = widgetType.group;
 			if (areAllGroupWidgetsAdded(group)) {
 				int indexToRemove = getIndexOfAvailableGroup(group);
 				if (indexToRemove != -1) {
@@ -388,8 +388,8 @@ public class ReorderWidgetsAdapterHelper {
 			ListItem listItem = items.get(i);
 			if (listItem.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
-				WidgetParams widgetParams = WidgetParams.getById(addedWidgetUiInfo.key);
-				if (widgetParams != null && group == widgetParams.group) {
+				WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
+				if (widgetType != null && group == widgetType.group) {
 					addedGroupWidgetsCount++;
 				}
 			}

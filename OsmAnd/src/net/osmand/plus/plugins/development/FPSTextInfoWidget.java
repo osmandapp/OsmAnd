@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.FPS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +15,7 @@ public class FPSTextInfoWidget extends TextInfoWidget {
 	private final OsmandMapTileView mapView;
 
 	public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, FPS);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(FPS);

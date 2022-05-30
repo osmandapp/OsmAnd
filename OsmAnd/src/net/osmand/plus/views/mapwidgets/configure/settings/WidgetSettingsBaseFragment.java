@@ -29,7 +29,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 
 public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
@@ -46,7 +46,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	protected View view;
 
 	@NonNull
-	public abstract WidgetParams getWidget();
+	public abstract WidgetType getWidget();
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupToolbar() {
-		WidgetParams widget = getWidget();
+		WidgetType widget = getWidget();
 
 		View closeButton = view.findViewById(R.id.close_button);
 		closeButton.setOnClickListener(v -> dismiss());

@@ -7,7 +7,7 @@ import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class WidgetDataHolder {
 	private final WidgetsPanel widgetsPanel;
 
 	private WidgetGroup widgetGroup;
-	private WidgetParams widgetParams;
+	private WidgetType widgetType;
 
 	private ConnectedApp connectedApp;
 	private String aidlWidgetId;
@@ -54,7 +54,7 @@ public class WidgetDataHolder {
 				aidlWidgetData = connectedApp.getWidgets().get(sourceId);
 			}
 		} else {
-			widgetParams = WidgetParams.getById(bundle.getString(KEY_WIDGET_ID));
+			widgetType = WidgetType.getById(bundle.getString(KEY_WIDGET_ID));
 		}
 	}
 
@@ -77,8 +77,8 @@ public class WidgetDataHolder {
 	public String getTitle() {
 		if (widgetGroup != null) {
 			return getString(widgetGroup.titleId);
-		} else if (widgetParams != null) {
-			return getString(widgetParams.titleId);
+		} else if (widgetType != null) {
+			return getString(widgetType.titleId);
 		} else if (aidlWidgetData != null) {
 			return aidlWidgetData.getMenuTitle();
 		}
@@ -96,8 +96,8 @@ public class WidgetDataHolder {
 	public int getIconId(boolean nightMode) {
 		if (widgetGroup != null) {
 			return widgetGroup.getIconId(nightMode);
-		} else if (widgetParams != null) {
-			return widgetParams.getIconId(nightMode);
+		} else if (widgetType != null) {
+			return widgetType.getIconId(nightMode);
 		} else if (aidlWidgetData != null) {
 			String iconName = aidlWidgetData.getMenuIconName();
 			return AndroidUtils.getDrawableId(app, iconName);
@@ -109,8 +109,8 @@ public class WidgetDataHolder {
 	public String getDescription() {
 		if (widgetGroup != null && widgetGroup.descId != 0) {
 			return getString(widgetGroup.descId);
-		} else if (widgetParams != null && widgetParams.descId != 0) {
-			return getString(widgetParams.descId);
+		} else if (widgetType != null && widgetType.descId != 0) {
+			return getString(widgetType.descId);
 		} else if (connectedApp != null) {
 			return connectedApp.getName();
 		}
@@ -118,11 +118,11 @@ public class WidgetDataHolder {
 	}
 
 	@Nullable
-	public List<WidgetParams> getWidgetsList() {
+	public List<WidgetType> getWidgetsList() {
 		if (widgetGroup != null) {
 			return widgetGroup.getWidgets();
-		} else if (widgetParams != null) {
-			return Collections.singletonList(widgetParams);
+		} else if (widgetType != null) {
+			return Collections.singletonList(widgetType);
 		}
 		return null;
 	}
@@ -136,8 +136,8 @@ public class WidgetDataHolder {
 	public String getSecondaryDescription() {
 		if (widgetGroup != null) {
 			return widgetGroup.getSecondaryDescriptionId(app);
-		} else if (widgetParams != null) {
-			return widgetParams.getSecondaryDescriptionId(app);
+		} else if (widgetType != null) {
+			return widgetType.getSecondaryDescriptionId(app);
 		}
 		return null;
 	}
@@ -146,8 +146,8 @@ public class WidgetDataHolder {
 	public int getSecondaryIconId() {
 		if (widgetGroup != null) {
 			return widgetGroup.getSecondaryIconId();
-		} else if (widgetParams != null) {
-			return widgetParams.getSecondaryIconId();
+		} else if (widgetType != null) {
+			return widgetType.getSecondaryIconId();
 		}
 		return 0;
 	}
@@ -156,8 +156,8 @@ public class WidgetDataHolder {
 	public int getDocsUrl() {
 		if (widgetGroup != null) {
 			return widgetGroup.docsUrlId;
-		} else if (widgetParams != null) {
-			return widgetParams.docsUrlId;
+		} else if (widgetType != null) {
+			return widgetType.docsUrlId;
 		}
 		return 0;
 	}
@@ -166,8 +166,8 @@ public class WidgetDataHolder {
 		outState.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		if (widgetGroup != null) {
 			outState.putString(KEY_GROUP_NAME, widgetGroup.name());
-		} else if (widgetParams != null) {
-			outState.putString(KEY_WIDGET_ID, widgetParams.id);
+		} else if (widgetType != null) {
+			outState.putString(KEY_WIDGET_ID, widgetType.id);
 		} else {
 			outState.putString(KEY_WIDGET_ID, aidlWidgetId);
 			outState.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);

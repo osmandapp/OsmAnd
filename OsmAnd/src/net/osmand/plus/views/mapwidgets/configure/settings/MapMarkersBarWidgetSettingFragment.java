@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
@@ -23,8 +23,8 @@ public class MapMarkersBarWidgetSettingFragment extends WidgetSettingsBaseFragme
 
 	@NonNull
 	@Override
-	public WidgetParams getWidget() {
-		return WidgetParams.MARKERS_TOP_BAR;
+	public WidgetType getWidget() {
+		return WidgetType.MARKERS_TOP_BAR;
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package net.osmand.plus.views.mapwidgets.configure.panel;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.getDuplicateWidgetId;
+import static net.osmand.plus.views.mapwidgets.WidgetType.getDuplicateWidgetId;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -47,7 +47,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -269,13 +269,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	private MapWidgetInfo createDuplicateWidget(@NonNull String widgetId, @NonNull WidgetsPanel panel) {
-		WidgetParams params = WidgetParams.getById(widgetId);
-		if (params != null) {
+		WidgetType widgetType = WidgetType.getById(widgetId);
+		if (widgetType != null) {
 			String id = widgetId.contains(DELIMITER) ? widgetId : getDuplicateWidgetId(widgetId);
-			MapWidget widget = widgetsFactory.createMapWidget(id, params);
+			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
 				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
-				return widgetRegistry.createCustomWidget(id, widget, params, panel);
+				return widgetRegistry.createCustomWidget(id, widget, widgetType, panel);
 			}
 		}
 		return null;

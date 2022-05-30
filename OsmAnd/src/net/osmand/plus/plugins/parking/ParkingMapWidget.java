@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.parking;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PARKING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.PARKING;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +27,7 @@ public class ParkingMapWidget extends TextInfoWidget {
 	private int cachedMeters = 0;
 
 	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, PARKING);
 		this.plugin = plugin;
 
 		setText(null, null);

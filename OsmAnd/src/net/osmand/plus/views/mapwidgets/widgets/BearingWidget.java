@@ -1,6 +1,13 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.TRUE_BEARING;
+
 import android.hardware.GeomagneticField;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -10,17 +17,10 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType.TRUE_BEARING;
 
 public class BearingWidget extends TextInfoWidget {
 
@@ -33,13 +33,13 @@ public class BearingWidget extends TextInfoWidget {
 	private int cachedBearing;
 
 	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType) {
-		super(mapActivity);
+		super(mapActivity, bearingType.widgetType);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 
 		setText(null, null);
-		setIcons(bearingType.widget);
-		setContentTitle(bearingType.widget.titleId);
+		setIcons(bearingType.widgetType);
+		setContentTitle(bearingType.widgetType.titleId);
 	}
 
 	@Override
@@ -144,14 +144,14 @@ public class BearingWidget extends TextInfoWidget {
 
 	public enum BearingType {
 
-		RELATIVE_BEARING(WidgetParams.RELATIVE_BEARING),
-		MAGNETIC_BEARING(WidgetParams.MAGNETIC_BEARING),
-		TRUE_BEARING(WidgetParams.TRUE_BEARING);
+		RELATIVE_BEARING(WidgetType.RELATIVE_BEARING),
+		MAGNETIC_BEARING(WidgetType.MAGNETIC_BEARING),
+		TRUE_BEARING(WidgetType.TRUE_BEARING);
 
-		public final WidgetParams widget;
+		public final WidgetType widgetType;
 
-		BearingType(@NonNull WidgetParams widget) {
-			this.widget = widget;
+		BearingType(@NonNull WidgetType widgetType) {
+			this.widgetType = widgetType;
 		}
 	}
 }

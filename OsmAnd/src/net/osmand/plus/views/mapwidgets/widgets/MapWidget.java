@@ -23,6 +23,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.List;
@@ -35,21 +36,18 @@ public abstract class MapWidget {
 	protected final UiUtilities iconsCache;
 	protected final OsmAndLocationProvider locationProvider;
 	protected final RoutingHelper routingHelper;
-	protected final WidgetState widgetState;
+
+	protected final WidgetType widgetType;
 
 	private boolean nightMode;
 
 	protected final View view;
 
-	public MapWidget(@NonNull MapActivity mapActivity) {
-		this(mapActivity, null);
-	}
-
-	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetState widgetState) {
+	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
-		this.widgetState = widgetState;
+		this.widgetType = widgetType;
 		this.iconsCache = app.getUIUtilities();
 		this.locationProvider = app.getLocationProvider();
 		this.routingHelper = app.getRoutingHelper();
@@ -85,9 +83,14 @@ public abstract class MapWidget {
 		return nightMode;
 	}
 
-	@NonNull
+	@Nullable
 	public WidgetState getWidgetState() {
-		return widgetState;
+		return null;
+	}
+
+	@Nullable
+	public WidgetType getWidgetType() {
+		return widgetType;
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
