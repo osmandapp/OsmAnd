@@ -260,12 +260,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
 			LatLon location = entry.getKey();
 			AvoidRoadInfo road = entry.getValue();
-			if (road != null && contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
-				AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
-				if (object.id == road.id) {
-					continue;
-				}
-			}
 			Bitmap bitmap = getMergedBitmap(road != null);
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			int x = MapUtils.get31TileNumberX(location.getLongitude());
