@@ -115,7 +115,7 @@
     <string name="shared_string_live">Live</string>
     <string name="shared_string_bot">Bot</string>
     <string name="get_telegram_title">Registratie in Telegram</string>
-    <string name="get_telegram_account_first">U hebt een een Telegram account nodig om uw locatie te delen.</string>
+    <string name="get_telegram_account_first">U hebt een Telegram account nodig om uw locatie te delen.</string>
     <string name="get_telegram_description_continue">Installeer Telegram aub en stel een account in.</string>
     <string name="get_telegram_after_creating_account">Dan kunt u deze app gebruiken.</string>
     <string name="already_registered_in_telegram">U hebt een geregistreerd Telegram account en telefoonnummer nodig</string>
@@ -158,7 +158,7 @@
     <string name="shared_string_search">Zoek</string>
     <string name="shared_string_appearance">Uiterlijk</string>
     <string name="time_on_the_move">Tijd in beweging</string>
-    <string name="background_work">Achtergondactiviteit</string>
+    <string name="background_work">Achtergrondactiviteit</string>
     <string name="time_ago">geleden</string>
     <string name="osmand_connect">Verbind met OsmAnd</string>
     <string name="expire_at">Verloopt op</string>
@@ -166,7 +166,7 @@
     <string name="shared_string_off">Uit</string>
     <string name="set_time_description">Stel de tijd in waarop uw contacten en groepen uw locatie kunnen zien.</string>
     <string name="set_time">Stel tijd in</string>
-    <string name="initialization">Initialiseer</string>
+    <string name="initialization">Aan het opstarten</string>
     <string name="location_service_no_gps_available">Selecteer de locatie provider waarmee u uw locatie deelt.</string>
     <string name="osmand_service">Achtergrond modus</string>
     <string name="osmand_service_descr">OsmAnd tracker loopt in de achtergrond met uitgeschakeld scherm.</string>
@@ -180,7 +180,7 @@
     <string name="show_users_on_map">Toon gebruikers op de kaart</string>
     <string name="active_chats">Actieve chats</string>
     <string name="shared_string_authorization">Autorisatie</string>
-    <string name="shared_string_authorization_descr">Vul a.u.b. uw Telegram telefoon nummer in in internationaal formaat</string>
+    <string name="shared_string_authorization_descr">Vul a.u.b. uw Telegram telefoonnummer in volgens internationale notatie</string>
     <string name="shared_string_welcome">Welkom</string>
     <string name="yard">yard</string>
     <string name="foot">voet</string>
@@ -207,7 +207,7 @@
     <string name="si_mi_meters">Mijl/meter</string>
     <string name="shared_string_hour_short">u</string>
     <string name="shared_string_minute_short">min</string>
-    <string name="shared_string_second_short">sec</string>
+    <string name="shared_string_second_short">s</string>
     <string name="welcome_descr">Met <b>OsmAnd Tracker</b> kunt u uw locatie delen en die van anderen bekijken.<br/>
         <br/>The app gebruikt de Telegram API, daarom hebt u een Telegram account nodig.</string>
     <string name="my_location">Mijn locatie</string>
