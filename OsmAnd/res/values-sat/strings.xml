@@ -125,7 +125,7 @@
     <string name="position_on_map_bottom">ᱞᱟᱛᱟᱨ</string>
     <string name="search_address_top_text">ᱴᱷᱤᱠᱟᱹᱬᱟ</string>
     <string name="poi_action_delete">ᱢᱮᱴᱟᱣ ᱢᱮ</string>
-    <string name="poi_dialog_opening_hours">ᱡᱷᱤᱡ ᱢᱮ</string>
+    <string name="poi_dialog_opening_hours">ᱡᱷᱤᱡᱽ ᱜᱮᱭᱟ</string>
     <string name="shared_string_get">ᱧᱟᱢ ᱢᱮ</string>
     <string name="user_hates_app_get_feedback">ᱞᱟᱹᱭ ᱟᱞᱮ ᱢᱮ ᱪᱮᱫᱟᱜᱽ᱾</string>
     <string name="tab_title_basic">ᱥᱟᱫᱷᱟᱨᱚᱱ</string>
@@ -789,4 +789,12 @@
     <string name="app_mode_bicycle">ᱥᱟᱭᱠᱤᱞ</string>
     <string name="start_editing">ᱥᱟᱯᱲᱟᱣ ᱮᱛᱚᱦᱚᱵᱽ ᱢᱮ</string>
     <string name="shared_string_from">ᱠᱷᱚᱱ</string>
+    <string name="shared_string_qr_code">QR ᱠᱳᱰ</string>
+    <string name="shared_string_my_location">ᱤᱧᱭᱟᱹᱜ ᱴᱷᱟᱣ</string>
+    <string name="shared_string_collapse">ᱵᱷᱤᱸᱫᱟᱹᱲ</string>
+    <string name="my_location">ᱤᱧᱭᱟᱹᱜ ᱴᱷᱟᱣ</string>
+    <string name="shared_string_is_open_24_7">᱒᱔/᱗ ᱡᱷᱮᱡᱽ ᱜᱮᱭᱟ</string>
+    <string name="search_position_current_location_found">ᱤᱧᱭᱟᱹᱜ ᱴᱷᱟᱣ (ᱧᱟᱢᱠᱟᱱᱟ)</string>
+    <string name="shared_string_is_open">ᱱᱤᱛᱚᱜ ᱡᱷᱮᱡᱽ ᱜᱮᱭᱟ</string>
+    <string name="search_my_location">ᱤᱧᱭᱟᱹᱜ ᱴᱷᱟᱣ ᱧᱟᱢ ᱢᱮ</string>
 </resources>
