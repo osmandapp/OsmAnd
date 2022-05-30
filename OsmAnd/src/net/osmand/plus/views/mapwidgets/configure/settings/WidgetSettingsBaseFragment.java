@@ -34,11 +34,13 @@ import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChan
 
 public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
-	private static final String KEY_APP_MODE = "app_mode";
+	public static final String KEY_APP_MODE = "app_mode";
+	public static final String KEY_WIDGET_ID = "widget_id";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected ApplicationMode appMode;
+	protected String widgetId;
 	protected boolean nightMode;
 
 	protected View view;
@@ -62,6 +64,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	}
 
 	protected void initParams(@NonNull Bundle bundle) {
+		widgetId = bundle.getString(KEY_WIDGET_ID);
 		appMode = ApplicationMode.valueOfStringKey(bundle.getString(KEY_APP_MODE), settings.getApplicationMode());
 	}
 
@@ -162,18 +165,16 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		return activity != null ? ((MapActivity) activity) : null;
 	}
 
-	public static void showFragment(@NonNull FragmentManager fragmentManager,
+	public static void showFragment(@NonNull FragmentManager manager,
+	                                @NonNull Bundle args,
 	                                @Nullable Fragment target,
-	                                @NonNull ApplicationMode appMode,
 	                                @NonNull WidgetSettingsBaseFragment fragment) {
 		String tag = fragment.getClass().getSimpleName();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
-			Bundle args = new Bundle();
-			args.putString(KEY_APP_MODE, appMode.getStringKey());
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
 			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
 
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(tag)
 					.commitAllowingStateLoss();

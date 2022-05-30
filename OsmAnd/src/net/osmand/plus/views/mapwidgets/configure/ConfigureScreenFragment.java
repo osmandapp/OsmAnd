@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,7 +43,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsVisibilityListener;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -49,11 +52,10 @@ import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-
-public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsVisibilityListener {
+public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsRegistryListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -121,7 +123,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStart() {
 		super.onStart();
 		app.getQuickActionRegistry().addUpdatesListener(this);
-		widgetRegistry.addWidgetsVisibilityListener(this);
+		widgetRegistry.addWidgetsRegistryListener(this);
 		mapActivity.disableDrawer();
 	}
 
@@ -129,7 +131,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onStop() {
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
-		widgetRegistry.removeWidgetsVisibilityListener(this);
+		widgetRegistry.removeWidgetsRegistryListener(this);
 		mapActivity.enableDrawer();
 	}
 
@@ -273,6 +275,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetParams params) {
+
+	}
+
+	@Override
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
 		setupWidgetsCard();
 	}
@@ -287,7 +294,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
-		int count = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, panel).size();
+		MapActivity mapActivity = requireMapActivity();
+		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, ENABLED_MODE, Collections.singletonList(panel)).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);
@@ -400,6 +408,15 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof MapActivity)) {
+			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
+		}
+		return (MapActivity) activity;
 	}
 
 	private void updateFragment() {

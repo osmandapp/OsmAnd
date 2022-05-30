@@ -4,12 +4,10 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.FPS;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,18 +18,21 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
+import java.util.List;
+
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
-		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
 	}
 
 	@Override
@@ -55,13 +56,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
-		if (mapActivity != null) {
-			registerWidget(mapActivity);
-		}
-	}
-
-	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
 			helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
@@ -77,32 +71,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
-		if (mapActivity != null) {
-			if (isActive()) {
-				registerWidget(mapActivity);
-			} else {
-				MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-				if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) != null) {
-					mapInfoLayer.removeSideWidget(mapInfoLayer.getSideWidget(FPSTextInfoWidget.class));
-					mapInfoLayer.recreateControls();
-				}
-			}
-		}
-	}
-
-	private void registerWidget(@NonNull MapActivity mapActivity) {
-		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
-			MapWidget widget = createMapWidgetForParams(mapActivity, FPS);
-			mapInfoLayer.registerWidget(FPS, widget);
-			mapInfoLayer.recreateControls();
-		}
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		MapWidget widget = createMapWidgetForParams(mapActivity, FPS);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(FPS, widget));
 	}
 
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetParams params) {
-		return new FPSTextInfoWidget(mapActivity);
+		if (params == FPS) {
+			return new FPSTextInfoWidget(mapActivity);
+		}
+		return null;
 	}
 
 	@Override

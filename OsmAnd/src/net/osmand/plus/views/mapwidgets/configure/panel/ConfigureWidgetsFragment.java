@@ -1,6 +1,9 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.getDuplicateWidgetId;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -44,8 +47,10 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -240,13 +245,19 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel) {
+		int filter = AVAILABLE_MODE | ENABLED_MODE;
+		MapActivity mapActivity = requireMapActivity();
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode,
+					filter, Arrays.asList(WidgetsPanel.values()));
+			if (panel.isDuplicatesAllowed() && (widgetInfo == null || widgetInfos.contains(widgetInfo))) {
+				widgetInfo = createDuplicateWidget(widgetId, panel);
+			}
 			if (widgetInfo != null) {
-				addWidgetToEnd(widgetInfo, widgetsPanel);
-				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true);
+				addWidgetToEnd(mapActivity, widgetInfo, panel);
+				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true, false);
 			}
 		}
 
@@ -257,11 +268,23 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		onWidgetsConfigurationChanged();
 	}
 
-	private void addWidgetToEnd(@NonNull MapWidgetInfo targetWidget, @NonNull WidgetsPanel widgetsPanel) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+	private MapWidgetInfo createDuplicateWidget(@NonNull String widgetId, @NonNull WidgetsPanel panel) {
+		WidgetParams params = WidgetParams.getById(widgetId);
+		if (params != null) {
+			String id = widgetId.contains(DELIMITER) ? widgetId : getDuplicateWidgetId(widgetId);
+			MapWidget widget = widgetsFactory.createMapWidget(id, params);
+			if (widget != null) {
+				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
+				return widgetRegistry.createCustomWidget(id, widget, params, panel);
+			}
+		}
+		return null;
+	}
 
+	private void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget, @NonNull WidgetsPanel widgetsPanel) {
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, ENABLED_MODE, widgetsPanel);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
+				selectedAppMode, ENABLED_MODE, Collections.singletonList(widgetsPanel));
 
 		widgetRegistry.getWidgetsForPanel(targetWidget.widgetPanel).remove(targetWidget);
 		targetWidget.widgetPanel = widgetsPanel;
@@ -315,6 +338,15 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof MapActivity)) {
+			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
+		}
+		return (MapActivity) activity;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {

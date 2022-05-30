@@ -1,24 +1,27 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class WidgetsDataHolder {
 
@@ -48,29 +51,47 @@ public class WidgetsDataHolder {
 		return orders;
 	}
 
-	public void initOrders(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode, boolean orderByDefault) {
+	public void initOrders(@NonNull MapActivity mapActivity, @NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 		pages.clear();
 		orders.clear();
 
+		int filter = AVAILABLE_MODE | ENABLED_MODE;
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(selectedPanel));
+		for (MapWidgetInfo widgetInfo : widgets) {
+			int page = selectedPanel.getWidgetPage(appMode, widgetInfo.key, app.getSettings());
+			int order = selectedPanel.getWidgetOrder(appMode, widgetInfo.key, app.getSettings());
+			addWidgetToPage(widgetInfo.key, page);
+			orders.put(widgetInfo.key, order);
+		}
+	}
 
-		if (orderByDefault) {
-			Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, AVAILABLE_MODE, selectedPanel);
-			for (MapWidgetInfo widgetInfo : widgets) {
-				if (appMode.isWidgetVisibleByDefault(widgetInfo.key)) {
-					int order = selectedPanel.getOriginalWidgetOrder(widgetInfo.key);
-					addWidgetToPage(widgetInfo.key, 0);
-					orders.put(widgetInfo.key, order);
-				}
+	public void copyAppModePrefs(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+		pages.clear();
+		orders.clear();
+
+		OsmandSettings settings = app.getSettings();
+		List<List<String>> widgetsOrder = selectedPanel.getWidgetsOrder(appMode, settings);
+		for (int page = 0; page < widgetsOrder.size(); page++) {
+			List<String> pageOrder = widgetsOrder.get(page);
+			for (int order = 0; order < pageOrder.size(); order++) {
+				String widgetId = pageOrder.get(order);
+				addWidgetToPage(widgetId, page);
+				orders.put(widgetId, order);
 			}
-		} else {
-			int availableEnabledFilter = AVAILABLE_MODE | ENABLED_MODE;
-			Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(appMode, availableEnabledFilter, selectedPanel);
-			for (MapWidgetInfo widgetInfo : widgets) {
-				int page = selectedPanel.getWidgetPage(appMode, widgetInfo.key, app.getSettings());
-				int order = selectedPanel.getWidgetOrder(appMode, widgetInfo.key, app.getSettings());
-				addWidgetToPage(widgetInfo.key, page);
-				orders.put(widgetInfo.key, order);
+		}
+	}
+
+	public void resetToDefault(@NonNull ApplicationMode appMode) {
+		pages.clear();
+		orders.clear();
+
+		List<String> originalOrder = selectedPanel.getOriginalOrder();
+		for (int i = 0; i < originalOrder.size(); i++) {
+			String widgetId = originalOrder.get(i);
+			if (appMode.isWidgetVisibleByDefault(widgetId)) {
+				addWidgetToPage(widgetId, 0);
+				orders.put(widgetId, i);
 			}
 		}
 	}
@@ -86,8 +107,10 @@ public class WidgetsDataHolder {
 	}
 
 	public void addWidgetToPage(@NonNull String widgetId, int page) {
-		for (List<String> widgetsOfPage : pages.values()) {
-			widgetsOfPage.remove(widgetId);
+		if (!selectedPanel.isDuplicatesAllowed()) {
+			for (List<String> widgetsOfPage : pages.values()) {
+				widgetsOfPage.remove(widgetId);
+			}
 		}
 
 		List<String> widgetsOfPage = pages.get(page);

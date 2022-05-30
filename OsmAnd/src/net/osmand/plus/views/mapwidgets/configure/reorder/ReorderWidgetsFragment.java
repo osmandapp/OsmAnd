@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
@@ -30,6 +45,7 @@ import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
+import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
@@ -47,19 +63,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 
 public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		CopyAppModePrefsListener, AddWidgetListener {
@@ -103,7 +106,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 			dataHolder.restoreData(savedInstanceState);
 		} else {
-			dataHolder.initOrders(app, selectedAppMode, false);
+			dataHolder.initOrders(requireMapActivity(), app, selectedAppMode);
 		}
 	}
 
@@ -246,19 +249,24 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	private void updateItems() {
+		List<ListItem> enabledItems = createEnabledWidgetsList(selectedAppMode);
+		List<ListItem> availableWidgets = createAvailableWidgetsList(selectedAppMode);
+		updateItems(availableWidgets, enabledItems);
+	}
+
+	private void updateItems(@NonNull List<ListItem> availableItems, @NonNull List<ListItem> enabledItems) {
 		List<ListItem> items = new ArrayList<>();
 		items.add(new ListItem(ItemType.CARD_TOP_DIVIDER, null));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_visible_widgets)));
-		items.addAll(createEnabledWidgetsList());
+		items.addAll(enabledItems);
 		if (dataHolder.getSelectedPanel().isPagingAllowed()) {
 			items.add(new ListItem(ItemType.ADD_PAGE_BUTTON, null));
 		}
 		items.add(new ListItem(ItemType.CARD_DIVIDER, null));
 
-		List<ListItem> availableWidgets = createAvailableWidgetsList();
-		if (!Algorithms.isEmpty(availableWidgets)) {
+		if (!Algorithms.isEmpty(availableItems)) {
 			items.add(new ListItem(ItemType.HEADER, getString(R.string.available_widgets)));
-			items.addAll(availableWidgets);
+			items.addAll(availableItems);
 			items.add(new ListItem(ItemType.CARD_DIVIDER, null));
 		}
 
@@ -278,11 +286,13 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		adapter.setItems(items);
 	}
 
-	private List<ListItem> createEnabledWidgetsList() {
+	private List<ListItem> createEnabledWidgetsList(@NonNull ApplicationMode appMode) {
 		List<ListItem> widgetsItems = new ArrayList<>();
 
+		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE, selectedPanel);
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
+				AVAILABLE_MODE, Collections.singletonList(selectedPanel));
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
 			if (!enabled) {
@@ -326,18 +336,19 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	@NonNull
-	private List<ListItem> createAvailableWidgetsList() {
+	private List<ListItem> createAvailableWidgetsList(@NonNull ApplicationMode appMode) {
 		Map<Integer, ListItem> defaultWidgetsItems = new TreeMap<>();
 		List<ListItem> externalWidgetsItems = new ArrayList<>();
 		List<WidgetGroup> availableGroups = new ArrayList<>();
 
+		int filter = AVAILABLE_MODE | DEFAULT_MODE;
+		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(selectedAppMode, AVAILABLE_MODE,
-				selectedPanel.getMergedPanels());
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, selectedPanel.getMergedPanels());
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
-			if (enabled) {
+			if (enabled && !selectedPanel.isDuplicatesAllowed()) {
 				continue;
 			}
 
@@ -400,21 +411,16 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		List<String> enabledWidgetsIds = new ArrayList<>();
 
 		for (ListItem item : items) {
-			boolean isWidget = item.value instanceof AddedWidgetUiInfo;
-			if (!isWidget) {
-				continue;
+			if (item.value instanceof AddedWidgetUiInfo) {
+				AddedWidgetUiInfo widgetInfo = (AddedWidgetUiInfo) item.value;
+				List<String> widgetsOrder = pagedOrder.get(widgetInfo.page);
+				if (widgetsOrder == null) {
+					widgetsOrder = new ArrayList<>();
+					pagedOrder.put(widgetInfo.page, widgetsOrder);
+				}
+				widgetsOrder.add(widgetInfo.key);
+				enabledWidgetsIds.add(widgetInfo.key);
 			}
-
-			AddedWidgetUiInfo widgetInfo = (AddedWidgetUiInfo) item.value;
-
-			enabledWidgetsIds.add(widgetInfo.key);
-
-			List<String> widgetsOrder = pagedOrder.get(widgetInfo.page);
-			if (widgetsOrder == null) {
-				widgetsOrder = new ArrayList<>();
-				pagedOrder.put(widgetInfo.page, widgetsOrder);
-			}
-			widgetsOrder.add(widgetInfo.key);
 		}
 
 		applyWidgetsPanel(enabledWidgetsIds);
@@ -428,12 +434,19 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 	private void applyWidgetsPanel(@NonNull List<String> enabledWidgetsIds) {
 		WidgetsPanel currentPanel = dataHolder.getSelectedPanel();
-		for (String widgetId : enabledWidgetsIds) {
-			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-			if (widgetInfo != null && widgetInfo.widgetPanel != currentPanel) {
-				widgetRegistry.getWidgetsForPanel(widgetInfo.widgetPanel).remove(widgetInfo);
-				widgetRegistry.getWidgetsForPanel(currentPanel).add(widgetInfo);
-				widgetInfo.widgetPanel = currentPanel;
+		if (currentPanel.isDuplicatesAllowed()) {
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof ConfigureWidgetsFragment) {
+				((ConfigureWidgetsFragment) fragment).onWidgetsSelectedToAdd(enabledWidgetsIds, currentPanel);
+			}
+		} else {
+			for (String widgetId : enabledWidgetsIds) {
+				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+				if (widgetInfo != null && widgetInfo.widgetPanel != currentPanel) {
+					widgetRegistry.getWidgetsForPanel(widgetInfo.widgetPanel).remove(widgetInfo);
+					widgetRegistry.getWidgetsForPanel(currentPanel).add(widgetInfo);
+					widgetInfo.widgetPanel = currentPanel;
+				}
 			}
 		}
 	}
@@ -443,7 +456,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
 			if (widget.isEnabledForAppMode(selectedAppMode) != enabledFromApply) {
-				widgetRegistry.enableDisableWidget(widget, enabledFromApply);
+				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widget, enabledFromApply, false);
 			}
 		}
 	}
@@ -455,13 +468,15 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
-		dataHolder.initOrders(app, appMode, false);
-		updateItems();
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+		dataHolder.copyAppModePrefs(app, appMode);
+		List<ListItem> enabledItems = createEnabledWidgetsList(appMode);
+		List<ListItem> availableItems = createAvailableWidgetsList(appMode);
+		updateItems(availableItems, enabledItems);
 	}
 
 	private void resetToDefault() {
-		dataHolder.initOrders(app, selectedAppMode, true);
+		dataHolder.resetToDefault(selectedAppMode);
 		updateItems();
 	}
 
@@ -486,6 +501,15 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof MapActivity)) {
+			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
+		}
+		return (MapActivity) activity;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

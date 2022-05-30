@@ -454,16 +454,17 @@ class AppVersionUpgradeOnInit {
 
 	@NonNull
 	private String getIntermediateTimeWidgetId(@NonNull ApplicationMode appMode) {
-		boolean intermediateArrival = app.getSettings()
-				.INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO.getModeValue(appMode);
-		return intermediateArrival
-				? INTERMEDIATE_ARRIVAL_TIME_LEGACY
-				: INTERMEDIATE_TIME_TO_GO_LEGACY;
+		CommonPreference<Boolean> preference = app.getSettings()
+				.registerBooleanPreference("show_intermediate_arrival_time", true).makeProfile();
+		boolean intermediateArrival = preference.getModeValue(appMode);
+		return intermediateArrival ? INTERMEDIATE_ARRIVAL_TIME_LEGACY : INTERMEDIATE_TIME_TO_GO_LEGACY;
 	}
 
 	@NonNull
 	private String getTimeWidgetId(@NonNull ApplicationMode appMode) {
-		boolean arrival = app.getSettings().DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO.getModeValue(appMode);
+		CommonPreference<Boolean> preference = app.getSettings()
+				.registerBooleanPreference("show_arrival_time", true).makeProfile();
+		boolean arrival = preference.getModeValue(appMode);
 		return arrival ? ARRIVAL_TIME_LEGACY : TIME_TO_GO_LEGACY;
 	}
 

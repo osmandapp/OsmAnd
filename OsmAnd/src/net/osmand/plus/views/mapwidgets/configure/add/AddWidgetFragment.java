@@ -1,5 +1,11 @@
 package net.osmand.plus.views.mapwidgets.configure.add;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -12,10 +18,17 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.aidl.AidlMapWidgetWrapper;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -35,22 +48,11 @@ import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
 
 public class AddWidgetFragment extends BaseOsmAndFragment {
 
@@ -231,10 +233,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		CheckBox checkBox = view.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
 
+		MapActivity mapActivity = requireMapActivity();
+		WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
 		boolean alreadyEnabled = alreadySelectedWidgetsIds != null
 				? alreadySelectedWidgetsIds.contains(widgetId)
-				: isWidgetEnabled(widgetId);
-		if (alreadyEnabled) {
+				: isWidgetEnabled(mapActivity, widgetId);
+		if (alreadyEnabled && !widgetsPanel.isDuplicatesAllowed()) {
 			checkBox.setChecked(true);
 			view.setSelected(true);
 			view.setOnClickListener(v -> app.showShortToastMessage(R.string.import_duplicates_title));
@@ -257,9 +261,10 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private boolean isWidgetEnabled(@NonNull String widgetId) {
+	private boolean isWidgetEnabled(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(appMode, ENABLED_MODE, WidgetsPanel.values());
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
+				ENABLED_MODE, Arrays.asList(WidgetsPanel.values()));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (widgetId.equals(widgetInfo.key)) {
@@ -304,6 +309,15 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof MapActivity)) {
+			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
+		}
+		return (MapActivity) activity;
 	}
 
 	/**

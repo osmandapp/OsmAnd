@@ -509,7 +509,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());

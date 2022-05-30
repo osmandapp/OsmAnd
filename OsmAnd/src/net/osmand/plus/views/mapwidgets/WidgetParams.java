@@ -1,29 +1,30 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.content.Context;
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
-import net.osmand.plus.R;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
-import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment.TimeToDestinationSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment.TimeToIntermediateSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
+import net.osmand.plus.R;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
 public enum WidgetParams {
 
@@ -150,12 +151,22 @@ public enum WidgetParams {
 
 	@NonNull
 	public WidgetsPanel getPanel(@NonNull OsmandSettings settings) {
+		return getPanel(id, settings);
+	}
+
+	@NonNull
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull OsmandSettings settings) {
+		return getPanel(widgetId, settings.getApplicationMode(), settings);
+	}
+
+	@NonNull
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
 		if (defaultPanel == TOP || defaultPanel == BOTTOM) {
 			return defaultPanel;
 		} else if (defaultPanel == LEFT) {
-			return RIGHT.getWidgetOrder(id, settings) != DEFAULT_ORDER ? RIGHT : LEFT;
+			return RIGHT.getWidgetOrder(mode, widgetId, settings) != DEFAULT_ORDER ? RIGHT : LEFT;
 		} else if (defaultPanel == RIGHT) {
-			return LEFT.getWidgetOrder(id, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
+			return LEFT.getWidgetOrder(mode, widgetId, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
 		}
 		throw new IllegalStateException("Unsupported panel");
 	}
@@ -168,10 +179,8 @@ public enum WidgetParams {
 			return new MapMarkersBarWidgetSettingFragment();
 		} else if (this == RADIUS_RULER) {
 			return new RadiusRulerWidgetSettingsFragment();
-		} else if (this == TIME_TO_INTERMEDIATE) {
-			return new TimeToIntermediateSettingsFragment();
-		} else if (this == TIME_TO_DESTINATION) {
-			return new TimeToDestinationSettingsFragment();
+		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
+			return new TimeToNavigationPointSettingsFragment();
 		}
 		return null;
 	}
@@ -179,10 +188,25 @@ public enum WidgetParams {
 	@Nullable
 	public static WidgetParams getById(@NonNull String id) {
 		for (WidgetParams widget : WidgetParams.values()) {
-			if (widget.id.equals(id)) {
+			String defaultId = getDefaultWidgetId(id);
+			if (widget.id.equals(defaultId)) {
 				return widget;
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public static String getDefaultWidgetId(@NonNull String key) {
+		int index = key.indexOf(DELIMITER);
+		if (index != -1) {
+			key = key.substring(0, index);
+		}
+		return key;
+	}
+
+	@NonNull
+	public static String getDuplicateWidgetId(@NonNull String widgetId) {
+		return getDefaultWidgetId(widgetId) + DELIMITER + System.currentTimeMillis();
 	}
 }
