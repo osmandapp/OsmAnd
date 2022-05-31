@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
+import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
@@ -82,6 +83,8 @@ public class MapWidgetsFactory {
 				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING);
 			case CURRENT_SPEED:
 				return new CurrentSpeedWidget(mapActivity);
+			case AVERAGE_SPEED:
+				return new AverageSpeedWidget(mapActivity);
 			case MAX_SPEED:
 				return new MaxSpeedWidget(mapActivity);
 			case ALTITUDE:
