@@ -1470,7 +1470,7 @@
     <string name="drawer">平面清單</string>
     <string name="osm_edits">OSM 編輯</string>
     <string name="osmand_parking_hour">時</string>
-    <string name="osmand_parking_minute">分</string>
+    <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">左</string>
     <string name="parking_place_limited">停車場時限到</string>
     <string name="your_edits">您的編輯</string>
@@ -4674,4 +4674,10 @@
     <string name="rendering_attr_hideMilitaryAreas_name">隱藏軍事區域</string>
     <string name="rendering_attr_hideMilitaryAreas_description">隱藏軍事區域</string>
     <string name="explore_plans">探索方案</string>
+    <string name="shared_string_mode">模式</string>
+    <string name="time_to_navigation_point_widget_settings_desc">您可以輕點小工具來切換模式。</string>
+    <string name="map_widget_time_to_destination">到達目的地的時間</string>
+    <string name="map_widget_time_to_intermediate">到達中繼點的時間</string>
+    <string name="map_widget_distance_to_intermediate">到中繼點的距離</string>
+    <string name="radius_ruler_mode_desc">您可以輕點小工具來切換半徑尺規模式。</string>
 </resources>

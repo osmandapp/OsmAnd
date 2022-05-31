@@ -1067,7 +1067,7 @@
     <string name="action_delete">Eylem sil</string>
     <string name="osm_edits">OSM düzeltmeleri</string>
     <string name="osmand_parking_hour">sa</string>
-    <string name="osmand_parking_minute">dk</string>
+    <string name="shared_string_minute_lowercase">dk</string>
     <string name="osmand_parking_time_left">sol</string>
     <string name="your_edits">Düzeltmeleriniz</string>
     <string name="tips_and_tricks_descr">Sık sorulan sorular, son değişiklikler ve diğerleri.</string>
@@ -4645,7 +4645,7 @@
     <string name="current_speed_widget_desc">GPS sensörü tarafından algılanan geçerli hızınızı gösteren widget.</string>
     <string name="time_to_go_desc">Varış noktasına ulaşmak için gereken dakika veya saat cinsinden süre.</string>
     <string name="map_markers_bar_widget_desc">Üst çubuk widget\'ında, geçerli konumdan işaretçiye olan mesafeyi ve yönü görebilirsiniz. Widget\'ta 1 veya 2 üst işaretçiyi görecek şekilde yapılandırmak mümkündür.</string>
-    <string name="audio_video_notes_desc">Kayıt (ses, video veya fotoğraf) almayı başlatmak/durdurmak için hızlı erişim sağlayan widget\'lar.</string>
+    <string name="audio_video_notes_desc">Kayıt (ses, video veya fotoğraf) almayı başlatmak/durdurmak için hızlı erişim sağlayan widget.</string>
     <string name="bearing_desc">Yön widget\'ı, bir hedefin mutlak veya göreceli yönünü açısal birimlerde gösterir (Derece 180, Derece 360, Miliradyan).</string>
     <string name="route_maneuvers_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
     <string name="calculate_online_altitude_descr">Rakım verileri OsmAnd sunucusunda hesaplanacak.</string>
@@ -4681,4 +4681,11 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Askeri alanları gizleyin</string>
     <string name="explore_plans">Planları Keşfet</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Askeri alanları gizle</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Widget\'a dokunarak modu değiştirebilirsiniz.</string>
+    <string name="map_widget_time_to_destination">Hedefe varış süresi</string>
+    <string name="map_widget_time_to_intermediate">Ara noktaya varış süresi</string>
+    <string name="map_widget_distance_to_intermediate">Ara noktaya uzaklık</string>
+    <string name="radius_ruler_mode_desc">Widget\'a dokunarak yarıçap cetvel modunu değiştirebilirsiniz.</string>
+    <string name="shared_string_mode">Mod</string>
+    <string name="lang_sat">Santali</string>
 </resources>

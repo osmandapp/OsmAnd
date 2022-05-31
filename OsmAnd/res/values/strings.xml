@@ -11,12 +11,18 @@
 	Thx - Hardy
 -->
 
+    <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
+    <string name="average_speed_skip_stops">Take into account stops</string>
+    <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
+    <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
+    <string name="map_widget_average_speed">Average speed</string>
+    <string name="lang_sat">Santali</string>
     <string name="shared_string_mode">Mode</string>
-    <string name="time_to_navigation_point_widget_settings_desc">You can switch mode by taping on widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Switch mode by tapping the widget.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>
     <string name="map_widget_time_to_intermediate">Time to intermediate</string>
     <string name="map_widget_distance_to_intermediate">Distance to intermediate</string>
-    <string name="radius_ruler_mode_desc">You can switch \“Radius ruler\” mode by taping on widget.</string>
+    <string name="radius_ruler_mode_desc">Tapping the widget switches to \“Radius ruler\” mode.</string>
     <string name="explore_plans">Explore Plans</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
@@ -50,14 +56,14 @@
     <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
     <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
-    <string name="fps_widget_desc">Widget show how fast map &amp; map elements are shown &amp; refreshed.</string>
-    <string name="radius_rules_widget_desc">Radius-ruler tool helps to determine the radius around the selected point on the map via displaying distance-circles on the map.</string>
-    <string name="current_time_widget_desc">This widget shows current time from your device.</string>
-    <string name="battery_widget_desc">Widget shows battery level of your device.</string>
-    <string name="gps_info_widget_desc">Widget shows a number of satellites that device detects and uses at that moment.</string>
-    <string name="altitude_widget_desc">Widget shows the height above sea level of current geolocation.</string>
-    <string name="max_speed_widget_desc">Widget shows a speed limit for the currently driven road.</string>
-    <string name="current_speed_widget_desc">Widget shows your current speed detected by GPS-sensor.</string>
+    <string name="fps_widget_desc">Shows how fast map and map elements are shown and refreshed.</string>
+    <string name="radius_rules_widget_desc">The radius-ruler tool helps determine the radius around a selected point on the map showing distance-circles on the map.</string>
+    <string name="current_time_widget_desc">Shows current time from your device.</string>
+    <string name="battery_widget_desc">Shows battery level of your device.</string>
+    <string name="gps_info_widget_desc">Shows a number of satellites that device detects and uses at that moment.</string>
+    <string name="altitude_widget_desc">Shows the height above sea level of current geolocation.</string>
+    <string name="max_speed_widget_desc">Shows a speed limit for the currently driven road.</string>
+    <string name="current_speed_widget_desc">Shows your current speed detected by GPS-sensor.</string>
     <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
     <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
     <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
@@ -2784,7 +2790,7 @@
     <!-- means first letter of word *hour* -->
     <string name="osmand_parking_hour">h</string>
     <!-- means first letter of word *minute*-->
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Parking time limited to</string>
     <!-- used to describe time left, not left direction -->
     <string name="osmand_parking_time_left">left</string>

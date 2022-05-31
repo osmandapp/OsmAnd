@@ -131,6 +131,6 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	}
 
 	public interface CopyAppModePrefsListener {
-		void copyAppModePrefs(ApplicationMode appMode);
+		void copyAppModePrefs(@NonNull ApplicationMode appMode);
 	}
 }

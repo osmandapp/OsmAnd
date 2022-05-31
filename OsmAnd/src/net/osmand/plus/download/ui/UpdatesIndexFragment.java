@@ -1,7 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,21 +22,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -46,6 +34,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -56,11 +45,22 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
@@ -322,13 +322,15 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		private final boolean showSubscriptionPurchaseBanner;
 
 		@Override
-		public void addData(LocalIndexInfo info) {
-			mapsList.add(info);
+		public void addData(@NonNull List<LocalIndexInfo> indexes) {
+			mapsList.addAll(indexes);
+			notifyDataSetChanged();
 		}
 
 		@Override
 		public void clearData() {
 			mapsList.clear();
+			notifyDataSetChanged();
 		}
 
 		@Override

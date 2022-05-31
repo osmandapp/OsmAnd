@@ -1,21 +1,22 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class AltitudeWidget extends TextInfoWidget {
 
 	private int cachedAltitude = 0;
 
 	public AltitudeWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
-		setIcons(WidgetParams.ALTITUDE);
+		super(mapActivity, ALTITUDE);
+		setIcons(ALTITUDE);
 		setText(null, null);
 	}
 

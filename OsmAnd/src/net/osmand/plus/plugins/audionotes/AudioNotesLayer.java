@@ -18,6 +18,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -217,9 +218,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		int compare = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox));
 		int radius = compare * 3 / 2;
 		for (Recording n : plugin.getAllRecordings()) {
-			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-			int y = (int) tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
-			if (calculateBelongs(ex, ey, x, y, compare)) {
+			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, n.getLatitude(), n.getLongitude());
+			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 				compare = radius;
 				am.add(n);
 			}

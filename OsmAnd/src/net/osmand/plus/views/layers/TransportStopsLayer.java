@@ -33,14 +33,14 @@ import net.osmand.osm.edit.Way;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
@@ -152,9 +152,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				if (n.getLocation() == null) {
 					continue;
 				}
-				int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+						n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 					if (!ms.add(n.getName())) {
 						// only unique names
 						continue;
@@ -322,7 +322,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 

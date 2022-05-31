@@ -5,15 +5,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.R;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+
+import net.osmand.plus.R;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 
 public class AddedWidgetViewHolder extends ViewHolder implements UnmovableItem {
 
@@ -51,18 +50,6 @@ public class AddedWidgetViewHolder extends ViewHolder implements UnmovableItem {
 		public int page;
 		public int order;
 		public int iconId;
-
-		public AddedWidgetUiInfo() {
-		}
-
-		public AddedWidgetUiInfo(@NonNull AvailableWidgetUiInfo availableWidgetInfo, int page, int order) {
-			this.key = availableWidgetInfo.key;
-			this.title = availableWidgetInfo.title;
-			this.info = availableWidgetInfo.info;
-			this.page = page;
-			this.order = order;
-			this.iconId = availableWidgetInfo.iconId;
-		}
 	}
 
 	public interface ItemMovableCallback {

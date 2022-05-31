@@ -1476,7 +1476,7 @@
     <string name="action_delete">Odstrániť akciu</string>
     <string name="osm_edits">Zmeny v OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">zostáva</string>
     <string name="parking_place_limited">Čas parkovania obmedzený na</string>
     <string name="your_edits">Vaše zmeny</string>
@@ -4676,4 +4676,10 @@
     <string name="fps_widget_desc">Nástroj zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
     <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>
     <string name="route_maneuvers">Manévre trasy</string>
+    <string name="shared_string_mode">Režim</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Režim môžete prepnúť stlačením nástroja.</string>
+    <string name="map_widget_time_to_destination">Čas k cieľu</string>
+    <string name="map_widget_time_to_intermediate">Čas k prechodnému cieľu</string>
+    <string name="map_widget_distance_to_intermediate">Vzdialenosť k prechodnému cieľu</string>
+    <string name="radius_ruler_mode_desc">Režim polomerového pravítka môžete prepnúť stlačením nástroja.</string>
 </resources>

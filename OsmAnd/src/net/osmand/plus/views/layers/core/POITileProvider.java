@@ -50,6 +50,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	private final TextRasterizer.Style textStyle;
 	private final float textScale;
 	private final float density;
+	private final PointI offset;
 
 	private final OsmandMapLayer.MapLayerData<List<Amenity>> layerData;
 	private MapTiledCollectionProvider providerInstance;
@@ -132,6 +133,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		this.textStyle = textStyle != null ? textStyle : new TextRasterizer.Style();
 		this.textScale = textScale;
 		this.density = density;
+		this.offset = new PointI(0, 0);
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -269,5 +271,10 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
 		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+	}
+
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
 	}
 }

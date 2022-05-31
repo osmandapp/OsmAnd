@@ -1228,9 +1228,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (isPointHidden(g, n)) {
 					continue;
 				}
-				int x = (int) tb.getPixXFromLatLon(n.lat, n.lon);
-				int y = (int) tb.getPixYFromLatLon(n.lat, n.lon);
-				if (calculateBelongs(ex, ey, x, y, r)) {
+				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.lat, n.lon);
+				if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
 					res.add(n);
 				}
 			}
@@ -1245,7 +1244,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (SelectedGpxFile selectedGpxFile : visibleGpxFiles) {
 			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
 			if (points != null) {
-				LatLon latLon = tb.getLatLonFromPixel(mx, my);
+				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, mx, my);
 				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon,
 						showTrackPointMenu));
 			}
@@ -1257,7 +1256,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (TrkSegment segment : segments) {
 			QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
 			if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
-				Pair<WptPt, WptPt> points = findPointsNearSegment(tileBox, segment.points, radius, x, y);
+				Pair<WptPt, WptPt> points = findPointsNearSegment(getMapRenderer(), tileBox, segment.points, radius, x, y);
 				if (points != null) {
 					return points;
 				}
@@ -1267,19 +1266,23 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Nullable
-	public static Pair<WptPt, WptPt> findPointsNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
+	public static Pair<WptPt, WptPt> findPointsNearSegment(@Nullable MapRendererView mapRenderer,
+	                                                       @NonNull RotatedTileBox tb, List<WptPt> points,
+	                                                       int r, int mx, int my) {
 		if (Algorithms.isEmpty(points)) {
 			return null;
 		}
 		WptPt prevPoint = points.get(0);
-		int ppx = (int) tb.getPixXFromLatLon(prevPoint.lat, prevPoint.lon);
-		int ppy = (int) tb.getPixYFromLatLon(prevPoint.lat, prevPoint.lon);
+		PointF pixelPrev = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, prevPoint.lat, prevPoint.lon);
+		int ppx = (int) pixelPrev.x;
+		int ppy = (int) pixelPrev.y;
 		int pcross = placeInBbox(ppx, ppy, mx, my, r, r);
 
 		for (int i = 1; i < points.size(); i++) {
 			WptPt point = points.get(i);
-			int px = (int) tb.getPixXFromLatLon(point.lat, point.lon);
-			int py = (int) tb.getPixYFromLatLon(point.lat, point.lon);
+			PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, point.lat, point.lon);
+			int px = (int) pixel.x;
+			int py = (int) pixel.y;
 			int cross = placeInBbox(px, py, mx, my, r, r);
 			if (cross == 0) {
 				return new Pair<>(prevPoint, point);
@@ -1513,13 +1516,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			List<Object> trackPoints = new ArrayList<>();
 			getTracksFromPoint(tileBox, point, trackPoints, true);
 
 			if (!Algorithms.isEmpty(trackPoints)) {
-				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
 				if (trackPoints.size() == 1) {
 					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
 					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, null);

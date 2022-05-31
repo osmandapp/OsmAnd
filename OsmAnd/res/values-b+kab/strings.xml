@@ -398,7 +398,7 @@
     <string name="shared_string_message">Izen</string>
     <string name="shared_string_go">Ddu</string>
     <string name="osmand_parking_hour">s</string>
-    <string name="osmand_parking_minute">tas</string>
+    <string name="shared_string_minute_lowercase">tas</string>
     <string name="osmand_parking_time_left">id iguran</string>
     <string name="your_edits">Tiẓrigin-ik</string>
     <string name="general_settings_2">Iɣewwaren imuta</string>

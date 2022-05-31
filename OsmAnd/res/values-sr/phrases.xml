@@ -261,11 +261,11 @@
     <string name="poi_tram_stop">Трамвајска станица</string>
     <string name="poi_public_transport_station">Станица јавног превоза</string>
     <string name="poi_bus_station">Аутобуска станица</string>
-    <string name="poi_railway_station">Железничка станица</string>
+    <string name="poi_railway_station">Железничка станица; Железничка станица; Железничка станица</string>
     <string name="poi_subway_entrance">Улаз у подземну</string>
     <string name="poi_subway_station">Да; Станица метроа</string>
     <string name="poi_taxi">Такси станица</string>
-    <string name="poi_aerodrome">Аеродром</string>
+    <string name="poi_aerodrome">Аеродром; Аеродром</string>
     <string name="poi_helipad">Хелиодром</string>
     <string name="poi_runway">Писта</string>
     <string name="poi_aeroway_terminal">Ваздушни терминал</string>
@@ -1485,8 +1485,8 @@
     <string name="poi_traffic_calming_table">Успоривачки прелаз</string>
     <string name="poi_traffic_calming_choker">Потискивач</string>
     <string name="poi_public_transport_stop_position">Стоп позиција јавног превоза</string>
-    <string name="poi_railway_platform">Перон пруге</string>
-    <string name="poi_halt">Пружни прелаз</string>
+    <string name="poi_railway_platform">Железничка платформа; Перон пруге</string>
+    <string name="poi_halt">Крај станице; Крај воза</string>
     <string name="poi_railway_buffer_stop">Пружни предзаустављач</string>
     <string name="poi_slipway">Бродоградилишна пруга</string>
     <string name="poi_aerialway_station">Станица жичаре</string>
@@ -3780,7 +3780,7 @@
     <string name="poi_tactile_paving_incorrect">Неисправано</string>
     <string name="poi_tactile_paving_primitive">Примитивно</string>
     <string name="poi_tactile_paving_contrasted">Контрастно</string>
-    <string name="poi_traffic_signals_sound_locate">Дозвољено је само при ходању</string>
+    <string name="poi_traffic_signals_sound_locate">Само да се лоцира стуб</string>
     <string name="poi_internet_access_fee_customers">Приступ интернету: купци</string>
     <string name="poi_video_no">Не</string>
     <string name="poi_video_yes">Да; Видео</string>
@@ -4306,7 +4306,7 @@
     <string name="poi_rice">Продавница пиринча</string>
     <string name="poi_termite_mound">Термитњак</string>
     <string name="poi_payment_american_express_contactless_yes">Бесконтактни Американ Експрес (AMEX)</string>
-    <string name="poi_payment_girocard_contactless_yes">Жирокартица</string>
+    <string name="poi_payment_girocard_contactless_yes">Бесконтактна Жирокартица</string>
     <string name="poi_payment_maestro_contactless_yes">Бесконтактни Маестро</string>
     <string name="poi_payment_mastercard_contactless_yes">Бесконтактно Мастеркард</string>
     <string name="poi_payment_visa_contactless_yes">Бесконтактно Виза</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_board_type_wildlife">Дивље животиње</string>
     <string name="poi_board_type_nature">Природа</string>
     <string name="poi_food_no">Храна: не</string>
+    <string name="poi_flow_rate">Брзина протока</string>
+    <string name="poi_golf_pin">Голф пин</string>
 </resources>

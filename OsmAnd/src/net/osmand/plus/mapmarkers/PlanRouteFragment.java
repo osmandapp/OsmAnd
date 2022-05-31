@@ -47,8 +47,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapMarkersLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -949,7 +949,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private class PlanRouteToolbarController extends TopToolbarController {
 
 		PlanRouteToolbarController() {
-			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
+			super(TopToolbarController.TopToolbarControllerType.MEASUREMENT_TOOL);
 			setBackBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
@@ -960,7 +960,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		}
 
 		@Override
-		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+		public void updateToolbar(TopToolbarView view) {
 			super.updateToolbar(view);
 			View shadow = view.getShadowView();
 			if (shadow != null) {

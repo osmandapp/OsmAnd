@@ -48,6 +48,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	private final float textScale;
 	private boolean showClosed = false;
 	private final int minZoom;
+	private final PointI offset;
 
 	private final OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData;
 	private MapTiledCollectionProvider providerInstance;
@@ -126,6 +127,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		this.textScale = textScale;
 		this.showClosed = showClosed;
 		this.minZoom = minZoom;
+		this.offset = new PointI(0, 0);
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -262,5 +264,10 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
 		return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+	}
+
+	@Override
+	public PointI getPinIconOffset() {
+		return offset;
 	}
 }

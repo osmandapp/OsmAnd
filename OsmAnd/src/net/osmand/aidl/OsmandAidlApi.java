@@ -1,5 +1,24 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -106,6 +125,9 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -394,9 +416,13 @@ public class OsmandAidlApi {
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
 							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
-							layer.registerExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), connectedApp.getPack(), defaultPanel,
-									widgetData.getOrder());
+
+							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+							widgetRegistry.registerWidget(widgetInfo);
+
+							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
 						}
 					}
@@ -467,9 +493,9 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
-	public void registerWidgetControls(@NonNull MapActivity mapActivity) {
+	public void createWidgetControls(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.registerWidgetControls(mapActivity);
+			connectedApp.createWidgetControls(mapActivity, widgetsInfos);
 		}
 	}
 
@@ -490,7 +516,7 @@ public class OsmandAidlApi {
 							if (mapLayer != null) {
 								mapActivity.getMapView().removeLayer(mapLayer);
 							}
-							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack());
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack(), -180000);
 							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
 							connectedApp.getMapLayers().put(layerId, mapLayer);
 						}

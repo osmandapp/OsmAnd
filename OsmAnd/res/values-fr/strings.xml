@@ -1471,7 +1471,7 @@
     <string name="action_delete">Action supprimer</string>
     <string name="osm_edits">Éditions OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">restantes</string>
     <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
     <string name="your_edits">Vos modifications</string>
@@ -1687,7 +1687,7 @@
     <string name="update_all">Tout mettre à jour (%1$s Mo)</string>
     <string name="free_downloads_used">Téléchargements gratuits utilisés</string>
     <string name="free_downloads_used_description">Affiche le nombre de téléchargements gratuits restants.</string>
-    <string name="share_geo">geo :</string>
+    <string name="share_geo">géo :</string>
     <string name="share_menu_location">Partager ce lieu</string>
     <string name="shared_string_send">Envoyer</string>
     <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes et autres données.</string>
@@ -4086,7 +4086,7 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
     <string name="search_more">Rechercher plus…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Sauvegarde &amp; Restauration</string>
+    <string name="backup_and_restore">Sauvegarder &amp; Restaurer</string>
     <string name="last_backup">Dernière sauvegarde</string>
     <string name="duration_ago">il y a %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -4098,7 +4098,7 @@
     <string name="verify_email_address_descr">Code de vérification envoyé sur %1$s. Veuillez le saisir dans le champ ci-dessous.</string>
     <string name="cloud_email_already_registered">Il existe déjà un compte pour cet email.</string>
     <string name="resend_verification_code">Renvoyer le code</string>
-    <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
+    <string name="verification_code_missing">Je n\'ai pas reçu de code de vérification</string>
     <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données. Sauvegardez et restaurez facilement toutes vos informations.</string>
     <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, un code de vérification vous sera envoyé à cette adresse,
 \net toutes vos données y seront associées.</string>
@@ -4540,7 +4540,7 @@
     <string name="simulation_real_mode_desc">Sur les sections de routes droites, la vitesse sera approximativement égale à la vitesse maximale autorisée.
 \nAux intersections, la simulation ralentira.
 \nDes pénalités supplémentaires seront appliquées sur les feux de signalisation, les panneaux stop, etc.</string>
-    <string name="routeInfo_horse_scale_description">Afficher les chemins en fonction de la difficulté des sentiers pour chevaux</string>
+    <string name="routeInfo_horse_scale_description">Afficher les chemins en fonction de la difficulté des sentiers équestres</string>
     <string name="rendering_attr_horse_scale_common_name">Commun</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigeant</string>
     <string name="rendering_attr_horse_scale_difficult_name">Difficile</string>
@@ -4556,9 +4556,9 @@
     <string name="shared_string_item">Élément</string>
     <string name="shared_string_buttons">Boutons</string>
     <string name="simulation_real_mode_title">Simulation réaliste</string>
-    <string name="simulation_constant_mode_desc">La simulation sera effectuée avec la vitesse constante sélectionnée.</string>
-    <string name="simulation_constant_mode_title">Vitesse fixe</string>
-    <string name="simulation_preview_mode_desc">La vitesse de la simulation sera maximale sur les sections droites et ralentira aux bifurcations.</string>
+    <string name="simulation_constant_mode_desc">La simulation se déroulera à la vitesse constante indiquée.</string>
+    <string name="simulation_constant_mode_title">Vitesse constante</string>
+    <string name="simulation_preview_mode_desc">La vitesse de simulation sera maximale sur les sections droites et diminuera aux bifurcations.</string>
     <string name="simulation_preview_mode_title">Mode de prévisualisation rapide</string>
     <string name="routing_attr_carriage_restrictions_name">Restrictions de chariot</string>
     <string name="routing_attr_carriage_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules hippomobiles</string>
@@ -4614,11 +4614,11 @@
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="max_speed_widget_desc">Le widget indique la limitation de vitesse de la route actuelle.</string>
+    <string name="max_speed_widget_desc">Le widget indique la limitation de vitesse pour la route actuelle.</string>
     <string name="fps_widget_desc">Widget indiquant la vitesse d\'affichage et de rafraîchissement de la carte et des éléments de la carte.</string>
     <string name="radius_rules_widget_desc">L\'outil Rayon permet de déterminer la distance autour du point sélectionné en affichant des cercles de distance sur la carte.</string>
     <string name="altitude_widget_desc">Widget indiquant la hauteur, par rapport au niveau de la mer, de la position actuelle.</string>
-    <string name="audio_video_notes_desc">Ces widgets permettent un accès rapide pour démarrer / arrêter un enregistrement (audio, vidéo ou photo).</string>
+    <string name="audio_video_notes_desc">Ce widget permet un accès rapide pour démarrer / arrêter un enregistrement (audio, vidéo ou photo).</string>
     <string name="get_altitude_data">Obtenir les données d\'altitude</string>
     <string name="current_time_widget_desc">Ce widget affiche l\'heure de votre appareil.</string>
     <string name="elevation_profile_widget_desc">Ce widget affiche le profil d’altitude et de pente pour l’itinéraire actuel.</string>
@@ -4674,4 +4674,11 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
     <string name="explore_plans">Explorer les plans</string>
+    <string name="map_widget_time_to_destination">Temps restant jusqu\'à l\'arrivée</string>
+    <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>
+    <string name="map_widget_distance_to_intermediate">Distance du point intermédiaire</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Vous pouvez basculer de mode en appuyant sur le widget.</string>
+    <string name="radius_ruler_mode_desc">Vous pouvez basculer le mode de la règle de mesure par rayon en appuyant sur le widget.</string>
+    <string name="shared_string_mode">Mode</string>
+    <string name="lang_sat">Santali</string>
 </resources>

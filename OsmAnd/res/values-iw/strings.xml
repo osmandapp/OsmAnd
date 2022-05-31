@@ -2051,7 +2051,7 @@
     <string name="map_mode">מצב מפה</string>
     <string name="no_map_markers_found">נא להוסיף סמני מפה דרך המפה</string>
     <string name="no_waypoints_found">לא נמצאו נקודות דרך</string>
-    <string name="osmand_parking_minute">דק׳</string>
+    <string name="shared_string_minute_lowercase">דק׳</string>
     <string name="parking_place_limited">זמן החנייה מוגבל עד</string>
     <string name="osmand_parking_time_left">נותרו</string>
     <string name="your_edits">העריכות שלך</string>
@@ -4636,7 +4636,7 @@
     <string name="max_speed_widget_desc">וידג׳ט שמציג את מגבלת המהירות בכביש הנוכחי.</string>
     <string name="time_to_go_desc">הזמן בדקות או שעות שנדרש להגעה ליעד שלך.</string>
     <string name="street_name_widget_desc">וידג׳ט שם הרחוב מציג את שם הרחוב הנוכחי עם חץ מיקום ישר או ליד שם הרחוב עם המעקף שיש להשלים.</string>
-    <string name="audio_video_notes_desc">וידג׳טים מספקים גישה מהירה להתחלת/עצירת הקלטה (שמע, וידאו או תמונה).</string>
+    <string name="audio_video_notes_desc">וידג׳ט מספק גישה מהירה להתחלת/עצירת הקלטה (שמע, וידאו או תמונה).</string>
     <string name="shared_string_widget">וידג׳ט</string>
     <string name="av_def_action_choose">לפי בקשה</string>
     <string name="map_markers_bar_widget_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק ואת הכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר כדי לראות סמן או שניים מובילים בווידג׳ט.</string>
@@ -4668,4 +4668,25 @@
     <string name="rendering_attr_horseScale_name">קושי מסלולי הסוסים</string>
     <string name="map_widget_true_bearing">תכווין אמיתי</string>
     <string name="routing_attr_allow_private_for_truck_name">לאפשר גישה לשטח פרטי (משאית)</string>
+    <string name="shared_string_mode">מצב</string>
+    <string name="routing_attr_avoid_highway_name">הימנעות מכבישים מהירים</string>
+    <string name="routing_attr_avoid_highway_description">הימנעות מכבישים מהירים</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">הסתרת שטחים צבאיים</string>
+    <string name="map_widget_trip_recording_downhill">במורד ההר</string>
+    <string name="map_widget_trip_recording_uphill">במעלה ההר</string>
+    <string name="time_to_navigation_point_widget_settings_desc">אפשר להחליף מצב בלחיצה על וידג׳ט.</string>
+    <string name="map_widget_time_to_destination">זמן ליעד</string>
+    <string name="map_widget_time_to_intermediate">זמן לנק׳ ביניים</string>
+    <string name="map_widget_distance_to_intermediate">מרחק לנק׳ ביניים</string>
+    <string name="radius_ruler_mode_desc">אפשר להחליף מצב סרגל רדיוס בנגיעה בווידג׳ט.</string>
+    <string name="explore_plans">עיון בתוכניות</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">הסתרת שטחים צבאיים</string>
+    <string name="map_widget_trip_recording_duration">משך</string>
+    <string name="map_widget_trip_recording_distance">מרחק</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">אין הגבלות</string>
+    <string name="routing_attr_hazmat_category_name">קטגוריית חומ״ס</string>
+    <string name="routing_attr_hazmat_category_description">קטגוריית חומרים מסוכנים / התחשבות ההגבלות גישה עקב חומרים מסוכנים</string>
+    <string name="routing_attr_avoid_fords_name">המנעות מגשרים איריים</string>
+    <string name="routing_attr_avoid_fords_description">המנעות מגשרים איריים</string>
+    <string name="lang_sat">סינטאלי</string>
 </resources>

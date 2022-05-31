@@ -1438,7 +1438,7 @@
     <string name="action_delete">Вилучити дію</string>
     <string name="osm_edits">Зміни OSM</string>
     <string name="osmand_parking_hour">г</string>
-    <string name="osmand_parking_minute">хв</string>
+    <string name="shared_string_minute_lowercase">хв</string>
     <string name="osmand_parking_time_left">лишилось</string>
     <string name="parking_place_limited">Стоянка з обмеженням по часу</string>
     <string name="your_edits">Ваші зміни</string>
@@ -1881,7 +1881,7 @@
     <string name="report">Звіт</string>
     <string name="use_osm_live_routing_description">Увімкнути навігацію з урахуванням автооновлень OsmAnd Live.</string>
     <string name="use_osm_live_routing">Навігація OsmAnd Live</string>
-    <string name="access_no_destination">Втулок доступності: пункт призначення не встановлено</string>
+    <string name="access_no_destination">Плагін доступності: пункт призначення не встановлено</string>
     <string name="map_widget_magnetic_bearing">Магнітний компас</string>
     <string name="map_widget_bearing">Курсовий кут</string>
     <string name="access_disable_offroute_recalc">Не перераховувати маршрут при сході з нього</string>
@@ -4638,7 +4638,7 @@
     <string name="lanes_widgets_desc">Віджет «Смуги» показує поточне розташування доріг і виділяє смуги для їзди з активною навігацією.</string>
     <string name="map_markers_bar_widget_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>
     <string name="street_name_widget_desc">Віджет назви вулиць показує назву поточної вулиці зі стрілкою напрямку або назву наступної вулиці з маневром, який потрібно виконати.</string>
-    <string name="audio_video_notes_desc">Віджети надають швидкий доступ до початку/зупинки запису (аудіо, відео або фотографування).</string>
+    <string name="audio_video_notes_desc">Віджет надає швидкий доступ до початку/зупинки запису (аудіо, відео або фотографування).</string>
     <string name="bearing_desc">Віджет азимуту показує абсолютний або відносний азимут до цілі в кутових одиницях (градуси 180, градуси 360, мілірадіани).</string>
     <string name="map_markers_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>
     <string name="navigation_points_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
@@ -4681,4 +4681,11 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Сховати військові райони</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Сховати військові райони</string>
     <string name="explore_plans">Ознайомитися з тарифними планами</string>
+    <string name="shared_string_mode">Режим</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Ви можете перемикати режим, натиснувши на віджет.</string>
+    <string name="map_widget_time_to_destination">Час до місця призначення</string>
+    <string name="map_widget_time_to_intermediate">Час до проміжного пункту</string>
+    <string name="map_widget_distance_to_intermediate">Відстань до проміжного пункту</string>
+    <string name="radius_ruler_mode_desc">Ви можете перемикати режим радіусної лінійки, натиснувши на віджет.</string>
+    <string name="lang_sat">Санталі</string>
 </resources>

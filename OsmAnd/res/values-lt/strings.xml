@@ -1430,7 +1430,7 @@
     <string name="action_modify">Pakeisti veiksmą</string>
     <string name="action_delete">Ištrinti veiksmą</string>
     <string name="action_create">Sukurti veiksmą</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">liko</string>
     <string name="waypoint_visit_after">Aplankyti po</string>
     <string name="waypoint_visit_before">Aplankyti iki</string>

@@ -1420,7 +1420,7 @@
     <string name="action_delete">Usuń</string>
     <string name="osm_edits">Edycje OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">pozostało</string>
     <string name="parking_place_limited">Czas parkowania ograniczony do</string>
     <string name="your_edits">Zmiany</string>
@@ -4641,4 +4641,9 @@
     <string name="routing_attr_hazmat_category_description">Kategoria materiałów niebezpiecznych / Uwzględnić zezwolenia na dostęp do materiałów niebezpiecznych</string>
     <string name="routing_attr_avoid_4wd_only_name">Unikaj dróg dla pojazdów z napędem na 4 koła</string>
     <string name="distance_circles">Okręgi odległości</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ukryj obszary wojskowe</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Ukryj obszary wojskowe</string>
+    <string name="shared_string_mode">Tryb</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tryb można przełączać, stukając widżet.</string>
+    <string name="map_widget_distance_to_intermediate">Odległość do punktu pośredniego</string>
 </resources>

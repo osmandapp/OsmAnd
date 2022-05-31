@@ -137,6 +137,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -148,8 +149,8 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -479,6 +480,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				atlasMapRendererView.setElevationAngle(app.getSettings().getLastKnownMapElevation());
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}
+			mapView.setMapRenderer(atlasMapRendererView);
 			OsmAndMapLayersView ml = findViewById(R.id.MapLayersView);
 			if (useAndroidAuto) {
 				ml.setVisibility(View.GONE);
@@ -490,7 +492,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 			getMapViewTrackingUtilities().setMapView(mapView);
-			mapView.setMapRenderer(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
 		} else {
@@ -1170,7 +1171,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			float y = event.getY();
 			final RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 			final QuadPoint cp = tb.getCenterPixelPoint();
-			final LatLon l = tb.getLatLonFromPixel(cp.x + x * 15, cp.y + y * 15);
+			final LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
+					cp.x + x * 15, cp.y + y * 15);
 			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
 		}
@@ -1302,7 +1304,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandMapTileView mapView = getMapView();
 		MapLayers mapLayers = getMapLayers();
 		if (mapLayers.getMapInfoLayer() != null) {
-			mapLayers.getMapInfoLayer().recreateControls();
+			mapLayers.getMapInfoLayer().recreateAllControls(this);
 		}
 		if (mapLayers.getMapQuickActionLayer() != null) {
 			mapLayers.getMapQuickActionLayer().refreshLayer();
@@ -1374,7 +1376,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void scrollMap(float dx, float dy) {
 		final RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 		final QuadPoint cp = tb.getCenterPixelPoint();
-		final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+		final LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
+				cp.x + dx, cp.y + dy);
 		app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 	}
 

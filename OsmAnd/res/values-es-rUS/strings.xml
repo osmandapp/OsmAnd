@@ -42,7 +42,7 @@
     <string name="action_delete">Acción borrar</string>
     <string name="osm_edits">Ediciones de OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Estacionamiento limitado hasta las</string>
     <string name="osmand_parking_time_left">restante(s)</string>
     <string name="your_edits">Tus ediciones</string>
@@ -4631,7 +4631,7 @@
     <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
     <string name="routing_attr_avoid_4wd_only_description">Evita los caminos adecuados solo para vehículos todo terreno 4x4</string>
     <string name="bearing_secondary_desc">Puedes cambiar el formato de los datos mostrados en: %1$s → %2$s → %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Puedes cambiar el formato de las coordenadas en %1$s → %2$s → %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">El formato de las coordenadas pueden cambiarse en %1$s → %2$s → %3$s.</string>
     <string name="widget_secondary_desc_part_of">Parte del complemento «%1$s».</string>
     <string name="elevation_profile_widget_desc">Este widget muestra el perfil de elevación y pendiente de la ruta actual.</string>
     <string name="parking_widget_desc">Este widget muestra la distancia desde el centro de la pantalla hasta el lugar del estacionamiento.</string>
@@ -4641,7 +4641,7 @@
     <string name="battery_widget_desc">El widget muestra el nivel de batería del dispositivo.</string>
     <string name="gps_info_widget_desc">Este widget muestra el número de satélites que el dispositivo detecta y utiliza en ese momento.</string>
     <string name="altitude_widget_desc">Este widget muestra la altura sobre el nivel del mar en la ubicación actual.</string>
-    <string name="max_speed_widget_desc">Este widget muestra el límite de velocidad del camino actual.</string>
+    <string name="max_speed_widget_desc">Este widget muestra el límite de velocidad del camino por el que se circula actualmente.</string>
     <string name="current_speed_widget_desc">Este widget muestra la velocidad actual detectada por el sensor del GPS.</string>
     <string name="get_altitude_information">Obtener información de altitud</string>
     <string name="calculating_altitude">Calculando altitud</string>
@@ -4666,7 +4666,7 @@
     <string name="lanes_widgets_desc">Este widget de carriles muestra la disposición actual de los carriles en el camino y destaca los carriles por los que se puede circular con la navegación activa.</string>
     <string name="map_markers_bar_widget_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">Estos widgets proporcionan un acceso rápido para iniciar o parar una grabación de audio, vídeo o foto.</string>
+    <string name="audio_video_notes_desc">Este widget proporciona un acceso rápido para iniciar o parar una grabación (audio, video o foto).</string>
     <string name="bearing_desc">Este widget muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados, milirradianes).</string>
     <string name="map_markers_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
     <string name="navigation_points_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
@@ -4696,4 +4696,10 @@
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
     <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Puedes cambiar el modo pulsando en el widget.</string>
+    <string name="radius_ruler_mode_desc">Puedes cambiar el modo de «Regla radial» pulsando en el widget.</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="shared_string_mode">Modo</string>
+    <string name="map_widget_time_to_destination">Tiempo al destino</string>
+    <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
 </resources>

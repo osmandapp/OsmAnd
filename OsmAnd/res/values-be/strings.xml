@@ -1480,7 +1480,7 @@
     <string name="shared_string_more_actions">Яшчэ дзеянні</string>
     <string name="osmand_parking_overdue">Састарэлі</string>
     <string name="osmand_parking_hour">г</string>
-    <string name="osmand_parking_minute">хв</string>
+    <string name="shared_string_minute_lowercase">хв</string>
     <string name="osmand_parking_time_left">засталося</string>
     <string name="action_create">Стварыць дзеянне</string>
     <string name="action_modify">Змяніць дзеянне</string>

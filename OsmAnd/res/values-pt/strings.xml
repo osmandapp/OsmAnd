@@ -1360,7 +1360,7 @@
     <string name="action_delete">Ação eliminar</string>
     <string name="osm_edits">Edições no OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Tempo de estacionamento limitado a</string>
     <string name="osmand_parking_time_left">restante</string>
     <string name="your_edits">Minhas edições</string>
@@ -4625,7 +4625,7 @@
     <string name="radius_rules_widget_desc">A ferramenta régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da visualização de círculos de distância no mapa.</string>
     <string name="fps_widget_desc">Widget que mostra a que velocidade o mapa e os seus elementos são mostrados e atualizados.</string>
     <string name="altitude_widget_desc">Widget que mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
-    <string name="max_speed_widget_desc">Widget que mostra a velocidade máxima na estrada em que se encontra.</string>
+    <string name="max_speed_widget_desc">Widget que mostra a velocidade máxima permitida na estrada em que se encontra.</string>
     <string name="arrival_time_widget_desc">Hora de chegada ao ponto de destino.</string>
     <string name="route_maneuvers_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
     <string name="routing_attr_avoid_4wd_only_description">Evitar estradas adequadas apenas para viaturas todo-o-terreno com tração às 4 rodas</string>
@@ -4674,7 +4674,7 @@
     <string name="routing_attr_avoid_highway_name">Evitar autoestradas</string>
     <string name="routing_attr_avoid_highway_description">Evitar autoestradas</string>
     <string name="routing_attr_hazmat_category_name">Categoria de material perigoso</string>
-    <string name="routing_attr_allow_private_for_truck_description">Permitir acesso para camiões a áreas privadas.</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permitir acesso a camiões em áreas privadas.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permitir acesso privado (camião)</string>
     <string name="map_widget_trip_recording_duration">Duração</string>
     <string name="map_widget_trip_recording_distance">Distância</string>
@@ -4686,4 +4686,11 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares, normalmente de acesso proibido a civis</string>
     <string name="explore_plans">Explorar planos</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Pode alterar o modo tocando no widget.</string>
+    <string name="map_widget_time_to_destination">Tempo até ao destino</string>
+    <string name="map_widget_time_to_intermediate">Tempo até ao ponto intermédio</string>
+    <string name="map_widget_distance_to_intermediate">Distância até ao ponto intermédio</string>
+    <string name="radius_ruler_mode_desc">Pode alterar o modo de régua de raio tocando no widget.</string>
+    <string name="shared_string_mode">Modo</string>
+    <string name="lang_sat">Santáli</string>
 </resources>
