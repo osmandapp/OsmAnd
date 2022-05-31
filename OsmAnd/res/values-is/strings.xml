@@ -180,7 +180,7 @@
     <string name="shared_string_go">Fara</string>
     <string name="osmand_parking_overdue">útrunnið</string>
     <string name="osmand_parking_hour">klst</string>
-    <string name="osmand_parking_minute">mín</string>
+    <string name="shared_string_minute_lowercase">mín</string>
     <string name="osmand_parking_time_left">eftir</string>
     <string name="drawer">Flatur listi</string>
     <string name="general_settings_2">Almennar stillingar</string>

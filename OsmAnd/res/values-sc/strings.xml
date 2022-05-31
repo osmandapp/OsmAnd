@@ -1460,7 +1460,7 @@
     <string name="action_delete">Atzione iscantzella</string>
     <string name="osm_edits">Modìficas OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">galu</string>
     <string name="parking_place_limited">Parchègiu cun tempus limitadu a</string>
     <string name="your_edits">Modìficas tuas</string>

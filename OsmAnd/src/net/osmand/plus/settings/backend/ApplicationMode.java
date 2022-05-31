@@ -32,6 +32,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
@@ -227,6 +228,7 @@ public class ApplicationMode {
 		regWidgetAvailability(TIME_TO_DESTINATION.id, all);
 		regWidgetAvailability(CURRENT_SPEED.id, all);
 		regWidgetAvailability(MAX_SPEED.id, all);
+		regWidgetAvailability(AVERAGE_SPEED.id, all);
 		regWidgetAvailability(ALTITUDE.id, all);
 
 		// all = null everything

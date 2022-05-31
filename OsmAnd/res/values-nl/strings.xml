@@ -1457,7 +1457,7 @@
     <string name="action_delete">Actie verwijderen</string>
     <string name="osm_edits">OSM wijzigingen</string>
     <string name="osmand_parking_hour">u</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">over</string>
     <string name="parking_place_limited">Parkeertijd beperkt tot</string>
     <string name="your_edits">Uw wijzigingen</string>

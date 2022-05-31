@@ -1,18 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
-
 import android.content.Context;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -20,11 +8,24 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
 public enum WidgetType {
 
@@ -48,6 +49,7 @@ public enum WidgetType {
 	MAGNETIC_BEARING("magnetic_bearing", R.string.map_widget_magnetic_bearing, R.string.magnetic_bearing_widget_desc, R.drawable.widget_bearing_day, R.drawable.widget_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
 	TRUE_BEARING("true_bearing", R.string.map_widget_true_bearing, 0, R.drawable.widget_true_bearing_day, R.drawable.widget_true_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
 	CURRENT_SPEED("speed", R.string.map_widget_current_speed, R.string.current_speed_widget_desc, R.drawable.widget_speed_day, R.drawable.widget_speed_night, R.string.docs_widget_current_speed, null, RIGHT),
+	AVERAGE_SPEED("average_speed", R.string.map_widget_average_speed, R.string.average_speed_widget_desc, R.drawable.widget_average_speed_day, R.drawable.widget_average_speed_night, 0, null, RIGHT),
 	MAX_SPEED("max_speed", R.string.map_widget_max_speed, R.string.max_speed_widget_desc, R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night, R.string.docs_widget_max_speed, null, RIGHT),
 	ALTITUDE("altitude", R.string.map_widget_altitude, R.string.altitude_widget_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, R.string.docs_widget_altitude, null, RIGHT),
 	GPS_INFO("gps_info", R.string.map_widget_gps_info, R.string.gps_info_widget_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
@@ -182,6 +184,8 @@ public enum WidgetType {
 			return new RadiusRulerWidgetSettingsFragment();
 		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
 			return new TimeToNavigationPointSettingsFragment();
+		} else if (this == AVERAGE_SPEED) {
+			return new AverageSpeedWidgetSettingFragment();
 		}
 		return null;
 	}

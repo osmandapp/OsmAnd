@@ -1264,7 +1264,7 @@
     <string name="donations">Rhoddion</string>
     <string name="shared_string_update">Diweddaru</string>
     <string name="m_s">m/e</string>
-    <string name="osmand_parking_minute">mun</string>
+    <string name="shared_string_minute_lowercase">mun</string>
     <string name="shared_string_deselect">Dad-ddewis</string>
     <string name="animate_routing_gpx">Dynwared gan ddefnyddio trac GPX</string>
     <string name="route_descr_lat_lon">Lled %1$.3f, hyd %2$.3f</string>

@@ -6,10 +6,6 @@ import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,6 +28,10 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -149,7 +149,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		alarmControl.setVisibility(false);
 
 		setupRulerWidget(mapRulerLayout);
-
 		widgetRegistry.registerAllControls(mapActivity);
 	}
 

@@ -1487,7 +1487,7 @@
     <string name="action_delete">Handling: slet</string>
     <string name="osm_edits">OSM-redigeringer</string>
     <string name="osmand_parking_hour">t</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">tilbage</string>
     <string name="parking_place_limited">Tidsbegrænset parkering til</string>
     <string name="your_edits">Redigeringer</string>

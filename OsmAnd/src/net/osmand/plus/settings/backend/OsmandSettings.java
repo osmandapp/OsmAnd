@@ -88,6 +88,7 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -1504,6 +1505,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PREFER_MOTORWAYS = new BooleanPreference(this, "prefer_motorways", false).makeProfile().cache();
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
+
+	public final OsmandPreference<Long> AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS = new LongPreference(this, "average_speed_measured_interval_millis", AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS).makeProfile().cache();
+	public final OsmandPreference<Boolean> AVERAGE_SPEED_SKIP_STOPS = new BooleanPreference(this, "average_speed_skip_stops", true).makeProfile().cache();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,

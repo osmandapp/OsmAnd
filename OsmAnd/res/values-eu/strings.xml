@@ -1468,7 +1468,7 @@
     <string name="action_modify">Aldatze ekintza</string>
     <string name="action_delete">Ezabatze ekintza</string>
     <string name="osm_edits">OSM edizioak</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Aparkatzeko denbora muga</string>
     <string name="osmand_parking_time_left">bukatzeko</string>
     <string name="your_edits">Zure edizioak</string>

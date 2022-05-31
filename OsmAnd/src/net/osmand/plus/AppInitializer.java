@@ -81,6 +81,7 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -455,6 +456,7 @@ public class AppInitializer implements IProgress {
 		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
+		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
 
 		initOpeningHoursParser();
 	}

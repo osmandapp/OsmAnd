@@ -445,7 +445,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		}
 		timeStringBuilder.append(minutes);
 		timeStringBuilder.append(" ");
-		timeStringBuilder.append(ctx.getString(R.string.osmand_parking_minute));
+		timeStringBuilder.append(ctx.getString(R.string.shared_string_minute_lowercase));
 
 
 		return timeStringBuilder.toString();

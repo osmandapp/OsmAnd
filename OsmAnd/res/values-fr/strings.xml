@@ -1471,7 +1471,7 @@
     <string name="action_delete">Action supprimer</string>
     <string name="osm_edits">Éditions OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">restantes</string>
     <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
     <string name="your_edits">Vos modifications</string>

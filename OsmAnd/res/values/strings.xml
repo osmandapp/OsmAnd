@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
+    <string name="average_speed_skip_stops">Take into account stops</string>
+    <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
+    <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
+    <string name="map_widget_average_speed">Average speed</string>
     <string name="lang_sat">Santali</string>
     <string name="shared_string_mode">Mode</string>
     <string name="time_to_navigation_point_widget_settings_desc">Switch mode by tapping the widget.</string>
@@ -2785,7 +2790,7 @@
     <!-- means first letter of word *hour* -->
     <string name="osmand_parking_hour">h</string>
     <!-- means first letter of word *minute*-->
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Parking time limited to</string>
     <!-- used to describe time left, not left direction -->
     <string name="osmand_parking_time_left">left</string>
