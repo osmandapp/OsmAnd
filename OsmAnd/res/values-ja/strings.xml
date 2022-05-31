@@ -1431,7 +1431,7 @@ POIの更新は利用できません</string>
     <string name="action_delete">アクションの削除</string>
     <string name="osm_edits">OSMの編集</string>
     <string name="osmand_parking_hour">時間</string>
-    <string name="osmand_parking_minute">分</string>
+    <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">駐車可能です</string>
     <string name="parking_place_limited">駐車場の制限時間</string>
     <string name="your_edits">あなたの編集</string>

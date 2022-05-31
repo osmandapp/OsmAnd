@@ -147,7 +147,7 @@ public class DashParkingFragment extends DashLocationFragment {
 		timeStringBuilder.append(" ");
 		timeStringBuilder.append(minutes);
 		timeStringBuilder.append(" ");
-		timeStringBuilder.append(getResources().getString(R.string.osmand_parking_minute));
+		timeStringBuilder.append(getResources().getString(R.string.shared_string_minute_lowercase));
 
 		return timeStringBuilder.toString();
 	}

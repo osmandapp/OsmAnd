@@ -1470,7 +1470,7 @@
     <string name="drawer">平面清單</string>
     <string name="osm_edits">OSM 編輯</string>
     <string name="osmand_parking_hour">時</string>
-    <string name="osmand_parking_minute">分</string>
+    <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">左</string>
     <string name="parking_place_limited">停車場時限到</string>
     <string name="your_edits">您的編輯</string>

@@ -1075,7 +1075,7 @@
     <string name="tips_and_tricks_descr">Ofte stilte spørsmål, siste endringer og annet.</string>
     <string name="routing_settings_2">Navigeringsinnstillinger</string>
     <string name="osmand_parking_hour">t</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Parkeringstid begrenset til</string>
     <string name="simulate_your_location">Simuler din posisjon</string>
     <string name="short_location_on_map">B.gr. %1$s

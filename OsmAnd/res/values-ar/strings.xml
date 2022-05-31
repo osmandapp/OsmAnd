@@ -1009,7 +1009,7 @@
     <string name="favourites_remove_dialog_msg">إزالة النقطة المفضلة \'%s\' ؟</string>
     <string name="favourites_remove_dialog_success">تم بنجاح حذف النقطة المفضلة {0}.</string>
     <string name="osmand_parking_hour">س</string>
-    <string name="osmand_parking_minute">د</string>
+    <string name="shared_string_minute_lowercase">د</string>
     <string name="shared_string_video">فيديو</string>
     <string name="shared_string_photo">صورة</string>
     <string name="route_points">نقاط الطريق</string>

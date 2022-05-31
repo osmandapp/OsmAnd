@@ -1362,7 +1362,7 @@
     <string name="confirmation_to_clear_history">Εκκαθάριση ιστορικού;</string>
     <string name="osm_edits">Επεξεργασίες OSM</string>
     <string name="osmand_parking_hour">ω</string>
-    <string name="osmand_parking_minute">λεπτά</string>
+    <string name="shared_string_minute_lowercase">λεπτά</string>
     <string name="tips_and_tricks_descr">Συχνές ερωτήσεις, πρόσφατες αλλαγές και άλλα.</string>
     <string name="shared_string_unexpected_error">Αναπάντεχο σφάλμα</string>
     <string name="shared_string_currently_recording_track">Τρέχουσα καταγραφή ίχνους</string>

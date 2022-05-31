@@ -1424,7 +1424,7 @@
     <string name="action_delete">Izbrisano</string>
     <string name="osm_edits">Urejanje OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">preostalo je</string>
     <string name="parking_place_limited">Parkiranje je časovno omejeno na</string>
     <string name="your_edits">Vaša urejanja</string>

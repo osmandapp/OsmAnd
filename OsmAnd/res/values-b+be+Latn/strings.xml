@@ -1734,7 +1734,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="action_delete">Vydalić dziejańnie</string>
     <string name="osm_edits">Praŭkі OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">chv</string>
+    <string name="shared_string_minute_lowercase">chv</string>
     <string name="parking_place_limited">Čas parkoŭkі abmiežavany</string>
     <string name="osmand_parking_time_left">zastałosia</string>
     <string name="your_edits">Vašy praŭkі</string>

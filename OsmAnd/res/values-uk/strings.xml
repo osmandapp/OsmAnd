@@ -1438,7 +1438,7 @@
     <string name="action_delete">Вилучити дію</string>
     <string name="osm_edits">Зміни OSM</string>
     <string name="osmand_parking_hour">г</string>
-    <string name="osmand_parking_minute">хв</string>
+    <string name="shared_string_minute_lowercase">хв</string>
     <string name="osmand_parking_time_left">лишилось</string>
     <string name="parking_place_limited">Стоянка з обмеженням по часу</string>
     <string name="your_edits">Ваші зміни</string>

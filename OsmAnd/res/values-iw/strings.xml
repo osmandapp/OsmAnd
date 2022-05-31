@@ -2051,7 +2051,7 @@
     <string name="map_mode">מצב מפה</string>
     <string name="no_map_markers_found">נא להוסיף סמני מפה דרך המפה</string>
     <string name="no_waypoints_found">לא נמצאו נקודות דרך</string>
-    <string name="osmand_parking_minute">דק׳</string>
+    <string name="shared_string_minute_lowercase">דק׳</string>
     <string name="parking_place_limited">זמן החנייה מוגבל עד</string>
     <string name="osmand_parking_time_left">נותרו</string>
     <string name="your_edits">העריכות שלך</string>

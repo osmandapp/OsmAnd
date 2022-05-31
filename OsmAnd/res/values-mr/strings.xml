@@ -405,7 +405,7 @@
     <string name="welcome_header">सुस्वागतम्</string>
     <string name="confirmation_to_clear_history">इतिहास पुसून टाकायचा\?</string>
     <string name="osmand_parking_hour">ता</string>
-    <string name="osmand_parking_minute">मि</string>
+    <string name="shared_string_minute_lowercase">मि</string>
     <string name="osmand_parking_time_left">उर्वरित</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_and">व</string>

@@ -541,7 +541,7 @@
     <string name="storage_directory">ഭൂപടം സൂക്ഷിക്കുന്ന സ്ഥലം</string>
     <string name="welcome_header">സ്വാഗതം</string>
     <string name="osmand_parking_overdue">കാലാവധി കഴിഞ്ഞൂ</string>
-    <string name="osmand_parking_minute">മി.</string>
+    <string name="shared_string_minute_lowercase">മി.</string>
     <string name="your_edits">നിങ്ങളുടെ എഡിറ്റുകള്‍</string>
     <string name="waypoint_visit_after">പിമ്പായി സന്ദര്‍ശിക്കുക</string>
     <string name="waypoint_visit_before">മുമ്പായി സന്ദര്‍ശിക്കുക</string>

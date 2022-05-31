@@ -1449,7 +1449,7 @@
     <string name="shared_string_collapse">Slå ihop</string>
     <string name="osm_edits">OSM-redigeringar</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">kvar</string>
     <string name="parking_place_limited">Tidsbegränsad parkering till</string>
     <string name="your_edits">Dina redigeringar</string>

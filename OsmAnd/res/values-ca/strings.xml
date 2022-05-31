@@ -1448,7 +1448,7 @@
     <string name="action_delete">Acció d\'esborrar</string>
     <string name="osm_edits">Edicions a OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Durada d\'aparcament limitada a</string>
     <string name="osmand_parking_time_left">pendent</string>
     <string name="your_edits">Les vostres edicions</string>

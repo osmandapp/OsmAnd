@@ -1067,7 +1067,7 @@
     <string name="action_delete">Eylem sil</string>
     <string name="osm_edits">OSM düzeltmeleri</string>
     <string name="osmand_parking_hour">sa</string>
-    <string name="osmand_parking_minute">dk</string>
+    <string name="shared_string_minute_lowercase">dk</string>
     <string name="osmand_parking_time_left">sol</string>
     <string name="your_edits">Düzeltmeleriniz</string>
     <string name="tips_and_tricks_descr">Sık sorulan sorular, son değişiklikler ve diğerleri.</string>

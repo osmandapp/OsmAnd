@@ -186,7 +186,7 @@
     <string name="shared_string_go">Get</string>
     <string name="osm_edits">OSM düzəlişləri</string>
     <string name="osmand_parking_hour">s</string>
-    <string name="osmand_parking_minute">dəq</string>
+    <string name="shared_string_minute_lowercase">dəq</string>
     <string name="osmand_parking_time_left">qalıb</string>
     <string name="your_edits">Düzəlişləriniz</string>
     <string name="waypoint_visit_after">Sonra ziyarət et</string>

@@ -1267,7 +1267,7 @@
     <string name="action_delete">Изтрито</string>
     <string name="osm_edits">OSM редакции</string>
     <string name="osmand_parking_hour">ч</string>
-    <string name="osmand_parking_minute">мин</string>
+    <string name="shared_string_minute_lowercase">мин</string>
     <string name="parking_place_limited">Времето за паркиране е ограничено до</string>
     <string name="osmand_parking_time_left">ляво</string>
     <string name="your_edits">Редакциите ви</string>

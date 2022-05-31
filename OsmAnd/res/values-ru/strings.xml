@@ -1744,7 +1744,7 @@
     <string name="action_create">Создать действие</string>
     <string name="osm_edits">Правки OSM</string>
     <string name="osmand_parking_hour">ч</string>
-    <string name="osmand_parking_minute">мин</string>
+    <string name="shared_string_minute_lowercase">мин</string>
     <string name="osmand_parking_time_left">осталось</string>
     <string name="parking_place_limited">Парковка ограничена временем</string>
     <string name="your_edits">Ваши правки</string>

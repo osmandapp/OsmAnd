@@ -1470,7 +1470,7 @@
     <string name="action_delete">Azione elimina</string>
     <string name="osm_edits">Modifiche OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">rimasto</string>
     <string name="parking_place_limited">Parcheggio a tempo fino a</string>
     <string name="your_edits">Le tue modifiche</string>

@@ -1301,7 +1301,7 @@
     <string name="action_delete">செயல் நீக்கம்</string>
     <string name="osm_edits">ஓஎஸ்எம் தொகுப்பு</string>
     <string name="osmand_parking_hour">மணிநேரம்</string>
-    <string name="osmand_parking_minute">மணிதுளி</string>
+    <string name="shared_string_minute_lowercase">மணிதுளி</string>
     <string name="parking_place_limited">நிறுத்தி வைக்க வரையறுத்த நேரம்</string>
     <string name="osmand_parking_time_left">இடது</string>
     <string name="your_edits">உங்கள் தொகுப்பு</string>

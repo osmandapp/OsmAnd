@@ -1336,7 +1336,7 @@
     <string name="action_delete">Darbības dzēšana</string>
     <string name="osm_edits">OSM labotie</string>
     <string name="osmand_parking_hour">st</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Stāvvietas laiks ierobežots uz</string>
     <string name="osmand_parking_time_left">pa kreisi</string>
     <string name="your_edits">Jūsu labotie</string>
