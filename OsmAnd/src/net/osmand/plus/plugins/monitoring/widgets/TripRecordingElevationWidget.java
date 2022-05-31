@@ -44,12 +44,17 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		double elevationDiff = getElevationDiff();
-		if (cachedElevationDiff != elevationDiff) {
+		if (isUpdateNeeded() || cachedElevationDiff != elevationDiff) {
 			cachedElevationDiff = elevationDiff;
 			MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
 			FormattedValue formattedUphill = OsmAndFormatter.getFormattedAltitudeValue(elevationDiff, app, metricsConstants);
 			setText(formattedUphill.value, formattedUphill.unit);
 		}
+	}
+
+	@Override
+	public boolean isMetricSystemDepended() {
+		return true;
 	}
 
 	protected abstract double getElevationDiff();
