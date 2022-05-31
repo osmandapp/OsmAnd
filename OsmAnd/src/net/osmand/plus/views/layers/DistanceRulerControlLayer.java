@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -108,13 +109,14 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		if (rulerModeOn() && !showTwoFingersDistance) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				touched = true;
 				touchOutside = false;
 				touchPoint.set(event.getX(), event.getY());
-				touchPointLatLon = tileBox.getLatLonFromPixel(event.getX(), event.getY());
+				touchPointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
+						event.getX(), event.getY());
 				touchStartTime = System.currentTimeMillis();
 				wasZoom = false;
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE && !touchOutside &&

@@ -14,7 +14,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +32,8 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 
 	@NonNull
 	@Override
-	public WidgetParams getWidget() {
-		return WidgetParams.RADIUS_RULER;
+	public WidgetType getWidget() {
+		return WidgetType.RADIUS_RULER;
 	}
 
 	@Override

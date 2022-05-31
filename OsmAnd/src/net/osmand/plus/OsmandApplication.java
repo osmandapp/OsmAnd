@@ -103,6 +103,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -197,6 +198,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LauncherShortcutsHelper launcherShortcutsHelper;
 	GpsFilterHelper gpsFilterHelper;
 	DownloadTilesHelper downloadTilesHelper;
+	AverageSpeedComputer averageSpeedComputer;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -553,6 +555,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public DownloadTilesHelper getDownloadTilesHelper() {
 		return downloadTilesHelper;
+	}
+
+	@NonNull
+	public AverageSpeedComputer getAverageSpeedComputer() {
+		return averageSpeedComputer;
 	}
 
 	public CommandPlayer getPlayer() {

@@ -834,7 +834,7 @@
     <string name="action_delete">Ջնջել գործողությունը</string>
     <string name="osm_edits">OSM-ի խմբագրումները</string>
     <string name="osmand_parking_hour">ժ</string>
-    <string name="osmand_parking_minute">րոպե</string>
+    <string name="shared_string_minute_lowercase">րոպե</string>
     <string name="parking_place_limited">Ավտոկանգառի ժամանակը սահմանափակ է</string>
     <string name="osmand_parking_time_left">մնաց</string>
     <string name="your_edits">Ձեր խմբագրումները</string>

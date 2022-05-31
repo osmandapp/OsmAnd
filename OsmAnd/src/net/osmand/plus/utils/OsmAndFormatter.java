@@ -104,11 +104,11 @@ public class OsmAndFormatter {
 			return hours + " "
 					+ app.getString(R.string.osmand_parking_hour)
 					+ (minutes > 0 ? " " + minutes + " "
-					+ app.getString(R.string.osmand_parking_minute) : "");
+					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
-			return minutes + " " + app.getString(R.string.osmand_parking_minute);
+			return minutes + " " + app.getString(R.string.shared_string_minute_lowercase);
 		} else {
-			return "<1 " + app.getString(R.string.osmand_parking_minute);
+			return "<1 " + app.getString(R.string.shared_string_minute_lowercase);
 		}
 	}
 

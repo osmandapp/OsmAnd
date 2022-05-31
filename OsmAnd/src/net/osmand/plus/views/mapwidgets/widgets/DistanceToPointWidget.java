@@ -1,5 +1,11 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -10,10 +16,7 @@ import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public abstract class DistanceToPointWidget extends TextInfoWidget {
 
@@ -24,11 +27,11 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	private final float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetParams widgetParams) {
-		super(mapActivity);
+	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		super(mapActivity, widgetType);
 		this.view = mapActivity.getMapView();
 
-		setIcons(widgetParams);
+		setIcons(widgetType);
 		setText(null, null);
 		setOnClickListener(v -> onClick(view));
 	}
@@ -78,7 +81,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 	public static class DistanceToDestinationWidget extends DistanceToPointWidget {
 
 		public DistanceToDestinationWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity, WidgetParams.DISTANCE_TO_DESTINATION);
+			super(mapActivity, DISTANCE_TO_DESTINATION);
 		}
 
 		@Override
@@ -100,7 +103,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 		private final TargetPointsHelper targetPointsHelper;
 
 		public DistanceToIntermediateDestinationWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity, WidgetParams.INTERMEDIATE_DESTINATION);
+			super(mapActivity, INTERMEDIATE_DESTINATION);
 			targetPointsHelper = app.getTargetPointsHelper();
 		}
 

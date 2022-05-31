@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_TIME;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,11 +11,10 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuType;
+import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -24,15 +25,15 @@ public class TripRecordingTimeWidget extends TextInfoWidget {
 	private float cachedTimeSpan = -1;
 
 	public TripRecordingTimeWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, TRIP_RECORDING_TIME);
 		savingTrackHelper = app.getSavingTrackHelper();
 
-		setIcons(WidgetParams.TRIP_RECORDING_TIME);
+		setIcons(TRIP_RECORDING_TIME);
 		updateInfo(null);
 		setOnClickListener(v -> {
 			if (cachedTimeSpan > 0) {
 				Bundle params = new Bundle();
-				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuType.TRACK.name());
+				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
 				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
 						null, null, params);
 			}

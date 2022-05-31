@@ -1360,7 +1360,7 @@
     <string name="action_delete">Ação eliminar</string>
     <string name="osm_edits">Edições no OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Tempo de estacionamento limitado a</string>
     <string name="osmand_parking_time_left">restante</string>
     <string name="your_edits">Minhas edições</string>
@@ -4692,4 +4692,5 @@
     <string name="map_widget_distance_to_intermediate">Distância até ao ponto intermédio</string>
     <string name="radius_ruler_mode_desc">Pode alterar o modo de régua de raio tocando no widget.</string>
     <string name="shared_string_mode">Modo</string>
+    <string name="lang_sat">Santáli</string>
 </resources>

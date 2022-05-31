@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -36,8 +35,8 @@ public class WidgetIconsHelper {
 		updateWidgetIcon(icon, mapIconId, settingsIconId, shouldPaintIcon);
 	}
 
-	public void updateWidgetIcon(@NonNull ImageView icon, @NonNull WidgetParams widgetParams) {
-		int settingsIconId = widgetParams.getIconId(nightMode);
+	public void updateWidgetIcon(@NonNull ImageView icon, @NonNull WidgetType widgetType) {
+		int settingsIconId = widgetType.getIconId(nightMode);
 		updateWidgetIcon(icon, 0, settingsIconId, false);
 	}
 

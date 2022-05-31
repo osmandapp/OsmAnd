@@ -103,7 +103,7 @@ public class MapLayers {
 	private MapControlsLayer mapControlsLayer;
 	private MapQuickActionLayer mapQuickActionLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
-	private MapWidgetRegistry mapWidgetRegistry;
+	private final MapWidgetRegistry mapWidgetRegistry;
 	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
@@ -113,6 +113,7 @@ public class MapLayers {
 		this.mapWidgetRegistry = new MapWidgetRegistry(app);
 	}
 
+	@NonNull
 	public MapWidgetRegistry getMapWidgetRegistry() {
 		return mapWidgetRegistry;
 	}
@@ -421,9 +422,9 @@ public class MapLayers {
 	}
 
 	private void addFilterToList(final ContextMenuAdapter adapter,
-								 final List<PoiUIFilter> list,
-								 final PoiUIFilter f,
-								 boolean multiChoice) {
+	                             final List<PoiUIFilter> list,
+	                             final PoiUIFilter f,
+	                             boolean multiChoice) {
 		list.add(f);
 		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {

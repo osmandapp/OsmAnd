@@ -835,11 +835,10 @@ public class NetworkRouteSelector {
 		}
 
 
-		public static List<RouteKey> getRouteStringKeys(RenderedObject o) {
-			Map<String, String> tags = o.getTags();
-			return getRouteKeys(tags);
+		public static List<RouteKey> getRouteKeys(RenderedObject renderedObject) {
+			return getRouteKeys(renderedObject.getTags());
 		}
-		
+
 		public static List<RouteKey> getRouteKeys(BinaryMapDataObject bMdo) {
 			Map<String, String> tags = new TreeMap<>();
 			for (int i = 0; i < bMdo.getObjectNames().keys().length; i++) {
@@ -879,8 +878,8 @@ public class NetworkRouteSelector {
 			}
 			return q;
 		}
-		
-		private static List<RouteKey> getRouteKeys(Map<String, String> tags) {
+
+		public static List<RouteKey> getRouteKeys(Map<String, String> tags) {
 			List<RouteKey> lst = new ArrayList<RouteKey>();
 			for (RouteType routeType : RouteType.values()) {
 				int rq = getRouteQuantity(tags, routeType);

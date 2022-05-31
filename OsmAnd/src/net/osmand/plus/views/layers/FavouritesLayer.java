@@ -26,6 +26,7 @@ import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -266,7 +267,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -283,9 +284,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
 								 FavouritePoint n) {
 		if (n.isVisible()) {
-			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
-			if (calculateBelongs(ex, ey, x, y, r)) {
+			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
+			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
 				res.add(n);
 			}
 		}

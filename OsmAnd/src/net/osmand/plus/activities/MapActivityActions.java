@@ -67,6 +67,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -328,7 +329,13 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
 			if (gpxFile.error == null) {
-				app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+				if (showOnMap) {
+					params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				} else {
+					params.hideFromMap();
+				}
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 				String result = app.getString(R.string.route_successfully_saved_at, gpxFile.tracks.get(0).name);
 				Toast.makeText(app, result, Toast.LENGTH_LONG).show();
 			} else {

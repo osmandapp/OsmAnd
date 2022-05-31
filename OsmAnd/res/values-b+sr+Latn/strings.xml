@@ -2229,7 +2229,7 @@
     <string name="your_edits">Vaše izmene</string>
     <string name="osmand_parking_time_left">preostalo</string>
     <string name="parking_place_limited">Vreme parkiranja je ograničeno na</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osm_edits">OSM izmene</string>
     <string name="action_delete">Dejstvo brisanja</string>

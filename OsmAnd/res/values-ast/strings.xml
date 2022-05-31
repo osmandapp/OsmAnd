@@ -94,7 +94,7 @@
     <string name="current_route">Camín actual</string>
     <string name="confirmation_to_clear_history">¿Quies llimpiar l\'historial\?</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osm_edits">OSM edits</string>
     <string name="your_edits">Your edits</string>
     <string name="shared_string_ellipsis">…</string>

@@ -1,9 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
-
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -116,6 +113,7 @@ import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -142,6 +140,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -304,7 +305,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
-				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+				LatLon latLon = NativeUtilities.getLatLonFromPixel(mapActivity.getMapView().getMapRenderer(), tileBox, point.x, point.y);
 				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
 				LatLon selectedPoint = pair != null ? pair.first : latLon;
 				PointDescription name = pair != null ? pair.second : null;
@@ -740,8 +741,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 
 				// Gpx card
-				List<SelectedGpxFile> selectedGPXFiles =
-						app.getSelectedGpxHelper().getSelectedGPXFiles();
+				List<SelectedGpxFile> selectedGPXFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 				final List<GPXFile> gpxFiles = new ArrayList<>();
 				for (SelectedGpxFile gs : selectedGPXFiles) {
 					if (!gs.isShowCurrentTrack()) {

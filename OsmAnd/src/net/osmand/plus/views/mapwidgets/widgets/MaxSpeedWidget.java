@@ -1,5 +1,10 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -7,10 +12,6 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class MaxSpeedWidget extends TextInfoWidget {
 
@@ -19,10 +20,10 @@ public class MaxSpeedWidget extends TextInfoWidget {
 	private float cachedMaxSpeed = 0;
 
 	public MaxSpeedWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, MAX_SPEED);
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 
-		setIcons(WidgetParams.MAX_SPEED);
+		setIcons(MAX_SPEED);
 		setText(null, null);
 	}
 

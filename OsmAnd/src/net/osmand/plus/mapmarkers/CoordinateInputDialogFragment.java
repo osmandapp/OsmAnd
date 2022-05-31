@@ -74,6 +74,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
@@ -1498,7 +1499,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			if (!gpxSelected) {
-				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false, true, true, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.showOnMap().syncGroup().selectedByUser().addToHistory().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 			}
 		}
 	}

@@ -533,10 +533,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (location != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			int x = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-			int y = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+					location.getLatitude(), location.getLongitude());
 			int rad = (int) (18 * tb.getDensity());
-			if (Math.abs(x - ex) <= rad && (ey - y) <= rad && (y - ey) <= 2.5 * rad) {
+			if (Math.abs(pixel.x - ex) <= rad && (ey - pixel.y) <= rad && (pixel.y - ey) <= 2.5 * rad) {
 				myLocation.add(location);
 			}
 		}

@@ -31,25 +31,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TRUE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
 
 public class ApplicationMode {
 
@@ -227,6 +228,7 @@ public class ApplicationMode {
 		regWidgetAvailability(TIME_TO_DESTINATION.id, all);
 		regWidgetAvailability(CURRENT_SPEED.id, all);
 		regWidgetAvailability(MAX_SPEED.id, all);
+		regWidgetAvailability(AVERAGE_SPEED.id, all);
 		regWidgetAvailability(ALTITUDE.id, all);
 
 		// all = null everything

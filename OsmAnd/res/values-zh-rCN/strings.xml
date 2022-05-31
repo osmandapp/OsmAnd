@@ -1048,7 +1048,7 @@
     <string name="action_delete">删除</string>
     <string name="osm_edits">OSM 编辑</string>
     <string name="osmand_parking_hour">时</string>
-    <string name="osmand_parking_minute">分</string>
+    <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">左</string>
     <string name="your_edits">您的编辑</string>
     <string name="simulate_your_location">模拟您的位置</string>

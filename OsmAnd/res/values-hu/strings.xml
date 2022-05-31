@@ -1435,7 +1435,7 @@
     <string name="action_delete">Törlés művelet</string>
     <string name="osm_edits">OSM szerkesztések</string>
     <string name="osmand_parking_hour">ó</string>
-    <string name="osmand_parking_minute">perc</string>
+    <string name="shared_string_minute_lowercase">perc</string>
     <string name="osmand_parking_time_left">maradt</string>
     <string name="confirmation_to_clear_history">Törlöd az előzményeket?</string>
     <string name="delay_to_start_navigation_descr">Az útvonaltervezési képernyőn töltendő várakozási idő megadása.</string>
@@ -4679,4 +4679,5 @@
     <string name="map_widget_distance_to_intermediate">Távolság a köztespontig</string>
     <string name="radius_ruler_mode_desc">A Sugárvonalzó módja megváltoztatható a widget megérintésével.</string>
     <string name="shared_string_mode">Mód</string>
+    <string name="lang_sat">Szantáli</string>
 </resources>

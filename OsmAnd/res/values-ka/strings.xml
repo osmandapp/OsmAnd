@@ -1608,7 +1608,7 @@
     <string name="welcome_header">კეთილი იყოს თქვენი მობრძანება</string>
     <string name="shared_string_go">წინ</string>
     <string name="osmand_parking_time_left">დარჩა</string>
-    <string name="osmand_parking_minute">წთ</string>
+    <string name="shared_string_minute_lowercase">წთ</string>
     <string name="osmand_parking_hour">სთ</string>
     <string name="shared_string_collapse">ჩამოშლა</string>
     <string name="shared_string_photo">ფოტო</string>

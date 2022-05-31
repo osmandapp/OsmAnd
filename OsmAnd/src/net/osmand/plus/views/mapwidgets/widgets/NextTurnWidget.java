@@ -1,22 +1,25 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.router.TurnType;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class NextTurnWidget extends NextTurnBaseWidget {
 
 	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
 	public NextTurnWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
-		super(mapActivity, horizontalMini);
+		super(mapActivity, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, horizontalMini);
 		setOnClickListener(getOnClickListener());
 	}
 

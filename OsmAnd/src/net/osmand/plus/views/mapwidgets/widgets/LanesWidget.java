@@ -1,8 +1,13 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
+
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -25,9 +30,6 @@ import net.osmand.router.TurnType;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class LanesWidget extends MapWidget {
 
 	private static final int MAX_METERS_NOT_SPOKEN_TURN = 800;
@@ -46,7 +48,7 @@ public class LanesWidget extends MapWidget {
 	private int shadowRadius;
 
 	public LanesWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, LANES);
 
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 

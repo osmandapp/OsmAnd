@@ -35,7 +35,7 @@
     <string name="shared_string_go">ಹೋಗು</string>
     <string name="osmand_parking_overdue">ಕಾಲಮೀರಿದ</string>
     <string name="osmand_parking_hour">ಗಂಟೆ</string>
-    <string name="osmand_parking_minute">ನಿಮಿಷ</string>
+    <string name="shared_string_minute_lowercase">ನಿಮಿಷ</string>
     <string name="osmand_parking_time_left">ಉಳಿದ ಸಮಯ</string>
     <string name="your_edits">ನಿಮ್ಮ ಸಂಪಾದನೆಗಳು</string>
     <string name="tips_and_tricks_descr">ಹೆಚ್ಚಾಗಿ ಕೆಳಲಾಗುವ ಪ್ರಶ್ನೆಗಳು, ಇತ್ತೀಚಿನ ಬದಲಾವಣೆಗಳು, ಮತ್ತು ಇತರೆ</string>

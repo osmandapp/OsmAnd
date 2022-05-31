@@ -2051,7 +2051,7 @@
     <string name="map_mode">מצב מפה</string>
     <string name="no_map_markers_found">נא להוסיף סמני מפה דרך המפה</string>
     <string name="no_waypoints_found">לא נמצאו נקודות דרך</string>
-    <string name="osmand_parking_minute">דק׳</string>
+    <string name="shared_string_minute_lowercase">דק׳</string>
     <string name="parking_place_limited">זמן החנייה מוגבל עד</string>
     <string name="osmand_parking_time_left">נותרו</string>
     <string name="your_edits">העריכות שלך</string>
@@ -4686,4 +4686,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">אין הגבלות</string>
     <string name="routing_attr_hazmat_category_name">קטגוריית חומ״ס</string>
     <string name="routing_attr_hazmat_category_description">קטגוריית חומרים מסוכנים / התחשבות ההגבלות גישה עקב חומרים מסוכנים</string>
+    <string name="routing_attr_avoid_fords_name">המנעות מגשרים איריים</string>
+    <string name="routing_attr_avoid_fords_description">המנעות מגשרים איריים</string>
+    <string name="lang_sat">סינטאלי</string>
 </resources>

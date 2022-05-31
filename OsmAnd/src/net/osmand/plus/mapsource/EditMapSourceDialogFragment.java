@@ -447,7 +447,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			case EXPIRE_TIME:
 				return expireTimeMinutes == EXPIRE_TIME_NEVER
 						? getString(R.string.shared_string_never)
-						: getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(expireTimeMinutes), getString(R.string.osmand_parking_minute));
+						: getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(expireTimeMinutes), getString(R.string.shared_string_minute_lowercase));
 			case MERCATOR_PROJECTION:
 				return elliptic ? getString(R.string.edit_tilesource_elliptic_tile) : getString(R.string.pseudo_mercator_projection);
 			case STORAGE_FORMAT:

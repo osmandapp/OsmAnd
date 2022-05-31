@@ -13,6 +13,12 @@ import android.graphics.Rect;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListMapMarker;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -22,9 +28,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +48,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Bitmap roadWorkIcon;
 	private Paint activePaint;
 	private Paint paint;
+
+	//OpenGL
+	private MapMarkersCollection mapMarkersCollection;
+	private int impassibleRoadsCount = 0;
+	private PointI movableObject;
 
 	public ImpassableRoadsLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -64,12 +77,26 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawPoint(canvas, pf.x, pf.y, true);
+			AvoidRoadInfo objectInMotion = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+			setMovableObject(objectInMotion);
+		}
+		if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			cancelMovableObject();
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= START_ZOOM) {
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				if (impassibleRoadsCount != avoidSpecificRoads.getImpassableRoads().size()) {
+					clearMarkersCollections();
+				}
+				initMarkersCollection();
+				impassibleRoadsCount = avoidSpecificRoads.getImpassableRoads().size();
+				return;
+			}
 			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
@@ -85,6 +112,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					drawPoint(canvas, tileBox, latitude, longitude, road != null);
 				}
 			}
+		} else {
+			clearMarkersCollections();
 		}
 	}
 
@@ -103,6 +132,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public void destroyLayer() {
+		clearMarkersCollections();
 	}
 
 	@Override
@@ -161,9 +191,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
 				if (location != null && road != null) {
-					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-					if (calculateBelongs(ex, ey, x, y, compare)) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, location.getLatitude(), location.getLongitude());
+					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 						compare = radius;
 						o.add(road);
 					}
@@ -216,6 +245,122 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					return callback != null && callback.isCancelled();
 				}
 			});
+			applyMovableObject(position);
+		}
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection != null) {
+			return;
+		}
+		mapMarkersCollection = new MapMarkersCollection();
+		for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+			LatLon location = entry.getKey();
+			AvoidRoadInfo road = entry.getValue();
+			boolean isMoveable = false;
+			if (road != null && contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
+				AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+				if (object.id == road.id) {
+					isMoveable = true;
+				}
+			}
+			Bitmap bitmap = getMergedBitmap(road != null);
+			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+			int x = MapUtils.get31TileNumberX(location.getLongitude());
+			int y = MapUtils.get31TileNumberY(location.getLatitude());
+			PointI pointI = new PointI(x, y);
+			mapMarkerBuilder
+					.setPosition(pointI)
+					.setIsHidden(isMoveable)
+					.setBaseOrder(baseOrder)
+					.setIsAccuracyCircleSupported(false)
+					.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
+					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
+					.buildAndAddToCollection(mapMarkersCollection);
+		}
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	/**OpenGL*/
+	private Bitmap getMergedBitmap(boolean active) {
+		float textScale = getTextScale();
+		Bitmap bitmapResult = Bitmap.createBitmap(roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		int cx = roadWorkIcon.getWidth() / 2;
+		int cy = roadWorkIcon.getHeight() / 2;
+		Rect destRect = getIconDestinationRect(cx, cy, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
+		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
+		return bitmapResult;
+	}
+
+	/**OpenGL*/
+	private void clearMarkersCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (mapMarkersCollection != null) {
+			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
+			mapMarkersCollection = null;
+		}
+	}
+
+	/** OpenGL */
+	private void setMovableObject(@NonNull AvoidRoadInfo objectInMotion) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection == null || movableObject != null) {
+			return;
+		}
+		int x = MapUtils.get31TileNumberX(objectInMotion.longitude);
+		int y = MapUtils.get31TileNumberY(objectInMotion.latitude);
+		QListMapMarker markers = mapMarkersCollection.getMarkers();
+		for (int i = 0; i < markers.size(); i++) {
+			MapMarker m = markers.get(i);
+			if (m.getPosition().getX() == x && m.getPosition().getY() == y) {
+				m.setIsHidden(true);
+				movableObject = m.getPosition();
+				break;
+			}
+		}
+	}
+
+	/** OpenGL */
+	private void applyMovableObject(@NonNull LatLon newPosition) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
+			return;
+		}
+		int x = MapUtils.get31TileNumberX(newPosition.getLongitude());
+		int y = MapUtils.get31TileNumberY(newPosition.getLatitude());
+		QListMapMarker markers = mapMarkersCollection.getMarkers();
+		for (int i = 0; i < markers.size(); i++) {
+			MapMarker m = markers.get(i);
+			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+				m.setPosition(new PointI(x, y));
+				m.setIsHidden(false);
+				movableObject = null;
+				break;
+			}
+		}
+	}
+
+	/** OpenGL */
+	private void cancelMovableObject() {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
+			return;
+		}
+		QListMapMarker markers = mapMarkersCollection.getMarkers();
+		for (int i = 0; i < markers.size(); i++) {
+			MapMarker m = markers.get(i);
+			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
+				m.setIsHidden(false);
+				movableObject = null;
+				break;
+			}
 		}
 	}
 }

@@ -776,6 +776,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
+		app.getAverageSpeedComputer().updateLocation(location);
 		OsmandPlugin.updateLocationPlugins(location);
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
@@ -818,6 +819,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		// 1. Logging services
 		if (location != null) {
 			app.getSavingTrackHelper().updateLocation(location, heading);
+			app.getAverageSpeedComputer().updateLocation(location);
 			OsmandPlugin.updateLocationPlugins(location);
 		}
 

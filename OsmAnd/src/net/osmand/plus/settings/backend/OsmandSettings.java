@@ -1,8 +1,19 @@
 package net.osmand.plus.settings.backend;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
+import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -77,6 +88,7 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -102,18 +114,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
-import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 
 public class OsmandSettings {
 
@@ -1506,6 +1506,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 
+	public final OsmandPreference<Long> AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS = new LongPreference(this, "average_speed_measured_interval_millis", AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS).makeProfile().cache();
+	public final OsmandPreference<Boolean> AVERAGE_SPEED_SKIP_STOPS = new BooleanPreference(this, "average_speed_skip_stops", true).makeProfile().cache();
+
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
 			"current_track_coloring_type", ColoringType.TRACK_SOLID,
@@ -1766,6 +1769,8 @@ public class OsmandSettings {
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
+	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
+
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS_BAR_WIDGET = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
@@ -1810,7 +1815,6 @@ public class OsmandSettings {
 					}
 					return l;
 				}
-
 			}
 		}
 		return null;
@@ -1918,28 +1922,22 @@ public class OsmandSettings {
 
 
 	public void freezeExternalStorageDirectory() {
-		if (Build.VERSION.SDK_INT >= 19) {
-			int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
-			if (type == -1) {
-				ValueHolder<Integer> vh = new ValueHolder<>();
-				File f = getExternalStorageDirectoryV19(vh);
-				setExternalStorageDirectoryV19(vh.value, f.getAbsolutePath());
-			}
+		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+		if (type == -1) {
+			ValueHolder<Integer> vh = new ValueHolder<>();
+			File f = getExternalStorageDirectoryV19(vh);
+			setExternalStorageDirectoryV19(vh.value, f.getAbsolutePath());
 		}
 	}
 
 	public void initExternalStorageDirectory() {
-		if (Build.VERSION.SDK_INT < 19) {
-			setExternalStorageDirectoryPre19(getInternalAppPath().getAbsolutePath());
+		File externalStorage = getExternal1AppPath();
+		if (externalStorage != null && FileUtils.isWritable(externalStorage)) {
+			setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
+					getExternal1AppPath().getAbsolutePath());
 		} else {
-			File externalStorage = getExternal1AppPath();
-			if (externalStorage != null && FileUtils.isWritable(externalStorage)) {
-				setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
-						getExternal1AppPath().getAbsolutePath());
-			} else {
-				setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE,
-						getInternalAppPath().getAbsolutePath());
-			}
+			setExternalStorageDirectoryV19(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE,
+					getInternalAppPath().getAbsolutePath());
 		}
 	}
 
@@ -1948,24 +1946,17 @@ public class OsmandSettings {
 	}
 
 	public File getExternalStorageDirectory(ValueHolder<Integer> type) {
-		if (Build.VERSION.SDK_INT < 19) {
-			return getExternalStorageDirectoryPre19();
-		} else {
-			return getExternalStorageDirectoryV19(type);
-		}
+		return getExternalStorageDirectoryV19(type);
 	}
 
 	public File getInternalAppPath() {
-		if (Build.VERSION.SDK_INT >= 21) {
-			File fl = getNoBackupPath();
-			if (fl != null) {
-				return fl;
-			}
+		File fl = getNoBackupPath();
+		if (fl != null) {
+			return fl;
 		}
 		return ctx.getFilesDir();
 	}
 
-	@TargetApi(19)
 	public File getExternal1AppPath() {
 		File[] externals = ctx.getExternalFilesDirs(null);
 		if (externals != null && externals.length > 0) {
@@ -1975,12 +1966,10 @@ public class OsmandSettings {
 		}
 	}
 
-	@TargetApi(21)
 	private File getNoBackupPath() {
 		return ctx.getNoBackupFilesDir();
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
 	public File getExternalStorageDirectoryV19(ValueHolder<Integer> tp) {
 		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
 		File location = getDefaultLocationV19();
@@ -2059,25 +2048,17 @@ public class OsmandSettings {
 	@SuppressLint("NewApi")
 	@Nullable
 	public File getSecondaryStorage() {
-		if (Build.VERSION.SDK_INT < 19) {
-			return getExternalStorageDirectoryPre19();
-		} else {
-			File[] externals = ctx.getExternalFilesDirs(null);
-			for (File file : externals) {
-				if (file != null && !file.getAbsolutePath().contains("emulated")) {
-					return file;
-				}
+		File[] externals = ctx.getExternalFilesDirs(null);
+		for (File file : externals) {
+			if (file != null && !file.getAbsolutePath().contains("emulated")) {
+				return file;
 			}
 		}
 		return null;
 	}
 
 	public void setExternalStorageDirectory(int type, String directory) {
-		if (Build.VERSION.SDK_INT < 19) {
-			setExternalStorageDirectoryPre19(directory);
-		} else {
-			setExternalStorageDirectoryV19(type, directory);
-		}
+		setExternalStorageDirectoryV19(type, directory);
 
 	}
 
@@ -2864,12 +2845,6 @@ public class OsmandSettings {
 
 	public final ListStringPreference DISPLAYED_TRANSPORT_SETTINGS = (ListStringPreference)
 			new ListStringPreference(this, "displayed_transport_settings", null, ",").makeProfile();
-
-	public final OsmandPreference<Boolean> DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO =
-			new BooleanPreference(this, "show_arrival_time", true).makeProfile();
-
-	public final OsmandPreference<Boolean> INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO =
-			new BooleanPreference(this, "show_intermediate_arrival_time", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();

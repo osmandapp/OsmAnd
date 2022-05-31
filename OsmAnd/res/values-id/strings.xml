@@ -1262,7 +1262,7 @@
     <string name="shared_string_search">Cari</string>
     <string name="confirmation_to_clear_history">Hapus riwayat\?</string>
     <string name="your_edits">Suntingan-suntingan Anda</string>
-    <string name="osmand_parking_minute">men</string>
+    <string name="shared_string_minute_lowercase">men</string>
     <string name="osmand_parking_hour">j</string>
     <string name="shared_string_deselect">Batalkan pemilihan</string>
     <string name="shared_string_select_all">Pilih semua</string>

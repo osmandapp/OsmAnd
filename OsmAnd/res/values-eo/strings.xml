@@ -34,7 +34,7 @@
     <string name="shared_string_wikipedia">Vikipedio</string>
     <string name="local_indexes_cat_wiki">Vikipedio</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="show_transparency_seekbar">Montri ŝovilon de travideblo</string>
     <string name="download_files_error_not_enough_space">Mankas spaco!
 \nPostulas {3} MB provizore kaj {1} MB daŭre.
@@ -4685,4 +4685,5 @@
     <string name="map_widget_time_to_intermediate">Tempo al intercelo</string>
     <string name="shared_string_mode">Reĝimo</string>
     <string name="radius_ruler_mode_desc">Vi povas ŝanĝi reĝimon de la cirkelo per frapeti la fenestraĵon.</string>
+    <string name="lang_sat">Santala</string>
 </resources>

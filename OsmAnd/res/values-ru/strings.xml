@@ -1744,7 +1744,7 @@
     <string name="action_create">Создать действие</string>
     <string name="osm_edits">Правки OSM</string>
     <string name="osmand_parking_hour">ч</string>
-    <string name="osmand_parking_minute">мин</string>
+    <string name="shared_string_minute_lowercase">мин</string>
     <string name="osmand_parking_time_left">осталось</string>
     <string name="parking_place_limited">Парковка ограничена временем</string>
     <string name="your_edits">Ваши правки</string>
@@ -4638,7 +4638,7 @@
     <string name="time_to_go_desc">Время в минутах или часах, необходимое для достижения пункта назначения.</string>
     <string name="lanes_widgets_desc">Виджет показывает текущую схему полос движения и выделяет полосы для движения с активной навигацией.</string>
     <string name="street_name_widget_desc">Виджет показывает название текущей улицы со стрелкой направления или название следующей улицы с маневром, который необходимо выполнить.</string>
-    <string name="audio_video_notes_desc">Виджеты обеспечивают быстрый доступ к съемке фото и запуску/остановке записи аудио и видео.</string>
+    <string name="audio_video_notes_desc">Виджет обеспечивает быстрый доступ к съемке фото и запуску/остановке записи аудио и видео.</string>
     <string name="route_maneuvers">Маршрутные маневры</string>
     <string name="bearing_desc">Виджет показывает абсолютный (магнитный) пеленг или курсовой угол на цель в угловых единицах (градусы 180, градусы 360, миллирадианы).</string>
     <string name="shared_string_speed">Скорость</string>
@@ -4692,4 +4692,5 @@
     <string name="map_widget_time_to_destination">Финишное время</string>
     <string name="time_to_navigation_point_widget_settings_desc">Вы можете переключить режим, нажав на виджет.</string>
     <string name="map_widget_distance_to_intermediate">Расстояние до промежуточного пункта</string>
+    <string name="lang_sat">Сантали</string>
 </resources>
