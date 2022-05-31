@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -23,7 +22,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -844,16 +842,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected Drawable getPersistentPrefIcon(Drawable enabled, Drawable disabled) {
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
-
-		if (Build.VERSION.SDK_INT < 21) {
-			int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-			ColorStateList colorStateList = AndroidUtils.createEnabledColorIntStateList(defaultColor, getActiveProfileColor());
-			icon = DrawableCompat.wrap(icon);
-			DrawableCompat.setTintList(icon, colorStateList);
-			return icon;
-		}
-		return icon;
+		return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, int title, int summary, int layoutId) {

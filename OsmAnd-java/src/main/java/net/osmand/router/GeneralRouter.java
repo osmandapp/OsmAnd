@@ -36,6 +36,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
 	public static final String ALLOW_PRIVATE_FOR_TRUCK = "allow_private_for_truck";
+	public static final String HAZMAT_CATEGORY = "hazmat_category";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 	public static final String DEFAULT_SPEED = "default_speed";
 	public static final String MIN_SPEED = "min_speed";
