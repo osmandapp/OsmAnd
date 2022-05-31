@@ -203,12 +203,12 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 }

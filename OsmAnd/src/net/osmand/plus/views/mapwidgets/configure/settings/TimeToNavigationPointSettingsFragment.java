@@ -1,5 +1,10 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.DESTINATION_ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.INTERMEDIATE_ARRIVAL_TIME;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,32 +13,42 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.DESTINATION_ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.INTERMEDIATE_ARRIVAL_TIME;
-
-public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettingsBaseFragment {
+public class TimeToNavigationPointSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String KEY_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO = "arrival_time_otherwise_time_to_go";
 
 	private OsmandPreference<Boolean> arrivalTimeOtherwiseTimeToGoPref;
 	private boolean arrivalTimeOtherwiseTimeToGo;
+	private boolean intermediate;
+
+	@NonNull
+	@Override
+	public WidgetType getWidget() {
+		return intermediate ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION;
+	}
 
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		arrivalTimeOtherwiseTimeToGoPref = getWidget() == WidgetParams.TIME_TO_INTERMEDIATE
-				? settings.INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO
-				: settings.DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO;
-
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+		if (widgetInfo != null) {
+			TimeToNavigationPointWidget navigationPointWidget = (TimeToNavigationPointWidget) widgetInfo.widget;
+			intermediate = navigationPointWidget.isIntermediate();
+			arrivalTimeOtherwiseTimeToGoPref = navigationPointWidget.getPreference();
+		}
 		boolean defaultArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.getModeValue(appMode);
 		arrivalTimeOtherwiseTimeToGo = bundle
 				.getBoolean(KEY_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO, defaultArrivalTimeOtherwiseTimeToGo);
@@ -100,7 +115,7 @@ public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettin
 
 	@NonNull
 	private TimeToNavigationPointState getWidgetState(boolean arrivalTimeOtherwiseTimeToGo) {
-		boolean intermediate = getWidget() == WidgetParams.TIME_TO_INTERMEDIATE;
+		boolean intermediate = getWidget() == TIME_TO_INTERMEDIATE;
 		return TimeToNavigationPointState.getState(intermediate, arrivalTimeOtherwiseTimeToGo);
 	}
 
@@ -113,24 +128,6 @@ public abstract class TimeToNavigationPointSettingsFragment extends WidgetSettin
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(KEY_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO, arrivalTimeOtherwiseTimeToGo);
-	}
-
-	public static class TimeToIntermediateSettingsFragment extends TimeToNavigationPointSettingsFragment {
-
-		@NonNull
-		@Override
-		public WidgetParams getWidget() {
-			return WidgetParams.TIME_TO_INTERMEDIATE;
-		}
-	}
-
-	public static class TimeToDestinationSettingsFragment extends TimeToNavigationPointSettingsFragment {
-
-		@NonNull
-		@Override
-		public WidgetParams getWidget() {
-			return WidgetParams.TIME_TO_DESTINATION;
-		}
 	}
 
 	private interface TimeModeSelectionCallback {

@@ -2610,7 +2610,7 @@
     <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
     <string name="copy_location_name">Ort/POI-Name kopieren</string>
-    <string name="toast_empty_name_error">Unbenannter Ort</string>
+    <string name="toast_empty_name_error">Standort ohne Name</string>
     <string name="show_closed_notes">Geschlossene Hinweise anzeigen</string>
     <string name="switch_osm_notes_visibility_desc">OSM-Hinweise auf der Karte ein- oder ausblenden.</string>
     <string name="gpx_file_desc">GPX - geeignet für den Export in JOSM oder andere OSM-Editoren.</string>
@@ -3365,7 +3365,7 @@
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
-    <string name="copy_coordinates">Koordinaten kopieren</string>
+    <string name="copy_coordinates">Kopiere Koordinaten</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
@@ -3923,7 +3923,7 @@
     <string name="routing_engine_vehicle_type_car">Auto</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
-    <string name="copy_address">Adresse kopieren</string>
+    <string name="copy_address">Kopiere Adresse</string>
     <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online Navigationssystem</string>
     <string name="online_routing_engines">Online Navigationssysteme</string>
@@ -3965,7 +3965,7 @@
     <string name="delete_online_routing_engine">Dieses Online-Routingmodul löschen\?</string>
     <string name="context_menu_edit_descr">Beschreibung bearbeiten</string>
     <string name="delete_waypoints">Wegpunkte löschen</string>
-    <string name="copy_to_map_favorites">In Favoriten kopieren</string>
+    <string name="copy_to_map_favorites">Kopiere in Favoriten</string>
     <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
     <string name="upload_photo">Lade hoch</string>
     <string name="upload_photo_completed">Hochladen abgeschlossen</string>
@@ -4549,13 +4549,13 @@
     <string name="rendering_attr_showFitnessTrails_name">Fitness Parcours</string>
     <string name="rendering_attr_showRunningRoutes_name">Laufrouten</string>
     <string name="rendering_attr_showRunningRoutes_description">Laufrouten anzeigen</string>
-    <string name="routeInfo_horse_scale_name">Schwierigkeitsgrad der Reitwege</string>
+    <string name="routeInfo_horse_scale_name">Schwierigkeitsgrad von Reitwegen</string>
     <string name="rendering_attr_showTrainRoutes_name">Zuglinien</string>
     <string name="rendering_attr_showTramRoutes_name">Straßenbahnlinien</string>
     <string name="simulation_real_mode_desc">Auf geraden Straßenabschnitten wird die Geschwindigkeit ungefähr der zulässigen Höchstgeschwindigkeit entsprechen.
 \nAn Kreuzungen wird die Simulation verlangsamt.
 \nZusätzliche Zeitzuschläge werden bei Verkehrszeichen, Stoppschildern usw. berücksichtigt.</string>
-    <string name="routeInfo_horse_scale_description">Reitwege nach ihrem Schwierigkeitsgrad darstellen</string>
+    <string name="routeInfo_horse_scale_description">Zeige Reitwege abhängig vom Schwierigkeitsgrad an</string>
     <string name="rendering_attr_horse_scale_common_name">Anspruchslos</string>
     <string name="rendering_attr_horse_scale_demanding_name">Vorsicht angeraten</string>
     <string name="rendering_attr_horse_scale_difficult_name">Schwieriger Weg</string>
@@ -4578,9 +4578,9 @@
     <string name="configure_screen_widgets_descr">Wählen Sie die Bildschirmseite aus, um Widgets hinzuzufügen oder neu anzuordnen.</string>
     <string name="osm_carto_render_descr">Ähnlich dem OpenStreetMap-Carto-Stil, der auf der OSM-Hauptseite verwendet wird</string>
     <string name="simulation_real_mode_title">Realistische Simulation</string>
-    <string name="simulation_constant_mode_desc">Die Simulation wird mit der gewählten konstanten Geschwindigkeit durchgeführt.</string>
+    <string name="simulation_constant_mode_desc">Die Simulation wird mit der ausgewählten Geschwindigkeit ausgeführt.</string>
     <string name="simulation_constant_mode_title">Konstante Geschwindigkeit</string>
-    <string name="simulation_preview_mode_desc">Die Geschwindigkeit der Simulation wird auf geraden Streckenabschnitten maximal sein und sich nur an Kreuzungen verlangsamen.</string>
+    <string name="simulation_preview_mode_desc">Die Geschwindigkeit der Simulation wird auf geraden Strecken maximal sein und wird nur bei Kreuzungen langsamer.</string>
     <string name="simulation_preview_mode_title">Schneller Vorschaumodus</string>
     <string name="speed_mode">Geschwindigkeitsmodus</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Sammeltaxirouten</string>
@@ -4621,4 +4621,5 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Bevorzugt abseits der Piste</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Mittel</string>
     <string name="colour_of_circles">Farbe der Ringe</string>
+    <string name="routing_attr_allow_private_for_truck_name">Erlaube Privatzugang (LKW)</string>
 </resources>

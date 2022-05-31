@@ -6,13 +6,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment.TimeToDestinationSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment.TimeToIntermediateSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
 import androidx.annotation.DrawableRes;
@@ -20,13 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
-public enum WidgetParams {
+public enum WidgetType {
 
 	// Left Panel
 	NEXT_TURN("next_turn", R.string.map_widget_next_turn, 0, R.drawable.widget_next_turn_day, R.drawable.widget_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, LEFT),
@@ -66,6 +67,7 @@ public enum WidgetParams {
 	AV_NOTES_TAKE_PHOTO("av_notes_take_photo", R.string.av_def_action_picture, 0, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, 0, WidgetGroup.AUDIO_VIDEO_NOTES, RIGHT),
 	MAPILLARY("mapillary", R.string.mapillary, R.string.mapillary_widget_desc, R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night, R.string.docs_widget_mapillary, null, RIGHT),
 	PARKING("parking", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
+	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
 
@@ -95,14 +97,14 @@ public enum WidgetParams {
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
-	WidgetParams(@NonNull String id,
-	             @StringRes int titleId,
-	             @StringRes int descId,
-	             @DrawableRes int dayIconId,
-	             @DrawableRes int nightIconId,
-	             @StringRes int docsUrlId,
-	             @Nullable WidgetGroup group,
-	             @NonNull WidgetsPanel defaultPanel) {
+	WidgetType(@NonNull String id,
+	           @StringRes int titleId,
+	           @StringRes int descId,
+	           @DrawableRes int dayIconId,
+	           @DrawableRes int nightIconId,
+	           @StringRes int docsUrlId,
+	           @Nullable WidgetGroup group,
+	           @NonNull WidgetsPanel defaultPanel) {
 		this.id = id;
 		this.titleId = titleId;
 		this.descId = descId;
@@ -152,12 +154,22 @@ public enum WidgetParams {
 
 	@NonNull
 	public WidgetsPanel getPanel(@NonNull OsmandSettings settings) {
+		return getPanel(id, settings);
+	}
+
+	@NonNull
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull OsmandSettings settings) {
+		return getPanel(widgetId, settings.getApplicationMode(), settings);
+	}
+
+	@NonNull
+	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
 		if (defaultPanel == TOP || defaultPanel == BOTTOM) {
 			return defaultPanel;
 		} else if (defaultPanel == LEFT) {
-			return RIGHT.getWidgetOrder(id, settings) != DEFAULT_ORDER ? RIGHT : LEFT;
+			return RIGHT.getWidgetOrder(mode, widgetId, settings) != DEFAULT_ORDER ? RIGHT : LEFT;
 		} else if (defaultPanel == RIGHT) {
-			return LEFT.getWidgetOrder(id, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
+			return LEFT.getWidgetOrder(mode, widgetId, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
 		}
 		throw new IllegalStateException("Unsupported panel");
 	}
@@ -170,10 +182,8 @@ public enum WidgetParams {
 			return new MapMarkersBarWidgetSettingFragment();
 		} else if (this == RADIUS_RULER) {
 			return new RadiusRulerWidgetSettingsFragment();
-		} else if (this == TIME_TO_INTERMEDIATE) {
-			return new TimeToIntermediateSettingsFragment();
-		} else if (this == TIME_TO_DESTINATION) {
-			return new TimeToDestinationSettingsFragment();
+		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
+			return new TimeToNavigationPointSettingsFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
 		}
@@ -181,12 +191,27 @@ public enum WidgetParams {
 	}
 
 	@Nullable
-	public static WidgetParams getById(@NonNull String id) {
-		for (WidgetParams widget : WidgetParams.values()) {
-			if (widget.id.equals(id)) {
+	public static WidgetType getById(@NonNull String id) {
+		for (WidgetType widget : WidgetType.values()) {
+			String defaultId = getDefaultWidgetId(id);
+			if (widget.id.equals(defaultId)) {
 				return widget;
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public static String getDefaultWidgetId(@NonNull String key) {
+		int index = key.indexOf(DELIMITER);
+		if (index != -1) {
+			key = key.substring(0, index);
+		}
+		return key;
+	}
+
+	@NonNull
+	public static String getDuplicateWidgetId(@NonNull String widgetId) {
+		return getDefaultWidgetId(widgetId) + DELIMITER + System.currentTimeMillis();
 	}
 }

@@ -1,6 +1,12 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -14,15 +20,11 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
-
-public class MapMarkerSideWidget extends TextInfoWidget {
+public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonListener {
 
 	private final MapMarkersHelper mapMarkersHelper;
 
@@ -35,7 +37,7 @@ public class MapMarkerSideWidget extends TextInfoWidget {
 	private LatLon customLatLon;
 
 	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, boolean firstMarker) {
-		super(mapActivity);
+		super(mapActivity, firstMarker ? SIDE_MARKER_1 : SIDE_MARKER_2);
 		this.firstMarker = firstMarker;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 
@@ -46,6 +48,7 @@ public class MapMarkerSideWidget extends TextInfoWidget {
 		setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, firstMarker ? 0 : 1));
 	}
 
+	@Override
 	public void setCustomLatLon(@Nullable LatLon customLatLon) {
 		this.customLatLon = customLatLon;
 	}

@@ -19,6 +19,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.util.Algorithms;
 
@@ -75,7 +76,8 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private LatLon getSelectedLatLon() {
 		RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
 		PointF point = menuLayer.getMovableCenterPoint(tileBox);
-		return tileBox.getLatLonFromPixel(point.x, point.y);
+		return NativeUtilities.getLatLonFromPixel(mapActivity.getMapView().getMapRenderer(),
+				tileBox, point.x, point.y);
 	}
 
 	public void onDraw(@NonNull RotatedTileBox tileBox) {

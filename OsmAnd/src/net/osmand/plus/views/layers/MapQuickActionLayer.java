@@ -393,7 +393,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     }
 
     @Override
-    public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+    public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
         if (isInMovingMarkerMode() && !pressedQuickActionWidget(point.x, point.y)) {
             setLayerState(false);
             return true;

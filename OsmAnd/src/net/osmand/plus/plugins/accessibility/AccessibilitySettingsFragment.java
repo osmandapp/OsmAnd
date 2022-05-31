@@ -12,6 +12,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -266,7 +267,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());

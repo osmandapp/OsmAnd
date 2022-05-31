@@ -80,11 +80,12 @@ public class AverageSpeedComputer {
 	private boolean isEnabled() {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		ApplicationMode appMode = settings.getApplicationMode();
-		int filterModes = MapWidgetRegistry.AVAILABLE_MODE | MapWidgetRegistry.ENABLED_MODE;
-		Set<MapWidgetInfo> sideWidgets = widgetRegistry.getWidgetsForPanel(appMode, filterModes, WidgetsPanel.getSidePanels());
+		List<MapWidgetInfo> widgetInfos = widgetRegistry.getAllWidgets();
 
-		for (MapWidgetInfo widgetInfo : sideWidgets) {
-			if (widgetInfo.widget instanceof AverageSpeedWidget) {
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
+			if (widgetInfo.widget instanceof AverageSpeedWidget
+					&& widgetInfo.isEnabledForAppMode(appMode)
+					&& appMode.isWidgetAvailable(widgetInfo.key)) {
 				return true;
 			}
 		}

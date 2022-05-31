@@ -1009,12 +1009,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return mapRouteInfoMenu.onSingleTap(point, tileBox);
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		touchEvent = System.currentTimeMillis();
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isFollowingMode()) {

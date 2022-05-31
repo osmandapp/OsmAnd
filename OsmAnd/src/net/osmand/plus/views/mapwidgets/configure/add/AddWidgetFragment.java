@@ -1,5 +1,11 @@
 package net.osmand.plus.views.mapwidgets.configure.add;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
+import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -12,10 +18,17 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.aidl.AidlMapWidgetWrapper;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -26,7 +39,7 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
@@ -35,22 +48,11 @@ import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
 
 public class AddWidgetFragment extends BaseOsmAndFragment {
 
@@ -167,7 +169,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 
 
-		List<WidgetParams> widgets = widgetsDataHolder.getWidgetsList();
+		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
 			inflateWidgetsList(widgets);
@@ -184,11 +186,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void inflateWidgetsList(@NonNull List<WidgetParams> widgets) {
+	private void inflateWidgetsList(@NonNull List<WidgetType> widgets) {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
-		for (WidgetParams widget : widgets) {
+		for (WidgetType widget : widgets) {
 			View view = inflater.inflate(R.layout.selectable_widget_item, container, false);
 			String title = getString(widget.titleId);
 			String desc = widget.descId != 0 ? getString(widget.descId) : null;
@@ -231,10 +233,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		CheckBox checkBox = view.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
 
+		MapActivity mapActivity = requireMapActivity();
+		WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
 		boolean alreadyEnabled = alreadySelectedWidgetsIds != null
 				? alreadySelectedWidgetsIds.contains(widgetId)
-				: isWidgetEnabled(widgetId);
-		if (alreadyEnabled) {
+				: isWidgetEnabled(mapActivity, widgetId);
+		if (alreadyEnabled && !widgetsPanel.isDuplicatesAllowed()) {
 			checkBox.setChecked(true);
 			view.setSelected(true);
 			view.setOnClickListener(v -> app.showShortToastMessage(R.string.import_duplicates_title));
@@ -257,9 +261,10 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private boolean isWidgetEnabled(@NonNull String widgetId) {
+	private boolean isWidgetEnabled(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(appMode, ENABLED_MODE, WidgetsPanel.values());
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
+				ENABLED_MODE, Arrays.asList(WidgetsPanel.values()));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (widgetId.equals(widgetInfo.key)) {
@@ -306,6 +311,15 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
 	}
 
+	@NonNull
+	public MapActivity requireMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof MapActivity)) {
+			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
+		}
+		return (MapActivity) activity;
+	}
+
 	/**
 	 * @param alreadySelectedWidgetsIds If in edit mode ({@link ReorderWidgetsFragment}), non-null list
 	 *                                  of added widgets ids of this group; null if in view mode
@@ -335,12 +349,12 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	                                    @NonNull Fragment target,
 	                                    @NonNull ApplicationMode appMode,
 	                                    @NonNull WidgetsPanel widgetsPanel,
-	                                    @NonNull WidgetParams widgetParams,
+	                                    @NonNull WidgetType widgetType,
 	                                    @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
-		args.putString(KEY_WIDGET_ID, widgetParams.id);
+		args.putString(KEY_WIDGET_ID, widgetType.id);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);

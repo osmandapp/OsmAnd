@@ -20,9 +20,11 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.Utilities;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -195,7 +197,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
 			boolean pointSelected = showPointsMinZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
@@ -210,7 +212,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						}
 					}
 				} else {
-					pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+					pressedPointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
 					if (singleTapListener != null) {
 						singleTapListener.onAddPoint();
 					}
@@ -261,7 +263,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled) {
 			if (showPointsMinZoom
 					&& editingCtx.getSelectedPointPosition() == -1
@@ -290,13 +292,27 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		double lowestDistance = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
 		for (int i = 0; i < editingCtx.getPointsCount(); i++) {
 			WptPt pt = editingCtx.getPoints().get(i);
-			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
-				float ptX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-				float ptY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-				double distToPoint = MapUtils.getSqrtDistance(x, y, ptX, ptY);
-				if (distToPoint < lowestDistance) {
-					lowestDistance = distToPoint;
-					editingCtx.setSelectedPointPosition(i);
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				AreaI visibleBBox31 = mapRenderer.getState().getVisibleBBox31();
+				PointI point31 = Utilities.convertLatLonTo31(new net.osmand.core.jni.LatLon(pt.lat, pt.lon));
+				if (visibleBBox31.contains(point31)) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, pt.lat, pt.lon);
+					double distToPoint = MapUtils.getSqrtDistance(x, y, pixel.x, pixel.y);
+					if (distToPoint < lowestDistance) {
+						lowestDistance = distToPoint;
+						editingCtx.setSelectedPointPosition(i);
+					}
+				}
+			} else {
+				if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
+					float ptX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+					float ptY = tb.getPixYFromLatLon(pt.lat, pt.lon);
+					double distToPoint = MapUtils.getSqrtDistance(x, y, ptX, ptY);
+					if (distToPoint < lowestDistance) {
+						lowestDistance = distToPoint;
+						editingCtx.setSelectedPointPosition(i);
+					}
 				}
 			}
 		}

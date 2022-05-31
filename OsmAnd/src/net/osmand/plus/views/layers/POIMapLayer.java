@@ -51,6 +51,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -228,9 +229,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity n = objects.get(i);
-					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+							n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					if (Math.abs(pixel.x - ex) <= compare && Math.abs(pixel.y - ey) <= compare) {
 						compare = radius;
 						am.add(n);
 					}

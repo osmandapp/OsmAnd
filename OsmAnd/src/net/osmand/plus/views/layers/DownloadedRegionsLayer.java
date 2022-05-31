@@ -26,23 +26,24 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -480,7 +481,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -555,7 +556,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION
 				&& data.getResults() != null && osmandRegions.isInitialized()) {
-			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
+			LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, point.x, point.y);
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
 

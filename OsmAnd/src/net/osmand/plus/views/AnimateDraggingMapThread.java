@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import android.graphics.PointF;
 import android.os.SystemClock;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -10,6 +11,7 @@ import androidx.core.util.Pair;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -141,8 +143,10 @@ public class AnimateDraggingMapThread {
 			rotation = startRotation;
 		}
 
-		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
-		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+		PointF startPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, startLat, startLon);
+		PointF finalPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, finalLat, finalLon);
+		final float mMoveX = startPoint.x - finalPoint.x;
+		final float mMoveY = startPoint.y - finalPoint.y;
 		boolean skipAnimation = !rb.containsLatLon(finalLat, finalLon);
 		if (skipAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
@@ -199,8 +203,10 @@ public class AnimateDraggingMapThread {
 			}
 			return;
 		}
-		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
-		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+		PointF startPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, startLat, startLon);
+		PointF finalPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, finalLat, finalLon);
+		final float mMoveX = startPoint.x - finalPoint.x;
+		final float mMoveY = startPoint.y - finalPoint.y;
 
 		final boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
 		final float animationTime = doNotUseAnimations ? 1 : Math.max(450, (Math.abs(mSt[0]) + Math.abs(mSt[1])) / 1200f * MOVE_MOVE_ANIMATION_TIME);
@@ -243,8 +249,10 @@ public class AnimateDraggingMapThread {
 		if (mSt == null) {
 			mSt = new float[2];
 		}
-		mSt[0] = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
-		mSt[1] = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+		PointF startPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, startLat, startLon);
+		PointF finalPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, finalLat, finalLon);
+		mSt[0] = startPoint.x - finalPoint.x;
+		mSt[1] = startPoint.y - finalPoint.y;
 		while (Math.abs(mSt[0]) + Math.abs(mSt[1]) > 1200) {
 			rb.setZoom(rb.getZoom() - 1);
 			if (rb.getZoom() <= 4) {

@@ -38,12 +38,14 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     private final Context ctx;
     private final TextRasterizer.Style textStyle;
     private final float density;
+    private final PointI offset;
 
     public AudioNotesTileProvider(@NonNull Context context, int baseOrder, float density) {
         this.baseOrder = baseOrder;
         this.ctx = context;
         textStyle = new TextRasterizer.Style();
         this.density = density;
+        this.offset = new PointI(0, 0);
     }
 
     public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -197,5 +199,10 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     @Override
     public MapMarker.PinIconHorisontalAlignment getPinIconHorisontalAlignment() {
         return MapMarker.PinIconHorisontalAlignment.CenterHorizontal;
+    }
+
+    @Override
+    public PointI getPinIconOffset() {
+        return offset;
     }
 }

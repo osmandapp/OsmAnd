@@ -5,7 +5,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,9 +20,9 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	private long lastUpdateTime = 0;
 
 	public AverageSpeedWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, WidgetType.AVERAGE_SPEED);
 		averageSpeedComputer = app.getAverageSpeedComputer();
-		setIcons(WidgetParams.AVERAGE_SPEED);
+		setIcons(WidgetType.AVERAGE_SPEED);
 	}
 
 	@Override

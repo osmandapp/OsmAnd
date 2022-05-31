@@ -14,7 +14,7 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -34,8 +34,8 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 
 	@NonNull
 	@Override
-	public WidgetParams getWidget() {
-		return WidgetParams.AVERAGE_SPEED;
+	public WidgetType getWidget() {
+		return WidgetType.AVERAGE_SPEED;
 	}
 
 	@Override

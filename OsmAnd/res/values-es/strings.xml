@@ -4665,7 +4665,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
     <string name="rendering_attr_horseScale_name">Dificultad de los senderos ecuestres</string>
     <string name="routing_attr_avoid_highway_name">Evitar los caminos</string>
-    <string name="max_speed_widget_desc">Este widget muestra el límite de velocidad del camino actual.</string>
+    <string name="max_speed_widget_desc">Este widget muestra el límite de velocidad del camino por el que se circula actualmente.</string>
     <string name="current_speed_widget_desc">Este widget muestra la velocidad actual detectada por el sensor del GPS.</string>
     <string name="calculate_online_altitude_descr">Los datos de altitud serán calculados en el servidor de OsmAnd.</string>
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
@@ -4680,14 +4680,14 @@
     <string name="explore_plans">Explorar planes</string>
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
     <string name="map_widget_trip_recording_uphill">Ascenso</string>
-    <string name="coordinates_widget_secondary_desc">Puedes cambiar el formato de las coordenadas en %1$s → %2$s → %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">El formato de las coordenadas pueden cambiarse en %1$s → %2$s → %3$s.</string>
     <string name="elevation_profile_widget_desc">Este widget muestra el perfil de elevación y pendiente de la ruta actual.</string>
     <string name="mapillary_widget_desc">Este widget proporciona un acceso rápido a la aplicación Mapillary para añadir imágenes a nivel de calle.</string>
     <string name="gps_info_widget_desc">Este widget muestra el número de satélites que el dispositivo detecta y utiliza en ese momento.</string>
     <string name="lanes_widgets_desc">Este widget de carriles muestra la disposición actual de los carriles en el camino y destaca los carriles por los que se puede circular con la navegación activa.</string>
     <string name="street_name_widget_desc">Este widget muestra el nombre actual de la calle con una flecha de ubicación recta o el nombre de la siguiente calle con la maniobra que debe completarse.</string>
     <string name="coordinates_widget_desc">Muestra las coordenadas geográficas de la ubicación actual.</string>
-    <string name="audio_video_notes_desc">Estos widgets proporcionan un acceso rápido para iniciar o parar una grabación de audio, vídeo o foto.</string>
+    <string name="audio_video_notes_desc">Este widget proporciona un acceso rápido para iniciar o parar una grabación (audio, vídeo o foto).</string>
     <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
     <string name="routing_attr_avoid_4wd_only_description">Evita los caminos adecuados solo para vehículos todo terreno 4x4</string>
     <string name="fps_widget_desc">Este widget muestra que tan rápido se ven y actualizan los elementos del mapa.</string>
@@ -4697,4 +4697,10 @@
     <string name="altitude_widget_desc">Este widget muestra la altura sobre el nivel del mar en la ubicación actual.</string>
     <string name="navigation_points_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="route_maneuvers_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Puedes cambiar el modo pulsando en el widget.</string>
+    <string name="shared_string_mode">Modo</string>
+    <string name="radius_ruler_mode_desc">Puedes cambiar el modo de «Regla radial» pulsando en el widget.</string>
+    <string name="map_widget_time_to_destination">Tiempo al destino</string>
+    <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
 </resources>

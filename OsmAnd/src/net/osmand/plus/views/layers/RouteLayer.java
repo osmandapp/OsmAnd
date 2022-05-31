@@ -23,8 +23,6 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_void;
-import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -634,12 +632,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -674,9 +672,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				if (n.getLocation() == null) {
 					continue;
 				}
-				int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+						n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 					radius = rp;
 					res.add(n);
 				}

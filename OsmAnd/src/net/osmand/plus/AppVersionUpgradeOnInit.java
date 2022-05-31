@@ -22,7 +22,7 @@ import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.util.Algorithms;
 
@@ -44,20 +44,20 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_A
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ARRIVAL_TIME_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_ON_REQUEST;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_AUDIO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_RECORD_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_TAKE_PHOTO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.AV_NOTES_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BEARING_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_ARRIVAL_TIME_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_TO_GO_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.TIME_TO_GO_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ARRIVAL_TIME_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_WIDGET_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.BEARING_WIDGET_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_ARRIVAL_TIME_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_TIME_TO_GO_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_TIME_WIDGET_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NAVIGATION_TIME_WIDGET_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_GO_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 
@@ -454,16 +454,17 @@ class AppVersionUpgradeOnInit {
 
 	@NonNull
 	private String getIntermediateTimeWidgetId(@NonNull ApplicationMode appMode) {
-		boolean intermediateArrival = app.getSettings()
-				.INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO.getModeValue(appMode);
-		return intermediateArrival
-				? INTERMEDIATE_ARRIVAL_TIME_LEGACY
-				: INTERMEDIATE_TIME_TO_GO_LEGACY;
+		CommonPreference<Boolean> preference = app.getSettings()
+				.registerBooleanPreference("show_intermediate_arrival_time", true).makeProfile();
+		boolean intermediateArrival = preference.getModeValue(appMode);
+		return intermediateArrival ? INTERMEDIATE_ARRIVAL_TIME_LEGACY : INTERMEDIATE_TIME_TO_GO_LEGACY;
 	}
 
 	@NonNull
 	private String getTimeWidgetId(@NonNull ApplicationMode appMode) {
-		boolean arrival = app.getSettings().DESTINATION_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO.getModeValue(appMode);
+		CommonPreference<Boolean> preference = app.getSettings()
+				.registerBooleanPreference("show_arrival_time", true).makeProfile();
+		boolean arrival = preference.getModeValue(appMode);
 		return arrival ? ARRIVAL_TIME_LEGACY : TIME_TO_GO_LEGACY;
 	}
 
@@ -546,8 +547,8 @@ class AppVersionUpgradeOnInit {
 		WidgetsIdsMapper idsMapper = new WidgetsIdsMapper();
 		List<String> oldIntermediate = Arrays.asList(INTERMEDIATE_ARRIVAL_TIME_LEGACY, INTERMEDIATE_TIME_TO_GO_LEGACY);
 		List<String> oldDestination = Arrays.asList(ARRIVAL_TIME_LEGACY, TIME_TO_GO_LEGACY);
-		idsMapper.addReplacement(oldIntermediate, WidgetParams.TIME_TO_INTERMEDIATE.id);
-		idsMapper.addReplacement(oldDestination, WidgetParams.TIME_TO_DESTINATION.id);
+		idsMapper.addReplacement(oldIntermediate, WidgetType.TIME_TO_INTERMEDIATE.id);
+		idsMapper.addReplacement(oldDestination, WidgetType.TIME_TO_DESTINATION.id);
 
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 

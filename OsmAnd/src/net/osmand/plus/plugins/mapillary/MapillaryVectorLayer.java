@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTileLayer;
@@ -416,8 +417,11 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			double tileY = entry.getKey().y;
 			Map<?, ?> userData = entry.getValue();
 
-			x = tb.getPixXFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
-			y = tb.getPixYFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+					MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileY),
+					MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileX));
+			x = pixel.x;
+			y = pixel.y;
 			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 				sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
 				if (img == null || minSqDist > sqDist) {

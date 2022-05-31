@@ -58,6 +58,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -999,7 +1000,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////////////// DRAGGING PART ///////////////////////////////////////
-
+	@NonNull
 	public net.osmand.data.RotatedTileBox getCurrentRotatedTileBox() {
 		return currentViewport;
 	}
@@ -1388,17 +1389,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (newZoom != initialViewport.getZoom()) {
 					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
 				} else {
-					LatLon p1 = null;
-					LatLon p2 = null;
 					MapRendererView mapRenderer = getMapRenderer();
-					if (mapRenderer != null) {
-						p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, (int) x1, (int) y1);
-						p2 = NativeUtilities.getLatLonFromPixel(mapRenderer, (int) x2, (int) y2);
-					}
-					if (p1 == null || p2 == null) {
-						p1 = initialViewport.getLatLonFromPixel(x1, y1);
-						p2 = initialViewport.getLatLonFromPixel(x2, y2);
-					}
+					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
+					LatLon p2 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x2, y2);
 					showMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
 				}
@@ -1415,17 +1408,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (newZoom != initialViewport.getZoom()) {
 					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
 				} else {
-					LatLon p1 = null;
-					LatLon p2 = null;
 					MapRendererView mapRenderer = getMapRenderer();
-					if (mapRenderer != null) {
-						p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, (int) x1, (int) y1);
-						p2 = NativeUtilities.getLatLonFromPixel(mapRenderer, (int) x2, (int) y2);
- 					}
-					if (p1 == null || p2 == null) {
-						p1 = initialViewport.getLatLonFromPixel(x1, y1);
-						p2 = initialViewport.getLatLonFromPixel(x2, y2);
-					}
+					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
+					LatLon p2 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x2, y2);
 					showMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
 				}
@@ -1441,14 +1426,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y2 = y2;
 			if (x1 != x2 || y1 != y2) {
 				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null) {
-					firstTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, (int) x1, (int) y1);
-					secondTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, (int) x2, (int) y2);
-				}
-				if (firstTouchPointLatLon == null || secondTouchPointLatLon == null) {
-					firstTouchPointLatLon = currentViewport.getLatLonFromPixel(x1, y1);
-					secondTouchPointLatLon = currentViewport.getLatLonFromPixel(x2, y2);
-				}
+				firstTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, currentViewport, x1, y1);
+				secondTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, currentViewport, x2, y2);
 				multiTouch = true;
 				wasZoomInMultiTouch = false;
 				multiTouchStartTime = System.currentTimeMillis();
@@ -1490,18 +1469,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getCurrentRotatedTileBox().copy();
 			MapRendererView mapRenderer = getMapRenderer();
-			LatLon initialCenterLatLon = null;
-			if (mapRenderer != null) {
-				initialCenterLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer,
-						(int) initialMultiTouchCenterPoint.x,
-						(int) initialMultiTouchCenterPoint.y);
-			}
-			if (initialCenterLatLon == null) {
-				initialCenterLatLon = initialViewport.getLatLonFromPixel(
-						initialMultiTouchCenterPoint.x,
-						initialMultiTouchCenterPoint.y);
-			}
-			this.initialCenterLatLon = initialCenterLatLon;
+			initialCenterLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport,
+					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
 			startRotating = false;
 		}
 
