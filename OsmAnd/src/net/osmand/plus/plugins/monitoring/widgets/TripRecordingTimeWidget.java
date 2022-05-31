@@ -11,7 +11,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuType;
+import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -33,7 +33,7 @@ public class TripRecordingTimeWidget extends TextInfoWidget {
 		setOnClickListener(v -> {
 			if (cachedTimeSpan > 0) {
 				Bundle params = new Bundle();
-				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuType.TRACK.name());
+				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
 				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
 						null, null, params);
 			}

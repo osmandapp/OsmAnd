@@ -1,18 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -92,6 +79,7 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
@@ -133,6 +121,19 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
@@ -1186,7 +1187,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					? gpxData.getGpxFile().path
 					: app.getAppPath(GPX_INDEX_DIR) + "/" + getSuggestedFileName() + GPX_FILE_EXT;
 
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().syncGroup().selectedByUser()
+					.addToMarkers().addToHistory().saveSelection();
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 
 			hide();
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.snap_to_road_image_button,
@@ -1966,7 +1970,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	protected static void showGpxOnMap(OsmandApplication app, GPXFile gpx, boolean isNewGpx) {
 		GPXUtilities.createArtificialPrimeMeridianPoints(gpx);
-		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+		GpxSelectionParams params = GpxSelectionParams.newInstance()
+				.showOnMap().selectedByUser().syncGroup().addToMarkers().addToHistory()
+				.saveSelection();
+		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 		if (sf != null && !isNewGpx) {
 			sf.processPoints(app);
 		}

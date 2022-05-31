@@ -50,6 +50,7 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -665,25 +666,24 @@ public class ExternalApiHelper {
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				MapActivity mapActivity = mapActivityRef.get();
-				if (errorMessage == null && mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+				if (errorMessage == null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 					OsmandApplication app = mapActivity.getMyApplication();
 					GpxSelectionHelper helper = app.getSelectedGpxHelper();
 					SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(gpxFile.path);
 					if (selectedGpx != null) {
 						selectedGpx.setGpxFile(gpxFile, app);
 					} else {
-						helper.selectGpxFile(gpxFile, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						helper.selectGpxFile(gpxFile, params);
 					}
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
-						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
-
-							@Override
-							public void onDismiss(DialogInterface dialog) {
-								MapActivity mapActivity = mapActivityRef.get();
-								if (mapActivity != null && !routingHelper.isFollowingMode()) {
-									ExternalApiHelper.startNavigation(mapActivity, gpxFile, checkLocationPermission);
-								}
+						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
+							MapActivity _mapActivity = mapActivityRef.get();
+							if (_mapActivity != null && !routingHelper.isFollowingMode()) {
+								ExternalApiHelper.startNavigation(_mapActivity, gpxFile, checkLocationPermission);
 							}
 						});
 					} else {

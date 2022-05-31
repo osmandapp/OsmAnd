@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -125,7 +126,9 @@ public class FileUtils {
 			file.delete();
 			app.getGpxDbHelper().remove(file);
 			if (selected != null && selected.getGpxFile() != null) {
-				helper.selectGpxFile(selected.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
 			return true;
 		}

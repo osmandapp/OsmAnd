@@ -1,9 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
-
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -143,6 +140,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -741,8 +741,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 
 				// Gpx card
-				List<SelectedGpxFile> selectedGPXFiles =
-						app.getSelectedGpxHelper().getSelectedGPXFiles();
+				List<SelectedGpxFile> selectedGPXFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 				final List<GPXFile> gpxFiles = new ArrayList<>();
 				for (SelectedGpxFile gs : selectedGPXFiles) {
 					if (!gs.isShowCurrentTrack()) {

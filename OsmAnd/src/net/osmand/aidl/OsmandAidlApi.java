@@ -115,6 +115,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
@@ -159,6 +160,25 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 public class OsmandAidlApi {
 
@@ -1310,7 +1330,9 @@ public class OsmandAidlApi {
 
 				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 			} else {
-				helper.selectGpxFile(selectedGpx.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				helper.selectGpxFile(selectedGpx.getGpxFile(), params);
 				refreshMap();
 			}
 		} else if (show) {
@@ -1324,7 +1346,10 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						helper.selectGpxFile(gpx, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						helper.selectGpxFile(gpx, params);
 						refreshMap();
 					}
 				}
@@ -1441,7 +1466,10 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 						refreshMap();
 					}
 				}
@@ -1462,7 +1490,9 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 			if (selectedGpxFile != null) {
-				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
 				refreshMap();
 				return true;
 			}

@@ -13,7 +13,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuType;
+import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
@@ -35,7 +35,7 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 		setOnClickListener(v -> {
 			if (getAnalysis().hasElevationData) {
 				Bundle params = new Bundle();
-				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuType.TRACK.name());
+				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
 				params.putString(TrackMenuFragment.CHART_TAB_NAME, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE.name());
 				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
 						null, null, params);

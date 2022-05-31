@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,22 +29,23 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -223,34 +223,30 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				prepareSplitIntervalAdapterData();
 			}
 			updateSplitIntervalView(splitIntervalView);
-			splitIntervalView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final ListPopupWindow popup = new ListPopupWindow(v.getContext());
-					popup.setAnchorView(splitIntervalView);
-					popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-					popup.setModal(true);
-					popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-					popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-					popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-					popup.setAdapter(new ArrayAdapter<>(v.getContext(),
-							R.layout.popup_list_text_item, options));
-					popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-						@Override
-						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-							selectedSplitInterval = position;
-							SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), true, false);
-							final List<GpxDisplayGroup> groups = getDisplayGroups();
-							if (groups.size() > 0) {
-								updateSplit(groups, sf);
-							}
-							popup.dismiss();
-							updateSplitIntervalView(splitIntervalView);
-						}
-					});
-					popup.show();
-				}
+			splitIntervalView.setOnClickListener(v -> {
+				ListPopupWindow popup = new ListPopupWindow(v.getContext());
+				popup.setAnchorView(splitIntervalView);
+				popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+				popup.setModal(true);
+				popup.setDropDownGravity(Gravity.END | Gravity.TOP);
+				popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+				popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+				popup.setAdapter(new ArrayAdapter<>(v.getContext(),
+						R.layout.popup_list_text_item, options));
+				popup.setOnItemClickListener((parent, view, position, id) -> {
+					selectedSplitInterval = position;
+					GpxSelectionParams params = GpxSelectionParams.newInstance()
+							.showOnMap().selectedByUser().syncGroup().addToMarkers()
+							.addToHistory().saveSelection();
+					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), params);
+					final List<GpxDisplayGroup> groups = getDisplayGroups();
+					if (groups.size() > 0) {
+						updateSplit(groups, sf);
+					}
+					popup.dismiss();
+					updateSplitIntervalView(splitIntervalView);
+				});
+				popup.show();
 			});
 			splitIntervalView.setVisibility(View.VISIBLE);
 		} else {

@@ -1,11 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
-import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -136,6 +130,7 @@ import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -169,6 +164,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1099,8 +1100,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (gpxFile.showCurrentTrack) {
 						selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 					} else {
-						selectedGpxFile = app.getSelectedGpxHelper()
-								.selectGpxFile(gpxFile, true, false, false, false, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().selectedAutomatically().saveSelection();
+						selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 					}
 
 					TrackAppearanceFragment.showInstance(this, selectedGpxFile, null);

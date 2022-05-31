@@ -15,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
@@ -127,7 +128,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
-			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false, false, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().selectedAutomatically().saveSelection();
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
 		}
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group == null) {
