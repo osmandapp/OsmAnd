@@ -4402,4 +4402,5 @@
     <string name="backup_error_gzip_only_supported_upload">Файл павінен быць адпраўлены ў фармаце .gzip</string>
     <string name="backup_error_subscription_was_used">Падпіска або промакод выкарыстоўваюцца іншым уліковым запісам %1$s</string>
     <string name="migration_files_present">У абраным месцы \"%3$s\" ёсць файлы %1$d (%2$s).</string>
+    <string name="option_available_only_in_osmand_pro">Даступна як частка падпіскі на OsmAnd Pro.</string>
 </resources>

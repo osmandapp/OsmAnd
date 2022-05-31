@@ -4092,14 +4092,14 @@
     <string name="parking_widget_desc">Pripomoček, ki prikazuje razdaljo od središča zaslona do parkirišča.</string>
     <string name="mapillary_widget_desc">Pripomoček, ki omogoča hiter dostop do aplikacije Mapillary za dodajanje slik na ravni ulice.</string>
     <string name="av_notes_choose_action_widget_desc">Izberite dejanje.</string>
-    <string name="fps_widget_desc">Pripomoček prikazuje, kako hitro so prikazani in osveženi zemljevid in sami elementi zemljevida.</string>
-    <string name="radius_rules_widget_desc">Orodje Radius-ruler pomaga določiti polmer okoli izbrane točke na zemljevidu s prikazovanjem krogov razdalje na zemljevidu.</string>
-    <string name="current_time_widget_desc">Ta gradnik prikazuje trenutni čas iz vaše naprave.</string>
-    <string name="battery_widget_desc">Widget prikazuje nivo baterije v napravi.</string>
-    <string name="gps_info_widget_desc">Gradnik prikazuje število satelitov, ki jih naprava sprejema in uporablja v tem trenutku.</string>
-    <string name="altitude_widget_desc">Gradnik prikazuje nadmorsko višino trenutne zemljepisne lege.</string>
-    <string name="max_speed_widget_desc">Gradnik prikazuje omejitev hitrosti na cesti, kjer trenutno voziš.</string>
-    <string name="current_speed_widget_desc">Gradnik prikazuje trenutno hitrost po GPS-u.</string>
+    <string name="fps_widget_desc">Prikazuje, kako hitro so prikazani in osveženi zemljevid in elementi zemljevida.</string>
+    <string name="radius_rules_widget_desc">Orodje ravnilo polmera pomaga določiti polmer okoli izbrane točke na zemljevidu s prikazovanjem krogov-razdalje na zemljevidu.</string>
+    <string name="current_time_widget_desc">Prikazuje trenutni čas iz tvoje naprave.</string>
+    <string name="battery_widget_desc">Prikazuje nivo baterije v napravi.</string>
+    <string name="gps_info_widget_desc">Prikazuje število satelitov, ki jih naprava sprejema in uporablja v tem trenutku.</string>
+    <string name="altitude_widget_desc">Prikazuje nadmorsko višino trenutne zemljepisne lege.</string>
+    <string name="max_speed_widget_desc">Prikazuje omejitev hitrosti na cesti, kjer trenutno voziš.</string>
+    <string name="current_speed_widget_desc">Prikazuje trenutno hitrost po GPS-u.</string>
     <string name="time_to_go_desc">Čas v minutah ali urah, potreben za dosego cilja.</string>
     <string name="arrival_time_widget_desc">Čas prihoda na ciljno točko.</string>
     <string name="lanes_widgets_desc">Gradnik Pasovi prikazuje trenutno razporeditev cestnih pasov in označuje pasove za vožnjo z aktivno navigacijo.</string>
@@ -4673,11 +4673,11 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Skrij vojaška območja</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Skrij vojaška območja</string>
     <string name="explore_plans">Razišči načrte</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Način lahko preklopiš tako, da tapneš na gradnik.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Preklopi način tako, da tapneš na gradnik.</string>
     <string name="map_widget_time_to_destination">Čas do cilja</string>
     <string name="map_widget_time_to_intermediate">Čas do vmesne točke</string>
     <string name="map_widget_distance_to_intermediate">Razdalja do vmesne točke</string>
-    <string name="radius_ruler_mode_desc">Način ravnila polmera lahko preklopiš tako, da tapneš na gradnik.</string>
+    <string name="radius_ruler_mode_desc">Če tapneš gradnik, preklopiš v način ravnila polmera.</string>
     <string name="shared_string_mode">Način</string>
     <string name="lang_sat">santalščina</string>
 </resources>

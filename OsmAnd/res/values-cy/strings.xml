@@ -2902,7 +2902,7 @@
     <string name="shared_string_by_default">Rhagosodedig</string>
     <string name="routing_attr_max_num_changes_description">Nodi terfyn uchaf y newidiadau</string>
     <string name="routing_attr_freeride_policy_allow_name">Caniatáu</string>
-    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Hoffi offpiste</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Ffafrio offpiste</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Dechreuwr</string>
     <string name="simulation_constant_mode_title">Cyflymder sefydlog</string>
     <string name="turn_screen_on_power_button_disabled">Analluogwyd. Mae angen \'Cadw\'r sgrin ymlaen\' o dan \'Goramser ar ôl deffro\'.</string>
@@ -3337,7 +3337,7 @@
     <string name="list_of_installed_plugins">Ategion wedi\'u gosod</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Lliw y llwybrau yn ôl eu lliw lleol unigol (os yw\'n bresennol ar OpenStreetMap) a symbol tarian heicio.</string>
     <string name="activity_type_offroad_name">Oddi ar y ffordd</string>
-    <string name="delete_online_routing_engine">Tynnu\'r injan llwybro ar-lein hwn\?</string>
+    <string name="delete_online_routing_engine">Tynnu\'r peiriant llwybro ar-lein hwn\?</string>
     <string name="gpx_join_gaps">Uno\'r bylchau</string>
     <string name="rendering_attr_showLez_description">Dangos Parthau Allyriadau Isel ar y map. Nid yw\'n effeithio ar y llwybro.</string>
     <string name="rendering_attr_winter_road_name">Ffordd y gaeaf</string>
