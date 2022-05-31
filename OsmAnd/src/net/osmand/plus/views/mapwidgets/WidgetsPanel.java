@@ -194,4 +194,9 @@ public enum WidgetsPanel {
 		}
 		return null;
 	}
+
+	@NonNull
+	public static WidgetsPanel[] getSidePanels() {
+		return new WidgetsPanel[] {LEFT, RIGHT};
+	}
 }

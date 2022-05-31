@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_minute_lowercase">min</string>
+    <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
+    <string name="average_speed_skip_stops">Take into account stops</string>
+    <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
+    <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
+    <string name="map_widget_average_speed">Average speed</string>
     <string name="shared_string_mode">Mode</string>
     <string name="time_to_navigation_point_widget_settings_desc">You can switch mode by taping on widget.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>

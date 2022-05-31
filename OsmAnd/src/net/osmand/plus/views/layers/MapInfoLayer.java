@@ -28,6 +28,7 @@ import net.osmand.plus.views.mapwidgets.WidgetParams;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
+import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
@@ -60,6 +61,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetParams.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.COORDINATES;
 import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
@@ -301,6 +303,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		MapWidget currentSpeed = new CurrentSpeedWidget(mapActivity);
 		registerWidget(CURRENT_SPEED, currentSpeed);
+
+		MapWidget averageSpeed = new AverageSpeedWidget(mapActivity);
+		registerWidget(AVERAGE_SPEED, averageSpeed);
 
 		MapWidget maxSpeed = new MaxSpeedWidget(mapActivity);
 		registerWidget(MAX_SPEED, maxSpeed);
