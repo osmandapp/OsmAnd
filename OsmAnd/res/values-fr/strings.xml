@@ -4614,18 +4614,18 @@
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="max_speed_widget_desc">Le widget indique la limitation de vitesse pour la route actuelle.</string>
-    <string name="fps_widget_desc">Widget indiquant la vitesse d\'affichage et de rafraîchissement de la carte et des éléments de la carte.</string>
+    <string name="max_speed_widget_desc">Indique la limitation de vitesse de la route actuelle.</string>
+    <string name="fps_widget_desc">Indique la vitesse d\'affichage et de rafraîchissement de la carte et des éléments de la carte.</string>
     <string name="radius_rules_widget_desc">L\'outil Rayon permet de déterminer la distance autour du point sélectionné en affichant des cercles de distance sur la carte.</string>
-    <string name="altitude_widget_desc">Widget indiquant la hauteur, par rapport au niveau de la mer, de la position actuelle.</string>
+    <string name="altitude_widget_desc">Indique l’altitude, par rapport au niveau de la mer, de la position actuelle.</string>
     <string name="audio_video_notes_desc">Ce widget permet un accès rapide pour démarrer / arrêter un enregistrement (audio, vidéo ou photo).</string>
     <string name="get_altitude_data">Obtenir les données d\'altitude</string>
-    <string name="current_time_widget_desc">Ce widget affiche l\'heure de votre appareil.</string>
+    <string name="current_time_widget_desc">Affiche l\'heure de votre appareil.</string>
     <string name="elevation_profile_widget_desc">Ce widget affiche le profil d’altitude et de pente pour l’itinéraire actuel.</string>
-    <string name="battery_widget_desc">Le widget indique le niveau de batterie de votre appareil.</string>
+    <string name="battery_widget_desc">Affiche le niveau de batterie de votre appareil.</string>
     <string name="navigation_points">Points de navigation</string>
     <string name="app_mode_mountain_bicycle">VTT</string>
-    <string name="current_speed_widget_desc">Le widget indique votre vitesse GPS actuelle.</string>
+    <string name="current_speed_widget_desc">Indique votre vitesse GPS actuelle.</string>
     <string name="coordinates_widget_desc">Indique les coordonnées de la positon actuelle.</string>
     <string name="route_maneuvers">Manœuvres sur l\'itinéraire</string>
     <string name="get_altitude_information">Obtenir les informations d\'altitude</string>
@@ -4635,7 +4635,7 @@
     <string name="calculate_online_altitude_descr">Les données d\'altitude seront calculées sur le serveur d\'OsmAnd.</string>
     <string name="calculate_altitude">Calculer l\'altitude</string>
     <string name="no_altitude_data">Aucune donnée d\'altitude</string>
-    <string name="gps_info_widget_desc">Widget indiquant le nombre de satellites que l\'appareil détecte et utilise actuellement.</string>
+    <string name="gps_info_widget_desc">Indiqle nombre de satellites que l\'appareil détecte et utilise actuellement.</string>
     <string name="bearing_secondary_desc">Vous pouvez modifier le format d\'affichage des données dans : %1$s - %2$s - %3$s.</string>
     <string name="av_def_action_choose">A la demande</string>
     <string name="magnetic_bearing_widget_desc">Depuis votre position, angle entre le nord magnétique et la cible.</string>
@@ -4677,8 +4677,8 @@
     <string name="map_widget_time_to_destination">Temps restant jusqu\'à l\'arrivée</string>
     <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>
     <string name="map_widget_distance_to_intermediate">Distance du point intermédiaire</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Vous pouvez basculer de mode en appuyant sur le widget.</string>
-    <string name="radius_ruler_mode_desc">Vous pouvez basculer le mode de la règle de mesure par rayon en appuyant sur le widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Basculer de mode en tapant sur le widget.</string>
+    <string name="radius_ruler_mode_desc">Vous pouvez basculer le mode de l’outil Rayon en tapant sur le widget.</string>
     <string name="shared_string_mode">Mode</string>
     <string name="lang_sat">Santali</string>
 </resources>
