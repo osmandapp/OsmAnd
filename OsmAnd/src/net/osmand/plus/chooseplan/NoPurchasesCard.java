@@ -4,6 +4,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
@@ -11,8 +13,11 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class NoPurchasesCard extends BaseCard {
 
-	public NoPurchasesCard(@NonNull FragmentActivity activity) {
+	private final DialogFragment target;
+
+	public NoPurchasesCard(@NonNull FragmentActivity activity, @NonNull DialogFragment target) {
 		super(activity, false);
+		this.target = target;
 	}
 
 	@Override
@@ -29,6 +34,6 @@ public class NoPurchasesCard extends BaseCard {
 
 		LinearLayout cardsContainer = view.findViewById(R.id.cards_container);
 		cardsContainer.removeAllViews();
-		cardsContainer.addView(new ExploreOsmAndPlansCard(activity).build(activity));
+		cardsContainer.addView(new ExploreOsmAndPlansCard(activity, target).build(activity));
 	}
 }
