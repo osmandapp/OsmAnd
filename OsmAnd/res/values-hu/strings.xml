@@ -4680,4 +4680,9 @@
     <string name="radius_ruler_mode_desc">A widgetre koppintva átvált sugárvonalzó módba.</string>
     <string name="shared_string_mode">Mód</string>
     <string name="lang_sat">Szantáli</string>
+    <string name="average_speed_time_interval_desc">Adja meg azt az időintervallumot, amelyen belül az átlagsebesség mérésre kerüljön.</string>
+    <string name="average_speed_widget_desc">Megjeleníti az aktuális utazás átlagsebességét.</string>
+    <string name="map_widget_average_speed">Átlagsebesség</string>
+    <string name="average_speed_skip_stops">Vegye figyelembe a megállásokat</string>
+    <string name="average_speed_skip_stops_desc">A %1$s-nál kisebb sebességet nem veszi figyelembe a rendszer és nem befolyásolja az átlagsebességet sem.</string>
 </resources>
