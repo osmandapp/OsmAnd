@@ -4693,4 +4693,9 @@
     <string name="time_to_navigation_point_widget_settings_desc">Вы можете переключить режим, нажав на виджет.</string>
     <string name="map_widget_distance_to_intermediate">Расстояние до промежуточного пункта</string>
     <string name="lang_sat">Сантали</string>
+    <string name="average_speed_skip_stops">Учитывать остановки</string>
+    <string name="average_speed_time_interval_desc">Укажите интервал времени, для которого будет измеряться средняя скорость.</string>
+    <string name="average_speed_widget_desc">Виджет показывает среднюю скорость текущей поездки.</string>
+    <string name="map_widget_average_speed">Средняя скорость</string>
+    <string name="average_speed_skip_stops_desc">Скорость меньше %1$s не будет учитываться и влиять на среднюю скорость.</string>
 </resources>
