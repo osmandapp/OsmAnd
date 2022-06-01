@@ -4688,4 +4688,9 @@
     <string name="map_widget_distance_to_intermediate">Відстань до проміжного пункту</string>
     <string name="radius_ruler_mode_desc">Дотик до віджета вмикає/вимикає радіусну лінійку.</string>
     <string name="lang_sat">Санталі</string>
+    <string name="average_speed_skip_stops">Враховувати зупинки</string>
+    <string name="average_speed_time_interval_desc">Укажіть інтервал часу, за який вимірюватиметься середня швидкість.</string>
+    <string name="average_speed_widget_desc">Показує середню швидкість поточної поїздки.</string>
+    <string name="map_widget_average_speed">Середня швидкість</string>
+    <string name="average_speed_skip_stops_desc">Швидкість до %1$s не враховуватиметься і не впливатиме на середню швидкість.</string>
 </resources>
