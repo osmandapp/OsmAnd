@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -92,9 +93,7 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net") &&
-					data.getPath() != null && data.getPath().startsWith("/go")) {
+			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
 				String url = data.getQueryParameter("url");
@@ -128,9 +127,7 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net") &&
-					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
+			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/add-tile-source")) {
 				Map<String, String> attrs = new HashMap<>();
 				for (String name : data.getQueryParameterNames()) {
 					String value = data.getQueryParameter(name);
@@ -159,9 +156,7 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net")
-					&& data.getPath() != null && data.getPath().startsWith("/open-gpx")) {
+			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/open-gpx")) {
 				String url = data.getQueryParameter("url");
 				if (Algorithms.isEmpty(url)) {
 					return false;
@@ -333,7 +328,7 @@ public class IntentHelper {
 		}
 	}
 
-	private void clearIntent(Intent intent) {
+	private void clearIntent(@NonNull Intent intent) {
 		intent.setAction(null);
 		intent.setData(null);
 	}
@@ -424,5 +419,20 @@ public class IntentHelper {
 			);
 		}
 		return false;
+	}
+
+	private boolean isHttpOrHttpsScheme(@NonNull Uri uri) {
+		String scheme = uri.getScheme();
+		return "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme);
+	}
+
+	private boolean isOsmAndHost(@NonNull Uri uri) {
+		String host = uri.getHost();
+		return host != null && host.endsWith("osmand.net");
+	}
+
+	private boolean isPathPrefix(@NonNull Uri uri, @NonNull String pathPrefix) {
+		String path = uri.getPath();
+		return path != null && path.startsWith(pathPrefix);
 	}
 }
