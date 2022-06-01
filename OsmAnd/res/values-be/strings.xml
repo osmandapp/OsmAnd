@@ -4403,4 +4403,21 @@
     <string name="backup_error_subscription_was_used">Падпіска або промакод выкарыстоўваюцца іншым уліковым запісам %1$s</string>
     <string name="migration_files_present">У абраным месцы \"%3$s\" ёсць файлы %1$d (%2$s).</string>
     <string name="option_available_only_in_osmand_pro">Даступна як частка падпіскі на OsmAnd Pro.</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Аддаваць перавагу тактыльнаму пакрыццю</string>
+    <string name="unlimited_map_downloads">Неабмежаваная колькасць спампоўванняў мапаў</string>
+    <string name="routes_color_by_type">Афарбоўка маршрутаў паводле…</string>
+    <string name="delete_version_history">Выдаліць гісторыю версій</string>
+    <string name="reset_to_original">Скінуць да зыходнага значэння</string>
+    <string name="continue_with">Працягнуць з %1$s</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s або %2$s</string>
+    <string name="explore_wikipedia_offline">Даследуйце Вікіпедыю па-за сецівам.</string>
+    <string name="active_till">Актыўна да %1$s</string>
+    <string name="restore_selected_data">Аднавіць абраныя даныя</string>
+    <string name="osmand_pro_tagline">Атрымайце максімум магчымасцяў</string>
+    <string name="osmand_maps_plus_tagline">Атрымайце пашыраныя функцыі</string>
+    <string name="redeem_promo_code">Скарыстацца прома-кодам</string>
+    <string name="send_logcat_log">Адправіць змест журнала</string>
+    <string name="duration_moment_ago">толькі што</string>
+    <string name="send_crash_log">Адправіць журнал збояў</string>
+    <string name="available_until">Даступна да %1$s</string>
 </resources>
