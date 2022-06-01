@@ -128,48 +128,10 @@
 
 			<intent-filter>
 				<data android:scheme="http" />
-				<data android:host="osmand.net" />
-				<data android:pathPrefix="/go" />
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<category android:name="android.intent.category.APP_MAPS" />
-				<category android:name="android.intent.category.CAR_MODE" />
-				<category android:name="android.intent.category.CAR_DOCK" />
-				<category android:name="android.intent.category.DESK_DOCK" />
-			</intent-filter>
-
-			<intent-filter>
 				<data android:scheme="https" />
 				<data android:host="osmand.net" />
 				<data android:pathPrefix="/go" />
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<category android:name="android.intent.category.APP_MAPS" />
-				<category android:name="android.intent.category.CAR_MODE" />
-				<category android:name="android.intent.category.CAR_DOCK" />
-				<category android:name="android.intent.category.DESK_DOCK" />
-			</intent-filter>
-
-			<intent-filter>
-				<data android:scheme="http" />
-				<data android:scheme="https" />
-				<data android:host="osmand.net" />
 				<data android:pathPrefix="/add-tile-source" />
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<category android:name="android.intent.category.APP_MAPS" />
-				<category android:name="android.intent.category.CAR_MODE" />
-				<category android:name="android.intent.category.CAR_DOCK" />
-				<category android:name="android.intent.category.DESK_DOCK" />
-			</intent-filter>
-
-			<intent-filter>
-				<data android:scheme="http" />
-				<data android:scheme="https" />
-				<data android:host="osmand.net" />
 				<data android:pathPrefix="/open-gpx" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
