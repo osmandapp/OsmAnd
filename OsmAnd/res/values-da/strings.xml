@@ -4694,4 +4694,9 @@
     <string name="map_widget_time_to_intermediate">Tid til mellemliggende</string>
     <string name="shared_string_mode">Tilstand</string>
     <string name="lang_sat">Santali</string>
+    <string name="average_speed_widget_desc">Viser gennemsnitshastigheden for den aktuelle tur.</string>
+    <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil ikke blive talt med og påvirker ikke gennemsnitshastigheden.</string>
+    <string name="average_speed_skip_stops">Tag højde for stop</string>
+    <string name="average_speed_time_interval_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles.</string>
+    <string name="map_widget_average_speed">Gennemsnitshastighed</string>
 </resources>
