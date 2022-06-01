@@ -4620,12 +4620,12 @@
 \n</string>
     <string name="turn_on_public_transport_description">Ative para ver as rotas de transportes públicos no mapa.</string>
     <string name="av_def_action_choose">A pedido</string>
-    <string name="current_time_widget_desc">Este widget mostra a hora atual configurada no seu dispositivo.</string>
-    <string name="battery_widget_desc">Widget que mostra o nível da bateria do seu dispositivo.</string>
-    <string name="radius_rules_widget_desc">A ferramenta régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da visualização de círculos de distância no mapa.</string>
-    <string name="fps_widget_desc">Widget que mostra a que velocidade o mapa e os seus elementos são mostrados e atualizados.</string>
-    <string name="altitude_widget_desc">Widget que mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
-    <string name="max_speed_widget_desc">Widget que mostra a velocidade máxima permitida na estrada em que se encontra.</string>
+    <string name="current_time_widget_desc">Mostra a hora atual configurada no seu dispositivo.</string>
+    <string name="battery_widget_desc">Mostra o nível da bateria do seu dispositivo.</string>
+    <string name="radius_rules_widget_desc">A ferramenta régua de raio ajuda a determinar o raio ao redor de um ponto selecionado no mapa mostrando círculos de distância no mapa.</string>
+    <string name="fps_widget_desc">Mostra a que velocidade o mapa e os seus elementos são mostrados e atualizados.</string>
+    <string name="altitude_widget_desc">Mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
+    <string name="max_speed_widget_desc">Mostra a velocidade máxima permitida na estrada em que se encontra.</string>
     <string name="arrival_time_widget_desc">Hora de chegada ao ponto de destino.</string>
     <string name="route_maneuvers_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
     <string name="routing_attr_avoid_4wd_only_description">Evitar estradas adequadas apenas para viaturas todo-o-terreno com tração às 4 rodas</string>
@@ -4633,7 +4633,7 @@
     <string name="widget_secondary_desc_part_of">Parte do complemento %1$s.</string>
     <string name="parking_widget_desc">Widget que mostra a distância do centro do seu ecrã ao local de estacionamento.</string>
     <string name="mapillary_widget_desc">Widget que fornece um acesso rápido à aplicação do Mapillary para tirar fotografias ao nível da rua.</string>
-    <string name="current_speed_widget_desc">Widget que mostra a velocidade atual que o seu dispositivo se desloca detetada pelo sensor de GPS.</string>
+    <string name="current_speed_widget_desc">Mostra a velocidade atual que o seu dispositivo se desloca detetada pelo sensor de GPS.</string>
     <string name="magnetic_bearing_widget_desc">Ângulo entre o Norte magnético e o ponto alvo observado na sua localização.</string>
     <string name="time_to_go_desc">Tempo em minutos ou horas necessárias para chegar ao seu destino.</string>
     <string name="coordinates_widget_desc">Mostra as coordenadas geográficas da geolocalização atual.</string>
@@ -4655,7 +4655,7 @@
     <string name="coordinates_widget_secondary_desc">O formato de coordenadas pode ser alterado em %1$s – %2$s – %3$s.</string>
     <string name="elevation_profile_widget_desc">O widget mostra o perfil da elevação e o declive da rota atual.</string>
     <string name="av_notes_choose_action_widget_desc">Escolha a ação.</string>
-    <string name="gps_info_widget_desc">Widget que mostra o número de satélites que o seu dispositivo deteta nesse momento.</string>
+    <string name="gps_info_widget_desc">Mostra o número de satélites que o seu dispositivo detetou e está a usar nesse momento.</string>
     <string name="map_markers_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
     <string name="map_markers_bar_widget_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
     <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
@@ -4686,11 +4686,16 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares, normalmente de acesso proibido a civis</string>
     <string name="explore_plans">Explorar planos</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Pode alterar o modo tocando no widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Altere o modo tocando no widget.</string>
     <string name="map_widget_time_to_destination">Tempo até ao destino</string>
     <string name="map_widget_time_to_intermediate">Tempo até ao ponto intermédio</string>
     <string name="map_widget_distance_to_intermediate">Distância até ao ponto intermédio</string>
-    <string name="radius_ruler_mode_desc">Pode alterar o modo de régua de raio tocando no widget.</string>
+    <string name="radius_ruler_mode_desc">Tocando no widget muda para o modo de régua de raio.</string>
     <string name="shared_string_mode">Modo</string>
     <string name="lang_sat">Santáli</string>
+    <string name="average_speed_skip_stops">Ter em conta as paragens</string>
+    <string name="average_speed_time_interval_desc">Especificar o intervalo de tempo para o qual a velocidade média será medida.</string>
+    <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
+    <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s não será contada e afetará a velocidade média.</string>
+    <string name="map_widget_average_speed">Velocidade média</string>
 </resources>
