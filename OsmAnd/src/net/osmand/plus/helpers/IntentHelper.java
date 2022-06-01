@@ -1,18 +1,8 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.PointsGroup;
@@ -55,6 +45,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+
 public class IntentHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(IntentHelper.class);
@@ -70,12 +70,18 @@ public class IntentHelper {
 	}
 
 	public boolean parseLaunchIntents() {
-		boolean applied = parseLocationIntent();
+		boolean applied = parseMoveMapToLocationUrlIntent();
 		if (!applied) {
-			applied = parseTileSourceIntent();
+			applied = parseOpenLocationMenuUrlIntent();
 		}
 		if (!applied) {
-			applied = parseOpenGpxIntent();
+			applied = parseRedirectUrlIntent();
+		}
+		if (!applied) {
+			applied = parseTileSourceUrlIntent();
+		}
+		if (!applied) {
+			applied = parseOpenGpxUrlIntent();
 		}
 		if (!applied) {
 			applied = parseSendIntent();
@@ -89,14 +95,43 @@ public class IntentHelper {
 		return applied;
 	}
 
-	private boolean parseLocationIntent() {
+	private boolean parseMoveMapToLocationUrlIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/go")) {
+			String uri = data.toString();
+			String pathPrefix = "/map#";
+			int pathStartIndex = uri.indexOf(pathPrefix);
+			if (isOsmAndMapUrl(data) && pathStartIndex != -1) {
+				String[] params = uri.substring(pathStartIndex + pathPrefix.length()).split("/");
+				if (params.length == 3) {
+					try {
+						int zoom = Integer.parseInt(params[0]);
+						double lat = Double.parseDouble(params[1]);
+						double lon = Double.parseDouble(params[2]);
+						settings.setMapLocationToShow(lat, lon, zoom);
+					} catch (NumberFormatException e) {
+						LOG.error("Invalid map URL params", e);
+					}
+				}
+				mapActivity.setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isOsmAndMapUrl(@NonNull Uri uri) {
+		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri) && isPathPrefix(uri, "/map");
+	}
+
+	private boolean parseOpenLocationMenuUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if (isOsmAndGoUrl(data)) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
-				String url = data.getQueryParameter("url");
 				if (lat != null && lon != null) {
 					try {
 						double lt = Double.parseDouble(lat);
@@ -110,7 +145,21 @@ public class IntentHelper {
 					} catch (NumberFormatException e) {
 						LOG.error("error", e);
 					}
-				} else if (url != null) {
+				}
+				mapActivity.setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean parseRedirectUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if (isOsmAndGoUrl(data)) {
+				String url = data.getQueryParameter("url");
+				if (url != null) {
 					url = DiscountHelper.parseUrl(app, url);
 					if (DiscountHelper.validateUrl(app, url)) {
 						DiscountHelper.openUrl(mapActivity, url);
@@ -123,7 +172,11 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseTileSourceIntent() {
+	private boolean isOsmAndGoUrl(@NonNull Uri uri) {
+		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri) && isPathPrefix(uri, "/go");
+	}
+
+	private boolean parseTileSourceUrlIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
@@ -152,7 +205,7 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseOpenGpxIntent() {
+	private boolean parseOpenGpxUrlIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
