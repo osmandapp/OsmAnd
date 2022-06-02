@@ -277,4 +277,8 @@ public class WorldRegion implements Serializable {
 			return obfFileName.toLowerCase();
 		}
 	}
+
+	public List<LatLon> getPolygon() {
+		return polygon;
+	}
 }
