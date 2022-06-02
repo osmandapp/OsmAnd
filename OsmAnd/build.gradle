@@ -216,7 +216,7 @@ dependencies {
 	//opengldebugImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
 
 	// Comment for local debug
-	// opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:4.2@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:4.2@aar"
 	opengldebugImplementation "net.osmand:OsmAndCore_android:4.2@aar"
 
 	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:4.2@aar"
