@@ -39,14 +39,14 @@ afterEvaluate {
                 from components.release
                 organisation = 'net.osmand'
                 module = 'android-aidl-lib'
-                revision = 'master-snapshot'
+                revision = '4.2'
              }
              debug(IvyPublication) {
                 // Applies the component for the release build variant.
                 from components.debug
                 organisation = 'net.osmand'
                 module = 'android-aidl-lib'
-                revision = 'master-snapshot'
+                revision = '4.2'
              }
         }
     }
