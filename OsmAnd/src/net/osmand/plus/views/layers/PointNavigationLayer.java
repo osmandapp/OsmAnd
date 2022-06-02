@@ -268,7 +268,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void destroyLayer() {
-
+		removeMarkers();
 	}
 
 	@Override
