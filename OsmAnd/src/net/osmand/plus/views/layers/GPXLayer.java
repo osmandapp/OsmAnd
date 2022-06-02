@@ -1245,8 +1245,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
 			if (points != null) {
 				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, mx, my);
-				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon,
-						showTrackPointMenu));
+				if (latLon != null) {
+					res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon,
+							showTrackPointMenu));
+				}
 			}
 		}
 	}
