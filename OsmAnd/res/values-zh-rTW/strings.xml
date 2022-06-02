@@ -4615,12 +4615,12 @@
     <string name="parking_widget_desc">顯示從畫面中央到停車位置距離的小工具。</string>
     <string name="mapillary_widget_desc">提供快速存取 Mapillary 應用程式以新增街道級影像的小工具。</string>
     <string name="av_notes_choose_action_widget_desc">選擇動作。</string>
-    <string name="fps_widget_desc">顯示地圖與地圖元素的顯示與更新速率的小工具。</string>
-    <string name="radius_rules_widget_desc">半徑尺規工具透過在地圖上顯示距離同心圓來協助確定在地圖上選定的點周圍的半徑。</string>
-    <string name="current_time_widget_desc">這個小工具將會顯示來自您裝置的目前時間。</string>
-    <string name="gps_info_widget_desc">顯示裝置當下偵測到與使用的衛星數量的小工具。</string>
-    <string name="altitude_widget_desc">顯示目前地理位置海拔高度的小工具。</string>
-    <string name="max_speed_widget_desc">顯示目前行駛道路速限的小工具。</string>
+    <string name="fps_widget_desc">顯示地圖與地圖元素得的顯示與更新速率。</string>
+    <string name="radius_rules_widget_desc">半徑尺規工具會在地圖上顯示距離同心圓來協助確定在地圖上選定的點周圍的半徑。</string>
+    <string name="current_time_widget_desc">顯示來自您裝置的目前時間。</string>
+    <string name="gps_info_widget_desc">顯示裝置當下偵測到與使用的衛星數量。</string>
+    <string name="altitude_widget_desc">顯示目前地理位置海拔高度。</string>
+    <string name="max_speed_widget_desc">顯示目前行駛道路速限。</string>
     <string name="current_speed_widget_desc">顯示您目前由 GPS 感測器偵測到的速度。</string>
     <string name="magnetic_bearing_widget_desc">從您所在位置觀察到的磁北與目標點之間的角度。</string>
     <string name="arrival_time_widget_desc">到達目的地點的時間。</string>
@@ -4637,7 +4637,7 @@
     <string name="track_attach_to_the_roads_descr">軌跡將會使用離線地圖貼齊至道路上，軌跡的幾何形狀可能會有變化。</string>
     <string name="no_altitude_data">無海拔資料</string>
     <string name="shared_string_speed">速度</string>
-    <string name="battery_widget_desc">顯示您裝置電量百分比的小工具。</string>
+    <string name="battery_widget_desc">顯示您裝置的電量百分比。</string>
     <string name="time_to_go_desc">到達目的地所需的時間（以分鐘或小時為單位）。</string>
     <string name="lanes_widgets_desc">車道小工具會顯示目前道路的車道佈局，並會突顯要透過主動導航行駛的車道。</string>
     <string name="calculate_online">線上計算</string>
@@ -4675,9 +4675,15 @@
     <string name="rendering_attr_hideMilitaryAreas_description">隱藏軍事區域</string>
     <string name="explore_plans">探索方案</string>
     <string name="shared_string_mode">模式</string>
-    <string name="time_to_navigation_point_widget_settings_desc">您可以輕點小工具來切換模式。</string>
+    <string name="time_to_navigation_point_widget_settings_desc">透過點擊小工具來切換模式。</string>
     <string name="map_widget_time_to_destination">到達目的地的時間</string>
     <string name="map_widget_time_to_intermediate">到達中繼點的時間</string>
     <string name="map_widget_distance_to_intermediate">到中繼點的距離</string>
-    <string name="radius_ruler_mode_desc">您可以輕點小工具來切換半徑尺規模式。</string>
+    <string name="radius_ruler_mode_desc">點擊小工具來切換至半徑尺規模式。</string>
+    <string name="average_speed_skip_stops">考慮停止</string>
+    <string name="average_speed_time_interval_desc">指定要測量平均速度的時間間隔。</string>
+    <string name="average_speed_widget_desc">顯示目前騎乘的平均速度。</string>
+    <string name="map_widget_average_speed">平均速率</string>
+    <string name="lang_sat">桑塔利文</string>
+    <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將不會被計算在內，並會影響平均速度。</string>
 </resources>
