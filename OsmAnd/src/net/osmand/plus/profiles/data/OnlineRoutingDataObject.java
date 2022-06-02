@@ -12,7 +12,7 @@ public class OnlineRoutingDataObject extends RoutingDataObject {
 	                               String description,
 	                               String stringKey,
 	                               int iconRes) {
-		super(stringKey, name, description, iconRes, false, null);
+		super(stringKey, name, description, iconRes, false, null, null);
 	}
 
 	@Override
