@@ -2833,7 +2833,7 @@
     <string name="run_full_osmand_header">Запусціць OsmAnd\?</string>
     <string name="cubic_m">м³</string>
     <string name="metric_ton">Т</string>
-    <string name="shared_string_capacity">Аб’ём</string>
+    <string name="shared_string_capacity">Ёмістасць</string>
     <string name="shared_string_width">Шырыня</string>
     <string name="shared_string_height">Вышыня</string>
     <string name="add_destination_point">Вызначыць пункт прызначэння</string>
@@ -4420,4 +4420,22 @@
     <string name="duration_moment_ago">толькі што</string>
     <string name="send_crash_log">Адправіць журнал збояў</string>
     <string name="available_until">Даступна да %1$s</string>
+    <string name="configure_screen_widgets_descr">Выберыце бок экрана, куды дадаць або пераставіць віджэты.</string>
+    <string name="attribute">Атрыбут</string>
+    <string name="shared_string_interval">Дыяпазон</string>
+    <string name="radius_ruler_mode_desc">Націсканне на віджэт пераключыць яго ў рэжым радыуснай лінейкі.</string>
+    <string name="start_point">Пачатак</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="route_line_use_gradient_coloring">Лінія маршруту афарбаваная паводле профілю вышыні.</string>
+    <string name="restart">Перазапусціць</string>
+    <string name="average_speed_skip_stops">Улічваць прыпынкі</string>
+    <string name="average_speed_time_interval_desc">Вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
+    <string name="average_speed_widget_desc">Паказвае сярэднюю хуткасць бягучай паездкі.</string>
+    <string name="track_has_no_altitude">След не змяшчае даных аб вышыні.</string>
+    <string name="select_category_descr">Выберыце катэгорыю або дадайце новую</string>
+    <string name="app_restart_required">Для ўжывання некаторых налад патрабуецца перазапуск праграмы.</string>
+    <string name="shared_string_feet">футы</string>
+    <string name="track_has_no_speed">След не змяшчае даных аб хуткасці.</string>
+    <string name="average_speed_skip_stops_desc">Хуткасць меншая за %1$s не будзе ўлічвацца і ўплываць на сярэднюю хуткасць.</string>
+    <string name="resend_verification_code">Адправіць паўторна</string>
 </resources>
