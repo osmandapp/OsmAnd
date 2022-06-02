@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -249,7 +250,14 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				if (mapsPlusPurchased) {
-					PurchasesFragment.showInstance(activity.getSupportFragmentManager());
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					Fragment purchasesFragment = fragmentManager.findFragmentByTag(PurchasesFragment.TAG);
+					boolean returnToPurchasesFragment = purchasesFragment != null;
+					if (returnToPurchasesFragment) {
+						dismiss();
+					} else {
+						PurchasesFragment.showInstance(fragmentManager);
+					}
 				} else {
 					MapsPlusPlanFragment.showInstance(activity);
 				}
@@ -307,11 +315,11 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull OsmAndFeature selectedFeature) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ChoosePlanFragment fragment = new ChoosePlanFragment();
 			fragment.selectedFeature = selectedFeature;
-			fragment.show(activity.getSupportFragmentManager(), TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
