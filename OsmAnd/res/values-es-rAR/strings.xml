@@ -4697,7 +4697,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="explore_plans">Explorar planes</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Cambiar de modo pulsando en el widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Cambia de modo pulsando en el widget.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="shared_string_mode">Modo</string>
     <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
