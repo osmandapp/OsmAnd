@@ -103,13 +103,14 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG = 11;
 
 	//OpenGL
-	PolygonsCollection polygonsCollection;
-	int downloadedSize = 0;
-	int selectedSize = 0;
-	int backupedSize = 0;
-	int polygonId = 1;
-	boolean needRedrawOpenGL = false;
+	private PolygonsCollection polygonsCollection;
+	private int downloadedSize = 0;
+	private int selectedSize = 0;
+	private int backupedSize = 0;
+	private int polygonId = 1;
+	private boolean needRedrawOpenGL = false;
 	private boolean indexRegionBoundaries = false;
+	private boolean onMapIndexed = false;
 
 	public static class DownloadMapObject {
 		private final BinaryMapDataObject dataObject;
@@ -517,6 +518,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void destroyLayer() {
+		rm.removeResourceListener(this);
 		clearPolygonsCollections();
 	}
 
@@ -681,6 +683,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapRenderer == null) {
 			return;
 		}
+		if (onMapIndexed) {
+			clearPolygonsCollections();
+			onMapIndexed = false;
+		}
 		if (polygonsCollection != null && selectedSize == selectedObjects.size()) {
 			return;
 		}
@@ -796,6 +802,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void onMapsIndexed() {
-		clearPolygonsCollections();
+		onMapIndexed = true;
 	}
 }

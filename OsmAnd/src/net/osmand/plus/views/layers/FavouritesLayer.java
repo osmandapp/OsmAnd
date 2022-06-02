@@ -92,7 +92,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void destroyLayer() {
-
+		favouritesHelper.removeListener(this);
+		clearFavorites();
 	}
 
 	@Override
