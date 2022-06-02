@@ -28,7 +28,7 @@ public class BackupIconsView extends View {
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 
-	private final Paint paint = new Paint();
+	private final Paint circlePaint = new Paint();
 	private final Map<Integer, List<Integer>> iconsMap = new HashMap<>();
 
 	private final int iconSize;
@@ -42,8 +42,9 @@ public class BackupIconsView extends View {
 		app = (OsmandApplication) context.getApplicationContext();
 		uiUtilities = app.getUIUtilities();
 
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(context.getResources().getDimensionPixelSize(R.dimen.map_button_stroke));
+		circlePaint.setAntiAlias(true);
+		circlePaint.setStyle(Style.STROKE);
+		circlePaint.setStrokeWidth(context.getResources().getDimensionPixelSize(R.dimen.map_button_stroke));
 
 		Resources resources = app.getResources();
 		iconSize = resources.getDimensionPixelSize(R.dimen.big_icon_size);
@@ -107,8 +108,8 @@ public class BackupIconsView extends View {
 
 	private void drawIcon(Canvas canvas, int drawableId, int colorId, int xOffset, int rowNumber) {
 		Drawable icon = uiUtilities.getIcon(drawableId, colorId);
-		paint.setColor(ContextCompat.getColor(app, colorId));
-		paint.setAlpha(51);
+		circlePaint.setColor(ContextCompat.getColor(app, colorId));
+		circlePaint.setAlpha(51);
 
 		int center = iconSize / 2;
 		int rowBottomMargin = iconSize / 4;
@@ -119,7 +120,7 @@ public class BackupIconsView extends View {
 				y - icon.getIntrinsicHeight() / 2,
 				x + icon.getIntrinsicWidth() / 2,
 				y + icon.getIntrinsicHeight() / 2);
-		canvas.drawCircle(center + xOffset, y, center, paint);
+		canvas.drawCircle(center + xOffset, y, center, circlePaint);
 		icon.draw(canvas);
 	}
 
