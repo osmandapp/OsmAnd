@@ -202,20 +202,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			boolean pointSelected = showPointsMinZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {
-				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null) {
-					PointI pos31 = new PointI(0, 0);
-					if (mapRenderer.getLocationFromScreenPoint(new PointI((int) point.x, (int) point.y), pos31)) {
-						pressedPointLatLon = new LatLon(MapUtils.get31LatitudeY(pos31.getY()), MapUtils.get31LongitudeX(pos31.getX()));
-						if (singleTapListener != null) {
-							singleTapListener.onAddPoint();
-						}
-					}
-				} else {
-					pressedPointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
-					if (singleTapListener != null) {
-						singleTapListener.onAddPoint();
-					}
+				pressedPointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
+				if (singleTapListener != null) {
+					singleTapListener.onAddPoint();
 				}
 			}
 		}
@@ -294,9 +283,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			WptPt pt = editingCtx.getPoints().get(i);
 			MapRendererView mapRenderer = getMapRenderer();
 			if (mapRenderer != null) {
-				AreaI visibleBBox31 = mapRenderer.getState().getVisibleBBox31();
 				PointI point31 = Utilities.convertLatLonTo31(new net.osmand.core.jni.LatLon(pt.lat, pt.lon));
-				if (visibleBBox31.contains(point31)) {
+				if (mapRenderer.isPositionVisible(point31)) {
 					PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, pt.lat, pt.lon);
 					double distToPoint = MapUtils.getSqrtDistance(x, y, pixel.x, pixel.y);
 					if (distToPoint < lowestDistance) {

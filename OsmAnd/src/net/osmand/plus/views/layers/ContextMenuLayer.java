@@ -278,8 +278,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mInChangeMarkerPositionMode) {
 			if (menu != null && menu.getObject() == null) {
 				if (hasMapRenderer) {
-					PointI loc31 = new PointI(0, 0);
-					if (mapRenderer.getLocationFromScreenPoint(new PointI(box.getPixWidth() / 2, box.getPixHeight() / 2), loc31)) {
+					PointI loc31 = NativeUtilities.get31FromPixel(mapRenderer, box, box.getPixWidth() / 2, box.getPixHeight() / 2);
+					if (loc31 != null) {
 						contextCoreMarker.setPosition(loc31);
 						showMarker = true;
 					}
@@ -293,8 +293,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		} else if (mInAddGpxPointMode) {
 			if (hasMapRenderer) {
-				PointI loc31 = new PointI(0, 0);
-				if (mapRenderer.getLocationFromScreenPoint(new PointI(box.getPixWidth() / 2, box.getPixHeight() / 2), loc31)) {
+				PointI loc31 = NativeUtilities.get31FromPixel(mapRenderer, box, box.getPixWidth() / 2, box.getPixHeight() / 2);
+				if (loc31 != null) {
 					contextCoreMarker.setPosition(loc31);
 					showMarker = true;
 				}
@@ -703,7 +703,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			selectedObjectContextMenuProvider = provider;
 			hideVisibleMenues();
 			getApplication().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-			if (!getMapView().getCurrentRotatedTileBox().containsLatLon(latLon)) {
+			if (!NativeUtilities.containsLatLon(getMapRenderer(), getMapView().getCurrentRotatedTileBox(), latLon)) {
 				menu.setMapCenter(latLon);
 				menu.setMapPosition(getMapView().getMapPosition());
 				menu.setCenterMarker(true);
