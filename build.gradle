@@ -26,7 +26,6 @@ plugins {
 
 allprojects {
     group "net.osmand"
-    version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
     
     repositories {
         ivy {
