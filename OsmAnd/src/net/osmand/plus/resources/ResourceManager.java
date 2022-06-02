@@ -1425,10 +1425,6 @@ public class ResourceManager {
 		return new LinkedHashMap<>(indexFileNames);
 	}
 
-	public int getIndexFileNamesSize() {
-		return indexFileNames.size();
-	}
-
 	public Map<String, File> getIndexFiles() {
 		return new LinkedHashMap<>(indexFiles);
 	}
