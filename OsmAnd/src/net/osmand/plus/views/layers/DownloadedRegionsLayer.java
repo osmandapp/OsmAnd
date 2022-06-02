@@ -44,6 +44,7 @@ import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -66,7 +67,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
+public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection,
+		ResourceListener {
 
 	private static final int ZOOM_THRESHOLD = 2;
 
@@ -105,7 +107,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	int downloadedSize = 0;
 	int selectedSize = 0;
 	int backupedSize = 0;
-	int indexedMapSize = 0;
 	int polygonId = 1;
 	boolean needRedrawOpenGL = false;
 	private boolean indexRegionBoundaries = false;
@@ -151,6 +152,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 		app = view.getApplication();
 		rm = app.getResourceManager();
+		rm.addResourceListener(this);
 		osmandRegions = rm.getOsmandRegions();
 		helper = new LocalIndexHelper(app);
 
@@ -679,7 +681,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapRenderer == null) {
 			return;
 		}
-		if (indexedMapSize == rm.getIndexFileNamesSize() && selectedSize == selectedObjects.size()) {
+		if (polygonsCollection != null && selectedSize == selectedObjects.size()) {
 			return;
 		}
 		List<WorldRegion> downloadedRegions = new ArrayList<>();
@@ -715,7 +717,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			backupedSize = backupedRegions.size();
 			downloadedSize = downloadedRegions.size();
 			selectedSize = selectedRegions.size();
-			indexedMapSize = rm.getIndexFileNamesSize();
 		}
 		addToPolygonsCollection(downloadedRegions, paintDownloaded);
 		addToPolygonsCollection(backupedRegions, paintBackuped);
@@ -765,7 +766,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			polygonsCollection = null;
 		}
 		needRedrawOpenGL = true;
-		indexedMapSize = 0;
 		selectedSize = 0;
 		polygonId = 1;
 	}
@@ -794,4 +794,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 	}
 
+	@Override
+	public void onMapsIndexed() {
+		clearPolygonsCollections();
+	}
 }
