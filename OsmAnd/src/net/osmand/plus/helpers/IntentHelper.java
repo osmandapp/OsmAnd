@@ -27,6 +27,7 @@ import net.osmand.plus.myplaces.ui.EditFavoriteGroupDialogFragment;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.openplacereviews.OPRConstants;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -46,6 +47,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -70,29 +72,75 @@ public class IntentHelper {
 	}
 
 	public boolean parseLaunchIntents() {
-		boolean applied = parseMoveMapToLocationUrlIntent();
-		if (!applied) {
-			applied = parseOpenLocationMenuUrlIntent();
+		return parseNavigationUrlIntent()
+				|| parseMoveMapToLocationUrlIntent()
+				|| parseOpenLocationMenuUrlIntent()
+				|| parseRedirectUrlIntent()
+				|| parseTileSourceUrlIntent()
+				|| parseOpenGpxUrlIntent()
+				|| parseSendIntent()
+				|| parseOAuthIntent()
+				|| parseOprOAuthIntent();
+	}
+
+	private boolean parseNavigationUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			boolean hasNavigationDestination = data.getQueryParameterNames().contains("end");
+			if (isOsmAndMapUrl(data) && hasNavigationDestination) {
+				String startLatLonParam = data.getQueryParameter("start");
+				String endLatLonParam = data.getQueryParameter("end");
+				String appModeKeyParam = data.getQueryParameter("mode");
+
+				if (Algorithms.isEmpty(endLatLonParam)) {
+					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
+					return true;
+				}
+
+				LatLon startLatLon = startLatLonParam == null ? null : parseLatLon(startLatLonParam);
+				if (startLatLonParam != null && startLatLon == null) {
+					LOG.error("Malformed OsmAnd navigation URL: start location is broken");
+				}
+
+				LatLon endLatLon = parseLatLon(endLatLonParam);
+				if (endLatLon == null) {
+					LOG.error("Malformed OsmAnd navigation URL: destination location is broken");
+					return true;
+				}
+
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKeyParam, null);
+				if (!Algorithms.isEmpty(appModeKeyParam) && appMode == null) {
+					LOG.debug("App mode with specified key not available, using default navigation app mode");
+				}
+
+				if (appMode != null) {
+					app.getRoutingHelper().setAppMode(appMode);
+				}
+
+				app.getTargetPointsHelper().navigateToPoint(endLatLon, true, -1);
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, startLatLon,
+						null, false, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+
+				return true;
+			}
 		}
-		if (!applied) {
-			applied = parseRedirectUrlIntent();
+		return false;
+	}
+
+	@Nullable
+	private LatLon parseLatLon(@NonNull String latLon) {
+		String[] coords = latLon.split(",");
+		if (coords.length != 2) {
+			return null;
 		}
-		if (!applied) {
-			applied = parseTileSourceUrlIntent();
+		try {
+			double lat = Double.parseDouble(coords[0]);
+			double lon = Double.parseDouble(coords[1]);
+			return new LatLon(lat, lon);
+		} catch (NumberFormatException e) {
+			return null;
 		}
-		if (!applied) {
-			applied = parseOpenGpxUrlIntent();
-		}
-		if (!applied) {
-			applied = parseSendIntent();
-		}
-		if (!applied) {
-			applied = parseOAuthIntent();
-		}
-		if (!applied) {
-			applied = parseOprOAuthIntent();
-		}
-		return applied;
 	}
 
 	private boolean parseMoveMapToLocationUrlIntent() {
