@@ -702,24 +702,35 @@ public class RoutePlannerFrontEnd {
 
 	private boolean needRequestPrivateAccessRouting(RoutingContext ctx, List<LatLon> points) throws IOException {
 		boolean res = false;
-		GeneralRouter router = (GeneralRouter) ctx.getRouter();
-		if (router != null && !router.isAllowPrivate() && router.getParameters().containsKey(GeneralRouter.ALLOW_PRIVATE)) {
-			ctx.unloadAllData();
-			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
-			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
-			mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
-			ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
-			for (LatLon latLon : points) {
-				RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
-				if (rp != null && rp.road != null) {
-					if (rp.road.hasPrivateAccess()) {
-						res = true;
-						break;
+		if (ctx.nativeLib != null) {
+			int size = points.size();
+			int[] y31Coordinates = new int[size];
+			int[] x31Coordinates = new int[size];
+			for (int i = 0; i < size; i++) {
+				y31Coordinates[i] = MapUtils.get31TileNumberY(points.get(i).getLatitude());
+				x31Coordinates[i] = MapUtils.get31TileNumberX(points.get(i).getLongitude());
+			}
+			res = ctx.nativeLib.needRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
+		} else {
+			GeneralRouter router = (GeneralRouter) ctx.getRouter();
+			if (router != null && !router.isAllowPrivate() && router.getParameters().containsKey(GeneralRouter.ALLOW_PRIVATE)) {
+				ctx.unloadAllData();
+				LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
+				mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
+				mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
+				ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
+				for (LatLon latLon : points) {
+					RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
+					if (rp != null && rp.road != null) {
+						if (rp.road.hasPrivateAccess()) {
+							res = true;
+							break;
+						}
 					}
 				}
+				ctx.unloadAllData();
+				ctx.setRouter(router);
 			}
-			ctx.unloadAllData();
-			ctx.setRouter(router);
 		}
 		return res;
 	}
