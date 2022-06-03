@@ -84,7 +84,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	@Override
 	public void onDataSetChanged() {
-		updateItemsData();
 		updateItemsView();
 	}
 
