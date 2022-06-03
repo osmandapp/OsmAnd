@@ -178,6 +178,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
+	private boolean hasMovableWpt = false;
 
 	private ContextMenuLayer contextMenuLayer;
 	@ColorInt
@@ -287,6 +288,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawMovableWpt(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		Object movableObject = contextMenuLayer.getMoveableObject();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (movableObject instanceof WptPt) {
 			WptPt movableWpt = ((WptPt) movableObject);
 			SelectedGpxFile gpxFile = pointFileMap.get(movableWpt);
@@ -300,7 +302,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				drawBigPoint(canvas, movableWpt, getFileColor(gpxFile), pf.x, pf.y, mapMarker, textScale);
 				canvas.restore();
+				if (mapRenderer != null && pointsTileProvider != null && !hasMovableWpt) {
+					hasMovableWpt = true;
+					drawSelectedFilesPointsOpenGl(mapRenderer, tileBox, visibleGPXFilesCache, true);
+				}
 			}
+		}
+		if (mapRenderer != null &&  hasMovableWpt && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			hasMovableWpt = false;
+			drawSelectedFilesPointsOpenGl(mapRenderer, tileBox, visibleGPXFilesCache, true);
 		}
 	}
 

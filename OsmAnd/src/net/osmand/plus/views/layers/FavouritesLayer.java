@@ -64,6 +64,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
+	private boolean hasMovableTilePoint;
+	private boolean appliedNewPosition = false;
 
 	public FavouritesLayer(@NonNull Context ctx, int baseOrder) {
 		super(ctx);
@@ -109,7 +111,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
 			float textScale = getTextScale();
 			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
-			//TODO movable for OpenGL
+			if (favoritesMapLayerProvider != null && !hasMovableTilePoint) {
+				hasMovableTilePoint = true;
+				showFavorites();
+			}
+		}
+		if (hasMovableTilePoint && !appliedNewPosition && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			hasMovableTilePoint = false;
+			showFavorites();
 		}
 	}
 
@@ -265,6 +274,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		favoritesMapLayerProvider.clearSymbols(mapRenderer);
 		favoritesMapLayerProvider = null;
+		appliedNewPosition = false;
 	}
 
 	@Override
@@ -383,6 +393,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
 		}
+		appliedNewPosition = true;
 	}
 
 	@Override
@@ -392,11 +403,17 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
+		if (hasMovableTilePoint && point == contextMenuLayer.getMoveableObject()) {
+			hasMovableTilePoint = false;
+		}
 		showFavorites();
 	}
 
 	@Override
 	public void onFavoritePropertiesUpdated() {
+		if (hasMovableTilePoint) {
+			return;
+		}
 		showFavorites();
 	}
 }

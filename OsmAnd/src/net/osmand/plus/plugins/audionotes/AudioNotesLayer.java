@@ -40,6 +40,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 	//OpenGL
 	private AudioNotesTileProvider audioNotesTileProvider;
+	private LatLon movableTilePoint;
 
 	public AudioNotesLayer(@NonNull Context context, @NonNull AudioVideoNotesPlugin plugin, int baseOrder) {
 		super(context);
@@ -71,7 +72,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			float textScale = getTextScale();
 			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
-			//TODO movable for OpenGL
+			if (audioNotesTileProvider != null && movableTilePoint == null) {
+				movableTilePoint = new LatLon(objectInMotion.getLatitude(), objectInMotion.getLongitude());
+				resetAudioVideoNotes();
+			}
+		}
+		if (movableTilePoint != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			movableTilePoint = null;
+			resetAudioVideoNotes();
 		}
 	}
 
@@ -80,23 +88,13 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
-			List<Recording> objects =  recs.getAllObjects();
+			List<Recording> objects = recs.getAllObjects();
+			int movableCount = movableTilePoint != null ? 1 : 0;
 
-			if (audioNotesTileProvider != null && objects.size() != audioNotesTileProvider.getPointsCount()) {
+			if (audioNotesTileProvider != null && objects.size() != audioNotesTileProvider.getPointsCount() + movableCount) {
 				clearAudioVideoNotes();
 			}
-
-			if (audioNotesTileProvider == null) {
-				audioNotesTileProvider = new AudioNotesTileProvider(ctx, baseOrder, view.getDensity());
-			}
-
-			if (objects.size() > 0 && audioNotesTileProvider.getPointsCount() == 0) {
-				float textScale = getTextScale();
-				for (Recording o : objects) {
-					audioNotesTileProvider.addToData(o, textScale);
-				}
-				audioNotesTileProvider.drawSymbols(mapRenderer);
-			}
+			showAudioVideoNotes(objects);
 		} else {
 			if (tileBox.getZoom() >= startZoom) {
 				OsmandApplication app = getApplication();
@@ -252,14 +250,47 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
 		}
+		movableTilePoint = null;
+		resetAudioVideoNotes();
 	}
 
-	public void clearAudioVideoNotes() {
+	/** OpenGL */
+	private void clearAudioVideoNotes() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null || audioNotesTileProvider == null) {
 			return;
 		}
 		audioNotesTileProvider.clearSymbols(mapRenderer);
 		audioNotesTileProvider = null;
+	}
+
+	/** OpenGL */
+	private void resetAudioVideoNotes() {
+		clearAudioVideoNotes();
+		DataTileManager<Recording> recs = plugin.getRecordings();
+		List<Recording> objects = recs.getAllObjects();
+		showAudioVideoNotes(objects);
+	}
+
+	/** OpenGL */
+	private void showAudioVideoNotes(List<Recording> objects) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (audioNotesTileProvider == null) {
+			audioNotesTileProvider = new AudioNotesTileProvider(ctx, baseOrder, view.getDensity());
+		}
+		if (objects.size() > 0 && audioNotesTileProvider.getPointsCount() == 0) {
+			float textScale = getTextScale();
+			for (Recording o : objects) {
+				if (movableTilePoint != null && movableTilePoint.getLatitude() == o.getLatitude()
+						&& movableTilePoint.getLongitude() == o.getLongitude()) {
+					continue;
+				}
+				audioNotesTileProvider.addToData(o, textScale);
+			}
+			audioNotesTileProvider.drawSymbols(mapRenderer);
+		}
 	}
 }

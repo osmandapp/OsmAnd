@@ -121,9 +121,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private double markerSizePx;
 
 	//OpenGL
-	private MapMarkersCollection mapMarkersCollection;
 	private int markersCount = 0;
-	private PointI movableObject;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -369,10 +367,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (mapRenderer != null) {
 			Object movableObject = contextMenuLayer.getMoveableObject();
 			if (movableObject instanceof MapMarker) {
-				setMovableObject((MapMarker)movableObject);
+				double lat = ((MapMarker)movableObject).getLatitude();
+				double lon = ((MapMarker)movableObject).getLongitude();
+				setMovableObject(lat, lon);
 				drawMovableMarker(canvas, tileBox);
 			}
-			if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
 				cancelMovableObject();
 			}
 			return;
@@ -787,62 +787,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (mapMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
 			mapMarkersCollection = null;
-		}
-	}
-
-	/** OpenGL */
-	private void setMovableObject(@NonNull MapMarker objectInMotion) {
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || mapMarkersCollection == null || movableObject != null) {
-			return;
-		}
-		int x = MapUtils.get31TileNumberX(objectInMotion.getLongitude());
-		int y = MapUtils.get31TileNumberY(objectInMotion.getLatitude());
-		QListMapMarker markers = mapMarkersCollection.getMarkers();
-		for (int i = 0; i < markers.size(); i++) {
-			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == x && m.getPosition().getY() == y) {
-				m.setIsHidden(true);
-				movableObject = m.getPosition();
-				break;
-			}
-		}
-	}
-
-	/** OpenGL */
-	private void applyMovableObject(@NonNull LatLon newPosition) {
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
-			return;
-		}
-		int x = MapUtils.get31TileNumberX(newPosition.getLongitude());
-		int y = MapUtils.get31TileNumberY(newPosition.getLatitude());
-		QListMapMarker markers = mapMarkersCollection.getMarkers();
-		for (int i = 0; i < markers.size(); i++) {
-			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
-				m.setPosition(new PointI(x, y));
-				m.setIsHidden(false);
-				movableObject = null;
-				break;
-			}
-		}
-	}
-
-	/** OpenGL */
-	private void cancelMovableObject() {
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
-			return;
-		}
-		QListMapMarker markers = mapMarkersCollection.getMarkers();
-		for (int i = 0; i < markers.size(); i++) {
-			net.osmand.core.jni.MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
-				m.setIsHidden(false);
-				movableObject = null;
-				break;
-			}
 		}
 	}
 
