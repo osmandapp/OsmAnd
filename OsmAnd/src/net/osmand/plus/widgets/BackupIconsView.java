@@ -33,7 +33,7 @@ public class BackupIconsView extends View {
 
 	private final int iconSize;
 	private final int rowMargin;
-	private final double screenSize;
+	private int screenWidth;
 
 	private int iconsOffset = 0;
 
@@ -49,9 +49,16 @@ public class BackupIconsView extends View {
 		Resources resources = app.getResources();
 		iconSize = resources.getDimensionPixelSize(R.dimen.big_icon_size);
 		rowMargin = resources.getDimensionPixelSize(R.dimen.content_padding);
+	}
 
-		screenSize = (app.getResources().getDisplayMetrics().widthPixels) * 1.2;
-		initIconsMap();
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		if (screenWidth == 0) {
+			int extraSpace = 2 * (iconSize + rowMargin);
+			screenWidth = getMeasuredWidth() + extraSpace;
+			initIconsMap();
+		}
 	}
 
 	@Override
@@ -59,7 +66,7 @@ public class BackupIconsView extends View {
 		buildRows(canvas);
 		invalidate();
 
-		if (iconsOffset >= screenSize) {
+		if (iconsOffset >= screenWidth) {
 			iconsOffset = 0;
 		} else {
 			iconsOffset++;
@@ -78,8 +85,8 @@ public class BackupIconsView extends View {
 			xOffset = xOffset + iconsOffset;
 
 			for (Integer iconId : iconIds) {
-				if (xOffset > screenSize - xOffsetStep) {
-					xOffset = xOffset - (int) screenSize;
+				if (xOffset > screenWidth - xOffsetStep) {
+					xOffset -= screenWidth;
 				}
 				drawIcon(canvas, iconId, color, xOffset, row);
 				xOffset += xOffsetStep;
@@ -95,7 +102,7 @@ public class BackupIconsView extends View {
 		colorIds.add(R.color.backup_restore_icons_green);
 
 		int xOffsetStep = iconSize + rowMargin;
-		int iconsCount = (int) screenSize / xOffsetStep;
+		int iconsCount = (int) screenWidth / xOffsetStep;
 
 		for (Integer colorId : colorIds) {
 			List<Integer> icons = new ArrayList<>();
