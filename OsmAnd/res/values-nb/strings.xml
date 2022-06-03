@@ -4684,4 +4684,9 @@
     <string name="map_widget_time_to_destination">Tid til mål</string>
     <string name="map_widget_time_to_intermediate">Tid til mellomliggende</string>
     <string name="radius_ruler_mode_desc">Bytt til radius-linjalmodus ved å trykke på miniprogrammet.</string>
+    <string name="average_speed_skip_stops">Ta hensyn til stopp</string>
+    <string name="average_speed_time_interval_desc">Angi tidsintervall for måling av gjennomsnittsfart.</string>
+    <string name="average_speed_widget_desc">Viser gjennomsnittsfart for nåværende tur.</string>
+    <string name="map_widget_average_speed">Gjennomsnittsfart</string>
+    <string name="average_speed_skip_stops_desc">Hastighet mindre enn %1$s vil ikke bli medregnet, og ikke ha innvirkning på gjennomsnittsfarten.</string>
 </resources>
