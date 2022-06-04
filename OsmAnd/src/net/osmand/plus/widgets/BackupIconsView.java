@@ -16,10 +16,9 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -41,12 +40,15 @@ public class BackupIconsView extends View {
 	private final UiUtilities uiUtilities;
 
 	private final Paint circlePaint = new Paint();
-	private final Map<Integer, List<Integer>> iconsMap = new LinkedHashMap<>();
+	private final List<IconsRow> iconsRows = new ArrayList<>();
 
 	private final int iconSize;
 	private final int horizontalMargin;
 	private final int verticalMargin;
+	private final int stepWidth;
+
 	private int measuredWidth;
+	private int iconsPerRow;
 
 	private int offsetX = 0;
 
@@ -62,54 +64,68 @@ public class BackupIconsView extends View {
 		iconSize = dpToPx(ICON_SIZE_DP);
 		horizontalMargin = dpToPx(ICON_HORIZONTAL_MARGIN_DP);
 		verticalMargin = iconSize / 4;
+		stepWidth = iconSize + horizontalMargin;
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		if (measuredWidth == 0) {
-			int extraSpace = 2 * (iconSize + horizontalMargin);
-			measuredWidth = getMeasuredWidth() + extraSpace;
-			fillIconsMap();
+			measuredWidth = getMeasuredWidth();
+			iconsPerRow = measuredWidth / stepWidth + 2;
+			fillIconsRows();
 		}
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		drawIconsRows(canvas);
-		offsetX = (offsetX + 1) % measuredWidth;
 		invalidate();
-	}
-
-	private void drawIconsRows(@NonNull Canvas canvas) {
-		int stepX = iconSize + horizontalMargin;
-		int row = 0;
-
-		for (Map.Entry<Integer, List<Integer>> entry : iconsMap.entrySet()) {
-			int color = entry.getKey();
-			List<Integer> iconIds = entry.getValue();
-
-			int initialOffsetX = row % 2 == 0 ? horizontalMargin : 0;
-			int offsetX = this.offsetX + initialOffsetX;
-
-			for (int iconId : iconIds) {
-				if (offsetX > measuredWidth - stepX) {
-					offsetX -= measuredWidth;
-				}
-				drawIcon(canvas, iconId, color, offsetX, row);
-				offsetX += stepX;
-			}
-
-			row++;
+		offsetX++;
+		if (offsetX >= measuredWidth) {
+			offsetX = measuredWidth - iconsPerRow * stepWidth;
 		}
 	}
 
-	private void drawIcon(@NonNull Canvas canvas, @DrawableRes int drawableId, @ColorRes int colorId, int offsetX, int row) {
+	private void drawIconsRows(@NonNull Canvas canvas) {
+		for (IconsRow row : iconsRows) {
+			int baseOffsetX = row.index % 2 == 0 ? horizontalMargin : 0;
+			int initialOffsetX = this.offsetX + baseOffsetX;
+
+			drawFittingIcons(canvas, row, initialOffsetX);
+			drawNotFittingIcons(canvas, row, initialOffsetX);
+		}
+	}
+
+	private void drawFittingIcons(@NonNull Canvas canvas, @NonNull IconsRow row, int initialOffsetX) {
+		int offsetX = initialOffsetX;
+		int i = 0;
+		while (offsetX < measuredWidth && i < row.iconsIds.size()) {
+			int iconId = row.iconsIds.get(i);
+			drawIcon(canvas, iconId, row.colorId, offsetX, row.index);
+			offsetX += stepWidth;
+			i++;
+		}
+	}
+
+	private void drawNotFittingIcons(@NonNull Canvas canvas, @NonNull IconsRow row, int initialOffsetX) {
+		int offsetX = initialOffsetX - stepWidth;
+		int i = row.iconsIds.size() - 1;
+		int endIndex = (int) Math.ceil((measuredWidth - initialOffsetX) / (float) stepWidth);
+		while (i >= endIndex && offsetX + iconSize >= 0) {
+			int iconId = row.iconsIds.get(i);
+			drawIcon(canvas, iconId, row.colorId, offsetX, row.index);
+			offsetX -= stepWidth;
+			i--;
+		}
+	}
+
+	private void drawIcon(@NonNull Canvas canvas, @DrawableRes int iconId, @ColorRes int colorId, int offsetX, int row) {
 		int iconSize2 = iconSize / 2;
 		int centerX = offsetX + iconSize2;
 		int centerY = row * (iconSize + verticalMargin) + iconSize2;
 
-		Drawable icon = uiUtilities.getIcon(drawableId, colorId);
+		Drawable icon = uiUtilities.getIcon(iconId, colorId);
 
 		int leftBound = centerX - icon.getIntrinsicWidth() / 2;
 		int topBound = centerY - icon.getIntrinsicHeight() / 2;
@@ -124,10 +140,7 @@ public class BackupIconsView extends View {
 		canvas.drawCircle(centerX, centerY, iconSize2, circlePaint);
 	}
 
-	private void fillIconsMap() {
-		int stepX = iconSize + horizontalMargin;
-		int iconsPerRow = measuredWidth / stepX;
-
+	private void fillIconsRows() {
 		List<List<Integer>> excludedIndexesForRows = getForbiddenIconsIndexesForRows();
 		for (int row = 0; row < colorsIds.size(); row++) {
 
@@ -148,7 +161,7 @@ public class BackupIconsView extends View {
 			for (int iconIndex : rowIconsIndexes) {
 				rowIconsIds.add(iconsIds.get(iconIndex));
 			}
-			iconsMap.put(colorId, rowIconsIds);
+			iconsRows.add(new IconsRow(row, colorId, rowIconsIds));
 		}
 	}
 
@@ -251,5 +264,20 @@ public class BackupIconsView extends View {
 			randomValue = new Random().nextInt(range);
 		} while (!ignoreExcluded && excludedValues.contains(randomValue));
 		return randomValue;
+	}
+
+	private static class IconsRow {
+
+		public final int index;
+		@ColorRes
+		public final int colorId;
+		@NonNull
+		public final List<Integer> iconsIds;
+
+		public IconsRow(int index, @ColorRes int colorId, @NonNull List<Integer> iconsIds) {
+			this.index = index;
+			this.colorId = colorId;
+			this.iconsIds = Collections.unmodifiableList(iconsIds);
+		}
 	}
 }
