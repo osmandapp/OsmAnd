@@ -2722,4 +2722,10 @@
     <string name="time_to_navigation_point_widget_settings_desc">Превключва режима при докосване на приспособлението.</string>
     <string name="explore_plans">Проучване на планове</string>
     <string name="average_speed_skip_stops_desc">Скорост, по-нискa от %1$s, няма да бъде отчетена и няма да повлияе на средната скорост.</string>
+    <string name="rendering_attr_weatherTempContours_name">Изотерми</string>
+    <string name="routing_attr_avoid_highway_name">Без автомагистрали</string>
+    <string name="rendering_attr_horseScale_name">Сложност на конни маршрути</string>
+    <string name="rendering_attr_weatherPressureContours_name">Изобари</string>
+    <string name="radius_ruler_mode_desc">Докосването на приспособлението включва режима на линия за радиуси.</string>
+    <string name="routeInfo_horse_scale_name">Сложност на конни маршрути</string>
 </resources>
