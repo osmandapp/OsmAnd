@@ -2962,7 +2962,7 @@
 \n• عرض السمت في قياس المسافة
 \n
 \n</string-->
-    <string name="day">يوم</string>
+    <string name="day">نهار</string>
     <string name="days_2_4">أيام</string>
     <string name="days_5">أيام</string>
     <string name="week">أسبوع</string>
@@ -4753,8 +4753,13 @@
     <string name="map_widget_time_to_destination">وقت الوصول</string>
     <string name="map_widget_time_to_intermediate">متوسط وقت الوصول</string>
     <string name="map_widget_distance_to_intermediate">مسافة متوسط وقت الوصول</string>
-    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الأداة.</string>
+    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الويدجت.</string>
     <string name="shared_string_mode">نمط</string>
-    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الأداة.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="lang_sat">السنتالية</string>
+    <string name="average_speed_skip_stops">مراعاة التوقف</string>
+    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة.</string>
+    <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
+    <string name="average_speed_skip_stops_desc">لن يتم احتساب السرعة الأقل من %1$s وستؤثر على متوسط السرعة.</string>
+    <string name="map_widget_average_speed">متوسط السرعة</string>
 </resources>

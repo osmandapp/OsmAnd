@@ -1040,7 +1040,7 @@
     <string name="poi_trade_plumbing">Inštalačný materiál</string>
     <string name="poi_trade_wood">Drevo</string>
     <string name="poi_trade_agricultural_supplies">Poľnohospodárske potreby</string>
-    <string name="poi_trade_tile">Kachličky</string>
+    <string name="poi_trade_tile">Obkladačky</string>
     <string name="poi_population">Počet obyvateľov</string>
     <string name="poi_parking_underground">Podzemné</string>
     <string name="poi_parking_multi_storey">Poschodové</string>
@@ -3620,7 +3620,7 @@
     <string name="poi_tactile_paving_incorrect">Nesprávne</string>
     <string name="poi_tactile_paving_primitive">Primitívne</string>
     <string name="poi_tactile_paving_contrasted">Kontrastné</string>
-    <string name="poi_traffic_signals_sound_locate">Len keď je povolená chôdza</string>
+    <string name="poi_traffic_signals_sound_locate">Len pre nájdenie stĺpa</string>
     <string name="poi_video_no">Nie</string>
     <string name="poi_video_yes">Áno;Video</string>
     <string name="poi_booth">Typ búdky</string>
