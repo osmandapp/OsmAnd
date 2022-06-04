@@ -1435,7 +1435,7 @@
     <string name="install_more">Instali pli…</string>
     <string name="lang_es_us">Hispana (Amerika)</string>
     <string name="lang_be_by">Belorusa (latina)</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kanara</string>
     <string name="system_locale">Sistema</string>
     <string name="amenity_type_administrative">Administrejo</string>
     <string name="amenity_type_barrier">Barilo</string>
@@ -4686,4 +4686,9 @@
     <string name="shared_string_mode">Reĝimo</string>
     <string name="radius_ruler_mode_desc">Vi povas ŝanĝi reĝimon de la cirkelo per frapeti la fenestraĵon.</string>
     <string name="lang_sat">Santala</string>
+    <string name="average_speed_time_interval_desc">Difini temp-intervalon por kiu la mezuma rapido estos kalkulita.</string>
+    <string name="average_speed_widget_desc">Fenestraĵo montranta la mezuman rapidon por la nuna vojaĝo.</string>
+    <string name="map_widget_average_speed">Mezuma rapido</string>
+    <string name="average_speed_skip_stops">Enkalkuli paŭzojn</string>
+    <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne estos enkalkulita kaj ne efikos sur la mezuma rapido.</string>
 </resources>
