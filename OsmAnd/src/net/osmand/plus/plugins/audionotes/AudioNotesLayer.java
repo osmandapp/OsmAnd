@@ -19,11 +19,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.AudioNotesTileProvider;
 import net.osmand.util.Algorithms;
 
@@ -37,6 +38,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	private final Context ctx;
 	private final AudioVideoNotesPlugin plugin;
 	private ContextMenuLayer contextMenuLayer;
+	private boolean changeMarkerPositionMode;
 
 	//OpenGL
 	private AudioNotesTileProvider audioNotesTileProvider;
@@ -71,7 +73,13 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			float textScale = getTextScale();
 			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
-			//TODO movable for OpenGL
+			if (!changeMarkerPositionMode) {
+				changeMarkerPositionMode = true;
+				clearAudioVideoNotes();
+			}
+		} else if (changeMarkerPositionMode) {
+			changeMarkerPositionMode = false;
+			clearAudioVideoNotes();
 		}
 	}
 
@@ -81,19 +89,19 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (mapRenderer != null) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
 			List<Recording> objects =  recs.getAllObjects();
-
-			if (audioNotesTileProvider != null && objects.size() != audioNotesTileProvider.getPointsCount()) {
+			int objectsCount = objects.size() - (contextMenuLayer.isInChangeMarkerPositionMode() ? 1 : 0);
+			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPointsCount()) {
 				clearAudioVideoNotes();
 			}
-
 			if (audioNotesTileProvider == null) {
 				audioNotesTileProvider = new AudioNotesTileProvider(ctx, baseOrder, view.getDensity());
 			}
-
-			if (objects.size() > 0 && audioNotesTileProvider.getPointsCount() == 0) {
+			if (objectsCount > 0 && audioNotesTileProvider.getPointsCount() == 0) {
 				float textScale = getTextScale();
 				for (Recording o : objects) {
-					audioNotesTileProvider.addToData(o, textScale);
+					if (o != contextMenuLayer.getMoveableObject()) {
+						audioNotesTileProvider.addToData(o, textScale);
+					}
 				}
 				audioNotesTileProvider.drawSymbols(mapRenderer);
 			}
@@ -103,7 +111,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 				float textScale = getTextScale();
 				float iconSize = getIconSize(app);
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
-
 				DataTileManager<Recording> recs = plugin.getRecordings();
 				final QuadRect latlon = tileBox.getLatLonBounds();
 				List<Recording> objects = recs.getObjects(latlon.top, latlon.left, latlon.bottom, latlon.right);
@@ -114,7 +121,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					if (o != contextMenuLayer.getMoveableObject()) {
 						float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 						float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
 									ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
@@ -244,7 +250,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		if (o instanceof Recording) {
 			result = ((Recording) o).setLocation(position);

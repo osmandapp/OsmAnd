@@ -22,9 +22,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -61,6 +61,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float textScale = 1f;
 	private boolean textVisible = false;
 	private boolean nightMode = false;
+	private boolean changeMarkerPositionMode;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
@@ -86,8 +87,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5);
-//		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
-		//return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 
 	@Override
@@ -109,7 +108,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
 			float textScale = getTextScale();
 			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
-			//TODO movable for OpenGL
+			if (!changeMarkerPositionMode) {
+				changeMarkerPositionMode = true;
+				showFavorites();
+			}
+		} else if (changeMarkerPositionMode) {
+			changeMarkerPositionMode = false;
+			showFavorites();
 		}
 	}
 
@@ -392,12 +397,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
-		showFavorites();
 	}
 
 	@Override
 	public void onFavoritePropertiesUpdated() {
-		showFavorites();
+		if (!changeMarkerPositionMode) {
+			showFavorites();
+		}
 	}
 }
 
