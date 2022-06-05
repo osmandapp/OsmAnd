@@ -122,7 +122,7 @@ public class BackupIconsView extends View {
 
 	private void drawIcon(@NonNull Canvas canvas, @DrawableRes int iconId, @ColorRes int colorId, int offsetX, int row) {
 		int iconSize2 = iconSize / 2;
-		int centerX = offsetX + iconSize2;
+		int centerX = mapX(offsetX + iconSize2);
 		int centerY = row * (iconSize + verticalMargin) + iconSize2;
 
 		Drawable icon = uiUtilities.getIcon(iconId, colorId);
@@ -138,6 +138,10 @@ public class BackupIconsView extends View {
 		circlePaint.setColor(ContextCompat.getColor(app, colorId));
 		circlePaint.setAlpha(CIRCLE_PAINT_ALPHA);
 		canvas.drawCircle(centerX, centerY, iconSize2, circlePaint);
+	}
+
+	private int mapX(int x) {
+		return !AndroidUtils.isLayoutRtl(getContext()) ? measuredWidth - x : x;
 	}
 
 	private void fillIconsRows() {
