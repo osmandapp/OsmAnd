@@ -518,6 +518,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		rm.removeResourceListener(this);
 		clearPolygonsCollections();
 	}

@@ -75,7 +75,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private boolean nightMode = false;
 	private TransportStopsTileProvider transportStopsTileProvider;
 	private VectorLinesCollection vectorLinesCollection;
-	private MapMarkersCollection mapMarkersCollection;
 	private int stopRouteDist = 0;
 	private TransportStopType stopRouteType = null;
 	private boolean mapsInitialized = false;
@@ -312,6 +311,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		clearTransportStopsTileProvider();
 		clearTransportRouteCollections();
 	}
@@ -446,10 +446,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		if (mapRenderer == null) {
 			return;
 		}
-		if (mapMarkersCollection != null) {
-			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
-			mapMarkersCollection = null;
-		}
+		clearMapMarkersCollections();
 		if (vectorLinesCollection != null) {
 			mapRenderer.removeSymbolsProvider(vectorLinesCollection);
 			vectorLinesCollection = null;

@@ -1522,11 +1522,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void destroyLayer() {
-
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}
