@@ -2027,7 +2027,6 @@ mapak eta nabigazioa</string>
     <string name="new_filter_desc">Idatzi iragazki berriaren izena, zure \'Kategoriak\' fitxara gehituko da.</string>
     <string name="edit_filter">Editatu kategoriak</string>
     <string name="subcategories">Azpikategoriak</string>
-    <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
     <string name="translit_names">Transliteratu izenak</string>
     <string name="search_hint">Idatzi hiria, helbidea, interesgunearen izena</string>
     <string name="rendering_value_light_brown_name">Marroi argia</string>

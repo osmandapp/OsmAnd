@@ -2032,7 +2032,6 @@
     <string name="driving_region_australia">استرالیا</string>
     <string name="shared_string_markers">نشانه‌ها</string>
     <string name="favorite_group_name">نام گروه</string>
-    <string name="translit_name_if_miss">اگر نام %1$s وجود نداشت، با حروف انگلیسی نشان بده</string>
     <string name="live_monitoring_max_interval_to_send">حافظهٔ تأخیری برای ردیابی آنلاین</string>
     <string name="live_monitoring_max_interval_to_send_desrc">مدت‌زمانی را مشخص کنید تا اگر اتصال برقرار نبود، مکان‌ها تا این مدت برای ارسال حفظ شوند.</string>
     <string name="shared_string_others">دیگر</string>

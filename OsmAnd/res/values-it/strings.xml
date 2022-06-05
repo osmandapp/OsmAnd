@@ -2036,7 +2036,6 @@
     <string name="gpx_logging_no_data">Nessun dato</string>
     <string name="rendering_attr_contourColorScheme_description">Schema del colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
-    <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
     <string name="trip_rec_notification_settings">Abilita l\'avvio veloce della registrazione</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notifica che permette di iniziare a registrare il viaggio.</string>
     <string name="shared_string_notifications">Notifiche</string>

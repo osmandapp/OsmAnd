@@ -2055,7 +2055,6 @@
     <string name="rendering_attr_contourColorScheme_name">Esquema de cores das curvas de nível</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da estrada</string>
     <string name="search_hint">Escreva cidade, endereço, nome do ponto de interesse (POI)</string>
-    <string name="translit_name_if_miss">Transliterar se o nome %1$s estiver ausente</string>
     <string name="translit_names">Nomes transliterados</string>
     <string name="edit_filter">Editar categorias</string>
     <string name="subcategories">Subcategorias</string>

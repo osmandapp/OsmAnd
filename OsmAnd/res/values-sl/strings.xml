@@ -2020,7 +2020,6 @@
     <string name="create_custom_poi">Ustvari filter po meri</string>
     <string name="custom_search">Iskanje po meri</string>
     <string name="translit_names">Prečrkovanje imen</string>
-    <string name="translit_name_if_miss">Uporabi prečrkovanje, če ime %1$s ni na voljo</string>
     <string name="shared_string_continue">Nadaljuj</string>
     <string name="shared_string_pause">Premor</string>
     <string name="shared_string_trip">Potovanje</string>
