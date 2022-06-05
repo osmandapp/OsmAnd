@@ -728,8 +728,8 @@
     <string name="driving_region_uk">DU, India, a thebyg</string>
     <string name="speak_street_names">Enwau strydoedd (TTS)</string>
     <string name="speak_traffic_warnings">Rhybuddion traffig</string>
-    <string name="clear_intermediate_points">Clirio cyrchfannau ar y ffordd</string>
-    <string name="keep_intermediate_points">Cadw cyrchfannau ar y ffordd</string>
+    <string name="clear_intermediate_points">Clirio\'r mannau stopio ar y ffordd</string>
+    <string name="keep_intermediate_points">Cadw mannau stopio ar y ffordd</string>
     <string name="maps_define_edit">Diffinio/Golygu…</string>
     <string name="edit_tilesource_choose_existing">Dewis bresennol…</string>
     <string name="driving_region_australia">Awstralia</string>
@@ -770,10 +770,10 @@
     <string name="poi_filter_emergency">Argyfwng</string>
     <string name="poi_filter_entertainment">Adloniant</string>
     <string name="poi_filter_accomodation">Llety</string>
-    <string name="intermediate_point_too_far">Mae\'r gyrchfan %1$s ar y ffordd yn rhy bell o\'r ffordd agosach.</string>
-    <string name="arrived_at_intermediate_point">Wedi cyrraedd cyrchfan ar y ffordd</string>
-    <string name="context_menu_item_intermediate_point">Ychwanegu fel cyrchfan ar y ffordd</string>
-    <string name="map_widget_intermediate_distance">Cyrchfan ar y ffordd</string>
+    <string name="intermediate_point_too_far">Mae\'r man stopio ar y ffordd %1$s yn rhy bell o\'r ffordd agosach.</string>
+    <string name="arrived_at_intermediate_point">Wedi cyrraedd man stopio ar y ffordd</string>
+    <string name="context_menu_item_intermediate_point">Ychwanegu fel man stopio ar y ffordd</string>
+    <string name="map_widget_intermediate_distance">Man stopio ar y ffordd</string>
     <string name="poi_filter_public_transport">Trafnidiaeth gyhoeddus</string>
     <string name="arrival_distance_factor_normally">Arferol</string>
     <string name="index_name_africa">Affrica</string>
@@ -993,12 +993,12 @@
     <string name="replace_destination_point">Newid y gyrchfan</string>
     <string name="gps_not_available">Galluogwch GPS yn y gosodiadau</string>
     <string name="map_widget_monitoring_services">Gwasanaethau logio</string>
-    <string name="intermediate_point">Cyrchfan ar y ffordd %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Ychwanegu fel y gyrchfan olaf ar y ffordd</string>
-    <string name="context_menu_item_first_intermediate_point">Ychwanegu fel y gyrchfan cyntaf ar y ffordd</string>
-    <string name="add_as_last_destination_point">Ychwanegu fel cyrchfan ar y ffordd</string>
-    <string name="add_as_first_destination_point">Ychwanegu fel cyrchfan ar y ffordd</string>
-    <string name="new_destination_point_dialog">Rydych eisoes wedi gosod cyrchfan:</string>
+    <string name="intermediate_point">Man stopio ar y ffordd %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Ychwanegu fel y man olaf i stopio yno ar y ffordd</string>
+    <string name="context_menu_item_first_intermediate_point">Ychwanegu fel y man cyntaf i stopio yno ar y ffordd</string>
+    <string name="add_as_last_destination_point">Ychwanegu fel y man stopio olaf ar y ffordd</string>
+    <string name="add_as_first_destination_point">Ychwanegu fel y man stopio cyntaf ar y ffordd</string>
+    <string name="new_destination_point_dialog">Mae cyrchfan eisoes wedi\'i osod:</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \n Mae OsmAnd yn ap llywio meddalwedd cod agored gyda mynediad at ystyr eang o ddata OSM byd-eang. Gellir cadw holl ddata\'r map (fectorau neu deils mapiau) yng ngherdyn storfa\'r ffôn ar gyfer defnydd all-lein. Mae\'n bosib llywio llwybrau ar-lein ac all-lein, gan gynnwys cyfarwyddiadau llais ar hyd y ffordd.
@@ -1055,7 +1055,7 @@
     <string name="context_menu_item_directions_to">Cyfarwyddiadau i</string>
     <string name="please_select_address">Dewiswch ddinas neu stryd yn gyntaf</string>
     <string name="favourites_list_activity">Dewis Ffefryn</string>
-    <string name="clear_dest_confirm">Tynnu dy gyrchfan (a mannau ar hyd y ffordd)\?</string>
+    <string name="clear_dest_confirm">Tynnu pen y daith (a mannau stopio ar y ffordd)\?</string>
     <string name="av_use_external_recorder">Defnyddio recordydd y system</string>
     <string name="recording_description">Yn recordio %1$s %3$s %2$s</string>
     <string name="index_srtm_parts">rhannau</string>
@@ -1081,7 +1081,7 @@
     <string name="amenity_type_administrative">Gweinyddol</string>
     <string name="amenity_type_landuse">Defnydd tir</string>
     <string name="osb_author_or_password_not_specified">Rho dy enw defnyddiwr a chyfrinair OSM yn \'Gosodiadau\'</string>
-    <string name="new_directions_point_dialog">Mae gennyt eisoes gyrchfannau ar hyd y ffordd wedi\'u gosod.</string>
+    <string name="new_directions_point_dialog">Mae eisoes mannau stopio ar y ffordd wedi eu gosod.</string>
     <string name="plugin_distance_point_time">amser</string>
     <string name="plugin_distance_point_ele">uchder</string>
     <string name="distance_measurement_start_editing">Dechrau golygu</string>
@@ -1459,7 +1459,7 @@
     <string name="sample_wikivoyage">Enghraifft Wikivoyage</string>
     <string name="app_mode_kayak">Caiac</string>
     <string name="shared_string_hillshade">Cysgodion bryniau</string>
-    <string name="rendering_attr_piste_difficulty_intermediate_name">Canolig</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Cymedrol anodd</string>
     <string name="route_to">I:</string>
     <string name="map_widget_max_speed">Terfyn cyflymder</string>
     <string name="safe_mode_description">Rhedeg yr ap yn y modd diogel (arafach).</string>
@@ -2774,7 +2774,7 @@
     <string name="maps_could_not_be_downloaded">Methwyd lawrlwytho\'r map hwn</string>
     <string name="search_poi_category_hint">Teipiwch i chwilio\'r cyfan</string>
     <string name="storage_directory_internal_app">Cof mewnol yr ap</string>
-    <string name="mark_final_location_first">Gosodwch pen y daith gyntaf</string>
+    <string name="mark_final_location_first">Dylid osod pen y daith gyntaf</string>
     <string name="rendering_attr_coloredBuildings_name">Lliwio adeiladau yn ôl eu defnydd</string>
     <string name="app_modes_choose">Proffiliau\'r ap</string>
     <string name="rendering_attr_showTramRoutes_name">Llwybrau tramiau</string>
@@ -2811,7 +2811,7 @@
     <string name="choose_icon_color_name">Lliw, eiconau ac enw</string>
     <string name="avoid_in_routing_descr_">Osgoi rhai llwybrau a mathau o ffyrdd</string>
     <string name="routeInfo_road_types_name">Mathau o ffyrdd</string>
-    <string name="intermediate_destinations">Gosod mannau stopio</string>
+    <string name="intermediate_destinations">Mannau stopio ar y ffordd</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Llwybrau tacsis i\'w rhannu</string>
     <string name="download_map_dialog">Deialog lawrlwytho mapiau</string>
     <string name="temporary_conditional_routing">Ystyried cyfyngiadau dros dro</string>
@@ -2986,7 +2986,7 @@
     <string name="monitoring_prefs_descr">Llywio, cywirdeb logio</string>
     <string name="paste_Osmand_data_folder_path">Gluda\'r llwybr i\'r ffolder gyda data OsmAnd</string>
     <string name="change_osmand_data_folder_question">Newid ffolder data OsmAnd\?</string>
-    <string name="move_maps_to_new_destination">Symud i\'r gyrchfan newydd</string>
+    <string name="move_maps_to_new_destination">Symud i\'r lleoliad newydd</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parc tir</string>
     <string name="months_3">Tri mis</string>
     <string name="turn_screen_on_router">Deffro ar dro</string>
@@ -3063,7 +3063,7 @@
     <string name="hillshade_download_description">Mae angen mapiau ychwanegol i weld cysgodion bryniau ar y map.</string>
     <string name="shared_string_app_default_w_val">Rhagosodiad Ap (%s)</string>
     <string name="osm_editing_prefs_descr">Mewngofnodi, cyfrinair, golygu all-lein</string>
-    <string name="change_data_storage_full_description">Symud ffeiliau data OsmAnd i\'r gyrchfan newydd\?
+    <string name="change_data_storage_full_description">Symud ffeiliau data OsmAnd i\'r lleoliad newydd\?
 \n%1$s &gt; %2$s</string>
     <string name="mercator_projection">Tafluniad Mercator</string>
     <string name="keep_screen_off">Cadw\'r sgrin i ffwrdd</string>
@@ -3074,7 +3074,7 @@
     <string name="recalculate_route_distance_promo">Bydd y llwybr yn cael ei ailgyfrif os yw\'r pellter o\'r llwybr i\'r lleoliad presennol yn fwy na\'r gwerth a ddewiswyd.</string>
     <string name="shared_string_poi_types">Mathau o POI</string>
     <string name="shared_string_enter_param">Rhowch paramedr</string>
-    <string name="quick_action_remove_next_destination_descr">Yn dileu cyrchfan nesaf eich llwybr. Os mai dyna\'r cyrchfan olaf, bydd y llywio yn dod i ben.</string>
+    <string name="quick_action_remove_next_destination_descr">Mae\'n dileu\'r gyrchfan nesaf ar y daith. Os mai dyna yw pen y daith, daw\'r llywio i ben.</string>
     <string name="live_monitoring_adress">Cyfeiriad gwe</string>
     <string name="join_segments">Cysylltu segmentau</string>
     <string name="route_parameters_descr">Ffurfweddu paramedrau llwybr</string>
@@ -3084,7 +3084,7 @@
     <string name="route_maneuvers_desc">Mae teclynnau llywio\'n cael eu galluogi yn ystod llywio i ddangos gwybodaeth fel pellter, amser cyrraedd neu adael, troadau nesaf, cyfeiriant, enw stryd cyfredol, manylion lonydd, cyflymder uchaf, rhybuddion yn agosáu, POIs, cyfeirbwyntiau.</string>
     <string name="track_attach_to_the_roads_descr">Bydd y trac yn cael ei gysylltu â\'r ffordd gan ddefnyddio mapiau all-lein, bydd geometreg y trac yn cael ei newid.</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Dim dewisiadau</string>
-    <string name="routing_attr_difficulty_preference_intermediate_name">Canolradd</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Cymedrol anodd</string>
     <string name="on_with_params">%1$s ar %2$s</string>
     <string name="apply_only_to_new_points">Gosod i bwyntiau newydd yn unig</string>
     <string name="rendering_attr_horse_scale_demanding_name">Anodd Iawn</string>
@@ -3387,8 +3387,8 @@
     <string name="monitoring_min_distance_descr_side_effect">Sgil effeithiau: Nid yw cyfnodau o orffwys yn cael eu cofnodi o gwbl neu o un pwynt yr un yn unig. Mae’n bosibl y bydd symudiadau bach (byd go iawn) (e.e. i’r ochr, i nodi troad posibl ar eich taith) yn cael eu hidlo allan. Mae eich ffeil yn cynnwys llai o wybodaeth ar gyfer ôl-brosesu, ac mae ganddi ystadegau gwaeth trwy hidlo pwyntiau sy\'n amlwg yn ddiangen ar amser cofnodi, tra\'n cadw o bosibl arteffactau a achosir gan dderbyniad gwael neu effeithiau chipset GPS.</string>
     <string name="shared_string_mode">Modd</string>
     <string name="time_to_navigation_point_widget_settings_desc">Gelli newid modd trwy dapio ar y teclyn.</string>
-    <string name="map_widget_time_to_intermediate">Amser i ganolradd</string>
-    <string name="map_widget_distance_to_intermediate">Pellter i ganolradd</string>
+    <string name="map_widget_time_to_intermediate">Amser i fan stopio</string>
+    <string name="map_widget_distance_to_intermediate">Pellter i fan stopio</string>
     <string name="radius_ruler_mode_desc">Gelli newid modd mesurydd Radius trwy dapio ar y teclyn.</string>
     <string name="explore_plans">Archwilio Cynlluniau</string>
     <string name="radius_rules_widget_desc">Mae teclyn mesur radiws yn helpu i bennu\'r radiws o amgylch y pwynt a ddewiswyd ar y map trwy ddangos cylchoedd pellter ar y map.</string>
@@ -3480,4 +3480,37 @@
     <string name="collected_data">Data a gasglwyd</string>
     <string name="backup_pause_all">Oedi\'r cyfan</string>
     <string name="tts_title">TTS</string>
+    <string name="routing_attr_allow_intermediate_description">Llwybrau mwy anodd gyda rhannau mwy serth. Yn gyffredinol, bydd rhai rhwystrau i\'w osgoi.</string>
+    <string name="add_destination_query">Dylid gosod pen y daith gyntaf</string>
+    <string name="access_intermediate_arrival_time">Amser cyrraedd man stopio</string>
+    <string name="keep_and_add_destination_point">Ychwanegu fel man stopio nesaf</string>
+    <string name="copying_osmand_files_descr">Yn copïo ffeiliau data OsmAnd i\'r lleoliad newydd (%s)…</string>
+    <string name="map_widget_intermediate_time">Amser man stopio</string>
+    <string name="add_start_and_end_points">Ychwnaegu man gadael a phen y daith</string>
+    <string name="add_intermediate">Ychwanegu man stopio</string>
+    <string name="switch_start_finish">Cyfnewid y man gadael a phen y daith</string>
+    <string name="copying_osmand_one_file_descr">Yn copïo ffeil (%s) i\'r lleoliad newydd…</string>
+    <string name="routing_attr_allow_intermediate_name">Caniatáu llwybrau cymedrol anodd</string>
+    <string name="make_round_trip_descr">Ychwanegu copi o bwynt gadael fel cyrchfan.</string>
+    <string name="add_intermediate_point">Ychwanegu man stopio</string>
+    <string name="intermediate_waypoint">Man stopio ar y ffordd</string>
+    <string name="quick_action_add_first_intermediate">Ychwanegu\'r man stopio cyntaf</string>
+    <string name="last_intermediate_dest_description">Ychwanega man stopio ar y ffordd</string>
+    <string name="application_dir_change_warning3">Symud ffeiliau OsmAnd i\'r lleoliad newydd\?</string>
+    <string name="subsequent_dest_description">Symud y gyrchfan i fyny a\'i greu</string>
+    <string name="first_intermediate_dest_description">Ychwanega man\'r man stopio cyntaf</string>
+    <string name="osmand_extended_description_part2">Llywio GPS
+\n • Dewis rhwng modd all-lein (dim defnydd data symudol) neu ar-lein (mwy cyflym)
+\n • Cyfarwyddiadau llais ar hyd y ffordd (dewis o ieithoedd, ond ddim eto yn Gymraeg)
+\n • Ail-gyfrifo\'r llwybr os ewch oddi arno
+\n • Canllaw lonydd, enwau strydoedd, ac amcan o\'ch amser cyrraedd
+\n • Modd dydd/nos yn newid yn awtomatig
+\n • Dangos cyfyngiadau cyflymder a\'ch rhybuddio os ewch rhy gyflym
+\n • Chwyddo maint y map yn dibynnu ar eich cyflymder
+\n • Chwilio am leoedd gyda chyfeiriad, math (e.e. parcio, bwyty, gwesty, petrol, amgueddfa), neu gyfesurynnau daearyddol
+\n • Cefnogi mannau stopio ar hyd eich taith
+\n • Recordio neu lwytho\'ch trac GPX eich hunain a\'i ddilyn
+\n</string>
+    <string name="route_is_too_long_v2">Ar gyfer teithiau hir, gosoder mannau stopio ar hyd y ffordd os na fydd llwybr wedi\'i ganfod o fewn 10 munud.</string>
+    <string name="clear_all_intermediates">Clirio pob man stopio</string>
 </resources>
