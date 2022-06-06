@@ -461,8 +461,8 @@ public class BackupHelper {
 
 	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type,
-					  @NonNull StreamWriter streamWriter, final long uploadTime,
-					  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	                  @NonNull StreamWriter streamWriter, final long uploadTime,
+	                  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -523,14 +523,53 @@ public class BackupHelper {
 		return error;
 	}
 
+	boolean obfMapExistsOnServer(@NonNull String name) {
+		final boolean[] exists = new boolean[1];
+
+		Map<String, String> params = new HashMap<>();
+		params.put("name", name);
+		params.put("type", "file");
+
+		OperationLog operationLog = new OperationLog("obfMapExistsOnServer", DEBUG);
+		operationLog.startOperation(name);
+
+		AndroidNetworkUtils.sendRequest(app, "https://osmand.net/userdata/check-file-on-server",
+				params, "Check obf map on server", false, false,
+				(result, error, resultCode) -> {
+					int status;
+					String message;
+					if (!Algorithms.isEmpty(error)) {
+						status = STATUS_SERVER_ERROR;
+						message = "Check obf map on server error: " + new BackupError(error);
+					} else if (!Algorithms.isEmpty(result)) {
+						try {
+							JSONObject obj = new JSONObject(result);
+							String fileStatus = obj.optString("status");
+							exists[0] = Algorithms.stringsEqual(fileStatus, "present");
+
+							status = STATUS_SUCCESS;
+							message = name + " exists: " + exists[0];
+						} catch (JSONException e) {
+							status = STATUS_PARSE_JSON_ERROR;
+							message = "Check obf map on server error: json parsing";
+						}
+					} else {
+						status = STATUS_EMPTY_RESPONSE_ERROR;
+						message = "Check obf map on server error: empty response";
+					}
+					operationLog.finishOperation("(" + status + "): " + message);
+				});
+		return exists[0];
+	}
+
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-						 @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                     @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
 			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
