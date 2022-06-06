@@ -33,11 +33,11 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 	public static final String TRACK_WIDTH_MEDIUM = "medium";
 	public static final String SHOW_START_FINISH_ATTR = "show_start_finish_attr";
 
-	private OsmandApplication app;
-	private GpxAppearanceAdapterType adapterType;
-	private int currentColor;
-	private boolean showStartFinishIcons;
-	private boolean nightMode;
+	private final OsmandApplication app;
+	private final GpxAppearanceAdapterType adapterType;
+	private final int currentColor;
+	private final boolean showStartFinishIcons;
+	private final boolean nightMode;
 
 	public enum GpxAppearanceAdapterType {
 		TRACK_WIDTH,
@@ -140,10 +140,10 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 			}
 		}
 		if (adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
-			AppearanceListItem startFinishIconsitem = new AppearanceListItem(SHOW_START_FINISH_ATTR,
+			AppearanceListItem startFinishIconsItem = new AppearanceListItem(SHOW_START_FINISH_ATTR,
 					showStartFinishIcons ? "false" : "true", app.getString(R.string.start_finish_icons));
-			items.add(startFinishIconsitem);
-			startFinishIconsitem.setLastItem(true);
+			items.add(startFinishIconsItem);
+			startFinishIconsItem.setLastItem(true);
 		}
 		if (trackColorProp != null) {
 			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {

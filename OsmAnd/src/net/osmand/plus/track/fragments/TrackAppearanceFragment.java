@@ -177,9 +177,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				gpxDataItem = gpxDbHelper.getItem(new File(trackDrawInfo.getFilePath()));
 			}
 			showStartFinishIconsInitialValue = savedInstanceState.getBoolean(SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY,
-					settings.SHOW_START_FINISH_ICONS.get());
+					settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		} else {
-			showStartFinishIconsInitialValue = settings.SHOW_START_FINISH_ICONS.get();
+			showStartFinishIconsInitialValue = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				trackDrawInfo = new TrackDrawInfo(app, true);
@@ -594,24 +594,18 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		View saveButton = view.findViewById(R.id.right_bottom_button);
-		saveButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				saveTrackInfo();
-				dismiss();
-			}
+		saveButton.setOnClickListener(v -> {
+			saveTrackInfo();
+			dismiss();
 		});
 
 		View cancelButton = view.findViewById(R.id.dismiss_button);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				discardSplitChanges();
-				discardShowStartFinishChanges();
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		cancelButton.setOnClickListener(v -> {
+			discardSplitChanges();
+			discardShowStartFinishChanges();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 
@@ -712,7 +706,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDbHelper.updateColor(gpxDataItem, trackDrawInfo.getColor());
 			gpxDbHelper.updateWidth(gpxDataItem, trackDrawInfo.getWidth());
 			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
-//			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
+			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
 			gpxDbHelper.updateSplit(gpxDataItem, splitType, trackDrawInfo.getSplitInterval());
 			ColoringType coloringType = trackDrawInfo.getColoringType();
 			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
@@ -732,7 +726,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void discardShowStartFinishChanges() {
-		settings.SHOW_START_FINISH_ICONS.set(showStartFinishIconsInitialValue);
+		settings.CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinishIconsInitialValue);
 	}
 
 	void applySplit(GpxSplitType splitType, int timeSplit, double distanceSplit) {
@@ -773,7 +767,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
-			addCard(container, new ShowStartFinishCard(mapActivity));
+			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 
 			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			addCard(container, trackColoringCard);

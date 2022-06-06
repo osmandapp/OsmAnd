@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,13 +19,9 @@ import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -477,11 +472,8 @@ public class GpxUiHelper {
 						v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 						ch.setOnCheckedChangeListener(null);
 						ch.setChecked(item.getSelected());
-						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								item.setSelected(isChecked);
-							}
+						ch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+							item.setSelected(isChecked);
 						});
 						UiUtilities.setupCompoundButton(ch, nightMode, PROFILE_DEPENDENT);
 					} else {
@@ -490,11 +482,8 @@ public class GpxUiHelper {
 						v.findViewById(R.id.toggle_checkbox_item).setVisibility(View.GONE);
 						ch.setOnCheckedChangeListener(null);
 						ch.setChecked(item.getSelected());
-						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								item.setSelected(isChecked);
-							}
+						ch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+							item.setSelected(isChecked);
 						});
 						UiUtilities.setupCompoundButton(ch, nightMode, PROFILE_DEPENDENT);
 					}
@@ -504,11 +493,7 @@ public class GpxUiHelper {
 			}
 		};
 
-		OnClickListener onClickListener = new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int position) {
-			}
-		};
+		OnClickListener onClickListener = (dialog, position) -> { };
 		gpxDataItemCallback.setListAdapter(alertDialogAdapter);
 		builder.setAdapter(alertDialogAdapter, onClickListener);
 		if (multipleChoice) {
@@ -535,92 +520,79 @@ public class GpxUiHelper {
 
 					updateAppearanceTitle(activity, app, trackWidthProp, renderer, apprTitleView, prefWidth.get(), prefColor.get());
 
-					apprTitleView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							final ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
-							popup.setAnchorView(apprTitleView);
-							popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
-							popup.setModal(true);
-							popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
-							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
-							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
-									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
-									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR,
-									gpxAppearanceParams.containsKey(SHOW_START_FINISH_ATTR) ? "true".equals(gpxAppearanceParams.get(SHOW_START_FINISH_ATTR)) : app.getSettings().SHOW_START_FINISH_ICONS.get(), nightMode);
-							popup.setAdapter(gpxApprAdapter);
-							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-								@Override
-								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-									AppearanceListItem item = gpxApprAdapter.getItem(position);
-									if (item != null) {
-										if (CURRENT_TRACK_WIDTH_ATTR.equals(item.getAttrName())) {
-											gpxAppearanceParams.put(CURRENT_TRACK_WIDTH_ATTR, item.getValue());
-										} else if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
-											gpxAppearanceParams.put(CURRENT_TRACK_COLOR_ATTR, item.getValue());
-										} else if (SHOW_START_FINISH_ATTR.equals(item.getAttrName())) {
-											gpxAppearanceParams.put(SHOW_START_FINISH_ATTR, item.getValue());
-										}
-									}
-									popup.dismiss();
-									updateAppearanceTitle(activity, app, trackWidthProp, renderer,
-											apprTitleView,
-											gpxAppearanceParams.containsKey(CURRENT_TRACK_WIDTH_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_WIDTH_ATTR) : prefWidth.get(),
-											gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get());
+					apprTitleView.findViewById(R.id.button).setOnClickListener(v -> {
+						final ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
+						popup.setAnchorView(apprTitleView);
+						popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
+						popup.setModal(true);
+						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
+						popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
+						popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
+						final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
+								gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
+								GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR,
+								gpxAppearanceParams.containsKey(SHOW_START_FINISH_ATTR) ? "true".equals(gpxAppearanceParams.get(SHOW_START_FINISH_ATTR)) : app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get(), nightMode);
+						popup.setAdapter(gpxApprAdapter);
+						popup.setOnItemClickListener((parent, view, position, id) -> {
+							AppearanceListItem item = gpxApprAdapter.getItem(position);
+							if (item != null) {
+								if (CURRENT_TRACK_WIDTH_ATTR.equals(item.getAttrName())) {
+									gpxAppearanceParams.put(CURRENT_TRACK_WIDTH_ATTR, item.getValue());
+								} else if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
+									gpxAppearanceParams.put(CURRENT_TRACK_COLOR_ATTR, item.getValue());
+								} else if (SHOW_START_FINISH_ATTR.equals(item.getAttrName())) {
+									gpxAppearanceParams.put(SHOW_START_FINISH_ATTR, item.getValue());
 								}
-							});
-							popup.show();
-						}
+							}
+							popup.dismiss();
+							updateAppearanceTitle(activity, app, trackWidthProp, renderer,
+									apprTitleView,
+									gpxAppearanceParams.containsKey(CURRENT_TRACK_WIDTH_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_WIDTH_ATTR) : prefWidth.get(),
+									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get());
+						});
+						popup.show();
 					});
 					builder.setCustomTitle(apprTitleView);
 				}
 			} else {
 				builder.setTitle(R.string.show_gpx);
 			}
-			builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (gpxAppearanceParams.size() > 0) {
-						for (Map.Entry<String, String> entry : gpxAppearanceParams.entrySet()) {
-							if (SHOW_START_FINISH_ATTR.equals(entry.getKey())) {
-								app.getSettings().SHOW_START_FINISH_ICONS.set("true".equals(entry.getValue()));
-							} else {
-								final CommonPreference<String> pref
-										= app.getSettings().getCustomRenderProperty(entry.getKey());
-								pref.set(entry.getValue());
-							}
-						}
-						if (activity instanceof MapActivity) {
-							((MapActivity) activity).refreshMapComplete();
+			builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+				if (gpxAppearanceParams.size() > 0) {
+					for (Map.Entry<String, String> entry : gpxAppearanceParams.entrySet()) {
+						if (SHOW_START_FINISH_ATTR.equals(entry.getKey())) {
+							app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.set("true".equals(entry.getValue()));
+						} else {
+							CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(entry.getKey());
+							pref.set(entry.getValue());
 						}
 					}
-					GPXFile currentGPX = null;
-					//clear all previously selected files before adding new one
-					OsmandApplication app = (OsmandApplication) activity.getApplication();
-					if (app.getSelectedGpxHelper() != null) {
-						app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).refreshMapComplete();
 					}
-					if (showCurrentGpx && adapter.getItem(0).getSelected()) {
-						currentGPX = app.getSavingTrackHelper().getCurrentGpx();
-					}
-					List<String> selectedGpxNames = new ArrayList<>();
-					for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
-						if (adapter.getItem(i).getSelected()) {
-							selectedGpxNames.add(gpxInfoList.get(i).getFileName());
-						}
-					}
-					dialog.dismiss();
-					updateSelectedTracksAppearance(app, selectedGpxNames, gpxAppearanceParams);
-					loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
-							selectedGpxNames.toArray(new String[0]));
 				}
+				GPXFile currentGPX = null;
+				//clear all previously selected files before adding new one
+				OsmandApplication _app = (OsmandApplication) activity.getApplication();
+				if (_app.getSelectedGpxHelper() != null) {
+					_app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
+				}
+				if (showCurrentGpx && adapter.getItem(0).getSelected()) {
+					currentGPX = _app.getSavingTrackHelper().getCurrentGpx();
+				}
+				List<String> selectedGpxNames = new ArrayList<>();
+				for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
+					if (adapter.getItem(i).getSelected()) {
+						selectedGpxNames.add(gpxInfoList.get(i).getFileName());
+					}
+				}
+				dialog.dismiss();
+				updateSelectedTracksAppearance(_app, selectedGpxNames, gpxAppearanceParams);
+				loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
+						selectedGpxNames.toArray(new String[0]));
 			});
 			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-					&& gpxInfoList.size() > 1 || !showCurrentGpx && gpxInfoList.size() > 0) {
+			if (gpxInfoList.size() > 1 || !showCurrentGpx && gpxInfoList.size() > 0) {
 				builder.setNeutralButton(R.string.gpx_add_track, null);
 			}
 		}
@@ -635,81 +607,57 @@ public class GpxUiHelper {
 			spannableDesc.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),
 					descPrefix.length() + 1, spannableDesc.length(), 0);
 			descTextView.setText(spannableDesc);
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-				footerView.findViewById(R.id.button).setVisibility(View.GONE);
-			} else {
-				footerView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						addTrack(activity, alertDialogAdapter, adapter, gpxInfoList);
-					}
-				});
-			}
+			footerView.findViewById(R.id.button).setOnClickListener(v -> {
+				addTrack(activity, alertDialogAdapter, adapter, gpxInfoList);
+			});
 			dlg.getListView().addFooterView(footerView, null, false);
 		}
-		dlg.getListView().setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (multipleChoice) {
-					ContextMenuItem item = adapter.getItem(position);
-					item.setSelected(!item.getSelected());
-					alertDialogAdapter.notifyDataSetInvalidated();
-					if (position == 0 && showCurrentGpx && item.getSelected()) {
-						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
-						if (monitoringPlugin == null) {
-							AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									Bundle params = new Bundle();
-									params.putBoolean(PluginsFragment.OPEN_PLUGINS, true);
-									MapActivity.launchMapActivityMoveToTop(activity, null, null, params);
-								}
-							});
-							confirm.setNegativeButton(R.string.shared_string_cancel, null);
-							confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
-							confirm.show();
-						} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							monitoringPlugin.showTripRecordingDialog(activity);
-						}
+		dlg.getListView().setOnItemClickListener((parent, view, position, id) -> {
+			if (multipleChoice) {
+				ContextMenuItem item = adapter.getItem(position);
+				item.setSelected(!item.getSelected());
+				alertDialogAdapter.notifyDataSetInvalidated();
+				if (position == 0 && showCurrentGpx && item.getSelected()) {
+					OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+					if (monitoringPlugin == null) {
+						AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
+						confirm.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+							Bundle params = new Bundle();
+							params.putBoolean(PluginsFragment.OPEN_PLUGINS, true);
+							MapActivity.launchMapActivityMoveToTop(activity, null, null, params);
+						});
+						confirm.setNegativeButton(R.string.shared_string_cancel, null);
+						confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
+						confirm.show();
+					} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+						monitoringPlugin.showTripRecordingDialog(activity);
 					}
+				}
+			} else {
+				dlg.dismiss();
+				if (showCurrentGpx && position == 0) {
+					callbackWithObject.processResult(null);
 				} else {
-					dlg.dismiss();
-					if (showCurrentGpx && position == 0) {
-						callbackWithObject.processResult(null);
+					String fileName = gpxInfoList.get(position).getFileName();
+					SelectedGpxFile selectedGpxFile =
+							app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+					if (selectedGpxFile != null) {
+						callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
 					} else {
-						String fileName = gpxInfoList.get(position).getFileName();
-						SelectedGpxFile selectedGpxFile =
-								app.getSelectedGpxHelper().getSelectedFileByName(fileName);
-						if (selectedGpxFile != null) {
-							callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
-						} else {
-							loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
-						}
+						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
 					}
 				}
 			}
 		});
-		dlg.setOnShowListener(new DialogInterface.OnShowListener() {
-			@Override
-			public void onShow(DialogInterface dialog) {
-				Button addTrackButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
-				if (addTrackButton != null) {
-					addTrackButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							addTrack(activity, alertDialogAdapter, adapter, gpxInfoList);
-						}
-					});
-				}
+		dlg.setOnShowListener(dialog -> {
+			Button addTrackButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+			if (addTrackButton != null) {
+				addTrackButton.setOnClickListener(v -> {
+					addTrack(activity, alertDialogAdapter, adapter, gpxInfoList);
+				});
 			}
 		});
-		dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				gpxDataItemCallback.setUpdateEnable(false);
-			}
-		});
+		dlg.setOnDismissListener(dialog -> gpxDataItemCallback.setUpdateEnable(false));
 		dlg.show();
 		try {
 			dlg.getListView().setFastScrollEnabled(true);
@@ -754,7 +702,7 @@ public class GpxUiHelper {
 			gpxDbHelper.updateWidth(item, width);
 		}
 		if (params.containsKey(SHOW_START_FINISH_ATTR)) {
-			boolean showStartFinish = settings.SHOW_START_FINISH_ICONS.get();
+			boolean showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 			gpxDbHelper.updateShowStartFinish(item, showStartFinish);
 		}
 	}
