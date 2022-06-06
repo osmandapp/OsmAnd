@@ -434,11 +434,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     }
 
     @Override
-    public void destroyLayer() {
-
-    }
-
-    @Override
     public boolean drawInScreenPixels() {
         return true;
     }

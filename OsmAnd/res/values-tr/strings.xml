@@ -2708,7 +2708,6 @@
     <string name="get_for">%1$s için alın</string>
     <string name="lang_kab">Cezayir Berbericesi</string>
     <string name="translit_names">Adlara harf çevirisi yap</string>
-    <string name="translit_name_if_miss">%1$s adı eksikse harf çevirisi yap</string>
     <string name="rendering_value_light_brown_name">Açık kahverengi</string>
     <string name="rendering_value_dark_brown_name">Koyu kahverengi</string>
     <string name="rendering_attr_contourColorScheme_name">Eş yükselti eğrileri renk şeması</string>

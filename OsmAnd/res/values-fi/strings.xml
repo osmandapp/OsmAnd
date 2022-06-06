@@ -1752,7 +1752,6 @@
     <string name="access_direction_haptic_feedback">Reittiohjaus (värinäpalautteena)</string>
     <string name="storage_directory_readonly_desc">Vaihdettu sisäiseen muistiin, sillä valittu tallennushakemisto on kirjoitussuojattu. Ole hyvä ja valitse tallennushakemisto johon voi kirjoittaa.</string>
     <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten.</string>
-    <string name="translit_name_if_miss">Translitteroi, jos nimi puuttuu kielellä %1$s</string>
     <string name="translit_names">Translitteroi nimet</string>
     <string name="osm_live_header">Tämä tilaus mahdollistaa päivitykset kaikkiin karttoihin ympäri maailmaa tunneittain.
 \nOsa tuloista menee takaisin OSM-yhteisölle ja maksetaan jokaiselle OSM-avustajalle.

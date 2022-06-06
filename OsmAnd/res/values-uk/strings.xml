@@ -2000,7 +2000,6 @@
     <string name="rendering_attr_contourColorScheme_name">Колірна схема ізоліній</string>
     <string name="rendering_attr_surfaceIntegrity_name">Якість дорожнього покриття</string>
     <string name="search_hint">Введіть назву міста, адресу, назву точки інтересу</string>
-    <string name="translit_name_if_miss">Транслітерація якщо назва на %1$s відсутня</string>
     <string name="translit_names">Транслітерація назв</string>
     <string name="edit_filter">Редагувати категорії</string>
     <string name="subcategories">Підкатегорії</string>

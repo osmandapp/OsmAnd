@@ -2031,7 +2031,6 @@
     <string name="edit_filter">تعديل الفئات</string>
     <string name="subcategories">فئات فرعية</string>
     <string name="translit_names">أسماء بترجمة حرفية</string>
-    <string name="translit_name_if_miss">ترجمة حرفية اذا كانت %1$s من الاسم مفقودة</string>
     <string name="search_hint">أدخل المدينة، العنوان أو نقاط الاهتمام</string>
     <string name="christmas_desc">في ارتقاب عطل عيد الميلاد ورأس السنة الجديدة، يمكنك اختيار عرض POI المرتبطة بعيد الميلاد: أشجار عيد الميلاد، أسواق...الخ.</string>
     <string name="christmas_desc_q">عرض POI عيد الميلاد ؟</string>

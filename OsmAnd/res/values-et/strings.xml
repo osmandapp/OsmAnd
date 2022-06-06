@@ -2422,7 +2422,6 @@
     <string name="edit_filter">Muuda kategooriaid</string>
     <string name="subcategories">Alamkategooriad</string>
     <string name="translit_names">Translitereeri nimed</string>
-    <string name="translit_name_if_miss">Translitereeri kui %1$s nimi puudub</string>
     <string name="search_hint">Sisesta linn, aadress, huvipunkti nimi</string>
     <string name="rendering_value_light_brown_name">Helepruun</string>
     <string name="rendering_value_dark_brown_name">Tumepruun</string>

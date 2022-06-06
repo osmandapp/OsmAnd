@@ -345,7 +345,6 @@
 \n</string>
     <string name="rendering_attr_surfaceIntegrity_name">சாலை மேற்பரப்பு ஒருமைப்பாடு</string>
     <string name="search_hint">நகரம், முகவரி, POI பெயர்</string>
-    <string name="translit_name_if_miss">%1$s பெயர் காணவில்லை என்றால், குறிக்கவும்</string>
     <string name="translit_names">பெயரிடும் பெயர்கள்</string>
     <string name="edit_filter">திருத்து வகைகள்</string>
     <string name="subcategories">துணை வகைகள்</string>

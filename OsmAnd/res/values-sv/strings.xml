@@ -1953,7 +1953,6 @@
     <string name="delete_filter">Ta bort filter</string>
     <string name="new_filter">Nytt filter</string>
     <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att läggas till på fliken ’Kategorier’.</string>
-    <string name="translit_name_if_miss">Transkribera om %1$s namn saknas</string>
     <string name="skip_map_downloading">Hoppa över nerladdning av kartor</string>
     <string name="search_another_country">Välj en annan region</string>
     <string name="osmand_plus_banner_desc">Obegränsade nedladdningar av kartor, uppdateringar och Wikipedia-plugin.</string>

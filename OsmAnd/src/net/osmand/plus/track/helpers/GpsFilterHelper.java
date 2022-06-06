@@ -211,6 +211,7 @@ public class GpsFilterHelper {
 		copy.showCurrentTrack = source.showCurrentTrack;
 		copy.hasAltitude = source.hasAltitude;
 		copy.modifiedTime = System.currentTimeMillis();
+		copy.pointsModifiedTime = copy.modifiedTime;
 		copy.copyExtensions(source);
 		return copy;
 	}

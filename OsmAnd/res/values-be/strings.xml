@@ -2077,7 +2077,6 @@
     <string name="rendering_value_dark_brown_name">Цёмна-карычневы</string>
     <string name="rendering_attr_surfaceIntegrity_name">Якасць дарожнага пакрыцця</string>
     <string name="search_hint">Увядзіце горад, адрас, назву POI</string>
-    <string name="translit_name_if_miss">Транслітарыраваць калі назва на %1$s адсутнічае</string>
     <string name="route_calculation">Разлік шляху</string>
     <string name="gpx_no_tracks_title">У вас яшчэ няма файлаў слядоў</string>
     <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць файлы слядоў у каталог</string>

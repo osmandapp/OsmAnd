@@ -986,7 +986,6 @@
     <string name="rendering_attr_contourColorScheme_name">Образац боја линија изохипси</string>
     <string name="rendering_attr_surfaceIntegrity_name">Целовитост површи пута</string>
     <string name="search_hint">Укуцајте град, адресу, име тачке од интереса</string>
-    <string name="translit_name_if_miss">Преслови ако %1$s превод не постоји</string>
     <string name="translit_names">Преслови имена</string>
     <string name="edit_filter">Измени категорије</string>
     <string name="subcategories">Поткатегорије</string>

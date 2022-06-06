@@ -2047,7 +2047,6 @@
     <string name="rendering_attr_contourColorScheme_name">Szintvonalak színsémája</string>
     <string name="rendering_attr_surfaceIntegrity_name">Útfelület épsége</string>
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
-    <string name="translit_name_if_miss">Átírás, ha a %1$s név hiányzik</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
     <string name="wiki_around">Közeli Wikipédia-cikkek</string>

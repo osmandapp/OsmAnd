@@ -3720,7 +3720,6 @@
     <string name="donation_to_osm">Donație către comunitatea OSM</string>
     <string name="new_filter_desc">Vă rugăm să introduceți un nume pentru noul filtru, care va fi adăugat la fila \'Categorii\'.</string>
     <string name="translit_names">Transliterarea numelor</string>
-    <string name="translit_name_if_miss">Transliterare în cazul în care numele %1$s lipsește</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integritatea suprafeței drumurilor</string>
     <string name="rendering_attr_contourColorScheme_name">Schema de culori a liniilor de contur</string>
     <string name="christmas_desc_q">Afișați POI-uri de vacanță de Crăciun\?</string>

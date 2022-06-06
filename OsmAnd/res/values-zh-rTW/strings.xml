@@ -2018,7 +2018,6 @@
     <string name="new_filter_desc">請輸入新的篩選名稱，這會加到您的「類別」分頁裡。</string>
     <string name="translit_names">音譯名稱</string>
     <string name="search_hint">輸入城市、地址、POI 名稱</string>
-    <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
     <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
     <string name="save_track_min_speed">記錄最低的速度</string>
     <string name="save_track_min_speed_descr">篩選：不低於這個速度的記錄點。</string>

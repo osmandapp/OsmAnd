@@ -141,6 +141,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		clearContextMarkerCollection();
 		clearOutlineCollection();
 	}
@@ -419,9 +420,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public PointF getMovableCenterPoint(RotatedTileBox tb) {
 		if (applyingMarkerLatLon != null) {
-			float x = tb.getPixXFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
-			float y = tb.getPixYFromLatLon(applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
-			return new PointF(x, y);
+			return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+					applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
 		} else {
 			return new PointF(tb.getPixWidth() / 2f, tb.getPixHeight() / 2f);
 		}
