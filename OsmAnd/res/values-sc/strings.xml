@@ -2024,7 +2024,6 @@
     <string name="edit_filter">Acontza sas categorias</string>
     <string name="subcategories">Suta-categorias</string>
     <string name="translit_names">Translìtera sos nùmenes</string>
-    <string name="translit_name_if_miss">Translìtera si non b\'est su nùmene in %1$s</string>
     <string name="search_hint">Iscrie sa tzitade, s\'indiritzu, o su nùmene de su PDI</string>
     <string name="shared_string_continue">Sighi</string>
     <string name="shared_string_pause">Pàusa</string>

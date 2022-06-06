@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
     <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden. </string>
     <string name="transport_hazmat_title">Transporting of hazardous materials</string>
@@ -2318,7 +2319,6 @@
     <string name="rendering_attr_contourColorScheme_name">Contour lines color scheme</string>
     <string name="rendering_attr_surfaceIntegrity_name">Road surface integrity</string>
     <string name="search_hint">Type city, address, POI name</string>
-    <string name="translit_name_if_miss">Transliterate if %1$s name is missing</string>
     <string name="translit_names">Transliterate names</string>
     <string name="edit_filter">Edit categories</string>
     <string name="subcategories">Subcategories</string>

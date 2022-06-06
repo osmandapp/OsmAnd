@@ -1994,7 +1994,6 @@ failu(s)?
     <string name="rendering_attr_contourColorScheme_name">Kontūrlīniju krāsu shēma</string>
     <string name="rendering_attr_surfaceIntegrity_name">Ceļa seguma integritāte</string>
     <string name="search_hint">Ierakstiet pilsētu, adresi vai POI</string>
-    <string name="translit_name_if_miss">Transliterēt ja %1$s vārds iztrūkst</string>
     <string name="translit_names">Transliterēt vārdus</string>
     <string name="edit_filter">Rediğēt kategorijas</string>
     <string name="subcategories">Apakškategorijas</string>

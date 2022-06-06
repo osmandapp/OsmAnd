@@ -2676,7 +2676,6 @@
     <string name="selected_categories">Selected categories</string>
     <string name="edit_filter">Edit categories</string>
     <string name="translit_names">Transliterate names</string>
-    <string name="translit_name_if_miss">Transliterate if %1$s name is missing</string>
     <string name="rendering_attr_surfaceIntegrity_name">Road surface integrity</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines color scheme</string>
     <string name="christmas_desc_q">Show Christmas holiday POIs\?</string>

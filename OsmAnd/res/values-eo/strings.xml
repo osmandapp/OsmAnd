@@ -2023,7 +2023,6 @@
     <string name="edit_filter">Redakti kategoriojn</string>
     <string name="subcategories">Subkategorioj</string>
     <string name="translit_names">Transliterumi nomojn</string>
-    <string name="translit_name_if_miss">Transliterumi, se nomo en %1$s mankas</string>
     <string name="search_hint">Enigu urbon, adreson aŭ nomon de interesejo</string>
     <string name="rendering_value_light_brown_name">Bronzkolora hela</string>
     <string name="rendering_value_dark_brown_name">Bronzkolora malhela</string>

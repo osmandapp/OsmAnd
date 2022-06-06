@@ -1870,7 +1870,6 @@
     <string name="search_my_location">내 위치 찾기</string>
     <string name="shared_string_from">부터</string>
     <string name="mapillary_menu_title_tile_cache">타일 캐시</string>
-    <string name="translit_name_if_miss">이름이 누락된 1%1$s 번역 하기</string>
     <string name="offline_maps_required_descr">이 경로에 필요한 일부 오프라인 맵이 없습니다.</string>
     <string name="shared_string_all_languages">모든 언어</string>
     <string name="street_level_imagery">거리 기반의 파노라마 영상 서비스</string>

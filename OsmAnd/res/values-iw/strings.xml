@@ -2274,7 +2274,6 @@
     <string name="shared_string_marker">סמן</string>
     <string name="do_not_show_startup_messages_desc">לא להציג הודעות על הנחות ביישומון ואירועים מקומיים מיוחדים.</string>
     <string name="routing_attr_driving_style_safety_name">העדפת דרכים משניות</string>
-    <string name="translit_name_if_miss">לשתק אם השם %1$s אם חסר</string>
     <string name="translit_names">שעתוק שמות</string>
     <string name="edit_filter">עריכת קטגוריות</string>
     <string name="subcategories">תת קטגוריות</string>

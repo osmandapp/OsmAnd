@@ -2032,7 +2032,6 @@
     <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
     <string name="translit_names">Namen transliterieren</string>
-    <string name="translit_name_if_miss">Transliteration, wenn Namen in %1$s fehlen</string>
     <string name="rendering_value_light_brown_name">Hellbraun</string>
     <string name="rendering_value_dark_brown_name">Dunkelbraun</string>
     <string name="rendering_attr_contourColorScheme_name">Farbschema für Höhenlinien</string>

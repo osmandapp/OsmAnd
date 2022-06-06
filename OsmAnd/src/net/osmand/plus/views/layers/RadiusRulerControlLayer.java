@@ -629,11 +629,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}

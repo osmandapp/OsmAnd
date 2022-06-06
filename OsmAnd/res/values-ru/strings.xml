@@ -214,7 +214,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Качество дорожного покрытия</string>
     <string name="search_hint">Город, адрес, POI</string>
     <string name="new_filter_desc">Введите имя для нового фильтра. Он добавится в список «Категории».</string>
-    <string name="translit_name_if_miss">Транслитерировать названия при их отсутствии на выбранном языке</string>
     <string name="translit_names">Транслитерация названий</string>
     <string name="edit_filter">Редактировать категории</string>
     <string name="subcategories">Подкатегории</string>
