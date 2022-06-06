@@ -26,7 +26,6 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 
 public class RoutePlannerFrontEnd {
 
