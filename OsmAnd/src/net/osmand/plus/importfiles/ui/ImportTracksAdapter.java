@@ -84,7 +84,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new TrackViewHolder(view, drawParams, listener, nightMode);
 			case TYPE_HEADER:
 				view = inflater.inflate(R.layout.import_tracks_header, parent, false);
-				return new HeaderViewHolder(view);
+				return new HeaderViewHolder(view, listener);
 			case TYPE_FOOTER:
 				view = inflater.inflate(R.layout.select_folder_card, parent, false);
 				return new FoldersViewHolder(view, listener, nightMode);
@@ -168,6 +168,8 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	}
 
 	public interface ImportTracksListener {
+
+		void onImportAsOneTrackClicked();
 
 		void onAddFolderSelected();
 

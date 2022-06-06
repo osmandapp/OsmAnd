@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
     <string name="average_speed_skip_stops">Take into account stops</string>

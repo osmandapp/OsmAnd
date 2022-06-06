@@ -18,9 +18,11 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 
 	private final File importDir;
 	private final List<TrackItem> items;
-	private final SaveGpxListener listener;
+	private final SaveImportedGpxListener listener;
 
-	public SaveTracksTask(@NonNull List<TrackItem> items, @NonNull File importDir, @Nullable SaveGpxListener listener) {
+	public SaveTracksTask(@NonNull List<TrackItem> items,
+	                      @NonNull File importDir,
+	                      @Nullable SaveImportedGpxListener listener) {
 		this.items = items;
 		this.importDir = importDir;
 		this.listener = listener;
@@ -29,10 +31,11 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 	@Override
 	protected void onPreExecute() {
 		if (listener != null) {
-			listener.gpxSavingStarted();
+			listener.onGpxSavingStarted();
 		}
 	}
 
+	@NonNull
 	@Override
 	protected List<String> doInBackground(Void... params) {
 		//noinspection ResultOfMethodCallIgnored
@@ -54,16 +57,9 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<String> warnings) {
+	protected void onPostExecute(@NonNull List<String> warnings) {
 		if (listener != null) {
-			listener.gpxSavingFinished(warnings);
+			listener.onGpxSavingFinished(warnings);
 		}
-	}
-
-	public interface SaveGpxListener {
-
-		void gpxSavingStarted();
-
-		void gpxSavingFinished(List<String> warnings);
 	}
 }
