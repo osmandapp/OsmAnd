@@ -34,10 +34,10 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	private final SaveImportedGpxListener listener;
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
-	                 @NonNull GPXFile gpxFile,
-	                 @NonNull File destinationDir,
-	                 @NonNull String fileName,
-	                 @Nullable SaveImportedGpxListener listener) {
+	                        @NonNull GPXFile gpxFile,
+	                        @NonNull File destinationDir,
+	                        @NonNull String fileName,
+	                        @Nullable SaveImportedGpxListener listener) {
 		this.app = app;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
