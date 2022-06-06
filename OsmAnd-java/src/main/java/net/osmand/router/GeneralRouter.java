@@ -87,6 +87,7 @@ public class GeneralRouter implements VehicleRouter {
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
 		ROAD_PRIORITIES("priority"),
+		DESTINATION_PRIORITIES("destination_priority"),
 		ACCESS("access"),
 		OBSTACLES("obstacle_time"),
 		ROUTING_OBSTACLES("obstacle"),
@@ -520,6 +521,16 @@ public class GeneralRouter implements VehicleRouter {
 		if(sp == null) {
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
 			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, false);
+		}
+		return sp;
+	}
+	
+	@Override
+	public float defineDestinationPriority(RouteDataObject road) {
+		Float sp = getCache(RouteDataObjectAttribute.DESTINATION_PRIORITIES, road);
+		if(sp == null) {
+			sp = getObjContext(RouteDataObjectAttribute.DESTINATION_PRIORITIES).evaluateFloat(road, 1f);
+			putCache(RouteDataObjectAttribute.DESTINATION_PRIORITIES, road, sp, false);
 		}
 		return sp;
 	}
