@@ -419,7 +419,6 @@
     <string name="rendering_value_light_brown_name">Բաց-շագանակագույն</string>
     <string name="rendering_value_dark_brown_name">Մուգ շագանակագույն</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines գունային սխեման</string>
-    <string name="translit_name_if_miss">Transliterate եթե %1$s անունը բացակայում է</string>
     <string name="translit_names">Transliterate անունները</string>
     <string name="first_usage_greeting">Ստացեք երթուղիներ և հայտնաբերեք նոր վայրեր առանց ինտերնետ կապի</string>
     <string name="search_my_location">Գտնել իմ դիրքը</string>

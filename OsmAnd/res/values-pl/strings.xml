@@ -2025,7 +2025,6 @@
     <string name="edit_filter">Edytuj kategorie</string>
     <string name="subcategories">Podkategorie</string>
     <string name="translit_names">Transliteracja nazw</string>
-    <string name="translit_name_if_miss">Transliteruje nazwy, jeżeli nazwa w %1$s nie jest dostępna</string>
     <string name="search_hint">Proszę wprowadzić miasto, adres, nazwę użytecznego miejsca</string>
     <string name="rendering_value_light_brown_name">Jasnobrązowy</string>
     <string name="rendering_value_dark_brown_name">Ciemnobrązowy</string>

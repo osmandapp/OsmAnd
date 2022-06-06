@@ -2763,7 +2763,6 @@
     <string name="subcategories">Potkategorije</string>
     <string name="edit_filter">Izmeni kategorije</string>
     <string name="translit_names">Preslovi imena</string>
-    <string name="translit_name_if_miss">Preslovi ako %1$s prevod ne postoji</string>
     <string name="search_hint">Ukucajte grad, adresu, ime tačke od interesa</string>
     <string name="rendering_attr_surfaceIntegrity_name">Celovitost površi puta</string>
     <string name="rendering_attr_contourColorScheme_name">Obrazac boja linija izohipsi</string>

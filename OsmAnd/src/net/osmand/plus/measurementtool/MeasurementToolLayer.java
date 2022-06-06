@@ -994,6 +994,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		clearCachedCounters();
 		clearCachedRenderables();
 		clearPointsProvider();

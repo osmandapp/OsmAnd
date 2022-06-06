@@ -379,7 +379,6 @@
     <string name="rendering_attr_contourColorScheme_name">Skema warna garis kontur</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integritas permukaan jalan</string>
     <string name="search_hint">Ketik kota, alamat, nama POI</string>
-    <string name="translit_name_if_miss">Terjemahkan jika nama %1$s hilang</string>
     <string name="translit_names">Terjemahkan nama</string>
     <string name="edit_filter">Sunting kategori-kategori</string>
     <string name="subcategories">Subkategori-subkategori</string>

@@ -2014,7 +2014,6 @@
     <string name="edit_filter">Bewerk categorieën</string>
     <string name="subcategories">Subcategorieën</string>
     <string name="translit_names">Transliteratie van namen</string>
-    <string name="translit_name_if_miss">Weergeven in westers schrift als naam in %1$s ontbreekt</string>
     <string name="search_hint">Plaatsnaam, adres of naam invoeren</string>
     <string name="rendering_value_light_brown_name">Lichtbruin</string>
     <string name="rendering_value_dark_brown_name">Donkerbruin</string>

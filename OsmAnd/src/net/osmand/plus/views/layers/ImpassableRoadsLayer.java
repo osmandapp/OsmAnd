@@ -18,7 +18,6 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListMapMarker;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -50,9 +49,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Paint paint;
 
 	//OpenGL
-	private MapMarkersCollection mapMarkersCollection;
 	private int impassibleRoadsCount = 0;
-	private PointI movableObject;
 
 	public ImpassableRoadsLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -77,8 +74,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawPoint(canvas, pf.x, pf.y, true);
-			AvoidRoadInfo objectInMotion = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
-			setMovableObject(objectInMotion);
+			AvoidRoadInfo movableRoad = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+			setMovableObject(movableRoad.latitude, movableRoad.longitude);
 		}
 		if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
 			cancelMovableObject();
@@ -90,11 +87,12 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= START_ZOOM) {
 			MapRendererView mapRenderer = getMapRenderer();
 			if (mapRenderer != null) {
-				if (impassibleRoadsCount != avoidSpecificRoads.getImpassableRoads().size()) {
-					clearMarkersCollections();
+				if (impassibleRoadsCount != avoidSpecificRoads.getImpassableRoads().size() || mapActivityInvalidated) {
+					clearMapMarkersCollections();
 				}
 				initMarkersCollection();
 				impassibleRoadsCount = avoidSpecificRoads.getImpassableRoads().size();
+				mapActivityInvalidated = false;
 				return;
 			}
 			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
@@ -113,7 +111,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				}
 			}
 		} else {
-			clearMarkersCollections();
+			clearMapMarkersCollections();
 		}
 	}
 
@@ -128,11 +126,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		y -= roadWorkIcon.getHeight() / 2f * textScale;
 		Rect destRect = getIconDestinationRect(x, y, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
 		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
-	}
-
-	@Override
-	public void destroyLayer() {
-		clearMarkersCollections();
 	}
 
 	@Override
@@ -294,73 +287,5 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		Rect destRect = getIconDestinationRect(cx, cy, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
 		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
 		return bitmapResult;
-	}
-
-	/**OpenGL*/
-	private void clearMarkersCollections() {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null) {
-			return;
-		}
-		if (mapMarkersCollection != null) {
-			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
-			mapMarkersCollection = null;
-		}
-	}
-
-	/** OpenGL */
-	private void setMovableObject(@NonNull AvoidRoadInfo objectInMotion) {
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || mapMarkersCollection == null || movableObject != null) {
-			return;
-		}
-		int x = MapUtils.get31TileNumberX(objectInMotion.longitude);
-		int y = MapUtils.get31TileNumberY(objectInMotion.latitude);
-		QListMapMarker markers = mapMarkersCollection.getMarkers();
-		for (int i = 0; i < markers.size(); i++) {
-			MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == x && m.getPosition().getY() == y) {
-				m.setIsHidden(true);
-				movableObject = m.getPosition();
-				break;
-			}
-		}
-	}
-
-	/** OpenGL */
-	private void applyMovableObject(@NonNull LatLon newPosition) {
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
-			return;
-		}
-		int x = MapUtils.get31TileNumberX(newPosition.getLongitude());
-		int y = MapUtils.get31TileNumberY(newPosition.getLatitude());
-		QListMapMarker markers = mapMarkersCollection.getMarkers();
-		for (int i = 0; i < markers.size(); i++) {
-			MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
-				m.setPosition(new PointI(x, y));
-				m.setIsHidden(false);
-				movableObject = null;
-				break;
-			}
-		}
-	}
-
-	/** OpenGL */
-	private void cancelMovableObject() {
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || movableObject == null || mapMarkersCollection == null) {
-			return;
-		}
-		QListMapMarker markers = mapMarkersCollection.getMarkers();
-		for (int i = 0; i < markers.size(); i++) {
-			MapMarker m = markers.get(i);
-			if (m.getPosition().getX() == movableObject.getX() && m.getPosition().getY() == movableObject.getY()) {
-				m.setIsHidden(false);
-				movableObject = null;
-				break;
-			}
-		}
 	}
 }

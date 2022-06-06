@@ -2019,7 +2019,6 @@
     <string name="edit_filter">Edita les categories</string>
     <string name="subcategories">Subcategories</string>
     <string name="translit_names">Translitera els noms</string>
-    <string name="translit_name_if_miss">Translitera si el nom %1$s no existeix</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color de les línies de contorn</string>
     <string name="save_track_min_speed">Velocitat mínima per registrar la ruta</string>
     <string name="save_track_min_speed_descr">Filtre: No enregistris punts per sota d\'aquesta velocitat.</string>

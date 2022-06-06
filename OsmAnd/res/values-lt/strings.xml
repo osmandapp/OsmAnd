@@ -2235,7 +2235,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="save_track_min_distance_descr">Filtras: Nustatyti minimalų atstumą nuo ankstesnės pozicijos, kad taškas būtų išsaugotas.</string>
     <string name="save_track_precision">Minimalus išsaugojimo tikslumas</string>
     <string name="save_track_precision_descr">Filtras: Nustatyti mažiausią tikslumą, kad taškas būtų išsaugotas.</string>
-    <string name="translit_name_if_miss">Transliteracija jei %1$s vardo nėra</string>
     <string name="quick_action_resume_pause_navigation">Pristabdyti/Pratęsti navigaciją</string>
     <string name="quick_action_resume_pause_navigation_descr">Mygtuką navigacijai pristabdyti arba pratęsti.</string>
     <string name="quick_action_show_navigation_finish_dialog">Rodyti \'Navigacija baigta\' dialogą</string>
