@@ -83,7 +83,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.track.ChartLabel;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -127,6 +127,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
@@ -520,7 +521,7 @@ public class GpxUiHelper {
 
 					updateAppearanceTitle(activity, app, trackWidthProp, renderer, apprTitleView, prefWidth.get(), prefColor.get());
 
-					apprTitleView.findViewById(R.id.button).setOnClickListener(v -> {
+					apprTitleView.setOnClickListener(v -> {
 						final ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
 						popup.setAnchorView(apprTitleView);
 						popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
@@ -528,10 +529,10 @@ public class GpxUiHelper {
 						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
 						popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 						popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
-						final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
+						boolean showStartFinish = Objects.equals(gpxAppearanceParams.get(SHOW_START_FINISH_ATTR), "true");
+						GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
 								gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
-								GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR,
-								gpxAppearanceParams.containsKey(SHOW_START_FINISH_ATTR) ? "true".equals(gpxAppearanceParams.get(SHOW_START_FINISH_ATTR)) : app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get(), nightMode);
+								GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR, showStartFinish, nightMode);
 						popup.setAdapter(gpxApprAdapter);
 						popup.setOnItemClickListener((parent, view, position, id) -> {
 							AppearanceListItem item = gpxApprAdapter.getItem(position);
@@ -561,7 +562,8 @@ public class GpxUiHelper {
 				if (gpxAppearanceParams.size() > 0) {
 					for (Map.Entry<String, String> entry : gpxAppearanceParams.entrySet()) {
 						if (SHOW_START_FINISH_ATTR.equals(entry.getKey())) {
-							app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.set("true".equals(entry.getValue()));
+							boolean showStartFinish = Objects.equals(entry.getValue(), "true");
+							app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinish);
 						} else {
 							CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(entry.getKey());
 							pref.set(entry.getValue());

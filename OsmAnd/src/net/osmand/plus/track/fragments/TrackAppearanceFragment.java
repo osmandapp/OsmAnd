@@ -40,7 +40,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
@@ -77,7 +77,6 @@ import java.util.List;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
 import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
@@ -826,7 +825,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private List<Integer> getTrackColors() {
 		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
+		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
 			if (!colors.contains(appearanceListItem.getColor())) {
 				colors.add(appearanceListItem.getColor());
 			}
