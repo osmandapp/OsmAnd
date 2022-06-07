@@ -4685,4 +4685,9 @@
     <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera ignorée et n\'affectera pas le calcul de la vitesse moyenne.</string>
     <string name="average_speed_widget_desc">Indique la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
+    <string name="transport_hazmat_yes_desc">Vous devez sélectionner une catégorie.</string>
+    <string name="transport_hazmat_title">Transport de matières dangereuses</string>
+    <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels interdisent le transport de matières dangereuses.</string>
+    <string name="import_as_one_track">Importer comme une seule trace</string>
+    <string name="use_latin_name_if_missing">Utiliser le nom latin si manquant</string>
 </resources>
