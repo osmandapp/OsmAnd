@@ -627,9 +627,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected final void applyPreference(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (applyToAllProfiles) {
-			app.getSettings().setPreferenceForAllModes(prefId, newValue);
+			settings.setPreferenceForAllModes(prefId, newValue);
 		} else {
-			app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
+			settings.setPreference(prefId, newValue, getSelectedAppMode());
+		}
+	}
+
+	protected final void resetPreference(String prefId, boolean applyToAllProfiles) {
+		if (applyToAllProfiles) {
+			settings.resetPreferenceForAllModes(prefId);
+		} else {
+			settings.resetPreference(prefId, getSelectedAppMode());
 		}
 	}
 

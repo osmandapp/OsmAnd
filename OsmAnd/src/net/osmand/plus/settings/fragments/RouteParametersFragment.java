@@ -622,7 +622,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				applyPreference(HAZMAT_TRANSPORTING_ENABLED, applyToAllProfiles, true);
 			} else {
 				applyPreference(HAZMAT_TRANSPORTING_ENABLED, applyToAllProfiles, false);
-				settings.removePreferenceForProfile(HAZMAT_ROUTING_PREFERENCE, getSelectedAppMode());
+				resetPreference(HAZMAT_ROUTING_PREFERENCE, applyToAllProfiles);
 			}
 			updateHazmatCategoryPreference();
 		} else {

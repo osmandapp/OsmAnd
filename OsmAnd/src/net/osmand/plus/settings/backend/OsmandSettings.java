@@ -333,6 +333,22 @@ public class OsmandSettings {
 		return false;
 	}
 
+	public void resetPreferenceForAllModes(@NonNull String prefId) {
+		OsmandPreference<?> preference = getPreference(prefId);
+		if (preference != null) {
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				preference.resetModeToDefault(mode);
+			}
+		}
+	}
+
+	public void resetPreference(@NonNull String prefId, @NonNull ApplicationMode mode) {
+		OsmandPreference<?> preference = getPreference(prefId);
+		if (preference != null) {
+			preference.resetModeToDefault(mode);
+		}
+	}
+
 	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
 		copyProfilePreferences(modeFrom, modeTo, new ArrayList<>(registeredPreferences.values()));
 	}
