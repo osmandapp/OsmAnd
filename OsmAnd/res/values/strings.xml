@@ -13,6 +13,9 @@
 
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
+    <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
+    <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden. </string>
+    <string name="transport_hazmat_title">Transporting of hazardous materials</string>
     <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
     <string name="average_speed_skip_stops">Take into account stops</string>
     <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
