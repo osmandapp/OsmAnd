@@ -4684,4 +4684,9 @@
     <string name="map_widget_average_speed">Átlagsebesség</string>
     <string name="average_speed_skip_stops">Megállások figyelembevétele</string>
     <string name="average_speed_skip_stops_desc">A %1$s-nál kisebb sebességet nem veszi figyelembe a rendszer és nem befolyásolja az átlagsebességet sem.</string>
+    <string name="transport_hazmat_yes_desc">Ki kell választania a megfelelő kategóriát.</string>
+    <string name="transport_hazmat_no_desc">Egyes utakon és alagutakban tilos a veszélyes anyagok szállítása.</string>
+    <string name="transport_hazmat_title">Veszélyes anyagok szállítása</string>
+    <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
+    <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
 </resources>
