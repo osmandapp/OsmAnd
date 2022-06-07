@@ -116,7 +116,7 @@ public class NetworkWriter extends AbstractWriter {
 	}
 
 	private StreamWriter getStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
-		boolean useEmptyStreamWriter = useEmptyStreamWriter(itemWriter, fileName);
+		boolean useEmptyStreamWriter = shouldUseEmptyStreamWriter(itemWriter, fileName);
 		if (useEmptyStreamWriter) {
 			return (outputStream, progress) -> {
 				FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
@@ -133,11 +133,11 @@ public class NetworkWriter extends AbstractWriter {
 		return itemWriter::writeToStream;
 	}
 
-	private boolean useEmptyStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
+	private boolean shouldUseEmptyStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
 		SettingsItem item = itemWriter.getItem();
 		if (item instanceof FileSettingsItem) {
 			if (((FileSettingsItem) item).getSubtype() == FileSubtype.OBF_MAP) {
-				return backupHelper.obfMapExistsOnServer(fileName);
+				return backupHelper.isObfMapExistsOnServer(fileName);
 			}
 		}
 		return false;

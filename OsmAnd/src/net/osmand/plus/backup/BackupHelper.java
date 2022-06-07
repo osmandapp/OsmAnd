@@ -523,14 +523,14 @@ public class BackupHelper {
 		return error;
 	}
 
-	boolean obfMapExistsOnServer(@NonNull String name) {
+	boolean isObfMapExistsOnServer(@NonNull String name) {
 		final boolean[] exists = new boolean[1];
 
 		Map<String, String> params = new HashMap<>();
 		params.put("name", name);
 		params.put("type", "file");
 
-		OperationLog operationLog = new OperationLog("obfMapExistsOnServer", DEBUG);
+		OperationLog operationLog = new OperationLog("isObfMapExistsOnServer", DEBUG);
 		operationLog.startOperation(name);
 
 		AndroidNetworkUtils.sendRequest(app, "https://osmand.net/userdata/check-file-on-server",
