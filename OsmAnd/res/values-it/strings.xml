@@ -4681,4 +4681,7 @@
     <string name="average_speed_time_interval_desc">Specifica il periodo per cui sarà misurata la velocità media.</string>
     <string name="average_speed_widget_desc">Mostra la velocità media per il viaggio attuale.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori del %1$s non saranno conteggiate e non impatteranno sulla velocità media.</string>
+    <string name="transport_hazmat_yes_desc">Hai bisogno di scegliere la categoria appropriata.</string>
+    <string name="import_as_one_track">Importa come un\'unica traccia</string>
+    <string name="use_latin_name_if_missing">Usa nomi latini se mancano</string>
 </resources>
