@@ -1,18 +1,6 @@
 package net.osmand.plus.settings.backend;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
-import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -114,6 +102,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
+import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 
 public class OsmandSettings {
 
@@ -333,6 +333,22 @@ public class OsmandSettings {
 		return false;
 	}
 
+	public void resetPreferenceForAllModes(@NonNull String prefId) {
+		OsmandPreference<?> preference = getPreference(prefId);
+		if (preference != null) {
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				preference.resetModeToDefault(mode);
+			}
+		}
+	}
+
+	public void resetPreference(@NonNull String prefId, @NonNull ApplicationMode mode) {
+		OsmandPreference<?> preference = getPreference(prefId);
+		if (preference != null) {
+			preference.resetModeToDefault(mode);
+		}
+	}
+
 	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
 		copyProfilePreferences(modeFrom, modeTo, new ArrayList<>(registeredPreferences.values()));
 	}
@@ -351,6 +367,11 @@ public class OsmandSettings {
 				}
 			}
 		}
+	}
+
+	public void removePreferenceForProfile(String prefId, ApplicationMode mode) {
+		Object preferences =  getProfilePreferences(mode);
+		settingsAPI.edit(preferences).remove(prefId).commit();
 	}
 
 	public void resetPreferencesForProfile(ApplicationMode mode) {
@@ -1189,6 +1210,9 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
 			new BooleanPreference(this, "disable_wrong_direction_recalc", false).makeProfile();
+
+	public final OsmandPreference<Boolean> HAZMAT_TRANSPORTING_ENABLED =
+			new BooleanPreference(this, "hazmat_transporting_enabled", false).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =

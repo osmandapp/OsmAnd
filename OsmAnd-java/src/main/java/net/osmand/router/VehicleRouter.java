@@ -56,6 +56,11 @@ public interface VehicleRouter {
 	 * define priority to multiply the speed for g(x) A* 
 	 */
 	public float defineSpeedPriority(RouteDataObject road);
+	
+	/**
+	 * define destination priority
+	 */
+	float defineDestinationPriority(RouteDataObject road);
 
 	/**
 	 * Used for A* routing to calculate g(x)
