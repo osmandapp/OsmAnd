@@ -4698,4 +4698,9 @@
     <string name="average_speed_skip_stops">Tag højde for stop</string>
     <string name="average_speed_time_interval_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles.</string>
     <string name="map_widget_average_speed">Gennemsnitshastighed</string>
+    <string name="transport_hazmat_title">Transport af farlige materialer</string>
+    <string name="import_as_one_track">Importer som ét spor</string>
+    <string name="transport_hazmat_no_desc">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="transport_hazmat_yes_desc">Du skal vælge den rette kategori.</string>
+    <string name="use_latin_name_if_missing">Brug latinsk navn, hvis det mangler</string>
 </resources>
