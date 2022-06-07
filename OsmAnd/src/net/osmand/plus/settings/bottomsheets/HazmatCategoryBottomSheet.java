@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -47,7 +48,6 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 
 	private final List<View> categoriesViews = new ArrayList<>();
 	private LayoutInflater inflater;
-	private boolean attachedToContext;
 
 	private String[] names;
 	private Object[] values;
@@ -74,7 +74,6 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		attachedToContext = true;
 		app = requiredMyApplication();
 		appMode = getAppMode();
 		if (savedInstanceState != null) {
@@ -194,13 +193,13 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 		outState.putStringArray(VALUES_KEY, (String[]) values);
 		outState.putBoolean(CATEGORY_SELECTED_KEY, isAnyCategorySelected);
 		outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
-		attachedToContext = false;
 	}
 
 	@Override
 	public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
 		super.onDismiss(dialog);
-		if (attachedToContext) {
+		Activity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
 			onApply();
 		}
 	}
