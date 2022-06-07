@@ -1409,7 +1409,6 @@
     <string name="christmas_desc">预计到圣诞节和新年假期，你可以选择显示相关的 POI，如圣诞树和市场等。</string>
     <string name="rendering_attr_contourColorScheme_name">等高线的颜色调配</string>
     <string name="rendering_attr_surfaceIntegrity_name">道路表面完整性</string>
-    <string name="translit_name_if_miss">如果 %1$s 的名称缺失则音译</string>
     <string name="translit_names">音译名称</string>
     <string name="new_filter_desc">请输入新筛选器的名称，该名称将添加到你的\"类别\"选项卡中。</string>
     <string name="osm_live_payment_desc">订阅按选定的时间段收费。可随时在 Google Play 上取消。</string>

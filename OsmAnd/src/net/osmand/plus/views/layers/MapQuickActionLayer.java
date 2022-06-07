@@ -42,6 +42,7 @@ import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
@@ -331,8 +332,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         view.setMapPosition(OsmandSettings.MIDDLE_BOTTOM_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
 
-        LatLon ll = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
-        boolean isFollowPoint = isFolowPoint(tileBox, menu);
+        LatLon ll = menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon())
+                ? menu.getLatLon() : tileBox.getCenterLatLon();
+        boolean isFollowPoint = isFollowPoint(tileBox, menu);
 
         menu.updateMapCenter(null);
         menu.close();
@@ -356,10 +358,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         view.refreshMap();
     }
 
-    private boolean isFolowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
+    private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
         return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
                 app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
-                menu.isActive() && tileBox.containsLatLon(menu.getLatLon());  // remove if not to folow if there is selected point on map
+                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to folow if there is selected point on map
     }
 
     private void quitMovingMarker() {
@@ -368,7 +370,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return;
         }
         RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
-        if (!isFolowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT){
+        if (!isFollowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT){
             RotatedTileBox rb = tileBox.copy();
             rb.setCenterLocation(0.5f, 0.5f);
             LatLon ll = tileBox.getCenterLatLon();
@@ -429,11 +431,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
             quickActionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
-    }
-
-    @Override
-    public void destroyLayer() {
-
     }
 
     @Override

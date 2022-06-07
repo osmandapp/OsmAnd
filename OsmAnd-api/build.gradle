@@ -25,6 +25,7 @@ android {
     }
 }
 
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
 afterEvaluate {
     publishing {
         repositories {    
@@ -39,14 +40,12 @@ afterEvaluate {
                 from components.release
                 organisation = 'net.osmand'
                 module = 'android-aidl-lib'
-                revision = 'master-snapshot'
              }
              debug(IvyPublication) {
                 // Applies the component for the release build variant.
                 from components.debug
                 organisation = 'net.osmand'
                 module = 'android-aidl-lib'
-                revision = 'master-snapshot'
              }
         }
     }

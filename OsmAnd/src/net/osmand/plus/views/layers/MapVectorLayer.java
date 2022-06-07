@@ -38,6 +38,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		resetLayerProvider();
 	}
 

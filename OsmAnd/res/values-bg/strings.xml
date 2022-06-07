@@ -618,7 +618,7 @@
     <string name="internet_not_available">За действието се изисква Интернет връзка, но тя не е налична</string>
     <string name="install_more">Инсталиране на други…</string>
     <string name="level_to_switch_vector_raster_descr">Минимален мащаб, с който могат да се ползват векторните карти</string>
-    <string name="level_to_switch_vector_raster">Мин. мащаб за векторните карти</string>
+    <string name="level_to_switch_vector_raster">Мин. мащаб на векторни карти</string>
     <string name="error_doing_search">Възникна грешка при търсенето офлайн</string>
     <string name="search_osm_offline">Търсене на адрес в локалните карти</string>
     <string name="system_locale">Система</string>
@@ -852,7 +852,7 @@
     <string name="search_online_address">Търсене онлайн</string>
     <string name="max_level_download_tile">Максимален мащаб при онлайн</string>
     <string name="max_level_download_tile_descr">Изберете максимален мащаб за сваляне на онлайн картни фрагменти</string>
-    <string name="route_general_information">Разстояние: %1$s, време до целта: %2$d ч. %3$d мин.</string>
+    <string name="route_general_information">Разстояние: %1$s, време до целта: %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Изберете онлайн или офлайн услуга за навигация</string>
     <string name="router_service">Услуга за навигация</string>
     <string name="sd_dir_not_accessible">Папката за запис на SD картата не е достъпна!</string>
@@ -2711,4 +2711,15 @@
     <string name="routing_attr_avoid_highway_description">Избягване на магистрали</string>
     <string name="map_widget_trip_recording_uphill">Качване</string>
     <string name="srtm_menu_download_descr">Изтеглете картата „Контурни линии“, която да ползвате в този регион.</string>
+    <string name="shared_string_mode">Режим</string>
+    <string name="map_widget_time_to_destination">Време до пристигане</string>
+    <string name="map_widget_time_to_intermediate">Междинно време</string>
+    <string name="average_speed_skip_stops">Вземане предвид на спиранията</string>
+    <string name="average_speed_time_interval_desc">Задайте интервала, за който да бъде измерена средната скорост.</string>
+    <string name="average_speed_widget_desc">Показва средната скорост на текущото пътуване.</string>
+    <string name="map_widget_average_speed">Средна скорост</string>
+    <string name="map_widget_distance_to_intermediate">Разстояние до междинна точка</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Превключва режима при докосване на приспособлението.</string>
+    <string name="explore_plans">Проучване на планове</string>
+    <string name="average_speed_skip_stops_desc">Скорост, по-нискa от %1$s, няма да бъде отчетена и няма да повлияе на средната скорост.</string>
 </resources>

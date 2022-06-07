@@ -2031,7 +2031,6 @@
     <string name="edit_filter">تعديل الفئات</string>
     <string name="subcategories">فئات فرعية</string>
     <string name="translit_names">أسماء بترجمة حرفية</string>
-    <string name="translit_name_if_miss">ترجمة حرفية اذا كانت %1$s من الاسم مفقودة</string>
     <string name="search_hint">أدخل المدينة، العنوان أو نقاط الاهتمام</string>
     <string name="christmas_desc">في ارتقاب عطل عيد الميلاد ورأس السنة الجديدة، يمكنك اختيار عرض POI المرتبطة بعيد الميلاد: أشجار عيد الميلاد، أسواق...الخ.</string>
     <string name="christmas_desc_q">عرض POI عيد الميلاد ؟</string>
@@ -2962,7 +2961,7 @@
 \n• عرض السمت في قياس المسافة
 \n
 \n</string-->
-    <string name="day">يوم</string>
+    <string name="day">نهار</string>
     <string name="days_2_4">أيام</string>
     <string name="days_5">أيام</string>
     <string name="week">أسبوع</string>
@@ -4753,8 +4752,13 @@
     <string name="map_widget_time_to_destination">وقت الوصول</string>
     <string name="map_widget_time_to_intermediate">متوسط وقت الوصول</string>
     <string name="map_widget_distance_to_intermediate">مسافة متوسط وقت الوصول</string>
-    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الأداة.</string>
+    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الويدجت.</string>
     <string name="shared_string_mode">نمط</string>
-    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الأداة.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="lang_sat">السنتالية</string>
+    <string name="average_speed_skip_stops">مراعاة التوقف</string>
+    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة.</string>
+    <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
+    <string name="average_speed_skip_stops_desc">لن يتم احتساب السرعة الأقل من %1$s وستؤثر على متوسط السرعة.</string>
+    <string name="map_widget_average_speed">متوسط السرعة</string>
 </resources>

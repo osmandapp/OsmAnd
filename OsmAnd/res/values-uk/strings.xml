@@ -374,7 +374,7 @@
     <string name="daynight_mode_day">День</string>
     <string name="daynight_mode_night">Ніч</string>
     <string name="daynight_mode_auto">Схід/захід сонця</string>
-    <string name="daynight_mode_sensor">Датчик освітленості</string>
+    <string name="daynight_mode_sensor">Датник освітленості</string>
     <string name="daynight_descr">Налаштуйте перемикання між нічним та денним режимами.</string>
     <string name="daynight">Денний/нічний режим</string>
     <string name="download_files_question">Завантажити {0} файл(ів) ({1} MB)?</string>
@@ -2000,7 +2000,6 @@
     <string name="rendering_attr_contourColorScheme_name">Колірна схема ізоліній</string>
     <string name="rendering_attr_surfaceIntegrity_name">Якість дорожнього покриття</string>
     <string name="search_hint">Введіть назву міста, адресу, назву точки інтересу</string>
-    <string name="translit_name_if_miss">Транслітерація якщо назва на %1$s відсутня</string>
     <string name="translit_names">Транслітерація назв</string>
     <string name="edit_filter">Редагувати категорії</string>
     <string name="subcategories">Підкатегорії</string>
@@ -3058,7 +3057,7 @@
     <string name="routing_attr_freeride_policy_description">\"Фрірайд\" та \"позатрекові\" є неофіційними маршрутами та проїздами. Зазвичай недоглянуті, офіційно непозначені та не підтримуються в належному стані. Використовуйте на власний розсуд.</string>
     <string name="turn_screen_on_router">Вмикати перед маневром</string>
     <string name="turn_screen_on_time_descr">Відрегулюйте, як довго повинен бути ввімкнений екран.</string>
-    <string name="turn_screen_on_sensor">Використовувати датчик наближення</string>
+    <string name="turn_screen_on_sensor">Використовувати датник наближення</string>
     <string name="turn_screen_on_sensor_descr">Вмикати екран жестом.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">1 клас</string>
     <string name="rendering_attr_highway_class_track_grade2_name">2 клас</string>
@@ -3603,7 +3602,7 @@
     <string name="turn_screen_on_navigation_instructions">Навігаційні інструкції</string>
     <string name="turn_screen_on_power_button_descr">Натисніть кнопку живлення пристрою, щоб увімкнути екран з OsmAnd поверх екрану блокування.</string>
     <string name="turn_screen_on_power_button">Кнопка живлення</string>
-    <string name="turn_screen_on_proximity_sensor">Датчик наближення</string>
+    <string name="turn_screen_on_proximity_sensor">Датник наближення</string>
     <string name="turn_screen_on_wake_time_descr">Час очікування екрану після увімкнення. («%1$s» вимикає вимкнення екрану.)</string>
     <string name="keep_screen_on">Залишати екран увімкненим</string>
     <string name="keep_screen_off">Залишати екран вимкненим</string>
@@ -4633,7 +4632,7 @@
     <string name="fps_widget_desc">Показує, як швидко показується та оновлюється мапа та елементи на ній.</string>
     <string name="time_to_go_desc">Час у хвилинах або годинах, необхідний для досягнення пункту призначення.</string>
     <string name="current_time_widget_desc">Показує поточний час пристрою.</string>
-    <string name="current_speed_widget_desc">Показує вашу поточну швидкість, визначену GPS-датчиком.</string>
+    <string name="current_speed_widget_desc">Показує вашу поточну швидкість, визначену GPS-датником.</string>
     <string name="magnetic_bearing_widget_desc">Кут між магнітною північчю та цільовою точкою, що визначається з місця вашого розташування.</string>
     <string name="lanes_widgets_desc">Віджет «Смуги» показує поточне розташування доріг і виділяє смуги для їзди з активною навігацією.</string>
     <string name="map_markers_bar_widget_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>

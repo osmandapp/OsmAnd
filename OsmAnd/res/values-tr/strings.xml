@@ -2708,7 +2708,6 @@
     <string name="get_for">%1$s için alın</string>
     <string name="lang_kab">Cezayir Berbericesi</string>
     <string name="translit_names">Adlara harf çevirisi yap</string>
-    <string name="translit_name_if_miss">%1$s adı eksikse harf çevirisi yap</string>
     <string name="rendering_value_light_brown_name">Açık kahverengi</string>
     <string name="rendering_value_dark_brown_name">Koyu kahverengi</string>
     <string name="rendering_attr_contourColorScheme_name">Eş yükselti eğrileri renk şeması</string>
@@ -4688,4 +4687,9 @@
     <string name="radius_ruler_mode_desc">Widget\'a dokunulduğunda yarıçap cetveli moduna geçilir.</string>
     <string name="shared_string_mode">Mod</string>
     <string name="lang_sat">Santali</string>
+    <string name="average_speed_time_interval_desc">Ortalama hızın ölçüleceği zaman aralığını belirtin.</string>
+    <string name="average_speed_widget_desc">Geçerli sürüşün ortalama hızını gösterir.</string>
+    <string name="average_speed_skip_stops">Durmaları dikkate al</string>
+    <string name="average_speed_skip_stops_desc">%1$s değerinden daha düşük hızlar sayılmayacak ve ortalama hızı etkilemeyecektir.</string>
+    <string name="map_widget_average_speed">Ortalama hız</string>
 </resources>

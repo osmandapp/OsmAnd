@@ -1150,7 +1150,6 @@
     <string name="upload_poi">Senda inn merkisstað</string>
     <string name="christmas_desc_q">Birta jólastaðina?</string>
     <string name="rendering_attr_surfaceIntegrity_name">Áreiðanleiki yfirborðs gatna</string>
-    <string name="translit_name_if_miss">Umrita ef heiti %1$s vantar</string>
     <string name="donation_to_osm">Styrkur til OpenStreetMap samfélagsins</string>
     <string name="skip_map_downloading">Sleppa því að ná í kort</string>
     <string name="rendering_attr_hideOverground_name">Hlutir á yfirborði</string>

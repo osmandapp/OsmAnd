@@ -328,9 +328,9 @@ public class MapPoiTypes {
 	}
 
 	private void addCategory(PoiCategory category) {
-		List<PoiCategory> copy = new ArrayList<>(categories);
-		copy.add(category);
-		categories = copy;
+		List<PoiCategory> categories = new ArrayList<>(this.categories);
+		categories.add(category);
+		this.categories = categories;
 	}
 
 	public PoiTranslator getPoiTranslator() {
@@ -339,8 +339,9 @@ public class MapPoiTypes {
 
 	public void setPoiTranslator(PoiTranslator poiTranslator) {
 		this.poiTranslator = poiTranslator;
+		List<PoiCategory> categories = new ArrayList<>(this.categories);
 		sortList(categories);
-
+		this.categories = categories;
 	}
 
 	public void init() {

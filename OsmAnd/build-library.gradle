@@ -35,12 +35,13 @@ afterEvaluate {
 	}
 }
 
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
 project.afterEvaluate {
 	publishing {
 		repositories {
 			ivy {
 				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-				version = "4.2"
+				
 			}
 		}
 		publications {

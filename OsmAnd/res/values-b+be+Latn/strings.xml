@@ -2103,7 +2103,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_light_brown_name">Svetla-karyčnievy</string>
     <string name="rendering_value_dark_brown_name">Ciomna-karyčnievy</string>
     <string name="search_hint">Uviadzicie horada, adras, nazvu POI</string>
-    <string name="translit_name_if_miss">Tranślitaryravać kali nazva na %1$s adsutničaje</string>
     <string name="translit_names">Tranślitaracyja nazvaŭ</string>
     <string name="edit_filter">Redahavać katehoryi</string>
     <string name="subcategories">Padkatehoryi</string>

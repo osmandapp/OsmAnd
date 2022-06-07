@@ -928,6 +928,7 @@ public class GpxSelectionHelper {
 
 		protected int color;
 		protected long modifiedTime = -1;
+		protected long pointsModifiedTime = -1;
 
 		private boolean routePoints;
 		protected boolean joinSegments;
@@ -966,6 +967,7 @@ public class GpxSelectionHelper {
 
 		protected void update(OsmandApplication app) {
 			modifiedTime = gpxFile.modifiedTime;
+			pointsModifiedTime = gpxFile.pointsModifiedTime;
 
 			long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
 					? System.currentTimeMillis()
@@ -1067,6 +1069,14 @@ public class GpxSelectionHelper {
 
 		public int getColor() {
 			return color;
+		}
+
+		public long getModifiedTime() {
+			return modifiedTime;
+		}
+
+		public long getPointsModifiedTime() {
+			return pointsModifiedTime;
 		}
 
 		public void resetSplitProcessed() {
@@ -1354,6 +1364,7 @@ public class GpxSelectionHelper {
 				if (visible) {
 					if (!sf.isShowCurrentTrack()) {
 						sf.getGpxFile().modifiedTime = -1;
+						sf.getGpxFile().pointsModifiedTime = -1;
 					}
 					originalSelectedItems.add(sf.getGpxFile());
 				}

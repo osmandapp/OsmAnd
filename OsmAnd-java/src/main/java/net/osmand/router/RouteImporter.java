@@ -56,6 +56,7 @@ public class RouteImporter {
 				parseRoute();
 				gpxFile.path = file.getAbsolutePath();
 				gpxFile.modifiedTime = file.lastModified();
+				gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
 			} catch (IOException e) {
 				log.error("Error importing route " + file.getAbsolutePath(), e);
 				return null;
