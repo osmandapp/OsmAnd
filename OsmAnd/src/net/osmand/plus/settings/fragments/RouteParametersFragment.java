@@ -51,7 +51,6 @@ import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -86,15 +85,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private final List<RoutingParameter> drivingStyleParameters = new ArrayList<>();
 	private final List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
 	private final List<RoutingParameter> otherRoutingParameters = new ArrayList<>();
+	private ListParameters hazmatParameters;
 
 	private StateChangedListener<Boolean> booleanRoutingPrefListener;
 	private StateChangedListener<String> customRoutingPrefListener;
-
-	/**
-	 * A map to store temporary information about the parameter,
-	 * which will be needed in several places.
-	 */
-	private Map<String, Object> parametersDataCache = new HashMap<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -402,15 +396,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			showSeekbarSettingsDialog(getActivity(), getSelectedAppMode());
 		} else if (preference.getKey().equals(HAZMAT_TRANSPORTING_ENABLED)) {
 			FragmentManager manager = getFragmentManager();
-			Object data = parametersDataCache.get(HAZMAT_CATEGORY);
-			if (manager != null && data instanceof ListParameters) {
-				ListParameters parameters = (ListParameters) data;
+			if (manager != null && hazmatParameters != null) {
 				ApplicationMode appMode = getSelectedAppMode();
 				OsmandPreference<String> hazmatPreference = getHazmatPreference();
 				String selectedValue = hazmatPreference.getModeValue(appMode);
-				Integer selectedValueIndex = settings.HAZMAT_TRANSPORTING_ENABLED.getModeValue(appMode) ?
-						parameters.findIndexOfValue(selectedValue) : null;
-				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, parameters.names, parameters.values, selectedValueIndex);
+				boolean enabled = settings.HAZMAT_TRANSPORTING_ENABLED.getModeValue(appMode);
+				Integer selectedValueIndex = enabled ? hazmatParameters.findIndexOfValue(selectedValue) : null;
+				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.names, hazmatParameters.values, selectedValueIndex);
 			}
 		}
 		return super.onPreferenceClick(preference);
@@ -514,30 +506,26 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		uiPreference.setTitle(R.string.transport_hazmat_title);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr);
 		screen.addPreference(uiPreference);
-
-		ListParameters listParameters = populateListParameters(p);
-		parametersDataCache.put(HAZMAT_CATEGORY, listParameters);
+		hazmatParameters = populateListParameters(p);
 		updateHazmatCategoryPreference();
 	}
 
 	private void updateHazmatCategoryPreference() {
 		Preference uiPreference = findPreference(HAZMAT_TRANSPORTING_ENABLED);
-		Object data = parametersDataCache.get(HAZMAT_CATEGORY);
-		if (uiPreference == null || data == null) {
+		if (uiPreference == null || hazmatParameters == null) {
 			return;
 		}
 		ApplicationMode appMode = getSelectedAppMode();
 		OsmandPreference<String> preference = getHazmatPreference();
 		String selectedValue = settings.HAZMAT_TRANSPORTING_ENABLED.getModeValue(appMode)
 				? preference.getModeValue(appMode) : null;
-		ListParameters parameters = (ListParameters) data;
-		int selectedValueIndex = parameters.findIndexOfValue(selectedValue);
+		int selectedValueIndex = hazmatParameters.findIndexOfValue(selectedValue);
 
 		Drawable icon;
 		String description;
 		if (selectedValueIndex >= 0) {
 			String yes = getString(R.string.shared_string_yes);
-			String name = parameters.names[selectedValueIndex];
+			String name = hazmatParameters.names[selectedValueIndex];
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, yes, name);
 			icon = getIcon(R.drawable.ic_action_hazmat_limit_colored);
 		} else {
