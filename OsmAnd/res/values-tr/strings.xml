@@ -4692,4 +4692,9 @@
     <string name="average_speed_skip_stops">Durmaları dikkate al</string>
     <string name="average_speed_skip_stops_desc">%1$s değerinden daha düşük hızlar sayılmayacak ve ortalama hızı etkilemeyecektir.</string>
     <string name="map_widget_average_speed">Ortalama hız</string>
+    <string name="import_as_one_track">Tek yol olarak içe aktar</string>
+    <string name="use_latin_name_if_missing">Eksikse Latince adını kullan</string>
+    <string name="transport_hazmat_yes_desc">Uygun kategoriyi seçmeniz gerekiyor.</string>
+    <string name="transport_hazmat_no_desc">Bazı yollarda ve tünellerde tehlikeli maddelerin taşınması yasaktır.</string>
+    <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
 </resources>
