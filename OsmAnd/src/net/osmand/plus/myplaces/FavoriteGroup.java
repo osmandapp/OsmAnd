@@ -7,6 +7,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.PointsGroup;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
@@ -124,7 +125,24 @@ public class FavoriteGroup {
 		return name;
 	}
 
-	public PointsGroup toPointsGroup() {
-		return new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor(), points.size());
+	public PointsGroup toPointsGroup(@NonNull Context ctx) {
+		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor());
+		for (FavouritePoint point : points) {
+			pointsGroup.points.add(point.toWpt(ctx));
+		}
+		return pointsGroup;
+	}
+
+	public static FavoriteGroup fromPointsGroup(@NonNull PointsGroup pointsGroup, @NonNull Context ctx) {
+		FavoriteGroup favoriteGroup = new FavoriteGroup();
+		favoriteGroup.name = pointsGroup.name;
+		favoriteGroup.color = pointsGroup.color;
+		favoriteGroup.iconName = pointsGroup.iconName;
+		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE);
+
+		for (WptPt point : pointsGroup.points) {
+			favoriteGroup.points.add(FavouritePoint.fromWpt(point, ctx));
+		}
+		return favoriteGroup;
 	}
 }

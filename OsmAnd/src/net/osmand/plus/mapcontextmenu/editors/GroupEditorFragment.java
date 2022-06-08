@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.data.BackgroundType;
@@ -107,10 +109,7 @@ public abstract class GroupEditorFragment extends EditorFragment {
 	@Override
 	protected void checkEnteredName(@NonNull String name, @NonNull View saveButton) {
 		String trimmedName = name.trim();
-		if (trimmedName.isEmpty()) {
-			nameCaption.setError(getString(R.string.empty_category_name));
-			saveButton.setEnabled(false);
-		} else if (pointsGroup == null && isCategoryExists(trimmedName)) {
+		if (pointsGroup == null && isCategoryExists(trimmedName)) {
 			nameCaption.setError(getString(R.string.favorite_category_dublicate_message));
 			saveButton.setEnabled(false);
 		} else {
@@ -129,7 +128,13 @@ public abstract class GroupEditorFragment extends EditorFragment {
 	@Override
 	protected void savePressed() {
 		if (pointsGroup != null) {
-			editPointsGroup(true);
+			PointEditor editor = getEditor();
+			FragmentActivity activity = getActivity();
+			if (editor != null && activity != null) {
+				String tag = editor.getFragmentTag();
+				FragmentManager manager = activity.getSupportFragmentManager();
+				SaveGroupConfirmationBottomSheet.showInstance(manager, this, tag, pointsGroup.points.size());
+			}
 		} else {
 			save(true);
 		}

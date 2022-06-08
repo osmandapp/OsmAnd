@@ -1,8 +1,19 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.PointsGroup;
@@ -45,17 +56,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 public class IntentHelper {
 
@@ -356,7 +356,7 @@ public class IntentHelper {
 				String groupName = intent.getStringExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY);
 				FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, groupName));
 
-				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup() : null;
+				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup(app) : null;
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				FavouriteGroupEditorFragment.showInstance(manager, pointsGroup, null, true);
 

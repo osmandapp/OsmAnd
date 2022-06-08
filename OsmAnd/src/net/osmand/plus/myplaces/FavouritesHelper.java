@@ -110,17 +110,14 @@ public class FavouritesHelper {
 		flatGroups.clear();
 		favoriteGroups.clear();
 
-		Map<String, FavouritePoint> points = fileHelper.loadInternalPoints();
-		Map<String, FavouritePoint> extPoints = fileHelper.loadExternalPoints();
+		Map<String, FavoriteGroup> groups = fileHelper.loadInternalGroups();
+		Map<String, FavoriteGroup> extGroups = fileHelper.loadExternalGroups();
 
-		boolean changed = merge(extPoints, points);
+		boolean changed = merge(extGroups, groups);
 
-		for (FavouritePoint pns : points.values()) {
-			FavoriteGroup group = getOrCreateGroup(pns);
-			group.getPoints().add(pns);
-		}
-		sortAll();
 		recalculateCachedFavPoints();
+		sortAll();
+
 		if (changed || !fileHelper.getExternalFile().exists()) {
 			saveCurrentPointsIntoFile();
 		}
@@ -438,12 +435,12 @@ public class FavouritesHelper {
 	}
 
 	public void saveCurrentPointsIntoFile() {
-		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(cachedFavoritePoints));
+		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(favoriteGroups));
 		onFavouritePropertiesUpdated();
 	}
 
 	public Exception exportFavorites() {
-		return fileHelper.saveExternalFile(new ArrayList<>(cachedFavoritePoints), null);
+		return fileHelper.saveExternalFile(new ArrayList<>(favoriteGroups), null);
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group) {
