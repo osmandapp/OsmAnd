@@ -18,7 +18,6 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class AddOSMBugAction extends QuickAction {
 
-
 	private static final String KEY_MESSAGE = "message";
 	private static final String KEY_SHO_DIALOG = "dialog";
 
@@ -37,21 +36,12 @@ public class AddOSMBugAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-
 		if (plugin != null) {
-
-			LatLon latLon = mapActivity.getMapView()
-					.getCurrentRotatedTileBox()
-					.getCenterLatLon();
-
+			LatLon latLon = getMapLocation(mapActivity);
 			if (getParams().isEmpty()) {
-
 				plugin.openOsmNote(mapActivity, latLon.getLatitude(), latLon.getLongitude(), "", true);
-
 			} else {
-
 				plugin.openOsmNote(mapActivity, latLon.getLatitude(), latLon.getLongitude(),
 						getParams().get(KEY_MESSAGE),
 						!Boolean.valueOf(getParams().get(KEY_SHO_DIALOG)));

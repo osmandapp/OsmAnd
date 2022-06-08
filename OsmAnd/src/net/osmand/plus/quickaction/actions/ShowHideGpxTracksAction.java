@@ -44,13 +44,10 @@ public class ShowHideGpxTracksAction extends QuickAction {
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 			.inflate(R.layout.quick_action_with_text, parent, false);
-
 		((TextView) view.findViewById(R.id.text))
 			.setText(R.string.quick_action_show_hide_gpx_tracks_descr);
-
 		parent.addView(view);
 	}
 

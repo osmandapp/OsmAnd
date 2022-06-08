@@ -99,16 +99,12 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
 		mapActivity.closeQuickSearch();
 
 		PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
-
 		if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)) {
-
 			pf.clearSelectedPoiFilters();
-
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
@@ -123,10 +119,8 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	private boolean isCurrentFilters(OsmandApplication application) {
-
 		PoiFiltersHelper pf = application.getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(application.getPoiFilters());
-
 		return isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters);
 	}
 

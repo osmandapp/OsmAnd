@@ -33,10 +33,7 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.VectorDouble;
-import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.Amenity;
@@ -60,7 +57,6 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -278,31 +274,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean showMarker = false;
 		if (mInChangeMarkerPositionMode) {
 			if (menu != null && menu.getObject() == null) {
-				if (hasMapRenderer) {
-					PointI loc31 = NativeUtilities.get31FromPixel(mapRenderer, box, box.getPixWidth() / 2, box.getPixHeight() / 2);
-					if (loc31 != null) {
-						contextCoreMarker.setPosition(loc31);
-						showMarker = true;
-					}
-				} else {
-					canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
-					contextMarker.draw(canvas);
-				}
+				canvas.translate(box.getPixWidth() / 2f - contextMarker.getWidth() / 2f, box.getPixHeight() / 2f - contextMarker.getHeight());
+				contextMarker.draw(canvas);
 			}
 			if (mMoveMarkerBottomSheetHelper != null) {
 				mMoveMarkerBottomSheetHelper.onDraw(box);
 			}
 		} else if (mInAddGpxPointMode) {
-			if (hasMapRenderer) {
-				PointI loc31 = NativeUtilities.get31FromPixel(mapRenderer, box, box.getPixWidth() / 2, box.getPixHeight() / 2);
-				if (loc31 != null) {
-					contextCoreMarker.setPosition(loc31);
-					showMarker = true;
-				}
-			} else {
-				canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
-				contextMarker.draw(canvas);
-			}
+			canvas.translate(box.getPixWidth() / 2f - contextMarker.getWidth() / 2f, box.getPixHeight() / 2f - contextMarker.getHeight());
+			contextMarker.draw(canvas);
 			if (mAddGpxPointBottomSheetHelper != null) {
 				mAddGpxPointBottomSheetHelper.onDraw(box);
 			}
@@ -639,12 +619,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		menu.hide();
 
 		LatLon ll = menu.getLatLon();
-		RotatedTileBox rb = new RotatedTileBox(tileBox);
-		rb.setCenterLocation(0.5f, 0.5f);
-		rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
-		double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		view.setLatLon(lat, lon);
+		if (hasMapRenderer()) {
+			view.setLatLon(ll.getLatitude(), ll.getLongitude(), false);
+		} else {
+			RotatedTileBox rb = new RotatedTileBox(tileBox);
+			rb.setCenterLocation(0.5f, 0.5f);
+			rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
+			double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			view.setLatLon(lat, lon);
+		}
 
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getRightIcon());
