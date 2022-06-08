@@ -2093,7 +2093,7 @@
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
     <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
     <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
-    <string name="quick_action_add_parking">Tilføj en parkeringsplads</string>
+    <string name="quick_action_add_parking">Tilføj parkeringssted</string>
     <string name="quick_action_new_action">Tilføj genvej</string>
     <string name="quick_action_edit_action">Rediger genvej</string>
     <string name="quick_action_add_favorite">Tilføj Favorit</string>
