@@ -4684,4 +4684,6 @@
     <string name="transport_hazmat_yes_desc">Hai bisogno di scegliere la categoria appropriata.</string>
     <string name="import_as_one_track">Importa come un\'unica traccia</string>
     <string name="use_latin_name_if_missing">Usa nomi latini se mancano</string>
+    <string name="transport_hazmat_no_desc">In alcune strade e tunnel il trasporto di materiale pericoloso è proibito.</string>
+    <string name="transport_hazmat_title">Trasporto di materiale pericoloso</string>
 </resources>
