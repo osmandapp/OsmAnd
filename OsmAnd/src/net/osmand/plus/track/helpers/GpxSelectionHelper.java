@@ -36,6 +36,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -146,7 +147,7 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public boolean isShowingAnyGpxFiles() {
+	public boolean isAnyGpxFileSelected() {
 		return !selectedGPXFiles.isEmpty();
 	}
 
@@ -221,7 +222,8 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
+	@Nullable
+	public SelectedGpxFile getSelectedGPXFile(@NonNull WptPt point) {
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
 			if (gpxFile.containsPoint(point) || gpxFile.containsRoutePoint(point)) {
@@ -247,7 +249,7 @@ public class GpxSelectionHelper {
 			if (gpxFileToProcess != null && path.equals(gpxFileToProcess.path)) {
 				selectedGpxFile = fileToProcess;
 			} else {
-				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
+				selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(path);
 			}
 
 			if (selectedGpxFile == null || fileToProcess != null && !fileToProcess.equals(selectedGpxFile)) {
@@ -595,12 +597,28 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	/**
+	 * @return {@link SelectedGpxFile} only if it was selected
+	 */
 	@Nullable
-	public SelectedGpxFile getSelectedFileByPath(String path) {
-		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
-		for (SelectedGpxFile s : newList) {
-			if (s.getGpxFile().path.equals(path)) {
-				return s;
+	public SelectedGpxFile getSelectedFileByPath(@NonNull String path) {
+		return getFileByPath(path, selectedGPXFiles);
+	}
+
+	/**
+	 * @return {@link SelectedGpxFile} if it was selected or temporarily visible while screen like
+	 * {@link TrackMenuFragment} is opened
+	 */
+	@Nullable
+	public SelectedGpxFile getVisibleFileByPath(@NonNull String path) {
+		return getFileByPath(path, getVisibleGPXFiles());
+	}
+
+	@Nullable
+	private SelectedGpxFile getFileByPath(@NonNull String path, @NonNull List<SelectedGpxFile> gpxFiles) {
+		for (SelectedGpxFile gpxFile : gpxFiles) {
+			if (gpxFile.getGpxFile().path.equals(path)) {
+				return gpxFile;
 			}
 		}
 		return null;

@@ -82,7 +82,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
 			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_NAME);
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+			selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 
 			selectedTimeSplitInterval = savedInstanceState.getInt(SELECTED_TIME_SPLIT_INTERVAL);
@@ -90,7 +90,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 			selectedSplitType = GpxSplitType.valueOf(savedInstanceState.getString(SELECTED_TRACK_SPLIT_TYPE));
 		} else if (arguments != null) {
 			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+			selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 			updateSelectedSplitParams();
 		}
