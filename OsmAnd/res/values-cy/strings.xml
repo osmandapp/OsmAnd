@@ -3387,8 +3387,8 @@
     <string name="monitoring_min_distance_descr_side_effect">Sgil effeithiau: Nid yw cyfnodau o orffwys yn cael eu cofnodi o gwbl neu o un pwynt yr un yn unig. Mae’n bosibl y bydd symudiadau bach (byd go iawn) (e.e. i’r ochr, i nodi troad posibl ar eich taith) yn cael eu hidlo allan. Mae eich ffeil yn cynnwys llai o wybodaeth ar gyfer ôl-brosesu, ac mae ganddi ystadegau gwaeth trwy hidlo pwyntiau sy\'n amlwg yn ddiangen ar amser cofnodi, tra\'n cadw o bosibl arteffactau a achosir gan dderbyniad gwael neu effeithiau chipset GPS.</string>
     <string name="shared_string_mode">Modd</string>
     <string name="time_to_navigation_point_widget_settings_desc">Gelli newid modd trwy dapio ar y teclyn.</string>
-    <string name="map_widget_time_to_intermediate">Amser i ganolradd</string>
-    <string name="map_widget_distance_to_intermediate">Pellter i ganolradd</string>
+    <string name="map_widget_time_to_intermediate">Amser i fan stopio ar y ffordd</string>
+    <string name="map_widget_distance_to_intermediate">Pellter i fan stopio ar y ffordd</string>
     <string name="radius_ruler_mode_desc">Gelli newid modd mesurydd Radius trwy dapio ar y teclyn.</string>
     <string name="explore_plans">Archwilio Cynlluniau</string>
     <string name="radius_rules_widget_desc">Mae teclyn mesur radiws yn helpu i bennu\'r radiws o amgylch y pwynt a ddewiswyd ar y map trwy ddangos cylchoedd pellter ar y map.</string>
