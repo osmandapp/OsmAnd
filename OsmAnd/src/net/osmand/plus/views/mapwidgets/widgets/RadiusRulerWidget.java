@@ -9,6 +9,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -75,5 +76,11 @@ public class RadiusRulerWidget extends TextInfoWidget {
 		FormattedValue formattedDistance = OsmAndFormatter
 				.getFormattedDistanceValue(dist, app, true, settings.METRIC_SYSTEM.get());
 		setText(formattedDistance.value, formattedDistance.unit);
+	}
+
+	@Nullable
+	@Override
+	public OsmandPreference<?> getWidgetSettingsPrefToReset() {
+		return settings.RADIUS_RULER_MODE;
 	}
 }

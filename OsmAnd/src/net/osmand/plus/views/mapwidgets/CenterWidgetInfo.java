@@ -42,5 +42,9 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 		if (visibilityPref != null) {
 			visibilityPref.setModeValue(appMode, enabled);
 		}
+		OsmandPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset();
+		if (!enabled && settingsPref != null) {
+			settingsPref.resetModeToDefault(appMode);
+		}
 	}
 }

@@ -68,6 +68,14 @@ public abstract class MapWidget {
 		return null;
 	}
 
+	/**
+	 * @return preference that needs to be reset after deleting widget
+	 */
+	@Nullable
+	public OsmandPreference<?> getWidgetSettingsPrefToReset() {
+		return null;
+	}
+
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
