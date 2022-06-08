@@ -1168,7 +1168,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void attachToRoadsClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			enterApproximationMode(mapActivity);
+			boolean plainTrack = editingCtx.getPointsCount() > 0 && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
+			if (plainTrack) {
+				enterApproximationMode(mapActivity);
+			} else {
+				editingCtx.recalculateRouteSegments(null);
+			}
 		}
 	}
 
