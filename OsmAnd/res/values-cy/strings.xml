@@ -2647,7 +2647,7 @@
     <string name="av_notes_choose_action_widget_desc">Dewisa weithred.</string>
     <string name="arrival_time_widget_desc">Amser cyrraedd pen y daith.</string>
     <string name="max_speed_widget_desc">Mae\'n dangos cyfyngiad cyflymder y ffordd bresennol.</string>
-    <string name="current_speed_widget_desc">Dangosa\'r ategyn dy gyflymder yn ôl synhwyrydd GPS.</string>
+    <string name="current_speed_widget_desc">Mae\'n dangos dy gyflymder cyfredol yn ôl synhwyrydd GPS.</string>
     <string name="time_to_go_desc">Yr amser mewn munudau neu oriau i gyrraedd pen y daith.</string>
     <string name="get_altitude_information">Cael gwybodaeth uchder</string>
     <string name="calculating_altitude">Cyfrifo uchder</string>
