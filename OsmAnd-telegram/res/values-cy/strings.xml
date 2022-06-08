@@ -11,4 +11,5 @@
     <string name="shared_string_all">Y cwbl</string>
     <string name="logcat_buffer_descr">Gwirio a rhannu logiau manwl o\'r ap</string>
     <string name="logcat_buffer">Byffyr Logcat</string>
+    <string name="nm">nmi</string>
 </resources>
