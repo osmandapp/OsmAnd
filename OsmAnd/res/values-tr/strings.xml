@@ -2447,7 +2447,7 @@
     <string name="simulate_navigation">Navigasyonu simüle et</string>
     <string name="voice_announcements">Sesli uyarılar</string>
     <string name="intermediate_destinations">Ara varış noktaları</string>
-    <string name="osm_live_subscriptions">Açıklamalar</string>
+    <string name="osm_live_subscriptions">Abonelikler</string>
     <string name="osm_live_payment_monthly_title">Aylık</string>
     <string name="osm_live_payment_3_months_title">3 Aylık</string>
     <string name="osm_live_payment_annual_title">Yıllık</string>
@@ -4697,4 +4697,6 @@
     <string name="transport_hazmat_yes_desc">Uygun kategoriyi seçmeniz gerekiyor.</string>
     <string name="transport_hazmat_no_desc">Bazı yollarda ve tünellerde tehlikeli maddelerin taşınması yasaktır.</string>
     <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
+    <string name="routing_attr_goods_restrictions_name">Yük araçları kısıtlamaları</string>
+    <string name="routing_attr_goods_restrictions_description">Hafif yük araçları (mallar) için erişim izinlerini göz önünde bulundurun</string>
 </resources>

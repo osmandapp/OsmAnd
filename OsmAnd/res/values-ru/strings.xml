@@ -4702,4 +4702,6 @@
     <string name="transport_hazmat_title">Перевозка опасных грузов</string>
     <string name="transport_hazmat_no_desc">По некоторым дорогам и туннелям перевозка опасных грузов запрещена.</string>
     <string name="transport_hazmat_yes_desc">Выберите подходящую категорию.</string>
+    <string name="routing_attr_goods_restrictions_description">Учитывать права доступа для легкого коммерческого транспорта</string>
+    <string name="routing_attr_goods_restrictions_name">Ограничения на грузовые автомобили</string>
 </resources>

@@ -1184,7 +1184,7 @@
     <string name="poi_park_ride">Park ve sürüş</string>
     <string name="poi_access_mofa">Mofa erişimi</string>
     <string name="poi_access_hgv">Ağır yük aracı erişimi</string>
-    <string name="poi_access_goods">Hafif ticari araç erişimi</string>
+    <string name="poi_access_goods">Hafif yük araçları erişimi</string>
     <string name="poi_berth">Demirleme yeri</string>
     <string name="poi_buoy_installation">Yükleme şamandırası</string>
     <string name="poi_buoy_isolated_danger">Şamandıra, izole tehlike</string>
