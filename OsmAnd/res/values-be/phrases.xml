@@ -3913,4 +3913,15 @@
     <string name="poi_water_source_powered_pump">Электрычная помпа</string>
     <string name="poi_water_source_river">Рака</string>
     <string name="poi_lavoir">Грамадская пральня</string>
+    <string name="poi_swimming_area">Зона для купання</string>
+    <string name="poi_wildlife_crossing">Пераправа дзікіх жывёл</string>
+    <string name="poi_wildlife_crossing_bat_bridge">Мост кажаноў</string>
+    <string name="poi_piste_ski_jump">Лыжны трамплін</string>
+    <string name="poi_piste_name">Назва трасы</string>
+    <string name="poi_gladed_yes">Расчышчаная паляна: так</string>
+    <string name="poi_climbing_grade_uiaa_min">Самы просты маршрут (клас UIAA)</string>
+    <string name="poi_health_specialty_vaccination_yes">Вакцынацыя</string>
+    <string name="poi_wildlife_crossing_bat_tunnel">Тунэль кажаноў</string>
+    <string name="poi_patrolled_yes">Патрулююецца: так</string>
+    <string name="poi_patrolled_no">Патрулююецца: не</string>
 </resources>
