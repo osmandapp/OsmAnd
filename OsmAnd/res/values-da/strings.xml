@@ -3902,7 +3902,7 @@
     <string name="select_folder">Valg mappe</string>
     <string name="select_folder_descr">Vælg mappe eller tilføj en ny</string>
     <string name="shared_string_empty">Tom</string>
-    <string name="analyze_by_intervals">Analyser splitintervaller</string>
+    <string name="analyze_by_intervals">Analyser efter intervaller</string>
     <string name="upload_to_openstreetmap">Overfør til OpenStreetMap</string>
     <string name="edit_track">Rediger spor</string>
     <string name="rename_track">Omdøb spor</string>
