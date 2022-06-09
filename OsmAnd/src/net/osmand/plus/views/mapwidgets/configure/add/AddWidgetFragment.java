@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -83,6 +84,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 			initFromBundle(savedInstanceState);
 		} else if (args != null) {
 			initFromBundle(args);
+			selectSingleWidgetByDefault();
 		}
 	}
 
@@ -206,7 +208,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
 		View view = inflater.inflate(R.layout.selectable_widget_item_no_description, container, false);
-		String widgetId = OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
+		String widgetId = getAidlWidgetId(aidlWidgetData);
 		String title = aidlWidgetData.getMenuTitle();
 		String iconName = aidlWidgetData.getMenuIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
@@ -253,11 +255,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 				boolean selected = !view.isSelected();
 				view.setSelected(selected);
 				checkBox.setChecked(selected);
-				if (selected) {
-					selectedWidgetsIds.put(order, widgetId);
-				} else {
-					selectedWidgetsIds.remove(order);
-				}
+				updateWidgetSelection(order, widgetId, selected);
 			});
 		}
 	}
@@ -274,6 +272,29 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		}
 
 		return false;
+	}
+
+	private String getAidlWidgetId(AidlMapWidgetWrapper aidlWidgetData) {
+		return OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
+	}
+
+	private void selectSingleWidgetByDefault() {
+		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
+		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
+		if (widgets != null && widgets.size() == 1) {
+			WidgetType widget = Objects.requireNonNull(widgetsDataHolder.getWidgetsList()).get(0);
+			updateWidgetSelection(widget.getDefaultOrder(), widget.id, true);
+		} else if (aidlWidgetData != null) {
+			updateWidgetSelection(0, getAidlWidgetId(aidlWidgetData), true);
+		}
+	}
+
+	private void updateWidgetSelection(int order, @NonNull String widgetId, boolean selected) {
+		if (selected) {
+			selectedWidgetsIds.put(order, widgetId);
+		} else {
+			selectedWidgetsIds.remove(order);
+		}
 	}
 
 	private void setupApplyButton() {
