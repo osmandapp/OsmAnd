@@ -15,6 +15,7 @@ import java.util.Set;
 public class WorldRegion implements Serializable {
 
 	public static final String WORLD_BASEMAP = "world_basemap";
+	public static final String WORLD_BASEMAP_MINI = "world_basemap_mini";
 	public static final String ANTARCTICA_REGION_ID = "antarctica";
 	public static final String AFRICA_REGION_ID = "africa";
 	public static final String ASIA_REGION_ID = "asia";
