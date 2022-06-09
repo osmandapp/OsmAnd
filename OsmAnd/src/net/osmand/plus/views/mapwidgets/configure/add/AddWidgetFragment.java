@@ -191,7 +191,8 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
 		for (WidgetType widget : widgets) {
-			View view = inflater.inflate(R.layout.selectable_widget_item, container, false);
+			int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
+			View view = inflater.inflate(layoutId, container, false);
 			String title = getString(widget.titleId);
 			String desc = widget.descId != 0 ? getString(widget.descId) : null;
 			Drawable icon = getIcon(widget.getIconId(nightMode));
@@ -204,7 +205,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
-		View view = inflater.inflate(R.layout.selectable_widget_item, container, false);
+		View view = inflater.inflate(R.layout.selectable_widget_item_no_description, container, false);
 		String widgetId = OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
 		String title = aidlWidgetData.getMenuTitle();
 		String iconName = aidlWidgetData.getMenuIconName();
