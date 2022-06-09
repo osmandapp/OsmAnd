@@ -22,7 +22,6 @@ public class TerrainAction extends QuickAction {
 			nameRes(R.string.shared_string_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
 			category(QuickActionType.CONFIGURE_MAP);
 
-
 	public TerrainAction() {
 		super(TYPE);
 	}

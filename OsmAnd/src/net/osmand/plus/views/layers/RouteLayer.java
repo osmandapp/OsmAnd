@@ -623,10 +623,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void destroyLayer() {
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}

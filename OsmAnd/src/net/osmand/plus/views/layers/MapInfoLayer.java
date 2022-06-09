@@ -303,10 +303,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return true;
 	}

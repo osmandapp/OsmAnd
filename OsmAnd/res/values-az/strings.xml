@@ -1225,7 +1225,6 @@
     <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni marşrut təyinatı edən düymə. Əvvəl seçilmiş təyinatı (əgər varsa) əvəz edəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekranın mərkəzini birinci aralıq təyinat nöqtəsi etmək üçün düymə.</string>
     <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisə mesajları göstərmə.</string>
-    <string name="translit_name_if_miss">%1$s ad yoxdursa, transliterasiya et</string>
     <string name="route_preferences">Marşrut seçimləri</string>
     <string name="routing_preferences_descr">Marşrutlama seçimləri</string>
     <string name="profile_settings">Profil parametrləri</string>

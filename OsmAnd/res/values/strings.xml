@@ -11,12 +11,18 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
+    <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
+    <string name="import_as_one_track">Import as one track</string>
+    <string name="use_latin_name_if_missing">Use latin name if missing</string>
+    <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
+    <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden. </string>
+    <string name="transport_hazmat_title">Transporting of hazardous materials</string>
     <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
-    <string name="average_speed_skip_stops">Take into account stops</string>
+    <string name="average_speed_skip_stops">Take stops into account</string>
     <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
     <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
     <string name="map_widget_average_speed">Average speed</string>
-    <string name="lang_sat">Santali</string>
     <string name="shared_string_mode">Mode</string>
     <string name="time_to_navigation_point_widget_settings_desc">Switch mode by tapping the widget.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>
@@ -710,7 +716,7 @@
     <string name="rename_track">Rename track</string>
     <string name="edit_track">Edit track</string>
     <string name="upload_to_openstreetmap">Upload to OpenStreetMap</string>
-    <string name="analyze_by_intervals">Analyze split intervals</string>
+    <string name="analyze_by_intervals">Analyze by intervals</string>
     <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>
@@ -1057,7 +1063,6 @@
     <string name="osm_live_payment_subscription_management">Payment is charged from your Google Play account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your Google Play settings at any time.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
-    <string name="lang_lmo">Lombard</string>
     <string name="lang_an">Aragonese</string>
     <string name="lang_ba">Bashkir</string>
     <string name="lang_bar">Bavarian</string>
@@ -1067,6 +1072,7 @@
     <string name="lang_jv">Javanese</string>
     <string name="lang_kk">Kazakh</string>
     <string name="lang_ky">Kyrgyz</string>
+    <string name="lang_lmo">Lombard</string>
     <string name="lang_mg">Malagasy</string>
     <string name="lang_min">Minangkabau</string>
     <string name="lang_mn">Mongolian</string>
@@ -1074,6 +1080,7 @@
     <string name="lang_nap">Neapolitan</string>
     <string name="lang_ne">Nepali</string>
     <string name="lang_pnb">Punjabi</string>
+    <string name="lang_sat">Santali</string>
     <string name="lang_scn">Sicilian</string>
     <string name="lang_sco">Scots</string>
     <string name="lang_tg">Tajik</string>
@@ -2315,7 +2322,6 @@
     <string name="rendering_attr_contourColorScheme_name">Contour lines color scheme</string>
     <string name="rendering_attr_surfaceIntegrity_name">Road surface integrity</string>
     <string name="search_hint">Type city, address, POI name</string>
-    <string name="translit_name_if_miss">Transliterate if %1$s name is missing</string>
     <string name="translit_names">Transliterate names</string>
     <string name="edit_filter">Edit categories</string>
     <string name="subcategories">Subcategories</string>

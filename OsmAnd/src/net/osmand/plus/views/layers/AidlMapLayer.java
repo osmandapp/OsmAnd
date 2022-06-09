@@ -97,7 +97,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final List<AidlMapPointWrapper> displayedPoints = new ArrayList<>();
 
 	//OpenGL
-	private MapMarkersCollection mapMarkersCollection;
 	private AidlTileProvider aidlMapLayerProvider;
 	private int pointImagesSize = 0;
 	private boolean nightMode = false;
@@ -297,6 +296,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		clearAidlTileProvider();
 	}
 

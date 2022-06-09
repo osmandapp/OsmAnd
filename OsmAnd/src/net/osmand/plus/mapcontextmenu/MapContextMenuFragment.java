@@ -992,7 +992,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (mapActivity != null) {
 			OsmandMap osmandMap = mapActivity.getMyApplication().getOsmandMap();
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
+			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (!containsLatLon) {
 				restoreCustomMapRatio();
 			}
@@ -1011,7 +1011,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
+			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (containsLatLon) {
 				setCustomMapRatio();
 			} else {

@@ -15,7 +15,7 @@ So by opening an issue, please know that your issue will be sent out to all deve
 Comments on the closed issues are also sent to all developers, so you will definitely will be heard.
 However, there is no guarantee that a developer will pick up the issue to work on it.
 
-Please be sure to read our [FAQ](https://osmand.net/help-online) before creating an issue here.
+Please be sure to read our [User Guide]([https://osmand.net/help-online](https://osmand.net/docs/user/)) before creating an issue here.
 
 The best way to get help about an OsmAnd issue is to create a valid and detailed issue.
 Please give us the following information so that we can try to **reproduce** your issue:

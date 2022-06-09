@@ -9,15 +9,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.track.TrackDrawInfo;
 
 public class ShowStartFinishCard extends MapBaseCard {
 
-	private OsmandPreference<Boolean> showStartFinishPreference;
+	private final TrackDrawInfo trackDrawInfo;
 
-	public ShowStartFinishCard(@NonNull MapActivity mapActivity) {
+	public ShowStartFinishCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
-		this.showStartFinishPreference = app.getSettings().SHOW_START_FINISH_ICONS;
+		this.trackDrawInfo = trackDrawInfo;
 	}
 
 	@Override
@@ -33,14 +33,12 @@ public class ShowStartFinishCard extends MapBaseCard {
 		titleView.setText(R.string.track_show_start_finish_icons);
 
 		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
-		//compoundButton.setChecked(trackDrawInfo.isShowStartFinish());
-		compoundButton.setChecked(showStartFinishPreference.get());
+		compoundButton.setChecked(trackDrawInfo.isShowStartFinish());
 
 		view.setOnClickListener(v -> {
 			boolean checked = !compoundButton.isChecked();
 			compoundButton.setChecked(checked);
-			//trackDrawInfo.setShowStartFinish(checked);
-			showStartFinishPreference.set(checked);
+			trackDrawInfo.setShowStartFinish(checked);
 			mapActivity.refreshMap();
 			notifyCardPressed();
 		});

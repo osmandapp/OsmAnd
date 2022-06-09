@@ -1912,7 +1912,6 @@
     <string name="rendering_attr_contourColorScheme_name">Χρωματικός συνδυασμός ισοϋψών καμπυλών</string>
     <string name="rendering_attr_surfaceIntegrity_name">Αρτιότητα επιφάνειας δρόμου</string>
     <string name="search_hint">Πληκτρολογήστε πόλη, διεύθυνση, όνομα ΣΕ</string>
-    <string name="translit_name_if_miss">Μεταγραμμάτιση εάν λείπει το όνομα του %1$s</string>
     <string name="translit_names">Μεταγραμμάτιση ονομάτων</string>
     <string name="edit_filter">Επεξεργασία κατηγοριών</string>
     <string name="subcategories">Υποκατηγορίες</string>

@@ -1930,7 +1930,7 @@
     <string name="poi_payment_fuel_type">Cartes carburant</string>
     <string name="poi_additional_type">Supplémentaire</string>
     <string name="poi_internet_access_type">Type d\'accès Internet</string>
-    <string name="poi_vending_type">Type de vente</string>
+    <string name="poi_vending_type">Type de distributeur</string>
     <string name="poi_bicycle_service">Service vélo</string>
     <string name="poi_clothes_type">Type</string>
     <string name="poi_shoes_type">Type</string>

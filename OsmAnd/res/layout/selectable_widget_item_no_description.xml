@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_selectable_widget_item"
+	android:layout_marginBottom="@dimen/content_padding_small">
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal"
+		android:minHeight="@dimen/card_row_min_height"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small"
+		android:background="?attr/ripple_solid_6dp"
+		tools:ignore="UselessParent">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/dialog_content_margin"
+			android:layout_height="@dimen/dialog_content_margin"
+			tools:srcCompat="@drawable/widget_next_turn_day" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			style="@style/TitleStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:maxLines="1"
+			android:layout_weight="1"
+			android:layout_marginStart="@dimen/title_padding"
+			android:ellipsize="end"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Widget name" />
+
+		<androidx.appcompat.widget.AppCompatCheckBox
+			android:id="@+id/compound_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/title_padding"
+			android:layout_gravity="center_vertical"
+			android:saveEnabled="false"
+			android:clickable="false"
+			android:focusable="false" />
+
+	</LinearLayout>
+
+</FrameLayout>

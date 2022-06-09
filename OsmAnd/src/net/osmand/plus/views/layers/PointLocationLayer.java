@@ -85,7 +85,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private static final int MARKER_ID_NAVIGATION = 2;
 	private static final int MARKER_ID_MY_LOCATION_HEADING = 3;
 	private static final int MARKER_ID_NAVIGATION_HEADING = 4;
-	private MapMarkersCollection markersCollection;
 	private CoreMapMarker locationMarker;
 	private CoreMapMarker locationMarkerWithHeading;
 	private CoreMapMarker navigationMarker;
@@ -176,7 +175,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (mapActivity != null) {
 			initCoreRenderer();
 		} else {
-			resetMarkerProvider();
+			clearMapMarkersCollections();
 		}
 	}
 
@@ -206,25 +205,17 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (view == null || icon == null) {
 			return null;
 		}
-		if (markersCollection == null) {
-			markersCollection = new MapMarkersCollection();
+		if (mapMarkersCollection == null) {
+			mapMarkersCollection = new MapMarkersCollection();
 		}
-		return CoreMapMarker.createAndAddToCollection(getContext(), markersCollection, id,
+		return CoreMapMarker.createAndAddToCollection(getContext(), mapMarkersCollection, id,
 				getBaseOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading);
-	}
-
-	private void resetMarkerProvider() {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && markersCollection != null) {
-			mapRenderer.removeSymbolsProvider(markersCollection);
-		}
-		markersCollection = null;
 	}
 
 	private void setMarkerProvider() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && markersCollection != null) {
-			mapRenderer.addSymbolsProvider(markersCollection);
+		if (mapRenderer != null && mapMarkersCollection != null) {
+			mapRenderer.addSymbolsProvider(mapMarkersCollection);
 		}
 	}
 
@@ -232,7 +223,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (view == null || !hasMapRenderer()) {
 			return false;
 		}
-		resetMarkerProvider();
+		clearMapMarkersCollections();
 		locationMarker = recreateMarker(locationIcon, MARKER_ID_MY_LOCATION, profileColor, false);
 		locationMarkerWithHeading = recreateMarker(locationIcon, MARKER_ID_MY_LOCATION_HEADING, profileColor, true);
 		navigationMarker = recreateMarker(navigationIcon, MARKER_ID_NAVIGATION, profileColor, false);
@@ -380,7 +371,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (view == null || tileBox.getZoom() < MIN_ZOOM || locationProvider.getLastStaleKnownLocation() == null) {
-			resetMarkerProvider();
+			clearMapMarkersCollections();
 			return;
 		}
 		boolean nightMode = settings != null && settings.isNightMode();
@@ -395,7 +386,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 		if (hasMapRenderer()) {
 			boolean markersRecreated = false;
-			if (markersInvalidated || markersCollection == null) {
+			if (markersInvalidated || mapMarkersCollection == null) {
 				markersRecreated = recreateMarkerCollection();
 				markersInvalidated = false;
 			}
@@ -424,7 +415,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void destroyLayer() {
-		resetMarkerProvider();
+		super.destroyLayer();
+		clearMapMarkersCollections();
 	}
 
 	private void updateParams(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {

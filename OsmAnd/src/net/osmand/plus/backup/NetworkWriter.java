@@ -8,6 +8,7 @@ import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -103,19 +104,48 @@ public class NetworkWriter extends AbstractWriter {
 
 	@Nullable
 	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-								  @NonNull String fileName, @Nullable OnUploadFileListener listener,
-								  long uploadTime) throws UserNotRegisteredException, IOException {
+	                              @NonNull String fileName, @Nullable OnUploadFileListener listener,
+	                              long uploadTime) throws UserNotRegisteredException, IOException {
 		if (isCancelled()) {
 			throw new InterruptedIOException();
 		} else {
-			return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(),
-					itemWriter::writeToStream, uploadTime, listener);
+			String type = itemWriter.getItem().getType().name();
+			StreamWriter streamWriter = getStreamWriter(itemWriter, fileName);
+			return backupHelper.uploadFile(fileName, type, streamWriter, uploadTime, listener);
 		}
+	}
+
+	private StreamWriter getStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
+		boolean useEmptyStreamWriter = shouldUseEmptyStreamWriter(itemWriter, fileName);
+		if (useEmptyStreamWriter) {
+			return (outputStream, progress) -> {
+				FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
+				Algorithms.closeStream(item.getInputStream());
+
+				if (progress != null) {
+					int work = (int) (item.getEstimatedSize() / 1024);
+					progress.startWork(work);
+					progress.progress(work);
+					progress.finishTask();
+				}
+			};
+		}
+		return itemWriter::writeToStream;
+	}
+
+	private boolean shouldUseEmptyStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
+		SettingsItem item = itemWriter.getItem();
+		if (item instanceof FileSettingsItem) {
+			if (((FileSettingsItem) item).getSubtype() == FileSubtype.OBF_MAP) {
+				return backupHelper.isObfMapExistsOnServer(fileName);
+			}
+		}
+		return false;
 	}
 
 	@Nullable
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-									  @NonNull String fileName, long uploadTime)
+	                                  @NonNull String fileName, long uploadTime)
 			throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
 		List<File> filesToUpload = backupHelper.collectItemFilesForUpload(item);

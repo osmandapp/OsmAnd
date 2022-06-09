@@ -2367,7 +2367,6 @@ POIの更新は利用できません</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球の海洋深度マップ</string>
     <string name="index_item_depth_points_northern_hemisphere">北半球の海洋深度マップ</string>
     <string name="rendering_attr_surfaceIntegrity_name">路面の質</string>
-    <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
     <string name="private_access_routing_req">目的地が専有エリア(私有地)内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
     <string name="quick_action_page_list_descr">作成したリスト順にマップスタイルを変更するボタンです。</string>

@@ -236,7 +236,10 @@ public class TerrainLayer extends MapTileLayer {
 				for (String t : ts) {
 					SQLiteTileSource sqLiteTileSource = resources.get(t);
 					if (sqLiteTileSource != null) {
-						return sqLiteTileSource.getBytes(x, y, zoom, null, timeHolder);
+						byte[] res = sqLiteTileSource.getBytes(x, y, zoom, null, timeHolder);
+						if (res != null) {
+							return res;
+						}
 					}
 				}
 				return null;

@@ -386,6 +386,10 @@ public class RotatedTileBox {
 		calculateDerivedFields();
 	}
 
+	public boolean isCenterShifted() {
+		return cx != 0.5f || cy != 0.5f;
+	}
+
 	public LatLon getLeftTopLatLon() {
 		checkTileRectangleCalculated();
 		return new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(tileLT.y)),

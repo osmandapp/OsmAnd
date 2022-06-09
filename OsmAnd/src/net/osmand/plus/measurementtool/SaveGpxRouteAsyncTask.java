@@ -148,6 +148,7 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
                 if (addToTrack) {
                     newGpx.tracks.addAll(gpx.tracks);
                     newGpx.routes.addAll(gpx.routes);
+                    newGpx.addPoints(gpx.getPoints());
                 }
                 gpx = newGpx;
             }

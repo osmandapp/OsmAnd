@@ -28,6 +28,12 @@ public class OsmAndLocationSimulation {
 
 	public static final float PRECISION_1_M = 0.00001f;
 	public static final int DEVIATION_M = 6;
+	private final float MOTORWAY_MAX_SPEED = 120.0f;
+	private final float TRUNK_MAX_SPEED = 90.0f;
+	private final float PRIMARY_MAX_SPEED = 60.0f;
+	private final float SECONDARY_MAX_SPEED = 50.0f;
+	private final float LIVING_SPTREET_MAX_SPEED = 15.0f;
+	private final float DEFAULT_MAX_SPEED = 40.0f;
 	private Thread routeAnimation;
 	private final OsmAndLocationProvider provider;
 	private final OsmandApplication app;
@@ -155,7 +161,7 @@ public class OsmAndLocationSimulation {
 							if (simulationMode == SimulationMode.CONSTANT) {
 								result = useSimulationConstantSpeed(simSpeed, current, directions, meters, intervalTime, coeff);
 							} else {
-								result = useDefaultSimulation(current, directions, meters);
+								result = useDefaultSimulation(current, directions, meters, intervalTime, coeff);
 							}
 							current = (SimulatedLocation) result.get(0);
 							meters = (float) result.get(1);
@@ -221,7 +227,7 @@ public class OsmAndLocationSimulation {
 		return result;
 	}
 
-	private List<Object> useDefaultSimulation(SimulatedLocation current, List<SimulatedLocation> directions, float meters) {
+	private List<Object> useDefaultSimulation(SimulatedLocation current, List<SimulatedLocation> directions, float meters, float intervalTime,float coeff) {
 		List<Object> result = new ArrayList<>();
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
@@ -229,6 +235,12 @@ public class OsmAndLocationSimulation {
 			current = new SimulatedLocation(directions.remove(0));
 			meters = metersToGoInFiveSteps(directions, current);
 		}
+
+		float limit = getMetersLimitForPoint(current, intervalTime, coeff);
+		if (meters > limit) {
+			meters = limit;
+		}
+
 		result.add(current);
 		result.add(meters);
 
@@ -237,6 +249,31 @@ public class OsmAndLocationSimulation {
 
 	private float metersToGoInFiveSteps(List<SimulatedLocation> directions, SimulatedLocation current) {
 		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2);
+	}
+
+	private float getMetersLimitForPoint(SimulatedLocation point, float intervalTime,float coeff) {
+		float maxSpeed = (float) (getMaxSpeedForRoadType(point.getHighwayType()) / 3.6);
+		float speedLimit = point.getSpeedLimit();
+		if (speedLimit > 0 && maxSpeed > speedLimit) {
+			maxSpeed = speedLimit;
+		}
+		return maxSpeed * intervalTime / coeff;
+	}
+
+	private float getMaxSpeedForRoadType(String roadType) {
+		if ("motorway".equals(roadType)) {
+			return MOTORWAY_MAX_SPEED;
+		} else if ("trunk".equals(roadType)) {
+			return TRUNK_MAX_SPEED;
+		} else if ("primary".equals(roadType)) {
+			return PRIMARY_MAX_SPEED;
+		} else if ("secondary".equals(roadType)) {
+			return SECONDARY_MAX_SPEED;
+		} else if ("living_street".equals(roadType) || "service".equals(roadType)) {
+			return LIVING_SPTREET_MAX_SPEED;
+		} else {
+			return DEFAULT_MAX_SPEED;
+		}
 	}
 
 	public void stop() {
@@ -272,10 +309,14 @@ public class OsmAndLocationSimulation {
 
 	public static class SimulatedLocation extends Location {
 		private boolean trafficLight;
+		private String highwayType;
+		private float speedLimit;
 
 		public SimulatedLocation(SimulatedLocation l) {
 			super(l);
 			trafficLight = l.isTrafficLight();
+			highwayType = l.getHighwayType();
+			speedLimit = l.getSpeedLimit();
 		}
 
 		public SimulatedLocation(String s) {
@@ -292,6 +333,22 @@ public class OsmAndLocationSimulation {
 
 		public void setTrafficLight(boolean trafficLight) {
 			this.trafficLight = trafficLight;
+		}
+
+		public String getHighwayType() {
+			return this.highwayType;
+		}
+
+		public void setHighwayType(String highwayType) {
+			this.highwayType = highwayType;
+		}
+
+		public float getSpeedLimit() {
+			return this.speedLimit;
+		}
+
+		public void setSpeedLimit(float speedLimit) {
+			this.speedLimit = speedLimit;
 		}
 	}
 }

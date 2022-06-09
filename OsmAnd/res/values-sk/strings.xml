@@ -2021,7 +2021,6 @@
     <string name="edit_filter">Upraviť kategórie</string>
     <string name="subcategories">Podkategórie</string>
     <string name="translit_names">Transliterovať názvy</string>
-    <string name="translit_name_if_miss">Transliterovať ak chýba názov po %1$s</string>
     <string name="rendering_value_light_brown_name">Svetlohnedá</string>
     <string name="rendering_value_dark_brown_name">Tmavohnedá</string>
     <string name="rendering_attr_contourColorScheme_name">Farebná schéma vrstevníc</string>
@@ -4624,7 +4623,7 @@
     <string name="map_widget_trip_recording_duration">Trvanie</string>
     <string name="map_widget_trip_recording_distance">Vzdialenosť</string>
     <string name="routing_attr_hazmat_category_name">Kategória nebezpečného nákladu</string>
-    <string name="current_time_widget_desc">Tento nástroj zobrazuje aktuálny čas zariadenia.</string>
+    <string name="current_time_widget_desc">Zobrazuje aktuálny čas zariadenia.</string>
     <string name="get_altitude_information">Získať informácie o výške</string>
     <string name="navigation_points">Navigačné body</string>
     <string name="get_altitude_data">Získať údaje výšky</string>
@@ -4636,7 +4635,7 @@
     <string name="circle_settings">Nastavenia kružníc</string>
     <string name="routing_attr_avoid_4wd_only_description">Vyhnúť sa cestám vhodným len terénnym vozidlám s pohonom 4x4</string>
     <string name="radius_rules_widget_desc">Pravítko pomáha určiť polomer okolo zvoleného bodu na mape zobrazením kružníc vzdialeností na mape.</string>
-    <string name="battery_widget_desc">Nástroj zobrazuje úroveň nabitia batérie zariadenia.</string>
+    <string name="battery_widget_desc">Zobrazuje úroveň nabitia batérie zariadenia.</string>
     <string name="magnetic_bearing_widget_desc">Uhol medzi magnetickým severom a cieľovým bodom pozorovaný z vašej polohy.</string>
     <string name="calculate_online">Vypočítať online</string>
     <string name="no_altitude_data">Žiadne údaje o výške</string>
@@ -4657,10 +4656,10 @@
     <string name="widget_secondary_desc_part_of">Súčasť modulu %1$s.</string>
     <string name="elevation_profile_widget_desc">Nástroj zobrazuje profil prevýšenia a svahu aktuálnej trasy.</string>
     <string name="parking_widget_desc">Nástroj zobrazuje vzdialenosť od stredu obrazovky k parkovaciemu miestu.</string>
-    <string name="altitude_widget_desc">Nástroj zobrazuje nadmorskú výšku aktuálnej polohy.</string>
-    <string name="max_speed_widget_desc">Nástroj zobrazuje max. povolenú rýchlosť na práve používanej ceste.</string>
-    <string name="current_speed_widget_desc">Nástroj zobrazuje aktuálnu rýchlosť podľa GPS senzora.</string>
-    <string name="gps_info_widget_desc">Nástroj zobrazuje počet satelitov, ktoré zariadenie práve vidí a používa.</string>
+    <string name="altitude_widget_desc">Zobrazuje nadmorskú výšku aktuálnej polohy.</string>
+    <string name="max_speed_widget_desc">Zobrazuje max. povolenú rýchlosť na práve používanej ceste.</string>
+    <string name="current_speed_widget_desc">Zobrazuje aktuálnu rýchlosť podľa GPS senzora.</string>
+    <string name="gps_info_widget_desc">Zobrazuje počet satelitov, ktoré zariadenie práve vidí a používa.</string>
     <string name="shared_string_widget">Nástroj</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skryť vojenské oblasti</string>
     <string name="routing_attr_avoid_fords_description">Vyhnúť sa brodom</string>
@@ -4673,13 +4672,19 @@
     <string name="bearing_desc">Nástroj smerovania zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (180 stupňov, 360 stupňov, miliradiány).</string>
     <string name="map_markers_desc">Nástroj na hornom paneli môže zobrazovať vzdialenosť a smer k značke od aktuálnej polohy. Je možné nastaviť zobrazenie 1 alebo 2 značiek na nástroji.</string>
     <string name="routing_attr_avoid_4wd_only_name">Vyhnúť sa terénnym cestám</string>
-    <string name="fps_widget_desc">Nástroj zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
+    <string name="fps_widget_desc">Zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
     <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>
     <string name="route_maneuvers">Manévre trasy</string>
     <string name="shared_string_mode">Režim</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Režim môžete prepnúť stlačením nástroja.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Prepnite režim stlačením nástroja.</string>
     <string name="map_widget_time_to_destination">Čas k cieľu</string>
     <string name="map_widget_time_to_intermediate">Čas k prechodnému cieľu</string>
     <string name="map_widget_distance_to_intermediate">Vzdialenosť k prechodnému cieľu</string>
-    <string name="radius_ruler_mode_desc">Režim polomerového pravítka môžete prepnúť stlačením nástroja.</string>
+    <string name="radius_ruler_mode_desc">Stlačením nástroja prepnete na režim polomerového pravítka.</string>
+    <string name="average_speed_skip_stops">Zohľadniť zastavenia</string>
+    <string name="map_widget_average_speed">Priemerná rýchlosť</string>
+    <string name="lang_sat">Santali</string>
+    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
+    <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
+    <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
 </resources>

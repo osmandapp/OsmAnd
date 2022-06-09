@@ -3,6 +3,7 @@ package net.osmand.plus.importfiles;
 import static android.app.Activity.RESULT_OK;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
@@ -65,6 +66,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -432,20 +434,11 @@ public class ImportHelper {
 			} else {
 				if (save) {
 					int tracksCount = result.getTracksCount();
-					if (tracksCount > 1 && tracksCount < 50) {
-						ImportTracksFragment.showInstance(activity.getSupportFragmentManager(), result, name);
+					boolean showImportMultiTrackFragment = tracksCount > 1 && tracksCount < 50;
+					if (showImportMultiTrackFragment) {
+						ImportTracksFragment.showInstance(activity.getSupportFragmentManager(), result, name, fileSize);
 					} else {
-						String existingFilePath = getExistingFilePath(name, fileSize);
-						if (existingFilePath != null) {
-							app.showToastMessage(R.string.file_already_imported);
-							if (onGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
-								showGpxContextMenu(existingFilePath);
-							} else if (onGpxImport == OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT) {
-								showPlanRouteFragment(result);
-							}
-						} else {
-							executeImportTask(new SaveGpxAsyncTask(app, this, result, name, onGpxImport, useImportDir));
-						}
+						importAsOneTrack(result, name, fileSize, useImportDir, onGpxImport);
 					}
 				} else {
 					showNeededScreen(onGpxImport, result);
@@ -489,8 +482,45 @@ public class ImportHelper {
 		}
 	}
 
+	private void importAsOneTrack(@NonNull GPXFile gpxFile, @NonNull String name, long fileSize,
+	                              boolean useImportDir, @Nullable OnSuccessfulGpxImport onSuccessfulGpxImport) {
+		String existingFilePath = getExistingFilePath(app, name, fileSize);
+		if (existingFilePath != null) {
+			app.showToastMessage(R.string.file_already_imported);
+			showNeededScreen(onSuccessfulGpxImport, gpxFile);
+		} else {
+			File destinationDir = useImportDir
+					? app.getAppPath(GPX_IMPORT_DIR)
+					: app.getAppPath(GPX_INDEX_DIR);
+			SaveImportedGpxListener listener = new SaveImportedGpxListener() {
+
+				@Override
+				public void onGpxSavingStarted() {
+				}
+
+				@Override
+				public void onGpxSavingFinished(@NonNull List<String> warnings) {
+					boolean success = Algorithms.isEmpty(warnings);
+					if (success) {
+						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+						if (selectedGpxFile != null) {
+							selectedGpxFile.setGpxFile(gpxFile, app);
+						}
+						showNeededScreen(onSuccessfulGpxImport, gpxFile);
+					} else {
+						app.showToastMessage(warnings.get(0));
+					}
+					if (gpxImportCompleteListener != null) {
+						gpxImportCompleteListener.onSaveComplete(success, gpxFile);
+					}
+				}
+			};
+			executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener));
+		}
+	}
+
 	@Nullable
-	private String getExistingFilePath(String name, long fileSize) {
+	public static String getExistingFilePath(@NonNull OsmandApplication app, @NonNull String name, long fileSize) {
 		File dir = app.getAppPath(GPX_INDEX_DIR);
 		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
 		for (GPXInfo gpxInfo : gpxInfoList) {

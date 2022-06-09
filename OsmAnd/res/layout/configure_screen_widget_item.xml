@@ -73,15 +73,24 @@
 			android:layout_gravity="center_vertical"
 			android:background="?attr/divider_color_basic" />
 
-		<androidx.appcompat.widget.AppCompatImageButton
-			android:id="@+id/settings_icon"
+		<FrameLayout
+			android:id="@+id/settings_button"
 			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="@dimen/standard_icon_size"
-			android:layout_height="@dimen/standard_icon_size"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:layout_margin="@dimen/content_padding"
-			android:tint="?attr/default_icon_color"
-			app:srcCompat="@drawable/ic_action_settings" />
+			android:padding="@dimen/content_padding">
+
+			<androidx.appcompat.widget.AppCompatImageButton
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center_vertical"
+				android:clickable="false"
+				android:focusable="false"
+				android:tint="?attr/default_icon_color"
+				app:srcCompat="@drawable/ic_action_settings" />
+
+		</FrameLayout>
 
 	</LinearLayout>
 

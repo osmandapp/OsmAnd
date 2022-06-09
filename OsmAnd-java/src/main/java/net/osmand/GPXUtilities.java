@@ -1331,6 +1331,7 @@ public class GPXUtilities {
 		public boolean showCurrentTrack;
 		public boolean hasAltitude;
 		public long modifiedTime = 0;
+		public long pointsModifiedTime = 0;
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
@@ -1388,21 +1389,25 @@ public class GPXUtilities {
 		public void clearPoints() {
 			points.clear();
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		public void addPoint(WptPt point) {
 			points.add(point);
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		public void addPoint(int position, WptPt point) {
 			points.add(position, point);
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		public void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		public boolean isCloudmadeRouteFile() {
@@ -1590,6 +1595,7 @@ public class GPXUtilities {
 			points.add(pt);
 
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 
 			return pt;
 		}
@@ -1651,6 +1657,7 @@ public class GPXUtilities {
 			Route lastRoute = routes.get(routes.size() - 1);
 			lastRoute.points.addAll(points);
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		public void replaceRoutePoints(List<WptPt> points) {
@@ -1659,6 +1666,7 @@ public class GPXUtilities {
 			Route currentRoute = routes.get(routes.size() - 1);
 			currentRoute.points.addAll(points);
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		public void updateWptPt(WptPt pt, double lat, double lon, String description, String name, String category,
@@ -1686,6 +1694,7 @@ public class GPXUtilities {
 				points.set(index, pt);
 			}
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 		}
 
 		private void removeGeneralTrackIfExists() {
@@ -1715,11 +1724,13 @@ public class GPXUtilities {
 
 		public boolean deleteWptPt(WptPt pt) {
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 			return points.remove(pt);
 		}
 
 		public boolean deleteRtePt(WptPt pt) {
 			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
 			for (Route route : routes) {
 				if (route.points.remove(pt)) {
 					return true;
@@ -2457,6 +2468,7 @@ public class GPXUtilities {
 			GPXFile gpxFile = loadGPXFile(fis, extensionsReader);
 			gpxFile.path = file.getAbsolutePath();
 			gpxFile.modifiedTime = file.lastModified();
+			gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
 
 			Algorithms.closeStream(fis);
 			return gpxFile;
