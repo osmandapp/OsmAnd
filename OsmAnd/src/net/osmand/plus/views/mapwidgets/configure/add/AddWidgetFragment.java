@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -282,7 +281,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null && widgets.size() == 1) {
-			WidgetType widget = Objects.requireNonNull(widgetsDataHolder.getWidgetsList()).get(0);
+			WidgetType widget = widgetsDataHolder.getWidgetsList().get(0);
 			updateWidgetSelection(widget.getDefaultOrder(), widget.id, true);
 		} else if (aidlWidgetData != null) {
 			updateWidgetSelection(0, getAidlWidgetId(aidlWidgetData), true);
