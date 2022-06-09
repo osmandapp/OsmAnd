@@ -4330,4 +4330,6 @@
     <string name="poi_laundry_service_no">否</string>
     <string name="poi_flow_rate">流速</string>
     <string name="poi_golf_pin">標示高爾夫球洞的旗子</string>
+    <string name="poi_payment_mir_no">不接受 Mir 卡</string>
+    <string name="poi_payment_mir_yes">Mir</string>
 </resources>
