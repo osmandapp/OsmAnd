@@ -197,7 +197,7 @@ public class OptionsCard extends MapBaseCard {
 	private BaseBottomSheetItem createAnalyzeByIntervalsItem() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getActiveIcon(R.drawable.ic_action_analyze_intervals))
-				.setTitle(app.getString(R.string.analyze_by_intervals))
+				.setTitle(app.getString(R.string.ic_action_table))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(ANALYZE_BY_INTERVALS_BUTTON_INDEX))
 				.create();
