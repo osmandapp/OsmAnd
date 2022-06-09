@@ -23,11 +23,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -542,12 +544,16 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				}
 			}
 
-			public List<CityItem> searchCities(final OsmandApplication app, final String text) throws IOException {
-				IndexItem worldBaseMapItem = app.getDownloadThread().getIndexes().getWorldBaseMapItem();
-				if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
+			@NonNull
+			public List<CityItem> searchCities(@NonNull OsmandApplication app, @NonNull String text) throws IOException {
+				File obf = getWorldBaseMapObf(app);
+				if (obf == null) {
+					obf = getWorldBaseMapMiniObf(app);
+				}
+				if (obf == null) {
 					return new ArrayList<>();
 				}
-				File obf = worldBaseMapItem.getTargetFile(app);
+
 				final BinaryMapIndexReader baseMapReader = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
 				final SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(
 						text, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
@@ -597,6 +603,27 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					items.add(new CityItem(amenity.getName(), amenity, null));
 				}
 				return items;
+			}
+
+			@Nullable
+			private File getWorldBaseMapObf(@NonNull OsmandApplication app) {
+				DownloadResources downloadResources = app.getDownloadThread().getIndexes();
+				IndexItem worldBaseMapItem = downloadResources.getWorldBaseMapItem();
+				if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+					File obf = worldBaseMapItem.getTargetFile(app);
+					if (obf.exists()) {
+						return obf;
+					}
+				}
+				return null;
+			}
+
+			@Nullable
+			private File getWorldBaseMapMiniObf(@NonNull OsmandApplication app) {
+				File mapsPath = app.getAppPath(IndexConstants.MAPS_PATH);
+				String baseMapMiniFileName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
+				File baseMapMiniObf = new File(mapsPath, baseMapMiniFileName);
+				return baseMapMiniObf.exists() ? baseMapMiniObf : null;
 			}
 
 			@Override
