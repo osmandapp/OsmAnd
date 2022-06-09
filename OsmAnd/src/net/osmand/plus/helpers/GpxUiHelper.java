@@ -575,12 +575,11 @@ public class GpxUiHelper {
 				}
 				GPXFile currentGPX = null;
 				//clear all previously selected files before adding new one
-				OsmandApplication _app = (OsmandApplication) activity.getApplication();
-				if (_app.getSelectedGpxHelper() != null) {
-					_app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
+				if (app.getSelectedGpxHelper() != null) {
+					app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
 				}
 				if (showCurrentGpx && adapter.getItem(0).getSelected()) {
-					currentGPX = _app.getSavingTrackHelper().getCurrentGpx();
+					currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 				}
 				List<String> selectedGpxNames = new ArrayList<>();
 				for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
@@ -589,7 +588,7 @@ public class GpxUiHelper {
 					}
 				}
 				dialog.dismiss();
-				updateSelectedTracksAppearance(_app, selectedGpxNames, gpxAppearanceParams);
+				updateSelectedTracksAppearance(app, selectedGpxNames, gpxAppearanceParams);
 				loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
 						selectedGpxNames.toArray(new String[0]));
 			});
