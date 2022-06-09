@@ -2782,4 +2782,15 @@
     <string name="shared_string_widget">Приспособление</string>
     <string name="routing_attr_carriage_restrictions_description">Отчита правата за достъп на транспортни средства с животинска тяга</string>
     <string name="routing_attr_avoid_4wd_only_name">Пез пътища за 4WD</string>
+    <string name="fps_widget_desc">Показва колко бързо се показват и опресняват картата и нейните елементи.</string>
+    <string name="quick_action_switch_profile_descr">Бутонът за действия превлкючва между избраните профили.</string>
+    <string name="selected_profile">Избран профил</string>
+    <string name="arrival_time_widget_desc">Време на пристигане в крайната точка.</string>
+    <string name="gps_info_widget_desc">Показва броя на сателитите, които устройството открива и използва в този момент.</string>
+    <string name="current_time_widget_desc">Показва текущото време на устройство.</string>
+    <string name="battery_widget_desc">Показва нивото на батерията на устройство.</string>
+    <string name="max_speed_widget_desc">Показва ограничението на скоростта на текущия път.</string>
+    <string name="altitude_widget_desc">Показва надморската височина на текущото местоположение.</string>
+    <string name="current_speed_widget_desc">Показва текущата скорост, получена от дтачика за GPS.</string>
+    <string name="time_to_go_desc">Времето в минути или часове, необходимо за достигане в крайната точка.</string>
 </resources>
