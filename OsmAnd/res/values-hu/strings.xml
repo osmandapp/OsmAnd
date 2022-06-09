@@ -4689,4 +4689,6 @@
     <string name="transport_hazmat_title">Veszélyes anyagok szállítása</string>
     <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
+    <string name="routing_attr_goods_restrictions_description">Vegye figyelembe az (áruszállító) furgonokra vonatkozó behajtási engedélyeket</string>
+    <string name="routing_attr_goods_restrictions_name">Furgon korlátozások</string>
 </resources>
