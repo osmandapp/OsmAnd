@@ -66,6 +66,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private View mapWindow;
 	private boolean mapWindowTouched = false;
 	private boolean wasDrawerDisabled;
+	private boolean paused;
 
 	private AppCompatImageView minZoomPreviewImage;
 	private AppCompatImageView maxZoomPreviewImage;
@@ -306,6 +307,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void onResume() {
 		super.onResume();
+		paused = false;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -320,6 +322,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void onPause() {
 		super.onPause();
+		paused = true;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
@@ -380,6 +383,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		app.runInUIThread(() -> {
+			if (paused) {
+				return;
+			}
+
 			int maxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
