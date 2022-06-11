@@ -4322,7 +4322,7 @@
     <string name="backup_setup">إنشاء نسخة احتياطية</string>
     <string name="backup_restore_now">استعادة الآن</string>
     <string name="attribute">ميزة</string>
-    <string name="shared_string_purchased">المشتريات</string>
+    <string name="shared_string_purchased">تم شراؤه</string>
     <string name="explore_wikipedia_offline">استكشف ويكيبيديا دون اتصال بالإنترنت.</string>
     <string name="on_hold_since">معلقة منذ %1$s</string>
     <string name="active_till">نشط حتى %1$s</string>
