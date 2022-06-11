@@ -3919,7 +3919,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Elemzés felosztási intervallumonként</string>
+    <string name="analyze_by_intervals">Elemzés intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>

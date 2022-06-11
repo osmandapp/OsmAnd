@@ -3941,7 +3941,7 @@
     <string name="message_name_is_already_exists">Ce nom existe déjà</string>
     <string name="routing_engine_vehicle_type_hgv">Poids lourd</string>
     <string name="announcement_time_passing">Durée</string>
-    <string name="analyze_by_intervals">Analyser par intervalles de fractionnement</string>
+    <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>

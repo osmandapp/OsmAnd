@@ -3929,7 +3929,7 @@
     <string name="select_folder">בחירת תקינה</string>
     <string name="select_folder_descr">נא לבחור תיקייה או להוסיף אחת חדשה</string>
     <string name="shared_string_empty">ריק</string>
-    <string name="analyze_by_intervals">ניתוח מרווחי פיצול</string>
+    <string name="analyze_by_intervals">ניתוח לפי מרווחים</string>
     <string name="upload_to_openstreetmap">העלאה ל־OpenStreetMap</string>
     <string name="edit_track">עריכת מסלול</string>
     <string name="rename_track">שינוי שם מסלול</string>
@@ -4700,4 +4700,5 @@
     <string name="map_widget_average_speed">מהירות ממוצעת</string>
     <string name="routing_attr_goods_restrictions_name">מגבלות כלי תובלה</string>
     <string name="routing_attr_goods_restrictions_description">התייחסות להרשאות גישה למשאיות קלות (טנדרים)</string>
+    <string name="rendering_attr_seabedDetail_description">פירוט טקסט נוסף על surface_qualification (תנאי שטח), סוגי שטח מעורבים, קטגוריה וסיווג של צמחי או אצות הים על הקרקעית</string>
 </resources>
