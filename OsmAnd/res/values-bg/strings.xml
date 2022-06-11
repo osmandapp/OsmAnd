@@ -2590,7 +2590,7 @@
     <string name="shared_string_turn_off">Изключване</string>
     <string name="shared_preference">Общи</string>
     <string name="file_imported_successfully">%1$s е внесен.</string>
-    <string name="apply_preference_to_all_profiles">Прилагане на промяната към всички профили.</string>
+    <string name="apply_preference_to_all_profiles">Прилагане на промяната към всички или към избраните профили.</string>
     <string name="layer_osm_edits">OSM редакции</string>
     <string name="quick_action_poi_show">Показване на %1$s</string>
     <string name="quick_action_navigation_voice_descr">Превключва гласовите напътствия по време на маршрутизиране.</string>
@@ -2793,4 +2793,5 @@
     <string name="altitude_widget_desc">Показва надморската височина на текущото местоположение.</string>
     <string name="current_speed_widget_desc">Показва текущата скорост, получена от дтачика за GPS.</string>
     <string name="time_to_go_desc">Времето в минути или часове, необходимо за достигане в крайната точка.</string>
+    <string name="route_parameters_info">Настройки на маршрутизацията за профил „%1$s“.</string>
 </resources>
