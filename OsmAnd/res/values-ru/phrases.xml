@@ -4331,4 +4331,6 @@
     <string name="poi_payment_mir_no">Карты Мир не принимаются</string>
     <string name="poi_payment_mir_yes">Мир</string>
     <string name="poi_club_youth_movement">Молодёжное движение</string>
+    <string name="poi_club_religion">Религиозный клуб</string>
+    <string name="poi_club_amateur_radio">Клуб радиолюбителей</string>
 </resources>
