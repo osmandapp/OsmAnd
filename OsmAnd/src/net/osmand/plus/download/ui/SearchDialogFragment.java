@@ -624,21 +624,22 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 				app.runInUIThread(SearchDialogFragment.this::showProgressBar);
 
+				String searchRequest = constraint == null ? "" : constraint.toString().trim();
 				FilterResults results = new FilterResults();
-				if (constraint == null || constraint.length() < 2) {
+				if (searchRequest.length() < 2) {
 					results.values = new ArrayList<>();
 					results.count = 0;
 				} else {
 					List<Object> filter = new ArrayList<>();
-					if (constraint.length() > 2) {
+					if (searchRequest.length() > 2) {
 						try {
-							filter.addAll(searchCities(constraint.toString()));
+							filter.addAll(searchCities(searchRequest));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
 
-					String[] ors = constraint.toString().split(",");
+					String[] ors = searchRequest.split(",");
 					List<List<String>> conds = new ArrayList<>();
 					for (String or : ors) {
 						final ArrayList<String> cond = new ArrayList<>();
