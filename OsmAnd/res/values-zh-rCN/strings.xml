@@ -4290,4 +4290,33 @@
     <string name="routing_attr_avoid_4wd_only_name">避开四轮驱动道路</string>
     <string name="routing_attr_avoid_4wd_only_description">避开只适合四轮驱动车辆的道路</string>
     <string name="bearing_secondary_desc">您可以更改显示数据的格式：%1$s – %2$s – %3$s。</string>
+    <string name="all_groups">所有组</string>
+    <string name="no_widgets_here_yet">这里还没有小工具</string>
+    <string name="available_widgets">可用的小部件</string>
+    <string name="snackbar_page_removed">“页面 %1$s”已被删除。</string>
+    <string name="shared_string_shape">形状</string>
+    <string name="selected_waypoints_descr">选定的航点将被添加到“%1$s”轨道</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">无偏好</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">中等</string>
+    <string name="routing_attr_difficulty_preference_expert_name">专家</string>
+    <string name="shared_string_symbol">符号</string>
+    <string name="no_widgets_descr">从可用小部件列表中添加一个或多个小部件。</string>
+    <string name="import_tracks">导入轨迹</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">仅在必要时</string>
+    <string name="rendering_attr_seabedDetail_name">海床细节</string>
+    <string name="select_suggested_points">选择建议的点</string>
+    <string name="please_provide_group_name_message">请为该组命名。</string>
+    <string name="default_appearance_desc">默认颜色、图标和形状将应用于添加到组中的收藏点。</string>
+    <string name="shared_string_reading_file">正在读取文件…</string>
+    <string name="gpx_no_routes_descr">你可以使用\"%1$s\"工具将路线添加到文件中。</string>
+    <string name="list_of_groups">群组列表</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">高级</string>
+    <string name="location_source_descr">默认情况下，从Google Play安装的OsmAnd使用%1$s来确定位置。
+\n
+\n如果您获得不准确的位置信息或使用没有 %2$s 的设备，请尝试切换到“%3$s”</string>
+    <string name="quick_action_add_route_descr">一个可以从屏幕中间启动路线的按钮。</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">初学者</string>
+    <string name="routing_attr_freeride_policy_allow_name">允许</string>
+    <string name="shared_string_item">项目</string>
+    <string name="location_source">位置来源</string>
 </resources>
