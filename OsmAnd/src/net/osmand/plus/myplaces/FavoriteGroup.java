@@ -45,6 +45,15 @@ public class FavoriteGroup {
 		this.visible = visible;
 	}
 
+	public FavoriteGroup(@NonNull FavoriteGroup group) {
+		name = group.name;
+		color = group.color;
+		visible = group.visible;
+		iconName = group.iconName;
+		backgroundType = group.backgroundType;
+		points.addAll(group.getPoints());
+	}
+
 	public String getName() {
 		return name;
 	}

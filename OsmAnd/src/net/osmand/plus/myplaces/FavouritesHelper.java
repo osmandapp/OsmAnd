@@ -27,6 +27,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -115,6 +116,9 @@ public class FavouritesHelper {
 
 		boolean changed = merge(extGroups, groups);
 
+		flatGroups.putAll(groups);
+		favoriteGroups.addAll(groups.values());
+
 		recalculateCachedFavPoints();
 		sortAll();
 
@@ -176,13 +180,29 @@ public class FavouritesHelper {
 		listeners.remove(listener);
 	}
 
-	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
+	private boolean merge(Map<String, FavoriteGroup> source, Map<String, FavoriteGroup> destination) {
 		boolean changed = false;
-		for (Map.Entry<String, FavouritePoint> entry : source.entrySet()) {
-			String ks = entry.getKey();
-			if (!destination.containsKey(ks)) {
+		for (Map.Entry<String, FavoriteGroup> entry : source.entrySet()) {
+			String key = entry.getKey();
+			FavoriteGroup sourceGroup = entry.getValue();
+			FavoriteGroup destinationGroup = destination.get(key);
+
+			if (destinationGroup == null) {
 				changed = true;
-				destination.put(ks, entry.getValue());
+				destinationGroup = new FavoriteGroup(sourceGroup);
+				destination.put(key, destinationGroup);
+			} else {
+				List<FavouritePoint> points = destinationGroup.getPoints();
+				Map<String, FavouritePoint> pointsMap = new HashMap<>();
+				for (FavouritePoint point : points) {
+					pointsMap.put(point.getKey(), point);
+				}
+				for (FavouritePoint point : sourceGroup.getPoints()) {
+					if (!pointsMap.containsKey(point.getKey())) {
+						changed = true;
+						points.add(point);
+					}
+				}
 			}
 		}
 		return changed;
@@ -440,7 +460,7 @@ public class FavouritesHelper {
 	}
 
 	public Exception exportFavorites() {
-		return fileHelper.saveExternalFile(new ArrayList<>(favoriteGroups), null);
+		return fileHelper.saveExternalFile(new ArrayList<>(favoriteGroups), Collections.emptySet());
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group) {
@@ -691,5 +711,13 @@ public class FavouritesHelper {
 		for (FavoritesListener listener : listeners) {
 			listener.onFavoritePropertiesUpdated();
 		}
+	}
+
+	public static List<FavouritePoint> getPointsFromGroups(@NonNull List<FavoriteGroup> groups) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>();
+		for (FavoriteGroup group : groups) {
+			favouritePoints.addAll(group.getPoints());
+		}
+		return favouritePoints;
 	}
 }

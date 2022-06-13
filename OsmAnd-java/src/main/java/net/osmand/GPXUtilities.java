@@ -691,18 +691,18 @@ public class GPXUtilities {
 		public int color;
 
 		public PointsGroup(String name) {
-			this.name = name;
+			this.name = name != null ? name : "";
 		}
 
 		public PointsGroup(String name, String iconName, String backgroundType, int color) {
-			this.name = name;
+			this(name);
 			this.color = color;
 			this.iconName = iconName;
 			this.backgroundType = backgroundType;
 		}
 
 		public PointsGroup(WptPt point) {
-			this.name = point.category;
+			this(point.category);
 			this.color = point.getColor();
 			this.iconName = point.getIconName();
 			this.backgroundType = point.getBackgroundType();
