@@ -710,12 +710,16 @@ public class RoutePlannerFrontEnd {
 			return false;
 		}
 		Map<String, RoutingParameter> parameters = router.getParameters();
-		boolean hasKeys = parameters.containsKey(GeneralRouter.ALLOW_PRIVATE) || parameters.containsKey(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK);
-		if (!router.isAllowPrivate() && hasKeys) {
+		String allowPrivateKey = null;
+		if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE)) {
+			allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
+		} else if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK)) {
+			allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
+		}
+		if (!router.isAllowPrivate() && allowPrivateKey != null) {
 			ctx.unloadAllData();
 			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
-			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
-			mp.put(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, "true");
+			mp.put(allowPrivateKey, "true");
 			mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
 			ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
 			for (LatLon latLon : points) {
