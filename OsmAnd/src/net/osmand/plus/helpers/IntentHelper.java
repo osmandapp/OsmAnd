@@ -11,6 +11,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -114,18 +117,39 @@ public class IntentHelper {
 					LOG.debug("App mode with specified key not available, using default navigation app mode");
 				}
 
-				if (appMode != null) {
-					app.getRoutingHelper().setAppMode(appMode);
-				}
+				if (app.isApplicationInitializing()) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+						@Override
+						public void onStart(AppInitializer init) {
+						}
 
-				app.getTargetPointsHelper().navigateToPoint(endLatLon, true, -1);
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, startLatLon,
-						null, false, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+						@Override
+						public void onProgress(AppInitializer init, InitEvents event) {
+						}
+
+						@Override
+						public void onFinish(AppInitializer init) {
+							init.removeListener(this);
+							buildRoute(startLatLon, endLatLon, appMode);
+						}
+					});
+				} else {
+					buildRoute(startLatLon, endLatLon, appMode);
+				}
 
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end, @Nullable ApplicationMode appMode) {
+		if (appMode != null) {
+			app.getRoutingHelper().setAppMode(appMode);
+		}
+		app.getTargetPointsHelper().navigateToPoint(end, true, -1);
+		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, start,
+				null, false, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	@Nullable
