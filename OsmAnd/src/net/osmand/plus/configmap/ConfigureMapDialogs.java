@@ -63,7 +63,9 @@ public class ConfigureMapDialogs {
 					public void onClick(View v) {
 						int which = (int) v.getTag();
 						view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-						activity.refreshMapComplete();
+						if (view.getMapRenderer() == null) {
+							activity.refreshMapComplete();
+						}
 						activity.getDashboard().refreshContent(false);
 					}
 				}

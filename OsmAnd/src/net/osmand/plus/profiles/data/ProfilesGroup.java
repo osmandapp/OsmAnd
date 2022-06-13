@@ -10,10 +10,10 @@ public class ProfilesGroup {
 
 	protected CharSequence title;
 	protected CharSequence description;
-	protected List<ProfileDataObject> profiles;
+	protected List<RoutingDataObject> profiles;
 
 	public ProfilesGroup(@NonNull String title,
-	                     @NonNull List<ProfileDataObject> profiles) {
+	                     @NonNull List<RoutingDataObject> profiles) {
 		this.title = title;
 		this.profiles = profiles;
 	}
@@ -31,7 +31,7 @@ public class ProfilesGroup {
 		this.description = description;
 	}
 
-	public List<ProfileDataObject> getProfiles() {
+	public List<RoutingDataObject> getProfiles() {
 		return profiles;
 	}
 }
