@@ -258,7 +258,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			if (AndroidUtils.isValidEmail(email)) {
 				settings.BACKUP_USER_EMAIL.set(email);
 				progressBar.setVisibility(View.VISIBLE);
-				backupHelper.updateOrderId((status, message, error) -> backupHelper.registerDevice(""));
+				backupHelper.registerDevice("");
 			} else {
 				editText.requestFocus();
 				errorText.setText(R.string.osm_live_enter_email);
