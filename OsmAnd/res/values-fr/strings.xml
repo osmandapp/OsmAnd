@@ -3941,7 +3941,7 @@
     <string name="message_name_is_already_exists">Ce nom existe déjà</string>
     <string name="routing_engine_vehicle_type_hgv">Poids lourd</string>
     <string name="announcement_time_passing">Durée</string>
-    <string name="analyze_by_intervals">Analyser par intervalles de fractionnement</string>
+    <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>
@@ -4685,4 +4685,11 @@
     <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera ignorée et n\'affectera pas le calcul de la vitesse moyenne.</string>
     <string name="average_speed_widget_desc">Indique la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
+    <string name="transport_hazmat_yes_desc">Vous devez sélectionner une catégorie.</string>
+    <string name="transport_hazmat_title">Transport de matières dangereuses</string>
+    <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels interdisent le transport de matières dangereuses.</string>
+    <string name="import_as_one_track">Importer comme une seule trace</string>
+    <string name="use_latin_name_if_missing">Utiliser le nom latin si manquant</string>
+    <string name="routing_attr_goods_restrictions_name">Restrictions d\'accès pour les véhicules de transport de marchandises</string>
+    <string name="routing_attr_goods_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
 </resources>

@@ -1,11 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.GPXUtilities.calculateTrackBounds;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -64,6 +58,7 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
@@ -112,6 +107,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.GPXUtilities.calculateTrackBounds;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
@@ -196,6 +197,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private CommonPreference<String> currentTrackRouteInfoAttributePref;
 	private CommonPreference<String> currentTrackWidthPref;
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
+	private OsmandPreference<Boolean> currentTrackShowStartFinishPref;
 
 	public GPXLayer(@NonNull Context ctx, int baseOrder) {
 		super(ctx);
@@ -217,6 +219,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		currentTrackRouteInfoAttributePref = view.getSettings().CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE;
 		currentTrackWidthPref = view.getSettings().CURRENT_TRACK_WIDTH;
 		currentTrackShowArrowsPref = view.getSettings().CURRENT_TRACK_SHOW_ARROWS;
+		currentTrackShowStartFinishPref = view.getSettings().CURRENT_TRACK_SHOW_START_FINISH;
 		defaultTrackColorPref = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).cache();
 		defaultTrackWidthPref = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).cache();
 
@@ -480,9 +483,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			boolean changed = forceUpdate;
 			int startFinishPointsCount = 0;
 			int splitLabelsCount = 0;
-			boolean showStartFinish = isShowStartFinishForTrack();
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-				if (showStartFinish) {
+				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
 						if (segment.points.size() >= 2) {
@@ -512,7 +514,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			QListPointI startFinishPoints = new QListPointI();
 			SplitLabelList splitLabels = new SplitLabelList();
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-				if (showStartFinish) {
+				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
 						if (segment.points.size() >= 2) {
@@ -673,9 +675,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFilesStartEndPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= START_ZOOM) {
-			boolean showStartFinish = isShowStartFinishForTrack();
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-				if (showStartFinish) {
+				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
 						if (segment.points.size() >= 2) {
@@ -1171,7 +1172,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
 	}
 
-	private boolean isShowArrowsForTrack(GPXFile gpxFile) {
+	private boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowArrows();
 		} else if (gpxFile.showCurrentTrack) {
@@ -1185,11 +1186,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private boolean isShowStartFinishForTrack() {
-		return view.getApplication().getSettings().SHOW_START_FINISH_ICONS.get();
+	private boolean isShowStartFinishForTrack(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.isShowStartFinish();
+		} else if (gpxFile.showCurrentTrack) {
+			return currentTrackShowStartFinishPref.get();
+		} else {
+			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null) {
+				return dataItem.isShowStartFinish();
+			}
+			return gpxFile.isShowStartFinish();
+		}
 	}
 
-	private boolean hasTrackDrawInfoForTrack(GPXFile gpxFile) {
+	private boolean hasTrackDrawInfoForTrack(@NonNull GPXFile gpxFile) {
 		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.showCurrentTrack
 				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
 	}

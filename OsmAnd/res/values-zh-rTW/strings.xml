@@ -3918,7 +3918,7 @@
     <string name="select_folder">選取資料夾</string>
     <string name="select_folder_descr">選取資料夾或新增</string>
     <string name="shared_string_empty">空</string>
-    <string name="analyze_by_intervals">分析分割間隔</string>
+    <string name="analyze_by_intervals">按間隔分析</string>
     <string name="upload_to_openstreetmap">上傳到 OpenStreetMap</string>
     <string name="edit_track">編輯軌跡</string>
     <string name="rename_track">重新命名軌跡</string>
@@ -4685,4 +4685,11 @@
     <string name="map_widget_average_speed">平均速率</string>
     <string name="lang_sat">桑塔利文</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將不會被計算在內，並會影響平均速度。</string>
+    <string name="transport_hazmat_no_desc">部份道路與隧道禁止運輸危險物品。</string>
+    <string name="transport_hazmat_title">危險物品運輸</string>
+    <string name="import_as_one_track">匯入為一個軌跡</string>
+    <string name="use_latin_name_if_missing">若缺少則使用拉丁名稱</string>
+    <string name="transport_hazmat_yes_desc">您必須選擇合適的分類。</string>
+    <string name="routing_attr_goods_restrictions_description">考慮輕型貨車（貨物）的進入權限</string>
+    <string name="routing_attr_goods_restrictions_name">貨車限制</string>
 </resources>

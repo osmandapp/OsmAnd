@@ -31,22 +31,17 @@ public class ShowHideCoordinatesWidgetAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
 		mapActivity.getMyApplication().getSettings().SHOW_COORDINATES_WIDGET.set(
 				!mapActivity.getMyApplication().getSettings().SHOW_COORDINATES_WIDGET.get());
-
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
-
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_coordinates_widget_descr);
-
 		parent.addView(view);
 	}
 

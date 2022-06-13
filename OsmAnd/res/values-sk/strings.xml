@@ -3920,7 +3920,7 @@
     <string name="select_folder">Zvoľte priečinok</string>
     <string name="select_folder_descr">Zvoľte priečinok alebo pridajte nový</string>
     <string name="shared_string_empty">Prázdne</string>
-    <string name="analyze_by_intervals">Analyzovať rozdelené intervaly</string>
+    <string name="analyze_by_intervals">Analyzovať podľa intervalov</string>
     <string name="upload_to_openstreetmap">Nahrať do OpenStreetMap</string>
     <string name="edit_track">Upraviť stopu</string>
     <string name="rename_track">Premenovať stopu</string>
@@ -4687,4 +4687,11 @@
     <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
+    <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>
+    <string name="routing_attr_goods_restrictions_name">Obmedzenia pre dodávkové vozidlá</string>
+    <string name="transport_hazmat_yes_desc">Musíte zvoliť správnu kategóriu.</string>
+    <string name="import_as_one_track">Importovať ako jednu stopu</string>
+    <string name="use_latin_name_if_missing">Použiť názov v latinke ak chýba</string>
+    <string name="transport_hazmat_no_desc">Prevoz nebezpečných látok je zakázaná na niektorých cestách a tuneloch.</string>
+    <string name="transport_hazmat_title">Prevoz nebezpečných látok</string>
 </resources>

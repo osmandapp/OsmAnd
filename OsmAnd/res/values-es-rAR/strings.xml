@@ -417,7 +417,7 @@
     <string name="osmand_distance_planning_plugin_description">Crea caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. El resultado puede guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usando la rueda de desplazamiento para el control del zum, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Haz contribuciones en OpenStreetMap, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX grabados en OsmAnd, proporcionando tu nombre de usuario y contraseña. OpenStreetMap.org es un proyecto de mapeo de dominio público, global, libre e impulsado por la comunidad.</string>
-    <string name="osmand_development_plugin_description">Ajusta las funciones de desarrollo y depuración, como la simulación de navegación, el rendimiento del renderizado o las indicaciones por voz. Destinado para desarrolladores, no es necesario para el normal uso de la aplicación.</string>
+    <string name="osmand_development_plugin_description">Ajusta las funciones en desarrollo y depuración, como la simulación de navegación, el rendimiento del renderizado o las indicaciones por voz. Destinado para desarrolladores, no es necesario para el normal uso de la aplicación.</string>
     <string name="world_ski_missing">Descargar el mapa especial sin conexión para mostrar las instalaciones de esquí.</string>
     <string name="nautical_maps_missing">Descargar el mapa especial sin conexión para mostrar los detalles náuticos.</string>
     <string name="proxy_pref_descr">Indica un servidor proxy.</string>
@@ -2682,8 +2682,8 @@
     <string name="unlimited_downloads">Descargas ilimitadas</string>
     <string name="wikipedia_offline">Wikipedia sin conexión</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
-    <string name="monthly_map_updates">Actualizaciones del mapa: cada mes</string>
-    <string name="daily_map_updates">Actualizaciones del mapa: cada hora</string>
+    <string name="monthly_map_updates">Actualizaciones mensuales del mapa</string>
+    <string name="daily_map_updates">Actualizaciones horarias del mapa</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
     <string name="travel_card_download_descr">Descarga las guías turísticas de Wikiviajes para ver artículos sobre sitios alrededor del mundo, sin una conexión a Internet.</string>
     <string name="update_is_available">Actualización disponible</string>
@@ -3925,7 +3925,7 @@
     <string name="select_folder">Elegir carpeta</string>
     <string name="select_folder_descr">Elegir carpeta o añadir una nueva</string>
     <string name="shared_string_empty">Vacío</string>
-    <string name="analyze_by_intervals">Analizar intervalos divididos</string>
+    <string name="analyze_by_intervals">Analizar por intervalos</string>
     <string name="upload_to_openstreetmap">Subir a OpenStreetMap</string>
     <string name="edit_track">Editar traza</string>
     <string name="rename_track">Renombrar traza</string>
@@ -4708,4 +4708,11 @@
     <string name="average_speed_widget_desc">Muestra la velocidad media del recorrido actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
     <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s no serán contadas y afectará a la velocidad media.</string>
+    <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
+    <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
+    <string name="transport_hazmat_yes_desc">Debes elegir la categoría adecuada.</string>
+    <string name="import_as_one_track">Importar como una traza</string>
+    <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
+    <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
+    <string name="routing_attr_goods_restrictions_name">Restricciones a vehículos de mercancías</string>
 </resources>

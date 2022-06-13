@@ -4330,4 +4330,9 @@
     <string name="poi_laundry_service_no">Немає</string>
     <string name="poi_flow_rate">Швидкість потоку</string>
     <string name="poi_golf_pin">Шпилька для гольфу</string>
+    <string name="poi_payment_mir_no">Картки Mir не приймаються</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_youth_movement">Молодіжний рух</string>
+    <string name="poi_club_religion">Релігійний клуб</string>
+    <string name="poi_club_amateur_radio">Любительський радіоклуб</string>
 </resources>

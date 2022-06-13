@@ -4680,8 +4680,15 @@
     <string name="shared_string_mode">Način</string>
     <string name="lang_sat">santalščina</string>
     <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se ne upošteva in ne vpliva na povprečno hitrost.</string>
-    <string name="average_speed_skip_stops">Upoštevanje postankov</string>
+    <string name="average_speed_skip_stops">Upoštevaj postanke</string>
     <string name="average_speed_time_interval_desc">Določi časovni interval, v katerem se meri povprečna hitrost.</string>
     <string name="average_speed_widget_desc">Prikazuje povprečno hitrost trenutne vožnje.</string>
     <string name="map_widget_average_speed">Povprečna hitrost</string>
+    <string name="routing_attr_goods_restrictions_description">Upoštevaj dovoljenja za dostop za lahka tovorna vozila (blago)</string>
+    <string name="transport_hazmat_no_desc">Na nekaterih cestah in predorih je prevoz nevarnih snovi prepovedan.</string>
+    <string name="transport_hazmat_title">Prevoz nevarnih snovi</string>
+    <string name="routing_attr_goods_restrictions_name">Omejitve za tovorna vozila</string>
+    <string name="import_as_one_track">Uvozi kot eno sled</string>
+    <string name="use_latin_name_if_missing">Uporabi latinsko ime, če manjka</string>
+    <string name="transport_hazmat_yes_desc">Izbrati moraš ustrezno kategorijo.</string>
 </resources>

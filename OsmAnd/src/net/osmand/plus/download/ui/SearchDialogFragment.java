@@ -1,5 +1,6 @@
 package net.osmand.plus.download.ui;
 
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -23,11 +24,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -51,6 +54,7 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
@@ -73,6 +77,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public static final String SHOW_GROUP_KEY = "show_group_key";
 	public static final String DOWNLOAD_TYPES_TO_SHOW_KEY = "download_types_to_show";
 	public static final String SHOW_WIKI_KEY = "show_wiki_key";
+
+	private OsmandApplication app;
+	private boolean nightMode;
+
 	private boolean showGroup;
 	private ArrayList<String> downloadTypesToShow = new ArrayList<>();
 	private ListView listView;
@@ -87,17 +95,17 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = getMyApplication().getSettings().isLightContent();
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		app = requireMyApplication();
+		nightMode = !app.getSettings().isLightContent();
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
-		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Context themedContext = UiUtilities.getThemedContext(requireContext(), nightMode);
+		LayoutInflater themedInflater = LayoutInflater.from(themedContext);
+		View view = themedInflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			searchText = savedInstanceState.getString(SEARCH_TEXT_DLG_KEY);
@@ -121,25 +129,18 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		Drawable icBack = app.getUIUtilities().getIcon(
-				AndroidUtils.getNavigationIconResId(app), iconColorResId);
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
-		FragmentActivity activity = requireActivity();
-		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) activity, false);
+		banner = new BannerAndDownloadFreeVersion(view, getDownloadActivity(), false);
 
 		LinearLayout ll = (LinearLayout) view;
 		ExpandableListView expandablelistView = (ExpandableListView) view.findViewById(android.R.id.list);
 		ll.removeView(expandablelistView);
 
-		listView = new ListView(activity);
+		listView = new ListView(themedContext);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
 		layoutParams.weight = 1;
 		layoutParams.setMargins(0, 0, 0, 0);
@@ -151,16 +152,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		listView.setOnItemClickListener(this);
 		listView.setAdapter(listAdapter);
 
-		TypedValue typedValue = new TypedValue();
-		activity.getTheme().resolveAttribute(R.attr.toolbar_theme, typedValue, true);
-
 		searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
-		searchEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(activity, nightMode));
-		searchEditText.setHintTextColor(ContextCompat.getColor(activity, nightMode ? R.color.searchbar_tab_inactive_dark : R.color.inactive_item_orange));
+		searchEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
+		int hintColorId = nightMode ? R.color.searchbar_tab_inactive_dark : R.color.inactive_item_orange;
+		searchEditText.setHintTextColor(ContextCompat.getColor(app, hintColorId));
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
@@ -182,14 +181,11 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			}
 		});
 
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (searchEditText.getText().length() == 0) {
-					dismiss();
-				} else {
-					searchEditText.setText("");
-				}
+		clearButton.setOnClickListener(v -> {
+			if (searchEditText.getText().length() == 0) {
+				dismiss();
+			} else {
+				searchEditText.setText("");
 			}
 		});
 
@@ -202,14 +198,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setShowsDialog(true);
-		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
 		listView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	@Override
 	public void onUpdatedIndexesList() {
-		if(banner != null) {
+		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
 		updateSearchText(searchText);
@@ -217,7 +211,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 	@Override
 	public void downloadHasFinished() {
-		if(banner != null) {
+		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
@@ -225,7 +219,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 	@Override
 	public void downloadInProgress() {
-		if(banner != null) {
+		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
@@ -254,12 +248,13 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		filter.filter(searchText);
 	}
 
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
 	private DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
+	}
+
+	@NonNull
+	private OsmandApplication requireMyApplication() {
+		return (OsmandApplication) requireActivity().getApplication();
 	}
 
 	public static SearchDialogFragment createInstance(String searchText, boolean showGroup,
@@ -542,12 +537,16 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				}
 			}
 
-			public List<CityItem> searchCities(final OsmandApplication app, final String text) throws IOException {
-				IndexItem worldBaseMapItem = app.getDownloadThread().getIndexes().getWorldBaseMapItem();
-				if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
+			@NonNull
+			public List<CityItem> searchCities(@NonNull String text) throws IOException {
+				File obf = getWorldBaseMapObf(app);
+				if (obf == null) {
+					obf = getWorldBaseMapMiniObf(app);
+				}
+				if (obf == null) {
 					return new ArrayList<>();
 				}
-				File obf = worldBaseMapItem.getTargetFile(app);
+
 				final BinaryMapIndexReader baseMapReader = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
 				final SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(
 						text, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
@@ -599,33 +598,48 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				return items;
 			}
 
+			@Nullable
+			private File getWorldBaseMapObf(@NonNull OsmandApplication app) {
+				DownloadResources downloadResources = app.getDownloadThread().getIndexes();
+				IndexItem worldBaseMapItem = downloadResources.getWorldBaseMapItem();
+				if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+					File obf = worldBaseMapItem.getTargetFile(app);
+					if (obf.exists()) {
+						return obf;
+					}
+				}
+				return null;
+			}
+
+			@Nullable
+			private File getWorldBaseMapMiniObf(@NonNull OsmandApplication app) {
+				File mapsPath = app.getAppPath(IndexConstants.MAPS_PATH);
+				String baseMapMiniFileName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
+				File baseMapMiniObf = new File(mapsPath, baseMapMiniFileName);
+				return baseMapMiniObf.exists() ? baseMapMiniObf : null;
+			}
+
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 
-				getMyApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						showProgressBar();
-					}
-				});
+				app.runInUIThread(SearchDialogFragment.this::showProgressBar);
 
-				DownloadResources root = ctx.getDownloadThread().getIndexes();
-
+				String searchRequest = constraint == null ? "" : constraint.toString().trim();
 				FilterResults results = new FilterResults();
-				if (constraint == null || constraint.length() < 2) {
+				if (searchRequest.length() < 2) {
 					results.values = new ArrayList<>();
 					results.count = 0;
 				} else {
 					List<Object> filter = new ArrayList<>();
-					if (constraint.length() > 2) {
+					if (searchRequest.length() > 2) {
 						try {
-							filter.addAll(searchCities(getMyApplication(), constraint.toString()));
+							filter.addAll(searchCities(searchRequest));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
 
-					String[] ors = constraint.toString().split(",");
+					String[] ors = searchRequest.split(",");
 					List<List<String>> conds = new ArrayList<>();
 					for (String or : ors) {
 						final ArrayList<String> cond = new ArrayList<>();
@@ -640,7 +654,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						}
 					}
 
-					processGroup(root, filter, conds);
+					DownloadResources indexes = ctx.getDownloadThread().getIndexes();
+					processGroup(indexes, filter, conds);
 
 					final Collator collator = OsmAndCollator.primaryCollator();
 					Collections.sort(filter, new Comparator<Object>() {
@@ -651,7 +666,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 							if (obj1 instanceof DownloadResourceGroup) {
 								str1 = ((DownloadResourceGroup) obj1).getName(ctx);
 							} else if (obj1 instanceof IndexItem) {
-								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions, false);
+								str1 = ((IndexItem) obj1).getVisibleName(app, osmandRegions, false);
 							} else {
 								Amenity a = ((CityItem) obj1).getAmenity();
 								if ("city".equals(a.getSubType())) {
@@ -663,7 +678,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 							if (obj2 instanceof DownloadResourceGroup) {
 								str2 = ((DownloadResourceGroup) obj2).getName(ctx);
 							} else if (obj2 instanceof IndexItem) {
-								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions, false);
+								str2 = ((IndexItem) obj2).getVisibleName(app, osmandRegions, false);
 							} else {
 								Amenity a = ((CityItem) obj2).getAmenity();
 								if ("city".equals(a.getSubType())) {
@@ -680,12 +695,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					results.count = filter.size();
 				}
 
-				getMyApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						hideProgressBar();
-					}
-				});
+				app.runInUIThread(SearchDialogFragment.this::hideProgressBar);
 
 				return results;
 			}

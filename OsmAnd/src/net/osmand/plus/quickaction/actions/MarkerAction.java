@@ -32,10 +32,7 @@ public class MarkerAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
-		LatLon latLon = mapActivity.getMapView()
-				.getCurrentRotatedTileBox()
-				.getCenterLatLon();
+		LatLon latLon = getMapLocation(mapActivity);
 
 		PointDescription pointDescription = new PointDescription(
 				latLon.getLatitude(),

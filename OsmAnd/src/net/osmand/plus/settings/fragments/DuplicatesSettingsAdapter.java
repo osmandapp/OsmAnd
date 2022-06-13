@@ -30,7 +30,7 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;

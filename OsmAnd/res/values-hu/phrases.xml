@@ -4330,4 +4330,9 @@
     <string name="poi_food_no">Étel nincs</string>
     <string name="poi_flow_rate">Áramlási sebesség</string>
     <string name="poi_golf_pin">Golfzászló</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_payment_mir_no">Mir kártya nem elfogadott</string>
+    <string name="poi_club_youth_movement">Ifjúsági mozgalom</string>
+    <string name="poi_club_religion">Vallási klub</string>
+    <string name="poi_club_amateur_radio">Amatőr rádiós klub</string>
 </resources>

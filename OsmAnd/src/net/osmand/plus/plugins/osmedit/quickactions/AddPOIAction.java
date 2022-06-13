@@ -134,9 +134,7 @@ public class AddPOIAction extends QuickAction {
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (plugin == null) return;
 
-		LatLon latLon = mapActivity.getMapView()
-				.getCurrentRotatedTileBox()
-				.getCenterLatLon();
+		LatLon latLon = getMapLocation(mapActivity);
 
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());

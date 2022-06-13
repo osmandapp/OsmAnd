@@ -40,8 +40,13 @@ public class RegisterDeviceCommand extends BackupCommand {
 
 	@Override
 	protected Object doInBackground(Object... objects) {
-		Map<String, String> params = new HashMap<>();
 		BackupHelper helper = getHelper();
+		// Update order id on login
+		if (Algorithms.isEmpty(token)) {
+			helper.updateOrderId(null);
+		}
+
+		Map<String, String> params = new HashMap<>();
 		params.put("email", helper.getEmail());
 		String orderId = helper.getOrderId();
 		if (orderId != null) {

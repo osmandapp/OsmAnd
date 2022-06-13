@@ -30,7 +30,7 @@ public class NavDirectionsFromAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		LatLon latLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		LatLon latLon = getMapLocation(mapActivity);
 		mapActivity.getMapActions().enterDirectionsFromPoint(latLon.getLatitude(), latLon.getLongitude());
 	}
 

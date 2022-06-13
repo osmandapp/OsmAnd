@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
+    <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
@@ -714,7 +716,7 @@
     <string name="rename_track">Rename track</string>
     <string name="edit_track">Edit track</string>
     <string name="upload_to_openstreetmap">Upload to OpenStreetMap</string>
-    <string name="analyze_by_intervals">Analyze split intervals</string>
+    <string name="analyze_by_intervals">Analyze by intervals</string>
     <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>

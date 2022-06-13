@@ -3,14 +3,24 @@ package net.osmand.plus.settings.fragments;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.SelectNavProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.profiles.data.ProfileDataObject;
-import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
+import net.osmand.plus.profiles.data.RoutingProfilesHolder;
+import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
@@ -18,15 +28,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.Algorithms;
 
-import java.util.Map;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreferenceCompat;
-
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
@@ -39,14 +42,15 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 	private static final String CUSTOMIZE_ROUTE_LINE = "customize_route_line";
 
-	private Map<String, ProfileDataObject> routingProfileDataObjects;
-	private Preference navigationType;
+	private RoutingProfilesHolder routingProfiles;
 	private RoutingDataUtils routingDataUtils;
+	private Preference navigationType;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		updateRoutingProfilesDataObjects();
+		routingDataUtils = new RoutingDataUtils(app);
+		updateRoutingProfiles();
 		setupOnBackPressedCallback();
 	}
 
@@ -94,12 +98,14 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	}
 
 	private void setupNavigationTypePref() {
-		String routingProfileKey = getSelectedAppMode().getRoutingProfile();
+		ApplicationMode appMode = getSelectedAppMode();
+		String routingProfileKey = appMode.getRoutingProfile();
+		String derivedProfile = appMode.getDerivedProfile();
 		if (!Algorithms.isEmpty(routingProfileKey)) {
-			ProfileDataObject routingProfileDataObject = routingProfileDataObjects.get(routingProfileKey);
-			if (routingProfileDataObject != null) {
-				navigationType.setSummary(routingProfileDataObject.getName());
-				navigationType.setIcon(getActiveIcon(routingProfileDataObject.getIconRes()));
+			ProfileDataObject profile = routingProfiles.get(routingProfileKey, derivedProfile);
+			if (profile != null) {
+				navigationType.setSummary(profile.getName());
+				navigationType.setIcon(getActiveIcon(profile.getIconRes()));
 			}
 		}
 	}
@@ -153,28 +159,18 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		return false;
 	}
 
-	private void updateRoutingProfilesDataObjects() {
-		routingProfileDataObjects = getRoutingDataUtils().getRoutingProfiles();
+	private void updateRoutingProfiles() {
+		routingProfiles = routingDataUtils.getRoutingProfiles();
 	}
 
-	private RoutingDataUtils getRoutingDataUtils() {
-		if (routingDataUtils == null) {
-			routingDataUtils = new RoutingDataUtils(app);
-		}
-		return routingDataUtils;
-	}
-
-	void updateRoutingProfile(String profileKey) {
-		ProfileDataObject selectedRoutingProfileDataObject = routingProfileDataObjects.get(profileKey);
-		if (profileKey == null || selectedRoutingProfileDataObject == null) {
+	void updateRoutingProfile(@NonNull String profileKey, @Nullable String derivedProfile) {
+		RoutingDataObject selected = routingProfiles.get(profileKey, derivedProfile);
+		if (selected == null) {
 			return;
 		}
-		for (Map.Entry<String, ProfileDataObject> rp : routingProfileDataObjects.entrySet()) {
-			boolean selected = profileKey.equals(rp.getKey());
-			rp.getValue().setSelected(selected);
-		}
-		navigationType.setSummary(selectedRoutingProfileDataObject.getName());
-		navigationType.setIcon(getActiveIcon(selectedRoutingProfileDataObject.getIconRes()));
+		routingProfiles.setSelected(selected);
+		navigationType.setSummary(selected.getName());
+		navigationType.setIcon(getActiveIcon(selected.getIconRes()));
 
 		ApplicationMode appMode = getSelectedAppMode();
 		RouteService routeService;
@@ -189,8 +185,12 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		} else {
 			routeService = RouteService.OSMAND;
 		}
+		if (Algorithms.isEmpty(derivedProfile)) {
+			derivedProfile = "default";
+		}
 		appMode.setRouteService(routeService);
 		appMode.setRoutingProfile(profileKey);
+		appMode.setDerivedProfile(derivedProfile);
 	}
 
 	private void setupVehicleParametersPref() {
@@ -209,9 +209,12 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public void onProfileSelected(Bundle args) {
 		if (args.getBoolean(PROFILES_LIST_UPDATED_ARG)) {
-			updateRoutingProfilesDataObjects();
+			updateRoutingProfiles();
 		}
-		updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
+		String profileKey = args.getString(PROFILE_KEY_ARG);
+		if (profileKey != null) {
+			updateRoutingProfile(profileKey, args.getString(DERIVED_PROFILE_ARG));
+		}
 		showHideCustomizeRouteLinePref();
 	}
 }

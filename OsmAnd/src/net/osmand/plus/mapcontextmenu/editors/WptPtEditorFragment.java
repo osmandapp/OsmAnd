@@ -436,7 +436,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		if (editor.getGpxFile().showCurrentTrack) {
 			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 		} else {
-			selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(editor.getGpxFile().path);
+			selectedGpxFile = gpxSelectionHelper.getVisibleFileByPath(editor.getGpxFile().path);
 		}
 		if (selectedGpxFile != null) {
 			return !selectedGpxFile.isGroupHidden(categoryName);

@@ -200,8 +200,8 @@
     <string name="osmand_parking_position_name">Parkeringsplads</string>
     <string name="osmand_parking_plugin_description">Registrer hvor din bil er parkeret, inklusiv hvor meget parkeringstid der er tilbage.
 \nBåde placering og tid er synlige på betjeningspanel samt i et modul på kortet. En alarm kan tilføjes til Android-kalenderen, som en påmindelse.</string>
-    <string name="osmand_parking_plugin_name">Parkeringsplads</string>
-    <string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
+    <string name="osmand_parking_plugin_name">Parkeringsplacering</string>
+    <string name="context_menu_item_add_parking_point">Markér som parkeringssted</string>
     <string name="context_menu_item_delete_parking_point">Slet parkeringsmarkør</string>
     <string name="gpxup_public">Offentligt</string>
     <string name="gpxup_identifiable">Identificerbar</string>
@@ -2093,7 +2093,7 @@
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
     <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
     <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
-    <string name="quick_action_add_parking">Tilføj en parkeringsplads</string>
+    <string name="quick_action_add_parking">Tilføj parkeringssted</string>
     <string name="quick_action_new_action">Tilføj genvej</string>
     <string name="quick_action_edit_action">Rediger genvej</string>
     <string name="quick_action_add_favorite">Tilføj Favorit</string>
@@ -2110,7 +2110,7 @@
     <string name="quick_action_add_osm_bug_descr">En knap til at tilføje en OSM-note midt på skærmen.</string>
     <string name="quick_action_add_poi_descr">En knap yik at tilføje et interessepunkt midt på skærmen.</string>
     <string name="quick_action_navigation_voice_descr">En til/fra-knap for at deaktiverer eller aktivere stemmevejledning under navigation.</string>
-    <string name="quick_action_add_parking_descr">En knap til at tilføje en parkeringsplads midt på skærmen.</string>
+    <string name="quick_action_add_parking_descr">En knap til at tilføje en parkeringsplacering midt på skærmen.</string>
     <string name="favorite_autofill_toast_text">" gemt i "</string>
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Genvej omdøbt til %1$s for at undgå dubletter.</string>
@@ -3533,7 +3533,7 @@
     <string name="osmand_purchases_item">OsmAnd køb</string>
     <string name="quick_action_transport_descr">En knap til at vise eller skjule offentlig transport på kortet.</string>
     <string name="create_edit_poi">Opret eller rediger IP</string>
-    <string name="parking_positions">Parkeringsplads</string>
+    <string name="parking_positions">Parkeringsplaceringer</string>
     <string name="add_edit_favorite">Tilføj eller rediger favorit</string>
     <string name="reset_deafult_order">Gendan standardrækkefølge for elementer</string>
     <string name="back_to_editing">Tilbage til redigering</string>
@@ -3902,7 +3902,7 @@
     <string name="select_folder">Valg mappe</string>
     <string name="select_folder_descr">Vælg mappe eller tilføj en ny</string>
     <string name="shared_string_empty">Tom</string>
-    <string name="analyze_by_intervals">Analyser splitintervaller</string>
+    <string name="analyze_by_intervals">Analyser efter intervaller</string>
     <string name="upload_to_openstreetmap">Overfør til OpenStreetMap</string>
     <string name="edit_track">Rediger spor</string>
     <string name="rename_track">Omdøb spor</string>
@@ -4120,14 +4120,14 @@
     <string name="backup_promocode">Kampagnekode</string>
     <string name="send_crash_log">Send nedbrudslog</string>
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
-    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt bakkeskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
+    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt terrænskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
     <string name="purchases_feature_desc_wikipedia">Udforsk Wikipedia offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
     <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Få ubegrænset download af offline kort for alle kontinenter og regioner.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Få adgang til regelmæssige månedlige opdateringer af offlinekort.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Få adgang til hyppigere kortopdateringer. Opdateringer hver time, dag eller uge. Opdateringer downloades trinvis og kun for det ændrede område.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Få OsmAnd Cloud til at gemme alle OsmAnd-data online. Ingen tabte data efter geninstallation. Sikkerhedskopier og gendan nemt alle informationer.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Få OsmAnd Cloud for at gemme alle OsmAnd-data online. Ingen mistede data efter geninstallation. Sikkerhedskopiér og gendan nemt alle informationer.</string>
     <string name="nautical_depth">Havdybde</string>
     <string name="shared_string_progress">Fremskridt</string>
     <string name="promo_subscription">Kampagne-abonnement</string>
@@ -4622,7 +4622,7 @@
     <string name="coordinates_widget_secondary_desc">Koordinaters format kan være ændret i %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
     <string name="elevation_profile_widget_desc">Modul viser højden og hældningsprofilen for den aktuelle rute.</string>
-    <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringspladsen.</string>
+    <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringsstedet.</string>
     <string name="altitude_widget_desc">Viser højden over havniveau for den aktuelle geografiske placering.</string>
     <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
     <string name="map_markers_bar_widget_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, om der skal vises 1 eller 2 topmarkører i modulet.</string>
@@ -4679,7 +4679,7 @@
     <string name="map_widget_trip_recording_downhill">Ned ad bakke</string>
     <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
     <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
-    <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
+    <string name="routing_attr_hazmat_category_name">Transport af farligt gods</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
@@ -4698,4 +4698,11 @@
     <string name="average_speed_skip_stops">Tag højde for stop</string>
     <string name="average_speed_time_interval_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles.</string>
     <string name="map_widget_average_speed">Gennemsnitshastighed</string>
+    <string name="transport_hazmat_title">Transport af farlige materialer</string>
+    <string name="import_as_one_track">Importer som ét spor</string>
+    <string name="transport_hazmat_no_desc">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="transport_hazmat_yes_desc">Du skal vælge rette kategori.</string>
+    <string name="use_latin_name_if_missing">Brug latinsk navn, hvis det mangler</string>
+    <string name="routing_attr_goods_restrictions_description">Tag hensyn til adgangstilladelser for lette varebiler (varer)</string>
+    <string name="routing_attr_goods_restrictions_name">Begrænsninger for varebiler</string>
 </resources>

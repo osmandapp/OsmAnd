@@ -3919,7 +3919,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Elemzés felosztási intervallumonként</string>
+    <string name="analyze_by_intervals">Elemzés intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>
@@ -4682,6 +4682,13 @@
     <string name="average_speed_time_interval_desc">Adja meg azt az időintervallumot, amelyen belül az átlagsebesség mérésre kerüljön.</string>
     <string name="average_speed_widget_desc">Megjeleníti az aktuális utazás átlagsebességét.</string>
     <string name="map_widget_average_speed">Átlagsebesség</string>
-    <string name="average_speed_skip_stops">Vegye figyelembe a megállásokat</string>
+    <string name="average_speed_skip_stops">Megállások figyelembevétele</string>
     <string name="average_speed_skip_stops_desc">A %1$s-nál kisebb sebességet nem veszi figyelembe a rendszer és nem befolyásolja az átlagsebességet sem.</string>
+    <string name="transport_hazmat_yes_desc">Ki kell választania a megfelelő kategóriát.</string>
+    <string name="transport_hazmat_no_desc">Egyes utakon és alagutakban tilos a veszélyes anyagok szállítása.</string>
+    <string name="transport_hazmat_title">Veszélyes anyagok szállítása</string>
+    <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
+    <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
+    <string name="routing_attr_goods_restrictions_description">Vegye figyelembe az (áruszállító) furgonokra vonatkozó behajtási engedélyeket</string>
+    <string name="routing_attr_goods_restrictions_name">Furgon korlátozások</string>
 </resources>
