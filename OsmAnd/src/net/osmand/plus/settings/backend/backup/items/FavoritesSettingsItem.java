@@ -138,7 +138,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					}
 				}
 			}
-			List<FavouritePoint> favourites = getPointsFromGroups(appliedItems);
+			List<FavouritePoint> favourites = FavouritesHelper.getPointsFromGroups(appliedItems);
 			for (FavouritePoint favourite : favourites) {
 				favoritesHelper.addFavourite(favourite, false, false);
 			}
@@ -213,19 +213,10 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		};
 	}
 
-	private List<FavouritePoint> getPointsFromGroups(List<FavoriteGroup> groups) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>();
-		for (FavoriteGroup group : groups) {
-			favouritePoints.addAll(group.getPoints());
-		}
-		return favouritePoints;
-	}
-
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		List<FavouritePoint> favourites = getPointsFromGroups(items);
-		GPXFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(favourites);
+		GPXFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
 		return getGpxWriter(gpxFile);
 	}
 }

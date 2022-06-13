@@ -101,18 +101,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		outState.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
 	}
 
-	@Override
-	public void setSelectedGroup(String selectedGroup) {
-		super.setSelectedGroup(selectedGroup);
-
-		FavoriteGroup group = getFavoriteGroup(selectedGroup);
-		if (group != null) {
-			setColor(group.getColor());
-			setIconName(group.getIconName());
-			setBackgroundType(group.getBackgroundType());
-		}
-	}
-
 	private void replacePressed() {
 		Bundle args = new Bundle();
 		args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
@@ -378,15 +366,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (editor != null) {
 			FavoriteGroup lastUsedGroup = favouritesHelper.getGroup(getLastUsedGroup());
 			if (lastUsedGroup != null) {
-				pointsGroups.put(lastUsedGroup.getDisplayName(app), lastUsedGroup.toPointsGroup());
+				pointsGroups.put(lastUsedGroup.getDisplayName(app), lastUsedGroup.toPointsGroup(app));
 			}
 			Set<PointsGroup> hiddenCategories = new LinkedHashSet<>();
 			for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
 				if (!group.equals(lastUsedGroup)) {
 					if (group.isVisible()) {
-						pointsGroups.put(group.getDisplayName(app), group.toPointsGroup());
+						pointsGroups.put(group.getDisplayName(app), group.toPointsGroup(app));
 					} else {
-						hiddenCategories.add(group.toPointsGroup());
+						hiddenCategories.add(group.toPointsGroup(app));
 					}
 				}
 			}

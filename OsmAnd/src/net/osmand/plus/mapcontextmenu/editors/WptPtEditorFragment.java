@@ -81,18 +81,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void setSelectedGroup(String selectedGroup) {
-		super.setSelectedGroup(selectedGroup);
-
-		PointsGroup group = pointsGroups.get(selectedGroup);
-		if (group != null) {
-			setColor(group.color);
-			setIconName(group.iconName);
-			setBackgroundType(group.backgroundType);
-		}
-	}
-
-	@Override
 	public void dismiss(boolean includingMenu) {
 		super.dismiss(includingMenu);
 		WptPtEditor editor = getWptPtEditor();
@@ -263,9 +251,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	                      String backgroundType) {
 		WptPt wpt = getWpt();
 		if (wpt != null) {
-			this.wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
+			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(),
 					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType);
-			syncGpx(gpx);
+			gpx.addPoint(wpt);
 		}
 	}
 
@@ -420,7 +408,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		if (pointsGroups != null) {
 			PointsGroup group = pointsGroups.get(category);
 			if (group != null) {
-				return group.pointsSize;
+				return group.points.size();
 			}
 		}
 		return 0;

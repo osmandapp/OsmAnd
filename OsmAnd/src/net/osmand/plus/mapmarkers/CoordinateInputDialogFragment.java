@@ -166,7 +166,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				savingTrackHelper.insertPointData(lat, lon, System.currentTimeMillis(), description, name, category, color);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				gpx.addWptPt(lat, lon, System.currentTimeMillis(), description, name, category, color);
+				WptPt point = WptPt.createAdjustedPoint(lat, lon, System.currentTimeMillis(),
+						description, name, category, color, null, null);
+				gpx.addPoint(point);
 			}
 		}
 	}
