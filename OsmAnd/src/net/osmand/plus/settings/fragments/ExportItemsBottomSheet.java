@@ -53,7 +53,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
