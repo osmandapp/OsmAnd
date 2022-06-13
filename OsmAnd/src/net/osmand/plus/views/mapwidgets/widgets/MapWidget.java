@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
@@ -65,6 +66,14 @@ public abstract class MapWidget {
 
 	@Nullable
 	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
+		return null;
+	}
+
+	/**
+	 * @return preference that needs to be reset after deleting widget
+	 */
+	@Nullable
+	public OsmandPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
 		return null;
 	}
 

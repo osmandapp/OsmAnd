@@ -145,9 +145,14 @@ public class GeneralRouter implements VehicleRouter {
 		for (int i = 0; i < objectAttributes.length; i++) {
 			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
 		}
-		allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false);
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
 		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false);
+
+		if (params.containsKey("profile_truck")) {
+			allowPrivate = params.containsKey(ALLOW_PRIVATE_FOR_TRUCK) && parseSilentBoolean(params.get(ALLOW_PRIVATE_FOR_TRUCK), false);
+		} else {
+			allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false);
+		}
 		if (params.containsKey(DEFAULT_SPEED)) {
 			defaultSpeed = parseSilentFloat(params.get(DEFAULT_SPEED), defaultSpeed);
 		}
