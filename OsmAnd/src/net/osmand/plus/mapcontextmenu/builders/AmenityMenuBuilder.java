@@ -4,6 +4,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.MAPILLARY;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.getOsmUrlForId;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.isOsmUrlAvailable;
 
 import android.content.Context;
 import android.content.Intent;
@@ -659,7 +660,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildNearestRows((ViewGroup) view);
 
 		Long id = amenity.getId();
-		if (osmEditingEnabled && id != null && id > 0 && (id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE)) {
+		if (osmEditingEnabled && isOsmUrlAvailable(id)) {
 			String link = getOsmUrlForId(id, 1);
 			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
 					0, false, null, true, 0, true, null, false);
