@@ -93,6 +93,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
 		if (!fragmentManager.isStateSaved()) {
 			LiveUpdatesSettingsBottomSheet fragment = new LiveUpdatesSettingsBottomSheet();
+			fragment.usedOnMap = false;
 			fragment.setTargetFragment(target, 0);
 			fragment.fileName = fileName;
 			fragment.show(fragmentManager, TAG);
