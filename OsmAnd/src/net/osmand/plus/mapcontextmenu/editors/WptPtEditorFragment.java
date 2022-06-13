@@ -81,18 +81,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void setSelectedGroup(String selectedGroup) {
-		super.setSelectedGroup(selectedGroup);
-
-		PointsGroup group = pointsGroups.get(selectedGroup);
-		if (group != null) {
-			setColor(group.color);
-			setIconName(group.iconName);
-			setBackgroundType(group.backgroundType);
-		}
-	}
-
-	@Override
 	public void dismiss(boolean includingMenu) {
 		super.dismiss(includingMenu);
 		WptPtEditor editor = getWptPtEditor();

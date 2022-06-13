@@ -101,18 +101,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		outState.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
 	}
 
-	@Override
-	public void setSelectedGroup(String selectedGroup) {
-		super.setSelectedGroup(selectedGroup);
-
-		FavoriteGroup group = getFavoriteGroup(selectedGroup);
-		if (group != null) {
-			setColor(group.getColor());
-			setIconName(group.getIconName());
-			setBackgroundType(group.getBackgroundType());
-		}
-	}
-
 	private void replacePressed() {
 		Bundle args = new Bundle();
 		args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
