@@ -2388,7 +2388,7 @@
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
     <string name="nothing_found_descr">Ændr søgning eller øg radius.</string>
-    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Tillad brug af private veje til turen\?</string>
+    <string name="private_access_routing_req">Din destination ligger i et område med privat adgang. Tillad at der benyttes private veje til denne tur\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-modul</string>
     <string name="mapillary_widget_descr">Tillader hurtige bidrag til Mapillary.</string>
