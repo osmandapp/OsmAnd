@@ -70,6 +70,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,7 +148,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private final List<IMapLocationListener> locationListeners = new ArrayList<>();
+	private final List<IMapLocationListener> locationListeners = Collections.synchronizedList(new ArrayList<>());
 
 	private OnLongClickListener onLongClickListener;
 
