@@ -106,7 +106,7 @@ public class FileUtils {
 		}
 		if (src.renameTo(dest)) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
+			SelectedGpxFile selected = helper.getVisibleFileByPath(src.getAbsolutePath());
 			app.getGpxDbHelper().rename(src, dest);
 			app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 			if (selected != null && selected.getGpxFile() != null) {
@@ -122,7 +122,7 @@ public class FileUtils {
 	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
 		if (file.exists()) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
+			SelectedGpxFile selected = helper.getVisibleFileByPath(file.getAbsolutePath());
 			file.delete();
 			app.getGpxDbHelper().remove(file);
 			if (selected != null && selected.getGpxFile() != null) {

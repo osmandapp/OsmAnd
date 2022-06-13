@@ -136,7 +136,7 @@ public class OverviewCard extends MapBaseCard {
 	private int getActiveShowHideIcon() {
 		int icon;
 		if (!FileUtils.isTempFile(app, getGPXFile().path)) {
-			icon = isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_view : R.drawable.ic_action_hide;
+			icon = isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_hide : R.drawable.ic_action_view;
 		} else {
 			icon = R.drawable.ic_action_gsave_dark;
 		}

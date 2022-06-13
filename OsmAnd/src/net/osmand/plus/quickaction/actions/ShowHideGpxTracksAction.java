@@ -35,7 +35,7 @@ public class ShowHideGpxTracksAction extends QuickAction {
 	public void execute(@NonNull final MapActivity mapActivity) {
 		final GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication()
 			.getSelectedGpxHelper();
-		if (selectedGpxHelper.isShowingAnyGpxFiles()) {
+		if (selectedGpxHelper.isAnyGpxFileSelected()) {
 			selectedGpxHelper.clearAllGpxFilesToShow(true);
 		} else {
 			selectedGpxHelper.restoreSelectedGpxFiles();
@@ -60,6 +60,6 @@ public class ShowHideGpxTracksAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		return application.getSelectedGpxHelper().isShowingAnyGpxFiles();
+		return application.getSelectedGpxHelper().isAnyGpxFileSelected();
 	}
 }
