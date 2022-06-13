@@ -70,9 +70,9 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 		if (mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
 			PointsGroup newGroup = new PointsGroup(groupName, pointsGroup.iconName,
-					pointsGroup.backgroundType, pointsGroup.color, pointsGroup.pointsSize);
+					pointsGroup.backgroundType, pointsGroup.color);
 
-			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup,
+			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup.name,
 					newGroup, listener, false);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
@@ -80,8 +80,8 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 
 	private UpdateGpxListener getUpdateGpxListener(@NonNull MapActivity mapActivity) {
 		WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
-		return errorMessage -> {
-			if (errorMessage == null) {
+		return exception -> {
+			if (exception == null) {
 				MapActivity activity = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					TrackMenuFragment fragment = activity.getTrackMenuFragment();
@@ -90,7 +90,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 					}
 				}
 			} else {
-				LOG.error(errorMessage);
+				LOG.error(exception);
 			}
 		};
 	}

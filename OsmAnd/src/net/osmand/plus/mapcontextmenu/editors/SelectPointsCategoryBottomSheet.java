@@ -141,7 +141,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		TextView description = itemView.findViewById(R.id.description);
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
 		text.setText(name);
-		description.setText(String.valueOf(pointsGroup.pointsSize));
+		description.setText(String.valueOf(pointsGroup.points.size()));
 
 		itemView.setOnClickListener(v -> {
 			PointEditor pointEditor = getPointEditor();

@@ -433,6 +433,47 @@ public class GPXUtilities {
 		public boolean hasLocation() {
 			return (lat != 0 && lon != 0);
 		}
+
+		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
+		                                        String name, String category, int color,
+		                                        String iconName, String backgroundType) {
+			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
+			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
+			final WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			point.name = name;
+			point.category = category;
+			point.desc = description;
+
+			if (color != 0) {
+				point.setColor(color);
+			}
+			if (iconName != null) {
+				point.setIconName(iconName);
+			}
+			if (backgroundType != null) {
+				point.setBackgroundType(backgroundType);
+			}
+			return point;
+		}
+
+		private void updatePoint(double lat, double lon, String description, String name,
+		                         String category, int color, String iconName, String backgroundType) {
+			this.lat = Double.parseDouble(LAT_LON_FORMAT.format(lat));
+			this.lon = Double.parseDouble(LAT_LON_FORMAT.format(lon));
+			this.time = System.currentTimeMillis();
+			this.desc = description;
+			this.name = name;
+			this.category = category;
+			if (color != 0) {
+				setColor(color);
+			}
+			if (iconName != null) {
+				setIconName(iconName);
+			}
+			if (backgroundType != null) {
+				setBackgroundType(backgroundType);
+			}
+		}
 	}
 
 	public static class TrkSegment extends GPXExtensions {
@@ -643,26 +684,33 @@ public class GPXUtilities {
 
 	public static class PointsGroup {
 
-		public String name;
+		public final String name;
 		public String iconName;
 		public String backgroundType;
+		public final List<WptPt> points = new ArrayList<>();
 		public int color;
-		public int pointsSize;
 
-		public PointsGroup() {
+		public PointsGroup(String name) {
+			this.name = name != null ? name : "";
 		}
 
-		public PointsGroup(String name, String iconName, String backgroundType, int color, int pointsSize) {
-			this.name = name;
+		public PointsGroup(String name, String iconName, String backgroundType, int color) {
+			this(name);
 			this.color = color;
 			this.iconName = iconName;
-			this.pointsSize = pointsSize;
 			this.backgroundType = backgroundType;
+		}
+
+		public PointsGroup(WptPt point) {
+			this(point.category);
+			this.color = point.getColor();
+			this.iconName = point.getIconName();
+			this.backgroundType = point.getBackgroundType();
 		}
 
 		@Override
 		public int hashCode() {
-			return Algorithms.hash(name, iconName, backgroundType, color, pointsSize);
+			return Algorithms.hash(name, iconName, backgroundType, color, points);
 		}
 
 		@Override
@@ -676,10 +724,35 @@ public class GPXUtilities {
 			PointsGroup that = (PointsGroup) o;
 
 			return color == that.color
-					&& pointsSize == that.pointsSize
+					&& Algorithms.objectEquals(points, that.points)
 					&& Algorithms.stringsEqual(name, that.name)
 					&& Algorithms.stringsEqual(iconName, that.iconName)
 					&& Algorithms.stringsEqual(backgroundType, that.backgroundType);
+		}
+
+		public StringBundle toStringBundle() {
+			StringBundle bundle = new StringBundle();
+			bundle.putString("name", name != null ? name : "");
+
+			if (color != 0) {
+				bundle.putString("color", Algorithms.colorToString(color));
+			}
+			if (!Algorithms.isEmpty(iconName)) {
+				bundle.putString(ICON_NAME_EXTENSION, iconName);
+			}
+			if (!Algorithms.isEmpty(backgroundType)) {
+				bundle.putString(BACKGROUND_TYPE_EXTENSION, backgroundType);
+			}
+			return bundle;
+		}
+
+		private static PointsGroup parsePointsGroupAttributes(XmlPullParser parser) {
+			String name = parser.getAttributeValue("", "name");
+			PointsGroup category = new PointsGroup(name != null ? name : "");
+			category.color = parseColor(parser.getAttributeValue("", "color"), 0);
+			category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION);
+			category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION);
+			return category;
 		}
 	}
 
@@ -1323,8 +1396,10 @@ public class GPXUtilities {
 		public String author;
 		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
-		private final List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
+
+		private final List<WptPt> points = new ArrayList<>();
+		private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 
 		public Exception error = null;
 		public String path = "";
@@ -1388,26 +1463,102 @@ public class GPXUtilities {
 
 		public void clearPoints() {
 			points.clear();
+			pointsGroups.clear();
 			modifiedTime = System.currentTimeMillis();
 			pointsModifiedTime = modifiedTime;
 		}
 
 		public void addPoint(WptPt point) {
 			points.add(point);
+			addPointsToGroups(Collections.singleton(point));
 			modifiedTime = System.currentTimeMillis();
 			pointsModifiedTime = modifiedTime;
 		}
 
 		public void addPoint(int position, WptPt point) {
 			points.add(position, point);
+			addPointsToGroups(Collections.singleton(point));
 			modifiedTime = System.currentTimeMillis();
 			pointsModifiedTime = modifiedTime;
 		}
 
 		public void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
+			addPointsToGroups(collection);
 			modifiedTime = System.currentTimeMillis();
 			pointsModifiedTime = modifiedTime;
+		}
+
+		public void addPointsGroup(PointsGroup group) {
+			points.addAll(group.points);
+			pointsGroups.put(group.name, group);
+			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
+		}
+
+		private void addPointsToGroups(Collection<? extends WptPt> collection) {
+			for (WptPt point : collection) {
+				PointsGroup pointsGroup = getOrCreateGroup(point);
+				pointsGroup.points.add(point);
+			}
+		}
+
+		private PointsGroup getOrCreateGroup(WptPt point) {
+			if (pointsGroups.containsKey(point.category)) {
+				return pointsGroups.get(point.category);
+			}
+			PointsGroup pointsGroup = new PointsGroup(point);
+
+			pointsGroups.put(pointsGroup.name, pointsGroup);
+
+			return pointsGroup;
+		}
+
+		public boolean deleteWptPt(WptPt point) {
+			removePointFromGroup(point);
+			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
+
+			return points.remove(point);
+		}
+
+		private void removePointFromGroup(WptPt point) {
+			removePointFromGroup(point, point.category);
+		}
+
+		private void removePointFromGroup(WptPt point, String groupName) {
+			PointsGroup group = pointsGroups.get(groupName);
+			if (group != null) {
+				group.points.remove(point);
+				if (Algorithms.isEmpty(group.points)) {
+					pointsGroups.remove(groupName);
+				}
+			}
+		}
+
+		public void updateWptPt(WptPt point, double lat, double lon, String description, String name,
+		                        String category, int color, String iconName, String backgroundType) {
+			int index = points.indexOf(point);
+			String prevGroupName = point.category;
+			point.updatePoint(lat, lon, description, name, category, color, iconName, backgroundType);
+
+			if (Algorithms.stringsEqual(category, prevGroupName)
+					|| Algorithms.isEmpty(category) && Algorithms.isEmpty(prevGroupName)) {
+				removePointFromGroup(point, prevGroupName);
+				PointsGroup pointsGroup = getOrCreateGroup(point);
+				pointsGroup.points.add(point);
+			}
+			if (index != -1) {
+				points.set(index, point);
+			}
+			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
+		}
+
+		public void updatePointsGroup(String prevGroupName, PointsGroup pointsGroup) {
+			pointsGroups.remove(prevGroupName);
+			pointsGroups.put(pointsGroup.name, pointsGroup);
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public boolean isCloudmadeRouteFile() {
@@ -1473,7 +1624,7 @@ public class GPXUtilities {
 			GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 			analysis.name = path;
 			analysis.wptPoints = points.size();
-			analysis.wptCategoryNames = getWaypointCategories(true);
+			analysis.wptCategoryNames = getWaypointCategories();
 
 			List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
 			analysis.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
@@ -1570,36 +1721,6 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color) {
-			return addWptPt(lat, lon, time, description, name, category, color, null, null);
-		}
-
-		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category,
-		                      int color, String iconName, String backgroundType) {
-			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
-			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
-			pt.name = name;
-			pt.category = category;
-			pt.desc = description;
-			if (color != 0) {
-				pt.setColor(color);
-			}
-			if (iconName != null) {
-				pt.setIconName(iconName);
-			}
-			if (backgroundType != null) {
-				pt.setBackgroundType(backgroundType);
-			}
-
-			points.add(pt);
-
-			modifiedTime = System.currentTimeMillis();
-			pointsModifiedTime = modifiedTime;
-
-			return pt;
-		}
-
 		public List<TrkSegment> getNonEmptyTrkSegments(boolean routesOnly) {
 			List<TrkSegment> segments = new ArrayList<>();
 			for (Track t : tracks) {
@@ -1669,34 +1790,6 @@ public class GPXUtilities {
 			pointsModifiedTime = modifiedTime;
 		}
 
-		public void updateWptPt(WptPt pt, double lat, double lon, String description, String name, String category,
-		                        int color, String iconName, String backgroundType) {
-			int index = points.indexOf(pt);
-			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
-			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			pt.lat = latAdjusted;
-			pt.lon = lonAdjusted;
-			pt.time = System.currentTimeMillis();
-			pt.desc = description;
-			pt.name = name;
-			pt.category = category;
-			if (color != 0) {
-				pt.setColor(color);
-			}
-			if (iconName != null) {
-				pt.setIconName(iconName);
-			}
-			if (backgroundType != null) {
-				pt.setBackgroundType(backgroundType);
-			}
-
-			if (index != -1) {
-				points.set(index, pt);
-			}
-			modifiedTime = System.currentTimeMillis();
-			pointsModifiedTime = modifiedTime;
-		}
-
 		private void removeGeneralTrackIfExists() {
 			if (generalTrack != null) {
 				tracks.remove(generalTrack);
@@ -1720,12 +1813,6 @@ public class GPXUtilities {
 			}
 			addGeneralTrack();
 			return false;
-		}
-
-		public boolean deleteWptPt(WptPt pt) {
-			modifiedTime = System.currentTimeMillis();
-			pointsModifiedTime = modifiedTime;
-			return points.remove(pt);
 		}
 
 		public boolean deleteRtePt(WptPt pt) {
@@ -1852,35 +1939,12 @@ public class GPXUtilities {
 			return count;
 		}
 
-		public Set<String> getWaypointCategories(boolean withDefaultCategory) {
-			Set<String> categories = new HashSet<>();
-			for (WptPt pt : points) {
-				String category = pt.category == null ? "" : pt.category;
-				if (withDefaultCategory || !Algorithms.isEmpty(category)) {
-					categories.add(category);
-				}
-			}
-			return categories;
+		public Set<String> getWaypointCategories() {
+			return new HashSet<>(pointsGroups.keySet());
 		}
 
 		public Map<String, PointsGroup> getPointsGroups() {
-			Map<String, PointsGroup> categories = new HashMap<>();
-			for (WptPt wptPt : points) {
-				String category = wptPt.category == null ? "" : wptPt.category;
-				int color = wptPt.category == null ? 0 : wptPt.getColor();
-
-				PointsGroup pointsGroup = categories.get(category);
-				if (pointsGroup == null) {
-					pointsGroup = new PointsGroup(category, wptPt.getIconName(), wptPt.getBackgroundType(), color, 1);
-					categories.put(category, pointsGroup);
-				} else {
-					pointsGroup.pointsSize++;
-				}
-				if (pointsGroup.color == 0 && color != 0) {
-					pointsGroup.color = color;
-				}
-			}
-			return categories;
+			return pointsGroups;
 		}
 
 		public QuadRect getRect() {
@@ -2103,6 +2167,7 @@ public class GPXUtilities {
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
+			assignPointsGroupsExtensionWriter(file);
 			writeMetadata(serializer, file, progress);
 			writePoints(serializer, file, progress);
 			writeRoutes(serializer, file, progress);
@@ -2117,6 +2182,25 @@ public class GPXUtilities {
 			return e;
 		}
 		return null;
+	}
+
+	private static void assignPointsGroupsExtensionWriter(final GPXFile gpxFile) {
+		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.getExtensionsWriter() == null) {
+			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
+
+				@Override
+				public void writeExtensions(XmlSerializer serializer) {
+					StringBundle bundle = new StringBundle();
+					List<StringBundle> categoriesBundle = new ArrayList<>();
+					for (PointsGroup group : gpxFile.pointsGroups.values()) {
+						categoriesBundle.add(group.toStringBundle());
+					}
+					bundle.putBundleList("points_groups", "group", categoriesBundle);
+					StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
+					bundleWriter.writeBundle();
+				}
+			});
+		}
 	}
 
 	private static void writeMetadata(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
@@ -2501,8 +2585,10 @@ public class GPXUtilities {
 			boolean routePointExtension = false;
 			List<RouteSegment> routeSegments = new ArrayList<>();
 			List<RouteType> routeTypes = new ArrayList<>();
+			List<PointsGroup> pointsGroups = new ArrayList<>();
 			boolean routeExtension = false;
 			boolean typesExtension = false;
+			boolean pointsGroupsExtension = false;
 			parserState.push(gpxFile);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -2517,6 +2603,9 @@ public class GPXUtilities {
 						} else if (typesExtension && tagName.equals("type")) {
 							RouteType type = parseRouteTypeAttributes(parser);
 							routeTypes.add(type);
+						} else if (pointsGroupsExtension && tagName.equals("group")) {
+							PointsGroup pointsGroup = PointsGroup.parsePointsGroupAttributes(parser);
+							pointsGroups.add(pointsGroup);
 						}
 						switch (tagName) {
 							case "routepointextension":
@@ -2530,6 +2619,9 @@ public class GPXUtilities {
 								break;
 							case "types":
 								typesExtension = true;
+								break;
+							case "points_groups":
+								pointsGroupsExtension = true;
 								break;
 
 							default:
@@ -2823,6 +2915,9 @@ public class GPXUtilities {
 				firstSegment.routeSegments = routeSegments;
 				firstSegment.routeTypes = routeTypes;
 			}
+			if (!pointsGroups.isEmpty() || !gpxFile.points.isEmpty()) {
+				gpxFile.pointsGroups.putAll(mergePointsGroups(pointsGroups, gpxFile.points));
+			}
 			gpxFile.addGeneralTrack();
 		} catch (Exception e) {
 			gpxFile.error = e;
@@ -2832,6 +2927,37 @@ public class GPXUtilities {
 		createArtificialPrimeMeridianPoints(gpxFile);
 
 		return gpxFile;
+	}
+
+	private static Map<String, PointsGroup> mergePointsGroups(List<PointsGroup> groups, List<WptPt> points) {
+		Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
+		for (PointsGroup category : groups) {
+			pointsGroups.put(category.name, category);
+		}
+
+		for (WptPt point : points) {
+			String categoryName = point.category != null ? point.category : "";
+
+			PointsGroup pointsGroup = pointsGroups.get(categoryName);
+			if (pointsGroup == null) {
+				pointsGroup = new PointsGroup(point);
+				pointsGroups.put(categoryName, pointsGroup);
+			}
+			int color = point.getColor();
+			if (pointsGroup.color == 0 && color != 0) {
+				pointsGroup.color = color;
+			}
+			String iconName = point.getIconName();
+			if (Algorithms.isEmpty(pointsGroup.iconName) && !Algorithms.isEmpty(iconName)) {
+				pointsGroup.iconName = iconName;
+			}
+			String backgroundType = point.getBackgroundType();
+			if (Algorithms.isEmpty(pointsGroup.backgroundType) && !Algorithms.isEmpty(backgroundType)) {
+				pointsGroup.backgroundType = backgroundType;
+			}
+			pointsGroup.points.add(point);
+		}
+		return pointsGroups;
 	}
 
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
@@ -2929,8 +3055,8 @@ public class GPXUtilities {
 		if (from.showCurrentTrack) {
 			to.showCurrentTrack = true;
 		}
-		if (from.points != null) {
-			to.points.addAll(from.points);
+		if (!Algorithms.isEmpty(from.points)) {
+			to.addPoints(from.points);
 		}
 		if (from.tracks != null) {
 			to.tracks.addAll(from.tracks);
