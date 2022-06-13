@@ -2038,7 +2038,6 @@
     <string name="rendering_attr_contourColorScheme_name">Barevné schéma vrstevnic</string>
     <string name="rendering_attr_surfaceIntegrity_name">Celistvost povrchu cest</string>
     <string name="search_hint">Zadejte město, adresu, název POI</string>
-    <string name="translit_name_if_miss">Přepsat, pokud %1$s název chybí</string>
     <string name="translit_names">Přepsat názvy</string>
     <string name="edit_filter">Upravit kategorie</string>
     <string name="subcategories">Podkategorie</string>

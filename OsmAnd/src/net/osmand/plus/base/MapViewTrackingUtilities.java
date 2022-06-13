@@ -31,6 +31,7 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
@@ -222,7 +223,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				boolean smallSpeedForAnimation = isSmallSpeedForAnimation(location);
 				// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
 				showViewAngle = (!location.hasBearing() || smallSpeedForCompass) && (tb != null &&
-						tb.containsLatLon(location.getLatitude(), location.getLongitude()));
+						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (smallSpeedForDirectionOfMovement) {
 						showViewAngle = routePlanningMode;
@@ -255,7 +256,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 			} else if (location != null) {
 				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null &&
-						tb.containsLatLon(location.getLatitude(), location.getLongitude()));
+						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
 				registerUnregisterSensor(location, false);
 			}
 			RoutingHelper routingHelper = app.getRoutingHelper();

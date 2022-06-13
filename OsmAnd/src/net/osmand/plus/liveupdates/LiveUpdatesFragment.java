@@ -96,7 +96,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
 	private final static Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
-	private static final String SUBSCRIPTION_URL = "https://osmand.net/features/subscription";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -296,7 +295,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				if (activity != null) {
-					AndroidUtils.openUrl(activity, Uri.parse(SUBSCRIPTION_URL), nightMode);
+					String docsUrl = getString(R.string.docs_osmand_live);
+					AndroidUtils.openUrl(activity, Uri.parse(docsUrl), nightMode);
 				}
 			}
 		});

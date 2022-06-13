@@ -170,7 +170,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	                                @Nullable Fragment target,
 	                                @NonNull WidgetSettingsBaseFragment fragment) {
 		String tag = fragment.getClass().getSimpleName();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag) && manager.findFragmentByTag(tag) == null) {
 			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
 

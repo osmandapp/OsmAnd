@@ -402,7 +402,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return res;
 	}
 
-	void recalculateRouteSegments(@Nullable ApplicationMode mode) {
+	public void recalculateRouteSegments(@Nullable ApplicationMode mode) {
 		boolean changed = false;
 		if (mode == null) {
 			roadSegmentData.clear();

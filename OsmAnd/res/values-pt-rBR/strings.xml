@@ -2240,7 +2240,6 @@
     <string name="rendering_attr_contourColorScheme_name">Esquema de cores das curvas de nível</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da via</string>
     <string name="search_hint">Digite cidade, endereço, nome do POI</string>
-    <string name="translit_name_if_miss">Transliterar se o nome %1$s for ausente</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou os menus de contexto.</string>

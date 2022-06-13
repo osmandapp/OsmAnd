@@ -23,42 +23,24 @@
 			android:layout_height="@dimen/dialog_content_margin"
 			tools:srcCompat="@drawable/widget_next_turn_day" />
 
-		<LinearLayout
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			style="@style/TitleStyle"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:maxLines="1"
 			android:layout_weight="1"
 			android:layout_marginStart="@dimen/title_padding"
-			android:orientation="vertical">
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/title"
-				style="@style/TitleStyle"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:maxLines="1"
-				android:ellipsize="end"
-				android:textColor="?android:textColorPrimary"
-				tools:text="Widget name" />
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/description"
-				style="@style/DescStyle"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding_small_half"
-				android:visibility="gone"
-				android:textColor="?android:textColorSecondary"
-				tools:visibility="visible"
-				tools:text="This is long widget description that takes multiple lines" />
-
-		</LinearLayout>
+			android:ellipsize="end"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Widget name" />
 
 		<androidx.appcompat.widget.AppCompatCheckBox
 			android:id="@+id/compound_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/title_padding"
-			android:layout_marginTop="@dimen/favorites_icon_padding"
+			android:layout_gravity="center_vertical"
 			android:saveEnabled="false"
 			android:clickable="false"
 			android:focusable="false" />

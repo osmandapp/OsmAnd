@@ -1,10 +1,5 @@
 package net.osmand.plus.importfiles.ui;
 
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,15 +17,6 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
@@ -41,15 +27,17 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.CollectTracksTask;
 import net.osmand.plus.importfiles.CollectTracksTask.CollectTracksListener;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.SaveGpxAsyncTask;
+import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.SaveTracksTask;
-import net.osmand.plus.importfiles.SaveTracksTask.SaveGpxListener;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
-import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -64,6 +52,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 
 public class ImportTracksFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
 		FolderSelectionListener, OnTrackFolderAddListener, ImportTracksListener, PointsSelectionListener {
@@ -82,7 +84,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	private GPXFile gpxFile;
 	private String fileName;
 	private String selectedFolder;
+	private long fileSize;
 
+	private SaveGpxAsyncTask saveAsOneTrackTask;
 	private SaveTracksTask saveTracksTask;
 	private CollectTracksTask collectTracksTask;
 
@@ -269,7 +273,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	private boolean isSavingTracks() {
-		return saveTracksTask != null && saveTracksTask.getStatus() == Status.RUNNING;
+		boolean savingAsOneTrack = saveAsOneTrackTask != null && saveAsOneTrackTask.getStatus() == Status.RUNNING;
+		boolean savingMultiTracks = saveTracksTask != null && saveTracksTask.getStatus() == Status.RUNNING;
+		return savingAsOneTrack || savingMultiTracks;
 	}
 
 	private boolean isCollectingTracks() {
@@ -278,7 +284,8 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	private void importTracks() {
 		File folder = getFolderFile(selectedFolder);
-		saveTracksTask = new SaveTracksTask(new ArrayList<>(selectedTracks), folder, getSaveGpxListener());
+		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveTracksTask = null);
+		saveTracksTask = new SaveTracksTask(new ArrayList<>(selectedTracks), folder, saveGpxListener);
 		saveTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -300,12 +307,25 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		return new TracksDrawParams(metrics.density, width, height, color);
 	}
 
+	@Override
+	public void onImportAsOneTrackClicked() {
+		String existingFilePath = ImportHelper.getExistingFilePath(app, fileName, fileSize);
+		if (existingFilePath != null) {
+			app.showToastMessage(R.string.file_already_imported);
+			openTracksTabInMyPlaces();
+		} else {
+			File destinationDir = getFolderFile(selectedFolder);
+			SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
+			saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener);
+			saveAsOneTrackTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
 	@NonNull
 	private File getFolderFile(@NonNull String folderName) {
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		return Algorithms.stringsEqual(folderName, gpxDir.getName()) ? gpxDir : new File(gpxDir, folderName);
 	}
-
 
 	@Override
 	public void onFolderSelected(@NonNull String folderName) {
@@ -411,32 +431,36 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@NonNull
-	private SaveGpxListener getSaveGpxListener() {
-		return new SaveGpxListener() {
+	private SaveImportedGpxListener getSaveGpxListener(@NonNull Runnable clearTaskCallback) {
+		return new SaveImportedGpxListener() {
+
 			@Override
-			public void gpxSavingStarted() {
+			public void onGpxSavingStarted() {
 				updateProgress();
 			}
 
 			@Override
-			public void gpxSavingFinished(List<String> warnings) {
-				saveTracksTask = null;
+			public void onGpxSavingFinished(@NonNull List<String> warnings) {
+				clearTaskCallback.run();
 				updateProgress();
-
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					String folder = GPX_INDEX_DIR.equals(selectedFolder + "/") ? "" : selectedFolder;
-					Bundle bundle = new Bundle();
-					bundle.putInt(TAB_ID, GPX_TAB);
-					bundle.putString(SELECTED_FOLDER_KEY, folder);
-
-					Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
-					intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
-					activity.startActivity(intent);
-				}
-				dismiss();
+				openTracksTabInMyPlaces();
 			}
 		};
+	}
+
+	private void openTracksTabInMyPlaces() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			String folder = GPX_INDEX_DIR.equals(selectedFolder + "/") ? "" : selectedFolder;
+			Bundle bundle = new Bundle();
+			bundle.putInt(TAB_ID, GPX_TAB);
+			bundle.putString(SELECTED_FOLDER_KEY, folder);
+
+			Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+			intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+			activity.startActivity(intent);
+		}
+		dismiss();
 	}
 
 	@Nullable
@@ -449,11 +473,15 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull GPXFile gpxFile, @NonNull String fileName) {
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull GPXFile gpxFile,
+	                                @NonNull String fileName,
+	                                long fileSize) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ImportTracksFragment fragment = new ImportTracksFragment();
 			fragment.gpxFile = gpxFile;
 			fragment.fileName = fileName;
+			fragment.fileSize = fileSize;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}

@@ -192,10 +192,6 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return true;
 	}

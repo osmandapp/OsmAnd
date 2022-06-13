@@ -1689,7 +1689,6 @@
     <string name="save_track_precision">Minimumsnøyaktighet for logging</string>
     <string name="save_track_precision_descr">Filter: Ingen logging med mindre denne nøyaktigheten er nådd.</string>
     <string name="christmas_desc">I anledning jul og nyttår kan du velge å vise interessepunkter knyttet til julen: juletrær, markeder, etc.</string>
-    <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
     <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, som legger til ukentlige, daglige, og selv timevise oppdateringer.</string>
     <string name="access_direction_audio_feedback">Lydbaserte anvisninger</string>

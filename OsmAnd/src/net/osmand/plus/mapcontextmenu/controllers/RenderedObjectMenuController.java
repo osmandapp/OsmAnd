@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.getOsmUrlForId;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.isOsmUrlAvailable;
 
 import androidx.annotation.NonNull;
 
@@ -117,8 +118,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 			boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
 			Long id = renderedObject.getId();
-			if (osmEditingEnabled && id != null && id > 0 &&
-					(id % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT || (id >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE)) {
+			if (osmEditingEnabled && isOsmUrlAvailable(id)) {
 				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
 				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link, true, true, null);
 			}

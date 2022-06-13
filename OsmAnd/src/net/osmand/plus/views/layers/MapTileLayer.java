@@ -479,6 +479,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		setMapTileAdapter(null);
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);

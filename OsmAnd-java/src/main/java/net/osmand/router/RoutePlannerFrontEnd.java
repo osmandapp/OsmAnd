@@ -28,6 +28,7 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
+
 public class RoutePlannerFrontEnd {
 
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
@@ -174,7 +175,7 @@ public class RoutePlannerFrontEnd {
 				}
 				if (road != null) {
 					if(!transportStop) {
-						float prio = Math.max(ctx.getRouter().defineSpeedPriority(road.road), 0.3f);
+						float prio = ctx.getRouter().defineDestinationPriority(road.road);
 						if (prio > 0) {
 							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
 									/ (prio * prio);

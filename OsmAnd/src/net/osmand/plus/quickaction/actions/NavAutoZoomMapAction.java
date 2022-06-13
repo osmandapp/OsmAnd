@@ -33,7 +33,6 @@ public class NavAutoZoomMapAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		settings.AUTO_ZOOM_MAP.set(!settings.AUTO_ZOOM_MAP.get());
 		Toast.makeText(mapActivity, mapActivity.getString(!settings.AUTO_ZOOM_MAP.get()

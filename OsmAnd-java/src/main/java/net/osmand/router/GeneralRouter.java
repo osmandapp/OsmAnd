@@ -36,6 +36,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
 	public static final String ALLOW_PRIVATE_FOR_TRUCK = "allow_private_for_truck";
+	public static final String HAZMAT_CATEGORY = "hazmat_category";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 	public static final String DEFAULT_SPEED = "default_speed";
 	public static final String MIN_SPEED = "min_speed";
@@ -87,6 +88,7 @@ public class GeneralRouter implements VehicleRouter {
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
 		ROAD_PRIORITIES("priority"),
+		DESTINATION_PRIORITIES("destination_priority"),
 		ACCESS("access"),
 		OBSTACLES("obstacle_time"),
 		ROUTING_OBSTACLES("obstacle"),
@@ -521,6 +523,16 @@ public class GeneralRouter implements VehicleRouter {
 		if(sp == null) {
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
 			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, false);
+		}
+		return sp;
+	}
+	
+	@Override
+	public float defineDestinationPriority(RouteDataObject road) {
+		Float sp = getCache(RouteDataObjectAttribute.DESTINATION_PRIORITIES, road);
+		if(sp == null) {
+			sp = getObjContext(RouteDataObjectAttribute.DESTINATION_PRIORITIES).evaluateFloat(road, 1f);
+			putCache(RouteDataObjectAttribute.DESTINATION_PRIORITIES, road, sp, false);
 		}
 		return sp;
 	}

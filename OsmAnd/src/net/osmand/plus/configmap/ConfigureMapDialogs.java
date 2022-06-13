@@ -63,7 +63,9 @@ public class ConfigureMapDialogs {
 					public void onClick(View v) {
 						int which = (int) v.getTag();
 						view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-						activity.refreshMapComplete();
+						if (view.getMapRenderer() == null) {
+							activity.refreshMapComplete();
+						}
 						activity.getDashboard().refreshContent(false);
 					}
 				}
@@ -213,7 +215,7 @@ public class ConfigureMapDialogs {
 					v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
 					v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
 					TextView switchText = v.findViewById(R.id.switchText);
-					switchText.setText(activity.getString(R.string.translit_name_if_miss, mapLanguagesNames[position]));
+					switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
 					SwitchCompat check = v.findViewById(R.id.check);
 					check.setChecked(transliterateNames[0]);
 					check.setOnCheckedChangeListener(translitChangdListener);

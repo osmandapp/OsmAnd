@@ -169,7 +169,9 @@ public class TrackDetailsMenu {
 						mapRenderer, tb, segment.points, r, mx, my);
 				if (points != null) {
 					LatLon latLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, mx, my);
-					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
+					if (latLon != null) {
+						gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
+					}
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||

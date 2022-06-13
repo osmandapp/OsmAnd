@@ -2288,7 +2288,6 @@
     <string name="morning">രാവിലെ</string>
     <string name="number_of_contributors">സംഭാവകരുടെ എണ്ണം</string>
     <string name="number_of_edits">എഡിറ്റുകളുടെ എണ്ണം</string>
-    <string name="translit_name_if_miss">%1$s പേര് ഇല്ലെങ്കില്‍ ലിപ്യന്തരണം (Transliterate) ചെയ്യുക</string>
     <string name="search_hint">നഗരം, വിലാസം, POI നാമം ടൈപ്പുചെയ്യുക</string>
     <string name="rendering_attr_surfaceIntegrity_name">റോഡ് പ്രതല നിലവാരം</string>
     <string name="save_track_min_speed_descr">ഫിൽറ്റർ: ഈ വേഗതക്ക് താഴെ പോയിന്റുകൾ ലോഗ് ചെയ്യുന്നില്ല.</string>

@@ -51,7 +51,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private ApplicationMode appMode;
 
 	private ContextMenuAdapter adapter;
-	private Map<ContextMenuItem, List<ContextMenuItem>> menuItems;
+	private Map<ContextMenuItem, List<ContextMenuItem>> items;
 	private ViewCreator viewCreator;
 
 	private LinearLayout llList;
@@ -84,7 +84,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	@Override
 	public void onDataSetChanged() {
-		updateItemsData();
 		updateItemsView();
 	}
 
@@ -117,16 +116,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		adapter = menu.createListAdapter(mapActivity);
 		CtxMenuUtils.removeHiddenItems(adapter);
 		CtxMenuUtils.hideExtraDividers(adapter);
-		menuItems = CtxMenuUtils.collectItemsByCategories(adapter.getItems());
-
+		items = CtxMenuUtils.collectItemsByCategories(adapter.getItems());
 		ContextMenuItem bottomShadow = new ContextMenuItem(null);
 		bottomShadow.setLayout(R.layout.card_bottom_divider);
-		menuItems.put(bottomShadow, null);
+		items.put(bottomShadow, null);
 	}
 
 	private void updateItemsView() {
-		for (ContextMenuItem topItem : menuItems.keySet()) {
-			List<ContextMenuItem> nestedItems = menuItems.get(topItem);
+		for (ContextMenuItem topItem : items.keySet()) {
+			List<ContextMenuItem> nestedItems = items.get(topItem);
 			if (topItem.isCategory() && nestedItems != null) {
 				bindCategoryView(topItem, nestedItems);
 			} else {
