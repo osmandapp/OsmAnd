@@ -137,6 +137,7 @@ public class IntentHelper {
 					buildRoute(startLatLon, endLatLon, appMode);
 				}
 
+				mapActivity.setIntent(null);
 				return true;
 			}
 		}
