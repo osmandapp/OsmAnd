@@ -85,7 +85,7 @@ public class IntentHelper {
 
 	private boolean parseNavigationUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
+		if (intent != null && intent.getData() != null && intent.getData().isHierarchical()) {
 			Uri data = intent.getData();
 			boolean hasNavigationDestination = data.getQueryParameterNames().contains("end");
 			if (isOsmAndMapUrl(data) && hasNavigationDestination) {
