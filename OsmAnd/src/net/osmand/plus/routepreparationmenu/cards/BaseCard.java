@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,15 +15,15 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseCard {
 
-	protected OsmandApplication app;
-	protected FragmentActivity activity;
+	protected final OsmandApplication app;
+	protected final FragmentActivity activity;
 
 	protected View view;
 
@@ -81,6 +82,18 @@ public abstract class BaseCard {
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
+	}
+
+	protected void notifyCardPressed() {
+		if (listener != null) {
+			listener.onCardPressed(this);
+		}
+	}
+
+	protected void notifyButtonPressed(int buttonIndex) {
+		if (listener != null) {
+			listener.onCardButtonPressed(this, buttonIndex);
+		}
 	}
 
 	public void setLayoutNeeded() {
@@ -142,6 +155,10 @@ public abstract class BaseCard {
 
 	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		return app.getUIUtilities().getPaintedIcon(id, color);
+	}
+
+	protected int getDimen(@DimenRes int dimenId) {
+		return app.getResources().getDimensionPixelSize(dimenId);
 	}
 
 	public void setShowTopShadow(boolean showTopShadow) {

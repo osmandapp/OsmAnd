@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
@@ -27,18 +28,19 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -235,21 +237,16 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
 			}
 			final HistoryEntry historyEntry = getItem(position);
-			udpateHistoryItem(historyEntry, row, location, getActivity(), getMyApplication());
-			TextView distanceText = (TextView) row.findViewById(R.id.distance);
-			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			updateHistoryItem(historyEntry, row, location, getMyApplication());
+			TextView distanceText = row.findViewById(R.id.distance);
+			ImageView direction = row.findViewById(R.id.direction);
 			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, 
 					direction, distanceText, historyEntry.getLat(),
 					historyEntry.getLon());
-			ImageButton options = (ImageButton) row.findViewById(R.id.options);
+			ImageButton options = row.findViewById(R.id.options);
 			options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setVisibility(View.VISIBLE);
-			options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					selectModelOptions(historyEntry, v);
-				}
-			});
+			options.setOnClickListener(v -> selectModelOptions(historyEntry, v));
 			if (getActivity() instanceof SearchActivity)
 				ViewCompat.setAccessibilityDelegate(row, ((SearchActivity)getActivity()).getAccessibilityAssistant());
 			return row;
@@ -257,27 +254,29 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	}
 	
 				
-	public static void udpateHistoryItem(final HistoryEntry historyEntry, View row,
-			LatLon location, Activity activity, OsmandApplication app) {
-		TextView nameText = (TextView) row.findViewById(R.id.name);
-		TextView distanceText = (TextView) row.findViewById(R.id.distance);
-		ImageView direction = (ImageView) row.findViewById(R.id.direction);
+	public static void updateHistoryItem(@NonNull HistoryEntry historyEntry, @NonNull View row,
+	                                     @Nullable LatLon location, @NonNull OsmandApplication app) {
+		TextView nameText = row.findViewById(R.id.name);
+		TextView distanceText = row.findViewById(R.id.distance);
+		ImageView direction = row.findViewById(R.id.direction);
 		UiUtilities ic = app.getUIUtilities();
 		direction.setImageDrawable(ic.getIcon(R.drawable.ic_direction_arrow, R.color.color_distance));
+
 		String distance = "";
 		if (location != null) {
 			int dist = (int) (MapUtils.getDistance(location, historyEntry.getLat(), historyEntry.getLon()));
-			distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) activity.getApplication()) + "  ";
+			distance = OsmAndFormatter.getFormattedDistance(dist, app) + "  ";
 		}
 		distanceText.setText(distance);
-		PointDescription pd = historyEntry.getName();
-		nameText.setText(pd.getSimpleName(activity, false), BufferType.SPANNABLE);
-		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
-		icon.setImageDrawable(ic.getThemedIcon(getItemIcon(historyEntry.getName())));
 
-		String typeName = historyEntry.getName().getTypeName();
-		if (typeName != null && !typeName.isEmpty()) {
-			ImageView group = (ImageView) row.findViewById(R.id.type_name_icon);
+		PointDescription pointDescription = historyEntry.getName();
+		nameText.setText(pointDescription.getSimpleName(app, false), BufferType.SPANNABLE);
+		ImageView icon = row.findViewById(R.id.icon);
+		icon.setImageDrawable(ic.getThemedIcon(getItemIcon(pointDescription)));
+
+		String typeName = pointDescription.getTypeName();
+		if (!Algorithms.isEmpty(typeName)) {
+			ImageView group = row.findViewById(R.id.type_name_icon);
 			group.setVisibility(View.VISIBLE);
 			group.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_group_name_16));
 			((TextView) row.findViewById(R.id.type_name)).setText(typeName);
@@ -287,7 +286,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		}
 	}
 
-	public static int getItemIcon(PointDescription pd) {
+	public static int getItemIcon(@NonNull PointDescription pd) {
 		int iconId;
 		if (pd.isAddress()) {
 			iconId = R.drawable.ic_action_street_name;
@@ -297,6 +296,8 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			iconId = R.drawable.ic_action_marker_dark;
 		} else if (pd.isPoi()) {
 			iconId = R.drawable.ic_action_info_dark;
+		} else if (pd.isGpxFile() || pd.isGpxPoint()) {
+			iconId = R.drawable.ic_action_polygom_dark;
 		} else if (pd.isWpt()) {
 			iconId = R.drawable.ic_action_flag_stroke;
 		} else if (pd.isAudioNote()) {

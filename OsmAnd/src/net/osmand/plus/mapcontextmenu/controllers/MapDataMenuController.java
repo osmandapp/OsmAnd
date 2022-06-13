@@ -10,19 +10,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -32,7 +32,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.MapDataMenuBuilder;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.util.Algorithms;
@@ -404,7 +404,7 @@ public class MapDataMenuController extends MenuController {
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE
 					|| indexItem.getType() == DownloadActivityType.SLOPE_FILE)
 					&& srtmDisabled) {
-				leftDownloadButtonController.caption = mapActivity.getString(R.string.get_plugin);
+				leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_get);
 				leftDownloadButtonController.clearIcon(true);
 			} else if (indexItem.isOutdated()) {
 				leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_update);

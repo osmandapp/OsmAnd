@@ -9,15 +9,20 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -45,7 +50,7 @@ class RouteRecalculationHelper {
 	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
 
-	private RouteCalculationProgressCallback progressRoute;
+	private Set<RouteCalculationProgressListener> calculationProgressListeners = new HashSet<>();
 
 	RouteRecalculationHelper(@NonNull RoutingHelper routingHelper) {
 		this.routingHelper = routingHelper;
@@ -60,8 +65,16 @@ class RouteRecalculationHelper {
 		return lastRouteCalcErrorShort;
 	}
 
-	void setProgressBar(RouteCalculationProgressCallback progressRoute) {
-		this.progressRoute = progressRoute;
+	public void addCalculationProgressListener(@NonNull RouteCalculationProgressListener listener) {
+		Set<RouteCalculationProgressListener> listeners = new HashSet<>(this.calculationProgressListeners);
+		listeners.add(listener);
+		this.calculationProgressListeners = listeners;
+	}
+
+	public void removeCalculationProgressListener(@NonNull RouteCalculationProgressListener listener) {
+		Set<RouteCalculationProgressListener> listeners = new HashSet<>(this.calculationProgressListeners);
+		listeners.remove(listener);
+		this.calculationProgressListeners = listeners;
 	}
 
 	boolean isRouteBeingCalculated() {
@@ -182,12 +195,15 @@ class RouteRecalculationHelper {
 			}
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
-			if (!wrongMovementDirection || newRoute) {
+			if (!res.initialCalculation && (!wrongMovementDirection || newRoute)) {
 				getVoiceRouter().newRouteIsCalculated(newRoute);
 			}
 		}
 		app.getWaypointHelper().setNewRoute(res);
 		routingHelper.newRouteCalculated(newRoute, res);
+		if (res.initialCalculation) {
+			app.runInUIThread(() -> routingHelper.recalculateRouteDueToSettingsChange(false));
+		}
 	}
 
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
@@ -196,7 +212,7 @@ class RouteRecalculationHelper {
 			RouteRecalculationTask newTask = new RouteRecalculationTask(this,
 					params, paramsChanged, updateProgress);
 			lastTask = newTask;
-			startProgress(params);
+			onRouteCalculationStart(params);
 			if (updateProgress) {
 				updateProgress(params);
 			}
@@ -206,7 +222,8 @@ class RouteRecalculationHelper {
 	}
 
 	public void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates,
-											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged) {
+											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute,
+											 boolean paramsChanged, boolean onlyStartPointChanged) {
 		if (start == null || end == null) {
 			return;
 		}
@@ -241,65 +258,78 @@ class RouteRecalculationHelper {
 			if (getLastProjection() != null) {
 				params.currentLocation = getLastFixedLocation();
 			}
+			if (params.mode.getRouteService() == RouteService.ONLINE) {
+				OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(params.mode.getRoutingProfile());
+				if (engine != null) {
+					engine.updateRouteParameters(params, paramsChanged ? previousRoute : null);
+				}
+			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}
 	}
 
-	void startProgress(final RouteCalculationParams params) {
-		if (params.calculationProgressCallback != null) {
-			params.calculationProgressCallback.start();
-		} else if (progressRoute != null) {
-			progressRoute.start();
-		}
-	}
-
 	void updateProgress(final RouteCalculationParams params) {
-		final RouteCalculationProgressCallback progressRoute;
-		if (params.calculationProgressCallback != null) {
-			progressRoute = params.calculationProgressCallback;
-		} else {
-			progressRoute = this.progressRoute;
+		List<RouteCalculationProgressListener> listeners = new ArrayList<>();
+		if (params.calculationProgressListener != null) {
+			listeners.add(params.calculationProgressListener);
+		} else if (calculationProgressListeners != null) {
+			listeners.addAll(calculationProgressListeners);
 		}
-		if (progressRoute != null) {
+		if (!Algorithms.isEmpty(listeners)) {
 			app.runInUIThread(() -> {
-				RouteCalculationProgress calculationProgress = params.calculationProgress;
-				if (isRouteBeingCalculated()) {
-					boolean routeCalculationStarted = calculationProgress.routeCalculationStartTime != 0;
-					if (lastTask != null && lastTask.params == params) {
-						progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
-						if (calculationProgress.requestPrivateAccessRouting) {
-							progressRoute.requestPrivateAccessRouting();
-						}
-						if (routeCalculationStarted) {
-							if (lastTask.missingMaps != null) {
-								progressRoute.updateMissingMaps(lastTask.missingMaps, true);
-							} else if (System.currentTimeMillis() > calculationProgress.routeCalculationStartTime + SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME) {
-								progressRoute.updateMissingMaps(null, true);
-							} else if (calculationProgress.missingMaps != null) {
-								progressRoute.updateMissingMaps(calculationProgress.missingMaps, false);
-							}
-						}
-						updateProgress(params);
-					}
-				} else {
-					if (calculationProgress.requestPrivateAccessRouting) {
-						progressRoute.requestPrivateAccessRouting();
-					}
-					progressRoute.finish();
+				for (RouteCalculationProgressListener listener : listeners) {
+					onRouteCalculationUpdate(listener, params);
 				}
 			}, 300);
 		}
 	}
 
-	void finishProgress(RouteCalculationParams params) {
-		final RouteCalculationProgressCallback progressRoute;
-		if (params.calculationProgressCallback != null) {
-			progressRoute = params.calculationProgressCallback;
-		} else {
-			progressRoute = this.progressRoute;
+	private void onRouteCalculationStart(@NonNull RouteCalculationParams params) {
+		if (params.calculationProgressListener != null) {
+			params.calculationProgressListener.onCalculationStart();
+		} else if (calculationProgressListeners != null) {
+			for (RouteCalculationProgressListener listener : calculationProgressListeners) {
+				listener.onCalculationStart();
+			}
 		}
-		if (progressRoute != null) {
-			progressRoute.finish();
+	}
+
+	private void onRouteCalculationUpdate(@NonNull RouteCalculationProgressListener progressRoute,
+	                                      @NonNull RouteCalculationParams params) {
+		RouteCalculationProgress calculationProgress = params.calculationProgress;
+		if (isRouteBeingCalculated()) {
+			boolean routeCalculationStarted = calculationProgress.routeCalculationStartTime != 0;
+			if (lastTask != null && lastTask.params == params) {
+				progressRoute.onUpdateCalculationProgress((int) calculationProgress.getLinearProgress());
+				if (calculationProgress.requestPrivateAccessRouting) {
+					progressRoute.onRequestPrivateAccessRouting();
+				}
+				if (routeCalculationStarted) {
+					if (lastTask.missingMaps != null) {
+						progressRoute.onUpdateMissingMaps(lastTask.missingMaps, true);
+					} else if (System.currentTimeMillis() > calculationProgress.routeCalculationStartTime + SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME) {
+						progressRoute.onUpdateMissingMaps(null, true);
+					} else if (calculationProgress.missingMaps != null) {
+						progressRoute.onUpdateMissingMaps(calculationProgress.missingMaps, false);
+					}
+				}
+				updateProgress(params);
+			}
+		} else {
+			if (calculationProgress.requestPrivateAccessRouting) {
+				progressRoute.onRequestPrivateAccessRouting();
+			}
+			progressRoute.onCalculationFinish();
+		}
+	}
+
+	private void onRouteCalculationFinish(@NonNull RouteCalculationParams params) {
+		if (params.calculationProgressListener != null) {
+			params.calculationProgressListener.onCalculationFinish();
+		} else if (calculationProgressListeners != null) {
+			for (RouteCalculationProgressListener listener : calculationProgressListeners) {
+				listener.onCalculationFinish();
+			}
 		}
 	}
 
@@ -345,9 +375,8 @@ class RouteRecalculationHelper {
 
 		public boolean startMissingMapsOnlineSearch() {
 			if (missingMapsOnlineSearchTask == null) {
-				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps -> {
-					RouteRecalculationTask.this.missingMaps = missingMaps;
-				});
+				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps ->
+						RouteRecalculationTask.this.missingMaps = missingMaps);
 				missingMapsOnlineSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				return true;
 			}
@@ -406,12 +435,7 @@ class RouteRecalculationHelper {
 				}
 			}
 			if (!updateProgress) {
-				routingHelper.getApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						routingThreadHelper.finishProgress(params);
-					}
-				});
+				app.runInUIThread(() -> routingThreadHelper.onRouteCalculationFinish(params));
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}
@@ -420,7 +444,7 @@ class RouteRecalculationHelper {
 	private class RouteRecalculationExecutor extends ThreadPoolExecutor {
 
 		public RouteRecalculationExecutor() {
-			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+			super(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 		}
 
 		protected void afterExecute(Runnable r, Throwable t) {

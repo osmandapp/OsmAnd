@@ -9,7 +9,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (de berichten-app) wordt gebruikt om mensen te verbinden en te communiceren met mensen.</string>
     <string name="privacy_policy_telegram_client">OsmAnd-tracker is een van de app clients die het open platform van Telegram gebruiken. Uw contactpersonen kunnen elke andere Telegram-client gebruiken.</string>
-    <string name="privacy_policy_agree">Door op Doorgaan te klikken gaat u akkoord met het privacy beleid van zowel Telegram als OsmAnd.</string>
+    <string name="privacy_policy_agree">Door op \"Doorgaan\" te klikken, gaat u akkoord met het privacy beleid van zowel Telegram als OsmAnd.</string>
     <string name="shared_string_accept">Aanvaard</string>
     <string name="telegram_privacy_policy">Telegram privacy beleid</string>
     <string name="osmand_privacy_policy">OsmAnd privacy beleid</string>
@@ -17,7 +17,7 @@
     <string name="received_gps_points">Ontvangen GPX punten: %1$s</string>
     <string name="show_gps_points">Toon GPS punten</string>
     <string name="show_gps_points_descr">Toon totaal aan verzamelde en verstuurde GPS punten.</string>
-    <string name="please_update_osmand">Update OsmAnd aub om data op de kaart te zien</string>
+    <string name="please_update_osmand">OsmAnd alsjeblieft updaten om data op de kaart te zien</string>
     <string name="shared_string_update">Update</string>
     <string name="gps_points_in_buffer">verzonden (%1$d in buffer)</string>
     <string name="points_size">%1$d punten</string>
@@ -89,7 +89,7 @@
     <string name="choose_osmand">Selecteer te gebruiken Osmand versie</string>
     <string name="disable_all_sharing_desc">Schakel locatie delen uit naar alle geselecteerde chats (%1$d).</string>
     <string name="disable_all_sharing">Schakel delen helemaal uit</string>
-    <string name="turn_off_all">Schakel alles uit</string>
+    <string name="turn_off_all">Alles uitschakelen</string>
     <string name="shared_string_exit">Verlaat</string>
     <string name="last_response">Laatste respons</string>
     <string name="shared_string_group">Groep</string>
@@ -115,7 +115,7 @@
     <string name="shared_string_live">Live</string>
     <string name="shared_string_bot">Bot</string>
     <string name="get_telegram_title">Registratie in Telegram</string>
-    <string name="get_telegram_account_first">U hebt een een Telegram account nodig om uw locatie te delen.</string>
+    <string name="get_telegram_account_first">U hebt een Telegram account nodig om uw locatie te delen.</string>
     <string name="get_telegram_description_continue">Installeer Telegram aub en stel een account in.</string>
     <string name="get_telegram_after_creating_account">Dan kunt u deze app gebruiken.</string>
     <string name="already_registered_in_telegram">U hebt een geregistreerd Telegram account en telefoonnummer nodig</string>
@@ -156,17 +156,17 @@
     <string name="search_contacts_descr">Zoek door al uw groepen en contacten.</string>
     <string name="type_contact_or_group_name">Type contact- of groepnaam</string>
     <string name="shared_string_search">Zoek</string>
-    <string name="shared_string_appearance">Weergave</string>
+    <string name="shared_string_appearance">Uiterlijk</string>
     <string name="time_on_the_move">Tijd in beweging</string>
-    <string name="background_work">Achtergond uitvoeringen</string>
-    <string name="time_ago">sinds</string>
+    <string name="background_work">Achtergrondactiviteit</string>
+    <string name="time_ago">geleden</string>
     <string name="osmand_connect">Verbind met OsmAnd</string>
     <string name="expire_at">Verloopt op</string>
     <string name="shared_string_all">Alles</string>
     <string name="shared_string_off">Uit</string>
     <string name="set_time_description">Stel de tijd in waarop uw contacten en groepen uw locatie kunnen zien.</string>
     <string name="set_time">Stel tijd in</string>
-    <string name="initialization">Initialiseer</string>
+    <string name="initialization">Aan het opstarten</string>
     <string name="location_service_no_gps_available">Selecteer de locatie provider waarmee u uw locatie deelt.</string>
     <string name="osmand_service">Achtergrond modus</string>
     <string name="osmand_service_descr">OsmAnd tracker loopt in de achtergrond met uitgeschakeld scherm.</string>
@@ -180,7 +180,7 @@
     <string name="show_users_on_map">Toon gebruikers op de kaart</string>
     <string name="active_chats">Actieve chats</string>
     <string name="shared_string_authorization">Autorisatie</string>
-    <string name="shared_string_authorization_descr">Vul a.u.b. uw Telegram telefoon nummer in in internationaal formaat</string>
+    <string name="shared_string_authorization_descr">Vul a.u.b. uw Telegram telefoonnummer in volgens internationale notatie</string>
     <string name="shared_string_welcome">Welkom</string>
     <string name="yard">yard</string>
     <string name="foot">voet</string>
@@ -190,7 +190,7 @@
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
-    <string name="nm_h"></string>
+    <string name="nm_h">nmi/h</string>
     <string name="m_s">m/s</string>
     <string name="km_h">km/u</string>
     <string name="mile_per_hour">mpu</string>
@@ -207,7 +207,7 @@
     <string name="si_mi_meters">Mijl/meter</string>
     <string name="shared_string_hour_short">u</string>
     <string name="shared_string_minute_short">min</string>
-    <string name="shared_string_second_short">sec</string>
+    <string name="shared_string_second_short">s</string>
     <string name="welcome_descr">Met <b>OsmAnd Tracker</b> kunt u uw locatie delen en die van anderen bekijken.<br/>
         <br/>The app gebruikt de Telegram API, daarom hebt u een Telegram account nodig.</string>
     <string name="my_location">Mijn locatie</string>
@@ -254,11 +254,26 @@
     <string name="time_zone">Tijdzone</string>
     <string name="units_and_formats">Eenheden &amp; formaten</string>
     <string name="unit_of_length_descr">Wijzig de eenheid van afstand voor metingen.</string>
-    <string name="unit_of_length">Afstand eenheden</string>
+    <string name="unit_of_length">Lengte-eenheden</string>
     <string name="unit_of_speed_system_descr">Definieer de eenheid voor snelheid.</string>
     <string name="unit_of_speed_system">Eenheid van snelheid</string>
     <string name="send_report">Stuur rapport</string>
     <string name="shared_string_export">Exporteer</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="logcat_buffer_descr">Controleer en deel gedetailleerde logs van de app</string>
+    <string name="duration_ago">%1$s geleden</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="shared_string_error">Fout</string>
+    <string name="send_live_location_error">Fout bij sturen van live locatie: %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
+    <string name="last_update_from_telegram_date">Laatste update van Telegram: %1$s</string>
+    <string name="last_response_date">Laatste antwoord: %1$s</string>
+    <string name="last_update_from_telegram_duration">Laatste update van Telegram: %1$s geleden</string>
+    <string name="last_response_duration">Laatste antwoord: %1$s geleden</string>
+    <string name="back_to_osmand">Terug naar OsmAnd</string>
+    <string name="shared_string_suggested">Aanbevolen</string>
+    <string name="status_widget_title">Status van OsmAnd Tracker</string>
+    <string name="buffer_time_descr">Maximale tijd om punten in de buffer op te slaan</string>
+    <string name="buffer_time">Bewaartermijn voor de buffer</string>
 </resources>

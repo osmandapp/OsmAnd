@@ -7,11 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -36,7 +37,7 @@ public enum ColoringType {
 	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
 	// For gpx track only
 	TRACK_SOLID("solid", R.string.track_coloring_solid, R.drawable.ic_action_circle),
-	SPEED("speed", R.string.map_widget_speed, R.drawable.ic_action_speed),
+	SPEED("speed", R.string.shared_string_speed, R.drawable.ic_action_speed),
 	// For both route and gpx file
 	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
 	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
@@ -156,10 +157,12 @@ public enum ColoringType {
 	                                          @NonNull SelectedGpxFile selectedGpxFile,
 	                                          @Nullable String attributeName) {
 		if (isGradient()) {
-			return selectedGpxFile.getTrackAnalysis(app)
-					.isColorizationTypeAvailable(toGradientScaleType().toColorizationType());
+			GradientScaleType scaleType = toGradientScaleType();
+			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+			if (analysis != null && scaleType != null) {
+				return analysis.isColorizationTypeAvailable(scaleType.toColorizationType());
+			}
 		}
-
 		if (isRouteInfoAttribute()) {
 			List<RouteSegmentResult> routeSegments = getRouteSegmentsInTrack(selectedGpxFile.getGpxFile());
 			if (Algorithms.isEmpty(routeSegments)) {

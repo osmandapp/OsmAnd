@@ -56,9 +56,6 @@
     <string name="map_widget_compass">Kompassi</string>
     <string name="map_widget_reset">Palauta oletusasetukset</string>
     <string name="map_widget_parking">Pysäköinti</string>
-    <string name="map_widget_speed">Nopeus</string>
-    <string name="map_widget_distance">Päämäärä</string>
-    <string name="map_widget_altitude">Korkeus</string>
     <string name="map_widget_next_turn">Seuraava käännös</string>
     <string name="map_widget_next_turn_small">Seuraava käännös (pieni)</string>
     <string name="bg_service_screen_lock">Lukitse näyttö</string>
@@ -135,7 +132,7 @@
     <string name="filterpoi_activity">Luo KP-suodin</string>
     <string name="poi_search_desc">KP (Kiinnostava paikka) haku</string>
     <string name="update_poi_does_not_change_indexes">KP muutokset ohjelman sisällä eivät vaikuta ladattuihin karttatiedostoihin. Muutokset tallennetaan tiedostona laitteellesi.</string>
-    <string name="poi_context_menu_showdescription">Näytä KP:n kuvaus</string>
+    <string name="poi_context_menu_showdescription">Näytä KP:n kuvaus.</string>
     <string name="poi_query_by_name_matches_categories">Löytyi useita vastaavia KP-kategorioita.</string>
     <string name="local_index_poi_data">KP data</string>
     <string name="local_indexes_cat_poi">KP data</string>
@@ -163,14 +160,14 @@
     <string name="profile_settings">Profiilikohtaiset asetukset</string>
     <string name="settings_preset">Oletusprofiili</string>
     <string name="routing_settings">Navigointi</string>
-    <string name="routing_settings_descr">Määritä navigointiasetukset</string>
+    <string name="routing_settings_descr">Määritä navigointiasetukset.</string>
     <string name="global_settings">Globaalit asetukset</string>
     <string name="index_settings">Hallitse karttatiedostoja</string>
     <string name="general_settings">Yleiset asetukset</string>
-    <string name="general_settings_descr">Konfiguroi globaalit asetukset</string>
+    <string name="general_settings_descr">Määritä näyttö ja yleiset asetukset.</string>
     <string name="global_app_settings">Globaalit sovellusasetukset</string>
     <string name="user_name">OSM käyttäjänimesi</string>
-    <string name="open_street_map_login_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
+    <string name="open_street_map_login_descr">Tarvitaan openstreetmap.org ehdotuksia varten.</string>
     <string name="user_password">Salasana</string>
     <string name="download_files_not_enough_space">%1$s Mt:n lataamiseen ei ole tarpeeksi vapaata tilaa (vapaana: %2$s).</string>
     <string name="download_files_question_space">Lataa {0} tiedosto(a)\?
@@ -272,7 +269,7 @@
     <string name="hello">Navigointisovellus OsmAnd</string>
     <string name="update_poi_success">KP data päivitettiin (Ladattiin {0})</string>
     <string name="update_poi_error_local">Paikallista KP listaa ei voitu päivittää.</string>
-    <string name="update_poi_error_loading">Virhe ladattaessa tietoja palvelimelta</string>
+    <string name="update_poi_error_loading">Virhe ladattaessa tietoja palvelimelta.</string>
     <string name="context_menu_item_update_poi">Päivitä KP</string>
     <string name="context_menu_item_update_map_confirm">Päivitetäänkö paikalliset tiedot Internetistä\?</string>
     <string name="search_history_city">Kaupunki: {0}</string>
@@ -312,7 +309,7 @@
     <string name="loading_cities">Ladataan kaupunkeja…</string>
     <string name="poi">KP</string>
     <string name="error_occurred_saving_gpx">GPX-tiedostoa ei voitu tallentaa.</string>
-    <string name="error_calculating_route">Virhe reitin laskennassa</string>
+    <string name="error_calculating_route">Reittiä ei voitu laskea.</string>
     <string name="arrived_at_destination">Olet saapunut perille.</string>
     <string name="invalid_locations">Virheelliset koordinaatit</string>
     <string name="shared_string_close">Sulje</string>
@@ -328,7 +325,6 @@
     <string name="save_current_track_descr">Tallenna nykyinen reitti GPX tiedostona nyt.</string>
     <string name="save_current_track">Tallenna nykyinen reitti</string>
     <string name="save_track_interval">Kirjausväli suunnistuksen aikana</string>
-    <string name="save_track_to_gpx_descrp">GPX-jälki tallennetaan automaattisesti jälkihakemistoon navigaation aikana.</string>
     <string name="update_tile">Päivitä kartta</string>
     <string name="mark_point">Kohde</string>
     <string name="shared_string_add_to_favorites">Lisää suosikkeihin</string>
@@ -422,8 +418,8 @@
     <string name="favourites_search_desc">Haku suosikeista</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigointi ei ole saatavilla tilapäisesti.</string>
     <string name="left_side_navigation">Vasemmanpuoleinen liikenne</string>
-    <string name="left_side_navigation_descr">Valitse maissa joissa on käytössä vasen kaista</string>
-    <string name="unknown_location">Sijaintia ei tiedetä vielä</string>
+    <string name="left_side_navigation_descr">Valitse maissa joissa on käytössä vasen kaista.</string>
+    <string name="unknown_location">Sijaintia ei tiedetä vielä.</string>
     <string name="local_indexes_cat_tile">Online ja välimuistin kuvakekartat</string>
     <string name="amenity_type_finance">Rahoitus</string>
     <string name="amenity_type_barrier">Este</string>
@@ -459,7 +455,7 @@
     <string name="search_address">Etsi osoite</string>
     <string name="use_english_names_descr">Valitse paikalliset tai englanninkieliset nimet.</string>
     <string name="go_back_to_osmand">Palaa karttaan</string>
-    <string name="empty_route_calculated">Virhe: Laskettu reitti on tyhjä</string>
+    <string name="empty_route_calculated">Laskettu reitti on tyhjä.</string>
     <string name="route_general_information">Kokonaismatka %1$s, matka-aika %2$d h %3$d min.</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">sekuntia</string>
@@ -489,7 +485,7 @@
     <string name="rendering_attr_roadColors_name">Tien värimaailma</string>
     <string name="map_widget_show_destination_arrow">Näytä kohteen suunta</string>
     <string name="non_optimal_route_calculation">Laske mahdollisesti epäoptimaalinen reitti pitkille matkoille</string>
-    <string name="offline_edition_descr">Käytä aina offline editointia</string>
+    <string name="offline_edition_descr">Mikäli offline muokkaus on valittu, muutokset talletetaan ensin paikallisesti ja lähetetään vain pyynnöstä, muuten muutokset lähetetään samantien.</string>
     <string name="free_version_message">Tämä ilmainen OsmAnd versio on rajoitettu %1$s lataukseen ja ei tue offline wikipedia artikkeleita.</string>
     <string name="index_name_voice">Äänikehotteet (nauhoitettu, rajoitetut ominaisuudet)</string>
     <string name="index_name_tts_voice">Äänikehotteet (TTS, suositeltu)</string>
@@ -505,7 +501,7 @@
     <string name="filename_input">Tiedostonimi: </string>
     <string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
     <string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
-    <string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
+    <string name="favorite_delete_multiple">Poistetaanko %1$d suosikkia ja %2$d suosikkiryhmää\?</string>
     <string name="local_index_installed">Paikallinen versio</string>
     <string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
     <string name="osb_comment_dialog_author">Tekijän nimi</string>
@@ -521,7 +517,7 @@
     <string name="shared_string_clear">Nollaa</string>
     <string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
     <string name="voice_is_not_available_title">Valitse ääniohjaus paketti</string>
-    <string name="unknown_from_location">Aloituspistettä ei ole vielä määritelty</string>
+    <string name="unknown_from_location">Aloituspistettä ei ole vielä määritelty.</string>
     <string name="modify_transparency">Säädä läpinäkyvyyttä (0 - läpinäkyvä, 255 - läpinäkymätön)</string>
     <string name="confirm_interrupt_download">Peruutetaanko tiedoston lataus\?</string>
     <string name="basemap_was_selected_to_download">Peruskartta vaaditaan sovelluksen kunnolliseen toimintaan ja siksi se on valittu ladattavaksi.</string>
@@ -537,7 +533,7 @@
     <string name="show_poi_filter">Näytä suodin</string>
     <string name="search_poi_filter">Suodin</string>
     <string name="failed_op">epäonnistui</string>
-    <string name="error_calculating_route_occured">Tapahtui virhe laskettaessa reittiä</string>
+    <string name="error_calculating_route_occured">Reittiä ei pystytty laskemaan.</string>
     <string name="map_widget_distancemeasurement">Etäisyyden mittaus</string>
     <string name="download_select_map_types">Muut kartat</string>
     <string name="av_def_action_video">Tallenna videota</string>
@@ -602,7 +598,7 @@
     <string name="edit_tilesource_minzoom">Minimi tarkennus</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Valitse olemassaoleva…</string>
-    <string name="driving_region_descr">Valitse liikkumisalue: USA, Eurooppa, UK, Aasia tai muut</string>
+    <string name="driving_region_descr">Valitse liikkumisalue: USA, Eurooppa, UK, Aasia tai muut.</string>
     <string name="driving_region">Liikkumisalue</string>
     <string name="driving_region_japan">Japani</string>
     <string name="driving_region_us">Yhdysvallat</string>
@@ -671,7 +667,7 @@
     <string name="monitoring_settings">Matkan tallennus</string>
     <string name="plugin_ski_name">Hiihtokarttanäkymä</string>
     <string name="route_points">Reittipisteet</string>
-    <string name="get_plugin">Lataa</string>
+    <string name="shared_string_get">Lataa</string>
     <string name="plugin_nautical_name">Merikartat</string>
     <string name="osmand_distance_planning_plugin_name">Etäisyyslaskin &amp; suunnittelutyökalu</string>
     <string name="search_for">Etsi</string>
@@ -721,7 +717,7 @@
     <string name="action_delete">Poista toiminto</string>
     <string name="osm_edits">OSM muokkaukset</string>
     <string name="osmand_parking_hour">t</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Pysäköintiaika rajoitettu</string>
     <string name="osmand_parking_time_left">vasen</string>
     <string name="your_edits">Muokkaukset</string>
@@ -807,7 +803,7 @@
     <string name="map_widget_left">Vasen paneeli</string>
     <string name="always_center_position_on_map">Näytä sijainti aina keskellä</string>
     <string name="voice_is_not_available_msg">Ääniohjausta ei ole saatavilla. Mene \\\'Asetukset\\\' → \\\'Yleiset asetukset\\\' → \'\\Ääniohjaus\\\' ja valitse tai lataa äänikehote.</string>
-    <string name="download_type_to_filter">etsi</string>
+    <string name="download_type_to_filter">kirjoita suodattaaksesi</string>
     <string name="search_map_hint">Kaupunki tai alue</string>
     <string name="route_roundabout_short">Poistu %1$d. liittymästä</string>
     <string name="route_calculation">Reitin laskenta</string>
@@ -1165,7 +1161,7 @@
     <string name="shared_string_logoff">Kirjaudu ulos</string>
     <string name="local_recordings_delete_all_confirm">Haluatko varmasti poistaa %1$d huomautukset\?</string>
     <string name="osmand_parking_plugin_name">Pysäköinnin sijainti</string>
-    <string name="osm_settings">OSM muokkaus</string>
+    <string name="osm_editing_plugin_name">OSM muokkaus</string>
     <string name="share_note">Jaa huomautus</string>
     <string name="location_on_map">Sijainti:
 \nLev %1$s
@@ -1175,8 +1171,8 @@
     <string name="rendering_attr_pisteRoutes_name">Laskettelurinteet</string>
     <string name="device_memory">Laitteen muisti</string>
     <string name="rendering_attr_pisteGrooming_name">Rinnehuolto</string>
-    <string name="world_ski_missing">Näyttääksesi hiihtokartat tarvitsee ladata erityinen offline kartta</string>
-    <string name="nautical_maps_missing">Näyttääksesi merikartat tarvitsee ladata erityinen offline kartta</string>
+    <string name="world_ski_missing">Näyttääksesi hiihtokartat tarvitsee ladata erityinen offline kartta.</string>
+    <string name="nautical_maps_missing">Näyttääksesi merikartat tarvitsee ladata erityinen offline kartta.</string>
     <string name="parking_place">Pysäköintipaikka</string>
     <string name="remove_the_tag">POISTA TAGI</string>
     <string name="gps_status">GPS tila</string>
@@ -1274,7 +1270,7 @@
     <string name="navigation_item_description">Asetukset suunnistukseen</string>
     <string name="planning_trip_item">Reitin suunnittelu</string>
     <string name="faq_item">UKK</string>
-    <string name="faq_item_description">Usein kysytyt kysymykset</string>
+    <string name="faq_item_description">Usein kysytyt kysymykset.</string>
     <string name="map_viewing_item">Kartan katselu</string>
     <string name="search_on_the_map_item">Kartalla etsiminen</string>
     <string name="instalation_troubleshooting_item">Asennus ja ongelmien ratkaisu</string>
@@ -1328,7 +1324,7 @@
     <string name="speak_speed_limit">Nopeusrajoitus</string>
     <string name="speak_cameras">Nopeuskamerat</string>
     <string name="speak_traffic_warnings">Liikennevaroitukset</string>
-    <string name="osb_author_or_password_not_specified">Määritä OSM-käyttäjä ja salasana kohdassa \'Asetukset\'.</string>
+    <string name="osb_author_or_password_not_specified">Määritä OSM-käyttäjä ja salasana kohdassa \'Asetukset\'</string>
     <string name="save_track_interval_globally">Keruuväli</string>
     <string name="save_track_interval_descr">Määritä kirjausväli jäljen tallennukselle suunnistuksen aikana</string>
     <string name="enable_proxy_title">Ota HTTP välityspalvelin käyttöön</string>
@@ -1452,8 +1448,8 @@
     <string name="map_online_data">Online ja kuvakekartat</string>
     <string name="play_commands_of_currently_selected_voice">Valitse ääni ja testaa toistamalla ilmoituksia:</string>
     <string name="test_voice_prompts">Testaa ääniohjeita</string>
-    <string name="support_new_features_descr">Lahjoita nähdäksesi uusia ominaisuuksia totetettavaksi sovellutukseen</string>
-    <string name="accessibility_mode_descr">Ota käyttöön esteettömyysominaisuudet</string>
+    <string name="support_new_features_descr">Lahjoita nähdäksesi uusia ominaisuuksia sovelluksessa.</string>
+    <string name="accessibility_mode_descr">Ota käyttöön esteettömyysominaisuudet.</string>
     <string name="zoomOut">Loitonna</string>
     <string name="zoomIn">Lähennä</string>
     <string name="zoomIs">Zoomaustaso on</string>
@@ -1497,7 +1493,7 @@
     <string name="tts_missing_language_data_title">Puuttuva tieto</string>
     <string name="gpx_option_reverse_route">Käännä jäljen suunta</string>
     <string name="gpx_option_destination_point">Käytä nykyistä päämäärää</string>
-    <string name="choose_audio_stream_descr">Valitse kaiutin ääniohjaukselle</string>
+    <string name="choose_audio_stream_descr">Valitse kaiutin ääniohjaukselle.</string>
     <string name="index_name_canada">Pohjois-Amerikka - Kanada</string>
     <string name="index_name_italy">Eurooppa - Italia</string>
     <string name="index_name_gb">Eurooppa - Iso-Britannia</string>
@@ -1520,7 +1516,7 @@
     <string name="guidance_preferences_descr">Navigointivalinnat</string>
     <string name="routing_preferences_descr">Reititysvalinnat</string>
     <string name="complex_route_calculation_failed">Nopea reitin laskenta epäonnistui (%s), palataan hitaaseen laskentaan.</string>
-    <string name="disable_complex_routing_descr">Poista käytöstä 2-vaiheinen reititys autosuunnistukseen</string>
+    <string name="disable_complex_routing_descr">Poista käytöstä 2-vaiheinen reititys autosuunnistukseen.</string>
     <string name="disable_complex_routing">Poista käytöstä moniosainen reititys</string>
     <string name="app_modes_choose">Sovellusprofiilit</string>
     <string name="app_mode_hiking">Patikointi</string>
@@ -1529,7 +1525,7 @@
     <string name="route_descr_lat_lon">Pit %1$.3f, lev %2$.3f</string>
     <string name="route_descr_destination">Päämäärä</string>
     <string name="route_via">Kautta:</string>
-    <string name="local_osm_changes_backup_failed">OSM muutosten varmistus epäonnistui</string>
+    <string name="local_osm_changes_backup_failed">OSM muutosten varmistus epäonnistui.</string>
     <string name="local_osm_changes_backup">Varmuuskopioi OSM-muutoksena</string>
     <string name="distance_measurement_finish_editing">Lopeta muokkaus</string>
     <string name="other_location">Muuta</string>
@@ -1697,7 +1693,7 @@
     <string name="update_poi_no_offline_poi_index">Tälle alueelle ei ole käytettävissä offline KP tietoja</string>
     <string name="update_poi_is_not_available_for_zoom">Lähentämällä voit päivittää KP:t</string>
     <string name="max_level_download_tile">Maksimi online zoomaus</string>
-    <string name="max_level_download_tile_descr">Valitse maksimi zoomaustaso online karttakuvakkeiden lataamiseksi</string>
+    <string name="max_level_download_tile_descr">Valitse maksimi zoomaustaso online karttakuvakkeiden lataamiseksi.</string>
     <string name="router_service_descr">Online- tai offline-navigaatiopalvelu.</string>
     <string name="download_question_exist">Offline data {0} on jo olemassa ({1}). Päivitetäänlö se ({2})\?</string>
     <string name="opening_changeset">Avataan muutosjoukkoa…</string>
@@ -1722,7 +1718,6 @@
     <string name="route_from">Mistä:</string>
     <string name="download_using_mobile_internet">Ei yhdistetty Wi-Fi-verkkoon. Haluatko käyttää nykyistä Internet-yhteyttä lataukseen\?</string>
     <string name="precise_routing_mode_descr">Ota käyttöön reitille tarkka laskenta ilman pikkuvirheitä. Vielä etäisyysrajoitteinen ja hidas.</string>
-    <string name="av_def_action_choose">Pyynnöstä\?</string>
     <string name="av_widget_action_descr">Oletustyökalutoiminto:</string>
     <string name="av_widget_action">Oletustyökalutoiminto</string>
     <string name="av_use_external_recorder_descr">Käytä järjestelmän nauhoitinta videolle.</string>
@@ -1731,7 +1726,7 @@
     <string name="recording_is_recorded">Nauhoitetaan ääntä/videota. Lopettaaksesi sen paina AV työkalua.</string>
     <string name="recording_context_menu_vrecord">Tee video huomautus</string>
     <string name="layer_recordings">Nauhoitustaso</string>
-    <string name="recording_can_not_be_played">Nauhoitusta ei voida toistaa</string>
+    <string name="recording_can_not_be_played">Nauhoitusta ei voida toistaa.</string>
     <string name="recording_context_menu_delete">Poista nauhoitus</string>
     <string name="recording_default_name">Nauhoitetaan</string>
     <string name="map_widget_av_notes">Audio/video huomautukset</string>
@@ -1743,8 +1738,8 @@
     <string name="native_library_not_running">Sovellusta suoritetaan turvatilassa (poista tila Asetuksissa).</string>
     <string name="close_changeset">Sulje muutosjoukko</string>
     <string name="show_warnings_descr">Määritä liikennevaroitukset (nopeusrajoitukset, pakolliset pysähdykset, hidasteet, tunnelit), nopeuskameravaroitukset ja kaistatiedot.</string>
-    <string name="auto_zoom_map_descr">Automaattisesti zoomautuva kartta nopeutesi mukaan (kun kartta on synkronoitu nykyiseen sijaintiisi)</string>
-    <string name="interrupt_music_descr">Keskeytä musiikki täydellisesti ääniohjeiden ajaksi (ei ainoastaan hiljennystä)</string>
+    <string name="auto_zoom_map_descr">Automaattisesti zoomautuva kartta nopeutesi mukaan (kun kartta on synkronoitu nykyiseen sijaintiisi).</string>
+    <string name="interrupt_music_descr">Keskeytä musiikki täydellisesti ääniohjeiden ajaksi (ei ainoastaan hiljennystä).</string>
     <string name="map_widget_next_next_turn">Toinen käännös</string>
     <string name="native_app_allocated_memory_descr">Sovelluksen varaama natiivi muisti yhteensä %1$s MB (Dalvik %2$s MB, muut %3$s MB).
 \nSuhteellinen muisti %4$s MB (Android raja %5$s MB, Dalvik %6$s MB).</string>
@@ -1756,8 +1751,7 @@
     <string name="access_direction_audio_feedback">Reittiohjaus (äänipalautteena)</string>
     <string name="access_direction_haptic_feedback">Reittiohjaus (värinäpalautteena)</string>
     <string name="storage_directory_readonly_desc">Vaihdettu sisäiseen muistiin, sillä valittu tallennushakemisto on kirjoitussuojattu. Ole hyvä ja valitse tallennushakemisto johon voi kirjoittaa.</string>
-    <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten</string>
-    <string name="translit_name_if_miss">Translitteroi, jos nimi puuttuu kielellä %1$s</string>
+    <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten.</string>
     <string name="translit_names">Translitteroi nimet</string>
     <string name="osm_live_header">Tämä tilaus mahdollistaa päivitykset kaikkiin karttoihin ympäri maailmaa tunneittain.
 \nOsa tuloista menee takaisin OSM-yhteisölle ja maksetaan jokaiselle OSM-avustajalle.
@@ -1800,7 +1794,7 @@
     <string name="clear_intermediate_points">Poista välikohteet</string>
     <string name="keep_intermediate_points">Säilytä välikohteet</string>
     <string name="new_directions_point_dialog">Olet jo asettanut välikohteita.</string>
-    <string name="use_kalman_filter_compass_descr">Vähentää kohinaa kompassilukemissa mutta lisää hitautta</string>
+    <string name="use_kalman_filter_compass_descr">Vähentää kohinaa kompassilukemissa mutta lisää hitautta.</string>
     <string name="use_magnetic_sensor_descr">Käytä magneetista sensoria määrittäessä kompassin arvoja suuntasensorin sijaan.</string>
     <string name="use_magnetic_sensor">Käytä magneetista sensoria</string>
     <string name="srtm_paid_version_msg">Harkitse maksamista Korkeuskäyrät-lisäosasta tukeaksesi jatkokehitystä.</string>
@@ -1817,7 +1811,7 @@
     <string name="overlay_transparency">Peitteen läpinäkyvyys</string>
     <string name="map_transparency_descr">Säädä peruskartan läpinäkyvyyttä.</string>
     <string name="map_transparency">Peruskartan läpinäkyvyys</string>
-    <string name="tile_source_already_installed">Kartta on jo asennettu, asetukset päivitetään</string>
+    <string name="tile_source_already_installed">Kartta on jo asennettu, asetukset päivitetään.</string>
     <string name="select_tile_source_to_install">Valitse (tiili) kartat asennettavaksi tai päivitettäväksi.</string>
     <string name="internet_not_available">Toimintoa ei voida suorittaa ilman Internet-yhteyttä.</string>
     <string name="install_more">Asenna lisää…</string>
@@ -1897,7 +1891,7 @@
     <string name="quick_action_map_source">Muuta kartan lähdettä</string>
     <string name="gpx_split_interval">Jakoväli</string>
     <string name="prefs_plugins_descr">Liitännäiset aktivoivat laajennetut asetukset ja lisätoiminnallisuudet.</string>
-    <string name="choose_auto_follow_route_descr">Aika kunnes karttanäyttö synkronoituu nykysijaintiin</string>
+    <string name="choose_auto_follow_route_descr">Aika kunnes karttanäyttö synkronoituu nykysijaintiin.</string>
     <string name="keep_informing_descr">Ilmoita navigointiohjeet säännöllisin väliajoin uudestaan.</string>
     <string name="auto_follow_route_navigation">Keskitä automaattisesti ainoastaan suunnistettaessa</string>
     <string name="old_poi_file_should_be_deleted">KP-datatiedosto \'%1$s\' on tarpeeton ja se voidaan poistaa.</string>
@@ -3057,7 +3051,7 @@
     <string name="verify_email_address_descr">Lähetimme vahvistuskoodin osoitteeseen %1$s, kirjoita se alla olevaan kenttään.</string>
     <string name="cloud_email_not_registered">Tätä sähköpostia ei ole rekisteröity OsmAnd Cloud -palveluun</string>
     <string name="cloud_email_already_registered">Tällä sähköpostilla on jo rekisteröity tili.</string>
-    <string name="resend_verification_code">Lähetä koodi uudelleen</string>
+    <string name="resend_verification_code">Lähetä uudelleen</string>
     <string name="verification_code_missing">En saanut vahvistuskoodia</string>
     <string name="verification_code_missing_description">Koodin odotusaika voi olla 10 minuuttia, voit myös tarkistaa roskapostikansiosi. Jos se ei auta, käytä alla olevaa painiketta.</string>
     <string name="loading_list_of_routing_services">Ladataan luettelo käytettävissä olevista reitityspalveluista</string>
@@ -3431,7 +3425,6 @@
     <string name="rendering_attr_piste_type_sled_name">Kelkka</string>
     <string name="rendering_attr_piste_type_sleigh_name">Reki</string>
     <string name="change_data_storage_folder">Vaihda tallennuskansio</string>
-    <string name="internal_app_storage_description">Sisäinen tallennustila OsmAndia varten (piilotettu käyttäjiltä ja muilta sovelluksilta).</string>
     <string name="paste_Osmand_data_folder_path">Liitä polku kansioon, jossa on OsmAnd-tiedot</string>
     <string name="change_osmand_data_folder_question">Muuta OsmAnd-tietokansiota\?</string>
     <string name="enter_path_to_folder">Anna kansion polku</string>
@@ -3649,7 +3642,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Saat käyttöösi säännölliset kuukausittaiset päivitykset offline-karttoihin.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Hanki pääsy käyttämään tiheämpiä karttapäivityksiä. Tuntikohtaiset, päivittäiset tai viikoittaiset päivitykset. Päivitykset ladataan asteittain vain muutetulle alueelle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Hanki OsmAnd Cloud tallentaaksesi kaikki OsmAnd tiedot verkkoon. Et menetä tietoja uudelleenasennuksen jälkeen. Varmuuskopioi ja palauta kaikki tiedot helposti.</string>
-    <string name="not_enough_contributions_descr">Vähintään %1$s OpenStreetMap-julkaisua vaaditaan %2$s päivän kuluessa.</string>
     <string name="voice_prompts_timetable">Äänikehotteiden ajat</string>
     <string name="osmand_plus_extended_description_part5">Turvallisuusominaisuudet
 \n - Valinnainen automaattinen päivä-/yönäkymän vaihto
@@ -3843,7 +3835,7 @@
 \nMahdollisesti kaikkia karttoja ei ole ladattu.</string>
     <string name="online_maps_required_descr">Valitettavasti, OsmAnd ei voi päätellä reittiä asetuksillesi.
 \n
-\nMahdollisesti jotkut kartat lataamatta, voit ajaa tarkistuksen tarvittaville kartoille.</string>
+\nMahdollisesti jotkut kartat ovat lataamatta, voit ajaa tarkistuksen tarvittaville kartoille.</string>
     <string name="pro_features">Pro ominaisuus</string>
     <string name="shared_string_purchased">Maksettu</string>
     <string name="explore_osmnad_plans_to_find_suitable">Selaa OsmAnd vaihtoehdoista itsellesi sopiva.</string>
@@ -3858,7 +3850,7 @@
     <string name="purchases_restored">Ostokset palautettu</string>
     <string name="cancel_anytime_in_amazon_app">Keskeytä se koska vain Amazon sovelluksessa</string>
     <string name="empty_category_name">Tyhjä kategorian nimi</string>
-    <string name="no_activity_for_intent">Tarvittavaa sovellusta ei löytynyt</string>
+    <string name="no_activity_for_intent">Tarvittavaa sovellusta ei löytynyt.</string>
     <string name="indexing_transport">Indeksoidaan liikennettä…</string>
     <string name="increase_search_radius_to">Laajenna hakusädettä %1$s:iin</string>
     <string name="powered_by_osmand">Käyttäen OsmAndia</string>
@@ -3878,4 +3870,111 @@
     <string name="quick_action_add_navigation">Navigointi</string>
     <string name="quick_action_add_osm_bug">Lisää OSM-huomautus</string>
     <string name="in_app_purchase_desc_ex">Ostamisen jälkeen se on pysyvästi käytettävissäsi.</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="lang_tg">Tadžikki</string>
+    <string name="lang_scn">Sisilia</string>
+    <string name="lang_pnb">Pandžabi</string>
+    <string name="lang_nap">Napoli</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_mg">Malagassi</string>
+    <string name="lang_kk">Kazakki</string>
+    <string name="lang_gu">Gudžarati</string>
+    <string name="lang_cv">Tšuvassi</string>
+    <string name="sqlite_db_file">SQLiteDB -tiedosto</string>
+    <string name="start_point">Aloita</string>
+    <string name="shared_string_files">Tiedostot</string>
+    <string name="start_editing_card_image_text">Ilmainen maailmanlaajuinen matkaopas, jota kuka tahansa voi muokata.</string>
+    <string name="gpx_no_routes_title">Ei reittejä</string>
+    <string name="gpx_no_routes_descr">Voit käyttää \"%1$s\" työkalua lisätäksesi reitin tiedostoon.</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vesiväylien tunnelit</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Älä piilota vesiväylien tunneleita</string>
+    <string name="turn_arrows">Kääntymisnuolet</string>
+    <string name="distance_between_points">Pisteiden välinen välimatka</string>
+    <string name="gps_filter_smoothing">Pehmennys</string>
+    <string name="migration_files_present">Löytyi %1$d tiedostoa (%2$s) valitusta sijainnista \'%3$s\'.</string>
+    <string name="app_profile_type">Lisää profiilin tyyppi</string>
+    <string name="shared_string_memory">Muisti</string>
+    <string name="memory_allocated_for_routing_ds">Suurempi muistivaraus nopeuttaa pitkien reittien laskentaa (yli 500 km), mutta saattaa vaikuttaa muiden sovellusten nopeuteen.
+\nEi vaikutusta lyhyempien reittien laskentanopeuteen.</string>
+    <string name="memory_allocated_for_routing">Reititykselle varattava muisti</string>
+    <string name="no_items_selected_warning">Ole hyvä valitse vähintään yksi</string>
+    <string name="display_groups_visibility_dialog_description">Voit määrittää ryhmän näkyvyyden kartalla. Mikäli reitti on piilotettu, kaikki ryhmät piilotetaan myös.</string>
+    <string name="storage_copying_files_size">Kopioidaan %1$s tiedostoja %2$s</string>
+    <string name="storage_found_files_size">Löydettiin %1$s tiedostoa %2$s</string>
+    <string name="shared_storage_last_step">Voit määrittää uuden tiedostokansion jälkikäteen.</string>
+    <string name="shared_storage_migration">Jaetun kansion migraatio</string>
+    <string name="use_external_timestamps">Käytä ulkoisia aikaleimoja</string>
+    <string name="save_track_to_gpx_descrp">Aloita reitin nauhoitus automaattisesti navigoinnin alkaessa. Navigoinnin päättyessä nauhoitus tallennetaan automaattisesti.</string>
+    <string name="please_provide_group_name_message">Nimeä ryhmä.</string>
+    <string name="shared_string_used">Käytössä</string>
+    <string name="shared_string_not_used">Ei käytössä</string>
+    <string name="storage_migration_wrong_folder_warning">OsmAnd tietoja ei löydetty valitusta kansiosta. Ole hyvä ja yritä uudelleen.</string>
+    <string name="app_modes_options">Valitse sovelluksen tila</string>
+    <string name="reading_files">Luetaan tiedostoja…</string>
+    <string name="add_to_group">Lisää ryhmään</string>
+    <string name="skip_confirmation">Kyllä, ohita</string>
+    <string name="shared_storage_migration_descr">Johtuen muutoksista Androidin kansio oikeuksissa, OsmAnd ei voi käyttää enää %1$s.
+\n
+\nKopioi kaikki tietosi uuteen kansioon.</string>
+    <string name="shared_storage">Jaettu kansio</string>
+    <string name="start_copying">Aloita kopiointi</string>
+    <string name="exit_without_saving_warning">Poistu tallentamatta muutoksia\?</string>
+    <string name="track_file">Reittitiedosto</string>
+    <string name="shared_string_size">Koko</string>
+    <string name="created_on">Luotu</string>
+    <string name="shared_string_precision">Tarkkuus</string>
+    <string name="save_changes_into_file">Talleta muutokset tiedostoon</string>
+    <string name="save_as_copy">Tallenna kopio</string>
+    <string name="gps_filter_actions_description">OsmAnd lisää muutokset reittiin tallentamatta tiedostoa. Voit tallentaa muutokset manuaalisesti.</string>
+    <string name="shared_string_gps_filter">GPS suodatin</string>
+    <string name="shared_string_hide_all">Piilota kaikki</string>
+    <string name="shared_string_statistics">Tilastot</string>
+    <string name="rendering_value_all_name">Kaikki</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonit matalalla tarkkuudella</string>
+    <string name="copying_file">Kopioidaan tiedostoa %1$s…</string>
+    <string name="from_to_with_params">Sijainnista %1$s sijaintiin %2$s</string>
+    <string name="progress_complete">%1$s valmis</string>
+    <string name="storage_copied_files_size">Kopioidaan %1$s tiedostoista %2$s</string>
+    <string name="files_remaining">Tiedostoja jäljellä: %1$s %2$s</string>
+    <string name="shared_storage_third_step">Salli pääsy kansioon. Ilman sitä OsmAnd ei voi kopioida tiedostoja.</string>
+    <string name="shared_storage_second_step">Valitse \"Käytä tätä kansiota\".</string>
+    <string name="folder_access_denied">Oikeus valittuun kansioon pääsemiseen vaaditaan.</string>
+    <string name="copying_completed">Kopioitu</string>
+    <string name="shared_string_migration">Migraatio</string>
+    <string name="icon_group_industrial">Teollinen</string>
+    <string name="display_route_tracks">Näytä reitit</string>
+    <string name="shared_string_travelbooks">Matkakirjat</string>
+    <string name="approx_safe_mode">Turvallinen GPX tarkkuus</string>
+    <string name="map_marker_options">Karttamerkkien ominaisuudet</string>
+    <string name="gps_filter_precision">GPS tarkkuus</string>
+    <string name="safe_settings">Turvassa</string>
+    <string name="rendering_value_category_name">Kategoria</string>
+    <string name="shared_string_skip_warning">Ohitetaanko migraatio\? OsmAndilla ei ole enää pääsyä tiedostoihisi jaetussa tallennuskansiossa.
+\n
+\nOhjelma käynnistetään käyttäen uutta tietokansiota.</string>
+    <string name="shared_string_copy_to">Kopioi tänne</string>
+    <string name="delete_history_items_descr">Poistetaanko valitut historiasta\?</string>
+    <string name="delete_history_items">Poistetaanko %1$s kohtia historiasta\?</string>
+    <string name="display_route_tracks_as_poi">Näytä reitit kuten KP</string>
+    <string name="exit_import_descr">Poistu tallentamatta muutoksia\?</string>
+    <string name="list_of_groups">Lista ryhmistä</string>
+    <string name="exit_import">Poistu\?</string>
+    <string name="shared_string_reading_file">Luetaan tiedostoa…</string>
+    <string name="all_groups">Kaikki ryhmät</string>
+    <string name="points_selection_descr">Sulje ja menetä tekemäsi muutokset\?</string>
+    <string name="import_tracks">Tuo jäljet</string>
+    <string name="import_tracks_descr">%1$s, sisältää %2$s erillistä jälkeä. Valitse tuotavat jäljet.</string>
+    <string name="quick_action_add_route_descr">Painike reitin lisäämiseksi keskeltä ruutua.</string>
+    <string name="location_source_descr">Google Play kaupasta asennettu OsmAnd käyttää oletuksena %1$s päätelläkseen sijainnin.
+\n
+\nJos saat epätarkan sijainnin tai käytät laitetta ilman %2$s, yritä vaihtaa \"%3$s\"</string>
+    <string name="location_source">Sijainnin lähde</string>
+    <string name="select_suggested_points">Valitse ehdotetut pisteet</string>
+    <string name="selected_waypoints_descr">Valitut väyläpisteet lisätään \"%1$s\" jäljelle</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonien yksinkertaistettu esittäminen matalilla tarkkuuksilla</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Näytä huomautustunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Näytä fixme tunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Huomautustunnisteet</string>
 </resources>

@@ -16,6 +16,8 @@ public class LocationConvert {
 	public static final int UTM_FORMAT = 3;
 	public static final int OLC_FORMAT = 4;
 	public static final int MGRS_FORMAT = 5;
+	public static final int SWISS_GRID_FORMAT = 6;
+	public static final int SWISS_GRID_PLUS_FORMAT = 7;
 	private static final char DELIM = ':';
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';

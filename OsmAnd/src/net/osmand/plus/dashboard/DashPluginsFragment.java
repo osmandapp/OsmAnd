@@ -16,17 +16,17 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
+import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -176,7 +176,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		CompoundButton enableDisableButton = (CompoundButton) view.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) view.findViewById(R.id.get_plugin);
-		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
+		getButton.setText(plugin.isPaid() ? R.string.shared_string_get : R.string.shared_string_install);
 		getButton.setOnClickListener(getListener(plugin));
 		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view, plugin);

@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import net.osmand.plus.NotificationHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.util.Algorithms;

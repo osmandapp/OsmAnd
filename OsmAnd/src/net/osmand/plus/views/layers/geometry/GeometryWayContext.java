@@ -9,20 +9,24 @@ import android.graphics.PorterDuffColorFilter;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 
 public abstract class GeometryWayContext {
 
 	public static final int DEFAULT_SIMPLIFICATION_ZOOM = 16;
 
 	private final Context ctx;
+
 	private final float density;
 	private boolean nightMode;
 	private int simplificationZoom = DEFAULT_SIMPLIFICATION_ZOOM;
+	private boolean mapRendererEnabled = true;
 
 	private final Paint paintIcon;
 	private final Paint paintIconCustom;
@@ -31,7 +35,7 @@ public abstract class GeometryWayContext {
 
 	private final Bitmap arrowBitmap;
 
-	public GeometryWayContext(Context ctx, float density) {
+	public GeometryWayContext(@NonNull Context ctx, float density) {
 		this.ctx = ctx;
 		this.density = density;
 
@@ -50,12 +54,31 @@ public abstract class GeometryWayContext {
 		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId());
 	}
 
+	@NonNull
 	public OsmandApplication getApp() {
 		return (OsmandApplication) ctx.getApplicationContext();
 	}
 
+	@NonNull
 	public Context getCtx() {
 		return ctx;
+	}
+
+	public boolean hasMapRenderer() {
+		return mapRendererEnabled && getMapRenderer() != null;
+	}
+
+	public void enableMapRenderer() {
+		mapRendererEnabled = true;
+	}
+
+	public void disableMapRenderer() {
+		mapRendererEnabled = false;
+	}
+
+	@Nullable
+	public MapRendererView getMapRenderer() {
+		return mapRendererEnabled ? getApp().getOsmandMap().getMapView().getMapRenderer() : null;
 	}
 
 	public RenderingLineAttributes getAttrs() {
@@ -81,8 +104,10 @@ public abstract class GeometryWayContext {
 	@DrawableRes
 	protected abstract int getArrowBitmapResId();
 
-	public void setNightMode(boolean nightMode) {
+	public boolean setNightMode(boolean nightMode) {
+		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
+		return changed;
 	}
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes attrs) {

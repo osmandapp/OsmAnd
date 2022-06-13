@@ -15,7 +15,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -41,9 +41,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -59,7 +57,11 @@ import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
+import net.osmand.aidlapi.customization.PreferenceParams;
+import net.osmand.aidlapi.exit.ExitAppParams;
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
+import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
@@ -69,19 +71,11 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.CustomOsmandPlugin;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
@@ -90,15 +84,26 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.LogcatAsyncTask;
+import net.osmand.plus.plugins.development.LogcatMessageListener;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -108,11 +113,25 @@ import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
@@ -142,6 +161,25 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+
 public class OsmandAidlApi {
 
 	AidlCallbackListener aidlCallbackListener = null;
@@ -152,6 +190,9 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
 	public static final int KEY_ON_VOICE_MESSAGE = 8;
 	public static final int KEY_ON_KEY_EVENT = 16;
+	public static final int KEY_ON_LOGCAT_MESSAGE = 32;
+
+	public static final String WIDGET_ID_PREFIX = "aidl_widget_";
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -205,6 +246,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
 	private static final String AIDL_LOCK_STATE = "lock_state";
+	private static final String AIDL_EXIT_APP = "exit_app";
+	private static final String AIDL_EXIT_APP_RESTART = "exit_app_restart";
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -219,19 +262,22 @@ public class OsmandAidlApi {
 	private final OsmandApplication app;
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
+	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private final Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, LogcatAsyncTask> logcatAsyncTasks = new ConcurrentHashMap<>();
 
 	private MapActivity mapActivity;
 
 	private boolean mapActivityActive = false;
 
-	public OsmandAidlApi(OsmandApplication app) {
+	public OsmandAidlApi(@NonNull OsmandApplication app) {
 		this.app = app;
 		loadConnectedApps();
 	}
 
-	public void onCreateMapActivity(MapActivity mapActivity) {
+	public void onCreateMapActivity(@NonNull MapActivity mapActivity) {
 		mapActivityActive = true;
 		registerRefreshMapReceiver(mapActivity);
 		registerSetMapLocationReceiver(mapActivity);
@@ -257,6 +303,7 @@ public class OsmandAidlApi {
 		registerExecuteQuickActionReceiver(mapActivity);
 		registerLockStateReceiver(mapActivity);
 		registerSetLocationReceiver(mapActivity);
+		registerExitAppReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		this.mapActivity = mapActivity;
@@ -296,7 +343,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private void registerRefreshMapReceiver(MapActivity mapActivity) {
+	private void registerRefreshMapReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver refreshMapReceiver = new BroadcastReceiver() {
 			@Override
@@ -310,7 +357,7 @@ public class OsmandAidlApi {
 		registerReceiver(refreshMapReceiver, mapActivity, AIDL_REFRESH_MAP);
 	}
 
-	private void registerSetMapLocationReceiver(MapActivity mapActivity) {
+	private void registerSetMapLocationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver setMapLocationReceiver = new BroadcastReceiver() {
 			@Override
@@ -347,7 +394,7 @@ public class OsmandAidlApi {
 		registerReceiver(setMapLocationReceiver, mapActivity, AIDL_SET_MAP_LOCATION);
 	}
 
-	private void registerAddMapWidgetReceiver(MapActivity mapActivity) {
+	private void registerAddMapWidgetReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
@@ -358,17 +405,24 @@ public class OsmandAidlApi {
 				if (mapActivity != null && widgetId != null && packName != null) {
 					ConnectedApp connectedApp = connectedApps.get(packName);
 					if (connectedApp != null) {
-						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(widgetId);
+						AidlMapWidgetWrapper widgetData = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-						if (widget != null && layer != null) {
-							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
-							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
-							connectedApp.getWidgetControls().put(widgetId, control);
+						if (widgetData != null && layer != null) {
+							ApplicationMode.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							connectedApp.getWidgetControls().put(widgetId, widget);
 
-							int iconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
+							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-							String widgetKey = "aidl_widget_" + widgetId;
-							layer.registerSideWidget(control, menuIconId, widget.getMenuTitle(), widgetKey, false, widget.getOrder());
+							String widgetKey = WIDGET_ID_PREFIX + widgetId;
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+
+							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+							widgetRegistry.registerWidget(widgetInfo);
+
+							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
 						}
 					}
@@ -384,7 +438,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	private void registerAddContextMenuButtonsReceiver(MapActivity mapActivity) {
+	private void registerAddContextMenuButtonsReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addContextMenuButtonsParamsReceiver = new BroadcastReceiver() {
 			@Override
@@ -414,7 +468,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private void registerRemoveMapWidgetReceiver(MapActivity mapActivity) {
+	private void registerRemoveMapWidgetReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver removeMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
@@ -439,13 +493,13 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
-	public void registerWidgetControls(@NonNull MapActivity mapActivity) {
+	public void createWidgetControls(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.registerWidgetControls(mapActivity);
+			connectedApp.createWidgetControls(mapActivity, widgetsInfos);
 		}
 	}
 
-	private void registerAddMapLayerReceiver(MapActivity mapActivity) {
+	private void registerAddMapLayerReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapLayerReceiver = new BroadcastReceiver() {
 			@Override
@@ -462,7 +516,7 @@ public class OsmandAidlApi {
 							if (mapLayer != null) {
 								mapActivity.getMapView().removeLayer(mapLayer);
 							}
-							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack());
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack(), -180000);
 							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
 							connectedApp.getMapLayers().put(layerId, mapLayer);
 						}
@@ -473,7 +527,7 @@ public class OsmandAidlApi {
 		registerReceiver(addMapLayerReceiver, mapActivity, AIDL_ADD_MAP_LAYER);
 	}
 
-	private void registerRemoveMapLayerReceiver(MapActivity mapActivity) {
+	private void registerRemoveMapLayerReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver removeMapLayerReceiver = new BroadcastReceiver() {
 			@Override
@@ -496,7 +550,7 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapLayerReceiver, mapActivity, AIDL_REMOVE_MAP_LAYER);
 	}
 
-	private void registerTakePhotoNoteReceiver(MapActivity mapActivity) {
+	private void registerTakePhotoNoteReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver takePhotoNoteReceiver = new BroadcastReceiver() {
 			@Override
@@ -513,7 +567,7 @@ public class OsmandAidlApi {
 		registerReceiver(takePhotoNoteReceiver, mapActivity, AIDL_TAKE_PHOTO_NOTE);
 	}
 
-	private void registerStartVideoRecordingReceiver(MapActivity mapActivity) {
+	private void registerStartVideoRecordingReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver startVideoRecordingReceiver = new BroadcastReceiver() {
 			@Override
@@ -530,7 +584,7 @@ public class OsmandAidlApi {
 		registerReceiver(startVideoRecordingReceiver, mapActivity, AIDL_START_VIDEO_RECORDING);
 	}
 
-	private void registerStartAudioRecordingReceiver(MapActivity mapActivity) {
+	private void registerStartAudioRecordingReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver startAudioRecordingReceiver = new BroadcastReceiver() {
 			@Override
@@ -547,7 +601,7 @@ public class OsmandAidlApi {
 		registerReceiver(startAudioRecordingReceiver, mapActivity, AIDL_START_AUDIO_RECORDING);
 	}
 
-	private void registerStopRecordingReceiver(MapActivity mapActivity) {
+	private void registerStopRecordingReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver stopRecordingReceiver = new BroadcastReceiver() {
 			@Override
@@ -562,7 +616,7 @@ public class OsmandAidlApi {
 		registerReceiver(stopRecordingReceiver, mapActivity, AIDL_STOP_RECORDING);
 	}
 
-	private void registerNavigateReceiver(MapActivity mapActivity) {
+	private void registerNavigateReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateReceiver = new BroadcastReceiver() {
 			@Override
@@ -623,7 +677,7 @@ public class OsmandAidlApi {
 		registerReceiver(navigateReceiver, mapActivity, AIDL_NAVIGATE);
 	}
 
-	private void registerNavigateSearchReceiver(MapActivity mapActivity) {
+	private void registerNavigateSearchReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateSearchReceiver = new BroadcastReceiver() {
 			@Override
@@ -689,7 +743,7 @@ public class OsmandAidlApi {
 		registerReceiver(navigateSearchReceiver, mapActivity, AIDL_NAVIGATE_SEARCH);
 	}
 
-	private void registerNavigateGpxReceiver(MapActivity mapActivity) {
+	private void registerNavigateGpxReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateGpxReceiver = new BroadcastReceiver() {
 			@Override
@@ -731,7 +785,7 @@ public class OsmandAidlApi {
 		registerReceiver(navigateGpxReceiver, mapActivity, AIDL_NAVIGATE_GPX);
 	}
 
-	private void registerPauseNavigationReceiver(MapActivity mapActivity) {
+	private void registerPauseNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver pauseNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -750,7 +804,7 @@ public class OsmandAidlApi {
 		registerReceiver(pauseNavigationReceiver, mapActivity, AIDL_PAUSE_NAVIGATION);
 	}
 
-	private void registerResumeNavigationReceiver(MapActivity mapActivity) {
+	private void registerResumeNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver resumeNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -768,7 +822,7 @@ public class OsmandAidlApi {
 		registerReceiver(resumeNavigationReceiver, mapActivity, AIDL_RESUME_NAVIGATION);
 	}
 
-	private void registerStopNavigationReceiver(MapActivity mapActivity) {
+	private void registerStopNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver stopNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -785,7 +839,7 @@ public class OsmandAidlApi {
 		registerReceiver(stopNavigationReceiver, mapActivity, AIDL_STOP_NAVIGATION);
 	}
 
-	private void registerMuteNavigationReceiver(MapActivity mapActivity) {
+	private void registerMuteNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver muteNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -799,7 +853,7 @@ public class OsmandAidlApi {
 		registerReceiver(muteNavigationReceiver, mapActivity, AIDL_MUTE_NAVIGATION);
 	}
 
-	private void registerUnmuteNavigationReceiver(MapActivity mapActivity) {
+	private void registerUnmuteNavigationReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver unmuteNavigationReceiver = new BroadcastReceiver() {
 			@Override
@@ -813,7 +867,7 @@ public class OsmandAidlApi {
 		registerReceiver(unmuteNavigationReceiver, mapActivity, AIDL_UNMUTE_NAVIGATION);
 	}
 
-	private void registerShowSqliteDbFileReceiver(MapActivity mapActivity) {
+	private void registerShowSqliteDbFileReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver showSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
@@ -836,7 +890,7 @@ public class OsmandAidlApi {
 		registerReceiver(showSqliteDbFileReceiver, mapActivity, AIDL_SHOW_SQLITEDB_FILE);
 	}
 
-	private void registerHideSqliteDbFileReceiver(MapActivity mapActivity) {
+	private void registerHideSqliteDbFileReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver hideSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
@@ -859,7 +913,7 @@ public class OsmandAidlApi {
 		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
 	}
 
-	private void registerExecuteQuickActionReceiver(MapActivity mapActivity) {
+	private void registerExecuteQuickActionReceiver(@NonNull MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver executeQuickActionReceiver = new BroadcastReceiver() {
 			@Override
@@ -877,7 +931,7 @@ public class OsmandAidlApi {
 		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
 	}
 
-	private void registerLockStateReceiver(MapActivity mapActivity) {
+	private void registerLockStateReceiver(@NonNull MapActivity mapActivity) {
 		BroadcastReceiver lockStateReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -893,7 +947,7 @@ public class OsmandAidlApi {
 		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
 	}
 
-	private void registerSetLocationReceiver(MapActivity mapActivity) {
+	private void registerSetLocationReceiver(@NonNull MapActivity mapActivity) {
 		BroadcastReceiver setLocationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -929,6 +983,22 @@ public class OsmandAidlApi {
 		registerReceiver(setLocationReceiver, mapActivity, AIDL_SET_LOCATION);
 	}
 
+	private void registerExitAppReceiver(@NonNull MapActivity mapActivity) {
+		BroadcastReceiver exitAppReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				boolean restart = intent.getBooleanExtra(AIDL_EXIT_APP_RESTART, false);
+				if (restart) {
+					RestartActivity.doRestartSilent(app);
+				} else {
+					mapActivity.finishAndRemoveTask();
+					RestartActivity.exitApp();
+				}
+			}
+		};
+		registerReceiver(exitAppReceiver, mapActivity, AIDL_EXIT_APP);
+	}
+
 	public void registerMapLayers(@NonNull Context context) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
 			connectedApp.registerMapLayers(context);
@@ -947,9 +1017,9 @@ public class OsmandAidlApi {
 	}
 
 	boolean addFavoriteGroup(String name, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				return false;
 			}
@@ -958,14 +1028,16 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(colorTag)) {
 			color = ColorDialogs.getColorByTag(colorTag);
 		}
-		favoritesHelper.addEmptyCategory(name, color, visible);
+		FavoriteGroup group = favoritesHelper.addFavoriteGroup(name, color);
+		group.setVisible(visible);
+
 		return true;
 	}
 
 	boolean removeFavoriteGroup(String name) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+		for (FavoriteGroup g : groups) {
 			if (g.getName().equals(name)) {
 				favoritesHelper.deleteGroup(g);
 				return true;
@@ -975,23 +1047,23 @@ public class OsmandAidlApi {
 	}
 
 	boolean updateFavoriteGroup(String prevGroupName, String newGroupName, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.getName().equals(prevGroupName)) {
-				int color = 0;
-				if (!Algorithms.isEmpty(colorTag)) {
-					color = ColorDialogs.getColorByTag(colorTag);
-				}
-				favoritesHelper.editFavouriteGroup(g, newGroupName, color, visible);
-				return true;
-			}
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		FavoriteGroup group = favoritesHelper.getGroup(prevGroupName);
+		if (group != null) {
+			int color = Algorithms.isEmpty(colorTag) ? 0 : ColorDialogs.getColorByTag(colorTag);
+
+			favoritesHelper.updateGroupColor(group, color, true, false);
+			favoritesHelper.updateGroupVisibility(group, visible, false);
+			favoritesHelper.updateGroupName(group, newGroupName, false);
+
+			favoritesHelper.saveCurrentPointsIntoFile();
+			return true;
 		}
 		return false;
 	}
 
 	boolean addFavorite(double latitude, double longitude, String name, String category, String description, String colorTag, boolean visible) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		FavouritePoint point = new FavouritePoint(latitude, longitude, name, category);
 		point.setDescription(description);
 		int color = 0;
@@ -1006,7 +1078,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean removeFavorite(String name, String category, double latitude, double longitude) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
 			if (f.getName().equals(name) && f.getCategory().equals(category) &&
@@ -1020,7 +1092,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean updateFavorite(String prevName, String prevCategory, double prevLat, double prevLon, String newName, String newCategory, String newDescription, String newAddress, double newLat, double newLon) {
-		FavouritesDbHelper favoritesHelper = app.getFavorites();
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
 			if (f.getName().equals(prevName) && f.getCategory().equals(prevCategory) &&
@@ -1258,7 +1330,9 @@ public class OsmandAidlApi {
 
 				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 			} else {
-				helper.selectGpxFile(selectedGpx.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				helper.selectGpxFile(selectedGpx.getGpxFile(), params);
 				refreshMap();
 			}
 		} else if (show) {
@@ -1272,7 +1346,10 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						helper.selectGpxFile(gpx, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						helper.selectGpxFile(gpx, params);
 						refreshMap();
 					}
 				}
@@ -1389,7 +1466,10 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 						refreshMap();
 					}
 				}
@@ -1410,7 +1490,9 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 			if (selectedGpxFile != null) {
-				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
 				refreshMap();
 				return true;
 			}
@@ -1640,7 +1722,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.startGPXMonitoring(null);
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
@@ -1650,7 +1732,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.stopRecording();
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
@@ -1691,8 +1773,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigate(String startName, double startLat, double startLon,
-					 String destName, double destLat, double destLon,
-					 String profile, boolean force, boolean requestLocationPermission) {
+	                 String destName, double destLat, double destLon,
+	                 String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1709,8 +1791,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigateSearch(String startName, double startLat, double startLon,
-						   String searchQuery, double searchLat, double searchLon,
-						   String profile, boolean force, boolean requestLocationPermission) {
+	                       String searchQuery, double searchLat, double searchLon,
+	                       String profile, boolean force, boolean requestLocationPermission) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_SEARCH);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1814,12 +1896,16 @@ public class OsmandAidlApi {
 			turnInfo = ExternalApiHelper.getRouteDirectionsInfo(app);
 		}
 		AppInfoParams params = new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+		params.setVersionsInfo(ExternalApiHelper.getPluginAndProfileVersions());
 		params.setDestinationLocation(destinationLocation);
+		params.setOsmAndVersion(Version.getFullVersion(app));
+		String releaseDate = app.getString(R.string.app_edition);
+		params.setReleaseDate(releaseDate.isEmpty() ? null : releaseDate);
 		return params;
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
-				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
 		}
@@ -1880,6 +1966,7 @@ public class OsmandAidlApi {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
+	@Nullable
 	public ConnectedApp getConnectedApp(@NonNull String pack) {
 		List<ConnectedApp> connectedApps = getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {
@@ -2004,8 +2091,6 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(pluginId, newState);
 	}
 
-	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
-
 	void registerForNavigationUpdates(long id) {
 		final NextDirectionInfo baseNdi = new NextDirectionInfo();
 		IRoutingDataUpdateListener listener = () -> {
@@ -2097,8 +2182,37 @@ public class OsmandAidlApi {
 	}
 
 	public void unregisterFromVoiceRouterMessages(long id) {
-		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
-		voiceRouterMessageCallbacks.remove(id);
+		VoiceMessageListener callback = voiceRouterMessageCallbacks.remove(id);
+		if (callback != null) {
+			app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(callback);
+		}
+	}
+
+	public void registerLogcatListener(long id, String filterLevel) {
+		LogcatMessageListener listener = (_filterLevel, logs) -> {
+			if (aidlCallbackListenerV2 != null) {
+				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0) {
+						try {
+							cb.getCallback().onLogcatMessage(new OnLogcatMessageParams(_filterLevel, logs));
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+			}
+		};
+		stopLogcatTask(id);
+		LogcatAsyncTask task = new LogcatAsyncTask(listener, filterLevel);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		logcatAsyncTasks.put(id, task);
+	}
+
+	public void stopLogcatTask(long id) {
+		LogcatAsyncTask task = logcatAsyncTasks.remove(id);
+		if (task != null) {
+			task.stop();
+		}
 	}
 
 	public Map<String, AidlContextMenuButtonsWrapper> getContextMenuButtonsParams() {
@@ -2190,17 +2304,18 @@ public class OsmandAidlApi {
 	}
 
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
-							final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	                        final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
-		final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawer.TrackBitmapDrawerListener() {
+		final TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawerListener() {
 			@Override
 			public void onTrackBitmapDrawing() {
 			}
 
 			@Override
-			public void onTrackBitmapDrawn() {
+			public void onTrackBitmapDrawn(boolean success) {
+
 			}
 
 			@Override
@@ -2236,12 +2351,13 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener) {
+	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels,
+	                                    final int heightPixels, final int color, final TrackBitmapDrawerListener drawerListener) {
 		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, result -> {
-			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, null, result.getRect(), density, widthPixels, heightPixels);
+			TracksDrawParams drawParams = new TracksDrawParams(density, widthPixels, heightPixels, color);
+			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, drawParams, null);
 			trackBitmapDrawer.addListener(drawerListener);
 			trackBitmapDrawer.setDrawEnabled(true);
-			trackBitmapDrawer.setTrackColor(color);
 			trackBitmapDrawer.initAndDraw();
 			return false;
 		});
@@ -2263,7 +2379,7 @@ public class OsmandAidlApi {
 	}
 
 	public boolean importProfileV2(final Uri profileUri, List<String> settingsTypeKeys, boolean replace,
-								   boolean silent, String latestChanges, int version) {
+	                               boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
@@ -2385,6 +2501,7 @@ public class OsmandAidlApi {
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
 					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
 					bean.navIcon.name(), bean.order);
+			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);
 		}
@@ -2418,6 +2535,50 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_TIME_TO_NOT_USE_OTHER_GPS, timeToNotUseOtherGPS);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	public boolean exitApp(ExitAppParams params) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_EXIT_APP);
+		intent.putExtra(AIDL_EXIT_APP_RESTART, params.shouldRestart());
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	public boolean getText(GetTextParams params) {
+		Context context = app.getLocaleHelper().getLocalizedContext(params.getLocale());
+		params.setValue(AndroidUtils.getStringByProperty(context, params.getKey()));
+		return true;
+	}
+
+	public boolean reloadIndexes() {
+		app.getResourceManager().reloadIndexesAsync(null, null);
+		return true;
+	}
+
+	public boolean setPreference(PreferenceParams params) {
+		String prefId = params.getPrefId();
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<?> pref = settings.getPreference(prefId);
+		if (pref != null && settings.isExportAvailableForPref(pref)) {
+			String value = params.getValue();
+			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
+			return settings.setPreference(prefId, value, appMode);
+		}
+		return false;
+	}
+
+	public boolean getPreference(PreferenceParams params) {
+		String prefId = params.getPrefId();
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<?> pref = settings.getPreference(prefId);
+		if (pref != null && settings.isExportAvailableForPref(pref)) {
+			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
+			String value = appMode != null ? pref.asStringModeValue(appMode) : pref.asString();
+			params.setValue(value);
+			return true;
+		}
+		return false;
 	}
 
 	private static class FileCopyInfo {
@@ -2464,7 +2625,7 @@ public class OsmandAidlApi {
 					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
 					showGpx(new File(destinationDir, fileName).getPath());
 				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
-					app.getFavorites().loadFavorites();
+					app.getFavoritesHelper().loadFavorites();
 				}
 			}
 		}
@@ -2580,8 +2741,6 @@ public class OsmandAidlApi {
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
 	}
-
-	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
 
 	public boolean onKeyEvent(KeyEvent event) {
 		if (aidlCallbackListenerV2 != null) {

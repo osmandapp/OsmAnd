@@ -747,6 +747,18 @@ public class RouteDataObject {
 		return false;
 	}
 
+	public boolean hasTrafficLightAt(int i) {
+		int[] pointTypes = getPointTypes(i);
+		if (pointTypes != null) {
+			for (int pointType : pointTypes) {
+				if (region.routeEncodingRules.get(pointType).getValue().startsWith("traffic_signals")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 //	public boolean isMotorWayLink() {
 //		int sz = types.length;
 //		for (int i = 0; i < sz; i++) {
@@ -1059,10 +1071,16 @@ public class RouteDataObject {
 
 	@Override
 	public String toString() {
-		String name = getName();
+		String str = String.format("Road (%d)", id / 64);
 		String rf = getRef("", false, true);
-		return String.format("Road id (%d), name ('%s'), ref ('%s')", id / 64, name, rf);
-//		return String.format("Road [%d, '%s', '%s'] - [%s, %s]", id / 64, name, rf, Arrays.toString(pointsX), Arrays.toString(pointsY));
+		if (!Algorithms.isEmpty(rf)) {
+			str += ", ref ('" + rf + "')";
+		}
+		String name = getName();
+		if (!Algorithms.isEmpty(name)) {
+			str += ", name ('" + name + "')";
+		}
+		return str;
 	}
 
 	public boolean hasNameTagStartsWith(String tagStartsWith) {

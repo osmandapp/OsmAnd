@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
@@ -114,7 +114,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		}
 		float speed = (float) pt.speed;
 		if (speed != 0) {
-			String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
+			String speedStr = (mapActivity.getString(R.string.shared_string_speed)).substring(0, 1);
 			holder.speed.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,
 					speedStr, OsmAndFormatter.getFormattedSpeed(speed, app)));
 		} else {

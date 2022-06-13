@@ -3521,7 +3521,7 @@
     <string name="poi_books_children">Dla dzieci</string>
     <string name="poi_atoll">Atol</string>
     <string name="poi_denotation">Denotacja</string>
-    <string name="poi_toll_gantry">Brama poboru opłat</string>
+    <string name="poi_toll_gantry">Bramka poboru opłat</string>
     <string name="poi_childcare">Opieka nad dziećmi</string>
     <string name="poi_denotation_natural_monument">Pomnik przyrody</string>
     <string name="poi_denotation_landmark">Punkt orientacyjny</string>
@@ -4001,4 +4001,12 @@
     <string name="poi_authentication_key">Autoryzacja kluczem</string>
     <string name="poi_authentication_chip_card">Autoryzacja kartą czipową</string>
     <string name="poi_authentication_contactless">Autoryzacja zbliżeniowa</string>
+    <string name="poi_trailhead">Początek szlaku</string>
+    <string name="poi_satellite_dish">Antena satelitarna</string>
+    <string name="poi_mattress_filter">Materac</string>
+    <string name="poi_heating_filter">Ogrzewanie</string>
+    <string name="poi_coffee_filter">Kawa</string>
+    <string name="poi_ice_cream_filter">Lody</string>
+    <string name="poi_tobacco_filter">Tytoń</string>
+    <string name="poi_furniture_filter">Meble</string>
 </resources>

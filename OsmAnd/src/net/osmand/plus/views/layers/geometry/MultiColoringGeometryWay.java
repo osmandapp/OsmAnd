@@ -11,6 +11,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
@@ -28,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import gnu.trove.list.array.TByteArrayList;
@@ -38,6 +42,7 @@ public abstract class MultiColoringGeometryWay
 
 	protected int customColor;
 	protected float customWidth;
+	protected float[] dashPattern;
 	@NonNull
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
@@ -53,6 +58,14 @@ public abstract class MultiColoringGeometryWay
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.width = newWidth;
 		}
+		resetSymbolProviders();
+	}
+
+	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
+		for (GeometryWayStyle<?> style : styleMap.values()) {
+			style.dashPattern = dashPattern;
+		}
+		resetSymbolProviders();
 	}
 
 	protected void updatePaints(@Nullable Float width, @NonNull ColoringType routeColoringType) {
@@ -61,19 +74,21 @@ public abstract class MultiColoringGeometryWay
 		}
 	}
 
-	protected void updateGradientRoute(RotatedTileBox tb, List<Location> locations) {
+	protected void updateGradientWay(RotatedTileBox tb, List<Location> locations) {
 		GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, getContext().getApp());
-		ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
-		RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
-		List<RouteColorizationPoint> points = routeColorize.getResult(false);
-
-		updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
+		GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
+		if (gradientScaleType != null) {
+			ColorizationType colorizationType = gradientScaleType.toColorizationType();
+			RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
+			List<RouteColorizationPoint> points = routeColorize.getResult(false);
+			updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
+		}
 	}
 
-	private Map<Integer, GeometryWayStyle<?>> createGradientStyles(List<RouteColorizationPoint> points) {
+	protected Map<Integer, GeometryWayStyle<?>> createGradientStyles(List<RouteColorizationPoint> points) {
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
 		for (int i = 0; i < points.size() - 1; i++) {
-			GeometryGradientWayStyle style = getGradientWayStyle();
+			GeometryGradientWayStyle<?> style = getGradientWayStyle();
 			style.currColor = points.get(i).color;
 			style.nextColor = points.get(i + 1).color;
 			styleMap.put(i, style);
@@ -88,20 +103,16 @@ public abstract class MultiColoringGeometryWay
 			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
 			return;
 		}
-
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-
 		for (int i = 0; i < colors.size(); ) {
 			int color = colors.get(i);
 			GeometrySolidWayStyle<?> style = getSolidWayStyle(color);
 			styleMap.put(i, style);
-
 			i++;
 			while (i < colors.size() && colors.get(i) == color) {
 				i++;
 			}
 		}
-
 		updateWay(locations, styleMap, tileBox);
 	}
 
@@ -173,13 +184,16 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist, GeometryWayStyle<?> style,
-	                           List<Float> tx, List<Float> ty, List<Double> angles,
-	                           List<Double> distances, List<GeometryWayStyle<?>> styles) {
-		super.addLocation(tb, locationIdx, dist, style, tx, ty, angles, distances, styles);
-		if (style instanceof GeometryGradientWayStyle && styles.size() > 1) {
-			GeometryGradientWayStyle prevStyle = (GeometryGradientWayStyle) styles.get(styles.size() - 2);
-			GeometryGradientWayStyle currStyle = (GeometryGradientWayStyle) style;
+	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist,
+	                           GeometryWayStyle<?> style,
+	                           List<Float> tx, List<Float> ty,
+	                           List<Integer> tx31, List<Integer> ty31,
+	                           List<Double> angles, List<Double> distances,
+	                           List<GeometryWayStyle<?>> styles) {
+		super.addLocation(tb, locationIdx, dist, style, tx, ty, tx31, ty31, angles, distances, styles);
+		if (style instanceof GeometryGradientWayStyle<?> && styles.size() > 1) {
+			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) styles.get(styles.size() - 2);
+			GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
 			prevStyle.nextColor = currStyle.currColor;
 		}
 	}
@@ -191,7 +205,7 @@ public abstract class MultiColoringGeometryWay
 		previousVisible = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 				style, previousVisible, lastPoint, startLocationIndex);
 		if (style instanceof GeometryGradientWayStyle) {
-			GeometryGradientWayStyle gradientWayStyle = (GeometryGradientWayStyle) style;
+			GeometryGradientWayStyle<?> gradientWayStyle = (GeometryGradientWayStyle<?>) style;
 			GradientGeometryWayProvider locationProvider = getGradientLocationProvider();
 			if (startLocationIndex == 0) {
 				int startColor = locationProvider.getColor(0);
@@ -210,7 +224,7 @@ public abstract class MultiColoringGeometryWay
 				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
-		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
+		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?>) {
 			GeometrySolidWayStyle<?> prevStyle = (GeometrySolidWayStyle<?>) style;
 			GeometrySolidWayStyle<?> transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
 			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
@@ -220,10 +234,10 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer,
-	                                     GeometryWayStyle<?>> styleMap, int locationIdx) {
+	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification,
+	                                     Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
 		return coloringType.isGradient()
-				? simplification.getQuick(locationIdx) == 0
+				? simplification != null && simplification.getQuick(locationIdx) == 0
 				: super.shouldSkipLocation(simplification, styleMap, locationIdx);
 	}
 
@@ -232,30 +246,40 @@ public abstract class MultiColoringGeometryWay
 	public abstract GeometryWayStyle<?> getDefaultWayStyle();
 
 	@NonNull
-	public abstract GeometrySolidWayStyle<C> getSolidWayStyle(int lineColor);
+	public abstract GeometrySolidWayStyle<?> getSolidWayStyle(int lineColor);
 
 	@NonNull
-	public GeometryGradientWayStyle getGradientWayStyle() {
-		return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
+	public GeometryGradientWayStyle<?> getGradientWayStyle() {
+		return new GeometryGradientWayStyle<>(getContext(), customColor, customWidth);
 	}
 
 	private GradientGeometryWayProvider getGradientLocationProvider() {
 		return (GradientGeometryWayProvider) getLocationProvider();
 	}
 
-	private static class GradientGeometryWayProvider implements GeometryWayProvider {
+	@ColorInt
+	protected int getContrastLineColor(@ColorInt int lineColor) {
+		return ColorUtilities.getContrastColor(getContext().getCtx(), lineColor, false);
+	}
+
+	protected static class GradientGeometryWayProvider implements GeometryWayProvider {
 
 		private final RouteColorize routeColorize;
 		private final List<RouteColorizationPoint> locations;
 
-		public GradientGeometryWayProvider(RouteColorize routeColorize, List<RouteColorizationPoint> locations) {
+		public GradientGeometryWayProvider(@Nullable RouteColorize routeColorize,
+		                                   @NonNull List<RouteColorizationPoint> locations) {
 			this.routeColorize = routeColorize;
 			this.locations = locations;
 		}
 
+		@Nullable
 		public List<RouteColorizationPoint> simplify(int zoom) {
-			routeColorize.setZoom(zoom);
-			return routeColorize.simplify();
+			if (routeColorize != null) {
+				routeColorize.setZoom(zoom);
+				return routeColorize.simplify();
+			}
+			return null;
 		}
 
 		public int getColor(int index) {
@@ -289,65 +313,74 @@ public abstract class MultiColoringGeometryWay
 			if (locationProvider instanceof GradientGeometryWayProvider) {
 				GradientGeometryWayProvider provider = (GradientGeometryWayProvider) locationProvider;
 				List<RouteColorizationPoint> simplified = provider.simplify(tb.getZoom());
-				for (RouteColorizationPoint location : simplified) {
-					simplifyPoints.set(location.id, (byte) 1);
+				if (simplified != null) {
+					for (RouteColorizationPoint location : simplified) {
+						simplifyPoints.set(location.id, (byte) 1);
+					}
 				}
 			}
 		}
 	}
 
-	public static class GeometryGradientWayStyle extends GeometryWayStyle<MultiColoringGeometryWayContext> {
+	public static class GeometrySolidWayStyle<C extends MultiColoringGeometryWayContext> extends GeometryWayStyle<C> {
 
-		public int currColor;
-		public int nextColor;
+		private static final float LINE_WIDTH_THRESHOLD_DP = 8f;
+		private static final float ARROW_DISTANCE_MULTIPLIER = 1.5f;
+		private static final float SPECIAL_ARROW_DISTANCE_MULTIPLIER = 10f;
 
-		public GeometryGradientWayStyle(MultiColoringGeometryWayContext context, Integer color, Float width) {
-			super(context, color, width);
-		}
+		public static final int OUTER_CIRCLE_COLOR = 0x33000000;
 
-		@Override
-		public Bitmap getPointBitmap() {
-			return getContext().getArrowBitmap();
-		}
+		private final int directionArrowColor;
 
-		@Override
-		public boolean isUnique() {
-			return true;
-		}
+		private final boolean hasPathLine;
 
-		@Override
-		public boolean equals(Object other) {
-			if (this == other) {
-				return true;
-			}
-			if (!super.equals(other)) {
-				return false;
-			}
-			if (!(other instanceof GeometryGradientWayStyle)) {
-				return false;
-			}
-			GeometryGradientWayStyle o = (GeometryGradientWayStyle) other;
-			return currColor == o.currColor && nextColor == o.nextColor;
-		}
-	}
+		private final float lineWidthThresholdPix;
+		private final float outerCircleRadius;
+		private final float innerCircleRadius;
 
-	public static class GeometrySolidWayStyle<T extends MultiColoringGeometryWayContext> extends GeometryWayStyle<T> {
-
-		protected final Integer directionArrowColor;
-
-		GeometrySolidWayStyle(T context, Integer color, Float width, Integer directionArrowColor) {
-			super(context, color, width);
+		GeometrySolidWayStyle(@NonNull C context, int lineColor, float lineWidth, int directionArrowColor,
+		                      boolean hasPathLine) {
+			super(context, lineColor, lineWidth);
 			this.directionArrowColor = directionArrowColor;
+			this.hasPathLine = hasPathLine;
+
+			this.innerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 7);
+			this.outerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 8);
+			this.lineWidthThresholdPix = AndroidUtils.dpToPx(context.getCtx(), LINE_WIDTH_THRESHOLD_DP);
 		}
 
 		@Override
 		public Bitmap getPointBitmap() {
-			return getContext().getArrowBitmap();
+			return useSpecialArrow() ? getContext().getSpecialArrowBitmap() : getContext().getArrowBitmap();
 		}
 
+		@NonNull
 		@Override
 		public Integer getPointColor() {
 			return directionArrowColor;
+		}
+
+		public boolean hasPathLine() {
+			return hasPathLine;
+		}
+
+		public float getInnerCircleRadius() {
+			return innerCircleRadius;
+		}
+
+		public float getOuterCircleRadius() {
+			return outerCircleRadius;
+		}
+
+		@Override
+		public double getPointStepPx(double zoomCoef) {
+			return useSpecialArrow()
+					? getPointBitmap().getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER
+					: getPointBitmap().getHeight() + getWidth(0) * ARROW_DISTANCE_MULTIPLIER;
+		}
+
+		public boolean useSpecialArrow() {
+			return getWidth(0) <= lineWidthThresholdPix;
 		}
 
 		@Override
@@ -363,6 +396,46 @@ public abstract class MultiColoringGeometryWay
 			}
 			GeometrySolidWayStyle<?> o = (GeometrySolidWayStyle<?>) other;
 			return Algorithms.objectEquals(directionArrowColor, o.directionArrowColor);
+		}
+
+		@Override
+		public int getColorizationScheme() {
+			return COLORIZATION_SOLID;
+		}
+	}
+
+	public static class GeometryGradientWayStyle<C extends MultiColoringGeometryWayContext> extends GeometrySolidWayStyle<C> {
+
+		public int currColor;
+		public int nextColor;
+
+		public GeometryGradientWayStyle(@NonNull C context, int color, float width) {
+			super(context, color, width, Color.BLACK, true);
+		}
+
+		@Override
+		public boolean isUnique() {
+			return true;
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			if (this == other) {
+				return true;
+			}
+			if (!super.equals(other)) {
+				return false;
+			}
+			if (!(other instanceof MultiColoringGeometryWay.GeometryGradientWayStyle)) {
+				return false;
+			}
+			GeometryGradientWayStyle<?> o = (GeometryGradientWayStyle<?>) other;
+			return currColor == o.currColor && nextColor == o.nextColor;
+		}
+
+		@Override
+		public int getColorizationScheme() {
+			return COLORIZATION_GRADIENT;
 		}
 	}
 }

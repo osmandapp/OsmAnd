@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -28,21 +27,20 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -51,8 +49,13 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.TurnType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
@@ -80,6 +83,7 @@ import static net.osmand.search.core.ObjectType.VILLAGE;
 import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 public class ExternalApiHelper {
+
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ExternalApiHelper.class);
 
 	public static final String API_CMD_SHOW_GPX = "show_gpx";
@@ -167,6 +171,9 @@ public class ExternalApiHelper {
 	public static final String PARAM_QUICK_ACTION_TYPE = "quick_action_type";
 	public static final String PARAM_QUICK_ACTION_PARAMS = "quick_action_params";
 	public static final String PARAM_QUICK_ACTION_NUMBER = "quick_action_number";
+
+	public static final String PARAM_PLUGINS_VERSIONS = "plugins_versions";
+	public static final String PARAM_PROFILES_VERSIONS = "profiles_versions";
 
 	// RESULT_OK == -1
 	// RESULT_CANCELED == 0
@@ -497,7 +504,7 @@ public class ExternalApiHelper {
 				fav.setColor(color);
 				fav.setVisible(visible);
 
-				FavouritesDbHelper helper = app.getFavorites();
+				FavouritesHelper helper = app.getFavoritesHelper();
 				helper.addFavourite(fav);
 
 				showOnMap(lat, lon, fav, mapActivity.getMapLayers().getFavouritesLayer().getObjectName(fav));
@@ -659,25 +666,24 @@ public class ExternalApiHelper {
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				MapActivity mapActivity = mapActivityRef.get();
-				if (errorMessage == null && mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+				if (errorMessage == null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 					OsmandApplication app = mapActivity.getMyApplication();
 					GpxSelectionHelper helper = app.getSelectedGpxHelper();
 					SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(gpxFile.path);
 					if (selectedGpx != null) {
 						selectedGpx.setGpxFile(gpxFile, app);
 					} else {
-						helper.selectGpxFile(gpxFile, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						helper.selectGpxFile(gpxFile, params);
 					}
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
-						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
-
-							@Override
-							public void onDismiss(DialogInterface dialog) {
-								MapActivity mapActivity = mapActivityRef.get();
-								if (mapActivity != null && !routingHelper.isFollowingMode()) {
-									ExternalApiHelper.startNavigation(mapActivity, gpxFile, checkLocationPermission);
-								}
+						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
+							MapActivity _mapActivity = mapActivityRef.get();
+							if (_mapActivity != null && !routingHelper.isFollowingMode()) {
+								ExternalApiHelper.startNavigation(_mapActivity, gpxFile, checkLocationPermission);
 							}
 						});
 					} else {
@@ -696,7 +702,27 @@ public class ExternalApiHelper {
 		}
 	}
 
-	public static Bundle getRouteDirectionsInfo(OsmandApplication app) {
+	@NonNull
+	public static Bundle getPluginAndProfileVersions() {
+		Bundle bundle = new Bundle();
+		List<CustomOsmandPlugin> plugins = OsmandPlugin.getCustomPlugins();
+		if (!Algorithms.isEmpty(plugins)) {
+			HashMap<String, Integer> map = new HashMap<>();
+			for (CustomOsmandPlugin plugin : plugins) {
+				map.put(plugin.getId(), plugin.getVersion());
+			}
+			bundle.putSerializable(PARAM_PLUGINS_VERSIONS, map);
+		}
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			HashMap<String, Integer> map = new HashMap<>();
+			map.put(mode.getStringKey(), mode.getVersion());
+			bundle.putSerializable(PARAM_PROFILES_VERSIONS, map);
+		}
+		return bundle;
+	}
+
+	@NonNull
+	public static Bundle getRouteDirectionsInfo(@NonNull OsmandApplication app) {
 		Bundle bundle = new Bundle();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		RouteDirectionInfo directionInfo = routingHelper.getRoute().getCurrentDirection();
@@ -756,9 +782,11 @@ public class ExternalApiHelper {
 										LatLon to, PointDescription toDesc,
 										ApplicationMode mode, boolean checkLocationPermission) {
 		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		MapViewTrackingUtilities mapViewTrackingUtilities = mapActivity.getMapViewTrackingUtilities();
 		if (gpx == null) {
-			app.getSettings().setApplicationMode(mode);
+			settings.setApplicationMode(mode);
 			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
@@ -767,15 +795,15 @@ public class ExternalApiHelper {
 		if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 			mapActivity.getMapRouteInfoMenu().show();
 		} else {
-			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
-				app.getSettings().setApplicationMode(routingHelper.getAppMode(), false);
+			if (settings.APPLICATION_MODE.get() != routingHelper.getAppMode()) {
+				settings.setApplicationMode(routingHelper.getAppMode(), false);
 			}
-			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-			app.getSettings().FOLLOW_THE_ROUTE.set(true);
+			mapViewTrackingUtilities.backToLocationImpl();
+			settings.FOLLOW_THE_ROUTE.set(true);
 			routingHelper.setFollowingMode(true);
 			routingHelper.setRoutePlanningMode(false);
-			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-			app.getRoutingHelper().notifyIfRouteIsCalculated();
+			mapViewTrackingUtilities.switchToRoutePlanningMode();
+			routingHelper.notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
 		if (checkLocationPermission) {

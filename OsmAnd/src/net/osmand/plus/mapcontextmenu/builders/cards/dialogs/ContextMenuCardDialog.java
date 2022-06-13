@@ -6,12 +6,11 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapillary.MapillaryImageDialog;
-import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.mapillary.MapillaryImageDialog;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -135,15 +134,11 @@ public abstract class ContextMenuCardDialog {
 
 	private void updateLayers(boolean activate) {
 		MapActivity mapActivity = getMapActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
 		switch (type) {
 			case MAPILLARY: {
-				boolean showMapillary = app.getSettings().SHOW_MAPILLARY.get();
-				if (!showMapillary) {
-					MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
-					if (mapillaryPlugin != null) {
-						mapillaryPlugin.updateLayers(mapActivity, mapActivity, activate);
-					}
+				MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+				if (plugin != null && !plugin.SHOW_MAPILLARY.get()) {
+					plugin.updateLayers(mapActivity, mapActivity, activate);
 				}
 				break;
 			}

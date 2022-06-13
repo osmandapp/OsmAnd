@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 
@@ -42,14 +42,6 @@ public class ImportTrackCard extends MapBaseCard {
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_import_to));
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(ImportTrackCard.this);
-				}
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 }

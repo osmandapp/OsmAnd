@@ -1,7 +1,6 @@
 package net.osmand.plus.profiles;
 
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -35,6 +32,8 @@ import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
@@ -174,10 +173,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private void createProfilesList() {
 		for (ProfilesGroup group : profileGroups) {
-			List<ProfileDataObject> items = group.getProfiles();
+			List<RoutingDataObject> items = group.getProfiles();
 			if (!Algorithms.isEmpty(items)) {
 				addGroupHeader(group.getTitle(), group.getDescription(app, nightMode));
-				for (ProfileDataObject item : items) {
+				for (RoutingDataObject item : items) {
 					addProfileItem(item);
 				}
 				addDivider();
@@ -254,10 +253,8 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 			ImageView ivEndBtnIcon = itemView.findViewById(R.id.end_button_icon);
 			Drawable drawable = getIcon(R.drawable.ic_action_settings, getRouteInfoColorId());
-			if (Build.VERSION.SDK_INT >= 21) {
-				Drawable activeDrawable = getIcon(R.drawable.ic_action_settings, getActiveColorId());
-				drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
-			}
+			Drawable activeDrawable = getIcon(R.drawable.ic_action_settings, getActiveColorId());
+			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 			ivEndBtnIcon.setImageDrawable(drawable);
 
 			basePart.setOnClickListener(getItemClickListener(profile));
@@ -291,6 +288,17 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	@Override
 	protected boolean isProfilesListUpdated(ProfileDataObject profile) {
 		return profile instanceof RoutingDataObject && ((RoutingDataObject) profile).isOnline();
+	}
+
+	@Override
+	protected boolean isSelected(ProfileDataObject profile) {
+		boolean isSelected = super.isSelected(profile);
+		String derivedProfile = getAppMode().getDerivedProfile();
+		if (!Algorithms.objectEquals(derivedProfile, "default") && profile instanceof RoutingDataObject) {
+			RoutingDataObject data = (RoutingDataObject) profile;
+			isSelected = isSelected && Algorithms.objectEquals(derivedProfile, data.getDerivedProfile());
+		}
+		return isSelected;
 	}
 
 	@Override

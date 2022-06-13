@@ -1,13 +1,16 @@
 package net.osmand.plus.chooseplan.button;
 
+import android.text.Spannable;
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,32 +30,42 @@ public class PurchasingUtils {
 
 	public static final String PROMO_PREFIX = "promo_";
 
-	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
-	                                                                  InAppPurchaseHelper purchaseHelper,
-	                                                                  List<InAppSubscription> subscriptions,
+	public static List<SubscriptionButton> collectSubscriptionButtons(@NonNull OsmandApplication app,
+	                                                                  @NonNull InAppPurchaseHelper purchaseHelper,
+	                                                                  @NonNull List<InAppSubscription> subscriptions,
 	                                                                  boolean nightMode) {
-		int priceColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
+		InAppSubscription monthlySubscription = purchaseHelper.getMonthlySubscription();
+		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 
-		for (InAppSubscription s : subscriptions) {
-			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
-			boolean hasIntroductoryInfo = introductoryInfo != null;
-			SubscriptionButton priceBtn = new SubscriptionButton(s.getSku(), s);
-			priceBtn.setTitle(s.getTitle(app));
+		for (InAppSubscription subscription : subscriptions) {
+			SubscriptionButton subscriptionButton = new SubscriptionButton(subscription.getSku(), subscription);
+			subscriptionButton.setTitle(subscription.getTitle(app));
 
-			CharSequence priceTitle = hasIntroductoryInfo ?
-					introductoryInfo.getFormattedDescription(app, priceColor) : s.getPriceWithPeriod(app);
-			priceBtn.setPrice(priceTitle);
+			String discount = subscription.getDiscount(monthlySubscription);
+			String discountTitle = subscription.getDiscountTitle(app, monthlySubscription);
 
-			String discount = s.getDiscount(purchaseHelper.getMonthlyLiveUpdates());
-			if (!Algorithms.isEmpty(discount)) {
-				priceBtn.setDiscount(discount);
+			InAppSubscriptionIntroductoryInfo info = subscription.getIntroductoryInfo();
+			if (info != null) {
+				Pair<Spannable, Spannable> pair = info.getFormattedDescription(app, primaryTextColor);
+				subscriptionButton.setDiscount(discount);
+				subscriptionButton.setDiscountApplied(!Algorithms.isEmpty(discount));
+				subscriptionButton.setPrice(pair.first.toString());
+				subscriptionButton.setDescription(pair.second.toString());
+			} else {
+				subscriptionButton.setPrice(subscription.getPriceWithPeriod(app));
 
-				String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
-				priceBtn.setRegularPrice(regularPrice);
+				boolean discountApplied = !Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
+				subscriptionButton.setDiscountApplied(discountApplied);
+				subscriptionButton.setDiscount(discountApplied ? discount : discountTitle);
+
+				if (!Algorithms.isEmpty(discount) && discountApplied) {
+					String pattern = app.getString(R.string.ltr_or_rtl_combine_via_colon);
+					String regularPrice = subscription.getRegularPrice(app);
+					subscriptionButton.setDescription(String.format(pattern, app.getString(R.string.regular_price), regularPrice));
+				}
 			}
-
-			priceButtons.add(priceBtn);
+			priceButtons.add(subscriptionButton);
 		}
 		return priceButtons;
 	}
@@ -78,28 +91,26 @@ public class PurchasingUtils {
 	}
 
 	public static void createPromoItem(@NonNull ContextMenuAdapter adapter,
-									   @NonNull MapActivity mapActivity,
-									   @NonNull OsmAndFeature feature,
-									   @NonNull String id,
-									   @StringRes int titleId,
-									   @StringRes int descriptionId) {
+	                                   @NonNull MapActivity mapActivity,
+	                                   @NonNull OsmAndFeature feature,
+	                                   @NonNull String id,
+	                                   @StringRes int titleId,
+	                                   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
-		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
+		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			ChoosePlanFragment.showInstance(mapActivity, feature);
 			return false;
 		};
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(PROMO_PREFIX + id)
+		adapter.addItem(new ContextMenuItem(PROMO_PREFIX + id)
 				.setLayout(R.layout.list_item_promo)
 				.setTitleId(titleId, mapActivity)
 				.setDescription(app.getString(descriptionId))
 				.setIcon(feature.getIconId(nightMode))
-				.setSkipPaintingWithoutColor(true)
-				.setListener(listener)
-				.createItem());
+				.setUseNaturalIconColor(true)
+				.setListener(listener));
 	}
 
 	public static void removePromoItems(ContextMenuAdapter contextMenuAdapter) {
@@ -111,5 +122,4 @@ public class PurchasingUtils {
 			}
 		}
 	}
-
 }

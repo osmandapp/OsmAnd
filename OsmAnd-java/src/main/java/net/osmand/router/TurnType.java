@@ -134,6 +134,17 @@ public class TurnType {
 	private boolean possiblyLeftTurn;
 	private boolean possiblyRightTurn;
 
+	public TurnType(int value, int exitOut, float turnAngle, boolean skipToSpeak, int[] lanes,
+	                boolean possiblyLeftTurn, boolean possiblyRightTurn) {
+		this.value = value;
+		this.exitOut = exitOut;
+		this.turnAngle = turnAngle;
+		this.skipToSpeak = skipToSpeak;
+		this.lanes = lanes;
+		this.possiblyLeftTurn = possiblyLeftTurn;
+		this.possiblyRightTurn = possiblyRightTurn;
+	}
+
 	public static TurnType getExitTurn(int out, float angle, boolean leftSide) {
 		TurnType r = valueOf(RNDB, leftSide); //$NON-NLS-1$
 		r.exitOut = out;
@@ -141,7 +152,7 @@ public class TurnType {
 		return r;
 	}
 
-	
+
 	private TurnType(int vl) {
 		this.value = vl;
 	}
@@ -386,7 +397,7 @@ public class TurnType {
 		}
 		if(vl != null) {
 			if(lanes != null) {
-				vl += "(" + lanesToString(lanes) +")";
+				vl += " (" + lanesToString(lanes) +")";
 			}
 			return vl;
 		}

@@ -588,7 +588,7 @@ public class RouteColorize {
         public double val;
         public int color;
 
-        RouteColorizationPoint(int id, double lat, double lon, double val) {
+        public RouteColorizationPoint(int id, double lat, double lon, double val) {
             this.id = id;
             this.lat = lat;
             this.lon = lon;

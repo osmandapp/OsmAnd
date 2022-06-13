@@ -74,8 +74,7 @@
     <string name="location_history_desc">隱藏在給定時間內未移動的連絡人。</string>
     <string name="location_history">位置歷史記錄</string>
     <string name="stale_location_desc">上次移動連絡人的時間。</string>
-    <string name="stale_location">沒有移動
-\n</string>
+    <string name="stale_location">沒有移動</string>
     <string name="send_my_location_desc">設置位置共用的最小間隔。</string>
     <string name="send_my_location">發送我的位置</string>
     <string name="gps_and_location">位置</string>
@@ -172,9 +171,7 @@
     <string name="shared_string_hour_short">時</string>
     <string name="shared_string_minute_short">分</string>
     <string name="shared_string_second_short">秒</string>
-    <string name="welcome_descr">
-        <b>OsmAnd 追蹤器</b>可以讓您分享您的位置，並在 OsmAnd 中看到其他人的位置。<br/>
-        <br/>應用程式使用 Telegram API，所以您需要一個 Telegram 帳號。</string>
+    <string name="welcome_descr"><b>OsmAnd 追蹤器</b>可以讓您分享您的位置，並在 OsmAnd 中看到其他人的位置。<br/> <br/>應用程式使用 Telegram API，所以您需要一個 Telegram 帳號。</string>
     <string name="my_location">我的位置</string>
     <string name="live_now">即時狀況</string>
     <string name="monitoring_is_enabled">監視已啟用</string>
@@ -194,7 +191,7 @@
     <string name="telegram_privacy_policy">Telegram 隱私權政策</string>
     <string name="osmand_privacy_policy">OsmAnd 隱私權政策</string>
     <string name="how_it_works">如何運作</string>
-    <string name="received_gps_points">"已收到 GPX 點：%1$s "</string>
+    <string name="received_gps_points">已收到 GPX 點：%1$s</string>
     <string name="shared_string_appearance">外觀</string>
     <string name="show_gps_points">顯示 GPS 點</string>
     <string name="show_gps_points_descr">顯示蒐集到與發送的 GPS 點數量。</string>
@@ -274,4 +271,8 @@
     <string name="shared_string_export">匯出</string>
     <string name="logcat_buffer">Logcat 緩衝</string>
     <string name="logcat_buffer_descr">檢查及分享應用程式的詳細紀錄</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="shared_string_error">錯誤</string>
+    <string name="send_live_location_error">傳送即時位置時發生錯誤：%1$s</string>
 </resources>

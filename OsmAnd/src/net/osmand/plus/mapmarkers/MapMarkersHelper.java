@@ -1,11 +1,14 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+
 import android.util.Pair;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -13,15 +16,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
@@ -42,8 +45,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
 // TODO rename after 4.0 MapMarkersHelper -> ItineraryHelper
 public class MapMarkersHelper {
@@ -526,7 +527,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(WptPt wptPt) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (marker.wptPt == wptPt) {
 				return marker;
 			}
@@ -536,7 +537,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(FavouritePoint favouritePoint) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (marker.favouritePoint == favouritePoint) {
 				return marker;
 			}
@@ -546,7 +547,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(@NonNull LatLon latLon) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (marker.point != null && marker.point.equals(latLon)) {
 				return marker;
 			}
@@ -556,7 +557,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(@NonNull String id) {
-		for (MapMarker marker : getMarkers()) {
+		for (MapMarker marker : getAllMarkers()) {
 			if (Algorithms.stringsEqual(marker.id, id)) {
 				return marker;
 			}
@@ -564,11 +565,9 @@ public class MapMarkersHelper {
 		return null;
 	}
 
-	private List<MapMarker> getMarkers() {
+	private List<MapMarker> getAllMarkers() {
 		List<MapMarker> res = new ArrayList<>(mapMarkers);
-		if (ctx.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
-			res.addAll(mapMarkersHistory);
-		}
+		res.addAll(mapMarkersHistory);
 		return res;
 	}
 
@@ -646,6 +645,13 @@ public class MapMarkersHelper {
 
 	public void removeMarker(MapMarker marker) {
 		removeMarker(marker, true);
+	}
+
+	public void removeMarkers(List<MapMarker> mapMarkers) {
+		for (MapMarker marker : mapMarkers) {
+			removeMarker(marker, false);
+		}
+		refresh();
 	}
 
 	private void removeMarker(MapMarker marker, boolean refresh) {
@@ -889,7 +895,7 @@ public class MapMarkersHelper {
 		shouldSaveFavourites |= syncPassedPoints(mapMarkersHistory, gpxFiles);
 
 		if (shouldSaveFavourites) {
-			ctx.getFavorites().saveCurrentPointsIntoFile();
+			ctx.getFavoritesHelper().saveCurrentPointsIntoFile();
 		}
 		for (GPXFile gpxFile : gpxFiles) {
 			GpxUiHelper.saveGpx(gpxFile, null);
@@ -911,9 +917,9 @@ public class MapMarkersHelper {
 	private boolean syncFavouritesPassedPoints(MapMarker marker) {
 		boolean passedPoint = marker.favouritePoint.getVisitedDate() != 0;
 		if (marker.history && !passedPoint) {
-			return ctx.getFavorites().favouritePassed(marker.favouritePoint, true, false);
+			return ctx.getFavoritesHelper().favouritePassed(marker.favouritePoint, true, false);
 		} else if (!marker.history && passedPoint) {
-			return ctx.getFavorites().favouritePassed(marker.favouritePoint, false, false);
+			return ctx.getFavoritesHelper().favouritePassed(marker.favouritePoint, false, false);
 		}
 		return false;
 	}
@@ -926,7 +932,7 @@ public class MapMarkersHelper {
 			if (selectedGpxFile != null) {
 				boolean passedPoint = marker.wptPt.getExtensionsToWrite().containsKey(VISITED_DATE);
 				if (marker.history && !passedPoint) {
-					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, ItineraryDataHelper.formatTime(System.currentTimeMillis()));
+					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(System.currentTimeMillis()));
 					gpxFiles.add(selectedGpxFile.getGpxFile());
 				} else if (!marker.history && passedPoint) {
 					marker.wptPt.getExtensionsToWrite().remove(VISITED_DATE);
@@ -1038,7 +1044,7 @@ public class MapMarkersHelper {
 	}
 
 	private void syncFavouriteGroup(@NonNull MapMarkersGroup group, @NonNull List<MapMarker> existingMarkers) {
-		FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getId());
+		FavoriteGroup favGroup = ctx.getFavoritesHelper().getGroup(group.getId());
 		if (favGroup == null) {
 			removeFromGroupsList(group);
 			return;

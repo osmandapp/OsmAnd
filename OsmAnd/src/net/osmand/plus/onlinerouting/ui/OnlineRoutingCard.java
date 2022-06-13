@@ -5,7 +5,6 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -13,23 +12,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.CompoundButtonType;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
 
 import java.util.List;
 
@@ -38,8 +34,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 	private View headerContainer;
 	private TextView tvHeaderTitle;
 	private TextView tvHeaderSubtitle;
-	private RecyclerView rvSelectionMenu;
-	private HorizontalSelectionAdapter adapter;
+	private HorizontalChipsView chipsView;
 	private TextView tvDescription;
 	private View checkBoxContainer;
 	private CheckBox checkBox;
@@ -54,7 +49,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 	private OnTextChangedListener onTextChangedListener;
 	private boolean fieldBoxHelperTextShowed;
 
-	private ApplicationMode appMode;
+	private final ApplicationMode appMode;
 
 	public OnlineRoutingCard(@NonNull MapActivity mapActivity, boolean nightMode, ApplicationMode appMode) {
 		super(mapActivity);
@@ -72,7 +67,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 		headerContainer = view.findViewById(R.id.header);
 		tvHeaderTitle = view.findViewById(R.id.title);
 		tvHeaderSubtitle = view.findViewById(R.id.subtitle);
-		rvSelectionMenu = view.findViewById(R.id.selection_menu);
+		chipsView = view.findViewById(R.id.selection_menu);
 		tvDescription = view.findViewById(R.id.description);
 		checkBoxContainer = view.findViewById(R.id.checkbox_container);
 		checkBox = view.findViewById(R.id.checkbox);
@@ -108,13 +103,10 @@ public class OnlineRoutingCard extends MapBaseCard {
 			}
 		});
 
-		editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					editText.setSelection(editText.getText().length());
-					AndroidUtils.showSoftKeyboard(getMapActivity(), editText);
-				}
+		editText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				editText.setSelection(editText.getText().length());
+				AndroidUtils.showSoftKeyboard(getMapActivity(), editText);
 			}
 		});
 	}
@@ -129,35 +121,43 @@ public class OnlineRoutingCard extends MapBaseCard {
 		tvHeaderSubtitle.setText(subtitle);
 	}
 
-	public void setSelectionMenu(@NonNull List<HorizontalSelectionItem> items,
-								 @NonNull String selectedItemTitle,
-								 @NonNull final CallbackWithObject<HorizontalSelectionItem> callback) {
-		showElements(rvSelectionMenu);
-		rvSelectionMenu.setLayoutManager(
-				new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		adapter = new HorizontalSelectionAdapter(app, nightMode);
-		adapter.setItems(items);
-		adapter.setSelectedItemByTitle(selectedItemTitle);
-		adapter.setListener(new HorizontalSelectionAdapterListener() {
-			@Override
-			public void onItemSelected(HorizontalSelectionItem item) {
-				if (callback.processResult(item)) {
-					adapter.setSelectedItem(item);
-				}
-			}
+	public void setSelectionMenu(@NonNull List<ChipItem> items,
+								 @NonNull String selectedId,
+								 @NonNull final CallbackWithObject<ChipItem> callback) {
+		showElements(chipsView);
+		chipsView.setItems(items);
+		ChipItem selected = chipsView.getChipById(selectedId);
+		chipsView.setSelected(selected);
+		chipsView.setOnSelectChipListener(chip -> {
+			chipsView.smoothScrollTo(chip);
+			callback.processResult(chip);
+			return true;
 		});
-		rvSelectionMenu.setAdapter(adapter);
+		chipsView.notifyDataSetChanged();
 	}
 
 	private void updateBottomMarginSelectionMenu() {
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rvSelectionMenu.getLayoutParams();
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) chipsView.getLayoutParams();
+		int contentPadding = getDimen(R.dimen.content_padding);
 		params.bottomMargin = isVisibleViewsBelowSelectionMenu() ? contentPadding : 0;
 	}
 
 	public void setDescription(@NonNull String description) {
 		showElements(tvDescription);
 		tvDescription.setText(description);
+	}
+
+	public void onClickCheckBox(@NonNull String title, @NonNull CallbackWithObject<Boolean> callback) {
+		showElements(checkBoxContainer);
+		tvCheckBoxDescription.setText(title);
+		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
+		checkBoxContainer.setOnClickListener(v -> {
+			callback.processResult(checkBox.isChecked());
+		});
+	}
+
+	public void setCheckBox(boolean checked) {
+		checkBox.setChecked(checked);
 	}
 
 	public void setCheckBox(@NonNull String title, boolean checked,
@@ -201,10 +201,15 @@ public class OnlineRoutingCard extends MapBaseCard {
 	}
 
 	public void setEditedText(@NonNull String text) {
+		setEditedText(text, true);
+	}
+
+	public void setEditedText(@NonNull String text, boolean enabled) {
 		showElements(fieldBoxContainer);
 		editText.setTag("");    // indicate that the text was edited programmatically
 		editText.setText(text);
 		editText.setTag(null);
+		editText.setEnabled(enabled);
 	}
 
 	@NonNull

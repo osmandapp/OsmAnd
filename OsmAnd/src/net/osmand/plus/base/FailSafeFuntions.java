@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.GPXUtilities;
@@ -15,8 +17,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -159,10 +161,9 @@ public class FailSafeFuntions {
 
 	}
 	
-	public static void enterRoutingMode(MapActivity ma, 
-			GPXRouteParamsBuilder gpxRoute) {
-		OsmandApplication app = ma.getMyApplication();
-		ma.getMapViewTrackingUtilities().backToLocationImpl();
+	public static void enterRoutingMode(@NonNull MapActivity mapActivity, @Nullable GPXRouteParamsBuilder gpxRoute) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSettings().FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);
 
@@ -173,9 +174,10 @@ public class FailSafeFuntions {
 		app.getSettings().FOLLOW_THE_ROUTE.set(true);
 		routingHelper.setFollowingMode(true);
 		app.getTargetPointsHelper().updateRouteAndRefresh(true);
-		app.initVoiceCommandPlayer(ma, routingHelper.getAppMode(), true, null, false, false, false);
-		if(ma.getDashboard().isVisible()) {
-			ma.getDashboard().hideDashboard();
+		app.initVoiceCommandPlayer(mapActivity, routingHelper.getAppMode(), null,
+				true, false, false, false);
+		if (mapActivity.getDashboard().isVisible()) {
+			mapActivity.getDashboard().hideDashboard();
 		}
 	}
 	

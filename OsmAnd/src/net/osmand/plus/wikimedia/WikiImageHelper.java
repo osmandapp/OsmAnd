@@ -10,7 +10,8 @@ import com.google.gson.annotations.SerializedName;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -28,7 +29,7 @@ public class WikiImageHelper {
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
 	private static final String CM_LIMIT = "&cmlimit=500";
 	private static final String FORMAT_JSON = "&format=json";
-	private static final String IMAGE_BASE_URL = "https://upload.wikimedia.org/wikipedia/commons/";
+	private static final String IMAGE_BASE_URL = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 
 	private static final String WIKIDATA_PREFIX = "Q";
 	private static final String WIKIMEDIA_FILE = "File:";
@@ -38,7 +39,7 @@ public class WikiImageHelper {
 	private static final Log LOG = PlatformUtil.getLog(WikiImageHelper.class);
 
 	public static void addWikidataImageCards(@NonNull MapActivity mapActivity, @NonNull String wikidataId,
-	                                         @NonNull List<ImageCard> imageCards) {
+	                                         @NonNull ImageCardsHolder holder) {
 		if (wikidataId.startsWith(WIKIDATA_PREFIX)) {
 			String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
 			WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
@@ -46,7 +47,7 @@ public class WikiImageHelper {
 				for (P18 p18 : response.claims.p18) {
 					String imageFileName = p18.mainsnak.datavalue.value;
 					if (imageFileName != null) {
-						addImageCard(mapActivity, imageCards, imageFileName);
+						addImageCard(mapActivity, holder, ImageCardType.WIKIDATA, imageFileName);
 					}
 				}
 			}
@@ -56,10 +57,10 @@ public class WikiImageHelper {
 	}
 
 	public static void addWikimediaImageCards(@NonNull MapActivity mapActivity, @NonNull String wikiMediaTagContent,
-	                                          @NonNull List<ImageCard> imageCards) {
+	                                          @NonNull ImageCardsHolder holder) {
 		if (wikiMediaTagContent.startsWith(WIKIMEDIA_FILE)) {
 			String fileName = wikiMediaTagContent.replace(WIKIMEDIA_FILE, "");
-			addImageCard(mapActivity, imageCards, fileName);
+			addImageCard(mapActivity, holder, ImageCardType.WIKIMEDIA, fileName);
 		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
 			String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + wikiMediaTagContent + CM_LIMIT + FORMAT_JSON;
 			WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class);
@@ -71,12 +72,12 @@ public class WikiImageHelper {
 						if (memberTitle.startsWith(WIKIMEDIA_CATEGORY)) {
 							subCategories.add(memberTitle);
 						} else {
-							addWikimediaImageCards(mapActivity, memberTitle, imageCards);
+							addWikimediaImageCards(mapActivity, memberTitle, holder);
 						}
 					}
 				}
 				for (String subCategory : subCategories) {
-					addWikimediaImageCards(mapActivity, subCategory, imageCards);
+					addWikimediaImageCards(mapActivity, subCategory, holder);
 				}
 			}
 		} else {
@@ -98,11 +99,13 @@ public class WikiImageHelper {
 		return null;
 	}
 
-	private static void addImageCard(@NonNull MapActivity mapActivity, @NonNull List<ImageCard> images,
+	private static void addImageCard(@NonNull MapActivity mapActivity,
+	                                 @NonNull ImageCardsHolder holder,
+	                                 @NonNull ImageCardType type,
 	                                 @NonNull String fileName) {
 		WikiImage img = getImageData(fileName);
 		if (img != null) {
-			images.add(new WikiImageCard(mapActivity, img));
+			holder.add(type, new WikiImageCard(mapActivity, img));
 		}
 	}
 
@@ -113,14 +116,9 @@ public class WikiImageHelper {
 			imageName = imageName.substring(0, imageName.lastIndexOf("."));
 			String[] urlHashParts = getHash(imageFileName);
 
-			String imageHiResUrl = IMAGE_BASE_URL +
-					urlHashParts[0] + "/" + urlHashParts[1] + "/" +
-					imageFileName;
+			String imageHiResUrl = IMAGE_BASE_URL + imageFileName;
 
-			String imageStubUrl = IMAGE_BASE_URL + "thumb/" +
-					urlHashParts[0] + "/" + urlHashParts[1] + "/" +
-					imageFileName + "/" + THUMB_SIZE + "px-" +
-					imageFileName;
+			String imageStubUrl = IMAGE_BASE_URL + imageFileName + "?width=" + THUMB_SIZE;
 
 			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
 

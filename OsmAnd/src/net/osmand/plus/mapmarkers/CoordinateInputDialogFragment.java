@@ -57,30 +57,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
@@ -165,7 +166,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				savingTrackHelper.insertPointData(lat, lon, System.currentTimeMillis(), description, name, category, color);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				gpx.addWptPt(lat, lon, System.currentTimeMillis(), description, name, category, color);
+				WptPt point = WptPt.createAdjustedPoint(lat, lon, System.currentTimeMillis(),
+						description, name, category, color, null, null);
+				gpx.addPoint(point);
 			}
 		}
 	}
@@ -173,10 +176,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	protected void updateWpt(GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.showCurrentTrack) {
-				savingTrackHelper.updatePointData(selectedWpt, lat, lon, System.currentTimeMillis(), description, name, category, color);
+				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				gpx.updateWptPt(selectedWpt, lat, lon, System.currentTimeMillis(), description, name, category, color);
+				gpx.updateWptPt(selectedWpt, lat, lon, description, name, category, color, null, null);
 			}
 		}
 	}
@@ -1498,7 +1501,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			if (!gpxSelected) {
-				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false, true, true, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.showOnMap().syncGroup().selectedByUser().addToHistory().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 			}
 		}
 	}

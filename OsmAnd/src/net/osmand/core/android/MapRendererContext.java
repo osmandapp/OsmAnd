@@ -25,7 +25,7 @@ import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -40,8 +40,8 @@ import net.osmand.util.Algorithms;
 public class MapRendererContext implements RendererRegistry.IRendererLoadedEventListener {
     private static final String TAG = "MapRendererContext";
 
-	private static final int OBF_RASTER_LAYER = 0;
-	private OsmandApplication app;
+	public static final int OBF_RASTER_LAYER = 0;
+	private final OsmandApplication app;
 	
 	// input parameters
 	private MapStylesCollection mapStylesCollection;
@@ -50,8 +50,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	private boolean nightMode;
 	private final float density;
 	
-	// ached objects
-	private Map<String, ResolvedMapStyle> mapStyles = new HashMap<String, ResolvedMapStyle>();
+	// сached objects
+	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
 	private CachedMapPresentation presentationObjectParams;
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	
@@ -81,6 +81,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 	}
 
+	public boolean isVectorLayerEnabled() {
+		return !app.getSettings().MAP_ONLINE_DATA.get();
+	}
+
 	public void setNightMode(boolean nightMode) {
 		if (nightMode != this.nightMode) {
 			this.nightMode = nightMode;
@@ -105,7 +109,9 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		this.obfsCollection = obfsCollection;
 		this.mapStylesCollection = mapStylesCollection;
 		updateMapPresentationEnvironment();
-		recreateRasterAndSymbolsProvider();
+		if (isVectorLayerEnabled()) {
+			recreateRasterAndSymbolsProvider();
+		}
 	}
 
 	protected int getRasterTileSize() {
@@ -165,7 +171,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		QStringStringHash convertedStyleSettings = getMapStyleSettings();
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
-		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
+		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && isVectorLayerEnabled()) {
 			recreateRasterAndSymbolsProvider();
 		}
 	}
@@ -176,7 +182,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 		Map<String, String> props = new HashMap<String, String>();
 		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-			if(RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())){
+			if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())){
 				continue;
 			} else if (customProp.isBoolean()) {
 				CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
@@ -200,7 +206,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		return convertedStyleSettings;
 	}
 	
-	private void recreateRasterAndSymbolsProvider() {
+	public void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
 		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
 		MapPrimitiviser mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
@@ -211,7 +217,16 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		updateObfMapRasterLayerProvider(mapPrimitivesProvider);
 		updateObfMapSymbolsProvider(mapPrimitivesProvider);
 	}
-	
+
+	public void resetRasterAndSymbolsProvider() {
+		if (mapRendererView != null) {
+			mapRendererView.resetMapLayerProvider(OBF_RASTER_LAYER);
+		}
+		if (obfMapSymbolsProvider != null && mapRendererView != null) {
+			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
+		}
+	}
+
 	private void updateObfMapRasterLayerProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// Create new OBF map raster layer provider
 		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
@@ -248,17 +263,20 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
-		// Layers
-		if (obfMapRasterLayerProvider != null) {
-			mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
-		}
-		// Symbols
-		if (obfMapSymbolsProvider != null) {
-			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+
+		if (isVectorLayerEnabled()) {
+			// Layers
+			if (obfMapRasterLayerProvider != null) {
+				mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
+			}
+			// Symbols
+			if (obfMapSymbolsProvider != null) {
+				mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+			}
 		}
 	}
 
-	private class CachedMapPresentation {
+	private static class CachedMapPresentation {
 		String langId ;
 		LanguagePreference langPref;
 		ResolvedMapStyle mapStyle;
@@ -308,16 +326,15 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
     }
 
     private void loadStyleFromStream(String name, InputStream source) {
-    	if(source == null) {
+    	if (source == null) {
     		return;
     	}
         if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
-            if (source != null) {
-                try {
-                    source.close();
-                } catch(IOException e) {}
-            }
-            return;
+	        try {
+	            source.close();
+	        } catch (IOException ignored) {
+	        }
+	        return;
         }
 
         Log.d(TAG, "Going to pass '" + name + "' style content to native");
@@ -337,7 +354,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
         } finally {
             try {
             	source.close();
-            } catch(IOException e) {}
+            } catch (IOException ignored) {
+            }
         }
 
         if (!mapStylesCollection.addStyleFromByteArray(
@@ -345,6 +363,4 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             Log.w(TAG, "Failed to add style from byte array");
         }
     }
-
-	
 }

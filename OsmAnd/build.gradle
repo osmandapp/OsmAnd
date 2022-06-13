@@ -36,9 +36,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion 23
-		versionCode 410
+		versionCode 4200
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "4.1.0"
+		versionName "4.2.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -70,29 +70,33 @@ android {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
 		androidFull {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-google"]
 		}
 		gplayFull {
-			java.srcDirs = ["src-gms", "src-google"]
+			java.srcDirs = ["src-google"]
 		}
 		gplayFree {
-			java.srcDirs = ["src-gms", "src-google"]
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		nightlyFree {
-			java.srcDirs = ["src-nogms", "src-google"]
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
+		rescueTrack {
+			java.srcDirs = ["src-google"]
+			manifest.srcFile "AndroidManifest-rescueTrack.xml"
+		}
 		amazonFree {
-			java.srcDirs = ["src-nogms", "src-amazon"]
+			java.srcDirs = ["src-amazon"]
 			manifest.srcFile "AndroidManifest-amazonFree.xml"
 		}
 		amazonFull {
-			java.srcDirs = ["src-nogms", "src-amazon"]
+			java.srcDirs = ["src-amazon"]
 			manifest.srcFile "AndroidManifest-amazonFull.xml"
 		}
 		huawei {
-			java.srcDirs = ["src-nogms", "src-huawei"]
+			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 
@@ -115,6 +119,12 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus"
 			resValue "string", "app_name", "OsmAnd~"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
+		}
+		rescueTrack {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd"
 			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
 		}
 		gplayFree {
@@ -206,17 +216,14 @@ dependencies {
 	//opengldebugImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
 
 	// Comment for local debug
-	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
-	opengldebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:4.2@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_android:4.2@aar"
 
-	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
-	openglImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:4.2@aar"
+	openglImplementation "net.osmand:OsmAndCore_android:4.2@aar"
 
 	huaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 	huaweiImplementation 'com.huawei.hms:appservice:5.0.4.303'
-
-	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
-	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
 
 	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"

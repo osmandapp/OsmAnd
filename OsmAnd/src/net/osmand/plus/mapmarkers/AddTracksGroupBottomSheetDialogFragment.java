@@ -15,10 +15,11 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
-import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
@@ -106,7 +107,9 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 				File gpx = dataItem.getFile();
 				if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
 					GPXFile res = GPXUtilities.loadGPXFile(gpx);
-					selectionHelper.selectGpxFile(res, true, false, false, false, false);
+					GpxSelectionParams params = GpxSelectionParams.newInstance()
+							.showOnMap().selectedAutomatically().saveSelection();
+					selectionHelper.selectGpxFile(res, params);
 				}
 				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 			}

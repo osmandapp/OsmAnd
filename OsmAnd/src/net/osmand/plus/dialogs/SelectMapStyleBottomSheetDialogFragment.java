@@ -1,7 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -20,21 +18,24 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -45,6 +46,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static net.osmand.plus.configmap.ConfigureMapMenu.PISTE_ROUTES_ATTR;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -141,10 +145,16 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(selectedStyle);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
-			view.getSettings().RENDERER.set(selectedStyle);
+			OsmandSettings settings = view.getSettings();
+			settings.RENDERER.set(selectedStyle);
+			final CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(PISTE_ROUTES_ATTR);
+			if (pisteRoutesPref.get()) {
+				pisteRoutesPref.set(settings.RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER));
+			}
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			mapActivity.refreshMapComplete();
-			mapActivity.getDashboard().refreshContent(true);
+			DashboardOnMap dashboard = mapActivity.getDashboard();
+			dashboard.refreshContent(false);
 		} else {
 			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 		}

@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,12 +28,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
 
 public class AlarmWidget {
@@ -63,8 +63,6 @@ public class AlarmWidget {
 	private final OsmAndLocationProvider locationProvider;
 	private final WaypointHelper wh;
 
-	private final boolean drawBitmap;
-
 	private int imgId;
 	private String cachedText;
 	private String cachedBottomText;
@@ -93,7 +91,6 @@ public class AlarmWidget {
 			widgetBottomText = null;
 		}
 		this.app = app;
-		this.drawBitmap = mapActivity == null;
 		routingHelper = app.getRoutingHelper();
 		trackingUtilities = app.getMapViewTrackingUtilities();
 		settings = app.getSettings();
@@ -106,7 +103,7 @@ public class AlarmWidget {
 		return widgetBitmap;
 	}
 
-	public boolean updateInfo(DrawSettings drawSettings) {
+	public boolean updateInfo(DrawSettings drawSettings, boolean drawBitmap) {
 		boolean showRoutingAlarms = settings.SHOW_ROUTING_ALARMS.get();
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 		boolean cams = settings.SHOW_CAMERAS.get();
@@ -180,6 +177,9 @@ public class AlarmWidget {
 			if (!visible && widgetBitmap != null) {
 				changed = true;
 			}
+			if (visible && widgetBitmap == null && drawBitmap) {
+				changed = true;
+			}
 			if (changed && icon == null) {
 				if (info == null || drawSettings == null || !drawBitmap) {
 					widgetBitmap = null;
@@ -191,6 +191,9 @@ public class AlarmWidget {
 		}
 		if (layout != null) {
 			AndroidUiHelper.updateVisibility(layout, visible);
+		}
+		if (!visible && drawBitmap) {
+			widgetBitmap = null;
 		}
 		return true;
 	}

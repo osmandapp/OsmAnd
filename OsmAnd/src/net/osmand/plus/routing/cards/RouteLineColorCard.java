@@ -2,36 +2,44 @@ package net.osmand.plus.routing.cards;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.ListStringPreference;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
-import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.ColoringTypeCard;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
+import net.osmand.plus.track.cards.ColoringTypeCard;
+import net.osmand.plus.track.cards.ColorsCard;
+import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.render.RenderingRulesStorage;
@@ -41,17 +49,12 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
 
 public class RouteLineColorCard extends MapBaseCard implements CardListener, ColorPickerListener, HeaderInfo {
+
+	private static final String IS_NIGHT_MAP_THEME = "is_night_map_theme";
 
 	private static final int DAY_TITLE_ID = R.string.day;
 	private static final int NIGHT_TITLE_ID = R.string.night;
@@ -71,21 +74,32 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private ColoringType selectedType;
 	private String selectedRouteInfoAttribute;
 	private final PreviewRouteLineInfo previewRouteLineInfo;
-	private final DayNightMode initMapTheme;
-	private DayNightMode selectedMapTheme;
+	private boolean isNightMapTheme;
+	private final ApplicationMode appMode;
 
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
 	                          @NonNull Fragment targetFragment,
 	                          @NonNull PreviewRouteLineInfo previewRouteLineInfo,
-	                          @NonNull DayNightMode initMapTheme,
-	                          @NonNull DayNightMode selectedMapTheme,
-	                          @NonNull HeaderUiAdapter headerUiAdapter) {
+	                          @NonNull HeaderUiAdapter headerUiAdapter,
+	                          @NonNull ApplicationMode appMode,
+	                          @Nullable Bundle savedInstanceState) {
 		super(mapActivity);
 		this.targetFragment = targetFragment;
 		this.previewRouteLineInfo = previewRouteLineInfo;
-		this.initMapTheme = initMapTheme;
-		this.selectedMapTheme = selectedMapTheme;
 		this.headerUiAdapter = headerUiAdapter;
+		this.appMode = appMode;
+		selectedType = previewRouteLineInfo.getRouteColoringType();
+		selectedRouteInfoAttribute = previewRouteLineInfo.getRouteInfoAttribute();
+
+		Boolean nightMapTheme = null;
+		if (savedInstanceState != null) {
+			nightMapTheme = savedInstanceState.getBoolean(IS_NIGHT_MAP_THEME);
+		}
+		if (nightMapTheme == null) {
+			DayNightHelper themeHelper = app.getDaynightHelper();
+			nightMapTheme = themeHelper.isNightModeForMapControls();
+		}
+		isNightMapTheme = nightMapTheme;
 	}
 
 	@Override
@@ -108,21 +122,20 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 		cardsContainer = view.findViewById(R.id.colors_card_container);
 		createCards(cardsContainer);
-
-		initSelectedMode();
+		refreshSelectedMode();
 	}
 
-	private void initSelectedMode() {
+	private void refreshSelectedMode() {
 		selectedType = previewRouteLineInfo.getRouteColoringType();
 		selectedRouteInfoAttribute = previewRouteLineInfo.getRouteInfoAttribute();
-		modeChanged();
+		onModeChanged();
 	}
 
-	private void modeChanged() {
+	private void onModeChanged() {
 		AndroidUiHelper.updateVisibility(themeToggleContainer, selectedType.isCustomColor());
 		colorsCard.updateVisibility(selectedType.isCustomColor());
 		coloringTypeCard.setColoringType(selectedType);
-		changeMapTheme(!selectedType.isCustomColor() ? initMapTheme : isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
+		onMapThemeChanged();
 
 		previewRouteLineInfo.setRouteColoringType(selectedType);
 		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);
@@ -153,26 +166,23 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(day, night);
 
-		radioGroup.setSelectedItem(!isNightMap() ? day : night);
+		radioGroup.setSelectedItem(isNightMapTheme ? night : day);
 	}
 
 	private TextRadioItem createMapThemeButton(final boolean isNight) {
 		TextRadioItem item = new TextRadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
-		item.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				selectedMapTheme = isNight ? DayNightMode.NIGHT : DayNightMode.DAY;
-				changeMapTheme(selectedMapTheme);
-				updateDescription();
-				return true;
-			}
+		item.setOnClickListener((radioItem, view) -> {
+			isNightMapTheme = isNight;
+			onMapThemeChanged();
+			updateDescription();
+			return true;
 		});
 		return item;
 	}
 
-	private void changeMapTheme(DayNightMode mapTheme) {
-		if (targetFragment instanceof OnMapThemeUpdateListener) {
-			((OnMapThemeUpdateListener) targetFragment).onMapThemeUpdated(mapTheme);
+	private void onMapThemeChanged() {
+		if (targetFragment instanceof OnMapThemeChangeListener) {
+			((OnMapThemeChangeListener) targetFragment).onMapThemeChanged();
 		}
 		if (selectedType == ColoringType.CUSTOM_COLOR) {
 			colorsCard.setSelectedColor(getCustomRouteColor());
@@ -259,7 +269,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private void updateDescription() {
-		String description = null;
+		String description;
 		if (selectedType.isDefault()) {
 			String pattern = app.getString(R.string.route_line_use_map_style_color);
 			description = String.format(pattern, app.getRendererRegistry().getSelectedRendererName());
@@ -278,12 +288,15 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private boolean isNightMap() {
-		return selectedMapTheme.isNight();
+		if (selectedType.isCustomColor()) {
+			return isNightMapTheme;
+		} else {
+			return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
+		}
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-	}
+	public void onCardLayoutNeeded(@NonNull BaseCard card) { }
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
@@ -293,7 +306,17 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) { }
+
+	public void saveToBundle(@NonNull Bundle outState) {
+		outState.putBoolean(IS_NIGHT_MAP_THEME, isNightMapTheme);
+	}
+
+	@Nullable
+	public DayNightMode getSelectedMapTheme() {
+		return selectedType.isCustomColor() ?
+				isNightMapTheme ? DayNightMode.NIGHT : DayNightMode.DAY
+				: null;
 	}
 
 	private class ColorTypeAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
@@ -326,15 +349,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
-			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
-			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			view.getLayoutParams().width = getDimen(R.dimen.gpx_group_button_width);
+			view.getLayoutParams().height = getDimen(R.dimen.gpx_group_button_height);
 			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 
 			AppearanceViewHolder holder = new AppearanceViewHolder(view);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
-						R.drawable.ripple_solid_dark_6dp);
-			}
+			AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
+					R.drawable.ripple_solid_dark_6dp);
 			return holder;
 		}
 
@@ -352,12 +373,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 				selectedRouteInfoAttribute = coloringTypeName;
 				notifyItemRangeChanged(0, getItemCount());
 
-				modeChanged();
-
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(RouteLineColorCard.this);
-				}
+				onModeChanged();
+				notifyCardPressed();
 			});
 		}
 
@@ -417,7 +434,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		void onSelectedColorChanged();
 	}
 
-	public interface OnMapThemeUpdateListener {
-		void onMapThemeUpdated(@NonNull DayNightMode mapTheme);
+	public interface OnMapThemeChangeListener {
+		void onMapThemeChanged();
 	}
 }

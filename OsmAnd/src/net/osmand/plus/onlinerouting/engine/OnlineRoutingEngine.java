@@ -13,6 +13,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 
@@ -68,7 +70,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	/**
-	 * Used only when creating a full server url
+	 * Only used when creating a full API url
 	 * @return a string that represents the type of vehicle, or an empty string
 	 * if the vehicle type not provided
 	 */
@@ -104,6 +106,28 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public boolean shouldApproximateRoute() {
 		String value = get(EngineParameter.APPROXIMATE_ROUTE);
+		return !Algorithms.isEmpty(value);
+	}
+
+	@Nullable
+	public String getApproximateRouteProfile() {
+		String routingProfile = get(EngineParameter.APPROXIMATE_ROUTE);
+		if (!Algorithms.isEmpty(routingProfile)) {
+			return routingProfile;
+		}
+		return null;
+	}
+
+	public boolean useExternalTimestamps() {
+		String value = get(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+		if (!Algorithms.isEmpty(value)) {
+			return Boolean.parseBoolean(value);
+		}
+		return false;
+	}
+
+	public boolean useRoutingFallback() {
+		String value = get(EngineParameter.USE_ROUTING_FALLBACK);
 		if (!Algorithms.isEmpty(value)) {
 			return Boolean.parseBoolean(value);
 		}
@@ -111,14 +135,13 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@NonNull
-	public String getFullUrl(@NonNull List<LatLon> path) {
+	public String getFullUrl(@NonNull List<LatLon> path, @Nullable Float startBearing) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());
-		makeFullUrl(sb, path);
+		makeFullUrl(sb, path, startBearing);
 		return sb.toString();
 	}
 
-	protected abstract void makeFullUrl(@NonNull StringBuilder sb,
-	                                    @NonNull List<LatLon> path);
+	protected abstract void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing);
 
 	@NonNull
 	public String getBaseUrl() {
@@ -132,10 +155,24 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	@NonNull
 	public abstract String getStandardUrl();
 
+	@NonNull
+	public String getHTTPMethod() {
+		return "GET";
+	}
+
 	@Nullable
-	public abstract OnlineRoutingResponse parseResponse(@NonNull String content,
-	                                                    @NonNull OsmandApplication app,
-	                                                    boolean leftSideNavigation) throws JSONException;
+	public Map<String, String> getRequestHeaders() {
+		return null;
+	}
+
+	@Nullable
+	public String getRequestBody(@NonNull List<LatLon> path, @Nullable Float startBearing) throws JSONException {
+		return null;
+	}
+
+	@Nullable
+	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
+	                                                    boolean leftSideNavigation, boolean initialCalculation) throws JSONException;
 
 	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                                   @NonNull String content) throws JSONException;
@@ -186,8 +223,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return isPredefinedEngineKey(getStringKey());
 	}
 
+	public void updateRouteParameters(@NonNull RouteCalculationParams params, @Nullable RouteCalculationResult previousRoute) {
+	}
+
 	@Nullable
-	private String getSelectedVehicleName(@NonNull Context ctx) {
+	protected String getSelectedVehicleName(@NonNull Context ctx) {
+		if (isCustomParameterizedVehicle()) {
+			return CUSTOM_VEHICLE.getTitle(ctx);
+		}
 		String key = get(EngineParameter.VEHICLE_KEY);
 		VehicleType vt = getVehicleTypeByKey(key);
 		if (!vt.equals(CUSTOM_VEHICLE)) {
@@ -212,6 +255,21 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 			}
 		}
 		return CUSTOM_VEHICLE;
+	}
+
+	public boolean isCustomParameterizedVehicle() {
+		return isCustomParameterizedValue(get(EngineParameter.VEHICLE_KEY));
+	}
+
+	/**
+	 * @return 'true' if the custom input has any custom parameters, 'false' - otherwise.
+	 * For example, for custom input "&profile=car&locale=en" the method returns 'true'.
+	 */
+	public boolean isCustomParameterizedValue(@Nullable String value) {
+		if (value != null) {
+			return value.startsWith("&") || value.indexOf("=") < value.indexOf("&");
+		}
+		return false;
 	}
 
 	@NonNull
@@ -256,7 +314,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 		private List<Location> route;
 		private List<RouteDirectionInfo> directions;
+
 		private GPXFile gpxFile;
+		private boolean calculatedTimeSpeed;
 
 		// constructor for JSON responses
 		public OnlineRoutingResponse(List<Location> route, List<RouteDirectionInfo> directions) {
@@ -265,8 +325,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		}
 
 		// constructor for GPX responses
-		public OnlineRoutingResponse(GPXFile gpxFile) {
+		public OnlineRoutingResponse(GPXFile gpxFile, boolean calculatedTimeSpeed) {
 			this.gpxFile = gpxFile;
+			this.calculatedTimeSpeed = calculatedTimeSpeed;
 		}
 
 		public List<Location> getRoute() {
@@ -279,6 +340,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 		public GPXFile getGpxFile() {
 			return gpxFile;
+		}
+
+		public boolean hasCalculatedTimeSpeed() {
+			return calculatedTimeSpeed;
 		}
 	}
 

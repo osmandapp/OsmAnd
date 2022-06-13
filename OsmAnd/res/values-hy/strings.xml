@@ -92,7 +92,6 @@
     <string name="local_indexes_cat_srtm">Կոնտուրային գծերի/եզրագծերի տվյալներ</string>
     <string name="precise_routing_mode_descr">Միացնել ճշգրիտ երթուղիների հաշվարկի ռեժիմը։ Այս ռեժիմը դեր սահմանափակված է հեռավորությամբ և դանդախ է։</string>
     <string name="dropbox_plugin_name">Dropbox փլագին</string>
-    <string name="av_def_action_choose">Ընտրել ըստ հարցման\?</string>
     <string name="av_widget_action_descr">Ընտրել default Widget գործողություն՝</string>
     <string name="av_widget_action">Default վիդջետի գործողություն</string>
     <string name="recording_is_recorded">Կատարվում է աուդիո/վիդեո ձայնագրում, դադարեցնելու համար սեխմեք AV վիջետը։</string>
@@ -420,7 +419,6 @@
     <string name="rendering_value_light_brown_name">Բաց-շագանակագույն</string>
     <string name="rendering_value_dark_brown_name">Մուգ շագանակագույն</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines գունային սխեման</string>
-    <string name="translit_name_if_miss">Transliterate եթե %1$s անունը բացակայում է</string>
     <string name="translit_names">Transliterate անունները</string>
     <string name="first_usage_greeting">Ստացեք երթուղիներ և հայտնաբերեք նոր վայրեր առանց ինտերնետ կապի</string>
     <string name="search_my_location">Գտնել իմ դիրքը</string>
@@ -835,7 +833,7 @@
     <string name="action_delete">Ջնջել գործողությունը</string>
     <string name="osm_edits">OSM-ի խմբագրումները</string>
     <string name="osmand_parking_hour">ժ</string>
-    <string name="osmand_parking_minute">րոպե</string>
+    <string name="shared_string_minute_lowercase">րոպե</string>
     <string name="parking_place_limited">Ավտոկանգառի ժամանակը սահմանափակ է</string>
     <string name="osmand_parking_time_left">մնաց</string>
     <string name="your_edits">Ձեր խմբագրումները</string>
@@ -956,7 +954,7 @@
     <string name="enter_new_name">Մուտքագրեք նոր անուն</string>
     <string name="shared_string_back">Վերադառնալ</string>
     <string name="shared_string_view">Դիտել</string>
-    <string name="osm_settings">OSM-ի խմբագրում</string>
+    <string name="osm_editing_plugin_name">OSM-ի խմբագրում</string>
     <string name="waypoints_added_to_map_markers">Կետերը ավելացվել են քարտեզի մարկերներին</string>
     <string name="osm_editing_plugin_description">Այս OsmAnd-ի plugin-ի միջոցով կարելի է ներդրում կատարել OSM-ի, ինչպիսիք են OSM POI-ի օբյեկտների ստեղծում կամ փոփոխում, OSM նշումների բացումը կամ մեկնաբանումը և վերբեռնում արձանագրված GPX ֆայլերը: OSM-ն գլոբալ հանրային քարտեզագրման նախագիծ է, որը կառավարվում է OSM համայնքի կողմից: Մանրամասների համար այցելեք https://openstreetmap.org: Ակտիվ մասնակցությունը գնահատվում է, և ներդրումները կարող են կատարվել ուղղակիորեն OsmAnd-ից, եթե նշեք ձեր անձնական OSM-ի հավատարմագրերը հավելվածում:</string>
     <string name="osmand_development_plugin_description">Կարգավորումներ զարգացման եւ կարգաբերման գործառույթների համար, ինչպիսիք են երթուղու ստուգումը կամ մոդելավորումը,քարտեզի ցուցադրման կատարումը, ձայնային հուշումները ստուգելը: Այս կարգավորումները մշակողների համար են և հասարակ օգտագործողների համար անհրաժեշտ չեն:</string>
@@ -1088,7 +1086,6 @@
     <string name="save_track_to_gpx_globally_descr">Ընդհանուր դիրքի գրանցումը GPX ֆայլի տեսքով կարող եք միացնել կամ անջատել GPX վիջետի միջոցով քարտեզի վրա։</string>
     <string name="save_current_track_descr">Պահպանել ընթացիկ տրեկը որպես GPX ֆայլ։</string>
     <string name="save_current_track">Պահպանել ընթացիկ տրեկը</string>
-    <string name="save_track_to_gpx_descrp">Նավիգացիայի ընթացքում GPX տրեկները ինքնաբերաբար կպահպանվեն տրեկների թղթապանակում։</string>
     <string name="save_track_interval_globally">Մուտքագրման ժամանակի ընդմիջումը</string>
     <string name="save_track_interval">Նավիգացիայի ընթացքում մուտքագրման ժամանակի ընդմիջումը</string>
     <string name="save_track_interval_descr">Ընտրեք մուտքագրման ժամանակի ընդմիջումը նավիգացիայի ընթացքում</string>
@@ -1637,9 +1634,6 @@
     <string name="map_widget_compass">Կողմնացույց</string>
     <string name="map_widget_reset">Վերականգնել սկզբնական պարամետրերը</string>
     <string name="map_widget_parking">Կայանատեղ</string>
-    <string name="map_widget_speed">Արագություն</string>
-    <string name="map_widget_distance">Նպատակակետ</string>
-    <string name="map_widget_altitude">Բարձրություն</string>
     <string name="map_widget_time">Ուղևորության ժամանակը</string>
     <string name="map_widget_next_turn">Հաջորդ շրջադարձը</string>
     <string name="map_widget_next_turn_small">Հաջորդ շրջադարձը (փոքր)</string>
@@ -2336,7 +2330,7 @@
     <string name="av_camera_pic_size_descr">Ընտրեք տեսախցիկի և պատկերի չափը</string>
     <string name="navigation_intent_invalid">Սխալ ձևաչափ՝ %s</string>
     <string name="plugin_install_needs_network">Անհրաժեշտ է ինտերնետ կապ այս plugin-ը տեղադրելու համար:</string>
-    <string name="get_plugin">Ստանալ</string>
+    <string name="shared_string_get">Ստանալ</string>
     <string name="use_fast_recalculation">Երթուղու խելացի վերահաշվարկ</string>
     <string name="use_fast_recalculation_desc">Երկար ուղեւորությունների ժամանակ միայն վերահաշվարկել երթուղու նախնական մասը:</string>
     <string name="do_you_like_osmand">Ձեզ դուր է գալիս OsmAnd?</string>
@@ -2652,7 +2646,6 @@
     <string name="ski_map_render_descr">Դահուկային ոճ: Ցուցադրում է - երթուղիների, լեռնադահուկային վերելակների և այլ լեռնադահուկային առանձնահատկություններ: Ավելի քիչ շեղող երկրորդային օբյեկտներ:</string>
     <string name="light_rs_render_descr">Պարզ ոճը ավտոմեքենաների նավարկության համար: Աչքերի համար հարմար է գիշերային ռեժիմում: Հիմնական առանձնահատկությունները. Եզրագծերը, հակապատկեր նարնջագույն ճանապարհներ, ավելի քիչ շեղող երկրորդային օբյեկտներ:</string>
     <string name="topo_render_descr">Հակապատկեր ոճը, որը նախատեսված է հիմնականում արշավային զբոսանքի, հետիոտն և հեծանվային զբոսանքի համար։ Լավ ընթեռնելիություն բարդ արտաքին լուսավորման ժամանակ։ Հիմնական առանձնահատկությունները: Հակապատկեր ճանապարհներ և բնական օբյեկտներ, տարբեր տեսակի երթուղիներ, ուրվագծային գծի առաջադեմ պարամետրերով, ավելի մանրամասն տեղեկատվություններ ներկայացված են համապատասխան մակարդակների չափման, քան հիմնական ոճում։ Ճանապարհային որակի ծածկույթը տարբերակը թույլ է տալիս տարբերակել ճանապարհի տարբեր որակի մակերեսին։ Չկան գիշերային ռեժիմ։</string>
-    <string name="mapnik_render_descr">Հին ցուցադրման ոճը «Mapnik» է: Գույները նման են «Mapnik» ոճին:</string>
     <string name="touring_view_render_descr">Բարձր մանրամասն ոճ շրջագայության համար: Ներառում է կանխադրված ոճի բոլոր կազմաձևային տարբերակները, բացի այդ, ցուցադրվում է որքան հնարավոր է մանրամասն, մասնավորապես, բոլոր ճանապարհները, ճանապարհները և ճանապարհորդելու այլ ուղիներ: Հստակ տեսողական տարբերություն բոլոր տեսակների ճանապարհների միջև, բազմաթիվ զբոսաշրջային ատլասների հիշեցում: Արտաքին օգտագործման, ցերեկային և գիշերային ռեժիմի բարձր հակադրություն գունային սխեման:</string>
     <string name="default_render_descr">Ընդհանուր ոճ: Խիտ բնակեցված քաղաքներում պարզեցված ռենդերինգ: Եզրագծային գծեր, երթուղիներ, ճանապարհերի մակերեսային որակնը, մուտքի սահմանափակումներ, ճանապարհային նշաններ, SAC սանդղակի երթուղիների արտացոլում, սպորտային համաձուլվածքների բնութագրեր:</string>
     <string name="open_wikipedia_link_online">Բացել Wikipedia հղումը առցանց</string>

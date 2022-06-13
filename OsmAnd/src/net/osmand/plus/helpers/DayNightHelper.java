@@ -8,12 +8,16 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle.State;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.SunriseSunset;
 
@@ -45,23 +49,26 @@ public class DayNightHelper implements SensorEventListener {
 	private static final Log log = PlatformUtil.getLog(DayNightHelper.class);
 	
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 
 	public DayNightHelper(OsmandApplication app) {
 		this.app = app;
+		settings = app.getSettings();
 	}
 
 	private DayNightHelper listener;
+	private MapThemeProvider mapThemeProvider;
 
 	private long lastTime = 0;
 	private boolean lastNightMode = false;
 	private StateChangedListener<Boolean> sensorStateListener;
 
 	public boolean isNightModeForMapControls() {
-		return isNightModeForMapControlsForProfile(app.getSettings().APPLICATION_MODE.get());
+		return isNightModeForMapControlsForProfile(settings.APPLICATION_MODE.get());
 	}
 
 	public boolean isNightModeForMapControlsForProfile(ApplicationMode mode) {
-		if (app.getSettings().isLightContentForMode(mode)) {
+		if (settings.isLightContentForMode(mode)) {
 			return isNightModeForProfile(mode);
 		} else {
 			return true;
@@ -72,13 +79,17 @@ public class DayNightHelper implements SensorEventListener {
 	 * @return true if day is supposed to be
 	 */
 	public boolean isNightMode() {
-		return isNightModeForProfile(app.getSettings().APPLICATION_MODE.get());
+		return isNightModeForProfile(settings.APPLICATION_MODE.get());
 	}
 
 	public boolean isNightModeForProfile(ApplicationMode mode) {
-		DayNightMode dayNightMode = app.getSettings().DAYNIGHT_MODE.getModeValue(mode);
+		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.getModeValue(mode);
+		if (mapThemeProvider != null) {
+			DayNightMode providedTheme = mapThemeProvider.getMapTheme();
+			dayNightMode = providedTheme != null ? providedTheme : dayNightMode;
+		}
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+		if (carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
 			boolean carDarkMode = carNavigationSession.getCarContext().isDarkMode();
 			dayNightMode = carDarkMode ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}
@@ -86,8 +97,7 @@ public class DayNightHelper implements SensorEventListener {
 			return false;
 		} else if (dayNightMode.isNight()) {
 			return true;
-		} else // We are in auto mode!
-		if (dayNightMode.isAuto()) {
+		} else if (dayNightMode.isAuto()) { // We are in auto mode!
 			long currentTime = System.currentTimeMillis();
 			// allow recalculation each 60 seconds
 			if (currentTime - lastTime > 60000) {
@@ -127,6 +137,10 @@ public class DayNightHelper implements SensorEventListener {
 				actualTime, TimeZone.getDefault());
 	}
 
+	public void setMapThemeProvider(@Nullable MapThemeProvider mapThemeProvider) {
+		this.mapThemeProvider = mapThemeProvider;
+	}
+
 	public void stopSensorIfNeeded() {
 		if (listener != null) {
 			SensorManager mSensorManager = (SensorManager) app
@@ -139,7 +153,7 @@ public class DayNightHelper implements SensorEventListener {
 
 	public void startSensorIfNeeded(StateChangedListener<Boolean> sensorStateListener) {
 		this.sensorStateListener = sensorStateListener;
-		DayNightMode dayNightMode = app.getSettings().DAYNIGHT_MODE.get();
+		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.get();
 		if (listener == null && dayNightMode.isSensor()) {
 			SensorManager mSensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -171,5 +185,9 @@ public class DayNightHelper implements SensorEventListener {
 				}
 			}
 		}
+	}
+
+	public interface MapThemeProvider {
+		DayNightMode getMapTheme();
 	}
 }

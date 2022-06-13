@@ -1,7 +1,5 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -29,16 +27,19 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.AddPOIAction;
+import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
+import net.osmand.plus.quickaction.actions.GPXAction;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
+
+import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 /**
  * Created by rosty on 12/27/16.
@@ -150,7 +151,7 @@ public class CreateEditActionDialog extends DialogFragment
         setupHeader(view, savedInstanceState);
         setupFooter(view);
 
-        action.drawUI((ViewGroup) getView().findViewById(R.id.container), (MapActivity) getActivity());
+        action.drawUI((ViewGroup) getView().findViewById(R.id.container), getMapActivity());
     }
 
     @Override
@@ -261,8 +262,6 @@ public class CreateEditActionDialog extends DialogFragment
                         if (isNew) quickActionRegistry.addQuickAction(action);
                         else quickActionRegistry.updateQuickAction(action);
 
-                        quickActionRegistry.notifyUpdates();
-
                         dismiss();
 
                     } else {
@@ -278,8 +277,6 @@ public class CreateEditActionDialog extends DialogFragment
 
                                 if (isNew) quickActionRegistry.addQuickAction(action);
                                 else quickActionRegistry.updateQuickAction(action);
-
-                                quickActionRegistry.notifyUpdates();
 
                                 CreateEditActionDialog.this.dismiss();
                                 dismiss();
@@ -313,6 +310,12 @@ public class CreateEditActionDialog extends DialogFragment
     public boolean processResult(Object result) {
         if (action instanceof SwitchableAction) {
             ((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
+        } else if (action instanceof GPXAction) {
+            View container = getView() != null ? getView().findViewById(R.id.container) : null;
+            MapActivity mapActivity = getMapActivity();
+            if (container != null && mapActivity != null && result instanceof String) {
+                ((GPXAction) action).onGpxFileSelected(container, mapActivity, (String) result);
+            }
         }
         return false;
     }
@@ -320,7 +323,25 @@ public class CreateEditActionDialog extends DialogFragment
     @Override
     public void onConfirmButtonClick() {
         quickActionRegistry.deleteQuickAction(action);
-        quickActionRegistry.notifyUpdates();
         dismiss();
+    }
+
+    public void hide() {
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.hide();
+        }
+    }
+
+    public void show() {
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.show();
+        }
+    }
+
+    @Nullable
+    private MapActivity getMapActivity() {
+        return getActivity() == null ? null : ((MapActivity) getActivity());
     }
 }

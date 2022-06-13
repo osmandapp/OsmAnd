@@ -13,21 +13,20 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -123,10 +122,6 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		Fragment optionsFragment = fragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
 		if (optionsFragment != null) {
 			((OptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
-		}
-		Fragment directionIndicationFragment = fragmentManager.findFragmentByTag(DirectionIndicationDialogFragment.TAG);
-		if (directionIndicationFragment != null) {
-			((DirectionIndicationDialogFragment) directionIndicationFragment).setListener(createShowDirectionFragmentListener());
 		}
 		final Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
 		if (orderByFragment != null) {
@@ -364,7 +359,6 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void showDirectionOnClick() {
 				if (mapActivity != null) {
 					DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
-					fragment.setListener(createShowDirectionFragmentListener());
 					fragment.show(getChildFragmentManager(), DirectionIndicationDialogFragment.TAG);
 				}
 			}
@@ -432,20 +426,6 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			@Override
 			public void dismiss() {
 				restoreSelectedNavItem();
-			}
-		};
-	}
-
-	private DirectionIndicationFragmentListener createShowDirectionFragmentListener() {
-		return new DirectionIndicationFragmentListener() {
-
-			final MapActivity mapActivity = getMapActivity();
-
-			@Override
-			public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
-				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
-				activeFragment.setShowDirectionEnabled(showDirectionEnabled);
-				updateAdapters();
 			}
 		};
 	}

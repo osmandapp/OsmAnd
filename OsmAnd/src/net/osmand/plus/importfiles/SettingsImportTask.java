@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.CustomOsmandPlugin;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
@@ -67,7 +67,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	protected String doInBackground(Void... voids) {
 		File tempDir = FileUtils.getTempDir(app);
 		File dest = new File(tempDir, name);
-		return ImportHelper.copyFile(app, dest, uri, true);
+		return ImportHelper.copyFile(app, dest, uri, true, false);
 	}
 
 	@Override
@@ -160,7 +160,6 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 						plugin.indexingFiles(true, true);
 					}
 					if (activity instanceof MapActivity) {
-						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 						((MapActivity) activity).updateApplicationModeSettings();
 					}
 					if (!silentImport && file != null && activity != null) {

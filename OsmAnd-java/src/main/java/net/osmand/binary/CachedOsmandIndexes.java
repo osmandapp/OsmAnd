@@ -34,11 +34,12 @@ public class CachedOsmandIndexes {
 	private OsmAndStoredIndex storedIndex;
 	private OsmAndStoredIndex.Builder storedIndexBuilder;
 	private Log log = PlatformUtil.getLog(CachedOsmandIndexes.class);
-	private boolean hasChanged = true;
+	private boolean hasChanged = false;
+	public static final String INDEXES_DEFAULT_FILENAME = "indexes.cache";
 
 	public static final int VERSION = 2;
 
-	public void addToCache(BinaryMapIndexReader reader, File f) {
+	public FileIndex addToCache(BinaryMapIndexReader reader, File f) {
 		hasChanged = true;
 		if (storedIndexBuilder == null) {
 			storedIndexBuilder = OsmandIndex.OsmAndStoredIndex.newBuilder();
@@ -157,8 +158,9 @@ public class CachedOsmandIndexes {
 			fileIndex.addRoutingIndex(routing);
 		}
 
-		storedIndexBuilder.addFileIndex(fileIndex);
-
+		FileIndex fi = fileIndex.build();
+		storedIndexBuilder.addFileIndex(fi);
+		return fi;
 	}
 
 	private void addRouteSubregion(RoutingPart.Builder routing, RouteSubregion sub, boolean base) {
@@ -175,9 +177,26 @@ public class CachedOsmandIndexes {
 	}
 
 	public BinaryMapIndexReader getReader(File f, boolean useStoredIndex) throws IOException {
+		FileIndex found = useStoredIndex ? getFileIndex(f, false) : null;
+		BinaryMapIndexReader reader = null;
 		RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
+		if (found == null) {
+			long val = System.currentTimeMillis();
+			reader = new BinaryMapIndexReader(mf, f);
+			found = addToCache(reader, f);
+			if (log.isDebugEnabled()) {
+				log.debug("Initializing db " + f.getAbsolutePath() + " " + (System.currentTimeMillis() - val) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
+		} else {
+			reader = initReaderFromFileIndex(found, mf, f);
+		}
+		return reader;
+	}
+
+
+	public FileIndex getFileIndex(File f, boolean init) throws IOException {
 		FileIndex found = null;
-		if (storedIndex != null && useStoredIndex) {
+		if (storedIndex != null) {
 			for (int i = 0; i < storedIndex.getFileIndexCount(); i++) {
 				FileIndex fi = storedIndex.getFileIndex(i);
 				if (f.length() == fi.getSize() && f.getName().equals(fi.getFileName())) {
@@ -187,21 +206,21 @@ public class CachedOsmandIndexes {
 				}
 			}
 		}
-		BinaryMapIndexReader reader = null;
-		if (found == null) {
+		if (found == null && init) {
+			RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
 			long val = System.currentTimeMillis();
-			reader = new BinaryMapIndexReader(mf, f);
-			addToCache(reader, f);
+			BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f);
+			found = addToCache(reader, f);
 			if (log.isDebugEnabled()) {
 				log.debug("Initializing db " + f.getAbsolutePath() + " " + (System.currentTimeMillis() - val) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
-		} else {
-			reader = initFileIndex(found, mf, f);
+			reader.close();
+			mf.close();
 		}
-		return reader;
+ 		return found;
 	}
 
-	private BinaryMapIndexReader initFileIndex(FileIndex found, RandomAccessFile mf, File f) throws IOException {
+	public BinaryMapIndexReader initReaderFromFileIndex(FileIndex found, RandomAccessFile mf, File f) throws IOException {
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f, false);
 		reader.version = found.getVersion();
 		reader.dateCreated = found.getDateModified();
@@ -308,6 +327,7 @@ public class CachedOsmandIndexes {
 
 		return reader;
 	}
+	
 
 	public void readFromFile(File f, int version) throws IOException {
 		long time = System.currentTimeMillis();
@@ -334,5 +354,7 @@ public class CachedOsmandIndexes {
 			}
 		}
 	}
+
+	
 
 }

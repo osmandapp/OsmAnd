@@ -5,32 +5,37 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 
 import java.lang.ref.WeakReference;
 
 public class WidgetsVisibilityHelper {
 
-	private final MapActivity mapActivity;
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
+
+	private final MapActivity mapActivity;
 	private final MapLayers mapLayers;
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.settings = mapActivity.getMyApplication().getSettings();
-		this.routingHelper = mapActivity.getRoutingHelper();
-		this.mapLayers = mapActivity.getMapLayers();
+		app = mapActivity.getMyApplication();
+		settings = app.getSettings();
+		routingHelper = app.getRoutingHelper();
+		mapLayers = app.getOsmandMap().getMapLayers();
 	}
 
 	public boolean shouldShowQuickActionButton() {
@@ -47,7 +52,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isContextMenuFragmentVisible()
-				&& !isMultiSelectionMenuFragmentVisible();
+				&& !isMultiSelectionMenuFragmentVisible()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
@@ -59,14 +66,15 @@ public class WidgetsVisibilityHelper {
 				&& !isInRouteLineAppearanceMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
-				&& !isInFollowTrackMode();
+				&& !isInFollowTrackMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldHideMapMarkersWidget() {
-		View addressTopBar = mapActivity.findViewById(R.id.map_top_bar);
-		return !settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()
-				|| !settings.MAP_MARKERS_MODE.get().isToolbar()
-				|| addressTopBar != null && addressTopBar.getVisibility() == View.VISIBLE
+		View streetName = mapActivity.findViewById(R.id.street_name_widget);
+		return !settings.SHOW_MAP_MARKERS_BAR_WIDGET.get()
+				|| streetName != null && streetName.getVisibility() == View.VISIBLE
 				|| routingHelper.isFollowingMode()
 				|| routingHelper.isRoutePlanningMode()
 				|| isMapRouteInfoMenuVisible()
@@ -74,7 +82,9 @@ public class WidgetsVisibilityHelper {
 				|| mapActivity.shouldHideTopControls()
 				|| isInTrackAppearanceMode()
 				|| isInPlanRouteMode()
-				|| isInRouteLineAppearanceMode();
+				|| isInRouteLineAppearanceMode()
+				|| isInGpsFilteringMode()
+				|| isSelectingTilesZone();
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
@@ -87,7 +97,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInTrackAppearanceMode()
-				&& !isInRouteLineAppearanceMode();
+				&& !isInRouteLineAppearanceMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldShowZoomButtons() {
@@ -95,8 +107,12 @@ public class WidgetsVisibilityHelper {
 				&& !isInTrackAppearanceMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
-				&& !isInRouteLineAppearanceMode();
-		return !mapActivity.shouldHideTopControls()
+				&& !isInRouteLineAppearanceMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
+		boolean showTopControls = !mapActivity.shouldHideTopControls()
+				|| (isInTrackMenuMode() && !isPortrait());
+		return showTopControls
 				&& !isInFollowTrackMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
@@ -109,7 +125,9 @@ public class WidgetsVisibilityHelper {
 				|| isInTrackAppearanceMode()
 				|| isInWaypointsChoosingMode()
 				|| isInFollowTrackMode()
-				|| isInRouteLineAppearanceMode();
+				|| isInRouteLineAppearanceMode()
+				|| isInGpsFilteringMode()
+				|| isSelectingTilesZone();
 	}
 
 	public boolean shouldShowTopButtons() {
@@ -120,7 +138,9 @@ public class WidgetsVisibilityHelper {
 				&& !isInTrackAppearanceMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
-				&& !isInRouteLineAppearanceMode();
+				&& !isInRouteLineAppearanceMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	public boolean shouldShowBackToLocationButton() {
@@ -129,15 +149,43 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
-				&& !isInRouteLineAppearanceMode();
-		return !mapActivity.shouldHideTopControls()
+				&& !isInRouteLineAppearanceMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
+		boolean showTopControls = !mapActivity.shouldHideTopControls()
+				|| (isInTrackMenuMode() && !isPortrait());
+		return showTopControls
 				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
+	public boolean shouldShowElevationProfileWidget() {
+		return settings.SHOW_ELEVATION_PROFILE_WIDGET.get() && isRouteCalculated()
+				&& InAppPurchaseHelper.isOsmAndProAvailable(app)
+				&& !isInChangeMarkerPositionMode()
+				&& !isInMeasurementToolMode()
+				&& !isInChoosingRoutesMode()
+				&& !isInWaypointsChoosingMode()
+				&& !isInPlanRouteMode()
+				&& !isSelectingTilesZone();
+		/*
+				&& !isDashboardVisible()
+				&& !isInGpxDetailsMode()
+				&& !isInTrackAppearanceMode()
+				&& !isInTrackMenuMode()
+				&& !isMapRouteInfoMenuVisible()
+				&& !isInRouteLineAppearanceMode()
+				&& !isInFollowTrackMode()
+				&& !isContextMenuFragmentVisible()
+				&& !isMultiSelectionMenuFragmentVisible();
+		 */
+	}
+
 	public boolean shouldShowDownloadMapWidget() {
-		return !isInRouteLineAppearanceMode();
+		return !isInRouteLineAppearanceMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
 	}
 
 	private boolean isQuickActionLayerOn() {
@@ -202,6 +250,10 @@ public class WidgetsVisibilityHelper {
 		return MapRouteInfoMenu.followTrackVisible;
 	}
 
+	public boolean isDashboardVisible() {
+		return mapActivity.getDashboard().isVisible();
+	}
+
 	private boolean isContextMenuFragmentVisible() {
 		MapContextMenu contextMenu = mapActivity.getContextMenu();
 		WeakReference<MapContextMenuFragment> contextMenuMenuFragmentRef = contextMenu.findMenuFragment();
@@ -222,6 +274,14 @@ public class WidgetsVisibilityHelper {
 		return false;
 	}
 
+	private boolean isInGpsFilteringMode() {
+		return mapActivity.getGpsFilterFragment() != null;
+	}
+
+	private boolean isSelectingTilesZone() {
+		return mapActivity.getDownloadTilesFragment() != null;
+	}
+
 	private boolean isMapLinkedToLocation() {
 		return mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 	}
@@ -230,14 +290,22 @@ public class WidgetsVisibilityHelper {
 		return mapActivity.getTrackDetailsMenu().isVisible();
 	}
 
+	private boolean isRouteCalculated() {
+		return mapActivity.getRoutingHelper().isRouteCalculated();
+	}
+
 	private boolean isPortrait() {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
 	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_center_info), topControlsVisible);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), topControlsVisible);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), topControlsVisible);
-		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.bottom_controls_container), bottomControlsVisible);
+		int topControlsVisibility = topControlsVisible ? View.VISIBLE : View.GONE;
+		AndroidUiHelper.setVisibility(mapActivity, topControlsVisibility,
+				R.id.map_center_info,
+				R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel);
+		int bottomControlsVisibility = bottomControlsVisible ? View.VISIBLE : View.GONE;
+		AndroidUiHelper.setVisibility(mapActivity, bottomControlsVisibility,
+				R.id.bottom_controls_container);
 	}
 }

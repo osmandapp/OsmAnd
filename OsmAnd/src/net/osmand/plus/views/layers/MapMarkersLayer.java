@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -18,6 +17,7 @@ import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -26,29 +26,41 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.Utilities;
+import net.osmand.core.jni.VectorDouble;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
-import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -62,9 +74,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
 
-	private OsmandMapTileView view;
-
-	private MapMarkersWidgetsFactory widgetsFactory;
+	private MarkersWidgetsHelper markersWidgetsHelper;
 
 	private Paint bitmapPaint;
 	private Bitmap markerBitmapBlue;
@@ -94,7 +104,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private TrkSegment route;
 
 	private float textSize;
-	private int verticalOffset;
+	private float verticalOffset;
 
 	private final List<Float> tx = new ArrayList<>();
 	private final List<Float> ty = new ArrayList<>();
@@ -111,6 +121,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
+	private boolean carView;
+	private float textScale = 1f;
+	private double markerSizePx;
+
+	//OpenGL
+	private int markersCount = 0;
+	private VectorLinesCollection vectorLinesCollection;
+	private boolean needDrawLines = true;
+	private final List<MapMarker> displayedMarkers = new ArrayList<>();
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -118,8 +137,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		super(context);
 	}
 
-	public MapMarkersWidgetsFactory getWidgetsFactory() {
-		return widgetsFactory;
+	public MarkersWidgetsHelper getMarkersWidgetsHelper() {
+		return markersWidgetsHelper;
 	}
 
 	public boolean isInPlanRouteMode() {
@@ -138,17 +157,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
-		markerBitmapBlue = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_blue);
-		markerBitmapGreen = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_green);
-		markerBitmapOrange = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_orange);
-		markerBitmapRed = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
-		markerBitmapYellow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_yellow);
-		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_teal);
-		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_purple);
 
-		arrowLight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p1_light);
-		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p2_color);
-		arrowShadow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p3_shadow);
+		updateBitmaps(true);
+
 		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
 		bitmapPaintDestGreen = createPaintDest(R.color.marker_green);
 		bitmapPaintDestOrange = createPaintDest(R.color.marker_orange);
@@ -158,16 +169,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-
-		textSize = getContext().getResources().getDimensionPixelSize(R.dimen.guide_line_text_size);
-		verticalOffset = getContext().getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset);
 	}
 
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			widgetsFactory = new MapMarkersWidgetsFactory(mapActivity);
+			markersWidgetsHelper = new MarkersWidgetsHelper(mapActivity);
 			longTapDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public void onLongPress(MotionEvent e) {
@@ -175,7 +183,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 			});
 		} else {
-			widgetsFactory = null;
+			markersWidgetsHelper.clearListeners();
+			markersWidgetsHelper = null;
 			longTapDetector = null;
 		}
 	}
@@ -238,7 +247,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		handler = new Handler();
 		initUI();
 	}
@@ -248,6 +258,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
+			clearMapMarkersCollections();
+			clearVectorLinesCollections();
 			return;
 		}
 
@@ -261,6 +273,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {
+				clearMapMarkersCollections();
+				clearVectorLinesCollections();
+			}
+			initMarkersCollection();
+			markersCount = activeMapMarkers.size();
+			mapActivityInvalidated = false;
+		}
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (route != null && route.points.size() > 0) {
@@ -270,34 +292,64 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
+			if (mapRenderer != null) {
+				if (displayedMarkers.size() != displayedWidgets) {
+					clearVectorLinesCollections();
+				}
+				for (int i = 0; i < activeMapMarkers.size() && i < displayedMarkers.size(); i++) {
+					if (displayedMarkers.get(i) != activeMapMarkers.get(i)) {
+						clearVectorLinesCollections();
+						break;
+					}
+				}
+			}
+			displayedMarkers.clear();
+
 			textAttrs.paint.setTextSize(textSize);
 			textAttrs.paint2.setTextSize(textSize);
-
 			lineAttrs.updatePaints(app, nightMode, tileBox);
 			textAttrs.updatePaints(app, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
-
 			textPaint.set(textAttrs.paint);
 
 			boolean drawMarkerName = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 
 			float locX;
 			float locY;
+			LatLon loc;
 			MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()
 					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(myLoc)
 					&& !mapViewTrackingUtilities.isMovingToMyLocation()) {
-				locX = tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
-				locY = tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				loc = new LatLon(tileBox.getLatitude(), tileBox.getLongitude());
 			} else {
-				locX = tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
-				locY = tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				loc = new LatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			}
 			int[] colors = MapMarker.getColors(getContext());
 			for (int i = 0; i < activeMapMarkers.size() && i < displayedWidgets; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
-				float markerX = tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
-				float markerY = tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
+				float markerX;
+				float markerY;
+				int color = colors[marker.colorIndex];
+				if (mapRenderer != null) {
+					boolean isLast = (i == activeMapMarkers.size() - 1) || (i == displayedWidgets - 1);
+					initVectorLinesCollection(loc, marker, color, isLast);
+					displayedMarkers.add(marker);
+					PointF[] line = calculateLineInScreenRect(tileBox, marker, loc);
+					if (line != null) {
+						locX = line[0].x;
+						locY = line[0].y;
+						markerX = line[1].x;
+						markerY = line[1].y;
+					} else {
+						continue;
+					}
+				} else {
+					locX = tileBox.getPixXFromLatLon(loc.getLatitude(), loc.getLongitude());
+					locY = tileBox.getPixYFromLatLon(loc.getLatitude(), loc.getLongitude());
+					markerX = tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
+					markerY = tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
+				}
 
 				linePath.reset();
 				tx.clear();
@@ -319,11 +371,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				text = TextUtils.ellipsize(text, textPaint, pm.getLength(), TextUtils.TruncateAt.END).toString();
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
-				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
-				lineAttrs.paint.setColor(colors[marker.colorIndex]);
+				float hOffset = pm.getLength() / 2 - bounds.width() / 2f;
+				lineAttrs.paint.setColor(color);
 
-				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				canvas.drawPath(linePath, lineAttrs.paint);
+				if (mapRenderer == null) {
+					canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+					canvas.drawPath(linePath, lineAttrs.paint);
+				}
 				if (locX >= markerX) {
 					canvas.rotate(180, pos[0], pos[1]);
 					canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + verticalOffset, textAttrs.paint2);
@@ -340,30 +394,35 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		if (widgetsFactory != null) {
-			widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
+		if (markersWidgetsHelper != null) {
+			markersWidgetsHelper.setCustomLatLon(useFingerLocation ? fingerLocation : null);
 		}
-		OsmandSettings settings = getApplication().getSettings();
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
-			return;
+			clearMapMarkersCollections();
+			clearVectorLinesCollections();
 		}
 
+		MapRendererView mapRenderer = getMapRenderer();
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		updateBitmaps(false);
 
-		MapMarkersHelper markersHelper = getApplication().getMapMarkersHelper();
-
-		for (MapMarker marker : markersHelper.getMapMarkers()) {
-			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
-					&& !isInMotion(marker) && !isSynced(marker)) {
-				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
-				int marginX = bmp.getWidth() / 6;
-				int marginY = bmp.getHeight();
-				int locationX = tileBox.getPixXFromLonNoRot(marker.getLongitude());
-				int locationY = tileBox.getPixYFromLatNoRot(marker.getLatitude());
-				canvas.rotate(-tileBox.getRotate(), locationX, locationY);
-				canvas.drawBitmap(bmp, locationX - marginX, locationY - marginY, bitmapPaint);
-				canvas.rotate(tileBox.getRotate(), locationX, locationY);
+		if (mapRenderer == null) {
+			for (MapMarker marker : markersHelper.getMapMarkers()) {
+				if (isMarkerVisible(tileBox, marker) && !overlappedByWaypoint(marker)
+						&& !isInMotion(marker) && !isSynced(marker)) {
+					Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
+					int marginX = bmp.getWidth() / 6;
+					int marginY = bmp.getHeight();
+					int locationX = tileBox.getPixXFromLonNoRot(marker.getLongitude());
+					int locationY = tileBox.getPixYFromLatNoRot(marker.getLatitude());
+					canvas.rotate(-tileBox.getRotate(), locationX, locationY);
+					canvas.drawBitmap(bmp, locationX - marginX, locationY - marginY, bitmapPaint);
+					canvas.rotate(tileBox.getRotate(), locationX, locationY);
+				}
 			}
 		}
 
@@ -373,16 +432,33 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			for (MapMarker marker : markersHelper.getMapMarkers()) {
 				if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
 					canvas.save();
-					net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
-							marker.getLatitude(), marker.getLongitude(), calculations);
-					float bearing = calculations[1] - 90;
+					float bearing;
 					float radiusBearing = DIST_TO_SHOW * tileBox.getDensity();
-					final QuadPoint cp = tileBox.getCenterPixelPoint();
-					canvas.rotate(bearing, cp.x, cp.y);
+					float cx;
+					float cy;
+					if (mapRenderer != null) {
+						LatLon cp = tileBox.getCenterLatLon();
+						PointF centerPixels = NativeUtilities.getPixelFromLatLon(mapRenderer, tileBox, cp.getLatitude(), cp.getLongitude());
+						PointF[] line = calculateLineInScreenRect(tileBox, marker, cp);
+						if (line == null) {
+							continue;
+						}
+						cx = centerPixels.x;
+						cy = centerPixels.y;
+						bearing = (float) getAngleBetween(centerPixels, line[1]);
+					} else {
+						final QuadPoint cp = tileBox.getCenterPixelPoint();
+						cx = cp.x;
+						cy = cp.y;
+						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
+								marker.getLatitude(), marker.getLongitude(), calculations);
+						bearing = calculations[1] - 90;
+					}
+					canvas.rotate(bearing, cx, cy);
 					canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
-					canvas.drawBitmap(arrowShadow, cp.x, cp.y, bitmapPaint);
-					canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
-					canvas.drawBitmap(arrowLight, cp.x, cp.y, bitmapPaint);
+					canvas.drawBitmap(arrowShadow, cx, cy, bitmapPaint);
+					canvas.drawBitmap(arrowToDestination, cx, cy, getMarkerDestPaint(marker.colorIndex));
+					canvas.drawBitmap(arrowLight, cx, cy, bitmapPaint);
 					canvas.restore();
 				}
 				i++;
@@ -391,19 +467,51 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 			}
 		}
-
-		if (contextMenuLayer.getMoveableObject() instanceof MapMarker) {
-			MapMarker objectInMotion = (MapMarker) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			Bitmap bitmap = getMapMarkerBitmap(objectInMotion.colorIndex);
-			int marginX = bitmap.getWidth() / 6;
-			int marginY = bitmap.getHeight();
-			float locationX = pf.x;
-			float locationY = pf.y;
-			canvas.rotate(-tileBox.getRotate(), locationX, locationY);
-			canvas.drawBitmap(bitmap, locationX - marginX, locationY - marginY, bitmapPaint);
-
+		Object movableObject = contextMenuLayer.getMoveableObject();
+		if (movableObject instanceof MapMarker) {
+			MapMarker movableMarker = (MapMarker) movableObject;
+			setMovableObject(movableMarker.getLatitude(), movableMarker.getLongitude());
+			drawMovableMarker(canvas, tileBox, (MapMarker) movableObject);
 		}
+		if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			cancelMovableObject();
+		}
+	}
+
+	private void updateBitmaps(boolean forceUpdate) {
+		OsmandApplication app = getApplication();
+		float textScale = getTextScale();
+		boolean carView = app.getOsmandMap().getMapView().isCarView();
+		if (this.textScale != textScale || this.carView != carView || forceUpdate) {
+			this.textScale = textScale;
+			this.carView = carView;
+			recreateBitmaps();
+			textSize = app.getResources().getDimensionPixelSize(R.dimen.guide_line_text_size) * textScale;
+			verticalOffset = app.getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset) * textScale;
+		}
+	}
+
+	private void recreateBitmaps() {
+		markerBitmapBlue = getScaledBitmap(R.drawable.map_marker_blue);
+		markerBitmapGreen = getScaledBitmap(R.drawable.map_marker_green);
+		markerBitmapOrange = getScaledBitmap(R.drawable.map_marker_orange);
+		markerBitmapRed = getScaledBitmap(R.drawable.map_marker_red);
+		markerBitmapYellow = getScaledBitmap(R.drawable.map_marker_yellow);
+		markerBitmapTeal = getScaledBitmap(R.drawable.map_marker_teal);
+		markerBitmapPurple = getScaledBitmap(R.drawable.map_marker_purple);
+
+		markerSizePx = Math.sqrt(markerBitmapBlue.getWidth() * markerBitmapBlue.getWidth()
+				+ markerBitmapBlue.getHeight() * markerBitmapBlue.getHeight());
+
+		arrowLight = getScaledBitmap(R.drawable.map_marker_direction_arrow_p1_light);
+		arrowToDestination = getScaledBitmap(R.drawable.map_marker_direction_arrow_p2_color);
+		arrowShadow = getScaledBitmap(R.drawable.map_marker_direction_arrow_p3_shadow);
+	}
+
+	@Nullable
+	@Override
+	protected Bitmap getScaledBitmap(int drawableId) {
+		return getScaledBitmap(drawableId, textScale);
 	}
 
 	private boolean isSynced(@NonNull MapMarker marker) {
@@ -419,17 +527,28 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (marker == null || tb == null) {
 			return false;
 		}
-		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude());
+		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude(), 0, 0);
 	}
 
-	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon) {
-		double widgetHeight = 0;
-		if (widgetsFactory != null && widgetsFactory.isTopBarVisible()) {
-			widgetHeight = widgetsFactory.getTopBarHeight();
+	public boolean isMarkerVisible(RotatedTileBox tb, MapMarker marker) {
+		//noinspection SimplifiableIfStatement
+		if (marker == null || tb == null) {
+			return false;
 		}
-		double tx = tb.getPixXFromLatLon(lat, lon);
-		double ty = tb.getPixYFromLatLon(lat, lon);
-		return tx >= 0 && tx <= tb.getPixWidth() && ty >= widgetHeight && ty <= tb.getPixHeight();
+		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude(), markerSizePx, markerSizePx);
+	}
+
+	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon, double w, double h) {
+		double widgetHeight = 0;
+		if (markersWidgetsHelper != null
+				&& markersWidgetsHelper.isMapMarkersBarWidgetVisible()
+				&& !getApplication().getOsmandMap().getMapView().isCarView()) {
+			widgetHeight = markersWidgetsHelper.getMapMarkersBarWidgetHeight();
+		}
+		PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, lat, lon);
+		double tx = pixel.x;
+		double ty = pixel.y;
+		return tx >= -w && tx <= tb.getPixWidth() + w && ty >= widgetHeight - h && ty <= tb.getPixHeight() + h;
 	}
 
 	public boolean overlappedByWaypoint(MapMarker marker) {
@@ -442,18 +561,26 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return false;
 	}
 
-	@Override
-	public void destroyLayer() {
+	private void drawMovableMarker(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull MapMarker movableMarker) {
+		PointF point = contextMenuLayer.getMovableCenterPoint(tileBox);
+		Bitmap bitmap = getMapMarkerBitmap(movableMarker.colorIndex);
+		int marginX = bitmap.getWidth() / 6;
+		int marginY = bitmap.getHeight();
+
+		canvas.save();
+		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		canvas.drawBitmap(bitmap, point.x - marginX, point.y - marginY, bitmapPaint);
+		canvas.restore();
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		if (!longTapDetector.onTouchEvent(event)) {
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					float x = event.getX();
 					float y = event.getY();
-					fingerLocation = tileBox.getLatLonFromPixel(x, y);
+					fingerLocation = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, x, y);
 					hasMoved = false;
 					moving = true;
 					break;
@@ -554,10 +681,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-
-					if (calculateBelongs((int) point.x, (int) point.y, x, y, r)) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, latLon.getLatitude(), latLon.getLongitude());
+					if (calculateBelongs((int) point.x, (int) point.y, (int) pixel.x, (int) pixel.y, r)) {
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
 						} else {
@@ -584,14 +709,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private boolean isMarkerOnFavorite(@NonNull MapMarker marker) {
-		return marker.point != null && getApplication().getFavorites().getVisibleFavByLatLon(marker.point) != null;
+		return marker.point != null && getApplication().getFavoritesHelper().getVisibleFavByLatLon(marker.point) != null;
 	}
 
 	@Nullable
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
 			String mapObjName = marker.mapObjectName.split("_")[0];
-			return findAmenity(getApplication(), -1, Collections.singletonList(mapObjName), marker.point, 15);
+			return MapSelectionHelper.findAmenity(getApplication(), marker.point, Collections.singletonList(mapObjName), -1, 15);
 		}
 		return null;
 	}
@@ -610,11 +735,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return null;
 	}
 
-
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapMarker) {
-			return ((MapMarker) o).getPointDescription(view.getContext());
+			return ((MapMarker) o).getPointDescription(getContext());
 		}
 		return null;
 	}
@@ -639,7 +763,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
-									   @Nullable ApplyMovedObjectCallback callback) {
+	                                   @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		MapMarker newObject = null;
 		if (o instanceof MapMarker) {
@@ -656,9 +780,203 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				newObject = markersHelper.getMapMarkers().get(index);
 			}
 			result = true;
+			if (displayedMarkers.contains(marker)) {
+				clearVectorLinesCollections();
+			}
 		}
 		if (callback != null) {
 			callback.onApplyMovedObject(result, newObject == null ? o : newObject);
 		}
+		applyMovableObject(position);
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (mapMarkersCollection != null && mapRenderer.hasSymbolsProvider(mapMarkersCollection)) {
+			return;
+		}
+		mapMarkersCollection = new MapMarkersCollection();
+		OsmandApplication app = getApplication();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		updateBitmaps(false);
+
+		for (MapMarker marker : markersHelper.getMapMarkers()) {
+			if (!overlappedByWaypoint(marker) && !isSynced(marker)) {
+				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
+				int x = MapUtils.get31TileNumberX(marker.getLongitude());
+				int y = MapUtils.get31TileNumberY(marker.getLatitude());
+				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+				PointI pointI = new PointI(x, y);
+				int color = getColorByIndex(marker.colorIndex);
+				boolean isMoveable = isInMotion(marker);
+
+				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
+						.setBaseOrder(baseOrder)
+						.setIsHidden(isMoveable)
+						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
+					    .setPosition(pointI)
+						.setPinIconVerticalAlignment(net.osmand.core.jni.MapMarker.PinIconVerticalAlignment.Top)
+					    .setPinIconHorisontalAlignment(net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+						.setPinIconOffset(new PointI(bmp.getWidth() / 3, 0))
+					    .setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(color))
+						.buildAndAddToCollection(mapMarkersCollection);
+			}
+		}
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	/**OpenGL*/
+	private void initVectorLinesCollection(LatLon loc, MapMarker marker, int color, boolean isLast) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || !needDrawLines) {
+			return;
+		}
+
+		int locX = MapUtils.get31TileNumberX(loc.getLongitude());
+		int locY = MapUtils.get31TileNumberY(loc.getLatitude());
+		PointI start = new PointI(locX, locY);
+		int markerX = MapUtils.get31TileNumberX(marker.getLongitude());
+		int markerY = MapUtils.get31TileNumberY(marker.getLatitude());
+		PointI end = new PointI(markerX, markerY);
+
+		if (vectorLinesCollection == null) {
+			vectorLinesCollection = new VectorLinesCollection();
+		}
+
+		QVectorPointI points = new QVectorPointI();
+		points.add(start);
+		points.add(end);
+
+		VectorLineBuilder outlineBuilder = new VectorLineBuilder();
+		VectorDouble outlinePattern = new VectorDouble();
+		outlinePattern.add(95 / getMapDensity());
+		outlinePattern.add(35 / getMapDensity());
+		FColorARGB outlineColor = new FColorARGB(1.0f, 1.0f, 1.0f, 1.0f);
+		double strokeWidth = 20.0d;
+		int outlineId = isLast ? 20 : 10;
+		int lineId = isLast ? 21 : 11;
+		outlineBuilder.setBaseOrder(baseOrder + lineId + 1)
+				.setIsHidden(false)
+				.setLineId(outlineId)
+				.setLineWidth(strokeWidth * 1.5)
+				.setLineDash(outlinePattern)
+				.setPoints(points)
+				.setFillColor(outlineColor);
+		outlineBuilder.buildAndAddToCollection(vectorLinesCollection);
+
+		VectorLineBuilder inlineBuilder = new VectorLineBuilder();
+		VectorDouble inlinePattern = new VectorDouble();
+		inlinePattern.add(-strokeWidth / getMapDensity());
+		inlinePattern.add((95 - strokeWidth * 1.5) / getMapDensity());
+		inlinePattern.add((35 + strokeWidth * 1.5) / getMapDensity());
+		inlineBuilder.setBaseOrder(baseOrder + lineId)
+				.setIsHidden(false)
+				.setLineId(lineId)
+				.setLineWidth(strokeWidth)
+				.setLineDash(inlinePattern)
+				.setPoints(points)
+				.setFillColor(NativeUtilities.createFColorARGB(color));
+		inlineBuilder.buildAndAddToCollection(vectorLinesCollection);
+		if (isLast) {
+			mapRenderer.addSymbolsProvider(vectorLinesCollection);
+			needDrawLines = false;
+		}
+	}
+
+	/**OpenGL*/
+	protected void clearVectorLinesCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && vectorLinesCollection != null) {
+			mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+			vectorLinesCollection = null;
+			needDrawLines = true;
+		}
+	}
+
+	/**OpenGL*/
+	@Nullable
+	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, MapMarker marker, LatLon loc) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return null;
+		}
+		int locX = MapUtils.get31TileNumberX(loc.getLongitude());
+		int locY = MapUtils.get31TileNumberY(loc.getLatitude());
+		PointI locPointI = new PointI(locX, locY);
+		int x = MapUtils.get31TileNumberX(marker.getLongitude());
+		int y = MapUtils.get31TileNumberY(marker.getLatitude());
+		PointI markerPointI = new PointI(x, y);
+		AreaI screenBbox = mapRenderer.getVisibleBBox31();
+
+		PointI firstPoint = null;
+		PointI secondPoint = null;
+		if (screenBbox.contains(locPointI)) {
+			firstPoint = locPointI;
+		}
+		if (screenBbox.contains(markerPointI)) {
+			secondPoint = markerPointI;
+		}
+		if (firstPoint == null && secondPoint == null) {
+			firstPoint = new PointI(0, 0);
+			secondPoint = new PointI(0, 0);
+			if (Utilities.calculateIntersection(locPointI, markerPointI, screenBbox, firstPoint)) {
+				Utilities.calculateIntersection(markerPointI, locPointI, screenBbox, secondPoint);
+			} else {
+				return null;
+			}
+		} else if (firstPoint == null) {
+			firstPoint = new PointI(0, 0);
+			if (!Utilities.calculateIntersection(locPointI, markerPointI, screenBbox, firstPoint)) {
+				return null;
+			}
+		} else if (secondPoint == null) {
+			secondPoint = new PointI(0, 0);
+			if (!Utilities.calculateIntersection(markerPointI, locPointI, screenBbox, secondPoint)) {
+				return null;
+			}
+		}
+		PointF l = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, firstPoint);
+		PointF m = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, secondPoint);
+		return new PointF[]{l, m};
+	}
+
+	/**OpenGL*/
+	private double getAngleBetween(PointF start, PointF end) {
+		double dx = start.x - end.x;
+		double dy = start.y - end.y;
+		double radians = dx != 0 ? Math.atan(dy/dx) : (dy < 0 ? Math.PI / 2 : -Math.PI / 2);
+		return Math.toDegrees(radians - (start.x > end.x ? Math.PI : 0));
+	}
+
+	private @ColorInt int getColorByIndex(int colorIndex) {
+		int colorResId;
+		switch (colorIndex) {
+			case 1:
+				colorResId = R.color.marker_green;
+				break;
+			case 2:
+				colorResId = R.color.marker_orange;
+				break;
+			case 3:
+				colorResId = R.color.marker_red;
+				break;
+			case 4:
+				colorResId = R.color.marker_yellow;
+				break;
+			case 5:
+				colorResId = R.color.marker_teal;
+				break;
+			case 6:
+				colorResId = R.color.marker_purple;
+				break;
+			default:
+				colorResId = R.color.marker_blue;
+				break;
+		}
+		return getContext().getResources().getColor(colorResId, null);
 	}
 }

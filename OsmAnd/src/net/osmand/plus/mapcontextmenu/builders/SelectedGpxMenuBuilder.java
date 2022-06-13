@@ -10,20 +10,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -81,7 +79,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		Date end = new Date(analysis.endTime);
 		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		DateFormat endFormat;
-		if (DateUtils.isSameDay(start, end)) {
+		if (OsmAndFormatter.isSameDay(start, end)) {
 			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 		} else {
 			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
@@ -120,7 +118,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	public void buildSpeedRows(View view) {
 		if (analysis.isSpeedSpecified()) {
-			buildCategoryView(view, app.getString(R.string.map_widget_speed));
+			buildCategoryView(view, app.getString(R.string.shared_string_speed));
 
 			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.average_speed),
 					OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app), 0, null,
@@ -140,7 +138,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 				false, null, false, 0, false, false, false, null, false);
 
 		if (selectedPoint.time != 0) {
-			DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+			DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
 			buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, app.getString(R.string.shared_string_time),
 					format.format(selectedPoint.time), 0, null,
 					false, null, false, 0, false, false, false, null, true);
@@ -151,7 +149,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 					false, null, false, 0, false, false, false, null, false);
 		}
 		if (!Double.isNaN(selectedPoint.speed)) {
-			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.map_widget_speed),
+			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.shared_string_speed),
 					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.speed, app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
 		}

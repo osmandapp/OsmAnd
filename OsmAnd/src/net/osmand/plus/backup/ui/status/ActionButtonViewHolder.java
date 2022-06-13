@@ -8,12 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupInfo;
@@ -23,6 +20,8 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +52,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 				settingsHelper.cancelImport();
 				settingsHelper.cancelExport();
 			});
-			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_cancel);
 		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			actionButton.setOnClickListener(v -> {
 				try {
@@ -62,14 +61,14 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 					if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
 						settingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
 					}
-				} catch (IllegalArgumentException e) {
+				} catch (IllegalStateException e) {
 					log.error(e.getMessage(), e);
 				}
 			});
-			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY_ACTIVE, R.string.backup_now);
 		} else if (status == BackupStatus.NO_INTERNET_CONNECTION || status == BackupStatus.ERROR) {
 			actionButton.setOnClickListener(v -> app.getBackupHelper().prepareBackup());
-			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY_ACTIVE, R.string.retry);
 		} else if (status == BackupStatus.SUBSCRIPTION_EXPIRED) {
 			actionButton.setOnClickListener(v -> {
 				if (Version.isInAppPurchaseSupported()) {
@@ -78,9 +77,8 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 					PromoCodeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 				}
 			});
-			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.renew_subscription);
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY_ACTIVE, R.string.renew_subscription);
 		}
 		AndroidUiHelper.updateVisibility(divider, uploadItemsVisible);
-		AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 	}
 }

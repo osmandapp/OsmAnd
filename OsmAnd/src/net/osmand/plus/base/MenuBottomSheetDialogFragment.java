@@ -29,12 +29,12 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -44,7 +44,7 @@ import java.util.List;
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
-	private static final int DEFAULT_VALUE = -1;
+	protected static final int DEFAULT_VALUE = -1;
 
 	protected List<BaseBottomSheetItem> items = new ArrayList<>();
 
@@ -55,10 +55,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected View dismissButton;
 	protected View rightButton;
 	protected View thirdButton;
-
-	private View buttonsShadow;
-	private LinearLayout itemsContainer;
-	private LinearLayout buttonsContainer;
+	protected View buttonsShadow;
+	protected LinearLayout itemsContainer;
+	protected LinearLayout buttonsContainer;
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
@@ -77,7 +76,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		createMenuItems(savedInstanceState);
 		Activity activity = requireActivity();
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View mainView = themedInflater.inflate(R.layout.bottom_sheet_menu_base, null);
@@ -89,6 +87,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			itemsContainer.setVisibility(View.VISIBLE);
 		}
 		buttonsShadow = mainView.findViewById(R.id.buttons_shadow);
+
+		createMenuItems(savedInstanceState);
 
 		inflateMenuItems();
 		setupScrollShadow(mainView);

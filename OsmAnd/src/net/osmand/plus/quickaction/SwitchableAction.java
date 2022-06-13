@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.AndroidUtils.isLayoutRtl;
+import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -110,15 +110,28 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication app) {
-		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
-		String disabledItem = getDisabledItem(app);
-		String nextItem = getNextSelectedItem(app);
-		if (Algorithms.stringsEqual(nextItem, disabledItem)) {
-			String item = getSelectedItem(app);
-			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+		String rtlArrow = "\u25c0", ltrArrow = "\u25b6";
+		String arrow = isLayoutRtl(app) ? rtlArrow : ltrArrow;
+		String selectedItem = getSelectedItem(app);
+		String itemName;
+		if (loadListFromParams().size() == 1) {
+			String mainItem = getItemIdFromObject(loadListFromParams().get(0));
+			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
+			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
+			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
+			itemName = (selectedMain ? "" : arrow) + getTranslatedItemName(app, mainItem) +
+					 (selectedMain ? arrow : "");
 		} else {
-			return getTranslatedItemName(app, nextItem) + arrowDirection + "\u2026";
+			String disabledItem = getDisabledItem(app);
+			String nextItem = getNextSelectedItem(app);
+			String mainItem = Algorithms.stringsEqual(nextItem, disabledItem) ? selectedItem : nextItem; 
+			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
+			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
+			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
+			itemName = (selectedMain ? "" : ("\u2026" + arrow)) + getTranslatedItemName(app, mainItem) +
+					 (selectedMain ? (arrow + "\u2026") : "");
 		}
+		return itemName;
 	}
 
 	@Override
@@ -136,6 +149,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected Adapter getAdapter() {
 		return adapter;
 	}
+
+	public abstract String getItemIdFromObject(T object);
 
 	public abstract List<T> loadListFromParams();
 
@@ -158,8 +173,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	public String getNextItemFromSources(@NonNull OsmandApplication app,
-										 @NonNull List<Pair<String, String>> sources,
-										 @NonNull String defValue) {
+	                                     @NonNull List<Pair<String, String>> sources,
+	                                     @NonNull String defValue) {
 		if (!Algorithms.isEmpty(sources)) {
 			String currentSource = getSelectedItem(app);
 			if (sources.size() > 1) {

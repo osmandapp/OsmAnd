@@ -4,10 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -71,13 +71,11 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 			reverseTrackCard.setListener(target);
 			cardsContainer.addView(reverseTrackCard.build(mapActivity));
 
-			if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-				cardsContainer.addView(buildDividerView(cardsContainer, true));
+			cardsContainer.addView(buildDividerView(cardsContainer, true));
 
-				AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
-				attachTrackCard.setListener(target);
-				cardsContainer.addView(attachTrackCard.build(mapActivity));
-			}
+			AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
+			attachTrackCard.setListener(target);
+			cardsContainer.addView(attachTrackCard.build(mapActivity));
 
 			setupNavigateOptionsCard(cardsContainer, rparams);
 		}

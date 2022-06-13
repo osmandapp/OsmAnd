@@ -7,13 +7,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -71,8 +72,16 @@ public class TrackEditCard extends MapBaseCard {
 			fileName = app.getString(R.string.shared_string_gpx_track);
 		}
 
-		GPXInfo gpxInfo = new GPXInfo(gpxFile.path, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
-		GpxDataItem dataItem = getDataItem(gpxInfo);
+		GPXInfo gpxInfo = new GPXInfo(fileName, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
+		GPXTrackAnalysis analysis = null;
+		if (file != null) {
+			GpxDataItem dataItem = getDataItem(gpxInfo);
+			if (dataItem != null) {
+				analysis = dataItem.getAnalysis();
+			}
+		} else {
+			analysis = gpxFile.getAnalysis(0);
+		}
 		String title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(fileName));
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
@@ -80,44 +89,38 @@ public class TrackEditCard extends MapBaseCard {
 			int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
 			title = app.getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
 		}
-		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
+		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, analysis, app);
 
-		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null)
-			if (routeParams.getSelectedSegment() != -1 && gpxFile.getNonEmptySegmentsCount() > routeParams.getSelectedSegment()) {
-					TextView distanceView = view.findViewById(R.id.distance);
-					TextView timeView = view.findViewById(R.id.time);
-					ImageView timeIcon = view.findViewById(R.id.time_icon);
-					AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
-					AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
-					List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-					GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
-					double distance = TrackSelectSegmentAdapter.getDistance(segment);
-					long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
-					boolean timeAvailable = time != 1;
-					if (timeAvailable) {
-						timeView.setText(Algorithms.formatDuration((int) (time / 1000),
-								app.accessibilityEnabled()));
-					}
-					AndroidUiHelper.updateVisibility(timeView, timeAvailable);
-					AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
-					distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
-				}
+		if (gpxFile.getNonEmptySegmentsCount() > 1
+				&& routeParams != null
+				&& routeParams.getSelectedSegment() != -1
+				&& gpxFile.getNonEmptySegmentsCount() > routeParams.getSelectedSegment()) {
+			TextView distanceView = view.findViewById(R.id.distance);
+			TextView timeView = view.findViewById(R.id.time);
+			ImageView timeIcon = view.findViewById(R.id.time_icon);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
+			List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+			GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
+			double distance = TrackSelectSegmentAdapter.getDistance(segment);
+			long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
+			boolean timeAvailable = time != 1;
+			if (timeAvailable) {
+				timeView.setText(Algorithms.formatDuration((int) (time / 1000),
+						app.accessibilityEnabled()));
+			}
+			AndroidUiHelper.updateVisibility(timeView, timeAvailable);
+			AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
+			distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
+		}
 
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
 		editButton.setVisibility(View.VISIBLE);
 		editButton.setImageDrawable(getContentIcon(R.drawable.ic_action_edit_dark));
-		editButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(TrackEditCard.this);
-				}
-			}
-		});
+		editButton.setOnClickListener(v -> notifyCardPressed());
 
-		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
-		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
+		int minCardHeight = getDimen(R.dimen.setting_list_item_large_height);
+		int listContentPadding = getDimen(R.dimen.list_content_padding);
 
 		LinearLayout container = view.findViewById(R.id.container);
 		container.setMinimumHeight(minCardHeight);

@@ -15,27 +15,32 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.enums.AngularConstants;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 public class RadiusRulerControlLayer extends OsmandMapLayer {
 
@@ -45,7 +50,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 	private View rightWidgetsPanel;
 
 	private TextSide textSide;
@@ -56,7 +60,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private QuadPoint cacheCenter;
 	private float cacheMapDensity;
-	private OsmandPreference<Float> mapDensity;
 	private MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
 	private LatLon cacheCenterLatLon;
@@ -91,11 +94,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
+
 		app = getApplication();
-		this.view = view;
-		mapDensity = app.getSettings().MAP_DENSITY;
 		cacheMetricSystem = app.getSettings().METRIC_SYSTEM.get();
-		cacheMapDensity = mapDensity.get();
+		cacheMapDensity = getMapDensity();
 		cacheDistances = new ArrayList<>();
 		cacheCenter = new QuadPoint();
 		maxRadiusInDp = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
@@ -150,32 +153,38 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings drawSettings) {
 		if (rulerModeOn()) {
 			OsmandApplication app = view.getApplication();
-			circleAttrs.updatePaints(app, settings, tb);
+			OsmandSettings settings = app.getSettings();
+			circleAttrs.updatePaints(app, drawSettings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
-			circleAttrsAlt.updatePaints(app, settings, tb);
+			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 			final QuadPoint center = tb.getCenterPixelPoint();
-			final RadiusRulerMode mode = app.getSettings().RADIUS_RULER_MODE.get();
-			boolean showCompass = app.getSettings().SHOW_COMPASS_CONTROL_RULER.get() && tb.getZoom() >= SHOW_COMPASS_MIN_ZOOM;
 
-			drawCenterIcon(canvas, tb, center, settings.isNightMode(), mode);
+			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
+			boolean showRadiusRuler = radiusRulerMode == RadiusRulerMode.FIRST || radiusRulerMode == RadiusRulerMode.SECOND;
+			boolean showCompass = settings.SHOW_COMPASS_ON_RADIUS_RULER.get() && tb.getZoom() >= SHOW_COMPASS_MIN_ZOOM;
 
-			if (mode == RadiusRulerMode.FIRST || mode == RadiusRulerMode.SECOND) {
+			boolean radiusRulerNightMode = radiusRulerMode == RadiusRulerMode.SECOND;
+			drawCenterIcon(canvas, tb, center, drawSettings.isNightMode(), radiusRulerNightMode);
+
+			if (showRadiusRuler) {
 				updateData(tb, center);
+
 				if (showCompass) {
 					updateHeading();
 					resetDrawingPaths();
 				}
-				RenderingLineAttributes attrs = mode == RadiusRulerMode.FIRST ? circleAttrs : circleAttrsAlt;
-				int compassCircleId = getCompassCircleId(tb, center);
-				for (int i = 1; i <= cacheDistances.size(); i++) {
-					if (showCompass && i == compassCircleId) {
-						drawCompassCircle(canvas, tb, compassCircleId, center, attrs);
+
+				RenderingLineAttributes attrs = radiusRulerNightMode ? circleAttrsAlt : circleAttrs;
+				int compassCircleIndex = getCompassCircleIndex(tb, center);
+				for (int circleIndex = 1; circleIndex <= cacheDistances.size(); circleIndex++) {
+					if (showCompass && circleIndex == compassCircleIndex) {
+						drawCompassCircle(canvas, tb, compassCircleIndex, center, attrs);
 					} else {
-						drawCircle(canvas, tb, i, center, attrs);
+						drawCircle(canvas, tb, circleIndex, center, attrs);
 					}
 				}
 			}
@@ -183,13 +192,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	public boolean rulerModeOn() {
-		return getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry().isVisible("ruler")
+		MapWidgetRegistry mapWidgetRegistry = getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		return mapWidgetRegistry.isWidgetVisible(RADIUS_RULER.id)
 				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
 	}
 
-	private int getCompassCircleId(RotatedTileBox tileBox, QuadPoint center) {
-		int compassCircleId = 2;
-		float radiusLength = radius * compassCircleId;
+	private int getCompassCircleIndex(RotatedTileBox tileBox, QuadPoint center) {
+		int compassCircleIndex = 2;
+		float radiusLength = radius * compassCircleIndex;
 		float top = center.y - radiusLength;
 		float bottom = center.y + radiusLength;
 		float left = center.x - radiusLength;
@@ -214,10 +224,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		int vertical = (int) (right - left) / 2;
 		int minFittingRadius = Math.min(horizontal, vertical);
 		if (radiusLength > minFittingRadius * COMPASS_CIRCLE_FITTING_RADIUS_COEF) {
-			compassCircleId = 1;
+			compassCircleIndex = 1;
 		}
 
-		return compassCircleId;
+		return compassCircleIndex;
 	}
 
 	private void updateHeading() {
@@ -235,9 +245,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center,
-								boolean nightMode, RadiusRulerMode mode) {
+								boolean nightMode, boolean radiusRulerNightMode) {
 		canvas.rotate(-tb.getRotate(), center.x, center.y);
-		if (nightMode || mode == RadiusRulerMode.SECOND) {
+		if (nightMode || radiusRulerNightMode) {
 			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2f,
 					center.y - centerIconNight.getHeight() / 2f, bitmapPaint);
 		} else {
@@ -256,8 +266,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			}
 
 			MetricsConstants currentMetricSystem = app.getSettings().METRIC_SYSTEM.get();
+			float mapDensity = getMapDensity();
 			boolean updateCache = tb.getZoom() != cacheIntZoom
-					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity.get() != cacheMapDensity
+					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity != cacheMapDensity
 					|| cacheMetricSystem != currentMetricSystem;
 
 			if (!tb.isZoomAnimated() && updateCache) {
@@ -265,7 +276,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				cacheIntZoom = tb.getZoom();
 				LatLon centerLatLon = tb.getCenterLatLon();
 				cacheCenterLatLon = new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude());
-				cacheMapDensity = mapDensity.get();
+				cacheMapDensity = mapDensity;
 				updateDistance(tb);
 			}
 		}
@@ -618,18 +629,30 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}
 
 	public enum RadiusRulerMode {
-		FIRST,
-		SECOND,
-		EMPTY
+
+		FIRST(R.string.dark_theme, R.drawable.ic_action_ruler_circle_dark),
+		SECOND(R.string.light_theme, R.drawable.ic_action_ruler_circle_light),
+		EMPTY(R.string.shared_string_hide, R.drawable.ic_action_hide);
+
+		@StringRes
+		public final int titleId;
+		@DrawableRes
+		public final int iconId;
+
+		RadiusRulerMode(@StringRes int titleId, @DrawableRes int iconId) {
+			this.titleId = titleId;
+			this.iconId = iconId;
+		}
+
+		@NonNull
+		public RadiusRulerMode next() {
+			int nextItemIndex = (ordinal() + 1) % values().length;
+			return values()[nextItemIndex];
+		}
 	}
 }

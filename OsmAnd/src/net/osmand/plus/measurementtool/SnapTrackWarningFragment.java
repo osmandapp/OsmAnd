@@ -5,8 +5,8 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.UiUtilities.DialogButtonType.SECONDARY;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,11 +24,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.base.BaseOsmAndFragment;

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
+<net.osmand.plus.widgets.chips.HorizontalChipsView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/track_categories"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:clipToPadding="false"
-	android:orientation="horizontal"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingTop="@dimen/content_padding_half"
-	android:paddingRight="@dimen/content_padding"
-	android:paddingBottom="@dimen/content_padding_half"
+	android:paddingVertical="@dimen/content_padding_half"
+	android:paddingHorizontal="@dimen/content_padding"
 	tools:itemCount="3"
-	tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-	tools:listitem="@layout/point_editor_icon_category_item"
-	android:paddingStart="@dimen/content_padding"
-	android:paddingEnd="@dimen/content_padding" />
+	tools:listitem="@layout/custom_chip_view" />

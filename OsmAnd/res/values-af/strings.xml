@@ -612,7 +612,7 @@
   <string name="osm_settings_descr">Spesifiseer Openstreetmap.org (OSM) stellings benodig vir OSM toevoegings</string>
   <string name="data_settings_descr">Spesifiseer taal, aflaai/herlaai inligting</string>
   <string name="data_settings">Inligting</string>
-    <string name="osm_settings">OSM veranderings</string>
+    <string name="osm_editing_plugin_name">OSM veranderings</string>
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
   <string name="additional_settings">Bykomende stellings</string>
@@ -621,7 +621,6 @@
   <string name="save_current_track">Berg huidige spoor</string>
   <string name="save_track_interval">Log tussenpose</string>
   <string name="save_track_interval_descr">Kies posisioneringstussenpose vir spore</string>
-  <string name="save_track_to_gpx_descrp">Spore sal geberg word in die spoor bergadres in daaglikse groepe</string>
   <string name="update_tile">Opgradeer kaart</string>
   <string name="reload_tile">Laai teël weer af</string>
   <string name="mark_point">Teiken</string>
@@ -731,9 +730,6 @@
 <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Herstel verstek</string>
     <string name="map_widget_parking">Parkering</string>
-<string name="map_widget_speed">Spoed</string>
-<string name="map_widget_distance">Teiken</string>
-<string name="map_widget_altitude">Hoogte</string>
 <string name="map_widget_time">Tyd oor</string>
 <string name="map_widget_next_turn">Volgende draai</string>
 <string name="map_widget_next_turn_small">Volgende draai (klein)</string>
@@ -831,7 +827,6 @@
     <string name="intermediate_points_change_order">Verander volgorde</string>
     <string name="srtm_paid_version_msg">Oorweeg dit asseblief om die kontoerlyn-inlasmodulen in die Market winkel te koop om verdere ontwikkeling te ondersteun.</string>
     <string name="srtm_paid_version_title">Kontoerlyn inlasmodule</string>
-    <string name="av_def_action_choose">Kies op versoek</string>
     <string name="av_def_action_video">Neem video</string>
     <string name="av_def_action_audio">Neem oudio op</string>
     <string name="av_widget_action_descr">Kies verstek programmetjie-aksie</string>

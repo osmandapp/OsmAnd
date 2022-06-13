@@ -355,9 +355,6 @@
     <string name="map_widget_back_to_loc">मी कुठे आहे</string>
     <string name="map_widget_compass">कंपास</string>
     <string name="map_widget_parking">वाहनतळ</string>
-    <string name="map_widget_speed">वेग</string>
-    <string name="map_widget_distance">इच्छित स्थळ</string>
-    <string name="map_widget_altitude">उंची</string>
     <string name="map_widget_next_turn">पुढचे वळण</string>
     <string name="map_widget_next_turn_small">पुढचे वळण (लहान)</string>
     <string name="map_widget_next_next_turn">पुढचे दुसरे वळण</string>
@@ -408,7 +405,7 @@
     <string name="welcome_header">सुस्वागतम्</string>
     <string name="confirmation_to_clear_history">इतिहास पुसून टाकायचा\?</string>
     <string name="osmand_parking_hour">ता</string>
-    <string name="osmand_parking_minute">मि</string>
+    <string name="shared_string_minute_lowercase">मि</string>
     <string name="osmand_parking_time_left">उर्वरित</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_and">व</string>

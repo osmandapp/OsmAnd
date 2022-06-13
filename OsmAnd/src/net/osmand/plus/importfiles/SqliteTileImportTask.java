@@ -1,18 +1,18 @@
 package net.osmand.plus.importfiles;
 
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+
 import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 
 class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
@@ -27,7 +27,7 @@ class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		return ImportHelper.copyFile(app, app.getAppPath(TILES_INDEX_DIR + name), uri, false);
+		return ImportHelper.copyFile(app, app.getAppPath(TILES_INDEX_DIR + name), uri, false, false);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			OsmandPlugin.enablePluginIfNeeded(activity, app, plugin, true);
 			if (activity instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) activity;
-				mapActivity.getMapLayers().selectMapLayer(mapActivity, null, null);
+				mapActivity.getMapLayers().selectMapLayer(mapActivity, true, null);
 			}
 			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
 		} else {

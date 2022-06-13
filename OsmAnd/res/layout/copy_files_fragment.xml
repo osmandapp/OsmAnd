@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<ScrollView
+		android:id="@+id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:divider="@null"
+		android:dividerHeight="0dp"
+		android:drawSelectorOnTop="false"
+		android:focusable="false"
+		android:groupIndicator="@android:color/transparent"
+		android:listSelector="@android:color/transparent"
+		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/toolbar_height_expanded">
+
+			<LinearLayout
+				android:id="@+id/progress_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:visibility="visible">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/progress_title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingTop="@dimen/content_padding_small"
+					android:paddingRight="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding_small"
+					android:text="@string/progress_complete"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/default_desc_line_height"
+					osmand:lineHeight="23sp"
+					osmand:typeface="@string/font_roboto_medium" />
+
+				<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+					android:id="@+id/progress_bar"
+					style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="4dp"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:layout_marginRight="@dimen/content_padding"
+					android:indeterminate="false"
+					osmand:mpb_progressStyle="horizontal"
+					osmand:mpb_setBothDrawables="true"
+					osmand:mpb_useIntrinsicPadding="false" />
+
+				<include
+					android:id="@+id/copy_files_descr"
+					layout="@layout/preference_with_descr" />
+
+				<include layout="@layout/simple_divider_item" />
+
+				<LinearLayout
+					android:id="@+id/remaining_files"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingTop="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@android:id/title"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_regular" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@android:id/summary"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:letterSpacing="@dimen/description_letter_spacing"
+						android:maxLines="4"
+						android:text="@string/osmand_net_previously_installed"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						osmand:lineHeight="@dimen/default_desc_line_height"
+						osmand:typeface="@string/font_roboto_regular" />
+
+				</LinearLayout>
+
+				<include
+					android:id="@+id/restart_required"
+					layout="@layout/preference_with_descr" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:stateListAnimator="@animator/appbar_always_elevated">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_big_item_height"
+			android:background="?attr/actionModeBackground"
+			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
+			osmand:expandedTitleGravity="start|bottom"
+			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
+			osmand:expandedTitleMarginEnd="@dimen/content_padding"
+			osmand:expandedTitleMarginStart="@dimen/content_padding"
+			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
+			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:minHeight="@dimen/toolbar_height"
+				osmand:layout_collapseMode="pin"
+				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				osmand:title="@string/copying_osmand_files"
+				osmand:titleMarginEnd="0dp"
+				osmand:titleMarginStart="0dp">
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<include
+		layout="@layout/bottom_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_ex_height"
+		android:layout_gravity="bottom" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

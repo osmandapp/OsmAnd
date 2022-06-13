@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import android.annotation.SuppressLint;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,11 +51,11 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	}
 
 	public void updateAllWidgets() {
-		DashboardOnMap d = dashboard;
-		if (d == null) {
+		OsmandApplication app = getMyApplication();
+		if (app == null || dashboard == null) {
 			return;
 		}
-		UiUtilities ic = getMyApplication().getUIUtilities();
+		UiUtilities ic = app.getUIUtilities();
 		UpdateLocationViewCache cache = ic.getUpdateLocationViewCache();
 		for (DashLocationView lv : distances) {
 			cache.arrowResId = lv.arrowResId;

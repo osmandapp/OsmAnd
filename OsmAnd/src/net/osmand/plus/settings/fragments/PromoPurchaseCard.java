@@ -4,18 +4,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
-public class PromoPurchaseCard extends MapBaseCard {
+public class PromoPurchaseCard extends BaseCard {
 
-	public PromoPurchaseCard(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+	public PromoPurchaseCard(@NonNull FragmentActivity activity) {
+		super(activity);
 	}
 
 	@Override

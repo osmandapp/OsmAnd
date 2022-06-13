@@ -37,28 +37,26 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
 import net.osmand.plus.mapsource.TileStorageFormatBottomSheet.OnTileStorageFormatSelectedListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -71,7 +69,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	public static final String TAG = EditMapSourceDialogFragment.class.getName();
 	static final int EXPIRE_TIME_NEVER = -1;
 	private static final Log LOG = PlatformUtil.getLog(EditMapSourceDialogFragment.class);
-	private static final String HELP_ARTICLE_URL = "https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#add-new-online-raster-map-source";
 	private static final String PNG_EXT = "png";
 	private static final int MAX_ZOOM = 17;
 	private static final int MIN_ZOOM = 5;
@@ -422,7 +419,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void onHelpClick() {
-		WikipediaDialogFragment.showFullArticle(requireContext(), Uri.parse(HELP_ARTICLE_URL), nightMode);
+		Context context = requireContext();
+		AndroidUtils.openUrl(context, Uri.parse(context.getString(R.string.docs_add_online_maps)), nightMode);
 	}
 
 	private void showExitDialog() {
@@ -449,7 +447,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			case EXPIRE_TIME:
 				return expireTimeMinutes == EXPIRE_TIME_NEVER
 						? getString(R.string.shared_string_never)
-						: getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(expireTimeMinutes), getString(R.string.osmand_parking_minute));
+						: getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(expireTimeMinutes), getString(R.string.shared_string_minute_lowercase));
 			case MERCATOR_PROJECTION:
 				return elliptic ? getString(R.string.edit_tilesource_elliptic_tile) : getString(R.string.pseudo_mercator_projection);
 			case STORAGE_FORMAT:
@@ -502,7 +500,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void updateDescription(ConfigurationItem item) {
-		View view = contentContainer.getChildAt(ArrayUtils.indexOf(ConfigurationItem.values(), item));
+		View view = contentContainer.getChildAt(item.ordinal());
 		((TextView) view.findViewById(R.id.sub_title)).setText(getDescription(item));
 	}
 

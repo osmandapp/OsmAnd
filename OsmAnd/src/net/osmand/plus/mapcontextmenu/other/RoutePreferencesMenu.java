@@ -17,11 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -40,9 +37,14 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.GeneralRouter;
 
 import java.io.File;
+import java.util.List;
 
 public class RoutePreferencesMenu {
 
@@ -85,8 +87,9 @@ public class RoutePreferencesMenu {
 					int i = 0;
 					int selectedIndex = -1;
 					for (LocalRoutingParameter p : group.getRoutingParameters()) {
-						adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity))
-								.setSelected(false).createItem());
+						adapter.addItem(new ContextMenuItem(null)
+								.setTitle(p.getText(mapActivity))
+								.setSelected(false));
 						if (p.isSelected(settings)) {
 							selectedIndex = i;
 						}
@@ -99,8 +102,8 @@ public class RoutePreferencesMenu {
 					AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 					final int layout = R.layout.list_menu_item_native_singlechoice;
 
-					final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1,
-							adapter.getItemNames()) {
+					List<String> names = CtxMenuUtils.getNames(adapter.getItems());
+					final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1, names) {
 						@NonNull
 						@Override
 						public View getView(final int position, View convertView, ViewGroup parent) {

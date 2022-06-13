@@ -1,7 +1,6 @@
 package net.osmand.plus.views.layers;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
@@ -9,14 +8,18 @@ import android.graphics.Paint.Style;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
+import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -31,7 +34,6 @@ public class MapTextLayer extends OsmandMapLayer {
 
 	private Map<OsmandMapLayer, Collection<?>> textObjects = new LinkedHashMap<>();
 	private Paint paintTextIcon;
-	private OsmandMapTileView view;
 
 	public interface MapTextProvider<T> {
 
@@ -50,8 +52,29 @@ public class MapTextLayer extends OsmandMapLayer {
 		super(ctx);
 	}
 
+	@Override
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
+
+		paintTextIcon = new Paint();
+		updateTextSize();
+		paintTextIcon.setTextAlign(Align.CENTER);
+		paintTextIcon.setAntiAlias(true);
+		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>((lhs, rhs) -> {
+			OsmandMapTileView v = this.view;
+			if (v != null) {
+				float z1 = v.getZorder(lhs);
+				float z2 = v.getZorder(rhs);
+				return Float.compare(z1, z2);
+			}
+			return 0;
+		});
+		textObjectsLoc.putAll(this.textObjects);
+		this.textObjects = textObjectsLoc;
+	}
+
 	public void putData(OsmandMapLayer ml, Collection<?> objects) {
-		if (objects == null || objects.isEmpty()) {
+		if (Algorithms.isEmpty(objects)) {
 			textObjects.remove(ml);
 		} else {
 			if (ml instanceof MapTextProvider) {
@@ -69,7 +92,7 @@ public class MapTextLayer extends OsmandMapLayer {
 		for (Map.Entry<OsmandMapLayer, Collection<?>> entry : textObjects.entrySet()) {
 			OsmandMapLayer l = entry.getKey();
 			MapTextProvider provider = (MapTextProvider) l;
-			if (!view.isLayerVisible(l) || !provider.isTextVisible()) {
+			if (!view.isLayerExists(l) || !provider.isTextVisible()) {
 				continue;
 			}
 
@@ -148,47 +171,24 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void drawShadowText(Canvas cv, String text, float centerX, float centerY, boolean nightMode) {
-		Resources r = view.getApplication().getResources();
 		paintTextIcon.setStyle(Style.STROKE);
+		Context ctx = getContext();
 		paintTextIcon.setColor(nightMode
-				? r.getColor(R.color.widgettext_shadow_night)
-				: r.getColor(R.color.widgettext_shadow_day));
+				? ContextCompat.getColor(ctx, R.color.widgettext_shadow_night)
+				: ContextCompat.getColor(ctx, R.color.widgettext_shadow_day));
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset
 		paintTextIcon.setStrokeWidth(2);
 		paintTextIcon.setStyle(Style.FILL);
 		paintTextIcon.setColor(nightMode
-				? r.getColor(R.color.widgettext_night)
-				: r.getColor(R.color.widgettext_day));
+				? ContextCompat.getColor(ctx, R.color.widgettext_night)
+				: ContextCompat.getColor(ctx, R.color.widgettext_day));
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView v) {
-		this.view = v;
-		paintTextIcon = new Paint();
-		updateTextSize();
-		paintTextIcon.setTextAlign(Align.CENTER);
-		paintTextIcon.setAntiAlias(true);
-		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>((lhs, rhs) -> {
-			if (view != null) {
-				float z1 = view.getZorder(lhs);
-				float z2 = view.getZorder(rhs);
-				return Float.compare(z1, z2);
-			}
-			return 0;
-		});
-		textObjectsLoc.putAll(this.textObjects);
-		this.textObjects = textObjectsLoc;
-	}
-
-	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-	}
-
-	@Override
-	public void destroyLayer() {
 	}
 
 	@Override
@@ -197,10 +197,30 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void updateTextSize() {
-		float scale = view.getApplication().getSettings().TEXT_SCALE.get();
+		float scale = getTextScale();
 		float textSize = scale * TEXT_SIZE * view.getDensity();
 		if (paintTextIcon.getTextSize() != textSize) {
 			paintTextIcon.setTextSize(textSize);
 		}
+	}
+
+	public static TextRasterizer.Style getTextStyle(@NonNull Context ctx, boolean nightMode,
+	                                                float textScale, float density) {
+		TextRasterizer.Style textStyle = new TextRasterizer.Style();
+		textStyle.setWrapWidth(TEXT_WRAP);
+		textStyle.setMaxLines(TEXT_LINES);
+		textStyle.setBold(false);
+		textStyle.setItalic(false);
+		textStyle.setColor(NativeUtilities.createColorARGB(
+				ContextCompat.getColor(ctx, nightMode
+						? R.color.widgettext_night
+						: R.color.widgettext_day)));
+		textStyle.setSize(textScale * TEXT_SIZE * density);
+		textStyle.setHaloColor(NativeUtilities.createColorARGB(
+				ContextCompat.getColor(ctx, nightMode
+						? R.color.widgettext_shadow_night
+						: R.color.widgettext_shadow_day)));
+		textStyle.setHaloRadius(5);
+		return textStyle;
 	}
 }

@@ -11,7 +11,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.routing.RoutingHelper;
@@ -38,8 +38,8 @@ public class NavStartStopAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		RoutingHelper helper = mapActivity.getRoutingHelper();
 		if (helper.isPauseNavigation() || helper.isFollowingMode()) {
-			if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
-				DestinationReachedMenu.show(mapActivity);
+			if (Boolean.parseBoolean(getParams().get(KEY_DIALOG))) {
+				DestinationReachedFragment.show(mapActivity);
 			} else {
 				mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
 			}
@@ -90,7 +90,7 @@ public class NavStartStopAction extends QuickAction {
 		if (context instanceof MapActivity) {
 			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
 			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
-				return ((MapActivity) context).getMapActions().getRouteMode(null).getIconRes();
+				return ((MapActivity) context).getMapActions().getRouteMode().getIconRes();
 			}
 			return helper.getAppMode().getIconRes();
 		}

@@ -2,18 +2,27 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Paint;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class RouteGeometryWay extends
 		MultiColoringGeometryWay<RouteGeometryWayContext, MultiColoringGeometryWayDrawer<RouteGeometryWayContext>> {
@@ -22,6 +31,9 @@ public class RouteGeometryWay extends
 	private RouteCalculationResult route;
 
 	private Integer customDirectionArrowColor;
+
+	//OpenGL
+	public VectorLinesCollection actionLinesCollection;
 
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new MultiColoringGeometryWayDrawer<>(context));
@@ -59,35 +71,43 @@ public class RouteGeometryWay extends
 		getContext().getAttrs().customColorPaint.setStrokeCap(cap);
 	}
 
-	public void updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
+	public boolean updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
 		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			coloringChanged = false;
 			List<Location> locations = route.getImmutableAllLocations();
-
 			if (coloringType.isGradient()) {
-				updateGradientRoute(tb, locations);
+				updateGradientWay(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {
 				updateSolidMultiColorRoute(tb, locations, route.getOriginalRoute());
 			} else {
 				updateWay(locations, tb);
 			}
+			return true;
 		}
+		return false;
 	}
 
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		if (coloringType.isGradient()) {
-			return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
-		}
-		return new GeometrySolidWayStyle<>(getContext(), customColor, customWidth, customDirectionArrowColor);
+		return coloringType.isGradient()
+				? super.getGradientWayStyle()
+				: getArrowWayStyle(customColor);
 	}
 
 	@NonNull
 	@Override
 	public GeometrySolidWayStyle<RouteGeometryWayContext> getSolidWayStyle(int lineColor) {
-		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, customDirectionArrowColor);
+		return getArrowWayStyle(lineColor);
+	}
+
+	@NonNull
+	private GeometrySolidWayStyle<RouteGeometryWayContext> getArrowWayStyle(int lineColor) {
+		int directionArrowColor = customDirectionArrowColor != null
+				? customDirectionArrowColor
+				: getContext().getPaintIcon().getColor();
+		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, directionArrowColor, true);
 	}
 
 	@Override
@@ -113,6 +133,88 @@ public class RouteGeometryWay extends
 		if (route != null) {
 			route = null;
 			clearWay();
+		}
+	}
+
+	public void resetSymbolProviders() {
+		super.resetSymbolProviders();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (actionLinesCollection != null) {
+				mapRenderer.removeSymbolsProvider(actionLinesCollection);
+				actionLinesCollection = null;
+			}
+		}
+	}
+
+	public void resetActionLines() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (actionLinesCollection != null) {
+				mapRenderer.removeSymbolsProvider(actionLinesCollection);
+				actionLinesCollection = null;
+			}
+		}
+	}
+
+	private List<List<Location>> getActionArrows(List<Location> locations) {
+		List<List<Location>> ll = new ArrayList<>();
+		ll.add(new ArrayList<>());
+		int index = 0;
+		for (int i = 0; i < locations.size(); i++) {
+			Location loc = locations.get(i);
+			if (loc != null) {
+				ll.get(index).add(loc);
+			} else if (i < locations.size() - 1) {
+				index++;
+				ll.add(new ArrayList<>());
+			}
+		}
+		return ll;
+	}
+
+	public void buildActionArrows(List<Location> actionPoints, int customTurnArrowColor) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		int baseOrder = this.baseOrder - 1000;
+		List<List<Location>> actionArrows = getActionArrows(actionPoints);
+		if (!actionArrows.isEmpty()) {
+			int lineIdx = 0;
+			if (actionLinesCollection == null) {
+				actionLinesCollection = new VectorLinesCollection();
+			}
+			long initialLinesCount = actionLinesCollection.getLines().size();
+			for (List<Location> line : actionArrows) {
+				QVectorPointI points = new QVectorPointI();
+				for (Location point : line) {
+					int x = MapUtils.get31TileNumberX(point.getLongitude());
+					int y = MapUtils.get31TileNumberY(point.getLatitude());
+					points.add(new PointI(x, y));
+				}
+				if (lineIdx < initialLinesCount) {
+					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
+					vectorLine.setPoints(points);
+					vectorLine.setIsHidden(false);
+					lineIdx++;
+				} else {
+					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
+					vectorLineBuilder.setBaseOrder(baseOrder--)
+							.setIsHidden(false)
+							.setLineId((int) actionLinesCollection.getLines().size())
+							.setLineWidth(customWidth)
+							.setPoints(points)
+							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
+							.setFillColor(NativeUtilities.createFColorARGB(customTurnArrowColor));
+					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
+				}
+			}
+			while (lineIdx < initialLinesCount) {
+				actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				lineIdx++;
+			}
+			mapRenderer.addSymbolsProvider(actionLinesCollection);
 		}
 	}
 }

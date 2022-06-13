@@ -13,12 +13,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.MapMarkersMode;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -64,22 +62,13 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
-		MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
 		int displayedCount = getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-		ImageView showDirectionIcon = (ImageView) mainView.findViewById(R.id.show_direction_icon);
-		int imageResId = 0;
-		switch (mode) {
-			case TOOLBAR:
-				imageResId = displayedCount == 1 ? R.drawable.ic_action_device_topbar : R.drawable.ic_action_device_topbar_two;
-				break;
-			case WIDGETS:
-				imageResId = displayedCount == 1 ? R.drawable.ic_action_device_widget : R.drawable.ic_action_device_widget_two;
-				break;
-		}
-		showDirectionIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
-		if (imageResId != 0) {
-			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.active_color_primary_light));
-		}
+		ImageView showDirectionIcon = mainView.findViewById(R.id.show_direction_icon);
+		int imageResId = displayedCount == 1
+				? R.drawable.ic_action_device_topbar
+				: R.drawable.ic_action_device_topbar_two;
+		showDirectionIcon.setBackground(getContentIcon(R.drawable.ic_action_device_top));
+		showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.active_color_primary_light));
 		((ImageView) mainView.findViewById(R.id.coordinate_input_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
 		((ImageView) mainView.findViewById(R.id.build_route_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));

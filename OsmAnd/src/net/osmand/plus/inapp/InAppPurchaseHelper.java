@@ -11,16 +11,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
-import net.osmand.AndroidNetworkUtils.Request;
-import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -28,6 +25,11 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.plus.utils.AndroidNetworkUtils.Request;
+import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -57,6 +59,7 @@ public abstract class InAppPurchaseHelper {
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
+	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
 	protected boolean isDeveloperVersion;
 	protected String token = "";
@@ -143,9 +146,13 @@ public abstract class InAppPurchaseHelper {
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
-	public static boolean isSubscribedToMaps(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_MAPS_PURCHASED.get();
+	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app) {
+		return isSubscribedToMaps(app, true);
+	}
+
+	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app)
+				|| app.getSettings().OSMAND_MAPS_PURCHASED.get();
 	}
 
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
@@ -174,8 +181,28 @@ public abstract class InAppPurchaseHelper {
 				|| isSubscribedToOsmAndPro(ctx);
 	}
 
-	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx) || ctx.getSettings().FULL_VERSION_PURCHASED.get();
+	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
+		long time = System.currentTimeMillis();
+		long installTime = getInstallTime(app);
+		if (time >= installTime + ANDROID_AUTO_START_DATE_MS) {
+			return Version.isDeveloperBuild(app) || Version.isPaidVersion(app);
+		}
+		return true;
+	}
+
+	private static long getInstallTime(@NonNull OsmandApplication app) {
+		AppInitializer initializer = app.getAppInitializer();
+		long updateVersionTime = initializer.getUpdateVersionTime();
+		long firstInstalledTime = initializer.getFirstInstalledTime();
+		return Math.max(updateVersionTime, firstInstalledTime);
+	}
+
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
+		return isFullVersionPurchased(app, true);
+	}
+
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app) || app.getSettings().FULL_VERSION_PURCHASED.get();
 	}
 
 	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication ctx) {
@@ -213,13 +240,13 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getContourLines();
 	}
 
-	public InAppSubscription getMonthlyLiveUpdates() {
-		return purchases.getMonthlyLiveUpdates();
+	public InAppSubscription getMonthlySubscription() {
+		return purchases.getMonthlySubscription();
 	}
 
 	@Nullable
-	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
-		return purchases.getPurchasedMonthlyLiveUpdates();
+	public InAppSubscription getPurchasedMonthlySubscription() {
+		return purchases.getPurchasedMonthlySubscription();
 	}
 
 	@Nullable
@@ -743,9 +770,11 @@ public abstract class InAppPurchaseHelper {
 			subscription.setPurchaseState(PurchaseState.PURCHASED);
 			subscription.setPurchaseInfo(ctx, info);
 			subscription.setState(ctx, SubscriptionState.UNDEFINED);
+			logDebug("Sending tokens...");
 			sendTokens(Collections.singletonList(info), new OnRequestResultListener() {
 				@Override
 				public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
+					logDebug("Tokens sent");
 					boolean active = false;
 					if (liveUpdates || pro) {
 						active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
@@ -763,6 +792,7 @@ public abstract class InAppPurchaseHelper {
 					}
 					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 					notifyItemPurchased(sku, active);
+					refreshAndroidAuto();
 					stop(true);
 				}
 			});
@@ -777,6 +807,7 @@ public abstract class InAppPurchaseHelper {
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 			notifyItemPurchased(fullVersion.getSku(), false);
+			refreshAndroidAuto();
 			stop(true);
 
 		} else if (depthContours != null && info.getSku().equals(depthContours.getSku())) {
@@ -807,6 +838,14 @@ public abstract class InAppPurchaseHelper {
 		} else {
 			notifyDismissProgress(activeTask);
 			stop(true);
+		}
+	}
+
+	private void refreshAndroidAuto() {
+		NavigationSession carNavigationSession = ctx.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			logDebug("Call Android Auto");
+			carNavigationSession.onPurchaseDone();
 		}
 	}
 

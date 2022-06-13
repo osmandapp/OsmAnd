@@ -10,13 +10,13 @@ import org.apache.commons.logging.Log;
 
 public class RenderingRuleProperty {
 	private final static Log log = PlatformUtil.getLog(RenderingRuleProperty.class);
-	
-	private final static int INT_TYPE = 1;
-	private final static int FLOAT_TYPE = 2;
-	private final static int STRING_TYPE = 3;
-	private final static int COLOR_TYPE = 4;
-	private final static int BOOLEAN_TYPE = 5;
-	
+
+	public final static int INT_TYPE = 1;
+	public final static int FLOAT_TYPE = 2;
+	public final static int STRING_TYPE = 3;
+	public final static int COLOR_TYPE = 4;
+	public final static int BOOLEAN_TYPE = 5;
+
 	public static final int TRUE_VALUE = 1;
 	public static final int FALSE_VALUE = 0;
 	

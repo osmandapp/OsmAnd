@@ -12,22 +12,22 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
 
 import java.util.List;
 
 public class PredefinedProfilesGroup extends ProfilesGroup {
 
-	private String type;
+	private final String type;
 
 	public PredefinedProfilesGroup(@NonNull String title,
 	                               @NonNull String type,
-	                               @NonNull List<ProfileDataObject> profiles) {
+	                               @NonNull List<RoutingDataObject> profiles) {
 		super(title, profiles);
 		this.type = type;
 	}

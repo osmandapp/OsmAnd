@@ -6,11 +6,11 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.CustomRegion;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;

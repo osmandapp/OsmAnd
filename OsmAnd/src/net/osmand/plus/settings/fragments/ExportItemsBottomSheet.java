@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.MISC;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,22 +17,22 @@ import androidx.core.widget.CompoundButtonCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -44,12 +48,12 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.OsmNotesPoint;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -64,16 +68,11 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
-import static net.osmand.view.ThreeStateCheckbox.State.MISC;
-import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -294,7 +293,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				if (appMode != null) {
 					profileName = appMode.toHumanString();
 				} else {
-					profileName = StringUtils.capitalize(modeBean.stringKey);
+					profileName = Algorithms.capitalizeFirstLetter(modeBean.stringKey);
 				}
 			}
 			item.setTitle(profileName);
@@ -324,7 +323,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			} else {
 				actualIconColor = ContextCompat.getColor(app, secondaryColorRes);
 			}
-			item.setIcon(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
+			int iconRes = profileIconRes != 0 ? profileIconRes : R.drawable.ic_world_globe_dark;
+			item.setIcon(uiUtilities.getPaintedIcon(iconRes, actualIconColor));
 		} else if (object instanceof QuickAction) {
 			QuickAction quickAction = (QuickAction) object;
 			item.setTitle(quickAction.getName(app));

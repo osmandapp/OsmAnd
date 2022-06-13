@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.router.network.NetworkRouteContext.*;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -20,32 +22,26 @@ import androidx.appcompat.content.res.AppCompatResources;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
-import net.osmand.PlatformUtil;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -56,6 +52,7 @@ import net.osmand.plus.mapcontextmenu.controllers.ImpassibleRoadsMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapMarkerMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
@@ -65,25 +62,27 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.mapillary.MapillaryImage;
-import net.osmand.plus.mapillary.MapillaryMenuController;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.osmedit.EditPOIMenuController;
-import net.osmand.plus.osmedit.OsmBugMenuController;
-import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
-import net.osmand.plus.osmedit.OsmPoint;
-import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
-import net.osmand.plus.resources.OsmandRegionSearcher;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.mapillary.MapillaryImage;
+import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
+import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
+import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.plugins.osmedit.menu.EditPOIMenuController;
+import net.osmand.plus.plugins.osmedit.menu.OsmBugMenuController;
+import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
+import net.osmand.plus.resources.SearchOsmandRegionTask;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
-import org.apache.commons.logging.Log;
-
-import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -126,8 +125,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	private DownloadIndexesThread downloadThread;
 
 	protected List<OpeningHours.Info> openingHoursInfo;
-
-	private static final Log LOG = PlatformUtil.getLog(MenuController.class);
 
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
@@ -175,10 +172,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
-												   @NonNull LatLon latLon,
-												   @NonNull PointDescription pointDescription,
-												   @Nullable Object object,
-												   @NonNull MenuType menuType) {
+	                                               @NonNull LatLon latLon,
+	                                               @NonNull PointDescription pointDescription,
+	                                               @Nullable Object object,
+	                                               @NonNull MenuType menuType) {
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
@@ -226,8 +223,14 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
 			} else if (object instanceof SelectedGpxPoint) {
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
-			} else if (object instanceof Pair && ((Pair<?, ?>) object).second instanceof SelectedGpxPoint) {
-				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) ((Pair<?, ?>) object).second);
+			} else if (object instanceof Pair) {
+				Pair<?, ?> pair = (Pair<?, ?>) object;
+				if (pair.second instanceof SelectedGpxPoint) {
+					menuController = new SelectedGpxMenuController(mapActivity, pointDescription,
+							(SelectedGpxPoint) ((Pair<?, ?>) object).second);
+				} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
+					menuController = new NetworkRouteMenuController(mapActivity, pointDescription, pair);
+				}
 			}
 		}
 		if (menuController == null) {
@@ -269,12 +272,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
-		boolean collapsable, CollapsableView collapsableView, OnClickListener onClickListener) {
-
-		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, collapsable, collapsableView, onClickListener);
-	}
-
 	public void clearPlainMenuItems() {
 		builder.clearPlainMenuItems();
 	}
@@ -313,18 +310,18 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected void addPrecisionToPlainItems() {
 		final MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null ) {
+		if (mapActivity != null) {
 			final OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAccuracy()) {
 				String acc;
 				if (l.hasVerticalAccuracy()) {
 					acc = String.format(app.getString(R.string.precision_hdop_and_vdop),
-						OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app),
-						OsmAndFormatter.getFormattedDistance(l.getVerticalAccuracy(), app));
+							OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app),
+							OsmAndFormatter.getFormattedDistance(l.getVerticalAccuracy(), app));
 				} else {
 					acc = String.format(app.getString(R.string.precision_hdop),
-						OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app));
+							OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app));
 				}
 
 				addPlainMenuItem(R.drawable.ic_action_ruler_circle, null, acc, false, false, null);
@@ -579,8 +576,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public static SpannableString getSpannableOpeningHours(List<OpeningHours.Info> openingHoursInfo,
-														   int colorOpen,
-														   int colorClosed) {
+	                                                       int colorOpen,
+	                                                       int colorClosed) {
 		StringBuilder sb = new StringBuilder();
 		int[] pos = new int[openingHoursInfo.size()];
 		for (int i = 0; i < openingHoursInfo.size(); i++) {
@@ -595,7 +592,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		int k = 0;
 		for (int i = 0; i < openingHoursInfo.size(); i++) {
 			OpeningHours.Info info = openingHoursInfo.get(i);
-			infoStr.setSpan(new ForegroundColorSpan(info.isOpened() ? colorOpen : colorClosed), k, pos[i], 0);
+			boolean opened = info.isFallback() ? openingHoursInfo.get(i - 1).isOpened() : info.isOpened();
+			int color = opened ? colorOpen : colorClosed;
+			infoStr.setSpan(new ForegroundColorSpan(color), k, pos[i], 0);
 			k = pos[i];
 		}
 		return infoStr;
@@ -868,7 +867,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		}
 	}
 
-	private void createMapDownloadControls(BinaryMapDataObject binaryMapDataObject, String selectedFullName) {
+	public void createMapDownloadControls(BinaryMapDataObject binaryMapDataObject, String selectedFullName) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandRegions osmandRegions = mapActivity.getMyApplication().getResourceManager().getOsmandRegions();
@@ -921,56 +920,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (mapContextMenu != null) {
 					mapContextMenu.updateMenuUI();
 				}
-			}
-		}
-	}
-
-	private static class SearchOsmandRegionTask extends AsyncTask<Void, Void, BinaryMapDataObject> {
-
-		private final WeakReference<MenuController> controllerRef;
-		private final LatLon latLon;
-		private final int zoom;
-		private OsmandRegionSearcher regionSearcher;
-
-		SearchOsmandRegionTask(@NonNull MenuController controller, @NonNull LatLon latLon, int zoom) {
-			this.controllerRef = new WeakReference<>(controller);
-			this.latLon = latLon;
-			this.zoom = zoom;
-		}
-
-		@Nullable
-		private MenuController getController() {
-			return controllerRef.get();
-		}
-
-		@Nullable
-		private MapActivity getMapActivity() {
-			MenuController controller = getController();
-			return controller != null ? controller.getMapActivity() : null;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				regionSearcher = new OsmandRegionSearcher(mapActivity.getMyApplication(), latLon, zoom);
-			}
-		}
-
-		@Override
-		protected BinaryMapDataObject doInBackground(Void... voids) {
-			if (regionSearcher == null) {
-				return null;
-			}
-			regionSearcher.search();
-			return regionSearcher.getBinaryMapDataObject();
-		}
-
-		@Override
-		protected void onPostExecute(BinaryMapDataObject binaryMapDataObject) {
-			MenuController controller = getController();
-			if (controller != null && regionSearcher != null) {
-				controller.createMapDownloadControls(binaryMapDataObject, regionSearcher.getRegionFullName());
 			}
 		}
 	}

@@ -1,11 +1,5 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
-import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
@@ -36,13 +30,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
@@ -54,17 +44,25 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
 
 public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener, OnRegisterDeviceListener {
 
 	private static final Log LOG = PlatformUtil.getLog(AuthorizeFragment.class);
 
 	public static final String TAG = AuthorizeFragment.class.getSimpleName();
-
-	private static final String OSMAND_EMAIL = "support@osmand.net";
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
 	private static final String SIGN_IN_KEY = "sign_in_key";
@@ -96,7 +94,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	public void setDialogType(LoginDialogType dialogType) {
@@ -146,7 +144,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		setupSupportButton();
 		setupKeyboardListener();
 
-		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
+		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.shared_string_get);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
 
 		return view;
@@ -243,8 +241,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			setDialogType(nextType);
 			updateContent();
 		});
-		UiUtilities.setupDialogButton(nightMode, buttonAuthorize, DialogButtonType.SECONDARY, nextType.titleId);
-		AndroidUtils.setBackground(app, buttonAuthorize, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+		UiUtilities.setupDialogButton(nightMode, buttonAuthorize, DialogButtonType.SECONDARY_ACTIVE, nextType.titleId);
 
 		buttonChoosePlan.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -296,8 +293,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				AndroidUiHelper.updateVisibility(codeMissingDescription, true);
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY, R.string.resend_verification_code);
-		AndroidUtils.setBackground(app, resendButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY_ACTIVE, R.string.resend_verification_code);
 
 		buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
 		buttonContinue.setOnClickListener(v -> {
@@ -447,7 +443,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private void setupSupportButton() {
 		TextView supportDescription = mainView.findViewById(R.id.contact_support_button);
-		supportDescription.setText(createColoredSpannable(R.string.osmand_cloud_help_descr, OSMAND_EMAIL));
+		String email = getString(R.string.support_email);
+		supportDescription.setText(createColoredSpannable(R.string.osmand_cloud_help_descr, email));
 		supportDescription.setOnClickListener(v -> app.sendSupportEmail(getString(R.string.backup_and_restore)));
 	}
 

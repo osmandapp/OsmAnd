@@ -27,7 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -38,14 +38,14 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.FontCache;
@@ -55,10 +55,10 @@ import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
-import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
-import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
-import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
+import net.osmand.plus.measurementtool.graph.BaseChartAdapter;
+import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
+import net.osmand.plus.measurementtool.graph.ChartAdapterHelper;
+import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -337,17 +337,17 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 		routeDetailsMenu.setMapActivity(mapActivity);
 
-		CommonGraphAdapter mainGraphAdapter = statisticCard.getGraphAdapter();
+		CommonChartAdapter mainGraphAdapter = statisticCard.getGraphAdapter();
 		if (mainGraphAdapter != null) {
-			GraphAdapterHelper.bindGraphAdapters(mainGraphAdapter, getRouteInfoCardsGraphAdapters(), getMainView());
-			refreshMapCallback = GraphAdapterHelper.bindToMap(mainGraphAdapter, mapActivity, routeDetailsMenu);
+			ChartAdapterHelper.bindGraphAdapters(mainGraphAdapter, getRouteInfoCardsGraphAdapters(), getMainView());
+			refreshMapCallback = ChartAdapterHelper.bindToMap(mainGraphAdapter, mapActivity, routeDetailsMenu);
 		}
 	}
 
-	private List<BaseGraphAdapter> getRouteInfoCardsGraphAdapters() {
-		List<BaseGraphAdapter> adapters = new ArrayList<>();
+	private List<BaseChartAdapter> getRouteInfoCardsGraphAdapters() {
+		List<BaseChartAdapter> adapters = new ArrayList<>();
 		for (RouteInfoCard card : routeInfoCards) {
-			BaseGraphAdapter adapter = card.getGraphAdapter();
+			BaseChartAdapter adapter = card.getGraphAdapter();
 			if (adapter != null) {
 				adapters.add(adapter);
 			}

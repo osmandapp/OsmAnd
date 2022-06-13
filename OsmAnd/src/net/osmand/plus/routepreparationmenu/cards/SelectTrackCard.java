@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 
@@ -40,16 +40,8 @@ public class SelectTrackCard extends MapBaseCard {
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_folder));
 
-		int minHeight = app.getResources().getDimensionPixelSize(R.dimen.route_info_list_text_padding);
+		int minHeight = getDimen(R.dimen.route_info_list_text_padding);
 		view.setMinimumHeight(minHeight);
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardPressed(SelectTrackCard.this);
-				}
-			}
-		});
+		view.setOnClickListener(v -> notifyCardPressed());
 	}
 }

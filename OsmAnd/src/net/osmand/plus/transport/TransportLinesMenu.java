@@ -1,234 +1,156 @@
 package net.osmand.plus.transport;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SwitchCompat;
 
-import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapUtils;
+import net.osmand.plus.configmap.ConfigureMapUtils;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class TransportLinesMenu {
+final public class TransportLinesMenu {
 
 	public static final String RENDERING_CATEGORY_TRANSPORT = "transport";
 
-	public static final String PT_TRANSPORT_STOPS = "transportStops";
-	public static final String PT_PUBLIC_TRANSPORT_MODE = "publicTransportMode";
-	public static final String PT_TRAM_TRAIN_ROUTES = "tramTrainRoutes";
-	public static final String PT_SUBWAY_MODE = "subwayMode";
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
 
-	public static void toggleTransportLines(@NonNull MapActivity mapActivity, boolean enable,
-	                                        @Nullable CallbackWithObject<Boolean> callback) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
+	public TransportLinesMenu(@NonNull OsmandApplication app) {
+		this.app = app;
+		this.settings = app.getSettings();
+	}
+
+	public void toggleTransportLines(@NonNull MapActivity mapActivity, boolean enable) {
 		if (enable) {
-			List<String> enabledTransportIds = settings.DISPLAYED_TRANSPORT_SETTINGS.getStringsList();
-			if (enabledTransportIds != null) {
-				for (CommonPreference<Boolean> pref : getTransportPrefs(app, null)) {
-					boolean selected = enabledTransportIds.contains(pref.getId());
-					pref.set(selected);
-				}
-				refreshMap(mapActivity);
+			List<String> enabledIds = settings.DISPLAYED_TRANSPORT_SETTINGS.getStringsList();
+			if (enabledIds != null) {
+				showEnabledTransport(mapActivity, enabledIds);
 			} else {
-				showTransportsDialog(mapActivity, callback);
+				showTransportsDialog(mapActivity);
 			}
 		} else {
-			for (CommonPreference<Boolean> pref : getTransportPrefs(app, null)) {
-				pref.set(false);
-			}
-			refreshMap(mapActivity);
-			if (callback != null) {
-				callback.processResult(false);
-			}
+			hideAllTransport(mapActivity);
 		}
 	}
 
-	public static void showTransportsDialog(@NonNull final MapActivity mapActivity,
-	                                        @Nullable final CallbackWithObject<Boolean> callback) {
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
-		final ApplicationMode appMode = settings.getApplicationMode();
-
-		final List<String> enabledTransportIds = app.getSettings().DISPLAYED_TRANSPORT_SETTINGS.getStringsList();
-		final List<RenderingRuleProperty> transportRules = getTransportRules(app);
-		final List<CommonPreference<Boolean>> transportPrefs = getTransportPrefs(app, transportRules);
-
-		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final Context themedCtx = UiUtilities.getThemedContext(mapActivity, nightMode);
-		final int profileColor = appMode.getProfileColor(nightMode);
-
-		final AlertDialog.Builder b = new AlertDialog.Builder(themedCtx);
-		b.setTitle(themedCtx.getString(R.string.rendering_category_transport));
-
-		final boolean[] checkedItems = new boolean[transportPrefs.size()];
-		for (int i = 0; i < transportPrefs.size(); i++) {
-			boolean selected = enabledTransportIds != null
-					&& enabledTransportIds.contains(transportPrefs.get(i).getId());
-			checkedItems[i] = selected;
-		}
-
-		final int[] iconIds = new int[transportPrefs.size()];
-		final String[] vals = new String[transportRules.size()];
-
-		final Map<String, Integer> transportIcons = new HashMap<>();
-		transportIcons.put(PT_TRANSPORT_STOPS, R.drawable.ic_action_transport_stop);
-		transportIcons.put(PT_PUBLIC_TRANSPORT_MODE, R.drawable.ic_action_transport_bus);
-		transportIcons.put(PT_TRAM_TRAIN_ROUTES, R.drawable.ic_action_transport_tram);
-		transportIcons.put(PT_SUBWAY_MODE, R.drawable.ic_action_transport_subway);
-
-		for (int i = 0; i < transportRules.size(); i++) {
-			RenderingRuleProperty p = transportRules.get(i);
-			String attrName = p.getAttrName();
-			String propertyName = AndroidUtils.getRenderingStringPropertyName(themedCtx, attrName, p.getName());
-			vals[i] = propertyName;
-			Integer iconId = transportIcons.get(attrName);
-			if (iconId != null) {
-				iconIds[i] = iconId;
-			} else {
-				iconIds[i] = R.drawable.ic_action_transport_bus;
+	public void toggleTransportType(@NonNull MapActivity mapActivity, @NonNull String attrName, boolean enable) {
+		ApplicationMode appMode = getAppMode();
+		CommonPreference<Boolean> preference = getTransportPreference(attrName);
+		preference.setModeValue(appMode, enable);
+		List<String> idsToSave = new ArrayList<>();
+		for (CommonPreference<Boolean> p : getTransportPreferences()) {
+			if (p.getModeValue(appMode)) {
+				idsToSave.add(p.getId());
 			}
 		}
-
-		final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(themedCtx,
-				R.layout.popup_list_item_icon24_and_menu, R.id.title, vals) {
-			@NonNull
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				View v = super.getView(position, convertView, parent);
-				final ImageView icon = (ImageView) v.findViewById(R.id.icon);
-				if (checkedItems[position]) {
-					icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconIds[position], profileColor));
-				} else {
-					icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
-				}
-				v.findViewById(R.id.divider).setVisibility(View.GONE);
-				v.findViewById(R.id.description).setVisibility(View.GONE);
-				v.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
-				final SwitchCompat check = (SwitchCompat) v.findViewById(R.id.toggle_item);
-				check.setOnCheckedChangeListener(null);
-				check.setChecked(checkedItems[position]);
-				check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						checkedItems[position] = isChecked;
-						if (checkedItems[position]) {
-							icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconIds[position], profileColor));
-						} else {
-							icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
-						}
-					}
-				});
-				UiUtilities.setupCompoundButton(nightMode, profileColor, check);
-				return v;
-			}
-		};
-
-		final ListView listView = new ListView(themedCtx);
-		listView.setDivider(null);
-		listView.setClickable(true);
-		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				checkedItems[position] = !checkedItems[position];
-				adapter.notifyDataSetChanged();
-			}
-		});
-		b.setView(listView);
-
-		b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if (callback != null) {
-					callback.processResult(isShowLines(app));
-				}
-			}
-		});
-
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				List<String> transportIdsToSave = new ArrayList<>();
-				for (int i = 0; i < transportPrefs.size(); i++) {
-					CommonPreference<Boolean> pref = transportPrefs.get(i);
-					boolean selected = checkedItems[i];
-					if (selected) {
-						transportIdsToSave.add(pref.getId());
-					}
-					pref.set(selected);
-				}
-				settings.DISPLAYED_TRANSPORT_SETTINGS.setStringsListForProfile(appMode,
-						transportIdsToSave.size() > 0 ? transportIdsToSave : null);
-				if (callback != null) {
-					callback.processResult(transportIdsToSave.size() > 0);
-				}
-				refreshMap(mapActivity);
-			}
-		});
-		b.show();
+		idsToSave = !Algorithms.isEmpty(idsToSave) ? idsToSave : null;
+		settings.DISPLAYED_TRANSPORT_SETTINGS.setModeValues(appMode, idsToSave);
+		refreshMap(mapActivity);
 	}
 
-	public static List<RenderingRuleProperty> getTransportRules(OsmandApplication app) {
-		List<RenderingRuleProperty> transportRules = new ArrayList<>();
-		for (RenderingRuleProperty property : ConfigureMapUtils.getCustomRules(app)) {
-			if (RENDERING_CATEGORY_TRANSPORT.equals(property.getCategory()) && property.isBoolean()) {
-				transportRules.add(property);
-			}
-		}
-		return transportRules;
+	public boolean isTransportEnabled(@NonNull String attrName) {
+		CommonPreference<Boolean> preference = getTransportPreference(attrName);
+		return settings.DISPLAYED_TRANSPORT_SETTINGS.containsValue(getAppMode(), preference.getId());
 	}
 
-	public static List<CommonPreference<Boolean>> getTransportPrefs(@NonNull OsmandApplication app,
-	                                                                List<RenderingRuleProperty> transportRules) {
-		if (transportRules == null) {
-			transportRules = getTransportRules(app);
-		}
-		List<CommonPreference<Boolean>> transportPrefs = new ArrayList<>();
-		for (RenderingRuleProperty property : transportRules) {
-			final CommonPreference<Boolean> pref = app.getSettings()
-					.getCustomRenderBooleanProperty(property.getAttrName());
-			transportPrefs.add(pref);
-		}
-		return transportPrefs;
+	public boolean isShowAnyTransport() {
+		return isShowAnyTransport(getAppMode());
 	}
 
-	private static void refreshMap(MapActivity mapActivity) {
-		mapActivity.refreshMapComplete();
-		mapActivity.getMapLayers().updateLayers(mapActivity);
-	}
-
-	public static boolean isShowLines(@NonNull OsmandApplication app) {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		for (CommonPreference<Boolean> pref : getTransportPrefs(app, null)) {
-			if (pref.getModeValue(appMode)) {
+	public boolean isShowAnyTransport(@NonNull ApplicationMode appMode) {
+		List<CommonPreference<Boolean>> preferences = getTransportPreferences();
+		for (CommonPreference<Boolean> preference : preferences) {
+			if (preference.getModeValue(appMode)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public int getTransportIcon(@NonNull String attrName) {
+		for (TransportType type : TransportType.values()) {
+			if (type.getAttrName().equals(attrName)) {
+				return type.getIconId();
+			}
+		}
+		return R.drawable.ic_action_transport_bus;
+	}
+
+	public String getTransportName(@NonNull String attrName) {
+		return getTransportName(attrName, null);
+	}
+
+	public String getTransportName(@NonNull String attrName, @Nullable String defValue) {
+		return AndroidUtils.getRenderingStringPropertyName(app, attrName, defValue);
+	}
+
+	private void showEnabledTransport(@NonNull MapActivity mapActivity, @NonNull List<String> enabledIds) {
+		ApplicationMode appMode = getAppMode();
+		for (RenderingRuleProperty p : getTransportRules(app)) {
+			CommonPreference<Boolean> preference = getTransportPreference(p.getAttrName());
+			String id = preference.getId();
+			boolean selected = enabledIds.contains(id);
+			preference.setModeValue(appMode, selected);
+		}
+		refreshMap(mapActivity);
+	}
+
+	private void hideAllTransport(@NonNull MapActivity mapActivity) {
+		ApplicationMode appMode = getAppMode();
+		for (RenderingRuleProperty p : getTransportRules(app)) {
+			CommonPreference<Boolean> preference = getTransportPreference(p.getAttrName());
+			preference.setModeValue(appMode, false);
+		}
+		refreshMap(mapActivity);
+	}
+
+	private void refreshMap(@NonNull MapActivity mapActivity) {
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		mapView.refreshMap(true);
+		mapActivity.updateLayers();
+	}
+
+	private ApplicationMode getAppMode() {
+		return settings.getApplicationMode();
+	}
+
+	private List<CommonPreference<Boolean>> getTransportPreferences() {
+		List<CommonPreference<Boolean>> preferences = new ArrayList<>();
+		for (RenderingRuleProperty property : getTransportRules(app)) {
+			CommonPreference<Boolean> preference = getTransportPreference(property.getAttrName());
+			preferences.add(preference);
+		}
+		return preferences;
+	}
+
+	private CommonPreference<Boolean> getTransportPreference(@NonNull String attrName) {
+		return settings.getCustomRenderBooleanProperty(attrName);
+	}
+
+	public static void showTransportsDialog(@NonNull MapActivity mapActivity) {
+		DashboardOnMap dashboard = mapActivity.getDashboard();
+		dashboard.setDashboardVisibility(true, DashboardType.TRANSPORT_LINES);
+	}
+
+	public static List<RenderingRuleProperty> getTransportRules(OsmandApplication app) {
+		List<RenderingRuleProperty> rules = new ArrayList<>();
+		for (RenderingRuleProperty property : ConfigureMapUtils.getCustomRules(app)) {
+			if (RENDERING_CATEGORY_TRANSPORT.equals(property.getCategory()) && property.isBoolean()) {
+				rules.add(property);
+			}
+		}
+		return rules;
 	}
 }

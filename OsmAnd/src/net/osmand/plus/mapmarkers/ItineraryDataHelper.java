@@ -2,11 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.util.Pair;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXExtensionsReader;
 import net.osmand.GPXUtilities.GPXExtensionsWriter;
@@ -19,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
@@ -31,20 +27,19 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
-import java.util.TimeZone;
+import java.util.UUID;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import static net.osmand.GPXUtilities.readText;
 import static net.osmand.GPXUtilities.writeNotNullText;
@@ -63,12 +58,6 @@ public class ItineraryDataHelper {
 	private static final String ITINERARY_GROUP = "itinerary_group";
 	private static final String GPX_KEY = "gpx";
 	private static final String FAVOURITES_KEY = "favourites_group";
-
-	private static final SimpleDateFormat GPX_TIME_FORMAT = new SimpleDateFormat(GPXUtilities.GPX_TIME_FORMAT, Locale.US);
-
-	static {
-		GPX_TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
-	}
 
 	private final OsmandApplication app;
 	private final MapMarkersHelper mapMarkersHelper;
@@ -129,7 +118,7 @@ public class ItineraryDataHelper {
 	}
 
 	public void collectMarkersGroups(GPXFile gpxFile, Map<String, MapMarkersGroup> groups,
-									 List<ItineraryGroupInfo> groupInfos, Map<String, MapMarker> sortedMarkers) {
+	                                 List<ItineraryGroupInfo> groupInfos, Map<String, MapMarker> sortedMarkers) {
 		for (ItineraryGroupInfo groupInfo : groupInfos) {
 			MapMarkersGroup group = ItineraryGroupInfo.createGroup(groupInfo);
 			groups.put(groupInfo.alias, group);
@@ -288,10 +277,10 @@ public class ItineraryDataHelper {
 			wpt.setColor(ContextCompat.getColor(app, MapMarker.getColorId(marker.colorIndex)));
 			if (completeBackup) {
 				if (marker.creationDate != 0) {
-					wpt.getExtensionsToWrite().put(CREATION_DATE, formatTime(marker.creationDate));
+					wpt.getExtensionsToWrite().put(CREATION_DATE, GPXUtilities.formatTime(marker.creationDate));
 				}
 				if (marker.visitedDate != 0) {
-					wpt.getExtensionsToWrite().put(VISITED_DATE, formatTime(marker.visitedDate));
+					wpt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(marker.visitedDate));
 				}
 			}
 			gpxFile.addPoint(wpt);
@@ -357,7 +346,7 @@ public class ItineraryDataHelper {
 		marker.id = getMarkerId(app, marker, group);
 		marker.favouritePoint = point;
 		marker.creationDate = point.getCreationDate();
-		marker.creationDate = point.getVisitedDate();
+		marker.visitedDate = point.getVisitedDate();
 		marker.history = marker.visitedDate != 0;
 
 		if (group != null) {
@@ -375,8 +364,8 @@ public class ItineraryDataHelper {
 
 		marker.id = getMarkerId(app, marker, group);
 		marker.wptPt = point;
-		marker.creationDate = parseTime(point.getExtensionsToRead().get(CREATION_DATE));
-		marker.visitedDate = parseTime(point.getExtensionsToRead().get(VISITED_DATE));
+		marker.creationDate = GPXUtilities.parseTime(point.getExtensionsToRead().get(CREATION_DATE));
+		marker.visitedDate = GPXUtilities.parseTime(point.getExtensionsToRead().get(VISITED_DATE));
 		marker.history = marker.visitedDate != 0;
 
 		if (group != null) {
@@ -395,27 +384,12 @@ public class ItineraryDataHelper {
 		return wpt;
 	}
 
-	public static long parseTime(String text) {
-		long time = 0;
-		if (text != null) {
-			try {
-				time = GPX_TIME_FORMAT.parse(text).getTime();
-			} catch (ParseException e) {
-				log.error(e);
-			}
-		}
-		return time;
-	}
-
-	public static String formatTime(long time) {
-		return GPX_TIME_FORMAT.format(new Date(time));
-	}
-
 	public static String getMarkerId(@NonNull OsmandApplication app, @NonNull MapMarker marker, @Nullable MapMarkersGroup group) {
 		if (group == null) {
-			return String.valueOf(System.currentTimeMillis()) + String.valueOf(new Random().nextInt(900) + 100);
+			return UUID.randomUUID().toString();
 		} else {
-			return group.getId() + marker.getName(app) + createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+			String shortLink = createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
+			return group.getId() + marker.getName(app) + shortLink;
 		}
 	}
 

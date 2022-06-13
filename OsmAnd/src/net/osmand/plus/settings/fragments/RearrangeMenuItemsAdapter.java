@@ -17,16 +17,15 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
-
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +59,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
@@ -145,7 +144,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			final ItemHolder h = (ItemHolder) holder;
 			ContextMenuItem menuItem = (ContextMenuItem) item.value;
 			String id = menuItem.getId();
-			if (DRAWER_DIVIDER_ID.equals(menuItem.getId())) {
+			if (DRAWER_DIVIDER_ID.equals(id)) {
 				h.title.setText(R.string.shared_string_divider);
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 				h.title.setTextColor(app.getResources().getColor(activeColorRes));
@@ -170,8 +169,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				if (menuItem.getIcon() != -1) {
 					h.icon.setImageDrawable(uiUtilities.getIcon(menuItem.getIcon(), nightMode));
 					h.icon.setVisibility(View.VISIBLE);
-					h.actionIcon.setVisibility(View.VISIBLE);
+				} else {
+					h.icon.setVisibility(View.INVISIBLE);
 				}
+				h.actionIcon.setVisibility(View.VISIBLE);
+				h.actionIcon.setContentDescription(app.getString(R.string.ltr_or_rtl_combine_via_space,
+						app.getString(R.string.quick_action_show_hide_title),
+						menuItem.getTitle()));
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_regular)));
 				h.title.setText(menuItem.getTitle());
 				h.title.setTextColor(app.getResources().getColor(textColorRes));
@@ -517,14 +521,14 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			case MAP_CONTEXT_MENU_PHOTO_NOTE:
 				return R.string.audionotes_plugin_name;
 			case CONTOUR_LINES:
-			case TERRAIN:
+			case TERRAIN_ID:
 				return R.string.srtm_plugin_name;
 			case OSM_NOTES:
 			case OSM_EDITS:
 			case MAP_CONTEXT_MENU_CREATE_POI:
 			case MAP_CONTEXT_MENU_MODIFY_OSM_NOTE:
 			case MAP_CONTEXT_MENU_OPEN_OSM_NOTE:
-				return R.string.osm_settings;
+				return R.string.osm_editing_plugin_name;
 			case MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC:
 				return R.string.parking_positions;
 			default:

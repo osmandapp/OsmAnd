@@ -1,13 +1,22 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidNetworkUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -16,19 +25,28 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
-import net.osmand.plus.openplacereviews.OPRConstants;
-import net.osmand.plus.openplacereviews.OprAuthHelper.OprAuthorizationListener;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.ui.EditFavoriteGroupDialogFragment;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.openplacereviews.OPRConstants;
+import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -38,11 +56,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
 
 public class IntentHelper {
 
@@ -59,35 +72,114 @@ public class IntentHelper {
 	}
 
 	public boolean parseLaunchIntents() {
-		boolean applied = parseLocationIntent();
-		if (!applied) {
-			applied = parseTileSourceIntent();
-		}
-		if (!applied) {
-			applied = parseOpenGpxIntent();
-		}
-		if (!applied) {
-			applied = parseSendIntent();
-		}
-		if (!applied) {
-			applied = parseOAuthIntent();
-		}
-		if (!applied) {
-			applied = parseOprOAuthIntent();
-		}
-		return applied;
+		return parseNavigationUrlIntent()
+				|| parseMoveMapToLocationUrlIntent()
+				|| parseOpenLocationMenuUrlIntent()
+				|| parseRedirectUrlIntent()
+				|| parseTileSourceUrlIntent()
+				|| parseOpenGpxUrlIntent()
+				|| parseSendIntent()
+				|| parseOAuthIntent()
+				|| parseOprOAuthIntent();
 	}
 
-	private boolean parseLocationIntent() {
+	private boolean parseNavigationUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null && intent.getData().isHierarchical()) {
+			Uri data = intent.getData();
+			boolean hasNavigationDestination = data.getQueryParameterNames().contains("end");
+			if (isOsmAndMapUrl(data) && hasNavigationDestination) {
+				String startLatLonParam = data.getQueryParameter("start");
+				String endLatLonParam = data.getQueryParameter("end");
+				String appModeKeyParam = data.getQueryParameter("mode");
+
+				if (Algorithms.isEmpty(endLatLonParam)) {
+					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
+					return true;
+				}
+
+				LatLon startLatLon = startLatLonParam == null ? null : parseLatLon(startLatLonParam);
+				if (startLatLonParam != null && startLatLon == null) {
+					LOG.error("Malformed OsmAnd navigation URL: start location is broken");
+				}
+
+				LatLon endLatLon = parseLatLon(endLatLonParam);
+				if (endLatLon == null) {
+					LOG.error("Malformed OsmAnd navigation URL: destination location is broken");
+					return true;
+				}
+
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKeyParam, null);
+				if (!Algorithms.isEmpty(appModeKeyParam) && appMode == null) {
+					LOG.debug("App mode with specified key not available, using default navigation app mode");
+				}
+
+				if (appMode != null) {
+					app.getRoutingHelper().setAppMode(appMode);
+				}
+
+				app.getTargetPointsHelper().navigateToPoint(endLatLon, true, -1);
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, startLatLon,
+						null, false, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	private LatLon parseLatLon(@NonNull String latLon) {
+		String[] coords = latLon.split(",");
+		if (coords.length != 2) {
+			return null;
+		}
+		try {
+			double lat = Double.parseDouble(coords[0]);
+			double lon = Double.parseDouble(coords[1]);
+			return new LatLon(lat, lon);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
+
+	private boolean parseMoveMapToLocationUrlIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net") &&
-					data.getPath() != null && data.getPath().startsWith("/go")) {
+			String uri = data.toString();
+			String pathPrefix = "/map#";
+			int pathStartIndex = uri.indexOf(pathPrefix);
+			if (isOsmAndMapUrl(data) && pathStartIndex != -1) {
+				String[] params = uri.substring(pathStartIndex + pathPrefix.length()).split("/");
+				if (params.length == 3) {
+					try {
+						int zoom = Integer.parseInt(params[0]);
+						double lat = Double.parseDouble(params[1]);
+						double lon = Double.parseDouble(params[2]);
+						settings.setMapLocationToShow(lat, lon, zoom);
+					} catch (NumberFormatException e) {
+						LOG.error("Invalid map URL params", e);
+					}
+				}
+				mapActivity.setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isOsmAndMapUrl(@NonNull Uri uri) {
+		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri) && isPathPrefix(uri, "/map");
+	}
+
+	private boolean parseOpenLocationMenuUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if (isOsmAndGoUrl(data)) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
-				String url = data.getQueryParameter("url");
 				if (lat != null && lon != null) {
 					try {
 						double lt = Double.parseDouble(lat);
@@ -101,7 +193,21 @@ public class IntentHelper {
 					} catch (NumberFormatException e) {
 						LOG.error("error", e);
 					}
-				} else if (url != null) {
+				}
+				mapActivity.setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean parseRedirectUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if (isOsmAndGoUrl(data)) {
+				String url = data.getQueryParameter("url");
+				if (url != null) {
 					url = DiscountHelper.parseUrl(app, url);
 					if (DiscountHelper.validateUrl(app, url)) {
 						DiscountHelper.openUrl(mapActivity, url);
@@ -114,13 +220,15 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseTileSourceIntent() {
+	private boolean isOsmAndGoUrl(@NonNull Uri uri) {
+		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri) && isPathPrefix(uri, "/go");
+	}
+
+	private boolean parseTileSourceUrlIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net") &&
-					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
+			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/add-tile-source")) {
 				Map<String, String> attrs = new HashMap<>();
 				for (String name : data.getQueryParameterNames()) {
 					String value = data.getQueryParameter(name);
@@ -145,13 +253,11 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseOpenGpxIntent() {
+	private boolean parseOpenGpxUrlIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))
-					&& data.getHost() != null && data.getHost().contains("osmand.net")
-					&& data.getPath() != null && data.getPath().startsWith("/open-gpx")) {
+			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/open-gpx")) {
 				String url = data.getQueryParameter("url");
 				if (Algorithms.isEmpty(url)) {
 					return false;
@@ -212,6 +318,9 @@ public class IntentHelper {
 						if (apiHelper.needFinish()) {
 							mapActivity.finish();
 						}
+					} else if (LauncherShortcutsHelper.INTENT_SCHEME.equals(scheme)) {
+						app.getLauncherShortcutsHelper().parseIntent(mapActivity, intent);
+						clearIntent(intent);
 					}
 				}
 			}
@@ -243,6 +352,16 @@ public class IntentHelper {
 				}
 				mapActivity.setIntent(null);
 			}
+			if (intent.hasExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY)) {
+				String groupName = intent.getStringExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY);
+				FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, groupName));
+
+				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup(app) : null;
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				FavouriteGroupEditorFragment.showInstance(manager, pointsGroup, null, true);
+
+				mapActivity.setIntent(null);
+			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:
@@ -250,7 +369,7 @@ public class IntentHelper {
 						break;
 
 					case BaseSettingsFragment.SCREEN_CONFIG:
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+						ConfigureScreenFragment.showInstance(mapActivity);
 						break;
 				}
 				mapActivity.setIntent(null);
@@ -258,9 +377,31 @@ public class IntentHelper {
 			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
 				String path = intent.getStringExtra(TRACK_FILE_NAME);
 				String name = intent.getStringExtra(RETURN_SCREEN_NAME);
+				String tabName = intent.getStringExtra(OPEN_TAB_NAME);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null, tabName);
 				mapActivity.setIntent(null);
+			}
+			if (intent.getExtras() != null) {
+				Bundle extras = intent.getExtras();
+				if (extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
+					String featureValue = extras.getString(ChoosePlanFragment.CHOOSE_PLAN_FEATURE);
+					if (!Algorithms.isEmpty(featureValue)) {
+						try {
+							OsmAndFeature feature = OsmAndFeature.valueOf(featureValue);
+							if (feature == OsmAndFeature.ANDROID_AUTO) {
+								if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+									ChoosePlanFragment.showInstance(mapActivity, feature);
+								}
+							} else {
+								ChoosePlanFragment.showInstance(mapActivity, feature);
+							}
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+				clearIntent(intent);
 			}
 		}
 	}
@@ -288,7 +429,7 @@ public class IntentHelper {
 		}
 	}
 
-	private void clearIntent(Intent intent) {
+	private void clearIntent(@NonNull Intent intent) {
 		intent.setAction(null);
 		intent.setData(null);
 	}
@@ -379,5 +520,20 @@ public class IntentHelper {
 			);
 		}
 		return false;
+	}
+
+	private boolean isHttpOrHttpsScheme(@NonNull Uri uri) {
+		String scheme = uri.getScheme();
+		return "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme);
+	}
+
+	private boolean isOsmAndHost(@NonNull Uri uri) {
+		String host = uri.getHost();
+		return host != null && host.endsWith("osmand.net");
+	}
+
+	private boolean isPathPrefix(@NonNull Uri uri, @NonNull String pathPrefix) {
+		String path = uri.getPath();
+		return path != null && path.startsWith(pathPrefix);
 	}
 }

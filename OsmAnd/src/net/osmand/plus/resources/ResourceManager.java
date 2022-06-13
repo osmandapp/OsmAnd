@@ -1,21 +1,24 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
+import android.os.AsyncTask;
 import android.os.HandlerThread;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import net.osmand.AndroidUtils;
-import net.osmand.Collator;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -36,21 +39,24 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.OnMapLoadedListener;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.util.Algorithms;
@@ -69,18 +75,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -401,15 +407,29 @@ public class ResourceManager {
 		}
 	}
 
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
+	public synchronized boolean isTileDownloaded(String file, ITileSource map, int x, int y, int zoom) {
 		TilesCache<?> cache = getTilesCache(map);
-		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
+		return cache != null && cache.isTileDownloaded(file, map, x, y, zoom);
+	}
+
+	public synchronized boolean isTileSavedOnFileSystem(@NonNull String tileId, @Nullable ITileSource map,
+	                                                    int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		return cache != null && cache.isTileSavedOnFileSystem(tileId, map, x, y, zoom);
+	}
+
+	public synchronized int getTileBytesSizeOnFileSystem(@NonNull String tileId, @NonNull ITileSource map,
+	                                                     int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		return cache != null
+				? cache.getTileBytesSizeOnFileSystem(tileId, map, x, y, zoom)
+				: 0;
 	}
 
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom, long requestTimestamp) {
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
-			cache.getTileForMap(file, map, x, y, zoom, true, false, true, true, requestTimestamp);
+			cache.getTileForMap(file, map, x, y, zoom, true, false, true, requestTimestamp);
 		}
 	}
 
@@ -429,27 +449,30 @@ public class ResourceManager {
 		return cache != null && cache.getRequestedTile(req) != null;
 	}
 
-	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
-									 boolean loadFromInternetIfNeeded, long requestTimestamp) {
+	public void getTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
+	                              boolean loadFromInternetIfNeeded, long requestTimestamp) {
 		TilesCache<?> cache = getTilesCache(map);
-		return cache != null
-				&& cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp) != null;
+		if (cache != null) {
+			cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp);
+		}
 	}
 
 	public void clearCacheAndTiles(@NonNull ITileSource map) {
 		map.deleteTiles(new File(dirWithTiles, map.getName()).getAbsolutePath());
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
-			cache.clearTiles();
+			cache.clearAllTiles();
 		}
 	}
 
 	////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 
-	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings) {
+	private final ExecutorService reloadIndexesSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
+	public List<String> reloadIndexesOnStart(@NonNull AppInitializer progress, List<String> warnings) {
 		close();
 		// check we have some assets to copy to sdcard
-		warnings.addAll(checkAssets(progress, false));
+		warnings.addAll(checkAssets(progress, false, true));
 		progress.notifyEvent(InitEvents.ASSETS_COPIED);
 		reloadIndexes(progress, warnings);
 		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
@@ -457,24 +480,74 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	public List<String> reloadIndexes(IProgress progress, List<String> warnings) {
-		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
-		// do it lazy
-		// indexingImageTiles(progress);
-		warnings.addAll(indexingMaps(progress));
-		warnings.addAll(indexVoiceFiles(progress));
-		warnings.addAll(indexFontFiles(progress));
-		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
-		warnings.addAll(indexAdditionalMaps(progress));
+	public void reloadIndexesAsync(@Nullable IProgress progress, @Nullable ReloadIndexesListener listener) {
+		ReloadIndexesTask reloadIndexesTask = new ReloadIndexesTask(progress, listener);
+		reloadIndexesTask.executeOnExecutor(reloadIndexesSingleThreadExecutor);
+	}
+
+	public List<String> reloadIndexes(@Nullable IProgress progress, @NonNull List<String> warnings) {
+		ReloadIndexesTask task = new ReloadIndexesTask(progress, null);
+		try {
+			warnings.addAll(task.executeOnExecutor(reloadIndexesSingleThreadExecutor).get());
+		} catch (ExecutionException | InterruptedException e) {
+			log.error(e);
+		}
 		return warnings;
 	}
 
-	public List<String> indexAdditionalMaps(IProgress progress) {
+	private class ReloadIndexesTask extends AsyncTask<Void, String, List<String>> {
+
+		private final IProgress progress;
+		private final ReloadIndexesListener listener;
+
+		public ReloadIndexesTask(@Nullable IProgress progress, @Nullable ReloadIndexesListener listener) {
+			this.progress = progress;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (listener != null) {
+				listener.reloadIndexesStarted();
+			}
+		}
+
+		@Override
+		protected List<String> doInBackground(Void... params) {
+			geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
+			// do it lazy
+			// indexingImageTiles(progress);
+			List<String> warnings = new ArrayList<>();
+			warnings.addAll(indexingMaps(progress));
+			warnings.addAll(indexVoiceFiles(progress));
+			warnings.addAll(indexFontFiles(progress));
+			warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
+			warnings.addAll(indexAdditionalMaps(progress));
+
+			return warnings;
+		}
+
+		@Override
+		protected void onPostExecute(List<String> warnings) {
+			if (listener != null) {
+				listener.reloadIndexesFinished(warnings);
+			}
+		}
+	}
+
+	public interface ReloadIndexesListener {
+
+		void reloadIndexesStarted();
+
+		void reloadIndexesFinished(List<String> reloadIndexesWarnings);
+	}
+
+	public List<String> indexAdditionalMaps(@Nullable IProgress progress) {
 		return context.getAppCustomization().onIndexingFiles(progress, indexFileNames);
 	}
 
 
-	public List<String> indexVoiceFiles(IProgress progress) {
+	public List<String> indexVoiceFiles(@Nullable IProgress progress) {
 		File file = context.getAppPath(VOICE_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<>();
@@ -486,10 +559,6 @@ public class ResourceManager {
 					if (f.isDirectory()) {
 						String lang = f.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
 						File conf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
-						if (!conf.exists()) {
-							conf = new File(f, "_config.p");
-							conf = conf.exists() ? conf : new File(f, "_ttsconfig.p");
-						}
 						if (conf.exists()) {
 							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified()));
 							indexFiles.put(f.getName(), f);
@@ -501,7 +570,7 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	public List<String> indexFontFiles(IProgress progress) {
+	public List<String> indexFontFiles(@Nullable IProgress progress) {
 		File file = context.getAppPath(IndexConstants.FONT_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<>();
@@ -540,53 +609,114 @@ public class ResourceManager {
 					}
 				}
 			}
-		} catch (XmlPullParserException e) {
-			log.error("Error while loading tts files from assets", e);
-		} catch (IOException e) {
+		} catch (XmlPullParserException | IOException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
 
-	public List<String> checkAssets(IProgress progress, boolean forceUpdate) {
-		String fv = Version.getFullVersion(context);
-		if (context.getAppInitializer().isAppVersionChanged()) {
-			copyMissingJSAssets();
+	private final ExecutorService checkAssetsSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
+	public void checkAssetsAsync(@Nullable IProgress progress, boolean forceUpdate, boolean forceCheck,
+	                             @Nullable CheckAssetsListener listener) {
+		CheckAssetsTask task = new CheckAssetsTask(progress, forceUpdate, forceCheck, listener);
+		task.executeOnExecutor(checkAssetsSingleThreadExecutor);
+	}
+
+	public List<String> checkAssets(@Nullable IProgress progress, boolean forceUpdate, boolean forceCheck) {
+		List<String> warnings = new ArrayList<>();
+		CheckAssetsTask task = new CheckAssetsTask(progress, forceUpdate, forceCheck, null);
+		try {
+			warnings.addAll(task.executeOnExecutor(checkAssetsSingleThreadExecutor).get());
+		} catch (ExecutionException | InterruptedException e) {
+			log.error(e);
 		}
-		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get()) || forceUpdate) {
-			File applicationDataDir = context.getAppPath(null);
-			applicationDataDir.mkdirs();
-			if (applicationDataDir.canWrite()) {
-				try {
-					progress.startTask(context.getString(R.string.installing_new_resources), -1);
-					AssetManager assetManager = context.getAssets();
-					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().isEmpty();
-					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall || forceUpdate);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
-					copyRegionsBoundaries();
-					// see Issue #3381
-					//copyPoiTypes();
-					for (String internalStyle : context.getRendererRegistry().getInternalRenderers().keySet()) {
-						File fl = context.getRendererRegistry().getFileForInternalStyle(internalStyle);
-						if (fl.exists()) {
-							context.getRendererRegistry().copyFileForInternalStyle(internalStyle);
-						}
-					}
-				} catch (SQLiteException e) {
-					log.error(e.getMessage(), e);
-				} catch (IOException e) {
-					log.error(e.getMessage(), e);
-				} catch (XmlPullParserException e) {
-					log.error(e.getMessage(), e);
-				}
+		return warnings;
+	}
+
+	private class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
+
+		private final IProgress progress;
+		private final CheckAssetsListener listener;
+
+		private final boolean forceUpdate;
+		private final boolean forceCheck;
+
+		public CheckAssetsTask(@Nullable IProgress progress, boolean forceUpdate, boolean forceCheck,
+		                       @Nullable CheckAssetsListener listener) {
+			this.progress = progress;
+			this.forceUpdate = forceUpdate;
+			this.forceCheck = forceCheck;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (listener != null) {
+				listener.checkAssetsStarted();
 			}
 		}
-		return Collections.emptyList();
+
+		@Override
+		protected List<String> doInBackground(Void... params) {
+			return checkAssets(progress, forceUpdate, forceCheck);
+		}
+
+		private List<String> checkAssets(IProgress progress, boolean forceUpdate, boolean forceCheck) {
+			if (context.getAppInitializer().isAppVersionChanged()) {
+				copyMissingJSAssets();
+			}
+			String fv = Version.getFullVersion(context);
+			OsmandSettings settings = context.getSettings();
+			boolean versionChanged = !fv.equalsIgnoreCase(settings.PREVIOUS_INSTALLED_VERSION.get());
+			boolean overwrite = versionChanged || forceUpdate;
+			if (overwrite || forceCheck) {
+				File appDataDir = context.getAppPath(null);
+				appDataDir.mkdirs();
+				if (appDataDir.canWrite()) {
+					try {
+						progress.startTask(context.getString(R.string.installing_new_resources), -1);
+						AssetManager assetManager = context.getAssets();
+						boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
+						unpackBundledAssets(assetManager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck);
+						settings.PREVIOUS_INSTALLED_VERSION.set(fv);
+						copyRegionsBoundaries(overwrite);
+						// see Issue #3381
+						//copyPoiTypes();
+						RendererRegistry registry = context.getRendererRegistry();
+						for (String internalStyle : registry.getInternalRenderers().keySet()) {
+							File file = registry.getFileForInternalStyle(internalStyle);
+							if (file.exists() && overwrite) {
+								registry.copyFileForInternalStyle(internalStyle);
+							}
+						}
+					} catch (SQLiteException | IOException | XmlPullParserException e) {
+						log.error(e.getMessage(), e);
+					}
+				}
+			}
+			return Collections.emptyList();
+		}
+
+		@Override
+		protected void onPostExecute(List<String> warnings) {
+			if (listener != null) {
+				listener.checkAssetsFinished(warnings);
+			}
+		}
 	}
 
-	private void copyRegionsBoundaries() {
+	public interface CheckAssetsListener {
+
+		void checkAssetsStarted();
+
+		void checkAssetsFinished(List<String> warnings);
+	}
+
+	private void copyRegionsBoundaries(boolean overwrite) {
 		try {
 			File file = context.getAppPath("regions.ocbf");
-			if (file != null) {
+			boolean exists = file.exists();
+			if (!exists || overwrite) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), fout);
 				fout.close();
@@ -596,10 +726,11 @@ public class ResourceManager {
 		}
 	}
 
-	private void copyPoiTypes() {
+	private void copyPoiTypes(boolean overwrite) {
 		try {
 			File file = context.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml");
-			if (file != null) {
+			boolean exists = file.exists();
+			if (!exists || overwrite) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
 				fout.close();
@@ -614,10 +745,13 @@ public class ResourceManager {
 	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
 	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 
-	private void unpackBundledAssets(AssetManager assetManager, File appDataDir, IProgress progress, boolean isFirstInstall) throws IOException, XmlPullParserException {
+	private void unpackBundledAssets(@NonNull AssetManager assetManager, @NonNull File appDataDir,
+	                                 boolean firstInstall,
+	                                 boolean overwrite,
+	                                 boolean forceCheck) throws IOException, XmlPullParserException {
 		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
 		for (AssetEntry asset : assetEntries) {
-			final String[] modes = asset.combinedMode.split("\\|");
+			String[] modes = asset.combinedMode.split("\\|");
 			if (modes.length == 0) {
 				log.error("Mode '" + asset.combinedMode + "' is not valid");
 				continue;
@@ -625,29 +759,39 @@ public class ResourceManager {
 			String installMode = null;
 			String copyMode = null;
 			for (String mode : modes) {
-				if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
+				if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode)) {
 					installMode = mode;
-				else if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
+				} else if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
 						ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
-						ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
+						ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode)) {
 					copyMode = mode;
-				else
+				} else {
 					log.error("Mode '" + mode + "' is unknown");
+				}
 			}
 
-			final File destinationFile = new File(appDataDir, asset.destination);
+			File destinationFile = new File(appDataDir, asset.destination);
+			boolean exists = destinationFile.exists();
 
 			boolean unconditional = false;
-			if (installMode != null)
-				unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
-			if (copyMode == null)
+			if (installMode != null) {
+				unconditional = ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode)
+						&& (firstInstall || forceCheck && !exists);
+			}
+			if (copyMode == null) {
 				log.error("No copy mode was defined for " + asset.source);
-			unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			}
+			if (firstInstall || overwrite) {
+				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			} else if (forceCheck) {
+				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode) && !exists;
+			}
 
 			boolean shouldCopy = unconditional;
-			shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
-			shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
-
+			if (firstInstall || overwrite) {
+				shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists;
+				shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !exists;
+			}
 			if (shouldCopy) {
 				copyAssets(assetManager, asset.source, destinationFile);
 			}
@@ -694,11 +838,11 @@ public class ResourceManager {
 		}
 	}
 
-	public List<String> indexingMaps(IProgress progress) {
+	public List<String> indexingMaps(@Nullable IProgress progress) {
 		return indexingMaps(progress, Collections.emptyList());
 	}
 
-	public List<String> indexingMaps(final IProgress progress, List<File> filesToReindex) {
+	public List<String> indexingMaps(@Nullable IProgress progress, @NonNull List<File> filesToReindex) {
 		long val = System.currentTimeMillis();
 		ArrayList<File> files = new ArrayList<>();
 		File appPath = context.getAppPath(null);
@@ -764,7 +908,9 @@ public class ResourceManager {
 		java.text.DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
 			String fileName = f.getName();
-			progress.startTask(context.getString(R.string.indexing_map) + " " + fileName, -1);
+			if (progress != null) {
+				progress.startTask(context.getString(R.string.indexing_map) + " " + fileName, -1);
+			}
 			try {
 				BinaryMapIndexReader mapReader = null;
 				try {
@@ -943,7 +1089,11 @@ public class ResourceManager {
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		List<AmenityIndexRepository> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			if (!includeTravel && fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			if (!includeTravel) {
+				if (fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+					continue;
+				}
+			} else if (!context.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
 				continue;
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
@@ -985,17 +1135,18 @@ public class ResourceManager {
 	}
 
 	@NonNull
-	public List<PoiSubType> searchPoiSubTypesByPrefix(@NonNull String prefix) {
-		List<PoiSubType> poiSubTypes = new ArrayList<>();
+	public List<String> searchPoiSubTypesByPrefix(@NonNull String prefix) {
+		Set<String> poiSubTypes = new HashSet<>();
 		for (AmenityIndexRepository index : getAmenityRepositories()) {
 			if (index instanceof AmenityIndexRepositoryBinary) {
 				AmenityIndexRepositoryBinary repository = (AmenityIndexRepositoryBinary) index;
-				poiSubTypes.addAll(repository.searchPoiSubTypesByPrefix(prefix));
+				List<PoiSubType> subTypes = repository.searchPoiSubTypesByPrefix(prefix);
+				for (PoiSubType subType : subTypes) {
+					poiSubTypes.add(subType.name);
+				}
 			}
 		}
-		final Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(poiSubTypes, (o1, o2) -> collator.compare(o1.name, o2.name));
-		return poiSubTypes;
+		return new ArrayList<>(poiSubTypes);
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,
@@ -1171,9 +1322,13 @@ public class ResourceManager {
 		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
 	}
 
-	public void updateRendererMap(RotatedTileBox rotatedTileBox, OnMapLoadedListener mapLoadedListener) {
+	public void updateRendererMap(@NonNull RotatedTileBox tileBox) {
+		updateRendererMap(tileBox, null, false);
+	}
+
+	public void updateRendererMap(@NonNull RotatedTileBox tileBox, @Nullable OnMapLoadedListener listener, boolean forceLoadMap) {
 		renderer.interruptLoadingMap();
-		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox, mapLoadedListener));
+		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(tileBox, listener, forceLoadMap));
 	}
 
 	public void interruptRendering() {

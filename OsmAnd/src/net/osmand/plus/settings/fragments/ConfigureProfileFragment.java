@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,26 +21,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
+import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -50,7 +49,11 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
-import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -58,7 +61,8 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener,
+		ResetAppModePrefsListener, PluginStateListener {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
@@ -96,24 +100,18 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
 		toolbarTitle.setText(getSelectedAppMode().toHumanString());
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
-			toolbarTitle.setLetterSpacing(letterSpacing);
-		}
+		float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
+		toolbarTitle.setLetterSpacing(letterSpacing);
 
 		TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
 		toolbarSubtitle.setText(R.string.configure_profile);
 		toolbarSubtitle.setVisibility(View.VISIBLE);
 
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ApplicationMode selectedMode = getSelectedAppMode();
-				List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
-				boolean isChecked = availableAppModes.contains(selectedMode);
-				ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
-				updateToolbarSwitch();
-			}
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(view1 -> {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			boolean isChecked = ApplicationMode.values(app).contains(selectedMode);
+			ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+			updateToolbarSwitch();
 		});
 
 		View switchProfile = view.findViewById(R.id.profile_button);
@@ -133,7 +131,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (view == null) {
 			return;
 		}
-		boolean isChecked = ApplicationMode.values(getMyApplication()).contains(getSelectedAppMode());
+		boolean isChecked = ApplicationMode.values(app).contains(getSelectedAppMode());
 		int color = isChecked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
 		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
@@ -161,7 +159,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		if (appMode != null) {
 			ApplicationMode selectedAppMode = getSelectedAppMode();
 			app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode);
@@ -228,7 +226,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			app.getPoiFilters().loadSelectedPoiFilters();
-			mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
@@ -242,7 +239,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		return new RecyclerView.ItemDecoration() {
 			@Override
-			public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+			public void onDraw(@NonNull Canvas canvas, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
 				int dividerLeft = parent.getPaddingLeft();
 				int dividerRight = parent.getWidth() - parent.getPaddingRight();
 
@@ -264,7 +261,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 
 			@Override
-			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+			public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
 				if (shouldDrawDivider(view)) {
 					outRect.set(0, 0, 0, pluginDividerHeight);
 				}
@@ -283,6 +280,28 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+
+		if (PLUGIN_SETTINGS.equals(preference.getKey())) {
+			View noPluginsPart = holder.findViewById(R.id.no_plugins_part);
+			boolean hasPlugins = OsmandPlugin.getEnabledSettingsScreenPlugins().size() > 0;
+			AndroidUiHelper.updateVisibility(noPluginsPart, !hasPlugins);
+
+			View openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
+			if (!hasPlugins) {
+				UiUtilities.setupDialogButton(isNightMode(), openPluginsButton, DialogButtonType.SECONDARY, R.string.plugins_screen);
+				openPluginsButton.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						PluginsFragment.showInstance(activity.getSupportFragmentManager(), ConfigureProfileFragment.this);
+					}
+				});
+			}
+		}
+	}
+
+	@Override
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
@@ -293,10 +312,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		setupProfileAppearancePref();
 		setupUiCustomizationPref();
 
-		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
+		PreferenceCategory pluginSettings = findPreference(PLUGIN_SETTINGS);
 		setupOsmandPluginsPref(pluginSettings);
 
-		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
+		PreferenceCategory settingsActions = findPreference(SETTINGS_ACTIONS);
 		settingsActions.setIconSpaceReserved(false);
 
 		setupCopyProfileSettingsPref();
@@ -326,17 +345,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void setupConfigureScreenPref() {
-		Context ctx = getContext();
-		if (ctx == null) {
-			return;
-		}
 		Preference configureMap = findPreference(CONFIGURE_SCREEN);
 		configureMap.setIcon(getContentIcon(R.drawable.ic_configure_screen_dark));
-
-		Intent intent = new Intent(ctx, MapActivity.class);
-		intent.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
-		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
-		configureMap.setIntent(intent);
 	}
 
 	private void setupProfileAppearancePref() {
@@ -389,21 +399,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (ctx == null) {
 			return;
 		}
-		List<OsmandPlugin> plugins = OsmandPlugin.getAvailablePlugins();
-		for (OsmandPlugin plugin : plugins) {
-			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsScreenType() == null) {
-				continue;
-			}
-			Preference preference = new Preference(ctx);
-			preference.setPersistent(false);
-			preference.setKey(plugin.getId());
-			preference.setTitle(plugin.getName());
-			preference.setSummary(plugin.getPrefsDescription());
-			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
-			preference.setLayoutResource(R.layout.preference_with_descr);
-			preference.setFragment(plugin.getSettingsScreenType().fragmentName);
+		List<OsmandPlugin> plugins = OsmandPlugin.getEnabledSettingsScreenPlugins();
+		if (plugins.size() != 0) {
+			for (OsmandPlugin plugin : plugins) {
+				Preference preference = new Preference(ctx);
+				preference.setPersistent(false);
+				preference.setKey(plugin.getId());
+				preference.setTitle(plugin.getName());
+				preference.setSummary(plugin.getPrefsDescription());
+				preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
+				preference.setLayoutResource(R.layout.preference_with_descr);
+				preference.setFragment(plugin.getSettingsScreenType().fragmentName);
 
-			preferenceCategory.addPreference(preference);
+				preferenceCategory.addPreference(preference);
+			}
 		}
 	}
 
@@ -420,26 +429,27 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
+		MapActivity mapActivity = getMapActivity();
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
+		if (mapActivity != null && fragmentManager != null) {
 			String prefId = preference.getKey();
 			ApplicationMode selectedMode = getSelectedAppMode();
 
-			if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
-				if (!ApplicationMode.values(app).contains(selectedMode)) {
-					ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-				}
-				settings.setApplicationMode(selectedMode);
+			if (CONFIGURE_MAP.equals(prefId)) {
+				sepAppModeToSelected();
 				fragmentManager.beginTransaction()
 						.remove(this)
 						.addToBackStack(TAG)
 						.commitAllowingStateLoss();
+			} else if (CONFIGURE_SCREEN.equals(prefId)) {
+				sepAppModeToSelected();
+				ConfigureScreenFragment.showInstance(mapActivity);
 			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
 			} else if (RESET_TO_DEFAULT.equals(prefId)) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
-				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
+				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {
 				onDeleteProfileClick();
 			} else if (UI_CUSTOMIZATION.equals(prefId)) {
@@ -447,6 +457,21 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	private void sepAppModeToSelected() {
+		ApplicationMode selectedMode = getSelectedAppMode();
+		if (!ApplicationMode.values(app).contains(selectedMode)) {
+			ApplicationMode.changeProfileAvailability(selectedMode, true, app);
+		}
+		settings.setApplicationMode(selectedMode);
+	}
+
+	@Override
+	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
+		if (plugin.getSettingsScreenType() != null) {
+			updateAllSettings();
+		}
 	}
 
 	private void onDeleteProfileClick() {

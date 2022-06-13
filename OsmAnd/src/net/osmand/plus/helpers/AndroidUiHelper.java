@@ -3,15 +3,23 @@ package net.osmand.plus.helpers;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.view.View.OnAttachStateChangeListener;
+import android.view.WindowInsetsController;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import net.osmand.PlatformUtil;
+
+import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 /**
  * Created by dummy on 28.01.15.
@@ -81,7 +89,7 @@ public class AndroidUiHelper {
         return orientation;
     }
     
-    public static boolean updateVisibility(View view, boolean visible) {
+    public static boolean updateVisibility(@Nullable View view, boolean visible) {
 		if (view != null && visible != (view.getVisibility() == View.VISIBLE)) {
 			if (visible) {
 				view.setVisibility(View.VISIBLE);
@@ -110,7 +118,7 @@ public class AndroidUiHelper {
 			}
 		}
 	}
-    
+
 	public static boolean isXLargeDevice(@NonNull Activity ctx) {
 		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
 		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
@@ -120,5 +128,51 @@ public class AndroidUiHelper {
 		int orientation = AndroidUiHelper.getScreenOrientation(ctx);
 		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+	}
+
+	public static void setStatusBarContentColor(@Nullable View view, boolean isNightMode) {
+		if (view != null) {
+			setStatusBarContentColor(view, view.getSystemUiVisibility(), !isNightMode);
+		}
+	}
+
+	public static void setStatusBarContentColor(@NonNull View view, int flags, boolean addLightFlag) {
+		if (Build.VERSION.SDK_INT >= 30) {
+			WindowInsetsController controller = view.getWindowInsetsController();
+			if (controller != null) {
+				int flag = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
+				if (addLightFlag) {
+					controller.setSystemBarsAppearance(flag, flag);
+					makeAbilityToResetLightStatusBar(view);
+				} else {
+					controller.setSystemBarsAppearance(0, flag);
+				}
+			}
+		} else {
+		    if (addLightFlag) {
+			    flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+		    } else {
+			    flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+		    }
+		    view.setSystemUiVisibility(flags);
+	    }
+	}
+
+	@RequiresApi(api = VERSION_CODES.R)
+	private static void makeAbilityToResetLightStatusBar(@NonNull View view) {
+		view.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
+			@Override
+			public void onViewAttachedToWindow(View v) { }
+
+			@Override
+			public void onViewDetachedFromWindow(View v) {
+				// Automatically reset APPEARANCE_LIGHT_STATUS_BARS flag
+				// when user close the screen on which this flag was applied.
+				WindowInsetsController controller = view.getWindowInsetsController();
+				if (controller != null) {
+					controller.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS);
+				}
+			}
+		});
 	}
 }

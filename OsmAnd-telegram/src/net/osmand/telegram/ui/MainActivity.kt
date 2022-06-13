@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -31,7 +33,6 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
 import java.util.*
-import kotlin.collections.ArrayList
 
 const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
 
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 
 		telegramAuthorizationRequestHandler = telegramHelper.setTelegramAuthorizationRequestHandler(object : TelegramAuthorizationRequestListener {
-			override fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType) {
+			override fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthParamType) {
 				runOnUi {
 					showLoginDialog(parameterType)
 				}
@@ -146,6 +147,13 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			override fun onTelegramAuthorizationRequestError(code: Int, message: String) {
 				runOnUi {
 					Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
+				}
+			}
+
+			override fun onTelegramUnsupportedAuthorizationState(authorizationState: String) {
+				runOnUi {
+					val message = "Unsupported authorization state: $authorizationState"
+					Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
 				}
 			}
 		})
@@ -297,7 +305,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onTelegramError(code: Int, message: String) {
 		runOnUi {
-			Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
+			Log.e(PlatformUtil.TAG, "Error: $code - $message")
+			val error = getString(R.string.shared_string_error)
+			val errorMessage = getString(R.string.ltr_or_rtl_combine_via_dash, code.toString(), message)
+			val text = 	getString(R.string.ltr_or_rtl_combine_via_colon, error, errorMessage)
+			Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
 			listeners.forEach { it.get()?.onTelegramError(code, message) }
 		}
 	}
@@ -437,8 +449,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	private fun addGrayPhoto(userId: Int, originalPhotoPath: String) {
-		if (userId != 0 && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
+	private fun addGrayPhoto(userId: Long, originalPhotoPath: String) {
+		if (userId != 0L && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
 			app.uiUtils.convertAndSaveGrayPhoto(
 				originalPhotoPath,
 				"${app.filesDir.absolutePath}/$GRAYSCALE_PHOTOS_DIR$userId$GRAYSCALE_PHOTOS_EXT"
@@ -454,20 +466,24 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	private fun showLoginDialog(telegramAuthenticationParameterType: TelegramAuthenticationParameterType) {
-		when (telegramAuthenticationParameterType) {
-			TelegramAuthenticationParameterType.PHONE_NUMBER -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PHONE_NUMBER)
-			TelegramAuthenticationParameterType.CODE -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_CODE)
-			TelegramAuthenticationParameterType.PASSWORD -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PASSWORD)
+	private fun showLoginDialog(telegramAuthParamType: TelegramAuthParamType) {
+		when (telegramAuthParamType) {
+			TelegramAuthParamType.PHONE_NUMBER -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PHONE_NUMBER)
+			TelegramAuthParamType.CODE -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_CODE)
+			TelegramAuthParamType.PASSWORD -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PASSWORD)
 		}
 	}
 
-	fun applyAuthParam(loginDialogFragment: LoginDialogFragment?, loginDialogType: LoginDialogType, text: String) {
+	fun applyAuthParam(loginDialogFragment: LoginDialogFragment?, type: LoginDialogType, text: String) {
+		if (TextUtils.isEmpty(text)) {
+			Toast.makeText(this@MainActivity, "Authorization parameter is empty.", Toast.LENGTH_LONG).show()
+			return
+		}
 		loginDialogFragment?.showProgress()
-		when (loginDialogType) {
-			LoginDialogType.ENTER_PHONE_NUMBER -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.PHONE_NUMBER, text)
-			LoginDialogType.ENTER_CODE -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.CODE, text)
-			LoginDialogType.ENTER_PASSWORD -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.PASSWORD, text)
+		when (type) {
+			LoginDialogType.ENTER_PHONE_NUMBER -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.PHONE_NUMBER, text)
+			LoginDialogType.ENTER_CODE -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.CODE, text)
+			LoginDialogType.ENTER_PASSWORD -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.PASSWORD, text)
 		}
 	}
 

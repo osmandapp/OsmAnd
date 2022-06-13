@@ -1,6 +1,7 @@
 package net.osmand.plus.search;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,31 +11,29 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import net.osmand.GPXUtilities;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.IndexConstants;
-import net.osmand.data.Amenity;
-import net.osmand.data.City;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.Street;
-import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -105,6 +104,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.GPX_TRACK) {
 
 						showResult(sr);
+					} else if (sr.objectType == ObjectType.INDEX_ITEM) {
+						processIndexItemClick((IndexItem) sr.relatedObject);
 					} else {
 						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
 							showResult = true;
@@ -175,107 +176,21 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
 		} else if (searchResult.location != null) {
-			OsmandApplication app = getMyApplication();
-			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
-			boolean transliterate = searchResult.requiredSearchPhrase.getSettings().isTransliterate();
-			PointDescription pointDescription = null;
-			Object object = searchResult.object;
-			switch (searchResult.objectType) {
-				case POI:
-					Amenity a = (Amenity) object;
-					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-					pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(app, a));
-					break;
-				case RECENT_OBJ:
-					HistoryEntry entry = (HistoryEntry) object;
-					pointDescription = entry.getName();
-					if (pointDescription.isPoi()) {
-						Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
-						if (amenity != null) {
-							object = amenity;
-							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-									OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-							pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(app, amenity));
-						}
-					} else if (pointDescription.isFavorite()) {
-						LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
-						List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
-						for (FavouritePoint f : favs) {
-							if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
-									&& (pointDescription.getName().equals(f.getName()) ||
-									pointDescription.getName().equals(f.getDisplayName(app)))) {
-								object = f;
-								pointDescription = f.getPointDescription(app);
-								break;
-							}
-						}
-					}
-					break;
-				case FAVORITE:
-					FavouritePoint fav = (FavouritePoint) object;
-					pointDescription = fav.getPointDescription(app);
-					break;
-				case VILLAGE:
-				case CITY:
-					String cityName = searchResult.localeName;
-					String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameCity, cityName);
-					pointDescription.setIconName("ic_action_building_number");
-					break;
-				case STREET:
-					String streetName = searchResult.localeName;
-					String typeNameStreet = QuickSearchListItem.getTypeName(app, searchResult);
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameStreet, streetName);
-					pointDescription.setIconName("ic_action_street_name");
-					break;
-				case HOUSE:
-					String typeNameHouse = null;
-					String name = searchResult.localeName;
-					if (searchResult.relatedObject instanceof City) {
-						name = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + name;
-					} else if (searchResult.relatedObject instanceof Street) {
-						String s = ((Street) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-						typeNameHouse = ((Street) searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-						name = s + " " + name;
-					} else if (searchResult.localeRelatedObjectName != null) {
-						name = searchResult.localeRelatedObjectName + " " + name;
-					}
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameHouse, name);
-					pointDescription.setIconName("ic_action_building");
-					break;
-				case LOCATION:
-					pointDescription = new PointDescription(
-							searchResult.location.getLatitude(), searchResult.location.getLongitude());
-					pointDescription.setIconName("ic_action_world_globe");
-					break;
-				case STREET_INTERSECTION:
-					String typeNameIntersection = QuickSearchListItem.getTypeName(app, searchResult);
-					if (Algorithms.isEmpty(typeNameIntersection)) {
-						typeNameIntersection = null;
-					}
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
-							typeNameIntersection, QuickSearchListItem.getName(app, searchResult));
-					pointDescription.setIconName("ic_action_intersection");
-					break;
-				case WPT:
-					GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
-					pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
-					break;
-			}
+			Pair<PointDescription, Object> pointDescriptionObject =
+					QuickSearchListItem.getPointDescriptionObject(getMyApplication(), searchResult);
 
 			dialogFragment.hideToolbar();
 			dialogFragment.hide();
 
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					searchResult.preferredZoom, pointDescription, object);
+					searchResult.preferredZoom, pointDescriptionObject.first, pointDescriptionObject.second);
 		}
 	}
 
 	public static void showOnMap(MapActivity mapActivity, QuickSearchDialogFragment dialogFragment,
 								 double latitude, double longitude, int zoom,
-								 PointDescription pointDescription, Object object) {
+								 @Nullable PointDescription pointDescription, Object object) {
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			QuickSearchType searchType = dialogFragment.getSearchType();
@@ -307,15 +222,28 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
 		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 		String path = file.getAbsolutePath();
-		TrackMenuFragment.showInstance(mapActivity, path, false, null, QuickSearchDialogFragment.TAG);
+		TrackMenuFragment.showInstance(mapActivity, path, false, null, QuickSearchDialogFragment.TAG, null);
 		dialogFragment.dismiss();
+	}
+
+	private void processIndexItemClick(@NonNull IndexItem indexItem) {
+		OsmandApplication app = getMyApplication();
+		FragmentActivity activity = getMapActivity();
+		DownloadIndexesThread thread = app.getDownloadThread();
+
+		DownloadValidationManager manager = new DownloadValidationManager(app);
+		if (thread.isDownloading(indexItem)) {
+			manager.makeSureUserCancelDownload(activity, indexItem);
+		} else {
+			manager.startDownload(activity, indexItem);
+		}
 	}
 
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
 
-	public void updateLocation(LatLon latLon, Float heading) {
+	public void updateLocation(Float heading) {
 		if (listAdapter != null && !touching && !scrolling) {
 			dialogFragment.getAccessibilityAssistant().lockEvents();
 			listAdapter.notifyDataSetChanged();
@@ -337,12 +265,18 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append) {
+		updateListAdapter(listItems, append, true);
+	}
+
+	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
 		if (listAdapter != null) {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
 			if (list.size() > 0) {
 				showResult = false;
-				list.add(0, new QuickSearchTopShadowListItem(getMyApplication()));
-				list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
+				if (addShadows) {
+					list.add(0, new QuickSearchTopShadowListItem(getMyApplication()));
+					list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
+				}
 			}
 			listAdapter.setListItems(list);
 			if (!append) {

@@ -12,17 +12,19 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectFavouriteGroupBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet;
+import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -52,9 +54,8 @@ public class FavoriteAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
-		final LatLon latLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		final LatLon latLon = getMapLocation(mapActivity);
 		final String title = getParams().get(KEY_NAME);
-
 		if (title == null || title.isEmpty()) {
 			progressDialog = createProgressDialog(mapActivity, new DialogOnClickListener() {
 				@Override
@@ -126,9 +127,7 @@ public class FavoriteAction extends QuickAction {
 
 	@Override
 	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
-
-		FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
-
+		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
 		final View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
 
@@ -140,7 +139,6 @@ public class FavoriteAction extends QuickAction {
 		EditText name = (EditText) root.findViewById(R.id.name_edit);
 
 		if (!getParams().isEmpty()) {
-
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 			categoryImage.setColorFilter(Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)));
 			name.setText(getParams().get(KEY_NAME));
@@ -151,10 +149,8 @@ public class FavoriteAction extends QuickAction {
 				categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
 				categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
 			}
-
 		} else if (helper.getFavoriteGroups().size() > 0) {
-
-			FavouritesDbHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
+			FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
 			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
 			categoryEdit.setText(group.getDisplayName(mapActivity));
@@ -162,9 +158,7 @@ public class FavoriteAction extends QuickAction {
 
 			getParams().put(KEY_CATEGORY_NAME, group.getName());
 			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.getColor()));
-
 		} else {
-
 			categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
 			categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
 
@@ -172,68 +166,27 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, "0");
 		}
 
-		categoryEdit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View view) {
-
-				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
-
-				dialogFragment.show(
-						mapActivity.getSupportFragmentManager(),
-						SelectCategoryDialogFragment.TAG);
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+		categoryEdit.setOnClickListener(view -> {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			CategorySelectionListener listener = (pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color);
+			SelectFavouriteGroupBottomSheet.showInstance(manager, "", listener);
 		});
 
-		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
-
+		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-
-			dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-				@Override
-				public void onCategorySelected(String category, int color) {
-
-					fillGroupParams(root, category, color);
-				}
-			});
-
-		} else {
-
-			EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
-					mapActivity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
-
-			if (dialog != null) {
-
-				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
-					@Override
-					public void onCategorySelected(String category, int color) {
-
-						fillGroupParams(root, category, color);
-					}
-				});
-			}
+			dialogFragment.setListener((pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color));
 		}
 	}
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-
 		getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-
 		return true;
 	}
 
 	private void fillGroupParams(View root, String name, int color) {
-
 		if (color == 0)
 			color = root.getContext().getResources().getColor(R.color.color_favorite);
 

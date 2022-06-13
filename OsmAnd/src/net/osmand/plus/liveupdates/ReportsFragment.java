@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -25,12 +24,12 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -51,7 +50,6 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
-	public static final String OSM_LIVE_URL = "https://osmand.net/osm_live";
 	public static final String EDITS_FRAGMENT = "NumberOfEditsFragment";
 	public static final String RECIPIENTS_FRAGMENT = "RecipientsFragment";
 
@@ -92,54 +90,41 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
 		monthReportsSpinner = (Spinner) view.findViewById(R.id.monthReportsSpinner);
 		final View monthButton = view.findViewById(R.id.monthButton);
-		monthReportsSpinner.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				event.offsetLocation(AndroidUtils.dpToPx(getActivity(), 48f), 0);
-				monthButton.onTouchEvent(event);
-				return true;
-			}
+		monthReportsSpinner.setOnTouchListener((v, event) -> {
+			event.offsetLocation(AndroidUtils.dpToPx(getActivity(), 48f), 0);
+			monthButton.onTouchEvent(event);
+			return true;
 		});
 		monthsForReportsAdapter = new MonthsForReportsAdapter(getActivity());
 		monthReportsSpinner.setAdapter(monthsForReportsAdapter);
 
-		monthButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				monthReportsSpinner.performClick();
-			}
-		});
+		monthButton.setOnClickListener(v -> monthReportsSpinner.performClick());
 
+		String osmLiveUrl = getString(R.string.url_osm_live_info);
 		view.findViewById(R.id.show_all).setOnClickListener(v -> {
 			Activity activity = getActivity();
 			if (activity != null) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(OSM_LIVE_URL));
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(osmLiveUrl));
 				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		});
-		((TextView) view.findViewById(R.id.osm_live_url_label)).setText(OSM_LIVE_URL);
+		((TextView) view.findViewById(R.id.osm_live_url_label)).setText(osmLiveUrl);
 
 		View regionReportsButton = view.findViewById(R.id.reportsButton);
-		regionReportsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				countrySelectionFragment.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
-			}
+		regionReportsButton.setOnClickListener(v -> {
+			countrySelectionFragment.show(getChildFragmentManager(), "CountriesSearchSelectionFragment");
 		});
-		OnClickListener listener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				int monthItemPosition = monthReportsSpinner.getSelectedItemPosition();
-				String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
-				String countryUrlString = selectedCountryItem.getDownloadName();
-				boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
-				if (countryUrlString.length() > 0 || isRecipientsReport) {
-					Bundle bl = new Bundle();
-					bl.putString(UsersReportFragment.URL_REQUEST,
-							String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
-					userReportFragment.setArguments(bl);
-					userReportFragment.show(getChildFragmentManager(), isRecipientsReport ? RECIPIENTS_FRAGMENT : EDITS_FRAGMENT);
-				}
+		OnClickListener listener = v -> {
+			int monthItemPosition = monthReportsSpinner.getSelectedItemPosition();
+			String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
+			String countryUrlString = selectedCountryItem.getDownloadName();
+			boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
+			if (countryUrlString.length() > 0 || isRecipientsReport) {
+				Bundle bl = new Bundle();
+				bl.putString(UsersReportFragment.URL_REQUEST,
+						String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
+				userReportFragment.setArguments(bl);
+				userReportFragment.show(getChildFragmentManager(), isRecipientsReport ? RECIPIENTS_FRAGMENT : EDITS_FRAGMENT);
 			}
 		};
 		view.findViewById(R.id.numberOfContributorsLayout).setOnClickListener(listener);

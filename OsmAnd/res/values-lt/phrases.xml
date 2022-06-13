@@ -1614,4 +1614,13 @@
     <string name="poi_direction_north">Šiaurės kryptis</string>
     <string name="poi_callable_no">Ne</string>
     <string name="poi_callable_yes">Taip</string>
+    <string name="poi_shelter_no">Pastogė: ne</string>
+    <string name="poi_manufacturer">Gamintojas</string>
+    <string name="poi_guest_house">Svečių namai</string>
+    <string name="poi_lodging">Apgyvendinimas</string>
+    <string name="poi_attraction_roller_coaster">Amerikietiški kalneliai</string>
+    <string name="poi_attraction">Turistų traukos centras</string>
+    <string name="poi_attraction_big_wheel">Apžvalgos ratas</string>
+    <string name="poi_alpine_hut">Alpių namelis</string>
+    <string name="poi_hunting_lodge">Medžioklės namelis</string>
 </resources>

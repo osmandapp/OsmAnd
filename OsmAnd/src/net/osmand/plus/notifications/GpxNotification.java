@@ -11,12 +11,12 @@ import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
 
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.NavigationService.USED_BY_GPX;
@@ -55,7 +55,7 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
-					plugin.updateControl();
+					plugin.updateWidgets();
 				}
 			}
 		}, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
@@ -67,7 +67,7 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.stopRecording();
-					plugin.updateControl();
+					plugin.updateWidgets();
 				}
 			}
 		}, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));

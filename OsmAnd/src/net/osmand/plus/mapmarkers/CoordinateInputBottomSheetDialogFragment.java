@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -41,14 +41,11 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				.setIcon(getContentIcon(R.drawable.ic_action_save_to_file))
 				.setTitle(getString(R.string.coord_input_save_as_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.saveAsTrack();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.saveAsTrack();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(editItem);
@@ -62,14 +59,11 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				.setIcon(getContentIcon(R.drawable.ic_action_keyboard))
 				.setTitle(getString(R.string.use_system_keyboard))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onKeyboardChanged();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onKeyboardChanged();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(useSystemKeyboardItem);
@@ -80,16 +74,13 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				.setIcon(getContentIcon(R.drawable.ic_action_next_field_stroke))
 				.setTitle(getString(R.string.use_two_digits_longitude))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							CommonPreference<Boolean> pref = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE;
-							pref.set(!pref.get());
-							listener.onInputSettingsChanged();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						CommonPreference<Boolean> pref = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE;
+						pref.set(!pref.get());
+						listener.onInputSettingsChanged();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(twoDigitsLongtitudeItem);
@@ -105,16 +96,13 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 							: R.drawable.ic_action_show_keypad_left))
 					.setTitle(getString(R.string.show_number_pad))
 					.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								CommonPreference<Boolean> pref = settings.COORDS_INPUT_USE_RIGHT_SIDE;
-								pref.set(!pref.get());
-								listener.onHandChanged();
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							CommonPreference<Boolean> pref = settings.COORDS_INPUT_USE_RIGHT_SIDE;
+							pref.set(!pref.get());
+							listener.onHandChanged();
 						}
+						dismiss();
 					})
 					.create();
 			items.add(showNumberPadItem);
@@ -126,16 +114,13 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 		Format selectedFormat = settings.COORDS_INPUT_FORMAT.get();
 		Drawable formatIcon = getContentIcon(R.drawable.ic_action_coordinates_latitude);
-		View.OnClickListener formatsOnClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Format format = (Format) v.getTag();
-				settings.COORDS_INPUT_FORMAT.set(format);
-				if (listener != null) {
-					listener.onInputSettingsChanged();
-				}
-				dismiss();
+		View.OnClickListener formatsOnClickListener = v -> {
+			Format format = (Format) v.getTag();
+			settings.COORDS_INPUT_FORMAT.set(format);
+			if (listener != null) {
+				listener.onInputSettingsChanged();
 			}
+			dismiss();
 		};
 
 		for (Format format : Format.values()) {

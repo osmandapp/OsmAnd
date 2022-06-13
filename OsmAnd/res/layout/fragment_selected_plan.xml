@@ -97,12 +97,11 @@
 					android:minHeight="@dimen/toolbar_height"
 					android:orientation="horizontal">
 
-					<androidx.appcompat.widget.AppCompatImageView
+					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/button_back"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						android:padding="@dimen/list_content_padding"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
 						android:tint="@color/icon_color_default_light"
 						osmand:srcCompat="@drawable/ic_arrow_back" />
 
@@ -118,12 +117,11 @@
 						osmand:typeface="@string/font_roboto_medium"
 						tools:text="Title" />
 
-					<androidx.appcompat.widget.AppCompatImageView
+					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/button_help"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						android:padding="@dimen/list_content_padding"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
 						osmand:srcCompat="@drawable/ic_action_help"
 						tools:tint="@color/icon_color_default_light" />
 

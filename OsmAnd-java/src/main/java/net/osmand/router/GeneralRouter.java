@@ -1,5 +1,12 @@
 package net.osmand.router;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,16 +22,11 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 public class GeneralRouter implements VehicleRouter {
 	
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
+	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
 	public static final String AVOID_FERRIES = "avoid_ferries";
@@ -33,6 +35,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
+	public static final String ALLOW_PRIVATE_FOR_TRUCK = "allow_private_for_truck";
+	public static final String HAZMAT_CATEGORY = "hazmat_category";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 	public static final String DEFAULT_SPEED = "default_speed";
 	public static final String MIN_SPEED = "min_speed";
@@ -84,6 +88,7 @@ public class GeneralRouter implements VehicleRouter {
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
 		ROAD_PRIORITIES("priority"),
+		DESTINATION_PRIORITIES("destination_priority"),
 		ACCESS("access"),
 		OBSTACLES("obstacle_time"),
 		ROUTING_OBSTACLES("obstacle"),
@@ -111,9 +116,9 @@ public class GeneralRouter implements VehicleRouter {
 		PEDESTRIAN,
 		BICYCLE,
 		BOAT,
-		PUBLIC_TRANSPORT
+		PUBLIC_TRANSPORT,
+		HORSEBACKRIDING
 	}
-
 	
 	public enum RoutingParameterType {
 		NUMERIC,
@@ -140,9 +145,14 @@ public class GeneralRouter implements VehicleRouter {
 		for (int i = 0; i < objectAttributes.length; i++) {
 			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
 		}
-		allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false);
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
 		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false);
+
+		if (params.containsKey("profile_truck")) {
+			allowPrivate = params.containsKey(ALLOW_PRIVATE_FOR_TRUCK) && parseSilentBoolean(params.get(ALLOW_PRIVATE_FOR_TRUCK), false);
+		} else {
+			allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false);
+		}
 		if (params.containsKey(DEFAULT_SPEED)) {
 			defaultSpeed = parseSilentFloat(params.get(DEFAULT_SPEED), defaultSpeed);
 		}
@@ -154,7 +164,11 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		maxVehicleSpeed = maxSpeed;
 		if (shortestRoute) {
-			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			if (profile == GeneralRouterProfile.BICYCLE) {
+				maxSpeed = Math.min(BICYCLE_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			} else {
+				maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
+			}
 		}
 		initCaches();
 	}
@@ -243,27 +257,29 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 
-	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
+	public void registerBooleanParameter(String id, String group, String name, String description, String[] profiles, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
+		rp.id = id;
 		rp.group = group;
 		rp.name = name;
 		rp.description = description;
-		rp.id = id;
+		rp.profiles = profiles;
 		rp.type = RoutingParameterType.BOOLEAN;
 		rp.defaultBoolean = defaultValue;
 		parameters.put(rp.id, rp);
 		
 	}
 
-	public void registerNumericParameter(String id, String name, String description, Double[] vls, String[] vlsDescriptions) {
+	public void registerNumericParameter(String id, String name, String description, String[] profiles, Double[] vls, String[] vlsDescriptions) {
 		RoutingParameter rp = new RoutingParameter();
 		rp.name = name;
 		rp.description = description;
 		rp.id = id;
+		rp.profiles = profiles;
 		rp.possibleValues = vls;
 		rp.possibleValueDescriptions = vlsDescriptions;
 		rp.type = RoutingParameterType.NUMERIC;
-		parameters.put(rp.id, rp);		
+		parameters.put(rp.id, rp);
 	}
 
 	@Override
@@ -372,8 +388,6 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return 0;
 	}
-	
-	TIntArrayList filteredRules = new TIntArrayList();
 	
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
@@ -513,6 +527,16 @@ public class GeneralRouter implements VehicleRouter {
 		if(sp == null) {
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
 			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, false);
+		}
+		return sp;
+	}
+	
+	@Override
+	public float defineDestinationPriority(RouteDataObject road) {
+		Float sp = getCache(RouteDataObjectAttribute.DESTINATION_PRIORITIES, road);
+		if(sp == null) {
+			sp = getObjContext(RouteDataObjectAttribute.DESTINATION_PRIORITIES).evaluateFloat(road, 1f);
+			putCache(RouteDataObjectAttribute.DESTINATION_PRIORITIES, road, sp, false);
 		}
 		return sp;
 	}
@@ -704,6 +728,7 @@ public class GeneralRouter implements VehicleRouter {
 		private RoutingParameterType type;
 		private Object[] possibleValues;
 		private String[] possibleValueDescriptions;
+		private String[] profiles;
 		private boolean defaultBoolean;
 		
 		public String getId() {
@@ -730,6 +755,9 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
+		}
+		public String[] getProfiles() {
+			return profiles;
 		}
 	}
 	

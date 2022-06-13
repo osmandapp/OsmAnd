@@ -11,39 +11,38 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.development.BaseLogcatActivity;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemLongClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
-
-	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
-	public static final String GITHUB_DISCUSSIONS_URL = "https://github.com/osmandapp/OsmAnd/discussions";
-	// public static final String OSMAND_MAP_LEGEND = "https://osmand.net/help/map-legend_default.png";
 
 	public static final int COLLAPSED_TELEGRAM_CHATS_COUNT = 3;
 	public static final int NULL_ID = -1;
@@ -51,42 +50,42 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	public static final String TELEGRAM_CHATS_EXPANDED = "telegram_chats_expanded";
 	// public static final String DIALOG = "dialog";
 
-	private ArrayAdapter<ContextMenuItem> mAdapter;
+	private ContextMenuListAdapter mAdapter;
 	private boolean telegramChatsExpanded;
 	private ListView listView;
 
 	private enum TelegramDiscussion {
-		ENGLISH(R.string.lang_en, "https://t.me/OsmAndMaps"),
-		RUSSIAN(R.string.lang_ru, "https://t.me/ruosmand"),
-		GERMAN(R.string.lang_de, "https://t.me/deosmand"),
-		ITALIAN(R.string.lang_it, "https://t.me/itosmand"),
-		FRENCH(R.string.lang_fr, "https://t.me/frosmand"),
-		POLISH(R.string.lang_pl, "https://t.me/osmand_pl"),
-		PORTUGUESE_BRAZIL(R.string.lang_pt_br, "https://t.me/brosmand"),
-		SPANISH(R.string.lang_es, "https://t.me/osmand_es"),
-		UKRAINIAN(R.string.lang_uk, "https://t.me/uaosmand");
+		ENGLISH(R.string.lang_en, R.string.discussion_telegram_english),
+		RUSSIAN(R.string.lang_ru, R.string.discussion_telegram_russian),
+		GERMAN(R.string.lang_de, R.string.discussion_telegram_german),
+		ITALIAN(R.string.lang_it, R.string.discussion_telegram_italian),
+		FRENCH(R.string.lang_fr, R.string.discussion_telegram_french),
+		POLISH(R.string.lang_pl, R.string.discussion_telegram_polish),
+		PORTUGUESE_BRAZIL(R.string.lang_pt_br, R.string.discussion_telegram_portuguese_brazil),
+		SPANISH(R.string.lang_es, R.string.discussion_telegram_spanish),
+		UKRAINIAN(R.string.lang_uk, R.string.discussion_telegram_ukrainian);
 
 		private final int langTitleId;
-		private final String url;
+		private final int urlId;
 
-		TelegramDiscussion(int langTitleId, String url) {
+		TelegramDiscussion(int langTitleId, int urlId) {
 			this.langTitleId = langTitleId;
-			this.url = url;
+			this.urlId = urlId;
 		}
 
-		public String getLangTitle(Context ctx) {
+		public String getLangTitle(@NonNull Context ctx) {
 			return ctx.getString(langTitleId);
 		}
 
-		public String getUrl() {
-			return url;
+		public String getUrl(@NonNull Context ctx) {
+			return ctx.getString(urlId);
 		}
 	}
 
 	private enum SocialNetwork {
-		TWITTER(R.string.twitter, R.string.twitter_address, R.drawable.ic_action_social_twitter),
-		REDDIT(R.string.reddit, R.string.reddit_address, R.drawable.ic_action_social_reddit),
-		FACEBOOK(R.string.facebook, R.string.facebook_address, R.drawable.ic_action_social_facebook);
+		TWITTER(R.string.twitter, R.string.community_twitter, R.drawable.ic_action_social_twitter),
+		REDDIT(R.string.reddit, R.string.community_reddit, R.drawable.ic_action_social_reddit),
+		FACEBOOK(R.string.facebook, R.string.community_facebook, R.drawable.ic_action_social_facebook);
 
 		SocialNetwork(int titleId, int urlId, int iconId) {
 			this.titleId = titleId;
@@ -136,20 +135,21 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private void createItems() {
-		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(getMyApplication());
-		contextMenuAdapter.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
+		ContextMenuAdapter menu = new ContextMenuAdapter(getMyApplication());
 
-		createBeginWithOsmandItems(contextMenuAdapter);
-		createFeaturesItems(contextMenuAdapter);
-		createPluginsItems(contextMenuAdapter);
-		createHelpUsToImproveItems(contextMenuAdapter);
-		createOtherItems(contextMenuAdapter);
-		createDiscussionItems(contextMenuAdapter);
-		createSocialNetworksItems(contextMenuAdapter);
+		createBeginWithOsmandItems(menu);
+		createFeaturesItems(menu);
+		createPluginsItems(menu);
+		createHelpUsToImproveItems(menu);
+		createOtherItems(menu);
+		createDiscussionItems(menu);
+		createSocialNetworksItems(menu);
 
 		boolean lightContent = getMyApplication().getSettings().isLightContent();
 
-		mAdapter = contextMenuAdapter.createListAdapter(this, lightContent);
+		ViewCreator viewCreator = new ViewCreator(this, !lightContent);
+		viewCreator.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
+		mAdapter = menu.toListAdapter(this, viewCreator);
 
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
@@ -163,15 +163,16 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ContextMenuAdapter.ItemClickListener listener = mAdapter.getItem(position).getItemClickListener();
+		ContextMenuItem item = mAdapter.getItem(position);
+		ItemClickListener listener = item.getItemClickListener();
 		if (listener != null) {
-			listener.onContextMenuClick(mAdapter, position, position, false, null);
+			listener.onContextMenuClick(mAdapter, view, item, false);
 		}
 	}
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-		ContextMenuAdapter.ItemLongClickListener listener = mAdapter.getItem(position).getItemLongClickListener();
+		ItemLongClickListener listener = mAdapter.getItem(position).getItemLongClickListener();
 		if (listener != null) {
 			listener.onContextMenuLongClick(mAdapter, position, position, false, null);
 			return true;
@@ -203,7 +204,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	private void createDiscussionItems(ContextMenuAdapter adapter) {
 		adapter.addItem(createCategory(R.string.shared_string_discussion));
-		adapter.addItem(createSocialItem(getString(R.string.github), GITHUB_DISCUSSIONS_URL,
+		adapter.addItem(createSocialItem(getString(R.string.github),
+				getString(R.string.discussion_github),
 				R.drawable.ic_action_social_github));
 		TelegramDiscussion[] discussions = TelegramDiscussion.values();
 		int countToShow = telegramChatsExpanded ? discussions.length : COLLAPSED_TELEGRAM_CHATS_COUNT;
@@ -211,7 +213,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 			TelegramDiscussion discussion = discussions[i];
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
 			String title = String.format(pattern, getString(R.string.telegram), discussion.getLangTitle(this));
-			adapter.addItem(createSocialItem(title, discussion.getUrl(), R.drawable.ic_action_social_telegram));
+			adapter.addItem(createSocialItem(title, discussion.getUrl(this), R.drawable.ic_action_social_telegram));
 		}
 		if (!telegramChatsExpanded) {
 			adapter.addItem(createViewAllButton());
@@ -232,26 +234,24 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		final OsmandApplication app = getMyApplication();
 
 		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setLayout(R.layout.help_to_improve_item).createItem());
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
+				.setLayout(R.layout.help_to_improve_item));
 
 		final File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (exceptionLog.exists()) {
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitle(getString(R.string.send_crash_log))
-					.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.sendCrashLog(exceptionLog);
 						return false;
-					}).createItem()
-			);
+					}));
 		}
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitle(getString(R.string.send_logcat_log))
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					startSaveLogsAsyncTask();
 					return false;
-				}).createItem()
-		);
+				}));
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {
@@ -266,7 +266,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				"feature_articles/navigation-profiles.html"));
 		contextMenuAdapter.addItem(createItem(R.string.osmand_purchases_item, NULL_ID,
 				"feature_articles/osmand_purchases.html"));
-		contextMenuAdapter.addItem(createItem(R.string.subscription_osmandlive_item, NULL_ID,
+		contextMenuAdapter.addItem(createItem(R.string.osm_live_subscriptions, NULL_ID,
 				"feature_articles/subscription.html"));
 		contextMenuAdapter.addItem(createItem(R.string.favorites_item, NULL_ID,
 				"feature_articles/favourites.html"));
@@ -304,7 +304,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
 
-		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, LATEST_CHANGES_URL));
+
+		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, getString(R.string.docs_latest_version)));
 
 		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
@@ -314,74 +315,71 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		String version = Version.getFullVersion(getMyApplication()) + releaseDate;
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", this, version);
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitle(getString(R.string.shared_string_about))
 				.setDescription(version)
 				.setListener(listener)
 				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
 					return false;
-				})
-				.createItem());
+				}));
 	}
 
 	// Helper methods
 	private ContextMenuItem createCategory(@StringRes int titleRes) {
-		return new ContextMenuItem.ItemBuilder().setTitle(
-				getString(titleRes)).setCategory(true)
-				.setLayout(R.layout.download_item_list_section).createItem();
+		return new ContextMenuItem(null)
+				.setCategory(true)
+				.setTitle(getString(titleRes))
+				.setLayout(R.layout.download_item_list_section);
 	}
 
 	private ContextMenuItem createItem(@StringRes int titleRes,
 									   @StringRes int descriptionRes,
 									   String path) {
-		ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder()
+		ContextMenuItem item = new ContextMenuItem(null)
 				.setTitle(getString(titleRes))
 				.setListener(new ShowArticleOnTouchListener(path, this));
 		if (descriptionRes != -1) {
-			builder.setDescription(getString(descriptionRes));
+			item.setDescription(getString(descriptionRes));
 		}
-		return builder.createItem();
+		return item;
 	}
 
 	private ContextMenuItem createPluginItem(String title,
 											 @DrawableRes int icon,
 											 String path) {
-		return new ContextMenuItem.ItemBuilder()
+		return new ContextMenuItem(null)
 				.setTitle(title)
 				.setIcon(icon)
-				.setListener(new ShowArticleOnTouchListener(path, this))
-				.createItem();
+				.setListener(new ShowArticleOnTouchListener(path, this));
 	}
 
 	private ContextMenuItem createSocialItem(String title,
 											 String url,
 											 @DrawableRes int icon) {
-		return new ContextMenuItem.ItemBuilder()
+		return new ContextMenuItem(null)
 				.setTitle(title)
 				.setDescription(url)
 				.setIcon(icon)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 					AndroidUtils.startActivityIfSafe(this, intent);
 					return false;
-				})
-				.createItem();
+				});
 	}
 
 	private ContextMenuItem createViewAllButton() {
-		return new ItemBuilder()
+		return new ContextMenuItem(null)
 				.setLayout(R.layout.title_with_right_icon_list_item)
 				.setTitle(getString(R.string.shared_string_view_all))
 				.setIcon(R.drawable.ic_action_arrow_down)
-				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
+				.setListener((uiAdapter, view, item, isChecked) -> {
 					telegramChatsExpanded = true;
 					int pos = listView.getFirstVisiblePosition();
 					createItems();
 					listView.setSelection(pos);
 					return false;
-				})
-				.createItem();
+				});
 	}
 
 	@NonNull
@@ -413,13 +411,14 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		}
 
 		@Override
-		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+		public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+			String LATEST_CHANGES_URL = ctx.getString(R.string.docs_latest_version);
 			if (LATEST_CHANGES_URL.equals(path)) {
 				OsmandApplication app = (OsmandApplication) ctx.getApplication();
 				boolean nightMode = !app.getSettings().isLightContent();
-				WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(LATEST_CHANGES_URL), nightMode);
+				AndroidUtils.openUrl(ctx, Uri.parse(LATEST_CHANGES_URL), nightMode);
 			} else {
-				String title = mTitle == null ? adapter.getItem(position).getTitle() : mTitle;
+				String title = mTitle == null ? item.getTitle() : mTitle;
 				HelpArticleDialogFragment.instantiateWithAsset(path, title)
 						.show(ctx.getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
 			}

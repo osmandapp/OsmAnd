@@ -18,12 +18,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.CustomRegion;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
@@ -33,7 +33,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -195,7 +194,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 				@Override
 				public void onClick(View v) {
 					if (actionButton.getUrl() != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(actionButton.getUrl()), nightMode);
+						AndroidUtils.openUrl(ctx, Uri.parse(actionButton.getUrl()), nightMode);
 					} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
 						boolean isDownloading = ctx.getDownloadThread().isDownloading(indexItem);
 						if (!isDownloading) {

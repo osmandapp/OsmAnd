@@ -5,6 +5,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -99,20 +100,24 @@ public class GeocodingUtilities {
 			return connectionPoint;
 		}
 
-		public double getDistance() {
-			if (dist == -1 && connectionPoint != null && searchPoint != null) {
-				dist = MapUtils.getDistance(connectionPoint, searchPoint);
+		public double getSortDistance() {
+			double dist = getDistance();
+			if (dist > 0 && building == null) {
+				// add extra distance to match buildings first 
+				return dist + 50;
 			}
 			return dist;
 		}
-
-		public double getDistanceP() {
-			if (point != null && searchPoint != null) {
-				// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from neareest named road
-				return Math.sqrt(point.distSquare);
-			} else {
-				return -1;
+		public double getDistance() {
+			if (dist == -1 && searchPoint != null) {
+				if (building == null && point != null) {
+					// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from neareest named road
+					dist = Math.sqrt(point.distSquare);
+				} else if (connectionPoint != null) {
+					dist = MapUtils.getDistance(connectionPoint, searchPoint);
+				}
 			}
+			return dist;
 		}
 
 		@Override
@@ -132,8 +137,7 @@ public class GeocodingUtilities {
 			} else if (city != null) {
 				bld.append(" city ").append(city.getName());
 			}
-			if (connectionPoint != null && searchPoint != null) {
-
+			if (getDistance() > 0) {
 				bld.append(" dist=").append((int) getDistance());
 			}
 			return bld.toString();
@@ -146,6 +150,7 @@ public class GeocodingUtilities {
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		// we allow duplications to search in both files for boundary regions 
+		// here we use same code as for normal routing, so we take into account current profile and sort by priority & distance
 		rp.findRouteSegment(lat, lon, ctx, listR, false, true);
 		double distSquare = 0;
 		Map<String, List<RouteRegion>> streetNames = new HashMap<>();
@@ -396,5 +401,56 @@ public class GeocodingUtilities {
 			}
 		}
 		return streetBuildings;
+	}
+
+	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
+		double minBuildingDistance = 0;
+		for (GeocodingResult r : res) {
+			BinaryMapIndexReader reader = null;
+			for (BinaryMapIndexReader b : list) {
+				for (RouteRegion rb : b.getRoutingIndexes()) {
+					if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
+						reader = b;
+						break;
+
+					}
+				}
+				if (reader != null) {
+					break;
+				}
+			}
+			if (reader != null) {
+				List<GeocodingResult> justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, null);
+				if (!justified.isEmpty()) {
+					double md = justified.get(0).getDistance();
+					if (minBuildingDistance == 0) {
+						minBuildingDistance = md;
+					} else {
+						minBuildingDistance = Math.min(md, minBuildingDistance);
+					}
+					complete.addAll(justified);
+				}
+			} else {
+				complete.add(r);
+			}
+		}
+		filterDuplicateRegionResults(complete);
+		Iterator<GeocodingResult> it = complete.iterator();
+		while (it.hasNext()) {
+			GeocodingResult r = it.next();
+			if (r.building != null && r.getDistance() > minBuildingDistance
+					* GeocodingUtilities.THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER) {
+				it.remove();
+			}
+		}
+		Collections.sort(complete, new Comparator<GeocodingResult>() {
+			@Override
+			public int compare(GeocodingResult o1, GeocodingResult o2) {
+				return Double.compare(o1.getDistance(), o2.getDistance());
+			}
+		});
+		return complete;
+
 	}
 }

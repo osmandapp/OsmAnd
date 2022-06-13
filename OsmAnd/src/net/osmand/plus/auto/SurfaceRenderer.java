@@ -5,6 +5,11 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.Surface;
 
+import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.AppManager;
@@ -14,11 +19,6 @@ import androidx.car.app.SurfaceContainer;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-
-import net.osmand.Location;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * A very simple implementation of a renderer for the app's background surface.
@@ -51,6 +51,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				public void onSurfaceAvailable(@NonNull SurfaceContainer surfaceContainer) {
 					synchronized (SurfaceRenderer.this) {
 						Log.i(TAG, "Surface available " + surfaceContainer);
+						if (mSurface != null) {
+							mSurface.release();
+						}
 						mSurface = surfaceContainer.getSurface();
 						surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
 						darkMode = mCarContext.isDarkMode();
@@ -86,7 +89,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
 					synchronized (SurfaceRenderer.this) {
 						Log.i(TAG, "Surface destroyed");
-						mSurface = null;
+						if (mSurface != null) {
+							mSurface.release();
+							mSurface = null;
+						}
 						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 						if (mapView != null) {
 							mapView.setupOpenGLView();
@@ -176,13 +182,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	}
 
 	/**
-	 * Updates the markers drawn on the surface.
-	 */
-	public void updateMarkerVisibility(boolean showMarkers, int numMarkers, int activeMarker) {
-		renderFrame();
-	}
-
-	/**
 	 * Updates the location coordinate string drawn on the surface.
 	 */
 	public void updateLocation(@Nullable Location location) {
@@ -227,7 +226,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		}
 		DrawSettings drawSettings = new DrawSettings(mCarContext.isDarkMode(), false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
-		renderFrame(tileBox, drawSettings);
+		try {
+			renderFrame(tileBox, drawSettings);
+		} catch (Exception ignored) {
+			// Ignored
+		}
 	}
 
 	public void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {

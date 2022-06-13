@@ -31,8 +31,7 @@ public final class NavigationCarAppService extends CarAppService {
 	 */
 	@NonNull
 	public static Uri createDeepLinkUri(@NonNull String deepLinkAction) {
-		return Uri.fromParts(
-				NavigationSession.URI_SCHEME, NavigationSession.URI_HOST, deepLinkAction);
+		return Uri.fromParts(NavigationSession.URI_SCHEME, NavigationSession.URI_HOST, deepLinkAction);
 	}
 
 	@Override
@@ -57,6 +56,16 @@ public final class NavigationCarAppService extends CarAppService {
 		session.getLifecycle()
 				.addObserver(
 						new DefaultLifecycleObserver() {
+							@Override
+							public void onStart(@NonNull LifecycleOwner owner) {
+								getApp().getOsmandMap().getMapView().setupOpenGLView();
+							}
+
+							@Override
+							public void onStop(@NonNull LifecycleOwner owner) {
+								getApp().getOsmandMap().getMapView().setupOpenGLView();
+							}
+
 							@Override
 							public void onDestroy(@NonNull LifecycleOwner owner) {
 								getApp().getLocationProvider().removeLocationListener(session);

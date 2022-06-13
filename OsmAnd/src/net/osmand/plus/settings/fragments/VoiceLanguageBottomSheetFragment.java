@@ -1,5 +1,15 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listTtsVoiceIndexes;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,12 +28,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -33,16 +43,15 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
-import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
+import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.util.Algorithms;
@@ -53,14 +62,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
 
 public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents {
 
@@ -76,7 +77,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private InfoType selectedVoiceType = InfoType.TTS;
 	private IndexItem indexToSelectAfterDownload = null;
-	private boolean listedRecordedVoicesFromInternet = false;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
@@ -100,8 +100,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private InfoType defineSelectedVoiceType() {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(getAppMode());
-		return Algorithms.isEmpty(voiceProvider) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
-				|| voiceProvider.equals(OsmandSettings.VOICE_PROVIDER_NOT_USE)
+		return settings.isVoiceProviderNotSelected(getAppMode()) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
 				? InfoType.TTS
 				: InfoType.RECORDED;
 	}
@@ -231,13 +230,14 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void createVoiceView() {
-		if (selectedVoiceType == InfoType.TTS && Algorithms.isEmpty(voiceItems)) {
-			voiceItems = getVoiceList(selectedVoiceType.indexGroupName);
+		if (selectedVoiceType == InfoType.TTS) {
+			if (Algorithms.isEmpty(voiceItems)) {
+				voiceItems = getVoiceList(selectedVoiceType.indexGroupName);
+			}
 		} else if (selectedVoiceType == InfoType.RECORDED) {
 			DownloadResources indexes = downloadThread.getIndexes();
 			boolean successfulDownload = indexes.isDownloadedFromInternet && !indexes.downloadFromInternetFailed;
-			boolean shouldReloadList = !listedRecordedVoicesFromInternet
-					&& (successfulDownload || downloadThread.shouldDownloadIndexes());
+			boolean shouldReloadList = successfulDownload || downloadThread.shouldDownloadIndexes();
 			if (Algorithms.isEmpty(voiceItemsRec) || shouldReloadList) {
 				voiceItemsRec = getVoiceList(selectedVoiceType.indexGroupName);
 			}
@@ -369,9 +369,13 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
 		Activity activity = getActivity();
 		if (activity != null) {
+			boolean wasProviderNotSelected = settings.isVoiceProviderNotSelected(getAppMode());
+			if (wasProviderNotSelected) {
+				app.getRoutingHelper().getVoiceRouter().setMuteForMode(getAppMode(), false);
+			}
 			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
 			onVoiceProviderChanged();
-			app.initVoiceCommandPlayer(activity, getAppMode(), false, null,
+			app.initVoiceCommandPlayer(activity, getAppMode(), null, false,
 					false, false, false);
 		}
 		if (DownloadActivityType.isVoiceTTS(indexItem) || forceDismiss) {
@@ -428,14 +432,18 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
 		if (indexes.isDownloadedFromInternet && !indexes.downloadFromInternetFailed) {
 			suggestedVoice.addAll(indexes.getDownloadItemsForGroup(type));
-			if (selectedVoiceType == InfoType.RECORDED) {
-				listedRecordedVoicesFromInternet = true;
+		}
+		List<IndexItem> localItems = selectedVoiceType == InfoType.TTS ? listTtsVoiceIndexes(app) : listLocalRecordedVoiceIndexes(app);
+		for (IndexItem item : localItems) {
+			boolean contains = false;
+			for (DownloadItem suggestedItem : suggestedVoice) {
+				if (Algorithms.stringsEqual(item.getFileName(), suggestedItem.getFileName())) {
+					contains = true;
+					break;
+				}
 			}
-		} else {
-			if (selectedVoiceType == InfoType.TTS) {
-				suggestedVoice.addAll(DownloadOsmandIndexesHelper.listTtsVoiceIndexes(app));
-			} else {
-				suggestedVoice.addAll(DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes(app));
+			if (!contains) {
+				suggestedVoice.add(item);
 			}
 		}
 

@@ -9,29 +9,36 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerHeaderViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
+import net.osmand.plus.settings.fragments.MarkersHistorySettingsFragment;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 
-public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChangedListener {
+public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChangedListener, OnPreferenceChanged {
 
 	private MapMarkersHistoryAdapter adapter;
 	private OsmandApplication app;
@@ -202,19 +209,50 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 				}
 			}
 		});
-		final View emptyView = mainView.findViewById(R.id.empty_view);
-		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		if (Build.VERSION.SDK_INT >= 18) {
-			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_history_night : R.drawable.ic_empty_state_marker_history_day);
-		} else {
-			emptyImageView.setVisibility(View.INVISIBLE);
-		}
-		recyclerView.setEmptyView(emptyView);
+		recyclerView.setEmptyView(getEmptyView(mainView, night));
 		recyclerView.setAdapter(adapter);
 
 		app.getMapMarkersHelper().addListener(this);
 
 		return mainView;
+	}
+
+	private View getEmptyView(@NonNull View mainView, boolean nightMode) {
+		View emptyView = mainView.findViewById(R.id.empty_view);
+		View disabledView = mainView.findViewById(R.id.disabled_history_card);
+
+		boolean historyEnabled = app.getSettings().MAP_MARKERS_HISTORY.get();
+		if (historyEnabled) {
+			ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
+			if (Build.VERSION.SDK_INT >= 18) {
+				emptyImageView.setImageResource(nightMode ? R.drawable.ic_empty_state_marker_history_night : R.drawable.ic_empty_state_marker_history_day);
+			} else {
+				emptyImageView.setVisibility(View.INVISIBLE);
+			}
+		} else {
+			TextView title = disabledView.findViewById(R.id.title);
+			title.setText(getString(R.string.is_disabled, getString(R.string.shared_string_history)));
+
+			TextView description = disabledView.findViewById(R.id.description);
+			description.setText(R.string.markers_history_is_disabled_descr);
+
+			TextView analyseButtonDescr = disabledView.findViewById(R.id.settings_button);
+			FrameLayout analyseButton = disabledView.findViewById(R.id.settings_button_container);
+
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+				AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			} else {
+				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+			}
+			analyseButton.setOnClickListener(v -> {
+				FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					MarkersHistorySettingsFragment.showInstance(fragmentManager, this);
+				}
+			});
+		}
+		return historyEnabled ? emptyView : disabledView;
 	}
 
 	void hideSnackbar() {
@@ -270,6 +308,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 
 	@Override
 	public void onMapMarkersChanged() {
+		updateAdapter();
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
 		updateAdapter();
 	}
 }

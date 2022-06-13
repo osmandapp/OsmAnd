@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
@@ -26,8 +26,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.TrackMenuFragment;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
@@ -63,7 +63,10 @@ import static net.osmand.GPXUtilities.writeGpxFile;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.plus.GpxSelectionHelper.*;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.*;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.*;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
@@ -74,7 +77,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TRACK_POINT;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -82,10 +85,6 @@ public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
-	public static final String ROUTE_ARTICLE = "route_article";
-	public static final String ROUTE_TRACK = "route_track";
-	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
-	public static final String ROUTE_RADIUS = "route_radius";
 	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
@@ -287,7 +286,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	private SearchPoiTypeFilter getSearchFilter(final String... filterSubcategory) {
+	public static SearchPoiTypeFilter getSearchFilter(final String... filterSubcategory) {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
@@ -601,42 +600,22 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-							  @NonNull String gpxFileName, @NonNull  LatLon latLon) {
+	                          @NonNull String gpxFileName, @NonNull LatLon latLon) {
 		GpxReadCallback callback = new GpxReadCallback() {
 			@Override
 			public void onGpxFileReading() {
 			}
 
 			@Override
-			public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
+			public void onGpxFileRead(@Nullable GPXFile gpxFile) {
 				if (gpxFile != null) {
-					OsmandApplication app = mapActivity.getMyApplication();
-					String fileName = gpxFileName;
-					if (!fileName.endsWith(GPX_FILE_EXT)) {
-						fileName += GPX_FILE_EXT;
-					}
-					File file = new File(FileUtils.getTempDir(app), fileName);
-					new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-						@Override
-						public void gpxSavingStarted() {
+					WptPt wptPt = new WptPt();
+					wptPt.lat = latLon.getLatitude();
+					wptPt.lon = latLon.getLongitude();
 
-						}
-
-						@Override
-						public void gpxSavingFinished(Exception errorMessage) {
-							if (errorMessage == null) {
-								GPXUtilities.WptPt selectedPoint = new GPXUtilities.WptPt();
-								selectedPoint.lat = latLon.getLatitude();
-								selectedPoint.lon = latLon.getLongitude();
-								SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-								SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
-								TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-										null, null, false, article.getAnalysis());
-							} else {
-								LOG.error(errorMessage);
-							}
-						}
-					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					String name = gpxFileName.endsWith(GPX_FILE_EXT) ? gpxFileName : gpxFileName + GPX_FILE_EXT;
+					File file = new File(FileUtils.getTempDir(app), name);
+					GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, article.getAnalysis(), null);
 				}
 			}
 		};
@@ -1121,7 +1100,6 @@ public class TravelObfHelper implements TravelHelper {
 		article.gpxFile = gpxFile;
 		return gpxFile;
 	}
-
 
 
 	@NonNull

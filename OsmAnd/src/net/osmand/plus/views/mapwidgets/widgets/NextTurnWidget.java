@@ -1,102 +1,85 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.app.Activity;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.router.TurnType;
 
-public class NextTurnWidget extends TextInfoWidget {
+public class NextTurnWidget extends NextTurnBaseWidget {
 
-	protected boolean horizontalMini;
+	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
-	protected int deviatedPath = 0;
-	protected int nextTurnDistance = 0;
-
-	private final TurnDrawable turnDrawable;
-	private final OsmandApplication app;
-
-	public NextTurnWidget(Activity activity, @NonNull OsmandApplication app, boolean horizontalMini) {
-		super(activity);
-		this.app = app;
-		this.horizontalMini = horizontalMini;
-		turnDrawable = new TurnDrawable(activity, horizontalMini);
-		if (horizontalMini) {
-			setImageDrawable(turnDrawable, false);
-			setTopImageDrawable(null, null);
-		} else {
-			setImageDrawable(null, true);
-			setTopImageDrawable(turnDrawable, "");
-		}
+	public NextTurnWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
+		super(mapActivity, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, horizontalMini);
+		setOnClickListener(getOnClickListener());
 	}
 
-	public TurnType getTurnType() {
-		return turnDrawable.getTurnType();
-	}
-
-	public void setTurnType(TurnType turnType) {
-		boolean vis = updateVisibility(turnType != null);
-		if (turnDrawable.setTurnType(turnType) || vis) {
-			turnDrawable.setTextPaint(topTextView.getPaint());
-			if (horizontalMini) {
-				setImageDrawable(turnDrawable, false);
-			} else {
-				setTopImageDrawable(turnDrawable, "");
-//				setTopImageDrawable(turnDrawable, turnType == null || turnType.getExitOut() == 0 ? "" : 
-//					turnType.getExitOut() + "");
+	/**
+	 * Uncomment to test rendering
+	 */
+	@NonNull
+	private OnClickListener getOnClickListener() {
+		return new View.OnClickListener() {
+//			int i = 0;
+//			boolean leftSide = false;
+			@Override
+			public void onClick(View v) {
+//				final int l = TurnType.predefinedTypes.length;
+//				final int exits = 5;
+//				i++;
+//				if (i % (l + exits) >= l ) {
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), leftSide);
+//					float a = leftSide?  -180 + (i % (l + exits) - l + 1) * 50:  180 - (i % (l + exits) - l + 1) * 50;
+//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
+//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
+//				} else {
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], leftSide);
+//					nextTurnInfo.exitOut = "";
+//				}
+//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
+//				nextTurnInfo.nextTurnDirection = 580;
+//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
+				if (routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
+					routingHelper.getVoiceRouter().announceCurrentDirection(null);
+				}
 			}
-		}
-	}
-
-	public void setTurnImminent(int turnImminent, boolean deviatedFromRoute) {
-		if (turnDrawable.getTurnImminent() != turnImminent || turnDrawable.isDeviatedFromRoute() != deviatedFromRoute) {
-			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
-		}
-	}
-
-	public void setDeviatePath(int deviatePath) {
-		if (RouteInfoWidgetsFactory.distChanged(deviatePath, this.deviatedPath)) {
-			this.deviatedPath = deviatePath;
-			updateDistance();
-		}
-	}
-
-	public void setTurnDistance(int nextTurnDistance) {
-		if (RouteInfoWidgetsFactory.distChanged(nextTurnDistance, this.nextTurnDistance)) {
-			this.nextTurnDistance = nextTurnDistance;
-			updateDistance();
-		}
-	}
-
-	private void updateDistance() {
-		int deviatePath = turnDrawable.isDeviatedFromRoute() ? deviatedPath : nextTurnDistance;
-		String ds = OsmAndFormatter.getFormattedDistance(deviatePath, app);
-
-		TurnType turnType = getTurnType();
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		if ((turnType != null) && (routingHelper != null)) {
-			setContentDescription(ds + " " + RouteCalculationResult.toString(turnType, app, false));
-		} else {
-			setContentDescription(ds);
-		}
-
-		int ls = ds.lastIndexOf(' ');
-		if (ls == -1) {
-			setTextNoUpdateVisibility(ds, null);
-		} else {
-			setTextNoUpdateVisibility(ds.substring(0, ls), ds.substring(ls + 1));
-		}
+		};
 	}
 
 	@Override
-	public boolean updateInfo(DrawSettings drawSettings) {
-		return false;
+	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		boolean followingMode = routingHelper.isFollowingMode()
+				|| locationProvider.getLocationSimulation().isRouteAnimating();
+		TurnType turnType = null;
+		boolean deviatedFromRoute = false;
+		int turnImminent = 0;
+		int nextTurnDistance = 0;
+		if (routingHelper.isRouteCalculated() && followingMode) {
+			deviatedFromRoute = routingHelper.isDeviatedFromRoute();
+
+			if (deviatedFromRoute) {
+				turnType = TurnType.valueOf(TurnType.OFFR, settings.DRIVING_REGION.get().leftHandDriving);
+				setDeviatePath((int) routingHelper.getRouteDeviation());
+			} else {
+				NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
+				if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
+					turnType = r.directionInfo.getTurnType();
+					nextTurnDistance = r.distanceTo;
+					turnImminent = r.imminent;
+				}
+			}
+		}
+		setTurnType(turnType);
+		setTurnImminent(turnImminent, deviatedFromRoute);
+		setTurnDistance(nextTurnDistance);
 	}
 }

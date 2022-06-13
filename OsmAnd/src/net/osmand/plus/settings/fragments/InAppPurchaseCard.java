@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
-import android.os.Build;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,11 +8,10 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
@@ -20,13 +19,15 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class InAppPurchaseCard extends MapBaseCard {
+public class InAppPurchaseCard extends BaseCard {
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
@@ -34,8 +35,8 @@ public class InAppPurchaseCard extends MapBaseCard {
 	private final InAppPurchaseHelper purchaseHelper;
 	private final InAppPurchases purchases;
 
-	public InAppPurchaseCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull InAppPurchase purchase) {
-		super(mapActivity);
+	public InAppPurchaseCard(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull InAppPurchase purchase) {
+		super(activity);
 		this.purchase = purchase;
 		this.purchaseHelper = purchaseHelper;
 		purchases = purchaseHelper.getInAppPurchases();
@@ -76,6 +77,12 @@ public class InAppPurchaseCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
 
+	private void setupSelectableBackground(@NonNull View view) {
+		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.active_color_basic);
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(view.getContext(), color, 0.3f);
+		AndroidUtils.setBackground(view.findViewById(R.id.selectable_list_item), drawable);
+	}
+
 	private void setupManageButton(boolean visible) {
 		View manageSubscription = view.findViewById(R.id.manage_subscription);
 		manageSubscription.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +94,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 				}
 			}
 		});
+		setupSelectableBackground(manageSubscription);
 		ImageView icon = manageSubscription.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_purchases));
 
@@ -97,12 +105,8 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 	private void setupLiveButton(boolean visible) {
 		View osmandLive = view.findViewById(R.id.osmand_live);
-		osmandLive.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), null);
-			}
-		});
+		osmandLive.setOnClickListener(v -> LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), null));
+		setupSelectableBackground(osmandLive);
 		ImageView icon = osmandLive.findViewById(android.R.id.icon);
 		TextView title = osmandLive.findViewById(android.R.id.title);
 
@@ -163,21 +167,12 @@ public class InAppPurchaseCard extends MapBaseCard {
 		} else if (state != SubscriptionState.ACTIVE && state != SubscriptionState.CANCELLED) {
 			View renewContainer = view.findViewById(R.id.renewContainer);
 			AndroidUiHelper.updateVisibility(renewContainer, true);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(mapActivity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-			} else {
-				AndroidUtils.setBackground(mapActivity, renewContainer, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
-			}
+			AndroidUtils.setBackground(activity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 			final String sku = subscription.getSku();
-			renewContainer.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					InAppPurchaseHelper.subscribe(mapActivity, purchaseHelper, sku);
-				}
-			});
+			renewContainer.setOnClickListener(v -> InAppPurchaseHelper.subscribe(activity, purchaseHelper, sku));
 
 			View renew = view.findViewById(R.id.renew);
-			AndroidUtils.setBackground(mapActivity, renew, nightMode,
+			AndroidUtils.setBackground(activity, renew, nightMode,
 					R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_dark);
 		}
 		setupStatus(view, state, expiredTime, expiredTime);

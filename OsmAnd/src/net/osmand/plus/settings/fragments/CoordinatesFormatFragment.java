@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -18,20 +17,17 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 	public static final String TAG = CoordinatesFormatFragment.class.getSimpleName();
-
-	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
-	private static final String MGRS_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Military_Grid_Reference_System";
 
 	private static final String FORMAT_DEGREES = "format_degrees";
 	private static final String FORMAT_MINUTES = "format_minutes";
@@ -39,6 +35,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String UTM_FORMAT = "utm_format";
 	private static final String MGRS_FORMAT = "mgrs_format";
 	private static final String OLC_FORMAT = "olc_format";
+	private static final String SWISS_GRID_FORMAT = "swiss_grid_format";
+	private static final String SWISS_GRID_PLUS_FORMAT = "swiss_grid_plus_format";
 
 	@Override
 	protected void setupPreferences() {
@@ -48,6 +46,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		CheckBoxPreference utmPref = (CheckBoxPreference) findPreference(UTM_FORMAT);
 		CheckBoxPreference mgrsPref = (CheckBoxPreference) findPreference(MGRS_FORMAT);
 		CheckBoxPreference olcPref = (CheckBoxPreference) findPreference(OLC_FORMAT);
+		CheckBoxPreference swissGridPref = (CheckBoxPreference) findPreference(SWISS_GRID_FORMAT);
+		CheckBoxPreference swissGridPlusPref = (CheckBoxPreference) findPreference(SWISS_GRID_PLUS_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -57,6 +57,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		utmPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.UTM_FORMAT));
 		mgrsPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.MGRS_FORMAT));
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
+		swissGridPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_FORMAT));
+		swissGridPlusPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_PLUS_FORMAT));
 
 		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
 		String currentPrefKey = getCoordinatesKeyForFormat(currentFormat);
@@ -102,7 +104,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
+						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_utm_format, isNightMode());
 					}
 				}
 
@@ -132,7 +134,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
-						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(MGRS_FORMAT_WIKI_LINK), isNightMode());
+						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_mgrs_format, isNightMode());
 					}
 				}
 
@@ -203,6 +205,10 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return PointDescription.MGRS_FORMAT;
 			case OLC_FORMAT:
 				return PointDescription.OLC_FORMAT;
+			case SWISS_GRID_FORMAT:
+				return PointDescription.SWISS_GRID_FORMAT;
+			case SWISS_GRID_PLUS_FORMAT:
+				return PointDescription.SWISS_GRID_PLUS_FORMAT;
 			default:
 				return -1;
 		}
@@ -222,6 +228,10 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return MGRS_FORMAT;
 			case PointDescription.OLC_FORMAT:
 				return OLC_FORMAT;
+			case PointDescription.SWISS_GRID_FORMAT:
+				return SWISS_GRID_FORMAT;
+			case PointDescription.SWISS_GRID_PLUS_FORMAT:
+				return SWISS_GRID_PLUS_FORMAT;
 			default:
 				return "Unknown format";
 		}

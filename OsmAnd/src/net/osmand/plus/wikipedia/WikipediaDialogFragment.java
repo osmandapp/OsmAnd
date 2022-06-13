@@ -18,26 +18,23 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
@@ -228,7 +225,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
 					Context context = getContext();
 					if (context != null) {
-						showFullArticle(context, Uri.parse(article), nightMode);
+						AndroidUtils.openUrl(context, Uri.parse(article), nightMode);
 					}
 				}
 			});
@@ -241,18 +238,6 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				}
 			});
 			contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
-		}
-	}
-
-	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
-				.build();
-		customTabsIntent.intent.setData(uri);
-		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
-			customTabsIntent.launchUrl(context, uri);
-		} else {
-			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
 

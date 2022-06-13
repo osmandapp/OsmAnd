@@ -279,7 +279,7 @@ public class LocationParser {
 		Double prevDouble = null;
 		for (int i = begin; i <= end; i++) {
 			Object o = i == end ? "" : all.get(i);
-			if(o.equals("S") || o.equals("W") || o.equals(-0.0))  {
+			if (o.equals("S") || o.equals("s") || o.equals("W") || o.equals("w") || o.equals(-0.0)) {
 				neg = !neg;
 			}
 			if (prevDouble != null) {
@@ -318,13 +318,18 @@ public class LocationParser {
 	}
 
 	public static void splitObjects(String s, List<Double> d, List<Object> all, List<String> strings) {
+		splitObjects(s, d, all, strings, new boolean[]{false});
+	}
+
+	public static void splitObjects(String s, List<Double> d, List<Object> all, List<String> strings, boolean[] partial) {
 		boolean digit = false;
 		int word = -1;
+		int firstNumeralIdx = -1;
 		for (int i = 0; i <= s.length(); i++) {
 			char ch = i == s.length() ? ' ' : s.charAt(i);
 			boolean dg = Character.isDigit(ch);
 			boolean nonwh = ch != ',' && ch != ' ' && ch != ';';
-			if (ch == '.' || dg || ch == '-' ) {
+			if (ch == '.' || dg || ch == '-') {
 				if (!digit) {
 					if (word != -1) {
 						all.add(s.substring(word, i));
@@ -333,19 +338,22 @@ public class LocationParser {
 					digit = true;
 					word = i;
 				} else {
-					if(word == -1) {
+					if (word == -1) {
 						word = i;
 					}
 					// if digit
 					// continue
 				}
 			} else {
-				if (digit){
+				if (digit) {
 					if (word != -1) {
 						try {
 							double dl = Double.parseDouble(s.substring(word, i));
 							d.add(dl);
 							all.add(dl);
+							if (firstNumeralIdx == -1) {
+								firstNumeralIdx = all.size() - 1;
+							}
 							strings.add(s.substring(word, i));
 							digit = false;
 							word = -1;
@@ -354,15 +362,15 @@ public class LocationParser {
 					}
 				}
 				if (nonwh) {
-					if(!Character.isLetter(ch)) {
-						if(word != -1) {
+					if (!Character.isLetter(ch)) {
+						if (word != -1) {
 							all.add(s.substring(word, i));
 							strings.add(s.substring(word, i));
 						}
 						all.add(s.substring(i, i + 1));
-						strings.add(s.substring(i, i +1));
+						strings.add(s.substring(i, i + 1));
 						word = -1;
-					} else if(word == -1) {
+					} else if (word == -1) {
 						word = i;
 					}
 				} else {
@@ -372,6 +380,14 @@ public class LocationParser {
 					}
 					word = -1;
 				}
+			}
+		}
+
+		partial[0] = false;
+		if (firstNumeralIdx != -1) {
+			int nextTokenIdx = firstNumeralIdx + 1;
+			if (all.size() <= nextTokenIdx) {
+				partial[0] = true;
 			}
 		}
 	}

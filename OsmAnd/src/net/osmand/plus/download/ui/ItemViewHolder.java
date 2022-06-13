@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -21,29 +22,31 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.CustomIndexItem;
-import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
 import net.osmand.plus.download.SelectIndexesHelper.ItemsToDownloadSelectedListener;
-import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -104,7 +107,6 @@ public class ItemViewHolder {
 
 		ViewCompat.setAccessibilityDelegate(view, context.getAccessibilityAssistant());
 		ViewCompat.setAccessibilityDelegate(rightButton, context.getAccessibilityAssistant());
-		ViewCompat.setAccessibilityDelegate(rightImageButton, context.getAccessibilityAssistant());
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();
@@ -167,6 +169,19 @@ public class ItemViewHolder {
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
+		ViewCompat.setAccessibilityDelegate(rightImageButton, new AccessibilityAssistant(context){
+
+			@Override
+			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+				super.onInitializeAccessibilityNodeInfo(host, info);
+				info.setContentDescription(context.getString(R.string.shared_string_download) + nameTextView.getText());
+				info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+						AccessibilityNodeInfo.ACTION_CLICK, context.getString(R.string.shared_string_download)
+				));
+				info.setEnabled(host.isEnabled());
+			}
+		});
+
 		if (!disabled) {
 			nameTextView.setTextColor(textColorPrimary);
 		} else {
@@ -297,7 +312,7 @@ public class ItemViewHolder {
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
 		OnClickListener action = getRightButtonAction(item, clickAction);
 		if (clickAction != RightButtonAction.DOWNLOAD) {
-			rightButton.setText(R.string.get_plugin);
+			rightButton.setText(R.string.shared_string_get);
 			rightButton.setVisibility(View.VISIBLE);
 			rightImageButton.setVisibility(View.GONE);
 			rightButton.setOnClickListener(action);

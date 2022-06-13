@@ -81,6 +81,7 @@ import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.AProfile;
+import net.osmand.aidlapi.customization.PreferenceParams;
 
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
@@ -111,8 +112,13 @@ import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
 
 import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.info.GetTextParams;
 
 import net.osmand.aidlapi.profile.ExportProfileParams;
+
+import net.osmand.aidlapi.exit.ExitAppParams;
+
+import net.osmand.aidlapi.logcat.ALogcatListenerParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -904,4 +910,29 @@ interface IOsmAndAidlInterface {
     boolean removeRoadBlock(in RemoveBlockedRoadParams params);
 
     boolean setLocation(in SetLocationParams params);
+
+    boolean exitApp(in ExitAppParams params);
+
+    boolean getText(inout GetTextParams params);
+
+    boolean reloadIndexes();
+
+    boolean setPreference(in PreferenceParams params);
+
+    boolean getPreference(inout PreferenceParams params);
+
+    /**
+     * Method to register for Logcat messages. Notifies user about new logs in application.
+     *
+     * @param subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
+     * @param callbackId (long) - id of callback, needed to unsubscribe from messages
+     * @param filterLevel (String) determines which type of logs will be returned by callback
+     * Must be one of the values below:
+     * - "D" (debug)
+     * - "I" (info)
+     * - "W" (warn)
+     * - "E" (error)
+     * @param callback (IOsmAndAidlCallback) - callback to notify user on new OsmAnd logs
+     */
+    long registerForLogcatMessages(in ALogcatListenerParams params, IOsmAndAidlCallback callback);
 }

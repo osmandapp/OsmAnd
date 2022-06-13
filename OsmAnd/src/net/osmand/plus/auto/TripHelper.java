@@ -1,18 +1,30 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
+
+import java.util.TimeZone;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
@@ -25,20 +37,11 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 import androidx.core.graphics.drawable.IconCompat;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.LanesDrawable;
-import net.osmand.plus.views.mapwidgets.TurnDrawable;
-import net.osmand.router.TurnType;
-
-import java.util.TimeZone;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 public class TripHelper {
 
@@ -178,9 +181,20 @@ public class TripHelper {
 				}
 			}
 
+			if (deviatedFromRoute) {
+				lastCurrentRoad = null;
+			} else {
+				String streetName = defineStreetName();
+				if (!Algorithms.isEmpty(streetName)) {
+					stepBuilder.setRoad(streetName);
+					tripBuilder.setCurrentRoad(streetName);
+				}
+				lastCurrentRoad = streetName;
+			}
+
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
-			Distance stepDistance = getDistance(nextTurnDistance);
+			Distance stepDistance = getDistance(app, nextTurnDistance);
 			DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
 			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec);
@@ -189,14 +203,6 @@ public class TripHelper {
 			tripBuilder.addStep(step, stepTravelEstimate);
 			lastStep = step;
 			lastStepTravelEstimate = stepTravelEstimate;
-			if (!deviatedFromRoute) {
-				nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
-				CurrentStreetName currentName = routingHelper.getCurrentName(nextDirInfo);
-				tripBuilder.setCurrentRoad(currentName.text);
-				lastCurrentRoad = currentName.text;
-			} else {
-				lastCurrentRoad = null;
-			}
 		} else {
 			lastStep = null;
 			lastStepTravelEstimate = null;
@@ -208,11 +214,15 @@ public class TripHelper {
 	public Pair<Destination, TravelEstimate> getDestination(@NonNull TargetPoint pointToNavigate) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		Destination.Builder destBuilder = new Destination.Builder();
-		destBuilder.setName(pointToNavigate.getOnlyName());
+		String name = pointToNavigate.getOnlyName();
+		if (Algorithms.isEmpty(name)) {
+			name = app.getString(R.string.route_descr_destination);
+		}
+		destBuilder.setName(name);
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 
-		Distance distance = getDistance(routingHelper.getLeftDistance());
+		Distance distance = getDistance(app, routingHelper.getLeftDistance());
 		int leftTimeSec = routingHelper.getLeftTime();
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
@@ -232,14 +242,14 @@ public class TripHelper {
 		return bitmap;
 	}
 
-	private Distance getDistance(double meters) {
+	static Distance getDistance(@NonNull OsmandApplication app, double meters) {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		int displayUnit;
 		float mainUnitInMeters;
-		if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (mc == net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS) {
 			displayUnit = Distance.UNIT_KILOMETERS;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES) {
 			displayUnit = Distance.UNIT_MILES;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -247,28 +257,28 @@ public class TripHelper {
 			mainUnitInMeters = METERS_IN_ONE_MILE;
 		}
 		if (meters >= 100 * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters + 0.5, displayUnit);
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else if (meters > 9.99f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else if (meters > 0.999f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else {
-			if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS) {
-				return Distance.create(meters + 0.5,  Distance.UNIT_METERS);
-			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET) {
-				return Distance.create(meters * FEET_IN_ONE_METER + 0.5, Distance.UNIT_FEET);
-			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS) {
-				return Distance.create(meters * YARDS_IN_ONE_METER + 0.5, Distance.UNIT_YARDS);
+			if (mc == net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS) {
+				return Distance.create(meters,  Distance.UNIT_METERS);
+			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET) {
+				return Distance.create(meters * FEET_IN_ONE_METER, Distance.UNIT_FEET);
+			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS) {
+				return Distance.create(meters * YARDS_IN_ONE_METER, Distance.UNIT_YARDS);
 			}
-			return Distance.create(meters + 0.5,  Distance.UNIT_METERS);
+			return Distance.create(meters,  Distance.UNIT_METERS);
 		}
 	}
 
@@ -340,5 +350,22 @@ public class TripHelper {
 			default:
 				return LaneDirection.SHAPE_UNKNOWN;
 		}
+	}
+
+	@Nullable
+	private String defineStreetName() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+		CurrentStreetName currentStreetName = routingHelper.getCurrentName(nextDirInfo);
+		String streetName = currentStreetName.text;
+
+		if (Algorithms.isEmpty(streetName)) {
+			return null;
+		}
+
+		String exitRef = currentStreetName.exitRef;
+		return Algorithms.isEmpty(exitRef)
+				? streetName
+				: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, streetName);
 	}
 }

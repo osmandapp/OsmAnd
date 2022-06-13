@@ -159,9 +159,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">s</string>
-    <string name="welcome_descr">
-        <b>OsmAnd tracker</b> ti permette di condividere la tua posizione e di vedere quella di altri su OsmAnd.<br/>
-        <br/>L\'applicazione usa le API di Telegram e pertanto è necessario un account di Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> ti permette di condividere la tua posizione e di vedere quella di altri su OsmAnd.<br/> <br/>L\'applicazione usa le API di Telegram, è pertanto necessario un account di Telegram.</string>
     <string name="my_location">La mia posizione</string>
     <string name="live_now">Ora in diretta</string>
     <string name="logout_from_osmand_telegram_descr">Sei sicuro di volerti disconnettere da OsmAnd Tracker, cosicché non potrai condividere la posizione o vedere quella di altri\?</string>
@@ -196,7 +194,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'applicazione di messaggistica) viene usato per connettersi e comunicare con le persone.</string>
     <string name="privacy_policy_telegram_client">Il tracker OsmAnd è uno dei client utilizzati dalla piattaforma aperta Telegram. I tuoi contatti possono usare un qualsiasi cliente Telegram.</string>
-    <string name="privacy_policy_agree">Cliccando \"Continua\" tu sottoscrivi le condizioni di privacy di Telegram e quelle di OsmAnd.</string>
+    <string name="privacy_policy_agree">Premendo su \"Continua\", accetti le condizioni delle privacy policy di Telegram e di OsmAnd.</string>
     <string name="shared_string_accept">Accettazione</string>
     <string name="how_it_works">Come funziona</string>
     <string name="telegram_privacy_policy">Informativa sulla privacy di Telegram</string>
@@ -267,7 +265,7 @@
     <string name="shared_string_error_short">ERR</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="logcat_buffer">Logcat buffer</string>
-    <string name="send_report">Invia rapporto</string>
+    <string name="send_report">Invia segnalazione</string>
     <string name="shared_string_export">Esporta</string>
     <string name="unit_of_speed_system_descr">Specifica l\'unità di misura della velocità.</string>
     <string name="time_zone_descr">Seleziona il fuso orario da mostrare nei messaggi sulla posizione.</string>

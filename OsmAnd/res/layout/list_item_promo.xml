@@ -79,7 +79,7 @@
                 android:paddingBottom="@dimen/content_padding_small"
                 osmand:typeface="@string/font_roboto_medium"
                 android:textColor="?attr/active_color_basic"
-                android:text="@string/get_plugin" />
+                android:text="@string/shared_string_get" />
 
             <View
                 android:id="@+id/divider"

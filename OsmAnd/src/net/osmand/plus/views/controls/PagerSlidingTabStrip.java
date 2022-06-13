@@ -341,13 +341,17 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	private void updateTabStyles() {
-		tabsContainer.setBackgroundResource(tabBackgroundResId);
+		if (tabBackgroundResId != 0) {
+			tabsContainer.setBackgroundResource(tabBackgroundResId);
+		}
 		if (pager.getAdapter() instanceof CustomTabProvider) {
 			((CustomTabProvider) pager.getAdapter()).tabStylesUpdated(tabsContainer, currentPosition);
 		} else {
 			for (int i = 0; i < tabCount; i++) {
 				View v = tabsContainer.getChildAt(i);
-				v.setBackgroundResource(tabBackgroundResId);
+				if (tabBackgroundResId != 0) {
+					v.setBackgroundResource(tabBackgroundResId);
+				}
 				v.setPadding(tabPadding, v.getPaddingTop(), tabPadding, v.getPaddingBottom());
 
 				TextView tabTitle = v.findViewById(R.id.tab_title);
@@ -501,6 +505,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 			currentPosition = position;
 			currentPositionOffset = positionOffset;
+
+			if (isDataSetChanged()) {
+				notifyDataSetChanged(false);
+				return;
+			}
+
 			int offset = tabCount > 0 ? (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()) : 0;
 			scrollToChild(position, offset);
 			invalidate();
@@ -511,6 +521,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		@Override
 		public void onPageScrollStateChanged(int state) {
+			if (isDataSetChanged()) {
+				notifyDataSetChanged(false);
+				return;
+			}
+
 			if (state == ViewPager.SCROLL_STATE_IDLE) {
 				scrollToChild(pager.getCurrentItem(), 0);
 			}
@@ -535,6 +550,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		@Override
 		public void onPageSelected(int position) {
+			if (isDataSetChanged()) {
+				notifyDataSetChanged(false);
+				return;
+			}
+
 			updateSelection(position);
 			if (delegatePageListener != null) {
 				delegatePageListener.onPageSelected(position);
@@ -596,6 +616,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				}
 			}
 		}
+	}
+
+	private boolean isDataSetChanged() {
+		return pager.getAdapter() != null && tabCount != pager.getAdapter().getCount();
 	}
 
 	private class PagerAdapterObserver extends DataSetObserver {

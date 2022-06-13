@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.getOsmUrlForId;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.isOsmUrlAvailable;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.NativeLibrary.RenderedObject;
@@ -8,12 +11,12 @@ import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -24,8 +27,8 @@ public class RenderedObjectMenuController extends MenuController {
 	private RenderedObject renderedObject;
 
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
-										@NonNull PointDescription pointDescription,
-										@NonNull RenderedObject renderedObject) {
+	                                    @NonNull PointDescription pointDescription,
+	                                    @NonNull RenderedObject renderedObject) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		this.renderedObject = renderedObject;
@@ -114,17 +117,10 @@ public class RenderedObjectMenuController extends MenuController {
 			}
 
 			boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
-			if (osmEditingEnabled && renderedObject.getId() != null
-					&& renderedObject.getId() > 0 &&
-					(renderedObject.getId() % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT 
-							|| (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE)) {
-				String link;
-				if ((renderedObject.getId()) % 2 == MapObject.WAY_MODULO_REMAINDER) {
-					link = "https://www.openstreetmap.org/way/";
-				} else {
-					link = "https://www.openstreetmap.org/node/";
-				}
-				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT), true, true, null);
+			Long id = renderedObject.getId();
+			if (osmEditingEnabled && isOsmUrlAvailable(id)) {
+				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
+				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link, true, true, null);
 			}
 		}
 	}

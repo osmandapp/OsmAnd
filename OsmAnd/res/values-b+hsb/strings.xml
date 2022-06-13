@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_mode_bus">Bus</string>
     <string name="app_mode_train">Ćah</string>
@@ -471,9 +471,6 @@
     <string name="map_widget_lock_screen">Lock screen</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_parking">Parkowanišćo</string>
-    <string name="map_widget_speed">Spěšnosć</string>
-    <string name="map_widget_distance">Cil</string>
-    <string name="map_widget_altitude">Wysokosć</string>
     <string name="map_widget_time">Zbywacy čas</string>
     <string name="show_cameras">Błyskače pokazać</string>
     <string name="show_traffic_warnings">Wobchadne warnowanja pokazać</string>
@@ -1164,7 +1161,7 @@
     <string name="record_plugin_name">Nahrawanje jězbow</string>
     <string name="audionotes_plugin_name">Awdijowe/widejowe noticy</string>
     <string name="audionotes_plugin_description">Přidatk za awdijowe/widejowe noticy skići móžnosć, po puću awdijowe/fotowe/widejowe noticy za wěstu poziciju nahrać, pak přez kneflk na kartowym wobrazu, abo direktnje přez kontekstowy meni.</string>
-    <string name="osm_settings">Wobdźěłanje OSM</string>
+    <string name="osm_editing_plugin_name">Wobdźěłanje OSM</string>
     <string name="rendering_attr_roadStyle_name">Stil pućow</string>
     <string name="rendering_attr_roadStyle_description">Stil pućow</string>
     <string name="rendering_value__name">Standard</string>
@@ -1265,7 +1262,7 @@
     <string name="shared_string_search">Pytać</string>
     <string name="shared_string_message">Zdźělenka</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">mjeńš</string>
+    <string name="shared_string_minute_lowercase">mjeńš</string>
     <string name="osmand_parking_time_left">wyše</string>
     <string name="short_location_on_map">Šěr %1$s
 \nDołh %2$s</string>
@@ -1543,7 +1540,6 @@
     <string name="shared_string_select_folder">Rjadowak…</string>
     <string name="change_osmand_data_folder_question">Rjadowak za OsmAnd-daty změnić\?</string>
     <string name="move_maps_to_new_destination">Na nowe městno přesunyć</string>
-    <string name="internal_app_storage_description">Interny skład, schowany před wužiwarjemi a druhimi aplikacijemi, jenož za OsmAnd přistupny</string>
     <string name="change_data_storage_folder">Rjadowak za składowanje datow změnić</string>
     <string name="rendering_attr_piste_type_connection_name">Zwisk</string>
     <string name="rendering_attr_piste_difficulty_novice_name">nowačk</string>
@@ -1629,4 +1625,8 @@
     <string name="base_profile_descr_aircraft">Lětadło, gliding</string>
     <string name="shared_string_track_is_saved">Čara %s je składowana</string>
     <string name="downloading_list_indexes">Sćahnu lisćinu přistupnych regionow…</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="shared_string_import_complete">Import dokónčeny</string>
+    <string name="add_description">Wopisanje dodać</string>
+    <string name="shared_string_transparency">Transparenca</string>
 </resources>

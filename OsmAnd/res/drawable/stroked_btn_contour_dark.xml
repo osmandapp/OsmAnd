@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item><shape android:shape="rectangle">
         <stroke android:color="@color/divider_color_dark" android:width="1dp" />
-        <corners android:radius="@dimen/dlg_button_rect_rad" />
+        <corners android:radius="@dimen/radius_normal" />
     </shape></item>
 </selector>

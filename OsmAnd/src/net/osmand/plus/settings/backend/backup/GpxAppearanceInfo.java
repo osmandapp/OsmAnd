@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -12,6 +12,10 @@ import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.*;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 
 public class GpxAppearanceInfo {
 
@@ -26,6 +30,13 @@ public class GpxAppearanceInfo {
 	public long timeSpan;
 	public int wptPoints;
 	public float totalDistance;
+
+	public double smoothingThreshold = Double.NaN;
+	public double minFilterSpeed = Double.NaN;
+	public double maxFilterSpeed = Double.NaN;
+	public double minFilterAltitude = Double.NaN;
+	public double maxFilterAltitude = Double.NaN;
+	public double maxFilterHdop = Double.NaN;
 
 	public GpxAppearanceInfo() {
 	}
@@ -45,6 +56,13 @@ public class GpxAppearanceInfo {
 			wptPoints = analysis.wptPoints;
 			totalDistance = analysis.totalDistance;
 		}
+
+		smoothingThreshold = dataItem.getSmoothingThreshold();
+		minFilterSpeed = dataItem.getMinFilterSpeed();
+		maxFilterSpeed = dataItem.getMaxFilterSpeed();
+		minFilterAltitude = dataItem.getMinFilterAltitude();
+		maxFilterAltitude = dataItem.getMaxFilterAltitude();
+		maxFilterHdop = dataItem.getMaxFilterHdop();
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {
@@ -59,6 +77,13 @@ public class GpxAppearanceInfo {
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
 		writeParam(json, "total_distance", totalDistance);
+
+		writeValidDouble(json, TAG_SMOOTHING_THRESHOLD, smoothingThreshold);
+		writeValidDouble(json, TAG_MIN_FILTER_SPEED, minFilterSpeed);
+		writeValidDouble(json, TAG_MAX_FILTER_SPEED, maxFilterSpeed);
+		writeValidDouble(json, TAG_MIN_FILTER_ALTITUDE, minFilterAltitude);
+		writeValidDouble(json, TAG_MAX_FILTER_ALTITUDE, maxFilterSpeed);
+		writeValidDouble(json, TAG_MAX_FILTER_HDOP, maxFilterHdop);
 	}
 
 	public static GpxAppearanceInfo fromJson(@NonNull JSONObject json) {
@@ -92,6 +117,19 @@ public class GpxAppearanceInfo {
 		hasAnyParam |= json.has("total_distance");
 		gpxAppearanceInfo.totalDistance = (float) json.optDouble("total_distance");
 
+		hasAnyParam |= json.has(TAG_SMOOTHING_THRESHOLD);
+		gpxAppearanceInfo.smoothingThreshold = json.optDouble(TAG_SMOOTHING_THRESHOLD);
+		hasAnyParam |= json.has(TAG_MIN_FILTER_SPEED);
+		gpxAppearanceInfo.minFilterSpeed = json.optDouble(TAG_MIN_FILTER_SPEED);
+		hasAnyParam |= json.has(TAG_MAX_FILTER_SPEED);
+		gpxAppearanceInfo.maxFilterSpeed = json.optDouble(TAG_MAX_FILTER_SPEED);
+		hasAnyParam |= json.has(TAG_MIN_FILTER_ALTITUDE);
+		gpxAppearanceInfo.minFilterAltitude = json.optDouble(TAG_MIN_FILTER_ALTITUDE);
+		hasAnyParam |= json.has(TAG_MAX_FILTER_ALTITUDE);
+		gpxAppearanceInfo.maxFilterAltitude = json.optDouble(TAG_MAX_FILTER_ALTITUDE);
+		hasAnyParam |= json.has(TAG_MAX_FILTER_HDOP);
+		gpxAppearanceInfo.maxFilterHdop = json.optDouble(TAG_MAX_FILTER_HDOP);
+
 		return hasAnyParam ? gpxAppearanceInfo : null;
 	}
 
@@ -124,6 +162,12 @@ public class GpxAppearanceInfo {
 				json.putOpt(name, value);
 			}
 		} else if (value != null) {
+			json.putOpt(name, value);
+		}
+	}
+
+	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name, double value) throws JSONException{
+		if (!Double.isNaN(value)) {
 			json.putOpt(name, value);
 		}
 	}

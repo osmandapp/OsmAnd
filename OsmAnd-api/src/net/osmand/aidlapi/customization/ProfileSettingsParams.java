@@ -1,5 +1,7 @@
 package net.osmand.aidlapi.customization;
 
+import static net.osmand.aidlapi.profile.ExportProfileParams.SETTINGS_TYPE_KEY;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -9,8 +11,6 @@ import net.osmand.aidlapi.profile.AExportSettingsType;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.aidlapi.profile.ExportProfileParams.SETTINGS_TYPE_KEY;
 
 public class ProfileSettingsParams extends AidlParams {
 
@@ -38,8 +38,20 @@ public class ProfileSettingsParams extends AidlParams {
 		this.silent = silent;
 	}
 
+	public ProfileSettingsParams(List<String> settingsTypeList, Uri profileSettingsUri, boolean replace,
+	                             boolean silent, String latestChanges, int version) {
+		this.profileSettingsUri = profileSettingsUri;
+		if (settingsTypeList != null) {
+			settingsTypeKeyList.addAll(settingsTypeList);
+		}
+		this.replace = replace;
+		this.latestChanges = latestChanges;
+		this.version = version;
+		this.silent = silent;
+	}
+
 	public ProfileSettingsParams(Uri profileSettingsUri, List<AExportSettingsType> settingsTypeList,
-								 boolean replace, String latestChanges, int version) {
+	                             boolean replace, String latestChanges, int version) {
 		this(profileSettingsUri, settingsTypeList, replace, false, latestChanges, version);
 	}
 
@@ -73,6 +85,10 @@ public class ProfileSettingsParams extends AidlParams {
 
 	public List<String> getSettingsTypeKeys() {
 		return settingsTypeKeyList;
+	}
+
+	public void setSettingsTypeKeyList(List<String> settingsTypeKeyList) {
+		this.settingsTypeKeyList = settingsTypeKeyList;
 	}
 
 	public boolean isReplace() {

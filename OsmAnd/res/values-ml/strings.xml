@@ -127,7 +127,6 @@
     <string name="poi_filter_sightseeing">സൈറ്റ്സീയിങ്ങ്</string>
     <string name="map_widget_lock_screen">സ്ക്രീന്‍ പൂട്ടുക</string>
     <string name="map_widget_parking">പാര്‍ക്കിങ്ങ്</string>
-    <string name="map_widget_distance">ലക്ഷ്യസ്ഥാനം</string>
     <string name="bg_service_screen_lock">സ്ക്രീന്‍ പൂട്ടുക</string>
     <string name="osmand_parking_hours">മണിക്കുര്‍</string>
     <string name="osmand_parking_minutes">മിനിറ്റ്</string>
@@ -331,7 +330,6 @@
     <string name="auto_zoom_map">ഭൂപടം ഓട്ടോസൂമാക്കിക്കാണിക്കുക</string>
     <string name="bg_service_sleep_mode_on">"ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിക്കുന്നത് നിര്‍ത്തുക "</string>
     <string name="map_widget_back_to_loc">എവിടെയാണ് ഞാന്‍</string>
-    <string name="map_widget_altitude">ഉയരം</string>
     <string name="map_widget_next_turn">അടുത്ത തിരുവ്</string>
     <string name="map_widget_next_turn_small">അടുത്ത (ചെറു) തിരുവ്</string>
     <string name="map_widget_next_next_turn">"രണ്ടാമത്തെ  തിരുവ്"</string>
@@ -543,7 +541,7 @@
     <string name="storage_directory">ഭൂപടം സൂക്ഷിക്കുന്ന സ്ഥലം</string>
     <string name="welcome_header">സ്വാഗതം</string>
     <string name="osmand_parking_overdue">കാലാവധി കഴിഞ്ഞൂ</string>
-    <string name="osmand_parking_minute">മി.</string>
+    <string name="shared_string_minute_lowercase">മി.</string>
     <string name="your_edits">നിങ്ങളുടെ എഡിറ്റുകള്‍</string>
     <string name="waypoint_visit_after">പിമ്പായി സന്ദര്‍ശിക്കുക</string>
     <string name="waypoint_visit_before">മുമ്പായി സന്ദര്‍ശിക്കുക</string>
@@ -644,7 +642,6 @@
     <string name="day_night_info">പകല്‍/രാത്രി വിവരം</string>
     <string name="map_widget_show_ruler">സ്കേല്‍</string>
     <string name="bg_service_sleep_mode_off">"ആപ്പിനെ ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിപ്പിക്കുക "</string>
-    <string name="map_widget_speed">വേഗത</string>
     <string name="map_widget_time">ദൈര്‍ഘ്യം</string>
     <string name="bg_service_screen_unlock">"സ്ക്രീന്‍ തുറക്കുക "</string>
     <string name="bg_service_screen_lock_toast">"സ്ക്രീന്‍ പൂട്ടിയിരിക്കുന്നു "</string>
@@ -1537,7 +1534,7 @@
     <string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.
 
 പാര്‍ക്കിങ്ങ് സ്ഥലവും സമയവും ഓഎസ്എംആന്ഡിന്റെ ഡാഷ്ബോഡിലും ഭൂപത്തിലും കാണാവുന്നതാണ്. കൂടാതെ ആന്ഡ്രോയിഡ് കലണ്ടറിലൊരു  ഓര്‍മ്മക്കത്ത് ചേര്‍ക്കാവുന്നതാണ്."</string>
-    <string name="osm_settings">ഓഎസ്എം തിരുത്തലുകള്‍</string>
+    <string name="osm_editing_plugin_name">ഓഎസ്എം തിരുത്തലുകള്‍</string>
     <string name="watch">നിരീക്ഷണം</string>
     <string name="use_opengl_render_descr">ഉപകരണ സഹായത്തോടെ ഓപണ്‍ജിഎല്‍ ഉപയോഗിച്ച് വരക്കുക (ചില ഉപകരണങ്ങളില്‍ പ്രവര്‍ത്തിക്കില്ല)</string>
     <string name="map_update">%1$s ഭൂപടങ്ങള്‍ക്ക് പരിഷ്കാരങ്ങള്‍ ലഭ്യമാണ്</string>
@@ -2039,7 +2036,6 @@
     <string name="save_track_to_gpx_globally_descr">"ജിപിഎക്സ് ഫയലിലേക്കു്  സ്ഥാനം ലോഗ്ഗിങ് ചെയ്യുന്നത്, ഭൂപടത്തിൽ ജിപിഎക്സ് ലോഗിങ് വിഡ്ജെറ്റ് ഉപയോഗിച്ചു് ഓണാക്കുന്നതാണു്."</string>
     <string name="save_current_track_descr">ഇപ്പോൾ നിലവിലുള്ള ട്രാക്ക് ജിപിഎക്സ് ഫയൽ ആയി സംരക്ഷിക്കുക.</string>
     <string name="save_track_to_gpx">നാവിഗേഷൻ സമയത്ത് ട്രാക്ക് ഓട്ടോമാറ്റിക്കായി റെക്കോർഡ് ചെയ്യുക</string>
-    <string name="save_track_to_gpx_descrp">നാവിഗേഷൻ സമയത്ത് GPX ട്രാക്ക്, ട്രാക്കുകളുടെ ഫോൾഡറിലേക്ക് ഓട്ടോമാറ്റിക്കായി സംരക്ഷിക്കുന്നു.</string>
     <string name="save_track_interval_descr">നാവിഗേഷൻ വേളയിൽ ട്രാക്ക് റെക്കോർഡിംഗിനുള്ള ലോഗിംഗ് ഇടവേള തിരഞ്ഞെടുക്കുക.</string>
     <string name="proxy_host_descr">നിങ്ങളുടെ പ്രോക്സി ഹോസ്റ്റിന്റെ പേര് കോൺഫിഗർ ചെയ്യുക (ഉദാ: 127.0.0.1).</string>
     <string name="proxy_port_title">പ്രോക്സി പോർട്ട്</string>
@@ -2099,7 +2095,6 @@
     <string name="precise_routing_mode_descr">തടസം കൂടാതെ കൃത്യമായ യാത്രാമാർഗങ്ങൾ കണക്കാക്കുക. ദൂരം കുറഞ്ഞതും വേഗത കുറഞ്ഞതും.</string>
     <string name="recording_photo_description">ഫോട്ടോ %1$s %2$s</string>
     <string name="srtm_paid_version_msg">കൂടുതല്‍ ഡെവലപ്പ്മെന്റിന് പിന്തുണ നൽകാൻ \'കോണ്ടൂർ ലൈനുകൾ\' പ്ലഗിനു വേണ്ടി പണമടയ്ക്കുക.</string>
-    <string name="av_def_action_choose">അഭ്യർത്ഥനയനുസരിച്ച് തിരഞ്ഞെടുക്കുക</string>
     <string name="recording_error">റെക്കോർഡിംഗ് പരാജയപ്പെട്ടു</string>
     <string name="recording_is_recorded">ഓഡിയോ / വീഡിയോ റെക്കോർഡുചെയ്യുന്നു. AV വിഡ്ജെറ്റ് ടാപ്പുചെയ്യുന്നതിലൂടെ നിർത്തുക.</string>
     <string name="recording_playing">റിക്കോഡിങ്ങില്‍ നിന്ന് ഒരു ഓഡിയോ പ്ളേ ചെയ്യുന്നു.
@@ -2275,7 +2270,7 @@
     <string name="poi_dialog_comment_default">POI മാറുന്നു</string>
     <string name="poi_dialog_other_tags_message">മറ്റെല്ലാ ടാഗുകളും സംരക്ഷിക്കപ്പെടും</string>
     <string name="plugin_install_needs_network">ഈ പ്ലഗിൻ ഇൻസ്റ്റാളുചെയ്യാൻ നിങ്ങൾ ഇന്റർനെറ്റിൽ കണക്റ്റുചെയ്യേണ്ടതുണ്ട്.</string>
-    <string name="get_plugin">നേടുക</string>
+    <string name="shared_string_get">നേടുക</string>
     <string name="rate_this_app">ഈ അപ്ലിക്കേഷൻ റേറ്റുചെയ്യുക</string>
     <string name="rate_this_app_long">Google Play- യിൽ OsmAnd-ന് സ്കോർ കൊടുക്കുക</string>
     <string name="poi_dialog_poi_type">POI തരം</string>
@@ -2293,7 +2288,6 @@
     <string name="morning">രാവിലെ</string>
     <string name="number_of_contributors">സംഭാവകരുടെ എണ്ണം</string>
     <string name="number_of_edits">എഡിറ്റുകളുടെ എണ്ണം</string>
-    <string name="translit_name_if_miss">%1$s പേര് ഇല്ലെങ്കില്‍ ലിപ്യന്തരണം (Transliterate) ചെയ്യുക</string>
     <string name="search_hint">നഗരം, വിലാസം, POI നാമം ടൈപ്പുചെയ്യുക</string>
     <string name="rendering_attr_surfaceIntegrity_name">റോഡ് പ്രതല നിലവാരം</string>
     <string name="save_track_min_speed_descr">ഫിൽറ്റർ: ഈ വേഗതക്ക് താഴെ പോയിന്റുകൾ ലോഗ് ചെയ്യുന്നില്ല.</string>
@@ -2591,7 +2585,6 @@
     <string name="contour_lines_hillshade_maps">കോണ്ടൂര്‍ ലൈനുകള്‍ &amp; ഹില്‍ഷേഡ് മാപ്പുകള്‍</string>
     <string name="open_wikipedia_link_online_description">വെബ് ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക.</string>
     <string name="topo_render_descr">"ഹൈക്കിംങ്| ട്രക്കിങ്| സൈക്ലിംഗ് എന്നിവയ്ക്ക് വേണ്ടി രൂപകൽപ്പന ചെയ്ത കോൺട്രാസ്റ്റ് ശൈലി. സങ്കീർണ്ണമായ വെളിച്ചത്തില്‍ പോലും  വായിക്കാനായ്. പ്രധാന സവിശേഷതകൾ: റോഡുകളും സ്വാഭാവിക വസ്തുക്കളും വേര്‍തിരിച്ചറിയാം| വിവിധ തരത്തിലുള്ള റൂട്ടുകൾ| വിപുലമായ സജ്ജീകരണങ്ങൾ ഉള്ള കോണ്ടൂർ ലൈനുകൾ| ഒരേ സൂം ലെവലിൽ സാധരണ ശൈലിയേക്കാൾ കൂടുതൽ വിശദാംശങ്ങൾ. റോഡ് ഗുണനിലവാരത്തെ തിരിച്ചറിയാം. രാത്രി മോഡ് ഇല്ല."</string>
-    <string name="mapnik_render_descr">പഴയ \'മാപ്പ്നിക്ക്\' ശൈലിയുള്ള സ്ഥിര റെൻഡറിംഗ് ശൈലി. പ്രധാന സവിശേഷതകൾ: മാപ്പ്നിക്ക്\' ശൈലിക്ക് സമാനമായ കളര്‍.</string>
     <string name="default_render_descr">പൊതു ഉദ്ദേശ്യ ശൈലി. ജനസാന്ദ്രതയുള്ള നഗരങ്ങളിൽ ലളിതമായ ക്ലീനർ റെൻഡറിംഗ്. പ്രധാന സവിശേഷതകൾ: കോണ്ടൂർ ലൈനുകൾ| വഴികൾ| ഉപരിതല നിലവാരം| പ്രവേശന നിയന്ത്രണങ്ങൾ| റോഡ് ഷീൽഡുകൾ| പാതകള്‍ എസ്എസി സ്കെയിൽ റെന്‍ഡര്‍ ചെയ്തിരിക്കുന്നു | വാട്ടർ സ്പോർട്സ് സവിശേഷതകൾ</string>
     <string name="touring_view_render_descr">ടൂറിങ്ങ് ആവശ്യകതകൾക്കായി ഉയർന്ന വിശദാംശങ്ങളുള്ള ശൈലി. സാധാരണ ശൈലിയിലുള്ള എല്ലാ കോൺഫിഗറേഷൻ ഓപ്ഷനുകളും ഉൾപ്പെടുന്നു: സാധ്യമായത്രയും വിശദമായി| പ്രത്യേകിച്ച് എല്ലാ റോഡുകളും പാതകളും യാത്ര ചെയ്യാനുള്ള മറ്റ് വഴികളും എല്ലാം പ്രദർശിപ്പിക്കുന്നു. എല്ലാ വ്യത്യസ്ത തരം റോഡുകൾക്കും വ്യക്തമാക്കുക. ഔട്ട്ഡോർ ഉപയോഗത്തിനായി ഉയർന്ന ദൃശ്യതീവ്രത നിറം| ദിനം| രാത്രി മോഡ്.</string>
     <string name="access_intermediate_arrival_time">ഇട-ലക്ഷ്യസ്ഥാനത്തെത്തുന്ന സമയം</string>

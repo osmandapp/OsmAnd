@@ -15,6 +15,7 @@ import java.util.Set;
 public class WorldRegion implements Serializable {
 
 	public static final String WORLD_BASEMAP = "world_basemap";
+	public static final String WORLD_BASEMAP_MINI = "world_basemap_mini";
 	public static final String ANTARCTICA_REGION_ID = "antarctica";
 	public static final String AFRICA_REGION_ID = "africa";
 	public static final String ASIA_REGION_ID = "asia";
@@ -213,7 +214,7 @@ public class WorldRegion implements Serializable {
 		return true;
 	}
 
-	private boolean containsBoundingBox(QuadRect rectangle) {
+	public boolean containsBoundingBox(QuadRect rectangle) {
 		return (boundingBox != null && rectangle != null) &&
 				boundingBox.contains(rectangle);
 	}
@@ -276,5 +277,9 @@ public class WorldRegion implements Serializable {
 		} else {
 			return obfFileName.toLowerCase();
 		}
+	}
+
+	public List<LatLon> getPolygon() {
+		return polygon;
 	}
 }

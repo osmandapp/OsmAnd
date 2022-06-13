@@ -8,21 +8,22 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
-import net.osmand.ValueHolder;
+import net.osmand.data.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
@@ -31,6 +32,7 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.router.TransportRoutingContext;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -485,8 +487,11 @@ public class TransportRoutingHelper {
 			RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
+			String derivedProfile = params.mode.getDerivedProfile();
+			GeneralRouter router = config.getRouter(params.mode.getRoutingProfile());
 			OsmandSettings settings = params.ctx.getSettings();
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getRoutingProfile()).getParameters().entrySet()) {
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(params.mode, router);
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String key = e.getKey();
 				GeneralRouter.RoutingParameter pr = e.getValue();
 				String vl;
@@ -500,6 +505,9 @@ public class TransportRoutingHelper {
 				if (vl != null && vl.length() > 0) {
 					params.params.put(key, vl);
 				}
+			}
+			if (!Algorithms.isEmpty(derivedProfile)) {
+				params.params.put("profile_"+ derivedProfile, String.valueOf(true));
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
@@ -549,14 +557,14 @@ public class TransportRoutingHelper {
 			params.mode = walkingMode;
 			params.ctx = app;
 			params.calculationProgress = new RouteCalculationProgress();
-			params.calculationProgressCallback = new RouteCalculationProgressCallback() {
+			params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 				@Override
-				public void start() {
+				public void onCalculationStart() {
 				}
 
 				@Override
-				public void updateProgress(int progress) {
+				public void onUpdateCalculationProgress(int progress) {
 					float p = Math.max(params.calculationProgress.distanceFromBegin,
 							params.calculationProgress.distanceFromEnd);
 
@@ -565,19 +573,19 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
-				public void requestPrivateAccessRouting() {
+				public void onRequestPrivateAccessRouting() {
 				}
 
 				@Override
-				public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+				public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 				}
 
 				@Override
-				public void finish() {
+				public void onCalculationFinish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
 						walkingSegmentsCalculated = true;
 					} else {
-						updateProgress(0);
+						onUpdateCalculationProgress(0);
 						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 						if (walkingRouteParams != null) {
 							routingHelper.startRouteCalculationThread(walkingRouteParams);

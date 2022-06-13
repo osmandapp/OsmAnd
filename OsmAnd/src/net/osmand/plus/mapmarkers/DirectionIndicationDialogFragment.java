@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -17,69 +16,59 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.Toolbar;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.LinkedList;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.Toolbar;
+
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
 
-	public final static String TAG = "DirectionIndicationDialogFragment";
+	public final static String TAG = DirectionIndicationDialogFragment.class.getSimpleName();
 
-	private DirectionIndicationFragmentListener listener;
 	private View mainView;
 
 	private int helpImgHeight;
 	private boolean shadowVisible;
-	private boolean usedOnMap = false;
-
-	public void setListener(DirectionIndicationFragmentListener listener) {
-		this.listener = listener;
-	}
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandSettings settings = getSettings();
-		boolean nightMode = isNightMode(usedOnMap);
+		boolean nightMode = isNightMode(false);
 		
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
 
-		mainView = UiUtilities.getInflater(getContext(), !settings.isLightContent()).inflate(R.layout.fragment_direction_indication_dialog, container);
+		mainView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.fragment_direction_indication_dialog, container);
 
-		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
+		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
 		toolbar.setNavigationIcon(getIconsCache().getIcon(navigationIconResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(view -> dismiss());
 
-		TextView appModeTv = (TextView) mainView.findViewById(R.id.app_mode_text_view);
+		TextView appModeTv = mainView.findViewById(R.id.app_mode_text_view);
 		ApplicationMode appMode = settings.APPLICATION_MODE.get();
 		appModeTv.setText(appMode.toHumanString());
 		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(
@@ -114,7 +103,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 		updateHelpImage();
 
-		final TextView menuTv = (TextView) mainView.findViewById(R.id.active_markers_text_view);
+		final TextView menuTv = mainView.findViewById(R.id.active_markers_text_view);
 		menuTv.setText(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		menuTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 		menuTv.setOnClickListener(new View.OnClickListener() {
@@ -146,73 +135,30 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			}
 		});
 
-		final CompoundButton distanceIndicationToggle = (CompoundButton) mainView.findViewById(R.id.distance_indication_switch);
-		distanceIndicationToggle.setChecked(settings.MARKERS_DISTANCE_INDICATION_ENABLED.get());
-		mainView.findViewById(R.id.distance_indication_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				updateChecked(settings.MARKERS_DISTANCE_INDICATION_ENABLED, distanceIndicationToggle);
-				updateSelection(true);
-			}
-		});
-		UiUtilities.setupCompoundButton(distanceIndicationToggle, nightMode, PROFILE_DEPENDENT);
+		updateHelpImage();
 
-		mainView.findViewById(R.id.top_bar_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				settings.MAP_MARKERS_MODE.set(MapMarkersMode.TOOLBAR);
-				updateSelection(true);
-			}
-		});
-
-		mainView.findViewById(R.id.widget_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				settings.MAP_MARKERS_MODE.set(MapMarkersMode.WIDGETS);
-				updateSelection(true);
-			}
-		});
-
-		updateSelection(false);
-
-		final CompoundButton showArrowsToggle = (CompoundButton) mainView.findViewById(R.id.show_arrows_switch);
+		final CompoundButton showArrowsToggle = mainView.findViewById(R.id.show_arrows_switch);
 		showArrowsToggle.setChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
-		mainView.findViewById(R.id.show_arrows_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				updateChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS, showArrowsToggle);
-			}
-		});
+		mainView.findViewById(R.id.show_arrows_row).setOnClickListener(view ->
+				updateChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS, showArrowsToggle));
 		UiUtilities.setupCompoundButton(showArrowsToggle, nightMode, PROFILE_DEPENDENT);
 
-		final CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
+		final CompoundButton showLinesToggle = mainView.findViewById(R.id.show_guide_line_switch);
 		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
-		mainView.findViewById(R.id.show_guide_line_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				updateChecked(settings.SHOW_LINES_TO_FIRST_MARKERS, showLinesToggle);
-			}
-		});
+		mainView.findViewById(R.id.show_guide_line_row).setOnClickListener(view ->
+				updateChecked(settings.SHOW_LINES_TO_FIRST_MARKERS, showLinesToggle));
 		UiUtilities.setupCompoundButton(showLinesToggle, nightMode, PROFILE_DEPENDENT);
 
-		final CompoundButton oneTapActiveToggle = (CompoundButton) mainView.findViewById(R.id.one_tap_active_switch);
+		final CompoundButton oneTapActiveToggle = mainView.findViewById(R.id.one_tap_active_switch);
 		oneTapActiveToggle.setChecked(settings.SELECT_MARKER_ON_SINGLE_TAP.get());
-		mainView.findViewById(R.id.one_tap_active_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				updateChecked(settings.SELECT_MARKER_ON_SINGLE_TAP, oneTapActiveToggle);
-			}
-		});
+		mainView.findViewById(R.id.one_tap_active_row).setOnClickListener(view ->
+				updateChecked(settings.SELECT_MARKER_ON_SINGLE_TAP, oneTapActiveToggle));
 		UiUtilities.setupCompoundButton(oneTapActiveToggle, nightMode, PROFILE_DEPENDENT);
 
-		final CompoundButton keepPassedToggle = (CompoundButton) mainView.findViewById(R.id.keep_passed_switch);
+		final CompoundButton keepPassedToggle = mainView.findViewById(R.id.keep_passed_switch);
 		keepPassedToggle.setChecked(settings.KEEP_PASSED_MARKERS_ON_MAP.get());
-		mainView.findViewById(R.id.keep_passed_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateChecked(settings.KEEP_PASSED_MARKERS_ON_MAP, keepPassedToggle);
-			}
-		});
+		mainView.findViewById(R.id.keep_passed_row).setOnClickListener(v ->
+				updateChecked(settings.KEEP_PASSED_MARKERS_ON_MAP, keepPassedToggle));
 		UiUtilities.setupCompoundButton(keepPassedToggle, nightMode, PROFILE_DEPENDENT);
 
 		return mainView;
@@ -225,10 +171,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
-		if (activity != null && activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
+		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
 	}
 
 	private CharSequence[] getMenuTitles() {
@@ -246,41 +189,30 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private void updateHelpImage() {
-		if (Build.VERSION.SDK_INT >= 18) {
-			OsmandSettings settings = getSettings();
-			int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-			LinkedList<Drawable> imgList = new LinkedList<>();
-			imgList.add(getDeviceImg());
-			if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
-				imgList.add(getGuideLineOneImg());
-				if (count == 2) {
-					imgList.add(getGuideLineTwoImg());
-				}
+		OsmandSettings settings = getSettings();
+		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		LinkedList<Drawable> imgList = new LinkedList<>();
+		imgList.add(getDeviceImg());
+		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
+			imgList.add(getGuideLineOneImg());
+			if (count == 2) {
+				imgList.add(getGuideLineTwoImg());
 			}
-			if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
-				imgList.add(getArrowOneImg());
-				if (count == 2) {
-					imgList.add(getArrowTwoImg());
-				}
-			}
-			if (settings.MARKERS_DISTANCE_INDICATION_ENABLED.get()) {
-				if (settings.MAP_MARKERS_MODE.get().isWidgets()) {
-					imgList.add(getWidget1Img());
-					if (count == 2) {
-						imgList.add(getWidget2Img());
-					}
-				} else {
-					imgList.add(getTopBar1Img());
-					if (count == 2) {
-						imgList.add(getTopBar2Img());
-					}
-				}
-			}
-			((ImageView) mainView.findViewById(R.id.action_bar_image))
-					.setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[0])));
-		} else {
-			mainView.findViewById(R.id.action_bar_image_container).setVisibility(View.GONE);
 		}
+		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
+			imgList.add(getArrowOneImg());
+			if (count == 2) {
+				imgList.add(getArrowTwoImg());
+			}
+		}
+		if (settings.SHOW_MAP_MARKERS_BAR_WIDGET.get()) {
+			imgList.add(getTopBar1Img());
+			if (count == 2) {
+				imgList.add(getTopBar2Img());
+			}
+		}
+		((ImageView) mainView.findViewById(R.id.action_bar_image))
+				.setImageDrawable(new LayerDrawable(imgList.toArray(new Drawable[0])));
 	}
 
 	private Drawable getTopBar2Img() {
@@ -291,16 +223,6 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private Drawable getTopBar1Img() {
 		return getIconsCache().getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_topbar_1_day : R.drawable.img_help_markers_direction_topbar_1_night);
-	}
-
-	private Drawable getWidget2Img() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
-				? R.drawable.img_help_markers_direction_widget_2_day : R.drawable.img_help_markers_direction_widget_2_night);
-	}
-
-	private Drawable getWidget1Img() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
-				? R.drawable.img_help_markers_direction_widget_1_day : R.drawable.img_help_markers_direction_widget_1_night);
 	}
 
 	private Drawable getArrowOneImg() {
@@ -328,20 +250,11 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				? R.drawable.img_help_markers_direction_device_day : R.drawable.img_help_markers_direction_device_night);
 	}
 
-	private Drawable getIconBackground(boolean active) {
-		return active ? getIcon(R.drawable.ic_action_device_top, R.color.active_color_primary_light)
-				: getContentIcon(R.drawable.ic_action_device_top);
-	}
-
-	private Drawable getIconTop(int id, boolean active) {
-		return active ? getIcon(id, R.color.active_color_primary_dark) : getContentIcon(id);
-	}
-
 	private void updateDisplayedMarkersCount(int count) {
 		((TextView) mainView.findViewById(R.id.active_markers_text_view))
 				.setText(count == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.set(count);
-		updateSelection(true);
+		updateHelpImage();
 	}
 
 	private void updateChecked(OsmandPreference<Boolean> setting, CompoundButton button) {
@@ -356,45 +269,5 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
 		}
-	}
-
-	private void notifyListener() {
-		if (listener != null) {
-			listener.onMapMarkersModeChanged(getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get());
-		}
-	}
-
-	private void updateSelection(boolean notifyListener) {
-		OsmandSettings settings = getSettings();
-		MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
-		boolean distIndEnabled = settings.MARKERS_DISTANCE_INDICATION_ENABLED.get();
-		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-		int topBarIconId = count == 1 ? R.drawable.ic_action_device_topbar : R.drawable.ic_action_device_topbar_two;
-		int widgetIconId = count == 1 ? R.drawable.ic_action_device_widget : R.drawable.ic_action_device_widget_two;
-		updateIcon(R.id.top_bar_icon, topBarIconId, mode.isToolbar() && distIndEnabled);
-		updateIcon(R.id.widget_icon, widgetIconId, mode.isWidgets() && distIndEnabled);
-		updateMarkerModeRow(R.id.top_bar_row, R.id.top_bar_radio_button, mode.isToolbar(), distIndEnabled);
-		updateMarkerModeRow(R.id.widget_row, R.id.widget_radio_button, mode.isWidgets(), distIndEnabled);
-		if (notifyListener) {
-			notifyListener();
-		}
-		updateHelpImage();
-	}
-
-	private void updateIcon(int imageViewId, int drawableId, boolean active) {
-		ImageView iv = (ImageView) mainView.findViewById(imageViewId);
-		iv.setBackgroundDrawable(getIconBackground(active));
-		iv.setImageDrawable(getIconTop(drawableId, active));
-	}
-
-	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
-		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
-		rb.setChecked(checked);
-		UiUtilities.setupCompoundButton(rb, isNightMode(usedOnMap), PROFILE_DEPENDENT);
-		mainView.findViewById(rowId).setEnabled(active);
-	}
-
-	public interface DirectionIndicationFragmentListener {
-		void onMapMarkersModeChanged(boolean showDirectionEnabled);
 	}
 }

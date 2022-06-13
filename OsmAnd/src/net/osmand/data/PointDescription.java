@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.openlocationcode.OpenLocationCode;
 
 import net.osmand.LocationConvert;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -30,7 +30,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
 	public static final String POINT_TYPE_GPX = "gpx";
-	public static final String POINT_TYPE_RTE = "rte";
+	public static final String POINT_TYPE_ROUTE = "route";
 	public static final String POINT_TYPE_POI = "poi";
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
@@ -46,7 +46,6 @@ public class PointDescription {
 	public static final String POINT_TYPE_MAP_MARKER = "map_marker";
 	public static final String POINT_TYPE_OSM_BUG = "bug";
 	public static final String POINT_TYPE_WORLD_REGION = "world_region";
-	public static final String POINT_TYPE_GPX_ITEM = "gpx_item";
 	public static final String POINT_TYPE_GPX_FILE = "gpx_file";
 	public static final String POINT_TYPE_WORLD_REGION_SHOW_ON_MAP = "world_region_show_on_map";
 	public static final String POINT_TYPE_BLOCKED_ROAD = "blocked_road";
@@ -55,6 +54,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
 	public static final String POINT_TYPE_POI_TYPE = "poi_type";
 	public static final String POINT_TYPE_CUSTOM_POI_FILTER = "custom_poi_filter";
+
 	public static final int LOCATION_URL = 200;
 	public static final int LOCATION_LIST_HEADER = 201;
 
@@ -173,6 +173,8 @@ public class PointDescription {
 		String utm = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.UTM_FORMAT);
 		String olc = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.OLC_FORMAT);
 		String mgrs = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MGRS_FORMAT);
+		String swissGrid = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_FORMAT);
+		String swissGridPlus = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_PLUS_FORMAT);
 
 		try {
 			latLonString = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
@@ -193,11 +195,10 @@ public class PointDescription {
 		results.put(OsmAndFormatter.UTM_FORMAT, utm);
 		results.put(OsmAndFormatter.OLC_FORMAT, olc);
 		results.put(OsmAndFormatter.MGRS_FORMAT, mgrs);
+		results.put(OsmAndFormatter.SWISS_GRID_FORMAT, swissGrid);
+		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
 
-		int zoom = 17;
-		if (ctx.getMapView() != null) {
-			zoom = ctx.getMapView().getZoom();
-		}
+		int zoom = ctx.getMapView().getZoom();
 		final String httpUrl = "https://osmand.net/go?lat=" + (lat) + "&lon=" + (lon) + "&z=" + zoom;
 		results.put(LOCATION_URL, httpUrl);
 
@@ -209,6 +210,10 @@ public class PointDescription {
 			results.put(LOCATION_LIST_HEADER, olc);
 		} else if (f == PointDescription.MGRS_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, mgrs);
+		} else if (f == PointDescription.SWISS_GRID_FORMAT) {
+			results.put(LOCATION_LIST_HEADER, swissGrid);
+		} else if (f == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+			results.put(LOCATION_LIST_HEADER, swissGridPlus);
 		} else if (f == PointDescription.FORMAT_DEGREES) {
 			results.put(LOCATION_LIST_HEADER, latLonDeg);
 		} else if (f == PointDescription.FORMAT_MINUTES) {
@@ -244,10 +249,6 @@ public class PointDescription {
 	
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
-	}
-
-	public boolean isRte() {
-		return POINT_TYPE_RTE.equals(type);
 	}
 	
 	public boolean isPoi() {
@@ -298,6 +299,10 @@ public class PointDescription {
 		return POINT_TYPE_GPX.equals(type);
 	}
 
+	public boolean isRoutePoint() {
+		return POINT_TYPE_ROUTE.equals(type);
+	}
+
 	public boolean isGpxFile() {
 		return POINT_TYPE_GPX_FILE.equals(type);
 	}
@@ -309,8 +314,8 @@ public class PointDescription {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((typeName == null) ? 0 : typeName.hashCode());
-		result = prime * result + ((lat == 0) ? 0 : new Double(lat).hashCode());
-		result = prime * result + ((lon == 0) ? 0 : new Double(lon).hashCode());
+		result = prime * result + ((lat == 0) ? 0 : Double.valueOf(lat).hashCode());
+		result = prime * result + ((lon == 0) ? 0 : Double.valueOf(lon).hashCode());
 		return result;
 	}
 
@@ -335,7 +340,6 @@ public class PointDescription {
 	public static String getSimpleName(LocationPoint o, Context ctx) {
 		PointDescription pd = o.getPointDescription(ctx);
 		return pd.getSimpleName(ctx, true);
-//		return o.getPointDescription(ctx).getFullPlainName(ctx, o.getLatitude(), o.getLongitude());
 	}
 
 	public boolean isSearchingAddress(Context ctx) {
@@ -406,6 +410,8 @@ public class PointDescription {
 	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
 	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
+	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
+	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 
 	public static String formatToHumanString(Context ctx, int format) {
 		switch (format) {
@@ -421,6 +427,10 @@ public class PointDescription {
 				return "OLC";
 			case LocationConvert.MGRS_FORMAT:
 				return "MGRS";
+			case LocationConvert.SWISS_GRID_FORMAT:
+				return ctx.getString(R.string.navigate_point_format_swiss_grid);
+			case LocationConvert.SWISS_GRID_PLUS_FORMAT:
+				return ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
 			default:
 				return "Unknown format";
 		}

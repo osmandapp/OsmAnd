@@ -16,6 +16,7 @@
 		android:divider="@null"
 		android:dividerHeight="0dp"
 		android:drawSelectorOnTop="false"
-		android:groupIndicator="@android:color/transparent" />
+		android:groupIndicator="@android:color/transparent"
+		android:listSelector="@android:color/transparent" />
 
 </LinearLayout>

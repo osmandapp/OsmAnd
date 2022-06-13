@@ -1,14 +1,7 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
-import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
@@ -22,16 +15,12 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.helpers.enums.DrivingRegion;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.helpers.enums.SpeedConstants;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
@@ -41,6 +30,10 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -51,7 +44,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
 //	import android.widget.Toast;
 
@@ -79,6 +78,7 @@ public class WaypointHelper {
 	public static final int MAX = 5;
 	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 200, 500, 1000, 2000, 5000};
 	private static final double DISTANCE_IGNORE_DOUBLE_SPEEDCAMS = 150;
+	private static final double DISTANCE_IGNORE_DOUBLE_RAILWAYS = 50;
 
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
@@ -159,13 +159,36 @@ public class WaypointHelper {
 			}
 		}
 		if (checkedIntermediates != null) {
-			IntermediatePointsDialog.commitPointsRemoval(app, checkedIntermediates);
+			commitPointsRemoval(checkedIntermediates);
 		}
+	}
 
+	private void commitPointsRemoval(final boolean[] checkedIntermediates) {
+		int cnt = 0;
+		for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
+			if (!checkedIntermediates[i]) {
+				cnt++;
+			}
+		}
+		if (cnt > 0) {
+			boolean changeDestinationFlag = !checkedIntermediates[checkedIntermediates.length - 1];
+			if (cnt == checkedIntermediates.length) { // there is no alternative destination if all points are to be removed?
+				app.getTargetPointsHelper().removeAllWayPoints(true, true);
+			} else {
+				for (int i = checkedIntermediates.length - 2; i >= 0; i--) { // skip the destination until a retained waypoint is found
+					if (checkedIntermediates[i] && changeDestinationFlag) { // Find a valid replacement for the destination
+						app.getTargetPointsHelper().makeWayPointDestination(cnt == 0, i);
+						changeDestinationFlag = false;
+					} else if (!checkedIntermediates[i]) {
+						cnt--;
+						app.getTargetPointsHelper().removeWayPoint(cnt == 0, i);
+					}
+				}
+			}
+		}
 	}
 
 	public LocationPointWrapper getMostImportantLocationPoint(List<LocationPointWrapper> list) {
-		//Location lastProjection = app.getRoutingHelper().getLastProjection();
 		if (list != null) {
 			list.clear();
 		}
@@ -215,7 +238,8 @@ public class WaypointHelper {
 			int kIterator = pointsProgress.get(ALARMS);
 			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
 			while (kIterator < lp.size()) {
-				AlarmInfo inf = (AlarmInfo) lp.get(kIterator).point;
+				LocationPointWrapper lwp = lp.get(kIterator);
+				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
 				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() != -1
 						&& inf.getLastLocationIndex() < currentRoute) {
@@ -226,7 +250,12 @@ public class WaypointHelper {
 							&& currentRoute < inf.getLastLocationIndex()) {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
-					int d = route.getDistanceToPoint(inf.getLocationIndex());
+					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
+					int d = (int) Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+							inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
+					if (inf.getLocationIndex() == currentRoute && d > 10) {
+						return null;
+					}
 					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
 						break;
 					}
@@ -378,6 +407,7 @@ public class WaypointHelper {
 
 					VoiceRouter voiceRouter = getVoiceRouter();
 					AnnounceTimeDistances atd = voiceRouter.getAnnounceTimeDistances();
+					RouteDirectionInfo nextRoute = voiceRouter.getNextRouteDirection();
 					float atdSpeed = atd.getSpeed(lastKnownLocation);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
@@ -411,6 +441,13 @@ public class WaypointHelper {
 									case TRAFFIC_CALMING:
 										announceRadius = STATE_SHORT_ALARM_ANNOUNCE;
 										filterCloseAlarms = true;
+										break;
+									case PEDESTRIAN:
+										announceRadius = ((nextRoute != null)
+												&& (nextRoute.getTurnType().isRoundAbout())
+												&& (kIterator != 0))
+												? STATE_SHORT_ALARM_ANNOUNCE
+												: STATE_LONG_ALARM_ANNOUNCE;
 										break;
 									default:
 										announceRadius = STATE_LONG_ALARM_ANNOUNCE;
@@ -546,7 +583,7 @@ public class WaypointHelper {
 			if ((type == FAVORITES || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
 				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavorites().getVisibleFavouritePoints(),
+					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
 							announceFavorites);
 					sortList(array);
 				}
@@ -658,6 +695,7 @@ public class WaypointHelper {
 			return;
 		}
 		AlarmInfo prevSpeedCam = null;
+		AlarmInfo prevRailway = null;
 		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
 			AlarmInfoType type = alarmInfo.getType();
 			if (type == AlarmInfoType.SPEED_CAMERA) {
@@ -676,6 +714,12 @@ public class WaypointHelper {
 			} else if (type == AlarmInfoType.PEDESTRIAN) {
 				if (settings.SHOW_PEDESTRIAN.getModeValue(mode) || settings.SPEAK_PEDESTRIAN.getModeValue(mode)) {
 					addPointWrapper(alarmInfo, array, settings.SPEAK_PEDESTRIAN.getModeValue(mode));
+				}
+			} else if (type == AlarmInfoType.RAILWAY) {
+				if (prevRailway == null || MapUtils.getDistance(prevRailway.getLatitude(), prevRailway.getLongitude(),
+						alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_RAILWAYS) {
+					addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
+					prevRailway = alarmInfo;
 				}
 			} else if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
 				addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
@@ -790,7 +834,7 @@ public class WaypointHelper {
 
 			} else if (type == FAVORITES ) {
 				return PointImageDrawable.getFromFavorite(uiCtx,
-						app.getFavorites().getColorWithCategory((FavouritePoint) point,
+						app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point,
 								app.getResources().getColor(R.color.color_favorite)), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
 				if (point instanceof WptLocationPoint) {

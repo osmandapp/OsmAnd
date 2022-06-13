@@ -6,14 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.OsmandSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.OsmandSettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,8 +86,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 		return new OsmandSettingsItemWriter<OsmandSettingsItem>(this, getSettings()) {
 			@Override
 			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isShared())
-						|| getSettings().APPLICATION_MODE.getId().equals(preference.getId())) {
+				if (getSettings().isExportAvailableForPref(preference)) {
 					preference.writeToJson(json, null);
 				}
 			}

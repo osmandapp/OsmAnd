@@ -1,6 +1,7 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -37,19 +38,29 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	@Override
 	public void setLabelText(String labelText) {
 		super.setLabelText(labelText);
-		floatingLabel.post(new Runnable() {
-			@Override
-			public void run() {
-				if (floatingLabel.getLineCount() > 1) {
-					inputLayout.setPadding(
-							inputLayout.getPaddingLeft(),
-							getResources().getDimensionPixelOffset(useDenseSpacing ? R.dimen.dense_editTextLayout_padding_top : R.dimen.editTextLayout_padding_top) +
-									getResources().getDimensionPixelSize(useDenseSpacing ? R.dimen.context_menu_first_line_top_margin : R.dimen.content_padding_small),
-							inputLayout.getPaddingRight(),
-							inputLayout.getPaddingBottom()
-					);
-				}
+		floatingLabel.post(() -> {
+			if (floatingLabel.getLineCount() > 1) {
+				int topPaddingRes = useDenseSpacing
+						? R.dimen.favorites_my_places_icon_size
+						: R.dimen.list_content_padding_large;
+				int topPadding = getResources().getDimensionPixelSize(topPaddingRes);
+				inputLayout.setPadding(inputLayout.getPaddingLeft(), topPadding,
+						inputLayout.getPaddingRight(), inputLayout.getPaddingBottom());
 			}
 		});
+	}
+
+	public void setClearButton(Drawable clearIcon) {
+		showClearButton();
+		clearButton.setColorFilter(null);
+		clearButton.setImageDrawable(clearIcon);
+	}
+
+	public void hideClearButton() {
+		clearButton.setAlpha(0f);
+	}
+
+	public void showClearButton() {
+		clearButton.setAlpha(1f);
 	}
 }

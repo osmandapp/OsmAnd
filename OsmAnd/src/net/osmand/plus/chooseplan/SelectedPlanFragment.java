@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -25,13 +23,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +45,6 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	public static final String TAG = SelectedPlanFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SelectedPlanFragment.class);
 
-	private static final String PURCHASES_INFO = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
 	public static final String SELECTED_PRICE_BTN_ID = "selected_price_btn_id";
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
@@ -128,8 +125,9 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		backBtn.setOnClickListener(v -> dismiss());
 
 		ImageView helpBtn = mainView.findViewById(R.id.button_help);
-		helpBtn.setOnClickListener(v ->
-				WikipediaDialogFragment.showFullArticle(requireActivity(), Uri.parse(PURCHASES_INFO), nightMode));
+		helpBtn.setOnClickListener(v -> {
+			AndroidUtils.openUrl(requireActivity(), R.string.docs_purchases_android, nightMode);
+		});
 	}
 
 	@Override
@@ -163,15 +161,11 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		int toolbarColor = ColorUtilities.getProportionalColorMix(headerBgColor, activeColor, 0, totalScrollRange, Math.abs(verticalOffset));
 		appBar.setBackgroundColor(toolbarColor);
 		Dialog dialog = getDialog();
-		if (Build.VERSION.SDK_INT >= 21 && dialog != null && dialog.getWindow() != null) {
+		if (dialog != null && dialog.getWindow() != null) {
 			Window window = dialog.getWindow();
 			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 			window.setStatusBarColor(toolbarColor);
-			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-				window.getDecorView().setSystemUiVisibility(collapsed ?
-						mainView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR :
-						mainView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-			}
+			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), mainView.getSystemUiVisibility(), !nightMode && !collapsed);
 		}
 
 		View shadow = mainView.findViewById(R.id.shadowView);
@@ -226,31 +220,30 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		LinearLayout container = mainView.findViewById(R.id.price_block);
 		container.removeAllViews();
 
-		for (PriceButton<?> btn : priceButtons) {
+		for (PriceButton<?> button : priceButtons) {
 			View itemView = themedInflater.inflate(R.layout.purchase_dialog_btn_payment, container, false);
 			TextView tvTitle = itemView.findViewById(R.id.title);
 			TextView tvPrice = itemView.findViewById(R.id.price);
 			TextView tvDiscount = itemView.findViewById(R.id.discount);
 			TextView tvDesc = itemView.findViewById(R.id.description);
 
-			tvTitle.setText(btn.getTitle());
-			tvPrice.setText(btn.getPrice());
-			if (!Algorithms.isEmpty(btn.getDiscount())) {
-				tvDiscount.setText(btn.getDiscount());
-				tvDiscount.setVisibility(View.VISIBLE);
-				if (!Algorithms.isEmpty(btn.getRegularPrice())) {
-					String pattern = getString(R.string.ltr_or_rtl_combine_via_colon);
-					String regularPrice = String.format(pattern, getString(R.string.regular_price), btn.getRegularPrice());
-					tvDesc.setText(regularPrice);
-					tvDesc.setVisibility(View.VISIBLE);
-				}
-			}
+			tvTitle.setText(button.getTitle());
+			tvPrice.setText(button.getPrice());
+			tvDesc.setText(button.getDescription());
+			tvDiscount.setText(button.getDiscount());
+
+			AndroidUiHelper.updateVisibility(tvDesc, !Algorithms.isEmpty(button.getDescription()));
+			AndroidUiHelper.updateVisibility(tvDiscount, !Algorithms.isEmpty(button.getDiscount()));
+
+			int iconId = button.isDiscountApplied() ? R.drawable.purchase_sc_discount_rectangle : R.drawable.purchase_save_discount_rectangle;
+			AndroidUtils.setBackground(tvDiscount, getIcon(iconId));
+
 			itemView.setOnClickListener(v -> {
-				selectedPriceButton = btn;
+				selectedPriceButton = button;
 				updateButtons();
 			});
 
-			buttonViews.put(btn, itemView);
+			buttonViews.put(button, itemView);
 			container.addView(itemView);
 		}
 

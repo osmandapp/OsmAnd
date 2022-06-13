@@ -1,24 +1,5 @@
 package net.osmand.plus.settings.datastorage;
 
-import android.os.Build;
-
-import androidx.annotation.NonNull;
-
-import net.osmand.IndexConstants;
-import net.osmand.ValueHolder;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.settings.datastorage.item.DirectoryItem;
-import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
-import net.osmand.plus.settings.datastorage.item.MemoryItem;
-import net.osmand.plus.settings.datastorage.item.StorageItem;
-import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
-
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
@@ -30,6 +11,34 @@ import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
 import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType.EXTENSIONS;
 import static net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType.PREFIX;
+
+import android.app.ProgressDialog;
+import android.os.Environment;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.data.ValueHolder;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.datastorage.item.DirectoryItem;
+import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
+import net.osmand.plus.settings.datastorage.item.MemoryItem;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
+import net.osmand.plus.utils.FileUtils;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataStorageHelper {
 	public final static String INTERNAL_STORAGE = "internal_storage";
@@ -78,7 +87,7 @@ public class DataStorageHelper {
 		if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
 			currentStorageType = settings.getExternalStorageDirectoryTypeV19();
 		} else {
-			ValueHolder<Integer> vh = new ValueHolder<Integer>();
+			ValueHolder<Integer> vh = new ValueHolder<>();
 			if (vh.value != null && vh.value >= 0) {
 				currentStorageType = vh.value;
 			} else {
@@ -87,80 +96,40 @@ public class DataStorageHelper {
 		}
 		currentStoragePath = settings.getExternalStorageDirectory().getAbsolutePath();
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+		//internal storage
+		StorageItem internalStorageItem = StorageItem.builder()
+				.setKey(INTERNAL_STORAGE)
+				.setTitle(app.getString(R.string.storage_directory_internal_app))
+				.setDirectory(settings.getInternalAppPath().getAbsolutePath())
+				.setDescription(app.getString(R.string.internal_app_storage_description))
+				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
+				.setIconResIds(R.drawable.ic_action_phone, R.drawable.ic_action_phone_filled)
+				.createItem();
+		addItem(internalStorageItem);
 
-			//internal storage
-			String path = settings.getInternalAppPath().getAbsolutePath();
-			File dir = new File(path);
-			int iconId = R.drawable.ic_action_phone;
+		//shared storage
+		StorageItem sharedStorageItem = StorageItem.builder()
+				.setKey(SHARED_STORAGE)
+				.setTitle(app.getString(R.string.storage_directory_shared))
+				.setDirectory(settings.getDefaultInternalStorage().getAbsolutePath())
+				.setDescription(app.getString(R.string.shared_app_storage_description))
+				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
+				.setIconResId(R.drawable.ic_action_device_alert)
+				.createItem();
+		addItem(sharedStorageItem);
 
-			StorageItem internalStorageItem = StorageItem.builder()
-					.setKey(INTERNAL_STORAGE)
-					.setTitle(app.getString(R.string.storage_directory_internal_app))
-					.setDirectory(path)
-					.setDescription(app.getString(R.string.internal_app_storage_description))
-					.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
-					.setIconResId(iconId)
-					.createItem();
-			addItem(internalStorageItem);
+		//external storage
+		File[] externals = app.getExternalFilesDirs(null);
+		if (externals != null) {
+			listExternalOrObbStorages(externals, EXTERNAL_STORAGE, R.string.storage_directory_external,
+					OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE);
+		}
 
-			//shared storage
-			dir = settings.getDefaultInternalStorage();
-			path = dir.getAbsolutePath();
-			iconId = R.drawable.ic_action_phone;
-
-			StorageItem sharedStorageItem = StorageItem.builder()
-					.setKey(SHARED_STORAGE)
-					.setTitle(app.getString(R.string.storage_directory_shared))
-					.setDirectory(path)
-					.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
-					.setIconResId(iconId)
-					.createItem();
-			addItem(sharedStorageItem);
-
-			//external storage
-			File[] externals = app.getExternalFilesDirs(null);
-			if (externals != null) {
-				int i = 0;
-				for (File external : externals) {
-					if (external != null) {
-						++i;
-						dir = external;
-						path = dir.getAbsolutePath();
-						iconId = getIconForStorageType(dir);
-						StorageItem externalStorageItem = StorageItem.builder()
-								.setKey(EXTERNAL_STORAGE + i)
-								.setTitle(app.getString(R.string.storage_directory_external) + " " + i)
-								.setDirectory(path)
-								.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
-								.setIconResId(iconId)
-								.createItem();
-						addItem(externalStorageItem);
-					}
-				}
-			}
-
-			//multi user storage
-			File[] obbDirs = app.getObbDirs();
-			if (obbDirs != null) {
-				int i = 0;
-				for (File obb : obbDirs) {
-					if (obb != null) {
-						++i;
-						dir = obb;
-						path = dir.getAbsolutePath();
-						iconId = getIconForStorageType(dir);
-						StorageItem multiuserStorageItem = StorageItem.builder()
-								.setKey(MULTIUSER_STORAGE + i)
-								.setTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
-								.setDirectory(path)
-								.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
-								.setIconResId(iconId)
-								.createItem();
-						addItem(multiuserStorageItem);
-					}
-				}
-			}
+		//multi user storage
+		File[] obbDirs = app.getObbDirs();
+		if (obbDirs != null) {
+			listExternalOrObbStorages(obbDirs, MULTIUSER_STORAGE, R.string.storage_directory_multiuser,
+					OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB);
 		}
 
 		//manually specified storage
@@ -176,6 +145,32 @@ public class DataStorageHelper {
 		if (currentDataStorage == null) {
 			currentDataStorage = manuallySpecified;
 		}
+	}
+
+	private void listExternalOrObbStorages(File[] dirs, String keyPrefix, int titleRes, int storageType) {
+		int visibleIndex = 0;
+		for (File dir : dirs) {
+			if (dir != null) {
+				visibleIndex++;
+				int notSelectedIcon = getIconResForExternalStorage(dir, false);
+				int selectedIcon = getIconResForExternalStorage(dir, true);
+				StorageItem item = StorageItem.builder()
+						.setKey(keyPrefix + visibleIndex)
+						.setTitle(app.getString(titleRes) + " " + visibleIndex)
+						.setDirectory(dir.getAbsolutePath())
+						.setType(storageType)
+						.setIconResIds(notSelectedIcon, selectedIcon)
+						.createItem();
+				addItem(item);
+			}
+		}
+	}
+
+	@DrawableRes
+	private int getIconResForExternalStorage(File dir, boolean selected) {
+		return Environment.isExternalStorageRemovable(dir)
+				? selected ? R.drawable.ic_actiond_sdcard_filled : R.drawable.ic_sdcard
+				: R.drawable.ic_action_folder;
 	}
 
 	private void initUsedMemoryItems() {
@@ -240,10 +235,6 @@ public class DataStorageHelper {
 
 	public ArrayList<StorageItem> getStorageItems() {
 		return storageItems;
-	}
-
-	private int getIconForStorageType(File dir) {
-		return R.drawable.ic_action_folder;
 	}
 
 	public StorageItem getCurrentStorage() {
@@ -318,6 +309,58 @@ public class DataStorageHelper {
 		}
 		String formattedUsed = new DecimalFormat("#.##").format(memory);
 		return String.format(formatStrings[type], formattedUsed);
+	}
+
+	public static boolean isCurrentStorageShared(@NonNull OsmandApplication app) {
+		DataStorageHelper dataStorageHelper = new DataStorageHelper(app);
+		return SHARED_STORAGE.equals(dataStorageHelper.getCurrentStorage().getKey());
+	}
+
+	public static boolean saveFilesLocation(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
+		boolean writable = FileUtils.isWritable(selectedFile);
+		if (writable) {
+			app.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
+			reloadData(app, activity);
+		} else {
+			app.showToastMessage(R.string.specified_directiory_not_writeable);
+		}
+		return writable;
+	}
+
+	public static void checkAssetsAsync(@NonNull OsmandApplication app) {
+		app.getResourceManager().checkAssetsAsync(IProgress.EMPTY_PROGRESS, true, false, null);
+	}
+
+	public static void updateDownloadIndexes(@NonNull OsmandApplication app) {
+		app.getDownloadThread().runReloadIndexFilesSilent();
+	}
+
+	public static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
+		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
+
+			private ProgressImplementation progress;
+
+			@Override
+			public void reloadIndexesStarted() {
+				FragmentActivity activity = activityRef.get();
+				if (activity != null) {
+					progress = ProgressImplementation.createProgressDialog(activity, app.getString(R.string.loading_data),
+							app.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+				}
+			}
+
+			@Override
+			public void reloadIndexesFinished(List<String> warnings) {
+				try {
+					if (progress != null && progress.getDialog().isShowing()) {
+						progress.getDialog().dismiss();
+					}
+				} catch (Exception e) {
+					//ignored
+				}
+			}
+		});
 	}
 
 	public interface UpdateMemoryInfoUIAdapter {

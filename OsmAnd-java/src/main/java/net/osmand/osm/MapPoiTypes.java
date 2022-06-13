@@ -37,12 +37,18 @@ public class MapPoiTypes {
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
 	private Set<String> forbiddenTypes = new HashSet<>();
 	private PoiCategory otherCategory;
-	private PoiCategory otherMapCategory;
 
 	public static final String WIKI_LANG = "wiki_lang";
 	public static final String WIKI_PLACE = "wiki_place";
 	public static final String OSM_WIKI_CATEGORY = "osmwiki";
 	public static final String SPEED_CAMERA = "speed_camera";
+
+	public static final String ROUTES = "routes";
+	public static final String ROUTE_ARTICLE = "route_article";
+	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
+	public static final String CATEGORY = "category";
+	public static final String ROUTE_TRACK = "route_track";
+	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
@@ -67,6 +73,7 @@ public class MapPoiTypes {
 		String getSynonyms(AbstractPoiType type);
 		String getSynonyms(String keyName);
 
+		String getAllLanguagesTranslationSuffix();
 	}
 
 	public static MapPoiTypes getDefaultNoInit() {
@@ -99,10 +106,7 @@ public class MapPoiTypes {
 	}
 
 	public PoiCategory getOtherMapCategory() {
-		if (otherMapCategory == null) {
-			otherMapCategory = getPoiCategoryByName(OTHER_MAP_CATEGORY, true);
-		}
-		return otherMapCategory;
+		return getPoiCategoryByName(OTHER_MAP_CATEGORY, true);
 	}
 
 	public String getPoiAdditionalCategoryIconName(String category) {
@@ -139,6 +143,16 @@ public class MapPoiTypes {
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory category = categories.get(i);
 			if (category.isWiki()) {
+				return category;
+			}
+		}
+		return null;
+	}
+
+	public PoiCategory getRoutes() {
+		for (int i = 0; i < categories.size(); i++) {
+			PoiCategory category = categories.get(i);
+			if (category.isRoutes()) {
 				return category;
 			}
 		}
@@ -242,7 +256,7 @@ public class MapPoiTypes {
 		List<AbstractPoiType> tm = new ArrayList<AbstractPoiType>();
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory pc = categories.get(i);
-			if (pc == otherMapCategory) {
+			if (pc == getOtherMapCategory()) {
 				continue;
 			}
 			addIf(tm, pc, matcher);
@@ -314,9 +328,9 @@ public class MapPoiTypes {
 	}
 
 	private void addCategory(PoiCategory category) {
-		List<PoiCategory> copy = new ArrayList<>(categories);
-		copy.add(category);
-		categories = copy;
+		List<PoiCategory> categories = new ArrayList<>(this.categories);
+		categories.add(category);
+		this.categories = categories;
 	}
 
 	public PoiTranslator getPoiTranslator() {
@@ -325,8 +339,9 @@ public class MapPoiTypes {
 
 	public void setPoiTranslator(PoiTranslator poiTranslator) {
 		this.poiTranslator = poiTranslator;
+		List<PoiCategory> categories = new ArrayList<>(this.categories);
 		sortList(categories);
-
+		this.categories = categories;
 	}
 
 	public void init() {
@@ -804,7 +819,14 @@ public class MapPoiTypes {
 		return getBasePoiName(abstractPoiType);
 	}
 
-	private String getBasePoiName(AbstractPoiType abstractPoiType) {
+	public String getAllLanguagesTranslationSuffix() {
+		if (poiTranslator != null) {
+			return poiTranslator.getAllLanguagesTranslationSuffix();
+		}
+		return "all languages";
+	}
+
+	public String getBasePoiName(AbstractPoiType abstractPoiType) {
 		String name = abstractPoiType.getKeyName();
 		if(name.startsWith("osmand_")) {
 			name = name.substring("osmand_".length());

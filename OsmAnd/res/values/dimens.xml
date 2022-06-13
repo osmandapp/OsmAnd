@@ -16,6 +16,9 @@
 
     <dimen name="line_spacing_multiplier_description">1.2</dimen>
     <dimen name="line_spacing_extra_description">5dp</dimen>
+	<dimen name="price_button_bottom_padding">2dp</dimen>
+    <dimen name="price_bottom_title_bottom_padding">1dp</dimen>
+	<dimen name="backup_icons_view_height">150dp</dimen>
     <dimen name="list_content_padding_small">10dp</dimen>
 
 </resources>

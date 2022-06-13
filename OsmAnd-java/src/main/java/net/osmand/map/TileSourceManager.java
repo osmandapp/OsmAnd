@@ -21,9 +21,12 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class TileSourceManager {
@@ -40,7 +43,6 @@ public class TileSourceManager {
 
 	private static final String MAPNIK_URL = "https://tile.osmand.net/hd/{0}/{1}/{2}.png";
 	private static final String CYCLE_URL = "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116";
-	private static final String MAPILLARY_RASTER_URL = "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png";
 	private static final String MAPILLARY_VECTOR_URL = "https://tiles.mapillary.com/maps/vtp/mly1_public/2/{0}/{1}/{2}/?access_token="
 			+ MAPILLARY_ACCESS_TOKEN;
 
@@ -50,22 +52,18 @@ public class TileSourceManager {
 	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
 			new TileSourceTemplate("CycleMap", CYCLE_URL, ".png", 16, 1,
 					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
-	private static final TileSourceTemplate MAPILLARY_RASTER_SOURCE =
-			new TileSourceTemplate("Mapillary (raster tiles)", MAPILLARY_RASTER_URL, ".png",
-					16, 0, 256, 16, 32000);
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
 					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
 
 	static {
-		MAPILLARY_RASTER_SOURCE.setExpirationTimeMinutes(60 * 24);
-		MAPILLARY_RASTER_SOURCE.setHidden(true);
 		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(60 * 24);
 		MAPILLARY_VECTOR_SOURCE.setHidden(true);
 	}
 
 	private static final String PARAM_BING_QUAD_KEY = "{q}";
 	private static final String PARAM_RND = "{rnd}";
+	public static final String PARAMETER_NAME = "{PARAM}";
 
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
 		private int maxZoom;
@@ -73,6 +71,7 @@ public class TileSourceManager {
 		private String name;
 		protected int tileSize;
 		protected String urlToLoad;
+		private final Map<String, String> urlParameters = new ConcurrentHashMap<>();
 		protected String ext;
 		private int avgSize;
 		private int bitDensity;
@@ -87,10 +86,15 @@ public class TileSourceManager {
 		private String userAgent;
 		private boolean hidden; // if hidden in configure map settings, for example mapillary sources
 
+		private ParameterType paramType = ParameterType.UNDEFINED;
+		private long paramMin;
+		private long paramStep;
+		private long paramMax;
+
 		private boolean isRuleAcceptable = true;
 
-		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
-				int avgSize) {
+		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom,
+		                          int tileSize, int bitDensity, int avgSize) {
 			this.maxZoom = maxZoom;
 			this.minZoom = minZoom;
 			this.name = name;
@@ -99,6 +103,16 @@ public class TileSourceManager {
 			this.ext = ext;
 			this.avgSize = avgSize;
 			this.bitDensity = bitDensity;
+		}
+
+		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom,
+		                          int tileSize, int bitDensity, int avgSize,
+		                          ParameterType paramType, long paramMin, long paramStep, long paramMax) {
+			this(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+			this.paramType = paramType;
+			this.paramMin = paramMin;
+			this.paramStep = paramStep;
+			this.paramMax = paramMax;
 		}
 
 		public static String normalizeUrl(String url) {
@@ -311,7 +325,64 @@ public class TileSourceManager {
 		public void setRuleAcceptable(boolean isRuleAcceptable) {
 			this.isRuleAcceptable = isRuleAcceptable;
 		}
-		
+
+		public ParameterType getParamType() {
+			return paramType;
+		}
+
+		public long getParamMin() {
+			return paramMin;
+		}
+
+		public long getParamStep() {
+			return paramStep;
+		}
+
+		public long getParamMax() {
+			return paramMax;
+		}
+
+		public void setParamType(ParameterType paramType) {
+			this.paramType = paramType;
+		}
+
+		public void setParamMin(long paramMin) {
+			this.paramMin = paramMin;
+		}
+
+		public void setParamStep(long paramStep) {
+			this.paramStep = paramStep;
+		}
+
+		public void setParamMax(long paramMax) {
+			this.paramMax = paramMax;
+		}
+
+		@Override
+		public Map<String, String> getUrlParameters() {
+			return Collections.unmodifiableMap(urlParameters);
+		}
+
+		@Override
+		public String getUrlParameter(String name) {
+			return urlParameters.get(name);
+		}
+
+		@Override
+		public void setUrlParameter(String name, String value) {
+			urlParameters.put(name, value);
+		}
+
+		@Override
+		public void resetUrlParameter(String name) {
+			urlParameters.remove(name);
+		}
+
+		@Override
+		public void resetUrlParameters() {
+			urlParameters.clear();
+		}
+
 		public TileSourceTemplate copy() {
 			try {
 				return (TileSourceTemplate) this.clone();
@@ -329,7 +400,7 @@ public class TileSourceManager {
 			if (isInvertedYTile()) {
 				y = (1 << zoom) - 1 - y;
 			}
-			return buildUrlToLoad(urlToLoad, randomsArray, x, y, zoom);
+			return buildUrlToLoad(urlToLoad, randomsArray, x, y, zoom, urlParameters);
 		}
 
 		private static String eqtBingQuadKey(int z, int x, int y) {
@@ -344,7 +415,7 @@ public class TileSourceManager {
 			return new String(tn);
 		}
 
-		public static String buildUrlToLoad(String urlTemplate, String[] randomsArray, int x, int y, int zoom) {
+		public static String buildUrlToLoad(String urlTemplate, String[] randomsArray, int x, int y, int zoom, Map<String, String> params) {
 			try {
 				if (randomsArray != null && randomsArray.length > 0) {
 					String rand;
@@ -362,6 +433,16 @@ public class TileSourceManager {
 				int bingQuadKeyParamIndex = urlTemplate.indexOf(PARAM_BING_QUAD_KEY);
 				if (bingQuadKeyParamIndex != -1) {
 					return urlTemplate.replace(PARAM_BING_QUAD_KEY, eqtBingQuadKey(zoom, x, y));
+				}
+
+				if (!Algorithms.isEmpty(params)) {
+					for (Entry<String, String> pv : params.entrySet()) {
+						String name = pv.getKey();
+						int paramIndex = urlTemplate.indexOf(name);
+						if (paramIndex != -1) {
+							urlTemplate = urlTemplate.replace(name, pv.getValue());
+						}
+					}
 				}
 
 				return MessageFormat.format(urlTemplate, zoom + "", x + "", y + "");
@@ -415,20 +496,29 @@ public class TileSourceManager {
 		public String getRule() {
 			return rule;
 		}
-		
+
 		public String calculateTileId(int x, int y, int zoom) {
 			StringBuilder builder = new StringBuilder(getName());
 			builder.append('/');
 			builder.append(zoom).append('/').append(x).append('/').append(y).append(getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
 			return builder.toString();
 		}
-		
+
+		@Override
+		public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles) {
+			File en = new File(dirWithTiles, calculateTileId(x, y, zoom));
+			if (en.exists()) {
+				return en.lastModified();
+			}
+			return System.currentTimeMillis();
+		}
+
 		@Override
 		public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
 			File f = new File(dirWithTiles, calculateTileId(x, y, zoom));
 			if (!f.exists())
 				return null;
-			
+
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
 			FileInputStream fis = new FileInputStream(f);
 			Algorithms.streamCopy(fis, bous);
@@ -505,9 +595,15 @@ public class TileSourceManager {
 		if (tm.getExpirationTimeMinutes() != -1) {
 			properties.put("expiration_time_minutes", tm.getExpirationTimeMinutes() + "");
 		}
+		if (tm.paramType != ParameterType.UNDEFINED) {
+			properties.put("param_type", tm.paramType.getParamName());
+			properties.put("param_min", tm.paramMin + "");
+			properties.put("param_step", tm.paramStep + "");
+			properties.put("param_max", tm.paramMax + "");
+		}
 		if (override || !metainfo.exists()) {
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
-			for (Map.Entry<String, String> entry : properties.entrySet()) {
+			for (Entry<String, String> entry : properties.entrySet()) {
 				writer.write("[" + entry.getKey() + "]\n" + entry.getValue() + "\n");
 			}
 			writer.close();
@@ -622,10 +718,6 @@ public class TileSourceManager {
 		return MAPNIK_SOURCE;
 	}
 
-	public static TileSourceTemplate getMapillaryRasterSource() {
-		return MAPILLARY_RASTER_SOURCE;
-	}
-
 	public static TileSourceTemplate getMapillaryVectorSource() {
 		return MAPILLARY_VECTOR_SOURCE;
 	}
@@ -634,7 +726,7 @@ public class TileSourceManager {
 		final List<TileSourceTemplate> templates = new ArrayList<>();
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection((https ? "https" : "http")
-					+ "://test.osmand.net/tile_sources?" + versionAsUrl);
+					+ "://download.osmand.net/tile_sources?" + versionAsUrl);
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int tok;
@@ -740,6 +832,22 @@ public class TileSourceManager {
 		templ.setEllipticYTile(ellipsoid);
 		templ.setInvertedYTile(invertedY);
 		templ.setRandoms(randoms);
+		if (attributes.get("param_type") != null && attributes.get("param_min") != null
+				&& attributes.get("param_step") != null && attributes.get("param_max") != null) {
+			templ.setParamType(ParameterType.fromName(attributes.get("param_type")));
+			try {
+				templ.setParamMin(Long.parseLong(attributes.get("param_min")));
+			} catch (NumberFormatException ignore) {
+			}
+			try {
+				templ.setParamStep(Long.parseLong(attributes.get("param_step")));
+			} catch (NumberFormatException ignore) {
+			}
+			try {
+				templ.setParamMax(Long.parseLong(attributes.get("param_max")));
+			} catch (NumberFormatException ignore) {
+			}
+		}
 		return templ;
 	}
 }

@@ -21,6 +21,7 @@ private const val MIN_MESSAGE_SENDING_INTERVAL_MS = 1000 // 1 sec
 private const val MIN_MESSAGES_BUFFER_CHECK_INTERVAL_MS = 300 // 0.3 sec
 
 private const val SEND_MESSAGES_BUFFER_MS_MSG_ID = 5000
+private const val SEND_NEW_MESSAGE_INTERVAL_SEC = 15 * 60 // 15 min
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -239,7 +240,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	}
 
 
-	private fun shareLocationMessages(location: Location, userId: Int) {
+	private fun shareLocationMessages(location: Location, userId: Long) {
 		val chatsShareInfo = app.settings.getChatsShareInfo()
 		val latitude = location.latitude
 		val longitude = location.longitude
@@ -330,7 +331,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					} else {
 						app.locationMessages.addBufferedMessage(message)
 					}
-				} else {
+				} else if (!shareInfo.hasMapSharingError || ((System.currentTimeMillis() / 1000) - shareInfo.lastSendMapMessageTime) >= SEND_NEW_MESSAGE_INTERVAL_SEC) {
 					app.telegramHelper.sendNewMapLocation(shareInfo, message)
 				}
 			}
@@ -385,7 +386,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 								shareInfo.lastMapSuccessfulSendTime = System.currentTimeMillis() / 1000
 							}
 							app.locationMessages.removeBufferedMessage(locationMessage)
-							if ((shareInfo.shouldSendViaBotTextMessage || shareInfo.shouldSendViaBotMapMessage) && osmandBotId != -1 && device != null) {
+							if ((shareInfo.shouldSendViaBotTextMessage || shareInfo.shouldSendViaBotMapMessage) && osmandBotId != -1L && device != null) {
 								app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon, locationMessage.hdop), device, shareType)
 								shareInfo.shouldSendViaBotTextMessage = false
 								shareInfo.shouldSendViaBotMapMessage = false

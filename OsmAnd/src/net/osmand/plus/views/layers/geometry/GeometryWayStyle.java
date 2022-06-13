@@ -3,49 +3,81 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.util.Algorithms;
+
+import java.util.Arrays;
 
 public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
-	private T context;
+	private final T context;
 	protected Integer color;
 	protected Float width;
+	protected float[] dashPattern;
+	public static final int COLORIZATION_NONE = 0;
+	public static final int COLORIZATION_GRADIENT = 1;
+	public static final int COLORIZATION_SOLID = 2;
 
-	public GeometryWayStyle(T context) {
+	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
 	}
 
-	public GeometryWayStyle(T context, Integer color) {
+	public GeometryWayStyle(@NonNull T context, Integer color) {
 		this.context = context;
 		this.color = color;
 	}
 
-	public GeometryWayStyle(T context, Integer color, Float width) {
+	public GeometryWayStyle(@NonNull T context, Integer color, Float width) {
 		this.context = context;
 		this.color = color;
 		this.width = width;
 	}
 
+	@NonNull
 	public T getContext() {
 		return context;
 	}
 
+	@NonNull
 	public Context getCtx() {
 		return context.getCtx();
 	}
 
+	@Nullable
 	public Integer getColor() {
 		return color;
 	}
 
+	public Integer getColor(Integer def) {
+		return color != null ? color : def;
+	}
+
+	@Nullable
 	public Float getWidth() {
 		return width;
 	}
 
-	public Integer getStrokeColor() {
-		return context.getStrokeColor(color);
+	public Float getWidth(Integer def) {
+		return width != null ? width : def;
 	}
 
+	@Nullable
+	public float[] getDashPattern() {
+		return dashPattern;
+	}
+
+	@Nullable
+	public Integer getStrokeColor() {
+		return color != null ? context.getStrokeColor(color) : null;
+	}
+
+	public Integer getStrokeColor(Integer def) {
+		return color != null ? context.getStrokeColor(color) : def;
+	}
+
+	@Nullable
 	public Integer getPointColor() {
 		return null;
 	}
@@ -92,6 +124,12 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 			return false;
 		}
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
-		return Algorithms.objectEquals(color, o.color) && Algorithms.objectEquals(width, o.width);
+		return Algorithms.objectEquals(color, o.color)
+				&& Algorithms.objectEquals(width, o.width)
+				&& Arrays.equals(dashPattern, o.dashPattern);
+	}
+
+	public int getColorizationScheme() {
+		return COLORIZATION_NONE;
 	}
 }

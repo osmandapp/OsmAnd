@@ -84,8 +84,7 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 	}
 
 	@Override
-	protected void makeFullUrl(@NonNull StringBuilder sb,
-	                           @NonNull List<LatLon> path) {
+	protected void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing) {
 		sb.append("?");
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
@@ -99,7 +98,10 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 		}
 		String vehicle = getVehicleKeyForUrl();
 		if (!isEmpty(vehicle)) {
-			sb.append('&').append("vehicle=").append(vehicle);
+			if (!isCustomParameterizedVehicle()) {
+				sb.append('&').append("vehicle=");
+			}
+			sb.append(vehicle);
 		}
 		String apiKey = get(EngineParameter.API_KEY);
 		if (!isEmpty(apiKey)) {

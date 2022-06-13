@@ -17,7 +17,7 @@ object OsmandApiUtils {
 
 	private val log = PlatformUtil.getLog(OsmandApiUtils::class.java)
 
-	fun updateSharingDevices(app: TelegramApplication, userId: Int) {
+	fun updateSharingDevices(app: TelegramApplication, userId: Long) {
 		AndroidNetworkUtils.sendRequestAsync(app, "$BASE_URL/device/send-devices?uid=$userId", null, "Get Devices", true, false,
 			object : AndroidNetworkUtils.OnRequestResultListener {
 				override fun onResult(result: String?) {

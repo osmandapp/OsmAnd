@@ -1,30 +1,41 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchHistoryFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
-import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryCard extends MapBaseCard {
 
-	private List<SearchResult> searchResults;
+	private final List<SearchResult> searchResults;
 	private int limit = 3;
 
 	public HistoryCard(MapActivity mapActivity, List<SearchResult> searchResults) {
@@ -47,62 +58,81 @@ public class HistoryCard extends MapBaseCard {
 			}
 		}
 
-		LinearLayout items = (LinearLayout) view.findViewById(R.id.items);
+		LinearLayout items = view.findViewById(R.id.items);
 		items.removeAllViews();
 
-		int i = 0;
 		boolean showLimitExceeds = list.size() > limit + 1;
-		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		LayoutInflater inflater = LayoutInflater.from(ctx);
-		for (final SearchResult searchResult : list) {
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+
+		int iconColorId = nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light;
+		int iconColor = ContextCompat.getColor(app, iconColorId);
+
+		for (int i = 0; i < list.size(); i++) {
 			if (showLimitExceeds && i >= limit) {
 				break;
 			}
-			String title = QuickSearchListItem.getName(app, searchResult);
-			String description = QuickSearchListItem.getTypeName(app, searchResult);
-			boolean hasDesc = !Algorithms.isEmpty(description);
-			View v = inflater.inflate(R.layout.history_card_item, items, false);
-			v.findViewById(R.id.divider).setVisibility(i == 0 ? View.GONE : View.VISIBLE);
-			TextView titleView = (TextView) v.findViewById(R.id.title);
-			TextView subtitleView = (TextView) v.findViewById(R.id.subtitle);
-			titleView.setText(title);
-			if (hasDesc) {
-				subtitleView.setText(description);
-				subtitleView.setVisibility(View.VISIBLE);
-			} else {
-				subtitleView.setVisibility(View.GONE);
-			}
-			Drawable image;
-			final HistoryEntry entry = (HistoryEntry) searchResult.object;
-			int iconId = QuickSearchListItem.getHistoryIconId(app, entry);
-			try {
-				image = app.getUIUtilities().getIcon(iconId, nightMode ?
-						R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-			} catch (Exception e) {
-				image = app.getUIUtilities().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()), nightMode ?
-						R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-			}
-			ImageView img = (ImageView) v.findViewById(R.id.imageView);
-			img.setImageDrawable(image);
-			img.setVisibility(View.VISIBLE);
+			SearchResult searchResult = list.get(i);
 
-			ImageView typeImg = (ImageView) v.findViewById(R.id.type_name_icon);
-			Drawable typeIcon = QuickSearchListItem.getTypeIcon(app, searchResult);
-			if (typeIcon != null && hasDesc) {
-				typeImg.setImageDrawable(typeIcon);
-				typeImg.setVisibility(View.VISIBLE);
-			} else {
-				typeImg.setVisibility(View.GONE);
-			}
+			LinearLayout view;
+			QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
+			if (searchResult.objectType == ObjectType.GPX_TRACK) {
+				view = (LinearLayout) inflater.inflate(R.layout.search_gpx_list_item, items, false);
 
-			v.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.getTargetPointsHelper().navigateToPoint(searchResult.location, true, -1, entry.getName());
-				}
-			});
-			items.addView(v);
-			i++;
+				GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+				QuickSearchListAdapter.bindGpxTrack(view, listItem, gpxInfo);
+
+				ImageView icon = view.findViewById(R.id.icon);
+				icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
+
+				view.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						String fileName = gpxInfo.getFileName();
+						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+						if (selectedGpxFile != null) {
+							GPXFile gpxFile = selectedGpxFile.getGpxFile();
+							mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile);
+						} else {
+							CallbackWithObject<GPXFile[]> callback = result -> {
+								MapActivity mapActivity = getMapActivity();
+								if (mapActivity != null) {
+									mapActivity.getMapRouteInfoMenu().selectTrack(result[0]);
+								}
+								return true;
+							};
+							File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+							GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, callback, dir, null, fileName);
+						}
+					}
+				});
+			} else {
+				view = (LinearLayout) inflater.inflate(R.layout.search_list_item, items, false);
+				QuickSearchListAdapter.bindSearchResult(view, listItem);
+
+				ImageView icon = view.findViewById(R.id.imageView);
+				icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
+
+				final HistoryEntry entry = (HistoryEntry) searchResult.object;
+				view.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						app.getTargetPointsHelper().navigateToPoint(searchResult.location, true, -1, entry.getName());
+					}
+				});
+			}
+			View itemContainer = view.findViewById(R.id.searchListItemLayout);
+			itemContainer.setBackground(UiUtilities.getSelectableDrawable(themedContext));
+			itemContainer.setMinimumHeight(getDimen(R.dimen.route_info_card_item_height));
+
+			int margin = getDimen(R.dimen.route_info_list_text_padding);
+			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(app, 1));
+			AndroidUtils.setMargins(params, margin, 0, 0, 0);
+			View divider = view.findViewById(R.id.divider);
+			divider.setLayoutParams(params);
+			AndroidUiHelper.updateVisibility(divider, !showLimitExceeds || i < limit);
+
+			items.addView(view);
 		}
 
 		View showAllButton = view.findViewById(R.id.show_all_button);

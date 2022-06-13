@@ -18,31 +18,40 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.PolygonBuilder;
+import net.osmand.core.jni.PolygonsCollection;
+import net.osmand.core.jni.QVectorPointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.resources.ResourceManager.ResourceListener;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -58,12 +67,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
+public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection,
+		ResourceListener {
 
 	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
 	private Paint paintSelected;
@@ -87,11 +96,21 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_AFTER_BASEMAP = 12;
 
 	private static final int ZOOM_TO_SHOW_BORDERS_ST = 4;
-	private static final int ZOOM_TO_SHOW_BORDERS = 7;
+	private static final int ZOOM_TO_SHOW_BORDERS = 8;
 	private static final int ZOOM_TO_SHOW_SELECTION_ST = 3;
 	private static final int ZOOM_TO_SHOW_SELECTION = 8;
 	private static final int ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG = 9;
 	private static final int ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG = 11;
+
+	//OpenGL
+	private PolygonsCollection polygonsCollection;
+	private int downloadedSize = 0;
+	private int selectedSize = 0;
+	private int backupedSize = 0;
+	private int polygonId = 1;
+	private boolean needRedrawOpenGL = false;
+	private boolean indexRegionBoundaries = false;
+	private boolean onMapIndexed = false;
 
 	public static class DownloadMapObject {
 		private final BinaryMapDataObject dataObject;
@@ -130,9 +149,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		app = view.getApplication();
 		rm = app.getResourceManager();
+		rm.addResourceListener(this);
 		osmandRegions = rm.getOsmandRegions();
 		helper = new LocalIndexHelper(app);
 
@@ -177,10 +198,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			@Override
-			protected List<BinaryMapDataObject> calculateResult(RotatedTileBox tileBox) {
-				return queryData(tileBox);
+			protected List<BinaryMapDataObject> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				return queryData(latLonBounds, zoom);
 			}
 		};
+		addMapsInitializedListener();
 	}
 
 	private Paint getPaint(int color) {
@@ -197,13 +219,19 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		final int zoom = tileBox.getZoom();
-		if (zoom < ZOOM_TO_SHOW_SELECTION_ST) {
+		if (zoom < ZOOM_TO_SHOW_SELECTION_ST || !indexRegionBoundaries) {
 			return;
 		}
 		//make sure no maps are loaded for the location
 		checkMapToDownload(tileBox, data.getResults());
 		// draw objects
 		if (osmandRegions.isInitialized() && zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				drawMapPolygons(zoom);
+				return;
+			}
+
 			final List<BinaryMapDataObject> currentObjects = new LinkedList<>();
 			if (data.getResults() != null) {
 				currentObjects.addAll(data.getResults());
@@ -236,6 +264,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					}
 				}
 			}
+		} else {
+			clearPolygonsCollections();
 		}
 	}
 
@@ -372,36 +402,29 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return new File(fileDir, regionName).exists() || new File(fileDir, roadsRegionName).exists();
 	}
 
-	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
-		if (tileBox.getZoom() >= ZOOM_AFTER_BASEMAP) {
-			if(!checkIfMapEmpty(tileBox)) {
+	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
+		if (zoom >= ZOOM_AFTER_BASEMAP) {
+			if (!checkIfMapEmpty(zoom)) {
 				return Collections.emptyList();
 			}
 		}
-		LatLon lt = tileBox.getLeftTopLatLon();
-		LatLon rb = tileBox.getRightBottomLatLon();
-//		if (tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-//			lt = rb = tileBox.getCenterLatLon();
-//		}
 
-		List<BinaryMapDataObject> result = null;
-		int left = MapUtils.get31TileNumberX(lt.getLongitude());
-		int right = MapUtils.get31TileNumberX(rb.getLongitude());
-		int top = MapUtils.get31TileNumberY(lt.getLatitude());
-		int bottom = MapUtils.get31TileNumberY(rb.getLatitude());
+		List<BinaryMapDataObject> result;
+		int left = MapUtils.get31TileNumberX(latLonBounds.left);
+		int right = MapUtils.get31TileNumberX(latLonBounds.right);
+		int top = MapUtils.get31TileNumberY(latLonBounds.top);
+		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 
 		try {
 			result = osmandRegions.query(left, right, top, bottom, false);
 		} catch (IOException e) {
-			return result;
+			return null;
 		}
 
 		Iterator<BinaryMapDataObject> it = result.iterator();
 		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
-			if (tileBox.getZoom() < ZOOM_TO_SHOW_SELECTION) {
-				//
-			} else {
+			if (zoom >= ZOOM_TO_SHOW_SELECTION) {
 				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
 					it.remove();
 				}
@@ -411,30 +434,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return result;
 	}
 
-	private boolean checkIfMapEmpty(RotatedTileBox tileBox) {
-//		RotatedTileBox cb = rm.getRenderer().getCheckedBox();
-		// old code to wait
-		// wait for image to be rendered
-//		int count = 0;
-//		while (cb == null || cb.getZoom() != tileBox.getZoom() || 
-//				!cb.containsLatLon(tileBox.getCenterLatLon())) {
-//			if (count++ > 5) {
-//				return false;
-//			}
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				return false;
-//			}
-//			cb = rm.getRenderer().getCheckedBox();
-//		}
-//		if (cb == null || cb.getZoom() != tileBox.getZoom() || 
-//				!cb.containsLatLon(tileBox.getCenterLatLon())) {
-//			return false;
-//		}
+	private boolean checkIfMapEmpty(int zoom) {
 		int cState = rm.getRenderer().getCheckedRenderedState();
 		final boolean empty;
-		if (tileBox.getZoom() < ZOOM_AFTER_BASEMAP) {
+		if (zoom < ZOOM_AFTER_BASEMAP) {
 			empty = cState == 0;
 		} else {
 			empty = cState <= 1;
@@ -507,7 +510,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -515,6 +518,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
+		rm.removeResourceListener(this);
+		clearPolygonsCollections();
 	}
 
 
@@ -547,10 +553,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);
 			return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-					view.getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
+					getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
 		}
 		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-				view.getContext().getString(R.string.shared_string_map), "");
+				getContext().getString(R.string.shared_string_map), "");
 	}
 
 	@Override
@@ -582,7 +588,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION
 				&& data.getResults() != null && osmandRegions.isInitialized()) {
-			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
+			LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, point.x, point.y);
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
 
@@ -672,4 +678,131 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		selectedObjects = new LinkedList<>();
 	}
 
+	/**OpenGL*/
+	private void drawMapPolygons(int zoom) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (onMapIndexed) {
+			clearPolygonsCollections();
+			onMapIndexed = false;
+		}
+		if (polygonsCollection != null && selectedSize == selectedObjects.size()) {
+			return;
+		}
+		List<WorldRegion> downloadedRegions = new ArrayList<>();
+		List<WorldRegion> backupedRegions = new ArrayList<>();
+		List<WorldRegion> selectedRegions = new ArrayList<>();
+		if (selectedObjects.size() > 0) {
+			for (BinaryMapDataObject o : selectedObjects) {
+				String fullName = osmandRegions.getFullName(o);
+				WorldRegion wr = osmandRegions.getRegionData(fullName);
+				if (wr != null) {
+					selectedRegions.add(wr);
+				}
+			}
+		}
+		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
+			List<WorldRegion> worldRegions = osmandRegions.getAllRegionData();
+			for (WorldRegion wr : worldRegions) {
+				if (selectedRegions.contains(wr)) {
+					continue;
+				}
+				String n = wr.getRegionDownloadName();
+				if (rm.checkIfObjectDownloaded(n)) {
+					downloadedRegions.add(wr);
+				} else if (checkIfObjectBackuped(n)) {
+					backupedRegions.add(wr);
+				}
+			}
+		}
+		if (backupedSize != backupedRegions.size()
+				|| downloadedSize != downloadedRegions.size()
+				|| selectedSize != selectedRegions.size()) {
+			clearPolygonsCollections();
+			backupedSize = backupedRegions.size();
+			downloadedSize = downloadedRegions.size();
+			selectedSize = selectedRegions.size();
+		}
+		addToPolygonsCollection(downloadedRegions, paintDownloaded);
+		addToPolygonsCollection(backupedRegions, paintBackuped);
+		addToPolygonsCollection(selectedRegions, paintSelected);
+		if (needRedrawOpenGL && polygonsCollection != null) {
+			mapRenderer.addSymbolsProvider(polygonsCollection);
+			needRedrawOpenGL = false;
+		}
+	}
+
+	/**OpenGL*/
+	private void addToPolygonsCollection(List<WorldRegion> regionList, Paint paint) {
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		if (mapRenderer == null || regionList.size() == 0 || !needRedrawOpenGL) {
+			return;
+		}
+		if (polygonsCollection == null) {
+			polygonsCollection = new PolygonsCollection();
+		}
+		for (WorldRegion wr : regionList) {
+			List<LatLon> polygon = wr.getPolygon();
+			QVectorPointI points = new QVectorPointI();
+			for (LatLon latLon : polygon) {
+				int x = MapUtils.get31TileNumberX(latLon.getLongitude());
+				int y = MapUtils.get31TileNumberY(latLon.getLatitude());
+				points.add(new PointI(x, y));
+			}
+			FColorARGB colorARGB = NativeUtilities.createFColorARGB(paint.getColor());
+			PolygonBuilder polygonBuilder = new PolygonBuilder();
+			polygonBuilder.setBaseOrder(baseOrder--)
+					.setIsHidden(points.size() < 3)
+					.setPolygonId(++polygonId)
+					.setPoints(points)
+					.setFillColor(colorARGB)
+					.buildAndAddToCollection(polygonsCollection);
+		}
+	}
+
+	/**OpenGL*/
+	private void clearPolygonsCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (polygonsCollection != null) {
+			mapRenderer.removeSymbolsProvider(polygonsCollection);
+			polygonsCollection = null;
+		}
+		needRedrawOpenGL = true;
+		selectedSize = 0;
+		polygonId = 1;
+	}
+
+	private void addMapsInitializedListener() {
+		OsmandApplication app = getApplication();
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onStart(AppInitializer init) {
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+					if (event == AppInitializer.InitEvents.INDEX_REGION_BOUNDARIES) {
+						indexRegionBoundaries = true;
+					}
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+				}
+			});
+		} else {
+			indexRegionBoundaries = true;
+		}
+	}
+
+	@Override
+	public void onMapsIndexed() {
+		onMapIndexed = true;
+	}
 }

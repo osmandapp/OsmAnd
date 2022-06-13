@@ -164,7 +164,7 @@
     <string name="si_m_s">Metros por segundo</string>
     <string name="si_min_km">Minutos por quilômetro</string>
     <string name="si_min_m">Minutos por milha</string>
-    <string name="si_nm_h">Milhas náuticas por hora (nó)</string>
+    <string name="si_nm_h">Milhas náuticas por hora (nós)</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="si_mi_yard">Milhas/jardas</string>
     <string name="si_km_m">Quilômetros/metros</string>

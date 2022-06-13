@@ -2,7 +2,6 @@ package net.osmand.plus.base;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -18,13 +17,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
+
 	private UiUtilities iconsCache;
 
 	private int statusBarColor = -1;
@@ -33,21 +33,19 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				int colorId = getStatusBarColorId();
-				if (colorId != -1) {
-					if (activity instanceof MapActivity) {
-						((MapActivity) activity).updateStatusBarColor();
-					} else {
-						statusBarColor = activity.getWindow().getStatusBarColor();
-						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-					}
+		Activity activity = getActivity();
+		if (activity != null) {
+			int colorId = getStatusBarColorId();
+			if (colorId != -1) {
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).updateStatusBarColor();
+				} else {
+					statusBarColor = activity.getWindow().getStatusBarColor();
+					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 				}
-				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-					((MapActivity) activity).exitFromFullScreen(getView());
-				}
+			}
+			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+				((MapActivity) activity).exitFromFullScreen(getView());
 			}
 		}
 	}
@@ -55,15 +53,13 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
-					activity.getWindow().setStatusBarColor(statusBarColor);
-				}
-				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-					((MapActivity) activity).enterToFullScreen();
-				}
+		Activity activity = getActivity();
+		if (activity != null) {
+			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
+				activity.getWindow().setStatusBarColor(statusBarColor);
+			}
+			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+				((MapActivity) activity).enterToFullScreen();
 			}
 		}
 	}
@@ -71,7 +67,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColorId() != -1) {
+		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
@@ -196,5 +192,13 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected OsmandSettings requireSettings() {
 		OsmandApplication app = requireMyApplication();
 		return app.getSettings();
+	}
+
+	protected boolean isNightMode(boolean usedOnMap) {
+		OsmandApplication app = requireMyApplication();
+		if (usedOnMap) {
+			return app.getDaynightHelper().isNightModeForMapControls();
+		}
+		return !app.getSettings().isLightContent();
 	}
 }

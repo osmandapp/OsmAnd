@@ -5,20 +5,11 @@
 	android:background="?attr/bg_color"
 	android:orientation="vertical">
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/recycler_view"
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
+		android:id="@+id/chips_view"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_list_item_height"
-		android:clipToPadding="false"
-		android:orientation="horizontal"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
+		android:paddingHorizontal="@dimen/content_padding"
 		android:scrollbars="none" />
-
-	<include
-		android:id="@+id/show_on_map"
-		layout="@layout/bottom_sheet_item_with_switch_no_icon" />
 
 </LinearLayout>

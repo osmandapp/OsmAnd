@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:background="?attr/list_background_color">
+
+	<View
+		android:id="@+id/top_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?divider_color_basic" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/page"
+		style="@style/DescStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/directionIconSize"
+		android:textColor="?android:textColorSecondary"
+		tools:text="Page 1" />
+
+</LinearLayout>

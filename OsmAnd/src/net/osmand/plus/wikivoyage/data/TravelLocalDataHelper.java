@@ -1,6 +1,8 @@
 package net.osmand.plus.wikivoyage.data;
 
-import net.osmand.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -8,6 +10,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.util.Algorithms;
 
@@ -25,9 +29,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 
 public class TravelLocalDataHelper {
@@ -532,7 +533,10 @@ public class TravelLocalDataHelper {
 					if (gpxFile != null) {
 						String name = travelHelper.getGPXName(article);
 						gpxFile.path = context.getAppPath(IndexConstants.GPX_TRAVEL_DIR + name).getAbsolutePath();
-						context.getSelectedGpxHelper().selectGpxFile(gpxFile, false, true);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.hideFromMap().syncGroup().saveSelection()
+								.notShowNavigationDialog();
+						context.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 					}
 
 					SQLiteConnection conn = openConnection(false);

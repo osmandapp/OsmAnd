@@ -19,15 +19,16 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.LocationSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +37,8 @@ public class NavigationService extends Service {
 
 	public static class NavigationServiceBinder extends Binder {
 	}
+
+	public static final String DEEP_LINK_ACTION_OPEN_ROOT_SCREEN = "net.osmand.plus.navigation.car.OpenRootScreen";
 
 	// global id don't conflict with others
 	public static int USED_BY_NAVIGATION = 1;
@@ -50,6 +53,7 @@ public class NavigationService extends Service {
 	protected int usedBy = 0;
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
+	private StateChangedListener<LocationSource> locationSourceListener;
 
 	// Android Auto
 	private CarContext carContext;
@@ -130,38 +134,15 @@ public class NavigationService extends Service {
 			stopSelf();
 			return START_NOT_STICKY;
 		}
+		requestLocationUpdates();
 
-		// request location updates
-		try {
-			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
-				@Override
-				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-					if (!locations.isEmpty()) {
-						Location location = locations.get(locations.size() - 1);
-						NavigationSession carNavigationSession = app.getCarNavigationSession();
-						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasSurface();
-						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
-							locationProvider.setLocationFromService(location);
-						}
-					}
-				}
-
-				@Override
-				public void onLocationAvailability(boolean locationAvailable) {
-				}
-			});
-		} catch (SecurityException e) {
-			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
-		} catch (IllegalArgumentException e) {
-			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
-		}
 		return START_REDELIVER_INTENT;
 	}
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		// initializing variables
+		addLocationSourceListener();
 	}
 
 	@Override
@@ -171,14 +152,9 @@ public class NavigationService extends Service {
 		setCarContext(null);
 		app.setNavigationService(null);
 		usedBy = 0;
-		// remove updates
-		if (locationServiceHelper != null) {
-			try {
-				locationServiceHelper.removeLocationUpdates();
-			} catch (SecurityException e) {
-				// Location service permission not granted
-			}
-		}
+		removeLocationUpdates();
+		removeLocationSourceListener();
+
 		// remove notification
 		stopForeground(Boolean.TRUE);
 		app.getNotificationHelper().updateTopNotification();
@@ -195,6 +171,57 @@ public class NavigationService extends Service {
 		}
 	}
 
+	private void addLocationSourceListener() {
+		OsmandApplication app = getApp();
+		locationSourceListener = change -> {
+			removeLocationUpdates();
+			locationServiceHelper = app.createLocationServiceHelper();
+			requestLocationUpdates();
+		};
+		app.getSettings().LOCATION_SOURCE.addListener(locationSourceListener);
+	}
+
+	private void removeLocationSourceListener() {
+		settings.LOCATION_SOURCE.removeListener(locationSourceListener);
+	}
+
+	private void requestLocationUpdates() {
+		OsmandApplication app = getApp();
+		try {
+			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
+				@Override
+				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
+					if (!locations.isEmpty()) {
+						Location location = locations.get(locations.size() - 1);
+						NavigationSession carNavigationSession = app.getCarNavigationSession();
+						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
+						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
+							locationProvider.setLocationFromService(location);
+						}
+					}
+				}
+
+				@Override
+				public void onLocationAvailability(boolean locationAvailable) {
+				}
+			});
+		} catch (SecurityException e) {
+			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
+		} catch (IllegalArgumentException e) {
+			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
+		}
+	}
+
+	private void removeLocationUpdates() {
+		if (locationServiceHelper != null) {
+			try {
+				locationServiceHelper.removeLocationUpdates();
+			} catch (SecurityException e) {
+				// Location service permission not granted
+			}
+		}
+	}
+
 	/** Sets the {@link CarContext} to use while the service is running. */
 	public void setCarContext(@Nullable CarContext carContext) {
 		this.carContext = carContext;
@@ -205,12 +232,17 @@ public class NavigationService extends Service {
 					new NavigationManagerCallback() {
 						@Override
 						public void onStopNavigation() {
-							NavigationService.this.stopCarNavigation();
+							getApp().stopNavigation();
 						}
 
 						@Override
 						public void onAutoDriveEnabled() {
 							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+							OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
+							RoutingHelper routingHelper = getApp().getRoutingHelper();
+							if (!sim.isRouteAnimating() && routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+								sim.startStopRouteAnimation(null);
+							}
 						}
 					});
 

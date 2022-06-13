@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="duration_ago">%1$s əvvəl</string>
+    <string name="shared_string_logout">Çıx</string>
+    <string name="units_and_formats">Vahidlər və formatlar</string>
+    <string name="si_mi_feet">Mil/fut</string>
+    <string name="si_mi_yard">Mil/yard</string>
+    <string name="si_nm_h">Saatda dəniz mili (düyünlər)</string>
+    <string name="unit_of_length_descr">Məsafə üçün ölçü vahidini dəyiş.</string>
 </resources>
