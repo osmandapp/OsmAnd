@@ -36,6 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupListeners;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -257,7 +258,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			if (AndroidUtils.isValidEmail(email)) {
 				settings.BACKUP_USER_EMAIL.set(email);
 				progressBar.setVisibility(View.VISIBLE);
-				backupHelper.registerDevice("");
+				backupHelper.updateOrderId((status, message, error) -> backupHelper.registerDevice(""));
 			} else {
 				editText.requestFocus();
 				errorText.setText(R.string.osm_live_enter_email);
