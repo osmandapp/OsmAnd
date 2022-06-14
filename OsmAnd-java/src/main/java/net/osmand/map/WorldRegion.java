@@ -25,6 +25,8 @@ public class WorldRegion implements Serializable {
 	public static final String NORTH_AMERICA_REGION_ID = "northamerica";
 	public static final String RUSSIA_REGION_ID = "russia";
 	public static final String JAPAN_REGION_ID = "japan_asia";
+	public static final String GERMANY_REGION_ID = "europe_germany";
+	public static final String FRANCE_REGION_ID = "europe_france";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
 	protected static final String WORLD = "world";
 
