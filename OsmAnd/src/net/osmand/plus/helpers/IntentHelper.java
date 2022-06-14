@@ -22,6 +22,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -73,6 +76,7 @@ public class IntentHelper {
 
 	public boolean parseLaunchIntents() {
 		return parseNavigationUrlIntent()
+				|| parseSetPinOnMapUrlIntent()
 				|| parseMoveMapToLocationUrlIntent()
 				|| parseOpenLocationMenuUrlIntent()
 				|| parseRedirectUrlIntent()
@@ -85,7 +89,7 @@ public class IntentHelper {
 
 	private boolean parseNavigationUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null && intent.getData().isHierarchical()) {
+		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
 			boolean hasNavigationDestination = data.getQueryParameterNames().contains("end");
 			if (isOsmAndMapUrl(data) && hasNavigationDestination) {
@@ -114,14 +118,57 @@ public class IntentHelper {
 					LOG.debug("App mode with specified key not available, using default navigation app mode");
 				}
 
-				if (appMode != null) {
-					app.getRoutingHelper().setAppMode(appMode);
+				if (app.isApplicationInitializing()) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+						@Override
+						public void onStart(AppInitializer init) {
+						}
+
+						@Override
+						public void onProgress(AppInitializer init, InitEvents event) {
+						}
+
+						@Override
+						public void onFinish(AppInitializer init) {
+							init.removeListener(this);
+							buildRoute(startLatLon, endLatLon, appMode);
+						}
+					});
+				} else {
+					buildRoute(startLatLon, endLatLon, appMode);
 				}
 
-				app.getTargetPointsHelper().navigateToPoint(endLatLon, true, -1);
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, startLatLon,
-						null, false, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+				mapActivity.setIntent(null);
+				return true;
+			}
+		}
+		return false;
+	}
 
+	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end, @Nullable ApplicationMode appMode) {
+		if (appMode != null) {
+			app.getRoutingHelper().setAppMode(appMode);
+		}
+		app.getTargetPointsHelper().navigateToPoint(end, true, -1);
+		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, start,
+				null, false, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+	}
+
+	private boolean parseSetPinOnMapUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && isUriHierarchical(intent)) {
+			Uri data = intent.getData();
+			if (isOsmAndMapUrl(data) && data.getQueryParameterNames().contains("pin")) {
+				String latLonParam = data.getQueryParameter("pin");
+				LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : parseLatLon(latLonParam);
+				if (latLon != null) {
+					double lat = latLon.getLatitude();
+					double lon = latLon.getLongitude();
+					int zoom = settings.getLastKnownMapZoom();
+					settings.setMapLocationToShow(lat, lon, zoom, new PointDescription(lat, lon));
+				}
+
+				mapActivity.setIntent(null);
 				return true;
 			}
 		}
@@ -145,7 +192,7 @@ public class IntentHelper {
 
 	private boolean parseMoveMapToLocationUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
+		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
 			String uri = data.toString();
 			String pathPrefix = "/map#";
@@ -170,12 +217,12 @@ public class IntentHelper {
 	}
 
 	private boolean isOsmAndMapUrl(@NonNull Uri uri) {
-		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri) && isPathPrefix(uri, "/map");
+		return isOsmAndSite(uri) && isPathPrefix(uri, "/map");
 	}
 
 	private boolean parseOpenLocationMenuUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
+		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
 			if (isOsmAndGoUrl(data)) {
 				String lat = data.getQueryParameter("lat");
@@ -203,7 +250,7 @@ public class IntentHelper {
 
 	private boolean parseRedirectUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
+		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
 			if (isOsmAndGoUrl(data)) {
 				String url = data.getQueryParameter("url");
@@ -221,14 +268,14 @@ public class IntentHelper {
 	}
 
 	private boolean isOsmAndGoUrl(@NonNull Uri uri) {
-		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri) && isPathPrefix(uri, "/go");
+		return isOsmAndSite(uri) && isPathPrefix(uri, "/go");
 	}
 
 	private boolean parseTileSourceUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
+		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
-			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/add-tile-source")) {
+			if (isOsmAndSite(data) && isPathPrefix(data, "/add-tile-source")) {
 				Map<String, String> attrs = new HashMap<>();
 				for (String name : data.getQueryParameterNames()) {
 					String value = data.getQueryParameter(name);
@@ -255,9 +302,9 @@ public class IntentHelper {
 
 	private boolean parseOpenGpxUrlIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
+		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
-			if (isHttpOrHttpsScheme(data) && isOsmAndHost(data) && isPathPrefix(data, "/open-gpx")) {
+			if (isOsmAndSite(data) && isPathPrefix(data, "/open-gpx")) {
 				String url = data.getQueryParameter("url");
 				if (Algorithms.isEmpty(url)) {
 					return false;
@@ -520,6 +567,14 @@ public class IntentHelper {
 			);
 		}
 		return false;
+	}
+
+	private boolean isUriHierarchical(@NonNull Intent intent) {
+		return intent.getData() != null && intent.getData().isHierarchical();
+	}
+
+	private boolean isOsmAndSite(@NonNull Uri uri) {
+		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri);
 	}
 
 	private boolean isHttpOrHttpsScheme(@NonNull Uri uri) {
