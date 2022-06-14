@@ -369,11 +369,6 @@ public class OsmandSettings {
 		}
 	}
 
-	public void removePreferenceForProfile(String prefId, ApplicationMode mode) {
-		Object preferences =  getProfilePreferences(mode);
-		settingsAPI.edit(preferences).remove(prefId).commit();
-	}
-
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
 	}

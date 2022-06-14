@@ -13,6 +13,16 @@
 
     <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
+    <string name="co2_mission">CO2 emission</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_petrol_name">Petrol</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">Electric</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
+    <string name="routing_attr_motor_type_name">Motor type</string>
+    <string name="routing_attr_motor_type_description">For CO2 computation</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>

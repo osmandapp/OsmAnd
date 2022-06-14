@@ -1,7 +1,11 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -85,9 +89,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -872,7 +873,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public SwitchPreferenceEx createSwitchPreferenceEx(String prefId, String title, String summary, int layoutId) {
-		SwitchPreferenceEx p = new SwitchPreferenceEx(getContext());
+		return createSwitchPreferenceEx(requireContext(), prefId, title, summary, layoutId);
+	}
+
+	public static SwitchPreferenceEx createSwitchPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
+	                                                          String title, String summary, int layoutId) {
+		SwitchPreferenceEx p = new SwitchPreferenceEx(ctx);
 		p.setKey(prefId);
 		p.setTitle(title);
 		p.setSummary(summary);
@@ -886,7 +892,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public ListPreferenceEx createListPreferenceEx(String prefId, String[] names, Object[] values, String title, int layoutId) {
-		ListPreferenceEx listPreference = new ListPreferenceEx(getContext());
+		return createListPreferenceEx(requireContext(), prefId, names, values, title, layoutId);
+	}
+
+	public static ListPreferenceEx createListPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
+	                                                      @NonNull String[] names, @NonNull Object[] values,
+	                                                      String title, int layoutId) {
+		ListPreferenceEx listPreference = new ListPreferenceEx(ctx);
 		listPreference.setKey(prefId);
 		listPreference.setTitle(title);
 		listPreference.setDialogTitle(title);

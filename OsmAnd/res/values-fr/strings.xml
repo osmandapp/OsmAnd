@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="routing_attr_motor_type_name">Motorisation</string>
+    <string name="routing_attr_motor_type_description">Pour les calculs de CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_petrol_name">Essence</string>
+    <string name="routing_attr_motor_type_lpg_name">GPL</string>
+    <string name="routing_attr_motor_type_electric_name">Électrique</string>
+    <string name="routing_attr_motor_type_gas_name">GNV</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybride</string>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
     <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier de votre appareil.</string>
