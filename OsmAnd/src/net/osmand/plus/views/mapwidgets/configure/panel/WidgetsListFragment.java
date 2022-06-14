@@ -232,6 +232,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
 					}
 				});
+				setupListItemBackgroundImpl(settingsButton);
 			}
 
 			View infoButton = view.findViewById(R.id.info_button);
@@ -412,9 +413,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void setupListItemBackground(@NonNull View view) {
 		View button = view.findViewById(R.id.container);
+		setupListItemBackgroundImpl(button);
+	}
+
+	private void setupListItemBackgroundImpl(@NonNull View view) {
 		int profileColor = selectedAppMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
-		AndroidUtils.setBackground(button, background);
+		AndroidUtils.setBackground(view, background);
 	}
 
 	@Override
