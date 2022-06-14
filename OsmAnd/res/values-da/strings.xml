@@ -3813,9 +3813,6 @@
     <string name="updated">Opdateret: %s</string>
     <string name="last_time_checked">Sidst kontrolleret: %s</string>
     <string name="update_frequency">Opdateringsfrekvens</string>
-    <string name="live_update_frequency_week_variant">Kortopdateringer kontrolleres hver uge. Næste gang %1$s kl. %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kortopdateringer kontrolleres hver dag. Næste gang %1$s kl. %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kortopdateringer kontrolleres hver time. Næste gang %1$s kl. %2$s.</string>
     <string name="delete_updates">Slet opdateringer</string>
     <string name="purchases">Køb</string>
     <string name="select_category_descr">Vælg kategori eller tilføj en ny</string>

@@ -3607,9 +3607,6 @@
     <string name="save_global_track_interval_descr">Määritä kirjausväli yleiseen reitin tallennukseen (kytketään päälle kartalta Matkatallennus-widgetillä).</string>
     <string name="send_files_to_openstreetmap">Lähetä GPX-tiedosto OpenStreetMapiin</string>
     <string name="enter_text_separated">Kirjoita tunnisteet pilkuilla erotettuina.</string>
-    <string name="live_update_frequency_week_variant">Karttapäivitykset tarkistetaan joka viikko. Seuraavan kerran %1$s, %2$s päästä.</string>
-    <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan joka päivä. Seuraavan kerran %1$s, %2$s päästä.</string>
-    <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan joka tunti. Seuraavan kerran %1$s, %2$s päästä.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Luonnon rajat</string>
     <string name="routeInfo_surface_name">Pinta</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Luokka 4</string>

@@ -4007,9 +4007,6 @@
     <string name="updated">已更新：%s</string>
     <string name="last_time_checked">上次檢查時間：%s</string>
     <string name="update_frequency">更新頻率</string>
-    <string name="live_update_frequency_week_variant">地圖更新將每週檢查一次。下次 %1$s 於 %2$s。</string>
-    <string name="live_update_frequency_day_variant">地圖更新將每天檢查一次。下次 %1$s 於 %2$s。</string>
-    <string name="live_update_frequency_hour_variant">地圖更新將每小時檢查一次。下次 %1$s 於 %2$s。</string>
     <string name="delete_updates">刪除更新</string>
     <string name="live_update_delete_updates_msg">刪除所有 %s live 更新嗎？</string>
     <string name="purchases">購買</string>

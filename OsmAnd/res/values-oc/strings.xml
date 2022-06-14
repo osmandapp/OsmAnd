@@ -1578,7 +1578,6 @@
     <string name="no_purchases">Avètz ges de cròmpas</string>
     <string name="on_pause">En pausa</string>
     <string name="activity_type_water_name">Aiga</string>
-    <string name="live_update_frequency_week_variant">Leis actualizacions de la mapa son verificadas cada setmana. E lo còp que vèn a %2$s %1$s.</string>
     <string name="shared_string_feet">pès</string>
     <string name="shared_string_route_line">Linha dau percors</string>
     <string name="activity_type_walking_name">D\'a pès</string>
@@ -1619,7 +1618,6 @@
     <string name="trip_recording_show_start_dialog_setting">S\'es desactivat l\'enregistrament començarà just après qu\'autretz clicat sus la vinheta ò lo menut. La boita de dialòg ò la confirmacion seràn sautats.</string>
     <string name="trip_recording_save_and_continue">Sauvagardar e contuniar</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d\'enregistrament determina la frequéncia que OsmAnd demanda leis informacions sus la posicion correnta.</string>
-    <string name="live_update_frequency_day_variant">Leis actualizacions de la mapa son verificadas cada jorn. E lo còp que vèn a %2$s %1$s.</string>
     <string name="update_frequency">Frequéncia de l\'actualizacion</string>
     <string name="select_another_colorization">Per plaser, chausissètz una autra mena de colorizacion.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar lei resèrvas naturalas, leis airaus protegits e lei pargues naturaus.</string>
@@ -1627,7 +1625,6 @@
     <string name="select_category_descr">Seleccionar la categoria ò ajustar una novèla</string>
     <string name="live_update_delete_updates_msg">Escafar totei lei %s actualizacions live\?</string>
     <string name="delete_updates">Escafar leis actualizacions</string>
-    <string name="live_update_frequency_hour_variant">Leis actualizacions de la mapa seràn verificadas cada ora. Aquela que vèn serà a %2$s dins %1$s.</string>
     <string name="last_time_checked">Darriera verificacion : %s</string>
     <string name="latest_openstreetmap_update">Darriera actualizacion OpenStreetMap disponibla :</string>
     <string name="quick_action_coordinates_widget_descr">Una bascula per mostrar ò amagar lei vinhetas dei Coordenadas sus la mapa.</string>

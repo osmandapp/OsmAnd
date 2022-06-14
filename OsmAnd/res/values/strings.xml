@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour.</string>
+    <string name="live_update_frequency_day_variant">Map updates will be checked every day.</string>
+    <string name="live_update_frequency_week_variant">Map updates will be checked every week.</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
@@ -627,9 +630,6 @@
     <string name="purchases">Purchases</string>
     <string name="live_update_delete_updates_msg">Delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>
-    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_week_variant">Map updates will be checked every week. Next time %1$s in %2$s.</string>
     <string name="update_frequency">Update frequency</string>
     <string name="last_time_checked">Last time checked: %s</string>
     <string name="updated">Updated: %s</string>

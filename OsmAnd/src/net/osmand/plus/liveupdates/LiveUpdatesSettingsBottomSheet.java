@@ -1,6 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
@@ -253,7 +252,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		weeklyButton.setOnClickListener(getFrequencyButtonListener(UpdateFrequency.WEEKLY, itemTimeOfDayButtons, timeOfDayTitle));
 
 		itemFrequencyHelpMessage = new ShortDescriptionItem.Builder()
-				.setDescription(getFrequencyHelpMessage())
+				.setDescription(getUpdateFrequencyMessage())
 				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_description)
 				.create();
@@ -430,7 +429,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 
 	private void updateFrequencyHelpMessage() {
 		if (itemFrequencyHelpMessage != null) {
-			((BottomSheetItemWithDescription) itemFrequencyHelpMessage).setDescription(getFrequencyHelpMessage());
+			((BottomSheetItemWithDescription) itemFrequencyHelpMessage).setDescription(getUpdateFrequencyMessage());
 		}
 	}
 
@@ -464,12 +463,11 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		return new SpannableString(updatedTimeStr);
 	}
 
-	protected String getFrequencyHelpMessage() {
-		CommonPreference<Integer> updateFrequency = preferenceUpdateFrequency(fileName, settings);
-		CommonPreference<Integer> timeOfDayToUpdate = preferenceTimeOfDayToUpdate(fileName, settings);
-		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
-		return formatHelpDateTime(app, UpdateFrequency.values()[updateFrequency.get()],
-				TimeOfDay.values()[timeOfDayToUpdate.get()], lastUpdate);
+	@NonNull
+	private String getUpdateFrequencyMessage() {
+		CommonPreference<Integer> updateFrequencyPref = preferenceUpdateFrequency(fileName, settings);
+		UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPref.get()];
+		return getString(updateFrequency.descId);
 	}
 
 	private long getUpdatesSize() {

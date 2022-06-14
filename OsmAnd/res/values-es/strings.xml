@@ -4017,9 +4017,6 @@
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
     <string name="update_frequency">Frecuencia de actualización</string>
-    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. Próxima vez el %1$s a las %2$s hs.</string>
-    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. Próxima vez el %1$s a las %2$s hs.</string>
-    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. Próxima vez el %1$s a las %2$s hs.</string>
     <string name="delete_updates">Borrar actualizaciones</string>
     <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
     <string name="purchases">Compras</string>

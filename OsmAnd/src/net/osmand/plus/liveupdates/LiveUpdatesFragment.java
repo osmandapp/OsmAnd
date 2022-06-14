@@ -546,12 +546,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			if (localUpdateOn.get()) {
 				int frequencyId = preferenceUpdateFrequency(item, settings).get();
 				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
-				String subTitleText = getString(frequency.getLocalizedId());
-				/*int timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(item, settings).get();
-				final TimeOfDay timeOfDay = TimeOfDay.values()[timeOfDateToUpdateId];
-				if (frequency != UpdateFrequency.HOURLY) {
-					subTitleText += " • " + getString(timeOfDay.getLocalizedId());
-				}*/
+				String subTitleText = getString(frequency.titleId);
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
 						? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode)));

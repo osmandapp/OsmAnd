@@ -9,6 +9,7 @@ import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.LocalIndexInfo;
@@ -21,7 +22,6 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class LiveUpdatesHelper {
 	private static final String UPDATE_TIMES_POSTFIX = "_update_times";
@@ -136,44 +136,6 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static String formatHelpDateTime(Context ctx, UpdateFrequency updateFrequency, TimeOfDay timeOfDay, long lastDateTime) {
-		if (lastDateTime == DEFAULT_LAST_CHECK) {
-			lastDateTime = System.currentTimeMillis();
-		}
-		switch (updateFrequency) {
-			case DAILY: {
-				return helpDateTimeBuilder(ctx, R.string.live_update_frequency_day_variant, lastDateTime, 1, TimeUnit.DAYS, timeOfDay);
-			}
-			case WEEKLY: {
-				return helpDateTimeBuilder(ctx, R.string.live_update_frequency_week_variant, lastDateTime, 7, TimeUnit.DAYS, timeOfDay);
-			}
-			default:
-			case HOURLY: {
-				return helpDateTimeBuilder(ctx, R.string.live_update_frequency_hour_variant, lastDateTime, 1, TimeUnit.HOURS, timeOfDay);
-			}
-		}
-	}
-
-	private static String helpDateTimeBuilder(Context ctx, int stringResId, long lastDateTime, long sourceDuration, TimeUnit sourceUnit, TimeOfDay timeOfDay) {
-		long nextDateTime = lastDateTime + TimeUnit.MILLISECONDS.convert(sourceDuration, sourceUnit);
-
-		if (sourceUnit != TimeUnit.HOURS) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTimeInMillis(nextDateTime);
-			calendar.set(Calendar.HOUR_OF_DAY, timeOfDay == TimeOfDay.MORNING ? MORNING_UPDATE_TIME : NIGHT_UPDATE_TIME);
-			nextDateTime = calendar.getTimeInMillis();
-		}
-
-		int flagsBase = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
-		int flagsBaseNoYear = flagsBase | DateUtils.FORMAT_NO_YEAR;
-		int flagsTime = DateUtils.FORMAT_SHOW_TIME;
-
-		String date = DateUtils.formatDateTime(ctx, nextDateTime, isCurrentYear(nextDateTime) ? flagsBaseNoYear : flagsBase);
-		String time = DateUtils.formatDateTime(ctx, nextDateTime, flagsTime);
-
-		return ctx.getResources().getString(stringResId, DateUtils.isToday(nextDateTime) ? "" : " " + date, time);
-	}
-
 	public static PendingIntent getPendingIntent(@NonNull Context context,
 												 @NonNull String fileName) {
 		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
@@ -198,8 +160,7 @@ public class LiveUpdatesHelper {
 				throw new IllegalStateException("Unexpected update frequency:"
 						+ updateFrequency);
 		}
-		alarmMgr.setInexactRepeating(AlarmManager.RTC,
-				timeOfFirstUpdate, updateFrequency.getTime(), alarmIntent);
+		alarmMgr.setInexactRepeating(AlarmManager.RTC, timeOfFirstUpdate, updateFrequency.intervalMillis, alarmIntent);
 	}
 
 	private static long getNextUpdateTime(TimeOfDay timeOfDayToUpdate) {
@@ -235,23 +196,21 @@ public class LiveUpdatesHelper {
 	}
 
 	public enum UpdateFrequency {
-		HOURLY(R.string.hourly, AlarmManager.INTERVAL_HOUR),
-		DAILY(R.string.daily, AlarmManager.INTERVAL_DAY),
-		WEEKLY(R.string.weekly, AlarmManager.INTERVAL_DAY * 7);
-		private final int localizedId;
-		private final long time;
 
-		UpdateFrequency(int localizedId, long time) {
-			this.localizedId = localizedId;
-			this.time = time;
-		}
+		HOURLY(R.string.hourly, R.string.live_update_frequency_hour_variant, AlarmManager.INTERVAL_HOUR),
+		DAILY(R.string.daily, R.string.live_update_frequency_day_variant, AlarmManager.INTERVAL_DAY),
+		WEEKLY(R.string.weekly, R.string.live_update_frequency_week_variant, AlarmManager.INTERVAL_DAY * 7);
 
-		public int getLocalizedId() {
-			return localizedId;
-		}
+		@StringRes
+		public final int titleId;
+		@StringRes
+		public final int descId;
+		public final long intervalMillis;
 
-		public long getTime() {
-			return time;
+		UpdateFrequency(@StringRes int titleId, @StringRes int descId, long intervalMillis) {
+			this.titleId = titleId;
+			this.descId = descId;
+			this.intervalMillis = intervalMillis;
 		}
 	}
 

@@ -4008,9 +4008,6 @@
     <string name="updated">Atualizado: %s</string>
     <string name="last_time_checked">Última vez verificado: %s</string>
     <string name="update_frequency">Frequência de atualização</string>
-    <string name="live_update_frequency_week_variant">As atualizações do mapa serão verificadas todas as semanas. Próxima vez %1$s em %2$s.</string>
-    <string name="live_update_frequency_day_variant">As atualizações do mapa serão verificadas todos os dias. Próxima vez %1$s em %2$s.</string>
-    <string name="live_update_frequency_hour_variant">As atualizações do mapa serão verificadas a cada hora. Da próxima vez, %1$s em %2$s.</string>
     <string name="delete_updates">Apagar atualizações</string>
     <string name="live_update_delete_updates_msg">Excluir todas as atualizações do OsmAnd Live de %s\?</string>
     <string name="purchases">Compras</string>

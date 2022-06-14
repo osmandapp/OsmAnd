@@ -2433,9 +2433,6 @@
     <string name="track_recording_description">Stopio recordio\?
 \nCaiff yr holl ddata heb ei gadw ei golli.</string>
     <string name="provided_by">Darparwyd gan %1$s</string>
-    <string name="live_update_frequency_week_variant">Caiff diweddariadau mapiau eu gwirio yn wythnosol. Y tro nesaf %1$s ymhen %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Caiff diweddariadau mapiau eu gwirio pob awr. Y tro nesaf %1$s ymhen %2$s.</string>
-    <string name="live_update_frequency_day_variant">Caiff diweddariadau mapiau eu gwirio yn ddyddiol. Y tro nesaf %1$s ymhen %2$s.</string>
     <string name="latest_openstreetmap_update">Diweddariad diweddaraf OpenStreetMap ar gael:</string>
     <string name="select_picture">Dewiswch lun</string>
     <string name="cannot_upload_image">Methu llwytho delwedd i fyny. Ceisiwch eto\'n hwyrach</string>

@@ -4006,9 +4006,6 @@
     <string name="updated">Aktualizované: %s</string>
     <string name="last_time_checked">Posledná kontrola: %s</string>
     <string name="update_frequency">Frekvencia aktualizácií</string>
-    <string name="live_update_frequency_week_variant">Aktualizácie mapy budú kontrolované každý týždeň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_day_variant">Aktualizácie mapy budú kontrolované každý deň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Aktualizácie mapy budú kontrolované každú hodinu. Nasledujúca kontrola %1$s o %2$s.</string>
     <string name="delete_updates">Odstrániť aktualizácie</string>
     <string name="live_update_delete_updates_msg">Zmazať všetky živé aktualizácie (%s)\?</string>
     <string name="select_category_descr">Zvoľte kategóriu alebo pridajte novú</string>
