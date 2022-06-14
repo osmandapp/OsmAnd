@@ -332,6 +332,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						new LoadWikivoyageData(activity, resetData).execute();
