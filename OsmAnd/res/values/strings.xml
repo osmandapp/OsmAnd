@@ -11,6 +11,16 @@
 	Thx - Hardy
 -->
 
+    <string name="co2_mission">CO2 emission</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_petrol_name">Petrol</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">Electric</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
+    <string name="routing_attr_motor_type_name">Motor type</string>
+    <string name="routing_attr_motor_type_description">For CO2 computation</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
@@ -349,16 +359,6 @@
     <string name="horseback_riding">Horseback riding</string>
     <string name="shared_string_mini">mini</string>
     <string name="sample_wikivoyage">Wikivoyage example</string>
-    <string name="motor_setting_title">Motor type</string>
-    <string name="motor_setting_descr">For CO2 computation</string>
-    <string name="approxEmissions">Approx. emissions</string>
-    <string name="diesel">Diesel</string>
-    <string name="petrol">Petrol</string>
-    <string name="LPG">LPG</string>
-    <string name="electric">Electric</string>
-    <string name="gas">CNG</string>
-    <string name="hybrid">Hybrid</string>
-    <string name="vehicle_parameters_descr">Weight, height, length, speed, motor type</string>
     <string name="travel_route_types">Route types</string>
     <string name="shared_string_files">Files</string>
     <string name="service_is_not_available_please_try_later">Service unavailable. Please try again later.</string>
@@ -1452,6 +1452,7 @@
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="map_during_navigation">Map during navigation</string>
     <string name="shared_string_other">Other</string>
+    <string name="vehicle_parameters_descr">Weight, height, length, speed</string>
     <string name="vehicle_parameters">Vehicle parameters</string>
     <string name="voice_announces_info">Voice announcements only occur during navigation.</string>
     <string name="voice_announces_descr">Navigation instructions and announcements</string>

@@ -1,5 +1,11 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
+import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -17,6 +23,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.Slider;
@@ -55,12 +62,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -286,49 +287,66 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, "", preferParameters);
 				screen.addPreference(preferRouting);
 			}
+			Context ctx = requireContext();
 			for (RoutingParameter p : otherRoutingParameters) {
-				String title = getRoutingStringPropertyName(app, p.getId(), p.getName());
-				String description = AndroidUtils.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 				if (HAZMAT_CATEGORY.equals(p.getId())) {
 					setupHazmatCategoryPreference(p, screen);
-				} else if (p.getType() == RoutingParameterType.BOOLEAN) {
-					OsmandPreference preference = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-					SwitchPreferenceEx switchPreferenceEx = createSwitchPreferenceEx(preference.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
-					switchPreferenceEx.setDescription(description);
-					switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-					screen.addPreference(switchPreferenceEx);
-					setupOtherBooleanParameterSummary(am, p, switchPreferenceEx);
 				} else {
-					ListParameters listParameters = populateListParameters(p);
-					OsmandPreference<String> preference = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
-					ListPreferenceEx listPreferenceEx = createListPreferenceEx(preference.getId(), listParameters.names, listParameters.values, title, R.layout.preference_with_descr);
-					listPreferenceEx.setDescription(description);
-					listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-					screen.addPreference(listPreferenceEx);
+					Preference preference = createRoutingParameterPref(ctx, p);
+					preference.setIcon(getRoutingPrefIcon(p.getId()));
+					if (p.getType() == RoutingParameterType.BOOLEAN) {
+						setupOtherBooleanParameterSummary(am, p, (SwitchPreferenceEx) preference);
+					}
+					screen.addPreference(preference);
 				}
 			}
 		}
 		setupTimeConditionalRoutingPref();
 	}
 
-	private ListParameters populateListParameters(@NonNull RoutingParameter p) {
-		Object[] vls = p.getPossibleValues();
+	public static Preference createRoutingParameterPref(@NonNull Context ctx, @NonNull RoutingParameter p) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
+
+		String title = getRoutingStringPropertyName(ctx, p.getId(), p.getName());
+		String description = AndroidUtils.getRoutingStringPropertyDescription(ctx, p.getId(), p.getDescription());
+
+		if (p.getType() == RoutingParameterType.BOOLEAN) {
+			CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
+			SwitchPreferenceEx preference = createSwitchPreferenceEx(ctx, pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
+			preference.setDescription(description);
+			return preference;
+		} else {
+			ListParameters listParameters = populateListParameters(ctx, p);
+			OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+			ListPreferenceEx preference = createListPreferenceEx(ctx, pref.getId(), listParameters.names, listParameters.values, title, R.layout.preference_with_descr);
+			preference.setDescription(description);
+			return preference;
+		}
+	}
+
+	public static ListParameters populateListParameters(@NonNull Context ctx, @NonNull RoutingParameter parameter) {
+		Object[] vls = parameter.getPossibleValues();
 		String[] sVls = new String[vls.length];
 		int i = 0;
 		for (Object o : vls) {
 			sVls[i++] = o.toString();
 		}
-		String[] descriptions = p.getPossibleValueDescriptions();
+		String[] descriptions = parameter.getPossibleValueDescriptions();
 		String[] names = new String[descriptions.length];
 		for (int j = 0; j < descriptions.length; j++) {
 			String name = descriptions[j];
-			String id = p.getId() + "_" + name.toLowerCase().replace(" ", "_");
-			names[j] = getRoutingStringPropertyName(app, id, name);
+			if (Algorithms.stringsEqual(name, "-")) {
+				names[j] = ctx.getString(R.string.shared_string_none);
+			} else {
+				String id = parameter.getId() + "_" + name.toLowerCase().replace(" ", "_");
+				names[j] = getRoutingStringPropertyName(ctx, id, name);
+			}
 		}
 		return new ListParameters(names, sVls);
 	}
 
-	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p, SwitchPreferenceEx switchPreferenceEx) {
+	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p, TwoStatePreference preference) {
 		if (USE_HEIGHT_OBSTACLES.equals(p.getId()) && !Algorithms.isEmpty(reliefFactorParameters)) {
 			String summaryOn = getString(R.string.shared_string_enabled);
 			for (RoutingParameter parameter : reliefFactorParameters) {
@@ -336,11 +354,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					summaryOn = getString(R.string.ltr_or_rtl_combine_via_comma, summaryOn, getRoutingParameterTitle(app, parameter));
 				}
 			}
-			switchPreferenceEx.setSummaryOn(summaryOn);
-			switchPreferenceEx.setSummaryOff(R.string.shared_string_disabled);
+			preference.setSummaryOn(summaryOn);
+			preference.setSummaryOff(R.string.shared_string_disabled);
 		} else {
-			switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
-			switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
+			preference.setSummaryOn(R.string.shared_string_on);
+			preference.setSummaryOff(R.string.shared_string_off);
 		}
 	}
 
@@ -458,9 +476,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private static void setupAngleSlider(final float[] angleValue,
-										 View sliderView,
-										 final boolean nightMode,
-										 final int activeColor) {
+	                                     View sliderView,
+	                                     final boolean nightMode,
+	                                     final int activeColor) {
 
 		final Slider angleBar = sliderView.findViewById(R.id.angle_slider);
 		final TextView angleTv = sliderView.findViewById(R.id.angle_text);
@@ -500,13 +518,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		switchPref.setChecked(enabled);
 	}
 
-	private void setupHazmatCategoryPreference(@NonNull RoutingParameter p, @NonNull PreferenceScreen screen) {
+	private void setupHazmatCategoryPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
 		Preference uiPreference = new Preference(app);
 		uiPreference.setKey(HAZMAT_TRANSPORTING_ENABLED);
 		uiPreference.setTitle(R.string.transport_hazmat_title);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr);
 		screen.addPreference(uiPreference);
-		hazmatParameters = populateListParameters(p);
+		hazmatParameters = populateListParameters(app, parameter);
 		updateHazmatCategoryPreference();
 	}
 
@@ -731,7 +749,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	public static void updateSelectedParameters(OsmandApplication app, ApplicationMode mode,
-												List<RoutingParameter> parameters, String selectedParameterId) {
+	                                            List<RoutingParameter> parameters, String selectedParameterId) {
 		for (RoutingParameter p : parameters) {
 			String parameterId = p.getId();
 			setRoutingParameterSelected(app.getSettings(), mode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
@@ -740,7 +758,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	private static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
-													String parameterId, boolean defaultBoolean, boolean isChecked) {
+	                                                String parameterId, boolean defaultBoolean, boolean isChecked) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameterId, defaultBoolean);
 		if (mode != null) {
 			property.setModeValue(mode, isChecked);
@@ -788,9 +806,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private static class ListParameters {
-		private final String[] names;
-		private final Object[] values;
+	public static class ListParameters {
+
+		public final String[] names;
+		public final Object[] values;
 
 		public ListParameters(String[] names, Object[] values) {
 			this.names = names;

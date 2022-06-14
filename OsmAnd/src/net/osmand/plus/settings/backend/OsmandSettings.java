@@ -35,14 +35,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.enums.AngularConstants;
-import net.osmand.plus.helpers.enums.AutoZoomMap;
-import net.osmand.plus.helpers.enums.DayNightMode;
-import net.osmand.plus.helpers.enums.DrivingRegion;
-import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.routepreparationmenu.Co2Computer.MotorType;
-import net.osmand.plus.helpers.enums.SpeedConstants;
-import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
@@ -375,11 +367,6 @@ public class OsmandSettings {
 				}
 			}
 		}
-	}
-
-	public void removePreferenceForProfile(String prefId, ApplicationMode mode) {
-		Object preferences =  getProfilePreferences(mode);
-		settingsAPI.edit(preferences).remove(prefId).commit();
 	}
 
 	public void resetPreferencesForProfile(ApplicationMode mode) {
@@ -1103,9 +1090,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(this,
 			"max_speed", 0f).makeProfile().cache();
-
-	public final OsmandPreference<MotorType> MOTOR_TYPE = new EnumStringPreference<MotorType>(this,
-			"motor_type", MotorType.PETROL, MotorType.values()).makeProfile().cache();
 
 	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark").makeProfile().cache();
 

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="vehicle_parameters_descr">Poids, hauteur, longueur, vitesse, motorisation</string>
-    <string name="motor_setting_title">Motorisation</string>
-    <string name="motor_setting_descr">Pour les calculs de CO2</string>
-    <string name="approxEmissions">Émissions approx.</string>
-    <string name="diesel">Diesel</string>
-    <string name="petrol">Essence</string>
-    <string name="LPG">GPL</string>
-    <string name="electric">Électrique</string>
-    <string name="gas">GNV</string>
-    <string name="hybrid">Hybride</string>
+    <string name="routing_attr_motor_type_name">Motorisation</string>
+    <string name="routing_attr_motor_type_description">Pour les calculs de CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_petrol_name">Essence</string>
+    <string name="routing_attr_motor_type_lpg_name">GPL</string>
+    <string name="routing_attr_motor_type_electric_name">Électrique</string>
+    <string name="routing_attr_motor_type_gas_name">GNV</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybride</string>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
     <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier de votre appareil.</string>
@@ -3139,6 +3137,7 @@
     <string name="map_during_navigation_info">Carte pendant le guidage</string>
     <string name="map_during_navigation">Carte pendant le guidage</string>
     <string name="shared_string_other">Autre</string>
+    <string name="vehicle_parameters_descr">Poids, hauteur, longueur, vitesse</string>
     <string name="vehicle_parameters">Caractéristiques du véhicule</string>
     <string name="voice_announces_info">Les annonces vocales n\'ont lieu que pendant la navigation.</string>
     <string name="voice_announces_descr">Instructions de guidage et annonces</string>
