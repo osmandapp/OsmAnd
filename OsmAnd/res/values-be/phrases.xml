@@ -40,7 +40,7 @@
     <string name="poi_clothes">Крама адзення</string>
     <string name="poi_clothes_children">Дзіцячае адзенне</string>
     <string name="poi_shoes">Крама абутку</string>
-    <string name="poi_computer">Кампутары</string>
+    <string name="poi_computer">Камп\'ютарная крама</string>
     <string name="poi_copyshop">Капіравальныя паслугі</string>
     <string name="poi_curtain">Салон штор</string>
     <string name="poi_fabric">Тканіны</string>
@@ -396,7 +396,7 @@
     <string name="poi_resort">Курорт</string>
     <string name="poi_club_art">Клуб аматараў мастацтва</string>
     <string name="poi_club_astronomy">Астранамічны клуб</string>
-    <string name="poi_club_computer">Кампутарны клуб</string>
+    <string name="poi_club_computer">Камп\'ютарны клуб</string>
     <string name="poi_club_board_games">Настольныя гульні</string>
     <string name="poi_club_motorcycle">Мотаклуб</string>
     <string name="poi_club_sport">Спартовы клуб</string>
@@ -498,7 +498,7 @@
     <string name="poi_craft_watchmaker">Гадзіннікавы майстар</string>
     <string name="poi_craft_window_construction">Выраб акон</string>
     <string name="poi_funeral_directors">Рытуальныя паслугі</string>
-    <string name="poi_craft_computer">Зборка кампутараў</string>
+    <string name="poi_craft_computer">Зборка камп\'ютараў</string>
     <string name="poi_beauty">Салон прыгажосці</string>
     <string name="poi_beauty_salon_nails">Манікюр</string>
     <string name="poi_hairdresser">Цырульня</string>
@@ -930,7 +930,7 @@
     <string name="poi_recycling_hazardous_waste">Небяспечныя адходы</string>
     <string name="poi_recycling_mobile_phones">Мабільныя тэлефоны</string>
     <string name="poi_recycling_hydrargyrum">Ртуць</string>
-    <string name="poi_recycling_computers">Кампутары</string>
+    <string name="poi_recycling_computers">Камп\'ютары</string>
     <string name="poi_recycling_tyres">Шыны</string>
     <string name="poi_recycling_tv_monitor">Тэлевізары, маніторы</string>
     <string name="poi_recycling_tetrapak">Упакоўка TetraPak</string>
@@ -1800,7 +1800,7 @@
     <string name="poi_training_sport">Навучанне: спорт</string>
     <string name="poi_training_art">Навучанне: мастацтва</string>
     <string name="poi_training_cooking">Навучанне: гатаванне ежы</string>
-    <string name="poi_training_computer">Навучанне: праца на кампутары</string>
+    <string name="poi_training_computer">Навучанне: праца на камп\'ютары</string>
     <string name="poi_training_yoga">Навучанне: ёга</string>
     <string name="poi_training_martial_art">Навучанне: баявыя мастацтвы</string>
     <string name="poi_training_aviation">Навучанне: авіяцыя</string>
@@ -3053,7 +3053,7 @@
     <string name="poi_drink_wine_retail">Віно: продаж</string>
     <string name="poi_drink_wine_served">Віно: дэгустацыя</string>
     <string name="poi_energy_supplier">Офіс пастаўшчыка энергіі</string>
-    <string name="poi_electronics_repair_computer">Рамонт электронікі: кампутары</string>
+    <string name="poi_electronics_repair_computer">Рамонт электронікі: камп\'ютары</string>
     <string name="poi_electronics_repair_appliance">Рамонт электронікі: бытавая тэхніка</string>
     <string name="poi_electronics_repair_phone">Рамонт электронікі: тэлефоны</string>
     <string name="poi_electronics_repair_tv">Рамонт электронікі: тэлевізары</string>
@@ -3859,12 +3859,12 @@
     <string name="poi_shelter_filter">Укрыццё</string>
     <string name="poi_permanent_camping">Пастаянны кемпінг</string>
     <string name="poi_agrarian_type">Сельскагаспадарчыя тавары</string>
-    <string name="poi_computer_sales">Продаж кампутараў</string>
+    <string name="poi_computer_sales">Продаж камп\'ютараў</string>
     <string name="poi_tobacco_filter">Тытунь</string>
     <string name="poi_access_permit">Патрабуецца дазвол</string>
     <string name="poi_internet_access_ssid">SSID</string>
     <string name="poi_computer_parts">Камплектуючыя для ПК</string>
-    <string name="poi_computer_repair">Рамонт кампутараў</string>
+    <string name="poi_computer_repair">Рамонт камп\'ютараў</string>
     <string name="poi_authentication_phone_call">Аўтарызацыя па тэлефонным званку</string>
     <string name="poi_coffee_filter">Кава</string>
     <string name="poi_medical_supply_filter">Катэгорыі медыцынскага забеспячэння</string>
@@ -4068,4 +4068,26 @@
     <string name="poi_fumarole">Фумарола</string>
     <string name="poi_faculty_arts">Мастацтва</string>
     <string name="poi_faculty_biology">Біялогія</string>
+    <string name="poi_computer_parts_yes">Так;Камп\'ютарныя кампаненты</string>
+    <string name="poi_diet_vegan_limited">Для веганаў: абмежавана</string>
+    <string name="poi_faculty_psychology">Псіхалогія</string>
+    <string name="poi_tool_hire">Арэнда інструментаў</string>
+    <string name="poi_computer_repair_no">Рамонт камп\'ютараў: не</string>
+    <string name="poi_computer_parts_no">Камп\'ютарныя кампаненты: не</string>
+    <string name="poi_faculty_communication">Сувязь</string>
+    <string name="poi_faculty_education">Адукацыя</string>
+    <string name="poi_computer_repair_yes">Так;Рамонт камп\'ютараў</string>
+    <string name="poi_faculty_mathematics">Матэматыка</string>
+    <string name="poi_faculty_medicine">Медыцына</string>
+    <string name="poi_ticket_validator">Сродак праверкі квіткоў</string>
+    <string name="poi_faculty_chemistry">Хімія</string>
+    <string name="poi_faculty_economics">Эканоміка</string>
+    <string name="poi_faculty_engineering">Інжынерыя</string>
+    <string name="poi_faculty_geography">Геаграфія</string>
+    <string name="poi_faculty_law">Права</string>
+    <string name="poi_faculty_nursing">Догляд</string>
+    <string name="poi_escape_game">Квэсты</string>
+    <string name="poi_computer_sales_yes">Так;Продаж камп\'ютараў</string>
+    <string name="poi_computer_sales_used">Ужываныя;Ужываныя камп\'ютары</string>
+    <string name="poi_computer_sales_no">Продаж камп\'ютараў: не</string>
 </resources>
