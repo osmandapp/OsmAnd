@@ -3251,7 +3251,7 @@
     <string name="select_folder">Izberi mapo</string>
     <string name="select_folder_descr">Izberi mapo ali dodaj novo</string>
     <string name="shared_string_empty">Prazno</string>
-    <string name="analyze_by_intervals">Analiziraj razdelilne intervale</string>
+    <string name="analyze_by_intervals">Analiziraj po intervalih</string>
     <string name="upload_to_openstreetmap">Naloži v OpenStreetMap</string>
     <string name="edit_track">Uredi sled</string>
     <string name="rename_track">Preimenuj sled</string>

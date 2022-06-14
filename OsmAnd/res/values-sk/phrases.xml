@@ -893,7 +893,7 @@
     <string name="poi_recycling_waste_oil">Olej</string>
     <string name="poi_recycling_bottles">Fľaše</string>
     <string name="poi_recycling_cork">Korok</string>
-    <string name="poi_recycling_printer_cartridges">Tlačové hlavy</string>
+    <string name="poi_recycling_printer_cartridges">Prázdne náplne do tlačiarní</string>
     <string name="poi_recycling_sheet_metal">Kovové platne</string>
     <string name="poi_recycling_foil">Fólie</string>
     <string name="poi_recycling_paint">Farby</string>
@@ -4113,4 +4113,9 @@
     <string name="poi_board_type_nature">Príroda</string>
     <string name="poi_food_no">Jedlo: nie</string>
     <string name="poi_shop_fuel">Obchod s palivom</string>
+    <string name="poi_payment_mir_no">Neprijíma karty Mir</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_youth_movement">Mládežnícke hnutie</string>
+    <string name="poi_club_amateur_radio">Klub rádioamatérov</string>
+    <string name="poi_club_religion">Náboženský klub</string>
 </resources>

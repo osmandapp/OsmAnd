@@ -2194,7 +2194,7 @@
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено</string>
-    <string name="private_access_routing_req">Місце призначення розташовано в області з приватним доступом. Дозволити доступ до приватних доріг для цього маршруту\?</string>
+    <string name="private_access_routing_req">Пункт призначення розташований в районі з приватним доступом. Дозволити доступ приватних доріг для цього маршруту\?</string>
     <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
     <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку покаже чи приховає Нотатки OSM на мапі.</string>
     <string name="sorted_by_distance">Відсортоване за відстанню</string>

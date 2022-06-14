@@ -4633,7 +4633,7 @@
     <string name="compass_on_circles">Kompas na okręgach</string>
     <string name="routing_attr_avoid_4wd_only_description">Unikaj dróg nadających się tylko dla pojazdów z napędem na 4 koła</string>
     <string name="map_widget_trip_recording_distance">Odległość</string>
-    <string name="rendering_attr_horseScale_name">Trudność szlaków konnych</string>
+    <string name="rendering_attr_horseScale_name">Poziom trudności szlaków konnych</string>
     <string name="routing_attr_avoid_highway_name">Unikaj autostrad</string>
     <string name="rendering_attr_weatherTempContours_name">Izolinie temperatury</string>
     <string name="circle_settings">Ustawienia okręgu</string>
@@ -4643,6 +4643,20 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Ukryj obszary wojskowe</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ukryj obszary wojskowe</string>
     <string name="shared_string_mode">Tryb</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Tryb można przełączać, stukając widżet.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Przełącz tryb stukając widżet.</string>
     <string name="map_widget_distance_to_intermediate">Odległość do punktu pośredniego</string>
+    <string name="import_as_one_track">Importuj jako jedną ścieżkę</string>
+    <string name="use_latin_name_if_missing">Użyj nazwy łacińskiej, jeśli jej brakuje</string>
+    <string name="transport_hazmat_yes_desc">Należy wybrać odpowiednią kategorię.</string>
+    <string name="transport_hazmat_no_desc">Na niektórych drogach i w tunelach przewożenie materiałów niebezpiecznych jest zabronione.</string>
+    <string name="average_speed_time_interval_desc">Określ przedział czasu, dla którego będzie mierzona średnia prędkość.</string>
+    <string name="average_speed_widget_desc">Pokazuje średnią prędkość bieżącej jazdy.</string>
+    <string name="map_widget_average_speed">Prędkość średnia</string>
+    <string name="transport_hazmat_title">Transport materiałów niebezpiecznych</string>
+    <string name="routing_attr_goods_restrictions_name">Ograniczenia dla pojazdów ciężarowych</string>
+    <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s nie będzie liczona i nie będzie miała wpływu na średnią prędkość.</string>
+    <string name="average_speed_skip_stops">Uwzględnij przystanki</string>
+    <string name="explore_plans">Przegląd planów</string>
+    <string name="map_widget_time_to_destination">Czas dojazdu miejsca docelowego</string>
+    <string name="map_widget_time_to_intermediate">Czas pośredni</string>
 </resources>

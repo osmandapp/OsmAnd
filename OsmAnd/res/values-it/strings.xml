@@ -4687,5 +4687,5 @@
     <string name="transport_hazmat_no_desc">In alcune strade e tunnel il trasporto di materiale pericoloso è proibito.</string>
     <string name="transport_hazmat_title">Trasporto di materiale pericoloso</string>
     <string name="routing_attr_goods_restrictions_name">Restrizioni per categoria di merce trasportata</string>
-    <string name="routing_attr_goods_restrictions_description">Considera le limitazioni di accesso per categoria di merci.</string>
+    <string name="routing_attr_goods_restrictions_description">Considera le limitazioni di accesso per categoria di merci</string>
 </resources>
