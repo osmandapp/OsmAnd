@@ -2,7 +2,7 @@
 <resources>
     <string name="routing_attr_motor_type_name">Motorisation</string>
     <string name="routing_attr_motor_type_description">Pour les calculs de CO2</string>
-    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
     <string name="routing_attr_motor_type_electric_name">Électrique</string>
@@ -3159,7 +3159,7 @@
     <string name="application_profile_changed">Profil de l\'appli basculé à « %s »</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Paramètres de l\'extension</string>
-    <string name="get_discount_title">Payez %1$d %2$s et gagnez %3$s.</string>
+    <string name="get_discount_title">Réduction de %3$s pendant %1$d %2$s.</string>
     <string name="shared_string_by_default">Par défaut</string>
     <string name="download_detailed_map">Pour voir les détails de cette zone, téléchargez la carte %s.</string>
     <string name="change_data_storage_full_description">Déplacer les fichiers de données OsmAnd vers la nouvelle destination \?
@@ -3269,7 +3269,7 @@
     <string name="added_profiles">Profils ajoutés</string>
     <string name="added_profiles_descr">Profils ajoutés par extension</string>
     <string name="shared_string_turn_off">Eteindre</string>
-    <string name="new_plugin_added">Nouvel extension ajoutée</string>
+    <string name="new_plugin_added">Nouvelle extension ajoutée</string>
     <string name="join_segments">Relier les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
@@ -4700,4 +4700,6 @@
     <string name="use_latin_name_if_missing">Utiliser le nom latin si manquant</string>
     <string name="routing_attr_goods_restrictions_name">Restrictions d\'accès pour les véhicules de transport de marchandises</string>
     <string name="routing_attr_goods_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
+    <string name="kg">kg</string>
+    <string name="co2_mission">Émissions de CO2</string>
 </resources>
