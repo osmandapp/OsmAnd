@@ -183,8 +183,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 			});
 		} else {
-			markersWidgetsHelper.clearListeners();
-			markersWidgetsHelper = null;
+			if (markersWidgetsHelper != null) {
+				markersWidgetsHelper.clearListeners();
+				markersWidgetsHelper = null;
+			}
 			longTapDetector = null;
 		}
 	}
@@ -818,11 +820,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						.setBaseOrder(baseOrder)
 						.setIsHidden(isMoveable)
 						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
-					    .setPosition(pointI)
+						.setPosition(pointI)
 						.setPinIconVerticalAlignment(net.osmand.core.jni.MapMarker.PinIconVerticalAlignment.Top)
-					    .setPinIconHorisontalAlignment(net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+						.setPinIconHorisontalAlignment(net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 						.setPinIconOffset(new PointI(bmp.getWidth() / 3, 0))
-					    .setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(color))
+						.setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(color))
 						.buildAndAddToCollection(mapMarkersCollection);
 			}
 		}
@@ -941,18 +943,19 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		PointF l = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, firstPoint);
 		PointF m = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, secondPoint);
-		return new PointF[]{l, m};
+		return new PointF[] {l, m};
 	}
 
 	/**OpenGL*/
 	private double getAngleBetween(PointF start, PointF end) {
 		double dx = start.x - end.x;
 		double dy = start.y - end.y;
-		double radians = dx != 0 ? Math.atan(dy/dx) : (dy < 0 ? Math.PI / 2 : -Math.PI / 2);
+		double radians = dx != 0 ? Math.atan(dy / dx) : (dy < 0 ? Math.PI / 2 : -Math.PI / 2);
 		return Math.toDegrees(radians - (start.x > end.x ? Math.PI : 0));
 	}
 
-	private @ColorInt int getColorByIndex(int colorIndex) {
+	@ColorInt
+	private int getColorByIndex(int colorIndex) {
 		int colorResId;
 		switch (colorIndex) {
 			case 1:

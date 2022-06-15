@@ -184,12 +184,12 @@ public class GpxSelectionHelper {
 						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
 	}
 
-	public void addTemporallyVisibleTrack(@NonNull SelectedGpxFile file) {
-		updateTmpVisible(true, file);
+	public void addTemporallyVisibleTrack(@NonNull SelectedGpxFile selectedGpxFile) {
+		updateTmpVisible(true, selectedGpxFile);
 	}
 
-	public void removeTemporallyVisibleTrack(@NonNull SelectedGpxFile file) {
-		updateTmpVisible(false, file);
+	public void removeTemporallyVisibleTrack(@NonNull SelectedGpxFile selectedGpxFile) {
+		updateTmpVisible(false, selectedGpxFile);
 	}
 
 	private void updateTmpVisible(boolean show, @NonNull SelectedGpxFile file) {
