@@ -2916,7 +2916,7 @@
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
     <string name="public_transport_type">Type de transport</string>
-    <string name="searching_gps">Recherche des satellites</string>
+    <string name="searching_gps">Recherche des signaux GPS</string>
     <string name="coordinates_widget">Widget de coordonnées</string>
     <string name="shared_string_privacy_policy">Politique de confidentialité</string>
     <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd</string>
@@ -3274,7 +3274,7 @@
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les nœuds réseau des itinéraires cyclable</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les itinéraires cyclables balisés</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Réseaux de noeuds</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
