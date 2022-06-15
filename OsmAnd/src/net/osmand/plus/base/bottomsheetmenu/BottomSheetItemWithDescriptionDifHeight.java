@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
@@ -55,9 +56,15 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
 		if (minHeight != INVALID_VALUE) {
+			if (view instanceof TextView) {
+				((TextView) view).setMinimumHeight(minHeight);
+				((TextView) view).setMinHeight(minHeight);
+			} else {
+				view.setMinimumHeight(minHeight);
+			}
 			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
 			params.height = WRAP_CONTENT;
-			view.setMinimumHeight(minHeight);
+			view.setLayoutParams(params);
 		}
 	}
 
