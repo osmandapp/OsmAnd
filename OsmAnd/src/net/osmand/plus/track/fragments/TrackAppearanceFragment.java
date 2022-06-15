@@ -1,5 +1,10 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
+import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -39,8 +44,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.AppearanceListItem;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
@@ -73,11 +78,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
-import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
-import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
@@ -215,6 +215,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void restoreSelectedGpxFile(String gpxFilePath, boolean isCurrentRecording) {
 		TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, isCurrentRecording, (gpxFile) -> {
 			setSelectedGpxFile(gpxFile);
+			gpxSelectionHelper.addTemporallyVisibleTrack(gpxFile);
 			if (view != null) {
 				initContent();
 			}
@@ -317,7 +318,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
-		gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(trackDrawInfo);
@@ -327,7 +330,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onPause() {
 		super.onPause();
-		gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(null);
@@ -385,7 +390,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
-			} else if (!nightMode){
+			} else if (!nightMode) {
 				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
 			}
 		}
