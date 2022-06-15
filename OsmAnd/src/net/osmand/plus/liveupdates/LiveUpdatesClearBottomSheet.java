@@ -45,6 +45,7 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 		if (!fragmentManager.isStateSaved()) {
 			LiveUpdatesClearBottomSheet fragment = new LiveUpdatesClearBottomSheet();
 			fragment.setTargetFragment(target, 0);
+			fragment.usedOnMap = false;
 			fragment.fileName = fileName;
 			fragment.show(fragmentManager, TAG);
 		}
