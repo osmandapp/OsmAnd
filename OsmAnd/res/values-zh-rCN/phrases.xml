@@ -1304,4 +1304,13 @@
     <string name="poi_beach">海滩</string>
     <string name="poi_beacon">灯塔</string>
     <string name="poi_bridge_waterway">水路桥梁</string>
+    <string name="poi_logging">伐木场</string>
+    <string name="poi_farmland">农田</string>
+    <string name="poi_grassland">草原</string>
+    <string name="poi_leisure_common">公共休闲区</string>
+    <string name="poi_payment_debit_cards_yes">借记卡</string>
+    <string name="poi_scrub">灌木丛</string>
+    <string name="poi_heath">石楠荒原</string>
+    <string name="poi_bird_hide">观鸟地点</string>
+    <string name="poi_tactile_paving_no">没有盲道</string>
 </resources>
