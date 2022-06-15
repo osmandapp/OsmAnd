@@ -4699,4 +4699,14 @@
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
     <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
     <string name="routing_attr_goods_restrictions_name">Обмеження на вантажні транспортні засоби</string>
+    <string name="co2_mission">Викиди CO2</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_electric_name">Електричний</string>
+    <string name="routing_attr_motor_type_gas_name">Метан</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гібридний</string>
+    <string name="routing_attr_motor_type_name">Тип двигуна</string>
+    <string name="routing_attr_motor_type_description">Для обчислення CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизель</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_lpg_name">Пропан</string>
 </resources>
