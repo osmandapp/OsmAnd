@@ -3989,7 +3989,7 @@
     <string name="shared_string_folders">Фасцикле</string>
     <string name="select_folder">Одаберите фасциклу</string>
     <string name="select_folder_descr">Одаберите фасциклу или додајте нову</string>
-    <string name="analyze_by_intervals">Анализирај интервале поделе</string>
+    <string name="analyze_by_intervals">Анализирај по интервалима</string>
     <string name="upload_to_openstreetmap">Отпреми на OpenStreetMap</string>
     <string name="change_folder">Измени фасциклу</string>
     <string name="shared_string_sec">сек</string>
@@ -4687,4 +4687,21 @@
     <string name="average_speed_widget_desc">Приказује просечну брзину тренутне вожње.</string>
     <string name="map_widget_average_speed">Просечна брзина</string>
     <string name="average_speed_skip_stops_desc">Брзина мања од %1$s неће се рачунати и неће утицати на просечну брзину.</string>
+    <string name="routing_attr_goods_restrictions_description">Размотрите приступне дозволе за лака камионе са робом (роба)</string>
+    <string name="use_latin_name_if_missing">Користи латинично име ако недостаје</string>
+    <string name="import_as_one_track">Увези као једну путању</string>
+    <string name="routing_attr_motor_type_electric_name">Електрична</string>
+    <string name="routing_attr_motor_type_name">Тип мотора</string>
+    <string name="routing_attr_motor_type_lpg_name">Ауто гас</string>
+    <string name="routing_attr_motor_type_gas_name">Метан (CNG)</string>
+    <string name="transport_hazmat_no_desc">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
+    <string name="routing_attr_motor_type_description">За CO2 израчунавање</string>
+    <string name="routing_attr_goods_restrictions_name">Ограничење за возила са робом</string>
+    <string name="co2_mission">CO2 емисија</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_hybrid_name">Хибрид</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизел</string>
+    <string name="routing_attr_motor_type_petrol_name">Безоловни</string>
+    <string name="transport_hazmat_yes_desc">Морате одабрати исправну категорију.</string>
+    <string name="transport_hazmat_title">Превожење опасних материја</string>
 </resources>
