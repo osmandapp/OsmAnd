@@ -239,7 +239,6 @@ public class ResourceManager {
 	protected final Map<String, File> indexFiles = new ConcurrentHashMap<>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
 	private final Map<String, String> backupedFileNames = new ConcurrentHashMap<>();
-	private boolean isMapChanged = false;
 
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
 
