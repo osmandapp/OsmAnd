@@ -75,16 +75,16 @@
 
 		<FrameLayout
 			android:id="@+id/settings_button"
-			style="@style/Widget.AppCompat.ActionButton"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:padding="@dimen/content_padding">
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical">
 
 			<androidx.appcompat.widget.AppCompatImageButton
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginVertical="@dimen/content_padding_small"
 				android:clickable="false"
 				android:focusable="false"
 				android:tint="?attr/default_icon_color"
