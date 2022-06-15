@@ -4705,4 +4705,14 @@
     <string name="use_latin_name_if_missing">Brug latinsk navn, hvis det mangler</string>
     <string name="routing_attr_goods_restrictions_description">Tag hensyn til adgangstilladelser for lette varebiler (varer)</string>
     <string name="routing_attr_goods_restrictions_name">Begrænsninger for varebiler</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrisk</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="co2_mission">CO2-udledning</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_name">Motortype</string>
+    <string name="routing_attr_motor_type_description">Til CO2-beregning</string>
 </resources>
