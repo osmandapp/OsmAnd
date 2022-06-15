@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -56,7 +55,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 
-	protected String selectedGroup;
+	protected PointsGroup selectedGroup;
 	protected boolean skipConfirmationDialog;
 
 	@Override
@@ -94,14 +93,9 @@ public abstract class PointEditorFragment extends EditorFragment {
 		nameCaption.setHint(getString(R.string.shared_string_name));
 
 		nameIcon = view.findViewById(R.id.name_icon);
-		TextView categoryEdit = view.findViewById(R.id.groupName);
-		if (categoryEdit != null) {
-			AndroidUtils.setTextPrimaryColor(view.getContext(), categoryEdit, nightMode);
-			categoryEdit.setText(getCategoryInitValue());
-		}
-
-		descriptionEdit = view.findViewById(R.id.description_edit);
 		addressEdit = view.findViewById(R.id.address_edit);
+		descriptionEdit = view.findViewById(R.id.description_edit);
+
 		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, nightMode);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), addressEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, nightMode);
@@ -278,8 +272,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 		groupRecyclerView = view.findViewById(R.id.group_recycler_view);
 		groupRecyclerView.setAdapter(groupListAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-		selectedGroup = getCategoryInitValue();
-		setSelectedItemWithScroll(selectedGroup);
+
+		if (selectedGroup != null) {
+			setSelectedItemWithScroll(selectedGroup);
+		}
 	}
 
 	@Override
@@ -304,7 +300,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	@NonNull
 	public String getSelectedCategory() {
-		return selectedGroup != null ? selectedGroup : getCategoryInitValue();
+		return selectedGroup != null ? selectedGroup.name : "";
 	}
 
 	@Override
@@ -327,34 +323,38 @@ public abstract class PointEditorFragment extends EditorFragment {
 		delete(true);
 	}
 
-	public void setPointsGroup(@NonNull PointsGroup pointsGroup) {
-		setColor(pointsGroup.color);
-		setIconName(pointsGroup.iconName);
-		setBackgroundType(pointsGroup.backgroundType);
+	public void setPointsGroup(@NonNull PointsGroup group) {
+		setPointsGroup(group, shouldUpdateAppearance());
+		setSelectedItemWithScroll(group);
+	}
 
-		setSelectedGroup(pointsGroup.name);
-		setSelectedItemWithScroll(pointsGroup.name);
+	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
+		this.selectedGroup = group;
+		if (updateAppearance) {
+			setColor(group.color);
+			setIconName(group.iconName);
+			setBackgroundType(group.backgroundType);
+			updateContent();
+		}
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.name));
+	}
 
-		updateContent();
-		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(pointsGroup.name));
+	private boolean shouldUpdateAppearance() {
+		PointEditor editor = getEditor();
+		return editor != null && editor.isNew();
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
-	private void setSelectedItemWithScroll(String name) {
+	private void setSelectedItemWithScroll(@NonNull PointsGroup group) {
 		groupListAdapter.fillGroups();
 		groupListAdapter.notifyDataSetChanged();
 		int position = 0;
 		PointEditor editor = getEditor();
 		if (editor != null) {
-			position = groupListAdapter.items.size() == groupListAdapter.getItemPosition(name) + 1
-					? groupListAdapter.getItemPosition(name) + 1
-					: groupListAdapter.getItemPosition(name);
+			int itemPosition = groupListAdapter.getItemPosition(group);
+			position = groupListAdapter.items.size() == itemPosition + 1 ? itemPosition + 1 : itemPosition;
 		}
 		groupRecyclerView.scrollToPosition(position);
-	}
-
-	public void setSelectedGroup(String selectedGroup) {
-		this.selectedGroup = selectedGroup;
 	}
 
 	protected String getLastUsedGroup() {
@@ -389,14 +389,6 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@NonNull
 	protected abstract Map<String, PointsGroup> getPointsGroups();
 
-	@ColorInt
-	protected abstract int getCategoryColor(String category);
-
-	protected abstract int getCategoryPointsCount(String category);
-
-	@NonNull
-	protected abstract String getCategoryInitValue();
-
 	protected abstract String getAddressInitValue();
 
 	protected abstract String getDescriptionInitValue();
@@ -407,20 +399,18 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	protected abstract void showAddNewCategoryFragment();
 
-	protected boolean isCategoryVisible(String name) {
-		return true;
-	}
+	protected abstract boolean isCategoryVisible(String name);
 
 	protected String getCategoryTextValue() {
 		RecyclerView recyclerView = view.findViewById(R.id.group_recycler_view);
-		if (recyclerView.getAdapter() != null) {
-			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup)) {
+		if (recyclerView.getAdapter() != null && selectedGroup != null) {
+			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup.name)) {
 				return PERSONAL_CATEGORY;
 			}
-			if (selectedGroup.equals(getDefaultCategoryName())) {
+			if (Algorithms.stringsEqual(selectedGroup.name, getDefaultCategoryName())) {
 				return "";
 			}
-			return selectedGroup;
+			return selectedGroup.name;
 		}
 		return "";
 	}
@@ -442,7 +432,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		private static final int VIEW_TYPE_CELL = 0;
 		private static final int VIEW_TYPE_FOOTER = 1;
 
-		private final List<String> items = new ArrayList<>();
+		private final List<PointsGroup> items = new ArrayList<>();
 
 		GroupAdapter() {
 			fillGroups();
@@ -450,7 +440,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 		private void fillGroups() {
 			items.clear();
-			items.addAll(getPointsGroups().keySet());
+			items.addAll(getPointsGroups().values());
 		}
 
 		@NonNull
@@ -483,24 +473,21 @@ public abstract class PointEditorFragment extends EditorFragment {
 			} else {
 				holder.groupButton.setOnClickListener(view -> {
 					int previousSelectedPosition = getItemPosition(selectedGroup);
-					setSelectedGroup(items.get(holder.getAdapterPosition()));
+					setPointsGroup(items.get(holder.getAdapterPosition()), shouldUpdateAppearance());
 
-					updateContent();
-					AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(selectedGroup));
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(previousSelectedPosition);
 				});
-				final String group = items.get(position);
-				holder.groupName.setText(group);
-				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));
+				final PointsGroup group = items.get(position);
+				holder.groupName.setText(group.name);
+				holder.pointsCounter.setText(String.valueOf(group.points.size()));
 				int strokeColor;
 				int strokeWidth;
-				if (selectedGroup != null && selectedGroup.equals(items.get(position))) {
+				if (Algorithms.objectEquals(selectedGroup, items.get(position))) {
 					strokeColor = ColorUtilities.getActiveColor(app, nightMode);
 					strokeWidth = 2;
 				} else {
-					strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark
-							: R.color.stroked_buttons_and_links_outline_light);
+					strokeColor = ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode);
 					strokeWidth = 1;
 				}
 				GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app,
@@ -511,9 +498,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 				}
 				int color;
 				int iconID;
-				if (isCategoryVisible(group)) {
-					int categoryColor = getCategoryColor(group);
-					color = categoryColor == 0 ? getDefaultColor() : categoryColor;
+				if (isCategoryVisible(group.name)) {
+					color = group.color == 0 ? getDefaultColor() : group.color;
 					iconID = R.drawable.ic_action_folder;
 					holder.groupName.setTypeface(null, Typeface.NORMAL);
 				} else {
@@ -538,8 +524,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 			return items.size() + 1;
 		}
 
-		int getItemPosition(String name) {
-			return items.indexOf(name);
+		int getItemPosition(PointsGroup group) {
+			return items.indexOf(group);
 		}
 	}
 

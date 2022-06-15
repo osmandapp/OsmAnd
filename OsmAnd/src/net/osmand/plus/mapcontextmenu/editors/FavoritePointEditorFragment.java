@@ -72,6 +72,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
+			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
@@ -142,12 +143,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void setPointsGroup(@NonNull PointsGroup pointsGroup) {
+	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		Context ctx = getContext();
 		if (ctx != null) {
-			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, pointsGroup.name);
-			group = favouritesHelper.getGroup(groupIdName);
-			super.setPointsGroup(pointsGroup);
+			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.name);
+			this.group = favouritesHelper.getGroup(groupIdName);
+			super.setPointsGroup(group, updateAppearance);
 		}
 	}
 
@@ -319,15 +320,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return favorite != null ? favorite.getName() : "";
 	}
 
-	@NonNull
-	@Override
-	public String getCategoryInitValue() {
-		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0
-				? getDefaultCategoryName()
-				: favorite.getCategoryDisplayName(requireContext());
-	}
-
 	@Override
 	public String getDescriptionInitValue() {
 		FavouritePoint favorite = getFavorite();
@@ -388,19 +380,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public boolean isCategoryVisible(@NonNull String name) {
 		return favouritesHelper.isGroupVisible(name);
-	}
-
-	@Override
-	public int getCategoryPointsCount(String category) {
-		FavoriteGroup group = getFavoriteGroup(category);
-		return group != null ? group.getPoints().size() : 0;
-	}
-
-	@Override
-	@ColorInt
-	public int getCategoryColor(String category) {
-		FavoriteGroup group = getFavoriteGroup(category);
-		return group != null ? group.getColor() : getDefaultColor();
 	}
 
 	@Nullable
