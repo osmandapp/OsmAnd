@@ -4691,4 +4691,14 @@
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
     <string name="routing_attr_goods_restrictions_description">Vegye figyelembe az (áruszállító) furgonokra vonatkozó behajtási engedélyeket</string>
     <string name="routing_attr_goods_restrictions_name">Furgon korlátozások</string>
+    <string name="co2_mission">Szén-dioxid kibocsátás</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_lpg_name">Autógáz (LPG)</string>
+    <string name="routing_attr_motor_type_electric_name">Elektromos</string>
+    <string name="routing_attr_motor_type_gas_name">Sűrített földgáz (CNG)</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
+    <string name="routing_attr_motor_type_description">Szén-dioxid számításhoz</string>
+    <string name="routing_attr_motor_type_name">Motor típus</string>
 </resources>
