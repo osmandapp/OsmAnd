@@ -601,17 +601,13 @@ public class FavouritesHelper {
 	}
 
 	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
-		if (color != 0 && group.getColor() != color) {
-			if (updatePoints) {
-				for (FavouritePoint point : group.getPoints()) {
-					if (point.getColor() == group.getColor()) {
-						point.setColor(color);
-					}
-				}
+		if (updatePoints) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setColor(color);
 			}
-			group.setColor(color);
-			runSyncWithMarkers(group);
 		}
+		group.setColor(color);
+		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
@@ -619,17 +615,13 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
 	                                boolean updatePoints, boolean saveImmediately) {
-		if (!Algorithms.stringsEqual(group.getIconName(), iconName)) {
-			if (updatePoints) {
-				for (FavouritePoint point : group.getPoints()) {
-					if (Algorithms.stringsEqual(point.getIconName(), group.getIconName())) {
-						point.setIconIdFromName(iconName);
-					}
-				}
+		if (updatePoints) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setIconIdFromName(iconName);
 			}
-			group.setIconName(iconName);
-			runSyncWithMarkers(group);
 		}
+		group.setIconName(iconName);
+		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
@@ -637,17 +629,13 @@ public class FavouritesHelper {
 
 	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
 	                                      boolean updatePoints, boolean saveImmediately) {
-		if (group.getBackgroundType() != backgroundType) {
-			if (updatePoints) {
-				for (FavouritePoint point : group.getPoints()) {
-					if (point.getBackgroundType() == group.getBackgroundType()) {
-						point.setBackgroundType(backgroundType);
-					}
-				}
+		if (updatePoints) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setBackgroundType(backgroundType);
 			}
-			group.setBackgroundType(backgroundType);
-			runSyncWithMarkers(group);
 		}
+		group.setBackgroundType(backgroundType);
+		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
