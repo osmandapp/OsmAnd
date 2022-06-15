@@ -794,10 +794,6 @@ public class RouteProvider {
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
-		String derivedProfile = params.mode.getDerivedProfile();
-		if (!Algorithms.isEmpty(derivedProfile)) {
-			paramsR.put("profile_"+ derivedProfile, String.valueOf(true));
-		}
 		OsmandApplication app = settings.getContext();
 		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidRoadsHelper();
 		config.setDirectionPoints(avoidRoadsHelper.getDirectionPoints(params.mode));
@@ -810,7 +806,9 @@ public class RouteProvider {
 		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(memoryLimitMb, nativeMemoryLimitMb);
 		log.warn("Use " + memoryLimitMb + " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
 		log.warn("Use " + nativeMemoryLimitMb + " MB of native memory ");
-		RoutingConfiguration cf = config.build(params.mode.getRoutingProfile(), params.start.hasBearing() ?
+		String derivedProfile = params.mode.getDerivedProfile();
+		String routingProfile = "default".equals(derivedProfile) ? params.mode.getRoutingProfile() : derivedProfile;
+		RoutingConfiguration cf = config.build(routingProfile, params.start.hasBearing() ?
 						params.start.getBearing() / 180d * Math.PI : null,
 				memoryLimits, paramsR);
 		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
