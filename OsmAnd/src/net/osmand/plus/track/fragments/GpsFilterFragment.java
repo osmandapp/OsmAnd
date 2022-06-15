@@ -1,5 +1,8 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -48,9 +51,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 public class GpsFilterFragment extends ContextMenuScrollFragment implements SaveAsNewTrackFragmentListener,
 		SaveIntoFileListener, GpsFilterListener {
@@ -139,6 +139,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		if (!Algorithms.isEmpty(gpxFilePath)) {
 			TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, false, (gpxFile) -> {
 				selectedGpxFile = gpxFile;
+				gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
 				FilteredSelectedGpxFile filteredSelectedGpxFile = setFileToFilter(selectedGpxFile);
 				if (view != null && filteredSelectedGpxFile != null) {
 					initContent(filteredSelectedGpxFile);
@@ -288,14 +289,18 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onResume() {
 		super.onResume();
-		gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		}
 		app.getGpsFilterHelper().addListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		}
 	}
 
 	@Override
