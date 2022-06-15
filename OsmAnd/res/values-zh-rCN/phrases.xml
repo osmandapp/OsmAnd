@@ -127,7 +127,7 @@
     <string name="poi_car_repair">汽车修理</string>
     <string name="poi_public_transport_platform_bus">公交停靠站</string>
     <string name="poi_bus_stop">公交停靠站</string>
-    <string name="poi_railway_station">火车站;火车站;火车站</string>
+    <string name="poi_railway_station">火车站;铁道站</string>
     <string name="poi_aerodrome">飞机场；航空站</string>
     <string name="poi_speed_camera">测速摄像机</string>
     <string name="poi_telephone">电话</string>
@@ -152,7 +152,7 @@
     <string name="poi_company">公司</string>
     <string name="poi_insurance">保险</string>
     <string name="poi_lawyer">律师</string>
-    <string name="poi_american_football"/>
+    <string name="poi_american_football">美式橄榄球</string>
     <string name="poi_baseball">棒球</string>
     <string name="poi_basketball">篮球</string>
     <string name="poi_ice_hockey">冰球</string>
@@ -1219,7 +1219,7 @@
     <string name="poi_fuel_hgv_diesel">HGV柴油</string>
     <string name="poi_fuel_octane_95">辛烷值 95</string>
     <string name="poi_fuel_octane_98">辛烷值 98</string>
-    <string name="poi_railway_platform">铁路月台；火车月台</string>
+    <string name="poi_railway_platform">铁路月台;火车月台</string>
     <string name="poi_pub">酒馆</string>
     <string name="poi_recreation_ground">休闲场地</string>
     <string name="poi_beach_resort">海滩度假区</string>
@@ -1313,4 +1313,12 @@
     <string name="poi_heath">石楠荒原</string>
     <string name="poi_bird_hide">观鸟地点</string>
     <string name="poi_tactile_paving_no">没有盲道</string>
+    <string name="poi_australian_football">澳式橄榄球</string>
+    <string name="poi_socket_chademo_output_filter">CHAdeMO 输出</string>
+    <string name="poi_beachvolleyball">沙滩排球</string>
+    <string name="poi_bmx">小轮车</string>
+    <string name="poi_laundry_service_no">无</string>
+    <string name="poi_dry_cleaning_yes">有</string>
+    <string name="poi_dry_cleaning_no">无</string>
+    <string name="poi_termite_mound">白蚁丘</string>
 </resources>
