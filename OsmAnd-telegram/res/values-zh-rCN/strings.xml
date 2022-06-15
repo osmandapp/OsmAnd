@@ -14,4 +14,6 @@
     <string name="logcat_buffer">Logcat 缓冲区</string>
     <string name="shared_string_suggested">建议的</string>
     <string name="status_widget_title">OsmAnd追踪器状态</string>
+    <string name="send_live_location_error">发送实时位置出错：%1$s</string>
+    <string name="shared_string_error">错误</string>
 </resources>
