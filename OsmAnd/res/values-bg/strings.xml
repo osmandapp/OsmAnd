@@ -1042,7 +1042,7 @@
     <string name="shared_string_about">За програмата</string>
     <string name="about_settings_descr">Версия, лицензи и разработчици</string>
     <string name="shared_string_delete_all">Премахване на всичко</string>
-    <string name="animate_routing_route_not_calculated">Моля, първо изчислете маршрута</string>
+    <string name="animate_routing_route_not_calculated">Първо изчислете маршрута</string>
     <string name="animate_routing_route">Симулация по намерения маршрут </string>
     <string name="animate_routing_gpx">Симулация по GPX следа</string>
     <string name="shared_string_remember_my_choice">Запомняне на избора</string>
@@ -1051,7 +1051,7 @@
     <string name="auto_zoom_far">Нормално</string>
     <string name="auto_zoom_farthest">За далечни разстояния</string>
     <string name="map_magnifier">Лупа за картата</string>
-    <string name="local_osm_changes_delete_all_confirm">Ще изтриете %1$d промени в картата OSM. Сигурни ли сте?</string>
+    <string name="local_osm_changes_delete_all_confirm">Премахване на %1$d промени в OSM\?</string>
     <string name="local_index_tile_data_expire">Изтича след %1$s минути</string>
     <string name="local_index_tile_data_downloadable">Разрешени за теглене: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимален мащаб: %1$s</string>
@@ -2794,4 +2794,16 @@
     <string name="current_speed_widget_desc">Показва текущата скорост, получена от дтачика за GPS.</string>
     <string name="time_to_go_desc">Времето в минути или часове, необходимо за достигане в крайната точка.</string>
     <string name="route_parameters_info">Настройки на маршрутизацията за профил „%1$s“.</string>
+    <string name="backup_now">Създаване на резервно копие</string>
+    <string name="make_backup">Създаване на резервно копие</string>
+    <string name="routing_attr_motor_type_hybrid_name">Хибриден</string>
+    <string name="routing_attr_motor_type_electric_name">Електрически</string>
+    <string name="routing_attr_motor_type_lpg_name">Природен газ</string>
+    <string name="routing_attr_motor_type_gas_name">Газ под налягане</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензинов</string>
+    <string name="routing_attr_motor_type_name">Вид на двигателя</string>
+    <string name="routing_attr_motor_type_description">За изчисляване на CO2</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизел</string>
+    <string name="co2_mission">Емисии от CO2</string>
 </resources>
