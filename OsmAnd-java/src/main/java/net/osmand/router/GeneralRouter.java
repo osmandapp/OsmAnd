@@ -45,6 +45,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_WEIGHT = "weight";
 	public static final String VEHICLE_WIDTH = "width";
 	public static final String VEHICLE_LENGTH = "length";
+	public static final String MOTOR_TYPE = "motor_type";
 	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
 
 	private static boolean USE_CACHE = true;

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/route_info_details_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -15,7 +14,7 @@
 		android:focusable="false" />
 
 	<LinearLayout
-		android:id="@+id/RouteInfoControls"
+		android:id="@+id/route_info_controls"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_and_list_background_basic"
@@ -25,159 +24,130 @@
 			android:id="@+id/info_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small_half">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/firstRow"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				tools:text="34,2 km  •  39 min (17:47)" />
 
 			<LinearLayout
-				android:id="@+id/Info"
+				android:id="@+id/secondRow"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:minHeight="@dimen/route_info_list_item_height"
-				android:orientation="horizontal"
-				android:paddingTop="@dimen/route_info_details_padding"
-				android:paddingBottom="@dimen/route_info_details_padding">
+				android:layout_marginTop="@dimen/text_margin_small"
+				android:orientation="horizontal">
 
 				<LinearLayout
-					android:layout_width="0dp"
+					android:id="@+id/uphill_container"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:minHeight="36dp"
-					android:orientation="horizontal"
-					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
+					android:layout_marginEnd="@dimen/content_padding"
+					android:orientation="horizontal">
 
 					<androidx.appcompat.widget.AppCompatImageView
-						android:id="@+id/InfoIcon"
+						android:layout_width="@dimen/content_padding"
+						android:layout_height="@dimen/content_padding"
+						android:layout_gravity="center_vertical"
+						android:layout_marginVertical="@dimen/text_margin_small"
+						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
+						osmand:srcCompat="@drawable/ic_action_altitude_ascent_16"
+						osmand:tint="?attr/secondary_icon_color" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/uphill"
+						style="@style/DescStyle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/list_content_padding"
-						android:contentDescription="@string/info_button"
-						osmand:srcCompat="@drawable/ic_action_info_dark"
-						android:layout_marginEnd="@dimen/list_content_padding"
-						android:layout_marginStart="@dimen/list_content_padding" />
-
-					<LinearLayout
-						android:id="@+id/InfoDistance"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:orientation="vertical">
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/DistanceText"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:gravity="start"
-							android:singleLine="true"
-							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_list_text_size"
-							tools:text="10 km" />
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/DistanceTitle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:gravity="start"
-							android:text="@string/distance"
-							android:textColor="@color/description_font_and_bottom_sheet_icons"
-							android:textSize="@dimen/default_sub_text_size" />
-
-					</LinearLayout>
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="168 m" />
 
 				</LinearLayout>
 
-				<View
-					android:id="@+id/info_divider"
-					android:layout_width="1dp"
-					android:layout_height="match_parent"
-					android:background="?attr/divider_color_basic"
-					android:paddingBottom="@dimen/list_item_button_padding" />
-
 				<LinearLayout
-					android:layout_width="0dp"
+					android:id="@+id/downhill_container"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:minHeight="36dp"
-					android:orientation="horizontal"
-					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
+					android:layout_marginEnd="@dimen/content_padding"
+					android:orientation="horizontal">
 
 					<androidx.appcompat.widget.AppCompatImageView
-						android:id="@+id/DurationIcon"
+						android:layout_width="@dimen/content_padding"
+						android:layout_height="@dimen/content_padding"
+						android:layout_gravity="center_vertical"
+						android:layout_marginVertical="@dimen/text_margin_small"
+						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
+						osmand:srcCompat="@drawable/ic_action_altitude_descent_16"
+						osmand:tint="?attr/secondary_icon_color" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/downhill"
+						style="@style/DescStyle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/list_content_padding"
-						android:contentDescription="@string/info_button"
-						osmand:srcCompat="@drawable/ic_action_time"
-						android:layout_marginEnd="@dimen/list_content_padding"
-						android:layout_marginStart="@dimen/list_content_padding" />
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="12 m" />
 
-					<LinearLayout
-						android:id="@+id/InfoDuration"
-						android:layout_width="match_parent"
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/emission_container"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:orientation="horizontal"
+					android:visibility="gone">
+
+					<View
+						android:layout_width="1dp"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical"
+						android:layout_marginVertical="@dimen/content_padding_small_half"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:background="?attr/divider_color_basic" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/emission"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:orientation="vertical">
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/DurationText"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:gravity="start"
-							android:singleLine="true"
-							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_list_text_size"
-							tools:text="5 min" />
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/DurationTitle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:gravity="start"
-							android:textColor="@color/description_font_and_bottom_sheet_icons"
-							android:textSize="@dimen/default_sub_text_size"
-							tools:text="@string/arrive_at_time" />
-
-					</LinearLayout>
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="14 kg CO2 emission" />
 
 				</LinearLayout>
 
 			</LinearLayout>
 
-			<com.github.mikephil.charting.charts.LineChart
-				android:id="@+id/chart"
-				android:layout_width="match_parent"
-				android:layout_height="72dp"
-				android:layout_gravity="center_vertical" />
-
 		</LinearLayout>
 
-		<FrameLayout
-			android:id="@+id/details_button"
+		<com.github.mikephil.charting.charts.LineChart
+			android:id="@+id/chart"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/route_info_buttons_height"
+			android:layout_height="72dp"
 			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="@dimen/route_info_buttons_padding_top_bottom"
-			android:layout_marginTop="@dimen/route_info_details_padding"
-			android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
-			android:layout_marginBottom="@dimen/route_info_details_padding"
-			android:orientation="horizontal"
-			android:layout_marginEnd="@dimen/route_info_buttons_padding_top_bottom"
-			android:layout_marginStart="@dimen/route_info_buttons_padding_top_bottom">
+			android:paddingHorizontal="@dimen/content_padding" />
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/details_button_descr"
+		<FrameLayout
+			android:id="@+id/button_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding">
+
+			<include
+				android:id="@+id/details_button"
+				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_gravity="center"
-				android:ellipsize="end"
-				android:gravity="center"
-				android:letterSpacing="@dimen/text_button_letter_spacing"
-				android:maxLines="1"
-				android:text="@string/rendering_category_details"
-				android:textColor="?attr/active_color_basic"
-				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:ignore="UnusedAttribute" />
+				android:layout_height="@dimen/route_info_buttons_height" />
 
 		</FrameLayout>
 

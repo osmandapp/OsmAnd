@@ -1,6 +1,9 @@
 package net.osmand.plus.routepreparationmenu;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
+
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -140,9 +143,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -847,9 +847,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				} else if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
 					showRouteOnMap(mapActivity, ((PublicTransportCard) card).getRouteId());
 				}
-			} else if (card instanceof SimpleRouteCard) {
-				hide();
-				ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(), 0, MenuState.FULL_SCREEN);
 			} else if (card instanceof PublicTransportNotFoundWarningCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
@@ -1224,9 +1221,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity,
-													   final MuteSoundRoutingParameter parameter,
-													   final RouteMenuAppModes mode,
-													   LinearLayout optionsContainer) {
+	                                                   final MuteSoundRoutingParameter parameter,
+	                                                   final RouteMenuAppModes mode,
+	                                                   LinearLayout optionsContainer) {
 		final ApplicationMode appMode = mapActivity.getRoutingHelper().getAppMode();
 		final int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
@@ -1363,7 +1360,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createImpassableRoadsItems(MapActivity mapActivity, Map<LatLon, AvoidRoadInfo> impassableRoads,
-											final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
+	                                        final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
 		Iterator<AvoidRoadInfo> it = impassableRoads.values().iterator();
 		while (it.hasNext()) {
 			final AvoidRoadInfo avoidRoadInfo = it.next();
@@ -1391,13 +1388,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createAvoidParametersItems(MapActivity mapActivity, final List<RoutingParameter> avoidedParameters,
-											final LocalRoutingParameter parameter, final RouteMenuAppModes mode,
-											final LinearLayout item) {
+	                                        final LocalRoutingParameter parameter, final RouteMenuAppModes mode,
+	                                        final LinearLayout item) {
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		for (int i = 0; i < avoidedParameters.size(); i++) {
 			final RoutingParameter routingParameter = avoidedParameters.get(i);
 			final View container = createToolbarSubOptionView(false, AndroidUtils.getRoutingStringPropertyName(
-					app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark,
+							app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark,
 					i == avoidedParameters.size() - 1, v -> {
 						OsmandApplication app = getApp();
 						if (app == null) {
@@ -1496,7 +1493,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private LinearLayout createToolbarOptionView(boolean active, String title, @DrawableRes int activeIconId,
-												 @DrawableRes int disabledIconId, OnClickListener listener) {
+	                                             @DrawableRes int disabledIconId, OnClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
@@ -1543,7 +1540,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private View createToolbarSubOptionView(boolean hideTextLine, String title, @DrawableRes int iconId,
-											boolean lastItem, OnClickListener listener) {
+	                                        boolean lastItem, OnClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
