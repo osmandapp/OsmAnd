@@ -4699,4 +4699,14 @@
     <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
     <string name="routing_attr_goods_restrictions_name">Yük araçları kısıtlamaları</string>
     <string name="routing_attr_goods_restrictions_description">Hafif yük araçları (mallar) için erişim izinlerini göz önünde bulundurun</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrik</string>
+    <string name="co2_mission">CO2 emisyonu</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Dizel</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrit</string>
+    <string name="routing_attr_motor_type_name">Motor türü</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_description">CO2 hesaplaması için</string>
 </resources>
