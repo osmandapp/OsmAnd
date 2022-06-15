@@ -4864,4 +4864,7 @@
 
 	<string name="poi_club_dog">Dog club</string>
 
+	<string name="poi_board_title">Board title</string>
+	<string name="poi_short_name">Short name</string>
+
 </resources>
