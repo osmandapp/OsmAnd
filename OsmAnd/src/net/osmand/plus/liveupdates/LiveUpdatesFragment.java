@@ -82,8 +82,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
@@ -563,7 +562,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			}
 			statusIcon.setImageDrawable(statusDrawable);
 
-			description.setText(getLastCheckString(item, app));
+			description.setText(getFormattedLastSuccessfulCheck(item));
 
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				compoundButton.setEnabled(liveUpdateOn);
@@ -631,25 +630,11 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		}
 	}
 
-	protected static String getLastCheckString(String fileName, OsmandApplication app) {
-		return getLastCheckString(fileName, app, false);
-	}
-
-	protected static String getLastCheckString(String fileName, OsmandApplication app, boolean lastTimeChecked) {
-		OsmandSettings settings = app.getSettings();
-
-		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
+	@NonNull
+	private String getFormattedLastSuccessfulCheck(@NonNull String fileName) {
+		long lastUpdate = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 		String lastUpdateString = formatShortDateTime(app, lastUpdate);
-		String description = app.getString(R.string.updated, lastUpdateString);
-
-		if (lastTimeChecked) {
-			final long lastCheck = preferenceLastCheck(fileName, settings).get();
-			String lastCheckString = formatShortDateTime(app, lastCheck);
-			if (!lastUpdateString.equals(app.getString(R.string.shared_string_never))) {
-				description = description.concat("\n" + app.getString(R.string.last_time_checked, lastCheckString));
-			}
-		}
-		return description;
+		return app.getString(R.string.updated, lastUpdateString);
 	}
 
 	@Override

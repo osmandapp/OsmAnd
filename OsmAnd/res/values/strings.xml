@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="updated_map_time">Updated: %1$s.</string>
+    <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
+    <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
+    <string name="next_live_update_time">Next update: in %1$s.</string>
     <string name="live_update_frequency_hour_variant">Map updates will be checked every hour.</string>
     <string name="live_update_frequency_day_variant">Map updates will be checked every day.</string>
     <string name="live_update_frequency_week_variant">Map updates will be checked every week.</string>

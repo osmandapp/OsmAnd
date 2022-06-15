@@ -3,7 +3,7 @@ package net.osmand.plus;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
@@ -682,7 +682,7 @@ public class AppInitializer implements IProgress {
 			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
 			LiveUpdatesHelper.UpdateFrequency updateFrequency =
 					LiveUpdatesHelper.UpdateFrequency.values()[updateFrequencyOrd];
-			long lastCheck = preferenceLastCheck(fileName, settings).get();
+			long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 
 			if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
 				runLiveUpdate(app, fileName, false, null);

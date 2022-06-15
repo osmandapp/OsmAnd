@@ -5,29 +5,30 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastOsmChange;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
 
 public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -88,8 +89,9 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 		IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
 		String fileNameWithoutExt = Algorithms.getFileNameWithoutExtension(fileName);
 		changesManager.deleteUpdates(fileNameWithoutExt);
+		preferenceLastSuccessfulUpdateCheck(fileName, settings).resetToDefault();
+		preferenceLastOsmChange(fileName, settings).resetToDefault();
 		preferenceLastCheck(fileName, settings).resetToDefault();
-		preferenceLatestUpdateAvailable(fileName, settings).resetToDefault();
 	}
 
 	@Override
