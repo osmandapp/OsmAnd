@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.core.android.MapRendererView;
@@ -55,10 +54,10 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControlle
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -110,7 +109,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private int polygonId = 1;
 	private boolean needRedrawOpenGL = false;
 	private boolean indexRegionBoundaries = false;
-	private boolean onMapIndexed = false;
+	private boolean onMapsChanged = false;
 
 	public static class DownloadMapObject {
 		private final BinaryMapDataObject dataObject;
@@ -249,7 +248,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					List<BinaryMapDataObject> backupedObjects = new ArrayList<>();
 					for (BinaryMapDataObject o : currentObjects) {
 						boolean downloaded = rm.checkIfObjectDownloaded(osmandRegions.getDownloadName(o));
-						boolean backuped = checkIfObjectBackuped(osmandRegions.getDownloadName(o));
+						boolean backuped = rm.checkIfObjectBackuped(osmandRegions.getDownloadName(o));
 						if (downloaded) {
 							downloadedObjects.add(o);
 						} else if (backuped) {
@@ -391,15 +390,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 		}
 		canvas.drawPath(path, paint);
-	}
-
-	private boolean checkIfObjectBackuped(String downloadName) {
-		File fileDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		return new File(fileDir, regionName).exists() || new File(fileDir, roadsRegionName).exists();
 	}
 
 	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
@@ -684,9 +674,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapRenderer == null) {
 			return;
 		}
-		if (onMapIndexed) {
+		if (onMapsChanged) {
 			clearPolygonsCollections();
-			onMapIndexed = false;
+			onMapsChanged = false;
 		}
 		if (polygonsCollection != null && selectedSize == selectedObjects.size()) {
 			return;
@@ -712,7 +702,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				String n = wr.getRegionDownloadName();
 				if (rm.checkIfObjectDownloaded(n)) {
 					downloadedRegions.add(wr);
-				} else if (checkIfObjectBackuped(n)) {
+				} else if (rm.checkIfObjectBackuped(n)) {
 					backupedRegions.add(wr);
 				}
 			}
@@ -743,6 +733,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (polygonsCollection == null) {
 			polygonsCollection = new PolygonsCollection();
 		}
+		int baseOrder = getBaseOrder();
 		for (WorldRegion wr : regionList) {
 			List<LatLon> polygon = wr.getPolygon();
 			QVectorPointI points = new QVectorPointI();
@@ -803,6 +794,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void onMapsIndexed() {
-		onMapIndexed = true;
+		onMapsChanged = true;
+	}
+
+	@Override
+	public void onMapClosed() {
+		onMapsChanged = true;
 	}
 }

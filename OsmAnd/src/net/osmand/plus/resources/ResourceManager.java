@@ -115,8 +115,8 @@ public class ResourceManager {
 	private final List<ResourceListener> resourceListeners = new ArrayList<>();
 
 	public interface ResourceListener {
-
 		void onMapsIndexed();
+		void onMapClosed();
 	}
 
 	// Indexes
@@ -238,6 +238,8 @@ public class ResourceManager {
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<>();
 	protected final Map<String, File> indexFiles = new ConcurrentHashMap<>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
+	private final Map<String, String> backupedFileNames = new ConcurrentHashMap<>();
+	private boolean isMapChanged = false;
 
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
 
@@ -320,6 +322,14 @@ public class ResourceManager {
 		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return indexFileNames.containsKey(regionName) || indexFileNames.containsKey(roadsRegionName);
+	}
+
+	public boolean checkIfObjectBackuped(String downloadName) {
+		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		return backupedFileNames.containsKey(regionName) || backupedFileNames.containsKey(roadsRegionName);
 	}
 
 	public List<MapTileLayerSize> getMapTileLayerSizes() {
@@ -1023,6 +1033,8 @@ public class ResourceManager {
 				log.error("Index file could not be written", e);
 			}
 		}
+		backupedFileNames.clear();
+		getBackupIndexes(backupedFileNames);
 		for (ResourceListener l : resourceListeners) {
 			l.onMapsIndexed();
 		}
@@ -1356,6 +1368,9 @@ public class ResourceManager {
 		BinaryMapReaderResource resource = fileReaders.remove(fileName);
 		if (resource != null) {
 			resource.close();
+		}
+		for (ResourceListener l : resourceListeners) {
+			l.onMapClosed();
 		}
 	}
 
