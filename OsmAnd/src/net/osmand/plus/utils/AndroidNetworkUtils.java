@@ -178,12 +178,12 @@ public class AndroidNetworkUtils {
 	}
 
 	public static void sendRequestAsync(@Nullable OsmandApplication app,
-										@NonNull String url,
-										@Nullable Map<String, String> parameters,
-										@Nullable String userOperation,
-										boolean toastAllowed,
-										boolean post,
-										@Nullable OnRequestResultListener listener) {
+	                                    @NonNull String url,
+	                                    @Nullable Map<String, String> parameters,
+	                                    @Nullable String userOperation,
+	                                    boolean toastAllowed,
+	                                    boolean post,
+	                                    @Nullable OnRequestResultListener listener) {
 		new AsyncTask<Void, Void, Void>() {
 
 			private String result;

@@ -35,8 +35,6 @@ public class PerformLiveUpdateAsyncTask
 
 	private static final Log LOG = PlatformUtil.getLog(PerformLiveUpdateAsyncTask.class);
 
-	private static final int STATUS_CODE_OK = 200;
-
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	@NonNull
