@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
@@ -24,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -49,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
@@ -68,6 +71,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	private MapTileLayer underlayLayer;
 	private StateChangedListener<String> underlayListener;
 	private StateChangedListener<Integer> overlayLayerListener;
+	private CallbackWithObject<Boolean> updateConfigureMapItemCallback;
 
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
 		super(app);
@@ -109,8 +113,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
 		final CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty("hideWaterPolygons");
 		underlayListener = change -> app.runInUIThread(() -> {
-			hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-			hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+			boolean selected = settings.MAP_UNDERLAY.get() != null;
+			hidePolygonsPref.set(selected);
+			hideWaterPolygonsPref.set(selected);
+			if (updateConfigureMapItemCallback != null) {
+				updateConfigureMapItemCallback.processResult(selected);
+			}
 		});
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
@@ -351,6 +359,18 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				}
 				return true;
 			}
+		};
+
+		updateConfigureMapItemCallback = result -> {
+			MapActivity ma = mapActivityRef.get();
+			if (ma != null) {
+				ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(ma);
+				if (fragment != null) {
+					fragment.onRefreshItem(HIDE_ID);
+				}
+				return true;
+			}
+			return false;
 		};
 
 		if (overlayLayer.getMap() == null) {
