@@ -4692,4 +4692,14 @@
     <string name="transport_hazmat_yes_desc">您必須選擇合適的分類。</string>
     <string name="routing_attr_goods_restrictions_description">考慮輕型貨車（貨物）的進入權限</string>
     <string name="routing_attr_goods_restrictions_name">貨車限制</string>
+    <string name="co2_mission">二氧化碳排放</string>
+    <string name="kg">公斤</string>
+    <string name="routing_attr_motor_type_electric_name">電力</string>
+    <string name="routing_attr_motor_type_hybrid_name">混合動力</string>
+    <string name="routing_attr_motor_type_description">用於二氧化碳計算</string>
+    <string name="routing_attr_motor_type_diesel_name">柴油</string>
+    <string name="routing_attr_motor_type_petrol_name">汽油</string>
+    <string name="routing_attr_motor_type_lpg_name">液化石油氣</string>
+    <string name="routing_attr_motor_type_gas_name">天然氣</string>
+    <string name="routing_attr_motor_type_name">馬達類型</string>
 </resources>
