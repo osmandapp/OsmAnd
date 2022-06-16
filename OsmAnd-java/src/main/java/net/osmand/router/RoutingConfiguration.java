@@ -166,7 +166,8 @@ public class RoutingConfiguration {
 			String derivedProfile = null;
 			if (!routers.containsKey(router)) {
 				for (Map.Entry<String, GeneralRouter> r : routers.entrySet()) {
-					if (r.getValue().getAttribute("derivedProfiles").contains(router)) {
+					String derivedProfiles = r.getValue().getAttribute("derivedProfiles");
+					if (derivedProfiles != null && derivedProfiles.contains(router)) {
 						derivedProfile = router;
 						router = r.getKey();
 						break;
