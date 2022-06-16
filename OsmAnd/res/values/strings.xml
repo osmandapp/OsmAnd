@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="lang_ckb">Central Kurdish</string>
     <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
     <string name="co2_mission">CO2 emission</string>
