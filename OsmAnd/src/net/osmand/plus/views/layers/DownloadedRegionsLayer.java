@@ -816,7 +816,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
-	public void onMapClosed() {
+	public void onMapClosed(String fileName) {
 		onMapsChanged = true;
 	}
 

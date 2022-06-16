@@ -116,7 +116,7 @@ public class ResourceManager {
 
 	public interface ResourceListener {
 		void onMapsIndexed();
-		void onMapClosed();
+		void onMapClosed(String fileName);
 	}
 
 	// Indexes
@@ -1369,7 +1369,7 @@ public class ResourceManager {
 			resource.close();
 		}
 		for (ResourceListener l : resourceListeners) {
-			l.onMapClosed();
+			l.onMapClosed(fileName);
 		}
 	}
 

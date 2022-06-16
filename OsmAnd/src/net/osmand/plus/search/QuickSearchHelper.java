@@ -681,7 +681,7 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	@Override
-	public void onMapClosed() {
+	public void onMapClosed(String fileName) {
 	}
 
 	public static void showPoiFilterOnMap(@NonNull final MapActivity mapActivity,
