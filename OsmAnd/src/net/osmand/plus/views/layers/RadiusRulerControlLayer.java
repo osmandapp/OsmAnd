@@ -479,7 +479,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 									   QuadPoint center, RenderingLineAttributes attrs) {
 		String distance = cacheDistances.get(circleNumber - 1);
 		String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, AngularConstants.DEGREES360) + " " + getCardinalDirectionForDegrees(cachedHeading);
-		float[] textCoords = calculateTextCoords(distance, heading, radiusLength, center, tb, attrs);
+
+		float offset = (textSide == TextSide.HORIZONTAL) ? 15 : 20;
+		float drawingTextRadius = radiusLength + AndroidUtils.dpToPx(app, offset);
+		float[] textCoords = calculateTextCoords(distance, heading, drawingTextRadius, center, tb, attrs);
 
 		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
 		canvas.drawText(heading, textCoords[0], textCoords[1], attrs.paint3);
