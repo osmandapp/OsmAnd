@@ -322,20 +322,18 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawRulerCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center, RenderingLineAttributes attrs) {
-		List<QuadPoint> sidePoints = drawCircle(canvas, tb, circleNumber, center, attrs);
-		if (sidePoints!= null && sidePoints.size() == 2) {
-			String text = cacheDistances.get(circleNumber - 1);
-			float[] textCoords = calculateTextCoords(text, text, sidePoints.get(0), sidePoints.get(1), attrs);
-			drawTextCoords(canvas, text, textCoords, attrs);
-		}
+		drawCircle(canvas, tb, circleNumber, center, attrs);
+
+		String text = cacheDistances.get(circleNumber - 1);
+		float circleRadius = radius * circleNumber;
+		float[] textCoords = calculateTextCoords(text, text, circleRadius, center, tb, attrs);
+		drawTextCoords(canvas, text, textCoords, attrs);
 	}
 
-	private List<QuadPoint> drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
+	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
 							RenderingLineAttributes attrs) {
 		if (!tb.isZoomAnimated()) {
 			float circleRadius = radius * circleNumber;
-			QuadPoint topOrLeftPoint = null;
-			QuadPoint rightOrBottomPoint = null;
 			List<List<QuadPoint>> arrays = new ArrayList<>();
 			List<QuadPoint> points = new ArrayList<>();
 			LatLon centerLatLon = getCenterLatLon(tb);
@@ -351,20 +349,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 				PointF screenPoint = latLonToScreenPoint(latLon, tb);
 				points.add(new QuadPoint(screenPoint.x, screenPoint.y));
-
-				if (textSide == TextSide.VERTICAL) {
-					if (a == 0) {
-						topOrLeftPoint = new QuadPoint(screenPoint.x, screenPoint.y);
-					} else if (a == 180) {
-						rightOrBottomPoint = new QuadPoint(screenPoint.x, screenPoint.y);
-					}
-				} else if (textSide == TextSide.HORIZONTAL) {
-					if (a == -90) {
-						topOrLeftPoint = new QuadPoint(screenPoint.x, screenPoint.y);
-					} else if (a == 90) {
-						rightOrBottomPoint = new QuadPoint(screenPoint.x, screenPoint.y);
-					}
-				}
 			}
 			if (points.size() > 0) {
 				arrays.add(points);
@@ -382,9 +366,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				canvas.drawPath(path, attrs.shadowPaint);
 				canvas.drawPath(path, attrs.paint);
 			}
-			return Arrays.asList(topOrLeftPoint, rightOrBottomPoint);
 		}
-		return null;
 	}
 
 	private void drawTextCoords(Canvas canvas, String text, float[] textCoords, RenderingLineAttributes attrs) {
