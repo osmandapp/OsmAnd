@@ -203,10 +203,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
 	}
 
-	private boolean is3DModeActive() {
-		return getMapRenderer() != null;
-	}
-
 	private int getCompassCircleIndex(RotatedTileBox tb, QuadPoint center) {
 		int compassCircleIndex = 2;
 		float radiusLength = radius * compassCircleIndex;
@@ -497,19 +493,19 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		double headOffsesFromRadius = AndroidUtils.dpToPx(app, 9);
 		double triangleSideLength = AndroidUtils.dpToPx(app, 12);
 		double triangleHeadAngle = 60;
-		double zeroAngle = angle - 90 + (is3DModeActive() ? 0 : tb.getRotate());
+		double zeroAngle = angle - 90 + (hasMapRenderer() ? 0 : tb.getRotate());
 
-		double radians = toRadians(zeroAngle);
+		double radians = Math.toRadians(zeroAngle);
 		double firstPointX = center.x + Math.cos(radians) * (radius + headOffsesFromRadius);
 		double firstPointY = center.y + Math.sin(radians) * (radius + headOffsesFromRadius);
 		PointF firstScreenPoint = screenPointFromPoint(firstPointX, firstPointY, false, tb);
 
-		double radians2 = toRadians(zeroAngle + triangleHeadAngle / 2 + 180);
+		double radians2 = Math.toRadians(zeroAngle + triangleHeadAngle / 2 + 180);
 		double secondPointX = firstPointX + Math.cos(radians2) * triangleSideLength;
 		double secondPointY = firstPointY + Math.sin(radians2) * triangleSideLength;
 		PointF secondScreenPoint = screenPointFromPoint(secondPointX, secondPointY, false, tb);
 
-		double radians3 = toRadians(zeroAngle - triangleHeadAngle / 2 + 180);
+		double radians3 = Math.toRadians(zeroAngle - triangleHeadAngle / 2 + 180);
 		double thirdPointX = firstPointX + Math.cos(radians3) * triangleSideLength;
 		double thirdPointY = firstPointY + Math.sin(radians3) * triangleSideLength;
 		PointF thirdScreenPoint = screenPointFromPoint(thirdPointX, thirdPointY, false, tb);
@@ -539,7 +535,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private void drawCompassCents(QuadPoint center, float innerRadiusLength, float radiusLength, RotatedTileBox tb, Canvas canvas, RenderingLineAttributes attrs) {
 		for (int i = 0; i < degrees.length; i++) {
-			double degree = degrees[i] + (is3DModeActive() ? 0 : tb.getRotate());
+			double degree = degrees[i] + (hasMapRenderer() ? 0 : tb.getRotate());
 			float x = (float) Math.cos(degree);
 			float y = -(float) Math.sin(degree);
 
@@ -581,11 +577,21 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private QuadPoint getCenterPoint(RotatedTileBox tb) {
-		if (is3DModeActive()) {
-			PointI origTarget31 = getMapRenderer().getState().getTarget31();
-			double lon = MapUtils.get31LongitudeX(origTarget31.getX());
-			double lat = MapUtils.get31LatitudeY(origTarget31.getY());
-			PointF centerPixels = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, lat, lon);
+		if (hasMapRenderer()) {
+			PointF centerPixels;
+			if (tb.isCenterShifted()) {
+				PointI windowSize = getMapRenderer().getState().getWindowSize();
+				int sx = windowSize.getX() / 2;
+				int sy = windowSize.getY() / 2;
+				PointI center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
+				if (center31 != null) {
+					centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
+					return new QuadPoint(centerPixels.x, centerPixels.y);
+				}
+			}
+
+			LatLon center = tb.getCenterLatLon();
+			centerPixels = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, center.getLatitude(), center.getLongitude());
 			return new QuadPoint(centerPixels.x, centerPixels.y);
 		} else {
 			return tb.getCenterPixelPoint();
@@ -593,23 +599,33 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private LatLon getCenterLatLon(RotatedTileBox tb) {
-		if (is3DModeActive()) {
-			PointI origTarget31 = getMapRenderer().getState().getTarget31();
-			double lon = MapUtils.get31LongitudeX(origTarget31.getX());
-			double lat = MapUtils.get31LatitudeY(origTarget31.getY());
-			return new LatLon(lat, lon);
+		if (hasMapRenderer()) {
+			PointI center31;
+			if (tb.isCenterShifted()) {
+				PointI windowSize = getMapRenderer().getState().getWindowSize();
+				int sx = windowSize.getX() / 2;
+				int sy = windowSize.getY() / 2;
+				center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
+				if (center31 != null) {
+					double lon = MapUtils.get31LongitudeX(center31.getX());
+					double lat = MapUtils.get31LatitudeY(center31.getY());
+					return new LatLon(lat, lon);
+				}
+			}
+
+			return tb.getCenterLatLon();
 		} else {
 			return tb.getCenterLatLon();
 		}
 	}
 
 	private PointF screenPointFromPoint(double x, double y, boolean compensateMapRotation, RotatedTileBox tb) {
-		if (is3DModeActive()) {
+		if (hasMapRenderer()) {
 			QuadPoint circleCenterPoint = getCenterPoint(tb);
 			double dX = circleCenterPoint.x - x;
 			double dY = circleCenterPoint.y - y;
 			double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
-			double angleFromCenter = toDegrees(Math.atan2(dY, dX)) - 90;
+			double angleFromCenter = Math.toDegrees(Math.atan2(dY, dX)) - 90;
 			angleFromCenter = compensateMapRotation ? angleFromCenter - tb.getRotate() : angleFromCenter; //??
 			return getPointFromCenterByRadius(distanceFromCenter, angleFromCenter, tb);
 		} else {
@@ -620,7 +636,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		if (is3DModeActive()) {
+		if (hasMapRenderer()) {
 			return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 		} else {
 			float x = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -633,13 +649,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 	}
 
-	private double toRadians(double degrees) {
-		return degrees * Math.PI / 180;
-	}
-
-	private double toDegrees(double radians) {
-		return radians / Math.PI * 180;
-	}
 
 	private float getCompassLineHeight(int index) {
 		if (index % 6 == 0) {
