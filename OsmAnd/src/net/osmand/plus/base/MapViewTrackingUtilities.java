@@ -245,9 +245,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoom,
 							pendingRotation, rotation, false);
-					if (mapView.getElevationAngle() < 90f && app.getRoutingHelper().isFollowingMode()) {
-						mapView.adjustElevationAngle();
-					}
 				} else {
 					if (zoom != null && zoom.first != null && zoom.second != null) {
 						mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
