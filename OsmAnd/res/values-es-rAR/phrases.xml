@@ -168,7 +168,7 @@
     <string name="poi_fuel_gtl_diesel">Diésel GTL</string>
     <string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
     <string name="poi_fuel_biodiesel">Biodiésel</string>
-    <string name="poi_fuel_lpg">GPL</string>
+    <string name="poi_fuel_lpg">Gas licuado de petróleo (GLP)</string>
     <string name="poi_fuel_octane_80">80 octanos</string>
     <string name="poi_fuel_octane_91">91 octanos</string>
     <string name="poi_fuel_octane_92">92 octanos</string>
@@ -4336,4 +4336,6 @@
     <string name="poi_club_amateur_radio">Club de radioaficionados</string>
     <string name="poi_club_religion">Club religioso</string>
     <string name="poi_club_dog">Club canino</string>
+    <string name="poi_board_title">Título del tablero</string>
+    <string name="poi_short_name">Nombre corto</string>
 </resources>
