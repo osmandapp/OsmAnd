@@ -341,7 +341,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						PointF[] line;
 						PointF centerPixels;
 						if (tileBox.isCenterShifted()) {
-							PointI marker31 = NativeUtilities.getPointI31FromLatLon(marker.getLatitude(), marker.getLongitude());
+							PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
 							PointI windowSize = mapRenderer.getState().getWindowSize();
 							int sx = windowSize.getX() / 2;
 							int sy = windowSize.getY() / 2;
@@ -724,7 +724,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			if (!overlappedByWaypoint(marker) && !isSynced(marker)) {
 				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
 				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
-				PointI pointI = NativeUtilities.getPointI31FromLatLon(marker.getLatitude(), marker.getLongitude());
+				PointI pointI = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
 				int color = getColorByIndex(marker.colorIndex);
 				boolean isMoveable = isInMotion(marker);
 
@@ -750,8 +750,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		PointI start = NativeUtilities.getPointI31FromLatLon(loc.getLatitude(), loc.getLongitude());
-		PointI end = NativeUtilities.getPointI31FromLatLon(marker.getLatitude(), marker.getLongitude());
+		PointI start = NativeUtilities.getPoint31FromLatLon(loc.getLatitude(), loc.getLongitude());
+		PointI end = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
 
 		if (vectorLinesCollection == null) {
 			vectorLinesCollection = new VectorLinesCollection();
@@ -808,8 +808,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, MapMarker marker, LatLon loc) {
-		PointI locPointI = NativeUtilities.getPointI31FromLatLon(loc.getLatitude(), loc.getLongitude());
-		PointI markerPointI = NativeUtilities.getPointI31FromLatLon(marker.getLatitude(), marker.getLongitude());
+		PointI locPointI = NativeUtilities.getPoint31FromLatLon(loc.getLatitude(), loc.getLongitude());
+		PointI markerPointI = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
 		return calculateLineInScreenRect(tileBox, markerPointI, locPointI);
 	}
 

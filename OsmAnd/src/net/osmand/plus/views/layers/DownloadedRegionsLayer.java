@@ -685,23 +685,26 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (polygonsCollection != null && selectedSize == selectedObjects.size()) {
 			return;
 		}
+		List<WorldRegion> downloadedRegions = new ArrayList<>();
+		List<WorldRegion> backupedRegions = new ArrayList<>();
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
-			if (this.downloadedRegions == null && this.backupedRegions == null) {
-				this.downloadedRegions = new ArrayList<>();
-				this.backupedRegions = new ArrayList<>();
+			if (this.downloadedRegions == null || this.backupedRegions == null) {
 				List<WorldRegion> worldRegions = osmandRegions.getAllRegionData();
 				for (WorldRegion wr : worldRegions) {
 					String n = wr.getRegionDownloadName();
 					if (rm.checkIfObjectDownloaded(n)) {
-						this.downloadedRegions.add(wr);
+						downloadedRegions.add(wr);
 					} else if (rm.checkIfObjectBackuped(n)) {
-						this.backupedRegions.add(wr);
+						backupedRegions.add(wr);
 					}
 				}
+				this.downloadedRegions = downloadedRegions;
+				this.backupedRegions = backupedRegions;
+			} else {
+				downloadedRegions = new ArrayList<>(this.downloadedRegions);
+				backupedRegions = new ArrayList<>(this.backupedRegions);
 			}
 		}
-		List<WorldRegion> downloadedRegions = getCopyOfList(this.downloadedRegions);
-		List<WorldRegion> backupedRegions = getCopyOfList(this.backupedRegions);
 		List<WorldRegion> selectedRegions = new ArrayList<>();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			if (selectedObjects.size() > 0) {
@@ -818,13 +821,5 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	@Override
 	public void onMapClosed(String fileName) {
 		onMapsChanged = true;
-	}
-
-	private List<WorldRegion> getCopyOfList(@Nullable List<WorldRegion> list) {
-		if (list == null) {
-			return new ArrayList<>();
-		} else {
-			return new ArrayList<>(list);
-		}
 	}
 }
