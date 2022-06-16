@@ -1,12 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -16,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -52,6 +44,8 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
+import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -67,6 +61,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -93,6 +88,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
@@ -789,16 +791,14 @@ public class MenuBuilder {
 	}
 
 	public View buildDescriptionRow(final View view, final String description) {
-
 		final String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (description.contains("</")) {
-					POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
-				} else {
-					POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, description, descriptionLabel);
-				}
+		View.OnClickListener onClickListener = v -> {
+			if (this instanceof WptPtMenuBuilder || this instanceof FavouritePointMenuBuilder) {
+				ReadPointDescriptionFragment.showInstance(mapActivity, description);
+			} else if (description.contains("</")) {
+				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
+			} else {
+				POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, description, descriptionLabel);
 			}
 		};
 
@@ -816,12 +816,9 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-		ll.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(description, view.getContext());
-				return true;
-			}
+		ll.setOnLongClickListener(v -> {
+			copyToClipboard(description, view.getContext());
+			return true;
 		});
 
 		baseView.addView(ll);
@@ -938,11 +935,8 @@ public class MenuBuilder {
 			}
 			ssb.append(line.getValue());
 			button.setText(ssb);
-			button.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					copyToClipboard(line.getValue(), mapActivity);
-				}
+			button.setOnClickListener(v -> {
+				copyToClipboard(line.getValue(), mapActivity);
 			});
 			llv.addView(button);
 		}
@@ -955,11 +949,8 @@ public class MenuBuilder {
 		for (final String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
 			button.setText(distance);
-			button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					copyToClipboard(distance, mapActivity);
-				}
+			button.setOnClickListener(v -> {
+				copyToClipboard(distance, mapActivity);
 			});
 			llv.addView(button);
 		}
@@ -1004,7 +995,7 @@ public class MenuBuilder {
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 		button.setTextColor(buttonColorStateList);
-		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+		button.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(true);
 		button.setEllipsize(TextUtils.TruncateAt.END);
 		button.setOnClickListener(onClickListener);
@@ -1014,8 +1005,8 @@ public class MenuBuilder {
 				light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 		Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
 				light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, Build.VERSION.SDK_INT >= 21
-				? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button,
+				AndroidUtils.createPressedStateListDrawable(normal, pressed), null, null, null);
 		button.setCompoundDrawablePadding(dpToPx(8f));
 		container.addView(button);
 	}

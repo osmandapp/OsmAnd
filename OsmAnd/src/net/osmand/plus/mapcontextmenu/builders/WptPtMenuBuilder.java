@@ -4,19 +4,23 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -25,10 +29,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 public class WptPtMenuBuilder extends MenuBuilder {
 
@@ -58,11 +58,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 
 		final String textPrefix = app.getString(R.string.shared_string_description);
-		View.OnClickListener clickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
-			}
+		View.OnClickListener clickListener = v -> {
+			POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
 		};
 
 		buildRow(view, null, null, textPrefix, wpt.desc, 0,
@@ -100,12 +97,9 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (!Algorithms.isEmpty(wpt.comment)) {
 			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
 					false, null, true, 10, false, null, false);
-			rowc.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					POIMapLayer.showPlainDescriptionDialog(rowc.getContext(), app, wpt.comment,
-							rowc.getResources().getString(R.string.poi_dialog_comment));
-				}
+			rowc.setOnClickListener(v -> {
+				POIMapLayer.showPlainDescriptionDialog(rowc.getContext(), app, wpt.comment,
+						rowc.getResources().getString(R.string.poi_dialog_comment));
 			});
 		}
 
@@ -168,14 +162,11 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				button.setText(point.name);
 
 				if (!selected) {
-					button.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-							PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
-							mapActivity.getContextMenu().setCenterMarker(true);
-							mapActivity.getContextMenu().show(latLon, pointDescription, point);
-						}
+					button.setOnClickListener(v -> {
+						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
+						mapActivity.getContextMenu().setCenterMarker(true);
+						mapActivity.getContextMenu().show(latLon, pointDescription, point);
 					});
 				}
 				view.addView(button);
@@ -188,11 +179,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (points.size() > 10) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
-			button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					TrackMenuFragment.openTrack(mapActivity, new File(gpxFile.path), null);
-				}
+			button.setOnClickListener(v -> {
+				TrackMenuFragment.openTrack(mapActivity, new File(gpxFile.path), null);
 			});
 			view.addView(button);
 		}

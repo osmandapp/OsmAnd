@@ -1,29 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -114,9 +90,12 @@ import net.osmand.plus.track.cards.RouteInfoCard;
 import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
@@ -145,10 +124,34 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -1585,6 +1588,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			dismiss();
 		}
 	}
+
+	@Override
+	public boolean onSaveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			EditGpxDescriptionController controller = new EditGpxDescriptionController(getMapActivity());
+			controller.saveEditedDescription(editedText, callback);
+			return true;
+		}
+		return false;
+	}
+
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams) {
 		openTrack(context, file, prevIntentParams, null);

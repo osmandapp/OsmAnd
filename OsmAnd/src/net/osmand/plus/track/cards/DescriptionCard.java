@@ -1,10 +1,6 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
-
 import android.content.Context;
-import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,16 +15,16 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Metadata;
-import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.fragments.GpxEditDescriptionDialogFragment;
-import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.fragments.EditDescriptionFragment;
+import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -36,6 +32,9 @@ import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
+
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
 
 public class DescriptionCard extends MapBaseCard {
 
@@ -76,11 +75,8 @@ public class DescriptionCard extends MapBaseCard {
 		View addBtn = view.findViewById(R.id.btn_add);
 
 		setupButton(addBtn);
-		addBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				GpxEditDescriptionDialogFragment.showInstance(getMapActivity(), "", null);
-			}
+		addBtn.setOnClickListener(v -> {
+			EditDescriptionFragment.showInstance(getMapActivity(), "", targetFragment);
 		});
 		AndroidUiHelper.updateVisibility(descriptionContainer, false);
 		AndroidUiHelper.updateVisibility(addBtn, true);
@@ -98,32 +94,26 @@ public class DescriptionCard extends MapBaseCard {
 
 		View readBtn = view.findViewById(R.id.btn_read_full);
 		setupButton(readBtn);
-		readBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Map<String, String> extensions = gpxFile.metadata.getExtensionsToRead();
-				if (!Algorithms.isEmpty(extensions)) {
-					String title = extensions.get(ARTICLE_TITLE);
-					String lang = extensions.get(ARTICLE_LANG);
-					if (title != null && lang != null) {
-						TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
-						if (articleId != null) {
-							WikivoyageUtils.openWikivoyageArticle(activity, articleId, lang);
-							return;
-						}
+		readBtn.setOnClickListener(v -> {
+			Map<String, String> extensions = gpxFile.metadata.getExtensionsToRead();
+			if (!Algorithms.isEmpty(extensions)) {
+				String _title = extensions.get(ARTICLE_TITLE);
+				String lang = extensions.get(ARTICLE_LANG);
+				if (_title != null && lang != null) {
+					TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(_title, lang);
+					if (articleId != null) {
+						WikivoyageUtils.openWikivoyageArticle(activity, articleId, lang);
+						return;
 					}
 				}
-				GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			}
+			ReadGpxDescriptionFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 		});
 
 		View editBtn = view.findViewById(R.id.btn_edit);
 		setupButton(editBtn);
-		editBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				GpxEditDescriptionDialogFragment.showInstance(mapActivity, descriptionHtml, null);
-			}
+		editBtn.setOnClickListener(v -> {
+			EditDescriptionFragment.showInstance(mapActivity, descriptionHtml, targetFragment);
 		});
 	}
 
@@ -139,11 +129,7 @@ public class DescriptionCard extends MapBaseCard {
 
 	private void setupButton(View button) {
 		Context ctx = button.getContext();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.btn_unstroked_light, R.drawable.btn_unstroked_dark);
-		}
+		AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 	}
 
 	private void setupImage(final String imageUrl) {
