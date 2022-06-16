@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="routing_attr_motor_type_name">Motorisation</string>
-    <string name="routing_attr_motor_type_description">Pour les calculs de CO2</string>
+    <string name="routing_attr_motor_type_description">Pour les calculs de CO₂</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
@@ -4701,5 +4701,5 @@
     <string name="routing_attr_goods_restrictions_name">Restrictions d\'accès pour les véhicules de transport de marchandises</string>
     <string name="routing_attr_goods_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
     <string name="kg">kg</string>
-    <string name="co2_mission">Émissions de CO2</string>
+    <string name="co2_mission">Émissions de CO₂</string>
 </resources>
