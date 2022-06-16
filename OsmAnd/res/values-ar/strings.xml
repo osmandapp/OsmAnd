@@ -4768,4 +4768,14 @@
     <string name="routing_attr_goods_restrictions_name">قيود مركبات البضائع</string>
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
+    <string name="routing_attr_motor_type_name">نوع المحرك</string>
+    <string name="routing_attr_motor_type_petrol_name">بنزين</string>
+    <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
+    <string name="routing_attr_motor_type_electric_name">كهربائي</string>
+    <string name="routing_attr_motor_type_gas_name">الغاز الطبيعي المضغوط</string>
+    <string name="routing_attr_motor_type_hybrid_name">هجين</string>
+    <string name="routing_attr_motor_type_description">لحساب ثاني أكسيد الكربون</string>
+    <string name="kg">كلم</string>
+    <string name="routing_attr_motor_type_diesel_name">ديزل</string>
+    <string name="co2_mission">ثاني أكسيد الكربون</string>
 </resources>
