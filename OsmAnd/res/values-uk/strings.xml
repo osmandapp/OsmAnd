@@ -277,7 +277,7 @@
     <string name="voice_stream_music">Медіа/навігаційне аудіо</string>
     <string name="warning_tile_layer_not_downloadable">Застосунок не може завантажити шар мапи %1$s, спробуйте перевстановити його.</string>
     <string name="overlay_transparency_descr">Змінити прозорість мапи.</string>
-    <string name="overlay_transparency">Прозорість</string>
+    <string name="overlay_transparency">Прозорість накладення</string>
     <string name="map_transparency_descr">Змінити прозорість основної мапи.</string>
     <string name="map_transparency">Прозорість мапи</string>
     <string name="layer_underlay">Мапа підкладки…</string>
