@@ -4712,4 +4712,6 @@
     <string name="routing_attr_motor_type_description">Для расчета CO2</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_electric_name">Электрический</string>
+    <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
+    <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
 </resources>
