@@ -199,4 +199,10 @@ public class NativeUtilities {
 			return tileBox.containsLatLon(latitude, longitude);
 		}
 	}
+
+	public static PointI getPoint31FromLatLon(double lat, double lon) {
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		return new PointI(x31, y31);
+	}
 }
