@@ -1,5 +1,15 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
+import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
+import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.RoutingParameterType;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,32 +29,24 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
-
-import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
-import static net.osmand.router.GeneralRouter.RoutingParameter;
-import static net.osmand.router.GeneralRouter.RoutingParameterType;
-import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
-import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -66,10 +68,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			if (router != null) {
 				GeneralRouterProfile routerProfile = router.getProfile();
 				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile);
+
+				setupRoutingParameterPref(parameters.get(MOTOR_TYPE));
 				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
 				}
@@ -79,8 +83,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private void setupCustomRoutingPropertyPref(@Nullable RoutingParameter parameter,
-												GeneralRouterProfile routerProfile) {
+	private void setupVehiclePropertyPref(@Nullable RoutingParameter parameter, @Nullable GeneralRouterProfile profile) {
 		if (parameter == null) {
 			return;
 		}
@@ -92,7 +95,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
 		StringPreference pref = (StringPreference) app.getSettings()
 				.getCustomRoutingProperty(parameterId, defValue);
-		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, routerProfile);
+		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, profile);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
@@ -106,11 +109,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					entriesStr[i].substring(0, firstCharIndex), getString(assets.getMetricShortRes()));
 		}
 
-		Context ctx = getContext();
-		if (ctx == null) {
-			return;
-		}
-		SizePreference vehicleSizePref = new SizePreference(ctx);
+		SizePreference vehicleSizePref = new SizePreference(requireContext());
 		vehicleSizePref.setKey(pref.getId());
 		vehicleSizePref.setAssets(assets);
 		vehicleSizePref.setDefaultValue(defValue);
@@ -135,6 +134,14 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		defaultSpeedPref.setIcon(getPreferenceIcon(DEFAULT_SPEED));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(defaultSpeedPref);
+	}
+
+	private void setupRoutingParameterPref(@Nullable RoutingParameter parameter) {
+		if (parameter != null) {
+			Preference preference = createRoutingParameterPref(requireContext(), parameter);
+			preference.setIcon(getPreferenceIcon(parameter.getId()));
+			getPreferenceScreen().addPreference(preference);
+		}
 	}
 
 	@Override
@@ -303,8 +310,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	}
 
 	private void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] defaultValue,
-								  final int[] minValue, final int[] maxValue, final int min, int max,
-								  View seekbarView, int activeColor) {
+	                              final int[] minValue, final int[] maxValue, final int min, int max,
+	                              View seekbarView, int activeColor) {
 		View sliderLayout;
 		int titleId;
 		final int[] speedValue;
@@ -344,40 +351,37 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		speedUnitsTv.setText(speedUnits);
 		slider.setValueTo(max - min);
 		slider.setValue(Math.max(speedValue[0] - min, 0));
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float val, boolean fromUser) {
-				int progress = (int) val;
-				int value = progress + min;
-				switch (type) {
-					case DEFAULT_SPEED:
-					case DEFAULT_SPEED_ONLY:
-						if (value > maxValue[0]) {
-							value = maxValue[0];
-							slider.setValue(Math.max(value - min, 0));
-						} else if (value < minValue[0]) {
-							value = minValue[0];
-							slider.setValue(Math.max(value - min, 0));
-						}
-						break;
-					case MIN_SPEED:
-						if (value > defaultValue[0]) {
-							value = defaultValue[0];
-							slider.setValue(Math.max(value - min, 0));
-						}
-						break;
-					case MAX_SPEED:
-						if (value < defaultValue[0]) {
-							value = defaultValue[0];
-							slider.setValue(Math.max(value - min, 0));
-						}
-						break;
-					default:
-						break;
-				}
-				speedValue[0] = value;
-				speedTv.setText(String.valueOf(value));
+		slider.addOnChangeListener((slider1, val, fromUser) -> {
+			int progress = (int) val;
+			int value = progress + min;
+			switch (type) {
+				case DEFAULT_SPEED:
+				case DEFAULT_SPEED_ONLY:
+					if (value > maxValue[0]) {
+						value = maxValue[0];
+						slider1.setValue(Math.max(value - min, 0));
+					} else if (value < minValue[0]) {
+						value = minValue[0];
+						slider1.setValue(Math.max(value - min, 0));
+					}
+					break;
+				case MIN_SPEED:
+					if (value > defaultValue[0]) {
+						value = defaultValue[0];
+						slider1.setValue(Math.max(value - min, 0));
+					}
+					break;
+				case MAX_SPEED:
+					if (value < defaultValue[0]) {
+						value = defaultValue[0];
+						slider1.setValue(Math.max(value - min, 0));
+					}
+					break;
+				default:
+					break;
 			}
+			speedValue[0] = value;
+			speedTv.setText(String.valueOf(value));
 		});
 		UiUtilities.setupSlider(slider, isNightMode(), activeColor);
 	}
@@ -394,6 +398,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				return getPersistentPrefIcon(R.drawable.ic_action_width_limit);
 			case VEHICLE_LENGTH:
 				return getPersistentPrefIcon(R.drawable.ic_action_length_limit);
+			case MOTOR_TYPE:
+				return getPersistentPrefIcon(R.drawable.ic_action_fuel);
 			default:
 				return null;
 		}

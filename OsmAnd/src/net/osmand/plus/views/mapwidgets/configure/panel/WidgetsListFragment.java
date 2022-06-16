@@ -1,12 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -49,6 +42,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener {
 
@@ -217,10 +217,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			ImageView imageView = view.findViewById(R.id.icon);
 			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
 
-			ImageView settingsIcon = view.findViewById(R.id.settings_icon);
+			View settingsButton = view.findViewById(R.id.settings_button);
 			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment() : null;
 			if (fragment != null) {
-				settingsIcon.setOnClickListener(v -> {
+				settingsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						Bundle args = new Bundle();
@@ -232,12 +232,29 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
 					}
 				});
+				setupListItemBackgroundImpl(settingsButton);
 			}
-			view.setOnClickListener(v -> settingsIcon.callOnClick());
 
-			AndroidUiHelper.updateVisibility(settingsIcon, fragment != null);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.info_button), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
+			View infoButton = view.findViewById(R.id.info_button);
+			infoButton.setOnClickListener(v -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					Fragment target = getParentFragment();
+					if (widgetGroup != null) {
+						AddWidgetFragment.showGroupDialog(fragmentManager, target,
+								selectedAppMode, selectedPanel, widgetGroup, null);
+					} else {
+						AddWidgetFragment.showWidgetDialog(fragmentManager, target,
+								selectedAppMode, selectedPanel, widgetType, null);
+					}
+				}
+			});
+			view.setOnClickListener(v -> infoButton.callOnClick());
+
+			AndroidUiHelper.updateVisibility(settingsButton, fragment != null);
+			AndroidUiHelper.updateVisibility(infoButton, true);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), fragment != null);
 
 			setupListItemBackground(view);
 
@@ -324,7 +341,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			view.setOnClickListener(v -> infoButton.callOnClick());
 
 			AndroidUiHelper.updateVisibility(infoButton, true);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_icon), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
 
 			boolean last = i + 1 == widgets.size();
@@ -360,7 +377,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 				}
 			});
 			AndroidUiHelper.updateVisibility(infoButton, true);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_icon), false);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
 
 			boolean last = i + 1 == externalWidgets.size();
@@ -396,9 +413,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void setupListItemBackground(@NonNull View view) {
 		View button = view.findViewById(R.id.container);
+		setupListItemBackgroundImpl(button);
+	}
+
+	private void setupListItemBackgroundImpl(@NonNull View view) {
 		int profileColor = selectedAppMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
-		AndroidUtils.setBackground(button, background);
+		AndroidUtils.setBackground(view, background);
 	}
 
 	@Override

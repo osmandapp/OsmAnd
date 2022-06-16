@@ -189,6 +189,7 @@ public class RoutingHelperUtils {
 		return getParametersForDerivedProfile(appMode, router).get(id);
 	}
 
+	@NonNull
 	public static Map<String, RoutingParameter> getParametersForDerivedProfile(@NonNull ApplicationMode appMode, @NonNull GeneralRouter router) {
 		String derivedProfile = appMode.getDerivedProfile();
 		Map<String, RoutingParameter> parameters = new HashMap<>();

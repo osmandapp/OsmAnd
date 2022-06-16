@@ -4690,4 +4690,11 @@
     <string name="map_widget_average_speed">Mezuma rapido</string>
     <string name="average_speed_skip_stops">Enkalkuli paŭzojn</string>
     <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne estos enkalkulita kaj ne efikos sur la mezuma rapido.</string>
+    <string name="routing_attr_goods_restrictions_description">Konsideri limigojn por malpezaj (≤ 3,5 Mg) varaŭtomobiloj.</string>
+    <string name="import_as_one_track">Enporti kiel unu spuron</string>
+    <string name="transport_hazmat_yes_desc">Elektu ĝustan kategorion.</string>
+    <string name="transport_hazmat_no_desc">Sur kelkaj ŝoseoj kaj tuneloj transporto de danĝeraj materialoj estas malpermesata.</string>
+    <string name="routing_attr_goods_restrictions_name">Limigoj por kamionetoj</string>
+    <string name="use_latin_name_if_missing">Se mankas, transliteri nomon al latina alfabeto</string>
+    <string name="transport_hazmat_title">Transporto de danĝeraj materialoj</string>
 </resources>

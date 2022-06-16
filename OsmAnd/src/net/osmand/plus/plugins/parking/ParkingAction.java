@@ -31,28 +31,19 @@ public class ParkingAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
 		ParkingPositionPlugin plugin = OsmandPlugin.getActivePlugin(ParkingPositionPlugin.class);
-
 		if (plugin != null) {
-
-			LatLon latLon = mapActivity.getMapView()
-					.getCurrentRotatedTileBox()
-					.getCenterLatLon();
-
+			LatLon latLon = getMapLocation(mapActivity);
 			plugin.showAddParkingDialog(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 		}
 	}
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
-
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_add_parking_descr);
-
 		parent.addView(view);
 	}
 }

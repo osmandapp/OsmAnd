@@ -169,7 +169,7 @@
     <string name="poi_fuel_gtl_diesel">GTL 柴油</string>
     <string name="poi_fuel_hgv_diesel">HGV 柴油</string>
     <string name="poi_fuel_biodiesel">Bio 柴油</string>
-    <string name="poi_fuel_lpg">液化石油瓦斯</string>
+    <string name="poi_fuel_lpg">液化石油氣</string>
     <string name="poi_fuel_octane_80">80 無鉛汽油</string>
     <string name="poi_fuel_octane_91">91 無鉛汽油</string>
     <string name="poi_fuel_octane_92">92 無鉛汽油</string>
@@ -4330,4 +4330,12 @@
     <string name="poi_laundry_service_no">否</string>
     <string name="poi_flow_rate">流速</string>
     <string name="poi_golf_pin">標示高爾夫球洞的旗子</string>
+    <string name="poi_payment_mir_no">不接受 Mir 卡</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_youth_movement">青年運動</string>
+    <string name="poi_club_religion">宗教俱樂部</string>
+    <string name="poi_club_amateur_radio">業餘無線電俱樂部</string>
+    <string name="poi_club_dog">狗俱樂部</string>
+    <string name="poi_board_title">資訊板標題</string>
+    <string name="poi_short_name">短名稱</string>
 </resources>

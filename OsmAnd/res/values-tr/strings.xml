@@ -2447,7 +2447,7 @@
     <string name="simulate_navigation">Navigasyonu simüle et</string>
     <string name="voice_announcements">Sesli uyarılar</string>
     <string name="intermediate_destinations">Ara varış noktaları</string>
-    <string name="osm_live_subscriptions">Açıklamalar</string>
+    <string name="osm_live_subscriptions">Abonelikler</string>
     <string name="osm_live_payment_monthly_title">Aylık</string>
     <string name="osm_live_payment_3_months_title">3 Aylık</string>
     <string name="osm_live_payment_annual_title">Yıllık</string>
@@ -3926,7 +3926,7 @@
     <string name="select_folder">Klasör seç</string>
     <string name="select_folder_descr">Klasör seçin veya yeni bir tane ekleyin</string>
     <string name="shared_string_empty">Boş</string>
-    <string name="analyze_by_intervals">Bölünmüş aralıkları analiz et</string>
+    <string name="analyze_by_intervals">Aralıklarla analiz et</string>
     <string name="upload_to_openstreetmap">OpenStreetMap\'e yükle</string>
     <string name="edit_track">Yolu düzenle</string>
     <string name="rename_track">Yolu yeniden adlandır</string>
@@ -4697,4 +4697,16 @@
     <string name="transport_hazmat_yes_desc">Uygun kategoriyi seçmeniz gerekiyor.</string>
     <string name="transport_hazmat_no_desc">Bazı yollarda ve tünellerde tehlikeli maddelerin taşınması yasaktır.</string>
     <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
+    <string name="routing_attr_goods_restrictions_name">Yük araçları kısıtlamaları</string>
+    <string name="routing_attr_goods_restrictions_description">Hafif yük araçları (mallar) için erişim izinlerini göz önünde bulundurun</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrik</string>
+    <string name="co2_mission">CO2 emisyonu</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Dizel</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrit</string>
+    <string name="routing_attr_motor_type_name">Motor türü</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_description">CO2 hesaplaması için</string>
 </resources>

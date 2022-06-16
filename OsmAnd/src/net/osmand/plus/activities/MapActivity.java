@@ -126,6 +126,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -477,7 +478,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (atlasMapRendererView == null) {
 				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 				atlasMapRendererView.setAzimuth(0);
-				atlasMapRendererView.setElevationAngle(app.getSettings().getLastKnownMapElevation());
+				float elevationAngle = mapView.normalizeElevationAngle(app.getSettings().getLastKnownMapElevation());
+				atlasMapRendererView.setElevationAngle(elevationAngle);
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}
 			mapView.setMapRenderer(atlasMapRendererView);
@@ -542,22 +544,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void onRequestPrivateAccessRouting() {
-				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(getRoutingHelper().getAppMode())) {
-					final CommonPreference<Boolean> allowPrivate
-							= settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
+				ApplicationMode routingProfile = getRoutingHelper().getAppMode();
+				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
+					OsmandPreference<Boolean> allowPrivate = getAllowPrivatePreference(routingProfile);
 					final List<ApplicationMode> modes = ApplicationMode.values(app);
 					for (ApplicationMode mode : modes) {
-						if (!allowPrivate.getModeValue(mode)) {
+						if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
 							settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
 						}
 					}
-					if (!allowPrivate.getModeValue(getRoutingHelper().getAppMode())) {
+					if (!allowPrivate.getModeValue(routingProfile)) {
 						AlertDialog.Builder dlg = new AlertDialog.Builder(MapActivity.this);
 						dlg.setMessage(R.string.private_access_routing_req);
 						dlg.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 							for (ApplicationMode mode : modes) {
-								if (!allowPrivate.getModeValue(mode)) {
-									allowPrivate.setModeValue(mode, true);
+								OsmandPreference<Boolean> preference = getAllowPrivatePreference(mode);
+								if (!preference.getModeValue(mode)) {
+									preference.setModeValue(mode, true);
 								}
 							}
 							getRoutingHelper().onSettingsChanged(null, true);
@@ -566,6 +569,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						dlg.show();
 					}
 				}
+			}
+
+			private OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {
+				String derivedProfile = appMode.getDerivedProfile();
+				CommonPreference<Boolean> allowPrivate =
+						settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
+				CommonPreference<Boolean> allowPrivateForTruck =
+						settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, false);
+				return Algorithms.objectEquals(derivedProfile, "truck") ? allowPrivateForTruck : allowPrivate;
 			}
 
 			@Override

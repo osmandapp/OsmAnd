@@ -56,13 +56,19 @@ public class NativeUtilities {
 	@Nullable
 	public static PointI get31FromPixel(@NonNull MapRendererView mapRenderer, @Nullable RotatedTileBox tileBox,
 	                                    int x, int y) {
-		return get31FromPixel(mapRenderer, tileBox, new PointI(x, y));
+		return get31FromPixel(mapRenderer, tileBox, new PointI(x, y), false);
 	}
 
 	@Nullable
 	public static PointI get31FromPixel(@NonNull MapRendererView mapRenderer, @Nullable RotatedTileBox tileBox,
-	                                    @NonNull PointI screenPoint) {
-		if (tileBox != null && tileBox.isCenterShifted()) {
+	                                    int x, int y, boolean useShiftedCenter) {
+		return get31FromPixel(mapRenderer, tileBox, new PointI(x, y), useShiftedCenter);
+	}
+
+	@Nullable
+	public static PointI get31FromPixel(@NonNull MapRendererView mapRenderer, @Nullable RotatedTileBox tileBox,
+	                                    @NonNull PointI screenPoint, boolean useShiftedCenter) {
+		if (useShiftedCenter && tileBox != null && tileBox.isCenterShifted()) {
 			RotatedTileBox tbCenter = tileBox.copy();
 			tbCenter.setCenterLocation(0.5f, 0.5f);
 			int x = screenPoint.getX() + (tileBox.getCenterPixelX() - tbCenter.getCenterPixelX());
@@ -88,7 +94,7 @@ public class NativeUtilities {
 	@Nullable
 	public static LatLon getLatLonFromPixel(@NonNull MapRendererView mapRenderer, @Nullable RotatedTileBox tileBox,
 	                                        @NonNull PointI screenPoint) {
-		PointI point31 = get31FromPixel(mapRenderer, tileBox, screenPoint);
+		PointI point31 = get31FromPixel(mapRenderer, tileBox, screenPoint, false);
 		if (point31 != null) {
 			return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
 		}
@@ -107,7 +113,8 @@ public class NativeUtilities {
 	}
 
 	@NonNull
-	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox, double lat, double lon) {
+	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
+	                                        double lat, double lon) {
 		PointF point = null;
 		if (mapRenderer != null) {
 			int x31 = MapUtils.get31TileNumberX(lon);
@@ -144,15 +151,21 @@ public class NativeUtilities {
 	@NonNull
 	public static PointI calculateTarget31(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
 	                                        double latitude, double longitude, boolean applyNewTarget) {
+		return calculateTarget31(mapRenderer, tileBox, latitude, longitude, true, applyNewTarget);
+	}
+
+	@NonNull
+	public static PointI calculateTarget31(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
+	                                        double latitude, double longitude, boolean useShiftedCenter, boolean applyNewTarget) {
 		PointI target31 = new PointI(MapUtils.get31TileNumberX(longitude), MapUtils.get31TileNumberY(latitude));
 		PointI newTarget31 = target31;
-		if (tileBox.isCenterShifted()) {
+		if (useShiftedCenter && tileBox.isCenterShifted()) {
 			PointI origTarget31 = mapRenderer.getState().getTarget31();
 			mapRenderer.setTarget(target31, false, true);
 			PointI windowSize = mapRenderer.getState().getWindowSize();
 			int cx = windowSize.getX() / 2;
 			int cy = windowSize.getY() / 2;
-			PointI shiftedTarget31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, cx, cy);
+			PointI shiftedTarget31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, cx, cy, true);
 			if (shiftedTarget31 != null) {
 				newTarget31 = new PointI(
 						target31.getX() + (target31.getX() - shiftedTarget31.getX()),
@@ -185,5 +198,11 @@ public class NativeUtilities {
 		} else {
 			return tileBox.containsLatLon(latitude, longitude);
 		}
+	}
+
+	public static PointI getPoint31FromLatLon(double lat, double lon) {
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		return new PointI(x31, y31);
 	}
 }

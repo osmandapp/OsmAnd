@@ -49,7 +49,7 @@
 				android:visibility="gone"
 				android:textColor="?android:textColorSecondary"
 				tools:visibility="visible"
-				tools:text="This is ling widget description that takes multiple lines" />
+				tools:text="This is long widget description that takes multiple lines" />
 
 		</LinearLayout>
 

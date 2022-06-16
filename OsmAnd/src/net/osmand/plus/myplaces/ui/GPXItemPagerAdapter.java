@@ -161,7 +161,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private GPXFile getFilteredGpxFile() {
 		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().path : null;
 		if (gpxPath != null) {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(gpxPath);
 			if (selectedGpxFile != null && selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 				return selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile();
 			}

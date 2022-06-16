@@ -369,11 +369,6 @@ public class OsmandSettings {
 		}
 	}
 
-	public void removePreferenceForProfile(String prefId, ApplicationMode mode) {
-		Object preferences =  getProfilePreferences(mode);
-		settingsAPI.edit(preferences).remove(prefId).commit();
-	}
-
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
 	}
@@ -1519,7 +1514,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference(this, "calc_gpx_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> GPX_ROUTE_SEGMENT = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().makeShared().cache();
-	public final OsmandPreference<Boolean> SHOW_START_FINISH_ICONS = new BooleanPreference(this, "show_start_finish_icons", true).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference(this, "avoid_toll_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference(this, "avoid_motorway", false).makeProfile().cache();

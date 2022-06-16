@@ -4702,4 +4702,14 @@
     <string name="transport_hazmat_title">Перевозка опасных грузов</string>
     <string name="transport_hazmat_no_desc">По некоторым дорогам и туннелям перевозка опасных грузов запрещена.</string>
     <string name="transport_hazmat_yes_desc">Выберите подходящую категорию.</string>
+    <string name="routing_attr_goods_restrictions_description">Учитывать права доступа для легкого коммерческого транспорта</string>
+    <string name="routing_attr_goods_restrictions_name">Ограничения на грузовые автомобили</string>
+    <string name="co2_mission">Выбросы CO2</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизель</string>
+    <string name="routing_attr_motor_type_name">Тип двигателя</string>
+    <string name="routing_attr_motor_type_description">Для расчета CO2</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_electric_name">Электрический</string>
 </resources>

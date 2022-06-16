@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -52,6 +53,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	public final static String PROFILE_KEY_ARG = "profile_key_arg";
 	public final static String USE_LAST_PROFILE_ARG = "use_last_profile_arg";
 	public final static String PROFILES_LIST_UPDATED_ARG = "is_profiles_list_updated";
+	public final static String DERIVED_PROFILE_ARG = "derived_profile";
 
 	protected OsmandApplication app;
 	protected String selectedItemKey;
@@ -233,6 +235,9 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		Bundle args = new Bundle();
 		args.putString(PROFILE_KEY_ARG, profile.getStringKey());
 		args.putBoolean(PROFILES_LIST_UPDATED_ARG, isProfilesListUpdated(profile));
+		if (profile instanceof RoutingDataObject) {
+			args.putString(DERIVED_PROFILE_ARG, ((RoutingDataObject) profile).getDerivedProfile());
+		}
 		Fragment target = getTargetFragment();
 		if (target instanceof OnSelectProfileCallback) {
 			((OnSelectProfileCallback) target).onProfileSelected(args);

@@ -2236,7 +2236,7 @@
     <string name="quick_action_add_first_intermediate">إضافة وجهة وسطى</string>
     <string name="analyze_on_map">تحليل</string>
     <string name="shared_string_visible">المعروضة على الخريطة</string>
-    <string name="restore_purchases">استرجاع الشراء</string>
+    <string name="restore_purchases">استعادة المشتريات</string>
     <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">هضابي</string>
     <string name="shared_string_time_moving">الوقت المتحرك</string>
@@ -2260,7 +2260,7 @@
     <string name="mapillary_descr">صور على مستوى الشارع عبر الإنترنت متاحة للجميع. اكتشف الأماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="mapillary">مابيلاري</string>
     <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
-    <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تسمح بالدخول إلى الطرق الخاصة لهذه الرحلة؟</string>
+    <string name="private_access_routing_req">تقع وجهتك في منطقة ذات وصول خاص. السماح باستخدام الطرق الخاصة لهذه الرحلة؟</string>
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط الكنتورية لهذه المنطقة لعرضها.</string>
@@ -3206,8 +3206,8 @@
     <string name="turn_screen_on_time_descr">تعيين الوقت الذي سيتم تشغيل الشاشة فيه.</string>
     <string name="turn_screen_on_sensor">استخدام مستشعر القرب</string>
     <string name="turn_screen_on_sensor_descr">حرك يدك أعلى الشاشة لتشغيلها أثناء التنقل.</string>
-    <string name="monthly_map_updates">تحديثات خريطة شهرية</string>
-    <string name="daily_map_updates">تحديثات خريطة كل ساعة</string>
+    <string name="monthly_map_updates">تحديثات الخرائط الشهرية</string>
+    <string name="daily_map_updates">تحديثات الخريطة كل ساعة</string>
     <string name="send_search_query_description">سيتم إرسال استعلام البحث إلى: \"%1$s\" ، بالإضافة إلى موقعك. 
 \n 
 \nلا يتم جمع المعلومات الشخصية ، فقط بيانات البحث اللازمة لتحسين البحث.</string>
@@ -3994,7 +3994,7 @@
     <string name="select_folder">تحديد مجلد</string>
     <string name="select_folder_descr">حدد مجلد أو أضف واحد جديد</string>
     <string name="shared_string_empty">فارغ</string>
-    <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
+    <string name="analyze_by_intervals">تحليل حسب الفواصل الزمنية</string>
     <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
     <string name="edit_track">تحرير المسار</string>
     <string name="rename_track">تسمية المسار</string>
@@ -4242,9 +4242,9 @@
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_monthly_map_updates">احصل على التحديثات الشهرية المنتظمة للخرائط غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_hourly_map_updates">احصل على إمكانية الوصول إلى تحديث الخرائط بشكل متكرر، اختر بين: تحديثات كل ساعة أو يومية أو أسبوعية. يتم تحميل التحديثات بشكل متزايد، فقط للمنطقة التي تم تغييرها.</string>
-    <string name="purchases_feature_desc_osmand_cloud">احصل على سحابة أوسماند لتخزين جميع بياناتك على التطبيق عبر الإنترنت. في حال نسيان أو فقدان البيانات الخاصة بك بعد إعادة التثبيت ، ويتيح لك النسخ الاحتياطي واستعادة جميع المعلومات دون مشكلة.</string>
-    <string name="unlimited_map_downloads">تحميلات غير محدودة</string>
-    <string name="wikipedia_and_wikivoyage_offline">Wikipedia و Wikivoyage غير متصل بالإنترنت</string>
+    <string name="purchases_feature_desc_osmand_cloud">احصل على أوسماند كلاود لتخزين جميع بيانات أوسماند عبر الإنترنت. لن تفقد بياناتك بعد إعادة التثبيت. نسخ الاحتياطي واستعادة جميع المعلومات بسهولة.</string>
+    <string name="unlimited_map_downloads">تنزيلات خرائط غير محدودة</string>
+    <string name="wikipedia_and_wikivoyage_offline">ويكيبيديا وويكي الرحلات غير متصلين بالإنترنت</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">خرائط التضاريس: الخطوط الكنتورية ، التلال ، المنحدرات</string>
     <string name="offline_wikipeadia">ويكيبيديا غير متصل</string>
     <string name="offline_wikivoyage">Wikivoyage غير متصل</string>
@@ -4322,7 +4322,7 @@
     <string name="backup_setup">إنشاء نسخة احتياطية</string>
     <string name="backup_restore_now">استعادة الآن</string>
     <string name="attribute">ميزة</string>
-    <string name="shared_string_purchased">المشتريات</string>
+    <string name="shared_string_purchased">تم شراؤه</string>
     <string name="explore_wikipedia_offline">استكشف ويكيبيديا دون اتصال بالإنترنت.</string>
     <string name="on_hold_since">معلقة منذ %1$s</string>
     <string name="active_till">نشط حتى %1$s</string>
@@ -4761,4 +4761,21 @@
     <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
     <string name="average_speed_skip_stops_desc">لن يتم احتساب السرعة الأقل من %1$s وستؤثر على متوسط السرعة.</string>
     <string name="map_widget_average_speed">متوسط السرعة</string>
+    <string name="import_as_one_track">استيراد كمسار واحد</string>
+    <string name="transport_hazmat_yes_desc">تحتاج إلى اختيار الفئة المناسبة.</string>
+    <string name="transport_hazmat_no_desc">يمنع في بعض الطرق والأنفاق نقل المواد الخطرة.</string>
+    <string name="use_latin_name_if_missing">استخدم الاسم اللاتيني إذا كان الاسم مفقودا</string>
+    <string name="routing_attr_goods_restrictions_name">قيود مركبات البضائع</string>
+    <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
+    <string name="transport_hazmat_title">نقل المواد الخطرة</string>
+    <string name="routing_attr_motor_type_name">نوع المحرك</string>
+    <string name="routing_attr_motor_type_petrol_name">بنزين</string>
+    <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
+    <string name="routing_attr_motor_type_electric_name">كهربائي</string>
+    <string name="routing_attr_motor_type_gas_name">الغاز الطبيعي المضغوط</string>
+    <string name="routing_attr_motor_type_hybrid_name">هجين</string>
+    <string name="routing_attr_motor_type_description">لحساب ثاني أكسيد الكربون</string>
+    <string name="kg">كلم</string>
+    <string name="routing_attr_motor_type_diesel_name">ديزل</string>
+    <string name="co2_mission">ثاني أكسيد الكربون</string>
 </resources>

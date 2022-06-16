@@ -4292,7 +4292,7 @@
     <string name="poi_shop_fuel">Магазин топлива</string>
     <string name="poi_printer_ink">Магазин чернил для принтера</string>
     <string name="poi_water_sports">Магазин водных видов спорта</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_girocard_contactless_yes">Бесконтактная Girocard</string>
     <string name="poi_payment_maestro_contactless_yes">Бесконтактный Maestro</string>
     <string name="poi_payment_mastercard_contactless_yes">Бесконтактный MasterCard</string>
     <string name="poi_payment_visa_contactless_yes">Бесконтактная Visa</string>
@@ -4328,4 +4328,12 @@
     <string name="poi_food_no">Еда: нет</string>
     <string name="poi_flow_rate">Скорость потока</string>
     <string name="poi_greenery">Озеленение</string>
+    <string name="poi_payment_mir_no">Карты Мир не принимаются</string>
+    <string name="poi_payment_mir_yes">Мир;Mir</string>
+    <string name="poi_club_youth_movement">Молодёжное движение</string>
+    <string name="poi_club_religion">Религиозный клуб</string>
+    <string name="poi_club_amateur_radio">Клуб радиолюбителей</string>
+    <string name="poi_club_dog">Клуб собаководства</string>
+    <string name="poi_board_title">Заголовок информационного щита</string>
+    <string name="poi_short_name">Краткое название</string>
 </resources>

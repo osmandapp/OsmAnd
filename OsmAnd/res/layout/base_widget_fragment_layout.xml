@@ -62,6 +62,7 @@
 				android:layout_height="wrap_content"
 				android:maxLines="1"
 				android:ellipsize="end"
+				android:textSize="@dimen/dialog_header_text_size"
 				android:textColor="?android:textColorPrimary"
 				tools:text="Widget name" />
 

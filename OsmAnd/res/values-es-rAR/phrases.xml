@@ -2426,7 +2426,7 @@
     <string name="poi_amenity_vacuum_cleaner">Aspiradoras</string>
     <string name="poi_sport_free_flying">Ala delta (deporte)</string>
     <string name="poi_bicycle_repair_station">Estación de reparación para bicicletas; Estación de auto-reparación para bicicletas</string>
-    <string name="poi_water_tap">Grifo de agua;Canilla de agua</string>
+    <string name="poi_water_tap">Canilla de agua;Grifo de agua;Bomba de agua</string>
     <string name="poi_button_operated_yes">Activado por botón: sí</string>
     <string name="poi_button_operated_no">Activado por botón: no</string>
     <string name="poi_free_flying_site_takeoff">Despegue</string>
@@ -4330,4 +4330,10 @@
     <string name="poi_laundry_service_yes">Sí</string>
     <string name="poi_flow_rate">Caudal</string>
     <string name="poi_golf_pin">Pin de golf</string>
+    <string name="poi_payment_mir_no">No se acepta tarjetas Mir</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_youth_movement">Movimiento juvenil</string>
+    <string name="poi_club_amateur_radio">Club de radioaficionados</string>
+    <string name="poi_club_religion">Club religioso</string>
+    <string name="poi_club_dog">Club canino</string>
 </resources>

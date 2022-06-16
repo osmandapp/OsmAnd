@@ -31,11 +31,7 @@ public class TakeAudioNoteAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-
-		LatLon latLon = mapActivity.getMapView()
-				.getCurrentRotatedTileBox()
-				.getCenterLatLon();
-
+		LatLon latLon = getMapLocation(mapActivity);
 		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null)
 			plugin.recordAudio(latLon.getLatitude(), latLon.getLongitude(), mapActivity);
@@ -43,13 +39,10 @@ public class TakeAudioNoteAction extends QuickAction {
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
-
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_take_audio_note_descr);
-
 		parent.addView(view);
 	}
 }

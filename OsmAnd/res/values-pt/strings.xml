@@ -2073,7 +2073,7 @@
     <string name="osm_live_subscription_desc">A subscrição permite atualizações a cada hora, dia ou semana e descarregamentos ilimitados de todos os mapas globalmente.</string>
     <string name="get_it">Obter</string>
     <string name="get_for">Comprar por %1$s</string>
-    <string name="osm_live_banner_desc">Obter descarregamentos ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
+    <string name="osm_live_banner_desc">Obtenha descarregamentos ilimitados de mapas, para além de atualizações semanais, diárias ou de hora a hora.</string>
     <string name="osmand_plus_banner_desc">Descarregamentos ilimitados de mapas, atualizações e o complemento Wikipédia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="search_map">À procura de mapas…</string>
@@ -2180,8 +2180,8 @@
     <string name="welcome_to_open_beta">Bem-vindo à versão beta aberta</string>
     <string name="wikivoyage_travel_guide">Guias de viagem</string>
     <string name="wikivoyage_travel_guide_descr">Explore os guias dos lugares mais interessantes do mundo, dentro do OsmAnd, sem ser preciso estar ligado à Internet.</string>
-    <string name="monthly_map_updates">Atualizações de mapas mensais</string>
-    <string name="daily_map_updates">Atualizações de mapas a cada hora</string>
+    <string name="monthly_map_updates">Atualizações de mapas: a cada mês</string>
+    <string name="daily_map_updates">Atualizações de mapas: a cada hora</string>
     <string name="in_app_purchase">Compra na aplicação</string>
     <string name="in_app_purchase_desc">Pagamento de uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez comprado, estará sempre disponível para si.</string>
@@ -4061,7 +4061,7 @@
     <string name="customize_route_line">Personalizar linha da rota</string>
     <string name="shared_string_route_line">Linha de itinerário</string>
     <string name="specify_color_for_map_mode">Especificar cor para o modo mapa %1$s.</string>
-    <string name="new_device_account">Novo aparelho / nova conta</string>
+    <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="troubleshooting">Resolução de problemas</string>
     <string name="annual_subscription">Subscrição anual</string>
     <string name="monthly_subscription">Subscrição mensal</string>
@@ -4072,7 +4072,7 @@
     <string name="routing_attr_allow_intermittent_name">Permitir cursos de água sazonais</string>
     <string name="osmand_live_cancelled">Cancelada</string>
     <string name="renew_subscription">Renovar subscrição</string>
-    <string name="expired">Expirou</string>
+    <string name="expired">Expirado</string>
     <string name="exit_number">Número da saída</string>
     <string name="announce_when_exceeded">Avisar quando ultrapassar limite de velocidade</string>
     <string name="user_points">Pontos do utilizador</string>
@@ -4189,7 +4189,7 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continue com %1$s</string>
     <string name="not_available_with">Não disponível com %1$s</string>
-    <string name="redeem_promo_code">Utilizar o código promocional</string>
+    <string name="redeem_promo_code">Resgatar código promocional</string>
     <string name="osmand_maps_plus_tagline">Obtenha as funcionalidades estendidas</string>
     <string name="osmand_pro_tagline">Obtenha todas as funcionalidades</string>
     <string name="shared_string_learn_more">Saber mais</string>
@@ -4290,7 +4290,7 @@
     <string name="contributions_may_calculate_with_delay">O cálculo das contribuições pode demorar algumas horas.</string>
     <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
     <string name="connect_track_points_as">Conectar pontos de rota</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para si.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explore os planos OsmAnd para encontrar um adequado a si.</string>
     <string name="routes_color_by_type">Rotas coloridas por…</string>
     <string name="shared_string_relation">Relação</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Atribua uma cor a rotas de acordo com a sua cor local individual (se existir no OpenStreetMap) e o símbolo de escudo de caminhada.</string>
@@ -4697,4 +4697,11 @@
     <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
     <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s não será contada e afetará a velocidade média.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
+    <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
+    <string name="routing_attr_goods_restrictions_name">Restrições a veículos de mercadorias</string>
+    <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
+    <string name="transport_hazmat_yes_desc">É necessário escolher a categoria adequada.</string>
+    <string name="import_as_one_track">Importar como um só trilho</string>
+    <string name="use_latin_name_if_missing">Usar nome latino se faltar</string>
+    <string name="transport_hazmat_no_desc">Em algumas estradas e túneis é proibido o transporte de materiais perigosos.</string>
 </resources>

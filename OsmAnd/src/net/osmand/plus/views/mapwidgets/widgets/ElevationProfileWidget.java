@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,8 +55,6 @@ import java.util.List;
 
 public class ElevationProfileWidget extends MapWidget {
 
-	public static final String WIDGET_ELEVATION_PROFILE = "elevation_profile";
-
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
 	private View uphillView;
@@ -90,6 +87,7 @@ public class ElevationProfileWidget extends MapWidget {
 		super(mapActivity, ELEVATION_PROFILE);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
+		setupStatisticBlocks();
 	}
 
 	@Override
@@ -101,12 +99,6 @@ public class ElevationProfileWidget extends MapWidget {
 	@Override
 	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
 		return settings.SHOW_ELEVATION_PROFILE_WIDGET;
-	}
-
-	@Override
-	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
-		super.attachView(container, order, followingWidgets);
-		setupStatisticBlocks();
 	}
 
 	private void setupStatisticBlocks() {

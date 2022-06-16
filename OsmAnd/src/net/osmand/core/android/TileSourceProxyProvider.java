@@ -92,13 +92,11 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public boolean supportsNaturalObtainDataAsync() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
-		//TODO: Launch the request via manager and after image is ready (or error is ready)
-		// call asyncImage.submit()
 	}
 	
 	@Override

@@ -27,6 +27,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -110,17 +111,17 @@ public class FavouritesHelper {
 		flatGroups.clear();
 		favoriteGroups.clear();
 
-		Map<String, FavouritePoint> points = fileHelper.loadInternalPoints();
-		Map<String, FavouritePoint> extPoints = fileHelper.loadExternalPoints();
+		Map<String, FavoriteGroup> groups = fileHelper.loadInternalGroups();
+		Map<String, FavoriteGroup> extGroups = fileHelper.loadExternalGroups();
 
-		boolean changed = merge(extPoints, points);
+		boolean changed = merge(extGroups, groups);
 
-		for (FavouritePoint pns : points.values()) {
-			FavoriteGroup group = getOrCreateGroup(pns);
-			group.getPoints().add(pns);
-		}
-		sortAll();
+		flatGroups.putAll(groups);
+		favoriteGroups.addAll(groups.values());
+
 		recalculateCachedFavPoints();
+		sortAll();
+
 		if (changed || !fileHelper.getExternalFile().exists()) {
 			saveCurrentPointsIntoFile();
 		}
@@ -179,13 +180,29 @@ public class FavouritesHelper {
 		listeners.remove(listener);
 	}
 
-	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
+	private boolean merge(Map<String, FavoriteGroup> source, Map<String, FavoriteGroup> destination) {
 		boolean changed = false;
-		for (Map.Entry<String, FavouritePoint> entry : source.entrySet()) {
-			String ks = entry.getKey();
-			if (!destination.containsKey(ks)) {
+		for (Map.Entry<String, FavoriteGroup> entry : source.entrySet()) {
+			String key = entry.getKey();
+			FavoriteGroup sourceGroup = entry.getValue();
+			FavoriteGroup destinationGroup = destination.get(key);
+
+			if (destinationGroup == null) {
 				changed = true;
-				destination.put(ks, entry.getValue());
+				destinationGroup = new FavoriteGroup(sourceGroup);
+				destination.put(key, destinationGroup);
+			} else {
+				List<FavouritePoint> points = destinationGroup.getPoints();
+				Map<String, FavouritePoint> pointsMap = new HashMap<>();
+				for (FavouritePoint point : points) {
+					pointsMap.put(point.getKey(), point);
+				}
+				for (FavouritePoint point : sourceGroup.getPoints()) {
+					if (!pointsMap.containsKey(point.getKey())) {
+						changed = true;
+						points.add(point);
+					}
+				}
 			}
 		}
 		return changed;
@@ -438,12 +455,12 @@ public class FavouritesHelper {
 	}
 
 	public void saveCurrentPointsIntoFile() {
-		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(cachedFavoritePoints));
+		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(favoriteGroups));
 		onFavouritePropertiesUpdated();
 	}
 
 	public Exception exportFavorites() {
-		return fileHelper.saveExternalFile(new ArrayList<>(cachedFavoritePoints), null);
+		return fileHelper.saveExternalFile(new ArrayList<>(favoriteGroups), Collections.emptySet());
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group) {
@@ -584,17 +601,13 @@ public class FavouritesHelper {
 	}
 
 	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
-		if (color != 0 && group.getColor() != color) {
-			if (updatePoints) {
-				for (FavouritePoint point : group.getPoints()) {
-					if (point.getColor() == group.getColor()) {
-						point.setColor(color);
-					}
-				}
+		if (updatePoints) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setColor(color);
 			}
-			group.setColor(color);
-			runSyncWithMarkers(group);
 		}
+		group.setColor(color);
+		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
@@ -602,17 +615,13 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
 	                                boolean updatePoints, boolean saveImmediately) {
-		if (!Algorithms.stringsEqual(group.getIconName(), iconName)) {
-			if (updatePoints) {
-				for (FavouritePoint point : group.getPoints()) {
-					if (Algorithms.stringsEqual(point.getIconName(), group.getIconName())) {
-						point.setIconIdFromName(iconName);
-					}
-				}
+		if (updatePoints) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setIconIdFromName(iconName);
 			}
-			group.setIconName(iconName);
-			runSyncWithMarkers(group);
 		}
+		group.setIconName(iconName);
+		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
@@ -620,17 +629,13 @@ public class FavouritesHelper {
 
 	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
 	                                      boolean updatePoints, boolean saveImmediately) {
-		if (group.getBackgroundType() != backgroundType) {
-			if (updatePoints) {
-				for (FavouritePoint point : group.getPoints()) {
-					if (point.getBackgroundType() == group.getBackgroundType()) {
-						point.setBackgroundType(backgroundType);
-					}
-				}
+		if (updatePoints) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setBackgroundType(backgroundType);
 			}
-			group.setBackgroundType(backgroundType);
-			runSyncWithMarkers(group);
 		}
+		group.setBackgroundType(backgroundType);
+		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
@@ -694,5 +699,13 @@ public class FavouritesHelper {
 		for (FavoritesListener listener : listeners) {
 			listener.onFavoritePropertiesUpdated();
 		}
+	}
+
+	public static List<FavouritePoint> getPointsFromGroups(@NonNull List<FavoriteGroup> groups) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>();
+		for (FavoriteGroup group : groups) {
+			favouritePoints.addAll(group.getPoints());
+		}
+		return favouritePoints;
 	}
 }

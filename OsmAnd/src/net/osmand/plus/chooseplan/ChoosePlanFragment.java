@@ -311,7 +311,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	public static void showDefaultInstance(@NonNull FragmentActivity activity) {
-		showInstance(activity, OsmAndFeature.values()[0]);
+		showInstance(activity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull OsmAndFeature selectedFeature) {

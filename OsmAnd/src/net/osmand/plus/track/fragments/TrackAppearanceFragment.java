@@ -1,5 +1,10 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
+import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
+import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -39,8 +44,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
@@ -73,12 +78,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
-import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
-import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
-import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
@@ -177,9 +176,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				gpxDataItem = gpxDbHelper.getItem(new File(trackDrawInfo.getFilePath()));
 			}
 			showStartFinishIconsInitialValue = savedInstanceState.getBoolean(SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY,
-					settings.SHOW_START_FINISH_ICONS.get());
+					settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		} else {
-			showStartFinishIconsInitialValue = settings.SHOW_START_FINISH_ICONS.get();
+			showStartFinishIconsInitialValue = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				trackDrawInfo = new TrackDrawInfo(app, true);
@@ -216,6 +215,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void restoreSelectedGpxFile(String gpxFilePath, boolean isCurrentRecording) {
 		TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, isCurrentRecording, (gpxFile) -> {
 			setSelectedGpxFile(gpxFile);
+			gpxSelectionHelper.addTemporallyVisibleTrack(gpxFile);
 			if (view != null) {
 				initContent();
 			}
@@ -318,7 +318,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
-		gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(trackDrawInfo);
@@ -328,7 +330,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onPause() {
 		super.onPause();
-		gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(null);
@@ -386,7 +390,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
-			} else if (!nightMode){
+			} else if (!nightMode) {
 				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
 			}
 		}
@@ -594,24 +598,18 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		View saveButton = view.findViewById(R.id.right_bottom_button);
-		saveButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				saveTrackInfo();
-				dismiss();
-			}
+		saveButton.setOnClickListener(v -> {
+			saveTrackInfo();
+			dismiss();
 		});
 
 		View cancelButton = view.findViewById(R.id.dismiss_button);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				discardSplitChanges();
-				discardShowStartFinishChanges();
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		cancelButton.setOnClickListener(v -> {
+			discardSplitChanges();
+			discardShowStartFinishChanges();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 
@@ -712,7 +710,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDbHelper.updateColor(gpxDataItem, trackDrawInfo.getColor());
 			gpxDbHelper.updateWidth(gpxDataItem, trackDrawInfo.getWidth());
 			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
-//			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
+			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
 			gpxDbHelper.updateSplit(gpxDataItem, splitType, trackDrawInfo.getSplitInterval());
 			ColoringType coloringType = trackDrawInfo.getColoringType();
 			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
@@ -732,7 +730,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void discardShowStartFinishChanges() {
-		settings.SHOW_START_FINISH_ICONS.set(showStartFinishIconsInitialValue);
+		settings.CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinishIconsInitialValue);
 	}
 
 	void applySplit(GpxSplitType splitType, int timeSplit, double distanceSplit) {
@@ -773,7 +771,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
-			addCard(container, new ShowStartFinishCard(mapActivity));
+			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 
 			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			addCard(container, trackColoringCard);
@@ -832,7 +830,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private List<Integer> getTrackColors() {
 		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
+		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
 			if (!colors.contains(appearanceListItem.getColor())) {
 				colors.add(appearanceListItem.getColor());
 			}

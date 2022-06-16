@@ -54,7 +54,7 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 	@Override
 	public void addNewGroup() {
 		FavoriteGroup favoriteGroup = favouritesHelper.addFavoriteGroup(groupName, getColor(), getIconName(), getBackgroundType());
-		pointsGroup = favoriteGroup.toPointsGroup();
+		pointsGroup = favoriteGroup.toPointsGroup(app);
 	}
 
 	@Override

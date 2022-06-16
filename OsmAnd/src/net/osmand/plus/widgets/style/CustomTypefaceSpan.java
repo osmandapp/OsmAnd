@@ -4,16 +4,18 @@ import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
 
+import androidx.annotation.NonNull;
+
 public class CustomTypefaceSpan extends MetricAffectingSpan {
 
-	private Typeface typeface;
+	private final Typeface typeface;
 
 	public CustomTypefaceSpan(Typeface typeface) {
 		this.typeface = typeface;
 	}
 
 	@Override
-	public void updateMeasureState(TextPaint p) {
+	public void updateMeasureState(@NonNull TextPaint p) {
 		update(p);
 	}
 

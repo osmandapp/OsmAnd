@@ -596,7 +596,7 @@
         <item name="toolbar_back_button_color">@color/icon_color_primary_dark</item>
         <item name="toolbar_title_color">@color/text_color_primary_dark</item>
         <item name="active_buttons_and_links_bg_pressed">@color/active_buttons_and_links_bg_pressed_dark</item>
-        <item name="ripple_solid_6dp">@drawable/ripple_solid_light_6dp</item>
+        <item name="ripple_solid_6dp">@drawable/ripple_solid_dark_6dp</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

@@ -3919,7 +3919,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Elemzés felosztási intervallumonként</string>
+    <string name="analyze_by_intervals">Elemzés intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>
@@ -4689,4 +4689,16 @@
     <string name="transport_hazmat_title">Veszélyes anyagok szállítása</string>
     <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
+    <string name="routing_attr_goods_restrictions_description">Vegye figyelembe az (áruszállító) furgonokra vonatkozó behajtási engedélyeket</string>
+    <string name="routing_attr_goods_restrictions_name">Furgon korlátozások</string>
+    <string name="co2_mission">Szén-dioxid-kibocsátás</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG (cseppfolyósított földgáz)</string>
+    <string name="routing_attr_motor_type_electric_name">Elektromos</string>
+    <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
+    <string name="routing_attr_motor_type_description">CO2-kibocsátás számításához</string>
+    <string name="routing_attr_motor_type_name">Motortípus</string>
 </resources>

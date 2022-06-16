@@ -2194,7 +2194,7 @@
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено</string>
-    <string name="private_access_routing_req">Місце призначення розташовано в області з приватним доступом. Дозволити доступ до приватних доріг для цього маршруту\?</string>
+    <string name="private_access_routing_req">Пункт призначення розташований в районі з приватним доступом. Дозволити доступ приватних доріг для цього маршруту\?</string>
     <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
     <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку покаже чи приховає Нотатки OSM на мапі.</string>
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
@@ -2693,8 +2693,8 @@
 \n Особисті відомості не накопичуються, пошукові дані використовуються лише для покращення алгоритму пошуку.</string>
     <string name="send_search_query">Надіслати пошуковий запит?</string>
     <string name="shared_string_world">Світ</string>
-    <string name="monthly_map_updates">Оновлення мап: щомісячно</string>
-    <string name="daily_map_updates">Оновлення мап: щогодинно</string>
+    <string name="monthly_map_updates">Щомісячні оновлення мап</string>
+    <string name="daily_map_updates">Щогодинне оновлення мап</string>
     <string name="in_app_purchase">Купівля в застосунку</string>
     <string name="in_app_purchase_desc">Одноразовий платіж</string>
     <string name="in_app_purchase_desc_ex">Після покупки він буде завжди доступний для вас.</string>
@@ -4173,7 +4173,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Отримайте доступ до часто оновлюваних мап. Щогодинні, щоденні або щотижневі оновлення. Завантажуються поступово, лише для зміненої ділянки.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd в Інтернеті. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd онлайн. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
     <string name="unlimited_map_downloads">Необмежена кількість завантажень мап</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедія і Вікімандри в офлайн режимі</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Мапи рельєфу: ізолінії, рельєф, схили</string>
@@ -4697,4 +4697,16 @@
     <string name="transport_hazmat_yes_desc">Вам потрібно вибрати відповідну категорію.</string>
     <string name="transport_hazmat_no_desc">Деякими дорогами й тунелями перевезення небезпечних матеріалів заборонено.</string>
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
+    <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
+    <string name="routing_attr_goods_restrictions_name">Обмеження на вантажні транспортні засоби</string>
+    <string name="co2_mission">Викиди CO2</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_electric_name">Електричний</string>
+    <string name="routing_attr_motor_type_gas_name">Метан</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гібридний</string>
+    <string name="routing_attr_motor_type_name">Тип двигуна</string>
+    <string name="routing_attr_motor_type_description">Для обчислення CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизель</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_lpg_name">Пропан</string>
 </resources>

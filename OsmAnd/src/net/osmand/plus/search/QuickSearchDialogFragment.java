@@ -1199,6 +1199,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						reloadCategoriesInternal();
 						if (!searching) {
@@ -1328,6 +1329,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						reloadCitiesInternal();
 						if (!searching) {
@@ -1521,6 +1523,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						reloadHistoryInternal();
 						if (!searching) {
@@ -1697,6 +1700,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);
 					}
