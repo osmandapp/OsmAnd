@@ -159,7 +159,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings drawSettings) {
-		if (rulerModeOn()) {
+		if (rulerModeOn() && !tb.isZoomAnimated()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
 			circleAttrs.updatePaints(app, drawSettings, tb);
@@ -332,41 +332,40 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
 							RenderingLineAttributes attrs) {
-		if (!tb.isZoomAnimated()) {
-			float circleRadius = radius * circleNumber;
-			List<List<QuadPoint>> arrays = new ArrayList<>();
-			List<QuadPoint> points = new ArrayList<>();
-			LatLon centerLatLon = getCenterLatLon(tb);
-			for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
-				LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
-				if (Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180) {
-					if (points.size() > 0) {
-						arrays.add(points);
-						points = new ArrayList<>();
-					}
-					continue;
+		float circleRadius = radius * circleNumber;
+		List<List<QuadPoint>> arrays = new ArrayList<>();
+		List<QuadPoint> points = new ArrayList<>();
+		LatLon centerLatLon = getCenterLatLon(tb);
+		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
+			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
+			if (Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180) {
+				if (points.size() > 0) {
+					arrays.add(points);
+					points = new ArrayList<>();
 				}
-
-				PointF screenPoint = latLonToScreenPoint(latLon, tb);
-				points.add(new QuadPoint(screenPoint.x, screenPoint.y));
-			}
-			if (points.size() > 0) {
-				arrays.add(points);
+				continue;
 			}
 
-			for (List<QuadPoint> pts : arrays) {
-				Path path = new Path();
-				for (QuadPoint pt : pts) {
-					if (path.isEmpty()) {
-						path.moveTo(pt.x, pt.y);
-					} else {
-						path.lineTo(pt.x, pt.y);
-					}
-				}
-				canvas.drawPath(path, attrs.shadowPaint);
-				canvas.drawPath(path, attrs.paint);
-			}
+			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			points.add(new QuadPoint(screenPoint.x, screenPoint.y));
 		}
+		if (points.size() > 0) {
+			arrays.add(points);
+		}
+
+		for (List<QuadPoint> pts : arrays) {
+			Path path = new Path();
+			for (QuadPoint pt : pts) {
+				if (path.isEmpty()) {
+					path.moveTo(pt.x, pt.y);
+				} else {
+					path.lineTo(pt.x, pt.y);
+				}
+			}
+			canvas.drawPath(path, attrs.shadowPaint);
+			canvas.drawPath(path, attrs.paint);
+		}
+
 	}
 
 	private void drawTextCoords(Canvas canvas, String text, float[] textCoords, RenderingLineAttributes attrs) {
@@ -438,19 +437,17 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private void drawCompassCircle(Canvas canvas, RotatedTileBox tb, int circleNumber,
 								   QuadPoint center, RenderingLineAttributes attrs) {
-		if (!tb.isZoomAnimated()) {
-			float radiusLength = radius * circleNumber;
-			float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
-			QuadPoint centerPixels = getCenterPoint(tb);
+		float radiusLength = radius * circleNumber;
+		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
+		QuadPoint centerPixels = getCenterPoint(tb);
 
-			drawCircle(canvas, tb, circleNumber, center, attrs);
-			drawCompassCents(centerPixels, innerRadiusLength, radiusLength, tb, canvas, attrs);
-			drawCardinalDirections(canvas, center, radiusLength, tb, attrs);
-			drawLightingHeadingArc(radiusLength, cachedHeading, center, tb, canvas, attrs);
-			drawTriangleArrowByRadius(radiusLength, 0, center, attrs.shadowPaint, triangleNorthPaint, tb, canvas);
-			drawTriangleArrowByRadius(radiusLength, cachedHeading, center, attrs.shadowPaint, triangleHeadingPaint, tb, canvas);
-			drawCompassCircleText(canvas, tb, circleNumber, radiusLength, center, attrs);
-		}
+		drawCircle(canvas, tb, circleNumber, center, attrs);
+		drawCompassCents(centerPixels, innerRadiusLength, radiusLength, tb, canvas, attrs);
+		drawCardinalDirections(canvas, center, radiusLength, tb, attrs);
+		drawLightingHeadingArc(radiusLength, cachedHeading, center, tb, canvas, attrs);
+		drawTriangleArrowByRadius(radiusLength, 0, center, attrs.shadowPaint, triangleNorthPaint, tb, canvas);
+		drawTriangleArrowByRadius(radiusLength, cachedHeading, center, attrs.shadowPaint, triangleHeadingPaint, tb, canvas);
+		drawCompassCircleText(canvas, tb, circleNumber, radiusLength, center, attrs);
 	}
 
 	private void drawCompassCircleText(Canvas canvas, RotatedTileBox tb, int circleNumber, float radiusLength,
