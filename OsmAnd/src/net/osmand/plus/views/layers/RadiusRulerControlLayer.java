@@ -128,11 +128,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 		circleAttrs = new RenderingLineAttributes("rulerCircle");
 		circleAttrs.paint2.setTextSize(circleTextSize);
-		circleAttrs.paint3.setTextSize(circleTextSize + 1);
+		circleAttrs.paint3.setTextSize(circleTextSize);
 
 		circleAttrsAlt = new RenderingLineAttributes("rulerCircleAlt");
 		circleAttrsAlt.paint2.setTextSize(circleTextSize);
-		circleAttrsAlt.paint3.setTextSize(circleTextSize + 1);
+		circleAttrsAlt.paint3.setTextSize(circleTextSize);
 
 		for (int i = 0; i < 72; i++) {
 			degrees[i] = Math.toRadians(i * 5);
@@ -365,7 +365,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			canvas.drawPath(path, attrs.shadowPaint);
 			canvas.drawPath(path, attrs.paint);
 		}
-
 	}
 
 	private void drawTextCoords(Canvas canvas, String text, float[] textCoords, RenderingLineAttributes attrs) {
@@ -506,9 +505,21 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		blueLinesPaint.setShader(shader);
 		blueLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
 
-		PointF topLeftArcPoint = screenPointFromPoint(center.x - radius, center.y - radius, true, tb);
-		PointF bottomRightArcPoint = screenPointFromPoint(center.x + radius, center.y + radius, true, tb);
-		arrowArc.addArc(new RectF(center.x - (float)radius, topLeftArcPoint.y, center.x + (float)radius, bottomRightArcPoint.y), (-45+ cachedHeading + tb.getRotate()), -90);
+		arrowArc.reset();
+		int startArcAngle = (int)angle - 45;
+		int endArcAngle = (int)angle + 45;
+		List<List<QuadPoint>> arrays = new ArrayList<>();
+		List<QuadPoint> points = new ArrayList<>();
+		LatLon centerLatLon = getCenterLatLon(tb);
+		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
+			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
+			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			if (arrowArc.isEmpty()) {
+				arrowArc.moveTo(screenPoint.x, screenPoint.y);
+			} else {
+				arrowArc.lineTo(screenPoint.x, screenPoint.y);
+			}
+		}
 		canvas.drawPath(arrowArc, blueLinesPaint);
 	}
 
@@ -569,8 +580,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				}
 			}
 
-			LatLon center = tb.getCenterLatLon();
-			centerPixels = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, center.getLatitude(), center.getLongitude());
+			PointI center31 = getMapRenderer().getState().getTarget31();
+			centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
 			return new QuadPoint(centerPixels.x, centerPixels.y);
 		} else {
 			return tb.getCenterPixelPoint();
@@ -586,13 +597,12 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				int sy = windowSize.getY() / 2;
 				center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
 				if (center31 != null) {
-					double lon = MapUtils.get31LongitudeX(center31.getX());
-					double lat = MapUtils.get31LatitudeY(center31.getY());
-					return new LatLon(lat, lon);
+					return point31ToLatLon(center31);
 				}
 			}
 
-			return tb.getCenterLatLon();
+			center31 = getMapRenderer().getState().getTarget31();
+			return point31ToLatLon(center31);
 		} else {
 			return tb.getCenterLatLon();
 		}
@@ -615,17 +625,17 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		if (hasMapRenderer()) {
-			return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
-		} else {
-			float x = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			float y = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			return new PointF(x, y);
-		}
+		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	private PointF latLonToScreenPoint(LatLon latLon, RotatedTileBox tb) {
 		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	private LatLon point31ToLatLon(PointI point31) {
+		double lon = MapUtils.get31LongitudeX(point31.getX());
+		double lat = MapUtils.get31LatitudeY(point31.getY());
+		return new LatLon(lat, lon);
 	}
 
 
