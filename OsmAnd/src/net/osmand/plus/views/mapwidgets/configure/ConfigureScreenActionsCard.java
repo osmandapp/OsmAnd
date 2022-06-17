@@ -25,7 +25,7 @@ public class ConfigureScreenActionsCard extends MapBaseCard {
 	private final int screenTitleId;
 
 	public ConfigureScreenActionsCard(@NonNull MapActivity mapActivity,
-									  @NonNull Fragment target,
+	                                  @NonNull Fragment target,
 	                                  @NonNull ApplicationMode appMode,
 	                                  @StringRes int screenTitleId) {
 		super(mapActivity, false);
