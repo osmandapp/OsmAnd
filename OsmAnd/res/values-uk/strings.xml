@@ -4645,7 +4645,6 @@
     <string name="route_maneuvers_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
     <string name="get_altitude_information">Отримати дані про висоту</string>
     <string name="calculating_altitude">Обчислення висоти</string>
-    <string name="calculate_online_altitude_descr">Дані про висоту будуть обчислені на сервері OsmAnd.</string>
     <string name="calculate_online">Обчислити онлайн</string>
     <string name="track_attach_to_the_roads_descr">Трек буде прив\'язаний до дороги за допомогою офлайн-мап, геометрія треку буде змінена.</string>
     <string name="get_altitude_data">Отримати дані про висоту</string>

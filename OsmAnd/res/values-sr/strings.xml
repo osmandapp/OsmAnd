@@ -4665,7 +4665,6 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Без преференци</string>
     <string name="street_name_widget_desc">Виџет за назив улице приказује тренутни назив улице са правом локационом стрелицом или следећи назив улице са маневром који треба да се заврши.</string>
     <string name="get_altitude_information">Достави информације о надморској висини</string>
-    <string name="calculate_online_altitude_descr">Подаци о надморској висини ће бити израчунати на ОсмАнд серверу.</string>
     <string name="route_maneuvers">Маневри руте</string>
     <string name="calculating_altitude">Израчунавање надморске висине</string>
     <string name="no_widgets_here_yet">Овде још нема виџета</string>

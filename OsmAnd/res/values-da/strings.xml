@@ -4632,7 +4632,6 @@
     <string name="route_maneuvers_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="calculating_altitude">Beregner højde</string>
-    <string name="calculate_online_altitude_descr">Højdedata vil blive beregnet på OsmAnd-serveren.</string>
     <string name="calculate_online">Beregn online</string>
     <string name="track_attach_to_the_roads_descr">Spor vil blive forbundet til vejen ved hjælp af offline-kort, og sporets geometri vil blive ændret.</string>
     <string name="get_altitude_data">Få højdedata</string>

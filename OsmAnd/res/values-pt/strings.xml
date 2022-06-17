@@ -4643,7 +4643,6 @@
     <string name="route_maneuvers">Manobras de rota</string>
     <string name="get_altitude_information">Obter informação sobre a altitude</string>
     <string name="calculating_altitude">Cálculo da altitude</string>
-    <string name="calculate_online_altitude_descr">Os dados de altitude serão calculados no servidor OsmAnd.</string>
     <string name="calculate_online">Calcular online</string>
     <string name="track_attach_to_the_roads_descr">O trilho será anexado à estrada utilizando mapas offline, a geometria do trilho será alterada.</string>
     <string name="get_altitude_data">Obter dados de altitude</string>

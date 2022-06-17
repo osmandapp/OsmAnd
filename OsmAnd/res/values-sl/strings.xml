@@ -4109,7 +4109,6 @@
     <string name="route_maneuvers">Manevri na poti</string>
     <string name="get_altitude_information">Pridobi informacije o nadmorski višini</string>
     <string name="calculating_altitude">Izračunavanje nadmorske višine</string>
-    <string name="calculate_online_altitude_descr">Podatki o nadmorski višini bodo izračunani v strežniku OsmAnd.</string>
     <string name="calculate_online">Izračunavanje na spletu</string>
     <string name="track_attach_to_the_roads_descr">Proga bo na cesto pritrjena s pomočjo zemljevidov brez povezave, geometrija proge se bo spremenila.</string>
     <string name="no_altitude_data">Ni podatkov o nadmorski višini</string>
