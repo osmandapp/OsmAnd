@@ -4673,4 +4673,11 @@
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_description">Für CO2-Berechnung</string>
     <string name="routing_attr_motor_type_name">Motorentyp</string>
+    <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
+    <string name="compass_on_circles">Kompass auf Kreisen</string>
+    <string name="bearing_secondary_desc">Das Format der angezeigten Daten kann in %1$s - %2$s - %3$s geändert werden.</string>
+    <string name="elevation_profile_widget_desc">Das Widget zeigt das Höhen- und Hangneigungsprofil der aktuellen Route an.</string>
+    <string name="mapillary_widget_desc">Widget, das einen schnellen Zugriff auf die Mapillary-App ermöglicht, um Straßenansichten hinzuzufügen.</string>
+    <string name="coordinates_widget_secondary_desc">Das Koordinatenformat könnte in %1$s - %2$s - %3$s geändert werden.</string>
+    <string name="parking_widget_desc">Widget, das die Entfernung von der Bildschirmmitte zum Parkplatz anzeigt.</string>
 </resources>
