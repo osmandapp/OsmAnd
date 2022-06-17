@@ -299,8 +299,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandSettings settings = app.getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
-			clearMapMarkersCollections();
 			clearVectorLinesCollections();
+			return;
 		}
 
 		MapRendererView mapRenderer = getMapRenderer();
