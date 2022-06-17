@@ -1,12 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.GPXUtilities.GPXFile;
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
-import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
-
 import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,10 +9,6 @@ import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -55,6 +44,17 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.GPXUtilities.GPXFile;
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
+import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
+import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
@@ -252,36 +252,46 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void updateMessage() {
 		if (!editingCtx.isPointsEnoughToCalculateRoute()) {
-			showMessage(app.getString(R.string.message_you_need_add_two_points_to_show_graphs), INVALID_ID, 0, null, null);
+			String desc = app.getString(R.string.message_you_need_add_two_points_to_show_graphs);
+			showMessage(null, desc, INVALID_ID, 0, null, null);
 		} else if (isRouteCalculating()) {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
-			showMessage(app.getString(R.string.message_graph_will_be_available_after_recalculation), INVALID_ID, progressSize, null, null);
+			String desc = app.getString(R.string.message_graph_will_be_available_after_recalculation);
+			showMessage(null, desc, INVALID_ID, progressSize, null, null);
 		} else if (visibleType.hasData()) {
 			showGraph();
 		} else if (visibleType.canBeCalculated()) {
 			if (fragment.isCalculatingSrtmData()) {
+				String desc = app.getString(R.string.calculating_altitude);
 				int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
-				showMessage(app.getString(R.string.calculating_altitude), INVALID_ID, progressSize,
-						app.getString(R.string.shared_string_cancel),
-						v -> fragment.stopUploadFileTask());
+				String buttonText = app.getString(R.string.shared_string_cancel);
+				showMessage(null, desc, INVALID_ID, progressSize, buttonText, v -> fragment.stopUploadFileTask());
 			} else {
-				showMessage(app.getString(R.string.message_need_calculate_route_before_show_graph,
-						visibleType.getTitle()), R.drawable.ic_action_altitude_average,
-						0, app.getString(R.string.route_between_points),
-						v -> fragment.startSnapToRoad(false));
+				String title = app.getString(R.string.no_altitude_data);
+				String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
+				String buttonText = app.getString(R.string.calculate_altitude);
+				showMessage(title, desc, R.drawable.ic_action_altitude_average, 0, buttonText,
+						v -> fragment.getAltitudeClick());
 			}
 		}
 	}
 
-	private void showMessage(@NonNull String text,
+	private void showMessage(@Nullable String title,
+	                         @NonNull String description,
 	                         @DrawableRes int iconId,
 	                         int progressSize,
 	                         @Nullable String btnTitle,
 	                         @Nullable OnClickListener listener) {
 		messageContainer.setVisibility(View.VISIBLE);
 
-		TextView tvMessage = messageContainer.findViewById(R.id.message_text);
-		tvMessage.setText(text);
+		TextView messageTitle = messageContainer.findViewById(R.id.message_title);
+		if (!Algorithms.isEmpty(title)) {
+			messageTitle.setText(title);
+		}
+		AndroidUiHelper.updateVisibility(messageTitle, !Algorithms.isEmpty(title));
+
+		TextView messageDesc = messageContainer.findViewById(R.id.message_text);
+		messageDesc.setText(description);
 
 		ImageView icon = messageContainer.findViewById(R.id.message_icon);
 		if (iconId != INVALID_ID) {

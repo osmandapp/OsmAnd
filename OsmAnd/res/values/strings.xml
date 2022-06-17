@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="no_altitude_data_desc">You can attach your track to the roads to get %1$s data or calculate it online.</string>
     <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on Satellite Imagery and digital elevation models. It could vary from device recorded altitude and could be used as altitude correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
