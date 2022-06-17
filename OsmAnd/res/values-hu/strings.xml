@@ -4701,4 +4701,5 @@
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
     <string name="routing_attr_motor_type_description">CO₂-kibocsátás számításához</string>
     <string name="routing_attr_motor_type_name">Motortípus</string>
+    <string name="lang_ckb">Közép-kurd</string>
 </resources>
