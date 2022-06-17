@@ -338,30 +338,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float cx;
 					float cy;
 					if (mapRenderer != null) {
-						PointF[] line;
-						PointF centerPixels;
-						if (tileBox.isCenterShifted()) {
-							PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-							PointI windowSize = mapRenderer.getState().getWindowSize();
-							int sx = windowSize.getX() / 2;
-							int sy = windowSize.getY() / 2;
-							PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, sx, sy,true);
-							if (center31 == null) {
-								continue;
-							}
-							line = calculateLineInScreenRect(tileBox, marker31, center31);
-							centerPixels = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, center31);
-						} else {
-							LatLon center = tileBox.getCenterLatLon();
-							line = calculateLineInScreenRect(tileBox, marker, center);
-							centerPixels = NativeUtilities.getPixelFromLatLon(mapRenderer, tileBox, center.getLatitude(), center.getLongitude());
-						}
+						LatLon center = tileBox.getCenterLatLon();
+						PointF[] line = calculateLineInScreenRect(tileBox, marker, center);
 						if (line == null) {
 							continue;
 						}
-						cx = centerPixels.x;
-						cy = centerPixels.y;
-						bearing = (float) getAngleBetween(centerPixels, line[1]) - tileBox.getRotate();
+						PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						cx = centerPixel.x;
+						cy = centerPixel.y;
+						bearing = (float) getAngleBetween(centerPixel, line[1]) - tileBox.getRotate();
 					} else {
 						final QuadPoint cp = tileBox.getCenterPixelPoint();
 						cx = cp.x;
