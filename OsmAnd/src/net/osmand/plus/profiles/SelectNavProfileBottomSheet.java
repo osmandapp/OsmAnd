@@ -294,9 +294,14 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	protected boolean isSelected(ProfileDataObject profile) {
 		boolean isSelected = super.isSelected(profile);
 		String derivedProfile = getAppMode().getDerivedProfile();
-		if (!Algorithms.objectEquals(derivedProfile, "default") && profile instanceof RoutingDataObject) {
+		if (isSelected && profile instanceof RoutingDataObject) {
 			RoutingDataObject data = (RoutingDataObject) profile;
-			isSelected = isSelected && Algorithms.objectEquals(derivedProfile, data.getDerivedProfile());
+			boolean checkForDerived = !Algorithms.objectEquals(derivedProfile, "default");
+			if (checkForDerived) {
+				isSelected = Algorithms.objectEquals(derivedProfile, data.getDerivedProfile());
+			} else {
+				isSelected = data.getDerivedProfile() == null;
+			}
 		}
 		return isSelected;
 	}
