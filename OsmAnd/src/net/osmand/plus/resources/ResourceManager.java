@@ -1368,6 +1368,8 @@ public class ResourceManager {
 		if (resource != null) {
 			resource.close();
 		}
+		backupedFileNames.remove(fileName);
+		indexFileNames.remove(fileName);
 		for (ResourceListener l : resourceListeners) {
 			l.onMapClosed(fileName);
 		}
