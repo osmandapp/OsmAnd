@@ -341,8 +341,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float cx;
 					float cy;
 					if (mapRenderer != null) {
-						LatLon center = tileBox.getCenterLatLon();
-						PointF[] line = calculateLineInScreenRect(tileBox, marker, center);
+						PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
+						PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						if (center31 == null) {
+							continue;
+						}
+						PointF[] line = calculateLineInScreenRect(tileBox, marker31, center31);
 						if (line == null) {
 							continue;
 						}
