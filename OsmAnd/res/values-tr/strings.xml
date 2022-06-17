@@ -4709,4 +4709,5 @@
     <string name="routing_attr_motor_type_name">Motor türü</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="routing_attr_motor_type_description">CO2 hesaplaması için</string>
+    <string name="lang_ckb">Orta Kürtçe</string>
 </resources>
