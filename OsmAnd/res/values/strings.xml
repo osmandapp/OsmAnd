@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="goods_delivery_desc_4">If your vehicle weight is more than 3.5 tonnes you need to use Truck profile.</string>
+    <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
+    <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>
+    <string name="goods_delivery_desc">Vehicle transporting goods can be restricted to access some roads. </string>
+    <string name="goods_delivery">Goods delivery</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
