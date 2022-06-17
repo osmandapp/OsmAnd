@@ -130,6 +130,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private VectorLinesCollection vectorLinesCollection;
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
+	private int displayedWidgets = 0;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -325,6 +326,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer != null) {
 			drawLineAndText(canvas, tileBox, nightMode);
+		} else {
+			clearVectorLinesCollections();
 		}
 
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
@@ -893,8 +896,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandSettings settings = app.getSettings();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
-		if (mapRenderer != null) {
-			for (int i = 0; i < activeMapMarkers.size() && i < displayedMarkers.size(); i++) {
+		if (displayedWidgets != settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get()) {
+			displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+			clearVectorLinesCollections();
+		} else {
+			for (int i = 0; mapRenderer != null && i < activeMapMarkers.size() && i < displayedMarkers.size(); i++) {
 				if (displayedMarkers.get(i) != activeMapMarkers.get(i)) {
 					clearVectorLinesCollections();
 					break;
@@ -910,7 +916,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		textAttrs.paint.setStyle(Paint.Style.FILL);
 		textPaint.set(textAttrs.paint);
 
-		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		boolean drawMarkerName = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 		float locX;
 		float locY;
