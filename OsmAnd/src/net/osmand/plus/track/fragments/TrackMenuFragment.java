@@ -1,5 +1,29 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -120,30 +144,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -300,6 +300,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			loadSelectedGpxFile(mapActivity, path, showCurrentTrack, result -> {
 				setSelectedGpxFile(result);
 				onSelectedGpxFileAvailable();
+				gpxSelectionHelper.addTemporallyVisibleTrack(result);
 				if (getView() != null) {
 					initContent(getView());
 				}
@@ -593,10 +594,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		searchEditText.addTextChangedListener(
 				new TextWatcher() {
 					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					}
 
 					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) { }
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					}
 
 					@Override
 					public void afterTextChanged(Editable s) {
@@ -834,14 +837,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onResume() {
 		super.onResume();
-		gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		}
 		onHiddenChanged(false);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		}
 		onHiddenChanged(true);
 	}
 
@@ -1022,10 +1029,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) { }
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+	}
 
 	@Override
-	public void onCardPressed(@NonNull BaseCard card) { }
+	public void onCardPressed(@NonNull BaseCard card) {
+	}
 
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
@@ -1357,10 +1366,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void scrollBy(int px) { }
+	public void scrollBy(int px) {
+	}
 
 	@Override
-	public void onPointsDeletionStarted() { }
+	public void onPointsDeletionStarted() {
+	}
 
 	@Override
 	public void onPointsDeleted() {
@@ -1513,7 +1524,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
-			public void gpxSavingStarted() { }
+			public void gpxSavingStarted() {
+			}
 
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {

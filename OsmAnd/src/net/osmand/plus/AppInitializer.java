@@ -782,13 +782,10 @@ public class AppInitializer implements IProgress {
 	}
 
 	public void notifyFinish() {
-		app.uiHandler.post(new Runnable() {
-
-			@Override
-			public void run() {
-				for (AppInitializeListener l : listeners) {
-					l.onFinish(AppInitializer.this);
-				}
+		app.uiHandler.post(() -> {
+			List<AppInitializeListener> listeners = new ArrayList<>(this.listeners);
+			for (AppInitializeListener l : listeners) {
+				l.onFinish(this);
 			}
 		});
 	}

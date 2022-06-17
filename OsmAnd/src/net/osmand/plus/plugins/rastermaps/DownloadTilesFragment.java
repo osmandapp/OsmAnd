@@ -380,6 +380,11 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		app.runInUIThread(() -> {
+			boolean activityDestroyed = !AndroidUtils.isActivityNotDestroyed(getActivity());
+			if (activityDestroyed) {
+				return;
+			}
+
 			int maxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {

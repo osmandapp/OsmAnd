@@ -91,7 +91,7 @@ public class WptPtEditor extends PointEditor {
 			return gpxFile.getPointsGroups();
 		}
 		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
-			PointsGroup pointsGroup = new PointsGroup(wpt.category, wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor, 0);
+			PointsGroup pointsGroup = new PointsGroup(wpt.category, wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor);
 
 			Map<String, PointsGroup> predefinedCategory = new HashMap<>();
 			predefinedCategory.put(wpt.category, pointsGroup);

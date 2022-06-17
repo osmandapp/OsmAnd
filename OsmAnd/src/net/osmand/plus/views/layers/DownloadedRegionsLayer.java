@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.core.android.MapRendererView;
@@ -55,10 +54,10 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControlle
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -110,7 +109,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private int polygonId = 1;
 	private boolean needRedrawOpenGL = false;
 	private boolean indexRegionBoundaries = false;
-	private boolean onMapIndexed = false;
+	private boolean onMapsChanged = false;
+	List<WorldRegion> downloadedRegions = null;
+	List<WorldRegion> backupedRegions = null;
 
 	public static class DownloadMapObject {
 		private final BinaryMapDataObject dataObject;
@@ -249,7 +250,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					List<BinaryMapDataObject> backupedObjects = new ArrayList<>();
 					for (BinaryMapDataObject o : currentObjects) {
 						boolean downloaded = rm.checkIfObjectDownloaded(osmandRegions.getDownloadName(o));
-						boolean backuped = checkIfObjectBackuped(osmandRegions.getDownloadName(o));
+						boolean backuped = rm.checkIfObjectBackuped(osmandRegions.getDownloadName(o));
 						if (downloaded) {
 							downloadedObjects.add(o);
 						} else if (backuped) {
@@ -391,15 +392,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 		}
 		canvas.drawPath(path, paint);
-	}
-
-	private boolean checkIfObjectBackuped(String downloadName) {
-		File fileDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		return new File(fileDir, regionName).exists() || new File(fileDir, roadsRegionName).exists();
 	}
 
 	private List<BinaryMapDataObject> queryData(@NonNull QuadRect latLonBounds, int zoom) {
@@ -684,36 +676,50 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapRenderer == null) {
 			return;
 		}
-		if (onMapIndexed) {
+		if (onMapsChanged) {
 			clearPolygonsCollections();
-			onMapIndexed = false;
+			onMapsChanged = false;
+			downloadedRegions = null;
+			backupedRegions = null;
 		}
 		if (polygonsCollection != null && selectedSize == selectedObjects.size()) {
 			return;
 		}
 		List<WorldRegion> downloadedRegions = new ArrayList<>();
 		List<WorldRegion> backupedRegions = new ArrayList<>();
-		List<WorldRegion> selectedRegions = new ArrayList<>();
-		if (selectedObjects.size() > 0) {
-			for (BinaryMapDataObject o : selectedObjects) {
-				String fullName = osmandRegions.getFullName(o);
-				WorldRegion wr = osmandRegions.getRegionData(fullName);
-				if (wr != null) {
-					selectedRegions.add(wr);
+		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
+			if (this.downloadedRegions == null || this.backupedRegions == null) {
+				List<WorldRegion> worldRegions = osmandRegions.getAllRegionData();
+				for (WorldRegion wr : worldRegions) {
+					String n = wr.getRegionDownloadName();
+					if (rm.checkIfObjectDownloaded(n)) {
+						downloadedRegions.add(wr);
+					} else if (rm.checkIfObjectBackuped(n)) {
+						backupedRegions.add(wr);
+					}
 				}
+				this.downloadedRegions = downloadedRegions;
+				this.backupedRegions = backupedRegions;
+			} else {
+				downloadedRegions = new ArrayList<>(this.downloadedRegions);
+				backupedRegions = new ArrayList<>(this.backupedRegions);
 			}
 		}
-		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
-			List<WorldRegion> worldRegions = osmandRegions.getAllRegionData();
-			for (WorldRegion wr : worldRegions) {
-				if (selectedRegions.contains(wr)) {
-					continue;
-				}
-				String n = wr.getRegionDownloadName();
-				if (rm.checkIfObjectDownloaded(n)) {
-					downloadedRegions.add(wr);
-				} else if (checkIfObjectBackuped(n)) {
-					backupedRegions.add(wr);
+		List<WorldRegion> selectedRegions = new ArrayList<>();
+		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
+			if (selectedObjects.size() > 0) {
+				for (BinaryMapDataObject o : selectedObjects) {
+					String fullName = osmandRegions.getFullName(o);
+					WorldRegion wr = osmandRegions.getRegionData(fullName);
+					if (wr != null) {
+						selectedRegions.add(wr);
+						if (downloadedRegions.contains(wr)) {
+							downloadedRegions.remove(wr);
+						}
+						if (backupedRegions.contains(wr)) {
+							backupedRegions.remove(wr);
+						}
+					}
 				}
 			}
 		}
@@ -725,9 +731,14 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			downloadedSize = downloadedRegions.size();
 			selectedSize = selectedRegions.size();
 		}
-		addToPolygonsCollection(downloadedRegions, paintDownloaded);
-		addToPolygonsCollection(backupedRegions, paintBackuped);
-		addToPolygonsCollection(selectedRegions, paintSelected);
+		int baseOrder = getBaseOrder();
+		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
+			baseOrder = addToPolygonsCollection(downloadedRegions, paintDownloaded, baseOrder);
+			baseOrder = addToPolygonsCollection(backupedRegions, paintBackuped, baseOrder);
+		}
+		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
+			addToPolygonsCollection(selectedRegions, paintSelected, baseOrder);
+		}
 		if (needRedrawOpenGL && polygonsCollection != null) {
 			mapRenderer.addSymbolsProvider(polygonsCollection);
 			needRedrawOpenGL = false;
@@ -735,10 +746,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	/**OpenGL*/
-	private void addToPolygonsCollection(List<WorldRegion> regionList, Paint paint) {
+	private int addToPolygonsCollection(List<WorldRegion> regionList, Paint paint, int baseOrder) {
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer == null || regionList.size() == 0 || !needRedrawOpenGL) {
-			return;
+			return baseOrder;
 		}
 		if (polygonsCollection == null) {
 			polygonsCollection = new PolygonsCollection();
@@ -760,6 +771,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					.setFillColor(colorARGB)
 					.buildAndAddToCollection(polygonsCollection);
 		}
+		return baseOrder;
 	}
 
 	/**OpenGL*/
@@ -803,6 +815,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void onMapsIndexed() {
-		onMapIndexed = true;
+		onMapsChanged = true;
+	}
+
+	@Override
+	public void onMapClosed(String fileName) {
+		onMapsChanged = true;
 	}
 }

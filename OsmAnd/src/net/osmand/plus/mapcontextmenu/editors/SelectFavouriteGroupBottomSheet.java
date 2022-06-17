@@ -40,7 +40,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 
 		FavouritesHelper helper = app.getFavoritesHelper();
 		for (FavoriteGroup favoriteGroup : helper.getFavoriteGroups()) {
-			PointsGroup pointsGroup = favoriteGroup.toPointsGroup();
+			PointsGroup pointsGroup = favoriteGroup.toPointsGroup(app);
 			pointsGroups.put(pointsGroup.name, pointsGroup);
 		}
 	}
@@ -54,7 +54,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 
 		List<FavoriteGroup> favoriteGroups = app.getFavoritesHelper().getFavoriteGroups();
 		for (FavoriteGroup favoriteGroup : favoriteGroups) {
-			PointsGroup pointsGroup = favoriteGroup.toPointsGroup();
+			PointsGroup pointsGroup = favoriteGroup.toPointsGroup(app);
 			container.addView(createCategoryItem(pointsGroup, !favoriteGroup.isVisible()));
 		}
 		return new BaseBottomSheetItem.Builder()

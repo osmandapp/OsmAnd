@@ -52,6 +52,7 @@ import net.osmand.plus.auto.CarSurfaceView;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
+import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
@@ -70,6 +71,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,7 +149,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private final List<IMapLocationListener> locationListeners = new ArrayList<>();
+	private final List<IMapLocationListener> locationListeners = Collections.synchronizedList(new ArrayList<>());
 
 	private OnLongClickListener onLongClickListener;
 
@@ -502,6 +504,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setRotate(float rotate, boolean force) {
+		if (multiTouch) {
+			return;
+		}
 		float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
 		if (Math.abs(diff) > 5 || force) { // check smallest rotation
 			animatedDraggingThread.startRotate(rotate);
@@ -771,6 +776,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				currentViewport.getCenterPixelY() != cy ||
 				currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
 		}
@@ -1099,27 +1105,23 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void setRotateImpl(float rotate, int centerX, int centerY) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			RotatedTileBox tb = currentViewport.copy();
-			boolean centerShifted = tb.isCenterShifted();
-			if (centerShifted) {
-				int centerX31 = 0;
-				int centerY31 = 0;
-				PointI center31 = new PointI();
-				if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-					centerX31 = center31.getX();
-					centerY31 = center31.getY();
-				}
-				PointI target31 = mapRenderer.getState().getTarget31();
-				float azimuth = mapRenderer.getState().getAzimuth();
-				int targetX = target31.getX() - centerX31;
-				int targetY = target31.getY() - centerY31;
-				double angleR = Math.toRadians(-azimuth - rotate);
-				double cosAngle = Math.cos(angleR);
-				double sinAngle = Math.sin(angleR);
-				int newTargetX = (int) (targetX * cosAngle - targetY * sinAngle + centerX31);
-				int newTargetY = (int) (targetX * sinAngle + targetY * cosAngle + centerY31);
-				mapRenderer.setTarget(new PointI(newTargetX, newTargetY));
+			int centerX31 = 0;
+			int centerY31 = 0;
+			PointI center31 = new PointI();
+			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
+				centerX31 = center31.getX();
+				centerY31 = center31.getY();
 			}
+			PointI target31 = mapRenderer.getState().getTarget31();
+			float azimuth = mapRenderer.getState().getAzimuth();
+			int targetX = target31.getX() - centerX31;
+			int targetY = target31.getY() - centerY31;
+			double angleR = Math.toRadians(-azimuth - rotate);
+			double cosAngle = Math.cos(angleR);
+			double sinAngle = Math.sin(angleR);
+			int newTargetX = (int) (targetX * cosAngle - targetY * sinAngle + centerX31);
+			int newTargetY = (int) (targetX * sinAngle + targetY * cosAngle + centerY31);
+			mapRenderer.setTarget(new PointI(newTargetX, newTargetY));
 			mapRenderer.setAzimuth(-rotate);
 		}
 		currentViewport.setRotate(rotate);
@@ -1144,16 +1146,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			RotatedTileBox tb = currentViewport.copy();
 			int centerX31Before = 0;
 			int centerY31Before = 0;
-			// If map center is shifted we need to store map center in 31 coordinates before zoom and
-			// after zoom - shift map to new center (to keep map center in same px coordinate)
-			boolean centerShifted = tb.isCenterShifted();
-			if (centerShifted) {
-				// Get map center in 31
-				PointI center31 = new PointI();
-				if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-					centerX31Before = center31.getX();
-					centerY31Before = center31.getY();
-				}
+
+			// Get map center in 31
+			PointI center31 = new PointI();
+			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
+				centerX31Before = center31.getX();
+				centerY31Before = center31.getY();
 			}
 
 			// Zoom
@@ -1162,21 +1160,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 
 			// Shift map to new center
-			if (centerShifted) {
-				PointI center31 = new PointI();
-				// Get new map center in 31
-				if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-					int centerX31After = center31.getX();
-					int centerY31After = center31.getY();
-					PointI target31 = mapRenderer.getState().getTarget31();
-					int targetX = target31.getX() - (centerX31After - centerX31Before);
-					int targetY = target31.getY() - (centerY31After - centerY31Before);
-					// Shift map
-					mapRenderer.setTarget(new PointI(targetX, targetY));
-				}
+			center31 = new PointI();
+			// Get new map center in 31
+			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
+				int centerX31After = center31.getX();
+				int centerY31After = center31.getY();
+				PointI target31 = mapRenderer.getState().getTarget31();
+				int targetX = target31.getX() - (centerX31After - centerX31Before);
+				int targetY = target31.getY() - (centerY31After - centerY31Before);
+				// Shift map
+				mapRenderer.setTarget(new PointI(targetX, targetY));
 			}
 		}
 		currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
+		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
 	}
 
 	private void setMapDensityImpl(double mapDensity) {
@@ -1186,6 +1183,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		}
 		currentViewport.setMapDensity(mapDensity);
+	}
+
+	public float normalizeElevationAngle(float elevationAngle) {
+		if (elevationAngle > 90f) {
+			return 90f;
+		}
+		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
+		if (verticalTilesCount < 8) {
+			return Math.max(33f, elevationAngle);
+		} else if (verticalTilesCount < 9) {
+			return Math.max(35f, elevationAngle);
+		} else if (verticalTilesCount < 10) {
+			return Math.max(40f, elevationAngle);
+		}
+		return Math.max(45f, elevationAngle);
 	}
 
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, int centerX, int centerY, boolean notify) {
@@ -1639,26 +1651,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			// Keep zoom center fixed or flexible
 			if (mapRenderer != null) {
 				zoomToAnimate(initialViewport, dz, multiTouchCenterX, multiTouchCenterY);
-/*
-				int multiTouchCenterX31After = 0;
-				int multiTouchCenterY31After = 0;
-				PointI center31 = new PointI();
-				if (mapRenderer.getLocationFromScreenPoint(new PointI(
-						multiTouchCenterX, multiTouchCenterY), center31)) {
-					multiTouchCenterX31After = center31.getX();
-					multiTouchCenterY31After = center31.getY();
-				}
-
-				PointI target31 = mapRenderer.getState().getTarget31();
-				int targetX = target31.getX() - multiTouchCenterX31After;
-				int targetY = target31.getY() - multiTouchCenterY31After;
-				double angleR = Math.toRadians(prevAngle - angle);
-				double cosAngle = Math.cos(angleR);
-				double sinAngle = Math.sin(angleR);
-				int newTargetX = (int) (targetX * cosAngle - targetY * sinAngle + multiTouchCenterX31After);
-				int newTargetY = (int) (targetX * sinAngle + targetY * cosAngle + multiTouchCenterY31After);
-				setTarget31(newTargetX, newTargetY);
- */
 				rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
 			} else {
 				LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchCenterX, cp.y + cp.y - multiTouchCenterY);
@@ -1671,11 +1663,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void setElevationAngle(float angle) {
-		if (angle < 35f) {
-			angle = 35f;
-		} else if (angle > 90f) {
-			angle = 90f;
-		}
+		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
 		application.getOsmandMap().setMapElevation(angle);
 	}
