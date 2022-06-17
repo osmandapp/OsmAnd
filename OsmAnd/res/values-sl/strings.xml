@@ -4691,4 +4691,14 @@
     <string name="import_as_one_track">Uvozi kot eno sled</string>
     <string name="use_latin_name_if_missing">Uporabi latinsko ime, če manjka</string>
     <string name="transport_hazmat_yes_desc">Izbrati moraš ustrezno kategorijo.</string>
+    <string name="co2_mission">Emisije CO2</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Dizel</string>
+    <string name="routing_attr_motor_type_electric_name">Električni</string>
+    <string name="routing_attr_motor_type_gas_name">Stisnjen zemeljski plin CNG</string>
+    <string name="routing_attr_motor_type_name">Tip motorja</string>
+    <string name="routing_attr_motor_type_description">Za izračun CO2</string>
+    <string name="routing_attr_motor_type_petrol_name">Bencin</string>
+    <string name="routing_attr_motor_type_lpg_name">Avtoplin LPG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibridni</string>
 </resources>

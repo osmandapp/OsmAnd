@@ -20,7 +20,7 @@
     <string name="poi_aeroway_gate">Flugsteig</string>
     <string name="poi_aeroway_terminal">Flughafenterminal</string>
     <string name="poi_craft_agricultural_engines">Landmaschinen</string>
-    <string name="poi_aerodrome">Flughafen</string>
+    <string name="poi_aerodrome">Flughafen;Flugplatz</string>
     <string name="poi_alcohol">Spirituosenladen</string>
     <string name="poi_alpine_hut">Bewirtschaftete Schutzhütte;Unterstand</string>
     <string name="poi_ambulance_station">Rettungswache</string>
@@ -2670,7 +2670,7 @@
     <string name="poi_crossing_supervision_no">Bahnübergangsüberwachung: keine</string>
     <string name="poi_crossing_supervision_attendant">Bahnübergangsüberwachung: Bediensteter</string>
     <string name="poi_crossing_supervision_camera">Bahnübergangsüberwachung: Kamera</string>
-    <string name="poi_dispensing_yes">ja</string>
+    <string name="poi_dispensing_yes">Ja;Abgabe</string>
     <string name="poi_dispensing_no">Nach Rezept: nein</string>
     <string name="poi_pumping_station">Pumpstation</string>
     <string name="poi_display_yes">Anzeige: ja</string>
@@ -3601,7 +3601,7 @@
     <string name="poi_vehicle_military">Zufahrt Fahrzeuge: militärisch</string>
     <string name="poi_vehicle_delivery">Zufahrt Fahrzeuge: Lieferung</string>
     <string name="poi_vehicle_forestry">Zufahrt Fahrzeuge: Forstwirtschaft</string>
-    <string name="poi_motorcar_yes">Ja</string>
+    <string name="poi_motorcar_yes">Ja;Kraftfahrzeug</string>
     <string name="poi_motorcar_private">Zufahrt Pkw: privat</string>
     <string name="poi_motorcar_no">Zufahrt Pkw: nein</string>
     <string name="poi_motorcar_destination">Zufahrt Pkw: für Anlieger</string>
