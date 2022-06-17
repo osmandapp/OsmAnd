@@ -30,6 +30,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
@@ -386,11 +388,14 @@ public class OsmAndAppCustomization {
 	}
 
 	public boolean isWidgetAvailable(@NonNull String key, ApplicationMode appMode) {
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
+		if (key.contains(MapWidgetInfo.DELIMITER)) {
+			key = WidgetType.getDefaultWidgetId(key);
+		}
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(key);
+		if (availableForModes == null) {
 			return true;
 		}
-		return set.contains(appMode);
+		return availableForModes.contains(appMode);
 	}
 
 	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName, @Nullable String intent) {

@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="reset_all_settings_desc">Are you sure you want to reset all settings to default?</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>

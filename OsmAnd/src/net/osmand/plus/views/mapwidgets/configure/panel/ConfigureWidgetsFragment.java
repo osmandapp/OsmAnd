@@ -157,6 +157,14 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				AndroidUtils.openUrl(activity, R.string.docs_widgets, nightMode);
 			}
 		});
+
+		View actionsButton = toolbar.findViewById(R.id.actions_button);
+		actionsButton.setOnClickListener(v -> {
+			if (selectedFragment != null) {
+				selectedFragment.scrollToActions();
+			}
+		});
+
 		TextView tvSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
 		tvSubtitle.setText(selectedAppMode.toHumanString());
 	}
@@ -275,7 +283,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
 				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
-				return widgetRegistry.createCustomWidget(id, widget, widgetType, panel);
+				return widgetRegistry.createCustomWidget(id, widget, widgetType, panel, selectedAppMode);
 			}
 		}
 		return null;

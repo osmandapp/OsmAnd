@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -177,7 +178,9 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				.setColor(app, layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID));
 	}
 
-	void createWidgetControls(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos) {
+	void createWidgetControls(@NonNull MapActivity mapActivity,
+	                          @NonNull List<MapWidgetInfo> widgetsInfos,
+	                          @NonNull ApplicationMode appMode) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 			int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
@@ -187,7 +190,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 			TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
 			MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
-					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
 			((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
 
 			widgetsInfos.add(widgetInfo);
