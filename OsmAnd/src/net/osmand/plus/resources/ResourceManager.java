@@ -1361,6 +1361,7 @@ public class ResourceManager {
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
+		backupedFileNames.remove(fileName);
 		indexFiles.remove(fileName);
 		travelRepositories.remove(fileName);
 		renderer.closeConnection(fileName);
@@ -1368,8 +1369,6 @@ public class ResourceManager {
 		if (resource != null) {
 			resource.close();
 		}
-		backupedFileNames.remove(fileName);
-		indexFileNames.remove(fileName);
 		for (ResourceListener l : resourceListeners) {
 			l.onMapClosed(fileName);
 		}
