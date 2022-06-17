@@ -4699,6 +4699,6 @@
     <string name="routing_attr_motor_type_electric_name">Elektromos</string>
     <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
-    <string name="routing_attr_motor_type_description">CO2-kibocsátás számításához</string>
+    <string name="routing_attr_motor_type_description">CO₂-kibocsátás számításához</string>
     <string name="routing_attr_motor_type_name">Motortípus</string>
 </resources>
