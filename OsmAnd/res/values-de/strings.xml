@@ -4655,4 +4655,22 @@
     <string name="transport_hazmat_no_desc">Auf einigen Straßen und Tunneln ist der Transport gefährlicher Materialien verboten.</string>
     <string name="routing_attr_goods_restrictions_name">Beschränkungen für Lastkraftwagen</string>
     <string name="transport_hazmat_yes_desc">Sie müssen eine richtige Kategorie wählen.</string>
+    <string name="import_as_one_track">Als einen Track importieren</string>
+    <string name="transport_hazmat_title">Transport gefährlicher Materialien</string>
+    <string name="map_widget_trip_recording_downhill">Bergab</string>
+    <string name="map_widget_trip_recording_uphill">Bergauf</string>
+    <string name="explore_plans">Pläne erkunden</string>
+    <string name="widget_secondary_desc_part_of">Teil des %1$s-Plugins.</string>
+    <string name="av_notes_choose_action_widget_desc">Aktion auswählen.</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_gas_name">Erdgas</string>
+    <string name="lang_ckb">Zentralkurdisch</string>
+    <string name="routing_attr_motor_type_lpg_name">Autogas</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrisch</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
+    <string name="co2_mission">CO2-Ausstoß</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_description">Für CO2-Berechnung</string>
+    <string name="routing_attr_motor_type_name">Motorentyp</string>
 </resources>
