@@ -923,7 +923,7 @@
     <string name="poi_turning_circle">Obračalni krog</string>
     <string name="poi_aerialway_pylon">Žičniški drog</string>
     <string name="poi_aerialway_magic_carpet">Tapetna vlečnica</string>
-    <string name="poi_ferry_terminal">Terminal za trajekt</string>
+    <string name="poi_ferry_terminal">Terminal za trajekte</string>
     <string name="poi_slipway">Drča</string>
     <string name="poi_aeroway_gate">Letališka vrata</string>
     <string name="poi_helipad">Heliodrom</string>
