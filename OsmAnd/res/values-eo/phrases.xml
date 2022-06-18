@@ -4338,4 +4338,7 @@
     <string name="poi_club_dog">Hund-ŝatanta klubejo</string>
     <string name="poi_board_title">Titolo de tabulo</string>
     <string name="poi_short_name">Mallonga nomo</string>
+    <string name="poi_club_aviation">Avia klubejo</string>
+    <string name="poi_club_bicycle">Bicikla klubejo</string>
+    <string name="poi_club_doityourself">Memfarula klubejo</string>
 </resources>
