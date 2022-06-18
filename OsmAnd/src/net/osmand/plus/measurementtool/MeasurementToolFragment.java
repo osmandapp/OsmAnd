@@ -933,16 +933,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void calculateSrtmTrack() {
 		GpxData gpxData = editingCtx.getGpxData();
 		if (isCalculateSrtmMode() && gpxData != null && calculateSrtmTask == null) {
-			GPXFile gpxFile = gpxData.getGpxFile();
-			GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
-			if (!analysis.hasElevationData) {
-				try {
-					File file = new File(gpxFile.path);
-					calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, file,
-							file.getName(), false, Collections.emptyMap(), null, this);
-				} catch (IOException e) {
-					Toast.makeText(getMapActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-				}
+			try {
+				GPXFile gpxFile = gpxData.getGpxFile();
+				File file = new File(gpxFile.path);
+				calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, file,
+						file.getName(), false, Collections.emptyMap(), null, this);
+			} catch (IOException e) {
+				Toast.makeText(getMapActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -1227,6 +1224,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		calculateSrtmTrack();
 		setInfoType(InfoType.GRAPH);
 		infoTypeBtn.setSelectedItem(graphBtn);
+		updateInfoView();
 	}
 
 	@Override

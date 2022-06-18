@@ -73,6 +73,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private View commonGraphContainer;
 	private View customGraphContainer;
 	private View messageContainer;
+	private View buttonContainer;
 	private CommonChartAdapter commonGraphAdapter;
 	private CustomChartAdapter customGraphAdapter;
 	private HorizontalChipsView graphTypesMenu;
@@ -113,6 +114,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		customGraphAdapter.setLayoutChangeListener(this::setLayoutNeeded);
 
 		messageContainer = view.findViewById(R.id.message_container);
+		buttonContainer = view.findViewById(R.id.btn_container);
 
 		ViewGroup scrollView = view.findViewById(R.id.scroll_view);
 		ChartAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList(customGraphAdapter), scrollView);
@@ -245,50 +247,53 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	}
 
 	private void hideAll() {
-		commonGraphContainer.setVisibility(View.GONE);
-		customGraphContainer.setVisibility(View.GONE);
-		messageContainer.setVisibility(View.GONE);
+		AndroidUiHelper.setVisibility(View.GONE,
+				commonGraphContainer,
+				customGraphContainer,
+				messageContainer,
+				buttonContainer);
 	}
 
 	private void updateMessage() {
 		if (!editingCtx.isPointsEnoughToCalculateRoute()) {
 			String desc = app.getString(R.string.message_you_need_add_two_points_to_show_graphs);
-			showMessage(null, desc, INVALID_ID, 0, null, null);
+			showMessage(null, desc, INVALID_ID, 0);
 		} else if (isRouteCalculating()) {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
 			String desc = app.getString(R.string.message_graph_will_be_available_after_recalculation);
-			showMessage(null, desc, INVALID_ID, progressSize, null, null);
+			showMessage(null, desc, INVALID_ID, progressSize);
+		} else if (visibleType.canBeCalculated() && fragment.isCalculatingSrtmData()) {
+			String desc = app.getString(R.string.calculating_altitude);
+			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
+			String buttonText = app.getString(R.string.shared_string_cancel);
+			showMessage(null, desc, INVALID_ID, progressSize);
+			showButton(buttonText, v -> fragment.stopUploadFileTask());
+		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
+			String title = app.getString(R.string.no_altitude_data);
+			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
+			showMessage(title, desc, R.drawable.ic_action_altitude_average, 0);
+			showCalculateAltitudeButton();
 		} else if (visibleType.hasData()) {
 			showGraph();
-		} else if (visibleType.canBeCalculated()) {
-			if (fragment.isCalculatingSrtmData()) {
-				String desc = app.getString(R.string.calculating_altitude);
-				int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
-				String buttonText = app.getString(R.string.shared_string_cancel);
-				showMessage(null, desc, INVALID_ID, progressSize, buttonText, v -> fragment.stopUploadFileTask());
-			} else {
-				String title = app.getString(R.string.no_altitude_data);
-				String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
-				String buttonText = app.getString(R.string.calculate_altitude);
-				showMessage(title, desc, R.drawable.ic_action_altitude_average, 0, buttonText,
-						v -> fragment.getAltitudeClick());
+			if (visibleType.canBeCalculated) {
+				showCalculateAltitudeButton();
 			}
 		}
+	}
+
+	private void showCalculateAltitudeButton() {
+		showButton(app.getString(R.string.calculate_altitude), v -> fragment.getAltitudeClick());
 	}
 
 	private void showMessage(@Nullable String title,
 	                         @NonNull String description,
 	                         @DrawableRes int iconId,
-	                         int progressSize,
-	                         @Nullable String btnTitle,
-	                         @Nullable OnClickListener listener) {
-		messageContainer.setVisibility(View.VISIBLE);
-
+	                         int progressSize) {
 		TextView messageTitle = messageContainer.findViewById(R.id.message_title);
 		if (!Algorithms.isEmpty(title)) {
 			messageTitle.setText(title);
 		}
-		AndroidUiHelper.updateVisibility(messageTitle, !Algorithms.isEmpty(title));
+		AndroidUiHelper.updateVisibility(messageTitle, title != null);
 
 		TextView messageDesc = messageContainer.findViewById(R.id.message_text);
 		messageDesc.setText(description);
@@ -306,14 +311,14 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		progressBar.setLayoutParams(params);
 		AndroidUiHelper.updateVisibility(progressBar, progressSize != 0);
 
-		View btnContainer = messageContainer.findViewById(R.id.btn_container);
-		TextView tvBtnTitle = btnContainer.findViewById(R.id.btn_text);
-		tvBtnTitle.setText(btnTitle);
-		AndroidUiHelper.updateVisibility(btnContainer, btnTitle != null);
+		AndroidUiHelper.updateVisibility(messageContainer, true);
+	}
 
-		if (listener != null) {
-			btnContainer.setOnClickListener(listener);
-		}
+	private void showButton(@NonNull String buttonTitle, @NonNull OnClickListener listener) {
+		TextView tvBtnTitle = buttonContainer.findViewById(R.id.btn_text);
+		tvBtnTitle.setText(buttonTitle);
+		buttonContainer.setOnClickListener(listener);
+		AndroidUiHelper.updateVisibility(buttonContainer, true);
 	}
 
 	private void showGraph() {
