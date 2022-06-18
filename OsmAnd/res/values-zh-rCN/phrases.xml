@@ -1590,7 +1590,7 @@
     <string name="poi_handwashing_creme_no">洗手霜：否</string>
     <string name="poi_handwashing_hand_cleaning_paste_no">洗手膏：无</string>
     <string name="poi_handwashing_creme_yes">洗手霜：是</string>
-    <string name="poi_hot_water_no">热水：否</string>
+    <string name="poi_hot_water_no">有热水：否</string>
     <string name="poi_hot_water_yes">热水：是</string>
     <string name="poi_map_type_topo">地图类型：地形图</string>
     <string name="poi_map_type_scheme">地图类型：大纲（scheme）</string>
@@ -1730,7 +1730,7 @@
     <string name="poi_membership_no">否</string>
     <string name="poi_distillery">蒸馏酿酒厂</string>
     <string name="poi_toilets_hands_drying_no">干手：否</string>
-    <string name="poi_toilets_handwashing_yes">洗手：是</string>
+    <string name="poi_toilets_handwashing_yes">可洗手：是</string>
     <string name="poi_museum_aerospace">航空航天</string>
     <string name="poi_museum_maritime">海事</string>
     <string name="poi_museum_technology">科技</string>
