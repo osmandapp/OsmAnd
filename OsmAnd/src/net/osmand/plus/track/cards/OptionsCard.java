@@ -47,7 +47,8 @@ public class OptionsCard extends MapBaseCard {
 	public static final int RENAME_BUTTON_INDEX = 9;
 	public static final int CHANGE_FOLDER_BUTTON_INDEX = 10;
 	public static final int GPS_FILTER_BUTTON_INDEX = 11;
-	public static final int DELETE_BUTTON_INDEX = 12;
+	public static final int ALTITUDE_CORRECTION_BUTTON_INDEX = 12;
+	public static final int DELETE_BUTTON_INDEX = 13;
 
 	private final TrackDisplayHelper displayHelper;
 	private final SelectedGpxFile selectedGpxFile;
@@ -95,16 +96,22 @@ public class OptionsCard extends MapBaseCard {
 			if (uploadOsmItem != null) {
 				items.add(uploadOsmItem);
 			}
+
 			items.add(createDividerItem());
+
 			if (!FileUtils.isTempFile(app, gpxFile.path)) {
 				items.add(createEditItem());
 			}
 			items.add(createRenameItem());
 			items.add(createChangeFolderItem());
+
+			items.add(createDividerItem());
+
 			boolean plainTrack = gpxFile.hasTrkPt() && !gpxFile.hasRoute() && !gpxFile.hasRtePt();
 			if (plainTrack) {
 				items.add(createGpsFilterItem());
 			}
+			items.add(createAltitudeCorrectionItem());
 			items.add(createDividerItem());
 			items.add(createDeleteItem());
 		}
@@ -268,6 +275,16 @@ public class OptionsCard extends MapBaseCard {
 				.setTitle(app.getString(R.string.shared_string_gps_filter))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(GPS_FILTER_BUTTON_INDEX))
+				.create();
+	}
+
+	private BaseBottomSheetItem createAltitudeCorrectionItem() {
+		Drawable altitudeCorrectionIcon = getActiveIcon(R.drawable.ic_action_altitude_average);
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(AndroidUtils.getDrawableForDirection(app, altitudeCorrectionIcon))
+				.setTitle(app.getString(R.string.altitude_correction))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> notifyButtonPressed(ALTITUDE_CORRECTION_BUTTON_INDEX))
 				.create();
 	}
 
