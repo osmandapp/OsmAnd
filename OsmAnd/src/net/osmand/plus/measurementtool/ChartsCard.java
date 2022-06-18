@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -267,22 +268,22 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
 			String buttonText = app.getString(R.string.shared_string_cancel);
 			showMessage(null, desc, INVALID_ID, progressSize);
-			showButton(buttonText, v -> fragment.stopUploadFileTask());
+			showButton(buttonText, v -> fragment.stopUploadFileTask(), true);
 		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
 			String title = app.getString(R.string.no_altitude_data);
 			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
 			showMessage(title, desc, R.drawable.ic_action_altitude_average, 0);
-			showCalculateAltitudeButton();
+			showCalculateAltitudeButton(true);
 		} else if (visibleType.hasData()) {
 			showGraph();
 			if (visibleType.canBeCalculated) {
-				showCalculateAltitudeButton();
+				showCalculateAltitudeButton(false);
 			}
 		}
 	}
 
-	private void showCalculateAltitudeButton() {
-		showButton(app.getString(R.string.calculate_altitude), v -> fragment.getAltitudeClick());
+	private void showCalculateAltitudeButton(boolean addStartPadding) {
+		showButton(app.getString(R.string.calculate_altitude), v -> fragment.getAltitudeClick(), addStartPadding);
 	}
 
 	private void showMessage(@Nullable String title,
@@ -314,9 +315,18 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		AndroidUiHelper.updateVisibility(messageContainer, true);
 	}
 
-	private void showButton(@NonNull String buttonTitle, @NonNull OnClickListener listener) {
-		TextView tvBtnTitle = buttonContainer.findViewById(R.id.btn_text);
-		tvBtnTitle.setText(buttonTitle);
+	private void showButton(@NonNull String buttonTitle, @NonNull OnClickListener listener, boolean addStartPadding) {
+		View buttonPadding = buttonContainer.findViewById(R.id.button_padding);
+		AndroidUiHelper.updateVisibility(buttonPadding, addStartPadding);
+
+		View buttonDivider = buttonContainer.findViewById(R.id.button_divider);
+		MarginLayoutParams layoutParams = (MarginLayoutParams) buttonDivider.getLayoutParams();
+		layoutParams.setMarginStart(addStartPadding ? getDimen(R.dimen.content_padding) : 0);
+		buttonDivider.setLayoutParams(layoutParams);
+
+		TextView title = buttonContainer.findViewById(R.id.btn_text);
+		title.setText(buttonTitle);
+
 		buttonContainer.setOnClickListener(listener);
 		AndroidUiHelper.updateVisibility(buttonContainer, true);
 	}
