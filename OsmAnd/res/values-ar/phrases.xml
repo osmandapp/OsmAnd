@@ -4336,4 +4336,8 @@
     <string name="poi_club_amateur_radio">نادي هواة الراديو</string>
     <string name="poi_club_religion">نادي ديانة</string>
     <string name="poi_club_dog">نادي الكلاب</string>
+    <string name="poi_short_name">الاسم المختصر</string>
+    <string name="poi_club_aviation">نادي الطيران</string>
+    <string name="poi_club_doityourself">نادي DIY</string>
+    <string name="poi_club_bicycle">نادي الدراجات الهوائية</string>
 </resources>

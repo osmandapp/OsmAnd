@@ -2693,8 +2693,8 @@
     <string name="welcome_to_open_beta">Willkommen zur Open Beta</string>
     <string name="wikivoyage_travel_guide">Reiseführer</string>
     <string name="wikivoyage_travel_guide_descr">Führt innerhalb von OsmAnd ohne Internetverbindung zu den interessantesten Orten der Welt.</string>
-    <string name="monthly_map_updates">Kartenaktualisierungen: jeden Monat</string>
-    <string name="daily_map_updates">Stündliche Kartenaktualisierungen</string>
+    <string name="monthly_map_updates">Monatliche Kartenaktualisierung</string>
+    <string name="daily_map_updates">Stündliche Kartenaktualisierung</string>
     <string name="in_app_purchase">In-App-Kauf</string>
     <string name="in_app_purchase_desc">Einmalige Zahlung</string>
     <string name="in_app_purchase_desc_ex">Nach dem Kauf steht es Ihnen dauerhaft zur Verfügung.</string>
@@ -4712,4 +4712,6 @@
     <string name="calculating_altitude">Berechne die Höhe</string>
     <string name="calculate_online_altitude_descr">Die Höhendaten werden auf dem OsmAnd-Server berechnet.</string>
     <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
+    <string name="map_markers_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
+    <string name="map_markers_bar_widget_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
 </resources>

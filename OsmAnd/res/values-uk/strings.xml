@@ -4709,4 +4709,5 @@
     <string name="routing_attr_motor_type_diesel_name">Дизель</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_lpg_name">Пропан</string>
+    <string name="lang_ckb">Центральна курдська</string>
 </resources>

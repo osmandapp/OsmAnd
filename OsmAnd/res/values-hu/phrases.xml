@@ -4338,4 +4338,7 @@
     <string name="poi_club_dog">Kutyásklub</string>
     <string name="poi_board_title">Tábla címe</string>
     <string name="poi_short_name">Rövid név</string>
+    <string name="poi_club_aviation">Repülőklub</string>
+    <string name="poi_club_doityourself">Barkácsklub</string>
+    <string name="poi_club_bicycle">Kerékpáros klub</string>
 </resources>

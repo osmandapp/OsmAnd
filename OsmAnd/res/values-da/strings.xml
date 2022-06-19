@@ -4715,4 +4715,5 @@
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_name">Motortype</string>
     <string name="routing_attr_motor_type_description">Til CO2-beregning</string>
+    <string name="lang_ckb">Sorani</string>
 </resources>

@@ -1113,7 +1113,7 @@
     <string name="rendering_value_browse_map_name">Карта</string>
     <string name="rendering_value_car_name">Автомобил</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
-    <string name="rendering_value_pedestrian_name">Пешеходец</string>
+    <string name="rendering_value_pedestrian_name">Пеша</string>
     <string name="rendering_attr_coloredBuildings_name">Оцветяване на сградите в зависимост от типа им</string>
     <string name="continue_navigation">Продължи навигацията</string>
     <string name="pause_navigation">Пауза на навигацията</string>
@@ -1385,7 +1385,7 @@
     <string name="share_fav_subject">Споделени места чрез OsmAnd</string>
     <string name="import_file_favourites">Запазване като файл на GPX или внасяне в „Избрани“\?</string>
     <string name="voices">Гласови напътствия</string>
-    <string name="rendering_value_pink_name">розов</string>
+    <string name="rendering_value_pink_name">Розова</string>
     <string name="speed_limit_exceed">Толеранс за скоростта</string>
     <string name="delay_navigation_start">Автоматичен старт на маршрутизацията</string>
     <string name="gpx_info_waypoints">Точки: %1$s</string>
@@ -1412,7 +1412,7 @@
     <string name="rendering_value_brown_name">кафяв</string>
     <string name="osmo_edit_color">Цвят на показване</string>
     <string name="rendering_value_disabled_name">Спрян</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Оцветяване спрямо обхвата</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Принадкежност към мрежа</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Излизане</string>
     <string name="osm_changes_added_to_local_edits">Промените в OSM са добавени към списъка с промени</string>
@@ -2806,4 +2806,20 @@
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_diesel_name">Дизел</string>
     <string name="co2_mission">Емисии от CO2</string>
+    <string name="rendering_value_darkyellow_name">Тъмно жълта</string>
+    <string name="rendering_value_omit_name">Пропускане</string>
+    <string name="rendering_value_light_brown_name">Светло жълта</string>
+    <string name="rendering_value_dark_brown_name">Тъмно кафява</string>
+    <string name="backup_conflicts">Конфликти</string>
+    <string name="rendering_value_fine_name">Фина</string>
+    <string name="rendering_value_translucent_pink_name">Розова прозрачна</string>
+    <string name="rendering_value_high_name">Висока</string>
+    <string name="rendering_value_bold_name">Дебела</string>
+    <string name="rendering_value_low_name">Ниска</string>
+    <string name="rendering_value_medium_w_name">Средна</string>
+    <string name="rendering_value_thin_name">Тънка</string>
+    <string name="rendering_value_medium_name">Средна</string>
+    <string name="rendering_value_black_name">Черна</string>
+    <string name="rendering_value_white_name">Бяла</string>
+    <string name="rendering_value_thick_name">Дебела</string>
 </resources>
