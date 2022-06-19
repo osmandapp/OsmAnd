@@ -3514,9 +3514,6 @@
     <string name="latest_openstreetmap_update">最新的 OpenStreetMap 更新可用：</string>
     <string name="last_time_checked">上次检查： %s</string>
     <string name="update_frequency">更新频率</string>
-    <string name="live_update_frequency_week_variant">将每周检查一次地图更新。下次 %1$s 在 %2$s 。</string>
-    <string name="live_update_frequency_day_variant">将每天检查地图更新。下次 %1$s 在 %2$s 。</string>
-    <string name="live_update_frequency_hour_variant">将每小时检查一次地图更新。下次 %1$s 在 %2$s 。</string>
     <string name="purchases">购买</string>
     <string name="select_category_descr">选择类别或添加新类别</string>
     <string name="track_recording_will_be_continued">录制将继续。</string>

@@ -177,49 +177,41 @@ public class AndroidNetworkUtils {
 		}.executeOnExecutor(executor, (Void) null);
 	}
 
-	public static void sendRequestAsync(final OsmandApplication ctx,
-										final String url,
-										final Map<String, String> parameters,
-										final String userOperation,
-										final boolean toastAllowed,
-										final boolean post,
-										final OnRequestResultListener listener) {
-		sendRequestAsync(ctx, url, parameters, userOperation, toastAllowed, post, listener,
-				AsyncTask.THREAD_POOL_EXECUTOR);
-	}
+	public static void sendRequestAsync(@Nullable OsmandApplication app,
+	                                    @NonNull String url,
+	                                    @Nullable Map<String, String> parameters,
+	                                    @Nullable String userOperation,
+	                                    boolean toastAllowed,
+	                                    boolean post,
+	                                    @Nullable OnRequestResultListener listener) {
+		new AsyncTask<Void, Void, Void>() {
 
-	public static void sendRequestAsync(final OsmandApplication ctx,
-										final String url,
-										final Map<String, String> parameters,
-										final String userOperation,
-										final boolean toastAllowed,
-										final boolean post,
-										final OnRequestResultListener listener,
-										final Executor executor) {
-		new AsyncTask<Void, Void, String[]>() {
+			private String result;
+			private String error;
+			private Integer resultCode;
 
 			@Override
-			protected String[] doInBackground(Void... params) {
-				final String[] res = {null, null};
+			protected Void doInBackground(Void... params) {
 				try {
-					sendRequest(ctx, url, parameters, userOperation, toastAllowed, post, (result, error, resultCode) -> {
-						res[0] = result;
-						res[1] = error;
+					sendRequest(app, url, parameters, userOperation, toastAllowed, post, (result, error, resultCode) -> {
+						this.result = result;
+						this.error = error;
+						this.resultCode = resultCode;
 					});
 				} catch (Exception e) {
 					// ignore
 				}
-				return res;
+				return null;
 			}
 
 			@Override
-			protected void onPostExecute(String[] response) {
+			protected void onPostExecute(Void param) {
 				if (listener != null) {
-					listener.onResult(response[0], response[1], null);
+					listener.onResult(result, error, resultCode);
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void downloadFileAsync(final String url,

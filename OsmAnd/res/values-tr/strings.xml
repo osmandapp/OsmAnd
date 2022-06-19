@@ -4015,9 +4015,6 @@
     <string name="updated">Güncellendi: %s</string>
     <string name="last_time_checked">Son denetleme: %s</string>
     <string name="update_frequency">Güncelleme sıklığı</string>
-    <string name="live_update_frequency_week_variant">Harita güncellemeleri her hafta denetlenecek. Bir sonraki: %1$s, %2$s.</string>
-    <string name="live_update_frequency_day_variant">Harita güncellemeleri her gün denetlenecek. Bir sonraki: %1$s, %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Harita güncellemeleri her saat denetlenecek. Bir sonraki: %1$s, %2$s.</string>
     <string name="delete_updates">Güncellemeleri sil</string>
     <string name="live_update_delete_updates_msg">Tüm %s canlı güncelleme silinsin mi\?</string>
     <string name="purchases">Satın almalar</string>

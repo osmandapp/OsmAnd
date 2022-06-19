@@ -3996,9 +3996,6 @@
     <string name="updated">עדכון: %s</string>
     <string name="last_time_checked">מועד הבדיקה האחרונה: %s</string>
     <string name="update_frequency">תדירות עדכון</string>
-    <string name="live_update_frequency_week_variant">בכל שבוע יתבצע חיפוש לעדכוני מפה. הפעם הבאה %1$s ב־%2$s.</string>
-    <string name="live_update_frequency_day_variant">בכל יום יתבצע חיפוש לעדכוני מפה. הפעם הבאה %1$s ב־%2$s.</string>
-    <string name="live_update_frequency_hour_variant">בכל שעה יתבצע חיפוש לעדכוני מפה. הפעם הבאה %1$s ב־%2$s.</string>
     <string name="delete_updates">מחיקת עדכונים</string>
     <string name="purchases">רכישות</string>
     <string name="select_category_descr">נא לבחור קטגוריה או להוסיף אחת חדשה</string>

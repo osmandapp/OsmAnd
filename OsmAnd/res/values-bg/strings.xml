@@ -2616,10 +2616,7 @@
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="export_profile">Изнасяне на профил</string>
     <string name="profile_import">Внасяне на профил</string>
-    <string name="live_update_frequency_day_variant">Проверката за обновяване е всеки ден. Следващата %1$s е в %2$s.</string>
-    <string name="live_update_frequency_week_variant">Проверката за обновяване е всяка седмица. Следващата %1$s е в %2$s.</string>
     <string name="update_frequency">Честота на проверка за обнояване</string>
-    <string name="live_update_frequency_hour_variant">Проверката за обновяване е през час. Следващата %1$s е в %2$s.</string>
     <string name="use_osm_live_routing">Маршрутизация на OsmAnd Live</string>
     <string name="turn_on_public_transport_description">Включете, за да виждате маршрутите на обществения транспорт на картата.</string>
     <string name="change_default_appearance">Промяна на подразбирания външен вид</string>

@@ -3941,7 +3941,6 @@
     <string name="add_online_routing_engine">Adicionar motor de roteamento online</string>
     <string name="announcement_time_passing">Ao passar</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta elétrica</string>
-    <string name="live_update_frequency_hour_variant">As atualizações ao mapa serão verificadas a todas as horas. Próxima %1$s em %2$s.</string>
     <string name="live_update_delete_updates_msg">Eliminar todas as %s atualizações OsmAnd Live\?</string>
     <string name="release_4_0_beta">• Tradução para português europeu completamente revista.
 \n
@@ -3995,8 +3994,6 @@
     <string name="select_segments">Selecionar segmentos</string>
     <string name="select_segments_description">%1$s contém mais do que um segmento, tem de selecionar a parte necessária para a navegação.</string>
     <string name="quick_action_coordinates_widget_descr">Um alternador para mostrar ou ocultar um widget de coordenadas no mapa.</string>
-    <string name="live_update_frequency_week_variant">As atualizações do mapa serão verificadas todas as semanas. Próxima %1$s em %2$s.</string>
-    <string name="live_update_frequency_day_variant">As atualizações do mapa serão verificadas todos os dias. Próxima %1$s em %2$s.</string>
     <string name="empty_purchases_description">Se as suas compras não aparecerem aqui, toque em “%1$s” ou contacte a nossa equipa de suporte.</string>
     <string name="routing_attr_prefer_hiking_routes_description">Preferir rotas de caminhadas</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rotas de caminhadas</string>

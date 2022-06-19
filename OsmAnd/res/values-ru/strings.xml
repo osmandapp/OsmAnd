@@ -3997,9 +3997,6 @@
     <string name="updated">Обновлено: %s</string>
     <string name="last_time_checked">Последняя проверка: %s</string>
     <string name="update_frequency">Частота обновления</string>
-    <string name="live_update_frequency_week_variant">Проверка обновлений раз в неделю. Ближайшая %1$s в %2$s.</string>
-    <string name="live_update_frequency_day_variant">Проверка обновлений каждый день. Ближайшая %1$s в %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Проверка обновлений каждый час. Ближайшая %1$s в %2$s.</string>
     <string name="delete_updates">Удалить обновления</string>
     <string name="live_update_delete_updates_msg">Удалить все live-обновления для %s\?</string>
     <string name="purchases">Покупки</string>

@@ -3936,9 +3936,6 @@ POIの更新は利用できません</string>
     <string name="updated">更新: %s</string>
     <string name="last_time_checked">最後にチェック時間: %s</string>
     <string name="update_frequency">更新間隔</string>
-    <string name="live_update_frequency_week_variant">マップの更新は毎週チェックされます。次回は%2$sの%1$sです。</string>
-    <string name="live_update_frequency_day_variant">マップの更新は毎日チェックされます。次回は%2$sの%1$sです。</string>
-    <string name="live_update_frequency_hour_variant">マップの更新は1時間ごとにチェックされます。次回は%2$sの%1$sです。</string>
     <string name="delete_updates">更新の削除</string>
     <string name="live_update_delete_updates_msg">%sのライブアップデートをすべて削除しますか？</string>
     <string name="purchases">購入</string>
