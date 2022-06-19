@@ -4336,6 +4336,7 @@
     <string name="poi_club_dog">Клуб собаководства</string>
     <string name="poi_board_title">Заголовок информационного щита</string>
     <string name="poi_short_name">Краткое название</string>
-    <string name="poi_club_doityourself">Клуб сделай сам</string>
-    <string name="poi_club_bicycle">Велосипедный клуб</string>
+    <string name="poi_club_doityourself">Клуб сделай сам;DIY клуб</string>
+    <string name="poi_club_bicycle">Велоклуб;Велосипедный клуб</string>
+    <string name="poi_club_aviation">Авиаклуб;Авиационный клуб</string>
 </resources>
