@@ -4687,4 +4687,5 @@
     <string name="get_altitude_information">Uzyskaj informacje o wysokości</string>
     <string name="route_maneuvers">Manewry na trasie</string>
     <string name="calculating_altitude">Obliczanie wysokości</string>
+    <string name="lang_ckb">Kurdyjski centralny</string>
 </resources>
