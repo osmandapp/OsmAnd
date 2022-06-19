@@ -211,7 +211,7 @@
     <string name="poi_railway_platform">Plataforma ferroviária</string>
     <string name="poi_halt">Parada ferroviária</string>
     <string name="poi_subway_entrance">Entrada do metrô</string>
-    <string name="poi_subway_station">Sim</string>
+    <string name="poi_subway_station">Sim; estação de metrô</string>
     <string name="poi_vacuum_cleaner">Loja de aspiradores de pó</string>
     <string name="poi_variety_store">Loja de variedades</string>
     <string name="poi_video">Loja / locadora de vídeos</string>
@@ -220,7 +220,7 @@
     <string name="poi_helipad">Heliponto</string>
     <string name="poi_railway_buffer_stop">Para-choque de via</string>
     <string name="poi_taxi">Ponto de táxi</string>
-    <string name="poi_aerodrome">Aeroporto</string>
+    <string name="poi_aerodrome">Aeroporto;Aeródromo</string>
     <string name="poi_runway">Pista de pouso/decolagem</string>
     <string name="poi_aeroway_terminal">Terminal de aeroporto</string>
     <string name="poi_aeroway_gate">Portão de embarque</string>
@@ -476,7 +476,7 @@
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Hotel estrada</string>
     <string name="poi_alpine_hut">Abrigo de montanha</string>
-    <string name="poi_chalet">Chalé</string>
+    <string name="poi_chalet">Chalet;Abrigo</string>
     <string name="poi_apartment">Apartamento</string>
     <string name="poi_wilderness_hut">Abrigo no deserto</string>
     <string name="poi_cabin">Cabana</string>
@@ -859,7 +859,7 @@
     <string name="poi_enforcement_check">Fiscalização: verificação</string>
     <string name="poi_cutline">Linha de corte florestal</string>
     <string name="poi_country">País</string>
-    <string name="poi_fee_yes">Sim</string>
+    <string name="poi_fee_yes">Sim;Grátis</string>
     <string name="poi_abandoned_poi">Objeto abandonado</string>
     <string name="poi_route_hiking_iwn_poi">Rota internacional de caminhada</string>
     <string name="poi_route_hiking_nwn_poi">Rota nacional de caminhada</string>
@@ -877,7 +877,7 @@
     <string name="poi_access_delivery">Acesso para entrega</string>
     <string name="poi_access_agricultural">Acesso agrícola</string>
     <string name="poi_monitoring_station">Estação de medição ambiental</string>
-    <string name="poi_capital">Sim</string>
+    <string name="poi_capital">Sim;Capital</string>
     <string name="poi_fee_no">Não</string>
     <string name="poi_email">Email</string>
     <string name="poi_fax">Fax</string>
@@ -953,11 +953,11 @@
     <string name="poi_recycling_cars">Carros</string>
     <string name="poi_recycling_bicycles">Bicicletas</string>
     <string name="poi_shower">Chuveiro</string>
-    <string name="poi_drinking_water_yes">Sim</string>
+    <string name="poi_drinking_water_yes">Sim;Água potável</string>
     <string name="poi_drinking_water_no">Não</string>
     <string name="poi_supervised_yes">Supervisionado</string>
     <string name="poi_supervised_no">Sem supervisão</string>
-    <string name="poi_seasonal_yes">Sim</string>
+    <string name="poi_seasonal_yes">Sim;Sazonal</string>
     <string name="poi_seasonal_no">Não</string>
     <string name="poi_seasonal_dry_season">Estação seca</string>
     <string name="poi_seasonal_wet_season">Estação chuvosa</string>
@@ -1060,7 +1060,7 @@
     <string name="poi_brownfield">Terreno abandonado</string>
     <string name="poi_greenfield">Terreno virgem</string>
     <string name="poi_start_date">Data de início / inauguração</string>
-    <string name="poi_wheelchair_yes">Sim</string>
+    <string name="poi_wheelchair_yes">Sim;Cadeira de rodas</string>
     <string name="poi_bunker_silo">Silo trincheira</string>
     <string name="poi_content_silage">Conteúdo: silagem</string>
     <string name="poi_content_water">Conteúdo: água</string>
@@ -4249,4 +4249,6 @@
     <string name="poi_computer_sales_no">Venda de computadores: não</string>
     <string name="poi_computer_repair_no">Conserto de computadores: não</string>
     <string name="poi_museum_ethnography">Etnográfico</string>
+    <string name="poi_laundry_service_filter">Serviço de lavanderia</string>
+    <string name="poi_dry_cleaning_filter">Limpeza à seco</string>
 </resources>
