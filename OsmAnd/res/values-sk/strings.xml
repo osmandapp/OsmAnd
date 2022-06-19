@@ -4642,7 +4642,6 @@
     <string name="app_mode_mountain_bicycle">Horský bicykel</string>
     <string name="route_maneuvers_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
     <string name="calculating_altitude">Vypočítava sa výška</string>
-    <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd.</string>
     <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
     <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
     <string name="explore_plans">Preskúmať možnosti predplatného</string>

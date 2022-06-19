@@ -2581,7 +2581,6 @@
     <string name="map_markers_desc">Ar yr ategyn bar uchaf gallwch weld pellter a chyfeiriad y nodwr o\'r lleoliad presennol. Mae\'n bosib ei ffurfweddu i weld un neu ddau farcwr yn yr ategyn.</string>
     <string name="calculate_altitude">Cyfrifo\'r uchder</string>
     <string name="no_altitude_data">Dim data uchder</string>
-    <string name="calculate_online_altitude_descr">Caiff data uchder ei gyfrifo ar weinydd OsmAnd.</string>
     <string name="map_widget_current_speed">Cyflymder cyfredol</string>
     <string name="configure_screen_widgets_descr">Dewiswch ochr o\'r sgrin i ychwanegu neu ail-drefnu ategion.</string>
     <string name="import_profile">Mewnforio proffil</string>

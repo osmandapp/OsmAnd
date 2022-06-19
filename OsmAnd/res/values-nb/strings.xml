@@ -4640,7 +4640,6 @@
     <string name="calculate_altitude">Regn ut høyde</string>
     <string name="no_altitude_data">Ingen høydedata</string>
     <string name="navigation_points">Navigasjonspunkter</string>
-    <string name="calculate_online_altitude_descr">Høydedata vil bli regnet ut på OsmAnd-tjeneren.</string>
     <string name="calculating_altitude">Beregner høyde</string>
     <string name="get_altitude_information">Hent høydeinfo</string>
     <string name="turn_on_public_transport_description">Slå på for å vise offentlige transportruter på kartet.</string>

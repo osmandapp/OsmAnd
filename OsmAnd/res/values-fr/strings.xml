@@ -4639,7 +4639,6 @@
     <string name="calculating_altitude">Calcul de l\'altitude</string>
     <string name="calculate_online">Calculer en ligne</string>
     <string name="shared_string_speed">Vitesse</string>
-    <string name="calculate_online_altitude_descr">Les données d\'altitude seront calculées sur le serveur d\'OsmAnd.</string>
     <string name="calculate_altitude">Calculer l\'altitude</string>
     <string name="no_altitude_data">Aucune donnée d\'altitude</string>
     <string name="gps_info_widget_desc">Widget indiquant le nombre de satellites que l\'appareil détecte et utilise actuellement.</string>

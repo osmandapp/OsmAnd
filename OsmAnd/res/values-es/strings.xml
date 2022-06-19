@@ -4666,7 +4666,6 @@
     <string name="routing_attr_avoid_highway_name">Evitar los caminos</string>
     <string name="max_speed_widget_desc">Este widget muestra el límite de velocidad del camino por el que se circula actualmente.</string>
     <string name="current_speed_widget_desc">Este widget muestra la velocidad actual detectada por el sensor del GPS.</string>
-    <string name="calculate_online_altitude_descr">Los datos de altitud serán calculados en el servidor de OsmAnd.</string>
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
     <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
     <string name="colour_of_circles">Color de los círculos</string>
