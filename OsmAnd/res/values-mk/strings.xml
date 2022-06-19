@@ -1467,4 +1467,43 @@
 \n
 \n</string>
     <string name="shared_string_calculate">Presmetaj</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="app_mode_utv">Eden po drug</string>
+    <string name="data_storage_space_description">%1$s Besplatni GB(od %2$s GB)</string>
+    <string name="enter_path_to_folder">Vnesete ja patekata do papkata</string>
+    <string name="shared_string_select_folder">Papka…</string>
+    <string name="change_data_storage_full_description">Da se premestat datotekite so podatoci OsmAnd na novata destinacija\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="move_maps_to_new_destination">Premestete se na novata destinacija</string>
+    <string name="paste_Osmand_data_folder_path">Prekopirajte ja patekata do papkata so podatoci OsmAnd</string>
+    <string name="change_data_storage_folder">Promenete ja papkata za skladiranje</string>
+    <string name="change_osmand_data_folder_question">Da se smeni papkata so podatoci OsmAnd\?</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Terenski park</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Sanki</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Pocetnik</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Lesno</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Sredno</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Napreden</string>
+    <string name="rendering_attr_piste_type_sled_name">Sanka</string>
+    <string name="rendering_attr_piste_type_hike_name">Planinari</string>
+    <string name="rendering_attr_piste_type_connection_name">Vrska</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skijacka marsruta</string>
+    <string name="rendering_attr_piste_type_downhill_name">Nadolnica</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nordiski</string>
+    <string name="routeInfo_piste_type_name">Tip na pateka</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Ekspert</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Besplatno vozenje</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremen</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Vozdušen pat</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Vrska</string>
+    <string name="avoid_in_routing_descr_">Izbegnuvajte odredeni pravci i tipovi patišta</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Nedefinirano</string>
+    <string name="routeInfo_piste_difficulty_name">Teskotii na patekata</string>
+    <string name="shared_string_osmand_usage">OsmAnd upotreba</string>
+    <string name="shared_sting_tiles">Plocki</string>
+    <string name="shared_string_maps">Karti</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
 </resources>
