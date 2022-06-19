@@ -3949,7 +3949,6 @@
     <string name="track_has_no_speed">Sled ne vsebuje podatkov o hitrosti.</string>
     <string name="track_has_no_altitude">Sled ne vsebuje podatkov o višini.</string>
     <string name="rendering_attr_natureReserves_name">Naravni rezervat</string>
-    <string name="live_update_frequency_week_variant">Posodobitve zemljevidov se preverjajo vsak teden. Naslednjič ob %2$s %1$s.</string>
     <string name="track_recording_description">Ustaviti snemanje\?
 \nVsi neshranjeni podatki bodo izgubljeni.</string>
     <string name="track_recording_title">Snemanje sledi je ustavljeno</string>
@@ -3985,8 +3984,6 @@
     <string name="shared_string_interval">Interval</string>
     <string name="track_recording_will_be_continued">Snemanje se bo nadaljevalo.</string>
     <string name="live_update_delete_updates_msg">Ali želiš izbrisati vseh %s posodobitev v živo\?</string>
-    <string name="live_update_frequency_hour_variant">Posodobitve zemljevidov se preverjajo vsako uro. Naslednjič ob %2$s %1$s.</string>
-    <string name="live_update_frequency_day_variant">Posodobitve zemljevidov se preverjajo vsak dan. Naslednjič ob %2$s %1$s.</string>
     <string name="last_time_checked">Zadnjič preverjeno: %s</string>
     <string name="updated">Posodobljeno: %s</string>
     <string name="latest_openstreetmap_update">Najnovejša posodobitev OpenStreetMap je na voljo:</string>
@@ -4109,7 +4106,6 @@
     <string name="route_maneuvers">Manevri na poti</string>
     <string name="get_altitude_information">Pridobi informacije o nadmorski višini</string>
     <string name="calculating_altitude">Izračunavanje nadmorske višine</string>
-    <string name="calculate_online_altitude_descr">Podatki o nadmorski višini bodo izračunani v strežniku OsmAnd.</string>
     <string name="calculate_online">Izračunavanje na spletu</string>
     <string name="track_attach_to_the_roads_descr">Proga bo na cesto pritrjena s pomočjo zemljevidov brez povezave, geometrija proge se bo spremenila.</string>
     <string name="no_altitude_data">Ni podatkov o nadmorski višini</string>

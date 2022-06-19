@@ -4006,8 +4006,6 @@ Lon %2$s</string>
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
     <string name="update_frequency">Frecuencia de actualización</string>
-    <string name="live_update_frequency_week_variant">As actualizacións do mapa serán comprobadas cada semana. A seguinte vez %1$s en %2$s.</string>
-    <string name="live_update_frequency_day_variant">As actualizacións do mapa serán comprobadas cada día. A seguinte vez %1$s en %2$s.</string>
     <string name="delete_updates">Eliminar actualizacións</string>
     <string name="live_update_delete_updates_msg">Eliminar todas as actualizacións ao vivo de %s\?</string>
     <string name="purchases">Compras</string>
@@ -4020,7 +4018,6 @@ Lon %2$s</string>
     <string name="track_has_no_altitude">A pista non contén datos de altitude.</string>
     <string name="track_has_no_speed">A pista non contén datos de velocidade.</string>
     <string name="select_another_colorization">Escolle outro tipo de cor.</string>
-    <string name="live_update_frequency_hour_variant">As actualizacións de mapas serán comprobadas cada hora. A seguinte vez %1$s en %2$s.</string>
     <string name="select_segments">Escoller segmentos</string>
     <string name="select_segments_description">%1$s contén máis dun segmento, precisas especificar a parte para a navegación.</string>
     <string name="segments_count">Segmento %1$d</string>

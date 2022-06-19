@@ -14,6 +14,16 @@
     <string name="lang_ckb">Central Kurdish</string>
     <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
+    <string name="updated_map_time">Updated: %1$s.</string>
+    <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
+    <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
+    <string name="next_live_update_time">Next update: in %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour.</string>
+    <string name="live_update_frequency_day_variant">Map updates will be checked every day.</string>
+    <string name="live_update_frequency_week_variant">Map updates will be checked every week.</string>
+    <string name="altitude_correction">Altitude correction</string>
+    <string name="no_altitude_data_desc">You can attach your track to the roads to get %1$s data or calculate it online.</string>
+    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on Satellite Imagery and digital elevation models. It could vary from device recorded altitude and could be used as altitude correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
@@ -99,7 +109,6 @@
     <string name="route_maneuvers">Route maneuvers</string>
     <string name="get_altitude_information">Get Altitude information</string>
     <string name="calculating_altitude">Calculating altitude</string>
-    <string name="calculate_online_altitude_descr">Altitude data will be calculated on OsmAnd server.</string>
     <string name="calculate_online">Calculate online</string>
     <string name="track_attach_to_the_roads_descr">Track will be attached to the road using offline maps, track geometry will be changed.</string>
     <string name="get_altitude_data">Get altitude data</string>
@@ -639,9 +648,6 @@
     <string name="purchases">Purchases</string>
     <string name="live_update_delete_updates_msg">Delete all %s live updates?</string>
     <string name="delete_updates">Delete updates</string>
-    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_week_variant">Map updates will be checked every week. Next time %1$s in %2$s.</string>
     <string name="update_frequency">Update frequency</string>
     <string name="last_time_checked">Last time checked: %s</string>
     <string name="updated">Updated: %s</string>

@@ -4021,9 +4021,6 @@
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Kérjük válasszon másik színezést.</string>
-    <string name="live_update_frequency_week_variant">Térképfrissítések keresése hetente. Következő: %1$s (%2$s múlva).</string>
-    <string name="live_update_frequency_day_variant">Térképfrissítések keresése naponta. Legközelebb: %1$s (%2$s múlva).</string>
-    <string name="live_update_frequency_hour_variant">Térképfrissítések keresése óránként. Következő: %1$s (%2$s múlva).</string>
     <string name="trip_recording_logging_interval_info">A naplózási intervallum beállítja azt az időközt, amelyben az OsmAnd lekéri az aktuális helyadatokat.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
@@ -4629,7 +4626,6 @@
     <string name="max_speed_widget_desc">Megjeleníti az aktuálisan használt úton érvényes sebességkorlátozást.</string>
     <string name="navigation_points">Navigációs pontok</string>
     <string name="route_maneuvers">Útvonal manőverek</string>
-    <string name="calculate_online_altitude_descr">A magassági adat az OsmAnd szerverén kerül kiszámításra.</string>
     <string name="calculate_altitude">Magasság kiszámítása</string>
     <string name="get_altitude_data">Magassági adat lekérése</string>
     <string name="no_altitude_data">Nincs magassági adat</string>

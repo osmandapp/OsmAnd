@@ -3813,9 +3813,6 @@
     <string name="updated">Opdateret: %s</string>
     <string name="last_time_checked">Sidst kontrolleret: %s</string>
     <string name="update_frequency">Opdateringsfrekvens</string>
-    <string name="live_update_frequency_week_variant">Kortopdateringer kontrolleres hver uge. Næste gang %1$s kl. %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kortopdateringer kontrolleres hver dag. Næste gang %1$s kl. %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kortopdateringer kontrolleres hver time. Næste gang %1$s kl. %2$s.</string>
     <string name="delete_updates">Slet opdateringer</string>
     <string name="purchases">Køb</string>
     <string name="select_category_descr">Vælg kategori eller tilføj en ny</string>
@@ -4632,7 +4629,6 @@
     <string name="route_maneuvers_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="calculating_altitude">Beregner højde</string>
-    <string name="calculate_online_altitude_descr">Højdedata vil blive beregnet på OsmAnd-serveren.</string>
     <string name="calculate_online">Beregn online</string>
     <string name="track_attach_to_the_roads_descr">Spor vil blive forbundet til vejen ved hjælp af offline-kort, og sporets geometri vil blive ændret.</string>
     <string name="get_altitude_data">Få højdedata</string>
