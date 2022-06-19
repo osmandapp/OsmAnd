@@ -130,6 +130,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private VectorLinesCollection vectorLinesCollection;
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
+	private int displayedWidgets = 0;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -298,8 +299,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandSettings settings = app.getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
-			clearMapMarkersCollections();
 			clearVectorLinesCollections();
+			return;
 		}
 
 		MapRendererView mapRenderer = getMapRenderer();
@@ -325,6 +326,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer != null) {
 			drawLineAndText(canvas, tileBox, nightMode);
+		} else {
+			clearVectorLinesCollections();
 		}
 
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
@@ -338,30 +341,19 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float cx;
 					float cy;
 					if (mapRenderer != null) {
-						PointF[] line;
-						PointF centerPixels;
-						if (tileBox.isCenterShifted()) {
-							PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-							PointI windowSize = mapRenderer.getState().getWindowSize();
-							int sx = windowSize.getX() / 2;
-							int sy = windowSize.getY() / 2;
-							PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, sx, sy,true);
-							if (center31 == null) {
-								continue;
-							}
-							line = calculateLineInScreenRect(tileBox, marker31, center31);
-							centerPixels = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, center31);
-						} else {
-							LatLon center = tileBox.getCenterLatLon();
-							line = calculateLineInScreenRect(tileBox, marker, center);
-							centerPixels = NativeUtilities.getPixelFromLatLon(mapRenderer, tileBox, center.getLatitude(), center.getLongitude());
+						PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
+						PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						if (center31 == null) {
+							continue;
 						}
+						PointF[] line = calculateLineInScreenRect(tileBox, marker31, center31);
 						if (line == null) {
 							continue;
 						}
-						cx = centerPixels.x;
-						cy = centerPixels.y;
-						bearing = (float) getAngleBetween(centerPixels, line[1]) - tileBox.getRotate();
+						PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						cx = centerPixel.x;
+						cy = centerPixel.y;
+						bearing = (float) getAngleBetween(centerPixel, line[1]) - tileBox.getRotate();
 					} else {
 						final QuadPoint cp = tileBox.getCenterPixelPoint();
 						cx = cp.x;
@@ -908,8 +900,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandSettings settings = app.getSettings();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
-		if (mapRenderer != null) {
-			for (int i = 0; i < activeMapMarkers.size() && i < displayedMarkers.size(); i++) {
+		if (displayedWidgets != settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get()) {
+			displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+			clearVectorLinesCollections();
+		} else {
+			for (int i = 0; mapRenderer != null && i < activeMapMarkers.size() && i < displayedMarkers.size(); i++) {
 				if (displayedMarkers.get(i) != activeMapMarkers.get(i)) {
 					clearVectorLinesCollections();
 					break;
@@ -925,7 +920,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		textAttrs.paint.setStyle(Paint.Style.FILL);
 		textPaint.set(textAttrs.paint);
 
-		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		boolean drawMarkerName = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 		float locX;
 		float locY;

@@ -698,8 +698,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 						backupedRegions.add(wr);
 					}
 				}
-				this.downloadedRegions = downloadedRegions;
-				this.backupedRegions = backupedRegions;
+				this.downloadedRegions = new ArrayList<>(downloadedRegions);
+				this.backupedRegions = new ArrayList<>(backupedRegions);
 			} else {
 				downloadedRegions = new ArrayList<>(this.downloadedRegions);
 				backupedRegions = new ArrayList<>(this.backupedRegions);
