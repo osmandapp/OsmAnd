@@ -4655,7 +4655,6 @@
     <string name="route_maneuvers">Maniobras de la ruta</string>
     <string name="get_altitude_information">Obtener información de altitud</string>
     <string name="calculating_altitude">Calculando altitud</string>
-    <string name="calculate_online_altitude_descr">Los datos de altitud serán calculados en el servidor de OsmAnd.</string>
     <string name="calculate_online">Calcular en línea</string>
     <string name="track_attach_to_the_roads_descr">La traza se adjuntará al camino usando mapas sin conexión. Esto cambiará la geometría de la traza.</string>
     <string name="get_altitude_data">Obtener datos de altitud</string>

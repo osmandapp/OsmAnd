@@ -6,12 +6,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+import java.util.Objects;
 
 public class ContextMenuListAdapter extends ArrayAdapter<ContextMenuItem> implements OnDataChangeUiAdapter {
 
@@ -47,6 +51,26 @@ public class ContextMenuListAdapter extends ArrayAdapter<ContextMenuItem> implem
 	@Override
 	public void onDataSetInvalidated() {
 		notifyDataSetInvalidated();
+	}
+
+	@Override
+	public void onRefreshItem(@NonNull @NotNull String itemId) {
+		ContextMenuItem item = getItemById(itemId);
+		if (item != null) {
+			item.refreshWithActualData();
+			onDataSetChanged();
+		}
+	}
+
+	@Nullable
+	public ContextMenuItem getItemById(@NonNull String itemId) {
+		for (int i = 0; i < getCount(); i++) {
+			ContextMenuItem item = getItem(i);
+			if (Objects.equals(itemId, item.getId())) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 }

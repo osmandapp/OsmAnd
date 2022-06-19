@@ -4623,7 +4623,6 @@
     <string name="navigation_points">Точки навигации</string>
     <string name="get_altitude_information">Получить информацию о высоте</string>
     <string name="calculating_altitude">Расчет высоты</string>
-    <string name="calculate_online_altitude_descr">Данные о высоте будут рассчитаны на сервере OsmAnd.</string>
     <string name="calculate_online">Рассчитать онлайн</string>
     <string name="track_attach_to_the_roads_descr">Трек будет привязан к дороге с помощью офлайн-карт, геометрия трека будет изменена.</string>
     <string name="get_altitude_data">Получить данные о высоте</string>

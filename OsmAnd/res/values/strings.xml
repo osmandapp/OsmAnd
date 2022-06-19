@@ -18,6 +18,9 @@
     <string name="live_update_frequency_hour_variant">Map updates will be checked every hour.</string>
     <string name="live_update_frequency_day_variant">Map updates will be checked every day.</string>
     <string name="live_update_frequency_week_variant">Map updates will be checked every week.</string>
+    <string name="altitude_correction">Altitude correction</string>
+    <string name="no_altitude_data_desc">You can attach your track to the roads to get %1$s data or calculate it online.</string>
+    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on Satellite Imagery and digital elevation models. It could vary from device recorded altitude and could be used as altitude correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
@@ -104,7 +107,6 @@
     <string name="route_maneuvers">Route maneuvers</string>
     <string name="get_altitude_information">Get Altitude information</string>
     <string name="calculating_altitude">Calculating altitude</string>
-    <string name="calculate_online_altitude_descr">Altitude data will be calculated on OsmAnd server.</string>
     <string name="calculate_online">Calculate online</string>
     <string name="track_attach_to_the_roads_descr">Track will be attached to the road using offline maps, track geometry will be changed.</string>
     <string name="get_altitude_data">Get altitude data</string>

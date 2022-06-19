@@ -562,12 +562,12 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE));
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				UI_CATEGORY_DETAILS, activity, true, DETAILS_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_DETAILS, activity, DETAILS_ID, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				UI_CATEGORY_HIDE, activity, true, HIDE_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_HIDE, activity, HIDE_ID, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -582,14 +582,13 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,
-											 @StringRes final int strId,
-											 @DrawableRes final int icon,
-											 final String category,
-											 final MapActivity activity,
-											 final boolean useDescription,
-											 final String id,
-											 final boolean nightMode,
-											 @ColorInt final int selectedProfileColor) {
+	                                         @StringRes final int strId,
+	                                         @DrawableRes final int icon,
+	                                         final String category,
+	                                         final MapActivity activity,
+	                                         final String id,
+	                                         final boolean nightMode,
+	                                         @ColorInt final int selectedProfileColor) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
@@ -607,54 +606,29 @@ public class ConfigureMapMenu {
 		}
 		if (prefs.size() > 0) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
-				if (!isChecked && !useDescription) {
-					for (int i = 0; i < prefs.size(); i++) {
-						prefs.get(i).set(false);
-					}
-					uiAdapter.onDataSetInvalidated();
-					activity.refreshMapComplete();
-					activity.getMapLayers().updateLayers(activity);
+				if (UI_CATEGORY_DETAILS.equals(category)) {
+					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, uiAdapter, item);
 				} else {
-					if (UI_CATEGORY_DETAILS.equals(category)) {
-						DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, uiAdapter, item);
-					} else {
-						ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-								activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
-					}
+					ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
+							activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
 				}
 				return false;
 			};
 			ContextMenuItem item = new ContextMenuItem(id)
 					.setTitleId(strId, activity)
 					.setIcon(icon).setListener(clickListener);
-			boolean selected = false;
-			for (CommonPreference<Boolean> p : prefs) {
-				if (p.get()) {
-					selected = true;
-					break;
+			item.setRefreshCallback(refreshableItem -> {
+				boolean selected = false;
+				for (CommonPreference<Boolean> p : prefs) {
+					if (p.get()) {
+						selected = true;
+						break;
+					}
 				}
-			}
-			item.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
-			if (useDescription) {
-				item.setDescription(ConfigureMapUtils.getDescription(prefs));
-				item.setLayout(R.layout.list_item_single_line_descrition_narrow);
-			} else {
-				item.setListener(new OnRowItemClick() {
-					@Override
-					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
-						return clickListener.onContextMenuClick(uiAdapter, view, item, isChecked);
-					}
-
-					@Override
-					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
-						ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-								activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
-						return false;
-					}
-				});
-				item.setSecondaryIcon(R.drawable.ic_action_additional_option);
-				item.setSelected(selected);
-			}
+				refreshableItem.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
+				refreshableItem.setDescription(ConfigureMapUtils.getDescription(prefs));
+			});
+			item.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			OsmandPreference<?>[] prefArray = new OsmandPreference[prefs.size()];
 			item.setItemDeleteAction(prefs.toArray(prefArray));
 			return item;

@@ -39,8 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
@@ -90,6 +88,18 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	@Override
 	public void onDataSetInvalidated() {
 		recreateView();
+	}
+
+	@Override
+	public void onRefreshItem(@NonNull String itemId) {
+		ContextMenuItem item = adapter.getItemById(itemId);
+		if (item != null) {
+			item.refreshWithActualData();
+			View view = views.get(item.getTitleId());
+			if (view != null) {
+				bindItemView(item, llList);
+			}
+		}
 	}
 
 	private void recreateView() {
@@ -245,17 +255,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			};
 		}
 		return itemsClickListener;
-	}
-
-	public void onMapStyleChanged() {
-		ContextMenuItem item = adapter.getItemById(MAP_STYLE_ID);
-		if (item != null) {
-			item.refreshWithActualData();
-			View view = views.get(item.getTitleId());
-			if (view != null) {
-				bindItemView(item, llList);
-			}
-		}
 	}
 
 	private void setupSelectableBg(@NonNull View view) {

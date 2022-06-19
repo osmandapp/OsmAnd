@@ -52,6 +52,7 @@ import net.osmand.plus.auto.CarSurfaceView;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
+import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
@@ -81,7 +82,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
 	private static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
-	private static final float MIN_ELEVATION_ANGLE = 35f;
 
 	private boolean MEASURE_FPS = false;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -776,6 +776,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				currentViewport.getCenterPixelY() != cy ||
 				currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
 		}
@@ -1172,7 +1173,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 		currentViewport.setZoomAndAnimation(zoom, zoomAnimation, zoomFloatPart);
-		setElevationAngle(normalizeElevationAngle(this.elevationAngle, (float) (zoom + zoomAnimation + zoomFloatPart)));
+		setElevationAngle(normalizeElevationAngle(this.elevationAngle));
 	}
 
 	private void setMapDensityImpl(double mapDensity) {
@@ -1184,22 +1185,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		currentViewport.setMapDensity(mapDensity);
 	}
 
-	private float normalizeElevationAngle(float elevationAngle, float zoom) {
+	public float normalizeElevationAngle(float elevationAngle) {
 		if (elevationAngle > 90f) {
 			return 90f;
 		}
-		if (zoom > 15) {
+		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
+		if (verticalTilesCount < 8) {
+			return Math.max(33f, elevationAngle);
+		} else if (verticalTilesCount < 9) {
 			return Math.max(35f, elevationAngle);
-		} else if (zoom > 12) {
-			return Math.max(45f, elevationAngle);
-		} else if (zoom > 9) {
-			return Math.max(50f, elevationAngle);
-		} else if (zoom > 7) {
-			return Math.max(55f, elevationAngle);
-		} else if (zoom > 5) {
-			return Math.max(65f, elevationAngle);
+		} else if (verticalTilesCount < 10) {
+			return Math.max(40f, elevationAngle);
 		}
-		return Math.max(75f, elevationAngle);
+		return Math.max(45f, elevationAngle);
 	}
 
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, int centerX, int centerY, boolean notify) {
@@ -1664,14 +1662,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void adjustElevationAngle() {
-		setElevationAngle(MIN_ELEVATION_ANGLE);
-	}
-
 	private void setElevationAngle(float angle) {
-		RotatedTileBox tb = currentViewport.copy();
-		float zoom = (float) (tb.getZoom() + tb.getZoomAnimation() + tb.getZoomFloatPart());
-		angle = normalizeElevationAngle(angle, zoom);
+		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
 		application.getOsmandMap().setMapElevation(angle);
 	}

@@ -4638,7 +4638,6 @@
     <string name="lanes_widgets_desc">車道小工具會顯示目前道路的車道佈局，並會突顯要透過主動導航行駛的車道。</string>
     <string name="calculate_online">線上計算</string>
     <string name="navigation_points_desc">在導航期間啟用導航小工具以顯示諸如距離、到達或剩餘時間、下個轉彎、方位、目前街道名稱、車道資訊、最大速度、接近警報、POI、航點等資訊。</string>
-    <string name="calculate_online_altitude_descr">海拔資料將會在 OsmAnd 伺服器上計算。</string>
     <string name="map_markers_bar_widget_desc">在頂部列的小工具上，您可以看到從目前位置到標記的距離與方向。可以設定為在小工具中檢視 1 或 2 個頂部標記。</string>
     <string name="bearing_desc">方位小工具以角度單位（180 度、360 度、毫弧度）顯示與目標的絕對或相對方位。</string>
     <string name="get_altitude_data">取得海拔資料</string>

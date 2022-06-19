@@ -4649,7 +4649,6 @@
     <string name="shared_string_speed">מהירות</string>
     <string name="get_altitude_information">קבלת פרטי הגובה</string>
     <string name="calculating_altitude">הגובה מחושב</string>
-    <string name="calculate_online_altitude_descr">נתוני הגובה יחושבו בשרת של OsmAnd.</string>
     <string name="calculate_online">חישוב מקוון</string>
     <string name="navigation_points_desc">וידג׳טים ניווטיים מופעלים במהלך הניווט כדי להציג מידע כגון מרחק, זמן הגעה או עזיבה, הפניות הבאות, תכווין, שם הרחוב הנוכחי, פרטי נתיבים, מהירות מרבית, התראות הגעה, נקודות עניין, נקודות דרך.</string>
     <string name="track_attach_to_the_roads_descr">המסלול יוצמד לכביש באמצעות מפות בלתי מקוונות, צורת המסלול תשתנה.</string>

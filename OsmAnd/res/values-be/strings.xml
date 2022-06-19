@@ -4143,7 +4143,6 @@
     <string name="route_maneuvers">Маршрутныя манеўры</string>
     <string name="get_altitude_information">Атрымаць інфармацыю аб вышыні</string>
     <string name="calculating_altitude">Разлік вышыні</string>
-    <string name="calculate_online_altitude_descr">Даныя аб вышыні будуць разлічвацца на серверы OsmAnd.</string>
     <string name="calculate_online">Разлічыць у сеціве</string>
     <string name="track_attach_to_the_roads_descr">След будзе прымацаваны да дарогі з дапамогай аўтаномных мапаў, геаметрыя следу будзе зменена.</string>
     <string name="street_name_widget_desc">Віджэт назвы вуліцы паказвае бягучую назву вуліцы са стрэлкай прамога месцазнаходжання або наступную назву вуліцы з манеўрам, які трэба выканаць.</string>

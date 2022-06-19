@@ -4644,7 +4644,6 @@
     <string name="audio_video_notes_desc">Kayıt (ses, video veya fotoğraf) almayı başlatmak/durdurmak için hızlı erişim sağlayan widget.</string>
     <string name="bearing_desc">Yön widget\'ı, bir hedefin mutlak veya göreceli yönünü açısal birimlerde gösterir (Derece 180, Derece 360, Miliradyan).</string>
     <string name="route_maneuvers_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
-    <string name="calculate_online_altitude_descr">Rakım verileri OsmAnd sunucusunda hesaplanacak.</string>
     <string name="navigation_points">Navigasyon noktaları</string>
     <string name="navigation_points_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
     <string name="route_maneuvers">Güzergah manevraları</string>
