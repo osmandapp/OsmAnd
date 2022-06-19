@@ -1244,9 +1244,9 @@
     <string name="show_pedestrian_warnings">Пешеходни пътеки</string>
     <string name="rendering_attr_streetLighting_name">Улично осветление</string>
     <string name="rendering_attr_roadStyle_name">Оцветяване на пътищата</string>
-    <string name="rendering_value_germanRoadAtlas_name">Германски стил</string>
-    <string name="rendering_value_americanRoadAtlas_name">Американски стил</string>
-    <string name="rendering_value_orange_name">оранжев</string>
+    <string name="rendering_value_germanRoadAtlas_name">Немска пътна карта</string>
+    <string name="rendering_value_americanRoadAtlas_name">Американска пътна карта</string>
+    <string name="rendering_value_orange_name">Оранжева</string>
     <string name="rendering_attr_transportStops_name">Гари и спирки</string>
     <string name="welcome_header">Добре дошли</string>
     <string name="storage_directory_internal_app">Вътрешна памет на приложението</string>
@@ -1409,7 +1409,7 @@
     <string name="no_index_file_to_download">Не са намерени изтегляния, проверете връзката с интернет.</string>
     <string name="gpx_selection_points">%1$s
 \nТочки</string>
-    <string name="rendering_value_brown_name">кафяв</string>
+    <string name="rendering_value_brown_name">Кафява</string>
     <string name="osmo_edit_color">Цвят на показване</string>
     <string name="rendering_value_disabled_name">Спрян</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Принадкежност към мрежа</string>
@@ -1627,7 +1627,7 @@
     <string name="rendering_value_defaultTranslucentCyan_name">По подразбиране (полупрозрачно синьо)</string>
     <string name="rendering_attr_currentTrackColor_description">GPX цвят</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX ширина</string>
-    <string name="rendering_value_red_name">червен</string>
+    <string name="rendering_value_red_name">Червена</string>
     <string name="rendering_value_translucent_red_name">Полупрозрачно червено</string>
     <string name="rendering_value_translucent_orange_name">Полупрозрачно оранжево</string>
     <string name="rendering_value_yellow_name">жълт</string>
@@ -1636,9 +1636,9 @@
     <string name="rendering_value_translucent_lightgreen_name">Полупрозрачно светло-зелено</string>
     <string name="rendering_value_green_name">зелен</string>
     <string name="rendering_value_translucent_green_name">Полупрозрачно зелено</string>
-    <string name="rendering_value_lightblue_name">Свелто-син</string>
+    <string name="rendering_value_lightblue_name">Свелтосиня</string>
     <string name="rendering_value_translucent_lightblue_name">Полупрозрачно свелто-синьо</string>
-    <string name="rendering_value_blue_name">син</string>
+    <string name="rendering_value_blue_name">Синя</string>
     <string name="rendering_value_translucent_blue_name">Полупрозрачен светло-син</string>
     <string name="rendering_value_purple_name">лилав</string>
     <string name="rendering_value_translucent_purple_name">Полупрозрачно лилаво</string>
@@ -2806,13 +2806,13 @@
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_diesel_name">Дизел</string>
     <string name="co2_mission">Емисии от CO2</string>
-    <string name="rendering_value_darkyellow_name">Тъмно жълта</string>
+    <string name="rendering_value_darkyellow_name">Тъмножълта</string>
     <string name="rendering_value_omit_name">Пропускане</string>
-    <string name="rendering_value_light_brown_name">Светло жълта</string>
-    <string name="rendering_value_dark_brown_name">Тъмно кафява</string>
+    <string name="rendering_value_light_brown_name">Светложълта</string>
+    <string name="rendering_value_dark_brown_name">Тъмнокафява</string>
     <string name="backup_conflicts">Конфликти</string>
     <string name="rendering_value_fine_name">Фина</string>
-    <string name="rendering_value_translucent_pink_name">Розова прозрачна</string>
+    <string name="rendering_value_translucent_pink_name">Прозрачнорозова</string>
     <string name="rendering_value_high_name">Висока</string>
     <string name="rendering_value_bold_name">Дебела</string>
     <string name="rendering_value_low_name">Ниска</string>
