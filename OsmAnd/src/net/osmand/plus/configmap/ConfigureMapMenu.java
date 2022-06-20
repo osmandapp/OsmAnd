@@ -1,5 +1,40 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
+
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -54,41 +89,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
-import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
 public class ConfigureMapMenu {
 
@@ -303,9 +303,11 @@ public class ConfigureMapMenu {
 						pref.set(isChecked);
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-						uiAdapter.onDataSetChanged();
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
 						if (property != null) {
-							activity.refreshMap();
+							activity.refreshMapComplete();
 							activity.updateLayers();
 						} else {
 							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
@@ -340,14 +342,16 @@ public class ConfigureMapMenu {
 					}
 
 					@Override
-					public boolean onContextMenuClick(@NonNull @Nullable OnDataChangeUiAdapter uiAdapter,
-					                                  @NonNull @Nullable View view, @NonNull ContextMenuItem item,
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NonNull ContextMenuItem item,
 					                                  boolean isChecked) {
 						pref.set(isChecked ? previousValue : "");
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-						uiAdapter.onDataSetChanged();
-						activity.refreshMap();
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						activity.refreshMapComplete();
 						activity.updateLayers();
 						return false;
 					}
@@ -764,7 +768,7 @@ public class ConfigureMapMenu {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (property != null) {
 						pref.set(isChecked);
-						activity.refreshMap();
+						activity.refreshMapComplete();
 						activity.updateLayers();
 					} else {
 						isChecked = pref.get();
