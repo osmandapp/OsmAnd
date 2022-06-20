@@ -4021,9 +4021,6 @@
     <string name="updated">Ažurirano: %s</string>
     <string name="last_time_checked">Poslednje vreme provere: %s</string>
     <string name="update_frequency">Učestalost ažuriranja</string>
-    <string name="live_update_frequency_week_variant">Provera ažuriranja karte će biti svakih nedelju dana. Sledeće vreme %1$s za %2$s.</string>
-    <string name="live_update_frequency_day_variant">Provera ažuriranja karte će biti svakog dana. Sledeće vreme %1$s za %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Provera ažuriranja karte će biti na svakih sat vremena. Sledeće vreme %1$s za %2$s.</string>
     <string name="delete_updates">Obriši ažuriranja</string>
     <string name="live_update_delete_updates_msg">Da li ste sigurni da želite da obrišete %s ažuriranja uživo\?</string>
     <string name="purchases">Kupovine</string>

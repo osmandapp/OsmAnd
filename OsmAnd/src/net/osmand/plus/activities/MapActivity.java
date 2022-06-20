@@ -169,6 +169,7 @@ import java.util.concurrent.Executors;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 
@@ -1352,7 +1353,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					OsmandPlugin.registerRenderingPreferences(app);
 					ConfigureMapFragment cm = ConfigureMapFragment.getVisibleInstance(this);
 					if (cm != null) {
-						cm.onMapStyleChanged();
+						cm.onRefreshItem(MAP_STYLE_ID);
 					}
 				}
 				return true;

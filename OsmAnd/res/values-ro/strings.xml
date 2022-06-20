@@ -3269,9 +3269,6 @@
     <string name="updated">Actualizat: %s</string>
     <string name="last_time_checked">Ultima dată când a fost verificat: %s</string>
     <string name="update_frequency">Frecvența de actualizare</string>
-    <string name="live_update_frequency_week_variant">Actualizările hărții vor fi verificate în fiecare săptămână. Data viitoare %1$s în %2$s.</string>
-    <string name="live_update_frequency_day_variant">Actualizările hărții vor fi verificate în fiecare zi. Data viitoare %1$s în %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Actualizările hărții vor fi verificate la fiecare oră. Data viitoare %1$s în %2$s.</string>
     <string name="delete_updates">Ștergeți actualizările</string>
     <string name="live_update_delete_updates_msg">Ștergeți toate actualizările live %s\?</string>
     <string name="purchases">Achiziții</string>

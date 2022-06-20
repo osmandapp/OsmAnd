@@ -4011,9 +4011,6 @@
     <string name="updated">Agiornadu: %s</string>
     <string name="last_time_checked">Ùrtima verìfica: %s</string>
     <string name="update_frequency">Frecuèntzia de sos agiornamentos</string>
-    <string name="live_update_frequency_week_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada chida. Sa borta chi benit: %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada die. Sa borta chi benit: %1$s in %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada ora. Sa borta chi benit: %1$s in %2$s.</string>
     <string name="delete_updates">Iscantzella sos agiornamentos</string>
     <string name="live_update_delete_updates_msg">Iscantzellare totu sos %s agiornamentos in direta\?</string>
     <string name="select_category_descr">Ischerta una categoria o annanghe·nde una noa</string>
