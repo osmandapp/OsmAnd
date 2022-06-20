@@ -59,6 +59,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
@@ -388,7 +389,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
 		MapActivity mapActivity = requireMapActivity();
-		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, ENABLED_MODE, Collections.singletonList(panel)).size();
+		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);

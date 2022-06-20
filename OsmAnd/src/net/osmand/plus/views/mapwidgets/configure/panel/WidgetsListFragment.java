@@ -218,6 +218,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		int previousPage = -1;
 
 		for (MapWidgetInfo widgetInfoToCopy : widgetInfosToCopy) {
+			if (!selectedAppMode.isWidgetAvailable(widgetInfoToCopy.key)) {
+				continue;
+			}
+
 			WidgetType widgetTypeToCopy = widgetInfoToCopy.widget.getWidgetType();
 			boolean duplicateNotPossible = widgetTypeToCopy == null || !selectedPanel.isDuplicatesAllowed();
 			String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetInfoToCopy.key);
