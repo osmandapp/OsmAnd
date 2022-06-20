@@ -4698,4 +4698,14 @@
     <string name="routing_attr_motor_type_description">CO₂-kibocsátás számításához</string>
     <string name="routing_attr_motor_type_name">Motortípus</string>
     <string name="lang_ckb">Közép-kurd</string>
+    <string name="live_update_frequency_day_variant">A térképfrissítéseket naponta fogja keresni.</string>
+    <string name="live_update_frequency_hour_variant">A térképfrissítéseket óránként fogja keresni.</string>
+    <string name="live_update_frequency_week_variant">A térképfrissítéseket hetente fogja keresni.</string>
+    <string name="next_live_update_time">Következő frissítés: %1$s-kor.</string>
+    <string name="altitude_correction">Magasság korrekció</string>
+    <string name="no_altitude_data_desc">Saját nyomvonalat csatolhat az utakhoz, hogy megkapja a(z) %1$s adatot vagy kiszámoltathatja azt online.</string>
+    <string name="updated_map_time">Frissítve: %1$s.</string>
+    <string name="calculate_online_altitude_descr">A tengerszint feletti magasságot műholdképek és digitális magassági modellek felhasználásával az OsmAnd szervereken számítja ki online. Az eredmény eltérhet az eszköz által meghatározott magasságtól és magasságkorrekcióként használható.</string>
+    <string name="next_live_update_date_and_time">Következő frissítés: %1$s %2$s.</string>
+    <string name="includes_osm_changes_until">Tartalmazza az OSM-en %1$s-ig végrehajtott módosításokat.</string>
 </resources>
