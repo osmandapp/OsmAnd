@@ -4708,4 +4708,8 @@
     <string name="routing_attr_motor_type_name">סוג מנוע</string>
     <string name="routing_attr_motor_type_description">לחישוב פליטת פחמן דו חמצני</string>
     <string name="lang_ckb">כורדית מרכזית</string>
+    <string name="updated_map_time">עדכון: %1$s.</string>
+    <string name="next_live_update_time">עדכון הבא: ב־%1$s.</string>
+    <string name="includes_osm_changes_until">לרבות שינויים שבוצעו ב־OSM עד %1$s.</string>
+    <string name="next_live_update_date_and_time">עדכון הבא: %1$s ב־%2$s.</string>
 </resources>
