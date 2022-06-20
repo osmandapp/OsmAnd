@@ -21,7 +21,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.Si
 
 import androidx.annotation.NonNull;
 
-public class MapMarkerSideWidgetSettingsFragment extends BaseAverageSpeedSettingFragment {
+public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String MARKER_MODE_KEY = "marker_mode";
 	private static final String AVERAGE_SPEED_INTERVAL_KEY = "average_speed_interval";
@@ -31,6 +31,9 @@ public class MapMarkerSideWidgetSettingsFragment extends BaseAverageSpeedSetting
 	private OsmandPreference<Long> averageSpeedIntervalPref;
 
 	private SideMarkerMode selectedMarkerMode;
+	private long initialIntervalMillis;
+
+	private AverageSpeedIntervalCard averageSpeedIntervalCard;
 
 	@NonNull
 	@Override
@@ -54,7 +57,7 @@ public class MapMarkerSideWidgetSettingsFragment extends BaseAverageSpeedSetting
 			long defaultAverageSpeedInterval = averageSpeedIntervalPref.getModeValue(appMode);
 
 			selectedMarkerMode = SideMarkerMode.valueOf(bundle.getString(MARKER_MODE_KEY, defaultMode.name()));
-			selectedIntervalMillis = bundle.getLong(AVERAGE_SPEED_INTERVAL_KEY, defaultAverageSpeedInterval);
+			initialIntervalMillis = bundle.getLong(AVERAGE_SPEED_INTERVAL_KEY, defaultAverageSpeedInterval);
 		} else {
 			dismiss();
 		}
@@ -130,24 +133,26 @@ public class MapMarkerSideWidgetSettingsFragment extends BaseAverageSpeedSetting
 	}
 
 	private void setupAverageSpeedIntervalSetting() {
-		setupIntervalSlider();
-		setupMinMaxIntervals();
-		View container = view.findViewById(R.id.average_speed_container);
-		AndroidUiHelper.updateVisibility(container, selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME);
+		averageSpeedIntervalCard = new AverageSpeedIntervalCard(requireMyActivity(), initialIntervalMillis);
+		ViewGroup cardContainer = view.findViewById(R.id.average_speed_interval_card_container);
+		cardContainer.addView(averageSpeedIntervalCard.build(cardContainer.getContext()));
+
+		View settingContainer = view.findViewById(R.id.average_speed_container);
+		AndroidUiHelper.updateVisibility(settingContainer, selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME);
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(MARKER_MODE_KEY, selectedMarkerMode.name());
-		outState.putLong(AVERAGE_SPEED_INTERVAL_KEY, selectedIntervalMillis);
+		outState.putLong(AVERAGE_SPEED_INTERVAL_KEY, averageSpeedIntervalCard.getSelectedIntervalMillis());
 	}
 
 	@Override
 	protected void applySettings() {
 		markerModePref.setModeValue(appMode, selectedMarkerMode);
 		if (selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME) {
-			averageSpeedIntervalPref.setModeValue(appMode, selectedIntervalMillis);
+			averageSpeedIntervalPref.setModeValue(appMode, averageSpeedIntervalCard.getSelectedIntervalMillis());
 		}
 	}
 

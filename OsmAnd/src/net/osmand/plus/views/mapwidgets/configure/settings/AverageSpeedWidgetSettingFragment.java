@@ -14,12 +14,15 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import androidx.annotation.NonNull;
 
-public class AverageSpeedWidgetSettingFragment extends BaseAverageSpeedSettingFragment {
+public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 	private static final String KEY_SKIP_STOPS = "skip_stops";
 
+	private long initialIntervalMillis;
 	private boolean skipStops;
+
+	private AverageSpeedIntervalCard averageSpeedIntervalCard;
 
 	@NonNull
 	@Override
@@ -34,7 +37,7 @@ public class AverageSpeedWidgetSettingFragment extends BaseAverageSpeedSettingFr
 		long defaultInterval = settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.getModeValue(appMode);
 		boolean defaultSkipStops = settings.AVERAGE_SPEED_SKIP_STOPS.getModeValue(appMode);
 
-		selectedIntervalMillis = bundle.getLong(KEY_TIME_INTERVAL, defaultInterval);
+		initialIntervalMillis = bundle.getLong(KEY_TIME_INTERVAL, defaultInterval);
 		skipStops = bundle.getBoolean(KEY_SKIP_STOPS, defaultSkipStops);
 	}
 
@@ -42,9 +45,14 @@ public class AverageSpeedWidgetSettingFragment extends BaseAverageSpeedSettingFr
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.average_speed_widget_settings_fragment, container);
 
-		setupIntervalSlider();
-		setupMinMaxIntervals();
+		setupIntervalSliderCard();
 		setupSkipStopsSetting();
+	}
+
+	private void setupIntervalSliderCard() {
+		averageSpeedIntervalCard = new AverageSpeedIntervalCard(requireMyActivity(), initialIntervalMillis);
+		ViewGroup cardContainer = view.findViewById(R.id.average_speed_interval_card_container);
+		cardContainer.addView(averageSpeedIntervalCard.build(cardContainer.getContext()));
 	}
 
 	private void setupSkipStopsSetting() {
@@ -68,13 +76,13 @@ public class AverageSpeedWidgetSettingFragment extends BaseAverageSpeedSettingFr
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putLong(KEY_TIME_INTERVAL, selectedIntervalMillis);
+		outState.putLong(KEY_TIME_INTERVAL, averageSpeedIntervalCard.getSelectedIntervalMillis());
 		outState.putBoolean(KEY_SKIP_STOPS, skipStops);
 	}
 
 	@Override
 	protected void applySettings() {
-		settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.setModeValue(appMode, selectedIntervalMillis);
+		settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.setModeValue(appMode, averageSpeedIntervalCard.getSelectedIntervalMillis());
 		settings.AVERAGE_SPEED_SKIP_STOPS.setModeValue(appMode, skipStops);
 	}
 }
