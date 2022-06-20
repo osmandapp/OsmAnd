@@ -260,16 +260,16 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	@NonNull
 	private List<MapWidgetInfo> getDefaultWidgetInfos(@NonNull MapActivity mapActivity) {
-		Set<MapWidgetInfo> thisWidgetInfos = widgetRegistry
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry
 				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, selectedPanel.getMergedPanels());
-		for (MapWidgetInfo widgetInfo : thisWidgetInfos) {
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			if (widgetInfo.widgetPanel == selectedPanel) {
 				Boolean visibility = WidgetType.isOriginalWidget(widgetInfo.key) ? false : null;
 				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, visibility, false);
 			}
 		}
 		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
-		return new ArrayList<>(thisWidgetInfos);
+		return new ArrayList<>(widgetInfos);
 	}
 
 	@Nullable
