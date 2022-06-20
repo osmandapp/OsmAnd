@@ -103,7 +103,7 @@ public class SideWidgetInfo extends MapWidgetInfo {
 		getVisibilityPreference().setModeValue(appMode, newVisibilityString.toString());
 
 		OsmandPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset(appMode);
-		if (!enabled && settingsPref != null) {
+		if ((enabled == null || !enabled) && settingsPref != null) {
 			settingsPref.resetModeToDefault(appMode);
 		}
 	}
