@@ -30,8 +30,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
@@ -387,11 +385,8 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean isWidgetAvailable(@NonNull String key, ApplicationMode appMode) {
-		if (key.contains(MapWidgetInfo.DELIMITER)) {
-			key = WidgetType.getDefaultWidgetId(key);
-		}
-		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(key);
+	public boolean isWidgetAvailable(@NonNull String widgetId, ApplicationMode appMode) {
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(widgetId);
 		if (availableForModes == null) {
 			return true;
 		}

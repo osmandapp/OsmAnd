@@ -38,6 +38,7 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -277,15 +278,14 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String key) {
+	public boolean isWidgetAvailable(String widgetId) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
-			return app.getAppCustomization().isWidgetAvailable(key, this);
+			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
 		}
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
-			return true;
-		}
-		return set.contains(this);
+
+		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
+		return availableForModes == null || availableForModes.contains(this);
 	}
 
 	public String getStringKey() {
