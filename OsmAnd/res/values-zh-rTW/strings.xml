@@ -4698,4 +4698,5 @@
     <string name="routing_attr_motor_type_lpg_name">液化石油氣</string>
     <string name="routing_attr_motor_type_gas_name">天然氣</string>
     <string name="routing_attr_motor_type_name">馬達類型</string>
+    <string name="lang_ckb">中庫德語</string>
 </resources>

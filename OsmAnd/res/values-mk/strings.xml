@@ -1552,4 +1552,181 @@
     <string name="utm_format_descr">OsmAnd go koristi standardot UTM, koj e sličen, no ne identičen so formatot UTM NATO.</string>
     <string name="mgrs_format_descr">OsmAnd koristi MGRS, koj e sličen na UTM NATO formatot.</string>
     <string name="manage_profiles_descr">Kreirajte, uvezete, ureduvajte profili</string>
+    <string name="vehicle_parameters">Parametri na voziloto</string>
+    <string name="voice_announces_info">Glasovnite soopštenija se pojavuvaat samo za vreme na navigacijata.</string>
+    <string name="voice_announces_descr">Instrukcii za navigacija i soopštenija</string>
+    <string name="voice_announces">Glasovni pottiknuvanja</string>
+    <string name="screen_alerts">Predupreduvanja na ekranot</string>
+    <string name="day">Den</string>
+    <string name="months_3">Tri meseci</string>
+    <string name="get_discount_title">Dobijte %1$d %2$s so %3$s popust.</string>
+    <string name="years_5">Godini</string>
+    <string name="price_free">Besplatno</string>
+    <string name="get_discount_first_part">%1$s za prvite %2$s</string>
+    <string name="price_and_discount">%1$s • Začuvaj %2$s</string>
+    <string name="gpx_join_gaps">Priklučete gi prazninite</string>
+    <string name="app_mode_camper">Kamper</string>
+    <string name="app_mode_campervan">Kamperso kombi (RV)</string>
+    <string name="app_mode_wagon">Vagon</string>
+    <string name="app_mode_pickup_truck">Pikap kamion</string>
+    <string name="shared_string_default">Standarden</string>
+    <string name="rendering_attr_showLez_description">Prikaži zoni so niski emisii na kartata. Ne vlijae na nasočuvanjeto.</string>
+    <string name="rendering_attr_showLez_name">Prikaži zoni so niski emisii</string>
+    <string name="temporary_conditional_routing">Zemete gi vo obzir privremenite ograničuvanja</string>
+    <string name="rendering_attr_winter_road_name">Zimski pat</string>
+    <string name="rendering_attr_ice_road_name">Zamrznat pat</string>
+    <string name="turn_screen_on_time_descr">Prilagodete kolku dolgo ekranot treba da bide vklučen.</string>
+    <string name="turn_screen_on_sensor">Koristete senzor za blizina</string>
+    <string name="turn_screen_on_sensor_descr">Maftanjeto so rakata preku ekranot ḱe go vkluči.</string>
+    <string name="shared_string_track_is_saved">Zapisot %s e začuvan</string>
+    <string name="turn_screen_on_router">Razbudete se na vrtenje</string>
+    <string name="edit_profile_setup_map_subtitle">Izberete opcii za kartata za profilot</string>
+    <string name="default_speed_setting_title">Standardna brzina</string>
+    <string name="default_speed_setting_descr">Promenete gi standardnite postavki za brzina</string>
+    <string name="app_mode_scooter">Skuter</string>
+    <string name="shared_string_min_speed">Min. brzina</string>
+    <string name="shared_string_max_speed">Max. brzina</string>
+    <string name="minmax_speed_dialog_title">Postavete min./maks. brzina</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Ikona</string>
+    <string name="shared_string_crash">Pad</string>
+    <string name="last_launch_crashed">Se urna posledniot OsmAnd. Pomognete ni da go podobrime OsmAnd so spodeluvanje na porakata za greška.</string>
+    <string name="press_again_to_change_the_map_orientation">Doprete povtorno za da ja promenite orientacijata na kartata</string>
+    <string name="new_profile">Nov profil</string>
+    <string name="process_downloading_service">Servisot za prevzemanje na OsmAnd</string>
+    <string name="settings_privacy_and_security">Privatnost i bezbednost</string>
+    <string name="settings_privacy_and_security_desc">Izberete koi podatoci ḱe gi spodelite</string>
+    <string name="shared_string_no_thank_you">Ne, blagodaram</string>
+    <string name="shared_string_allow">Dozvolete</string>
+    <string name="privacy_and_security_change_descr">Doprete „Dozvoli“ ako se soglasuvate so našiot %1$s</string>
+    <string name="osmand_routing_promo">Dodadete svoja sopstvena izmeneta verzija na datotekata routing.xml vo ..osmand/routing</string>
+    <string name="app_mode_skiing">Skijanje</string>
+    <string name="base_profile_descr_ski">Skijanje</string>
+    <string name="show_compass_ruler">Prikaži go lenirot na kompasot</string>
+    <string name="hide_compass_ruler">Skrijte go lenirot na kompasot</string>
+    <string name="select_icon_profile_dialog_title">Izberete ikona</string>
+    <string name="settings_routing_mode_string">Režim: %s</string>
+    <string name="app_mode_helicopter">Hekikopter</string>
+    <string name="settings_derived_routing_mode_string">Korisnički režim, izveden od: %s</string>
+    <string name="profile_alert_cant_delete_base">Ne možete da gi izbrišete osnovnite profili na OsmAnd</string>
+    <string name="profile_alert_need_save_title">Začuvajte gi promenite</string>
+    <string name="profile_alert_need_save_msg">Prvo začuvajte gi promenite na profilot</string>
+    <string name="profile_alert_delete_title">Izbrisete go profilot</string>
+    <string name="profile_alert_delete_msg">Izbrišete go „%s“ profilot</string>
+    <string name="profile_alert_need_profile_name_title">Vnesete ime na profilot</string>
+    <string name="profile_alert_need_profile_name_msg">Prvo mora da navedete ime na profilot.</string>
+    <string name="profile_alert_duplicate_name_title">Duplikat ime</string>
+    <string name="profile_alert_duplicate_name_msg">Veḱe postoi profil so toa ime</string>
+    <string name="base_profile_descr_car">Avtomobil, kamion, motocikl</string>
+    <string name="select_nav_profile_dialog_title">Izberete tip na navigacija</string>
+    <string name="select_base_profile_dialog_message">Zasnovajte go vašiot prisposoben profil na eden od standardnite profili na aplikacii, ova go definira osnovnoto postavuvanje kako standardnata vidlivost na grafičkite kontroli i edinicite za brzina i rastojanie. Ova se standardnite profili na aplikacii, zaedno so primeri na sopstveni profili što može da se proširat na:</string>
+    <string name="base_profile_descr_bicycle">Planinski velosiped, moped, konj</string>
+    <string name="base_profile_descr_public_transport">Vidovi javen prevoz</string>
+    <string name="files_moved">Premesteni %1$d datoteki (%2$s).</string>
+    <string name="files_copied">Kopirani %1$d datoteki (%2$s).</string>
+    <string name="files_failed">Ne može da se kopira %1$d datoteka (%2$s).</string>
+    <string name="files_present">%1$d datoteki (%2$s) se prisutni na prethodnata lokacija „%3$s“.</string>
+    <string name="move_maps">Premesti gi kartite</string>
+    <string name="route_parameters_descr">Konfigurirajte gi parametrite na maršrutata</string>
+    <string name="week">Nedela</string>
+    <string name="weeks_2_4">Nedeli</string>
+    <string name="weeks_5">Nedeli</string>
+    <string name="month">Mesec</string>
+    <string name="months_2_4">Meseci</string>
+    <string name="months_5">Meseci</string>
+    <string name="get_discount_first_few_part">%1$s za prvite %2$s</string>
+    <string name="get_discount_second_part">Potoa %1$s</string>
+    <string name="cancel_subscription">Otkažete ja pretplatata</string>
+    <string name="rendering_attr_tracktype_grade1_name">Cvrst (popločen)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Cvrst (nepopločen)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Najčesto soliden</string>
+    <string name="rendering_attr_tracktype_grade4_name">Najčesto meko</string>
+    <string name="rendering_attr_tracktype_grade5_name">Meko</string>
+    <string name="routeInfo_tracktype_name">Cvrstina na površinata</string>
+    <string name="shared_string_file_is_saved">%s e zacuvano</string>
+    <string name="shared_string_open_track">Otvori zapis</string>
+    <string name="app_mode_offroad">Nadvor od patot</string>
+    <string name="edit_profile_setup_title">Postavete profil</string>
+    <string name="edit_profile_setup_subtitle">Profilot gi zadržuva svoite postavki</string>
+    <string name="edit_profile_screen_options_subtitle">Izberete opcii za ekranot za profilot</string>
+    <string name="routing_attr_max_num_changes_description">Navedete ja gornata granica na promeni</string>
+    <string name="routing_attr_max_num_changes_name">Broj na promeni</string>
+    <string name="precision_hdop_and_vdop">Horizontalna preciznost: %1$s, vertikalna: %2$s</string>
+    <string name="precision_hdop">Horizontalna preciznost: %s</string>
+    <string name="app_mode_personal_transporter">Ličen transporter</string>
+    <string name="app_mode_monowheel">Monovozilo</string>
+    <string name="rate_dialog_descr">Spodelete gi vašite povratni informacii i ocenete ja našata rabota na Google Play.</string>
+    <string name="button_rate">Oceni</string>
+    <string name="shared_string_privacy_policy">Politika za privatnost</string>
+    <string name="help_us_make_osmand_better">Pomognete ni da go podobrime OsmAnd</string>
+    <string name="make_osmand_better_descr">Dozvolete OsmAnd da sobira i obrabotuva anonimni podatoci za koristenje na aplikacijata. Ne se sobiraat podatoci za vašata pozicija ili lokaciite što gi gledate na kartata.
+\n
+\nKonfigurirajte vo sekoe vreme vo „Postavki“ → „Privatnost i bezbednost“.</string>
+    <string name="choose_data_to_share">Izberete go tipot na podatoci što sakate da gi spodelite:</string>
+    <string name="downloaded_maps">Prevzemeni karti</string>
+    <string name="visited_screens">Poeteni ekrani</string>
+    <string name="collected_data">Sobrana datoteka</string>
+    <string name="collected_data_descr">Definirajte koi podatoci ḱe dozvolite da gi spodeluva OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Ni pomaga da ja razbereme popularnosta na mapata na zemjata i regionot.</string>
+    <string name="visited_screens_collect_descr">Ni pomaga da ja razbereme popularnosta na funkciite OsmAnd.</string>
+    <string name="app_mode_subway">Metro</string>
+    <string name="app_mode_horse">Konj</string>
+    <string name="routing_profile_ski">Skijanje</string>
+    <string name="profile_type_descr_string">Tip: %s</string>
+    <string name="profile_type_base_string">Osnoven profil</string>
+    <string name="profile_alert_need_routing_type_title">Izberete tip na navigacija</string>
+    <string name="profile_alert_need_routing_type_msg">Izberete tip na navigacija za noviot profil na aplikacijata</string>
+    <string name="select_base_profile_dialog_title">Izberete profil za početok</string>
+    <string name="base_profile_descr_pedestrian">Pešačenje, planinarenje, trčanje</string>
+    <string name="base_profile_descr_boat">Brod, veslanje, plovenje</string>
+    <string name="base_profile_descr_aircraft">Avion, lizganje</string>
+    <string name="routing_profile_geocoding">Geokodiranje</string>
+    <string name="routing_profile_straightline">Prava linija</string>
+    <string name="osmand_default_routing">OsmAnd rutiranje</string>
+    <string name="custom_routing">Prilagodi go profilot za rutiranje</string>
+    <string name="special_routing_type">Posebni rutiranja</string>
+    <string name="third_party_routing_type">Third-party rutiranje</string>
+    <string name="application_profiles">Dodadete profili</string>
+    <string name="dont_move_maps">Ne premestuvaj</string>
+    <string name="public_transport_ped_route_title">Maršrutata peški e približno %1$s i može da bide pobrza od javniot prevoz</string>
+    <string name="public_transport_no_route_title">Za žal, OsmAnd ne možeše da najde ruta pogodna za vašite postavki.</string>
+    <string name="public_transport_try_ped">Obidete se so navigacija za peški.</string>
+    <string name="public_transport_try_change_settings">Obidete se da gi promenite postavkite.</string>
+    <string name="edit_profile_nav_settings_subtitle">Izberete postavki za navigacija za profilot</string>
+    <string name="route_parameters">Parametri na rutata</string>
+    <string name="days_5">Denovi</string>
+    <string name="year">Godina</string>
+    <string name="years_2_4">Godini</string>
+    <string name="days_2_4">Denovi</string>
+    <string name="turn_on_profile_desc">Vklučete barem eden profil na aplikacija za da ja koristite ovaa postavka.</string>
+    <string name="app_mode_ufo">NLO</string>
+    <string name="nav_type_hint">Tip na navigacija</string>
+    <string name="release_3_4">• Profili na aplikacii: kreirajte prisposoben profil za vašite potrebi, so prisposobena ikona i boja
+\n
+\n • Sega prisposobete gi standardnite i minimalnite/maksimalnite brzini na koj bilo profil
+\n
+\n • Dodadeno vidžet za tekovnite koordinati
+\n
+\n • Dodadeni opcii za prikažuvanje na kompasot i linijar so radius na kartata
+\n
+\n • Popravete evidentiranje na traki vo zadnina
+\n
+\n • Podobreno prezemanje mapi vo zadnina
+\n
+\n • Se vrati opcijata „Vkluči ekran“.
+\n
+\n • Popraven izbor na jazik na Vikipedija
+\n
+\n • Fiksirano odnesuvanje na kopčeto za kompas za vreme na navigacijata
+\n
+\n • Drugi popraveni greški
+\n
+\n</string>
+    <string name="routing_profile_broutrer">BRuter oflajn</string>
+    <string name="searching_gps">Prebaruvanje GPS</string>
+    <string name="profile_name_hint">Ime na profilot</string>
+    <string name="app_mode_taxi">Taksi</string>
+    <string name="app_mode_shuttle_bus">Shatl avtobus</string>
+    <string name="application_profiles_descr">Izberete gi profilite što ḱe bidat vidlivi vo aplikacijata.</string>
+    <string name="coordinates_widget">Koordinati za vidzet</string>
 </resources>
