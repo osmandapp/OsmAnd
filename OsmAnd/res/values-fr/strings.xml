@@ -4708,4 +4708,5 @@
     <string name="includes_osm_changes_until">Inclut les modifications OSM jusqu’au %1$s.</string>
     <string name="next_live_update_date_and_time">Prochaine mise à jour : %1$s dans %2$s.</string>
     <string name="next_live_update_time">Prochaine mise à jour : dans %1$s.</string>
+    <string name="lang_ckb">Sorani</string>
 </resources>
