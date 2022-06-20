@@ -4714,4 +4714,6 @@
     <string name="altitude_correction">Корекція висоти</string>
     <string name="updated_map_time">Оновлено: %1$s.</string>
     <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>
+    <string name="no_altitude_data_desc">Ви можете прикріпити свій трек до доріг, щоб отримати дані %1$s або обчислити їх онлайн.</string>
+    <string name="calculate_online_altitude_descr">Обчислюйте висоту онлайн на серверах OsmAnd на основі супутникових знімків та цифрових моделей висот. Результат може відрізнятися від записаної пристроєм висоти та може бути використаним як корекція висоти.</string>
 </resources>
