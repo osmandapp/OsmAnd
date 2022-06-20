@@ -12,6 +12,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSet
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
@@ -43,8 +44,8 @@ public enum WidgetType {
 	INTERMEDIATE_DESTINATION("intermediate_distance", R.string.map_widget_distance_to_intermediate, 0, R.drawable.widget_intermediate_day, R.drawable.widget_intermediate_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
 	TIME_TO_INTERMEDIATE("time_to_intermediate", R.string.map_widget_time_to_intermediate, 0, R.drawable.widget_intermediate_time_day, R.drawable.widget_intermediate_time_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
 	TIME_TO_DESTINATION("time_to_destination", R.string.map_widget_time_to_destination, 0, R.drawable.widget_time_to_distance_day, R.drawable.widget_time_to_distance_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
-	SIDE_MARKER_1("map_marker_1st", R.string.map_marker_1st, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
-	SIDE_MARKER_2("map_marker_2nd", R.string.map_marker_2nd, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
+	SIDE_MARKER_1("map_marker_1st", R.string.marker_1st, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
+	SIDE_MARKER_2("map_marker_2nd", R.string.marker_2nd, 0, R.drawable.widget_marker_day, R.drawable.widget_marker_night, 0, WidgetGroup.MAP_MARKERS, RIGHT),
 	RELATIVE_BEARING("relative_bearing", R.string.map_widget_bearing, 0, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
 	MAGNETIC_BEARING("magnetic_bearing", R.string.map_widget_magnetic_bearing, R.string.magnetic_bearing_widget_desc, R.drawable.widget_bearing_day, R.drawable.widget_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
 	TRUE_BEARING("true_bearing", R.string.map_widget_true_bearing, 0, R.drawable.widget_true_bearing_day, R.drawable.widget_true_bearing_night, 0, WidgetGroup.BEARING, RIGHT),
@@ -184,6 +185,8 @@ public enum WidgetType {
 			return new RadiusRulerWidgetSettingsFragment();
 		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
 			return new TimeToNavigationPointSettingsFragment();
+		} else if (this == SIDE_MARKER_1 || this == SIDE_MARKER_2) {
+			return new MapMarkerSideWidgetSettingsFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
 		}

@@ -27,7 +27,7 @@ public class TimeToNavigationPointWidgetState extends WidgetState {
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		this.arrivalTimeOrTimeToGo = app.getSettings().registerBooleanPreference(prefId, true).makeProfile();
+		this.arrivalTimeOrTimeToGo = settings.registerBooleanPreference(prefId, true).makeProfile();
 	}
 
 	public boolean isIntermediate() {
@@ -55,8 +55,8 @@ public class TimeToNavigationPointWidgetState extends WidgetState {
 	}
 
 	@Override
-	public void changeState(int stateId) {
-		arrivalTimeOrTimeToGo.set(stateId == TIME_CONTROL_WIDGET_STATE_ARRIVAL_TIME);
+	public void changeToNextState() {
+		arrivalTimeOrTimeToGo.set(!arrivalTimeOrTimeToGo.get());
 	}
 
 	public enum TimeToNavigationPointState {
