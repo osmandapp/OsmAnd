@@ -4706,4 +4706,12 @@
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_lpg_name">Пропан</string>
     <string name="lang_ckb">Центральна курдська</string>
+    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини.</string>
+    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня.</string>
+    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня.</string>
+    <string name="next_live_update_date_and_time">Наступне оновлення: %1$s о %2$s.</string>
+    <string name="next_live_update_time">Наступне оновлення: о %1$s.</string>
+    <string name="altitude_correction">Корекція висоти</string>
+    <string name="updated_map_time">Оновлено: %1$s.</string>
+    <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>
 </resources>
