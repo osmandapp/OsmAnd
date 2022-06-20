@@ -1361,6 +1361,7 @@ public class ResourceManager {
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
+		backupedFileNames.remove(fileName);
 		indexFiles.remove(fileName);
 		travelRepositories.remove(fileName);
 		renderer.closeConnection(fileName);

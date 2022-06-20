@@ -4211,10 +4211,7 @@
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
     <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
     <string name="app_restart_required">Programomstart kreves for å bruke noen innstillinger.</string>
-    <string name="live_update_frequency_hour_variant">Ser etter kart hver time. Neste gang %1$s om %2$s.</string>
     <string name="voice_prompts_timetable">Talemeldingstider</string>
-    <string name="live_update_frequency_week_variant">Ser etter kart hver uke. Neste gang %1$s om %2$s.</string>
-    <string name="live_update_frequency_day_variant">Ser etter kart hver dag. Neste gang %1$s om %2$s.</string>
     <string name="update_all_maps_added">Oppdater alle kart lagt til i %1$s\?</string>
     <string name="purchases_feature_desc_wikivoyage">Utforsk Wikivoyage frakoblet. Artikler inndelt etter land og regioner og tilgjengelig på alle språk.</string>
     <string name="purchases_feature_desc_wikipedia">Utforsk Wikipedia frakoblet. Artikler inndelt etter land og regioner og tilgjengelig på alle språk.</string>
@@ -4640,7 +4637,6 @@
     <string name="calculate_altitude">Regn ut høyde</string>
     <string name="no_altitude_data">Ingen høydedata</string>
     <string name="navigation_points">Navigasjonspunkter</string>
-    <string name="calculate_online_altitude_descr">Høydedata vil bli regnet ut på OsmAnd-tjeneren.</string>
     <string name="calculating_altitude">Beregner høyde</string>
     <string name="get_altitude_information">Hent høydeinfo</string>
     <string name="turn_on_public_transport_description">Slå på for å vise offentlige transportruter på kartet.</string>

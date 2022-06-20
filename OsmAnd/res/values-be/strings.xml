@@ -4143,7 +4143,6 @@
     <string name="route_maneuvers">Маршрутныя манеўры</string>
     <string name="get_altitude_information">Атрымаць інфармацыю аб вышыні</string>
     <string name="calculating_altitude">Разлік вышыні</string>
-    <string name="calculate_online_altitude_descr">Даныя аб вышыні будуць разлічвацца на серверы OsmAnd.</string>
     <string name="calculate_online">Разлічыць у сеціве</string>
     <string name="track_attach_to_the_roads_descr">След будзе прымацаваны да дарогі з дапамогай аўтаномных мапаў, геаметрыя следу будзе зменена.</string>
     <string name="street_name_widget_desc">Віджэт назвы вуліцы паказвае бягучую назву вуліцы са стрэлкай прамога месцазнаходжання або наступную назву вуліцы з манеўрам, які трэба выканаць.</string>
@@ -4354,11 +4353,8 @@
     <string name="temporary_conditional_routing_descr">Выкарыстоўваць дарожныя абмежаванні, якія зараз дзейнічаюць на мапе</string>
     <string name="android_auto_purchase_request_title">Набудзьце OsmAnd Pro або Maps+, каб выкарыстоўваць OsmAnd з Android Auto</string>
     <string name="troubleshooting_description">Калі ў вас узніклі праблемы з пакупкамі, перайдзіце па гэтай спасылцы.</string>
-    <string name="live_update_frequency_hour_variant">Абнаўленні мапы будуць правяраецца штогадзіну. Наступны раз %1$s у %2$s.</string>
-    <string name="live_update_frequency_week_variant">Абнаўленні мапы будуць правярацца штотыдзень. Наступны раз %1$s у %2$s.</string>
     <string name="approx_safe_mode_description">Выканаць апраксімацыю GPX, выкарыстоўваючы больш павольны код Android замест убудаванага.</string>
     <string name="quick_action_coordinates_widget_descr">Пераключальнік для адлюстравання або скрыцця віджэту каардынатаў на мапе.</string>
-    <string name="live_update_frequency_day_variant">Абнаўленні мапы будуць правярацца штодня. Наступны раз %1$s у %2$s.</string>
     <string name="map_orientation_threshold_descr">Не паварочваць прагляд мапы, калі хуткасць меншая за гранічную</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Колер маршрутаў у залежнасці ад тыпу сеткі вузлоў (міжнародная, рэгіянальная, лакальная).</string>
     <string name="benefits_for_contributors_primary_descr">Актыўныя ўдзельнікі OpenStreetMap.org маюць права на неабмежаваную колькасць штогадзінных абнаўленняў мапаў.</string>

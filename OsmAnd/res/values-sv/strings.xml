@@ -3311,9 +3311,6 @@
     <string name="updated">Uppdaterad: %s</string>
     <string name="last_time_checked">Senast kontrollerad: %s</string>
     <string name="update_frequency">Uppdateringsfrekvens</string>
-    <string name="live_update_frequency_week_variant">Kartuppdateringar kommer att kontrolleras varje vecka. Nästa gång %1$s i %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kartuppdateringar kommer att kontrolleras varje dag. Nästa gång %1$s i %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kartuppdateringar kontrolleras varje timme. Nästa gång %1$s i %2$s.</string>
     <string name="delete_updates">Ta bort uppdateringar</string>
     <string name="live_update_delete_updates_msg">Ta bort alla %s liveuppdateringar\?</string>
     <string name="purchases">Inköp</string>
