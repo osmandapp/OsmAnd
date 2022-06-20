@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="marker_2nd">Second marker</string>
+    <string name="marker_1st">First marker</string>
     <string name="map_marker_average_speed_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
     <string name="switch_widget_mode_desc">You can switch mode by taping on widget.</string>
     <string name="side_marker_eta">Estimated time of arrival</string>
