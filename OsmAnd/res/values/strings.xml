@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="goods_delivery_desc_4">If your vehicle weight is more than 3.5 tonnes you need to use Truck profile.</string>
+    <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
+    <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>
+    <string name="goods_delivery_desc">Vehicle transporting goods can be restricted to access some roads. </string>
+    <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="updated_map_time">Updated: %1$s.</string>
     <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
     <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
