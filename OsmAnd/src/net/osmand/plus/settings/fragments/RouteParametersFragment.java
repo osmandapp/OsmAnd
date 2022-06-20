@@ -569,17 +569,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private void setupGoodsRestrictionsPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
 		Preference uiPreference = new Preference(app);
 		uiPreference.setKey(GOODS_RESTRICTIONS_PREFERENCE);
-		uiPreference.setTitle(R.string.goods_delivery);
+		String title = getRoutingStringPropertyName(app, parameter.getId(), parameter.getName());
+		uiPreference.setTitle(title);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr);
-		screen.addPreference(uiPreference);
-		updateGoodsRestrictionPreference();
-	}
-
-	private void updateGoodsRestrictionPreference() {
-		Preference uiPreference = findPreference(GOODS_RESTRICTIONS_PREFERENCE);
-		if (uiPreference == null) {
-			return;
-		}
 		ApplicationMode appMode = getSelectedAppMode();
 		OsmandPreference<Boolean> preference = getGoodsRestrictionPreference();
 		boolean selected = preference.getModeValue(appMode);
@@ -588,6 +580,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		String description = getString(selected ? R.string.shared_string_yes : R.string.shared_string_no);
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(icon);
+		screen.addPreference(uiPreference);
 	}
 
 	@Override
@@ -679,9 +672,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				resetPreference(HAZMAT_ROUTING_PREFERENCE, applyToAllProfiles);
 			}
 			updateHazmatCategoryPreference();
-		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
-			applyPreference(GOODS_RESTRICTIONS_PREFERENCE, applyToAllProfiles, newValue);
-			updateGoodsRestrictionPreference();
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
