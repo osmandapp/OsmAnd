@@ -13,10 +13,10 @@ public abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
 	@Override
 	public synchronized void addListener(StateChangedListener<T> listener) {
 		if (l == null) {
-			l = new LinkedList<>();
+			l = new LinkedList<WeakReference<StateChangedListener<T>>>();
 		}
-		if (!l.contains(new WeakReference<>(listener))) {
-			l.add(new WeakReference<>(listener));
+		if (!l.contains(new WeakReference<StateChangedListener<T>>(listener))) {
+			l.add(new WeakReference<StateChangedListener<T>>(listener));
 		}
 	}
 
