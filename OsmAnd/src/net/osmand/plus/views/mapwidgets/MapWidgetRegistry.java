@@ -141,19 +141,14 @@ public class MapWidgetRegistry {
 		return widgetInfo != null && widgetInfo.isEnabledForAppMode(appMode);
 	}
 
-	public void enableDisableWidget(@NonNull MapWidgetInfo widgetInfo, boolean enabled) {
-		ApplicationMode appMode = settings.getApplicationMode();
-		enableDisableWidgetForMode(appMode, widgetInfo, enabled, true);
-	}
-
 	public void enableDisableWidgetForMode(@NonNull ApplicationMode appMode,
 	                                       @NonNull MapWidgetInfo widgetInfo,
-	                                       boolean enabled,
+	                                       @Nullable Boolean enabled,
 	                                       boolean recreateControls) {
 		widgetInfo.enableDisableForMode(appMode, enabled);
 		notifyWidgetVisibilityChanged(widgetInfo);
 
-		if (widgetInfo.isCustomWidget() && !enabled) {
+		if (widgetInfo.isCustomWidget() && (enabled == null || !enabled)) {
 			settings.CUSTOM_WIDGETS_KEYS.removeValue(widgetInfo.key);
 		}
 
@@ -349,7 +344,7 @@ public class MapWidgetRegistry {
 		createRightWidgets(widgetsFactory, widgetInfos, appMode);
 
 		OsmandPlugin.createMapWidgets(mapActivity, widgetInfos, appMode);
-		app.getAidlApi().createWidgetControls(mapActivity, widgetInfos);
+		app.getAidlApi().createWidgetControls(mapActivity, widgetInfos, appMode);
 		createCustomWidgets(widgetsFactory, appMode, widgetInfos);
 
 		return widgetInfos;
@@ -445,10 +440,11 @@ public class MapWidgetRegistry {
 	                                          @DrawableRes int settingsIconId,
 	                                          @Nullable String message,
 	                                          @NonNull WidgetsPanel defaultPanel,
-	                                          int order) {
-		WidgetsPanel panel = getExternalWidgetPanel(widgetId, defaultPanel);
-		int page = panel.getWidgetPage(widgetId, settings);
-		int savedOrder = panel.getWidgetOrder(widgetId, settings);
+	                                          int order,
+	                                          @NonNull ApplicationMode appMode) {
+		WidgetsPanel panel = getExternalWidgetPanel(widgetId, defaultPanel, appMode);
+		int page = panel.getWidgetPage(appMode, widgetId, settings);
+		int savedOrder = panel.getWidgetOrder(appMode, widgetId, settings);
 		if (savedOrder != WidgetsPanel.DEFAULT_ORDER) {
 			order = savedOrder;
 		}
@@ -476,7 +472,7 @@ public class MapWidgetRegistry {
 		MapWidget widget = factory.createMapWidget(key, widgetType);
 		if (widget != null) {
 			WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
-			return createCustomWidget(key, widget, widgetType, panel);
+			return createCustomWidget(key, widget, widgetType, panel, appMode);
 		}
 		return null;
 	}
@@ -485,17 +481,20 @@ public class MapWidgetRegistry {
 	public MapWidgetInfo createCustomWidget(@NonNull String widgetId,
 	                                        @NonNull MapWidget widget,
 	                                        @NonNull WidgetType widgetType,
-	                                        @NonNull WidgetsPanel panel) {
-		int page = panel.getWidgetPage(widgetType.id, settings);
-		int order = panel.getWidgetOrder(widgetType.id, settings);
+	                                        @NonNull WidgetsPanel panel,
+	                                        @NonNull ApplicationMode appMode) {
+		int page = panel.getWidgetPage(appMode, widgetId, settings);
+		int order = panel.getWidgetOrder(appMode, widgetId, settings);
 
 		return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId, widgetType.titleId, null, page, order, panel);
 	}
 
 	@NonNull
-	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId, @NonNull WidgetsPanel defaultPanel) {
-		boolean storedInLeftPanel = WidgetsPanel.LEFT.getWidgetOrder(widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
-		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
+	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId,
+	                                            @NonNull WidgetsPanel defaultPanel,
+	                                            @NonNull ApplicationMode appMode) {
+		boolean storedInLeftPanel =WidgetsPanel.LEFT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
+		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
 		if (storedInLeftPanel) {
 			return WidgetsPanel.LEFT;
 		} else if (storedInRightPanel) {

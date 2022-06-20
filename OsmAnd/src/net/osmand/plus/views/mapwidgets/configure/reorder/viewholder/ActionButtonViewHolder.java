@@ -19,7 +19,7 @@ public class ActionButtonViewHolder extends ViewHolder implements UnmovableItem 
 
 	public ActionButtonViewHolder(@NonNull View itemView) {
 		super(itemView);
-		buttonView = itemView.findViewById(R.id.button_container);
+		buttonView = itemView.findViewById(R.id.container);
 		icon = itemView.findViewById(R.id.icon);
 		title = itemView.findViewById(R.id.title);
 	}
