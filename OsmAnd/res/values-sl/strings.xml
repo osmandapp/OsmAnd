@@ -1545,7 +1545,7 @@
     <string name="lang_vo">Volapik</string>
     <string name="lang_th">Tajščina</string>
     <string name="lang_te">Telugujščina</string>
-    <string name="lang_nn">Norveški Norsk</string>
+    <string name="lang_nn">Norveščina Norsk</string>
     <string name="lang_new">Nepalščina</string>
     <string name="lang_ms">Malajščina</string>
     <string name="lang_ht">Haitščina</string>
@@ -1554,7 +1554,7 @@
     <string name="lang_ceb">Cebuanščina</string>
     <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz Wikipedije. Ali jih želite arhivirati?</string>
     <string name="lang_es_ar">Španščina (argentinska)</string>
-    <string name="lang_nb">Norveški Bokmål</string>
+    <string name="lang_nb">Norveščina Bokmål</string>
     <string name="light_theme">Svetla</string>
     <string name="dark_theme">Temna</string>
     <string name="lang_pms">Pijemontščina</string>
@@ -4326,9 +4326,9 @@
     <string name="legend_item_description">Vodnik po simbolih zemljevida.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Iskanje po vrsti POI točk</string>
-    <string name="lang_lmo">lombardščina</string>
-    <string name="lang_uz">uzbeščina</string>
-    <string name="lang_war">varajščina</string>
+    <string name="lang_lmo">Lombardščina</string>
+    <string name="lang_uz">Uzbeščina</string>
+    <string name="lang_war">Varajščina</string>
     <string name="some_articles_may_not_available_in_lang">Nekateri članki v Wikipediji morda niso na voljo v tvojem jeziku.</string>
     <string name="shared_string_languages">Jeziki</string>
     <string name="changes_applied_to_profile">Spremembe so bile uporabljene za profil »%1$s«.</string>
@@ -4352,14 +4352,14 @@
     <string name="shared_string_routing">Usmerjanje</string>
     <string name="live_monitoring_adress">Spletni naslov</string>
     <string name="travel_item">Potovanja (Wikivoyage in Wikipedija)</string>
-    <string name="lang_jv">javanščina</string>
-    <string name="lang_kk">kazaščina</string>
-    <string name="lang_mg">malgaščina</string>
-    <string name="lang_min">minangkabajščina</string>
-    <string name="lang_mn">mongolščina</string>
-    <string name="lang_my">burmanščina</string>
-    <string name="lang_nap">neapeljščina</string>
-    <string name="lang_ne">nepalščina</string>
+    <string name="lang_jv">Javanščina</string>
+    <string name="lang_kk">Kazaščina</string>
+    <string name="lang_mg">Malgaščina</string>
+    <string name="lang_min">Minangkabajščina</string>
+    <string name="lang_mn">Mongolščina</string>
+    <string name="lang_my">Burmanščina</string>
+    <string name="lang_nap">Neapeljščina</string>
+    <string name="lang_ne">Nepalščina</string>
     <string name="divider_descr">Elementi pod to točko, ločeni z delilnikom.</string>
     <string name="shared_string_divider">Delilnik</string>
     <string name="context_menu_actions">Dejanja kontekstnega menija</string>
@@ -4394,7 +4394,7 @@
     <string name="subscription_osmandlive_item">Naročnina - OsmAnd Live</string>
     <string name="favorites_item">Priljubljene</string>
     <string name="custom_color">Barva po meri</string>
-    <string name="lang_an">aragonščina</string>
+    <string name="lang_an">Aragonščina</string>
     <string name="replace_point_descr">Zamenjaj drugo točko s to.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Priporočilo: težko je predvideti, kaj bo snemano in kaj ne, morda je najbolje, da izklopiš ta filter.</string>
     <string name="monitoring_min_speed">Najmanjša hitrost</string>
@@ -4403,13 +4403,13 @@
     <string name="profile_import_descr">Dodaj profil tako, da odpreš njegovo datoteko z OsmAnd.</string>
     <string name="file_imported_successfully">%1$s uvoženo.</string>
     <string name="radius_ruler_item">Krožno ravnilo</string>
-    <string name="lang_cv">čuvaščina</string>
-    <string name="lang_gu">gudžaratščina</string>
-    <string name="lang_ur">urdujščina</string>
+    <string name="lang_cv">Čuvaščina</string>
+    <string name="lang_gu">Gudžaratščina</string>
+    <string name="lang_ur">Urdujščina</string>
     <string name="settings_item_import_error">Ni bilo mogoče uvoziti iz »%1$s«.</string>
     <string name="settings_item_write_error">Ni bilo mogoče pisati v »%1$s«.</string>
-    <string name="lang_pnb">pandžabščina</string>
-    <string name="lang_scn">sicilijanščina</string>
+    <string name="lang_pnb">Pandžabščina</string>
+    <string name="lang_scn">Sicilijanščina</string>
     <string name="main_actions_descr">Ima samo štiri gumbe.</string>
     <string name="reset_items_descr">Skrivanje nastavitev jih ponastavi v prvotno stanje.</string>
     <string name="shared_string_hidden">Skrito</string>
@@ -4432,10 +4432,10 @@
     <string name="accessibility_announce">Napovej</string>
     <string name="tracker_item">Sledilnik OsmAnd</string>
     <string name="download_unsupported_action">Nepodprto dejanje %1$s</string>
-    <string name="lang_tt">tatarščina</string>
-    <string name="lang_tg">tadžiščina</string>
-    <string name="lang_zhminnan">južna minščina</string>
-    <string name="lang_zhyue">kantonščina</string>
+    <string name="lang_tt">Tatarščina</string>
+    <string name="lang_tg">Tadžiščina</string>
+    <string name="lang_zhminnan">Južna minščina</string>
+    <string name="lang_zhyue">Kantonščina</string>
     <string name="wiki_menu_download_descr">Za ogled wikipedijinih POI točk na zemljevidu so potrebni dodatni zemljevidi.</string>
     <string name="shared_string_language">Jezik</string>
     <string name="shared_string_import_complete">Uvoz je končan</string>
@@ -4461,9 +4461,9 @@
 \nPodaljša se, razen če ni preklicana pred izbranim obdobjem podaljšanja.
 \n
 \nSvoje naročnine lahko kadar koli upravljaš ali prekličeš v nastavitvah Google Play .</string>
-    <string name="lang_ky">kirgizijščina</string>
-    <string name="lang_yo">jorubščina</string>
-    <string name="lang_sco">škotščina</string>
+    <string name="lang_ky">Kirgizijščina</string>
+    <string name="lang_yo">Jorubščina</string>
+    <string name="lang_sco">Škotščina</string>
     <string name="select_wikipedia_article_langs">Izberi jezike za Wikipedijine članke na zemljevidu. Med branjem članka preklopi na kateri koli jezik, ki je na voljo.</string>
     <string name="select_track_file">Izberite datoteko sledi</string>
     <string name="settings_item_read_error">Ni bilo mogoče brati iz »%1$s«.</string>
@@ -4550,9 +4550,9 @@
     <string name="live_monitoring">Spletno sledenje</string>
     <string name="osm_editing">Urejanje OSM</string>
     <string name="shared_string_all_languages">Vsi jeziki</string>
-    <string name="lang_ba">baškirščina</string>
-    <string name="lang_bar">bavarščina</string>
-    <string name="lang_ce">čečenščina</string>
+    <string name="lang_ba">Baškirščina</string>
+    <string name="lang_bar">Bavarščina</string>
+    <string name="lang_ce">Čečenščina</string>
     <string name="monitoring_min_distance_descr_recommendation">Priporočilo: nastavitev 5 metrov lahko dobro deluje, če ne želiš zajemati drobnih podrobnosti in ne želiš izrecno zajemati podatkov med mirovanjem.</string>
     <string name="live_monitoring_time_buffer">Časovni medpomnilnik</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Za usmerjanje raje uporabi neasfaltirane kot asfaltirane ceste.</string>
@@ -4638,7 +4638,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Zračna pot</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="what_is_new">Kaj je novega</string>
-    <string name="lang_de_casual">nemščina (neformalna)</string>
+    <string name="lang_de_casual">Nemščina (neformalna)</string>
     <string name="search_offline_geo_error">Geo namere »%s« ni bilo mogoče razčleniti.</string>
     <string name="simulate_your_location_gpx_descr">Simuliraj svoj položaj s posneto sledjo GPX.</string>
     <string name="sort_by_category">Razvrsti po kategoriji</string>
@@ -4674,7 +4674,7 @@
     <string name="map_widget_distance_to_intermediate">Razdalja do vmesne točke</string>
     <string name="radius_ruler_mode_desc">Če tapneš gradnik, preklopiš v način ravnila polmera.</string>
     <string name="shared_string_mode">Način</string>
-    <string name="lang_sat">santalščina</string>
+    <string name="lang_sat">Santalščina</string>
     <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se ne upošteva in ne vpliva na povprečno hitrost.</string>
     <string name="average_speed_skip_stops">Upoštevaj postanke</string>
     <string name="average_speed_time_interval_desc">Določi časovni interval, v katerem se meri povprečna hitrost.</string>
@@ -4697,4 +4697,15 @@
     <string name="routing_attr_motor_type_petrol_name">Bencin</string>
     <string name="routing_attr_motor_type_lpg_name">Avtoplin LPG</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibridni</string>
+    <string name="live_update_frequency_hour_variant">Posodobitve zemljevidov se preverjajo vsako uro.</string>
+    <string name="live_update_frequency_week_variant">Posodobitve zemljevidov se bodo preverjale vsak teden.</string>
+    <string name="live_update_frequency_day_variant">Posodobitve zemljevidov se bodo preverjale vsak dan.</string>
+    <string name="calculate_online_altitude_descr">Izračunaj nadmorsko višino na spletu na strežnikih OsmAnd na podlagi satelitskih posnetkov in digitalnih modelov višin. Lahko se razlikuje od nadmorske višine, zabeležene z napravo, in se lahko uporablja kot popravek nadmorske višine.</string>
+    <string name="lang_ckb">Soranska kurdščina</string>
+    <string name="next_live_update_time">Naslednja posodobitev: v %1$s.</string>
+    <string name="altitude_correction">Popravek nadmorske višine</string>
+    <string name="no_altitude_data_desc">Svojo progo lahko pritrdiš na ceste in tako dobiš podatke %1$s, ali jih izračunaš prek spleta.</string>
+    <string name="includes_osm_changes_until">Vključuje spremembe OSM, narejene do %1$s.</string>
+    <string name="updated_map_time">Posodobljeno: %1$s.</string>
+    <string name="next_live_update_date_and_time">Naslednja posodobitev: %1$s v %2$s.</string>
 </resources>
