@@ -26,6 +26,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.Nullable;
+
 public class IncrementalChangesManager {
 	private static final Log LOG = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private static final String URL = "https://osmand.net/check_live";
@@ -192,6 +194,7 @@ public class IncrementalChangesManager {
 			return false;
 		}
 
+		@Nullable
 		public List<IncrementalUpdate> getItemsForUpdate() {
 			Iterator<IncrementalUpdateGroupByMonth> it = updateByMonth.values().iterator();
 			List<IncrementalUpdate> ll = new ArrayList<IncrementalUpdate>();

@@ -4004,9 +4004,6 @@
     <string name="updated">Zaktualizowano: %s</string>
     <string name="last_time_checked">Ostatnio sprawdzono: %s</string>
     <string name="update_frequency">Częstotliwość aktualizacji</string>
-    <string name="live_update_frequency_week_variant">Aktualizacje map będą sprawdzane co tydzień. Następnym razem %1$s w %2$s.</string>
-    <string name="live_update_frequency_day_variant">Aktualizacje map będą sprawdzane codziennie. Następnym razem %1$s w %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Aktualizacje map będą sprawdzane co godzinę. Następnym razem %1$s w %2$s.</string>
     <string name="delete_updates">Usuń aktualizacje</string>
     <string name="live_update_delete_updates_msg">Usunąć wszystkie %s aktualizacje na żywo\?</string>
     <string name="purchases">Zakupy</string>

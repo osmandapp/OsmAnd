@@ -4006,9 +4006,6 @@
     <string name="updated">Aktualizované: %s</string>
     <string name="last_time_checked">Posledná kontrola: %s</string>
     <string name="update_frequency">Frekvencia aktualizácií</string>
-    <string name="live_update_frequency_week_variant">Aktualizácie mapy budú kontrolované každý týždeň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_day_variant">Aktualizácie mapy budú kontrolované každý deň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Aktualizácie mapy budú kontrolované každú hodinu. Nasledujúca kontrola %1$s o %2$s.</string>
     <string name="delete_updates">Odstrániť aktualizácie</string>
     <string name="live_update_delete_updates_msg">Zmazať všetky živé aktualizácie (%s)\?</string>
     <string name="select_category_descr">Zvoľte kategóriu alebo pridajte novú</string>
@@ -4642,7 +4639,6 @@
     <string name="app_mode_mountain_bicycle">Horský bicykel</string>
     <string name="route_maneuvers_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
     <string name="calculating_altitude">Vypočítava sa výška</string>
-    <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd.</string>
     <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
     <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
     <string name="explore_plans">Preskúmať možnosti predplatného</string>

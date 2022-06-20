@@ -2433,9 +2433,6 @@
     <string name="track_recording_description">Stopio recordio\?
 \nCaiff yr holl ddata heb ei gadw ei golli.</string>
     <string name="provided_by">Darparwyd gan %1$s</string>
-    <string name="live_update_frequency_week_variant">Caiff diweddariadau mapiau eu gwirio yn wythnosol. Y tro nesaf %1$s ymhen %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Caiff diweddariadau mapiau eu gwirio pob awr. Y tro nesaf %1$s ymhen %2$s.</string>
-    <string name="live_update_frequency_day_variant">Caiff diweddariadau mapiau eu gwirio yn ddyddiol. Y tro nesaf %1$s ymhen %2$s.</string>
     <string name="latest_openstreetmap_update">Diweddariad diweddaraf OpenStreetMap ar gael:</string>
     <string name="select_picture">Dewiswch lun</string>
     <string name="cannot_upload_image">Methu llwytho delwedd i fyny. Ceisiwch eto\'n hwyrach</string>
@@ -2581,7 +2578,6 @@
     <string name="map_markers_desc">Ar yr ategyn bar uchaf gallwch weld pellter a chyfeiriad y nodwr o\'r lleoliad presennol. Mae\'n bosib ei ffurfweddu i weld un neu ddau farcwr yn yr ategyn.</string>
     <string name="calculate_altitude">Cyfrifo\'r uchder</string>
     <string name="no_altitude_data">Dim data uchder</string>
-    <string name="calculate_online_altitude_descr">Caiff data uchder ei gyfrifo ar weinydd OsmAnd.</string>
     <string name="map_widget_current_speed">Cyflymder cyfredol</string>
     <string name="configure_screen_widgets_descr">Dewiswch ochr o\'r sgrin i ychwanegu neu ail-drefnu ategion.</string>
     <string name="import_profile">Mewnforio proffil</string>

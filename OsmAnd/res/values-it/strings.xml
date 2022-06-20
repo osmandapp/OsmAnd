@@ -4001,9 +4001,6 @@
     <string name="updated">Aggiornata: %s</string>
     <string name="last_time_checked">Ultimo controllo: %s</string>
     <string name="update_frequency">Frequenza di aggiornamento</string>
-    <string name="live_update_frequency_week_variant">Gli aggiornamenti della mappa saranno controllati ogni settimana. La prossima alle %2$s %1$s.</string>
-    <string name="live_update_frequency_day_variant">Gli aggiornamenti della mappa saranno controllati ogni giorno. La prossima alle %2$s %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Gli aggiornamenti alla mappa saranno controllati ogni ora. Il prossimo alle %2$s %1$s.</string>
     <string name="delete_updates">Elimina aggiornamenti</string>
     <string name="live_update_delete_updates_msg">Eliminare tutti i %s aggiornamenti live\?</string>
     <string name="purchases">Acquisti</string>
@@ -4636,7 +4633,6 @@
     <string name="circle_settings">Impostazioni del cerchio</string>
     <string name="battery_widget_desc">Il widget mostra il livello della batteria del tuo dispositivo.</string>
     <string name="altitude_widget_desc">Il widget mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
-    <string name="calculate_online_altitude_descr">I dati dell\'altitudine saranno calcolati nel server OsmAnd.</string>
     <string name="fps_widget_desc">Il widget mostra con che velocità la mappa e i suoi elementi sono mostrati e aggiornati.</string>
     <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia quella da utilizzare per la navigazione attuale.</string>
     <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>

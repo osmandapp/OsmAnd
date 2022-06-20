@@ -1,24 +1,12 @@
 package net.osmand.plus.liveupdates;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +16,6 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,10 +23,10 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
@@ -67,7 +48,34 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNextUpdateDate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNextUpdateTimeMillis;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastOsmChange;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
 
@@ -75,11 +83,13 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsBottomSheet.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
+	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm", Locale.US);
+
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
 	private BaseBottomSheetItem itemTitle;
-	private BaseBottomSheetItem itemLastCheck;
+	private BaseBottomSheetItem itemUpdateTimeInfo;
 	private BaseBottomSheetItem itemSwitchLiveUpdate;
 	private BaseBottomSheetItem itemFrequencyHelpMessage;
 	private BaseBottomSheetItem itemClear;
@@ -93,6 +103,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
 		if (!fragmentManager.isStateSaved()) {
 			LiveUpdatesSettingsBottomSheet fragment = new LiveUpdatesSettingsBottomSheet();
+			fragment.usedOnMap = false;
 			fragment.setTargetFragment(target, 0);
 			fragment.fileName = fileName;
 			fragment.show(fragmentManager, TAG);
@@ -130,13 +141,11 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.create();
 		items.add(itemTitle);
 
-		itemLastCheck = new ShortDescriptionItem.Builder()
-				.setDescription(getLastCheckString())
-				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
-				.setDescriptionMaxLines(2)
-				.setLayoutId(R.layout.bottom_sheet_item_description)
+		itemUpdateTimeInfo = new BaseBottomSheetItem.Builder()
+				.setCustomView(inflater.inflate(R.layout.live_update_time_info, null))
 				.create();
-		items.add(itemLastCheck);
+		items.add(itemUpdateTimeInfo);
+		refreshUpdateTimeInfo();
 
 		View itemLiveUpdate = getCustomButtonView(app, null, localUpdatePreference.get(), nightMode);
 		View itemLiveUpdateButton = itemLiveUpdate.findViewById(R.id.button_container);
@@ -158,8 +167,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 								&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, !checked, new Runnable() {
 							@Override
 							public void run() {
-								updateLastCheck();
-								updateFrequencyHelpMessage();
+								refreshUpdateTimeInfo();
+								refreshUpdateFrequencyMessage();
 								updateFileSize();
 								Fragment target = getTargetFragment();
 								if (target instanceof LiveUpdatesFragment) {
@@ -251,8 +260,9 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		dailyButton.setOnClickListener(getFrequencyButtonListener(UpdateFrequency.DAILY, itemTimeOfDayButtons, timeOfDayTitle));
 		weeklyButton.setOnClickListener(getFrequencyButtonListener(UpdateFrequency.WEEKLY, itemTimeOfDayButtons, timeOfDayTitle));
 
-		itemFrequencyHelpMessage = new ShortDescriptionItem.Builder()
-				.setDescription(getFrequencyHelpMessage())
+		itemFrequencyHelpMessage = new BottomSheetItemWithDescriptionDifHeight.Builder()
+				.setMinHeight(0)
+				.setDescription(getString(getUpdateFrequency().descId))
 				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_description)
 				.create();
@@ -280,8 +290,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 							if (onLiveUpdatesForLocalChange != null) {
 								Runnable runnable = () -> {
 									if (isAdded()) {
-										updateLastCheck();
-										updateFrequencyHelpMessage();
+										refreshUpdateTimeInfo();
+										refreshUpdateFrequencyMessage();
 										updateFileSize();
 										Fragment target = getTargetFragment();
 										if (target instanceof LiveUpdatesFragment) {
@@ -357,11 +367,6 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		titleView.setPadding(titleView.getPaddingLeft(), getDimen(R.dimen.content_padding_small),
 				titleView.getPaddingRight(), getDimen(R.dimen.list_item_button_padding));
 
-		int descriptionHeight = getDimen(R.dimen.bottom_sheet_title_height);
-		TextView descriptionView = (TextView) itemLastCheck.getView();
-		descriptionView.setMinimumHeight(descriptionHeight);
-		descriptionView.getLayoutParams().height = descriptionHeight;
-
 		TextView frequencyHelpMessageView = (TextView) itemFrequencyHelpMessage.getView();
 		frequencyHelpMessageView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
 		int dp16 = getDimen(R.dimen.content_padding);
@@ -421,15 +426,10 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	private void updateLastCheck() {
-		if (itemLastCheck != null) {
-			((BottomSheetItemWithDescription) itemLastCheck).setDescription(getLastCheckString());
-		}
-	}
-
-	private void updateFrequencyHelpMessage() {
+	private void refreshUpdateFrequencyMessage() {
 		if (itemFrequencyHelpMessage != null) {
-			((BottomSheetItemWithDescription) itemFrequencyHelpMessage).setDescription(getFrequencyHelpMessage());
+			String updateFrequencyMessage = getString(getUpdateFrequency().descId);
+			((BottomSheetItemWithDescription) itemFrequencyHelpMessage).setDescription(updateFrequencyMessage);
 		}
 	}
 
@@ -439,36 +439,78 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	protected SpannableString getLastCheckString() {
-		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
-		String updatedTimeStr = getString(R.string.updated, formatShortDateTime(app, lastUpdate));
-		if (!updatedTimeStr.contains(getString(R.string.shared_string_never))) {
-			final long lastCheck = preferenceLastCheck(fileName, settings).get();
-			String lastCheckStr = getString(R.string.last_time_checked, formatShortDateTime(app, lastCheck));
-			updatedTimeStr = updatedTimeStr.concat("\n").concat(lastCheckStr);
-			SpannableString spanStr = new SpannableString(updatedTimeStr);
-			Typeface typeface = FontCache.getRobotoMedium(getContext());
-			int start = updatedTimeStr.indexOf(" — ");
-			if (start != -1) {
-				int end = updatedTimeStr.indexOf(lastCheckStr) - 1;
-				spanStr.setSpan(new CustomTypefaceSpan(typeface), start, end, 0);
-				start = updatedTimeStr.lastIndexOf(" — ");
-				if (start != -1) {
-					end = updatedTimeStr.length();
-					spanStr.setSpan(new CustomTypefaceSpan(typeface), start, end, 0);
-				}
-			}
-			return spanStr;
+	private void refreshUpdateTimeInfo() {
+		if (itemUpdateTimeInfo != null) {
+			long lastUpdateTimeMillis = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
+			CharSequence lastUpdateTimeStr = getLastUpdateTimeInfo(lastUpdateTimeMillis);
+			CharSequence nextUpdateTimeStr = getNextUpdateTimeInfo(lastUpdateTimeMillis);
+
+			View view = itemUpdateTimeInfo.getView();
+			TextView lastUpdateInfo = view.findViewById(R.id.last_update_info);
+			TextView nextUpdateInfo = view.findViewById(R.id.next_update_info);
+
+			lastUpdateInfo.setText(lastUpdateTimeStr);
+			nextUpdateInfo.setText(nextUpdateTimeStr);
+			AndroidUiHelper.updateVisibility(nextUpdateInfo, !Algorithms.isEmpty(nextUpdateTimeStr));
 		}
-		return new SpannableString(updatedTimeStr);
 	}
 
-	protected String getFrequencyHelpMessage() {
-		CommonPreference<Integer> updateFrequency = preferenceUpdateFrequency(fileName, settings);
-		CommonPreference<Integer> timeOfDayToUpdate = preferenceTimeOfDayToUpdate(fileName, settings);
-		final long lastUpdate = preferenceLatestUpdateAvailable(fileName, settings).get();
-		return formatHelpDateTime(app, UpdateFrequency.values()[updateFrequency.get()],
-				TimeOfDay.values()[timeOfDayToUpdate.get()], lastUpdate);
+	@NonNull
+	private CharSequence getLastUpdateTimeInfo(long lastUpdateTimeMillis) {
+		boolean noUpdatesYet = lastUpdateTimeMillis == DEFAULT_LAST_CHECK;
+		if (noUpdatesYet) {
+			return getString(R.string.shared_string_never);
+		}
+
+		String lastUpdateTime = getString(R.string.updated_map_time, formatShortDateTime(app, lastUpdateTimeMillis));
+		long lastOsmUpdateTimestamp = preferenceLastOsmChange(fileName, settings).get();
+		if (lastOsmUpdateTimestamp <= 0) {
+			lastOsmUpdateTimestamp = preferenceLastCheck(fileName, settings).get();
+		}
+		if (lastOsmUpdateTimestamp <= 0) {
+			return lastUpdateTime;
+		}
+
+		String formattedOsmUpdateTime = dateFormat.format(new Date(lastOsmUpdateTimestamp));
+		String lastOsmChangesTime = getString(R.string.includes_osm_changes_until, formattedOsmUpdateTime);
+		String updateInfo = getString(R.string.ltr_or_rtl_combine_via_space, lastUpdateTime, lastOsmChangesTime);
+		SpannableString spannable = new SpannableString(updateInfo);
+		CustomTypefaceSpan span = new CustomTypefaceSpan(FontCache.getRobotoMedium(app));
+		int start = updateInfo.indexOf(formattedOsmUpdateTime);
+		int end = start + formattedOsmUpdateTime.length();
+		spannable.setSpan(span, start, end, 0);
+
+		return spannable;
+	}
+
+	@NonNull
+	private String getNextUpdateTimeInfo(long lastUpdateTimeMillis) {
+		boolean noUpdatesYet = lastUpdateTimeMillis == DEFAULT_LAST_CHECK;
+		if (noUpdatesYet) {
+			return "";
+		}
+
+		UpdateFrequency updateFrequency = getUpdateFrequency();
+		TimeOfDay timeOfDay = getTimeOfDayToUpdate();
+		long nextUpdateTimeMillis = getNextUpdateTimeMillis(lastUpdateTimeMillis, updateFrequency, timeOfDay);
+
+		String nextUpdateTime = LiveUpdatesHelper.getNextUpdateTime(app, nextUpdateTimeMillis);
+		String nextUpdateDate = getNextUpdateDate(app, nextUpdateTimeMillis);
+		return DateUtils.isToday(nextUpdateTimeMillis)
+				? getString(R.string.next_live_update_time, nextUpdateTime)
+				: getString(R.string.next_live_update_date_and_time, nextUpdateDate, nextUpdateTime);
+	}
+
+	@NonNull
+	private UpdateFrequency getUpdateFrequency() {
+		CommonPreference<Integer> updateFrequencyPref = preferenceUpdateFrequency(fileName, settings);
+		return UpdateFrequency.values()[updateFrequencyPref.get()];
+	}
+
+	@NonNull
+	private TimeOfDay getTimeOfDayToUpdate() {
+		CommonPreference<Integer> timeOfDayToUpdatePref = preferenceTimeOfDayToUpdate(fileName, settings);
+		return TimeOfDay.values()[timeOfDayToUpdatePref.get()];
 	}
 
 	private long getUpdatesSize() {
@@ -543,7 +585,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 			if (!Algorithms.isEmpty(Arrays.asList(timeOfDayLayouts))) {
 				refreshTimeOfDayLayout(newValue, timeOfDayLayouts);
 			}
-			updateFrequencyHelpMessage();
+			refreshUpdateFrequencyMessage();
 			OnLiveUpdatesForLocalChange confirmationInterface = (OnLiveUpdatesForLocalChange) getTargetFragment();
 			if (confirmationInterface != null) {
 				confirmationInterface.updateList();
@@ -557,7 +599,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		if (confirmationInterface != null) {
 			confirmationInterface.updateList();
 		}
-		updateLastCheck();
+		refreshUpdateTimeInfo();
 		updateFileSize();
 	}
 
