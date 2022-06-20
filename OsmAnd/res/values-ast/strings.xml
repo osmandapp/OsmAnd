@@ -3818,9 +3818,6 @@
     <string name="updated">Data d\'anovamientu: %s</string>
     <string name="last_time_checked">Last time checked: %s</string>
     <string name="update_frequency">Frecuencia del anovamientu</string>
-    <string name="live_update_frequency_week_variant">Map updates will be checked every week. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time %1$s in %2$s.</string>
     <string name="delete_updates">Delete updates</string>
     <string name="live_update_delete_updates_msg">Delete all %s live updates\?</string>
     <string name="purchases">Compres</string>

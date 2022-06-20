@@ -4014,9 +4014,6 @@
     <string name="updated">Оновлено: %s</string>
     <string name="last_time_checked">Востаннє перевірено: %s</string>
     <string name="update_frequency">Частота оновлень</string>
-    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня. Наступного разу %1$s в %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу %1$s в %2$s.</string>
-    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу %1$s в %2$s.</string>
     <string name="delete_updates">Вилучити оновлення</string>
     <string name="live_update_delete_updates_msg">Вилучити всі live-оновлення для %s\?</string>
     <string name="purchases">Покупки</string>
@@ -4645,7 +4642,6 @@
     <string name="route_maneuvers_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
     <string name="get_altitude_information">Отримати дані про висоту</string>
     <string name="calculating_altitude">Обчислення висоти</string>
-    <string name="calculate_online_altitude_descr">Дані про висоту будуть обчислені на сервері OsmAnd.</string>
     <string name="calculate_online">Обчислити онлайн</string>
     <string name="track_attach_to_the_roads_descr">Трек буде прив\'язаний до дороги за допомогою офлайн-мап, геометрія треку буде змінена.</string>
     <string name="get_altitude_data">Отримати дані про висоту</string>

@@ -1,11 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -43,6 +37,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.AvoidRoadsPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
+import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -63,6 +58,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
+import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
+import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
@@ -77,6 +79,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String ROUTING_RECALC_WRONG_DIRECTION = "disable_wrong_direction_recalc";
 	private static final String HAZMAT_TRANSPORTING_ENABLED = "hazmat_transporting_enabled";
 	private static final String HAZMAT_ROUTING_PREFERENCE = ROUTING_PREFERENCE_PREFIX + HAZMAT_CATEGORY;
+	private static final String GOODS_RESTRICTIONS_PREFERENCE = ROUTING_PREFERENCE_PREFIX + GOODS_RESTRICTIONS;
 
 	public static final float DISABLE_MODE = -1.0f;
 	public static final float DEFAULT_MODE = 0.0f;
@@ -291,6 +294,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			for (RoutingParameter p : otherRoutingParameters) {
 				if (HAZMAT_CATEGORY.equals(p.getId())) {
 					setupHazmatCategoryPreference(p, screen);
+				} else if (GOODS_RESTRICTIONS.equals(p.getId())) {
+					setupGoodsRestrictionsPreference(p, screen);
 				} else {
 					Preference preference = createRoutingParameterPref(ctx, p);
 					preference.setIcon(getRoutingPrefIcon(p.getId()));
@@ -422,6 +427,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				Integer selectedValueIndex = enabled ? hazmatParameters.findIndexOfValue(selectedValue) : null;
 				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.names, hazmatParameters.values, selectedValueIndex);
 			}
+		} else if (preference.getKey().equals(GOODS_RESTRICTIONS_PREFERENCE)) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				ApplicationMode appMode = getSelectedAppMode();
+				OsmandPreference<Boolean> pref = getGoodsRestrictionPreference();
+				GoodsRestrictionsBottomSheet.showInstance(manager, this, GOODS_RESTRICTIONS_PREFERENCE, appMode, false, pref.getModeValue(appMode));
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -552,6 +564,23 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(icon);
+	}
+
+	private void setupGoodsRestrictionsPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
+		Preference uiPreference = new Preference(app);
+		uiPreference.setKey(GOODS_RESTRICTIONS_PREFERENCE);
+		String title = getRoutingStringPropertyName(app, parameter.getId(), parameter.getName());
+		uiPreference.setTitle(title);
+		uiPreference.setLayoutResource(R.layout.preference_with_descr);
+		ApplicationMode appMode = getSelectedAppMode();
+		OsmandPreference<Boolean> preference = getGoodsRestrictionPreference();
+		boolean selected = preference.getModeValue(appMode);
+		int iconId = R.drawable.ic_action_van;
+		Drawable icon = selected ? getActiveIcon(iconId) : getContentIcon(iconId);
+		String description = getString(selected ? R.string.shared_string_yes : R.string.shared_string_no);
+		uiPreference.setSummary(description);
+		uiPreference.setIcon(icon);
+		screen.addPreference(uiPreference);
 	}
 
 	@Override
@@ -723,6 +752,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		return settings.getCustomRoutingProperty(HAZMAT_CATEGORY, "0.0");
 	}
 
+	private OsmandPreference<Boolean> getGoodsRestrictionPreference() {
+		return settings.getCustomRoutingBooleanProperty(GOODS_RESTRICTIONS, false);
+	}
+
 	private void clearParameters() {
 		avoidParameters.clear();
 		preferParameters.clear();
@@ -797,6 +830,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				return getPersistentPrefIcon(
 						getIcon(R.drawable.ic_action_hazmat_limit_colored),
 						getContentIcon(R.drawable.ic_action_hazmat_limit));
+			case GOODS_RESTRICTIONS_PREFERENCE:
+				return getPersistentPrefIcon(R.drawable.ic_action_van);
 			case ROUTING_RECALC_DISTANCE:
 				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
 			case ROUTING_RECALC_WRONG_DIRECTION:

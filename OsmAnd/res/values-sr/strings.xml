@@ -3914,9 +3914,6 @@
     <string name="updated">Ажурирано: %s</string>
     <string name="last_time_checked">Последње време провере: %s</string>
     <string name="update_frequency">Учесталост ажурирања</string>
-    <string name="live_update_frequency_week_variant">Провера ажурирања карте ће бити сваких недељу дана. Следеће време %1$s за %2$s.</string>
-    <string name="live_update_frequency_day_variant">Провера ажурирања карте ће бити сваког дана. Следеће време %1$s за %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Провера ажурирања карте ће бити на сваких сат времена. Следеће време %1$s за %2$s.</string>
     <string name="delete_updates">Обриши ажурирања</string>
     <string name="live_update_delete_updates_msg">Ообрисати свих %s ажурирања уживо\?</string>
     <string name="purchases">Куповине</string>
@@ -4665,7 +4662,6 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Без преференци</string>
     <string name="street_name_widget_desc">Виџет за назив улице приказује тренутни назив улице са правом локационом стрелицом или следећи назив улице са маневром који треба да се заврши.</string>
     <string name="get_altitude_information">Достави информације о надморској висини</string>
-    <string name="calculate_online_altitude_descr">Подаци о надморској висини ће бити израчунати на ОсмАнд серверу.</string>
     <string name="route_maneuvers">Маневри руте</string>
     <string name="calculating_altitude">Израчунавање надморске висине</string>
     <string name="no_widgets_here_yet">Овде још нема виџета</string>

@@ -2616,10 +2616,7 @@
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="export_profile">Изнасяне на профил</string>
     <string name="profile_import">Внасяне на профил</string>
-    <string name="live_update_frequency_day_variant">Проверката за обновяване е всеки ден. Следващата %1$s е в %2$s.</string>
-    <string name="live_update_frequency_week_variant">Проверката за обновяване е всяка седмица. Следващата %1$s е в %2$s.</string>
     <string name="update_frequency">Честота на проверка за обнояване</string>
-    <string name="live_update_frequency_hour_variant">Проверката за обновяване е през час. Следващата %1$s е в %2$s.</string>
     <string name="use_osm_live_routing">Маршрутизация на OsmAnd Live</string>
     <string name="turn_on_public_transport_description">Включете, за да виждате маршрутите на обществения транспорт на картата.</string>
     <string name="change_default_appearance">Промяна на подразбирания външен вид</string>
@@ -2645,7 +2642,6 @@
     <string name="track_has_no_altitude">Трасето не съдържа данни за надморската височина.</string>
     <string name="index_item_world_basemap_detailed">Обзорна карта на света (подробна)</string>
     <string name="calculating_altitude">Изчисляване на надморската височина</string>
-    <string name="calculate_online_altitude_descr">Данните за надморската височина ще бъдат изчислени в сървъра на OsmAnd.</string>
     <string name="get_altitude_data">Данни за надморската височина</string>
     <string name="calculate_altitude">Изчисляване на надморска височина</string>
     <string name="no_altitude_data">Няма данни за височината</string>
