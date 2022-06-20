@@ -19,7 +19,7 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = new EditPointDescriptionController((MapActivity) requireActivity());
+		controller = EditPointDescriptionController.getInstance((MapActivity) requireActivity());
 	}
 
 	@Override

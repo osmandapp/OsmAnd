@@ -22,25 +22,24 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 
-public class EditGpxDescriptionController {
+public class EditGpxDescriptionController extends EditDescriptionController {
 
 	private static final Log log = PlatformUtil.getLog(EditGpxDescriptionController.class);
 
-	private final MapActivity mapActivity;
-
 	public EditGpxDescriptionController(@NonNull MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+		super(mapActivity);
 	}
 
 	public void setupWebViewController(@NonNull WebView webView, @NonNull View view, @NonNull ReadGpxDescriptionFragment fragment) {
 		GPXFile gpxFile = getGpxFile();
 		if (gpxFile != null) {
-			webView.setWebViewClient(new ArticleWebViewClient(fragment, mapActivity, gpxFile, view, true));
+			webView.setWebViewClient(new ArticleWebViewClient(fragment, activity, gpxFile, view, true));
 		}
 	}
 
+	@Override
 	public void saveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
-		TrackMenuFragment trackMenuFragment = mapActivity.getTrackMenuFragment();
+		TrackMenuFragment trackMenuFragment = activity.getTrackMenuFragment();
 		if (trackMenuFragment == null) {
 			return;
 		}
@@ -51,15 +50,16 @@ public class EditGpxDescriptionController {
 		File file = trackMenuFragment.getDisplayHelper().getFile();
 		new SaveGpxAsyncTask(file, gpx, new SaveGpxListener() {
 			@Override
-			public void gpxSavingStarted() { }
+			public void gpxSavingStarted() {
+			}
 
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				if (errorMessage != null) {
 					log.error(errorMessage);
 				}
-				if (mapActivity.getTrackMenuFragment() != null) {
-					TrackMenuFragment trackMenuFragment = mapActivity.getTrackMenuFragment();
+				if (activity.getTrackMenuFragment() != null) {
+					TrackMenuFragment trackMenuFragment = activity.getTrackMenuFragment();
 					trackMenuFragment.updateContent();
 				}
 				callback.onDescriptionSaved();
@@ -69,7 +69,7 @@ public class EditGpxDescriptionController {
 
 	@Nullable
 	private GPXFile getGpxFile() {
-		TrackMenuFragment trackMenuFragment = mapActivity.getTrackMenuFragment();
+		TrackMenuFragment trackMenuFragment = activity.getTrackMenuFragment();
 		if (trackMenuFragment != null) {
 			TrackDisplayHelper displayHelper = trackMenuFragment.getDisplayHelper();
 			if (displayHelper != null) {

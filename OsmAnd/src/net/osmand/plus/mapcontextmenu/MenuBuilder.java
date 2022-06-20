@@ -44,8 +44,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
-import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -548,7 +546,10 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildDescription(View view) {
+	protected void buildDescription(View view) { }
+
+	protected boolean shouldShowDescriptionDialog() {
+		return false;
 	}
 
 	protected void buildAfter(View view) {
@@ -793,7 +794,7 @@ public class MenuBuilder {
 	public View buildDescriptionRow(final View view, final String description) {
 		final String descriptionLabel = app.getString(R.string.shared_string_description);
 		View.OnClickListener onClickListener = v -> {
-			if (this instanceof WptPtMenuBuilder || this instanceof FavouritePointMenuBuilder) {
+			if (shouldShowDescriptionDialog()) {
 				ReadPointDescriptionFragment.showInstance(mapActivity, description);
 			} else if (description.contains("</")) {
 				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);

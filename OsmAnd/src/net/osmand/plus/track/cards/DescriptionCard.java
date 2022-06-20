@@ -97,10 +97,10 @@ public class DescriptionCard extends MapBaseCard {
 		readBtn.setOnClickListener(v -> {
 			Map<String, String> extensions = gpxFile.metadata.getExtensionsToRead();
 			if (!Algorithms.isEmpty(extensions)) {
-				String _title = extensions.get(ARTICLE_TITLE);
+				String articleTitle = extensions.get(ARTICLE_TITLE);
 				String lang = extensions.get(ARTICLE_LANG);
-				if (_title != null && lang != null) {
-					TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(_title, lang);
+				if (articleTitle != null && lang != null) {
+					TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(articleTitle, lang);
 					if (articleId != null) {
 						WikivoyageUtils.openWikivoyageArticle(activity, articleId, lang);
 						return;

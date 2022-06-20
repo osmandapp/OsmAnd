@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -41,6 +39,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.track.fragments.controller.EditWptDescriptionController.updateDescriptionTokens;
 
 public class WptPtEditorFragment extends PointEditorFragment {
 
@@ -171,6 +172,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			if (menu.getLatLon() != null && menu.isActive() && wpt != null) {
 				LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
 				if (menu.getLatLon().equals(latLon)) {
+					updateDescriptionTokens(mapActivity, wpt);
 					menu.update(latLon, new WptLocationPoint(wpt).getPointDescription(mapActivity), wpt);
 				}
 			}

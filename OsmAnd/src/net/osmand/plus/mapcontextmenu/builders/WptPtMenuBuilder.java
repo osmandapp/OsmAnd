@@ -68,6 +68,11 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
+	protected boolean shouldShowDescriptionDialog() {
+		return true;
+	}
+
+	@Override
 	public void buildInternal(View view) {
 		if (wpt.time > 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());

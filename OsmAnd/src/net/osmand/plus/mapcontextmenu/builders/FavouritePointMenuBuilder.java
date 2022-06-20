@@ -93,6 +93,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		}
 	}
 
+	@Override
+	protected boolean shouldShowDescriptionDialog() {
+		return true;
+	}
+
 	private void buildGroupFavouritesView(View view) {
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(fav);
 		List<FavouritePoint> groupFavourites = favoriteGroup.getPoints();
