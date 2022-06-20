@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +13,42 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.Behavior;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
+import net.osmand.plus.quickaction.QuickActionListFragment;
+import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -25,37 +59,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.AppBarLayout.Behavior;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.quickaction.QuickActionListFragment;
-import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
-import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
-import net.osmand.plus.widgets.chips.ChipItem;
-import net.osmand.plus.widgets.chips.HorizontalChipsView;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener, WidgetsRegistryListener {
+public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -72,6 +80,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private HorizontalChipsView modesToggle;
 	private LinearLayout widgetsCard;
 	private LinearLayout buttonsCard;
+	private ViewGroup actionsCardContainer;
 	private NestedScrollView scrollView;
 
 	private boolean nightMode;
@@ -105,12 +114,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		widgetsCard = view.findViewById(R.id.widgets_card);
 		buttonsCard = view.findViewById(R.id.buttons_card);
 		scrollView = view.findViewById(R.id.scroll_view);
+		actionsCardContainer = view.findViewById(R.id.configure_screen_actions_container);
 
 		setupAppBar();
 		setupToolbar();
 		setupModesToggle();
 		setupWidgetsCard();
 		setupButtonsCard();
+		setupActionsCard();
 
 		if (currentScrollY > 0) {
 			scrollView.scrollTo(0, currentScrollY);
@@ -168,6 +179,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			if (activity != null) {
 				AndroidUtils.openUrl(activity, R.string.docs_widget_configure_screen, nightMode);
 			}
+		});
+
+		View actionsButton = toolbar.findViewById(R.id.actions_button);
+		actionsButton.setOnClickListener(v -> {
+			appBar.setExpanded(false);
+			scrollView.smoothScrollTo(0, (int) actionsCardContainer.getY());
 		});
 	}
 
@@ -269,6 +286,83 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		));
 	}
 
+	private void setupActionsCard() {
+		ConfigureScreenActionsCard card = new ConfigureScreenActionsCard(mapActivity, this,
+				selectedAppMode, R.string.map_widget_config);
+		actionsCardContainer.addView(card.build(actionsCardContainer.getContext()));
+	}
+
+	@Override
+	public void onResetToDefaultConfirmed() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry
+				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, Arrays.asList(WidgetsPanel.values()));
+		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
+			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, null, false);
+		}
+		settings.MAP_INFO_CONTROLS.resetModeToDefault(selectedAppMode);
+		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(selectedAppMode);
+
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			panel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
+		}
+
+		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(selectedAppMode);
+		settings.SHOW_COMPASS_ALWAYS.resetModeToDefault(selectedAppMode);
+		settings.SHOW_DISTANCE_RULER.resetModeToDefault(selectedAppMode);
+		settings.QUICK_ACTION.resetModeToDefault(selectedAppMode);
+
+		recreateControlsCompletely(mapActivity);
+		updateFragment();
+	}
+
+	@Override
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		List<WidgetsPanel> centerPanels = Arrays.asList(WidgetsPanel.TOP, WidgetsPanel.BOTTOM);
+		Set<MapWidgetInfo> centerWidgetInfos = widgetRegistry
+				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, centerPanels);
+		for (MapWidgetInfo widgetInfo : centerWidgetInfos) {
+			OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
+			if (visibilityPref != null) {
+				widgetInfo.enableDisableForMode(selectedAppMode, visibilityPref.getModeValue(appMode));
+			}
+		}
+		copyPreferenceFromAppMode(settings.MAP_INFO_CONTROLS, appMode);
+		copyPreferenceFromAppMode(settings.CUSTOM_WIDGETS_KEYS, appMode);
+
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			copyPreferenceFromAppMode(panel.getOrderPreference(settings), appMode);
+		}
+
+		copyPreferenceFromAppMode(settings.TRANSPARENT_MAP_THEME, appMode);
+		copyPreferenceFromAppMode(settings.SHOW_COMPASS_ALWAYS, appMode);
+		copyPreferenceFromAppMode(settings.SHOW_DISTANCE_RULER, appMode);
+		copyPreferenceFromAppMode(settings.QUICK_ACTION, appMode);
+
+		recreateControlsCompletely(mapActivity);
+		updateFragment();
+	}
+
+	private <T> void copyPreferenceFromAppMode(@NonNull OsmandPreference<T> pref, @NonNull ApplicationMode fromAppMode) {
+		pref.setModeValue(selectedAppMode, pref.getModeValue(fromAppMode));
+	}
+
+	private void recreateControlsCompletely(@NonNull MapActivity mapActivity) {
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.recreateAllControls(mapActivity);
+		}
+	}
+
 	@Override
 	public void onActionsUpdated() {
 		setupButtonsCard();
@@ -276,7 +370,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
-
+		setupWidgetsCard();
 	}
 
 	@Override
@@ -295,7 +389,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
 		MapActivity mapActivity = requireMapActivity();
-		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, ENABLED_MODE, Collections.singletonList(panel)).size();
+		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);
@@ -417,6 +512,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
 		}
 		return (MapActivity) activity;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		FragmentActivity activity = getActivity();
+		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
 	}
 
 	private void updateFragment() {

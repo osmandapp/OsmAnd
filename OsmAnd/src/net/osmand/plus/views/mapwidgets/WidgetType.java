@@ -201,13 +201,17 @@ public enum WidgetType {
 		return null;
 	}
 
+	public static boolean isOriginalWidget(@NonNull String widgetId) {
+		return widgetId.equals(getDefaultWidgetId(widgetId));
+	}
+
 	@NonNull
-	public static String getDefaultWidgetId(@NonNull String key) {
-		int index = key.indexOf(DELIMITER);
+	public static String getDefaultWidgetId(@NonNull String widgetId) {
+		int index = widgetId.indexOf(DELIMITER);
 		if (index != -1) {
-			key = key.substring(0, index);
+			widgetId = widgetId.substring(0, index);
 		}
-		return key;
+		return widgetId;
 	}
 
 	@NonNull

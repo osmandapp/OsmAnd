@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="reset_all_settings_desc">Are you sure you want to reset all settings to default?</string>
     <string name="goods_delivery_desc_4">If your vehicle weight is more than 3.5 tonnes you need to use Truck profile.</string>
     <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
     <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>
