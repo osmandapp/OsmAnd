@@ -28,6 +28,7 @@ import net.osmand.plus.views.mapwidgets.widgets.RadiusRulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 
 public class MapWidgetsFactory {
@@ -72,9 +73,11 @@ public class MapWidgetsFactory {
 				TimeToNavigationPointWidgetState widgetState = new TimeToNavigationPointWidgetState(app, customId, false);
 				return new TimeToNavigationPointWidget(mapActivity, widgetState);
 			case SIDE_MARKER_1:
-				return new MapMarkerSideWidget(mapActivity, true);
+				MapMarkerSideWidgetState firstMarkerState = new MapMarkerSideWidgetState(app, customId, true);
+				return new MapMarkerSideWidget(mapActivity, firstMarkerState);
 			case SIDE_MARKER_2:
-				return new MapMarkerSideWidget(mapActivity, false);
+				MapMarkerSideWidgetState secondMarkerState = new MapMarkerSideWidgetState(app, customId, false);
+				return new MapMarkerSideWidget(mapActivity, secondMarkerState);
 			case RELATIVE_BEARING:
 				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING);
 			case MAGNETIC_BEARING:

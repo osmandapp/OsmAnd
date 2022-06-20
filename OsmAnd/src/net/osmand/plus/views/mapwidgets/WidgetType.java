@@ -12,6 +12,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSet
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
@@ -184,6 +185,8 @@ public enum WidgetType {
 			return new RadiusRulerWidgetSettingsFragment();
 		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
 			return new TimeToNavigationPointSettingsFragment();
+		} else if (this == SIDE_MARKER_1 || this == SIDE_MARKER_2) {
+			return new MapMarkerSideWidgetSettingsFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
 		}

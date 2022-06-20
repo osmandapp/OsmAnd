@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="map_marker_average_speed_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
+    <string name="switch_widget_mode_desc">You can switch mode by taping on widget.</string>
+    <string name="side_marker_eta">Estimated time of arrival</string>
     <string name="goods_delivery_desc_4">If your vehicle weight is more than 3.5 tonnes you need to use Truck profile.</string>
     <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
     <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>

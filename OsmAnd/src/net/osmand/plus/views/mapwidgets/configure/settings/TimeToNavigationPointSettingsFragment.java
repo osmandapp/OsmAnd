@@ -42,7 +42,6 @@ public class TimeToNavigationPointSettingsFragment extends WidgetSettingsBaseFra
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			TimeToNavigationPointWidget navigationPointWidget = (TimeToNavigationPointWidget) widgetInfo.widget;
