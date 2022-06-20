@@ -4712,4 +4712,14 @@
     <string name="routing_attr_motor_type_name">Motortype</string>
     <string name="routing_attr_motor_type_description">Til CO2-beregning</string>
     <string name="lang_ckb">Sorani</string>
+    <string name="live_update_frequency_hour_variant">Der tjekkes for kortopdateringer hver time.</string>
+    <string name="calculate_online_altitude_descr">Beregn højden online på OsmAnd-servere baseret på satellitbilleder og digitale højdemodeller. Den kan variere fra den højde, der registreres af enheden, og kan bruges som højdekorrektion.</string>
+    <string name="updated_map_time">Opdateret: %1$s.</string>
+    <string name="includes_osm_changes_until">Inkluderer OSM-ændringer foretaget frem til %1$s.</string>
+    <string name="live_update_frequency_day_variant">Der tjekkes for kortopdateringer dagligt.</string>
+    <string name="next_live_update_date_and_time">Næste opdatering: %1$s om %2$s.</string>
+    <string name="next_live_update_time">Næste opdatering: om %1$s.</string>
+    <string name="live_update_frequency_week_variant">Der tjekkes for kortopdateringer hver uge.</string>
+    <string name="altitude_correction">Højdekorrektion</string>
+    <string name="no_altitude_data_desc">Du kan knytte dit spor til vejene for at få %1$s-data eller beregne det online.</string>
 </resources>
