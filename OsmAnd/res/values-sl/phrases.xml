@@ -4333,4 +4333,7 @@
     <string name="poi_hampshire_gate">Hampshirska vrata</string>
     <string name="poi_driver_training">Mesto za usposabljanje voznikov</string>
     <string name="poi_research_institute">Raziskovalni inštitut</string>
+    <string name="poi_club_aviation">Letalski klub</string>
+    <string name="poi_club_bicycle">Kolesarski klub</string>
+    <string name="poi_club_doityourself">DIY klub</string>
 </resources>
