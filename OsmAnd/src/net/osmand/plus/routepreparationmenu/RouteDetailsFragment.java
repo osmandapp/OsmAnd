@@ -483,7 +483,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 				spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			startIndex = spannable.length();
-			spannable.append(String.valueOf(stops.size())).append(" ").append(getString(R.string.transport_stops));
+			spannable.append(String.valueOf(stops.size() - 1)).append(" ").append(getString(R.string.transport_stops));
 			spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		if (spannable.length() > 0) {
