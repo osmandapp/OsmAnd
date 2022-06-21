@@ -163,6 +163,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
+	private static final String TRACK_HIDDEN_MANUALLY = "track_hidden_manually";
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
@@ -209,6 +210,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private UpdateLocationViewCache updateLocationViewCache;
 	private boolean locationUpdateStarted;
 	private LatLon latLon;
+	private boolean trackHiddenManually;
 
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
@@ -295,6 +297,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
+			trackHiddenManually = savedInstanceState.getBoolean(TRACK_HIDDEN_MANUALLY, false);
+
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			boolean showCurrentTrack = savedInstanceState.getBoolean(CURRENT_RECORDING);
 			MapActivity mapActivity = requireMapActivity();
@@ -1006,6 +1010,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
 			outState.putDouble(KEY_LONGITUDE, latLon.getLongitude());
 		}
+		outState.putBoolean(TRACK_HIDDEN_MANUALLY, trackHiddenManually);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -1059,6 +1064,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (!isGpxFileSelected(app, gpxFile)) {
 						params.showOnMap().selectedByUser().addToHistory().addToMarkers();
 					} else {
+						trackHiddenManually = true;
 						params.hideFromMap();
 					}
 					gpxSelectionHelper.selectGpxFile(gpxFile, params);
@@ -1574,6 +1580,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					.show(this)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	public void dismissFromMap() {
+		GPXFile gpxFile = getGpx();
+		if (!isGpxFileSelected(app, gpxFile) && !trackHiddenManually) {
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().selectedByUser().syncGroup().addToHistory().addToMarkers().saveSelection();
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
+		}
+		dismiss();
 	}
 
 	@Override

@@ -878,7 +878,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean hideVisibleMenues() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapActivity.getTrackMenuFragment() != null) {
-			mapActivity.getTrackMenuFragment().dismiss();
+			mapActivity.getTrackMenuFragment().dismissFromMap();
 			MapActivity.clearPrevActivityIntent();
 			return true;
 		}
