@@ -144,7 +144,7 @@
     <string name="info_button">Gwybodaeth</string>
     <string name="back_to_location">Dychwelyd i leoliad</string>
     <string name="shared_string_help">Cymorth</string>
-    <string name="accessibility_mode">Modd Hygyrchedd</string>
+    <string name="accessibility_mode">Modd hygyrchedd</string>
     <string name="accessibility_mode_descr">Mae\'n troi ymlaen nodweddion ar gyfer defnyddwyr â nam.</string>
     <string name="shared_string_on">Ymlaen</string>
     <string name="shared_string_off">I ffwrdd</string>
@@ -889,7 +889,7 @@
     <string name="connect_track_points_as">Cysylltu pwyntiau taith</string>
     <string name="map_updates_are_unavailable_yet">Dyw diweddariadau mapiau ddim eto ar gael. :-(</string>
     <string name="contributions_may_calculate_with_delay">Gall cyfrifo cyfraniadau gymryd rhai oriau.</string>
-    <string name="enough_contributions_descr">Llongyfarchiadau! Rwyt wedi cyfrannu digon i OpenStreetMap i allu mwynhau diweddariadau di-ddiwedd o fapiau OsmAnd!</string>
+    <string name="enough_contributions_descr">Llongyfarchiadau! Rwyt wedi cyfrannu digon i OpenStreetMap i allu diweddaru mapiau OsmAnd heb gyfyngiad!</string>
     <string name="benefits_for_contributors_secondary_descr">Mewngofnoda i OpenStreetMap i weld os wyt ti\'n gymwys i gael diweddariadau mapiau diderfyn.</string>
     <string name="walking_route_osmc_description">Lliwio llwybrau yn ôl eu lliwiau lleol (os ar OpenStreetMap) a math (rhyngwladol, rhanbarthol, lleol).</string>
     <string name="online_direct_line_maps_link">Gwiria\'r mapiau angenrheidiol.</string>
@@ -901,7 +901,7 @@
     <string name="backup_error_no_valid_subscription">Dim tanysgrifiad dilys</string>
     <string name="backup_error_token_is_not_valid_or_expired">Tocyn annilys neu wedi dod i ben</string>
     <string name="shared_string_progress">Cynnydd</string>
-    <string name="backup_error_user_is_not_registered">Does dim defnyddiwr wedi cofrestru gyda\'r cyfeiriad e-bost hwnnw</string>
+    <string name="backup_error_user_is_not_registered">Dim defnyddiwr wedi cofrestru gyda\'r e-bost hwnnw</string>
     <string name="backup_error_token_is_not_valid">Mae rhywbeth o\'i le gyda\'r tocyn neu ID y ddyfais</string>
     <string name="shared_string_discussion">Trafodaeth</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia a Wikivoyage all-lein</string>
@@ -1509,7 +1509,7 @@
     <string name="poi">MODd</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="quick_action_add_navigation">Llywio</string>
-    <string name="selected_waypoints_descr">Caiff y pwyntiau a awgrymir eu hychwanegu at drac \"%1$s\"</string>
+    <string name="selected_waypoints_descr">Caiff y cyfeirbwyntiau dan sylw eu hychwanegu i\'r trac \"%1$s\"</string>
     <string name="shared_string_reading_file">Yn darllen ffeil…</string>
     <string name="all_groups">Pob grŵp</string>
     <string name="list_of_groups">Rhestr grwpiau</string>
@@ -2433,9 +2433,6 @@
     <string name="track_recording_description">Stopio recordio\?
 \nCaiff yr holl ddata heb ei gadw ei golli.</string>
     <string name="provided_by">Darparwyd gan %1$s</string>
-    <string name="live_update_frequency_week_variant">Caiff diweddariadau mapiau eu gwirio yn wythnosol. Y tro nesaf %1$s ymhen %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Caiff diweddariadau mapiau eu gwirio pob awr. Y tro nesaf %1$s ymhen %2$s.</string>
-    <string name="live_update_frequency_day_variant">Caiff diweddariadau mapiau eu gwirio yn ddyddiol. Y tro nesaf %1$s ymhen %2$s.</string>
     <string name="latest_openstreetmap_update">Diweddariad diweddaraf OpenStreetMap ar gael:</string>
     <string name="select_picture">Dewiswch lun</string>
     <string name="cannot_upload_image">Methu llwytho delwedd i fyny. Ceisia eto\'n hwyrach.</string>
@@ -2532,7 +2529,7 @@
     <string name="compass_on_circles">Cwmpawd ar gylchoedd</string>
     <string name="distance_circles">Cylchoedd-pellter</string>
     <string name="routing_attr_hazmat_category_name">Categori Hazmat</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Dim cyfyngiadau</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Dim cyfyngiadau)</string>
     <string name="circle_settings">Gosodiadau cylchoedd</string>
     <string name="fps_widget_desc">Mae\'n dangos pa mor gyflym y mae mapiau ac elfennau mapiau yn ymddangos ac ail-lwytho.</string>
     <string name="get_altitude_data">Cael data uchder</string>
@@ -2574,14 +2571,13 @@
     <string name="lanes_widgets_desc">Dangosa\'r ategyn lonydd y drefn lonydd cyfredol a pha lonydd i gadw ynddynt.</string>
     <string name="battery_widget_desc">Dangosa\'r ategyn lefel batri dy ddyfais.</string>
     <string name="gps_info_widget_desc">Dangosa\'r ategyn nifer y lloerennau mae\'r ddyfais yn eu canfod a\'u defnyddio pryd hwnnw.</string>
-    <string name="altitude_widget_desc">Dangosa\'r ategyn uchder uwch y môr y lleoliad daearyddol presennol.</string>
+    <string name="altitude_widget_desc">Mae\'n dangos uchder uwch y môr y lleoliad daearyddol presennol.</string>
     <string name="coordinates_widget_desc">Mae\'n dangos cyfesurynnau daearyddol y geo-leoliad presennol.</string>
     <string name="av_def_action_choose">Ar gais</string>
-    <string name="audio_video_notes_desc">Mae ategion yn rhoi mynediad cyflym at ddechrau/stopio recordio (sain, video neu lun).</string>
+    <string name="audio_video_notes_desc">Mae ategion yn rhoi mynediad cyflym at ddechrau/stopio recordio (llun, fideo neu sain).</string>
     <string name="map_markers_desc">Ar yr ategyn bar uchaf gallwch weld pellter a chyfeiriad y nodwr o\'r lleoliad presennol. Mae\'n bosib ei ffurfweddu i weld un neu ddau farcwr yn yr ategyn.</string>
     <string name="calculate_altitude">Cyfrifo\'r uchder</string>
     <string name="no_altitude_data">Dim data uchder</string>
-    <string name="calculate_online_altitude_descr">Caiff data uchder ei gyfrifo ar weinydd OsmAnd.</string>
     <string name="map_widget_current_speed">Cyflymder cyfredol</string>
     <string name="configure_screen_widgets_descr">Dewiswch ochr o\'r sgrin i ychwanegu neu ail-drefnu ategion.</string>
     <string name="import_profile">Mewnforio proffil</string>
@@ -3219,9 +3215,9 @@
     <string name="keep_it_empty_if_not">Cadwch ef yn wag os na</string>
     <string name="shared_string_delete_all_q">Dileu\'r cyfan\?</string>
     <string name="quick_action_item">Gweithred gyflym</string>
-    <string name="settings_item_read_error">Methu darllen o \'%1$s\'.</string>
+    <string name="settings_item_read_error">Methwyd darllen o \'%1$s\'.</string>
     <string name="changes_applied_to_profile">Newidiadau wedi\'u gosod i broffil \'%1$s\'.</string>
-    <string name="settings_item_write_error">Methu ysgrifennu ffeil \'%1$s\' .</string>
+    <string name="settings_item_write_error">Methwyd ysgrifennu i \'%1$s\'.</string>
     <string name="app_mode_ski_touring">Teithio sgïo</string>
     <string name="import_duplicates_title">Mae rhai eitemau eisoes yn bodoli</string>
     <string name="logcat_buffer">Byffyr Logcat</string>
@@ -3556,7 +3552,7 @@
     <string name="angular_measeurement">Uned onglog</string>
     <string name="quick_action_day_night_mode">Modd %s</string>
     <string name="quick_action_page_list_descr">Botwm i droi drwy\'r rhestr islaw.</string>
-    <string name="version_settings_descr">Llwytha i lawr yr adeiladau nosweithiol.</string>
+    <string name="version_settings_descr">Llwytho adeileddau nosweithiol.</string>
     <string name="quick_action_directions_from_desc">Botwm i wneud canol y sgrin yn fan gadael. Yna bydd yn gofyn am osod cyrchfan neu gychwyn cyfrifio\'r llwybr.</string>
     <string name="quick_action_add_destination_desc">Botwm i wneud canol y sgrin yn gyrchfan llwybr, byddai cyrchfan a ddewiswyd yn flaenorol yn dod yn gyrchfan rhyngol olaf.</string>
     <string name="route_stops_before">Mae %1$s wedi stopio cyn</string>
@@ -3852,7 +3848,7 @@
     <string name="read_full_article">Darllen yr erthygl lawn (ar-lein)</string>
     <string name="osm_edit_context_menu_delete">Dileu golygiad OSM</string>
     <string name="agps_data_last_downloaded">Data A-GPS wedi\'i lawrlwytho: %1$s</string>
-    <string name="please_specify_poi_type_only_from_list">Noda\'r y math POI cywir neu ei hepgor.</string>
+    <string name="please_specify_poi_type_only_from_list"></string>
     <string name="welcome_select_region">I adlewyrchu\'r arwyddion traffig a\'r rheoliadau yn gywir, dewisa dy rhanbarth gyrru:</string>
     <string name="welcome_text">Mae OsmAnd yn darparu pori mapiau all-lein byd-eang a llywio all-lein.</string>
     <string name="osm_changes_added_to_local_edits">Newidiadau OSM wedi\'u hychwanegu at set newidiadau lleol</string>
@@ -3912,7 +3908,7 @@
     <string name="access_direction_haptic_feedback_descr">Noda gyfeiriad y pwynt targed yn ôl dirgryniad.</string>
     <string name="osm_live_email_desc">Ei angen i roi\'r wybodaeth ddiweddaraf i chi am eich cyfraniadau.</string>
     <string name="no_location_permission">Caniatáu mynediad i ddata lleoliad.</string>
-    <string name="access_from_map_description">Mae botwm dewislen yn agor y bwrdd gwaith yn hytrach na\'r ddewislen</string>
+    <string name="access_from_map_description">Y botwm dewislen i agor y dashfwrdd yn hytrach na\'r ddewislen</string>
     <string name="osmand_running_in_background">Rhedeg yn y cefndir</string>
     <string name="gps_wake_up_timer">Cyfwng deffro GPS</string>
     <string name="download_wikipedia_files">Lawrlwytho data Wicipedia ychwanegol (%1$sMB)\?</string>

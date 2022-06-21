@@ -2455,7 +2455,7 @@
 \nWeb / Wikimedia - foto POI sesuai data OpenStreetMap.</string>
     <string name="use_dev_url_descr">Ubah untuk menggunakan dev.openstreetmap.org daripada openstreetmap.org untuk menguji coba mengunggah Catatan / POI / GPX OSM.</string>
     <string name="clear_osm_token">Hapus token OAuth OpenStreetMap</string>
-    <string name="osm_editing_plugin_description">Buat kontribusi OSM seperti membuat atau mengubah obyek POI OSM, membuka atau mengomentari catatan OSM, dan berkontribusi file GPX dalam OsmAnd dengan menyediakan nama pengguna dan sandi Anda. OpenStreetMap.org adalah proyek pemetaan domain publik global berbasis komunitas.</string>
+    <string name="osm_editing_plugin_description">Buat kontribusi OSM seperti membuat atau mengubah objek POI OSM, membuka atau mengomentari catatan OSM, dan berkontribusi file GPX dalam OsmAnd dengan menyediakan nama pengguna dan sandi Anda. OpenStreetMap.org adalah proyek pemetaan domain publik global berbasis komunitas.</string>
     <string name="choose_audio_stream">Output panduan suara</string>
     <string name="choose_audio_stream_descr">Pilih speaker untuk panduan suara.</string>
     <string name="voice_stream_voice_call">Audio panggilan ponsel (untuk menginterupsi stereo Bluetooth mobil)</string>
@@ -2779,7 +2779,6 @@
     <string name="av_photo_play_sound">Mainkan suara potret kamera</string>
     <string name="av_photo_play_sound_descr">Tetapkan untuk suara atau diam untuk potret foto.</string>
     <string name="select_another_colorization">Mohon pilih tipe pewarnaan yang lain.</string>
-    <string name="live_update_frequency_week_variant">Pembaruan peta akan diperiksa setiap minggu. Berikutnya %1$s pada %2$s.</string>
     <string name="shared_string_symbol">Simbol</string>
     <string name="available_widgets">Widget yang tersedia</string>
     <string name="shared_string_details">Detail</string>
@@ -2876,7 +2875,6 @@
     <string name="update_all_maps_added">Perbarui semua peta yang ditambahkan ke %1$s\?</string>
     <string name="on_hold">Dihentikan</string>
     <string name="show_start_dialog">Tampilkan dialog pemulaian</string>
-    <string name="live_update_frequency_day_variant">Pembaruan peta akan diperiksa setiap hari. Berikutnya %1$s pada %2$s.</string>
     <string name="update_frequency">Frekuensi pembaruan</string>
     <string name="app_restart_required">Pemulaian aplikasi dibutuhkan untuk menerapkan beberapa pengaturan.</string>
     <string name="rename_track">Namai ulang trek</string>
@@ -2927,7 +2925,6 @@
     <string name="track_has_no_altitude">Trek ini tidak berisi data ketinggian.</string>
     <string name="live_update_delete_updates_msg">Hapus semua %s pembaruan langsung\?</string>
     <string name="delete_updates">Hapus pembaruan</string>
-    <string name="live_update_frequency_hour_variant">Pembaruan peta akan diperiksa setiap jam. Berikutnya %1$s pada %2$s.</string>
     <string name="map_orientation_threshold_descr">Jangan putar tampilan peta jika kecepatannya kurang dari ambang batas</string>
     <string name="on_pause">Pada jeda</string>
     <string name="snap_to_road_descr">Ikon posisi saat ini akan terkunci ke rute navigasi saat ini</string>
@@ -3699,7 +3696,6 @@
     <string name="circle_settings">Pengaturan lingkaran</string>
     <string name="navigation_points_desc">Widget navigasi diaktifkan selama navigasi untuk menampilkan informasi seperti jarak, waktu kedatangan atau kiri, belokan berikutnya, arah, nama jalan saat ini, informasi jalur, kecepatan maksimal, peringatan mendekat, POI, titik jalan.</string>
     <string name="calculating_altitude">Menghitung ketinggian</string>
-    <string name="calculate_online_altitude_descr">Data ketinggian akan dihitung pada server OsmAnd.</string>
     <string name="calculate_online">Kalkulasi secara daring</string>
     <string name="track_attach_to_the_roads_descr">Trek akan dilampirkan ke jalan menggunakan peta luring, geometri trek akan diubah.</string>
     <string name="calculate_altitude">Hitung ketinggian</string>
@@ -3869,4 +3865,46 @@
     <string name="turn_screen_on_router">Bangun pada arahan</string>
     <string name="edit_profile_setup_map_subtitle">Pilih opsi peta untuk profil</string>
     <string name="available_maps">Peta yang tersedia</string>
+    <string name="rendering_attr_hideIcons_name">Ikon POI</string>
+    <string name="rec_split_clip_length">Panjang klip</string>
+    <string name="road_blocked">Jalan diblokir</string>
+    <string name="item_removed">Item dihapus</string>
+    <string name="lang_nds">Jerman Rendah</string>
+    <string name="osn_bug_name">Catatan OSM</string>
+    <string name="world_maps">Peta dunia</string>
+    <string name="share_menu_location">Bagikan lokasi</string>
+    <string name="download_live_updates">Pembaruan langsung</string>
+    <string name="lang_nn">Nynorsk Norwegia</string>
+    <string name="rendering_value_translucent_red_name">Merah tembus pandang</string>
+    <string name="shared_string_not_selected">Tidak terpilih</string>
+    <string name="rendering_attr_hideProposed_name">Obyek yang diusulkan</string>
+    <string name="favourites_edit_dialog_title">Info favorit</string>
+    <string name="shared_string_trip_recording">Rekaman perjalanan</string>
+    <string name="rendering_value_translucent_purple_name">Ungu tembus pandang</string>
+    <string name="shared_string_show_details">Tampilkan detail</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Rute pendakian</string>
+    <string name="shared_string_undo_all">Urungkan semua</string>
+    <string name="shared_string_qr_code">Kode QR</string>
+    <string name="map_downloaded">Peta diunduh</string>
+    <string name="go_to_map">Tampilkan peta</string>
+    <string name="region_maps">Peta seluruh wilayah</string>
+    <string name="rendering_attr_hideUnderground_name">Obyek bawah tanah</string>
+    <string name="rec_split_storage_size">Ukuran penyimpanan</string>
+    <string name="favorite_category_name">Nama kategori</string>
+    <string name="shared_string_read_more">Baca lebih lanjut</string>
+    <string name="rendering_value_translucent_yellow_name">Kuning tembus pandang</string>
+    <string name="read_more">Baca lebih lanjut</string>
+    <string name="favorite_category_select">Pilih kategori</string>
+    <string name="rendering_attr_currentTrackColor_name">Warna GPX</string>
+    <string name="rendering_value_translucent_orange_name">Oranye tembus pandang</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Afiliasi jaringan</string>
+    <string name="rendering_value_boldOutline_name">Garis tebal</string>
+    <string name="n_items_removed">item dihapus</string>
+    <string name="rendering_value_lightblue_name">Biru muda</string>
+    <string name="rendering_attr_currentTrackWidth_name">Lebar GPX</string>
+    <string name="rendering_value_translucent_green_name">Hijau tembus pandang</string>
+    <string name="rendering_value_translucent_blue_name">Biru tembus pandang</string>
+    <string name="lang_es_ar">Spanyol (Argentina)</string>
+    <string name="lang_nb">Bokmål Norwegia</string>
+    <string name="rendering_value_lightgreen_name">Hijau muda</string>
 </resources>

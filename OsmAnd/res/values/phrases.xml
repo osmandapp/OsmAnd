@@ -4859,4 +4859,17 @@
 
 	<string name="poi_club_youth_movement">Youth movement</string>
 
+	<string name="poi_club_amateur_radio">Amateur radio club</string>
+	<string name="poi_club_religion">Religion club</string>
+
+	<string name="poi_club_dog">Dog club</string>
+
+	<string name="poi_board_title">Board title</string>
+	<string name="poi_short_name">Short name</string>
+
+	<string name="poi_club_aviation">Aviation club</string>
+	<string name="poi_club_bicycle">Bicycle club</string>
+
+	<string name="poi_club_doityourself">DIY club</string>
+
 </resources>

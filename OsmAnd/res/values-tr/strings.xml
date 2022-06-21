@@ -2447,7 +2447,7 @@
     <string name="simulate_navigation">Navigasyonu simüle et</string>
     <string name="voice_announcements">Sesli uyarılar</string>
     <string name="intermediate_destinations">Ara varış noktaları</string>
-    <string name="osm_live_subscriptions">Açıklamalar</string>
+    <string name="osm_live_subscriptions">Abonelikler</string>
     <string name="osm_live_payment_monthly_title">Aylık</string>
     <string name="osm_live_payment_3_months_title">3 Aylık</string>
     <string name="osm_live_payment_annual_title">Yıllık</string>
@@ -3926,7 +3926,7 @@
     <string name="select_folder">Klasör seç</string>
     <string name="select_folder_descr">Klasör seçin veya yeni bir tane ekleyin</string>
     <string name="shared_string_empty">Boş</string>
-    <string name="analyze_by_intervals">Bölünmüş aralıkları analiz et</string>
+    <string name="analyze_by_intervals">Aralıklarla analiz et</string>
     <string name="upload_to_openstreetmap">OpenStreetMap\'e yükle</string>
     <string name="edit_track">Yolu düzenle</string>
     <string name="rename_track">Yolu yeniden adlandır</string>
@@ -4015,9 +4015,6 @@
     <string name="updated">Güncellendi: %s</string>
     <string name="last_time_checked">Son denetleme: %s</string>
     <string name="update_frequency">Güncelleme sıklığı</string>
-    <string name="live_update_frequency_week_variant">Harita güncellemeleri her hafta denetlenecek. Bir sonraki: %1$s, %2$s.</string>
-    <string name="live_update_frequency_day_variant">Harita güncellemeleri her gün denetlenecek. Bir sonraki: %1$s, %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Harita güncellemeleri her saat denetlenecek. Bir sonraki: %1$s, %2$s.</string>
     <string name="delete_updates">Güncellemeleri sil</string>
     <string name="live_update_delete_updates_msg">Tüm %s canlı güncelleme silinsin mi\?</string>
     <string name="purchases">Satın almalar</string>
@@ -4647,7 +4644,6 @@
     <string name="audio_video_notes_desc">Kayıt (ses, video veya fotoğraf) almayı başlatmak/durdurmak için hızlı erişim sağlayan widget.</string>
     <string name="bearing_desc">Yön widget\'ı, bir hedefin mutlak veya göreceli yönünü açısal birimlerde gösterir (Derece 180, Derece 360, Miliradyan).</string>
     <string name="route_maneuvers_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
-    <string name="calculate_online_altitude_descr">Rakım verileri OsmAnd sunucusunda hesaplanacak.</string>
     <string name="navigation_points">Navigasyon noktaları</string>
     <string name="navigation_points_desc">Navigasyon widget\'ları, mesafe, varış veya kalan zaman, sonraki dönüşler, yön, geçerli sokak adı, şerit bilgileri, azami hız, yaklaşan uyarılar, POI\'ler, ara noktalar gibi bilgileri görüntülemek için navigasyon sırasında etkinleştirilir.</string>
     <string name="route_maneuvers">Güzergah manevraları</string>
@@ -4674,7 +4670,7 @@
     <string name="map_widget_trip_recording_uphill">Yokuş yukarı</string>
     <string name="map_widget_trip_recording_distance">Mesafe</string>
     <string name="routing_attr_hazmat_category_name">Tehlikeli madde kategorisi</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Kısıtlama yok</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Kısıtlama yok)</string>
     <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>
     <string name="map_widget_true_bearing">Gerçek yön</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Askeri alanları gizleyin</string>
@@ -4697,4 +4693,27 @@
     <string name="transport_hazmat_yes_desc">Uygun kategoriyi seçmeniz gerekiyor.</string>
     <string name="transport_hazmat_no_desc">Bazı yollarda ve tünellerde tehlikeli maddelerin taşınması yasaktır.</string>
     <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
+    <string name="routing_attr_goods_restrictions_name">Yük araçları kısıtlamaları</string>
+    <string name="routing_attr_goods_restrictions_description">Hafif yük araçları (mallar) için erişim izinlerini göz önünde bulundurun</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrik</string>
+    <string name="co2_mission">CO2 emisyonu</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Dizel</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrit</string>
+    <string name="routing_attr_motor_type_name">Motor türü</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_description">CO2 hesaplaması için</string>
+    <string name="lang_ckb">Orta Kürtçe</string>
+    <string name="live_update_frequency_hour_variant">Harita güncellemeleri her saat denetlenecek.</string>
+    <string name="live_update_frequency_week_variant">Harita güncellemeleri her hafta denetlenecek.</string>
+    <string name="calculate_online_altitude_descr">Uydu görüntüleri ve sayısal yükseklik modellerine dayalı olarak OsmAnd sunucularında çevrim içi rakım hesaplayın. Aygıtın kaydettiği rakımdan farklı olabilir ve rakım düzeltmesi olarak kullanılabilir.</string>
+    <string name="next_live_update_date_and_time">Sonraki güncelleme: %1$s, %2$s içinde.</string>
+    <string name="live_update_frequency_day_variant">Harita güncellemeleri her gün denetlenecek.</string>
+    <string name="altitude_correction">Rakım düzeltmesi</string>
+    <string name="updated_map_time">Güncellendi: %1$s.</string>
+    <string name="includes_osm_changes_until">%1$s tarihine kadar yapılan OSM değişikliklerini içerir.</string>
+    <string name="next_live_update_time">Sonraki güncelleme: %1$s içinde.</string>
+    <string name="no_altitude_data_desc">%1$s verilerini almak için izinizi yollara ekleyebilir veya çevrim içi olarak hesaplayabilirsiniz.</string>
 </resources>

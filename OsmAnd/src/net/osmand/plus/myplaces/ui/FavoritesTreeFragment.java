@@ -12,7 +12,6 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,30 +37,30 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.ShareFavoritesAsyncTask;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.ShareFavoritesAsyncTask;
 import net.osmand.plus.myplaces.ShareFavoritesAsyncTask.ShareFavoritesListener;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -182,12 +181,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			TextView title = searchView.findViewById(R.id.title);
 			Drawable searchIcon = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark);
 			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(title, searchIcon, null, null, null);
-			searchView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					FavoritesSearchFragment.showInstance(getActivity(), "");
-				}
-			});
+			searchView.setOnClickListener(v -> FavoritesSearchFragment.showInstance(getActivity(), ""));
 			listView.addHeaderView(searchView);
 			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
 			listView.addHeaderView(dividerView, null, false);
@@ -196,35 +190,20 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
-		if (Build.VERSION.SDK_INT >= 18) {
-			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
-		} else {
-			emptyImageView.setVisibility(View.INVISIBLE);
-		}
+		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		Button importButton = emptyView.findViewById(R.id.import_button);
-		importButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				importFavourites();
-			}
-		});
+		importButton.setOnClickListener(view1 -> importFavourites());
 		listView.setEmptyView(emptyView);
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
 		setHasOptionsMenu(true);
-		listView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-			@Override
-			public void onGroupCollapse(int groupPosition) {
-				String groupName = favouritesAdapter.getGroup(groupPosition).getName();
-				getGroupExpandedPreference(groupName).set(false);
-			}
+		listView.setOnGroupCollapseListener(groupPosition -> {
+			String groupName = favouritesAdapter.getGroup(groupPosition).getName();
+			getGroupExpandedPreference(groupName).set(false);
 		});
-		listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-			@Override
-			public void onGroupExpand(int groupPosition) {
-				String groupName = favouritesAdapter.getGroup(groupPosition).getName();
-				getGroupExpandedPreference(groupName).set(true);
-			}
+		listView.setOnGroupExpandListener(groupPosition -> {
+			String groupName = favouritesAdapter.getGroup(groupPosition).getName();
+			getGroupExpandedPreference(groupName).set(true);
 		});
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override

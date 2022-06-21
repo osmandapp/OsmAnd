@@ -3914,9 +3914,6 @@
     <string name="updated">Ажурирано: %s</string>
     <string name="last_time_checked">Последње време провере: %s</string>
     <string name="update_frequency">Учесталост ажурирања</string>
-    <string name="live_update_frequency_week_variant">Провера ажурирања карте ће бити сваких недељу дана. Следеће време %1$s за %2$s.</string>
-    <string name="live_update_frequency_day_variant">Провера ажурирања карте ће бити сваког дана. Следеће време %1$s за %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Провера ажурирања карте ће бити на сваких сат времена. Следеће време %1$s за %2$s.</string>
     <string name="delete_updates">Обриши ажурирања</string>
     <string name="live_update_delete_updates_msg">Ообрисати свих %s ажурирања уживо\?</string>
     <string name="purchases">Куповине</string>
@@ -3989,7 +3986,7 @@
     <string name="shared_string_folders">Фасцикле</string>
     <string name="select_folder">Одаберите фасциклу</string>
     <string name="select_folder_descr">Одаберите фасциклу или додајте нову</string>
-    <string name="analyze_by_intervals">Анализирај интервале поделе</string>
+    <string name="analyze_by_intervals">Анализирај по интервалима</string>
     <string name="upload_to_openstreetmap">Отпреми на OpenStreetMap</string>
     <string name="change_folder">Измени фасциклу</string>
     <string name="shared_string_sec">сек</string>
@@ -4588,7 +4585,7 @@
     <string name="map_widget_trip_recording_duration">Трајање</string>
     <string name="map_widget_trip_recording_distance">Растојање</string>
     <string name="shared_string_mode">Режим</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Нема ограничења</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Нема ограничења)</string>
     <string name="av_def_action_choose">На захтев</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Сакриј војна подручја</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Неприказивање војних подручја</string>
@@ -4665,7 +4662,6 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Без преференци</string>
     <string name="street_name_widget_desc">Виџет за назив улице приказује тренутни назив улице са правом локационом стрелицом или следећи назив улице са маневром који треба да се заврши.</string>
     <string name="get_altitude_information">Достави информације о надморској висини</string>
-    <string name="calculate_online_altitude_descr">Подаци о надморској висини ће бити израчунати на ОсмАнд серверу.</string>
     <string name="route_maneuvers">Маневри руте</string>
     <string name="calculating_altitude">Израчунавање надморске висине</string>
     <string name="no_widgets_here_yet">Овде још нема виџета</string>
@@ -4687,4 +4683,21 @@
     <string name="average_speed_widget_desc">Приказује просечну брзину тренутне вожње.</string>
     <string name="map_widget_average_speed">Просечна брзина</string>
     <string name="average_speed_skip_stops_desc">Брзина мања од %1$s неће се рачунати и неће утицати на просечну брзину.</string>
+    <string name="routing_attr_goods_restrictions_description">Размотрите приступне дозволе за лака камионе са робом (роба)</string>
+    <string name="use_latin_name_if_missing">Користи латинично име ако недостаје</string>
+    <string name="import_as_one_track">Увези као једну путању</string>
+    <string name="routing_attr_motor_type_electric_name">Електрична</string>
+    <string name="routing_attr_motor_type_name">Тип мотора</string>
+    <string name="routing_attr_motor_type_lpg_name">Ауто гас</string>
+    <string name="routing_attr_motor_type_gas_name">Метан (CNG)</string>
+    <string name="transport_hazmat_no_desc">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
+    <string name="routing_attr_motor_type_description">За CO2 израчунавање</string>
+    <string name="routing_attr_goods_restrictions_name">Ограничење за возила са робом</string>
+    <string name="co2_mission">CO2 емисија</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_hybrid_name">Хибрид</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизел</string>
+    <string name="routing_attr_motor_type_petrol_name">Безоловни</string>
+    <string name="transport_hazmat_yes_desc">Морате одабрати исправну категорију.</string>
+    <string name="transport_hazmat_title">Превожење опасних материја</string>
 </resources>

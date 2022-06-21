@@ -515,7 +515,7 @@
     <string name="auto_zoom_close">Para corto alcance</string>
     <string name="auto_zoom_far">Para mediano alcance</string>
     <string name="auto_zoom_farthest">Para largo alcance</string>
-    <string name="map_magnifier">Ampliar mapa</string>
+    <string name="map_magnifier">Lupa del mapa</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="about_version">Versión:</string>
     <string name="shared_string_about">Información</string>
@@ -2682,8 +2682,8 @@
     <string name="unlimited_downloads">Descargas ilimitadas</string>
     <string name="wikipedia_offline">Wikipedia sin conexión</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
-    <string name="monthly_map_updates">Actualizaciones del mapa: cada mes</string>
-    <string name="daily_map_updates">Actualizaciones del mapa: cada hora</string>
+    <string name="monthly_map_updates">Actualizaciones mensuales del mapa</string>
+    <string name="daily_map_updates">Actualizaciones horarias del mapa</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
     <string name="travel_card_download_descr">Descarga las guías turísticas de Wikiviajes para ver artículos sobre sitios alrededor del mundo, sin una conexión a Internet.</string>
     <string name="update_is_available">Actualización disponible</string>
@@ -3925,7 +3925,7 @@
     <string name="select_folder">Elegir carpeta</string>
     <string name="select_folder_descr">Elegir carpeta o añadir una nueva</string>
     <string name="shared_string_empty">Vacío</string>
-    <string name="analyze_by_intervals">Analizar intervalos divididos</string>
+    <string name="analyze_by_intervals">Analizar por intervalos</string>
     <string name="upload_to_openstreetmap">Subir a OpenStreetMap</string>
     <string name="edit_track">Editar traza</string>
     <string name="rename_track">Renombrar traza</string>
@@ -4015,9 +4015,6 @@
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
     <string name="update_frequency">Frecuencia de actualización</string>
-    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. Próxima vez el %1$s a las %2$s hs.</string>
-    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. Próxima vez el %1$s a las %2$s hs.</string>
-    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. Próxima vez el %1$s a las %2$s hs.</string>
     <string name="delete_updates">Borrar actualizaciones</string>
     <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
     <string name="purchases">Compras</string>
@@ -4658,7 +4655,6 @@
     <string name="route_maneuvers">Maniobras de la ruta</string>
     <string name="get_altitude_information">Obtener información de altitud</string>
     <string name="calculating_altitude">Calculando altitud</string>
-    <string name="calculate_online_altitude_descr">Los datos de altitud serán calculados en el servidor de OsmAnd.</string>
     <string name="calculate_online">Calcular en línea</string>
     <string name="track_attach_to_the_roads_descr">La traza se adjuntará al camino usando mapas sin conexión. Esto cambiará la geometría de la traza.</string>
     <string name="get_altitude_data">Obtener datos de altitud</string>
@@ -4687,7 +4683,7 @@
     <string name="map_widget_trip_recording_uphill">Ascenso</string>
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Sin restricciones</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="map_widget_trip_recording_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
@@ -4713,4 +4709,16 @@
     <string name="transport_hazmat_yes_desc">Debes elegir la categoría adecuada.</string>
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
+    <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
+    <string name="routing_attr_goods_restrictions_name">Restricciones a vehículos de mercancías</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diésel</string>
+    <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
+    <string name="routing_attr_motor_type_gas_name">GNC</string>
+    <string name="routing_attr_motor_type_description">Para el cálculo del CO2</string>
+    <string name="co2_mission">Emisión de CO2</string>
+    <string name="routing_attr_motor_type_name">Tipo de motor</string>
+    <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
+    <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
+    <string name="routing_attr_motor_type_petrol_name">Gasolina;Nafta;Bencina</string>
 </resources>

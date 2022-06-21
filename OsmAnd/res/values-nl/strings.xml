@@ -4003,9 +4003,6 @@
     <string name="updated">Geüpdatet: %s</string>
     <string name="last_time_checked">Laatste keer gecontroleerd: %s</string>
     <string name="update_frequency">Update frequentie</string>
-    <string name="live_update_frequency_week_variant">Kaartupdates worden elke week gecontroleerd. Volgende keer %1$s over %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kaartupdates worden elke dag gecontroleerd. Volgende keer %1$s over %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kaartupdates worden elk uur gecontroleerd. Volgende keer %1$s over %2$s.</string>
     <string name="delete_updates">Wis alle updates</string>
     <string name="live_update_delete_updates_msg">Alle %s live updates verwijderen\?</string>
     <string name="purchases">Aankopen</string>

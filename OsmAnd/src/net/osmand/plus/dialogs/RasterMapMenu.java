@@ -30,6 +30,8 @@ import org.jetbrains.annotations.NotNull;
 
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
 
 
 public class RasterMapMenu {
@@ -71,8 +73,8 @@ public class RasterMapMenu {
 			throw new RuntimeException("Unexpected raster map type");
 		}
 
-		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty("noPolygons");
-		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty("hideWaterPolygons");
+		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
+		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
 
 		String mapTypeDescr = mapTypePreference.get();
 		if (mapTypeDescr != null && mapTypeDescr.contains(".sqlitedb")) {
@@ -84,14 +86,10 @@ public class RasterMapMenu {
 				: R.string.shared_string_off;
 
 		final OnMapSelectedCallback onMapSelectedCallback =
-				new OnMapSelectedCallback() {
-					@Override
-					public void onMapSelected(boolean canceled) {
-						mapActivity.getDashboard().refreshContent(true);
-						boolean refreshToHidePolygons = type == RasterMapType.UNDERLAY;
-						if (refreshToHidePolygons) {
-							mapActivity.refreshMapComplete();
-						}
+				canceled -> {
+					mapActivity.getDashboard().refreshContent(true);
+					if (type == RasterMapType.UNDERLAY && !canceled) {
+						mapActivity.refreshMapComplete();
 					}
 				};
 		final MapLayers mapLayers = mapActivity.getMapLayers();
@@ -118,7 +116,6 @@ public class RasterMapMenu {
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(() -> {
 						plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-						mapActivity.refreshMapComplete();
 					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);

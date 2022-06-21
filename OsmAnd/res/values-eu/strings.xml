@@ -4351,7 +4351,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="explore_wikipedia_offline">Arakatu Wikipedia lineaz kanpo.</string>
     <string name="shared_string_purchased">Erosita</string>
     <string name="backup_deleted_all_data">Datu guztiak ezabatu dira.</string>
-    <string name="live_update_frequency_day_variant">Mapen eguneraketak egunero egiaztatuko dira. Hurrengoa %1$sko %2$setan.</string>
     <string name="backup_error_file_not_available">Fitxategia ez dago erabilgarri</string>
     <string name="backup_error_token_is_not_valid_or_expired">Token baliogabea edo iraungita</string>
     <string name="backup_error_subscription_was_expired">Harpidetza iraungita</string>
@@ -4380,8 +4379,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="track_recording_will_be_continued">Grabaketak jarraituko du.</string>
     <string name="select_category_descr">Hautatu kategoria edo gehitu berri bat</string>
     <string name="delete_updates">Ezabatu eguneraketak</string>
-    <string name="live_update_frequency_hour_variant">Mapen eguneraketak orduro egiaztatuko dira. Hurrengoan %1$sko %2$setan.</string>
-    <string name="live_update_frequency_week_variant">Mapen eguneraketak astero egiaztatuko dira. Hurrengoan %1$sko %2$setan.</string>
     <string name="update_frequency">Eguneraketen maiztasuna</string>
     <string name="last_time_checked">Egiaztatu den azken aldia: %s</string>
     <string name="latest_openstreetmap_update">Eskuragarri dagoen OpenStreetMap-en azken eguneratzea:</string>

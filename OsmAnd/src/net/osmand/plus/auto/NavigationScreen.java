@@ -196,8 +196,12 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		adjustMapPosition(navigating);
 	}
 
-	private void adjustMapPosition(boolean shiftMap) {
-		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+	private void adjustMapPosition(boolean shiftMapIfSessionRunning) {
+		OsmandApplication app = getApp();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		NavigationSession session = app.getCarNavigationSession();
+		boolean sessionStarted = session != null && session.hasStarted();
+		boolean shiftMap = shiftMapIfSessionRunning && sessionStarted;
 		mapView.setMapPositionX(shiftMap ? 1 : 0);
 	}
 

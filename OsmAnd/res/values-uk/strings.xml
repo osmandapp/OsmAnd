@@ -277,7 +277,7 @@
     <string name="voice_stream_music">Медіа/навігаційне аудіо</string>
     <string name="warning_tile_layer_not_downloadable">Застосунок не може завантажити шар мапи %1$s, спробуйте перевстановити його.</string>
     <string name="overlay_transparency_descr">Змінити прозорість мапи.</string>
-    <string name="overlay_transparency">Прозорість</string>
+    <string name="overlay_transparency">Прозорість накладення</string>
     <string name="map_transparency_descr">Змінити прозорість основної мапи.</string>
     <string name="map_transparency">Прозорість мапи</string>
     <string name="layer_underlay">Мапа підкладки…</string>
@@ -2194,7 +2194,7 @@
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено</string>
-    <string name="private_access_routing_req">Місце призначення розташовано в області з приватним доступом. Дозволити доступ до приватних доріг для цього маршруту\?</string>
+    <string name="private_access_routing_req">Пункт призначення розташований в районі з приватним доступом. Дозволити доступ приватних доріг для цього маршруту\?</string>
     <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
     <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку покаже чи приховає Нотатки OSM на мапі.</string>
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
@@ -2693,8 +2693,8 @@
 \n Особисті відомості не накопичуються, пошукові дані використовуються лише для покращення алгоритму пошуку.</string>
     <string name="send_search_query">Надіслати пошуковий запит?</string>
     <string name="shared_string_world">Світ</string>
-    <string name="monthly_map_updates">Оновлення мап: щомісячно</string>
-    <string name="daily_map_updates">Оновлення мап: щогодинно</string>
+    <string name="monthly_map_updates">Щомісячні оновлення мап</string>
+    <string name="daily_map_updates">Щогодинне оновлення мап</string>
     <string name="in_app_purchase">Купівля в застосунку</string>
     <string name="in_app_purchase_desc">Одноразовий платіж</string>
     <string name="in_app_purchase_desc_ex">Після покупки він буде завжди доступний для вас.</string>
@@ -4014,9 +4014,6 @@
     <string name="updated">Оновлено: %s</string>
     <string name="last_time_checked">Востаннє перевірено: %s</string>
     <string name="update_frequency">Частота оновлень</string>
-    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня. Наступного разу %1$s в %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу %1$s в %2$s.</string>
-    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу %1$s в %2$s.</string>
     <string name="delete_updates">Вилучити оновлення</string>
     <string name="live_update_delete_updates_msg">Вилучити всі live-оновлення для %s\?</string>
     <string name="purchases">Покупки</string>
@@ -4173,7 +4170,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Отримайте доступ до часто оновлюваних мап. Щогодинні, щоденні або щотижневі оновлення. Завантажуються поступово, лише для зміненої ділянки.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd в Інтернеті. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd онлайн. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
     <string name="unlimited_map_downloads">Необмежена кількість завантажень мап</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедія і Вікімандри в офлайн режимі</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Мапи рельєфу: ізолінії, рельєф, схили</string>
@@ -4645,7 +4642,6 @@
     <string name="route_maneuvers_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
     <string name="get_altitude_information">Отримати дані про висоту</string>
     <string name="calculating_altitude">Обчислення висоти</string>
-    <string name="calculate_online_altitude_descr">Дані про висоту будуть обчислені на сервері OsmAnd.</string>
     <string name="calculate_online">Обчислити онлайн</string>
     <string name="track_attach_to_the_roads_descr">Трек буде прив\'язаний до дороги за допомогою офлайн-мап, геометрія треку буде змінена.</string>
     <string name="get_altitude_data">Отримати дані про висоту</string>
@@ -4668,7 +4664,7 @@
     <string name="routing_attr_allow_private_for_truck_name">Дозволити приватний доступ (вантажівка)</string>
     <string name="map_widget_trip_recording_uphill">Підйом</string>
     <string name="routing_attr_hazmat_category_description">Категорія небезпечних матеріалів / Розгляньте дозволи на доступ до небезпечних матеріалів</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Без обмежень</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без обмежень)</string>
     <string name="routing_attr_avoid_fords_description">Уникати броди</string>
     <string name="routing_attr_avoid_fords_name">Уникати броди</string>
     <string name="map_widget_trip_recording_duration">Тривалість</string>
@@ -4697,4 +4693,27 @@
     <string name="transport_hazmat_yes_desc">Вам потрібно вибрати відповідну категорію.</string>
     <string name="transport_hazmat_no_desc">Деякими дорогами й тунелями перевезення небезпечних матеріалів заборонено.</string>
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
+    <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
+    <string name="routing_attr_goods_restrictions_name">Обмеження на вантажні транспортні засоби</string>
+    <string name="co2_mission">Викиди CO2</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_electric_name">Електричний</string>
+    <string name="routing_attr_motor_type_gas_name">Метан</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гібридний</string>
+    <string name="routing_attr_motor_type_name">Тип двигуна</string>
+    <string name="routing_attr_motor_type_description">Для обчислення CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизель</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_lpg_name">Пропан</string>
+    <string name="lang_ckb">Центральна курдська</string>
+    <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини.</string>
+    <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня.</string>
+    <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня.</string>
+    <string name="next_live_update_date_and_time">Наступне оновлення: %1$s о %2$s.</string>
+    <string name="next_live_update_time">Наступне оновлення: о %1$s.</string>
+    <string name="altitude_correction">Корекція висоти</string>
+    <string name="updated_map_time">Оновлено: %1$s.</string>
+    <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>
+    <string name="no_altitude_data_desc">Ви можете прикріпити свій трек до доріг, щоб отримати дані %1$s або обчислити їх онлайн.</string>
+    <string name="calculate_online_altitude_descr">Обчислюйте висоту онлайн на серверах OsmAnd на основі супутникових знімків та цифрових моделей висот. Результат може відрізнятися від записаної пристроєм висоти та може бути використаним як корекція висоти.</string>
 </resources>

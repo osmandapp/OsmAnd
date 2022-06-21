@@ -416,10 +416,11 @@ public class OsmandAidlApi {
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
 							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+							ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
 							widgetRegistry.registerWidget(widgetInfo);
 
 							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
@@ -493,9 +494,11 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
-	public void createWidgetControls(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos) {
+	public void createWidgetControls(@NonNull MapActivity mapActivity,
+	                                 @NonNull List<MapWidgetInfo> widgetsInfos,
+	                                 @NonNull ApplicationMode appMode) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.createWidgetControls(mapActivity, widgetsInfos);
+			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode);
 		}
 	}
 

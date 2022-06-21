@@ -3920,7 +3920,7 @@
     <string name="select_folder">Zvoľte priečinok</string>
     <string name="select_folder_descr">Zvoľte priečinok alebo pridajte nový</string>
     <string name="shared_string_empty">Prázdne</string>
-    <string name="analyze_by_intervals">Analyzovať rozdelené intervaly</string>
+    <string name="analyze_by_intervals">Analyzovať podľa intervalov</string>
     <string name="upload_to_openstreetmap">Nahrať do OpenStreetMap</string>
     <string name="edit_track">Upraviť stopu</string>
     <string name="rename_track">Premenovať stopu</string>
@@ -4006,9 +4006,6 @@
     <string name="updated">Aktualizované: %s</string>
     <string name="last_time_checked">Posledná kontrola: %s</string>
     <string name="update_frequency">Frekvencia aktualizácií</string>
-    <string name="live_update_frequency_week_variant">Aktualizácie mapy budú kontrolované každý týždeň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_day_variant">Aktualizácie mapy budú kontrolované každý deň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Aktualizácie mapy budú kontrolované každú hodinu. Nasledujúca kontrola %1$s o %2$s.</string>
     <string name="delete_updates">Odstrániť aktualizácie</string>
     <string name="live_update_delete_updates_msg">Zmazať všetky živé aktualizácie (%s)\?</string>
     <string name="select_category_descr">Zvoľte kategóriu alebo pridajte novú</string>
@@ -4642,13 +4639,12 @@
     <string name="app_mode_mountain_bicycle">Horský bicykel</string>
     <string name="route_maneuvers_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
     <string name="calculating_altitude">Vypočítava sa výška</string>
-    <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd.</string>
     <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
     <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
     <string name="explore_plans">Preskúmať možnosti predplatného</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Skryť vojenské oblasti</string>
     <string name="routing_attr_hazmat_category_description">Kategória nebezpečného nákladu / Zohľadniť obmedzenia pre nebezpečný náklad</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Bez obmedzení</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Bez obmedzení)</string>
     <string name="routing_attr_avoid_fords_name">Vyhnúť sa brodom</string>
     <string name="time_to_go_desc">Čas v minútach alebo hodinách potrebný na dosiahnutie cieľa.</string>
     <string name="arrival_time_widget_desc">Čas príjazdu do cieľového bodu.</string>
@@ -4687,4 +4683,21 @@
     <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
+    <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>
+    <string name="routing_attr_goods_restrictions_name">Obmedzenia pre dodávkové vozidlá</string>
+    <string name="transport_hazmat_yes_desc">Musíte zvoliť správnu kategóriu.</string>
+    <string name="import_as_one_track">Importovať ako jednu stopu</string>
+    <string name="use_latin_name_if_missing">Použiť názov v latinke ak chýba</string>
+    <string name="transport_hazmat_no_desc">Prevoz nebezpečných látok je zakázaná na niektorých cestách a tuneloch.</string>
+    <string name="transport_hazmat_title">Prevoz nebezpečných látok</string>
+    <string name="co2_mission">Emisie CO2</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrický</string>
+    <string name="routing_attr_motor_type_name">Typ motora</string>
+    <string name="routing_attr_motor_type_description">Pre výpočet CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Nafta</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzín</string>
+    <string name="routing_attr_motor_type_gas_name">CNG (Stlačený zemný plyn)</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybridný</string>
 </resources>

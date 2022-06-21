@@ -1,11 +1,13 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.myplaces.FavouritesHelper.getPointsFromGroups;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
@@ -50,79 +52,100 @@ public class FavouritesFileHelper {
 	}
 
 	@NonNull
-	public Map<String, FavouritePoint> loadInternalPoints() {
-		Map<String, FavouritePoint> points = new LinkedHashMap<>();
-		loadGPXFile(getInternalFile(), points);
-		return points;
+	public Map<String, FavoriteGroup> loadInternalGroups() {
+		Map<String, FavoriteGroup> favoriteGroups = new LinkedHashMap<>();
+		loadGPXFile(getInternalFile(), favoriteGroups);
+		return favoriteGroups;
 	}
 
 	@NonNull
-	public Map<String, FavouritePoint> loadExternalPoints() {
-		Map<String, FavouritePoint> points = new LinkedHashMap<>();
-		loadGPXFile(getExternalFile(), points);
-		return points;
+	public Map<String, FavoriteGroup> loadExternalGroups() {
+		Map<String, FavoriteGroup> favoriteGroups = new LinkedHashMap<>();
+		loadGPXFile(getExternalFile(), favoriteGroups);
+		return favoriteGroups;
 	}
 
-	public boolean loadGPXFile(@NonNull File file, @NonNull Map<String, FavouritePoint> points) {
+	public boolean loadGPXFile(@NonNull File file, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
 		if (!file.exists()) {
 			return false;
 		}
-		GPXFile res = GPXUtilities.loadGPXFile(file);
-		if (res.error != null) {
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+		if (gpxFile.error != null) {
 			return false;
 		}
-		for (WptPt wptPt : res.getPoints()) {
-			FavouritePoint favouritePoint = FavouritePoint.fromWpt(wptPt, app);
-			points.put(favouritePoint.getKey(), favouritePoint);
+		for (Map.Entry<String, PointsGroup> entry : gpxFile.getPointsGroups().entrySet()) {
+			String key = entry.getKey();
+			PointsGroup pointsGroup = entry.getValue();
+			FavoriteGroup favoriteGroup = FavoriteGroup.fromPointsGroup(pointsGroup, app);
+
+			favoriteGroups.put(key, favoriteGroup);
 		}
 		return true;
 	}
 
-	@NonNull
-	public GPXFile asGpxFile(@NonNull List<FavouritePoint> points) {
-		GPXFile gpx = new GPXFile(Version.getFullVersion(app));
-		for (FavouritePoint point : points) {
-			app.getSelectedGpxHelper().addPoint(point.toWpt(app), gpx);
+	public boolean loadPointsFromFile(@NonNull File file, @NonNull Map<String, FavouritePoint> points) {
+		Map<String, FavoriteGroup> groups = new LinkedHashMap<>();
+		boolean gpxLoaded = loadGPXFile(file, groups);
+		if (gpxLoaded) {
+			for (FavoriteGroup group : groups.values()) {
+				for (FavouritePoint point : group.getPoints()) {
+					points.put(point.getKey(), point);
+				}
+			}
 		}
-		return gpx;
+		return gpxLoaded;
+	}
+
+	@NonNull
+	public GPXFile asGpxFile(@NonNull List<FavoriteGroup> favoriteGroups) {
+		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+		for (FavoriteGroup group : favoriteGroups) {
+			gpxFile.addPointsGroup(group.toPointsGroup(app));
+		}
+		return gpxFile;
 	}
 
 	@Nullable
-	public Exception saveFile(@NonNull List<FavouritePoint> points, @NonNull File file) {
-		GPXFile gpx = asGpxFile(points);
+	public Exception saveFile(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File file) {
+		GPXFile gpx = asGpxFile(favoriteGroups);
 		return GPXUtilities.writeGpxFile(file, gpx);
 	}
 
-	public void saveCurrentPointsIntoFile(@NonNull List<FavouritePoint> points) {
+	public void saveCurrentPointsIntoFile(@NonNull List<FavoriteGroup> groups) {
 		try {
 			Map<String, FavouritePoint> deletedInMemory = new LinkedHashMap<>();
-			loadGPXFile(getInternalFile(), deletedInMemory);
-			for (FavouritePoint point : points) {
+			loadPointsFromFile(getInternalFile(), deletedInMemory);
+			for (FavouritePoint point : getPointsFromGroups(groups)) {
 				deletedInMemory.remove(point.getKey());
 			}
-			saveFile(points, getInternalFile());
-			saveExternalFile(points, deletedInMemory.keySet());
+			saveFile(groups, getInternalFile());
+			saveExternalFile(groups, deletedInMemory.keySet());
 			backup(getBackupFile(), getExternalFile());
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 	}
 
-	protected Exception saveExternalFile(@NonNull List<FavouritePoint> points, @Nullable Set<String> deleted) {
+	protected Exception saveExternalFile(@NonNull List<FavoriteGroup> groups, @NonNull Set<String> deleted) {
 		Map<String, FavouritePoint> all = new LinkedHashMap<>();
-		loadGPXFile(getExternalFile(), all);
-		if (!Algorithms.isEmpty(deleted)) {
-			for (String key : deleted) {
-				all.remove(key);
-			}
+		loadPointsFromFile(getExternalFile(), all);
+		for (String key : deleted) {
+			all.remove(key);
 		}
 		// remove already existing in memory
-		for (FavouritePoint point : points) {
+		for (FavouritePoint point : getPointsFromGroups(groups)) {
 			all.remove(point.getKey());
 		}
 		// save favoritePoints from memory in order to update existing
-		points.addAll(all.values());
-		return saveFile(points, getExternalFile());
+		for (FavouritePoint point : all.values()) {
+			for (FavoriteGroup group : groups) {
+				if (Algorithms.stringsEqual(point.getCategory(), group.getName())) {
+					group.getPoints().add(point);
+					break;
+				}
+			}
+		}
+		return saveFile(groups, getExternalFile());
 	}
 
 	public void backup(@NonNull File backupFile, @NonNull File externalFile) {

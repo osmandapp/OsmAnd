@@ -1,36 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
-
-import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
-import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.routing.RouteService;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
@@ -52,7 +21,40 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+
+import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class ApplicationMode {
+
+	public static final float FAST_SPEED_THRESHOLD = 10;
 
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
@@ -127,24 +129,14 @@ public class ApplicationMode {
 
 	public static List<ApplicationMode> values(@NonNull OsmandApplication app) {
 		if (customizationListener == null) {
-			customizationListener = new OsmAndAppCustomizationListener() {
-				@Override
-				public void onOsmAndSettingsCustomized() {
-					cachedFilteredValues = new ArrayList<>();
-				}
-			};
+			customizationListener = () -> cachedFilteredValues = new ArrayList<>();
 			app.getAppCustomization().addListener(customizationListener);
 		}
 		if (cachedFilteredValues.isEmpty()) {
 
 			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
-				listener = new StateChangedListener<String>() {
-					@Override
-					public void stateChanged(String change) {
-						cachedFilteredValues = new ArrayList<>();
-					}
-				};
+				listener = change -> cachedFilteredValues = new ArrayList<>();
 				settings.AVAILABLE_APP_MODES.addListener(listener);
 			}
 			String available = settings.AVAILABLE_APP_MODES.get();
@@ -288,15 +280,14 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String key) {
+	public boolean isWidgetAvailable(String widgetId) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
-			return app.getAppCustomization().isWidgetAvailable(key, this);
+			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
 		}
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
-			return true;
-		}
-		return set.contains(this);
+
+		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
+		return availableForModes == null || availableForModes.contains(this);
 	}
 
 	public String getStringKey() {
@@ -387,7 +378,7 @@ public class ApplicationMode {
 
 
 	public boolean hasFastSpeed() {
-		return getDefaultSpeed() > 10;
+		return getDefaultSpeed() > FAST_SPEED_THRESHOLD;
 	}
 
 	public float getDefaultSpeed() {
@@ -433,6 +424,12 @@ public class ApplicationMode {
 	public void setUserProfileName(String userProfileName) {
 		if (!Algorithms.isEmpty(userProfileName)) {
 			app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
+		}
+	}
+
+	public void setDerivedProfile(String derivedProfile) {
+		if (!Algorithms.isEmpty(derivedProfile)) {
+			app.getSettings().DERIVED_PROFILE.setModeValue(this, derivedProfile);
 		}
 	}
 

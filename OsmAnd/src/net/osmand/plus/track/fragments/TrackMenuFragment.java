@@ -1,5 +1,30 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.track.cards.OptionsCard.ALTITUDE_CORRECTION_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -90,9 +115,12 @@ import net.osmand.plus.track.cards.RouteInfoCard;
 import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
@@ -121,34 +149,10 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -162,13 +166,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
+	private static final String TRACK_HIDDEN_MANUALLY = "track_hidden_manually";
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private TrackDisplayHelper displayHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedGpxFile selectedGpxFile;
-	private GPXTrackAnalysis analyses;
+	private GPXTrackAnalysis analysis;
 
 	private TrackMenuTab menuType = TrackMenuTab.OVERVIEW;
 	private SegmentsCard segmentsCard;
@@ -208,6 +213,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private UpdateLocationViewCache updateLocationViewCache;
 	private boolean locationUpdateStarted;
 	private LatLon latLon;
+	private boolean trackHiddenManually;
 
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
@@ -294,12 +300,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
+			trackHiddenManually = savedInstanceState.getBoolean(TRACK_HIDDEN_MANUALLY, false);
+
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			boolean showCurrentTrack = savedInstanceState.getBoolean(CURRENT_RECORDING);
 			MapActivity mapActivity = requireMapActivity();
 			loadSelectedGpxFile(mapActivity, path, showCurrentTrack, result -> {
 				setSelectedGpxFile(result);
 				onSelectedGpxFileAvailable();
+				gpxSelectionHelper.addTemporallyVisibleTrack(result);
 				if (getView() != null) {
 					initContent(getView());
 				}
@@ -411,8 +420,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.chartTabToOpen = chartTabToOpen;
 	}
 
-	private void setAnalyses(@Nullable GPXTrackAnalysis analyses) {
-		this.analyses = analyses;
+	private void setAnalysis(@Nullable GPXTrackAnalysis analysis) {
+		this.analysis = analysis;
 	}
 
 	@Override
@@ -593,10 +602,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		searchEditText.addTextChangedListener(
 				new TextWatcher() {
 					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					}
 
 					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) { }
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					}
 
 					@Override
 					public void afterTextChanged(Editable s) {
@@ -711,7 +722,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (overviewCard != null && overviewCard.getView() != null) {
 					reattachCard(cardsContainer, overviewCard);
 				} else {
-					overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile, analyses, this);
+					overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile, analysis, this);
 					overviewCard.setListener(this);
 					cardsContainer.addView(overviewCard.build(mapActivity));
 					if (isCurrentRecordingTrack()) {
@@ -834,14 +845,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onResume() {
 		super.onResume();
-		gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
+		}
 		onHiddenChanged(false);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		if (selectedGpxFile != null) {
+			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
+		}
 		onHiddenChanged(true);
 	}
 
@@ -998,6 +1013,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
 			outState.putDouble(KEY_LONGITUDE, latLon.getLongitude());
 		}
+		outState.putBoolean(TRACK_HIDDEN_MANUALLY, trackHiddenManually);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -1022,10 +1038,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) { }
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+	}
 
 	@Override
-	public void onCardPressed(@NonNull BaseCard card) { }
+	public void onCardPressed(@NonNull BaseCard card) {
+	}
 
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
@@ -1049,6 +1067,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (!isGpxFileSelected(app, gpxFile)) {
 						params.showOnMap().selectedByUser().addToHistory().addToMarkers();
 					} else {
+						trackHiddenManually = true;
 						params.hideFromMap();
 					}
 					gpxSelectionHelper.selectGpxFile(gpxFile, params);
@@ -1118,6 +1137,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				MoveGpxFileBottomSheet.showInstance(fragmentManager, this, gpxFile.path, true, false);
 			} else if (buttonIndex == GPS_FILTER_BUTTON_INDEX) {
 				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile, this);
+			} else if (buttonIndex == ALTITUDE_CORRECTION_BUTTON_INDEX) {
+				GPXTrackAnalysis analysis = this.analysis != null
+						? this.analysis
+						: selectedGpxFile.getTrackAnalysis(app);
+				if (analysis.hasElevationData) {
+					calculateOnlineSelected(-1);
+				} else {
+					showTrackAltitudeDialog(-1);
+				}
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 
@@ -1357,10 +1385,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void scrollBy(int px) { }
+	public void scrollBy(int px) {
+	}
 
 	@Override
-	public void onPointsDeletionStarted() { }
+	public void onPointsDeletionStarted() {
+	}
 
 	@Override
 	public void onPointsDeleted() {
@@ -1407,9 +1437,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void openGetAltitudeBottomSheet(@NonNull GpxDisplayItem gpxItem) {
+		showTrackAltitudeDialog(getSegmentIndex(gpxItem));
+	}
+
+	private void showTrackAltitudeDialog(int segmentIndex) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			int segmentIndex = getSegmentIndex(gpxItem);
 			TrackAltitudeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, segmentIndex);
 		}
 	}
@@ -1513,7 +1546,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
-			public void gpxSavingStarted() { }
+			public void gpxSavingStarted() {
+			}
 
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
@@ -1551,6 +1585,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
+	public void dismissFromMap() {
+		GPXFile gpxFile = getGpx();
+		if (!isGpxFileSelected(app, gpxFile) && !trackHiddenManually) {
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().selectedByUser().syncGroup().addToHistory().addToMarkers().saveSelection();
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
+		}
+		dismiss();
+	}
+
 	@Override
 	public void attachToRoadsSelected(int segmentIndex) {
 		openPlanRoute(segmentIndex, ATTACH_ROADS_MODE);
@@ -1573,6 +1617,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			dismiss();
 		}
 	}
+
+	@Override
+	public boolean onSaveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			EditGpxDescriptionController controller = new EditGpxDescriptionController(getMapActivity());
+			controller.saveEditedDescription(editedText, callback);
+			return true;
+		}
+		return false;
+	}
+
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams) {
 		openTrack(context, file, prevIntentParams, null);
@@ -1678,7 +1734,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			TrackMenuFragment fragment = new TrackMenuFragment();
 			fragment.setArguments(args);
 			fragment.setRetainInstance(true);
-			fragment.setAnalyses(analyses);
+			fragment.setAnalysis(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setRouteSegment(routeSegment);
 

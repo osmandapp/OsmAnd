@@ -4001,9 +4001,6 @@
     <string name="updated">Aggiornata: %s</string>
     <string name="last_time_checked">Ultimo controllo: %s</string>
     <string name="update_frequency">Frequenza di aggiornamento</string>
-    <string name="live_update_frequency_week_variant">Gli aggiornamenti della mappa saranno controllati ogni settimana. La prossima alle %2$s %1$s.</string>
-    <string name="live_update_frequency_day_variant">Gli aggiornamenti della mappa saranno controllati ogni giorno. La prossima alle %2$s %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Gli aggiornamenti alla mappa saranno controllati ogni ora. Il prossimo alle %2$s %1$s.</string>
     <string name="delete_updates">Elimina aggiornamenti</string>
     <string name="live_update_delete_updates_msg">Eliminare tutti i %s aggiornamenti live\?</string>
     <string name="purchases">Acquisti</string>
@@ -4636,7 +4633,6 @@
     <string name="circle_settings">Impostazioni del cerchio</string>
     <string name="battery_widget_desc">Il widget mostra il livello della batteria del tuo dispositivo.</string>
     <string name="altitude_widget_desc">Il widget mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
-    <string name="calculate_online_altitude_descr">I dati dell\'altitudine saranno calcolati nel server OsmAnd.</string>
     <string name="fps_widget_desc">Il widget mostra con che velocità la mappa e i suoi elementi sono mostrati e aggiornati.</string>
     <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia quella da utilizzare per la navigazione attuale.</string>
     <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>
@@ -4647,7 +4643,7 @@
     <string name="rendering_attr_horseScale_name">Difficoltà dei percorsi ippici</string>
     <string name="routing_attr_avoid_highway_name">Evita autostrade</string>
     <string name="routing_attr_avoid_highway_description">Evita autostrade</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Nessuna restrizione</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Nessuna restrizione)</string>
     <string name="routing_attr_avoid_fords_name">Evita i guadi</string>
     <string name="routing_attr_avoid_fords_description">Evita i guadi</string>
     <string name="map_widget_trip_recording_downhill">Discesa</string>
@@ -4686,4 +4682,26 @@
     <string name="use_latin_name_if_missing">Usa nomi latini se mancano</string>
     <string name="transport_hazmat_no_desc">In alcune strade e tunnel il trasporto di materiale pericoloso è proibito.</string>
     <string name="transport_hazmat_title">Trasporto di materiale pericoloso</string>
+    <string name="routing_attr_goods_restrictions_name">Restrizioni per categoria di merce trasportata</string>
+    <string name="routing_attr_goods_restrictions_description">Considera le limitazioni di accesso per categoria di merci</string>
+    <string name="routing_attr_motor_type_lpg_name">GPL</string>
+    <string name="routing_attr_motor_type_electric_name">Elettrico</string>
+    <string name="routing_attr_motor_type_gas_name">Metano</string>
+    <string name="co2_mission">Emissione di CO2</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzina</string>
+    <string name="routing_attr_motor_type_hybrid_name">Ibrido</string>
+    <string name="routing_attr_motor_type_name">Tipo di motore</string>
+    <string name="routing_attr_motor_type_description">Per il calcolo della CO2</string>
+    <string name="lang_ckb">Curdo centrale</string>
+    <string name="updated_map_time">Aggiornato: %1$s.</string>
+    <string name="includes_osm_changes_until">Include le modifiche di OSM apportate fino a %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Gli aggiornamenti delle mappe verranno controllati ogni ora.</string>
+    <string name="live_update_frequency_day_variant">Gli aggiornamenti delle mappe verranno controllati ogni giorno.</string>
+    <string name="live_update_frequency_week_variant">Gli aggiornamenti delle mappe verranno controllati ogni settimana.</string>
+    <string name="calculate_online_altitude_descr">Calcola l\'altitudine online sui server OsmAnd in base alle immagini satellitari e ai modelli di elevazione digitale. Potrebbe variare dall\'altitudine registrata dal dispositivo e potrebbe essere usata come correzione dell\'altitudine.</string>
+    <string name="next_live_update_date_and_time">Prossimo aggiornamento: %1$s in %2$s.</string>
+    <string name="next_live_update_time">Prossimo aggiornamento: in %1$s.</string>
+    <string name="altitude_correction">Correzione dell\'altitudine</string>
 </resources>

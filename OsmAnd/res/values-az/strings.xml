@@ -2579,7 +2579,6 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="download_additional_maps">Çatışmayan %1$s xəritələri endirilsin (%2$d MB)\?</string>
     <string name="rendering_value_black_name">Qara</string>
-    <string name="live_update_frequency_day_variant">Xəritə yeniləmələri hər gün yoxlanılacaq. Növbəti dəfə %1$s %2$s.</string>
     <string name="shared_string_includes">Daxil olanlar</string>
     <string name="change_data_storage_full_description">OsmAnd məlumat faylları yeni təyinat yerinə daşınsın\?
 \n%1$s &gt; %2$s</string>

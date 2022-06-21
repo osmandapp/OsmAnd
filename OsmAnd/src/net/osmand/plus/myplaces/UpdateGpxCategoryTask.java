@@ -18,25 +18,25 @@ import java.io.File;
 public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Exception> {
 
 	private final GPXFile gpxFile;
-	private final PointsGroup prevPointsGroup;
-	private final PointsGroup updatedPointsGroup;
+	private final String prevGroupName;
+	private final PointsGroup pointsGroup;
 	private final UpdateGpxListener listener;
-	private final boolean updateAppearance;
+	private final boolean updatePointsAppearance;
 
-	private boolean pointsUpdated;
+	private boolean gpxUpdated;
 
 	public UpdateGpxCategoryTask(@NonNull FragmentActivity activity,
 	                             @NonNull GPXFile gpxFile,
-	                             @NonNull PointsGroup prevPointsGroup,
-	                             @NonNull PointsGroup updatedPointsGroup,
+	                             @NonNull String prevGroupName,
+	                             @NonNull PointsGroup pointsGroup,
 	                             @Nullable UpdateGpxListener listener,
-	                             boolean updateAppearance) {
+	                             boolean updatePointsAppearance) {
 		super(activity);
 		this.gpxFile = gpxFile;
 		this.listener = listener;
-		this.prevPointsGroup = prevPointsGroup;
-		this.updatedPointsGroup = updatedPointsGroup;
-		this.updateAppearance = updateAppearance;
+		this.prevGroupName = prevGroupName;
+		this.pointsGroup = pointsGroup;
+		this.updatePointsAppearance = updatePointsAppearance;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 
 	@Override
 	protected Exception doInBackground(Void... voids) {
-		if (!gpxFile.showCurrentTrack && pointsUpdated) {
+		if (!gpxFile.showCurrentTrack && gpxUpdated) {
 			return GPXUtilities.writeGpxFile(new File(gpxFile.path), gpxFile);
 		}
 		return null;
@@ -57,7 +57,7 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 	protected void onPostExecute(Exception exception) {
 		hideProgress();
 
-		if (pointsUpdated) {
+		if (gpxUpdated) {
 			syncGpx();
 		}
 		if (listener != null) {
@@ -66,24 +66,29 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 	}
 
 	private void updatePoints() {
+		long modifiedTime = gpxFile.modifiedTime;
 		for (WptPt wpt : gpxFile.getPoints()) {
-			if (Algorithms.stringsEqual(wpt.category, prevPointsGroup.name)
-					|| Algorithms.isEmpty(wpt.category) && Algorithms.isEmpty(prevPointsGroup.name)) {
-				pointsUpdated = true;
-
-				String category = updatedPointsGroup.name;
-				String iconName = updateAppearance ? updatedPointsGroup.iconName : wpt.getIconName();
-				String backgroundType = updateAppearance ? updatedPointsGroup.backgroundType : wpt.getBackgroundType();
-				int color = updateAppearance ? updatedPointsGroup.color : wpt.colourARGB;
-
-				if (gpxFile.showCurrentTrack) {
-					app.getSavingTrackHelper().updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
-							wpt.desc, wpt.name, category, color, iconName, backgroundType);
-				} else {
-					gpxFile.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), wpt.desc, wpt.name,
-							category, color, iconName, backgroundType);
-				}
+			if (Algorithms.stringsEqual(wpt.category, prevGroupName)
+					|| Algorithms.isEmpty(wpt.category) && Algorithms.isEmpty(prevGroupName)) {
+				updatePoint(wpt);
 			}
+		}
+		gpxFile.updatePointsGroup(prevGroupName, pointsGroup);
+		gpxUpdated = modifiedTime != gpxFile.modifiedTime;
+	}
+
+	private void updatePoint(@NonNull WptPt wpt) {
+		String category = pointsGroup.name;
+		String iconName = updatePointsAppearance ? pointsGroup.iconName : wpt.getIconName();
+		String backgroundType = updatePointsAppearance ? pointsGroup.backgroundType : wpt.getBackgroundType();
+		int color = updatePointsAppearance ? pointsGroup.color : wpt.colourARGB;
+
+		if (gpxFile.showCurrentTrack) {
+			app.getSavingTrackHelper().updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
+					wpt.desc, wpt.name, category, color, iconName, backgroundType);
+		} else {
+			gpxFile.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), wpt.desc, wpt.name,
+					category, color, iconName, backgroundType);
 		}
 	}
 
@@ -97,6 +102,6 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 
 	public interface UpdateGpxListener {
 
-		void updateGpxFinished(Exception errorMessage);
+		void updateGpxFinished(@Nullable Exception exception);
 	}
 }

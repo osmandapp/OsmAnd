@@ -163,8 +163,22 @@ public class RoutingConfiguration {
 		                                  Double direction,
 		                                  RoutingMemoryLimits memoryLimits,
 		                                  Map<String, String> params) {
+			String derivedProfile = null;
 			if (!routers.containsKey(router)) {
-				router = defaultRouter;
+				for (Map.Entry<String, GeneralRouter> r : routers.entrySet()) {
+					String derivedProfiles = r.getValue().getAttribute("derivedProfiles");
+					if (derivedProfiles != null && derivedProfiles.contains(router)) {
+						derivedProfile = router;
+						router = r.getKey();
+						break;
+					}
+				}
+				if (derivedProfile == null) {
+					router = defaultRouter;
+				}
+			}
+			if (derivedProfile != null) {
+				params.put("profile_" + derivedProfile, String.valueOf(true));
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
 			if (routers.containsKey(router)) {

@@ -3913,9 +3913,6 @@
     <string name="last_time_checked">آخرین زمان بررسی: %s</string>
     <string name="latest_openstreetmap_update">آخرین روزآمدسازهٔ اوپن‌استریت‌مپ:</string>
     <string name="updated">روزآمدشده: %s</string>
-    <string name="live_update_frequency_week_variant">روزآمدی نقشه هر هفته بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
-    <string name="live_update_frequency_day_variant">روزآمدی نقشه هر روز بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
-    <string name="live_update_frequency_hour_variant">روزآمدی نقشه هر ساعت بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="delete_updates">حذف روزآمدسازه‌ها</string>
     <string name="live_update_delete_updates_msg">آیا همهٔ روزآمدسازه‌های زندهٔ %s حذف شود؟</string>
     <string name="update_frequency">تکرار روزآمدسازی</string>
@@ -4378,4 +4375,19 @@
 \n
 \nلطفا پوشه داده را از ذخیره‌سازی مشترک به حافظه در دسترس منتقل کنید، در غیر این صورت برنامه دسترسی به داده‌های شما مانند نقشه‌های آفلاین، جی‌پی‌اکس، غیره را از دست خواهد داد.</string>
     <string name="routeInfo_tracktype_description">مسیر یا خط مسیر را با ترکیب سطح آن رنگ کنید. معمولاً زمانی اعمال می‌شود که شبکه جاده تا حد زیادی آسفالت نشده باشد.</string>
+    <string name="routing_attr_motor_type_description">برای محاسبه CO2</string>
+    <string name="co2_mission">انتشار CO2</string>
+    <string name="kg">کیلوگرم</string>
+    <string name="routing_attr_motor_type_diesel_name">دیزل</string>
+    <string name="routing_attr_motor_type_petrol_name">بنزین</string>
+    <string name="routing_attr_motor_type_electric_name">برقی</string>
+    <string name="routing_attr_motor_type_gas_name">سی‌ان‌جی</string>
+    <string name="routing_attr_motor_type_hybrid_name">هیبرید</string>
+    <string name="routing_attr_motor_type_name">نوع موتور</string>
+    <string name="import_as_one_track">وارد کردن به‌عنوان یک ترک</string>
+    <string name="use_latin_name_if_missing">در صورت وجود از نام لاتین استفاده کنید</string>
+    <string name="transport_hazmat_yes_desc">شما باید دسته‌بندی مناسب را انتخاب کنید.</string>
+    <string name="transport_hazmat_title">حمل و نقل مواد خطرناک</string>
+    <string name="lang_ckb">کردی مرکزی</string>
+    <string name="transport_hazmat_no_desc">در برخی جاده‌ها و تونل‌ها حمل و نقل مواد خطرناک ممنوع است.</string>
 </resources>

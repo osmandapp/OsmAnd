@@ -3997,9 +3997,6 @@
     <string name="updated">Обновлено: %s</string>
     <string name="last_time_checked">Последняя проверка: %s</string>
     <string name="update_frequency">Частота обновления</string>
-    <string name="live_update_frequency_week_variant">Проверка обновлений раз в неделю. Ближайшая %1$s в %2$s.</string>
-    <string name="live_update_frequency_day_variant">Проверка обновлений каждый день. Ближайшая %1$s в %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Проверка обновлений каждый час. Ближайшая %1$s в %2$s.</string>
     <string name="delete_updates">Удалить обновления</string>
     <string name="live_update_delete_updates_msg">Удалить все live-обновления для %s\?</string>
     <string name="purchases">Покупки</string>
@@ -4626,7 +4623,6 @@
     <string name="navigation_points">Точки навигации</string>
     <string name="get_altitude_information">Получить информацию о высоте</string>
     <string name="calculating_altitude">Расчет высоты</string>
-    <string name="calculate_online_altitude_descr">Данные о высоте будут рассчитаны на сервере OsmAnd.</string>
     <string name="calculate_online">Рассчитать онлайн</string>
     <string name="track_attach_to_the_roads_descr">Трек будет привязан к дороге с помощью офлайн-карт, геометрия трека будет изменена.</string>
     <string name="get_altitude_data">Получить данные о высоте</string>
@@ -4671,7 +4667,7 @@
     <string name="map_widget_trip_recording_duration">Продолжительность</string>
     <string name="map_widget_trip_recording_uphill">Подъём</string>
     <string name="routing_attr_hazmat_category_name">Категория опасности</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Без ограничений</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без ограничений)</string>
     <string name="map_widget_trip_recording_distance">Расстояние</string>
     <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
     <string name="routing_attr_avoid_fords_name">Без бродов</string>
@@ -4702,4 +4698,27 @@
     <string name="transport_hazmat_title">Перевозка опасных грузов</string>
     <string name="transport_hazmat_no_desc">По некоторым дорогам и туннелям перевозка опасных грузов запрещена.</string>
     <string name="transport_hazmat_yes_desc">Выберите подходящую категорию.</string>
+    <string name="routing_attr_goods_restrictions_description">Учитывать права доступа для легкого коммерческого транспорта</string>
+    <string name="routing_attr_goods_restrictions_name">Ограничения на грузовые автомобили</string>
+    <string name="co2_mission">Выбросы CO2</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизель</string>
+    <string name="routing_attr_motor_type_name">Тип двигателя</string>
+    <string name="routing_attr_motor_type_description">Для расчета CO2</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_electric_name">Электрический</string>
+    <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
+    <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
+    <string name="lang_ckb">Центральный курдский</string>
+    <string name="calculate_online_altitude_descr">Рассчитывайте высоту в режиме онлайн на серверах OsmAnd на основе спутниковых снимков и цифровых моделей рельефа. Результат расчета может отличаться от высоты, записанной устройством, и может быть использован в качестве коррекции высоты.</string>
+    <string name="live_update_frequency_hour_variant">Обновления карты будут проверяться каждый час.</string>
+    <string name="live_update_frequency_day_variant">Обновления карты будут проверяться каждый день.</string>
+    <string name="live_update_frequency_week_variant">Обновления карты будут проверяться каждую неделю.</string>
+    <string name="altitude_correction">Коррекция высоты</string>
+    <string name="next_live_update_time">Следующее обновление: в %1$s.</string>
+    <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
+    <string name="no_altitude_data_desc">Вы можете прикрепить свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
+    <string name="updated_map_time">Обновлено: %1$s.</string>
+    <string name="next_live_update_date_and_time">Следующее обновление: %1$s в %2$s.</string>
 </resources>

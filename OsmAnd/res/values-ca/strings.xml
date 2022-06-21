@@ -3964,8 +3964,9 @@
     <string name="routing_attr_avoid_highway_name">Evita les autopistes</string>
     <string name="routing_attr_allow_private_for_truck_name">Permet l\'accés privat (camió)</string>
     <string name="map_widget_trip_recording_downhill">Descens</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Sense restriccions</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sense restriccions)</string>
     <string name="map_widget_trip_recording_duration">Durada</string>
     <string name="routing_attr_avoid_fords_description">Evita els guals</string>
     <string name="fps_widget_desc">El giny mostra la velocitat de càrrega i actualització del mapa i dels elements auxiliars.</string>
+    <string name="routing_attr_goods_restrictions_name">Restriccions per a vehicles de mercaderies</string>
 </resources>

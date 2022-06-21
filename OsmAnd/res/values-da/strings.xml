@@ -200,8 +200,8 @@
     <string name="osmand_parking_position_name">Parkeringsplads</string>
     <string name="osmand_parking_plugin_description">Registrer hvor din bil er parkeret, inklusiv hvor meget parkeringstid der er tilbage.
 \nBåde placering og tid er synlige på betjeningspanel samt i et modul på kortet. En alarm kan tilføjes til Android-kalenderen, som en påmindelse.</string>
-    <string name="osmand_parking_plugin_name">Parkeringsplads</string>
-    <string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
+    <string name="osmand_parking_plugin_name">Parkeringsplacering</string>
+    <string name="context_menu_item_add_parking_point">Markér som parkeringssted</string>
     <string name="context_menu_item_delete_parking_point">Slet parkeringsmarkør</string>
     <string name="gpxup_public">Offentligt</string>
     <string name="gpxup_identifiable">Identificerbar</string>
@@ -2110,7 +2110,7 @@
     <string name="quick_action_add_osm_bug_descr">En knap til at tilføje en OSM-note midt på skærmen.</string>
     <string name="quick_action_add_poi_descr">En knap yik at tilføje et interessepunkt midt på skærmen.</string>
     <string name="quick_action_navigation_voice_descr">En til/fra-knap for at deaktiverer eller aktivere stemmevejledning under navigation.</string>
-    <string name="quick_action_add_parking_descr">En knap til at tilføje en parkeringsplads midt på skærmen.</string>
+    <string name="quick_action_add_parking_descr">En knap til at tilføje en parkeringsplacering midt på skærmen.</string>
     <string name="favorite_autofill_toast_text">" gemt i "</string>
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Genvej omdøbt til %1$s for at undgå dubletter.</string>
@@ -2388,7 +2388,7 @@
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
     <string name="nothing_found_descr">Ændr søgning eller øg radius.</string>
-    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Tillad brug af private veje til turen\?</string>
+    <string name="private_access_routing_req">Din destination ligger i et område med privat adgang. Tillad at der benyttes private veje til denne tur\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-modul</string>
     <string name="mapillary_widget_descr">Tillader hurtige bidrag til Mapillary.</string>
@@ -3533,7 +3533,7 @@
     <string name="osmand_purchases_item">OsmAnd køb</string>
     <string name="quick_action_transport_descr">En knap til at vise eller skjule offentlig transport på kortet.</string>
     <string name="create_edit_poi">Opret eller rediger IP</string>
-    <string name="parking_positions">Parkeringsplads</string>
+    <string name="parking_positions">Parkeringsplaceringer</string>
     <string name="add_edit_favorite">Tilføj eller rediger favorit</string>
     <string name="reset_deafult_order">Gendan standardrækkefølge for elementer</string>
     <string name="back_to_editing">Tilbage til redigering</string>
@@ -3813,9 +3813,6 @@
     <string name="updated">Opdateret: %s</string>
     <string name="last_time_checked">Sidst kontrolleret: %s</string>
     <string name="update_frequency">Opdateringsfrekvens</string>
-    <string name="live_update_frequency_week_variant">Kortopdateringer kontrolleres hver uge. Næste gang %1$s kl. %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kortopdateringer kontrolleres hver dag. Næste gang %1$s kl. %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kortopdateringer kontrolleres hver time. Næste gang %1$s kl. %2$s.</string>
     <string name="delete_updates">Slet opdateringer</string>
     <string name="purchases">Køb</string>
     <string name="select_category_descr">Vælg kategori eller tilføj en ny</string>
@@ -3902,7 +3899,7 @@
     <string name="select_folder">Valg mappe</string>
     <string name="select_folder_descr">Vælg mappe eller tilføj en ny</string>
     <string name="shared_string_empty">Tom</string>
-    <string name="analyze_by_intervals">Analyser splitintervaller</string>
+    <string name="analyze_by_intervals">Analyser efter intervaller</string>
     <string name="upload_to_openstreetmap">Overfør til OpenStreetMap</string>
     <string name="edit_track">Rediger spor</string>
     <string name="rename_track">Omdøb spor</string>
@@ -4120,14 +4117,14 @@
     <string name="backup_promocode">Kampagnekode</string>
     <string name="send_crash_log">Send nedbrudslog</string>
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
-    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt bakkeskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
+    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt terrænskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
     <string name="purchases_feature_desc_wikipedia">Udforsk Wikipedia offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
     <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Få ubegrænset download af offline kort for alle kontinenter og regioner.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Få adgang til regelmæssige månedlige opdateringer af offlinekort.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Få adgang til hyppigere kortopdateringer. Opdateringer hver time, dag eller uge. Opdateringer downloades trinvis og kun for det ændrede område.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Få OsmAnd Cloud til at gemme alle OsmAnd-data online. Ingen tabte data efter geninstallation. Sikkerhedskopier og gendan nemt alle informationer.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Få OsmAnd Cloud for at gemme alle OsmAnd-data online. Ingen mistede data efter geninstallation. Sikkerhedskopiér og gendan nemt alle informationer.</string>
     <string name="nautical_depth">Havdybde</string>
     <string name="shared_string_progress">Fremskridt</string>
     <string name="promo_subscription">Kampagne-abonnement</string>
@@ -4622,7 +4619,7 @@
     <string name="coordinates_widget_secondary_desc">Koordinaters format kan være ændret i %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
     <string name="elevation_profile_widget_desc">Modul viser højden og hældningsprofilen for den aktuelle rute.</string>
-    <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringspladsen.</string>
+    <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringsstedet.</string>
     <string name="altitude_widget_desc">Viser højden over havniveau for den aktuelle geografiske placering.</string>
     <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
     <string name="map_markers_bar_widget_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, om der skal vises 1 eller 2 topmarkører i modulet.</string>
@@ -4632,7 +4629,6 @@
     <string name="route_maneuvers_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="calculating_altitude">Beregner højde</string>
-    <string name="calculate_online_altitude_descr">Højdedata vil blive beregnet på OsmAnd-serveren.</string>
     <string name="calculate_online">Beregn online</string>
     <string name="track_attach_to_the_roads_descr">Spor vil blive forbundet til vejen ved hjælp af offline-kort, og sporets geometri vil blive ændret.</string>
     <string name="get_altitude_data">Få højdedata</string>
@@ -4679,8 +4675,8 @@
     <string name="map_widget_trip_recording_downhill">Ned ad bakke</string>
     <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
     <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
-    <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
+    <string name="routing_attr_hazmat_category_name">Transport af farligt gods</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Ingen restriktioner)</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
@@ -4701,6 +4697,29 @@
     <string name="transport_hazmat_title">Transport af farlige materialer</string>
     <string name="import_as_one_track">Importer som ét spor</string>
     <string name="transport_hazmat_no_desc">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
-    <string name="transport_hazmat_yes_desc">Du skal vælge den rette kategori.</string>
+    <string name="transport_hazmat_yes_desc">Du skal vælge rette kategori.</string>
     <string name="use_latin_name_if_missing">Brug latinsk navn, hvis det mangler</string>
+    <string name="routing_attr_goods_restrictions_description">Tag hensyn til adgangstilladelser for lette varebiler (varer)</string>
+    <string name="routing_attr_goods_restrictions_name">Begrænsninger for varebiler</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrisk</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="co2_mission">CO2-udledning</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_name">Motortype</string>
+    <string name="routing_attr_motor_type_description">Til CO2-beregning</string>
+    <string name="lang_ckb">Sorani</string>
+    <string name="live_update_frequency_hour_variant">Der tjekkes for kortopdateringer hver time.</string>
+    <string name="calculate_online_altitude_descr">Beregn højden online på OsmAnd-servere baseret på satellitbilleder og digitale højdemodeller. Den kan variere fra den højde, der registreres af enheden, og kan bruges som højdekorrektion.</string>
+    <string name="updated_map_time">Opdateret: %1$s.</string>
+    <string name="includes_osm_changes_until">Inkluderer OSM-ændringer foretaget frem til %1$s.</string>
+    <string name="live_update_frequency_day_variant">Der tjekkes for kortopdateringer dagligt.</string>
+    <string name="next_live_update_date_and_time">Næste opdatering: %1$s om %2$s.</string>
+    <string name="next_live_update_time">Næste opdatering: om %1$s.</string>
+    <string name="live_update_frequency_week_variant">Der tjekkes for kortopdateringer hver uge.</string>
+    <string name="altitude_correction">Højdekorrektion</string>
+    <string name="no_altitude_data_desc">Du kan knytte dit spor til vejene for at få %1$s-data eller beregne det online.</string>
 </resources>

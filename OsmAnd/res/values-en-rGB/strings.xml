@@ -194,4 +194,9 @@
 \n</string>
     <string name="rendering_attr_appMode_description">Optimise map for</string>
     <string name="shared_string_size">Size</string>
+    <string name="routing_attr_avoid_highway_description">Avoid motorways</string>
+    <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
+    <string name="routing_attr_avoid_highway_name">Avoid motorways</string>
+    <string name="routing_attr_allow_private_for_truck_name">Allow private access (lorry)</string>
+    <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for lorries.</string>
 </resources>

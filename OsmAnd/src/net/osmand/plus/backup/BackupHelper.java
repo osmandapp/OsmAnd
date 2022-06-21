@@ -368,7 +368,7 @@ public class BackupHelper {
 		}
 	}
 
-	void updateOrderId(@Nullable OnUpdateSubscriptionListener listener) {
+	public void updateOrderId(@Nullable OnUpdateSubscriptionListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
 

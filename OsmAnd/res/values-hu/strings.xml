@@ -3919,7 +3919,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Elemzés felosztási intervallumonként</string>
+    <string name="analyze_by_intervals">Elemzés intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>
@@ -4021,9 +4021,6 @@
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Kérjük válasszon másik színezést.</string>
-    <string name="live_update_frequency_week_variant">Térképfrissítések keresése hetente. Következő: %1$s (%2$s múlva).</string>
-    <string name="live_update_frequency_day_variant">Térképfrissítések keresése naponta. Legközelebb: %1$s (%2$s múlva).</string>
-    <string name="live_update_frequency_hour_variant">Térképfrissítések keresése óránként. Következő: %1$s (%2$s múlva).</string>
     <string name="trip_recording_logging_interval_info">A naplózási intervallum beállítja azt az időközt, amelyben az OsmAnd lekéri az aktuális helyadatokat.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
@@ -4629,7 +4626,6 @@
     <string name="max_speed_widget_desc">Megjeleníti az aktuálisan használt úton érvényes sebességkorlátozást.</string>
     <string name="navigation_points">Navigációs pontok</string>
     <string name="route_maneuvers">Útvonal manőverek</string>
-    <string name="calculate_online_altitude_descr">A magassági adat az OsmAnd szerverén kerül kiszámításra.</string>
     <string name="calculate_altitude">Magasság kiszámítása</string>
     <string name="get_altitude_data">Magassági adat lekérése</string>
     <string name="no_altitude_data">Nincs magassági adat</string>
@@ -4658,7 +4654,7 @@
     <string name="map_widget_trip_recording_distance">Távolság</string>
     <string name="map_widget_trip_recording_uphill">Dombnak fel</string>
     <string name="routing_attr_avoid_fords_name">Gázlók nélkül</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Nincs korlátozás</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Nincs korlátozás)</string>
     <string name="rendering_attr_weatherTempContours_name">Hőmérsékleti vonalak</string>
     <string name="routing_attr_allow_private_for_truck_description">Tehergépjárművek számára a magánterületre való behajtás engedélyezése.</string>
     <string name="rendering_attr_horseScale_name">Lovas utak nehézségi foka</string>
@@ -4689,4 +4685,27 @@
     <string name="transport_hazmat_title">Veszélyes anyagok szállítása</string>
     <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
+    <string name="routing_attr_goods_restrictions_description">Vegye figyelembe az (áruszállító) furgonokra vonatkozó behajtási engedélyeket</string>
+    <string name="routing_attr_goods_restrictions_name">Furgon korlátozások</string>
+    <string name="co2_mission">Szén-dioxid-kibocsátás</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzin</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG (cseppfolyósított földgáz)</string>
+    <string name="routing_attr_motor_type_electric_name">Elektromos</string>
+    <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
+    <string name="routing_attr_motor_type_description">CO₂-kibocsátás számításához</string>
+    <string name="routing_attr_motor_type_name">Motortípus</string>
+    <string name="lang_ckb">Közép-kurd</string>
+    <string name="live_update_frequency_day_variant">A térképfrissítéseket naponta fogja keresni.</string>
+    <string name="live_update_frequency_hour_variant">A térképfrissítéseket óránként fogja keresni.</string>
+    <string name="live_update_frequency_week_variant">A térképfrissítéseket hetente fogja keresni.</string>
+    <string name="next_live_update_time">Következő frissítés: %1$s-kor.</string>
+    <string name="altitude_correction">Magasság korrekció</string>
+    <string name="no_altitude_data_desc">Saját nyomvonalat csatolhat az utakhoz, hogy megkapja a(z) %1$s adatot vagy kiszámoltathatja azt online.</string>
+    <string name="updated_map_time">Frissítve: %1$s.</string>
+    <string name="calculate_online_altitude_descr">A tengerszint feletti magasságot műholdképek és digitális magassági modellek felhasználásával az OsmAnd szervereken számítja ki online. Az eredmény eltérhet az eszköz által meghatározott magasságtól és magasságkorrekcióként használható.</string>
+    <string name="next_live_update_date_and_time">Következő frissítés: %1$s %2$s.</string>
+    <string name="includes_osm_changes_until">Tartalmazza az OSM-en %1$s-ig végrehajtott módosításokat.</string>
 </resources>
