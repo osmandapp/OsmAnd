@@ -4774,4 +4774,25 @@
     <string name="kg">كلم</string>
     <string name="routing_attr_motor_type_diesel_name">ديزل</string>
     <string name="co2_mission">ثاني أكسيد الكربون</string>
+    <string name="switch_widget_mode_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
+    <string name="side_marker_eta">الوقت المقدر للوصول</string>
+    <string name="goods_delivery_desc_4">إذا كان وزن سيارتك أكثر من 3.5 طن، فأنت بحاجة إلى استخدام وضع الشاحنة.</string>
+    <string name="goods_delivery_desc_2">سيتم تجنب الطرق التي أغلقت لتسليم البضائع.</string>
+    <string name="goods_delivery_desc">يمكن تقييد المركبات التي تنقل البضائع للوصول إلى بعض الطرق.</string>
+    <string name="updated_map_time">تم التحديث: %1$s.</string>
+    <string name="includes_osm_changes_until">يتضمن تغييرات الشارع المفتوح التي تم إجراؤها حتى %1$s.</string>
+    <string name="live_update_frequency_day_variant">سيتم التحقق من تحديثات الخرائط كل يوم.</string>
+    <string name="altitude_correction">تصحيح الارتفاع</string>
+    <string name="map_marker_average_speed_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة لحساب الوقت المقدر للوصول.</string>
+    <string name="marker_2nd">التوجيه المباشر الثاني</string>
+    <string name="next_live_update_date_and_time">التحديث التالي: %1$s في %2$s.</string>
+    <string name="goods_delivery_desc_3">ينطبق فقط على المركبات التي تحمل البضائع التي تحتوي على أربع عجلات على الأقل ولا يزيد وزنها عن 3.5 طن.</string>
+    <string name="reset_all_settings_desc">هل أنت متأكد أنك تريد إعادة تعيين كافة الإعدادات إلى الافتراضي؟</string>
+    <string name="marker_1st">التوجيه المباشر الأول</string>
+    <string name="no_altitude_data_desc">يمكنك إرفاق مسارك بالطرق للحصول على بيانات %1$s أو حسابها عبر الإنترنت.</string>
+    <string name="next_live_update_time">التحديث التالي: في %1$s.</string>
+    <string name="live_update_frequency_hour_variant">سيتم التحقق من تحديثات الخرائط كل ساعة.</string>
+    <string name="live_update_frequency_week_variant">سيتم التحقق من تحديثات الخرائط كل أسبوع.</string>
+    <string name="calculate_online_altitude_descr">احسب الارتفاع عبر الإنترنت على خوادم أوسماند استنادا إلى صور الأقمار الصناعية ونماذج الارتفاع الرقمية. يمكن أن يختلف عن الارتفاع المسجل للجهاز ويمكن استخدامه كتصحيح للارتفاع.</string>
+    <string name="lang_ckb">الكردية المركزية</string>
 </resources>
