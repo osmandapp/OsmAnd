@@ -11,6 +11,7 @@ import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.Task;
 
 import net.osmand.PlatformUtil;
@@ -64,7 +65,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 				// delivered sooner than this interval.
 				.setMaxWaitTime(0)
 
-				.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+				.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
 
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
