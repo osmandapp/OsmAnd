@@ -54,6 +54,8 @@ import java.util.Set;
 
 public class ApplicationMode {
 
+	public static final float FAST_SPEED_THRESHOLD = 10;
+
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
@@ -376,7 +378,7 @@ public class ApplicationMode {
 
 
 	public boolean hasFastSpeed() {
-		return getDefaultSpeed() > 10;
+		return getDefaultSpeed() > FAST_SPEED_THRESHOLD;
 	}
 
 	public float getDefaultSpeed() {
