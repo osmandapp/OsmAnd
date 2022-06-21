@@ -4709,4 +4709,14 @@
     <string name="next_live_update_date_and_time">Prochaine mise à jour : %1$s dans %2$s.</string>
     <string name="next_live_update_time">Prochaine mise à jour : dans %1$s.</string>
     <string name="lang_ckb">Sorani</string>
+    <string name="goods_delivery_desc">L\'accès aux véhicules transportant des marchandises peut être restreint sur certaines routes.</string>
+    <string name="map_marker_average_speed_desc">Indiquez la durée pendant laquelle la vitesse moyenne sera mesurée pour calculer l\'heure d\'arrivée estimée.</string>
+    <string name="switch_widget_mode_desc">Vous pouvez basculer de mode en tapant sur le gadget.</string>
+    <string name="marker_1st">Première marque</string>
+    <string name="side_marker_eta">Heure d’arrivée estimée</string>
+    <string name="marker_2nd">Seconde marque</string>
+    <string name="goods_delivery_desc_4">Si le poids de votre véhicule est supérieur à 3,5 tonnes, vous devez utiliser le profil Camion.</string>
+    <string name="goods_delivery_desc_2">Les routes qui sont fermées à la livraison de marchandises seront évitées.</string>
+    <string name="reset_all_settings_desc">Êtes-vous certain de vouloir réinitialiser tous les paramètres à leurs valeurs par défaut \?</string>
+    <string name="goods_delivery_desc_3">S\'applique uniquement aux véhicules ayant au moins quatre roues, transportant des marchandises et dont le poids ne dépasse pas 3,5 tonnes.</string>
 </resources>
