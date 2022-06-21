@@ -2,6 +2,8 @@ package net.osmand.plus.measurementtool.command;
 
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.RoadSegmentData;
@@ -17,7 +19,7 @@ public class JoinPointsCommand extends MeasurementModeCommand {
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData;
 	private int pointPosition;
 
-	public JoinPointsCommand(MeasurementToolLayer measurementLayer) {
+	public JoinPointsCommand(@NonNull MeasurementToolLayer measurementLayer) {
 		super(measurementLayer);
 	}
 
@@ -51,6 +53,7 @@ public class JoinPointsCommand extends MeasurementModeCommand {
 		executeCommand();
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.JOIN_POINTS;
