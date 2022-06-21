@@ -4708,4 +4708,14 @@
     <string name="calculate_online_altitude_descr">A tengerszint feletti magasságot műholdképek és digitális magassági modellek felhasználásával az OsmAnd szervereken számítja ki online. Az eredmény eltérhet az eszköz által meghatározott magasságtól és magasságkorrekcióként használható.</string>
     <string name="next_live_update_date_and_time">Következő frissítés: %1$s %2$s.</string>
     <string name="includes_osm_changes_until">Tartalmazza az OSM-en %1$s-ig végrehajtott módosításokat.</string>
+    <string name="marker_2nd">2. jelölő</string>
+    <string name="reset_all_settings_desc">Biztosan visszaállítja az összes beállítást alaphelyzetbe\?</string>
+    <string name="switch_widget_mode_desc">A widgetre koppintva módot válthat.</string>
+    <string name="goods_delivery_desc_4">Ha a járműve 3,5 t feletti, a teherautó profilt szükséges használnia.</string>
+    <string name="goods_delivery_desc">Áruszállító járművel néhány útra való behajtás tiltva lehet.</string>
+    <string name="side_marker_eta">Becsült érkezési idő</string>
+    <string name="marker_1st">1. jelölő</string>
+    <string name="goods_delivery_desc_2">Az áruszállító járművek által igénybe nem vehető utak mellőzve lesznek.</string>
+    <string name="goods_delivery_desc_3">Csak olyan, legalább 4 kerekű áruszállító járművekhez alkalmazható, melyek tömege nem haladja meg a 3,5 tonnát.</string>
+    <string name="map_marker_average_speed_desc">Az időintervallum megadása, amely alapján az érkezési idő becsléséhez szükséges átlagsebesség kiszámításra kerül.</string>
 </resources>
