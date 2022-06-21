@@ -382,7 +382,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
 					}
 				});
-				setupListItemBackground(settingsButton);
+				setupListItemBackground(app, settingsButton, selectedAppMode.getProfileColor(nightMode));
 			}
 
 			View infoButton = view.findViewById(R.id.info_button);
@@ -562,15 +562,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	private void setupListItemBackground(@NonNull View view) {
-		setupListItemBackground(app, view, selectedAppMode.getProfileColor(nightMode));
+		View container = view.findViewById(R.id.container);
+		setupListItemBackground(app, container, selectedAppMode.getProfileColor(nightMode));
 	}
 
-	public static void setupListItemBackground(@NonNull Context context,
-	                                           @NonNull View view,
-	                                           @ColorInt int profileColor) {
-		View button = view.findViewById(R.id.container);
-		Drawable background = UiUtilities.getColoredSelectableDrawable(context, profileColor, 0.3f);
-		AndroidUtils.setBackground(button, background);
+	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
+		Drawable background = UiUtilities.getColoredSelectableDrawable(context, color, 0.3f);
+		AndroidUtils.setBackground(view, background);
 	}
 
 	@Override
