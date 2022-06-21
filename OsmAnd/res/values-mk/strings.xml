@@ -484,7 +484,7 @@
     <string name="rendering_attr_horseScale_name">Teskotii na konjskite pateki</string>
     <string name="map_widget_trip_recording_uphill">Nagornica</string>
     <string name="routing_attr_hazmat_category_name">Kategorija na opasni materii</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Bez ogranicuvanja</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A Bez ogranicuvanja</string>
     <string name="parking_widget_desc">Aplikacijata Vi go pokazuva rastojanieto od centarot na ekranot do parking prostorot.</string>
     <string name="map_markers_bar_widget_desc">Na grafičkata kontrola na gornata lenta može da go vidite rastojanieto i nasokata do markerot od momentalnata lokacija. Možno e da se konfigurira za da se vidat 1 ili 2 gorni markeri vo vidžetot.</string>
     <string name="av_notes_choose_action_widget_desc">Odberete akcija.</string>
@@ -2844,7 +2844,7 @@
 \n Prezemete gi mapite so pločki direktno onlajn ili podgotvete gi za oflajn upotreba (račno kopirani vo papkata so podatoci na OsmAnd) kako baza na podatoci na SQLite što može da se proizvede so različni alatki za podgotovka na karti od treta strana.</string>
     <string name="plugin_touringview_descr">Aktiviranjeto na ovoj prikaz go menuva stilot na mapata na OsmAnd vo „Pregled na patuvanja“, ova e specijalen prikaz so visoki detali za patnicite i profesionalnite vozači.
 \n
-\nOvoj prikaz obezbeduva, pri sekoe zumiranje na kartata, maksimalna količina na detali za patuvanjeto dostapni vo podatocite na kartata (osobeno patišta, pateki, pateki i oznaki za orientacija).
+\nOvoj prikaz obezbeduva, pri sekoe zumiranje na kartata, maksimalna količina na detali za patuvanjeto dostapni vo podatocite na kartata (osobeno patišta, pateki i oznaki za orientacija).
 \n
 \nIsto taka, jasno gi prikažuva site vidovi patišta nedvosmisleno so kodiranje vo boja, što e korisno koga na pr. vozenje golemi vozila.
 \n
@@ -2858,7 +2858,7 @@
 \nSpecijalen dodatok za mapi za OsmAnd ḱe gi obezbedi site oznaki za nautička navigacija i simboli na grafikoni, za navigacija vo vnatrešnosta i vo blizina na bregot. Opisot na sekoja navigaciska oznaka gi dava detalite potrebni za nivno identifikuvanje i nivnoto značenje (kategorija, forma, boja, niza, referenca itn.).
 \n
 \nZa da se vratite na eden od konvencionalnite stilovi na mapi na OsmAnd, ednostavno ili povtorno deaktivirajte go ovoj priklučok ili promenete go „Stilot na karta“ pod „Konfiguriraj mapa“ po želba.</string>
-    <string name="srtm_plugin_description">Ovoj priklučok obezbeduva i preklopuvanje na konturnata linija i (reljef) sloj na senka na ridot što ḱe se prikažat na vrvot na standardnite karti na OsmAnd. Ovaa funkcionalnost ḱe bide mnogu ceneta od sportisti, planinari, planinari i site zainteresirani za reljefnata struktura na pejzažot. (Ve molime imajte predvid deka podatocite za linijata na konturata i/ili relefot se odvoeni, dostapni se dopolnitelni prezemanja po aktiviranjeto na priklučokot.)
+    <string name="srtm_plugin_description">Ovoj priklučok obezbeduva i preklopuvanje na konturnata linija i (reljef) sloj na senka na ridot što ḱe se prikažat na vrvot na standardnite karti na OsmAnd. Ovaa funkcionalnost ḱe bide mnogu ceneta od sportisti, planinari, velossipedisti i site zainteresirani za reljefnata struktura na pejzažot. (Ve molime imajte predvid deka podatocite za linijata na konturata i/ili relefot se odvoeni, dostapni se dopolnitelni prezemanja po aktiviranjeto na priklučokot.)
 \n
 \nGlobalnite podatoci (pomeǵu 70 ° sever i 70 ° južno) se zasnovaat na merenjata na SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Termal Emission and Reflection Radiometer), instrument za slikanje na odborot Terra, vodečkiot satelit na NASA za nabljuduvanje na Zemjata. Sistem. ASTER e kooperativen napor pomeǵu NASA, japonskoto Ministerstvo za ekonomija, trgovija i industrija (METI) i Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_descr">Ovoj priklučok za OsmAnd vi gi stava na dofat detalite za globalnite skijački pateki, kros-kantri skijački pateki, alpskite ski pateki, žičarnicite i ski-liftovite. Patekite i patekite se prikažani vo boja spored teškotija i prikažani vo specijalen stil na mapa „Zimski“ koj asimilira zimski pejzaž oboen so sneg.
@@ -2953,4 +2953,31 @@
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_off">Isklučeno</string>
     <string name="shared_string_close">Zatvori</string>
+    <string name="shared_string_navigation">Navigacija</string>
+    <string name="osmand_running_in_background">Raboti vo pozadina</string>
+    <string name="shared_string_accessibility">Pristapnost</string>
+    <string name="rename_failed">Preimenuvanjeto ne uspea.</string>
+    <string name="days_behind">denovi zad</string>
+    <string name="back_to_map">Vrati se na kartata</string>
+    <string name="location_on_map">Lokacija:
+\nGeodrafska sirina %1$s
+\nGeografska dolzina %2$s</string>
+    <string name="notes">A/V zabeleski</string>
+    <string name="online_map">Karta na internet</string>
+    <string name="roads_only">Samo patista</string>
+    <string name="free">Besplatno %1$s</string>
+    <string name="device_memory">Ured za memorija</string>
+    <string name="shared_string_trip_recording">Snimanje na patuvanjeto</string>
+    <string name="osmand_accessibility_description">Gi pravi funkciite za pristapnost na uredot direktno dostapni vo OsmAnd. Toa go olesnuva na pr. prilagoduvanje na brzinata na govorot za glasovi od tekst vo govor, konfiguriranje na navigacija so D-pad, koristenje na trackball za kontrola na zumiranje ili povratni informacii od tekst vo govor, na primer za avtomatsko objavuvanje na vašata pozicija.</string>
+    <string name="osmand_distance_planning_plugin_description">Kreirajte pateki so dopiranje na kartata ili so koristenje ili menuvanje na postoečkite GPX-datoteki, za da planirate patuvanje i da go izmerite rastojanieto pomeǵu točkite. Rezultatot može da se začuva kako datoteka GPX za da se koristi podocna za nasoki.</string>
+    <string name="osm_editing_plugin_description">Napravete pridonesi za OSM kako kreiranje ili menuvanje objekti na OSM POI, otvoranje ili komentiranje beleški za OSM i pridonesuvanje snimeni GPX-datoteki vo OsmAnd so dostavuvanje na vašeto korisničko ime i lozinka. OpenStreetMap.org e globalen proekt za mapiranje na javen domen upravuvan od zaednicata.</string>
+    <string name="osmand_development_plugin_description">Postavki za funkcii za razvoj i otstranuvanje greški, kako što se simulacija na navigacija, izvedba na renderiranje ili glasovno pottiknuvanje. Nameneto za programeri, ne e potrebno za normalna upotreba na aplikacii.</string>
+    <string name="rendering_attr_pisteRoutes_name">Ledeni nagibi</string>
+    <string name="m_s">m/s</string>
+    <string name="plugin_nautical_name">Prikaz na nautička karta</string>
+    <string name="osm_editing_plugin_name">Ureduvanje na OpenStreetMap</string>
+    <string name="debugging_and_development">OsmAnd razvoj</string>
+    <string name="share_note">Spodeli zabeleska</string>
+    <string name="rendering_attr_pisteGrooming_name">Izravnuvanje na patekata</string>
+    <string name="watch">Pogledni</string>
 </resources>
