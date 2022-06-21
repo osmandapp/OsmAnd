@@ -121,7 +121,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 
 	public abstract boolean isEnabledForAppMode(@NonNull ApplicationMode appMode);
 
-	public abstract void enableDisableForMode(@NonNull ApplicationMode appMode, boolean enabled);
+	public abstract void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled);
 
 	@Override
 	public int hashCode() {

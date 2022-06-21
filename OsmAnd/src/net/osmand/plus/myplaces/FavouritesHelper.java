@@ -1,8 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -34,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 
 public class FavouritesHelper {
@@ -391,6 +391,10 @@ public class FavouritesHelper {
 			app.getGeocodingLookupService().cancel(request);
 			addressRequestMap.remove(point);
 		}
+	}
+
+	public boolean editFavouriteDescription(FavouritePoint p, String descr) {
+		return editFavouriteName(p, p.getName(), p.getCategory(), descr, p.getAddress());
 	}
 
 	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr, String address) {

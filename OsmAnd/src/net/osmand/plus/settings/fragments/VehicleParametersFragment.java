@@ -1,15 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
-import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
-import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
-import static net.osmand.router.GeneralRouter.RoutingParameter;
-import static net.osmand.router.GeneralRouter.RoutingParameterType;
-import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
-import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,14 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
 
@@ -47,6 +29,25 @@ import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
+import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
+import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.RoutingParameterType;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -231,27 +232,32 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				break;
 		}
 
+		GeneralRouter router = app.getRouter(mode);
+
 		float settingsMinSpeed = mode.getMinSpeed();
 		float settingsMaxSpeed = mode.getMaxSpeed();
 		float settingsDefaultSpeed = mode.getDefaultSpeed();
+		boolean decimalPrecision = !defaultSpeedOnly
+				&& router != null
+				&& router.getMaxSpeed() <= ApplicationMode.FAST_SPEED_THRESHOLD;
 
-		final int[] defaultValue = {Math.round(settingsDefaultSpeed * ratio[0])};
-		final int[] minValue = new int[1];
-		final int[] maxValue = new int[1];
-		final int min;
-		final int max;
+		float[] defaultValue = {roundSpeed(settingsDefaultSpeed * ratio[0], decimalPrecision)};
+		float[] minValue = new float[1];
+		float[] maxValue = new float[1];
+		int min;
+		int max;
 
-		GeneralRouter router = app.getRouter(mode);
 		if (defaultSpeedOnly || router == null) {
 			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
 			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
-			min = minValue[0];
-			max = maxValue[0];
+			min = (int) minValue[0];
+			max = (int) maxValue[0];
 		} else {
 			float minSpeedValue = settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed();
 			float maxSpeedValue = settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed();
-			minValue[0] = Math.round(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0]);
-			maxValue[0] = Math.round(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0]);
+
+			minValue[0] = roundSpeed(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
+			maxValue[0] = roundSpeed(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 
 			min = Math.round(Math.min(minValue[0], router.getMinSpeed() * ratio[0] / 2f));
 			max = Math.round(Math.max(maxValue[0], router.getMaxSpeed() * ratio[0] * 1.5f));
@@ -288,11 +294,15 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 		int selectedModeColor = mode.getProfileColor(nightMode);
 		if (!defaultSpeedOnly) {
-			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, seekbarView, selectedModeColor);
-			setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, seekbarView, selectedModeColor);
-			setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, seekbarView, selectedModeColor);
+			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, defaultValue, minValue, maxValue,
+					min, max, decimalPrecision, seekbarView, selectedModeColor);
+			setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, defaultValue, minValue, maxValue,
+					min, max, decimalPrecision, seekbarView, selectedModeColor);
+			setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, defaultValue, minValue, maxValue,
+					min, max, decimalPrecision, seekbarView, selectedModeColor);
 		} else {
-			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, defaultValue, minValue, maxValue, min, max, seekbarView, selectedModeColor);
+			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, defaultValue, minValue,
+					maxValue, min, max, false, seekbarView, selectedModeColor);
 			seekbarView.findViewById(R.id.default_speed_div).setVisibility(View.GONE);
 			seekbarView.findViewById(R.id.default_speed_container).setVisibility(View.GONE);
 			seekbarView.findViewById(R.id.max_speed_div).setVisibility(View.GONE);
@@ -309,12 +319,19 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		MAX_SPEED,
 	}
 
-	private void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] defaultValue,
-	                              final int[] minValue, final int[] maxValue, final int min, int max,
-	                              View seekbarView, int activeColor) {
+	private void setupSpeedSlider(@NonNull SpeedSliderType type,
+	                              @NonNull String speedUnits,
+	                              @NonNull float[] defaultValue,
+	                              @NonNull float[] minValue,
+	                              @NonNull float[] maxValue,
+	                              int min,
+	                              int max,
+	                              boolean decimalPrecision,
+	                              @NonNull View seekbarView,
+	                              @ColorInt int activeColor) {
 		View sliderLayout;
 		int titleId;
-		final int[] speedValue;
+		float[] speedValue;
 		switch (type) {
 			case DEFAULT_SPEED_ONLY:
 				speedValue = defaultValue;
@@ -342,18 +359,19 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		final TextView speedMinTv = sliderLayout.findViewById(R.id.speed_seekbar_min_text);
 		final TextView speedMaxTv = sliderLayout.findViewById(R.id.speed_seekbar_max_text);
 		final TextView speedUnitsTv = sliderLayout.findViewById(R.id.speed_units);
-		final TextView speedTv = sliderLayout.findViewById(R.id.speed_text);
+		final TextView selectedSpeedTv = sliderLayout.findViewById(R.id.speed_text);
 
 		speedTitleTv.setText(titleId);
 		speedMinTv.setText(String.valueOf(min));
 		speedMaxTv.setText(String.valueOf(max));
-		speedTv.setText(String.valueOf(speedValue[0]));
+		selectedSpeedTv.setText(formatSpeed(speedValue[0], decimalPrecision));
 		speedUnitsTv.setText(speedUnits);
+
 		slider.setValueTo(max - min);
 		slider.setValue(Math.max(speedValue[0] - min, 0));
 		slider.addOnChangeListener((slider1, val, fromUser) -> {
-			int progress = (int) val;
-			int value = progress + min;
+			float progress = decimalPrecision ? Math.round(val * 10) / 10f : (int) val;
+			float value = min + progress;
 			switch (type) {
 				case DEFAULT_SPEED:
 				case DEFAULT_SPEED_ONLY:
@@ -381,9 +399,20 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 					break;
 			}
 			speedValue[0] = value;
-			speedTv.setText(String.valueOf(value));
+			selectedSpeedTv.setText(formatSpeed(value, decimalPrecision));
 		});
 		UiUtilities.setupSlider(slider, isNightMode(), activeColor);
+	}
+
+	@NonNull
+	private String formatSpeed(float speed, boolean decimalPrecision) {
+		return decimalPrecision
+				? OsmAndFormatter.formatValue(speed, "", true, 1, app).value
+				: String.valueOf((int) speed);
+	}
+
+	private float roundSpeed(float speed, boolean decimalPrecision) {
+		return decimalPrecision ? Math.round(speed * 10) / 10f : Math.round(speed);
 	}
 
 	private Drawable getPreferenceIcon(String prefId) {

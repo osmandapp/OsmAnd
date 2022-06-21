@@ -27,12 +27,7 @@ public class CurrentTimeWidget extends TextInfoWidget {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - cachedTime > UPDATE_INTERVAL_MILLIS) {
 			cachedTime = time;
-			if (DateFormat.is24HourFormat(app)) {
-				setText(DateFormat.format("k:mm", time).toString(), null);
-			} else {
-				setText(DateFormat.format("h:mm", time).toString(),
-						DateFormat.format("aa", time).toString());
-			}
+			setTimeText(time);
 		}
 	}
 }

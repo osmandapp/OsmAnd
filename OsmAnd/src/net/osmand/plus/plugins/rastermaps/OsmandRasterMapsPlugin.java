@@ -1,11 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -57,6 +51,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	public static final String NO_POLYGONS_ATTR = "noPolygons";
@@ -74,7 +74,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	private MapTileLayer underlayLayer;
 	private StateChangedListener<String> underlayListener;
 	private StateChangedListener<Integer> overlayLayerListener;
-	private CallbackWithObject<Boolean> hidePolygonsCallback;
+	private CallbackWithObject<Boolean> updateConfigureMapItemCallback;
 
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
 		super(app);
@@ -113,17 +113,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
-		final CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
-		final CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
-		underlayListener = change -> {
+		underlayListener = change -> app.runInUIThread(() -> {
 			boolean selected = settings.MAP_UNDERLAY.get() != null;
-			hidePolygonsPref.set(selected);
-			hideWaterPolygonsPref.set(selected);
-
-			if (hidePolygonsCallback != null) {
-				hidePolygonsCallback.processResult(selected);
+			if (updateConfigureMapItemCallback != null) {
+				updateConfigureMapItemCallback.processResult(selected);
 			}
-		};
+		});
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -153,22 +148,34 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void updateMapLayers(@NonNull Context context, @Nullable MapActivity mapActivity,
-	                            @Nullable CommonPreference<String> settingsToWarnAboutMap) {
+								@Nullable CommonPreference<String> settingsToWarnAboutMap) {
 		if (overlayLayer == null) {
 			createLayers(context);
 		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
 		overlayLayer.updateParameter();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		// Overlay
 		if (isActive()) {
 			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, ZORDER_OVERLAY, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
 		}
+		// Underlay
+		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
+		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
 		if (isActive()) {
-			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+			if (updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap)) {
+				boolean selected = settings.MAP_UNDERLAY.get() != null;
+				hidePolygonsPref.set(selected);
+				hideWaterPolygonsPref.set(selected);
+			}
 		} else {
+			if (underlayLayer.getMap() != null) {
+				hidePolygonsPref.set(false);
+				hideWaterPolygonsPref.set(false);
+			}
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
 		}
@@ -191,9 +198,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, settingsToWarnAboutMap);
 	}
 
-	public void updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
-	                        MapTileLayer layer, CommonPreference<String> preference,
-	                        float layerOrder, boolean warnWhenSelected) {
+	public boolean updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
+	                           MapTileLayer layer, CommonPreference<String> preference,
+	                           float layerOrder, boolean warnWhenSelected) {
 		ITileSource overlay = settings.getTileSourceByName(preference.get(), warnWhenSelected);
 		if (!Algorithms.objectEquals(overlay, layer.getMap())) {
 			if (overlay == null) {
@@ -203,21 +210,23 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			layer.setMap(overlay);
 			mapView.refreshMap();
+			return true;
 		}
+		return false;
 	}
 
 	public void selectMapOverlayLayer(@NonNull final CommonPreference<String> mapPref,
-	                                  @NonNull final CommonPreference<String> exMapPref,
-	                                  boolean force,
-	                                  @NonNull MapActivity mapActivity,
-	                                  @Nullable final OnMapSelectedCallback callback) {
+									  @NonNull final CommonPreference<String> exMapPref,
+									  boolean force,
+									  @NonNull MapActivity mapActivity,
+									  @Nullable final OnMapSelectedCallback callback) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		if (!force && exMapPref.get() != null) {
 			mapPref.set(exMapPref.get());
+			updateMapLayers(mapActivity, mapActivity, mapPref);
 			if (callback != null) {
 				callback.onMapSelected(false);
 			}
-			updateMapLayers(mapActivity, mapActivity, mapPref);
 			return;
 		}
 		OsmandSettings settings = app.getSettings();
@@ -232,56 +241,56 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		items[i] = app.getString(R.string.install_more);
 		builder.setSingleChoiceItems(items, -1, (dialog, which) -> {
-					MapActivity mapActv = mapActivityRef.get();
-					if (mapActv == null || mapActv.isFinishing()) {
-						return;
-					}
-					if (which == items.length - 1) {
-						installMapLayers(mapActv, new ResultMatcher<TileSourceTemplate>() {
-							TileSourceTemplate template = null;
-							int count = 0;
-							boolean cancel = false;
+			MapActivity mapActv = mapActivityRef.get();
+			if (mapActv == null || mapActv.isFinishing()) {
+				return;
+			}
+			if (which == items.length - 1) {
+				installMapLayers(mapActv, new ResultMatcher<TileSourceTemplate>() {
+					TileSourceTemplate template = null;
+					int count = 0;
+					boolean cancel = false;
 
-							@Override
-							public boolean publish(TileSourceTemplate object) {
-								MapActivity mapActv = mapActivityRef.get();
-								if (mapActv == null || mapActv.isFinishing()) {
-									cancel = true;
-									return false;
-								}
-								if (object == null) {
-									if (count == 1) {
-										mapPref.set(template.getName());
-										exMapPref.set(template.getName());
-										if (callback != null) {
-											callback.onMapSelected(false);
-										}
-										updateMapLayers(mapActv, mapActv, mapPref);
-									} else {
-										selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
-									}
-								} else {
-									count++;
-									template = object;
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return cancel;
-							}
-						});
-					} else {
-						mapPref.set(keys.get(which));
-						exMapPref.set(keys.get(which));
-						if (callback != null) {
-							callback.onMapSelected(false);
+					@Override
+					public boolean publish(TileSourceTemplate object) {
+						MapActivity mapActv = mapActivityRef.get();
+						if (mapActv == null || mapActv.isFinishing()) {
+							cancel = true;
+							return false;
 						}
-						updateMapLayers(mapActv, mapActv, mapPref);
+						if (object == null) {
+							if (count == 1) {
+								mapPref.set(template.getName());
+								exMapPref.set(template.getName());
+								updateMapLayers(mapActv, mapActv, mapPref);
+								if (callback != null) {
+									callback.onMapSelected(false);
+								}
+							} else {
+								selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+							}
+						} else {
+							count++;
+							template = object;
+						}
+						return false;
 					}
-					dialog.dismiss();
-				})
+
+					@Override
+					public boolean isCancelled() {
+						return cancel;
+					}
+				});
+			} else {
+				mapPref.set(keys.get(which));
+				exMapPref.set(keys.get(which));
+				updateMapLayers(mapActv, mapActv, mapPref);
+				if (callback != null) {
+					callback.onMapSelected(false);
+				}
+			}
+			dialog.dismiss();
+		})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setOnDismissListener(dialog -> {
 					if (callback != null) {
@@ -335,7 +344,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									item.setDescription(overlayMapDescr);
 									item.setSelected(hasOverlayDescription);
 									item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-									uiAdapter.onDataSetChanged();
+									if (uiAdapter != null) {
+										uiAdapter.onDataSetChanged();
+									}
 								}
 							});
 					return false;
@@ -354,9 +365,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									item.setDescription(underlayMapDescr);
 									item.setSelected(hasUnderlayDescription);
 									item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-									uiAdapter.onDataSetChanged();
-
-									mapActv.refreshMapComplete();
+									if (uiAdapter != null) {
+										uiAdapter.onDataSetChanged();
+									}
+									if (!canceled) {
+										mapActv.refreshMapComplete();
+									}
 								}
 							});
 					return false;
@@ -365,10 +379,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 		};
 
-		hidePolygonsCallback = result -> {
-			MapActivity activity = mapActivityRef.get();
-			if (activity != null) {
-				ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(activity);
+		updateConfigureMapItemCallback = result -> {
+			MapActivity ma = mapActivityRef.get();
+			if (ma != null) {
+				ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(ma);
 				if (fragment != null) {
 					fragment.onRefreshItem(HIDE_ID);
 				}
@@ -542,12 +556,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void toggleUnderlayState(@NonNull MapActivity mapActivity,
-	                                @NonNull RasterMapType type,
-	                                @Nullable OnMapSelectedCallback callback) {
+									@NonNull RasterMapType type,
+									@Nullable OnMapSelectedCallback callback) {
 		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
-
-		//boolean isMapSelected;
 		MapTileLayer layer;
 		if (type == RasterMapType.OVERLAY) {
 			mapTypePreference = settings.MAP_OVERLAY;
@@ -561,15 +573,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
-		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type == RasterMapType.OVERLAY
-				? LayerTransparencySeekbarMode.OVERLAY
-				: LayerTransparencySeekbarMode.UNDERLAY;
+		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
+			OsmandRasterMapsPlugin.RasterMapType.OVERLAY
+			? LayerTransparencySeekbarMode.OVERLAY
+			: LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
 			mapTypePreference.set(null);
+			updateMapLayers(mapActivity, mapActivity, null);
 			if (callback != null) {
 				callback.onMapSelected(false);
 			}
-			updateMapLayers(mapActivity, mapActivity, null);
 			// hide seekbar
 			if (currentMapTypeSeekbarMode == settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get()) {
 				settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDEFINED);

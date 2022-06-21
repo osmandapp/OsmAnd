@@ -20,7 +20,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/content_padding_small"
-			android:layout_marginLeft="@dimen/content_padding_small"
 			android:background="@null"
 			android:padding="@dimen/content_padding_half"
 			android:paddingStart="@dimen/content_padding_half"
@@ -39,7 +38,6 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/dialog_button_height"
-			android:layout_marginLeft="@dimen/dialog_button_height"
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:textColor="@color/list_background_color_light"
@@ -51,14 +49,9 @@
 			android:id="@+id/toolbar_edit"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/content_padding_small"
-			android:layout_marginLeft="@dimen/content_padding_small"
-			android:layout_marginRight="@dimen/content_padding_small"
-			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_marginHorizontal="@dimen/content_padding_small"
 			android:background="@null"
-			android:padding="@dimen/content_padding_half"
-			android:paddingStart="@dimen/content_padding_half"
-			android:paddingEnd="@dimen/content_padding_half">
+			android:padding="@dimen/content_padding_half">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="@dimen/standard_icon_size"
@@ -96,8 +89,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="@dimen/content_padding"
-				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/content_padding"
 				android:background="@color/color_transparent" />
 
 			<View
@@ -112,7 +103,6 @@
 				android:id="@+id/btn_edit"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginTop="@dimen/context_menu_padding_margin_small"
 				android:layout_marginBottom="@dimen/context_menu_padding_margin_small"

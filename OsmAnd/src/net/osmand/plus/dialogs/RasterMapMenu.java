@@ -1,10 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
-import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
-import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
-import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
-
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -33,19 +28,25 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import org.jetbrains.annotations.NotNull;
 
+import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
+import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
+
 
 public class RasterMapMenu {
+	private static final String TAG = "RasterMapMenu";
 
-	public static ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity,
-	                                                   @NonNull RasterMapType type) {
+	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
+	                                                   final RasterMapType type) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}
 
-	private static void createLayersItems(@NonNull ContextMenuAdapter adapter,
-	                                      @NonNull MapActivity mapActivity,
-	                                      @NonNull RasterMapType type) {
+	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
+	                                      final MapActivity mapActivity,
+	                                      final RasterMapType type) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
@@ -84,13 +85,13 @@ public class RasterMapMenu {
 		final int toggleActionStringId = mapSelected ? R.string.shared_string_on
 				: R.string.shared_string_off;
 
-		final OnMapSelectedCallback onMapSelectedCallback = canceled -> {
-			mapActivity.getDashboard().refreshContent(true);
-			boolean refreshToHidePolygons = type == RasterMapType.UNDERLAY;
-			if (refreshToHidePolygons) {
-				mapActivity.refreshMapComplete();
-			}
-		};
+		final OnMapSelectedCallback onMapSelectedCallback =
+				canceled -> {
+					mapActivity.getDashboard().refreshContent(true);
+					if (type == RasterMapType.UNDERLAY && !canceled) {
+						mapActivity.refreshMapComplete();
+					}
+				};
 		final MapLayers mapLayers = mapActivity.getMapLayers();
 		OnRowItemClick l = new OnRowItemClick() {
 
@@ -115,7 +116,6 @@ public class RasterMapMenu {
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(() -> {
 						plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-						mapActivity.refreshMapComplete();
 					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
@@ -152,13 +152,13 @@ public class RasterMapMenu {
 		};
 
 		mapTypeDescr = mapSelected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
-		adapter.addItem(new ContextMenuItem(null)
+		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
 				.setHideDivider(true)
 				.setListener(l)
 				.setSelected(mapSelected));
 		if (mapSelected) {
-			adapter.addItem(new ContextMenuItem(null)
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(mapTypeString, mapActivity)
 					.setHideDivider(true)
 					.setListener(l)
@@ -172,7 +172,7 @@ public class RasterMapMenu {
 						return false;
 					};
 			// android:max="255" in layout is expected
-			adapter.addItem(new ContextMenuItem(null)
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(mapTypeStringTransparency, mapActivity)
 					.setHideDivider(true)
 					.setLayout(R.layout.list_item_progress)
@@ -181,21 +181,21 @@ public class RasterMapMenu {
 					.setListener(l)
 					.setIntegerListener(integerListener));
 			if (type == RasterMapType.UNDERLAY) {
-				adapter.addItem(new ContextMenuItem(null)
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_polygons, mapActivity)
 						.setHideDivider(true)
 						.setListener(l)
 						.setSelected(!hidePolygonsPref.get()));
 			}
 			Boolean transparencySwitchState = isSeekbarVisible(app, type);
-			adapter.addItem(new ContextMenuItem(null)
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
 					.setHideDivider(true)
 					.setListener(l)
 					.setSelected(transparencySwitchState));
-			ITileSource overlayMap = plugin.getOverlayLayer().getMap();
-			if (type == RasterMapType.OVERLAY && overlayMap != null && overlayMap.getParamType() != ParameterType.UNDEFINED) {
-				adapter.addItem(new ContextMenuItem(null)
+			ITileSource oveplayMap = plugin.getOverlayLayer().getMap();
+			if (type == RasterMapType.OVERLAY && oveplayMap != null && oveplayMap.getParamType() != ParameterType.UNDEFINED) {
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_parameter_seekbar, mapActivity)
 						.setHideDivider(true)
 						.setListener(l)

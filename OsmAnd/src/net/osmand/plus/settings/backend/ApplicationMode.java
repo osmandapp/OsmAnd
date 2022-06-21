@@ -38,6 +38,7 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -52,6 +53,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class ApplicationMode {
+
+	public static final float FAST_SPEED_THRESHOLD = 10;
 
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
@@ -277,15 +280,14 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String key) {
+	public boolean isWidgetAvailable(String widgetId) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
-			return app.getAppCustomization().isWidgetAvailable(key, this);
+			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
 		}
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
-			return true;
-		}
-		return set.contains(this);
+
+		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
+		return availableForModes == null || availableForModes.contains(this);
 	}
 
 	public String getStringKey() {
@@ -376,7 +378,7 @@ public class ApplicationMode {
 
 
 	public boolean hasFastSpeed() {
-		return getDefaultSpeed() > 10;
+		return getDefaultSpeed() > FAST_SPEED_THRESHOLD;
 	}
 
 	public float getDefaultSpeed() {

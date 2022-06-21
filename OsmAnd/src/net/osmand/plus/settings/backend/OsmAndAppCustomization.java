@@ -385,12 +385,12 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean isWidgetAvailable(@NonNull String key, ApplicationMode appMode) {
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
+	public boolean isWidgetAvailable(@NonNull String widgetId, ApplicationMode appMode) {
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(widgetId);
+		if (availableForModes == null) {
 			return true;
 		}
-		return set.contains(appMode);
+		return availableForModes.contains(appMode);
 	}
 
 	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName, @Nullable String intent) {
