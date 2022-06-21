@@ -670,11 +670,8 @@ public class OsmAndFormatter {
 					.append(formatCoordinate(lon, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
 					.append(lon > 0 ? EAST : WEST);
 		} else if (outputFormat == UTM_FORMAT) {
-			ZonedUTMPoint pnt = new ZonedUTMPoint(new LatLonPoint(lat, lon));
-			result.append(pnt.zone_number)
-					.append(pnt.zone_letter).append(" ")
-					.append((long) pnt.easting).append(" ")
-					.append((long) pnt.northing);
+			ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
+			result.append(utmPoint.format());
 		} else if (outputFormat == OLC_FORMAT) {
 			String r;
 			try {
