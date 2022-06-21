@@ -4695,4 +4695,13 @@
     <string name="routing_attr_motor_type_name">Tipo di motore</string>
     <string name="routing_attr_motor_type_description">Per il calcolo della CO2</string>
     <string name="lang_ckb">Curdo centrale</string>
+    <string name="updated_map_time">Aggiornato: %1$s.</string>
+    <string name="includes_osm_changes_until">Include le modifiche di OSM apportate fino a %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Gli aggiornamenti delle mappe verranno controllati ogni ora.</string>
+    <string name="live_update_frequency_day_variant">Gli aggiornamenti delle mappe verranno controllati ogni giorno.</string>
+    <string name="live_update_frequency_week_variant">Gli aggiornamenti delle mappe verranno controllati ogni settimana.</string>
+    <string name="calculate_online_altitude_descr">Calcola l\'altitudine online sui server OsmAnd in base alle immagini satellitari e ai modelli di elevazione digitale. Potrebbe variare dall\'altitudine registrata dal dispositivo e potrebbe essere usata come correzione dell\'altitudine.</string>
+    <string name="next_live_update_date_and_time">Prossimo aggiornamento: %1$s in %2$s.</string>
+    <string name="next_live_update_time">Prossimo aggiornamento: in %1$s.</string>
+    <string name="altitude_correction">Correzione dell\'altitudine</string>
 </resources>
