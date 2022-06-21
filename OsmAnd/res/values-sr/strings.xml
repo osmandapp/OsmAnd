@@ -4585,7 +4585,7 @@
     <string name="map_widget_trip_recording_duration">Трајање</string>
     <string name="map_widget_trip_recording_distance">Растојање</string>
     <string name="shared_string_mode">Режим</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Нема ограничења</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Нема ограничења)</string>
     <string name="av_def_action_choose">На захтев</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Сакриј војна подручја</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Неприказивање војних подручја</string>

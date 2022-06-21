@@ -4676,7 +4676,7 @@
     <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
     <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
     <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Ingen restriktioner</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Ingen restriktioner)</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>

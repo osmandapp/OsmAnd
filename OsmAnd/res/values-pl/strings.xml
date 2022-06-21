@@ -4623,7 +4623,7 @@
     <string name="map_widget_trip_recording_uphill">Podjazd</string>
     <string name="map_widget_trip_recording_duration">Czas trwania</string>
     <string name="routing_attr_hazmat_category_name">Kategoria zagrożenia</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Brak ograniczeń</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Brak ograniczeń)</string>
     <string name="routing_attr_avoid_fords_name">Unikaj brodów</string>
     <string name="routing_attr_avoid_fords_description">Unikaj brodów</string>
     <string name="colour_of_circles">Kolor okręgów</string>
