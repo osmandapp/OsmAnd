@@ -8,13 +8,14 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,7 +84,9 @@ public class AverageSpeedComputer {
 		List<MapWidgetInfo> widgetInfos = widgetRegistry.getAllWidgets();
 
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			if (widgetInfo.widget instanceof AverageSpeedWidget
+			MapWidget widget = widgetInfo.widget;
+			boolean usesAverageSpeed = widget instanceof AverageSpeedWidget || widget instanceof MapMarkerSideWidget;
+			if (usesAverageSpeed
 					&& widgetInfo.isEnabledForAppMode(appMode)
 					&& appMode.isWidgetAvailable(widgetInfo.key)) {
 				return true;
