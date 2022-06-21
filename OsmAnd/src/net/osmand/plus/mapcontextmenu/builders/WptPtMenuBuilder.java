@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
@@ -57,10 +58,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			return;
 		}
 
-		final String textPrefix = app.getString(R.string.shared_string_description);
-		View.OnClickListener clickListener = v -> {
-			POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
-		};
+		String textPrefix = app.getString(R.string.shared_string_description);
+		View.OnClickListener clickListener = v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.desc, textPrefix);
 
 		buildRow(view, null, null, textPrefix, wpt.desc, 0,
 				null, false, null, true, 10,
@@ -68,8 +67,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected boolean shouldShowDescriptionDialog() {
-		return true;
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
+		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
 	@Override
@@ -83,7 +82,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 		if (wpt.speed > 0) {
 			buildRow(view, R.drawable.ic_action_speed,
-					null, OsmAndFormatter.getFormattedSpeed((float)wpt.speed, app), 0, false, null, false, 0, false, null, false);
+					null, OsmAndFormatter.getFormattedSpeed((float) wpt.speed, app), 0, false, null, false, 0, false, null, false);
 		}
 		if (!Double.isNaN(wpt.ele)) {
 			buildRow(view, R.drawable.ic_action_altitude,
@@ -91,26 +90,24 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 		if (!Double.isNaN(wpt.hdop)) {
 			buildRow(view, R.drawable.ic_action_gps_info,
-					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int)wpt.hdop, 0,
+					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int) wpt.hdop, 0,
 					false, null, false, 0, false, null, false);
 		}
-		
+
 		if (!Algorithms.isEmpty(wpt.desc)) {
 			prepareDescription(wpt, view);
 		}
-		
+
 		if (!Algorithms.isEmpty(wpt.comment)) {
-			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
+			View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
 					false, null, true, 10, false, null, false);
-			rowc.setOnClickListener(v -> {
-				POIMapLayer.showPlainDescriptionDialog(rowc.getContext(), app, wpt.comment,
-						rowc.getResources().getString(R.string.poi_dialog_comment));
-			});
+			rowc.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(rowc.getContext(),
+					app, wpt.comment, rowc.getResources().getString(R.string.poi_dialog_comment)));
 		}
 
 		buildPlainMenuItems(view);
 	}
-	
+
 	protected void prepareDescription(final WptPt wpt, View view) {
 
 	}
@@ -184,9 +181,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (points.size() > 10) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
-			button.setOnClickListener(v -> {
-				TrackMenuFragment.openTrack(mapActivity, new File(gpxFile.path), null);
-			});
+			button.setOnClickListener(v -> TrackMenuFragment.openTrack(mapActivity, new File(gpxFile.path), null));
 			view.addView(button);
 		}
 

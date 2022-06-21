@@ -40,7 +40,6 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 		}
 	}
 
-
 	@Override
 	protected void prepareDescription(final WptPt wpt, View view) {
 		String phones = descTokens.get(KEY_PHONE);

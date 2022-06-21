@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.router.network.NetworkRouteContext.*;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -84,8 +86,6 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 import java.util.LinkedList;
 import java.util.List;
 
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
 	public static class MenuState {
@@ -169,10 +169,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 		}
 		builder.build((ViewGroup) rootView);
-	}
-
-	public MenuBuilder getMenuBuilder() {
-		return builder;
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,

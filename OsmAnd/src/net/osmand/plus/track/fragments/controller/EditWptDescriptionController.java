@@ -10,13 +10,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
-import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
 
 import java.io.File;
 
@@ -45,7 +41,6 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 						wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
 				saveGpx(gpx);
 			}
-			updateDescriptionTokens(activity, wpt);
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
 			updateContextMenu(latLon, new WptLocationPoint(wpt).getPointDescription(activity), wpt);
 		}
@@ -62,16 +57,4 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 		WptPt wpt = (WptPt) getContextMenuObject();
 		return wpt != null ? wpt.name : super.getTitle();
 	}
-
-	public static void updateDescriptionTokens(@NonNull MapActivity activity, @NonNull WptPt wpt) {
-		MapContextMenu contextMenu = activity.getContextMenu();
-		MenuController controller = contextMenu.getMenuController();
-		if (controller != null) {
-			MenuBuilder menuBuilder = controller.getMenuBuilder();
-			if (menuBuilder instanceof WikivoyageWptPtMenuBuilder) {
-				((WikivoyageWptPtMenuBuilder) menuBuilder).updateDescriptionTokens(wpt);
-			}
-		}
-	}
-
 }

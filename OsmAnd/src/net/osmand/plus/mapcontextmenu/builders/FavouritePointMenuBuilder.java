@@ -16,13 +16,14 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -94,8 +95,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected boolean shouldShowDescriptionDialog() {
-		return true;
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
+		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
 	private void buildGroupFavouritesView(View view) {

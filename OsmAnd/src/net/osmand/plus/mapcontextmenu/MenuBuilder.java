@@ -1,5 +1,12 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -59,7 +66,6 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -86,13 +92,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
@@ -546,10 +545,15 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildDescription(View view) { }
+	protected void buildDescription(View view) {
+	}
 
-	protected boolean shouldShowDescriptionDialog() {
-		return false;
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
+		if (description.contains("</")) {
+			POIMapLayer.showHtmlDescriptionDialog(ctx, app, description, title);
+		} else {
+			POIMapLayer.showPlainDescriptionDialog(ctx, app, description, title);
+		}
 	}
 
 	protected void buildAfter(View view) {
@@ -793,15 +797,7 @@ public class MenuBuilder {
 
 	public View buildDescriptionRow(final View view, final String description) {
 		final String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = v -> {
-			if (shouldShowDescriptionDialog()) {
-				ReadPointDescriptionFragment.showInstance(mapActivity, description);
-			} else if (description.contains("</")) {
-				POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
-			} else {
-				POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, description, descriptionLabel);
-			}
-		};
+		View.OnClickListener onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -936,9 +932,7 @@ public class MenuBuilder {
 			}
 			ssb.append(line.getValue());
 			button.setText(ssb);
-			button.setOnClickListener(v -> {
-				copyToClipboard(line.getValue(), mapActivity);
-			});
+			button.setOnClickListener(v -> copyToClipboard(line.getValue(), mapActivity));
 			llv.addView(button);
 		}
 		return new CollapsableView(llv, this, true);
@@ -950,9 +944,7 @@ public class MenuBuilder {
 		for (final String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
 			button.setText(distance);
-			button.setOnClickListener(v -> {
-				copyToClipboard(distance, mapActivity);
-			});
+			button.setOnClickListener(v -> copyToClipboard(distance, mapActivity));
 			llv.addView(button);
 		}
 		return new CollapsableView(llv, this, true);
@@ -1006,8 +998,9 @@ public class MenuBuilder {
 				light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 		Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
 				light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button,
-				AndroidUtils.createPressedStateListDrawable(normal, pressed), null, null, null);
+
+		Drawable drawable = AndroidUtils.createPressedStateListDrawable(normal, pressed);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, drawable, null, null, null);
 		button.setCompoundDrawablePadding(dpToPx(8f));
 		container.addView(button);
 	}
