@@ -4701,12 +4701,12 @@
     <string name="routing_attr_goods_restrictions_description">Учитывать права доступа для легкого коммерческого транспорта</string>
     <string name="routing_attr_goods_restrictions_name">Ограничения на грузовые автомобили</string>
     <string name="co2_mission">Выбросы CO2</string>
-    <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гибридный</string>
     <string name="kg">кг</string>
-    <string name="routing_attr_motor_type_diesel_name">Дизель</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизельный</string>
     <string name="routing_attr_motor_type_name">Тип двигателя</string>
     <string name="routing_attr_motor_type_description">Для расчета CO2</string>
-    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензиновый</string>
     <string name="routing_attr_motor_type_electric_name">Электрический</string>
     <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
     <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
