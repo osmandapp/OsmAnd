@@ -4712,4 +4712,6 @@
     <string name="next_live_update_time">עדכון הבא: ב־%1$s.</string>
     <string name="includes_osm_changes_until">לרבות שינויים שבוצעו ב־OSM עד %1$s.</string>
     <string name="next_live_update_date_and_time">עדכון הבא: %1$s ב־%2$s.</string>
+    <string name="marker_2nd">סמן שני</string>
+    <string name="marker_1st">סמן ראשון</string>
 </resources>
