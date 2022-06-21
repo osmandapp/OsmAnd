@@ -85,13 +85,13 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	}
 
 	@Override
-	public void enableDisableForMode(@NonNull ApplicationMode appMode, boolean enabled) {
+	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled) {
 		List<String> widgetsVisibility = getWidgetsVisibility(appMode);
 		widgetsVisibility.remove(key);
 		widgetsVisibility.remove(COLLAPSED_PREFIX + key);
 		widgetsVisibility.remove(HIDE_PREFIX + key);
 
-		if (!isCustomWidget() || enabled) {
+		if (enabled != null && (!isCustomWidget() || enabled)) {
 			widgetsVisibility.add(enabled ? key : HIDE_PREFIX + key);
 		}
 
@@ -103,7 +103,7 @@ public class SideWidgetInfo extends MapWidgetInfo {
 		getVisibilityPreference().setModeValue(appMode, newVisibilityString.toString());
 
 		OsmandPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset(appMode);
-		if (!enabled && settingsPref != null) {
+		if ((enabled == null || !enabled) && settingsPref != null) {
 			settingsPref.resetModeToDefault(appMode);
 		}
 	}

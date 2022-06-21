@@ -29,6 +29,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 
@@ -39,6 +40,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
+	protected MapWidgetRegistry widgetRegistry;
 	protected ApplicationMode appMode;
 	protected String widgetId;
 	protected boolean nightMode;
@@ -53,14 +55,8 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
+		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		nightMode = !settings.isLightContent();
-
-		Bundle args = getArguments();
-		if (savedInstanceState != null) {
-			initParams(savedInstanceState);
-		} else if (args != null) {
-			initParams(args);
-		}
 	}
 
 	protected void initParams(@NonNull Bundle bundle) {
@@ -71,6 +67,14 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		if (savedInstanceState != null) {
+			initParams(savedInstanceState);
+		} else if (args != null) {
+			initParams(args);
+		}
+
+
 		Context context = requireContext();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
@@ -134,7 +138,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
 	protected abstract void applySettings();
 
-	private void dismiss() {
+	protected void dismiss() {
 		Activity activity = getActivity();
 		if (activity != null) {
 			activity.onBackPressed();
@@ -145,6 +149,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_APP_MODE, appMode.getStringKey());
+		outState.putString(KEY_WIDGET_ID, widgetId);
 	}
 
 	@Override
