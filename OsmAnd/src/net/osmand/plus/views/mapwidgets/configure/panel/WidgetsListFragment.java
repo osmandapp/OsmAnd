@@ -1,5 +1,12 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,6 +16,14 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,21 +57,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener,
 		ResetToDefaultListener, CopyAppModePrefsListener {
@@ -382,6 +382,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
 					}
 				});
+				setupListItemBackground(app, settingsButton, selectedAppMode.getProfileColor(nightMode));
 			}
 
 			View infoButton = view.findViewById(R.id.info_button);
@@ -561,15 +562,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	private void setupListItemBackground(@NonNull View view) {
-		setupListItemBackground(app, view, selectedAppMode.getProfileColor(nightMode));
+		View container = view.findViewById(R.id.container);
+		setupListItemBackground(app, container, selectedAppMode.getProfileColor(nightMode));
 	}
 
-	public static void setupListItemBackground(@NonNull Context context,
-	                                           @NonNull View view,
-	                                           @ColorInt int profileColor) {
-		View button = view.findViewById(R.id.container);
-		Drawable background = UiUtilities.getColoredSelectableDrawable(context, profileColor, 0.3f);
-		AndroidUtils.setBackground(button, background);
+	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
+		Drawable background = UiUtilities.getColoredSelectableDrawable(context, color, 0.3f);
+		AndroidUtils.setBackground(view, background);
 	}
 
 	@Override

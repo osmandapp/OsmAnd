@@ -2,6 +2,11 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -10,16 +15,11 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 public enum WidgetGroup {
 
 	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
 	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, R.string.docs_widget_navigation_points),
-	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_day, R.string.docs_widget_markers),
+	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_night, R.string.docs_widget_markers),
 	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, R.string.docs_widget_bearing),
 	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
 	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes);

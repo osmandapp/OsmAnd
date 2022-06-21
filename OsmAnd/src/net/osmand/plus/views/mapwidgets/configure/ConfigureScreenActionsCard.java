@@ -4,18 +4,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 public class ConfigureScreenActionsCard extends MapBaseCard {
 
@@ -56,7 +56,8 @@ public class ConfigureScreenActionsCard extends MapBaseCard {
 
 		resetIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId));
 		resetTitle.setText(titleId);
-		WidgetsListFragment.setupListItemBackground(app, view, appMode.getProfileColor(nightMode));
+		View container = view.findViewById(R.id.container);
+		WidgetsListFragment.setupListItemBackground(app, container, appMode.getProfileColor(nightMode));
 	}
 
 	private void showResetToDefaultConfirmationDialog() {
