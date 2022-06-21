@@ -115,9 +115,12 @@ import net.osmand.plus.track.cards.RouteInfoCard;
 import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
@@ -149,7 +152,7 @@ import java.util.List;
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -1598,6 +1601,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			dismiss();
 		}
 	}
+
+	@Override
+	public boolean onSaveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			EditGpxDescriptionController controller = new EditGpxDescriptionController(getMapActivity());
+			controller.saveEditedDescription(editedText, callback);
+			return true;
+		}
+		return false;
+	}
+
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams) {
 		openTrack(context, file, prevIntentParams, null);

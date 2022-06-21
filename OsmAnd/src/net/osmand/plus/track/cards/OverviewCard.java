@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
-import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -191,14 +190,11 @@ public class OverviewCard extends MapBaseCard {
 			AndroidUiHelper.updateVisibility(description, false);
 		} else {
 			description.setText(getFirstParagraph(descriptionHtml));
-			description.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					GPXFile gpxFile = getGPXFile();
-					String title = gpxFile.metadata.getArticleTitle();
-					String imageUrl = getMetadataImageLink(gpxFile.metadata);
-					GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
-				}
+			description.setOnClickListener(v -> {
+				GPXFile gpx = getGPXFile();
+				String title = gpx.metadata.getArticleTitle();
+				String imageUrl = getMetadataImageLink(gpx.metadata);
+				ReadGpxDescriptionFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			});
 			AndroidUiHelper.updateVisibility(description, true);
 		}
