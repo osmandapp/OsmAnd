@@ -4683,7 +4683,7 @@
     <string name="map_widget_trip_recording_uphill">Ascenso</string>
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Sin restricciones</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="map_widget_trip_recording_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
