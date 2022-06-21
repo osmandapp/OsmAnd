@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
+import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
@@ -24,9 +24,10 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 	private List<List<WptPt>> segmentPointsList;
 	private final List<List<WptPt>> originalSegmentPointsList;
 
-	public ApplyGpxApproximationCommand(MeasurementToolLayer measurementLayer,
-										List<GpxRouteApproximation> approximations,
-										List<List<WptPt>> segmentPointsList, ApplicationMode mode) {
+	public ApplyGpxApproximationCommand(@NonNull MeasurementToolLayer measurementLayer,
+	                                    @NonNull List<GpxRouteApproximation> approximations,
+	                                    @NonNull List<List<WptPt>> segmentPointsList,
+	                                    @NonNull ApplicationMode mode) {
 		super(measurementLayer);
 		this.approximations = approximations;
 		this.segmentPointsList = segmentPointsList;
@@ -42,6 +43,7 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 		return originalSegmentPointsList;
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.APPROXIMATE_POINTS;

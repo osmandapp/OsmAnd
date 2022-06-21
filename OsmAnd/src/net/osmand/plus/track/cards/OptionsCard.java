@@ -1,17 +1,16 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -20,18 +19,19 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {
 
@@ -254,7 +254,8 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createChangeFolderItem() {
-		String folder = new File(gpxFile.path).getParentFile().getName();
+		File file = new File(gpxFile.path).getParentFile();
+		String folder = file != null ? file.getName() : null;
 		Drawable changeFolderIcon = getActiveIcon(R.drawable.ic_action_folder_move);
 
 		return new BottomSheetItemWithDescriptionDifHeight.Builder()

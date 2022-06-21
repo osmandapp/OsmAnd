@@ -1,20 +1,22 @@
 package net.osmand.plus.measurementtool.command;
 
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
+import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 
 public class ChangeRouteModeCommand extends MeasurementModeCommand {
 
@@ -36,7 +38,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		ALL_PREV_SEGMENTS
 	}
 
-	public ChangeRouteModeCommand(MeasurementToolLayer measurementLayer, ApplicationMode newMode,
+	public ChangeRouteModeCommand(@NonNull MeasurementToolLayer measurementLayer, ApplicationMode newMode,
 								  ChangeRouteType changeRouteType, int pointIndex) {
 		super(measurementLayer);
 		this.newMode = newMode;
@@ -122,6 +124,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		executeCommand();
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.CHANGE_ROUTE_MODE;
