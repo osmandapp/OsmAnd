@@ -4711,4 +4711,14 @@
     <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
     <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
     <string name="lang_ckb">Центральный курдский</string>
+    <string name="calculate_online_altitude_descr">Рассчитывайте высоту в режиме онлайн на серверах OsmAnd на основе спутниковых снимков и цифровых моделей рельефа. Результат расчета может отличаться от высоты, записанной устройством, и может быть использован в качестве коррекции высоты.</string>
+    <string name="live_update_frequency_hour_variant">Обновления карты будут проверяться каждый час.</string>
+    <string name="live_update_frequency_day_variant">Обновления карты будут проверяться каждый день.</string>
+    <string name="live_update_frequency_week_variant">Обновления карты будут проверяться каждую неделю.</string>
+    <string name="altitude_correction">Коррекция высоты</string>
+    <string name="next_live_update_time">Следующее обновление: в %1$s.</string>
+    <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
+    <string name="no_altitude_data_desc">Вы можете прикрепить свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
+    <string name="updated_map_time">Обновлено: %1$s.</string>
+    <string name="next_live_update_date_and_time">Следующее обновление: %1$s в %2$s.</string>
 </resources>

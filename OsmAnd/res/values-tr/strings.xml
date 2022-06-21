@@ -4706,4 +4706,14 @@
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="routing_attr_motor_type_description">CO2 hesaplaması için</string>
     <string name="lang_ckb">Orta Kürtçe</string>
+    <string name="live_update_frequency_hour_variant">Harita güncellemeleri her saat denetlenecek.</string>
+    <string name="live_update_frequency_week_variant">Harita güncellemeleri her hafta denetlenecek.</string>
+    <string name="calculate_online_altitude_descr">Uydu görüntüleri ve sayısal yükseklik modellerine dayalı olarak OsmAnd sunucularında çevrim içi rakım hesaplayın. Aygıtın kaydettiği rakımdan farklı olabilir ve rakım düzeltmesi olarak kullanılabilir.</string>
+    <string name="next_live_update_date_and_time">Sonraki güncelleme: %1$s, %2$s içinde.</string>
+    <string name="live_update_frequency_day_variant">Harita güncellemeleri her gün denetlenecek.</string>
+    <string name="altitude_correction">Rakım düzeltmesi</string>
+    <string name="updated_map_time">Güncellendi: %1$s.</string>
+    <string name="includes_osm_changes_until">%1$s tarihine kadar yapılan OSM değişikliklerini içerir.</string>
+    <string name="next_live_update_time">Sonraki güncelleme: %1$s içinde.</string>
+    <string name="no_altitude_data_desc">%1$s verilerini almak için izinizi yollara ekleyebilir veya çevrim içi olarak hesaplayabilirsiniz.</string>
 </resources>
