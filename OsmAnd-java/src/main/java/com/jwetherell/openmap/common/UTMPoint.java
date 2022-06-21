@@ -459,6 +459,6 @@ public class UTMPoint {
     }
 
     public String format() {
-        return zone_number + "" + zone_letter + " " + ((long) easting) + ((long) northing);
+        return zone_number + "" + zone_letter + " " + ((long) easting) + " " + ((long) northing);
     }
 }
