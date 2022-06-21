@@ -493,7 +493,7 @@
     <string name="vector_data_missing">Hent (\'offline\') data for at kunne bruge kort offline.</string>
     <string name="local_index_installed">Lokal version</string>
     <string name="local_index_items_backuped">%1$d af %2$d emner deaktiveret.</string>
-    <string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
+    <string name="local_index_items_deleted">%1$d af %2$d emne(r) slettet.</string>
     <string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
     <string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
     <string name="local_index_action_do">Du er ved at %1$s %2$s emne(r). Fortsæt\?</string>
@@ -1498,7 +1498,7 @@
     <string name="confirmation_to_clear_history">Ryd historik?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændring(er) til OSM\?</string>
     <string name="osm_changes_added_to_local_edits">OSM-ændringer tilføjet til lokale ændringer</string>
-    <string name="mark_to_delete">Marker for at slette</string>
+    <string name="mark_to_delete">Markér for at slette</string>
     <string name="current_route">Aktuel rute</string>
     <string name="welmode_download_maps">Administrer kort</string>
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
@@ -4722,4 +4722,14 @@
     <string name="live_update_frequency_week_variant">Der tjekkes for kortopdateringer hver uge.</string>
     <string name="altitude_correction">Højdekorrektion</string>
     <string name="no_altitude_data_desc">Du kan knytte dit spor til vejene for at få %1$s-data eller beregne det online.</string>
+    <string name="marker_2nd">Anden markør</string>
+    <string name="switch_widget_mode_desc">Du kan skifte tilstand ved at trykke på modul.</string>
+    <string name="goods_delivery_desc_4">Hvis dit køretøj vejer mere end 3,5 tons, skal du bruge lastbil-profilen.</string>
+    <string name="goods_delivery_desc_2">Veje, der er lukket for godslevering, vil blive undgået.</string>
+    <string name="marker_1st">Første markør</string>
+    <string name="map_marker_average_speed_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
+    <string name="reset_all_settings_desc">Er du sikker på, at du vil nulstille alle indstillinger til standard\?</string>
+    <string name="side_marker_eta">Forventet ankomsttidspunkt</string>
+    <string name="goods_delivery_desc_3">Gælder kun for godstransporter, som har mindst fire hjul og vejer højst 3,5 tons.</string>
+    <string name="goods_delivery_desc">Køretøjer, der transporterer gods, kan få begrænset adgang til visse veje.</string>
 </resources>
