@@ -2682,4 +2682,5 @@
     <string name="favorite_category_add_new">Dodadi nov</string>
     <string name="favorite_category_select">Izberi kategorija</string>
     <string name="marker_2nd">Vtor marker</string>
+    <string name="min_km">min/km</string>
 </resources>
