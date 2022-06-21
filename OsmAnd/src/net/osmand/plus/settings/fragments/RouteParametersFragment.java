@@ -1,5 +1,12 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
+import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
+import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -57,13 +64,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
-import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -264,6 +264,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 						&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
 						&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
+						&& !param.equals(GeneralRouter.MOTOR_TYPE)
 						&& !param.equals(GeneralRouter.VEHICLE_LENGTH)) {
 					otherRoutingParameters.add(routingParameter);
 				}

@@ -4111,7 +4111,7 @@
     <string name="routing_attr_avoid_highway_description">Пазбягаць аўтамагісрталяў</string>
     <string name="map_widget_trip_recording_distance">Адлегласць</string>
     <string name="routing_attr_hazmat_category_name">Катэгорыя небяспечнасці</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Без абмежаванняў</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без абмежаванняў)</string>
     <string name="routing_attr_avoid_fords_description">Пазбягаць бродаў</string>
     <string name="get_altitude_data">Атрымаць даныя аб вышыні</string>
     <string name="calculate_altitude">Разлічыць вышыню</string>

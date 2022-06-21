@@ -4664,7 +4664,7 @@
     <string name="routing_attr_allow_private_for_truck_name">Дозволити приватний доступ (вантажівка)</string>
     <string name="map_widget_trip_recording_uphill">Підйом</string>
     <string name="routing_attr_hazmat_category_description">Категорія небезпечних матеріалів / Розгляньте дозволи на доступ до небезпечних матеріалів</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Без обмежень</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без обмежень)</string>
     <string name="routing_attr_avoid_fords_description">Уникати броди</string>
     <string name="routing_attr_avoid_fords_name">Уникати броди</string>
     <string name="map_widget_trip_recording_duration">Тривалість</string>

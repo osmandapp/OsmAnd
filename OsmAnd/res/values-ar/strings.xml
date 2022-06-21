@@ -4738,7 +4738,7 @@
     <string name="routing_attr_hazmat_category_description">فئة المواد الخطرة / النظر في أذونات الوصول إلى المواد الخطرة</string>
     <string name="routing_attr_avoid_fords_name">تجنب الوحل</string>
     <string name="routing_attr_hazmat_category_name">فئة المواد الخطرة</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">لا قيود</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (لا قيود)</string>
     <string name="routing_attr_avoid_fords_description">تجنب الوحل</string>
     <string name="map_widget_trip_recording_duration">المدة</string>
     <string name="rendering_attr_hideMilitaryAreas_name">إخفاء المناطق العسكرية</string>

@@ -4675,7 +4675,7 @@
     <string name="map_widget_trip_recording_distance">Distância</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiais perigosos / aplicar as permissões de acesso com materiais perigosos</string>
     <string name="routing_attr_avoid_fords_name">Evitar vaus</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Sem restrições</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sem restrições)</string>
     <string name="routing_attr_avoid_fords_description">Evitar vaus (passagens em riachos baixos)</string>
     <string name="map_widget_true_bearing">Rumo verdadeiro</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
