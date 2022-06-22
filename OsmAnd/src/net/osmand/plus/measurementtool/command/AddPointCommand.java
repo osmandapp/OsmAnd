@@ -1,7 +1,10 @@
 package net.osmand.plus.measurementtool.command;
 
-import net.osmand.data.LatLon;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
@@ -16,12 +19,12 @@ public class AddPointCommand extends MeasurementModeCommand {
 	private boolean center;
 	private boolean addPointBefore;
 
-	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
+	public AddPointCommand(@NonNull MeasurementToolLayer measurementLayer, boolean center) {
 		super(measurementLayer);
 		init(null, center);
 	}
 
-	public AddPointCommand(MeasurementToolLayer measurementLayer, LatLon latLon) {
+	public AddPointCommand(@NonNull MeasurementToolLayer measurementLayer, @Nullable LatLon latLon) {
 		super(measurementLayer);
 		init(latLon, false);
 	}
@@ -81,6 +84,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 		measurementLayer.moveMapToPoint(position);
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.ADD_POINT;

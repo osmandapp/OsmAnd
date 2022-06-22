@@ -1,5 +1,18 @@
 package net.osmand.plus.measurementtool;
 
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -121,19 +134,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
@@ -877,12 +877,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return null;
 	}
 
+	@NonNull
 	private MeasurementToolLayer getMeasurementLayer() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			return mapActivity.getMapLayers().getMeasurementToolLayer();
-		}
-		return null;
+		return app.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 	}
 
 	@Override

@@ -1,15 +1,19 @@
 package net.osmand.plus.profiles.data;
 
+import static net.osmand.plus.profiles.data.RoutingProfilesResources.BROUTER_MODE;
+import static net.osmand.plus.profiles.data.RoutingProfilesResources.DIRECT_TO_MODE;
+import static net.osmand.plus.profiles.data.RoutingProfilesResources.STRAIGHT_LINE_MODE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
@@ -26,11 +30,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-
-import static net.osmand.plus.profiles.data.RoutingProfilesResources.BROUTER_MODE;
-import static net.osmand.plus.profiles.data.RoutingProfilesResources.DIRECT_TO_MODE;
-import static net.osmand.plus.profiles.data.RoutingProfilesResources.STRAIGHT_LINE_MODE;
 
 public class RoutingDataUtils {
 
@@ -57,23 +56,29 @@ public class RoutingDataUtils {
 
 	public List<ProfilesGroup> getOfflineProfiles() {
 		List<ProfilesGroup> result = new ArrayList<>();
-		Map<String, RoutingFile> byFileNames = getOfflineRoutingFilesByNames();
-		result.add(createProfilesGroup(R.string.app_name_osmand, byFileNames.remove(OSMAND_NAVIGATION)));
-		for (String key : byFileNames.keySet()) {
-			result.add(createProfilesGroup(key, byFileNames.remove(key)));
+		Map<String, RoutingFile> routingFiles = getOfflineRoutingFilesByNames();
+
+		ProfilesGroup profilesGroup = createProfilesGroup(getString(R.string.app_name_osmand), routingFiles.remove(OSMAND_NAVIGATION));
+		if (profilesGroup != null) {
+			result.add(profilesGroup);
+		}
+		for (Map.Entry<String, RoutingFile> entry : routingFiles.entrySet()) {
+			profilesGroup = createProfilesGroup(entry.getKey(), entry.getValue());
+			if (profilesGroup != null) {
+				result.add(profilesGroup);
+			}
 		}
 		result.add(new ProfilesGroup(getString(R.string.shared_string_external), getExternalRoutingProfiles()));
 		sortItems(result);
 		return result;
 	}
 
-	private ProfilesGroup createProfilesGroup(int titleId, @Nullable RoutingFile file) {
-		return createProfilesGroup(getString(titleId), file);
-	}
-
+	@Nullable
 	private ProfilesGroup createProfilesGroup(@NonNull String title, @Nullable RoutingFile file) {
-		assert file != null;
-		return new ProfilesGroup(title, file.getProfiles());
+		if (file != null) {
+			return new ProfilesGroup(title, file.getProfiles());
+		}
+		return null;
 	}
 
 	public List<ProfilesGroup> getOnlineProfiles(@Nullable List<ProfilesGroup> predefined) {
@@ -101,19 +106,17 @@ public class RoutingDataUtils {
 
 	private Map<String, RoutingFile> getOfflineRoutingFilesByNames() {
 		Map<String, RoutingFile> map = new HashMap<>();
-		for (final RoutingDataObject profile : getOfflineRoutingProfiles()) {
+		for (RoutingDataObject profile : getOfflineRoutingProfiles()) {
 			String fileName = profile.getFileName();
 			if (fileName == null) {
 				fileName = OSMAND_NAVIGATION;
 			}
-			if (map.containsKey(fileName)) {
-				RoutingFile file = Objects.requireNonNull(map.get(fileName));
-				file.addProfile(profile);
-			} else {
-				RoutingFile file = new RoutingFile(fileName);
-				file.addProfile(profile);
+			RoutingFile file = map.get(fileName);
+			if (file == null) {
+				file = new RoutingFile(fileName);
 				map.put(fileName, file);
 			}
+			file.addProfile(profile);
 		}
 		return map;
 	}

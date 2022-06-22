@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -103,22 +104,25 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	}
 
 	private void recreateView() {
-		appMode = settings.getApplicationMode();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			appMode = settings.getApplicationMode();
+			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 
-		viewCreator = new ViewCreator(requireActivity(), nightMode);
-		viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
-		viewCreator.setUiAdapter(this);
+			viewCreator = new ViewCreator(activity, nightMode);
+			viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+			viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
+			viewCreator.setUiAdapter(this);
 
-		int bgColor = ColorUtilities.getActivityBgColor(app, nightMode);
-		llList.setBackgroundColor(bgColor);
+			int bgColor = ColorUtilities.getActivityBgColor(app, nightMode);
+			llList.setBackgroundColor(bgColor);
 
-		views.clear();
-		llList.removeAllViews();
-		updateItemsData();
-		updateItemsView();
+			views.clear();
+			llList.removeAllViews();
+			updateItemsData();
+			updateItemsView();
+		}
 	}
 
 	private void updateItemsData() {
@@ -265,7 +269,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	@Nullable
 	public static ConfigureMapFragment getVisibleInstance(@NonNull MapActivity mapActivity) {
-		FragmentManager fm = mapActivity.getSupportFragmentManager();;
+		FragmentManager fm = mapActivity.getSupportFragmentManager();
+		;
 		return (ConfigureMapFragment) fm.findFragmentByTag(TAG);
 	}
 

@@ -101,8 +101,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private void buildGroupFavouritesView(View view) {
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(fav);
-		List<FavouritePoint> groupFavourites = favoriteGroup.getPoints();
-		if (groupFavourites.size() > 0) {
+		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : view.getResources().getColor(disabledColor);

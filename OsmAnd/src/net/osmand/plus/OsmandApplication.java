@@ -370,7 +370,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	/**
 	 * Application settings
-	 * 
+	 *
 	 * @return Reference to instance of OsmandSettings
 	 */
 	public OsmandSettings getSettings() {
@@ -785,15 +785,17 @@ public class OsmandApplication extends MultiDexApplication {
 		});
 	}
 
-	public void showToastMessage(final String msg) {
-		uiHandler.post(() -> {
-			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(),
-						msg, CarToast.LENGTH_LONG).show();
-			}
-		});
+	public void showToastMessage(@Nullable String text) {
+		if (!Algorithms.isEmpty(text)) {
+			uiHandler.post(() -> {
+				Toast.makeText(OsmandApplication.this, text, Toast.LENGTH_LONG).show();
+				NavigationSession carNavigationSession = this.carNavigationSession;
+				if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+					CarToast.makeText(carNavigationSession.getCarContext(),
+							text, CarToast.LENGTH_LONG).show();
+				}
+			});
+		}
 	}
 
 	public SQLiteAPI getSQLiteAPI() {

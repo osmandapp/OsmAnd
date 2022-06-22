@@ -191,7 +191,7 @@ public class TrackBitmapDrawer {
 
 	public void refreshTrackBitmap() {
 		currentTrackColor = app.getSettings().CURRENT_TRACK_COLOR.get();
-		if (mapBitmap != null && isDrawEnabled()) {
+		if (mapBitmap != null && !mapBitmap.isRecycled() && isDrawEnabled()) {
 			SelectedGpxFile sf;
 			GPXFile gpxFile = getGpx();
 			if (gpxFile != null) {
