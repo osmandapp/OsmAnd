@@ -4685,8 +4685,7 @@
     <string name="transport_hazmat_title">Veszélyes anyagok szállítása</string>
     <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
-    <string name="routing_attr_goods_restrictions_description">Vegye figyelembe az (áruszállító) furgonokra vonatkozó behajtási engedélyeket</string>
-    <string name="routing_attr_goods_restrictions_name">Furgon korlátozások</string>
+    <string name="routing_attr_goods_restrictions_description">Az (áruszállító) könnyű tehergépjárművekre vonatkozó behajtási engedélyek figyelembevétele</string>
     <string name="co2_mission">Szén-dioxid-kibocsátás</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>
@@ -4701,11 +4700,21 @@
     <string name="live_update_frequency_day_variant">A térképfrissítéseket naponta fogja keresni.</string>
     <string name="live_update_frequency_hour_variant">A térképfrissítéseket óránként fogja keresni.</string>
     <string name="live_update_frequency_week_variant">A térképfrissítéseket hetente fogja keresni.</string>
-    <string name="next_live_update_time">Következő frissítés: %1$s-kor.</string>
-    <string name="altitude_correction">Magasság korrekció</string>
+    <string name="next_live_update_time">Következő frissítés: %1$s múlva.</string>
+    <string name="altitude_correction">Magasságkorrekció</string>
     <string name="no_altitude_data_desc">Saját nyomvonalat csatolhat az utakhoz, hogy megkapja a(z) %1$s adatot vagy kiszámoltathatja azt online.</string>
     <string name="updated_map_time">Frissítve: %1$s.</string>
     <string name="calculate_online_altitude_descr">A tengerszint feletti magasságot műholdképek és digitális magassági modellek felhasználásával az OsmAnd szervereken számítja ki online. Az eredmény eltérhet az eszköz által meghatározott magasságtól és magasságkorrekcióként használható.</string>
-    <string name="next_live_update_date_and_time">Következő frissítés: %1$s %2$s.</string>
+    <string name="next_live_update_date_and_time">Következő frissítés: %1$s (%2$s múlva).</string>
     <string name="includes_osm_changes_until">Tartalmazza az OSM-en %1$s-ig végrehajtott módosításokat.</string>
+    <string name="marker_2nd">2. jelölő</string>
+    <string name="reset_all_settings_desc">Biztosan visszaállítja az összes beállítást alaphelyzetbe\?</string>
+    <string name="switch_widget_mode_desc">A widgetre koppintva módot válthat.</string>
+    <string name="goods_delivery_desc_4">Ha a járműve tömege meghaladja a 3,5 tonnát, akkor a teherautó profilt kell használnia.</string>
+    <string name="goods_delivery_desc">Korlátozhatja az áruszállító járművek egyes utakra való behajtását.</string>
+    <string name="side_marker_eta">Becsült érkezési idő</string>
+    <string name="marker_1st">1. jelölő</string>
+    <string name="goods_delivery_desc_2">Elkerülheti az áruszállító járművek által igénybe nem vehető utakat.</string>
+    <string name="goods_delivery_desc_3">Csak olyan, legalább négy kerekű áruszállító járművekre vonatkozik, amelyek tömege legfeljebb 3,5 tonna.</string>
+    <string name="map_marker_average_speed_desc">Az időintervallum megadása, amely alapján az érkezési idő becsléséhez szükséges átlagsebesség kiszámításra kerül.</string>
 </resources>

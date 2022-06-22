@@ -1,5 +1,6 @@
 package net.osmand.plus.widgets.chips;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -16,7 +17,6 @@ public class HorizontalChipsView extends RecyclerView {
 
 	final private ChipsAdapter adapter;
 	final private ChipsDataHolder holder = new ChipsDataHolder();
-	final private DefaultAttributes defAttrs;
 
 	public HorizontalChipsView(@NonNull Context context) {
 		this(context, null);
@@ -35,7 +35,7 @@ public class HorizontalChipsView extends RecyclerView {
 		setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
 		setClipToPadding(false);
 
-		defAttrs = DefaultAttributes.createInstance(context, attrs, defStyleAttr);
+		DefaultAttributes defAttrs = DefaultAttributes.createInstance(context, attrs, defStyleAttr);
 		adapter = new ChipsAdapter(context, holder, defAttrs);
 		setAdapter(adapter);
 	}
@@ -52,6 +52,7 @@ public class HorizontalChipsView extends RecyclerView {
 		adapter.setOnSelectChipListener(listener);
 	}
 
+	@SuppressLint("NotifyDataSetChanged")
 	public void notifyDataSetChanged() {
 		adapter.notifyDataSetChanged();
 	}
@@ -67,5 +68,4 @@ public class HorizontalChipsView extends RecyclerView {
 	public void smoothScrollTo(@NonNull ChipItem chip) {
 		smoothScrollToPosition(holder.indexOf(chip));
 	}
-
 }

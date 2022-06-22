@@ -161,7 +161,7 @@ public class OsmAndLocationSimulation {
 							if (simulationMode == SimulationMode.CONSTANT) {
 								result = useSimulationConstantSpeed(simSpeed, current, directions, meters, intervalTime, coeff);
 							} else {
-								result = useDefaultSimulation(current, directions, meters, intervalTime, coeff);
+								result = useDefaultSimulation(current, directions, meters, intervalTime, coeff, realistic);
 							}
 							current = (SimulatedLocation) result.get(0);
 							meters = (float) result.get(1);
@@ -184,6 +184,7 @@ public class OsmAndLocationSimulation {
 					}
 					if (realistic && current.isTrafficLight() && stopDelayCount == 0) {
 						stopDelayCount = 5;
+						current.setSpeed(0);
 						current.removeBearing();
 					} else if (stopDelayCount > 0) {
 						stopDelayCount--;
@@ -227,7 +228,7 @@ public class OsmAndLocationSimulation {
 		return result;
 	}
 
-	private List<Object> useDefaultSimulation(SimulatedLocation current, List<SimulatedLocation> directions, float meters, float intervalTime,float coeff) {
+	private List<Object> useDefaultSimulation(SimulatedLocation current, List<SimulatedLocation> directions, float meters, float intervalTime, float coeff, boolean isRealistic) {
 		List<Object> result = new ArrayList<>();
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
@@ -236,9 +237,11 @@ public class OsmAndLocationSimulation {
 			meters = metersToGoInFiveSteps(directions, current);
 		}
 
-		float limit = getMetersLimitForPoint(current, intervalTime, coeff);
-		if (meters > limit) {
-			meters = limit;
+		if (isRealistic) {
+			float limit = getMetersLimitForPoint(current, intervalTime, coeff);
+			if (meters > limit) {
+				meters = limit;
+			}
 		}
 
 		result.add(current);

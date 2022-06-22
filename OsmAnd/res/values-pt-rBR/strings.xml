@@ -4547,7 +4547,6 @@
     <string name="explore_plans">Explorar planos</string>
     <string name="time_to_navigation_point_widget_settings_desc">Você pode alternar o modo tocando no widget.</string>
     <string name="map_widget_time_to_destination">Tempo para o destino</string>
-    <string name="routing_attr_goods_restrictions_name">Restrições de veículos de mercadorias</string>
     <string name="routing_attr_goods_restrictions_description">Considere as permissões de acesso para veículos de mercadorias leves (mercadorias)</string>
     <string name="routing_attr_motor_type_lpg_name">GLP</string>
     <string name="co2_mission">Emissão de CO2</string>

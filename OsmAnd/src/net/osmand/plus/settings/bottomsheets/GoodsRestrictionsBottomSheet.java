@@ -33,9 +33,6 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	private static final String SELECTED_KEY = "selected_key";
 
 	private OsmandApplication app;
-	private ApplicationMode appMode;
-
-	private LayoutInflater inflater;
 
 	private boolean isSelected;
 
@@ -59,7 +56,6 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		appMode = getAppMode();
 		if (savedInstanceState != null) {
 			restoreSavedState(savedInstanceState);
 		} else if (getArguments() != null) {
@@ -70,7 +66,7 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
-		inflater = UiUtilities.getInflater(context, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 
 		View view = inflater.inflate(R.layout.bottom_sheet_goods_restriction, null);
 		setupToggleButtons(view);
@@ -105,6 +101,11 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	private void updateView(@NonNull View view) {
 		View fartherDescription = view.findViewById(R.id.farther_description);
 		AndroidUiHelper.setVisibility(isSelected ? View.VISIBLE : View.GONE, fartherDescription);
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
 	}
 
 	private void restoreSavedState(@NonNull Bundle bundle) {

@@ -859,7 +859,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectTrack(@NonNull GPXFile gpxFile) {
+	public void selectTrack(@NonNull GPXFile gpxFile, boolean checkForSegments) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -872,7 +872,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 							true, false, false, true);
 				}
 			}
-			if (gpxFile.getNonEmptySegmentsCount() > 1) {
+			if (checkForSegments && gpxFile.getNonEmptySegmentsCount() > 1) {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
 				if (fragment == null) {

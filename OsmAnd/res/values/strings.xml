@@ -12,8 +12,10 @@
 -->
 
     <string name="lang_ckb">Central Kurdish</string>
-    <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
+    <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
+    <string name="routing_attr_motor_type_description">Select fuel type used by your vehicle motor, to calculate CO2 emission.</string>
+    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
     <string name="marker_2nd">Second marker</string>
     <string name="marker_1st">First marker</string>
     <string name="map_marker_average_speed_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
@@ -42,8 +44,6 @@
     <string name="routing_attr_motor_type_electric_name">Electric</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
-    <string name="routing_attr_motor_type_name">Motor type</string>
-    <string name="routing_attr_motor_type_description">For CO2 computation</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>

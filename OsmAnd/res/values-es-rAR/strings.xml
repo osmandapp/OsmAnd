@@ -4710,7 +4710,6 @@
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
-    <string name="routing_attr_goods_restrictions_name">Restricciones a vehículos de mercancías</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
@@ -4721,4 +4720,25 @@
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina;Nafta;Bencina</string>
+    <string name="switch_widget_mode_desc">Puedes cambiar el modo pulsando en el widget.</string>
+    <string name="side_marker_eta">Hora estimada de llegada</string>
+    <string name="goods_delivery_desc_3">Aplica únicamente a vehículos que transportan mercancías, que tienen al menos cuatro ruedas y no pesan más de 3,5 toneladas.</string>
+    <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
+    <string name="includes_osm_changes_until">Incluye cambios de OSM realizados hasta %1$s.</string>
+    <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
+    <string name="next_live_update_time">Próxima actualización: en %1$s.</string>
+    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día.</string>
+    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana.</string>
+    <string name="marker_2nd">Segundo marcador</string>
+    <string name="map_marker_average_speed_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
+    <string name="marker_1st">Primer marcador</string>
+    <string name="reset_all_settings_desc">¿Restablecer todos los ajustes a los predefinidos\?</string>
+    <string name="goods_delivery_desc_4">Si el peso del vehículo es superior a 3,5 toneladas, debes usar el perfil de camión.</string>
+    <string name="updated_map_time">Actualizado: %1$s.</string>
+    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos %1$s o calcularlos en línea.</string>
+    <string name="altitude_correction">Corrección de altitud</string>
+    <string name="goods_delivery_desc">Los vehículos de transporte de mercancías pueden tener restringido el acceso a algunos caminos.</string>
+    <string name="calculate_online_altitude_descr">Calcula la altitud en línea en los servidores de OsmAnd basándose en las imágenes de satélite y en los modelos digitales de elevación. Podría variar de la altitud registrada por el dispositivo y podría utilizarse como corrección de altitud.</string>
+    <string name="lang_ckb">Kurdo central</string>
+    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
 </resources>

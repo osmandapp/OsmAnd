@@ -1,5 +1,7 @@
 package net.osmand.plus.measurementtool.command;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
@@ -9,7 +11,7 @@ public class RemovePointCommand extends MeasurementModeCommand {
 	private WptPt point;
 	private String prevPointProfile;
 
-	public RemovePointCommand(MeasurementToolLayer measurementLayer, int position) {
+	public RemovePointCommand(@NonNull MeasurementToolLayer measurementLayer, int position) {
 		super(measurementLayer);
 		this.position = position;
 	}
@@ -45,6 +47,7 @@ public class RemovePointCommand extends MeasurementModeCommand {
 		refreshMap();
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.REMOVE_POINT;

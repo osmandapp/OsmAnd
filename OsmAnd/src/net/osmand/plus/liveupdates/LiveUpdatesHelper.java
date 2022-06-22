@@ -89,10 +89,6 @@ public class LiveUpdatesHelper {
 		return checkPref(settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK));
 	}
 
-	public static CommonPreference<Long> preferenceLastSuccessfulUpdateCheck(OsmandSettings settings) {
-		return checkPref(settings.registerLongPreference(LIVE_UPDATES_LAST_SUCCESSFUL_CHECK, DEFAULT_LAST_CHECK));
-	}
-
 	public static CommonPreference<Long> preferenceLastOsmChange(@NonNull String fileName, @NonNull OsmandSettings settings) {
 		String prefId = fileName + LIVE_UPDATES_LAST_OSM_UPDATE;
 		return checkPref(settings.registerLongPreference(prefId, 0));

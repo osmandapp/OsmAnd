@@ -4694,7 +4694,6 @@
     <string name="transport_hazmat_no_desc">Деякими дорогами й тунелями перевезення небезпечних матеріалів заборонено.</string>
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
     <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
-    <string name="routing_attr_goods_restrictions_name">Обмеження на вантажні транспортні засоби</string>
     <string name="co2_mission">Викиди CO2</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_electric_name">Електричний</string>
@@ -4716,4 +4715,14 @@
     <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>
     <string name="no_altitude_data_desc">Ви можете прикріпити свій трек до доріг, щоб отримати дані %1$s або обчислити їх онлайн.</string>
     <string name="calculate_online_altitude_descr">Обчислюйте висоту онлайн на серверах OsmAnd на основі супутникових знімків та цифрових моделей висот. Результат може відрізнятися від записаної пристроєм висоти та може бути використаним як корекція висоти.</string>
+    <string name="marker_2nd">Друга позначка</string>
+    <string name="switch_widget_mode_desc">Ви можете змінити режим, натиснувши на віджет.</string>
+    <string name="goods_delivery_desc_2">Будуть уникатися дороги, якими заборонено доставляти вантажі.</string>
+    <string name="goods_delivery_desc_4">Якщо вага вашого автомобіля перевищує 3,5 тонни, вам потрібно використовувати профіль «Вантажівка».</string>
+    <string name="goods_delivery_desc_3">Застосовується лише до тих транспортних засобів, що перевозять вантажі, мають принаймні чотири колеса та повну масу до 3,5 тонн.</string>
+    <string name="marker_1st">Перша позначка</string>
+    <string name="side_marker_eta">Орієнтовний час прибуття</string>
+    <string name="reset_all_settings_desc">Справді скинути всі налаштування до типових\?</string>
+    <string name="goods_delivery_desc">Транспортні засоби, що перевозять вантажі, можуть бути обмежені в доступі до деяких доріг.</string>
+    <string name="map_marker_average_speed_desc">Вкажіть проміжок часу, впродовж якого буде виміряна середня швидкість для обчислення приблизного часу прибуття.</string>
 </resources>

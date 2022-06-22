@@ -4693,7 +4693,6 @@
     <string name="transport_hazmat_yes_desc">Uygun kategoriyi seçmeniz gerekiyor.</string>
     <string name="transport_hazmat_no_desc">Bazı yollarda ve tünellerde tehlikeli maddelerin taşınması yasaktır.</string>
     <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
-    <string name="routing_attr_goods_restrictions_name">Yük araçları kısıtlamaları</string>
     <string name="routing_attr_goods_restrictions_description">Hafif yük araçları (mallar) için erişim izinlerini göz önünde bulundurun</string>
     <string name="routing_attr_motor_type_electric_name">Elektrik</string>
     <string name="co2_mission">CO2 emisyonu</string>
@@ -4716,4 +4715,14 @@
     <string name="includes_osm_changes_until">%1$s tarihine kadar yapılan OSM değişikliklerini içerir.</string>
     <string name="next_live_update_time">Sonraki güncelleme: %1$s içinde.</string>
     <string name="no_altitude_data_desc">%1$s verilerini almak için izinizi yollara ekleyebilir veya çevrim içi olarak hesaplayabilirsiniz.</string>
+    <string name="map_marker_average_speed_desc">Tahmini varış zamanını hesaplamak için ortalama hızın ölçüleceği zaman aralığını belirtin.</string>
+    <string name="reset_all_settings_desc">Tüm ayarları öntanımlı değerlerine sıfırlamak istediğinizden emin misiniz\?</string>
+    <string name="goods_delivery_desc_4">Araç ağırlığınız 3,5 tondan fazlaysa Kamyon profilini kullanmanız gerekir.</string>
+    <string name="marker_2nd">İkinci işaretleyici</string>
+    <string name="marker_1st">İlk işaretleyici</string>
+    <string name="switch_widget_mode_desc">Widget\'a dokunarak modu değiştirebilirsiniz.</string>
+    <string name="side_marker_eta">Tahmini varış zamanı</string>
+    <string name="goods_delivery_desc">Yük taşıyan araçların bazı yollara erişimi kısıtlanabilir.</string>
+    <string name="goods_delivery_desc_2">Yük teslimatı için kapalı olan yollardan kaçınılacaktır.</string>
+    <string name="goods_delivery_desc_3">Yalnızca en az dört tekerleği olan ve ağırlığı 3,5 tonu geçmeyen yük taşıyan araçlar için geçerlidir.</string>
 </resources>

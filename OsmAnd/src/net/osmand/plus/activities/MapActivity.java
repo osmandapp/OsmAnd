@@ -1,5 +1,12 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -165,13 +172,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -546,14 +546,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void onRequestPrivateAccessRouting() {
 				ApplicationMode routingProfile = getRoutingHelper().getAppMode();
-				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
-					OsmandPreference<Boolean> allowPrivate = getAllowPrivatePreference(routingProfile);
+				if (AndroidUtils.isActivityNotDestroyed(MapActivity.this)
+						&& !settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
 					final List<ApplicationMode> modes = ApplicationMode.values(app);
 					for (ApplicationMode mode : modes) {
 						if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
 							settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
 						}
 					}
+					OsmandPreference<Boolean> allowPrivate = getAllowPrivatePreference(routingProfile);
 					if (!allowPrivate.getModeValue(routingProfile)) {
 						AlertDialog.Builder dlg = new AlertDialog.Builder(MapActivity.this);
 						dlg.setMessage(R.string.private_access_routing_req);
@@ -767,7 +768,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
 
-		applicationModeListener = change -> app.runInUIThread(this::updateApplicationModeSettings);
+		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
+			if (settings.APPLICATION_MODE.get() != prevAppMode) {
+				MapActivity.this.updateApplicationModeSettings();
+			}
+		});
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings();
 

@@ -4412,7 +4412,6 @@
     <string name="no_plugins_enabled">Nemate uključenih dodataka. Možete naći spisak dostupnih dodataka preko ’Meni’ → ’Dodaci’.</string>
     <string name="active_till">Traje do %1$s</string>
     <string name="backup_into_file">Pravljenje rezervne kopije u datoteci</string>
-    <string name="routing_attr_goods_restrictions_name">Ograničenje za vozila sa robom</string>
     <string name="co2_mission">CO2 emisija</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Dizel</string>

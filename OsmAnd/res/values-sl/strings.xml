@@ -4683,7 +4683,6 @@
     <string name="routing_attr_goods_restrictions_description">Upoštevaj dovoljenja za dostop za lahka tovorna vozila (blago)</string>
     <string name="transport_hazmat_no_desc">Na nekaterih cestah in predorih je prevoz nevarnih snovi prepovedan.</string>
     <string name="transport_hazmat_title">Prevoz nevarnih snovi</string>
-    <string name="routing_attr_goods_restrictions_name">Omejitve za tovorna vozila</string>
     <string name="import_as_one_track">Uvozi kot eno sled</string>
     <string name="use_latin_name_if_missing">Uporabi latinsko ime, če manjka</string>
     <string name="transport_hazmat_yes_desc">Izbrati moraš ustrezno kategorijo.</string>
@@ -4708,4 +4707,14 @@
     <string name="includes_osm_changes_until">Vključuje spremembe OSM, narejene do %1$s.</string>
     <string name="updated_map_time">Posodobljeno: %1$s.</string>
     <string name="next_live_update_date_and_time">Naslednja posodobitev: %1$s v %2$s.</string>
+    <string name="map_marker_average_speed_desc">Določi časovni interval, v katerem se bo merila povprečna hitrost za izračun predvidenega časa prihoda.</string>
+    <string name="switch_widget_mode_desc">Način lahko preklopiš tako, da tapneš na gradnik.</string>
+    <string name="side_marker_eta">Predvideni čas prihoda</string>
+    <string name="goods_delivery_desc_4">Če je masa tvojega vozila večja od 3,5 tone, moraš uporabiti profil tovornjaka.</string>
+    <string name="goods_delivery_desc_2">Izogibali se bomo cestam, ki so zaprte za dostavo blaga.</string>
+    <string name="goods_delivery_desc">Vozilom, ki prevažajo blago, je lahko dostop do nekaterih cest omejen.</string>
+    <string name="marker_2nd">Druga oznaka</string>
+    <string name="marker_1st">Prva oznaka</string>
+    <string name="reset_all_settings_desc">Ali si prepričan/a, da želiš ponastaviti vse nastavitve na privzete\?</string>
+    <string name="goods_delivery_desc_3">Velja samo za vozila, ki prevažajo blago, imajo vsaj štiri kolesa in tehtajo največ 3,5 tone.</string>
 </resources>

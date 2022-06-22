@@ -343,7 +343,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		for (int j = 0; j < descriptions.length; j++) {
 			String name = descriptions[j];
 			if (Algorithms.stringsEqual(name, "-")) {
-				names[j] = ctx.getString(R.string.shared_string_none);
+				names[j] = ctx.getString(R.string.shared_string_not_selected);
 			} else {
 				String id = parameter.getId() + "_" + name.toLowerCase().replace(" ", "_");
 				names[j] = getRoutingStringPropertyName(ctx, id, name);
@@ -416,9 +416,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(settings.ROUTE_STRAIGHT_ANGLE.getId())) {
+		String prefId = preference.getKey();
+		if (settings.ROUTE_STRAIGHT_ANGLE.getId().equals(prefId)) {
 			showSeekbarSettingsDialog(getActivity(), getSelectedAppMode());
-		} else if (preference.getKey().equals(HAZMAT_TRANSPORTING_ENABLED)) {
+		} else if (HAZMAT_TRANSPORTING_ENABLED.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null && hazmatParameters != null) {
 				ApplicationMode appMode = getSelectedAppMode();
@@ -428,7 +429,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				Integer selectedValueIndex = enabled ? hazmatParameters.findIndexOfValue(selectedValue) : null;
 				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.names, hazmatParameters.values, selectedValueIndex);
 			}
-		} else if (preference.getKey().equals(GOODS_RESTRICTIONS_PREFERENCE)) {
+		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				ApplicationMode appMode = getSelectedAppMode();
