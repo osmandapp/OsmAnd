@@ -158,7 +158,7 @@ public class OsmAndFormatter {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
 		Date date = calendar.getTime();
-		String formattedTime = shortTimeFormatter.format(date, false);
+		String formattedTime = shortTimeFormatter.format(date, true);
 		if (!isSameDay(calendar, Calendar.getInstance())) {
 			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}
