@@ -12,7 +12,7 @@ import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedAlt;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedDistanceValue;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedDuration;
-import static net.osmand.plus.utils.OsmAndFormatter.getFormattedTime;
+import static net.osmand.plus.utils.OsmAndFormatter.getFormattedTimeShort;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.STROKED;
 
 import android.text.SpannableStringBuilder;
@@ -153,7 +153,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupArrivalTime(@NonNull SpannableStringBuilder builder) {
 		int index = builder.length();
-		String arriveTime = getFormattedTime(routingHelper.getLeftTime(), true);
+		String arriveTime = getFormattedTimeShort(routingHelper.getLeftTime(), true);
 
 		builder.append(" (").append(arriveTime).append(")");
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
