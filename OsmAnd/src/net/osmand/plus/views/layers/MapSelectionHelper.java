@@ -25,6 +25,7 @@ import net.osmand.core.jni.IBillboardMapSymbol;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
+import net.osmand.core.jni.MapSymbol;
 import net.osmand.core.jni.MapSymbolInformationList;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
 import net.osmand.core.jni.ObfMapObject;
@@ -307,7 +308,7 @@ class MapSelectionHelper {
 									addRoute(result, tileBox, point);
 								} else {
 									amenity = getAmenity(result.objectLatLon, obfMapObject);
-									if (amenity == null && mapObject.getPoints31().size() > 1) {
+									if (amenity == null) {
 										addRenderedObject(result, symbolInfo, obfMapObject);
 									}
 								}
@@ -338,7 +339,9 @@ class MapSelectionHelper {
 				PointI pointI = points31.get(k);
 				renderedObject.addLocation(pointI.getX(), pointI.getY());
 			}
-			renderedObject.setName(rasterMapSymbol.getContent());
+			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
+				renderedObject.setName(rasterMapSymbol.getContent());
+			}
 			result.selectedObjects.put(renderedObject, null);
 		}
 	}
