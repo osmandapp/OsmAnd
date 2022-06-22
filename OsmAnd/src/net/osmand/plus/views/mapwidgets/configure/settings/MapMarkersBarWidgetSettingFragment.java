@@ -31,7 +31,7 @@ public class MapMarkersBarWidgetSettingFragment extends WidgetSettingsBaseFragme
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
 		oneMarkerDisplayed = bundle.containsKey(KEY_DISPLAYED_MARKERS)
-				? oneMarkerDisplayed = bundle.getBoolean(KEY_DISPLAYED_MARKERS)
+				? bundle.getBoolean(KEY_DISPLAYED_MARKERS)
 				: settings.DISPLAYED_MARKERS_WIDGETS_COUNT.getModeValue(appMode) == 1;
 	}
 

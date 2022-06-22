@@ -115,9 +115,12 @@ import net.osmand.plus.track.cards.RouteInfoCard;
 import net.osmand.plus.track.cards.SegmentsCard;
 import net.osmand.plus.track.cards.TrackPointsCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
+import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
@@ -149,7 +152,7 @@ import java.util.List;
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -163,6 +166,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
+	private static final String TRACK_HIDDEN_MANUALLY = "track_hidden_manually";
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
@@ -209,6 +213,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private UpdateLocationViewCache updateLocationViewCache;
 	private boolean locationUpdateStarted;
 	private LatLon latLon;
+	private boolean trackHiddenManually;
 
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
@@ -295,6 +300,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
+			trackHiddenManually = savedInstanceState.getBoolean(TRACK_HIDDEN_MANUALLY, false);
+
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			boolean showCurrentTrack = savedInstanceState.getBoolean(CURRENT_RECORDING);
 			MapActivity mapActivity = requireMapActivity();
@@ -1006,6 +1013,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
 			outState.putDouble(KEY_LONGITUDE, latLon.getLongitude());
 		}
+		outState.putBoolean(TRACK_HIDDEN_MANUALLY, trackHiddenManually);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -1059,6 +1067,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (!isGpxFileSelected(app, gpxFile)) {
 						params.showOnMap().selectedByUser().addToHistory().addToMarkers();
 					} else {
+						trackHiddenManually = true;
 						params.hideFromMap();
 					}
 					gpxSelectionHelper.selectGpxFile(gpxFile, params);
@@ -1576,6 +1585,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
+	public void dismissFromMap() {
+		GPXFile gpxFile = getGpx();
+		if (!isGpxFileSelected(app, gpxFile) && !trackHiddenManually) {
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().selectedByUser().syncGroup().addToHistory().addToMarkers().saveSelection();
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
+		}
+		dismiss();
+	}
+
 	@Override
 	public void attachToRoadsSelected(int segmentIndex) {
 		openPlanRoute(segmentIndex, ATTACH_ROADS_MODE);
@@ -1598,6 +1617,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			dismiss();
 		}
 	}
+
+	@Override
+	public boolean onSaveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			EditGpxDescriptionController controller = new EditGpxDescriptionController(getMapActivity());
+			controller.saveEditedDescription(editedText, callback);
+			return true;
+		}
+		return false;
+	}
+
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams) {
 		openTrack(context, file, prevIntentParams, null);

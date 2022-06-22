@@ -140,7 +140,6 @@ public abstract class CommandPlayer {
 
 	public void clear() {
 		abandonAudioFocus();
-		app = null;
 	}
 
 	public void updateAudioStream(int streamType) {

@@ -9,7 +9,6 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
@@ -18,7 +17,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
@@ -33,14 +33,14 @@ public class ArticleWebViewClient extends WebViewClient {
 	private static final String PREFIX_TEL = "tel:";
 
 	private final OsmandApplication app;
-	private final GpxReadDescriptionDialogFragment fragment;
+	private final ReadGpxDescriptionFragment fragment;
 	private final FragmentActivity activity;
 	private final GPXFile gpxFile;
 	private final View view;
 	private final boolean usedOnMap;
 	private WikiArticleHelper wikiArticleHelper;
 
-	public ArticleWebViewClient(@NonNull GpxReadDescriptionDialogFragment fragment,
+	public ArticleWebViewClient(@NonNull ReadGpxDescriptionFragment fragment,
 	                            @NonNull FragmentActivity activity,
 	                            @NonNull GPXFile gpxFile,
 	                            @NonNull View view,

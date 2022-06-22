@@ -1,5 +1,7 @@
 package net.osmand.plus.measurementtool.command;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
@@ -9,7 +11,7 @@ public class MovePointCommand extends MeasurementModeCommand {
 	private final WptPt newPoint;
 	private final int position;
 
-	public MovePointCommand(MeasurementToolLayer measurementLayer, WptPt oldPoint, WptPt newPoint, int position) {
+	public MovePointCommand(@NonNull MeasurementToolLayer measurementLayer, WptPt oldPoint, WptPt newPoint, int position) {
 		super(measurementLayer);
 		this.oldPoint = oldPoint;
 		this.newPoint = newPoint;
@@ -35,6 +37,7 @@ public class MovePointCommand extends MeasurementModeCommand {
 		refreshMap();
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.MOVE_POINT;

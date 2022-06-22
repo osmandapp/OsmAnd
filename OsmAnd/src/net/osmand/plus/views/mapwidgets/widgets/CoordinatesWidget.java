@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -9,14 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
-import com.jwetherell.openmap.common.UTMPoint;
+import com.jwetherell.openmap.common.ZonedUTMPoint;
 
 import net.osmand.Location;
 import net.osmand.LocationConvert;
@@ -36,6 +30,12 @@ import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 import org.apache.commons.logging.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
 
 public class CoordinatesWidget extends MapWidget {
 
@@ -152,7 +152,7 @@ public class CoordinatesWidget extends MapWidget {
 
 	private void showUtmCoordinates(double lat, double lon) {
 		setupForNonStandardFormat();
-		UTMPoint utmPoint = new UTMPoint(new LatLonPoint(lat, lon));
+		ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
 		firstCoordinate.setText(utmPoint.format());
 	}
 

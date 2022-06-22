@@ -35,7 +35,9 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	}
 
 	private void updateAverageSpeed() {
-		float averageSpeed = averageSpeedComputer.getAverageSpeed();
+		long measuredInterval = settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.get();
+		boolean skipLowSpeed = settings.AVERAGE_SPEED_SKIP_STOPS.get();
+		float averageSpeed = averageSpeedComputer.getAverageSpeed(measuredInterval, skipLowSpeed);
 		if (Float.isNaN(averageSpeed)) {
 			setText(DASH, null);
 		} else {

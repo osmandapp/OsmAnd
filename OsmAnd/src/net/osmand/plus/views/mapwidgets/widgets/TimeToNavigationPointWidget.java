@@ -39,7 +39,7 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 		updateIcons();
 		updateContentTitle();
 		setOnClickListener(v -> {
-			arrivalTimeOtherwiseTimeToGoPref.set(!arrivalTimeOtherwiseTimeToGoPref.get());
+			widgetState.changeToNextState();
 			updateInfo(null);
 			mapActivity.refreshMap();
 		});
@@ -102,12 +102,7 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 
 	private void updateArrivalTime(int leftSeconds) {
 		long arrivalTime = System.currentTimeMillis() + leftSeconds * 1000L;
-		if (DateFormat.is24HourFormat(app)) {
-			setText(DateFormat.format("k:mm", arrivalTime).toString(), null);
-		} else {
-			setText(DateFormat.format("h:mm", arrivalTime).toString(),
-					DateFormat.format("aa", arrivalTime).toString());
-		}
+		setTimeText(arrivalTime);
 	}
 
 	private void updateTimeToGo(int leftSeconds) {

@@ -2529,7 +2529,7 @@
     <string name="compass_on_circles">Cwmpawd ar gylchoedd</string>
     <string name="distance_circles">Cylchoedd-pellter</string>
     <string name="routing_attr_hazmat_category_name">Categori Hazmat</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Dim cyfyngiadau</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Dim cyfyngiadau)</string>
     <string name="circle_settings">Gosodiadau cylchoedd</string>
     <string name="fps_widget_desc">Teclyn sy\'n dangos pa mor gyflym y mae mapiau ac elfennau mapiau yn ymddangos ac ail-lwytho.</string>
     <string name="get_altitude_data">Cael data uchder</string>
