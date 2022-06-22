@@ -928,12 +928,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager());
 	}
 
-	@Override
-	public void stopNavigationWithoutConfirm() {
-		super.stopNavigationWithoutConfirm();
-		mapActivity.updateApplicationModeSettings();
-	}
-
 	public void stopNavigationActionConfirm(@Nullable OnDismissListener listener) {
 		stopNavigationActionConfirm(listener, null);
 	}

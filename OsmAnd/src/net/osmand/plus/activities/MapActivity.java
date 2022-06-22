@@ -767,7 +767,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
 
-		applicationModeListener = change -> app.runInUIThread(this::updateApplicationModeSettings);
+		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
+			if (settings.APPLICATION_MODE.get() != prevAppMode) {
+				MapActivity.this.updateApplicationModeSettings();
+			}
+		});
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings();
 
