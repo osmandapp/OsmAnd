@@ -1,8 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,8 +22,6 @@ import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +112,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 			v.setOnClickListener(_v -> {
 				selectedEntryIndex = (int) _v.getTag();
 				updateRadioButtons();
-				dismiss();
+				onApply();
 			});
 
 			llItems.addView(v);
@@ -164,20 +160,12 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 		outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
 	}
 
-	@Override
-	public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
-		super.onDismiss(dialog);
-		Activity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			onApply();
-		}
-	}
-
 	private void onApply() {
 		Fragment target = getTargetFragment();
 		if (target instanceof OnConfirmPreferenceChange) {
 			OnConfirmPreferenceChange callback = ((OnConfirmPreferenceChange) target);
 			callback.onConfirmPreferenceChange(getPrefId(), values[selectedEntryIndex], ApplyQueryType.SNACK_BAR);
 		}
+		dismiss();
 	}
 }
