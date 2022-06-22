@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Motorisation</string>
-    <string name="routing_attr_motor_type_description">Pour les calculs de CO2</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
