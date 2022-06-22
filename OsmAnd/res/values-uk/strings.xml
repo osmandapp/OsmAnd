@@ -4694,7 +4694,6 @@
     <string name="transport_hazmat_no_desc">Деякими дорогами й тунелями перевезення небезпечних матеріалів заборонено.</string>
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
     <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
-    <string name="routing_attr_goods_restrictions_name">Обмеження на вантажні транспортні засоби</string>
     <string name="co2_mission">Викиди CO2</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_electric_name">Електричний</string>

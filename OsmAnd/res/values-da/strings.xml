@@ -4700,7 +4700,6 @@
     <string name="transport_hazmat_yes_desc">Du skal vælge rette kategori.</string>
     <string name="use_latin_name_if_missing">Brug latinsk navn, hvis det mangler</string>
     <string name="routing_attr_goods_restrictions_description">Tag hensyn til adgangstilladelser for lette varebiler (varer)</string>
-    <string name="routing_attr_goods_restrictions_name">Begrænsninger for varebiler</string>
     <string name="routing_attr_motor_type_electric_name">Elektrisk</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>

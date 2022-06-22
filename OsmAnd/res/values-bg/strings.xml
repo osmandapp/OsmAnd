@@ -2770,7 +2770,6 @@
     <string name="app_mode_mountain_bicycle">Планински велосипед</string>
     <string name="bearing_secondary_desc">Можете да промените формата на показваните данни от меню %1$s – %2$s – %3$s.</string>
     <string name="routing_attr_avoid_4wd_only_description">Избягване на пътища, подходящи за превозни средства с пълно задвижване</string>
-    <string name="routing_attr_goods_restrictions_name">Ограничения за транспортни средства за стоки</string>
     <string name="routing_attr_goods_restrictions_description">Отчита правата за достъп на леки транспортни средства, превозващи стоки</string>
     <string name="navigation_points_desc">Навигационните приспособления се включват по време на навигация, за да показват информация като разтояние, време на пристигане или оставащо време, предстоящите завои, посоката на движение, име на текущата улица, информация за лентата на движение, максималната скорост, приближаващи опасности, POI, пътни точки.</string>
     <string name="navigation_points">Точки на навигация</string>

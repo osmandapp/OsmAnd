@@ -12,7 +12,7 @@
 -->
 
     <string name="lang_ckb">Central Kurdish</string>
-    <string name="routing_attr_goods_restrictions_name">Goods vehicles restrictions</string>
+    <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
     <string name="marker_2nd">Second marker</string>
     <string name="marker_1st">First marker</string>

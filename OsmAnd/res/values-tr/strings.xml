@@ -4693,7 +4693,6 @@
     <string name="transport_hazmat_yes_desc">Uygun kategoriyi seçmeniz gerekiyor.</string>
     <string name="transport_hazmat_no_desc">Bazı yollarda ve tünellerde tehlikeli maddelerin taşınması yasaktır.</string>
     <string name="transport_hazmat_title">Tehlikeli maddelerin taşınması</string>
-    <string name="routing_attr_goods_restrictions_name">Yük araçları kısıtlamaları</string>
     <string name="routing_attr_goods_restrictions_description">Hafif yük araçları (mallar) için erişim izinlerini göz önünde bulundurun</string>
     <string name="routing_attr_motor_type_electric_name">Elektrik</string>
     <string name="co2_mission">CO2 emisyonu</string>

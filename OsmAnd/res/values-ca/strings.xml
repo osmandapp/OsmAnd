@@ -3968,5 +3968,4 @@
     <string name="map_widget_trip_recording_duration">Durada</string>
     <string name="routing_attr_avoid_fords_description">Evita els guals</string>
     <string name="fps_widget_desc">El giny mostra la velocitat de càrrega i actualització del mapa i dels elements auxiliars.</string>
-    <string name="routing_attr_goods_restrictions_name">Restriccions per a vehicles de mercaderies</string>
 </resources>

@@ -4761,7 +4761,6 @@
     <string name="transport_hazmat_yes_desc">تحتاج إلى اختيار الفئة المناسبة.</string>
     <string name="transport_hazmat_no_desc">يمنع في بعض الطرق والأنفاق نقل المواد الخطرة.</string>
     <string name="use_latin_name_if_missing">استخدم الاسم اللاتيني إذا كان الاسم مفقودا</string>
-    <string name="routing_attr_goods_restrictions_name">قيود مركبات البضائع</string>
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
     <string name="routing_attr_motor_type_name">نوع المحرك</string>

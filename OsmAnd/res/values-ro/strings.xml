@@ -4685,7 +4685,6 @@
     <string name="routing_attr_motor_type_name">Tip de motor</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
     <string name="co2_mission">emisie CO2</string>
-    <string name="routing_attr_goods_restrictions_name">Restricții pentru vehiculele de marfă</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Petrol</string>

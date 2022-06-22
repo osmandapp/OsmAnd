@@ -4710,7 +4710,6 @@
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
-    <string name="routing_attr_goods_restrictions_name">Restricciones a vehículos de mercancías</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
