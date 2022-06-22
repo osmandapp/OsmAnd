@@ -1,5 +1,16 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
+import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
+import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.RoutingParameterType;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,6 +18,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
 
@@ -29,26 +49,6 @@ import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
-import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
-import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
-import static net.osmand.router.GeneralRouter.RoutingParameter;
-import static net.osmand.router.GeneralRouter.RoutingParameterType;
-import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
-import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -180,16 +180,6 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				showSeekbarSettingsDialog(activity, defaultSpeedOnly);
 			}
 			return true;
-		} else if (preference.getKey().equals(MOTOR_TYPE_PREF_ID)) {
-			FragmentManager manager = getFragmentManager();
-			ListPreferenceEx pref = (ListPreferenceEx) preference;
-			if (manager != null) {
-				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
-						pref.getTitle().toString(), pref.getDescription(),
-						getSelectedAppMode(), false, pref.getEntries(),
-						pref.getEntryValues(), pref.getValueIndex());
-			}
-			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -202,7 +192,16 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
 						this, false, getSelectedAppMode());
 			}
-		} else if (!preference.getKey().equals(MOTOR_TYPE_PREF_ID)) {
+		} else if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				ListPreferenceEx pref = (ListPreferenceEx) preference;
+				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
+						pref.getTitle().toString(), pref.getDescription(),
+						getSelectedAppMode(), false, pref.getEntries(),
+						pref.getEntryValues(), pref.getValueIndex());
+			}
+		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
 	}
