@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.enums.SpeedConstants;
@@ -39,6 +39,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
 import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
 import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
@@ -55,6 +56,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 	private static final String ROUTING_PARAMETER_NUMERIC_DEFAULT = "0.0";
 	private static final String ROUTING_PARAMETER_SYMBOLIC_DEFAULT = "-";
+
+	private static final String MOTOR_TYPE_PREF_ID = ROUTING_PREFERENCE_PREFIX + MOTOR_TYPE;
 
 	@Override
 	protected void setupPreferences() {
@@ -177,6 +180,16 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				showSeekbarSettingsDialog(activity, defaultSpeedOnly);
 			}
 			return true;
+		} else if (preference.getKey().equals(MOTOR_TYPE_PREF_ID)) {
+			FragmentManager manager = getFragmentManager();
+			ListPreferenceEx pref = (ListPreferenceEx) preference;
+			if (manager != null) {
+				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
+						pref.getTitle().toString(), pref.getDescription(),
+						getSelectedAppMode(), false, pref.getEntries(),
+						pref.getEntryValues(), pref.getValueIndex());
+			}
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -189,7 +202,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
 						this, false, getSelectedAppMode());
 			}
-		} else {
+		} else if (!preference.getKey().equals(MOTOR_TYPE_PREF_ID)) {
 			super.onDisplayPreferenceDialog(preference);
 		}
 	}
@@ -268,28 +281,22 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		View seekbarView = LayoutInflater.from(themedContext).inflate(R.layout.default_speed_dialog, null, false);
 		builder.setView(seekbarView);
-		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				mode.setDefaultSpeed(defaultValue[0] / ratio[0]);
-				if (!defaultSpeedOnly) {
-					mode.setMinSpeed(minValue[0] / ratio[0]);
-					mode.setMaxSpeed(maxValue[0] / ratio[0]);
-				}
-				app.getRoutingHelper().onSettingsChanged(mode);
+		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+			mode.setDefaultSpeed(defaultValue[0] / ratio[0]);
+			if (!defaultSpeedOnly) {
+				mode.setMinSpeed(minValue[0] / ratio[0]);
+				mode.setMaxSpeed(maxValue[0] / ratio[0]);
 			}
+			app.getRoutingHelper().onSettingsChanged(mode);
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setNeutralButton(R.string.shared_string_revert, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				mode.resetDefaultSpeed();
-				if (!defaultSpeedOnly) {
-					mode.setMinSpeed(0f);
-					mode.setMaxSpeed(0f);
-				}
-				app.getRoutingHelper().onSettingsChanged(mode);
+		builder.setNeutralButton(R.string.shared_string_revert, (dialog, which) -> {
+			mode.resetDefaultSpeed();
+			if (!defaultSpeedOnly) {
+				mode.setMinSpeed(0f);
+				mode.setMaxSpeed(0f);
 			}
+			app.getRoutingHelper().onSettingsChanged(mode);
 		});
 
 		int selectedModeColor = mode.getProfileColor(nightMode);
