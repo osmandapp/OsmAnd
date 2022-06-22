@@ -62,6 +62,7 @@ public class OsmAndFormatter {
 
 	private static boolean twelveHoursFormat = false;
 	private static TimeFormatter fullTimeFormatter;
+	private static TimeFormatter shortTimeFormatter;
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
 	public static final float MILS_IN_DEGREE = 17.777778f;
@@ -95,6 +96,7 @@ public class OsmAndFormatter {
 	public static void setTwelveHoursFormatting(boolean setTwelveHoursFormat, @NonNull Locale locale) {
 		twelveHoursFormat = setTwelveHoursFormat;
 		fullTimeFormatter = new TimeFormatter(locale, "H:mm:ss", "h:mm:ss a");
+		shortTimeFormatter = new TimeFormatter(locale, "HH:mm", "h:mm a");
 	}
 
 	public static String getFormattedDuration(int seconds, @NonNull OsmandApplication app) {
@@ -148,7 +150,7 @@ public class OsmAndFormatter {
 		return fullTimeFormatter.format(calendar.getTime(), twelveHoursFormat);
 	}
 
-	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
+	public static String getFormattedTimeShort(long seconds, boolean useCurrentTime) {
 		Calendar calendar = Calendar.getInstance();
 		if (useCurrentTime) {
 			calendar.setTimeInMillis(System.currentTimeMillis() + seconds * 1000);
@@ -156,7 +158,7 @@ public class OsmAndFormatter {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
 		Date date = calendar.getTime();
-		String formattedTime = fullTimeFormatter.format(date, false);
+		String formattedTime = shortTimeFormatter.format(date, twelveHoursFormat);
 		if (!isSameDay(calendar, Calendar.getInstance())) {
 			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}
