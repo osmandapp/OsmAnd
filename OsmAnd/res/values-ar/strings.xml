@@ -1674,7 +1674,7 @@
     <string name="go_to_map">إظهار الخريطة</string>
     <string name="map_downloaded">تم تحميل الخريطة</string>
     <string name="simulate_initial_startup">محاكاة طريقة تشغيل التطبيق للمرة الأولى</string>
-    <string name="share_geo">الموقع الجغرافي:</string>
+    <string name="share_geo">فتح بتطبيق آخر:</string>
     <string name="shared_string_send">إرسال</string>
     <string name="favorite_category_name">اسم المفضلة</string>
     <string name="favorite_category_add_new_title">إضافة فئة جديدة</string>
