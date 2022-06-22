@@ -4684,7 +4684,6 @@
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
     <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>
-    <string name="routing_attr_goods_restrictions_name">Obmedzenia pre dodávkové vozidlá</string>
     <string name="transport_hazmat_yes_desc">Musíte zvoliť správnu kategóriu.</string>
     <string name="import_as_one_track">Importovať ako jednu stopu</string>
     <string name="use_latin_name_if_missing">Použiť názov v latinke ak chýba</string>

@@ -4694,7 +4694,6 @@
     <string name="average_speed_time_interval_desc">נא לציין את הפרש הזמן למדידת מהירות ממוצעת.</string>
     <string name="average_speed_widget_desc">מציג את המהירות הממוצעת בנסיעה הנוכחית.</string>
     <string name="map_widget_average_speed">מהירות ממוצעת</string>
-    <string name="routing_attr_goods_restrictions_name">מגבלות כלי תובלה</string>
     <string name="routing_attr_goods_restrictions_description">התייחסות להרשאות גישה למשאיות קלות (טנדרים)</string>
     <string name="rendering_attr_seabedDetail_description">פירוט טקסט נוסף על surface_qualification (תנאי שטח), סוגי שטח מעורבים, קטגוריה וסיווג של צמחי או אצות הים על הקרקעית</string>
     <string name="co2_mission">פליטת פחמן דו חמצני</string>

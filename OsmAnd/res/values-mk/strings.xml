@@ -475,7 +475,6 @@
     <string name="snap_to_road_descr">Ikonata za momentalna pozicija ḱe se prikači na tekovnata ruta za navigacija</string>
     <string name="routing_attr_driving_style_description">Izberete cel na vozenje za da dobiete pokratok, pobrz ili pobezbeden pat</string>
     <string name="routing_attr_short_way_description">Optimizirana pokratka ruta (zašteda na energija)</string>
-    <string name="routing_attr_goods_restrictions_name">Ogranicuvanje za vozila so stoka</string>
     <string name="average_speed_skip_stops_desc">Brzinata pomala od %1$s nema da se presmetuva i nema da vlijae na prosecnata brzina.</string>
     <string name="radius_ruler_mode_desc">So dopir na uredot (widget) prefrlete se vo rezimot na Radius.</string>
     <string name="explore_plans">Istrazuvanje na planovite</string>

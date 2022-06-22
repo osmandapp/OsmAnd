@@ -4692,7 +4692,6 @@
     <string name="routing_attr_motor_type_gas_name">Метан (CNG)</string>
     <string name="transport_hazmat_no_desc">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
     <string name="routing_attr_motor_type_description">За CO2 израчунавање</string>
-    <string name="routing_attr_goods_restrictions_name">Ограничење за возила са робом</string>
     <string name="co2_mission">CO2 емисија</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_hybrid_name">Хибрид</string>

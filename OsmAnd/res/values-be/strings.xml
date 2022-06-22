@@ -4639,7 +4639,6 @@
     <string name="routing_attr_avoid_tunnels_description">Пазбягаць тунэляў</string>
     <string name="routing_attr_goods_restrictions_description">Улічваць дазволы на доступ для лёгкіх грузавых транспартных сродкаў (з таварам)</string>
     <string name="transport_hazmat_no_desc">Па некаторых дарогах і тунэлях перавозка небяспечных матэрыялаў забаронена.</string>
-    <string name="routing_attr_goods_restrictions_name">Абмежаванні для грузавых транспартных сродкаў</string>
     <string name="use_latin_name_if_missing">Пры адсутнасці выкарыстоўваць назву на лацінке</string>
     <string name="routing_attr_carriage_restrictions_name">Абмежаванні на перавозку</string>
     <string name="rendering_attr_showFunicularRoutes_name">Фунікулёрныя маршруты</string>

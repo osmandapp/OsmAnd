@@ -4686,7 +4686,6 @@
     <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
     <string name="routing_attr_goods_restrictions_description">Az (áruszállító) könnyű tehergépjárművekre vonatkozó behajtási engedélyek figyelembevétele</string>
-    <string name="routing_attr_goods_restrictions_name">Kisteherautókra vonatkozó korlátozások</string>
     <string name="co2_mission">Szén-dioxid-kibocsátás</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>

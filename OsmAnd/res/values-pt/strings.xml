@@ -4694,7 +4694,6 @@
     <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s não será contada e afetará a velocidade média.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
-    <string name="routing_attr_goods_restrictions_name">Restrições a veículos de mercadorias</string>
     <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
     <string name="transport_hazmat_yes_desc">É necessário escolher a categoria adequada.</string>
     <string name="import_as_one_track">Importar como um só trilho</string>
