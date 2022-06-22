@@ -141,6 +141,11 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 		this.selectedEntryIndex = selectedEntryIndex != null ? selectedEntryIndex : 0;
 	}
 
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
+	}
+
 	private void restoreSavedState(@NonNull Bundle bundle) {
 		title = bundle.getString(TITLE_KEY);
 		description = bundle.getString(DESCRIPTION_KEY);
