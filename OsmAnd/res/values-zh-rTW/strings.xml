@@ -4709,4 +4709,14 @@
     <string name="live_update_frequency_hour_variant">每個小時會檢查一次地圖更新。</string>
     <string name="live_update_frequency_day_variant">每天會檢查一次地圖更新。</string>
     <string name="altitude_correction">高度校正</string>
+    <string name="marker_2nd">第二個標記</string>
+    <string name="switch_widget_mode_desc">您可以透過點擊小工具來切換模式。</string>
+    <string name="side_marker_eta">預計到達時間</string>
+    <string name="goods_delivery_desc_4">若您的車重超過 3.5 公噸，您必須使用卡車設定檔。</string>
+    <string name="goods_delivery_desc_2">將避開針對運送貨物關閉的道路。</string>
+    <string name="marker_1st">第一個標記</string>
+    <string name="map_marker_average_speed_desc">指定將測量平均速度以計算預計到達時間的時間間隔。</string>
+    <string name="goods_delivery_desc_3">僅適用於至少有四個輪子且載重量不超過 3.5 公噸貨物的車輛。</string>
+    <string name="reset_all_settings_desc">您確定您要將所有設定重設為預設值？</string>
+    <string name="goods_delivery_desc">可以限制運輸貨物的車輛進入某些道路。</string>
 </resources>
