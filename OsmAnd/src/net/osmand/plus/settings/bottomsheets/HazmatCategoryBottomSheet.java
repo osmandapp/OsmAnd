@@ -179,6 +179,11 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 		this.isAnyCategorySelected = selectedEntryIndex != null;
 	}
 
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
+	}
+
 	private void restoreSavedState(@NonNull Bundle bundle) {
 		names = bundle.getStringArray(NAMES_KEY);
 		values = bundle.getStringArray(VALUES_KEY);
