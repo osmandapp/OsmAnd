@@ -5,6 +5,7 @@ import android.os.Bundle;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
@@ -30,6 +31,7 @@ public class ConfirmResetToDefaultBottomSheetDialog extends MenuBottomSheetDialo
 				.setTitleColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_plain_title_with_description)
 				.create());
+		items.add(new DividerSpaceItem(requireContext(), getDimen(R.dimen.content_padding_small)));
 	}
 
 	@Override
@@ -54,6 +56,11 @@ public class ConfirmResetToDefaultBottomSheetDialog extends MenuBottomSheetDialo
 			((ResetToDefaultListener) target).onResetToDefaultConfirmed();
 		}
 		dismiss();
+	}
+
+	@Override
+	protected int getFirstDividerHeight() {
+		return getDimen(R.dimen.dialog_content_margin);
 	}
 
 	@Override
