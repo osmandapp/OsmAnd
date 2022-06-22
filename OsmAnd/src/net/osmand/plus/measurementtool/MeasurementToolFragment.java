@@ -574,6 +574,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				}
 			}
 		});
+		if (fileName != null) {
+			toolBarController.setSaveViewTextId(R.string.shared_string_save);
+		}
 		updateToolbar();
 
 		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
