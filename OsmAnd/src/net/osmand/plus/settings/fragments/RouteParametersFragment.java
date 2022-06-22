@@ -343,7 +343,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		for (int j = 0; j < descriptions.length; j++) {
 			String name = descriptions[j];
 			if (Algorithms.stringsEqual(name, "-")) {
-				names[j] = ctx.getString(R.string.shared_string_none);
+				names[j] = ctx.getString(R.string.shared_string_not_selected);
 			} else {
 				String id = parameter.getId() + "_" + name.toLowerCase().replace(" ", "_");
 				names[j] = getRoutingStringPropertyName(ctx, id, name);
