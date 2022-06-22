@@ -1,18 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -134,6 +121,19 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
@@ -547,36 +547,30 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
-		toolBarController.setOnBackButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					GpxApproximationFragment gpxApproximationFragment = mapActivity.getGpxApproximationFragment();
-					SnapTrackWarningFragment snapTrackWarningFragment = mapActivity.getSnapTrackWarningBottomSheet();
-					if (gpxApproximationFragment != null) {
-						gpxApproximationFragment.dismissImmediate();
-					} else if (snapTrackWarningFragment != null) {
-						snapTrackWarningFragment.dismissImmediate();
-					} else {
-						quit(false);
-					}
+		toolBarController.setOnBackButtonClickListener(v -> {
+			MapActivity mapActivity1 = getMapActivity();
+			if (mapActivity1 != null) {
+				GpxApproximationFragment gpxApproximationFragment = mapActivity1.getGpxApproximationFragment();
+				SnapTrackWarningFragment snapTrackWarningFragment = mapActivity1.getSnapTrackWarningBottomSheet();
+				if (gpxApproximationFragment != null) {
+					gpxApproximationFragment.dismissImmediate();
+				} else if (snapTrackWarningFragment != null) {
+					snapTrackWarningFragment.dismissImmediate();
+				} else {
+					quit(false);
 				}
 			}
 		});
-		toolBarController.setOnSaveViewClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (isFollowTrackMode()) {
-					startTrackNavigation();
-				} else if (editingCtx.isNewData() || editingCtx.hasChanges()
-						|| isCalculateSrtmMode() && editingCtx.hasElevationData()) {
-					saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
-				} else {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						dismiss(mapActivity, false);
-					}
+		toolBarController.setOnSaveViewClickListener(v -> {
+			if (isFollowTrackMode()) {
+				startTrackNavigation();
+			} else if (editingCtx.isNewData() || editingCtx.hasChanges()
+					|| isCalculateSrtmMode() && editingCtx.hasElevationData()) {
+				saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
+			} else {
+				MapActivity mapActivity12 = getMapActivity();
+				if (mapActivity12 != null) {
+					dismiss(mapActivity12, false);
 				}
 			}
 		});
@@ -584,11 +578,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-		snapToRoadBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startSnapToRoad(false);
-			}
+		snapToRoadBtn.setOnClickListener(v -> {
+			startSnapToRoad(false);
 		});
 		snapToRoadBtn.setVisibility(View.VISIBLE);
 		LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
@@ -600,11 +591,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		divider.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), R.attr.divider_color));
 		ImageButton profileBtn = profileWithConfig.findViewById(R.id.profile);
 		profileBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night_no_shadow : R.drawable.btn_circle_no_shadow);
-		profileBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startSnapToRoad(false);
-			}
+		profileBtn.setOnClickListener(v -> {
+			startSnapToRoad(false);
 		});
 		ImageButton configBtn = profileWithConfig.findViewById(R.id.profile_config);
 		configBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night_no_shadow : R.drawable.btn_circle_no_shadow);
@@ -2363,8 +2351,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) {
-	}
+	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) { }
 
 	@Override
 	public void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath) {
@@ -2394,12 +2381,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFileUploadStarted() {
-	}
+	public void onFileUploadStarted() { }
 
 	@Override
-	public void onFileUploadProgress(int percent) {
-	}
+	public void onFileUploadProgress(int percent) { }
 
 	@Override
 	public void onFileUploadDone(@NonNull NetworkResult networkResult) {
