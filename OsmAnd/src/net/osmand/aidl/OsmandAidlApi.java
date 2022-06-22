@@ -1056,7 +1056,7 @@ public class OsmandAidlApi {
 			favoritesHelper.updateGroupVisibility(group, visible, false);
 			favoritesHelper.updateGroupName(group, newGroupName, false);
 
-			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.saveCurrentPointsIntoFile(false);
 			return true;
 		}
 		return false;

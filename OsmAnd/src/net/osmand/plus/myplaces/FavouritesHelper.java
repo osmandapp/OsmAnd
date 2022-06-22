@@ -123,7 +123,7 @@ public class FavouritesHelper {
 		sortAll();
 
 		if (changed || !fileHelper.getExternalFile().exists()) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(false);
 		}
 		favoritesLoaded = true;
 		notifyListeners();
@@ -146,7 +146,7 @@ public class FavouritesHelper {
 			group.getPoints().add(fp);
 		}
 		sortAll();
-		saveCurrentPointsIntoFile();
+		saveCurrentPointsIntoFile(false);
 		notifyListeners();
 	}
 
@@ -260,7 +260,7 @@ public class FavouritesHelper {
 				}
 			}
 		}
-		saveCurrentPointsIntoFile();
+		saveCurrentPointsIntoFile(false);
 	}
 
 	public boolean deleteFavourite(FavouritePoint point) {
@@ -280,7 +280,7 @@ public class FavouritesHelper {
 			}
 		}
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(false);
 		}
 		return true;
 	}
@@ -354,7 +354,7 @@ public class FavouritesHelper {
 		}
 		if (saveImmediately) {
 			sortAll();
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(hasMarkerGroup(group));
 		}
 
 		runSyncWithMarkers(group);
@@ -416,15 +416,17 @@ public class FavouritesHelper {
 			pg.getPoints().add(p);
 		}
 		sortAll();
-		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p));
+		FavoriteGroup group = getOrCreateGroup(p);
+		saveCurrentPointsIntoFile(hasMarkerGroup(group));
+		runSyncWithMarkers(group);
 		return true;
 	}
 
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
-		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p));
+		FavoriteGroup group = getOrCreateGroup(p);
+		saveCurrentPointsIntoFile(hasMarkerGroup(group));
+		runSyncWithMarkers(group);
 	}
 
 	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
@@ -433,10 +435,10 @@ public class FavouritesHelper {
 
 	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
 		point.setVisitedDate(passed ? System.currentTimeMillis() : 0);
-		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
-		}
 		FavoriteGroup group = getOrCreateGroup(point);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(hasMarkerGroup(group));
+		}
 		runSyncWithMarkers(group);
 		return true;
 	}
@@ -449,14 +451,15 @@ public class FavouritesHelper {
 		if (description != null) {
 			p.setDescription(description);
 		}
-		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p));
+		FavoriteGroup favGroup = getOrCreateGroup(p);
+		saveCurrentPointsIntoFile(hasMarkerGroup(favGroup));
+		runSyncWithMarkers(favGroup);
 		return true;
 	}
 
-	public void saveCurrentPointsIntoFile() {
+	public void saveCurrentPointsIntoFile(boolean syncWithMarker) {
 		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(favoriteGroups));
-		onFavouritePropertiesUpdated();
+		onFavouritePropertiesUpdated(syncWithMarker);
 	}
 
 	public Exception exportFavorites() {
@@ -467,7 +470,7 @@ public class FavouritesHelper {
 		boolean remove = favoriteGroups.remove(group);
 		if (remove) {
 			flatGroups.remove(group.getName());
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(false);
 			removeFromMarkers(group);
 			return true;
 		}
@@ -609,7 +612,7 @@ public class FavouritesHelper {
 		group.setColor(color);
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(hasMarkerGroup(group));
 		}
 	}
 
@@ -623,7 +626,7 @@ public class FavouritesHelper {
 		group.setIconName(iconName);
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(hasMarkerGroup(group));
 		}
 	}
 
@@ -637,7 +640,7 @@ public class FavouritesHelper {
 		group.setBackgroundType(backgroundType);
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(hasMarkerGroup(group));
 		}
 	}
 
@@ -650,7 +653,7 @@ public class FavouritesHelper {
 			runSyncWithMarkers(group);
 		}
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(group.isVisible() != visible && hasMarkerGroup(group));
 		}
 	}
 
@@ -679,7 +682,7 @@ public class FavouritesHelper {
 			}
 		}
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFile(false);
 		}
 	}
 
@@ -695,9 +698,9 @@ public class FavouritesHelper {
 		return group;
 	}
 
-	private void onFavouritePropertiesUpdated() {
+	private void onFavouritePropertiesUpdated(boolean syncWithMarker) {
 		for (FavoritesListener listener : listeners) {
-			listener.onFavoritePropertiesUpdated();
+			listener.onFavoritePropertiesUpdated(syncWithMarker);
 		}
 	}
 
@@ -707,5 +710,11 @@ public class FavouritesHelper {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
+	}
+
+	private boolean hasMarkerGroup(FavoriteGroup favoriteGroup) {
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		MapMarkersGroup mg = helper.getMarkersGroup(favoriteGroup);
+		return mg != null;
 	}
 }

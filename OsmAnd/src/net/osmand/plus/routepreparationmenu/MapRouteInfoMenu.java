@@ -2484,7 +2484,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	@Override
-	public void onFavoritePropertiesUpdated() {
+	public void onFavoritePropertiesUpdated(boolean syncWithMarker) {
 	}
 
 	@NonNull
