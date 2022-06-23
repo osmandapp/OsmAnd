@@ -4694,8 +4694,8 @@
     <string name="routing_attr_motor_type_electric_name">Elektromos</string>
     <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
-    <string name="routing_attr_motor_type_description">CO₂-kibocsátás számításához</string>
-    <string name="routing_attr_motor_type_name">Motortípus</string>
+    <string name="routing_attr_motor_type_description">A járműve által használt üzemanyag típusának kiválasztása a CO₂-kibocsátás számításához</string>
+    <string name="routing_attr_motor_type_name">A motor üzemanyag típusa</string>
     <string name="lang_ckb">Közép-kurd</string>
     <string name="live_update_frequency_day_variant">A térképfrissítéseket naponta fogja keresni.</string>
     <string name="live_update_frequency_hour_variant">A térképfrissítéseket óránként fogja keresni.</string>
@@ -4717,4 +4717,5 @@
     <string name="goods_delivery_desc_2">Elkerülheti az áruszállító járművek által igénybe nem vehető utakat.</string>
     <string name="goods_delivery_desc_3">Csak olyan, legalább négy kerekű áruszállító járművekre vonatkozik, amelyek tömege legfeljebb 3,5 tonna.</string>
     <string name="map_marker_average_speed_desc">Az időintervallum megadása, amely alapján az érkezési idő becsléséhez szükséges átlagsebesség kiszámításra kerül.</string>
+    <string name="routing_attr_goods_restrictions_name">Áruszállítás</string>
 </resources>
