@@ -184,6 +184,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private LatLon highlightedPointLocationCached;
 	private boolean syncWithMarker = false;
 	private int hiddenWptGroupCountCached = 0;
+	private boolean appliedNewPosition = false;
 
 	private ContextMenuLayer contextMenuLayer;
 	@ColorInt
@@ -819,6 +820,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			boolean textVisible = isTextVisible();
 			boolean changeMarkerPositionMode = contextMenuLayer.isInChangeMarkerPositionMode();
+			if (changeMarkerPositionMode != changeMarkerPositionModeCached && appliedNewPosition) {
+				// skip double rendering (wait forceUpdate)
+				appliedNewPosition = false;
+				return;
+			}
 			if (!forceUpdate && pointCountCached == pointsCount && textVisible == textVisibleCached
 					&& changeMarkerPositionModeCached == changeMarkerPositionMode && !mapActivityInvalidated
 					&& hiddenWptGroupCount == hiddenWptGroupCountCached) {
@@ -1688,6 +1694,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						}
 					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
+				appliedNewPosition = true;
 			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
@@ -1717,7 +1724,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onSyncDone() {
-		syncWithMarker = true;
+		if (!appliedNewPosition) {
+			syncWithMarker = true;
+		}
 	}
 
 	@Override

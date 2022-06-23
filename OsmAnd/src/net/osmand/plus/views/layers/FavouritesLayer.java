@@ -18,6 +18,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -63,6 +65,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean textVisible = false;
 	private boolean nightMode = false;
 	private boolean changeMarkerPositionMode;
+	private boolean appliedNewPosition = false;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
@@ -85,6 +88,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		favouritesHelper.addListener(this);
 		mapMarkersHelper.addSyncListener(this);
+		addMapsInitializedListener();
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -117,8 +121,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				showFavorites();
 			}
 		} else if (changeMarkerPositionMode) {
+			if (!appliedNewPosition) {
+				// cancel
+				showFavorites();
+			}
 			changeMarkerPositionMode = false;
-			showFavorites();
+			appliedNewPosition = false;
 		}
 	}
 
@@ -391,6 +399,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			favouritesHelper.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
 			favouritesHelper.lookupAddress((FavouritePoint) o);
 			result = true;
+			appliedNewPosition = true;
 		}
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
@@ -420,6 +429,29 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onSyncDone() {
 		showFavorites();
+	}
+
+	private void addMapsInitializedListener() {
+		OsmandApplication app = getApplication();
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onStart(AppInitializer init) {
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					//run after app.mapMarkersHelper.syncAllGroups()
+					if (hasMapRenderer()) {
+						showFavorites();
+					}
+				}
+			});
+		}
 	}
 }
 
