@@ -4323,4 +4323,5 @@
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="system_locale">Sistem</string>
+    <string name="search_offline_address">Oflajn prebaruvanje</string>
 </resources>
