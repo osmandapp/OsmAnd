@@ -45,6 +45,7 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
@@ -348,6 +349,10 @@ public class StreetNameWidget extends MapWidget {
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
 		if (updatedVisibility) {
+			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateTopWidgetsPanel();
+			}
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;
