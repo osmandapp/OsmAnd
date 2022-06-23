@@ -4700,13 +4700,13 @@
     <string name="transport_hazmat_yes_desc">Выберите подходящую категорию.</string>
     <string name="routing_attr_goods_restrictions_description">Учитывать права доступа для легкого коммерческого транспорта</string>
     <string name="co2_mission">Выбросы CO2</string>
-    <string name="routing_attr_motor_type_hybrid_name">Гибридный</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
     <string name="kg">кг</string>
-    <string name="routing_attr_motor_type_diesel_name">Дизельный</string>
-    <string name="routing_attr_motor_type_name">Тип двигателя</string>
-    <string name="routing_attr_motor_type_description">Для расчета CO2</string>
-    <string name="routing_attr_motor_type_petrol_name">Бензиновый</string>
-    <string name="routing_attr_motor_type_electric_name">Электрический</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизельное топливо</string>
+    <string name="routing_attr_motor_type_name">Топливо, используемое двигателем</string>
+    <string name="routing_attr_motor_type_description">Выберите тип топлива, используемый двигателем вашего автомобиля, для расчета выбросов CO2.</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_electric_name">Электричество</string>
     <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
     <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
     <string name="lang_ckb">Центральный курдский</string>
@@ -4730,4 +4730,5 @@
     <string name="marker_1st">Первый маркер</string>
     <string name="goods_delivery_desc">Транспортным средствам, перевозящим товары, может быть ограничен доступ к некоторым дорогам.</string>
     <string name="goods_delivery_desc_4">Если вес вашего автомобиля превышает 3,5 тонны, вам необходимо использовать профиль грузовика.</string>
+    <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
 </resources>
