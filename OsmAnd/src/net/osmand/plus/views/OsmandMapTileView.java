@@ -1005,7 +1005,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		// force to refresh map because image can be loaded from different threads
 		// and threads can block each other especially for sqlite images when they
 		// are inserting into db they block main thread
-		refreshMap();
+		if (mapRenderer == null) {
+			refreshMap();
+		}
 	}
 
 	// ///////////////////////////////// DRAGGING PART ///////////////////////////////////////

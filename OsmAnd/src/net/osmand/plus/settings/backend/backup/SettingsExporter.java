@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AbstractProgress;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;

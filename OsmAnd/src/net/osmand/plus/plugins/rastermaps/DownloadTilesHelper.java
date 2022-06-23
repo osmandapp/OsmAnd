@@ -118,7 +118,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 			resourceManager = app.getResourceManager();
 			tileDownloader = MapTileDownloader.getInstance(Version.getAppVersion(app));
 			tileDownloadCallback = request -> {
-				if (request != null) {
+				if (request != null && !request.error) {
 					long tileSize = request.fileToSave.length();
 					totalTilesBytes += tileSize;
 					app.runInUIThread(() -> listener.onTileDownloaded(downloadedTiles++, totalTilesBytes));
