@@ -720,7 +720,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setRoutingProfile(changedProfile.routingProfile);
 			mode.setRouteService(changedProfile.routeService);
 			mode.setIconColor(changedProfile.color);
-			mode.setCustomIconColor(changedProfile.customColor);
+			mode.updateCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 
