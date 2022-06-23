@@ -14,28 +14,28 @@
     <string name="lang_ckb">Central Kurdish</string>
     <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
-    <string name="routing_attr_motor_type_description">Select fuel type used by your vehicle motor, to calculate CO2 emission.</string>
-    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
+    <string name="routing_attr_motor_type_description">Calculate CO2 emission by selecting the fuel type your vehicle motor uses.</string>
+    <string name="routing_attr_motor_type_name">Energy source</string>
     <string name="marker_2nd">Second marker</string>
     <string name="marker_1st">First marker</string>
-    <string name="map_marker_average_speed_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
-    <string name="switch_widget_mode_desc">You can switch mode by taping on widget.</string>
-    <string name="side_marker_eta">Estimated time of arrival</string>
-    <string name="reset_all_settings_desc">Are you sure you want to reset all settings to default?</string>
-    <string name="goods_delivery_desc_4">If your vehicle weight is more than 3.5 tonnes you need to use Truck profile.</string>
-    <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
-    <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>
-    <string name="goods_delivery_desc">Vehicle transporting goods can be restricted to access some roads. </string>
-    <string name="updated_map_time">Updated: %1$s.</string>
+    <string name="map_marker_average_speed_desc">Specify a time interval to measure average speed for to estimate time of arrival.</string>
+    <string name="switch_widget_mode_desc">Tap the widget to switch mode.</string>
+    <string name="side_marker_eta">Estimated arrival time</string>
+    <string name="reset_all_settings_desc">Reset all settings?</string>
+    <string name="goods_delivery_desc_4">Use the truck profile for vehicle weight above 3.5 tonnes.</string>
+    <string name="goods_delivery_desc_3">Only for vehicles with four wheels or more, carrying goods and weighing up to 3.5 tonnes.</string>
+    <string name="goods_delivery_desc_2">Roads closed for goods delivery will be avoided. </string>
+    <string name="goods_delivery_desc">Vehicles transporting goods can be denied access some roads. </string>
+    <string name="updated_map_time">Updated %1$s.</string>
     <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
-    <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
-    <string name="next_live_update_time">Next update: in %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour.</string>
-    <string name="live_update_frequency_day_variant">Map updates will be checked every day.</string>
-    <string name="live_update_frequency_week_variant">Map updates will be checked every week.</string>
+    <string name="next_live_update_date_and_time">Next update %1$s in %2$s.</string>
+    <string name="next_live_update_time">Next update in %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Checking for map updates every hour.</string>
+    <string name="live_update_frequency_day_variant">Checking for map updates every day.</string>
+    <string name="live_update_frequency_week_variant">Checking for map updates every week.</string>
     <string name="altitude_correction">Altitude correction</string>
-    <string name="no_altitude_data_desc">You can attach your track to the roads to get %1$s data or calculate it online.</string>
-    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on Satellite Imagery and digital elevation models. It could vary from device recorded altitude and could be used as altitude correction.</string>
+    <string name="no_altitude_data_desc">Attach your track to available roads to get %1$s data or calculate it online.</string>
+    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on satellite imagery and digital elevation models. Can differ from device recorded altitude, and can used for altitude correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
@@ -46,20 +46,20 @@
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
-    <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
-    <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden. </string>
+    <string name="transport_hazmat_yes_desc">Choose a proper category.</string>
+    <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden.</string>
     <string name="transport_hazmat_title">Transporting of hazardous materials</string>
     <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
     <string name="average_speed_skip_stops">Take stops into account</string>
-    <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
-    <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
+    <string name="average_speed_time_interval_desc">Specify a time interval to measure average speed for.</string>
+    <string name="average_speed_widget_desc">Shows the average speed of the current trip.</string>
     <string name="map_widget_average_speed">Average speed</string>
     <string name="shared_string_mode">Mode</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Switch mode by tapping the widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tap the widget to switch mode.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>
     <string name="map_widget_time_to_intermediate">Time to intermediate</string>
     <string name="map_widget_distance_to_intermediate">Distance to intermediate</string>
-    <string name="radius_ruler_mode_desc">Tapping the widget switches to \“Radius ruler\” mode.</string>
+    <string name="radius_ruler_mode_desc">Tap the widget to switch to \“Radius ruler\” mode.</string>
     <string name="explore_plans">Explore Plans</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
@@ -243,22 +243,22 @@
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>
     <string name="waypoint_template">Waypoint template</string>
-    <string name="predefined_waypoint_appearance_description">Tapping this action will auto-save the waypoint with predefined parameters.</string>
-    <string name="always_ask_waypoint_appearance_description">Tapping this action will open the \"Add waypoint\" screen, where you can change name and appearance.</string>
+    <string name="predefined_waypoint_appearance_description">Tap this action to auto-save the waypoint with predefined parameters.</string>
+    <string name="always_ask_waypoint_appearance_description">Tap this action to open the “Add waypoint” screen, where the name and appearance can be changed.</string>
     <string name="waypoint_appearance">Waypoint appearance</string>
-    <string name="track_file_description">Tapping this action will show a selection dialogue of available tracks.</string>
+    <string name="track_file_description">Tap this action to show available tracks to select.</string>
     <string name="track_file">Track file</string>
     <string name="turn_arrows">Turn Arrows</string>
     <string name="turn_arrows_descr">Select whether turn arrows are indicated on the route line.</string>
     <string name="shared_string_size">Size</string>
     <string name="created_on">Created on</string>
-    <string name="use_routing_fallback">Offline routing fallback</string>
-    <string name="use_routing_fallback_description">Use offline routing while online routing is not available.</string>
+    <string name="use_routing_fallback">Routing fallback</string>
+    <string name="use_routing_fallback_description">Offline routing when online routing is unavailable.</string>
     <string name="gps_filter_precision">GPS precision</string>
     <string name="shared_string_precision">Precision</string>
-    <string name="shared_string_statistics">Statistics</string>
+    <string name="shared_string_statistics">Stats</string>
     <string name="gps_filter_hdop_desc">Set the maximum accepted value for HDOP.\nPoints with higher value will be hidden.</string>
-    <string name="gps_filter_speed_altitude_desc">Only track points matching the set interval will appear on the chart and map, the rest will be hidden.</string>
+    <string name="gps_filter_speed_altitude_desc">Only track points matching the set interval will appear on the chart and map. (The rest will be hidden.)</string>
     <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points not at least this distance away from the last visible point will be hidden.\nBe aware that high thresholds may oversimplify the track geometry.</string>
     <string name="distance_between_points">Distance between points</string>
     <string name="gps_filter_smoothing">Smoothing</string>
@@ -640,7 +640,7 @@
     <string name="specify_color_for_map_mode">Specify color for map mode %1$s.</string>
     <string name="shared_string_route_line">Route line</string>
     <string name="customize_route_line">Customize route line</string>
-    <string name="trip_recording_show_start_dialog_setting">If disabled, recording will start immediately after tapping the widget or menu item, skipping the confirmation dialog.</string>
+    <string name="trip_recording_show_start_dialog_setting">If off, tap the widget or menu item to start recording immediately, without a confirmation.</string>
     <string name="show_start_dialog">Show start dialog</string>
     <string name="lost_data_warning">All unsaved data will be lost.</string>
     <string name="trip_recording_save_and_continue">Save and continue</string>
@@ -1136,7 +1136,7 @@
     <string name="replace_point_descr">Replace another point with this.</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">Items can only be moved within this category.</string>
-    <string name="additional_actions_descr">Access these actions by tapping the “%1$s” button.</string>
+    <string name="additional_actions_descr">The “%1$s” button to access these actions.</string>
     <string name="main_actions">Main actions</string>
     <string name="main_actions_descr">Only has four buttons.</string>
     <string name="reset_items_descr">Hiding settings resets them to their original state.</string>
@@ -1304,12 +1304,12 @@
     <string name="select_map_icon_descr">Icon shown at rest.</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
-    <string name="reset_confirmation_descr">Tapping %1$s discards all your changes.</string>
-    <string name="reset_all_profile_settings_descr">Reset all profile settings to installation defaults.</string>
+    <string name="reset_confirmation_descr">Tap %1$s to discard all your changes.</string>
+    <string name="reset_all_profile_settings_descr">Restores the installation defaults.</string>
     <string name="reset_all_profile_settings">Reset all profile settings?</string>
     <string name="select_navigation_icon">Position icon while moving</string>
     <string name="select_map_icon">Position icon at rest</string>
-    <string name="delete_profiles_descr">Tapping \'Apply\' deletes removed profiles permanently.</string>
+    <string name="delete_profiles_descr">Removed profiles permanently are after taping \'Apply\'.</string>
     <string name="master_profile">Master profile</string>
     <string name="select_color">Select color</string>
     <string name="rendering_value_thick_name">Thick</string>
@@ -2211,7 +2211,7 @@
     <string name="fonts_header">Map fonts</string>
     <string name="right_side_navigation">Right-hand traffic</string>
     <string name="driving_region_automatic">Automatic</string>
-    <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
+    <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage stats</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
     <string name="do_not_show_startup_messages_desc">Don\'t show app discounts &amp; special local event messages.</string>
@@ -2949,7 +2949,7 @@
     <string name="osmand_parking_plugin_description">Lets you record where your car is parked, including how much parking time remains.\n
     Both location and time are visible on the dashboard as well as in a map widget. An alarm reminder can be added to the Android calendar.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
-    <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
+    <string name="osmand_distance_planning_plugin_description">Tap the map to create paths on the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. Save the result as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
@@ -3139,7 +3139,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
     <string name="no_index_file_to_download">Downloads not found, please check your connection to the Internet.</string>
     <string name="select_index_file_to_download">Nothing was found, but you can make it yourself (see https://osmand.net).</string>
-    <string name="none_selected_gpx">Specify a GPX file by long-tapping first.</string>
+    <string name="none_selected_gpx">Long-tap to specify a GPX file first.</string>
     <string name="local_index_select_gpx_file">Select a track</string>
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_category">Sort by category</string>
@@ -3460,7 +3460,7 @@
     <string name="av_settings">Audio/video settings</string>
     <string name="recording_error">Recording failed</string>
     <string name="recording_camera_not_available">Camera not available</string>
-    <string name="recording_is_recorded">Recording audio/video. Stop by tapping the AV widget.</string>
+    <string name="recording_is_recorded">Recording audio/video… Tap the AV widget to stop it.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Delete this item?</string>
@@ -3584,7 +3584,7 @@
         • Choose between offline (no roaming charges when you are abroad) or online (faster) mode\n
         • Turn-by-turn voice guidance leads you along the way (recorded and synthesized voices)\n
         • The route gets rebuilt whenever you deviate from it\n
-        • Lane guidance, street names, and estimated time of arrival will help along the way\n
+        • Lane guidance, street names, and estimated arrival time will help along the way\n
         • To make your trip safer, day/night mode switches automatically\n
         • Show speed limits, and get reminders if you exceed it\n
         • Map zoom adjusts to your speed\n
@@ -3679,7 +3679,7 @@
         Navigation\n
         • Works online (fast) or offline (no roaming charges when you are abroad)\n
         • Turn-by-turn voice guidance (recorded and synthesized voices)\n
-        • Optional lane guidance, street name display, and estimated time of arrival\n
+        • Optional lane guidance, street name display, and estimated arrival time\n
         • Supports intermediate points on your itinerary\n
         • Automatic re-routing whenever you deviate from the route\n
         • Search for places by address, by type (e.g: Restaurant, hotel, gas station, museum), or by geographical coordinates\n
@@ -4655,7 +4655,7 @@
     <string name="quick_action_map_source_action">Add map source</string>
     <string name="quick_action_map_source_switch">Map source changed to \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Change button position</string>
-    <string name="quick_action_btn_tutorial_descr">Long-tapping and dragging the button changes its position on the screen.</string>
+    <string name="quick_action_btn_tutorial_descr">Long-tap and drag the button to change its position on the screen.</string>
     <string name="shared_string_action_name">Action name</string>
     <string name="mappilary_no_internet_desc">Photos from Mapillary are only available online.</string>
     <string name="retry">Retry</string>
