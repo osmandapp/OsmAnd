@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Motorisation</string>
-    <string name="routing_attr_motor_type_description">Pour les calculs de CO₂</string>
+    <string name="routing_attr_motor_type_name">Carburant</string>
+    <string name="routing_attr_motor_type_description">Sélectionnez le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
@@ -4718,4 +4718,5 @@
     <string name="goods_delivery_desc_2">Les routes qui sont fermées à la livraison de marchandises seront évitées.</string>
     <string name="reset_all_settings_desc">Êtes-vous certain de vouloir réinitialiser tous les paramètres à leurs valeurs par défaut \?</string>
     <string name="goods_delivery_desc_3">S\'applique uniquement aux véhicules ayant au moins quatre roues, transportant des marchandises et dont le poids ne dépasse pas 3,5 tonnes.</string>
+    <string name="routing_attr_goods_restrictions_name">Livraison de marchandises</string>
 </resources>
