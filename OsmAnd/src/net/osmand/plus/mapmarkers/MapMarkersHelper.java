@@ -145,14 +145,14 @@ public class MapMarkersHelper {
 
 		if (mapMarkersGroups.size() > 0) {
 			for (OnGroupSyncedListener listener : syncListeners) {
-				listener.onSyncStarted();
+				ctx.runInUIThread(listener::onSyncStarted);
 			}
 			for (MapMarkersGroup group : mapMarkersGroups) {
 				updateGroup(group);
 				runGroupSynchronization(group);
 			}
 			for (OnGroupSyncedListener listener : syncListeners) {
-				listener.onSyncDone();
+				ctx.runInUIThread(listener::onSyncDone);
 			}
 		}
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
