@@ -404,7 +404,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					}
 
 					@Override
-					public void onFavoritePropertiesUpdated() {
+					public void onFavoritePropertiesUpdated(boolean syncWithMarker) {
 					}
 				});
 			}

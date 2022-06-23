@@ -134,8 +134,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
-	public MapMarkersLayer(@NonNull Context context) {
+	public MapMarkersLayer(@NonNull Context context, int baseOrder) {
 		super(context);
+		this.baseOrder = baseOrder;
 	}
 
 	public MarkersWidgetsHelper getMarkersWidgetsHelper() {

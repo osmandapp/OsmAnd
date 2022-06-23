@@ -10,5 +10,5 @@ public interface FavoritesListener {
 
 	void onFavoriteDataUpdated(@NonNull FavouritePoint point);
 
-	void onFavoritePropertiesUpdated();
+	void onFavoritePropertiesUpdated(boolean syncWithMarker);
 }

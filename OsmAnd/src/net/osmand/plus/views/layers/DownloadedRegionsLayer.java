@@ -144,8 +144,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 	}
 
-	public DownloadedRegionsLayer(@NonNull Context context) {
+	public DownloadedRegionsLayer(@NonNull Context context, int baseOrder) {
 		super(context);
+		this.baseOrder = baseOrder;
 	}
 
 	@Override
