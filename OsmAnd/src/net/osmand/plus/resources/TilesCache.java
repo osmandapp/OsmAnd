@@ -176,7 +176,7 @@ public abstract class TilesCache<T> {
 		return get(tileId, timestamp);
 	}
 
-	protected synchronized T getRequestedTile(TileLoadDownloadRequest req) {
+	protected T getRequestedTile(TileLoadDownloadRequest req) {
 		if (req.tileId == null || req.dirWithTiles == null) {
 			return null;
 		}
@@ -199,6 +199,7 @@ public abstract class TilesCache<T> {
 			}
 
 			T tileObject = getTileObject(req);
+
 			if (tileObject != null) {
 				put(req.tileId, tileObject, req.timestamp);
 				if (log.isDebugEnabled()) {

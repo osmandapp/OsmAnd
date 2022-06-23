@@ -27,7 +27,7 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 		maxCacheSize = 28;
 	}
 
-	public synchronized long getTileSize(@NonNull ITileSource tileSource, int zoom) {
+	public long getTileSize(@NonNull ITileSource tileSource, int zoom) {
 		Map<Integer, Long> tilesSizes = mapsTilesSizes.get(tileSource.getName());
 		if (tilesSizes == null) {
 			return 0;
@@ -88,7 +88,7 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 		return bitmap;
 	}
 
-	private synchronized void updateTilesSizes(@NonNull String mapName, int zoom, long tileSize) {
+	private void updateTilesSizes(@NonNull String mapName, int zoom, long tileSize) {
 		Map<Integer, Long> tilesSizes = mapsTilesSizes.get(mapName);
 		if (tilesSizes == null) {
 			tilesSizes = new HashMap<>();
