@@ -3877,7 +3877,7 @@
     <string name="routing_engine_vehicle_type_cycling_regular">Vanlig sykling</string>
     <string name="message_server_error">Tjenerfeil: %1$s</string>
     <string name="message_name_is_already_exists">Navnet finnes allerede</string>
-    <string name="analyze_by_intervals">Analyser ved intervaller (delt intervall)</string>
+    <string name="analyze_by_intervals">Analyser etter intervaller</string>
     <string name="announcement_time_off_route">Ruteavvik</string>
     <string name="routing_engine_vehicle_type_hgv">Stor lastebil</string>
     <string name="delete_online_routing_engine">Slett denne nettbaserte rutingsmotoren\?</string>
@@ -4685,4 +4685,7 @@
     <string name="map_widget_average_speed">Gjennomsnittsfart</string>
     <string name="average_speed_skip_stops_desc">Hastighet mindre enn %1$s vil ikke bli medregnet, og ikke ha innvirkning på gjennomsnittsfarten.</string>
     <string name="import_as_one_track">Importer som ett spor</string>
+    <string name="altitude_correction">Høydekorreksjon</string>
+    <string name="calculate_online_altitude_descr">Beregn høyde på nett på OsmAnd-tjenere basert på satellittbilder og digitale høydemodeller. Det kan variere fra enhetens registrerte høyde og kan brukes som høydekorreksjon.</string>
+    <string name="no_altitude_data_desc">Du kan feste sporet ditt til veiene for å få %1$s-data eller beregne det på nettet.</string>
 </resources>
