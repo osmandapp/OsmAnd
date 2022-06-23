@@ -130,7 +130,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				}
 
 				@Override
-				public void onFavoritePropertiesUpdated() {
+				public void onFavoritePropertiesUpdated(boolean syncWithMarker) {
 				}
 			});
 		}

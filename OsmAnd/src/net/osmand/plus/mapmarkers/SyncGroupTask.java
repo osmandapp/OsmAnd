@@ -10,7 +10,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.Set;
 
-class SyncGroupTask extends AsyncTask<Void, Void, Void> {
+public class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
 	private final OsmandApplication app;
 	private final MapMarkersGroup group;
