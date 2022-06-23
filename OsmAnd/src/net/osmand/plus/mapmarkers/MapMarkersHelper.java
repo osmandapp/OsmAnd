@@ -144,16 +144,15 @@ public class MapMarkersHelper {
 		mapMarkersGroups = new ArrayList<>(pair.first.values());
 
 		if (mapMarkersGroups.size() > 0) {
-			for (OnGroupSyncedListener listener : syncListeners) {
-				ctx.runInUIThread(listener::onSyncStarted);
-			}
 			for (MapMarkersGroup group : mapMarkersGroups) {
 				updateGroup(group);
 				runGroupSynchronization(group);
 			}
-			for (OnGroupSyncedListener listener : syncListeners) {
-				ctx.runInUIThread(listener::onSyncDone);
-			}
+			ctx.runInUIThread(() -> {
+				for (OnGroupSyncedListener listener : syncListeners) {
+					listener.onSyncDone();
+				}
+			});
 		}
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		sortGroups();
