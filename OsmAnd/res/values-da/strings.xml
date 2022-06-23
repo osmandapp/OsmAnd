@@ -416,7 +416,7 @@
     <string name="search_position_current_location_found">Positionen (fundet)</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
-    <string name="shared_string_undefined">Ikke defineret</string>
+    <string name="shared_string_undefined">Udefineret</string>
     <string name="search_position_map_view">Nuværende kortcenter</string>
     <string name="select_search_position">Udgangspunkt:</string>
     <string name="context_menu_item_search">Søg i nærheden</string>
@@ -4243,7 +4243,7 @@
     <string name="online_routing_engine">Online ruteberegningsmotor</string>
     <string name="online_routing_engines">Online ruteberegningsmotorer</string>
     <string name="select_nav_profile_dialog_message">\'Navigationstype\' afgør, hvordan ruterne beregnes med tilgængelige offline- og online ruteberegningsmotorer.</string>
-    <string name="in_grace_period">I betalingsfri periode</string>
+    <string name="in_grace_period">I henstandsperiode</string>
     <string name="loading_list_of_routing_services">Indlæser liste over tilgængelige ruteberegningstjenester</string>
     <string name="gpx_parse_error">OsmAnd GPX er ikke korrekt dannet, kontakt venligst supportteamet for at undersøge det nærmere.</string>
     <string name="empty_state_my_tracks_desc">Importer eller optag sporfiler</string>
@@ -4708,9 +4708,9 @@
     <string name="co2_mission">CO2-udledning</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_name">Motortype</string>
-    <string name="routing_attr_motor_type_description">Til CO2-beregning</string>
-    <string name="lang_ckb">Sorani</string>
+    <string name="routing_attr_motor_type_name">Brændstof anvendt af motor</string>
+    <string name="routing_attr_motor_type_description">Vælg den brændstoftype, der anvendes af din bilmotor, for at beregne CO2-udledning.</string>
+    <string name="lang_ckb">Centralkurdisk</string>
     <string name="live_update_frequency_hour_variant">Der tjekkes for kortopdateringer hver time.</string>
     <string name="calculate_online_altitude_descr">Beregn højden online på OsmAnd-servere baseret på satellitbilleder og digitale højdemodeller. Den kan variere fra den højde, der registreres af enheden, og kan bruges som højdekorrektion.</string>
     <string name="updated_map_time">Opdateret: %1$s.</string>
@@ -4724,11 +4724,12 @@
     <string name="marker_2nd">Anden markør</string>
     <string name="switch_widget_mode_desc">Du kan skifte tilstand ved at trykke på modul.</string>
     <string name="goods_delivery_desc_4">Hvis dit køretøj vejer mere end 3,5 tons, skal du bruge lastbil-profilen.</string>
-    <string name="goods_delivery_desc_2">Veje, der er lukket for godslevering, vil blive undgået.</string>
+    <string name="goods_delivery_desc_2">Veje, der er lukket for varekørsel, vil blive undgået.</string>
     <string name="marker_1st">Første markør</string>
     <string name="map_marker_average_speed_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
     <string name="reset_all_settings_desc">Er du sikker på, at du vil nulstille alle indstillinger til standard\?</string>
     <string name="side_marker_eta">Forventet ankomsttidspunkt</string>
-    <string name="goods_delivery_desc_3">Gælder kun for godstransporter, som har mindst fire hjul og vejer højst 3,5 tons.</string>
-    <string name="goods_delivery_desc">Køretøjer, der transporterer gods, kan få begrænset adgang til visse veje.</string>
+    <string name="goods_delivery_desc_3">Gælder kun for køretøjer, der transporterer gods, som har mindst fire hjul og vejer højst 3,5 tons.</string>
+    <string name="goods_delivery_desc">Køretøjer, der transporterer varer, kan få begrænset adgang til visse veje.</string>
+    <string name="routing_attr_goods_restrictions_name">Vareleverance</string>
 </resources>
