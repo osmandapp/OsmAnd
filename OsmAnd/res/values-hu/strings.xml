@@ -4694,7 +4694,7 @@
     <string name="routing_attr_motor_type_electric_name">Elektromos</string>
     <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
-    <string name="routing_attr_motor_type_description">A járműve által használt üzemanyag típusának kiválasztása a CO₂-kibocsátás számításához</string>
+    <string name="routing_attr_motor_type_description">A járműve által használt üzemanyag típusának kiválasztása a CO₂-kibocsátás számításához.</string>
     <string name="routing_attr_motor_type_name">A motor üzemanyag típusa</string>
     <string name="lang_ckb">Közép-kurd</string>
     <string name="live_update_frequency_day_variant">A térképfrissítéseket naponta fogja keresni.</string>
