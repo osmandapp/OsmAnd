@@ -25,6 +25,7 @@ import net.osmand.core.jni.IBillboardMapSymbol;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
+import net.osmand.core.jni.MapSymbol;
 import net.osmand.core.jni.MapSymbolInformationList;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
 import net.osmand.core.jni.ObfMapObject;
@@ -32,6 +33,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.RasterMapSymbol;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
@@ -231,7 +233,9 @@ class MapSelectionHelper {
 				} else if (isRoute) {
 					addRoute(result, tileBox, point);
 				} else {
-					addRenderedObject(result, renderedObject, searchLatLon);
+					if (!addAmenity(result, renderedObject, searchLatLon)) {
+						result.selectedObjects.put(renderedObject, null);
+					}
 				}
 			}
 		}
@@ -303,16 +307,9 @@ class MapSelectionHelper {
 								if (isRoute) {
 									addRoute(result, tileBox, point);
 								} else {
-									List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
-									names.add(obfMapObject.getCaptionInNativeLanguage());
-									long id = obfMapObject.getId().getId().longValue() >> 7;
-									amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
-									if (amenity != null && mapObject.getPoints31().size() > 1) {
-										QVectorPointI points31 = mapObject.getPoints31();
-										for (int k = 0; k < points31.size(); k++) {
-											amenity.getX().add(points31.get(k).getX());
-											amenity.getY().add(points31.get(k).getY());
-										}
+									amenity = getAmenity(result.objectLatLon, obfMapObject);
+									if (amenity == null) {
+										addRenderedObject(result, symbolInfo, obfMapObject);
 									}
 								}
 							}
@@ -324,6 +321,48 @@ class MapSelectionHelper {
 				}
 			}
 		}
+	}
+
+	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
+	                               @NonNull ObfMapObject obfMapObject) {
+		RasterMapSymbol rasterMapSymbol;
+		try {
+			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+		} catch (Exception eRasterMapSymbol) {
+			rasterMapSymbol = null;
+		}
+		if (rasterMapSymbol != null) {
+			RenderedObject renderedObject = new RenderedObject();
+			renderedObject.setId(obfMapObject.getId().getId().longValue());
+			QVectorPointI points31 = obfMapObject.getPoints31();
+			for (int k = 0; k < points31.size(); k++) {
+				PointI pointI = points31.get(k);
+				renderedObject.addLocation(pointI.getX(), pointI.getY());
+			}
+			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
+				renderedObject.setName(rasterMapSymbol.getContent());
+			}
+			result.selectedObjects.put(renderedObject, null);
+		}
+	}
+
+	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {
+		Amenity amenity;
+		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
+		String caption = obfMapObject.getCaptionInNativeLanguage();
+		if (!caption.isEmpty()) {
+			names.add(caption);
+		}
+		long id = obfMapObject.getId().getId().longValue() >> 7;
+		amenity = findAmenity(app, latLon, names, id, AMENITY_SEARCH_RADIUS);
+		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
+			QVectorPointI points31 = obfMapObject.getPoints31();
+			for (int k = 0; k < points31.size(); k++) {
+				amenity.getX().add(points31.get(k).getX());
+				amenity.getY().add(points31.get(k).getY());
+			}
+		}
+		return amenity;
 	}
 
 	private void addTravelGpx(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @Nullable String filter) {
@@ -400,7 +439,7 @@ class MapSelectionHelper {
 		return true;
 	}
 
-	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
+	private boolean addAmenity(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
 		Amenity amenity = findAmenity(app, searchLatLon, object.getOriginalNames(), object.getId() >> 7, AMENITY_SEARCH_RADIUS);
 		if (amenity != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
@@ -410,9 +449,9 @@ class MapSelectionHelper {
 			if (isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
 				result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
 			}
-		} else {
-			result.selectedObjects.put(object, null);
+			return true;
 		}
+		return false;
 	}
 
 	private boolean isUniqueAmenity(@NonNull Set<Object> set, @NonNull Amenity amenity) {

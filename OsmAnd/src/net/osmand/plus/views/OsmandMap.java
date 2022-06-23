@@ -83,7 +83,6 @@ public class OsmandMap implements NavigationSessionListener {
 		mapView = new OsmandMapTileView(app, w, h);
 		mapLayers = new MapLayers(app);
 
-		// to not let it gc
 		downloaderCallback = request -> {
 			if (request != null && !request.error && request.fileToSave != null) {
 				ResourceManager mgr = app.getResourceManager();
