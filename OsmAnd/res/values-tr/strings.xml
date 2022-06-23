@@ -4701,9 +4701,9 @@
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Dizel</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrit</string>
-    <string name="routing_attr_motor_type_name">Motor türü</string>
+    <string name="routing_attr_motor_type_name">Motorun kullandığı yakıt</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
-    <string name="routing_attr_motor_type_description">CO2 hesaplaması için</string>
+    <string name="routing_attr_motor_type_description">CO2 emisyonunu hesaplamak için araç motorunuz tarafından kullanılan yakıt türünü seçin.</string>
     <string name="lang_ckb">Orta Kürtçe</string>
     <string name="live_update_frequency_hour_variant">Harita güncellemeleri her saat denetlenecek.</string>
     <string name="live_update_frequency_week_variant">Harita güncellemeleri her hafta denetlenecek.</string>
@@ -4725,4 +4725,5 @@
     <string name="goods_delivery_desc">Yük taşıyan araçların bazı yollara erişimi kısıtlanabilir.</string>
     <string name="goods_delivery_desc_2">Yük teslimatı için kapalı olan yollardan kaçınılacaktır.</string>
     <string name="goods_delivery_desc_3">Yalnızca en az dört tekerleği olan ve ağırlığı 3,5 tonu geçmeyen yük taşıyan araçlar için geçerlidir.</string>
+    <string name="routing_attr_goods_restrictions_name">Yük teslimatı</string>
 </resources>
