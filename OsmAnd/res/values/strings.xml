@@ -11,8 +11,6 @@
 	Thx - Hardy
 -->
 
-    <string name="rendering_attr_depthContourWidth_name">Depth contour lines width</string>
-    <string name="rendering_attr_depthContourWidth_description">Depth contour lines width</string>
     <string name="lang_ckb">Central Kurdish</string>
     <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
