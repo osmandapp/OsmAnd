@@ -6,16 +6,20 @@ import net.osmand.aidl.mapwidget.AMapWidget;
 
 public class AidlMapWidgetWrapper {
 
-	private String id;
-	private String menuIconName;
-	private String menuTitle;
-	private String lightIconName;
-	private String darkIconName;
-	private String text;
-	private String description;
-	private int order;
-	private Intent intentOnClick;
+	private final String id;
+	private final String menuIconName;
+	private final String menuTitle;
+	private final String lightIconName;
+	private final String darkIconName;
+	private final String text;
+	private final String description;
+	private final int order;
+	private final boolean rightPanelByDefault;
+	private final Intent intentOnClick;
 
+	/**
+	 * Old API constructor
+	 */
 	public AidlMapWidgetWrapper(AMapWidget aMapWidget) {
 		this.id = aMapWidget.getId();
 		this.menuIconName = aMapWidget.getMenuIconName();
@@ -25,9 +29,13 @@ public class AidlMapWidgetWrapper {
 		this.text = aMapWidget.getText();
 		this.description = aMapWidget.getDescription();
 		this.order = aMapWidget.getOrder();
+		this.rightPanelByDefault = true;
 		this.intentOnClick = aMapWidget.getIntentOnClick();
 	}
 
+	/**
+	 * Up to date API constructor
+	 */
 	public AidlMapWidgetWrapper(net.osmand.aidlapi.mapwidget.AMapWidget aMapWidget) {
 		this.id = aMapWidget.getId();
 		this.menuIconName = aMapWidget.getMenuIconName();
@@ -37,6 +45,7 @@ public class AidlMapWidgetWrapper {
 		this.text = aMapWidget.getText();
 		this.description = aMapWidget.getDescription();
 		this.order = aMapWidget.getOrder();
+		this.rightPanelByDefault = aMapWidget.isRightPanelByDefault();
 		this.intentOnClick = aMapWidget.getIntentOnClick();
 	}
 
@@ -70,6 +79,10 @@ public class AidlMapWidgetWrapper {
 
 	public int getOrder() {
 		return order;
+	}
+
+	public boolean isRightPanelByDefault() {
+		return rightPanelByDefault;
 	}
 
 	public Intent getIntentOnClick() {

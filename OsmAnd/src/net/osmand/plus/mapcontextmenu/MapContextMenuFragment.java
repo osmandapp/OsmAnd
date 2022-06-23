@@ -1,10 +1,15 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -73,6 +78,7 @@ import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
@@ -91,10 +97,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
@@ -172,35 +174,33 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
-			mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
-				public void handleOnBackPressed() {
-					if (menu.isVisible() && menu.isClosable()) {
-						if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
-							menu.openMenuHeaderOnly();
-						} else {
-							menu.close();
-						}
+		MapActivity mapActivity = requireMapActivity();
+
+		menu = mapActivity.getContextMenu();
+		boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
+		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
+			public void handleOnBackPressed() {
+				if (menu.isVisible() && menu.isClosable()) {
+					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
+						menu.openMenuHeaderOnly();
+					} else {
+						menu.close();
 					}
 				}
-			});
-		}
+			}
+		});
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
-
-		MapActivity mapActivity = getMapActivity();
-		menu = mapActivity != null ? mapActivity.getContextMenu() : null;
-		if (menu == null || menu.getLatLon() == null) {
+		if (menu.getLatLon() == null) {
 			return null;
 		}
 
 		processScreenHeight(container);
 
+		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 
@@ -252,10 +252,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				origMarkerX = box.getCenterPixelX();
 				origMarkerY = box.getCenterPixelY();
 			} else {
-				double markerLat = latLon.getLatitude();
-				double markerLon = latLon.getLongitude();
-				origMarkerX = (int) box.getPixXFromLatLon(markerLat, markerLon);
-				origMarkerY = (int) box.getPixYFromLatLon(markerLat, markerLon);
+				PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
+				origMarkerX = (int) pixel.x;
+				origMarkerY = (int) pixel.y;
 			}
 		} else {
 			mapCenter = menu.getMapCenter();
@@ -979,10 +978,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void setCustomMapRatio() {
 		LatLon latLon = menu.getLatLon();
 		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-		float px = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-		float py = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-		float ratioX = px / tb.getPixWidth();
-		float ratioY = py / tb.getPixHeight();
+		PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+		float ratioX = pixel.x / tb.getPixWidth();
+		float ratioY = pixel.y / tb.getPixHeight();
 		map.setCustomMapRatio(ratioX, ratioY);
 		map.setLatLon(latLon.getLatitude(), latLon.getLongitude());
 	}
@@ -992,7 +990,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (mapActivity != null) {
 			OsmandMap osmandMap = mapActivity.getMyApplication().getOsmandMap();
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
+			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (!containsLatLon) {
 				restoreCustomMapRatio();
 			}
@@ -1011,7 +1009,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
+			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (containsLatLon) {
 				setCustomMapRatio();
 			} else {
@@ -2196,7 +2194,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
-									   final boolean centered) {
+	                                   final boolean centered) {
 		if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
 			return false;
 		}
@@ -2266,6 +2264,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Nullable
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return (MapActivity) requireActivity();
 	}
 
 	private int dpToPx(float dp) {

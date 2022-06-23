@@ -17,6 +17,8 @@ public class RotatedTileBox {
 	private int cy;
 	private int pixWidth;
 	private int pixHeight;
+	private float ratiocx;
+	private float ratiocy;
 
 	// derived
 	// all geometry math is done in tileX, tileY of phisycal given zoom
@@ -50,6 +52,8 @@ public class RotatedTileBox {
 		this.density = r.density;
 		this.cx = r.cx;
 		this.cy = r.cy;
+		this.ratiocx = r.ratiocx;
+		this.ratiocy = r.ratiocy;
 		copyDerivedFields(r);
 	}
 
@@ -192,10 +196,10 @@ public class RotatedTileBox {
 	}
 	
 	private double alignTile(double tile) {
-		if(tile < 0) {
+		if (tile < 0) {
 			return 0;
 		}
-		if(tile >= MapUtils.getPowZoom(zoom)) {
+		if (tile >= MapUtils.getPowZoom(zoom)) {
 			return MapUtils.getPowZoom(zoom) - .000001;
 		}
 		return tile;
@@ -352,6 +356,8 @@ public class RotatedTileBox {
 		this.pixWidth = width;
 		this.cx = (int) (pixWidth * ratiocx);
 		this.cy = (int) (pixHeight * ratiocy);
+		this.ratiocx = ratiocx;
+		this.ratiocy = ratiocy;
 		calculateDerivedFields();
 	}
 
@@ -383,7 +389,13 @@ public class RotatedTileBox {
 	public void setCenterLocation(float ratiocx, float ratiocy) {
 		this.cx = (int) (pixWidth * ratiocx);
 		this.cy = (int) (pixHeight * ratiocy);
+		this.ratiocx = ratiocx;
+		this.ratiocy = ratiocy;
 		calculateDerivedFields();
+	}
+
+	public boolean isCenterShifted() {
+		return ratiocx != 0.5f || ratiocy != 0.5f;
 	}
 
 	public LatLon getLeftTopLatLon() {
@@ -549,6 +561,8 @@ public class RotatedTileBox {
 			tb.pixHeight = pixHeight;
 			tb.cx = (int) (pixWidth * centerX);
 			tb.cy = (int) (pixHeight * centerY);
+			tb.ratiocx = centerX;
+			tb.ratiocy = centerY;
 			pixelDimensionsSet = true;
 			return this;
 		}

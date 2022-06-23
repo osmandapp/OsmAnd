@@ -42,6 +42,7 @@ public abstract class MultiColoringGeometryWay
 
 	protected int customColor;
 	protected float customWidth;
+	protected float[] dashPattern;
 	@NonNull
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
@@ -56,6 +57,13 @@ public abstract class MultiColoringGeometryWay
 	protected void updateStylesWidth(@Nullable Float newWidth) {
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.width = newWidth;
+		}
+		resetSymbolProviders();
+	}
+
+	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
+		for (GeometryWayStyle<?> style : styleMap.values()) {
+			style.dashPattern = dashPattern;
 		}
 		resetSymbolProviders();
 	}
@@ -95,20 +103,16 @@ public abstract class MultiColoringGeometryWay
 			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
 			return;
 		}
-
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-
 		for (int i = 0; i < colors.size(); ) {
 			int color = colors.get(i);
 			GeometrySolidWayStyle<?> style = getSolidWayStyle(color);
 			styleMap.put(i, style);
-
 			i++;
 			while (i < colors.size() && colors.get(i) == color) {
 				i++;
 			}
 		}
-
 		updateWay(locations, styleMap, tileBox);
 	}
 

@@ -1,8 +1,21 @@
 package net.osmand.plus.auto;
 
-import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
-
 import android.text.SpannableString;
+
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
@@ -21,18 +34,7 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.views.PointImageDrawable;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchResult;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import java.util.List;
+import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
 
 /**
  * Screen for showing a list of favorite places.
@@ -58,7 +60,7 @@ public final class FavoritesScreen extends Screen {
 	@Override
 	public Template onGetTemplate() {
 		ItemList.Builder listBuilder = new ItemList.Builder();
-		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		OsmandApplication app = getApp();
 		LatLon location = app.getSettings().getLastKnownMapLocation();
 		for (FavouritePoint point : getFavorites()) {
 			String title = point.getDisplayName(app);
@@ -106,13 +108,18 @@ public final class FavoritesScreen extends Screen {
 
 	@NonNull
 	private List<FavouritePoint> getFavorites() {
-		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
-		return app.getFavoritesHelper().getFavouritePoints();
+		List<FavouritePoint> favouritePoints = new ArrayList<>(getApp().getFavoritesHelper().getFavouritePoints());
+		Collections.sort(favouritePoints, (left, right) -> Long.compare(right.getTimestamp(), left.getTimestamp()));
+		return favouritePoints;
 	}
 
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
-		app.getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
 		finish();
+	}
+
+	@NonNull
+	private OsmandApplication getApp() {
+		return ((OsmandApplication) getCarContext().getApplicationContext());
 	}
 }

@@ -1000,7 +1000,6 @@
     <string name="max_speed_none">არა</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="local_indexes_cat_srtm">კონტურული ხაზები</string>
-    <string name="av_def_action_choose">მოთხოვნისას\?</string>
     <string name="av_use_external_camera_descr">ფოტოებისათვის სისტემური აპლიკაციის გამოყენება.</string>
     <string name="av_use_external_camera">კამერის აპლიკაციის გამოყენება</string>
     <string name="osmand_play_title_30_chars">OsmAnd რუკები &amp; ნავიგაცია</string>
@@ -1609,7 +1608,7 @@
     <string name="welcome_header">კეთილი იყოს თქვენი მობრძანება</string>
     <string name="shared_string_go">წინ</string>
     <string name="osmand_parking_time_left">დარჩა</string>
-    <string name="osmand_parking_minute">წთ</string>
+    <string name="shared_string_minute_lowercase">წთ</string>
     <string name="osmand_parking_hour">სთ</string>
     <string name="shared_string_collapse">ჩამოშლა</string>
     <string name="shared_string_photo">ფოტო</string>
@@ -2127,7 +2126,7 @@
     <string name="plugin_settings">დამატებები</string>
     <string name="osmand_parking_overdue">გადაცილებულია</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="get_plugin">გადმოწერა</string>
+    <string name="shared_string_get">გადმოწერა</string>
     <string name="version_settings">ქვევერსია</string>
     <string name="proxy_pref_title">პროქსი</string>
     <string name="download_tab_local">ადგილობრივი</string>

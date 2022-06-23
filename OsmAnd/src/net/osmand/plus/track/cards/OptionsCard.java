@@ -1,17 +1,16 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -20,18 +19,19 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {
 
@@ -47,7 +47,8 @@ public class OptionsCard extends MapBaseCard {
 	public static final int RENAME_BUTTON_INDEX = 9;
 	public static final int CHANGE_FOLDER_BUTTON_INDEX = 10;
 	public static final int GPS_FILTER_BUTTON_INDEX = 11;
-	public static final int DELETE_BUTTON_INDEX = 12;
+	public static final int ALTITUDE_CORRECTION_BUTTON_INDEX = 12;
+	public static final int DELETE_BUTTON_INDEX = 13;
 
 	private final TrackDisplayHelper displayHelper;
 	private final SelectedGpxFile selectedGpxFile;
@@ -95,16 +96,22 @@ public class OptionsCard extends MapBaseCard {
 			if (uploadOsmItem != null) {
 				items.add(uploadOsmItem);
 			}
+
 			items.add(createDividerItem());
+
 			if (!FileUtils.isTempFile(app, gpxFile.path)) {
 				items.add(createEditItem());
 			}
 			items.add(createRenameItem());
 			items.add(createChangeFolderItem());
+
+			items.add(createDividerItem());
+
 			boolean plainTrack = gpxFile.hasTrkPt() && !gpxFile.hasRoute() && !gpxFile.hasRtePt();
 			if (plainTrack) {
 				items.add(createGpsFilterItem());
 			}
+			items.add(createAltitudeCorrectionItem());
 			items.add(createDividerItem());
 			items.add(createDeleteItem());
 		}
@@ -247,7 +254,8 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createChangeFolderItem() {
-		String folder = new File(gpxFile.path).getParentFile().getName();
+		File file = new File(gpxFile.path).getParentFile();
+		String folder = file != null ? file.getName() : null;
 		Drawable changeFolderIcon = getActiveIcon(R.drawable.ic_action_folder_move);
 
 		return new BottomSheetItemWithDescriptionDifHeight.Builder()
@@ -268,6 +276,16 @@ public class OptionsCard extends MapBaseCard {
 				.setTitle(app.getString(R.string.shared_string_gps_filter))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(GPS_FILTER_BUTTON_INDEX))
+				.create();
+	}
+
+	private BaseBottomSheetItem createAltitudeCorrectionItem() {
+		Drawable altitudeCorrectionIcon = getActiveIcon(R.drawable.ic_action_altitude_average);
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(AndroidUtils.getDrawableForDirection(app, altitudeCorrectionIcon))
+				.setTitle(app.getString(R.string.altitude_correction))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> notifyButtonPressed(ALTITUDE_CORRECTION_BUTTON_INDEX))
 				.create();
 	}
 

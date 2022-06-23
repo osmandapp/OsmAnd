@@ -667,7 +667,7 @@
     <string name="monitoring_settings">Matkan tallennus</string>
     <string name="plugin_ski_name">Hiihtokarttanäkymä</string>
     <string name="route_points">Reittipisteet</string>
-    <string name="get_plugin">Lataa</string>
+    <string name="shared_string_get">Lataa</string>
     <string name="plugin_nautical_name">Merikartat</string>
     <string name="osmand_distance_planning_plugin_name">Etäisyyslaskin &amp; suunnittelutyökalu</string>
     <string name="search_for">Etsi</string>
@@ -717,7 +717,7 @@
     <string name="action_delete">Poista toiminto</string>
     <string name="osm_edits">OSM muokkaukset</string>
     <string name="osmand_parking_hour">t</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Pysäköintiaika rajoitettu</string>
     <string name="osmand_parking_time_left">vasen</string>
     <string name="your_edits">Muokkaukset</string>
@@ -1718,7 +1718,6 @@
     <string name="route_from">Mistä:</string>
     <string name="download_using_mobile_internet">Ei yhdistetty Wi-Fi-verkkoon. Haluatko käyttää nykyistä Internet-yhteyttä lataukseen\?</string>
     <string name="precise_routing_mode_descr">Ota käyttöön reitille tarkka laskenta ilman pikkuvirheitä. Vielä etäisyysrajoitteinen ja hidas.</string>
-    <string name="av_def_action_choose">Pyynnöstä\?</string>
     <string name="av_widget_action_descr">Oletustyökalutoiminto:</string>
     <string name="av_widget_action">Oletustyökalutoiminto</string>
     <string name="av_use_external_recorder_descr">Käytä järjestelmän nauhoitinta videolle.</string>
@@ -1753,7 +1752,6 @@
     <string name="access_direction_haptic_feedback">Reittiohjaus (värinäpalautteena)</string>
     <string name="storage_directory_readonly_desc">Vaihdettu sisäiseen muistiin, sillä valittu tallennushakemisto on kirjoitussuojattu. Ole hyvä ja valitse tallennushakemisto johon voi kirjoittaa.</string>
     <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten.</string>
-    <string name="translit_name_if_miss">Translitteroi, jos nimi puuttuu kielellä %1$s</string>
     <string name="translit_names">Translitteroi nimet</string>
     <string name="osm_live_header">Tämä tilaus mahdollistaa päivitykset kaikkiin karttoihin ympäri maailmaa tunneittain.
 \nOsa tuloista menee takaisin OSM-yhteisölle ja maksetaan jokaiselle OSM-avustajalle.
@@ -3609,9 +3607,6 @@
     <string name="save_global_track_interval_descr">Määritä kirjausväli yleiseen reitin tallennukseen (kytketään päälle kartalta Matkatallennus-widgetillä).</string>
     <string name="send_files_to_openstreetmap">Lähetä GPX-tiedosto OpenStreetMapiin</string>
     <string name="enter_text_separated">Kirjoita tunnisteet pilkuilla erotettuina.</string>
-    <string name="live_update_frequency_week_variant">Karttapäivitykset tarkistetaan joka viikko. Seuraavan kerran %1$s, %2$s päästä.</string>
-    <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan joka päivä. Seuraavan kerran %1$s, %2$s päästä.</string>
-    <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan joka tunti. Seuraavan kerran %1$s, %2$s päästä.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Luonnon rajat</string>
     <string name="routeInfo_surface_name">Pinta</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Luokka 4</string>

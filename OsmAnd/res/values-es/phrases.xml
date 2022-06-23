@@ -43,7 +43,7 @@
     <string name="poi_palaeontological_site">Yacimiento paleontológico</string>
     <string name="poi_bakery">Panadería</string>
     <string name="poi_alcohol">Licorería;Tienda de licores</string>
-    <string name="poi_convenience">Tienda de comestibles</string>
+    <string name="poi_convenience">Tienda de comestibles;Tienda de conveniencia;Colmado;Tienda de ultramarinos;Almacén;Minimercado;Maxikiosco;Maxiquiosco</string>
     <string name="poi_mall">Centro comercial</string>
     <string name="poi_beverages">Tienda de bebidas</string>
     <string name="poi_butcher">Carnicería</string>
@@ -137,8 +137,8 @@
     <string name="poi_tram_stop">Parada de tranvía</string>
     <string name="poi_public_transport_station">Estación de transporte público</string>
     <string name="poi_bus_station">Estación de autobús;Terminal de ómnibus</string>
-    <string name="poi_railway_station">Estación de tren</string>
-    <string name="poi_halt">Parada de tren</string>
+    <string name="poi_railway_station">Estación de ferrocarril;Estación ferroviaria;Estación de tren</string>
+    <string name="poi_halt">Parada ferroviaria;Parada de ferrocarril;Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de metro</string>
     <string name="poi_subway_station">Sí; Estación de metro</string>
     <string name="poi_aerodrome">Aeropuerto;Aeródromo</string>
@@ -403,7 +403,7 @@
     <string name="poi_parking_entrance">Entrada al aparcamiento</string>
     <string name="poi_garages">Cocheras;Garajes</string>
     <string name="poi_public_transport_stop_position">Punto de detención de transporte público</string>
-    <string name="poi_railway_platform">Andén de tren</string>
+    <string name="poi_railway_platform">Andén ferroviario;Andén de ferrocarril;Andén de tren;Plataforma ferroviaria</string>
     <string name="poi_aeroway_gate">Puerta de embarque</string>
     <string name="poi_slipway">Rampa</string>
     <string name="poi_aerialway_station">Estación de transporte elevado</string>
@@ -3780,7 +3780,7 @@
     <string name="poi_seamark_water_level_submerged">Nivel del agua: sumergido</string>
     <string name="poi_seamark_water_level_part_submerged">Nivel del agua: parcialmente sumergido</string>
     <string name="poi_tactile_paving_incorrect">Incorrecto</string>
-    <string name="poi_traffic_signals_sound_locate">Sólo se permite al caminar</string>
+    <string name="poi_traffic_signals_sound_locate">Sólo para encontrar el poste</string>
     <string name="poi_internet_access_fee_customers">Conexión a Internet: clientes</string>
     <string name="poi_booth">Tipo de cabina</string>
     <string name="poi_covered_booth">Cabina</string>
@@ -4294,7 +4294,7 @@
     <string name="poi_board_type_sport">Deporte</string>
     <string name="poi_dry_cleaning_no">No</string>
     <string name="poi_rice">Tienda de arroz</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard Sin Contacto</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard sin contacto</string>
     <string name="poi_payment_maestro_contactless_no">Maestro Sin Contacto no aceptada</string>
     <string name="poi_board_type_planet_walk">Paseo por el planeta</string>
     <string name="poi_tiles">Tienda de mosaicos</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_shop_fuel">Tienda de combustible</string>
     <string name="poi_printer_ink">Tienda de tinta para impresión</string>
     <string name="poi_water_sports">Tienda de deportes acuáticos</string>
+    <string name="poi_flow_rate">Caudal</string>
+    <string name="poi_golf_pin">Pin de golf</string>
 </resources>

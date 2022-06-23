@@ -4,6 +4,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -12,14 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.List;
 
@@ -29,16 +35,23 @@ public abstract class MapWidget {
 	protected final OsmandSettings settings;
 	protected final MapActivity mapActivity;
 	protected final UiUtilities iconsCache;
+	protected final OsmAndLocationProvider locationProvider;
+	protected final RoutingHelper routingHelper;
+
+	protected final WidgetType widgetType;
 
 	private boolean nightMode;
 
 	protected final View view;
 
-	public MapWidget(@NonNull MapActivity mapActivity) {
+	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
+		this.widgetType = widgetType;
 		this.iconsCache = app.getUIUtilities();
+		this.locationProvider = app.getLocationProvider();
+		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode();
 		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 	}
@@ -56,12 +69,37 @@ public abstract class MapWidget {
 		return null;
 	}
 
+	/**
+	 * @return preference that needs to be reset after deleting widget
+	 */
+	@Nullable
+	public OsmandPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
+		return null;
+	}
+
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
 
+	public void detachView() {
+		ViewParent parent = view.getParent();
+		if (parent instanceof ViewGroup) {
+			((ViewGroup) parent).removeView(view);
+		}
+	}
+
 	public boolean isNightMode() {
 		return nightMode;
+	}
+
+	@Nullable
+	public WidgetState getWidgetState() {
+		return null;
+	}
+
+	@Nullable
+	public WidgetType getWidgetType() {
+		return widgetType;
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
@@ -105,5 +143,10 @@ public abstract class MapWidget {
 	@NonNull
 	protected String getString(@StringRes int stringId, Object... args) {
 		return app.getString(stringId, args);
+	}
+
+	@NonNull
+	public OsmandApplication getMyApplication() {
+		return app;
 	}
 }

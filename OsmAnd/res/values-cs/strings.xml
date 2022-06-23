@@ -938,7 +938,6 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_maps">Stínování kopců</string>
     <string name="prefer_in_routing_descr">Upřednostňovat dálnice.</string>
-    <string name="av_def_action_choose">Na žádost\?</string>
     <string name="access_arrival_time">Čas příjezdu</string>
     <string name="layer_hillshade">Stínování</string>
     <string name="map_widget_gps_info">Info o GPS</string>
@@ -1434,7 +1433,7 @@
     <string name="shared_string_enable">Povolit</string>
     <string name="shared_string_disable">Zakázat</string>
     <string name="plugin_install_needs_network">Pro instalaci tohoto modulu musíte být online.</string>
-    <string name="get_plugin">Získat</string>
+    <string name="shared_string_get">Získat</string>
     <string name="route_points">Body trasy</string>
     <string name="simulate_your_location">Simulovat polohu</string>
     <string name="short_location_on_map">Šířka %1$s
@@ -1460,7 +1459,7 @@
     <string name="action_delete">Odstranit akci</string>
     <string name="osm_edits">Editace OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Čas parkování vymezen do</string>
     <string name="osmand_parking_overdue">vypršel</string>
     <string name="osmand_parking_time_left">zbývá</string>
@@ -2039,7 +2038,6 @@
     <string name="rendering_attr_contourColorScheme_name">Barevné schéma vrstevnic</string>
     <string name="rendering_attr_surfaceIntegrity_name">Celistvost povrchu cest</string>
     <string name="search_hint">Zadejte město, adresu, název POI</string>
-    <string name="translit_name_if_miss">Přepsat, pokud %1$s název chybí</string>
     <string name="translit_names">Přepsat názvy</string>
     <string name="edit_filter">Upravit kategorie</string>
     <string name="subcategories">Podkategorie</string>
@@ -4016,9 +4014,6 @@
     <string name="updated">Aktualizováno: %s</string>
     <string name="last_time_checked">Poslední kontrola: %s</string>
     <string name="update_frequency">Frekvence aktualizací</string>
-    <string name="live_update_frequency_week_variant">Aktualizace mapy budou kontrolovány každý týden. Příští kontrola %1$s v %2$s.</string>
-    <string name="live_update_frequency_day_variant">Aktualizace mapy budou kontrolovány každý den. Příští kontrola %1$s v %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Aktualizace mapy budou kontrolovány každou hodinu. Příští kontrola %1$s v %2$s.</string>
     <string name="delete_updates">Smazat aktualizace</string>
     <string name="live_update_delete_updates_msg">Smazat všechny živé aktualizace (%s)\?</string>
     <string name="purchases">Nákupy</string>

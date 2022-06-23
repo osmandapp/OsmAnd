@@ -1,8 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -106,6 +103,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -130,10 +128,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+
 public class OsmandApplication extends MultiDexApplication {
 
 	public static final String EXCEPTION_PATH = "exception.log";
-	public static final String OSMAND_PRIVACY_POLICY_URL = "https://osmand.net/help-online/privacy-policy";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
@@ -198,6 +198,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LauncherShortcutsHelper launcherShortcutsHelper;
 	GpsFilterHelper gpsFilterHelper;
 	DownloadTilesHelper downloadTilesHelper;
+	AverageSpeedComputer averageSpeedComputer;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -248,17 +249,16 @@ public class OsmandApplication extends MultiDexApplication {
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
-//		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
-//			targetPointsHelper.clearPointToNavigate(false);
-//		}
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
-		osmandMap.getMapLayers().updateLayers(null);
-
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
+		OsmandPlugin.createLayers(this, null);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
+		osmandMap.getMapLayers().updateLayers(null);
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
 		BackupHelper.DEBUG = true;//OsmandPlugin.isDevelopment();
@@ -370,7 +370,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	/**
 	 * Application settings
-	 * 
+	 *
 	 * @return Reference to instance of OsmandSettings
 	 */
 	public OsmandSettings getSettings() {
@@ -555,6 +555,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public DownloadTilesHelper getDownloadTilesHelper() {
 		return downloadTilesHelper;
+	}
+
+	@NonNull
+	public AverageSpeedComputer getAverageSpeedComputer() {
+		return averageSpeedComputer;
 	}
 
 	public CommandPlayer getPlayer() {
@@ -780,15 +785,17 @@ public class OsmandApplication extends MultiDexApplication {
 		});
 	}
 
-	public void showToastMessage(final String msg) {
-		uiHandler.post(() -> {
-			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(),
-						msg, CarToast.LENGTH_LONG).show();
-			}
-		});
+	public void showToastMessage(@Nullable String text) {
+		if (!Algorithms.isEmpty(text)) {
+			uiHandler.post(() -> {
+				Toast.makeText(OsmandApplication.this, text, Toast.LENGTH_LONG).show();
+				NavigationSession carNavigationSession = this.carNavigationSession;
+				if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+					CarToast.makeText(carNavigationSession.getCarContext(),
+							text, CarToast.LENGTH_LONG).show();
+				}
+			});
+		}
 	}
 
 	public SQLiteAPI getSQLiteAPI() {

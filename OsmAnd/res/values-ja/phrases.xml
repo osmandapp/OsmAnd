@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_aerodrome">空港</string>
+    <string name="poi_aerodrome">空港;飛行場</string>
     <string name="poi_bank">銀行</string>
     <string name="poi_bus_stop">バス停</string>
     <string name="poi_car_rental">レンタカー</string>
@@ -4315,10 +4315,17 @@
     <string name="poi_parcel_locker">小包・宅配便ロッカー</string>
     <string name="poi_laundry_service_filter">洗濯スタッフの有無</string>
     <string name="poi_dry_cleaning_filter">ドライクリーニング</string>
-    <string name="poi_telecommunication"></string>
+    <string name="poi_telecommunication">電気通信設備</string>
     <string name="poi_avalanche_transceiver">雪崩ビーコン;AVD;アバランチトランシーバー</string>
     <string name="poi_dry_cleaning_no">無し</string>
     <string name="poi_avalanche_transceiver_checkpoint">雪崩ビーコンチェックポイント</string>
     <string name="poi_dry_cleaning_yes">有り</string>
     <string name="poi_laundry_service_yes">有り</string>
+    <string name="poi_board_type_wildlife">生息動物情報</string>
+    <string name="poi_termite_mound">シロアリ塚</string>
+    <string name="poi_anthill">アリ塚</string>
+    <string name="poi_board_type_nature">地域自然情報</string>
+    <string name="poi_food_no">食事提供:無し</string>
+    <string name="poi_flow_rate">公称流量</string>
+    <string name="poi_golf_pin">ゴルフピン</string>
 </resources>

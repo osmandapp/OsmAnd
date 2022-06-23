@@ -1,5 +1,14 @@
 package net.osmand.plus.plugins.osmedit;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -25,10 +34,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
@@ -71,15 +80,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -257,8 +257,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (osmEditsLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(osmEditsLayer);
 		}
-		osmBugsLayer = new OsmBugsLayer(context, this);
-		osmEditsLayer = new OsmEditsLayer(context, this);
+		osmBugsLayer = new OsmBugsLayer(context, this, -120000);
+		osmEditsLayer = new OsmEditsLayer(context, this, -120000);
 	}
 
 	public OsmEditsLayer getOsmEditsLayer(@NonNull MapActivity mapActivity) {
@@ -636,10 +636,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
+	public static boolean isOsmUrlAvailable(@Nullable Long id) {
+		return id != null && id > 0 && (id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE);
+	}
+
 	public static String getOsmUrlForId(long id, int shift) {
 		long originalId = (id >> 1);
 		long relationShift = 1L << 41;
 		if (originalId > relationShift) {
+			long division = originalId / relationShift;
+			originalId = division > 1 ? originalId / division : originalId;
 			long relationId = (originalId & ~relationShift) >> 10;
 			return "https://www.openstreetmap.org/relation/" + relationId;
 		} else if (id % 2 == MapObject.WAY_MODULO_REMAINDER) {

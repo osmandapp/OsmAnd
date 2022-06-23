@@ -62,6 +62,7 @@ public class OsmAndFormatter {
 
 	private static boolean twelveHoursFormat = false;
 	private static TimeFormatter fullTimeFormatter;
+	private static TimeFormatter shortTimeFormatter;
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
 	public static final float MILS_IN_DEGREE = 17.777778f;
@@ -95,6 +96,7 @@ public class OsmAndFormatter {
 	public static void setTwelveHoursFormatting(boolean setTwelveHoursFormat, @NonNull Locale locale) {
 		twelveHoursFormat = setTwelveHoursFormat;
 		fullTimeFormatter = new TimeFormatter(locale, "H:mm:ss", "h:mm:ss a");
+		shortTimeFormatter = new TimeFormatter(locale, "HH:mm", "h:mm a");
 	}
 
 	public static String getFormattedDuration(int seconds, @NonNull OsmandApplication app) {
@@ -104,11 +106,11 @@ public class OsmAndFormatter {
 			return hours + " "
 					+ app.getString(R.string.osmand_parking_hour)
 					+ (minutes > 0 ? " " + minutes + " "
-					+ app.getString(R.string.osmand_parking_minute) : "");
+					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
-			return minutes + " " + app.getString(R.string.osmand_parking_minute);
+			return minutes + " " + app.getString(R.string.shared_string_minute_lowercase);
 		} else {
-			return "<1 " + app.getString(R.string.osmand_parking_minute);
+			return "<1 " + app.getString(R.string.shared_string_minute_lowercase);
 		}
 	}
 
@@ -148,7 +150,7 @@ public class OsmAndFormatter {
 		return fullTimeFormatter.format(calendar.getTime(), twelveHoursFormat);
 	}
 
-	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
+	public static String getFormattedTimeShort(long seconds, boolean useCurrentTime) {
 		Calendar calendar = Calendar.getInstance();
 		if (useCurrentTime) {
 			calendar.setTimeInMillis(System.currentTimeMillis() + seconds * 1000);
@@ -156,7 +158,7 @@ public class OsmAndFormatter {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
 		Date date = calendar.getTime();
-		String formattedTime = fullTimeFormatter.format(date, false);
+		String formattedTime = shortTimeFormatter.format(date, twelveHoursFormat);
 		if (!isSameDay(calendar, Calendar.getInstance())) {
 			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}
@@ -371,16 +373,23 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
+		return getFormattedAltitudeValue(alt, ctx, mc).format(ctx);
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedAltitudeValue(double altitude,
+	                                                       @NonNull OsmandApplication ctx,
+	                                                       @NonNull MetricsConstants mc) {
 		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS;
 		FormattedValue formattedValue;
 		if (useFeet) {
-			int feet = (int) (alt * FEET_IN_ONE_METER + 0.5);
+			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);
 			formattedValue = formatValue(feet, R.string.foot, false, 0, ctx);
 		} else {
-			int meters = (int) (alt + 0.5);
+			int meters = (int) (altitude + 0.5);
 			formattedValue = formatValue(meters, R.string.m, false, 0, ctx);
 		}
-		return formattedValue.format(ctx);
+		return formattedValue;
 	}
 
 	@NonNull
@@ -402,14 +411,14 @@ public class OsmAndFormatter {
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = Math.round(kmh * 10f);
-			return getFormattedSpeed(kmh10 / 10f, unit, ctx);
+			return getFormattedLowSpeed(kmh10 / 10f, unit, ctx);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
 				return getFormattedSpeed(Math.round(mph), unit, ctx);
 			} else {
 				int mph10 = Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, unit, ctx);
+				return getFormattedLowSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
@@ -417,7 +426,7 @@ public class OsmAndFormatter {
 				return getFormattedSpeed(Math.round(mph), unit, ctx);
 			} else {
 				int mph10 = Math.round(mph * 10f);
-				return getFormattedSpeed(mph10 / 10f, unit, ctx);
+				return getFormattedLowSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
 			if (metersPerSeconds < 0.111111111) {
@@ -439,7 +448,7 @@ public class OsmAndFormatter {
 				return getFormattedSpeed(Math.round(minPerM), unit, ctx);
 			} else {
 				int mph10 = Math.round(minPerM * 10f);
-				return getFormattedSpeed(mph10 / 10f, unit, ctx);
+				return getFormattedLowSpeed(mph10 / 10f, unit, ctx);
 			}
 		} else {
 			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
@@ -448,13 +457,18 @@ public class OsmAndFormatter {
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = Math.round(metersPerSeconds * 10f);
-			return getFormattedSpeed(kmh10 / 10f, metersPerSecond, ctx);
+			return getFormattedLowSpeed(kmh10 / 10f, metersPerSecond, ctx);
 		}
 	}
 
 	@NonNull
 	private static FormattedValue getFormattedSpeed(float speed, @NonNull String unit, @NonNull OsmandApplication app) {
 		return formatValue(speed, unit, false, 0, app);
+	}
+
+	@NonNull
+	private static FormattedValue getFormattedLowSpeed(float speed, @NonNull String unit, @NonNull OsmandApplication app) {
+		return formatValue(speed, unit, true, 1, app);
 	}
 
 	@NonNull
@@ -658,11 +672,8 @@ public class OsmAndFormatter {
 					.append(formatCoordinate(lon, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
 					.append(lon > 0 ? EAST : WEST);
 		} else if (outputFormat == UTM_FORMAT) {
-			ZonedUTMPoint pnt = new ZonedUTMPoint(new LatLonPoint(lat, lon));
-			result.append(pnt.zone_number)
-					.append(pnt.zone_letter).append(" ")
-					.append((long) pnt.easting).append(" ")
-					.append((long) pnt.northing);
+			ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
+			result.append(utmPoint.format());
 		} else if (outputFormat == OLC_FORMAT) {
 			String r;
 			try {

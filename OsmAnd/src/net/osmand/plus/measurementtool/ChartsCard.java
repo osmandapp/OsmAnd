@@ -2,15 +2,14 @@ package net.osmand.plus.measurementtool;
 
 import android.annotation.SuppressLint;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -19,9 +18,6 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -38,6 +34,9 @@ import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.router.RouteSegmentResult;
@@ -46,6 +45,10 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static net.osmand.GPXUtilities.GPXFile;
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -71,6 +74,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private View commonGraphContainer;
 	private View customGraphContainer;
 	private View messageContainer;
+	private View buttonContainer;
 	private CommonChartAdapter commonGraphAdapter;
 	private CustomChartAdapter customGraphAdapter;
 	private HorizontalChipsView graphTypesMenu;
@@ -111,6 +115,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		customGraphAdapter.setLayoutChangeListener(this::setLayoutNeeded);
 
 		messageContainer = view.findViewById(R.id.message_container);
+		buttonContainer = view.findViewById(R.id.btn_container);
 
 		ViewGroup scrollView = view.findViewById(R.id.scroll_view);
 		ChartAdapterHelper.bindGraphAdapters(commonGraphAdapter, Collections.singletonList(customGraphAdapter), scrollView);
@@ -215,9 +220,23 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	}
 
 	private ChartType<?> getFirstAvailableType() {
-		for (ChartType<?> type : chartTypes) {
-			if (type.isAvailable()) {
-				return type;
+		ChartType<?> chartType = getFirstOnlineType();
+		if (chartType == null) {
+			for (ChartType<?> type : chartTypes) {
+				if (type.isAvailable()) {
+					chartType = type;
+				}
+			}
+		}
+		return chartType;
+	}
+
+	private ChartType<?> getFirstOnlineType() {
+		if (fragment.isCalculateSrtmMode()) {
+			for (ChartType<?> type : chartTypes) {
+				if (type.isAvailable() && Algorithms.stringsEqual(type.title, app.getString(R.string.altitude))) {
+					return type;
+				}
 			}
 		}
 		return null;
@@ -225,62 +244,91 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void updateView() {
 		hideAll();
-		if (!editingCtx.isPointsEnoughToCalculateRoute()) {
-			showMessage(app.getString(R.string.message_you_need_add_two_points_to_show_graphs), false);
-		} else if (isRouteCalculating()) {
-			showMessage(app.getString(R.string.message_graph_will_be_available_after_recalculation), true);
-		} else if (visibleType.hasData()) {
-			showGraph();
-		} else if (visibleType.canBeCalculated()) {
-			showMessage(app.getString(R.string.message_need_calculate_route_before_show_graph,
-					visibleType.getTitle()), R.drawable.ic_action_altitude_average,
-					app.getString(R.string.route_between_points),
-					v -> fragment.startSnapToRoad(false));
-		}
+		updateMessage();
 	}
 
 	private void hideAll() {
-		commonGraphContainer.setVisibility(View.GONE);
-		customGraphContainer.setVisibility(View.GONE);
-		messageContainer.setVisibility(View.GONE);
+		AndroidUiHelper.setVisibility(View.GONE,
+				commonGraphContainer,
+				customGraphContainer,
+				messageContainer,
+				buttonContainer);
 	}
 
-	private void showMessage(String text, @DrawableRes int iconResId, String btnTitle, View.OnClickListener btnListener) {
-		showMessage(text, iconResId, false, btnTitle, btnListener);
+	private void updateMessage() {
+		if (!editingCtx.isPointsEnoughToCalculateRoute()) {
+			String desc = app.getString(R.string.message_you_need_add_two_points_to_show_graphs);
+			showMessage(null, desc, INVALID_ID, 0);
+		} else if (isRouteCalculating()) {
+			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
+			String desc = app.getString(R.string.message_graph_will_be_available_after_recalculation);
+			showMessage(null, desc, INVALID_ID, progressSize);
+		} else if (visibleType.canBeCalculated() && fragment.isCalculatingSrtmData()) {
+			String desc = app.getString(R.string.calculating_altitude);
+			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
+			String buttonText = app.getString(R.string.shared_string_cancel);
+			showMessage(null, desc, INVALID_ID, progressSize);
+			showButton(buttonText, v -> fragment.stopUploadFileTask(), true);
+		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
+			String title = app.getString(R.string.no_altitude_data);
+			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
+			showMessage(title, desc, R.drawable.ic_action_altitude_average, 0);
+			showCalculateAltitudeButton(true);
+		} else if (visibleType.hasData()) {
+			showGraph();
+			if (visibleType.canBeCalculated) {
+				showCalculateAltitudeButton(false);
+			}
+		}
 	}
 
-	private void showMessage(String text, boolean showProgressBar) {
-		showMessage(text, INVALID_ID, showProgressBar, null, null);
+	private void showCalculateAltitudeButton(boolean addStartPadding) {
+		showButton(app.getString(R.string.calculate_altitude), v -> fragment.getAltitudeClick(), addStartPadding);
 	}
 
-	private void showMessage(@NonNull String text,
-	                         @DrawableRes int iconResId,
-	                         boolean showProgressBar,
-	                         String btnTitle,
-	                         View.OnClickListener btnListener) {
-		messageContainer.setVisibility(View.VISIBLE);
-		TextView tvMessage = messageContainer.findViewById(R.id.message_text);
-		tvMessage.setText(text);
+	private void showMessage(@Nullable String title,
+	                         @NonNull String description,
+	                         @DrawableRes int iconId,
+	                         int progressSize) {
+		TextView messageTitle = messageContainer.findViewById(R.id.message_title);
+		if (!Algorithms.isEmpty(title)) {
+			messageTitle.setText(title);
+		}
+		AndroidUiHelper.updateVisibility(messageTitle, title != null);
+
+		TextView messageDesc = messageContainer.findViewById(R.id.message_text);
+		messageDesc.setText(description);
+
 		ImageView icon = messageContainer.findViewById(R.id.message_icon);
-		if (iconResId != INVALID_ID) {
-			icon.setVisibility(View.VISIBLE);
-			icon.setImageResource(iconResId);
-		} else {
-			icon.setVisibility(View.GONE);
+		if (iconId != INVALID_ID) {
+			icon.setImageResource(iconId);
 		}
-		ProgressBar pb = messageContainer.findViewById(R.id.progress_bar);
-		pb.setVisibility(showProgressBar ? View.VISIBLE : View.GONE);
-		View btnContainer = messageContainer.findViewById(R.id.btn_container);
-		if (btnTitle != null) {
-			TextView tvBtnTitle = btnContainer.findViewById(R.id.btn_text);
-			tvBtnTitle.setText(btnTitle);
-			btnContainer.setVisibility(View.VISIBLE);
-		} else {
-			btnContainer.setVisibility(View.GONE);
-		}
-		if (btnListener != null) {
-			btnContainer.setOnClickListener(btnListener);
-		}
+		AndroidUiHelper.updateVisibility(icon, iconId != INVALID_ID);
+
+		ProgressBar progressBar = messageContainer.findViewById(R.id.progress_bar);
+		LayoutParams params = progressBar.getLayoutParams();
+		params.height = progressSize;
+		params.width = progressSize;
+		progressBar.setLayoutParams(params);
+		AndroidUiHelper.updateVisibility(progressBar, progressSize != 0);
+
+		AndroidUiHelper.updateVisibility(messageContainer, true);
+	}
+
+	private void showButton(@NonNull String buttonTitle, @NonNull OnClickListener listener, boolean addStartPadding) {
+		View buttonPadding = buttonContainer.findViewById(R.id.button_padding);
+		AndroidUiHelper.updateVisibility(buttonPadding, addStartPadding);
+
+		View buttonDivider = buttonContainer.findViewById(R.id.button_divider);
+		MarginLayoutParams layoutParams = (MarginLayoutParams) buttonDivider.getLayoutParams();
+		layoutParams.setMarginStart(addStartPadding ? getDimen(R.dimen.content_padding) : 0);
+		buttonDivider.setLayoutParams(layoutParams);
+
+		TextView title = buttonContainer.findViewById(R.id.btn_text);
+		title.setText(buttonTitle);
+
+		buttonContainer.setOnClickListener(listener);
+		AndroidUiHelper.updateVisibility(buttonContainer, true);
 	}
 
 	private void showGraph() {
@@ -318,7 +366,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		addCommonType(R.string.shared_string_overview, true, hasElevationData, ALTITUDE, SLOPE);
 		addCommonType(R.string.altitude, true, hasElevationData, ALTITUDE, null);
 		addCommonType(R.string.shared_string_slope, true, hasElevationData, SLOPE, null);
-		addCommonType(R.string.map_widget_current_speed, false, hasSpeedData, SPEED, null);
+		addCommonType(R.string.shared_string_speed, false, hasSpeedData, SPEED, null);
 
 		// update custom graph data
 		List<RouteStatistics> routeStatistics = calculateRouteStatistics();

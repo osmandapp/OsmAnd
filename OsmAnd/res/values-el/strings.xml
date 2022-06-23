@@ -931,7 +931,6 @@
     <string name="favourites_list_activity">Επιλογή αγαπημένου</string>
     <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
     <string name="shared_string_more_actions">Άλλες ενέργειες</string>
-    <string name="av_def_action_choose">Κατόπιν αίτησης;</string>
     <string name="download_using_mobile_internet">Δεν είστε συνδεδεμένοι με ασύρματο δίκτυο. Θέλετε να χρησιμοποιήσετε την τρέχουσα διαδικτυακή σύνδεση για λήψη;</string>
     <string name="cancel_route">Απόρριψη διαδρομής</string>
     <string name="cancel_navigation">Διακοπή πλοήγησης</string>
@@ -1363,7 +1362,7 @@
     <string name="confirmation_to_clear_history">Εκκαθάριση ιστορικού;</string>
     <string name="osm_edits">Επεξεργασίες OSM</string>
     <string name="osmand_parking_hour">ω</string>
-    <string name="osmand_parking_minute">λεπτά</string>
+    <string name="shared_string_minute_lowercase">λεπτά</string>
     <string name="tips_and_tricks_descr">Συχνές ερωτήσεις, πρόσφατες αλλαγές και άλλα.</string>
     <string name="shared_string_unexpected_error">Αναπάντεχο σφάλμα</string>
     <string name="shared_string_currently_recording_track">Τρέχουσα καταγραφή ίχνους</string>
@@ -1913,7 +1912,6 @@
     <string name="rendering_attr_contourColorScheme_name">Χρωματικός συνδυασμός ισοϋψών καμπυλών</string>
     <string name="rendering_attr_surfaceIntegrity_name">Αρτιότητα επιφάνειας δρόμου</string>
     <string name="search_hint">Πληκτρολογήστε πόλη, διεύθυνση, όνομα ΣΕ</string>
-    <string name="translit_name_if_miss">Μεταγραμμάτιση εάν λείπει το όνομα του %1$s</string>
     <string name="translit_names">Μεταγραμμάτιση ονομάτων</string>
     <string name="edit_filter">Επεξεργασία κατηγοριών</string>
     <string name="subcategories">Υποκατηγορίες</string>
@@ -2485,7 +2483,7 @@
     <string name="av_camera_pic_size">Μέγεθος εικόνας κάμερας</string>
     <string name="av_camera_pic_size_descr">Ορίστε μέγεθος εικόνας κάμερας</string>
     <string name="plugin_install_needs_network">Χρειάζεται να συνδεθείτε με το διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
-    <string name="get_plugin">Λήψη</string>
+    <string name="shared_string_get">Λήψη</string>
     <string name="use_fast_recalculation">Επανυπολογισμός έξυπνης διαδρομής</string>
     <string name="use_fast_recalculation_desc">Για μεγάλα ταξίδια, να επανυπολογίζεται μόνο το αρχικό μέρος της διαδρομής.</string>
     <string name="do_you_like_osmand">Σας αρέσει το OsmAnd;</string>

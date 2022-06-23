@@ -16,6 +16,7 @@ import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -369,7 +370,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());

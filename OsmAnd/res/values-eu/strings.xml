@@ -81,7 +81,7 @@
     <string name="available_downloads_left">%1$d fitxategi deskargatzeke</string>
     <string name="install_paid">Bertsio osoa</string>
     <string name="cancel_route">Baztertu ibilbidea</string>
-    <string name="cancel_navigation">Nabigazioa gelditu</string>
+    <string name="cancel_navigation">Gelditu nabigazioa</string>
     <string name="clear_destination">Helmuga garbitu</string>
     <string name="download_using_mobile_internet">Ez zaude Wi-Fi batera konektatuta. Deskargatu uneko Internet konexioa erabiliz?</string>
     <string name="street_name">Kalearen izena</string>
@@ -126,7 +126,6 @@
     <string name="intermediate_points_change_order">Ordena aldatu</string>
     <string name="srtm_paid_version_msg">Baloratu \'Sestra-kurbak\' gehigarriagatik ordaintzea honen garapena babesteko.</string>
     <string name="srtm_paid_version_title">Sestra-kurben gehigarria</string>
-    <string name="av_def_action_choose">Eskatutakoan\?</string>
     <string name="av_def_action_video">Grabatu bideoa</string>
     <string name="av_def_action_audio">Grabatu audioa</string>
     <string name="av_widget_action_descr">Trepetaren ekintza lehenetsia:</string>
@@ -359,8 +358,8 @@
     <string name="gpxup_private">Pribatua</string>
     <string name="asap">Azkar</string>
     <string name="route_roundabout">Biribilgunea: Hartu %1$d. irteera</string>
-    <string name="route_kl">Ezkerrean gelditu</string>
-    <string name="route_kr">Eskubian gelditu</string>
+    <string name="route_kl">Mantendu ezkerrean eta jarraitu</string>
+    <string name="route_kr">Mantendu eskubian eta jarraitu</string>
     <string name="rendering_attr_noPolygons_description">Egin mapako lur ezaugarri guztiak gardenak.</string>
     <string name="rendering_attr_noPolygons_name">Poligonoak</string>
     <string name="rendering_attr_appMode_name">Marrazte modua</string>
@@ -845,7 +844,7 @@
     <string name="opening_hours_not_supported">Ezin da irekiera ordutegien formatua aldatu.</string>
     <string name="add_new_rule">Erregela berria gehitu</string>
     <string name="transport_Routes">Ibilbideak</string>
-    <string name="transport_Stop">Gelditu</string>
+    <string name="transport_Stop">Geltokia</string>
     <string name="transport_stops">geltoki</string>
     <string name="transport_search_after">Ondorengo ibilbidea</string>
     <string name="transport_search_before">Aurreko ibilbidea</string>
@@ -1469,7 +1468,7 @@
     <string name="action_modify">Aldatze ekintza</string>
     <string name="action_delete">Ezabatze ekintza</string>
     <string name="osm_edits">OSM edizioak</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Aparkatzeko denbora muga</string>
     <string name="osmand_parking_time_left">bukatzeko</string>
     <string name="your_edits">Zure edizioak</string>
@@ -1899,7 +1898,7 @@
     <string name="favourites_context_menu_add">Gehitu gogokoa</string>
     <string name="poi_action_delete">ezabatu</string>
     <string name="poi_dialog_reopen">Berrireki</string>
-    <string name="get_plugin">Eskuratu</string>
+    <string name="shared_string_get">Eskuratu</string>
     <string name="do_you_like_osmand">OsmAnd gogoko duzu?</string>
     <string name="we_really_care_about_your_opinion">Zure iritzia eskertzen dugu.</string>
     <string name="rate_this_app">Baloratu aplikazio hau</string>
@@ -2028,7 +2027,6 @@ mapak eta nabigazioa</string>
     <string name="new_filter_desc">Idatzi iragazki berriaren izena, zure \'Kategoriak\' fitxara gehituko da.</string>
     <string name="edit_filter">Editatu kategoriak</string>
     <string name="subcategories">Azpikategoriak</string>
-    <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
     <string name="translit_names">Transliteratu izenak</string>
     <string name="search_hint">Idatzi hiria, helbidea, interesgunearen izena</string>
     <string name="rendering_value_light_brown_name">Marroi argia</string>
@@ -4353,7 +4351,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="explore_wikipedia_offline">Arakatu Wikipedia lineaz kanpo.</string>
     <string name="shared_string_purchased">Erosita</string>
     <string name="backup_deleted_all_data">Datu guztiak ezabatu dira.</string>
-    <string name="live_update_frequency_day_variant">Mapen eguneraketak egunero egiaztatuko dira. Hurrengoa %1$sko %2$setan.</string>
     <string name="backup_error_file_not_available">Fitxategia ez dago erabilgarri</string>
     <string name="backup_error_token_is_not_valid_or_expired">Token baliogabea edo iraungita</string>
     <string name="backup_error_subscription_was_expired">Harpidetza iraungita</string>
@@ -4382,8 +4379,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="track_recording_will_be_continued">Grabaketak jarraituko du.</string>
     <string name="select_category_descr">Hautatu kategoria edo gehitu berri bat</string>
     <string name="delete_updates">Ezabatu eguneraketak</string>
-    <string name="live_update_frequency_hour_variant">Mapen eguneraketak orduro egiaztatuko dira. Hurrengoan %1$sko %2$setan.</string>
-    <string name="live_update_frequency_week_variant">Mapen eguneraketak astero egiaztatuko dira. Hurrengoan %1$sko %2$setan.</string>
     <string name="update_frequency">Eguneraketen maiztasuna</string>
     <string name="last_time_checked">Egiaztatu den azken aldia: %s</string>
     <string name="latest_openstreetmap_update">Eskuragarri dagoen OpenStreetMap-en azken eguneratzea:</string>

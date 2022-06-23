@@ -85,6 +85,7 @@ artifacts {
 	android androidJar
 }
 
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "4.2"
 publishing {
 	repositories {
 		ivy {

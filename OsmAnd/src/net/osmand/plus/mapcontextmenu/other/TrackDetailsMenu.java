@@ -1,7 +1,10 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.helpers.GpxUiHelper.HOUR_IN_MILLIS;
+
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -22,21 +25,17 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.plus.track.GpxMarkerView;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -44,10 +43,17 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
+import net.osmand.plus.track.GpxMarkerView;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.GPXLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
@@ -57,8 +63,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static net.osmand.plus.helpers.GpxUiHelper.HOUR_IN_MILLIS;
 
 public class TrackDetailsMenu {
 
@@ -155,14 +159,19 @@ public class TrackDetailsMenu {
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			if (ds != null && ds.size() > 0 && gpxItem != null && segment != null) {
+				MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 				RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox();
-				int mx = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-				int my = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+				PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude());
+				int mx = (int) pixel.x;
+				int my = (int) pixel.y;
 				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
-				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(tb, segment.points, r, mx, my);
+				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(
+						mapRenderer, tb, segment.points, r, mx, my);
 				if (points != null) {
-					LatLon latLon = tb.getLatLonFromPixel(mx, my);
-					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
+					LatLon latLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, mx, my);
+					if (latLon != null) {
+						gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
+					}
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
@@ -276,7 +285,10 @@ public class TrackDetailsMenu {
 		if (mapActivity != null) {
 			if (gpxItem != null && gpxItem.chartPointLayer == ChartPointLayer.GPX && gpxItem.wasHidden
 					&& gpxItem.group != null && gpxItem.group.getGpx() != null) {
-				mapActivity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxItem.group.getGpx(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
+				helper.selectGpxFile(gpxItem.group.getGpx(), params);
 			}
 			TrackDetailsBarController toolbarController = this.toolbarController;
 			if (toolbarController != null) {
@@ -540,7 +552,9 @@ public class TrackDetailsMenu {
 				float currentPointEntry = interval;
 				while (currentPointEntry < maxXValue) {
 					LatLon location = getLocationAtPos(chart, currentPointEntry);
-					xAxisPoints.add(location);
+					if (location != null) {
+						xAxisPoints.add(location);
+					}
 					currentPointEntry += interval;
 				}
 				this.xAxisPoints = xAxisPoints;
@@ -875,7 +889,7 @@ public class TrackDetailsMenu {
 	private static class TrackDetailsBarController extends TopToolbarController {
 
 		TrackDetailsBarController() {
-			super(MapInfoWidgetsFactory.TopToolbarControllerType.TRACK_DETAILS);
+			super(TopToolbarControllerType.TRACK_DETAILS);
 			setBackBtnIconClrIds(0, 0);
 			setRefreshBtnIconClrIds(0, 0);
 			setCloseBtnIconClrIds(0, 0);

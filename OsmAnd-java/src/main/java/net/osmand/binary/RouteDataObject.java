@@ -747,6 +747,18 @@ public class RouteDataObject {
 		return false;
 	}
 
+	public boolean hasTrafficLightAt(int i) {
+		int[] pointTypes = getPointTypes(i);
+		if (pointTypes != null) {
+			for (int pointType : pointTypes) {
+				if (region.routeEncodingRules.get(pointType).getValue().startsWith("traffic_signals")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 //	public boolean isMotorWayLink() {
 //		int sz = types.length;
 //		for (int i = 0; i < sz; i++) {

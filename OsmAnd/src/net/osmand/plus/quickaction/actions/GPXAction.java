@@ -109,10 +109,7 @@ public class GPXAction extends QuickAction {
 	}
 
 	private void addWaypoint(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
-		LatLon latLon = mapActivity.getMapView()
-				.getCurrentRotatedTileBox()
-				.getCenterLatLon();
-
+		LatLon latLon = getMapLocation(mapActivity);
 		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 		if (usePredefinedWaypoint) {
 			WptPt wptPt = createWaypoint();

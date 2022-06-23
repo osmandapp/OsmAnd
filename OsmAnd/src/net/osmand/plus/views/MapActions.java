@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -11,7 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.GPXRouteParams;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
@@ -35,12 +36,12 @@ public class MapActions {
 		return false;
 	}
 
-	public void setGPXRouteParams(GPXFile result) {
+	public void setGPXRouteParams(@Nullable GPXFile result) {
 		if (result == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
-			GPXRouteParams.GPXRouteParamsBuilder params = new GPXRouteParams.GPXRouteParamsBuilder(result, settings);
+			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			params.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
@@ -79,7 +80,7 @@ public class MapActions {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
@@ -147,7 +148,12 @@ public class MapActions {
 		if (selected != ApplicationMode.DEFAULT) {
 			mode = selected;
 		} else if (mode == ApplicationMode.DEFAULT) {
-			mode = ApplicationMode.CAR;
+			for (ApplicationMode appMode : ApplicationMode.values(app)) {
+				if (appMode != ApplicationMode.DEFAULT) {
+					mode = appMode;
+					break;
+				}
+			}
 			if (settings.LAST_ROUTING_APPLICATION_MODE != null &&
 					settings.LAST_ROUTING_APPLICATION_MODE != ApplicationMode.DEFAULT) {
 				mode = settings.LAST_ROUTING_APPLICATION_MODE;
@@ -163,6 +169,7 @@ public class MapActions {
 			if (settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(mode)) {
 				settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, false);
 				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false).setModeValue(mode, false);
+				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, false).setModeValue(mode, false);
 			}
 		}
 	}

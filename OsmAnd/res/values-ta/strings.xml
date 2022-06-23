@@ -345,7 +345,6 @@
 \n</string>
     <string name="rendering_attr_surfaceIntegrity_name">சாலை மேற்பரப்பு ஒருமைப்பாடு</string>
     <string name="search_hint">நகரம், முகவரி, POI பெயர்</string>
-    <string name="translit_name_if_miss">%1$s பெயர் காணவில்லை என்றால், குறிக்கவும்</string>
     <string name="translit_names">பெயரிடும் பெயர்கள்</string>
     <string name="edit_filter">திருத்து வகைகள்</string>
     <string name="subcategories">துணை வகைகள்</string>
@@ -977,7 +976,6 @@
     <string name="av_def_action_picture">ஒரு புகைப்படத்தை எடுக்கவும்</string>
     <string name="recording_context_menu_precord">ஒரு புகைப்படத்தை எடுக்கவும்</string>
     <string name="intermediate_points_change_order">வரிசையை மாற்று</string>
-    <string name="av_def_action_choose">கோரிக்கையில் தேர்ந்தெடுக்கவும்</string>
     <string name="av_def_action_video">வீடியோ பதிவு</string>
     <string name="av_def_action_audio">பதிவு ஆடியோ</string>
     <string name="av_widget_action_descr">இயல்புநிலை விட்ஜெட்டை நடவடிக்கை தேர்ந்தெடுக்கவும்.</string>
@@ -1302,7 +1300,7 @@
     <string name="action_delete">செயல் நீக்கம்</string>
     <string name="osm_edits">ஓஎஸ்எம் தொகுப்பு</string>
     <string name="osmand_parking_hour">மணிநேரம்</string>
-    <string name="osmand_parking_minute">மணிதுளி</string>
+    <string name="shared_string_minute_lowercase">மணிதுளி</string>
     <string name="parking_place_limited">நிறுத்தி வைக்க வரையறுத்த நேரம்</string>
     <string name="osmand_parking_time_left">இடது</string>
     <string name="your_edits">உங்கள் தொகுப்பு</string>

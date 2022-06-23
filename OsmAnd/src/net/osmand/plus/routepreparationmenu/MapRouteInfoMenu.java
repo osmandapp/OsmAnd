@@ -71,8 +71,8 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
-import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
@@ -116,6 +116,7 @@ import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -304,7 +305,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
-				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+				LatLon latLon = NativeUtilities.getLatLonFromPixel(mapActivity.getMapView().getMapRenderer(), tileBox, point.x, point.y);
 				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
 				LatLon selectedPoint = pair != null ? pair.first : latLon;
 				PointDescription name = pair != null ? pair.second : null;
@@ -740,8 +741,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 
 				// Gpx card
-				List<SelectedGpxFile> selectedGPXFiles =
-						app.getSelectedGpxHelper().getSelectedGPXFiles();
+				List<SelectedGpxFile> selectedGPXFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 				final List<GPXFile> gpxFiles = new ArrayList<>();
 				for (SelectedGpxFile gs : selectedGPXFiles) {
 					if (!gs.isShowCurrentTrack()) {
@@ -847,9 +847,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				} else if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
 					showRouteOnMap(mapActivity, ((PublicTransportCard) card).getRouteId());
 				}
-			} else if (card instanceof SimpleRouteCard) {
-				hide();
-				ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(), 0, MenuState.FULL_SCREEN);
 			} else if (card instanceof PublicTransportNotFoundWarningCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
@@ -862,7 +859,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectTrack(@NonNull GPXFile gpxFile) {
+	public void selectTrack(@NonNull GPXFile gpxFile, boolean checkForSegments) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -875,9 +872,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 							true, false, false, true);
 				}
 			}
-			if (gpxFile.getNonEmptySegmentsCount() > 1) {
-				Fragment targetFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapRouteInfoMenuFragment.TAG);
-				TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, targetFragment);
+			if (checkForSegments && gpxFile.getNonEmptySegmentsCount() > 1) {
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
+				if (fragment == null) {
+					fragment = manager.findFragmentByTag(FollowTrackFragment.TAG);
+				}
+				TrackSelectSegmentBottomSheet.showInstance(manager, gpxFile, fragment);
 			} else {
 				mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
@@ -1220,9 +1221,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity,
-													   final MuteSoundRoutingParameter parameter,
-													   final RouteMenuAppModes mode,
-													   LinearLayout optionsContainer) {
+	                                                   final MuteSoundRoutingParameter parameter,
+	                                                   final RouteMenuAppModes mode,
+	                                                   LinearLayout optionsContainer) {
 		final ApplicationMode appMode = mapActivity.getRoutingHelper().getAppMode();
 		final int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
@@ -1359,7 +1360,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createImpassableRoadsItems(MapActivity mapActivity, Map<LatLon, AvoidRoadInfo> impassableRoads,
-											final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
+	                                        final LocalRoutingParameter parameter, final RouteMenuAppModes mode, final LinearLayout item) {
 		Iterator<AvoidRoadInfo> it = impassableRoads.values().iterator();
 		while (it.hasNext()) {
 			final AvoidRoadInfo avoidRoadInfo = it.next();
@@ -1387,13 +1388,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createAvoidParametersItems(MapActivity mapActivity, final List<RoutingParameter> avoidedParameters,
-											final LocalRoutingParameter parameter, final RouteMenuAppModes mode,
-											final LinearLayout item) {
+	                                        final LocalRoutingParameter parameter, final RouteMenuAppModes mode,
+	                                        final LinearLayout item) {
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		for (int i = 0; i < avoidedParameters.size(); i++) {
 			final RoutingParameter routingParameter = avoidedParameters.get(i);
 			final View container = createToolbarSubOptionView(false, AndroidUtils.getRoutingStringPropertyName(
-					app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark,
+							app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark,
 					i == avoidedParameters.size() - 1, v -> {
 						OsmandApplication app = getApp();
 						if (app == null) {
@@ -1492,7 +1493,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private LinearLayout createToolbarOptionView(boolean active, String title, @DrawableRes int activeIconId,
-												 @DrawableRes int disabledIconId, OnClickListener listener) {
+	                                             @DrawableRes int disabledIconId, OnClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
@@ -1539,7 +1540,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private View createToolbarSubOptionView(boolean hideTextLine, String title, @DrawableRes int iconId,
-											boolean lastItem, OnClickListener listener) {
+	                                        boolean lastItem, OnClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
@@ -1653,6 +1654,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		setupViaText(mainView);
 
 		FrameLayout viaButton = mainView.findViewById(R.id.via_button);
+		int viaContentDescId = routeParams != null ? R.string.shared_string_add : R.string.shared_string_edit;
+		viaButton.setContentDescription(app.getString(viaContentDescId));
 		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
 
 		viaButton.setOnClickListener(v -> {

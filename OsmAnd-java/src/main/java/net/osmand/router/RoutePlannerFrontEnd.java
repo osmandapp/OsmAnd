@@ -1,17 +1,6 @@
 package net.osmand.router;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-
-import gnu.trove.list.array.TIntArrayList;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
@@ -23,7 +12,22 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
+
 
 public class RoutePlannerFrontEnd {
 
@@ -171,7 +175,7 @@ public class RoutePlannerFrontEnd {
 				}
 				if (road != null) {
 					if(!transportStop) {
-						float prio = Math.max(ctx.getRouter().defineSpeedPriority(road.road), 0.3f);
+						float prio = ctx.getRouter().defineDestinationPriority(road.road);
 						if (prio > 0) {
 							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
 									/ (prio * prio);
@@ -702,11 +706,20 @@ public class RoutePlannerFrontEnd {
 	private boolean needRequestPrivateAccessRouting(RoutingContext ctx, List<LatLon> points) throws IOException {
 		boolean res = false;
 		GeneralRouter router = (GeneralRouter) ctx.getRouter();
-		if (router != null && !router.isAllowPrivate() && 
-				router.getParameters().containsKey(GeneralRouter.ALLOW_PRIVATE)) {
+		if (router == null) {
+			return false;
+		}
+		Map<String, RoutingParameter> parameters = router.getParameters();
+		String allowPrivateKey = null;
+		if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE)) {
+			allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
+		} else if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK)) {
+			allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
+		}
+		if (!router.isAllowPrivate() && allowPrivateKey != null) {
 			ctx.unloadAllData();
 			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
-			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
+			mp.put(allowPrivateKey, "true");
 			mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
 			ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
 			for (LatLon latLon : points) {
@@ -765,7 +778,7 @@ public class RoutePlannerFrontEnd {
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
 			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
 			ctx.targetY = MapUtils.get31TileNumberY(end.getLatitude());
-			RouteSegment recalculationEnd = getRecalculationEnd(ctx);
+			RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 			if (recalculationEnd != null) {
 				ctx.initTargetPoint(recalculationEnd);
 			}
@@ -896,7 +909,7 @@ public class RoutePlannerFrontEnd {
 
 	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 	                                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
-		RouteSegment recalculationEnd = getRecalculationEnd(ctx);
+		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
 			ctx.initStartAndTargetPoints(start, recalculationEnd);
 		} else {
@@ -924,8 +937,8 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public RouteSegment getRecalculationEnd(final RoutingContext ctx) {
-		RouteSegment recalculationEnd = null;
+	public RouteSegmentPoint getRecalculationEnd(final RoutingContext ctx) {
+		RouteSegmentPoint recalculationEnd = null;
 		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
 				&& ctx.config.recalculateDistance != 0;
 		if (runRecalculation) {
@@ -947,7 +960,7 @@ public class RoutePlannerFrontEnd {
 					if (previous != null) {
 						previous.setParentRoute(segment);
 					} else {
-						recalculationEnd = segment;
+						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0); 
 					}
 					previous = segment;
 				}

@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -14,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
@@ -406,19 +407,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				selectTrackToFollow(gpxFile);
-				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() != 1);
+				selectTrackToFollow(gpxFile, true);
+				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() > 1);
 			} else {
-				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
-					@Override
-					public boolean processResult(GPXFile[] result) {
-						MapActivity mapActivity = getMapActivity();
-						if (mapActivity != null) {
-							selectTrackToFollow(result[0]);
-							updateSelectionMode(result[0].getNonEmptySegmentsCount() != 1);
-						}
-						return true;
+				CallbackWithObject<GPXFile[]> callback = result -> {
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						selectTrackToFollow(result[0], true);
+						updateSelectionMode(result[0].getNonEmptySegmentsCount() != 1);
 					}
+					return true;
 				};
 				File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, callback, dir, null, fileName);
@@ -426,12 +424,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	private void selectTrackToFollow(@NonNull GPXFile gpxFile) {
+	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean checkForSegments) {
 		this.gpxFile = gpxFile;
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile);
+			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, checkForSegments);
 		}
 	}
 
@@ -448,11 +446,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	public void importTrack() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			Intent intent = ImportHelper.getImportTrackIntent();
-			AndroidUtils.startActivityForResultIfSafe(activity, intent, ImportHelper.IMPORT_FILE_REQUEST);
-		}
+		Intent intent = ImportHelper.getImportTrackIntent();
+		AndroidUtils.startActivityForResultIfSafe(this, intent, ImportHelper.IMPORT_FILE_REQUEST);
 	}
 
 	@Override
@@ -469,7 +464,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					@Override
 					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {
-							selectTrackToFollow(result);
+							selectTrackToFollow(result, true);
 							updateSelectionMode(false);
 						} else {
 							app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
@@ -493,7 +488,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, showSnapWarning);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
 		}
 	}
 
@@ -598,7 +593,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
 		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
-		selectTrackToFollow(gpxFile);
+		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (paramsBuilder != null) {
 			paramsBuilder.setSelectedSegment(selectedSegment);

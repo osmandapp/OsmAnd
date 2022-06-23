@@ -13,6 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -22,18 +30,23 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
+import net.osmand.plus.views.layers.core.TransportStopsTileProvider.StopsCollectionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,8 +61,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private static final int startZoom = 12;
 	private static final int startZoomRoute = 10;
 
-	private OsmandMapTileView view;
-
 	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
@@ -59,17 +70,28 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	private Path path;
 
-	public TransportStopsLayer(@NonNull Context context) {
+	//OpenGL
+	private float textScale = 1.0f;
+	private boolean nightMode = false;
+	private TransportStopsTileProvider transportStopsTileProvider;
+	private VectorLinesCollection vectorLinesCollection;
+	private int stopRouteDist = 0;
+	private TransportStopType stopRouteType = null;
+	private boolean mapsInitialized = false;
+
+	public TransportStopsLayer(@NonNull Context context, int baseOrder) {
 		super(context);
 		OsmandSettings settings = getApplication().getSettings();
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
+		this.baseOrder = baseOrder;
 	}
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		WindowManager wmgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 		path = new Path();
 		attrs = new RenderingLineAttributes("transport_route");
@@ -90,11 +112,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 
 			@Override
-			protected List<TransportStop> calculateResult(RotatedTileBox tileBox) {
-				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if (latLonBounds == null) {
-					return new ArrayList<>();
-				}
+			protected List<TransportStop> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
 				try {
 					List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {
@@ -117,6 +135,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				}
 			}
 		};
+		addMapsInitializedListener();
 	}
 
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
@@ -132,9 +151,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				if (n.getLocation() == null) {
 					continue;
 				}
-				int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+						n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 					if (!ms.add(n.getName())) {
 						// only unique names
 						continue;
@@ -175,9 +194,38 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		if (!mapsInitialized) {
+			return;
+		}
 		List<TransportStop> objects = null;
 		boolean nightMode = settings.isNightMode();
 		OsmandApplication app = getApplication();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			float textScale = getTextScale();
+			int stopRouteDist = stopRoute != null ? stopRoute.distance : 0;
+			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
+			if (this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated
+					|| tb.getZoom() < startZoomRoute || this.stopRouteDist != stopRouteDist
+					|| this.stopRouteType != stopRouteType || !showTransportStops.get()) {
+				clearTransportRouteCollections();
+				clearTransportStopsTileProvider();
+			}
+			if (tb.getZoom() >= startZoomRoute && showTransportStops.get()) {
+				if (stopRoute != null) {
+					initTransportRouteCollections();
+				} else {
+					initTransportStopsTileProvider();
+				}
+			}
+			mapActivityInvalidated = false;
+			this.nightMode = nightMode;
+			this.textScale = textScale;
+			this.stopRouteDist = stopRouteDist;
+			this.stopRouteType = stopRouteType;
+			return;
+		}
+
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
 				objects = stopRoute.route.getForwardStops();
@@ -263,6 +311,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
+		clearTransportStopsTileProvider();
+		clearTransportRouteCollections();
 	}
 
 	@Override
@@ -271,7 +322,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -324,6 +375,127 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return ((TransportStop)o).getLocation();
 		}
 		return null;
+	}
+
+	/**OpenGL*/
+	private void initTransportRouteCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || stopRoute == null || stopRoute.route == null) {
+			return;
+		}
+		if (vectorLinesCollection != null || mapMarkersCollection != null) {
+			return;
+		}
+		List<Way> ws = stopRoute.route.getForwardWays();
+		if (ws != null) {
+			int lineId = 1;
+			OsmandApplication app = getApplication();
+			int color = stopRoute.getColor(app, nightMode);
+			for (Way w : ws) {
+				QVectorPointI points = new QVectorPointI();
+				for (int i = 0; i < w.getNodes().size(); i++) {
+					Node o = w.getNodes().get(i);
+					int x = MapUtils.get31TileNumberX(o.getLongitude());
+					int y = MapUtils.get31TileNumberY(o.getLatitude());
+					points.add(new PointI(x, y));
+				}
+				if (points.size() > 1) {
+					if (vectorLinesCollection == null) {
+						vectorLinesCollection = new VectorLinesCollection();
+					}
+					VectorLineBuilder builder = new VectorLineBuilder();
+					builder.setPoints(points)
+							.setIsHidden(false)
+							.setLineId(lineId++)
+							.setLineWidth(attrs.defaultWidth * 1.5d)
+							.setFillColor(NativeUtilities.createFColorARGB(color))
+							.setApproximationEnabled(false)
+							.setBaseOrder(baseOrder);
+					builder.buildAndAddToCollection(vectorLinesCollection);
+				}
+			}
+			if (vectorLinesCollection != null) {
+				mapRenderer.addSymbolsProvider(vectorLinesCollection);
+			}
+		}
+		List<TransportStop> transportStops = stopRoute.route.getForwardStops();
+		String transportRouteType = stopRoute.route.getType();
+		if (transportStops.size() > 0) {
+			int baseOrder = getBaseOrder() - 1;
+			mapMarkersCollection = new MapMarkersCollection();
+			for (TransportStop ts : transportStops) {
+				StopsCollectionPoint collectionPoint =
+						new StopsCollectionPoint(getContext(), ts, getTextScale(), transportRouteType);
+				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+				mapMarkerBuilder
+						.setPosition(collectionPoint.getPoint31())
+						.setIsHidden(false)
+						.setBaseOrder(baseOrder)
+						.setPinIcon(collectionPoint.getImageBitmap(true))
+						.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
+						.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
+				mapMarkerBuilder.buildAndAddToCollection(mapMarkersCollection);
+			}
+			mapRenderer.addSymbolsProvider(mapMarkersCollection);
+		}
+	}
+
+	/**OpenGL*/
+	private void clearTransportRouteCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		clearMapMarkersCollections();
+		if (vectorLinesCollection != null) {
+			mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+			vectorLinesCollection = null;
+		}
+	}
+
+	/**OpenGL*/
+	private void initTransportStopsTileProvider() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (transportStopsTileProvider == null) {
+			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, baseOrder, getTextScale());
+			transportStopsTileProvider.drawSymbols(mapRenderer);
+		}
+	}
+
+	/**OpenGL*/
+	private void clearTransportStopsTileProvider() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && transportStopsTileProvider != null) {
+			transportStopsTileProvider.clearSymbols(mapRenderer);
+			transportStopsTileProvider = null;
+		}
+	}
+
+	private void addMapsInitializedListener() {
+		OsmandApplication app = getApplication();
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onStart(AppInitializer init) {
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+					if (event == AppInitializer.InitEvents.MAPS_INITIALIZED) {
+						mapsInitialized = true;
+					}
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+				}
+			});
+		} else {
+			mapsInitialized = true;
+		}
 	}
 
 }

@@ -1,16 +1,25 @@
 package net.osmand.plus.views.controls;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,23 +29,20 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
 public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
-	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final WidgetsPanel widgetsPanel;
+	private final MapWidgetRegistry widgetRegistry;
 
 	private VisiblePages visiblePages;
 	private ViewHolderBindListener bindListener;
 
-	public WidgetsPagerAdapter(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.visiblePages = collectVisiblePages();
+	public WidgetsPagerAdapter(@NonNull OsmandApplication app, @NonNull WidgetsPanel widgetsPanel) {
+		this.widgetsPanel = widgetsPanel;
+		settings = app.getSettings();
+		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		visiblePages = collectVisiblePages();
 	}
 
 	public void setViewHolderBindListener(@Nullable ViewHolderBindListener bindListener) {
@@ -89,9 +95,9 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 	@NonNull
 	private VisiblePages collectVisiblePages() {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		return new VisiblePages(widgetRegistry.getRightWidgets(), appMode);
+		ApplicationMode appMode = settings.getApplicationMode();
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(widgetsPanel);
+		return new VisiblePages(widgetInfos, appMode);
 	}
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {

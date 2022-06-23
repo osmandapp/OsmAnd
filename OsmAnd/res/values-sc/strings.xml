@@ -246,7 +246,6 @@
     <string name="intermediate_points_change_order">Muda s’òrdine</string>
     <string name="srtm_paid_version_msg">Pro praghere piga a cunsideru sa còmpora de s’estensione \'Curvas de livellu\', pro sostènnere s’isvilupu imbeniente.</string>
     <string name="srtm_paid_version_title">Estensione \"Curvas de livellu\"</string>
-    <string name="av_def_action_choose">A dimanda\?</string>
     <string name="av_def_action_video">Registra video</string>
     <string name="av_def_action_audio">Registra audio</string>
     <string name="av_widget_action_descr">Atzione predefinida de su widget:</string>
@@ -1412,7 +1411,7 @@
     <string name="shared_string_enable">Abìlita</string>
     <string name="shared_string_disable">Disabìlita</string>
     <string name="plugin_install_needs_network">Depes èssere connessu in lìnia pro installare custa estensione.</string>
-    <string name="get_plugin">Iscàrriga</string>
+    <string name="shared_string_get">Iscàrriga</string>
     <string name="plugin_nautical_name">Vista mapa nàutica</string>
     <string name="world_ski_missing">Iscàrriga sa mapa ispetziale non in lìnia pro ammustrare sos impiantos pro s’iscì.</string>
     <string name="plugin_ski_name">Vista mapa iscì</string>
@@ -1461,7 +1460,7 @@
     <string name="action_delete">Atzione iscantzella</string>
     <string name="osm_edits">Modìficas OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">galu</string>
     <string name="parking_place_limited">Parchègiu cun tempus limitadu a</string>
     <string name="your_edits">Modìficas tuas</string>
@@ -2025,7 +2024,6 @@
     <string name="edit_filter">Acontza sas categorias</string>
     <string name="subcategories">Suta-categorias</string>
     <string name="translit_names">Translìtera sos nùmenes</string>
-    <string name="translit_name_if_miss">Translìtera si non b\'est su nùmene in %1$s</string>
     <string name="search_hint">Iscrie sa tzitade, s\'indiritzu, o su nùmene de su PDI</string>
     <string name="shared_string_continue">Sighi</string>
     <string name="shared_string_pause">Pàusa</string>
@@ -4013,9 +4011,6 @@
     <string name="updated">Agiornadu: %s</string>
     <string name="last_time_checked">Ùrtima verìfica: %s</string>
     <string name="update_frequency">Frecuèntzia de sos agiornamentos</string>
-    <string name="live_update_frequency_week_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada chida. Sa borta chi benit: %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada die. Sa borta chi benit: %1$s in %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada ora. Sa borta chi benit: %1$s in %2$s.</string>
     <string name="delete_updates">Iscantzella sos agiornamentos</string>
     <string name="live_update_delete_updates_msg">Iscantzellare totu sos %s agiornamentos in direta\?</string>
     <string name="select_category_descr">Ischerta una categoria o annanghe·nde una noa</string>
@@ -4594,4 +4589,5 @@
     <string name="no_widgets_here_yet">Galu perunu widget inoghe</string>
     <string name="available_widgets">Widgets a disponimentu</string>
     <string name="snackbar_page_removed">\"Sa pàgina %1$s\" est istada bogada.</string>
+    <string name="shared_string_mode">Modalidade</string>
 </resources>

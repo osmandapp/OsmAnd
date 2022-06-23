@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -38,7 +39,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private static final int DISTANCE_TEXT_SIZE = 16;
 
 	private OsmandApplication app;
-	private OsmandMapTileView view;
 
 	private boolean showTwoFingersDistance;
 	private boolean showDistBetweenFingerAndLocation;
@@ -72,8 +72,9 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
+
 		app = getApplication();
-		this.view = view;
 		touchPoint = new PointF();
 		acceptableTouchRadius = app.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
@@ -108,13 +109,14 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		if (rulerModeOn() && !showTwoFingersDistance) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				touched = true;
 				touchOutside = false;
 				touchPoint.set(event.getX(), event.getY());
-				touchPointLatLon = tileBox.getLatLonFromPixel(event.getX(), event.getY());
+				touchPointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
+						event.getX(), event.getY());
 				touchStartTime = System.currentTimeMillis();
 				wasZoom = false;
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE && !touchOutside &&
@@ -260,11 +262,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		drawFingerTouchIcon(canvas, x, y, night);
 		drawTextOnCenterOfPath(canvas, x, currX, linePath, text);
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-	}
-
-	@Override
-	public void destroyLayer() {
-
 	}
 
 	@Override

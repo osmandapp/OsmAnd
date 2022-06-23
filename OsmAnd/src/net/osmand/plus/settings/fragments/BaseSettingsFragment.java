@@ -1,8 +1,11 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.res.ColorStateList;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -23,7 +26,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -87,9 +89,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -629,9 +628,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected final void applyPreference(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (applyToAllProfiles) {
-			app.getSettings().setPreferenceForAllModes(prefId, newValue);
+			settings.setPreferenceForAllModes(prefId, newValue);
 		} else {
-			app.getSettings().setPreference(prefId, newValue, getSelectedAppMode());
+			settings.setPreference(prefId, newValue, getSelectedAppMode());
+		}
+	}
+
+	protected final void resetPreference(String prefId, boolean applyToAllProfiles) {
+		if (applyToAllProfiles) {
+			settings.resetPreferenceForAllModes(prefId);
+		} else {
+			settings.resetPreference(prefId, getSelectedAppMode());
 		}
 	}
 
@@ -844,16 +851,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected Drawable getPersistentPrefIcon(Drawable enabled, Drawable disabled) {
-		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
-
-		if (Build.VERSION.SDK_INT < 21) {
-			int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-			ColorStateList colorStateList = AndroidUtils.createEnabledColorIntStateList(defaultColor, getActiveProfileColor());
-			icon = DrawableCompat.wrap(icon);
-			DrawableCompat.setTintList(icon, colorStateList);
-			return icon;
-		}
-		return icon;
+		return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
@@ -875,7 +873,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public SwitchPreferenceEx createSwitchPreferenceEx(String prefId, String title, String summary, int layoutId) {
-		SwitchPreferenceEx p = new SwitchPreferenceEx(getContext());
+		return createSwitchPreferenceEx(requireContext(), prefId, title, summary, layoutId);
+	}
+
+	public static SwitchPreferenceEx createSwitchPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
+	                                                          String title, String summary, int layoutId) {
+		SwitchPreferenceEx p = new SwitchPreferenceEx(ctx);
 		p.setKey(prefId);
 		p.setTitle(title);
 		p.setSummary(summary);
@@ -889,7 +892,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public ListPreferenceEx createListPreferenceEx(String prefId, String[] names, Object[] values, String title, int layoutId) {
-		ListPreferenceEx listPreference = new ListPreferenceEx(getContext());
+		return createListPreferenceEx(requireContext(), prefId, names, values, title, layoutId);
+	}
+
+	public static ListPreferenceEx createListPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
+	                                                      @NonNull String[] names, @NonNull Object[] values,
+	                                                      String title, int layoutId) {
+		ListPreferenceEx listPreference = new ListPreferenceEx(ctx);
 		listPreference.setKey(prefId);
 		listPreference.setTitle(title);
 		listPreference.setDialogTitle(title);

@@ -63,16 +63,17 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 
 	@Override
 	public void addNewGroup() {
-
+		pointsGroup = new PointsGroup(groupName, getIconName(), getBackgroundType().getTypeName(), getColor());
 	}
 
 	@Override
-	public void editPointsGroup(boolean updatePoints) {
+	public void editPointsGroup(boolean updatePointsAppearance) {
 		MapActivity mapActivity = getMapActivity();
 		if (pointsGroup != null && mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
-			PointsGroup newGroup = new PointsGroup(groupName, getIconName(), getBackgroundType().getTypeName(), getColor(), pointsGroup.pointsSize);
-			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup, newGroup, listener, true);
+			String backgroundType = getBackgroundType().getTypeName();
+			PointsGroup newGroup = new PointsGroup(groupName, getIconName(), backgroundType, getColor());
+			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup.name, newGroup, listener, updatePointsAppearance);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 		dismiss();
@@ -80,9 +81,9 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 
 	private UpdateGpxListener getUpdateGpxListener(@NonNull MapActivity mapActivity) {
 		WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
-		return errorMessage -> {
+		return exception -> {
 			saved = true;
-			if (errorMessage == null) {
+			if (exception == null) {
 				MapActivity activity = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 					TrackMenuFragment fragment = activity.getTrackMenuFragment();
@@ -91,7 +92,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 					}
 				}
 			} else {
-				LOG.error(errorMessage);
+				LOG.error(exception);
 			}
 		};
 	}

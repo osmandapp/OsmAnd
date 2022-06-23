@@ -12,7 +12,7 @@
     <string name="poi_aerialway_station">Station de transport aérien par câble</string>
     <string name="poi_aeroway_gate">Porte d\'embarquement</string>
     <string name="poi_runway">Piste d\'aérodrome</string>
-    <string name="poi_aerodrome">Aérodrome</string>
+    <string name="poi_aerodrome">Aéroport ; Aérodrome</string>
     <string name="poi_alcohol">Magasin de boissons alcoolisées</string>
     <string name="poi_alpine_hut">Refuge de montagne gardé ; Refuge</string>
     <string name="poi_ambulance_station">Station d\'ambulances</string>
@@ -626,7 +626,7 @@
     <string name="poi_military_landuse">Zone militaire</string>
     <string name="poi_wine">Caviste</string>
     <string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
-    <string name="poi_halt">Gare ferroviaire (halte)</string>
+    <string name="poi_halt">Gare ferroviaire</string>
     <string name="poi_lodging">Hébergement</string>
     <string name="poi_apartment">Meublé de tourisme</string>
     <string name="poi_internet_access_wlan">Accès Internet : sans-fil</string>
@@ -1104,7 +1104,7 @@
     <string name="poi_aerialway_duration">Durée moyenne du trajet (minutes)</string>
     <string name="poi_aerialway_bubble_yes">Fermé</string>
     <string name="poi_aerialway_bubble_no">Non fermé</string>
-    <string name="poi_aerialway_heating_yes">Oui; Chauffage</string>
+    <string name="poi_aerialway_heating_yes">Oui ; Chauffage</string>
     <string name="poi_aerialway_heating_no">Non chauffé</string>
     <string name="poi_aerialway_bicycle_yes">Autorisés</string>
     <string name="poi_aerialway_bicycle_no">Vélos : interdits</string>
@@ -1417,10 +1417,10 @@
     <string name="poi_surface_fine_gravel">Surface : gravier fin</string>
     <string name="poi_route_monorail_ref">Monorail</string>
     <string name="poi_service_bicycle_retail_no">Vente de vélos : non</string>
-    <string name="poi_service_bicycle_repair_yes">Réparation; Réparation de bicyclettes; Réparation de vélo</string>
-    <string name="poi_service_bicycle_retail_yes">Vente; Vente au détail de bicyclettes; Vente au détail de vélos</string>
+    <string name="poi_service_bicycle_repair_yes">Réparation ; Réparation de bicyclettes ; Réparation de vélo</string>
+    <string name="poi_service_bicycle_retail_yes">Vente ; Vente au détail de bicyclettes ; Vente au détail de vélos</string>
     <string name="poi_service_bicycle_repair_no">Réparation de vélos : non</string>
-    <string name="poi_service_bicycle_rental_yes">Location;Location de bicyclettes/vélos</string>
+    <string name="poi_service_bicycle_rental_yes">Location ; Location de bicyclettes/vélos</string>
     <string name="poi_service_bicycle_rental_no">Location de vélos : non</string>
     <string name="poi_service_bicycle_pump_yes">Pompe à bicyclette/vélo</string>
     <string name="poi_service_bicycle_pump_no">Pompe à vélo : non</string>
@@ -1428,7 +1428,7 @@
     <string name="poi_service_bicycle_diy_no">Outils en libre service : non</string>
     <string name="poi_service_bicycle_cleaning_yes">Nettoyage bicyclettes/vélos</string>
     <string name="poi_service_bicycle_cleaning_no">Nettoyage de vélos : non</string>
-    <string name="poi_service_bicycle_chaintool_yes">Dérive-chaîne ; Dérive-chaîne de vélo ; Dérive-chaîne de vélo</string>
+    <string name="poi_service_bicycle_chaintool_yes">Dérive-chaîne ; Dérive-chaîne de vélo/bicyclette</string>
     <string name="poi_service_bicycle_chaintool_no">Dérive-chaîne : non</string>
     <string name="poi_training_language">Enseignement : langue</string>
     <string name="poi_training_music">Enseignement : musique</string>
@@ -2202,7 +2202,7 @@
     <string name="poi_outdoor_seating_filter_yes">Oui ; sièges extérieurs</string>
     <string name="poi_brushless_yes">Oui ; sans balai</string>
     <string name="poi_architecture_stalinist_neoclassicism">Architecture : néoclassicisme stalinien</string>
-    <string name="poi_service_bicycle_charging_yes">"Recharge de vélo électrique  : oui"</string>
+    <string name="poi_service_bicycle_charging_yes">Recharge de vélo électrique : oui</string>
     <string name="poi_service_bicycle_charging_no">Recharge : non</string>
     <string name="poi_clothes_schoolwear">École</string>
     <string name="poi_shower_filter_yes">Oui ; filtre de douche</string>
@@ -3684,7 +3684,7 @@
     <string name="poi_disabled_no">Accès pour handicapés : non</string>
     <string name="poi_snowmobile_yes">Oui ; Motoneige</string>
     <string name="poi_snowmobile_designated">Indiqué ; Indiqué pour les motoneiges</string>
-    <string name="poi_snowmobile_permissive">"Autorisé  ; accès autorisé  aux motoneiges"</string>
+    <string name="poi_snowmobile_permissive">Autorisé ; accès autorisé aux motoneiges</string>
     <string name="poi_bus_designated">Désigné ; désigné pour les bus</string>
     <string name="poi_caravan_yes">Oui ; Caravane</string>
     <string name="poi_caravan_designated">Désignée ; désignée pour les caravanes</string>
@@ -3790,7 +3790,7 @@
     <string name="poi_drinking_water_refill_yes">Oui ; Recharge d’eau potable ; Remplir</string>
     <string name="poi_drinking_water_refill_no">Remplissage d\'eau potable : non</string>
     <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
-    <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>
+    <string name="poi_traffic_signals_sound_locate">Uniquement pour trouver le poteau</string>
     <string name="poi_internet_access_fee_customers">Accès internet client</string>
     <string name="poi_fire_hydrant_pressure_filter">Pression</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Aspiration</string>
@@ -4297,7 +4297,7 @@
     <string name="poi_parcel_locker">Casier à colis</string>
     <string name="poi_landuse_education">Education</string>
     <string name="poi_changing_table_filter">Table à langer</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard sans contact</string>
     <string name="poi_payment_maestro_contactless_yes">Sans contact Maestro</string>
     <string name="poi_payment_visa_contactless_yes">Sans contact Visa</string>
     <string name="poi_payment_american_express_contactless_no">American Express (AMEX) sans contact non acceptée</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_food_no">Nourriture : non</string>
     <string name="poi_rice">Magasin de riz</string>
     <string name="poi_fish_pass">Passe à poissons</string>
+    <string name="poi_flow_rate">Débit</string>
+    <string name="poi_golf_pin">Drapeau de golf</string>
 </resources>

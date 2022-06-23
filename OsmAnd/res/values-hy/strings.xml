@@ -92,7 +92,6 @@
     <string name="local_indexes_cat_srtm">Կոնտուրային գծերի/եզրագծերի տվյալներ</string>
     <string name="precise_routing_mode_descr">Միացնել ճշգրիտ երթուղիների հաշվարկի ռեժիմը։ Այս ռեժիմը դեր սահմանափակված է հեռավորությամբ և դանդախ է։</string>
     <string name="dropbox_plugin_name">Dropbox փլագին</string>
-    <string name="av_def_action_choose">Ընտրել ըստ հարցման\?</string>
     <string name="av_widget_action_descr">Ընտրել default Widget գործողություն՝</string>
     <string name="av_widget_action">Default վիդջետի գործողություն</string>
     <string name="recording_is_recorded">Կատարվում է աուդիո/վիդեո ձայնագրում, դադարեցնելու համար սեխմեք AV վիջետը։</string>
@@ -420,7 +419,6 @@
     <string name="rendering_value_light_brown_name">Բաց-շագանակագույն</string>
     <string name="rendering_value_dark_brown_name">Մուգ շագանակագույն</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines գունային սխեման</string>
-    <string name="translit_name_if_miss">Transliterate եթե %1$s անունը բացակայում է</string>
     <string name="translit_names">Transliterate անունները</string>
     <string name="first_usage_greeting">Ստացեք երթուղիներ և հայտնաբերեք նոր վայրեր առանց ինտերնետ կապի</string>
     <string name="search_my_location">Գտնել իմ դիրքը</string>
@@ -835,7 +833,7 @@
     <string name="action_delete">Ջնջել գործողությունը</string>
     <string name="osm_edits">OSM-ի խմբագրումները</string>
     <string name="osmand_parking_hour">ժ</string>
-    <string name="osmand_parking_minute">րոպե</string>
+    <string name="shared_string_minute_lowercase">րոպե</string>
     <string name="parking_place_limited">Ավտոկանգառի ժամանակը սահմանափակ է</string>
     <string name="osmand_parking_time_left">մնաց</string>
     <string name="your_edits">Ձեր խմբագրումները</string>
@@ -2332,7 +2330,7 @@
     <string name="av_camera_pic_size_descr">Ընտրեք տեսախցիկի և պատկերի չափը</string>
     <string name="navigation_intent_invalid">Սխալ ձևաչափ՝ %s</string>
     <string name="plugin_install_needs_network">Անհրաժեշտ է ինտերնետ կապ այս plugin-ը տեղադրելու համար:</string>
-    <string name="get_plugin">Ստանալ</string>
+    <string name="shared_string_get">Ստանալ</string>
     <string name="use_fast_recalculation">Երթուղու խելացի վերահաշվարկ</string>
     <string name="use_fast_recalculation_desc">Երկար ուղեւորությունների ժամանակ միայն վերահաշվարկել երթուղու նախնական մասը:</string>
     <string name="do_you_like_osmand">Ձեզ դուր է գալիս OsmAnd?</string>

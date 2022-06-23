@@ -3,7 +3,7 @@ package net.osmand.plus;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
@@ -81,6 +81,7 @@ import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -112,7 +113,6 @@ import btools.routingapp.IBRouterService;
  */
 public class AppInitializer implements IProgress {
 
-	public static final String LATEST_CHANGES_URL = "https://docs.osmand.net/blog/osmand-android-4-2-released/";
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
@@ -186,6 +186,14 @@ public class AppInitializer implements IProgress {
 
 	public long getFirstInstalledDays() {
 		return appVersionUpgrade.getFirstInstalledDays(startPrefs);
+	}
+
+	public long getFirstInstalledTime() {
+		return appVersionUpgrade.getFirstInstalledTime(startPrefs);
+	}
+
+	public long getUpdateVersionTime() {
+		return appVersionUpgrade.getUpdateVersionTime(startPrefs);
 	}
 
 	public void resetFirstTimeRun() {
@@ -448,6 +456,7 @@ public class AppInitializer implements IProgress {
 		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
+		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
 
 		initOpeningHoursParser();
 	}
@@ -673,9 +682,9 @@ public class AppInitializer implements IProgress {
 			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
 			LiveUpdatesHelper.UpdateFrequency updateFrequency =
 					LiveUpdatesHelper.UpdateFrequency.values()[updateFrequencyOrd];
-			long lastCheck = preferenceLastCheck(fileName, settings).get();
+			long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 
-			if (System.currentTimeMillis() - lastCheck > updateFrequency.getTime() * 2) {
+			if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
 				runLiveUpdate(app, fileName, false, null);
 				PendingIntent alarmIntent = getPendingIntent(app, fileName);
 				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
@@ -773,13 +782,10 @@ public class AppInitializer implements IProgress {
 	}
 
 	public void notifyFinish() {
-		app.uiHandler.post(new Runnable() {
-
-			@Override
-			public void run() {
-				for (AppInitializeListener l : listeners) {
-					l.onFinish(AppInitializer.this);
-				}
+		app.uiHandler.post(() -> {
+			List<AppInitializeListener> listeners = new ArrayList<>(this.listeners);
+			for (AppInitializeListener l : listeners) {
+				l.onFinish(this);
 			}
 		});
 	}

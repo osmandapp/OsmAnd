@@ -54,7 +54,7 @@
     <string name="action_delete">Apagar ação</string>
     <string name="osm_edits">Edições no OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Tempo de estacionamento limitado a</string>
     <string name="osmand_parking_time_left">restante</string>
     <string name="your_edits">Suas edições</string>
@@ -673,7 +673,6 @@
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
     <string name="srtm_paid_version_msg">Considere pagar pelo complemento \"Curvas de nível\" para apoiar o desenvolvimento.</string>
-    <string name="av_def_action_choose">Sob demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar áudio</string>
     <string name="av_widget_action_descr">Ação padrão do widget:</string>
@@ -1523,7 +1522,7 @@
     <string name="av_camera_pic_size_descr">Defina tamanho da foto</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_install_needs_network">Você precisa estar conectado para instalar este complemento.</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="shared_string_logoff">Desconectar</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzamentos de fronteiras nacionais</string>
     <string name="routing_attr_height_name">Limite de altura</string>
@@ -2241,7 +2240,6 @@
     <string name="rendering_attr_contourColorScheme_name">Esquema de cores das curvas de nível</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da via</string>
     <string name="search_hint">Digite cidade, endereço, nome do POI</string>
-    <string name="translit_name_if_miss">Transliterar se o nome %1$s for ausente</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou os menus de contexto.</string>
@@ -3085,7 +3083,7 @@
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixa emissão no mapa. Não afeta o roteamento.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baixa emissão</string>
-    <string name="temporary_conditional_routing">Considere limitações temporárias</string>
+    <string name="temporary_conditional_routing">Aplicar limitações temporárias (obras...)</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s, tempo do roteador %2$s
 \nCálculo: %3$.1f seg; %4$d estradas; %5$d mosaicos)</string>
@@ -4010,9 +4008,6 @@
     <string name="updated">Atualizado: %s</string>
     <string name="last_time_checked">Última vez verificado: %s</string>
     <string name="update_frequency">Frequência de atualização</string>
-    <string name="live_update_frequency_week_variant">As atualizações do mapa serão verificadas todas as semanas. Próxima vez %1$s em %2$s.</string>
-    <string name="live_update_frequency_day_variant">As atualizações do mapa serão verificadas todos os dias. Próxima vez %1$s em %2$s.</string>
-    <string name="live_update_frequency_hour_variant">As atualizações do mapa serão verificadas a cada hora. Da próxima vez, %1$s em %2$s.</string>
     <string name="delete_updates">Apagar atualizações</string>
     <string name="live_update_delete_updates_msg">Excluir todas as atualizações do OsmAnd Live de %s\?</string>
     <string name="purchases">Compras</string>
@@ -4507,4 +4502,49 @@
     <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="stop_download_desc">O download não está completo. Se você interromper o download agora, apenas parte dos blocos estará disponível para visualização.</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermediário</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avançado</string>
+    <string name="available_widgets">Widgets disponíveis</string>
+    <string name="no_widgets_descr">Adicione um ou mais widgets da lista de widgets disponíveis.</string>
+    <string name="no_widgets_here_yet">Ainda não há widgets aqui</string>
+    <string name="turn_on_public_transport_description">Ative para ver as rotas de transporte público no mapa.</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Especialista</string>
+    <string name="release_4_2">• Redesenho de widgets: novo Look &amp; Feel, agrupar por Páginas, alterar a ordem e combinar como quiser.
+\n
+\n• Caminhadas / Ciclismo / Rotas de viagem: toque no símbolo da rota e obtenha informações completas sobre a rota.
+\n
+\n• Grupos favoritos: defina a aparência padrão para novos pontos no grupo
+\n
+\n• Correções: atualização automática de mapas online
+\n
+\n</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Não saia da pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Somente se necessário</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Prefira fora da pista</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Sem preferência</string>
+    <string name="shared_string_symbol">Símbolo</string>
+    <string name="bearing_secondary_desc">Você pode alterar o formato dos dados exibidos em: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">O formato das coordenadas pode ser alterado em %1$s – %2$s – %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Parte do plug-in %1$s.</string>
+    <string name="elevation_profile_widget_desc">Este widget mostra o perfil de elevação e inclinação da rota atual.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Evitar estradas 4x4</string>
+    <string name="routing_attr_avoid_4wd_only_description">Evite estradas adequadas apenas para veículos 4x4</string>
+    <string name="parking_widget_desc">Este widget que mostra a distância do centro da tela até o estacionamento.</string>
+    <string name="mapillary_widget_desc">Este widget fornece acesso rápido ao aplicativo Mapillary para adicionar imagens de nível de rua.</string>
+    <string name="current_time_widget_desc">Este widget mostra a hora atual do seu dispositivo.</string>
+    <string name="gps_info_widget_desc">Este widget mostra uma série de satélites que o dispositivo detecta e usa naquele momento.</string>
+    <string name="altitude_widget_desc">Este widget mostra a altura acima do nível do mar da geolocalização atual.</string>
+    <string name="max_speed_widget_desc">Este widget mostra um limite de velocidade para uma estrada em que se encontra.</string>
+    <string name="fps_widget_desc">Este widget mostra a rapidez com que os elementos do mapa são mostrados e atualizados.</string>
+    <string name="battery_widget_desc">Este widget mostra o nível da bateria do seu dispositivo.</string>
+    <string name="radius_rules_widget_desc">A ferramenta Régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da exibição de círculos de distância no mapa.</string>
+    <string name="current_speed_widget_desc">Este widget mostra sua velocidade atual detectada pelo sensor GPS.</string>
+    <string name="shared_string_mode">Modo</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares</string>
+    <string name="explore_plans">Explorar planos</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Você pode alternar o modo tocando no widget.</string>
+    <string name="map_widget_time_to_destination">Tempo para o destino</string>
 </resources>

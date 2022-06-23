@@ -14,16 +14,11 @@ import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -31,13 +26,18 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
@@ -60,6 +60,7 @@ import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -71,6 +72,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -240,7 +242,7 @@ public abstract class SettingsHelper {
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			List<OsmNotesPoint> notesPointList = settingsTypes == null || settingsTypes.contains(ExportSettingsType.OSM_NOTES)
-					? osmEditingPlugin.getDBBug().getOsmbugsPoints()
+					? osmEditingPlugin.getDBBug().getOsmBugsPoints()
 					: Collections.emptyList();
 			if (!notesPointList.isEmpty() || addEmptyItems) {
 				myPlacesItems.put(ExportSettingsType.OSM_NOTES, notesPointList);
@@ -387,8 +389,20 @@ public abstract class SettingsHelper {
 	}
 
 	private List<LocalIndexInfo> getLocalIndexData(LocalIndexType... indexTypes) {
-		return new LocalIndexHelper(app).getLocalIndexData(
-				!app.getResourceManager().isIndexesLoadedOnStart(), false, null, indexTypes);
+		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
+		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
+		List<LocalIndexInfo> indexInfos = indexHelper.getLocalIndexData(readFiles, false, null, indexTypes);
+
+		String miniBaseMapName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
+		Iterator<LocalIndexInfo> iterator = indexInfos.iterator();
+		while (iterator.hasNext()) {
+			LocalIndexInfo indexInfo = iterator.next();
+			if (LocalIndexType.MAP_DATA == indexInfo.getType() && miniBaseMapName.equalsIgnoreCase(indexInfo.getFileName())) {
+				iterator.remove();
+			}
+		}
+
+		return indexInfos;
 	}
 
 	private List<File> getFilesByType(List<LocalIndexInfo> localVoiceFileList, LocalIndexType... localIndexType) {

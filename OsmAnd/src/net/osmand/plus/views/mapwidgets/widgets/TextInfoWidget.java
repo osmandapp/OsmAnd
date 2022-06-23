@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -25,6 +27,7 @@ public class TextInfoWidget extends MapWidget {
 	private final TextView textViewShadow;
 	private final TextView smallTextView;
 	private final TextView smallTextViewShadow;
+	private final View bottomDivider;
 
 	@DrawableRes
 	private int dayIconId;
@@ -34,13 +37,15 @@ public class TextInfoWidget extends MapWidget {
 	private Integer cachedMetricSystem = null;
 	private Integer cachedAngularUnits = null;
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
+		super(mapActivity, widgetType);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
+		bottomDivider = view.findViewById(R.id.bottom_divider);
 	}
 
 	@Override
@@ -68,6 +73,10 @@ public class TextInfoWidget extends MapWidget {
 			imageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
 		}
 		imageView.invalidate();
+	}
+
+	public boolean setIcons(@NonNull WidgetType widgetType) {
+		return setIcons(widgetType.dayIconId, widgetType.nightIconId);
 	}
 
 	public boolean setIcons(@DrawableRes int widgetDayIcon, @DrawableRes int widgetNightIcon) {
@@ -164,6 +173,9 @@ public class TextInfoWidget extends MapWidget {
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
+
+		view.setBackgroundResource(textState.widgetBackgroundId);
+		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
 	}
 
 	@Override
@@ -178,6 +190,15 @@ public class TextInfoWidget extends MapWidget {
 	@DrawableRes
 	protected int getIconId() {
 		return getIconId(isNightMode());
+	}
+
+	protected void setTimeText(long time) {
+		if (DateFormat.is24HourFormat(app)) {
+			setText(DateFormat.format("k:mm", time).toString(), null);
+		} else {
+			setText(DateFormat.format("h:mm", time).toString(),
+					DateFormat.format("aa", time).toString());
+		}
 	}
 
 	@DrawableRes

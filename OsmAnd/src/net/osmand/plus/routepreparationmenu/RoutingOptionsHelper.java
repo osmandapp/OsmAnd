@@ -32,6 +32,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -67,6 +68,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_R
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
@@ -421,6 +423,8 @@ public class RoutingOptionsHelper {
 				return new DividerItem();
 			case RouteSimulationItem.KEY:
 				return new RouteSimulationItem();
+			case CalculateAltitudeItem.KEY:
+				return new CalculateAltitudeItem();
 			case ShowAlongTheRouteItem.KEY:
 				return new ShowAlongTheRouteItem();
 			case AvoidPTTypesRoutingParameter.KEY:
@@ -448,7 +452,7 @@ public class RoutingOptionsHelper {
 		}
 
 		LocalRoutingParameter rp;
-		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters();
+		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
 		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameterId);
 
 		if (routingParameter != null) {
@@ -456,7 +460,7 @@ public class RoutingOptionsHelper {
 			rp.routingParameter = routingParameter;
 		} else {
 			LocalRoutingParameterGroup rpg = null;
-			for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
+			for (GeneralRouter.RoutingParameter r : parameters.values()) {
 				if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN
 						&& !Algorithms.isEmpty(r.getGroup()) && r.getGroup().equals(parameterId)) {
 					if (rpg == null) {
@@ -528,7 +532,8 @@ public class RoutingOptionsHelper {
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
-		for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
+		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
+		for (GeneralRouter.RoutingParameter r : parameters.values()) {
 			if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 				if ("relief_smoothness_factor".equals(r.getGroup())) {
 					continue;
@@ -593,6 +598,7 @@ public class RoutingOptionsHelper {
 				rp.activeIconId = R.drawable.ic_action_avoid_motorways;
 				break;
 			case GeneralRouter.ALLOW_PRIVATE:
+			case GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK:
 				rp.activeIconId = R.drawable.ic_action_allow_private_access;
 				rp.disabledIconId = R.drawable.ic_action_forbid_private_access;
 				break;
@@ -616,7 +622,8 @@ public class RoutingOptionsHelper {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
+			Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
 				String param = e.getKey();
 				GeneralRouter.RoutingParameter routingParameter = e.getValue();
 				if (param.startsWith("avoid_")) {
@@ -632,7 +639,7 @@ public class RoutingOptionsHelper {
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {
-			parameter = router.getParameters().get(parameterId);
+			parameter = RoutingHelperUtils.getParameterForDerivedProfile(parameterId, applicationMode, router);
 		}
 
 		return parameter;
@@ -828,6 +835,23 @@ public class RoutingOptionsHelper {
 		}
 
 		public RouteSimulationItem() {
+			super(null);
+		}
+	}
+
+	public static class CalculateAltitudeItem extends LocalRoutingParameter {
+
+		public static final String KEY = NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
+
+		public String getKey() {
+			return KEY;
+		}
+
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
+		public CalculateAltitudeItem() {
 			super(null);
 		}
 	}

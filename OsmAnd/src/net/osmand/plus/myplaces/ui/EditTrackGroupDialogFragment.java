@@ -1,8 +1,5 @@
 package net.osmand.plus.myplaces.ui;
 
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -36,6 +33,7 @@ import net.osmand.plus.measurementtool.OptionsDividerItem;
 import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
@@ -48,6 +46,9 @@ import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
 public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
 
@@ -77,7 +78,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		if (currentTrack) {
 			selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 		} else {
-			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+			selectedGpxFile = selectedGpxHelper.getVisibleFileByPath(gpxFile.path);
 		}
 		boolean trackPoints = group.getType() == GpxDisplayItemType.TRACK_POINTS;
 		if (trackPoints && selectedGpxFile != null) {
@@ -173,9 +174,11 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void updateGroupWptCategory(GPXFile gpxFile, boolean synced) {
-		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getVisibleFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
-			selectedGpxHelper.selectGpxFile(gpxFile, true, false, false, false, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().selectedAutomatically().saveSelection();
+			selectedGpxHelper.selectGpxFile(gpxFile, params);
 		}
 		boolean groupCreated = false;
 		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);

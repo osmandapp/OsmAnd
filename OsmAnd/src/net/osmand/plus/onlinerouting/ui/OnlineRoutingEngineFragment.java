@@ -7,14 +7,11 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
@@ -36,8 +33,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.onlinerouting.EngineParameter;
@@ -46,10 +41,12 @@ import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.util.Algorithms;
 
@@ -61,7 +58,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
 public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements OnSelectProfileCallback {
 
@@ -132,13 +132,12 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 							 @Nullable Bundle savedInstanceState) {
 		view = getInflater().inflate(
 				R.layout.online_routing_engine_fragment, container, false);
-		segmentsContainer = (ViewGroup) view.findViewById(R.id.segments_container);
-		scrollView = (ScrollView) view.findViewById(R.id.segments_scroll);
-		buttonsShadow = (AppCompatImageView) view.findViewById(R.id.buttons_shadow);
-		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(getContext(), view);
-		}
-		setupToolbar((Toolbar) view.findViewById(R.id.toolbar));
+		segmentsContainer = view.findViewById(R.id.segments_container);
+		scrollView = view.findViewById(R.id.segments_scroll);
+		buttonsShadow = view.findViewById(R.id.buttons_shadow);
+
+		AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+		setupToolbar(view.findViewById(R.id.toolbar));
 
 		setupNameCard();
 		setupTypeCard();
@@ -164,12 +163,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private void setupToolbar(Toolbar toolbar) {
 		ImageView navigationIcon = toolbar.findViewById(R.id.close_button);
 		navigationIcon.setImageResource(R.drawable.ic_action_close);
-		navigationIcon.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showExitDialog();
-			}
-		});
+		navigationIcon.setOnClickListener(v -> showExitDialog());
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 		View actionBtn = toolbar.findViewById(R.id.action_button);
@@ -178,12 +172,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			ImageView ivBtn = toolbar.findViewById(R.id.action_button_icon);
 			ivBtn.setImageDrawable(
 					getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete));
-			actionBtn.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					delete(mapActivity);
-				}
-			});
+			actionBtn.setOnClickListener(v -> delete(mapActivity));
 		} else {
 			title.setText(getString(R.string.add_online_routing_engine));
 			actionBtn.setVisibility(View.GONE);
@@ -196,14 +185,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		nameCard.setDescription(getString(R.string.select_nav_profile_dialog_message));
 		nameCard.setEditedText(engine.getName(app));
 		nameCard.setFieldBoxLabelText(getString(R.string.shared_string_name));
-		nameCard.setOnTextChangedListener(new OnTextChangedListener() {
-			@Override
-			public void onTextChanged(boolean changedByUser, @NonNull String text) {
-				if (changedByUser) {
-					engine.put(EngineParameter.CUSTOM_NAME, text);
-					engine.remove(EngineParameter.NAME_INDEX);
-					checkCustomNameUnique(engine);
-				}
+		nameCard.setOnTextChangedListener((changedByUser, text) -> {
+			if (changedByUser) {
+				engine.put(EngineParameter.CUSTOM_NAME, text);
+				engine.remove(EngineParameter.NAME_INDEX);
+				checkCustomNameUnique(engine);
 			}
 		});
 		nameCard.showDivider();
@@ -231,13 +217,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 					}
 					return false;
 				});
-		typeCard.setOnTextChangedListener(new OnTextChangedListener() {
-			@Override
-			public void onTextChanged(boolean editedByUser, @NonNull String text) {
-				if (editedByUser) {
-					engine.put(EngineParameter.CUSTOM_URL, text);
-					updateCardViews(exampleCard);
-				}
+		typeCard.setOnTextChangedListener((editedByUser, text) -> {
+			if (editedByUser) {
+				engine.put(EngineParameter.CUSTOM_URL, text);
+				updateCardViews(exampleCard);
 			}
 		});
 		typeCard.setFieldBoxLabelText(getString(R.string.shared_string_server_url));
@@ -250,14 +233,11 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		vehicleCard.build(mapActivity);
 		vehicleCard.setHeaderTitle(getString(R.string.shared_string_vehicle));
 		vehicleCard.setFieldBoxLabelText(getString(R.string.shared_string_custom));
-		vehicleCard.setOnTextChangedListener(new OnTextChangedListener() {
-			@Override
-			public void onTextChanged(boolean editedByUser, @NonNull String text) {
-				if (editedByUser) {
-					customVehicleKey = text;
-					engine.put(EngineParameter.VEHICLE_KEY, customVehicleKey);
-					updateCardViews(nameCard, exampleCard);
-				}
+		vehicleCard.setOnTextChangedListener((editedByUser, text) -> {
+			if (editedByUser) {
+				customVehicleKey = text;
+				engine.put(EngineParameter.VEHICLE_KEY, customVehicleKey);
+				updateCardViews(nameCard, exampleCard);
 			}
 		});
 		vehicleCard.setEditedText(customVehicleKey);
@@ -350,16 +330,13 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			apiKeyCard.setEditedText(apiKey);
 		}
 		apiKeyCard.showDivider();
-		apiKeyCard.setOnTextChangedListener(new OnTextChangedListener() {
-			@Override
-			public void onTextChanged(boolean editedByUser, @NonNull String text) {
-				if (Algorithms.isBlank(text)) {
-					engine.remove(EngineParameter.API_KEY);
-				} else {
-					engine.put(EngineParameter.API_KEY, text);
-				}
-				updateCardViews(exampleCard);
+		apiKeyCard.setOnTextChangedListener((editedByUser, text) -> {
+			if (Algorithms.isBlank(text)) {
+				engine.remove(EngineParameter.API_KEY);
+			} else {
+				engine.put(EngineParameter.API_KEY, text);
 			}
+			updateCardViews(exampleCard);
 		});
 		segmentsContainer.addView(apiKeyCard.getView());
 	}
@@ -405,12 +382,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		View cancelButton = view.findViewById(R.id.dismiss_button);
 		UiUtilities.setupDialogButton(nightMode, cancelButton,
 				DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showExitDialog();
-			}
-		});
+		cancelButton.setOnClickListener(v -> showExitDialog());
 
 		view.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
@@ -418,12 +390,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		UiUtilities.setupDialogButton(nightMode, saveButton,
 				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
 		saveButton.setVisibility(View.VISIBLE);
-		saveButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onSaveEngine();
-				dismiss();
-			}
+		saveButton.setOnClickListener(v -> {
+			onSaveEngine();
+			dismiss();
 		});
 	}
 
@@ -491,12 +460,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, isNightMode()));
 			builder.setMessage(getString(R.string.delete_online_routing_engine));
 			builder.setNegativeButton(R.string.shared_string_no, null);
-			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					onDeleteEngine();
-					dismiss();
-				}
+			builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+				onDeleteEngine();
+				dismiss();
 			});
 			builder.create().show();
 		}
@@ -516,52 +482,41 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private void testEngineWork() {
 		final OnlineRoutingEngine requestedEngine = (OnlineRoutingEngine) engine.clone();
 		final ExampleLocation location = selectedLocation;
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				StringBuilder errorMessage = new StringBuilder();
-				boolean resultOk = false;
-				try {
-					String method = engine.getHTTPMethod();
-					List<LatLon> path = Arrays.asList(location.getCityAirportLatLon(),
-													  location.getCityCenterLatLon());
-					String body = engine.getRequestBody(path, null);
-					Map<String, String> headers = engine.getRequestHeaders();
-					String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
-					resultOk = requestedEngine.isResultOk(errorMessage, response);
-				} catch (IOException | JSONException e) {
-					errorMessage.append(e.toString());
-				}
-				showTestResults(resultOk, errorMessage.toString(), location);
+		new Thread(() -> {
+			StringBuilder errorMessage = new StringBuilder();
+			boolean resultOk = false;
+			try {
+				String method = engine.getHTTPMethod();
+				List<LatLon> path = Arrays.asList(location.getCityAirportLatLon(),
+												  location.getCityCenterLatLon());
+				String body = engine.getRequestBody(path, null);
+				Map<String, String> headers = engine.getRequestHeaders();
+				String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
+				resultOk = requestedEngine.isResultOk(errorMessage, response);
+			} catch (IOException | JSONException e) {
+				errorMessage.append(e.toString());
 			}
+			showTestResults(resultOk, errorMessage.toString(), location);
 		}).start();
 	}
 
 	private void showTestResults(final boolean resultOk,
 								 final @NonNull String message,
 								 final @NonNull ExampleLocation location) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				testResultsContainer.setVisibility(View.VISIBLE);
-				ImageView ivImage = testResultsContainer.findViewById(R.id.icon);
-				TextView tvTitle = testResultsContainer.findViewById(R.id.title);
-				TextView tvDescription = testResultsContainer.findViewById(R.id.description);
-				if (resultOk) {
-					ivImage.setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
-					tvTitle.setText(getString(R.string.shared_string_ok));
-				} else {
-					ivImage.setImageDrawable(getContentIcon(R.drawable.ic_action_alert));
-					tvTitle.setText(String.format(getString(R.string.message_server_error), message));
-				}
-				tvDescription.setText(location.getName());
-				scrollView.post(new Runnable() {
-					@Override
-					public void run() {
-						scrollView.scrollTo(0, scrollView.getChildAt(0).getBottom());
-					}
-				});
+		app.runInUIThread(() -> {
+			testResultsContainer.setVisibility(View.VISIBLE);
+			ImageView ivImage = testResultsContainer.findViewById(R.id.icon);
+			TextView tvTitle = testResultsContainer.findViewById(R.id.title);
+			TextView tvDescription = testResultsContainer.findViewById(R.id.description);
+			if (resultOk) {
+				ivImage.setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
+				tvTitle.setText(getString(R.string.shared_string_ok));
+			} else {
+				ivImage.setImageDrawable(getContentIcon(R.drawable.ic_action_alert));
+				tvTitle.setText(String.format(getString(R.string.message_server_error), message));
 			}
+			tvDescription.setText(location.getName());
+			scrollView.post(() -> scrollView.scrollTo(0, scrollView.getChildAt(0).getBottom()));
 		});
 	}
 
@@ -592,7 +547,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 				}
 
 			} else if (exampleCard.equals(card)) {
-				exampleCard.setEditedText(getTestUrl());
+				exampleCard.setEditedText(getTestUrl(), false);
 			}
 		}
 	}
@@ -615,12 +570,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		if (!engine.equals(initEngine)) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(mapActivity,
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
-			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dismiss();
-				}
-			});
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
 			dismissDialog.show();
 		} else {
 			dismiss();
@@ -782,22 +732,17 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void showButtonsAboveKeyboard() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
-		}
+		view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
 	}
 
 	private OnScrollChangedListener getShowShadowOnScrollListener() {
 		if (onScroll == null) {
-			onScroll = new OnScrollChangedListener() {
-				@Override
-				public void onScrollChanged() {
-					boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-					if (scrollToBottomAvailable) {
-						showShadowButton();
-					} else {
-						hideShadowButton();
-					}
+			onScroll = () -> {
+				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+				if (scrollToBottomAvailable) {
+					showShadowButton();
+				} else {
+					hideShadowButton();
 				}
 			};
 		}
@@ -812,11 +757,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 				@Override
 				public void onGlobalLayout() {
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-					} else {
-						view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-					}
+					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
 					Rect visibleDisplayFrame = new Rect();
 					view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
@@ -853,11 +794,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void removeOnGlobalLayoutListener() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			view.getViewTreeObserver().removeOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
-		} else {
-			view.getViewTreeObserver().removeGlobalOnLayoutListener(getShowButtonsOnGlobalListener());
-		}
+		view.getViewTreeObserver().removeOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
 	}
 
 	private void showShadowButton() {

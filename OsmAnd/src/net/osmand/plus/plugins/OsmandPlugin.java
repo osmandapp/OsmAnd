@@ -27,7 +27,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -64,6 +63,11 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -491,8 +495,10 @@ public abstract class OsmandPlugin {
 		app.getQuickActionRegistry().updateActionTypes();
 		if (activity != null) {
 			if (activity instanceof MapActivity) {
-				final MapActivity mapActivity = (MapActivity) activity;
+				MapActivity mapActivity = (MapActivity) activity;
 				plugin.updateLayers(mapActivity, mapActivity);
+				MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+				mapLayers.getMapInfoLayer().recreateAllControls(mapActivity);
 				mapActivity.getDashboard().refreshDashboardFragments();
 
 				DashFragmentData fragmentData = plugin.getCardFragment();
@@ -547,6 +553,9 @@ public abstract class OsmandPlugin {
 	}
 
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+	}
+
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 	}
 
 	public void mapActivityCreate(MapActivity activity) {
@@ -625,6 +634,10 @@ public abstract class OsmandPlugin {
 	}
 
 	protected String getMapObjectPreferredLang(MapObject object, String defaultLanguage) {
+		return null;
+	}
+
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		return null;
 	}
 
@@ -865,6 +878,23 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerLayers(context, mapActivity);
 		}
+	}
+
+	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.createWidgets(mapActivity, widgetInfos, appMode);
+		}
+	}
+
+	@Nullable
+	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType);
+			if (widget != null) {
+				return widget;
+			}
+		}
+		return null;
 	}
 
 	public static void registerMapContextMenu(@NonNull MapActivity mapActivity, double latitude, double longitude,

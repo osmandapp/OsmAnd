@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.chooseplan.ExploreOsmAndPlansCard;
 import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -40,12 +40,11 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
-	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
-
 	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
+	private LayoutInflater themedInflater;
 
 	private boolean nightMode;
 
@@ -58,7 +57,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		View view = themedInflater.inflate(R.layout.purchases_layout, container, false);
 		createToolbar(view, nightMode);
@@ -96,7 +95,10 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		}
 
 		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
-			cardsContainer.addView(new NoPurchasesCard(activity, false).build(activity));
+			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
+		} else {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			cardsContainer.addView(new ExploreOsmAndPlansCard(activity, this).build(activity));
 		}
 		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));
 	}
@@ -121,7 +123,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_help_online, iconColorRes));
 		icon.setOnClickListener(v -> {
 			if (getContext() != null) {
-				AndroidUtils.openUrl(getContext(), Uri.parse(OSMAND_PURCHASES_URL), nightMode);
+				AndroidUtils.openUrl(getContext(), R.string.docs_purchases, nightMode);
 			}
 		});
 		ImageButton backButton = toolbar.findViewById(R.id.close_button);

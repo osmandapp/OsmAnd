@@ -159,7 +159,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		if (appMode != null) {
 			ApplicationMode selectedAppMode = getSelectedAppMode();
 			app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode);
@@ -226,7 +226,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			app.getPoiFilters().loadSelectedPoiFilters();
-			mapActivity.getMapLayers().getMapWidgetRegistry().updateVisibleSideWidgets();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();

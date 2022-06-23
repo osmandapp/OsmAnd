@@ -42,7 +42,7 @@
     <string name="action_delete">Acción borrar</string>
     <string name="osm_edits">Ediciones de OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Estacionamiento limitado hasta las</string>
     <string name="osmand_parking_time_left">restante(s)</string>
     <string name="your_edits">Tus ediciones</string>
@@ -64,8 +64,8 @@
     <string name="shared_string_enable">Activar</string>
     <string name="shared_string_disable">Desactivar</string>
     <string name="shared_string_ok">Aceptar</string>
-    <string name="shared_string_on">Sí</string>
-    <string name="shared_string_off">No</string>
+    <string name="shared_string_on">Activado</string>
+    <string name="shared_string_off">Desactivado</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
     <string name="shared_string_selected">Marcado</string>
@@ -302,7 +302,7 @@
     <string name="lang_al">Albanés</string>
     <string name="lang_ar">Árabe</string>
     <string name="lang_hy">Armenio</string>
-    <string name="lang_eu">Euskera</string>
+    <string name="lang_eu">Vasco</string>
     <string name="lang_be">Bielorruso</string>
     <string name="lang_bs">Bosnio</string>
     <string name="lang_bg">Búlgaro</string>
@@ -317,7 +317,7 @@
     <string name="lang_de">Alemán</string>
     <string name="lang_el">Griego</string>
     <string name="lang_iw">Hebreo</string>
-    <string name="lang_hi">Hindi</string>
+    <string name="lang_hi">Hindú</string>
     <string name="lang_hu">Húngaro</string>
     <string name="lang_id">Indonesio</string>
     <string name="lang_it">Italiano</string>
@@ -601,7 +601,7 @@
     <string name="cancel_route">¿Descartar ruta\?</string>
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Limpiar destino</string>
-    <string name="download_using_mobile_internet">No está conectado a una red Wi-Fi. ¿Usar la conexión actual a Internet para descargar?</string>
+    <string name="download_using_mobile_internet">No estás conectado a una red Wi-Fi. ¿Usar la conexión actual a Internet para descargar\?</string>
     <string name="street_name">Nombre de calle</string>
     <string name="hno">Número</string>
     <string name="website">Sitio web</string>
@@ -639,7 +639,6 @@
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="srtm_paid_version_msg">Por favor, considera pagar por el complemento «Curvas de nivel» para apoyar su desarrollo.</string>
-    <string name="av_def_action_choose">¿A petición\?</string>
     <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
     <string name="av_widget_action_descr">Acción predefinida del widget:</string>
@@ -1523,7 +1522,7 @@
     <string name="av_camera_pic_size_descr">Define el tamaño de la fotografía</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
-    <string name="get_plugin">Obtener</string>
+    <string name="shared_string_get">Obtener</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
     <string name="routing_attr_height_name">Límite de altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
@@ -1547,7 +1546,7 @@
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandés</string>
-    <string name="lang_ms">Malayo</string>
+    <string name="lang_ms">Malasio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estonio</string>
@@ -2024,7 +2023,6 @@
     <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
-    <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
     <string name="rendering_value_light_brown_name">Marrón claro</string>
     <string name="rendering_value_dark_brown_name">Marrón oscuro</string>
@@ -2167,7 +2165,7 @@
     <string name="file_can_not_be_moved">No se pudo mover el archivo.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Trazas</string>
-    <string name="shared_string_time_moving">Tiempo moviéndose</string>
+    <string name="shared_string_time_moving">Tiempo en movimiento</string>
     <string name="shared_string_time_span">Duración</string>
     <string name="shared_string_max">Máx</string>
     <string name="shared_string_start_time">Hora de inicio</string>
@@ -3514,7 +3512,7 @@
     <string name="lang_zhminnan">Min del Sur</string>
     <string name="lang_yo">Yoruba</string>
     <string name="lang_war">Waray</string>
-    <string name="lang_uz">Uzbeko</string>
+    <string name="lang_uz">Uzbeco</string>
     <string name="lang_ur">Urdu</string>
     <string name="lang_tt">Tártaro</string>
     <string name="lang_tg">Tayiko</string>
@@ -3530,8 +3528,8 @@
     <string name="lang_ky">Kirguís</string>
     <string name="lang_kk">Kazajo</string>
     <string name="lang_jv">Javanés</string>
-    <string name="lang_gu">Gujaratí</string>
-    <string name="lang_cv">Chuvash</string>
+    <string name="lang_gu">Guyaratí</string>
+    <string name="lang_cv">Chuvasio</string>
     <string name="lang_ce">Checheno</string>
     <string name="lang_bar">Bávaro</string>
     <string name="lang_ba">Bashkir</string>
@@ -3846,8 +3844,8 @@
     <string name="enter_text_separated">Ingresa etiquetas separadas por comas.</string>
     <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
     <string name="gpx_upload_private_visibility_descr">«Privado» significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
-    <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tu listado de trazas y en los listados de trazas GPS públicas con marcas de tiempo en bruto. Los datos servidos a través de la API no harán referencia a su página de trazas. Las marcas de tiempo de los puntos de la traza no estarán disponible a través de la API pública de GPS, aunque los puntos se ordenan cronológicamente.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tu listado de trazas y en el listado de trazas GPS públicas, es decir que otros usuarios podrán descargar la traza en bruto y asociarla con su nombre de usuario. Los datos servidos a través de la API de conjunto de puntos hará referencia a la página original de la traza.</string>
+    <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tus trazas GPS y en las lista públicas de trazas GPS y con marcas de tiempo en crudo. Los datos servidos a través de la API no harán referencia a tu página de trazas. Las marcas de tiempo de los puntos no estarán disponibles a través de la API pública de GPS, y los puntos de la ruta no se ordenarán de manera cronológica.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tus trazas GPS y en las listas públicas de trazas GPS, es decir que otros usuarios podrán descargar la traza en bruto y asociarla a tu nombre de usuario. Los datos públicos servidos a través de la API con marcas de tiempo GPS harán referencia a la página original de la traza.</string>
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
     <string name="osm_login_descr">Inicia sesión con las credenciales de OAuth u OpenStreetMap.</string>
@@ -4012,14 +4010,11 @@
     <string name="on_pause">En pausa</string>
     <string name="app_restart_required">Es necesario reiniciar la aplicación para aplicar algunos ajustes.</string>
     <string name="routing_attr_height_obstacles_description">La ruta podría evitar las fuertes subidas.</string>
-    <string name="quick_action_coordinates_widget_descr">Alternar para mostrar u ocultar el widget de coordenadas en el mapa.</string>
+    <string name="quick_action_coordinates_widget_descr">Un botón que muestra u oculta el widget de coordenadas en el mapa.</string>
     <string name="latest_openstreetmap_update">Última actualización de OpenStreetMap disponible:</string>
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
     <string name="update_frequency">Frecuencia de actualización</string>
-    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana. Próxima vez el %1$s a las %2$s hs.</string>
-    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día. Próxima vez el %1$s a las %2$s hs.</string>
-    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora. Próxima vez el %1$s a las %2$s hs.</string>
     <string name="delete_updates">Borrar actualizaciones</string>
     <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
     <string name="purchases">Compras</string>
@@ -4077,7 +4072,7 @@
     <string name="output">Salida</string>
     <string name="shared_string_feet">pies</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
-    <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provee datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
     <string name="shared_string_max_height">Altura máx.</string>
@@ -4282,7 +4277,7 @@
 \n
 \nQuizás algunos mapas no están cargados, puedes ejecutar una comprobación en línea para los mapas necesarios.</string>
     <string name="online_maps_searching_descr">Buscando mapas en línea…</string>
-    <string name="reset_to_original">Restablecer al original</string>
+    <string name="reset_to_original">Reiniciar al original</string>
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
@@ -4511,7 +4506,7 @@
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
     <string name="gpx_no_routes_title">Sin rutas</string>
-    <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para guardar la ruta como un archivo.</string>
+    <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para añadir la ruta al archivo.</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
     <string name="please_provide_group_name_message">Indica el nombre del grupo.</string>
     <string name="selected_waypoints_descr">Los puntos de referencia marcados serán añadidos a la traza «%1$s»</string>
@@ -4602,6 +4597,106 @@
     <string name="no_widgets_descr">Añade uno o más widgets de la lista de widgets disponibles.</string>
     <string name="no_widgets_here_yet">Todavía sin widgets aquí</string>
     <string name="available_widgets">Widgets disponibles</string>
-    <string name="snackbar_page_removed">Se ha quitado «Página %1$s»</string>
+    <string name="snackbar_page_removed">Se ha quitado «Página %1$s».</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermedia</string>
+    <string name="release_4_2">• Rediseño de los widgets: nuevo aspecto, agrupación por páginas, reordenar y combinar como quieras.
+\n
+\n• Rutas de senderismo/ciclismo/viaje: pulsa el símbolo de la ruta y obtén información completa sobre ella.
+\n
+\n• Grupos favoritos: define el aspecto predefinido de los nuevos puntos del grupo.
+\n
+\n• Correcciones: actualización automática de teselas en los mapas en línea.
+\n
+\n• Nuevos widgets: rumbo verdadero. Grabación del viaje: descenso, ascenso, duración.
+\n
+\n• Teselas SRTM en línea.
+\n
+\n• Ahora se admiten coordenadas de la red suiza CH1903 / CH1903+.
+\n
+\n• Reemplazo de coordenadas UTM como 31T en lugar de 31N.
+\n
+\n• Gráficos: el análisis en el mapa ahora muestra los datos de dos ejes.
+\n
+\n• El estilo de mapa «Mapnik» fue reemplazado por el nuevo estilo «OSM-Carto».
+\n
+\n• Todos los elementos relacionados con OpenStreetMap se han combinado en un solo grupo en el menú «Configurar mapa».
+\n
+\n• Wikipedia: se ha corregido la visibilidad de las imágenes en hebreo.
+\n
+\n</string>
+    <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
+    <string name="bearing_secondary_desc">Puedes cambiar el formato de los datos mostrados en: %1$s → %2$s → %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">El formato de las coordenadas pueden cambiarse en %1$s → %2$s → %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Parte del complemento «%1$s».</string>
+    <string name="elevation_profile_widget_desc">Este widget muestra el perfil de elevación y pendiente de la ruta actual.</string>
+    <string name="parking_widget_desc">Este widget muestra la distancia desde el centro de la pantalla hasta el lugar del estacionamiento.</string>
+    <string name="av_notes_choose_action_widget_desc">Elegir acción.</string>
+    <string name="mapillary_widget_desc">Este widget proporciona un acceso rápido a la aplicación Mapillary para añadir imágenes a nivel de calle.</string>
+    <string name="fps_widget_desc">Este widget muestra que tan rápido se ven y actualizan los elementos del mapa.</string>
+    <string name="radius_rules_widget_desc">La herramienta «Regla radial» ayuda a definir el radio alrededor del punto marcado en el mapa, mostrando círculos de distancia en el mapa.</string>
+    <string name="current_time_widget_desc">Este widget muestra la hora actual del dispositivo.</string>
+    <string name="battery_widget_desc">El widget muestra el nivel de batería del dispositivo.</string>
+    <string name="gps_info_widget_desc">Este widget muestra el número de satélites que el dispositivo detecta y utiliza en ese momento.</string>
+    <string name="altitude_widget_desc">Este widget muestra la altura sobre el nivel del mar en la ubicación actual.</string>
+    <string name="max_speed_widget_desc">Este widget muestra el límite de velocidad del camino por el que se circula actualmente.</string>
+    <string name="current_speed_widget_desc">Este widget muestra la velocidad actual detectada por el sensor del GPS.</string>
+    <string name="magnetic_bearing_widget_desc">Ángulo entre el norte magnético y el punto objetivo observado desde la ubicación.</string>
+    <string name="time_to_go_desc">Tiempo en minutos u horas necesario para llegar al destino.</string>
+    <string name="arrival_time_widget_desc">Hora de llegada al punto de destino.</string>
+    <string name="lanes_widgets_desc">Este widget de carriles muestra la disposición actual de los carriles en el camino y destaca los carriles por los que se puede circular con la navegación activa.</string>
+    <string name="map_markers_bar_widget_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
+    <string name="street_name_widget_desc">Este widget muestra el nombre actual de la calle con una flecha de ubicación recta o el nombre de la siguiente calle con la maniobra que debe completarse.</string>
+    <string name="coordinates_widget_desc">Muestra las coordenadas geográficas de la ubicación actual.</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="bearing_desc">Este widget muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados, milirradianes).</string>
+    <string name="map_markers_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
+    <string name="audio_video_notes_desc">Este widget proporciona un acceso rápido para iniciar o parar una grabación (audio, video o foto).</string>
+    <string name="route_maneuvers">Maniobras de la ruta</string>
+    <string name="get_altitude_information">Obtener información de altitud</string>
+    <string name="calculating_altitude">Calculando altitud</string>
+    <string name="calculate_online">Calcular en línea</string>
+    <string name="track_attach_to_the_roads_descr">La traza se adjuntará al camino usando mapas sin conexión. Esto cambiará la geometría de la traza.</string>
+    <string name="get_altitude_data">Obtener datos de altitud</string>
+    <string name="calculate_altitude">Calcular altitud</string>
+    <string name="no_altitude_data">Sin datos de altitud</string>
+    <string name="shared_string_speed">Velocidad</string>
+    <string name="app_mode_mountain_bicycle">Bicicleta de montaña</string>
+    <string name="av_def_action_choose">A petición</string>
+    <string name="navigation_points_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
+    <string name="navigation_points">Puntos de navegación</string>
+    <string name="route_maneuvers_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
+    <string name="routing_attr_avoid_4wd_only_description">Evita los caminos adecuados solo para vehículos todo terreno 4x4</string>
+    <string name="compass_on_circles">Brújula en círculos</string>
+    <string name="distance_circles">Círculos de distancia</string>
+    <string name="circle_settings">Ajustes de los círculos</string>
+    <string name="colour_of_circles">Color de los círculos</string>
+    <string name="rendering_attr_weatherTempContours_name">Isolíneas de temperatura</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permitir el acceso privado (camión)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Isolíneas de presión</string>
+    <string name="routing_attr_avoid_fords_name">Evitar vados</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permitir el acceso a áreas privadas para camiones.</string>
+    <string name="rendering_attr_horseScale_name">Dificultad de los senderos ecuestres</string>
+    <string name="routing_attr_avoid_highway_name">Evitar los caminos</string>
+    <string name="map_widget_trip_recording_downhill">Descenso</string>
+    <string name="map_widget_trip_recording_uphill">Ascenso</string>
+    <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
+    <string name="map_widget_trip_recording_duration">Duración</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
+    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
+    <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
+    <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
+    <string name="map_widget_true_bearing">Rumbo verdadero</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="explore_plans">Explorar planes</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Puedes cambiar el modo pulsando en el widget.</string>
+    <string name="map_widget_time_to_destination">Tiempo al destino</string>
+    <string name="shared_string_mode">Modo</string>
+    <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="radius_ruler_mode_desc">Puedes cambiar el modo de «Regla radial» pulsando en el widget.</string>
+    <string name="lang_sat">Santalí</string>
 </resources>

@@ -1,5 +1,32 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -11,7 +38,7 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -25,30 +52,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.views.mapwidgets.WidgetParams.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NAVIGATION_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetParams.SIDE_MARKER_1;
-
 public class ApplicationMode {
+
+	public static final float FAST_SPEED_THRESHOLD = 10;
 
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
@@ -123,24 +129,14 @@ public class ApplicationMode {
 
 	public static List<ApplicationMode> values(@NonNull OsmandApplication app) {
 		if (customizationListener == null) {
-			customizationListener = new OsmAndAppCustomizationListener() {
-				@Override
-				public void onOsmAndSettingsCustomized() {
-					cachedFilteredValues = new ArrayList<>();
-				}
-			};
+			customizationListener = () -> cachedFilteredValues = new ArrayList<>();
 			app.getAppCustomization().addListener(customizationListener);
 		}
 		if (cachedFilteredValues.isEmpty()) {
 
 			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
-				listener = new StateChangedListener<String>() {
-					@Override
-					public void stateChanged(String change) {
-						cachedFilteredValues = new ArrayList<>();
-					}
-				};
+				listener = change -> cachedFilteredValues = new ArrayList<>();
 				settings.AVAILABLE_APP_MODES.addListener(listener);
 			}
 			String available = settings.AVAILABLE_APP_MODES.get();
@@ -210,30 +206,33 @@ public class ApplicationMode {
 		regWidgetAvailability(SECOND_NEXT_TURN.id, exceptDefault);
 
 		// right
-		regWidgetVisibility(INTERMEDIATE_DISTANCE.id, all);
+		regWidgetVisibility(INTERMEDIATE_DESTINATION.id, all);
 		regWidgetVisibility(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetVisibility(NAVIGATION_TIME.id, all);
-		regWidgetVisibility(INTERMEDIATE_TIME.id, all);
+		regWidgetVisibility(TIME_TO_INTERMEDIATE.id, all);
+		regWidgetVisibility(TIME_TO_DESTINATION.id, all);
 		regWidgetVisibility(CURRENT_SPEED.id, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
 				MOTORCYCLE, HORSE);
 		regWidgetVisibility(MAX_SPEED.id, CAR, TRUCK, MOTORCYCLE);
 		regWidgetVisibility(ALTITUDE.id, PEDESTRIAN, BICYCLE);
-		regWidgetAvailability(INTERMEDIATE_DISTANCE.id, all);
+		regWidgetAvailability(INTERMEDIATE_DESTINATION.id, all);
 		regWidgetAvailability(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetAvailability(NAVIGATION_TIME.id, all);
-		regWidgetAvailability(INTERMEDIATE_TIME.id, all);
+		regWidgetAvailability(TIME_TO_INTERMEDIATE.id, all);
+		regWidgetAvailability(TIME_TO_DESTINATION.id, all);
 		regWidgetAvailability(CURRENT_SPEED.id, all);
 		regWidgetAvailability(MAX_SPEED.id, all);
+		regWidgetAvailability(AVERAGE_SPEED.id, all);
 		regWidgetAvailability(ALTITUDE.id, all);
 
 		// all = null everything
-		regWidgetAvailability(SIDE_MARKER_1.id, none);
-		regWidgetAvailability(SIDE_MARKER_1.id, none);
+		regWidgetAvailability(SIDE_MARKER_1.id, all);
+		regWidgetAvailability(SIDE_MARKER_2.id, all);
 		regWidgetAvailability(GPS_INFO.id, all);
 		regWidgetAvailability(BATTERY.id, all);
-		regWidgetAvailability(BEARING.id, all);
+		regWidgetAvailability(RELATIVE_BEARING.id, all);
+		regWidgetAvailability(MAGNETIC_BEARING.id, all);
+		regWidgetAvailability(TRUE_BEARING.id, all);
 		regWidgetAvailability(RADIUS_RULER.id, all);
-		regWidgetAvailability(PLAIN_TIME.id, all);
+		regWidgetAvailability(CURRENT_TIME.id, all);
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
@@ -281,15 +280,14 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String key) {
+	public boolean isWidgetAvailable(String widgetId) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
-			return app.getAppCustomization().isWidgetAvailable(key, this);
+			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
 		}
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
-			return true;
-		}
-		return set.contains(this);
+
+		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
+		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
+		return availableForModes == null || availableForModes.contains(this);
 	}
 
 	public String getStringKey() {
@@ -380,7 +378,7 @@ public class ApplicationMode {
 
 
 	public boolean hasFastSpeed() {
-		return getDefaultSpeed() > 10;
+		return getDefaultSpeed() > FAST_SPEED_THRESHOLD;
 	}
 
 	public float getDefaultSpeed() {
@@ -427,6 +425,20 @@ public class ApplicationMode {
 		if (!Algorithms.isEmpty(userProfileName)) {
 			app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
 		}
+	}
+
+	public void setDerivedProfile(String derivedProfile) {
+		if (!Algorithms.isEmpty(derivedProfile)) {
+			app.getSettings().DERIVED_PROFILE.setModeValue(this, derivedProfile);
+		}
+	}
+
+	public String getDerivedProfile() {
+		return app.getSettings().DERIVED_PROFILE.getModeValue(this);
+	}
+
+	public String getDefaultDerivedProfile() {
+		return app.getSettings().DERIVED_PROFILE.getProfileDefaultValue(this);
 	}
 
 	public String getRoutingProfile() {

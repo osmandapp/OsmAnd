@@ -162,6 +162,8 @@
 	    <attr name="image_tile_placeholder" format="reference" />
 	    <attr name="toolbar_back_button_color" format="reference" />
 	    <attr name="toolbar_title_color" format="reference" />
+	    <attr name="ripple_solid_6dp" format="reference" />
+	    <attr name="active_buttons_and_links_bg_pressed" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
@@ -219,6 +221,10 @@
 		<attr name="chipBgColor" format="reference" />
 		<attr name="chipBgSelectedColor" format="reference" />
 		<attr name="chipBgDisabledColor" format="reference" />
+	</declare-styleable>
+
+	<declare-styleable name="SideWidgetsPanel">
+		<attr name="rightSide" format="boolean" />
 	</declare-styleable>
 
     <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />

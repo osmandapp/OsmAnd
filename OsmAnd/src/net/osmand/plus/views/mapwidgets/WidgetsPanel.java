@@ -11,76 +11,89 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 public enum WidgetsPanel {
 
-	LEFT(R.drawable.ic_action_screen_side_left, R.string.map_widget_left, R.id.left_side),
-	RIGHT(R.drawable.ic_action_screen_side_right, R.string.map_widget_right, R.id.right_side),
-	TOP(R.drawable.ic_action_screen_side_top, R.string.top_widgets_panel, R.id.top_side),
-	BOTTOM(R.drawable.ic_action_screen_side_bottom, R.string.bottom_widgets_panel, R.id.bottom_side);
+	LEFT(R.drawable.ic_action_screen_side_left, R.string.map_widget_left),
+	RIGHT(R.drawable.ic_action_screen_side_right, R.string.map_widget_right),
+	TOP(R.drawable.ic_action_screen_side_top, R.string.top_widgets_panel),
+	BOTTOM(R.drawable.ic_action_screen_side_bottom, R.string.bottom_widgets_panel);
 
 	public static final String PAGE_SEPARATOR = ";";
 	public static final String WIDGET_SEPARATOR = ",";
 	public static final Integer DEFAULT_ORDER = 1000;
 
-	private static final List<String> originalLeftOrder = new ArrayList<>();
-	private static final List<String> originalRightOrder = new ArrayList<>();
-	private static final List<String> originalTopOrder = new ArrayList<>();
-	private static final List<String> originalBottomOrder = new ArrayList<>();
+	private static final List<String> ORIGINAL_LEFT_ORDER = new ArrayList<>();
+	private static final List<String> ORIGINAL_RIGHT_ORDER = new ArrayList<>();
+	private static final List<String> ORIGINAL_TOP_ORDER = new ArrayList<>();
+	private static final List<String> ORIGINAL_BOTTOM_ORDER = new ArrayList<>();
 
 	static {
-		for (WidgetParams widget : WidgetParams.values()) {
+		for (WidgetType widget : WidgetType.values()) {
 			String id = widget.id;
 			WidgetsPanel defaultPanel = widget.defaultPanel;
 			if (defaultPanel == LEFT) {
-				originalLeftOrder.add(id);
+				ORIGINAL_LEFT_ORDER.add(id);
 			} else if (defaultPanel == TOP) {
-				originalTopOrder.add(id);
+				ORIGINAL_TOP_ORDER.add(id);
 			} else if (defaultPanel == RIGHT) {
-				originalRightOrder.add(id);
+				ORIGINAL_RIGHT_ORDER.add(id);
 			} else if (defaultPanel == BOTTOM) {
-				originalBottomOrder.add(id);
+				ORIGINAL_BOTTOM_ORDER.add(id);
 			} else {
 				throw new IllegalStateException("Unsupported panel");
 			}
 		}
 	}
 
+	@DrawableRes
 	private final int iconId;
+	@StringRes
 	private final int titleId;
-	private final int tabId;
 
-	WidgetsPanel(int iconId, int titleId, int tabId) {
+	WidgetsPanel(@DrawableRes int iconId, @StringRes int titleId) {
 		this.iconId = iconId;
 		this.titleId = titleId;
-		this.tabId = tabId;
 	}
 
-	public int getIconId() {
-		return iconId;
+	@DrawableRes
+	public int getIconId(boolean rtl) {
+		return getRtlPanel(rtl).iconId;
 	}
 
-	public int getTitleId() {
-		return titleId;
+	@StringRes
+	public int getTitleId(boolean rtl) {
+		return getRtlPanel(rtl).titleId;
 	}
 
-	public int getTabId() {
-		return tabId;
+	@NonNull
+	private WidgetsPanel getRtlPanel(boolean rtl) {
+		if (!rtl || this == TOP || this == BOTTOM) {
+			return this;
+		} else if (this == LEFT) {
+			return RIGHT;
+		} else if (this == RIGHT) {
+			return LEFT;
+		}
+		throw new IllegalStateException("Unsupported panel");
 	}
 
 	@NonNull
 	public List<String> getOriginalOrder() {
 		if (this == LEFT) {
-			return new ArrayList<>(originalLeftOrder);
+			return new ArrayList<>(ORIGINAL_LEFT_ORDER);
 		} else if (this == RIGHT) {
-			return new ArrayList<>(originalRightOrder);
+			return new ArrayList<>(ORIGINAL_RIGHT_ORDER);
 		} else if (this == TOP) {
-			return new ArrayList<>(originalTopOrder);
+			return new ArrayList<>(ORIGINAL_TOP_ORDER);
 		} else {
-			return new ArrayList<>(originalBottomOrder);
+			return new ArrayList<>(ORIGINAL_BOTTOM_ORDER);
 		}
 	}
 
@@ -142,8 +155,30 @@ public enum WidgetsPanel {
 		return orderPreference.setModeValue(appMode, stringBuilder.toString());
 	}
 
+	@NonNull
+	public List<List<String>> getWidgetsOrder(@NonNull ApplicationMode appMode, @NonNull OsmandSettings settings) {
+		List<List<String>> widgetsOrder = new ArrayList<>();
+		ListStringPreference preference = getOrderPreference(settings);
+		List<String> pages = preference.getStringsListForProfile(appMode);
+
+		if (!Algorithms.isEmpty(pages)) {
+			for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
+				String page = pages.get(pageIndex);
+				List<String> orders = Arrays.asList(page.split(WIDGET_SEPARATOR));
+				if (!Algorithms.isEmpty(orders)) {
+					widgetsOrder.add(orders);
+				}
+			}
+		}
+		return widgetsOrder;
+	}
+
 	public boolean isPagingAllowed() {
-		return this == RIGHT;
+		return this == LEFT || this == RIGHT;
+	}
+
+	public boolean isDuplicatesAllowed() {
+		return this == LEFT || this == RIGHT;
 	}
 
 	@NonNull
@@ -158,5 +193,17 @@ public enum WidgetsPanel {
 			return settings.BOTTOM_WIDGET_PANEL_ORDER;
 		}
 		throw new IllegalStateException("Unsupported panel");
+	}
+
+	@NonNull
+	public List<WidgetsPanel> getMergedPanels() {
+		if (this == LEFT || this == RIGHT) {
+			return Arrays.asList(LEFT, RIGHT);
+		} else if (this == TOP) {
+			return Collections.singletonList(TOP);
+		} else if (this == BOTTOM) {
+			return Collections.singletonList(BOTTOM);
+		}
+		throw new IllegalStateException("Unsupported widgets panel");
 	}
 }

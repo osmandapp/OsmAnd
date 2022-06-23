@@ -1,5 +1,6 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.createGpxTabsView;
 import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
 
 import android.view.View;
@@ -19,8 +20,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
-import net.osmand.plus.myplaces.ui.SegmentGPXAdapter;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -40,18 +41,23 @@ public class SegmentsCard extends MapBaseCard {
 	private final SegmentActionsListener listener;
 	private final SelectedGpxFile selectedGpxFile;
 	private final SelectedGpxPoint gpxPoint;
+
+	private GPXTabItemType tabToOpen;
+
 	private RecyclerView recyclerView;
 
 	public SegmentsCard(@NonNull MapActivity mapActivity,
 	                    @NonNull TrackDisplayHelper displayHelper,
 	                    @Nullable SelectedGpxPoint gpxPoint,
 	                    @Nullable SelectedGpxFile selectedGpxFile,
-	                    @NonNull SegmentActionsListener listener) {
+	                    @NonNull SegmentActionsListener listener,
+	                    @NonNull GPXTabItemType tabToOpen) {
 		super(mapActivity);
 		this.listener = listener;
 		this.selectedGpxFile = selectedGpxFile;
 		this.displayHelper = displayHelper;
 		this.gpxPoint = gpxPoint;
+		this.tabToOpen = tabToOpen;
 	}
 
 	@Override
@@ -89,7 +95,8 @@ public class SegmentsCard extends MapBaseCard {
 		updateLocationOnMap(items);
 		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-		recyclerView.setAdapter(new SegmentsAdapter(items));
+		recyclerView.setAdapter(new SegmentsAdapter(items, tabToOpen));
+		tabToOpen = null;
 		recyclerView.setHasFixedSize(true);
 
 		LinearLayout noRoutesContainer = view.findViewById(R.id.no_routes_container);
@@ -123,16 +130,17 @@ public class SegmentsCard extends MapBaseCard {
 	private class SegmentsAdapter extends RecyclerView.Adapter<SegmentViewHolder> {
 
 		private final List<GpxDisplayItem> displayItems;
+		private GPXTabItemType tabToOpen;
 
-		public SegmentsAdapter(List<GpxDisplayItem> displayItems) {
+		public SegmentsAdapter(List<GpxDisplayItem> displayItems, @Nullable GPXTabItemType tabToOpen) {
 			this.displayItems = displayItems;
+			this.tabToOpen = tabToOpen;
 		}
 
 		@NonNull
 		@Override
 		public SegmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			View segmentView = SegmentGPXAdapter.createGpxTabsView(parent, nightMode);
-			return new SegmentViewHolder(segmentView);
+			return new SegmentViewHolder(createGpxTabsView(parent, nightMode));
 		}
 
 		@Override
@@ -146,11 +154,29 @@ public class SegmentsCard extends MapBaseCard {
 			}
 			AndroidUiHelper.updateVisibility(holder.title, !Algorithms.isBlank(displayItem.trackSegmentName));
 
-			holder.pager.setAdapter(new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode,
-					listener, false, false));
+			GPXItemPagerAdapter adapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, listener, nightMode, true);
+			holder.pager.setAdapter(adapter);
 			holder.tabLayout.setViewPager(holder.pager);
 
+			GPXTabItemType tabToOpen = getTabToOpen(position);
+			if (tabToOpen != null) {
+				int tabIndex = adapter.getTabIndex(tabToOpen);
+				if (tabIndex != -1) {
+					holder.pager.setCurrentItem(tabIndex);
+				}
+			}
+
 			AndroidUiHelper.updateVisibility(holder.bottomDivider, position + 1 == displayItems.size());
+		}
+
+		@Nullable
+		private GPXTabItemType getTabToOpen(int position) {
+			if (tabToOpen == null || position > 0) {
+				return null;
+			}
+			GPXTabItemType tabToOpen = this.tabToOpen;
+			this.tabToOpen = null;
+			return tabToOpen;
 		}
 
 		@Override

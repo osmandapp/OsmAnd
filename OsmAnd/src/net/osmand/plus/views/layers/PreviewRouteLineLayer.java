@@ -62,7 +62,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 	@Override
 	protected void initGeometries(float density) {
-		previewWayContext = new RouteGeometryWayContext(view.getContext(), density);
+		previewWayContext = new RouteGeometryWayContext(getContext(), density);
 		previewWayContext.disableMapRenderer();
 		previewWayContext.updatePaints(nightMode, attrs);
 		previewLineGeometry = new RouteGeometryWay(previewWayContext);
@@ -152,8 +152,8 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		if (previewRouteLineInfo.shouldShowTurnArrows()) {
 			Path path = new Path();
 			Matrix matrix = new Matrix();
-			int lineLength = AndroidUtils.dpToPx(view.getContext(), 24);
-			int offset = AndroidUtils.isLayoutRtl(view.getContext()) ? lineLength : -lineLength;
+			int lineLength = AndroidUtils.dpToPx(getContext(), 24);
+			int offset = AndroidUtils.isLayoutRtl(getContext()) ? lineLength : -lineLength;
 			int attrsTurnArrowColor = attrs.paint3.getColor();
 			if (customTurnArrowColor != 0) {
 				attrs.paint3.setColor(customTurnArrowColor);
@@ -180,7 +180,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		}
 
 		if (previewIcon == null) {
-			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), previewInfo.getIconId());
+			previewIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), previewInfo.getIconId());
 			if (previewIcon != null) {
 				DrawableCompat.setTint(previewIcon.getDrawable(1), previewInfo.getIconColor());
 			}
@@ -286,7 +286,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			totalDist += d;
 		}
 
-		boolean rtl = AndroidUtils.isLayoutRtl(view.getContext());
+		boolean rtl = AndroidUtils.isLayoutRtl(getContext());
 		List<Float> srcTx = new ArrayList<>(tx);
 		List<Float> srcTy = new ArrayList<>(ty);
 		int[] colorsArray = new int[tx.size() + lengthRatios.size()];
@@ -463,10 +463,6 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			return colors[index - 1];
 		}
 		return 0;
-	}
-
-	@Override
-	public void destroyLayer() {
 	}
 
 	@Override

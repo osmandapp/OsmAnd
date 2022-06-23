@@ -53,7 +53,6 @@ public class MapTileLayer extends BaseMapLayer {
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 
-	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
 
@@ -88,7 +87,8 @@ public class MapTileLayer extends BaseMapLayer {
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
-		this.view = view;
+		super.initLayer(view);
+
 		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
 		useSampling = Build.VERSION.SDK_INT < 28;
 
@@ -148,7 +148,6 @@ public class MapTileLayer extends BaseMapLayer {
 			if (paramType != ParameterType.UNDEFINED) {
 				CommonPreference<Float> paramStepPref = getParamStepPref();
 				if (paramStepPref != null) {
-					float step = paramStepPref.get();
 					float currentValue = Float.NaN;
 					String param = map.getUrlParameter(TileSourceManager.PARAMETER_NAME);
 					if (!Algorithms.isEmpty(param)) {
@@ -260,7 +259,7 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	private boolean setLayerProvider(@Nullable ITileSource map) {
-		final MapRendererView mapRenderer = view != null ? view.getMapRenderer() : null;
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			int layerIndex = view.getLayerIndex(this);
 			if (map != null) {
@@ -276,7 +275,7 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	private void updateLayerProviderAlpha(int alpha) {
-		final MapRendererView mapRenderer = view != null ? view.getMapRenderer() : null;
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
@@ -302,8 +301,7 @@ public class MapTileLayer extends BaseMapLayer {
 			mapTileAdapter.onDraw(canvas, tilesRect, drawSettings);
 		}
 
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null) {
+		if (hasMapRenderer()) {
 			ITileSource map = visible ? this.map : null;
 			boolean providerUpdated = false;
 			if (needUpdateProvider) {
@@ -481,6 +479,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		setMapTileAdapter(null);
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);

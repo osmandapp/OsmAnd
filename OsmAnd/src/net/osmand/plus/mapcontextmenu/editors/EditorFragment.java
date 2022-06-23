@@ -1,5 +1,9 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -50,10 +54,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public abstract class EditorFragment extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
@@ -161,6 +161,18 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		requireMapActivity().disableDrawer();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		requireMapActivity().enableDrawer();
 	}
 
 	private void setupToolbar() {

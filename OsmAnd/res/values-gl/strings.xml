@@ -382,7 +382,6 @@
     <string name="intermediate_points_change_order">Mudar a orde</string>
     <string name="srtm_paid_version_msg">Coida a posibilidade de mercar o plugin de \'Curvas de nivel\' para así apoiar o seu desenvolvemento.</string>
     <string name="srtm_paid_version_title">Plugin de curvas de nivel</string>
-    <string name="av_def_action_choose">Baixo demanda\?</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar son</string>
     <string name="av_widget_action_descr">Acción predeterminada do trebello:</string>
@@ -1477,7 +1476,7 @@
     <string name="shared_string_go">Ir</string>
     <string name="osm_edits">Edicións do OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">esquerda</string>
     <string name="your_edits">As súas edicións</string>
     <string name="waypoint_visit_after">Visitar despois</string>
@@ -1543,7 +1542,7 @@ Lon %2$s</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_release">Publicado</string>
     <string name="plugin_install_needs_network">Precisas estar conectado para instalar este plugin.</string>
-    <string name="get_plugin">Obter</string>
+    <string name="shared_string_get">Obter</string>
     <string name="use_fast_recalculation_desc">Recalcular só a parte inicial da ruta, útil para viaxes longas.</string>
     <string name="do_you_like_osmand">Gosta do OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">A túa opinión e comentarios son valorados.</string>
@@ -1980,7 +1979,6 @@ Lon %2$s</string>
     <string name="map_widget_magnetic_bearing">Traxectoria magnética</string>
     <string name="map_widget_bearing">Traxectoria relativa</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superficie da estrada</string>
-    <string name="translit_name_if_miss">Transliterar se falta o nome en %1$s</string>
     <string name="osm_live_banner_desc">Obtén descargas ilimitadas de mapas, engadindo actualizacións semanais, diarias ou cada hora.</string>
     <string name="no_inet_connection_desc_map">Obrigatorio para baixar mapas.</string>
     <string name="search_location">Estase a procurar a localización…</string>
@@ -4008,8 +4006,6 @@ Lon %2$s</string>
     <string name="updated">Actualizado: %s</string>
     <string name="last_time_checked">Última comprobación: %s</string>
     <string name="update_frequency">Frecuencia de actualización</string>
-    <string name="live_update_frequency_week_variant">As actualizacións do mapa serán comprobadas cada semana. A seguinte vez %1$s en %2$s.</string>
-    <string name="live_update_frequency_day_variant">As actualizacións do mapa serán comprobadas cada día. A seguinte vez %1$s en %2$s.</string>
     <string name="delete_updates">Eliminar actualizacións</string>
     <string name="live_update_delete_updates_msg">Eliminar todas as actualizacións ao vivo de %s\?</string>
     <string name="purchases">Compras</string>
@@ -4022,7 +4018,6 @@ Lon %2$s</string>
     <string name="track_has_no_altitude">A pista non contén datos de altitude.</string>
     <string name="track_has_no_speed">A pista non contén datos de velocidade.</string>
     <string name="select_another_colorization">Escolle outro tipo de cor.</string>
-    <string name="live_update_frequency_hour_variant">As actualizacións de mapas serán comprobadas cada hora. A seguinte vez %1$s en %2$s.</string>
     <string name="select_segments">Escoller segmentos</string>
     <string name="select_segments_description">%1$s contén máis dun segmento, precisas especificar a parte para a navegación.</string>
     <string name="segments_count">Segmento %1$d</string>

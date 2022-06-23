@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -18,6 +19,10 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -36,8 +41,10 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
+import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
@@ -78,6 +85,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	//OpenGL
 	private final RenderState renderState = new RenderState();
+	private LocationPointsTileProvider trackChartPointsProvider;
+	private MapMarkersCollection highlightedPointCollection;
+	private net.osmand.core.jni.MapMarker highlightedPointMarker;
+	private LatLon highlightedPointLocationCached;
+	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 
 	public RouteLayer(@NonNull Context context, int baseOrder) {
 		super(context);
@@ -104,7 +116,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsPT = new RenderingLineAttributes("publicTransportLine");
 		attrsPT.defaultWidth = (int) (12 * density);
 		attrsPT.defaultWidth3 = (int) (7 * density);
-		attrsPT.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
+		attrsPT.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track);
 		attrsPT.paint3.setStrokeCap(Cap.BUTT);
 		attrsPT.paint3.setColor(Color.WHITE);
 		attrsPT.paint2.setStrokeCap(Cap.BUTT);
@@ -113,7 +125,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsW = new RenderingLineAttributes("walkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
-		attrsW.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track_walk_fill);
+		attrsW.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track_walk_fill);
 		attrsW.paint3.setStrokeCap(Cap.BUTT);
 		attrsW.paint3.setColor(Color.WHITE);
 		attrsW.paint2.setStrokeCap(Cap.BUTT);
@@ -122,12 +134,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	@Override
 	protected void initGeometries(float density) {
-		routeWayContext = new RouteGeometryWayContext(view.getContext(), density);
+		routeWayContext = new RouteGeometryWayContext(getContext(), density);
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
 		routeGeometry.baseOrder = getBaseOrder();
 
-		publicTransportWayContext = new PublicTransportGeometryWayContext(view.getContext(), density);
+		publicTransportWayContext = new PublicTransportGeometryWayContext(getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
 		publicTransportRouteGeometry.baseOrder = getBaseOrder();
@@ -158,26 +170,108 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			final QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
 
 			drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
-
-			if (trackChartPoints != null) {
-				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-
-				List<LatLon> xAxisPoints = trackChartPoints.getXAxisPoints();
-				if (!Algorithms.isEmpty(xAxisPoints)) {
-					chartPointsHelper.drawXAxisPoints(xAxisPoints, attrs.defaultColor, canvas, tileBox);
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer == null) {
+				drawXAxisPoints(trackChartPoints, canvas, tileBox);
+			} else {
+				if (highlightedPointCollection == null || mapActivityInvalidated) {
+					recreateHighlightedPointCollection();
 				}
-
-				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
-				if (highlightedPoint != null) {
-					chartPointsHelper.drawHighlightedPoint(highlightedPoint, canvas, tileBox);
-				}
-
-				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+				drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
 			}
 		} else {
 			resetLayer();
 		}
-		mapActivitInvalidated = false;
+		mapActivityInvalidated = false;
+	}
+
+	private void drawXAxisPoints(@Nullable TrackChartPoints chartPoints, @NonNull Canvas canvas,
+	                             @NonNull RotatedTileBox tileBox) {
+		if (chartPoints != null) {
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
+			if (!Algorithms.isEmpty(xAxisPoints)) {
+				chartPointsHelper.drawXAxisPoints(xAxisPoints, attrs.defaultColor, canvas, tileBox);
+			}
+			LatLon highlightedPoint = chartPoints.getHighlightedPoint();
+			if (highlightedPoint != null) {
+				chartPointsHelper.drawHighlightedPoint(highlightedPoint, canvas, tileBox);
+			}
+			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		}
+	}
+
+	private void drawXAxisPointsOpenGl(@Nullable TrackChartPoints chartPoints, @NonNull MapRendererView mapRenderer,
+	                                   @NonNull RotatedTileBox tileBox) {
+		if (chartPoints != null) {
+			if (trackChartPoints != null && trackChartPoints.getHighlightedPoint() != null) {
+				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
+				if (!Algorithms.objectEquals(highlightedPointLocationCached, highlightedPoint)) {
+					highlightedPointLocationCached = highlightedPoint;
+					setHighlightedPointMarkerLocation(highlightedPoint);
+					setHighlightedPointMarkerVisibility(true);
+				}
+			} else {
+				setHighlightedPointMarkerVisibility(false);
+			}
+
+			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
+			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null && !mapActivityInvalidated) {
+				return;
+			}
+			xAxisPointsCached = xAxisPoints;
+			clearXAxisPoints();
+			if (!Algorithms.isEmpty(xAxisPoints)) {
+				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(attrs.defaultColor, tileBox.getDensity());
+				trackChartPointsProvider = new LocationPointsTileProvider(baseOrder - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider.drawPoints(mapRenderer);
+			}
+		} else {
+			xAxisPointsCached = new ArrayList<>();
+			highlightedPointLocationCached = null;
+			setHighlightedPointMarkerVisibility(false);
+			clearXAxisPoints();
+		}
+	}
+
+	private void setHighlightedPointMarkerLocation(LatLon latLon) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && highlightedPointMarker != null) {
+			highlightedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
+					MapUtils.get31TileNumberY(latLon.getLatitude())));
+		}
+	}
+
+	private void setHighlightedPointMarkerVisibility(boolean visible) {
+		if (highlightedPointMarker != null) {
+			highlightedPointMarker.setIsHidden(!visible);
+		}
+	}
+
+	private void clearXAxisPoints() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && trackChartPointsProvider != null) {
+			trackChartPointsProvider.clearPoints(mapRenderer);
+			trackChartPointsProvider = null;
+		}
+	}
+
+	private void recreateHighlightedPointCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (highlightedPointCollection != null) {
+				mapRenderer.removeSymbolsProvider(highlightedPointCollection);
+			}
+			highlightedPointCollection = new MapMarkersCollection();
+			MapMarkerBuilder builder = new MapMarkerBuilder();
+			builder.setBaseOrder(baseOrder - 600);
+			builder.setIsAccuracyCircleSupported(false);
+			builder.setIsHidden(true);
+			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(
+					chartPointsHelper.createHighlightedPointBitmap()));
+			highlightedPointMarker = builder.buildAndAddToCollection(highlightedPointCollection);
+			mapRenderer.addSymbolsProvider(highlightedPointCollection);
+		}
 	}
 
 	@Override
@@ -257,7 +351,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
-			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), LocationIcon.DEFAULT.getIconId());
+			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), LocationIcon.DEFAULT.getIconId());
 		}
 		if (projectionIcon != null) {
 			int locationX = (int) projectionXY[0];
@@ -280,7 +374,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			routeGeometry.clearRoute();
 			boolean routeUpdated = publicTransportRouteGeometry.updateRoute(tb, route);
 			boolean draw = routeUpdated || renderState.shouldRebuildTransportRoute
-					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivitInvalidated;
+					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivityInvalidated;
 			if (route != null && draw) {
 				LatLon start = transportHelper.getStartLocation();
 				Location startLocation = new Location("transport");
@@ -320,7 +414,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (routeGeometry.hasMapRenderer()) {
 				renderState.updateRouteState(startLocationIndex, actualColoringType, routeLineColor,
 						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows);
-				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivitInvalidated;
+				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivityInvalidated;
 				if (draw) {
 					routeGeometry.resetSymbolProviders();
 				} else {
@@ -335,7 +429,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows) {
 				if (routeGeometry.hasMapRenderer()) {
-					if (renderState.shouldUpdateActionPoints || mapActivitInvalidated) {
+					if (renderState.shouldUpdateActionPoints || mapActivityInvalidated) {
 						List<Location> actionPoints = calculateActionPoints(helper.getLastProjection(),
 								route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
 						routeGeometry.buildActionArrows(actionPoints, customTurnArrowColor);
@@ -394,7 +488,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			double distanceLoc2Proj = MapUtils.getSqrtDistance((int)projectionXY[0], (int) projectionXY[1],
 					box.getPixXFromLonNoRot(ll.getLongitude()), box.getPixYFromLatNoRot(ll.getLatitude()));
 			boolean visible = box.containsPoint((float) projectionXY[0], (float) projectionXY[1], 20.0f)
-					&& distanceLoc2Proj > AndroidUtils.dpToPx(view.getContext(), 52) / 2.0;
+					&& distanceLoc2Proj > AndroidUtils.dpToPx(getContext(), 52) / 2.0;
 			if (visible) {
 				return projectionXY;
 			}
@@ -529,21 +623,17 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void destroyLayer() {
-	}
-
-	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -578,9 +668,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				if (n.getLocation() == null) {
 					continue;
 				}
-				int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
+						n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 					radius = rp;
 					res.add(n);
 				}
@@ -615,7 +705,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof TransportStop){
-			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, view.getContext().getString(R.string.transport_Stop),
+			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, getContext().getString(R.string.transport_Stop),
 					((TransportStop)o).getName());
 		}
 		return null;
@@ -648,6 +738,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	/** OpenGL */
 	private void resetLayer() {
+		clearXAxisPoints();
 		if (routeGeometry != null && routeGeometry.hasMapRenderer()) {
 			routeGeometry.resetSymbolProviders();
 		}

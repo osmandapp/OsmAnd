@@ -211,6 +211,7 @@ public class GpsFilterHelper {
 		copy.showCurrentTrack = source.showCurrentTrack;
 		copy.hasAltitude = source.hasAltitude;
 		copy.modifiedTime = System.currentTimeMillis();
+		copy.pointsModifiedTime = copy.modifiedTime;
 		copy.copyExtensions(source);
 		return copy;
 	}
@@ -536,7 +537,7 @@ public class GpsFilterHelper {
 		@NonNull
 		@Override
 		public CharSequence getFilterTitle(@NonNull OsmandApplication app) {
-			String speed = app.getString(R.string.map_widget_current_speed);
+			String speed = app.getString(R.string.shared_string_speed);
 			String titleContent;
 			if (!isNeeded()) {
 				titleContent = app.getString(R.string.gpx_logging_no_data);

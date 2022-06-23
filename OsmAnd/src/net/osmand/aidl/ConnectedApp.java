@@ -1,5 +1,8 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.OsmandAidlApi.WIDGET_ID_PREFIX;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -14,16 +17,17 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -34,15 +38,9 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
 
@@ -136,7 +134,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			if (mapLayer != null) {
 				mapView.removeLayer(mapLayer);
 			}
-			mapLayer = new AidlMapLayer(context, layer, pack);
+			mapLayer = new AidlMapLayer(context, layer, pack, -180000);
 			mapView.addLayer(mapLayer, layer.getZOrder());
 			mapLayers.put(layer.getId(), mapLayer);
 		}
@@ -180,68 +178,82 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				.setColor(app, layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID));
 	}
 
-	void registerWidgetControls(@NonNull MapActivity mapActivity) {
-		for (AidlMapWidgetWrapper widget : widgets.values()) {
-			MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-			if (layer != null) {
-				TextInfoWidget control = createWidgetControl(mapActivity, widget.getId());
-				widgetControls.put(widget.getId(), control);
-				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
-				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-				String widgetKey = "aidl_widget_" + widget.getId();
-				layer.registerWidget(widgetKey, control, menuIconId, widget.getMenuTitle(), WidgetsPanel.RIGHT, widget.getOrder());
-			}
+	void createWidgetControls(@NonNull MapActivity mapActivity,
+	                          @NonNull List<MapWidgetInfo> widgetsInfos,
+	                          @NonNull ApplicationMode appMode) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
+			int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
+			int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
+			String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+			WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+
+			TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
+			MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
+					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
+			((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
+
+			widgetsInfos.add(widgetInfo);
+			widgetControls.put(widgetData.getId(), widget);
 		}
 	}
 
 	@NonNull
-	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, String widgetId) {
-		TextInfoWidget control = new RightTextInfoWidget(mapActivity) {
+	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
+		return new AidlTextInfoWidget(mapActivity, widgetId);
+	}
 
-			private boolean init = true;
-			private String cachedTxt;
-			private String cachedSubtext;
-			private Boolean cachedNight;
-			private Integer cachedIcon;
+	class AidlTextInfoWidget extends TextInfoWidget {
 
-			@Override
-			public void updateInfo(@Nullable DrawSettings drawSettings) {
+		private final String widgetId;
+
+		private String cachedTxt;
+		private String cachedSubtext;
+		private Boolean cachedNight;
+		private Integer cachedIcon;
+		private boolean init = true;
+
+		public AidlTextInfoWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
+			super(mapActivity, null);
+			this.widgetId = widgetId;
+
+			updateInfo(null);
+			setOnClickListener(v -> {
 				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null) {
-					String txt = widget.getText();
-					String subtext = widget.getDescription();
-					boolean night = drawSettings != null && drawSettings.isNightMode();
-					int icon = AndroidUtils.getDrawableId(app, night ? widget.getDarkIconName() : widget.getLightIconName());
-					if (init || !Algorithms.objectEquals(txt, cachedTxt) || !Algorithms.objectEquals(subtext, cachedSubtext)
-							|| !Algorithms.objectEquals(night, cachedNight) || !Algorithms.objectEquals(icon, cachedIcon)) {
-						init = false;
-						cachedTxt = txt;
-						cachedSubtext = subtext;
-						cachedNight = night;
-						cachedIcon = icon;
-
-						setText(txt, subtext);
-						if (icon != 0) {
-							setImageDrawable(icon);
-						} else {
-							setImageDrawable(null);
-						}
-					}
-				} else {
-					setText(null, null);
-					setImageDrawable(null);
+				if (widget != null && widget.getIntentOnClick() != null) {
+					app.startActivity(widget.getIntentOnClick());
 				}
-			}
-		};
-		control.updateInfo(null);
+			});
+		}
 
-		control.setOnClickListener(v -> {
+		@Override
+		public void updateInfo(@Nullable DrawSettings drawSettings) {
 			AidlMapWidgetWrapper widget = widgets.get(widgetId);
-			if (widget != null && widget.getIntentOnClick() != null) {
-				app.startActivity(widget.getIntentOnClick());
+			if (widget != null) {
+				String txt = widget.getText();
+				String subtext = widget.getDescription();
+				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+				int icon = AndroidUtils.getDrawableId(app, nightMode ? widget.getDarkIconName() : widget.getLightIconName());
+				if (init || !Algorithms.objectEquals(txt, cachedTxt) || !Algorithms.objectEquals(subtext, cachedSubtext)
+						|| !Algorithms.objectEquals(nightMode, cachedNight) || !Algorithms.objectEquals(icon, cachedIcon)) {
+					init = false;
+					cachedTxt = txt;
+					cachedSubtext = subtext;
+					cachedNight = nightMode;
+					cachedIcon = icon;
+
+					setText(txt, subtext);
+					if (icon != 0) {
+						setImageDrawable(icon);
+					} else {
+						setImageDrawable(null);
+					}
+				}
+			} else {
+				setText(null, null);
+				setImageDrawable(null);
 			}
-		});
-		return control;
+		}
 	}
 
 	boolean addMapWidget(AidlMapWidgetWrapper widget) {

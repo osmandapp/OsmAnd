@@ -15,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingEngineFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfilesGroup;
+import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
@@ -86,10 +87,10 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 
 	private void createProfilesList() {
 		for (ProfilesGroup group : profileGroups) {
-			List<ProfileDataObject> items = group.getProfiles();
+			List<RoutingDataObject> items = group.getProfiles();
 			if (!Algorithms.isEmpty(items)) {
 				addGroupHeader(group.getTitle(), group.getDescription(app, nightMode));
-				for (ProfileDataObject item : items) {
+				for (RoutingDataObject item : items) {
 					addProfileItem(item);
 				}
 				addDivider();

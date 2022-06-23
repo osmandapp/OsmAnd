@@ -72,6 +72,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
+			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
@@ -99,18 +100,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
-	}
-
-	@Override
-	public void setSelectedGroup(String selectedGroup) {
-		super.setSelectedGroup(selectedGroup);
-
-		FavoriteGroup group = getFavoriteGroup(selectedGroup);
-		if (group != null) {
-			setColor(group.getColor());
-			setIconName(group.getIconName());
-			setBackgroundType(group.getBackgroundType());
-		}
 	}
 
 	private void replacePressed() {
@@ -154,12 +143,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void setPointsGroup(@NonNull PointsGroup pointsGroup) {
+	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		Context ctx = getContext();
 		if (ctx != null) {
-			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, pointsGroup.name);
-			group = favouritesHelper.getGroup(groupIdName);
-			super.setPointsGroup(pointsGroup);
+			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.name);
+			this.group = favouritesHelper.getGroup(groupIdName);
+			super.setPointsGroup(group, updateAppearance);
 		}
 	}
 
@@ -331,15 +320,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return favorite != null ? favorite.getName() : "";
 	}
 
-	@NonNull
-	@Override
-	public String getCategoryInitValue() {
-		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0
-				? getDefaultCategoryName()
-				: favorite.getCategoryDisplayName(requireContext());
-	}
-
 	@Override
 	public String getDescriptionInitValue() {
 		FavouritePoint favorite = getFavorite();
@@ -378,15 +358,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (editor != null) {
 			FavoriteGroup lastUsedGroup = favouritesHelper.getGroup(getLastUsedGroup());
 			if (lastUsedGroup != null) {
-				pointsGroups.put(lastUsedGroup.getDisplayName(app), lastUsedGroup.toPointsGroup());
+				pointsGroups.put(lastUsedGroup.getDisplayName(app), lastUsedGroup.toPointsGroup(app));
 			}
 			Set<PointsGroup> hiddenCategories = new LinkedHashSet<>();
 			for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
 				if (!group.equals(lastUsedGroup)) {
 					if (group.isVisible()) {
-						pointsGroups.put(group.getDisplayName(app), group.toPointsGroup());
+						pointsGroups.put(group.getDisplayName(app), group.toPointsGroup(app));
 					} else {
-						hiddenCategories.add(group.toPointsGroup());
+						hiddenCategories.add(group.toPointsGroup(app));
 					}
 				}
 			}
@@ -400,19 +380,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public boolean isCategoryVisible(@NonNull String name) {
 		return favouritesHelper.isGroupVisible(name);
-	}
-
-	@Override
-	public int getCategoryPointsCount(String category) {
-		FavoriteGroup group = getFavoriteGroup(category);
-		return group != null ? group.getPoints().size() : 0;
-	}
-
-	@Override
-	@ColorInt
-	public int getCategoryColor(String category) {
-		FavoriteGroup group = getFavoriteGroup(category);
-		return group != null ? group.getColor() : getDefaultColor();
 	}
 
 	@Nullable

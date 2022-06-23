@@ -513,7 +513,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void copyAppModePrefs(ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		if (appMode != null) {
 			isChanged = true;
 			initSavedIds(appMode);

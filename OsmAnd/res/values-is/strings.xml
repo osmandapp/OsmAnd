@@ -180,7 +180,7 @@
     <string name="shared_string_go">Fara</string>
     <string name="osmand_parking_overdue">útrunnið</string>
     <string name="osmand_parking_hour">klst</string>
-    <string name="osmand_parking_minute">mín</string>
+    <string name="shared_string_minute_lowercase">mín</string>
     <string name="osmand_parking_time_left">eftir</string>
     <string name="drawer">Flatur listi</string>
     <string name="general_settings_2">Almennar stillingar</string>
@@ -654,7 +654,7 @@
     <string name="edit_filter_save_as_menu_item">Vista sem</string>
     <string name="edit_filter_delete_dialog_title">Eyða þessari síu\?</string>
     <string name="email">tölvupóstur</string>
-    <string name="get_plugin">Sækja</string>
+    <string name="shared_string_get">Sækja</string>
     <string name="failed_to_upload">Gat ekki sent inn</string>
     <string name="try_again">Reyndu aftur</string>
     <string name="error_message_pattern">Villa: {0}</string>
@@ -1150,7 +1150,6 @@
     <string name="upload_poi">Senda inn merkisstað</string>
     <string name="christmas_desc_q">Birta jólastaðina?</string>
     <string name="rendering_attr_surfaceIntegrity_name">Áreiðanleiki yfirborðs gatna</string>
-    <string name="translit_name_if_miss">Umrita ef heiti %1$s vantar</string>
     <string name="donation_to_osm">Styrkur til OpenStreetMap samfélagsins</string>
     <string name="skip_map_downloading">Sleppa því að ná í kort</string>
     <string name="rendering_attr_hideOverground_name">Hlutir á yfirborði</string>
@@ -1690,7 +1689,6 @@
     <string name="precise_routing_mode_descr">Reikna nákvæmar leiðir án hnökra. Er ennþá takmarkað út frá vegalengdum og fremur hægvirkt.</string>
     <string name="precise_routing_mode">Nákvæmt leiðaval (alfa-tilraunaútgáfa)</string>
     <string name="dropbox_plugin_description">Gerir þér kleift að samstilla ferla og minnispunkta við hljóð/myndskeið með því að nota Dropbox-aðganginn þinn.</string>
-    <string name="av_def_action_choose">Eftir þörfum\?</string>
     <string name="av_def_action_video">Taka upp myndskeið</string>
     <string name="av_def_action_audio">Taka upp hljóð</string>
     <string name="av_widget_action_descr">Sjálfgefin aðgerð viðmótshluta:</string>
@@ -1916,7 +1914,7 @@
     <string name="loading_builds">Hleð inn OsmAnd útgáfusamsetningum…</string>
     <string name="select_build_to_install">Veldu OsmAnd útgáfusamsetningu til að setja upp</string>
     <string name="route_points_category_name">Punktar sem fara skal í gegnum á leiðinni</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Veldu hæðarflökt landslags</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Velja hæðarflökt landslags</string>
     <string name="route_stops_before">%1$s stopp á undan</string>
     <string name="access_disable_offroute_recalc">Ekki endurreikna leið þegar farið er út af stefnu</string>
     <string name="access_disable_wrong_direction_recalc">Ekki endurreikna leið þegar stefnt er í öfuga átt</string>
@@ -3818,7 +3816,7 @@
 \n
 \nÞú getur stýrt og aflýst áskriftunum þínum með því að fara í AppGallery stillingarnar þínar.</string>
     <string name="shared_string_graph">Graf</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="shared_string_local_maps">Staðkort</string>
     <string name="icon_group_amenity">Aðstaða</string>
     <string name="icon_group_special">Sértákn</string>
@@ -4022,9 +4020,6 @@
     <string name="updated">Uppfært: %s</string>
     <string name="last_time_checked">Síðast athugað: %s</string>
     <string name="update_frequency">Uppfærslutíðni</string>
-    <string name="live_update_frequency_week_variant">Uppfærslur korta verða athugaðar í hverri viku. Næsta skipti %1$s eftir %2$s.</string>
-    <string name="live_update_frequency_day_variant">Uppfærslur korta verða athugaðar á hverjum degi. Næsta skipti %1$s eftir %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Uppfærslur korta verða athugaðar á klukkustundar fresti. Næsta skipti %1$s eftir %2$s.</string>
     <string name="delete_updates">Eyða uppfærslum</string>
     <string name="live_update_delete_updates_msg">Eyða öllum %s rauntímauppfærslum\?</string>
     <string name="purchases">Innkaup</string>
@@ -4515,6 +4510,106 @@
     <string name="navigate_point_format_swiss_grid_plus">Svissneska hnitanetið (CH1903+)</string>
     <string name="please_provide_group_name_message">Gefðu hópnum eitthvað heiti.</string>
     <string name="quick_action_add_route_descr">Hnappur til að byrja leið af miðjum skjánum.</string>
-    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að vista leiðina inn í skrá.</string>
+    <string name="gpx_no_routes_descr">Þú getur notað \"%1$s\" verkfærið til að vista leið inn í skrá.</string>
     <string name="gpx_no_routes_title">Það eru engar leiðir</string>
+    <string name="exit_import">Hætta\?</string>
+    <string name="on_with_params">%1$s á %2$s</string>
+    <string name="apply_to_existing_favorites_descr">Virkja breytingar á fyrirliggjandi eftirlætispunkta hópsins eða aðeins á nýja eftirlætispunkta\?</string>
+    <string name="apply_to_existing">Bæta við fyrirliggjandi</string>
+    <string name="apply_only_to_new_points">Bæta aðeins við nýja punkta</string>
+    <string name="apply_to_existing_points_descr">Virkja breytingar á fyrirliggjandi punkta hópsins eða aðeins á nýja punkta\?</string>
+    <string name="apply_only_to_new_favorites">Bæta aðeins við ný eftirlæti</string>
+    <string name="change_default_appearance">Breyta sjálfgefnu útliti</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Krefjandi</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Erfitt</string>
+    <string name="rendering_attr_horse_scale_critical_name">Varhugavert</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Hættulegt</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Ómögulegt</string>
+    <string name="routing_attr_carriage_restrictions_name">Takmarkanir hestvagna</string>
+    <string name="routing_attr_carriage_restrictions_description">Taka mið af heimildum fyrir hestknúin faratæki</string>
+    <string name="rendering_attr_showTramRoutes_name">Leiðir sporvagna</string>
+    <string name="simulation_real_mode_desc">Á beinum veghlutum verður hraði nálægt leyfilegum hámarkshraða.
+\nVið gatnamót hægist á hraða hermingar.
+\nFrádráttur kemur til við umferðarljós, stöðvunarmerki o.s.frv.</string>
+    <string name="simulation_preview_mode_desc">Hraði leiðarhermingar verður í hámarki á beinum hlutum og hægist aðeins niður við gatnamót.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Hlaupaleiðir</string>
+    <string name="top_widgets_panel">Toppstika</string>
+    <string name="bottom_widgets_panel">Botnstika</string>
+    <string name="shared_string_item">Atriði</string>
+    <string name="configure_screen_widgets_descr">Veldu þá hlið skjásins þar sem bæta á við eða raða viðmótshlutum.</string>
+    <string name="simulation_real_mode_title">Raunsæ herming</string>
+    <string name="simulation_constant_mode_title">Fastur hraði</string>
+    <string name="simulation_preview_mode_title">Hraðvirkur forskoðunarhamur</string>
+    <string name="speed_mode">Hraðahamur</string>
+    <string name="osm_carto_render_descr">Líkist kortastíl OpenStreetMap eins og hann er notaður á aðalvefsvæði OSM</string>
+    <string name="rendering_attr_showFitnessTrails_description">Sýna fitness-leiðir</string>
+    <string name="stop_download">Hætta niðurhali</string>
+    <string name="stop_and_exit">Hætta og fara út</string>
+    <string name="shared_string_complete">klárað</string>
+    <string name="estimated_download_size">Áætluð stærð niðurhals</string>
+    <string name="stop_download_desc">Niðurhali er ekki lokið. Ef þú stöðvar niðurhalið núna, verður aðeins hluti kortaflísanna tiltækur til skoðunar.</string>
+    <string name="points_selection_descr">Loka og tapa öllum breytingum\?</string>
+    <string name="exit_import_descr">Loka án þess að vista neinar breytingar\?</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Ekki fara utan vega</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Aðeins ef það er nauðsynlegt</string>
+    <string name="routing_attr_freeride_policy_allow_name">Leyfa</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Leiðir einteinunga</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Leiðir kláfbrauta</string>
+    <string name="rendering_attr_showBusRoutes_name">Leiðir strætisvagna</string>
+    <string name="routeInfo_horse_scale_name">Erfiðleikastig reiðleiða</string>
+    <string name="routeInfo_horse_scale_description">Myndgera leiðir samkvæmt erfiðleikastigi reiðleiða</string>
+    <string name="rendering_attr_horse_scale_common_name">Algengt</string>
+    <string name="shared_string_buttons">Hnappar</string>
+    <string name="simulation_constant_mode_desc">Leiðarherming verður framkvæmd með völdum föstum hraða.</string>
+    <string name="release_4_2">• Endurhönnun viðmótshluta: ný framsetning útlits og hegðunar, hópun eftir síðum, hægt að breyta röðun og sameina eftir þörfum.
+\n
+\n • Göngu / Hjóla / Ferða-leiðir: ýttu á tákn leiðar og fáðu allar upplýsingar um leiðina.
+\n
+\n • Eftirlætishópar: stilling á sjálfgefnu útliti nýrra punkta í hópnum.
+\n
+\n • Lagfæringar: nettengdar kortaflísar uppfærast sjálfvirkt.
+\n
+\n</string>
+    <string name="available_widgets">Tiltækir viðmótshlutar</string>
+    <string name="snackbar_page_removed">\"Síðan %1$s\" hefur verið fjarlægð.</string>
+    <string name="map_widget_altitude">Hæð núverandi staðsetningar</string>
+    <string name="map_widget_distance_to_destination">Fjarlægð á áfangastað</string>
+    <string name="map_widget_current_speed">Fyrirliggjandi hraði</string>
+    <string name="add_page">Bæta við síðu</string>
+    <string name="page_number">Síða %1$s</string>
+    <string name="rendering_attr_showTrainRoutes_name">Leiðir lesta</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Leiðir léttlesta</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Leiðir rafknúinna strætisvagna</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Skutluleiðir</string>
+    <string name="map_markers_bar">Stika fyrir kortamerki</string>
+    <string name="shared_string_visible_widgets">Sýnilegir viðmótshlutar</string>
+    <string name="shared_string_shape">Lögun</string>
+    <string name="zoom_levels_difference_description">Hinn mikli munur milli aðdráttarstiga getur aukið stærð sóttra gagna.</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Miðlungs</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Fara helst utan vega</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Engar óskir</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Byrjendur</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Lengra komnir</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Sérfræðingar</string>
+    <string name="shared_string_symbol">Tákn</string>
+    <string name="no_widgets_descr">Bæta við einum eða fleiri viðmótshlutum úr listanum yfir tiltæka viðmótshluta.</string>
+    <string name="no_widgets_here_yet">Engir viðmótshlutar hér ennþá</string>
+    <string name="rendering_attr_showRunningRoutes_description">Sýna hlaupaleiðir</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness-leiðir</string>
+    <string name="number_of_tiles">Fjöldi flísa</string>
+    <string name="move_map_to_select_area">Færðu kortið til að velja nauðsynlegt svæði.</string>
+    <string name="edit_category">Breyta flokki</string>
+    <string name="default_appearance">Sjálfgefið útlit</string>
+    <string name="location_source">Uppruni staðsetningar</string>
+    <string name="select_suggested_points">Velja punkta sem stungið er upp á</string>
+    <string name="selected_waypoints_descr">Völdum leiðarpunktum verður bætt við \"%1$s\" ferilinn</string>
+    <string name="shared_string_reading_file">Les skrá…</string>
+    <string name="all_groups">Allir hópar</string>
+    <string name="list_of_groups">Listi yfir hópa</string>
+    <string name="import_tracks">Flytja inn ferla</string>
+    <string name="import_tracks_descr">%1$s, inniheldur %2$s aðskilda ferla. Veldu ferlana sem á að flytja inn.</string>
+    <string name="default_appearance_desc">Sjálfgefinn litur, táknmynd og lögun verður beitt á viðbætta eftirlætispunkta í hópnum.</string>
+    <string name="location_source_descr">Sjálfgefið mun OsmAnd sem sett er upp úr Google Play nota %1$s til að ákvarða staðsetningu.
+\n
+\nEf þú ert að fá ónákvæmar staðsetningar eða notar tækið án %2$s, geturðu prófað að skipta yfir í \"%3$s\"</string>
 </resources>

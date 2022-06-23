@@ -94,7 +94,7 @@
     <string name="current_route">Camín actual</string>
     <string name="confirmation_to_clear_history">¿Quies llimpiar l\'historial\?</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osm_edits">OSM edits</string>
     <string name="your_edits">Your edits</string>
     <string name="shared_string_ellipsis">…</string>
@@ -179,7 +179,7 @@
     <string name="speak_pedestrian">Pasos peoniles</string>
     <string name="traffic_warning_railways">Pasu a nivel</string>
     <string name="traffic_warning_pedestrian">Pasu peonil</string>
-    <string name="get_plugin">Consiguir</string>
+    <string name="shared_string_get">Consiguir</string>
     <string name="map_widget_battery">Nivel de la batería</string>
     <string name="app_mode_bus">Bus</string>
     <string name="app_mode_train">Tren</string>
@@ -847,7 +847,6 @@
     <string name="stop_routing_confirm">¿Quies parar la navegación\?</string>
     <string name="clear_dest_confirm">Remove your destination (and intermediate destinations)\?</string>
     <string name="recording_context_menu_precord">Take a photo</string>
-    <string name="av_def_action_choose">¿Baxo demanda\?</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Default widget action:</string>
@@ -2677,7 +2676,6 @@
     <string name="selected_categories">Selected categories</string>
     <string name="edit_filter">Edit categories</string>
     <string name="translit_names">Transliterate names</string>
-    <string name="translit_name_if_miss">Transliterate if %1$s name is missing</string>
     <string name="rendering_attr_surfaceIntegrity_name">Road surface integrity</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines color scheme</string>
     <string name="christmas_desc_q">Show Christmas holiday POIs\?</string>
@@ -3820,9 +3818,6 @@
     <string name="updated">Data d\'anovamientu: %s</string>
     <string name="last_time_checked">Last time checked: %s</string>
     <string name="update_frequency">Frecuencia del anovamientu</string>
-    <string name="live_update_frequency_week_variant">Map updates will be checked every week. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_day_variant">Map updates will be checked every day. Next time %1$s in %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour. Next time %1$s in %2$s.</string>
     <string name="delete_updates">Delete updates</string>
     <string name="live_update_delete_updates_msg">Delete all %s live updates\?</string>
     <string name="purchases">Compres</string>

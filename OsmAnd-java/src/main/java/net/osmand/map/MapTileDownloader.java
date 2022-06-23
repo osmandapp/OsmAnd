@@ -32,7 +32,7 @@ public class MapTileDownloader {
 	private static final Log log = PlatformUtil.getLog(MapTileDownloader.class);
 
 	// Download manager tile settings
-	public static int TILE_DOWNLOAD_THREADS = 4;
+	public static int TILE_DOWNLOAD_THREADS = 8;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
 	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 15000;
 	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 50;

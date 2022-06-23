@@ -36,9 +36,11 @@ import java.util.Map;
 final class MapLayerMenuListener extends OnRowItemClick {
 
 	private final MapActivity mapActivity;
+	private final TransportLinesMenu transportLinesMenu;
 
 	MapLayerMenuListener(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		this.transportLinesMenu = new TransportLinesMenu(mapActivity.getMyApplication());
 	}
 
 	@NonNull
@@ -71,18 +73,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			showGpxSelectionDialog(uiAdapter, item);
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
-			TransportLinesMenu.showTransportsDialog(mapActivity, result -> {
-				item.setSelected(result);
-				item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				uiAdapter.onDataSetChanged();
-				return true;
-			});
-			boolean selected = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
-			if (!selected) {
-				item.setSelected(true);
-				item.setColor(mapActivity, R.color.osmand_orange);
-				uiAdapter.onDataSetChanged();
-			}
+			TransportLinesMenu.showTransportsDialog(mapActivity);
 			return false;
 		} else {
 			CompoundButton btn = view.findViewById(R.id.toggle_item);
@@ -119,20 +110,15 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			settings.SHOW_FAVORITES.set(isChecked);
 		} else if (itemId == R.string.layer_gpx_layer) {
 			final GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
-			if (selectedGpxHelper.isShowingAnyGpxFiles()) {
+			if (selectedGpxHelper.isAnyGpxFileSelected()) {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
 			} else {
 				showGpxSelectionDialog(uiAdapter, item);
 			}
 		} else if (itemId == R.string.rendering_category_transport) {
-			boolean selected = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
-			TransportLinesMenu.toggleTransportLines(mapActivity, !selected, result -> {
-				item.setSelected(result);
-				item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				uiAdapter.onDataSetChanged();
-				return true;
-			});
+			boolean selected = transportLinesMenu.isShowAnyTransport();
+			transportLinesMenu.toggleTransportLines(mapActivity, !selected);
 		} else if (itemId == R.string.map_markers) {
 			settings.SHOW_MAP_MARKERS.set(isChecked);
 		} else if (itemId == R.string.layer_map) {
@@ -154,7 +140,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		AlertDialog dialog = layers.showGPXFileLayer(getAlreadySelectedGpx(), mapActivity);
 		dialog.setOnDismissListener(dlg -> {
 			OsmandApplication app = mapActivity.getMyApplication();
-			boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
+			boolean selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
 			item.setSelected(selected);
 			item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
 			item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);

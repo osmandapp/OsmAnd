@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -72,6 +73,10 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 		return pathBorderPaint;
 	}
 
+	public float getBorderOutlineWidth() {
+		return (hasMapRenderer() ? 0.5f : 1f) * getDensity();
+	}
+
 	@NonNull
 	public Paint getProfileIconBackgroundPaint() {
 		return profileIconBackgroundPaint;
@@ -94,11 +99,13 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 			canvas.drawCircle(iconCenter, iconCenter, frameRadius, profileIconBorderPaint);
 
 			float profileIconSize = PROFILE_ICON_SIZE_DP * getDensity();
-			Bitmap profileIconBitmap = AndroidUtils.createScaledBitmap(
-					iconsCache.getPaintedIcon(iconRes, color), (int) profileIconSize, (int) profileIconSize);
-			canvas.drawBitmap(profileIconBitmap, iconCenter - profileIconSize / 2,
-					iconCenter - profileIconSize / 2, profileIconBorderPaint);
-
+			Drawable paintedIcon = iconsCache.getPaintedIcon(iconRes, color);
+			if (paintedIcon != null) {
+				Bitmap profileIconBitmap = AndroidUtils.createScaledBitmap(
+						paintedIcon, (int) profileIconSize, (int) profileIconSize);
+				canvas.drawBitmap(profileIconBitmap, iconCenter - profileIconSize / 2,
+						iconCenter - profileIconSize / 2, profileIconBorderPaint);
+			}
 			profileIconsBitmapCache.put(key, framedProfileIconBitmap);
 		}
 		return framedProfileIconBitmap;

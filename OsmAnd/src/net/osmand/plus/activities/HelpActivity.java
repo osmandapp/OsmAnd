@@ -41,13 +41,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
-
-	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
-	public static final String GITHUB_DISCUSSIONS_URL = "https://github.com/osmandapp/OsmAnd/discussions";
-	// public static final String OSMAND_MAP_LEGEND = "https://osmand.net/help/map-legend_default.png";
 
 	public static final int COLLAPSED_TELEGRAM_CHATS_COUNT = 3;
 	public static final int NULL_ID = -1;
@@ -60,37 +55,37 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	private ListView listView;
 
 	private enum TelegramDiscussion {
-		ENGLISH(R.string.lang_en, "https://t.me/OsmAndMaps"),
-		RUSSIAN(R.string.lang_ru, "https://t.me/ruosmand"),
-		GERMAN(R.string.lang_de, "https://t.me/deosmand"),
-		ITALIAN(R.string.lang_it, "https://t.me/itosmand"),
-		FRENCH(R.string.lang_fr, "https://t.me/frosmand"),
-		POLISH(R.string.lang_pl, "https://t.me/osmand_pl"),
-		PORTUGUESE_BRAZIL(R.string.lang_pt_br, "https://t.me/brosmand"),
-		SPANISH(R.string.lang_es, "https://t.me/osmand_es"),
-		UKRAINIAN(R.string.lang_uk, "https://t.me/uaosmand");
+		ENGLISH(R.string.lang_en, R.string.discussion_telegram_english),
+		RUSSIAN(R.string.lang_ru, R.string.discussion_telegram_russian),
+		GERMAN(R.string.lang_de, R.string.discussion_telegram_german),
+		ITALIAN(R.string.lang_it, R.string.discussion_telegram_italian),
+		FRENCH(R.string.lang_fr, R.string.discussion_telegram_french),
+		POLISH(R.string.lang_pl, R.string.discussion_telegram_polish),
+		PORTUGUESE_BRAZIL(R.string.lang_pt_br, R.string.discussion_telegram_portuguese_brazil),
+		SPANISH(R.string.lang_es, R.string.discussion_telegram_spanish),
+		UKRAINIAN(R.string.lang_uk, R.string.discussion_telegram_ukrainian);
 
 		private final int langTitleId;
-		private final String url;
+		private final int urlId;
 
-		TelegramDiscussion(int langTitleId, String url) {
+		TelegramDiscussion(int langTitleId, int urlId) {
 			this.langTitleId = langTitleId;
-			this.url = url;
+			this.urlId = urlId;
 		}
 
-		public String getLangTitle(Context ctx) {
+		public String getLangTitle(@NonNull Context ctx) {
 			return ctx.getString(langTitleId);
 		}
 
-		public String getUrl() {
-			return url;
+		public String getUrl(@NonNull Context ctx) {
+			return ctx.getString(urlId);
 		}
 	}
 
 	private enum SocialNetwork {
-		TWITTER(R.string.twitter, R.string.twitter_address, R.drawable.ic_action_social_twitter),
-		REDDIT(R.string.reddit, R.string.reddit_address, R.drawable.ic_action_social_reddit),
-		FACEBOOK(R.string.facebook, R.string.facebook_address, R.drawable.ic_action_social_facebook);
+		TWITTER(R.string.twitter, R.string.community_twitter, R.drawable.ic_action_social_twitter),
+		REDDIT(R.string.reddit, R.string.community_reddit, R.drawable.ic_action_social_reddit),
+		FACEBOOK(R.string.facebook, R.string.community_facebook, R.drawable.ic_action_social_facebook);
 
 		SocialNetwork(int titleId, int urlId, int iconId) {
 			this.titleId = titleId;
@@ -209,7 +204,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	private void createDiscussionItems(ContextMenuAdapter adapter) {
 		adapter.addItem(createCategory(R.string.shared_string_discussion));
-		adapter.addItem(createSocialItem(getString(R.string.github), GITHUB_DISCUSSIONS_URL,
+		adapter.addItem(createSocialItem(getString(R.string.github),
+				getString(R.string.discussion_github),
 				R.drawable.ic_action_social_github));
 		TelegramDiscussion[] discussions = TelegramDiscussion.values();
 		int countToShow = telegramChatsExpanded ? discussions.length : COLLAPSED_TELEGRAM_CHATS_COUNT;
@@ -217,7 +213,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 			TelegramDiscussion discussion = discussions[i];
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
 			String title = String.format(pattern, getString(R.string.telegram), discussion.getLangTitle(this));
-			adapter.addItem(createSocialItem(title, discussion.getUrl(), R.drawable.ic_action_social_telegram));
+			adapter.addItem(createSocialItem(title, discussion.getUrl(this), R.drawable.ic_action_social_telegram));
 		}
 		if (!telegramChatsExpanded) {
 			adapter.addItem(createViewAllButton());
@@ -308,7 +304,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
 
-		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, LATEST_CHANGES_URL));
+
+		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, getString(R.string.docs_latest_version)));
 
 		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
@@ -415,6 +412,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 		@Override
 		public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+			String LATEST_CHANGES_URL = ctx.getString(R.string.docs_latest_version);
 			if (LATEST_CHANGES_URL.equals(path)) {
 				OsmandApplication app = (OsmandApplication) ctx.getApplication();
 				boolean nightMode = !app.getSettings().isLightContent();

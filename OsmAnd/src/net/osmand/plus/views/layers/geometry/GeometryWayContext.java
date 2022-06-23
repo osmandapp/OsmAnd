@@ -104,8 +104,10 @@ public abstract class GeometryWayContext {
 	@DrawableRes
 	protected abstract int getArrowBitmapResId();
 
-	public void setNightMode(boolean nightMode) {
+	public boolean setNightMode(boolean nightMode) {
+		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
+		return changed;
 	}
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes attrs) {

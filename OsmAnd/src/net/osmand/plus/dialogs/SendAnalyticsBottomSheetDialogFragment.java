@@ -115,7 +115,8 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		SpannableString spannable = new SpannableString(text);
 		int start = text.indexOf(privacyPolicyText);
 		int end = start + privacyPolicyText.length();
-		spannable.setSpan(new URLSpan(OsmandApplication.OSMAND_PRIVACY_POLICY_URL) {
+		String url = getString(R.string.osmand_privacy_policy);
+		spannable.setSpan(new URLSpan(url) {
 			@Override
 			public void updateDrawState(@NonNull TextPaint ds) {
 				super.updateDrawState(ds);

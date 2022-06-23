@@ -1,5 +1,14 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -45,6 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -80,15 +90,6 @@ import java.util.List;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -150,6 +151,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(@NonNull final OsmandMapTileView view) {
+		super.initLayer(view);
 	}
 
 	@Override
@@ -427,7 +429,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void onBackToLocation(boolean showLocationMenu) {
-		MapActivity mapActivity = requireMapActivity();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
 		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			if (showLocationMenu) {
 				showContextMenuForMyLocation();
@@ -835,6 +840,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		super.destroyLayer();
 		controls.clear();
 	}
 
@@ -865,7 +871,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		//routePlanningBtn.setIconResId(isRouteFollowingMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_gdirections_dark);
 		updateRoutePlaningButton(rh, isRoutePlanningMode);
 
-		boolean showBottomMenuButtons = (shouldShowRouteCalculationControls || !isRouteFollowingMode) && vh.shouldShowBottomMenuButtons();
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
+		boolean showBottomMenuButtons = vh.shouldShowBottomMenuButtons()
+				&& (shouldShowRouteCalculationControls || !isRouteFollowingMode || androidAutoAttached);
 		routePlanningBtn.updateVisibility(showBottomMenuButtons);
 		menuControl.updateVisibility(showBottomMenuButtons);
 
@@ -1005,12 +1014,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		return mapRouteInfoMenu.onSingleTap(point, tileBox);
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
+		return mapRouteInfoMenu != null && mapRouteInfoMenu.onSingleTap(point, tileBox);
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		touchEvent = System.currentTimeMillis();
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isFollowingMode()) {

@@ -184,7 +184,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private void refreshMap() {
 		MapActivity mapActivity = (MapActivity) getMyActivity();
 		if (mapActivity != null) {
-			mapActivity.refreshMap();
+			mapActivity.refreshMapComplete();
 			mapActivity.updateLayers();
 		}
 	}

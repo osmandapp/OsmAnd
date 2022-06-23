@@ -6,17 +6,13 @@
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding"
-	android:paddingEnd="@dimen/content_padding"
-	android:paddingStart="@dimen/content_padding">
+	android:paddingHorizontal="@dimen/content_padding">
 
 	<androidx.appcompat.widget.AppCompatRadioButton
 		android:id="@+id/compound_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/content_padding_half"
-		android:layout_marginRight="@dimen/content_padding_half"
 		android:background="@null"
 		android:clickable="false"
 		android:focusable="false"
@@ -27,8 +23,7 @@
 		style="@style/TitleStyle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginHorizontal="@dimen/content_padding"
 		android:ellipsize="end"
 		android:textColor="?android:textColorPrimary"
 		tools:text="OsmAnd" />

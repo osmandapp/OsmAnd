@@ -257,12 +257,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {
+		long currentTimeMillis = System.currentTimeMillis();
 		if (isWarningEmpty) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				try {
 					if (db.isOpen()) {
-						long time = System.currentTimeMillis();
+						long time = currentTimeMillis;
 						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] {time});
 						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] {time});
 					}
@@ -278,7 +279,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		ctx.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
-		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
+		currentTrack.getModifiableGpxFile().modifiedTime = currentTimeMillis;
+		currentTrack.getModifiableGpxFile().pointsModifiedTime = currentTimeMillis;
 		prepareCurrentTrackForRecording();
 	}
 
@@ -536,6 +538,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		pt.setBackgroundType(backgroundName);
 		ctx.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
+		currentTrack.getModifiableGpxFile().pointsModifiedTime = time;
 		points++;
 
 		Map<String, Object> rowsMap = new LinkedHashMap<>();
@@ -557,6 +560,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	                            String category, int color, String iconName, String iconBackground) {
 		long time = System.currentTimeMillis();
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
+		currentTrack.getModifiableGpxFile().pointsModifiedTime = time;
 
 		List<Object> params = new ArrayList<>();
 		params.add(lat);
@@ -633,6 +637,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void deletePointData(WptPt pt) {
 		ctx.getSelectedGpxHelper().removePoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
+		currentTrack.getModifiableGpxFile().pointsModifiedTime = System.currentTimeMillis();
 		points--;
 
 		List<Object> params = new ArrayList<>();

@@ -1150,7 +1150,7 @@
     <string name="shared_string_go">Mine</string>
     <string name="osm_edits">OSM muudatused</string>
     <string name="osmand_parking_hour">t</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="parking_place_limited">Parkimisaeg piiratud</string>
     <string name="your_edits">Sinu muudatused</string>
     <string name="waypoint_visit_after">Külasta peale</string>
@@ -1588,7 +1588,6 @@
     <string name="recording_context_menu_precord">Pildista</string>
     <string name="dropbox_plugin_name">Dropbox lisa</string>
     <string name="intermediate_points_change_order">Muuda järjekorda</string>
-    <string name="av_def_action_choose">Nõudmisel\?</string>
     <string name="av_def_action_video">Salvesta video</string>
     <string name="av_def_action_audio">Salvesta heli</string>
     <string name="av_widget_action_descr">Vaikimisi vidina tegevus:</string>
@@ -2423,7 +2422,6 @@
     <string name="edit_filter">Muuda kategooriaid</string>
     <string name="subcategories">Alamkategooriad</string>
     <string name="translit_names">Translitereeri nimed</string>
-    <string name="translit_name_if_miss">Translitereeri kui %1$s nimi puudub</string>
     <string name="search_hint">Sisesta linn, aadress, huvipunkti nimi</string>
     <string name="rendering_value_light_brown_name">Helepruun</string>
     <string name="rendering_value_dark_brown_name">Tumepruun</string>
@@ -2982,7 +2980,7 @@
     <string name="av_camera_pic_size">Kaamera pildi suurus</string>
     <string name="av_camera_pic_size_descr">Määra kaamera pildi suurus</string>
     <string name="navigation_intent_invalid">Vigane formaat: %s</string>
-    <string name="get_plugin">Hangi</string>
+    <string name="shared_string_get">Hangi</string>
     <string name="do_you_like_osmand">Kas sulle meeldib OsmAnd\?</string>
     <string name="we_really_care_about_your_opinion">Sinu arvamus ja tagasiside on väärtuslik.</string>
     <string name="rate_this_app">Hinda seda rakendust</string>
@@ -3914,9 +3912,6 @@
     <string name="upload_photo_completed">Sai üleslaaditud</string>
     <string name="upload_photo">Laadin üles</string>
     <string name="activity_type_offroad_name">Maastikul</string>
-    <string name="live_update_frequency_week_variant">Kaardi värskendusi kontrollitakse kord nädalas. Järgmine kord: %1$s %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kaardi värskendusi kontrollitakse kord päevas. Järgmine kord: %1$s %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kaardi värskendusi kontrollitakse kord tunnis. Järgmine kord: %1$s %2$s.</string>
     <string name="voice_prompts_timetable">Häälteavituste ajad</string>
     <string name="routing_attr_prefer_hiking_routes_description">Eelista matkaradu</string>
     <string name="routing_attr_prefer_hiking_routes_name">Eelista matkaradu</string>

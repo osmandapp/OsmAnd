@@ -163,8 +163,22 @@ public class RoutingConfiguration {
 		                                  Double direction,
 		                                  RoutingMemoryLimits memoryLimits,
 		                                  Map<String, String> params) {
+			String derivedProfile = null;
 			if (!routers.containsKey(router)) {
-				router = defaultRouter;
+				for (Map.Entry<String, GeneralRouter> r : routers.entrySet()) {
+					String derivedProfiles = r.getValue().getAttribute("derivedProfiles");
+					if (derivedProfiles != null && derivedProfiles.contains(router)) {
+						derivedProfile = router;
+						router = r.getKey();
+						break;
+					}
+				}
+				if (derivedProfile == null) {
+					router = defaultRouter;
+				}
+			}
+			if (derivedProfile != null) {
+				params.put("profile_" + derivedProfile, String.valueOf(true));
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
 			if (routers.containsKey(router)) {
@@ -349,19 +363,21 @@ public class RoutingConfiguration {
 		String name = parser.getAttributeValue("", "name");
 		String id = parser.getAttributeValue("", "id");
 		String type = parser.getAttributeValue("", "type");
+		String profilesList = parser.getAttributeValue("", "profiles");
+		String[] profiles = Algorithms.isEmpty(profilesList) ? null : profilesList.split(",");
 		boolean defaultValue = Boolean.parseBoolean(parser.getAttributeValue("", "default"));
 		if ("boolean".equalsIgnoreCase(type)) {
-			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, defaultValue);
+			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, profiles, defaultValue);
 		} else if ("numeric".equalsIgnoreCase(type)) {
 			String values = parser.getAttributeValue("", "values");
 			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
+			String[] vlsDesc = valueDescriptions.split(",");
 			String[] strValues = values.split(",");
 			Double[] vls = new Double[strValues.length];
 			for (int i = 0; i < vls.length; i++) {
 				vls[i] = Double.parseDouble(strValues[i].trim());
 			}
-			currentRouter.registerNumericParameter(id, name, description, vls , 
-					valueDescriptions.split(","));
+			currentRouter.registerNumericParameter(id, name, description, profiles, vls , vlsDesc);
 		} else {
 			throw new UnsupportedOperationException("Unsupported routing parameter type - " + type);
 		}

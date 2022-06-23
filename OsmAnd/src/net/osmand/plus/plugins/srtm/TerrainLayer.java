@@ -27,6 +27,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -228,6 +229,22 @@ public class TerrainLayer extends MapTileLayer {
 				}
 				return null;
 			}
+
+			@Override
+			public byte[] getBytes(int x, int y, int zoom, String dirWithTiles, long[] timeHolder) throws IOException {
+				List<String> ts = getTileSource(x, y, zoom);
+				for (String t : ts) {
+					SQLiteTileSource sqLiteTileSource = resources.get(t);
+					if (sqLiteTileSource != null) {
+						byte[] res = sqLiteTileSource.getBytes(x, y, zoom, null, timeHolder);
+						if (res != null) {
+							return res;
+						}
+					}
+				}
+				return null;
+			}
+
 			
 			@Override
 			public int getBitDensity() {

@@ -102,8 +102,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -1200,6 +1199,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						reloadCategoriesInternal();
 						if (!searching) {
@@ -1329,6 +1329,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						reloadCitiesInternal();
 						if (!searching) {
@@ -1522,6 +1523,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						reloadHistoryInternal();
 						if (!searching) {
@@ -1698,6 +1700,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					if (!paused) {
 						runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);
 					}

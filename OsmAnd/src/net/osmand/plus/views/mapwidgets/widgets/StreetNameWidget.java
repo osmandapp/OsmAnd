@@ -1,7 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import static net.osmand.plus.render.TextRenderer.TextDrawInfo;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -34,6 +34,7 @@ import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.render.TextDrawInfo;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
@@ -84,7 +85,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public StreetNameWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity);
+		super(mapActivity, STREET_NAME);
 
 		waypointHelper = app.getWaypointHelper();
 
@@ -287,7 +288,7 @@ public class StreetNameWidget extends MapWidget {
 
 		Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
-		Paint paint = setupTextPaint(textRenderer.getPaintText(), rreq);
+		Paint paint = setupTextPaint(app, textRenderer.getPaintText(), rreq);
 
 		float centerX = xSize / 2f;
 		float centerY = ySize / 2f - paint.getFontMetrics().ascent / 2f;
@@ -300,7 +301,8 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@NonNull
-	private Paint setupTextPaint(@NonNull Paint paint, @NonNull RenderingRuleSearchRequest request) {
+	public static Paint setupTextPaint(@NonNull OsmandApplication app, @NonNull Paint paint,
+	                                   @NonNull RenderingRuleSearchRequest request) {
 		paint.setTypeface(Typeface.create(TextRenderer.DROID_SERIF, Typeface.BOLD));
 
 		if (request.isSpecified(request.ALL.R_TEXT_COLOR)) {

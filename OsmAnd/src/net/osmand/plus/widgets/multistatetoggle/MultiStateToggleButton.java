@@ -56,6 +56,11 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		initView();
 	}
 
+	public final void setSelectedItem(int itemIndex) {
+		_Radio selectedItem = itemIndex < 0 || itemIndex >= items.size() ? null : items.get(itemIndex);
+		setSelectedItem(selectedItem);
+	}
+
 	public final void setSelectedItem(@Nullable _Radio selectedItem) {
 		this.selectedItem = selectedItem;
 		updateView();

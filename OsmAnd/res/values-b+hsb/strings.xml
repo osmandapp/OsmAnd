@@ -1262,7 +1262,7 @@
     <string name="shared_string_search">Pytać</string>
     <string name="shared_string_message">Zdźělenka</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">mjeńš</string>
+    <string name="shared_string_minute_lowercase">mjeńš</string>
     <string name="osmand_parking_time_left">wyše</string>
     <string name="short_location_on_map">Šěr %1$s
 \nDołh %2$s</string>

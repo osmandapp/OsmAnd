@@ -882,7 +882,7 @@
     <string name="route_duration">时间：</string>
     <string name="route_distance">距离：</string>
     <string name="no_address_found">没有确定地址</string>
-    <string name="shared_string_near">附近</string>
+    <string name="shared_string_near">邻近</string>
     <string name="shared_string_hide">隐藏</string>
     <string name="av_video_quality_low">最低品质</string>
     <string name="av_video_quality_high">最高品质</string>
@@ -1048,7 +1048,7 @@
     <string name="action_delete">删除</string>
     <string name="osm_edits">OSM 编辑</string>
     <string name="osmand_parking_hour">时</string>
-    <string name="osmand_parking_minute">分</string>
+    <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">左</string>
     <string name="your_edits">您的编辑</string>
     <string name="simulate_your_location">模拟您的位置</string>
@@ -1382,7 +1382,7 @@
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录音后的间隙</string>
-    <string name="auto_split_recording_descr">如果日期已更改，开始新区段在6分钟后的间隙，新轨迹在2小时后的间隙，或新文件在更长的间隙之后。</string>
+    <string name="auto_split_recording_descr">6分钟间隔后开始新区段，2小时间隔后开始新轨迹，或间隔更长时间，日期已改变则启用新文件。</string>
     <string name="rendering_attr_contourDensity_description">等高线密度</string>
     <string name="rendering_attr_contourDensity_name">等高线密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -1409,7 +1409,6 @@
     <string name="christmas_desc">预计到圣诞节和新年假期，你可以选择显示相关的 POI，如圣诞树和市场等。</string>
     <string name="rendering_attr_contourColorScheme_name">等高线的颜色调配</string>
     <string name="rendering_attr_surfaceIntegrity_name">道路表面完整性</string>
-    <string name="translit_name_if_miss">如果 %1$s 的名称缺失则音译</string>
     <string name="translit_names">音译名称</string>
     <string name="new_filter_desc">请输入新筛选器的名称，该名称将添加到你的\"类别\"选项卡中。</string>
     <string name="osm_live_payment_desc">订阅按选定的时间段收费。可随时在 Google Play 上取消。</string>
@@ -1449,7 +1448,7 @@
     <string name="dist_away_from_my_location">搜索 %1$s 开外</string>
     <string name="share_history_subject">通过 OsmAnd 分享</string>
     <string name="postcode">邮政编码</string>
-    <string name="shared_string_from">从</string>
+    <string name="shared_string_from">之于</string>
     <string name="city_type_district">区</string>
     <string name="city_type_neighbourhood">邻里</string>
     <string name="map_widget_search">搜索</string>
@@ -1675,7 +1674,7 @@
     <string name="traffic_warning_calming">交通稳静化</string>
     <string name="traffic_warning_speed_camera">测速摄像机</string>
     <string name="traffic_warning">交通警告</string>
-    <string name="speak_favorites">收藏附近</string>
+    <string name="speak_favorites">附近的收藏</string>
     <string name="speak_poi">附近的 POI</string>
     <string name="way_alarms">交通警告</string>
     <string name="sleep_mode_stop_dialog">停止 GPS 背景模式吗？</string>
@@ -1896,7 +1895,6 @@
     <string name="use_magnetic_sensor_descr">使用磁传感器来确定罗盘值而不是方向传感器。</string>
     <string name="use_magnetic_sensor">使用磁传感器</string>
     <string name="osmand_background_plugin_description">通过定期唤醒 GPS 设备（屏幕关闭）显示打开后台跟踪和导航的设置。</string>
-    <string name="av_def_action_choose">根据要求？</string>
     <string name="av_use_external_recorder">使用系统录音机</string>
     <string name="recording_playing">从已指定的录音开始播放音频。
 \n%1$s</string>
@@ -2259,7 +2257,7 @@
     <string name="av_camera_pic_size_descr">设置相机图片大小</string>
     <string name="navigation_intent_invalid">格式无效: %s</string>
     <string name="plugin_install_needs_network">你需要互联网连接来安装这个插件。</string>
-    <string name="get_plugin">获取</string>
+    <string name="shared_string_get">获取</string>
     <string name="use_fast_recalculation">路线智能重新规划</string>
     <string name="use_fast_recalculation_desc">只重新计算路线的初始部分，对长途旅行很有用。</string>
     <string name="do_you_like_osmand">你喜欢 OsmAnd 吗？</string>
@@ -3516,9 +3514,6 @@
     <string name="latest_openstreetmap_update">最新的 OpenStreetMap 更新可用：</string>
     <string name="last_time_checked">上次检查： %s</string>
     <string name="update_frequency">更新频率</string>
-    <string name="live_update_frequency_week_variant">将每周检查一次地图更新。下次 %1$s 在 %2$s 。</string>
-    <string name="live_update_frequency_day_variant">将每天检查地图更新。下次 %1$s 在 %2$s 。</string>
-    <string name="live_update_frequency_hour_variant">将每小时检查一次地图更新。下次 %1$s 在 %2$s 。</string>
     <string name="purchases">购买</string>
     <string name="select_category_descr">选择类别或添加新类别</string>
     <string name="track_recording_will_be_continued">录制将继续。</string>
@@ -4247,4 +4242,5 @@
     <string name="map_widget_current_speed">当前速度</string>
     <string name="map_widget_distance_to_destination">距目的地距离</string>
     <string name="exit_import">是否退出？</string>
+    <string name="shared_string_open_track">打开轨迹</string>
 </resources>

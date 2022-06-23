@@ -1,12 +1,5 @@
 package net.osmand.router.network;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.Map.Entry;
-
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -15,10 +8,19 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class NetworkRouteSelector {
 
@@ -88,23 +90,44 @@ public class NetworkRouteSelector {
 		return res;
 	}
 
-	public List<NetworkRouteSegment> getFirstSegments(QuadRect bBox, RouteKey selected) throws IOException {
-		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
-		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
-		int x31L = MapUtils.get31TileNumberX(bBox.left);
-		int x31R = MapUtils.get31TileNumberX(bBox.right);
+	public List<NetworkRouteSegment> getFirstSegments(QuadRect rect, RouteKey selected, double searchDistance) throws IOException {
+		int y31T = MapUtils.get31TileNumberY(Math.max(rect.bottom, rect.top));
+		int y31B = MapUtils.get31TileNumberY(Math.min(rect.bottom, rect.top));
+		int x31L = MapUtils.get31TileNumberX(rect.left);
+		int x31R = MapUtils.get31TileNumberX(rect.right);
+
 		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+
+		LatLon latLon = new LatLon(rect.centerY(), rect.centerX());
 		List<NetworkRouteSegment> networkRouteSegmentList = new ArrayList<>();
 		for (RouteKey key : res.keySet()) {
 			if (selected != null && !selected.equals(key)) {
 				continue;
 			}
 			List<NetworkRouteSegment> list = res.get(key);
-			if (list.size() > 0) {
+			if (list.size() > 0 && isSegmentsNearPoint(list, latLon, searchDistance)) {
 				networkRouteSegmentList.add(list.get(0));
 			}
 		}
 		return networkRouteSegmentList;
+	}
+
+	private boolean isSegmentsNearPoint(List<NetworkRouteSegment> list, LatLon latLon, double searchDistance) {
+		for (NetworkRouteSegment segment : list) {
+			RouteDataObject dataObject = segment.robj;
+			if (dataObject != null) {
+				for (int i = 0; i < dataObject.getPointsLength(); i++) {
+					double lon = MapUtils.get31LongitudeX(dataObject.getPoint31XTile(i));
+					double lat = MapUtils.get31LatitudeY(dataObject.getPoint31YTile(i));
+
+					double distance = MapUtils.getDistance(latLon, lat, lon);
+					if (distance <= searchDistance) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadRoutes, RouteKey selected) throws IOException {
@@ -809,11 +832,10 @@ public class NetworkRouteSelector {
 		}
 
 
-		public static List<RouteKey> getRouteStringKeys(RenderedObject o) {
-			Map<String, String> tags = o.getTags();
-			return getRouteKeys(tags);
+		public static List<RouteKey> getRouteKeys(RenderedObject renderedObject) {
+			return getRouteKeys(renderedObject.getTags());
 		}
-		
+
 		public static List<RouteKey> getRouteKeys(BinaryMapDataObject bMdo) {
 			Map<String, String> tags = new TreeMap<>();
 			for (int i = 0; i < bMdo.getObjectNames().keys().length; i++) {
@@ -853,8 +875,8 @@ public class NetworkRouteSelector {
 			}
 			return q;
 		}
-		
-		private static List<RouteKey> getRouteKeys(Map<String, String> tags) {
+
+		public static List<RouteKey> getRouteKeys(Map<String, String> tags) {
 			List<RouteKey> lst = new ArrayList<RouteKey>();
 			for (RouteType routeType : RouteType.values()) {
 				int rq = getRouteQuantity(tags, routeType);

@@ -906,7 +906,6 @@
     <string name="prefer_in_routing_descr">Uprednostniť diaľnice.</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
-    <string name="av_def_action_choose">Pri požiadaní\?</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Výpočet presnej trasy bez závad. Zatiaľ však obmedzený na menšiu vzdialenosť a je pomalší.</string>
     <string name="map_widget_gps_info">Informácie o GPS</string>
@@ -1350,7 +1349,7 @@
     <string name="gps_status">Stav GPS</string>
     <string name="edit_group">Upraviť skupinu</string>
     <string name="plugin_install_needs_network">Pre nainštalovanie tohto zásuvného modulu musíte byť pripojený na Internet.</string>
-    <string name="get_plugin">Získať</string>
+    <string name="shared_string_get">Získať</string>
     <string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>
     <string name="plugin_nautical_name">Námorný mapový pohľad</string>
     <string name="world_ski_missing">Stiahnite samostatnú lyžiarsku mapu pre zobrazenie zariadení pre lyžovanie.</string>
@@ -1477,7 +1476,7 @@
     <string name="action_delete">Odstrániť akciu</string>
     <string name="osm_edits">Zmeny v OSM</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">zostáva</string>
     <string name="parking_place_limited">Čas parkovania obmedzený na</string>
     <string name="your_edits">Vaše zmeny</string>
@@ -2022,7 +2021,6 @@
     <string name="edit_filter">Upraviť kategórie</string>
     <string name="subcategories">Podkategórie</string>
     <string name="translit_names">Transliterovať názvy</string>
-    <string name="translit_name_if_miss">Transliterovať ak chýba názov po %1$s</string>
     <string name="rendering_value_light_brown_name">Svetlohnedá</string>
     <string name="rendering_value_dark_brown_name">Tmavohnedá</string>
     <string name="rendering_attr_contourColorScheme_name">Farebná schéma vrstevníc</string>
@@ -4008,9 +4006,6 @@
     <string name="updated">Aktualizované: %s</string>
     <string name="last_time_checked">Posledná kontrola: %s</string>
     <string name="update_frequency">Frekvencia aktualizácií</string>
-    <string name="live_update_frequency_week_variant">Aktualizácie mapy budú kontrolované každý týždeň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_day_variant">Aktualizácie mapy budú kontrolované každý deň. Nasledujúca kontrola %1$s o %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Aktualizácie mapy budú kontrolované každú hodinu. Nasledujúca kontrola %1$s o %2$s.</string>
     <string name="delete_updates">Odstrániť aktualizácie</string>
     <string name="live_update_delete_updates_msg">Zmazať všetky živé aktualizácie (%s)\?</string>
     <string name="select_category_descr">Zvoľte kategóriu alebo pridajte novú</string>
@@ -4506,7 +4501,7 @@
     <string name="rendering_value_category_name">Kategória</string>
     <string name="save_track_to_gpx_descrp">Automaticky spustiť nahrávanie stopy počas navigácie a potom uložiť.</string>
     <string name="gpx_no_routes_title">Neexistujú žiadne trasy</string>
-    <string name="gpx_no_routes_descr">Pre uloženie cesty do súboru môžete použiť nástroj \"%1$s\".</string>
+    <string name="gpx_no_routes_descr">Môžete použiť nástroj \"%1$s\" pre pridanie trasy do súboru.</string>
     <string name="quick_action_add_route_descr">Tlačidlo na začatie trasy v strede obrazovky.</string>
     <string name="select_suggested_points">Zvoľte navrhované body</string>
     <string name="selected_waypoints_descr">Zvolené body trasy budú pridané do stopy \"%1$s\"</string>
@@ -4599,4 +4594,87 @@
     <string name="map_widget_distance_to_destination">Vzdialenosť do cieľa</string>
     <string name="map_widget_current_speed">Súčasná rýchlosť</string>
     <string name="page_number">Strana %1$s</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Stredne pokročilí</string>
+    <string name="release_4_2">• Prepracovanie nástrojov na obrazovke: nový vzhľad, zoskupenie na stránky, možnosť zmeny poradia a kombinácií ako potrebujete.
+\n
+\n • Turistické / cyklistické / cestovné trasy: stlačte symbol trasy a získajte informácie o trase.
+\n
+\n • Skupiny obľúbených bodov: nastavte predvolený vzhľad pre nové body v skupine.
+\n
+\n • Opravy: automatická aktualizácia online dlaždíc
+\n
+\n</string>
+    <string name="av_def_action_choose">Na vyžiadanie</string>
+    <string name="street_name_widget_desc">Nástroj názvu ulice zobrazuje názov aktuálnej ulice s priamou šípkou alebo názov nasledujúcej ulice spolu s manévrom, ktorý má byť vykonaný.</string>
+    <string name="coordinates_widget_desc">Zobrazuje zemepisné súradnice aktuálnej polohy.</string>
+    <string name="map_widget_trip_recording_downhill">Z kopca</string>
+    <string name="map_widget_trip_recording_uphill">Do kopca</string>
+    <string name="routing_attr_avoid_highway_description">Vyhnúť sa cestám</string>
+    <string name="map_widget_true_bearing">Skutočné smerovanie</string>
+    <string name="routing_attr_allow_private_for_truck_description">Povoliť prístup do súkromných oblastí pre nákladné autá.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Povoliť súkromný prístup (nákladné autá)</string>
+    <string name="rendering_attr_weatherTempContours_name">Teplotné vrstevnice (izotermy)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Tlakové vrstevnice (izobary)</string>
+    <string name="rendering_attr_horseScale_name">Náročnosť ciest pre kone</string>
+    <string name="routing_attr_avoid_highway_name">Vyhnúť sa cestám</string>
+    <string name="map_widget_trip_recording_duration">Trvanie</string>
+    <string name="map_widget_trip_recording_distance">Vzdialenosť</string>
+    <string name="routing_attr_hazmat_category_name">Kategória nebezpečného nákladu</string>
+    <string name="current_time_widget_desc">Tento nástroj zobrazuje aktuálny čas zariadenia.</string>
+    <string name="get_altitude_information">Získať informácie o výške</string>
+    <string name="navigation_points">Navigačné body</string>
+    <string name="get_altitude_data">Získať údaje výšky</string>
+    <string name="calculate_altitude">Vypočítať výšku</string>
+    <string name="shared_string_speed">Rýchlosť</string>
+    <string name="colour_of_circles">Farba kružníc</string>
+    <string name="compass_on_circles">Kompas na kružniciach</string>
+    <string name="distance_circles">Kružnice vzdialenosti</string>
+    <string name="circle_settings">Nastavenia kružníc</string>
+    <string name="routing_attr_avoid_4wd_only_description">Vyhnúť sa cestám vhodným len terénnym vozidlám s pohonom 4x4</string>
+    <string name="radius_rules_widget_desc">Pravítko pomáha určiť polomer okolo zvoleného bodu na mape zobrazením kružníc vzdialeností na mape.</string>
+    <string name="battery_widget_desc">Nástroj zobrazuje úroveň nabitia batérie zariadenia.</string>
+    <string name="magnetic_bearing_widget_desc">Uhol medzi magnetickým severom a cieľovým bodom pozorovaný z vašej polohy.</string>
+    <string name="calculate_online">Vypočítať online</string>
+    <string name="no_altitude_data">Žiadne údaje o výške</string>
+    <string name="app_mode_mountain_bicycle">Horský bicykel</string>
+    <string name="route_maneuvers_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
+    <string name="calculating_altitude">Vypočítava sa výška</string>
+    <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
+    <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
+    <string name="explore_plans">Preskúmať možnosti predplatného</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Skryť vojenské oblasti</string>
+    <string name="routing_attr_hazmat_category_description">Kategória nebezpečného nákladu / Zohľadniť obmedzenia pre nebezpečný náklad</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Bez obmedzení)</string>
+    <string name="routing_attr_avoid_fords_name">Vyhnúť sa brodom</string>
+    <string name="time_to_go_desc">Čas v minútach alebo hodinách potrebný na dosiahnutie cieľa.</string>
+    <string name="arrival_time_widget_desc">Čas príjazdu do cieľového bodu.</string>
+    <string name="av_notes_choose_action_widget_desc">Zvoľte akciu.</string>
+    <string name="widget_secondary_desc_part_of">Súčasť modulu %1$s.</string>
+    <string name="elevation_profile_widget_desc">Nástroj zobrazuje profil prevýšenia a svahu aktuálnej trasy.</string>
+    <string name="parking_widget_desc">Nástroj zobrazuje vzdialenosť od stredu obrazovky k parkovaciemu miestu.</string>
+    <string name="altitude_widget_desc">Nástroj zobrazuje nadmorskú výšku aktuálnej polohy.</string>
+    <string name="max_speed_widget_desc">Nástroj zobrazuje max. povolenú rýchlosť na práve používanej ceste.</string>
+    <string name="current_speed_widget_desc">Nástroj zobrazuje aktuálnu rýchlosť podľa GPS senzora.</string>
+    <string name="gps_info_widget_desc">Nástroj zobrazuje počet satelitov, ktoré zariadenie práve vidí a používa.</string>
+    <string name="shared_string_widget">Nástroj</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Skryť vojenské oblasti</string>
+    <string name="routing_attr_avoid_fords_description">Vyhnúť sa brodom</string>
+    <string name="bearing_secondary_desc">Môžete zmeniť formát zobrazených údajov v: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Formát súradníc môže byť zmenený v %1$s – %2$s – %3$s.</string>
+    <string name="mapillary_widget_desc">Nástroj poskytuje rýchly prístup k aplikácii Mapillary pre pridanie snímok z úrovne ulice.</string>
+    <string name="map_markers_bar_widget_desc">Nástroj na hornom paneli môže zobrazovať vzdialenosť a smer k značke od aktuálnej polohy. Je možné nastaviť zobrazenie 1 alebo 2 značiek na nástroji.</string>
+    <string name="lanes_widgets_desc">Nástroj jazdných pruhov zobrazuje rozloženie jazdných pruhov cesty a zvýrazňuje, ktoré pruhy použiť pri zapnutej navigácii.</string>
+    <string name="navigation_points_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
+    <string name="bearing_desc">Nástroj smerovania zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (180 stupňov, 360 stupňov, miliradiány).</string>
+    <string name="map_markers_desc">Nástroj na hornom paneli môže zobrazovať vzdialenosť a smer k značke od aktuálnej polohy. Je možné nastaviť zobrazenie 1 alebo 2 značiek na nástroji.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Vyhnúť sa terénnym cestám</string>
+    <string name="fps_widget_desc">Nástroj zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
+    <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>
+    <string name="route_maneuvers">Manévre trasy</string>
+    <string name="shared_string_mode">Režim</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Režim môžete prepnúť stlačením nástroja.</string>
+    <string name="map_widget_time_to_destination">Čas k cieľu</string>
+    <string name="map_widget_time_to_intermediate">Čas k prechodnému cieľu</string>
+    <string name="map_widget_distance_to_intermediate">Vzdialenosť k prechodnému cieľu</string>
+    <string name="radius_ruler_mode_desc">Režim polomerového pravítka môžete prepnúť stlačením nástroja.</string>
 </resources>

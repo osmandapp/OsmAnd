@@ -518,7 +518,7 @@
     <string name="we_really_care_about_your_opinion">Važno nam je da čujemo Vaše mišljenje.</string>
     <string name="do_you_like_osmand">Da li Vam se OsmAnd sviđa\?</string>
     <string name="use_fast_recalculation">Pmaetno preračunavanje puta</string>
-    <string name="get_plugin">Preuzmi</string>
+    <string name="shared_string_get">Preuzmi</string>
     <string name="plugin_install_needs_network">Morate imati internet da biste instalirali ovaj dodatak.</string>
     <string name="navigation_intent_invalid">Neispravni format: %s</string>
     <string name="av_camera_pic_size_descr">Beličinu slike ugrađenog fotoaparata</string>
@@ -1844,7 +1844,6 @@
     <string name="access_no_destination">Dodatak za pristupačnost: Odredište nije podešeno</string>
     <string name="use_osm_live_routing">Navođenje uživo OSM-a</string>
     <string name="use_osm_live_routing_description">Omogući navođenje izmena OSM-a uživo.</string>
-    <string name="av_def_action_choose">Na zahtev\?</string>
     <string name="srtm_paid_version_msg">Razmislite o plaćanju dodatka za „izohipse“ radi davanja podrške daljem razvoju.</string>
     <string name="precise_routing_mode">Tačno računanje putanja (sporo)</string>
     <string name="precise_routing_mode_descr">Računanje tačnih putanja bez grešaka. Radnja je ograničena daljinom i spora.</string>
@@ -2230,7 +2229,7 @@
     <string name="your_edits">Vaše izmene</string>
     <string name="osmand_parking_time_left">preostalo</string>
     <string name="parking_place_limited">Vreme parkiranja je ograničeno na</string>
-    <string name="osmand_parking_minute">min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osm_edits">OSM izmene</string>
     <string name="action_delete">Dejstvo brisanja</string>
@@ -2764,7 +2763,6 @@
     <string name="subcategories">Potkategorije</string>
     <string name="edit_filter">Izmeni kategorije</string>
     <string name="translit_names">Preslovi imena</string>
-    <string name="translit_name_if_miss">Preslovi ako %1$s prevod ne postoji</string>
     <string name="search_hint">Ukucajte grad, adresu, ime tačke od interesa</string>
     <string name="rendering_attr_surfaceIntegrity_name">Celovitost površi puta</string>
     <string name="rendering_attr_contourColorScheme_name">Obrazac boja linija izohipsi</string>
@@ -4023,9 +4021,6 @@
     <string name="updated">Ažurirano: %s</string>
     <string name="last_time_checked">Poslednje vreme provere: %s</string>
     <string name="update_frequency">Učestalost ažuriranja</string>
-    <string name="live_update_frequency_week_variant">Provera ažuriranja karte će biti svakih nedelju dana. Sledeće vreme %1$s za %2$s.</string>
-    <string name="live_update_frequency_day_variant">Provera ažuriranja karte će biti svakog dana. Sledeće vreme %1$s za %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Provera ažuriranja karte će biti na svakih sat vremena. Sledeće vreme %1$s za %2$s.</string>
     <string name="delete_updates">Obriši ažuriranja</string>
     <string name="live_update_delete_updates_msg">Da li ste sigurni da želite da obrišete %s ažuriranja uživo\?</string>
     <string name="purchases">Kupovine</string>

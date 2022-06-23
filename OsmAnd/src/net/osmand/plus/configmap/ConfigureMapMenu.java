@@ -1,5 +1,40 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
+
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -54,41 +89,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
-import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
 public class ConfigureMapMenu {
 
@@ -188,7 +188,8 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.SHOW_POI_LABEL)
 				.setListener(listener));
 
-		selected = TransportLinesMenu.isShowLines(app);
+		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
+		selected = transportLinesMenu.isShowAnyTransport();
 		adapter.addItem(new ContextMenuItem(TRANSPORT_ID)
 				.setTitleId(R.string.rendering_category_transport, activity)
 				.setIcon(R.drawable.ic_action_transport_bus)
@@ -197,10 +198,10 @@ public class ConfigureMapMenu {
 				.setColor(selected ? selectedProfileColor : null)
 				.setListener(listener));
 
-		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
+		selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
 		adapter.addItem(new ContextMenuItem(GPX_FILES_ID)
 				.setTitleId(R.string.layer_gpx_layer, activity)
-				.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles())
+				.setSelected(app.getSelectedGpxHelper().isAnyGpxFileSelected())
 				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
 				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
@@ -302,9 +303,11 @@ public class ConfigureMapMenu {
 						pref.set(isChecked);
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-						uiAdapter.onDataSetChanged();
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
 						if (property != null) {
-							activity.refreshMap();
+							activity.refreshMapComplete();
 							activity.updateLayers();
 						} else {
 							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
@@ -339,14 +342,16 @@ public class ConfigureMapMenu {
 					}
 
 					@Override
-					public boolean onContextMenuClick(@NonNull @Nullable OnDataChangeUiAdapter uiAdapter,
-					                                  @NonNull @Nullable View view, @NonNull ContextMenuItem item,
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NonNull ContextMenuItem item,
 					                                  boolean isChecked) {
 						pref.set(isChecked ? previousValue : "");
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-						uiAdapter.onDataSetChanged();
-						activity.refreshMap();
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						activity.refreshMapComplete();
 						activity.updateLayers();
 						return false;
 					}
@@ -561,12 +566,12 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE));
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				UI_CATEGORY_DETAILS, adapter, activity, true, DETAILS_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_DETAILS, activity, DETAILS_ID, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				UI_CATEGORY_HIDE, adapter, activity, true, HIDE_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_HIDE, activity, HIDE_ID, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -581,15 +586,15 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,
-											 @StringRes final int strId,
-											 @DrawableRes final int icon,
-											 final String category,
-											 final ContextMenuAdapter adapter,
-											 final MapActivity activity,
-											 final boolean useDescription,
-											 final String id,
-											 final boolean nightMode,
-											 @ColorInt final int selectedProfileColor) {
+	                                         @StringRes final int strId,
+	                                         @DrawableRes final int icon,
+	                                         final String category,
+	                                         final MapActivity activity,
+	                                         final String id,
+	                                         final boolean nightMode,
+	                                         @ColorInt final int selectedProfileColor) {
+		OsmandApplication app = activity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -599,62 +604,35 @@ public class ConfigureMapMenu {
 			RenderingRuleProperty p = it.next();
 			if (category.equals(p.getCategory()) && p.isBoolean()) {
 				ps.add(p);
-				final CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
-						.getCustomRenderBooleanProperty(p.getAttrName());
-				prefs.add(pref);
+				prefs.add(settings.getCustomRenderBooleanProperty(p.getAttrName()));
 				it.remove();
 			}
 		}
 		if (prefs.size() > 0) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
-				if (!isChecked && !useDescription) {
-					for (int i = 0; i < prefs.size(); i++) {
-						prefs.get(i).set(false);
-					}
-					uiAdapter.onDataSetInvalidated();
-					activity.refreshMapComplete();
-					activity.getMapLayers().updateLayers(activity);
+				if (UI_CATEGORY_DETAILS.equals(category)) {
+					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, uiAdapter, item);
 				} else {
-					if (UI_CATEGORY_DETAILS.equals(category)) {
-						DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, uiAdapter, item);
-					} else {
-						ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-								activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
-					}
+					ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
+							activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
 				}
 				return false;
 			};
 			ContextMenuItem item = new ContextMenuItem(id)
 					.setTitleId(strId, activity)
 					.setIcon(icon).setListener(clickListener);
-			boolean selected = false;
-			for (CommonPreference<Boolean> p : prefs) {
-				if (p.get()) {
-					selected = true;
-					break;
+			item.setRefreshCallback(refreshableItem -> {
+				boolean selected = false;
+				for (CommonPreference<Boolean> p : prefs) {
+					if (p.get()) {
+						selected = true;
+						break;
+					}
 				}
-			}
-			item.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
-			if (useDescription) {
-				item.setDescription(ConfigureMapUtils.getDescription(prefs));
-				item.setLayout(R.layout.list_item_single_line_descrition_narrow);
-			} else {
-				item.setListener(new OnRowItemClick() {
-					@Override
-					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
-						return clickListener.onContextMenuClick(uiAdapter, view, item, isChecked);
-					}
-
-					@Override
-					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
-						ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-								activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
-						return false;
-					}
-				});
-				item.setSecondaryIcon(R.drawable.ic_action_additional_option);
-				item.setSelected(selected);
-			}
+				refreshableItem.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
+				refreshableItem.setDescription(ConfigureMapUtils.getDescription(prefs));
+			});
+			item.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			OsmandPreference<?>[] prefArray = new OsmandPreference[prefs.size()];
 			item.setItemDeleteAction(prefs.toArray(prefArray));
 			return item;
@@ -764,7 +742,7 @@ public class ConfigureMapMenu {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (property != null) {
 						pref.set(isChecked);
-						activity.refreshMap();
+						activity.refreshMapComplete();
 						activity.updateLayers();
 					} else {
 						isChecked = pref.get();

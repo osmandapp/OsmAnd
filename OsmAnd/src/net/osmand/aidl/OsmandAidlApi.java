@@ -1,5 +1,24 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -96,6 +115,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
@@ -105,6 +125,9 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -168,6 +191,8 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_VOICE_MESSAGE = 8;
 	public static final int KEY_ON_KEY_EVENT = 16;
 	public static final int KEY_ON_LOGCAT_MESSAGE = 32;
+
+	public static final String WIDGET_ID_PREFIX = "aidl_widget_";
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -380,17 +405,25 @@ public class OsmandAidlApi {
 				if (mapActivity != null && widgetId != null && packName != null) {
 					ConnectedApp connectedApp = connectedApps.get(packName);
 					if (connectedApp != null) {
-						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(widgetId);
+						AidlMapWidgetWrapper widgetData = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-						if (widget != null && layer != null) {
-							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
-							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
-							connectedApp.getWidgetControls().put(widgetId, control);
+						if (widgetData != null && layer != null) {
+							ApplicationMode.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							connectedApp.getWidgetControls().put(widgetId, widget);
 
-							int iconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
+							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-							String widgetKey = "aidl_widget_" + widgetId;
-							layer.registerWidget(widgetKey, control, menuIconId, widget.getMenuTitle(), WidgetsPanel.RIGHT, widget.getOrder());
+							String widgetKey = WIDGET_ID_PREFIX + widgetId;
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+							ApplicationMode appMode = app.getSettings().getApplicationMode();
+
+							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
+							widgetRegistry.registerWidget(widgetInfo);
+
+							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
 						}
 					}
@@ -461,9 +494,11 @@ public class OsmandAidlApi {
 		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
-	public void registerWidgetControls(@NonNull MapActivity mapActivity) {
+	public void createWidgetControls(@NonNull MapActivity mapActivity,
+	                                 @NonNull List<MapWidgetInfo> widgetsInfos,
+	                                 @NonNull ApplicationMode appMode) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			connectedApp.registerWidgetControls(mapActivity);
+			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode);
 		}
 	}
 
@@ -484,7 +519,7 @@ public class OsmandAidlApi {
 							if (mapLayer != null) {
 								mapActivity.getMapView().removeLayer(mapLayer);
 							}
-							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack());
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack(), -180000);
 							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
 							connectedApp.getMapLayers().put(layerId, mapLayer);
 						}
@@ -1298,7 +1333,9 @@ public class OsmandAidlApi {
 
 				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 			} else {
-				helper.selectGpxFile(selectedGpx.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				helper.selectGpxFile(selectedGpx.getGpxFile(), params);
 				refreshMap();
 			}
 		} else if (show) {
@@ -1312,7 +1349,10 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						helper.selectGpxFile(gpx, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						helper.selectGpxFile(gpx, params);
 						refreshMap();
 					}
 				}
@@ -1429,7 +1469,10 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().selectedByUser().addToMarkers()
+								.addToHistory().saveSelection();
+						app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 						refreshMap();
 					}
 				}
@@ -1450,7 +1493,9 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 			if (selectedGpxFile != null) {
-				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
 				refreshMap();
 				return true;
 			}
@@ -1680,7 +1725,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.startGPXMonitoring(null);
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
@@ -1690,7 +1735,7 @@ public class OsmandAidlApi {
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.stopRecording();
-			plugin.updateControl();
+			plugin.updateWidgets();
 			return true;
 		}
 		return false;
@@ -1924,6 +1969,7 @@ public class OsmandAidlApi {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
+	@Nullable
 	public ConnectedApp getConnectedApp(@NonNull String pack) {
 		List<ConnectedApp> connectedApps = getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {

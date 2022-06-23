@@ -123,7 +123,10 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
 				ChipItem selected = chipsView.getChipById(selectedItem);
 				chipsView.setSelected(selected);
-				chipsView.smoothScrollTo(selected);
+				if (selected != null) {
+					chipsView.notifyDataSetChanged();
+					chipsView.smoothScrollTo(selected);
+				}
 			}
 		});
 
@@ -211,7 +214,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-									boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				Bundle args = new Bundle();

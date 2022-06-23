@@ -1379,12 +1379,12 @@
     <string name="poi_generator_source_geothermal">Enerji kaynağı: jeotermal</string>
     <string name="poi_generator_source_oil">Enerji kaynağı: petrol</string>
     <string name="poi_generator_source_diesel">Enerji kaynağı: dizel</string>
-    <string name="poi_int_name">Uluslararası isim</string>
-    <string name="poi_nat_name">Ulusal isim</string>
+    <string name="poi_int_name">Uluslararası adı</string>
+    <string name="poi_nat_name">Ulusal adı</string>
     <string name="poi_reg_name">Yerel ad</string>
-    <string name="poi_loc_name">Yerel isim</string>
-    <string name="poi_old_name">Eski isim</string>
-    <string name="poi_alt_name">Alternatif isim</string>
+    <string name="poi_loc_name">Yerel adı</string>
+    <string name="poi_old_name">Eski adı</string>
+    <string name="poi_alt_name">Alternatif adı</string>
     <string name="poi_pump_manual">Elle</string>
     <string name="poi_pump_powered">Enerjili</string>
     <string name="poi_pump_no">Pompa yok</string>
@@ -3498,4 +3498,6 @@
     <string name="poi_access_permit">İzin gerekli</string>
     <string name="poi_printer_ink">Yazıcı mürekkep mağazası</string>
     <string name="poi_water_sports">Su sporları mağazası</string>
+    <string name="poi_liaison_filter">Irtibat</string>
+    <string name="poi_agrarian_type">Tarımsal girdiler</string>
 </resources>

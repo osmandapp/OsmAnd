@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
-                    android:text="@string/get_plugin"
+                    android:text="@string/shared_string_get"
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_list_text_size"
                     android:textStyle="bold"

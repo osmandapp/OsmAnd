@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -62,7 +63,9 @@ public class ConfigureMapDialogs {
 					public void onClick(View v) {
 						int which = (int) v.getTag();
 						view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-						activity.refreshMapComplete();
+						if (view.getMapRenderer() == null) {
+							activity.refreshMapComplete();
+						}
 						activity.getDashboard().refreshContent(false);
 					}
 				}
@@ -180,12 +183,13 @@ public class ConfigureMapDialogs {
 
 		b.setTitle(activity.getString(R.string.map_locale));
 
-		final String[] txtIds = ConfigureMapUtils.getSortedMapNamesIds(activity, ConfigureMapUtils.MAP_NAMES_IDS,
-				ConfigureMapUtils.getMapNamesValues(activity, ConfigureMapUtils.MAP_NAMES_IDS));
-		final String[] txtValues = ConfigureMapUtils.getMapNamesValues(activity, txtIds);
+		Map<String, String> mapLanguages = ConfigureMapUtils.getSorterMapLanguages(app);
+		String[] mapLanguagesIds = mapLanguages.keySet().toArray(new String[0]);
+		String[] mapLanguagesNames = mapLanguages.values().toArray(new String[0]);
+
 		int selected = -1;
-		for (int i = 0; i < txtIds.length; i++) {
-			if (view.getSettings().MAP_PREFERRED_LOCALE.get().equals(txtIds[i])) {
+		for (int i = 0; i < mapLanguagesIds.length; i++) {
+			if (settings.MAP_PREFERRED_LOCALE.get().equals(mapLanguagesIds[i])) {
 				selected = i;
 				break;
 			}
@@ -196,7 +200,7 @@ public class ConfigureMapDialogs {
 		final OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
 
 		final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
-				new ContextThemeWrapper(activity, themeRes), R.layout.single_choice_switch_item, R.id.text1, txtValues) {
+				new ContextThemeWrapper(activity, themeRes), R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
 			@NonNull
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -211,7 +215,7 @@ public class ConfigureMapDialogs {
 					v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
 					v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
 					TextView switchText = v.findViewById(R.id.switchText);
-					switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
+					switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
 					SwitchCompat check = v.findViewById(R.id.check);
 					check.setChecked(transliterateNames[0]);
 					check.setOnCheckedChangeListener(translitChangdListener);
@@ -227,11 +231,13 @@ public class ConfigureMapDialogs {
 		};
 
 		b.setAdapter(singleChoiceAdapter, null);
-		b.setSingleChoiceItems(txtValues, selected, new DialogInterface.OnClickListener() {
+		b.setSingleChoiceItems(mapLanguagesNames, selected, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				selectedLanguageIndex[0] = which;
-				transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.isSet() ? transliterateNames[0] : txtIds[which].equals("en");
+				transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.isSet()
+						? transliterateNames[0]
+						: mapLanguagesIds[which].equals("en");
 				((AlertDialog) dialog).getListView().setSelection(which);
 				singleChoiceAdapter.notifyDataSetChanged();
 			}
@@ -245,9 +251,9 @@ public class ConfigureMapDialogs {
 				AlertDialog dlg = (AlertDialog) dialog;
 				int index = dlg.getListView().getCheckedItemPosition();
 				view.getSettings().MAP_PREFERRED_LOCALE.set(
-						txtIds[index]);
+						mapLanguagesIds[index]);
 				activity.refreshMapComplete();
-				String localeDescr = txtIds[index];
+				String localeDescr = mapLanguagesIds[index];
 				localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity
 						.getString(R.string.local_map_names) : localeDescr;
 				item.setDescription(localeDescr);

@@ -100,7 +100,7 @@ public class RouteStatisticCard extends MapBaseCard {
 		timeTv.setText(timeStr);
 
 		TextView arriveTimeTv = (TextView) view.findViewById(R.id.time_desc);
-		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(time, true));
+		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTimeShort(time, true));
 		arriveTimeTv.setText(arriveStr);
 
 		buildSlopeInfo();

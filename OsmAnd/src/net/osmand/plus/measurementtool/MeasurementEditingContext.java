@@ -1,5 +1,9 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -18,9 +22,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MeasurementModeCommand;
-import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.IRouteSettingsListener;
 import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
@@ -47,10 +51,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
-import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
 
@@ -200,12 +200,20 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		this.gpxData = gpxData;
 	}
 
+	public int getSelectedSegment() {
+		return selectedSegment;
+	}
+
 	public void setSelectedSegment(int selectedSegment) {
 		this.selectedSegment = selectedSegment;
 	}
 
 	public boolean hasRoutePoints() {
 		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().hasRtePt();
+	}
+
+	public boolean hasElevationData() {
+		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().getAnalysis(0).hasElevationData;
 	}
 
 	public CalculationMode getLastCalculationMode() {
@@ -394,7 +402,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return res;
 	}
 
-	void recalculateRouteSegments(@Nullable ApplicationMode mode) {
+	public void recalculateRouteSegments(@Nullable ApplicationMode mode) {
 		boolean changed = false;
 		if (mode == null) {
 			roadSegmentData.clear();

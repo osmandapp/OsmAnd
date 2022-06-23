@@ -1,19 +1,9 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
-
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,12 +26,21 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
-import net.osmand.plus.track.fragments.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends MapBaseCard {
 
@@ -136,7 +135,7 @@ public class OverviewCard extends MapBaseCard {
 	private int getActiveShowHideIcon() {
 		int icon;
 		if (!FileUtils.isTempFile(app, getGPXFile().path)) {
-			icon = isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_view : R.drawable.ic_action_hide;
+			icon = isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_hide : R.drawable.ic_action_view;
 		} else {
 			icon = R.drawable.ic_action_gsave_dark;
 		}
@@ -167,15 +166,12 @@ public class OverviewCard extends MapBaseCard {
 		filled.setAlpha(0.1f);
 		setImageDrawable(icon, iconResId, iconColorDef);
 		setOnTouchItem(item, icon, filled, iconResId, iconColorDef, iconColorPres);
-		item.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					notifyButtonPressed(buttonIndex);
-					if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
-						setImageDrawable(icon, getActiveShowHideIcon(), iconColorDef);
-					}
+		item.setOnClickListener(v -> {
+			CardListener listener = getListener();
+			if (listener != null) {
+				notifyButtonPressed(buttonIndex);
+				if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
+					setImageDrawable(icon, getActiveShowHideIcon(), iconColorDef);
 				}
 			}
 		});
@@ -194,14 +190,11 @@ public class OverviewCard extends MapBaseCard {
 			AndroidUiHelper.updateVisibility(description, false);
 		} else {
 			description.setText(getFirstParagraph(descriptionHtml));
-			description.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					GPXFile gpxFile = getGPXFile();
-					String title = gpxFile.metadata.getArticleTitle();
-					String imageUrl = getMetadataImageLink(gpxFile.metadata);
-					GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
-				}
+			description.setOnClickListener(v -> {
+				GPXFile gpx = getGPXFile();
+				String title = gpx.metadata.getArticleTitle();
+				String imageUrl = getMetadataImageLink(gpx.metadata);
+				ReadGpxDescriptionFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			});
 			AndroidUiHelper.updateVisibility(description, true);
 		}

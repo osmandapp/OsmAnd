@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -24,9 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 public class TracksCard extends MapBaseCard {
 
@@ -120,7 +120,7 @@ public class TracksCard extends MapBaseCard {
 			LinearLayout container = v.findViewById(R.id.container);
 			container.setMinimumHeight(minCardHeight);
 			AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
-			v.setOnClickListener(v1 -> mapActivity.getMapRouteInfoMenu().selectTrack(item.file));
+			v.setOnClickListener(v1 -> mapActivity.getMapRouteInfoMenu().selectTrack(item.file, true));
 			tracks.addView(v);
 		}
 

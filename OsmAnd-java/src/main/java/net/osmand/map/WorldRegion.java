@@ -15,6 +15,7 @@ import java.util.Set;
 public class WorldRegion implements Serializable {
 
 	public static final String WORLD_BASEMAP = "world_basemap";
+	public static final String WORLD_BASEMAP_MINI = "world_basemap_mini";
 	public static final String ANTARCTICA_REGION_ID = "antarctica";
 	public static final String AFRICA_REGION_ID = "africa";
 	public static final String ASIA_REGION_ID = "asia";
@@ -24,6 +25,8 @@ public class WorldRegion implements Serializable {
 	public static final String NORTH_AMERICA_REGION_ID = "northamerica";
 	public static final String RUSSIA_REGION_ID = "russia";
 	public static final String JAPAN_REGION_ID = "japan_asia";
+	public static final String GERMANY_REGION_ID = "europe_germany";
+	public static final String FRANCE_REGION_ID = "europe_france";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
 	protected static final String WORLD = "world";
 
@@ -276,5 +279,9 @@ public class WorldRegion implements Serializable {
 		} else {
 			return obfFileName.toLowerCase();
 		}
+	}
+
+	public List<LatLon> getPolygon() {
+		return polygon;
 	}
 }

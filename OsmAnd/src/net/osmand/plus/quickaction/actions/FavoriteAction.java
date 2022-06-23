@@ -54,9 +54,8 @@ public class FavoriteAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull final MapActivity mapActivity) {
-		final LatLon latLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		final LatLon latLon = getMapLocation(mapActivity);
 		final String title = getParams().get(KEY_NAME);
-
 		if (title == null || title.isEmpty()) {
 			progressDialog = createProgressDialog(mapActivity, new DialogOnClickListener() {
 				@Override
@@ -128,9 +127,7 @@ public class FavoriteAction extends QuickAction {
 
 	@Override
 	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
-
 		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
-
 		final View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
 
@@ -142,7 +139,6 @@ public class FavoriteAction extends QuickAction {
 		EditText name = (EditText) root.findViewById(R.id.name_edit);
 
 		if (!getParams().isEmpty()) {
-
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 			categoryImage.setColorFilter(Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)));
 			name.setText(getParams().get(KEY_NAME));
@@ -153,9 +149,7 @@ public class FavoriteAction extends QuickAction {
 				categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
 				categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
 			}
-
 		} else if (helper.getFavoriteGroups().size() > 0) {
-
 			FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
 			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
@@ -164,9 +158,7 @@ public class FavoriteAction extends QuickAction {
 
 			getParams().put(KEY_CATEGORY_NAME, group.getName());
 			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.getColor()));
-
 		} else {
-
 			categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
 			categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
 
@@ -189,15 +181,12 @@ public class FavoriteAction extends QuickAction {
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-
 		getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-
 		return true;
 	}
 
 	private void fillGroupParams(View root, String name, int color) {
-
 		if (color == 0)
 			color = root.getContext().getResources().getColor(R.color.color_favorite);
 

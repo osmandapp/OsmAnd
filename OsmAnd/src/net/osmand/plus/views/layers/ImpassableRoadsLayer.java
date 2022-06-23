@@ -13,6 +13,11 @@ import android.graphics.Rect;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -22,9 +27,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -41,12 +48,17 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Paint activePaint;
 	private Paint paint;
 
+	//OpenGL
+	private int impassibleRoadsCount = 0;
+
 	public ImpassableRoadsLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
+
 		avoidSpecificRoads = getApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
@@ -62,12 +74,27 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawPoint(canvas, pf.x, pf.y, true);
+			AvoidRoadInfo movableRoad = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+			setMovableObject(movableRoad.latitude, movableRoad.longitude);
+		}
+		if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+			cancelMovableObject();
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= START_ZOOM) {
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				if (impassibleRoadsCount != avoidSpecificRoads.getImpassableRoads().size() || mapActivityInvalidated) {
+					clearMapMarkersCollections();
+				}
+				initMarkersCollection();
+				impassibleRoadsCount = avoidSpecificRoads.getImpassableRoads().size();
+				mapActivityInvalidated = false;
+				return;
+			}
 			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
@@ -83,6 +110,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					drawPoint(canvas, tileBox, latitude, longitude, road != null);
 				}
 			}
+		} else {
+			clearMapMarkersCollections();
 		}
 	}
 
@@ -97,10 +126,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		y -= roadWorkIcon.getHeight() / 2f * textScale;
 		Rect destRect = getIconDestinationRect(x, y, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
 		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
-	}
-
-	@Override
-	public void destroyLayer() {
 	}
 
 	@Override
@@ -159,9 +184,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
 				if (location != null && road != null) {
-					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-					if (calculateBelongs(ex, ey, x, y, compare)) {
+					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, location.getLatitude(), location.getLongitude());
+					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 						compare = radius;
 						o.add(road);
 					}
@@ -214,6 +238,54 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					return callback != null && callback.isCancelled();
 				}
 			});
+			applyMovableObject(position);
 		}
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection != null) {
+			return;
+		}
+		mapMarkersCollection = new MapMarkersCollection();
+		for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+			LatLon location = entry.getKey();
+			AvoidRoadInfo road = entry.getValue();
+			boolean isMoveable = false;
+			if (road != null && contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
+				AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+				if (object.id == road.id) {
+					isMoveable = true;
+				}
+			}
+			Bitmap bitmap = getMergedBitmap(road != null);
+			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+			int x = MapUtils.get31TileNumberX(location.getLongitude());
+			int y = MapUtils.get31TileNumberY(location.getLatitude());
+			PointI pointI = new PointI(x, y);
+			mapMarkerBuilder
+					.setPosition(pointI)
+					.setIsHidden(isMoveable)
+					.setBaseOrder(baseOrder)
+					.setIsAccuracyCircleSupported(false)
+					.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
+					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
+					.buildAndAddToCollection(mapMarkersCollection);
+		}
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	/**OpenGL*/
+	private Bitmap getMergedBitmap(boolean active) {
+		float textScale = getTextScale();
+		Bitmap bitmapResult = Bitmap.createBitmap(roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		int cx = roadWorkIcon.getWidth() / 2;
+		int cy = roadWorkIcon.getHeight() / 2;
+		Rect destRect = getIconDestinationRect(cx, cy, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
+		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
+		return bitmapResult;
 	}
 }

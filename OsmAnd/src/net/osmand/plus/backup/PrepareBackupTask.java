@@ -138,6 +138,7 @@ public class PrepareBackupTask {
 
 				@Override
 				public void onFinish(AppInitializer init) {
+					init.removeListener(this);
 					collectLocalFilesImpl();
 				}
 			});

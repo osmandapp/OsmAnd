@@ -364,14 +364,14 @@
     <string name="poi_tram_stop">Paragem de elétrico</string>
     <string name="poi_public_transport_station">Estação de transporte público</string>
     <string name="poi_bus_station">Estação rodoviária</string>
-    <string name="poi_railway_station">Estação ferroviária</string>
-    <string name="poi_railway_platform">Plataforma ferroviária</string>
-    <string name="poi_halt">Apeadeiro ferroviário</string>
+    <string name="poi_railway_station">Estação ferroviária; Estação de comboios, Estação de caminhos de ferro</string>
+    <string name="poi_railway_platform">Plataforma ferroviária;Plataforma de comboios;Plataforma de caminho de ferro;Plataforma de estação;Plataforma de apeadeiro</string>
+    <string name="poi_halt">Apeadeiro ferroviário;Apeadeiro de caminho de ferro;Apeadeiro de comboio;Apeadeiro</string>
     <string name="poi_subway_entrance">Entrada de metropolitano</string>
     <string name="poi_subway_station">Sim;Estação de metropolitano</string>
     <string name="poi_railway_buffer_stop">Pára-choques de via férrea</string>
     <string name="poi_taxi">Praça de táxis</string>
-    <string name="poi_aerodrome">Aeroporto</string>
+    <string name="poi_aerodrome">Aeroporto;Aeródromo</string>
     <string name="poi_helipad">Heliponto</string>
     <string name="poi_runway">Pista de aterragem/descolagem</string>
     <string name="poi_aeroway_terminal">Terminal de aeroporto</string>
@@ -1445,7 +1445,7 @@
     <string name="poi_piste_difficulty_intermediate">Intermediária</string>
     <string name="poi_piste_difficulty_advanced">Avançada</string>
     <string name="poi_piste_difficulty_novice">Novato</string>
-    <string name="poi_piste_difficulty_expert">Perito</string>
+    <string name="poi_piste_difficulty_expert">Especialista</string>
     <string name="poi_piste_difficulty_freeride">Freeride</string>
     <string name="poi_piste_grooming_classic">Clássica</string>
     <string name="poi_piste_grooming_classic_skating">Clássica+patinagem</string>
@@ -3774,7 +3774,7 @@
     <string name="poi_tactile_paving_incorrect">Incorreto</string>
     <string name="poi_tactile_paving_primitive">Primitivo</string>
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
-    <string name="poi_traffic_signals_sound_locate">Apenas quando é permitido atravessar</string>
+    <string name="poi_traffic_signals_sound_locate">Apenas para encontrar o poste do semáforo</string>
     <string name="poi_internet_access_fee_customers">Acesso à Internet: só clientes</string>
     <string name="poi_video_no">Não</string>
     <string name="poi_video_yes">Sim;Vídeo</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_board_type_wildlife">Vida selvagem</string>
     <string name="poi_board_type_nature">Natureza</string>
     <string name="poi_food_no">Comida: não</string>
+    <string name="poi_flow_rate">Caudal</string>
+    <string name="poi_golf_pin">Buraco de golfe</string>
 </resources>

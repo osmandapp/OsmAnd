@@ -1,11 +1,19 @@
 package net.osmand.plus.plugins.mapillary;
 
+import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -31,10 +39,9 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetParams;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.RightTextInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -51,14 +58,6 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-
-import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -82,7 +81,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapActivity mapActivity;
 
 	private MapillaryVectorLayer vectorLayer;
-	private TextInfoWidget mapillaryControl;
 	private MapWidgetInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
@@ -150,6 +148,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		if (widgetType == WidgetType.MAPILLARY) {
+			return new MapillaryMapWidget(mapActivity);
+		}
+		return null;
+	}
+
+	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		updateMapLayers(context, mapActivity, false);
 	}
@@ -171,21 +177,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
 			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
-			if (mapillaryControl == null && mapActivity != null) {
-				registerWidget(mapActivity);
-			}
 		} else {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
-			if (mapActivity != null) {
-				MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-				if (mapillaryControl != null && mapInfoLayer != null) {
-					mapInfoLayer.removeSideWidget(mapillaryControl);
-					mapillaryControl = null;
-					mapInfoLayer.recreateControls();
-				}
-			}
-			mapillaryControl = null;
 		}
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 	}
@@ -233,27 +227,19 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setListener(listener));
 	}
 
-	private void registerWidget(@NonNull MapActivity activity) {
-		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		mapillaryControl = createMonitoringControl(activity);
-		mapillaryWidgetRegInfo = layer.registerWidget(WidgetParams.MAPILLARY, mapillaryControl, WidgetsPanel.RIGHT);
-		layer.recreateControls();
-	}
-
-	private TextInfoWidget createMonitoringControl(final MapActivity map) {
-		mapillaryControl = new RightTextInfoWidget(map);
-		mapillaryControl.setText(map.getString(R.string.mapillary), "");
-		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
-		mapillaryControl.setOnClickListener(v -> openMapillary(map, null));
-
-		return mapillaryControl;
+	@Override
+	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY);
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget));
 	}
 
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
+			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
-				mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(mode, mapillaryWidgetRegInfo, visible);
+				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible, false);
 			}
 			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mil != null) {
@@ -318,7 +304,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityPause(MapActivity activity) {
-		this.mapillaryControl = null;
 		this.mapActivity = null;
 	}
 
@@ -356,5 +341,4 @@ public class MapillaryPlugin extends OsmandPlugin {
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		return AndroidUtils.startActivityIfSafe(app, intent);
 	}
-
 }

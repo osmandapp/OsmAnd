@@ -41,8 +41,7 @@ import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
@@ -679,6 +678,10 @@ public class QuickSearchHelper implements ResourceListener {
 	@Override
 	public void onMapsIndexed() {
 		mapsIndexed = true;
+	}
+
+	@Override
+	public void onMapClosed(String fileName) {
 	}
 
 	public static void showPoiFilterOnMap(@NonNull final MapActivity mapActivity,

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -49,8 +48,6 @@ import java.util.List;
 public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
-
-	public static final Uri HELP_URI = Uri.parse("https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#download--update-tiles");
 
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
@@ -166,7 +163,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		helpButton.setOnClickListener(v -> {
 			Context context = getContext();
 			if (context != null) {
-				AndroidUtils.openUrl(context, HELP_URI, nightMode);
+				AndroidUtils.openUrl(context, R.string.docs_map_download_tiles, nightMode);
 			}
 		});
 	}
@@ -186,13 +183,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private void updateTileSourceContent() {
 		setupMapSourceSetting();
-		updateDownloadContent();
+		updateDownloadContent(mapView.getZoom());
 	}
 
-	private void updateDownloadContent() {
+	private void updateDownloadContent(int currentZoom) {
 		updateTilesPreviewZooms();
 		setupMinMaxZoom();
-		setupSlider();
+		setupSlider(currentZoom);
 		setupTilesDownloadInfo();
 	}
 
@@ -223,8 +220,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		selectedMapSourceText.setText(selectedMapSource);
 	}
 
-	private void setupSlider() {
-		int currentZoom = mapView.getZoom();
+	private void setupSlider(int currentZoom) {
 		int maxZoom = tileSource.getMaximumZoomSupported();
 		int minZoom = Math.min(currentZoom, maxZoom);
 
@@ -384,12 +380,19 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		app.runInUIThread(() -> {
+			boolean activityDestroyed = !AndroidUtils.isActivityNotDestroyed(getActivity());
+			if (activityDestroyed) {
+				return;
+			}
+
+			int maxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
-			if (currentZoom > selectedMinZoom) {
+			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
 			}
+
 			updateTilesPreview();
-			updateDownloadContent();
+			updateDownloadContent(currentZoom);
 		});
 	}
 

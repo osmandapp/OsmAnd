@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -549,6 +548,14 @@ public class MenuBuilder {
 	protected void buildDescription(View view) {
 	}
 
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
+		if (description.contains("</")) {
+			POIMapLayer.showHtmlDescriptionDialog(ctx, app, description, title);
+		} else {
+			POIMapLayer.showPlainDescriptionDialog(ctx, app, description, title);
+		}
+	}
+
 	protected void buildAfter(View view) {
 		buildRowDivider(view);
 	}
@@ -789,18 +796,8 @@ public class MenuBuilder {
 	}
 
 	public View buildDescriptionRow(final View view, final String description) {
-
 		final String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (description.contains("</")) {
-					POIMapLayer.showHtmlDescriptionDialog(view.getContext(), app, description, descriptionLabel);
-				} else {
-					POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, description, descriptionLabel);
-				}
-			}
-		};
+		View.OnClickListener onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -816,12 +813,9 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-		ll.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(description, view.getContext());
-				return true;
-			}
+		ll.setOnLongClickListener(v -> {
+			copyToClipboard(description, view.getContext());
+			return true;
 		});
 
 		baseView.addView(ll);
@@ -938,12 +932,7 @@ public class MenuBuilder {
 			}
 			ssb.append(line.getValue());
 			button.setText(ssb);
-			button.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					copyToClipboard(line.getValue(), mapActivity);
-				}
-			});
+			button.setOnClickListener(v -> copyToClipboard(line.getValue(), mapActivity));
 			llv.addView(button);
 		}
 		return new CollapsableView(llv, this, true);
@@ -955,12 +944,7 @@ public class MenuBuilder {
 		for (final String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
 			button.setText(distance);
-			button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					copyToClipboard(distance, mapActivity);
-				}
-			});
+			button.setOnClickListener(v -> copyToClipboard(distance, mapActivity));
 			llv.addView(button);
 		}
 		return new CollapsableView(llv, this, true);
@@ -1004,7 +988,7 @@ public class MenuBuilder {
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 		button.setTextColor(buttonColorStateList);
-		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+		button.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(true);
 		button.setEllipsize(TextUtils.TruncateAt.END);
 		button.setOnClickListener(onClickListener);
@@ -1014,8 +998,9 @@ public class MenuBuilder {
 				light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
 		Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
 				light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, Build.VERSION.SDK_INT >= 21
-				? AndroidUtils.createPressedStateListDrawable(normal, pressed) : normal, null, null, null);
+
+		Drawable drawable = AndroidUtils.createPressedStateListDrawable(normal, pressed);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, drawable, null, null, null);
 		button.setCompoundDrawablePadding(dpToPx(8f));
 		container.addView(button);
 	}
@@ -1400,7 +1385,7 @@ public class MenuBuilder {
 		ivIcon.setImageResource(feature.getIconId(!light));
 
 		View btnGet = banner.findViewById(R.id.button_get);
-		UiUtilities.setupDialogButton(!light, btnGet, DialogButtonType.PRIMARY, R.string.get_plugin);
+		UiUtilities.setupDialogButton(!light, btnGet, DialogButtonType.PRIMARY, R.string.shared_string_get);
 		btnGet.setOnClickListener(v -> {
 			if (mapActivity != null) {
 				ChoosePlanFragment.showInstance(mapActivity, feature);

@@ -7,7 +7,6 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,10 +46,10 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
-import net.osmand.plus.myplaces.ui.SegmentGPXAdapter;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
@@ -71,6 +70,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.createGpxTabsView;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_SPEED;
@@ -300,7 +300,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	private void createSegmentsTabs(ViewGroup viewGroup) {
-		View segmentView = SegmentGPXAdapter.createGpxTabsView(viewGroup, nightMode);
+		View segmentView = createGpxTabsView(viewGroup, nightMode);
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
@@ -328,7 +328,9 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		displayHelper.setGpx(gpxFile);
 
-		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, nightMode, this, true, true);
+		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false);
+		graphsAdapter.setHideStatistics(true);
+		graphsAdapter.setHideJoinGapsBottomButtons(true);
 		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
@@ -398,7 +400,13 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		buttonShowTrack.setOnClickListener(v -> {
 			boolean checked = !showTrackCompound.isChecked();
 			showTrackCompound.setChecked(checked);
-			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), checked, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+			if (checked) {
+				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+			} else {
+				params.hideFromMap();
+			}
+			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), params);
 			setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
 			createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
 		});
@@ -647,6 +655,11 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	@Override
 	public void openAnalyzeOnMap(@NonNull GpxDisplayItem gpxItem) {
+	}
+
+	@Override
+	public void openGetAltitudeBottomSheet(@NonNull GpxDisplayItem gpxItem) {
+
 	}
 
 	public interface DismissTargetFragment {

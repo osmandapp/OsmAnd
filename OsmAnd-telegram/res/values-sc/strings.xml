@@ -272,4 +272,8 @@
     <string name="logcat_buffer">Buffer de Logcat</string>
     <string name="logcat_buffer_descr">Verìfica e cumpartzi sos registros de s\'aplicatzione fatos a sa minuda</string>
     <string name="send_report">Imbia resumu</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="send_live_location_error">Imbia s\'errore de sa positzione in direta: %1$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="shared_string_error">Errore</string>
 </resources>

@@ -186,7 +186,7 @@
     <string name="shared_string_go">Get</string>
     <string name="osm_edits">OSM düzəlişləri</string>
     <string name="osmand_parking_hour">s</string>
-    <string name="osmand_parking_minute">dəq</string>
+    <string name="shared_string_minute_lowercase">dəq</string>
     <string name="osmand_parking_time_left">qalıb</string>
     <string name="your_edits">Düzəlişləriniz</string>
     <string name="waypoint_visit_after">Sonra ziyarət et</string>
@@ -686,7 +686,7 @@
     <string name="edit_filter_delete_message">“%1$s” filtri silindi</string>
     <string name="edit_filter_create_message">“%1$s” filtri yaradıldı</string>
     <string name="email">e-poçt</string>
-    <string name="get_plugin">Əldə et</string>
+    <string name="shared_string_get">Əldə et</string>
     <string name="do_you_like_osmand">OsmAnd-ı bəyəndiniz?</string>
     <string name="failed_to_upload">Yükləmək mümkün olmadı</string>
     <string name="delete_change">Dəyişikliyi sil</string>
@@ -1225,7 +1225,6 @@
     <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni marşrut təyinatı edən düymə. Əvvəl seçilmiş təyinatı (əgər varsa) əvəz edəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekranın mərkəzini birinci aralıq təyinat nöqtəsi etmək üçün düymə.</string>
     <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisə mesajları göstərmə.</string>
-    <string name="translit_name_if_miss">%1$s ad yoxdursa, transliterasiya et</string>
     <string name="route_preferences">Marşrut seçimləri</string>
     <string name="routing_preferences_descr">Marşrutlama seçimləri</string>
     <string name="profile_settings">Profil parametrləri</string>
@@ -2580,7 +2579,6 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="download_additional_maps">Çatışmayan %1$s xəritələri endirilsin (%2$d MB)\?</string>
     <string name="rendering_value_black_name">Qara</string>
-    <string name="live_update_frequency_day_variant">Xəritə yeniləmələri hər gün yoxlanılacaq. Növbəti dəfə %1$s %2$s.</string>
     <string name="shared_string_includes">Daxil olanlar</string>
     <string name="change_data_storage_full_description">OsmAnd məlumat faylları yeni təyinat yerinə daşınsın\?
 \n%1$s &gt; %2$s</string>

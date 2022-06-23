@@ -65,6 +65,7 @@ import androidx.core.content.FileProvider;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -188,7 +189,7 @@ public class AndroidUtils {
 		return createScaledBitmap(drawable, width, height);
 	}
 
-	public static Bitmap createScaledBitmap(Drawable drawable, int width, int height) {
+	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, int width, int height) {
 		return scaleBitmap(drawableToBitmap(drawable), width, height, false);
 	}
 
@@ -236,6 +237,18 @@ public class AndroidUtils {
 			LOG.error(e);
 			Toast.makeText(activity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 			return false;
+		}
+	}
+
+	public static void startActivityForResultIfSafe(@NonNull Fragment fragment, @NonNull Intent intent, int requestCode) {
+		try {
+			fragment.startActivityForResult(intent, requestCode);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e);
+			Context context = fragment.getContext();
+			if (context != null) {
+				Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
@@ -857,12 +870,9 @@ public class AndroidUtils {
 			}
 		}
 
-		Bitmap bitmap = null;
-		if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-		} else {
-			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-		}
+		Bitmap bitmap = drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0
+				? Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+				: Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
 
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -1178,6 +1188,14 @@ public class AndroidUtils {
 		return null;
 	}
 
+	public static void openUrl(@NonNull Context context, int urlStringId, boolean nightMode) {
+		openUrl(context, context.getString(urlStringId), nightMode);
+	}
+
+	public static void openUrl(@NonNull Context context, @NonNull String url, boolean nightMode) {
+		openUrl(context, Uri.parse(url), nightMode);
+	}
+
 	public static void openUrl(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
 		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
 				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
@@ -1189,7 +1207,5 @@ public class AndroidUtils {
 			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
-
-
 
 }

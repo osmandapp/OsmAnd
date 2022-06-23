@@ -15,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
@@ -91,7 +92,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 						}
 					})
 					.setCompoundButtonColorId(activeColorResId)
-					.setDescription(String.valueOf(entry.getValue().pointsSize))
+					.setDescription(String.valueOf(entry.getValue().points.size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
 					.setTitle(category.isEmpty() ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
@@ -127,7 +128,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
-			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false, false, false);
+			GpxSelectionParams params = GpxSelectionParams.newInstance()
+					.showOnMap().selectedAutomatically().saveSelection();
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
 		}
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group == null) {

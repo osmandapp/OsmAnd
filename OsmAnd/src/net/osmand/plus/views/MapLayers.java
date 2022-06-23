@@ -103,7 +103,7 @@ public class MapLayers {
 	private MapControlsLayer mapControlsLayer;
 	private MapQuickActionLayer mapQuickActionLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
-	private MapWidgetRegistry mapWidgetRegistry;
+	private final MapWidgetRegistry mapWidgetRegistry;
 	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
@@ -113,6 +113,7 @@ public class MapLayers {
 		this.mapWidgetRegistry = new MapWidgetRegistry(app);
 	}
 
+	@NonNull
 	public MapWidgetRegistry getMapWidgetRegistry() {
 		return mapWidgetRegistry;
 	}
@@ -123,7 +124,7 @@ public class MapLayers {
 		// 5.95 all labels
 		mapView.addLayer(mapTextLayer, 5.95f);
 		// 8. context menu layer 
-		contextMenuLayer = new ContextMenuLayer(app);
+		contextMenuLayer = new ContextMenuLayer(app, -210000);
 		mapView.addLayer(contextMenuLayer, 8);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		mapTileLayer = new MapTileLayer(app, true);
@@ -151,20 +152,20 @@ public class MapLayers {
 
 		// 2. osm bugs layer
 		// 3. poi layer
-		poiMapLayer = new POIMapLayer(app);
+		poiMapLayer = new POIMapLayer(app, -180000);
 		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
 		mFavouritesLayer = new FavouritesLayer(app, -160000);
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 4.6 measurement tool layer
-		measurementToolLayer = new MeasurementToolLayer(app);
+		measurementToolLayer = new MeasurementToolLayer(app, -190000);
 		mapView.addLayer(measurementToolLayer, 4.6f);
 		// 5. transport layer
-		transportStopsLayer = new TransportStopsLayer(app);
+		transportStopsLayer = new TransportStopsLayer(app, -120000);
 		mapView.addLayer(transportStopsLayer, 5);
 		// 5.95 all text labels
 		// 6. point location layer 
-		locationLayer = new PointLocationLayer(app);
+		locationLayer = new PointLocationLayer(app, -206000);
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(app, -207000);
@@ -421,9 +422,9 @@ public class MapLayers {
 	}
 
 	private void addFilterToList(final ContextMenuAdapter adapter,
-								 final List<PoiUIFilter> list,
-								 final PoiUIFilter f,
-								 boolean multiChoice) {
+	                             final List<PoiUIFilter> list,
+	                             final PoiUIFilter f,
+	                             boolean multiChoice) {
 		list.add(f);
 		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {

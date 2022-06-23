@@ -2,10 +2,12 @@ package net.osmand.plus.measurementtool.command;
 
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
+import net.osmand.plus.measurementtool.RoadSegmentData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private List<WptPt> points;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData;
-	private ClearCommandMode clearMode;
+	private final ClearCommandMode clearMode;
 	private int pointPosition;
 
 	public enum ClearCommandMode {
@@ -24,7 +26,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 		AFTER
 	}
 
-	public ClearPointsCommand(MeasurementToolLayer measurementLayer, ClearCommandMode clearMode) {
+	public ClearPointsCommand(@NonNull MeasurementToolLayer measurementLayer, @NonNull ClearCommandMode clearMode) {
 		super(measurementLayer);
 		this.clearMode = clearMode;
 	}
@@ -69,6 +71,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 		executeCommand();
 	}
 
+	@NonNull
 	@Override
 	public MeasurementCommandType getType() {
 		return MeasurementCommandType.CLEAR_POINTS;

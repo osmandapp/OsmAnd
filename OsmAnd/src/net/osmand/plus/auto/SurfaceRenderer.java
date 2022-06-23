@@ -5,6 +5,11 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.Surface;
 
+import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.AppManager;
@@ -14,11 +19,6 @@ import androidx.car.app.SurfaceContainer;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-
-import net.osmand.Location;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * A very simple implementation of a renderer for the app's background surface.
@@ -226,7 +226,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		}
 		DrawSettings drawSettings = new DrawSettings(mCarContext.isDarkMode(), false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
-		renderFrame(tileBox, drawSettings);
+		try {
+			renderFrame(tileBox, drawSettings);
+		} catch (Exception ignored) {
+			// Ignored
+		}
 	}
 
 	public void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {

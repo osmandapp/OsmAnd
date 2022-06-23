@@ -72,8 +72,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
-	private static final String SLOPES_WIKI_URL = "https://en.wikipedia.org/wiki/Grade_(slope)";
-	private static final String PLUGIN_URL = "https://osmand.net/features/contour-lines-plugin";
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
@@ -194,9 +192,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				getString(R.string.slope_read_more),
 				wikiString
 		);
-		String emptyStateText = getString(R.string.terrain_empty_state_text) + "\n" + PLUGIN_URL;
-		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, SLOPES_WIKI_URL, false);
-		setupClickableText(emptyStateDescriptionTv, emptyStateText, PLUGIN_URL, PLUGIN_URL, true);
+		String wikiSlopeUrl = getString(R.string.url_wikipedia_slope);
+		String pluginUrl = getString(R.string.osmand_features_contour_lines_plugin);
+		String emptyStateText = getString(R.string.terrain_empty_state_text) + "\n" + pluginUrl;
+		setupClickableText(slopeReadMoreTv, readMoreText, wikiString, wikiSlopeUrl, false);
+		setupClickableText(emptyStateDescriptionTv, emptyStateText, pluginUrl, pluginUrl, true);
 
 		switchCompat.setChecked(terrainEnabled);
 		hillshadeBtn.setOnClickListener(this);
@@ -300,8 +300,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private void setupClickableText(TextView textView,
 									String text,
 									String clickableText,
-									final String url,
-									final boolean medium) {
+									String url,
+									boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
@@ -503,6 +503,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void downloadHasFinished() {
 		updateDownloadSection();
+		MapActivity mapActivity = getMapActivity();
+		SRTMPlugin plugin = OsmandPlugin.getActivePlugin(SRTMPlugin.class);
+		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {
+			plugin.registerLayers(mapActivity, mapActivity);
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

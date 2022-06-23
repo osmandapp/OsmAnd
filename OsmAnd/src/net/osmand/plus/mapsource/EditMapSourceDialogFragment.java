@@ -69,7 +69,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	public static final String TAG = EditMapSourceDialogFragment.class.getName();
 	static final int EXPIRE_TIME_NEVER = -1;
 	private static final Log LOG = PlatformUtil.getLog(EditMapSourceDialogFragment.class);
-	private static final String HELP_ARTICLE_URL = "https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#add-new-online-raster-map-source";
 	private static final String PNG_EXT = "png";
 	private static final int MAX_ZOOM = 17;
 	private static final int MIN_ZOOM = 5;
@@ -420,7 +419,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void onHelpClick() {
-		AndroidUtils.openUrl(requireContext(), Uri.parse(HELP_ARTICLE_URL), nightMode);
+		Context context = requireContext();
+		AndroidUtils.openUrl(context, Uri.parse(context.getString(R.string.docs_add_online_maps)), nightMode);
 	}
 
 	private void showExitDialog() {
@@ -447,7 +447,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			case EXPIRE_TIME:
 				return expireTimeMinutes == EXPIRE_TIME_NEVER
 						? getString(R.string.shared_string_never)
-						: getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(expireTimeMinutes), getString(R.string.osmand_parking_minute));
+						: getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(expireTimeMinutes), getString(R.string.shared_string_minute_lowercase));
 			case MERCATOR_PROJECTION:
 				return elliptic ? getString(R.string.edit_tilesource_elliptic_tile) : getString(R.string.pseudo_mercator_projection);
 			case STORAGE_FORMAT:

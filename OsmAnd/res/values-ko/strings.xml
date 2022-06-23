@@ -792,7 +792,6 @@
     <string name="intermediate_points_change_order">순서 변경</string>
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글플레이에서 플러그인을 구입하시기 바랍니다 .</string>
     <string name="srtm_paid_version_title">등고선 플러그인</string>
-    <string name="av_def_action_choose">요청에 대한 선택</string>
     <string name="av_def_action_video">영상 녹화</string>
     <string name="av_def_action_audio">소리 녹음</string>
     <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>
@@ -1329,7 +1328,7 @@
     <string name="remove_the_tag">태그를 제거</string>
     <string name="edit_group">그룹 편집</string>
     <string name="plugin_install_needs_network">이 플러그인을 설치 하려면 인터넷에 연결을 해야 합니다.</string>
-    <string name="get_plugin">가져오기</string>
+    <string name="shared_string_get">가져오기</string>
     <string name="plugin_ski_name">스키 지도 보기</string>
     <string name="plugin_nautical_name">항해 지도 보기</string>
     <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
@@ -1444,7 +1443,7 @@
     <string name="action_delete">액션 삭제</string>
     <string name="osm_edits">OSM 편집</string>
     <string name="osmand_parking_hour">시간</string>
-    <string name="osmand_parking_minute">분</string>
+    <string name="shared_string_minute_lowercase">분</string>
     <string name="osmand_parking_time_left">남은 시간</string>
     <string name="parking_place_limited">주차 시간 제한</string>
     <string name="your_edits">편집</string>
@@ -1871,7 +1870,6 @@
     <string name="search_my_location">내 위치 찾기</string>
     <string name="shared_string_from">부터</string>
     <string name="mapillary_menu_title_tile_cache">타일 캐시</string>
-    <string name="translit_name_if_miss">이름이 누락된 1%1$s 번역 하기</string>
     <string name="offline_maps_required_descr">이 경로에 필요한 일부 오프라인 맵이 없습니다.</string>
     <string name="shared_string_all_languages">모든 언어</string>
     <string name="street_level_imagery">거리 기반의 파노라마 영상 서비스</string>

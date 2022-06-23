@@ -136,7 +136,7 @@
     <string name="poi_traffic_calming_cushion">Искусственная неровность «берлинская подушка»</string>
     <string name="poi_traffic_calming_chicane">Шикана</string>
     <string name="poi_traffic_calming_rumble_strip">Шумовые полосы</string>
-    <string name="poi_traffic_calming_table">Повышенный пешеходный переход</string>
+    <string name="poi_traffic_calming_table">Приподнятый пешеходный переход</string>
     <string name="poi_traffic_calming_choker">Сужение дороги</string>
     <string name="poi_traffic_signals">Светофор</string>
     <string name="poi_car_repair">Автосервис</string>
@@ -4326,4 +4326,5 @@
     <string name="poi_dry_cleaning_filter">Химчистка</string>
     <string name="poi_laundry_service_filter">Услуги прачечной</string>
     <string name="poi_food_no">Еда: нет</string>
+    <string name="poi_flow_rate">Скорость потока</string>
 </resources>

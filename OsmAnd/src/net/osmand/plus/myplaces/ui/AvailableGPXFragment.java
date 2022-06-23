@@ -68,6 +68,8 @@ import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -110,7 +112,6 @@ import java.util.Set;
 
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.fragments.TrackMenuFragment.openTrack;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
@@ -355,7 +356,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				public void onClick(View v) {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						openTrack(activity, null, storeState(), getString(R.string.shared_string_tracks));
+						TrackMenuFragment.openTrack(activity, null, storeState(), getString(R.string.shared_string_tracks));
 					}
 				}
 			});
@@ -1223,19 +1224,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				isChecked = selectedGpxFile != null;
 			}
 			checkItem.setChecked(isChecked);
-			checkItem.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					selectedGpxHelper.selectGpxFile(child.gpx, !isChecked, false);
-					notifyDataSetChanged();
+			checkItem.setOnClickListener(view -> {
+				GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
+				if (!isChecked) {
+					params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				} else {
+					params.hideFromMap();
 				}
+				selectedGpxHelper.selectGpxFile(child.gpx, params);
+				notifyDataSetChanged();
 			});
 
-			v.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onChildClick(null, v, groupPosition, childPosition, 0);
-				}
+			v.setOnClickListener(view -> {
+				onChildClick(null, view, groupPosition, childPosition, 0);
 			});
 			return v;
 		}
@@ -1553,12 +1554,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					public void onClick(View v) {
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 						builder.setMessage(R.string.recording_delete_confirm);
-						builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								operationTask = new DeleteGpxTask();
-								operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfo);
-							}
+						builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+							operationTask = new DeleteGpxTask();
+							operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfo);
 						});
 						builder.setNegativeButton(R.string.shared_string_cancel, null);
 						builder.show();
@@ -1667,7 +1665,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		GpxInfo item = allGpxAdapter.getChild(groupPosition, childPosition);
 
 		if (!selectionMode) {
-			openTrack(getActivity(), item.file, storeState(), getString(R.string.shared_string_tracks));
+			TrackMenuFragment.openTrack(getActivity(), item.file, storeState(), getString(R.string.shared_string_tracks));
 		} else {
 			if (!selectedItems.contains(item)) {
 				selectedItems.add(item);
