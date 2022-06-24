@@ -68,9 +68,6 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 						if (tileReadyCallback.isReady()) {
 							break;
 						}
-						if (request.getQueryController().isAborted()) {
-							return SwigUtilities.emptyQByteArray();
-						}
 						try {
 							tileReadyCallback.getSync().wait(50);
 						} catch (InterruptedException ignored) {
