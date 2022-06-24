@@ -48,7 +48,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 			favoritesHelper.addFavourite(favourite, false);
 		}
 		favoritesHelper.sortAll();
-		favoritesHelper.saveCurrentPointsIntoFile(false);
+		favoritesHelper.saveCurrentPointsIntoFile();
 	}
 
 	public static void checkDuplicateNames(List<FavouritePoint> favourites) {

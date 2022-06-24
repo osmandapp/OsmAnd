@@ -143,7 +143,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				favoritesHelper.addFavourite(favourite, false, false);
 			}
 			favoritesHelper.sortAll();
-			favoritesHelper.saveCurrentPointsIntoFile(false);
+			favoritesHelper.saveCurrentPointsIntoFile();
 			favoritesHelper.loadFavorites();
 		}
 	}
