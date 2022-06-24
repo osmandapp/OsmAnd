@@ -521,9 +521,19 @@ public class ApplicationMode {
 		}
 	}
 
-	public void setCustomIconColor(Integer customIconColor) {
-		String valueToSave = customIconColor == null ? null : Algorithms.colorToString(customIconColor);
-		app.getSettings().CUSTOM_ICON_COLOR.setModeValue(this, valueToSave);
+	public void updateCustomIconColor(@Nullable Integer color) {
+		if (!setCustomIconColor(color)) {
+			app.getSettings().CUSTOM_ICON_COLOR.resetModeToDefault(this);
+		}
+	}
+
+	public boolean setCustomIconColor(@Nullable Integer color) {
+		if (color != null) {
+			String valueToSave = Algorithms.colorToString(color);
+			app.getSettings().CUSTOM_ICON_COLOR.setModeValue(this, valueToSave);
+			return true;
+		}
+		return false;
 	}
 
 	public int getOrder() {

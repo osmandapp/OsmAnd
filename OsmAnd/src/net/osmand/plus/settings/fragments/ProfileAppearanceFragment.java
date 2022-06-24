@@ -42,13 +42,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
@@ -64,6 +60,10 @@ import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExport
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -263,20 +263,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 			UiUtilities.setupDialogButton(isNightMode(), saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
 
-			cancelButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					goBackWithoutSaving();
-				}
+			cancelButton.setOnClickListener(v -> {
+				goBackWithoutSaving();
 			});
-			saveButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (getActivity() != null) {
-						hideKeyboard();
-						if (isChanged() && checkProfileName()) {
-							saveProfile();
-						}
+			saveButton.setOnClickListener(v -> {
+				if (getActivity() != null) {
+					hideKeyboard();
+					if (isChanged() && checkProfileName()) {
+						saveProfile();
 					}
 				}
 			});
@@ -382,13 +376,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 					}
 				}
 			});
-			profileName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-				@Override
-				public void onFocusChange(View v, boolean hasFocus) {
-					if (hasFocus) {
-						profileName.setSelection(profileName.getText().length());
-						AndroidUtils.showSoftKeyboard(getMyActivity(), profileName);
-					}
+			profileName.setOnFocusChangeListener((v, hasFocus) -> {
+				if (hasFocus) {
+					profileName.setSelection(profileName.getText().length());
+					AndroidUtils.showSoftKeyboard(getMyActivity(), profileName);
 				}
 			});
 			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT) && !isNewProfile) {
@@ -406,18 +397,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			OsmandTextFieldBoxes baseProfileNameHint = (OsmandTextFieldBoxes) holder.findViewById(R.id.master_profile_otfb);
 			baseProfileNameHint.setLabelText(getString(R.string.profile_type_osmand_string));
 			FrameLayout selectNavTypeBtn = (FrameLayout) holder.findViewById(R.id.select_nav_type_btn);
-			selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (isNewProfile) {
-						hideKeyboard();
-						if (getActivity() != null) {
-							String selected = changedProfile.parent != null ?
-									changedProfile.parent.getStringKey() : null;
-							SelectBaseProfileBottomSheet.showInstance(
-									getActivity(),ProfileAppearanceFragment.this,
-									getSelectedAppMode(), selected, false);
-						}
+			selectNavTypeBtn.setOnClickListener(v -> {
+				if (isNewProfile) {
+					hideKeyboard();
+					if (getActivity() != null) {
+						String selected = changedProfile.parent != null ?
+								changedProfile.parent.getStringKey() : null;
+						SelectBaseProfileBottomSheet.showInstance(
+								getActivity(),ProfileAppearanceFragment.this,
+								getSelectedAppMode(), selected, false);
 					}
 				}
 			});
@@ -513,12 +501,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		AndroidUtils.setBackground(coloredCircle,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
 						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
-		coloredCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (iconRes != changedProfile.iconRes) {
-					updateIconSelector(iconRes);
-				}
+		coloredCircle.setOnClickListener(v -> {
+			if (iconRes != changedProfile.iconRes) {
+				updateIconSelector(iconRes);
 			}
 		});
 		iconItemView.findViewById(R.id.outline).setVisibility(View.GONE);
@@ -555,14 +540,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
 						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
-		coloredRect.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (locationIcon != changedProfile.locationIcon) {
-					setVerticalScrollBarEnabled(false);
-					updateLocationIconSelector(locationIcon);
-					setVerticalScrollBarEnabled(true);
-				}
+		coloredRect.setOnClickListener(v -> {
+			if (locationIcon != changedProfile.locationIcon) {
+				setVerticalScrollBarEnabled(false);
+				updateLocationIconSelector(locationIcon);
+				setVerticalScrollBarEnabled(true);
 			}
 		});
 		ImageView outlineRect = locationIconView.findViewById(R.id.outlineRect);
@@ -603,14 +585,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
 						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
-		coloredRect.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (navigationIcon != changedProfile.navigationIcon) {
-					setVerticalScrollBarEnabled(false);
-					updateNavigationIconSelector(navigationIcon);
-					setVerticalScrollBarEnabled(true);
-				}
+		coloredRect.setOnClickListener(v -> {
+			if (navigationIcon != changedProfile.navigationIcon) {
+				setVerticalScrollBarEnabled(false);
+				updateNavigationIconSelector(navigationIcon);
+				setVerticalScrollBarEnabled(true);
 			}
 		});
 		ImageView outlineRect = navigationIconView.findViewById(R.id.outlineRect);
@@ -662,12 +641,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void setVerticalScrollBarEnabled(boolean enabled) {
 		final RecyclerView preferenceListView = getListView();
 		if (enabled) {
-			preferenceListView.post(new Runnable() {
-				@Override
-				public void run() {
-					preferenceListView.setVerticalScrollBarEnabled(true);
-				}
-			});
+			preferenceListView.post(() -> preferenceListView.setVerticalScrollBarEnabled(true));
 		} else {
 			preferenceListView.setVerticalScrollBarEnabled(false);
 		}
@@ -733,19 +707,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void saveProfile() {
 		profile = changedProfile;
 		if (isNewProfile) {
-			DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
-
-				@Override
-				public void onShow(DialogInterface dialog) {
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							ApplicationMode mode = saveNewProfile();
-							saveProfileBackup(mode);
-						}
-					});
-				}
-			};
+			DialogInterface.OnShowListener showListener = dialog -> app.runInUIThread(() -> {
+				ApplicationMode mode = saveNewProfile();
+				saveProfileBackup(mode);
+			});
 			showNewProfileSavingDialog(showListener);
 		} else {
 			ApplicationMode mode = getSelectedAppMode();
@@ -755,7 +720,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			mode.setRoutingProfile(changedProfile.routingProfile);
 			mode.setRouteService(changedProfile.routeService);
 			mode.setIconColor(changedProfile.color);
-			mode.setCustomIconColor(changedProfile.customColor);
+			mode.updateCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
 
@@ -826,7 +791,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	private void dismissProfileSavingDialog() {
 		FragmentActivity activity = getActivity();
-		if (progress != null && activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+		if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 			progress.dismiss();
 		}
 	}
@@ -874,12 +839,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
-			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					changedProfile = profile;
-					goBackWithoutSaving();
-				}
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> {
+				changedProfile = profile;
+				goBackWithoutSaving();
 			});
 			dismissDialog.show();
 		} else {
