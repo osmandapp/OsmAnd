@@ -27,7 +27,6 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -44,10 +43,8 @@ import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -298,24 +295,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-
-		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, Arrays.asList(WidgetsPanel.values()));
-		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, null, false);
-		}
-		settings.MAP_INFO_CONTROLS.resetModeToDefault(selectedAppMode);
-		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(selectedAppMode);
-
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			panel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
-		}
-
-		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(selectedAppMode);
-		settings.SHOW_COMPASS_ALWAYS.resetModeToDefault(selectedAppMode);
-		settings.SHOW_DISTANCE_RULER.resetModeToDefault(selectedAppMode);
-		settings.QUICK_ACTION.resetModeToDefault(selectedAppMode);
-
+		WidgetsSettingsHelper.resetConfigureScreenSettings(mapActivity, selectedAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
 	}
@@ -326,20 +306,9 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-
-		WidgetsSettingsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Arrays.asList(WidgetsPanel.values()));
-
-		copyPreferenceFromAppMode(settings.TRANSPARENT_MAP_THEME, appMode);
-		copyPreferenceFromAppMode(settings.SHOW_COMPASS_ALWAYS, appMode);
-		copyPreferenceFromAppMode(settings.SHOW_DISTANCE_RULER, appMode);
-		copyPreferenceFromAppMode(settings.QUICK_ACTION, appMode);
-
+		WidgetsSettingsHelper.copyConfigureScreenSettings(mapActivity, appMode, selectedAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
-	}
-
-	private <T> void copyPreferenceFromAppMode(@NonNull OsmandPreference<T> pref, @NonNull ApplicationMode fromAppMode) {
-		pref.setModeValue(selectedAppMode, pref.getModeValue(fromAppMode));
 	}
 
 	private void recreateControlsCompletely(@NonNull MapActivity mapActivity) {

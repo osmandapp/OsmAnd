@@ -4,6 +4,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
@@ -13,6 +14,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +33,44 @@ public class WidgetsSettingsHelper {
 
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapWidgetsFactory widgetsFactory;
+
+	public static void resetConfigureScreenSettings(@NonNull MapActivity mapActivity,
+	                                                @NonNull ApplicationMode appMode) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+
+		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry
+				.getWidgetsForPanel(mapActivity, appMode, 0, Arrays.asList(WidgetsPanel.values()));
+		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
+			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, null, false);
+		}
+		settings.MAP_INFO_CONTROLS.resetModeToDefault(appMode);
+		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(appMode);
+
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			panel.getOrderPreference(settings).resetModeToDefault(appMode);
+		}
+
+		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(appMode);
+		settings.SHOW_COMPASS_ALWAYS.resetModeToDefault(appMode);
+		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
+		settings.QUICK_ACTION.resetModeToDefault(appMode);
+	}
+
+	public static void copyConfigureScreenSettings(@NonNull MapActivity mapActivity,
+	                                               @NonNull ApplicationMode fromAppMode,
+	                                               @NonNull ApplicationMode toAppMode) {
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		WidgetsSettingsHelper widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, toAppMode);
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, panel);
+		}
+		widgetsSettingsHelper.copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
+		widgetsSettingsHelper.copyPrefFromAppMode(settings.SHOW_COMPASS_ALWAYS, fromAppMode);
+		widgetsSettingsHelper.copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
+		widgetsSettingsHelper.copyPrefFromAppMode(settings.QUICK_ACTION, fromAppMode);
+	}
 
 	public static void copyWidgets(@NonNull MapActivity mapActivity,
 	                               @NonNull ApplicationMode fromAppMode,
@@ -157,5 +197,9 @@ public class WidgetsSettingsHelper {
 		boolean original = WidgetType.isOriginalWidget(widgetInfo.key);
 		WidgetType widgetType = widgetInfo.widget.getWidgetType();
 		return original && widgetType != null && widgetType.defaultPanel != widgetInfo.widgetPanel;
+	}
+
+	private <T> void copyPrefFromAppMode(@NonNull OsmandPreference<T> pref, @NonNull ApplicationMode fromAppMode) {
+		pref.setModeValue(appMode, pref.getModeValue(fromAppMode));
 	}
 }
