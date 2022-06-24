@@ -4691,12 +4691,12 @@
     <string name="kg">公斤</string>
     <string name="routing_attr_motor_type_electric_name">電力</string>
     <string name="routing_attr_motor_type_hybrid_name">混合動力</string>
-    <string name="routing_attr_motor_type_description">用於二氧化碳計算</string>
+    <string name="routing_attr_motor_type_description">選擇您的汽車引擎使用的燃料類型，以計算二氧化碳排放量。</string>
     <string name="routing_attr_motor_type_diesel_name">柴油</string>
     <string name="routing_attr_motor_type_petrol_name">汽油</string>
     <string name="routing_attr_motor_type_lpg_name">液化石油氣</string>
     <string name="routing_attr_motor_type_gas_name">天然氣</string>
-    <string name="routing_attr_motor_type_name">馬達類型</string>
+    <string name="routing_attr_motor_type_name">引擎使用的燃料</string>
     <string name="lang_ckb">中庫德語</string>
     <string name="updated_map_time">已更新：%1$s。</string>
     <string name="includes_osm_changes_until">包含在 %1$s 之前所作的 OSM 變更。</string>
@@ -4718,4 +4718,5 @@
     <string name="goods_delivery_desc_3">僅適用於至少有四個輪子且載重量不超過 3.5 公噸貨物的車輛。</string>
     <string name="reset_all_settings_desc">您確定您要將所有設定重設為預設值？</string>
     <string name="goods_delivery_desc">可以限制運輸貨物的車輛進入某些道路。</string>
+    <string name="routing_attr_goods_restrictions_name">貨運</string>
 </resources>

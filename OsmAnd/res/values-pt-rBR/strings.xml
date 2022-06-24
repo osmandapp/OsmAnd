@@ -3181,7 +3181,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">Intermediária</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Avançado</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Perito</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Ciclismo livre</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
@@ -3921,7 +3921,7 @@
     <string name="select_folder">Selecione a pasta</string>
     <string name="select_folder_descr">Selecione a pasta ou adicione uma nova</string>
     <string name="shared_string_empty">Vazio</string>
-    <string name="analyze_by_intervals">Analisar intervalos de divisão</string>
+    <string name="analyze_by_intervals">Analise por intervalos</string>
     <string name="upload_to_openstreetmap">Carregar para OpenStreetMap</string>
     <string name="edit_track">Editar trilha</string>
     <string name="rename_track">Renomear trilha</string>
@@ -3969,7 +3969,7 @@
     <string name="open_place_reviews_plugin_description">Envie fotos, comentários e links sobre locais públicos, como restaurantes, hotéis, museus e pontos de referência como dados abertos https://openplacereviews.org/data/.
 \n
 \nLeia mais em http://openplacereviews.org</string>
-    <string name="activity_type_motorbike_name">Motorbike</string>
+    <string name="activity_type_motorbike_name">Motocicleta</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Entrar para OpenPlaceReviews</string>
@@ -4051,7 +4051,7 @@
     <string name="contact_support">Contatar o suporte</string>
     <string name="troubleshooting">Solução de problemas</string>
     <string name="troubleshooting_description">Por favor, siga este link se tiver problemas com as compras.</string>
-    <string name="osmand_live">OsmAnd Live</string>
+    <string name="osmand_live">OsmAnd Em tempo real</string>
     <string name="annual_subscription">Assinatura anual</string>
     <string name="monthly_subscription">Assinatura mensal</string>
     <string name="three_months_subscription">Três meses de assinatura</string>
@@ -4474,8 +4474,8 @@
     <string name="use_routing_fallback_description">Use o roteamento offline enquanto o roteamento online não estiver disponível.</string>
     <string name="use_routing_fallback">Retorno de roteamento offline</string>
     <string name="waypoint_template">Modelo de ponto de trajeto</string>
-    <string name="always_ask_waypoint_appearance_description">Gravar a ação abrirá a tela “Adicionar ponto de trajeto”, onde você pode alterar o nome e a aparência.</string>
-    <string name="predefined_waypoint_appearance_description">Tocar na ação salvará automaticamente o ponto de trajeto com parâmetros predefinidos.</string>
+    <string name="always_ask_waypoint_appearance_description">Tocar nessa ação abrirá a tela “Adicionar ponto de trajeto”, onde você pode alterar o nome e a aparência.</string>
+    <string name="predefined_waypoint_appearance_description">Tocar nessa ação salvará automaticamente o ponto de trajeto com parâmetros predefinidos.</string>
     <string name="track_file">Arquivo de trilha</string>
     <string name="waypoint_appearance">Aparência do ponto de trajeto</string>
     <string name="track_file_description">Tocar nesta ação mostrará um diálogo de seleção de trilhas disponíveis.</string>
@@ -4487,9 +4487,9 @@
     <string name="files_with_route_restrictions">Arquivos com restrições de rota</string>
     <string name="shared_string_not_used">Não usado</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="save_track_to_gpx_descrp">Inicie a gravação da trilha automaticamente enquanto a navegação estiver em andamento. Quando terminar, a faixa será salva automaticamente.</string>
+    <string name="save_track_to_gpx_descrp">Iniciar automaticamente a gravação da faixa enquanto navega e salvar automaticamente depois.</string>
     <string name="rendering_attr_seabedDetail_name">Detalhe do fundo do mar</string>
-    <string name="rendering_attr_seabedDetail_description">Informações de texto adicionais sobre qualificação_superfície do fundo do mar, tipos de superfície combinados, categoria e táxon de ervas daninhas ou ervas marinhas</string>
+    <string name="rendering_attr_seabedDetail_description">Info. de texto adicionais sobre qualificação_superfície do fundo do mar, tipos de superfície combinados, categoria e táxon de ervas daninhas ou ervas marinhas</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omitir</string>
@@ -4499,7 +4499,7 @@
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis hidroviários</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
     <string name="gpx_no_routes_title">Não há rotas</string>
-    <string name="gpx_no_routes_descr">Pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
+    <string name="gpx_no_routes_descr">Você pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="stop_download_desc">O download não está completo. Se você interromper o download agora, apenas parte dos blocos estará disponível para visualização.</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
@@ -4533,19 +4533,19 @@
     <string name="routing_attr_avoid_4wd_only_description">Evite estradas adequadas apenas para veículos 4x4</string>
     <string name="parking_widget_desc">Este widget que mostra a distância do centro da tela até o estacionamento.</string>
     <string name="mapillary_widget_desc">Este widget fornece acesso rápido ao aplicativo Mapillary para adicionar imagens de nível de rua.</string>
-    <string name="current_time_widget_desc">Este widget mostra a hora atual do seu dispositivo.</string>
-    <string name="gps_info_widget_desc">Este widget mostra uma série de satélites que o dispositivo detecta e usa naquele momento.</string>
-    <string name="altitude_widget_desc">Este widget mostra a altura acima do nível do mar da geolocalização atual.</string>
-    <string name="max_speed_widget_desc">Este widget mostra um limite de velocidade para uma estrada em que se encontra.</string>
-    <string name="fps_widget_desc">Este widget mostra a rapidez com que os elementos do mapa são mostrados e atualizados.</string>
-    <string name="battery_widget_desc">Este widget mostra o nível da bateria do seu dispositivo.</string>
-    <string name="radius_rules_widget_desc">A ferramenta Régua de raio ajuda a determinar o raio ao redor do ponto selecionado no mapa através da exibição de círculos de distância no mapa.</string>
-    <string name="current_speed_widget_desc">Este widget mostra sua velocidade atual detectada pelo sensor GPS.</string>
+    <string name="current_time_widget_desc">Mostra a hora atual do seu dispositivo.</string>
+    <string name="gps_info_widget_desc">Mostra um número de satélites que o dispositivo detecta e usa naquele momento.</string>
+    <string name="altitude_widget_desc">Mostra a altura acima do nível do mar da geolocalização atual.</string>
+    <string name="max_speed_widget_desc">Mostra um limite de velocidade para a estrada em andamento.</string>
+    <string name="fps_widget_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados.</string>
+    <string name="battery_widget_desc">Mostra o nível da bateria do seu dispositivo.</string>
+    <string name="radius_rules_widget_desc">A ferramenta de régua de raio ajuda a determinar o raio em torno de um ponto selecionado no mapa, mostrando os círculos de distância no mapa.</string>
+    <string name="current_speed_widget_desc">Mostra sua velocidade atual detectada pelo sensor GPS.</string>
     <string name="shared_string_mode">Modo</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares</string>
     <string name="explore_plans">Explorar planos</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Você pode alternar o modo tocando no widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Alterne o modo tocando no widget.</string>
     <string name="map_widget_time_to_destination">Tempo para o destino</string>
     <string name="routing_attr_goods_restrictions_description">Considere as permissões de acesso para veículos de mercadorias leves (mercadorias)</string>
     <string name="routing_attr_motor_type_lpg_name">GLP</string>
@@ -4580,13 +4580,13 @@
     <string name="simulation_constant_mode_desc">A simulação será realizada com velocidade selecionada constante.</string>
     <string name="map_widget_distance_to_intermediate">Distância para intermediário</string>
     <string name="magnetic_bearing_widget_desc">Ângulo entre o norte magnético e o ponto alvo observado em sua localização.</string>
-    <string name="routing_attr_hazmat_category_name">Categoria de Hazmat</string>
+    <string name="routing_attr_hazmat_category_name">Categoria de Materiais perigosos</string>
     <string name="get_altitude_data">Obter dados de altitude</string>
     <string name="select_suggested_points">Selecione pontos sugeridos</string>
     <string name="number_of_tiles">Número de mosaicos</string>
     <string name="map_widget_altitude">Altitude da localização atual</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiais perigosos / Considere permissões de acesso a Hazmat</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Sem restrições</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sem restrições)</string>
     <string name="colour_of_circles">Cor dos círculos</string>
     <string name="compass_on_circles">Bússola em círculos</string>
     <string name="distance_circles">Círculos de distância</string>
@@ -4629,7 +4629,7 @@
     <string name="rendering_attr_showRunningRoutes_name">Rotas de execução</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas de corrida</string>
     <string name="default_appearance">Aparência padrão</string>
-    <string name="av_def_action_choose">Sob demanda\?</string>
+    <string name="av_def_action_choose">Sob demanda</string>
     <string name="routeInfo_horse_scale_name">Dificuldade de trilhas de cavalos</string>
     <string name="rendering_attr_showTramRoutes_name">Rotas de bonde</string>
     <string name="av_notes_choose_action_widget_desc">Escolher ação.</string>
@@ -4648,8 +4648,8 @@
     <string name="rendering_attr_horseScale_name">Dificuldade de trilhas de cavalos</string>
     <string name="routing_attr_avoid_highway_name">Evitar autoestradas</string>
     <string name="map_widget_trip_recording_uphill">Subida</string>
-    <string name="routing_attr_motor_type_name">Tipo de motor</string>
-    <string name="routing_attr_motor_type_description">Para computação de CO2</string>
+    <string name="routing_attr_motor_type_name">Combustível usado pelo motor</string>
+    <string name="routing_attr_motor_type_description">Selecione o tipo de combustível usado pelo seu veículo para calcular a emissão de CO2.</string>
     <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
     <string name="average_speed_skip_stops">Faça paradas em consideração</string>
     <string name="map_widget_trip_recording_distance">Distância</string>
@@ -4658,7 +4658,7 @@
     <string name="map_markers_desc">No widget da barra superior, você pode ver a distância e a direção do marcador do local atual. É possível configurar ver 1 ou 2 marcadores superiores no widget.</string>
     <string name="route_maneuvers">Manobras de rota</string>
     <string name="calculating_altitude">Calculando a altitude</string>
-    <string name="calculate_online_altitude_descr">Os dados de altitude serão calculados no servidor Osmand.</string>
+    <string name="calculate_online_altitude_descr">Calcule a altitude online nos servidores do OsmAnd com base em imagens de satélite e modelos digitais de elevação. Pode variar de acordo com a altitude registrada pelo dispositivo e pode ser usado como correção de altitude.</string>
     <string name="no_altitude_data">Sem dados de altitude</string>
     <string name="apply_to_existing">Aplicar-se a existir</string>
     <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
@@ -4684,4 +4684,42 @@
     <string name="simulation_real_mode_desc">Nas seções retas da estrada, a velocidade será aproximada à velocidade máxima permitida.
 \nNos cruzamentos, a simulação desacelerará.
 \nPenalidades extras serão aplicadas em sinais de trânsito, sinais de parada, etc.</string>
+    <string name="calculate_online">Calcular on-line</string>
+    <string name="calculate_altitude">Calcular altitude</string>
+    <string name="lang_sat">Santáli</string>
+    <string name="routing_attr_goods_restrictions_name">Entrega de mercadorias</string>
+    <string name="map_marker_average_speed_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular o tempo estimado de chegada.</string>
+    <string name="switch_widget_mode_desc">Você pode alternar o modo tocando no widget.</string>
+    <string name="side_marker_eta">Tempo estimado de chegada</string>
+    <string name="goods_delivery_desc_4">Se o peso do seu veículo for superior a 3,5 toneladas, você precisa usar o perfil Caminhão.</string>
+    <string name="goods_delivery_desc_2">Estradas fechadas para entrega de mercadorias serão evitadas.</string>
+    <string name="updated_map_time">Atualizado: %1$s.</string>
+    <string name="includes_osm_changes_until">Inclui alterações no OSM feitas até %1$s.</string>
+    <string name="altitude_correction">Correção de altitude</string>
+    <string name="live_update_frequency_day_variant">As atualizações do mapa serão verificadas todos os dias.</string>
+    <string name="reset_all_settings_desc">Tem certeza de que deseja redefinir todas as configurações para o padrão\?</string>
+    <string name="no_altitude_data_desc">Você pode anexar sua trilha às estradas para obter dados de %1$s ou calculá-los online.</string>
+    <string name="marker_1st">Primeiro marcador</string>
+    <string name="next_live_update_date_and_time">Próxima atualização: %1$s em %2$s.</string>
+    <string name="next_live_update_time">Próxima atualização: em %1$s.</string>
+    <string name="marker_2nd">Segundo marcador</string>
+    <string name="goods_delivery_desc_3">Aplica-se apenas a veículos que transportem mercadorias com pelo menos quatro rodas e peso não superior a 3,5 toneladas.</string>
+    <string name="goods_delivery_desc">Veículos de transporte de mercadorias podem ter o acesso restrito em algumas estradas.</string>
+    <string name="routing_attr_motor_type_gas_name">GNV</string>
+    <string name="map_markers_bar">Barra de marcadores do mapa</string>
+    <string name="map_widget_true_bearing">Rolamento verdadeiro</string>
+    <string name="routing_attr_avoid_fords_name">Evite fords</string>
+    <string name="routing_attr_avoid_fords_description">Evite fords</string>
+    <string name="radius_ruler_mode_desc">Tocar no widget muda para o modo de régua de raio.</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas de correção</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas de correção</string>
+    <string name="live_update_frequency_week_variant">As atualizações do mapa serão verificadas todas as semanas.</string>
+    <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhas de exercícios</string>
+    <string name="app_mode_mountain_bicycle">Bicicleta de montanha</string>
+    <string name="rendering_attr_showFitnessTrails_name">Trilhas de exercícios</string>
+    <string name="live_update_frequency_hour_variant">As atualizações do mapa serão verificadas a cada hora.</string>
+    <string name="kg">kg</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Rotas de trilha leve</string>
+    <string name="selected_waypoints_descr">Os pontos de passagem selecionados serão adicionados à trilha \"%1$s\"</string>
+    <string name="please_provide_group_name_message">Por favor, nomeie o grupo.</string>
 </resources>
