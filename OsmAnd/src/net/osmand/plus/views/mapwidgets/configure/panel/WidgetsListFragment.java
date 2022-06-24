@@ -27,7 +27,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
-import net.osmand.plus.views.mapwidgets.configure.CopyWidgetsHelper;
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
@@ -177,28 +177,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			return;
 		}
 
-		List<WidgetsPanel> panels = Collections.singletonList(selectedPanel);
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, panels);
-		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			Boolean newEnableState = isOriginalWidgetOnAnotherPanel(widgetInfo)
-					? false // Disable (not reset), because widget can be enabled by default
-					: null;
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, newEnableState, false);
-		}
-		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
+		WidgetsSettingsHelper.resetWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateAllControls(mapActivity);
 		}
 		updateContent();
-	}
-
-	private boolean isOriginalWidgetOnAnotherPanel(@NonNull MapWidgetInfo widgetInfo) {
-		boolean original = WidgetType.isOriginalWidget(widgetInfo.key);
-		WidgetType widgetType = widgetInfo.widget.getWidgetType();
-		return original && widgetType != null && widgetType.defaultPanel != widgetInfo.widgetPanel;
 	}
 
 	@Override
@@ -208,7 +193,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			return;
 		}
 
-		CopyWidgetsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Collections.singletonList(selectedPanel));
+		WidgetsSettingsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Collections.singletonList(selectedPanel));
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {

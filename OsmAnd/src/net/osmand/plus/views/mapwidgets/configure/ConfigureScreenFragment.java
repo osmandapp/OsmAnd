@@ -327,7 +327,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			return;
 		}
 
-		CopyWidgetsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Arrays.asList(WidgetsPanel.values()));
+		WidgetsSettingsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Arrays.asList(WidgetsPanel.values()));
 
 		copyPreferenceFromAppMode(settings.TRANSPARENT_MAP_THEME, appMode);
 		copyPreferenceFromAppMode(settings.SHOW_COMPASS_ALWAYS, appMode);

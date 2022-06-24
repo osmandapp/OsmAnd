@@ -23,12 +23,11 @@ import androidx.annotation.Nullable;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
-public class CopyWidgetsHelper {
+public class WidgetsSettingsHelper {
 
 	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
-	private final ApplicationMode fromAppMode;
-	private final ApplicationMode toAppMode;
+	private final ApplicationMode appMode;
 
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapWidgetsFactory widgetsFactory;
@@ -37,26 +36,30 @@ public class CopyWidgetsHelper {
 	                               @NonNull ApplicationMode fromAppMode,
 	                               @NonNull ApplicationMode toAppMode,
 	                               @NonNull List<WidgetsPanel> targetPanels) {
-		CopyWidgetsHelper copyWidgetsHelper = new CopyWidgetsHelper(mapActivity, fromAppMode, toAppMode);
+		WidgetsSettingsHelper widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, toAppMode);
 		for (WidgetsPanel panel : targetPanels) {
-			copyWidgetsHelper.copyWidgetsForPanel(panel);
+			widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, panel);
 		}
 	}
 
-	private CopyWidgetsHelper(@NonNull MapActivity mapActivity,
-	                          @NonNull ApplicationMode fromAppMode,
-	                          @NonNull ApplicationMode toAppMode) {
+	public static void resetWidgetsForPanel(@NonNull MapActivity mapActivity,
+	                                        @NonNull ApplicationMode appMode,
+	                                        @NonNull WidgetsPanel panel) {
+		WidgetsSettingsHelper widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
+		widgetsSettingsHelper.resetWidgetsForPanel(panel);
+	}
+
+	private WidgetsSettingsHelper(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
-		this.fromAppMode = fromAppMode;
-		this.toAppMode = toAppMode;
+		this.appMode = appMode;
 		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		this.widgetsFactory = new MapWidgetsFactory(mapActivity);
 	}
 
-	private void copyWidgetsForPanel(@NonNull WidgetsPanel panel) {
+	private void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		List<MapWidgetInfo> defaultWidgetInfos = getDefaultWidgetInfos(panel);
 		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry
@@ -65,7 +68,7 @@ public class CopyWidgetsHelper {
 		int previousPage = -1;
 
 		for (MapWidgetInfo widgetInfoToCopy : widgetInfosToCopy) {
-			if (!toAppMode.isWidgetAvailable(widgetInfoToCopy.key)) {
+			if (!appMode.isWidgetAvailable(widgetInfoToCopy.key)) {
 				continue;
 			}
 
@@ -76,10 +79,10 @@ public class CopyWidgetsHelper {
 
 			if (defaultWidgetInfo != null) {
 				String widgetIdToAdd;
-				boolean disabled = !defaultWidgetInfo.isEnabledForAppMode(toAppMode);
+				boolean disabled = !defaultWidgetInfo.isEnabledForAppMode(appMode);
 				boolean inAnotherPanel = defaultWidgetInfo.widgetPanel != panel;
 				if (duplicateNotPossible || (disabled && !inAnotherPanel)) {
-					widgetRegistry.enableDisableWidgetForMode(toAppMode, defaultWidgetInfo, true, false);
+					widgetRegistry.enableDisableWidgetForMode(appMode, defaultWidgetInfo, true, false);
 					widgetIdToAdd = defaultWidgetInfo.key;
 				} else {
 					MapWidgetInfo duplicateWidgetInfo = createDuplicateWidgetInfo(widgetTypeToCopy, panel);
@@ -96,20 +99,20 @@ public class CopyWidgetsHelper {
 			}
 		}
 
-		panel.setWidgetsOrder(toAppMode, newPagedOrder, settings);
+		panel.setWidgetsOrder(appMode, newPagedOrder, settings);
 	}
 
 	@NonNull
 	private List<MapWidgetInfo> getDefaultWidgetInfos(@NonNull WidgetsPanel panel) {
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, toAppMode, 0, panel.getMergedPanels());
+				.getWidgetsForPanel(mapActivity, appMode, 0, panel.getMergedPanels());
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			if (widgetInfo.widgetPanel == panel) {
 				Boolean visibility = WidgetType.isOriginalWidget(widgetInfo.key) ? false : null;
-				widgetRegistry.enableDisableWidgetForMode(toAppMode, widgetInfo, visibility, false);
+				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, visibility, false);
 			}
 		}
-		panel.getOrderPreference(settings).resetModeToDefault(toAppMode);
+		panel.getOrderPreference(settings).resetModeToDefault(appMode);
 		return new ArrayList<>(widgetInfos);
 	}
 
@@ -118,10 +121,10 @@ public class CopyWidgetsHelper {
 		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType.id);
 		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType);
 		if (duplicateWidget != null) {
-			settings.CUSTOM_WIDGETS_KEYS.addModeValue(toAppMode, duplicateWidgetId);
+			settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
 			MapWidgetInfo duplicateWidgetInfo = widgetRegistry.createCustomWidget(duplicateWidgetId,
-					duplicateWidget, widgetType, panel, toAppMode);
-			widgetRegistry.enableDisableWidgetForMode(toAppMode, duplicateWidgetInfo, true, false);
+					duplicateWidget, widgetType, panel, appMode);
+			widgetRegistry.enableDisableWidgetForMode(appMode, duplicateWidgetInfo, true, false);
 			return duplicateWidgetInfo;
 		}
 		return null;
@@ -135,5 +138,24 @@ public class CopyWidgetsHelper {
 			}
 		}
 		return null;
+	}
+
+	private void resetWidgetsForPanel(@NonNull WidgetsPanel panel) {
+		List<WidgetsPanel> panels = Collections.singletonList(panel);
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry
+				.getWidgetsForPanel(mapActivity, appMode, 0, panels);
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
+			Boolean newEnableState = isOriginalWidgetOnAnotherPanel(widgetInfo)
+					? false // Disable (not reset), because visible by default widget should be disabled in non-default panel
+					: null;
+			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, newEnableState, false);
+		}
+		panel.getOrderPreference(settings).resetModeToDefault(appMode);
+	}
+
+	private boolean isOriginalWidgetOnAnotherPanel(@NonNull MapWidgetInfo widgetInfo) {
+		boolean original = WidgetType.isOriginalWidget(widgetInfo.key);
+		WidgetType widgetType = widgetInfo.widget.getWidgetType();
+		return original && widgetType != null && widgetType.defaultPanel != widgetInfo.widgetPanel;
 	}
 }
