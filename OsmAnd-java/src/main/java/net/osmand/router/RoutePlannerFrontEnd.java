@@ -951,18 +951,18 @@ public class RoutePlannerFrontEnd {
 					rlist.add(rr);
 				}
 			}
-			runRecalculation = rlist.size() > 0;
+
 			if (rlist.size() > 0) {
 				RouteSegment previous = null;
-				for (int i = 0; i <= rlist.size() - 1; i++) {
+    				for (int i = 0; i < rlist.size(); i++) {
 					RouteSegmentResult rr = rlist.get(i);
 					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(), rr.getEndPointIndex());
 					if (previous != null) {
 						previous.setParentRoute(segment);
 					} else {
-						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0); 
+						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0);
 					}
-					previous = segment;
+					previous = previous == null ? recalculationEnd : segment;
 				}
 			}
 		}
@@ -989,13 +989,13 @@ public class RoutePlannerFrontEnd {
 		// long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
-		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
+		List<RouteSegmentResult> result = new ArrayList<>(Arrays.asList(res));
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;
 			while (current.getParentRoute() != null) {
 				RouteSegment pr = current.getParentRoute();
-				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentEnd(), pr.getSegmentStart()));
+				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentStart(), pr.getSegmentEnd()));
 				current = pr;
 			}
 		}
