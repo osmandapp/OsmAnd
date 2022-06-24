@@ -53,7 +53,6 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.SyncGroupTask;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -115,8 +114,7 @@ import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATT
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 
-public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt>,
-		SyncGroupTask.OnGroupSyncedListener, MapMarkersHelper.GpxSaveListener {
+public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
@@ -182,9 +180,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
-	private boolean syncWithMarker = false;
-	private int hiddenWptGroupCountCached = 0;
-	private boolean appliedNewPosition = false;
 
 	private ContextMenuLayer contextMenuLayer;
 	@ColorInt
@@ -229,8 +224,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		defaultTrackWidthPref = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).cache();
 
 		initUI();
-		mapMarkersHelper.addSyncListener(this);
-		mapMarkersHelper.addGpxSaveListener(this);
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
@@ -337,8 +330,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null)
 		{
-			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || syncWithMarker;
-			syncWithMarker = false;
+			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified;
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
 			}
@@ -813,26 +805,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 
 			int pointsCount = 0;
-			int hiddenWptGroupCount = 0;
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				pointsCount += getSelectedFilePointsSize(g);
-				hiddenWptGroupCount += g.getHiddenGroups().size();
 			}
 			boolean textVisible = isTextVisible();
 			boolean changeMarkerPositionMode = contextMenuLayer.isInChangeMarkerPositionMode();
-			if (changeMarkerPositionMode != changeMarkerPositionModeCached && appliedNewPosition) {
-				// skip double rendering (wait forceUpdate)
-				appliedNewPosition = false;
-				return;
-			}
 			if (!forceUpdate && pointCountCached == pointsCount && textVisible == textVisibleCached
-					&& changeMarkerPositionModeCached == changeMarkerPositionMode && !mapActivityInvalidated
-					&& hiddenWptGroupCount == hiddenWptGroupCountCached) {
+					&& changeMarkerPositionModeCached == changeMarkerPositionMode && !mapActivityInvalidated) {
 				return;
 			}
 			pointCountCached = pointsCount;
 			textVisibleCached = textVisible;
-			hiddenWptGroupCountCached = hiddenWptGroupCount;
 			changeMarkerPositionModeCached = changeMarkerPositionMode;
 			clearPoints();
 
@@ -854,15 +837,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								continue;
 							}
 						}
-						int color;
+						int colorBigPoint = getPointColor(wpt, fileColor);
+						int colorSmallPoint;
 						boolean history = false;
 						if (marker != null && marker.history) {
-							color = grayColor;
+							colorSmallPoint = grayColor;
 							history = true;
 						} else {
-							color = getPointColor(wpt, fileColor);
+							colorSmallPoint = getPointColor(wpt, fileColor);
 						}
-						pointsTileProvider.addToData(wpt, color, true, marker != null, history, textScale);
+						pointsTileProvider.addToData(wpt, colorBigPoint, colorSmallPoint, true, marker != null, history, textScale);
 					}
 					if (wpt == contextMenuLayer.getMoveableObject()) {
 						pointFileMap.put(wpt, g);
@@ -1694,7 +1678,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						}
 					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
-				appliedNewPosition = true;
 			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
@@ -1706,35 +1689,5 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (group != null) {
 			mapMarkersHelper.runSynchronization(group);
 		}
-	}
-
-	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
-		mapMarkersHelper.removeSyncListener(this);
-		mapMarkersHelper.removeGpxSaveListener(this);
-		clearXAxisPoints();
-		clearSelectedFilesSplits();
-		clearPoints();
-	}
-
-	@Override
-	public void onSyncStarted() {
-	}
-
-	@Override
-	public void onSyncDone() {
-		if (!appliedNewPosition) {
-			syncWithMarker = true;
-		}
-	}
-
-	@Override
-	public void onGpxSaveStarted() {
-	}
-
-	@Override
-	public void onGpxSaveFinished() {
-		syncWithMarker = true;
 	}
 }

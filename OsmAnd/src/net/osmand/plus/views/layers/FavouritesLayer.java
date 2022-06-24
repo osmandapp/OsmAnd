@@ -18,13 +18,10 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.SyncGroupTask;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
@@ -46,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
-		IMoveObjectProvider, MapTextProvider<FavouritePoint>, FavoritesListener, SyncGroupTask.OnGroupSyncedListener {
+		IMoveObjectProvider, MapTextProvider<FavouritePoint>, FavoritesListener {
 
 	private static final int START_ZOOM = 6;
 
@@ -65,7 +62,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean textVisible = false;
 	private boolean nightMode = false;
 	private boolean changeMarkerPositionMode;
-	private boolean appliedNewPosition = false;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
@@ -87,8 +83,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		grayColor = ContextCompat.getColor(getContext(), R.color.color_favorite_gray);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		favouritesHelper.addListener(this);
-		mapMarkersHelper.addSyncListener(this);
-		addMapsInitializedListener();
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -99,7 +93,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void destroyLayer() {
 		super.destroyLayer();
 		favouritesHelper.removeListener(this);
-		mapMarkersHelper.removeSyncListener(this);
 		clearFavorites();
 	}
 
@@ -121,12 +114,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				showFavorites();
 			}
 		} else if (changeMarkerPositionMode) {
-			if (!appliedNewPosition) {
-				// cancel
-				showFavorites();
-			}
 			changeMarkerPositionMode = false;
-			appliedNewPosition = false;
+			showFavorites();
 		}
 	}
 
@@ -260,13 +249,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								continue;
 							}
 						}
-						int color;
-						if ((marker != null && marker.history)) {
-							color = grayColor;
-						} else {
-							color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
-						}
-						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale, lat, lon);
+						int colorBigPoint = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+						int colorSmallPoint = (marker != null && marker.history) ? grayColor : colorBigPoint;
+						favoritesMapLayerProvider.addToData(favoritePoint, colorSmallPoint, colorBigPoint,
+								true, marker != null, textScale, lat, lon);
 					}
 				}
 			}
@@ -399,7 +385,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			favouritesHelper.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
 			favouritesHelper.lookupAddress((FavouritePoint) o);
 			result = true;
-			appliedNewPosition = true;
 		}
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
@@ -416,41 +401,9 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void onFavoritePropertiesUpdated(boolean syncWithMarker) {
-		if (!changeMarkerPositionMode && !syncWithMarker) {
+	public void onFavoritePropertiesUpdated() {
+		if (!changeMarkerPositionMode) {
 			showFavorites();
-		}
-	}
-
-	@Override
-	public void onSyncStarted() {
-	}
-
-	@Override
-	public void onSyncDone() {
-		showFavorites();
-	}
-
-	private void addMapsInitializedListener() {
-		OsmandApplication app = getApplication();
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					//run after app.mapMarkersHelper.syncAllGroups()
-					if (hasMapRenderer()) {
-						showFavorites();
-					}
-				}
-			});
 		}
 	}
 }
