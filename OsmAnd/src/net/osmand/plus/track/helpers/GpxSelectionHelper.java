@@ -35,7 +35,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -44,7 +43,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 public class GpxSelectionHelper {
 
@@ -62,7 +60,6 @@ public class GpxSelectionHelper {
 	private final SavingTrackHelper savingTrackHelper;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
-	private List<SelectedGpxFile> tmpVisibleGPXFiles = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
 
@@ -114,24 +111,6 @@ public class GpxSelectionHelper {
 		return selectedGPXFiles;
 	}
 
-	@NonNull
-	public List<SelectedGpxFile> getVisibleGPXFiles() {
-		List<SelectedGpxFile> total = new ArrayList<>();
-		total.addAll(selectedGPXFiles);
-		total.addAll(tmpVisibleGPXFiles);
-		// filter duplicate tracks
-		Set<String> paths = new TreeSet<>();
-		List<SelectedGpxFile> unique = new ArrayList<>();
-		for (SelectedGpxFile file : total) {
-			String path = file.gpxFile != null ? file.gpxFile.path : null;
-			if (path != null && !paths.contains(path)) {
-				paths.add(path);
-				unique.add(file);
-			}
-		}
-		return unique;
-	}
-
 	public Map<GPXFile, Long> getSelectedGpxFilesBackUp() {
 		return selectedGpxFilesBackUp;
 	}
@@ -177,15 +156,11 @@ public class GpxSelectionHelper {
 	}
 
 	@Nullable
-	public SelectedGpxFile getVisibleFileByPath(@NonNull String path) {
-		return getFileByPath(path, getVisibleGPXFiles());
-	}
-
-	@Nullable
-	private SelectedGpxFile getFileByPath(@NonNull String path, @NonNull List<SelectedGpxFile> gpxFiles) {
-		for (SelectedGpxFile gpxFile : gpxFiles) {
-			if (gpxFile.getGpxFile().path.equals(path)) {
-				return gpxFile;
+	public SelectedGpxFile getSelectedFileByPath(String path) {
+		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
+		for (SelectedGpxFile s : newList) {
+			if (s.getGpxFile().path.equals(path)) {
+				return s;
 			}
 		}
 		return null;
@@ -213,7 +188,7 @@ public class GpxSelectionHelper {
 
 	@Nullable
 	public WptPt getVisibleWayPointByLatLon(@NonNull LatLon latLon) {
-		for (SelectedGpxFile selectedGpx : getVisibleGPXFiles()) {
+		for (SelectedGpxFile selectedGpx : selectedGPXFiles) {
 			GPXFile gpx;
 			if (selectedGpx != null && (gpx = selectedGpx.getGpxFile()) != null) {
 				for (WptPt pt : gpx.getPoints()) {
