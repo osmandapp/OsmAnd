@@ -356,6 +356,16 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
+		updateWidgetsCountForPanel(widgetInfo.widgetPanel);
+	}
+
+	private void updateWidgetsCountForPanel(@NonNull WidgetsPanel panel) {
+		MapActivity mapActivity = getMapActivity();
+		View panelContainer = widgetsCard.findViewWithTag(panel.name());
+		if (mapActivity != null && panelContainer != null) {
+			int count = getWidgetsCount(mapActivity, panel);
+			updateWidgetsCount(panelContainer, count);
+		}
 	}
 
 	@Override
@@ -369,13 +379,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+		view.setTag(panel.name());
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		TextView tvTitle = view.findViewById(R.id.title);
-		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
 		MapActivity mapActivity = requireMapActivity();
-		int filter = ENABLED_MODE | AVAILABLE_MODE;
-		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
+		int count = getWidgetsCount(mapActivity, panel);
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);
@@ -383,8 +392,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		String title = getString(panel.getTitleId(rtl));
 		tvTitle.setText(title);
 
-		tvDesc.setVisibility(View.VISIBLE);
-		tvDesc.setText(String.valueOf(count));
+		updateWidgetsCount(view, count);
 
 		if (showShortDivider) {
 			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
@@ -402,6 +410,17 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		});
 		setupListItemBackground(view);
 		return view;
+	}
+
+	private int getWidgetsCount(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel panel) {
+		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		return widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
+	}
+
+	private void updateWidgetsCount(@NonNull View container, int count) {
+		TextView countContainer = container.findViewById(R.id.items_count_descr);
+		countContainer.setText(String.valueOf(count));
+		AndroidUiHelper.updateVisibility(countContainer, true);
 	}
 
 	private View createButtonWithSwitch(int iconId,
