@@ -327,21 +327,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			return;
 		}
 
-		List<WidgetsPanel> centerPanels = Arrays.asList(WidgetsPanel.TOP, WidgetsPanel.BOTTOM);
-		Set<MapWidgetInfo> centerWidgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, centerPanels);
-		for (MapWidgetInfo widgetInfo : centerWidgetInfos) {
-			OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
-			if (visibilityPref != null) {
-				widgetInfo.enableDisableForMode(selectedAppMode, visibilityPref.getModeValue(appMode));
-			}
-		}
-		copyPreferenceFromAppMode(settings.MAP_INFO_CONTROLS, appMode);
-		copyPreferenceFromAppMode(settings.CUSTOM_WIDGETS_KEYS, appMode);
-
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			copyPreferenceFromAppMode(panel.getOrderPreference(settings), appMode);
-		}
+		CopyWidgetsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Arrays.asList(WidgetsPanel.values()));
 
 		copyPreferenceFromAppMode(settings.TRANSPARENT_MAP_THEME, appMode);
 		copyPreferenceFromAppMode(settings.SHOW_COMPASS_ALWAYS, appMode);
