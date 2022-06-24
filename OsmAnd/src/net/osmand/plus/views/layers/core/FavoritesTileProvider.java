@@ -121,26 +121,26 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		}
 		Bitmap bitmap;
 		if (isFullSize) {
-			int bigBitmapKey = data.getKey();
+			int bigBitmapKey = data.getKey(true);
 			bitmap = bigBitmapCache.get(bigBitmapKey);
 			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable;
 				if (data.hasMarker) {
-					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.color,
+					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorBigPoint,
 							data.withShadow, true, data.overlayIconId, data.backgroundType);
 				} else {
-					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.color,
+					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.colorBigPoint,
 							data.withShadow, false, data.overlayIconId, data.backgroundType);
 				}
 				bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, false);
 				bigBitmapCache.put(bigBitmapKey, bitmap);
 			}
 		} else {
-			int smallBitmapKey = data.getKey();
+			int smallBitmapKey = data.getKey(false);
 			bitmap = smallBitmapCache.get(smallBitmapKey);
 			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
-						data.color, data.withShadow, false, data.overlayIconId, data.backgroundType);
+						data.colorSmallPoint, data.withShadow, false, data.overlayIconId, data.backgroundType);
 				bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
 				smallBitmapCache.put(smallBitmapKey, bitmap);
 			}
@@ -185,12 +185,12 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		return offset;
 	}
 
-	public void addToData(@NonNull FavouritePoint favorite, int color, boolean withShadow,
+	public void addToData(@NonNull FavouritePoint favorite, int colorSmallPoint, int colorBigPoint, boolean withShadow,
 	                      boolean hasMarker, float textScale, double lat, double lon) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
-		mapLayerDataList.add(new MapLayerData(favorite, color,
+		mapLayerDataList.add(new MapLayerData(favorite, colorSmallPoint, colorBigPoint,
 				withShadow, favorite.getOverlayIconId(ctx), favorite.getBackgroundType(),
 				hasMarker, textScale, lat, lon));
 	}
@@ -198,18 +198,20 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	private static class MapLayerData {
 		FavouritePoint favorite;
 		PointI point;
-		int color;
+		int colorBigPoint;
+		int colorSmallPoint;
 		boolean withShadow;
 		int overlayIconId;
 		BackgroundType backgroundType;
 		boolean hasMarker;
 		float textScale;
 
-		MapLayerData(@NonNull FavouritePoint favorite, int color,
+		MapLayerData(@NonNull FavouritePoint favorite, int colorSmallPoint, int colorBigPoint,
 		             boolean withShadow, int overlayIconId, @NonNull BackgroundType backgroundType,
 		             boolean hasMarker, float textScale, double lat, double lon) {
 			this.favorite = favorite;
-			this.color = color;
+			this.colorBigPoint = colorBigPoint;
+			this.colorSmallPoint = colorSmallPoint;
 			this.withShadow = withShadow;
 			this.overlayIconId = overlayIconId;
 			this.backgroundType = backgroundType;
@@ -220,7 +222,8 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			point = new PointI(x, y);
 		}
 
-		int getKey() {
+		int getKey(boolean bigPoint) {
+			int color = bigPoint ? colorBigPoint : colorSmallPoint;
 			long hash = ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
 					+ ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (backgroundType != null ? backgroundType.ordinal() : 0);
 			if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {

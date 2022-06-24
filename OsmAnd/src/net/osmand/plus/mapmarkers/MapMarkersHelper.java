@@ -22,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
@@ -76,7 +75,6 @@ public class MapMarkersHelper {
 	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 
 	private final List<MapMarkerChangedListener> listeners = new ArrayList<>();
-	private final List<GpxSaveListener> gpxSaveListeners = new ArrayList<>();
 	private final Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
 
 	private final MarkersPlanRouteContext planRouteContext;
@@ -868,16 +866,6 @@ public class MapMarkersHelper {
 		listeners.remove(l);
 	}
 
-	public void addGpxSaveListener(GpxSaveListener l) {
-		if (!gpxSaveListeners.contains(l)) {
-			gpxSaveListeners.add(l);
-		}
-	}
-
-	public void removeGpxSaveListener(GpxSaveListener l) {
-		gpxSaveListeners.remove(l);
-	}
-
 	private void refreshMarker(final MapMarker marker) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
@@ -907,25 +895,10 @@ public class MapMarkersHelper {
 		shouldSaveFavourites |= syncPassedPoints(mapMarkersHistory, gpxFiles);
 
 		if (shouldSaveFavourites) {
-			ctx.getFavoritesHelper().saveCurrentPointsIntoFile(false);
+			ctx.getFavoritesHelper().saveCurrentPointsIntoFile();
 		}
 		for (GPXFile gpxFile : gpxFiles) {
-			SaveGpxAsyncTask.SaveGpxListener listener = new SaveGpxAsyncTask.SaveGpxListener() {
-				@Override
-				public void gpxSavingStarted() {
-					for (GpxSaveListener l : gpxSaveListeners) {
-						l.onGpxSaveStarted();
-					}
-				}
-
-				@Override
-				public void gpxSavingFinished(Exception errorMessage) {
-					for (GpxSaveListener l : gpxSaveListeners) {
-						l.onGpxSaveFinished();
-					}
-				}
-			};
-			GpxUiHelper.saveGpx(gpxFile, listener);
+			GpxUiHelper.saveGpx(gpxFile, null);
 		}
 	}
 
@@ -1173,10 +1146,5 @@ public class MapMarkersHelper {
 				refresh();
 			}
 		}
-	}
-
-	public interface GpxSaveListener {
-		void onGpxSaveStarted();
-		void onGpxSaveFinished();
 	}
 }

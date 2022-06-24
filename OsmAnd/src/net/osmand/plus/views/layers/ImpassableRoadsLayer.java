@@ -51,9 +51,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	//OpenGL
 	private int impassibleRoadsCount = 0;
 
-	public ImpassableRoadsLayer(@NonNull Context ctx, int baseOrder) {
+	public ImpassableRoadsLayer(@NonNull Context ctx) {
 		super(ctx);
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
