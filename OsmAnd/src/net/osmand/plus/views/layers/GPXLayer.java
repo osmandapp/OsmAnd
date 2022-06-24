@@ -117,12 +117,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.GPXUtilities.calculateTrackBounds;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
