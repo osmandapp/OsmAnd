@@ -965,15 +965,16 @@ public class RoutePlannerFrontEnd {
 
 			if (rlist.size() > 0) {
 				RouteSegment previous = null;
-    				for (int i = 0; i < rlist.size(); i++) {
+				for (int i = 0; i < rlist.size(); i++) {
 					RouteSegmentResult rr = rlist.get(i);
-					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(), rr.getEndPointIndex());
 					if (previous != null) {
+						RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(),rr.getEndPointIndex());
 						previous.setParentRoute(segment);
+						previous = segment;
 					} else {
-						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0);
+						recalculationEnd = new RouteSegmentPoint(rr.getObject(), rr.getStartPointIndex(), 0);
+						previous = recalculationEnd;
 					}
-					previous = previous == null ? recalculationEnd : segment;
 				}
 			}
 		}
