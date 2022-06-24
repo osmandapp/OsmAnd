@@ -51,7 +51,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 				}
 
 				@Override
-				public void onFavoritePropertiesUpdated(boolean syncWithMarker) {
+				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

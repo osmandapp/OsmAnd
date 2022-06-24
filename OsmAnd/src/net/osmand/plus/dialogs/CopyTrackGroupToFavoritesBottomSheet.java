@@ -53,7 +53,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 				favouritesHelper.addFavourite(fp, false);
 			}
 		}
-		favouritesHelper.saveCurrentPointsIntoFile(false);
+		favouritesHelper.saveCurrentPointsIntoFile();
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener) {
 			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;

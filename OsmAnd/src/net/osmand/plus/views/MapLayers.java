@@ -135,7 +135,7 @@ public class MapLayers {
 		mapVectorLayer = new MapVectorLayer(app);
 		mapView.addLayer(mapVectorLayer, 0.0f);
 
-		downloadedRegionsLayer = new DownloadedRegionsLayer(app, -10000);
+		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
 		mapView.addLayer(downloadedRegionsLayer, 0.5f);
 
 		// 0.9 gpx layer
@@ -168,13 +168,13 @@ public class MapLayers {
 		locationLayer = new PointLocationLayer(app, -206000);
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
-		navigationLayer = new PointNavigationLayer(app, -209000);
+		navigationLayer = new PointNavigationLayer(app, -207000);
 		mapView.addLayer(navigationLayer, 7);
 		// 7.3 map markers layer
-		mapMarkersLayer = new MapMarkersLayer(app, -207000);
+		mapMarkersLayer = new MapMarkersLayer(app);
 		mapView.addLayer(mapMarkersLayer, 7.3f);
 		// 7.5 Impassible roads
-		impassableRoadsLayer = new ImpassableRoadsLayer(app, -206000);
+		impassableRoadsLayer = new ImpassableRoadsLayer(app);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
 		// 7.8 radius ruler control layer
 		radiusRulerControlLayer = new RadiusRulerControlLayer(app);

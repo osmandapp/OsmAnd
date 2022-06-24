@@ -1059,7 +1059,7 @@ public class OsmandAidlApi {
 			favoritesHelper.updateGroupVisibility(group, visible, false);
 			favoritesHelper.updateGroupName(group, newGroupName, false);
 
-			favoritesHelper.saveCurrentPointsIntoFile(false);
+			favoritesHelper.saveCurrentPointsIntoFile();
 			return true;
 		}
 		return false;

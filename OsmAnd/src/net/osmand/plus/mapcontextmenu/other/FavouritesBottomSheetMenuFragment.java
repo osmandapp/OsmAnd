@@ -88,7 +88,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				}
 
 				@Override
-				public void onFavoritePropertiesUpdated(boolean syncWithMarker) {
+				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}
