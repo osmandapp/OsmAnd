@@ -110,7 +110,7 @@ public class MapWidgetRegistry {
 
 	public void updateWidgetsInfo(@NonNull ApplicationMode appMode, @NonNull DrawSettings drawSettings) {
 		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
-			if (widgetInfo.isEnabledForAppMode(appMode)) {
+			if (widgetInfo.isEnabledForAppMode(appMode) || widgetInfo instanceof CenterWidgetInfo) {
 				widgetInfo.widget.updateInfo(drawSettings);
 			}
 		}
