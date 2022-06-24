@@ -1,5 +1,26 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -30,27 +51,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
 
 public class ApplicationMode {
 
@@ -521,19 +521,19 @@ public class ApplicationMode {
 		}
 	}
 
-	public void updateCustomIconColor(Integer customIconColor) {
-		if (!setCustomIconColor(customIconColor)) {
+	public void updateCustomIconColor(@Nullable Integer color) {
+		if (!setCustomIconColor(color)) {
 			app.getSettings().CUSTOM_ICON_COLOR.resetModeToDefault(this);
 		}
 	}
 
-	public boolean setCustomIconColor(Integer customIconColor) {
-		if (customIconColor == null) {
-			return false;
+	public boolean setCustomIconColor(@Nullable Integer color) {
+		if (color != null) {
+			String valueToSave = Algorithms.colorToString(color);
+			app.getSettings().CUSTOM_ICON_COLOR.setModeValue(this, valueToSave);
+			return true;
 		}
-		String valueToSave = Algorithms.colorToString(customIconColor);
-		app.getSettings().CUSTOM_ICON_COLOR.setModeValue(this, valueToSave);
-		return true;
+		return false;
 	}
 
 	public int getOrder() {
