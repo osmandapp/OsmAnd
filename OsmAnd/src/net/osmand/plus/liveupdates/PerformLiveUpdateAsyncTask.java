@@ -17,12 +17,18 @@ import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 
@@ -135,9 +141,6 @@ public class PerformLiveUpdateAsyncTask
 								((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
 							}
 							updateTimestamps(lastMapUpdateTimestamp);
-							if (runOnSuccess != null) {
-								runOnSuccess.run();
-							}
 						} else {
 							LOG.debug("onPostExecute: Not enough space for updates");
 						}
@@ -150,9 +153,6 @@ public class PerformLiveUpdateAsyncTask
 					if (userRequested && context instanceof DownloadActivity) {
 						updateTimestamps(0);
 						app.showShortToastMessage(R.string.no_updates_available);
-						if (runOnSuccess != null) {
-							runOnSuccess.run();
-						}
 					}
 				}
 			}
@@ -184,10 +184,35 @@ public class PerformLiveUpdateAsyncTask
 		}
 	}
 
-	private void updateTimestamps(long lastOsmChangeTimestamp) {
+	private void updateTimestamps(long lastMapChangeTimestamp) {
+		AndroidNetworkUtils.sendRequestAsync(
+				app, LiveUpdatesFragment.URL, null, "Requesting map updates info...", false, false, (result, error, resultCode) -> {
+					long lastServerUpdate = 0;
+					if (!Algorithms.isEmpty(result)) {
+						SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+						source.setTimeZone(TimeZone.getTimeZone("UTC"));
+						try {
+							Date parsed = source.parse(result);
+							if (parsed != null) {
+								lastServerUpdate = parsed.getTime();
+							}
+						} catch (ParseException e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+
+					updateTimestamps(lastMapChangeTimestamp, lastServerUpdate);
+					if (runOnSuccess != null) {
+						runOnSuccess.run();
+					}
+				});
+	}
+
+	private void updateTimestamps(long lastMapChangeTimestamp, long lastServerUpdate) {
 		long time = System.currentTimeMillis();
-		preferenceLastSuccessfulUpdateCheck(settings).set(time);
 		preferenceLastSuccessfulUpdateCheck(localIndexFileName, settings).set(time);
+
+		long lastOsmChangeTimestamp = Math.max(lastMapChangeTimestamp, lastServerUpdate);
 		if (lastOsmChangeTimestamp > 0) {
 			preferenceLastOsmChange(localIndexFileName, settings).set(lastOsmChangeTimestamp);
 		}

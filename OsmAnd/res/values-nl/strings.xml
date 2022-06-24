@@ -4496,4 +4496,11 @@
     <string name="time_to_go_desc">Tijd (in minuten of uren) benodigd om je bestemming te bereiken.</string>
     <string name="arrival_time_widget_desc">Tijdstip van aankomst op je bestemming.</string>
     <string name="coordinates_widget_desc">Het toont de geografische coördinaten van de huidige geolocatie.</string>
+    <string name="average_speed_skip_stops">Breng stilstanden in rekening</string>
+    <string name="average_speed_time_interval_desc">Kies het tijdsinterval waarvoor je wil dat de gemiddelde snelheid wordt berekend.</string>
+    <string name="average_speed_widget_desc">Toon de gemiddelde snelheid van de huidige rit.</string>
+    <string name="map_widget_average_speed">Gemiddelde snelheid</string>
+    <string name="map_widget_time_to_intermediate">Tijd tot tussenstop</string>
+    <string name="map_widget_distance_to_intermediate">Afstand tot tussenstop</string>
+    <string name="average_speed_skip_stops_desc">Snelheden lager dan %1$s worden niet opgenomen en hebben geen invloed op de gemiddelde snelheid.</string>
 </resources>

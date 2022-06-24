@@ -976,13 +976,14 @@ public class RouteCalculationResult {
 				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 				int i = s.getStartPointIndex();
 				while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
-					if (s.getObject().hasTrafficLightAt(i)) {
-						LatLon point = s.getPoint(i);
-						for (SimulatedLocation sd : simulatedLocations) {
-							LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
-							if (latLon.equals(point)) {
+					LatLon point = s.getPoint(i);
+					for (SimulatedLocation sd : simulatedLocations) {
+						LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
+						if (latLon.equals(point)) {
+							sd.setHighwayType(s.getObject().getHighway());
+							sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
+							if (s.getObject().hasTrafficLightAt(i)) {
 								sd.setTrafficLight(true);
-								break;
 							}
 						}
 					}

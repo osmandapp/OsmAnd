@@ -92,12 +92,12 @@ public class HistoryCard extends MapBaseCard {
 						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 						if (selectedGpxFile != null) {
 							GPXFile gpxFile = selectedGpxFile.getGpxFile();
-							mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile);
+							mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true);
 						} else {
 							CallbackWithObject<GPXFile[]> callback = result -> {
 								MapActivity mapActivity = getMapActivity();
 								if (mapActivity != null) {
-									mapActivity.getMapRouteInfoMenu().selectTrack(result[0]);
+									mapActivity.getMapRouteInfoMenu().selectTrack(result[0], true);
 								}
 								return true;
 							};

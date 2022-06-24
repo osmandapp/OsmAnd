@@ -70,10 +70,14 @@
 			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 			android:minHeight="@dimen/bottom_sheet_title_height"
 			android:paddingHorizontal="@dimen/content_padding"
-			android:paddingVertical="@dimen/content_padding_small"
+			android:paddingTop="@dimen/content_padding_small"
 			android:text="@string/goods_delivery_desc_4"
 			android:textColor="?android:textColorSecondary" />
 
 	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
 
 </LinearLayout>

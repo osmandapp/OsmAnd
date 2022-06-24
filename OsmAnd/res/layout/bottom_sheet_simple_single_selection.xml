@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:gravity="top|start"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_half"
+		tools:text="@string/routing_attr_motor_type_name"
+		android:textColor="?android:textColorPrimary" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:gravity="center_vertical|start"
+		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+		android:minHeight="@dimen/bottom_sheet_title_height"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
+		tools:text="@string/routing_attr_motor_type_description"
+		android:textColor="?android:textColorSecondary" />
+
+	<LinearLayout
+		android:id="@+id/items"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"/>
+
+</LinearLayout>

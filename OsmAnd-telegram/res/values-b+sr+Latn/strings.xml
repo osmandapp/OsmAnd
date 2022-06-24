@@ -2,10 +2,10 @@
 <resources>
     <string name="shared_string_select">Označi</string>
     <string name="shared_string_enable">Omogući</string>
-    <string name="altitude">Nadmorska visina</string>
+    <string name="altitude">Visina</string>
     <string name="shared_string_search">Traži</string>
     <string name="shared_string_ok">U redu</string>
-    <string name="shared_string_update">Ažuriraj</string>
+    <string name="shared_string_update">Nadgradi</string>
     <string name="average_altitude">Prosečna visina</string>
     <string name="average_speed">Prosečna brzina</string>
     <string name="shared_string_map">Karta</string>
@@ -15,18 +15,18 @@
     <string name="shared_string_disable">Onemogući</string>
     <string name="shared_string_save">Sačuvaj</string>
     <string name="shared_string_name">Ime</string>
-    <string name="shared_string_sort">Sortiraj</string>
+    <string name="shared_string_sort">Razvrstaj</string>
     <string name="shared_string_exit">Izlaz</string>
     <string name="shared_string_close">Zatvori</string>
     <string name="shared_string_all">Sve</string>
     <string name="shared_string_off">Isključeno</string>
-    <string name="shared_string_install">Instaliraj</string>
+    <string name="shared_string_install">Ugradi</string>
     <string name="shared_string_share">Deli</string>
     <string name="shared_string_back">Nazad</string>
     <string name="shared_string_continue">Nastavi</string>
     <string name="shared_string_cancel">Otkaži</string>
     <string name="shared_string_settings">Postavke</string>
-    <string name="osmand_service">Pozadinski režim</string>
+    <string name="osmand_service">Pozadinski rad</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
@@ -49,8 +49,8 @@
     <string name="si_nm">Nautičke milje</string>
     <string name="si_mi_meters">Milje/metri</string>
     <string name="shared_string_apply">Primeni</string>
-    <string name="shared_string_enabled">Uključen</string>
-    <string name="units_and_formats">Merne jedinice &amp; formatiranja</string>
+    <string name="shared_string_enabled">Omogućeno</string>
+    <string name="units_and_formats">Merne jedinice i oblici</string>
     <string name="unit_of_length_descr">Promeni jedinice za dužinu.</string>
     <string name="unit_of_length">Jedinice dužine</string>
     <string name="shared_string_appearance">Izgled</string>
@@ -84,7 +84,7 @@
     <string name="closing">Zatvaranje</string>
     <string name="logging_out">Odjavljivanje</string>
     <string name="initialization">Pokretanje</string>
-    <string name="shared_string_logout">Odjaviti se</string>
+    <string name="shared_string_logout">Odjava</string>
     <string name="shared_string_login">Prijavite se</string>
     <string name="password_descr">Telegram lozinka</string>
     <string name="enter_password">Unesite lozinku</string>
@@ -261,14 +261,14 @@
     <string name="status_widget_title">Status Tragača OsmAnda</string>
     <string name="shared_string_suggested">Predloženo</string>
     <string name="back_to_osmand">Povratak na OsmAnd</string>
-    <string name="duration_ago">Pre %1$</string>
+    <string name="duration_ago">Pre %1$s</string>
     <string name="last_response_duration">Poslednji odgovor: pre %1$</string>
     <string name="last_update_from_telegram_duration">Poslednje ažuriranje iz Telegrama: pre %1$</string>
     <string name="last_response_date">Poslednji odgovor: %1$</string>
     <string name="last_update_from_telegram_date">Poslednje ažuriranje iz Telegrama: %1$</string>
     <string name="shared_string_error_short">Greška</string>
     <string name="shared_string_export">Izvezi</string>
-    <string name="logcat_buffer">Logcat bafer</string>
-    <string name="logcat_buffer_descr">Proverite i podelite detaljne zapise aplikacije</string>
+    <string name="logcat_buffer">Spremnik dnevnika</string>
+    <string name="logcat_buffer_descr">Proverite i podelite dnevnike sa pojedinostima programa</string>
     <string name="send_report">Pošalji izveštaj</string>
 </resources>

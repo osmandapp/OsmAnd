@@ -20,7 +20,6 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -324,6 +323,11 @@ public class NativeLibrary {
 	public RenderedObject[] searchRenderedObjectsFromContext(RenderingContext context, int x, int y, boolean notvisible) {
 		return searchRenderedObjects(context, x, y, notvisible);
 	}
+
+	public boolean needRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates){
+		return nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
+	}
+	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 
 	/**/
 	// Empty native impl
