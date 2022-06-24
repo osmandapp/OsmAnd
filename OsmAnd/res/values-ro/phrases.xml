@@ -740,14 +740,14 @@
     <string name="poi_aeroway_terminal">Terminal de aerobază</string>
     <string name="poi_runway">Pista de alergare</string>
     <string name="poi_helipad">Heliport</string>
-    <string name="poi_aerodrome">Aeroport</string>
+    <string name="poi_aerodrome">Aeroport;Aerodrom</string>
     <string name="poi_taxi">Stație de taxi</string>
     <string name="poi_railway_buffer_stop">Oprire tampon de cale ferată</string>
     <string name="poi_subway_station">Da;Stație de metrou</string>
     <string name="poi_subway_entrance">Intrarea la metrou</string>
-    <string name="poi_halt">Stație de cale ferată</string>
-    <string name="poi_railway_platform">Platforma de cale ferată</string>
-    <string name="poi_railway_station">Stația de cale ferată</string>
+    <string name="poi_halt">Oprire cale ferată;Oprire tren</string>
+    <string name="poi_railway_platform">Platformă de cale ferată;Platformă de tren</string>
+    <string name="poi_railway_station">Stație auto;Stație de cale ferată;Stație de tren</string>
     <string name="poi_bus_station">Stația de autobuz</string>
     <string name="poi_public_transport_station">Stație de transport public</string>
     <string name="poi_tram_stop">Stația de tramvai</string>
@@ -3860,7 +3860,7 @@
     <string name="poi_tactile_paving_incorrect">Incorect</string>
     <string name="poi_tactile_paving_primitive">Primitiv</string>
     <string name="poi_tactile_paving_contrasted">Contrastat</string>
-    <string name="poi_traffic_signals_sound_locate">Numai atunci când mersul pe jos este permis</string>
+    <string name="poi_traffic_signals_sound_locate">Doar pentru a găsi stâlpul</string>
     <string name="poi_internet_access_fee_customers">Acces la internet: clienți</string>
     <string name="poi_video_no">Nu</string>
     <string name="poi_video_yes">Da;Video</string>
@@ -4302,7 +4302,7 @@
     <string name="poi_payment_mastercard_contactless_yes">MasterCard contactless</string>
     <string name="poi_payment_visa_contactless_yes">Visa contactless</string>
     <string name="poi_payment_american_express_contactless_no">AMEX contactless neacceptat</string>
-    <string name="poi_payment_girocard_contactless_yes">Girocard fără contact</string>
+    <string name="poi_payment_girocard_contactless_yes">Card Girocard fără contact</string>
     <string name="poi_payment_girocard_contactless_no">Girocard contactless neacceptat</string>
     <string name="poi_payment_maestro_contactless_no">Maestro contactless neacceptat</string>
     <string name="poi_payment_mastercard_contactless_no">MasterCard contactless neacceptat</string>
@@ -4326,4 +4326,14 @@
     <string name="poi_anthill">Mușuroi de furnici</string>
     <string name="poi_board_type_wildlife">Animale sălbatice</string>
     <string name="poi_food_no">Mâncare: nu</string>
+    <string name="poi_payment_mir_no">Nu se acceptă carduri Mir</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_youth_movement">Mișcarea de tineret</string>
+    <string name="poi_club_amateur_radio">Clubul de radioamatori</string>
+    <string name="poi_club_religion">Club de religie</string>
+    <string name="poi_club_dog">Club de câini</string>
+    <string name="poi_short_name">Nume scurt</string>
+    <string name="poi_flow_rate">Rata de debit</string>
+    <string name="poi_board_title">Titlul consiliului</string>
+    <string name="poi_golf_pin">Cui de golf</string>
 </resources>

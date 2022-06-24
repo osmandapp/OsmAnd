@@ -1435,7 +1435,7 @@
     <string name="install_more">Instali pli…</string>
     <string name="lang_es_us">Hispana (Amerika)</string>
     <string name="lang_be_by">Belorusa (latina)</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kanara</string>
     <string name="system_locale">Sistema</string>
     <string name="amenity_type_administrative">Administrejo</string>
     <string name="amenity_type_barrier">Barilo</string>
@@ -4681,4 +4681,26 @@
     <string name="shared_string_mode">Reĝimo</string>
     <string name="radius_ruler_mode_desc">Vi povas ŝanĝi reĝimon de la cirkelo per frapeti la fenestraĵon.</string>
     <string name="lang_sat">Santala</string>
+    <string name="average_speed_time_interval_desc">Difini temp-intervalon por kiu la mezuma rapido estos kalkulita.</string>
+    <string name="average_speed_widget_desc">Fenestraĵo montranta la mezuman rapidon por la nuna vojaĝo.</string>
+    <string name="map_widget_average_speed">Mezuma rapido</string>
+    <string name="average_speed_skip_stops">Enkalkuli paŭzojn</string>
+    <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne estos enkalkulita kaj ne efikos sur la mezuma rapido.</string>
+    <string name="routing_attr_goods_restrictions_description">Konsideri limigojn por malpezaj (≤ 3,5 Mg) varaŭtomobiloj.</string>
+    <string name="import_as_one_track">Enporti kiel unu spuron</string>
+    <string name="transport_hazmat_yes_desc">Elektu ĝustan kategorion.</string>
+    <string name="transport_hazmat_no_desc">Sur kelkaj ŝoseoj kaj tuneloj transporto de danĝeraj materialoj estas malpermesata.</string>
+    <string name="use_latin_name_if_missing">Se mankas, transliteri nomon al latina alfabeto</string>
+    <string name="transport_hazmat_title">Transporto de danĝeraj materialoj</string>
+    <string name="routing_attr_motor_type_diesel_name">dizela</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">elektra</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">hibrida</string>
+    <string name="routing_attr_motor_type_name">Speco de motoro</string>
+    <string name="routing_attr_motor_type_description">Por kalkuli eligon de CO₂</string>
+    <string name="kg">kg</string>
+    <string name="co2_mission">Eligo de CO₂</string>
+    <string name="routing_attr_motor_type_petrol_name">benzina</string>
+    <string name="lang_ckb">Sorana</string>
 </resources>

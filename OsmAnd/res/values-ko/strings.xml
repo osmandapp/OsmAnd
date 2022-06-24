@@ -2378,4 +2378,26 @@
     <string name="plan_route_open_existing_track">기존 트랙 열기</string>
     <string name="shared_string_resources">리소스</string>
     <string name="profile_type_custom_string">커스텀 프로필</string>
+    <string name="shared_string_buttons">버튼구성</string>
+    <string name="contact_support">‎지원 팀에 문의‎</string>
+    <string name="move_to_history">‎기록으로‎‎ 이동‎</string>
+    <string name="plan_route_import_track">트랙 가져오기</string>
+    <string name="wikivoyage_search_hint">‎국가, 도시 또는 지방 ‎‎검색‎</string>
+    <string name="saved_articles">저장된 가이드</string>
+    <string name="sort_by_category">‎범주‎‎별로 정렬‎</string>
+    <string name="backup_into_file">‎파일로‎‎ 백업‎</string>
+    <string name="shared_string_explore">‎탐색</string>
+    <string name="location_source">‎위치 ‎‎소스‎</string>
+    <string name="import_profile">‎프로파일‎‎ 가져오기‎</string>
+    <string name="osmand_cloud">‎오스엠앤‎‎드 클라우드‎</string>
+    <string name="new_device_account">‎새 ‎‎장치 / 새‎‎ 계정‎</string>
+    <string name="sorted_by_distance">‎거리별로 정렬‎</string>
+    <string name="location_source_descr">‎기본적으로 ‎‎Google Play‎‎에서 설치된 OsmAnd는 다음을 사용합니다. ‎%1$s‎ 위치를 결정합니다. ‎
+\n
+\n‎부정확한 위치 정보를 얻거나 장치를 사용하지 않고 사용하는 경우 ‎%2$s‎, 로 전환하려고합니다 \"‎%3$s\"</string>
+    <string name="reorder_profiles">‎프로파일‎‎ 목록 편집‎</string>
+    <string name="sort_by">‎정렬 기준‎</string>
+    <string name="restore_from_file">‎파일에서 복원‎</string>
+    <string name="osmand_cloud_authorize_descr">‎데이터를 ‎‎잃지‎‎ 마십시오. 모든 정보를 쉽게 백업하고 복원하십시오.‎</string>
+    <string name="restore_purchases">‎구매 ‎‎항목 복원‎</string>
 </resources>

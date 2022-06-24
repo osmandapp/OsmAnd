@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="lang_ckb">Central Kurdish</string>
+    <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
+    <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
     <string name="routing_attr_motor_type_description">Select fuel type used by your vehicle motor, to calculate CO2 emission.</string>
     <string name="routing_attr_motor_type_name">Fuel used by motor</string>
     <string name="marker_2nd">Second marker</string>
@@ -23,7 +26,6 @@
     <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
     <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>
     <string name="goods_delivery_desc">Vehicle transporting goods can be restricted to access some roads. </string>
-    <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="updated_map_time">Updated: %1$s.</string>
     <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
     <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
@@ -48,11 +50,10 @@
     <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden. </string>
     <string name="transport_hazmat_title">Transporting of hazardous materials</string>
     <string name="average_speed_skip_stops_desc">Speed less than %1$s will not be counted and affect the average speed.</string>
-    <string name="average_speed_skip_stops">Take into account stops</string>
+    <string name="average_speed_skip_stops">Take stops into account</string>
     <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
     <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
     <string name="map_widget_average_speed">Average speed</string>
-    <string name="lang_sat">Santali</string>
     <string name="shared_string_mode">Mode</string>
     <string name="time_to_navigation_point_widget_settings_desc">Switch mode by tapping the widget.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>
@@ -742,7 +743,7 @@
     <string name="rename_track">Rename track</string>
     <string name="edit_track">Edit track</string>
     <string name="upload_to_openstreetmap">Upload to OpenStreetMap</string>
-    <string name="analyze_by_intervals">Analyze split intervals</string>
+    <string name="analyze_by_intervals">Analyze by intervals</string>
     <string name="shared_string_empty">Empty</string>
     <string name="select_folder_descr">Select folder or add new one</string>
     <string name="select_folder">Select folder</string>
@@ -1089,7 +1090,6 @@
     <string name="osm_live_payment_subscription_management">Payment is charged from your Google Play account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your Google Play settings at any time.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="custom_color">Custom color</string>
-    <string name="lang_lmo">Lombard</string>
     <string name="lang_an">Aragonese</string>
     <string name="lang_ba">Bashkir</string>
     <string name="lang_bar">Bavarian</string>
@@ -1099,6 +1099,7 @@
     <string name="lang_jv">Javanese</string>
     <string name="lang_kk">Kazakh</string>
     <string name="lang_ky">Kyrgyz</string>
+    <string name="lang_lmo">Lombard</string>
     <string name="lang_mg">Malagasy</string>
     <string name="lang_min">Minangkabau</string>
     <string name="lang_mn">Mongolian</string>
@@ -1106,6 +1107,7 @@
     <string name="lang_nap">Neapolitan</string>
     <string name="lang_ne">Nepali</string>
     <string name="lang_pnb">Punjabi</string>
+    <string name="lang_sat">Santali</string>
     <string name="lang_scn">Sicilian</string>
     <string name="lang_sco">Scots</string>
     <string name="lang_tg">Tajik</string>

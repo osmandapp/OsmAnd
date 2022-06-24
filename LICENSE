@@ -1,6 +1,6 @@
 
     OsmAnd – OSM Automated Navigation Directions – navigation software based on OpenStreetMap.
-    Copyright © 2010–2020 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714, BTW 854627704B01).
+    Copyright © 2010–2022 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714, BTW 854627704B01).
 
     The code in this repository is covered by *GPLv3* (for code) and the artwork is covered by [CC-BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) (for artwork), except for some third-party libraries and resources.
     ATTENTION: Please be aware that some artwork uses a proprietary license.
@@ -144,7 +144,8 @@
 	- Mobile_DEM_1255: Amante, C.J., M.R. Love, L.A. Taylor, and B.W. Eakins, 2011. Digital Elevation Models of Mobile, Alabama: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-44, Dept. of Commerce, Boulder, CO, 43 pp. 
 	- Panama_City_DEM_1276: Amante, C.J., M.R. Love, L.A. Taylor, and B.W. Eakins, 2011. Digital Elevation Models of Panama City, Florida: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-50, U.S. Dept. of Commerce, Boulder, CO, 46 pp. 
 	- Great Lakes: National Centers for Environmental Information (NCEI)
-	
+	- Swiss lakes: Federal Office of Topography swisstopo
+
     * DEM (DSM) data
 	- ALOS DEM: The original data used for this product have been supplied by JAXA’s AW3D.
 	- MERIT DEM (available at http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM)
