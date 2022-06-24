@@ -1,12 +1,13 @@
 package net.osmand.plus.track.helpers;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
@@ -14,9 +15,6 @@ import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
 
 import java.io.File;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
@@ -127,9 +125,10 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	@Override
 	protected boolean processSplit(@Nullable OsmandApplication app) {
-		return GpxSelectionHelper.processSplit(app, this);
+		return GpxDisplayHelper.processSplit(app, this);
 	}
 
+	@NonNull
 	@Override
 	public List<TrkSegment> getPointsToDisplay() {
 		return joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null

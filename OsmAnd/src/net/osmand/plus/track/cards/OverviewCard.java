@@ -1,5 +1,14 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
+
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
@@ -27,20 +36,11 @@ import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends MapBaseCard {
 

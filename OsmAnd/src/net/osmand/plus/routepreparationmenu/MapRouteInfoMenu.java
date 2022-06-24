@@ -1,9 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
-
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -113,7 +110,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -143,6 +140,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
