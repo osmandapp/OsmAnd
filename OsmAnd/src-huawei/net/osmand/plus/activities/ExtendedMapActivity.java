@@ -12,8 +12,8 @@ import com.huawei.updatesdk.service.appmgr.bean.ApkUpgradeInfo;
 import com.huawei.updatesdk.service.otaupdate.CheckUpdateCallBack;
 import com.huawei.updatesdk.service.otaupdate.UpdateKey;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
