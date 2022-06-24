@@ -842,7 +842,7 @@
     <string name="poi_wastewater_plant">污水处理厂</string>
     <string name="poi_water_works">水厂</string>
     <string name="poi_aeroway_fuel">飞机加油站</string>
-    <string name="poi_lock_gate">闸门</string>
+    <string name="poi_lock_gate">船闸</string>
     <string name="poi_greengrocer">蔬菜水果商</string>
     <string name="poi_railway_buffer_stop">铁路止冲挡</string>
     <string name="poi_meadow">草甸</string>
@@ -925,7 +925,7 @@
     <string name="poi_copyshop">复印店</string>
     <string name="poi_gate">门</string>
     <string name="poi_place_allotments">社区农场</string>
-    <string name="poi_wildlife_crossing">野生动物通道</string>
+    <string name="poi_wildlife_crossing">野生动物过境通道</string>
     <string name="poi_wildlife_crossing_bat_tunnel">蝙蝠隧道</string>
     <string name="poi_abandoned_poi">废弃的对象</string>
     <string name="poi_product_beer">产品：啤酒</string>
@@ -1019,7 +1019,7 @@
     <string name="poi_faculty_filter">学院</string>
     <string name="poi_hiking_routes">远足路线</string>
     <string name="poi_node_networks">徒步/骑行网络节点</string>
-    <string name="poi_traffic_enforcement">交通执法</string>
+    <string name="poi_traffic_enforcement">交通强制执行</string>
     <string name="poi_personal_transport">个人运输工具</string>
     <string name="poi_shelter_filter">庇护所</string>
     <string name="poi_museum_type">博物馆主题</string>
@@ -1801,7 +1801,7 @@
     <string name="poi_street_cabinet_street_lighting">柜体类型：街道照明</string>
     <string name="poi_salt_no">盐： 否</string>
     <string name="poi_bicycle_parking_lockers">储物柜</string>
-    <string name="poi_spoil_heap">废料堆</string>
+    <string name="poi_spoil_heap">废石堆</string>
     <string name="poi_summer_camp">夏令营</string>
     <string name="poi_recreation_center">康乐中心</string>
     <string name="poi_crossing_activation_automatic">交叉路口启动：自动</string>
@@ -1887,4 +1887,23 @@
     <string name="poi_vehicle_military">轮椅访问：军人</string>
     <string name="poi_motorcycle_permissive">许可；摩托车准许通行</string>
     <string name="poi_motorcycle_designated">指定；摩托车指定通行</string>
+    <string name="poi_enforcement_toll">强制执行：过路费</string>
+    <string name="poi_enforcement_traffic_signals">强制执行：停车信号灯</string>
+    <string name="poi_enforcement_mindistance">强制执行：最小距离</string>
+    <string name="poi_enforcement_access">强制执行：通行（access）</string>
+    <string name="poi_enforcement_check">强制执行：检查</string>
+    <string name="poi_enforcement_maxheight">强制执行：最大高度</string>
+    <string name="poi_power_terminal">电力终端</string>
+    <string name="poi_weightbridge">地磅秤；卡车称重</string>
+    <string name="poi_kiln">窑</string>
+    <string name="poi_enforcement_maxspeed">强制执行：最高速度</string>
+    <string name="poi_information_terminal">终端机</string>
+    <string name="poi_chimney">烟囱</string>
+    <string name="poi_internet_access_type_terminal">终端机</string>
+    <string name="poi_elevator_yes">带电梯</string>
+    <string name="poi_elevator_no">不带电梯</string>
+    <string name="poi_industrial_intermodal_freight_terminal">类型: 联运货运车站</string>
+    <string name="poi_ventilation_shaft">通风井</string>
+    <string name="poi_windsock">风向袋</string>
+    <string name="poi_satellite_dish">卫星碟</string>
 </resources>
