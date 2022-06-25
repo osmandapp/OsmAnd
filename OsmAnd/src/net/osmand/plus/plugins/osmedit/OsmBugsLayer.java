@@ -72,12 +72,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private float textScale = 1f;
 	private boolean showClosed = false;
 
-	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin, int baseOrder) {
+	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
 		local = plugin.getOsmNotesLocalUtil();
-		this.baseOrder = baseOrder;
 	}
 
 	public OsmBugsUtil getOsmBugsUtil(OpenStreetNote bug) {
@@ -131,7 +130,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				this.textScale = textScale;
 				if (osmBugsTileProvider == null || textScaleChanged || mapActivityInvalidated || this.showClosed != showClosed) {
 					clearOsmBugsTileProvider();
-					osmBugsTileProvider = new OsmBugsTileProvider(ctx, data, baseOrder, showClosed, startZoom, textScale);
+					osmBugsTileProvider = new OsmBugsTileProvider(ctx, data, getBaseOrder(), showClosed, startZoom, textScale);
 					osmBugsTileProvider.drawSymbols(mapRenderer);
 					this.showClosed = showClosed;
 				}

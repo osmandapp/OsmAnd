@@ -58,9 +58,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private List<TargetPoint> renderedPoints;
 	private boolean nightMode = false;
 
-	public PointNavigationLayer(@NonNull Context context, int order) {
+	public PointNavigationLayer(@NonNull Context context) {
 		super(context);
-		baseOrder = order;
 		targetPoints = getApplication().getTargetPointsHelper();
 	}
 
@@ -378,7 +377,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mapMarkerBuilder
 				.setPosition(position)
 				.setIsHidden(false)
-				.setBaseOrder(baseOrder)
+				.setBaseOrder(getBaseOrder())
 				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.Right);

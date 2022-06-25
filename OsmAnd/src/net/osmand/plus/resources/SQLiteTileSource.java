@@ -239,7 +239,7 @@ public class SQLiteTileSource implements ITileSource {
 		return Algorithms.stringsEqual(name, other.name);
 	}
 
-	protected SQLiteConnection getDatabase() {
+	protected synchronized SQLiteConnection getDatabase() {
 		if ((db == null || db.isClosed()) && file.exists()) {
 			LOG.debug("Open " + file.getAbsolutePath());
 			db = openDatabase(false);
@@ -393,7 +393,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
-	public boolean isDbOpened() {
+	public synchronized boolean isDbOpened() {
 		return db != null && !db.isClosed();
 	}
 
@@ -516,7 +516,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	@Nullable
-	public Bitmap getImage(@NonNull byte[] blob, @NonNull String[] params) {
+	public synchronized Bitmap getImage(@NonNull byte[] blob, @NonNull String[] params) {
 		Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
 		if (bmp == null) {
 			SQLiteConnection db = getDatabase();
@@ -666,7 +666,7 @@ public class SQLiteTileSource implements ITileSource {
 		return inversiveZoom ? 17 - zoom : zoom;
 	}
 	
-	public void closeDB(){
+	public synchronized void closeDB(){
 		LOG.debug("closeDB");
 		if(timeSupported) {
 			clearOld();

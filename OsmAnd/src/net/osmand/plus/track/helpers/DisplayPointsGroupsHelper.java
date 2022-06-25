@@ -4,12 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OsmAndCollator;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -27,8 +24,8 @@ public class DisplayPointsGroupsHelper {
 	private final OsmandApplication app;
 	private final Comparator<String> comparator;
 
-	private List<GpxDisplayGroup> groups = new ArrayList<>();
-	private Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups = new LinkedHashMap<>();
+	private final List<GpxDisplayGroup> groups = new ArrayList<>();
+	private final Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups = new LinkedHashMap<>();
 
 	private DisplayPointsGroupsHelper(OsmandApplication app) {
 		this.app = app;

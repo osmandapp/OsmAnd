@@ -721,7 +721,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean isMoveable = isInMotion(marker);
 
 				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
-						.setBaseOrder(baseOrder)
+						.setBaseOrder(getBaseOrder())
 						.setIsHidden(isMoveable)
 						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
 						.setPosition(pointI)
@@ -761,7 +761,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		double strokeWidth = 20.0d;
 		int outlineId = isLast ? 20 : 10;
 		int lineId = isLast ? 21 : 11;
-		outlineBuilder.setBaseOrder(baseOrder + lineId + 1)
+		outlineBuilder.setBaseOrder(getBaseOrder() + lineId + 1)
 				.setIsHidden(false)
 				.setLineId(outlineId)
 				.setLineWidth(strokeWidth * 1.5)
@@ -775,7 +775,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		inlinePattern.add(-strokeWidth / getMapDensity());
 		inlinePattern.add((95 - strokeWidth * 1.5) / getMapDensity());
 		inlinePattern.add((35 + strokeWidth * 1.5) / getMapDensity());
-		inlineBuilder.setBaseOrder(baseOrder + lineId)
+		inlineBuilder.setBaseOrder(getBaseOrder() + lineId)
 				.setIsHidden(false)
 				.setLineId(lineId)
 				.setLineWidth(strokeWidth)

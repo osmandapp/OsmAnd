@@ -14,15 +14,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
-import java.net.URLConnection;
+import java.net.HttpURLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -45,8 +44,8 @@ public class MapTileDownloader {
 	private final ThreadPoolExecutor threadPoolExecutor;
 	private List<WeakReference<IMapDownloaderCallback>> callbacks = new LinkedList<>();
 
-	private final Set<File> pendingToDownload;
-	private final Set<File> currentlyDownloaded;
+	private final Map<File, DownloadRequest> pendingToDownload = new ConcurrentHashMap<>();
+	private final Map<File, DownloadRequest> currentlyDownloaded = new ConcurrentHashMap<>();
 
 	private int currentErrors = 0;
 	private long timeForErrorCounter = 0;
@@ -73,7 +72,7 @@ public class MapTileDownloader {
 		 * once method is called
 		 * (in order to not create a collection of request & reduce calling times)
 		 *
-		 * @param fileSaved
+		 * @param request
 		 */
 		void tileDownloaded(DownloadRequest request);
 	}
@@ -121,8 +120,6 @@ public class MapTileDownloader {
 	public MapTileDownloader(int numberOfThreads) {
 		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads,
 				TILE_DOWNLOAD_SECONDS_TO_WORK, TimeUnit.SECONDS, new LIFOBlockingDeque<Runnable>());
-		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
-		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
 	}
 	
 	public void setNoHttps(boolean noHttps) {
@@ -130,7 +127,7 @@ public class MapTileDownloader {
 	}
 
 	public void addDownloaderCallback(IMapDownloaderCallback callback) {
-		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
+		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<>(callbacks);
 		ncall.add(new WeakReference<>(callback));
 		callbacks = ncall;
 	}
@@ -163,11 +160,11 @@ public class MapTileDownloader {
 	}
 
 	public boolean isFilePendingToDownload(File f) {
-		return pendingToDownload.contains(f);
+		return f != null && pendingToDownload.containsKey(f);
 	}
 
 	public boolean isFileCurrentlyDownloaded(File f) {
-		return currentlyDownloaded.contains(f);
+		return f != null && currentlyDownloaded.containsKey(f);
 	}
 
 	public boolean isSomethingBeingDownloaded() {
@@ -198,12 +195,12 @@ public class MapTileDownloader {
 		if (request.url == null) {
 			return;
 		}
-		if(noHttps) {
+		if (noHttps) {
 			request.url = request.url.replace("https://", "http://");
 		}
 		if (!isFileCurrentlyDownloaded(request.fileToSave)
 				&& !isFilePendingToDownload(request.fileToSave)) {
-			pendingToDownload.add(request.fileToSave);
+			pendingToDownload.put(request.fileToSave, request);
 			threadPoolExecutor.execute(new DownloadMapWorker(request));
 		}
 	}
@@ -224,18 +221,19 @@ public class MapTileDownloader {
 		public void run() {
 			if (request != null && request.fileToSave != null && request.url != null) {
 				pendingToDownload.remove(request.fileToSave);
-				if (currentlyDownloaded.contains(request.fileToSave)) {
+				if (currentlyDownloaded.containsKey(request.fileToSave)) {
 					return;
 				}
 
-				currentlyDownloaded.add(request.fileToSave);
+				currentlyDownloaded.put(request.fileToSave, request);
 				if (log.isDebugEnabled()) {
 					log.debug("Start downloading tile : " + request.url); 
 				}
 				long time = System.currentTimeMillis();
 				request.setError(false);
+				HttpURLConnection connection = null;
 				try {
-					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
+					connection = NetworkUtils.getHttpURLConnection(request.url);
 					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); 
 					if (request.referer != null)
 						connection.setRequestProperty("Referer", request.referer); 
@@ -258,6 +256,9 @@ public class MapTileDownloader {
 					log.warn("Cannot download tile : " + request.url, e); 
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
+					if (connection != null) {
+						connection.disconnect();
+					}
 				}
 				if (!request.error) {
 					fireLoadCallback(request);

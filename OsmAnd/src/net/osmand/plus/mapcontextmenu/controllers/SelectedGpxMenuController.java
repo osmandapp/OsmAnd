@@ -11,10 +11,9 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -60,7 +59,7 @@ public class SelectedGpxMenuController extends MenuController {
 		rightTitleButtonController.startIconId = R.drawable.ic_action_analyze_intervals;
 	}
 
-	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxSelectionHelper.GpxDisplayItem> {
+	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxDisplayItem> {
 
 		private OsmandApplication app;
 
@@ -92,10 +91,10 @@ public class SelectedGpxMenuController extends MenuController {
 		}
 
 		@Override
-		protected GpxSelectionHelper.GpxDisplayItem doInBackground(Void... voids) {
+		protected GpxDisplayItem doInBackground(Void... voids) {
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
 			if (gpxFile.tracks.size() > 0) {
-				GpxDisplayGroup gpxDisplayGroup = app.getSelectedGpxHelper().buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
+				GpxDisplayGroup gpxDisplayGroup = app.getGpxDisplayHelper().buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
 
 				List<GpxDisplayItem> items = gpxDisplayGroup.getModifiableList();
 				if (!Algorithms.isEmpty(items)) {
@@ -106,7 +105,7 @@ public class SelectedGpxMenuController extends MenuController {
 		}
 
 		@Override
-		protected void onPostExecute(GpxSelectionHelper.GpxDisplayItem gpxItem) {
+		protected void onPostExecute(GpxDisplayItem gpxItem) {
 			MapActivity activity = activityRef.get();
 			if (activity != null) {
 				if (progressDialog != null && AndroidUtils.isActivityNotDestroyed(activity)) {

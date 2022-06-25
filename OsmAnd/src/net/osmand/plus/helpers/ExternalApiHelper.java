@@ -1,5 +1,14 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -54,7 +63,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.TurnType;
 import net.osmand.search.SearchUICore;
@@ -72,15 +81,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import static net.osmand.search.core.ObjectType.CITY;
-import static net.osmand.search.core.ObjectType.HOUSE;
-import static net.osmand.search.core.ObjectType.POI;
-import static net.osmand.search.core.ObjectType.POSTCODE;
-import static net.osmand.search.core.ObjectType.STREET;
-import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
-import static net.osmand.search.core.ObjectType.VILLAGE;
-import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 public class ExternalApiHelper {
 
@@ -681,9 +681,9 @@ public class ExternalApiHelper {
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
-							MapActivity _mapActivity = mapActivityRef.get();
-							if (_mapActivity != null && !routingHelper.isFollowingMode()) {
-								ExternalApiHelper.startNavigation(_mapActivity, gpxFile, checkLocationPermission);
+							MapActivity activity = mapActivityRef.get();
+							if (activity != null && !routingHelper.isFollowingMode()) {
+								ExternalApiHelper.startNavigation(activity, gpxFile, checkLocationPermission);
 							}
 						});
 					} else {
