@@ -1,6 +1,5 @@
 package net.osmand.router.network;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -48,6 +47,10 @@ public class NetworkRouteSelector {
 	private final NetworkRouteContext rCtx;
 	private final INetworkRouteSelection callback;
 
+	public interface INetworkRouteSelection {
+		boolean isCancelled();
+	}
+
 	// TODO - FIX & implement work with routing tags
 	// TEST:
 	// TODO https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
@@ -66,27 +69,18 @@ public class NetworkRouteSelector {
 		if (filter == null) {
 			filter = new NetworkRouteSelectorFilter();
 		}
-		rCtx = new NetworkRouteContext(files, filter, routing);
-		if (callback == null) {
-			callback = new INetworkRouteSelection() {
-				@Override
-				public boolean isCancelled() {
-					return false;
-				}
-
-				@Override
-				public boolean processResult(GPXFile result) {
-					return false;
-				}
-			};
-		}
+		this.rCtx = new NetworkRouteContext(files, filter, routing);
 		this.callback = callback;
 	}
 
 	public NetworkRouteContext getNetworkRouteContext() {
 		return rCtx;
 	}
-	
+
+	public boolean isCancelled() {
+		return callback != null && callback.isCancelled();
+	}
+
 	public Map<RouteKey, GPXFile> getRoutes(RenderedObject renderedObject) throws IOException {
 		int x = renderedObject.getX().get(0);
 		int y = renderedObject.getY().get(0);
@@ -310,7 +304,7 @@ public class NetworkRouteSelector {
 		for(int i = 0; i < chainsFlat.size(); ) {
 			NetworkRouteSegmentChain first = chainsFlat.get(i);
 			boolean merged = false;
-			for (int j = i + 1; j < chainsFlat.size() && !merged && !callback.isCancelled(); j++) {
+			for (int j = i + 1; j < chainsFlat.size() && !merged && !isCancelled(); j++) {
 				NetworkRouteSegmentChain second = chainsFlat.get(j);
 				if (MapUtils.squareRootDist31(first.getEndPointX(), first.getEndPointY(), second.getEndPointX(),
 						second.getEndPointY()) < rad) {
@@ -351,7 +345,7 @@ public class NetworkRouteSelector {
 	private int connectSimpleMerge(Map<Long, List<NetworkRouteSegmentChain>> chains,
 	                               Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
 		int merged = 1;
-		while (merged > 0 && !callback.isCancelled()) {
+		while (merged > 0 && !isCancelled()) {
 			int rs = reverseToConnectMore(chains, endChains, rad, radE);
 			merged = connectSimpleStraight(chains, endChains, rad, radE);
 			System.out.println(String.format("Simple merged: %d, reversed: %d (radius %d %d)", merged, rs, rad, radE));
@@ -416,7 +410,7 @@ public class NetworkRouteSelector {
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
 		int merged = 0;
 		boolean changed = true;
-		while (changed && !callback.isCancelled()) {
+		while (changed && !isCancelled()) {
 			changed = false;
 			mainLoop:
 			for (List<NetworkRouteSegmentChain> lst : chains.values()) {
@@ -581,7 +575,7 @@ public class NetworkRouteSelector {
 		long end = NetworkRouteContext.getTileId(segment.getEndPointX(), segment.getEndPointY());
 		queue.add(start);
 		queue.add(end);
-		while (!queue.isEmpty() && !callback.isCancelled()) {
+		while (!queue.isEmpty() && !isCancelled()) {
 			long tile = queue.get(queue.size() - 1);
 			queue.remove(queue.size() - 1, 1);
 			if (!visitedTiles.add(tile)) {
@@ -921,10 +915,5 @@ public class NetworkRouteSelector {
 			}
 			return lst;
 		}
-	}
-
-	public interface INetworkRouteSelection extends CallbackWithObject<GPXFile> {
-
-		boolean isCancelled();
 	}
 }

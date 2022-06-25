@@ -510,13 +510,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public void showProgressBarForNetwork() {
+	public void showHorizontalProgressBar() {
 		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		setupRouteCalculationProgressBar(pb);
+		setupProgressBar(pb, true);
 		pb.setVisibility(View.VISIBLE);
 	}
 
-	public void hideProgressBarForNetwork() {
+	public void hideHorizontalProgressBar() {
 		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
 		pb.setVisibility(View.GONE);
 	}
@@ -626,6 +626,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
+		RoutingHelper routingHelper = getRoutingHelper();
+		setupProgressBar(pb, routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
+	}
+
+	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
 		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
 
 		boolean nightMode = dayNightHelper.isNightModeForMapControls();
@@ -638,9 +643,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				? getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
-		RoutingHelper routingHelper = getRoutingHelper();
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
+		pb.setIndeterminate(indeterminate);
 		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
@@ -675,7 +679,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-
 		if (getMapLayers().getGpxLayer().isInRouteSelectionMode()) {
 			getMapLayers().getGpxLayer().cancelNetworkRouteSelect();
 			return;
