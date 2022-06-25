@@ -2400,4 +2400,148 @@
     <string name="restore_from_file">‎파일에서 복원‎</string>
     <string name="osmand_cloud_authorize_descr">‎데이터를 ‎‎잃지‎‎ 마십시오. 모든 정보를 쉽게 백업하고 복원하십시오.‎</string>
     <string name="restore_purchases">‎구매 ‎‎항목 복원‎</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">메모 태그</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">수로 터널을 숨기지 않기</string>
+    <string name="delete_online_routing_engine">이 온라인 라우팅 엔진을 제거하시겠습니까\?</string>
+    <string name="online_routing_engine">온라인 라우팅 엔진</string>
+    <string name="online_photos">온라인 사진</string>
+    <string name="routing_attr_avoid_4wd_only_name">4WD험로 주행회피</string>
+    <string name="routing_attr_goods_restrictions_name">상품 배송</string>
+    <string name="routing_attr_goods_restrictions_description">경품 차량(물품)에 대한 접근권한 고려</string>
+    <string name="send_crash_log">진단용 충돌로그 보내기</string>
+    <string name="add_online_source">온라인 소스 추가</string>
+    <string name="edit_online_source">온라인 소스 편집</string>
+    <string name="shared_string_app_default_w_val">앱 기본값(%s)</string>
+    <string name="begin_with_osmand_menu_group">사용을 위한 첫 단계</string>
+    <string name="help_us_to_improve_menu_group">OsmAnd 개선에 참여</string>
+    <string name="routing_attr_motor_type_name">모터가 사용하는 연료</string>
+    <string name="marker_1st">첫 번째 마커</string>
+    <string name="switch_widget_mode_desc">위젯을 탭하여 모드를 전환할 수 있습니다.</string>
+    <string name="side_marker_eta">도착 예정 시간</string>
+    <string name="next_live_update_date_and_time">다음 업데이트: %2$s의 %1$s.</string>
+    <string name="next_live_update_time">다음 업데이트: %1$s.</string>
+    <string name="updated_map_time">업데이트됨: %1$s.</string>
+    <string name="includes_osm_changes_until">%1$s까지 변경된 OSM을 포함합니다.</string>
+    <string name="altitude_correction">고도 보정</string>
+    <string name="no_altitude_data_desc">트랙을 도로에 연결하여 %1$s 데이터를 얻거나 온라인으로 계산할 수 있습니다.</string>
+    <string name="online_routing_example_hint">모든 매개변수가 있는 URL은:</string>
+    <string name="clear_active_markers_q">활성 마커를 모두 제거하시겠습니까\?</string>
+    <string name="map_marker_average_speed_desc">예상 도착 시간을 계산하기 위해 평균 속도를 측정할 시간 간격을 지정합니다.</string>
+    <string name="feedback">피드백</string>
+    <string name="shared_string_discussion">세션</string>
+    <string name="change_default_appearance">기본 모양 변경</string>
+    <string name="route_line_use_map_style_width">지도 스타일(%1$s) 기본 너비를 사용합니다.</string>
+    <string name="reset_all_settings_desc">모든 설정을 기본값으로 재설정하시겠습니까\?</string>
+    <string name="announcement_time_descr">다양한 음성 안내의 안내 시간은 안내 유형, 현재 탐색 속도 및 기본 탐색 속도에 따라 다릅니다.</string>
+    <string name="copy_from_other_profile">다른 프로필에서 복사</string>
+    <string name="default_appearance_desc">기본 색상, 아이콘 및 모양은 그룹에 추가된 즐겨찾기 포인트에 적용됩니다.</string>
+    <string name="profile_by_default_description">응용 프로그램 시작 시 사용할 프로필을 선택합니다.</string>
+    <string name="marker_2nd">두 번째 마커</string>
+    <string name="goods_delivery_desc_4">차량 중량이 3.5톤 이상인 경우 트럭 프로파일을 사용해야 합니다.</string>
+    <string name="osmand_online_routing_promo">미리 정의된 템플릿을 사용하거나 OSRM, GraphHopper, openrouteservice 또는 GPX 온라인 라우팅을 추가합니다.</string>
+    <string name="online_maps_required_descr">안타깝게도 OsmAnd는 설정에 대한 경로를 결정할 수 없습니다.
+\n
+\n어쩌면 일부지도가로드되지 않을 수도 있습니다, 당신은 필요한지도에 대한 온라인 검사를 실행할 수 있습니다.</string>
+    <string name="goods_delivery_desc_3">바퀴가 4개 이상이고 무게가 3.5톤 이하인 물품을 운반하는 차량에만 적용됩니다.</string>
+    <string name="goods_delivery_desc_2">물품 배달을 위해 폐쇄 된 도로는 피할 수 있습니다.</string>
+    <string name="goods_delivery_desc">물품을 운송하는 차량은 일부 도로에 접근이 제한될 수 있습니다.</string>
+    <string name="release_4_2">• 위젯 재설계: 새로운 모양과 느낌, 페이지별로 그룹화, 순서 변경 및 원하는 대로 결합.
+\n
+\n • 하이킹 / 자전거 타기 / 여행 경로: 경로 기호를 탭하면 경로에 대한 전체 정보를 얻을 수 있습니다.
+\n
+\n • 즐겨찾기 그룹: 그룹의 새 포인트에 대한 기본 모양 설정
+\n
+\n • 수정 사항: 온라인 타일 맵 자동 업데이트
+\n
+\n</string>
+    <string name="online_map_url_helper_text">온라인 소스의 URL을 입력하거나 붙여넣습니다.</string>
+    <string name="add_online_routing_engine">온라인 라우팅 엔진 추가</string>
+    <string name="online_webpage_warning">페이지는 온라인에서만 사용할 수 있습니다. 웹 브라우저에서 열었습니까\?</string>
+    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">수로 터널</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">픽스미 태그 표시</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">메모 태그 표시</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">낮은 줌의 아이콘</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">낮은 줌에서 아이콘의 도식적 표시</string>
+    <string name="release_4_1">• 안드로이드 자동에 대한 초기 지원이 추가
+\n
+\n• UTM 좌표 검색을 위한 사용자 인터페이스 업데이트
+\n
+\n• GPX 트랙을위한 GPS 필터
+\n
+\n• 고도 위젯 (프로)
+\n
+\n• 즐겨 찾기: 최근에 사용한 아이콘을 볼 수있는 기능이 추가되었습니다
+\n
+\n• 경로 계획 : 시작 후 선택한 프로파일을 사용합니다.
+\n
+\n• 고정 Mapillary 레이어, 플러그인은 이제 기본적으로 비활성화되어 있습니다.
+\n
+\n• 응용 프로그램의 모든 기록을 관리하는 화면이 추가되었습니다
+\n
+\n• 앱을 다시 시작한 후지도 방향이 재설정되지 않습니다.
+\n
+\n• 향상된 SRTM 높이 마커 렌더링
+\n
+\n• 고정 아랍어지도 캡션
+\n
+\n• 다른 라우팅 문제 수정
+\n
+\n</string>
+    <string name="osm_live_payment_subscription_management_amz">결제는 구매를 확인할 때 Amazon 계정에서 청구됩니다.
+\n
+\n선택한 갱신 기간 전에 취소되지 않는 한 갱신됩니다.
+\n
+\n언제든지 Amazon 설정에서 구독을 관리하거나 취소합니다.</string>
+    <string name="bottom_widgets_panel">하단 패널</string>
+    <string name="top_widgets_panel">상단 패널</string>
+    <string name="default_appearance">기본 모양</string>
+    <string name="import_tracks">트랙 가져오기</string>
+    <string name="move_all_to_history">모두 기록으로 이동</string>
+    <string name="circle_settings">서클 설정</string>
+    <string name="route_line_use_map_style_color">지도 스타일(%1$s) 기본 색상을 사용합니다.</string>
+    <string name="show_gpx">트랙</string>
+    <string name="shared_string_gpx_files">경로</string>
+    <string name="map_source_zoom_levels">최소 및 최대 확대 수준을 설정하여 온라인 지도를 표시하거나 로드합니다.</string>
+    <string name="live_monitoring">온라인 추적</string>
+    <string name="map_widget_time_to_intermediate">중간에 시간</string>
+    <string name="online_map_name_helper_text">온라인 지도 소스의 이름을 입력합니다.</string>
+    <string name="explore_plans">계획 살펴보기</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">군사 지역 숨기기</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">군사 지역 숨기기</string>
+    <string name="select_nav_profile_dialog_message">\'탐색 유형\'은 사용 가능한 오프라인 및 온라인 라우팅 엔진을 사용하여 경로를 계산하는 방법을 선택합니다.</string>
+    <string name="calculate_online_altitude_descr">위성 이미지 및 디지털 고도 모델을 기반으로 OsmAnd 서버에서 온라인으로 고도를 계산합니다. 장치에 기록된 고도와 다를 수 있으며 고도 보정으로 사용할 수 있습니다.</string>
+    <string name="online_routing_engines">온라인 라우팅 엔진</string>
+    <string name="open_wikipedia_link_online">온라인 위키백과 링크 열기</string>
+    <string name="contact_us">연락하기</string>
+    <string name="average_speed_skip_stops_desc">%1$s 미만의 속도는 계산되지 않으며 평균 속도에 영향을 미칩니다.</string>
+    <string name="average_speed_widget_desc">현재 주행차의 평균 속도를 표시합니다.</string>
+    <string name="map_widget_average_speed">평균 속도</string>
+    <string name="marker_save_as_track">경로 파일로 저장</string>
+    <string name="layer_gpx_layer">경로</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">픽스미 태그</string>
+    <string name="routing_attr_motor_type_description">CO2 배출량을 계산하기 위해 차량 모터에서 사용하는 연료 유형을 선택하십시오.</string>
+    <string name="transport_hazmat_yes_desc">적절한 카테고리를 선택해야 합니다.</string>
+    <string name="transport_hazmat_no_desc">일부 도로 및 터널에서는 유해 물질 운송이 금지되어 있습니다.</string>
+    <string name="transport_hazmat_title">유해 물질 운송</string>
+    <string name="routing_attr_avoid_4wd_only_description">4WD 전용 차량에만 적합한 도로를 피하기</string>
+    <string name="send_logcat_log">개선용 진단로그 보내기</string>
+    <string name="edit_online_routing_engine">온라인 라우팅 엔진 편집</string>
+    <string name="system_default_theme">시스템 기본값</string>
+    <string name="open_wikipedia_link_online_description">링크는 웹 브라우저에서 열립니다.</string>
+    <string name="shared_string_mode">모드</string>
+    <string name="coordinates_widget_secondary_desc">좌표 형식은 %1$s – %2$s – %3$s에서 변경될 수 있습니다.</string>
+    <string name="widget_secondary_desc_part_of">%1$s 플러그인의 일부입니다.</string>
+    <string name="bearing_secondary_desc">표시된 데이터의 형식을 변경: %1$s – %2$s – %3$s.</string>
+    <string name="elevation_profile_widget_desc">위젯은 현재 경로의 고도 및 경사 프로파일을 보여줍니다.</string>
+    <string name="profile_import">‎프로파일‎‎ 가져오기‎</string>
+    <string name="live_update_frequency_day_variant">지도 업데이트는 매일 확인됩니다.</string>
+    <string name="live_update_frequency_week_variant">지도 업데이트는 매주 확인됩니다.</string>
+    <string name="live_update_frequency_hour_variant">지도 업데이트는 매시간 확인됩니다.</string>
+    <string name="default_screen_timeout">기본 화면 시간 초과</string>
+    <string name="time_to_navigation_point_widget_settings_desc">위젯을 탭하여 모드를 전환합니다.</string>
+    <string name="map_widget_time_to_destination">목적지까지의 시간</string>
+    <string name="map_widget_distance_to_intermediate">중간까지의 거리</string>
+    <string name="reset_deafult_order">기본 항목 순서 복원</string>
+    <string name="lang_ckb">중부 쿠르드족</string>
+    <string name="co2_mission">CO2 배출</string>
 </resources>
