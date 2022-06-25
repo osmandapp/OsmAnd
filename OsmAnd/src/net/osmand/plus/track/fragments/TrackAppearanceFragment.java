@@ -3,7 +3,6 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.GpxAppearanceAdapter.getAppearanceItems;
 import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 import android.graphics.Color;
@@ -828,7 +827,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private List<Integer> getTrackColors() {
 		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
+		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
 			if (!colors.contains(appearanceListItem.getColor())) {
 				colors.add(appearanceListItem.getColor());
 			}

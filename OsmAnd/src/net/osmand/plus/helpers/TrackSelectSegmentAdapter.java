@@ -1,7 +1,5 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.track.helpers.GpxDisplayHelper.buildTrackSegmentName;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +17,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
@@ -49,7 +48,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 				continue;
 			}
 			for (TrkSegment segment : track.segments) {
-				String trackSegmentTitle = buildTrackSegmentName(gpxFile, track, segment, app);
+				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, app);
 				titledSegments.add(new TitledSegment(segment, trackSegmentTitle));
 			}
 		}

@@ -4,7 +4,6 @@ import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 
 import android.content.Context;
@@ -768,7 +767,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				List<Pair<WptPt, MapMarker>> fullObjects = new ArrayList<>();
 				int fileColor = getFileColor(g);
 				boolean synced = isSynced(g.getGpxFile());
-				boolean selected = isGpxFileSelected(app, g.getGpxFile());
+				boolean selected = GpxSelectionHelper.isGpxFileSelected(app, g.getGpxFile());
 				for (WptPt wpt : getSelectedFilePoints(g)) {
 					if (wpt.lat >= latLonBounds.bottom && wpt.lat <= latLonBounds.top
 							&& wpt.lon >= latLonBounds.left && wpt.lon <= latLonBounds.right
@@ -788,12 +787,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							@ColorInt
 							int color;
-							if (!selected) {
-								color = disabledColor;
-							} else if (marker != null && marker.history) {
-								color = grayColor;
+							if (selected) {
+								if (marker != null && marker.history) {
+									color = grayColor;
+								} else {
+									color = getPointColor(wpt, fileColor);
+								}
 							} else {
-								color = getPointColor(wpt, fileColor);
+								color = disabledColor;
 							}
 							PointImageDrawable pointImageDrawable = PointImageDrawable.getFromWpt(getContext(), color,
 									true, wpt);
@@ -863,6 +864,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				int fileColor = getFileColor(g);
 				boolean synced = isSynced(g.getGpxFile());
+				boolean selected = GpxSelectionHelper.isGpxFileSelected(app, g.getGpxFile());
 				for (WptPt wpt : getSelectedFilePoints(g)) {
 					if (wpt != contextMenuLayer.getMoveableObject() && !isPointHidden(g, wpt)) {
 						pointFileMap.put(wpt, g);
@@ -873,14 +875,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								continue;
 							}
 						}
-						int colorBigPoint = getPointColor(wpt, fileColor);
+						int colorBigPoint = selected ? getPointColor(wpt, fileColor) : disabledColor;
 						int colorSmallPoint;
 						boolean history = false;
-						if (marker != null && marker.history) {
-							colorSmallPoint = grayColor;
-							history = true;
+						if (selected) {
+							if (marker != null && marker.history) {
+								colorSmallPoint = grayColor;
+								history = true;
+							} else {
+								colorSmallPoint = getPointColor(wpt, fileColor);
+							}
 						} else {
-							colorSmallPoint = getPointColor(wpt, fileColor);
+							colorSmallPoint = disabledColor;
 						}
 						pointsTileProvider.addToData(wpt, colorBigPoint, colorSmallPoint, true, marker != null, history, textScale);
 					}
@@ -1143,10 +1149,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		int color = 0;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			color = trackDrawInfo.getColor();
+		} else if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+			color = disabledColor;
 		} else if (gpxFile.showCurrentTrack) {
 			color = currentTrackColorPref.get();
-		} else if (!isGpxFileSelected(app, gpxFile)) {
-			color = disabledColor;
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
