@@ -158,6 +158,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new HashMap<>();
+	private SelectedGpxFile tmpVisibleTrack;
 
 	private final List<WptPt> pointsCache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
@@ -320,7 +321,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
-		addTmpVisibleTrack(visibleGPXFiles);
+
+		boolean tmpVisibleTrackChanged = false;
+		SelectedGpxFile tmpVisibleTrack = getTmpVisibleTrack(visibleGPXFiles);
+		if (tmpVisibleTrack != null) {
+			visibleGPXFiles.add(tmpVisibleTrack);
+			tmpVisibleTrackChanged = this.tmpVisibleTrack != tmpVisibleTrack;
+			this.tmpVisibleTrack = tmpVisibleTrack;
+		}
 
 		pointsCache.clear();
 		removeCachedUnselectedTracks(visibleGPXFiles);
@@ -340,7 +348,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.nightMode = nightMode;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified;
+			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged;
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
 			}
@@ -364,27 +372,28 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		mapActivityInvalidated = false;
 	}
 
-	private void addTmpVisibleTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles) {
+	@Nullable
+	private SelectedGpxFile getTmpVisibleTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
+		if (mapActivity != null) {
+			SelectedGpxFile selectedGpxFile = null;
+			TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
+			if (fragment != null) {
+				selectedGpxFile = fragment.getSelectedGpxFile();
+			}
+			TrackAppearanceFragment appearanceFragment = mapActivity.getTrackAppearanceFragment();
+			if (appearanceFragment != null) {
+				selectedGpxFile = appearanceFragment.getSelectedGpxFile();
+			}
+			GpsFilterFragment gpsFilterFragment = mapActivity.getGpsFilterFragment();
+			if (gpsFilterFragment != null) {
+				selectedGpxFile = gpsFilterFragment.getSelectedGpxFile();
+			}
+			if (selectedGpxFile != null && !selectedGpxFiles.contains(selectedGpxFile)) {
+				return selectedGpxFile;
+			}
 		}
-		SelectedGpxFile selectedGpxFile = null;
-		TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
-		if (fragment != null) {
-			selectedGpxFile = fragment.getSelectedGpxFile();
-		}
-		TrackAppearanceFragment appearanceFragment = mapActivity.getTrackAppearanceFragment();
-		if (appearanceFragment != null) {
-			selectedGpxFile = appearanceFragment.getSelectedGpxFile();
-		}
-		GpsFilterFragment gpsFilterFragment = mapActivity.getGpsFilterFragment();
-		if (gpsFilterFragment != null) {
-			selectedGpxFile = gpsFilterFragment.getSelectedGpxFile();
-		}
-		if (selectedGpxFile != null && !selectedGpxFiles.contains(selectedGpxFile)) {
-			selectedGpxFiles.add(selectedGpxFile);
-		}
+		return null;
 	}
 
 	private boolean updatePaints(int color, String width, boolean routePoints, boolean currentTrack, DrawSettings drawSettings, RotatedTileBox tileBox) {
@@ -1230,7 +1239,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isShowStartFinishForTrack(@NonNull GPXFile gpxFile) {
-		if (hasTrackDrawInfoForTrack(gpxFile)) {
+		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+			return false;
+		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowStartFinish();
 		} else if (gpxFile.showCurrentTrack) {
 			return currentTrackShowStartFinishPref.get();
