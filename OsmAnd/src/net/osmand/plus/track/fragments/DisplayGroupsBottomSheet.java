@@ -17,9 +17,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -82,7 +82,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		callback = (DisplayPointGroupsCallback) getTargetFragment();
 		if (callback != null) {
 			displayHelper = callback.getDisplayHelper();
-			selectedGpxFile = callback.getSelectedGpx();
+			selectedGpxFile = callback.getSelectedGpxFile();
 			initSelectableItems();
 		}
 	}
@@ -251,7 +251,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 		void onPointGroupsVisibilityChanged();
 
-		SelectedGpxFile getSelectedGpx();
+		SelectedGpxFile getSelectedGpxFile();
 
 		TrackDisplayHelper getDisplayHelper();
 	}

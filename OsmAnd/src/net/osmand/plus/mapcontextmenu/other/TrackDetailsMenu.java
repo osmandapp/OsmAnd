@@ -45,9 +45,9 @@ import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -239,8 +239,8 @@ public class TrackDetailsMenu {
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity != null && gpxItem != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (groupGpx != null && gpxItem.chartPointLayer == ChartPointLayer.GPX) {
+			GPXFile groupGpx = gpxItem.group.getGpxFile();
+			if (gpxItem.chartPointLayer == ChartPointLayer.GPX) {
 				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.path) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
@@ -283,12 +283,12 @@ public class TrackDetailsMenu {
 		GpxDisplayItem gpxItem = getGpxItem();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (gpxItem != null && gpxItem.chartPointLayer == ChartPointLayer.GPX && gpxItem.wasHidden
-					&& gpxItem.group != null && gpxItem.group.getGpx() != null) {
+			if (gpxItem != null && gpxItem.chartPointLayer == ChartPointLayer.GPX
+					&& gpxItem.wasHidden && gpxItem.group != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
-				helper.selectGpxFile(gpxItem.group.getGpx(), params);
+				helper.selectGpxFile(gpxItem.group.getGpxFile(), params);
 			}
 			TrackDetailsBarController toolbarController = this.toolbarController;
 			if (toolbarController != null) {
@@ -341,7 +341,7 @@ public class TrackDetailsMenu {
 				return null;
 			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			GPXFile gpxFile = gpxItem.group.getGpx();
+			GPXFile gpxFile = gpxItem.group.getGpxFile();
 			boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
@@ -484,7 +484,7 @@ public class TrackDetailsMenu {
 			TrkSegment segment = getTrackSegment(chart);
 			int segmentColor = segment != null ? segment.getColor(0) : 0;
 			trackChartPoints.setSegmentColor(segmentColor);
-			trackChartPoints.setGpx(gpxItem.group.getGpx());
+			trackChartPoints.setGpx(gpxItem.group.getGpxFile());
 			this.trackChartPoints = trackChartPoints;
 		}
 

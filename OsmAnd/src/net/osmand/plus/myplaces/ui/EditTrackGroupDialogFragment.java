@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -35,20 +38,17 @@ import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
 public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
 
@@ -70,15 +70,15 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		mapMarkersHelper = app.getMapMarkersHelper();
 		items.add(new TitleItem(getCategoryName(app, group.getName())));
 
-		GPXFile gpxFile = group.getGpx();
+		GPXFile gpxFile = group.getGpxFile();
 
-		boolean currentTrack = group.getGpx().showCurrentTrack;
+		boolean currentTrack = group.getGpxFile().showCurrentTrack;
 
 		SelectedGpxFile selectedGpxFile;
 		if (currentTrack) {
 			selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 		} else {
-			selectedGpxFile = selectedGpxHelper.getVisibleFileByPath(gpxFile.path);
+			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 		}
 		boolean trackPoints = group.getType() == GpxDisplayItemType.TRACK_POINTS;
 		if (trackPoints && selectedGpxFile != null) {
@@ -174,7 +174,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void updateGroupWptCategory(GPXFile gpxFile, boolean synced) {
-		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getVisibleFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
 					.showOnMap().selectedAutomatically().saveSelection();
@@ -252,7 +252,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	private void deleteGroupItems() {
 		Set<GpxDisplayItem> items = new HashSet<>(group.getModifiableList());
-		new DeletePointsTask(app, group.getGpx(), items, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new DeletePointsTask(app, group.getGpxFile(), items, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private BaseBottomSheetItem createChangeColorItem() {
@@ -263,7 +263,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						GPXFile gpxFile = group.getGpx();
+						GPXFile gpxFile = group.getGpxFile();
 						PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
 						FragmentManager manager = activity.getSupportFragmentManager();
 						GpxGroupEditorFragment.showInstance(manager, gpxFile, pointsGroup, null);

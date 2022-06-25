@@ -36,7 +36,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.TrackPointsAdapter.OnItemSelectedListener;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -115,7 +115,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	protected void setupListView(@NonNull View view) {
 		GPXFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
-		GpxDisplayGroup group = app.getSelectedGpxHelper().buildPointsDisplayGroup(gpxFile, points, trackItem.name);
+		GpxDisplayGroup group = app.getGpxDisplayHelper().buildPointsDisplayGroup(gpxFile, points, trackItem.name);
 
 		adapter = new TrackPointsAdapter(app, selectedPoints, nightMode);
 		adapter.setListener(this);
