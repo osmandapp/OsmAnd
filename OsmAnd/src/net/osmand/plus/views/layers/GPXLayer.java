@@ -77,6 +77,7 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
+import net.osmand.plus.track.helpers.NetworkRouteSelectionTask.NetworkRouteSelectionCallback;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -100,7 +101,6 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -244,6 +244,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	public void setTrackDrawInfo(TrackDrawInfo trackDrawInfo) {
 		this.trackDrawInfo = trackDrawInfo;
+	}
+
+	public boolean isInRouteSelectionMode() {
+		return inRouteSelectionMode;
 	}
 
 	public void cancelNetworkRouteSelect() {
@@ -1638,7 +1642,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					QuadRect rect = (QuadRect) pair.second;
 					NetworkRouteSegment routeSegment = (NetworkRouteSegment) pair.first;
 					LatLon latLon = getObjectLocation(object);
-					NetworkRouteSelector.INetworkRouteSelection callback = new NetworkRouteSelector.INetworkRouteSelection() {
+					NetworkRouteSelectionCallback callback = new NetworkRouteSelectionCallback() {
 						@Override
 						public boolean isCancelled() {
 							return cancelNetworkRouteSelect;
@@ -1647,6 +1651,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						@Override
 						public boolean processResult(GPXFile gpxFile) {
 							inRouteSelectionMode = false;
+							cancelNetworkRouteSelect = false;
 							if (gpxFile != null) {
 								WptPt wptPt = new WptPt();
 								wptPt.lat = latLon.getLatitude();
@@ -1661,8 +1666,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					};
 					inRouteSelectionMode = true;
 					cancelNetworkRouteSelect = false;
-					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(mapActivity, routeSegment,
-							rect, callback);
+					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
+							mapActivity, routeSegment, rect, callback);
 					selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					return true;
 				}
@@ -1757,9 +1762,5 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (group != null) {
 			mapMarkersHelper.runSynchronization(group);
 		}
-	}
-
-	public boolean isInRouteSelectionMode() {
-		return inRouteSelectionMode;
 	}
 }
