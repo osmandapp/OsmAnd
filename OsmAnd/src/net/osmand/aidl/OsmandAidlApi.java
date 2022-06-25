@@ -519,7 +519,7 @@ public class OsmandAidlApi {
 							if (mapLayer != null) {
 								mapActivity.getMapView().removeLayer(mapLayer);
 							}
-							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack(), -180000);
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack());
 							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
 							connectedApp.getMapLayers().put(layerId, mapLayer);
 						}

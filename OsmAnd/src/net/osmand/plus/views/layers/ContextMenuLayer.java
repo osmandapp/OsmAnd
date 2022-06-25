@@ -107,9 +107,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private Object selectedObject;
 	private Object selectedObjectCached;
 
-	public ContextMenuLayer(@NonNull Context context, int baseOrder) {
+	public ContextMenuLayer(@NonNull Context context) {
 		super(context);
-		this.baseOrder = baseOrder;
 		selectionHelper = new MapSelectionHelper(context);
 	}
 
@@ -221,7 +220,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								.setLineWidth(outlinePaint.getStrokeWidth() * VECTOR_LINE_SCALE_COEF)
 								.setFillColor(NativeUtilities.createFColorARGB(outlinePaint.getColor()))
 								.setApproximationEnabled(false)
-								.setBaseOrder(baseOrder);
+								.setBaseOrder(getBaseOrder());
 						builder.buildAndAddToCollection(outlineCollection);
 						this.outlineCollection = outlineCollection;
 						mapRenderer.addSymbolsProvider(outlineCollection);

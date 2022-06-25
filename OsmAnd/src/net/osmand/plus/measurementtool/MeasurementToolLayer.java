@@ -121,9 +121,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private final Path multiProfilePath = new Path();
 	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
 
-	public MeasurementToolLayer(@NonNull Context ctx, int baseOrder) {
+	public MeasurementToolLayer(@NonNull Context ctx) {
 		super(ctx);
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -789,7 +788,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			activePointsCollection = new MapMarkersCollection();
 			// Center marker
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(nightMode ? centerIconNight : centerIconDay));
@@ -797,21 +796,21 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			mapRenderer.addSymbolsProvider(activePointsCollection);
 			// Before marker
 			builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(pointIcon));
 			beforePointMarker = builder.buildAndAddToCollection(activePointsCollection);
 			// After marker
 			builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(pointIcon));
 			afterPointMarker = builder.buildAndAddToCollection(activePointsCollection);
 			// Selected marker
 			builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(applyingPointIcon));
@@ -942,7 +941,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			clearXAxisPoints();
 			if (!Algorithms.isEmpty(xAxisPoints)) {
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(lineAttrs.defaultColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(baseOrder - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getBaseOrder() - 500, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -969,7 +968,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(highlightedPointImage));

@@ -199,9 +199,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
 	private OsmandPreference<Boolean> currentTrackShowStartFinishPref;
 
-	public GPXLayer(@NonNull Context ctx, int baseOrder) {
+	public GPXLayer(@NonNull Context ctx) {
 		super(ctx);
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -924,7 +923,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					pointColor = getTrackColor(trackChartPoints.getGpx(), cachedColor);
 				}
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(pointColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(baseOrder - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getBaseOrder() - 500, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -947,7 +946,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(highlightedPointImage));
