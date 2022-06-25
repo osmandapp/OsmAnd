@@ -4335,4 +4335,9 @@
     <string name="poi_club_youth_movement">Movimento juvenil</string>
     <string name="poi_club_amateur_radio">Clube de radioamadorismo</string>
     <string name="poi_club_religion">Clube religioso</string>
+    <string name="poi_club_dog">Clube canino</string>
+    <string name="poi_short_name">Nome abreviado</string>
+    <string name="poi_club_aviation">Clube aeronáutico</string>
+    <string name="poi_club_bicycle">Clube de ciclismo</string>
+    <string name="poi_club_doityourself">Clube de bricolagem</string>
 </resources>

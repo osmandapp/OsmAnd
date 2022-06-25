@@ -4691,8 +4691,8 @@
     <string name="routing_attr_motor_type_diesel_name">Dizel</string>
     <string name="routing_attr_motor_type_electric_name">Električni</string>
     <string name="routing_attr_motor_type_gas_name">Stisnjen zemeljski plin CNG</string>
-    <string name="routing_attr_motor_type_name">Tip motorja</string>
-    <string name="routing_attr_motor_type_description">Za izračun CO2</string>
+    <string name="routing_attr_motor_type_name">Gorivo, ki ga uporablja motor</string>
+    <string name="routing_attr_motor_type_description">Za izračun emisij CO2 izberi vrsto goriva, ki ga uporablja motor tvojega vozila.</string>
     <string name="routing_attr_motor_type_petrol_name">Bencin</string>
     <string name="routing_attr_motor_type_lpg_name">Avtoplin LPG</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibridni</string>
@@ -4717,4 +4717,5 @@
     <string name="marker_1st">Prva oznaka</string>
     <string name="reset_all_settings_desc">Ali si prepričan/a, da želiš ponastaviti vse nastavitve na privzete\?</string>
     <string name="goods_delivery_desc_3">Velja samo za vozila, ki prevažajo blago, imajo vsaj štiri kolesa in tehtajo največ 3,5 tone.</string>
+    <string name="routing_attr_goods_restrictions_name">Dostava blaga</string>
 </resources>

@@ -57,14 +57,12 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 			ResourceManager rm = app.getResourceManager();
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
-
 			String dirWithTiles = null;
 			if (tileSource.couldBeDownloadedFromInternet()) {
+				dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
 				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-				dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
-
-				while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, tileX, tileY,
+				while (rm.getBitmapTilesCache().getTileForMapSync(tileFilename, tileSource, tileX, tileY,
 						zoom, true, requestTimestamp) == null) {
 					synchronized (tileReadyCallback.getSync()) {
 						if (tileReadyCallback.isReady()) {

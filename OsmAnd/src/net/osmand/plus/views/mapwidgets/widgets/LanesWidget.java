@@ -175,7 +175,7 @@ public class LanesWidget extends MapWidget {
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
-		ViewGroup specialContainer = mapActivity.findViewById(R.id.lanes_widget_special_position);
+		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
 		boolean specialPosition = true;
@@ -190,5 +190,17 @@ public class LanesWidget extends MapWidget {
 		} else {
 			container.addView(view, order);
 		}
+	}
+
+	@Override
+	public void detachView() {
+		super.detachView();
+		// Clear in case link to previous view of LanesWidget is lost
+		getSpecialContainer().removeAllViews();
+	}
+
+	@NonNull
+	private ViewGroup getSpecialContainer() {
+		return mapActivity.findViewById(R.id.lanes_widget_special_position);
 	}
 }

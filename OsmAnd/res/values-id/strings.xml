@@ -3041,7 +3041,7 @@
     <string name="select_segments">Pilih segmen</string>
     <string name="announcement_time_intervals">Interval waktu dan jarak</string>
     <string name="announcement_time_title">Waktu pengumuman</string>
-    <string name="analyze_by_intervals">Analisis interval potongan</string>
+    <string name="analyze_by_intervals">Analisa berdasarkan interval</string>
     <string name="icon_group_amenity">Fasilitas</string>
     <string name="plan_route_import_track">Impor trek</string>
     <string name="send_logcat_log">Kirim catatan logcat</string>
@@ -3839,7 +3839,7 @@
     <string name="rendering_attr_horseScale_name">Kesulitan jalur kuda</string>
     <string name="map_widget_time_to_destination">Waktu ke tujuan</string>
     <string name="map_widget_distance_to_intermediate">Jarak ke perantara</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Tidak ada batasan</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Tanpa batasan)</string>
     <string name="release_3_5">• Pengaturan aplikasi dan profil yang diperbarui: Pengaturan sekarang diatur menurut jenisnya. Setiap profil bisa dikustomisasi secara terpisah.
 \n
 \n • Dialog unduhan peta baru yang menyarankan peta untuk diunduh saat menjelajah
@@ -3907,4 +3907,135 @@
     <string name="lang_es_ar">Spanyol (Argentina)</string>
     <string name="lang_nb">Bokmål Norwegia</string>
     <string name="rendering_value_lightgreen_name">Hijau muda</string>
+    <string name="marker_2nd">Penanda kedua</string>
+    <string name="goods_delivery_desc_4">Jika berat kendaraan Anda lebih dari 3,5 ton, Anda harus menggunakan profil Truk.</string>
+    <string name="updated_map_time">Diperbarui: %1$s.</string>
+    <string name="routing_attr_motor_type_petrol_name">Bensin</string>
+    <string name="app_mode_shuttle_bus">Bus antar jemput</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Tingkat 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Tingkat 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Tingkat 4</string>
+    <string name="points_of_interests">Tempat menarik (POI)</string>
+    <string name="access_disable_offroute_recalc_descr">Tidak ada penghitungan ulang rute setelah keluar dari rute.</string>
+    <string name="keep_passed_markers">Simpan penanda yang dilewati pada peta</string>
+    <string name="import_as_one_track">Impor sebagai satu trek</string>
+    <string name="transport_hazmat_title">Pengangkutan bahan berbahaya</string>
+    <string name="routing_attr_goods_restrictions_description">Pertimbangkan izin akses untuk kendaraan barang ringan (barang)</string>
+    <string name="use_latin_name_if_missing">Gunakan nama latin jika tidak ada</string>
+    <string name="transport_hazmat_yes_desc">Anda harus memilih kategori yang tepat.</string>
+    <string name="map_widget_magnetic_bearing">Bantalan magnetik</string>
+    <string name="time_of_day">Waktu dalam sehari</string>
+    <string name="marker_1st">Penanda pertama</string>
+    <string name="side_marker_eta">Perkiraan waktu tiba</string>
+    <string name="reset_all_settings_desc">Apakah Anda yakin ingin mengatur ulang semua pengaturan ke pengaturan bawaan\?</string>
+    <string name="goods_delivery_desc_3">Hanya berlaku untuk kendaraan yang membawa barang yang memiliki setidaknya empat roda dan beratnya tidak lebih dari 3,5 ton.</string>
+    <string name="goods_delivery_desc">Kendaraan pengangkut barang dapat dibatasi untuk mengakses beberapa jalan.</string>
+    <string name="includes_osm_changes_until">Termasuk perubahan OSM yang dibuat hingga %1$s.</string>
+    <string name="next_live_update_date_and_time">Pembaruan berikutnya: %1$s pada %2$s.</string>
+    <string name="next_live_update_time">Pembaruan berikutnya: pada %1$s.</string>
+    <string name="altitude_correction">Pembenaran ketinggian</string>
+    <string name="co2_mission">Emisi CO2</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">Listrik</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibrida</string>
+    <string name="live_update_frequency_day_variant">Pembaruan peta akan diperiksa setiap hari.</string>
+    <string name="map_marker_average_speed_desc">Tentukan interval waktu di mana kecepatan rata-rata akan diukur untuk menghitung perkiraan waktu kedatangan.</string>
+    <string name="switch_widget_mode_desc">Anda dapat beralih mode dengan mengetuk widget.</string>
+    <string name="routing_attr_avoid_share_taxi_name">Tidak ada taksi berbagi</string>
+    <string name="goods_delivery_desc_2">Jalan yang ditutup untuk pengiriman barang akan dihindari.</string>
+    <string name="routing_attr_avoid_subway_description">Menghindari kereta bawah tanah dan transportasi kereta api ringan</string>
+    <string name="public_transport_warning_title">Navigasi transportasi umum saat ini dalam pengujian beta, kemungkinan ada kesalahan dan ketidakbenaran.</string>
+    <string name="no_altitude_data_desc">Anda dapat melampirkan trek Anda ke jalan untuk mendapatkan data %1$s atau menghitungnya secara daring.</string>
+    <string name="edit_map_marker">Edit penanda peta</string>
+    <string name="release_3_4">• Profil aplikasi: Buat profil khusus untuk kebutuhan Anda sendiri, dengan ikon dan warna khusus
+\n
+\n• Sekarang Anda dapat sesuaikan profil apa pun default dan kecepatan min/maks
+\n
+\n• Ditambahkan widget untuk koordinat saat ini
+\n
+\n• Ditambahkan opsi untuk menampilkan kompas dan penggaris radius pada peta
+\n
+\n• Diperbaiki pencatatan trek latar belakang
+\n
+\n• Unduhan peta latar belakang yang ditingkatkan
+\n
+\n• Opsi \'Nyalakan layar\' dikembalikan
+\n
+\n• Diperbaiki pilihan bahasa Wikipedia
+\n
+\n• Diperbaiki perilaku tombol kompas selama navigasi
+\n
+\n• Perbaikan kutu lainnya
+\n
+\n</string>
+    <string name="ski_map_render_descr">Untuk bermain ski. Memfiturkan piste, angkutan ski, trek lintas negara, dll. Meredupkan objek peta sekunder.</string>
+    <string name="rendering_attr_whiteWaterSports_name">Olahraga arung</string>
+    <string name="pick_up_till">Pengambilan sampai</string>
+    <string name="access_direction_haptic_feedback">Arah haptik</string>
+    <string name="access_direction_haptic_feedback_descr">Tunjukkan arah titik target dengan getaran.</string>
+    <string name="app_mode_personal_transporter">Pengangkut pribadi</string>
+    <string name="contour_lines_hillshade_maps">Garis kontur &amp; peta bayangan bukit</string>
+    <string name="subsequent_dest_description">Pindahkan tujuan ke atas, dan buat</string>
+    <string name="access_smart_autoannounce_descr">Hanya beritahu ketika arah ke titik target berubah.</string>
+    <string name="routing_attr_avoid_share_taxi_description">Menghindari taksi berbagi</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Tingkat 5</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tombol untuk menampilkan atau menyembunyikan trek yang dipilih pada peta.</string>
+    <string name="intermediate_waypoint">Titik perantara</string>
+    <string name="choose_track_file_to_follow">Pilih file trek untuk diikuti</string>
+    <string name="voice_announcements">Perintah suara</string>
+    <string name="intermediate_destinations">Tujuan perantara</string>
+    <string name="select_waypoints_category_description">Tambahkan semua titik arah trek, atau pilih kategori terpisah.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Tidak ada jalan es atau arungan</string>
+    <string name="quick_action_directions_from_desc">Tombol untuk membuat layar menjadi pusat titik keberangkatan. Kemudian akan meminta untuk menetapkan tujuan atau memicu perhitungan rute.</string>
+    <string name="access_disable_offroute_recalc">Tidak ada penghitungan ulang rute setelah meninggalkannya</string>
+    <string name="current_track">Trek saat ini</string>
+    <string name="change_markers_position">Ubah posisi penanda</string>
+    <string name="access_disable_wrong_direction_recalc">Tidak ada penghitungan ulang rute untuk arah yang berlawanan</string>
+    <string name="move_marker_bottom_sheet_title">Pindahkan peta untuk mengubah posisi penanda</string>
+    <string name="map_widget_bearing">Bantalan relatif</string>
+    <string name="save_poi_value_exceed_length_title">Panjang nilai \"%s\"</string>
+    <string name="transport_nearby_routes_within">Rute terdekat dalam</string>
+    <string name="access_direction_audio_feedback_descr">Tunjukkan arah titik target dengan suara.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Tidak ada penghitungan ulang rute saat hanya bergerak ke arah yang berlawanan.</string>
+    <string name="markers_remove_dialog_msg">Hapus penanda peta \'%s\'\?</string>
+    <string name="rendering_attr_surface_grass_paver_name">Turap rumput</string>
+    <string name="nautical_render_descr">Untuk navigasi laut. Menampilkan pelampung, mercusuar, jalur sungai, alur dan marka laut, pelabuhan, layanan marka laut, dan kontur kedalaman.</string>
+    <string name="snowmobile_render_descr">Untuk mengemudi mobil salju dengan jalan dan trek khusus.</string>
+    <string name="live_update_frequency_hour_variant">Pembaruan peta akan diperiksa setiap sejam.</string>
+    <string name="live_update_frequency_week_variant">Pembaruan peta akan diperiksa setiap minggu.</string>
+    <string name="transfers_size">%1$d transfer</string>
+    <string name="topo_render_descr">Untuk hiking, trekking, dan bersepeda alam. Dapat dibaca di luar ruangan. Jalan yang kontras dan objek alami, jenis rute yang berbeda, opsi garis kontur lanjutan, detail tambahan. Menyesuaikan Integritas permukaan membedakan kualitas jalan. Tidak ada mode malam.</string>
+    <string name="default_render_descr">Gaya penggunaan umum. Kota padat ditampilkan dengan bersih. Menampilkan garis kontur, rute, kualitas permukaan, pembatasan akses, perisai jalan, perenderan jalur sesuai dengan skala SAC, item olahraga arung.</string>
+    <string name="touring_view_render_descr">Gaya tur dengan kontras tinggi dan detail maksimum. Mencakup semua opsi gaya bawaan OsmAnd, sekaligus menampilkan sedetail mungkin, khususnya jalan, jalur, dan cara lain untuk bepergian. Perbedaan \"atlas tur\" yang jelas antara jenis jalan. Cocok untuk penggunaan siang, malam, dan luar ruangan.</string>
+    <string name="access_smart_autoannounce">Pengumuman otomatis pintar</string>
+    <string name="access_autoannounce_period">Periode pengumuman otomatis</string>
+    <string name="access_direction_audio_feedback">Petunjuk audio</string>
+    <string name="routing_attr_avoid_subway_name">Tidak ada kereta bawah tanah</string>
+    <string name="angular_measeurement_descr">Ubah dalam azimuth apa yang diukur.</string>
+    <string name="poi_cannot_be_found">Tidak dapat menemukan simpul atau jalan.</string>
+    <string name="shared_string_restart">Pemulaian ulang aplikasi</string>
+    <string name="last_launch_crashed">Terakhir kali OsmAnd mogok. Mohon bantu kami meningkatkan OsmAnd dengan membagikan pesan kesalahan.</string>
+    <string name="keep_passed_markers_descr">Penanda yang ditambahkan sebagai grup Favorit atau titik jalan GPX yang ditandai Dilewati akan tetap berada di peta. Jika grup tidak aktif, penanda akan hilang dari peta.</string>
+    <string name="more_transport_on_stop_hint">Tersedia lebih banyak transportasi tersedia dari halte ini.</string>
+    <string name="off_road_render_descr">Untuk mengemudi off-road berdasarkan gaya \'Topo\' dan untuk digunakan dengan citra satelit hijau sebagai lapisan bawah. Mengurangi ketebalan jalan utama, meningkatkan ketebalan trek, jalan setapak, sepeda dan rute lainnya.</string>
+    <string name="light_rs_render_descr">Gaya mengemudi sederhana. Mode malam yang lembut, garis kontur, jalan bergaya oranye yang kontras, meredupkan objek peta sekunder.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Tingkat 1</string>
+    <string name="routing_attr_motor_type_description">Pilih jenis bahan bakar yang digunakan oleh motor kendaraan Anda, untuk menghitung emisi CO2.</string>
+    <string name="routing_attr_motor_type_name">Bahan bakar yang digunakan oleh kendaraan</string>
+    <string name="transport_hazmat_no_desc">Di beberapa jalan dan terowongan, pengangkutan bahan berbahaya tidak diperbolehkan.</string>
+    <string name="calculate_online_altitude_descr">Kalkulasi ketinggian secara daring di server OsmAnd berdasarkan Citra Satelit dan model ketinggian digital. Dapat bervariasi dari ketinggian yang direkam oleh perangkat dan dapat digunakan sebagai pembenaran ketinggian.</string>
+    <string name="rendering_attr_surface_paving_stones_name">Turap batu</string>
+    <string name="public_transport_calc_pedestrian">Kalkulasi rute pada kaki</string>
+    <string name="tracks_on_map">Trek yang ditampilkan</string>
+    <string name="unirs_render_descr">Modifikasi gaya bawaan untuk meningkatkan kontras jalan pejalan kaki dan sepeda. Menggunakan warna Mapnik lama.</string>
+    <string name="sit_on_the_stop">Datang di halte</string>
+    <string name="waypoints_removed_from_map_markers">Titik jalan dihapus dari penanda peta</string>
+    <string name="show_closed_notes">Tampilkan catatan yang telah ditutup</string>
+    <string name="will_open_tomorrow_at">Buka besok pada</string>
+    <string name="context_menu_points_of_group">Semua poin dari kelompok</string>
+    <string name="lang_ckb">Kurdi Tengah</string>
+    <string name="routing_attr_goods_restrictions_name">Pengiriman barang</string>
 </resources>

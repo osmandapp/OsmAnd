@@ -22,7 +22,6 @@ import com.huawei.hms.iap.entity.PurchaseResultInfo;
 import com.huawei.hms.iap.entity.StartIapActivityReq;
 import com.huawei.hms.iap.entity.StartIapActivityResult;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -30,6 +29,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -270,7 +270,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	protected InAppCommand getPurchaseSubscriptionCommand(final WeakReference<Activity> activity,
-														  String sku, String userInfo) throws UnsupportedOperationException {
+	                                                      String sku, String userInfo) throws UnsupportedOperationException {
 		return new InAppCommand() {
 			@Override
 			public void run(InAppPurchaseHelper helper) {

@@ -4763,13 +4763,13 @@
     <string name="use_latin_name_if_missing">استخدم الاسم اللاتيني إذا كان الاسم مفقودا</string>
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
-    <string name="routing_attr_motor_type_name">نوع المحرك</string>
+    <string name="routing_attr_motor_type_name">الوقود المستخدم من قبل المحرك</string>
     <string name="routing_attr_motor_type_petrol_name">بنزين</string>
     <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
     <string name="routing_attr_motor_type_electric_name">كهربائي</string>
     <string name="routing_attr_motor_type_gas_name">الغاز الطبيعي المضغوط</string>
     <string name="routing_attr_motor_type_hybrid_name">هجين</string>
-    <string name="routing_attr_motor_type_description">لحساب ثاني أكسيد الكربون</string>
+    <string name="routing_attr_motor_type_description">حدد نوع الوقود المستخدم من قبل محرك سيارتك ، لحساب انبعاثات CO2.</string>
     <string name="kg">كلم</string>
     <string name="routing_attr_motor_type_diesel_name">ديزل</string>
     <string name="co2_mission">ثاني أكسيد الكربون</string>
@@ -4794,4 +4794,5 @@
     <string name="live_update_frequency_week_variant">سيتم التحقق من تحديثات الخرائط كل أسبوع.</string>
     <string name="calculate_online_altitude_descr">احسب الارتفاع عبر الإنترنت على خوادم أوسماند استنادا إلى صور الأقمار الصناعية ونماذج الارتفاع الرقمية. يمكن أن يختلف عن الارتفاع المسجل للجهاز ويمكن استخدامه كتصحيح للارتفاع.</string>
     <string name="lang_ckb">الكردية المركزية</string>
+    <string name="routing_attr_goods_restrictions_name">تسليم البضائع</string>
 </resources>

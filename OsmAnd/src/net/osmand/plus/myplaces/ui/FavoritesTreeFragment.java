@@ -688,28 +688,28 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			favoriteGroups.clear();
 			groups.clear();
 			List<FavoriteGroup> disablesGroups = new ArrayList<>();
-			List<FavoriteGroup> gs = helper.getFavoriteGroups();
+			List<FavoriteGroup> favoriteGroups = helper.getFavoriteGroups();
 			Set<?> flt = filter;
-			for (FavoriteGroup key : gs) {
+			for (FavoriteGroup group : favoriteGroups) {
 				boolean empty = true;
-				if (flt == null || flt.contains(key)) {
+				if (flt == null || flt.contains(group)) {
 					empty = false;
-					favoriteGroups.put(key, new ArrayList<>(key.getPoints()));
+					this.favoriteGroups.put(group, new ArrayList<>(group.getPoints()));
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
-					for (FavouritePoint p : key.getPoints()) {
+					for (FavouritePoint p : group.getPoints()) {
 						if (flt.contains(p)) {
 							list.add(p);
 							empty = false;
 						}
 					}
-					favoriteGroups.put(key, list);
+					this.favoriteGroups.put(group, list);
 				}
 				if (!empty) {
-					if (key.isVisible()) {
-						groups.add(key);
+					if (group.isVisible()) {
+						groups.add(group);
 					} else {
-						disablesGroups.add(key);
+						disablesGroups.add(group);
 					}
 				}
 			}

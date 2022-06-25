@@ -383,7 +383,7 @@
     <string name="shared_string_select_all">Вибрати все</string>
     <string name="shared_string_refresh">Перезавантажити</string>
     <string name="fast_route_mode">Найшвидший маршрут</string>
-    <string name="fast_route_mode_descr">Увімкнути прокладання найшвидшого маршруту, або ж вимкнути режим енергоефективного маршруту.</string>
+    <string name="fast_route_mode_descr">Увімкнути прокладання найшвидшого маршруту, або ж вимкнути режим паливоощадного маршруту.</string>
     <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
     <string name="shared_string_download_map">Завантажити мапу</string>
     <string name="select_max_zoom_preload_area">Оберіть максимальний масштаб для попереднього завантаження</string>
@@ -4699,12 +4699,12 @@
     <string name="routing_attr_motor_type_electric_name">Електричний</string>
     <string name="routing_attr_motor_type_gas_name">Метан</string>
     <string name="routing_attr_motor_type_hybrid_name">Гібридний</string>
-    <string name="routing_attr_motor_type_name">Тип двигуна</string>
-    <string name="routing_attr_motor_type_description">Для обчислення CO2</string>
+    <string name="routing_attr_motor_type_name">Паливо, що використовується двигуном</string>
+    <string name="routing_attr_motor_type_description">Виберіть тип палива, який використовується двигуном вашого авто, щоб обчислити викиди CO2.</string>
     <string name="routing_attr_motor_type_diesel_name">Дизель</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_lpg_name">Пропан</string>
-    <string name="lang_ckb">Центральна курдська</string>
+    <string name="lang_ckb">Центральнокурдська</string>
     <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини.</string>
     <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня.</string>
     <string name="live_update_frequency_week_variant">Наявність оновлень мап перевірятиметься щотижня.</string>
@@ -4725,4 +4725,5 @@
     <string name="reset_all_settings_desc">Справді скинути всі налаштування до типових\?</string>
     <string name="goods_delivery_desc">Транспортні засоби, що перевозять вантажі, можуть бути обмежені в доступі до деяких доріг.</string>
     <string name="map_marker_average_speed_desc">Вкажіть проміжок часу, впродовж якого буде виміряна середня швидкість для обчислення приблизного часу прибуття.</string>
+    <string name="routing_attr_goods_restrictions_name">Доставлення товарів</string>
 </resources>

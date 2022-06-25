@@ -4132,10 +4132,10 @@
     <string name="routing_attr_avoid_fords_name">Пазбягаць бродаў</string>
     <string name="no_widgets_descr">Дадайце адзін або некалькі віджэтаў са спісу даступных віджэтаў.</string>
     <string name="release_4_2">• Рэдызайн віджэтаў: новы выгляд, магчымасць групавання па старонках, магчымасць змянення парадку і камбінавання.
-\n 
+\n
 \n • Пешаходныя / Веласіпедныя / Турыстычныя маршруты: націсніце на сімвал маршруту і атрымайце поўную інфармацыю аб маршруце
-\n 
-\n • Улюбныя групы: змяненне знешняга выгляду для новых кропак у групе
+\n
+\n • Улюбленыя групы: змяненне знешняга выгляду для новых кропак у групе
 \n
 \n • Выпраўленні: аўтаматычнае абнаўленне тайлавых анлайн-карт
 \n
@@ -4701,4 +4701,36 @@
     <string name="backup_storage_taken">Запаўненне сховішча</string>
     <string name="top_widgets_panel">Верхняя панэль</string>
     <string name="reading_files">Чытанне файлаў…</string>
+    <string name="routing_attr_motor_type_name">Паліва, якое выкарыстоўваецца рухавіком</string>
+    <string name="marker_2nd">Другая пазнака</string>
+    <string name="marker_1st">Першая пазнака</string>
+    <string name="switch_widget_mode_desc">Вы можаце пераключыць рэжым, націснуўшы на віджэт.</string>
+    <string name="reset_all_settings_desc">Вы ўпэўнены, што хочаце скінуць усе налады да прадвызначаных\?</string>
+    <string name="goods_delivery_desc_4">Калі вага вашага аўтамабіля больш за 3,5 тоны, вам неабходна выкарыстоўваць профіль \"Грузавік\".</string>
+    <string name="goods_delivery_desc_2">Дарогі, закрытыя для дастаўкі тавараў, не будуць улічвацца.</string>
+    <string name="goods_delivery_desc">Аўтамабілю, які перавозіць грузы, можа быць абмежаваны доступ да некаторых дарог.</string>
+    <string name="includes_osm_changes_until">Уключае змены OSM, зробленыя да %1$s.</string>
+    <string name="next_live_update_time">Наступнае абнаўленне: а %1$s.</string>
+    <string name="live_update_frequency_week_variant">Абнаўленні мапы будуць правярацца кожны тыдзень.</string>
+    <string name="altitude_correction">Карэкцыя вышыні</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_diesel_name">Дызель</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензін</string>
+    <string name="routing_attr_motor_type_gas_name">Сціснуты прыродны газ (CNG)</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гібрыдны</string>
+    <string name="routing_attr_motor_type_description">Выберыце тып паліва, які выкарыстоўваецца рухавіком вашага аўтамабіля, каб разлічыць выкіды CO2.</string>
+    <string name="map_marker_average_speed_desc">Каб вылічыць разліковы час прыбыцця, вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
+    <string name="side_marker_eta">Разліковы час прыбыцця</string>
+    <string name="goods_delivery_desc_3">Адносіцца толькі да транспартных сродкаў, якія перавозяць грузы, маюць не менш за чатыры колы і з вагай, не большай за 3,5 тоны.</string>
+    <string name="updated_map_time">Абноўлена: %1$s.</string>
+    <string name="next_live_update_date_and_time">Наступнае абнаўленне: %1$s а %2$s.</string>
+    <string name="no_altitude_data_desc">Каб атрымаць даныя %1$s, вы можаце прымацаваць свой след да дарог або вылічыць іх у сеціве.</string>
+    <string name="routing_attr_motor_type_lpg_name">Звадкаваны газ (LPG)</string>
+    <string name="live_update_frequency_hour_variant">Абнаўленні мапы будуць правярацца кожную гадзіну.</string>
+    <string name="routing_attr_goods_restrictions_name">Дастаўка тавараў</string>
+    <string name="calculate_online_altitude_descr">Вылічыце вышыню ў сеціве на серверах OsmAnd на аснове спадарожнікавых здымкаў і лічбавых мадэляў вышынь. Яна можа адрознівацца ад вышыні, запісанай прыладай, і можа выкарыстоўвацца ў якасці карэкцыі вышыні.</string>
+    <string name="live_update_frequency_day_variant">Абнаўленні мапы будуць правярацца кожны дзень.</string>
+    <string name="routing_attr_motor_type_electric_name">Электрычны</string>
+    <string name="lang_ckb">Курдская (цэнтральная)</string>
+    <string name="co2_mission">Выкіды CO2</string>
 </resources>

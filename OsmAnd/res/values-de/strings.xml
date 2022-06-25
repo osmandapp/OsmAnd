@@ -4618,7 +4618,7 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">Mittel</string>
     <string name="colour_of_circles">Farbe der Ringe</string>
     <string name="routing_attr_allow_private_for_truck_name">Erlaube Privatzugang (LKW)</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Keine Einschränkungen</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Keine Einschränkungen)</string>
     <string name="routing_attr_avoid_fords_name">Furten vermeiden</string>
     <string name="routing_attr_hazmat_category_description">Gefahrgutkategorie / Zugangsgenehmigungen für Gefahrgut berücksichtigen</string>
     <string name="circle_settings">Kreiseinstellungen</string>
