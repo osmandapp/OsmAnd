@@ -511,6 +511,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public void showProgressBarForNetwork() {
+		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		setupRouteCalculationProgressBar(pb);
+		pb.setVisibility(View.VISIBLE);
+	}
+
+	public void hideProgressBarForNetwork() {
+		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		pb.setVisibility(View.GONE);
+	}
+
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
 		final RouteCalculationProgressListener progressCallback = new RouteCalculationProgressListener() {
@@ -664,6 +675,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
+		}
+
+		if (getMapLayers().getGpxLayer().isInRouteSelectionMode()) {
+			getMapLayers().getGpxLayer().cancelNetworkRouteSelect();
+			return;
 		}
 		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
