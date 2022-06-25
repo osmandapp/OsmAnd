@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="poi_internet_access_type">Tip na internetski pristap</string>
+    <string name="poi_clothes_type">Tip</string>
+    <string name="poi_vending_type">Tip na prodazen avtomat</string>
+    <string name="poi_highway_crossing_type">Tip</string>
+    <string name="poi_water_source">Izvori na voda</string>
+    <string name="poi_subway_station_filter">Stanica na metro</string>
+    <string name="poi_fuel_avia_type">Tip na gorivo (avijacija)</string>
+    <string name="poi_additional_type">Dodatno</string>
+    <string name="poi_bicycle_service">Servis za velosipedi</string>
+    <string name="poi_fire_hydrant_type">Tip</string>
+    <string name="poi_fire_hydrant_position">Pozicija</string>
+    <string name="poi_payment_toll_type">Tip na placanje</string>
+    <string name="poi_tactile_paving">Taktilno popločuvanje</string>
+    <string name="poi_service_general">Servis</string>
+    <string name="poi_brushless">Bez četki</string>
+    <string name="poi_self_service">Samo usluga</string>
+    <string name="poi_automated">Avtomatizirano</string>
+    <string name="poi_parking_type">Tip</string>
+    <string name="poi_covered">Pokrieno</string>
+    <string name="poi_ferry_terminal_cargo">Kargo</string>
+    <string name="poi_bicycle_parking_type">Tip</string>
+    <string name="poi_aerialway_bicycle">Prevoz so velosiped</string>
+    <string name="poi_aerialway_heating">Greenje</string>
+    <string name="poi_pump">Pumpa</string>
+    <string name="poi_observatory_designation">Oznacuvanje</string>
+    <string name="poi_telescope_type">Tip</string>
+    <string name="poi_fuel_type">Tip na gorivo</string>
+    <string name="poi_payment_type">Tip na placanje</string>
+    <string name="poi_payment_fuel_type">Kartici za gorivo</string>
+    <string name="poi_shoes_type">Tip</string>
+    <string name="poi_traffic_signals_sound">Zvuk</string>
+</resources>
