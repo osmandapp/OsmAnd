@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -77,7 +78,6 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
-import net.osmand.plus.track.helpers.NetworkRouteSelectionTask.NetworkRouteSelectionCallback;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -186,8 +186,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private LatLon highlightedPointLocationCached;
 
 	private ContextMenuLayer contextMenuLayer;
-	private boolean cancelNetworkRouteSelect;
-	private boolean inRouteSelectionMode;
+	private NetworkRouteSelectionTask networkRouteSelectionTask;
+
 	@ColorInt
 	private int visitedColor;
 	@ColorInt
@@ -246,12 +246,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.trackDrawInfo = trackDrawInfo;
 	}
 
-	public boolean isInRouteSelectionMode() {
-		return inRouteSelectionMode;
+	public boolean isNetworkRouteSelectionMode() {
+		return networkRouteSelectionTask != null;
 	}
 
-	public void cancelNetworkRouteSelect() {
-		cancelNetworkRouteSelect = true;
+	public void cancelNetworkRouteSelection() {
+		if (networkRouteSelectionTask != null) {
+			networkRouteSelectionTask.cancel(false);
+		}
 	}
 
 	private void initUI() {
@@ -1642,33 +1644,26 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					QuadRect rect = (QuadRect) pair.second;
 					NetworkRouteSegment routeSegment = (NetworkRouteSegment) pair.first;
 					LatLon latLon = getObjectLocation(object);
-					NetworkRouteSelectionCallback callback = new NetworkRouteSelectionCallback() {
-						@Override
-						public boolean isCancelled() {
-							return cancelNetworkRouteSelect;
+					CallbackWithObject<GPXFile> callback = gpxFile -> {
+						networkRouteSelectionTask = null;
+						if (gpxFile != null) {
+							WptPt wptPt = new WptPt();
+							wptPt.lat = latLon.getLatitude();
+							wptPt.lon = latLon.getLongitude();
+							String name = getObjectName(object).getName();
+							String fileName = name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT;
+							File file = new File(FileUtils.getTempDir(app), fileName);
+							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeSegment);
 						}
-
-						@Override
-						public boolean processResult(GPXFile gpxFile) {
-							inRouteSelectionMode = false;
-							cancelNetworkRouteSelect = false;
-							if (gpxFile != null) {
-								WptPt wptPt = new WptPt();
-								wptPt.lat = latLon.getLatitude();
-								wptPt.lon = latLon.getLongitude();
-								String name = getObjectName(object).getName();
-								String fileName = name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT;
-								File file = new File(FileUtils.getTempDir(app), fileName);
-								GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeSegment);
-							}
-							return true;
-						}
+						return true;
 					};
-					inRouteSelectionMode = true;
-					cancelNetworkRouteSelect = false;
+					if (networkRouteSelectionTask != null) {
+						networkRouteSelectionTask.cancel(false);
+					}
 					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
 							mapActivity, routeSegment, rect, callback);
 					selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					networkRouteSelectionTask = selectionTask;
 					return true;
 				}
 			} else if (object instanceof SelectedGpxPoint) {
