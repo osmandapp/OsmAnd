@@ -159,7 +159,7 @@ public class LauncherShortcutsHelper {
 		if (point == null) {
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 			if (mapControlsLayer != null) {
-				mapControlsLayer.doRoute(false);
+				mapControlsLayer.doRoute();
 			}
 		} else {
 			app.getRoutingHelper().setRoutePlanningMode(true);

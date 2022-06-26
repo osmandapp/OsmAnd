@@ -331,7 +331,7 @@ public abstract class OsmandMapLayer {
 		return (int) textScale * radiusPoi;
 	}
 
-	public void setMapButtonIcon(ImageView imageView, Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @NonNull Drawable icon) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;

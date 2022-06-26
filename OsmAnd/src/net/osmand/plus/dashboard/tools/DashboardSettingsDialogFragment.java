@@ -109,7 +109,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 								((CompoundButton) showDashboardOnStart.findViewById(R.id.toggle_item)).isChecked());
 						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(
 								((CompoundButton) accessFromMap.findViewById(R.id.toggle_item)).isChecked());
-						mapActivity.getMapLayers().getMapControlsLayer().initDasboardRelatedControls();
+						mapActivity.getMapLayers().getMapControlsLayer().initDashboardRelatedControls();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
