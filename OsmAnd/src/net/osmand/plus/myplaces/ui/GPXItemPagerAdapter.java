@@ -49,8 +49,8 @@ import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -161,7 +161,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private GPXFile getFilteredGpxFile() {
 		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().path : null;
 		if (gpxPath != null) {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(gpxPath);
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
 			if (selectedGpxFile != null && selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 				return selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile();
 			}
@@ -232,7 +232,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
 		TrkSegment segment = getTrackSegment(chart);
 		if (!Algorithms.isEmpty(dataSets) && segment != null) {
-			GPXFile gpxFile = gpxItem.group.getGpx();
+			GPXFile gpxFile = gpxItem.group.getGpxFile();
 			boolean joinSegments = displayHelper.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
@@ -870,7 +870,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private TrkSegment getTrkSegment() {
-		for (Track track : gpxItem.group.getGpx().tracks) {
+		for (Track track : gpxItem.group.getGpxFile().tracks) {
 			if (!track.generalTrack && !gpxItem.isGeneralTrack() || track.generalTrack && gpxItem.isGeneralTrack()) {
 				for (TrkSegment segment : track.segments) {
 					if (segment.points.size() > 0 && segment.points.get(0).equals(gpxItem.analysis.locationStart)) {
@@ -920,7 +920,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	@Nullable
 	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GPXTrackAnalysis analysis) {
-		for (Track track : gpxItem.group.getGpx().tracks) {
+		for (Track track : gpxItem.group.getGpxFile().tracks) {
 			for (TrkSegment segment : track.segments) {
 				int size = segment.points.size();
 				if (size > 0 && segment.points.get(0).equals(analysis.locationStart)

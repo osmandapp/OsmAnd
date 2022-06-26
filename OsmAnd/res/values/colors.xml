@@ -111,7 +111,7 @@
 	<color name="popup_text_color">#FFFFFF</color>
 
 	<color name="audio_video_icon_color">#128a89</color>
-    <color name="created_poi_icon_color">#4caf50</color>
+	<color name="created_poi_icon_color">#4caf50</color>
 	<color name="osm_bug_unresolved_icon_color">#D42020</color>
 	<color name="osm_bug_resolved_icon_color">#12B21A</color>
 
@@ -208,6 +208,7 @@
 	<color name="gpx_altitude_asc">#EE3232</color>
 	<color name="gpx_distance_color">#ffa500</color>
 	<color name="gpx_time_span_color">#0080FF</color>
+	<color name="gpx_disabled_color">#808080</color>
 
 	<color name="color_favorite">#eecc22</color>
 	<color name="color_favorite_gray">#727272</color>
@@ -277,9 +278,9 @@
 	<color name="region_selected">#55FFFF00</color>
 	<color name="region_downloading">#44FF61FF</color>
 
-    <!-- Dialog Live Updates Settings -->
-    <color name="white_50_transparent">#8FFF</color>
-    <color name="white_80_transparent">#CFFF</color>
+	<!-- Dialog Live Updates Settings -->
+	<color name="white_50_transparent">#8FFF</color>
+	<color name="white_80_transparent">#CFFF</color>
 
 	<color name="gpx_chart_blue">#2f7af5</color>
 	<color name="gpx_chart_orange">#ff8800</color>

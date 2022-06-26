@@ -626,7 +626,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (audioNotesLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(audioNotesLayer);
 		}
-		audioNotesLayer = new AudioNotesLayer(context, this, -140000);
+		audioNotesLayer = new AudioNotesLayer(context, this);
 		app.getOsmandMap().getMapView().addLayer(audioNotesLayer, 3.5f);
 	}
 

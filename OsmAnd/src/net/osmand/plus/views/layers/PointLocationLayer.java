@@ -148,9 +148,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 	}
 
-	public PointLocationLayer(@NonNull Context context, int baseOrder) {
+	public PointLocationLayer(@NonNull Context context) {
 		super(context);
-		this.baseOrder = baseOrder;
 		this.mapViewTrackingUtilities = getApplication().getMapViewTrackingUtilities();
 		locationProvider = getApplication().getLocationProvider();
 	}

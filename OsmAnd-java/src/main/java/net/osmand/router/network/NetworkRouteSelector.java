@@ -45,7 +45,12 @@ public class NetworkRouteSelector {
 
 
 	private final NetworkRouteContext rCtx;
-	
+	private final INetworkRouteSelection callback;
+
+	public interface INetworkRouteSelection {
+		boolean isCancelled();
+	}
+
 	// TODO - FIX & implement work with routing tags
 	// TEST:
 	// TODO https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
@@ -54,21 +59,28 @@ public class NetworkRouteSelector {
 	// +++  https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596 [2] -> 2
 	// +++  https://www.openstreetmap.org/way/23246638#map=19/47.98180/11.28338 [5] -> 3
 	// +++  https://www.openstreetmap.org/relation/1075081#map=15/47.656/10.456 [46] 
-	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter) {
-		this(files, filter, true);
+	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter,
+	                            INetworkRouteSelection callback) {
+		this(files, filter, callback, true);
 	}
-	
-	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter, boolean routing) {
+
+	public NetworkRouteSelector(BinaryMapIndexReader[] files, NetworkRouteSelectorFilter filter,
+	                            INetworkRouteSelection callback, boolean routing) {
 		if (filter == null) {
 			filter = new NetworkRouteSelectorFilter();
 		}
-		rCtx = new NetworkRouteContext(files, filter, routing);
+		this.rCtx = new NetworkRouteContext(files, filter, routing);
+		this.callback = callback;
 	}
-	
+
 	public NetworkRouteContext getNetworkRouteContext() {
 		return rCtx;
 	}
-	
+
+	public boolean isCancelled() {
+		return callback != null && callback.isCancelled();
+	}
+
 	public Map<RouteKey, GPXFile> getRoutes(RenderedObject renderedObject) throws IOException {
 		int x = renderedObject.getX().get(0);
 		int y = renderedObject.getY().get(0);
@@ -292,7 +304,7 @@ public class NetworkRouteSelector {
 		for(int i = 0; i < chainsFlat.size(); ) {
 			NetworkRouteSegmentChain first = chainsFlat.get(i);
 			boolean merged = false;
-			for (int j = i + 1; j < chainsFlat.size() && !merged; j++) {
+			for (int j = i + 1; j < chainsFlat.size() && !merged && !isCancelled(); j++) {
 				NetworkRouteSegmentChain second = chainsFlat.get(j);
 				if (MapUtils.squareRootDist31(first.getEndPointX(), first.getEndPointY(), second.getEndPointX(),
 						second.getEndPointY()) < rad) {
@@ -331,9 +343,9 @@ public class NetworkRouteSelector {
 	}
 
 	private int connectSimpleMerge(Map<Long, List<NetworkRouteSegmentChain>> chains,
-			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
+	                               Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
 		int merged = 1;
-		while (merged > 0) {
+		while (merged > 0 && !isCancelled()) {
 			int rs = reverseToConnectMore(chains, endChains, rad, radE);
 			merged = connectSimpleStraight(chains, endChains, rad, radE);
 			System.out.println(String.format("Simple merged: %d, reversed: %d (radius %d %d)", merged, rs, rad, radE));
@@ -398,9 +410,10 @@ public class NetworkRouteSelector {
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
 		int merged = 0;
 		boolean changed = true;
-		while (changed) {
+		while (changed && !isCancelled()) {
 			changed = false;
-			mainLoop: for (List<NetworkRouteSegmentChain> lst : chains.values()) {
+			mainLoop:
+			for (List<NetworkRouteSegmentChain> lst : chains.values()) {
 				for (NetworkRouteSegmentChain it : lst) {
 					long pnt = NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY());
 					List<NetworkRouteSegmentChain> connectNextLst = getByPoint(chains, pnt, radE, it);
@@ -562,7 +575,7 @@ public class NetworkRouteSelector {
 		long end = NetworkRouteContext.getTileId(segment.getEndPointX(), segment.getEndPointY());
 		queue.add(start);
 		queue.add(end);
-		while (!queue.isEmpty()) {
+		while (!queue.isEmpty() && !isCancelled()) {
 			long tile = queue.get(queue.size() - 1);
 			queue.remove(queue.size() - 1, 1);
 			if (!visitedTiles.add(tile)) {
@@ -575,7 +588,7 @@ public class NetworkRouteSelector {
 			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(left, top, right - 1, bottom - 1, rkey);
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 			int sz = loaded == null ? 0 : loaded.size();
-			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
+//			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			if (sz == 0) {
 				continue;
 			}

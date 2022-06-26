@@ -375,11 +375,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application.accessibilityEnabled() ? false : null;
 	}
 
-	public synchronized boolean isLayerExists(OsmandMapLayer layer) {
+	public synchronized boolean isLayerExists(@NonNull OsmandMapLayer layer) {
 		return layers.contains(layer);
 	}
 
-	public float getZorder(OsmandMapLayer layer) {
+	public float getZorder(@NonNull OsmandMapLayer layer) {
 		Float z = zOrders.get(layer);
 		if (z == null) {
 			return 10;
@@ -387,26 +387,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return z;
 	}
 
-	public int getLayerIndex(OsmandMapLayer layer) {
+	public int getLayerIndex(@NonNull OsmandMapLayer layer) {
 		float zOrder = getZorder(layer);
 		return (int)(zOrder * 100.0f);
 	}
 
-	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
+	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrder) {
 		int i = 0;
 		for (i = 0; i < layers.size(); i++) {
 			if (zOrders.get(layers.get(i)) > zOrder) {
 				break;
 			}
 		}
+		zOrders.put(layer, zOrder);
 		layer.initLayer(this);
 		layers.add(i, layer);
-		zOrders.put(layer, zOrder);
 	}
 
-	public synchronized void removeLayer(OsmandMapLayer layer) {
+	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
 		layer.destroyLayer();
-		while (layers.remove(layer)) ;
+		while (layers.remove(layer));
 		zOrders.remove(layer);
 	}
 

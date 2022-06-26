@@ -413,7 +413,7 @@ class MapSelectionHelper {
 	                                   @NonNull QuadRect rect, double searchDistance) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
+		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		List<NetworkRouteSegment> segmentList = new ArrayList<>();
 		try {
 			segmentList.addAll(routeSelector.getFirstSegments(rect, null, searchDistance));

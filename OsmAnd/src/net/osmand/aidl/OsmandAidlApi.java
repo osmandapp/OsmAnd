@@ -118,7 +118,7 @@ import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -519,7 +519,7 @@ public class OsmandAidlApi {
 							if (mapLayer != null) {
 								mapActivity.getMapView().removeLayer(mapLayer);
 							}
-							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack(), -180000);
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack());
 							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
 							connectedApp.getMapLayers().put(layerId, mapLayer);
 						}

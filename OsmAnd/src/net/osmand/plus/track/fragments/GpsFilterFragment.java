@@ -41,7 +41,7 @@ import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -111,6 +111,10 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
+	public SelectedGpxFile getSelectedGpxFile() {
+		return selectedGpxFile;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -139,7 +143,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		if (!Algorithms.isEmpty(gpxFilePath)) {
 			TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, false, (gpxFile) -> {
 				selectedGpxFile = gpxFile;
-				gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
 				FilteredSelectedGpxFile filteredSelectedGpxFile = setFileToFilter(selectedGpxFile);
 				if (view != null && filteredSelectedGpxFile != null) {
 					initContent(filteredSelectedGpxFile);
@@ -289,18 +292,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (selectedGpxFile != null) {
-			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
-		}
 		app.getGpsFilterHelper().addListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (selectedGpxFile != null) {
-			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
-		}
 	}
 
 	@Override
@@ -463,7 +455,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			} else {
 				params.hideFromMap();
 			}
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
 
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			SavedTrackBottomSheetDialogFragment.showInstance(fragmentManager, gpxFile.path, false);
@@ -478,7 +470,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		boolean isGpxFileExist = new File(selectedGpxFile.getGpxFile().path).exists();
 		if (app != null && !isGpxFileExist) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance().hideFromMap().syncGroup().saveSelection();
-			app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
+			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), params);
 		}
 		gpsFilterHelper.clearListeners();
 

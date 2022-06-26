@@ -19,7 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.myplaces.UpdateGpxCategoryTask;
 import net.osmand.plus.myplaces.UpdateGpxCategoryTask.UpdateGpxListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +53,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 	}
 
 	private void renameGroupName() {
-		GPXFile gpxFile = group.getGpx();
+		GPXFile gpxFile = group.getGpxFile();
 		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
 		if (pointsGroup != null) {
 			updateGpx(gpxFile, pointsGroup);
