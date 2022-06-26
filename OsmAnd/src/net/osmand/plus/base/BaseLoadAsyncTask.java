@@ -1,6 +1,8 @@
 package net.osmand.plus.base;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 	protected OsmandApplication app;
 	protected WeakReference<FragmentActivity> activityRef;
 	protected ProgressDialog progress;
+	private final OnCancelListener cancelListener = dialog -> cancel(false);
 
 	public BaseLoadAsyncTask(@NonNull FragmentActivity activity) {
 		app = (OsmandApplication) activity.getApplicationContext();
@@ -29,10 +32,18 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 	}
 
 	protected void showProgress() {
+		showProgress(false);
+	}
+
+	protected void showProgress(boolean cancelableOnTouchOutside) {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			String title = app.getString(R.string.loading_smth, "");
 			progress = ProgressDialog.show(activity, title, app.getString(R.string.loading_data));
+			if (cancelableOnTouchOutside) {
+				progress.setCanceledOnTouchOutside(true);
+			}
+			progress.setOnCancelListener(cancelListener);
 		}
 	}
 

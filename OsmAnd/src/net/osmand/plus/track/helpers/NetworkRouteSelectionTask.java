@@ -33,16 +33,12 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 
 	private final QuadRect quadRect;
 	private final NetworkRouteSegment routeSegment;
-	private final NetworkRouteSelectionCallback callback;
-
-	public interface NetworkRouteSelectionCallback extends CallbackWithObject<GPXFile> {
-		boolean isCancelled();
-	}
+	private final CallbackWithObject<GPXFile> callback;
 
 	public NetworkRouteSelectionTask(@NonNull FragmentActivity activity,
 	                                 @NonNull NetworkRouteSegment routeSegment,
 	                                 @NonNull QuadRect quadRect,
-	                                 @Nullable NetworkRouteSelectionCallback callback) {
+	                                 @Nullable CallbackWithObject<GPXFile> callback) {
 
 		super(activity);
 		this.app = (OsmandApplication) activity.getApplication();
@@ -53,24 +49,21 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 
 	@Override
 	protected void onPreExecute() {
-		FragmentActivity activity = activityRef.get();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).showHorizontalProgressBar();
-		}
+		showProgress(true);
 	}
 
 	@Override
 	protected GPXFile doInBackground(Void... voids) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter,
-				callback == null ? null : callback::isCancelled);
+		NetworkRouteSelector routeSelector = new NetworkRouteSelector(
+				readers, selectorFilter, NetworkRouteSelectionTask.this::isCancelled);
 		RouteKey routeKey = routeSegment.routeKey;
 		if (routeKey != null) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
 				Map<RouteKey, GPXFile> routes = routeSelector.getRoutes(quadRect, true, routeKey);
-				if (callback != null && callback.isCancelled()) {
+				if (isCancelled()) {
 					routes.clear();
 				}
 				if (!Algorithms.isEmpty(routes)) {
@@ -85,12 +78,9 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 
 	@Override
 	protected void onPostExecute(GPXFile gpxFile) {
-		FragmentActivity activity = activityRef.get();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).hideHorizontalProgressBar();
-		}
 		if (callback != null) {
 			callback.processResult(gpxFile);
 		}
+		hideProgress();
 	}
 }
