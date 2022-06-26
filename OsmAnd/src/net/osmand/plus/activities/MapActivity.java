@@ -679,10 +679,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (getMapLayers().getGpxLayer().isInRouteSelectionMode()) {
-			getMapLayers().getGpxLayer().cancelNetworkRouteSelect();
-			return;
-		}
 		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
