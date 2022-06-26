@@ -68,6 +68,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
+	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private WidgetIconsHelper iconsHelper;
 
 	private View view;
@@ -95,6 +96,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		settings = app.getSettings();
 		nightMode = !settings.isLightContent();
 		selectedAppMode = settings.getApplicationMode();
+		widgetsSettingsHelper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
 		iconsHelper = new WidgetIconsHelper(app, selectedAppMode.getProfileColor(nightMode), nightMode);
 		if (savedInstanceState != null) {
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
@@ -177,7 +179,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			return;
 		}
 
-		WidgetsSettingsHelper.resetWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel);
+		widgetsSettingsHelper.resetWidgetsForPanel(selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
@@ -187,13 +189,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
 
-		WidgetsSettingsHelper.copyWidgets(mapActivity, appMode, selectedAppMode, Collections.singletonList(selectedPanel));
+		widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {

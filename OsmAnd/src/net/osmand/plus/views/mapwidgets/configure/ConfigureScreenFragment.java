@@ -295,18 +295,18 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-		WidgetsSettingsHelper.resetConfigureScreenSettings(mapActivity, selectedAppMode);
+		new WidgetsSettingsHelper(mapActivity, selectedAppMode).resetConfigureScreenSettings();
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
 	}
 
 	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
-		WidgetsSettingsHelper.copyConfigureScreenSettings(mapActivity, appMode, selectedAppMode);
+		new WidgetsSettingsHelper(mapActivity, selectedAppMode).copyConfigureScreenSettings(fromAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
 	}

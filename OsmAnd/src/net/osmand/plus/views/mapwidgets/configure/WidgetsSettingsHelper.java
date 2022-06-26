@@ -34,12 +34,16 @@ public class WidgetsSettingsHelper {
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapWidgetsFactory widgetsFactory;
 
-	public static void resetConfigureScreenSettings(@NonNull MapActivity mapActivity,
-	                                                @NonNull ApplicationMode appMode) {
+	public WidgetsSettingsHelper(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		this.settings = app.getSettings();
+		this.mapActivity = mapActivity;
+		this.appMode = appMode;
+		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		this.widgetsFactory = new MapWidgetsFactory(mapActivity);
+	}
 
+	public void resetConfigureScreenSettings() {
 		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry
 				.getWidgetsForPanel(mapActivity, appMode, 0, Arrays.asList(WidgetsPanel.values()));
 		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
@@ -58,48 +62,17 @@ public class WidgetsSettingsHelper {
 		settings.QUICK_ACTION.resetModeToDefault(appMode);
 	}
 
-	public static void copyConfigureScreenSettings(@NonNull MapActivity mapActivity,
-	                                               @NonNull ApplicationMode fromAppMode,
-	                                               @NonNull ApplicationMode toAppMode) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		WidgetsSettingsHelper widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, toAppMode);
+	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, panel);
+			copyWidgetsForPanel(fromAppMode, panel);
 		}
-		widgetsSettingsHelper.copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
-		widgetsSettingsHelper.copyPrefFromAppMode(settings.SHOW_COMPASS_ALWAYS, fromAppMode);
-		widgetsSettingsHelper.copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
-		widgetsSettingsHelper.copyPrefFromAppMode(settings.QUICK_ACTION, fromAppMode);
+		copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
+		copyPrefFromAppMode(settings.SHOW_COMPASS_ALWAYS, fromAppMode);
+		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
+		copyPrefFromAppMode(settings.QUICK_ACTION, fromAppMode);
 	}
 
-	public static void copyWidgets(@NonNull MapActivity mapActivity,
-	                               @NonNull ApplicationMode fromAppMode,
-	                               @NonNull ApplicationMode toAppMode,
-	                               @NonNull List<WidgetsPanel> targetPanels) {
-		WidgetsSettingsHelper widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, toAppMode);
-		for (WidgetsPanel panel : targetPanels) {
-			widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, panel);
-		}
-	}
-
-	public static void resetWidgetsForPanel(@NonNull MapActivity mapActivity,
-	                                        @NonNull ApplicationMode appMode,
-	                                        @NonNull WidgetsPanel panel) {
-		WidgetsSettingsHelper widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
-		widgetsSettingsHelper.resetWidgetsForPanel(panel);
-	}
-
-	private WidgetsSettingsHelper(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
-
-		this.settings = app.getSettings();
-		this.mapActivity = mapActivity;
-		this.appMode = appMode;
-		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		this.widgetsFactory = new MapWidgetsFactory(mapActivity);
-	}
-
-	private void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
+	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		List<MapWidgetInfo> defaultWidgetInfos = getDefaultWidgetInfos(panel);
 		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry
@@ -180,7 +153,7 @@ public class WidgetsSettingsHelper {
 		return null;
 	}
 
-	private void resetWidgetsForPanel(@NonNull WidgetsPanel panel) {
+	public void resetWidgetsForPanel(@NonNull WidgetsPanel panel) {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry
 				.getWidgetsForPanel(mapActivity, appMode, 0, panels);
