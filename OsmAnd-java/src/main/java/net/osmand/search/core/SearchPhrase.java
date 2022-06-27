@@ -910,17 +910,11 @@ public class SearchPhrase {
 
 	private boolean isTextComplete(String fullText) {
 		boolean lastUnknownSearchWordComplete = false;
-		if (fullText.length() > 0 ) {
+		if (fullText.length() > 0) {
 			char ch = fullText.charAt(fullText.length() - 1);
-			lastUnknownSearchWordComplete  = ch == ' ' || ch == ',' || ch == '\r' || ch == '\n'
+			lastUnknownSearchWordComplete = ch == ' ' || ch == ',' || ch == '\r' || ch == '\n'
 					|| ch == ';';
 		}
 		return lastUnknownSearchWordComplete;
 	}
-
-	
-
-	
-
-	
 }

@@ -56,13 +56,13 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 		final View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
 
-		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
+		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		toolbar.setContentInsetStartWithNavigation(
 				getResources().getDimensionPixelOffset(R.dimen.wikivoyage_search_divider_margin_start)
 		);
 
-		searchEt = (EditText) toolbar.findViewById(R.id.searchEditText);
+		searchEt = toolbar.findViewById(R.id.searchEditText);
 		searchEt.setHint(R.string.shared_string_search);
 		searchEt.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -77,7 +77,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				String newQuery = s.toString().trim();
+				String newQuery = s.toString();
 				if (!searchQuery.equalsIgnoreCase(newQuery)) {
 					searchQuery = newQuery;
 					if (searchQuery.isEmpty()) {
@@ -90,14 +90,14 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 			}
 		});
 
-		progressBar = (ProgressBar) toolbar.findViewById(R.id.searchProgressBar);
+		progressBar = toolbar.findViewById(R.id.searchProgressBar);
 
-		clearIb = (ImageButton) toolbar.findViewById(R.id.clearButton);
+		clearIb = toolbar.findViewById(R.id.clearButton);
 		clearIb.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 		clearIb.setOnClickListener(v -> searchEt.setText(""));
 
 		adapter = new SearchRecyclerViewAdapter(app);
-		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		final RecyclerView rv = mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 		adapter.setOnItemClickListener(v -> {
