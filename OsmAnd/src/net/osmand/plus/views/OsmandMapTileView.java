@@ -78,6 +78,8 @@ import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
+	public static final float DEFAULT_ELEVATION_ANGLE = 90;
+
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
@@ -271,7 +273,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		this.mapActivity = mapActivity;
 		if (mapActivity != null) {
 			gestureDetector = new GestureDetector(mapActivity, new MapTileViewOnGestureListener());
-			multiTouchSupport = new MultiTouchSupport(mapActivity, new MapTileViewMultiTouchZoomListener());
+			multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
 			doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
 			twoFingersTapDetector = new TwoFingerTapDetector() {
 				@Override
@@ -1186,18 +1188,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float normalizeElevationAngle(float elevationAngle) {
-		if (elevationAngle > 90f) {
-			return 90f;
-		}
+		return elevationAngle > 90 ? 90f : Math.max(getMinAllowedElevationAngle(), elevationAngle);
+	}
+
+	public float getMinAllowedElevationAngle() {
 		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
 		if (verticalTilesCount < 8) {
-			return Math.max(33f, elevationAngle);
+			return 33;
 		} else if (verticalTilesCount < 9) {
-			return Math.max(35f, elevationAngle);
+			return 35;
 		} else if (verticalTilesCount < 10) {
-			return Math.max(40f, elevationAngle);
+			return 40;
 		}
-		return Math.max(45f, elevationAngle);
+		return 45;
 	}
 
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, int centerX, int centerY, boolean notify) {
@@ -1662,7 +1665,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void setElevationAngle(float angle) {
+	public void setElevationAngle(float angle) {
 		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
 		application.getOsmandMap().setMapElevation(angle);

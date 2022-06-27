@@ -13,6 +13,8 @@ import org.apache.commons.logging.Log;
 
 import java.lang.reflect.Method;
 
+import androidx.annotation.NonNull;
+
 
 public class MultiTouchSupport {
 
@@ -27,35 +29,34 @@ public class MultiTouchSupport {
 
 	public interface MultiTouchZoomListener {
 
-    		public void onZoomStarted(PointF centerPoint);
+    		void onZoomStarted(PointF centerPoint);
 
-    		public void onZoomingOrRotating(double relativeToStart, float angle);
+    		void onZoomingOrRotating(double relativeToStart, float angle);
 
-    		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative);
+    		void onZoomOrRotationEnded(double relativeToStart, float angleRelative);
 
-    		public void onGestureInit(float x1, float y1, float x2, float y2);
+    		void onGestureInit(float x1, float y1, float x2, float y2);
 
-			public void onActionPointerUp();
+			void onActionPointerUp();
 
-			public void onActionCancel();
+			void onActionCancel();
 
-			public void onChangingViewAngle(float angle);
+			void onChangingViewAngle(float angle);
 
-			public void onChangeViewAngleStarted();
+			void onChangeViewAngleStarted();
 	}
 
-	private boolean multiTouchAPISupported = false;
+	private final OsmandApplication app;
 	private final MultiTouchZoomListener listener;
-	protected final Context ctx;
 
-	protected Method getPointerCount;
-	protected Method getX;
-	protected Method getY;
-	protected Method getPointerId;
+	private Method getPointerCount;
+	private Method getX;
+	private Method getY;
+	private boolean multiTouchAPISupported = false;
 
 
-	public MultiTouchSupport(Context ctx, MultiTouchZoomListener listener){
-		this.ctx = ctx;
+	public MultiTouchSupport(@NonNull OsmandApplication app, @NonNull MultiTouchZoomListener listener) {
+		this.app = app;
 		this.listener = listener;
 		initMethods();
 	}
@@ -72,20 +73,15 @@ public class MultiTouchSupport {
 		return inTiltMode;
 	}
 
-	private boolean isTiltSupported() {
-		return ((OsmandApplication) ctx.getApplicationContext()).getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit();
-	}
-
 	private void initMethods(){
 		try {
-			getPointerCount = MotionEvent.class.getMethod("getPointerCount"); //$NON-NLS-1$
-			getPointerId = MotionEvent.class.getMethod("getPointerId", Integer.TYPE); //$NON-NLS-1$
-			getX = MotionEvent.class.getMethod("getX", Integer.TYPE); //$NON-NLS-1$
-			getY = MotionEvent.class.getMethod("getY", Integer.TYPE); //$NON-NLS-1$	
+			getPointerCount = MotionEvent.class.getMethod("getPointerCount");
+			getX = MotionEvent.class.getMethod("getX", Integer.TYPE);
+			getY = MotionEvent.class.getMethod("getY", Integer.TYPE);
 			multiTouchAPISupported = true;
 		} catch (Exception e) {
 			multiTouchAPISupported = false;
-			log.info("Multi touch not supported", e); //$NON-NLS-1$
+			log.info("Multi touch not supported", e);
 		}
 	}
 
@@ -167,7 +163,7 @@ public class MultiTouchSupport {
 					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
 					listener.onChangingViewAngle(viewAngle);
-				} else if (isTiltSupported()) {
+				} else if (isTiltSupported(app)) {
 					float dx1 = Math.abs(firstFingerStart.x - x1);
 					float dx2 = Math.abs(secondFingerStart.x - x2);
 					float dy1 = Math.abs(firstFingerStart.y - y1);
@@ -192,12 +188,16 @@ public class MultiTouchSupport {
 				return true;
 			}
 		} catch (Exception e) {
-			log.debug("Multi touch exception" , e); //$NON-NLS-1$
+			log.debug("Multi touch exception" , e);
 		}
 		return false;
 	}
 
 	public PointF getCenterPoint() {
 		return centerPoint;
+	}
+
+	public static boolean isTiltSupported(@NonNull OsmandApplication app) {
+		return app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit();
 	}
 }
