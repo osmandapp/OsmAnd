@@ -71,6 +71,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	private List<String> alreadySelectedWidgetsIds;
 
 	private View view;
+	private View applyButton;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -255,6 +256,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 				view.setSelected(selected);
 				checkBox.setChecked(selected);
 				updateWidgetSelection(order, widgetId, selected);
+				enableDisableApplyButton();
 			});
 		}
 	}
@@ -297,7 +299,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupApplyButton() {
-		View applyButton = view.findViewById(R.id.dismiss_button);
+		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
 			if (target instanceof AddWidgetListener) {
@@ -308,6 +310,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 			dismiss();
 		});
 		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_add);
+		enableDisableApplyButton();
+	}
+
+	private void enableDisableApplyButton() {
+		applyButton.setEnabled(!selectedWidgetsIds.isEmpty());
 	}
 
 	private void dismiss() {
