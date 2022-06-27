@@ -44,7 +44,8 @@ public class MapActions {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
-			params.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
+			params.setSelectedSegment(settings.GPX_SEGMENT_INDEX.get());
+			params.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
 			List<Location> ps = params.getPoints(settings.getContext());
 			app.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);

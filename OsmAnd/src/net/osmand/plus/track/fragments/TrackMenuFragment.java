@@ -1082,7 +1082,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == DIRECTIONS_BUTTON_INDEX) {
 				GPXFile gpxFileToDisplay = displayHelper.getGpxFileToDisplay();
 				if (gpxFileToDisplay != null) {
-					if (gpxFileToDisplay.getNonEmptySegmentsCount() > 1) {
+					if (TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFileToDisplay)) {
 						TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFileToDisplay, this);
 					} else {
 						GpxNavigationHelper.startNavigationForGpx(gpxFileToDisplay, mapActivity);
@@ -1506,6 +1506,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			dismiss();
+		}
+	}
+
+	@Override
+	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
 			dismiss();
 		}
 	}

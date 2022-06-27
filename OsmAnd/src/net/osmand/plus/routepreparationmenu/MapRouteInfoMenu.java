@@ -1,6 +1,9 @@
 package net.osmand.plus.routepreparationmenu;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
+
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -95,6 +98,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSetting
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -140,9 +144,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -859,7 +860,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectTrack(@NonNull GPXFile gpxFile, boolean checkForSegments) {
+	public void selectTrack(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -872,7 +873,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 							true, false, false, true);
 				}
 			}
-			if (checkForSegments && gpxFile.getNonEmptySegmentsCount() > 1) {
+			if (showSelectionDialog && TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFile)) {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
 				if (fragment == null) {
@@ -1702,9 +1703,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			TextView buttonDescription = view.findViewById(R.id.via_button_description);
 
 			String via = generateViaDescription();
-			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (routeParamsBuilder != null) {
-				GPXFile gpxFile = routeParamsBuilder.getFile();
+			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+			if (paramsBuilder != null) {
+				GPXFile gpxFile = paramsBuilder.getFile();
 				String fileName = null;
 				if (!Algorithms.isEmpty(gpxFile.path)) {
 					fileName = new File(gpxFile.path).getName();
@@ -1714,13 +1715,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = app.getString(R.string.shared_string_gpx_track);
 				}
-				GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-
-				if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
-					int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
-					int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
-					fileName = app.getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + fileName;
-				}
+				fileName = TrackEditCard.getGpxTitleWithSelectedItem(app, paramsBuilder, fileName);
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				description.setText(R.string.follow_track);
 				buttonDescription.setText(R.string.shared_string_add);
