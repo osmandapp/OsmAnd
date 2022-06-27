@@ -282,9 +282,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	private void selectSingleWidgetByDefault() {
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
-		if (widgets != null && widgets.size() == 1) {
+		if (!Algorithms.isEmpty(widgets)) {
 			WidgetType widget = widgetsDataHolder.getWidgetsList().get(0);
-			updateWidgetSelection(widget.getDefaultOrder(), widget.id, true);
+			if (widgets.size() == 1 || widget.isMainWidgetOfGroup()) {
+				updateWidgetSelection(widget.getDefaultOrder(), widget.id, true);
+			}
 		} else if (aidlWidgetData != null) {
 			updateWidgetSelection(0, getAidlWidgetId(aidlWidgetData), true);
 		}
