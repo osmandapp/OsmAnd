@@ -1,5 +1,22 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -57,23 +74,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
 
 
 public class RoutingOptionsHelper {
@@ -509,7 +509,7 @@ public class RoutingOptionsHelper {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
 						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
 			}
-			if (!rparams.useIntermediateRtePoints()) {
+			if (!rparams.shouldUseIntermediateRtePoints()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point,
 						app.getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment,
