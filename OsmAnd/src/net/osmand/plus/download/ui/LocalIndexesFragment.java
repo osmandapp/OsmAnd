@@ -1040,7 +1040,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (builder.length() > 0) {
 						builder.append(" • ");
 					}
-					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
+					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024L));
 				}
 
 				if (SrtmDownloadItem.isSRTMItem(child)) {
@@ -1089,7 +1089,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if ((info.getType() == LocalIndexType.MAP_DATA) || (info.getType() == LocalIndexType.DEACTIVATED)) {
 			item = optionsMenu.getMenu().add(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_type_archive));
-			item.setOnMenuItemClickListener(item1 -> {
+			item.setOnMenuItemClickListener(menuItem -> {
 				performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
 				return true;
 			});
@@ -1097,7 +1097,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (info.getType() != LocalIndexType.TILES_DATA) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_rename)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-			item.setOnMenuItemClickListener(item12 -> {
+			item.setOnMenuItemClickListener(menuItem -> {
 				performBasicOperation(R.string.shared_string_rename, info);
 				return true;
 			});
@@ -1108,7 +1108,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_edit)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-			item.setOnMenuItemClickListener(item13 -> {
+			item.setOnMenuItemClickListener(menuItem -> {
 				performBasicOperation(R.string.shared_string_edit, info);
 				return true;
 			});
@@ -1117,7 +1117,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				&& ((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
 			item = optionsMenu.getMenu().add(R.string.clear_tile_data)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
-			item.setOnMenuItemClickListener(item14 -> {
+			item.setOnMenuItemClickListener(menuItem -> {
 				performBasicOperation(R.string.clear_tile_data, info);
 				return true;
 			});
@@ -1126,7 +1126,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (update != null) {
 			item = optionsMenu.getMenu().add(R.string.update_tile)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_import));
-			item.setOnMenuItemClickListener(i -> {
+			item.setOnMenuItemClickListener(menuItem -> {
 				DownloadActivity downloadActivity = getDownloadActivity();
 				if (downloadActivity != null) {
 					downloadActivity.startDownload(update);
@@ -1137,7 +1137,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
-		item.setOnMenuItemClickListener(item15 -> {
+		item.setOnMenuItemClickListener(menuItem -> {
 			performBasicOperation(R.string.shared_string_delete, info);
 			return true;
 		});
