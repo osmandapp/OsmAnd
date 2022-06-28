@@ -388,7 +388,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getLayerIndex(@NonNull OsmandMapLayer layer) {
 		float zOrder = getZorder(layer);
-		return (int)(zOrder * 100.0f);
+		return (int) (zOrder * 100.0f);
 	}
 
 	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrder) {
@@ -405,7 +405,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
 		layer.destroyLayer();
-		while (layers.remove(layer));
+		while (layers.remove(layer)) ;
 		zOrders.remove(layer);
 	}
 
@@ -1102,7 +1102,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private void setRotateImpl(float rotate) {
 		RotatedTileBox tb = currentViewport.copy();
-		setRotateImpl(rotate, tb.getCenterPixelX(),  tb.getCenterPixelY());
+		setRotateImpl(rotate, tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void setRotateImpl(float rotate, int centerX, int centerY) {
@@ -1498,7 +1498,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
 				} else {
 					MapRendererView mapRenderer = getMapRenderer();
 					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
@@ -1517,7 +1517,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
 				} else {
 					MapRendererView mapRenderer = getMapRenderer();
 					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
