@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets.configure.add;
+package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.os.Bundle;
 
