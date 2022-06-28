@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.view.Display;
 import android.view.View;
 import android.graphics.PointF;
 
@@ -53,6 +54,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private static final float COMPASS_CIRCLE_FITTING_RADIUS_COEF = 1.25f;
 	private static final float CIRCLE_ANGLE_STEP = 5;
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
+	private static final float MAX_LAT_VALUE = 90;
+	private static final float MAX_LON_VALUE = 180;
+	private static final float ESTIMATED_MAX_LON_VALUE = 179.999999f;
+	private static final float ESTIMATED_MIN_LON_VALUE = -179.999999f;
 
 	private OsmandApplication app;
 	private View rightWidgetsPanel;
@@ -338,16 +343,20 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
-			if (Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180) {
-				if (points.size() > 0) {
-					arrays.add(points);
-					points = new ArrayList<>();
+			if (Math.abs(latLon.getLatitude()) < 90 && Math.abs(latLon.getLongitude()) < MAX_LON_VALUE) {
+				PointF screenPoint = latLonToScreenPoint(latLon, tb);
+				points.add(new QuadPoint(screenPoint.x, screenPoint.y));
+			} else {
+				PointF screenPoint = latLonToScreenPointWithBoundsCheck(latLon, tb);
+				if (screenPoint != null) {
+					points.add(new QuadPoint(screenPoint.x, screenPoint.y));
+				} else {
+					if (points.size() > 0) {
+						arrays.add(points);
+						points = new ArrayList<>();
+					}
 				}
-				continue;
 			}
-
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
-			points.add(new QuadPoint(screenPoint.x, screenPoint.y));
 		}
 		if (points.size() > 0) {
 			arrays.add(points);
@@ -630,6 +639,48 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private PointF latLonToScreenPoint(LatLon latLon, RotatedTileBox tb) {
 		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	private PointF latLonToScreenPointWithBoundsCheck(LatLon latLon, RotatedTileBox tb) {
+		if (Math.abs(latLon.getLatitude()) >= MAX_LAT_VALUE) {
+			return null;
+		}
+
+		if (Math.abs(latLon.getLongitude()) <= MAX_LON_VALUE) {
+			return latLonToScreenPoint(latLon, tb);
+		} else {
+			PointF correctScreenPoint = new PointF();
+			PointF screenPointOutOfScreen = latLonToScreenPoint(latLon, tb);
+			float correctXNear180Lon;
+			float incorrectXNear180Lon;
+
+			LatLon latLonWithMinLongitude = new LatLon(latLon.getLatitude(),ESTIMATED_MIN_LON_VALUE);
+			LatLon latLonWithMaxLongitude = new LatLon(latLon.getLatitude(),ESTIMATED_MAX_LON_VALUE);
+			PointF pointWithMinLongitude = latLonToScreenPoint(latLonWithMinLongitude, tb);
+			PointF pointWithMaxLongitude = latLonToScreenPoint(latLonWithMaxLongitude, tb);
+
+			if (screenPointOutOfScreen.x > 0) {
+				correctXNear180Lon = pointWithMinLongitude.x;
+				incorrectXNear180Lon = pointWithMaxLongitude.x;
+			} else {
+				correctXNear180Lon = pointWithMaxLongitude.x;
+				incorrectXNear180Lon = pointWithMinLongitude.x;
+			}
+
+			correctScreenPoint.x = correctXNear180Lon + (screenPointOutOfScreen.x - incorrectXNear180Lon);
+			correctScreenPoint.y = screenPointOutOfScreen.y;
+
+			MapActivity ctx = getMapActivity();
+			AndroidUtils.getScreenWidth(ctx);
+			if (correctScreenPoint.x < 0 ||
+					correctScreenPoint.y < 0 ||
+					correctScreenPoint.x > AndroidUtils.getScreenWidth(ctx) ||
+					correctScreenPoint.y > AndroidUtils.getScreenHeight(ctx)) {
+				return null;
+			} else {
+				return correctScreenPoint;
+			}
+		}
 	}
 
 	private LatLon point31ToLatLon(PointI point31) {
