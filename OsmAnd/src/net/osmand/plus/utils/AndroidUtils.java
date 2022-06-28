@@ -1,6 +1,10 @@
 package net.osmand.plus.utils;
 
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -91,10 +95,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -199,16 +199,12 @@ public class AndroidUtils {
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
 
-	public static String addColon(OsmandApplication app, @StringRes int stringRes) {
+	public static String addColon(@NonNull OsmandApplication app, @StringRes int stringRes) {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
 	}
 
-	public static Uri getUriForFile(Context context, File file) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-			return Uri.fromFile(file);
-		} else {
-			return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
-		}
+	public static Uri getUriForFile(@NonNull Context context, @NonNull File file) {
+		return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
 	}
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
@@ -217,10 +213,11 @@ public class AndroidUtils {
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
 		try {
+			Intent selectedIntent = chooserIntent != null ? chooserIntent : intent;
 			if (!(context instanceof Activity)) {
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				selectedIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			}
-			context.startActivity(chooserIntent != null ? chooserIntent : intent);
+			context.startActivity(selectedIntent);
 			return true;
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e);
@@ -362,8 +359,8 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createCheckedColorStateList(Context ctx, boolean night,
-															 @ColorRes int lightNormal, @ColorRes int lightChecked,
-															 @ColorRes int darkNormal, @ColorRes int darkChecked) {
+	                                                         @ColorRes int lightNormal, @ColorRes int lightChecked,
+	                                                         @ColorRes int darkNormal, @ColorRes int darkChecked) {
 		return createColorStateList(ctx, night, android.R.attr.state_checked,
 				lightNormal, lightChecked, darkNormal, darkChecked);
 	}

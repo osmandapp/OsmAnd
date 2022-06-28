@@ -35,6 +35,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -355,7 +356,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		intent.putExtra("title", context.getString(R.string.osmand_parking_event)); //$NON-NLS-1$
 		intent.putExtra("beginTime", getParkingTime()); //$NON-NLS-1$
 		intent.putExtra("endTime", getParkingTime() + 60 * 60 * 1000); //$NON-NLS-1$
-		context.startActivity(intent);
+		AndroidUtils.startActivityIfSafe(context, intent);
 	}
 
 	/**
