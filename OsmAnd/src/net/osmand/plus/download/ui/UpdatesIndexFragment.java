@@ -1,12 +1,11 @@
 package net.osmand.plus.download.ui;
 
-import android.app.Activity;
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -21,6 +20,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -50,17 +56,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
@@ -91,9 +87,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		invalidateListView(activity);
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		invalidateListView(context);
 		startLoadLiveMapsAsyncTask(getMyApplication());
 	}
 
@@ -120,23 +116,18 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		updateUpdateAllButton();
 	}
 
-	public void invalidateListView(Activity a) {
+	public void invalidateListView(@NonNull Context context) {
 		final OsmandApplication app = getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 
 		final OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems,
+		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, indexItems,
 				!InAppPurchaseHelper.isSubscribedToLiveUpdates(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
 		final Collator collator = OsmAndCollator.primaryCollator();
-		listAdapter.sort(new Comparator<IndexItem>() {
-			@Override
-			public int compare(IndexItem indexItem, IndexItem indexItem2) {
-				return collator.compare(indexItem.getVisibleName(app, osmandRegions),
-						indexItem2.getVisibleName(app, osmandRegions));
-			}
-		});
+		listAdapter.sort((indexItem, indexItem2) -> collator.compare(indexItem.getVisibleName(app, osmandRegions),
+				indexItem2.getVisibleName(app, osmandRegions)));
 		setListAdapter(listAdapter);
 		updateErrorMessage();
 	}
@@ -165,7 +156,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		}
 		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
 		final List<IndexItem> indexItems = indexes.getItemsToUpdate();
-		final TextView updateAllButton = (TextView) view.findViewById(R.id.updateAllButton);
+		final TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.size() == 0 || indexItems.get(0).getType() == null) {
 			if (!Algorithms.isEmpty(errorMessage)) {
 				updateAllButton.setText(errorMessage);
@@ -184,25 +175,17 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			String updateAllText = getString(
 					R.string.update_all, String.valueOf(downloadsSize >> 20));
 			updateAllButton.setText(updateAllText);
-			updateAllButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final DownloadActivity activity = getMyActivity();
-					if (indexItems.size() > 3) {
-						AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-						dialog.setTitle(R.string.update_all_maps);
-						dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
-						dialog.setNegativeButton(R.string.shared_string_cancel, null);
-						dialog.setPositiveButton(R.string.shared_string_update, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								activity.startDownload(indexItems.toArray(new IndexItem[0]));
-							}
-						});
-						dialog.create().show();
-					} else {
-						activity.startDownload(indexItems.toArray(new IndexItem[0]));
-					}
+			updateAllButton.setOnClickListener(v -> {
+				final DownloadActivity activity = getMyActivity();
+				if (indexItems.size() > 3) {
+					AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+					dialog.setTitle(R.string.update_all_maps);
+					dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
+					dialog.setNegativeButton(R.string.shared_string_cancel, null);
+					dialog.setPositiveButton(R.string.shared_string_update, (dialog1, which) -> activity.startDownload(indexItems.toArray(new IndexItem[0])));
+					dialog.create().show();
+				} else {
+					activity.startDownload(indexItems.toArray(new IndexItem[0]));
 				}
 			});
 		}
@@ -232,7 +215,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
 		if (position == 0) {
 			DownloadActivity activity = getMyActivity();
 			if (activity != null) {
@@ -254,9 +237,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		ActionBar actionBar = getMyActivity().getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		if (actionBar != null) {
+			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		}
 		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 
@@ -394,7 +379,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
 								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
-						CardView cardView = ((CardView) view.findViewById(R.id.card_view));
+						CardView cardView = view.findViewById(R.id.card_view);
 						cardView.setCardBackgroundColor(stateList);
 						cardView.setOnClickListener(v -> {
 							FragmentActivity activity = getMyActivity();
@@ -404,9 +389,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						});
 					} else {
 						view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							view.setBackground(null);
-						}
+						view.setBackground(null);
 						AndroidUiHelper.setVisibility(View.GONE, view.findViewById(R.id.compound_button));
 						((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);
 						TextView tvTitle = view.findViewById(R.id.title);
@@ -420,12 +403,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						TypedValue typedValue = new TypedValue();
 						app.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
 						additionalButton.setBackgroundResource(typedValue.resourceId);
-						additionalButton.setOnClickListener(new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
-									showUpdateDialog(getActivity(), getFragmentManager(), UpdatesIndexFragment.this);
-								}
+						additionalButton.setOnClickListener(v -> {
+							if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
+								showUpdateDialog(getActivity(), getFragmentManager(), UpdatesIndexFragment.this);
 							}
 						});
 					}

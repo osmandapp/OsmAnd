@@ -174,7 +174,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		((ActionBarProgressActivity) activity).updateListViewFooter(footerView);
 
 		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
-		item.setOnMenuItemClickListener(item13 -> {
+		item.setOnMenuItemClickListener(menuItem -> {
 			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), NotesFragment.this);
 			return true;
 		});
@@ -183,14 +183,14 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		Drawable shareIcon = AndroidUtils.getDrawableForDirection(activity,
 				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark));
 		item = menu.add(R.string.shared_string_share).setIcon(shareIcon);
-		item.setOnMenuItemClickListener(item1 -> {
+		item.setOnMenuItemClickListener(menuItem -> {
 			enterSelectionMode(MODE_SHARE);
 			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
-		item.setOnMenuItemClickListener(item12 -> {
+		item.setOnMenuItemClickListener(menuItem -> {
 			enterSelectionMode(MODE_DELETE);
 			return true;
 		});

@@ -36,7 +36,7 @@ public class WorldRegion implements Serializable {
 	// Hierarchy
 	protected WorldRegion superregion;
 	protected List<WorldRegion> subregions;
-	
+
 	// filled by osmand regions
 	protected RegionParams params = new RegionParams();
 	protected String regionFullName;
@@ -94,13 +94,13 @@ public class WorldRegion implements Serializable {
 	}
 
 	public String getLocaleName() {
-		if(!Algorithms.isEmpty(regionNameLocale)) {
+		if (!Algorithms.isEmpty(regionNameLocale)) {
 			return regionNameLocale;
 		}
-		if(!Algorithms.isEmpty(regionNameEn)) {
+		if (!Algorithms.isEmpty(regionNameEn)) {
 			return regionNameEn;
 		}
-		if(!Algorithms.isEmpty(regionName)) {
+		if (!Algorithms.isEmpty(regionName)) {
 			return regionName;
 		}
 
@@ -131,6 +131,19 @@ public class WorldRegion implements Serializable {
 		return superregion;
 	}
 
+	public List<WorldRegion> getSuperRegions() {
+		List<WorldRegion> regions = new ArrayList<>();
+		collectSuperRegions(regions, superregion);
+		return regions;
+	}
+
+	private void collectSuperRegions(List<WorldRegion> regions, WorldRegion region) {
+		if (region != null) {
+			regions.add(region);
+			collectSuperRegions(regions, region.getSuperregion());
+		}
+	}
+
 	public List<WorldRegion> getSubregions() {
 		return subregions;
 	}
@@ -142,7 +155,7 @@ public class WorldRegion implements Serializable {
 
 		WorldRegion that = (WorldRegion) o;
 
-		return !(regionFullName != null ? !regionFullName.toLowerCase().equals(that.regionFullName.toLowerCase()) : that.regionFullName != null);
+		return !(regionFullName != null ? !regionFullName.equalsIgnoreCase(that.regionFullName) : that.regionFullName != null);
 	}
 
 	@Override
@@ -157,6 +170,7 @@ public class WorldRegion implements Serializable {
 		subregions = new LinkedList<>();
 
 	}
+
 	public WorldRegion(String id) {
 		this(id, null);
 	}
@@ -283,5 +297,10 @@ public class WorldRegion implements Serializable {
 
 	public List<LatLon> getPolygon() {
 		return polygon;
+	}
+
+	@Override
+	public String toString() {
+		return getRegionId();
 	}
 }
