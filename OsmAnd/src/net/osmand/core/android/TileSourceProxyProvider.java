@@ -85,6 +85,9 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		}
 
 		Bitmap firstTileBitmap = BitmapFactory.decodeByteArray(firstTileData, 0, firstTileData.length);
+		if (firstTileBitmap == null) {
+			return SwigUtilities.nullSkImage();
+		}
 		if (shiftedTile) {
 			Bitmap resultTileBitmap = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
 			Paint paint = new Paint();
@@ -94,6 +97,9 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			secondTileData = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp);
 			if (secondTileData != null) {
 				Bitmap secondTileBitmap = BitmapFactory.decodeByteArray(secondTileData, 0, secondTileData.length);
+				if (secondTileBitmap == null) {
+					return SwigUtilities.nullSkImage();
+				}
 				canvas.translate(0, tileSize);
 				canvas.drawBitmap(secondTileBitmap, 0, 0, paint);
 			}
