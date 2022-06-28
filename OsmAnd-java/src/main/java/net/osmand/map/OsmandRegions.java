@@ -97,11 +97,9 @@ public class OsmandRegions {
 		}
 	}
 
-
 	public void setTranslator(RegionTranslation translator) {
 		this.translator = translator;
 	}
-
 
 	public BinaryMapIndexReader prepareFile() throws IOException {
 		File regions = new File("regions.ocbf");
@@ -212,10 +210,13 @@ public class OsmandRegions {
 
 	private String getLocaleNameWithParent(List<WorldRegion> superRegions, String regionName, boolean reversed) {
 		StringBuilder builder = new StringBuilder();
+		List<String> topRegionsIds = getTopRegionsIds();
 		if (reversed) {
 			builder.append(regionName);
 			for (WorldRegion region : superRegions) {
-				if (!Algorithms.isEmpty(region.getRegionDownloadName())) {
+				String regionId = region.getRegionId();
+				if ((!topRegionsIds.contains(regionId) || WorldRegion.RUSSIA_REGION_ID.equals(regionId))
+						&& (!WorldRegion.WORLD.equals(regionId))) {
 					builder.append(", ").append(region.getLocaleName());
 				}
 			}
@@ -223,7 +224,9 @@ public class OsmandRegions {
 			ListIterator<WorldRegion> iterator = superRegions.listIterator(superRegions.size());
 			while (iterator.hasPrevious()) {
 				WorldRegion region = iterator.previous();
-				if (!Algorithms.isEmpty(region.getRegionDownloadName())) {
+				String regionId = region.getRegionId();
+				if ((!topRegionsIds.contains(regionId) || WorldRegion.RUSSIA_REGION_ID.equals(regionId))
+						&& (!WorldRegion.WORLD.equals(regionId))) {
 					builder.append(region.getLocaleName()).append(" ");
 				}
 			}
@@ -362,8 +365,7 @@ public class OsmandRegions {
 		}
 		return queryBboxNoInit(lx, rx, ty, by, checkCenter);
 	}
-	
-	
+
 	public List<BinaryMapDataObject> query(final int tile31x, final int tile31y) throws IOException {
 		if (quadTree != null) {
 			return getCountries(tile31x, tile31x, tile31y, tile31y, true);
@@ -371,7 +373,6 @@ public class OsmandRegions {
 		return queryBboxNoInit(tile31x, tile31x, tile31y, tile31y, true);
 	}
 
-	
 	private synchronized List<BinaryMapDataObject> queryBboxNoInit(int lx, int rx, int ty, int by, final boolean checkCenter) throws IOException {
 		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
 		final int mx = lx / 2 + rx / 2;
@@ -729,20 +730,28 @@ public class OsmandRegions {
 
 	}
 
+	private List<String> getTopRegionsIds() {
+		List<String> regionIds = new ArrayList<>();
+		regionIds.add(WorldRegion.ANTARCTICA_REGION_ID);
+		regionIds.add(WorldRegion.AFRICA_REGION_ID);
+		regionIds.add(WorldRegion.ASIA_REGION_ID);
+		regionIds.add(WorldRegion.CENTRAL_AMERICA_REGION_ID);
+		regionIds.add(WorldRegion.EUROPE_REGION_ID);
+		regionIds.add(WorldRegion.NORTH_AMERICA_REGION_ID);
+		regionIds.add(WorldRegion.RUSSIA_REGION_ID);
+		regionIds.add(WorldRegion.SOUTH_AMERICA_REGION_ID);
+		regionIds.add(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID);
+		return regionIds;
+	}
+
 	public void structureWorldRegions(List<WorldRegion> loadedItems) {
 		if (loadedItems.size() == 0) {
 			return;
 		}
 		WorldRegion world = new WorldRegion(WorldRegion.WORLD);
-		initWorldRegion(world, WorldRegion.ANTARCTICA_REGION_ID);
-		initWorldRegion(world, WorldRegion.AFRICA_REGION_ID);
-		initWorldRegion(world, WorldRegion.ASIA_REGION_ID);
-		initWorldRegion(world, WorldRegion.CENTRAL_AMERICA_REGION_ID);
-		initWorldRegion(world, WorldRegion.EUROPE_REGION_ID);
-		initWorldRegion(world, WorldRegion.NORTH_AMERICA_REGION_ID);
-		initWorldRegion(world, WorldRegion.RUSSIA_REGION_ID);
-		initWorldRegion(world, WorldRegion.SOUTH_AMERICA_REGION_ID);
-		initWorldRegion(world, WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID);
+		for (String regionId : getTopRegionsIds()) {
+			initWorldRegion(world, regionId);
+		}
 		Iterator<WorldRegion> it = loadedItems.iterator();
 		while (it.hasNext()) {
 			WorldRegion region = it.next();
@@ -785,7 +794,6 @@ public class OsmandRegions {
 			}
 		}
 	}
-
 
 	private void sortSubregions(WorldRegion region, Comparator<WorldRegion> comparator) {
 		Collections.sort(region.subregions, comparator);
