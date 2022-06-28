@@ -67,6 +67,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
+	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
@@ -92,6 +93,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		mapActivity = (MapActivity) requireMyActivity();
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, selectedAppMode);
 	}
 
 	@Nullable
@@ -295,7 +297,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-		new WidgetsSettingsHelper(mapActivity, selectedAppMode).resetConfigureScreenSettings();
+		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.resetConfigureScreenSettings();
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
 	}
@@ -306,7 +309,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-		new WidgetsSettingsHelper(mapActivity, selectedAppMode).copyConfigureScreenSettings(fromAppMode);
+		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
 	}

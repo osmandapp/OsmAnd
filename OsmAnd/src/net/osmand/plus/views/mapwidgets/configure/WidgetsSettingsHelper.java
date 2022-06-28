@@ -29,10 +29,11 @@ public class WidgetsSettingsHelper {
 
 	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
-	private final ApplicationMode appMode;
 
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapWidgetsFactory widgetsFactory;
+
+	private ApplicationMode appMode;
 
 	public WidgetsSettingsHelper(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -41,6 +42,10 @@ public class WidgetsSettingsHelper {
 		this.appMode = appMode;
 		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		this.widgetsFactory = new MapWidgetsFactory(mapActivity);
+	}
+
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
 	}
 
 	public void resetConfigureScreenSettings() {
