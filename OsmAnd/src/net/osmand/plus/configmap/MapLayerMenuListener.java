@@ -19,7 +19,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;

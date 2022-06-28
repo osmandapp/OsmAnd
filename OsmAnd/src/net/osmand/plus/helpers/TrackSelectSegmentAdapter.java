@@ -7,23 +7,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHolder> {
 
@@ -48,7 +48,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 				continue;
 			}
 			for (TrkSegment segment : track.segments) {
-				String trackSegmentTitle = GpxSelectionHelper.buildTrackSegmentName(gpxFile, track, segment, app);
+				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, app);
 				titledSegments.add(new TitledSegment(segment, trackSegmentTitle));
 			}
 		}

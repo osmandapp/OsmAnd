@@ -106,11 +106,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private int aidlPointsCount = 0;
 
 	public AidlMapLayer(@NonNull Context context, @NonNull AidlMapLayerWrapper aidlLayer,
-						@NonNull String packName, int baseOrder) {
+						@NonNull String packName) {
 		super(context);
 		this.aidlLayer = aidlLayer;
 		this.packName = packName;
-		this.baseOrder = baseOrder;
 
 		OsmandApplication app = getApplication();
 		layerPref = app.getSettings().registerBooleanPreference(packName + "_" + aidlLayer.getId(), true);
@@ -491,6 +490,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		aidlMapLayerProvider = new AidlTileProvider(this, density, yOffset);
 		mapMarkersCollection = new MapMarkersCollection();
 
+		int baseOrder = getBaseOrder();
 		for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
 			LatLon l = point.getLocation();
 			if (l != null) {
@@ -512,7 +512,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					aidlMapLayerProvider.addToData(point, image, isStale(point), getText(point));
 				} else {
 					Bitmap bitmap = getSelectedBitmap(point, image);
-					int baseOrder = selected ? getBaseOrder() - 1 : getBaseOrder();
+					int markerBaseOrder = selected ? baseOrder - 1 : baseOrder;
 					MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 					int x = MapUtils.get31TileNumberX(l.getLongitude());
 					int y = MapUtils.get31TileNumberY(l.getLatitude());
@@ -520,7 +520,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					mapMarkerBuilder
 							.setPosition(pointI)
 							.setIsHidden(false)
-							.setBaseOrder(baseOrder - 1)
+							.setBaseOrder(markerBaseOrder - 1)
 							.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 							.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 							.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)

@@ -14,11 +14,11 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 
 import java.io.File;
 import java.util.List;
@@ -77,8 +77,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 			} else {
 				String fileName = gpxInfoList.get(position).getFileName();
 				app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(fileName);
-				GpxSelectionHelper.SelectedGpxFile selectedGpxFile =
-						app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 				if (selectedGpxFile != null) {
 					callbackWithObject.processResult(new GPXUtilities.GPXFile[]{selectedGpxFile.getGpxFile()});
 				} else {

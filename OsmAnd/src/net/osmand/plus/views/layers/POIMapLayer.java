@@ -104,9 +104,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private final MapLayerData<List<Amenity>> data;
 
-	public POIMapLayer(@NonNull final Context context, int baseOrder) {
+	public POIMapLayer(@NonNull final Context context) {
 		super(context);
-		this.baseOrder = baseOrder;
 		app = (OsmandApplication) context.getApplicationContext();
 		routingHelper = app.getRoutingHelper();
 

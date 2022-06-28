@@ -1,7 +1,7 @@
 package net.osmand.plus.track;
 
 public class GpxSelectionParams {
-	/** All parameters are 'false' by default */
+
 	private boolean showOnMap;
 	private boolean addToMarkers;
 	private boolean syncGroup;
@@ -12,7 +12,8 @@ public class GpxSelectionParams {
 	private boolean updateVisibilityOnMap;
 	private boolean selectedByUserChanged;
 
-	private GpxSelectionParams() { }
+	private GpxSelectionParams() {
+	}
 
 	public boolean isShowOnMap() {
 		return showOnMap;

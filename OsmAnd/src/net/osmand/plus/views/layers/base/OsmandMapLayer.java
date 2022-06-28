@@ -61,7 +61,6 @@ public abstract class OsmandMapLayer {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
-	protected int baseOrder = -1;
 
 	@NonNull
 	private final Context ctx;
@@ -90,7 +89,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	public int getBaseOrder() {
-		return baseOrder;
+		return (int)((view != null ? view.getZorder(this) : 10f) * -100000f);
 	}
 
 	@NonNull

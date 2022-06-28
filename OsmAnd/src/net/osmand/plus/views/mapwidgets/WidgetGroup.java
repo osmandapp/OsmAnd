@@ -67,13 +67,18 @@ public enum WidgetGroup {
 		return widgetsIds;
 	}
 
-	public boolean containsWidget(@NonNull String widgetId) {
-		for (WidgetType widget : getWidgets()) {
-			if (widgetId.equals(widget.id)) {
-				return true;
-			}
+	@Nullable
+	public WidgetType getMainWidget() {
+		switch (this) {
+			case BEARING:
+				return WidgetType.RELATIVE_BEARING;
+			case TRIP_RECORDING:
+				return WidgetType.TRIP_RECORDING_DISTANCE;
+			case AUDIO_VIDEO_NOTES:
+				return WidgetType.AV_NOTES_ON_REQUEST;
+			default:
+				return null;
 		}
-		return false;
 	}
 
 	@DrawableRes

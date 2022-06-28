@@ -4,6 +4,7 @@ import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizat
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.content.Intent;
@@ -426,7 +427,8 @@ public class IntentHelper {
 				String name = intent.getStringExtra(RETURN_SCREEN_NAME);
 				String tabName = intent.getStringExtra(OPEN_TAB_NAME);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null, tabName);
+				boolean temporarySelected = intent.getBooleanExtra(TEMPORARY_SELECTED, false);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, temporarySelected, name, null, tabName);
 				mapActivity.setIntent(null);
 			}
 			if (intent.getExtras() != null) {

@@ -66,9 +66,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
 
-	public FavouritesLayer(@NonNull Context ctx, int baseOrder) {
+	public FavouritesLayer(@NonNull Context ctx) {
 		super(ctx);
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -232,7 +231,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		clearFavorites();
 		float textScale = getTextScale();
-		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), baseOrder, isTextVisible(),
+		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getBaseOrder(), isTextVisible(),
 				getTextStyle(textScale), view.getDensity());
 
 		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {

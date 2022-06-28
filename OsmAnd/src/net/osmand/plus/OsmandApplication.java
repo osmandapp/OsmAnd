@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -97,6 +100,7 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -127,9 +131,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
-
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -164,6 +165,7 @@ public class OsmandApplication extends MultiDexApplication {
 	FavouritesHelper favoritesHelper;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
+	GpxDisplayHelper gpxDisplayHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	NotificationHelper notificationHelper;
@@ -407,6 +409,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public GpxSelectionHelper getSelectedGpxHelper() {
 		return selectedGpxHelper;
+	}
+
+	public GpxDisplayHelper getGpxDisplayHelper() {
+		return gpxDisplayHelper;
 	}
 
 	public GpxDbHelper getGpxDbHelper() {

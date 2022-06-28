@@ -13,16 +13,23 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.AsyncLoadingThread;
+import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.resources.ResourceManager;
 
 
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
-	private final OsmandApplication app;
+	private static final int IMAGE_LOAD_TIMEOUT = 30000;
+
+	private final String dirWithTiles;
+	private final ResourceManager rm;
+	private final BitmapTilesCache tilesCache;
 	private final ITileSource tileSource;
 	
 	public TileSourceProxyProvider(OsmandApplication app, ITileSource tileSource) {
-		this.app = app;
+		this.dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
+		this.rm = app.getResourceManager();
+		this.tilesCache = rm.getBitmapTilesCache();
 		this.tileSource = tileSource;
 	}
 
@@ -48,44 +55,39 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public SWIGTYPE_p_QByteArray obtainImageData(IMapTiledDataProvider.Request request) {
-		byte[] image;
+		byte[] image = null;
 		try {
 			long requestTimestamp = System.currentTimeMillis();
 			int zoom = request.getZoom().swigValue();
 			int tileX = request.getTileId().getX();
 			int tileY = request.getTileId().getY();
-
-			ResourceManager rm = app.getResourceManager();
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
-			String dirWithTiles = null;
 			if (tileSource.couldBeDownloadedFromInternet()) {
-				dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
 				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-				while (rm.getBitmapTilesCache().getTileForMapSync(tileFilename, tileSource, tileX, tileY,
-						zoom, true, requestTimestamp) == null) {
-					synchronized (tileReadyCallback.getSync()) {
-						if (tileReadyCallback.isReady()) {
-							break;
-						}
-						try {
-							tileReadyCallback.getSync().wait(50);
-						} catch (InterruptedException ignored) {
+				try {
+					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,
+							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < IMAGE_LOAD_TIMEOUT) {
+						synchronized (tileReadyCallback.getSync()) {
+							if (tileReadyCallback.isReady()) {
+								break;
+							}
+							try {
+								tileReadyCallback.getSync().wait(50);
+							} catch (InterruptedException ignored) {
+							}
 						}
 					}
+				} finally {
+					rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
 				}
-				rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
 			} else {
-				rm.getBitmapTilesCache().get(tileFilename, requestTimestamp);
+				tilesCache.get(tileFilename, requestTimestamp);
 			}
 			image = tileSource.getBytes(tileX, tileY, zoom, dirWithTiles);
-		} catch (Exception e) {
-			return SwigUtilities.emptyQByteArray();
+		} catch (Exception ignore) {
 		}
-		if (image == null)
-			return SwigUtilities.emptyQByteArray();
-
-		return SwigUtilities.createQByteArrayAsCopyOf(image);
+		return image == null ? SwigUtilities.emptyQByteArray() : SwigUtilities.createQByteArrayAsCopyOf(image);
 	}
 
 	@Override

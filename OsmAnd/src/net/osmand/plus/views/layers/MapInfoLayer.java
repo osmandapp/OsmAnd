@@ -162,6 +162,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rightWidgetsPanel.update();
 	}
 
+	public void recreateTopWidgetsPanel() {
+		ApplicationMode appMode = settings.getApplicationMode();
+		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
+	}
+
 	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		if (container != null) {
 			container.removeAllViews();

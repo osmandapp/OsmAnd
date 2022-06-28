@@ -72,14 +72,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	private float storedTextScale = 1.0f;
 	private boolean poiTypesInitialized = false;
 
-	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin, int baseOrder) {
+	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
 		super(context);
 		this.ctx = context;
 		this.plugin = plugin;
 		app = getApplication();
 		mOsmChangeUtil = plugin.getPoiModificationLocalUtil();
 		mOsmBugsUtil = plugin.getOsmNotesLocalUtil();
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -409,7 +408,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		mapMarkerBuilder
 				.setPosition(position)
 				.setIsHidden(false)
-				.setBaseOrder(baseOrder)
+				.setBaseOrder(getBaseOrder())
 				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 
