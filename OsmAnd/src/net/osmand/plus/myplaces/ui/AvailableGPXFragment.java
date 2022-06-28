@@ -1,9 +1,14 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -70,14 +75,16 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectGpxTaskListener;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -110,12 +117,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
-
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
 		RenameCallback, UploadGpxListener {
@@ -126,6 +127,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private OsmandApplication app;
 	private GpxSelectionHelper selectedGpxHelper;
+	private GpxDisplayHelper gpxDisplayHelper;
 
 	private boolean selectionMode = false;
 	private final List<GpxInfo> selectedItems = new ArrayList<>();
@@ -179,7 +181,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		currentRecording = new GpxInfo(app.getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
-		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
+		gpxDisplayHelper = app.getGpxDisplayHelper();
+		selectedGpxHelper = app.getSelectedGpxHelper();
 		allGpxAdapter = new GpxIndexesAdapter();
 		setAdapter(allGpxAdapter);
 	}
@@ -351,13 +354,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			currentGpxView = inflater.inflate(R.layout.current_gpx_item, null, false);
 			createCurrentTrackView();
-			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						TrackMenuFragment.openTrack(activity, null, storeState(), getString(R.string.shared_string_tracks));
-					}
+			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(v1 -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					String name = getString(R.string.shared_string_tracks);
+					boolean temporarySelected = selectedGpxHelper.getSelectedCurrentRecordingTrack() == null;
+					TrackMenuFragment.openTrack(activity, null, storeState(), name, TrackMenuTab.OVERVIEW, temporarySelected);
 				}
 			});
 			listView.addHeaderView(currentGpxView);
@@ -368,12 +370,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(nightMode ? R.drawable.ic_empty_state_trip_night : R.drawable.ic_empty_state_trip_day);
 		Button importButton = emptyView.findViewById(R.id.import_button);
-		importButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addTrack();
-			}
-		});
+		importButton.setOnClickListener(view -> addTrack());
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
@@ -1235,9 +1232,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				notifyDataSetChanged();
 			});
 
-			v.setOnClickListener(view -> {
-				onChildClick(null, view, groupPosition, childPosition, 0);
-			});
+			v.setOnClickListener(view -> onChildClick(null, view, groupPosition, childPosition, 0));
 			return v;
 		}
 
@@ -1410,9 +1405,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 			if (generalTrack != null) {
 				gpxFile.addGeneralTrack();
-				gpxDisplayGroup = selectedGpxHelper.buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
+				gpxDisplayGroup = gpxDisplayHelper.buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
 			} else if (gpxFile != null && gpxFile.tracks.size() > 0) {
-				gpxDisplayGroup = selectedGpxHelper.buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
+				gpxDisplayGroup = gpxDisplayHelper.buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
 			}
 			List<GpxDisplayItem> items = null;
 			if (gpxDisplayGroup != null) {
@@ -1665,7 +1660,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		GpxInfo item = allGpxAdapter.getChild(groupPosition, childPosition);
 
 		if (!selectionMode) {
-			TrackMenuFragment.openTrack(getActivity(), item.file, storeState(), getString(R.string.shared_string_tracks));
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				String name = getString(R.string.shared_string_tracks);
+				boolean temporarySelected = selectedGpxHelper.getSelectedFileByName(item.getFileName()) == null;
+				TrackMenuFragment.openTrack(activity, item.file, storeState(), name, TrackMenuTab.OVERVIEW, temporarySelected);
+			}
 		} else {
 			if (!selectedItems.contains(item)) {
 				selectedItems.add(item);

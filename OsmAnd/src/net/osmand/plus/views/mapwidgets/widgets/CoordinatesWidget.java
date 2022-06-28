@@ -26,6 +26,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
@@ -235,6 +236,10 @@ public class CoordinatesWidget extends MapWidget {
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
 		if (updatedVisibility) {
+			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateTopWidgetsPanel();
+			}
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;

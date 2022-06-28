@@ -193,6 +193,10 @@ public enum WidgetType {
 		return null;
 	}
 
+	public boolean isMainWidgetOfGroup() {
+		return group != null && this == group.getMainWidget();
+	}
+
 	@Nullable
 	public static WidgetType getById(@NonNull String id) {
 		for (WidgetType widget : WidgetType.values()) {

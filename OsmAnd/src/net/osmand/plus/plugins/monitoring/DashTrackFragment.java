@@ -34,8 +34,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.io.File;

@@ -7,7 +7,6 @@ import static net.osmand.plus.routing.ColoringType.SPEED;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;

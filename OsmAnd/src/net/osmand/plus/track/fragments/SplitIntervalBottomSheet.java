@@ -25,12 +25,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
@@ -56,8 +54,8 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private SelectedGpxFile selectedGpxFile;
 	private TrackDrawInfo trackDrawInfo;
 
-	private Map<String, Integer> timeSplitOptions = new LinkedHashMap<>();
-	private Map<String, Double> distanceSplitOptions = new LinkedHashMap<>();
+	private final Map<String, Integer> timeSplitOptions = new LinkedHashMap<>();
+	private final Map<String, Double> distanceSplitOptions = new LinkedHashMap<>();
 
 	private int selectedTimeSplitInterval;
 	private int selectedDistanceSplitInterval;
@@ -77,21 +75,18 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 		Fragment target = getTargetFragment();
 		if (target instanceof TrackAppearanceFragment) {
-			trackDrawInfo = ((TrackAppearanceFragment) target).getTrackDrawInfo();
+			TrackAppearanceFragment fragment = (TrackAppearanceFragment) target;
+			trackDrawInfo = fragment.getTrackDrawInfo();
+			selectedGpxFile = fragment.getSelectedGpxFile();
 		}
+		prepareSplitIntervalOptions();
+
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
-			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_NAME);
-			selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(gpxFilePath);
-			prepareSplitIntervalOptions();
-
 			selectedTimeSplitInterval = savedInstanceState.getInt(SELECTED_TIME_SPLIT_INTERVAL);
 			selectedDistanceSplitInterval = savedInstanceState.getInt(SELECTED_DISTANCE_SPLIT_INTERVAL);
 			selectedSplitType = GpxSplitType.valueOf(savedInstanceState.getString(SELECTED_TRACK_SPLIT_TYPE));
 		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
-			selectedGpxFile = app.getSelectedGpxHelper().getVisibleFileByPath(gpxFilePath);
-			prepareSplitIntervalOptions();
 			updateSelectedSplitParams();
 		}
 	}
@@ -143,13 +138,10 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private TextRadioItem createRadioButton(final GpxSplitType splitType, int titleId) {
 		String title = app.getString(titleId);
 		TextRadioItem item = new TextRadioItem(title);
-		item.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				selectedSplitType = splitType;
-				updateSlider();
-				return true;
-			}
+		item.setOnClickListener((radioItem, view) -> {
+			selectedSplitType = splitType;
+			updateSlider();
+			return true;
 		});
 		return item;
 	}
@@ -160,7 +152,6 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(SELECTED_TIME_SPLIT_INTERVAL, selectedTimeSplitInterval);
 		outState.putInt(SELECTED_DISTANCE_SPLIT_INTERVAL, selectedDistanceSplitInterval);
 		outState.putString(SELECTED_TRACK_SPLIT_TYPE, selectedSplitType.name());
-		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
 	}
 
 	private void updateSelectedSplitParams() {
@@ -252,13 +243,10 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		updateSliderMinMaxValues(splitOptions);
 
 		slider.setValue(selectedTimeSplitInterval);
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-				if (fromUser) {
-					selectedTimeSplitInterval = (int) value;
-					selectedSplitValue.setText(splitOptions.get(selectedTimeSplitInterval));
-				}
+		slider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				selectedTimeSplitInterval = (int) value;
+				selectedSplitValue.setText(splitOptions.get(selectedTimeSplitInterval));
 			}
 		});
 		selectedSplitValue.setText(splitOptions.get(selectedTimeSplitInterval));
@@ -269,13 +257,10 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		updateSliderMinMaxValues(splitOptions);
 
 		slider.setValue(selectedDistanceSplitInterval);
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-				if (fromUser) {
-					selectedDistanceSplitInterval = (int) value;
-					selectedSplitValue.setText(splitOptions.get(selectedDistanceSplitInterval));
-				}
+		slider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				selectedDistanceSplitInterval = (int) value;
+				selectedSplitValue.setText(splitOptions.get(selectedDistanceSplitInterval));
 			}
 		});
 		selectedSplitValue.setText(splitOptions.get(selectedDistanceSplitInterval));
