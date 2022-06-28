@@ -507,6 +507,15 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
+	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
+			dismiss();
+		}
+	}
+
+	@Override
 	public void onUpdatedIndexesList() {
 		if (menu != null) {
 			menu.onUpdatedIndexesList();

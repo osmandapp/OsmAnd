@@ -3580,7 +3580,7 @@
     <string name="additional_actions_descr">Accede a estas acciones pulsando el botón «%1$s».</string>
     <string name="quick_action_transport_descr">Botón que muestra u oculta el transporte público en el mapa.</string>
     <string name="create_edit_poi">Crear o editar PDI</string>
-    <string name="parking_positions">Puestos de estacionamiento</string>
+    <string name="parking_positions">Posiciones de estacionamiento</string>
     <string name="add_edit_favorite">Añadir o editar favorito</string>
     <string name="reset_deafult_order">Restaurar el orden de los elementos predefinidos</string>
     <string name="back_to_editing">Volver a la edición</string>
@@ -4440,7 +4440,7 @@
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
     <string name="map_marker_options">Opciones del marcador de mapa</string>
     <string name="add_to_group">Añadir al grupo</string>
-    <string name="app_modes_options">Eligir modos de aplicación</string>
+    <string name="app_modes_options">Elegir modos de aplicación</string>
     <string name="shared_string_memory">Memoria</string>
     <string name="memory_allocated_for_routing_ds">Mayor asignación de memoria acelerá el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones.
 \nNo afecta a la velocidad de cálculo de rutas cortas.</string>
@@ -4486,12 +4486,12 @@
     <string name="track_file">Archivo de la traza</string>
     <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Sistema suizo (CH1903+)</string>
-    <string name="shared_string_not_used">Sin uso</string>
+    <string name="shared_string_not_used">Sin usar</string>
     <string name="files_with_route_restrictions">Archivos con restricciones de ruta</string>
     <string name="predefined_waypoint_appearance_description">Al pulsar esta acción se guardará automáticamente el punto de referencia con los parámetros predefinidos.</string>
     <string name="track_file_description">Al pulsar esta acción se mostrará un diálogo para marcar entre todas las trazas disponibles.</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Mostrar etiquetas «fixme» (arréglame)</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar etiquetas «note» (nota)</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
@@ -4513,7 +4513,7 @@
     <string name="shared_string_reading_file">Leyendo archivo…</string>
     <string name="all_groups">Todos los grupos</string>
     <string name="list_of_groups">Lista de grupos</string>
-    <string name="points_selection_descr">¿Cerrar y se perder todos los cambios\?</string>
+    <string name="points_selection_descr">¿Cerrar y perder todos los cambios\?</string>
     <string name="exit_import_descr">¿Salir sin guardar los cambios\?</string>
     <string name="exit_import">¿Salir\?</string>
     <string name="import_tracks">Importar trazas</string>
@@ -4719,7 +4719,7 @@
     <string name="routing_attr_motor_type_name">Combustible usado por el motor</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
-    <string name="routing_attr_motor_type_petrol_name">Gasolina;Nafta;Bencina</string>
+    <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
     <string name="switch_widget_mode_desc">Puedes cambiar el modo pulsando en el widget.</string>
     <string name="side_marker_eta">Hora estimada de llegada</string>
     <string name="goods_delivery_desc_3">Aplica únicamente a vehículos que transportan mercancías, que tienen al menos cuatro ruedas y no pesan más de 3,5 toneladas.</string>

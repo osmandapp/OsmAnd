@@ -1973,7 +1973,7 @@
     <string name="poi_outdoor_seating">Places assises extérieures</string>
     <string name="poi_smoking">Fumeur</string>
     <string name="poi_delivery">Livraison</string>
-    <string name="poi_drive_in">Drive-in</string>
+    <string name="poi_drive_in">Drive</string>
     <string name="poi_drive_through">Drive</string>
     <string name="poi_takeaway">À emporter</string>
     <string name="poi_cocktails">Cocktails</string>
@@ -2195,7 +2195,7 @@
     <string name="poi_diet_vegetarian_filter_yes">Végétarien</string>
     <string name="poi_diet_halal_filter_yes">Halal</string>
     <string name="poi_diet_lactose_free_filter_yes">Sans lactose</string>
-    <string name="poi_drive_in_yes">Oui ; Drive-in</string>
+    <string name="poi_drive_in_yes">Oui ; Drive</string>
     <string name="poi_drive_through_yes">Oui ; passage en voiture</string>
     <string name="poi_takeaway_filter_yes">Oui ; à emporter</string>
     <string name="poi_delivery_filter_yes">Oui ; livraison</string>
@@ -2337,7 +2337,7 @@
     <string name="poi_diet_kosher_yes">Casher</string>
     <string name="poi_diet_kosher_no">Régime casher : non</string>
     <string name="poi_diet_pescetarian_yes">Pesco-végétarien</string>
-    <string name="poi_drive_in_no">Drive-in : non</string>
+    <string name="poi_drive_in_no">Drive : non</string>
     <string name="poi_payment_icsf_yes">IC Stored Fare</string>
     <string name="poi_payment_icsf_no">Cartes IC Stored Fare non acceptées</string>
     <string name="poi_icao">Code OACI</string>
