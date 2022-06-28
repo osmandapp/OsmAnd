@@ -1,12 +1,21 @@
 package net.osmand.core.android;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
 import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
+import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
@@ -15,6 +24,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.util.MapUtils;
 
 
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
@@ -54,40 +65,46 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public SWIGTYPE_p_QByteArray obtainImageData(IMapTiledDataProvider.Request request) {
-		byte[] image = null;
-		try {
-			long requestTimestamp = System.currentTimeMillis();
-			int zoom = request.getZoom().swigValue();
-			int tileX = request.getTileId().getX();
-			int tileY = request.getTileId().getY();
-			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
-			if (tileSource.couldBeDownloadedFromInternet()) {
-				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
-				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-				try {
-					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,
-							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < IMAGE_LOAD_TIMEOUT) {
-						synchronized (tileReadyCallback.getSync()) {
-							if (tileReadyCallback.isReady()) {
-								break;
-							}
-							try {
-								tileReadyCallback.getSync().wait(50);
-							} catch (InterruptedException ignored) {
-							}
-						}
-					}
-				} finally {
-					rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
-				}
-			} else {
-				tilesCache.get(tileFilename, requestTimestamp);
-			}
-			image = tileSource.getBytes(tileX, tileY, zoom, dirWithTiles);
-		} catch (Exception ignore) {
+	public SWIGTYPE_p_sk_spT_SkImage_const_t obtainImage(IMapTiledDataProvider.Request request) {
+		long requestTimestamp = System.currentTimeMillis();
+		int zoom = request.getZoom().swigValue();
+		int tileX = request.getTileId().getX();
+		int tileY = request.getTileId().getY();
+		float tileSize = tileSource.getTileSize();
+		double offsetY = 0;
+		if (tileSource.isEllipticYTile()) {
+			double latitude = MapUtils.getLatitudeFromTile(zoom, tileY);
+			double[] numberOffset = MapUtils.getTileEllipsoidNumberAndOffsetY(zoom, latitude, tileSource.getTileSize());
+			tileY = (int) numberOffset[0];
+			offsetY = numberOffset[1];
 		}
-		return image == null ? SwigUtilities.emptyQByteArray() : SwigUtilities.createQByteArrayAsCopyOf(image);
+		boolean shiftedTile = offsetY > 0;
+		byte[] first;
+		byte[] second;
+		first = getTileBytes(tileX, tileY, zoom, requestTimestamp);
+		if (first == null) {
+			return SwigUtilities.nullSkImage();
+		}
+		Bitmap bitmapResult = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
+		Paint paint = new Paint();
+		Canvas canvas = new Canvas(bitmapResult);
+		Bitmap bmpFirst = BitmapFactory.decodeByteArray(first, 0, first.length);
+		canvas.translate(0, (float)-offsetY);
+		canvas.drawBitmap(bmpFirst, 0, 0, paint);
+		if (shiftedTile) {
+			second = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp);
+			if (second != null) {
+				Bitmap bmpSecond = BitmapFactory.decodeByteArray(second, 0, second.length);
+				canvas.translate(0, tileSize);
+				canvas.drawBitmap(bmpSecond, 0, 0, paint);
+			}
+		}
+		return NativeUtilities.createSkImageFromBitmap(bitmapResult);
+	}
+
+	@Override
+	public boolean supportsObtainImage() {
+		return true;
 	}
 
 	@Override
@@ -157,5 +174,39 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 				sync.notifyAll();
 			}
 		}
+	}
+
+	@Nullable
+	private byte[] getTileBytes(int tileX, int tileY, int zoom, long requestTimestamp) {
+		byte[] bytes = null;
+		try {
+			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
+			if (tileSource.couldBeDownloadedFromInternet()) {
+				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
+				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
+				try {
+					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,
+							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < IMAGE_LOAD_TIMEOUT) {
+						synchronized (tileReadyCallback.getSync()) {
+							if (tileReadyCallback.isReady()) {
+								break;
+							}
+							try {
+								tileReadyCallback.getSync().wait(50);
+							} catch (InterruptedException ignored) {
+							}
+						}
+					}
+				} finally {
+					rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
+				}
+			} else {
+				tilesCache.get(tileFilename, requestTimestamp);
+			}
+			bytes = tileSource.getBytes(tileX, tileY, zoom, dirWithTiles);
+		} catch (Exception ignore) {
+
+		}
+		return bytes;
 	}
 }
