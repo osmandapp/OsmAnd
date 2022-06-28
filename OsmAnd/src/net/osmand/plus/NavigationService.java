@@ -182,7 +182,10 @@ public class NavigationService extends Service {
 	}
 
 	private void removeLocationSourceListener() {
-		settings.LOCATION_SOURCE.removeListener(locationSourceListener);
+		OsmandApplication app = getApp();
+		if (app != null) {
+			app.getSettings().LOCATION_SOURCE.removeListener(locationSourceListener);
+		}
 	}
 
 	private void requestLocationUpdates() {

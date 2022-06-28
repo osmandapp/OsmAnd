@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -31,9 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 
 public class FavouritesHelper {
@@ -77,7 +77,7 @@ public class FavouritesHelper {
 
 	@NonNull
 	public List<FavouritePoint> getFavouritePoints() {
-		return cachedFavoritePoints;
+		return new ArrayList<>(cachedFavoritePoints);
 	}
 
 	@Nullable
@@ -132,7 +132,7 @@ public class FavouritesHelper {
 	public void fixBlackBackground() {
 		flatGroups.clear();
 		favoriteGroups.clear();
-		for (FavouritePoint fp : cachedFavoritePoints) {
+		for (FavouritePoint fp : getFavouritePoints()) {
 			if (fp.getColor() == 0xFF000000 || fp.getColor() == ContextCompat.getColor(app, R.color.color_favorite)) {
 				fp.setColor(0);
 			}
@@ -160,7 +160,7 @@ public class FavouritesHelper {
 
 	@Nullable
 	public FavouritePoint getSpecialPoint(SpecialPointType pointType) {
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.getSpecialPointType() == pointType) {
 				return point;
 			}
@@ -498,7 +498,7 @@ public class FavouritesHelper {
 	@NonNull
 	public List<FavouritePoint> getVisibleFavouritePoints() {
 		List<FavouritePoint> points = new ArrayList<>();
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.isVisible()) {
 				points.add(point);
 			}
@@ -508,7 +508,7 @@ public class FavouritesHelper {
 
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.isVisible() && latLon.equals(new LatLon(point.getLatitude(), point.getLongitude()))) {
 				return point;
 			}

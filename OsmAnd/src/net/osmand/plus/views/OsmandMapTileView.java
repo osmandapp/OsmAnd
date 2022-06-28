@@ -71,7 +71,6 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,7 +148,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private final List<IMapLocationListener> locationListeners = Collections.synchronizedList(new ArrayList<>());
+	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -586,12 +585,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return currentViewport.isZoomAnimated();
 	}
 
-	public void addMapLocationListener(@NonNull IMapLocationListener l) {
-		locationListeners.add(l);
+	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
+		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
+		listeners.add(listener);
+		this.locationListeners = listeners;
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners.remove(listener);
+		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
+		listeners.remove(listener);
+		this.locationListeners = listeners;
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {

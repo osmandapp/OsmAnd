@@ -468,7 +468,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	private boolean startDownload() {
 		boolean downloadStarted = false;
-		if (!downloadThread.isDownloading(mapIndexItem)
+		if (mapIndexItem != null && !downloadThread.isDownloading(mapIndexItem)
 				&& !mapIndexItem.isDownloaded()
 				&& !mapDownloadCancelled) {
 			validationManager.startDownload(getActivity(), mapIndexItem);

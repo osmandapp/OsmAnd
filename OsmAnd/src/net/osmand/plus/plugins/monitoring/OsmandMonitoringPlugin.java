@@ -293,23 +293,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				app.getNotificationHelper().refreshNotifications();
 				updateWidgets();
 
-				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
-				GPXFile gpxFile = null;
-				File file = null;
-				if (!Algorithms.isEmpty(gpxFilesByName)) {
-					String gpxFileName = gpxFilesByName.keySet().iterator().next();
-					gpxFile = gpxFilesByName.get(gpxFileName);
-					file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
-				}
-
-				boolean fileExists = file != null && file.exists();
-				boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
-				if (fileExists && gpxFileNonEmpty) {
-					if (openTrack) {
-						TrackMenuFragment.openTrack(mapActivity, file, null);
-					} else {
-						FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : null;
-						if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+				FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : mapActivity;
+				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+					Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
+					GPXFile gpxFile = null;
+					File file = null;
+					if (!Algorithms.isEmpty(gpxFilesByName)) {
+						String gpxFileName = gpxFilesByName.keySet().iterator().next();
+						gpxFile = gpxFilesByName.get(gpxFileName);
+						file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
+					}
+					boolean fileExists = file != null && file.exists();
+					boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
+					if (fileExists && gpxFileNonEmpty) {
+						if (openTrack) {
+							TrackMenuFragment.openTrack(mapActivity, file, null);
+						} else {
 							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
 						}
