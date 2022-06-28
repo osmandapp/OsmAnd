@@ -49,7 +49,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 

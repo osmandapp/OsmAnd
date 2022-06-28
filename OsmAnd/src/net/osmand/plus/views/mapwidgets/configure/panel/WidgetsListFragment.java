@@ -29,7 +29,7 @@ import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
-import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
