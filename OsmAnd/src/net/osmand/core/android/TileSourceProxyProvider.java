@@ -72,32 +72,36 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		double offsetY = 0;
 		if (tileSource.isEllipticYTile()) {
 			double latitude = MapUtils.getLatitudeFromTile(zoom, tileY);
-			double[] numberOffset = MapUtils.getTileEllipsoidNumberAndOffsetY(zoom, latitude, tileSource.getTileSize());
-			tileY = (int) numberOffset[0];
-			offsetY = numberOffset[1];
+			double[] tileOffset = MapUtils.getTileEllipsoidNumberAndOffsetY(zoom, latitude, tileSource.getTileSize());
+			tileY = (int) tileOffset[0];
+			offsetY = tileOffset[1];
 		}
 		boolean shiftedTile = offsetY > 0;
-		byte[] first;
-		byte[] second;
-		first = getTileBytes(tileX, tileY, zoom, requestTimestamp);
-		if (first == null) {
+		byte[] firstTileData;
+		byte[] secondTileData;
+		firstTileData = getTileBytes(tileX, tileY, zoom, requestTimestamp);
+		if (firstTileData == null) {
 			return SwigUtilities.nullSkImage();
 		}
-		Bitmap bitmapResult = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
-		Paint paint = new Paint();
-		Canvas canvas = new Canvas(bitmapResult);
-		Bitmap bmpFirst = BitmapFactory.decodeByteArray(first, 0, first.length);
-		canvas.translate(0, (float)-offsetY);
-		canvas.drawBitmap(bmpFirst, 0, 0, paint);
+
+		Bitmap firstTileBitmap = BitmapFactory.decodeByteArray(firstTileData, 0, firstTileData.length);
 		if (shiftedTile) {
-			second = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp);
-			if (second != null) {
-				Bitmap bmpSecond = BitmapFactory.decodeByteArray(second, 0, second.length);
+			Bitmap resultTileBitmap = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
+			Paint paint = new Paint();
+			Canvas canvas = new Canvas(resultTileBitmap);
+			canvas.translate(0, (float)-offsetY);
+			canvas.drawBitmap(firstTileBitmap, 0, 0, paint);
+			secondTileData = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp);
+			if (secondTileData != null) {
+				Bitmap secondTileBitmap = BitmapFactory.decodeByteArray(secondTileData, 0, secondTileData.length);
 				canvas.translate(0, tileSize);
-				canvas.drawBitmap(bmpSecond, 0, 0, paint);
+				canvas.drawBitmap(secondTileBitmap, 0, 0, paint);
 			}
+			return NativeUtilities.createSkImageFromBitmap(resultTileBitmap);
+		} else {
+			return NativeUtilities.createSkImageFromBitmap(firstTileBitmap);
 		}
-		return NativeUtilities.createSkImageFromBitmap(bitmapResult);
+
 	}
 
 	@Override

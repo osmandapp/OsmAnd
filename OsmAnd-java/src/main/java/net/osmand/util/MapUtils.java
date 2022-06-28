@@ -299,13 +299,13 @@ public class MapUtils {
 		final double M2 = (double) Math.log((1 + Math.sin(E2))
 				/ (1 - Math.sin(E2))) / 2 - J2 * Math.log((1 + J2 * Math.sin(E2)) / (1 - J2 * Math.sin(E2))) / 2;
 		final double B2 = getPowZoom(zoom);
-		double x = B2 / 2 - M2 * B2 / 2 / Math.PI;
+		double tileX = B2 / 2 - M2 * B2 / 2 / Math.PI;
 
-		double xTilesCountForThisZoom = (double) (1 << zoom);
-		double yTmp = xTilesCountForThisZoom * ( 0.5 - M2 / 2 / Math.PI);
+		double tilesCount = (double) (1 << zoom);
+		double yTmp = tilesCount * ( 0.5 - M2 / 2 / Math.PI);
 		double yTileNumber = Math.floor(yTmp);
-		double y = Math.floor((yTmp - yTileNumber) * tileSize);
-		return new double[]{x, y};
+		double tileY = Math.floor((yTmp - yTileNumber) * tileSize);
+		return new double[]{tileX, tileY};
 	}
 
 	public static double getLatitudeFromEllipsoidTileY(float zoom, float tileNumberY) {
