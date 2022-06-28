@@ -1,12 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,14 +9,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,18 +22,17 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -57,6 +41,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener,
 		ResetToDefaultListener, CopyAppModePrefsListener {
@@ -69,6 +68,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
+	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private WidgetIconsHelper iconsHelper;
 
 	private View view;
@@ -96,6 +96,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		settings = app.getSettings();
 		nightMode = !settings.isLightContent();
 		selectedAppMode = settings.getApplicationMode();
+		widgetsSettingsHelper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
 		iconsHelper = new WidgetIconsHelper(app, selectedAppMode.getProfileColor(nightMode), nightMode);
 		if (savedInstanceState != null) {
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
@@ -178,16 +179,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			return;
 		}
 
-		List<WidgetsPanel> panels = Collections.singletonList(selectedPanel);
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, panels);
-		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			Boolean newEnableState = isOriginalWidgetOnAnotherPanel(widgetInfo)
-					? false // Disable (not reset), because widget can be enabled by default
-					: null;
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, newEnableState, false);
-		}
-		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
+		widgetsSettingsHelper.resetWidgetsForPanel(selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
@@ -196,105 +188,20 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		updateContent();
 	}
 
-	private boolean isOriginalWidgetOnAnotherPanel(@NonNull MapWidgetInfo widgetInfo) {
-		boolean original = WidgetType.isOriginalWidget(widgetInfo.key);
-		WidgetType widgetType = widgetInfo.widget.getWidgetType();
-		return original && widgetType != null && widgetType.defaultPanel != widgetInfo.widgetPanel;
-	}
-
 	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
-		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 
-		List<WidgetsPanel> panels = Collections.singletonList(selectedPanel);
-		List<MapWidgetInfo> defaultWidgetInfos = getDefaultWidgetInfos(mapActivity);
-		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry
-				.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE | AVAILABLE_MODE, panels);
-		List<List<String>> newPagedOrder = new ArrayList<>();
-		int previousPage = -1;
-
-		for (MapWidgetInfo widgetInfoToCopy : widgetInfosToCopy) {
-			if (!selectedAppMode.isWidgetAvailable(widgetInfoToCopy.key)) {
-				continue;
-			}
-
-			WidgetType widgetTypeToCopy = widgetInfoToCopy.widget.getWidgetType();
-			boolean duplicateNotPossible = widgetTypeToCopy == null || !selectedPanel.isDuplicatesAllowed();
-			String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetInfoToCopy.key);
-			MapWidgetInfo defaultWidgetInfo = getWidgetInfoById(defaultWidgetId, defaultWidgetInfos);
-
-			if (defaultWidgetInfo != null) {
-				String widgetIdToAdd;
-				boolean disabled = !defaultWidgetInfo.isEnabledForAppMode(selectedAppMode);
-				boolean inAnotherPanel = defaultWidgetInfo.widgetPanel != selectedPanel;
-				if (duplicateNotPossible || (disabled && !inAnotherPanel)) {
-					widgetRegistry.enableDisableWidgetForMode(selectedAppMode, defaultWidgetInfo, true, false);
-					widgetIdToAdd = defaultWidgetInfo.key;
-				} else {
-					MapWidgetInfo duplicateWidgetInfo = createDuplicateWidgetInfo(widgetTypeToCopy, widgetsFactory);
-					widgetIdToAdd = duplicateWidgetInfo != null ? duplicateWidgetInfo.key : null;
-				}
-
-				if (!Algorithms.isEmpty(widgetIdToAdd)) {
-					if (previousPage != widgetInfoToCopy.pageIndex || newPagedOrder.size() == 0) {
-						previousPage = widgetInfoToCopy.pageIndex;
-						newPagedOrder.add(new ArrayList<>());
-					}
-					newPagedOrder.get(newPagedOrder.size() - 1).add(widgetIdToAdd);
-				}
-			}
-		}
-
-		selectedPanel.setWidgetsOrder(selectedAppMode, newPagedOrder, settings);
+		widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
 			mapInfoLayer.recreateAllControls(mapActivity);
 		}
 		updateContent();
-	}
-
-	@NonNull
-	private List<MapWidgetInfo> getDefaultWidgetInfos(@NonNull MapActivity mapActivity) {
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, selectedPanel.getMergedPanels());
-		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			if (widgetInfo.widgetPanel == selectedPanel) {
-				Boolean visibility = WidgetType.isOriginalWidget(widgetInfo.key) ? false : null;
-				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, visibility, false);
-			}
-		}
-		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
-		return new ArrayList<>(widgetInfos);
-	}
-
-	@Nullable
-	private MapWidgetInfo createDuplicateWidgetInfo(@NonNull WidgetType widgetType,
-	                                                @NonNull MapWidgetsFactory widgetsFactory) {
-		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType.id);
-		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType);
-		if (duplicateWidget != null) {
-			settings.CUSTOM_WIDGETS_KEYS.addModeValue(selectedAppMode, duplicateWidgetId);
-			MapWidgetInfo duplicateWidgetInfo = widgetRegistry.createCustomWidget(duplicateWidgetId,
-					duplicateWidget, widgetType, selectedPanel, selectedAppMode);
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, duplicateWidgetInfo, true, false);
-			return duplicateWidgetInfo;
-		}
-		return null;
-	}
-
-	@Nullable
-	private MapWidgetInfo getWidgetInfoById(@NonNull String widgetId, @NonNull List<MapWidgetInfo> widgetInfos) {
-		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			if (widgetId.equals(widgetInfo.key)) {
-				return widgetInfo;
-			}
-		}
-		return null;
 	}
 
 	public void updateContent() {
