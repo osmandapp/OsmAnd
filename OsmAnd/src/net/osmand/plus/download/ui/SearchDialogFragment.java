@@ -55,7 +55,10 @@ import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -547,12 +550,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					return new ArrayList<>();
 				}
 
-				final BinaryMapIndexReader baseMapReader = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
-				final SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(
-						text, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-				final String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-				final boolean translit = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-				final List<Amenity> amenities = new ArrayList<>();
+				SearchUICore searchUICore = app.getSearchUICore().getCore();
+				SearchSettings searchSettings = searchUICore.getSearchSettings();
+				SearchPhrase searchPhrase = searchUICore.getPhrase().generateNewPhrase(text, searchSettings);
+				NameStringMatcher matcher = searchPhrase.getFirstUnknownNameStringMatcher();
+
+				String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				boolean translit = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+				List<Amenity> amenities = new ArrayList<>();
 				SearchRequest<Amenity> request = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0,
 						text,
@@ -570,7 +575,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 								String localeName = amenity.getName(lang, translit);
 								String subType = amenity.getSubType();
 								if (!citySubTypes.contains(subType)
-										|| (!nm.matches(localeName) && !nm.matches(otherNames))) {
+										|| (!matcher.matches(localeName) && !matcher.matches(otherNames))) {
 									return false;
 								}
 								amenities.add(amenity);
@@ -584,6 +589,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						});
 
 				searchCityRequest = request;
+				BinaryMapIndexReader baseMapReader = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
 				baseMapReader.searchPoiByName(request);
 				try {
 					baseMapReader.close();
@@ -624,7 +630,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 				app.runInUIThread(SearchDialogFragment.this::showProgressBar);
 
-				String searchRequest = constraint == null ? "" : constraint.toString().trim();
+				String searchRequest = constraint == null ? "" : constraint.toString();
 				FilterResults results = new FilterResults();
 				if (searchRequest.length() < 2) {
 					results.values = new ArrayList<>();
