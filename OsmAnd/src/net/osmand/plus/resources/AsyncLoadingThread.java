@@ -123,7 +123,6 @@ public class AsyncLoadingThread extends Thread {
 
 	public static class TileLoadDownloadRequest extends DownloadRequest {
 
-		public final String tileId;
 		public final File dirWithTiles;
 		public final ITileSource tileSource;
 
@@ -131,10 +130,9 @@ public class AsyncLoadingThread extends Thread {
 
 		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId,
 		                               ITileSource source, int tileX, int tileY, int zoom, long timestamp) {
-			super(url, fileToSave, tileX, tileY, zoom);
+			super(url, fileToSave, tileId, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
 			this.tileSource = source;
-			this.tileId = tileId;
 			this.timestamp = timestamp;
 		}
 		
