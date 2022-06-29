@@ -14,6 +14,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,14 +46,18 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	}
 
 	private void copyToFavorites() {
+		ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
 		for (GpxDisplayItem item : group.getModifiableList()) {
 			if (item.locationStart != null) {
-				FavouritePoint fp = FavouritePoint.fromWpt(item.locationStart, app, groupName);
+				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
 				if (!Algorithms.isEmpty(item.description)) {
-					fp.setDescription(item.description);
+					point.setDescription(item.description);
 				}
-				favouritesHelper.addFavourite(fp, false);
+				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
+					plugin.updateParkingPoint(point);
+				}
+				favouritesHelper.addFavourite(point, false);
 			}
 		}
 		favouritesHelper.saveCurrentPointsIntoFile();

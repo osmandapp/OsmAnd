@@ -16,6 +16,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 	private final boolean forceImportFavourites;
 
 	public FavoritesImportTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile,
-							   @NonNull String fileName, boolean forceImportFavourites) {
+	                           @NonNull String fileName, boolean forceImportFavourites) {
 		super(activity);
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
@@ -40,14 +42,20 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 	}
 
 	public static void mergeFavorites(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-									  @NonNull String fileName, boolean forceImportFavourites) {
+	                                  @NonNull String fileName, boolean forceImportFavourites) {
 		List<FavouritePoint> favourites = asFavourites(app, gpxFile.getPoints(), fileName, forceImportFavourites);
 		checkDuplicateNames(favourites);
 
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
+		ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
 			favoritesHelper.addFavourite(favourite, false);
+
+			if (plugin != null && favourite.getSpecialPointType() == SpecialPointType.PARKING) {
+				plugin.updateParkingPoint(favourite);
+			}
 		}
 		favoritesHelper.sortAll();
 		favoritesHelper.saveCurrentPointsIntoFile();

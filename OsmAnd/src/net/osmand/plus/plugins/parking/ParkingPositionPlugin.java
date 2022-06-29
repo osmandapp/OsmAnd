@@ -122,6 +122,22 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return parkingPickupDate.get();
 	}
 
+	public void updateParkingPoint(@NonNull FavouritePoint point) {
+		if (point.getSpecialPointType() == SpecialPointType.PARKING) {
+			long timestamp = point.getTimestamp();
+			boolean timeRestricted = timestamp > 0;
+			setParkingType(timeRestricted);
+			setParkingTime(timeRestricted ? timestamp : 0);
+			setParkingPickupDate(point.getPickupDate());
+			setParkingPosition(point.getLatitude(), point.getLongitude());
+			addOrRemoveParkingEvent(point.getCalendarEvent());
+
+			if (point.getCalendarEvent()) {
+				addCalendarEvent(app);
+			}
+		}
+	}
+
 	public boolean clearParkingPosition() {
 		parkingLat.resetToDefault();
 		parkingLon.resetToDefault();
