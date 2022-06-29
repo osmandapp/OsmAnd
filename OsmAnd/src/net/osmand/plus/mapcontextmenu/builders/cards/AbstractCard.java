@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.WebViewEx;
 
 public abstract class AbstractCard {
@@ -66,7 +67,7 @@ public abstract class AbstractCard {
 		if (externalLink) {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
-			ctx.startActivity(intent);
+			AndroidUtils.startActivityIfSafe(ctx, intent);
 			return;
 		}
 

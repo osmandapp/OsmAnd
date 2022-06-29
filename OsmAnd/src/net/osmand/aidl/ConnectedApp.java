@@ -221,7 +221,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			setOnClickListener(v -> {
 				AidlMapWidgetWrapper widget = widgets.get(widgetId);
 				if (widget != null && widget.getIntentOnClick() != null) {
-					app.startActivity(widget.getIntentOnClick());
+					AndroidUtils.startActivityIfSafe(app, widget.getIntentOnClick());
 				}
 			});
 		}

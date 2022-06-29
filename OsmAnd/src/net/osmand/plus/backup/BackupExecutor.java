@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BackupExecutor extends ThreadPoolExecutor {
 
 	private final OsmandApplication app;
-	private final List<BackupExecutorListener> listeners = Collections.synchronizedList(new ArrayList<>());
+	private List<BackupExecutorListener> listeners = new ArrayList<>();
 	private final AtomicInteger aState = new AtomicInteger(State.IDLE.ordinal());
 	private final List<BackupCommand> activeCommands = Collections.synchronizedList(new ArrayList<>());
 
@@ -52,11 +52,15 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	}
 
 	public void addListener(@NonNull BackupExecutorListener listener) {
+		List<BackupExecutorListener> listeners = new ArrayList<>(this.listeners);
 		listeners.add(listener);
+		this.listeners = listeners;
 	}
 
 	public void removeListener(@NonNull BackupExecutorListener listener) {
+		List<BackupExecutorListener> listeners = new ArrayList<>(this.listeners);
 		listeners.remove(listener);
+		this.listeners = listeners;
 	}
 
 	public void runCommand(@NonNull BackupCommand command) {
