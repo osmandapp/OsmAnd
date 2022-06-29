@@ -77,7 +77,7 @@ public class FavouritesHelper {
 
 	@NonNull
 	public List<FavouritePoint> getFavouritePoints() {
-		return new ArrayList<>(cachedFavoritePoints);
+		return cachedFavoritePoints;
 	}
 
 	@Nullable
@@ -243,7 +243,7 @@ public class FavouritesHelper {
 				if (p.isHomeOrWork()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 				}
-				cachedFavoritePoints.remove(p);
+				removeFavouritePoint(p);
 			}
 			for (FavoriteGroup gr : groupsToSync) {
 				runSyncWithMarkers(gr);
@@ -253,7 +253,7 @@ public class FavouritesHelper {
 			for (FavoriteGroup g : groupsToDelete) {
 				flatGroups.remove(g.getName());
 				favoriteGroups.remove(g);
-				cachedFavoritePoints.removeAll(g.getPoints());
+				removeFavouritePoints(g.getPoints());
 				removeFromMarkers(g);
 				if (g.isPersonal()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
@@ -274,7 +274,7 @@ public class FavouritesHelper {
 				group.getPoints().remove(p);
 				runSyncWithMarkers(group);
 			}
-			cachedFavoritePoints.remove(p);
+			removeFavouritePoint(p);
 			if (p.isHomeOrWork()) {
 				app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 			}
@@ -350,7 +350,7 @@ public class FavouritesHelper {
 				}
 			}
 			group.getPoints().add(p);
-			cachedFavoritePoints.add(p);
+			addFavouritePoint(p);
 		}
 		if (saveImmediately) {
 			sortAll();
@@ -553,6 +553,24 @@ public class FavouritesHelper {
 		} else {
 			return null;
 		}
+	}
+
+	private void addFavouritePoint(@NonNull FavouritePoint point) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.add(point);
+		this.cachedFavoritePoints = favouritePoints;
+	}
+
+	private void removeFavouritePoint(@NonNull FavouritePoint point) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.remove(point);
+		this.cachedFavoritePoints = favouritePoints;
+	}
+
+	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.removeAll(points);
+		this.cachedFavoritePoints = favouritePoints;
 	}
 
 	public void recalculateCachedFavPoints() {

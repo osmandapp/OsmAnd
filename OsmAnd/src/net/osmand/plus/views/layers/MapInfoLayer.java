@@ -153,16 +153,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
-		resetCashedTheme();
-		ApplicationMode appMode = settings.getApplicationMode();
-		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
-
-		if (leftWidgetsPanel != null) {
+		if (getMapActivity() != null) {
+			resetCashedTheme();
+			ApplicationMode appMode = settings.getApplicationMode();
+			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
+			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
 			leftWidgetsPanel.update();
-		}
-		if (rightWidgetsPanel != null) {
 			rightWidgetsPanel.update();
 		}
 	}
