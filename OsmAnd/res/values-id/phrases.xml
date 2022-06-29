@@ -1268,4 +1268,22 @@
     <string name="poi_museum_paleontology">Paleontologi</string>
     <string name="poi_post_office_service_brand">Merek kantor pos</string>
     <string name="poi_books_adults">Orang Dewasa</string>
+    <string name="poi_club_youth_movement">Gerakan pemuda</string>
+    <string name="poi_club_religion">Klub religi</string>
+    <string name="poi_club_amateur_radio">Klub radio amatir</string>
+    <string name="poi_club_aviation">Klub penerbangan</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_payment_mir_no">Kartu Mir tidak diterima</string>
+    <string name="poi_club_dog">Klub anjing</string>
+    <string name="poi_short_name">Nama pendek</string>
+    <string name="poi_board_title">Judul papan</string>
+    <string name="poi_food_no">Makanan: tidak</string>
+    <string name="poi_board_type_nature">Alam</string>
+    <string name="poi_board_type_wildlife">Satwa Liar</string>
+    <string name="poi_anthill">Sarang Semut</string>
+    <string name="poi_dry_cleaning_no">Tidak</string>
+    <string name="poi_dry_cleaning_yes">Ya</string>
+    <string name="poi_laundry_service_no">Tidak</string>
+    <string name="poi_club_bicycle">Klub sepeda</string>
+    <string name="poi_club_doityourself">Klub DIY</string>
 </resources>
