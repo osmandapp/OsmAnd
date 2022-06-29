@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -14,12 +15,11 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -29,10 +29,11 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 
-public class FailSafeFuntions {
+public class FailSafeFunctions {
+
 	private static boolean quitRouteRestoreDialog = false;
-	private static Log log = PlatformUtil.getLog(FailSafeFuntions.class);
-	
+	private static final Log log = PlatformUtil.getLog(FailSafeFunctions.class);
+
 	public static void restoreRoutingMode(final MapActivity ma) {
 		final OsmandApplication app = ma.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
@@ -86,19 +87,19 @@ public class FailSafeFuntions {
 					delayDisplay = new Runnable() {
 						@Override
 						public void run() {
-							if(!quitRouteRestoreDialog) {
-								delay --;
+							if (!quitRouteRestoreDialog) {
+								delay--;
 								tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
-								if(delay <= 0) {
+								if (delay <= 0) {
 									try {
 										if (dlg.isShowing() && !quitRouteRestoreDialog) {
 											dlg.dismiss();
 										}
 										quitRouteRestoreDialog = true;
 										restoreRoutingModeInner();
-									} catch(Exception e) {
+									} catch (Exception e) {
 										// swalow view not attached exception
-										log.error(e.getMessage()+"", e);
+										log.error(e.getMessage() + "", e);
 									}
 								} else {
 									uiHandler.postDelayed(delayDisplay, 1000);
@@ -110,6 +111,7 @@ public class FailSafeFuntions {
 				}
 
 				private void restoreRoutingModeInner() {
+					@SuppressLint("StaticFieldLeak")
 					AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
 						@Override
 						protected GPXFile doInBackground(String... params) {
@@ -133,11 +135,16 @@ public class FailSafeFuntions {
 								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 									gpxRoute.setCalculateOsmAndRouteParts(true);
 								}
-								if(settings.GPX_ROUTE_CALC.get()) {
+								if (settings.GPX_ROUTE_CALC.get()) {
 									gpxRoute.setCalculateOsmAndRoute(true);
 								}
-								if (settings.GPX_ROUTE_SEGMENT.get() != -1) {
-									gpxRoute.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
+								int segmentIndex = settings.GPX_SEGMENT_INDEX.get();
+								if (segmentIndex != -1) {
+									gpxRoute.setSelectedSegment(segmentIndex);
+								}
+								int routeIndex = settings.GPX_ROUTE_INDEX.get();
+								if (routeIndex != -1) {
+									gpxRoute.setSelectedRoute(routeIndex);
 								}
 							} else {
 								gpxRoute = null;
@@ -149,8 +156,6 @@ public class FailSafeFuntions {
 								enterRoutingMode(ma, gpxRoute);
 							}
 						}
-
-						
 					};
 					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxPath);
 
@@ -158,7 +163,6 @@ public class FailSafeFuntions {
 			};
 			encapsulate.run();
 		}
-
 	}
 	
 	public static void enterRoutingMode(@NonNull MapActivity mapActivity, @Nullable GPXRouteParamsBuilder gpxRoute) {
@@ -180,10 +184,10 @@ public class FailSafeFuntions {
 			mapActivity.getDashboard().hideDashboard();
 		}
 	}
-	
-	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app){
+
+	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app) {
 		ma.updateApplicationModeSettings();
-		app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
+		app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<>());
 		app.getTargetPointsHelper().removeAllWayPoints(false, false);
 		ma.refreshMap();
 	}

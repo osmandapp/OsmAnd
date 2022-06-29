@@ -3,7 +3,6 @@ package net.osmand.plus.backup;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -186,13 +185,8 @@ public class BackupHelper {
 		return app.getBackupHelper().getDbHelper().getLastModifiedTime(name);
 	}
 
-	@SuppressLint("HardwareIds")
 	public String getAndroidId() {
-		try {
-			return Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
-		} catch (Exception e) {
-			return null;
-		}
+		return app.getUserAndroidId();
 	}
 
 	public static boolean isTokenValid(@NonNull String token) {

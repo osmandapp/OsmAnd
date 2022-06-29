@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -9,16 +11,14 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 
 import java.lang.ref.WeakReference;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class GpxNavigationHelper {
 
 	public static void startNavigationForSegment(@NonNull GPXFile gpxFile,
 	                                             int selectedSegment,
 	                                             @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+		app.getSettings().GPX_SEGMENT_INDEX.set(selectedSegment);
+		app.getSettings().GPX_ROUTE_INDEX.resetToDefault();
 		startNavigationForGpx(gpxFile, mapActivity);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (paramsBuilder != null) {
@@ -27,6 +27,19 @@ public class GpxNavigationHelper {
 		}
 	}
 
+	public static void startNavigationForRoute(@NonNull GPXFile gpxFile,
+	                                           int selectedRoute,
+	                                           @NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		app.getSettings().GPX_ROUTE_INDEX.set(selectedRoute);
+		app.getSettings().GPX_SEGMENT_INDEX.resetToDefault();
+		startNavigationForGpx(gpxFile, mapActivity);
+		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedRoute(selectedRoute);
+			app.getRoutingHelper().onSettingsChanged(true);
+		}
+	}
 
 	public static void startNavigationForGpx(@NonNull GPXFile gpxFile, @NonNull MapActivity mapActivity) {
 		MapActivityActions mapActions = mapActivity.getMapActions();

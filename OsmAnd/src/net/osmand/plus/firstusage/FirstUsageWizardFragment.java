@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -286,7 +285,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					final Map<String, String> pms = new LinkedHashMap<>();
 					pms.put("version", Version.getFullVersion(app));
 					try {
-						pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
+						pms.put("aid", app.getUserAndroidId());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
