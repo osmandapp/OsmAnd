@@ -1286,4 +1286,26 @@
     <string name="poi_laundry_service_no">Tidak</string>
     <string name="poi_club_bicycle">Klub sepeda</string>
     <string name="poi_club_doityourself">Klub DIY</string>
+    <string name="poi_laundry_service_yes">Ya</string>
+    <string name="poi_payment_maestro_contactless_no">Maestro nirsentuh tidak diterima</string>
+    <string name="poi_birds_nest">Sarang burung</string>
+    <string name="poi_shop_fuel">Toko bensin</string>
+    <string name="poi_board_type_sport">Olahraga</string>
+    <string name="poi_tiles">Toko ubin</string>
+    <string name="poi_board_type_sight">Pemandangan</string>
+    <string name="poi_payment_mastercard_contactless_yes">MasterCard nirsentuh</string>
+    <string name="poi_payment_maestro_contactless_yes">Maestro nirsentuh</string>
+    <string name="poi_payment_girocard_contactless_yes">Girocard nirsentuh</string>
+    <string name="poi_payment_american_express_contactless_yes">American Express (AMEX) nirsentuh</string>
+    <string name="poi_hairdresser_supply">Toko perlengkapan penata rambut</string>
+    <string name="poi_greenery">Tanaman hijau</string>
+    <string name="poi_wool">Toko wol</string>
+    <string name="poi_rice">Toko nasi</string>
+    <string name="poi_payment_visa_contactless_no">Visa nirsentuh tidak diterima</string>
+    <string name="poi_payment_mastercard_contactless_no">MasterCard nirsentuh tidak diterima</string>
+    <string name="poi_payment_girocard_contactless_no">Girocard nirsentuh tidak diterima</string>
+    <string name="poi_payment_american_express_contactless_no">American Express (AMEX) nirsentuh tidak diterima</string>
+    <string name="poi_payment_visa_contactless_yes">Visa nirsentuh</string>
+    <string name="poi_water_sports">Toko olahraga air</string>
+    <string name="poi_printer_ink">Toko tinta pencetak</string>
 </resources>
