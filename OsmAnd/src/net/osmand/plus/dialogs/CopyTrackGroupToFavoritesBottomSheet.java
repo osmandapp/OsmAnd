@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;

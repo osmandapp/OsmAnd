@@ -6,10 +6,8 @@ import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
@@ -19,10 +17,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.preferences.BooleanPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -56,9 +51,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private long creationDate;
 	private boolean calendarEvent;
 
-	public FavouritePoint() {
-	}
-
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -84,30 +76,30 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		initPersonalType();
 	}
 
-	public FavouritePoint(FavouritePoint favouritePoint) {
-		this.latitude = favouritePoint.latitude;
-		this.longitude = favouritePoint.longitude;
-		this.category = favouritePoint.category;
-		this.name = favouritePoint.name;
-		this.color = favouritePoint.color;
-		this.description = favouritePoint.description;
-		this.visible = favouritePoint.visible;
-		this.originObjectName = favouritePoint.originObjectName;
-		this.address = favouritePoint.address;
-		this.iconId = favouritePoint.iconId;
-		this.backgroundType = favouritePoint.backgroundType;
-		this.altitude = favouritePoint.altitude;
-		this.timestamp = favouritePoint.timestamp;
-		this.visitedDate = favouritePoint.visitedDate;
-		this.creationDate = favouritePoint.creationDate;
+	public FavouritePoint(@NonNull FavouritePoint point) {
+		this.latitude = point.latitude;
+		this.longitude = point.longitude;
+		this.category = point.category;
+		this.name = point.name;
+		this.color = point.color;
+		this.description = point.description;
+		this.visible = point.visible;
+		this.originObjectName = point.originObjectName;
+		this.address = point.address;
+		this.iconId = point.iconId;
+		this.backgroundType = point.backgroundType;
+		this.altitude = point.altitude;
+		this.timestamp = point.timestamp;
+		this.visitedDate = point.visitedDate;
+		this.pickupDate = point.pickupDate;
 		initPersonalType();
 	}
 
 	private void initPersonalType() {
 		if (FavoriteGroup.PERSONAL_CATEGORY.equals(category)) {
-			for (SpecialPointType p : SpecialPointType.values()) {
-				if (p.typeName.equals(this.name)) {
-					this.specialPointType = p;
+			for (SpecialPointType pointType : SpecialPointType.values()) {
+				if (Algorithms.stringsEqual(pointType.getName(), this.name)) {
+					this.specialPointType = pointType;
 				}
 			}
 		}

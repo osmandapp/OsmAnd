@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;

@@ -10,7 +10,7 @@ import android.net.Uri;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.SpecialPointType;
+import net.osmand.data.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider;

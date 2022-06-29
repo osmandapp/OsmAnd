@@ -22,9 +22,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

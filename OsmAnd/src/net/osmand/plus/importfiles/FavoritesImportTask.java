@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -41,8 +42,9 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 	public static void mergeFavorites(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 									  @NonNull String fileName, boolean forceImportFavourites) {
 		List<FavouritePoint> favourites = asFavourites(app, gpxFile.getPoints(), fileName, forceImportFavourites);
-		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		checkDuplicateNames(favourites);
+
+		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
 			favoritesHelper.addFavourite(favourite, false);
