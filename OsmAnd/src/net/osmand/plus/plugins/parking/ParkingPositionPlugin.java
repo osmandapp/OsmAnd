@@ -61,7 +61,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public static final String PARKING_POINT_LON = "parking_point_lon";
 	public static final String PARKING_TYPE = "parking_type";
 	public static final String PARKING_TIME = "parking_limit_time";
-	public static final String PARKING_START_TIME = "parking_time";
+	public static final String PARKING_PICKUP_DATE = "parking_time";
 	public static final String PARKING_EVENT_ADDED = "parking_event_added";
 
 	// Constants for determining the order of items in the additional actions context menu
@@ -74,7 +74,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	private final CommonPreference<Boolean> parkingType;
 	private final CommonPreference<Boolean> parkingEvent;
 	private final CommonPreference<Long> parkingTime;
-	private final CommonPreference<Long> parkingStartTime;
+	private final CommonPreference<Long> parkingPickupDate;
 
 	public ParkingPositionPlugin(OsmandApplication app) {
 		super(app);
@@ -85,7 +85,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeShared();
 		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal().makeShared();
 		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal().makeShared();
-		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal().makeShared();
+		parkingPickupDate = set.registerLongPreference(PARKING_PICKUP_DATE, -1).makeGlobal().makeShared();
 		parkingPosition = constructParkingPosition();
 	}
 
@@ -119,7 +119,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	public long getStartParkingTime() {
-		return parkingStartTime.get();
+		return parkingPickupDate.get();
 	}
 
 	public boolean clearParkingPosition() {
@@ -128,7 +128,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingType.resetToDefault();
 		parkingTime.resetToDefault();
 		parkingEvent.resetToDefault();
-		parkingStartTime.resetToDefault();
+		parkingPickupDate.resetToDefault();
 		parkingPosition = null;
 		FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
 		if (pnt != null) {
@@ -156,8 +156,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return true;
 	}
 
-	public boolean setParkingStartTime(long timeInMillis) {
-		parkingStartTime.set(timeInMillis);
+	public boolean setParkingPickupDate(long timeInMillis) {
+		parkingPickupDate.set(timeInMillis);
 		return true;
 	}
 
@@ -389,7 +389,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	void setParkingPosition(final double latitude, final double longitude, boolean isLimited) {
 		setParkingPosition(latitude, longitude);
 		setParkingType(isLimited);
-		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
+		setParkingPickupDate(Calendar.getInstance().getTimeInMillis());
 	}
 
 	private void cancelParking() {

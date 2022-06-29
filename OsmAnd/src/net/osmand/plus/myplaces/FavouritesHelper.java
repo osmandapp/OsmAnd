@@ -306,15 +306,15 @@ public class FavouritesHelper {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
 			point.setIconId(specialType.getIconId(app));
-			point.setTimestamp(pickupTimestamp);
+			point.setPickupDate(pickupTimestamp);
 			point.setCalendarEvent(addToCalendar);
+			point.setTimestamp(System.currentTimeMillis());
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 			lookupAddress(point);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
-			point.setCreationDate(System.currentTimeMillis());
-			point.setTimestamp(pickupTimestamp);
+			point.setPickupDate(pickupTimestamp);
 			point.setCalendarEvent(addToCalendar);
 			point.setIconId(specialType.getIconId(app));
 			addFavourite(point);
