@@ -458,7 +458,7 @@ public class ImportHelper {
 							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 							Uri uri = Uri.fromParts("package", app.getPackageName(), null);
 							intent.setData(uri);
-							app.startActivity(intent);
+							AndroidUtils.startActivityIfSafe(app, intent);
 							if (gpxImportCompleteListener != null) {
 								gpxImportCompleteListener.onImportComplete(false);
 							}

@@ -148,7 +148,7 @@ public class FavouritesHelper {
 	public void fixBlackBackground() {
 		flatGroups.clear();
 		favoriteGroups.clear();
-		for (FavouritePoint fp : cachedFavoritePoints) {
+		for (FavouritePoint fp : getFavouritePoints()) {
 			if (fp.getColor() == 0xFF000000 || fp.getColor() == ContextCompat.getColor(app, R.color.color_favorite)) {
 				fp.setColor(0);
 			}
@@ -176,7 +176,7 @@ public class FavouritesHelper {
 
 	@Nullable
 	public FavouritePoint getSpecialPoint(SpecialPointType pointType) {
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.getSpecialPointType() == pointType) {
 				return point;
 			}
@@ -259,7 +259,7 @@ public class FavouritesHelper {
 				if (p.isHomeOrWork()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 				}
-				cachedFavoritePoints.remove(p);
+				removeFavouritePoint(p);
 			}
 			for (FavoriteGroup gr : groupsToSync) {
 				runSyncWithMarkers(gr);
@@ -269,7 +269,7 @@ public class FavouritesHelper {
 			for (FavoriteGroup g : groupsToDelete) {
 				flatGroups.remove(g.getName());
 				favoriteGroups.remove(g);
-				cachedFavoritePoints.removeAll(g.getPoints());
+				removeFavouritePoints(g.getPoints());
 				removeFromMarkers(g);
 				if (g.isPersonal()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
@@ -290,7 +290,7 @@ public class FavouritesHelper {
 				group.getPoints().remove(p);
 				runSyncWithMarkers(group);
 			}
-			cachedFavoritePoints.remove(p);
+			removeFavouritePoint(p);
 			if (p.isHomeOrWork()) {
 				app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 			}
@@ -366,7 +366,7 @@ public class FavouritesHelper {
 				}
 			}
 			group.getPoints().add(p);
-			cachedFavoritePoints.add(p);
+			addFavouritePoint(p);
 		}
 		if (saveImmediately) {
 			sortAll();
@@ -515,7 +515,7 @@ public class FavouritesHelper {
 	@NonNull
 	public List<FavouritePoint> getVisibleFavouritePoints() {
 		List<FavouritePoint> points = new ArrayList<>();
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.isVisible()) {
 				points.add(point);
 			}
@@ -525,7 +525,7 @@ public class FavouritesHelper {
 
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.isVisible() && latLon.equals(new LatLon(point.getLatitude(), point.getLongitude()))) {
 				return point;
 			}
@@ -570,6 +570,24 @@ public class FavouritesHelper {
 		} else {
 			return null;
 		}
+	}
+
+	private void addFavouritePoint(@NonNull FavouritePoint point) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.add(point);
+		this.cachedFavoritePoints = favouritePoints;
+	}
+
+	private void removeFavouritePoint(@NonNull FavouritePoint point) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.remove(point);
+		this.cachedFavoritePoints = favouritePoints;
+	}
+
+	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.removeAll(points);
+		this.cachedFavoritePoints = favouritePoints;
 	}
 
 	public void recalculateCachedFavPoints() {

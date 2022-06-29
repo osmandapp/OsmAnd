@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -55,8 +57,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmAndAppCustomization {
 
@@ -492,7 +492,7 @@ public class OsmAndAppCustomization {
 							.setTitle(item.name)
 							.setIcon(iconId != 0 ? iconId : ContextMenuItem.INVALID_ID)
 							.setListener((uiAdapter, view, _item, isChecked) -> {
-								activity.startActivity(finalIntent);
+								AndroidUtils.startActivityIfSafe(activity, finalIntent);
 								return true;
 							}));
 				}
