@@ -4618,7 +4618,7 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">Mittel</string>
     <string name="colour_of_circles">Farbe der Ringe</string>
     <string name="routing_attr_allow_private_for_truck_name">Erlaube Privatzugang (LKW)</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">Keine Einschränkungen</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Keine Einschränkungen)</string>
     <string name="routing_attr_avoid_fords_name">Furten vermeiden</string>
     <string name="routing_attr_hazmat_category_description">Gefahrgutkategorie / Zugangsgenehmigungen für Gefahrgut berücksichtigen</string>
     <string name="circle_settings">Kreiseinstellungen</string>
@@ -4667,8 +4667,8 @@
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="co2_mission">CO2-Ausstoß</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_description">Für CO2-Berechnung</string>
-    <string name="routing_attr_motor_type_name">Motorentyp</string>
+    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Fahrzeugsmotors, um den CO2-Ausstoß zu berechnen.</string>
+    <string name="routing_attr_motor_type_name">Kraftstoffart des Motors</string>
     <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
     <string name="compass_on_circles">Kompass auf Kreisen</string>
     <string name="bearing_secondary_desc">Das Format der angezeigten Daten kann in %1$s - %2$s - %3$s geändert werden.</string>
@@ -4706,7 +4706,7 @@
     <string name="get_altitude_data">Höhendaten abrufen</string>
     <string name="calculate_altitude">Höhe berechnen</string>
     <string name="calculating_altitude">Berechne die Höhe</string>
-    <string name="calculate_online_altitude_descr">Die Höhendaten werden auf dem OsmAnd-Server berechnet.</string>
+    <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Sie kann von der vom Gerät aufgezeichneten Höhe abweichen und kann als Höhenkorrektur verwendet werden.</string>
     <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
     <string name="map_markers_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
     <string name="map_markers_bar_widget_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
@@ -4718,4 +4718,16 @@
     <string name="updated_map_time">Aktualisiert: %1$s.</string>
     <string name="includes_osm_changes_until">OSM Änderungen bis %1$s berücksichtigt.</string>
     <string name="next_live_update_date_and_time">Nächste Aktualisierung %1$s in %2$s.</string>
+    <string name="switch_widget_mode_desc">Sie können den Modus wechseln, indem Sie auf das Widget tippen.</string>
+    <string name="side_marker_eta">Geschätzte Ankunftszeit</string>
+    <string name="reset_all_settings_desc">Sind Sie sicher, dass Sie alle Einstellungen auf die Standardwerte zurücksetzen wollen\?</string>
+    <string name="goods_delivery_desc_3">Gilt nur für Lieferfahrzeuge, die mindestens vier Räder haben und nicht mehr als 3,5 Tonnen wiegen.</string>
+    <string name="goods_delivery_desc_2">Für die Warenanlieferung gesperrte Straßen werden gemieden.</string>
+    <string name="goods_delivery_desc">Für Lieferfahrzeuge kann der Zugang zu einigen Straßen eingeschränkt sein.</string>
+    <string name="no_altitude_data_desc">Sie können Ihren Track mit den Straßen verbinden, um %1$s Daten zu erhalten oder sie online zu berechnen.</string>
+    <string name="map_marker_average_speed_desc">Geben Sie das Zeitintervall an, für das die Durchschnittsgeschwindigkeit gemessen wird, um die geschätzte Ankunftszeit zu berechnen.</string>
+    <string name="marker_1st">Erste Markierung</string>
+    <string name="marker_2nd">Zweite Markierung</string>
+    <string name="goods_delivery_desc_4">Wenn Ihr Fahrzeuggewicht mehr als 3,5 Tonnen beträgt, müssen Sie das LKW-Profil verwenden.</string>
+    <string name="routing_attr_goods_restrictions_name">Warenlieferung</string>
 </resources>

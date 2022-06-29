@@ -1904,6 +1904,16 @@ public class GPXUtilities {
 			return points.isEmpty() && routes.isEmpty();
 		}
 
+		public List<Track> getTracks(boolean includeGeneralTrack) {
+			List<Track> tracks = new ArrayList<>();
+			for (Track track : this.tracks) {
+				if (includeGeneralTrack || !track.generalTrack) {
+					tracks.add(track);
+				}
+			}
+			return tracks;
+		}
+
 		public int getTracksCount() {
 			int count = 0;
 			for (Track track : tracks) {

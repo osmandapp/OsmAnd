@@ -73,7 +73,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.FailSafeFuntions;
+import net.osmand.plus.base.FailSafeFunctions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -463,7 +463,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.FOLLOW_THE_ROUTE.get()
 				&& !app.getRoutingHelper().isRouteCalculated()
 				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-			FailSafeFuntions.restoreRoutingMode(MapActivity.this);
+			FailSafeFunctions.restoreRoutingMode(MapActivity.this);
 		}
 	}
 
@@ -1245,7 +1245,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
-		FailSafeFuntions.quitRouteRestoreDialog();
+		FailSafeFunctions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();

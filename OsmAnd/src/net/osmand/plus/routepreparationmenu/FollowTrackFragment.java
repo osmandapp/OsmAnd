@@ -424,12 +424,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean checkForSegments) {
+	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
 		this.gpxFile = gpxFile;
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, checkForSegments);
+			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, showSelectionDialog);
 		}
 	}
 
@@ -487,7 +487,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
-			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
+			editingContext.setSelectedSegment(app.getSettings().GPX_SEGMENT_INDEX.get());
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
 		}
 	}
@@ -592,11 +592,24 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	@Override
 	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
-		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+		app.getSettings().GPX_SEGMENT_INDEX.set(selectedSegment);
 		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (paramsBuilder != null) {
 			paramsBuilder.setSelectedSegment(selectedSegment);
+			app.getRoutingHelper().onSettingsChanged(true);
+		}
+		updateSelectionMode(false);
+	}
+
+
+	@Override
+	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+		app.getSettings().GPX_ROUTE_INDEX.set(selectedRoute);
+		selectTrackToFollow(gpxFile, false);
+		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedRoute(selectedRoute);
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		updateSelectionMode(false);

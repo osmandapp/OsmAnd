@@ -366,9 +366,16 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	private static String getSegmentTitle(TrkSegment segment, int segmentIdx, OsmandApplication app) {
+	private static String getSegmentTitle(@NonNull TrkSegment segment, int segmentIdx, OsmandApplication app) {
 		String segmentName = Algorithms.isBlank(segment.name) ? String.valueOf(segmentIdx + 1) : segment.name;
 		String segmentString = app.getString(R.string.gpx_selection_segment_title);
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
+	}
+
+	@NonNull
+	public static String getRouteTitle(@NonNull Route route, int index, OsmandApplication app) {
+		String segmentName = Algorithms.isBlank(route.name) ? String.valueOf(index + 1) : route.name;
+		String segmentString = app.getString(R.string.layer_route);
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Carburant</string>
+    <string name="routing_attr_motor_type_name">Source d\'énergie du moteur</string>
     <string name="routing_attr_motor_type_description">Sélectionnez le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
@@ -4052,7 +4052,7 @@
     <string name="empty_purchases_description">Si vos achats n\'apparaissent pas ici, appuyez sur \"%1$s\" ou contactez notre équipe d\'assistance.</string>
     <string name="troubleshooting">Résolution de problèmes</string>
     <string name="troubleshooting_description">Veuillez suivre ce lien si vous rencontrez des problèmes avec vos achats.</string>
-    <string name="in_grace_period">En période de grâce</string>
+    <string name="in_grace_period">En période d\'essai</string>
     <string name="update_all_maps_added">Mettre à jour toutes les cartes ajoutées à %1$s \?</string>
     <string name="no_purchases">Vous n\'avez fait aucun achat</string>
     <string name="new_device_account">Nouvel appareil / nouveau compte</string>

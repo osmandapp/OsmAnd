@@ -456,7 +456,7 @@
     <string name="transport_stop_to_go_out">Leszállási megálló kiválasztása</string>
     <string name="transport_to_go_after">távolság előtte</string>
     <string name="transport_to_go_before">távolság utána</string>
-    <string name="transport_stops_to_pass">ennyi megálló után</string>
+    <string name="transport_stops_to_pass">érintendő megálló</string>
     <string name="transport_route_distance">Útiterv távolsága</string>
     <string name="transport">Tömegközlekedés</string>
     <string name="shared_string_ok">OK</string>
@@ -1706,7 +1706,7 @@
     <string name="other_menu_group">Egyebek</string>
     <string name="plugins_menu_group">Bővítmények</string>
     <string name="first_usage_item">Első használat</string>
-    <string name="first_usage_item_description">Hogyan kell térképetek letölteni és az alapbeállításokat megadni.</string>
+    <string name="first_usage_item_description">Hogyan kell térképeket letölteni és az alapbeállításokat megadni.</string>
     <string name="navigation_item_description">Navigáció beállítása.</string>
     <string name="faq_item">GYIK</string>
     <string name="faq_item_description">Gyakran ismétlődő kérdések.</string>
@@ -2399,7 +2399,7 @@
     <string name="save_gpx_waypoint">GPX-útpont mentése</string>
     <string name="save_route_point">Útvonalpont mentése</string>
     <string name="waypoint_one">Útpont 1</string>
-    <string name="route_point_one">Útvonalpont 1</string>
+    <string name="route_point_one">1. útvonalpont</string>
     <string name="empty_state_favourites">Kedvencek hozzáadása</string>
     <string name="empty_state_favourites_desc">Kedvencek importálása vagy hozzáadása a térképen pontok megjelölésével.</string>
     <string name="import_track">GPX fájl importálása</string>
@@ -3108,7 +3108,8 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Személyes</string>
     <string name="shared_string_downloading_formatted">%s letöltése</string>
-    <string name="new_route_calculated_dist_dbg">Útvonal: távolság %1$s, menetidő %2$s \nSzámítás: %3$.1f mp, %4$d útszakasz, %5$d csempe</string>
+    <string name="new_route_calculated_dist_dbg">Útvonal hossza: %1$s, menetidő: %2$s
+\nSzámítás: %3$.1f másodperc, %4$d útszakasz, %5$d csempe</string>
     <string name="rendering_attr_piste_type_downhill_name">Lesikló</string>
     <string name="routeInfo_piste_type_name">Sípálya típusa</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Haladó</string>
