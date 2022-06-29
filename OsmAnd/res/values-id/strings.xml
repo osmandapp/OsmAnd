@@ -495,7 +495,7 @@
     <string name="select_base_profile_dialog_title">Pilih profil untuk memulai</string>
     <string name="select_base_profile_dialog_message">Dasarkan profil kustom Anda pada salah satu profil aplikasi default, ini menentukan pengaturan dasar seperti visibilitas default widget dan unit kecepatan dan jarak. Ini adalah profil aplikasi default, bersama dengan contoh profil khusus yang dapat diperluas ke:</string>
     <string name="select_nav_profile_dialog_title">Pilih tipe navigasi</string>
-    <string name="base_profile_descr_car">Mobil, truk, motor</string>
+    <string name="base_profile_descr_car">Mobil, truk, sepeda motor</string>
     <string name="base_profile_descr_bicycle">Sepeda gunung, motor bebek, kuda</string>
     <string name="files_moved">Memindahkan %1$d berkas (%2$s).</string>
     <string name="files_copied">Menyalin %1$d berkas (%2$s).</string>
@@ -1371,8 +1371,8 @@
     <string name="search_history_int_streets">Persimpangan: {0} x {1} di {2}</string>
     <string name="route_roundabout">Bundaran: Ambil jalan keluar %1$d dan pergi</string>
     <string name="location_on_map">Lokasi:
-\n Lat %1$s
-\n Lon %2$s</string>
+\n Lin %1$s
+\n Buj %2$s</string>
     <string name="transport_searching_route">Hasil transang ({0} ke tujuan):</string>
     <string name="gpx_info_end_time">Waktu akhir: %1$tF, %1$tT</string>
     <string name="gpx_info_start_time">Waktu mulai: %1$tF, %1$tT</string>
@@ -2216,7 +2216,7 @@
 \nJika Anda mendapatkan informasi lokasi yang tidak akurat atau menggunakan perangkat tanpa %2$s, coba ubah ke \"%3$s\"</string>
     <string name="location_source">Sumber lokasi</string>
     <string name="select_suggested_points">Pilih titik yang disarankan</string>
-    <string name="shared_string_reading_file">Membaca file…</string>
+    <string name="shared_string_reading_file">Membaca berkas…</string>
     <string name="all_groups">Semua grup</string>
     <string name="list_of_groups">Daftar grup</string>
     <string name="points_selection_descr">Tutup dan hilangkan semua perubahan\?</string>
@@ -2225,7 +2225,7 @@
     <string name="import_tracks_descr">%1$s, berisi %2$s trek terpisah. Pilih trek untuk diimpor.</string>
     <string name="please_provide_group_name_message">Mohon memberikan nama pada grup.</string>
     <string name="quick_action_add_route_descr">Sebuah tombol untuk memulai sebuah rute dari tengah layar.</string>
-    <string name="gpx_no_routes_descr">Anda dapat menggunakan alat \"%1$s\" untuk menambahkan rute ke sebuah file.</string>
+    <string name="gpx_no_routes_descr">Anda dapat menggunakan alat \"%1$s\" untuk menambahkan rute ke berkas.</string>
     <string name="gpx_no_routes_title">Tidak ada rute</string>
     <string name="rendering_attr_seabedDetail_name">Detail dasar laut</string>
     <string name="rendering_value_category_name">Kategori</string>
@@ -2239,8 +2239,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Tampilkan skema ikon pada perbesaran rendah</string>
     <string name="shared_string_not_used">Tidak digunakan</string>
     <string name="shared_string_used">Digunakan</string>
-    <string name="files_with_route_restrictions">File dengan pembatasan rute</string>
-    <string name="track_file">Lacak file</string>
+    <string name="files_with_route_restrictions">Berkas dengan pembatasan rute</string>
+    <string name="track_file">Berkas trek</string>
     <string name="created_on">Dibuat pada</string>
     <string name="use_routing_fallback">Cadangan perutean luring</string>
     <string name="use_routing_fallback_description">Gunakan perutean luring ketika perutean daring tidak tersedia.</string>
@@ -2249,10 +2249,10 @@
     <string name="shared_string_statistics">Statistik</string>
     <string name="distance_between_points">Jarak antara titik</string>
     <string name="gps_filter_smoothing">Penghalusan</string>
-    <string name="save_changes_into_file">Simpan perubahan ke file</string>
+    <string name="save_changes_into_file">Simpan perubahan ke berkas</string>
     <string name="save_as_copy">Simpan sebagai salinan</string>
     <string name="shared_string_gps_filter">Saringan GPS</string>
-    <string name="app_profile_type">Tipe profil aplikasi</string>
+    <string name="app_profile_type">Jenis profil aplikasi</string>
     <string name="add_to_group">Tambahkan ke grup</string>
     <string name="app_modes_options">Pilih mode aplikasi</string>
     <string name="shared_string_memory">Memori</string>
@@ -2312,7 +2312,7 @@
     <string name="shared_string_api_key">Kunci API</string>
     <string name="shared_string_size">Ukuran</string>
     <string name="quick_action_add_favorite">Tambahkan Favorit</string>
-    <string name="reading_files">Membaca file…</string>
+    <string name="reading_files">Membaca berkas…</string>
     <string name="add_tag">Tambahkan Tanda</string>
     <string name="context_menu_item_update_poi">Perbarui POI</string>
     <string name="search_offline_address">Pencarian luring</string>
@@ -2334,8 +2334,8 @@
     <string name="local_index_tile_data_name">Data ubin: %1$s</string>
     <string name="new_route_calculated_dist_dbg">Rute: jarak %1$s, waktu perutean %2$s
 \nKalkulasi: %3$.1f detik, %4$d jalan, %5$d ubin)</string>
-    <string name="files_remaining">File tersisa: %1$s %2$s</string>
-    <string name="copying_file">Menyalin file %1$s…</string>
+    <string name="files_remaining">Berkas tersisa: %1$s %2$s</string>
+    <string name="copying_file">Menyalin berkas %1$s…</string>
     <string name="map_widget_view_direction">Arah tampilan</string>
     <string name="quick_action_item_action">Aksi %d</string>
     <string name="fav_points_edited">Titik favorit diedit</string>
@@ -2372,8 +2372,8 @@
     <string name="waypoint_template">Templat titik jalan</string>
     <string name="predefined_waypoint_appearance_description">Mengetuk tindakan ini akan menyimpan titik jalan secara otomatis dengan parameter yang telah ditentukan.</string>
     <string name="rendering_attr_showRoadMaps_description">Pilih kapan untuk menampilkan peta jalan:</string>
-    <string name="storage_copying_files_size">Menyalin %1$s file %2$s</string>
-    <string name="storage_found_files_size">Ditemukan %1$s file %2$s</string>
+    <string name="storage_copying_files_size">Menyalin %1$s berkas %2$s</string>
+    <string name="storage_found_files_size">Ditemukan %1$s berkas %2$s</string>
     <string name="gps_filter_hdop_desc">Tetapkan nilai maksimum untuk HDOP.
 \nTitik dengan nilai lebih tinggi akan disembunyikan.</string>
     <string name="lang_pnb">Punjabi</string>
@@ -2383,7 +2383,7 @@
     <string name="track_file_description">Mengetuk tindakan ini akan menampilkan sebuah dialog pemilihan trek yang tersedia.</string>
     <string name="turn_arrows_descr">Pilih jika panah arahan ditampilkan pada garis rute.</string>
     <string name="gps_filter_speed_altitude_desc">Hanya titik trek yang cocok dengan interval set akan ditampilkan pada grafik dan peta, yang lain akan disembunyikan.</string>
-    <string name="gps_filter_actions_description">OsmAnd akan menetapkan perubahan pada trek tanpa memperbarui file. Anda dapat menyimpan perubahan secara manual.</string>
+    <string name="gps_filter_actions_description">OsmAnd akan menerapkan perubahan pada trek tanpa memperbarui berkas. Anda dapat menyimpan perubahan secara manual.</string>
     <string name="storage_migration_wrong_folder_warning">Tidak ada data OsmAnd yang ditemukan di folder yang dipilih. Mohon coba lagi.</string>
     <string name="show_parameter_seekbar">Tampilkan bilah pencarian parameter</string>
     <string name="context_menu_item_search_poi">Cari POI</string>
@@ -2402,13 +2402,13 @@
     <string name="map_markers_other">Penanda lainnya</string>
     <string name="background_service_provider">Penyedia lokasi</string>
     <string name="display_groups_visibility_dialog_description">Anda dapat mengatur visibilitas grup pada peta. Jika trek tersembunyi, semua grup juga akan tersembunyi.</string>
-    <string name="storage_found_files_descr">Ketuk \"%1$s\" untuk menyalin %2$s file dari \"%3$s\" ke \"%4$s\". Ini mungkin membutuhkan beberapa waktu.</string>
-    <string name="storage_copied_files_size">Tersalin %1$s file %2$s</string>
+    <string name="storage_found_files_descr">Ketuk \"%1$s\" untuk menyalin %2$s berkas dari \"%3$s\" ke \"%4$s\". Ini mungkin membutuhkan beberapa waktu.</string>
+    <string name="storage_copied_files_size">Disalin %1$s berkas %2$s</string>
     <string name="device_memory">Memori perangkat</string>
     <string name="poi_namefinder_query_empty">Ketik untuk mencari POI</string>
     <string name="background_router_service">Jalankan OsmAnd di latar belakang</string>
     <string name="layer_map">Sumber peta…</string>
-    <string name="migration_files_present">Ada %1$d file (%2$s) di lokasi \'%3$s\' yang dipilih.</string>
+    <string name="migration_files_present">Ada %1$d berkas (%2$s) di lokasi \'%3$s\' yang dipilih.</string>
     <string name="map_orientation_default">Sama seperti perangkat</string>
     <string name="routing_attr_avoid_toll_name">Tidak ada jalan tol</string>
     <string name="shared_storage_migration_descr">Karena perubahan dalam pengaksesan penyimpanan Android, OsmAnd tidak dapat lagi menggunakan %1$s.
@@ -2432,7 +2432,7 @@
     <string name="history_is_disabled_descr">Aktifkan riwayat untuk mendapatkan akses lebih cepat ke hasil yang terakhir digunakan.</string>
     <string name="is_disabled">%1$s dinonaktifkan</string>
     <string name="clear_all_history">Hapus semua riwayat</string>
-    <string name="history_actions_descr">Anda dapat mengekspor riwayat ke sebuah file.</string>
+    <string name="history_actions_descr">Anda dapat mengekspor riwayat ke sebuah berkas.</string>
     <string name="map_markers_history">Riwayat penanda peta</string>
     <string name="android_auto_map_placeholder_descr">Putuskan hubungan dari perangkat Anda dari Android Auto untuk menampilkan peta dalam aplikasi.</string>
     <string name="navigation_history">Riwayat navigasi</string>
@@ -2440,7 +2440,7 @@
     <string name="shortcut_navigate_to_work">Navigasi ke \'Kerja\'</string>
     <string name="location_access_request_title">OsmAnd membutuhkan izin Lokasi untuk navigasi.</string>
     <string name="search_title">Cari: %1$s</string>
-    <string name="shared_string_files">File</string>
+    <string name="shared_string_files">Berkas</string>
     <string name="remove_group_from_markers">Hapus grup dari daftar penanda</string>
     <string name="no_activity_for_intent">Pasang sebuah aplikasi yang dapat melakukan tindakan ini.</string>
     <string name="empty_category_name">Nama kategori kosong</string>
@@ -2567,7 +2567,7 @@
     <string name="touring_view_renderer">Pemandangan tur</string>
     <string name="empty_state_favourites_desc">Impor Favorit atau tambahkan dengan menandai titik pada peta.</string>
     <string name="test_voice_desrc">Ketuk sebuah tombol dan dengarkan suara yang sesuai untuk mendengarkan jika kosong atau salah</string>
-    <string name="import_track">Impor file GPX</string>
+    <string name="import_track">Impor berkas GPX</string>
     <string name="import_track_desc">File %1$s tidak berisi titik jalan, impo sebagai trek\?</string>
     <string name="voice_prompts_timetable">Waktu petunjuk suara</string>
     <string name="move_point">Pindahkan Titik</string>
@@ -2748,9 +2748,9 @@
     <string name="shared_string_contributions">Kontribusi</string>
     <string name="error_reading_gpx">Tidak dapat membaca data GPX.</string>
     <string name="shared_storage_last_step">Anda dapat menetapkan folder data baru setelah itu.</string>
-    <string name="shared_storage_third_step">Berikan izin untuk mengakses folder. Tanpa itu OsmAnd tidak dapat menyalin file.</string>
+    <string name="shared_storage_third_step">Berikan izin untuk mengakses folder. Tanpa itu OsmAnd tidak dapat menyalin berkas.</string>
     <string name="shared_storage_first_step">Tekan \"%1$s\".
-\nPengelola file akan dibuka yang Anda harus mencari dan buka folder osmand.</string>
+\nPengelola berkas akan dibuka yang Anda harus mencari dan buka folder osmand.</string>
     <string name="copying_completed">Tersalin</string>
     <string name="shared_string_mini">mini</string>
     <string name="benefits_for_contributors_secondary_descr">Masuk ke OpenStreetMap untuk periksa jika Anda berhak untuk pembaruan peta bulanan dan per jam tak terbatas.</string>
@@ -3056,7 +3056,7 @@
     <string name="benefits_for_contributors">Manfaat untuk kontributor OSM aktif</string>
     <string name="loading_list_of_routing_services">Memuat daftar layanan perutean yang tersedia</string>
     <string name="follow_track">Ikuti trek</string>
-    <string name="shared_string_skip_warning">Lewati migrasi\? OsmAnd tidak akan memiliki akses ke file Anda di penyimpanan terbagi.
+    <string name="shared_string_skip_warning">Lewati migrasi\? OsmAnd tidak akan memiliki akses ke berkas Anda di penyimpanan terbagi.
 \n
 \nAplikasi akan mulai menggunakan folder data baru Anda.</string>
     <string name="location_access_request_result">Disetujui: %1$s Ditolak: %2$s</string>
@@ -3643,7 +3643,7 @@
     <string name="live_monitoring_tracking_interval">Interval pelacakan</string>
     <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempelwaktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode saat istirahat tidak dicatat sama sekali atau hanya masing-masing satu titik. Gerakan kecil (dunia nyata) (misalnya menyamping, untuk menandai kemungkinan belokan di perjalanan Anda) dapat disaring. File Anda berisi lebih sedikit informasi untuk pasca-pemrosesan, dan memiliki statistik yang lebih buruk dengan memfilter titik yang jelas-jelas berlebihan pada waktu perekaman, sambil berpotensi menyimpan artefak yang disebabkan oleh penerimaan yang buruk atau efek chipset GPS.</string>
-    <string name="import_routing_file">Impor file perutean</string>
+    <string name="import_routing_file">Impor berkas perutean</string>
     <string name="import_profile">Impor profil</string>
     <string name="monitoring_prefs_descr">Navigasi, akurasi pencatatan</string>
     <string name="osm_editing_prefs_descr">Masuk, kata sandi, penyuntingan luring</string>
@@ -3740,7 +3740,7 @@
     <string name="overwrite_profile_q">\'%1$s\' sudah ada. Timpa\?</string>
     <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Pengaturan 5 meter dapat bekerja dengan baik untuk Anda jika Anda tidak perlu menangkap detail yang lebih baik dari itu, dan tidak ingin secara eksplisit menangkap data saat istirahat.</string>
     <string name="apply_preference_to_all_profiles">Terapkan perubahan ini ke semua atau profil yang dipilih.</string>
-    <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area privat untuk truk.</string>
+    <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area pribadi untuk truk.</string>
     <string name="map_widget_trip_recording_distance">Jarak</string>
     <string name="rendering_attr_horseRoutes_name">Rute kuda</string>
     <string name="osm_save_offline">Simpan secara luring</string>
@@ -3791,7 +3791,7 @@
     <string name="average_speed_widget_desc">Menunjukkan kecepatan rata-rata perjalanan saat ini.</string>
     <string name="map_widget_average_speed">Kecepatan rata-rata</string>
     <string name="map_widget_time_to_intermediate">Waktu ke perantara</string>
-    <string name="routing_attr_allow_private_for_truck_name">Perbolehkan akses privat (truk)</string>
+    <string name="routing_attr_allow_private_for_truck_name">Izinkan akses pribadi (truk)</string>
     <string name="map_widget_trip_recording_downhill">Jalan menurun</string>
     <string name="map_widget_trip_recording_duration">Durasi</string>
     <string name="routing_attr_hazmat_category_name">Kategori hazmat</string>
@@ -3908,7 +3908,7 @@
     <string name="lang_nb">Bokmål Norwegia</string>
     <string name="rendering_value_lightgreen_name">Hijau muda</string>
     <string name="marker_2nd">Penanda kedua</string>
-    <string name="goods_delivery_desc_4">Jika berat kendaraan Anda lebih dari 3,5 ton, Anda harus menggunakan profil Truk.</string>
+    <string name="goods_delivery_desc_4">Jika berat kendaraan Anda lebih dari 3,5 ton Anda perlu menggunakan profil Truk.</string>
     <string name="updated_map_time">Diperbarui: %1$s.</string>
     <string name="routing_attr_motor_type_petrol_name">Bensin</string>
     <string name="app_mode_shuttle_bus">Bus antar jemput</string>
@@ -4038,4 +4038,8 @@
     <string name="context_menu_points_of_group">Semua poin dari kelompok</string>
     <string name="lang_ckb">Kurdi Tengah</string>
     <string name="routing_attr_goods_restrictions_name">Pengiriman barang</string>
+    <string name="gpx_saved_sucessfully">Berkas GPX disimpan ke {0}</string>
+    <string name="local_osm_changes_backup">Cadangkan perubahan OSM</string>
+    <string name="local_osm_changes_backup_successful">Berkas perubahan OSM dihasilkan %1$s</string>
+    <string name="local_osm_changes_backup_failed">Tidak dapat mencadangkan perubahan OSM.</string>
 </resources>
