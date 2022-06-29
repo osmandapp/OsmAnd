@@ -3,7 +3,6 @@ package net.osmand.plus;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -19,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -1052,20 +1050,12 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	@SuppressLint("HardwareIds")
 	public String getUserAndroidId() {
 		String userAndroidId = osmandSettings.USER_ANDROID_ID.get();
 		if (!Algorithms.isEmpty(userAndroidId)) {
 			return userAndroidId;
 		}
-		try {
-			userAndroidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-		} catch (Exception e) {
-			// ignore
-		}
-		if (userAndroidId == null || userAndroidId.length() < 16 || userAndroidId.equals("0000000000000000")) {
-			userAndroidId = UUID.randomUUID().toString();
-		}
+		userAndroidId = UUID.randomUUID().toString();
 		osmandSettings.USER_ANDROID_ID.set(userAndroidId);
 		return userAndroidId;
 	}
