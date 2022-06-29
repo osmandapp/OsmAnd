@@ -386,10 +386,7 @@ public class MapMarkersHelper {
 			removeGroupActiveMarkers(group, false);
 			removeFromGroupsList(group);
 			saveGroups(false);
-			//TODO: Make correct fix for wpt refresh at gpx layer
-			if (group.getType() == ItineraryType.TRACK) {
-				updateLastModifiedTime(group);
-			}
+			updateLastModifiedTime(group);
 		}
 	}
 
