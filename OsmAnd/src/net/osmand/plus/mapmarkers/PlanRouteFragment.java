@@ -346,7 +346,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0) {
-					mapActivity.getMyApplication().getMapMarkersHelper().saveMarkersOrder();
+					mapActivity.getMyApplication().getMapMarkersHelper().saveGroups(false);
 					mapActivity.refreshMap();
 					adapter.reloadData();
 					try {

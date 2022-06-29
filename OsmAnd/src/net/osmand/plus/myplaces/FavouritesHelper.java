@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -32,9 +35,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 
 public class FavouritesHelper {
 
@@ -51,6 +51,7 @@ public class FavouritesHelper {
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
 
 	private boolean favoritesLoaded;
+	private long lastModifiedTime = 0;
 
 	public FavouritesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -124,9 +125,24 @@ public class FavouritesHelper {
 
 		if (changed || !fileHelper.getExternalFile().exists()) {
 			saveCurrentPointsIntoFile();
+		} else {
+			updateLastModifiedTime();
 		}
 		favoritesLoaded = true;
 		notifyListeners();
+	}
+
+	public long getLastModifiedTime() {
+		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+		if (mapMarkersHelper != null) {
+			return Math.max(lastModifiedTime, mapMarkersHelper.getFavoriteMarkersModifiedTime());
+		} else {
+			return lastModifiedTime;
+		}
+	}
+
+	private void updateLastModifiedTime() {
+		lastModifiedTime = System.currentTimeMillis();
 	}
 
 	public void fixBlackBackground() {
@@ -460,6 +476,7 @@ public class FavouritesHelper {
 
 	public void saveCurrentPointsIntoFile() {
 		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(favoriteGroups));
+		updateLastModifiedTime();
 		onFavouritePropertiesUpdated();
 	}
 
