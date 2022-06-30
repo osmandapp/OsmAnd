@@ -1,12 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -76,6 +69,8 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.FailSafeFunctions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.IntervalLogger;
+import net.osmand.plus.configmap.IntervalLogger.EventType;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
@@ -172,6 +167,13 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDrawMapListener,
@@ -256,6 +258,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		IntervalLogger.start(EventType.MAP_ON_CREATE_TOTAL);
+		IntervalLogger.start(EventType.MAP_ON_CREATE_PART_1);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
@@ -274,7 +278,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_PART_1);
+
+		IntervalLogger.start(EventType.MAP_ON_CREATE_CONTENT_VIEW);
 		setContentView(R.layout.main);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_CONTENT_VIEW);
+
+		IntervalLogger.start(EventType.MAP_ON_CREATE_PART_2);
 		enterToFullScreen();
 		// Navigation Drawer
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
@@ -364,6 +374,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mIsDestroyed = false;
 
 		extendedMapActivity.onCreate(this, savedInstanceState);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_PART_5);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_TOTAL);
+		IntervalLogger.nextLine();
 	}
 
 	private void setMapInitialLatLon(@NonNull OsmandMapTileView mapView, @Nullable Location location) {
@@ -730,6 +743,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onResume() {
+		IntervalLogger.start(EventType.MAP_ON_RESUME_TOTAL);
+		IntervalLogger.start(EventType.MAP_ON_RESUME_PART_1);
 		super.onResume();
 
 		MapActivity mapViewMapActivity = getMapView().getMapActivity();
@@ -777,7 +792,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				SharedStorageWarningFragment.showInstance(getSupportFragmentManager(), true);
 			}
 		}
-
 		getMyApplication().getNotificationHelper().refreshNotifications();
 		// fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null) {
@@ -791,16 +805,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
-
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
 				MapActivity.this.updateApplicationModeSettings();
 			}
 		});
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
+		IntervalLogger.finish(EventType.MAP_ON_RESUME_PART_1);
+
+		IntervalLogger.start(EventType.MAP_ON_RESUME_UPDATE_APP_MODE_SETTINGS);
 		updateApplicationModeSettings();
+		IntervalLogger.finish(EventType.MAP_ON_RESUME_UPDATE_APP_MODE_SETTINGS);
 
-
+		IntervalLogger.start(EventType.MAP_ON_RESUME_PART_2);
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -809,8 +826,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
 			targets.updateRouteAndRefresh(true);
 		}
-		app.getLocationProvider().resumeAllUpdates();
+		IntervalLogger.finish(EventType.MAP_ON_RESUME_PART_2);
 
+		IntervalLogger.start(EventType.MAP_ON_RESUME_LOCATION_PROVIDER);
+		app.getLocationProvider().resumeAllUpdates();
+		IntervalLogger.finish(EventType.MAP_ON_RESUME_LOCATION_PROVIDER);
+
+		IntervalLogger.start(EventType.MAP_ON_RESUME_PART_3);
 		OsmandMapTileView mapView = getMapView();
 		if (settings.isLastKnownMapLocation() && !intentLocation) {
 			LatLon l = settings.getLastKnownMapLocation();
@@ -926,6 +948,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
 
 		extendedMapActivity.onResume(this);
+		IntervalLogger.finish(EventType.MAP_ON_RESUME_PART_3);
+		IntervalLogger.finish(EventType.MAP_ON_RESUME_TOTAL);
+		IntervalLogger.nextLine();
+		IntervalLogger.finish(EventType.TOTAL);
 	}
 
 	@Override

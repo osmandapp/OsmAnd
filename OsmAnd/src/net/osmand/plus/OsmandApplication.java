@@ -1,8 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -52,6 +49,8 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.configmap.IntervalLogger;
+import net.osmand.plus.configmap.IntervalLogger.EventType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -132,6 +131,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+
 public class OsmandApplication extends MultiDexApplication {
 
 	public static final String EXCEPTION_PATH = "exception.log";
@@ -210,6 +212,9 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	@Override
 	public void onCreate() {
+		IntervalLogger.start(EventType.TOTAL);
+		IntervalLogger.start(EventType.APP_ON_CREATE_TOTAL);
+		IntervalLogger.start(EventType.APP_ON_CREATE_PART_1);
 		if (RestartActivity.isRestartProcess(this)) {
 			return;
 		}
@@ -270,6 +275,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
 		BackupHelper.DEBUG = true;//OsmandPlugin.isDevelopment();
+		IntervalLogger.finish(EventType.APP_ON_CREATE_PART_2);
+		IntervalLogger.finish(EventType.APP_ON_CREATE_TOTAL);
+		IntervalLogger.nextLine();
 	}
 
 	public boolean isPlusVersionInApp() {
