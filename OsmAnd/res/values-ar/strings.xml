@@ -659,7 +659,7 @@
     <string name="search_position_current_location_found">موقعي ( تم تحديده )</string>
     <string name="search_position_address">عنوان…</string>
     <string name="search_position_favorites">المفضلة…</string>
-    <string name="shared_string_undefined">غير محدد</string>
+    <string name="shared_string_undefined">غير معرف</string>
     <string name="search_position_map_view">مركز الخريطة الحالي</string>
     <string name="select_search_position">المنطلق:</string>
     <string name="context_menu_item_search">بحث بالجوار</string>
@@ -4119,7 +4119,7 @@
 \n</string>
     <string name="osmand_live">OsmAnd لايف</string>
     <string name="next_billing_date">تاريخ الفاتورة التالية: %1$s</string>
-    <string name="in_grace_period">في فترة السماح</string>
+    <string name="in_grace_period">في فترة سماح</string>
     <string name="no_purchases">ليس لديك أي مشتريات</string>
     <string name="new_device_account">جهاز جديد / حساب جديد</string>
     <string name="contact_support_description">إذا كان لديك أي أسئلة ، يرجى الاتصال بنا على %1$s.</string>
@@ -4132,7 +4132,7 @@
     <string name="three_months_subscription">اشتراك ثلاثة اشهر</string>
     <string name="osmand_live_cancelled">تم الإلغاء</string>
     <string name="renew_subscription">جدد الاشتراك</string>
-    <string name="on_hold">في الانتظار</string>
+    <string name="on_hold">قيد الانتظار</string>
     <string name="expired">منتهي الصلاحية</string>
     <string name="update_all_maps_added">تحديث كافة الخرائط المضافة إلى %1$s؟</string>
     <string name="exit_number">رقم الخروج</string>
@@ -4793,6 +4793,6 @@
     <string name="live_update_frequency_hour_variant">سيتم التحقق من تحديثات الخرائط كل ساعة.</string>
     <string name="live_update_frequency_week_variant">سيتم التحقق من تحديثات الخرائط كل أسبوع.</string>
     <string name="calculate_online_altitude_descr">احسب الارتفاع عبر الإنترنت على خوادم أوسماند استنادا إلى صور الأقمار الصناعية ونماذج الارتفاع الرقمية. يمكن أن يختلف عن الارتفاع المسجل للجهاز ويمكن استخدامه كتصحيح للارتفاع.</string>
-    <string name="lang_ckb">الكردية المركزية</string>
+    <string name="lang_ckb">الكردية الوسطى</string>
     <string name="routing_attr_goods_restrictions_name">تسليم البضائع</string>
 </resources>
