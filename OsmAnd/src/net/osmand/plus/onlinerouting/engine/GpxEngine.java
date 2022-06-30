@@ -20,12 +20,15 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.network.NetworkRouteGpxApproximator;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -127,24 +130,12 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                              boolean initialCalculation) {
 		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
-			if(shouldNetworkApproximateRoute()){
-				BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
-				NetworkRouteGpxApproximator gpxApproximator = new NetworkRouteGpxApproximator(readers, true);
-				try {
-					gpxApproximator.setGpxFile(gpxFile);
-					gpxApproximator.approximate();
-					gpxFile = gpxApproximator.getGpxFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}else {
-				MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
-				if (ctx != null) {
-					GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
-					if (approximated != null) {
-						calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
-						gpxFile = approximated;
-					}
+			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
+			if (ctx != null) {
+				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+				if (approximated != null) {
+					calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
+					gpxFile = approximated;
 				}
 			}
 		}
@@ -170,7 +161,27 @@ public class GpxEngine extends OnlineRoutingEngine {
 				RoutingEnvironment env = routingHelper.getRoutingEnvironment(app, appMode, start, end);
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
-				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
+				GpxRouteApproximation gpxApproximation;
+				if (shouldNetworkApproximateRoute()) {
+					BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
+					NetworkRouteGpxApproximator gpxApproximator = new NetworkRouteGpxApproximator(readers, true);
+					try {
+						gpxApproximator.setGpxFile(gpxFile);
+						gpxApproximator.approximate();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					new RouteResultPreparation().prepareResult(env.getCtx(), gpxApproximator.result, true);
+					GpxPoint first = gpxPoints.get(0);
+					first.routeToTarget = gpxApproximator.result;
+					GpxPoint last = gpxPoints.get(gpxPoints.size() - 1);
+					last.routeToTarget = new ArrayList<>();
+					gctx.finalPoints.addAll(Arrays.asList(first, last));
+					gctx.result = gpxApproximator.result;
+					gpxApproximation = gctx;
+				} else {
+					gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
+				}
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
 				appMode.setRoutingProfile(oldRoutingProfile);

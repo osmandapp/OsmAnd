@@ -10,6 +10,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.network.NetworkRouteContext.NetworkRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSegmentChain;
@@ -34,6 +35,7 @@ public class NetworkRouteGpxApproximator {
 	private static final int GPX_SKIP_POINTS_GPX_MAX = 5;
 
 	private final NetworkRouteSelector selector;
+	public List<RouteSegmentResult> result = null;
 
 	public NetworkRouteGpxApproximator(BinaryMapIndexReader[] files, boolean routing) {
 		selector = new NetworkRouteSelector(files, new NetworkRouteSelectorFilter() {
@@ -57,13 +59,28 @@ public class NetworkRouteGpxApproximator {
 		this.gpxFile = gpxFile;
 	}
 
-	
 	public List<Entity> approximate() throws IOException {
 		Map<RouteKey, GPXFile> res = new HashMap<>();
 		List<NetworkRouteSegment> loaded = loadDataByGPX(gpxFile);
-		List<NetworkRouteSegmentChain> lst = selector.getNetworkRouteSegmentChains(null, res, loaded);
+		List<NetworkRouteSegmentChain> chainList = selector.getNetworkRouteSegmentChains(null, res, loaded);
 		gpxFile = res.values().iterator().next();
-		return convertToEntities(lst);
+		result = convertToRoadSegmentResultList(chainList);
+		return convertToEntities(chainList);
+	}
+
+	List<RouteSegmentResult> convertToRoadSegmentResultList(List<NetworkRouteSegmentChain> chainList) {
+		List<RouteSegmentResult> result = new ArrayList<>();
+		for (NetworkRouteSegmentChain c : chainList) {
+			List<NetworkRouteSegment> segmentList = new ArrayList<>();
+			segmentList.add(c.start);
+			if (c.connected != null) {
+				segmentList.addAll(c.connected);
+			}
+			for (NetworkRouteSegment segment : segmentList) {
+				result.add(new RouteSegmentResult(segment.robj, segment.start, segment.end));
+			}
+		}
+		return result;
 	}
 
 	private NetworkRouteSegment getMatchingGpxSegments(GpxRoutePoint p1, GpxRoutePoint p2) {
