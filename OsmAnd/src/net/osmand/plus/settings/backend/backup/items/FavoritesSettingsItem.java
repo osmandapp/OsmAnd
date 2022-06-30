@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
@@ -119,21 +120,11 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				if (!isPersonal) {
 					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 				} else {
-					for (FavouritePoint item : duplicate.getPoints()) {
-						if (item.getSpecialPointType() == FavouritePoint.SpecialPointType.PARKING) {
-							ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
-							if (plugin != null) {
-								plugin.clearParkingPosition();
-								boolean isTimeRestricted = item.getTimestamp() > 0;
-								plugin.setParkingType(isTimeRestricted);
-								plugin.setParkingTime(isTimeRestricted ? item.getTimestamp() : 0);
-								plugin.setParkingStartTime(item.getCreationDate());
-								plugin.setParkingPosition(item.getLatitude(), item.getLongitude());
-								plugin.addOrRemoveParkingEvent(item.getCalendarEvent());
-								if (item.getCalendarEvent()) {
-									plugin.addCalendarEvent(app);
-								}
-							}
+					ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+					for (FavouritePoint point : duplicate.getPoints()) {
+						if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
+							plugin.clearParkingPosition();
+							plugin.updateParkingPoint(point);
 						}
 					}
 				}
