@@ -319,9 +319,8 @@ public class ConfigureMapDialogs {
 		int themeRes = ConfigureMapMenu.getThemeRes(nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		boolean[] checkedItems = new boolean[prefs.size()];
-		boolean[] tempPrefs = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
-			tempPrefs[i] = checkedItems[i] = prefs.get(i).get();
+			checkedItems[i] = prefs.get(i).get();
 		}
 		String[] vals = new String[ps.size()];
 		for (int i = 0; i < ps.size(); i++) {
@@ -336,7 +335,7 @@ public class ConfigureMapDialogs {
 					@Override
 					public void onClick(View v) {
 						int which = (int) v.getTag();
-						tempPrefs[which] = !tempPrefs[which];
+						checkedItems[which] = !checkedItems[which];
 					}
 				}
 		);
@@ -360,8 +359,8 @@ public class ConfigureMapDialogs {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				boolean selected = false;
 				for (int i = 0; i < prefs.size(); i++) {
-					prefs.get(i).set(tempPrefs[i]);
-					selected |= tempPrefs[i];
+					prefs.get(i).set(checkedItems[i]);
+					selected |= checkedItems[i];
 				}
 				item.setSelected(selected);
 				item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
