@@ -713,7 +713,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 					app.logEvent("drawer_directions_open");
 					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 					if (mapControlsLayer != null) {
-						mapControlsLayer.doRoute(false);
+						mapControlsLayer.doRoute();
 					}
 					return true;
 				}));

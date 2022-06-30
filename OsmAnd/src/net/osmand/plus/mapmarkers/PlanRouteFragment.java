@@ -553,7 +553,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 					}
 					planRouteContext.setNavigationFromMarkers(true);
 					dismiss();
-					mapActivity.getMapLayers().getMapControlsLayer().doRoute(hasTargets);
+					mapActivity.getMapLayers().getMapControlsLayer().doRoute();
 				}
 			}
 

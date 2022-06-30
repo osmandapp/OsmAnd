@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="accessibility_2d_view_off">2.5D view Off</string>
+    <string name="accessibility_2d_view_on">2.5D view On</string>
     <string name="download_complete">Download complete</string>
     <string name="lang_ckb">Central Kurdish</string>
     <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
