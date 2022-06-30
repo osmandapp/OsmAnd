@@ -278,7 +278,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		enterToFullScreen();
 		// Navigation Drawer
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
-
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
 			if (showed) {
@@ -287,12 +286,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapActions = new MapActivityActions(this);
 		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_PART_2);
+
+		IntervalLogger.start(EventType.MAP_ON_CREATE_DASHBOARD);
 		dashboardOnMap.createDashboardView();
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_DASHBOARD);
+
+		IntervalLogger.start(EventType.MAP_ON_CREATE_PART_3);
 		extendedMapActivity = new ExtendedMapActivity();
-
 		getMapView().setMapActivity(this);
-		getMapLayers().setMapActivity(this);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_PART_3);
 
+
+		IntervalLogger.start(EventType.MAP_ON_CREATE_MAP_LAYERS);
+		getMapLayers().setMapActivity(this);
+		IntervalLogger.finish(EventType.MAP_ON_CREATE_MAP_LAYERS);
+
+		IntervalLogger.start(EventType.MAP_ON_CREATE_PART_4);
 		intentHelper = new IntentHelper(this, getMyApplication());
 		intentHelper.parseLaunchIntents();
 

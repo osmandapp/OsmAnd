@@ -250,7 +250,13 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		localeHelper.checkPreferredLocale();
+		IntervalLogger.finish(EventType.APP_ON_CREATE_PART_1);
+
+		IntervalLogger.start(EventType.APP_ON_CREATE_APP_INITIALIZER);
 		appInitializer.onCreateApplication();
+		IntervalLogger.finish(EventType.APP_ON_CREATE_APP_INITIALIZER);
+
+		IntervalLogger.start(EventType.APP_ON_CREATE_PART_2);
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");

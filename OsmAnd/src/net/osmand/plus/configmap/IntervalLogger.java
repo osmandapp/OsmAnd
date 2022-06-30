@@ -19,12 +19,38 @@ public class IntervalLogger {
 	private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh:mm:ss.SSS", Locale.US);
 
 	private static final String START_MESSAGE_PATTERN = " * %1$s started at %2$s";
-	private static final String FINISH_MESSAGE_PATTERN = "%1$s - %2$s ms (%3$s)";
+	private static final String FINISH_MESSAGE_PATTERN = "%1$s %2$s ms (%3$s)";
 
 	private static Map<EventType, Long> startPoints = new HashMap<>();
 
 	public enum EventType {
 		// implement your events here
+		TOTAL,
+
+		APP_ON_CREATE_TOTAL,
+
+		APP_ON_CREATE_PART_1,
+		APP_ON_CREATE_PART_2,
+		APP_ON_CREATE_APP_INITIALIZER,
+
+		MAP_ON_CREATE_TOTAL,
+
+		MAP_ON_CREATE_PART_1,
+		MAP_ON_CREATE_CONTENT_VIEW,
+		MAP_ON_CREATE_PART_2,
+		MAP_ON_CREATE_DASHBOARD,
+		MAP_ON_CREATE_PART_3,
+		MAP_ON_CREATE_MAP_LAYERS,
+		MAP_ON_CREATE_PART_4,
+		MAP_ON_CREATE_PART_5,
+
+		MAP_ON_RESUME_TOTAL,
+
+		MAP_ON_RESUME_PART_1,
+		MAP_ON_RESUME_UPDATE_APP_MODE_SETTINGS,
+		MAP_ON_RESUME_PART_2,
+		MAP_ON_RESUME_LOCATION_PROVIDER,
+		MAP_ON_RESUME_PART_3,
 	}
 
 	public static void start(@NonNull EventType event) {
@@ -45,6 +71,10 @@ public class IntervalLogger {
 			long dif = now - startTime;
 			LOG.debug(String.format(FINISH_MESSAGE_PATTERN, event.name(), dif, formatTime(now)));
 		}
+	}
+
+	public static void nextLine() {
+		LOG.debug("");
 	}
 
 	private static long updateRecordedStartPoints(@NonNull EventType event, boolean add) {
