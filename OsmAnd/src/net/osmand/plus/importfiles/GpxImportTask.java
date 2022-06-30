@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.util.Algorithms;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.util.Algorithms;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,7 +50,7 @@ class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 			}
 		} catch (FileNotFoundException e) {
 			//
-		} catch (IOException | SecurityException e) {
+		} catch (IOException | SecurityException | IllegalArgumentException e) {
 			ImportHelper.log.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);

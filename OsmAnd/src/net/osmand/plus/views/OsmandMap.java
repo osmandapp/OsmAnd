@@ -12,22 +12,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandApplication.NavigationSessionListener;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class OsmandMap implements NavigationSessionListener {
@@ -40,7 +39,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private final List<OsmandMapListener> listeners = Collections.synchronizedList(new ArrayList<>());
+	private List<OsmandMapListener> listeners = new ArrayList<>();
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);
@@ -52,12 +51,16 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public void addListener(@NonNull OsmandMapListener listener) {
 		if (!listeners.contains(listener)) {
+			List<OsmandMapListener> listeners = new ArrayList<>(this.listeners);
 			listeners.add(listener);
+			this.listeners = listeners;
 		}
 	}
 
 	public void removeListener(@NonNull OsmandMapListener listener) {
+		List<OsmandMapListener> listeners = new ArrayList<>(this.listeners);
 		listeners.remove(listener);
+		this.listeners = listeners;
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {

@@ -182,7 +182,7 @@ public class NavigationService extends Service {
 	}
 
 	private void removeLocationSourceListener() {
-		settings.LOCATION_SOURCE.removeListener(locationSourceListener);
+		getApp().getSettings().LOCATION_SOURCE.removeListener(locationSourceListener);
 	}
 
 	private void requestLocationUpdates() {

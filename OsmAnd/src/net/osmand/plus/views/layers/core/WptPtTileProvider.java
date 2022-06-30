@@ -122,23 +122,23 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       }
       Bitmap bitmap;
       if (isFullSize) {
-         int bigBitmapKey = data.getKey(true);
+         int bigBitmapKey = data.getKey();
          bitmap = bigBitmapCache.get(bigBitmapKey);
          if (bitmap == null) {
             PointImageDrawable pointImageDrawable;
             if (data.hasMarker) {
-               pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(ctx, data.colorBigPoint, data.wptPt);
+               pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(ctx, data.color, data.wptPt);
             } else {
-               pointImageDrawable = PointImageDrawable.getFromWpt(ctx, data.colorBigPoint, data.withShadow, data.wptPt);
+               pointImageDrawable = PointImageDrawable.getFromWpt(ctx, data.color, data.withShadow, data.wptPt);
             }
             bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, data.history);
             bigBitmapCache.put(bigBitmapKey, bitmap);
          }
       } else {
-         int smallBitmapKey = data.getKey(false);
+         int smallBitmapKey = data.getKey();
          bitmap = smallBitmapCache.get(smallBitmapKey);
          if (bitmap == null) {
-            PointImageDrawable pointImageDrawable = PointImageDrawable.getFromWpt(ctx, data.colorSmallPoint,
+            PointImageDrawable pointImageDrawable = PointImageDrawable.getFromWpt(ctx, data.color,
                     data.withShadow, data.wptPt);
             bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
             smallBitmapCache.put(smallBitmapKey, bitmap);
@@ -183,30 +183,28 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       return offset;
    }
 
-   public void addToData(@NonNull WptPt wptPt, int colorBigPoint, int colorSmallPoint, boolean withShadow,
+   public void addToData(@NonNull WptPt wptPt, int color, boolean withShadow,
                          boolean hasMarker, boolean history, float textScale) throws IllegalStateException {
       if (providerInstance != null) {
          throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
       }
-      mapLayerDataList.add(new MapLayerData(wptPt, colorBigPoint, colorSmallPoint, withShadow,
+      mapLayerDataList.add(new MapLayerData(wptPt, color, withShadow,
               hasMarker, history, textScale));
    }
 
    private static class MapLayerData {
       PointI point;
       WptPt wptPt;
-      int colorBigPoint;
-      int colorSmallPoint;
+      int color;
       boolean withShadow;
       boolean hasMarker;
       boolean history;
       float textScale;
 
-      MapLayerData(@NonNull WptPt wptPt, int colorBigPoint, int colorSmallPoint, boolean withShadow,
+      MapLayerData(@NonNull WptPt wptPt, int color, boolean withShadow,
                    boolean hasMarker, boolean history, float textScale) {
          this.wptPt = wptPt;
-         this.colorBigPoint = colorBigPoint;
-         this.colorSmallPoint = colorSmallPoint;
+         this.color = color;
          this.withShadow = withShadow;
          this.hasMarker = hasMarker;
          this.history = history;
@@ -214,8 +212,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
          point = new PointI(MapUtils.get31TileNumberX(wptPt.lon), MapUtils.get31TileNumberY(wptPt.lat));
       }
 
-      int getKey(boolean bigPoint) {
-         int color = bigPoint ? colorBigPoint : colorSmallPoint;
+      int getKey() {
          long hash = ((long) color << 6) + ((long) wptPt.hashCode() << 4) + ((withShadow ? 1 : 0) << 3)
                  + ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (history ? 1 : 0);
          if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {

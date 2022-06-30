@@ -480,15 +480,15 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				toolbar, R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light);
 		Menu menu = toolbar.getMenu();
 		MenuItem.OnMenuItemClickListener itemClickListener = item -> {
-			OsmandApplication app = getMyApplication();
-			if (app != null) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				int itemId = item.getItemId();
 				if (itemId == MENU_ITEM_SHARE) {
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.putExtra(Intent.EXTRA_TEXT, WikiArticleHelper.buildTravelUrl(article.getTitle(), article.getLang()));
 					intent.setType("text/plain");
 					Intent chooserIntent = Intent.createChooser(intent, getString(R.string.shared_string_share));
-					return AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
+					return AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 				}
 			}
 			return false;

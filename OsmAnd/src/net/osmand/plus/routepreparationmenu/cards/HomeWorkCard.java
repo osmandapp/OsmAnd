@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
@@ -26,8 +27,8 @@ public class HomeWorkCard extends MapBaseCard {
 	@Override
 	protected void updateContent() {
 		final FavouritesHelper favorites = getMyApplication().getFavoritesHelper();
-		final FavouritePoint homePoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
-		final FavouritePoint workPoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
+		final FavouritePoint homePoint = favorites.getSpecialPoint(SpecialPointType.HOME);
+		final FavouritePoint workPoint = favorites.getSpecialPoint(SpecialPointType.WORK);
 		final TextView homeDescr = view.findViewById(R.id.home_button_descr);
 		final TextView workDescr = view.findViewById(R.id.work_button_descr);
 		homeDescr.setText(homePoint != null ? homePoint.getAddress() : mapActivity.getString(R.string.shared_string_add));

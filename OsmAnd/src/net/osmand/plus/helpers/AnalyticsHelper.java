@@ -1,6 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -152,8 +151,6 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		return false;
 	}
 
-
-	@SuppressLint("HardwareIds")
 	private void submitCollectedData(List<Integer> allowedTypes) {
 		List<AnalyticsData> data = collectRecordedData();
 		for (AnalyticsData d : data) {

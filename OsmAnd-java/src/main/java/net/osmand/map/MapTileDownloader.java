@@ -82,6 +82,7 @@ public class MapTileDownloader {
 	 */
 	public static class DownloadRequest {
 		public final File fileToSave;
+		public final String tileId;
 		public final int zoom;
 		public final int xTile;
 		public final int yTile;
@@ -90,9 +91,10 @@ public class MapTileDownloader {
 		public String userAgent = null;
 		public boolean error;
 
-		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
+		public DownloadRequest(String url, File fileToSave, String tileId, int xTile, int yTile, int zoom) {
 			this.url = url;
 			this.fileToSave = fileToSave;
+			this.tileId = tileId;
 			this.xTile = xTile;
 			this.yTile = yTile;
 			this.zoom = zoom;

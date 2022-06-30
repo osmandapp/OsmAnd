@@ -166,16 +166,18 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 	}
 
 	private void updateSize() {
-		double sizeToDownload = getDownloadSizeInMb(dialog.getSelectedItems());
-		String size = DownloadItem.getFormattedMb(app, sizeToDownload);
-		String total = app.getString(R.string.shared_string_total);
-		String description = app.getString(R.string.ltr_or_rtl_combine_via_colon, total, size);
-		dialog.setTitleDescription(description);
-		String btnTitle = app.getString(R.string.shared_string_download);
-		if (sizeToDownload > 0) {
-			btnTitle = app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size);
+		if (dialog.isAdded()) {
+			double sizeToDownload = getDownloadSizeInMb(dialog.getSelectedItems());
+			String size = DownloadItem.getFormattedMb(app, sizeToDownload);
+			String total = app.getString(R.string.shared_string_total);
+			String description = app.getString(R.string.ltr_or_rtl_combine_via_colon, total, size);
+			dialog.setTitleDescription(description);
+			String btnTitle = app.getString(R.string.shared_string_download);
+			if (sizeToDownload > 0) {
+				btnTitle = app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size);
+			}
+			dialog.setApplyButtonTitle(btnTitle);
 		}
-		dialog.setApplyButtonTitle(btnTitle);
 	}
 
 	private double getDownloadSizeInMb(@NonNull List<SelectableItem<DownloadItem>> selectableItems) {
