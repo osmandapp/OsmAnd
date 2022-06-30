@@ -1,13 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static android.view.Gravity.TOP;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -15,7 +7,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
+import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
+
+import org.apache.commons.logging.Log;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -24,20 +34,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
-
-import org.apache.commons.logging.Log;
+import static android.view.Gravity.TOP;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
 
 public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
@@ -104,20 +107,17 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
 	private void setupControlButtons(@NonNull View view) {
 		MapActivity mapActivity = getMapActivity();
-		View zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
-		View zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
-		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
+		ImageView zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
+		ImageView zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		ImageView myLocButtonView = view.findViewById(R.id.map_my_location_button);
 		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
 
 		MapLayers mapLayers = mapActivity.getMapLayers();
-
-		OsmandMapTileView mapTileView = mapActivity.getMapView();
-		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
-
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
-		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupBackToLocationButton(myLocButtonView, false, BACK_TO_LOC_BUTTON_ID);
+
+		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButtonView, ZOOM_IN_BUTTON_ID));
+		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButtonView, ZOOM_OUT_BUTTON_ID));
+		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, BACK_TO_LOC_BUTTON_ID, false));
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		mapInfoLayer.setupRulerWidget(mapRulerView);
