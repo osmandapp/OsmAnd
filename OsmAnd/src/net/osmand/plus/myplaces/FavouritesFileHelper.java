@@ -76,7 +76,7 @@ public class FavouritesFileHelper {
 		for (Map.Entry<String, PointsGroup> entry : gpxFile.getPointsGroups().entrySet()) {
 			String key = entry.getKey();
 			PointsGroup pointsGroup = entry.getValue();
-			FavoriteGroup favoriteGroup = FavoriteGroup.fromPointsGroup(pointsGroup, app);
+			FavoriteGroup favoriteGroup = FavoriteGroup.fromPointsGroup(pointsGroup);
 
 			favoriteGroups.put(key, favoriteGroup);
 		}

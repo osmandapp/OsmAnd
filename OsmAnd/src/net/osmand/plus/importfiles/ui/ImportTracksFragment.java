@@ -1,5 +1,10 @@
 package net.osmand.plus.importfiles.ui;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +21,15 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -52,20 +66,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 
 public class ImportTracksFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
 		FolderSelectionListener, OnTrackFolderAddListener, ImportTracksListener, PointsSelectionListener {
@@ -212,6 +212,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	protected void updateButtonsState() {
+		if (!isAdded()) {
+			return;
+		}
 		String allTracks = String.valueOf(trackItems.size());
 		String selectedItems = String.valueOf(selectedTracks.size());
 		String count = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems, allTracks);
@@ -460,7 +463,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			activity.startActivity(intent);
 		}
-		dismiss();
+		dismissAllowingStateLoss();
 	}
 
 	@Nullable

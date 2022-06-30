@@ -37,9 +37,9 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -293,29 +293,27 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				app.getNotificationHelper().refreshNotifications();
 				updateWidgets();
 
-				Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
-				GPXFile gpxFile = null;
-				File file = null;
-				if (!Algorithms.isEmpty(gpxFilesByName)) {
-					String gpxFileName = gpxFilesByName.keySet().iterator().next();
-					gpxFile = gpxFilesByName.get(gpxFileName);
-					file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
-				}
-
-				boolean fileExists = file != null && file.exists();
-				boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
-				if (fileExists && gpxFileNonEmpty) {
-					if (openTrack) {
-						TrackMenuFragment.openTrack(mapActivity, file, null);
-					} else {
-						FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : null;
-						if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+				FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : mapActivity;
+				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+					Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
+					GPXFile gpxFile = null;
+					File file = null;
+					if (!Algorithms.isEmpty(gpxFilesByName)) {
+						String gpxFileName = gpxFilesByName.keySet().iterator().next();
+						gpxFile = gpxFilesByName.get(gpxFileName);
+						file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
+					}
+					boolean fileExists = file != null && file.exists();
+					boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
+					if (fileExists && gpxFileNonEmpty) {
+						if (openTrack) {
+							TrackMenuFragment.openTrack(mapActivity, file, null);
+						} else {
 							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
 						}
 					}
 				}
-
 				if (onComplete != null) {
 					onComplete.run();
 				}
@@ -367,11 +365,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return liveMonitoringHelper.isLiveMonitoringEnabled();
 	}
 
-	public void startGPXMonitoring(final Activity map) {
-		startGPXMonitoring(map, true);
-	}
-
-	public void startGPXMonitoring(final Activity map, final boolean showTrackSelection) {
+	public void startGPXMonitoring(final Activity activity) {
 		final ValueHolder<Integer> vs = new ValueHolder<>();
 		final ValueHolder<Boolean> choice = new ValueHolder<>();
 		vs.value = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
@@ -383,11 +377,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		};
-		if (choice.value || map == null) {
+		if (choice.value || activity == null) {
 			runnable.run();
-		} else if (map instanceof FragmentActivity) {
-			FragmentActivity activity = (FragmentActivity) map;
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(activity.getSupportFragmentManager(), app);
+		} else if (activity instanceof FragmentActivity) {
+			FragmentActivity fragmentActivity = (FragmentActivity) activity;
+			FragmentManager manager = fragmentActivity.getSupportFragmentManager();
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(manager, app);
 		}
 	}
 

@@ -13,6 +13,8 @@ import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.PICKUP_DATE;
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
@@ -45,8 +47,8 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -58,7 +60,6 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.importfiles.ui.ImportTracksFragment;
-import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -458,7 +459,7 @@ public class ImportHelper {
 							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 							Uri uri = Uri.fromParts("package", app.getPackageName(), null);
 							intent.setData(uri);
-							app.startActivity(intent);
+							AndroidUtils.startActivityIfSafe(app, intent);
 							if (gpxImportCompleteListener != null) {
 								gpxImportCompleteListener.onImportComplete(false);
 							}
@@ -639,8 +640,13 @@ public class ImportHelper {
 					point.setIconIdFromName(iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-				if (!Algorithms.isEmpty(extensions.get(ItineraryDataHelper.CREATION_DATE))) {
-					point.setCreationDate(GPXUtilities.parseTime(extensions.get(ItineraryDataHelper.CREATION_DATE)));
+
+				String time = extensions.get(PICKUP_DATE);
+				if (time == null) {
+					time = extensions.get(CREATION_DATE);
+				}
+				if (!Algorithms.isEmpty(time)) {
+					point.setPickupDate(GPXUtilities.parseTime(time));
 				}
 				favourites.add(point);
 			}

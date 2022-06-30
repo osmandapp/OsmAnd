@@ -305,6 +305,6 @@ public class FavoritesActivity extends TabActivity {
 		b.putInt(TAB_ID, FAV_TAB);
 		b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
 		intent.putExtra(MapActivity.INTENT_PARAMS, b);
-		context.startActivity(intent);
+		AndroidUtils.startActivityIfSafe(context, intent);
 	}
 }

@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,10 +32,6 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -153,13 +153,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
-		resetCashedTheme();
-		ApplicationMode appMode = settings.getApplicationMode();
-		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
-		leftWidgetsPanel.update();
-		rightWidgetsPanel.update();
+		if (getMapActivity() != null) {
+			resetCashedTheme();
+			ApplicationMode appMode = settings.getApplicationMode();
+			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
+			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
+			leftWidgetsPanel.update();
+			rightWidgetsPanel.update();
+		}
 	}
 
 	public void recreateTopWidgetsPanel() {

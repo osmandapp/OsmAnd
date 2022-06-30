@@ -184,6 +184,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
+	private long trackMarkersChangedTime = 0;
 
 	private ContextMenuLayer contextMenuLayer;
 	private NetworkRouteSelectionTask networkRouteSelectionTask;
@@ -357,6 +358,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		boolean nightMode = settings != null && settings.isNightMode();
 		boolean nightModeChanged = this.nightMode != nightMode;
 		this.nightMode = nightMode;
+		long trackMarkersChangedTime = mapMarkersHelper.getTrackMarkersModifiedTime();
+		boolean trackMarkersChanged = this.trackMarkersChangedTime != trackMarkersChangedTime;
+		this.trackMarkersChangedTime = trackMarkersChangedTime;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged;
@@ -365,7 +369,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
 			drawSelectedFilesSplitsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate);
-			drawSelectedFilesPointsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate);
+			drawSelectedFilesPointsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate || trackMarkersChanged);
 		} else {
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
@@ -895,20 +899,19 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								continue;
 							}
 						}
-						int colorBigPoint = selected ? getPointColor(wpt, fileColor) : disabledColor;
-						int colorSmallPoint;
 						boolean history = false;
+						int color;
 						if (selected) {
 							if (marker != null && marker.history) {
-								colorSmallPoint = grayColor;
+								color = grayColor;
 								history = true;
 							} else {
-								colorSmallPoint = getPointColor(wpt, fileColor);
+								color = getPointColor(wpt, fileColor);
 							}
 						} else {
-							colorSmallPoint = disabledColor;
+							color = disabledColor;
 						}
-						pointsTileProvider.addToData(wpt, colorBigPoint, colorSmallPoint, true, marker != null, history, textScale);
+						pointsTileProvider.addToData(wpt, color, true, marker != null, history, textScale);
 					}
 					if (wpt == contextMenuLayer.getMoveableObject()) {
 						pointFileMap.put(wpt, g);
