@@ -1385,7 +1385,7 @@
     <string name="poi_filter_food_shop">Toko makanan</string>
     <string name="poi_filter_car_aid">Bantuan mobil</string>
     <string name="poi_filter_public_transport">Angkutan publik</string>
-    <string name="target_point">Destinasi %1$s</string>
+    <string name="target_point">Tujuan %1$s</string>
     <string name="download_regular_maps">Peta standar</string>
     <string name="download_roads_only_item">Jalanraya saja</string>
     <string name="download_select_map_types">Peta lain</string>
@@ -4042,4 +4042,24 @@
     <string name="local_osm_changes_backup">Cadangkan perubahan OSM</string>
     <string name="local_osm_changes_backup_successful">Berkas perubahan OSM dihasilkan %1$s</string>
     <string name="local_osm_changes_backup_failed">Tidak dapat mencadangkan perubahan OSM.</string>
+    <string name="recording_description">Rekaman %1$s %3$s %2$s</string>
+    <string name="search_villages_and_postcodes">Cari lebih banyak desa/kode pos</string>
+    <string name="safe_mode_description">Jalankan aplikasi pada mode aman (yang lebih lambat).</string>
+    <string name="av_use_external_recorder_descr">Gunakan perekam sistem untuk video.</string>
+    <string name="av_use_external_camera_descr">Gunakan aplikasi sistem untuk foto.</string>
+    <string name="recording_delete_confirm">Hapus item ini\?</string>
+    <string name="native_library_not_running">Aplikasi berjalan pada mode aman (nonaktifkan di \'Pengaturan\').</string>
+    <string name="av_def_action_picture">Ambil foto</string>
+    <string name="stop_routing_confirm">Hentikan navigasi\?</string>
+    <string name="recording_context_menu_vrecord">Ambil catatan video</string>
+    <string name="search_street_in_neighborhood_cities">Cari jalan di kota sekitar</string>
+    <string name="av_use_external_recorder">Gunakan perekam sistem</string>
+    <string name="zxing_barcode_scanner_not_found">Aplikasi ZXing Barcode Scanner tidak terpasang. Telusuri di Google Play\?</string>
+    <string name="av_use_external_camera">Gunakan aplikasi kamera</string>
+    <string name="no_buildings_found">Tak ditemukan bangunan.</string>
+    <string name="recording_context_menu_precord">Ambil foto</string>
+    <string name="recording_context_menu_arecord">Ambil catatan suara</string>
+    <string name="recording_can_not_be_played">Tidak dapat memutar rekaman.</string>
+    <string name="download_using_mobile_internet">Tidak terhubung ke Wi-Fi. Gunakan koneksi ke Internet saat ini untuk mengunduh\?</string>
+    <string name="wait_current_task_finished">Harap tunggu sampai tugas saat ini selesai</string>
 </resources>
