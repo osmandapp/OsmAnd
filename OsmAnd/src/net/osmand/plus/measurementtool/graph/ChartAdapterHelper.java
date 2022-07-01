@@ -98,11 +98,11 @@ public class ChartAdapterHelper {
 	public static RefreshMapCallback bindToMap(@NonNull final CommonChartAdapter graphAdapter,
 	                                           @NonNull final MapActivity mapActivity,
 	                                           @NonNull final TrackDetailsMenu detailsMenu) {
-		final RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit) -> {
+		final RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit, recalculateXAxis) -> {
 			LineChart chart = graphAdapter.getChart();
 			OsmandApplication app = mapActivity.getMyApplication();
 			if (!app.getRoutingHelper().isFollowingMode()) {
-				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit);
+				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);
 				mapActivity.refreshMap();
 			}
 		};
@@ -112,7 +112,7 @@ public class ChartAdapterHelper {
 
 					@Override
 					public void onValueSelected(Entry e, Highlight h) {
-						refreshMapCallback.refreshMap(true, false);
+						refreshMapCallback.refreshMap(true, false, false);
 					}
 
 					@Override
@@ -133,7 +133,7 @@ public class ChartAdapterHelper {
 						lastPerformedGesture == ChartTouchListener.ChartGesture.PINCH_ZOOM ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.DOUBLE_TAP ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.ROTATE) {
-					refreshMapCallback.refreshMap(true, true);
+					refreshMapCallback.refreshMap(true, true, true);
 				}
 			}
 		});
@@ -142,6 +142,6 @@ public class ChartAdapterHelper {
 	}
 
 	public interface RefreshMapCallback {
-		void refreshMap(boolean fitTrackOnMap, boolean forceFit);
+		void refreshMap(boolean fitTrackOnMap, boolean forceFit, boolean recalculateXAxis);
 	}
 }
