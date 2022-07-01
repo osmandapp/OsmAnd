@@ -133,6 +133,7 @@ public class MapWidgetRegistry {
 
 	public void clearWidgets() {
 		allWidgets.clear();
+		notifyWidgetsCleared();
 	}
 
 	public boolean isWidgetVisible(@NonNull String widgetId) {
@@ -174,6 +175,14 @@ public class MapWidgetRegistry {
 		if (!Algorithms.isEmpty(listeners)) {
 			for (WidgetsRegistryListener listener : listeners) {
 				listener.onWidgetRegistered(widgetInfo, widgetType);
+			}
+		}
+	}
+
+	private void notifyWidgetsCleared() {
+		if (!Algorithms.isEmpty(listeners)) {
+			for (WidgetsRegistryListener listener : listeners) {
+				listener.onWidgetsCleared();
 			}
 		}
 	}
@@ -493,7 +502,7 @@ public class MapWidgetRegistry {
 	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId,
 	                                            @NonNull WidgetsPanel defaultPanel,
 	                                            @NonNull ApplicationMode appMode) {
-		boolean storedInLeftPanel =WidgetsPanel.LEFT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
+		boolean storedInLeftPanel = WidgetsPanel.LEFT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
 		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
 		if (storedInLeftPanel) {
 			return WidgetsPanel.LEFT;
@@ -507,5 +516,7 @@ public class MapWidgetRegistry {
 		void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType);
 
 		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);
+
+		void onWidgetsCleared();
 	}
 }

@@ -101,6 +101,11 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 		}
 	}
 
+	@Override
+	public void onWidgetsCleared() {
+		clearWidgets();
+	}
+
 	private boolean isMarkerWidget(@Nullable WidgetType widgetType) {
 		return widgetType == MARKERS_TOP_BAR || widgetType == SIDE_MARKER_1 || widgetType == SIDE_MARKER_2;
 	}

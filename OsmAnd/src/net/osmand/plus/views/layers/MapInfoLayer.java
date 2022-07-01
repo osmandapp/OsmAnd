@@ -137,7 +137,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
 		widgetRegistry.clearWidgets();
-		mapLayers.getMapMarkersLayer().getMarkersWidgetsHelper().clearWidgets();
 		registerAllControls(mapActivity);
 		widgetRegistry.reorderWidgets();
 		recreateControls();
