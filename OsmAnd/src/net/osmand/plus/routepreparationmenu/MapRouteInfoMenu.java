@@ -51,6 +51,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.SpecialPointType;
 import net.osmand.data.ValueHolder;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
@@ -359,10 +360,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), pd);
 				break;
 			case HOME:
-				favorites.setSpecialPoint(latLon, FavouritePoint.SpecialPointType.HOME, address);
+				favorites.setSpecialPoint(latLon, SpecialPointType.HOME, address);
 				break;
 			case WORK:
-				favorites.setSpecialPoint(latLon, FavouritePoint.SpecialPointType.WORK, address);
+				favorites.setSpecialPoint(latLon, SpecialPointType.WORK, address);
 				break;
 		}
 	}

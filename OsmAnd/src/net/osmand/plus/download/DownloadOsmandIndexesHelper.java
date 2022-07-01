@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
-import android.provider.Settings.Secure;
 
 import androidx.annotation.NonNull;
 
@@ -276,7 +275,7 @@ public class DownloadOsmandIndexesHelper {
 				}
 				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
 				try {
-					strUrl += "&aid=" + Secure.getString(ctx.getContentResolver(), Secure.ANDROID_ID);
+					strUrl += "&aid=" + ctx.getUserAndroidId();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

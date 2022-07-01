@@ -13,7 +13,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -117,9 +116,7 @@ final public class TransportLinesMenu {
 	}
 
 	private void refreshMap(@NonNull MapActivity mapActivity) {
-		OsmandMapTileView mapView = mapActivity.getMapView();
-		mapView.refreshMap(true);
-		mapActivity.updateLayers();
+		app.runInUIThread(mapActivity::refreshMapComplete);
 	}
 
 	private ApplicationMode getAppMode() {

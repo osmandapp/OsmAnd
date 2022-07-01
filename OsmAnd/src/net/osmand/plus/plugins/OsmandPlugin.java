@@ -1037,7 +1037,7 @@ public abstract class OsmandPlugin {
 		try {
 			installed = ctx.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch (NameNotFoundException e) {
-			LOG.error("Package not found: " + packageInfo, e);
+			LOG.info("Package not found: " + packageInfo);
 		}
 		return installed;
 	}

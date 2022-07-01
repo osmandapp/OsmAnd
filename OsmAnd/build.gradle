@@ -69,9 +69,6 @@ android {
 		debug {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
-		androidFull {
-			java.srcDirs = ["src-google"]
-		}
 		gplayFull {
 			java.srcDirs = ["src-google"]
 		}
@@ -79,8 +76,12 @@ android {
 			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
+		androidFull {
+			java.srcDirs = ["src-google", "src-osmand"]
+			manifest.srcFile "AndroidManifest-androidFull.xml"
+		}
 		nightlyFree {
-			java.srcDirs = ["src-google"]
+			java.srcDirs = ["src-google", "src-osmand"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		rescueTrack {

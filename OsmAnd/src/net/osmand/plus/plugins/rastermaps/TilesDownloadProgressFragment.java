@@ -153,6 +153,8 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		if (progress == 100) {
 			String completeString = getString(R.string.shared_string_complete);
 			text = format.format(new Object[] {progress, completeString});
+		} else if (downloadTilesHelper.isDownloadFinished()) {
+			text = getString(R.string.download_complete);
 		} else {
 			String downloadedString = getString(R.string.shared_string_download_successful).toLowerCase();
 			text = format.format(new Object[] {progress, downloadedString});
@@ -160,7 +162,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		((TextView) view.findViewById(R.id.percent_progress)).setText(text);
 
 		ProgressBar progressBar = view.findViewById(R.id.progress_bar);
-		progressBar.setProgress(progress);
+		progressBar.setProgress(downloadTilesHelper.isDownloadFinished() ? 100 : progress);
 	}
 
 	@SuppressLint("StringFormatMatches")
@@ -169,7 +171,8 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		String downloadedSize = getSizeMb(downloadedSizeMb);
 		String expectedSize = MessageFormat.format("(~{0})", getSizeMb(approxSizeMb));
 		String fullText;
-		if (progress == 100) {
+		boolean showExpectedSize = progress != 100 && !downloadTilesHelper.isDownloadFinished();
+		if (!showExpectedSize) {
 			fullText = getString(R.string.ltr_or_rtl_combine_via_colon, downloadedString, downloadedSize);
 		} else {
 			fullText = getString(R.string.ltr_or_rtl_combine_via_colon,
@@ -182,7 +185,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		Typeface bold = FontCache.getRobotoMedium(app);
 		setSpan(spannable, new CustomTypefaceSpan(bold), fullText.indexOf(downloadedSize), downloadedSize.length());
 
-		if (progress != 100) {
+		if (showExpectedSize) {
 			ForegroundColorSpan span = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));
 			setSpan(spannable, span, fullText.indexOf(expectedSize), expectedSize.length());
 		}
@@ -269,6 +272,17 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		updateTilesNumber();
 
 		if (progress == 100) {
+			setupCancelCloseButton(true);
+			app.getOsmandMap().getMapView().refreshMap();
+		}
+	}
+
+	@Override
+	public void onSuccessfulFinish() {
+		if (progress != 100) {
+			updateProgress();
+			updateDownloadSize();
+			updateTilesNumber();
 			setupCancelCloseButton(true);
 			app.getOsmandMap().getMapView().refreshMap();
 		}

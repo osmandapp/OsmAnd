@@ -407,7 +407,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = v -> {
 			hideDashboard();
-			mapActivity.getMapLayers().getMapControlsLayer().doRoute(false);
+			mapActivity.getMapLayers().getMapControlsLayer().doRoute();
 		};
 
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);
@@ -536,7 +536,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				if (isCurrentType(CONFIGURE_MAP)) {
 					int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
 					compassButton = mapActivity.getMapLayers().getMapControlsLayer()
-							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx), nightMode);
+							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx));
 				}
 			}
 			updateDownloadBtn();
@@ -928,7 +928,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void hide(boolean animation) {
 		if (compassButton != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton(nightMode);
+			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton();
 			compassButton = null;
 		}
 		if (!animation) {
