@@ -295,15 +295,18 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			View infoButton = view.findViewById(R.id.info_button);
 			infoButton.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
-				if (activity != null) {
+				Fragment target = getParentFragment();
+				if (activity != null && target != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					Fragment target = getParentFragment();
 					if (widgetGroup != null) {
 						AddWidgetFragment.showGroupDialog(fragmentManager, target,
 								selectedAppMode, selectedPanel, widgetGroup, null);
-					} else {
+					} else if (widgetType != null) {
 						AddWidgetFragment.showWidgetDialog(fragmentManager, target,
 								selectedAppMode, selectedPanel, widgetType, null);
+					} else if (widgetInfo.getExternalProviderPackage() != null) {
+						AddWidgetFragment.showExternalWidgetDialog(fragmentManager, target, selectedAppMode,
+								selectedPanel, widgetInfo.key, widgetInfo.getExternalProviderPackage(), null);
 					}
 				}
 			});

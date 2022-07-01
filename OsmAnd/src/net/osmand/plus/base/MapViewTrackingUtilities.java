@@ -55,6 +55,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private TrackDetailsMenu detailsMenu;
 
 	private long lastTimeAutoZooming = 0;
+	private long lastTimeManualZooming = 0;
 	private boolean isMapLinkedToLocation = true;
 	private boolean followingMode;
 	private boolean routePlanningMode;
@@ -368,8 +369,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zdelta += 1;
 				}
 				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
+				long lastZoomTime = Math.max(lastTimeAutoZooming, lastTimeManualZooming);
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
-				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
+				if (now - lastZoomTime > 4500 && (now - lastZoomTime > threshold || !isUserZoomed)) {
 					isUserZoomed = false;
 					lastTimeAutoZooming = now;
 //					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
@@ -522,7 +524,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void setZoomTime(long time) {
-		lastTimeAutoZooming = time;
+		lastTimeManualZooming = time;
 		isUserZoomed = true;
+	}
+
+	public long getLastManualZoomTime() {
+		return lastTimeManualZooming;
 	}
 }

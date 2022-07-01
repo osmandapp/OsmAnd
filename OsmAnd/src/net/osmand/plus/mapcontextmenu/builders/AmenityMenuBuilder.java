@@ -293,7 +293,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						String uri = socialMediaUrl == null ? text : socialMediaUrl;
 						Intent intent = new Intent(Intent.ACTION_VIEW);
 						intent.setData(Uri.parse(uri));
-						v.getContext().startActivity(intent);
+						AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 					}
 				}
 			});

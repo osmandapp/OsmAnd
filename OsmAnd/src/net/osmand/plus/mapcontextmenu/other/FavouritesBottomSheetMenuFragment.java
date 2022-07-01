@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
@@ -184,10 +185,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(app));
 				break;
 			case HOME:
-				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
+				favorites.setSpecialPoint(ll, SpecialPointType.HOME, null);
 				break;
 			case WORK:
-				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
+				favorites.setSpecialPoint(ll, SpecialPointType.WORK, null);
 				break;
 		}
 		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();

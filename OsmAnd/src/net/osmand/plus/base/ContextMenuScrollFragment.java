@@ -1,16 +1,10 @@
 package net.osmand.plus.base;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.widget.ImageView;
 
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
@@ -18,13 +12,22 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public abstract class ContextMenuScrollFragment extends ContextMenuFragment implements ContextMenuFragmentListener {
 
@@ -100,7 +103,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-			mapControlsLayer.removeHudButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
+			mapControlsLayer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -116,19 +119,16 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 	protected void setupControlButtons(@NonNull View view) {
 		MapActivity mapActivity = requireMapActivity();
-		View zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
-		View zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
-		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
+		ImageView zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
+		ImageView zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		ImageView myLocButtonView = view.findViewById(R.id.map_my_location_button);
 
 		MapLayers mapLayers = mapActivity.getMapLayers();
-
-		OsmandMapTileView mapTileView = mapActivity.getMapView();
-		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
-
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
-		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupBackToLocationButton(myLocButtonView, false, BACK_TO_LOC_BUTTON_ID);
+
+		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButtonView, ZOOM_IN_BUTTON_ID));
+		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButtonView, ZOOM_OUT_BUTTON_ID));
+		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, BACK_TO_LOC_BUTTON_ID, false));
 
 		setupMapRulerWidget(view, mapLayers);
 	}

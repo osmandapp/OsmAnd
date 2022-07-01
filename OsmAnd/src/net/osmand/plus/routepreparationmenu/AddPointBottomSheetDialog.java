@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
@@ -254,11 +255,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											break;
 										case HOME:
 											app.showShortToastMessage(R.string.add_home);
-											app.getFavoritesHelper().setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
+											app.getFavoritesHelper().setSpecialPoint(ll, SpecialPointType.HOME, null);
 											break;
 										case WORK:
 											app.showShortToastMessage(R.string.add_work);
-											app.getFavoritesHelper().setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
+											app.getFavoritesHelper().setSpecialPoint(ll, SpecialPointType.WORK, null);
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -461,13 +462,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), name);
 								break;
 							case HOME:
-								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
+								favorites.setSpecialPoint(ll, SpecialPointType.HOME, null);
 								break;
 							case WORK:
-								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
+								favorites.setSpecialPoint(ll, SpecialPointType.WORK, null);
 								break;
 							case PARKING:
-								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.PARKING, null);
+								favorites.setSpecialPoint(ll, SpecialPointType.PARKING, null);
 								break;
 						}
 						dismiss();
@@ -490,11 +491,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				FavouritesHelper favorites = mapActivity.getMyApplication().getFavoritesHelper();
 				FavouritePoint point = null;
 				if (item == PointType.HOME) {
-					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
+					point = favorites.getSpecialPoint(SpecialPointType.HOME);
 				} else if (item == PointType.WORK) {
-					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
+					point = favorites.getSpecialPoint(SpecialPointType.WORK);
 				} else if (item == PointType.PARKING) {
-					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.PARKING);
+					point = favorites.getSpecialPoint(SpecialPointType.PARKING);
 				}
 				if (point != null) {
 					ll = new LatLon(point.getLatitude(), point.getLongitude());

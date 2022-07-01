@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.rastermaps;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -44,18 +50,10 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -113,12 +111,18 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
-		underlayListener = change -> app.runInUIThread(() -> {
+		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
+		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
+
+		underlayListener = change -> {
 			boolean selected = settings.MAP_UNDERLAY.get() != null;
+			hidePolygonsPref.set(selected);
+			hideWaterPolygonsPref.set(selected);
+
 			if (updateConfigureMapItemCallback != null) {
 				updateConfigureMapItemCallback.processResult(selected);
 			}
-		});
+		};
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -163,19 +167,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			overlayLayer.setMap(null);
 		}
 		// Underlay
-		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
-		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
 		if (isActive()) {
-			if (updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap)) {
-				boolean selected = settings.MAP_UNDERLAY.get() != null;
-				hidePolygonsPref.set(selected);
-				hideWaterPolygonsPref.set(selected);
-			}
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
-			if (underlayLayer.getMap() != null) {
-				hidePolygonsPref.set(false);
-				hideWaterPolygonsPref.set(false);
-			}
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
 		}
@@ -325,7 +319,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
-			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  @Nullable View view, @NonNull ContextMenuItem item,
 			                                  boolean isChecked) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity == null || mapActivity.isFinishing()) {

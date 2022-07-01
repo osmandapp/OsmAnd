@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -9,8 +12,8 @@ import androidx.core.content.ContextCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,9 +35,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-
 
 public class FavouritesHelper {
 
@@ -51,6 +51,7 @@ public class FavouritesHelper {
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
 
 	private boolean favoritesLoaded;
+	private long lastModifiedTime = 0;
 
 	public FavouritesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -124,15 +125,30 @@ public class FavouritesHelper {
 
 		if (changed || !fileHelper.getExternalFile().exists()) {
 			saveCurrentPointsIntoFile();
+		} else {
+			updateLastModifiedTime();
 		}
 		favoritesLoaded = true;
 		notifyListeners();
 	}
 
+	public long getLastModifiedTime() {
+		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+		if (mapMarkersHelper != null) {
+			return Math.max(lastModifiedTime, mapMarkersHelper.getFavoriteMarkersModifiedTime());
+		} else {
+			return lastModifiedTime;
+		}
+	}
+
+	private void updateLastModifiedTime() {
+		lastModifiedTime = System.currentTimeMillis();
+	}
+
 	public void fixBlackBackground() {
 		flatGroups.clear();
 		favoriteGroups.clear();
-		for (FavouritePoint fp : cachedFavoritePoints) {
+		for (FavouritePoint fp : getFavouritePoints()) {
 			if (fp.getColor() == 0xFF000000 || fp.getColor() == ContextCompat.getColor(app, R.color.color_favorite)) {
 				fp.setColor(0);
 			}
@@ -160,7 +176,7 @@ public class FavouritesHelper {
 
 	@Nullable
 	public FavouritePoint getSpecialPoint(SpecialPointType pointType) {
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.getSpecialPointType() == pointType) {
 				return point;
 			}
@@ -243,7 +259,7 @@ public class FavouritesHelper {
 				if (p.isHomeOrWork()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 				}
-				cachedFavoritePoints.remove(p);
+				removeFavouritePoint(p);
 			}
 			for (FavoriteGroup gr : groupsToSync) {
 				runSyncWithMarkers(gr);
@@ -253,7 +269,7 @@ public class FavouritesHelper {
 			for (FavoriteGroup g : groupsToDelete) {
 				flatGroups.remove(g.getName());
 				favoriteGroups.remove(g);
-				cachedFavoritePoints.removeAll(g.getPoints());
+				removeFavouritePoints(g.getPoints());
 				removeFromMarkers(g);
 				if (g.isPersonal()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
@@ -274,7 +290,7 @@ public class FavouritesHelper {
 				group.getPoints().remove(p);
 				runSyncWithMarkers(group);
 			}
-			cachedFavoritePoints.remove(p);
+			removeFavouritePoint(p);
 			if (p.isHomeOrWork()) {
 				app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 			}
@@ -290,15 +306,15 @@ public class FavouritesHelper {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
 			point.setIconId(specialType.getIconId(app));
-			point.setTimestamp(pickupTimestamp);
+			point.setPickupDate(pickupTimestamp);
 			point.setCalendarEvent(addToCalendar);
+			point.setTimestamp(System.currentTimeMillis());
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 			lookupAddress(point);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
-			point.setCreationDate(System.currentTimeMillis());
-			point.setTimestamp(pickupTimestamp);
+			point.setPickupDate(pickupTimestamp);
 			point.setCalendarEvent(addToCalendar);
 			point.setIconId(specialType.getIconId(app));
 			addFavourite(point);
@@ -350,7 +366,7 @@ public class FavouritesHelper {
 				}
 			}
 			group.getPoints().add(p);
-			cachedFavoritePoints.add(p);
+			addFavouritePoint(p);
 		}
 		if (saveImmediately) {
 			sortAll();
@@ -460,6 +476,7 @@ public class FavouritesHelper {
 
 	public void saveCurrentPointsIntoFile() {
 		fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(favoriteGroups));
+		updateLastModifiedTime();
 		onFavouritePropertiesUpdated();
 	}
 
@@ -498,7 +515,7 @@ public class FavouritesHelper {
 	@NonNull
 	public List<FavouritePoint> getVisibleFavouritePoints() {
 		List<FavouritePoint> points = new ArrayList<>();
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.isVisible()) {
 				points.add(point);
 			}
@@ -508,7 +525,7 @@ public class FavouritesHelper {
 
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
-		for (FavouritePoint point : cachedFavoritePoints) {
+		for (FavouritePoint point : getFavouritePoints()) {
 			if (point.isVisible() && latLon.equals(new LatLon(point.getLatitude(), point.getLongitude()))) {
 				return point;
 			}
@@ -553,6 +570,24 @@ public class FavouritesHelper {
 		} else {
 			return null;
 		}
+	}
+
+	private void addFavouritePoint(@NonNull FavouritePoint point) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.add(point);
+		this.cachedFavoritePoints = favouritePoints;
+	}
+
+	private void removeFavouritePoint(@NonNull FavouritePoint point) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.remove(point);
+		this.cachedFavoritePoints = favouritePoints;
+	}
+
+	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
+		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
+		favouritePoints.removeAll(points);
+		this.cachedFavoritePoints = favouritePoints;
 	}
 
 	public void recalculateCachedFavPoints() {

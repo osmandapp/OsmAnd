@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,6 +18,7 @@ import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -29,16 +34,13 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 public class MapInfoLayer extends OsmandMapLayer {
 
 	private final OsmandApplication app;
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
+	private final MapLayers mapLayers;
 
 	private ViewGroup topWidgetsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
@@ -62,7 +64,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		app = getApplication();
 		settings = app.getSettings();
-		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		mapLayers = app.getOsmandMap().getMapLayers();
+		widgetRegistry = mapLayers.getMapWidgetRegistry();
 	}
 
 	@Override
@@ -153,13 +156,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
-		resetCashedTheme();
-		ApplicationMode appMode = settings.getApplicationMode();
-		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
-		leftWidgetsPanel.update();
-		rightWidgetsPanel.update();
+		if (getMapActivity() != null) {
+			resetCashedTheme();
+			ApplicationMode appMode = settings.getApplicationMode();
+			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
+			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
+			leftWidgetsPanel.update();
+			rightWidgetsPanel.update();
+		}
 	}
 
 	public void recreateTopWidgetsPanel() {
