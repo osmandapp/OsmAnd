@@ -9,14 +9,18 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.view.View;
-import android.graphics.PointF;
 
-import net.osmand.core.android.MapRendererView;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -36,14 +40,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
@@ -199,7 +196,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	public boolean rulerModeOn() {
 		MapWidgetRegistry mapWidgetRegistry = getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		return mapWidgetRegistry.isWidgetVisible(RADIUS_RULER.id)
+		return mapWidgetRegistry.isWidgetOrAnyDuplicateVisible(RADIUS_RULER.id)
 				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
 	}
 
