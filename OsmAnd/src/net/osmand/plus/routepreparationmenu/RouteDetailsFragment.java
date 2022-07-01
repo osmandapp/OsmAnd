@@ -374,7 +374,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		super.calculateLayout(view, initLayout);
 		if (!initLayout && getCurrentMenuState() != MenuState.FULL_SCREEN) {
 			if (refreshMapCallback != null) {
-				refreshMapCallback.refreshMap(false, false);
+				refreshMapCallback.refreshMap(false, false, true);
 			}
 		}
 	}
