@@ -795,7 +795,11 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		String[] olcTextParts = olcText.split(" ");
 		if (olcTextParts.length > 1) {
 			olcTextCode = olcTextParts[0];
-			cityName = olcTextParts[1];
+			cityName = olcText.substring(olcTextCode.length() + 1);
+			int commaIndex = cityName.indexOf(",");
+			if (commaIndex != -1) {
+				cityName = cityName.substring(0, commaIndex);
+			}
 		} else {
 			olcTextCode = olcText;
 		}
@@ -861,7 +865,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		@Override
 		protected List<Amenity> doInBackground(Void... voids) {
 			List<Amenity> results = new ArrayList<>(searchCities(app, region));
-			sortCities(results);
+			sortCities(results, region);
 			return results;
 		}
 
@@ -924,25 +928,48 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			return amenities;
 		}
 
-		private void sortCities(List<Amenity> cities) {
+		private void sortCities(List<Amenity> cities, String phraseName) {
 			final Collator collator = OsmAndCollator.primaryCollator();
+			final String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			final boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 			Collections.sort(cities, new Comparator<Object>() {
 				@Override
 				public int compare(Object obj1, Object obj2) {
 					String str1;
 					String str2;
+
 					Amenity a = ((Amenity) obj1);
-					if ("city".equals(a.getSubType())) {
-						str1 = "!" + ((Amenity) obj1).getName();
-					} else {
-						str1 = ((Amenity) obj1).getName();
+					str1 = a.getName();
+					if ((a.getSubType()).equals("city")) {
+						str1 = "!" + str1;
 					}
+					if ((a.getName(lang, transliterate)).equals(phraseName)) {
+						str1 = "!" + str1;
+					} else {
+						for (String name : a.getOtherNames(true)) {
+							if (name.equals(phraseName)) {
+								str1 = "!" + str1;
+								break;
+							}
+						}
+					}
+
 					Amenity b = ((Amenity) obj2);
-					if ("city".equals(b.getSubType())) {
-						str2 = "!" + ((Amenity) obj2).getName();
-					} else {
-						str2 = ((Amenity) obj2).getName();
+					str2 = b.getName();
+					if ((b.getSubType()).equals("city")) {
+						str2 = "!" + str2;
 					}
+					if ((b.getName(lang, transliterate)).equals(phraseName)) {
+						str2 = "!" + str2;
+					} else {
+						for (String name : b.getOtherNames(true)) {
+							if (name.equals(phraseName)) {
+								str2 = "!" + str2;
+								break;
+							}
+						}
+					}
+
 					return collator.compare(str1, str2);
 				}
 			});

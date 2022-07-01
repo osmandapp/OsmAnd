@@ -293,6 +293,11 @@ public class SearchPhrase {
 		if (mainUnknownWordToSearch != null) {
 			return;
 		}
+		if (LocationParser.isValidOLC(firstUnknownSearchWord) && otherUnknownWords.size() > 0) {
+			mainUnknownWordToSearch = otherUnknownWords.get(0);
+			mainUnknownSearchWordComplete = true;
+			return;
+		}
 		List<String> unknownSearchWords = otherUnknownWords;
 		mainUnknownWordToSearch = firstUnknownSearchWord;
 		mainUnknownSearchWordComplete = lastUnknownSearchWordComplete;
@@ -410,7 +415,6 @@ public class SearchPhrase {
 	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int meters, final SearchPhraseDataType dt) {
 		final QuadRect rect = meters > 0 ? getRadiusBBoxToSearch(meters) : null;
 		return getOfflineIndexes(rect, dt);
-		
 	}
 
 	public Iterator<BinaryMapIndexReader> getOfflineIndexes(final QuadRect rect, final SearchPhraseDataType dt) {
