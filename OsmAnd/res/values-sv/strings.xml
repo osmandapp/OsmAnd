@@ -4038,4 +4038,17 @@
     <string name="exit_import_descr">Avsluta utan att spara ändringar\?</string>
     <string name="routing_attr_freeride_policy_allow_name">Tillåt</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Avancerad</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_description">Välj färdmedelstyp som används av ditt fordons motor, för att beräkna CO2-utsläpp.</string>
+    <string name="routing_attr_motor_type_name">Färdmedel som används av motorn</string>
+    <string name="side_marker_eta">Uppskattad ankomstkid</string>
+    <string name="reset_all_settings_desc">Är du säker på att du vill återställa alla inställningar till standard\?</string>
+    <string name="co2_mission">CO2-utsläpp</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_petrol_name">Bensin</string>
+    <string name="osmand_cloud_create_account_descr">Vänligen ange din e-postadress, en verifikationskod kommer att skickas dit,
+\noch all din data kommer att länkas till den.</string>
+    <string name="send_crash_log">Skicka kraschlogg</string>
+    <string name="average_speed_widget_desc">Visar medelhastigheten för den nuvarande färden.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Skaffa OsmAnd Cloud för att lagra all OsmAnd-data online. Ingen förlorad data efter ominstallation. Säkerhetskopiera och återställ all info med lätthet.</string>
 </resources>
