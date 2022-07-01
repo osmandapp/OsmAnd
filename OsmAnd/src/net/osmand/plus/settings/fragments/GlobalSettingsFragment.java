@@ -347,6 +347,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		languages.put("ko", ctx.getString(R.string.lang_ko));
 		languages.put("lt", ctx.getString(R.string.lang_lt));
 		languages.put("lv", ctx.getString(R.string.lang_lv));
+		languages.put("mk", ctx.getString(R.string.lang_mk));
 		languages.put("ml", ctx.getString(R.string.lang_ml));
 		languages.put("mr", ctx.getString(R.string.lang_mr) + incompleteSuffix);
 		languages.put("nb", ctx.getString(R.string.lang_nb));
