@@ -18,6 +18,7 @@ import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -39,6 +40,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
+	private final MapLayers mapLayers;
 
 	private ViewGroup topWidgetsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
@@ -62,7 +64,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		app = getApplication();
 		settings = app.getSettings();
-		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		mapLayers = app.getOsmandMap().getMapLayers();
+		widgetRegistry = mapLayers.getMapWidgetRegistry();
 	}
 
 	@Override
