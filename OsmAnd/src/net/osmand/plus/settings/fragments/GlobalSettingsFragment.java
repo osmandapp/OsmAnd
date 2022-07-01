@@ -1,8 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -36,6 +33,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
+
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
 		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged, OnSelectProfileCallback {
@@ -57,6 +57,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupHistoryPref();
 		setupEnableProxyPref();
 		setupLocationSourcePref();
+		setupAutoBackupPref();
 		setupUninstallSpeedCamerasPref();
 	}
 
@@ -272,6 +273,14 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private void setupHistoryPref() {
 		Preference enableProxy = findPreference(HISTORY_PREF_ID);
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_history));
+	}
+
+	private void setupAutoBackupPref() {
+		boolean enabled = settings.AUTO_BACKUP_ENABLED.get();
+		SwitchPreferenceEx preference = (SwitchPreferenceEx) findPreference(OsmandSettings.AUTO_BACKUP_ENABLED_ID);
+		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_android));
+		preference.setChecked(enabled);
+		preference.setDescription(R.string.auto_backup_preference_desc);
 	}
 
 	private void setupUninstallSpeedCamerasPref() {
