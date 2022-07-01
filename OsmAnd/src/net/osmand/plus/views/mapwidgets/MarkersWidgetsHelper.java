@@ -84,27 +84,19 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
-		if (isMarkerWidget(widgetType)) {
-			if (widgetType == MARKERS_TOP_BAR) {
-				barWidgets.add(widgetInfo.widget);
-			} else if (widgetType == SIDE_MARKER_1) {
-				sideFirstWidgets.add(widgetInfo.widget);
-			} else if (widgetType == SIDE_MARKER_2) {
-				sideSecondWidgets.add(widgetInfo.widget);
-			}
+		if (isMarkerWidget(widgetType) && widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
+			addWidget(widgetInfo, widgetType);
 		}
 	}
 
 	@Override
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
 		WidgetType widgetType = widgetInfo.widget.getWidgetType();
-		if (isMarkerWidget(widgetType) && !widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
-			if (widgetType == MARKERS_TOP_BAR) {
-				barWidgets.remove(widgetInfo.widget);
-			} else if (widgetType == SIDE_MARKER_1) {
-				sideFirstWidgets.remove(widgetInfo.widget);
-			} else if (widgetType == SIDE_MARKER_2) {
-				sideSecondWidgets.remove(widgetInfo.widget);
+		if (isMarkerWidget(widgetType)) {
+			if (widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
+				addWidget(widgetInfo, widgetType);
+			} else {
+				removeWidget(widgetInfo, widgetType);
 			}
 		}
 	}
@@ -117,6 +109,26 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 		barWidgets.clear();
 		sideFirstWidgets.clear();
 		sideSecondWidgets.clear();
+	}
+
+	private void addWidget(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
+		if (widgetType == MARKERS_TOP_BAR) {
+			barWidgets.add(widgetInfo.widget);
+		} else if (widgetType == SIDE_MARKER_1) {
+			sideFirstWidgets.add(widgetInfo.widget);
+		} else if (widgetType == SIDE_MARKER_2) {
+			sideSecondWidgets.add(widgetInfo.widget);
+		}
+	}
+
+	private void removeWidget(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
+		if (widgetType == MARKERS_TOP_BAR) {
+			barWidgets.remove(widgetInfo.widget);
+		} else if (widgetType == SIDE_MARKER_1) {
+			sideFirstWidgets.remove(widgetInfo.widget);
+		} else if (widgetType == SIDE_MARKER_2) {
+			sideSecondWidgets.remove(widgetInfo.widget);
+		}
 	}
 
 	public static void showMarkerOnMap(@NonNull MapActivity mapActivity, int index) {
