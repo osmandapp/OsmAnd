@@ -4,6 +4,7 @@ import android.content.Context;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -23,26 +24,27 @@ public class MapMarkerSideWidgetState extends WidgetState {
 	public MapMarkerSideWidgetState(@NonNull OsmandApplication app, @Nullable String customId, boolean firstMarker) {
 		super(app);
 		this.firstMarker = firstMarker;
-		this.mapMarkerModePref = getModePref(customId);
-		this.averageSpeedIntervalPref = getAverageSpeedIntervalPref(customId);
+		this.mapMarkerModePref = registerModePref(customId);
+		this.averageSpeedIntervalPref = registerAverageSpeedIntervalPref(customId);
 	}
 
 	@NonNull
-	private OsmandPreference<SideMarkerMode> getModePref(@Nullable String customId) {
+	private OsmandPreference<SideMarkerMode> registerModePref(@Nullable String customId) {
 		String prefId = firstMarker ? "first_map_marker_mode" : "second_map_marker_mode";
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		return settings.registerEnumIntPreference(prefId, SideMarkerMode.DISTANCE, SideMarkerMode.values(), SideMarkerMode.class);
+		return settings.registerEnumIntPreference(prefId, SideMarkerMode.DISTANCE, SideMarkerMode.values(), SideMarkerMode.class)
+				.makeProfile();
 	}
 
 	@NonNull
-	private OsmandPreference<Long> getAverageSpeedIntervalPref(@Nullable String customId) {
+	private OsmandPreference<Long> registerAverageSpeedIntervalPref(@Nullable String customId) {
 		String prefId = firstMarker ? "first_map_marker_interval" : "second_map_marker_interval";
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		return settings.registerLongPreference(prefId, AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS);
+		return settings.registerLongPreference(prefId, AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS).makeProfile();
 	}
 
 	@NonNull
@@ -72,6 +74,12 @@ public class MapMarkerSideWidgetState extends WidgetState {
 	@Override
 	public void changeToNextState() {
 		mapMarkerModePref.set(mapMarkerModePref.get().next());
+	}
+
+	@Override
+	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		registerModePref(customId).setModeValue(appMode, mapMarkerModePref.getModeValue(appMode));
+		registerAverageSpeedIntervalPref(customId).setModeValue(appMode, averageSpeedIntervalPref.getModeValue(appMode));
 	}
 
 	public boolean isFirstMarker() {

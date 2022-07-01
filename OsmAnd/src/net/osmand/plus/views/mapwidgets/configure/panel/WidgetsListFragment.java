@@ -30,6 +30,7 @@ import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomShe
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetInfoFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
@@ -295,19 +296,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			View infoButton = view.findViewById(R.id.info_button);
 			infoButton.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
-				Fragment target = getParentFragment();
-				if (activity != null && target != null) {
+				if (activity != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					if (widgetGroup != null) {
-						AddWidgetFragment.showGroupDialog(fragmentManager, target,
-								selectedAppMode, selectedPanel, widgetGroup, null);
-					} else if (widgetType != null) {
-						AddWidgetFragment.showWidgetDialog(fragmentManager, target,
-								selectedAppMode, selectedPanel, widgetType, null);
-					} else if (widgetInfo.getExternalProviderPackage() != null) {
-						AddWidgetFragment.showExternalWidgetDialog(fragmentManager, target, selectedAppMode,
-								selectedPanel, widgetInfo.key, widgetInfo.getExternalProviderPackage(), null);
-					}
+					Fragment target = getParentFragment();
+					WidgetInfoFragment.showInstance(fragmentManager, target, selectedAppMode, widgetInfo.key);
 				}
 			});
 			view.setOnClickListener(v -> infoButton.callOnClick());
@@ -375,7 +367,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			if (widgetGroup != null) {
 				icon.setImageResource(widgetGroup.getIconId(nightMode));
 			} else {
-				iconsHelper.updateWidgetIcon(icon, widgetType);
+				icon.setImageResource(widgetType.getIconId(nightMode));
 			}
 
 			CharSequence title = widgetGroup != null
