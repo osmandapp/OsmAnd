@@ -135,9 +135,9 @@ public class WidgetDataHolder {
 	@Nullable
 	public String getSecondaryDescription() {
 		if (widgetGroup != null) {
-			return widgetGroup.getSecondaryDescriptionId(app);
+			return widgetGroup.getSecondaryDescription(app);
 		} else if (widgetType != null) {
-			return widgetType.getSecondaryDescriptionId(app);
+			return widgetType.getSecondaryDescription(app);
 		}
 		return null;
 	}

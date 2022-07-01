@@ -9,6 +9,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
 
@@ -23,11 +24,7 @@ public class TimeToNavigationPointWidgetState extends WidgetState {
 	public TimeToNavigationPointWidgetState(@NonNull OsmandApplication app, @Nullable String customId, boolean intermediate) {
 		super(app);
 		this.intermediate = intermediate;
-		String prefId = intermediate ? "show_arrival_time" : "show_intermediate_arrival_time";
-		if (!Algorithms.isEmpty(customId)) {
-			prefId += customId;
-		}
-		this.arrivalTimeOrTimeToGo = settings.registerBooleanPreference(prefId, true).makeProfile();
+		this.arrivalTimeOrTimeToGo = registerTimeTypePref(customId);
 	}
 
 	public boolean isIntermediate() {
@@ -57,6 +54,20 @@ public class TimeToNavigationPointWidgetState extends WidgetState {
 	@Override
 	public void changeToNextState() {
 		arrivalTimeOrTimeToGo.set(!arrivalTimeOrTimeToGo.get());
+	}
+
+	@Override
+	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		registerTimeTypePref(customId).setModeValue(appMode, arrivalTimeOrTimeToGo.getModeValue(appMode));
+	}
+
+	@NonNull
+	private OsmandPreference<Boolean> registerTimeTypePref(@Nullable String customId) {
+		String prefId = intermediate ? "show_arrival_time" : "show_intermediate_arrival_time";
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += customId;
+		}
+		return settings.registerBooleanPreference(prefId, true).makeProfile();
 	}
 
 	public enum TimeToNavigationPointState {

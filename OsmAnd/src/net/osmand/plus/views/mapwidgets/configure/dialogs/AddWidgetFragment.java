@@ -191,12 +191,14 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	private void inflateWidgetsList(@NonNull List<WidgetType> widgets) {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
+		WidgetGroup group = widgetsDataHolder.getWidgetGroup();
 
 		for (WidgetType widget : widgets) {
 			int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
 			View view = inflater.inflate(layoutId, container, false);
 			String title = getString(widget.titleId);
-			String desc = widget.descId != 0 ? getString(widget.descId) : null;
+			int descId = group != null ? widget.getGroupDescriptionId() : widget.descId;
+			String desc = descId == 0 ? null : getString(descId);
 			Drawable icon = getIcon(widget.getIconId(nightMode));
 			setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
 			container.addView(view);
