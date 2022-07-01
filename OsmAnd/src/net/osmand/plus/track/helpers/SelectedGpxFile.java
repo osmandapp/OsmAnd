@@ -126,6 +126,10 @@ public class SelectedGpxFile {
 		return Collections.unmodifiableSet(hiddenGroups);
 	}
 
+	public int getHiddenGroupsCount() {
+		return hiddenGroups.size();
+	}
+
 	public void addHiddenGroups(@Nullable String group) {
 		hiddenGroups.add(Algorithms.isBlank(group) ? null : group);
 	}
