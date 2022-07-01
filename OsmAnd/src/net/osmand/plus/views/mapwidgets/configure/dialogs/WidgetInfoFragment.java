@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -157,11 +158,19 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 
 	private void setupWidgetDescription() {
 		TextView tvDesc = view.findViewById(R.id.desc);
-		if (widgetType == null) {
-			AndroidUiHelper.updateVisibility(tvDesc, false);
-		} else {
+		String externalProviderPackage = widgetInfo.getExternalProviderPackage();
+		if (widgetType != null) {
 			tvDesc.setText(widgetType.descId);
+			return;
+		} else if (externalProviderPackage != null) {
+			ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(externalProviderPackage);
+			if (connectedApp != null) {
+				tvDesc.setText(connectedApp.getName());
+				return;
+			}
 		}
+
+		AndroidUiHelper.updateVisibility(tvDesc, false);
 	}
 
 	private void setupSelectableItem() {
