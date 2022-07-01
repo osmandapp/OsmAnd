@@ -20,7 +20,6 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
@@ -42,7 +41,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.TilePointsProvider;
@@ -78,7 +76,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private MultiProfileGeometryWay multiProfileGeometry;
 	private MultiProfileGeometryWayContext multiProfileGeometryWayContext;
 	private GpxGeometryWayContext wayContext;
-	private List<RenderableSegment> renderablesCached = new ArrayList<>();
+	private List<RenderableSegment> segmentsRenderablesCached = new ArrayList<>();
+	private List<RenderableSegment> approximationRenderablesCached = new ArrayList<>();
 	private int beforePointsCountCached;
 	private int afterPointsCountCached;
 	private int originalPointsCountCached;
@@ -323,10 +322,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated;
 			if (editingCtx.isInApproximationMode()) {
 				drawApproximatedLines(canvas, tb, updated);
-			} else if (editingCtx.isInMultiProfileMode()) {
+			}
+			if (editingCtx.isInMultiProfileMode()) {
 				if (hasMapRenderer) {
-					clearCachedCounters();
-					clearCachedRenderables();
+					clearCachedSegmentsPointsCounters();
+					clearCachedSegmentsRenderables();
 				}
 				boolean changed = multiProfileGeometryWayContext.setNightMode(settings.isNightMode());
 				changed |= multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(),
@@ -490,13 +490,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			boolean draw = forceDraw;
 			draw |= beforePointsCountCached != beforePointsCount;
 			draw |= afterPointsCountCached != afterPointsCount;
-			clearCachedCounters();
+			clearCachedSegmentsPointsCounters();
 			beforePointsCountCached = beforePointsCount;
 			afterPointsCountCached = afterPointsCount;
-			originalPointsCountCached = 0;
+
 			List<RenderableSegment> cached = new ArrayList<>();
 			if (draw) {
-				clearCachedRenderables();
+				clearCachedSegmentsRenderables();
 				int baseOrder = getBaseOrder() - 10;
 				QuadRect correctedQuadRect = getCorrectedQuadRect(tb.getLatLonBounds());
 				for (TrkSegment segment : segments) {
@@ -516,7 +516,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 								lineAttrs.paint.getStrokeWidth(), getDashPattern(lineAttrs.paint));
 					}
 				}
-				renderablesCached = cached;
+				segmentsRenderablesCached = cached;
 			}
 		} else {
 			for (TrkSegment segment : segments) {
@@ -538,11 +538,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				}
 				boolean draw = forceDraw;
 				draw |= originalPointsCountCached != originalPointsCount;
-				clearCachedCounters();
+				clearCachedOriginalPointsCounter();
 				originalPointsCountCached = originalPointsCount;
 				List<RenderableSegment> cached = new ArrayList<>();
 				if (draw) {
-					clearCachedRenderables();
+					clearCachedApproximationRenderables();
 					int baseOrder = getBaseOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tb.getLatLonBounds());
 					for (List<WptPt> points : originalPointsList) {
@@ -561,7 +561,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 									lineAttrs.paint.getStrokeWidth(), getDashPattern(lineAttrs.paint));
 						}
 					}
-					renderablesCached = cached;
+					approximationRenderablesCached = cached;
 				}
 			} else {
 				lineAttrs.customColorPaint.setColor(color);
@@ -570,28 +570,47 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
 				}
 			}
-		} else {
-			if (mapRenderer != null) {
-				clearCachedRenderables();
-			}
+		} else if (mapRenderer != null) {
+			clearCachedRenderables();
 		}
 	}
 
 	private void clearCachedCounters() {
-		originalPointsCountCached = 0;
-		beforePointsCountCached = 0;
+		clearCachedSegmentsPointsCounters();
+		clearCachedOriginalPointsCounter();
+	}
+
+	private void clearCachedSegmentsPointsCounters() {
 		afterPointsCountCached = 0;
+		beforePointsCountCached = 0;
+	}
+
+	private void clearCachedOriginalPointsCounter() {
+		originalPointsCountCached = 0;
 	}
 
 	private void clearCachedRenderables() {
-		List<RenderableSegment> cached = renderablesCached;
+		clearCachedSegmentsRenderables();
+		clearCachedApproximationRenderables();
+	}
+
+	private void clearCachedSegmentsRenderables() {
+		clearCachedRenderables(segmentsRenderablesCached);
+		segmentsRenderablesCached = new ArrayList<>();
+	}
+
+	private void clearCachedApproximationRenderables() {
+		clearCachedRenderables(approximationRenderablesCached);
+		approximationRenderablesCached = new ArrayList<>();
+	}
+
+	private void clearCachedRenderables(@NonNull List<RenderableSegment> cached) {
 		for (RenderableSegment renderer : cached) {
 			GpxGeometryWay geometryWay = renderer.getGeometryWay();
 			if (geometryWay != null) {
 				geometryWay.resetSymbolProviders();
 			}
 		}
-		renderablesCached = new ArrayList<>();
 	}
 
 	private void drawTrackChartPoints(@Nullable TrackChartPoints trackChartPoints,
@@ -662,7 +681,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		if (currentZoom >= 21) {
 			return true;
 		}
-		if(currentZoom < START_ZOOM) {
+		if (currentZoom < START_ZOOM) {
 			return false;
 		}
 		WptPt prev = null;
@@ -921,7 +940,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			PointI highlightedMarkerPosition = highlightedPointMarker != null ? highlightedPointMarker.getPosition() : null;
 			boolean highlightedPositionChanged = highlightedPosition != null && highlightedMarkerPosition != null
 					&& (highlightedPosition.getX() != highlightedMarkerPosition.getX()
-						|| highlightedPosition.getY() != highlightedMarkerPosition.getY());
+					|| highlightedPosition.getY() != highlightedMarkerPosition.getY());
 			if (highlightedPosition == null) {
 				if (highlightedPointMarker != null) {
 					highlightedPointMarker.setIsHidden(true);
