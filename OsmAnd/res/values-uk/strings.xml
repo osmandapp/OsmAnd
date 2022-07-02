@@ -4726,4 +4726,7 @@
     <string name="goods_delivery_desc">Транспортні засоби, що перевозять вантажі, можуть бути обмежені в доступі до деяких доріг.</string>
     <string name="map_marker_average_speed_desc">Вкажіть проміжок часу, впродовж якого буде виміряна середня швидкість для обчислення приблизного часу прибуття.</string>
     <string name="routing_attr_goods_restrictions_name">Доставлення товарів</string>
+    <string name="accessibility_2d_view_off">Огляд 2.5D вимк.</string>
+    <string name="accessibility_2d_view_on">Огляд 2.5D увімк.</string>
+    <string name="download_complete">Завантаження завершено</string>
 </resources>
