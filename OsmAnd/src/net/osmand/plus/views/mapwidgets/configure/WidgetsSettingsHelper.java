@@ -62,7 +62,7 @@ public class WidgetsSettingsHelper {
 		}
 
 		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(appMode);
-		settings.SHOW_COMPASS_ALWAYS.resetModeToDefault(appMode);
+		settings.COMPASS_VISIBILITY.resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
 		settings.QUICK_ACTION.resetModeToDefault(appMode);
 	}
@@ -72,7 +72,7 @@ public class WidgetsSettingsHelper {
 			copyWidgetsForPanel(fromAppMode, panel);
 		}
 		copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
-		copyPrefFromAppMode(settings.SHOW_COMPASS_ALWAYS, fromAppMode);
+		copyPrefFromAppMode(settings.COMPASS_VISIBILITY, fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
 		copyPrefFromAppMode(settings.QUICK_ACTION, fromAppMode);
 	}
