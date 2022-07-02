@@ -4731,4 +4731,7 @@
     <string name="lang_ckb">Curdo central</string>
     <string name="live_update_frequency_day_variant">As atualizações do mapa serão feitas todos os dias.</string>
     <string name="routing_attr_motor_type_name">Combustível usado pelo motor</string>
+    <string name="accessibility_2d_view_off">Vista 2.5D desligada</string>
+    <string name="accessibility_2d_view_on">Vista 2.5D ligada</string>
+    <string name="download_complete">Descarregar concluído</string>
 </resources>
