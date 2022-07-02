@@ -4731,4 +4731,7 @@
     <string name="goods_delivery_desc">Транспортным средствам, перевозящим товары, может быть ограничен доступ к некоторым дорогам.</string>
     <string name="goods_delivery_desc_4">Если вес вашего автомобиля превышает 3,5 тонны, вам необходимо использовать профиль грузовика.</string>
     <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
+    <string name="download_complete">Загрузка завершена</string>
+    <string name="accessibility_2d_view_on">2.5D вид вкл.</string>
+    <string name="accessibility_2d_view_off">2.5D вид выкл.</string>
 </resources>
