@@ -483,7 +483,7 @@
     <string name="rendering_attr_horseScale_name">Teskotii na konjskite pateki</string>
     <string name="map_widget_trip_recording_uphill">Nagornica</string>
     <string name="routing_attr_hazmat_category_name">Kategorija na opasni materii</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">A Bez ogranicuvanja</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Bez ogranicuvanja)</string>
     <string name="parking_widget_desc">Aplikacijata Vi go pokazuva rastojanieto od centarot na ekranot do parking prostorot.</string>
     <string name="map_markers_bar_widget_desc">Na grafičkata kontrola na gornata lenta može da go vidite rastojanieto i nasokata do markerot od momentalnata lokacija. Možno e da se konfigurira za da se vidat 1 ili 2 gorni markeri vo vidžetot.</string>
     <string name="av_notes_choose_action_widget_desc">Odberete akcija.</string>
@@ -2192,7 +2192,7 @@
     <string name="osm_live_payment_desc">Pretplatata se naplaḱa po izbran period. Otkažete go na Google Play vo sekoe vreme.</string>
     <string name="next_live_update_time">Sledno azuriranje:vo %1$s.</string>
     <string name="altitude_correction">Korekcija na nadmorska visočina</string>
-    <string name="no_altitude_data_desc">Možete da ja prikačite pesnata na patištata za da dobiete %1$s podatoci ili da ja presmetate onlajn.</string>
+    <string name="no_altitude_data_desc">Možete da ja prikačite patekata na patištata za da dobiete %1$s podatoci ili da ja presmetate onlajn.</string>
     <string name="enter_lon">Vnesete geografska dolžina</string>
     <string name="enter_lat">Vnesete geografska širina</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>

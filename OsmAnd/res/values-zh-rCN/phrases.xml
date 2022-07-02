@@ -913,8 +913,8 @@
     <string name="poi_rtsa_scale_filter">难度类别</string>
     <string name="poi_bulk_purchase">批量采购</string>
     <string name="poi_glacier_type">冰川类型</string>
-    <string name="poi_socket_type3_output_filter">第3类输出</string>
-    <string name="poi_socket_type2_output_filter">第2类输出</string>
+    <string name="poi_socket_type3_output_filter">Type 3 充电接口</string>
+    <string name="poi_socket_type2_output_filter">Type2 充电接口</string>
     <string name="poi_home_visit">家访</string>
     <string name="poi_service_car">汽车服务</string>
     <string name="poi_access_bus">公交车通道</string>
@@ -996,8 +996,8 @@
     <string name="poi_cash_withdrawal_bank_card">现金返还</string>
     <string name="poi_access_disabled">无障碍通道</string>
     <string name="poi_access_motorcycle">摩托车通道</string>
-    <string name="poi_socket_schuko_output_filter">Schuko 输出</string>
-    <string name="poi_socket_cee_blue_output_filter">CEE蓝色输出</string>
+    <string name="poi_socket_schuko_output_filter">Schuko 插头</string>
+    <string name="poi_socket_cee_blue_output_filter">蓝色的工业插头连接器 （CEE blue）插口</string>
     <string name="poi_caravans">拖挂房车</string>
     <string name="poi_drinking_water_refill">饮用水补充</string>
     <string name="poi_traffic_signals_arrow">箭头</string>
@@ -1314,7 +1314,7 @@
     <string name="poi_bird_hide">观鸟地点</string>
     <string name="poi_tactile_paving_no">没有盲道</string>
     <string name="poi_australian_football">澳式橄榄球</string>
-    <string name="poi_socket_chademo_output_filter">CHAdeMO 输出</string>
+    <string name="poi_socket_chademo_output_filter">CHAdeMO 充电接口</string>
     <string name="poi_beachvolleyball">沙滩排球</string>
     <string name="poi_bmx">小轮车</string>
     <string name="poi_laundry_service_no">无</string>
@@ -1434,7 +1434,7 @@
     <string name="poi_government_transportation">交通运输机构</string>
     <string name="poi_government_legislative">立法机构</string>
     <string name="poi_vhf">甚高频（VHF）频道</string>
-    <string name="poi_couloir"></string>
+    <string name="poi_couloir">峡谷</string>
     <string name="poi_location_overground">位置： 地上</string>
     <string name="poi_location_roof">位置： 屋顶</string>
     <string name="poi_lighting">照明灯具</string>
@@ -1526,7 +1526,7 @@
     <string name="poi_canoe">皮划艇</string>
     <string name="poi_archery">射箭</string>
     <string name="poi_fuel_electricity">电能</string>
-    <string name="poi_socket_type2_combo_output_filter">第2类组合输出</string>
+    <string name="poi_socket_type2_combo_output_filter">Type 2 混合接口</string>
     <string name="poi_visibility_area">能见度：区域</string>
     <string name="poi_recycling_animal_waste">动物粪便</string>
     <string name="poi_recycling_diapers">尿布</string>
@@ -1873,7 +1873,7 @@
     <string name="poi_military_naval_base">海军基地</string>
     <string name="poi_highway_steps">楼梯</string>
     <string name="poi_goods_designated">指定；轻型商用车辆指定访问</string>
-    <string name="poi_rcn_ref">区域自行车网络节点</string>
+    <string name="poi_rcn_ref">区域自行车骑行网络节点</string>
     <string name="poi_motorcycle_barrier">摩托车屏障</string>
     <string name="poi_rwn_ref">区域徒步旅行网络节点</string>
     <string name="poi_route_hiking_rwn_poi">区域徒步旅行路线</string>
@@ -1939,7 +1939,7 @@
     <string name="poi_social_centre">社交中心</string>
     <string name="poi_dance_floor">舞池</string>
     <string name="poi_nightclub">夜总会；迪斯科；舞厅</string>
-    <string name="poi_trail_riding_station">步道骑行站</string>
+    <string name="poi_trail_riding_station">骑行站</string>
     <string name="poi_trees_walnut">核桃</string>
     <string name="poi_trees_coconut">椰子</string>
     <string name="poi_service_electrical">维修电动汽车</string>
@@ -1954,7 +1954,7 @@
     <string name="poi_cuisine_donut">多纳圈；甜甜圈</string>
     <string name="poi_gambling_pachinko">弹珠机</string>
     <string name="poi_drink_wine_yes">酒：是</string>
-    <string name="poi_socket_tesla_standard_yes">特斯拉标准规范</string>
+    <string name="poi_socket_tesla_standard_yes">特斯拉插座</string>
     <string name="poi_mofa_no">助力摩托车访问：否</string>
     <string name="poi_planetarium">天文馆</string>
     <string name="poi_agrarian_yes">是；农业的</string>

@@ -235,7 +235,7 @@
     <string name="set_visible_time_for_all">Установити видимий час для всіх</string>
     <string name="visible_time_for_all">Показувати всім впродовж</string>
     <string name="set_time_description">Установіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
-    <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцеположенням.</string>
+    <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцем положення.</string>
     <string name="search_contacts">Пошук контактів</string>
     <string name="search_contacts_descr">Пошук у всіх своїх групах та контактах.</string>
     <string name="type_contact_or_group_name">Введіть назву контакту чи групи</string>
