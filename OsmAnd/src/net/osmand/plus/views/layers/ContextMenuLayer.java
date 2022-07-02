@@ -12,6 +12,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -23,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.lifecycle.Lifecycle.State;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -39,11 +41,13 @@ import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -107,6 +111,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private Object selectedObject;
 	private Object selectedObjectCached;
 
+	private boolean carView;
+
 	public ContextMenuLayer(@NonNull Context context) {
 		super(context);
 		selectionHelper = new MapSelectionHelper(context);
@@ -148,14 +154,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		Context context = getContext();
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		Drawable markerDrawable = AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu);
-		contextMarker.setImageDrawable(markerDrawable);
 		contextMarker.setClickable(true);
-		int minw = contextMarker.getDrawable().getMinimumWidth();
-		int minh = contextMarker.getDrawable().getMinimumHeight();
-		contextMarker.layout(0, 0, minw, minh);
 
-		contextMarkerImage = AndroidUtils.drawableToBitmap(markerDrawable);
+		updateMarker(true);
 
 		paint = new Paint();
 		paint.setColor(0x7f000000);
@@ -166,6 +167,29 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		outlinePaint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2f));
 		outlinePaint.setStrokeCap(Paint.Cap.ROUND);
 		outlinePaint.setColor(getContext().getResources().getColor(R.color.osmand_orange));
+	}
+
+	public void updateMarker(boolean forceUpdate) {
+		OsmandApplication app = getApplication();
+		boolean carView = app.getOsmandMap().getMapView().isCarView();
+		if (this.carView != carView || forceUpdate) {
+			this.carView = carView;
+
+			Context context = getContext();
+			if (carView) {
+				NavigationSession carNavigationSession = app.getCarNavigationSession();
+				if (carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
+					context = carNavigationSession.getCarContext();
+				}
+			}
+			Drawable markerDrawable = AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu);
+			contextMarker.setImageDrawable(markerDrawable);
+			int minw = contextMarker.getDrawable().getMinimumWidth();
+			int minh = contextMarker.getDrawable().getMinimumHeight();
+			contextMarker.layout(0, 0, minw, minh);
+
+			contextMarkerImage = AndroidUtils.drawableToBitmap(markerDrawable);
+		}
 	}
 
 	public Object getSelectedObject() {
@@ -271,6 +295,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		boolean showMarker = false;
+		updateMarker(false);
 		if (mInChangeMarkerPositionMode) {
 			if (menu != null && menu.getObject() == null) {
 				canvas.translate(box.getPixWidth() / 2f - contextMarker.getWidth() / 2f, box.getPixHeight() / 2f - contextMarker.getHeight());
