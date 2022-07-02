@@ -4719,4 +4719,7 @@
     <string name="reset_all_settings_desc">Êtes-vous certain de vouloir réinitialiser tous les paramètres à leurs valeurs par défaut \?</string>
     <string name="goods_delivery_desc_3">S\'applique uniquement aux véhicules ayant au moins quatre roues, transportant des marchandises et dont le poids ne dépasse pas 3,5 tonnes.</string>
     <string name="routing_attr_goods_restrictions_name">Livraison de marchandises</string>
+    <string name="accessibility_2d_view_on">Vue 2.5D activée</string>
+    <string name="download_complete">Téléchargement terminé</string>
+    <string name="accessibility_2d_view_off">Vue 2.5D désactivée</string>
 </resources>
