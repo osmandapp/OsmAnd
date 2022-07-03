@@ -19,17 +19,27 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
 public abstract class DashBaseFragment extends Fragment {
 
+	protected OsmandApplication app;
+	protected OsmandSettings settings;
 	protected DashboardOnMap dashboard;
 
 	private DismissListener defaultDismissListener;
 
 	public interface DismissListener {
 		void onDismiss();
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.app = requireMyApplication();
+		this.settings = app.getSettings();
 	}
 
 	@Override

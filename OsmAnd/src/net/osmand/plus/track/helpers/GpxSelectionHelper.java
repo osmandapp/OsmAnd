@@ -85,7 +85,7 @@ public class GpxSelectionHelper {
 				File file = new File(gpxEntry.getKey().path);
 				if (file.exists() && !file.isDirectory()) {
 					if (file.lastModified() > gpxEntry.getValue()) {
-						new GpxFileLoaderTask(file, result -> {
+						new GpxFileLoaderTask(file, null, result -> {
 							if (result != null) {
 								GpxSelectionParams params = GpxSelectionParams.newInstance()
 										.showOnMap().syncGroup().selectedByUser()
@@ -167,9 +167,9 @@ public class GpxSelectionHelper {
 	}
 
 	@Nullable
-	public SelectedGpxFile getSelectedFileByName(String path) {
+	public SelectedGpxFile getSelectedFileByName(String fileName) {
 		for (SelectedGpxFile s : selectedGPXFiles) {
-			if (s.getGpxFile().path.endsWith("/" + path)) {
+			if (s.getGpxFile().path.endsWith("/" + fileName)) {
 				return s;
 			}
 		}
@@ -447,20 +447,10 @@ public class GpxSelectionHelper {
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile.getGpxFileToDisplay());
 		} else {
-			String dialogTitle = app.getString(R.string.loading_smth, "");
-			String dialogMessage = app.getString(R.string.loading_data);
-			ProgressDialog progressDialog = showProgress && AndroidUtils.isActivityNotDestroyed(activity)
-					? ProgressDialog.show(activity, dialogTitle, dialogMessage)
-					: null;
-
-			GpxFileLoaderTask loadGpxTask = new GpxFileLoaderTask(file, gpxFile -> {
-				if (progressDialog != null) {
-					progressDialog.dismiss();
-				}
+			GpxFileLoaderTask.loadGpxFile(file, showProgress ? activity : null, gpxFile -> {
 				callback.processResult(gpxFile);
 				return true;
 			});
-			loadGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

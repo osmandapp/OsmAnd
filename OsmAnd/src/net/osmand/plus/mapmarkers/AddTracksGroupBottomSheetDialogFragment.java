@@ -19,6 +19,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -59,11 +60,15 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	};
 
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		dbHelper = app.getGpxDbHelper();
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 
 		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
 		recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
@@ -101,18 +106,18 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			fragment.setUsedOnMap(false);
 			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 		} else {
-			OsmandApplication app = getMyApplication();
-			if (app != null) {
-				GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
-				File gpx = dataItem.getFile();
-				if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
+			GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
+			File gpx = dataItem.getFile();
+			if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
+				GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
 					GPXFile res = GPXUtilities.loadGPXFile(gpx);
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().selectedAutomatically().saveSelection();
 					selectionHelper.selectGpxFile(res, params);
-				}
-				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
+					return true;
+				});
 			}
+			app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 		}
 		dismiss();
 	}

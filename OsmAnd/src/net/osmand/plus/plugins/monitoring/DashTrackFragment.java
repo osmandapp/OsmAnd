@@ -11,12 +11,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,9 +27,9 @@ import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -41,6 +38,9 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Denis
@@ -268,35 +268,31 @@ public class DashTrackFragment extends DashBaseFragment {
 			});
 		} else {
 			showOnMap.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_show_on_map));
-			showOnMap.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Runnable run = new Runnable() {
-						@Override
-						public void run() {
-							showOnMap(GPXUtilities.loadGPXFile(f));
-						}
-					};
-					run.run();
+			showOnMap.setOnClickListener(v -> GpxFileLoaderTask.loadGpxFile(f, getActivity(), gpxFile -> {
+				Activity activity = getActivity();
+				if (activity != null) {
+					showOnMap(activity, gpxFile);
 				}
-			});
+				return true;
+			}));
 		}
 	}
 
-	private void showOnMap(GPXUtilities.GPXFile file){
-		if (file.isEmpty()) {
-			Toast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
+	private void showOnMap(@NonNull Activity activity,@NonNull GPXFile gpxFile) {
+		if (gpxFile.isEmpty()) {
+			app.showToastMessage(R.string.gpx_file_is_empty);
 			return;
 		}
 
-		OsmandSettings settings = getMyApplication().getSettings();
-		if(file.getLastPoint() != null) {
-			settings.setMapLocationToShow(file.getLastPoint().lat, file.getLastPoint().lon, settings.getLastKnownMapZoom());
-		} else if(file.findPointToShow() != null) {
-			settings.setMapLocationToShow(file.findPointToShow().lat, file.findPointToShow().lon, settings.getLastKnownMapZoom());
+		WptPt point = gpxFile.getLastPoint();
+		if (point == null) {
+			point = gpxFile.findPointToShow();
 		}
-		getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(file);
-		MapActivity.launchMapActivityMoveToTop(getActivity());
+		if (point != null) {
+			settings.setMapLocationToShow(point.lat, point.lon, settings.getLastKnownMapZoom());
+		}
+		app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+		MapActivity.launchMapActivityMoveToTop(activity);
 	}
 
 	private void startHandler(final View v) {

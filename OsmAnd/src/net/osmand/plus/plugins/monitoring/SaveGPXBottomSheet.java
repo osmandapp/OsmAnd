@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.monitoring;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,12 +12,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -25,8 +20,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -39,6 +34,12 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
@@ -212,21 +213,20 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private void showOnMap(@NonNull FragmentActivity activity, @NonNull File f) {
-		AvailableGPXFragment.GpxInfo gpxInfo = new AvailableGPXFragment.GpxInfo();
-		gpxInfo.setGpx(GPXUtilities.loadGPXFile(f));
-		if (gpxInfo.gpx != null) {
-			GPXUtilities.WptPt loc = gpxInfo.gpx.findPointToShow();
+	private void showOnMap(@NonNull FragmentActivity activity, @NonNull File file) {
+		GpxFileLoaderTask.loadGpxFile(file, activity, gpxFile -> {
+			GPXUtilities.WptPt loc = gpxFile.findPointToShow();
 			if (loc != null) {
-				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxInfo.gpx);
-				if (activity instanceof MapActivity) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+				if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
 					MapActivity mapActivity = (MapActivity) activity;
 					OsmandMapTileView mapView = mapActivity.getMapView();
 					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, mapView.getZoom(), true);
 					mapView.refreshMap();
 				}
 			}
-		}
+			return true;
+		});
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull String fileName) {
