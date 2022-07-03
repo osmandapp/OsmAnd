@@ -4062,4 +4062,8 @@
     <string name="recording_can_not_be_played">Tidak dapat memutar rekaman.</string>
     <string name="download_using_mobile_internet">Tidak terhubung ke Wi-Fi. Gunakan koneksi ke Internet saat ini untuk mengunduh\?</string>
     <string name="wait_current_task_finished">Harap tunggu sampai tugas saat ini selesai</string>
+    <string name="save_global_track_interval">Interval pencatatan umum</string>
+    <string name="settings_preset_descr">Tampilan peta dan pengaturan navigasi diingat per profil penggunaan. Tetapkan profil bawaan Anda di sini.</string>
+    <string name="auto_follow_location_enabled">Tampilan peta tengah otomatis sedang digunakan.</string>
+    <string name="animate_routing_route_not_calculated">Harap hitung rute terlebih dahulu</string>
 </resources>
