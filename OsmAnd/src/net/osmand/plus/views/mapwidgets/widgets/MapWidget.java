@@ -77,6 +77,13 @@ public abstract class MapWidget {
 		return null;
 	}
 
+	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		WidgetState widgetState = getWidgetState();
+		if (widgetState != null) {
+			widgetState.copyPrefs(appMode, customId);
+		}
+	}
+
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}

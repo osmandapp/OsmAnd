@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/pressable_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="@dimen/content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/dialog_content_margin"
+			android:layout_height="@dimen/dialog_content_margin"
+			android:tint="?active_color_basic"
+			tools:src="@drawable/ic_action_settings" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			style="@style/TitleStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:maxLines="1"
+			android:ellipsize="end"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Settings" />
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/card_title_row_min_height"
+		android:background="?divider_color_basic"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+</LinearLayout>
