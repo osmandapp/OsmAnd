@@ -381,7 +381,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private void updateChartOnMap() {
 		if (hasVisibleGraph()) {
 			trackDetailsMenu.reset();
-			refreshMapCallback.refreshMap(false, false);
+			refreshMapCallback.refreshMap(false, false, true);
 		}
 	}
 

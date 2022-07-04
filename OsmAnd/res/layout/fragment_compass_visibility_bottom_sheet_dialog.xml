@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/map_widget_compass"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/favorites_icon_padding"
+			android:text="@string/compass_desc"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/always_visible_mode"
+		layout="@layout/compass_visibility_item" />
+
+	<include
+		android:id="@+id/always_hidden_mode"
+		layout="@layout/compass_visibility_item" />
+
+	<include
+		android:id="@+id/visible_if_map_rotated_mode"
+		layout="@layout/compass_visibility_item" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?divider_color_basic" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:orientation="horizontal"
+		android:gravity="center_vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/compass_click_desc"
+			android:textColor="?android:textColorSecondary" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="@dimen/dialog_content_margin"
+			android:layout_height="@dimen/dialog_content_margin"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:src="@drawable/ic_action_help"
+			app:tint="?secondary_icon_color" />
+
+	</LinearLayout>
+	
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -178,6 +178,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int startFinishPointsCountCached;
 	private int splitLabelsCountCached;
 	private int pointCountCached;
+	private int hiddenGroupsCountCached;
 	private boolean textVisibleCached;
 	private WptPtTileProvider pointsTileProvider;
 	private LocationPointsTileProvider trackChartPointsProvider;
@@ -866,16 +867,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 
 			int pointsCount = 0;
+			int hiddenGroupsCount = 0;
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				pointsCount += getSelectedFilePointsSize(g);
+				hiddenGroupsCount += g.getHiddenGroupsCount();
 			}
 			boolean textVisible = isTextVisible();
 			boolean changeMarkerPositionMode = contextMenuLayer.isInChangeMarkerPositionMode();
-			if (!forceUpdate && pointCountCached == pointsCount && textVisible == textVisibleCached
+			if (!forceUpdate && pointCountCached == pointsCount && hiddenGroupsCountCached == hiddenGroupsCount
+					&& textVisible == textVisibleCached
 					&& changeMarkerPositionModeCached == changeMarkerPositionMode && !mapActivityInvalidated) {
 				return;
 			}
 			pointCountCached = pointsCount;
+			hiddenGroupsCountCached = hiddenGroupsCount;
 			textVisibleCached = textVisible;
 			changeMarkerPositionModeCached = changeMarkerPositionMode;
 			clearPoints();
@@ -927,6 +932,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			highlightedPointLocationCached = null;
 			setHighlightedPointMarkerVisibility(false);
 			pointCountCached = 0;
+			hiddenGroupsCountCached = 0;
 			clearPoints();
 		}
 	}

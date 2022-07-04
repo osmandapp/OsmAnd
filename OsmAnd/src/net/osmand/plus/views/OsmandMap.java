@@ -1,8 +1,5 @@
 package net.osmand.plus.views;
 
-import static net.osmand.plus.auto.CarSurfaceView.MAP_DENSITY_DIVIDER_160;
-import static net.osmand.plus.auto.CarSurfaceView.TEXT_SCALE_DIVIDER_160;
-
 import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
@@ -201,22 +198,20 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public float getTextScale() {
 		float scale = app.getSettings().TEXT_SCALE.get();
-		return scale * getCarScaleCoef(true);
+		return scale * getCarDensityScaleCoef();
 	}
 
 	public float getMapDensity() {
 		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale * getCarScaleCoef(false);
+		return scale * getCarDensityScaleCoef();
 	}
 
-	public float getCarScaleCoef(boolean textScale) {
+	public float getCarDensityScaleCoef() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();
 			float density = mapView.getDensity();
-			if (density >= 2 && carViewDensity == 1) {
-				return textScale ? TEXT_SCALE_DIVIDER_160 : MAP_DENSITY_DIVIDER_160;
-			}
+			return carViewDensity / density;
 		}
 		return 1f;
 	}

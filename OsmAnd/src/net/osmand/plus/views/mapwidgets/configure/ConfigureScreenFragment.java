@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +15,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
@@ -36,6 +49,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -46,21 +61,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener {
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -248,15 +250,18 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private void setupButtonsCard() {
 		buttonsCard.removeAllViews();
 
-		buttonsCard.addView(createButtonWithSwitch(
-				R.drawable.ic_action_compass,
-				getString(R.string.map_widget_compass),
-				settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode),
-				false,
+		CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(selectedAppMode);
+		buttonsCard.addView(createButtonWithDesc(
+				compassVisibility.iconId,
+				compassVisibility.getTitle(app),
+				compassVisibility.getDescription(app),
+				true,
 				v -> {
-					boolean enabled = settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode);
-					settings.SHOW_COMPASS_ALWAYS.setModeValue(selectedAppMode, !enabled);
-					mapActivity.updateApplicationModeSettings();
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						CompassVisibilityBottomSheetDialogFragment.showInstance(fragmentManager, this, selectedAppMode);
+					}
 				}
 		));
 
@@ -328,6 +333,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
+	public void onCompassVisibilityUpdated(@NonNull CompassVisibility visibility) {
+		setupButtonsCard();
+	}
+
+	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
 		updateWidgetsCountForPanel(widgetInfo.widgetPanel);
 	}
@@ -344,6 +354,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Override
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
 		setupWidgetsCard();
+	}
+
+	@Override
+	public void onWidgetsCleared() {
+
 	}
 
 	private View createWidgetGroupView(@NonNull WidgetsPanel panel, boolean showShortDivider, boolean showLongDivider) {
@@ -440,7 +455,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private View createButtonWithDesc(int iconId,
 	                                  @NonNull String title,
-	                                  @NonNull String desc,
+	                                  @Nullable String desc,
 	                                  boolean enabled,
 	                                  OnClickListener listener) {
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
@@ -456,8 +471,10 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		tvTitle.setText(title);
 
 		TextView tvDesc = view.findViewById(R.id.description);
-		tvDesc.setVisibility(View.VISIBLE);
-		tvDesc.setText(desc);
+		if (desc != null) {
+			tvDesc.setText(desc);
+			AndroidUiHelper.updateVisibility(tvDesc, true);
+		}
 
 		setupClickListener(view, listener);
 		setupListItemBackground(view);

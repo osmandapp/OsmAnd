@@ -1,9 +1,11 @@
 package net.osmand.plus.views.mapwidgets.widgetstates;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class WidgetState {
 
@@ -26,4 +28,6 @@ public abstract class WidgetState {
 	public abstract int getSettingsIconId(boolean nightMode);
 
 	public abstract void changeToNextState();
+
+	public abstract void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId);
 }
