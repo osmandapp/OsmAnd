@@ -4712,7 +4712,7 @@
     <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
     <string name="next_live_update_time">Próxima actualización: en %1$s.</string>
     <string name="altitude_correction">Corrección de altitud</string>
-    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos %1$s o calcularlos en línea.</string>
+    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos de «%1$s» o calcularlo en línea.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible usado por el motor del vehículo, para calcular la emisión de CO₂.</string>
@@ -4736,7 +4736,7 @@
     <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana.</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
-    <string name="routing_attr_motor_type_gas_name">GNC</string>
+    <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
     <string name="lang_ckb">Kurdo central</string>
