@@ -31,6 +31,12 @@
     <string name="second_next_turn_widget_desc">The widget shows information about your second next turn which is enabled if turn within approaching distance.</string>
     <string name="next_turn_widget_desc">The widget shows information about your next turn with a picture of maneuver and distance to it.</string>
     <string name="widget_with_dot">Widget.</string>
+    <string name="compass_visible_if_map_rotated_desc">Hidden when North is up</string>
+    <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
+    <string name="compass_always_hidden">Always hidden</string>
+    <string name="compass_always_visible">Always visible</string>
+    <string name="compass_click_desc">Click on compass to switch map orientation mode.</string>
+    <string name="compass_desc">Shows direction to the north.</string>
     <string name="accessibility_2d_view_off">2.5D view Off</string>
     <string name="accessibility_2d_view_on">2.5D view On</string>
     <string name="download_complete">Download complete</string>
