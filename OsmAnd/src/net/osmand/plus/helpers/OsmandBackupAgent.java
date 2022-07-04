@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.app.backup.BackupAgentHelper;
+import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
@@ -66,6 +67,13 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 		long size = oldState.getStatSize();
 		if (size > 0 || isAutoBackupEnabled()) {
 			super.onBackup(oldState, data, newState);
+		}
+	}
+
+	@Override
+	public void onRestore(BackupDataInput data, int appVersionCode, ParcelFileDescriptor newState) throws IOException {
+		if (isAutoBackupEnabled()) {
+			super.onRestore(data, appVersionCode, newState);
 		}
 	}
 
