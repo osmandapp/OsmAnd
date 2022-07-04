@@ -45,15 +45,19 @@ public class RenderingIcons {
 		return bigIcons.containsKey(s);
 	}
 
-	public static synchronized Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+	public static synchronized Bitmap getBitmapFromVectorDrawable(@NonNull Context context, int drawableId) {
+		return getBitmapFromVectorDrawable(context, drawableId, 1f);
+	}
+
+	public static synchronized Bitmap getBitmapFromVectorDrawable(@NonNull Context context, int drawableId, float scale) {
 		Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
 		if (drawable == null) {
 			return null;
 		}
-		if (cacheBmp == null || cacheBmp.getWidth() != drawable.getIntrinsicWidth()
-				|| cacheBmp.getHeight() != drawable.getIntrinsicHeight()) {
-			cacheBmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-					drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		if (cacheBmp == null || cacheBmp.getWidth() != width || cacheBmp.getHeight() != height) {
+			cacheBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		}
 		cacheBmp.eraseColor(Color.TRANSPARENT);
 		Canvas canvas = new Canvas(cacheBmp);
@@ -62,7 +66,7 @@ public class RenderingIcons {
 		return cacheBmp;
 	}
 
-	private static synchronized byte[] getPngFromVectorDrawable(Context context, int drawableId) {
+	private static synchronized byte[] getPngFromVectorDrawable(@NonNull Context context, int drawableId) {
 		Bitmap bmp = getBitmapFromVectorDrawable(context, drawableId);
 		if (bmp == null) {
 			return null;

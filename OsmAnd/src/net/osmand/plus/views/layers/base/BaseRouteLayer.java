@@ -18,7 +18,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -47,6 +46,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 
 	protected boolean nightMode;
+	private boolean carView;
 
 	protected PreviewRouteLineInfo previewRouteLineInfo;
 	protected ColoringType routeColoringType = ColoringType.DEFAULT;
@@ -79,7 +79,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	}
 
 	private void init() {
-		float density = view.getDensity();
+		float density = view.isCarView() ? view.getCarViewDensity() : view.getDensity();
 		initAttrs(density);
 		initGeometries(density);
 		initPaints();
@@ -147,6 +147,16 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		}
 	}
 
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
+		boolean carView = view.isCarView();
+		if (this.carView != carView) {
+			this.carView = carView;
+			init();
+		}
+	}
+
 	@ColorInt
 	public int getRouteLineColor(boolean night) {
 		updateRouteColors(night);
@@ -165,8 +175,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(getAppMode());
 		}
-		float width = widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
-		return width * getCarScaleCoef(false);
+		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
 	}
 
 	@Nullable

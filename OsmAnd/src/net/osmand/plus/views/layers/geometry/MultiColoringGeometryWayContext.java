@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 
-import net.osmand.core.android.MapRendererView;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.plus.R;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public abstract class MultiColoringGeometryWayContext extends GeometryWayContext {
 
@@ -26,7 +24,13 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 		super(ctx, density);
 		borderPaint = createBorderPaint();
 		circlePaint = createCirclePaint();
-		specialArrowBitmap = AndroidUtils.drawableToBitmap(ContextCompat.getDrawable(ctx, R.drawable.mm_special_arrow_up));
+		float scale = getApp().getOsmandMap().getCarDensityScaleCoef();
+		Bitmap specialArrowBitmap = AndroidUtils.drawableToBitmap(ContextCompat.getDrawable(ctx, R.drawable.mm_special_arrow_up));
+		if (specialArrowBitmap != null && scale != 1f && scale > 0) {
+			specialArrowBitmap = AndroidUtils.scaleBitmap(specialArrowBitmap,
+					(int) (specialArrowBitmap.getWidth() * scale), (int) (specialArrowBitmap.getHeight() * scale), false);
+		}
+		this.specialArrowBitmap = specialArrowBitmap;
 	}
 
 	@NonNull
