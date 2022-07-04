@@ -111,44 +111,48 @@ public class NetworkRouteGpxApproximator {
 				}
 			}
 		}
-		for (int i = 0; i < gpxRoutePoints.size() - 1; i++) {
-			GpxRoutePoint start = gpxRoutePoints.get(i);
-			GpxRoutePoint nextPoint = gpxRoutePoints.get(i + 1);
+		for (int idx = 0; idx < gpxRoutePoints.size() - 1; idx++) {
+			GpxRoutePoint start = gpxRoutePoints.get(idx);
+			GpxRoutePoint nextPoint = gpxRoutePoints.get(idx + 1);
+			// 1. simple segment matching
 			NetworkRouteSegment matchingGpxSegment = getMatchingGpxSegments(start, nextPoint);
-			boolean matched = false;
 			if (matchingGpxSegment != null) {
-				// 1. simple segment matching
 				res.add(matchingGpxSegment);
-				matched = true;
+				continue;
 			}
-			if (!matched) {
-				// 2. skip gpx points
-				for (int j = 2; j < GPX_SKIP_POINTS_GPX_MAX; j++) {
-					nextPoint = gpxRoutePoints.get(i + j);
-					matchingGpxSegment = getMatchingGpxSegments(start, nextPoint);
-					if (matchingGpxSegment != null) {
-						boolean notFarAway = true;
-						// check that skipped points are not far away
-						for (int t = 1; t < j; t++) {
-							if (getOrthogonalDistance(gpxRoutePoints.get(i + t),
-									matchingGpxSegment) > GPX_MAX_INTER_SKIP_DISTANCE) {
-								notFarAway = false;
-								break;
-							}
-						}
-						if (notFarAway) {
-							res.add(matchingGpxSegment);
-							matched = true;
-							break;
-						}
-					}
-				}
+			// 2. skip extra gpx points
+			matchingGpxSegment = getGpxSegmentWithoutExtraGpxPoints(gpxRoutePoints, idx, start);
+			if (matchingGpxSegment != null) {
+				res.add(matchingGpxSegment);
 			}
-			if (!matched) {
-				// TODO add straight line if needed
-			}
+			// TODO add straight line if needed
 		}
 		return res;
+	}
+
+	private NetworkRouteSegment getGpxSegmentWithoutExtraGpxPoints(List<GpxRoutePoint> gpxRoutePoints, int idx,
+	                                                               GpxRoutePoint start) {
+		NetworkRouteSegment matchingGpxSegment = null;
+		for (int j = 2; j < GPX_SKIP_POINTS_GPX_MAX; j++) {
+			GpxRoutePoint nextPoint = gpxRoutePoints.get(idx + j);
+			matchingGpxSegment = getMatchingGpxSegments(start, nextPoint);
+			if (matchingGpxSegment != null) {
+				boolean notFarAway = true;
+				// check that skipped points are not far away
+				for (int t = 1; t < j; t++) {
+					GpxRoutePoint gpxRoutePoint = gpxRoutePoints.get(idx + t);
+					if (gpxRoutePoint.routePoint != null && getOrthogonalDistance(gpxRoutePoint,
+							matchingGpxSegment) > GPX_MAX_INTER_SKIP_DISTANCE) {
+						notFarAway = false;
+						break;
+					}
+				}
+				if (notFarAway) {
+					break;
+				}
+			}
+		}
+		return matchingGpxSegment;
 	}
 
 	private double getOrthogonalDistance(GpxRoutePoint gpxRoutePoint, NetworkRouteSegment matchingGpxSegment) {
