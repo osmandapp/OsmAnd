@@ -1,6 +1,10 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
+
 import android.app.Activity;
+import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -32,9 +36,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
@@ -117,8 +118,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				}
 			}
 			return false;
+		} else if (prefId.equals(settings.AUTO_BACKUP_ENABLED.getId())) {
+			BackupManager.dataChanged(app.getPackageName());
 		}
-
 		return super.onPreferenceChange(preference, newValue);
 	}
 
@@ -136,6 +138,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			setupUninstallSpeedCamerasPref();
 		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
 			setupLocationSourcePref();
+		} else if (prefId.equals(settings.AUTO_BACKUP_ENABLED.getId())) {
+			BackupManager.dataChanged(app.getPackageName());
 		}
 	}
 
@@ -168,7 +172,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupDefaultAppModePref() {
-		Preference defaultApplicationMode = (Preference) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
+		Preference defaultApplicationMode = findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
 		String summary;
 		int iconId;
 		if (settings.USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
@@ -188,7 +192,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (ctx == null) {
 			return;
 		}
-		ListPreferenceEx preferredLocale = (ListPreferenceEx) findPreference(settings.PREFERRED_LOCALE.getId());
+		ListPreferenceEx preferredLocale = findPreference(settings.PREFERRED_LOCALE.getId());
 		preferredLocale.setIcon(getActiveIcon(R.drawable.ic_action_map_language));
 		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
 
@@ -206,7 +210,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupExternalStorageDirPref() {
-		Preference externalStorageDir = (Preference) findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
+		Preference externalStorageDir = findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		externalStorageDir.setIcon(getActiveIcon(R.drawable.ic_action_folder));
 
 		DataStorageHelper holder = new DataStorageHelper(app);
@@ -233,13 +237,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private void setupSendAnonymousDataPref() {
 		boolean enabled = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get() || settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 
-		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
+		SwitchPreferenceCompat sendAnonymousData = findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
 		sendAnonymousData.setChecked(enabled);
 		sendAnonymousData.setIcon(getPersistentPrefIcon(R.drawable.ic_action_privacy_and_security));
 	}
 
 	private void setupDialogsAndNotificationsPref() {
-		Preference dialogsAndNotifications = (Preference) findPreference(DIALOGS_AND_NOTIFICATIONS_PREF_ID);
+		Preference dialogsAndNotifications = findPreference(DIALOGS_AND_NOTIFICATIONS_PREF_ID);
 		dialogsAndNotifications.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 		if (getSettings() == null) {
 			return;
@@ -258,7 +262,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupLocationSourcePref() {
-		Preference preference = (Preference) findPreference(settings.LOCATION_SOURCE.getId());
+		Preference preference = findPreference(settings.LOCATION_SOURCE.getId());
 		preference.setIcon(getContentIcon(R.drawable.ic_action_device_location));
 
 		LocationSource source = settings.LOCATION_SOURCE.get();
@@ -266,7 +270,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupEnableProxyPref() {
-		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
+		SwitchPreferenceEx enableProxy = findPreference(settings.ENABLE_PROXY.getId());
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
 	}
 
@@ -276,16 +280,14 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupAutoBackupPref() {
-		boolean enabled = settings.AUTO_BACKUP_ENABLED.get();
-		SwitchPreferenceEx preference = (SwitchPreferenceEx) findPreference(OsmandSettings.AUTO_BACKUP_ENABLED_ID);
+		SwitchPreferenceEx preference = findPreference(settings.AUTO_BACKUP_ENABLED.getId());
 		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_android));
-		preference.setChecked(enabled);
 		preference.setDescription(R.string.auto_backup_preference_desc);
 	}
 
 	private void setupUninstallSpeedCamerasPref() {
 		boolean uninstalled = settings.SPEED_CAMERAS_UNINSTALLED.get();
-		Preference uninstallSpeedCameras = (Preference) findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		Preference uninstallSpeedCameras = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
 		if (!uninstalled) {
 			uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
 		}
