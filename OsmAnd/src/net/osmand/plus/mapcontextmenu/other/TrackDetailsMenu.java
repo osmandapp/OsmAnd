@@ -61,7 +61,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class TrackDetailsMenu {
@@ -255,23 +254,15 @@ public class TrackDetailsMenu {
 				} else {
 					toolbarController.setTitle(mapActivity.getString(R.string.rendering_category_details));
 				}
-				toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						MapActivity mapActivity = getMapActivity();
-						if (mapActivity != null) {
-							mapActivity.onBackPressed();
-						}
+				toolbarController.setOnBackButtonClickListener(v -> {
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						activity.onBackPressed();
 					}
 				});
 				int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
 				toolbarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
-				toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						hide(false);
-					}
-				});
+				toolbarController.setOnCloseButtonClickListener(v -> hide(false));
 				mapActivity.showTopToolbar(toolbarController);
 			}
 			mapActivity.refreshMap();
@@ -464,11 +455,11 @@ public class TrackDetailsMenu {
 		return -1;
 	}
 
-	public void refreshChart(LineChart chart, boolean forceFit) {
-		refreshChart(chart, true, forceFit);
+	public void refreshChart(LineChart chart, boolean forceFit, boolean recalculateXAxis) {
+		refreshChart(chart, true, forceFit, recalculateXAxis);
 	}
 
-	public void refreshChart(LineChart chart, boolean fitTrackOnMap, boolean forceFit) {
+	public void refreshChart(LineChart chart, boolean fitTrackOnMap, boolean forceFit, boolean recalculateXAxis) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
@@ -514,7 +505,7 @@ public class TrackDetailsMenu {
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
-		if (shouldShowXAxisPoints()) {
+		if (recalculateXAxis && shouldShowXAxisPoints()) {
 			trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
 		}
 		if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
@@ -582,11 +573,11 @@ public class TrackDetailsMenu {
 			return;
 		}
 
-		final LineChart chart = (LineChart) parentView.findViewById(R.id.chart);
+		final LineChart chart = parentView.findViewById(R.id.chart);
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
-				refreshChart(chart, false);
+				refreshChart(chart, false, false);
 			}
 
 			@Override
@@ -594,39 +585,7 @@ public class TrackDetailsMenu {
 
 			}
 		});
-//		final float minDragTriggerDist = AndroidUtils.dpToPx(app, 3);
-//		chart.setOnTouchListener(new BarLineChartTouchListener(chart, chart.getViewPortHandler().getMatrixTouch(), 3f) {
-//			private PointF touchStartPoint = new PointF();
-//
-//			@SuppressLint("ClickableViewAccessibility")
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				switch (event.getAction() & MotionEvent.ACTION_MASK) {
-//					case MotionEvent.ACTION_DOWN:
-//						saveTouchStart(event);
-//						break;
-//					case MotionEvent.ACTION_POINTER_DOWN:
-//						if (event.getPointerCount() >= 2) {
-//							saveTouchStart(event);
-//						}
-//						break;
-//					case MotionEvent.ACTION_MOVE:
-//						if (mTouchMode == NONE && mChart.hasNoDragOffset()) {
-//							float touchDistance = distance(event.getX(), touchStartPoint.x, event.getY(), touchStartPoint.y);
-//							if (Math.abs(touchDistance) > minDragTriggerDist) {
-//								mTouchMode = DRAG;
-//							}
-//						}
-//						break;
-//				}
-//				return super.onTouch(v, event);
-//			}
-//
-//			private void saveTouchStart(MotionEvent event) {
-//				touchStartPoint.x = event.getX();
-//				touchStartPoint.y = event.getY();
-//			}
-//		});
+
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
 			boolean hasTranslated = false;
 			float highlightDrawX = -1;
@@ -658,7 +617,7 @@ public class TrackDetailsMenu {
 							lastPerformedGesture == ChartGesture.ROTATE) {
 
 						gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-						refreshChart(chart, false);
+						refreshChart(chart, false, true);
 					}
 				}
 			}
@@ -690,7 +649,7 @@ public class TrackDetailsMenu {
 					Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
 					if (h != null) {
 						chart.highlightValue(h);
-						refreshChart(chart, false);
+						refreshChart(chart, false, false);
 					}
 				}
 			}
@@ -726,20 +685,17 @@ public class TrackDetailsMenu {
 			}
 		}
 
-		Collections.sort(dataSets, new Comparator<ILineDataSet>() {
-			@Override
-			public int compare(ILineDataSet ds1, ILineDataSet ds2) {
-				OrderedLineDataSet dataSet1 = (OrderedLineDataSet) ds1;
-				OrderedLineDataSet dataSet2 = (OrderedLineDataSet) ds2;
-				return dataSet1.getPriority() > dataSet2.getPriority() ? -1 : (dataSet1.getPriority() == dataSet2.getPriority() ? 0 : 1);
-			}
+		Collections.sort(dataSets, (ds1, ds2) -> {
+			OrderedLineDataSet dataSet1 = (OrderedLineDataSet) ds1;
+			OrderedLineDataSet dataSet2 = (OrderedLineDataSet) ds2;
+			return Float.compare(dataSet2.getPriority(), dataSet1.getPriority());
 		});
 		chart.setData(new LineData(dataSets));
 		updateChart(chart);
 
 		View yAxis = parentView.findViewById(R.id.y_axis);
-		ImageView yAxisIcon = (ImageView) parentView.findViewById(R.id.y_axis_icon);
-		TextView yAxisTitle = (TextView) parentView.findViewById(R.id.y_axis_title);
+		ImageView yAxisIcon = parentView.findViewById(R.id.y_axis_icon);
+		TextView yAxisTitle = parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
 		final List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		boolean hasSlopeChart = false;
@@ -770,32 +726,26 @@ public class TrackDetailsMenu {
 		yAxisIcon.setImageDrawable(GPXDataSetType.getImageDrawable(app, gpxItem.chartTypes));
 		yAxisTitle.setText(GPXDataSetType.getName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
-			yAxis.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					List<PopUpMenuItem> items = new ArrayList<>();
-					for (GPXDataSetType[] types : availableTypes) {
-						String title = GPXDataSetType.getName(app, types);
-						Drawable icon = GPXDataSetType.getImageDrawable(app, types);
-						items.add(new PopUpMenuItem.Builder(app)
-								.setTitle(title)
-								.setIcon(icon)
-								.create());
-					}
-					AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
-						@Override
-						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-							fitTrackOnMapForbidden = true;
-							GpxDisplayItem gpxItem = getGpxItem();
-							gpxItem.chartTypes = availableTypes.get(position);
-							update();
-							fitTrackOnMapForbidden = false;
-						}
-					};
-					new PopUpMenuHelper.Builder(v, items, nightMode)
-							.setListener(listener)
-							.show();
+			yAxis.setOnClickListener(v -> {
+				List<PopUpMenuItem> items = new ArrayList<>();
+				for (GPXDataSetType[] types : availableTypes) {
+					String title = GPXDataSetType.getName(app, types);
+					Drawable icon = GPXDataSetType.getImageDrawable(app, types);
+					items.add(new PopUpMenuItem.Builder(app)
+							.setTitle(title)
+							.setIcon(icon)
+							.create());
 				}
+				AdapterView.OnItemClickListener listener = (parent, view, position, id) -> {
+					fitTrackOnMapForbidden = true;
+					GpxDisplayItem item = getGpxItem();
+					item.chartTypes = availableTypes.get(position);
+					update();
+					fitTrackOnMapForbidden = false;
+				};
+				new PopUpMenuHelper.Builder(v, items, nightMode)
+						.setListener(listener)
+						.show();
 			});
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -805,8 +755,8 @@ public class TrackDetailsMenu {
 		}
 
 		View xAxis = parentView.findViewById(R.id.x_axis);
-		ImageView xAxisIcon = (ImageView) parentView.findViewById(R.id.x_axis_icon);
-		TextView xAxisTitle = (TextView) parentView.findViewById(R.id.x_axis_title);
+		ImageView xAxisIcon = parentView.findViewById(R.id.x_axis_icon);
+		TextView xAxisTitle = parentView.findViewById(R.id.x_axis_title);
 		View xAxisArrow = parentView.findViewById(R.id.x_axis_arrow);
 		if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time));
@@ -819,32 +769,26 @@ public class TrackDetailsMenu {
 			xAxisTitle.setText(app.getString(R.string.distance));
 		}
 		if (analysis.isTimeSpecified() && !hasSlopeChart) {
-			xAxis.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					List<PopUpMenuItem> items = new ArrayList<>();
-					for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
-						items.add(new PopUpMenuItem.Builder(app)
-								.setTitleId(type.getStringId())
-								.setIcon(type.getImageDrawable(app))
-								.create());
-					}
-					new PopUpMenuHelper.Builder(v, items, nightMode)
-							.setListener(new AdapterView.OnItemClickListener() {
-								@Override
-								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-									fitTrackOnMapForbidden = true;
-									GpxDisplayItem gpxItem = getGpxItem();
-									if (gpxItem != null) {
-										gpxItem.chartAxisType = GPXDataSetAxisType.values()[position];
-										gpxItem.chartHighlightPos = -1;
-										gpxItem.chartMatrix = null;
-										update();
-									}
-									fitTrackOnMapForbidden = false;
-								}
-							}).show();
+			xAxis.setOnClickListener(v -> {
+				List<PopUpMenuItem> items = new ArrayList<>();
+				for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
+					items.add(new PopUpMenuItem.Builder(app)
+							.setTitleId(type.getStringId())
+							.setIcon(type.getImageDrawable(app))
+							.create());
 				}
+				new PopUpMenuHelper.Builder(v, items, nightMode)
+						.setListener((parent, view, position, id) -> {
+							fitTrackOnMapForbidden = true;
+							GpxDisplayItem item = getGpxItem();
+							if (item != null) {
+								item.chartAxisType = GPXDataSetAxisType.values()[position];
+								item.chartHighlightPos = -1;
+								item.chartMatrix = null;
+								update();
+							}
+							fitTrackOnMapForbidden = false;
+						}).show();
 			});
 			xAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -853,7 +797,7 @@ public class TrackDetailsMenu {
 			xAxisArrow.setVisibility(View.GONE);
 		}
 
-		refreshChart(chart, forceFitTrackOnMap);
+		refreshChart(chart, forceFitTrackOnMap, true);
 	}
 
 	private void updateChart(LineChart chart) {
