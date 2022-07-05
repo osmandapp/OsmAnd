@@ -2980,7 +2980,7 @@
     <string name="custom_routing">Perfil de navegación personalizado</string>
     <string name="special_routing_type">Navegación especial</string>
     <string name="third_party_routing_type">Navegación de terceros</string>
-    <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
+    <string name="application_profiles_descr">Perfiles visibles en la aplicación.</string>
     <string name="application_profiles">Perfiles de la aplicación</string>
     <string name="quick_action_need_to_add_item_to_list">Añadir al menos un elemento a la lista en los ajustes de «Acción rápida»</string>
     <string name="routing_attr_piste_type_downhill_name">Esquí alpino y de descenso</string>
@@ -3860,7 +3860,7 @@
     <string name="app_mode_motorboat">Lancha a motor</string>
     <string name="shared_string_resources">Recursos</string>
     <string name="approximate_file_size">Tamaño aproximado del archivo</string>
-    <string name="select_data_to_export">Marca los datos que serán exportados al archivo.</string>
+    <string name="select_data_to_export">Marca los datos a exportar al archivo.</string>
     <string name="file_size_needed_for_import">Necesario para importar</string>
     <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, libera algo de espacio o desmarca algunos elementos a exportar.</string>
     <string name="export_not_enough_space">Sin espacio suficiente</string>
@@ -3870,8 +3870,8 @@
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
 \nWeb / Wikimedia (fotos de PDI según datos de OpenStreetMap).</string>
-    <string name="select_groups_for_import">Marca los grupos que serán importados.</string>
-    <string name="select_items_for_import">Marca los elementos que serán importados.</string>
+    <string name="select_groups_for_import">Marca los grupos a importar.</string>
+    <string name="select_items_for_import">Marca los elementos a importar.</string>
     <string name="use_dev_url_descr">Cambia a la versión para desarrolladores «dev.openstreetmap.org» en lugar de openstreetmap.org para probar la carga de PDI, notas de OSM y archivos GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
     <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
@@ -4713,7 +4713,7 @@
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
-    <string name="routing_attr_motor_type_gas_name">GNC</string>
+    <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible usado por el motor del vehículo, para calcular la emisión de CO₂.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="routing_attr_motor_type_name">Combustible usado por el motor</string>
@@ -4735,11 +4735,14 @@
     <string name="reset_all_settings_desc">¿Restablecer todos los ajustes a los predefinidos\?</string>
     <string name="goods_delivery_desc_4">Si el peso del vehículo es superior a 3,5 toneladas, debes usar el perfil de camión.</string>
     <string name="updated_map_time">Actualizado: %1$s.</string>
-    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos %1$s o calcularlos en línea.</string>
+    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos de «%1$s» o calcularlo en línea.</string>
     <string name="altitude_correction">Corrección de altitud</string>
     <string name="goods_delivery_desc">Los vehículos de transporte de mercancías pueden tener restringido el acceso a algunos caminos.</string>
     <string name="calculate_online_altitude_descr">Calcula la altitud en línea en los servidores de OsmAnd basándose en las imágenes de satélite y en los modelos digitales de elevación. Podría variar de la altitud registrada por el dispositivo y podría usarse como corrección de altitud.</string>
     <string name="lang_ckb">Kurdo central</string>
     <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
     <string name="routing_attr_goods_restrictions_name">Entrega de mercancías</string>
+    <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
+    <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
+    <string name="download_complete">Descarga completa</string>
 </resources>

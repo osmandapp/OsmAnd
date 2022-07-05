@@ -4612,7 +4612,7 @@
     <string name="turn_on_public_transport_description">Увімкніть, щоб побачити маршрути громадського транспорту на мапі.</string>
     <string name="av_def_action_choose">За запитом</string>
     <string name="coordinates_widget_secondary_desc">Формат координат може бути змінений на %1$s – %2$s – %3$s.</string>
-    <string name="widget_secondary_desc_part_of">Частина плагіну %1$s.</string>
+    <string name="widget_secondary_desc_part_of">Частина втулку %1$s.</string>
     <string name="elevation_profile_widget_desc">Віджет показує профіль висоти та нахилу поточного маршруту.</string>
     <string name="parking_widget_desc">Віджет, який показує відстань від центру екрана до місця для паркування.</string>
     <string name="mapillary_widget_desc">Віджет, який забезпечує швидкий доступ до програми Mapillary для додавання зображень у шарі вулиць.</string>

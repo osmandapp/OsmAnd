@@ -4721,4 +4721,7 @@
     <string name="live_update_frequency_week_variant">Aktualizácie máp budú kontrolované každý týždeň.</string>
     <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd na základe satelitných snímkov a výškových modelov. Môže sa líšiť od nadmorskej výšky zaznamenanej zariadením a môže byť použitá ako oprava výšky.</string>
     <string name="lang_ckb">Kurdsky Sorání</string>
+    <string name="accessibility_2d_view_on">2.5D zobrazenie Zapnuté</string>
+    <string name="download_complete">Sťahovanie dokončené</string>
+    <string name="accessibility_2d_view_off">2.5D zobrazenie Vypnuté</string>
 </resources>
