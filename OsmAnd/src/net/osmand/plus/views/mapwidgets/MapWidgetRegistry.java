@@ -1,31 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
-
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorRes;
@@ -59,6 +33,32 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
 
 public class MapWidgetRegistry {
 
@@ -134,6 +134,17 @@ public class MapWidgetRegistry {
 	public void clearWidgets() {
 		allWidgets.clear();
 		notifyWidgetsCleared();
+	}
+
+	public boolean isAnyWidgetOfTypeVisible(@NonNull WidgetType widgetType) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		List<MapWidgetInfo> widgets = getWidgetInfoForType(widgetType);
+		for (MapWidgetInfo widgetInfo : widgets) {
+			if (widgetInfo.isEnabledForAppMode(appMode)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isWidgetVisible(@NonNull String widgetId) {
@@ -215,6 +226,17 @@ public class MapWidgetRegistry {
 		}
 
 		allWidgets = newAllWidgets;
+	}
+
+	@NonNull
+	public List<MapWidgetInfo> getWidgetInfoForType(@NonNull WidgetType widgetType) {
+		List<MapWidgetInfo> widgets = new ArrayList<>();
+		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
+			if (widgetInfo.getWidgetType() == widgetType) {
+				widgets.add(widgetInfo);
+			}
+		}
+		return widgets;
 	}
 
 	@Nullable

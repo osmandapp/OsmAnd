@@ -1,12 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +13,13 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 
 public class SideWidgetInfo extends MapWidgetInfo {
 
