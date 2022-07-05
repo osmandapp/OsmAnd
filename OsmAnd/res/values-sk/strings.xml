@@ -1041,7 +1041,7 @@
     <string name="speech_rate">Rýchlosť reči</string>
     <string name="guidance_preferences_descr">Nastavenia navigácie</string>
     <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
-    <string name="app_mode_truck">Kamión</string>
+    <string name="app_mode_truck">Nákladné auto</string>
     <string name="copying_osmand_files_descr">Kopírujem dátové súbory OsmAnd do nového cieľa (%s)…</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd…</string>
     <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa…</string>
@@ -3490,7 +3490,7 @@
 \nVypnite nepoužívané moduly pre skrytie ich ovládacích prvkov. %1$s.</string>
     <string name="ui_customization_short_descr">Položky v úvodnom paneli a kontextovom menu</string>
     <string name="ui_customization">Prispôsobenie používateľského rozhrania</string>
-    <string name="shared_string_drawer">Úvodný panel</string>
+    <string name="shared_string_drawer">Hlavné menu</string>
     <string name="context_menu_actions">Akcie kontextového menu</string>
     <string name="reorder_or_hide_from">Preusporiadajte alebo skryte položky z %1$s.</string>
     <string name="shared_string_divider">Rozdeľovač</string>
