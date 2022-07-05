@@ -39,7 +39,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -203,21 +202,17 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	public boolean isRulerWidgetOn() {
+		boolean isWidgetVisible = false;
 		List<MapWidgetInfo> widgets = widgetRegistry.getWidgetInfoForType(RADIUS_RULER);
-		if (!Algorithms.isEmpty(widgets)) {
-			boolean visible = false;
-			for (MapWidgetInfo widget : widgets) {
-				if (WidgetsPanel.RIGHT == widget.widgetPanel) {
-					visible = isWidgetVisible(widget) && isRightPanelVisible();
-				} else {
-					visible = isWidgetVisible(widget) && isLeftPanelVisible();
-				}
-				if (visible) {
-					return true;
-				}
+		for (MapWidgetInfo widget : widgets) {
+			if (WidgetsPanel.RIGHT == widget.widgetPanel) {
+				isWidgetVisible = isWidgetVisible(widget) && isRightPanelVisible();
+			} else {
+				isWidgetVisible = isWidgetVisible(widget) && isLeftPanelVisible();
 			}
+			if (isWidgetVisible) break;
 		}
-		return false;
+		return isWidgetVisible;
 	}
 
 	private boolean isWidgetVisible(@NonNull MapWidgetInfo widgetInfo) {
