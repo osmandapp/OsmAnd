@@ -4734,4 +4734,5 @@
     <string name="download_complete">Загрузка завершена</string>
     <string name="accessibility_2d_view_on">2.5D вид вкл.</string>
     <string name="accessibility_2d_view_off">2.5D вид выкл.</string>
+    <string name="auto_backup_title">Автоматическое резервное копирование</string>
 </resources>
