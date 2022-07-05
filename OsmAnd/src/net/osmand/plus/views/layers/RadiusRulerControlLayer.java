@@ -196,7 +196,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	public boolean rulerModeOn() {
 		MapWidgetRegistry mapWidgetRegistry = getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		return mapWidgetRegistry.isWidgetOrAnyDuplicateVisible(RADIUS_RULER.id)
+		return mapWidgetRegistry.isAnyWidgetOfTypeVisible(RADIUS_RULER)
 				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
 	}
 

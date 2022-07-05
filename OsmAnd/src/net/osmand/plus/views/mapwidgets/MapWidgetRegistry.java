@@ -136,9 +136,9 @@ public class MapWidgetRegistry {
 		notifyWidgetsCleared();
 	}
 
-	public boolean isWidgetOrAnyDuplicateVisible(@NonNull String originalWidgetId) {
+	public boolean isAnyWidgetOfTypeVisible(@NonNull WidgetType widgetType) {
 		ApplicationMode appMode = settings.getApplicationMode();
-		List<MapWidgetInfo> widgets = getWidgetAndDuplicatesInfo(originalWidgetId);
+		List<MapWidgetInfo> widgets = getWidgetInfoForType(widgetType);
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.isEnabledForAppMode(appMode)) {
 				return true;
@@ -229,10 +229,10 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
-	public List<MapWidgetInfo> getWidgetAndDuplicatesInfo(@NonNull String originalWidgetId) {
+	public List<MapWidgetInfo> getWidgetInfoForType(@NonNull WidgetType widgetType) {
 		List<MapWidgetInfo> widgets = new ArrayList<>();
 		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
-			if (widgetInfo.key != null && widgetInfo.key.startsWith(originalWidgetId)) {
+			if (widgetInfo.getWidgetType() == widgetType) {
 				widgets.add(widgetInfo);
 			}
 		}
