@@ -4718,4 +4718,7 @@
     <string name="reset_all_settings_desc">Ali si prepričan/a, da želiš ponastaviti vse nastavitve na privzete\?</string>
     <string name="goods_delivery_desc_3">Velja samo za vozila, ki prevažajo blago, imajo vsaj štiri kolesa in tehtajo največ 3,5 tone.</string>
     <string name="routing_attr_goods_restrictions_name">Dostava blaga</string>
+    <string name="download_complete">Prenos končan</string>
+    <string name="accessibility_2d_view_off">2.5D pogled Izklopljen</string>
+    <string name="accessibility_2d_view_on">2.5D pogled Vklopljen</string>
 </resources>
