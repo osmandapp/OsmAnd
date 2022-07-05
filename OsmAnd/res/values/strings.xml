@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="auto_backup_preference_desc">By default Android saves backups of favourites, map tokens and osmand settings to restore them on new devices or after reinstallation, this backup is limited to 25 MB.\nIf you are using OsmAnd Cloud, this can lead to misunderstandings after reinstallation.</string>
+    <string name="auto_backup_title">Auto-backup</string>
     <string name="duplacate_widget_added_snackbar">A duplicate widget is added next in the list.</string>
     <string name="shared_string_duplicate">Duplicate</string>
     <string name="av_notes_photo_widget_desc">Taping on the widget allows for taking a photo.</string>
