@@ -114,10 +114,12 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().selectedAutomatically().saveSelection();
 					selectionHelper.selectGpxFile(res, params);
+					app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 					return true;
 				});
+			} else {
+				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 			}
-			app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 		}
 		dismiss();
 	}
