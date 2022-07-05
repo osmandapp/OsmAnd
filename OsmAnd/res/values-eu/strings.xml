@@ -4532,4 +4532,11 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_description">Hautatu gidatzeko helburua ibilbide laburragoa, azkarragoa edo seguruagoa lortzeko</string>
     <string name="routing_engine_vehicle_type_hgv">Ibilgailu astunak</string>
     <string name="edit_track">Editatu arrastoa</string>
+    <string name="auto_25_chars_route_tl_kr">Biratu ezkerrera eta mantendu eskuinean</string>
+    <string name="auto_25_chars_route_tr_kl">Biratu eskuinera eta mantendu ezkerrean</string>
+    <string name="auto_25_chars_route_roundabout_kl">Hartu %1$d irteera eta ezkerrean mantendu</string>
+    <string name="auto_25_chars_route_tr_kr">Biratu eskuinera eta mantendu eskuinean</string>
+    <string name="auto_25_chars_route_tu_kr">Buelta eman eta eskuinean mantendu</string>
+    <string name="auto_25_chars_route_tl_kl">Biratu ezkerrera eta mantendu ezkerrean</string>
+    <string name="auto_25_chars_route_tu_kl">Buelta eman eta ezkerrean mantendu</string>
 </resources>
