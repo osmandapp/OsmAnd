@@ -487,8 +487,12 @@ public class ImportHelper {
 	                              boolean useImportDir, @Nullable OnSuccessfulGpxImport onSuccessfulGpxImport) {
 		String existingFilePath = getExistingFilePath(app, name, fileSize);
 		if (existingFilePath != null) {
+			if (onSuccessfulGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
+				showGpxContextMenu(existingFilePath);
+			} else {
+				showNeededScreen(onSuccessfulGpxImport, gpxFile);
+			}
 			app.showToastMessage(R.string.file_already_imported);
-			showNeededScreen(onSuccessfulGpxImport, gpxFile);
 		} else {
 			File destinationDir = useImportDir
 					? app.getAppPath(GPX_IMPORT_DIR)
