@@ -4745,4 +4745,37 @@
     <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
     <string name="download_complete">Descarga completa</string>
+    <string name="auto_backup_title">Copia de seguridad automática</string>
+    <string name="duplacate_widget_added_snackbar">Se ha añadido un widget duplicado en la siguiente lista.</string>
+    <string name="shared_string_duplicate">Duplicar</string>
+    <string name="av_notes_photo_widget_desc">Pulsa el widget para tomar una foto.</string>
+    <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar notas de audio.</string>
+    <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
+    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
+    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
+    <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación de la traza (en minutos/horas) del viaje registrado actual.</string>
+    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
+    <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
+    <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
+    <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
+    <string name="distance_to_destination_widget_desc">Muestra la distancia que queda hasta el último punto de destino.</string>
+    <string name="second_next_turn_widget_desc">Muestra la información sobre el segundo próximo giro, que se activa al aproximarse a este giro.</string>
+    <string name="next_turn_widget_desc">Muestra información sobre el próximo giro con una imagen de la maniobra y la distancia hasta ella.</string>
+    <string name="widget_with_dot">Widget.</string>
+    <string name="compass_visible_if_map_rotated_desc">Se oculta cuando el Norte se encuentra arriba</string>
+    <string name="compass_visible_if_map_rotated">Visible al girar el mapa</string>
+    <string name="compass_always_hidden">Siempre oculto</string>
+    <string name="compass_always_visible">Siempre visible</string>
+    <string name="compass_desc">Muestra la dirección hacia el norte.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
+    <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar, esta copia de seguridad está limitada a 25 MB.
+\nSi estás usando la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
+    <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
+    <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
+    <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
+    <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
+    <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
 </resources>

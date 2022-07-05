@@ -4722,4 +4722,17 @@
     <string name="accessibility_2d_view_on">Vue 2.5D activée</string>
     <string name="download_complete">Téléchargement terminé</string>
     <string name="accessibility_2d_view_off">Vue 2.5D désactivée</string>
+    <string name="widget_with_dot">Gadget.</string>
+    <string name="compass_visible_if_map_rotated_desc">Masqué lorsque le Nord est vers le haut</string>
+    <string name="compass_always_hidden">Toujours masqué</string>
+    <string name="compass_always_visible">Toujours affiché</string>
+    <string name="rendering_attr_depthContourWidth_name">Largeur des lignes de profondeur</string>
+    <string name="compass_desc">Indique la direction du Nord.</string>
+    <string name="compass_visible_if_map_rotated">Affiché lors de la rotation de la carte</string>
+    <string name="auto_backup_title">Backup automatique</string>
+    <string name="shared_string_duplicate">Dupliquer</string>
+    <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
+    <string name="compass_click_desc">Cliquez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Jeu de couleurs des lignes de profondeur</string>
 </resources>
