@@ -36,7 +36,9 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -52,7 +54,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 
 	private OsmandApplication app;
+	private MapWidgetRegistry widgetRegistry;
 	private View rightWidgetsPanel;
+	private View leftWidgetsPanel;
 
 	private TextSide textSide;
 	private int maxRadiusInDp;
@@ -99,6 +103,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		super.initLayer(view);
 
 		app = getApplication();
+		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		cacheMetricSystem = app.getSettings().METRIC_SYSTEM.get();
 		cacheMapDensity = getMapDensity();
 		cacheDistances = new ArrayList<>();
@@ -141,8 +146,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
+			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 		} else {
 			rightWidgetsPanel = null;
+			leftWidgetsPanel = null;
 		}
 	}
 
@@ -156,7 +163,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings drawSettings) {
-		if (rulerModeOn() && !tb.isZoomAnimated()) {
+		if (isRulerWidgetOn() && !tb.isZoomAnimated()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
 			circleAttrs.updatePaints(app, drawSettings, tb);
@@ -194,10 +201,30 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean rulerModeOn() {
-		MapWidgetRegistry mapWidgetRegistry = getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		return mapWidgetRegistry.isAnyWidgetOfTypeVisible(RADIUS_RULER)
-				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
+	public boolean isRulerWidgetOn() {
+		boolean isWidgetVisible = false;
+		List<MapWidgetInfo> widgets = widgetRegistry.getWidgetInfoForType(RADIUS_RULER);
+		for (MapWidgetInfo widget : widgets) {
+			if (WidgetsPanel.RIGHT == widget.widgetPanel) {
+				isWidgetVisible = isWidgetVisible(widget) && isRightPanelVisible();
+			} else {
+				isWidgetVisible = isWidgetVisible(widget) && isLeftPanelVisible();
+			}
+			if (isWidgetVisible) break;
+		}
+		return isWidgetVisible;
+	}
+
+	private boolean isWidgetVisible(@NonNull MapWidgetInfo widgetInfo) {
+		return widgetRegistry.isWidgetVisible(widgetInfo);
+	}
+
+	private boolean isLeftPanelVisible() {
+		return leftWidgetsPanel == null || leftWidgetsPanel.getVisibility() == View.VISIBLE;
+	}
+
+	private boolean isRightPanelVisible() {
+		return rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE;
 	}
 
 	private int getCompassCircleIndex(RotatedTileBox tb, QuadPoint center) {
