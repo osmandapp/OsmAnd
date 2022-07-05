@@ -147,6 +147,10 @@ public class MapWidgetRegistry {
 		return false;
 	}
 
+	public boolean isWidgetVisible(@NonNull MapWidgetInfo widgetInfo) {
+		return isWidgetVisible(widgetInfo.key);
+	}
+
 	public boolean isWidgetVisible(@NonNull String widgetId) {
 		ApplicationMode appMode = settings.getApplicationMode();
 		MapWidgetInfo widgetInfo = getWidgetInfoById(widgetId);
