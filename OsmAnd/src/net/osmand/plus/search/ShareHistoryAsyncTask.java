@@ -2,6 +2,7 @@ package net.osmand.plus.search;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 
-public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, GPXFile> {
+public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, String>> {
 
 	private final OsmandApplication app;
 	private final List<HistoryEntry> historyEntries;
@@ -34,8 +35,16 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, GPXFile> {
 	}
 
 	@Override
-	protected GPXFile doInBackground(Void... params) {
-		GPXFile gpx = new GPXFile(Version.getFullVersion(app));
+	protected void onPreExecute() {
+		if (listener != null) {
+			listener.onShareHistoryStarted();
+		}
+	}
+
+	@NonNull
+	@Override
+	protected Pair<File, String> doInBackground(Void... params) {
+		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
 		for (HistoryEntry h : historyEntries) {
 			WptPt pt = new WptPt();
 			pt.lat = h.getLat();
@@ -45,35 +54,30 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, GPXFile> {
 			if (hasTypeInDescription) {
 				pt.desc = h.getName().getTypeName();
 			}
-			gpx.addPoint(pt);
+			gpxFile.addPoint(pt);
 		}
-		return gpx;
-	}
 
-	@Override
-	protected void onPreExecute() {
-		if (listener != null) {
-			listener.onShareHistoryStarted();
-		}
-	}
-
-	@Override
-	protected void onPostExecute(GPXFile gpxFile) {
-		if (listener != null) {
-			listener.onShareHistoryFinished();
-		}
 		File dir = new File(app.getCacheDir(), "share");
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
-		File dst = new File(dir, "History.gpx");
-		GPXUtilities.writeGpxFile(dst, gpxFile);
+		File historyFile = new File(dir, "History.gpx");
+		GPXUtilities.writeGpxFile(historyFile, gpxFile);
+
+		return Pair.create(historyFile, GPXUtilities.asString(gpxFile));
+	}
+
+	@Override
+	protected void onPostExecute(@NonNull Pair<File, String> pair) {
+		if (listener != null) {
+			listener.onShareHistoryFinished();
+		}
 
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
+		sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + pair.second);
 		sendIntent.putExtra(Intent.EXTRA_SUBJECT, app.getString(R.string.share_history_subject));
-		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
+		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, pair.first));
 		sendIntent.setType("text/plain");
 		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
