@@ -4762,4 +4762,12 @@
     <string name="rendering_attr_depthContourWidth_name">Ширина ізоліній глибини</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колірна гамма контурних ліній глибини</string>
     <string name="rendering_attr_depthContourWidth_description">Ширина ізоліній глибини</string>
+    <string name="auto_25_chars_route_roundabout_kl">Поверніть у %1$d з\'їзд і тримайтеся ліворуч</string>
+    <string name="auto_25_chars_route_roundabout_kr">Поверніть у %1$d з\'їзд і тримайтеся праворуч</string>
+    <string name="auto_25_chars_route_tl_kl">Поверніть ліворуч і тримайтеся ліворуч</string>
+    <string name="auto_25_chars_route_tl_kr">Поверніть ліворуч і тримайтеся праворуч</string>
+    <string name="auto_25_chars_route_tr_kl">Поверніть праворуч і тримайтеся ліворуч</string>
+    <string name="auto_25_chars_route_tr_kr">Поверніть праворуч і тримайтеся праворуч</string>
+    <string name="auto_25_chars_route_tu_kl">Виконайте розворот і тримайтеся ліворуч</string>
+    <string name="auto_25_chars_route_tu_kr">Виконайте розворот і тримайтеся праворуч</string>
 </resources>
