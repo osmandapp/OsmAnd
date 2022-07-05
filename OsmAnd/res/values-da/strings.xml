@@ -4735,4 +4735,36 @@
     <string name="accessibility_2d_view_off">2.5D-visning slået fra</string>
     <string name="accessibility_2d_view_on">2.5D-visning slået til</string>
     <string name="download_complete">Download fuldført</string>
+    <string name="auto_backup_title">Automatisk sikkerhedskopiering</string>
+    <string name="duplacate_widget_added_snackbar">En modul-dublet tilføjes som næste på listen.</string>
+    <string name="shared_string_duplicate">Dublet</string>
+    <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
+    <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du starte en videooptagelse.</string>
+    <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du tage lydnoter.</string>
+    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedkørsler på den aktuelt registreret tur.</string>
+    <string name="trip_recording_uphill_widget_desc">Viser summen af alle stigninger på den aktuelt registreret tur.</string>
+    <string name="trip_recording_distance_widget_desc">Viser længden af den aktuelt registreret tur.</string>
+    <string name="true_bearing_wdiget_desc">Vinkel mellem det sande nord og målpunktet observeret fra din placering.</string>
+    <string name="relative_bearing_widget_desc">Viser vinklen mellem din fremadrettede bevægelsesretning og målpunktet.</string>
+    <string name="second_marker_widget_desc">Du kan indstille modulet til at vise afstanden eller det forventede ankomsttidspunkt til den anden kortmarkør.</string>
+    <string name="first_marker_widget_desc">Du kan indstille modulet til at vise afstanden eller det forventede ankomsttidspunkt til den første kortmarkør.</string>
+    <string name="time_to_destination_widget_desc">Modulet viser \"Ankomsttid\" eller \"Resterende tid\" til det sidste destinationspunkt. Tiden opdateres konstant under navigationen og er lig med rutetiden fra den aktuelle position.</string>
+    <string name="time_to_intermediate_widget_desc">Modulet viser \"Ankomsttid\" eller \"Resterende tid\" til det første mellemliggende punkt. Tiden opdateres konstant under navigationen, og når et mellemliggende punkt er passeret, vil tiden blive opdateret til det næste mellemliggende punkt.</string>
+    <string name="distance_to_intermediate_widget_desc">Modulet viser afstanden til det første mellemliggende punkt. Når et mellemliggende punkt er passeret, opdateres afstanden til det næste mellemliggende punkt.</string>
+    <string name="distance_to_destination_widget_desc">Modulet viser den resterende afstand til det sidste destinationspunkt.</string>
+    <string name="second_next_turn_widget_desc">Modulet viser oplysninger om dit andet \'næste sving\', som er aktiveret, hvis svinget er inden for nær afstand.</string>
+    <string name="next_turn_widget_desc">Modulet viser oplysninger om dit næste sving med et billede af manøvren og afstanden til den.</string>
+    <string name="widget_with_dot">Modul.</string>
+    <string name="compass_visible_if_map_rotated_desc">Skjult, når nord er op</string>
+    <string name="compass_visible_if_map_rotated">Synlig, hvis kortet er roteret</string>
+    <string name="compass_desc">Viser retning mod nord.</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Farvesætning for dybdekonturlinjer</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Farvesætning for dybdekonturlinjer</string>
+    <string name="rendering_attr_depthContourWidth_description">Dybdekonturlinjers bredde</string>
+    <string name="rendering_attr_depthContourWidth_name">Dybdekonturlinjers bredde</string>
+    <string name="auto_backup_preference_desc">Android gemmer som standard sikkerhedskopier af favoritter, kort-tokens og OsmAnd-indstillinger for at gendanne dem på nye enheder eller efter geninstallation, men denne sikkerhedskopi er begrænset til 25 MB.
+\nHvis du bruger OsmAnd Cloud, kan dette føre til misforståelser efter geninstallation.</string>
+    <string name="compass_always_visible">Altid synlig</string>
+    <string name="compass_always_hidden">Altid skjult</string>
+    <string name="compass_click_desc">Klik på kompas for at skifte måden hvorpå kortet er orienteret.</string>
 </resources>
