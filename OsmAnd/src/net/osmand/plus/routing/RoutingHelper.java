@@ -666,7 +666,7 @@ public class RoutingHelper {
 		NavigationService navigationService = app.getNavigationService();
 		if (carNavigationSession != null && navigationService != null && System.currentTimeMillis() - lastCarNavUpdateTime > 1000) {
 			lastCarNavUpdateTime = System.currentTimeMillis();
-			app.runInUIThread(navigationService::updateCarNavigation);
+			app.runInUIThread(() -> navigationService.updateCarNavigation(currentLocation));
 		}
 		return false;
 	}

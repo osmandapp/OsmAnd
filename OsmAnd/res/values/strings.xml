@@ -11,6 +11,14 @@
 	Thx - Hardy
 -->
 
+    <string name="auto_25_chars_route_tl_kl">Turn left and keep left</string>
+    <string name="auto_25_chars_route_tl_kr">Turn left and keep right</string>
+    <string name="auto_25_chars_route_tr_kl">Turn right and keep left</string>
+    <string name="auto_25_chars_route_tr_kr">Turn right and keep right</string>
+    <string name="auto_25_chars_route_tu_kl">Make U-turn and keep left</string>
+    <string name="auto_25_chars_route_tu_kr">Make U-turn and keep right</string>
+    <string name="auto_25_chars_route_roundabout_kl">Take %1$d exit and keep left</string>
+    <string name="auto_25_chars_route_roundabout_kr">Take %1$d exit and keep right</string>
     <string name="auto_backup_preference_desc">By default Android saves backups of favourites, map tokens and osmand settings to restore them on new devices or after reinstallation, this backup is limited to 25 MB.\nIf you are using OsmAnd Cloud, this can lead to misunderstandings after reinstallation.</string>
     <string name="auto_backup_title">Auto-backup</string>
     <string name="duplacate_widget_added_snackbar">A duplicate widget is added next in the list.</string>
