@@ -6,6 +6,8 @@ import com.github.scribejava.core.model.Verb;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.util.Algorithms;
+import net.osmand.util.StringUtils;
+
 import org.apache.commons.logging.Log;
 
 import java.io.*;
@@ -114,7 +116,7 @@ public class NetworkUtils {
 		try {
 			boolean firstPrm =!urlText.contains("?");
 			for (Map.Entry<String, String> entry : additionalMapData.entrySet()) {
-				urlText += (firstPrm ? "?" : "&") + entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "UTF-8");
+				urlText += (firstPrm ? "?" : "&") + entry.getKey() + "=" + StringUtils.encode(entry.getValue());
 				firstPrm = false;
 			}
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());

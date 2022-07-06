@@ -18,6 +18,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.StringUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -81,7 +82,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 				b.append(getNotesApi()).append("?");
 				b.append("lat=").append(point.getLatitude());
 				b.append("&lon=").append(point.getLongitude());
-				b.append("&text=").append(URLEncoder.encode(text, "UTF-8"));
+				b.append("&text=").append(StringUtils.encode(text));
 				msg = "Creating bug";
 			} else {
 				b.append(getNotesApi()).append("/");
@@ -96,7 +97,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 					b.append("/close");
 					msg = "Closing note";
 				}
-				b.append("?text=").append(URLEncoder.encode(text, "UTF-8"));
+				b.append("?text=").append(StringUtils.encode(text));
 			}
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);

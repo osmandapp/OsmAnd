@@ -49,6 +49,7 @@ import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.StringUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -862,7 +863,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private String getDecodedAdditionalInfo(String additionalInfo) {
 		try {
-			return URLDecoder.decode(additionalInfo, "UTF-8");
+			return StringUtils.decode(additionalInfo);
 		} catch (UnsupportedEncodingException e) {
 			LOG.error(e);
 		}

@@ -22,6 +22,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,6 +40,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import static net.osmand.util.StringUtils.UTF_8;
 
 
 /**
@@ -753,7 +758,7 @@ public class Algorithms {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
 		if (i != null) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
+			BufferedReader in = new BufferedReader(new InputStreamReader(i, UTF_8), 256); //$NON-NLS-1$
 			String s;
 			boolean f = true;
 			while ((s = in.readLine()) != null) {
@@ -1063,7 +1068,7 @@ public class Algorithms {
 	public static String getFileAsString(File file) {
 		try {
 			FileInputStream fin = new FileInputStream(file);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, UTF_8));
 			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -1084,7 +1089,7 @@ public class Algorithms {
 		InputStream is = new FileInputStream(file);
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		Map<String, String> map = new HashMap<>();
-		parser.setInput(is, "UTF-8");
+		parser.setInput(is, UTF_8);
 		int tok;
 		String key = null;
 		StringBuilder text = null;

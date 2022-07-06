@@ -48,6 +48,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.StringUtils;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -69,6 +70,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
+
+import static net.osmand.util.StringUtils.encode;
 
 public class BackupHelper {
 
@@ -649,7 +652,7 @@ public class BackupHelper {
 			StringBuilder sb = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
-				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(encode(entry.getValue()));
 				firstParam = false;
 			}
 			IProgress progress = new AbstractProgress() {
