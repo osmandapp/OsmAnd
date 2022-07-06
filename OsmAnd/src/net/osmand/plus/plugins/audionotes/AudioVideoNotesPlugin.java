@@ -947,7 +947,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else {
 			view = recordingMenu.prepareSurfaceView();
 		}
-		view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		view.getHolder().addCallback(new Callback() {
 
 			@Override
@@ -1272,7 +1271,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} else {
 				view = recordingMenu.prepareSurfaceView();
 			}
-			view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 			view.getHolder().addCallback(new Callback() {
 
 				@Override

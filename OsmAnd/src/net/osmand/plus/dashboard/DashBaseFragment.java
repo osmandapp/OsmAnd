@@ -94,11 +94,6 @@ public abstract class DashBaseFragment extends Fragment {
 		return true;
 	}
 
-	@Override
-	public boolean getUserVisibleHint() {
-		return super.getUserVisibleHint();
-	}
-
 	public abstract void onOpenDash();
 
 	public void onCloseDash() {
