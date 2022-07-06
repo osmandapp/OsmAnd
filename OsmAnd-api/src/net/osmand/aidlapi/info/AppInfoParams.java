@@ -6,6 +6,9 @@ import android.os.Parcel;
 import net.osmand.aidlapi.AidlParams;
 import net.osmand.aidlapi.map.ALatLon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AppInfoParams extends AidlParams {
 
 	private ALatLon lastKnownLocation;
@@ -21,6 +24,7 @@ public class AppInfoParams extends AidlParams {
 
 	private String osmAndVersion;
 	private String releaseDate;
+	private ArrayList<String> routingData = new ArrayList<>();
 
 	public AppInfoParams(ALatLon lastKnownLocation, ALatLon mapLocation, Bundle turnInfo,
 	                     int leftTime, int leftDistance, long arrivalTime, boolean mapVisible) {
@@ -109,6 +113,12 @@ public class AppInfoParams extends AidlParams {
 		this.releaseDate = releaseDate;
 	}
 
+	public void setRoutingData(List<String> routingData) {
+		if (routingData != null) {
+			this.routingData.addAll(routingData);
+		}
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putParcelable("lastKnownLocation", lastKnownLocation);
@@ -122,6 +132,7 @@ public class AppInfoParams extends AidlParams {
 		bundle.putBoolean("mapVisible", mapVisible);
 		bundle.putString("osmAndVersion", osmAndVersion);
 		bundle.putString("releaseDate", releaseDate);
+		bundle.putStringArrayList("routingData", routingData);
 	}
 
 	@Override
@@ -137,5 +148,6 @@ public class AppInfoParams extends AidlParams {
 		mapVisible = bundle.getBoolean("mapVisible");
 		osmAndVersion = bundle.getString("osmAndVersion");
 		releaseDate = bundle.getString("releaseDate");
+		routingData = bundle.getStringArrayList("routingData");
 	}
 }
