@@ -786,9 +786,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isScreenOn(Context context) {
-		PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH && powerManager.isInteractive()
-				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH && powerManager.isScreenOn();
+		PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+		return pm.isInteractive();
 	}
 
 	public static boolean isScreenLocked(Context context) {
