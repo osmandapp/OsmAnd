@@ -222,7 +222,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo);
 		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 		String path = file.getAbsolutePath();
-		TrackMenuFragment.showInstance(mapActivity, path, false, null, QuickSearchDialogFragment.TAG, null);
+		TrackMenuFragment.showInstance(mapActivity, path, false, false, null, QuickSearchDialogFragment.TAG, null);
 		dialogFragment.dismiss();
 	}
 

@@ -35,11 +35,6 @@ public class WidgetIconsHelper {
 		updateWidgetIcon(icon, mapIconId, settingsIconId, shouldPaintIcon);
 	}
 
-	public void updateWidgetIcon(@NonNull ImageView icon, @NonNull WidgetType widgetType) {
-		int settingsIconId = widgetType.getIconId(nightMode);
-		updateWidgetIcon(icon, 0, settingsIconId, false);
-	}
-
 	public void updateWidgetIcon(@NonNull ImageView icon,
 	                             @DrawableRes int mapIconId,
 	                             @DrawableRes int settingsIconId,

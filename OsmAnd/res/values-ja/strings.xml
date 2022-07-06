@@ -4561,4 +4561,15 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showFitnessTrails_name">アスレチックコース</string>
     <string name="rendering_attr_showFitnessTrails_description">アスレチックコースを表示します</string>
     <string name="rendering_attr_showRunningRoutes_name">ランニングルート</string>
+    <string name="marker_2nd">2番目のマーカー</string>
+    <string name="routing_attr_goods_restrictions_description">小型商用配達車の通行許可の可否</string>
+    <string name="routing_attr_goods_restrictions_name">小型配達車</string>
+    <string name="marker_1st">1番目のマーカー</string>
+    <string name="routing_attr_motor_type_name">主動力源が使用する燃料</string>
+    <string name="routing_attr_motor_type_description">車両の動力源が使用する燃料種類を選択することで、CO2排出量を計算します。</string>
+    <string name="switch_widget_mode_desc">ウィジェットをタップすることでモードを切り替えることができます。</string>
+    <string name="side_marker_eta">到着予定時刻</string>
+    <string name="map_marker_average_speed_desc">到着予定時刻を計算するために平均速度を測定する時間間隔を指定します。</string>
+    <string name="reset_all_settings_desc">リセットしてすべての設定を初期値に戻してもよろしいですか？</string>
+    <string name="lang_ckb">中央クルド語</string>
 </resources>

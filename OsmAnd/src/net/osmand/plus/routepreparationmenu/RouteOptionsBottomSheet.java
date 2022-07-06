@@ -1,5 +1,15 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -75,16 +85,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment implements CalculateAltitudeListener {
 
@@ -676,7 +676,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.setOnClickListener(v -> {
 					if (mapActivity != null) {
-						int segmentIndex = settings.GPX_ROUTE_SEGMENT.get();
+						int segmentIndex = settings.GPX_SEGMENT_INDEX.get();
 						FragmentManager manager = mapActivity.getSupportFragmentManager();
 						TrackAltitudeBottomSheet.showInstance(manager, this, segmentIndex);
 					}

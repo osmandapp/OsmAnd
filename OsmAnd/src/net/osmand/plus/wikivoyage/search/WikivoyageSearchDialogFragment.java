@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
@@ -54,13 +56,13 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 		final View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
 
-		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
+		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		toolbar.setContentInsetStartWithNavigation(
 				getResources().getDimensionPixelOffset(R.dimen.wikivoyage_search_divider_margin_start)
 		);
 
-		searchEt = (EditText) toolbar.findViewById(R.id.searchEditText);
+		searchEt = toolbar.findViewById(R.id.searchEditText);
 		searchEt.setHint(R.string.shared_string_search);
 		searchEt.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -88,36 +90,28 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 			}
 		});
 
-		progressBar = (ProgressBar) toolbar.findViewById(R.id.searchProgressBar);
+		progressBar = toolbar.findViewById(R.id.searchProgressBar);
 
-		clearIb = (ImageButton) toolbar.findViewById(R.id.clearButton);
+		clearIb = toolbar.findViewById(R.id.clearButton);
 		clearIb.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-		clearIb.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				searchEt.setText("");
-			}
-		});
+		clearIb.setOnClickListener(v -> searchEt.setText(""));
 
 		adapter = new SearchRecyclerViewAdapter(app);
-		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		final RecyclerView rv = mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
-		adapter.setOnItemClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				int pos = rv.getChildAdapterPosition(v);
-				FragmentManager fm = getFragmentManager();
-				if (pos != RecyclerView.NO_POSITION && fm != null) {
-					Object item = adapter.getItem(pos);
-					if (item instanceof WikivoyageSearchResult) {
-						WikivoyageSearchResult res = (WikivoyageSearchResult) item;
-						WikivoyageArticleDialogFragment.showInstance(fm, res.getArticleId(), new ArrayList<>(res.getLangs()));
-					} else if (item instanceof WikivoyageSearchHistoryItem) {
-						WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
-						WikivoyageArticleDialogFragment
-								.showInstanceByTitle(app, fm, historyItem.getArticleTitle(), historyItem.getLang());
-					}
+		adapter.setOnItemClickListener(v -> {
+			int pos = rv.getChildAdapterPosition(v);
+			FragmentManager fm = getFragmentManager();
+			if (pos != RecyclerView.NO_POSITION && fm != null) {
+				Object item = adapter.getItem(pos);
+				if (item instanceof WikivoyageSearchResult) {
+					WikivoyageSearchResult res = (WikivoyageSearchResult) item;
+					WikivoyageArticleDialogFragment.showInstance(fm, res.getArticleId(), new ArrayList<>(res.getLangs()));
+				} else if (item instanceof WikivoyageSearchHistoryItem) {
+					WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
+					WikivoyageArticleDialogFragment
+							.showInstanceByTitle(app, fm, historyItem.getArticleTitle(), historyItem.getLang());
 				}
 			}
 		});
@@ -163,13 +157,10 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 		searchHelper.search(searchQuery, new ResultMatcher<List<WikivoyageSearchResult>>() {
 			@Override
 			public boolean publish(final List<WikivoyageSearchResult> results) {
-				getMyApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						if (!isCancelled()) {
-							setAdapterItems(results);
-							switchProgressBarVisibility(false);
-						}
+				getMyApplication().runInUIThread(() -> {
+					if (!isCancelled()) {
+						setAdapterItems(results);
+						switchProgressBarVisibility(false);
 					}
 				});
 				return true;
@@ -183,17 +174,14 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 	}
 
 	private void switchProgressBarVisibility(boolean show) {
-		progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-		clearIb.setVisibility(show ? View.GONE : View.VISIBLE);
+		AndroidUiHelper.updateVisibility(clearIb, show);
+		AndroidUiHelper.updateVisibility(progressBar, show);
 	}
 
-	public static boolean showInstance(FragmentManager fm) {
-		try {
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			WikivoyageSearchDialogFragment fragment = new WikivoyageSearchDialogFragment();
-			fragment.show(fm, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
+			fragment.show(manager, TAG);
 		}
 	}
 }

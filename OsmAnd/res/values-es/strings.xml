@@ -4698,4 +4698,25 @@
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
     <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="marker_2nd">Segundo marcador</string>
+    <string name="marker_1st">Primer marcador</string>
+    <string name="switch_widget_mode_desc">Puedes cambiar de modo pulsando en el control.</string>
+    <string name="side_marker_eta">Tiempo estimado de llegada</string>
+    <string name="next_live_update_time">Próxima actualización: en %1$s.</string>
+    <string name="includes_osm_changes_until">Incluye cambios de OSM realizados hasta %1$s.</string>
+    <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
+    <string name="routing_attr_motor_type_description">Seleccionar el tipo de combustible usado por el motor de tu vehículo, para calcular las emisiones CO2.</string>
+    <string name="routing_attr_motor_type_name">Combustible utilizado por el motor</string>
+    <string name="routing_attr_goods_restrictions_name">Reparto de bienes</string>
+    <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos de bienes ligeros (bienes)</string>
+    <string name="reset_all_settings_desc">¿Estás seguro de que deseas restablecer todos los ajustes a los valores predeterminados\?</string>
+    <string name="goods_delivery_desc_3">Aplica solo para vehículos que transporten mercancías que tienen al menos cuatro ruedas y no pesan más de 3,5 toneladas.</string>
+    <string name="goods_delivery_desc_2">Se evitarán las carreteras que estén cerradas para el reparto de mercancías.</string>
+    <string name="updated_map_time">Actualizado: %1$s.</string>
+    <string name="map_marker_average_speed_desc">Especificar el intervalo de tiempo durante el cual se medirá la velocidad promedio para calcular el tiempo estimado de llegada.</string>
+    <string name="goods_delivery_desc_4">Si el peso de tu vehículo es superior a 3,5 toneladas, debes utilizar el perfil de Camión.</string>
+    <string name="goods_delivery_desc">Los vehículos que transportan mercancías pueden ser restringidos para acceder a algunas carreteras.</string>
+    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
+    <string name="lang_ckb">Kurdo Central</string>
+    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos de «%1$s» o calcularlo en línea.</string>
 </resources>

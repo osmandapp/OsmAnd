@@ -291,6 +291,22 @@ public class MapUtils {
 		return B2 / 2 - M2 * B2 / 2 / Math.PI;
 	}
 
+	public static double[] getTileEllipsoidNumberAndOffsetY(int zoom, double latitude, int tileSize) {
+		final double E2 = (double) latitude * Math.PI / 180;
+		final long sradiusa = EARTH_RADIUS_A;
+		final long sradiusb = EARTH_RADIUS_B;
+		final double J2 = (double) Math.sqrt(sradiusa * sradiusa - sradiusb * sradiusb) / sradiusa;
+		final double M2 = (double) Math.log((1 + Math.sin(E2))
+				/ (1 - Math.sin(E2))) / 2 - J2 * Math.log((1 + J2 * Math.sin(E2)) / (1 - J2 * Math.sin(E2))) / 2;
+		final double B2 = getPowZoom(zoom);
+		double tileY = B2 / 2 - M2 * B2 / 2 / Math.PI;
+
+		double tilesCount = (double) (1 << zoom);
+		double yTileNumber = Math.floor(tilesCount * ( 0.5 - M2 / 2 / Math.PI));
+		double offsetY = Math.floor((tilesCount * ( 0.5 - M2 / 2 / Math.PI) - yTileNumber) * tileSize);
+		return new double[]{tileY, offsetY};
+	}
+
 	public static double getLatitudeFromEllipsoidTileY(float zoom, float tileNumberY) {
 		final double MerkElipsK = 0.0000001;
 		final long sradiusa = EARTH_RADIUS_A;

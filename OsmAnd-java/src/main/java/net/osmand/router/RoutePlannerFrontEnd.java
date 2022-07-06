@@ -705,34 +705,45 @@ public class RoutePlannerFrontEnd {
 
 	private boolean needRequestPrivateAccessRouting(RoutingContext ctx, List<LatLon> points) throws IOException {
 		boolean res = false;
-		GeneralRouter router = (GeneralRouter) ctx.getRouter();
-		if (router == null) {
-			return false;
-		}
-		Map<String, RoutingParameter> parameters = router.getParameters();
-		String allowPrivateKey = null;
-		if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE)) {
-			allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
-		} else if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK)) {
-			allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
-		}
-		if (!router.isAllowPrivate() && allowPrivateKey != null) {
-			ctx.unloadAllData();
-			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
-			mp.put(allowPrivateKey, "true");
-			mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
-			ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
-			for (LatLon latLon : points) {
-				RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
-				if (rp != null && rp.road != null) {
-					if (rp.road.hasPrivateAccess()) {
-						res = true;
-						break;
+		if (ctx.nativeLib != null) {
+			int size = points.size();
+			int[] y31Coordinates = new int[size];
+			int[] x31Coordinates = new int[size];
+			for (int i = 0; i < size; i++) {
+				y31Coordinates[i] = MapUtils.get31TileNumberY(points.get(i).getLatitude());
+				x31Coordinates[i] = MapUtils.get31TileNumberX(points.get(i).getLongitude());
+			}
+			res = ctx.nativeLib.needRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
+		} else {
+			GeneralRouter router = (GeneralRouter) ctx.getRouter();
+			if (router == null) {
+				return false;
+			}
+			Map<String, RoutingParameter> parameters = router.getParameters();
+			String allowPrivateKey = null;
+			if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE)) {
+				allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
+			} else if (parameters.containsKey(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK)) {
+				allowPrivateKey = GeneralRouter.ALLOW_PRIVATE;
+			}
+			if (!router.isAllowPrivate() && allowPrivateKey != null) {
+				ctx.unloadAllData();
+				LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
+				mp.put(allowPrivateKey, "true");
+				mp.put(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED, "true");
+				ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
+				for (LatLon latLon : points) {
+					RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
+					if (rp != null && rp.road != null) {
+						if (rp.road.hasPrivateAccess()) {
+							res = true;
+							break;
+						}
 					}
 				}
+				ctx.unloadAllData();
+				ctx.setRouter(router);
 			}
-			ctx.unloadAllData();
-			ctx.setRouter(router);
 		}
 		return res;
 	}
@@ -951,18 +962,19 @@ public class RoutePlannerFrontEnd {
 					rlist.add(rr);
 				}
 			}
-			runRecalculation = rlist.size() > 0;
+
 			if (rlist.size() > 0) {
 				RouteSegment previous = null;
-				for (int i = 0; i <= rlist.size() - 1; i++) {
+				for (int i = 0; i < rlist.size(); i++) {
 					RouteSegmentResult rr = rlist.get(i);
-					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(), rr.getEndPointIndex());
 					if (previous != null) {
+						RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(),rr.getEndPointIndex());
 						previous.setParentRoute(segment);
+						previous = segment;
 					} else {
-						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0); 
+						recalculationEnd = new RouteSegmentPoint(rr.getObject(), rr.getStartPointIndex(), 0);
+						previous = recalculationEnd;
 					}
-					previous = segment;
 				}
 			}
 		}
@@ -989,13 +1001,13 @@ public class RoutePlannerFrontEnd {
 		// long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
-		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
+		List<RouteSegmentResult> result = new ArrayList<>(Arrays.asList(res));
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;
 			while (current.getParentRoute() != null) {
 				RouteSegment pr = current.getParentRoute();
-				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentEnd(), pr.getSegmentStart()));
+				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentStart(), pr.getSegmentEnd()));
 				current = pr;
 			}
 		}

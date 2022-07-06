@@ -2491,7 +2491,7 @@
 \n• Выбор между автономным (без платы за роуминг) и онлайн-режимом (быстрее)
 \n• Пошаговые голосовые подсказки (записанные или синтезированные) доведут до места назначения
 \n• Повторный расчёт маршрута после значительного отклонения от существующего
-\n•Обновлен автоматически
+\n• Чтобы сделать ваше путешествие более безопасным, дневной/ночной режим переключается автоматически
 \n• Отображение ограничений скорости и получение предупреждений при их превышении
 \n• Карта масштабируется соответственно вашей скорости
 \n• Поиск места по адресу, типу (паркинг, ресторан, отель, заправка, музей и т.д.) или географическим координатам
@@ -4688,4 +4688,91 @@
     <string name="time_to_navigation_point_widget_settings_desc">Вы можете переключить режим, нажав на виджет.</string>
     <string name="map_widget_distance_to_intermediate">Расстояние до промежуточного пункта</string>
     <string name="lang_sat">Сантали</string>
+    <string name="average_speed_skip_stops">Учитывать остановки</string>
+    <string name="average_speed_time_interval_desc">Укажите интервал времени, для которого будет измеряться средняя скорость.</string>
+    <string name="average_speed_widget_desc">Виджет показывает среднюю скорость текущей поездки.</string>
+    <string name="map_widget_average_speed">Средняя скорость</string>
+    <string name="average_speed_skip_stops_desc">Скорость меньше %1$s не будет учитываться и влиять на среднюю скорость.</string>
+    <string name="import_as_one_track">Импортировать как один трек</string>
+    <string name="use_latin_name_if_missing">Транслитерация латиницей при отсутствии названия на выбранном языке</string>
+    <string name="transport_hazmat_title">Перевозка опасных грузов</string>
+    <string name="transport_hazmat_no_desc">По некоторым дорогам и туннелям перевозка опасных грузов запрещена.</string>
+    <string name="transport_hazmat_yes_desc">Выберите подходящую категорию.</string>
+    <string name="routing_attr_goods_restrictions_description">Учитывать права доступа для легкого коммерческого транспорта</string>
+    <string name="co2_mission">Выбросы CO2</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
+    <string name="kg">кг</string>
+    <string name="routing_attr_motor_type_diesel_name">Дизельное топливо</string>
+    <string name="routing_attr_motor_type_name">Топливо, используемое двигателем</string>
+    <string name="routing_attr_motor_type_description">Выберите тип топлива, используемый двигателем вашего автомобиля, для расчета выбросов CO2.</string>
+    <string name="routing_attr_motor_type_petrol_name">Бензин</string>
+    <string name="routing_attr_motor_type_electric_name">Электричество</string>
+    <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
+    <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
+    <string name="lang_ckb">Центральный курдский</string>
+    <string name="calculate_online_altitude_descr">Рассчитывайте высоту в режиме онлайн на серверах OsmAnd на основе спутниковых снимков и цифровых моделей рельефа. Результат расчета может отличаться от высоты, записанной устройством, и может быть использован в качестве коррекции высоты.</string>
+    <string name="live_update_frequency_hour_variant">Обновления карты будут проверяться каждый час.</string>
+    <string name="live_update_frequency_day_variant">Обновления карты будут проверяться каждый день.</string>
+    <string name="live_update_frequency_week_variant">Обновления карты будут проверяться каждую неделю.</string>
+    <string name="altitude_correction">Коррекция высоты</string>
+    <string name="next_live_update_time">Следующее обновление: в %1$s.</string>
+    <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
+    <string name="no_altitude_data_desc">Вы можете прикрепить свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
+    <string name="updated_map_time">Обновлено: %1$s.</string>
+    <string name="next_live_update_date_and_time">Следующее обновление: %1$s в %2$s.</string>
+    <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
+    <string name="reset_all_settings_desc">Вы уверены, что хотите сбросить все настройки по умолчанию\?</string>
+    <string name="goods_delivery_desc_3">Применяется только для транспортных средств, перевозящих грузы, которые имеют не менее четырех колес и весят не более 3,5 тонн.</string>
+    <string name="goods_delivery_desc_2">Дороги, закрытые для доставки грузов, будут избегаться.</string>
+    <string name="side_marker_eta">Примерное время прибытия</string>
+    <string name="marker_2nd">Второй маркер</string>
+    <string name="map_marker_average_speed_desc">Укажите интервал времени, в течение которого будет измеряться средняя скорость для расчета примерного времени прибытия.</string>
+    <string name="marker_1st">Первый маркер</string>
+    <string name="goods_delivery_desc">Транспортным средствам, перевозящим товары, может быть ограничен доступ к некоторым дорогам.</string>
+    <string name="goods_delivery_desc_4">Если вес вашего автомобиля превышает 3,5 тонны, вам необходимо использовать профиль грузовика.</string>
+    <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
+    <string name="download_complete">Загрузка завершена</string>
+    <string name="accessibility_2d_view_on">2.5D вид вкл.</string>
+    <string name="accessibility_2d_view_off">2.5D вид выкл.</string>
+    <string name="auto_backup_title">Автоматическое резервное копирование</string>
+    <string name="relative_bearing_widget_desc">Показывает угол между вашим направлением движения и целевой точкой.</string>
+    <string name="first_marker_widget_desc">Вы можете настроить виджет так, чтобы он показывал расстояние или примерное время прибытия до первого маркера карты.</string>
+    <string name="distance_to_intermediate_widget_desc">Виджет показывает расстояние до первого промежуточного пункта. После прохождения промежуточного пункта расстояние будет обновлено до следующего промежуточного пункта.</string>
+    <string name="true_bearing_wdiget_desc">Угол между истинным севером и целевой точкой, наблюдаемой из вашего местоположения.</string>
+    <string name="time_to_destination_widget_desc">Виджет показывает «Время прибытия» или «Время до прибытия» в пункт назначения. Время постоянно обновляется во время навигации и равно времени пути от текущего местоположения.</string>
+    <string name="time_to_intermediate_widget_desc">Виджет показывает «Время прибытия» или «Время до прибытия» в первый промежуточный пункт. Время постоянно обновляется во время навигации, как только промежуточный пункт будет пройден, время будет обновлено до следующего промежуточного пункта.</string>
+    <string name="second_marker_widget_desc">Вы можете настроить виджет так, чтобы он показывал расстояние или примерное время прибытия до второго маркера карты.</string>
+    <string name="distance_to_destination_widget_desc">Виджет показывает расстояние, оставшееся до пункта назначения.</string>
+    <string name="auto_backup_preference_desc">По умолчанию Android сохраняет резервные копии избранных точек, токенов карт и настроек Osmand, чтобы восстановить их на новых устройствах или после переустановки, размер этой резервной копии ограничен 25 МБ.
+\nЕсли вы используете OsmAnd Cloud, это может привести к недоразумениям после переустановки.</string>
+    <string name="duplacate_widget_added_snackbar">Дубликат виджета добавляется следующим в списке.</string>
+    <string name="shared_string_duplicate">Дублировать</string>
+    <string name="widget_with_dot">Виджет.</string>
+    <string name="auto_25_chars_route_tl_kr">Поверните налево и держитесь правее</string>
+    <string name="auto_25_chars_route_tr_kl">Поверните направо и держитесь левее</string>
+    <string name="auto_25_chars_route_tr_kr">Поверните направо и держитесь правее</string>
+    <string name="trip_recording_duration_widget_desc">Показывает продолжительность записи трека в минутах/часах текущего записываемого маршрута.</string>
+    <string name="trip_recording_uphill_widget_desc">Показывает сумму всех подъёмов в текущем записываемом маршруте.</string>
+    <string name="trip_recording_downhill_widget_desc">Показывает сумму всех спусков в текущем записываемом маршруте.</string>
+    <string name="auto_25_chars_route_roundabout_kr">Сверните на %1$d съезд и держитесь правее</string>
+    <string name="auto_25_chars_route_roundabout_kl">Сверните на %1$d съезд и держитесь левее</string>
+    <string name="av_notes_photo_widget_desc">Нажатие на виджет позволяет сделать снимок.</string>
+    <string name="av_notes_video_widget_desc">Нажатие на виджет позволяет начать видеозапись.</string>
+    <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
+    <string name="compass_visible_if_map_rotated_desc">Скрыт, когда север сверху</string>
+    <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
+    <string name="compass_always_hidden">Всегда скрыт</string>
+    <string name="compass_always_visible">Всегда виден</string>
+    <string name="compass_click_desc">Нажмите на компас, чтобы переключить режим ориентации карты.</string>
+    <string name="compass_desc">Показывает направление на север.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Цветовая схема изобат</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема контурных линий глубины (изобат)</string>
+    <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
+    <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
+    <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
+    <string name="second_next_turn_widget_desc">Виджет показывает информацию о вашем втором следующем повороте, который включается, если поворот находится на расстоянии приближения.</string>
+    <string name="next_turn_widget_desc">Виджет показывает информацию о вашем следующем повороте с изображением маневра и расстояния до него.</string>
+    <string name="auto_25_chars_route_tl_kl">Поверните налево и держитесь левее</string>
+    <string name="auto_25_chars_route_tu_kl">Выполните разворот и держитесь левее</string>
+    <string name="auto_25_chars_route_tu_kr">Выполните разворот и держитесь правее</string>
 </resources>

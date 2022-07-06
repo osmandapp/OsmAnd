@@ -79,11 +79,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private TransportStopType stopRouteType = null;
 	private boolean mapsInitialized = false;
 
-	public TransportStopsLayer(@NonNull Context context, int baseOrder) {
+	public TransportStopsLayer(@NonNull Context context) {
 		super(context);
 		OsmandSettings settings = getApplication().getSettings();
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -410,7 +409,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							.setLineWidth(attrs.defaultWidth * 1.5d)
 							.setFillColor(NativeUtilities.createFColorARGB(color))
 							.setApproximationEnabled(false)
-							.setBaseOrder(baseOrder);
+							.setBaseOrder(getBaseOrder());
 					builder.buildAndAddToCollection(vectorLinesCollection);
 				}
 			}
@@ -460,7 +459,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return;
 		}
 		if (transportStopsTileProvider == null) {
-			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, baseOrder, getTextScale());
+			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getBaseOrder(), getTextScale());
 			transportStopsTileProvider.drawSymbols(mapRenderer);
 		}
 	}

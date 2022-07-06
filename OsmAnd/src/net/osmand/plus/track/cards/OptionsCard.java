@@ -22,7 +22,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -203,7 +203,7 @@ public class OptionsCard extends MapBaseCard {
 
 	private BaseBottomSheetItem createAnalyzeByIntervalsItem() {
 		return new SimpleBottomSheetItem.Builder()
-				.setIcon(getActiveIcon(R.drawable.ic_action_analyze_intervals))
+				.setIcon(getActiveIcon(R.drawable.ic_action_table))
 				.setTitle(app.getString(R.string.analyze_by_intervals))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(ANALYZE_BY_INTERVALS_BUTTON_INDEX))

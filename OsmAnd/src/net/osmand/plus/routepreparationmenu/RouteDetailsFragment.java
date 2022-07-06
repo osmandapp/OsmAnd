@@ -40,7 +40,7 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -374,7 +374,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		super.calculateLayout(view, initLayout);
 		if (!initLayout && getCurrentMenuState() != MenuState.FULL_SCREEN) {
 			if (refreshMapCallback != null) {
-				refreshMapCallback.refreshMap(false, false);
+				refreshMapCallback.refreshMap(false, false, true);
 			}
 		}
 	}

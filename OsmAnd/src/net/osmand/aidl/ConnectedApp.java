@@ -134,7 +134,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			if (mapLayer != null) {
 				mapView.removeLayer(mapLayer);
 			}
-			mapLayer = new AidlMapLayer(context, layer, pack, -180000);
+			mapLayer = new AidlMapLayer(context, layer, pack);
 			mapView.addLayer(mapLayer, layer.getZOrder());
 			mapLayers.put(layer.getId(), mapLayer);
 		}
@@ -221,7 +221,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			setOnClickListener(v -> {
 				AidlMapWidgetWrapper widget = widgets.get(widgetId);
 				if (widget != null && widget.getIntentOnClick() != null) {
-					app.startActivity(widget.getIntentOnClick());
+					AndroidUtils.startActivityIfSafe(app, widget.getIntentOnClick());
 				}
 			});
 		}

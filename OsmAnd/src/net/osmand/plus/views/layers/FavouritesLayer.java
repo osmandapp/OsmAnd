@@ -23,7 +23,6 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
@@ -37,13 +36,11 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.FavoritesTileProvider;
 import net.osmand.util.Algorithms;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
-		IMoveObjectProvider, MapTextProvider<FavouritePoint>, FavoritesListener {
+		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
 	private static final int START_ZOOM = 6;
 
@@ -62,13 +59,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean textVisible = false;
 	private boolean nightMode = false;
 	private boolean changeMarkerPositionMode;
+	private long favoritesChangedTime = 0;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
 
-	public FavouritesLayer(@NonNull Context ctx, int baseOrder) {
+	public FavouritesLayer(@NonNull Context ctx) {
 		super(ctx);
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
@@ -82,7 +79,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		defaultColor = ContextCompat.getColor(getContext(), R.color.color_favorite);
 		grayColor = ContextCompat.getColor(getContext(), R.color.color_favorite_gray);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-		favouritesHelper.addListener(this);
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -92,7 +88,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
-		favouritesHelper.removeListener(this);
 		clearFavorites();
 	}
 
@@ -133,9 +128,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean showFavorites = this.settings.SHOW_FAVORITES.get();
 		boolean showFavoritesChanged = !Algorithms.objectEquals(this.showFavorites, showFavorites);
 		this.showFavorites = showFavorites;
+		long favoritesChangedTime = favouritesHelper.getLastModifiedTime();
+		boolean favoritesChanged = this.favoritesChangedTime != favoritesChangedTime;
+		this.favoritesChangedTime = favoritesChangedTime;
+
 		if (hasMapRenderer()) {
 			if (mapActivityInvalidated || nightModeChanged || showFavoritesChanged
-					|| textScaleChanged || textVisibleChanged) {
+					|| favoritesChanged || textScaleChanged || textVisibleChanged) {
 				showFavorites();
 			}
 		} else {
@@ -232,7 +231,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		clearFavorites();
 		float textScale = getTextScale();
-		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), baseOrder, isTextVisible(),
+		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getBaseOrder(), isTextVisible(),
 				getTextStyle(textScale), view.getDensity());
 
 		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
@@ -249,10 +248,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								continue;
 							}
 						}
-						int colorBigPoint = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
-						int colorSmallPoint = (marker != null && marker.history) ? grayColor : colorBigPoint;
-						favoritesMapLayerProvider.addToData(favoritePoint, colorSmallPoint, colorBigPoint,
-								true, marker != null, textScale, lat, lon);
+						int color;
+						if ((marker != null && marker.history)) {
+							color = grayColor;
+						} else {
+							color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+						}
+						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale, lat, lon);
 					}
 				}
 			}
@@ -388,22 +390,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
-		}
-	}
-
-	@Override
-	public void onFavoritesLoaded() {
-		showFavorites();
-	}
-
-	@Override
-	public void onFavoriteDataUpdated(@NotNull FavouritePoint point) {
-	}
-
-	@Override
-	public void onFavoritePropertiesUpdated() {
-		if (!changeMarkerPositionMode) {
-			showFavorites();
 		}
 	}
 }

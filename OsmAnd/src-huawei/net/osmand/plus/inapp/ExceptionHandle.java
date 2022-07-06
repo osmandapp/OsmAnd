@@ -24,8 +24,8 @@ import androidx.annotation.Nullable;
 import com.huawei.hms.iap.IapApiException;
 import com.huawei.hms.iap.entity.OrderStatusCode;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.utils.AndroidUtils;
 
 /**
  *  Handles the exception returned from the iap api.

@@ -438,7 +438,7 @@
 	<string name="poi_bus_station">Bus station</string>
 	<string name="poi_railway_station">Railroad station;Railway station;Train station</string>
 	<string name="poi_railway_platform">Railroad platform;Train platform</string>
-	<string name="poi_halt">Railroad stop;Train stop</string>
+	<string name="poi_halt">Railroad stop;Train stop;Railroad station;Railway station;Train station;Station</string>
 	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Yes;Subway station</string>
 	<string name="poi_railway_buffer_stop">Railroad buffer stop</string>
@@ -1810,7 +1810,7 @@
 	<string name="poi_payment_gift_card_no">Gift cards not accepted</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown cards not accepted</string>
-	<string name="poi_payment_pro100_yes">PRO100 </string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 cards not accepted</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Union Card not accepted</string>
@@ -4853,5 +4853,25 @@
 	<string name="poi_flow_rate">Flow rate</string>
 
 	<string name="poi_golf_pin">Golf pin</string>
+
+	<string name="poi_payment_mir_no">Mir cards not accepted</string>
+	<string name="poi_payment_mir_yes">Mir</string>
+
+	<string name="poi_club_youth_movement">Youth movement</string>
+
+	<string name="poi_club_amateur_radio">Amateur radio club</string>
+	<string name="poi_club_religion">Religion club</string>
+
+	<string name="poi_club_dog">Dog club</string>
+
+	<string name="poi_board_title">Board title</string>
+	<string name="poi_short_name">Short name</string>
+
+	<string name="poi_club_aviation">Aviation club</string>
+	<string name="poi_club_bicycle">Bicycle club</string>
+
+	<string name="poi_club_doityourself">DIY club</string>
+
+	<string name="poi_first_aid_kit">First aid kit</string>
 
 </resources>

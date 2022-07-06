@@ -893,7 +893,7 @@
     <string name="poi_recycling_waste_oil">Olej</string>
     <string name="poi_recycling_bottles">Fľaše</string>
     <string name="poi_recycling_cork">Korok</string>
-    <string name="poi_recycling_printer_cartridges">Tlačové hlavy</string>
+    <string name="poi_recycling_printer_cartridges">Prázdne náplne do tlačiarní</string>
     <string name="poi_recycling_sheet_metal">Kovové platne</string>
     <string name="poi_recycling_foil">Fólie</string>
     <string name="poi_recycling_paint">Farby</string>
@@ -1040,7 +1040,7 @@
     <string name="poi_trade_plumbing">Inštalačný materiál</string>
     <string name="poi_trade_wood">Drevo</string>
     <string name="poi_trade_agricultural_supplies">Poľnohospodárske potreby</string>
-    <string name="poi_trade_tile">Kachličky</string>
+    <string name="poi_trade_tile">Obkladačky</string>
     <string name="poi_population">Počet obyvateľov</string>
     <string name="poi_parking_underground">Podzemné</string>
     <string name="poi_parking_multi_storey">Poschodové</string>
@@ -3620,7 +3620,7 @@
     <string name="poi_tactile_paving_incorrect">Nesprávne</string>
     <string name="poi_tactile_paving_primitive">Primitívne</string>
     <string name="poi_tactile_paving_contrasted">Kontrastné</string>
-    <string name="poi_traffic_signals_sound_locate">Len keď je povolená chôdza</string>
+    <string name="poi_traffic_signals_sound_locate">Len pre nájdenie stĺpa</string>
     <string name="poi_video_no">Nie</string>
     <string name="poi_video_yes">Áno;Video</string>
     <string name="poi_booth">Typ búdky</string>
@@ -4113,4 +4113,15 @@
     <string name="poi_board_type_nature">Príroda</string>
     <string name="poi_food_no">Jedlo: nie</string>
     <string name="poi_shop_fuel">Obchod s palivom</string>
+    <string name="poi_payment_mir_no">Neprijíma karty Mir</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_youth_movement">Mládežnícke hnutie</string>
+    <string name="poi_club_amateur_radio">Klub rádioamatérov</string>
+    <string name="poi_club_religion">Náboženský klub</string>
+    <string name="poi_club_dog">Klub psíčkarov</string>
+    <string name="poi_board_title">Nadpis tabule</string>
+    <string name="poi_short_name">Krátky názov</string>
+    <string name="poi_club_aviation">Letecký klub</string>
+    <string name="poi_club_bicycle">Cyklistický klub</string>
+    <string name="poi_club_doityourself">Klub kutilov</string>
 </resources>

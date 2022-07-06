@@ -37,6 +37,7 @@ public class MapActions {
 	}
 
 	public void setGPXRouteParams(@Nullable GPXFile result) {
+		app.logRoutingEvent("setGPXRouteParams result " + (result != null ? result.path : null));
 		if (result == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -44,7 +45,8 @@ public class MapActions {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
-			params.setSelectedSegment(settings.GPX_ROUTE_SEGMENT.get());
+			params.setSelectedSegment(settings.GPX_SEGMENT_INDEX.get());
+			params.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
 			List<Location> ps = params.getPoints(settings.getContext());
 			app.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
@@ -69,13 +71,13 @@ public class MapActions {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState);
 	}
 
@@ -112,6 +114,7 @@ public class MapActions {
 	}
 
 	public void recalculateRoute(boolean showDialog) {
+		app.logRoutingEvent("recalculateRoute showDialog " + showDialog);
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(true);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 

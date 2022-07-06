@@ -1,5 +1,29 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
+import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
+import static net.osmand.GPXUtilities.writeGpxFile;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.data.Amenity.REF;
+import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
+import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -8,7 +32,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -29,7 +52,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
@@ -54,32 +80,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
-import static net.osmand.GPXUtilities.writeGpxFile;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.data.Amenity.REF;
-import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.*;
-import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
-import static net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.*;
-import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class TravelObfHelper implements TravelHelper {
 
@@ -334,9 +334,6 @@ public class TravelObfHelper implements TravelHelper {
 		return res;
 	}
 
-
-
-
 	@Override
 	public boolean isAnyTravelBookPresent() {
 		return !Algorithms.isEmpty(getReaders());
@@ -348,7 +345,11 @@ public class TravelObfHelper implements TravelHelper {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
 		final String appLang = app.getLanguage();
-		final NameStringMatcher nm = new NameStringMatcher(searchQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		SearchSettings settings = searchUICore.getSearchSettings();
+		SearchPhrase phrase = searchUICore.getPhrase().generateNewPhrase(searchQuery, settings);
+		final NameStringMatcher matcher = phrase.getFirstUnknownNameStringMatcher();
+
 		for (BinaryMapIndexReader reader : getReaders()) {
 			try {
 				SearchRequest<Amenity> searchRequest = BinaryMapIndexReader.buildSearchPoiRequest(0, 0, searchQuery,
@@ -357,7 +358,7 @@ public class TravelObfHelper implements TravelHelper {
 							public boolean publish(Amenity object) {
 								List<String> otherNames = object.getOtherNames(false);
 								String localeName = object.getName(appLang);
-								return nm.matches(localeName) || nm.matches(otherNames);
+								return matcher.matches(localeName) || matcher.matches(otherNames);
 							}
 
 							@Override
@@ -595,8 +596,6 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		return article;
 	}
-
-
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,

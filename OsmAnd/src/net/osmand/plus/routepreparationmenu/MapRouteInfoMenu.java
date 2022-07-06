@@ -51,6 +51,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.SpecialPointType;
 import net.osmand.data.ValueHolder;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
@@ -98,6 +99,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSetting
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -113,7 +115,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -358,10 +360,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), pd);
 				break;
 			case HOME:
-				favorites.setSpecialPoint(latLon, FavouritePoint.SpecialPointType.HOME, address);
+				favorites.setSpecialPoint(latLon, SpecialPointType.HOME, address);
 				break;
 			case WORK:
-				favorites.setSpecialPoint(latLon, FavouritePoint.SpecialPointType.WORK, address);
+				favorites.setSpecialPoint(latLon, SpecialPointType.WORK, address);
 				break;
 		}
 	}
@@ -859,7 +861,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectTrack(@NonNull GPXFile gpxFile, boolean checkForSegments) {
+	public void selectTrack(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -872,7 +874,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 							true, false, false, true);
 				}
 			}
-			if (checkForSegments && gpxFile.getNonEmptySegmentsCount() > 1) {
+			if (showSelectionDialog && TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFile)) {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
 				if (fragment == null) {
@@ -1702,9 +1704,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			TextView buttonDescription = view.findViewById(R.id.via_button_description);
 
 			String via = generateViaDescription();
-			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (routeParamsBuilder != null) {
-				GPXFile gpxFile = routeParamsBuilder.getFile();
+			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+			if (paramsBuilder != null) {
+				GPXFile gpxFile = paramsBuilder.getFile();
 				String fileName = null;
 				if (!Algorithms.isEmpty(gpxFile.path)) {
 					fileName = new File(gpxFile.path).getName();
@@ -1714,13 +1716,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = app.getString(R.string.shared_string_gpx_track);
 				}
-				GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-
-				if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
-					int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
-					int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
-					fileName = app.getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + fileName;
-				}
+				fileName = TrackEditCard.getGpxTitleWithSelectedItem(app, paramsBuilder, fileName);
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				description.setText(R.string.follow_track);
 				buttonDescription.setText(R.string.shared_string_add);

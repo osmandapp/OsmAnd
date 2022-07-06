@@ -1,10 +1,12 @@
 package net.osmand.plus.helpers;
 
-import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -18,7 +20,10 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +38,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	private final static String ANALYTICS_UPLOAD_URL = "https://osmand.net/api/submit_analytics";
 	private final static String ANALYTICS_FILE_NAME = "analytics.json";
 
+	private final static int ROUTING_DATA_PARCEL_SIZE = 10; // 10 events
 	private final static int DATA_PARCEL_SIZE = 500; // 500 events
 	private final static int SUBMIT_DATA_INTERVAL = 60 * 60 * 1000; // 1 hour
 
@@ -59,18 +65,34 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 
 	public final static int EVENT_TYPE_APP_USAGE = 1;
 	public final static int EVENT_TYPE_MAP_DOWNLOAD = 2;
+	public final static int EVENT_TYPE_ROUTING = 3;
 
-	private OsmandApplication ctx;
-	private String insertEventScript;
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({EVENT_TYPE_APP_USAGE, EVENT_TYPE_MAP_DOWNLOAD, EVENT_TYPE_ROUTING})
+	public @interface EventType {
+	}
+
+	private final OsmandApplication app;
+	private final String insertEventScript;
 	private long lastSubmittedTime;
 
-	private ExecutorService executor = Executors.newSingleThreadExecutor();
+	private final ExecutorService executor = Executors.newSingleThreadExecutor();
 	private Future<?> submittingTask;
 
 	private static class AnalyticsItem {
 		long date;
 		int type;
 		String event;
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "AnalyticsItem{" +
+					"date=" + date +
+					", type=" + type +
+					", event=" + event +
+					'}';
+		}
 	}
 
 	private static class AnalyticsData {
@@ -79,11 +101,12 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		List<AnalyticsItem> items;
 	}
 
-	public AnalyticsHelper(OsmandApplication ctx) {
-		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
-		this.ctx = ctx;
+	public AnalyticsHelper(@NonNull OsmandApplication app) {
+		super(app, DATABASE_NAME, null, DATABASE_VERSION);
+		this.app = app;
 		insertEventScript = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?)";
 		submitCollectedDataAsync();
+		clearDB(Collections.singletonList(EVENT_TYPE_ROUTING), System.currentTimeMillis());
 	}
 
 	@Override
@@ -91,7 +114,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		createTable(db);
 	}
 
-	private void createTable(SQLiteDatabase db) {
+	private void createTable(@NonNull SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + COL_DATE + " long, " + COL_TYPE + " int, " + COL_EVENT + " text )");
 	}
 
@@ -116,35 +139,44 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		return res;
 	}
 
-	private void clearDB(long finishDate) {
+	private void clearDB(@NonNull List<Integer> allowedTypes, long finishDate) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?", new Object[]{finishDate});
+				String types = formatAllowedTypes(allowedTypes);
+				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?" + " AND " + COL_TYPE + " IN " + types, new Object[] {finishDate});
 			} finally {
 				db.close();
 			}
 		}
 	}
 
+	private String formatAllowedTypes(@NonNull List<Integer> allowedTypes) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("(");
+		for (int i = 0; i < allowedTypes.size(); i++) {
+			if (i > 0) {
+				builder.append(", ");
+			}
+			builder.append(allowedTypes.get(i));
+		}
+		builder.append(")");
+		return builder.toString();
+	}
+
 	public boolean submitCollectedDataAsync() {
-		if (ctx.getSettings().isInternetConnectionAvailable()) {
+		if (app.getSettings().isInternetConnectionAvailable()) {
 			long collectedRowsCount = getCollectedRowsCount();
 			if (collectedRowsCount > DATA_PARCEL_SIZE) {
 				final List<Integer> allowedTypes = new ArrayList<>();
-				if (ctx.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
+				if (app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
 					allowedTypes.add(EVENT_TYPE_MAP_DOWNLOAD);
 				}
-				if (ctx.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.get()) {
+				if (app.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.get()) {
 					allowedTypes.add(EVENT_TYPE_APP_USAGE);
 				}
 				if ((submittingTask == null || submittingTask.isDone()) && allowedTypes.size() > 0) {
-					submittingTask = executor.submit(new Runnable() {
-						@Override
-						public void run() {
-							submitCollectedData(allowedTypes);
-						}
-					});
+					submittingTask = executor.submit(() -> submitCollectedData(allowedTypes));
 					return true;
 				}
 			}
@@ -152,32 +184,28 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		return false;
 	}
 
-
-	@SuppressLint("HardwareIds")
-	private void submitCollectedData(List<Integer> allowedTypes) {
-		List<AnalyticsData> data = collectRecordedData();
+	private void submitCollectedData(@NonNull List<Integer> allowedTypes) {
+		List<AnalyticsData> data = collectRecordedData(allowedTypes);
 		for (AnalyticsData d : data) {
 			if (d.items != null && d.items.size() > 0) {
 				try {
 					JSONArray jsonItemsArray = new JSONArray();
 					for (AnalyticsItem item : d.items) {
-						if (allowedTypes.contains(item.type)) {
-							JSONObject jsonItem = new JSONObject();
-							jsonItem.put(JSON_DATE, item.date);
-							jsonItem.put(JSON_EVENT, item.event);
-							jsonItemsArray.put(jsonItem);
-						}
+						JSONObject jsonItem = new JSONObject();
+						jsonItem.put(JSON_DATE, item.date);
+						jsonItem.put(JSON_EVENT, item.event);
+						jsonItemsArray.put(jsonItem);
 					}
 
-					Map<String, String> additionalData = new LinkedHashMap<String, String>();
+					Map<String, String> additionalData = new LinkedHashMap<>();
 					additionalData.put(PARAM_OS, "android");
 					additionalData.put(PARAM_START_DATE, String.valueOf(d.startDate));
 					additionalData.put(PARAM_FINISH_DATE, String.valueOf(d.finishDate));
-					additionalData.put(PARAM_VERSION, Version.getFullVersion(ctx));
-					additionalData.put(PARAM_LANG, ctx.getLanguage() + "");
-					additionalData.put(PARAM_FIRST_INSTALL_DAYS, String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
-					additionalData.put(PARAM_NUMBER_OF_STARTS, String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
-					additionalData.put(PARAM_USER_ID, ctx.getUserAndroidId());
+					additionalData.put(PARAM_VERSION, Version.getFullVersion(app));
+					additionalData.put(PARAM_LANG, app.getLanguage() + "");
+					additionalData.put(PARAM_FIRST_INSTALL_DAYS, String.valueOf(app.getAppInitializer().getFirstInstalledDays()));
+					additionalData.put(PARAM_NUMBER_OF_STARTS, String.valueOf(app.getAppInitializer().getNumberOfStarts()));
+					additionalData.put(PARAM_USER_ID, app.getUserAndroidId());
 
 					JSONObject json = new JSONObject();
 					for (Map.Entry<String, String> entry : additionalData.entrySet()) {
@@ -196,17 +224,35 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 					LOG.error(e);
 					return;
 				}
-				clearDB(d.finishDate);
+				clearDB(allowedTypes, d.finishDate);
 			}
 		}
 	}
 
-	private List<AnalyticsData> collectRecordedData() {
+	@NonNull
+	public List<String> getRoutingRecordedData() {
+		int counter = 0;
+		List<String> routingData = new ArrayList<>();
+		for (AnalyticsData data : collectRecordedData(Collections.singletonList(EVENT_TYPE_ROUTING))) {
+			for (AnalyticsItem item : data.items) {
+				routingData.add(item.toString());
+
+				counter++;
+				if (counter >= ROUTING_DATA_PARCEL_SIZE) {
+					return routingData;
+				}
+			}
+		}
+		return routingData;
+	}
+
+	@NonNull
+	private List<AnalyticsData> collectRecordedData(@NonNull List<Integer> allowedTypes) {
 		List<AnalyticsData> data = new ArrayList<>();
 		SQLiteDatabase db = getReadableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				collectDBData(db, data);
+				collectDBData(db, data, allowedTypes);
 			} finally {
 				db.close();
 			}
@@ -214,8 +260,11 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		return data;
 	}
 
-	private void collectDBData(SQLiteDatabase db, List<AnalyticsData> data) {
-		Cursor query = db.rawQuery("SELECT " + COL_DATE + "," + COL_TYPE + "," + COL_EVENT + " FROM " + TABLE_NAME + " ORDER BY " + COL_DATE + " ASC", null);
+	private void collectDBData(@NonNull SQLiteDatabase db, @NonNull List<AnalyticsData> data, @NonNull List<Integer> allowedTypes) {
+		String types = formatAllowedTypes(allowedTypes);
+		Cursor query = db.rawQuery("SELECT " + COL_DATE + "," + COL_TYPE + "," + COL_EVENT
+				+ " FROM " + TABLE_NAME + " WHERE " + COL_TYPE + " IN " + types
+				+ " ORDER BY " + COL_DATE + " ASC", null);
 		List<AnalyticsItem> items = new ArrayList<>();
 		int itemsCounter = 0;
 		long startDate = Long.MAX_VALUE;
@@ -262,11 +311,11 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		query.close();
 	}
 
-	public void addEvent(String event, int type) {
+	public void addEvent(@NonNull String event, @EventType int type) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				db.execSQL(insertEventScript, new Object[]{System.currentTimeMillis(), type, event});
+				db.execSQL(insertEventScript, new Object[] {System.currentTimeMillis(), type, event});
 			} finally {
 				db.close();
 			}

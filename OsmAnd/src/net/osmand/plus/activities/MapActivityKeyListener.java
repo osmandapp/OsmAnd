@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -125,7 +126,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				String callingApp = "wunderlinq://datagrid";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(callingApp));
-				mapActivity.startActivity(intent);
+				AndroidUtils.startActivityIfSafe(mapActivity, intent);
 				return true;
 			}
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {

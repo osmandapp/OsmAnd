@@ -166,7 +166,7 @@ public class StartGPSStatus extends OsmAndAction {
 				return;
 			}
 			intent.addCategory(Intent.CATEGORY_LAUNCHER);
-			mapActivity.startActivity(intent);
+			AndroidUtils.startActivityIfSafe(mapActivity, intent);
 		} else if (Version.isMarketEnabled()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 			builder.setMessage(mapActivity.getString(R.string.gps_status_app_not_found));

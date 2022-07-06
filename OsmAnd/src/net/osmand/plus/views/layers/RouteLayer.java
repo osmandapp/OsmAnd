@@ -91,9 +91,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 
-	public RouteLayer(@NonNull Context context, int baseOrder) {
+	public RouteLayer(@NonNull Context context) {
 		super(context);
-		this.baseOrder = baseOrder;
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
@@ -147,6 +146,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
 
@@ -223,7 +223,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			clearXAxisPoints();
 			if (!Algorithms.isEmpty(xAxisPoints)) {
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(attrs.defaultColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(baseOrder - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getBaseOrder() - 500, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -264,7 +264,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(baseOrder - 600);
+			builder.setBaseOrder(getBaseOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(

@@ -114,7 +114,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					hideSnackbar();
-					mapActivity.getMyApplication().getMapMarkersHelper().saveMarkersOrder();
+					mapActivity.getMyApplication().getMapMarkersHelper().saveGroups(false);
 					adapter.notifyDataSetChanged();
 				}
 			}
@@ -127,7 +127,8 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 		final View emptyView = mainView.findViewById(R.id.empty_view);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent() ? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
+		emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent()
+				? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

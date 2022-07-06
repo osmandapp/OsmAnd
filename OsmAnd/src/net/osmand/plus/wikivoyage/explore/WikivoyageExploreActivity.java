@@ -5,9 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -24,13 +22,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
@@ -38,6 +33,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -85,33 +82,20 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			if (settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_NoAnimation;
 			}
-			if (Build.VERSION.SDK_INT >= 21) {
-				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
-			}
+			window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
 		}
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> finish());
 
-		findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fm = getSupportFragmentManager();
-				if (fm == null) {
-					return;
-				}
-				WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
-				fragment.setUsedOnMap(false);
-				fragment.show(fm, WikivoyageOptionsBottomSheetDialogFragment.TAG);
-			}
+		findViewById(R.id.options_button).setOnClickListener(v -> {
+			FragmentManager manager = getSupportFragmentManager();
+			WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.show(manager, WikivoyageOptionsBottomSheetDialogFragment.TAG);
 		});
 
 		int searchColorId = ColorUtilities.getSecondaryTextColorId(nightMode);
@@ -119,17 +103,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		((ImageView) findViewById(R.id.search_icon))
 				.setImageDrawable(getIcon(R.drawable.ic_action_search_dark, searchColorId));
 
-		findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				WikivoyageSearchDialogFragment.showInstance(getSupportFragmentManager());
-			}
-		});
+		findViewById(R.id.search_button).setOnClickListener(v -> WikivoyageSearchDialogFragment.showInstance(getSupportFragmentManager()));
 
 		viewPager = (LockableViewPager) findViewById(R.id.view_pager);
 		viewPager.setOffscreenPageLimit(2);
 		viewPager.setSwipeLocked(true);
-		setViewPagerAdapter(viewPager, new ArrayList<TabItem>());
+		setViewPagerAdapter(viewPager, new ArrayList<>());
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
 		if (pagerAdapter != null) {
 			pagerAdapter.addTab(getTabIndicator(R.string.shared_string_explore, ExploreTabFragment.class));
@@ -140,22 +119,19 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
-		bottomNav.setOnNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
-			@Override
-			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-				int position = -1;
-				int i = item.getItemId();
-				if (i == R.id.action_explore) {
-					position = EXPLORE_POSITION;
-				} else if (i == R.id.action_saved_articles) {
-					position = SAVED_ARTICLES_POSITION;
-				}
-				if (position != -1 && position != viewPager.getCurrentItem()) {
-					viewPager.setCurrentItem(position);
-					return true;
-				}
-				return false;
+		bottomNav.setOnNavigationItemSelectedListener(item -> {
+			int position = -1;
+			int i = item.getItemId();
+			if (i == R.id.action_explore) {
+				position = EXPLORE_POSITION;
+			} else if (i == R.id.action_saved_articles) {
+				position = SAVED_ARTICLES_POSITION;
 			}
+			if (position != -1 && position != viewPager.getCurrentItem()) {
+				viewPager.setCurrentItem(position);
+				return true;
+			}
+			return false;
 		});
 
 		updateSearchBarVisibility();
@@ -163,14 +139,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	@Override
-	public void onAttachFragment(Fragment fragment) {
+	public void onAttachFragment(@NonNull Fragment fragment) {
 		fragments.add(new WeakReference<>(fragment));
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-
 	}
 
 	@Override

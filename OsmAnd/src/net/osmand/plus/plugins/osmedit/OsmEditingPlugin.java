@@ -257,8 +257,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (osmEditsLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(osmEditsLayer);
 		}
-		osmBugsLayer = new OsmBugsLayer(context, this, -120000);
-		osmEditsLayer = new OsmEditsLayer(context, this, -120000);
+		osmBugsLayer = new OsmBugsLayer(context, this);
+		osmEditsLayer = new OsmEditsLayer(context, this);
 	}
 
 	public OsmEditsLayer getOsmEditsLayer(@NonNull MapActivity mapActivity) {

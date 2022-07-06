@@ -1,6 +1,6 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.router.network.NetworkRouteContext.*;
+import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,15 +42,24 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	}
 
 	@Override
+	protected void onPreExecute() {
+		showProgress(true);
+	}
+
+	@Override
 	protected GPXFile doInBackground(Void... voids) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
+		NetworkRouteSelector routeSelector = new NetworkRouteSelector(
+				readers, selectorFilter, NetworkRouteSelectionTask.this::isCancelled);
 		RouteKey routeKey = routeSegment.routeKey;
 		if (routeKey != null) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
 				Map<RouteKey, GPXFile> routes = routeSelector.getRoutes(quadRect, true, routeKey);
+				if (isCancelled()) {
+					routes.clear();
+				}
 				if (!Algorithms.isEmpty(routes)) {
 					return routes.values().iterator().next();
 				}
@@ -63,10 +72,9 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 
 	@Override
 	protected void onPostExecute(GPXFile gpxFile) {
-		hideProgress();
-
 		if (callback != null) {
 			callback.processResult(gpxFile);
 		}
+		hideProgress();
 	}
 }

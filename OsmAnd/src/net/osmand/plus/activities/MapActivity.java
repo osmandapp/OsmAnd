@@ -73,7 +73,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.FailSafeFuntions;
+import net.osmand.plus.base.FailSafeFunctions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -110,7 +110,6 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
@@ -142,8 +141,8 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -464,7 +463,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.FOLLOW_THE_ROUTE.get()
 				&& !app.getRoutingHelper().isRouteCalculated()
 				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-			FailSafeFuntions.restoreRoutingMode(MapActivity.this);
+			FailSafeFunctions.restoreRoutingMode(MapActivity.this);
 		}
 	}
 
@@ -509,6 +508,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 		}
+	}
+
+	public void showHorizontalProgressBar() {
+		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		setupProgressBar(pb, true);
+		pb.setVisibility(View.VISIBLE);
+	}
+
+	public void hideHorizontalProgressBar() {
+		final ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		pb.setVisibility(View.GONE);
 	}
 
 	private void createProgressBarForRouting() {
@@ -616,6 +626,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
+		RoutingHelper routingHelper = getRoutingHelper();
+		setupProgressBar(pb, routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
+	}
+
+	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
 		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
 
 		boolean nightMode = dayNightHelper.isNightModeForMapControls();
@@ -628,9 +643,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				? getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
-		RoutingHelper routingHelper = getRoutingHelper();
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
+		pb.setIndeterminate(indeterminate);
 		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
@@ -1231,7 +1245,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
-		FailSafeFuntions.quitRouteRestoreDialog();
+		FailSafeFunctions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
@@ -2094,16 +2108,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(GpxApproximationFragment.TAG);
 	}
 
-	public LoginBottomSheetFragment getLoginBottomSheetFragment() {
-		return getFragment(LoginBottomSheetFragment.TAG);
-	}
-
 	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {
 		return getFragment(SnapTrackWarningFragment.TAG);
 	}
 
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
+	}
+
+	public TrackAppearanceFragment getTrackAppearanceFragment() {
+		return getFragment(TrackAppearanceFragment.TAG);
 	}
 
 	@Nullable

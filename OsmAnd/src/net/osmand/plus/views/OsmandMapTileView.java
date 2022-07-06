@@ -71,12 +71,13 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
+
+	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
@@ -149,7 +150,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private final List<IMapLocationListener> locationListeners = Collections.synchronizedList(new ArrayList<>());
+	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -271,7 +272,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		this.mapActivity = mapActivity;
 		if (mapActivity != null) {
 			gestureDetector = new GestureDetector(mapActivity, new MapTileViewOnGestureListener());
-			multiTouchSupport = new MultiTouchSupport(mapActivity, new MapTileViewMultiTouchZoomListener());
+			multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
 			doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
 			twoFingersTapDetector = new TwoFingerTapDetector() {
 				@Override
@@ -375,11 +376,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application.accessibilityEnabled() ? false : null;
 	}
 
-	public synchronized boolean isLayerExists(OsmandMapLayer layer) {
+	public synchronized boolean isLayerExists(@NonNull OsmandMapLayer layer) {
 		return layers.contains(layer);
 	}
 
-	public float getZorder(OsmandMapLayer layer) {
+	public float getZorder(@NonNull OsmandMapLayer layer) {
 		Float z = zOrders.get(layer);
 		if (z == null) {
 			return 10;
@@ -387,24 +388,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return z;
 	}
 
-	public int getLayerIndex(OsmandMapLayer layer) {
+	public int getLayerIndex(@NonNull OsmandMapLayer layer) {
 		float zOrder = getZorder(layer);
-		return (int)(zOrder * 100.0f);
+		return (int) (zOrder * 100.0f);
 	}
 
-	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
+	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrder) {
 		int i = 0;
 		for (i = 0; i < layers.size(); i++) {
 			if (zOrders.get(layers.get(i)) > zOrder) {
 				break;
 			}
 		}
+		zOrders.put(layer, zOrder);
 		layer.initLayer(this);
 		layers.add(i, layer);
-		zOrders.put(layer, zOrder);
 	}
 
-	public synchronized void removeLayer(OsmandMapLayer layer) {
+	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
 		layer.destroyLayer();
 		while (layers.remove(layer)) ;
 		zOrders.remove(layer);
@@ -586,12 +587,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return currentViewport.isZoomAnimated();
 	}
 
-	public void addMapLocationListener(@NonNull IMapLocationListener l) {
-		locationListeners.add(l);
+	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
+		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
+		listeners.add(listener);
+		this.locationListeners = listeners;
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners.remove(listener);
+		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
+		listeners.remove(listener);
+		this.locationListeners = listeners;
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {
@@ -1099,7 +1104,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private void setRotateImpl(float rotate) {
 		RotatedTileBox tb = currentViewport.copy();
-		setRotateImpl(rotate, tb.getCenterPixelX(),  tb.getCenterPixelY());
+		setRotateImpl(rotate, tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void setRotateImpl(float rotate, int centerX, int centerY) {
@@ -1186,18 +1191,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float normalizeElevationAngle(float elevationAngle) {
-		if (elevationAngle > 90f) {
-			return 90f;
-		}
+		return elevationAngle > 90 ? 90f : Math.max(getMinAllowedElevationAngle(), elevationAngle);
+	}
+
+	public float getMinAllowedElevationAngle() {
 		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
 		if (verticalTilesCount < 8) {
-			return Math.max(33f, elevationAngle);
+			return 33;
 		} else if (verticalTilesCount < 9) {
-			return Math.max(35f, elevationAngle);
+			return 35;
 		} else if (verticalTilesCount < 10) {
-			return Math.max(40f, elevationAngle);
+			return 40;
 		}
-		return Math.max(45f, elevationAngle);
+		return 45;
 	}
 
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, int centerX, int centerY, boolean notify) {
@@ -1495,7 +1501,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
 				} else {
 					MapRendererView mapRenderer = getMapRenderer();
 					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
@@ -1514,7 +1520,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
 				} else {
 					MapRendererView mapRenderer = getMapRenderer();
 					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
@@ -1662,7 +1668,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void setElevationAngle(float angle) {
+	public void setElevationAngle(float angle) {
 		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
 		application.getOsmandMap().setMapElevation(angle);

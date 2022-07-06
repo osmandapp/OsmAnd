@@ -1,5 +1,14 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -54,7 +63,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.TurnType;
 import net.osmand.search.SearchUICore;
@@ -72,15 +81,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import static net.osmand.search.core.ObjectType.CITY;
-import static net.osmand.search.core.ObjectType.HOUSE;
-import static net.osmand.search.core.ObjectType.POI;
-import static net.osmand.search.core.ObjectType.POSTCODE;
-import static net.osmand.search.core.ObjectType.STREET;
-import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
-import static net.osmand.search.core.ObjectType.VILLAGE;
-import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 public class ExternalApiHelper {
 
@@ -151,6 +151,7 @@ public class ExternalApiHelper {
 	public static final String PARAM_SEARCH_LON = "search_lon";
 	public static final String PARAM_SHOW_SEARCH_RESULTS = "show_search_results";
 	public static final String PARAM_PROFILE = "profile";
+	public static final String PARAM_ROUTING_DATA = "routing_data";
 
 	public static final String PARAM_VERSION = "version";
 	public static final String PARAM_ETA = "eta";
@@ -467,6 +468,11 @@ public class ExternalApiHelper {
 					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
 					result.putExtras(getRouteDirectionsInfo(app));
 				}
+				List<String> routingData = app.getAnalyticsHelper().getRoutingRecordedData();
+				if (!Algorithms.isEmpty(routingData)) {
+					result.putStringArrayListExtra(PARAM_ROUTING_DATA, new ArrayList<>(routingData));
+				}
+
 				result.putExtra(PARAM_VERSION, VERSION_CODE);
 
 				finish = true;
@@ -642,7 +648,7 @@ public class ExternalApiHelper {
 	}
 
 	public static void saveAndNavigateGpx(MapActivity mapActivity, final GPXFile gpxFile,
-										  final boolean force, final boolean checkLocationPermission) {
+	                                      final boolean force, final boolean checkLocationPermission) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
 		if (Algorithms.isEmpty(gpxFile.path)) {
@@ -681,9 +687,9 @@ public class ExternalApiHelper {
 					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
-							MapActivity _mapActivity = mapActivityRef.get();
-							if (_mapActivity != null && !routingHelper.isFollowingMode()) {
-								ExternalApiHelper.startNavigation(_mapActivity, gpxFile, checkLocationPermission);
+							MapActivity activity = mapActivityRef.get();
+							if (activity != null && !routingHelper.isFollowingMode()) {
+								ExternalApiHelper.startNavigation(activity, gpxFile, checkLocationPermission);
 							}
 						});
 					} else {
