@@ -203,7 +203,7 @@ public class RouteStatisticCard extends MapBaseCard {
 					GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+					GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}

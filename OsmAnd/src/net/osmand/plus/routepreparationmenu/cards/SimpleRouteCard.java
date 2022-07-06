@@ -121,7 +121,7 @@ public class SimpleRouteCard extends MapBaseCard {
 						DISTANCE, false, true, false);
 				dataSets.add(elevationDataSet);
 				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, DISTANCE,
-						elevationDataSet.getValues(), true, true, false);
+						elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}

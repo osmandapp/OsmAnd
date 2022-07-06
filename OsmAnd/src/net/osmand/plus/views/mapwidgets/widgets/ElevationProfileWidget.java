@@ -184,7 +184,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}
