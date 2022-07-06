@@ -223,7 +223,7 @@ public class ShareMenu extends BaseMenuController {
 			intent.putExtra("ENCODE_DATA", encodeData);
 		}
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 
 		if (!AndroidUtils.startActivityIfSafe(activity, intent)) {
 			if (Version.isMarketEnabled()) {

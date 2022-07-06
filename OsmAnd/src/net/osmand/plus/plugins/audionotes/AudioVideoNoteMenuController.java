@@ -204,7 +204,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 								shareIntent.setType("video/*");
 							}
 							shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-							shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+							shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 							Intent chooserIntent = Intent.createChooser(shareIntent,
 									activity.getString(R.string.share_note));
 							AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
