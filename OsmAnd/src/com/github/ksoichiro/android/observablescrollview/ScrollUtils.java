@@ -16,7 +16,6 @@
 
 package com.github.ksoichiro.android.observablescrollview;
 
-import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -69,11 +68,7 @@ public final class ScrollUtils {
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 runnable.run();
             }
         });

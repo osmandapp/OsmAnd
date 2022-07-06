@@ -113,11 +113,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					listView.setSelectionFromTop(0, -maxHeight);
 
 					ViewTreeObserver obs = view.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
-						obs.removeGlobalOnLayoutListener(this);
-					}
+					obs.removeOnGlobalLayoutListener(this);
 				}
 			});
 

@@ -716,11 +716,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			@Override
 			public void onGlobalLayout() {
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
+				obs.removeOnGlobalLayoutListener(this);
 				final View contentView = mainView.findViewById(R.id.scroll_view);
 				contentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
 				contentView.requestLayout();

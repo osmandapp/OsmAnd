@@ -90,11 +90,7 @@ public class GpxBlockStatisticsBuilder {
 				public void onGlobalLayout() {
 					if (blocksView.getHeight() != 0) {
 						ViewTreeObserver obs = blocksView.getViewTreeObserver();
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							obs.removeOnGlobalLayoutListener(this);
-						} else {
-							obs.removeGlobalOnLayoutListener(this);
-						}
+						obs.removeOnGlobalLayoutListener(this);
 						blocksView.setMinimumHeight(blocksView.getHeight());
 					}
 				}

@@ -1060,11 +1060,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				LinearLayout container = ll.findViewById(R.id.app_modes_content);
 				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + endTogglePadding : 0;
 				scrollView.scrollTo(Math.max(s - scrollView.getWidth(), 0), 0);
-				if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				} else {
-					ll.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-				}
+				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		};
 		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);

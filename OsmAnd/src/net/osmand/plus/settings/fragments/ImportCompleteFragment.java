@@ -132,11 +132,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				ViewTreeObserver vts = buttonContainer.getViewTreeObserver();
 				int height = buttonContainer.getMeasuredHeight();
 				recyclerView.setPadding(0, 0, 0, height);
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					vts.removeOnGlobalLayoutListener(this);
-				} else {
-					vts.removeGlobalOnLayoutListener(this);
-				}
+				vts.removeOnGlobalLayoutListener(this);
 			}
 		});
 		return root;

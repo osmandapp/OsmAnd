@@ -104,11 +104,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 			@Override
 			public void onGlobalLayout() {
 				ViewTreeObserver obs = view.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
+				obs.removeOnGlobalLayoutListener(this);
 				descriptionContainer.setPadding(0, 0, 0, buttonsContainer.getHeight());
 			}
 		});

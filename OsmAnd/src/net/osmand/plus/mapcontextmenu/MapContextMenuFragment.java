@@ -1614,11 +1614,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 					if (view != null) {
 						ViewTreeObserver obs = view.getViewTreeObserver();
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							obs.removeOnGlobalLayoutListener(this);
-						} else {
-							obs.removeGlobalOnLayoutListener(this);
-						}
+						obs.removeOnGlobalLayoutListener(this);
 
 						if (getActivity() == null) {
 							return;
