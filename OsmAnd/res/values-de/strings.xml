@@ -4733,4 +4733,8 @@
     <string name="accessibility_2d_view_off">2.5D-Ansicht aus</string>
     <string name="accessibility_2d_view_on">2.5D-Ansicht an</string>
     <string name="download_complete">Download abgeschlossen</string>
+    <string name="auto_25_chars_route_tl_kr">Links abbiegen und rechts halten</string>
+    <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts halten</string>
+    <string name="auto_25_chars_route_tr_kl">Rechts abbiegen und links halten</string>
+    <string name="auto_25_chars_route_tl_kl">Links abbiegen und links halten</string>
 </resources>

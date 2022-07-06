@@ -37,6 +37,7 @@ public class MapActions {
 	}
 
 	public void setGPXRouteParams(@Nullable GPXFile result) {
+		app.logRoutingEvent("setGPXRouteParams result " + (result != null ? result.path : null));
 		if (result == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -70,13 +71,13 @@ public class MapActions {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState);
 	}
 
@@ -113,6 +114,7 @@ public class MapActions {
 	}
 
 	public void recalculateRoute(boolean showDialog) {
+		app.logRoutingEvent("recalculateRoute showDialog " + showDialog);
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(true);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 

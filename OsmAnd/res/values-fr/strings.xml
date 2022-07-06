@@ -4735,4 +4735,31 @@
     <string name="compass_click_desc">Cliquez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
     <string name="rendering_attr_depthContourColorScheme_name">Jeu de couleurs des lignes de profondeur</string>
+    <string name="av_notes_photo_widget_desc">En tapant sur le gadget, vous pouvez prendre une photo.</string>
+    <string name="av_notes_video_widget_desc">En tapant sur le gadget, vous pouvez lancer un enregistrement vidéo.</string>
+    <string name="av_notes_audio_widget_desc">En tapant sur le gadget, vous pouvez prendre une note audio.</string>
+    <string name="auto_backup_preference_desc">Par défaut, Android effectue des sauvegardes des favoris, des noms des cartes et des paramètres OsmAnd afin de pouvoir les restaurer sur d\'autres appareils ou après une réinitialisation. Cette sauvegarde est limitée à 25 Mo.
+\nL\'utilisation d\'OsmAnd Cloud et de ce type de sauvegarde peut entraîner des conflits après restauration.</string>
+    <string name="auto_25_chars_route_tl_kl">Tournez à gauche puis gardez la gauche</string>
+    <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis gardez la droite</string>
+    <string name="auto_25_chars_route_tr_kl">Tournez à droite puis gardez la gauche</string>
+    <string name="auto_25_chars_route_tr_kr">Tournez à droite puis gardez la droite</string>
+    <string name="auto_25_chars_route_tu_kl">Faites demi-tour et restez à gauche</string>
+    <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
+    <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis gardez la gauche</string>
+    <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis gardez la droite</string>
+    <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d\'enregistrement.</string>
+    <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes pour le trajet en cours d\'enregistrement.</string>
+    <string name="true_bearing_wdiget_desc">Angle entre le Nord vrai et la destination depuis votre position.</string>
+    <string name="relative_bearing_widget_desc">Affiche l\'angle entre la direction de votre déplacement et la destination.</string>
+    <string name="next_turn_widget_desc">Le gadget illustre la prochaine bifurcation avec une image et vous indique la distance qui vous en sépare.</string>
+    <string name="trip_recording_uphill_widget_desc">Affiche la somme de toutes les montées pour le trajet en cours d\'enregistrement.</string>
+    <string name="second_next_turn_widget_desc">Le gadget vous informe de la seconde bifurcation à venir et s\'active à l\'approche de cette bifurcation.</string>
+    <string name="duplacate_widget_added_snackbar">Un gadget doublon sera ensuite ajouté dans la liste.</string>
+    <string name="second_marker_widget_desc">Vous pouvez configurer le gadget pour afficher la distance ou l\'heure d\'arrivée estimée restante pour le deuxième marqueur de carte.</string>
+    <string name="first_marker_widget_desc">Vous pouvez configurer le gadget pour afficher la distance ou l\'heure d\'arrivée estimée restante pour le premier marqueur de carte.</string>
+    <string name="time_to_intermediate_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"L\'heure de départ\" pour le premier point intermédiaire. Le temps est constamment mis à jour durant le guidage et est égal au temps de l\'itinéraire depuis la position actuelle.</string>
+    <string name="distance_to_destination_widget_desc">Le gadget affiche la distance restante jusqu\'au dernier point de l\'arrivée.</string>
+    <string name="time_to_destination_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"L\'heure de départ\" pour le dernier point de l\'arrivée. Le temps est constamment mis à jour durant le guidage et est égal au temps de l\'itinéraire depuis la position actuelle.</string>
+    <string name="distance_to_intermediate_widget_desc">Le gadget affiche la distance restante jusqu\'au premier point intermédiaire. Une fois les points intermédiaires dépassés, la distance sera mise à jour jusqu\'au point intermédiaire suivant.</string>
 </resources>

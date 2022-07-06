@@ -4724,4 +4724,37 @@
     <string name="accessibility_2d_view_on">2.5D zobrazenie Zapnuté</string>
     <string name="download_complete">Sťahovanie dokončené</string>
     <string name="accessibility_2d_view_off">2.5D zobrazenie Vypnuté</string>
+    <string name="auto_backup_title">Automatické zálohovanie</string>
+    <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridaný ako ďalší v zozname.</string>
+    <string name="shared_string_duplicate">Duplikát</string>
+    <string name="av_notes_photo_widget_desc">Stlačenie nástroja umožňuje snímať fotografiu.</string>
+    <string name="av_notes_audio_widget_desc">Stlačenie nástroja umožňuje uložiť audio-poznámku.</string>
+    <string name="trip_recording_duration_widget_desc">Zobrazuje čas zaznamenávania stopy, dĺžku práve zaznamenávaného výletu v minútach/hodinách.</string>
+    <string name="trip_recording_distance_widget_desc">Zobrazuje vzdialenosť práve zaznamenávaného výletu.</string>
+    <string name="second_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k druhej mapovej značke.</string>
+    <string name="first_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k prvej mapovej značke.</string>
+    <string name="time_to_destination_widget_desc">Nástroj zobrazuje \"Čas príjazdu\" alebo \"Zostávajúci čas\" k poslednému cieľovému bodu. Čas je stále aktualizovaný počas navigácie a rovná sa času trasy z aktuálnej pozície.</string>
+    <string name="distance_to_intermediate_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k prvému prechodnému bodu. Keď je prechodný bod dosiahnutý, vzdialenosť je aktualizovaná k ďalšiemu prechodnému bodu.</string>
+    <string name="distance_to_destination_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k poslednému cieľovému bodu.</string>
+    <string name="widget_with_dot">Nástroj.</string>
+    <string name="compass_click_desc">Stlačte kompas pre prepnutie režimu orientácie mapy.</string>
+    <string name="compass_desc">Zobrazuje smer k severu.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Farebná schéma hĺbkových vrstevníc</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
+    <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
+    <string name="rendering_attr_depthContourWidth_name">Hrúbka čiary hĺbkových vrstevníc</string>
+    <string name="auto_backup_preference_desc">Prevolene ukladá Android zálohy obľúbených bodov, mapových značiek a nastavení OsmAnd, aby ich mohol obnoviť na novom zariadení alebo po opätovnej inštalácii. Táto záloha je obmedzená na 25 MB.
+\nAk používate OsmAnd Cloud, toto môže viesť k nejasnostiam po opätovnej inštalácii.</string>
+    <string name="av_notes_video_widget_desc">Stlačenie nástroja umožňuje začať video-nahrávku.</string>
+    <string name="trip_recording_uphill_widget_desc">Zobrazuje súčet všetkých výstupov v práve zaznamenávanom výlete.</string>
+    <string name="trip_recording_downhill_widget_desc">Zobrazuje súčet všetkých zostupov v práve zaznamenávanom výlete.</string>
+    <string name="true_bearing_wdiget_desc">Uhol medzi skutočným severom a cieľovým bodom pozorovaný z aktuálnej pozície.</string>
+    <string name="relative_bearing_widget_desc">Zobrazuje uhol medzi vaším smerom pohybu a cieľovým bodom.</string>
+    <string name="time_to_intermediate_widget_desc">Nástroj zobrazuje \"Čas príjazdu\" alebo \"Zostávajúci čas\" k prvému prechodnému bodu. Čas je stále aktualizovaný počas navigácie, a keď je prechodný bod dosiahnutý, čas sa aktualizuje na ďalší prechodný bod.</string>
+    <string name="second_next_turn_widget_desc">Nástroj zobrazuje informácie o druhom nasledujúcom zabočení, ktoré sa zobrazí ak je už v dostatočnej blízkosti.</string>
+    <string name="compass_visible_if_map_rotated_desc">Skrytý ak je sever hore</string>
+    <string name="compass_always_hidden">Vždy skrytý</string>
+    <string name="compass_always_visible">Vždy zobrazený</string>
+    <string name="next_turn_widget_desc">Nástroj zobrazuje informácie o nasledujúcom zabočení s obrázkom manévra a vzdialenosti k nemu.</string>
+    <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
 </resources>

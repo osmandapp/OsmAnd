@@ -242,5 +242,23 @@ public class GPXRouteParams {
 			}
 			return locationList;
 		}
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "GPXRouteParamsBuilder{" +
+					"calculateOsmAndRoute=" + calculateOsmAndRoute +
+					", file=" + file.path +
+					", leftSide=" + leftSide +
+					", reverse=" + reverse +
+					", passWholeRoute=" + passWholeRoute +
+					", calculateOsmAndRouteParts=" + calculateOsmAndRouteParts +
+					", calculatedRouteTimeSpeed=" + calculatedRouteTimeSpeed +
+					", connectPointsStraightly=" + connectPointsStraightly +
+					", useIntermediateRtePoints=" + useIntermediateRtePoints +
+					", selectedSegment=" + selectedSegment +
+					", selectedRoute=" + selectedRoute +
+					'}';
+		}
 	}
 }
