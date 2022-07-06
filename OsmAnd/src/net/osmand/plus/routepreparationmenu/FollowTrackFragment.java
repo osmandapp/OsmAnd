@@ -503,7 +503,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);

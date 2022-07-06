@@ -107,7 +107,7 @@ public class RouteStatisticCard extends MapBaseCard {
 		updateButtons();
 
 		if (isTransparentBackground()) {
-			view.setBackgroundDrawable(null);
+			view.setBackground(null);
 		}
 	}
 

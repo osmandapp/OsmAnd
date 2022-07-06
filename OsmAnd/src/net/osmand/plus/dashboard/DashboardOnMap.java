@@ -1137,7 +1137,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateMapShadowColor(malpha);
 			if (t < 1) {
 				//noinspection deprecation
-				toolbar.setBackgroundDrawable(gradientToolbar);
+				toolbar.setBackground(gradientToolbar);
 			} else {
 				toolbar.setBackgroundColor(0xff000000 | baseColor);
 			}

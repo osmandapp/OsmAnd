@@ -206,7 +206,7 @@ public class TopToolbarView {
 
 		if (controller.isTopViewVisible()) {
 			if (bg != null) {
-				topBarLayout.setBackgroundDrawable(bg);
+				topBarLayout.setBackground(bg);
 			} else {
 				topBarLayout.setBackgroundResource(bgId);
 			}

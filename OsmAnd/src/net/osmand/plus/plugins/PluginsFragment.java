@@ -269,7 +269,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				pluginLogo.setBackgroundResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_plugin_logo_enabled_light);
 			} else {
 				TypedArray attributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
-				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
+				pluginLogo.setBackground(attributes.getDrawable(0));
 				attributes.recycle();
 			}
 

@@ -144,7 +144,7 @@ public class PublicTransportCard extends MapBaseCard {
 		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
 		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow && showDivider ? View.VISIBLE : View.GONE);
 		if (transparentBackground) {
-			view.findViewById(R.id.routes_info_container).setBackgroundDrawable(null);
+			view.findViewById(R.id.routes_info_container).setBackground(null);
 		}
 	}
 
@@ -365,7 +365,7 @@ public class PublicTransportCard extends MapBaseCard {
 				}
 			});
 		} else {
-			bageView.findViewById(R.id.button).setBackgroundDrawable(null);
+			bageView.findViewById(R.id.button).setBackground(null);
 		}
 		return bageView;
 	}
@@ -407,7 +407,7 @@ public class PublicTransportCard extends MapBaseCard {
 				}
 			});
 		} else {
-			bageView.findViewById(R.id.button).setBackgroundDrawable(null);
+			bageView.findViewById(R.id.button).setBackground(null);
 		}
 		return bageView;
 	}

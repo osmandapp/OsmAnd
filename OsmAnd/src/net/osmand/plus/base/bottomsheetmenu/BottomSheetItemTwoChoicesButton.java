@@ -155,11 +155,11 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 			bottomBtnBg.setCornerRadii(new float[]{bottomBtnBgRadius, bottomBtnBgRadius, 0, 0, 0, 0, bottomBtnBgRadius, bottomBtnBgRadius});
 			rightBtnContainer.setBackgroundColor(Color.TRANSPARENT);
 			rightBtn.setTextColor(activeColor);
-			leftBtnContainer.setBackgroundDrawable(bottomBtnBg);
+			leftBtnContainer.setBackground(bottomBtnBg);
 			leftBtn.setTextColor(bottomBtnTextColor);
 		} else {
 			bottomBtnBg.setCornerRadii(new float[]{0, 0, bottomBtnBgRadius, bottomBtnBgRadius, bottomBtnBgRadius, bottomBtnBgRadius, 0, 0});
-			rightBtnContainer.setBackgroundDrawable(bottomBtnBg);
+			rightBtnContainer.setBackground(bottomBtnBg);
 			rightBtn.setTextColor(bottomBtnTextColor);
 			leftBtnContainer.setBackgroundColor(Color.TRANSPARENT);
 			leftBtn.setTextColor(activeColor);

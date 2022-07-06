@@ -107,7 +107,7 @@ public class TrackWidthCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 
 		View headerView = view.findViewById(R.id.header_view);
-		headerView.setBackgroundDrawable(null);
+		headerView.setBackground(null);
 
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.select_track_width);

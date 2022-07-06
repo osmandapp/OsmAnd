@@ -259,7 +259,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(),
 						R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {

@@ -1096,7 +1096,7 @@ public class MenuBuilder {
 		shape.setColor(bgColor);
 		transportRect.setTextColor(ColorUtilities.getContrastColor(app, bgColor, true));
 
-		transportRect.setBackgroundDrawable(shape);
+		transportRect.setBackground(shape);
 		transportRect.setText(route.route.getAdjustedRouteRef(true));
 		baseView.addView(transportRect);
 

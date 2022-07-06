@@ -173,7 +173,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			if (isPortrait()) {
-				view.findViewById(getBottomScrollViewId()).setBackgroundDrawable(null);
+				view.findViewById(getBottomScrollViewId()).setBackground(null);
 				LinearLayout cardsContainer = getCardsContainer();
 				FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
 				AndroidUtils.setMargins(layoutParams, pageMarginPx, 0, pageMarginPx, 0);
@@ -253,7 +253,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);

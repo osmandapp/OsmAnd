@@ -154,7 +154,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 					background.setCornerRadii(internalBtnRadii);
 					hideDividers(i - 1, i);
 				}
-				button.setBackgroundDrawable(background);
+				button.setBackground(background);
 				updateItemView(button, item, textColor);
 			} else {
 				button.setBackgroundColor(Color.TRANSPARENT);

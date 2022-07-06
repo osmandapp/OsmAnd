@@ -426,7 +426,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {
 		Drawable background = AppCompatResources.getDrawable(view.getContext(),
 				checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode));
-		view.setBackgroundDrawable(background);
+		view.setBackground(background);
 	}
 
 	private void createItem(View view, ItemType type) {
@@ -511,7 +511,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		} else {
 			UiUtilities.tintDrawable(background, ColorUtilities.getInactiveButtonsAndLinksColor(context, nightMode));
 		}
-		view.setBackgroundDrawable(background);
+		view.setBackground(background);
 	}
 
 	public static void setItemBackgroundActive(Context context, boolean nightMode, View view) {

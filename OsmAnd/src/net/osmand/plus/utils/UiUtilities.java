@@ -437,7 +437,7 @@ public class UiUtilities {
 
 			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			endButtonText.setTextColor(activeColor);
-			startButtonContainer.setBackgroundDrawable(background);
+			startButtonContainer.setBackground(background);
 			startButtonText.setTextColor(textColor);
 
 			if (centerButtonContainer != null) {
@@ -447,7 +447,7 @@ public class UiUtilities {
 			}
 		} else if (buttonType == CustomRadioButtonType.CENTER) {
 			background.setCornerRadii(new float[] {0, 0, 0, 0, 0, 0, 0, 0});
-			centerButtonContainer.setBackgroundDrawable(background);
+			centerButtonContainer.setBackground(background);
 			AndroidUiHelper.updateVisibility(centerButtonContainer, true);
 
 			TextView centerButtonText = centerButtonContainer.findViewById(R.id.center_button);
@@ -472,7 +472,7 @@ public class UiUtilities {
 			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
 			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
 
-			endButtonContainer.setBackgroundDrawable(background);
+			endButtonContainer.setBackground(background);
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonText.setTextColor(activeColor);
