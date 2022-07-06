@@ -167,6 +167,8 @@ public class FailSafeFunctions {
 	
 	public static void enterRoutingMode(@NonNull MapActivity mapActivity, @Nullable GPXRouteParamsBuilder gpxRoute) {
 		OsmandApplication app = mapActivity.getMyApplication();
+		app.logRoutingEvent("enterRoutingMode gpxRoute " + gpxRoute);
+
 		mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSettings().FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);

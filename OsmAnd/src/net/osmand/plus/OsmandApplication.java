@@ -1060,7 +1060,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return userAndroidId;
 	}
 
-	public void logEvent(String event) {
+	public void logEvent(@NonNull String event) {
 		try {
 			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_APP_USAGE);
 		} catch (Exception e) {
@@ -1068,7 +1068,15 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logMapDownloadEvent(String event, IndexItem item) {
+	public void logRoutingEvent(@NonNull String event) {
+		try {
+			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_ROUTING);
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+
+	public void logMapDownloadEvent(@NonNull String event,@NonNull  IndexItem item) {
 		try {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName(), AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
@@ -1076,7 +1084,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logMapDownloadEvent(String event, IndexItem item, long time) {
+	public void logMapDownloadEvent(@NonNull String event,@NonNull  IndexItem item, long time) {
 		try {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec", AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
