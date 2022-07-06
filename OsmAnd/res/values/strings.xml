@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+
     <string name="auto_25_chars_route_tl_kl">Turn left and keep left</string>
     <string name="auto_25_chars_route_tl_kr">Turn left and keep right</string>
     <string name="auto_25_chars_route_tr_kl">Turn right and keep left</string>
@@ -19,7 +20,7 @@
     <string name="auto_25_chars_route_tu_kr">Make U-turn and keep right</string>
     <string name="auto_25_chars_route_roundabout_kl">Take %1$d exit and keep left</string>
     <string name="auto_25_chars_route_roundabout_kr">Take %1$d exit and keep right</string>
-    <string name="auto_backup_preference_desc">By default Android saves backups of favourites, map tokens and osmand settings to restore them on new devices or after reinstallation, this backup is limited to 25 MB.\nIf you are using OsmAnd Cloud, this can lead to misunderstandings after reinstallation.</string>
+    <string name="auto_backup_preference_desc">By default Android saves backups of favourites, map tokens and OsmAnd settings to restore them on new devices or after reinstallation. This backup is limited to 25 MB.\nIf you are using OsmAnd Cloud, this can lead to misunderstandings after reinstallation.</string>
     <string name="auto_backup_title">Auto-backup</string>
     <string name="duplacate_widget_added_snackbar">A duplicate widget is added next in the list.</string>
     <string name="shared_string_duplicate">Duplicate</string>
@@ -28,7 +29,7 @@
     <string name="av_notes_audio_widget_desc">Taping on the widget allows for taking audio notes.</string>
     <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents of the current recorded trip.</string>
     <string name="trip_recording_uphill_widget_desc">Shows the sum of all the climbs of the currently recorded trip.</string>
-    <string name="trip_recording_duration_widget_desc">Shows time of track recording the duration in minutes/hours of the currently recorded trip.</string>
+    <string name="trip_recording_duration_widget_desc">Shows time of track recording, the duration in minutes/hours of the currently recorded trip.</string>
     <string name="trip_recording_distance_widget_desc">Shows the distance of the currently recorded trip.</string>
     <string name="true_bearing_wdiget_desc">Angle between the true north and the target point observed from your location.</string>
     <string name="relative_bearing_widget_desc">Shows the angle between your forward movement direction and the target point.</string>
@@ -45,7 +46,7 @@
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Click on compass to switch map orientation mode.</string>
+    <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
     <string name="compass_desc">Shows direction to the north.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
@@ -54,11 +55,8 @@
     <string name="accessibility_2d_view_off">2.5D view Off</string>
     <string name="accessibility_2d_view_on">2.5D view On</string>
     <string name="download_complete">Download complete</string>
-    <string name="lang_ckb">Central Kurdish</string>
     <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
-    <string name="routing_attr_motor_type_description">Select fuel type used by your vehicle motor, to calculate CO2 emission.</string>
-    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
     <string name="marker_2nd">Second marker</string>
     <string name="marker_1st">First marker</string>
     <string name="map_marker_average_speed_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
@@ -81,6 +79,8 @@
     <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on Satellite Imagery and digital elevation models. It could vary from device recorded altitude and could be used as altitude correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
+    <string name="routing_attr_motor_type_description">Select fuel type used by your vehicle motor, to calculate CO2 emission.</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Petrol</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
@@ -1137,6 +1137,7 @@
     <string name="lang_ba">Bashkir</string>
     <string name="lang_bar">Bavarian</string>
     <string name="lang_ce">Chechen</string>
+    <string name="lang_ckb">Central Kurdish</string>
     <string name="lang_cv">Chuvash</string>
     <string name="lang_gu">Gujarati</string>
     <string name="lang_jv">Javanese</string>
