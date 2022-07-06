@@ -932,11 +932,7 @@ public class AndroidUtils {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
-					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
-				} else {
-					return (long) (fs.getAvailableBlocks()) * fs.getBlockSize();
-				}
+				return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -948,11 +944,7 @@ public class AndroidUtils {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
-					return fs.getBlockCountLong() * fs.getBlockSizeLong();
-				} else {
-					return (long) (fs.getBlockCount()) * fs.getBlockSize();
-				}
+				return fs.getBlockCountLong() * fs.getBlockSizeLong();
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -964,7 +956,7 @@ public class AndroidUtils {
 		if (dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+				return (float) (fs.getBlockSizeLong()) * fs.getAvailableBlocksLong() / (1 << 30);
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}

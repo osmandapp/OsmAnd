@@ -643,8 +643,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				size = AndroidUtils.formatSize(activity, ((long) fs.getAvailableBlocks()) * fs.getBlockSize());
-				percent = 100 - (int) ((long) fs.getAvailableBlocks() * 100 / fs.getBlockCount());
+				size = AndroidUtils.formatSize(activity, (fs.getAvailableBlocksLong()) * fs.getBlockSizeLong());
+				percent = 100 - (int) (fs.getAvailableBlocksLong() * 100 / fs.getBlockCountLong());
 			} catch (IllegalIcuArgumentException e) {
 				LOG.error(e);
 			}

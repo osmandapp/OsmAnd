@@ -104,13 +104,7 @@ public class PicassoUtils {
 
 		try {
 			StatFs statFs = new StatFs(dir.getAbsolutePath());
-			//noinspection deprecation
-			long blockCount =
-					SDK_INT < JELLY_BEAN_MR2 ? (long) statFs.getBlockCount() : statFs.getBlockCountLong();
-			//noinspection deprecation
-			long blockSize =
-					SDK_INT < JELLY_BEAN_MR2 ? (long) statFs.getBlockSize() : statFs.getBlockSizeLong();
-			long available = blockCount * blockSize;
+			long available = statFs.getBlockCountLong() * statFs.getBlockSizeLong();
 			// Target 2% of the total space.
 			size = available / 50;
 		} catch (IllegalArgumentException e) {
