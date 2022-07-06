@@ -164,7 +164,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		outlinePaint.setAntiAlias(true);
 		outlinePaint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2f));
 		outlinePaint.setStrokeCap(Paint.Cap.ROUND);
-		outlinePaint.setColor(ContextCompat.getColor(context, R.color.osmand_orange));
+		outlinePaint.setColor(getColor(R.color.osmand_orange));
 	}
 
 	private void updateContextMarker() {

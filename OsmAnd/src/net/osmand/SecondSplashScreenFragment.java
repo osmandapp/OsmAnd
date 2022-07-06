@@ -71,7 +71,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		int backgroundColorId = systemDefaultNightMode ?
 				R.color.list_background_color_dark :
 				R.color.map_background_color_light;
-		view.setBackgroundColor(getResources().getColor(backgroundColorId));
+		view.setBackgroundColor(getColor(backgroundColorId));
 
 		ImageView logo = new ImageView(getContext());
 		logo.setId(LOGO_ID);

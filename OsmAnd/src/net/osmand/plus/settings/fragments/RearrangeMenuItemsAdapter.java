@@ -147,7 +147,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			if (DRAWER_DIVIDER_ID.equals(id)) {
 				h.title.setText(R.string.shared_string_divider);
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
-				h.title.setTextColor(app.getResources().getColor(activeColorRes));
+				h.title.setTextColor(app.getColor(activeColorRes));
 				h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 				h.description.setText(R.string.divider_descr);
 				h.icon.setVisibility(View.GONE);
@@ -178,7 +178,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 						menuItem.getTitle()));
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_regular)));
 				h.title.setText(menuItem.getTitle());
-				h.title.setTextColor(app.getResources().getColor(textColorRes));
+				h.title.setTextColor(app.getColor(textColorRes));
 				h.description.setText(getDescription(menuItem.getId()));
 				h.divider.setVisibility(View.GONE);
 				h.moveButton.setVisibility(View.VISIBLE);

@@ -136,7 +136,7 @@ public class NavigationNotification extends OsmandNotification {
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
-			color = app.getResources().getColor(R.color.osmand_orange);
+			color = app.getColor(R.color.osmand_orange);
 
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app);
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);

@@ -774,15 +774,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
-			int color = model.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : model.getColor();
+			int color = model.getColor() == 0 ? getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app.getUIUtilities().getPaintedIcon(
-						R.drawable.ic_action_folder, visible ? color : getResources().getColor(disabledColor)),
+						R.drawable.ic_action_folder, visible ? color : getColor(disabledColor)),
 						row);
 			}
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = row.findViewById(R.id.category_name);
-			label.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
+			label.setTextColor(getColor(visible ? enabledColor : disabledColor));
 			if (visible) {
 				Typeface typeface = FontCache.getFont(getContext(), "ui-fonts/Roboto-Medium.ttf");
 				label.setTypeface(typeface, Typeface.NORMAL);
@@ -886,10 +886,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			name.setText(model.getDisplayName(app), TextView.BufferType.SPANNABLE);
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
-			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
+			name.setTextColor(getColor(visible ? enabledColor : disabledColor));
 			addressText.setText(model.isAddressSpecified() ? model.getAddress() : null);
 			int color = visible
-					? app.getFavoritesHelper().getColorWithCategory(model, getResources().getColor(R.color.color_favorite))
+					? app.getFavoritesHelper().getColorWithCategory(model, getColor(R.color.color_favorite))
 					: ContextCompat.getColor(app, disabledIconColor);
 			icon.setImageDrawable(PointImageDrawable.getFromFavorite(getActivity(), color, false, model));
 			int iconSize = (int) getResources().getDimension(R.dimen.favorites_my_places_icon_size);
@@ -905,7 +905,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			direction.setVisibility(View.VISIBLE);
 			if (!visible) {
-				distanceText.setTextColor(getResources().getColor(disabledColor));
+				distanceText.setTextColor(getColor(disabledColor));
 				direction.setImageDrawable(arrowImageDisabled);
 			}
 

@@ -270,7 +270,7 @@ public class FavoritesActivity extends TabActivity {
 			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
 			//styling search hint icon and text
 			SearchView.SearchAutoComplete searchEdit = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
-			searchEdit.setTextColor(activity.getResources().getColor(R.color.color_white));
+			searchEdit.setTextColor(activity.getColor(R.color.color_white));
 			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
 			float rawTextSize = searchEdit.getTextSize();
 			int textSize = (int) (rawTextSize * 1.25);

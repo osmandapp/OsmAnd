@@ -604,10 +604,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		LockableScrollView bottomScrollView = (LockableScrollView) view.findViewById(R.id.context_menu_bottom_scroll);
 		bottomScrollView.setScrollingEnabled(false);
-		bottomScrollView.setBackgroundColor(getResources()
-				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
-		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getResources()
-				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		bottomScrollView.setBackgroundColor(getColor(
+				nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getColor(
+				nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 

@@ -128,7 +128,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
 
 		nameTv.setText(names.get(position));
 		if (wrong) {
-			Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_alert, app.getResources().getColor(R.color.color_warning));
+			Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_alert, app.getColor(R.color.color_warning));
 			iconIv.setImageDrawable(icon);
 			iconIv.setVisibility(View.VISIBLE);
 		}

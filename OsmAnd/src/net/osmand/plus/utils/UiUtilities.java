@@ -310,7 +310,7 @@ public class UiUtilities {
 							textColorSet = R.color.icon_color_default_light;
 						}
 					}
-					txt.setTextColor(app.getResources().getColor(textColorSet));
+					txt.setTextColor(ColorUtilities.getColor(app, textColorSet));
 				}
 				txt.setText(OsmAndFormatter.getFormattedDistance(mes[0], app));
 			} else {

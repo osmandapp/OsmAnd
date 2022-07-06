@@ -102,9 +102,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private void buildGroupFavouritesView(View view) {
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(fav);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
-			int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
-			color = favoriteGroup.isVisible() ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
+			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
 					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),

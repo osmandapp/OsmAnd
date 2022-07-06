@@ -21,10 +21,13 @@ import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -41,6 +44,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -142,6 +146,11 @@ public abstract class OsmandMapLayer {
 
 	public String getString(@StringRes int resId, Object... formatArgs) {
 		return ctx.getString(resId, formatArgs);
+	}
+
+	@ColorInt
+	protected int getColor(@ColorRes int resId) {
+		return ColorUtilities.getColor(getContext(), resId);
 	}
 
 	public OsmandMapTileView getMapView() {

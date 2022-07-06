@@ -234,7 +234,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
 			icon.setImageDrawable(PointImageDrawable.getFromFavorite(activity, app.getFavoritesHelper().getColorWithCategory(favorite,
-					app.getResources().getColor(R.color.color_favorite)), false, favorite));
+					app.getColor(R.color.color_favorite)), false, favorite));
 			 
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude());

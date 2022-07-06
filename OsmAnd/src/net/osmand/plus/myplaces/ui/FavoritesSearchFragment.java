@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -465,12 +466,12 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView title = (TextView) view.findViewById(R.id.title);
 					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 					int color = visible
-							? app.getFavoritesHelper().getColorWithCategory(point, getResources().getColor(R.color.color_favorite))
-							: ContextCompat.getColor(app, disabledIconColor);
+							? app.getFavoritesHelper().getColorWithCategory(point, getColor(R.color.color_favorite))
+							: getColor(disabledIconColor);
 					imageView.setImageDrawable(PointImageDrawable.getFromFavorite(activity, color, false, point));
 					title.setText(point.getDisplayName(app));
 					title.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
-					title.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
+					title.setTextColor(getColor(visible ? enabledColor : disabledColor));
 
 					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 							location.getLatitude(), location.getLongitude()));
@@ -479,7 +480,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					direction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_direction_arrow, visible ? R.color.color_distance : disabledColor));
 					TextView distanceText = (TextView) view.findViewById(R.id.distance);
 					distanceText.setText(distance);
-					distanceText.setTextColor(visible ? getResources().getColor(enabledColor) : getResources().getColor(disabledColor));
+					distanceText.setTextColor(visible ? getColor(enabledColor) : getColor(disabledColor));
 					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategoryDisplayName(app));
 				}
 			}
@@ -506,6 +507,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 		void setFilterResults(Set<?> values) {
 			this.filter = values;
+		}
+
+		@ColorInt
+		protected int getColor(@ColorInt int resId) {
+			return ColorUtilities.getColor(getContext(), resId);
 		}
 	}
 

@@ -144,7 +144,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
         ImageView imageView = view.findViewById(R.id.warning_image_view);
         imageView.setImageDrawable(getPaintedContentIcon(R.drawable.ic_small_warning,
-                getResources().getColor(R.color.color_warning)));
+                getColor(R.color.color_warning)));
 
 
         final EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);

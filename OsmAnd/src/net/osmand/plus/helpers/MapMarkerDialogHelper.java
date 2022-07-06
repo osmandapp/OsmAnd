@@ -77,8 +77,7 @@ public class MapMarkerDialogHelper {
 		if (!marker.history) {
 			waypointIcon.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
 			AndroidUtils.setTextPrimaryColor(ctx, text, nightMode);
-			textDist.setTextColor(ctx.getResources()
-					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
+			textDist.setTextColor(ctx.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		} else {
 			waypointIcon.setImageDrawable(app.getUIUtilities()
 					.getIcon(R.drawable.ic_action_flag, !nightMode));

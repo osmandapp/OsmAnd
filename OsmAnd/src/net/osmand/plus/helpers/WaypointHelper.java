@@ -835,7 +835,7 @@ public class WaypointHelper {
 			} else if (type == FAVORITES ) {
 				return PointImageDrawable.getFromFavorite(uiCtx,
 						app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point,
-								app.getResources().getColor(R.color.color_favorite)), false, (FavouritePoint) point);
+								app.getColor(R.color.color_favorite)), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
 				if (point instanceof WptLocationPoint) {
 					return PointImageDrawable.getFromWpt(uiCtx, point.getColor(), false, ((WptLocationPoint) point).getPt());

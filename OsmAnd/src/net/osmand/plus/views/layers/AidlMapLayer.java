@@ -18,6 +18,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.aidl.AidlMapLayerWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -124,7 +125,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		boolean night = getApplication().getDaynightHelper().isNightMode();
 
 		pointInnerCircle = new Paint();
-		pointInnerCircle.setColor(res.getColor(R.color.poi_background));
+		pointInnerCircle.setColor(getColor(R.color.poi_background));
 		pointInnerCircle.setStyle(Paint.Style.FILL);
 		pointInnerCircle.setAntiAlias(true);
 

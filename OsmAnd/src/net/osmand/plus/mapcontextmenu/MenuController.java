@@ -556,8 +556,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (openingHoursInfo != null) {
-				int colorOpen = mapActivity.getResources().getColor(R.color.ctx_menu_amenity_opened_text_color);
-				int colorClosed = mapActivity.getResources().getColor(R.color.ctx_menu_amenity_closed_text_color);
+				int colorOpen = mapActivity.getColor(R.color.ctx_menu_amenity_opened_text_color);
+				int colorClosed = mapActivity.getColor(R.color.ctx_menu_amenity_closed_text_color);
 				return getSpannableOpeningHours(openingHoursInfo, colorOpen, colorClosed);
 			} else if (shouldShowMapSize()) {
 				return mapActivity.getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());

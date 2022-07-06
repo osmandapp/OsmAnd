@@ -234,8 +234,8 @@ public class TopToolbarView {
 		} else {
 			refreshButton.setImageDrawable(uiUtils.getIcon(refreshBtnIconId, refreshBtnIconClrId));
 		}
-		int titleColor = titleTextClr != -1 ? titleTextClr : mapActivity.getResources().getColor(titleTextClrId);
-		int descrColor = descrTextClr != -1 ? descrTextClr : mapActivity.getResources().getColor(descrTextClrId);
+		int titleColor = titleTextClr != -1 ? titleTextClr : mapActivity.getColor(titleTextClrId);
+		int descrColor = descrTextClr != -1 ? descrTextClr : mapActivity.getColor(descrTextClrId);
 		titleView.setTextColor(titleColor);
 		descrView.setTextColor(descrColor);
 		saveView.setTextColor(titleColor);

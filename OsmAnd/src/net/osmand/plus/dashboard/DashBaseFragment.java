@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
@@ -131,6 +133,11 @@ public abstract class DashBaseFragment extends Fragment {
 			dashboard.onDetach(this);
 			dashboard = null;
 		}
+	}
+
+	@ColorInt
+	protected int getColor(@ColorInt int resId) {
+		return ColorUtilities.getColor(getContext(), resId);
 	}
 
 	protected void startFavoritesActivity(int tab) {

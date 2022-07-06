@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -688,7 +689,7 @@ public class MenuBuilder {
 			textView.setEllipsize(TextUtils.TruncateAt.END);
 		}
 		if (textColor > 0) {
-			textView.setTextColor(view.getResources().getColor(textColor));
+			textView.setTextColor(getColor(textColor));
 		}
 		llText.addView(textView);
 
@@ -916,19 +917,19 @@ public class MenuBuilder {
 			SpannableStringBuilder ssb = new SpannableStringBuilder();
 			if (line.getKey() == OsmAndFormatter.UTM_FORMAT) {
 				ssb.append("UTM: ");
-				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			} else if (line.getKey() == OsmAndFormatter.MGRS_FORMAT) {
 				ssb.append("MGRS: ");
-				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			} else if (line.getKey() == OsmAndFormatter.OLC_FORMAT) {
 				ssb.append("OLC: ");
-				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			} else if (line.getKey() == OsmAndFormatter.SWISS_GRID_FORMAT) {
 				ssb.append("CH1903: ");
-				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			} else if (line.getKey() == OsmAndFormatter.SWISS_GRID_PLUS_FORMAT) {
 				ssb.append("CH1903+: ");
-				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			ssb.append(line.getValue());
 			button.setText(ssb);
@@ -963,7 +964,7 @@ public class MenuBuilder {
 			AndroidUtils.setMargins(llHorLineParams, dpToPx(64f), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
+		horizontalLine.setBackgroundColor(getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
 		((LinearLayout) view).addView(horizontalLine, index);
 	}
 
@@ -1052,7 +1053,7 @@ public class MenuBuilder {
 		if (d != null) {
 			d = DrawableCompat.wrap(d);
 			d.mutate();
-			d.setColorFilter(app.getResources().getColor(light
+			d.setColorFilter(getColor(light
 					? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark), PorterDuff.Mode.SRC_IN);
 			return d;
 		} else {
@@ -1432,6 +1433,11 @@ public class MenuBuilder {
 
 	private void searchSortedAmenities(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
 		execute(new SearchAmenitiesTask(filter, latLon, listener));
+	}
+
+	@ColorInt
+	protected int getColor(@ColorInt int resId) {
+		return ColorUtilities.getColor(mapActivity, resId);
 	}
 
 	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {

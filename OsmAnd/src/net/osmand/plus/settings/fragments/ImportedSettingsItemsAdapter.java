@@ -57,7 +57,7 @@ public class ImportedSettingsItemsAdapter extends
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
-		holder.title.setTextColor(app.getResources().getColor(activeColorRes));
+		holder.title.setTextColor(app.getColor(activeColorRes));
 		Typeface typeface = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));
 		if (typeface != null) {
 			holder.title.setTypeface(typeface);

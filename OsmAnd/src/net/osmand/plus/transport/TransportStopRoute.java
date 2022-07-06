@@ -79,7 +79,7 @@ public class TransportStopRoute {
 
 	public int getColor(OsmandApplication ctx, boolean nightMode) {
 		if (cachedColor == 0 || cachedNight != nightMode) {
-			cachedColor = ctx.getResources().getColor(R.color.transport_route_line);
+			cachedColor = ctx.getColor(R.color.transport_route_line);
 			cachedNight = nightMode;
 			if (type != null) {
 				RenderingRulesStorage rrs = ctx.getRendererRegistry().getCurrentSelectedRenderer();

@@ -190,7 +190,7 @@ public class ItemViewHolder {
 		int color = textColorSecondary;
 		if (downloadItem.isDownloaded() && !isDownloading) {
 			int colorId = downloadItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
-			color = context.getResources().getColor(colorId);
+			color = context.getColor(colorId);
 		}
 		if (downloadItem.isDownloaded()) {
 			leftImageView.setImageDrawable(getContentIcon(context,

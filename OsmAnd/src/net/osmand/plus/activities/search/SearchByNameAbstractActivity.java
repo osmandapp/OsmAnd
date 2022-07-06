@@ -509,7 +509,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				label.setText(text);
 			} else {
 				label.setText(distanceText + " " + text, BufferType.SPANNABLE);
-				((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0,
+				((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getColor(R.color.color_distance)), 0,
 						distanceText.length(), 0);
 			}
 			return row;

@@ -1402,7 +1402,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
 			Spannable spannable = new SpannableString(selectStreets + " " + inCityName);
 			boolean light = settings.isLightContent();
-			spannable.setSpan(new ForegroundColorSpan(getResources().getColor(light ? R.color.icon_color_default_light : R.color.color_white)),
+			spannable.setSpan(new ForegroundColorSpan(app.getColor(light ? R.color.icon_color_default_light : R.color.color_white)),
 					selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 			final SearchResult lastCityFinal = lastCity;
@@ -1439,8 +1439,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								}
 
 								@Override
-								public void searchStarted(SearchPhrase phrase) {
-								}
+								public void searchStarted(SearchPhrase phrase) { }
 
 								@Override
 								public boolean searchFinished(SearchPhrase phrase) {

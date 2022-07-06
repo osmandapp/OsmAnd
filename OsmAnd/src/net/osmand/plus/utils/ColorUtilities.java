@@ -13,6 +13,11 @@ import net.osmand.plus.R;
 public class ColorUtilities {
 
 	@ColorInt
+	public static int getColor(@NonNull Context ctx, @ColorRes int colorId) {
+		return ContextCompat.getColor(ctx, colorId);
+	}
+
+	@ColorInt
 	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {
 		// Counting the perceptive luminance - human eye favors green color...
 		double luminance = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
@@ -82,7 +87,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getActiveColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getActiveColorId(nightMode));
+		return getColor(ctx, getActiveColorId(nightMode));
 	}
 
 	@ColorRes
@@ -92,7 +97,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getActiveTabTextColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getActiveTabTextColorId(nightMode));
+		return getColor(ctx, getActiveTabTextColorId(nightMode));
 	}
 
 	@ColorRes
@@ -102,7 +107,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getPrimaryTextColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getPrimaryTextColorId(nightMode));
+		return getColor(ctx, getPrimaryTextColorId(nightMode));
 	}
 
 	@ColorRes
@@ -112,7 +117,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getSecondaryTextColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getSecondaryTextColorId(nightMode));
+		return getColor(ctx, getSecondaryTextColorId(nightMode));
 	}
 
 	@ColorRes
@@ -122,7 +127,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getTertiaryTextColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getTertiaryTextColorId(nightMode));
+		return getColor(ctx, getTertiaryTextColorId(nightMode));
 	}
 
 	@ColorRes
@@ -132,7 +137,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getActiveIconColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getActiveIconColorId(nightMode));
+		return getColor(ctx, getActiveIconColorId(nightMode));
 	}
 
 	@ColorRes
@@ -142,7 +147,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getDefaultIconColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getDefaultIconColorId(nightMode));
+		return getColor(ctx, getDefaultIconColorId(nightMode));
 	}
 
 	@ColorRes
@@ -152,7 +157,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getSecondaryIconColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getSecondaryIconColorId(nightMode));
+		return getColor(ctx, getSecondaryIconColorId(nightMode));
 	}
 
 	@ColorRes
@@ -162,7 +167,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getActivityBgColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getActivityBgColorId(nightMode));
+		return getColor(ctx, getActivityBgColorId(nightMode));
 	}
 
 	@ColorRes
@@ -172,7 +177,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getListBgColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getListBgColorId(nightMode));
+		return getColor(ctx, getListBgColorId(nightMode));
 	}
 
 	@ColorRes
@@ -182,7 +187,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getAppBarColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getAppBarColorId(nightMode));
+		return getColor(ctx, getAppBarColorId(nightMode));
 	}
 
 	@ColorRes
@@ -192,7 +197,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getDividerColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getDividerColorId(nightMode));
+		return getColor(ctx, getDividerColorId(nightMode));
 	}
 
 	@ColorRes
@@ -202,7 +207,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getActiveButtonsAndLinksTextColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getActiveButtonsAndLinksTextColorId(nightMode));
+		return getColor(ctx, getActiveButtonsAndLinksTextColorId(nightMode));
 	}
 
 	@ColorRes
@@ -212,7 +217,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getActiveTransparentColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getActiveTransparentColorId(nightMode));
+		return getColor(ctx, getActiveTransparentColorId(nightMode));
 	}
 
 	@ColorRes
@@ -222,7 +227,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getCardAndListBackgroundColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getCardAndListBackgroundColorId(nightMode));
+		return getColor(ctx, getCardAndListBackgroundColorId(nightMode));
 	}
 
 	@ColorRes
@@ -232,7 +237,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getStrokedButtonsOutlineColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getStrokedButtonsOutlineColorId(nightMode));
+		return getColor(ctx, getStrokedButtonsOutlineColorId(nightMode));
 	}
 
 	@ColorRes
@@ -244,7 +249,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getInactiveButtonsAndLinksColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getInactiveButtonsAndLinksColorId(nightMode));
+		return getColor(ctx, getInactiveButtonsAndLinksColorId(nightMode));
 	}
 
 	@ColorRes
@@ -254,7 +259,7 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
-		return ContextCompat.getColor(ctx, getMapButtonIconColorId(nightMode));
+		return getColor(ctx, getMapButtonIconColorId(nightMode));
 	}
 
 	@ColorRes

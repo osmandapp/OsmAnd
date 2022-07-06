@@ -122,7 +122,7 @@ public class GpxNotification extends OsmandNotification {
 		ongoing = true;
 		lastBuiltNoData = false;
 		if (isGpxRecording) {
-			color = app.getResources().getColor(R.color.osmand_orange);
+			color = app.getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "
 					+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true) + " • "
 					+ OsmAndFormatter.getFormattedDistance(recordedDistance, app);

@@ -83,13 +83,13 @@ public class TurnDrawable extends Drawable {
 		this.turnImminent = turnImminent;
 		this.deviatedFromRoute = deviatedFromRoute;
 		if (deviatedFromRoute) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
 		} else if (turnImminent > 0) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow));
 		} else if (turnImminent == 0) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_imminent));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_imminent));
 		} else {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
 		}
 		invalidateSelf();
 	}

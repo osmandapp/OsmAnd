@@ -73,7 +73,7 @@ public class RouteDirectionsCard extends MapBaseCard {
 		ImageView lanesIcon = (ImageView) row.findViewById(R.id.lanes);
 		row.findViewById(R.id.divider).setVisibility(directionInfoIndex == directionsInfo.size() - 1 ? View.INVISIBLE : View.VISIBLE);
 
-		TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(mapActivity.getResources(), true);
+		TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(mapActivity, true);
 		drawable.setColorFilter(new PorterDuffColorFilter(getActiveColor(), PorterDuff.Mode.SRC_ATOP));
 		drawable.setRouteType(model.getTurnType());
 		directionIcon.setImageDrawable(drawable);

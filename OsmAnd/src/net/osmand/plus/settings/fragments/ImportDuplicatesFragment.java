@@ -101,8 +101,8 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		progressBar = root.findViewById(R.id.progress_bar);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
 		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both, nightMode
-				? getResources().getColor(R.color.icon_color_active_dark)
-				: getResources().getColor(R.color.icon_color_active_light))
+				? getColor(R.color.icon_color_active_dark)
+				: getColor(R.color.icon_color_active_light))
 		);
 		replaceAllBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_replace,
 				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))

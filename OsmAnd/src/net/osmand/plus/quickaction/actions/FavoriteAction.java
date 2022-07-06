@@ -147,12 +147,12 @@ public class FavoriteAction extends QuickAction {
 			if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
 				categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
-				categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
+				categoryImage.setColorFilter(mapActivity.getColor(R.color.color_favorite));
 			}
 		} else if (helper.getFavoriteGroups().size() > 0) {
 			FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
-			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
+			int color = group.getColor() == 0 ? mapActivity.getColor(R.color.color_favorite) : group.getColor();
 			categoryEdit.setText(group.getDisplayName(mapActivity));
 			categoryImage.setColorFilter(color);
 
@@ -160,7 +160,7 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.getColor()));
 		} else {
 			categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
-			categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
+			categoryImage.setColorFilter(mapActivity.getColor(R.color.color_favorite));
 
 			getParams().put(KEY_CATEGORY_NAME, "");
 			getParams().put(KEY_CATEGORY_COLOR, "0");
@@ -188,7 +188,7 @@ public class FavoriteAction extends QuickAction {
 
 	private void fillGroupParams(View root, String name, int color) {
 		if (color == 0)
-			color = root.getContext().getResources().getColor(R.color.color_favorite);
+			color = root.getContext().getColor(R.color.color_favorite);
 
 		((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
 		((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);

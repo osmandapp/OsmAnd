@@ -50,6 +50,7 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.Locale;
 
@@ -794,7 +795,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	public void setIndicatorColorResource(@ColorRes int resId) {
-		this.indicatorColor = getResources().getColor(resId);
+		this.indicatorColor = getColor(resId);
 		invalidate();
 	}
 
@@ -804,7 +805,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	public void setIndicatorBgColorResource(@ColorRes int resId) {
-		this.indicatorBgColor = getResources().getColor(resId);
+		this.indicatorBgColor = getColor(resId);
 		invalidate();
 	}
 
@@ -819,7 +820,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	public void setUnderlineColorResource(@ColorRes int resId) {
-		this.underlineColor = getResources().getColor(resId);
+		this.underlineColor = getColor(resId);
 		invalidate();
 	}
 
@@ -829,7 +830,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	public void setDividerColorResource(@ColorRes int resId) {
-		this.dividerColor = getResources().getColor(resId);
+		this.dividerColor = getColor(resId);
 		invalidate();
 	}
 
@@ -880,13 +881,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		return new ColorStateList(new int[][]{new int[]{}}, new int[]{textColor});
 	}
 
-
 	public void setTextColorResource(@ColorRes int resId) {
-		setTextColor(getResources().getColor(resId));
+		setTextColor(getColor(resId));
 	}
 
 	public void setTextColorStateListResource(@ColorRes int resId) {
-		setTextColor(getResources().getColor(resId));
+		setTextColor(getColor(resId));
 	}
 
 	public void setTypeface(Typeface typeface, int style) {
@@ -902,5 +902,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	public void setTabPaddingLeftRight(int paddingPx) {
 		this.tabPadding = paddingPx;
 		updateTabStyles();
+	}
+
+	@ColorInt
+	protected int getColor(@ColorInt int resId) {
+		return ColorUtilities.getColor(getContext(), resId);
 	}
 }

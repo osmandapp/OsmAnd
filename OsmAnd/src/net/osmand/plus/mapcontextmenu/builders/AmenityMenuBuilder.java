@@ -172,7 +172,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(app.getResources().getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
 			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
@@ -212,7 +212,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textView.setMaxLines(10);
 		}
 		if (textColor > 0) {
-			textView.setTextColor(view.getResources().getColor(textColor));
+			textView.setTextColor(getColor(textColor));
 		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);

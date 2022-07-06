@@ -284,7 +284,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		} else {
 			colorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 		}
-		int color = app.getResources().getColor(colorId);
+		int color = app.getColor(colorId);
 		title.setTextColor(color);
 		String titleText = getString(R.string.gpx_split_interval);
 		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, titleText, ""));
@@ -443,7 +443,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				}
 			} else {
 				if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
-					overviewTextView.setTextColor(app.getResources().getColor(activeColorId));
+					overviewTextView.setTextColor(app.getColor(activeColorId));
 					if (currentGpxDisplayItem.group.isSplitDistance()) {
 						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, activeColorId));
 						overviewTextView.setText("");

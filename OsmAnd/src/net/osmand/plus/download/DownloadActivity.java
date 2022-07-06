@@ -436,7 +436,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			spaceView.setLayoutParams(layoutParams);
 			marksLinearLayout.addView(spaceView);
 			int markWidth = (int) (1 * ctx.getResources().getDisplayMetrics().density);
-			int colorBlack = ctx.getResources().getColor(R.color.color_black);
+			int colorBlack = ctx.getColor(R.color.color_black);
 			for (int i = 1; i < DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS; i++) {
 				View markView = new View(ctx);
 				layoutParams = new LinearLayout.LayoutParams(markWidth, ViewGroup.LayoutParams.MATCH_PARENT);

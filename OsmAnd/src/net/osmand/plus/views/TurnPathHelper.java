@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -479,11 +479,11 @@ public class TurnPathHelper {
 		Path dpOutlay = new Path();
 		private boolean mini;
 		
-		public RouteDrawable(Resources resources, boolean mini){
+		public RouteDrawable(Context ctx, boolean mini){
 			this.mini = mini;
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
 			paintRouteDirectionOutlay = new Paint();
 			paintRouteDirectionOutlay.setStyle(Style.STROKE);

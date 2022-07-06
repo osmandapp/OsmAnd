@@ -108,7 +108,7 @@ public class DashParkingFragment extends DashLocationFragment {
 			TextView leftLbl = mainView.findViewById(R.id.left_lbl);
 			timeLeft.setText(time);
 			if (timeDiff < 0) {
-				leftLbl.setTextColor(getResources().getColor(R.color.parking_outdated_color));
+				leftLbl.setTextColor(getColor(R.color.parking_outdated_color));
 				leftLbl.setText(getString(R.string.osmand_parking_overdue));
 			} else {
 				leftLbl.setTextColor(Color.WHITE);
