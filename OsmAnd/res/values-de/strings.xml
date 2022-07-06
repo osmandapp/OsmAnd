@@ -4737,4 +4737,18 @@
     <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts halten</string>
     <string name="auto_25_chars_route_tr_kl">Rechts abbiegen und links halten</string>
     <string name="auto_25_chars_route_tl_kl">Links abbiegen und links halten</string>
+    <string name="auto_25_chars_route_tu_kl">Wenden und links halten</string>
+    <string name="auto_25_chars_route_tu_kr">Wenden und rechts halten</string>
+    <string name="auto_25_chars_route_roundabout_kl">Die %1$d Ausfahrt nehmen und links halten</string>
+    <string name="auto_25_chars_route_roundabout_kr">Die %1$d Ausfahrt nehmen und rechts halten</string>
+    <string name="auto_backup_preference_desc">Standardmäßig speichert Android Backups von Favoriten, Karten-Tokens und Osmand-Einstellungen, um sie auf neuen Geräten oder nach einer Neuinstallation wiederherzustellen, dieses Backup ist auf 25 MB begrenzt.
+\nWenn Sie OsmAnd Cloud verwenden, kann dies zu Missverständnissen nach der Neuinstallation führen.</string>
+    <string name="auto_backup_title">Automatische Sicherung</string>
+    <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird als nächstes in der Liste hinzugefügt.</string>
+    <string name="shared_string_duplicate">Duplikat</string>
+    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget können Sie ein Foto aufnehmen.</string>
+    <string name="av_notes_video_widget_desc">Durch Antippen des Widgets kann eine Videoaufnahme gestartet werden.</string>
+    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie Audio-Notizen aufnehmen.</string>
+    <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
+    <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
 </resources>
