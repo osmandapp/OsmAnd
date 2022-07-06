@@ -84,7 +84,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
-		return app.getAppInitializer().checkAppVersionChanged() && notShown;
+		return false;
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
