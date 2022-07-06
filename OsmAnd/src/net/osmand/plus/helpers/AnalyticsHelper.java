@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	private final static String ANALYTICS_UPLOAD_URL = "https://osmand.net/api/submit_analytics";
 	private final static String ANALYTICS_FILE_NAME = "analytics.json";
 
+	private final static int ROUTING_DATA_PARCEL_SIZE = 10; // 10 events
 	private final static int DATA_PARCEL_SIZE = 500; // 500 events
 	private final static int SUBMIT_DATA_INTERVAL = 60 * 60 * 1000; // 1 hour
 
@@ -81,6 +83,16 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		long date;
 		int type;
 		String event;
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "AnalyticsItem{" +
+					"date=" + date +
+					", type=" + type +
+					", event=" + event +
+					'}';
+		}
 	}
 
 	private static class AnalyticsData {
@@ -94,6 +106,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		this.app = app;
 		insertEventScript = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?)";
 		submitCollectedDataAsync();
+		clearDB(Collections.singletonList(EVENT_TYPE_ROUTING), System.currentTimeMillis());
 	}
 
 	@Override
@@ -130,11 +143,25 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?", new Object[] {finishDate});
+				String types = formatAllowedTypes(allowedTypes);
+				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?" + " AND " + COL_TYPE + " IN " + types, new Object[] {finishDate});
 			} finally {
 				db.close();
 			}
 		}
+	}
+
+	private String formatAllowedTypes(@NonNull List<Integer> allowedTypes) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("(");
+		for (int i = 0; i < allowedTypes.size(); i++) {
+			if (i > 0) {
+				builder.append(", ");
+			}
+			builder.append(allowedTypes.get(i));
+		}
+		builder.append(")");
+		return builder.toString();
 	}
 
 	public boolean submitCollectedDataAsync() {
@@ -158,18 +185,16 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	}
 
 	private void submitCollectedData(@NonNull List<Integer> allowedTypes) {
-		List<AnalyticsData> data = collectRecordedData();
+		List<AnalyticsData> data = collectRecordedData(allowedTypes);
 		for (AnalyticsData d : data) {
 			if (d.items != null && d.items.size() > 0) {
 				try {
 					JSONArray jsonItemsArray = new JSONArray();
 					for (AnalyticsItem item : d.items) {
-						if (allowedTypes.contains(item.type)) {
-							JSONObject jsonItem = new JSONObject();
-							jsonItem.put(JSON_DATE, item.date);
-							jsonItem.put(JSON_EVENT, item.event);
-							jsonItemsArray.put(jsonItem);
-						}
+						JSONObject jsonItem = new JSONObject();
+						jsonItem.put(JSON_DATE, item.date);
+						jsonItem.put(JSON_EVENT, item.event);
+						jsonItemsArray.put(jsonItem);
 					}
 
 					Map<String, String> additionalData = new LinkedHashMap<>();
@@ -205,12 +230,29 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	}
 
 	@NonNull
-	private List<AnalyticsData> collectRecordedData() {
+	public List<String> getRoutingRecordedData() {
+		int counter = 0;
+		List<String> routingData = new ArrayList<>();
+		for (AnalyticsData data : collectRecordedData(Collections.singletonList(EVENT_TYPE_ROUTING))) {
+			for (AnalyticsItem item : data.items) {
+				routingData.add(item.toString());
+
+				counter++;
+				if (counter >= ROUTING_DATA_PARCEL_SIZE) {
+					return routingData;
+				}
+			}
+		}
+		return routingData;
+	}
+
+	@NonNull
+	private List<AnalyticsData> collectRecordedData(@NonNull List<Integer> allowedTypes) {
 		List<AnalyticsData> data = new ArrayList<>();
 		SQLiteDatabase db = getReadableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				collectDBData(db, data);
+				collectDBData(db, data, allowedTypes);
 			} finally {
 				db.close();
 			}
@@ -218,8 +260,11 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		return data;
 	}
 
-	private void collectDBData(@NonNull SQLiteDatabase db, @NonNull List<AnalyticsData> data) {
-		Cursor query = db.rawQuery("SELECT " + COL_DATE + "," + COL_TYPE + "," + COL_EVENT + " FROM " + TABLE_NAME + " ORDER BY " + COL_DATE + " ASC", null);
+	private void collectDBData(@NonNull SQLiteDatabase db, @NonNull List<AnalyticsData> data, @NonNull List<Integer> allowedTypes) {
+		String types = formatAllowedTypes(allowedTypes);
+		Cursor query = db.rawQuery("SELECT " + COL_DATE + "," + COL_TYPE + "," + COL_EVENT
+				+ " FROM " + TABLE_NAME + " WHERE " + COL_TYPE + " IN " + types
+				+ " ORDER BY " + COL_DATE + " ASC", null);
 		List<AnalyticsItem> items = new ArrayList<>();
 		int itemsCounter = 0;
 		long startDate = Long.MAX_VALUE;
