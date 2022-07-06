@@ -125,7 +125,7 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
-	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
+	public static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
 	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
