@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.accessibility;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ACCESSIBILITY;
 
 import android.app.Activity;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
@@ -41,7 +42,11 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
-		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		AudioAttributes attr = new AudioAttributes.Builder()
+				.setUsage(AudioAttributes.USAGE_ASSISTANCE_ACCESSIBILITY)
+				.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+				.build();
+		sounds = new SoundPool.Builder().setAudioAttributes(attr).setMaxStreams(1).build();
 		if (sounds != null) {
 			soundIcons.put(DIRECTION_NOTIFICATION, loadSoundIcon("sounds/direction_notification.ogg"));
 			soundIcons.put(INCLINATION_LEFT, loadSoundIcon("sounds/inclination_left.ogg"));

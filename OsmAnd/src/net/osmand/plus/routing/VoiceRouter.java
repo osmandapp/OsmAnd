@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 
 import android.content.res.AssetFileDescriptor;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
@@ -123,7 +124,11 @@ public class VoiceRouter {
 
 	private void loadCameraSound() {
 		if (soundPool == null) {
-			soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+			AudioAttributes attr = new AudioAttributes.Builder()
+					.setUsage(AudioAttributes.USAGE_NOTIFICATION)
+					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+					.build();
+			soundPool = new SoundPool.Builder().setAudioAttributes(attr).setMaxStreams(5).build();
 		}
 		if (soundClick == -1) {
 			try {
