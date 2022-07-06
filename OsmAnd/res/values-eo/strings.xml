@@ -2319,7 +2319,7 @@
 \nDe Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…
 \n</string>
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
-    <string name="shared_string_visible">Videbla</string>
+    <string name="shared_string_visible">Videbla(j)</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
     <string name="sea_depth_thanks">Dankon al vi por aĉeti marajn profundec-kurbojn!</string>
     <string name="index_item_depth_contours_osmand_ext">Maraj profundec-kurboj</string>
@@ -3630,9 +3630,9 @@
     <string name="export_import_quick_actions_with_profiles_promo">Vi povas enporti aŭ elporti rapidajn agojn kune kun profiloj de la aplikaĵo.</string>
     <string name="shared_string_delete_all_q">Ĉu forigi ĉiujn\?</string>
     <string name="delete_all_actions_message_q">Ĉu neinversigeble forigi %d rapidajn agojn\?</string>
-    <string name="width_limit_description">Enigu larĝon de via veturilo, iuj vojaj limigoj aplikas al larĝaj veturiloj.</string>
-    <string name="height_limit_description">Enigu alton de via veturilo, iuj vojaj limigoj aplikas al altaj veturiloj.</string>
-    <string name="weight_limit_description">Enigu pezon de via veturilo, iuj vojaj limigoj aplikas al pezaj veturiloj.</string>
+    <string name="width_limit_description">Enigu larĝon de via veturilo, iuj vojaj limigoj aplikiĝas al larĝaj veturiloj.</string>
+    <string name="height_limit_description">Enigu alton de via veturilo, iuj vojaj limigoj aplikiĝas al altaj veturiloj.</string>
+    <string name="weight_limit_description">Enigu pezon de via veturilo, iuj vojaj limigoj aplikiĝas al pezaj veturiloj.</string>
     <string name="shared_string_tones">tunoj</string>
     <string name="shared_string_meters">metroj</string>
     <string name="details_dialog_decr">Montri aŭ kaŝi pliajn detalojn sur la mapo</string>
@@ -3668,7 +3668,7 @@
     <string name="app_mode_inline_skates">Rulglitiloj</string>
     <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
     <string name="use_volume_buttons_as_zoom_descr">Pligrandigi/malgrandigi la mapon per butonoj de sonforteco.</string>
-    <string name="lenght_limit_description">Enigu longon de via veturilo, iuj vojaj limigoj aplikas al longaj veturiloj.</string>
+    <string name="lenght_limit_description">Enigu longon de via veturilo, iuj vojaj limigoj aplikiĝas al longaj veturiloj.</string>
     <string name="quick_action_remove_next_destination">Forigi sekvan celon</string>
     <string name="please_provide_point_name_error">Enigu nomon por la punkto</string>
     <string name="quick_action_remove_next_destination_descr">La markita celo de la kurso estos forigita. Se tio ĉi estos la fina celo, la navigado ĉesos.</string>
@@ -4709,6 +4709,22 @@
     <string name="map_marker_average_speed_desc">Enigu la intertempon dum kiu estos mezurita la mezuma rapido, por kalkuli la proksimuman tempon de alveno.</string>
     <string name="switch_widget_mode_desc">Vi povas ŝanĝi la reĝimon per frapeti la fenestraĵon.</string>
     <string name="side_marker_eta">Proksimuma tempo de alveno</string>
-    <string name="goods_delivery_desc_4">Se via veturilo estas pli peza ol 3,5 Mg, uza la profilon “Kamiono”.</string>
+    <string name="goods_delivery_desc_4">Se via veturilo estas pli peza ol 3,5 Mg, uzu la profilon “Kamiono”.</string>
     <string name="routing_attr_goods_restrictions_name">Malpeza varaŭtomobilo</string>
+    <string name="goods_delivery_desc_3">Aplikiĝas nur al veturiloj portantaj varojn, kiuj havas almenaŭ kvar radojn kaj pezas ne pli ol 3,5 Mg (tunoj).</string>
+    <string name="goods_delivery_desc_2">Vojoj fermitaj por transporti varojn ne estos navigeblaj.</string>
+    <string name="next_live_update_date_and_time">Sekva ĝisdatigo: %1$s je %2$s.</string>
+    <string name="next_live_update_time">Sekva ĝisdatigo: %1$s.</string>
+    <string name="goods_delivery_desc">Veturiloj transportantaj varojn ne estas permesataj sur iuj vojoj.</string>
+    <string name="updated_map_time">Ĝisdatigita: %1$s.</string>
+    <string name="includes_osm_changes_until">Ampleksas OSM-ŝanĝojn faritajn ĝis %1$s.</string>
+    <string name="live_update_frequency_day_variant">Mapoj estos kontrolitaj pri ĝisdatigoj je ĉiu tago.</string>
+    <string name="calculate_online_altitude_descr">Enreta kalkulado de altitudo fariĝas ĉe la OsmAnd-serviloj uzante satelitan fotaron kaj ciferecajn modelojn de altitudo. Ĝi povas diferenci de altitudo registrita per via aparato kaj povas esti uzita por korekti altitudon.</string>
+    <string name="live_update_frequency_week_variant">Mapoj estos kontrolitaj pri ĝisdatigoj je ĉiu semajno.</string>
+    <string name="altitude_correction">Korekto de altitudo</string>
+    <string name="no_altitude_data_desc">Vi povas aligi vian spuron al la vojoj por akiri datumojn de %1$s aŭ kalkuli ilin enrete.</string>
+    <string name="accessibility_2d_view_off">2,5-dimensia vido: ne</string>
+    <string name="accessibility_2d_view_on">2,5-dimensia vido: jes</string>
+    <string name="download_complete">Elŝuto finita</string>
+    <string name="live_update_frequency_hour_variant">Mapoj estos kontrolitaj pri ĝisdatigoj je ĉiu horo.</string>
 </resources>

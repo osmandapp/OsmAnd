@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets.configure.add;
+package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -49,10 +49,10 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_GROUP_NAME;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
-import static net.osmand.plus.views.mapwidgets.configure.add.WidgetDataHolder.KEY_WIDGET_ID;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_GROUP_NAME;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGET_ID;
 
 public class AddWidgetFragment extends BaseOsmAndFragment {
 
@@ -191,12 +191,14 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	private void inflateWidgetsList(@NonNull List<WidgetType> widgets) {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
+		WidgetGroup group = widgetsDataHolder.getWidgetGroup();
 
 		for (WidgetType widget : widgets) {
 			int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
 			View view = inflater.inflate(layoutId, container, false);
 			String title = getString(widget.titleId);
-			String desc = widget.descId != 0 ? getString(widget.descId) : null;
+			int descId = group != null ? widget.getGroupDescriptionId() : widget.descId;
+			String desc = descId == 0 ? null : getString(descId);
 			Drawable icon = getIcon(widget.getIconId(nightMode));
 			setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
 			container.addView(view);

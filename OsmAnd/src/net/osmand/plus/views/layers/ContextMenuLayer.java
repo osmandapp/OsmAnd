@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -73,7 +75,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 
-	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
+	private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
 
 	private MapContextMenu menu;
@@ -97,6 +99,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
+	private boolean carView;
 
 	// OpenGl
 	private VectorLinesCollection outlineCollection;
@@ -151,11 +154,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		Drawable markerDrawable = AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu);
 		contextMarker.setImageDrawable(markerDrawable);
 		contextMarker.setClickable(true);
-		int minw = contextMarker.getDrawable().getMinimumWidth();
-		int minh = contextMarker.getDrawable().getMinimumHeight();
-		contextMarker.layout(0, 0, minw, minh);
-
-		contextMarkerImage = AndroidUtils.drawableToBitmap(markerDrawable);
+		updateContextMarker();
 
 		paint = new Paint();
 		paint.setColor(0x7f000000);
@@ -165,7 +164,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		outlinePaint.setAntiAlias(true);
 		outlinePaint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2f));
 		outlinePaint.setStrokeCap(Paint.Cap.ROUND);
-		outlinePaint.setColor(getContext().getResources().getColor(R.color.osmand_orange));
+		outlinePaint.setColor(ContextCompat.getColor(context, R.color.osmand_orange));
+	}
+
+	private void updateContextMarker() {
+		float scale = getApplication().getOsmandMap().getCarDensityScaleCoef();
+		int width = (int) (contextMarker.getDrawable().getMinimumWidth() * scale);
+		int height = (int) (contextMarker.getDrawable().getMinimumHeight() * scale);
+		contextMarker.layout(0, 0, width, height);
+		contextMarkerImage = getScaledBitmap(R.drawable.map_pin_context_menu, scale);
 	}
 
 	public Object getSelectedObject() {
@@ -182,9 +189,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mapActivity == null) {
 			return;
 		}
+		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
+		boolean carViewChanged = this.carView != carView;
+		this.carView = carView;
+		if (carViewChanged) {
+			updateContextMarker();
+		}
 		MapRendererView mapRenderer = getMapRenderer();
 		boolean hasMapRenderer = mapRenderer != null;
-		if (contextMarkerCollection == null || mapActivityInvalidated) {
+		if (contextMarkerCollection == null || mapActivityInvalidated || carViewChanged) {
 			recreateContextMarkerCollection();
 		}
 		boolean markerCustomized = false;
@@ -302,7 +315,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				} else {
 					int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-					canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
+					canvas.translate(x - contextMarker.getWidth() / 2f, y - contextMarker.getHeight());
 					contextMarker.draw(canvas);
 				}
 			}
@@ -328,9 +341,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void recreateContextMarkerCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
+		if (mapRenderer != null ) {
 			clearContextMarkerCollection();
 
+			if (contextMarkerImage == null) {
+				return;
+			}
 			contextMarkerCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
 			builder.setBaseOrder(getBaseOrder() - 100);

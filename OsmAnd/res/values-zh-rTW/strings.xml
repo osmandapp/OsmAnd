@@ -4719,4 +4719,7 @@
     <string name="reset_all_settings_desc">您確定您要將所有設定重設為預設值？</string>
     <string name="goods_delivery_desc">可以限制運輸貨物的車輛進入某些道路。</string>
     <string name="routing_attr_goods_restrictions_name">貨運</string>
+    <string name="accessibility_2d_view_on">2.5D 檢視開啟</string>
+    <string name="download_complete">下載完成</string>
+    <string name="accessibility_2d_view_off">2.5D 檢視關閉</string>
 </resources>

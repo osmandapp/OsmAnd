@@ -12,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -87,7 +88,10 @@ public class CompassButton extends MapButton {
 			return false;
 		} else if (!specialPosition) {
 			ApplicationMode appMode = settings.getApplicationMode();
-			return settings.SHOW_COMPASS_ALWAYS.getModeValue(appMode);
+			CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(appMode);
+			return compassVisibility == CompassVisibility.VISIBLE_IF_MAP_ROTATED
+					? mapActivity.getMapRotate() != 0
+					: compassVisibility == CompassVisibility.ALWAYS_VISIBLE;
 		}
 		return true;
 	}

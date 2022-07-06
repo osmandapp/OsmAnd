@@ -2,9 +2,11 @@ package net.osmand.plus.helpers;
 
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInput;
+import android.app.backup.BackupDataOutput;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.ParcelFileDescriptor;
 
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -21,28 +23,62 @@ import java.util.List;
  */
 public class OsmandBackupAgent extends BackupAgentHelper {
 
+	public static final String AUTO_BACKUP_ENABLED = "auto_backup_enabled";
+
 	@Override
 	public void onCreate() {
 		// can't cast to OsmAnd Application
+		if (isAutoBackupEnabled()) {
+			String[] files = collectFiles();
+			String[] preferences = collectPreferences();
+
+			addHelper("osmand.files", new FileBackupHelper(this, files));
+			addHelper("osmand.settings", new SharedPreferencesBackupHelper(this, preferences));
+		}
+	}
+
+	private boolean isAutoBackupEnabled() {
+		String preferencesName = OsmandSettings.getSharedPreferencesName(null);
+		SharedPreferences preferences = getSharedPreferences(preferencesName, Context.MODE_PRIVATE);
+		return preferences.getBoolean(AUTO_BACKUP_ENABLED, true);
+	}
+
+	private String[] collectPreferences() {
 		List<ApplicationMode> all = ApplicationMode.allPossibleValues();
-		String[] prefs = new String[all.size() + 1];
-		prefs[0] = OsmandSettings.getSharedPreferencesName(null);
+		String[] preferences = new String[all.size() + 1];
+		preferences[0] = OsmandSettings.getSharedPreferencesName(null);
 		int i = 1;
 		for (ApplicationMode m : all) {
-			prefs[i++] = OsmandSettings.getSharedPreferencesName(m);
+			preferences[i++] = OsmandSettings.getSharedPreferencesName(m);
 		}
+		return preferences;
+	}
 
-		SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, prefs);
-		addHelper("osmand.settings", helper);
+	private String[] collectFiles() {
+		return new String[] {
+				FavouritesFileHelper.FILE_TO_BACKUP,
+				"../databases/" + MapMarkersDbHelper.DB_NAME,
+				"../databases/" + OsmBugsDbHelper.OSMBUGS_DB_NAME
+		};
+	}
 
-		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesFileHelper.FILE_TO_BACKUP,
-				"../databases/" + MapMarkersDbHelper.DB_NAME, "../databases/" + OsmBugsDbHelper.OSMBUGS_DB_NAME);
-		addHelper("osmand.files", fileBackupHelper);
+	@Override
+	public void onBackup(ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState) throws IOException {
+		long size = oldState.getStatSize();
+		if (size > 0 || isAutoBackupEnabled()) {
+			super.onBackup(oldState, data, newState);
+		}
 	}
 
 	@Override
 	public void onRestore(BackupDataInput data, int appVersionCode, ParcelFileDescriptor newState) throws IOException {
-		super.onRestore(data, appVersionCode, newState);
+		if (isAutoBackupEnabled()) {
+			super.onRestore(data, appVersionCode, newState);
+		}
+	}
+
+	@Override
+	public void onRestoreFinished() {
 		getSharedPreferences(OsmandSettings.getSharedPreferencesName(null), Context.MODE_PRIVATE)
 				.edit()
 				.putInt(OsmandSettings.NUMBER_OF_FREE_DOWNLOADS_ID, 0)

@@ -43,15 +43,16 @@ public abstract class GeometryWayContext {
 		paintIcon.setFilterBitmap(true);
 		paintIcon.setAntiAlias(true);
 		paintIcon.setColor(Color.BLACK);
-		paintIcon.setStrokeWidth(1f * density);
+		paintIcon.setStrokeWidth(density);
 
 		paintIconCustom = new Paint();
 		paintIconCustom.setFilterBitmap(true);
 		paintIconCustom.setAntiAlias(true);
 		paintIconCustom.setColor(Color.BLACK);
-		paintIconCustom.setStrokeWidth(1f * density);
+		paintIconCustom.setStrokeWidth(density);
 
-		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId());
+		float scale = getApp().getOsmandMap().getCarDensityScaleCoef();
+		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId(), scale);
 	}
 
 	@NonNull

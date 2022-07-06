@@ -4718,4 +4718,5 @@
     <string name="goods_delivery_desc">Los vehículos que transportan mercancías pueden ser restringidos para acceder a algunas carreteras.</string>
     <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
     <string name="lang_ckb">Kurdo Central</string>
+    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos de «%1$s» o calcularlo en línea.</string>
 </resources>

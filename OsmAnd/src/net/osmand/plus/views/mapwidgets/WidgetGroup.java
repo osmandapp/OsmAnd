@@ -87,7 +87,7 @@ public enum WidgetGroup {
 	}
 
 	@Nullable
-	public String getSecondaryDescriptionId(@NonNull Context context) {
+	public String getSecondaryDescription(@NonNull Context context) {
 		if (this == BEARING) {
 			String configureProfile = context.getString(R.string.configure_profile);
 			String generalSettings = context.getString(R.string.general_settings_2);

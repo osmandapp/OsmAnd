@@ -4714,4 +4714,10 @@
     <string name="marker_2nd">סמן שני</string>
     <string name="marker_1st">סמן ראשון</string>
     <string name="routing_attr_goods_restrictions_name">משלוח טובין</string>
+    <string name="switch_widget_mode_desc">אפשר להחליף מצב בלחיצה על הווידג׳ט.</string>
+    <string name="side_marker_eta">זמן ההגעה המשוערך</string>
+    <string name="reset_all_settings_desc">לאפס את כל ההגדרות לברירת המחדל\?</string>
+    <string name="goods_delivery_desc_4">אם המכונית שלך שוקלת למעלה מ־3.5 טונות יש להשתמש בפרופיל משאית.</string>
+    <string name="goods_delivery_desc_3">חל רק על כלי רכב שמובילים סחורה ויש להם לפחות 4 גלגלי והם שוקלים לא יותר מ־3.5 טונות.</string>
+    <string name="download_complete">ההורדה הושלמה</string>
 </resources>

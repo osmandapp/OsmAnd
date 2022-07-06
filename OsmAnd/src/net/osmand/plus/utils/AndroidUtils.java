@@ -176,16 +176,14 @@ public class AndroidUtils {
 			bitmap = scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
 		}
-
 		return bitmap;
 	}
 
-	public static Bitmap createScaledBitmap(Drawable drawable, float scale) {
+	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, float scale) {
 		int width = (int) (drawable.getIntrinsicWidth() * scale);
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
 		width += width % 2 == 1 ? 1 : 0;
 		height += height % 2 == 1 ? 1 : 0;
-
 		return createScaledBitmap(drawable, width, height);
 	}
 
@@ -555,13 +553,13 @@ public class AndroidUtils {
 		return (int) paint.measureText(text);
 	}
 
-	public static int getTextHeight(Paint paint) {
+	public static int getTextHeight(@NonNull Paint paint) {
 		Paint.FontMetrics fm = paint.getFontMetrics();
 		float height = fm.bottom - fm.top;
 		return (int) height;
 	}
 
-	public static int dpToPx(Context ctx, float dp) {
+	public static int dpToPx(@NonNull Context ctx, float dp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,
@@ -570,7 +568,18 @@ public class AndroidUtils {
 		);
 	}
 
-	public static int spToPx(Context ctx, float sp) {
+	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		float scaleCoef = app.getOsmandMap().getCarDensityScaleCoef();
+		Resources r = ctx.getResources();
+		return (int) (TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		) * scaleCoef);
+	}
+
+	public static int spToPx(@NonNull Context ctx, float sp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_SP,
