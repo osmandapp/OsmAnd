@@ -320,9 +320,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	public static String getMonth(int month) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
-		Date date = new Date();
-		date.setMonth(month);
-		String monthStr = dateFormat.format(date);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, month);
+		String monthStr = dateFormat.format(calendar);
 		if (monthStr.length() > 1) {
 			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
 		}

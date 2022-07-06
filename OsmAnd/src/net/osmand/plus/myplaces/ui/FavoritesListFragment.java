@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -55,8 +56,9 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 
 	float lastHeading ; 
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(@NonNull Activity activity) {
 		super.onAttach(activity);
 		Intent intent = activity.getIntent();
 		OsmandApplication app = getApplication();

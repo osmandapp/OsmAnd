@@ -60,12 +60,13 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 		return playbackAuthorized;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean abandonAudFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		routingHelper = ((OsmandApplication) context.getApplicationContext()).getRoutingHelper();
 		playbackAuthorized = false;
-		if (android.os.Build.VERSION.SDK_INT < 26) {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
 		} else {
 			AudioAttributes mAudioAttributes = new AudioAttributes.Builder()

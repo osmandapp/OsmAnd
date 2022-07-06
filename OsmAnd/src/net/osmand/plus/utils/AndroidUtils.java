@@ -1,10 +1,6 @@
 package net.osmand.plus.utils;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -95,6 +91,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -684,29 +684,23 @@ public class AndroidUtils {
 	}
 
 	public static void showNavBar(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && !isNavBarVisible(activity)) {
+		if (!isNavBarVisible(activity)) {
 			switchNavBarVisibility(activity);
 		}
 	}
 
 	public static void hideNavBar(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && isNavBarVisible(activity)) {
+		if (isNavBarVisible(activity)) {
 			switchNavBarVisibility(activity);
 		}
 	}
 
 	public static boolean isNavBarVisible(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19) {
-			int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
-			return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
-		}
-		return true;
+		int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
+		return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
 	}
 
-	public static void switchNavBarVisibility(Activity activity) {
-		if (Build.VERSION.SDK_INT < 19) {
-			return;
-		}
+	public static void switchNavBarVisibility(@NonNull Activity activity) {
 		View decorView = activity.getWindow().getDecorView();
 		int uiOptions = decorView.getSystemUiVisibility();
 		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
