@@ -322,9 +322,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
-
-		if (shouldResetRotation()) {
-			mapView.resetManualRotation();
+		if (mapView != null && settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
+			mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
 		}
 	}
 
