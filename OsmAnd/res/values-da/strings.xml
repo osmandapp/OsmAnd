@@ -1435,7 +1435,7 @@
     <string name="shared_string_save">Gem</string>
     <string name="shared_string_rename">Omdøb</string>
     <string name="shared_string_delete">Slet</string>
-    <string name="shared_string_delete_all">Slet alle</string>
+    <string name="shared_string_delete_all">Slet alt</string>
     <string name="shared_string_share">Del</string>
     <string name="shared_string_add">Tilføj</string>
     <string name="shared_string_apply">Anvend</string>
@@ -4767,4 +4767,12 @@
     <string name="compass_always_visible">Altid synlig</string>
     <string name="compass_always_hidden">Altid skjult</string>
     <string name="compass_click_desc">Klik på kompas for at skifte måden hvorpå kortet er orienteret.</string>
+    <string name="auto_25_chars_route_tr_kl">Drej til højre og hold til venstre</string>
+    <string name="auto_25_chars_route_tr_kr">Drej til højre og hold til højre</string>
+    <string name="auto_25_chars_route_tu_kl">Foretag U-vending og hold til venstre</string>
+    <string name="auto_25_chars_route_tu_kr">Foretag U-vending og hold til højre</string>
+    <string name="auto_25_chars_route_roundabout_kl">Tag %1$d afkørsel og hold til venstre</string>
+    <string name="auto_25_chars_route_roundabout_kr">Tag %1$d afkørsel og hold til højre</string>
+    <string name="auto_25_chars_route_tl_kl">Drej til venstre og hold til venstre</string>
+    <string name="auto_25_chars_route_tl_kr">Drej til venstre og hold til højre</string>
 </resources>

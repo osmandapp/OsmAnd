@@ -4778,4 +4778,12 @@
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
     <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
+    <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tr_kl">Gira a la derecha y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tr_kr">Gira a la derecha y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tu_kl">Gira en U y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tu_kr">Gira en U y quédate en la derecha</string>
+    <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y quédate en la izquierda</string>
 </resources>

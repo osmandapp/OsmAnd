@@ -1057,4 +1057,17 @@
     <string name="poi_content_beer">Contengut: cervesa</string>
     <string name="poi_content_salt">Contengut: sau</string>
     <string name="poi_site_type_fortification">Fortificacion</string>
+    <string name="poi_embassy_filter">Ambaissada</string>
+    <string name="poi_traffic_signals_arrow">Sageta</string>
+    <string name="poi_traffic_signals_vibration">Vibracion</string>
+    <string name="poi_video_telephone">Vidèo</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_volcano_status">Estat</string>
+    <string name="poi_volcano_type">Mena</string>
+    <string name="poi_bath_open_air">A la serena</string>
+    <string name="poi_bath_type">Mena</string>
+    <string name="poi_drinking_water_refill">Aigada</string>
+    <string name="poi_departures_board">Tablèu dei partenças</string>
+    <string name="poi_consulate_filter">Consolat</string>
+    <string name="poi_fire_hydrant_pressure_filter">Pression</string>
 </resources>

@@ -49,7 +49,7 @@
     <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_color_scheme">Цветовая схема</string>
+    <string name="srtm_color_scheme">Цвет</string>
     <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
     <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моим положением во время навигации.</string>
@@ -207,7 +207,7 @@
     <string name="christmas_poi">Рождественские POI</string>
     <string name="christmas_desc">В преддверии рождественских и новогодних праздников вы можете выбрать отображение связанных с ними POI, таких как рождественские ёлки, ярмарки и т.д.</string>
     <string name="christmas_desc_q">Показывать праздничные POI\?</string>
-    <string name="rendering_attr_contourColorScheme_description">Цветовая схема горизонталей</string>
+    <string name="rendering_attr_contourColorScheme_description">Цвет горизонталей</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
     <string name="rendering_value_dark_brown_name">Тёмно-коричневый</string>
     <string name="rendering_attr_contourColorScheme_name">Цветовая гамма горизонталей</string>
@@ -4765,8 +4765,8 @@
     <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажмите на компас, чтобы переключить режим ориентации карты.</string>
     <string name="compass_desc">Показывает направление на север.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Цветовая схема изобат</string>
-    <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема контурных линий глубины (изобат)</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Цвет контурных линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
     <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
