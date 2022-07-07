@@ -11,7 +11,8 @@
 	Thx - Hardy
 -->
 
-
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Show specifically designed trails for mountainbiking</string>
     <string name="auto_25_chars_route_tl_kl">Turn left and keep left</string>
     <string name="auto_25_chars_route_tl_kr">Turn left and keep right</string>
     <string name="auto_25_chars_route_tr_kl">Turn right and keep left</string>
