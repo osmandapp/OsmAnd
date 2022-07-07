@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/root"
@@ -12,8 +11,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/action_bar_height"
 		android:background="?attr/pstsTabBackground"
-		android:orientation="horizontal"
-		android:gravity="center_vertical">
+		android:gravity="center_vertical"
+		android:orientation="horizontal">
 
 		<FrameLayout
 			android:id="@+id/toolbar_back"
@@ -29,7 +28,7 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:background="?attr/selectableItemBackgroundBorderless"
-				osmand:srcCompat="@drawable/ic_arrow_back"/>
+				osmand:srcCompat="@drawable/ic_arrow_back" />
 
 		</FrameLayout>
 
@@ -57,7 +56,7 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:background="?attr/selectableItemBackgroundBorderless"
-				osmand:srcCompat="@drawable/ic_action_edit_dark"/>
+				osmand:srcCompat="@drawable/ic_action_edit_dark" />
 
 		</FrameLayout>
 
@@ -72,24 +71,38 @@
 			android:id="@+id/ll"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:background="?attr/list_background_color">
+			android:background="?attr/list_background_color"
+			android:orientation="vertical">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/main_image"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:visibility="gone"
 				android:adjustViewBounds="true"
-				tools:visibility="visible"
-				tools:src="@drawable/img_help_announcement_time_day"/>
+				android:visibility="gone"
+				tools:src="@drawable/img_help_announcement_time_day"
+				tools:visibility="visible" />
 
-			<net.osmand.plus.widgets.WebViewEx
-				android:id="@+id/content"
+			<FrameLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="@dimen/content_padding"
-				android:background="@color/color_transparent" />
+				android:background="@color/color_transparent">
+
+				<net.osmand.plus.widgets.WebViewEx
+					android:id="@+id/content"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/content_plain"
+					android:textSize="@dimen/default_list_text_size"
+					android:textColor="?android:textColorPrimary"
+					osmand:typeface="@string/font_roboto_regular"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
+
+			</FrameLayout>
 
 			<View
 				android:id="@+id/divider"
@@ -97,7 +110,7 @@
 				android:layout_height="1dp"
 				android:background="?attr/ctx_menu_info_divider"
 				android:visibility="gone"
-				tools:visibility="visible"/>
+				tools:visibility="visible" />
 
 			<FrameLayout
 				android:id="@+id/btn_edit"
@@ -112,18 +125,18 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:gravity="center_vertical"
+					android:drawablePadding="@dimen/list_content_padding_large"
 					android:duplicateParentState="true"
+					android:gravity="center_vertical"
 					android:padding="@dimen/bottom_sheet_content_padding_small"
 					android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 					android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
-					android:drawablePadding="@dimen/list_content_padding_large"
-					osmand:drawableStartCompat="@drawable/ic_action_edit_dark"
-					osmand:drawableLeftCompat="@drawable/ic_action_edit_dark"
-					osmand:drawableTint="?attr/active_color_basic"
 					android:text="@string/shared_string_edit"
 					android:textColor="?attr/active_color_basic"
 					android:textSize="@dimen/default_list_text_size"
+					osmand:drawableLeftCompat="@drawable/ic_action_edit_dark"
+					osmand:drawableStartCompat="@drawable/ic_action_edit_dark"
+					osmand:drawableTint="?attr/active_color_basic"
 					osmand:typeface="@string/font_roboto_medium" />
 
 			</FrameLayout>
