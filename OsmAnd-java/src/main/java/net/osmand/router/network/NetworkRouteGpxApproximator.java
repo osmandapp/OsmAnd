@@ -97,6 +97,7 @@ public class NetworkRouteGpxApproximator {
 	private List<NetworkRouteSegment> loadDataByGPX(GPXFile gpxFile) throws IOException {
 		List<GpxRoutePoint> gpxRoutePoints = new ArrayList<>();
 		List<NetworkRouteSegment> res = new ArrayList<>();
+		List<NetworkRoutePoint> passedRoutePoints = new ArrayList<>();
 		for (GPXUtilities.Track t : gpxFile.tracks) {
 			for (GPXUtilities.TrkSegment ts : t.segments) {
 				for (int i = 0; i < ts.points.size() - 1; i++) {
@@ -104,11 +105,14 @@ public class NetworkRouteGpxApproximator {
 					NetworkRoutePoint nearesetPoint = selector.getNetworkRouteContext()
 							.getClosestNetworkRoutePoint(MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat));
 					GpxRoutePoint gpxRoutePoint = new GpxRoutePoint();
-					if (MapUtils.squareRootDist31(MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat), 
+					if (MapUtils.squareRootDist31(MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat),
 							nearesetPoint.x31, nearesetPoint.y31) < GPX_MAX_DISTANCE_POINT_MATCH) {
 						gpxRoutePoint.routePoint = nearesetPoint;
 					}
-					gpxRoutePoints.add(gpxRoutePoint);
+					if (!passedRoutePoints.contains(nearesetPoint)) {
+						passedRoutePoints.add(nearesetPoint);
+						gpxRoutePoints.add(gpxRoutePoint);
+					}
 				}
 			}
 		}
@@ -126,7 +130,6 @@ public class NetworkRouteGpxApproximator {
 			if (matchingGpxSegment != null) {
 				res.add(matchingGpxSegment);
 			}
-			// TODO add straight line if needed
 		}
 		return res;
 	}

@@ -275,8 +275,8 @@ public class NetworkRouteSelector {
 		connectToLongestChain(chains, endChains, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
-		Collection<List<NetworkRouteSegmentChain>> chainsValues = new ArrayList<>(chains.values());
-		for (List<NetworkRouteSegmentChain> chainList : chainsValues) {
+		Collection<List<NetworkRouteSegmentChain>> values = new ArrayList<>(chains.values());
+		for (List<NetworkRouteSegmentChain> chainList : values) {
 			NetworkRouteSegmentChain first = chainList.get(0);
 			chainReverse(chains, endChains, first);
 		}
