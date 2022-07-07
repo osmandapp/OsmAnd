@@ -8,9 +8,12 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 
 import androidx.annotation.NonNull;
 
@@ -18,6 +21,9 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 	private static final String KEY_SKIP_STOPS = "skip_stops";
+
+	private CommonPreference<Long> measuredIntervalPref;
+	private CommonPreference<Boolean> skipStopsPref;
 
 	private long initialIntervalMillis;
 	private boolean skipStops;
@@ -33,12 +39,20 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
+		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+		if (widgetInfo != null) {
+			AverageSpeedWidget widget = ((AverageSpeedWidget) widgetInfo.widget);
+			measuredIntervalPref = widget.getMeasuredIntervalPref();
+			skipStopsPref = widget.getSkipStopsPref();
 
-		long defaultInterval = settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.getModeValue(appMode);
-		boolean defaultSkipStops = settings.AVERAGE_SPEED_SKIP_STOPS.getModeValue(appMode);
+			long defaultInterval = measuredIntervalPref.getModeValue(appMode);
+			boolean defaultSkipStops = skipStopsPref.getModeValue(appMode);
 
-		initialIntervalMillis = bundle.getLong(KEY_TIME_INTERVAL, defaultInterval);
-		skipStops = bundle.getBoolean(KEY_SKIP_STOPS, defaultSkipStops);
+			initialIntervalMillis = bundle.getLong(KEY_TIME_INTERVAL, defaultInterval);
+			skipStops = bundle.getBoolean(KEY_SKIP_STOPS, defaultSkipStops);
+		} else {
+			dismiss();
+		}
 	}
 
 	@Override
@@ -82,7 +96,7 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 
 	@Override
 	protected void applySettings() {
-		settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.setModeValue(appMode, averageSpeedIntervalCard.getSelectedIntervalMillis());
-		settings.AVERAGE_SPEED_SKIP_STOPS.setModeValue(appMode, skipStops);
+		measuredIntervalPref.setModeValue(appMode, averageSpeedIntervalCard.getSelectedIntervalMillis());
+		skipStopsPref.setModeValue(appMode, skipStops);
 	}
 }
