@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.router.network.NetworkRouteContext.*;
+import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
-import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -163,13 +162,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.setMapContextMenu(mapContextMenu);
 	}
 
-	public void build(View rootView) {
+	public void build(ViewGroup rootView) {
 		for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
 			if (plugin.isMenuControllerSupported(this.getClass())) {
 				builder.addMenuPlugin(plugin);
 			}
 		}
-		builder.build((ViewGroup) rootView);
+		builder.build(rootView, getObject());
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,

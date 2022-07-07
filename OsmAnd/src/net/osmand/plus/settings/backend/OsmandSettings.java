@@ -1498,9 +1498,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 
-	public final OsmandPreference<Long> AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS = new LongPreference(this, "average_speed_measured_interval_millis", AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS).makeProfile().cache();
-	public final OsmandPreference<Boolean> AVERAGE_SPEED_SKIP_STOPS = new BooleanPreference(this, "average_speed_skip_stops", true).makeProfile().cache();
-
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
 			"current_track_coloring_type", ColoringType.TRACK_SOLID,

@@ -6,6 +6,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
+import static net.osmand.data.MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
@@ -24,6 +26,7 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
@@ -38,6 +41,10 @@ import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
@@ -119,6 +126,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OpenstreetmapRemoteUtil remoteUtil;
 	private OsmBugsRemoteUtil remoteNotesUtil;
 	private OsmBugsLocalUtil localNotesUtil;
+
+	private OsmBugsLayer osmBugsLayer;
+	private OsmEditsLayer osmEditsLayer;
 
 	public OsmEditingPlugin(OsmandApplication app) {
 		super(app);
@@ -203,11 +213,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		return dbbug;
 	}
-
-
-	private OsmBugsLayer osmBugsLayer;
-	private OsmEditsLayer osmEditsLayer;
-//	private EditingPOIDialogProvider poiActions;
 
 	@Override
 	protected List<QuickActionType> getQuickActionTypes() {
@@ -294,7 +299,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
-				//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 				EditPoiDialogFragment editPoiDialogFragment =
 						EditPoiDialogFragment.createAddPoiInstance(latitude, longitude,
 								mapActivity.getMyApplication());
@@ -329,8 +333,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
 			Long objectId = ((MapObject) selectedObj).getId();
-			isEditable = objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
-					|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE);
+			isEditable = isOsmUrlAvailable(objectId, true);
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
@@ -507,7 +510,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			this.descriptionId = descriptionId;
 		}
 
-		public String asURLparam() {
+		public String asUrlParam() {
 			return name().toLowerCase();
 		}
 
@@ -532,6 +535,32 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else {
 			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), info, fragment);
 			return true;
+		}
+	}
+
+	@Override
+	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+		return menuControllerClass == AmenityMenuController.class || menuControllerClass == RenderedObjectMenuController.class;
+	}
+
+	@Override
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
+		if (object instanceof Amenity) {
+			Amenity amenity = (Amenity) object;
+			Long id = amenity.getId();
+			if (isOsmUrlAvailable(id, false)) {
+				String link = getOsmUrlForId(id, 1);
+				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
+						0, false, null, true, 0, true, null, false);
+			}
+		} else if (object instanceof RenderedObject) {
+			RenderedObject renderedObject = (RenderedObject) object;
+			Long id = renderedObject.getId();
+			if (isOsmUrlAvailable(id, true)) {
+				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
+				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
+						null, true, 0, true, null, false);
+			}
 		}
 	}
 
@@ -636,11 +665,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
-	public static boolean isOsmUrlAvailable(@Nullable Long id) {
-		return id != null && id > 0 && (id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE);
+	private static boolean isOsmUrlAvailable(@Nullable Long id, boolean mapObject) {
+		if (id != null && id > 0) {
+			if (mapObject) {
+				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
+			} else {
+				return id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE;
+			}
+		}
+		return false;
 	}
 
-	public static String getOsmUrlForId(long id, int shift) {
+	private static String getOsmUrlForId(long id, int shift) {
 		long originalId = (id >> 1);
 		long relationShift = 1L << 41;
 		if (originalId > relationShift) {
