@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
@@ -41,6 +42,12 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		analysis = selectedGpxPoint.getSelectedGpxFile() == null
 				? new GPXTrackAnalysis()
 				: selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getMyApplication());
+	}
+
+	@Nullable
+	@Override
+	public Object getObject() {
+		return selectedGpxPoint;
 	}
 
 	@Override

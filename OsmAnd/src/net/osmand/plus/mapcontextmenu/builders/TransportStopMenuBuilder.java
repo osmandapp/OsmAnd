@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.activities.MapActivity;
@@ -14,6 +16,12 @@ public class TransportStopMenuBuilder extends MenuBuilder {
 	public TransportStopMenuBuilder(MapActivity mapActivity, final TransportStop transportStop) {
 		super(mapActivity);
 		this.transportStop = transportStop;
+	}
+
+	@Nullable
+	@Override
+	public Object getObject() {
+		return transportStop;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.activities.MapActivity;
@@ -27,6 +28,12 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 	public AudioVideoNoteMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Recording recording) {
 		super(mapActivity);
 		this.recording = recording;
+	}
+
+	@Nullable
+	@Override
+	public Object getObject() {
+		return recording;
 	}
 
 	@Override

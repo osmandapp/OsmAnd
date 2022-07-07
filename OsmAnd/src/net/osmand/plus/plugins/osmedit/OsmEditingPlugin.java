@@ -26,6 +26,7 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
@@ -40,6 +41,10 @@ import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
@@ -505,7 +510,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			this.descriptionId = descriptionId;
 		}
 
-		public String asURLparam() {
+		public String asUrlParam() {
 			return name().toLowerCase();
 		}
 
@@ -530,6 +535,33 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else {
 			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), info, fragment);
 			return true;
+		}
+	}
+
+	@Override
+	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+		return menuControllerClass == AmenityMenuController.class || menuControllerClass == RenderedObjectMenuController.class;
+	}
+
+	@Override
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+		Object object = menuBuilder.getObject();
+		if (object instanceof Amenity) {
+			Amenity amenity = (Amenity) object;
+			Long id = amenity.getId();
+			if (isOsmUrlAvailable(id, false)) {
+				String link = getOsmUrlForId(id, 1);
+				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
+						0, false, null, true, 0, true, null, false);
+			}
+		} else if (object instanceof RenderedObject) {
+			RenderedObject renderedObject = (RenderedObject) object;
+			Long id = renderedObject.getId();
+			if (isOsmUrlAvailable(id, true)) {
+				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
+				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
+						null, true, 0, true, null, false);
+			}
 		}
 	}
 
@@ -634,7 +666,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
-	public static boolean isOsmUrlAvailable(@Nullable Long id, boolean mapObject) {
+	private static boolean isOsmUrlAvailable(@Nullable Long id, boolean mapObject) {
 		if (id != null && id > 0) {
 			if (mapObject) {
 				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
@@ -645,7 +677,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public static String getOsmUrlForId(long id, int shift) {
+	private static String getOsmUrlForId(long id, int shift) {
 		long originalId = (id >> 1);
 		long relationShift = 1L << 41;
 		if (originalId > relationShift) {
