@@ -288,6 +288,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 		MapWidgetInfo duplicateWidgetInfo = widgetRegistry
 				.createCustomWidget(duplicateId, duplicateWidget, widgetType, panel, appMode);
 		duplicateWidgetInfo.enableDisableForMode(appMode, true);
+		widgetInfo.widget.copySettings(appMode, duplicateId);
 
 		Map<Integer, List<String>> pagedOrder = new LinkedHashMap<>();
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
