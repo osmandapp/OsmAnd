@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.activities.MapActivity;
