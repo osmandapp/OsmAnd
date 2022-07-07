@@ -30,12 +30,6 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 		this.recording = recording;
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return recording;
-	}
-
 	@Override
 	protected boolean needBuildPlainMenuItems() {
 		return false;

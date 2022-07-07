@@ -18,12 +18,6 @@ public class TransportStopMenuBuilder extends MenuBuilder {
 		this.transportStop = transportStop;
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return transportStop;
-	}
-
 	@Override
 	public void buildInternal(View view) {
 		Amenity amenity = transportStop.getAmenity();

@@ -44,12 +44,6 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 				: selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getMyApplication());
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return selectedGpxPoint;
-	}
-
 	@Override
 	protected boolean needBuildPlainMenuItems() {
 		return false;

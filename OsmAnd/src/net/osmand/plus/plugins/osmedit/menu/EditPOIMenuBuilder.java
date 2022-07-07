@@ -28,12 +28,6 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 		this.osmPoint = osmPoint;
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return osmPoint;
-	}
-
 	@Override
 	protected boolean needBuildPlainMenuItems() {
 		return false;

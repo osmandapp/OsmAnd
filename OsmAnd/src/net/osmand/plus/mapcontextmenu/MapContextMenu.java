@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -1357,7 +1358,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.slideDown();
 	}
 
-	public void build(View rootView) {
+	public void build(ViewGroup rootView) {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			menuController.build(rootView);

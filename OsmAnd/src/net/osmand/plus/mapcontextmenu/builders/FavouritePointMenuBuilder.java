@@ -57,12 +57,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return fav;
-	}
-
 	public Object getOriginObject() {
 		return originObject;
 	}

@@ -42,12 +42,6 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		setShowNearestWiki(true);
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return wpt;
-	}
-
 	@Override
 	protected boolean needBuildPlainMenuItems() {
 		return false;

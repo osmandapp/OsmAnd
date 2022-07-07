@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
@@ -86,12 +85,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
 		metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
-	}
-
-	@Nullable
-	@Override
-	public Object getObject() {
-		return amenity;
 	}
 
 	@Override

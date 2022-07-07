@@ -9,8 +9,8 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.RenderedObjectMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -23,7 +23,7 @@ public class RenderedObjectMenuController extends MenuController {
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
 	                                    @NonNull PointDescription pointDescription,
 	                                    @NonNull RenderedObject renderedObject) {
-		super(new RenderedObjectMenuBuilder(mapActivity, renderedObject), pointDescription, mapActivity);
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		this.renderedObject = renderedObject;
 	}

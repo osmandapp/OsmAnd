@@ -544,8 +544,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
-		Object object = menuBuilder.getObject();
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
 		if (object instanceof Amenity) {
 			Amenity amenity = (Amenity) object;
 			Long id = amenity.getId();

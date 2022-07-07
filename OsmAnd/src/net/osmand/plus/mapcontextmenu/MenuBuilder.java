@@ -236,11 +236,6 @@ public class MenuBuilder {
 		this.latLon = objectLocation;
 	}
 
-	@Nullable
-	public Object getObject() {
-		return null;
-	}
-
 	public void setMapContextMenu(MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
 	}
@@ -285,7 +280,7 @@ public class MenuBuilder {
 		this.light = light;
 	}
 
-	public void build(ViewGroup view) {
+	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -298,7 +293,7 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		buildInternal(view);
-		buildPluginRows(view);
+		buildPluginRows(view, object);
 
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
@@ -351,9 +346,9 @@ public class MenuBuilder {
 		return true;
 	}
 
-	protected void buildPluginRows(View view) {
+	protected void buildPluginRows(@NonNull View view,@Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuRows(this, view);
+			plugin.buildContextMenuRows(this, view, object);
 		}
 	}
 

@@ -30,12 +30,6 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		this.item = item;
 	}
 
-	@Nullable
-	@Override
-	public Object getObject() {
-		return item;
-	}
-
 	@Override
 	protected boolean needBuildPlainMenuItems() {
 		return false;
