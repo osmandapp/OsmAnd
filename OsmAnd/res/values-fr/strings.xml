@@ -4732,7 +4732,7 @@
     <string name="auto_backup_title">Backup automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
-    <string name="compass_click_desc">Cliquez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Appuyez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
     <string name="rendering_attr_depthContourColorScheme_name">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">En tapant sur le gadget, vous pouvez prendre une photo.</string>
@@ -4762,5 +4762,5 @@
     <string name="distance_to_destination_widget_desc">Le gadget affiche la distance restante jusqu\'à l’arrivée (dernier point).</string>
     <string name="time_to_destination_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"La durée restante\" jusqu\'à l\'arrivée. Ces informations sont actualisées pendant le guidage et calculées à partir de votre position actuelle.</string>
     <string name="distance_to_intermediate_widget_desc">Le gadget affiche la distance restante jusqu\'au premier point intermédiaire. Une fois ce point intermédiaire atteint, la distance sera calculée jusqu\'au point intermédiaire suivant.</string>
-    <string name="trip_recording_duration_widget_desc">Affiche la durée en minutes / heures de l’enregistrement en cours.</string>
+    <string name="trip_recording_duration_widget_desc">Affiche l\'heure, la durée en minutes / heures du parcours en cours d\'enregistrement.</string>
 </resources>
