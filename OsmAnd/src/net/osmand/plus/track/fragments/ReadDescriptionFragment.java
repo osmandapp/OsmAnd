@@ -176,8 +176,13 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void updateContent(@NonNull String content) {
-		mContent = content;
+		setContent(content);
 		updateContentView();
+	}
+
+	private void setContent(@NonNull String content) {
+		mContent = content;
+		mContentType = isHtmlText(mContent) ? ContentType.HTML : ContentType.PLAIN;
 	}
 
 	private void updateContentView() {
@@ -250,8 +255,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void readBundle(@NonNull Bundle bundle) {
-		mContent = bundle.getString(CONTENT_KEY);
-		mContentType = isHtmlText(mContent) ? ContentType.HTML : ContentType.PLAIN;
+		setContent(bundle.getString(CONTENT_KEY));
 	}
 
 	@NonNull
