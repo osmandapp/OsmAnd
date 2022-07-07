@@ -134,7 +134,8 @@ public class NetworkRouteGpxApproximator {
 	private NetworkRouteSegment getGpxSegmentWithoutExtraGpxPoints(List<GpxRoutePoint> gpxRoutePoints, int idx,
 	                                                               GpxRoutePoint start) {
 		NetworkRouteSegment matchingGpxSegment = null;
-		for (int j = 2; j < GPX_SKIP_POINTS_GPX_MAX; j++) {
+		int maxSkipGpxPoints = Math.min(gpxRoutePoints.size() - idx, GPX_SKIP_POINTS_GPX_MAX);
+		for (int j = 2; j < maxSkipGpxPoints; j++) {
 			GpxRoutePoint nextPoint = gpxRoutePoints.get(idx + j);
 			matchingGpxSegment = getMatchingGpxSegments(start, nextPoint);
 			if (matchingGpxSegment != null) {
@@ -142,7 +143,7 @@ public class NetworkRouteGpxApproximator {
 				// check that skipped points are not far away
 				for (int t = 1; t < j; t++) {
 					GpxRoutePoint gpxRoutePoint = gpxRoutePoints.get(idx + t);
-					if (gpxRoutePoint.routePoint != null && getOrthogonalDistance(gpxRoutePoint,
+					if (gpxRoutePoint.routePoint == null || getOrthogonalDistance(gpxRoutePoint,
 							matchingGpxSegment) > GPX_MAX_INTER_SKIP_DISTANCE) {
 						notFarAway = false;
 						break;
