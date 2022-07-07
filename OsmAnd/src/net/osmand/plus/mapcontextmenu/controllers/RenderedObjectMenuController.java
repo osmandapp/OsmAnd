@@ -118,7 +118,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 			boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
 			Long id = renderedObject.getId();
-			if (osmEditingEnabled && isOsmUrlAvailable(id)) {
+			if (osmEditingEnabled && isOsmUrlAvailable(id, true)) {
 				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
 				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link, true, true, null);
 			}

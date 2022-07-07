@@ -660,7 +660,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildNearestRows((ViewGroup) view);
 
 		Long id = amenity.getId();
-		if (osmEditingEnabled && isOsmUrlAvailable(id)) {
+		if (osmEditingEnabled && isOsmUrlAvailable(id, false)) {
 			String link = getOsmUrlForId(id, 1);
 			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
 					0, false, null, true, 0, true, null, false);

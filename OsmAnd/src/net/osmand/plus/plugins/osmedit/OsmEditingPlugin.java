@@ -6,6 +6,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
+import static net.osmand.data.MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
@@ -120,6 +122,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OsmBugsRemoteUtil remoteNotesUtil;
 	private OsmBugsLocalUtil localNotesUtil;
 
+	private OsmBugsLayer osmBugsLayer;
+	private OsmEditsLayer osmEditsLayer;
+
 	public OsmEditingPlugin(OsmandApplication app) {
 		super(app);
 
@@ -203,11 +208,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		return dbbug;
 	}
-
-
-	private OsmBugsLayer osmBugsLayer;
-	private OsmEditsLayer osmEditsLayer;
-//	private EditingPOIDialogProvider poiActions;
 
 	@Override
 	protected List<QuickActionType> getQuickActionTypes() {
@@ -294,7 +294,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
-				//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 				EditPoiDialogFragment editPoiDialogFragment =
 						EditPoiDialogFragment.createAddPoiInstance(latitude, longitude,
 								mapActivity.getMyApplication());
@@ -329,8 +328,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
 			Long objectId = ((MapObject) selectedObj).getId();
-			isEditable = objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
-					|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE);
+			isEditable = isOsmUrlAvailable(objectId, true);
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
@@ -636,8 +634,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
-	public static boolean isOsmUrlAvailable(@Nullable Long id) {
-		return id != null && id > 0 && (id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE);
+	public static boolean isOsmUrlAvailable(@Nullable Long id, boolean mapObject) {
+		if (id != null && id > 0) {
+			if (mapObject) {
+				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
+			} else {
+				return id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE;
+			}
+		}
+		return false;
 	}
 
 	public static String getOsmUrlForId(long id, int shift) {
