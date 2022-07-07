@@ -31,6 +31,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -203,6 +204,17 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
+		}
+	}
+
+	@Override
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
+		if (MOTOR_TYPE_PREF_ID.equals(prefId)) {
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				activity.getMapRouteInfoMenu().updateMenu();
+			}
 		}
 	}
 

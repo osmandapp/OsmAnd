@@ -132,6 +132,7 @@ public class EmissionHelper {
 		String pattern = totalEmissionsKg / 10 > 1 ? "0" : "0.0";
 		String emission = new DecimalFormat(pattern).format(totalEmissionsKg);
 		String text = app.getString(R.string.ltr_or_rtl_combine_via_space, emission, app.getString(R.string.kg));
+		text = app.getString(R.string.ltr_or_rtl_combine_via_space, "~", text);
 		return app.getString(R.string.ltr_or_rtl_combine_via_space, text, app.getString(R.string.co2_mission));
 	}
 
