@@ -201,6 +201,10 @@ public class OsmandMap implements NavigationSessionListener {
 		return scale * getCarDensityScaleCoef();
 	}
 
+	public float getOriginalTextScale() {
+		return app.getSettings().TEXT_SCALE.get();
+	}
+
 	public float getMapDensity() {
 		float scale = app.getSettings().MAP_DENSITY.get();
 		return scale * getCarDensityScaleCoef();
