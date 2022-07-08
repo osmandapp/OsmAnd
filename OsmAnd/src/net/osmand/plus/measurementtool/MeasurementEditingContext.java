@@ -273,6 +273,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isApproximationNeeded() {
+		boolean hasTimestamps = false;
 		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
 		if (!newData) {
@@ -281,11 +282,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			for (WptPt point : points) {
 				if (point.hasProfile()) {
 					hasDefaultPointsOnly = false;
+				}
+				if (point.time != 0) {
+					hasTimestamps = true;
+				}
+				if (!hasDefaultPointsOnly && hasTimestamps) {
 					break;
 				}
 			}
 		}
-		return !newData && hasDefaultPointsOnly && getPoints().size() > 2;
+		return !newData && getPoints().size() > 2 && hasDefaultPointsOnly && hasTimestamps;
 	}
 
 	public boolean isAddNewSegmentAllowed() {
