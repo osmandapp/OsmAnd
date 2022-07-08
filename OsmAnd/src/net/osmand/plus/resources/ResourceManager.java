@@ -442,6 +442,14 @@ public class ResourceManager {
 		}
 	}
 
+	public void downloadTileForMap(@NonNull String tileId, @NonNull ITileSource map, int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		if (cache != null) {
+			long timestamp = System.currentTimeMillis();
+			cache.getTileForMap(tileId, map, x, y, zoom, true, true, true, timestamp);
+		}
+	}
+
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
 	private boolean searchAmenitiesInProgress;
 

@@ -198,17 +198,8 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		private void downloadTile(int zoom, int x, int y) {
 			if (!cancelled) {
 				String tileId = resourceManager.calculateTileId(tileSource, x, y, zoom);
-				if (resourceManager.isTileDownloaded(tileId, tileSource, x, y, zoom)) {
-					if (!recentlyDownloadedTilesIds.contains(tileId)) {
-						int tileSize = resourceManager.getTileBytesSizeOnFileSystem(tileId, tileSource, x, y, zoom);
-						totalTilesBytes += tileSize;
-						app.runInUIThread(() -> listener.onTileDownloaded(availableTiles++, totalTilesBytes));
-					}
-				} else {
-					long time = System.currentTimeMillis();
-					resourceManager.getTileForMapSync(tileId, tileSource, x, y, zoom, true, time);
-					activeRequests++;
-				}
+				resourceManager.downloadTileForMap(tileId, tileSource, x, y, zoom);
+				activeRequests++;
 			}
 		}
 
