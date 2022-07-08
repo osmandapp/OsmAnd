@@ -32,7 +32,6 @@ import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
@@ -42,7 +41,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -432,85 +430,6 @@ public abstract class OsmandMapLayer {
 				break;
 			}
 		}
-	}
-
-
-	/** Universal: Canvas & OpenGL*/
-	protected QuadPoint getCenterPoint(RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			PointF centerPixels;
-			if (tb.isCenterShifted()) {
-				PointI windowSize = getMapRenderer().getState().getWindowSize();
-				int sx = windowSize.getX() / 2;
-				int sy = windowSize.getY() / 2;
-				PointI center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
-				if (center31 != null) {
-					centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
-					return new QuadPoint(centerPixels.x, centerPixels.y);
-				}
-			}
-
-			PointI center31 = getMapRenderer().getState().getTarget31();
-			centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
-			return new QuadPoint(centerPixels.x, centerPixels.y);
-		} else {
-			return tb.getCenterPixelPoint();
-		}
-	}
-
-	/** Universal: Canvas & OpenGL*/
-	protected LatLon getCenterLatLon(RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			PointI center31;
-			if (tb.isCenterShifted()) {
-				PointI windowSize = getMapRenderer().getState().getWindowSize();
-				int sx = windowSize.getX() / 2;
-				int sy = windowSize.getY() / 2;
-				center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
-				if (center31 != null) {
-					return point31ToLatLon(center31);
-				}
-			}
-
-			center31 = getMapRenderer().getState().getTarget31();
-			return point31ToLatLon(center31);
-		} else {
-			return tb.getCenterLatLon();
-		}
-	}
-
-	/** Universal: Canvas & OpenGL*/
-	protected PointF screenPointFromPoint(double x, double y, boolean compensateMapRotation, RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			QuadPoint circleCenterPoint = getCenterPoint(tb);
-			double dX = circleCenterPoint.x - x;
-			double dY = circleCenterPoint.y - y;
-			double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
-			double angleFromCenter = Math.toDegrees(Math.atan2(dY, dX)) - 90;
-			angleFromCenter = compensateMapRotation ? angleFromCenter - tb.getRotate() : angleFromCenter; //??
-			return getPointFromCenterByRadius(distanceFromCenter, angleFromCenter, tb);
-		} else {
-			return new PointF((float)x, (float)y);
-		}
-	}
-
-	/** Universal: Canvas & OpenGL*/
-	protected PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
-		LatLon centerLatLon = getCenterLatLon(tb);
-		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
-	}
-
-	/** Universal: Canvas & OpenGL*/
-	protected PointF latLonToScreenPoint(LatLon latLon, RotatedTileBox tb) {
-		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
-	}
-
-	/** Universal: Canvas & OpenGL*/
-	protected LatLon point31ToLatLon(PointI point31) {
-		double lon = MapUtils.get31LongitudeX(point31.getX());
-		double lat = MapUtils.get31LatitudeY(point31.getY());
-		return new LatLon(lat, lon);
 	}
 
 	public static class TileBoxRequest {

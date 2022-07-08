@@ -188,8 +188,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private void drawTwoFingersDistance(Canvas canvas, RotatedTileBox tb, LatLon firstTouch,
 										LatLon secondTouch, boolean nightMode) {
-		PointF firstScreenPoint = latLonToScreenPoint(firstTouch, tb);
-		PointF secondScreenPoint = latLonToScreenPoint(secondTouch, tb);
+		PointF firstScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, firstTouch.getLatitude(), firstTouch.getLongitude());
+		PointF secondScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, secondTouch.getLatitude(), secondTouch.getLongitude());
 		float x1 = firstScreenPoint.x;
 		float y1 = firstScreenPoint.y;
 		float x2 = secondScreenPoint.x;
@@ -240,8 +240,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
-		PointF firstScreenPoint = latLonToScreenPoint(touchPointLatLon, tb);
-		PointF secondScreenPoint = latLonToScreenPoint(new LatLon(currLoc.getLatitude(), currLoc.getLongitude()), tb);
+		PointF firstScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+		PointF secondScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, currLoc.getLatitude(), currLoc.getLongitude());
 		float x = firstScreenPoint.x;
 		float y = firstScreenPoint.y;
 		float currX = secondScreenPoint.x;

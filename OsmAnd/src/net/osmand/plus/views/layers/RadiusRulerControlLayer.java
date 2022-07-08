@@ -170,7 +170,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
-			final QuadPoint center = getCenterPoint(tb);
+			final QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
 			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
@@ -370,7 +370,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				continue;
 			}
 
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 			points.add(new QuadPoint(screenPoint.x, screenPoint.y));
 		}
 		if (points.size() > 0) {
@@ -462,7 +462,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 								   QuadPoint center, RenderingLineAttributes attrs) {
 		float radiusLength = radius * circleNumber;
 		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
-		QuadPoint centerPixels = getCenterPoint(tb);
+		QuadPoint centerPixels = tb.getCenterPixelPoint();
 
 		drawCircle(canvas, tb, circleNumber, center, attrs);
 		drawCompassCents(centerPixels, innerRadiusLength, radiusLength, tb, canvas, attrs);
@@ -537,7 +537,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 			if (arrowArc.isEmpty()) {
 				arrowArc.moveTo(screenPoint.x, screenPoint.y);
 			} else {
@@ -588,6 +588,52 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		canvas.drawPath(compass, attrs.shadowPaint);
 		canvas.drawPath(compass, attrs.paint);
 		canvas.drawPath(redCompassLines, redLinesPaint);
+	}
+
+	private LatLon getCenterLatLon(RotatedTileBox tb) {
+		if (hasMapRenderer()) {
+			PointI center31;
+			if (tb.isCenterShifted()) {
+				PointI windowSize = getMapRenderer().getState().getWindowSize();
+				int sx = windowSize.getX() / 2;
+				int sy = windowSize.getY() / 2;
+				center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
+				if (center31 != null) {
+					return point31ToLatLon(center31);
+				}
+			}
+
+			center31 = getMapRenderer().getState().getTarget31();
+			return point31ToLatLon(center31);
+		} else {
+			return tb.getCenterLatLon();
+		}
+	}
+
+	private PointF screenPointFromPoint(double x, double y, boolean compensateMapRotation, RotatedTileBox tb) {
+		if (hasMapRenderer()) {
+			QuadPoint circleCenterPoint = tb.getCenterPixelPoint();
+			double dX = circleCenterPoint.x - x;
+			double dY = circleCenterPoint.y - y;
+			double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
+			double angleFromCenter = Math.toDegrees(Math.atan2(dY, dX)) - 90;
+			angleFromCenter = compensateMapRotation ? angleFromCenter - tb.getRotate() : angleFromCenter; //??
+			return getPointFromCenterByRadius(distanceFromCenter, angleFromCenter, tb);
+		} else {
+			return new PointF((float)x, (float)y);
+		}
+	}
+
+	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
+		LatLon centerLatLon = getCenterLatLon(tb);
+		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
+		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	private LatLon point31ToLatLon(PointI point31) {
+		double lon = MapUtils.get31LongitudeX(point31.getX());
+		double lat = MapUtils.get31LatitudeY(point31.getY());
+		return new LatLon(lat, lon);
 	}
 
 	private float getCompassLineHeight(int index) {
