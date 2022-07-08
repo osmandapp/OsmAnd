@@ -134,6 +134,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		estimatedDownloadSizeText = view.findViewById(R.id.estimated_download_size);
 
 		mapView.rotateToAnimate(0);
+		mapView.setElevationAngle(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 
 		setupToolbar();
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
