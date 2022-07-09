@@ -4698,9 +4698,9 @@
     <string name="routing_attr_motor_type_description">Válassza ki a járműve által használt üzemanyag típusát a CO₂-kibocsátás kiszámításához.</string>
     <string name="routing_attr_motor_type_name">A motor által használt üzemanyag</string>
     <string name="lang_ckb">Közép-kurd</string>
-    <string name="live_update_frequency_day_variant">A térképfrissítéseket naponta fogja keresni.</string>
-    <string name="live_update_frequency_hour_variant">A térképfrissítéseket óránként fogja keresni.</string>
-    <string name="live_update_frequency_week_variant">A térképfrissítéseket hetente fogja keresni.</string>
+    <string name="live_update_frequency_day_variant">Naponta fogja ellenőrizni az OsmAnd a térképfrissítéseket.</string>
+    <string name="live_update_frequency_hour_variant">Óránként fogja ellenőrizni az OsmAnd a térképfrissítéseket.</string>
+    <string name="live_update_frequency_week_variant">Hetente fogja ellenőrizni az OsmAnd a térképfrissítéseket.</string>
     <string name="next_live_update_time">Következő frissítés: %1$s múlva.</string>
     <string name="altitude_correction">Magasságkorrekció</string>
     <string name="no_altitude_data_desc">A nyomvonalát az utakhoz kapcsolhatja %1$s adatokat lekéréséhez vagy online kiszámításához.</string>
