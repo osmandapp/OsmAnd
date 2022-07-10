@@ -1392,9 +1392,9 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurez le proxy HTTP pour toutes les requêtes réseau.</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
-    <string name="proxy_host_descr">Configurez le serveur mandataire, proxy, (par exemple : 127.0.0.1).</string>
+    <string name="proxy_host_descr">Paramétrez le serveur mandataire, proxy, (par exemple : 127.0.0.1).</string>
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
-    <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118.</string>
+    <string name="proxy_port_descr">Paramétrez le numéro de port de votre mandataire (Proxy). Par exemple : 8118.</string>
     <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
