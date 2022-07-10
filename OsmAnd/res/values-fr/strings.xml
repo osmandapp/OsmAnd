@@ -4514,8 +4514,8 @@
     <string name="shared_string_reading_file">Lecture du fichier…</string>
     <string name="all_groups">Tous les groupes</string>
     <string name="list_of_groups">Liste des groupes</string>
-    <string name="points_selection_descr">Fermer et annuler les modifications \?</string>
-    <string name="exit_import_descr">Quitter sans enregistrer les changements \?</string>
+    <string name="points_selection_descr">Fermer et annuler toutes les modifications \?</string>
+    <string name="exit_import_descr">Quitter sans enregistrer les modifications \?</string>
     <string name="exit_import">Quitter \?</string>
     <string name="import_tracks">Importer des traces</string>
     <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces à importer.</string>
