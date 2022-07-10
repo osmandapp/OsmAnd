@@ -4763,4 +4763,6 @@
     <string name="auto_25_chars_route_tu_kr">Forduljon meg, és tartson jobbra</string>
     <string name="auto_25_chars_route_roundabout_kl">Menjen ki a(z) %1$d kijáraton és tartson balra</string>
     <string name="auto_25_chars_route_roundabout_kr">Menjen ki a(z) %1$d kijáraton és tartson jobbra</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Speciálisan MTB-k számára kialakított utak megjelenítése</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA utak megjelenítése</string>
 </resources>
