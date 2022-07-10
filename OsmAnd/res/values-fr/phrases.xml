@@ -626,7 +626,7 @@
     <string name="poi_military_landuse">Zone militaire</string>
     <string name="poi_wine">Caviste</string>
     <string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
-    <string name="poi_halt">Gare ferroviaire</string>
+    <string name="poi_halt">Arrêt de chemin de fer ; Arrêt de train ; Gare de chemin de fer ; Gare ferroviaire ; Gare ; Station</string>
     <string name="poi_lodging">Hébergement</string>
     <string name="poi_apartment">Meublé de tourisme</string>
     <string name="poi_internet_access_wlan">Accès Internet : sans-fil</string>
