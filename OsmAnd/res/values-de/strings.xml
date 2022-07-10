@@ -4741,7 +4741,7 @@
     <string name="auto_25_chars_route_tu_kr">Wenden und rechts halten</string>
     <string name="auto_25_chars_route_roundabout_kl">Die %1$d Ausfahrt nehmen und links halten</string>
     <string name="auto_25_chars_route_roundabout_kr">Die %1$d Ausfahrt nehmen und rechts halten</string>
-    <string name="auto_backup_preference_desc">Standardmäßig speichert Android Backups von Favoriten, Karten-Tokens und Osmand-Einstellungen, um sie auf neuen Geräten oder nach einer Neuinstallation wiederherzustellen, dieses Backup ist auf 25 MB begrenzt.
+    <string name="auto_backup_preference_desc">Standardmäßig speichert Android Backups von Favoriten, Karten-Tokens und OsmAnd-Einstellungen, um sie auf neuen Geräten oder nach einer Neuinstallation wiederherzustellen. Dieses Backup ist auf 25 MB begrenzt.
 \nWenn Sie OsmAnd Cloud verwenden, kann dies zu Missverständnissen nach der Neuinstallation führen.</string>
     <string name="auto_backup_title">Automatische Sicherung</string>
     <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird als nächstes in der Liste hinzugefügt.</string>
@@ -4751,4 +4751,6 @@
     <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie Audio-Notizen aufnehmen.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Speziell für das Mountainbiken angelegte Wege anzeigen</string>
 </resources>
