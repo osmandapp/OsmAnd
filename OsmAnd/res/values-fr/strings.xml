@@ -808,7 +808,7 @@
 \n- Nombre limité de téléchargements
 \n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne.
 \n
-\nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheté la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
+\nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheter la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions)
 \n
 \nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal.
@@ -1392,9 +1392,9 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurez le proxy HTTP pour toutes les requêtes réseau.</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
-    <string name="proxy_host_descr">Configurez le serveur mandataire (Proxy). Par exemple : 127.0.0.1</string>
+    <string name="proxy_host_descr">Configurez le serveur mandataire, proxy, (par exemple : 127.0.0.1).</string>
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
-    <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118</string>
+    <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118.</string>
     <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
@@ -1781,7 +1781,7 @@
     <string name="av_video_quality_low">Qualité la plus basse</string>
     <string name="av_video_quality_high">Qualité la plus élevée</string>
     <string name="av_video_quality">Qualité de la sortie vidéo</string>
-    <string name="av_video_quality_descr">Sélectionnez la qualité de la vidéo</string>
+    <string name="av_video_quality_descr">Sélectionnez la qualité de la vidéo.</string>
     <string name="av_audio_format">Format de la sortie audio</string>
     <string name="av_audio_format_descr">Sélectionnez le format de sortie audio.</string>
     <string name="av_audio_bitrate">Bitrate audio</string>
@@ -1798,7 +1798,7 @@
     <string name="no_location_permission">Autoriser l\'accès aux données de localisation.</string>
     <string name="no_camera_permission">Autoriser l\'accès à l\'appareil photo.</string>
     <string name="no_microphone_permission">Autoriser l\'accès au microphone.</string>
-    <string name="impassable_road_desc">Sélectionnez les routes à éviter</string>
+    <string name="impassable_road_desc">Sélectionnez les routes à éviter.</string>
     <string name="shared_string_sound">Son</string>
     <string name="select_voice_provider">Sélectionnez la voix de guidage</string>
     <string name="select_voice_provider_descr">Sélectionnez ou téléchargez le guidage vocal pour votre langue.</string>
@@ -2958,7 +2958,7 @@
     <string name="profile_alert_duplicate_name_title">Nom déjà existant</string>
     <string name="profile_alert_duplicate_name_msg">Il existe déjà un profil avec ce nom</string>
     <string name="select_nav_profile_dialog_title">Sélectionnez le type de navigation</string>
-    <string name="routing_profile_geocoding">Geocoding</string>
+    <string name="routing_profile_geocoding">Géocodage</string>
     <string name="routing_profile_straightline">Ligne droite</string>
     <string name="osmand_default_routing">Routage OsmAnd</string>
     <string name="routing_attr_piste_type_skitour_description">Itinéraires de randonnée à ski.</string>
@@ -3175,7 +3175,7 @@
     <string name="rendering_attr_piste_type_sled_name">Luge</string>
     <string name="rendering_attr_piste_type_hike_name">Randonnée</string>
     <string name="rendering_attr_piste_type_connection_name">Liaison</string>
-    <string name="rendering_attr_piste_type_skitour_name">Skitour</string>
+    <string name="rendering_attr_piste_type_skitour_name">Ski de randonnée</string>
     <string name="rendering_attr_piste_type_downhill_name">Descente</string>
     <string name="rendering_attr_piste_type_nordic_name">Nordique</string>
     <string name="routeInfo_piste_type_name">Type de piste</string>
@@ -3213,7 +3213,7 @@
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
-    <string name="update_all_maps_q">Tout mettre à jour \? (%1$d) cartes)</string>
+    <string name="update_all_maps_q">Mettre à jour les %1$d cartes \?</string>
     <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier \'rec\' ou dans des dossiers mensuels ou journaliers.</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
@@ -4025,7 +4025,7 @@
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
-    <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur le trajet en cours.</string>
+    <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur l\'itinéraire en cours.</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
     <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
