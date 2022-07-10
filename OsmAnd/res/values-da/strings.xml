@@ -4776,4 +4776,6 @@
     <string name="auto_25_chars_route_tl_kl">Drej til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Drej til venstre og hold til højre</string>
     <string name="trip_recording_duration_widget_desc">Viser tidspunktet for sporoptagelse, varigheden i minutter/timer af den aktuelt optagede tur.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier specielt designet til mountainbiking</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
 </resources>
