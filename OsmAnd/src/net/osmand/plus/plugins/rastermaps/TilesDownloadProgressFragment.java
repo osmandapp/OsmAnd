@@ -28,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -43,12 +44,16 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 
 	private static final int BYTES_TO_MB = 1024 * 1024;
 
-	private static final String KEY_LEFT_LON = "left_lon";
-	private static final String KEY_TOP_LAT = "top_lat";
-	private static final String KEY_RIGHT_LON = "right_lon";
-	private static final String KEY_BOTTOM_LAT = "bottom_lat";
-	private static final String KEY_MIN_ZOOM = "min_zoom";
-	private static final String KEY_MAX_ZOOM = "max_zoom";
+	public static final String KEY_LEFT_LON = "left_lon";
+	public static final String KEY_TOP_LAT = "top_lat";
+	public static final String KEY_RIGHT_LON = "right_lon";
+	public static final String KEY_BOTTOM_LAT = "bottom_lat";
+	public static final String KEY_MIN_ZOOM = "min_zoom";
+	public static final String KEY_MAX_ZOOM = "max_zoom";
+	public static final String KEY_DOWNLOAD_TYPE = "download_type";
+	public static final String KEY_MISSING_TILES = "missing_tiles";
+	public static final String KEY_MISSING_SIZE_MB = "missing_size_mb";
+
 	private static final String KEY_PROGRESS = "progress";
 	private static final String KEY_DOWNLOADED_SIZE_MB = "downloaded_size_mb";
 	private static final String KEY_DOWNLOADED_TILES_NUMBER = "downloaded_tiles_number";
@@ -62,6 +67,8 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	private QuadRect latLonRect;
 	private int minZoom;
 	private int maxZoom;
+	private DownloadType downloadType;
+	private boolean approximate;
 
 	private int progress;
 	private float downloadedSizeMb;
@@ -84,34 +91,47 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		downloadTilesHelper = app.getDownloadTilesHelper();
 		nightMode = isNightMode(true);
 
-		restoreState(savedInstanceState);
-		ITileSource tileSource = requireSettings().getMapTileSource(false);
-		boolean ellipticYTile = tileSource.isEllipticYTile();
-		totalTilesNumber = DownloadTilesHelper.getTilesNumber(minZoom, maxZoom, latLonRect, ellipticYTile);
-		approxSizeMb = DownloadTilesHelper.getApproxTilesSizeMb(minZoom, maxZoom, latLonRect, tileSource,
-				app.getResourceManager().getBitmapTilesCache());
-	}
-
-	private void restoreState(@Nullable Bundle savedState) {
 		Bundle args = getArguments();
-		if (savedState != null) {
-			restoreStateFromBundle(savedState);
-		} else if (args != null) {
-			restoreStateFromBundle(args);
+		if (args != null) {
+			readArgs(args);
+		}
+
+		if (savedInstanceState != null) {
+			restoreState(savedInstanceState);
 		}
 	}
 
-	private void restoreStateFromBundle(@NonNull Bundle bundle) {
-		minZoom = bundle.getInt(KEY_MIN_ZOOM);
-		maxZoom = bundle.getInt(KEY_MAX_ZOOM);
+	private void restoreState(@NonNull Bundle savedState) {
+		progress = savedState.getInt(KEY_PROGRESS);
+		downloadedSizeMb = savedState.getFloat(KEY_DOWNLOADED_SIZE_MB);
+		downloadedTilesNumber = savedState.getLong(KEY_DOWNLOADED_TILES_NUMBER);
+	}
+
+	private void readArgs(@NonNull Bundle args) {
+		minZoom = args.getInt(KEY_MIN_ZOOM);
+		maxZoom = args.getInt(KEY_MAX_ZOOM);
 		latLonRect = new QuadRect();
-		latLonRect.left = bundle.getDouble(KEY_LEFT_LON);
-		latLonRect.top = bundle.getDouble(KEY_TOP_LAT);
-		latLonRect.right = bundle.getDouble(KEY_RIGHT_LON);
-		latLonRect.bottom = bundle.getDouble(KEY_BOTTOM_LAT);
-		progress = bundle.getInt(KEY_PROGRESS);
-		downloadedSizeMb = bundle.getFloat(KEY_DOWNLOADED_SIZE_MB);
-		downloadedTilesNumber = bundle.getLong(KEY_DOWNLOADED_TILES_NUMBER);
+		latLonRect.left = args.getDouble(KEY_LEFT_LON);
+		latLonRect.top = args.getDouble(KEY_TOP_LAT);
+		latLonRect.right = args.getDouble(KEY_RIGHT_LON);
+		latLonRect.bottom = args.getDouble(KEY_BOTTOM_LAT);
+		downloadType = DownloadType.valueOf(args.getString(KEY_DOWNLOAD_TYPE));
+		if (downloadType == DownloadType.ONLY_MISSING) {
+			if (args.containsKey(KEY_MISSING_TILES)) {
+				approximate = true;
+				totalTilesNumber = args.getLong(KEY_MISSING_TILES);
+				approxSizeMb = args.getFloat(KEY_MISSING_SIZE_MB);
+			} else {
+				totalTilesNumber = -1;
+				approxSizeMb = -1;
+			}
+		} else {
+			ITileSource tileSource = requireSettings().getMapTileSource(false);
+			boolean ellipticYTile = tileSource.isEllipticYTile();
+			totalTilesNumber = DownloadTilesHelper.getTilesNumber(minZoom, maxZoom, latLonRect, ellipticYTile);
+			approxSizeMb = DownloadTilesHelper.getApproxTilesSizeMb(minZoom, maxZoom, latLonRect, tileSource,
+					app.getResourceManager().getBitmapTilesCache());
+		}
 	}
 
 	@Nullable
@@ -171,7 +191,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		String downloadedSize = getSizeMb(downloadedSizeMb);
 		String expectedSize = MessageFormat.format("(~{0})", getSizeMb(approxSizeMb));
 		String fullText;
-		boolean showExpectedSize = progress != 100 && !downloadTilesHelper.isDownloadFinished();
+		boolean showExpectedSize = progress != 100 && !downloadTilesHelper.isDownloadFinished() && approxSizeMb != -1;
 		if (!showExpectedSize) {
 			fullText = getString(R.string.ltr_or_rtl_combine_via_colon, downloadedString, downloadedSize);
 		} else {
@@ -196,20 +216,23 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 
 	private void updateTilesNumber() {
 		String tilesString = getString(R.string.shared_sting_tiles);
-		String downloadedNumber = OsmAndFormatter.formatValue(downloadedTilesNumber, "",
-				false, 0, app).value;
-		String totalNumber = MessageFormat.format("({0})",
-				OsmAndFormatter.formatValue(totalTilesNumber, "", false, 0, app).value);
-		String fullText = getString(R.string.ltr_or_rtl_combine_via_colon,
-				tilesString,
-				getString(R.string.ltr_or_rtl_combine_via_space, downloadedNumber, totalNumber));
+		String downloadedNumber = formatNumber(downloadedTilesNumber, 0);
 
-		Spannable spannable = new SpannableString(fullText);
-		ForegroundColorSpan span = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));
-		setSpan(spannable, span, fullText.indexOf(totalNumber), totalNumber.length());
+		TextView tvDownloaded = view.findViewById(R.id.downloaded_number);
+		if (totalTilesNumber == -1) {
+			tvDownloaded.setText(getString(R.string.ltr_or_rtl_combine_via_colon, tilesString, downloadedNumber));
+		} else {
+			String totalFormat = approximate ? "(~{0})" : "({0})";
+			String totalNumber = MessageFormat.format(totalFormat, formatNumber(totalTilesNumber, 0));
+			String fullText = getString(R.string.ltr_or_rtl_combine_via_colon,
+					tilesString,
+					getString(R.string.ltr_or_rtl_combine_via_space, downloadedNumber, totalNumber));
 
-		TextView downloadedText = view.findViewById(R.id.downloaded_number);
-		downloadedText.setText(spannable);
+			Spannable spannable = new SpannableString(fullText);
+			ForegroundColorSpan span = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));
+			setSpan(spannable, span, fullText.indexOf(totalNumber), totalNumber.length());
+			tvDownloaded.setText(spannable);
+		}
 	}
 
 	private void setupCancelCloseButton(boolean downloadFinished) {
@@ -242,7 +265,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		downloadTilesHelper.setListener(this);
 		if (!downloadTilesHelper.isDownloadStarted()) {
 			ITileSource tileSource = app.getSettings().getMapTileSource(false);
-			downloadTilesHelper.downloadTiles(minZoom, maxZoom, latLonRect, tileSource);
+			downloadTilesHelper.downloadTiles(minZoom, maxZoom, latLonRect, tileSource, downloadType);
 		}
 	}
 
@@ -255,7 +278,6 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putAll(saveArgsToBundle(minZoom, maxZoom, latLonRect));
 		outState.putInt(KEY_PROGRESS, progress);
 		outState.putLong(KEY_DOWNLOADED_TILES_NUMBER, downloadedTilesNumber);
 		outState.putFloat(KEY_DOWNLOADED_SIZE_MB, downloadedSizeMb);
@@ -271,7 +293,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		updateDownloadSize();
 		updateTilesNumber();
 
-		if (progress == 100) {
+		if (progress == 100 && !approximate) {
 			setupCancelCloseButton(true);
 			app.getOsmandMap().getMapView().refreshMap();
 		}
@@ -279,7 +301,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 
 	@Override
 	public void onSuccessfulFinish() {
-		if (progress != 100) {
+		if (progress != 100 || approximate) {
 			updateProgress();
 			updateDownloadSize();
 			updateTilesNumber();
@@ -301,22 +323,22 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@SuppressLint("StringFormatMatches")
 	@NonNull
 	private String getSizeMb(float size) {
-		String formattedSize =
-				OsmAndFormatter.formatValue(size, "", false, 2, app).value;
+		String formattedSize = formatNumber(size, 2);
 		return getString(R.string.shared_string_memory_mb_desc, formattedSize);
+	}
+
+	@NonNull
+	private String formatNumber(float number, int decimalPlacesNumber) {
+		return OsmAndFormatter.formatValue(number, "", false, decimalPlacesNumber, app).value;
 	}
 
 	private void setSpan(@NonNull Spannable spannable, @NonNull CharacterStyle span, int start, int length) {
 		spannable.setSpan(span, start, start + length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                int minZoom,
-	                                int maxZoom,
-	                                @NonNull QuadRect latLonRect) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Bundle args) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			TilesDownloadProgressFragment fragment = new TilesDownloadProgressFragment();
-			Bundle args = saveArgsToBundle(minZoom, maxZoom, latLonRect);
 			fragment.setArguments(args);
 
 			fragmentManager.beginTransaction()
@@ -324,17 +346,5 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	@NonNull
-	private static Bundle saveArgsToBundle(int minZoom, int maxZoom, @NonNull QuadRect quadRect) {
-		Bundle bundle = new Bundle();
-		bundle.putDouble(KEY_LEFT_LON, quadRect.left);
-		bundle.putDouble(KEY_TOP_LAT, quadRect.top);
-		bundle.putDouble(KEY_RIGHT_LON, quadRect.right);
-		bundle.putDouble(KEY_BOTTOM_LAT, quadRect.bottom);
-		bundle.putInt(KEY_MIN_ZOOM, minZoom);
-		bundle.putInt(KEY_MAX_ZOOM, maxZoom);
-		return bundle;
 	}
 }
