@@ -4025,7 +4025,7 @@
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
-    <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur l\'itinéraire en cours.</string>
+    <string name="snap_to_road_descr">L’icône de positionnement s\'accrochera à l\'itinéraire en cours.</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
     <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
