@@ -141,7 +141,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					myLocation != null && isSmallSpeedForDirectionOfMovement(myLocation, speedForDirectionOfMovement);
 			boolean isRotateMapCompass = settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS;
 			boolean isRotateMapBearing = settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING;
-			if ((isRotateMapCompass || (isRotateMapBearing && !smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
+			if ((isRotateMapCompass || (isRotateMapBearing && smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
