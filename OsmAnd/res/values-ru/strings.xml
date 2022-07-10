@@ -49,7 +49,7 @@
     <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_color_scheme">Цвет</string>
+    <string name="srtm_color_scheme">Цвет горизонталей</string>
     <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
     <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моим положением во время навигации.</string>
@@ -4743,7 +4743,7 @@
     <string name="time_to_intermediate_widget_desc">Виджет показывает «Время прибытия» или «Время до прибытия» в первый промежуточный пункт. Время постоянно обновляется во время навигации, как только промежуточный пункт будет пройден, время будет обновлено до следующего промежуточного пункта.</string>
     <string name="second_marker_widget_desc">Вы можете настроить виджет так, чтобы он показывал расстояние или примерное время прибытия до второго маркера карты.</string>
     <string name="distance_to_destination_widget_desc">Виджет показывает расстояние, оставшееся до пункта назначения.</string>
-    <string name="auto_backup_preference_desc">По умолчанию Android сохраняет резервные копии избранных точек, токенов карт и настроек Osmand, чтобы восстановить их на новых устройствах или после переустановки, размер этой резервной копии ограничен 25 МБ.
+    <string name="auto_backup_preference_desc">По умолчанию Android сохраняет резервные копии избранных точек, токенов карт и настроек OsmAnd, чтобы восстановить их на новых устройствах или после переустановки. Размер этой резервной копии ограничен 25 МБ.
 \nЕсли вы используете OsmAnd Cloud, это может привести к недоразумениям после переустановки.</string>
     <string name="duplacate_widget_added_snackbar">Дубликат виджета добавляется следующим в списке.</string>
     <string name="shared_string_duplicate">Дублировать</string>
@@ -4751,7 +4751,7 @@
     <string name="auto_25_chars_route_tl_kr">Поверните налево и держитесь правее</string>
     <string name="auto_25_chars_route_tr_kl">Поверните направо и держитесь левее</string>
     <string name="auto_25_chars_route_tr_kr">Поверните направо и держитесь правее</string>
-    <string name="trip_recording_duration_widget_desc">Показывает продолжительность записи трека в минутах/часах текущего записываемого маршрута.</string>
+    <string name="trip_recording_duration_widget_desc">Показывает время записи трека, продолжительность в минутах/часах текущего записываемого маршрута.</string>
     <string name="trip_recording_uphill_widget_desc">Показывает сумму всех подъёмов в текущем записываемом маршруте.</string>
     <string name="trip_recording_downhill_widget_desc">Показывает сумму всех спусков в текущем записываемом маршруте.</string>
     <string name="auto_25_chars_route_roundabout_kr">Сверните на %1$d съезд и держитесь правее</string>
@@ -4775,4 +4775,6 @@
     <string name="auto_25_chars_route_tl_kl">Поверните налево и держитесь левее</string>
     <string name="auto_25_chars_route_tu_kl">Выполните разворот и держитесь левее</string>
     <string name="auto_25_chars_route_tu_kr">Выполните разворот и держитесь правее</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Показать специально разработанные трассы для горных велосипедов</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Маршруты MTB IMBA</string>
 </resources>

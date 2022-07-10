@@ -4763,4 +4763,6 @@
     <string name="time_to_destination_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"La durée restante\" jusqu\'à l\'arrivée. Ces informations sont actualisées pendant le guidage et calculées à partir de votre position actuelle.</string>
     <string name="distance_to_intermediate_widget_desc">Le gadget affiche la distance restante jusqu\'au premier point intermédiaire. Une fois ce point intermédiaire atteint, la distance sera calculée jusqu\'au point intermédiaire suivant.</string>
     <string name="trip_recording_duration_widget_desc">Affiche la durée d\'enregistrement en heure / minute du trajet en cours.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Afficher les pistes tracées pour le VTT</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Afficher la difficulté des chemins VTT IMBA</string>
 </resources>
