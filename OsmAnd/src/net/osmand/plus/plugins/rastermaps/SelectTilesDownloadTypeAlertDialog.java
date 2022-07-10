@@ -37,8 +37,8 @@ class SelectTilesDownloadTypeAlertDialog {
 	private List<Pair<String, String>> items;
 
 	public SelectTilesDownloadTypeAlertDialog(@NonNull OsmandApplication app,
-											  boolean nightMode,
-											  boolean allSelected,
+	                                          boolean nightMode,
+	                                          boolean allSelected,
 	                                          @NonNull DownloadTypeSelectionListener listener) {
 		this.app = app;
 		this.layoutInflater = UiUtilities.getInflater(app, nightMode);
