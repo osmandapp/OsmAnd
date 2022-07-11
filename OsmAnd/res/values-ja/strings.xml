@@ -629,7 +629,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">開始</string>
+    <string name="shared_string_control_start">実行</string>
     <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -4355,7 +4355,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_horse_routes_name">乗馬ルートを優先</string>
     <string name="travel_route_types">ルートタイプ</string>
     <string name="service_is_not_available_please_try_later">サービスは利用できません。後ほどもう一度やり直してください。</string>
-    <string name="start_point">開始</string>
+    <string name="start_point">スタート</string>
     <string name="routeInfo_roadClass_description">道路種別によってルートまたは経路のラインに色を付けます。</string>
     <string name="routeInfo_surface_description">道路/歩道の表面や舗装状態に関する情報を提供します。</string>
     <string name="remove_group_from_markers">マーカーリストからグループを削除</string>
