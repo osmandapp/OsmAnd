@@ -1629,7 +1629,6 @@
     <string name="latest_openstreetmap_update">Darriera actualizacion OpenStreetMap disponibla :</string>
     <string name="quick_action_coordinates_widget_descr">Una bascula per mostrar ò amagar lei vinhetas dei Coordenadas sus la mapa.</string>
     <string name="routing_attr_height_obstacles_description">Lo calcul dau percors pòt evitar lei devaladas sobdas.</string>
-    <string name="map_orientation_threshold_descr">Ges de rotacion de la mapa se la velocitat es inferiora a una valor predefinida</string>
     <string name="snap_to_road_descr">L\'icòna de la posicion correnta s\'alinharà sus lo percors corrent</string>
     <string name="routing_attr_driving_style_description">Chausissètz lo mòde de conducha per obtenir un percors pus breu, rapide e segur</string>
     <string name="routing_attr_short_way_description">Prioritat a un percors breu e esparnhaire en energia</string>

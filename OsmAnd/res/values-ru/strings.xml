@@ -4012,7 +4012,6 @@
     <string name="segments_count">Сегмент %1$d</string>
     <string name="temporary_conditional_routing_descr">Использовать дорожные ограничения, которые сейчас активны на карте</string>
     <string name="routing_attr_short_way_description">Оптимизированный более короткий маршрут (экономия топлива/энергии)</string>
-    <string name="map_orientation_threshold_descr">Не менять ориентацию карты, если скорость меньше порогового значения</string>
     <string name="restart">Перезапустить</string>
     <string name="shared_strings_all_regions">Все регионы</string>
     <string name="track_recording_stop_without_saving">Остановить без сохранения</string>

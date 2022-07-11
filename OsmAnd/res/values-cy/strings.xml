@@ -2997,7 +2997,6 @@
     <string name="routeInfo_smoothness_description">Dosbarthiad symudedd ffyrdd/llwybrau troed ar gyfer cerbydau olwyn, yn enwedig o ran rheoleidd-dra/gwastadedd yr arwyneb.</string>
     <string name="redeem_promo_code">Gwneud defnydd o\'r cod hyrwyddo</string>
     <string name="backup_promocode">Cod hyrwyddo</string>
-    <string name="map_orientation_threshold_descr">Peidio â throi golwg y map os yw\'r cyflymder yn llai na throthwy</string>
     <string name="online_routing_example_hint">Bydd URL gyda\'r holl baramedrau yn edrych fel hyn:</string>
     <string name="approximate_file_size">Maint ffeil yn fras</string>
     <string name="osm_login_descr">Mewngofnodwch gan ddefnyddio\'r dull OAuth, neu\'ch enw defnyddiwr a chyfrinair OSM.</string>
