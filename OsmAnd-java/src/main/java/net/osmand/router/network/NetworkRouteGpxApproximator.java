@@ -76,6 +76,7 @@ public class NetworkRouteGpxApproximator {
 				segmentList.addAll(c.connected);
 			}
 			listOfSegmentLists.add(segmentList);
+			break; // todo check all chains are needed
 		}
 		List<NetworkRouteSegment> segmentList = fitSegmentsOneByOne(listOfSegmentLists, start);
 		List<RouteSegmentResult> res = new ArrayList<>();
@@ -143,14 +144,27 @@ public class NetworkRouteGpxApproximator {
 	}
 
 	private NetworkRouteSegment getMatchingGpxSegments(GpxRoutePoint p1, GpxRoutePoint p2) {
+		List<NetworkRouteSegment> segments = new ArrayList<>();
 		for (NetworkRouteSegment segStart : p1.getObjects()) {
 			for (NetworkRouteSegment segEnd : p2.getObjects()) {
 				if (segEnd.getId() == segStart.getId() && segStart.start != segEnd.start) {
-					return new NetworkRouteSegment(segStart, segStart.start, segEnd.start);
+					segments.add(new NetworkRouteSegment(segStart, segStart.start, segEnd.start));
 				}
 			}
 		}
-		return null;
+		//fix https://www.openstreetmap.org/way/51203425
+		NetworkRouteSegment res = null;
+		if (!segments.isEmpty()) {
+			double minLength = Double.MAX_VALUE;
+			for (NetworkRouteSegment segment : segments) {
+				double length = segment.robj.distance(segment.start, segment.end);
+				if (length < minLength) {
+					minLength = length;
+					res = segment;
+				}
+			}
+		}
+		return res;
 	}
 
 	private List<NetworkRouteSegment> loadDataByGPX(GPXFile gpxFile) throws IOException {
