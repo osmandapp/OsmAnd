@@ -758,6 +758,9 @@ public class GeneralRouter implements VehicleRouter {
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
 		}
+		public String getDefaultString() {
+			return type == RoutingParameterType.NUMERIC ? "0.0" : "-";
+		}
 		public String[] getProfiles() {
 			return profiles;
 		}

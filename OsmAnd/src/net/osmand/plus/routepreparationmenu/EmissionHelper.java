@@ -96,8 +96,7 @@ public class EmissionHelper {
 		if (router != null && mode.getRouteService() == RouteService.OSMAND) {
 			RoutingParameter parameter = getParameterForDerivedProfile(MOTOR_TYPE, mode, router);
 			if (parameter != null) {
-				OsmandPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(),
-						parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				OsmandPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getDefaultString());
 				ListParameters parameters = populateListParameters(app, parameter);
 				int index = parameters.findIndexOfValue(pref.getModeValue(mode));
 				if (index != -1) {
