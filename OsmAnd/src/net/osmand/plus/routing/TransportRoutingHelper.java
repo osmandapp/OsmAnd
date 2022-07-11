@@ -504,7 +504,7 @@ public class TransportRoutingHelper {
 					Boolean bool = pref.getModeValue(params.mode);
 					vl = bool ? "true" : null;
 				} else {
-					vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
+					vl = settings.getCustomRoutingProperty(key, pr.getDefaultString()).getModeValue(params.mode);
 				}
 				if (vl != null && vl.length() > 0) {
 					params.params.put(key, vl);
