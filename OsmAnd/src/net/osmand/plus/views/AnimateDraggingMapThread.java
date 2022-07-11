@@ -45,6 +45,7 @@ public class AnimateDraggingMapThread {
 
 	private boolean isAnimatingZoom;
 	private boolean isAnimatingMapMove;
+	private boolean isAnimatingMapTilt;
 
 	public AnimateDraggingMapThread(OsmandMapTileView tileView) {
 		this.tileView = tileView;
@@ -58,11 +59,7 @@ public class AnimateDraggingMapThread {
 				float rotationDiff = MapUtils.unifyRotationDiff(tileView.getRotate(), targetRotate);
 				float absDiff = Math.abs(rotationDiff);
 				if (absDiff > 0) {
-					try {
-						Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-					} catch (InterruptedException e) {
-						//do nothing
-					}
+					sleepToRedraw(false);
 					if (absDiff < 1) {
 						tileView.rotateToAnimate(targetRotate);
 					} else {
@@ -301,11 +298,7 @@ public class AnimateDraggingMapThread {
 				}
 				float interpolation = interpolator.getInterpolation(normalizedTime);
 				tileView.rotateToAnimate(rotationDiff * interpolation + startRotate);
-				try {
-					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-				} catch (InterruptedException e) {
-					stopped = true;
-				}
+				sleepToRedraw(true);
 			}
 		} else {
 			tileView.rotateToAnimate(rotate);
@@ -331,11 +324,7 @@ public class AnimateDraggingMapThread {
 			tileView.dragToAnimate(cX, cY, nX, nY, notify);
 			cX = nX;
 			cY = nY;
-			try {
-				Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-			} catch (InterruptedException e) {
-				stopped = true;
-			}
+			sleepToRedraw(true);
 		}
 		if (finishAnimationCallback != null) {
 			tileView.getApplication().runInUIThread(finishAnimationCallback);
@@ -360,11 +349,7 @@ public class AnimateDraggingMapThread {
 			int nX = (int) (interpolation * moveX);
 			int nY = (int) (interpolation * moveY);
 			tileView.dragToAnimate(startX31 + nX, startY31 + nY, notify);
-			try {
-				Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-			} catch (InterruptedException e) {
-				stopped = true;
-			}
+			sleepToRedraw(true);
 		}
 		if (finishAnimationCallback != null) {
 			tileView.getApplication().runInUIThread(finishAnimationCallback);
@@ -399,11 +384,7 @@ public class AnimateDraggingMapThread {
 				int baseZoom = (int) Math.round(curZoom - 0.5 * threshold);
 				double zaAnimate = curZoom - baseZoom;
 				tileView.zoomToAnimate(baseZoom, zaAnimate, centerPixelX, centerPixelY, notifyListener);
-				try {
-					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-				} catch (InterruptedException e) {
-					stopped = true;
-				}
+				sleepToRedraw(true);
 			}
 			tileView.setFractionalZoom(zoomEnd, zoomFloatEnd, notifyListener);
 		} finally {
@@ -417,6 +398,10 @@ public class AnimateDraggingMapThread {
 
 	public boolean isAnimatingMapMove() {
 		return isAnimatingMapMove;
+	}
+
+	public boolean isAnimatingMapTilt() {
+		return isAnimatingMapTilt;
 	}
 
 	public void startZooming(final int zoomEnd, final double zoomPart, final boolean notifyListener) {
@@ -458,14 +443,59 @@ public class AnimateDraggingMapThread {
 				curX = newX;
 				curY = newY;
 				prevNormalizedTime = normalizedTime;
-				try {
-					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-				} catch (InterruptedException e) {
-					stopped = true;
-				}
+				sleepToRedraw(true);
 			}
 			pendingRotateAnimation();
 		});
+	}
+
+	public void animateElevationAngleChange(float elevationAngle) {
+		stopAnimatingSync();
+
+		float initialElevationAngle = tileView.getElevationAngle();
+		float elevationAngleDiff = elevationAngle - initialElevationAngle;
+
+		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
+		float animationTime = doNotUseAnimations ? 1 : Math.abs(elevationAngleDiff) * 5;
+
+		startThreadAnimating(() -> {
+			isAnimatingMapTilt = true;
+
+			LinearInterpolator interpolator = new LinearInterpolator();
+			long animationStartTime = SystemClock.uptimeMillis();
+			float normalizedTime;
+			while (!stopped) {
+				normalizedTime = (SystemClock.uptimeMillis() - animationStartTime) / animationTime;
+				if (normalizedTime > 1) {
+					if (tileView.getElevationAngle() != elevationAngle) {
+						tileView.setElevationAngle(elevationAngle);
+					}
+					break;
+				}
+
+				float interpolation = interpolator.getInterpolation(normalizedTime);
+				float newElevationAngle = initialElevationAngle + elevationAngleDiff * interpolation;
+
+				tileView.setElevationAngle(newElevationAngle);
+				tileView.setLatLonAnimate(tileView.getLatitude(), tileView.getLongitude(), false);
+
+				sleepToRedraw(true);
+			}
+
+			pendingRotateAnimation();
+			isAnimatingMapTilt = false;
+		});
+
+	}
+
+	private void sleepToRedraw(boolean stopIfInterrupted) {
+		try {
+			Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+		} catch (InterruptedException e) {
+			if (stopIfInterrupted) {
+				stopped = true;
+			}
+		}
 	}
 
 	private void clearTargetValues() {
