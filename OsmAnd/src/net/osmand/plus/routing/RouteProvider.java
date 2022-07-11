@@ -776,7 +776,7 @@ public class RouteProvider {
 				Boolean bool = pref.getModeValue(params.mode);
 				vl = bool ? "true" : null;
 			} else {
-				vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
+				vl = settings.getCustomRoutingProperty(key, pr.getDefaultString()).getModeValue(params.mode);
 			}
 			if (vl != null && vl.length() > 0) {
 				paramsR.put(key, vl);
