@@ -3251,7 +3251,6 @@
     <string name="routing_attr_short_way_description">Traseu mai scurt optimizat (economie de energie)</string>
     <string name="routing_attr_driving_style_description">Selectați scopul conducerii pentru a obține un traseu mai scurt, mai rapid sau mai sigur</string>
     <string name="snap_to_road_descr">Pictograma de poziție curentă se va fixa pe ruta de navigație curentă</string>
-    <string name="map_orientation_threshold_descr">Nu rotiți vizualizarea hărții dacă viteza este mai mică decât un anumit prag</string>
     <string name="restart">Reporniți</string>
     <string name="shared_strings_all_regions">Toate regiunile</string>
     <string name="delete_number_files_question">Ștergeți %1$d fișiere\?</string>

@@ -3989,7 +3989,6 @@
     <string name="routing_attr_short_way_description">最佳化的較短路線（節能）</string>
     <string name="routing_attr_driving_style_description">選取駕駛目的來取得較短、較快或較安全的路線</string>
     <string name="snap_to_road_descr">目前位置圖示將會貼齊到目前導航的路線</string>
-    <string name="map_orientation_threshold_descr">如果速度低於閾值時，不要旋轉地圖</string>
     <string name="restart">重新啟動</string>
     <string name="shared_strings_all_regions">所有區域</string>
     <string name="delete_number_files_question">刪除 %1$d 檔案？</string>

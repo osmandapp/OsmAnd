@@ -4001,7 +4001,6 @@
     <string name="delete_number_files_question">Töröl %1$d fájlt\?</string>
     <string name="shared_strings_all_regions">Az összes régió</string>
     <string name="restart">Újraindítás</string>
-    <string name="map_orientation_threshold_descr">Küszöbérték alatti sebességnél ne forogjon a térkép</string>
     <string name="snap_to_road_descr">A jelenlegi helyet jelző ikon bepattan az aktuális navigációs útvonalba</string>
     <string name="routing_attr_driving_style_description">Vezetési mód kiválasztása rövidebb, gyorsabb vagy biztonságosabb útvonal tervezéséhez</string>
     <string name="routing_attr_short_way_description">Optimalizált rövidebb útvonal (energiamegtakarítás)</string>

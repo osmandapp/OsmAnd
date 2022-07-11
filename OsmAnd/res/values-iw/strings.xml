@@ -4021,7 +4021,6 @@
     <string name="routing_attr_short_way_description">מסלול מקוצר מרחק (לחסכון באנרגיה)</string>
     <string name="routing_attr_driving_style_description">נא לבחור מטרת נסיעה כדי לקבל מסלול מהיר או בטוח יותר</string>
     <string name="snap_to_road_descr">סמל המקום הנוכחי יוצמד למסלול הניווט הנוכחי</string>
-    <string name="map_orientation_threshold_descr">לא לסובב את המפה אם המהירות קטנה מסף מסוים</string>
     <string name="on_pause">בהשהיה</string>
     <string name="app_restart_required">צריך להפעיל את היישומון מחדש כדי שכמה מהשינויים יחולו.</string>
     <string name="routing_attr_height_obstacles_description">הרכבת המסלול יכולה להימנע מעליות תלולות.</string>
