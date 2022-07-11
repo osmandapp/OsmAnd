@@ -33,6 +33,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -87,6 +88,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -332,8 +334,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
-			Long objectId = ((MapObject) selectedObj).getId();
-			isEditable = isOsmUrlAvailable(objectId, true);
+			isEditable = isOsmUrlAvailable((MapObject) selectedObj);
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
@@ -547,17 +548,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
 		if (object instanceof Amenity) {
 			Amenity amenity = (Amenity) object;
-			Long id = amenity.getId();
-			if (isOsmUrlAvailable(id, false)) {
-				String link = getOsmUrlForId(id, 1);
+			String link = getOsmUrlForId(amenity);
+			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
 						0, false, null, true, 0, true, null, false);
 			}
 		} else if (object instanceof RenderedObject) {
 			RenderedObject renderedObject = (RenderedObject) object;
-			Long id = renderedObject.getId();
-			if (isOsmUrlAvailable(id, true)) {
-				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
+			String link = getOsmUrlForId(renderedObject);
+			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
 						null, true, 0, true, null, false);
 			}
@@ -665,30 +664,58 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return description;
 	}
 
-	private static boolean isOsmUrlAvailable(@Nullable Long id, boolean mapObject) {
+	public static boolean isOsmUrlAvailable(@NonNull MapObject object) {
+		Long id = object.getId();
 		if (id != null && id > 0) {
-			if (mapObject) {
-				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
-			} else {
+			if (object instanceof Amenity) {
 				return id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE;
+			} else {
+				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
 			}
 		}
 		return false;
 	}
 
-	private static String getOsmUrlForId(long id, int shift) {
-		long originalId = (id >> 1);
-		long relationShift = 1L << 41;
-		if (originalId > relationShift) {
-			long division = originalId / relationShift;
-			originalId = division > 1 ? originalId / division : originalId;
-			long relationId = (originalId & ~relationShift) >> 10;
-			return "https://www.openstreetmap.org/relation/" + relationId;
-		} else if (id % 2 == MapObject.WAY_MODULO_REMAINDER) {
-			return "https://www.openstreetmap.org/way/" + (id >> shift);
-		} else {
-			return "https://www.openstreetmap.org/node/" + (id >> shift);
+	public static long getOsmObjectId(@NonNull MapObject object) {
+		Long id = object.getId();
+		if (id != null) {
+			long originalId = (id >> 1);
+			long relationShift = 1L << 41;
+			if (originalId > relationShift) {
+				long division = originalId / relationShift;
+				originalId = division > 1 ? originalId / division : originalId;
+				return originalId & ~relationShift >> 10;
+			} else {
+				int shift = object instanceof Amenity ? AMENITY_ID_RIGHT_SHIFT : NON_AMENITY_ID_RIGHT_SHIFT;
+				return id >> shift;
+			}
 		}
+		return -1;
+	}
+
+	@Nullable
+	public static EntityType getOsmEntityType(@NonNull MapObject object) {
+		if (isOsmUrlAvailable(object)) {
+			Long id = object.getId();
+			long originalId = id >> 1;
+			long relationShift = 1L << 41;
+			if (originalId > relationShift) {
+				return EntityType.RELATION;
+			} else {
+				return id % 2 == MapObject.WAY_MODULO_REMAINDER ? EntityType.WAY : EntityType.NODE;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static String getOsmUrlForId(@NonNull MapObject mapObject) {
+		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
+		if (type != null) {
+			long osmId = getOsmObjectId(mapObject);
+			return "https://www.openstreetmap.org/" + type.name().toLowerCase(Locale.US) + "/" + osmId;
+		}
+		return null;
 	}
 
 	@Override
