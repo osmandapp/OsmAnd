@@ -4311,7 +4311,6 @@
     <string name="troubleshooting_description">Калі ў вас узніклі праблемы з пакупкамі, перайдзіце па гэтай спасылцы.</string>
     <string name="approx_safe_mode_description">Выканаць апраксімацыю GPX, выкарыстоўваючы больш павольны код Android замест убудаванага.</string>
     <string name="quick_action_coordinates_widget_descr">Пераключальнік для адлюстравання або скрыцця віджэту каардынатаў на мапе.</string>
-    <string name="map_orientation_threshold_descr">Не паварочваць прагляд мапы, калі хуткасць меншая за гранічную</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Колер маршрутаў у залежнасці ад тыпу сеткі вузлоў (міжнародная, рэгіянальная, лакальная).</string>
     <string name="benefits_for_contributors_primary_descr">Актыўныя ўдзельнікі OpenStreetMap.org маюць права на неабмежаваную колькасць штогадзінных абнаўленняў мапаў.</string>
     <string name="mapillary_menu_filter_description_new">Фільтраваць выявы паводле даты або тыпу. Працуе толькі на буйных маштабах.</string>

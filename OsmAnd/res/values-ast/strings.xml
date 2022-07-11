@@ -3800,7 +3800,6 @@
     <string name="routing_attr_short_way_description">Optimized shorter route (energy saving)</string>
     <string name="routing_attr_driving_style_description">Select driving purpose to get shorter, faster or safer route</string>
     <string name="snap_to_road_descr">Current position icon will snap to the current navigation route</string>
-    <string name="map_orientation_threshold_descr">Don\'t rotate map view if speed is less than a threshold</string>
     <string name="restart">Restart</string>
     <string name="shared_strings_all_regions">Toles rexones</string>
     <string name="delete_number_files_question">¿Quies desaniciar %1$d ficheros\?</string>

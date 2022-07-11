@@ -3991,7 +3991,6 @@
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (economia de energia)</string>
     <string name="routing_attr_driving_style_description">Selecione o propósito de condução para obter um trajeto mais curto, mais rápido ou mais seguro</string>
     <string name="snap_to_road_descr">O ícone da posição atual se ajustará à rota de navegação atual</string>
-    <string name="map_orientation_threshold_descr">Não gire a visualização do mapa se a velocidade for inferior a um limite</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as regiões</string>
     <string name="delete_number_files_question">Excluir %1$d arquivos\?</string>

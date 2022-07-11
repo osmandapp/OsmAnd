@@ -4015,7 +4015,6 @@
     <string name="osmand_cloud_login_descr">Skriv inn e-postadressen du brukte for registrering. Du vil bli tilsendt et engangspassord som trengs i neste steg.</string>
     <string name="file_size_needed_for_import">Trengs for import</string>
     <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
-    <string name="map_orientation_threshold_descr">Ikke roter kartvisning hvis hastigheten er mindre enn terskel</string>
     <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
     <string name="offline_wikivoyage">Frakoblet Wikivoyage</string>
     <string name="terrain_maps">Terrengkart</string>

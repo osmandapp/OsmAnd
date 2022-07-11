@@ -4018,7 +4018,6 @@
     <string name="routing_attr_short_way_description">Optimierte kürzere Route (energiesparend)</string>
     <string name="routing_attr_driving_style_description">Wählen Sie den Fahrzweck, um eine kürzere, schnellere oder sicherere Route zu erhalten</string>
     <string name="snap_to_road_descr">Das Symbol für den aktuellen Standort wird an die aktuelle Navigationsroute angehängt</string>
-    <string name="map_orientation_threshold_descr">Kartenansicht nicht drehen, wenn die Geschwindigkeit kleiner als ein Schwellenwert ist</string>
     <string name="track_recording_description">Aufnahme beenden\?
 \nAlle nicht gespeicherten Daten gehen verloren.</string>
     <string name="on_pause">Pausiert</string>

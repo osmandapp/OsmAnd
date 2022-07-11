@@ -90,7 +90,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 			}
 		}
 		ListPreferenceEx switchMapDirectionToCompass = (ListPreferenceEx) findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.getId());
-		switchMapDirectionToCompass.setDescription(R.string.map_orientation_threshold_descr);
+		switchMapDirectionToCompass.setDescription(R.string.map_orientation_change_in_accordance_with_speed_descr);
 		switchMapDirectionToCompass.setEntries(names);
 		switchMapDirectionToCompass.setEntryValues(valuesKmh);
 	}

@@ -471,7 +471,6 @@
     <string name="delete_number_files_question">Da se izbrišat %1$d datoteki\?</string>
     <string name="shared_strings_all_regions">Site regioni</string>
     <string name="restart">Restartiraj</string>
-    <string name="map_orientation_threshold_descr">Ne vrtete go prikazot na kartata ako brzinata e pomala od pragot</string>
     <string name="snap_to_road_descr">Ikonata za momentalna pozicija ḱe se prikači na tekovnata ruta za navigacija</string>
     <string name="routing_attr_driving_style_description">Izberete cel na vozenje za da dobiete pokratok, pobrz ili pobezbeden pat</string>
     <string name="routing_attr_short_way_description">Optimizirana pokratka ruta (zašteda na energija)</string>
