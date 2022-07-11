@@ -217,7 +217,7 @@ public class AverageSpeedComputer {
 			this.distance = distance;
 			this.startTime = startTime;
 			this.endTime = endTime;
-			this.speed = (float) (distance / ((endTime - startTime) * 1000f));
+			this.speed = (float) (distance / ((endTime - startTime) / 1000f));
 		}
 
 		public boolean isLowSpeed(float speedToSkip) {
