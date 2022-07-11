@@ -175,9 +175,12 @@ public class GpxEngine extends OnlineRoutingEngine {
 					GpxPoint first = gpxPoints.get(0);
 					first.routeToTarget = gpxApproximator.result;
 					GpxPoint last = gpxPoints.get(gpxPoints.size() - 1);
+					last.ind = 1;
 					last.routeToTarget = new ArrayList<>();
 					gctx.finalPoints.addAll(Arrays.asList(first, last));
 					gctx.result = gpxApproximator.result;
+					gpxPoints.addAll(gctx.finalPoints);
+					points = Arrays.asList(points.get(0), points.get(points.size() - 1));
 					gpxApproximation = gctx;
 				} else {
 					gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);

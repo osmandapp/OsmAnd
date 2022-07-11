@@ -1,15 +1,13 @@
 package net.osmand.router.network;
 
+import static java.lang.Math.abs;
+
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.osm.edit.Entity;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.network.NetworkRouteContext.NetworkRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
@@ -59,28 +57,89 @@ public class NetworkRouteGpxApproximator {
 		this.gpxFile = gpxFile;
 	}
 
-	public List<Entity> approximate() throws IOException {
+	public List<RouteSegmentResult> approximate() throws IOException {
 		Map<RouteKey, GPXFile> res = new HashMap<>();
 		List<NetworkRouteSegment> loaded = loadDataByGPX(gpxFile);
 		List<NetworkRouteSegmentChain> chainList = selector.getNetworkRouteSegmentChains(null, res, loaded);
 		gpxFile = res.values().iterator().next();
-		result = convertToRoadSegmentResultList(chainList);
-		return convertToEntities(chainList);
+		result = convertToRoadSegmentResultList(chainList, loaded.get(0));
+		return result;
 	}
 
-	List<RouteSegmentResult> convertToRoadSegmentResultList(List<NetworkRouteSegmentChain> chainList) {
-		List<RouteSegmentResult> result = new ArrayList<>();
+	List<RouteSegmentResult> convertToRoadSegmentResultList(List<NetworkRouteSegmentChain> chainList,
+	                                                        NetworkRouteSegment start) {
+		List<List<NetworkRouteSegment>> listOfSegmentLists = new ArrayList<>();
 		for (NetworkRouteSegmentChain c : chainList) {
 			List<NetworkRouteSegment> segmentList = new ArrayList<>();
 			segmentList.add(c.start);
 			if (c.connected != null) {
 				segmentList.addAll(c.connected);
 			}
-			for (NetworkRouteSegment segment : segmentList) {
-				result.add(new RouteSegmentResult(segment.robj, segment.start, segment.end));
+			listOfSegmentLists.add(segmentList);
+		}
+		List<NetworkRouteSegment> segmentList = fitSegmentsOneByOne(listOfSegmentLists, start);
+		List<RouteSegmentResult> res = new ArrayList<>();
+		for (NetworkRouteSegment segment : segmentList) {
+			res.add(new RouteSegmentResult(segment.robj, segment.start, segment.end));
+		}
+		return res;
+	}
+
+	private List<NetworkRouteSegment> fitSegmentsOneByOne(List<List<NetworkRouteSegment>> listOfSegmentLists, NetworkRouteSegment start) {
+		List<NetworkRouteSegment> res = new ArrayList<>();
+		while (listOfSegmentLists.size() > 0) {
+			List<NetworkRouteSegment> list = findNextSegmentList(listOfSegmentLists, start);
+			start = list.get(list.size() - 1);
+			res.addAll(list);
+		}
+		return res;
+	}
+
+	private List<NetworkRouteSegment> findNextSegmentList(List<List<NetworkRouteSegment>> listOfSegmentLists,
+	                                                      NetworkRouteSegment start) {
+		List<NetworkRouteSegment> res = new ArrayList<>();
+		double distanceFromFirst = Double.MAX_VALUE;
+		List<NetworkRouteSegment> nearFromFirstList = null;
+		double distanceFromLast = Double.MAX_VALUE;
+		List<NetworkRouteSegment> nearFromLastList = null;
+		for (List<NetworkRouteSegment> segmentList : listOfSegmentLists) {
+			NetworkRouteSegment first = segmentList.get(0);
+			NetworkRouteSegment last = segmentList.get(segmentList.size() - 1);
+			double distance = getDistance(start, first);
+			if (distance < distanceFromFirst) {
+				distanceFromFirst = distance;
+				nearFromFirstList = segmentList;
+			}
+			distance = getDistance(start, last);
+			if (distance < distanceFromLast) {
+				distanceFromLast = distance;
+				nearFromLastList = segmentList;
 			}
 		}
-		return result;
+		if (distanceFromLast < distanceFromFirst) {
+			listOfSegmentLists.remove(nearFromLastList);
+			nearFromLastList = reverseRoute(nearFromLastList);
+			res = new ArrayList<>(nearFromLastList);
+		} else {
+			if (nearFromFirstList != null) {
+				listOfSegmentLists.remove(nearFromFirstList);
+				res = new ArrayList<>(nearFromFirstList);
+			}
+		}
+		return res;
+	}
+
+	private List<NetworkRouteSegment> reverseRoute(List<NetworkRouteSegment> nearFromLastList) {
+		List<NetworkRouteSegment> res = new ArrayList<>();
+		for (NetworkRouteSegment segment : nearFromLastList) {
+			res.add(segment.inverse());
+		}
+		Collections.reverse(res);
+		return res;
+	}
+
+	private double getDistance(NetworkRouteSegment start, NetworkRouteSegment last) {
+		return MapUtils.getSqrtDistance(start.getEndPointX(), start.getEndPointY(), last.getStartPointX(), last.getStartPointY());
 	}
 
 	private NetworkRouteSegment getMatchingGpxSegments(GpxRoutePoint p1, GpxRoutePoint p2) {
@@ -131,6 +190,22 @@ public class NetworkRouteGpxApproximator {
 				res.add(matchingGpxSegment);
 			}
 		}
+		res = addAbsentPoint(res);
+		return res;
+	}
+
+	private List<NetworkRouteSegment> addAbsentPoint(List<NetworkRouteSegment> segmentList) {
+		List<NetworkRouteSegment> res = new ArrayList<>();
+		for (NetworkRouteSegment segment : segmentList) {
+			if (abs(segment.end - segment.start) > 1) {
+				int step = Integer.signum(segment.end - segment.start);
+				for (int idx = segment.start; idx != segment.end; idx += step) {
+					res.add(new NetworkRouteSegment(segment, idx, idx + step));
+				}
+			} else {
+				res.add(segment);
+			}
+		}
 		return res;
 	}
 
@@ -146,7 +221,7 @@ public class NetworkRouteGpxApproximator {
 				// check that skipped points are not far away
 				for (int t = 1; t < j; t++) {
 					GpxRoutePoint gpxRoutePoint = gpxRoutePoints.get(idx + t);
-					if (gpxRoutePoint.routePoint == null || getOrthogonalDistance(gpxRoutePoint,
+					if (gpxRoutePoint.routePoint != null && getOrthogonalDistance(gpxRoutePoint,
 							matchingGpxSegment) > GPX_MAX_INTER_SKIP_DISTANCE) {
 						notFarAway = false;
 						break;
@@ -175,36 +250,6 @@ public class NetworkRouteGpxApproximator {
 			minDistance = Math.min(minDistance, distance);
 		}
 		return minDistance;
-	}
-
-	private List<Entity> convertToEntities(List<NetworkRouteSegmentChain> res) {
-		List<Entity> entityList = new ArrayList<>();
-		for (NetworkRouteSegmentChain chain : res) {
-			if (chain.connected == null) {
-				continue;
-			}
-			for (NetworkRouteSegment segment : chain.connected) {
-				boolean plus = segment.start < segment.end;
-				int ind = segment.start;
-				Way way = new Way(-1);
-				while (true) {
-					if (segment.robj != null) {
-						LatLon l = new LatLon(MapUtils.get31LatitudeY(segment.robj.getPoint31YTile(ind)),
-								MapUtils.get31LongitudeX(segment.robj.getPoint31XTile(ind)));
-						Node n = new Node(l.getLatitude(), l.getLongitude(), -1);
-						way.addNode(n);
-					}
-					if (ind == segment.end) {
-						break;
-					}
-					ind += plus ? 1 : -1;
-				}
-				if (way.getNodes().size() > 0) {
-					entityList.add(way);
-				}
-			}
-		}
-		return entityList;
 	}
 
 	public static class GpxRoutePoint {
