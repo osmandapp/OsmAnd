@@ -463,27 +463,21 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(MapObject object) {
-		Long objectId = object.getId();
-		if (!(objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
-				|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE))) {
+		EntityType type = OsmEditingPlugin.getOsmEntityType(object);
+		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
-		boolean isWay = objectId % 2 == MapObject.WAY_MODULO_REMAINDER;// check if mapObject is a way
-		long entityId;
-		if (object instanceof Amenity) {
-			entityId = objectId >> MapObject.AMENITY_ID_RIGHT_SHIFT;
-		} else {
-			entityId = objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
-		}
+		boolean isWay = type == EntityType.WAY;
+		long entityId = OsmEditingPlugin.getOsmObjectId(object);
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
-					ctx.getString(R.string.loading_poi_obj) + entityId, false); //$NON-NLS-1$ //$NON-NLS-2$
+					ctx.getString(R.string.loading_poi_obj) + entityId, false);
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				EntityId id = new Entity.EntityId(isWay ? EntityType.WAY : EntityType.NODE, entityId);
+				EntityId id = new EntityId(type, entityId);
 				Entity entity = (Entity) st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				entityInfoId = id;
