@@ -4742,7 +4742,7 @@
     <string name="relative_bearing_widget_desc">顯示您的前進方向與目標點之間的角度。</string>
     <string name="auto_25_chars_route_tu_kr">迴轉並靠右</string>
     <string name="auto_25_chars_route_roundabout_kl">在 %1$d 出口離開並靠左</string>
-    <string name="auto_backup_preference_desc">預設情況下，Android 會儲存收藏、地圖權杖與 OsmAnd 設定的備份，可用來在新裝置或重新安裝後還原它們，備份會被限制在 25 MB 內。
+    <string name="auto_backup_preference_desc">預設情況下，Android 會儲存收藏、地圖權杖與 OsmAnd 設定的備份，可用來在新裝置或重新安裝後還原它們。備份會被限制在 25 MB 內。
 \n若您正在使用 OsmAnd Cloud，這可能會在重新安裝後導致誤解。</string>
     <string name="auto_25_chars_route_roundabout_kr">在 %1$d 出口離開並靠右</string>
     <string name="trip_recording_downhill_widget_desc">顯示目前記錄的行程的所有下降高度總和。</string>
@@ -4763,4 +4763,6 @@
     <string name="rendering_attr_depthContourColorScheme_name">等深線配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
     <string name="rendering_attr_depthContourWidth_name">等深線寬度</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地腳踏車 IMBA 路徑</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示專為山地腳踏車的路徑</string>
 </resources>
