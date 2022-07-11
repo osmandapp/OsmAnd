@@ -347,7 +347,9 @@ class MapSelectionHelper {
 				PointI pointI = points31.get(k);
 				renderedObject.addLocation(pointI.getX(), pointI.getY());
 			}
-			renderedObject.setLocation(result.objectLatLon);
+			double lat = MapUtils.get31LatitudeY(obfMapObject.getLabelCoordinateY());
+			double lon = MapUtils.get31LongitudeX(obfMapObject.getLabelCoordinateX());
+			renderedObject.setLabelLatLon(new LatLon(lat, lon));
 
 			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
 				renderedObject.setName(rasterMapSymbol.getContent());
