@@ -3280,7 +3280,7 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
-    <string name="rendering_value_thick_name">Espesor</string>
+    <string name="rendering_value_thick_name">Grueso</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Más detallado.</string>
     <string name="select_navigation_icon">Icono de la ubicación mientras se mueve</string>
     <string name="select_map_icon">Icono de la ubicación en reposo</string>
