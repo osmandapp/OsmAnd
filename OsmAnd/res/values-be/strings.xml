@@ -4766,4 +4766,16 @@
     <string name="relative_bearing_widget_desc">Паказвае вугал паміж вашым напрамкам руху наперад і мэтавай кропкай.</string>
     <string name="second_marker_widget_desc">Вы можаце наладзіць віджэт на адлюстраванне адлегласці або разліковага часу прыбыцця да другой пазнакі на мапе.</string>
     <string name="second_next_turn_widget_desc">Віджэт паказвае інфармацыю аб вашым другім наступным павароце, які ўключаецца, калі паварот знаходзіцца на адлегласці набліжэння.</string>
+    <string name="widget_with_dot">Віджэт.</string>
+    <string name="next_turn_widget_desc">Віджэт паказвае інфармацыю аб вашым наступным павароце з малюнкам манеўру і адлегласцю да яго.</string>
+    <string name="compass_visible_if_map_rotated_desc">Схаваны, калі зверху поўнач</string>
+    <string name="compass_visible_if_map_rotated">Бачны, калі мапа павернута</string>
+    <string name="compass_always_hidden">Заўсёды схаваны</string>
+    <string name="compass_always_visible">Заўсёды бачны</string>
+    <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
+    <string name="rendering_attr_depthContourWidth_name">Шырыня контурных ліній глыбіні</string>
+    <string name="compass_desc">Паказвае напрамак на поўнач.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема контурных ліній глыбіні</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
+    <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
 </resources>
