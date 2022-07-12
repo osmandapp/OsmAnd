@@ -404,7 +404,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom : mapView.getZoom();
 					movingToMyLocation = true;
 					thread.startMoving(location.getLatitude(), location.getLongitude(),
-							fZoom, false, () -> movingToMyLocation = false);
+							fZoom, false, true, () -> movingToMyLocation = false);
 				}
 				mapView.refreshMap();
 			}

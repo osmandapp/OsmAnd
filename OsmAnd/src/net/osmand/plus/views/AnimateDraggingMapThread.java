@@ -1,13 +1,10 @@
 package net.osmand.plus.views;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.SystemClock;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-
-import androidx.core.util.Pair;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -17,6 +14,8 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+
+import androidx.core.util.Pair;
 
 /**
  * Thread for animated dragging.
@@ -33,6 +32,9 @@ public class AnimateDraggingMapThread {
 	private final static float NAV_ANIMATION_TIME = 1000f;
 	private final static int DEFAULT_SLEEP_TO_REDRAW = 15;
 
+	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
+	private static final float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
+
 	private volatile boolean stopped;
 	private volatile Thread currentThread = null;
 	private final OsmandMapTileView tileView;
@@ -46,6 +48,8 @@ public class AnimateDraggingMapThread {
 	private boolean isAnimatingZoom;
 	private boolean isAnimatingMapMove;
 	private boolean isAnimatingMapTilt;
+
+	private float interpolation;
 
 	public AnimateDraggingMapThread(OsmandMapTileView tileView) {
 		this.tileView = tileView;
@@ -185,11 +189,14 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final boolean notifyListener) {
-		startMoving(finalLat, finalLon, endZoom, notifyListener, null);
+		startMoving(finalLat, finalLon, endZoom, notifyListener, false, null);
 	}
 
 	public void startMoving(final double finalLat, final double finalLon, final int endZoom,
-							final boolean notifyListener, final Runnable finishAnimationCallback) {
+							final boolean notifyListener, boolean allowAnimationJoin,
+	                        final Runnable finishAnimationCallback) {
+		float interpolation = this.interpolation;
+
 		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
 
@@ -203,7 +210,8 @@ public class AnimateDraggingMapThread {
 		boolean skipAnimation = moveZoom == 0;
 		// check if animation needed
 		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
-		if (skipAnimation || wasAnimating) {
+		boolean joinAnimation = allowAnimationJoin && interpolation >= MIN_INTERPOLATION_TO_JOIN_ANIMATION;
+		if (skipAnimation || wasAnimating && !joinAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(endZoom, 0, notifyListener);
 			if (finishAnimationCallback != null) {
@@ -218,8 +226,10 @@ public class AnimateDraggingMapThread {
 		final float mMoveY = startPoint.y - finalPoint.y;
 
 		final boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
+		float normalizedAnimationLength = (Math.abs(mSt[0]) + Math.abs(mSt[1])) / MAX_OX_OY_SUM_DELTA_TO_ANIMATE;
 		final float animationTime = doNotUseAnimations
-				? 1 : Math.max(450, (Math.abs(mSt[0]) + Math.abs(mSt[1])) / 1200f * MOVE_MOVE_ANIMATION_TIME);
+				? 1
+				: Math.max(450, normalizedAnimationLength * MOVE_MOVE_ANIMATION_TIME);
 
 		startThreadAnimating(() -> {
 			isAnimatingMapMove = true;
@@ -272,7 +282,7 @@ public class AnimateDraggingMapThread {
 		PointF finalPoint = NativeUtilities.getPixelFromLatLon(tileView.getMapRenderer(), rb, finalLat, finalLon);
 		mSt[0] = startPoint.x - finalPoint.x;
 		mSt[1] = startPoint.y - finalPoint.y;
-		while (Math.abs(mSt[0]) + Math.abs(mSt[1]) > 1200) {
+		while (Math.abs(mSt[0]) + Math.abs(mSt[1]) > MAX_OX_OY_SUM_DELTA_TO_ANIMATE) {
 			rb.setZoom(rb.getZoom() - 1);
 			if (rb.getZoom() <= 4) {
 				skipAnimation = true;
@@ -296,10 +306,11 @@ public class AnimateDraggingMapThread {
 					tileView.rotateToAnimate(rotate);
 					break;
 				}
-				float interpolation = interpolator.getInterpolation(normalizedTime);
+				interpolation = interpolator.getInterpolation(normalizedTime);
 				tileView.rotateToAnimate(rotationDiff * interpolation + startRotate);
 				sleepToRedraw(true);
 			}
+			resetInterpolation();
 		} else {
 			tileView.rotateToAnimate(rotate);
 		}
@@ -318,7 +329,7 @@ public class AnimateDraggingMapThread {
 			if (normalizedTime > 1f) {
 				break;
 			}
-			float interpolation = interpolator.getInterpolation(normalizedTime);
+			interpolation = interpolator.getInterpolation(normalizedTime);
 			float nX = interpolation * moveX;
 			float nY = interpolation * moveY;
 			tileView.dragToAnimate(cX, cY, nX, nY, notify);
@@ -326,6 +337,7 @@ public class AnimateDraggingMapThread {
 			cY = nY;
 			sleepToRedraw(true);
 		}
+		resetInterpolation();
 		if (finishAnimationCallback != null) {
 			tileView.getApplication().runInUIThread(finishAnimationCallback);
 		}
@@ -345,12 +357,13 @@ public class AnimateDraggingMapThread {
 			if (normalizedTime > 1f) {
 				break;
 			}
-			float interpolation = interpolator.getInterpolation(normalizedTime);
+			interpolation = interpolator.getInterpolation(normalizedTime);
 			int nX = (int) (interpolation * moveX);
 			int nY = (int) (interpolation * moveY);
 			tileView.dragToAnimate(startX31 + nX, startY31 + nY, notify);
 			sleepToRedraw(true);
 		}
+		resetInterpolation();
 		if (finishAnimationCallback != null) {
 			tileView.getApplication().runInUIThread(finishAnimationCallback);
 		}
@@ -379,7 +392,7 @@ public class AnimateDraggingMapThread {
 				if (normalizedTime > 1f) {
 					break;
 				}
-				float interpolation = interpolator.getInterpolation(normalizedTime);
+				interpolation = interpolator.getInterpolation(normalizedTime);
 				double curZoom = interpolation * (endZoom - beginZoom) + beginZoom;
 				int baseZoom = (int) Math.round(curZoom - 0.5 * threshold);
 				double zaAnimate = curZoom - baseZoom;
@@ -388,6 +401,7 @@ public class AnimateDraggingMapThread {
 			}
 			tileView.setFractionalZoom(zoomEnd, zoomFloatEnd, notifyListener);
 		} finally {
+			resetInterpolation();
 			isAnimatingZoom = false;
 		}
 	}
@@ -434,7 +448,7 @@ public class AnimateDraggingMapThread {
 				if (normalizedTime >= 1f) {
 					break;
 				}
-				float interpolation = interpolator.getInterpolation(normalizedTime);
+				interpolation = interpolator.getInterpolation(normalizedTime);
 
 				float newX = velocityX * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curX;
 				float newY = velocityY * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curY;
@@ -445,6 +459,8 @@ public class AnimateDraggingMapThread {
 				prevNormalizedTime = normalizedTime;
 				sleepToRedraw(true);
 			}
+
+			resetInterpolation();
 			pendingRotateAnimation();
 		});
 	}
@@ -473,7 +489,7 @@ public class AnimateDraggingMapThread {
 					break;
 				}
 
-				float interpolation = interpolator.getInterpolation(normalizedTime);
+				interpolation = interpolator.getInterpolation(normalizedTime);
 				float newElevationAngle = initialElevationAngle + elevationAngleDiff * interpolation;
 
 				tileView.setElevationAngle(newElevationAngle);
@@ -483,6 +499,7 @@ public class AnimateDraggingMapThread {
 			}
 
 			pendingRotateAnimation();
+			resetInterpolation();
 			isAnimatingMapTilt = false;
 		});
 
@@ -551,6 +568,9 @@ public class AnimateDraggingMapThread {
 		return targetLongitude;
 	}
 
+	private void resetInterpolation() {
+		interpolation = 0;
+	}
 }
 
 
