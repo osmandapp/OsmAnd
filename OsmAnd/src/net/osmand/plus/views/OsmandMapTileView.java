@@ -255,9 +255,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		LatLon ll = settings.getLastKnownMapLocation();
-		currentViewport = new RotatedTileBoxBuilder().
-				setLocation(ll.getLatitude(), ll.getLongitude()).setZoom(settings.getLastKnownMapZoom()).
-				setPixelDimensions(w, h).build();
+		currentViewport = new RotatedTileBoxBuilder()
+				.setLocation(ll.getLatitude(), ll.getLongitude())
+				.setZoom(settings.getLastKnownMapZoom())
+				.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get())
+				.setPixelDimensions(w, h)
+				.build();
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
 		elevationAngle = settings.getLastKnownMapElevation();

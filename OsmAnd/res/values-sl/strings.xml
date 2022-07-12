@@ -3963,7 +3963,6 @@
     <string name="track_recording_stop_without_saving">Ustavi brez shranjevanja</string>
     <string name="delete_number_files_question">Izbrišem %1$d datotek\?</string>
     <string name="shared_strings_all_regions">Vse regije</string>
-    <string name="map_orientation_threshold_descr">Ne zavrti pogleda zemljevida, če je hitrost manjša od mejne vrednosti</string>
     <string name="routing_attr_driving_style_description">Izberi namen vožnje za krajšo, hitrejšo ali varnejšo pot</string>
     <string name="activity_type_offroad_name">Off-road</string>
     <string name="login_open_place_reviews">Prijava v OpenPlaceReviews</string>

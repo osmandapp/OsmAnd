@@ -4,6 +4,8 @@ package net.osmand.plus.helpers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -24,8 +26,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class TargetPointsHelper {
 
@@ -152,7 +152,7 @@ public class TargetPointsHelper {
 		
 	}
 
-	public TargetPointsHelper(OsmandApplication ctx){
+	public TargetPointsHelper(@NonNull OsmandApplication ctx){
 		this.ctx = ctx;
 		this.settings = ctx.getSettings();
 		this.routingHelper = ctx.getRoutingHelper();
@@ -168,7 +168,7 @@ public class TargetPointsHelper {
 
 	public void lookupAddressAll() {
 		lookupAddressForPointToNavigate();
-		lookupAddessForStartPoint();
+		lookupAddressForStartPoint();
 		for (TargetPoint targetPoint : intermediatePoints) {
 			lookupAddressForIntermediatePoint(targetPoint);
 		}
@@ -223,7 +223,7 @@ public class TargetPointsHelper {
 		}
 	}
 
-	private void lookupAddessForStartPoint() {
+	private void lookupAddressForStartPoint() {
 		if (pointToStart != null && pointToStart.isSearchingAddress(ctx)
 				&& (startPointRequest == null || !startPointRequest.getLatLon().equals(pointToStart.point))) {
 			cancelStartPointAddressRequest();
@@ -437,7 +437,7 @@ public class TargetPointsHelper {
 	}
 
 	public void updateRouteAndRefresh(boolean updateRoute) {
-		if(updateRoute && (routingHelper.isPublicTransportMode() || routingHelper.isRouteBeingCalculated() ||
+		if (updateRoute && (routingHelper.isPublicTransportMode() || routingHelper.isRouteBeingCalculated() ||
 				routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
 		}
@@ -502,6 +502,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearPointToNavigate(boolean updateRoute) {
+		ctx.logRoutingEvent("clearPointToNavigate updateRoute " + updateRoute);
 		cancelTargetPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
 		settings.clearPointToNavigate();
@@ -512,6 +513,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearStartPoint(boolean updateRoute) {
+		ctx.logRoutingEvent("clearStartPoint updateRoute " + updateRoute);
 		cancelStartPointAddressRequest();
 		settings.clearPointToStart();
 		readFromSettings();
@@ -519,6 +521,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearAllIntermediatePoints(boolean updateRoute) {
+		ctx.logRoutingEvent("clearAllIntermediatePoints updateRoute " + updateRoute);
 		cancelAllIntermediatePointsAddressRequests();
 		settings.clearIntermediatePoints();
 		intermediatePoints.clear();
@@ -527,6 +530,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearAllPoints(boolean updateRoute) {
+		ctx.logRoutingEvent("clearAllPoints updateRoute " + updateRoute);
 		cancelStartPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
 		cancelTargetPointAddressRequest();
@@ -611,6 +615,7 @@ public class TargetPointsHelper {
 	}
 
 	public void navigateToPoint(final LatLon point, boolean updateRoute, int intermediate, PointDescription historyName) {
+		ctx.logRoutingEvent("navigateToPoint point " + point + " updateRoute " + updateRoute + " intermediate " + intermediate + " historyName " + historyName);
 		if (point != null) {
 			final PointDescription pointDescription;
 			if (historyName == null) {
@@ -646,6 +651,7 @@ public class TargetPointsHelper {
 	}
 
 	public void setStartPoint(final LatLon startPoint, boolean updateRoute, PointDescription name) {
+		ctx.logRoutingEvent("setStartPoint startPoint " + startPoint + " updateRoute " + updateRoute + " name " + name);
 		if (startPoint != null) {
 			final PointDescription pointDescription;
 			if (name == null) {
@@ -665,6 +671,7 @@ public class TargetPointsHelper {
 	}
 
 	public void setMyLocationPoint(final LatLon startPoint, boolean updateRoute, PointDescription name) {
+		ctx.logRoutingEvent("setMyLocationPoint startPoint " + startPoint + " updateRoute " + updateRoute + " name " + name);
 		if (startPoint != null) {
 			final PointDescription pointDescription;
 			if (name == null) {

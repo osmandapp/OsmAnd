@@ -3900,7 +3900,6 @@
     <string name="activity_type_walking_name">Пешачење</string>
     <string name="activity_type_motorbike_name">Мотор</string>
     <string name="activity_type_car_name">Аутомобил</string>
-    <string name="map_orientation_threshold_descr">Не ротирај карту ако је брзина испод доње границе</string>
     <string name="restart">Рестарт</string>
     <string name="shared_strings_all_regions">Све регије</string>
     <string name="delete_number_files_question">Обриши %1$d фајлова\?</string>

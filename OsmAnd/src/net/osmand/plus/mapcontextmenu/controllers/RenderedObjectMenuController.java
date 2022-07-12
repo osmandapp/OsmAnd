@@ -1,13 +1,9 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.getOsmUrlForId;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.isOsmUrlAvailable;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -15,8 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -115,13 +109,6 @@ public class RenderedObjectMenuController extends MenuController {
 					}
 				}
 			}
-
-			boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
-			Long id = renderedObject.getId();
-			if (osmEditingEnabled && isOsmUrlAvailable(id)) {
-				String link = getOsmUrlForId(id, MapObject.NON_AMENITY_ID_RIGHT_SHIFT);
-				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link, true, true, null);
-			}
 		}
 	}
 
@@ -132,5 +119,4 @@ public class RenderedObjectMenuController extends MenuController {
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
 	}
-
 }

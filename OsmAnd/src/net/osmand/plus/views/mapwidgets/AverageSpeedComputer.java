@@ -13,7 +13,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 public class AverageSpeedComputer {
 
 	private static final long ADD_POINT_INTERVAL_MILLIS = 1000;
-	private static final long MISSING_POINT_TIME_THRESHOLD = 5000;
 
 	public static final List<Long> MEASURED_INTERVALS;
 	public static final long DEFAULT_INTERVAL_MILLIS = 30 * 60 * 1000L;
@@ -50,7 +48,6 @@ public class AverageSpeedComputer {
 
 	private LatLon previousLatLon = null;
 	private long previousTime = 0;
-	private boolean previousPointLowSpeed = false;
 
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -60,15 +57,6 @@ public class AverageSpeedComputer {
 
 	public void updateLocation(@Nullable Location location) {
 		long time = System.currentTimeMillis();
-
-		boolean recordPaused = previousTime > 0 && time - previousTime > MISSING_POINT_TIME_THRESHOLD;
-		if (recordPaused) {
-			segmentsList.clear();
-			previousLatLon = null;
-			previousTime = 0;
-			previousPointLowSpeed = false;
-		}
-
 		boolean save = location != null
 				&& isEnabled()
 				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
@@ -98,16 +86,14 @@ public class AverageSpeedComputer {
 
 	private void saveLocation(@NonNull Location location, long time) {
 		LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		boolean lowSpeed = !location.hasSpeed() || location.getSpeed() < getSpeedToSkipInMetersPerSecond();
 
 		if (previousLatLon != null && previousTime > 0) {
 			double distance = MapUtils.getDistance(previousLatLon, latLon);
-			segmentsList.addSegment(new Segment(distance, previousTime, time, previousPointLowSpeed || lowSpeed));
+			segmentsList.addSegment(new Segment(distance, previousTime, time));
 		}
 
 		previousLatLon = latLon;
 		previousTime = time;
-		previousPointLowSpeed = lowSpeed;
 	}
 
 	private float getSpeedToSkipInMetersPerSecond() {
@@ -133,13 +119,15 @@ public class AverageSpeedComputer {
 	 */
 	public float getAverageSpeed(long measuredInterval, boolean skipLowSpeed) {
 		long intervalStart = System.currentTimeMillis() - measuredInterval;
-		List<Segment> segments = segmentsList.getSegments(intervalStart, MISSING_POINT_TIME_THRESHOLD);
+		List<Segment> segments = segmentsList.getSegments(intervalStart);
 
 		double totalDistance = 0;
 		double totalTimeMillis = 0;
 
+		float speedToSkip = getSpeedToSkipInMetersPerSecond();
+
 		for (Segment segment : segments) {
-			if (!segment.lowSpeed || !skipLowSpeed) {
+			if (!skipLowSpeed || !segment.isLowSpeed(speedToSkip)) {
 				totalDistance += segment.distance;
 				totalTimeMillis += segment.endTime - segment.startTime;
 			}
@@ -176,21 +164,13 @@ public class AverageSpeedComputer {
 		}
 
 		@NonNull
-		public List<Segment> getSegments(long fromTimeInclusive, long allowedStartTimeGap) {
+		public List<Segment> getSegments(long fromTimeInclusive) {
 			List<Segment> filteredSegments = new ArrayList<>();
 			for (int i = tailIndex; i != headIndex; i = nextIndex(i)) {
 				Segment segment = segments[i];
-				if (segment == null || segment.startTime < fromTimeInclusive) {
-					continue;
+				if (segment != null && segment.startTime >= fromTimeInclusive) {
+					filteredSegments.add(segment);
 				}
-
-				boolean firstSegment = filteredSegments.size() == 0;
-				boolean hugeGap = fromTimeInclusive + allowedStartTimeGap < segment.startTime;
-				if (firstSegment && hugeGap) {
-					return Collections.emptyList();
-				}
-
-				filteredSegments.add(segment);
 			}
 			return filteredSegments;
 		}
@@ -221,12 +201,6 @@ public class AverageSpeedComputer {
 			tailIndex = nextIndex(tailIndex);
 		}
 
-		public void clear() {
-			Arrays.fill(segments, null);
-			tailIndex = 0;
-			headIndex = 0;
-		}
-
 		private int nextIndex(int index) {
 			return (index + 1) % segments.length;
 		}
@@ -237,13 +211,17 @@ public class AverageSpeedComputer {
 		public final double distance;
 		public final long startTime;
 		public final long endTime;
-		public final boolean lowSpeed;
+		public final float speed;
 
-		public Segment(double distance, long startTime, long endTime, boolean lowSpeed) {
+		public Segment(double distance, long startTime, long endTime) {
 			this.distance = distance;
 			this.startTime = startTime;
 			this.endTime = endTime;
-			this.lowSpeed = lowSpeed;
+			this.speed = (float) (distance / ((endTime - startTime) / 1000f));
+		}
+
+		public boolean isLowSpeed(float speedToSkip) {
+			return speed < speedToSkip;
 		}
 	}
 }

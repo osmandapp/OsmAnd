@@ -3025,7 +3025,6 @@
     <string name="routing_attr_length_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin uzunluğunu təyin edin.</string>
     <string name="voice_announcements">Səsli göstərişlər</string>
     <string name="live_monitoring_descr">Səfər qeydindən istifadə edərək hazırkı məkanı paylaşmağa imkan verir.</string>
-    <string name="map_orientation_threshold_descr">Sürət hədddən azdırsa, xəritə görünüşünü döndərmə</string>
     <string name="shared_strings_all_regions">Bütün regionlar</string>
     <string name="wikivoyage_travel_guide">Səyahət Bələdçiləri</string>
     <string name="travel_card_update_descr">Yeni Vikisəyahət məlumatları mövcuddur, zövq almaq üçün yeniləyin.</string>
