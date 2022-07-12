@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -9,9 +12,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class AverageSpeedWidget extends TextInfoWidget {
 
@@ -37,13 +37,21 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	}
 
 	@NonNull
-	public CommonPreference<Long> getMeasuredIntervalPref() {
-		return measuredIntervalPref;
+	public Long getMeasuredInterval(@NonNull ApplicationMode appMode) {
+		return measuredIntervalPref.getModeValue(appMode);
+	}
+
+	public void setMeasuredInterval(@NonNull ApplicationMode appMode, long measuredInterval) {
+		measuredIntervalPref.setModeValue(appMode, measuredInterval);
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getSkipStopsPref() {
-		return skipStopsPref;
+	public Boolean shouldSkipStops(@NonNull ApplicationMode appMode) {
+		return skipStopsPref.getModeValue(appMode);
+	}
+
+	public void setShouldSkipStops(@NonNull ApplicationMode appMode, boolean skipStops) {
+		skipStopsPref.setModeValue(appMode, skipStops);
 	}
 
 	@Override
