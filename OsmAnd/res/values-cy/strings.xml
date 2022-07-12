@@ -3560,7 +3560,6 @@
     <string name="quick_action_replace_destination_desc">Botwm i wneud y sgrin yn ganolbwynt i gyrchfan y llwybr newydd, gan ddisodli\'r gyrchfan a ddewiswyd yn flaenorol (os o gwbl).</string>
     <string name="lock_screen_request_explanation">Mae angen y caniatâd hwn ar %1$s i ddiffodd y sgrin ar gyfer y nodwedd arbed pŵer.</string>
     <string name="transport_hazmat_title">Cludo sylweddau peryglus</string>
-    <string name="average_speed_skip_stops_desc">Ni fydd cyflymder llai na %1$s yn cael ei gyfrif nac yn effeithio ar y cyflymder cyfartaledd.</string>
     <string name="rendering_attr_smoothness_impassable_name">Anhygyrch</string>
     <string name="index_name_us">Gogledd America - Unol Daleithiau</string>
     <string name="local_index_items_uploaded">%1$d o %2$d eitem wedi\'u huwchlwytho.</string>

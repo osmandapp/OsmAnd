@@ -4681,7 +4681,6 @@
     <string name="average_speed_time_interval_desc">Наведите временски интервал за који ће се мерити просечна брзина.</string>
     <string name="average_speed_widget_desc">Приказује просечну брзину тренутне вожње.</string>
     <string name="map_widget_average_speed">Просечна брзина</string>
-    <string name="average_speed_skip_stops_desc">Брзина мања од %1$s неће се рачунати и неће утицати на просечну брзину.</string>
     <string name="routing_attr_goods_restrictions_description">Размотрите приступне дозволе за лака камионе са робом (роба)</string>
     <string name="use_latin_name_if_missing">Користи латинично име ако недостаје</string>
     <string name="import_as_one_track">Увези као једну путању</string>

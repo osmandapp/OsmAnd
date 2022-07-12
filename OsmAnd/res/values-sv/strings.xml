@@ -4010,7 +4010,6 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Göm militärområden</string>
     <string name="battery_widget_desc">Visar din enhets batterinivå.</string>
     <string name="transport_hazmat_no_desc">På vissa vägar och i vissa tunnlar är transport av farligt gods förbjudet.</string>
-    <string name="average_speed_skip_stops_desc">Hastighet mindre än %1$s kommer inte att räknas eller påverka medelhastigheten.</string>
     <string name="time_to_go_desc">Tid i minuter eller timmar för att nå din destination.</string>
     <string name="arrival_time_widget_desc">Ankomsttid till destinationen.</string>
     <string name="list_of_groups">Lista över grupper</string>

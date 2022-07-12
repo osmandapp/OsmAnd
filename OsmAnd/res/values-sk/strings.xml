@@ -4679,7 +4679,6 @@
     <string name="average_speed_skip_stops">Zohľadniť zastavenia</string>
     <string name="map_widget_average_speed">Priemerná rýchlosť</string>
     <string name="lang_sat">Santali</string>
-    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
     <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>

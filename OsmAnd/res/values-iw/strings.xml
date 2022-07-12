@@ -4688,7 +4688,6 @@
     <string name="transport_hazmat_yes_desc">עליך לבחור קטגוריה מתאימה.</string>
     <string name="transport_hazmat_no_desc">בחלק מהכבישים והמנהרות אסור להוביל חומרים מסוכנים.</string>
     <string name="transport_hazmat_title">העברת חומרים מסוכנים</string>
-    <string name="average_speed_skip_stops_desc">מהירות מתחת ל־%1$s לא תחושב ותשפיע על המהירות הממוצעת.</string>
     <string name="average_speed_skip_stops">לוקח תחנות בחשבון</string>
     <string name="average_speed_time_interval_desc">נא לציין את הפרש הזמן למדידת מהירות ממוצעת.</string>
     <string name="average_speed_widget_desc">מציג את המהירות הממוצעת בנסיעה הנוכחית.</string>

@@ -4678,7 +4678,6 @@
     <string name="average_speed_widget_desc">Megjeleníti a jelenlegi utazás átlagsebességét.</string>
     <string name="map_widget_average_speed">Átlagsebesség</string>
     <string name="average_speed_skip_stops">Megállások figyelembevétele</string>
-    <string name="average_speed_skip_stops_desc">A(z) %1$s-nél kisebb sebesség nem számít, és az átlagsebességet sem befolyásolja.</string>
     <string name="transport_hazmat_yes_desc">Ki kell választania a megfelelő kategóriát.</string>
     <string name="transport_hazmat_no_desc">Egyes utakon és alagutakban tilos a veszélyes anyagok szállítása.</string>
     <string name="transport_hazmat_title">Veszélyes anyag szállítása</string>
