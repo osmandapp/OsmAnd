@@ -139,8 +139,12 @@ public class NetworkRouteGpxApproximator {
 		return res;
 	}
 
-	private double getDistance(NetworkRouteSegment start, NetworkRouteSegment last) {
-		return MapUtils.getSqrtDistance(start.getEndPointX(), start.getEndPointY(), last.getStartPointX(), last.getStartPointY());
+	private double getDistance(NetworkRouteSegment start, NetworkRouteSegment end) {
+		return MapUtils.getSqrtDistance(start.getEndPointX(), start.getEndPointY(), end.getStartPointX(), end.getStartPointY());
+	}
+
+	private double getDistance(GpxRoutePoint start, GpxRoutePoint end) {
+		return MapUtils.getDistance(start.lat, start.lon, end.lat, end.lon);
 	}
 
 	private NetworkRouteSegment getMatchingGpxSegments(GpxRoutePoint p1, GpxRoutePoint p2) {
@@ -171,13 +175,15 @@ public class NetworkRouteGpxApproximator {
 		List<GpxRoutePoint> gpxRoutePoints = new ArrayList<>();
 		List<NetworkRouteSegment> res = new ArrayList<>();
 		List<NetworkRoutePoint> passedRoutePoints = new ArrayList<>();
+		int totalDistance = 0;
+		int unmatchedDistance = 0;
 		for (GPXUtilities.Track t : gpxFile.tracks) {
 			for (GPXUtilities.TrkSegment ts : t.segments) {
 				for (int i = 0; i < ts.points.size() - 1; i++) {
 					GPXUtilities.WptPt ps = ts.points.get(i);
 					NetworkRoutePoint nearesetPoint = selector.getNetworkRouteContext()
 							.getClosestNetworkRoutePoint(MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat));
-					GpxRoutePoint gpxRoutePoint = new GpxRoutePoint();
+					GpxRoutePoint gpxRoutePoint = new GpxRoutePoint(ps.lat, ps.lon);
 					if (MapUtils.squareRootDist31(MapUtils.get31TileNumberX(ps.lon), MapUtils.get31TileNumberY(ps.lat),
 							nearesetPoint.x31, nearesetPoint.y31) < GPX_MAX_DISTANCE_POINT_MATCH) {
 						gpxRoutePoint.routePoint = nearesetPoint;
@@ -192,6 +198,7 @@ public class NetworkRouteGpxApproximator {
 		for (int idx = 0; idx < gpxRoutePoints.size() - 1; idx++) {
 			GpxRoutePoint start = gpxRoutePoints.get(idx);
 			GpxRoutePoint nextPoint = gpxRoutePoints.get(idx + 1);
+			totalDistance += getDistance(start, nextPoint);
 			// 1. simple segment matching
 			NetworkRouteSegment matchingGpxSegment = getMatchingGpxSegments(start, nextPoint);
 			if (matchingGpxSegment != null) {
@@ -202,8 +209,14 @@ public class NetworkRouteGpxApproximator {
 			matchingGpxSegment = getGpxSegmentWithoutExtraGpxPoints(gpxRoutePoints, idx, start);
 			if (matchingGpxSegment != null) {
 				res.add(matchingGpxSegment);
+				continue;
 			}
+			unmatchedDistance += getDistance(start, nextPoint);
 		}
+		int pointsSize = gpxRoutePoints.size();
+		int matchingGpxSegmentSize = res.size();
+		System.out.printf(">> GPX approximation (%d route points matched, %d points unmatched) for %d m: %d m umatched\n",
+				matchingGpxSegmentSize, pointsSize - matchingGpxSegmentSize, (int) totalDistance, (int) unmatchedDistance);
 		res = addAbsentPoint(res);
 		return res;
 	}
@@ -271,9 +284,14 @@ public class NetworkRouteGpxApproximator {
 		double lat;
 		double lon;
 		NetworkRoutePoint routePoint = null;
-		
+
+		public GpxRoutePoint(double lat, double lon) {
+			this.lat = lat;
+			this.lon = lon;
+		}
+
 		public List<NetworkRouteSegment> getObjects() {
-			if(routePoint == null) {
+			if (routePoint == null) {
 				return Collections.emptyList();
 			}
 			return routePoint.objects;
