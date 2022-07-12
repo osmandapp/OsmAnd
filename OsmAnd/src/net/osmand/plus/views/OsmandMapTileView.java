@@ -263,7 +263,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				.build();
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
-		elevationAngle = settings.getLastKnownMapElevation();
+		elevationAngle = settings.LAST_KNOWN_MAP_ELEVATION.get();
 	}
 
 	@Nullable
