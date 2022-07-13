@@ -325,8 +325,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 					mIgnoreEvent = false;
 				}
 				long timeInMillis = cal.getTimeInMillis() + hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
-				textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add)
-						+ " " + getFormattedTime(timeInMillis));
+				String title = mapActivity.getString(R.string.osmand_parking_position_description_add);
+				textView.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_space, title, getFormattedTime(timeInMillis)));
 			}
 		});
 
