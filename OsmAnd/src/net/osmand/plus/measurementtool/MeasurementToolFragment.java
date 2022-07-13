@@ -989,9 +989,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			editingCtx.getCommandManager().execute(new DisableApproximationCheckCommand(measurementLayer));
 			updateUndoRedoButton(false, redoBtn);
 			updateUndoRedoButton(true, undoBtn);
-			disable(upDownBtn);
 			updateSnapToRoadControls();
-			updateDistancePointsText();
 		}
 	}
 
