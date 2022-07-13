@@ -156,12 +156,14 @@ public class AverageSpeedComputer {
 			float totalSpeed = 0;
 			float speedToSkip = getSpeedToSkipInMetersPerSecond();
 
+			int countedLocations = 0;
 			for (Location location : locationsToUse) {
 				if (!skipLowSpeed || location.getSpeed() >= speedToSkip) {
 					totalSpeed += location.getSpeed();
+					countedLocations++;
 				}
 			}
-			return totalSpeed / locationsToUse.size();
+			return countedLocations != 0 ? totalSpeed / countedLocations : Float.NaN;
 		}
 		return Float.NaN;
 	}
