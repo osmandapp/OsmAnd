@@ -4649,7 +4649,6 @@
     <string name="average_speed_widget_desc">Pokazuje średnią prędkość bieżącej jazdy.</string>
     <string name="map_widget_average_speed">Prędkość średnia</string>
     <string name="transport_hazmat_title">Transport materiałów niebezpiecznych</string>
-    <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s nie będzie liczona i nie będzie miała wpływu na średnią prędkość.</string>
     <string name="average_speed_skip_stops">Uwzględnij przystanki</string>
     <string name="explore_plans">Przegląd planów</string>
     <string name="map_widget_time_to_destination">Czas dojazdu miejsca docelowego</string>

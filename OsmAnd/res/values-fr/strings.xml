@@ -4685,7 +4685,6 @@
     <string name="lang_sat">Santali</string>
     <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
-    <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera ignorée et n\'affectera pas le calcul de la vitesse moyenne.</string>
     <string name="average_speed_widget_desc">Indique la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
     <string name="transport_hazmat_yes_desc">Vous devez sélectionner une catégorie.</string>

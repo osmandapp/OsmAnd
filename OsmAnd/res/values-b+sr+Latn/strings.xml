@@ -4314,7 +4314,6 @@
     <string name="shortcut_navigate_to_work">Idite na „Posao“</string>
     <string name="page_number">Stranica %1$s</string>
     <string name="add_page">Dodaj stranicu</string>
-    <string name="average_speed_skip_stops_desc">Brzina manja od %1$s neće se računati i neće uticati na prosečnu brzinu.</string>
     <string name="average_speed_skip_stops">Uzmi u obzir zaustavljanja</string>
     <string name="average_speed_time_interval_desc">Navedite vremenski interval za koji će se meriti prosečna brzina.</string>
     <string name="average_speed_widget_desc">Prikazuje prosečnu brzinu trenutne vožnje.</string>

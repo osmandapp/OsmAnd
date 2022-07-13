@@ -27,7 +27,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 
 	private static final Log log = PlatformUtil.getLog(DownloadTilesHelper.class);
 
-	private static final int BYTES_TO_MB = 1024 * 1024;
+	public static final int BYTES_TO_MB = 1024 * 1024;
 	private static final float DEFAULT_TILE_SIZE_MB = 0.012f;
 
 	private static final long HALF_SECOND = 500;
@@ -57,8 +57,9 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 	public void downloadTiles(int minZoom,
 	                          int maxZoom,
 	                          @NonNull QuadRect latLonRect,
-	                          @NonNull ITileSource tileSource) {
-		downloadTilesTask = new DownloadTilesTask(app, minZoom, maxZoom, latLonRect, tileSource, this);
+	                          @NonNull ITileSource tileSource,
+	                          @NonNull DownloadType downloadType) {
+		downloadTilesTask = new DownloadTilesTask(app, minZoom, maxZoom, latLonRect, tileSource, downloadType, this);
 		downloadTilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -98,6 +99,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		private final int maxZoom;
 		private final QuadRect latLonRect;
 		private final ITileSource tileSource;
+		private final DownloadType downloadType;
 
 		private final TilesDownloadListener listener;
 
@@ -109,7 +111,6 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		private long availableTiles = 0;
 		private long totalTilesBytes = 0;
 		private final List<String> recentlyDownloadedTilesIds = new ArrayList<>();
-		private final long tilesToProcess;
 
 		private boolean cancelled = false;
 
@@ -118,15 +119,15 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		                         int maxZoom,
 		                         @NonNull QuadRect latLonRect,
 		                         @NonNull ITileSource tileSource,
+		                         @NonNull DownloadType downloadType,
 		                         @NonNull TilesDownloadListener listener) {
 			this.app = app;
 			this.minZoom = minZoom;
 			this.maxZoom = maxZoom;
 			this.latLonRect = latLonRect;
 			this.tileSource = tileSource;
+			this.downloadType = downloadType;
 			this.listener = listener;
-
-			tilesToProcess = DownloadTilesHelper.getTilesNumber(minZoom, maxZoom, latLonRect, tileSource.isEllipticYTile());
 
 			resourceManager = app.getResourceManager();
 			tileDownloader = MapTileDownloader.getInstance(Version.getAppVersion(app));
@@ -144,7 +145,9 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 			int zoom = request.zoom;
 			int x = request.xTile;
 			int y = request.yTile;
-			return minZoom <= zoom && zoom <= maxZoom && getConstraints(zoom).contains(x, y, x, y);
+			return minZoom <= zoom
+					&& zoom <= maxZoom
+					&& getTilesBorder(zoom, latLonRect, tileSource.isEllipticYTile()).contains(x, y, x, y);
 		}
 
 		@Override
@@ -178,69 +181,64 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 
 		private void downloadTiles() throws InterruptedException {
 			for (int zoom = minZoom; zoom <= maxZoom && !cancelled; zoom++) {
-				QuadRect constraints = getConstraints(zoom);
-				for (int x = (int) constraints.left; x <= (int) constraints.right; x++) {
-					for (int y = (int) constraints.top; y <= (int) constraints.bottom; y++) {
-						waitOutDownloadErrors();
-						downloadTile(zoom, x, y);
-						waitForDownloads(false);
+				QuadRect border = getTilesBorder(zoom, latLonRect, tileSource.isEllipticYTile());
+				int left = (int) border.left;
+				int top = (int) border.top;
+				int right = (int) border.right;
+				int bottom = (int) border.bottom;
+
+				for (int x = left; x <= right && !cancelled; x++) {
+					for (int y = top; y <= bottom && !cancelled; y++) {
+						handleTile(zoom, x, y);
 					}
 				}
 			}
 		}
 
-		private void waitOutDownloadErrors() throws InterruptedException {
-			while (!cancelled && tileDownloader.shouldSkipRequests() && availableTiles < tilesToProcess) {
-				Thread.sleep(HALF_SECOND);
-			}
-		}
-
-		private void downloadTile(int zoom, int x, int y) {
-			if (!cancelled) {
+		private void handleTile(int zoom, int x, int y) throws InterruptedException {
+			if (downloadType == DownloadType.FORCE_ALL) {
+				downloadTile(zoom, x, y);
+			} else {
 				String tileId = resourceManager.calculateTileId(tileSource, x, y, zoom);
-				if (resourceManager.isTileDownloaded(tileId, tileSource, x, y, zoom)) {
+				boolean downloaded = resourceManager.isTileDownloaded(tileId, tileSource, x, y, zoom);
+				if (downloaded && downloadType == DownloadType.ALL) {
 					if (!recentlyDownloadedTilesIds.contains(tileId)) {
 						int tileSize = resourceManager.getTileBytesSizeOnFileSystem(tileId, tileSource, x, y, zoom);
 						totalTilesBytes += tileSize;
 						app.runInUIThread(() -> listener.onTileDownloaded(availableTiles++, totalTilesBytes));
 					}
-				} else {
-					long time = System.currentTimeMillis();
-					resourceManager.getTileForMapSync(tileId, tileSource, x, y, zoom, true, time);
-					activeRequests++;
+				} else if (!downloaded) {
+					downloadTile(zoom, x, y);
 				}
+			}
+		}
+
+		private void downloadTile(int zoom, int x, int y) throws InterruptedException {
+			waitOutDownloadErrors();
+			resourceManager.downloadTileForMapSync(tileSource, x, y, zoom);
+			activeRequests++;
+			waitForDownloads(false);
+		}
+
+		private void waitOutDownloadErrors() throws InterruptedException {
+			while (!cancelled && tileDownloader.shouldSkipRequests()) {
+				Thread.sleep(HALF_SECOND);
 			}
 		}
 
 		private void waitForDownloads(boolean waitForAll) throws InterruptedException {
 			if (!cancelled) {
 				if (waitForAll) {
-					while (tileDownloader.isSomethingBeingDownloaded() && availableTiles < tilesToProcess) {
+					while (tileDownloader.isSomethingBeingDownloaded()) {
 						Thread.sleep(HALF_SECOND);
 					}
 				} else if (activeRequests >= REQUESTS_LIMIT) {
 					activeRequests = 0;
-					while (tileDownloader.isSomethingBeingDownloaded() && availableTiles < tilesToProcess) {
+					while (tileDownloader.isSomethingBeingDownloaded()) {
 						Thread.sleep(HALF_SECOND);
 					}
 				}
 			}
-		}
-
-		@NonNull
-		private QuadRect getConstraints(int zoom) {
-			int leftX = (int) MapUtils.getTileNumberX(zoom, latLonRect.left);
-			int rightX = (int) MapUtils.getTileNumberX(zoom, latLonRect.right);
-			int topY = getConstraintY(zoom, true);
-			int bottomY = getConstraintY(zoom, false);
-			return new QuadRect(leftX, topY, rightX, bottomY);
-		}
-
-		private int getConstraintY(int zoom, boolean top) {
-			double constraint = top ? latLonRect.top : latLonRect.bottom;
-			return tileSource.isEllipticYTile()
-					? (int) MapUtils.getTileEllipsoidNumberY(zoom, constraint)
-					: (int) MapUtils.getTileNumberY(zoom, constraint);
 		}
 
 		@Override
@@ -265,7 +263,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 				: getTilesNumber(minZoom, maxZoom, latLonRect, tileSource.isEllipticYTile()) * DEFAULT_TILE_SIZE_MB;
 	}
 
-	private static long getNearestZoomTileSize(int zoom, @NonNull ITileSource tileSource, @NonNull BitmapTilesCache cache) {
+	public static long getNearestZoomTileSize(int zoom, @NonNull ITileSource tileSource, @NonNull BitmapTilesCache cache) {
 		long size = cache.getTileSize(tileSource, zoom);
 		if (size > 0) {
 			return size;
@@ -316,5 +314,28 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 			bottomTileY = (int) MapUtils.getTileNumberY(zoom, latLonRect.bottom);
 		}
 		return (rightTileX - leftTileX + 1L) * (bottomTileY - topTileY + 1);
+	}
+
+	@NonNull
+	public static QuadRect getTilesBorder(int zoom, @NonNull QuadRect latLonRect, boolean ellipticYTile) {
+		int leftX = (int) MapUtils.getTileNumberX(zoom, latLonRect.left);
+		int rightX = (int) MapUtils.getTileNumberX(zoom, latLonRect.right);
+		int topY;
+		int bottomY;
+		if (ellipticYTile) {
+			topY = (int) MapUtils.getTileEllipsoidNumberY(zoom, latLonRect.top);
+			bottomY = (int) MapUtils.getTileEllipsoidNumberY(zoom, latLonRect.bottom);
+		} else {
+			topY = (int) MapUtils.getTileNumberY(zoom, latLonRect.top);
+			bottomY = (int) MapUtils.getTileNumberY(zoom, latLonRect.bottom);
+		}
+		return new QuadRect(leftX, topY, rightX, bottomY);
+	}
+
+	enum DownloadType {
+
+		FORCE_ALL,     // All tiles will be downloaded and counted
+		ALL,           // Missing tiles will be downloaded, present tiles won't be downloaded, all tiles will be counted
+		ONLY_MISSING   // Only missing tiles will be downloaded and counted
 	}
 }
