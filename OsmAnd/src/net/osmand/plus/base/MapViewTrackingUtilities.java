@@ -322,8 +322,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
-		if (mapView != null && settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
-			mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+		if (mapView != null) {
+			mapView.setElevationAngle(settings.LAST_KNOWN_MAP_ELEVATION.get());
+			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
+				mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+			}
 		}
 	}
 
@@ -514,7 +517,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}
-	
+
 	public Float getMapRotate() {
 		if (mapView == null) {
 			return null;

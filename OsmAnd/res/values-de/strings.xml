@@ -4646,7 +4646,6 @@
     <string name="rendering_attr_horseScale_name">Schwierigkeitsgrad von Reitwegen</string>
     <string name="map_widget_trip_recording_duration">Dauer</string>
     <string name="av_def_action_choose">Auf Anfrage</string>
-    <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden nicht gezählt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
     <string name="use_latin_name_if_missing">Falls nicht vorhanden, lateinischen Namen verwenden</string>
     <string name="transport_hazmat_no_desc">Auf einigen Straßen und Tunneln ist der Transport gefährlicher Materialien verboten.</string>
     <string name="transport_hazmat_yes_desc">Sie müssen eine richtige Kategorie wählen.</string>

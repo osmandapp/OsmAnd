@@ -4702,7 +4702,6 @@
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para el que se medirá la velocidad media.</string>
     <string name="average_speed_widget_desc">Muestra la velocidad media del recorrido actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
-    <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s no serán contadas y afectará a la velocidad media.</string>
     <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
     <string name="transport_hazmat_yes_desc">Debes elegir la categoría adecuada.</string>

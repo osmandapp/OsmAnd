@@ -4501,5 +4501,4 @@
     <string name="map_widget_average_speed">Gemiddelde snelheid</string>
     <string name="map_widget_time_to_intermediate">Tijd tot tussenstop</string>
     <string name="map_widget_distance_to_intermediate">Afstand tot tussenstop</string>
-    <string name="average_speed_skip_stops_desc">Snelheden lager dan %1$s worden niet opgenomen en hebben geen invloed op de gemiddelde snelheid.</string>
 </resources>

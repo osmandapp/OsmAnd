@@ -4621,7 +4621,6 @@
     <string name="turn_on_public_transport_description">Porniți pentru a vedea rutele de transport public pe hartă.</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Avansat</string>
     <string name="routing_attr_difficulty_preference_expert_name">Expertul</string>
-    <string name="average_speed_skip_stops_desc">Viteza mai mică de %1$s nu va fi luată în considerare și nu va afecta viteza medie.</string>
     <string name="average_speed_widget_desc">Afișează viteza medie a cursei curente.</string>
     <string name="map_widget_average_speed">Viteza medie</string>
     <string name="average_speed_skip_stops">Luați în considerare opririle</string>

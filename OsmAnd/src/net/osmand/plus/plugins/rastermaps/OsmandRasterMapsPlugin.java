@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.rastermaps;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
@@ -434,29 +435,46 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
-			ContextMenuItem item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
+			adapter.addItem(createMapMenuItem(mapActivity, mapTileLayer, true));
+			adapter.addItem(createMapMenuItem(mapActivity, mapTileLayer, false));
+		}
+	}
+
+	@NonNull
+	private ContextMenuItem createMapMenuItem(@NonNull MapActivity mapActivity,
+	                                          boolean mainMapTileLayer,
+	                                          boolean updateTiles) {
+		ContextMenuItem item;
+		if (updateTiles) {
+			item = new ContextMenuItem(MAP_CONTEXT_MENU_UPDATE_MAP)
+					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
+					.setIcon(R.drawable.ic_action_refresh_dark)
+					.setOrder(UPDATE_MAP_ITEM_ORDER);
+		} else {
+			item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setIcon(R.drawable.ic_action_import)
 					.setOrder(DOWNLOAD_MAP_ITEM_ORDER);
-
-			if (mapTileLayer) {
-				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-				ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
-					MapActivity mapActivity1 = mapActivityRef.get();
-					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
-						OsmandApplication app = mapActivity1.getMyApplication();
-						if (DownloadTilesFragment.shouldShowDialog(app)) {
-							DownloadTilesFragment.showInstance(mapActivity1.getSupportFragmentManager());
-						} else {
-							app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
-						}
-					}
-					return true;
-				};
-				item.setListener(listener);
-			}
-			adapter.addItem(item);
 		}
+
+		if (mainMapTileLayer) {
+			WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+			ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
+				MapActivity activity = mapActivityRef.get();
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					OsmandApplication app = activity.getMyApplication();
+					if (DownloadTilesFragment.shouldShowDialog(app)) {
+						DownloadTilesFragment.showInstance(activity.getSupportFragmentManager(), updateTiles);
+					} else {
+						app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
+					}
+				}
+				return true;
+			};
+			item.setListener(listener);
+		}
+
+		return item;
 	}
 
 	public static void installMapLayers(@NonNull Activity activity, final ResultMatcher<TileSourceTemplate> result) {
