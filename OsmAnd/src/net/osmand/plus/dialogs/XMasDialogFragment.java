@@ -14,7 +14,9 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.DateUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class XMasDialogFragment extends DialogFragment {
@@ -29,8 +31,8 @@ public class XMasDialogFragment extends DialogFragment {
 		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
 		if (numberOfStarts > 2) {
 			Date now = new Date();
-			Date start = new Date(now.getYear(), 11, 5, 0, 0);
-			Date end = new Date(now.getYear(), 11, 25, 23, 59);
+			Date start = DateUtils.createDateInCurrentYear(Calendar.DECEMBER, 5, 0, 0);
+			Date end = DateUtils.createDateInCurrentYear(Calendar.DECEMBER, 25, 23, 59);
 			int firstShownX = app.getSettings().NUMBER_OF_STARTS_FIRST_XMAS_SHOWN.get();
 			if (now.after(start) && now.before(end)) {
 				if (firstShownX == 0 || numberOfStarts - firstShownX == 3 || numberOfStarts - firstShownX == 10) {
