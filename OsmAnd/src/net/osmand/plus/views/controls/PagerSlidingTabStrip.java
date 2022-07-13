@@ -258,7 +258,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		if (pager.getAdapter() == null) {
 			throw new IllegalStateException("ViewPager does not have adapter instance.");
 		}
-
 		pager.setOnPageChangeListener(pageListener);
 		pager.getAdapter().registerDataSetObserver(adapterObserver);
 		adapterObserver.setAttached(true);
@@ -295,13 +294,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				@SuppressLint("NewApi")
 				@Override
 				public void onGlobalLayout() {
-
-					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-						getViewTreeObserver().removeGlobalOnLayoutListener(this);
-					} else {
-						getViewTreeObserver().removeOnGlobalLayoutListener(this);
-					}
-
+					getViewTreeObserver().removeOnGlobalLayoutListener(this);
 					currentPosition = pager.getCurrentItem();
 					currentPositionOffset = 0f;
 					scrollToChild(currentPosition, 0);
