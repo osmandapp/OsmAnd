@@ -4,6 +4,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -81,6 +83,7 @@ import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand.ChangeRouteType;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
+import net.osmand.plus.measurementtool.command.DisableApproximationCheckCommand;
 import net.osmand.plus.measurementtool.command.JoinPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
@@ -901,7 +904,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				enterApproximationMode(mapActivity);
 			} else {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION,
+						this, WHOLE_ROUTE_CALCULATION,
 						editingCtx.getLastCalculationMode() == CalculationMode.NEXT_SEGMENT
 								? RouteBetweenPointsDialogMode.SINGLE
 								: RouteBetweenPointsDialogMode.ALL,
@@ -981,6 +984,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				GpxApproximationFragment.showInstance(fragmentManager, this, pointsSegments, mode);
 			}
+		} else if (resultCode == SnapTrackWarningFragment.CONNECT_STRAIGHT_LINE_RESULT_CODE) {
+			MeasurementToolLayer measurementLayer = getMeasurementLayer();
+			editingCtx.getCommandManager().execute(new DisableApproximationCheckCommand(measurementLayer));
+			updateUndoRedoButton(false, redoBtn);
+			updateUndoRedoButton(true, undoBtn);
+			updateSnapToRoadControls();
 		}
 	}
 
@@ -1143,11 +1152,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void attachToRoadsClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			boolean plainTrack = editingCtx.getPointsCount() > 0 && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
-			if (plainTrack) {
+			if (editingCtx.isApproximationNeeded()) {
 				enterApproximationMode(mapActivity);
 			} else {
-				editingCtx.recalculateRouteSegments(null);
+				app.showToastMessage(R.string.attach_roads_warning);
 			}
 		}
 	}
@@ -1335,6 +1343,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
+	public void onRecalculateAll() {
+		editingCtx.recalculateRouteSegments(null);
+	}
+
+	@Override
 	public void onCloseRouteDialog() {
 		toolBarController.setTitle(previousToolBarTitle);
 		editingCtx.setSelectedPointPosition(-1);
@@ -1347,30 +1360,28 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
 	                                    RouteBetweenPointsDialogMode dialogMode) {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
-			switch (dialogType) {
-				case WHOLE_ROUTE_CALCULATION:
-					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
-							? ChangeRouteType.LAST_SEGMENT : ChangeRouteType.WHOLE_ROUTE;
-					break;
-				case NEXT_ROUTE_CALCULATION:
-					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
-							? ChangeRouteType.NEXT_SEGMENT : ChangeRouteType.ALL_NEXT_SEGMENTS;
-					break;
-				case PREV_ROUTE_CALCULATION:
-					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
-							? ChangeRouteType.PREV_SEGMENT : ChangeRouteType.ALL_PREV_SEGMENTS;
-					break;
-			}
-			editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, changeRouteType, editingCtx.getSelectedPointPosition()));
-			updateUndoRedoButton(false, redoBtn);
-			updateUndoRedoButton(true, undoBtn);
-			disable(upDownBtn);
-			updateSnapToRoadControls();
-			updateDistancePointsText();
+		ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
+		switch (dialogType) {
+			case WHOLE_ROUTE_CALCULATION:
+				changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+						? ChangeRouteType.LAST_SEGMENT : ChangeRouteType.WHOLE_ROUTE;
+				break;
+			case NEXT_ROUTE_CALCULATION:
+				changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+						? ChangeRouteType.NEXT_SEGMENT : ChangeRouteType.ALL_NEXT_SEGMENTS;
+				break;
+			case PREV_ROUTE_CALCULATION:
+				changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+						? ChangeRouteType.PREV_SEGMENT : ChangeRouteType.ALL_PREV_SEGMENTS;
+				break;
 		}
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, changeRouteType, editingCtx.getSelectedPointPosition()));
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		disable(upDownBtn);
+		updateSnapToRoadControls();
+		updateDistancePointsText();
 	}
 
 	@Override
@@ -1537,7 +1548,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
 			ImageButton configBtn = profileWithConfig.findViewById(R.id.profile);
 			if (isTrackReadyToCalculate()) {
-				if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
+				if (appMode == DEFAULT_APP_MODE) {
 					icon = getActiveIcon(R.drawable.ic_action_split_interval);
 					snapToRoadBtn.setVisibility(View.VISIBLE);
 					profileWithConfig.setVisibility(View.GONE);
@@ -2337,7 +2348,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) { }
+	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) {
+	}
 
 	@Override
 	public void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath) {
@@ -2367,10 +2379,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFileUploadStarted() { }
+	public void onFileUploadStarted() {
+	}
 
 	@Override
-	public void onFileUploadProgress(int percent) { }
+	public void onFileUploadProgress(int percent) {
+	}
 
 	@Override
 	public void onFileUploadDone(@NonNull NetworkResult networkResult) {
