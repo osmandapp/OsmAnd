@@ -86,7 +86,6 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.voice.CommandPlayer;
@@ -2068,7 +2067,6 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_ELEVATION = "last_known_map_elevation"; //$NON-NLS-1$
 
 	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
@@ -2178,15 +2176,8 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
 	}
 
-	public float getLastKnownMapElevation() {
-		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_ELEVATION, 90);
-	}
-
-	public void setLastKnownMapElevation(float elevation) {
-		settingsAPI.edit(globalPreferences).putFloat(LAST_KNOWN_MAP_ELEVATION, elevation).commit();
-	}
-
 	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
