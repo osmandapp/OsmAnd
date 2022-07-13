@@ -358,7 +358,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		final TextView textView = new TextView(getContext());
 		textView.setText(app.getString(R.string.new_filter_desc));
-		textView.setTextAppearance(getContext(), R.style.TextAppearance_ContextMenuSubtitle);
+		textView.setTextAppearance(R.style.TextAppearance_ContextMenuSubtitle);
 		LinearLayout ll = new LinearLayout(getContext());
 		ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -370,24 +370,21 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		builder.setView(ll);
 
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String filterName = editText.getText().toString();
-				PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
-				applyFilterFields();
-				if (!Algorithms.isEmpty(filter.getFilterByName())) {
-					nFilter.setSavedFilterByName(filter.getFilterByName());
-				}
-				if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
-					Toast.makeText(getContext(), 
-						       getContext().getString(R.string.edit_filter_create_message, filterName),
-						       Toast.LENGTH_SHORT).show();
-					app.getSearchUICore().refreshCustomPoiFilters();
-					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
-					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
-					QuickSearchPoiFilterFragment.this.dismiss();
-				}
+		builder.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
+			String filterName = editText.getText().toString();
+			PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
+			applyFilterFields();
+			if (!Algorithms.isEmpty(filter.getFilterByName())) {
+				nFilter.setSavedFilterByName(filter.getFilterByName());
+			}
+			if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
+				Toast.makeText(getContext(),
+					       getContext().getString(R.string.edit_filter_create_message, filterName),
+					       Toast.LENGTH_SHORT).show();
+				app.getSearchUICore().refreshCustomPoiFilters();
+				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
+				((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
+				QuickSearchPoiFilterFragment.this.dismiss();
 			}
 		});
 		builder.create().show();

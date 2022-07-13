@@ -718,7 +718,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		final TextView textView = new TextView(getContext());
 		textView.setText(app.getString(R.string.new_filter_desc));
-		textView.setTextAppearance(getContext(), R.style.TextAppearance_ContextMenuSubtitle);
+		textView.setTextAppearance(R.style.TextAppearance_ContextMenuSubtitle);
 		LinearLayout ll = new LinearLayout(getContext());
 		ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		ll.setOrientation(LinearLayout.VERTICAL);

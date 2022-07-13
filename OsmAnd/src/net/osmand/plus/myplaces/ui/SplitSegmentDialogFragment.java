@@ -117,11 +117,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.split_interval_toolbar);
 		TextView titleTextView = (TextView) toolbar.findViewById(R.id.title);
-		if (app.getSettings().isLightContent()) {
-			titleTextView.setTextAppearance(getContext(), R.style.Widget_Styled_LightActionBarTitle);
-		} else {
-			titleTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Widget_ActionBar_Title);
-		}
+		boolean nightMode = !app.getSettings().isLightContent();
+		titleTextView.setTextAppearance(nightMode ?
+				R.style.TextAppearance_AppCompat_Widget_ActionBar_Title :
+				R.style.Widget_Styled_LightActionBarTitle);
 		ActionBar trackActivityActionBar = trackActivity.getSupportActionBar();
 		if (trackActivityActionBar != null) {
 			titleTextView.setText(trackActivityActionBar.getTitle());
@@ -129,11 +128,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		Drawable icBack = ic.getIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
+		toolbar.setNavigationOnClickListener(v -> {
+			dismiss();
 		});
 
 		progressBar = view.findViewById(R.id.progress_bar);
