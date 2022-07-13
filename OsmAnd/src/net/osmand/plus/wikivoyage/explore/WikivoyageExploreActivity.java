@@ -119,7 +119,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
-		bottomNav.setOnNavigationItemSelectedListener(item -> {
+		bottomNav.setOnItemSelectedListener(item -> {
 			int position = -1;
 			int i = item.getItemId();
 			if (i == R.id.action_explore) {

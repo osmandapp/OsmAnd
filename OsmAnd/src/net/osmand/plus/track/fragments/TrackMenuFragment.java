@@ -1292,7 +1292,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
 		bottomNav.setSelectedItemId(menuType.menuItemId);
-		bottomNav.setOnNavigationItemSelectedListener(item -> {
+		bottomNav.setOnItemSelectedListener(item -> {
 			for (TrackMenuTab type : TrackMenuTab.values()) {
 				if (type.menuItemId == item.getItemId()) {
 					TrackMenuTab prevMenuType = menuType;

@@ -167,7 +167,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			viewPager.setCurrentItem(GROUPS_POSITION, false);
 			bottomNav.getMenu().findItem(R.id.action_groups).setChecked(true);
 		}
-		bottomNav.setOnNavigationItemSelectedListener(menuItem -> {
+		bottomNav.setOnItemSelectedListener(menuItem -> {
 			int i = menuItem.getItemId();
 			if (i == R.id.action_active) {
 				setupLocationUpdate(true, false);
@@ -187,7 +187,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			}
 			return false;
 		});
-		bottomNav.setOnNavigationItemReselectedListener(menuItem -> {
+		bottomNav.setOnItemReselectedListener(menuItem -> {
 			if (menuItem.getItemId() == R.id.action_more) {
 				dismissOptionsMenuFragment();
 			}
