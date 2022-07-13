@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="connect_with_straight_line">Connect with straight line</string>
+    <string name="attach_roads_descr">Do you want to approximate your track with a valid route attached to offline maps. In that case you will have corrected road altitude, road information and turns that could be used later in navigation.</string>
+    <string name="attach_roads_warning">You can attach to the roads only a recorded track</string>
+    <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
     <string name="download_tiles">Download tiles</string>
     <string name="auto_25_chars_route_tl_kl">Turn left and keep left</string>
