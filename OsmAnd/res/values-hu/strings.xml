@@ -4734,7 +4734,7 @@
     <string name="compass_visible_if_map_rotated">Látható, ha a térkép el van forgatva</string>
     <string name="compass_always_hidden">Mindig el van rejtve</string>
     <string name="compass_always_visible">Mindig látható</string>
-    <string name="compass_click_desc">Kattintson az iránytűre a térkép tájolási módjai közötti váltáshoz.</string>
+    <string name="compass_click_desc">Koppintson az iránytűre a térkép tájolási módjai közötti váltáshoz.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
@@ -4762,6 +4762,6 @@
     <string name="auto_25_chars_route_tu_kr">Forduljon meg, és tartson jobbra</string>
     <string name="auto_25_chars_route_roundabout_kl">Menjen ki a(z) %1$d kijáraton és tartson balra</string>
     <string name="auto_25_chars_route_roundabout_kr">Menjen ki a(z) %1$d kijáraton és tartson jobbra</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Speciálisan MTB-k számára kialakított utak megjelenítése</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Kifejezetten MTB-k számára kialakított utak megjelenítése</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA utak megjelenítése</string>
 </resources>
