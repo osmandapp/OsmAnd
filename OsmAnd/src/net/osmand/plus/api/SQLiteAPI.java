@@ -23,8 +23,6 @@ public interface SQLiteAPI {
 
 		boolean isReadOnly();
 
-		boolean isDbLockedByOtherThreads();
-
 		boolean isClosed();
 
 	}

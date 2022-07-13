@@ -443,11 +443,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public boolean isLocked() {
-		SQLiteConnection db = getDatabase();
-		if (db == null) {
-			return false;
-		}
-		return db.isDbLockedByOtherThreads();
+		return getDatabase() != null;
 	}
 
 	@Override

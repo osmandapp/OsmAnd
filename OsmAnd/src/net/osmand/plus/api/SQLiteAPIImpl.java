@@ -197,11 +197,6 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 		}
 
 		@Override
-		public boolean isDbLockedByOtherThreads() {
-			return ds.isDbLockedByOtherThreads();
-		}
-
-		@Override
 		public boolean isClosed() {
 			return !ds.isOpen();
 		}
