@@ -321,7 +321,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 						minute = 0;
 					}
 					mIgnoreEvent = true;
-					timePicker.setCurrentMinute(minute);
+					timePicker.setMinute(minute);
 					mIgnoreEvent = false;
 				}
 				long timeInMillis = cal.getTimeInMillis() + hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
@@ -332,8 +332,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 		//to set the same 24-hour or 12-hour mode as it is set in the device
 		timePicker.setIs24HourView(true);
-		timePicker.setCurrentHour(0);
-		timePicker.setCurrentMinute(0);
+		timePicker.setHour(0);
+		timePicker.setMinute(0);
 
 		setTime.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
@@ -342,8 +342,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				Calendar cal = Calendar.getInstance();
 				//int hour = cal.get(Calendar.HOUR_OF_DAY );
 				//int minute = cal.get(Calendar.MINUTE);
-				cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
-				cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
+				cal.add(Calendar.HOUR_OF_DAY, timePicker.getHour());
+				cal.add(Calendar.MINUTE, timePicker.getMinute());
 				setParkingTime(cal.getTimeInMillis());
 				app.getFavoritesHelper().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
 				CheckBox addCalendarEvent = setTimeParking.findViewById(R.id.check_event_in_calendar);

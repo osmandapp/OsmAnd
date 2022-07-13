@@ -52,8 +52,8 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 
 		final TimePicker timePicker = new TimePicker(getActivity());
 		timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
-		timePicker.setCurrentHour(hour);
-		timePicker.setCurrentMinute(minute);
+		timePicker.setHour(hour);
+		timePicker.setMinute(minute);
 
 		builder.setView(timePicker)
 				.setPositiveButton(isStart && createNew ? R.string.next_proceed
@@ -84,13 +84,10 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 								}
 							}
 						})
-				.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						BasicEditPoiFragment editPoiFragment = ((BasicEditPoiFragment) getParentFragment());
-						if (editPoiFragment != null) {
-							editPoiFragment.removeUnsavedOpeningHours();
-						}
+				.setNegativeButton(R.string.shared_string_cancel, (dialog, which) -> {
+					BasicEditPoiFragment editPoiFragment = ((BasicEditPoiFragment) getParentFragment());
+					if (editPoiFragment != null) {
+						editPoiFragment.removeUnsavedOpeningHours();
 					}
 				});
 
