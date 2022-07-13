@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
     <string name="download_tiles">Download tiles</string>
     <string name="auto_25_chars_route_tl_kl">Turn left and keep left</string>

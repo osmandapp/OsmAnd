@@ -1335,6 +1335,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
+	public void onRecalculateAll() {
+		editingCtx.recalculateRouteSegments(null);
+	}
+
+	@Override
 	public void onCloseRouteDialog() {
 		toolBarController.setTitle(previousToolBarTitle);
 		editingCtx.setSelectedPointPosition(-1);
@@ -1347,30 +1352,28 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
 	                                    RouteBetweenPointsDialogMode dialogMode) {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
-			switch (dialogType) {
-				case WHOLE_ROUTE_CALCULATION:
-					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
-							? ChangeRouteType.LAST_SEGMENT : ChangeRouteType.WHOLE_ROUTE;
-					break;
-				case NEXT_ROUTE_CALCULATION:
-					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
-							? ChangeRouteType.NEXT_SEGMENT : ChangeRouteType.ALL_NEXT_SEGMENTS;
-					break;
-				case PREV_ROUTE_CALCULATION:
-					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
-							? ChangeRouteType.PREV_SEGMENT : ChangeRouteType.ALL_PREV_SEGMENTS;
-					break;
-			}
-			editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, changeRouteType, editingCtx.getSelectedPointPosition()));
-			updateUndoRedoButton(false, redoBtn);
-			updateUndoRedoButton(true, undoBtn);
-			disable(upDownBtn);
-			updateSnapToRoadControls();
-			updateDistancePointsText();
+		ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
+		switch (dialogType) {
+			case WHOLE_ROUTE_CALCULATION:
+				changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+						? ChangeRouteType.LAST_SEGMENT : ChangeRouteType.WHOLE_ROUTE;
+				break;
+			case NEXT_ROUTE_CALCULATION:
+				changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+						? ChangeRouteType.NEXT_SEGMENT : ChangeRouteType.ALL_NEXT_SEGMENTS;
+				break;
+			case PREV_ROUTE_CALCULATION:
+				changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+						? ChangeRouteType.PREV_SEGMENT : ChangeRouteType.ALL_PREV_SEGMENTS;
+				break;
 		}
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, changeRouteType, editingCtx.getSelectedPointPosition()));
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		disable(upDownBtn);
+		updateSnapToRoadControls();
+		updateDistancePointsText();
 	}
 
 	@Override
@@ -2337,7 +2340,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) { }
+	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) {
+	}
 
 	@Override
 	public void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath) {
@@ -2367,10 +2371,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFileUploadStarted() { }
+	public void onFileUploadStarted() {
+	}
 
 	@Override
-	public void onFileUploadProgress(int percent) { }
+	public void onFileUploadProgress(int percent) {
+	}
 
 	@Override
 	public void onFileUploadDone(@NonNull NetworkResult networkResult) {
