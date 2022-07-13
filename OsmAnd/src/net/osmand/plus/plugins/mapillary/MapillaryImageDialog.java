@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.mapillary;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -25,8 +28,6 @@ import androidx.core.util.Pair;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
@@ -35,12 +36,14 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialog;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -224,10 +227,18 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				isPortrait() ? AndroidUtils.dpToPx(getMapActivity(), 270f) : ViewGroup.LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
 		webView.setWebViewClient(new WebViewClient() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				webView.loadUrl("about:blank");
 				noInternetView.setVisibility(View.VISIBLE);
+			}
+
+			@TargetApi(android.os.Build.VERSION_CODES.M)
+			@Override
+			public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
+				// Redirect to deprecated method, so you can use it in all SDK versions
+				onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
 			}
 		});
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(v -> {
