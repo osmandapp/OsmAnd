@@ -4,6 +4,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -901,7 +903,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				enterApproximationMode(mapActivity);
 			} else {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION,
+						this, WHOLE_ROUTE_CALCULATION,
 						editingCtx.getLastCalculationMode() == CalculationMode.NEXT_SEGMENT
 								? RouteBetweenPointsDialogMode.SINGLE
 								: RouteBetweenPointsDialogMode.ALL,
@@ -981,6 +983,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				GpxApproximationFragment.showInstance(fragmentManager, this, pointsSegments, mode);
 			}
+		} else if (resultCode == SnapTrackWarningFragment.CONNECT_STRAIT_LINE_RESULT_CODE) {
+			onChangeApplicationMode(DEFAULT_APP_MODE, WHOLE_ROUTE_CALCULATION, RouteBetweenPointsDialogMode.ALL);
 		}
 	}
 
@@ -1143,11 +1147,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void attachToRoadsClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			boolean plainTrack = editingCtx.getPointsCount() > 0 && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
-			if (plainTrack) {
+			if (editingCtx.isApproximationNeeded()) {
 				enterApproximationMode(mapActivity);
 			} else {
-				editingCtx.recalculateRouteSegments(null);
+				app.showToastMessage(R.string.attach_roads_warning);
 			}
 		}
 	}
@@ -1540,7 +1543,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			LinearLayout profileWithConfig = mapActivity.findViewById(R.id.profile_with_config_btn);
 			ImageButton configBtn = profileWithConfig.findViewById(R.id.profile);
 			if (isTrackReadyToCalculate()) {
-				if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
+				if (appMode == DEFAULT_APP_MODE) {
 					icon = getActiveIcon(R.drawable.ic_action_split_interval);
 					snapToRoadBtn.setVisibility(View.VISIBLE);
 					profileWithConfig.setVisibility(View.GONE);

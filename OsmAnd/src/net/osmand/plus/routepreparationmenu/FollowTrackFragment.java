@@ -374,10 +374,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				importTrack();
 			} else if (card instanceof AttachTrackToRoadsCard) {
 				openPlanRoute(true);
-				close();
 			} else if (card instanceof TrackEditCard) {
 				openPlanRoute(false);
-				close();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
 			} else if (card instanceof ReverseTrackCard
@@ -489,6 +487,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			editingContext.setSelectedSegment(app.getSettings().GPX_SEGMENT_INDEX.get());
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
+			close();
 		}
 	}
 
