@@ -452,11 +452,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		OsmandApplication app = getMyApplication();
 		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
 		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
-		OnClickListener backOnClick = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss(true);
-			}
+		OnClickListener backOnClick = v -> {
+			dismiss(true);
 		};
 		backButton.setOnClickListener(backOnClick);
 		backButtonFlow.setOnClickListener(backOnClick);
@@ -464,11 +461,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		backButton.setImageResource(navigationIconResId);
 		backButtonFlow.setImageResource(navigationIconResId);
 
-		OnClickListener printOnClick = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				print();
-			}
+		OnClickListener printOnClick = v -> {
+			print();
 		};
 		View printRoute = view.findViewById(R.id.print_route);
 		View printRouteFlow = view.findViewById(R.id.print_route_flow);
@@ -477,30 +471,27 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		View saveRoute = view.findViewById(R.id.save_as_gpx);
 		View saveRouteFlow = view.findViewById(R.id.save_as_gpx_flow);
-		OnClickListener saveOnClick = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					OsmandApplication app = mapActivity.getMyApplication();
-					GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		OnClickListener saveOnClick = v -> {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				OsmandApplication app1 = mapActivity.getMyApplication();
+				GPXRouteParamsBuilder paramsBuilder = app1.getRoutingHelper().getCurrentGPXRoute();
 
-					String fileName = null;
-					if (paramsBuilder != null && paramsBuilder.getFile() != null) {
-						GPXFile gpxFile = paramsBuilder.getFile();
-						if (!Algorithms.isEmpty(gpxFile.path)) {
-							fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
-						} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
-							fileName = gpxFile.tracks.get(0).name;
-						}
+				String fileName = null;
+				if (paramsBuilder != null && paramsBuilder.getFile() != null) {
+					GPXFile gpxFile = paramsBuilder.getFile();
+					if (!Algorithms.isEmpty(gpxFile.path)) {
+						fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
+					} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+						fileName = gpxFile.tracks.get(0).name;
 					}
-					if (Algorithms.isEmpty(fileName)) {
-						String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-						fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
-					}
-					SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							ChooseRouteFragment.this, null, fileName, null, false, true);
 				}
+				if (Algorithms.isEmpty(fileName)) {
+					String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
+					fileName = FileUtils.createUniqueFileName(app1, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
+				}
+				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+						ChooseRouteFragment.this, null, fileName, null, false, true);
 			}
 		};
 		saveRoute.setOnClickListener(saveOnClick);
@@ -512,37 +503,34 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
 		shareRoute.setImageDrawable(shareIcon);
 		shareRouteFlow.setImageDrawable(shareIcon);
-		OnClickListener shareOnClick = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					OsmandApplication app = (OsmandApplication) activity.getApplication();
-					RoutingHelper routingHelper = app.getRoutingHelper();
-					final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-					final GPXUtilities.GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-					final Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
-					File dir = new File(app.getCacheDir(), "share");
-					if (!dir.exists()) {
-						dir.mkdir();
-					}
-					File dst = new File(dir, "route.gpx");
-					try {
-						FileWriter fw = new FileWriter(dst);
-						GPXUtilities.writeGpx(fw, gpx, null);
-						fw.close();
-						final Intent sendIntent = new Intent();
-						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
-								routingHelper.getGeneralRouteInformation()).toString()));
-						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						AndroidUtils.startActivityIfSafe(activity, sendIntent);
-					} catch (IOException e) {
-					}
+		OnClickListener shareOnClick = v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				OsmandApplication app12 = (OsmandApplication) activity.getApplication();
+				RoutingHelper routingHelper = app12.getRoutingHelper();
+				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+				final GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
+				final Uri fileUri = AndroidUtils.getUriForFile(app12, new File(gpx.path));
+				File dir = new File(app12.getCacheDir(), "share");
+				if (!dir.exists()) {
+					dir.mkdir();
+				}
+				File dst = new File(dir, "route.gpx");
+				try {
+					FileWriter fw = new FileWriter(dst);
+					GPXUtilities.writeGpx(fw, gpx, null);
+					fw.close();
+					final Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
+							routingHelper.getGeneralRouteInformation()).toString()));
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app12, dst));
+					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					AndroidUtils.startActivityIfSafe(activity, sendIntent);
+				} catch (IOException e) {
 				}
 			}
 		};
@@ -568,18 +556,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
 			if (file != null && file.exists()) {
 				Uri uri = AndroidUtils.getUriForFile(app, file);
-				Intent intent;
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-					// Use Android Print Framework
-					intent = new Intent(getActivity(), PrintDialogActivity.class)
-							.setDataAndType(uri, "text/html")
-							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				} else {
-					// Just open html document
-					intent = new Intent(Intent.ACTION_VIEW)
-							.setDataAndType(uri, "text/html")
-							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				}
+				// Use Android Print Framework
+				Intent intent = new Intent(getActivity(), PrintDialogActivity.class)
+						.setDataAndType(uri, "text/html")
+						.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		}

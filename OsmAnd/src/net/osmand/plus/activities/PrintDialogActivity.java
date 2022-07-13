@@ -89,16 +89,15 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 
 	@SuppressLint("NewApi")
 	private void createWebPrintJob(WebView webView) {
-    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-    	    PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+		String jobName = "OsmAnd route info";
+		String docName = jobName + " Document";
 
-    	    PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
+		PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+		PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter(docName);
 
-    	    String jobName = "OsmAnd route info";
-    	    PrintJob printJob = printManager.print(jobName, printAdapter,
-    	            new PrintAttributes.Builder().build());
-    	    printJobId = printJob.getId();
-    	}
+		PrintJob printJob = printManager.print(jobName, printAdapter,
+		        new PrintAttributes.Builder().build());
+		printJobId = printJob.getId();
 	}
 }
 
