@@ -83,6 +83,7 @@ import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand.ChangeRouteType;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
+import net.osmand.plus.measurementtool.command.DisableApproximationCheckCommand;
 import net.osmand.plus.measurementtool.command.JoinPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
@@ -983,8 +984,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				GpxApproximationFragment.showInstance(fragmentManager, this, pointsSegments, mode);
 			}
-		} else if (resultCode == SnapTrackWarningFragment.CONNECT_STRAIT_LINE_RESULT_CODE) {
-			onChangeApplicationMode(DEFAULT_APP_MODE, WHOLE_ROUTE_CALCULATION, RouteBetweenPointsDialogMode.ALL);
+		} else if (resultCode == SnapTrackWarningFragment.CONNECT_STRAIGHT_LINE_RESULT_CODE) {
+			MeasurementToolLayer measurementLayer = getMeasurementLayer();
+			editingCtx.getCommandManager().execute(new DisableApproximationCheckCommand(measurementLayer));
+			updateUndoRedoButton(false, redoBtn);
+			updateUndoRedoButton(true, undoBtn);
+			disable(upDownBtn);
+			updateSnapToRoadControls();
+			updateDistancePointsText();
 		}
 	}
 

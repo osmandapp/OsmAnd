@@ -48,7 +48,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	public static final int REQUEST_CODE = 1000;
 	public static final int CANCEL_RESULT_CODE = 2;
 	public static final int CONTINUE_RESULT_CODE = 3;
-	public static final int CONNECT_STRAIT_LINE_RESULT_CODE = 4;
+	public static final int CONNECT_STRAIGHT_LINE_RESULT_CODE = 4;
 
 	public static final String TAG = SnapTrackWarningFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SnapTrackWarningFragment.class);
@@ -188,7 +188,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
 			dismissImmediate();
-			fragment.onActivityResult(REQUEST_CODE, CONNECT_STRAIT_LINE_RESULT_CODE, null);
+			fragment.onActivityResult(REQUEST_CODE, CONNECT_STRAIGHT_LINE_RESULT_CODE, null);
 		}
 	}
 

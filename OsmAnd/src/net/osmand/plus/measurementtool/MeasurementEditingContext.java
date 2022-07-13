@@ -81,6 +81,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
 	private ApplicationMode appMode;
 	private boolean calculatedTimeSpeed;
+	private boolean checkApproximation = true;
 
 	private SnapToRoadProgressListener progressListener;
 	private RouteCalculationProgress calculationProgress;
@@ -177,6 +178,14 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	public boolean hasCalculatedTimeSpeed() {
 		return calculatedTimeSpeed;
+	}
+
+	public boolean shouldCheckApproximation() {
+		return checkApproximation;
+	}
+
+	public void setShouldCheckApproximation(boolean checkApproximation) {
+		this.checkApproximation = checkApproximation;
 	}
 
 	public List<List<WptPt>> getOriginalSegmentPointsList() {
@@ -276,7 +285,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		boolean hasTimestamps = false;
 		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
-		if (!newData) {
+		if (!newData && checkApproximation) {
 			List<WptPt> points = getPoints();
 			hasDefaultPointsOnly = true;
 			for (WptPt point : points) {
