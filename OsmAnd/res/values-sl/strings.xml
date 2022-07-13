@@ -4674,7 +4674,6 @@
     <string name="radius_ruler_mode_desc">Če tapneš gradnik, preklopiš v način ravnila polmera.</string>
     <string name="shared_string_mode">Način</string>
     <string name="lang_sat">Santalščina</string>
-    <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se ne upošteva in ne vpliva na povprečno hitrost.</string>
     <string name="average_speed_skip_stops">Upoštevaj postanke</string>
     <string name="average_speed_time_interval_desc">Določi časovni interval, v katerem se meri povprečna hitrost.</string>
     <string name="average_speed_widget_desc">Prikazuje povprečno hitrost trenutne vožnje.</string>

@@ -3830,7 +3830,6 @@
     <string name="utm_format_descr">OsmAnd menggunakan Standar UTM, yang serupa tetapi tidak identik dengan format UTM NATO.</string>
     <string name="routing_attr_avoid_highway_description">Hindari jalan tol</string>
     <string name="routing_attr_avoid_highway_name">Hindari jalan tol</string>
-    <string name="average_speed_skip_stops_desc">Kecepatan kurang dari %1$s tidak akan dihitung dan mempengaruhi kecepatan rata-rata.</string>
     <string name="average_speed_skip_stops">Perhitungkan pemberhentian</string>
     <string name="lang_sat">Santali</string>
     <string name="time_to_navigation_point_widget_settings_desc">Beralih mode dengan mengetuk widget.</string>

@@ -4685,7 +4685,6 @@
     <string name="average_speed_time_interval_desc">Ortalama hızın ölçüleceği zaman aralığını belirtin.</string>
     <string name="average_speed_widget_desc">Geçerli sürüşün ortalama hızını gösterir.</string>
     <string name="average_speed_skip_stops">Durmaları dikkate al</string>
-    <string name="average_speed_skip_stops_desc">%1$s değerinden daha düşük hızlar sayılmayacak ve ortalama hızı etkilemeyecektir.</string>
     <string name="map_widget_average_speed">Ortalama hız</string>
     <string name="import_as_one_track">Tek yol olarak içe aktar</string>
     <string name="use_latin_name_if_missing">Eksikse Latince adını kullan</string>

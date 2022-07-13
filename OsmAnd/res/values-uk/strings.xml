@@ -4686,7 +4686,7 @@
     <string name="average_speed_time_interval_desc">Укажіть інтервал часу, за який вимірюватиметься середня швидкість.</string>
     <string name="average_speed_widget_desc">Показує середню швидкість поточної поїздки.</string>
     <string name="map_widget_average_speed">Середня швидкість</string>
-    <string name="average_speed_skip_stops_desc">Швидкість до %1$s не враховуватиметься і не впливатиме на середню швидкість.</string>
+    <string name="average_speed_skip_stops_desc">Швидкість до %1$s враховуватиметься і впливатиме на середню швидкість.</string>
     <string name="import_as_one_track">Імпортувати одним треком</string>
     <string name="use_latin_name_if_missing">Використовуйте назву латиницею, якщо її немає</string>
     <string name="transport_hazmat_yes_desc">Вам потрібно вибрати відповідну категорію.</string>

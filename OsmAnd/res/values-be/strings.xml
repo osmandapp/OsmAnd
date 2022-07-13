@@ -4386,7 +4386,7 @@
     <string name="app_restart_required">Для ўжывання некаторых налад патрабуецца перазапуск праграмы.</string>
     <string name="shared_string_feet">футы</string>
     <string name="track_has_no_speed">След не змяшчае даных аб хуткасці.</string>
-    <string name="average_speed_skip_stops_desc">Хуткасць меншая за %1$s не будзе ўлічвацца і ўплываць на сярэднюю хуткасць.</string>
+    <string name="average_speed_skip_stops_desc">Хуткасць меншая за %1$s будзе ўлічвацца і ўплываць на сярэднюю хуткасць.</string>
     <string name="resend_verification_code">Адправіць паўторна</string>
     <string name="history_actions_descr">Вы можаце экспартаваць гісторыю ў файл.</string>
     <string name="no_items_of_type_message">У вас няма элементаў гэтага тыпу</string>

@@ -4273,7 +4273,6 @@
     <string name="distance_circles">距离-圆圈</string>
     <string name="elevation_profile_widget_desc">小部件显示当前路线的高程和坡度剖面。</string>
     <string name="average_speed_skip_stops">考虑到停顿</string>
-    <string name="average_speed_skip_stops_desc">小于%1$s的速度将不被计算在内，也不影响平均速度。</string>
     <string name="average_speed_time_interval_desc">指定测量平均速度的时间间隔。</string>
     <string name="average_speed_widget_desc">显示当前骑行的平均速度。</string>
     <string name="map_widget_time_to_intermediate">到达中继点的时间</string>

@@ -4754,7 +4754,6 @@
     <string name="average_speed_skip_stops">مراعاة التوقف</string>
     <string name="average_speed_time_interval_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة.</string>
     <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
-    <string name="average_speed_skip_stops_desc">لن يتم احتساب السرعة الأقل من %1$s وستؤثر على متوسط السرعة.</string>
     <string name="map_widget_average_speed">متوسط السرعة</string>
     <string name="import_as_one_track">استيراد كمسار واحد</string>
     <string name="transport_hazmat_yes_desc">تحتاج إلى اختيار الفئة المناسبة.</string>
