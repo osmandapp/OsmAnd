@@ -29,6 +29,7 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -336,44 +337,28 @@ public class RoutingHelper {
 	}
 
 	public void addRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, true);
+		updateListeners = Algorithms.safeUpdateList(updateListeners, listener, true);
 	}
 
 	public void removeRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, false);
+		updateListeners = Algorithms.safeUpdateList(updateListeners, listener, false);
 	}
 
 	public void addRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, true);
+		settingsListeners = Algorithms.safeUpdateList(settingsListeners, listener, true);
 	}
 
 	public void removeRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, false);
+		settingsListeners = Algorithms.safeUpdateList(settingsListeners, listener, false);
 	}
 
 	public void addListener(@NonNull IRouteInformationListener l) {
-		listeners = updateListeners(new ArrayList<>(listeners), l, true);
+		listeners = Algorithms.safeUpdateList(listeners, l, true);
 		transportRoutingHelper.addListener(l);
 	}
 
 	public void removeListener(@NonNull IRouteInformationListener lt) {
-		listeners = updateListeners(new ArrayList<>(listeners), lt, false);
-	}
-
-	private <T> List<WeakReference<T>> updateListeners(List<WeakReference<T>> copyList,
-													   T listener, boolean isNewListener) {
-		Iterator<WeakReference<T>> it = copyList.iterator();
-		while (it.hasNext()) {
-			WeakReference<T> ref = it.next();
-			T l = ref.get();
-			if (l == null || l == listener) {
-				it.remove();
-			}
-		}
-		if (isNewListener) {
-			copyList.add(new WeakReference<>(listener));
-		}
-		return copyList;
+		listeners = Algorithms.safeUpdateList(listeners, lt, false);
 	}
 
 	public void updateLocation(Location currentLocation) {

@@ -5,6 +5,8 @@ import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.binary.RouteDataObject;
@@ -955,12 +957,12 @@ public class VoiceRouter {
 		}
 	}
 
-	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners = updateVoiceMessageListeners(new ArrayList<>(voiceMessageListeners), voiceMessageListener, true);
+	public void addVoiceMessageListener(@NonNull VoiceMessageListener voiceMessageListener) {
+		voiceMessageListeners = Algorithms.safeUpdateList(voiceMessageListeners, voiceMessageListener, true);
 	}
 	
-	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners = updateVoiceMessageListeners(new ArrayList<>(voiceMessageListeners), voiceMessageListener, false);
+	public void removeVoiceMessageListener(@NonNull VoiceMessageListener voiceMessageListener) {
+		voiceMessageListeners = Algorithms.safeUpdateList(voiceMessageListeners, voiceMessageListener, false);
 	}
 
 	private void notifyOnVoiceMessage(List<String> listCommands, List<String> played) {
@@ -971,22 +973,6 @@ public class VoiceRouter {
 				lnt.onVoiceMessage(listCommands, played);
 			}
 		}
-	}
-
-	private List<WeakReference<VoiceMessageListener>> updateVoiceMessageListeners(List<WeakReference<VoiceMessageListener>> voiceMessageListeners,
-																				  VoiceMessageListener listener, boolean isNewListener) {
-		Iterator<WeakReference<VoiceMessageListener>> it = voiceMessageListeners.iterator();
-		while (it.hasNext()) {
-			WeakReference<VoiceMessageListener> ref = it.next();
-			VoiceMessageListener l = ref.get();
-			if (l == null || l == listener) {
-				it.remove();
-			}
-		}
-		if (isNewListener) {
-			voiceMessageListeners.add(new WeakReference<>(listener));
-		}
-		return voiceMessageListeners;
 	}
 
 	private String cutLongDestination(String destination) {

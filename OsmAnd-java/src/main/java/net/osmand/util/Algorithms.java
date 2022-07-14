@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1235,5 +1236,22 @@ public class Algorithms {
 			}
 		}
 		return stringPalette.toString();
+	}
+
+	public static <T> List<WeakReference<T>> safeUpdateList(List<WeakReference<T>> original,
+	                                                        T item, boolean isNew) {
+		List<WeakReference<T>> copy = new ArrayList<>(original);
+		Iterator<WeakReference<T>> it = original.iterator();
+		while (it.hasNext()) {
+			WeakReference<T> ref = it.next();
+			T _item = ref.get();
+			if (_item == null || _item == item) {
+				it.remove();
+			}
+		}
+		if (isNew) {
+			original.add(new WeakReference<>(item));
+		}
+		return original;
 	}
 }
