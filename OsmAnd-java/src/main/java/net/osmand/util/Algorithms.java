@@ -1241,7 +1241,7 @@ public class Algorithms {
 	public static <T> List<WeakReference<T>> safeUpdateList(List<WeakReference<T>> original,
 	                                                        T item, boolean isNew) {
 		List<WeakReference<T>> copy = new ArrayList<>(original);
-		Iterator<WeakReference<T>> it = original.iterator();
+		Iterator<WeakReference<T>> it = copy.iterator();
 		while (it.hasNext()) {
 			WeakReference<T> ref = it.next();
 			T _item = ref.get();
@@ -1250,8 +1250,8 @@ public class Algorithms {
 			}
 		}
 		if (isNew) {
-			original.add(new WeakReference<>(item));
+			copy.add(new WeakReference<>(item));
 		}
-		return original;
+		return copy;
 	}
 }
