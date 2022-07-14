@@ -3674,7 +3674,7 @@
 \n
 \n• Načrtovanje poti: po zagonu se bo uporabil izbrani profil
 \n
-\n• Fiksna Mapillary plast, vtičnik je zdaj privzeto onemogočen
+\n• Fiksni Mapillary sloj, vtičnik je zdaj privzeto onemogočen
 \n
 \n• Dodan pogled za upravljanje vse zgodovine v aplikaciji
 \n
@@ -3963,7 +3963,6 @@
     <string name="track_recording_stop_without_saving">Ustavi brez shranjevanja</string>
     <string name="delete_number_files_question">Izbrišem %1$d datotek\?</string>
     <string name="shared_strings_all_regions">Vse regije</string>
-    <string name="map_orientation_threshold_descr">Ne zavrti pogleda zemljevida, če je hitrost manjša od mejne vrednosti</string>
     <string name="routing_attr_driving_style_description">Izberi namen vožnje za krajšo, hitrejšo ali varnejšo pot</string>
     <string name="activity_type_offroad_name">Off-road</string>
     <string name="login_open_place_reviews">Prijava v OpenPlaceReviews</string>
@@ -4198,7 +4197,7 @@
     <string name="plan_route_exit_dialog_descr">Želiš zavreči vse spremembe na načrtovani poti\?</string>
     <string name="street_level_imagery">Slike na ravni ulice</string>
     <string name="reverse_route">Obrni pot</string>
-    <string name="quick_action_showhide_mapillary_descr">Stikalo za prikaz ali skrivanje plasti Mapillary na zemljevidu.</string>
+    <string name="quick_action_showhide_mapillary_descr">Stikalo za prikaz ali skrivanje sloja Mapillary na zemljevidu.</string>
     <string name="screen_timeout_descr">Če je »%1$s« vklopljeno, bo čas aktivnosti odvisen od tega.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Izvozi ali uvozi hitra dejanja s profili aplikacij.</string>
     <string name="expire_time_descr">Ploščice v predpomnilniku bodo ponovno prenesene po določenem številu minut. To polje pustite prazno, če želite, da se ploščice za ta vir nikoli ne osvežijo.
@@ -4675,7 +4674,6 @@
     <string name="radius_ruler_mode_desc">Če tapneš gradnik, preklopiš v način ravnila polmera.</string>
     <string name="shared_string_mode">Način</string>
     <string name="lang_sat">Santalščina</string>
-    <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se ne upošteva in ne vpliva na povprečno hitrost.</string>
     <string name="average_speed_skip_stops">Upoštevaj postanke</string>
     <string name="average_speed_time_interval_desc">Določi časovni interval, v katerem se meri povprečna hitrost.</string>
     <string name="average_speed_widget_desc">Prikazuje povprečno hitrost trenutne vožnje.</string>
@@ -4721,4 +4719,26 @@
     <string name="download_complete">Prenos končan</string>
     <string name="accessibility_2d_view_off">2.5D pogled Izklopljen</string>
     <string name="accessibility_2d_view_on">2.5D pogled Vklopljen</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikaži posebej zasnovane poti za gorsko kolesarjenje</string>
+    <string name="auto_25_chars_route_tl_kr">Zavij levo in drži se desne</string>
+    <string name="auto_25_chars_route_tr_kl">Zavij desno in drži se leve</string>
+    <string name="auto_25_chars_route_tu_kl">Obrni se in drži se leve</string>
+    <string name="auto_25_chars_route_roundabout_kl">Izberi %1$d izvoz in drži se leve</string>
+    <string name="auto_backup_title">Samodejno varnostno kopiranje</string>
+    <string name="av_notes_video_widget_desc">S tapanjem gradnika lahko začneš snemati videoposnetek.</string>
+    <string name="av_notes_audio_widget_desc">S tapanjem gradnika lahko snemaš zvočne zapise.</string>
+    <string name="trip_recording_downhill_widget_desc">Prikaže vsoto vseh spustov trenutnega posnetega potovanja.</string>
+    <string name="trip_recording_uphill_widget_desc">Prikaže vsoto vseh vzponov trenutnega posnetega potovanja.</string>
+    <string name="trip_recording_duration_widget_desc">Prikazuje čas snemanja sledi, trajanje v minutah/urah trenutno posnetega potovanja.</string>
+    <string name="auto_25_chars_route_roundabout_kr">Izberi %1$d izvoz in drži se desne</string>
+    <string name="shared_string_duplicate">Podvoji</string>
+    <string name="av_notes_photo_widget_desc">S tapanjem gradnika lahko posnameš fotografijo.</string>
+    <string name="trip_recording_distance_widget_desc">Prikazuje razdaljo trenutno zabeleženega potovanja.</string>
+    <string name="auto_backup_preference_desc">Android privzeto shranjuje varnostne kopije priljubljenih, žetonov zemljevidov in nastavitev OsmAnd, da jih lahko obnoviš v novih napravah ali po ponovni namestitvi. Ta varnostna kopija je omejena na 25 MB.
+\nČe uporabljaš storitev OsmAnd Cloud, lahko to po ponovni namestitvi povzroči nesporazume.</string>
+    <string name="duplacate_widget_added_snackbar">Podvojeni gradnik je dodan kot naslednji na seznam.</string>
+    <string name="auto_25_chars_route_tl_kl">Zavij levo in drži se leve</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Pokaži poti MTB IMBA</string>
+    <string name="auto_25_chars_route_tr_kr">Zavij desno in drži se desne</string>
+    <string name="auto_25_chars_route_tu_kr">Obrni se in drži se desne</string>
 </resources>

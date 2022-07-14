@@ -4384,7 +4384,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="latest_openstreetmap_update">Eskuragarri dagoen OpenStreetMap-en azken eguneratzea:</string>
     <string name="track_recording_save_and_stop">Gorde eta gelditu grabaketa</string>
     <string name="shared_strings_all_regions">Eskualde guztiak</string>
-    <string name="map_orientation_threshold_descr">Ez biratu maparen ikuspegia abiadura atalase bat baino txikiagoa bada</string>
     <string name="backup_error_user_is_not_registered">Ez da erabiltzailerik erregistratu helbide elektroniko horrekin</string>
     <string name="shared_string_online">Linean</string>
     <string name="osmand_online_routing_promo">Erabili aurrez zehaztutako txantiloiak, edo gehitu OSRM, GraphHopper, openrouteservice edo GPX lineako bideraketa.</string>

@@ -4018,7 +4018,6 @@
     <string name="routing_attr_short_way_description">Optimierte kürzere Route (energiesparend)</string>
     <string name="routing_attr_driving_style_description">Wählen Sie den Fahrzweck, um eine kürzere, schnellere oder sicherere Route zu erhalten</string>
     <string name="snap_to_road_descr">Das Symbol für den aktuellen Standort wird an die aktuelle Navigationsroute angehängt</string>
-    <string name="map_orientation_threshold_descr">Kartenansicht nicht drehen, wenn die Geschwindigkeit kleiner als ein Schwellenwert ist</string>
     <string name="track_recording_description">Aufnahme beenden\?
 \nAlle nicht gespeicherten Daten gehen verloren.</string>
     <string name="on_pause">Pausiert</string>
@@ -4647,12 +4646,11 @@
     <string name="rendering_attr_horseScale_name">Schwierigkeitsgrad von Reitwegen</string>
     <string name="map_widget_trip_recording_duration">Dauer</string>
     <string name="av_def_action_choose">Auf Anfrage</string>
-    <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden nicht gezählt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
     <string name="use_latin_name_if_missing">Falls nicht vorhanden, lateinischen Namen verwenden</string>
     <string name="transport_hazmat_no_desc">Auf einigen Straßen und Tunneln ist der Transport gefährlicher Materialien verboten.</string>
     <string name="transport_hazmat_yes_desc">Sie müssen eine richtige Kategorie wählen.</string>
     <string name="import_as_one_track">Als einen Track importieren</string>
-    <string name="transport_hazmat_title">Transport gefährlicher Materialien</string>
+    <string name="transport_hazmat_title">Transport von Gefahrgut</string>
     <string name="map_widget_trip_recording_downhill">Bergab</string>
     <string name="map_widget_trip_recording_uphill">Bergauf</string>
     <string name="explore_plans">Pläne erkunden</string>
@@ -4741,7 +4739,7 @@
     <string name="auto_25_chars_route_tu_kr">Wenden und rechts halten</string>
     <string name="auto_25_chars_route_roundabout_kl">Die %1$d Ausfahrt nehmen und links halten</string>
     <string name="auto_25_chars_route_roundabout_kr">Die %1$d Ausfahrt nehmen und rechts halten</string>
-    <string name="auto_backup_preference_desc">Standardmäßig speichert Android Backups von Favoriten, Karten-Tokens und Osmand-Einstellungen, um sie auf neuen Geräten oder nach einer Neuinstallation wiederherzustellen, dieses Backup ist auf 25 MB begrenzt.
+    <string name="auto_backup_preference_desc">Standardmäßig speichert Android Backups von Favoriten, Karten-Tokens und OsmAnd-Einstellungen, um sie auf neuen Geräten oder nach einer Neuinstallation wiederherzustellen. Dieses Backup ist auf 25 MB begrenzt.
 \nWenn Sie OsmAnd Cloud verwenden, kann dies zu Missverständnissen nach der Neuinstallation führen.</string>
     <string name="auto_backup_title">Automatische Sicherung</string>
     <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird als nächstes in der Liste hinzugefügt.</string>
@@ -4751,4 +4749,29 @@
     <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie Audio-Notizen aufnehmen.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Speziell für das Mountainbiken angelegte Wege anzeigen</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Farbschema der Tiefenlinien</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Farbschema der Tiefenlinien</string>
+    <string name="rendering_attr_depthContourWidth_description">Breite der Tiefenlinie</string>
+    <string name="rendering_attr_depthContourWidth_name">Breite der Tiefenlinie</string>
+    <string name="distance_to_destination_widget_desc">Das Widget zeigt die verbleibende Entfernung zum letzten Zielpunkt an.</string>
+    <string name="second_next_turn_widget_desc">Das Widget zeigt Informationen über Ihre zweitnächste Abbiegung an, die aktiviert wird, wenn sich die Abbiegung in unmittelbarer Nähe befindet.</string>
+    <string name="next_turn_widget_desc">Das Widget zeigt Informationen zu Ihrer nächsten Abbiegung an, mit einem Bild des Manövers und entsprechender Entfernungsangabe.</string>
+    <string name="widget_with_dot">Widget.</string>
+    <string name="compass_visible_if_map_rotated_desc">Ausgeblendet, wenn Norden oben ist</string>
+    <string name="compass_visible_if_map_rotated">Sichtbar, wenn die Karte gedreht wird</string>
+    <string name="compass_always_hidden">Immer ausgeblendet</string>
+    <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald ein Zwischenpunkt passiert ist, wird die Entfernung zum nächsten Zwischenpunkt aktualisiert.</string>
+    <string name="trip_recording_duration_widget_desc">Zeigt die Zeit der Trackaufzeichnung an, die Dauer in Minuten/Stunden der aktuell aufgezeichneten Strecke.</string>
+    <string name="compass_click_desc">Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
+    <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
+    <string name="trip_recording_distance_widget_desc">Zeigt die Entfernung der aktuell aufgezeichneten Strecke an.</string>
+    <string name="true_bearing_wdiget_desc">Winkel zwischen dem wahren Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
+    <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
+    <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder die geschätzte Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
+    <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder die geschätzte Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
+    <string name="time_to_destination_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit ab dem aktuellen Standort.</string>
+    <string name="time_to_intermediate_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert. Sobald ein Zwischenpunkt passiert ist, wird die Zeit bis zum nächsten Zwischenpunkt aktualisiert.</string>
+    <string name="compass_always_visible">Immer sichtbar</string>
 </resources>

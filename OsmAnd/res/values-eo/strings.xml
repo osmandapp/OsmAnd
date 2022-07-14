@@ -3993,7 +3993,6 @@
     <string name="temporary_conditional_routing_descr">Uzi vojajn limigojn, kiuj estas nun aktivaj sur la mapo</string>
     <string name="routing_attr_driving_style_description">Elekti inter pli mallonga, pli rapida aŭ pli sekura kursoj</string>
     <string name="snap_to_road_descr">Proksimigas emblemon de via pozicio al la nune navigata vojo</string>
-    <string name="map_orientation_threshold_descr">Aŭtomate turni la mapon nur kiam rapido estas pli alta ol la sojlo</string>
     <string name="track_recording_stop_without_saving">Ĉesigi sen konservi</string>
     <string name="track_recording_save_and_stop">Konservi kaj ĉesigi registri</string>
     <string name="track_recording_title">Registrado de spuro ĉesigita</string>
@@ -4685,7 +4684,6 @@
     <string name="average_speed_widget_desc">Fenestraĵo montranta la mezuman rapidon por la nuna vojaĝo.</string>
     <string name="map_widget_average_speed">Mezuma rapido</string>
     <string name="average_speed_skip_stops">Enkalkuli paŭzojn</string>
-    <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne estos enkalkulita kaj ne efikos sur la mezuma rapido.</string>
     <string name="routing_attr_goods_restrictions_description">Konsideri limigojn por malpezaj (≤ 3,5 Mg) varaŭtomobiloj.</string>
     <string name="import_as_one_track">Enporti kiel unu spuron</string>
     <string name="transport_hazmat_yes_desc">Elektu ĝustan kategorion.</string>

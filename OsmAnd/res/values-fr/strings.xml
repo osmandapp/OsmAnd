@@ -1392,9 +1392,9 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurez le proxy HTTP pour toutes les requêtes réseau.</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
-    <string name="proxy_host_descr">Configurez le serveur mandataire, proxy, (par exemple : 127.0.0.1).</string>
+    <string name="proxy_host_descr">Paramétrez le serveur mandataire, proxy, (par exemple : 127.0.0.1).</string>
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
-    <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118.</string>
+    <string name="proxy_port_descr">Paramétrez le numéro de port de votre mandataire (Proxy). Par exemple : 8118.</string>
     <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
@@ -3993,7 +3993,6 @@
     <string name="track_recording_description">Arrêter l\'enregistrement \?
 \nToutes les données non enregistrées seront perdues.</string>
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
-    <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
     <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes pentes.</string>
@@ -4025,7 +4024,7 @@
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
-    <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur l\'itinéraire en cours.</string>
+    <string name="snap_to_road_descr">L’icône de positionnement s\'accrochera à l\'itinéraire en cours.</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
     <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
@@ -4686,7 +4685,6 @@
     <string name="lang_sat">Santali</string>
     <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
-    <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera ignorée et n\'affectera pas le calcul de la vitesse moyenne.</string>
     <string name="average_speed_widget_desc">Indique la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
     <string name="transport_hazmat_yes_desc">Vous devez sélectionner une catégorie.</string>

@@ -2817,7 +2817,6 @@
     <string name="temporary_conditional_routing_descr">Käytä tierajoituksia, jotka ovat nyt aktiivisia kartalla</string>
     <string name="routing_attr_short_way_description">Optimoitu lyhyempi reitti (energiansäästö)</string>
     <string name="routing_attr_driving_style_description">Valitse ajotarkoitus saadaksesi lyhyemmän, nopeamman tai turvallisemman reitin</string>
-    <string name="map_orientation_threshold_descr">Älä kierrä karttanäkymää, jos nopeus on alle kynnysarvon</string>
     <string name="shared_strings_all_regions">Kaikki alueet</string>
     <string name="delete_number_files_question">Poista %1$d tiedostoa\?</string>
     <string name="track_recording_stop_without_saving">Lopeta tallentamatta</string>

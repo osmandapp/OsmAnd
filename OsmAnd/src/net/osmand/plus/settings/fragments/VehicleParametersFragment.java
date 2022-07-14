@@ -94,12 +94,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		String parameterId = parameter.getId();
 		String title = AndroidUtils.getRoutingStringPropertyName(app, parameterId, parameter.getName());
-		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId,
-				parameter.getDescription());
-		String defValue = parameter.getType() == RoutingParameterType.NUMERIC
-				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
-		StringPreference pref = (StringPreference) app.getSettings()
-				.getCustomRoutingProperty(parameterId, defValue);
+		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
+		String defValue = parameter.getDefaultString();
+		StringPreference pref = (StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
 		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, profile);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];

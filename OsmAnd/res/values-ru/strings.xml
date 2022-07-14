@@ -4012,7 +4012,6 @@
     <string name="segments_count">Сегмент %1$d</string>
     <string name="temporary_conditional_routing_descr">Использовать дорожные ограничения, которые сейчас активны на карте</string>
     <string name="routing_attr_short_way_description">Оптимизированный более короткий маршрут (экономия топлива/энергии)</string>
-    <string name="map_orientation_threshold_descr">Не менять ориентацию карты, если скорость меньше порогового значения</string>
     <string name="restart">Перезапустить</string>
     <string name="shared_strings_all_regions">Все регионы</string>
     <string name="track_recording_stop_without_saving">Остановить без сохранения</string>
@@ -4692,7 +4691,7 @@
     <string name="average_speed_time_interval_desc">Укажите интервал времени, для которого будет измеряться средняя скорость.</string>
     <string name="average_speed_widget_desc">Виджет показывает среднюю скорость текущей поездки.</string>
     <string name="map_widget_average_speed">Средняя скорость</string>
-    <string name="average_speed_skip_stops_desc">Скорость меньше %1$s не будет учитываться и влиять на среднюю скорость.</string>
+    <string name="average_speed_skip_stops_desc">Скорость меньше %1$s будет учитываться и влиять на среднюю скорость.</string>
     <string name="import_as_one_track">Импортировать как один трек</string>
     <string name="use_latin_name_if_missing">Транслитерация латиницей при отсутствии названия на выбранном языке</string>
     <string name="transport_hazmat_title">Перевозка опасных грузов</string>

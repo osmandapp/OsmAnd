@@ -4015,7 +4015,6 @@
     <string name="osmand_cloud_login_descr">Skriv inn e-postadressen du brukte for registrering. Du vil bli tilsendt et engangspassord som trengs i neste steg.</string>
     <string name="file_size_needed_for_import">Trengs for import</string>
     <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
-    <string name="map_orientation_threshold_descr">Ikke roter kartvisning hvis hastigheten er mindre enn terskel</string>
     <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
     <string name="offline_wikivoyage">Frakoblet Wikivoyage</string>
     <string name="terrain_maps">Terrengkart</string>
@@ -4683,7 +4682,6 @@
     <string name="average_speed_time_interval_desc">Angi tidsintervall for måling av gjennomsnittsfart.</string>
     <string name="average_speed_widget_desc">Viser gjennomsnittsfart for nåværende tur.</string>
     <string name="map_widget_average_speed">Gjennomsnittsfart</string>
-    <string name="average_speed_skip_stops_desc">Hastighet mindre enn %1$s vil ikke bli medregnet, og ikke ha innvirkning på gjennomsnittsfarten.</string>
     <string name="import_as_one_track">Importer som ett spor</string>
     <string name="altitude_correction">Høydekorreksjon</string>
     <string name="calculate_online_altitude_descr">Beregn høyde på nett på OsmAnd-tjenere basert på satellittbilder og digitale høydemodeller. Det kan variere fra enhetens registrerte høyde og kan brukes som høydekorreksjon.</string>

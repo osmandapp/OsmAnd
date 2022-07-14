@@ -3293,7 +3293,6 @@
     <string name="routing_attr_short_way_description">Optimerad kortare rutt (energibesparing)</string>
     <string name="routing_attr_driving_style_description">Välj körsyfte för att få kortare, snabbare eller säkrare rutt</string>
     <string name="snap_to_road_descr">Ikonen för aktuell plats kommer att fästa mot den aktuella navigeringsvägen</string>
-    <string name="map_orientation_threshold_descr">Rotera inte kartvyn om hastigheten är mindre än en tröskelvärde</string>
     <string name="restart">Omstart</string>
     <string name="shared_strings_all_regions">Alla regioner</string>
     <string name="delete_number_files_question">Ta bort %1$d filer\?</string>
@@ -4011,7 +4010,6 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Göm militärområden</string>
     <string name="battery_widget_desc">Visar din enhets batterinivå.</string>
     <string name="transport_hazmat_no_desc">På vissa vägar och i vissa tunnlar är transport av farligt gods förbjudet.</string>
-    <string name="average_speed_skip_stops_desc">Hastighet mindre än %1$s kommer inte att räknas eller påverka medelhastigheten.</string>
     <string name="time_to_go_desc">Tid i minuter eller timmar för att nå din destination.</string>
     <string name="arrival_time_widget_desc">Ankomsttid till destinationen.</string>
     <string name="list_of_groups">Lista över grupper</string>

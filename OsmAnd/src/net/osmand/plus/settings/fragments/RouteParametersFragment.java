@@ -324,7 +324,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return preference;
 		} else {
 			ListParameters listParameters = populateListParameters(ctx, p);
-			OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+			OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getDefaultString());
 			ListPreferenceEx preference = createListPreferenceEx(ctx, pref.getId(), listParameters.names, listParameters.values, title, R.layout.preference_with_descr);
 			preference.setDescription(description);
 			return preference;
@@ -613,7 +613,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				pref.addListener(booleanRoutingPrefListener);
 			} else {
-				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getDefaultString());
 				pref.addListener(customRoutingPrefListener);
 			}
 		}
@@ -628,7 +628,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				pref.removeListener(booleanRoutingPrefListener);
 			} else {
-				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getDefaultString());
 				pref.removeListener(customRoutingPrefListener);
 			}
 		}

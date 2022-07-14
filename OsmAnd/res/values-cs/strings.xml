@@ -3996,7 +3996,6 @@
     <string name="routing_attr_short_way_description">Optimalizovaná kratší trasa (úspora energie)</string>
     <string name="routing_attr_driving_style_description">Vyberte účel řízení pro získání kratší, rychlejší nebo bezpečnější trasy</string>
     <string name="snap_to_road_descr">Ikona aktuální polohy bude přichycena k aktuální navigační trase</string>
-    <string name="map_orientation_threshold_descr">Neotáčet mapu, pokud rychlost je nižší než určitá mez</string>
     <string name="restart">Restartovat</string>
     <string name="shared_strings_all_regions">Všechny oblasti</string>
     <string name="delete_number_files_question">Smazat %1$d souborů\?</string>

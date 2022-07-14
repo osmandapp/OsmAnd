@@ -3991,7 +3991,6 @@
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (economia de energia)</string>
     <string name="routing_attr_driving_style_description">Selecione o propósito de condução para obter um trajeto mais curto, mais rápido ou mais seguro</string>
     <string name="snap_to_road_descr">O ícone da posição atual se ajustará à rota de navegação atual</string>
-    <string name="map_orientation_threshold_descr">Não gire a visualização do mapa se a velocidade for inferior a um limite</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as regiões</string>
     <string name="delete_number_files_question">Excluir %1$d arquivos\?</string>
@@ -4597,7 +4596,6 @@
     <string name="coordinates_widget_desc">Mostra as coordenadas geográficas da localização geográfica atual.</string>
     <string name="average_speed_widget_desc">Mostra a velocidade média do passeio atual.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
-    <string name="average_speed_skip_stops_desc">A velocidade menor que %1$s não será contada e afetará a velocidade média.</string>
     <string name="average_speed_time_interval_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida.</string>
     <string name="routing_attr_allow_private_for_truck_description">Permitir o acesso a áreas privadas para caminhões.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permitir acesso privado (caminhão)</string>

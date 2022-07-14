@@ -4001,7 +4001,6 @@
     <string name="activity_type_hiking_name">Caminhada</string>
     <string name="temporary_conditional_routing_descr">Usar restrições da estrada que estejam ativas agora no mapa</string>
     <string name="routing_attr_driving_style_description">Selecione o motivo da condução para obter uma rota mais curta, rápida e segura</string>
-    <string name="map_orientation_threshold_descr">Não rodar a visualização do mapa se a velocidade for inferior ao limite definido</string>
     <string name="latest_openstreetmap_update">Última atualização do OpenStreetMap disponível:</string>
     <string name="updated">Atualizado: %s</string>
     <string name="last_time_checked">Última verificação: %s</string>
@@ -4691,7 +4690,6 @@
     <string name="average_speed_skip_stops">Ter em conta as paragens</string>
     <string name="average_speed_time_interval_desc">Especificar o intervalo de tempo para o qual a velocidade média será medida.</string>
     <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
-    <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s não será contada e afetará a velocidade média.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
     <string name="transport_hazmat_title">Transporte de materiais perigosos</string>

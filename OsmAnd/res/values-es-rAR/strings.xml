@@ -3280,7 +3280,7 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
-    <string name="rendering_value_thick_name">Espesor</string>
+    <string name="rendering_value_thick_name">Grueso</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Más detallado.</string>
     <string name="select_navigation_icon">Icono de la ubicación mientras se mueve</string>
     <string name="select_map_icon">Icono de la ubicación en reposo</string>
@@ -3998,7 +3998,6 @@
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
     <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
-    <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
     <string name="delete_number_files_question">¿Borrar %1$d archivos\?</string>
@@ -4703,7 +4702,6 @@
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para el que se medirá la velocidad media.</string>
     <string name="average_speed_widget_desc">Muestra la velocidad media del recorrido actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
-    <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s no serán contadas y afectará a la velocidad media.</string>
     <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
     <string name="transport_hazmat_yes_desc">Debes elegir la categoría adecuada.</string>

@@ -3983,7 +3983,6 @@
     <string name="routing_attr_short_way_description">Percorso ottimizzato per brevità (risparmio energia)</string>
     <string name="routing_attr_driving_style_description">Scegli il tipo di guida per ottenere percorsi più brevi, veloci e sicuri</string>
     <string name="snap_to_road_descr">L\'icona della localizzazione attuale sarà incollata al percorso corrente</string>
-    <string name="map_orientation_threshold_descr">Non ruotare la visualizzazione della mappa se la velocità è inferiore a una soglia</string>
     <string name="restart">Riavvia</string>
     <string name="shared_strings_all_regions">Tutte le regioni</string>
     <string name="delete_number_files_question">Cancellare %1$d file\?</string>
@@ -4676,7 +4675,6 @@
     <string name="average_speed_skip_stops">Per il conteggio considera anche le fermate</string>
     <string name="average_speed_time_interval_desc">Specifica il periodo per cui sarà misurata la velocità media.</string>
     <string name="average_speed_widget_desc">Mostra la velocità media per il viaggio attuale.</string>
-    <string name="average_speed_skip_stops_desc">Velocità inferiori del %1$s non saranno conteggiate e non impatteranno sulla velocità media.</string>
     <string name="transport_hazmat_yes_desc">Hai bisogno di scegliere la categoria appropriata.</string>
     <string name="import_as_one_track">Importa come un\'unica traccia</string>
     <string name="use_latin_name_if_missing">Usa nomi latini se mancano</string>
