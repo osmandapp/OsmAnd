@@ -3997,7 +3997,6 @@
     <string name="routing_attr_short_way_description">Optimize edilmiş daha kısa rota (enerji tasarrufu)</string>
     <string name="routing_attr_driving_style_description">Daha kısa, daha hızlı veya daha güvenli bir rota elde etmek için sürüş amacını seçin</string>
     <string name="snap_to_road_descr">Geçerli konum simgesi, geçerli navigasyon rotasına tutturulacaktır</string>
-    <string name="map_orientation_threshold_descr">Hız belli bir eşikten düşükse harita görünümünü döndürme</string>
     <string name="restart">Yeniden başlat</string>
     <string name="shared_strings_all_regions">Tüm bölgeler</string>
     <string name="delete_number_files_question">%1$d dosya silinsin mi\?</string>
@@ -4686,7 +4685,6 @@
     <string name="average_speed_time_interval_desc">Ortalama hızın ölçüleceği zaman aralığını belirtin.</string>
     <string name="average_speed_widget_desc">Geçerli sürüşün ortalama hızını gösterir.</string>
     <string name="average_speed_skip_stops">Durmaları dikkate al</string>
-    <string name="average_speed_skip_stops_desc">%1$s değerinden daha düşük hızlar sayılmayacak ve ortalama hızı etkilemeyecektir.</string>
     <string name="map_widget_average_speed">Ortalama hız</string>
     <string name="import_as_one_track">Tek yol olarak içe aktar</string>
     <string name="use_latin_name_if_missing">Eksikse Latince adını kullan</string>
@@ -4726,4 +4724,7 @@
     <string name="goods_delivery_desc_2">Yük teslimatı için kapalı olan yollardan kaçınılacaktır.</string>
     <string name="goods_delivery_desc_3">Yalnızca en az dört tekerleği olan ve ağırlığı 3,5 tonu geçmeyen yük taşıyan araçlar için geçerlidir.</string>
     <string name="routing_attr_goods_restrictions_name">Yük teslimatı</string>
+    <string name="accessibility_2d_view_off">2.5B görünüm kapalı</string>
+    <string name="accessibility_2d_view_on">2.5B görünüm açık</string>
+    <string name="download_complete">İndirme tamamlandı</string>
 </resources>

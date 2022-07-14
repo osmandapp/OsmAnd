@@ -292,7 +292,7 @@ public abstract class OsmandPlugin {
 	/*
 	 * Add menu rows to the map context menu.
 	 */
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
 	}
 
 	/*

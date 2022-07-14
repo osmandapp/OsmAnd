@@ -236,7 +236,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				Context ctx = style.getCtx();
 				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
 				if (arrowsWayStyle.useSpecialArrow()) {
-					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPx(ctx, 2));
+					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPxAuto(ctx, 2));
 					return new int[]{bitmapSize, bitmapSize};
 				} else {
 					float scaleCoef = 1f;
@@ -263,7 +263,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 				float newWidth;
 				if (useSpecialArrow) {
-					newWidth = AndroidUtils.dpToPx(ctx, 12);
+					newWidth = AndroidUtils.dpToPxAuto(ctx, 12);
 				} else {
 					if (scaled) {
 						newWidth = arrowsWayStyle.getWidth(0) == 0 ? 0 : arrowsWayStyle.getWidth(0) / 2f;

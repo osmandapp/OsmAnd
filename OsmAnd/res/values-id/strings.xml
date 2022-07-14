@@ -2925,7 +2925,6 @@
     <string name="track_has_no_altitude">Trek ini tidak berisi data ketinggian.</string>
     <string name="live_update_delete_updates_msg">Hapus semua %s pembaruan langsung\?</string>
     <string name="delete_updates">Hapus pembaruan</string>
-    <string name="map_orientation_threshold_descr">Jangan putar tampilan peta jika kecepatannya kurang dari ambang batas</string>
     <string name="on_pause">Pada jeda</string>
     <string name="snap_to_road_descr">Ikon posisi saat ini akan terkunci ke rute navigasi saat ini</string>
     <string name="temporary_conditional_routing_descr">Gunakan pembatasan jalan yang aktif sekarang pada peta</string>
@@ -3831,7 +3830,6 @@
     <string name="utm_format_descr">OsmAnd menggunakan Standar UTM, yang serupa tetapi tidak identik dengan format UTM NATO.</string>
     <string name="routing_attr_avoid_highway_description">Hindari jalan tol</string>
     <string name="routing_attr_avoid_highway_name">Hindari jalan tol</string>
-    <string name="average_speed_skip_stops_desc">Kecepatan kurang dari %1$s tidak akan dihitung dan mempengaruhi kecepatan rata-rata.</string>
     <string name="average_speed_skip_stops">Perhitungkan pemberhentian</string>
     <string name="lang_sat">Santali</string>
     <string name="time_to_navigation_point_widget_settings_desc">Beralih mode dengan mengetuk widget.</string>
@@ -4062,4 +4060,8 @@
     <string name="recording_can_not_be_played">Tidak dapat memutar rekaman.</string>
     <string name="download_using_mobile_internet">Tidak terhubung ke Wi-Fi. Gunakan koneksi ke Internet saat ini untuk mengunduh\?</string>
     <string name="wait_current_task_finished">Harap tunggu sampai tugas saat ini selesai</string>
+    <string name="save_global_track_interval">Interval pencatatan umum</string>
+    <string name="settings_preset_descr">Tampilan peta dan pengaturan navigasi diingat per profil penggunaan. Tetapkan profil bawaan Anda di sini.</string>
+    <string name="auto_follow_location_enabled">Tampilan peta tengah otomatis sedang digunakan.</string>
+    <string name="animate_routing_route_not_calculated">Harap hitung rute terlebih dahulu</string>
 </resources>

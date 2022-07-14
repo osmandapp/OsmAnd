@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebSettings;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,8 @@ import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+
 public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment implements OnSaveDescriptionCallback {
 
 	public static final String TAG = ReadDescriptionFragment.class.getSimpleName();
@@ -44,12 +48,19 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	protected static final String CONTENT_KEY = "content_key";
 
 	protected String mContent;
+	protected ContentType mContentType;
 
 	protected OsmandApplication app;
 	protected WebViewEx mWebView;
+	protected TextView mPlainTextView;
+
+	protected enum ContentType {
+		PLAIN,
+		HTML
+	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		Bundle args = getArguments();
@@ -68,14 +79,14 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
 		setupImage(view);
-		setupWebView(view);
+		setupContentView(view);
 		return view;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		loadWebViewData();
+		updateContentView();
 	}
 
 	@NonNull
@@ -137,7 +148,13 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		});
 	}
 
-	private void setupWebView(View view) {
+	private void setupContentView(@NonNull View view) {
+		setupWebView(view);
+		setupPlainTextView(view);
+		updateContentView();
+	}
+
+	private void setupWebView(@NonNull View view) {
 		mWebView = view.findViewById(R.id.content);
 		mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 		mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -150,15 +167,34 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		settings.setLoadWithOverviewMode(true);
 		settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		setupWebViewClient(view);
-		loadWebViewData();
+	}
+
+	private void setupPlainTextView(@NonNull View view) {
+		mPlainTextView = view.findViewById(R.id.content_plain);
+		mPlainTextView.setAutoLinkMask(Linkify.ALL);
+		mPlainTextView.setLinksClickable(true);
 	}
 
 	protected void updateContent(@NonNull String content) {
-		mContent = content;
-		loadWebViewData();
+		setContent(content);
+		updateContentView();
 	}
 
-	public void setupWebViewClient(View view) { }
+	private void setContent(@NonNull String content) {
+		mContent = content;
+		mContentType = isHtmlText(mContent) ? ContentType.HTML : ContentType.PLAIN;
+	}
+
+	private void updateContentView() {
+		boolean isHtml = mContentType == ContentType.HTML;
+		if (isHtml) {
+			loadWebViewData();
+		} else {
+			loadPlainText();
+		}
+		mPlainTextView.setVisibility(isHtml ? View.GONE : View.VISIBLE);
+		mWebView.setVisibility(isHtml ? View.VISIBLE : View.GONE);
+	}
 
 	private void loadWebViewData() {
 		String content = mContent;
@@ -169,8 +205,21 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		}
 	}
 
-	private String getColoredContent(String content) {
+	private void loadPlainText() {
+		String content = mContent;
+		if (content != null) {
+			mPlainTextView.setText(content);
+		}
+	}
+
+	public void setupWebViewClient(@NonNull View view) { }
+
+	private String getColoredContent(@NonNull String content) {
 		return "<body style=\"color:white;\">\n" + content + "</body>\n";
+	}
+
+	private boolean isHtmlText(@NonNull String text) {
+		return text.contains("</");
 	}
 
 	public void setupDependentViews(@NonNull View view) {
@@ -206,7 +255,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void readBundle(@NonNull Bundle bundle) {
-		mContent = bundle.getString(CONTENT_KEY);
+		setContent(bundle.getString(CONTENT_KEY));
 	}
 
 	@NonNull

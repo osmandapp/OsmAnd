@@ -283,7 +283,7 @@ public class NavigationService extends Service {
 		}
 	}
 
-	public void updateCarNavigation() {
+	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		TripHelper tripHelper = this.tripHelper;
@@ -297,7 +297,7 @@ public class NavigationService extends Service {
 					if (density == 0) {
 						density = 1;
 					}
-					Trip trip = tripHelper.buildTrip(density);
+					Trip trip = tripHelper.buildTrip(currentLocation, density);
 					navigationManager.updateTrip(trip);
 
 					List<Destination> destinations = null;

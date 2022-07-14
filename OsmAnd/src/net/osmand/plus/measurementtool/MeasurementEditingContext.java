@@ -81,6 +81,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
 	private ApplicationMode appMode;
 	private boolean calculatedTimeSpeed;
+	private boolean checkApproximation = true;
 
 	private SnapToRoadProgressListener progressListener;
 	private RouteCalculationProgress calculationProgress;
@@ -179,6 +180,14 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return calculatedTimeSpeed;
 	}
 
+	public boolean shouldCheckApproximation() {
+		return checkApproximation;
+	}
+
+	public void setShouldCheckApproximation(boolean checkApproximation) {
+		this.checkApproximation = checkApproximation;
+	}
+
 	public List<List<WptPt>> getOriginalSegmentPointsList() {
 		MeasurementModeCommand command = commandManager.getLastCommand();
 		if (command.getType() == APPROXIMATE_POINTS) {
@@ -273,19 +282,25 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isApproximationNeeded() {
+		boolean hasTimestamps = false;
 		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
-		if (!newData) {
+		if (!newData && checkApproximation) {
 			List<WptPt> points = getPoints();
 			hasDefaultPointsOnly = true;
 			for (WptPt point : points) {
 				if (point.hasProfile()) {
 					hasDefaultPointsOnly = false;
+				}
+				if (point.time != 0) {
+					hasTimestamps = true;
+				}
+				if (!hasDefaultPointsOnly && hasTimestamps) {
 					break;
 				}
 			}
 		}
-		return !newData && hasDefaultPointsOnly && getPoints().size() > 2;
+		return !newData && getPoints().size() > 2 && hasDefaultPointsOnly && hasTimestamps;
 	}
 
 	public boolean isAddNewSegmentAllowed() {

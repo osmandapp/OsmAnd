@@ -151,6 +151,7 @@ public class ExternalApiHelper {
 	public static final String PARAM_SEARCH_LON = "search_lon";
 	public static final String PARAM_SHOW_SEARCH_RESULTS = "show_search_results";
 	public static final String PARAM_PROFILE = "profile";
+	public static final String PARAM_ROUTING_DATA = "routing_data";
 
 	public static final String PARAM_VERSION = "version";
 	public static final String PARAM_ETA = "eta";
@@ -467,6 +468,11 @@ public class ExternalApiHelper {
 					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
 					result.putExtras(getRouteDirectionsInfo(app));
 				}
+				List<String> routingData = app.getAnalyticsHelper().getRoutingRecordedData();
+				if (!Algorithms.isEmpty(routingData)) {
+					result.putStringArrayListExtra(PARAM_ROUTING_DATA, new ArrayList<>(routingData));
+				}
+
 				result.putExtra(PARAM_VERSION, VERSION_CODE);
 
 				finish = true;
@@ -642,7 +648,7 @@ public class ExternalApiHelper {
 	}
 
 	public static void saveAndNavigateGpx(MapActivity mapActivity, final GPXFile gpxFile,
-										  final boolean force, final boolean checkLocationPermission) {
+	                                      final boolean force, final boolean checkLocationPermission) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
 		if (Algorithms.isEmpty(gpxFile.path)) {

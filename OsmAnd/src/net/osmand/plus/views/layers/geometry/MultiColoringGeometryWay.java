@@ -344,9 +344,9 @@ public abstract class MultiColoringGeometryWay
 			this.directionArrowColor = directionArrowColor;
 			this.hasPathLine = hasPathLine;
 
-			this.innerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 7);
-			this.outerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 8);
-			this.lineWidthThresholdPix = AndroidUtils.dpToPx(context.getCtx(), LINE_WIDTH_THRESHOLD_DP);
+			this.innerCircleRadius = AndroidUtils.dpToPxAuto(context.getCtx(), 7);
+			this.outerCircleRadius = AndroidUtils.dpToPxAuto(context.getCtx(), 8);
+			this.lineWidthThresholdPix = AndroidUtils.dpToPxAuto(context.getCtx(), LINE_WIDTH_THRESHOLD_DP);
 		}
 
 		@Override

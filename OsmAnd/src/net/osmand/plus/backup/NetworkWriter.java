@@ -70,7 +70,7 @@ public class NetworkWriter extends AbstractWriter {
 
 	@Nullable
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-							   @NonNull String fileName, long uploadTime)
+	                           @NonNull String fileName, long uploadTime)
 			throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
 			return uploadDirWithFiles(itemWriter, fileName, uploadTime);
@@ -136,7 +136,10 @@ public class NetworkWriter extends AbstractWriter {
 	private boolean shouldUseEmptyStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
 		SettingsItem item = itemWriter.getItem();
 		if (item instanceof FileSettingsItem) {
-			if (((FileSettingsItem) item).getSubtype() == FileSubtype.OBF_MAP) {
+			FileSettingsItem settingsItem = (FileSettingsItem) item;
+			FileSubtype subtype = settingsItem.getSubtype();
+			if (subtype == FileSubtype.OBF_MAP || subtype == FileSubtype.ROAD_MAP || subtype == FileSubtype.WIKI_MAP
+					|| subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TILES_MAP) {
 				return backupHelper.isObfMapExistsOnServer(fileName);
 			}
 		}

@@ -1041,7 +1041,7 @@
     <string name="speech_rate">Rýchlosť reči</string>
     <string name="guidance_preferences_descr">Nastavenia navigácie</string>
     <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
-    <string name="app_mode_truck">Kamión</string>
+    <string name="app_mode_truck">Nákladné auto</string>
     <string name="copying_osmand_files_descr">Kopírujem dátové súbory OsmAnd do nového cieľa (%s)…</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd…</string>
     <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa…</string>
@@ -3490,7 +3490,7 @@
 \nVypnite nepoužívané moduly pre skrytie ich ovládacích prvkov. %1$s.</string>
     <string name="ui_customization_short_descr">Položky v úvodnom paneli a kontextovom menu</string>
     <string name="ui_customization">Prispôsobenie používateľského rozhrania</string>
-    <string name="shared_string_drawer">Úvodný panel</string>
+    <string name="shared_string_drawer">Hlavné menu</string>
     <string name="context_menu_actions">Akcie kontextového menu</string>
     <string name="reorder_or_hide_from">Preusporiadajte alebo skryte položky z %1$s.</string>
     <string name="shared_string_divider">Rozdeľovač</string>
@@ -3989,7 +3989,6 @@
     <string name="segments_count">Úsek %1$d</string>
     <string name="temporary_conditional_routing_descr">Použiť cestné obmedzenia, ktoré sú teraz aktívne na mape</string>
     <string name="routing_attr_driving_style_description">Zvoľte účel jazdy pre získanie kratšej, rýchlejšej alebo bezpečnejšej trasy</string>
-    <string name="map_orientation_threshold_descr">Neotáčať mapu, ak je rýchlosť nižšia ako hranica</string>
     <string name="restart">Reštartovať</string>
     <string name="shared_strings_all_regions">Všetky oblasti</string>
     <string name="delete_number_files_question">Zmazať %1$d súborov\?</string>
@@ -4680,7 +4679,6 @@
     <string name="average_speed_skip_stops">Zohľadniť zastavenia</string>
     <string name="map_widget_average_speed">Priemerná rýchlosť</string>
     <string name="lang_sat">Santali</string>
-    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
     <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>
@@ -4721,4 +4719,40 @@
     <string name="live_update_frequency_week_variant">Aktualizácie máp budú kontrolované každý týždeň.</string>
     <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd na základe satelitných snímkov a výškových modelov. Môže sa líšiť od nadmorskej výšky zaznamenanej zariadením a môže byť použitá ako oprava výšky.</string>
     <string name="lang_ckb">Kurdsky Sorání</string>
+    <string name="accessibility_2d_view_on">2.5D zobrazenie Zapnuté</string>
+    <string name="download_complete">Sťahovanie dokončené</string>
+    <string name="accessibility_2d_view_off">2.5D zobrazenie Vypnuté</string>
+    <string name="auto_backup_title">Automatické zálohovanie</string>
+    <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridaný ako ďalší v zozname.</string>
+    <string name="shared_string_duplicate">Duplikát</string>
+    <string name="av_notes_photo_widget_desc">Stlačenie nástroja umožňuje snímať fotografiu.</string>
+    <string name="av_notes_audio_widget_desc">Stlačenie nástroja umožňuje uložiť audio-poznámku.</string>
+    <string name="trip_recording_duration_widget_desc">Zobrazuje čas zaznamenávania stopy, dĺžku práve zaznamenávaného výletu v minútach/hodinách.</string>
+    <string name="trip_recording_distance_widget_desc">Zobrazuje vzdialenosť práve zaznamenávaného výletu.</string>
+    <string name="second_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k druhej mapovej značke.</string>
+    <string name="first_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k prvej mapovej značke.</string>
+    <string name="time_to_destination_widget_desc">Nástroj zobrazuje \"Čas príjazdu\" alebo \"Zostávajúci čas\" k poslednému cieľovému bodu. Čas je stále aktualizovaný počas navigácie a rovná sa času trasy z aktuálnej pozície.</string>
+    <string name="distance_to_intermediate_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k prvému prechodnému bodu. Keď je prechodný bod dosiahnutý, vzdialenosť je aktualizovaná k ďalšiemu prechodnému bodu.</string>
+    <string name="distance_to_destination_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k poslednému cieľovému bodu.</string>
+    <string name="widget_with_dot">Nástroj.</string>
+    <string name="compass_click_desc">Stlačte kompas pre prepnutie režimu orientácie mapy.</string>
+    <string name="compass_desc">Zobrazuje smer k severu.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Farebná schéma hĺbkových vrstevníc</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
+    <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
+    <string name="rendering_attr_depthContourWidth_name">Hrúbka čiary hĺbkových vrstevníc</string>
+    <string name="auto_backup_preference_desc">Prevolene ukladá Android zálohy obľúbených bodov, mapových značiek a nastavení OsmAnd, aby ich mohol obnoviť na novom zariadení alebo po opätovnej inštalácii. Táto záloha je obmedzená na 25 MB.
+\nAk používate OsmAnd Cloud, toto môže viesť k nejasnostiam po opätovnej inštalácii.</string>
+    <string name="av_notes_video_widget_desc">Stlačenie nástroja umožňuje začať video-nahrávku.</string>
+    <string name="trip_recording_uphill_widget_desc">Zobrazuje súčet všetkých výstupov v práve zaznamenávanom výlete.</string>
+    <string name="trip_recording_downhill_widget_desc">Zobrazuje súčet všetkých zostupov v práve zaznamenávanom výlete.</string>
+    <string name="true_bearing_wdiget_desc">Uhol medzi skutočným severom a cieľovým bodom pozorovaný z aktuálnej pozície.</string>
+    <string name="relative_bearing_widget_desc">Zobrazuje uhol medzi vaším smerom pohybu a cieľovým bodom.</string>
+    <string name="time_to_intermediate_widget_desc">Nástroj zobrazuje \"Čas príjazdu\" alebo \"Zostávajúci čas\" k prvému prechodnému bodu. Čas je stále aktualizovaný počas navigácie, a keď je prechodný bod dosiahnutý, čas sa aktualizuje na ďalší prechodný bod.</string>
+    <string name="second_next_turn_widget_desc">Nástroj zobrazuje informácie o druhom nasledujúcom zabočení, ktoré sa zobrazí ak je už v dostatočnej blízkosti.</string>
+    <string name="compass_visible_if_map_rotated_desc">Skrytý ak je sever hore</string>
+    <string name="compass_always_hidden">Vždy skrytý</string>
+    <string name="compass_always_visible">Vždy zobrazený</string>
+    <string name="next_turn_widget_desc">Nástroj zobrazuje informácie o nasledujúcom zabočení s obrázkom manévra a vzdialenosti k nemu.</string>
+    <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
 </resources>

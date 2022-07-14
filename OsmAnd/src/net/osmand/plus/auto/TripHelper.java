@@ -1,27 +1,20 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.util.Pair;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.views.mapwidgets.LanesDrawable;
-import net.osmand.plus.views.mapwidgets.TurnDrawable;
-import net.osmand.router.TurnType;
-import net.osmand.util.Algorithms;
-
-import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,11 +30,23 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 import androidx.core.graphics.drawable.IconCompat;
 
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import net.osmand.Location;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
+
+import java.util.TimeZone;
 
 public class TripHelper {
 
@@ -83,7 +88,7 @@ public class TripHelper {
 	}
 
 	@NonNull
-	public Trip buildTrip(float density) {
+	public Trip buildTrip(Location currentLocation, float density) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		OsmandSettings settings = app.getSettings();
 
@@ -105,12 +110,13 @@ public class TripHelper {
 			Step.Builder stepBuilder = new Step.Builder();
 			Maneuver.Builder turnBuilder;
 			TurnType turnType = null;
+			TurnType nextTurnType = null;
 			boolean leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 			int turnImminent = 0;
 			int nextTurnDistance = 0;
-			RouteCalculationResult.NextDirectionInfo nextDirInfo;
-			RouteCalculationResult.NextDirectionInfo calc = new RouteCalculationResult.NextDirectionInfo();
+			NextDirectionInfo nextDirInfo = null;
+			NextDirectionInfo calc = new NextDirectionInfo();
 			if (deviatedFromRoute) {
 				turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
 				nextTurnDistance = (int) routingHelper.getRouteDeviation();
@@ -121,6 +127,7 @@ public class TripHelper {
 					nextTurnDistance = nextDirInfo.distanceTo;
 					turnImminent = nextDirInfo.imminent;
 				}
+
 			}
 			if (turnType != null) {
 				TurnDrawable drawable = new TurnDrawable(app, false);
@@ -139,7 +146,20 @@ public class TripHelper {
 				turnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
 			}
 			Maneuver maneuver = turnBuilder.build();
-			String cue = turnType != null ? RouteCalculationResult.toString(turnType, app, true) : "";
+			AnnounceTimeDistances atd = app.getRoutingHelper().getVoiceRouter().getAnnounceTimeDistances();
+			if (nextDirInfo != null && atd != null) {
+				float speed = atd.getSpeed(currentLocation);
+				int dist = nextDirInfo.distanceTo;
+				if (atd.isTurnStateActive(speed, dist, STATE_TURN_IN)) {
+					NextDirectionInfo nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
+					if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null &&
+							(atd.isTurnStateActive(speed, nextNextDirInfo.distanceTo, STATE_TURN_NOW)
+							|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
+						nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
+					}
+				}
+			}
+			String cue = turnType != null ? nextTurnsToString(app, turnType, nextTurnType) : "";
 			stepBuilder.setManeuver(maneuver);
 			stepBuilder.setCue(cue);
 
@@ -208,6 +228,67 @@ public class TripHelper {
 			lastStepTravelEstimate = null;
 		}
 		return tripBuilder.build();
+	}
+
+	private boolean shouldKeepLeft(@Nullable TurnType t) {
+		return t != null && (t.getValue() == TurnType.TL || t.getValue() == TurnType.TSHL
+				|| t.getValue() == TurnType.TSLL || t.getValue() == TurnType.TU || t.getValue() == TurnType.KL);
+	}
+
+	private boolean shouldKeepRight(@Nullable TurnType t) {
+		return t != null && (t.getValue() == TurnType.TR || t.getValue() == TurnType.TSHR
+				|| t.getValue() == TurnType.TSLR || t.getValue() == TurnType.TRU || t.getValue() == TurnType.KR);
+	}
+
+	private String nextTurnsToString(@NonNull Context ctx, @NonNull TurnType type, @Nullable TurnType nextTurnType) {
+		if (type.isRoundAbout()) {
+			if (shouldKeepLeft(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_roundabout_kl, type.getExitOut());
+			} else if (shouldKeepRight(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_roundabout_kr, type.getExitOut());
+			} else {
+				return ctx.getString(R.string.route_roundabout_short, type.getExitOut());
+			}
+		} else if (type.getValue() == TurnType.TU || type.getValue() == TurnType.TRU) {
+			if (shouldKeepLeft(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_tu_kl);
+			} else if (shouldKeepRight(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_tu_kr);
+			} else {
+				return ctx.getString(R.string.route_tu);
+			}
+		} else if (type.getValue() == TurnType.C) {
+			return ctx.getString(R.string.route_head);
+		} else if (type.getValue() == TurnType.TSLL) {
+			return ctx.getString(R.string.route_tsll);
+		} else if (type.getValue() == TurnType.TL) {
+			if (shouldKeepLeft(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_tl_kl);
+			} else if (shouldKeepRight(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_tl_kr);
+			} else {
+				return ctx.getString(R.string.route_tl);
+			}
+		} else if (type.getValue() == TurnType.TSHL) {
+			return ctx.getString(R.string.route_tshl);
+		} else if (type.getValue() == TurnType.TSLR) {
+			return ctx.getString(R.string.route_tslr);
+		} else if (type.getValue() == TurnType.TR) {
+			if (shouldKeepLeft(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_tr_kl);
+			} else if (shouldKeepRight(nextTurnType)) {
+				return ctx.getString(R.string.auto_25_chars_route_tr_kr);
+			} else {
+				return ctx.getString(R.string.route_tr);
+			}
+		} else if (type.getValue() == TurnType.TSHR) {
+			return ctx.getString(R.string.route_tshr);
+		} else if (type.getValue() == TurnType.KL) {
+			return ctx.getString(R.string.route_kl);
+		} else if (type.getValue() == TurnType.KR) {
+			return ctx.getString(R.string.route_kr);
+		}
+		return "";
 	}
 
 	@NonNull

@@ -49,6 +49,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -60,7 +62,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener {
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -248,15 +250,18 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private void setupButtonsCard() {
 		buttonsCard.removeAllViews();
 
-		buttonsCard.addView(createButtonWithSwitch(
-				R.drawable.ic_action_compass,
+		CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(selectedAppMode);
+		buttonsCard.addView(createButtonWithDesc(
+				compassVisibility.iconId,
 				getString(R.string.map_widget_compass),
-				settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode),
-				false,
+				compassVisibility.getTitle(app),
+				true,
 				v -> {
-					boolean enabled = settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode);
-					settings.SHOW_COMPASS_ALWAYS.setModeValue(selectedAppMode, !enabled);
-					mapActivity.updateApplicationModeSettings();
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						CompassVisibilityBottomSheetDialogFragment.showInstance(fragmentManager, this, selectedAppMode);
+					}
 				}
 		));
 
@@ -324,6 +329,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public void onActionsUpdated() {
+		setupButtonsCard();
+	}
+
+	@Override
+	public void onCompassVisibilityUpdated(@NonNull CompassVisibility visibility) {
 		setupButtonsCard();
 	}
 
@@ -445,7 +455,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private View createButtonWithDesc(int iconId,
 	                                  @NonNull String title,
-	                                  @NonNull String desc,
+	                                  @Nullable String desc,
 	                                  boolean enabled,
 	                                  OnClickListener listener) {
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
@@ -461,8 +471,10 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		tvTitle.setText(title);
 
 		TextView tvDesc = view.findViewById(R.id.description);
-		tvDesc.setVisibility(View.VISIBLE);
-		tvDesc.setText(desc);
+		if (desc != null) {
+			tvDesc.setText(desc);
+			AndroidUiHelper.updateVisibility(tvDesc, true);
+		}
 
 		setupClickListener(view, listener);
 		setupListItemBackground(view);

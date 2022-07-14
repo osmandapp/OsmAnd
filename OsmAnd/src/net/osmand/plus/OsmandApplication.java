@@ -388,7 +388,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public SavingTrackHelper getSavingTrackHelper() {
 		return savingTrackHelper;
 	}
-	
+
+	public AnalyticsHelper getAnalyticsHelper() {
+		return analyticsHelper;
+	}
+
 	public NotificationHelper getNotificationHelper() {
 		return notificationHelper;
 	}
@@ -471,10 +475,6 @@ public class OsmandApplication extends MultiDexApplication {
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
-			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
-			if (Build.VERSION.SDK_INT < 14) {
-				newConfig.locale = preferredLocale;
-			}
 			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
 			Locale.setDefault(preferredLocale);
 		} else {
@@ -698,7 +698,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		@Override
-		public void uncaughtException(final Thread thread, final Throwable ex) {
+		public void uncaughtException(@NonNull final Thread thread, @NonNull final Throwable ex) {
 			File file = getAppPath(EXCEPTION_PATH);
 			try {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -729,11 +729,7 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					if (Build.VERSION.SDK_INT >= 19) {
-						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					} else {
-						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					}
+					mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
 					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
@@ -996,7 +992,6 @@ public class OsmandApplication extends MultiDexApplication {
 		if (getNavigationService() != null) {
 			intent |= getNavigationService().getUsedBy();
 			getNavigationService().stopSelf();
-			
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -1060,7 +1055,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return userAndroidId;
 	}
 
-	public void logEvent(String event) {
+	public void logEvent(@NonNull String event) {
 		try {
 			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_APP_USAGE);
 		} catch (Exception e) {
@@ -1068,7 +1063,15 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logMapDownloadEvent(String event, IndexItem item) {
+	public void logRoutingEvent(@NonNull String event) {
+		try {
+			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_ROUTING);
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+
+	public void logMapDownloadEvent(@NonNull String event, @NonNull IndexItem item) {
 		try {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName(), AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
@@ -1076,7 +1079,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logMapDownloadEvent(String event, IndexItem item, long time) {
+	public void logMapDownloadEvent(@NonNull String event, @NonNull IndexItem item, long time) {
 		try {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec", AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {

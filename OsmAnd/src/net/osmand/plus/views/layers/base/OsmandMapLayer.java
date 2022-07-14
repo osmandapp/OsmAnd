@@ -359,16 +359,20 @@ public abstract class OsmandMapLayer {
 		return getTextScale(getApplication());
 	}
 
+	public float getOriginalTextScale() {
+		return getOriginalTextScale(getApplication());
+	}
+
 	public static float getTextScale(@NonNull OsmandApplication app) {
 		return app.getOsmandMap().getTextScale();
 	}
 
-	public float getMapDensity() {
-		return getApplication().getOsmandMap().getMapDensity();
+	public static float getOriginalTextScale(@NonNull OsmandApplication app) {
+		return app.getOsmandMap().getOriginalTextScale();
 	}
 
-	public float getCarScaleCoef(boolean textScale) {
-		return getApplication().getOsmandMap().getCarScaleCoef(textScale);
+	public float getMapDensity() {
+		return getApplication().getOsmandMap().getMapDensity();
 	}
 
 	/**OpenGL*/
@@ -818,7 +822,6 @@ public abstract class OsmandMapLayer {
 			shadowPaint = initPaint();
 		}
 
-
 		private Paint initPaint() {
 			Paint paint = new Paint();
 			paint.setStyle(Style.STROKE);
@@ -828,12 +831,14 @@ public abstract class OsmandMapLayer {
 			return paint;
 		}
 
-
 		public boolean updatePaints(OsmandApplication app, DrawSettings settings, RotatedTileBox tileBox) {
 			OsmandRenderer renderer = app.getResourceManager().getRenderer().getRenderer();
 			RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
 			final boolean isNight = settings != null && settings.isNightMode();
-			int hsh = calculateHash(rrs, isNight, tileBox.getDensity());
+			float density;
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			density = mapView.isCarView() ? mapView.getCarViewDensity() : tileBox.getDensity();
+			int hsh = calculateHash(rrs, isNight, density);
 			if (hsh != cachedHash) {
 				cachedHash = hsh;
 				if (rrs != null) {
@@ -841,7 +846,7 @@ public abstract class OsmandMapLayer {
 					req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
 					if (req.searchRenderingAttribute(renderingAttribute)) {
 						RenderingContext rc = new OsmandRenderer.RenderingContext(app);
-						rc.setDensityValue(tileBox.getDensity());
+						rc.setDensityValue(density);
 						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 						renderer.updatePaint(req, paint, 0, false, rc);
 						isPaint2 = renderer.updatePaint(req, paint2, 1, false, rc);
@@ -877,7 +882,6 @@ public abstract class OsmandMapLayer {
 			}
 			return false;
 		}
-
 
 		private void updateDefaultColor(Paint paint, int defaultColor) {
 			if ((paint.getColor() == 0 || paint.getColor() == Color.BLACK) && defaultColor != 0) {

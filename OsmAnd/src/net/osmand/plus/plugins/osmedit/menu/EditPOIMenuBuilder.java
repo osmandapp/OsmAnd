@@ -1,8 +1,11 @@
 package net.osmand.plus.plugins.osmedit.menu;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
@@ -15,8 +18,6 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.Map;
-
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPOIMenuBuilder extends MenuBuilder {
 

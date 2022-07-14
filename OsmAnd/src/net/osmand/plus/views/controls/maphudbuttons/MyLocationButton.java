@@ -32,10 +32,12 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.tiltMapListener = v -> {
 			mapView.setElevationAngle(mapView.getMinAllowedElevationAngle());
+			mapView.setLatLon(mapView.getLatitude(), mapView.getLongitude());
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
 			mapView.setElevationAngle(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
+			mapView.setLatLon(mapView.getLatitude(), mapView.getLongitude());
 			mapView.refreshMap();
 		};
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);

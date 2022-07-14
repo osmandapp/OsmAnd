@@ -4067,7 +4067,6 @@
     <string name="temporary_conditional_routing_descr">استخدم قيود الطريق النشطة الآن على الخريطة</string>
     <string name="routing_attr_short_way_description">طريق أقصر محسن (توفير الطاقة)</string>
     <string name="routing_attr_driving_style_description">حدد غرض القيادة للحصول على مسار أقصر أو أسرع أو أكثر أمانًا</string>
-    <string name="map_orientation_threshold_descr">إذا كانت السرعة أقل من الحد ، لا تقم بتدويرالخريطة</string>
     <string name="restart">اعاده تشغيل</string>
     <string name="shared_strings_all_regions">كل المناطق</string>
     <string name="delete_number_files_question">حذف %1$d ملفات؟</string>
@@ -4755,7 +4754,6 @@
     <string name="average_speed_skip_stops">مراعاة التوقف</string>
     <string name="average_speed_time_interval_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة.</string>
     <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
-    <string name="average_speed_skip_stops_desc">لن يتم احتساب السرعة الأقل من %1$s وستؤثر على متوسط السرعة.</string>
     <string name="map_widget_average_speed">متوسط السرعة</string>
     <string name="import_as_one_track">استيراد كمسار واحد</string>
     <string name="transport_hazmat_yes_desc">تحتاج إلى اختيار الفئة المناسبة.</string>

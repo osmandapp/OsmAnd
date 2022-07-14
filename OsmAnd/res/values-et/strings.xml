@@ -4000,7 +4000,6 @@
     <string name="edit_track">Muuda rada</string>
     <string name="rename_track">Nimeta teekond ümber</string>
     <string name="show_track_on_map">Kuva teekond kaardil</string>
-    <string name="map_orientation_threshold_descr">Ära pööra kaardivaadet, kui kiirus on täpsuse lävest madalam</string>
     <string name="restart">Taaskäivita</string>
     <string name="shared_strings_all_regions">Kõik piirkonnad</string>
     <string name="delete_number_files_question">Kas kustutada %1$d filai\?</string>

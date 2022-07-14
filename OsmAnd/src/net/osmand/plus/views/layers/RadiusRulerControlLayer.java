@@ -9,14 +9,18 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.view.View;
-import android.graphics.PointF;
 
-import net.osmand.core.android.MapRendererView;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -32,18 +36,13 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
@@ -55,7 +54,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 
 	private OsmandApplication app;
+	private MapWidgetRegistry widgetRegistry;
 	private View rightWidgetsPanel;
+	private View leftWidgetsPanel;
 
 	private TextSide textSide;
 	private int maxRadiusInDp;
@@ -102,6 +103,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		super.initLayer(view);
 
 		app = getApplication();
+		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		cacheMetricSystem = app.getSettings().METRIC_SYSTEM.get();
 		cacheMapDensity = getMapDensity();
 		cacheDistances = new ArrayList<>();
@@ -144,8 +146,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
+			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 		} else {
 			rightWidgetsPanel = null;
+			leftWidgetsPanel = null;
 		}
 	}
 
@@ -159,14 +163,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings drawSettings) {
-		if (rulerModeOn() && !tb.isZoomAnimated()) {
+		if (isRulerWidgetOn() && !tb.isZoomAnimated()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
 			circleAttrs.updatePaints(app, drawSettings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
-			final QuadPoint center = getCenterPoint(tb);
+			final QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
 			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
@@ -197,10 +201,30 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean rulerModeOn() {
-		MapWidgetRegistry mapWidgetRegistry = getApplication().getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		return mapWidgetRegistry.isWidgetVisible(RADIUS_RULER.id)
-				&& (rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE);
+	public boolean isRulerWidgetOn() {
+		boolean isWidgetVisible = false;
+		List<MapWidgetInfo> widgets = widgetRegistry.getWidgetInfoForType(RADIUS_RULER);
+		for (MapWidgetInfo widget : widgets) {
+			if (WidgetsPanel.RIGHT == widget.widgetPanel) {
+				isWidgetVisible = isWidgetVisible(widget) && isRightPanelVisible();
+			} else {
+				isWidgetVisible = isWidgetVisible(widget) && isLeftPanelVisible();
+			}
+			if (isWidgetVisible) break;
+		}
+		return isWidgetVisible;
+	}
+
+	private boolean isWidgetVisible(@NonNull MapWidgetInfo widgetInfo) {
+		return widgetRegistry.isWidgetVisible(widgetInfo);
+	}
+
+	private boolean isLeftPanelVisible() {
+		return leftWidgetsPanel == null || leftWidgetsPanel.getVisibility() == View.VISIBLE;
+	}
+
+	private boolean isRightPanelVisible() {
+		return rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE;
 	}
 
 	private int getCompassCircleIndex(RotatedTileBox tb, QuadPoint center) {
@@ -346,7 +370,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				continue;
 			}
 
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 			points.add(new QuadPoint(screenPoint.x, screenPoint.y));
 		}
 		if (points.size() > 0) {
@@ -438,7 +462,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 								   QuadPoint center, RenderingLineAttributes attrs) {
 		float radiusLength = radius * circleNumber;
 		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
-		QuadPoint centerPixels = getCenterPoint(tb);
+		QuadPoint centerPixels = tb.getCenterPixelPoint();
 
 		drawCircle(canvas, tb, circleNumber, center, attrs);
 		drawCompassCents(centerPixels, innerRadiusLength, radiusLength, tb, canvas, attrs);
@@ -513,7 +537,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 			if (arrowArc.isEmpty()) {
 				arrowArc.moveTo(screenPoint.x, screenPoint.y);
 			} else {
@@ -566,28 +590,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		canvas.drawPath(redCompassLines, redLinesPaint);
 	}
 
-	private QuadPoint getCenterPoint(RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			PointF centerPixels;
-			if (tb.isCenterShifted()) {
-				PointI windowSize = getMapRenderer().getState().getWindowSize();
-				int sx = windowSize.getX() / 2;
-				int sy = windowSize.getY() / 2;
-				PointI center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
-				if (center31 != null) {
-					centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
-					return new QuadPoint(centerPixels.x, centerPixels.y);
-				}
-			}
-
-			PointI center31 = getMapRenderer().getState().getTarget31();
-			centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
-			return new QuadPoint(centerPixels.x, centerPixels.y);
-		} else {
-			return tb.getCenterPixelPoint();
-		}
-	}
-
 	private LatLon getCenterLatLon(RotatedTileBox tb) {
 		if (hasMapRenderer()) {
 			PointI center31;
@@ -610,7 +612,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private PointF screenPointFromPoint(double x, double y, boolean compensateMapRotation, RotatedTileBox tb) {
 		if (hasMapRenderer()) {
-			QuadPoint circleCenterPoint = getCenterPoint(tb);
+			QuadPoint circleCenterPoint = tb.getCenterPixelPoint();
 			double dX = circleCenterPoint.x - x;
 			double dY = circleCenterPoint.y - y;
 			double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
@@ -628,9 +630,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 	}
 
-	private PointF latLonToScreenPoint(LatLon latLon, RotatedTileBox tb) {
-		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
-	}
 
 	private LatLon point31ToLatLon(PointI point31) {
 		double lon = MapUtils.get31LongitudeX(point31.getX());

@@ -7,8 +7,7 @@ import android.view.View;
 @SuppressLint("ViewConstructor")
 public class CarSurfaceView extends View {
 
-	public static final float TEXT_SCALE_DIVIDER_160 = 0.5f;
-	public static final float MAP_DENSITY_DIVIDER_160 = 0.5f;
+	private static final float CAR_DENSITY_SCALE = 1.325f;
 
 	private final SurfaceRenderer surfaceRenderer;
 	private int dpi;
@@ -35,7 +34,7 @@ public class CarSurfaceView extends View {
 	}
 
 	public float getDensity() {
-		return density;
+		return density * CAR_DENSITY_SCALE;
 	}
 
 	@Override

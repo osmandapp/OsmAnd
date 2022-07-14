@@ -69,12 +69,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mBitmapPaint.setAntiAlias(true);
 		mBitmapPaint.setFilterBitmap(true);
 
-		float sp = Resources.getSystem().getDisplayMetrics().scaledDensity;
 		mTextPaint = new Paint();
-		mTextPaint.setTextSize(sp * 18);
 		mTextPaint.setTextAlign(Align.CENTER);
 		mTextPaint.setAntiAlias(true);
 
+		updateTextSize();
 		updateBitmaps(true);
 	}
 
@@ -201,13 +200,22 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		OsmandApplication app = getApplication();
 		float textScale = getTextScale();
 		boolean carView = app.getOsmandMap().getMapView().isCarView();
-		if (this.textScale != textScale || this.carView != carView || forceUpdate) {
+		boolean carViewChanged = this.carView != carView;
+		if (this.textScale != textScale || carViewChanged || forceUpdate) {
 			this.textScale = textScale;
 			this.carView = carView;
 			recreateBitmaps();
 			pointSizePx = Math.sqrt(mTargetPoint.getWidth() * mTargetPoint.getWidth()
 					+ mTargetPoint.getHeight() * mTargetPoint.getHeight());
+			if (carViewChanged) {
+				updateTextSize();
+			}
 		}
+	}
+
+	private void updateTextSize() {
+		mTextPaint.setTextSize(18f * Resources.getSystem().getDisplayMetrics().scaledDensity
+				* getApplication().getOsmandMap().getCarDensityScaleCoef());
 	}
 
 	private void recreateBitmaps() {
