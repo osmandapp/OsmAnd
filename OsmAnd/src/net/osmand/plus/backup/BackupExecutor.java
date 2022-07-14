@@ -8,9 +8,11 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -19,9 +21,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BackupExecutor extends ThreadPoolExecutor {
 
 	private final OsmandApplication app;
-	private List<BackupExecutorListener> listeners = new ArrayList<>();
+	private List<BackupExecutorListener> listeners = new CopyOnWriteArrayList<>();
 	private final AtomicInteger aState = new AtomicInteger(State.IDLE.ordinal());
-	private final List<BackupCommand> activeCommands = Collections.synchronizedList(new ArrayList<>());
+	private final List<BackupCommand> activeCommands = new CopyOnWriteArrayList<>();
 
 	public enum State {
 		IDLE,
@@ -52,15 +54,11 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	}
 
 	public void addListener(@NonNull BackupExecutorListener listener) {
-		List<BackupExecutorListener> listeners = new ArrayList<>(this.listeners);
 		listeners.add(listener);
-		this.listeners = listeners;
 	}
 
 	public void removeListener(@NonNull BackupExecutorListener listener) {
-		List<BackupExecutorListener> listeners = new ArrayList<>(this.listeners);
 		listeners.remove(listener);
-		this.listeners = listeners;
 	}
 
 	public void runCommand(@NonNull BackupCommand command) {
@@ -118,12 +116,12 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	}
 
 	private void updateActiveCommands() {
-		Iterator<BackupCommand> it = activeCommands.iterator();
-		while (it.hasNext()) {
-			BackupCommand command = it.next();
+		Set<BackupCommand> remove = new HashSet<>();
+		for (BackupCommand command : activeCommands) {
 			if (command.getStatus() == AsyncTask.Status.FINISHED) {
-				it.remove();
+				remove.add(command);
 			}
 		}
+		activeCommands.removeAll(remove);
 	}
 }

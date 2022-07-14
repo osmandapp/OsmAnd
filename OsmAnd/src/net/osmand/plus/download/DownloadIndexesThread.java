@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
@@ -52,7 +53,7 @@ public class DownloadIndexesThread {
 
 	private final DatabaseHelper dbHelper;
 	private final DownloadFileHelper downloadFileHelper;
-	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
+	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = new CopyOnWriteArrayList<>();
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
 	private DownloadEvents uiActivity = null;

@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PoiFiltersHelper {
 
@@ -199,18 +200,12 @@ public class PoiFiltersHelper {
 			AbstractPoiType tp = application.getPoiTypes().getAnyPoiTypeByKey(typeId);
 			if (tp != null) {
 				PoiUIFilter lf = new PoiUIFilter(tp, application, "");
-				ArrayList<PoiUIFilter> copy = cacheTopStandardFilters != null ? new ArrayList<>(cacheTopStandardFilters) : new ArrayList<PoiUIFilter>();
-				copy.add(lf);
-				cacheTopStandardFilters = copy;
-				return lf;
+				return addTopPoiFilter(lf);
 			}
 			AbstractPoiType lt = application.getPoiTypes().getAnyPoiAdditionalTypeByKey(typeId);
 			if (lt != null) {
 				PoiUIFilter lf = new PoiUIFilter(lt, application, "");
-				ArrayList<PoiUIFilter> copy = cacheTopStandardFilters != null ? new ArrayList<>(cacheTopStandardFilters) : new ArrayList<PoiUIFilter>();
-				copy.add(lf);
-				cacheTopStandardFilters = copy;
-				return lf;
+				return addTopPoiFilter(lf);
 			}
 		}
 		return null;
@@ -246,26 +241,28 @@ public class PoiFiltersHelper {
 		return result;
 	}
 
+	@NonNull
 	public List<PoiUIFilter> getTopDefinedPoiFilters() {
 		return getTopDefinedPoiFilters(false);
 	}
 
+	@NonNull
 	public List<PoiUIFilter> getTopDefinedPoiFilters(boolean includeDeleted) {
-		List<PoiUIFilter> top = this.cacheTopStandardFilters;
-		if (top == null) {
+		if (cacheTopStandardFilters == null) {
 			// user defined
-			top = new ArrayList<>(getUserDefinedPoiFilters(true));
+			cacheTopStandardFilters = new CopyOnWriteArrayList<>(getUserDefinedPoiFilters(true));
 			// default
+			List<PoiUIFilter> filters = new ArrayList<>();
 			MapPoiTypes poiTypes = application.getPoiTypes();
 			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
-				top.add(f);
+				filters.add(f);
 			}
-			OsmandPlugin.registerCustomPoiFilters(top);
-			this.cacheTopStandardFilters = top;
+			cacheTopStandardFilters.addAll(filters);
+			OsmandPlugin.registerCustomPoiFilters(cacheTopStandardFilters);
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
-		for (PoiUIFilter filter : top) {
+		for (PoiUIFilter filter : cacheTopStandardFilters) {
 			if (includeDeleted || !filter.isDeleted()) {
 				result.add(filter);
 			}
@@ -418,24 +415,23 @@ public class PoiFiltersHelper {
 		return res;
 	}
 
-	public boolean createPoiFilter(PoiUIFilter filter, boolean forHistory) {
+	public boolean createPoiFilter(@NonNull PoiUIFilter filter, boolean forHistory) {
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper == null) {
 			return false;
 		}
 		helper.deleteFilter(helper.getWritableDatabase(), filter, true);
-		Iterator<PoiUIFilter> it = cacheTopStandardFilters.iterator();
-		while (it.hasNext()) {
-			if (it.next().getFilterId().equals(filter.getFilterId())) {
-				it.remove();
+		Set<PoiUIFilter> remove = new HashSet<>();
+		for (PoiUIFilter f : cacheTopStandardFilters) {
+			if (f.getFilterId().equals(filter.getFilterId())) {
+				remove.add(f);
 			}
 		}
+		cacheTopStandardFilters.removeAll(remove);
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
-			ArrayList<PoiUIFilter> copy = cacheTopStandardFilters != null ? new ArrayList<>(cacheTopStandardFilters) : new ArrayList<PoiUIFilter>();
-			copy.add(filter);
-			Collections.sort(copy);
-			cacheTopStandardFilters = copy;
+			addTopPoiFilter(filter);
+			Collections.sort(cacheTopStandardFilters);
 		}
 		helper.close();
 		return res;
@@ -492,6 +488,23 @@ public class PoiFiltersHelper {
 		selectedPoiFilters.remove(filter);
 		saveSelectedPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
+	}
+
+	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
+		checkTopStandardFiltersCache();
+		cacheTopStandardFilters.add(filter);
+		return filter;
+	}
+
+	private void removeTopPoiFilter(@NonNull PoiUIFilter filter) {
+		checkTopStandardFiltersCache();
+		cacheTopStandardFilters.remove(filter);
+	}
+
+	private void checkTopStandardFiltersCache() {
+		if (cacheTopStandardFilters == null) {
+			cacheTopStandardFilters = new CopyOnWriteArrayList<>();
+		}
 	}
 
 	public boolean isShowingAnyPoi(PoiUIFilter ... filtersToExclude) {

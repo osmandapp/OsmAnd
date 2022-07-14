@@ -573,21 +573,15 @@ public class FavouritesHelper {
 	}
 
 	private void addFavouritePoint(@NonNull FavouritePoint point) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
-		favouritePoints.add(point);
-		this.cachedFavoritePoints = favouritePoints;
+		cachedFavoritePoints.add(point);
 	}
 
 	private void removeFavouritePoint(@NonNull FavouritePoint point) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
-		favouritePoints.remove(point);
-		this.cachedFavoritePoints = favouritePoints;
+		cachedFavoritePoints.remove(point);
 	}
 
 	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
-		favouritePoints.removeAll(points);
-		this.cachedFavoritePoints = favouritePoints;
+		cachedFavoritePoints.removeAll(points);
 	}
 
 	public void recalculateCachedFavPoints() {
