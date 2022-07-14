@@ -403,11 +403,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (!isMapLinkedToLocation()) {
 				setMapLinkedToLocation(true);
 				if (location != null) {
-					AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-					int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom : mapView.getZoom();
-					movingToMyLocation = true;
-					thread.startMoving(location.getLatitude(), location.getLongitude(),
-							fZoom, false, () -> movingToMyLocation = false);
+					animateBackToLocation(location, zoom, forceZoom);
 				}
 				mapView.refreshMap();
 			}
@@ -421,6 +417,21 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 			}
 		}
+	}
+
+	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
+		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
+		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get())
+				? zoom
+				: mapView.getZoom();
+		movingToMyLocation = true;
+		Runnable startAnimationCallback = () -> {
+			if (!isMapLinkedToLocation) {
+				setMapLinkedToLocation(true);
+			}
+		};
+		thread.startMoving(location.getLatitude(), location.getLongitude(),
+				fZoom, false, startAnimationCallback, () -> movingToMyLocation = false);
 	}
 
 	private void backToLocationWithDelay(int delay) {
