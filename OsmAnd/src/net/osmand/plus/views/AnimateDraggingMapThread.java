@@ -1,22 +1,24 @@
 package net.osmand.plus.views;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.SystemClock;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
-import androidx.core.util.Pair;
-
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 /**
  * Thread for animated dragging.
@@ -33,9 +35,11 @@ public class AnimateDraggingMapThread {
 	private final static float NAV_ANIMATION_TIME = 1000f;
 	private final static int DEFAULT_SLEEP_TO_REDRAW = 15;
 
+	private final OsmandApplication app;
+	private final OsmandMapTileView tileView;
+
 	private volatile boolean stopped;
 	private volatile Thread currentThread = null;
-	private final OsmandMapTileView tileView;
 
 	private float targetRotate = -720;
 	private double targetLatitude = 0;
@@ -46,7 +50,8 @@ public class AnimateDraggingMapThread {
 	private boolean isAnimatingZoom;
 	private boolean isAnimatingMapMove;
 
-	public AnimateDraggingMapThread(OsmandMapTileView tileView) {
+	public AnimateDraggingMapThread(@NonNull OsmandMapTileView tileView) {
+		this.app = tileView.getApplication();
 		this.tileView = tileView;
 	}
 
@@ -102,7 +107,7 @@ public class AnimateDraggingMapThread {
 		}
 	}
 
-	public synchronized void startThreadAnimating(final Runnable runnable) {
+	public synchronized void startThreadAnimating(@NonNull Runnable runnable) {
 		stopAnimatingSync();
 		stopped = false;
 		final Thread t = new Thread(() -> {
@@ -187,14 +192,18 @@ public class AnimateDraggingMapThread {
 		});
 	}
 
-	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final boolean notifyListener) {
-		startMoving(finalLat, finalLon, endZoom, notifyListener, null);
+	public void startMoving(double finalLat, double finalLon, int endZoom, boolean notifyListener) {
+		startMoving(finalLat, finalLon, endZoom, notifyListener, null, null);
 	}
 
-	public void startMoving(final double finalLat, final double finalLon, final int endZoom,
-							final boolean notifyListener, final Runnable finishAnimationCallback) {
+	public void startMoving(double finalLat, double finalLon, int endZoom, boolean notifyListener,
+	                        @Nullable Runnable startAnimationCallback, @Nullable Runnable finishAnimationCallback) {
 		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
+
+		if (finishAnimationCallback != null) {
+			app.runInUIThread(startAnimationCallback);
+		}
 
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
 		double startLat = rb.getLatitude();
@@ -210,7 +219,7 @@ public class AnimateDraggingMapThread {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(endZoom, 0, notifyListener);
 			if (finishAnimationCallback != null) {
-				tileView.getApplication().runInUIThread(finishAnimationCallback);
+				app.runInUIThread(finishAnimationCallback);
 			}
 			return;
 		}
@@ -243,7 +252,7 @@ public class AnimateDraggingMapThread {
 					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAnimationCallback);
 				}
 			} else if (finishAnimationCallback != null) {
-				tileView.getApplication().runInUIThread(finishAnimationCallback);
+				app.runInUIThread(finishAnimationCallback);
 			}
 			if (!stopped) {
 				tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
@@ -338,7 +347,7 @@ public class AnimateDraggingMapThread {
 			}
 		}
 		if (finishAnimationCallback != null) {
-			tileView.getApplication().runInUIThread(finishAnimationCallback);
+			app.runInUIThread(finishAnimationCallback);
 		}
 	}
 
@@ -367,7 +376,7 @@ public class AnimateDraggingMapThread {
 			}
 		}
 		if (finishAnimationCallback != null) {
-			tileView.getApplication().runInUIThread(finishAnimationCallback);
+			app.runInUIThread(finishAnimationCallback);
 		}
 	}
 
@@ -522,5 +531,3 @@ public class AnimateDraggingMapThread {
 	}
 
 }
-
-
