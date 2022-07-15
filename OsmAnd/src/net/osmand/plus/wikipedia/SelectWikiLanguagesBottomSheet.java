@@ -267,10 +267,10 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private static class WikiLanguageItem implements Comparable<WikiLanguageItem> {
-		private String locale;
-		private String title;
+		private final String locale;
+		private final String title;
 		private boolean checked;
-		private boolean topDefined;
+		private final boolean topDefined;
 
 		public WikiLanguageItem(String locale, String title, boolean checked, boolean topDefined) {
 			this.locale = locale;

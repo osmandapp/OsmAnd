@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ListStringPreference extends StringPreference {
 
-	private String delimiter;
+	private final String delimiter;
 
 	public ListStringPreference(OsmandSettings osmandSettings, String id, String defaultValue, String delimiter) {
 		super(osmandSettings, id, defaultValue);

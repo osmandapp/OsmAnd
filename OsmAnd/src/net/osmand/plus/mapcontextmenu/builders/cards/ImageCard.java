@@ -80,7 +80,7 @@ public abstract class ImageCard extends AbstractCard {
 	protected int buttonColor;
 	protected int buttonTextColor;
 
-	private int defaultCardLayoutId = R.layout.context_menu_card_image;
+	private final int defaultCardLayoutId = R.layout.context_menu_card_image;
 
 	protected Drawable icon;
 	protected Drawable buttonIcon;
@@ -396,11 +396,11 @@ public abstract class ImageCard extends AbstractCard {
 
 	public static class GetImageCardsTask extends AsyncTask<Void, Void, List<ImageCard>> {
 
-		private MapActivity mapActivity;
-		private OsmandApplication app;
-		private LatLon latLon;
-		private Map<String, String> params;
-		private GetImageCardsListener listener;
+		private final MapActivity mapActivity;
+		private final OsmandApplication app;
+		private final LatLon latLon;
+		private final Map<String, String> params;
+		private final GetImageCardsListener listener;
 		private List<ImageCard> result;
 		private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 

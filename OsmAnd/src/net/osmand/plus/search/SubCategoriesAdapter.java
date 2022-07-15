@@ -25,16 +25,16 @@ import java.util.List;
 
 public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-	private SubCategoryClickListener listener;
-	private boolean nightMode;
-	private boolean showCategory;
-	private int activeColorRes;
-	private int secondaryColorRes;
-	private int activeIconColorRes;
+	private final OsmandApplication app;
+	private final UiUtilities uiUtilities;
+	private final SubCategoryClickListener listener;
+	private final boolean nightMode;
+	private final boolean showCategory;
+	private final int activeColorRes;
+	private final int secondaryColorRes;
+	private final int activeIconColorRes;
 	private List<PoiType> selectedItems;
-	private List<PoiType> items;
+	private final List<PoiType> items;
 
 	public SubCategoriesAdapter(@NonNull OsmandApplication app,
 								@NonNull List<PoiType> items,

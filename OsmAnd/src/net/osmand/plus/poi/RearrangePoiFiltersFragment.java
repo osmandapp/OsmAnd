@@ -66,7 +66,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	private boolean usedOnMap;
 	private OnApplyPoiFiltersState resultCallback;
 
-	private List<ListItem> items = new ArrayList<>();
+	private final List<ListItem> items = new ArrayList<>();
 	private EditPoiFiltersAdapter adapter;
 	private boolean orderModified;
 	private boolean activationModified;
@@ -76,8 +76,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	private ApplicationMode appMode;
 	private LinearLayout buttonsContainer;
 
-	private HashMap<String, Integer> poiFiltersOrders = new HashMap<>();
-	private List<String> availableFiltersKeys = new ArrayList<>();
+	private final HashMap<String, Integer> poiFiltersOrders = new HashMap<>();
+	private final List<String> availableFiltersKeys = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -527,9 +527,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	}
 
 	protected class ControlButton {
-		private String title;
-		private int iconRes;
-		private View.OnClickListener listener;
+		private final String title;
+		private final int iconRes;
+		private final View.OnClickListener listener;
 
 		public ControlButton(String title, int iconRes, View.OnClickListener listener) {
 			this.title = title;
@@ -560,12 +560,12 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	private class EditPoiFiltersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 			implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
-		private OsmandApplication app;
-		private UiUtilities uiUtilities;
-		private PoiFiltersHelper poiHelper;
+		private final OsmandApplication app;
+		private final UiUtilities uiUtilities;
+		private final PoiFiltersHelper poiHelper;
 
 		private List<ListItem> items = new ArrayList<>();
-		private boolean nightMode;
+		private final boolean nightMode;
 		private PoiAdapterListener listener;
 
 		public EditPoiFiltersAdapter(OsmandApplication app, boolean nightMode) {
@@ -757,8 +757,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		}
 
 		private class HeaderViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
-			private TextView tvTitle;
-			private TextView tvDescription;
+			private final TextView tvTitle;
+			private final TextView tvDescription;
 
 			public HeaderViewHolder(View itemView) {
 				super(itemView);
@@ -775,9 +775,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		private class ButtonViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-			private View buttonView;
-			private ImageView icon;
-			private TextView title;
+			private final View buttonView;
+			private final ImageView icon;
+			private final TextView title;
 
 			public ButtonViewHolder(View itemView) {
 				super(itemView);
@@ -814,11 +814,11 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		private class PoiViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-			private TextView title;
-			private ImageView icon;
-			private ImageView actionIcon;
-			private ImageView actionDelete;
-			private ImageView moveIcon;
+			private final TextView title;
+			private final ImageView icon;
+			private final ImageView actionIcon;
+			private final ImageView actionDelete;
+			private final ImageView moveIcon;
 
 			public PoiViewHolder(View itemView) {
 				super(itemView);
@@ -845,7 +845,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		private class DescriptionViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-			private TextView tvDescription;
+			private final TextView tvDescription;
 
 			public DescriptionViewHolder(View itemView) {
 				super(itemView);

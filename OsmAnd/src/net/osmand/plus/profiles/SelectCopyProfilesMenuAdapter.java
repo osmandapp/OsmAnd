@@ -23,12 +23,12 @@ import java.util.List;
 
 public class SelectCopyProfilesMenuAdapter extends AbstractProfileMenuAdapter<SelectCopyProfilesMenuAdapter.SelectProfileViewHolder> {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	private ApplicationMode selectedAppMode;
-	private List<ApplicationMode> items = new ArrayList<>();
+	private final List<ApplicationMode> items = new ArrayList<>();
 
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	public SelectCopyProfilesMenuAdapter(List<ApplicationMode> items, @NonNull OsmandApplication app,
 	                                     boolean nightMode, @Nullable ApplicationMode selectedAppMode) {

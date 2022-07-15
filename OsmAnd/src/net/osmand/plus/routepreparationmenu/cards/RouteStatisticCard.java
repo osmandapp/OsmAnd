@@ -39,13 +39,13 @@ public class RouteStatisticCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;
 
-	private GPXFile gpx;
-	private GpxDisplayItem gpxItem;
+	private final GPXFile gpx;
+	private final GpxDisplayItem gpxItem;
 	@Nullable
 	private OrderedLineDataSet slopeDataSet;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
-	private OnClickListener onAnalyseClickListener;
+	private final OnClickListener onAnalyseClickListener;
 	private CommonChartAdapter graphAdapter;
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,

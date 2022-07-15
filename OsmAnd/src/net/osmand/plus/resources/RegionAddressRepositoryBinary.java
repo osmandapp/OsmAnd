@@ -38,15 +38,15 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private static final Log log = PlatformUtil.getLog(RegionAddressRepositoryBinary.class);
 
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
-	private int POSTCODE_MIN_QUERY_LENGTH = 2;
-	private int ZOOM_QTREE = 10;
-	private QuadTree<City> citiesQtree = new QuadTree<City>(new QuadRect(0, 0, 1 << (ZOOM_QTREE + 1),
+	private final int POSTCODE_MIN_QUERY_LENGTH = 2;
+	private final int ZOOM_QTREE = 10;
+	private final QuadTree<City> citiesQtree = new QuadTree<City>(new QuadRect(0, 0, 1 << (ZOOM_QTREE + 1),
 			1 << (ZOOM_QTREE + 1)), 8, 0.55f);
 	private final Map<String, City> postCodes;
 	private final Collator collator;
-	private OsmandPreference<String> langSetting;
-	private OsmandPreference<Boolean> transliterateSetting;
-	private BinaryMapReaderResource resource;
+	private final OsmandPreference<String> langSetting;
+	private final OsmandPreference<Boolean> transliterateSetting;
+	private final BinaryMapReaderResource resource;
 
 
 	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapReaderResource resource ) {
@@ -191,7 +191,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private List<City> fillWithCities(String name, final ResultMatcher<City> resultMatcher, final List<Integer> typeFilter) throws IOException {
 		List<City> result = new ArrayList<City>();
 		ResultMatcher<MapObject> matcher = new ResultMatcher<MapObject>() {
-			List<City> cache = new ArrayList<City>();
+			final List<City> cache = new ArrayList<City>();
 
 			@Override
 			public boolean publish(MapObject o) {

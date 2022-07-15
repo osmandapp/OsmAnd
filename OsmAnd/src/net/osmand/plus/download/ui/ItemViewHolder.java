@@ -72,8 +72,8 @@ public class ItemViewHolder {
 
 	protected final DownloadActivity context;
 
-	private int textColorPrimary;
-	private int textColorSecondary;
+	private final int textColorPrimary;
+	private final int textColorSecondary;
 
 	boolean showTypeInDesc;
 	boolean showTypeInName;
@@ -82,7 +82,7 @@ public class ItemViewHolder {
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
 
-	private DateFormat dateFormat;
+	private final DateFormat dateFormat;
 
 
 	private enum RightButtonAction {

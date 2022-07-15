@@ -37,7 +37,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private List<OsmandMapListener> listeners = new CopyOnWriteArrayList<>();
+	private final List<OsmandMapListener> listeners = new CopyOnWriteArrayList<>();
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);

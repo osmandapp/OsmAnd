@@ -14,7 +14,7 @@ public class RouteDirectionInfo {
 	// location where direction end. useful for roundabouts.
 	public int routeEndPointOffset = 0;
 	// Type of action to take
-	private TurnType turnType;
+	private final TurnType turnType;
 	// Description of the turn and route after
 	private String descriptionRoute = ""; //$NON-NLS-1$
 	// Speed after the action till next turn

@@ -98,7 +98,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private final boolean nightMode;
 	private boolean chartClicked;
-	private boolean showEmptyAltitudeTab;
+	private final boolean showEmptyAltitudeTab;
 	private boolean hideStatistics;
 	private boolean hideJoinGapsBottomButtons;
 	private int chartHMargin = 0;

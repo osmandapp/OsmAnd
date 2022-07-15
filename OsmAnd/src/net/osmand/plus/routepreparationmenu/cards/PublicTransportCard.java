@@ -42,12 +42,12 @@ public class PublicTransportCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int SHOW_BUTTON_INDEX = 1;
 
-	private LatLon startLocation;
-	private LatLon endLocation;
-	private TransportRouteResult routeResult;
+	private final LatLon startLocation;
+	private final LatLon endLocation;
+	private final TransportRouteResult routeResult;
 	private PublicTransportCardListener transportCardListener;
 
-	private int routeId;
+	private final int routeId;
 	private String showButtonCustomTitle;
 	private boolean routeInfoVisible = true;
 	private boolean routeButtonsVisible = true;

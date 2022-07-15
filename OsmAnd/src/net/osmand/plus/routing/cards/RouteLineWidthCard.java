@@ -41,9 +41,9 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 	private static final int CUSTOM_WIDTH_MIN = 1;
 	private static final int CUSTOM_WIDTH_MAX = 36;
 
-	private PreviewRouteLineInfo previewRouteLineInfo;
-	private OnNeedScrollListener onNeedScrollListener;
-	private HeaderUiAdapter headerUiAdapter;
+	private final PreviewRouteLineInfo previewRouteLineInfo;
+	private final OnNeedScrollListener onNeedScrollListener;
+	private final HeaderUiAdapter headerUiAdapter;
 
 	private WidthMode selectedMode;
 

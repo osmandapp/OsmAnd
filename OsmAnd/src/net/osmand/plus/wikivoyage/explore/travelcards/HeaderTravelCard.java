@@ -15,7 +15,7 @@ public class HeaderTravelCard extends BaseTravelCard {
 	public static final int TYPE = 4;
 
 	private int articleItemCount;
-	private String title;
+	private final String title;
 
 	public HeaderTravelCard(OsmandApplication app, boolean nightMode, String title) {
 		super(app, nightMode);

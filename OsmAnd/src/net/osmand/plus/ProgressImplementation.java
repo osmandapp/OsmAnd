@@ -21,9 +21,9 @@ public class ProgressImplementation implements IProgress {
 	private int work;
 	private String message = ""; //$NON-NLS-1$
 	
-	private Handler mViewUpdateHandler;
+	private final Handler mViewUpdateHandler;
 	private Thread run;
-	private Context context;
+	private final Context context;
 	private ProgressDialog dialog = null;
 	private ProgressBar progressBar = null;
 	private Runnable finishRunnable = null;

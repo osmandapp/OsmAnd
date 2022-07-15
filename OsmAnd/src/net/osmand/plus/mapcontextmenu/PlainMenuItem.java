@@ -4,14 +4,14 @@ import android.view.View;
 
 public class PlainMenuItem {
 
-	private int iconId;
-	private String buttonText;
-	private String text;
-	private boolean needLinks;
-	private boolean url;
-	private boolean collapsable;
-	private CollapsableView collapsableView;
-	private View.OnClickListener onClickListener;
+	private final int iconId;
+	private final String buttonText;
+	private final String text;
+	private final boolean needLinks;
+	private final boolean url;
+	private final boolean collapsable;
+	private final CollapsableView collapsableView;
+	private final View.OnClickListener onClickListener;
 
 	public PlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean url,
 	                     boolean collapsable, CollapsableView collapsableView,

@@ -30,15 +30,15 @@ import java.util.List;
 public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
 
-	private MapActivity mapActivity;
+	private final MapActivity mapActivity;
 	private List<MapMarker> markers;
 	private MapMarkersActiveAdapterListener listener;
 	private Snackbar snackbar;
 	private boolean showDirectionEnabled;
 
-	private boolean night;
-	private UiUtilities uiUtilities;
-	private UpdateLocationViewCache updateLocationViewCache;
+	private final boolean night;
+	private final UiUtilities uiUtilities;
+	private final UpdateLocationViewCache updateLocationViewCache;
 
 	public MapMarkersActiveAdapter(MapActivity mapActivity) {
 		setHasStableIds(true);

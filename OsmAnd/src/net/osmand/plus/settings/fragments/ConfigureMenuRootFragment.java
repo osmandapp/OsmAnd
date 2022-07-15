@@ -189,8 +189,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		private static final int DESCRIPTION_TYPE = 0;
 		private static final int ITEM_TYPE = 1;
 
-		private List<Object> items;
-		private OnCustomizationItemClickListener listener;
+		private final List<Object> items;
+		private final OnCustomizationItemClickListener listener;
 
 		CustomizationItemsAdapter(List<Object> items, OnCustomizationItemClickListener listener) {
 			this.items = items;

@@ -61,13 +61,13 @@ public class SelectedGpxMenuController extends MenuController {
 
 	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxDisplayItem> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
-		private WptPt selectedPoint;
-		private SelectedGpxFile selectedGpxFile;
+		private final WptPt selectedPoint;
+		private final SelectedGpxFile selectedGpxFile;
 
 		private ProgressDialog progressDialog;
-		private WeakReference<MapActivity> activityRef;
+		private final WeakReference<MapActivity> activityRef;
 
 		public OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
 			app = mapActivity.getMyApplication();

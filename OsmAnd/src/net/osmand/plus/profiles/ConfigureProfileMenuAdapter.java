@@ -32,8 +32,8 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureProfileMenuAdapter.class);
 
-	private List<Object> items = new ArrayList<>();
-	private Set<ApplicationMode> selectedItems;
+	private final List<Object> items = new ArrayList<>();
+	private final Set<ApplicationMode> selectedItems;
 
 	@Nullable
 	private ProfileSelectedListener profileSelectedListener;
@@ -41,10 +41,10 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 	@ColorInt
 	private int selectedIconColor;
 	private boolean bottomButton;
-	private String bottomButtonText;
+	private final String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
 
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	public ConfigureProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
 	                                   OsmandApplication app, String bottomButtonText, boolean nightMode) {

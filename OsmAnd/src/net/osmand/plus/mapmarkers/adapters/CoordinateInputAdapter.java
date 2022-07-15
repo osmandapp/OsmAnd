@@ -24,12 +24,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
 	private GPXFile gpx;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private UiUtilities uiUtilities;
-	private UpdateLocationViewCache updateViewCache;
+	private final UiUtilities uiUtilities;
+	private final UpdateLocationViewCache updateViewCache;
 
-	private boolean nightTheme;
+	private final boolean nightTheme;
 
 	private View.OnClickListener listener;
 	private View.OnClickListener actionsListener;

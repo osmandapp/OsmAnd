@@ -27,12 +27,12 @@ public class ArticleTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 2;
 
-	private TravelArticle article;
+	private final TravelArticle article;
 	private final Drawable readIcon;
-	private FragmentManager fragmentManager;
+	private final FragmentManager fragmentManager;
 	private boolean isLastItem;
 
-	private PicassoUtils picasso;
+	private final PicassoUtils picasso;
 
 	public ArticleTravelCard(OsmandApplication app, boolean nightMode, TravelArticle article, FragmentManager fragmentManager) {
 		super(app, nightMode);

@@ -94,9 +94,9 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 			this.iconId = iconId;
 		}
 
-		private int titleId;
-		private int urlId;
-		private int iconId;
+		private final int titleId;
+		private final int urlId;
+		private final int iconId;
 
 		public String getTitle(Context ctx) {
 			return ctx.getString(titleId);

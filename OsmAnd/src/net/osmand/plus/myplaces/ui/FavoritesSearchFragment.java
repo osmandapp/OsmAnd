@@ -300,10 +300,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 		private static final int HEADER_TYPE = 2;
 		private static final int FOOTER_SHADOW_TYPE = 3;
 
-		private OsmandApplication app;
-		private Activity activity;
+		private final OsmandApplication app;
+		private final Activity activity;
 		private AccessibilityAssistant accessibilityAssistant;
-		private FavouritesHelper helper;
+		private final FavouritesHelper helper;
 
 		private LatLon location;
 
@@ -311,9 +311,9 @@ public class FavoritesSearchFragment extends DialogFragment {
 		Filter myFilter;
 		private Set<?> filter;
 
-		private int enabledColor;
-		private int disabledColor;
-		private int disabledIconColor;
+		private final int enabledColor;
+		private final int disabledColor;
+		private final int disabledIconColor;
 
 		public FavoritesSearchListAdapter(OsmandApplication app, Activity activity) {
 			super(app, R.layout.search_list_item);

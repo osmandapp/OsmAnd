@@ -160,10 +160,10 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	}
 
 	public static class FavouritesAdapter extends ArrayAdapter<FavouritePoint> {
-		private Activity activity;
-		private OsmandApplication app;
-		private boolean shouldShowMenuButton;
-		private UpdateLocationViewCache cache;
+		private final Activity activity;
+		private final OsmandApplication app;
+		private final boolean shouldShowMenuButton;
+		private final UpdateLocationViewCache cache;
 
 		public FavouritesAdapter(Activity activity, List<FavouritePoint> list,
 								 boolean shouldShowMenuButton) {

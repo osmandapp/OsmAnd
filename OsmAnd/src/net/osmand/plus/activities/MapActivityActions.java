@@ -164,7 +164,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	private static final int DRAWER_MODE_SWITCH_PROFILE = 1;
 
 	// make static
-	private static Bundle dialogBundle = new Bundle();
+	private static final Bundle dialogBundle = new Bundle();
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;

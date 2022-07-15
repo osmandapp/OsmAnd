@@ -246,8 +246,8 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final CompoundButton compoundButton;
 		final TextView numberOfRowsTextView;
 		private int position;
-		private int colorActive;
-		private DashFragmentAdapter dashFragmentAdapter;
+		private final int colorActive;
+		private final DashFragmentAdapter dashFragmentAdapter;
 
 		public DashViewHolder(DashFragmentAdapter dashFragmentAdapter, View view, Context ctx) {
 			this.view = view;

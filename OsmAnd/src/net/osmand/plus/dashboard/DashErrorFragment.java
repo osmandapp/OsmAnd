@@ -79,10 +79,10 @@ public class DashErrorFragment extends DashBaseFragment {
 	}
 
 	private static class ErrorDismissListener implements DismissListener {
-		private View parentView;
-		private DashboardOnMap dashboardOnMap;
-		private String fragmentTag;
-		private View fragmentView;
+		private final View parentView;
+		private final DashboardOnMap dashboardOnMap;
+		private final String fragmentTag;
+		private final View fragmentView;
 
 		public ErrorDismissListener(View parentView, DashboardOnMap dashboardOnMap,
 									String fragmentTag, View fragmentView) {

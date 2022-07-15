@@ -50,7 +50,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		return type % SORT_TYPE_CATEGORY + 1;
 	}
 
-	private List<FavouritePoint> favouritePoints = new ArrayList<>();
+	private final List<FavouritePoint> favouritePoints = new ArrayList<>();
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
 	private int sortByDist = SORT_TYPE_DIST;

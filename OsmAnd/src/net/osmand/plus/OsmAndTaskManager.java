@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 public class OsmAndTaskManager {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public OsmAndTaskManager(OsmandApplication app) {
 		this.app = app;

@@ -17,9 +17,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GeocodingLookupService {
 
-	private OsmandApplication app;
-	private ConcurrentLinkedQueue<LatLon> lookupLocations = new ConcurrentLinkedQueue<>();
-	private ConcurrentHashMap<LatLon, List<AddressLookupRequest>> addressLookupRequestsMap = new ConcurrentHashMap<>();
+	private final OsmandApplication app;
+	private final ConcurrentLinkedQueue<LatLon> lookupLocations = new ConcurrentLinkedQueue<>();
+	private final ConcurrentHashMap<LatLon, List<AddressLookupRequest>> addressLookupRequestsMap = new ConcurrentHashMap<>();
 	private LatLon currentRequestedLocation = null;
 
 	private boolean searchDone;
@@ -36,8 +36,8 @@ public class GeocodingLookupService {
 	public static class AddressLookupRequest {
 
 		private LatLon latLon;
-		private OnAddressLookupResult uiResultCallback;
-		private OnAddressLookupProgress uiProgressCallback;
+		private final OnAddressLookupResult uiResultCallback;
+		private final OnAddressLookupProgress uiProgressCallback;
 
 		public AddressLookupRequest(LatLon latLon, OnAddressLookupResult uiResultCallback,
 		                            OnAddressLookupProgress uiProgressCallback) {
@@ -187,7 +187,7 @@ public class GeocodingLookupService {
 
 	private class AddressLookupRequestsAsyncTask extends AsyncTask<AddressLookupRequest, AddressLookupRequest, Void> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		public AddressLookupRequestsAsyncTask(OsmandApplication app) {
 			super();

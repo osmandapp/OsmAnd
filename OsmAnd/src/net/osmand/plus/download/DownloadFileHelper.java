@@ -50,7 +50,7 @@ public class DownloadFileHelper {
 	
 	public InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
 		InputStream cis = new InputStream() {
-			byte[] buffer = new byte[BUFFER_SIZE];
+			final byte[] buffer = new byte[BUFFER_SIZE];
 			int bufLen = 0;
 			int bufRead = 0;
 			int length = 0;

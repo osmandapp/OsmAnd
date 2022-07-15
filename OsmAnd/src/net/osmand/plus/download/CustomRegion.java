@@ -34,10 +34,10 @@ public class CustomRegion extends WorldRegion {
 
 	private static final Log LOG = PlatformUtil.getLog(CustomRegion.class);
 
-	private String scopeId;
-	private String path;
+	private final String scopeId;
+	private final String path;
 	private String parentPath;
-	private String type;
+	private final String type;
 	private String subfolder;
 
 	private JSONArray downloadItemsJson;

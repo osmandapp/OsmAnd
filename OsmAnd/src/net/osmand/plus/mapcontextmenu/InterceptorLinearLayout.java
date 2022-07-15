@@ -9,7 +9,7 @@ import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 
 public class InterceptorLinearLayout extends LinearLayout {
-	private int mTouchSlop;
+	private final int mTouchSlop;
 	private boolean mIsScrolling;
 	private float mDownY;
 	private OnTouchListener listener;

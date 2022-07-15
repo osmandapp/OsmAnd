@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FavouritesGroupsAdapter extends GroupsAdapter {
 
-	private List<FavoriteGroup> favoriteGroups;
+	private final List<FavoriteGroup> favoriteGroups;
 
 	public FavouritesGroupsAdapter(Context context, List<FavoriteGroup> favoriteGroups) {
 		super(context);

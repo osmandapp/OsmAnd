@@ -71,7 +71,7 @@ public class MapMarkersHelper {
 	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	private List<MapMarker> mapMarkers = new CopyOnWriteArrayList<>();
-	private List<MapMarker> mapMarkersHistory = new CopyOnWriteArrayList<>();
+	private final List<MapMarker> mapMarkersHistory = new CopyOnWriteArrayList<>();
 	private List<MapMarkersGroup> mapMarkersGroups = new CopyOnWriteArrayList<>();
 
 	private final List<MapMarkerChangedListener> listeners = new ArrayList<>();

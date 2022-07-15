@@ -33,7 +33,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	private static final int LIMIT = 300;
 
 	private String lastError = ""; //$NON-NLS-1$
-	private boolean addressQuery;
+	private final boolean addressQuery;
 	
 	public NominatimPoiFilter(OsmandApplication application, boolean addressQuery) {
 		super(application);

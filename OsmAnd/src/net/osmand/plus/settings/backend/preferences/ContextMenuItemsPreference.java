@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 public class ContextMenuItemsPreference extends CommonPreference<ContextMenuItemsSettings> {
 
 	@NonNull
-	private String idScheme;
+	private final String idScheme;
 
 	public ContextMenuItemsPreference(OsmandSettings settings, String id, @NonNull String idScheme, @NonNull ContextMenuItemsSettings defValue) {
 		super(settings, id, defValue);

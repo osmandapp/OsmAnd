@@ -37,7 +37,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = CountrySelectionFragment.class.getSimpleName();
 
-	private List<CountryItem> countryItems = new ArrayList<>();
+	private final List<CountryItem> countryItems = new ArrayList<>();
 	private OnFragmentInteractionListener mListener;
 
 	public List<CountryItem> getCountryItems() {
@@ -203,8 +203,8 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static class CountryItem implements Serializable {
-		private String localName;
-		private String downloadName;
+		private final String localName;
+		private final String downloadName;
 
 		public CountryItem(String localName, String downloadName) {
 			this.localName = localName;

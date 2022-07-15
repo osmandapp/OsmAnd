@@ -30,9 +30,9 @@ public enum ExampleLocation {
 		this.cityAirportLatLon = cityAirportLatLon;
 	}
 
-	private String name;
-	private LatLon cityCenterLatLon;
-	private LatLon cityAirportLatLon;
+	private final String name;
+	private final LatLon cityCenterLatLon;
+	private final LatLon cityAirportLatLon;
 
 	@NonNull
 	public String getName() {

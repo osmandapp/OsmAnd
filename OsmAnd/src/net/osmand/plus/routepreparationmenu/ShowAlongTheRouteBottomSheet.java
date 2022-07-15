@@ -228,7 +228,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Context context;
+		private final Context context;
 
 		private ContentItem contentItem;
 
@@ -515,9 +515,9 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private static class RecalculatePointsTask extends AsyncTask<Void, Void, Void> {
 
-		private OsmandApplication app;
-		private WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
-		private int type;
+		private final OsmandApplication app;
+		private final WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
+		private final int type;
 
 		RecalculatePointsTask(ShowAlongTheRouteBottomSheet fragment, int type) {
 			this.app = fragment.getMyApplication();
@@ -542,10 +542,10 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private static class EnableWaypointsTypeTask extends AsyncTask<Void, Void, Void> {
 
-		private OsmandApplication app;
-		private WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
-		private int type;
-		private boolean enable;
+		private final OsmandApplication app;
+		private final WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
+		private final int type;
+		private final boolean enable;
 
 		EnableWaypointsTypeTask(ShowAlongTheRouteBottomSheet fragment, int type, boolean enable) {
 			this.app = fragment.getMyApplication();
@@ -573,7 +573,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 	private static class ContentItem {
 
 		private int type;
-		private ArrayList<ContentItem> subItems = new ArrayList<>();
+		private final ArrayList<ContentItem> subItems = new ArrayList<>();
 
 		private ContentItem(int type) {
 			this.type = type;

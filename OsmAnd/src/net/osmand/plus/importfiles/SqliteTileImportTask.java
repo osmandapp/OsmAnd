@@ -16,8 +16,8 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 
 class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
-	private Uri uri;
-	private String name;
+	private final Uri uri;
+	private final String name;
 
 	public SqliteTileImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri, @NonNull String name) {
 		super(activity);

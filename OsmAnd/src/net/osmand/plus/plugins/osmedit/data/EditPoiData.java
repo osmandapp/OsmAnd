@@ -22,18 +22,18 @@ import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
-	private Set<TagsChangedListener> mListeners = new HashSet<>();
+	private final Set<TagsChangedListener> mListeners = new HashSet<>();
 	private final LinkedHashMap<String, String> tagValues = new LinkedHashMap<>();
 	private final LinkedHashMap<String, String> initTagValues = new LinkedHashMap<>();
 	private boolean isInEdit = false;
-	private Entity entity;
+	private final Entity entity;
 
 	public static final String REMOVE_TAG_VALUE = "DELETE";
-	private Map<String, PoiType> allTranslatedSubTypes;
+	private final Map<String, PoiType> allTranslatedSubTypes;
 	private PoiCategory category;
 	private PoiType currentPoiType;
 
-	private Set<String> changedTags = new HashSet<>();
+	private final Set<String> changedTags = new HashSet<>();
 	
 	public EditPoiData(Entity entity, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);

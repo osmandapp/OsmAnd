@@ -59,8 +59,8 @@ public class ApplicationMode {
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
-	private static List<ApplicationMode> defaultValues = new ArrayList<>();
-	private static List<ApplicationMode> values = new ArrayList<>();
+	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
+	private static final List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
 	private static StateChangedListener<String> listener;

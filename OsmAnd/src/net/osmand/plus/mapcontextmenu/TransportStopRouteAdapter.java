@@ -20,9 +20,9 @@ import java.util.List;
 
 public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 
-	private boolean nightMode;
+	private final boolean nightMode;
 	private OnClickListener listener;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public TransportStopRouteAdapter(@NonNull OsmandApplication application, @NonNull List<Object> objects, boolean nightMode) {
 		super(application, 0, objects);

@@ -35,14 +35,14 @@ public class TracksToFollowCard extends MapBaseCard {
 
 	private final Fragment target;
 
-	private List<GPXInfo> gpxInfoList;
+	private final List<GPXInfo> gpxInfoList;
 	private Map<String, List<GPXInfo>> gpxInfoCategories;
 
 	private GpxTrackAdapter tracksAdapter;
 	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
-	private String defaultCategory;
-	private String visibleCategory;
+	private final String defaultCategory;
+	private final String visibleCategory;
 	private String selectedCategory;
 
 	public TracksToFollowCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @NonNull List<GPXInfo> gpxInfoList, @NonNull String selectedCategory) {

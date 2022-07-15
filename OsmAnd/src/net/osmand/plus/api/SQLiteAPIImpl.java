@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 
 public class SQLiteAPIImpl implements SQLiteAPI {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private static final Log LOG = PlatformUtil.getLog(SQLiteAPIImpl.class);
 
 	public SQLiteAPIImpl(OsmandApplication app) {

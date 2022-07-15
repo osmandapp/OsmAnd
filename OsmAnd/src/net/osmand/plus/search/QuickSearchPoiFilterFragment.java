@@ -81,11 +81,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	private EditText editText;
 	private TextView applyFilterButton;
 	private View applyFilterButtonShadow;
-	private Set<String> selectedPoiAdditionals = new TreeSet<>();
+	private final Set<String> selectedPoiAdditionals = new TreeSet<>();
 	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
-	private ArrayList<String> collapsedCategories = new ArrayList<>();
-	private ArrayList<String> showAllCategories = new ArrayList<>();
-	private Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
+	private final ArrayList<String> collapsedCategories = new ArrayList<>();
+	private final ArrayList<String> showAllCategories = new ArrayList<>();
+	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 	private boolean isLightTheme;
 
 	public QuickSearchPoiFilterFragment() {
@@ -723,7 +723,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private class PoiFilterListAdapter extends ArrayAdapter<PoiFilterListItem> {
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		PoiFilterListAdapter(OsmandApplication app, List<PoiFilterListItem> items) {
 			super(app, R.layout.poi_filter_list_item, items);
@@ -896,15 +896,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	public static class PoiFilterListItem {
-		private PoiFilterListItemType type;
-		private int iconId;
-		private String text;
-		private int groupIndex;
-		private boolean expandable;
-		private boolean expanded;
+		private final PoiFilterListItemType type;
+		private final int iconId;
+		private final String text;
+		private final int groupIndex;
+		private final boolean expandable;
+		private final boolean expanded;
 		private boolean checked;
-		private String category;
-		private String keyName;
+		private final String category;
+		private final String keyName;
 
 		public PoiFilterListItem(PoiFilterListItemType type, int iconId, String text, int groupIndex,
 								 boolean expandable, boolean expanded, boolean checked, String category,

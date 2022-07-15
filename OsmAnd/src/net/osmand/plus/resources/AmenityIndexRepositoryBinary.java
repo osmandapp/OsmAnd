@@ -34,8 +34,8 @@ import java.util.Map;
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	private static final Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
-	private BinaryMapReaderResource resource;
-	private MapPoiTypes poiTypes;
+	private final BinaryMapReaderResource resource;
+	private final MapPoiTypes poiTypes;
 	private Map<String, List<String>> deltaPoiCategories = new HashMap<>();
 
 	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource, OsmandApplication app) {

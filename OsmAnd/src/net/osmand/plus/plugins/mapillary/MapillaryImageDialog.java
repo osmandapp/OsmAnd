@@ -90,8 +90,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private double fetchedTileLat = Double.NaN;
 	private double fetchedTileLon = Double.NaN;
 	private List<MapillaryImage> sequenceImages = new ArrayList<>();
-	private AtomicInteger downloadRequestNumber = new AtomicInteger();
-	private UiUtilities iconsCache;
+	private final AtomicInteger downloadRequestNumber = new AtomicInteger();
+	private final UiUtilities iconsCache;
 
 	public MapillaryImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.MAPILLARY);

@@ -19,8 +19,8 @@ import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 public class RouteInfoCard extends MapBaseCard {
-	private RouteStatistics statistics;
-	private GPXTrackAnalysis analysis;
+	private final RouteStatistics statistics;
+	private final GPXTrackAnalysis analysis;
 	private CustomChartAdapter graphAdapter;
 
 	private boolean showLegend;

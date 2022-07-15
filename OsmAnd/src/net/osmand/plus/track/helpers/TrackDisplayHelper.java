@@ -24,7 +24,7 @@ public class TrackDisplayHelper {
 
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
-	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
+	private final List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 
 	public TrackDisplayHelper(OsmandApplication app) {
 		this.app = app;

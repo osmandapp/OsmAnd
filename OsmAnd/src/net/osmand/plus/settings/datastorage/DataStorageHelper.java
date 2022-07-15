@@ -55,12 +55,12 @@ public class DataStorageHelper {
 	public static final String TILES_MEMORY = "tiles_memory_used";
 	public static final String OTHER_MEMORY = "other_memory_used";
 
-	private OsmandApplication app;
-	private ArrayList<StorageItem> storageItems = new ArrayList<>();
+	private final OsmandApplication app;
+	private final ArrayList<StorageItem> storageItems = new ArrayList<>();
 	private StorageItem currentDataStorage;
 	private StorageItem manuallySpecified;
 
-	private ArrayList<MemoryItem> memoryItems = new ArrayList<>();
+	private final ArrayList<MemoryItem> memoryItems = new ArrayList<>();
 	private MemoryItem mapsMemory;
 	private MemoryItem travelMemory;
 	private MemoryItem terrainMemory;

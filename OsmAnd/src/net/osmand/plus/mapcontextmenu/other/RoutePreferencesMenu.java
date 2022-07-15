@@ -48,11 +48,11 @@ import java.util.List;
 
 public class RoutePreferencesMenu {
 
-	private OsmandSettings settings;
-	private OsmandApplication app;
-	private MapActivity mapActivity;
-	private RoutingHelper routingHelper;
-	private RoutingOptionsHelper routingOptionsHelper;
+	private final OsmandSettings settings;
+	private final OsmandApplication app;
+	private final MapActivity mapActivity;
+	private final RoutingHelper routingHelper;
+	private final RoutingOptionsHelper routingOptionsHelper;
 	private ArrayAdapter<LocalRoutingParameter> listAdapter;
 
 	public static final String MORE_VALUE = "MORE_VALUE";

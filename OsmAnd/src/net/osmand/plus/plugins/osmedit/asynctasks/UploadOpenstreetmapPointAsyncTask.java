@@ -22,13 +22,13 @@ import java.util.Map;
  */
 public class UploadOpenstreetmapPointAsyncTask
 		extends AsyncTask<OsmPoint, OsmPoint, Map<OsmPoint, String>> {
-	private ProgressDialogFragment progress;
-	private OpenstreetmapRemoteUtil remotepoi;
-	private OsmBugsRemoteUtil remotebug;
+	private final ProgressDialogFragment progress;
+	private final OpenstreetmapRemoteUtil remotepoi;
+	private final OsmBugsRemoteUtil remotebug;
 	private int listSize = 0;
 	private boolean interruptUploading = false;
-	private OsmEditsUploadListener listener;
-	private OsmEditingPlugin plugin;
+	private final OsmEditsUploadListener listener;
+	private final OsmEditingPlugin plugin;
 	private final boolean closeChangeSet;
 	private final boolean loadAnonymous;
 	private static final int THREAD_ID = 10102;

@@ -6,7 +6,7 @@ import net.osmand.plus.R;
 
 public class GroupHeader {
 
-	private MapMarkersGroup group;
+	private final MapMarkersGroup group;
 
 	public GroupHeader(MapMarkersGroup group) {
 		this.group = group;

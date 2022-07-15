@@ -15,7 +15,7 @@ import net.osmand.plus.R;
 
 public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithDescription {
 
-	private View.OnClickListener onButtonClickListener;
+	private final View.OnClickListener onButtonClickListener;
 	private Drawable leftCompoundDrawable;
 	private Drawable rightCompoundDrawable;
 	private String buttonTitle;

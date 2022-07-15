@@ -130,7 +130,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
-	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
+	private final Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceV2Thread");
 

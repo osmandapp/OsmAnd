@@ -316,7 +316,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 
 	public static class GeometryTransportWayStyle extends GeometryWayStyle<PublicTransportGeometryWayContext> {
 
-		private TransportRouteResultSegment segment;
+		private final TransportRouteResultSegment segment;
 		private Drawable stopDrawable;
 		protected Integer pointColor;
 

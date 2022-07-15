@@ -25,12 +25,12 @@ import java.util.Map;
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private Map<ExportSettingsType, List<?>> itemsMap;
-	private List<ExportSettingsType> itemsTypes;
-	private UiUtilities uiUtils;
-	private OsmandApplication app;
-	private boolean nightMode;
-	private OnItemClickListener listener;
+	private final Map<ExportSettingsType, List<?>> itemsMap;
+	private final List<ExportSettingsType> itemsTypes;
+	private final UiUtilities uiUtils;
+	private final OsmandApplication app;
+	private final boolean nightMode;
+	private final OnItemClickListener listener;
 
 	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
 								 boolean nightMode, OnItemClickListener listener) {

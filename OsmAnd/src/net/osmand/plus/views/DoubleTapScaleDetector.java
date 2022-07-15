@@ -23,8 +23,8 @@ public class DoubleTapScaleDetector {
 	private final DoubleTapZoomListener listener;
 	protected final OsmandMapTileView view;
 
-	private int displayHeightPx;
-	private PointF centerScreen;
+	private final int displayHeightPx;
+	private final PointF centerScreen;
 	private PointF zoomCenter;
 
 	private boolean mIsInZoomMode = false;
@@ -32,8 +32,8 @@ public class DoubleTapScaleDetector {
 	private MotionEvent firstDown;
 	private MotionEvent firstUp;
 	private MotionEvent secondDown;
-	private int mTouchSlopSquare;
-	private int mDoubleTapSlopSquare;
+	private final int mTouchSlopSquare;
+	private final int mDoubleTapSlopSquare;
 	private boolean mIsDoubleTapping;
 	private boolean mScrolling;
 

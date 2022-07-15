@@ -151,7 +151,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private List<IMapLocationListener> locationListeners = new CopyOnWriteArrayList<>();
+	private final List<IMapLocationListener> locationListeners = new CopyOnWriteArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 

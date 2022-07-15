@@ -39,13 +39,13 @@ public class CurrentPositionHelper {
 	private Location lastAskedLocation = null;
 	private RoutingContext ctx;
 	private RoutingContext defCtx;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private ApplicationMode am;
 	private List<BinaryMapReaderResource> usedReaders = new ArrayList<>();
 	private static final Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
 
-	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-	private LongSparseArray<AtomicInteger> requestNumbersMap = new LongSparseArray<>();
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private final LongSparseArray<AtomicInteger> requestNumbersMap = new LongSparseArray<>();
 
 	public CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;

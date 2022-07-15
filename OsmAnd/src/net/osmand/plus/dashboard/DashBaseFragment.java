@@ -183,10 +183,10 @@ public abstract class DashBaseFragment extends Fragment {
 	}
 
 	public static class DefaultDismissListener implements DismissListener {
-		private View parentView;
-		private DashboardOnMap dashboardOnMap;
-		private String fragmentTag;
-		private View fragmentView;
+		private final View parentView;
+		private final DashboardOnMap dashboardOnMap;
+		private final String fragmentTag;
+		private final View fragmentView;
 
 		public DefaultDismissListener(View parentView, DashboardOnMap dashboardOnMap,
 									  String fragmentTag, View fragmentView) {

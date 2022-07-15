@@ -53,7 +53,7 @@ public class TargetPointsHelper {
 
 	public static class TargetPoint implements LocationPoint {
 		public LatLon point;
-		private PointDescription pointDescription;
+		private final PointDescription pointDescription;
 		public int index;
 		public boolean intermediate;
 		public boolean start;

@@ -34,9 +34,9 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	private static final int TYPE_ITEM = 1;
 	private static final int TYPE_COUNT = 2;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private List<Object> items;
+	private final List<Object> items;
 	private boolean selectionMode;
 	private List<OsmPoint> selectedOsmEdits;
 	private boolean portrait;

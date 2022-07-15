@@ -13,11 +13,11 @@ import net.osmand.plus.OsmandApplication;
 
 public class QuickSearchButtonListItem extends QuickSearchListItem {
 
-	private int iconId;
+	private final int iconId;
 	private String title;
 	private Spannable spannableTitle;
-	private View.OnClickListener onClickListener;
-	private int colorId;
+	private final View.OnClickListener onClickListener;
+	private final int colorId;
 
 	public QuickSearchButtonListItem(OsmandApplication app, int iconId, @NonNull String title, View.OnClickListener onClickListener) {
 		super(app, null);

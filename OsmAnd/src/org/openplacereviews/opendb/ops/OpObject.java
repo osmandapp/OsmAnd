@@ -505,7 +505,7 @@ public class OpObject {
 	public static class OpObjectAdapter implements JsonDeserializer<OpObject>,
 			JsonSerializer<OpObject> {
 		
-		private boolean fullOutput;
+		private final boolean fullOutput;
 
 		public OpObjectAdapter(boolean fullOutput) {
 			this.fullOutput = fullOutput;

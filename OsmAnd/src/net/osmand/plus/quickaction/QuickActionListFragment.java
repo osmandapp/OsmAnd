@@ -85,7 +85,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private QuickActionAdapter adapter;
     private ItemTouchHelper touchHelper;
     private QuickActionRegistry quickActionRegistry;
-    private ArrayList<Long> actionsToDelete = new ArrayList<>();
+    private final ArrayList<Long> actionsToDelete = new ArrayList<>();
     private int screenType = SCREEN_TYPE_REORDER;
     private boolean nightMode;
 
@@ -764,7 +764,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         private class DescriptionVH extends RecyclerView.ViewHolder
                 implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-            private TextView tvDescription;
+            private final TextView tvDescription;
 
             public DescriptionVH(View itemView) {
                 super(itemView);
@@ -806,10 +806,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         private class ButtonVH extends RecyclerView.ViewHolder
                 implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-            private View container;
-            private ImageView icon;
-            private TextView title;
-            private View divider;
+            private final View container;
+            private final ImageView icon;
+            private final TextView title;
+            private final View divider;
 
             public ButtonVH(View itemView) {
                 super(itemView);
@@ -850,9 +850,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     protected static class ControlButton {
-        private String title;
-        private int iconRes;
-        private View.OnClickListener listener;
+        private final String title;
+        private final int iconRes;
+        private final View.OnClickListener listener;
 
         public ControlButton(String title, int iconRes, View.OnClickListener listener) {
             this.title = title;

@@ -102,13 +102,13 @@ public class TravelDbHelper implements TravelHelper {
 
 	private final OsmandApplication application;
 
-	private TravelLocalDataHelper localDataHelper;
+	private final TravelLocalDataHelper localDataHelper;
 	private final Collator collator;
 
 	private SQLiteConnection connection = null;
 
 	private File selectedTravelBook = null;
-	private List<File> existingTravelBooks = new ArrayList<>();
+	private final List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<>();
 	
 	

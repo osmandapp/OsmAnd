@@ -67,12 +67,12 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	private View headerView;
 
 	private GpxDisplayItem gpxItem;
-	private GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
+	private final GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 	private GPXUtilities.TrkSegment trkSegment;
 
-	private List<String> options = new ArrayList<>();
-	private List<Double> distanceSplit = new ArrayList<>();
-	private TIntArrayList timeSplit = new TIntArrayList();
+	private final List<String> options = new ArrayList<>();
+	private final List<Double> distanceSplit = new ArrayList<>();
+	private final TIntArrayList timeSplit = new TIntArrayList();
 	private int selectedSplitInterval;
 	private UiUtilities ic;
 	private int minMaxSpeedLayoutWidth;

@@ -34,9 +34,9 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	private static final int TYPE_ITEM = 4;
 	private static final int TYPE_COUNT = 5;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private NotesAdapterListener listener;
-	private List<Object> items;
+	private final List<Object> items;
 
 	private boolean selectionMode;
 	private Set<Recording> selected;

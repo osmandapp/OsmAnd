@@ -20,7 +20,7 @@ public class ScrollHelper {
 	private static final int REFRESHING_DELAY_MS = 3;
 	private static final int INVALID_VALUE = -1;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private OnScrollEventListener onScrollEventListener;
 	
 	private final Direction UP = new Direction(KeyEvent.KEYCODE_DPAD_UP);
@@ -32,7 +32,7 @@ public class ScrollHelper {
 	private boolean isInContinuousScrolling = false;
 	private long startContinuousScrollingTime = INVALID_VALUE;
 
-	private Runnable scrollingRunnable = new Runnable() {
+	private final Runnable scrollingRunnable = new Runnable() {
 		@Override
 		public void run() {
 			isInContinuousScrolling = true;

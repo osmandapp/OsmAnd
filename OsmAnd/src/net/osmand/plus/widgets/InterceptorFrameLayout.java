@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
 public class InterceptorFrameLayout extends FrameLayout {
-	private int mTouchSlop;
+	private final int mTouchSlop;
 	private boolean mIsScrolling;
 	private float mDownX;
 	private SwipeDismissTouchListener listener;

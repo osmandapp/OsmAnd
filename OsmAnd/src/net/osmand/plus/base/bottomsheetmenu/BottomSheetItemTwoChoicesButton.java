@@ -31,11 +31,11 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 	private TextView rightBtn;
 
 	@StringRes
-	private int leftBtnTitleRes;
+	private final int leftBtnTitleRes;
 	@StringRes
-	private int rightBtnTitleRes;
+	private final int rightBtnTitleRes;
 	private boolean isLeftBtnSelected;
-	private OnBottomBtnClickListener onBottomBtnClickListener;
+	private final OnBottomBtnClickListener onBottomBtnClickListener;
 	private int bottomBtnBgRadius;
 	private int bottomBtnTextColor;
 	private int activeColor;

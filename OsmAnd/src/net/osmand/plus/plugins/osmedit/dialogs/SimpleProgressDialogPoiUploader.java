@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploader {
 
-	private MapActivity mapActivity;
+	private final MapActivity mapActivity;
 
 	public SimpleProgressDialogPoiUploader(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;

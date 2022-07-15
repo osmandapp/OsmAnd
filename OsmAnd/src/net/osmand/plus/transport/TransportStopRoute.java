@@ -25,7 +25,7 @@ public class TransportStopRoute {
 	public boolean showWholeRoute;
 	private int cachedColor;
 	private boolean cachedNight;
-	private Map<Pair<String, Boolean>, Integer> cachedRouteColors = new HashMap<>();
+	private final Map<Pair<String, Boolean>, Integer> cachedRouteColors = new HashMap<>();
 
 	public static TransportStopRoute getTransportStopRoute(TransportRoute rs, TransportStop s) {
 		TransportStopType type = TransportStopType.findType(rs.getType());

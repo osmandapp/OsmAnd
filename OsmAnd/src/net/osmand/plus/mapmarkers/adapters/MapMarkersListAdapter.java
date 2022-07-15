@@ -37,8 +37,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private static final int LOCATION_ITEM_ID = 0;
 	private static final int ROUND_TRIP_FINISH_ITEM_ID = 1;
 
-	private MapActivity mapActivity;
-	private List<Object> items = new LinkedList<>();
+	private final MapActivity mapActivity;
+	private final List<Object> items = new LinkedList<>();
 	private MapMarkersListAdapterListener listener;
 
 	private int startPos = -1;
@@ -48,7 +48,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private boolean showLocationItem;
 	private Location myLoc;
 	private AddressLookupRequest locRequest;
-	private PointDescription locDescription;
+	private final PointDescription locDescription;
 
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
 

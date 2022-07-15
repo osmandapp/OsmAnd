@@ -32,16 +32,16 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 
 	private static final Log LOG = PlatformUtil.getLog(SelectProfileMenuAdapter.class);
 
-	private List<Object> items = new ArrayList<>();
+	private final List<Object> items = new ArrayList<>();
 	private final OsmandApplication app;
-	private ApplicationMode appMode;
+	private final ApplicationMode appMode;
 	@ColorInt
 	private int selectedIconColor;
 	private boolean bottomButton;
-	private String bottomButtonText;
+	private final String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
 
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	public SelectProfileMenuAdapter(List<ApplicationMode> items, @NonNull OsmandApplication app,
 	                                String bottomButtonText, boolean nightMode,

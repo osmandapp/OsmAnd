@@ -19,7 +19,7 @@ import net.osmand.plus.activities.MapActivity;
 
 public class PedestrianRouteCard extends MapBaseCard {
 
-	private int approxPedestrianTime;
+	private final int approxPedestrianTime;
 
 	public PedestrianRouteCard(@NonNull MapActivity mapActivity, int approxPedestrianTime) {
 		super(mapActivity);

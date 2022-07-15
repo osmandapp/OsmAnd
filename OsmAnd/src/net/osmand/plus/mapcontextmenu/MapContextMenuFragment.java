@@ -360,10 +360,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			private float dyMain;
 			private float mDownY;
 
-			private int minimumVelocity;
-			private int maximumVelocity;
+			private final int minimumVelocity;
+			private final int maximumVelocity;
 			private VelocityTracker velocityTracker;
-			private OverScroller scroller;
+			private final OverScroller scroller;
 
 			private boolean slidingUp;
 			private boolean slidingDown;

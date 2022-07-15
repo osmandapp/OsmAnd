@@ -24,13 +24,13 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 	public static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	public static final int LONG_KEYPRESS_DELAY = 500;
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
-	private MapActivityActions mapActions;
-	private OsmandSettings settings;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
+	private final MapActivityActions mapActions;
+	private final OsmandSettings settings;
 	// handler to show/hide trackball position and to link map with delay
-	private Handler uiHandler = new Handler();
-	private ScrollHelper mapScrollHelper;
+	private final Handler uiHandler = new Handler();
+	private final ScrollHelper mapScrollHelper;
 
 	public MapActivityKeyListener(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;

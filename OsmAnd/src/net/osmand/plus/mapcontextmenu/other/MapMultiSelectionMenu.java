@@ -24,14 +24,14 @@ import java.util.Map;
 public class MapMultiSelectionMenu extends BaseMenuController {
 
 	private LatLon latLon;
-	private LinkedList<MenuObject> objects = new LinkedList<>();
-	private Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+	private final LinkedList<MenuObject> objects = new LinkedList<>();
+	private final Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 
 	public static class MenuObject extends MenuTitleController {
 
-		private LatLon latLon;
-		private PointDescription pointDescription;
-		private Object object;
+		private final LatLon latLon;
+		private final PointDescription pointDescription;
+		private final Object object;
 		private int order;
 
 		@Nullable

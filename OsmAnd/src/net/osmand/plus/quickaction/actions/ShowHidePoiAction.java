@@ -146,7 +146,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 	public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 
-		private List<PoiUIFilter> filters;
+		private final List<PoiUIFilter> filters;
 
 		public Adapter(List<PoiUIFilter> filters) {
 			this.filters = filters;
@@ -210,9 +210,9 @@ public class ShowHidePoiAction extends QuickAction {
 
 		class Holder extends RecyclerView.ViewHolder {
 
-			private TextView title;
-			private ImageView icon;
-			private ImageView delete;
+			private final TextView title;
+			private final ImageView icon;
+			private final ImageView delete;
 
 			public Holder(View itemView) {
 				super(itemView);

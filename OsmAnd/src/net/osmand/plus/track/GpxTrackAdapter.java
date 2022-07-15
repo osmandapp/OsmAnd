@@ -35,9 +35,9 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	private static final int TRACK_INFO_VIEW_TYPE = 0;
 	private static final int TRACK_CATEGORY_VIEW_TYPE = 1;
 
-	private OsmandApplication app;
-	private LayoutInflater themedInflater;
-	private UiUtilities iconsCache;
+	private final OsmandApplication app;
+	private final LayoutInflater themedInflater;
+	private final UiUtilities iconsCache;
 	private List<GPXInfo> gpxInfoList;
 	private HorizontalChipsView categoriesChipView;
 	private OnItemClickListener onItemClickListener;

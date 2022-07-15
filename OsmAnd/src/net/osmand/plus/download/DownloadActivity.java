@@ -384,9 +384,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		private final TextView downloadsLeftTextView;
 		private final ProgressBar downloadsLeftProgressBar;
 		
-		private DownloadActivity ctx;
+		private final DownloadActivity ctx;
 
-		private OnClickListener onCollapseListener = new OnClickListener() {
+		private final OnClickListener onCollapseListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE
@@ -497,8 +497,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		private final DownloadActivity ctx;
 		
-		private boolean showSpace;
-		private FreeVersionBanner freeVersionBanner;
+		private final boolean showSpace;
+		private final FreeVersionBanner freeVersionBanner;
 
 		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx, boolean showSpace) {
 			this.ctx = ctx;

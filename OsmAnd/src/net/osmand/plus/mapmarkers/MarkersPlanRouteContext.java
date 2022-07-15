@@ -31,7 +31,7 @@ public class MarkersPlanRouteContext {
 
 	private static final int MAX_DIST_FOR_SNAP_TO_ROAD = 500 * 1000; // 500 km
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();

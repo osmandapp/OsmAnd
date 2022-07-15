@@ -14,7 +14,7 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 
 public class SliderCard extends MapBaseCard {
 
-	private int initValue;
+	private final int initValue;
 	private SliderCardListener listener;
 
 	public SliderCard(MapActivity mapActivity, int initValue) {

@@ -14,7 +14,7 @@ public class AMapLayer implements Parcelable {
 	private String id;
 	private String name;
 	private float zOrder = 5.5f;
-	private Map<String, AMapPoint> points = new ConcurrentHashMap<>();
+	private final Map<String, AMapPoint> points = new ConcurrentHashMap<>();
 
 	private boolean imagePoints = false;
 	private int circlePointMinZoom = 0;

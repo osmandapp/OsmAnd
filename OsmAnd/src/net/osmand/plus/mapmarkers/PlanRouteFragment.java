@@ -496,7 +496,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private PlanRouteOptionsFragmentListener createOptionsFragmentListener() {
 		return new PlanRouteOptionsFragmentListener() {
 
-			private MapActivity mapActivity = getMapActivity();
+			private final MapActivity mapActivity = getMapActivity();
 
 			@Override
 			public void selectOnClick() {

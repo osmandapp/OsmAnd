@@ -37,16 +37,16 @@ public class WikivoyageWebViewClient extends WebViewClient {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
 
-	private OsmandApplication app;
-	private FragmentManager fragmentManager;
-	private FragmentActivity activity;
+	private final OsmandApplication app;
+	private final FragmentManager fragmentManager;
+	private final FragmentActivity activity;
 	private TravelArticle article;
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
-	private WikiArticleHelper wikiArticleHelper;
+	private final WikiArticleHelper wikiArticleHelper;
 
 
 	public WikivoyageWebViewClient(@NonNull FragmentActivity activity, @NonNull FragmentManager fm, boolean nightMode) {

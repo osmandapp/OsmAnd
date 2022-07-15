@@ -25,12 +25,12 @@ import net.osmand.plus.views.DirectionDrawable;
 import java.util.List;
 
 public class MapMarkersCard extends MapBaseCard {
-	private List<MapMarker> markers;
+	private final List<MapMarker> markers;
 	private boolean showLimited = true;
 	private LatLon loc;
 	private Float heading;
 	private boolean useCenter;
-	private int screenOrientation;
+	private final int screenOrientation;
 
 
 	public MapMarkersCard(@NonNull MapActivity mapActivity, @NonNull List<MapMarker> mapMarkers) {

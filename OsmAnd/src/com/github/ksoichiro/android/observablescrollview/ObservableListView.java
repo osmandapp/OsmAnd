@@ -50,7 +50,7 @@ public class ObservableListView extends ListView implements Scrollable {
     private ViewGroup mTouchInterceptionViewGroup;
 
     private OnScrollListener mOriginalScrollListener;
-    private OnScrollListener mScrollListener = new OnScrollListener() {
+    private final OnScrollListener mScrollListener = new OnScrollListener() {
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             if (mOriginalScrollListener != null) {

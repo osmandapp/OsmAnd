@@ -85,7 +85,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
+			private final float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private boolean iconHidden;
 
 			@Override

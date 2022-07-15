@@ -33,10 +33,10 @@ public class PicassoUtils {
 	private static final int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
 	private static PicassoUtils INSTANCE;
 
-	private Cache diskCache;
-	private LruCache memoryCache;
+	private final Cache diskCache;
+	private final LruCache memoryCache;
 
-	private Map<String, Boolean> cached = new HashMap<>();
+	private final Map<String, Boolean> cached = new HashMap<>();
 	
 	private PicassoUtils(OsmandApplication app){
 		File cacheDir = createDefaultCacheDir(app);

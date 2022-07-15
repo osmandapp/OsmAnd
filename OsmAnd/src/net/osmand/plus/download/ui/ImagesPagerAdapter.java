@@ -18,10 +18,10 @@ import java.util.List;
 
 public class ImagesPagerAdapter extends PagerAdapter {
 
-	private OsmandApplication app;
-	private PicassoUtils picassoUtils;
+	private final OsmandApplication app;
+	private final PicassoUtils picassoUtils;
 
-	private List<String> imageUrls;
+	private final List<String> imageUrls;
 
 	public ImagesPagerAdapter(@NonNull OsmandApplication app, List<String> imageUrls) {
 		this.app = app;

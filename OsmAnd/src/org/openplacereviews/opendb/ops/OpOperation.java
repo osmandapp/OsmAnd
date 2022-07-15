@@ -24,8 +24,8 @@ public class OpOperation extends OpObject {
 	public static final String F_NAME = "name";
 	public static final String F_COMMENT = "comment";
 
-	private List<OpObject> createdObjects = new LinkedList<OpObject>();
-	private List<OpObject> editedObjects = new LinkedList<OpObject>();
+	private final List<OpObject> createdObjects = new LinkedList<OpObject>();
+	private final List<OpObject> editedObjects = new LinkedList<OpObject>();
 	protected String type;
 
 	public OpOperation() {
@@ -221,8 +221,8 @@ public class OpOperation extends OpObject {
 			JsonSerializer<OpOperation> {
 
 		// plain serialization to calculate hash
-		private boolean excludeHashAndSignature;
-		private boolean fullOutput;
+		private final boolean excludeHashAndSignature;
+		private final boolean fullOutput;
 
 		public OpOperationBeanAdapter(boolean fullOutput, boolean excludeHashAndSignature) {
 			this.excludeHashAndSignature = excludeHashAndSignature;

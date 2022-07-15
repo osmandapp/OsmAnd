@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class OsmAndDialogs {
 
-	private static Map<Integer, OsmAndAction> dialogActions = new HashMap<Integer, OsmAndAction>(); 
+	private static final Map<Integer, OsmAndAction> dialogActions = new HashMap<Integer, OsmAndAction>();
 	public static Dialog createDialog(int dialogID, Activity activity, Bundle args) {
 		OsmAndAction action = dialogActions.get(dialogID);
 		if(action != null) {

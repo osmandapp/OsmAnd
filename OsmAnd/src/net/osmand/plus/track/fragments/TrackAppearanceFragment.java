@@ -108,7 +108,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private PromoBannerCard promoCard;
 	private boolean showStartFinishIconsInitialValue;
 
-	private List<BaseCard> cards = new ArrayList<>();
+	private final List<BaseCard> cards = new ArrayList<>();
 
 	private ImageView trackIcon;
 	private View buttonsShadow;

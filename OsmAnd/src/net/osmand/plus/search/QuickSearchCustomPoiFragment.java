@@ -498,7 +498,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		CategoryListAdapter(OsmandApplication app, List<PoiCategory> items) {
 			super(app, R.layout.list_item_icon24_and_menu, items);

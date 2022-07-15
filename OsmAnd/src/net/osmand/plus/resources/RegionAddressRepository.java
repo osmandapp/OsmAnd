@@ -61,7 +61,7 @@ public interface RegionAddressRepository {
 	
 	public static class MapObjectNameDistanceComparator implements Comparator<MapObject> {
 		
-		private Collator collator = Collator.getInstance();
+		private final Collator collator = Collator.getInstance();
 		private final LatLon location;
 		private final String lang;
 

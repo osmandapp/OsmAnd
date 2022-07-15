@@ -27,7 +27,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
     public static class RamerDouglasPeucer extends AsynchronousResampler {
 
-        private double epsilon;
+        private final double epsilon;
 
         public RamerDouglasPeucer(Renderable.RenderableSegment rs, double epsilon) {
             super(rs);

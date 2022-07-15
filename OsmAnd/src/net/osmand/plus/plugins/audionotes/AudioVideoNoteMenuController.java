@@ -20,7 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording mRecording;
-	private AudioVideoNotesPlugin mPlugin;
+	private final AudioVideoNotesPlugin mPlugin;
 	private boolean mIsFileAvailable;
 
 	public AudioVideoNoteMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final Recording recording) {

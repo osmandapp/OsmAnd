@@ -39,7 +39,7 @@ public class AMapPointMenuController extends MenuController {
 
 	private AidlMapPointWrapper point;
 
-	private Drawable pointDrawable;
+	private final Drawable pointDrawable;
 
 	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final AidlMapPointWrapper point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);

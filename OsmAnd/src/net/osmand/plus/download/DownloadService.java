@@ -17,7 +17,7 @@ public class DownloadService extends Service {
 
 	}
 
-	private DownloadServiceBinder binder = new DownloadServiceBinder();
+	private final DownloadServiceBinder binder = new DownloadServiceBinder();
 
 	@Override
 	public IBinder onBind(Intent intent) {

@@ -55,9 +55,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class OsmandRenderer {
 	private static final Log log = PlatformUtil.getLog(OsmandRenderer.class);
 
-	private Paint paint;
+	private final Paint paint;
 
-	private Paint paintIcon;
+	private final Paint paintIcon;
 	public static final int DEFAULT_POLYGON_MAX = 11;
 	public static final int DEFAULT_LINE_MAX = 100;
 	public static final int DEFAULT_POINTS_MAX = 200;
@@ -67,15 +67,15 @@ public class OsmandRenderer {
 	private static final int MAX_V = 10;
 	private static final int MAX_V_AREA = 2000;
 
-	private Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
-	private Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
-	private Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
+	private final Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
+	private final Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
+	private final Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
 	private final Context context;
 
-	private DisplayMetrics dm;
+	private final DisplayMetrics dm;
 
-	private TextRenderer textRenderer;
+	private final TextRenderer textRenderer;
 
 	public class MapDataObjectPrimitive {
 		BinaryMapDataObject obj;

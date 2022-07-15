@@ -67,19 +67,19 @@ public class OsmAndAppCustomization {
 	protected OsmandApplication app;
 	protected OsmandSettings osmandSettings;
 
-	private Map<String, Bitmap> navDrawerLogos = new HashMap<>();
+	private final Map<String, Bitmap> navDrawerLogos = new HashMap<>();
 
 	private String navDrawerFooterIntent;
 	private String navDrawerFooterAppName;
 	private String navDrawerFooterPackageName;
 
-	private Set<String> featuresEnabledIds = new HashSet<>();
-	private Set<String> featuresDisabledIds = new HashSet<>();
-	private Set<String> featuresEnabledPatterns = new HashSet<>();
-	private Set<String> featuresDisabledPatterns = new HashSet<>();
-	private Set<ApplicationMode> marginAppModeUsage = new HashSet<>();
-	private Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
-	private Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	private final Set<String> featuresEnabledIds = new HashSet<>();
+	private final Set<String> featuresDisabledIds = new HashSet<>();
+	private final Set<String> featuresEnabledPatterns = new HashSet<>();
+	private final Set<String> featuresDisabledPatterns = new HashSet<>();
+	private final Set<ApplicationMode> marginAppModeUsage = new HashSet<>();
+	private final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
+	private final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 	private CustomOsmandSettings customOsmandSettings;
 
 	private int marginLeft;
@@ -90,7 +90,7 @@ public class OsmAndAppCustomization {
 	private boolean featuresCustomized;
 	private boolean widgetsCustomized;
 
-	private List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
+	private final List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
 
 	public interface OsmAndAppCustomizationListener {
 
@@ -98,8 +98,8 @@ public class OsmAndAppCustomization {
 	}
 
 	public static class CustomOsmandSettings {
-		private String sharedPreferencesName;
-		private OsmandSettings settings;
+		private final String sharedPreferencesName;
+		private final OsmandSettings settings;
 
 		CustomOsmandSettings(OsmandApplication app, String sharedPreferencesName, Bundle bundle) {
 			this.sharedPreferencesName = sharedPreferencesName;
@@ -634,10 +634,10 @@ public class OsmAndAppCustomization {
 		static final String ICON_NAME_KEY = "icon_name";
 		static final String FLAGS_KEY = "flags";
 
-		private String name;
-		private String uri;
-		private String iconName;
-		private int flags;
+		private final String name;
+		private final String uri;
+		private final String iconName;
+		private final int flags;
 
 		public NavDrawerItem(String name, String uri, String iconName, int flags) {
 			this.name = name;

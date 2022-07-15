@@ -44,10 +44,10 @@ import java.util.List;
 
 public class EditProfilesFragment extends BaseOsmAndFragment {
 
-	private static String DELETED_APP_MODES_KEY = "deleted_app_modes_key";
-	private static String APP_MODES_ORDER_KEY = "app_modes_order_key";
+	private static final String DELETED_APP_MODES_KEY = "deleted_app_modes_key";
+	private static final String APP_MODES_ORDER_KEY = "app_modes_order_key";
 
-	private List<Object> items = new ArrayList<>();
+	private final List<Object> items = new ArrayList<>();
 	private HashMap<String, Integer> appModesOrders = new HashMap<>();
 	private ArrayList<String> deletedModesKeys = new ArrayList<>();
 
@@ -275,7 +275,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		private int order;
 		private boolean deleted;
-		private boolean customProfile;
+		private final boolean customProfile;
 
 		EditProfileDataObject(String stringKey, String name, String descr, int iconRes, boolean isSelected,
 							  boolean customProfile, boolean deleted, @ColorInt int iconColorLight, @ColorInt int iconColorDark, int order) {
@@ -313,13 +313,13 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		private static final int PROFILE_EDIT_TYPE = 1;
 		private static final int CATEGORY_TYPE = 3;
 
-		private OsmandApplication app;
-		private UiUtilities uiUtilities;
+		private final OsmandApplication app;
+		private final UiUtilities uiUtilities;
 
 		private List<Object> items = new ArrayList<>();
 		private ProfilesAdapterListener listener;
 
-		private boolean nightMode;
+		private final boolean nightMode;
 
 		EditProfilesAdapter(OsmandApplication app) {
 			setHasStableIds(true);
@@ -509,7 +509,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		private class InfoViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-			private TextView description;
+			private final TextView description;
 
 			InfoViewHolder(View itemView) {
 				super(itemView);
@@ -524,7 +524,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		private class CategoryViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-			private TextView title;
+			private final TextView title;
 
 			CategoryViewHolder(View itemView) {
 				super(itemView);

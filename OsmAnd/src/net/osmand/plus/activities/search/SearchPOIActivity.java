@@ -113,7 +113,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private MenuItem showFilterItem;
 	private MenuItem showOnMapItem;
 	private MenuItem searchPOILevel;
-	private static int RESULT_REQUEST_CODE = 54;
+	private static final int RESULT_REQUEST_CODE = 54;
 
 	private CharSequence tChange;
 
@@ -609,10 +609,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	class SearchAmenityTask extends AsyncTask<Void, Amenity, List<Amenity>> implements ResultMatcher<Amenity> {
 
-		private int requestType;
+		private final int requestType;
 		private TLongHashSet existingObjects = null;
 		private TLongHashSet updateExisting;
-		private Location searchLocation;
+		private final Location searchLocation;
 
 		public SearchAmenityTask(net.osmand.Location location, int requestType) {
 			this.searchLocation = location;

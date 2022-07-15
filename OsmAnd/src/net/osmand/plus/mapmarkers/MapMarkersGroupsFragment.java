@@ -107,7 +107,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final int textHeight = bounds.height();
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
+			private final float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private boolean iconHidden;
 
 			@Override

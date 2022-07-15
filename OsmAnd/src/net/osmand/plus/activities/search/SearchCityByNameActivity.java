@@ -227,7 +227,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		private final StringMatcherMode startsWith;
 		private final net.osmand.Collator cs;
 		private final String lang;
-		private boolean transliterate;
+		private final boolean transliterate;
 
 		private CityComparator(StringMatcherMode startsWith, String lang, boolean transliterate) {
 			this.startsWith = startsWith;

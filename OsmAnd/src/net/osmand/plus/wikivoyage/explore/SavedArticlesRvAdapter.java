@@ -55,7 +55,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private final Drawable readIcon;
 	private final Drawable deleteIcon;
-	private PicassoUtils picasso;
+	private final PicassoUtils picasso;
 	boolean nightMode;
 
 	public void setListener(Listener listener) {

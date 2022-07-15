@@ -7,7 +7,7 @@ import android.content.SharedPreferences.Editor;
 
 public class SettingsAPIImpl implements SettingsAPI {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public SettingsAPIImpl(OsmandApplication app) {
 		this.app = app;

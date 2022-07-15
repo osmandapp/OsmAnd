@@ -14,7 +14,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWithDescription {
 
-	private int minHeight;
+	private final int minHeight;
 
 	public BottomSheetItemWithDescriptionDifHeight(View customView,
 	                                               @LayoutRes int layoutId,

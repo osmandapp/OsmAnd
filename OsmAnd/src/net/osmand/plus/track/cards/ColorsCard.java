@@ -43,8 +43,8 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 
 	private final Fragment targetFragment;
 
-	private ApplicationMode appMode;
-	private ListStringPreference colorsListPreference;
+	private final ApplicationMode appMode;
+	private final ListStringPreference colorsListPreference;
 
 	private final List<Integer> colors;
 	private final List<Integer> customColors;

@@ -60,16 +60,16 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private static final int CATEGORIES_TYPE = 4;
 
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
-	private boolean night;
+	private final boolean night;
 	private boolean showDirectionEnabled;
 	private List<MapMarker> showDirectionMarkers;
 	private Snackbar snackbar;
 
 	private MapMarkersGroupsAdapterListener listener;
-	private UpdateLocationViewCache updateLocationViewCache;
+	private final UpdateLocationViewCache updateLocationViewCache;
 
 	public void setListener(MapMarkersGroupsAdapterListener listener) {
 		this.listener = listener;
@@ -676,7 +676,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public class CategoriesSubHeader {
 
-		private MapMarkersGroup group;
+		private final MapMarkersGroup group;
 
 		public CategoriesSubHeader(MapMarkersGroup group) {
 			this.group = group;

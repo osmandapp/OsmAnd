@@ -530,7 +530,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	class MapSourceTextWatcher implements TextWatcher {
-		private TextInputLayout relatedInputLayout;
+		private final TextInputLayout relatedInputLayout;
 
 		public MapSourceTextWatcher(TextInputLayout textInputLayout) {
 			this.relatedInputLayout = textInputLayout;
@@ -564,7 +564,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	public static class DeleteTilesTask extends AsyncTask<File, Void, Void> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		public DeleteTilesTask(OsmandApplication app) {
 			this.app = app;

@@ -121,8 +121,8 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 	private static class SavedArticlesDiffCallback extends DiffUtil.Callback {
 
-		private List<Object> oldItems;
-		private List<Object> newItems;
+		private final List<Object> oldItems;
+		private final List<Object> newItems;
 
 		SavedArticlesDiffCallback(List<Object> oldItems, List<Object> newItems) {
 			this.oldItems = oldItems;

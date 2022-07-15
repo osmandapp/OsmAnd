@@ -212,7 +212,7 @@ public class GPXDatabase {
 			GPX_COL_MAX_FILTER_ALTITUDE + " = ?, " +
 			GPX_COL_MAX_FILTER_HDOP + " = ? ";
 
-	private OsmandApplication context;
+	private final OsmandApplication context;
 
 	public static class GpxDataItem {
 

@@ -88,7 +88,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private boolean initFilter = false;
 	private String endingText = "";
 	private T endingObject;
-	private StyleSpan previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+	private final StyleSpan previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
 	
 	private static final int NAVIGATE_TO = 3;
@@ -223,7 +223,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	
-	private int MAX_VISIBLE_NAME = 18;
+	private final int MAX_VISIBLE_NAME = 18;
 	private boolean selectAddress;
 	
 	public String getCurrentFilter() {
@@ -389,7 +389,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	class UIUpdateHandler extends Handler {
-		private Map<String, Integer> endingMap = new HashMap<>();
+		private final Map<String, Integer> endingMap = new HashMap<>();
 		private int minimalIndex = Integer.MAX_VALUE;
 		private String minimalText = null;
 		

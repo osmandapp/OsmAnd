@@ -89,14 +89,14 @@ import java.util.TreeSet;
  */
 public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	// Cached ViewConfiguration and system-wide constant values
-	private int mSlop;
-	private int mMinFlingVelocity;
-	private int mMaxFlingVelocity;
-	private long mAnimationTime;
+	private final int mSlop;
+	private final int mMinFlingVelocity;
+	private final int mMaxFlingVelocity;
+	private final long mAnimationTime;
 
 	// Fixed properties
-	private ListView mListView;
-	private DismissCallbacks mCallbacks;
+	private final ListView mListView;
+	private final DismissCallbacks mCallbacks;
 	private int mViewWidth = 1; // 1 and not 0 to prevent dividing by zero
 
 	// Transient properties
@@ -111,10 +111,10 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private boolean mSwipePaused;
 	private boolean mSwipeCanceled;
 
-	private PopupWindow mUndoPopup;
+	private final PopupWindow mUndoPopup;
 	private int mValidDelayedMsgId;
-	private Handler mHideUndoHandler = new HideUndoPopupHandler();
-	private Button mUndoButton;
+	private final Handler mHideUndoHandler = new HideUndoPopupHandler();
+	private final Button mUndoButton;
 
 	private UndoStyle mUndoStyle = UndoStyle.SINGLE_POPUP;
 	private boolean mTouchBeforeAutoHide = false;
@@ -123,13 +123,13 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private int mSwipingLayout;
 
 	private final Object[] mAnimationLock = new Object[0];
-	private List<Undoable> mUndoActions = new ArrayList<>();
-	private SortedSet<PendingDismissData> mPendingDismisses = new TreeSet<>();
-	private List<View> mAnimatedViews = new LinkedList<>();
+	private final List<Undoable> mUndoActions = new ArrayList<>();
+	private final SortedSet<PendingDismissData> mPendingDismisses = new TreeSet<>();
+	private final List<View> mAnimatedViews = new LinkedList<>();
 
 	private View mSwipeDownChild;
-	private TextView mUndoPopupTextView;
-	private float mScreenDensity;
+	private final TextView mUndoPopupTextView;
+	private final float mScreenDensity;
 
 	/**
 	 * Defines the direction in which list items can be swiped out to delete them.

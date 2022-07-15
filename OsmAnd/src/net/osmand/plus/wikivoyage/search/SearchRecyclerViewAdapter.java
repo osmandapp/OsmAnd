@@ -34,12 +34,12 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 	private static final int HEADER_TYPE = 0;
 	private static final int ITEM_TYPE = 1;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private LayerDrawable placeholder;
-	private LayerDrawable historyPlaceholder;
+	private final LayerDrawable placeholder;
+	private final LayerDrawable historyPlaceholder;
 
-	private List<Object> items = new ArrayList<>();
+	private final List<Object> items = new ArrayList<>();
 
 	private View.OnClickListener onItemClickListener;
 

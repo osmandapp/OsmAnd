@@ -34,7 +34,7 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	public static final String SELECTED_KEYS = "selected_keys";
 	public static final String DISABLED_KEYS = "disabled_keys";
 
-	private List<ProfileDataObject> profiles = new ArrayList<>();
+	private final List<ProfileDataObject> profiles = new ArrayList<>();
 	private List<String> selectedProfiles;
 	private List<String> disabledProfiles;
 

@@ -15,7 +15,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRouti
 
 public class ReverseTrackCard extends MapBaseCard {
 
-	private LocalRoutingParameter parameter;
+	private final LocalRoutingParameter parameter;
 
 	public ReverseTrackCard(@NonNull MapActivity mapActivity, boolean isReverse) {
 		super(mapActivity);

@@ -153,7 +153,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private Location currentLocation;
-	private RelativeDirection lastDirection;
+	private final RelativeDirection lastDirection;
 	private long lastNotificationTime;
 	private volatile boolean autoAnnounce;
 	private volatile boolean targetDirectionFlag;

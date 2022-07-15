@@ -29,8 +29,8 @@ import net.osmand.plus.widgets.WebViewEx;
 
 public abstract class AbstractCard {
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
 	protected View view;
 
 	public abstract int getCardLayoutId();

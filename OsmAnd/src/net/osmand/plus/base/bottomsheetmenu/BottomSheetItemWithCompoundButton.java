@@ -20,8 +20,8 @@ import net.osmand.plus.utils.UiUtilities;
 public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescription {
 
 	private boolean checked;
-	private ColorStateList buttonTintList;
-	private OnCheckedChangeListener onCheckedChangeListener;
+	private final ColorStateList buttonTintList;
+	private final OnCheckedChangeListener onCheckedChangeListener;
 	@ColorRes private int compoundButtonColorId;
 	@ColorInt private Integer compoundButtonColor;
 

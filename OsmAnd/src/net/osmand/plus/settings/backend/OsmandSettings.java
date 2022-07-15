@@ -137,7 +137,7 @@ public class OsmandSettings {
 	private final Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
 
 	// cache variables
-	private long lastTimeInternetConnectionChecked = 0;
+	private final long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 
 	// TODO variable

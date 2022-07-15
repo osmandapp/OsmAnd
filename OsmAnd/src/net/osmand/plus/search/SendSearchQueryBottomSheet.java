@@ -31,7 +31,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String MISSING_SEARCH_QUERY_KEY = "missing_search_query_key";
 	public static final String MISSING_SEARCH_LOCATION_KEY = "missing_search_location_key";
 
-	private Map<String, String> params = new HashMap<>();
+	private final Map<String, String> params = new HashMap<>();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

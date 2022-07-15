@@ -28,11 +28,11 @@ import java.util.List;
 
 public class WikipediaPoiMenu {
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private WikipediaPlugin wikiPlugin;
-	private boolean nightMode;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final WikipediaPlugin wikiPlugin;
+	private final boolean nightMode;
 
 	public WikipediaPoiMenu(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;

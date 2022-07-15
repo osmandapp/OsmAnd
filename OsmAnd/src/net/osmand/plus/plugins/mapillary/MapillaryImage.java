@@ -12,8 +12,8 @@ public class MapillaryImage {
 	public static final String IS_PANORAMIC_KEY = "is_pano";
 
 	// Image location
-	private double latitude;
-	private double longitude;
+	private final double latitude;
+	private final double longitude;
 	// Camera heading.  -1 if not found.
 	private double compassAngle = -1;
 	// When the image was captured, expressed as UTC epoch time in milliseconds. Must be non-negative integer;  0 if not found.

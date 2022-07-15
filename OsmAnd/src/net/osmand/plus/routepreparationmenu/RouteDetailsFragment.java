@@ -105,12 +105,12 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
-	private List<BaseCard> menuCards = new ArrayList<>();
+	private final List<BaseCard> menuCards = new ArrayList<>();
 	@Nullable
 	private PublicTransportCard transportCard;
 	private RouteDetailsFragmentListener routeDetailsListener;
 	private RouteStatisticCard statisticCard;
-	private List<RouteInfoCard> routeInfoCards = new ArrayList<>();
+	private final List<RouteInfoCard> routeInfoCards = new ArrayList<>();
 	private RouteDetailsMenu routeDetailsMenu;
 	private RefreshMapCallback refreshMapCallback;
 

@@ -46,7 +46,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private final boolean silentImport;
 	private final String latestChanges;
 	private final int version;
-	private CallbackWithObject<List<SettingsItem>> callback;
+	private final CallbackWithObject<List<SettingsItem>> callback;
 
 	public SettingsImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
 							  @NonNull String name, List<ExportSettingsType> settingsTypes,

@@ -25,7 +25,7 @@ public class AccessibilityAssistant extends AccessibilityDelegateCompat implemen
     private volatile boolean eventsLocked;
     private volatile View focusedView;
 
-    private SparseArray<View> monitoredPages;
+    private final SparseArray<View> monitoredPages;
     private View visiblePage;
     private int visiblePageId;
 

@@ -21,10 +21,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
 	private final List<FavouritePoint> favouritePoints;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private View.OnClickListener listener;
 
-	private UpdateLocationViewCache cache;
+	private final UpdateLocationViewCache cache;
 
 	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
 		this.app = app;

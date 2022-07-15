@@ -23,8 +23,8 @@ import java.util.List;
 
 public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 
-	private List<PopUpMenuItem> items;
-	private boolean nightMode;
+	private final List<PopUpMenuItem> items;
+	private final boolean nightMode;
 
 	public PopUpMenuArrayAdapter(@NonNull Context context,
 	                             int resource,

@@ -125,12 +125,12 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Context context;
+		private final Context context;
 
-		private WikivoyageContentItem contentItem;
+		private final WikivoyageContentItem contentItem;
 
-		private Drawable itemGroupIcon;
-		private Drawable itemChildIcon;
+		private final Drawable itemGroupIcon;
+		private final Drawable itemChildIcon;
 
 		ExpandableListAdapter(Context context, WikivoyageContentItem contentItem) {
 			this.context = context;

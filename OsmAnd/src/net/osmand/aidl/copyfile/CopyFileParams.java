@@ -6,10 +6,10 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class CopyFileParams implements Parcelable {
-	private String fileName;
-	private byte[] filePartData;
-	private long startTime;
-	private boolean done;
+	private final String fileName;
+	private final byte[] filePartData;
+	private final long startTime;
+	private final boolean done;
 
 	public CopyFileParams(@NonNull String fileName, @NonNull byte[] filePartData, long startTime, boolean done) {
 		this.fileName = fileName;

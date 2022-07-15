@@ -831,8 +831,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, List<Amenity>> {
 
-		private OsmandApplication app;
-		private WeakReference<QuickSearchCoordinatesFragment> weakFragment;
+		private final OsmandApplication app;
+		private final WeakReference<QuickSearchCoordinatesFragment> weakFragment;
 		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
 
 		private final LatLon searchLocation;

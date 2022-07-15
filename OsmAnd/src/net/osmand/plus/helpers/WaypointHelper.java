@@ -84,8 +84,8 @@ public class WaypointHelper {
 	private static final double DISTANCE_IGNORE_DOUBLE_RAILWAYS = 50;
 
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
-	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
-	private ConcurrentHashMap<AlarmInfo.AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 

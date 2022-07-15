@@ -557,7 +557,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private abstract class ScrollItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 		private final List<Object> items;
-		private OsmandApplication app;
+		private final OsmandApplication app;
 		private OnClickListener listener;
 
 		ScrollItemsAdapter(OsmandApplication app, List<Object> items) {

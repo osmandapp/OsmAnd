@@ -20,15 +20,15 @@ public class CustomizationInfoParams implements Parcelable {
 	private NavDrawerFooterParams navDrawerFooterParams;
 	private SetNavDrawerItemsParams navDrawerItemsParams;
 
-	private ArrayList<SetWidgetsParams> visibilityWidgetsParams = new ArrayList<>();
-	private ArrayList<SetWidgetsParams> availabilityWidgetsParams = new ArrayList<>();
+	private final ArrayList<SetWidgetsParams> visibilityWidgetsParams = new ArrayList<>();
+	private final ArrayList<SetWidgetsParams> availabilityWidgetsParams = new ArrayList<>();
 
-	private ArrayList<PluginParams> pluginsParams = new ArrayList<>();
+	private final ArrayList<PluginParams> pluginsParams = new ArrayList<>();
 
-	private List<String> featuresEnabledIds = new ArrayList<>();
-	private List<String> featuresDisabledIds = new ArrayList<>();
-	private List<String> featuresEnabledPatterns = new ArrayList<>();
-	private List<String> featuresDisabledPatterns = new ArrayList<>();
+	private final List<String> featuresEnabledIds = new ArrayList<>();
+	private final List<String> featuresDisabledIds = new ArrayList<>();
+	private final List<String> featuresEnabledPatterns = new ArrayList<>();
+	private final List<String> featuresDisabledPatterns = new ArrayList<>();
 
 	public CustomizationInfoParams(OsmandSettingsParams settingsParams,
 	                               NavDrawerHeaderParams navDrawerHeaderParams,

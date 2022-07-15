@@ -14,10 +14,10 @@ public enum GpxSplitType {
 	DISTANCE("distance", 1, R.string.distance),
 	TIME("time", 2, R.string.shared_string_time);
 
-	private String typeName;
-	private int type;
+	private final String typeName;
+	private final int type;
 	@StringRes
-	private int resId;
+	private final int resId;
 
 	GpxSplitType(@NonNull String typeName, int type, @StringRes int resId) {
 		this.typeName = typeName;

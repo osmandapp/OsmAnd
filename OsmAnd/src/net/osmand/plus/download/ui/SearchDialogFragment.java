@@ -316,10 +316,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	private class SearchListAdapter extends BaseAdapter implements Filterable {
 
 		private SearchIndexFilter mFilter;
-		private OsmandRegions osmandRegions;
+		private final OsmandRegions osmandRegions;
 
-		private List<Object> items = new LinkedList<>();
-		private DownloadActivity ctx;
+		private final List<Object> items = new LinkedList<>();
+		private final DownloadActivity ctx;
 
 		public SearchListAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
@@ -468,7 +468,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		private final class SearchIndexFilter extends Filter {
 
-			private OsmandRegions osmandRegions;
+			private final OsmandRegions osmandRegions;
 			private final int searchCityLimit = 10000;
 			private final List<String> citySubTypes = Arrays.asList("city", "town");
 			private SearchRequest<Amenity> searchCityRequest;

@@ -19,9 +19,9 @@ import java.lang.ref.WeakReference;
 public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 
 	protected WeakReference<OsmandActionBarActivity> activity;
-	private WeakReference<Context> context;
-	private File from;
-	private File to;
+	private final WeakReference<Context> context;
+	private final File from;
+	private final File to;
 	protected ProgressImplementation progress;
 	private Runnable runOnSuccess;
 	private int movedCount;

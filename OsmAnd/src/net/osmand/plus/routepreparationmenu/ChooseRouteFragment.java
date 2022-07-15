@@ -883,7 +883,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {
-		private int routesCount;
+		private final int routesCount;
 
 		RoutesPagerAdapter(FragmentManager fm, int routesCount) {
 			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

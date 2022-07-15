@@ -50,7 +50,7 @@ public class TrackColoringCard extends MapBaseCard {
 
 	private TrackColoringAdapter coloringAdapter;
 	private TrackAppearanceItem selectedAppearanceItem;
-	private List<TrackAppearanceItem> appearanceItems;
+	private final List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
 	                         @NonNull SelectedGpxFile selectedGpxFile,
@@ -307,13 +307,13 @@ public class TrackColoringCard extends MapBaseCard {
 
 	public static class TrackAppearanceItem {
 
-		private String attrName;
-		private String localizedValue;
+		private final String attrName;
+		private final String localizedValue;
 
 		@DrawableRes
-		private int iconId;
+		private final int iconId;
 
-		private boolean isActive;
+		private final boolean isActive;
 
 		public TrackAppearanceItem(String attrName, String localizedValue, int iconId, boolean isActive) {
 			this.attrName = attrName;

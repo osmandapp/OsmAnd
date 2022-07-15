@@ -27,9 +27,9 @@ public class LiveMonitoringHelper {
 
 	private static final Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
+	private final ConcurrentLinkedQueue<LiveMonitoringData> queue;
 
 	private LatLon lastPoint;
 	private long lastTimeUpdated;

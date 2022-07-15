@@ -28,14 +28,14 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 
 	public static final int TYPE = 70;
 
-	private DownloadIndexesThread downloadThread;
-	private List<IndexItem> items;
+	private final DownloadIndexesThread downloadThread;
+	private final List<IndexItem> items;
 
-	private Drawable downloadIcon;
-	private Drawable cancelIcon;
+	private final Drawable downloadIcon;
+	private final Drawable cancelIcon;
 	private WeakReference<NeededMapsVH> ref;
 	private CardListener listener;
-	private View.OnClickListener onItemClickListener;
+	private final View.OnClickListener onItemClickListener;
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;

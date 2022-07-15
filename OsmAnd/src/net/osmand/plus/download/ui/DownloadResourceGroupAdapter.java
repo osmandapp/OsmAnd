@@ -20,7 +20,7 @@ import java.util.List;
 public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
 
 	private List<DownloadResourceGroup> data = new ArrayList<DownloadResourceGroup>();
-	private DownloadActivity ctx;
+	private final DownloadActivity ctx;
 	private DownloadResourceGroup mainGroup;
 
 

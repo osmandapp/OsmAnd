@@ -29,8 +29,8 @@ import java.util.Map;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 
 public class DownloadActivityType {
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
-	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+	private static final Map<String, DownloadActivityType> byTag = new HashMap<>();
 
 	public static final DownloadActivityType NORMAL_FILE =
 			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
@@ -64,8 +64,8 @@ public class DownloadActivityType {
 	private final int stringResource;
 	private final int iconResource;
 
-	private String tag;
-	private int orderIndex;
+	private final String tag;
+	private final int orderIndex;
 
 	public DownloadActivityType(int stringResource, int iconResource, String tag, int orderIndex) {
 		this.stringResource = stringResource;

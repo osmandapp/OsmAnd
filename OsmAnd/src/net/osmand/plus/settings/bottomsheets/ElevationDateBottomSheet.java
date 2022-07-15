@@ -59,7 +59,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private CommonPreference<Boolean> useHeightPref;
 
 	private BottomSheetItemWithCompoundButton useHeightButton;
-	private List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
+	private final List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
 
 	private int selectedEntryIndex = -1;
 

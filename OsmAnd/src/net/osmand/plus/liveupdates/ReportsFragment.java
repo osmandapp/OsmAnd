@@ -61,8 +61,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	private Spinner monthReportsSpinner;
 	private MonthsForReportsAdapter monthsForReportsAdapter;
 
-	private CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
-	private UsersReportFragment userReportFragment = new UsersReportFragment();
+	private final CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
+	private final UsersReportFragment userReportFragment = new UsersReportFragment();
 	private TextView countryNameTextView;
 	private CountryItem selectedCountryItem;
 

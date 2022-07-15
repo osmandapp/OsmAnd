@@ -41,7 +41,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	private RecyclerView recyclerView;
 	private TextView lookingForTracksText;
 
-	private GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
+	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
 		@Override
 		public boolean isCancelled() {
 			ProcessGpxTask processor = asyncProcessor;

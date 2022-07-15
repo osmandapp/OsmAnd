@@ -895,7 +895,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	private TextView.OnEditorActionListener mOnEditorActionListener =
+	private final TextView.OnEditorActionListener mOnEditorActionListener =
 			new TextView.OnEditorActionListener() {
 				@Override
 				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

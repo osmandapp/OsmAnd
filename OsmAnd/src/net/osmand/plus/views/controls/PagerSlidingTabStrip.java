@@ -100,14 +100,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private static final int PADDING_LEFT_INDEX = 3;
 	private static final int PADDING_RIGHT_INDEX = 4;
 
-	private LinearLayout.LayoutParams defaultTabLayoutParams;
-	private LinearLayout.LayoutParams expandedTabLayoutParams;
+	private final LinearLayout.LayoutParams defaultTabLayoutParams;
+	private final LinearLayout.LayoutParams expandedTabLayoutParams;
 
 	private final PageListener pageListener = new PageListener();
 	private OnTabReselectedListener tabReselectedListener = null;
 	public OnPageChangeListener delegatePageListener;
 
-	private LinearLayout tabsContainer;
+	private final LinearLayout tabsContainer;
 	private ViewPager pager;
 
 	private int tabCount;
@@ -115,8 +115,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int currentPosition = 0;
 	private float currentPositionOffset = 0f;
 
-	private Paint rectPaint;
-	private Paint dividerPaint;
+	private final Paint rectPaint;
+	private final Paint dividerPaint;
 
 	@ColorInt
 	private int indicatorColor;
@@ -431,7 +431,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		super.onLayout(changed, l, t, r, b);
 	}
 
-	private OnGlobalLayoutListener firstTabGlobalLayoutListener = new OnGlobalLayoutListener() {
+	private final OnGlobalLayoutListener firstTabGlobalLayoutListener = new OnGlobalLayoutListener() {
 
 		@SuppressLint("NewApi")
 		@Override

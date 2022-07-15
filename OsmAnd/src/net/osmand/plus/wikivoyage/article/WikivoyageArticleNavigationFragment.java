@@ -146,13 +146,13 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Context context;
+		private final Context context;
 
-		private Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap;
-		private List<WikivoyageSearchResult> headers;
+		private final Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap;
+		private final List<WikivoyageSearchResult> headers;
 
-		private Drawable itemGroupIcon;
-		private Drawable itemChildIcon;
+		private final Drawable itemGroupIcon;
+		private final Drawable itemChildIcon;
 
 		ExpandableListAdapter(Context context, Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
 			this.context = context;

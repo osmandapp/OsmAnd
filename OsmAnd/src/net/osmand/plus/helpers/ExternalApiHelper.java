@@ -189,7 +189,7 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_SEARCH_LOCATION_UNDEFINED = 1007;
 	public static final int RESULT_CODE_ERROR_QUICK_ACTION_NOT_FOUND = 1008;
 
-	private MapActivity mapActivity;
+	private final MapActivity mapActivity;
 	private int resultCode;
 	private boolean finish;
 

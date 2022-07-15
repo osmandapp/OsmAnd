@@ -42,7 +42,7 @@ public class DownloadOsmandIndexesHelper {
 		ArrayList<IndexItem> indexFiles = new ArrayList<IndexItem>();
 		private String mapversion;
 
-		private Comparator<IndexItem> comparator = new Comparator<IndexItem>() {
+		private final Comparator<IndexItem> comparator = new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem o1, IndexItem o2) {
 				String object1 = o1.getFileName();

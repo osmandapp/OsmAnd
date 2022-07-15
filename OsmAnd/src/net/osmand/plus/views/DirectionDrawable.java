@@ -26,7 +26,7 @@ public class DirectionDrawable extends Drawable {
 	private float angle;
 	int resourceId = -1;
 	Drawable arrowImage ;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public DirectionDrawable(OsmandApplication ctx, float width, float height, int resourceId, int clrId) {
 		this(ctx, width, height);
