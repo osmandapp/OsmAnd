@@ -4776,4 +4776,11 @@
     <string name="trip_recording_duration_widget_desc">Viser tidspunktet for sporoptagelse, varigheden i minutter/timer af den aktuelt optagede tur.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier specielt designet til mountainbiking</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
+    <string name="connect_with_straight_line">Forbind med en lige linje</string>
+    <string name="attach_roads_descr">Ønsker du at tilnærme dit spor en gyldig rute, der er knyttet til offline kort\? I så fald vil du få korrigeret vejhøjde, vejinformation og sving, som du senere kan bruge til navigation.</string>
+    <string name="attach_roads_warning">Du kan kun vedhæfte et optaget spor til vejene</string>
+    <string name="download_tiles">Download kortfliser</string>
+    <string name="shared_string_only_missing">Kun mangler</string>
+    <string name="without_profiles_changing">Uden at profiler ændres</string>
+    <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
 </resources>
