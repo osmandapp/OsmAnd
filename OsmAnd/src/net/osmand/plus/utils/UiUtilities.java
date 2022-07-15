@@ -487,7 +487,7 @@ public class UiUtilities {
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ColorUtilities.getDefaultIconColor(ctx, nightMode);
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {-android.R.attr.state_checked},
 				new int[] {android.R.attr.state_checked}
 		};
@@ -553,20 +553,20 @@ public class UiUtilities {
 		if (compoundButton == null) {
 			return;
 		}
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {-android.R.attr.state_enabled},
 				new int[] {-android.R.attr.state_checked},
 				new int[] {android.R.attr.state_checked}
 		};
 		if (compoundButton instanceof SwitchCompat) {
-			int[] thumbColors = new int[] {inactiveColorPrimary, inactiveColorPrimary, activeColor};
-			int[] trackColors = new int[] {inactiveColorSecondary, inactiveColorSecondary, inactiveColorSecondary};
+			int[] thumbColors = {inactiveColorPrimary, inactiveColorPrimary, activeColor};
+			int[] trackColors = {inactiveColorSecondary, inactiveColorSecondary, inactiveColorSecondary};
 
 			SwitchCompat sc = (SwitchCompat) compoundButton;
 			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getThumbDrawable()), new ColorStateList(states, thumbColors));
 			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getTrackDrawable()), new ColorStateList(states, trackColors));
 		} else if (compoundButton instanceof TintableCompoundButton) {
-			int[] colors = new int[] {inactiveColorPrimary, inactiveColorPrimary, activeColor};
+			int[] colors = {inactiveColorPrimary, inactiveColorPrimary, activeColor};
 			ColorStateList csl = new ColorStateList(states, colors);
 			((TintableCompoundButton) compoundButton).setSupportButtonTintList(csl);
 		}
@@ -604,7 +604,7 @@ public class UiUtilities {
 		ctx = new ContextThemeWrapper(ctx, themeId);
 
 		// colors
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {android.R.attr.state_enabled},
 				new int[] {-android.R.attr.state_enabled}
 		};
@@ -645,7 +645,7 @@ public class UiUtilities {
 		ctx = new ContextThemeWrapper(ctx, themeId);
 
 		// colors
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {android.R.attr.state_enabled},
 				new int[] {-android.R.attr.state_enabled}
 		};

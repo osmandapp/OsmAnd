@@ -242,7 +242,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		int activeColor = ColorUtilities.getActiveColor(app, isNightMode());
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, isNightMode());
 
-		String[] memoryUnitsFormats = new String[] {
+		String[] memoryUnitsFormats = {
 				getString(R.string.shared_string_memory_kb_desc),
 				getString(R.string.shared_string_memory_mb_desc),
 				getString(R.string.shared_string_memory_gb_desc),

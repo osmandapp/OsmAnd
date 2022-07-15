@@ -109,7 +109,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	public static final String SHOULD_SHOW = "should_show";
 
 
-	private final DashFragmentData[] fragmentsData = new DashFragmentData[] {
+	private final DashFragmentData[] fragmentsData = {
 			new DashFragmentData(DashDashboardOrDrawerFragment.TAG, DashDashboardOrDrawerFragment.class,
 					DashDashboardOrDrawerFragment.SHOULD_SHOW_FUNCTION, 5, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,

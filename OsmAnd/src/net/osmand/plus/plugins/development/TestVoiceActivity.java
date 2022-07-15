@@ -244,7 +244,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		if (!p.supportsStructuredStreetNames()) {
 			return new StreetName();
 		}
-		String[] streetNames = new String[]{"toRef", "toStreetName", "toDest", "fromRef", "fromStreetName", "fromDest"};
+		String[] streetNames = {"toRef", "toStreetName", "toDest", "fromRef", "fromStreetName", "fromDest"};
 		for (int i = 0; i < args.length; i++) {
 			res.put(streetNames[i], args[i]);
 		}

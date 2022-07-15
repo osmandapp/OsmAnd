@@ -84,7 +84,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	private CountDownTimer cTimer = null;
 
-	private final int[] running = new int[] {-1};
+	private final int[] running = {-1};
 
 	private boolean portrait;
 	private boolean nightMode;

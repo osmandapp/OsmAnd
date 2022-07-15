@@ -301,7 +301,7 @@ public class TravelLocalDataHelper {
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
 				String selectedTravelBookName = context.getTravelHelper().getSelectedTravelBookName();
 				if (selectedTravelBookName != null) {
-					Object[] args = new Object[] {selectedTravelBookName};
+					Object[] args = {selectedTravelBookName};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
 					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
 				}

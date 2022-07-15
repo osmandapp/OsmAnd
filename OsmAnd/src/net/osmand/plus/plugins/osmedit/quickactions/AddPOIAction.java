@@ -419,7 +419,7 @@ public class AddPOIAction extends QuickAction {
 
 			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
 			View deleteButton = convertView.findViewById(R.id.delete_button);
-			final String[] previousTag = new String[]{tg};
+			final String[] previousTag = {tg};
 			deleteButton.setOnClickListener(v -> {
 				linearLayout.removeView(convertView);
 				tagsData.remove(tagEditText.getText().toString());

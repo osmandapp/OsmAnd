@@ -67,7 +67,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 	}
 
 	private void setupTurnScreenOnTimePref() {
-		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 30, 45, 60};
+		Integer[] entryValues = {0, 5, 10, 15, 20, 30, 45, 60};
 		String[] entries = new String[entryValues.length];
 
 		entries[0] = getString(R.string.keep_screen_on);

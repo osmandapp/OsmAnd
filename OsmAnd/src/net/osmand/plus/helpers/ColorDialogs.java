@@ -25,7 +25,7 @@ import java.util.List;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ColorDialogs {
-	public static int[] paletteColors = new int[] {
+	public static int[] paletteColors = {
 			R.string.rendering_value_darkyellow_name,
 			R.string.rendering_value_red_name,
 			R.string.rendering_value_orange_name,
@@ -40,7 +40,7 @@ public class ColorDialogs {
 			R.string.rendering_value_black_name
 	};
 
-	public static int[] pallette = new int[] {
+	public static int[] pallette = {
 			0xffeecc22,
 			0xffd00d0d,
 			0xffff5020,
@@ -55,7 +55,7 @@ public class ColorDialogs {
 			0xff000001
 	};
 
-	public static String[] paletteColorTags = new String[] {
+	public static String[] paletteColorTags = {
 			"darkyellow",
 			"red",
 			"orange",

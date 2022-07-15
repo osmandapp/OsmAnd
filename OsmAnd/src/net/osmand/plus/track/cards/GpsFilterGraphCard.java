@@ -74,7 +74,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	@Nullable
 	private GpxDisplayItem getGpxDisplayItem() {
-		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+		GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 		List<GpxDisplayItem> displayItems = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 		return Algorithms.isEmpty(displayItems) ? null : displayItems.get(0);
 	}

@@ -85,7 +85,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	public static final String UPDATE_DYNAMIC_ITEMS = "update_dynamic_items";
 	public static final GPXTabItemType[] INIT_TAB_ITEMS =
-			new GPXTabItemType[] {GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
+			{GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;

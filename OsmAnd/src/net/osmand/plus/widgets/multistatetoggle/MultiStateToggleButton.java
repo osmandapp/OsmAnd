@@ -125,9 +125,9 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
 		int radius = AndroidUtils.dpToPx(app, 4);
-		float[] leftBtnRadii = new float[]{radius, radius, 0, 0, 0, 0, radius, radius};
-		float[] rightBtnRadii = new float[]{0, 0, radius, radius, radius, radius, 0, 0};
-		float[] internalBtnRadii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+		float[] leftBtnRadii = {radius, radius, 0, 0, 0, 0, radius, radius};
+		float[] rightBtnRadii = {0, 0, radius, radius, radius, radius, 0, 0};
+		float[] internalBtnRadii = {0, 0, 0, 0, 0, 0, 0, 0};
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
 		showAllDividers();

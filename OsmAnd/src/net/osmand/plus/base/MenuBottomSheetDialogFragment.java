@@ -471,7 +471,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected LayerDrawable createBackgroundDrawable(@NonNull Context ctx, @DrawableRes int shadowDrawableResId) {
 		Drawable shadowDrawable = ContextCompat.getDrawable(ctx, shadowDrawableResId);
-		Drawable[] layers = new Drawable[] {shadowDrawable, getColoredBg(ctx)};
+		Drawable[] layers = {shadowDrawable, getColoredBg(ctx)};
 		return new LayerDrawable(layers);
 	}
 

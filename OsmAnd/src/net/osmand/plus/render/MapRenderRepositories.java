@@ -440,9 +440,9 @@ public class MapRenderRepositories {
 		ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
 		ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
 		
-		int[] count = new int[]{0};
-		boolean[] ocean = new boolean[]{false};
-		boolean[] land = new boolean[]{false};
+		int[] count = {0};
+		boolean[] ocean = {false};
+		boolean[] land = {false};
 		List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
 		List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
 		int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
@@ -493,7 +493,7 @@ public class MapRenderRepositories {
 			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
 		}
 		if (addBasemapCoastlines && mi != null) {
-			int[] coordinates = new int[]{leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
+			int[] coordinates = {leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
 					topY};
 			BinaryMapDataObject o = new BinaryMapDataObject(-1, coordinates, new int[0][],  
 					RenderingRulesStorage.POLYGON_RULES, true,

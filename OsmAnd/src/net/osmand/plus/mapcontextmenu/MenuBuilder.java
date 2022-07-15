@@ -100,7 +100,7 @@ public class MenuBuilder {
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 
-	protected static final String[] arrowChars = new String[] {"=>", " - "};
+	protected static final String[] arrowChars = {"=>", " - "};
 	protected static final String NEAREST_WIKI_KEY = "nearest_wiki_key";
 	protected static final String NEAREST_POI_KEY = "nearest_poi_key";
 	protected static final String DIVIDER_ROW_KEY = "divider_row_key";

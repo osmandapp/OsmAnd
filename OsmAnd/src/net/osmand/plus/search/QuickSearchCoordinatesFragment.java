@@ -1027,7 +1027,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			final QuickSearchCoordinatesFragment parent = (QuickSearchCoordinatesFragment) getParentFragment();
-			String[] entries = new String[] {
+			String[] entries = {
 					PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_DEGREES),
 				PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_MINUTES),
 				PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_SECONDS),

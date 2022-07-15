@@ -757,7 +757,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static class PoiInfoPagerAdapter extends FragmentPagerAdapter {
-		private final Fragment[] fragments = new Fragment[]{new BasicEditPoiFragment(),
+		private final Fragment[] fragments = {new BasicEditPoiFragment(),
 				new AdvancedEditPoiFragment()};
 		private final String[] titles;
 

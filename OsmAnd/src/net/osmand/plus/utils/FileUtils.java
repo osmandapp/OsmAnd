@@ -45,7 +45,7 @@ public class FileUtils {
 			dest.getParentFile().mkdirs();
 		}
 		if (source.renameTo(dest)) {
-			final String[] suffixes = new String[] {"-journal", "-wal", "-shm"};
+			final String[] suffixes = {"-journal", "-wal", "-shm"};
 			for (String s : suffixes) {
 				File file = new File(ctx.getDatabasePath(source + s).toString());
 				if (file.exists()) {

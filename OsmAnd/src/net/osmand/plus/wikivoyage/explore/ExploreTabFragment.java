@@ -398,7 +398,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, Pair<List<IndexItem>, List<IndexItem>>> {
 
-		private static final DownloadActivityType[] types = new DownloadActivityType[]{
+		private static final DownloadActivityType[] types = {
 				DownloadActivityType.NORMAL_FILE,
 				DownloadActivityType.WIKIPEDIA_FILE
 		};

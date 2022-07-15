@@ -148,7 +148,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	private void setupSpeechRatePref() {
-		Float[] entryValues = new Float[] {0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f};
+		Float[] entryValues = {0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f};
 		String[] entries = new String[entryValues.length];
 
 		for (int i = 0; i < entries.length; i++) {
@@ -168,8 +168,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	private void setupAutoAnnouncePeriodPref() {
-		int[] seconds = new int[] {5, 10, 15, 20, 30, 45, 60, 90};
-		int[] minutes = new int[] {2, 3, 5};
+		int[] seconds = {5, 10, 15, 20, 30, 45, 60, 90};
+		int[] minutes = {2, 3, 5};
 
 		Integer[] entryValues = new Integer[seconds.length + minutes.length];
 		String[] entries = new String[entryValues.length];

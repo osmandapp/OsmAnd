@@ -189,14 +189,14 @@ public class ApplicationMode {
 
 	private static void initRegVisibility() {
 		// CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, HORSE
-		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN,
+		ApplicationMode[] exceptDefault = {CAR, BICYCLE, PEDESTRIAN,
 				PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[] {};
+		ApplicationMode[] none = {};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
-		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
+		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
+		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(NEXT_TURN.id, navigationSet1);
 		regWidgetVisibility(SMALL_NEXT_TURN.id, navigationSet2);

@@ -470,7 +470,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return;
 		}
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final float[] angleValue = new float[] {mode.getStrAngle()};
+		final float[] angleValue = {mode.getStrAngle()};
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);

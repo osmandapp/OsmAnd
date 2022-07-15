@@ -154,7 +154,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackMinDistancePref() {
-		Float[] entryValues = new Float[] {0.f, 2.0f, 5.0f, 10.0f, 20.0f, 30.0f, 50.0f};
+		Float[] entryValues = {0.f, 2.0f, 5.0f, 10.0f, 20.0f, 30.0f, 50.0f};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_not_selected);
 		for (int i = 1; i < entryValues.length; i++) {
@@ -175,7 +175,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackPrecisionPref() {
-		Float[] entryValues = new Float[] {0.f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 50.0f, 100.0f};
+		Float[] entryValues = {0.f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 50.0f, 100.0f};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_not_selected);
 		for (int i = 1; i < entryValues.length; i++) {
@@ -198,7 +198,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackMinSpeedPref() {
-		Float[] entryValues = new Float[] {0.f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
+		Float[] entryValues = {0.f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_not_selected);
 		entries[1] = "> 0"; // This option for the GPS chipset motion detection
@@ -244,7 +244,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupTrackStorageDirectoryPref() {
-		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY};
+		Integer[] entryValues = {REC_DIRECTORY, MONTHLY_DIRECTORY};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.store_tracks_in_rec_directory);
 		entries[1] = getString(R.string.store_tracks_in_monthly_directories);

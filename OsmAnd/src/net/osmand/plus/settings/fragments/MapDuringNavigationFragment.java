@@ -24,7 +24,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	}
 
 	private void setupAutoFollowPref() {
-		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
+		Integer[] entryValues = {0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_never);
 		for (int i = 1; i < entryValues.length; i++) {
@@ -75,8 +75,8 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 
 	private void setupMapDirectionToCompassPref() {
 		//array size must be equal!
-		Float[] valuesKmh = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] valuesMph = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
+		Float[] valuesKmh = {0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] valuesMph = {0f, 3f, 5f, 7f, 10f, 15f};
 		String[] names;
 		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
 			names = new String[valuesKmh.length];

@@ -151,9 +151,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return "feature_articles/trip-recording-plugin.html";
 	}
 
-	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
-	public static final int[] MINUTES = new int[] {2, 3, 5};
-	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
+	public static final int[] SECONDS = {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
+	public static final int[] MINUTES = {2, 3, 5};
+	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {

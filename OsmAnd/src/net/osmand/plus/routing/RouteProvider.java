@@ -178,8 +178,8 @@ public class RouteProvider {
 		RouteCalculationResult rcr = params.previousToRecalculate;
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
 		try {
-			int[] startI = new int[]{0};
-			int[] endI = new int[]{locs.size()};
+			int[] startI = {0};
+			int[] endI = {locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
@@ -316,8 +316,8 @@ public class RouteProvider {
 		}
 
 		List<Location> gpxRoute;
-		int[] startI = new int[]{0};
-		int[] endI = new int[]{gpxParams.points.size()};
+		int[] startI = {0};
+		int[] endI = {gpxParams.points.size()};
 		if (calcWholeRoute) {
 			gpxRoute = gpxParams.points;
 		} else {

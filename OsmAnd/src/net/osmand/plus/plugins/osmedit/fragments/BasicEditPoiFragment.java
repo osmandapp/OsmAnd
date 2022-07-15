@@ -76,7 +76,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
-		InputFilter[] lengthLimit = new InputFilter[] {
+		InputFilter[] lengthLimit = {
 				new LengthFilter(AMENITY_TEXT_LENGTH)
 		};
 		streetEditText = view.findViewById(R.id.streetEditText);

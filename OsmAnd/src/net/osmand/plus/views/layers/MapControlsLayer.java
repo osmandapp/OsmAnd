@@ -279,7 +279,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else {
 				AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 				bld.setTitle(R.string.new_directions_point_dialog);
-				final int[] defaultVls = new int[] {0};
+				final int[] defaultVls = {0};
 				bld.setSingleChoiceItems(new String[] {
 						mapActivity.getString(R.string.clear_intermediate_points),
 						mapActivity.getString(R.string.keep_intermediate_points)

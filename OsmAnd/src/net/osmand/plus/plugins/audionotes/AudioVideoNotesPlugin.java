@@ -549,7 +549,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public AudioVideoNotesPlugin(OsmandApplication app) {
 		super(app);
 
-		ApplicationMode[] noAppMode = new ApplicationMode[] {};
+		ApplicationMode[] noAppMode = {};
 		ApplicationMode.regWidgetVisibility(AV_NOTES_ON_REQUEST.id, noAppMode);
 		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_AUDIO.id, noAppMode);
 		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_VIDEO.id, noAppMode);

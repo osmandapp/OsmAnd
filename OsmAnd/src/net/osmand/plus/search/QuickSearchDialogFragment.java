@@ -2361,12 +2361,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public class SearchFragmentPagerAdapter extends FragmentPagerAdapter {
-		private final String[] fragments = new String[] {
+		private final String[] fragments = {
 				QuickSearchHistoryListFragment.class.getName(),
 				QuickSearchCategoriesListFragment.class.getName(),
 				QuickSearchAddressListFragment.class.getName()
 		};
-		private final int[] titleIds = new int[] {
+		private final int[] titleIds = {
 				QuickSearchHistoryListFragment.TITLE,
 				QuickSearchCategoriesListFragment.TITLE,
 				QuickSearchAddressListFragment.TITLE

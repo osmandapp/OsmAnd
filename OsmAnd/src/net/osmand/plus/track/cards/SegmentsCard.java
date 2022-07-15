@@ -37,7 +37,7 @@ import java.util.List;
 public class SegmentsCard extends MapBaseCard {
 
 	private final TrackDisplayHelper displayHelper;
-	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+	private final GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 	private final SegmentActionsListener listener;
 	private final SelectedGpxFile selectedGpxFile;
 	private final SelectedGpxPoint gpxPoint;

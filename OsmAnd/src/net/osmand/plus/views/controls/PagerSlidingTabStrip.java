@@ -82,7 +82,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	// @formatter:off
-	private static final int[] ATTRS = new int[]{
+	private static final int[] ATTRS = {
 			android.R.attr.textColorPrimary,
 			android.R.attr.textSize,
 			android.R.attr.textColor,
