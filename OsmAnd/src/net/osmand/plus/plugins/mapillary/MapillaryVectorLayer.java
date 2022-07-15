@@ -20,6 +20,9 @@ import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Point;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.MapillaryTilesProvider;
+import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -62,6 +65,9 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	private Bitmap point;
 	private Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 
+	//OpenGL
+	MapillaryTilesProvider mapillaryTilesProvider;
+
 	MapillaryVectorLayer(@NonNull Context context) {
 		super(context, false);
 		plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
@@ -82,6 +88,28 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
 		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location_view_angle);
 		point = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_photo_dot);
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		MapRendererView mapRenderer = getMapRenderer();
+
+		if (mapRenderer != null) {
+			if (mapillaryTilesProvider == null) {
+				int layerIndex = view.getLayerIndex(this);
+				if (map != null) {
+					mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, drawSettings.mapRefreshTimestamp, tileBox, view.getDensity());
+					mapRenderer.setMapLayerProvider(layerIndex, mapillaryTilesProvider.instantiateProxy(true));
+					mapillaryTilesProvider.swigReleaseOwnership();
+				} else {
+					mapRenderer.resetMapLayerProvider(layerIndex);
+				}
+			} else {
+				mapillaryTilesProvider.setMapRefreshTimestamp(drawSettings.mapRefreshTimestamp);
+				mapillaryTilesProvider.setRenderedTileBox(tileBox);
+				visiblePoints = mapillaryTilesProvider.getVisiblePoints();
+			}
+		}
 	}
 
 	@Override
