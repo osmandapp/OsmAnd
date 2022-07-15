@@ -613,7 +613,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			String description = routeDirectionInfo.getDescriptionRoutePart();
 			html.append(BR);
 			html.append("<p>")
-					.append(String.valueOf(i + 1)).append(". ")
+					.append(i + 1).append(". ")
 					.append(NBSP).append(description).append(NBSP)
 					.append("(").append(distance).append(")</p>");
 		}
@@ -663,7 +663,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			html.append("</td>");
 			String description = routeDirectionInfo.getDescriptionRoutePart();
 			html.append("<td>");
-			html.append(String.valueOf(i + 1)).append(". ").append(description);
+			html.append(i + 1).append(". ").append(description);
 			html.append("</td>");
 			CumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(i, directionsInfo);
 			html.append("<td>");

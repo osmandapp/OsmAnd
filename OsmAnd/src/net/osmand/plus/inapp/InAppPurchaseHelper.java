@@ -919,13 +919,13 @@ public abstract class InAppPurchaseHelper {
 									if (obj.has("error")) {
 										complain("SendToken Error: "
 												+ obj.getString("error")
-												+ " (response=" + result + " google=" + info.toString() + ")");
+												+ " (response=" + result + " google=" + info + ")");
 									}
 								} catch (JSONException e) {
 									logError("SendToken", e);
 									complain("SendToken Error: "
 											+ (e.getMessage() != null ? e.getMessage() : "JSONException")
-											+ " (response=" + result + " google=" + info.toString() + ")");
+											+ " (response=" + result + " google=" + info + ")");
 								}
 							}
 						}

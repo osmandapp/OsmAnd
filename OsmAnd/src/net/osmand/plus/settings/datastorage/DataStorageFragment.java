@@ -552,7 +552,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	@Override
 	public void onFinishUpdating(String tag) {
 		updateAllSettings();
-		if (tag != null && tag.equals(TILES_MEMORY)) {
+		if (TILES_MEMORY.equals(tag)) {
 			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
 		}
 	}

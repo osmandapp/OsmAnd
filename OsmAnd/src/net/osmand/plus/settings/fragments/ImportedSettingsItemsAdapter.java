@@ -72,7 +72,7 @@ public class ImportedSettingsItemsAdapter extends
 		holder.subTitle.setText(String.format(
 				app.getString(R.string.ltr_or_rtl_combine_via_colon),
 				app.getString(R.string.items_added),
-				String.valueOf(itemsMap.get(currentItemType).size()))
+				itemsMap.get(currentItemType).size())
 		);
 
 		switch (currentItemType) {

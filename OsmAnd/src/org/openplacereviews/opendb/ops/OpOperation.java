@@ -81,7 +81,7 @@ public class OpOperation extends OpObject {
 	}
 
 	public void addOtherSignedBy(String value) {
-		super.addOrSetStringValue(F_SIGNED_BY, value);
+		addOrSetStringValue(F_SIGNED_BY, value);
 	}
 
 	public List<String> getSignedBy() {

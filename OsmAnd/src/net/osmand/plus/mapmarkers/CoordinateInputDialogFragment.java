@@ -897,7 +897,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 									CharSequence pasteData = pasteItem.getText();
 									if (pasteData != null) {
 										String str = inputEditText.getText().toString();
-										inputEditText.setText(str + pasteData.toString());
+										inputEditText.setText(str + pasteData);
 										inputEditText.setSelection(inputEditText.getText().length());
 									}
 									return true;

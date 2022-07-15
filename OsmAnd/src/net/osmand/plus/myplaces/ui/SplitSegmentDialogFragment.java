@@ -434,7 +434,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				overviewTextView.setTextColor(defaultTextColor);
 				overviewTextView.setText(app.getString(R.string.shared_string_overview));
 				if (currentGpxDisplayItem != null) {
-					overviewTextView.setText(app.getString(R.string.shared_string_overview) + "  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
+					overviewTextView.setText(app.getString(R.string.shared_string_overview) + "  (" + currentGpxDisplayItem.analysis.points + ")");
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.shared_string_time_span) + ": " + Algorithms.formatDuration((int) (currentGpxDisplayItem.analysis.timeSpan / 1000), app.accessibilityEnabled()));
 				}
 			} else {
@@ -447,7 +447,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
-						overviewTextView.append("  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
+						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.points + ")");
 					} else if (currentGpxDisplayItem.group.isSplitTime()) {
 						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 						overviewTextView.setText("");
@@ -455,7 +455,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) metricStart, app));
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) currentGpxDisplayItem.analysis.metricEnd, app));
-						overviewTextView.append("  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
+						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.points + ")");
 					}
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.of, position, adapter.getCount() - 1));
 				}

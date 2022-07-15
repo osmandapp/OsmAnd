@@ -581,7 +581,7 @@ public class MapMarkersHelper {
 	@Nullable
 	public MapMarker getMapMarker(@NonNull LatLon latLon) {
 		for (MapMarker marker : getAllMarkers()) {
-			if (marker.point != null && marker.point.equals(latLon)) {
+			if (latLon.equals(marker.point)) {
 				return marker;
 			}
 		}

@@ -70,7 +70,7 @@ public class SliderCard extends MapBaseCard {
 
 	private String getStringValueWithMetric(int value) {
 		return String.format(view.getContext().getString(R.string.ltr_or_rtl_combine_via_space),
-				String.valueOf(value), view.getContext().getString(R.string.m));
+				value, view.getContext().getString(R.string.m));
 	}
 
 	interface SliderCardListener {

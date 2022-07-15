@@ -1081,7 +1081,7 @@ public class AndroidUtils {
 				values.append(split);
 			}
 		}
-		return "INSERT INTO " + tableName + " (" + keys.toString() + ") VALUES (" + values.toString() + ")";
+		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {

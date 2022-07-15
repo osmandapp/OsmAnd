@@ -25,7 +25,7 @@ public class UploadOpenstreetmapPointAsyncTask
 	private final ProgressDialogFragment progress;
 	private final OpenstreetmapRemoteUtil remotepoi;
 	private final OsmBugsRemoteUtil remotebug;
-	private int listSize;
+	private final int listSize;
 	private boolean interruptUploading;
 	private final OsmEditsUploadListener listener;
 	private final OsmEditingPlugin plugin;

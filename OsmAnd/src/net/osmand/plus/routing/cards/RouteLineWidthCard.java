@@ -204,7 +204,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 	private static WidthMode findAppropriateMode(@Nullable String widthKey) {
 		if (widthKey != null) {
 			for (WidthMode mode : WidthMode.values()) {
-				if (mode.widthKey != null && mode.widthKey.equals(widthKey)) {
+				if (widthKey.equals(mode.widthKey)) {
 					return mode;
 				}
 			}

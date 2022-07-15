@@ -346,7 +346,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 String title = String.format(
                         getString(R.string.ltr_or_rtl_combine_via_colon),
                         getString(R.string.shared_string_selected),
-                        String.valueOf(selectedCount));
+                        selectedCount);
                 tvTitle.setText(title);
             }
         }

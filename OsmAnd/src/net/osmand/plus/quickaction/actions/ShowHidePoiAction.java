@@ -82,19 +82,19 @@ public class ShowHidePoiAction extends QuickAction {
 		String filtersIdsJson = getParams().get(KEY_FILTERS);
 		List<String> filtersIds = tryParseFiltersIds(filtersIdsJson);
 		if (Algorithms.isEmpty(filtersIds)) {
-			return super.getIconRes();
+			return getIconRes();
 		}
 
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		PoiUIFilter filter = app.getPoiFilters().getFilterById(filtersIds.get(0));
 		if (filter == null) {
-			return super.getIconRes();
+			return getIconRes();
 		}
 
 		Object iconRes = filter.getIconResource();
 		return (iconRes instanceof String && RenderingIcons.containsBigIcon(iconRes.toString()))
 				? RenderingIcons.getBigIconResourceId(iconRes.toString())
-				: super.getIconRes();
+				: getIconRes();
 	}
 
 	@Override

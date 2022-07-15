@@ -487,7 +487,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 				String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
 				resultOk = requestedEngine.isResultOk(errorMessage, response);
 			} catch (IOException | JSONException e) {
-				errorMessage.append(e.toString());
+				errorMessage.append(e);
 			}
 			showTestResults(resultOk, errorMessage.toString(), location);
 		}).start();

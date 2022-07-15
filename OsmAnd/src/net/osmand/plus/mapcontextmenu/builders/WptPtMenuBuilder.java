@@ -160,7 +160,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			String currentCategory = point != null ? point.category : null;
 			if (selectedCategory.equals(currentCategory)) {
 				showCount++;
-				boolean selected = selectedPoint != null && selectedPoint.equals(point);
+				boolean selected = point.equals(selectedPoint);
 				TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 				button.setText(point.name);
 

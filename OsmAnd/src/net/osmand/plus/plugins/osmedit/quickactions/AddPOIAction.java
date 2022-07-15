@@ -117,7 +117,7 @@ public class AddPOIAction extends QuickAction {
 		PoiCategory poiCategory = getCategory(context);
 		String categoryIconName = PoiUIFilter.getPoiTypeIconName(poiCategory);
 		return Algorithms.isEmpty(categoryIconName)
-				? super.getIconRes()
+				? getIconRes()
 				: RenderingIcons.getBigIconResourceId(categoryIconName);
 	}
 

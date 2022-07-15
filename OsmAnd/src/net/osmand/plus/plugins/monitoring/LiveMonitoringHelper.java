@@ -169,7 +169,7 @@ public class LiveMonitoringHelper {
 					}
 					is.close();
 				}
-				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
+				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody);
 			}
 
 			urlConnection.disconnect();

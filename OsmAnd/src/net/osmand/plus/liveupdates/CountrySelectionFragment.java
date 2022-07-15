@@ -112,7 +112,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		} else if (getParentFragment() instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) getParentFragment();
 		} else {
-			throw new RuntimeException(context.toString()
+			throw new RuntimeException(context
 					+ " must implement OnFragmentInteractionListener");
 		}
 	}

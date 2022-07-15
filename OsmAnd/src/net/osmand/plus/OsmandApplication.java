@@ -718,9 +718,9 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				msg.append("\n")
 						.append("Exception occured in thread ")
-						.append(thread.toString())
+						.append(thread)
 						.append(" : \n")
-						.append(out.toString());
+						.append(out);
 
 				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
