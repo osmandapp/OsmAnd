@@ -76,7 +76,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private View view;
 	private View mapWindow;
-	private boolean mapWindowTouched = false;
+	private boolean mapWindowTouched;
 	private boolean wasDrawerDisabled;
 
 	private TextView tvDownloadTilesDesc;

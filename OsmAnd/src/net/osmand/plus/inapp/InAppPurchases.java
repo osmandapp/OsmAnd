@@ -270,7 +270,7 @@ public abstract class InAppPurchases {
 
 		double monthlyPriceValue;
 		double monthlyOriginalPriceValue;
-		boolean donationSupported = false;
+		boolean donationSupported;
 
 		private NumberFormat currencyFormatter;
 
@@ -682,11 +682,11 @@ public abstract class InAppPurchases {
 		private final String skuNoVersion;
 		private String subscriptionPeriodString;
 		private Period subscriptionPeriod;
-		private boolean upgrade = false;
+		private boolean upgrade;
 		private SubscriptionState state = SubscriptionState.UNDEFINED;
 		private SubscriptionState previousState = SubscriptionState.UNDEFINED;
-		private long startTime = 0;
-		private long expireTime = 0;
+		private long startTime;
+		private long expireTime;
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
 

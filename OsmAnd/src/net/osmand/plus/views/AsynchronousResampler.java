@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class AsynchronousResampler extends AsyncTask<String,Integer,String> {
 
     protected Renderable.RenderableSegment rs;
-    protected List<WptPt> culled = null;
+    protected List<WptPt> culled;
 
     AsynchronousResampler(Renderable.RenderableSegment rs) {
         assert rs != null;

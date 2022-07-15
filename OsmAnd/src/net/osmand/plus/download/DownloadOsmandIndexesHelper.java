@@ -37,7 +37,7 @@ public class DownloadOsmandIndexesHelper {
 	public static class IndexFileList implements Serializable {
 		private static final long serialVersionUID = 1L;
 
-		private boolean downloadedFromInternet = false;
+		private boolean downloadedFromInternet;
 		IndexItem basemap;
 		ArrayList<IndexItem> indexFiles = new ArrayList<IndexItem>();
 		private String mapversion;

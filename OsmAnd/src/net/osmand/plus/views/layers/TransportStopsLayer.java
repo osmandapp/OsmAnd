@@ -64,7 +64,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
-	private TransportStopRoute stopRoute = null;
+	private TransportStopRoute stopRoute;
 
 	private final CommonPreference<Boolean> showTransportStops;
 
@@ -72,12 +72,12 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	//OpenGL
 	private float textScale = 1.0f;
-	private boolean nightMode = false;
+	private boolean nightMode;
 	private TransportStopsTileProvider transportStopsTileProvider;
 	private VectorLinesCollection vectorLinesCollection;
-	private int stopRouteDist = 0;
-	private TransportStopType stopRouteType = null;
-	private boolean mapsInitialized = false;
+	private int stopRouteDist;
+	private TransportStopType stopRouteType;
+	private boolean mapsInitialized;
 
 	public TransportStopsLayer(@NonNull Context context) {
 		super(context);

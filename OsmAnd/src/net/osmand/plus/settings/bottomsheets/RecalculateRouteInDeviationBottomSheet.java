@@ -53,8 +53,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	private Float[] entryValues;
 	private float currentValue;
-	private boolean enabled = false;
-	private boolean sliderPositionChanged = false;
+	private boolean enabled;
+	private boolean sliderPositionChanged;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

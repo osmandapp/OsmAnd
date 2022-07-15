@@ -163,8 +163,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class OsmandAidlApi {
 
-	AidlCallbackListener aidlCallbackListener = null;
-	AidlCallbackListenerV2 aidlCallbackListenerV2 = null;
+	AidlCallbackListener aidlCallbackListener;
+	AidlCallbackListenerV2 aidlCallbackListenerV2;
 
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
@@ -251,7 +251,7 @@ public class OsmandAidlApi {
 
 	private MapActivity mapActivity;
 
-	private boolean mapActivityActive = false;
+	private boolean mapActivityActive;
 
 	public OsmandAidlApi(@NonNull OsmandApplication app) {
 		this.app = app;

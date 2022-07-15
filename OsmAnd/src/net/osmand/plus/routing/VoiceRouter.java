@@ -69,23 +69,23 @@ public class VoiceRouter {
 	private AnnounceTimeDistances atd;
 
 	private int currentStatus = STATUS_UNKNOWN;
-	private boolean playedAndArriveAtTarget = false;
-	private float playGoAheadDist = 0;
-	private long lastAnnouncedSpeedLimit = 0;
-	private long waitAnnouncedSpeedLimit = 0;
-	private long lastAnnouncedOffRoute = 0;
-	private long waitAnnouncedOffRoute = 0;
-	private boolean suppressDest = false;
-	private boolean announceBackOnRoute = false;
+	private boolean playedAndArriveAtTarget;
+	private float playGoAheadDist;
+	private long lastAnnouncedSpeedLimit;
+	private long waitAnnouncedSpeedLimit;
+	private long lastAnnouncedOffRoute;
+	private long waitAnnouncedOffRoute;
+	private boolean suppressDest;
+	private boolean announceBackOnRoute;
 	// private long lastTimeRouteRecalcAnnounced = 0;
 	// Remember when last announcement was made
-	private long lastAnnouncement = 0;
+	private long lastAnnouncement;
 
 
 	private SoundPool soundPool;
 	private int soundClick = -1;
 
-	private VoiceCommandPending pendingCommand = null;
+	private VoiceCommandPending pendingCommand;
 	private RouteDirectionInfo nextRouteDirection;
 
 

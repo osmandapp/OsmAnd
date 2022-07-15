@@ -102,7 +102,7 @@ public class ResourceManager {
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 
-	protected static ResourceManager manager = null;
+	protected static ResourceManager manager;
 
 	protected File dirWithTiles;
 
@@ -133,7 +133,7 @@ public class ResourceManager {
 
 	public static class MapTileLayerSize {
 		final MapTileLayer layer;
-		Long markToGCTimestamp = null;
+		Long markToGCTimestamp;
 		long activeTimestamp;
 		int tiles;
 
@@ -250,9 +250,9 @@ public class ResourceManager {
 
 	private final HandlerThread renderingBufferImageThread;
 
-	protected boolean internetIsNotAccessible = false;
+	protected boolean internetIsNotAccessible;
 	private boolean depthContours;
-	private boolean indexesLoadedOnStart = false;
+	private boolean indexesLoadedOnStart;
 
 	public ResourceManager(OsmandApplication context) {
 		this.context = context;

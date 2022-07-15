@@ -214,9 +214,9 @@ public class NetworkWriter extends AbstractWriter {
 	private OnUploadFileListener getUploadDirListener(@NonNull SettingsItem item, @NonNull String itemFileName, int itemWork) {
 		return new OnUploadFileListener() {
 
-			private int itemProgress = 0;
-			private int deltaProgress = 0;
-			private boolean uploadStarted = false;
+			private int itemProgress;
+			private int deltaProgress;
+			private boolean uploadStarted;
 
 			@Override
 			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {

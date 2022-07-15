@@ -12,7 +12,7 @@ public class RouteDirectionInfo {
 	// location when you should action (turn or go ahead)
 	public int routePointOffset;
 	// location where direction end. useful for roundabouts.
-	public int routeEndPointOffset = 0;
+	public int routeEndPointOffset;
 	// Type of action to take
 	private final TurnType turnType;
 	// Description of the turn and route after
@@ -26,7 +26,7 @@ public class RouteDirectionInfo {
 
 	private String destinationName;
 
-	private RouteDataObject routeDataObject = null;
+	private RouteDataObject routeDataObject;
 
 	@Nullable
 	private ExitInfo exitInfo;

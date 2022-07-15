@@ -97,7 +97,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	private TrackChartPoints trackChartPoints;
 	private GPXItemPagerAdapter graphsAdapter;
-	private int graphTabPosition = 0;
+	private int graphTabPosition;
 	private ViewGroup segmentsTabs;
 
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;

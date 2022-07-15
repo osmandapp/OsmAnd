@@ -27,7 +27,7 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 
 	private OsmandApplication app;
 	private WebView webView;
-	private PrintJobId printJobId = null;
+	private PrintJobId printJobId;
 
 	@Override
 	public void onCreate(Bundle icicle) {

@@ -85,8 +85,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private POITileProvider poiTileProvider;
 	private float textScale = 1f;
-	private boolean nightMode = false;
-	private boolean textVisible = false;
+	private boolean nightMode;
+	private boolean textVisible;
 
 	private final TravelRendererHelper travelRendererHelper;
 	private boolean showTravel;

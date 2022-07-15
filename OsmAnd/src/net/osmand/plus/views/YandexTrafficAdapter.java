@@ -28,8 +28,8 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	private static final long DELTA = 10 * 60 * 1000;
 	
 	private long lastTimestampUpdated;
-	private String mTimestamp = null;
-	private boolean updateThreadRan = false;
+	private String mTimestamp;
+	private boolean updateThreadRan;
 	
 	
 	@Override

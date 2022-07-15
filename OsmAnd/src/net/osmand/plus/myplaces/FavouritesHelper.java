@@ -52,7 +52,7 @@ public class FavouritesHelper {
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
 
 	private boolean favoritesLoaded;
-	private long lastModifiedTime = 0;
+	private long lastModifiedTime;
 
 	public FavouritesHelper(@NonNull OsmandApplication app) {
 		this.app = app;

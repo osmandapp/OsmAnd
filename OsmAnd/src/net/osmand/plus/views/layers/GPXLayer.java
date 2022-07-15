@@ -143,7 +143,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Bitmap highlightedPointImage;
 	private TrackDrawInfo trackDrawInfo;
 	private float textScale = 1f;
-	private boolean nightMode = false;
+	private boolean nightMode;
 	private boolean changeMarkerPositionModeCached;
 
 	private ChartPointsHelper chartPointsHelper;
@@ -185,7 +185,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
-	private long trackMarkersChangedTime = 0;
+	private long trackMarkersChangedTime;
 
 	private ContextMenuLayer contextMenuLayer;
 	private NetworkRouteSelectionTask networkRouteSelectionTask;

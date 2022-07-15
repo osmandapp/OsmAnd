@@ -92,17 +92,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private final AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
 
 
-	private long lastTimeGPSLocationFixed = 0;
-	private long lastTimeLocationFixed = 0;
+	private long lastTimeGPSLocationFixed;
+	private long lastTimeLocationFixed;
 	private boolean gpsSignalLost;
-	private SimulationProvider simulatePosition = null;
+	private SimulationProvider simulatePosition;
 
-	private long cachedLocationTimeFix = 0;
-	private long timeToNotUseOtherGPS = 0;
+	private long cachedLocationTimeFix;
+	private long timeToNotUseOtherGPS;
 	private net.osmand.Location cachedLocation;
 	private net.osmand.Location customLocation;
 
-	private boolean sensorRegistered = false;
+	private boolean sensorRegistered;
 	private final float[] mGravs = new float[3];
 	private final float[] mGeoMags = new float[3];
 	private float previousCorrectionValue = 360;
@@ -110,17 +110,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final boolean USE_KALMAN_FILTER = true;
 	private static final float KALMAN_COEFFICIENT = 0.04f;
 
-	float avgValSin = 0;
-	float avgValCos = 0;
-	float lastValSin = 0;
-	float lastValCos = 0;
+	float avgValSin;
+	float avgValCos;
+	float lastValSin;
+	float lastValCos;
 	private final float[] previousCompassValuesA = new float[50];
 	private final float[] previousCompassValuesB = new float[50];
-	private int previousCompassIndA = 0;
-	private int previousCompassIndB = 0;
-	private boolean inUpdateValue = false;
+	private int previousCompassIndA;
+	private int previousCompassIndB;
+	private boolean inUpdateValue;
 
-	private Float heading = null;
+	private Float heading;
 
 	// Current screen orientation
 	private int currentScreenOrientation;
@@ -132,7 +132,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private final OsmAndLocationSimulation locationSimulation;
 	private LocationServiceHelper locationServiceHelper;
 
-	private net.osmand.Location location = null;
+	private net.osmand.Location location;
 
 	private final GPSInfo gpsInfo = new GPSInfo();
 
@@ -950,9 +950,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	public static class GPSInfo {
-		public int foundSatellites = 0;
-		public int usedSatellites = 0;
-		public boolean fixed = false;
+		public int foundSatellites;
+		public int usedSatellites;
+		public boolean fixed;
 	}
 
 	public static boolean isNotSimulatedLocation(net.osmand.Location l) {

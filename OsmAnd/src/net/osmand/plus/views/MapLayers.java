@@ -527,8 +527,8 @@ public class MapLayers {
 							break;
 						case layerInstallMore:
 							OsmandRasterMapsPlugin.installMapLayers(mapActivity, new ResultMatcher<TileSourceTemplate>() {
-								TileSourceTemplate template = null;
-								int count = 0;
+								TileSourceTemplate template;
+								int count;
 
 								@Override
 								public boolean publish(TileSourceTemplate object) {

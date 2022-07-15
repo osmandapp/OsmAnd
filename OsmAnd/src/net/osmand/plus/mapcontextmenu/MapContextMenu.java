@@ -89,12 +89,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private MenuController menuController;
 
 	private LatLon mapCenter;
-	private int mapPosition = 0;
+	private int mapPosition;
 	private boolean centerMarker;
 	private boolean zoomOutOnly;
 	private int mapZoom;
 
-	private boolean inLocationUpdate = false;
+	private boolean inLocationUpdate;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;

@@ -359,8 +359,8 @@ public class WaypointDialogHelper {
 
 		new AsyncTask<Void, Void, int[]>() {
 
-			ProgressDialog dlg = null;
-			long startDialogTime = 0;
+			ProgressDialog dlg;
+			long startDialogTime;
 			List<TargetPoint> intermediates;
 
 			protected void onPreExecute() {

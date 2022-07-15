@@ -56,7 +56,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	//OpenGL
 	private TextRasterizer.Style captionStyle;
 	private List<TargetPoint> renderedPoints;
-	private boolean nightMode = false;
+	private boolean nightMode;
 
 	public PointNavigationLayer(@NonNull Context context) {
 		super(context);

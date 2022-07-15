@@ -19,8 +19,8 @@ import java.util.Collection;
 public class TextToggleButton extends MultiStateToggleButton<TextRadioItem> {
 
 	private final boolean forceHeight;
-	private int maxItemHeight = 0;
-	private int resizedItemsCount = 0;
+	private int maxItemHeight;
+	private int resizedItemsCount;
 
 	public TextToggleButton(@NonNull OsmandApplication app,
 	                        @NonNull LinearLayout container,

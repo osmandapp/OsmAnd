@@ -54,12 +54,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private int grayColor;
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
-	private boolean showFavorites = false;
+	private boolean showFavorites;
 	private float textScale = 1f;
-	private boolean textVisible = false;
-	private boolean nightMode = false;
+	private boolean textVisible;
+	private boolean nightMode;
 	private boolean changeMarkerPositionMode;
-	private long favoritesChangedTime = 0;
+	private long favoritesChangedTime;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;

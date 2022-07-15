@@ -50,7 +50,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	private List<BottomSheetItemWithCompoundButton> languageItems;
 
 	private ArrayList<WikiLanguageItem> languages;
-	private boolean isGlobalWikiPoiEnabled = false;
+	private boolean isGlobalWikiPoiEnabled;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -84,7 +84,7 @@ public class Version {
 		appName = ctx.getString(R.string.app_name);
 	}
 
-	private static Version ver = null;
+	private static Version ver;
 	private static Version getVersion(OsmandApplication ctx){
 		if (ver == null) {
 			ver = new Version(ctx);

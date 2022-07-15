@@ -33,7 +33,7 @@ public class CachedTrack {
 	private boolean useFilteredGpx;
 
 	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
-	private Set<String> availableColoringTypes = null;
+	private Set<String> availableColoringTypes;
 
 	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
 

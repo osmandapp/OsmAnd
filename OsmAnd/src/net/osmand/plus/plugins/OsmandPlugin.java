@@ -105,7 +105,7 @@ public abstract class OsmandPlugin {
 	protected List<OsmandPreference> pluginPreferences = new ArrayList<>();
 
 	private boolean enabled;
-	private String installURL = null;
+	private String installURL;
 
 	public OsmandPlugin(OsmandApplication app) {
 		this.app = app;

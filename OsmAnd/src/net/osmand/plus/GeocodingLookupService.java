@@ -20,7 +20,7 @@ public class GeocodingLookupService {
 	private final OsmandApplication app;
 	private final ConcurrentLinkedQueue<LatLon> lookupLocations = new ConcurrentLinkedQueue<>();
 	private final ConcurrentHashMap<LatLon, List<AddressLookupRequest>> addressLookupRequestsMap = new ConcurrentHashMap<>();
-	private LatLon currentRequestedLocation = null;
+	private LatLon currentRequestedLocation;
 
 	private boolean searchDone;
 	private String lastFoundAddress;

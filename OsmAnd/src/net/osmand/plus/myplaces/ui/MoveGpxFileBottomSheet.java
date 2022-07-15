@@ -42,7 +42,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 
 	private OsmandApplication app;
 	private String filePath;
-	private boolean showAllFolders = false;
+	private boolean showAllFolders;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

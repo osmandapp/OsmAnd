@@ -76,7 +76,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private List<DownloadItem> voiceItemsRec;
 
 	private InfoType selectedVoiceType = InfoType.TTS;
-	private IndexItem indexToSelectAfterDownload = null;
+	private IndexItem indexToSelectAfterDownload;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {

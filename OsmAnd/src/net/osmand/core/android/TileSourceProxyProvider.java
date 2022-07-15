@@ -144,7 +144,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		private final int x;
 		private final int y;
 		private final int zoom;
-		private boolean ready = false;
+		private boolean ready;
 		private final Object sync = new Object();
 
 		public TileReadyCallback(ITileSource tileSource, int x, int y, int zoom) {

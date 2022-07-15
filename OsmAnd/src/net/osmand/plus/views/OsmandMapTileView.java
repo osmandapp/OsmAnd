@@ -85,7 +85,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
 	private static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
 
-	private boolean MEASURE_FPS = false;
+	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
 
@@ -93,10 +93,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private final Context ctx;
 	private MapActivity mapActivity;
 	private OsmandApplication application;
-	protected OsmandSettings settings = null;
+	protected OsmandSettings settings;
 
-	private CanvasColors canvasColors = null;
-	private Boolean nightMode = null;
+	private CanvasColors canvasColors;
+	private Boolean nightMode;
 
 	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -104,9 +104,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private static class FPSMeasurement {
-		int fpsMeasureCount = 0;
-		int fpsMeasureMs = 0;
-		long fpsFirstMeasurement = 0;
+		int fpsMeasureCount;
+		int fpsMeasureMs;
+		long fpsFirstMeasurement;
 		float fps;
 
 		void calculateFPS(long start, long end) {
@@ -199,8 +199,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	@Nullable
 	private TwoFingerTapDetector twoFingersTapDetector;
 	//private boolean afterTwoFingersTap = false;
-	private boolean afterDoubleTap = false;
-	private boolean wasMapLinkedBeforeGesture = false;
+	private boolean afterDoubleTap;
+	private boolean wasMapLinkedBeforeGesture;
 
 	private LatLon firstTouchPointLatLon;
 	private LatLon secondTouchPointLatLon;
@@ -1484,7 +1484,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float x2;
 		private float y2;
 		private LatLon initialCenterLatLon;
-		private boolean startRotating = false;
+		private boolean startRotating;
 		private static final float ANGLE_THRESHOLD = 30;
 		private float initialElevation;
 		private float prevAngle;

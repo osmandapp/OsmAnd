@@ -276,7 +276,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
 		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
 		TextWatcher textWatcher = new TextWatcher() {
-			String pasteString = null;
+			String pasteString;
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				pasteString = null; 

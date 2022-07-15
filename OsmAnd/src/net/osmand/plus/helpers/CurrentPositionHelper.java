@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CurrentPositionHelper {
 	
 	private RouteDataObject lastFound;
-	private Location lastAskedLocation = null;
+	private Location lastAskedLocation;
 	private RoutingContext ctx;
 	private RoutingContext defCtx;
 	private final OsmandApplication app;

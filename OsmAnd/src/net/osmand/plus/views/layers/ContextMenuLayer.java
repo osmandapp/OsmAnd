@@ -80,7 +80,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
-	private CallbackWithObject<LatLon> selectOnMap = null;
+	private CallbackWithObject<LatLon> selectOnMap;
 	private MapQuickActionLayer mapQuickActionLayer;
 
 	private ImageView contextMarker;

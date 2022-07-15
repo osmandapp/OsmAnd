@@ -48,7 +48,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
 	private String selectedItem;
 	private float currentValue;
-	private int contentHeightPrevious = 0;
+	private int contentHeightPrevious;
 	private EditText text;
 	private int buttonsHeight;
 	private int shadowHeight;

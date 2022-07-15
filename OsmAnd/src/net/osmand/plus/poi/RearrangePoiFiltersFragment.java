@@ -70,9 +70,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	private EditPoiFiltersAdapter adapter;
 	private boolean orderModified;
 	private boolean activationModified;
-	private boolean wasReset = false;
-	private boolean isChanged = false;
-	private boolean filterDeleted = false;
+	private boolean wasReset;
+	private boolean isChanged;
+	private boolean filterDeleted;
 	private ApplicationMode appMode;
 	private LinearLayout buttonsContainer;
 

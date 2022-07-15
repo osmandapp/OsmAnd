@@ -64,11 +64,11 @@ public abstract class InAppPurchaseHelper {
 	protected boolean isDeveloperVersion;
 	protected String token = "";
 	protected InAppPurchaseTaskType activeTask;
-	protected boolean processingTask = false;
-	protected boolean inventoryRequestPending = false;
+	protected boolean processingTask;
+	protected boolean inventoryRequestPending;
 
 	protected OsmandApplication ctx;
-	protected InAppPurchaseListener uiActivity = null;
+	protected InAppPurchaseListener uiActivity;
 
 	protected long lastPromoCheckTime;
 	protected boolean promoRequested;
@@ -95,8 +95,8 @@ public abstract class InAppPurchaseHelper {
 
 	static class SubscriptionStateHolder {
 		SubscriptionState state = SubscriptionState.UNDEFINED;
-		long startTime = 0;
-		long expireTime = 0;
+		long startTime;
+		long expireTime;
 	}
 
 	public enum InAppPurchaseTaskType {

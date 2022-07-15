@@ -52,8 +52,8 @@ public class RendererRegistry {
 
 	private final OsmandApplication app;
 
-	private RenderingRulesStorage defaultRender = null;
-	private RenderingRulesStorage currentSelectedRender = null;
+	private RenderingRulesStorage defaultRender;
+	private RenderingRulesStorage currentSelectedRender;
 
 	private Map<String, File> externalRenderers = new LinkedHashMap<>();
 	private final Map<String, String> internalRenderers = new LinkedHashMap<>();

@@ -74,7 +74,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	private boolean hideImpassableRoads;
 	@ColorInt
-	private Integer compoundButtonColor = null;
+	private Integer compoundButtonColor;
 	private ApplicationMode appMode;
 
 	public void setHideImpassableRoads(boolean hideImpassableRoads) {

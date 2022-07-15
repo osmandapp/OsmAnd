@@ -41,7 +41,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	private View view;
 	private MultiSelectionArrayAdapter listAdapter;
 	private MapMultiSelectionMenu menu;
-	private boolean dismissing = false;
+	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
 	@Nullable

@@ -71,13 +71,13 @@ public class RouteCalculationResult {
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
-	protected int currentDirectionInfo = 0;
-	protected int currentRoute = 0;
-	protected int nextIntermediate = 0;
-	protected int currentWaypointGPX = 0;
-	protected int lastWaypointGPX = 0;
+	protected int currentDirectionInfo;
+	protected int currentRoute;
+	protected int nextIntermediate;
+	protected int currentWaypointGPX;
+	protected int lastWaypointGPX;
 	protected int currentStraightAngleRoute = -1;
-	protected Location currentStraightAnglePoint = null;
+	protected Location currentStraightAnglePoint;
 
 
 	public RouteCalculationResult(String errorMessage) {

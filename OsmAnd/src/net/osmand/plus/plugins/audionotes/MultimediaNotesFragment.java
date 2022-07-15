@@ -68,7 +68,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_NOTES = "open_notes";
 
-	boolean showSwitchProfile = false;
+	boolean showSwitchProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

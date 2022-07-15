@@ -123,8 +123,8 @@ public class MenuBuilder {
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
-	private boolean showNearestWiki = false;
-	private boolean showNearestPoi = false;
+	private boolean showNearestWiki;
+	private boolean showNearestPoi;
 	private boolean showOnlinePhotos = true;
 
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();

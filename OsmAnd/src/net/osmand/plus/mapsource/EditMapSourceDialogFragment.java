@@ -97,11 +97,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private int minZoom = MIN_ZOOM;
 	private int maxZoom = MAX_ZOOM;
 	private int expireTimeMinutes = EXPIRE_TIME_NEVER;
-	private boolean elliptic = false;
-	private boolean sqliteDB = false;
+	private boolean elliptic;
+	private boolean sqliteDB;
 	private boolean nightMode;
-	private boolean fromTemplate = false;
-	private boolean wasChanged = false;
+	private boolean fromTemplate;
+	private boolean wasChanged;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 									@Nullable Fragment targetFragment,
@@ -215,7 +215,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		});
 		final ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-			int pastY = 0;
+			int pastY;
 
 			@Override
 			public void onScrollChanged() {

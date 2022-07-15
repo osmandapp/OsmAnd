@@ -86,7 +86,7 @@ public class TrackDetailsMenu {
 	private boolean hidding;
 	private Location myLocation;
 
-	private boolean fitTrackOnMapForbidden = false;
+	private boolean fitTrackOnMapForbidden;
 
 	@Nullable
 	public MapActivity getMapActivity() {
@@ -587,7 +587,7 @@ public class TrackDetailsMenu {
 		});
 
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
-			boolean hasTranslated = false;
+			boolean hasTranslated;
 			float highlightDrawX = -1;
 
 			@Override

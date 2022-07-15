@@ -194,7 +194,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final MapContextMenu mapContextMenu = new MapContextMenu();
 	private static final MapRouteInfoMenu mapRouteInfoMenu = new MapRouteInfoMenu();
 	private static final TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
-	private static Intent prevActivityIntent = null;
+	private static Intent prevActivityIntent;
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -230,10 +230,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionAsked;
 	private boolean permissionGranted;
 
-	private boolean mIsDestroyed = false;
-	private boolean pendingPause = false;
+	private boolean mIsDestroyed;
+	private boolean pendingPause;
 	private Timer splashScreenTimer;
-	private boolean activityRestartNeeded = false;
+	private boolean activityRestartNeeded;
 	private boolean stopped = true;
 
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -402,7 +402,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (app.isApplicationInitializing()) {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
-				boolean openGlSetup = false;
+				boolean openGlSetup;
 
 				@Override
 				public void onStart(AppInitializer init) {

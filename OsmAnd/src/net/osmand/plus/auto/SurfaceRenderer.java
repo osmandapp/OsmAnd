@@ -36,7 +36,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	@Nullable
 	Rect mStableArea;
 
-	private boolean darkMode = false;
+	private boolean darkMode;
 	private final CarContext mCarContext;
 
 	SurfaceRendererCallback callback;

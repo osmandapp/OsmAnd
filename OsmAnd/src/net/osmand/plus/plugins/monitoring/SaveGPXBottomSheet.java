@@ -53,8 +53,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String SHOW_ON_MAP_ATTR = "show_on_map";
 
 	private OsmandApplication app;
-	private boolean openTrack = false;
-	private boolean showOnMap = false;
+	private boolean openTrack;
+	private boolean showOnMap;
 	private File savedGpxFile;
 	private String initialGpxName = "";
 	private String newGpxName = "";

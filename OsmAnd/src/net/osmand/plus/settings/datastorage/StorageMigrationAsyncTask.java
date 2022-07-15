@@ -167,7 +167,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	private IProgress getCopyProgress(@NonNull String fileName, @NonNull CopyFilesListener filesListener) {
 		return new AbstractProgress() {
 
-			private int progress = 0;
+			private int progress;
 
 			@Override
 			public void progress(int deltaWork) {
@@ -193,7 +193,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	private CopyFilesListener getCopyFilesListener(long size) {
 		return new CopyFilesListener() {
 
-			private int deltaProgress = 0;
+			private int deltaProgress;
 
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {

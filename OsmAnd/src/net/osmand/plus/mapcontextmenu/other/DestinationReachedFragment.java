@@ -39,7 +39,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 
 	private static final String SHOULD_HIDE_MENU = "should_hide_menu";
 
-	private static boolean shown = false;
+	private static boolean shown;
 
 	private MapActivity mapActivity;
 	private OsmandApplication app;

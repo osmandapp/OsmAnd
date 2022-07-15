@@ -27,7 +27,7 @@ public class DoubleTapScaleDetector {
 	private final PointF centerScreen;
 	private PointF zoomCenter;
 
-	private boolean mIsInZoomMode = false;
+	private boolean mIsInZoomMode;
 	private float scale;
 	private MotionEvent firstDown;
 	private MotionEvent firstUp;

@@ -79,7 +79,7 @@ public class TransportRoutingHelper {
 
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
-	private long lastTimeEvaluatedRoute = 0;
+	private long lastTimeEvaluatedRoute;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 

@@ -42,13 +42,13 @@ public class AnimateDraggingMapThread {
 	private final OsmandMapTileView tileView;
 
 	private volatile boolean stopped;
-	private volatile Thread currentThread = null;
+	private volatile Thread currentThread;
 
 	private float targetRotate = -720;
-	private double targetLatitude = 0;
-	private double targetLongitude = 0;
-	private int targetIntZoom = 0;
-	private double targetFloatZoom = 0;
+	private double targetLatitude;
+	private double targetLongitude;
+	private int targetIntZoom;
+	private double targetFloatZoom;
 
 	private boolean isAnimatingZoom;
 	private boolean isAnimatingMapMove;

@@ -86,8 +86,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private OsmandApplication app;
 	private ScreenType screenType;
 	private boolean nightMode;
-	private boolean wasReset = false;
-	private boolean isChanged = false;
+	private boolean wasReset;
+	private boolean isChanged;
 	private FragmentActivity activity;
 	private RecyclerView recyclerView;
 

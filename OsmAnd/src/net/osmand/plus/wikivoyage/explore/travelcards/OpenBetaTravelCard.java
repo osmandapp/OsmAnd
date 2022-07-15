@@ -16,7 +16,7 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 0;
 
-	private static boolean closed = false;
+	private static boolean closed;
 
 	private final FragmentActivity activity;
 

@@ -171,8 +171,8 @@ public class AsyncLoadingThread extends Thread {
 		protected double bottomLatitude;
 		protected double leftLongitude;
 		protected double rightLongitude;
-		protected boolean cancelled = false;
-		protected volatile boolean running = false;
+		protected boolean cancelled;
+		protected volatile boolean running;
 
 		public boolean isContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 			return this.topLatitude >= topLatitude && this.leftLongitude <= leftLongitude

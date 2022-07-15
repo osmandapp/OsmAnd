@@ -81,7 +81,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private PlanRouteToolbarController toolbarController;
 
 	private int previousMapPosition;
-	private int selectedCount = 0;
+	private int selectedCount;
 	private int toolbarHeight;
 	private int closedListContainerHeight;
 

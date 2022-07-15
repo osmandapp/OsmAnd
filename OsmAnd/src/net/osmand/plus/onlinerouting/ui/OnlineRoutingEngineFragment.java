@@ -91,7 +91,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private AppCompatImageView buttonsShadow;
 	private OnGlobalLayoutListener onGlobalLayout;
 	private OnScrollChangedListener onScroll;
-	private boolean isKeyboardShown = false;
+	private boolean isKeyboardShown;
 
 	private OnlineRoutingEngine engine;
 	private OnlineRoutingEngine initEngine;
@@ -702,7 +702,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	@SuppressLint("ClickableViewAccessibility")
 	private void hideKeyboardOnScroll() {
 		scrollView.setOnTouchListener(new View.OnTouchListener() {
-			int scrollViewY = 0;
+			int scrollViewY;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {

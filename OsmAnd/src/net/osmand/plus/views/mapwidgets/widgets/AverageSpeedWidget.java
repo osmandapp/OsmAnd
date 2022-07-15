@@ -26,7 +26,7 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	private final CommonPreference<Long> measuredIntervalPref;
 	private final CommonPreference<Boolean> skipStopsPref;
 
-	private long lastUpdateTime = 0;
+	private long lastUpdateTime;
 
 	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, WidgetType.AVERAGE_SPEED);

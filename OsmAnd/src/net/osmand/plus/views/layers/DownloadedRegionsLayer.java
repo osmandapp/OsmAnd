@@ -103,15 +103,15 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	//OpenGL
 	private PolygonsCollection polygonsCollection;
-	private int downloadedSize = 0;
-	private int selectedSize = 0;
-	private int backupedSize = 0;
+	private int downloadedSize;
+	private int selectedSize;
+	private int backupedSize;
 	private int polygonId = 1;
-	private boolean needRedrawOpenGL = false;
-	private boolean indexRegionBoundaries = false;
-	private boolean onMapsChanged = false;
-	List<WorldRegion> downloadedRegions = null;
-	List<WorldRegion> backupedRegions = null;
+	private boolean needRedrawOpenGL;
+	private boolean indexRegionBoundaries;
+	private boolean onMapsChanged;
+	List<WorldRegion> downloadedRegions;
+	List<WorldRegion> backupedRegions;
 
 	public static class DownloadMapObject {
 		private final BinaryMapDataObject dataObject;

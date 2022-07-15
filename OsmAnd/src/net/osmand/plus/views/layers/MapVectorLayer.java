@@ -27,7 +27,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
-	private boolean visible = false;
+	private boolean visible;
 	private boolean cachedVisible = true;
 	private int cachedAlpha = -1;
 

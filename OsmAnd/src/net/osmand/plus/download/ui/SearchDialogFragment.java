@@ -564,7 +564,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						Integer.MIN_VALUE, Integer.MAX_VALUE,
 						Integer.MIN_VALUE, Integer.MAX_VALUE,
 						new ResultMatcher<Amenity>() {
-							int count = 0;
+							int count;
 
 							@Override
 							public boolean publish(Amenity amenity) {

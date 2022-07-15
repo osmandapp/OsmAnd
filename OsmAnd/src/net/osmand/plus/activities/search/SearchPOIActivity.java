@@ -101,12 +101,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private View searchFilterLayout;
 	private NavigationInfo navigationInfo;
 
-	private boolean searchNearBy = false;
-	private net.osmand.Location location = null;
-	private net.osmand.Location lastSearchedLocation = null;
-	private Float heading = null;
+	private boolean searchNearBy;
+	private net.osmand.Location location;
+	private net.osmand.Location lastSearchedLocation;
+	private Float heading;
 
-	private SearchAmenityTask currentSearchTask = null;
+	private SearchAmenityTask currentSearchTask;
 	private AccessibilityAssistant accessibilityAssistant;
 
 	private OsmandApplication app;
@@ -610,7 +610,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	class SearchAmenityTask extends AsyncTask<Void, Amenity, List<Amenity>> implements ResultMatcher<Amenity> {
 
 		private final int requestType;
-		private TLongHashSet existingObjects = null;
+		private TLongHashSet existingObjects;
 		private TLongHashSet updateExisting;
 		private final Location searchLocation;
 

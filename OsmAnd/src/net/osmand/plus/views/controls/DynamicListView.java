@@ -61,12 +61,12 @@ public class DynamicListView extends ObservableListView {
 	protected int mDownY = -1;
 	protected int mDownX = -1;
 
-	private int mTotalOffset = 0;
+	private int mTotalOffset;
 
-	private boolean mCellIsMobile = false;
-	private boolean mIsMobileScrolling = false;
-	private int mSmoothScrollAmountAtEdge = 0;
-	private boolean itemsSwapped = false;
+	private boolean mCellIsMobile;
+	private boolean mIsMobileScrolling;
+	private int mSmoothScrollAmountAtEdge;
+	private boolean itemsSwapped;
 
 	protected final int INVALID_ID = -1;
 	private long mAboveItemId = INVALID_ID;
@@ -80,7 +80,7 @@ public class DynamicListView extends ObservableListView {
 	protected final int INVALID_POINTER_ID = -1;
 	private int mActivePointerId = INVALID_POINTER_ID;
 
-	private boolean mIsWaitingForScrollFinish = false;
+	private boolean mIsWaitingForScrollFinish;
 	private int mScrollState = OnScrollListener.SCROLL_STATE_IDLE;
 
 	private GestureDetector singleTapDetector;

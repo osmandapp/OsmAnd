@@ -126,11 +126,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private double markerSizePx;
 
 	//OpenGL
-	private int markersCount = 0;
+	private int markersCount;
 	private VectorLinesCollection vectorLinesCollection;
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
-	private int displayedWidgets = 0;
+	private int displayedWidgets;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 

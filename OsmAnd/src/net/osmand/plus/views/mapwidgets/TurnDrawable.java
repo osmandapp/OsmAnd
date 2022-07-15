@@ -26,7 +26,7 @@ public class TurnDrawable extends Drawable {
 	protected Paint paintRouteDirection;
 	protected Path pathForTurn = new Path();
 	protected Path pathForTurnOutlay = new Path();
-	protected TurnType turnType = null;
+	protected TurnType turnType;
 	protected int turnImminent;
 	protected boolean deviatedFromRoute;
 	private final Context ctx;

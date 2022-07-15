@@ -5,8 +5,8 @@ import android.view.ViewConfiguration;
 
 public abstract class TwoFingerTapDetector {
 	private static final int TIMEOUT = ViewConfiguration.getTapTimeout() + 100;
-	private long mFirstDownTime = 0;
-	private byte mTwoFingerTapCount = 0;
+	private long mFirstDownTime;
+	private byte mTwoFingerTapCount;
 
 	private void reset(long time) {
 		mFirstDownTime = time;

@@ -65,7 +65,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 	private EditText descriptionEditText;
 	private OpeningHoursAdapter openingHoursAdapter;
 
-	private boolean basicTagsInitialized = false;
+	private boolean basicTagsInitialized;
 
 	@Nullable
 	@Override

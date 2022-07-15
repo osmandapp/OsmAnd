@@ -155,9 +155,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
 
 	public static int directionInfo = -1;
-	public static boolean chooseRoutesVisible = false;
-	public static boolean waypointsVisible = false;
-	public static boolean followTrackVisible = false;
+	public static boolean chooseRoutesVisible;
+	public static boolean waypointsVisible;
+	public static boolean followTrackVisible;
 
 	private final Stack<MapRouteMenuStateHolder> menuBackStack = new Stack<>();
 
@@ -170,7 +170,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean selectFromTracks;
 	private boolean customizingRouteLine;
 
-	private boolean showMenu = false;
+	private boolean showMenu;
 	private int showMenuState = DEFAULT_MENU_STATE;
 
 	@Nullable

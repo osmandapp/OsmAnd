@@ -40,7 +40,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 
 	private AccessibilityStateChangeListener accessibilityListener;
 
-	boolean showSwitchProfile = false;
+	boolean showSwitchProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

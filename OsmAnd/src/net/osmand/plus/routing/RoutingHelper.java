@@ -61,11 +61,11 @@ public class RoutingHelper {
 	private final RouteRecalculationHelper routeRecalculationHelper;
 	private final TransportRoutingHelper transportRoutingHelper;
 
-	private boolean isFollowingMode = false;
-	private boolean isRoutePlanningMode = false;
-	private boolean isPauseNavigation = false;
+	private boolean isFollowingMode;
+	private boolean isRoutePlanningMode;
+	private boolean isPauseNavigation;
 
-	private GPXRouteParamsBuilder currentGPXRoute = null;
+	private GPXRouteParamsBuilder currentGPXRoute;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
 
@@ -75,13 +75,13 @@ public class RoutingHelper {
 	private Location lastFixedLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
-	private boolean deviceHasBearing = false;
+	private boolean deviceHasBearing;
 
-	private boolean isDeviatedFromRoute = false;
-	private long deviateFromRouteDetected = 0;
+	private boolean isDeviatedFromRoute;
+	private long deviateFromRouteDetected;
 	//private long wrongMovementDetected = 0;
-	private boolean voiceRouterStopped = false;
-	private long lastCarNavUpdateTime = 0;
+	private boolean voiceRouterStopped;
+	private long lastCarNavUpdateTime;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;

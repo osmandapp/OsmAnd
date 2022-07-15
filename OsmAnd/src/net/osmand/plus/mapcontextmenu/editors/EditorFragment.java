@@ -72,7 +72,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
 	private int scrollViewY;
-	private int layoutHeightPrevious = 0;
+	private int layoutHeightPrevious;
 
 	protected boolean cancelled;
 	protected boolean nightMode;

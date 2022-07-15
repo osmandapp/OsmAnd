@@ -755,7 +755,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		private float routeWidth = -1f;
 		private int currentRoute = -1;
 		private int zoom = -1;
-		private boolean shouldShowTurnArrows = false;
+		private boolean shouldShowTurnArrows;
 
 		boolean shouldRebuildRoute;
 		boolean shouldRebuildTransportRoute;

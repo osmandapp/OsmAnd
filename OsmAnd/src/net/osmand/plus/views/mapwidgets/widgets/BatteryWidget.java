@@ -17,7 +17,7 @@ public class BatteryWidget extends TextInfoWidget {
 
 	private static final long UPDATE_INTERVAL_MILLIS = 1000;
 
-	private long cachedTime = 0;
+	private long cachedTime;
 
 	public BatteryWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, BATTERY);

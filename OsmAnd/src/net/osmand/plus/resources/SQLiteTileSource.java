@@ -56,26 +56,26 @@ public class SQLiteTileSource implements ITileSource {
 	private final OsmandApplication app;
 
 	private ITileSource base;
-	private String urlTemplate = null;
+	private String urlTemplate;
 	private String name;
-	private SQLiteConnection db = null;
-	private File file = null;
+	private SQLiteConnection db;
+	private File file;
 	private int minZoom = 1;
 	private int maxZoom = 17;
 	private boolean inversiveZoom = true; // BigPlanet
-	private boolean timeSupported = false;
+	private boolean timeSupported;
 	private long expirationTimeMillis = -1; // never
-	private boolean isEllipsoid = false;
-	private boolean invertedY = false;
+	private boolean isEllipsoid;
+	private boolean invertedY;
 	private String randoms;
 	private String[] randomsArray;
-	private String rule = null;
-	private String referer = null;
-	private String userAgent = null;
+	private String rule;
+	private String referer;
+	private String userAgent;
 
 	private int tileSize = 256;
-	private boolean tileSizeSpecified = false;
-	private boolean onlyReadonlyAvailable = false;
+	private boolean tileSizeSpecified;
+	private boolean onlyReadonlyAvailable;
 
 	public SQLiteTileSource(OsmandApplication app, File f, List<TileSourceTemplate> toFindUrl){
 		this.app = app;

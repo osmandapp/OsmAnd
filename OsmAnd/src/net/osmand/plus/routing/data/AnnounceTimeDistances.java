@@ -31,7 +31,7 @@ public class AnnounceTimeDistances {
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
 	private float DEFAULT_SPEED = 10;
-	private double voicePromptDelayTimeSec = 0;
+	private double voicePromptDelayTimeSec;
 
 	private float ARRIVAL_DISTANCE;
 	private float OFF_ROUTE_DISTANCE;

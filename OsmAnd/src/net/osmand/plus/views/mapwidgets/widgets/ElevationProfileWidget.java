@@ -72,13 +72,13 @@ public class ElevationProfileWidget extends MapWidget {
 	private Location myLocation;
 	private List<WptPt> allPoints;
 
-	private boolean showSlopes = false;
+	private boolean showSlopes;
 	private RouteCalculationResult route;
 	private int firstVisiblePointIndex = -1;
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
 
-	private boolean movedToLocation = false;
+	private boolean movedToLocation;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
@@ -207,7 +207,7 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		segment = TrackDetailsMenu.getTrackSegment(chart, gpxItem);
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
-			boolean hasTranslated = false;
+			boolean hasTranslated;
 			float highlightDrawX = -1;
 
 			@Override

@@ -55,9 +55,9 @@ public class DownloadIndexesThread {
 	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = new CopyOnWriteArrayList<>();
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
-	private DownloadEvents uiActivity = null;
-	private IndexItem currentDownloadingItem = null;
-	private int currentDownloadingItemProgress = 0;
+	private DownloadEvents uiActivity;
+	private IndexItem currentDownloadingItem;
+	private int currentDownloadingItemProgress;
 	private DownloadResources indexes;
 	private static final int THREAD_ID = 10103;
 

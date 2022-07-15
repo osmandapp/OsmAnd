@@ -87,8 +87,8 @@ public class OsmandRenderer {
 	};
 
 	private static class IconDrawInfo {
-		float x = 0;
-		float y = 0;
+		float x;
+		float y;
 		String resId_1;
 		String resId;
 		String resId2;
@@ -121,9 +121,9 @@ public class OsmandRenderer {
 		float sinRotateTileSize;
 
 		int shadowLevelMin = 256;
-		int shadowLevelMax = 0;
+		int shadowLevelMax;
 
-		boolean ended = false;
+		boolean ended;
 
 		
 		@Override

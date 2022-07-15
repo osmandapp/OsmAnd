@@ -33,7 +33,7 @@ public class LiveMonitoringHelper {
 
 	private LatLon lastPoint;
 	private long lastTimeUpdated;
-	private boolean started = false;
+	private boolean started;
 
 	public LiveMonitoringHelper(OsmandApplication app) {
 		this.app = app;

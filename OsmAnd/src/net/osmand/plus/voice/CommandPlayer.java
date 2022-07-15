@@ -38,7 +38,7 @@ public abstract class CommandPlayer {
 	public static final String A_RIGHT_SL = "right_sl";
 	public static final String A_RIGHT_KEEP = "right_keep";
 
-	private static boolean bluetoothScoRunning = false;
+	private static boolean bluetoothScoRunning;
 	// Only for debugging
 	private static String bluetoothScoStatus = "-";
 

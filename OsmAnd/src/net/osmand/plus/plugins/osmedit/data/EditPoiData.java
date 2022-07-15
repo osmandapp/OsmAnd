@@ -25,7 +25,7 @@ public class EditPoiData {
 	private final Set<TagsChangedListener> mListeners = new HashSet<>();
 	private final LinkedHashMap<String, String> tagValues = new LinkedHashMap<>();
 	private final LinkedHashMap<String, String> initTagValues = new LinkedHashMap<>();
-	private boolean isInEdit = false;
+	private boolean isInEdit;
 	private final Entity entity;
 
 	public static final String REMOVE_TAG_VALUE = "DELETE";

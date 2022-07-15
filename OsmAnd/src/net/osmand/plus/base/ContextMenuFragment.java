@@ -908,7 +908,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	protected void animateMainView(final int posY, final boolean needCloseMenu, final int previousMenuState, final int newMenuState) {
 		animateView(mainView, posY, new AnimatorListenerAdapter() {
 
-			boolean canceled = false;
+			boolean canceled;
 
 			@Override
 			public void onAnimationCancel(Animator animation) {

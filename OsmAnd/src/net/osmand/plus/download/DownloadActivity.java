@@ -104,7 +104,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String REGION_TO_SEARCH = "search_region";
 
 
-	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP = false;
+	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP;
 
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;

@@ -24,9 +24,9 @@ public class ProgressImplementation implements IProgress {
 	private final Handler mViewUpdateHandler;
 	private Thread run;
 	private final Context context;
-	private ProgressDialog dialog = null;
-	private ProgressBar progressBar = null;
-	private Runnable finishRunnable = null;
+	private ProgressDialog dialog;
+	private ProgressBar progressBar;
+	private Runnable finishRunnable;
 	private final boolean cancelable;
 	private TextView tv;
 	

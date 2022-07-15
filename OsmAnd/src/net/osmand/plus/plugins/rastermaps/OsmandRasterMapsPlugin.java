@@ -242,9 +242,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			if (which == items.length - 1) {
 				installMapLayers(mapActv, new ResultMatcher<TileSourceTemplate>() {
-					TileSourceTemplate template = null;
-					int count = 0;
-					boolean cancel = false;
+					TileSourceTemplate template;
+					int count;
+					boolean cancel;
 
 					@Override
 					public boolean publish(TileSourceTemplate object) {

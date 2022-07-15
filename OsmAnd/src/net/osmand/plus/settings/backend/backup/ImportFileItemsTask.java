@@ -23,7 +23,7 @@ public class ImportFileItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final ImportListener listener;
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
-	private boolean needRestart = false;
+	private boolean needRestart;
 
 	ImportFileItemsTask(@NonNull FileSettingsHelper helper,
 						@NonNull File file,

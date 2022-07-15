@@ -96,7 +96,7 @@ public class TravelObfHelper implements TravelHelper {
 	private final Map<TravelArticleIdentifier, Map<String, TravelArticle>> cachedArticles = new ConcurrentHashMap<>();
 	private final TravelLocalDataHelper localDataHelper;
 	private int searchRadius = ARTICLE_SEARCH_RADIUS;
-	private int foundAmenitiesIndex = 0;
+	private int foundAmenitiesIndex;
 	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 
 
@@ -530,7 +530,7 @@ public class TravelObfHelper implements TravelHelper {
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, title, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(ROUTE_ARTICLE),
 						new ResultMatcher<Amenity>() {
-							boolean done = false;
+							boolean done;
 
 							@Override
 							public boolean publish(Amenity amenity) {
@@ -642,7 +642,7 @@ public class TravelObfHelper implements TravelHelper {
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 						Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 						getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
-							boolean done = false;
+							boolean done;
 
 							@Override
 							public boolean publish(Amenity amenity) {
@@ -696,7 +696,7 @@ public class TravelObfHelper implements TravelHelper {
 						req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 								Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 								getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
-									boolean done = false;
+									boolean done;
 
 									@Override
 									public boolean publish(Amenity amenity) {
@@ -758,7 +758,7 @@ public class TravelObfHelper implements TravelHelper {
 					req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 							Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 							getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
-								boolean done = false;
+								boolean done;
 
 								@Override
 								public boolean publish(Amenity amenity) {
@@ -804,7 +804,7 @@ public class TravelObfHelper implements TravelHelper {
 		return BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 				Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 				getSearchFilter(ROUTE_ARTICLE, ROUTE_TRACK), new ResultMatcher<Amenity>() {
-					boolean done = false;
+					boolean done;
 
 					@Override
 					public boolean publish(Amenity amenity) {
@@ -863,7 +863,7 @@ public class TravelObfHelper implements TravelHelper {
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 						x, y, title, left, right, top, bottom, getSearchFilter(ROUTE_ARTICLE),
 						new ResultMatcher<Amenity>() {
-							boolean done = false;
+							boolean done;
 
 							@Override
 							public boolean publish(Amenity amenity) {

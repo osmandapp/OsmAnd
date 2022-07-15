@@ -105,9 +105,9 @@ public class TravelDbHelper implements TravelHelper {
 	private final TravelLocalDataHelper localDataHelper;
 	private final Collator collator;
 
-	private SQLiteConnection connection = null;
+	private SQLiteConnection connection;
 
-	private File selectedTravelBook = null;
+	private File selectedTravelBook;
 	private final List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<>();
 	

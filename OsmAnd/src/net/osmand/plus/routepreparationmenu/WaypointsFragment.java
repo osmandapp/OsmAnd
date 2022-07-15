@@ -82,7 +82,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	private StateChangedListener<Void> onStateChangedListener;
 
-	private CountDownTimer cTimer = null;
+	private CountDownTimer cTimer;
 
 	private final int[] running = {-1};
 

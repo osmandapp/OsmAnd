@@ -32,7 +32,7 @@ public class DownloadFileHelper {
 	protected static final int TRIES_TO_DOWNLOAD = 15;
 	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
 	private final OsmandApplication ctx;
-	private boolean interruptDownloading = false;
+	private boolean interruptDownloading;
 	
 	
 	public DownloadFileHelper(OsmandApplication ctx){
@@ -51,12 +51,12 @@ public class DownloadFileHelper {
 	public InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
 		InputStream cis = new InputStream() {
 			final byte[] buffer = new byte[BUFFER_SIZE];
-			int bufLen = 0;
-			int bufRead = 0;
-			int length = 0;
-			int fileread = 0;
+			int bufLen;
+			int bufRead;
+			int length;
+			int fileread;
 			int triesDownload = TRIES_TO_DOWNLOAD;
-			boolean notFound = false;
+			boolean notFound;
 			boolean first = true;
 			private InputStream is;
 			
@@ -350,7 +350,7 @@ public class DownloadFileHelper {
 
 		private final InputStream[] delegate;
 		private int count;
-		private int currentRead = 0;
+		private int currentRead;
 
 		public CountingMultiInputStream(List<InputStream> streams) {
 			this.delegate = streams.toArray(new InputStream[0]);

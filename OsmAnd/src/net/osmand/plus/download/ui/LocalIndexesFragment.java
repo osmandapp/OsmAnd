@@ -86,7 +86,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private LocalIndexesAdapter listAdapter;
 	private AsyncTask<LocalIndexInfo, ?, ?> operationTask;
 
-	private boolean selectionMode = false;
+	private boolean selectionMode;
 	private final Set<LocalIndexInfo> selectedItems = new LinkedHashSet<>();
 
 	private ContextMenuAdapter optionsMenuAdapter;
@@ -740,7 +740,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		Map<LocalIndexInfo, List<LocalIndexInfo>> data = new LinkedHashMap<>();
 		List<LocalIndexInfo> category = new ArrayList<>();
-		List<LocalIndexInfo> filterCategory = null;
+		List<LocalIndexInfo> filterCategory;
 		int warningColor;
 		int okColor;
 		int corruptedColor;

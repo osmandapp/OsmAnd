@@ -317,7 +317,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				BinaryMapIndexReader reader = getOpenFile();
 				if (reader != null) {
 					reader.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
-						boolean canceled = false;
+						boolean canceled;
 
 						@Override
 						public boolean isCancelled() {

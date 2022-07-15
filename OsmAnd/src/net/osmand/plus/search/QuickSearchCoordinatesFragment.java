@@ -111,7 +111,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private ProgressBar searchProgressBar;
 	private int currentFormat = PointDescription.FORMAT_DEGREES;
 
-	private net.osmand.Location myLocation = null;
+	private net.osmand.Location myLocation;
 	private float heading;
 	private boolean paused;
 	private LatLon currentLatLon;
@@ -119,7 +119,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private UpdateLocationViewCache updateLocationViewCache;
 	private boolean isLightTheme;
 
-	private ProcessIndexItemsTask parseOlcCodeTask = null;
+	private ProcessIndexItemsTask parseOlcCodeTask;
 
 	public QuickSearchCoordinatesFragment() {
 	}
@@ -897,7 +897,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			}
 			app.getResourceManager().searchAmenitiesByName(region, MapUtils.MAX_LATITUDE,
 					MapUtils.MIN_LONGITUDE, MapUtils.MIN_LATITUDE, MapUtils.MAX_LONGITUDE, lat, lon, new ResultMatcher<Amenity>() {
-						int count = 0;
+						int count;
 
 						@Override
 						public boolean publish(Amenity amenity) {

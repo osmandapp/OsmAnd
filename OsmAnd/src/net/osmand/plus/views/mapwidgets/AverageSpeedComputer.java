@@ -52,8 +52,8 @@ public class AverageSpeedComputer {
 	private final SegmentsList segmentsList;
 	private final List<Location> locations = new LinkedList<>();
 
-	private Location previousLocation = null;
-	private long previousTime = 0;
+	private Location previousLocation;
+	private long previousTime;
 
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -206,8 +206,8 @@ public class AverageSpeedComputer {
 
 		private final Segment[] segments;
 
-		private int tailIndex = 0;
-		private int headIndex = 0;
+		private int tailIndex;
+		private int headIndex;
 
 		public SegmentsList() {
 			int size = (int) (BIGGEST_MEASURED_INTERVAL / ADD_POINT_INTERVAL_MILLIS) + 1;

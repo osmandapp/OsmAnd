@@ -44,11 +44,11 @@ class RouteRecalculationHelper {
 	private final Map<Future<?>, RouteRecalculationTask> tasksMap = new LinkedHashMap<>();
 	private RouteRecalculationTask lastTask;
 
-	private long lastTimeEvaluatedRoute = 0;
+	private long lastTimeEvaluatedRoute;
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
-	private long recalculateCountInInterval = 0;
-	private int evalWaitInterval = 0;
+	private long recalculateCountInInterval;
+	private int evalWaitInterval;
 
 	private Set<RouteCalculationProgressListener> calculationProgressListeners = new HashSet<>();
 
@@ -346,7 +346,7 @@ class RouteRecalculationHelper {
 
 		String routeCalcError;
 		String routeCalcErrorShort;
-		int evalWaitInterval = 0;
+		int evalWaitInterval;
 
 		public RouteRecalculationTask(@NonNull RouteRecalculationHelper routingThreadHelper,
 									  @NonNull RouteCalculationParams params, boolean paramsChanged,

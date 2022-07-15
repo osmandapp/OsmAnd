@@ -79,8 +79,8 @@ public class MapMarkersHelper {
 
 	private final MarkersPlanRouteContext planRouteContext;
 
-	private long favoriteMarkersModifiedTime = 0;
-	private long trackMarkersModifiedTime = 0;
+	private long favoriteMarkersModifiedTime;
+	private long trackMarkersModifiedTime;
 
 	public List<MapMarker> getMapMarkers() {
 		return mapMarkers;

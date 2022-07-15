@@ -101,12 +101,12 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	//OpenGL
 	private AidlTileProvider aidlMapLayerProvider;
-	private int pointImagesSize = 0;
-	private boolean nightMode = false;
+	private int pointImagesSize;
+	private boolean nightMode;
 	private int radius;
 	@Nullable
-	private String selectedPointId = null;
-	private int aidlPointsCount = 0;
+	private String selectedPointId;
+	private int aidlPointsCount;
 
 	public AidlMapLayer(@NonNull Context context, @NonNull AidlMapLayerWrapper aidlLayer,
 						@NonNull String packName) {

@@ -21,7 +21,7 @@ import java.util.Date;
 public class XMasDialogFragment extends DialogFragment {
 
 	public static final String TAG = "XMasDialogFragment";
-	private static boolean XmasDialogWasProcessed = false;
+	private static boolean XmasDialogWasProcessed;
 
 	public static boolean shouldShowXmasDialog(OsmandApplication app) {
 		if (XmasDialogWasProcessed || app.getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get()) {

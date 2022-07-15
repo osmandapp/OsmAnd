@@ -64,7 +64,7 @@ public class FavoritesActivity extends TabActivity {
 
 	private ViewPager viewPager;
 
-	private Bundle intentParams = null;
+	private Bundle intentParams;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

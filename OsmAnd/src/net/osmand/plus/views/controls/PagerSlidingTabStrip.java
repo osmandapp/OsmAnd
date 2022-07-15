@@ -104,7 +104,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private final LinearLayout.LayoutParams expandedTabLayoutParams;
 
 	private final PageListener pageListener = new PageListener();
-	private OnTabReselectedListener tabReselectedListener = null;
+	private OnTabReselectedListener tabReselectedListener;
 	public OnPageChangeListener delegatePageListener;
 
 	private final LinearLayout tabsContainer;
@@ -112,8 +112,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private int tabCount;
 
-	private int currentPosition = 0;
-	private float currentPositionOffset = 0f;
+	private int currentPosition;
+	private float currentPositionOffset;
 
 	private final Paint rectPaint;
 	private final Paint dividerPaint;
@@ -124,12 +124,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int indicatorBgColor;
 	private int indicatorHeight = 2;
 
-	private int underlineHeight = 0;
+	private int underlineHeight;
 	@ColorInt
 	private int underlineColor;
 
 
-	private int dividerWidth = 0;
+	private int dividerWidth;
 	@ColorInt
 	private int dividerColor;
 
@@ -144,18 +144,18 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private float tabTextAlpha = HALF_TRANSP;
 	private float tabTextSelectedAlpha = OPAQUE;
 
-	private int padding = 0;
+	private int padding;
 
-	private boolean shouldExpand = false;
+	private boolean shouldExpand;
 	private boolean textAllCaps = true;
-	private boolean isPaddingMiddle = false;
+	private boolean isPaddingMiddle;
 
-	private Typeface tabTypeface = null;
+	private Typeface tabTypeface;
 	private int tabTypefaceStyle = Typeface.NORMAL;
 	private int tabTypefaceSelectedStyle = Typeface.NORMAL;
 
 	private int scrollOffset;
-	private int lastScrollX = 0;
+	private int lastScrollX;
 
 	@DrawableRes
 	private int tabBackgroundResId = R.drawable.background_tab;
@@ -613,7 +613,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private class PagerAdapterObserver extends DataSetObserver {
 
-		private boolean attached = false;
+		private boolean attached;
 
 		@Override
 		public void onChanged() {

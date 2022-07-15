@@ -305,7 +305,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 			private static final int TIME_PICKER_INTERVAL = 5;
-			private boolean mIgnoreEvent = false;
+			private boolean mIgnoreEvent;
 			private final Calendar cal = Calendar.getInstance();
 
 

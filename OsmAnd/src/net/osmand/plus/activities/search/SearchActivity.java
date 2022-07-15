@@ -68,11 +68,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
 	public static final String SHOW_ONLY_ONE_TAB = "SHOW_ONLY_ONE_TAB"; //$NON-NLS-1$
 
-	private LatLon searchPoint = null;
-	private LatLon reqSearchPoint = null;
-	private boolean searchAroundCurrentLocation = false;
+	private LatLon searchPoint;
+	private LatLon reqSearchPoint;
+	private boolean searchAroundCurrentLocation;
 
-	private static boolean searchOnLine = false;
+	private static boolean searchOnLine;
 	private ArrayAdapter<String> spinnerAdapter;
 	private OsmandSettings settings;
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();

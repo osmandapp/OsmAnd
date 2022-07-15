@@ -15,7 +15,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	private static final Log log = PlatformUtil.getLog(NativeOsmandLibrary.class);
 	
 	private static NativeOsmandLibrary library;
-	private static Boolean isNativeSupported = null;
+	private static Boolean isNativeSupported;
 
     public NativeOsmandLibrary() {
         super();

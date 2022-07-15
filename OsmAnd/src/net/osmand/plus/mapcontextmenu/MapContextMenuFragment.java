@@ -1062,7 +1062,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					.setInterpolator(new DecelerateInterpolator())
 					.setListener(new AnimatorListenerAdapter() {
 
-						boolean canceled = false;
+						boolean canceled;
 
 						@Override
 						public void onAnimationCancel(Animator animation) {

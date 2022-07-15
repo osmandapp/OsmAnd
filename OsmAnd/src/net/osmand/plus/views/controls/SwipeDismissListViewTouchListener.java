@@ -101,7 +101,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 
 	// Transient properties
 	//private List<PendingDismissData> mPendingDismisses = new ArrayList<PendingDismissData>();
-	private int mDismissAnimationRefCount = 0;
+	private int mDismissAnimationRefCount;
 	private float mDownX;
 	private float mDownY;
 	private boolean mSwiping;
@@ -117,7 +117,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private final Button mUndoButton;
 
 	private UndoStyle mUndoStyle = UndoStyle.SINGLE_POPUP;
-	private boolean mTouchBeforeAutoHide = false;
+	private boolean mTouchBeforeAutoHide;
 	private SwipeDirection mSwipeDirection = SwipeDirection.BOTH;
 	private int mUndoHideDelay = 5000;
 	private int mSwipingLayout;

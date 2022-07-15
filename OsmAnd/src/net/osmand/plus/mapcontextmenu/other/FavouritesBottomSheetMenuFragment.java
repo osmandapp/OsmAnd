@@ -54,7 +54,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
 	private int sortByDist = SORT_TYPE_DIST;
-	private boolean isSorted = false;
+	private boolean isSorted;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private PointType pointType;

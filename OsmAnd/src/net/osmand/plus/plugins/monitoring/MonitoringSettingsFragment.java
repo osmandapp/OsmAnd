@@ -54,7 +54,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
-	boolean showSwitchProfile = false;
+	boolean showSwitchProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

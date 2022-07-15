@@ -964,10 +964,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	class ApplicationProfileObject {
 		String stringKey;
-		ApplicationMode parent = null;
+		ApplicationMode parent;
 		String name;
 		ProfileIconColors color;
-		Integer customColor = null;
+		Integer customColor;
 		int iconRes;
 		String routingProfile;
 		RouteService routeService;

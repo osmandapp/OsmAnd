@@ -57,7 +57,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	public static final int REQUEST_POI_EDIT = 55;
 
 	private EditText searchEditText;
-	private SearchPoiByNameTask currentTask = null;
+	private SearchPoiByNameTask currentTask;
 	private PoiFiltersAdapter poiFitlersAdapter;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

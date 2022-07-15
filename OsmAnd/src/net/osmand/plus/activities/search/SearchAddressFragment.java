@@ -50,16 +50,16 @@ public class SearchAddressFragment extends Fragment {
 	private Button countryButton;
 	private Button buildingButton;
 	
-	private String region = null;
-	private String city = null;
-	private String postcode = null;
-	private String street = null;
-	private String building = null;
-	private String street2 = null;
+	private String region;
+	private String city;
+	private String postcode;
+	private String street;
+	private String building;
+	private String street2;
 	private boolean radioBuilding = true;
 	
 	private OsmandSettings osmandSettings;
-	private LatLon searchPoint = null;
+	private LatLon searchPoint;
 
 	private View view;
 

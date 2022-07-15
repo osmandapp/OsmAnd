@@ -36,7 +36,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static final String TAG = "SecondSplashScreenFragment";
 	public static final int MIN_SCREEN_WIDTH_TABLET_DP = 600;
 	public static boolean SHOW = true;
-	public static boolean VISIBLE = false;
+	public static boolean VISIBLE;
 
 	private boolean systemDefaultNightMode;
 

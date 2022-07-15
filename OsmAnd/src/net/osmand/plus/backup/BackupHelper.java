@@ -77,7 +77,7 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	public static boolean DEBUG = false;
+	public static boolean DEBUG;
 
 	private final BackupExecutor executor;
 
@@ -474,9 +474,9 @@ public class BackupHelper {
 		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
-					private int work = 0;
-					private int progress = 0;
-					private int deltaProgress = 0;
+					private int work;
+					private int progress;
+					private int deltaProgress;
 
 					@Override
 					public void startWork(int work) {
@@ -654,9 +654,9 @@ public class BackupHelper {
 			}
 			IProgress progress = new AbstractProgress() {
 
-				private int work = 0;
-				private int progress = 0;
-				private int deltaProgress = 0;
+				private int work;
+				private int progress;
+				private int deltaProgress;
 
 				@Override
 				public void startWork(int work) {

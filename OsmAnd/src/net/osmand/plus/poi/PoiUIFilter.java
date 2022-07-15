@@ -69,15 +69,15 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	protected final OsmandApplication app;
 
-	protected int distanceInd = 0;
+	protected int distanceInd;
 	// in kilometers
 	protected double[] distanceToSearchValues = {1, 2, 5, 10, 20, 50, 100, 200, 500};
 
 	private final MapPoiTypes poiTypes;
 
-	protected String filterByName = null;
-	protected String savedFilterByName = null;
-	protected List<Amenity> currentSearchResult = null;
+	protected String filterByName;
+	protected String savedFilterByName;
+	protected List<Amenity> currentSearchResult;
 
 	private boolean deleted;
 

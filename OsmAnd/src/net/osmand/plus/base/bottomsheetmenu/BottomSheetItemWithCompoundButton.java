@@ -113,7 +113,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		protected ColorStateList buttonTintList;
 		protected OnCheckedChangeListener onCheckedChangeListener;
 		@ColorRes protected int compoundButtonColorId = INVALID_ID;
-		@ColorInt protected Integer compoundButtonColor = null;
+		@ColorInt protected Integer compoundButtonColor;
 
 		public Builder setChecked(boolean checked) {
 			this.checked = checked;

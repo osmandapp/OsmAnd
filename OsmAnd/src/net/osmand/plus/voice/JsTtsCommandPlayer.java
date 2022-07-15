@@ -48,7 +48,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	 */
 	private static int ttsRequests;
 	private float cSpeechRate = 1;
-	private boolean speechAllowed = false;
+	private boolean speechAllowed;
 
 	// Only for debugging
 	private static String ttsVoiceStatus = "-";

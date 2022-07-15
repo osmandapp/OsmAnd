@@ -24,8 +24,8 @@ public class PointDescription {
 	private String typeName;
 	private String iconName;
 
-	private double lat = 0;
-	private double lon = 0;
+	private double lat;
+	private double lon;
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";

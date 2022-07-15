@@ -85,7 +85,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
-	private boolean initFilter = false;
+	private boolean initFilter;
 	private String endingText = "";
 	private T endingObject;
 	private final StyleSpan previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
@@ -391,7 +391,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	class UIUpdateHandler extends Handler {
 		private final Map<String, Integer> endingMap = new HashMap<>();
 		private int minimalIndex = Integer.MAX_VALUE;
-		private String minimalText = null;
+		private String minimalText;
 		
 		@SuppressWarnings("unchecked")
 		@Override
@@ -445,9 +445,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	class NamesFilter extends Filter {
 		
-		protected boolean isCancelled = false;
+		protected boolean isCancelled;
 		private String newFilter;
-		private boolean active = false;
+		private boolean active;
 		private long startTime;
 		
 		protected void cancelPreviousFilter(String newFilter){

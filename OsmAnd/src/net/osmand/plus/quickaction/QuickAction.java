@@ -26,7 +26,7 @@ public class QuickAction {
 
         void onActionSelected(QuickAction action);
     }
-    private static int SEQ = 0;
+    private static int SEQ;
 
     protected long id;
     private String name;

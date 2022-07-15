@@ -22,7 +22,7 @@ import android.media.AudioManager;
 // [x] Treat LOSS_TRANSIENT_CAN_DUCK like LOSS, ducked speech probably hard to understand.
 
 public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, AudioFocusHelper {
-	public static boolean playbackAuthorized = false;
+	public static boolean playbackAuthorized;
 	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 	RoutingHelper routingHelper;
 

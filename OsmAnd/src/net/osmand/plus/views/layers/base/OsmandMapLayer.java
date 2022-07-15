@@ -71,7 +71,7 @@ public abstract class OsmandMapLayer {
 	@Nullable
 	private MapActivity mapActivity;
 	protected OsmandMapTileView view;
-	protected boolean mapActivityInvalidated = false;
+	protected boolean mapActivityInvalidated;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -586,7 +586,7 @@ public abstract class OsmandMapLayer {
 		public class DataReadyCallback {
 			private final TileBoxRequest request;
 			private T results;
-			private boolean ready = false;
+			private boolean ready;
 			private final Object sync = new Object();
 
 			public DataReadyCallback(@NonNull TileBoxRequest request) {
@@ -803,22 +803,22 @@ public abstract class OsmandMapLayer {
 		protected int cachedHash;
 		public Paint paint;
 		public Paint customColorPaint;
-		public int customColor = 0;
-		public float customWidth = 0;
-		public int defaultWidth = 0;
-		public int defaultColor = 0;
+		public int customColor;
+		public float customWidth;
+		public int defaultWidth;
+		public int defaultColor;
 		public boolean isPaint2;
 		public Paint paint2;
-		public int defaultWidth2 = 0;
+		public int defaultWidth2;
 		public boolean isPaint3;
 		public Paint paint3;
-		public int defaultWidth3 = 0;
+		public int defaultWidth3;
 		public Paint shadowPaint;
 		public boolean isShadowPaint;
 		public int defaultShadowWidthExtent = 2;
 		public Paint paint_1;
 		public boolean isPaint_1;
-		public int defaultWidth_1 = 0;
+		public int defaultWidth_1;
 		private final String renderingAttribute;
 
 		public RenderingLineAttributes(String renderingAttribute) {

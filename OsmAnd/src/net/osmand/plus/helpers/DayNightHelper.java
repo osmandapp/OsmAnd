@@ -59,8 +59,8 @@ public class DayNightHelper implements SensorEventListener {
 	private DayNightHelper listener;
 	private MapThemeProvider mapThemeProvider;
 
-	private long lastTime = 0;
-	private boolean lastNightMode = false;
+	private long lastTime;
+	private boolean lastNightMode;
 	private StateChangedListener<Boolean> sensorStateListener;
 
 	public boolean isNightModeForMapControls() {

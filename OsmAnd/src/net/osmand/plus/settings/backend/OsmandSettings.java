@@ -395,7 +395,7 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
+	public ApplicationMode LAST_ROUTING_APPLICATION_MODE;
 
 	public boolean setApplicationMode(ApplicationMode appMode) {
 		return setApplicationMode(appMode, true);
@@ -1386,7 +1386,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference(this, "disable_complex_routing", false).makeProfile();
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
-	public boolean simulateNavigation = false;
+	public boolean simulateNavigation;
 	public String simulateNavigationMode = SimulationMode.PREVIEW.getKey();
 	public float simulateNavigationSpeed = SIM_MIN_SPEED;
 

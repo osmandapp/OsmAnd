@@ -49,7 +49,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Paint paint;
 
 	//OpenGL
-	private int impassibleRoadsCount = 0;
+	private int impassibleRoadsCount;
 
 	public ImpassableRoadsLayer(@NonNull Context ctx) {
 		super(ctx);

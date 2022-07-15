@@ -53,7 +53,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private List<ProfilesGroup> predefinedGroups;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
-	private boolean triedToDownload = false;
+	private boolean triedToDownload;
 	private DialogMode dialogMode;
 	private String predefinedJson;
 

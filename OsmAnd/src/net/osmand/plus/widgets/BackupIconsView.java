@@ -50,7 +50,7 @@ public class BackupIconsView extends View {
 	private int measuredWidth;
 	private int iconsPerRow;
 
-	private int offsetX = 0;
+	private int offsetX;
 
 	public BackupIconsView(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);

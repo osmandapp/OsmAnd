@@ -143,7 +143,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	// camera picture size:
 	public static final int AV_PHOTO_SIZE_DEFAULT = -1;
-	public static int cameraPictureSizeDefault = 0;
+	public static int cameraPictureSizeDefault;
 
 	// camera focus type
 	public static final int AV_CAMERA_FOCUS_AUTO = 0;
@@ -153,8 +153,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_CAMERA_FOCUS_MACRO = 4;
 	public static final int AV_CAMERA_FOCUS_CONTINUOUS = 5;
 	// photo shot:
-	private static int shotId = 0;
-	private SoundPool soundPool = null;
+	private static int shotId;
+	private SoundPool soundPool;
 	public static final int FULL_SCEEN_RESULT_DELAY_MS = 3000;
 
 	public final CommonPreference<Integer> AV_CAMERA_PICTURE_SIZE;

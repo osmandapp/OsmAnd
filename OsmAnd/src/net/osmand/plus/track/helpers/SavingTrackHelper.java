@@ -70,16 +70,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public static final Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
-	private long lastTimeUpdated = 0;
+	private long lastTimeUpdated;
 	private final OsmandApplication ctx;
 	private final OsmandSettings settings;
 
 	private LatLon lastPoint;
-	private float distance = 0;
-	private long duration = 0;
+	private float distance;
+	private long duration;
 	private final SelectedGpxFile currentTrack;
 	private int points;
-	private int trkPoints = 0;
+	private int trkPoints;
 	private long lastTimeFileSaved;
 
 	private ApplicationMode lastRoutingApplicationMode;

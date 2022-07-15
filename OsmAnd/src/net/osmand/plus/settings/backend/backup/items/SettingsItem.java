@@ -41,7 +41,7 @@ public abstract class SettingsItem {
 	protected long lastModifiedTime;
 	private boolean fromJson;
 
-	protected boolean shouldReplace = false;
+	protected boolean shouldReplace;
 
 	protected List<String> warnings;
 

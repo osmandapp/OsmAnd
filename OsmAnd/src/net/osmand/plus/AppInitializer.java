@@ -121,8 +121,8 @@ public class AppInitializer implements IProgress {
 	private final OsmandApplication app;
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
 
-	private boolean initSettings = false;
-	private boolean activityChangesShowed = false;
+	private boolean initSettings;
+	private boolean activityChangesShowed;
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
@@ -856,7 +856,7 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	private boolean applicationBgInitializing = false;
+	private boolean applicationBgInitializing;
 
 
 	public synchronized void startApplication() {

@@ -104,7 +104,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(DashboardOnMap.class);
 	private static final String TAG = "DashboardOnMap";
 
-	public static boolean staticVisible = false;
+	public static boolean staticVisible;
 	public static DashboardType staticVisibleType = DASHBOARD;
 	public static final String SHOULD_SHOW = "should_show";
 
@@ -134,7 +134,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener adapterClickListener;
 
-	private boolean visible = false;
+	private boolean visible;
 	private DashboardType visibleType;
 	private DashboardType previousVisibleType;
 	private ApplicationMode previousAppMode;
@@ -144,7 +144,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private float heading;
 	private boolean mapLinkedToLocation;
 	private float mapRotation;
-	private boolean inLocationUpdate = false;
+	private boolean inLocationUpdate;
 	private ObservableListView listView;
 	private View listBackgroundView;
 	private Toolbar toolbar;

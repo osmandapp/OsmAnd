@@ -35,7 +35,7 @@ public class RenderingIcons {
 	private static final Map<String, Bitmap> iconsBmp = new LinkedHashMap<>();
 	private static final Map<String, Drawable> iconsDrawable = new LinkedHashMap<>();
 
-	private static Bitmap cacheBmp = null;
+	private static Bitmap cacheBmp;
 
 	public static boolean containsSmallIcon(String s){
 		return smallIcons.containsKey(s);

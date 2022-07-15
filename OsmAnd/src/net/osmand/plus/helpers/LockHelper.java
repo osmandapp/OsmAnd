@@ -33,7 +33,7 @@ public class LockHelper implements SensorEventListener {
 	private static final int SENSOR_SENSITIVITY = 4;
 
 	@Nullable
-	private WakeLock wakeLock = null;
+	private WakeLock wakeLock;
 
 	private final Handler uiHandler;
 	private final OsmandApplication app;

@@ -126,7 +126,7 @@ public class GPXRouteParams {
 
 		private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GPXRouteParamsBuilder.class);
 
-		boolean calculateOsmAndRoute = false;
+		boolean calculateOsmAndRoute;
 		// parameters
 		private final GPXFile file;
 		private final boolean leftSide;

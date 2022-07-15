@@ -884,15 +884,15 @@ public class ApplicationMode {
 		@Expose
 		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose
-		public Integer customIconColor = null;
+		public Integer customIconColor;
 		@Expose
-		public String routingProfile = null;
+		public String routingProfile;
 		@Expose
 		public RouteService routeService = RouteService.OSMAND;
 		@Expose
-		public LocationIcon locIcon = null;
+		public LocationIcon locIcon;
 		@Expose
-		public NavigationIcon navIcon = null;
+		public NavigationIcon navIcon;
 		@Expose
 		public int order = -1;
 		@Expose

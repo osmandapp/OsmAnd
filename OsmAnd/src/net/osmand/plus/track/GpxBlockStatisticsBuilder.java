@@ -62,11 +62,11 @@ public class GpxBlockStatisticsBuilder {
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
 	private boolean blocksClickable = true;
-	private GPXTabItemType tabItem = null;
+	private GPXTabItemType tabItem;
 
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
-	private boolean updateRunning = false;
+	private boolean updateRunning;
 
 	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile, boolean nightMode) {
 		this.app = app;

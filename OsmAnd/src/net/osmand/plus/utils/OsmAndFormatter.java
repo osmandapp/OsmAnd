@@ -60,7 +60,7 @@ public class OsmAndFormatter {
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
-	private static boolean twelveHoursFormat = false;
+	private static boolean twelveHoursFormat;
 	private static TimeFormatter fullTimeFormatter;
 	private static TimeFormatter shortTimeFormatter;
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);

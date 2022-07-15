@@ -14,7 +14,7 @@ public class CurrentTimeWidget extends TextInfoWidget {
 
 	private static final long UPDATE_INTERVAL_MILLIS = 5000;
 
-	private long cachedTime = 0;
+	private long cachedTime;
 
 	public CurrentTimeWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, CURRENT_TIME);

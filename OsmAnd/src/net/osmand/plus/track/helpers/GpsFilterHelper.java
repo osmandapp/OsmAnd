@@ -41,7 +41,7 @@ public class GpsFilterHelper {
 	private final Set<GpsFilterListener> listeners = new HashSet<>();
 
 	private final Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
-	private GpsFilterTask gpsFilterTask = null;
+	private GpsFilterTask gpsFilterTask;
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;

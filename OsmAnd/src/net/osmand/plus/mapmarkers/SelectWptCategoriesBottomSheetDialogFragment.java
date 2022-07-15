@@ -42,7 +42,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	private final Set<String> selectedCategories = new HashSet<>();
 	private final List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
 
-	private boolean isUpdateMode = false;
+	private boolean isUpdateMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

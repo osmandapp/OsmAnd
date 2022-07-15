@@ -714,9 +714,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public abstract class TitleButtonController {
 		public String caption = "";
-		public int startIconId = 0;
-		public int endIconId = 0;
-		public boolean needRightText = false;
+		public int startIconId;
+		public int endIconId;
+		public boolean needRightText;
 		public String rightTextCaption = "";
 		public boolean visible = true;
 		public boolean tintIcon = true;
@@ -774,7 +774,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public abstract static class TitleProgressController {
 		public String caption = "";
-		public int progress = 0;
+		public int progress;
 		public boolean indeterminate;
 		public boolean visible;
 		public boolean progressVisible;

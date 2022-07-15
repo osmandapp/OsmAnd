@@ -89,17 +89,17 @@ public class MapRenderRepositories {
 
 	// lat/lon box of requested vector data
 	private QuadRect cObjectsBox = new QuadRect();
-	private int cObjectsZoom = 0;
+	private int cObjectsZoom;
 	// cached objects in order to render rotation without reloading data from db
 	private List<BinaryMapDataObject> cObjects = new LinkedList<BinaryMapDataObject>();
-	private NativeSearchResult cNativeObjects = null;
+	private NativeSearchResult cNativeObjects;
 
 	// currently rendered box (not the same as already rendered)
 	// this box is checked for interrupted process or
-	private RotatedTileBox requestedBox = null;
+	private RotatedTileBox requestedBox;
 
 	// location of rendered bitmap
-	private RotatedTileBox prevBmpLocation = null;
+	private RotatedTileBox prevBmpLocation;
 	// already rendered bitmap
 	private Bitmap prevBmp;
 	// to track necessity of map download (1 (if basemap) + 2 (if normal map) 
@@ -107,12 +107,12 @@ public class MapRenderRepositories {
 	private RotatedTileBox checkedBox;
 
 	// location of rendered bitmap
-	private RotatedTileBox bmpLocation = null;
+	private RotatedTileBox bmpLocation;
 	// already rendered bitmap
 	private Bitmap bmp;
 	// Field used in C++
-	private boolean interrupted = false;
-	private int renderedState = 0; 	// (1 (if basemap) + 2 (if normal map)
+	private boolean interrupted;
+	private int renderedState; 	// (1 (if basemap) + 2 (if normal map)
 	private RenderingContext currentRenderingContext;
 	private RenderingContext visibleRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;

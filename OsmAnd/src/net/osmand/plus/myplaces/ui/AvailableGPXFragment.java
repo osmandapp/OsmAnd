@@ -132,7 +132,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private GpxSelectionHelper selectedGpxHelper;
 	private GpxDisplayHelper gpxDisplayHelper;
 
-	private boolean selectionMode = false;
+	private boolean selectionMode;
 	private final List<GpxInfo> selectedItems = new ArrayList<>();
 	private final Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
@@ -145,7 +145,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private boolean showOnMapMode;
 	private View currentGpxView;
 	private View footerView;
-	private boolean importing = false;
+	private boolean importing;
 	private View emptyView;
 	private SelectGpxTaskListener gpxTaskListener;
 	private TracksSortByMode sortByMode;
@@ -1687,9 +1687,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		public File file;
 		public String subfolder;
 
-		private String name = null;
+		private String name;
 		private int sz = -1;
-		private String fileName = null;
+		private String fileName;
 		private boolean corrupted;
 
 		public GpxInfo() {

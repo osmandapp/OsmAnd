@@ -89,7 +89,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private FavouritesHelper helper;
 	private FavouritesAdapter favouritesAdapter;
 
-	private boolean selectionMode = false;
+	private boolean selectionMode;
 	private final LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
 	private final Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
@@ -104,7 +104,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private FavoritesListener favoritesListener;
 
-	private String groupNameToShow = null;
+	private String groupNameToShow;
 	private boolean compassUpdateAllowed = true;
 	private boolean locationUpdateStarted;
 

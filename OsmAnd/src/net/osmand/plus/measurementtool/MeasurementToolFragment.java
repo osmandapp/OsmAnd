@@ -199,7 +199,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean progressBarVisible;
 	private boolean infoExpanded;
 
-	private int modes = 0x0;
+	private int modes;
 
 	private boolean portrait;
 	private boolean nightMode;

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class FailSafeFunctions {
 
-	private static boolean quitRouteRestoreDialog = false;
+	private static boolean quitRouteRestoreDialog;
 	private static final Log log = PlatformUtil.getLog(FailSafeFunctions.class);
 
 	public static void restoreRoutingMode(final MapActivity ma) {
@@ -47,7 +47,7 @@ public class FailSafeFunctions {
 			quitRouteRestoreDialog = false;
 			Runnable encapsulate = new Runnable() {
 				int delay = 7;
-				Runnable delayDisplay = null;
+				Runnable delayDisplay;
 
 				@Override
 				public void run() {

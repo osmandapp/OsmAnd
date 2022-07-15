@@ -180,8 +180,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean nightMode;
 
 	private LatLon centerLatLon;
-	private net.osmand.Location location = null;
-	private Float heading = null;
+	private net.osmand.Location location;
+	private Float heading;
 	private boolean useMapCenter;
 	private boolean paused;
 	private boolean cancelPrev;
@@ -1420,7 +1420,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							}
 							runCoreSearch("", false, false, new SearchResultListener() {
 
-								boolean cityFound = false;
+								boolean cityFound;
 
 								@Override
 								public void publish(SearchResultCollection res, boolean append) {
@@ -1713,8 +1713,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 									   final SearchResultListener resultListener) {
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
-			SearchResultCollection regionResultCollection = null;
-			SearchCoreAPI regionResultApi = null;
+			SearchResultCollection regionResultCollection;
+			SearchCoreAPI regionResultApi;
 			List<SearchResult> results = new ArrayList<>();
 
 			@Override

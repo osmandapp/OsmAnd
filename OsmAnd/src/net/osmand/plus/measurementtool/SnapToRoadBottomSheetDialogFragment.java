@@ -37,7 +37,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 	private boolean portrait;
 	private boolean snapToRoadEnabled;
 	private boolean removeDefaultMode = true;
-	private boolean showStraightLine = false;
+	private boolean showStraightLine;
 
 	public void setListener(SnapToRoadFragmentListener listener) {
 		this.listener = listener;

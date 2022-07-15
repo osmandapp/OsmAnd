@@ -40,18 +40,18 @@ public class ContextMenuItem {
 
 	private boolean useNaturalIconColor;
 	@ColorInt
-	private Integer color = null;
+	private Integer color;
 	@DrawableRes
 	private int icon = INVALID_ID;
 	@DrawableRes
 	private int secondaryIcon = INVALID_ID;
 
-	private Boolean selected = null;
+	private Boolean selected;
 	private int progress = INVALID_ID;
 	private boolean loading;
 
 	private boolean hidden;
-	private int order = 0;
+	private int order;
 
 	private OnRefreshCallback onRefreshCallback;
 	private ItemClickListener itemClickListener;

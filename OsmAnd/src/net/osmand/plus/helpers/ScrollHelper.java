@@ -29,7 +29,7 @@ public class ScrollHelper {
 	private final Direction RIGHT = new Direction(KeyEvent.KEYCODE_DPAD_RIGHT);
 
 	private final Map<Integer, Direction> availableDirections;
-	private boolean isInContinuousScrolling = false;
+	private boolean isInContinuousScrolling;
 	private long startContinuousScrollingTime = INVALID_VALUE;
 
 	private final Runnable scrollingRunnable = new Runnable() {

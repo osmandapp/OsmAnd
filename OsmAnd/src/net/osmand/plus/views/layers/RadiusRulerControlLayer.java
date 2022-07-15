@@ -92,7 +92,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private final int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
 
-	private float cachedHeading = 0;
+	private float cachedHeading;
 
 	public RadiusRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);

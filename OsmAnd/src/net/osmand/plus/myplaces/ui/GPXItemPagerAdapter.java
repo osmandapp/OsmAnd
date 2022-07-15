@@ -101,7 +101,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private final boolean showEmptyAltitudeTab;
 	private boolean hideStatistics;
 	private boolean hideJoinGapsBottomButtons;
-	private int chartHMargin = 0;
+	private int chartHMargin;
 
 	public void setChartHMargin(int chartHMargin) {
 		this.chartHMargin = chartHMargin;

@@ -34,11 +34,11 @@ public class TargetPointsHelper {
 	private final RoutingHelper routingHelper;
 
 	private final List<TargetPoint> intermediatePoints = new ArrayList<>();
-	private TargetPoint pointToNavigate = null;
-	private TargetPoint pointToStart = null;
-	private TargetPoint pointToNavigateBackup = null;
-	private TargetPoint pointToStartBackup = null;
-	private TargetPoint myLocationToStart = null;
+	private TargetPoint pointToNavigate;
+	private TargetPoint pointToStart;
+	private TargetPoint pointToNavigateBackup;
+	private TargetPoint pointToStartBackup;
+	private TargetPoint myLocationToStart;
 	private final List<StateChangedListener<Void>> listeners = new ArrayList<>();
 	private final List<TargetPointChangedListener> pointListeners = new ArrayList<>();
 

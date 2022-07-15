@@ -66,7 +66,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private Paint aroundArea;
 
 	private ApplicationMode appMode;
-	private boolean carView = false;
+	private boolean carView;
 	private float textScale = 1f;
 	@ColorInt
 	private int profileColor;
@@ -91,7 +91,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private CoreMapMarker navigationMarkerWithHeading;
 
 	private boolean markersInvalidated = true;
-	private boolean showHeadingCached = false;
+	private boolean showHeadingCached;
 	private Location lastKnownLocationCached;
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = MarkerState.Stay;
