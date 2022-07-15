@@ -310,8 +310,8 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			mainView = view;
 			topDivider = view.findViewById(R.id.top_divider);
 			backgroundView = view.findViewById(R.id.background_view);
-			checkBox = (CheckBox) view.findViewById(R.id.check_box);
-			title = (TextView) view.findViewById(R.id.title_text_view);
+			checkBox = view.findViewById(R.id.check_box);
+			title = view.findViewById(R.id.title_text_view);
 		}
 	}
 
@@ -326,11 +326,11 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 
 		OsmEditViewHolder(View view) {
 			mainView = view;
-			icon = (ImageView) view.findViewById(R.id.icon);
-			selectCheckBox = (CheckBox) view.findViewById(R.id.check_box);
-			optionsImageButton = (ImageButton) view.findViewById(R.id.options);
-			titleTextView = (TextView) view.findViewById(R.id.title);
-			descriptionTextView = (TextView) view.findViewById(R.id.description);
+			icon = view.findViewById(R.id.icon);
+			selectCheckBox = view.findViewById(R.id.check_box);
+			optionsImageButton = view.findViewById(R.id.options);
+			titleTextView = view.findViewById(R.id.title);
+			descriptionTextView = view.findViewById(R.id.description);
 			bottomDivider = view.findViewById(R.id.bottom_divider);
 		}
 	}

@@ -487,7 +487,7 @@ public class TurnPathHelper {
 			paintRouteDirectionOutlay.setStyle(Style.STROKE);
 			paintRouteDirectionOutlay.setColor(Color.BLACK);
 			paintRouteDirectionOutlay.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini,
+			calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini,
 					false, true, false);
 		}
 
@@ -500,7 +500,7 @@ public class TurnPathHelper {
 		}
 		
 		public void setRouteType(TurnType t){
-			TurnPathHelper.calcTurnPath(p, pOutlay, t, null, null, mini,
+			calcTurnPath(p, pOutlay, t, null, null, mini,
 					false, true, false);
 			onBoundsChange(getBounds());
 		}

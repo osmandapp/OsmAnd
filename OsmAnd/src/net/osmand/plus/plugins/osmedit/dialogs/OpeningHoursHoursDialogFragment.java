@@ -70,8 +70,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 								}
 								if (isStart && createNew) {
 									item.setStartTime(time, timePosition);
-									OpeningHoursHoursDialogFragment
-											.createInstance(item, rulePosition, false, timePosition)
+									createInstance(item, rulePosition, false, timePosition)
 											.show(getFragmentManager(), "TimePickerDialogFragment");
 								} else {
 									if (isStart) {

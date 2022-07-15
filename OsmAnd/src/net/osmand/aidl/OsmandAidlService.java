@@ -610,9 +610,6 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean calculateRoute(CalculateRouteParams params) {
 			try {
-				if (params == null || params.getEndPoint() == null) {
-					return false;
-				} else {
 				/*
 				final TargetPointsHelper targets = app.getTargetPointsHelper();
 				targets.removeAllWayPoints(false, true);
@@ -655,8 +652,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 				//mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, startPoint, startPointDescription, true, false);
 				*/
-					return true;
-				}
+				return params != null && params.getEndPoint() != null;
 			} catch (Exception e) {
 				handleException(e);
 				return false;

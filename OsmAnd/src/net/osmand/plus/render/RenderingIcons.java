@@ -119,9 +119,9 @@ public class RenderingIcons {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (poiType == null) {
 			return null;
-		} else if (RenderingIcons.containsSmallIcon(poiType.getIconKeyName())) {
+		} else if (containsSmallIcon(poiType.getIconKeyName())) {
 			return poiType.getIconKeyName();
-		} else if (RenderingIcons.containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
 		}
 		return null;

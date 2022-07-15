@@ -90,7 +90,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		};
 
 		if (adapter != null) {
-			LinearLayout itemsLinearLayout = (LinearLayout) mainView.findViewById(R.id.context_menu_items_container);
+			LinearLayout itemsLinearLayout = mainView.findViewById(R.id.context_menu_items_container);
 			LinearLayout row = (LinearLayout) View.inflate(context, R.layout.grid_menu_row, null);
 			int itemsAdded = 0;
 			for (int i = 0; i < adapter.length(); i++) {

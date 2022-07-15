@@ -227,7 +227,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		WORK_POINT;
 
 		public boolean isTargetPoint() {
-			return this != QuickSearchType.REGULAR;
+			return this != REGULAR;
 		}
 	}
 
@@ -303,9 +303,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchView = view.findViewById(R.id.search_view);
 
 		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
-		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
+		buttonToolbarImage = view.findViewById(R.id.buttonToolbarImage);
 		buttonToolbarImage.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
-		buttonToolbarFilter = (ImageButton) view.findViewById(R.id.filterButton);
+		buttonToolbarFilter = view.findViewById(R.id.filterButton);
 		buttonToolbarFilter.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_filter));
 		buttonToolbarFilter.setOnClickListener(new OnClickListener() {
 			@Override
@@ -339,7 +339,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 
-		buttonToolbarText = (TextView) view.findViewById(R.id.buttonToolbarTitle);
+		buttonToolbarText = view.findViewById(R.id.buttonToolbarTitle);
 		view.findViewById(R.id.buttonToolbar).setOnClickListener(
 				new OnClickListener() {
 					@Override
@@ -449,7 +449,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		);
 
-		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar = view.findViewById(R.id.toolbar);
 		if (!app.getSettings().isLightContent()) {
 			toolbar.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.app_bar_color_dark));
 		}
@@ -458,15 +458,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> onBackButtonPressed());
 
-		toolbarEdit = (Toolbar) view.findViewById(R.id.toolbar_edit);
+		toolbarEdit = view.findViewById(R.id.toolbar_edit);
 		toolbarEdit.setNavigationIcon(iconsCache.getIcon(R.drawable.ic_action_remove_dark));
 		toolbarEdit.setNavigationContentDescription(R.string.shared_string_cancel);
 		toolbarEdit.setNavigationOnClickListener(v -> enableSelectionMode(false, -1));
 
-		titleEdit = (TextView) view.findViewById(R.id.titleEdit);
+		titleEdit = view.findViewById(R.id.titleEdit);
 		Drawable shareIcon = iconsCache.getIcon(R.drawable.ic_action_gshare_dark, R.color.color_white);
 		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
-		ImageView shareButton = (ImageView) view.findViewById(R.id.shareButton);
+		ImageView shareButton = view.findViewById(R.id.shareButton);
 		shareButton.setImageDrawable(shareIcon);
 		shareButton.setOnClickListener(
 				new OnClickListener() {
@@ -498,7 +498,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 		);
 
-		viewPager = (LockableViewPager) view.findViewById(R.id.pager);
+		viewPager = view.findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(2);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
@@ -514,7 +514,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				break;
 		}
 
-		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+		tabLayout = view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
 		viewPager.addOnPageChangeListener(
 				new ViewPager.OnPageChangeListener() {
@@ -541,7 +541,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 		);
 
-		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -604,8 +604,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 		);
 
-		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
-		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		progressBar = view.findViewById(R.id.searchProgressBar);
+		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(
 				new OnClickListener() {
@@ -2445,7 +2445,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		@Override
 		public void onListItemClick(ListView l, View view, int position, long id) {
 			if (selectionMode) {
-				CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
+				CheckBox ch = view.findViewById(R.id.toggle_item);
 				ch.setChecked(!ch.isChecked());
 				getListAdapter().toggleCheckbox(position - l.getHeaderViewsCount(), ch);
 			} else {

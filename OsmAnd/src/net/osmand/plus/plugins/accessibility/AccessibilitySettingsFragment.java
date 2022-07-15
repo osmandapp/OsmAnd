@@ -140,7 +140,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			entryValues[i] = accessibilityModes[i].ordinal();
 		}
 
-		ListPreferenceEx accessibilityMode = (ListPreferenceEx) findPreference(settings.ACCESSIBILITY_MODE.getId());
+		ListPreferenceEx accessibilityMode = findPreference(settings.ACCESSIBILITY_MODE.getId());
 		accessibilityMode.setEntries(entries);
 		accessibilityMode.setEntryValues(entryValues);
 		accessibilityMode.setIcon(getPersistentPrefIcon(R.drawable.ic_action_android));
@@ -155,7 +155,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			entries[i] = (int) (entryValues[i] * 100) + " %";
 		}
 
-		ListPreferenceEx speechRate = (ListPreferenceEx) findPreference(settings.SPEECH_RATE.getId());
+		ListPreferenceEx speechRate = findPreference(settings.SPEECH_RATE.getId());
 		speechRate.setEntries(entries);
 		speechRate.setEntryValues(entryValues);
 		speechRate.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
@@ -163,7 +163,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	private void setupSmartAutoAnnouncePref() {
-		SwitchPreferenceEx smartAutoAnnounce = (SwitchPreferenceEx) findPreference(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.getId());
+		SwitchPreferenceEx smartAutoAnnounce = findPreference(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.getId());
 		smartAutoAnnounce.setDescription(getString(R.string.access_smart_autoannounce_descr));
 	}
 
@@ -185,7 +185,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			k++;
 		}
 
-		ListPreferenceEx autoAnnouncePeriod = (ListPreferenceEx) findPreference(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.getId());
+		ListPreferenceEx autoAnnouncePeriod = findPreference(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.getId());
 		autoAnnouncePeriod.setEntries(entries);
 		autoAnnouncePeriod.setEntryValues(entryValues);
 		autoAnnouncePeriod.setDescription(R.string.access_autoannounce_period_descr);
@@ -201,19 +201,19 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			entryValues[i] = relativeDirectionStyles[i].ordinal();
 		}
 
-		ListPreferenceEx directionStyle = (ListPreferenceEx) findPreference(settings.DIRECTION_STYLE.getId());
+		ListPreferenceEx directionStyle = findPreference(settings.DIRECTION_STYLE.getId());
 		directionStyle.setEntries(entries);
 		directionStyle.setEntryValues(entryValues);
 		directionStyle.setDescription(R.string.settings_direction_style_descr);
 	}
 
 	private void setupDirectionAudioFeedbackPref() {
-		SwitchPreferenceEx directionAudioFeedback = (SwitchPreferenceEx) findPreference(settings.DIRECTION_AUDIO_FEEDBACK.getId());
+		SwitchPreferenceEx directionAudioFeedback = findPreference(settings.DIRECTION_AUDIO_FEEDBACK.getId());
 		directionAudioFeedback.setDescription(getString(R.string.access_direction_audio_feedback_descr));
 	}
 
 	private void setupDirectionHapticFeedbackPref() {
-		SwitchPreferenceEx directionHapticFeedback = (SwitchPreferenceEx) findPreference(settings.DIRECTION_HAPTIC_FEEDBACK.getId());
+		SwitchPreferenceEx directionHapticFeedback = findPreference(settings.DIRECTION_HAPTIC_FEEDBACK.getId());
 		directionHapticFeedback.setDescription(getString(R.string.access_direction_haptic_feedback_descr));
 	}
 

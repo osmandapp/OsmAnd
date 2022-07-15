@@ -359,8 +359,8 @@ public class UiUtilities {
 		}
 		View view = snackbar.getView();
 		Context ctx = view.getContext();
-		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
-		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
+		TextView tvMessage = view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView tvAction = view.findViewById(com.google.android.material.R.id.snackbar_action);
 		if (messageColor == null) {
 			messageColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		}
@@ -381,8 +381,8 @@ public class UiUtilities {
 	public static void setupSnackbarVerticalLayout(Snackbar snackbar) {
 		View view = snackbar.getView();
 		Context ctx = view.getContext();
-		TextView messageView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
-		TextView actionView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
+		TextView messageView = view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView actionView = view.findViewById(com.google.android.material.R.id.snackbar_action);
 		ViewParent parent = actionView.getParent();
 		if (parent instanceof SnackbarContentLayout) {
 			((SnackbarContentLayout) parent).removeView(actionView);
@@ -533,7 +533,7 @@ public class UiUtilities {
 		if (background != null) {
 			int highlightColor = ContextCompat.getColor(app, nightMode ?
 					highlightColorNight : highlightColorDay);
-			int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+			int strokedColor = AndroidUtils.getColorFromAttr(getThemedContext(app, nightMode),
 					R.attr.stroked_buttons_and_links_outline);
 			background = (GradientDrawable) background.mutate();
 			if (checked) {

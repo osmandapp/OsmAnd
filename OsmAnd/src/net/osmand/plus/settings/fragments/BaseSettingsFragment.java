@@ -473,18 +473,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected void createToolbar(LayoutInflater inflater, View view) {
-		AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
+		AppBarLayout appBarLayout = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
 		View toolbarContainer = currentScreenType == null ? null :
 				UiUtilities.getInflater(getActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
 
-		TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		if (toolbarTitle != null) {
 			toolbarTitle.setText(getPreferenceScreen().getTitle());
 		}
 
-		TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
+		TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
 		if (toolbarSubtitle != null) {
 			toolbarSubtitle.setText(getSelectedAppMode().toHumanString());
 		}
@@ -531,12 +531,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		ApplicationMode selectedAppMode = getSelectedAppMode();
 		int iconColor = getActiveProfileColor();
 
-		ImageView profileIcon = (ImageView) view.findViewById(R.id.profile_icon);
+		ImageView profileIcon = view.findViewById(R.id.profile_icon);
 		if (profileIcon != null) {
 			int iconRes = selectedAppMode.getIconRes();
 			profileIcon.setImageDrawable(getPaintedIcon(iconRes, iconColor));
 		}
-		TextView profileTitle = (TextView) view.findViewById(R.id.profile_title);
+		TextView profileTitle = view.findViewById(R.id.profile_title);
 		if (profileTitle != null) {
 			String appName = selectedAppMode.toHumanString();
 			profileTitle.setText(appName);

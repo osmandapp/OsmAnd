@@ -855,7 +855,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		final List<TextViewEx> buttons = new ArrayList<>();
 
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		for (final PoiType pt : categoryTypes) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);

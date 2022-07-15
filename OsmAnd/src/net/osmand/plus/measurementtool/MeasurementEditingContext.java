@@ -257,7 +257,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
 				RoadSegmentData data = this.roadSegmentData.get(pair);
 				if (data == null) {
-					if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE || !pair.first.lastPoint || !pair.second.firstPoint) {
+					if (appMode != DEFAULT_APP_MODE || !pair.first.lastPoint || !pair.second.firstPoint) {
 						distance += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
 								pair.second.getLatitude(), pair.second.getLongitude());
 					}
@@ -452,7 +452,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private void preAddPoint(int position, AdditionMode additionMode, WptPt point) {
 		switch (additionMode) {
 			case UNDEFINED: {
-				if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				if (appMode != DEFAULT_APP_MODE) {
 					point.setProfileType(appMode.getStringKey());
 				}
 				break;
@@ -463,7 +463,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					WptPt prevPt = points.get(position - 1);
 					if (prevPt.isGap()) {
 						if (position == points.size() && getAfterPoints().size() == 0) {
-							if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+							if (appMode != DEFAULT_APP_MODE) {
 								point.setProfileType(appMode.getStringKey());
 							}
 						} else {
@@ -480,7 +480,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					} else if (prevPt.hasProfile()) {
 						point.setProfileType(prevPt.getProfileType());
 					}
-				} else if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				} else if (appMode != DEFAULT_APP_MODE) {
 					point.setProfileType(appMode.getStringKey());
 				}
 				break;
@@ -492,7 +492,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					if (nextPt.hasProfile()) {
 						point.setProfileType(nextPt.getProfileType());
 					}
-				} else if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				} else if (appMode != DEFAULT_APP_MODE) {
 					point.setProfileType(appMode.getStringKey());
 				}
 				break;
@@ -699,7 +699,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private ApplicationMode getPointAppMode(int pointPosition) {
 		String profileType = getPoints().get(pointPosition).getProfileType();
-		return ApplicationMode.valueOfStringKey(profileType, MeasurementEditingContext.DEFAULT_APP_MODE);
+		return ApplicationMode.valueOfStringKey(profileType, DEFAULT_APP_MODE);
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {

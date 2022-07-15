@@ -59,7 +59,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		setContentView(R.layout.update_index);
 		((TextView)findViewById(R.id.header)).setText(R.string.shared_string_select_all);
-		final CheckBox selectAll = (CheckBox) findViewById(R.id.select_all);
+		final CheckBox selectAll = findViewById(R.id.select_all);
 		selectAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -167,7 +167,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				}
 				helper.editPoiFilter(filter);
 				ListView lv = EditPOIFilterActivity.this.getListView();
-				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
+				AmenityAdapter la = EditPOIFilterActivity.this.getListAdapter();
 				la.notifyDataSetChanged();
 				lv.setSelectionFromTop(index, top);
 			}
@@ -243,10 +243,10 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			}
 			PoiCategory model = getItem(position);
 
-			CheckBox check = (CheckBox) row.findViewById(R.id.filter_poi_check);
+			CheckBox check = row.findViewById(R.id.filter_poi_check);
 			check.setChecked(filter.isTypeAccepted(model));
 
-			TextView text = (TextView) row.findViewById(R.id.filter_poi_label);
+			TextView text = row.findViewById(R.id.filter_poi_label);
 			String textString = model.getTranslation();
 			Set<String> subtypes = filter.getAcceptedSubtypes(model);
 			if(filter.isTypeAccepted(model)) {

@@ -124,8 +124,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	private int exportType;
 
 	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
-		TextView viewName = ((TextView) v.findViewById(R.id.name));
-		ImageView icon = (ImageView) v.findViewById(R.id.icon);
+		TextView viewName = v.findViewById(R.id.name);
+		ImageView icon = v.findViewById(R.id.icon);
 		String name = OsmEditingPlugin.getEditName(child);
 		viewName.setText(name);
 		if (child.getGroup() == Group.POI) {
@@ -134,7 +134,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note_add, R.color.color_distance));
 		}
 
-		TextView descr = (TextView) v.findViewById(R.id.description);
+		TextView descr = v.findViewById(R.id.description);
 		if (child.getAction() == OsmPoint.Action.CREATE) {
 			descr.setText(R.string.action_create);
 		} else if (child.getAction() == OsmPoint.Action.MODIFY) {
@@ -159,7 +159,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
-		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
 		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));

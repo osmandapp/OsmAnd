@@ -53,21 +53,21 @@ public enum BackupStatus {
 			int errorCode = error.getCode();
 			if (errorCode == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT
 					|| errorCode == STATUS_NO_ORDER_ID_ERROR) {
-				return BackupStatus.SUBSCRIPTION_EXPIRED;
+				return SUBSCRIPTION_EXPIRED;
 			}
 		}
 		if (info != null) {
 			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
-				return BackupStatus.CONFLICTS;
+				return CONFLICTS;
 			} else if (!Algorithms.isEmpty(info.itemsToUpload)
 					|| !Algorithms.isEmpty(info.itemsToDelete)) {
-				return BackupStatus.MAKE_BACKUP;
+				return MAKE_BACKUP;
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {
-			return BackupStatus.NO_INTERNET_CONNECTION;
+			return NO_INTERNET_CONNECTION;
 		} else if (backup.getError() != null) {
-			return BackupStatus.ERROR;
+			return ERROR;
 		}
-		return BackupStatus.BACKUP_COMPLETE;
+		return BACKUP_COMPLETE;
 	}
 }

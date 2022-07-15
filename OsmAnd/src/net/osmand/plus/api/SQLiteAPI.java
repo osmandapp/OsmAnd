@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 public interface SQLiteAPI {
 
-	public interface SQLiteConnection {
+	interface SQLiteConnection {
 		
 		void close();
 		
@@ -27,7 +27,7 @@ public interface SQLiteAPI {
 
 	}
 	
-	public interface SQLiteCursor {
+	interface SQLiteCursor {
 		
 		String[] getColumnNames();
 
@@ -56,7 +56,7 @@ public interface SQLiteAPI {
 
 	}
 	
-	public interface SQLiteStatement {
+	interface SQLiteStatement {
 
 		// 1 based argument
 		void bindString(int i, String filterId);

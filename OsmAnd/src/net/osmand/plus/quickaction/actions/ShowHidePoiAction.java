@@ -133,12 +133,12 @@ public class ShowHidePoiAction extends QuickAction {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
-		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+		RecyclerView list = view.findViewById(R.id.list);
 		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
 		final Adapter adapter = new Adapter(poiFilters);
 		list.setAdapter(adapter);
 
-		Button addFilter = (Button) view.findViewById(R.id.btnAddCategory);
+		Button addFilter = view.findViewById(R.id.btnAddCategory);
 		addFilter.setOnClickListener(v -> showSingleChoicePoiFilterDialog(mapActivity, adapter));
 
 		parent.addView(view);
@@ -217,9 +217,9 @@ public class ShowHidePoiAction extends QuickAction {
 			public Holder(View itemView) {
 				super(itemView);
 
-				title = (TextView) itemView.findViewById(R.id.title);
-				icon = (ImageView) itemView.findViewById(R.id.icon);
-				delete = (ImageView) itemView.findViewById(R.id.delete);
+				title = itemView.findViewById(R.id.title);
+				icon = itemView.findViewById(R.id.icon);
+				delete = itemView.findViewById(R.id.delete);
 			}
 		}
 	}

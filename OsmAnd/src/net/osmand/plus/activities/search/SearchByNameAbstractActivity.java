@@ -116,9 +116,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		
 		collator = OsmAndCollator.primaryCollator();
 
-		progress = (ProgressBar) findViewById(R.id.ProgressBar);
+		progress = findViewById(R.id.ProgressBar);
 			
-		searchText = (EditText) findViewById(R.id.SearchText);
+		searchText = findViewById(R.id.SearchText);
 
 		// ppenguin 2016-03-07: try to avoid full screen input in landscape mode (when softKB too large)
 		searchText.setImeOptions(searchText.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
@@ -502,7 +502,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.searchbyname_list, parent, false);
 			}
-			TextView label = (TextView) row.findViewById(R.id.NameLabel);
+			TextView label = row.findViewById(R.id.NameLabel);
 			String distanceText = getDistanceText(getItem(position));
 			String text = getText(getItem(position));
 			if(distanceText == null) {

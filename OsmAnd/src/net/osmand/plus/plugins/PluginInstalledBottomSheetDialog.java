@@ -315,7 +315,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
 				dialog.setArguments(args);
 				dialog.setUsedOnMap(usedOnMap);
-				dialog.show(fm, PluginInstalledBottomSheetDialog.TAG);
+				dialog.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

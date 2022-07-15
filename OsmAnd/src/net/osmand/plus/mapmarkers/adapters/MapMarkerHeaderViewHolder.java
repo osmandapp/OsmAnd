@@ -23,10 +23,10 @@ public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 
 	public MapMarkerHeaderViewHolder(View itemView) {
 		super(itemView);
-		icon = (ImageView) itemView.findViewById(R.id.icon);
+		icon = itemView.findViewById(R.id.icon);
 		iconSpace = itemView.findViewById(R.id.icon_space);
-		title = (TextView) itemView.findViewById(R.id.title);
-		disableGroupSwitch = (SwitchCompat) itemView.findViewById(R.id.disable_group_switch);
+		title = itemView.findViewById(R.id.title);
+		disableGroupSwitch = itemView.findViewById(R.id.disable_group_switch);
 		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
 		content = itemView.findViewById(R.id.content);
 		clearButton = itemView.findViewById(R.id.clear_button);

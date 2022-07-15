@@ -133,10 +133,10 @@ public class FavoriteAction extends QuickAction {
 
 		parent.addView(root);
 
-		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) root.findViewById(R.id.category_edit);
-		SwitchCompat showDialog = (SwitchCompat) root.findViewById(R.id.saveButton);
-		ImageView categoryImage = (ImageView) root.findViewById(R.id.category_image);
-		EditText name = (EditText) root.findViewById(R.id.name_edit);
+		AutoCompleteTextViewEx categoryEdit = root.findViewById(R.id.category_edit);
+		SwitchCompat showDialog = root.findViewById(R.id.saveButton);
+		ImageView categoryImage = root.findViewById(R.id.category_image);
+		EditText name = root.findViewById(R.id.name_edit);
 
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));

@@ -33,7 +33,7 @@ public class PedestrianRouteCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		TextView titleView = (TextView) view.findViewById(R.id.title);
+		TextView titleView = view.findViewById(R.id.title);
 		String text = app.getString(R.string.public_transport_ped_route_title);
 		String formattedDuration = OsmAndFormatter.getFormattedDuration(approxPedestrianTime, app);
 		int start = text.indexOf("%1$s");

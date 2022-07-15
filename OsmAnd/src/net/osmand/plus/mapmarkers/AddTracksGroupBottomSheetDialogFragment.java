@@ -68,9 +68,9 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
-		recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
-		lookingForTracksText = (TextView) mainView.findViewById(R.id.looking_for_tracks_text);
+		progressBar = mainView.findViewById(R.id.progress_bar);
+		recyclerView = mainView.findViewById(R.id.groups_recycler_view);
+		lookingForTracksText = mainView.findViewById(R.id.looking_for_tracks_text);
 
 		asyncProcessor = new ProcessGpxTask();
 		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

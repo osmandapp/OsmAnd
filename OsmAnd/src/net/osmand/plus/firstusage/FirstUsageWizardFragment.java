@@ -548,7 +548,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			if (!Algorithms.isEmpty(selectedFullName)) {
 				WorldRegion downloadRegion = osmandRegions.getRegionData(selectedFullName);
 				if (downloadRegion != null && downloadRegion.isRegionMapDownload()) {
-					FirstUsageWizardFragment.mapDownloadRegion = downloadRegion;
+					mapDownloadRegion = downloadRegion;
 					List<IndexItem> indexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
 					for (IndexItem item : indexItems) {
 						if (item.getType() == DownloadActivityType.NORMAL_FILE) {

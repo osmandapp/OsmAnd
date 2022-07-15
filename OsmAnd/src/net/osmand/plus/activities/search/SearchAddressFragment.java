@@ -183,7 +183,7 @@ public class SearchAddressFragment extends Fragment {
 		});
 		OsmandApplication app = getApplication();
 		Drawable icon = getApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark);
-		((ImageView)findViewById(R.id.ResetBuilding)).setBackground(icon);
+		findViewById(R.id.ResetBuilding).setBackground(icon);
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -194,7 +194,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
-		((ImageView)findViewById(R.id.ResetStreet)).setBackground(icon);
+		findViewById(R.id.ResetStreet).setBackground(icon);
 		 findViewById(R.id.ResetStreet).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -207,7 +207,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
-		 ((ImageView)findViewById(R.id.ResetCity)).setBackground(icon);
+		 findViewById(R.id.ResetCity).setBackground(icon);
 		 findViewById(R.id.ResetCity).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -222,7 +222,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
-		 ((ImageView)findViewById(R.id.ResetCountry)).setBackground(icon);
+		 findViewById(R.id.ResetCountry).setBackground(icon);
 		 findViewById(R.id.ResetCountry).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {

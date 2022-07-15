@@ -168,7 +168,7 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, @Nullable Integer prevColor) {
 		try {
-			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(CustomColorBottomSheet.TAG) == null) {
+			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				if (prevColor != null) {
 					args.putInt(PREV_SELECTED_COLOR, prevColor);
@@ -177,7 +177,7 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 				CustomColorBottomSheet customColorBottomSheet = new CustomColorBottomSheet();
 				customColorBottomSheet.setArguments(args);
 				customColorBottomSheet.setTargetFragment(target, 0);
-				customColorBottomSheet.show(fragmentManager, CustomColorBottomSheet.TAG);
+				customColorBottomSheet.show(fragmentManager, TAG);
 			}
 		} catch (RuntimeException e) {
 			log.error(e);

@@ -179,7 +179,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 											 @Nullable ApplicationMode appMode,
 											 @Nullable OnChangeSettingListener listener) {
 		try {
-			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 				args.putSerializable(NEW_VALUE_KEY, newValue);
@@ -191,7 +191,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				fragment.setAppMode(appMode);
 				fragment.setTargetFragment(target, 0);
 				fragment.setListener(listener);
-				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

@@ -59,9 +59,9 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {
-			if (fm.findFragmentByTag(CrashBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				CrashBottomSheetDialogFragment fragment = new CrashBottomSheetDialogFragment();
-				fragment.show(fm, CrashBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

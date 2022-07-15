@@ -178,9 +178,7 @@ public class QuickAction {
             QuickAction action = (QuickAction) o;
 
             if (getType() != action.getType()) return false;
-            if (id != action.id) return false;
-
-            return true;
+	        return id == action.id;
 
         } else return false;
     }

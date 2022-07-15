@@ -326,7 +326,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void addCustomPlugin(@NonNull OsmandApplication app, @NonNull CustomOsmandPlugin plugin) {
-		OsmandPlugin oldPlugin = OsmandPlugin.getPlugin(plugin.getId());
+		OsmandPlugin oldPlugin = getPlugin(plugin.getId());
 		if (oldPlugin != null) {
 			allPlugins.remove(oldPlugin);
 		}
@@ -444,7 +444,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
+		for (OsmandPlugin plugin : getMarketPlugins()) {
 			if (plugin.getInstallURL() != null && plugin.isAvailable(app)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
@@ -514,7 +514,7 @@ public abstract class OsmandPlugin {
 			if (plugin.isMarketPlugin() || plugin.isPaid()) {
 				if (plugin.isActive()) {
 					plugin.showInstallDialog(activity);
-				} else if (OsmandPlugin.checkPluginPackage(app, plugin)) {
+				} else if (checkPluginPackage(app, plugin)) {
 					plugin.showDisableDialog(activity);
 				}
 			}

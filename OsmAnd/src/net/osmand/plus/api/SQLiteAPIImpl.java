@@ -43,7 +43,6 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 
 		
 		public SQLiteDatabaseWrapper(android.database.sqlite.SQLiteDatabase ds) {
-			super();
 			this.ds = ds;
 		}
 

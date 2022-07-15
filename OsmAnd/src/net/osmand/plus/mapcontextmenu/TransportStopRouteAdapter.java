@@ -52,7 +52,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 				routeRef = (String) object;
 				bgColor = ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
 			}
-			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
+			TextView transportStopRouteTextView = convertView.findViewById(R.id.transport_stop_route_text);
 			transportStopRouteTextView.setText(routeRef);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
 			gradientDrawableBg.setColor(bgColor);

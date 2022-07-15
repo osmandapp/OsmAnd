@@ -165,7 +165,7 @@ public class NativeUtilities {
 			PointI windowSize = mapRenderer.getState().getWindowSize();
 			int cx = windowSize.getX() / 2;
 			int cy = windowSize.getY() / 2;
-			PointI shiftedTarget31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, cx, cy, true);
+			PointI shiftedTarget31 = get31FromPixel(mapRenderer, tileBox, cx, cy, true);
 			if (shiftedTarget31 != null) {
 				newTarget31 = new PointI(
 						target31.getX() + (target31.getX() - shiftedTarget31.getX()),

@@ -131,8 +131,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         View view = UiUtilities.getInflater(getContext(), nightMode)
                 .inflate(R.layout.quick_action_list, container, false);
 
-        rv = (RecyclerView) view.findViewById(R.id.recycler_view);
-        fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
+        rv = view.findViewById(R.id.recycler_view);
+        fab = view.findViewById(R.id.fabButton);
         fab.setOnClickListener(v -> showAddQuickActionDialog());
 
         AndroidUtils.addStatusBarPadding21v(requireContext(), view);
@@ -164,7 +164,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
         quickActionRegistry = requireMyApplication().getQuickActionRegistry();
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.toolbar);
         navigationIcon = toolbar.findViewById(R.id.close_button);
         deleteIconContainer = toolbar.findViewById(R.id.action_button);
         toolbarSwitchContainer = toolbar.findViewById(R.id.toolbar_switch_container);
@@ -725,16 +725,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             public QuickActionVH(View itemView) {
                 super(itemView);
                 OsmandApplication app = requireMyApplication();
-                title = (TextView) itemView.findViewById(R.id.title);
-                subTitle = (TextView) itemView.findViewById(R.id.subtitle);
-                icon = (ImageView) itemView.findViewById(R.id.imageView);
+                title = itemView.findViewById(R.id.title);
+                subTitle = itemView.findViewById(R.id.subtitle);
+                icon = itemView.findViewById(R.id.imageView);
                 itemDivider = itemView.findViewById(R.id.item_divider);
                 longDivider = itemView.findViewById(R.id.long_divider);
                 deleteBtn = itemView.findViewById(R.id.action_button);
-                deleteIcon = (ImageView) itemView.findViewById(R.id.action_icon);
+                deleteIcon = itemView.findViewById(R.id.action_icon);
                 moveButton = itemView.findViewById(R.id.move_button);
-                moveIcon = (ImageView) itemView.findViewById(R.id.move_icon);
-                checkbox = (CompoundButton) itemView.findViewById(R.id.checkbox);
+                moveIcon = itemView.findViewById(R.id.move_icon);
+                checkbox = itemView.findViewById(R.id.checkbox);
                 itemContainer = itemView.findViewById(R.id.searchListItemLayout);
 
                 deleteIcon.setImageDrawable(app.getUIUtilities()
@@ -752,7 +752,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
             public QuickActionHeaderVH(View itemView) {
                 super(itemView);
-                headerName = (TextView) itemView.findViewById(R.id.header);
+                headerName = itemView.findViewById(R.id.header);
             }
 
 	        @Override

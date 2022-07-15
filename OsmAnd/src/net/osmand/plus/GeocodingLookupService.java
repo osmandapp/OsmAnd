@@ -190,7 +190,6 @@ public class GeocodingLookupService {
 		private final OsmandApplication app;
 
 		public AddressLookupRequestsAsyncTask(OsmandApplication app) {
-			super();
 			this.app = app;
 		}
 

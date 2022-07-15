@@ -254,12 +254,12 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(FragmentManager fm, ApplicationMode appMode, Fragment target, boolean usedOnMap) {
 		try {
-			if (!fm.isStateSaved() && fm.findFragmentByTag(ElevationDateBottomSheet.TAG) == null) {
+			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ElevationDateBottomSheet fragment = new ElevationDateBottomSheet();
 				fragment.appMode = appMode;
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, ElevationDateBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

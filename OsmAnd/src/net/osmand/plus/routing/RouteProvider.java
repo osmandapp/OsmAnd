@@ -980,7 +980,7 @@ public class RouteProvider {
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
 							} 
-							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
+							last.distance = Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
 					} 
 					// save time as a speed because we don't know distance of the route segment

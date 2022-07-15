@@ -49,7 +49,7 @@ public class LogcatActivity extends BaseLogcatActivity {
 		}
 
 		adapter = new LogcatAdapter();
-		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		recyclerView = findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
 	}

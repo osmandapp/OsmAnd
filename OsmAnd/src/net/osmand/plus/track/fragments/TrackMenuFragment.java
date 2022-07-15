@@ -1646,7 +1646,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording,
+			showInstance((MapActivity) context, path, currentRecording,
 					temporarySelected, returnScreenName, null, tabToOpen.name());
 		} else {
 			Bundle bundle = new Bundle();

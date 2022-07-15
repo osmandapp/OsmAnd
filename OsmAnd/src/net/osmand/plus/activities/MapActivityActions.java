@@ -209,7 +209,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.add_gpx_point_dialog, null);
-		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
+		final EditText editText = view.findViewById(android.R.id.edit);
 		builder.setView(view);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
@@ -260,7 +260,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		final Dialog dlg = new Dialog(activity);
 		dlg.setTitle(R.string.shared_string_save_as_gpx);
 		dlg.setContentView(R.layout.save_directions_dialog);
-		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
+		final EditText edit = dlg.findViewById(R.id.FileNameEdit);
 
 		final GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
 		final String editText;

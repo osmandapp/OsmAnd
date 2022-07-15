@@ -67,13 +67,13 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View mainView = themedInflater.inflate(R.layout.bottom_sheet_behaviour_base, parent, false);
-		itemsContainer = (LinearLayout) mainView.findViewById(R.id.items_container);
+		itemsContainer = mainView.findViewById(R.id.items_container);
 
 		View scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
 		final BottomSheetBehavior behavior = BottomSheetBehavior.from(scrollView);
 		behavior.setPeekHeight(getPeekHeight());
 
-		LinearLayout buttonsContainer = (LinearLayout) mainView.findViewById(R.id.buttons_container);
+		LinearLayout buttonsContainer = mainView.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundResource(getButtonsContainerBg());
 
 		if (!portrait) {

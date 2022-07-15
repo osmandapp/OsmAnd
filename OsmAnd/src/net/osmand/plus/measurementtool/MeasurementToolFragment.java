@@ -1956,7 +1956,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				}
 				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 					setMode(UNDO_MODE, true);
-					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					showInstance(mapActivity.getSupportFragmentManager(),
 							editingCtx, modes);
 				}
 				return true;
@@ -1964,7 +1964,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} else {
 			setupGpxData(null);
 			setMode(UNDO_MODE, true);
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(),
+			showInstance(mapActivity.getSupportFragmentManager(),
 					editingCtx, modes);
 		}
 	}

@@ -101,7 +101,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 			fragment.setShowCurrentGpx(showCurrentGpx);
 			fragment.setCallbackWithObject(callbackWithObject);
 			fragment.setGpxInfoList(gpxInfoList);
-			fragment.show(fragmentManager, SelectGpxTrackBottomSheet.TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 

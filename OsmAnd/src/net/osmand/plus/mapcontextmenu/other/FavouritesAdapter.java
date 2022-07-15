@@ -79,11 +79,11 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 		public FavouritesViewHolder(View itemView) {
 			super(itemView);
-			favouriteImage = (ImageView) itemView.findViewById(R.id.favourite_icon);
-			title = (TextView) itemView.findViewById(R.id.favourite_title);
-			description = (TextView) itemView.findViewById(R.id.favourite_description);
-			distance = (TextView) itemView.findViewById(R.id.favourite_distance);
-			arrowImage = (ImageView) itemView.findViewById(R.id.favourite_direction_icon);
+			favouriteImage = itemView.findViewById(R.id.favourite_icon);
+			title = itemView.findViewById(R.id.favourite_title);
+			description = itemView.findViewById(R.id.favourite_description);
+			distance = itemView.findViewById(R.id.favourite_distance);
+			arrowImage = itemView.findViewById(R.id.favourite_direction_icon);
 		}
 	}
 }

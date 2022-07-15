@@ -710,7 +710,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Nullable
 	public static String getOsmUrlForId(@NonNull MapObject mapObject) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
+		EntityType type = getOsmEntityType(mapObject);
 		if (type != null) {
 			long osmId = getOsmObjectId(mapObject);
 			return "https://www.openstreetmap.org/" + type.name().toLowerCase(Locale.US) + "/" + osmId;

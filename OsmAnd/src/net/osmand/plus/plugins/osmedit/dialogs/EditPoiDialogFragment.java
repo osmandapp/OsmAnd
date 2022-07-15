@@ -160,7 +160,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setTitle(isAddingPoi ? R.string.poi_create_title : R.string.poi_edit_title);
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationIcon(icBack);
@@ -172,7 +172,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		viewPager = (EditPoiViewPager) view.findViewById(R.id.viewpager);
+		viewPager = view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
 		final PoiInfoPagerAdapter pagerAdapter = new PoiInfoPagerAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
@@ -200,7 +200,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+		final TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 		// tabLayout.setupWithViewPager(viewPager);
@@ -244,7 +244,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		final int activeColor = ColorUtilities.getActiveColor(getContext(), !isLightTheme);
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
-		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
+		final ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -259,7 +259,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		ExtendedEditText poiNameEditText = (ExtendedEditText) view.findViewById(R.id.poiNameEditText);
+		ExtendedEditText poiNameEditText = view.findViewById(R.id.poiNameEditText);
 		AndroidUtils.setTextHorizontalGravity(poiNameEditText, Gravity.START);
 		poiNameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -285,8 +285,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
 		poiNameEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(getActivity(), poiNameEditText);
-		poiTypeTextInputLayout = (OsmandTextFieldBoxes) view.findViewById(R.id.poiTypeTextInputLayout);
-		poiTypeEditText = (ExtendedEditText) view.findViewById(R.id.poiTypeEditText);
+		poiTypeTextInputLayout = view.findViewById(R.id.poiTypeTextInputLayout);
+		poiTypeEditText = view.findViewById(R.id.poiTypeEditText);
 		AndroidUtils.setTextHorizontalGravity(poiTypeEditText, Gravity.START);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
@@ -330,7 +330,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		});
 
 		if (!isAddingPoi && Entity.EntityType.valueOf(editPoiData.getEntity()) == Entity.EntityType.NODE) {
-			Button deleteButton = (Button) view.findViewById(R.id.deleteButton);
+			Button deleteButton = view.findViewById(R.id.deleteButton);
 			deleteButton.setVisibility(View.VISIBLE);
 			deleteButton.setOnClickListener(v -> {
 				DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
@@ -339,7 +339,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			});
 		}
 
-		Button saveButton = (Button) view.findViewById(R.id.saveButton);
+		Button saveButton = view.findViewById(R.id.saveButton);
 		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
 				? R.string.shared_string_upload : R.string.shared_string_save);
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -348,7 +348,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				trySave();
 			}
 		});
-		Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
+		Button cancelButton = view.findViewById(R.id.cancelButton);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -733,7 +733,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					Entity existingOsmEditEntity = getExistingOsmEditEntity(plugin, entity.getId());
 					Entity entityToEdit = existingOsmEditEntity != null ? existingOsmEditEntity : entity;
 					EditPoiDialogFragment fragment =
-							EditPoiDialogFragment.createInstance(entityToEdit, false);
+							createInstance(entityToEdit, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					Toast.makeText(activity,

@@ -59,7 +59,7 @@ public class AppModeDialog {
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		for (ApplicationMode ma : values) {
-			buttons[k++] = createToggle(a.getLayoutInflater(), app, R.layout.mode_view, (LinearLayout) ll.findViewById(R.id.app_modes_content), ma, useMapTheme);
+			buttons[k++] = createToggle(a.getLayoutInflater(), app, R.layout.mode_view, ll.findViewById(R.id.app_modes_content), ma, useMapTheme);
 		}
 		for (int i = 0; i < buttons.length; i++) {
 			updateButtonState(app, values, selected, onClickListener, buttons, i, singleSelection, useMapTheme, nightMode);
@@ -93,7 +93,7 @@ public class AppModeDialog {
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
 			final View selection = tb.findViewById(R.id.selection);
-			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
+			ImageView iv = tb.findViewById(R.id.app_mode_icon);
 			if (checked) {
 				iv.setImageDrawable(app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode)));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), app.getString(R.string.item_checked)));
@@ -144,7 +144,7 @@ public class AppModeDialog {
 			View tb = buttons[i];
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
-			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
+			ImageView iv = tb.findViewById(R.id.app_mode_icon);
 			ImageView selection = tb.findViewById(R.id.selection);
 			Drawable drawable = ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
 			if (checked) {
@@ -206,7 +206,7 @@ public class AppModeDialog {
 		int metricsX = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(layoutId, null);
-		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
+		ImageView iv = tb.findViewById(R.id.app_mode_icon);
 		iv.setImageDrawable(ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(isNightMode(ctx, useMapTheme))));
 		iv.setContentDescription(mode.toHumanString());
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);

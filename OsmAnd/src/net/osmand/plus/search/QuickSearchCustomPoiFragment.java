@@ -515,13 +515,13 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			}
 			PoiCategory category = getItem(position);
 			if (category != null) {
-				AppCompatImageView iconView = (AppCompatImageView) row.findViewById(R.id.icon);
+				AppCompatImageView iconView = row.findViewById(R.id.icon);
 				row.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
-				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
+				AppCompatTextView titleView = row.findViewById(R.id.title);
 				titleView.setMaxLines(Integer.MAX_VALUE);
 				titleView.setEllipsize(null);
-				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
-				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
+				AppCompatTextView descView = row.findViewById(R.id.description);
+				SwitchCompat check = row.findViewById(R.id.toggle_item);
 				UiUtilities.setupCompoundButton(check, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 
 				boolean categorySelected = filter.isTypeAccepted(category);

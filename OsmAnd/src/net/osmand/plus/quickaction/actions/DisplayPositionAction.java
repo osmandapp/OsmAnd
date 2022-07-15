@@ -53,7 +53,7 @@ public class DisplayPositionAction extends QuickAction {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 		View view = inflater.inflate(R.layout.quick_action_with_text, parent, false);
-		TextView tvDescription = (TextView) view.findViewById(R.id.text);
+		TextView tvDescription = view.findViewById(R.id.text);
 		tvDescription.setText(R.string.quick_action_toggle_preference);
 		parent.addView(view);
 	}

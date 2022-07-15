@@ -310,12 +310,12 @@ public abstract class ImageCard extends AbstractCard {
 
 	public void update() {
 		if (view != null) {
-			ImageView image = (ImageView) view.findViewById(R.id.image);
-			ImageView iconImageView = (ImageView) view.findViewById(R.id.icon);
-			TextView urlTextView = (TextView) view.findViewById(R.id.url);
-			TextView watermarkTextView = (TextView) view.findViewById(R.id.watermark);
-			ProgressBar progress = (ProgressBar) view.findViewById(R.id.progress);
-			AppCompatButton button = (AppCompatButton) view.findViewById(R.id.button);
+			ImageView image = view.findViewById(R.id.image);
+			ImageView iconImageView = view.findViewById(R.id.icon);
+			TextView urlTextView = view.findViewById(R.id.url);
+			TextView watermarkTextView = view.findViewById(R.id.watermark);
+			ProgressBar progress = view.findViewById(R.id.progress);
+			AppCompatButton button = view.findViewById(R.id.button);
 
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			AndroidUtils.setBackground(getMapActivity(), view.findViewById(R.id.card_background), night,
@@ -455,7 +455,7 @@ public abstract class ImageCard extends AbstractCard {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
 									if (!OsmandPlugin.createImageCardForJson(holder, imageObject)) {
-										ImageCard imageCard = ImageCard.createCard(mapActivity, imageObject);
+										ImageCard imageCard = createCard(mapActivity, imageObject);
 										if (imageCard != null) {
 											holder.add(ImageCardType.OTHER, imageCard);
 										}

@@ -88,7 +88,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 
 		mainView = view.findViewById(R.id.main_view);
 
-		TextView topBarTitle = (TextView) mainView.findViewById(R.id.top_bar_title);
+		TextView topBarTitle = mainView.findViewById(R.id.top_bar_title);
 		if (topBarTitle != null) {
 			if (menu.getGpxItem().group != null) {
 				topBarTitle.setText(menu.getGpxItem().group.getGpxName());
@@ -97,8 +97,8 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			}
 		}
 
-		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
-		ImageButton closeButton = (ImageButton) mainView.findViewById(R.id.top_bar_close_button);
+		ImageButton backButton = mainView.findViewById(R.id.top_bar_back_button);
+		ImageButton closeButton = mainView.findViewById(R.id.top_bar_close_button);
 		if (backButton != null) {
 			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -264,15 +264,15 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 				mainView.setBackgroundResource(typedValueAttr.resourceId);
 			}
 
-			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);
-			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.x_axis_title), nightMode);
+			AndroidUtils.setTextPrimaryColor(ctx, mainView.findViewById(R.id.y_axis_title), nightMode);
+			AndroidUtils.setTextPrimaryColor(ctx, mainView.findViewById(R.id.x_axis_title), nightMode);
 
-			ImageView yAxisArrow = (ImageView) mainView.findViewById(R.id.y_axis_arrow);
-			ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
+			ImageView yAxisArrow = mainView.findViewById(R.id.y_axis_arrow);
+			ImageView xAxisArrow = mainView.findViewById(R.id.x_axis_arrow);
 			yAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
 			xAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
 
-			ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
+			ImageButton backButton = mainView.findViewById(R.id.top_bar_back_button);
 			if (backButton != null) {
 				Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(ctx), R.color.color_white);
 				backButton.setImageDrawable(icBack);

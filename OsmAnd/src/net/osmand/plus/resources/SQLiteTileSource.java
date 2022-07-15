@@ -287,7 +287,7 @@ public class SQLiteTileSource implements ITileSource {
 					int expireminutes = list.indexOf(EXPIRE_MINUTES);
 					this.expirationTimeMillis = -1;
 					if(expireminutes != -1) {
-						int minutes = (int) cursor.getInt(expireminutes);
+						int minutes = cursor.getInt(expireminutes);
 						if(minutes > 0) {
 							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
@@ -297,18 +297,18 @@ public class SQLiteTileSource implements ITileSource {
 					int tsColumn = list.indexOf(TILESIZE);
 					this.tileSizeSpecified = tsColumn != -1;
 					if(tileSizeSpecified) {
-						this.tileSize = (int) cursor.getInt(tsColumn);
+						this.tileSize = cursor.getInt(tsColumn);
 					}
 					int ellipsoid = list.indexOf(ELLIPSOID);
 					if(ellipsoid != -1) {
-						int set = (int) cursor.getInt(ellipsoid);
+						int set = cursor.getInt(ellipsoid);
 						if(set == 1){
 							this.isEllipsoid = true;
 						}
 					}
 					int invertedY = list.indexOf(INVERTED_Y);
 					if(invertedY != -1) {
-						int set = (int) cursor.getInt(invertedY);
+						int set = cursor.getInt(invertedY);
 						if(set == 1){
 							this.invertedY = true;
 						}
@@ -322,11 +322,11 @@ public class SQLiteTileSource implements ITileSource {
 					boolean inversiveInfoZoom = inversiveZoom;
 					int mnz = list.indexOf(MIN_ZOOM);
 					if(mnz != -1) {
-						minZoom = (int) cursor.getInt(mnz);
+						minZoom = cursor.getInt(mnz);
 					}
 					int mxz = list.indexOf(MAX_ZOOM);
 					if(mxz != -1) {
-						maxZoom = (int) cursor.getInt(mxz);
+						maxZoom = cursor.getInt(mxz);
 					}
 					if(inversiveInfoZoom) {
 						mnz = minZoom;
@@ -555,10 +555,10 @@ public class SQLiteTileSource implements ITileSource {
 					new String[0]);
 		}
 		cursor.moveToFirst();
-		int right = (int) (cursor.getInt(0) >> (25 - coordinatesZoom));
-		int left = (int) (cursor.getInt(1) >> (25 - coordinatesZoom));
-		int top = (int) (cursor.getInt(3) >> (25 - coordinatesZoom));
-		int bottom  = (int) (cursor.getInt(2) >> (25 - coordinatesZoom));
+		int right = cursor.getInt(0) >> (25 - coordinatesZoom);
+		int left = cursor.getInt(1) >> (25 - coordinatesZoom);
+		int top = cursor.getInt(3) >> (25 - coordinatesZoom);
+		int bottom  = cursor.getInt(2) >> (25 - coordinatesZoom);
 
 		cursor.close();
 

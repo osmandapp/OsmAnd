@@ -515,8 +515,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			if (staticImageView != null) {
 				this.request = request;
 				this.downloadRequestNumber = downloadRequestNumber;
-				ProgressBar progressBar = (ProgressBar) staticImageView.findViewById(R.id.progressBar);
-				ImageView imageView = (ImageView) staticImageView.findViewById(R.id.imageView);
+				ProgressBar progressBar = staticImageView.findViewById(R.id.progressBar);
+				ImageView imageView = staticImageView.findViewById(R.id.imageView);
 				this.progressBar = progressBar;
 				this.imageView = imageView;
 			}

@@ -115,8 +115,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		AppCompatActivity trackActivity = (AppCompatActivity) getActivity();
 		final View view = trackActivity.getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.split_interval_toolbar);
-		TextView titleTextView = (TextView) toolbar.findViewById(R.id.title);
+		Toolbar toolbar = view.findViewById(R.id.split_interval_toolbar);
+		TextView titleTextView = toolbar.findViewById(R.id.title);
 		boolean nightMode = !app.getSettings().isLightContent();
 		titleTextView.setTextAppearance(nightMode ?
 				R.style.TextAppearance_AppCompat_Widget_ActionBar_Title :
@@ -134,7 +134,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		listView = (ListView) view.findViewById(R.id.list);
+		listView = view.findViewById(R.id.list);
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
 
@@ -269,9 +269,9 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void setupSplitIntervalView(@NonNull View view) {
-		final TextView title = (TextView) view.findViewById(R.id.split_interval_title);
-		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
-		final ImageView img = (ImageView) view.findViewById(R.id.split_interval_arrow);
+		final TextView title = view.findViewById(R.id.split_interval_title);
+		final TextView text = view.findViewById(R.id.split_interval_text);
+		final ImageView img = view.findViewById(R.id.split_interval_arrow);
 		boolean nightMode = !app.getSettings().isLightContent();
 		int colorId;
 		final List<GpxDisplayGroup> groups = getDisplayGroups();
@@ -289,7 +289,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void updateSplitIntervalView(View view) {
-		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
+		final TextView text = view.findViewById(R.id.split_interval_text);
 		if (selectedSplitInterval == 0) {
 			text.setText(getString(R.string.shared_string_none));
 		} else {
@@ -424,8 +424,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			convertView.setOnClickListener(null);
 			boolean nightMode = !app.getSettings().isLightContent();
 			int activeColorId = ColorUtilities.getActiveColorId(nightMode);
-			TextView overviewTextView = (TextView) convertView.findViewById(R.id.overview_text);
-			ImageView overviewImageView = (ImageView) convertView.findViewById(R.id.overview_image);
+			TextView overviewTextView = convertView.findViewById(R.id.overview_text);
+			ImageView overviewImageView = convertView.findViewById(R.id.overview_image);
 			if (position == 0) {
 				overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 				if (defaultTextColor == null) {
@@ -481,9 +481,9 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			if (currentGpxDisplayItem != null) {
 				GPXTrackAnalysis analysis = currentGpxDisplayItem.analysis;
 				if (analysis != null) {
-					ImageView distanceOrTimeSpanImageView = ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image));
-					TextView distanceOrTimeSpanValue = (TextView) convertView.findViewById(R.id.distance_or_time_span_value);
-					TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
+					ImageView distanceOrTimeSpanImageView = convertView.findViewById(R.id.distance_or_timespan_image);
+					TextView distanceOrTimeSpanValue = convertView.findViewById(R.id.distance_or_time_span_value);
+					TextView distanceOrTimeSpanText = convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 						float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
@@ -505,10 +505,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						}
 					}
 
-					TextView startTimeValue = (TextView) convertView.findViewById(R.id.start_time_value);
-					TextView startDateValue = (TextView) convertView.findViewById(R.id.start_date_value);
-					TextView endTimeValue = (TextView) convertView.findViewById(R.id.end_time_value);
-					TextView endDateValue = (TextView) convertView.findViewById(R.id.end_date_value);
+					TextView startTimeValue = convertView.findViewById(R.id.start_time_value);
+					TextView startDateValue = convertView.findViewById(R.id.start_date_value);
+					TextView endTimeValue = convertView.findViewById(R.id.end_time_value);
+					TextView endDateValue = convertView.findViewById(R.id.end_date_value);
 					if (analysis.timeSpan > 0) {
 						DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 						DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -561,9 +561,9 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 									.setVisibility(View.GONE);
 						}
 
-						TextView ascentValue = (TextView) convertView.findViewById(R.id.ascent_value);
-						TextView descentValue = (TextView) convertView.findViewById(R.id.descent_value);
-						TextView ascentDescentValue = (TextView) convertView.findViewById(R.id.ascent_descent_value);
+						TextView ascentValue = convertView.findViewById(R.id.ascent_value);
+						TextView descentValue = convertView.findViewById(R.id.descent_value);
+						TextView ascentDescentValue = convertView.findViewById(R.id.ascent_descent_value);
 
 						String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
 						String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);

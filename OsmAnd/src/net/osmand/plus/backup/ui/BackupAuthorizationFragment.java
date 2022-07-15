@@ -62,7 +62,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		super.createToolbar(inflater, view);
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
-		((AppBarLayout) view.findViewById(R.id.appbar)).setOutlineProvider(null);
+		view.findViewById(R.id.appbar).setOutlineProvider(null);
 	}
 
 	@Override

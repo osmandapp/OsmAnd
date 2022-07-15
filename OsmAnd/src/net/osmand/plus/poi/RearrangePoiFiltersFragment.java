@@ -307,7 +307,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		ApplicationMode selectedAppMode = getSelectedAppMode();
 		boolean nightMode = isNightMode(app, usedOnMap);
 
-		ImageView profileIcon = (ImageView) view.findViewById(R.id.profile_icon);
+		ImageView profileIcon = view.findViewById(R.id.profile_icon);
 		if (profileIcon != null) {
 			int iconRes = selectedAppMode.getIconRes();
 			profileIcon.setImageDrawable(uiUtilities.getPaintedIcon(iconRes, selectedAppMode.getProfileColor(nightMode)));
@@ -415,7 +415,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setResultCallback(callback);
 			fragment.setSelectedAppMode(appMode);
-			fragment.show(parentFragment.getChildFragmentManager(), RearrangePoiFiltersFragment.TAG);
+			fragment.show(parentFragment.getChildFragmentManager(), TAG);
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}

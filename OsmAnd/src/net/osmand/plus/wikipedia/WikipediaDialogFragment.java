@@ -71,10 +71,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
 
-		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
+		setupToolbar(mainView.findViewById(R.id.toolbar));
 
-		articleToolbarText = (TextView) mainView.findViewById(R.id.title_text_view);
-		ImageView options = (ImageView) mainView.findViewById(R.id.options_button);
+		articleToolbarText = mainView.findViewById(R.id.title_text_view);
+		ImageView options = mainView.findViewById(R.id.options_button);
 		options.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -103,7 +103,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark
 		);
 
-		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
+		readFullArticleButton = mainView.findViewById(R.id.read_full_article);
 		readFullArticleButton.setBackgroundResource(nightMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
 		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
@@ -112,7 +112,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
 		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 
-		selectedLangTv = (TextView) mainView.findViewById(R.id.select_language_text_view);
+		selectedLangTv = mainView.findViewById(R.id.select_language_text_view);
 		selectedLangTv.setTextColor(selectedLangColorStateList);
 		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
 		selectedLangTv.setBackgroundResource(nightMode

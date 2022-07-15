@@ -63,7 +63,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		}
 
 		View view = inflater.inflate(R.layout.fragment_search_list, container, false);
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		ListView listView = view.findViewById(android.R.id.list);
 		final ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
 		if (countryItems.size() > 0) {
 			for (CountryItem item : countryItems) {
@@ -78,7 +78,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 				dismiss();
 			}
 		});
-		final EditText searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		final EditText searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,7 +93,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 				adapter.getFilter().filter(s);
 			}
 		});
-		ImageButton clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		ImageButton clearButton = view.findViewById(R.id.clearButton);
 		setThemedDrawable(clearButton, R.drawable.ic_action_remove_dark);
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override

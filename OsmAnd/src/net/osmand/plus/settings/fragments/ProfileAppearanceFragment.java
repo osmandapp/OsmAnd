@@ -186,11 +186,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 		if (isNewProfile) {
-			TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 			if (toolbarTitle != null) {
 				toolbarTitle.setText(getString(R.string.new_profile));
 			}
-			TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
+			TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
 			if (toolbarSubtitle != null) {
 				toolbarSubtitle.setVisibility(View.GONE);
 			}

@@ -90,7 +90,7 @@ public class TrackEditCard extends MapBaseCard {
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 
 		if (routeParams != null) {
-			title = TrackEditCard.getGpxTitleWithSelectedItem(app, routeParams, title);
+			title = getGpxTitleWithSelectedItem(app, routeParams, title);
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, analysis, app);
 

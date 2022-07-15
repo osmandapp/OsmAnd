@@ -388,7 +388,7 @@ public class GpxBlockStatisticsBuilder {
 		ITEM_SPEED,
 		ITEM_TIME,
 		ITEM_TIME_SPAN,
-		ITEM_TIME_MOVING;
+		ITEM_TIME_MOVING
 	}
 
 	private class BlockStatisticsAdapter extends RecyclerView.Adapter<BlockStatisticsViewHolder> {

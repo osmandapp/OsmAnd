@@ -167,10 +167,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void createSearchItem() {
 		View searchView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_double_item, null);
-		TextView firstTitle = (TextView) searchView.findViewById(R.id.first_title);
-		TextView secondTitle = (TextView) searchView.findViewById(R.id.second_title);
-		ImageView firstIcon = (ImageView) searchView.findViewById(R.id.first_icon);
-		ImageView secondIcon = (ImageView) searchView.findViewById(R.id.second_icon);
+		TextView firstTitle = searchView.findViewById(R.id.first_title);
+		TextView secondTitle = searchView.findViewById(R.id.second_title);
+		ImageView firstIcon = searchView.findViewById(R.id.first_icon);
+		ImageView secondIcon = searchView.findViewById(R.id.second_icon);
 
 		firstTitle.setText(R.string.shared_string_search);
 		secondTitle.setText(R.string.shared_string_address);
@@ -325,7 +325,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void createSwitchStartAndEndItem() {
 		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
-		TextView title = (TextView) switchStartAndEndView.findViewById(R.id.title);
+		TextView title = switchStartAndEndView.findViewById(R.id.title);
 
 		String start = getString(R.string.route_start_point);
 		String destination = getString(R.string.route_descr_destination);
@@ -445,7 +445,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					PointDescription name = pair.second;
 					if (ll == null) {
 						if (item instanceof PointType) {
-							AddPointBottomSheetDialog.showInstance(mapActivity, (PointType) item);
+							showInstance(mapActivity, (PointType) item);
 						} else {
 							dismiss();
 						}
@@ -529,7 +529,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				return false;
 			}
 			Bundle args = new Bundle();
-			args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, pointType.name());
+			args.putString(POINT_TYPE_KEY, pointType.name());
 			AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);

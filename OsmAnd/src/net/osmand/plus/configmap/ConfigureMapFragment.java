@@ -270,7 +270,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	@Nullable
 	public static ConfigureMapFragment getVisibleInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager fm = mapActivity.getSupportFragmentManager();
-		;
 		return (ConfigureMapFragment) fm.findFragmentByTag(TAG);
 	}
 

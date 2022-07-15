@@ -169,13 +169,13 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
 									@NonNull String filePath, boolean usedOnMap, boolean showAllFolders) {
 		try {
-			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(MoveGpxFileBottomSheet.TAG) == null) {
+			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 				MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();
 				fragment.filePath = filePath;
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.showAllFolders = showAllFolders;
 				fragment.setTargetFragment(target, 0);
-				fragment.show(fragmentManager, MoveGpxFileBottomSheet.TAG);
+				fragment.show(fragmentManager, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

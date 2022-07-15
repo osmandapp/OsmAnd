@@ -39,7 +39,7 @@ public enum GpxSplitType {
 
 	@NonNull
 	public static GpxSplitType getSplitTypeByName(@Nullable String name) {
-		for (GpxSplitType splitType : GpxSplitType.values()) {
+		for (GpxSplitType splitType : values()) {
 			if (splitType.name().equalsIgnoreCase(name)) {
 				return splitType;
 			}
@@ -49,7 +49,7 @@ public enum GpxSplitType {
 
 	@NonNull
 	public static GpxSplitType getSplitTypeByTypeId(int typeId) {
-		for (GpxSplitType splitType : GpxSplitType.values()) {
+		for (GpxSplitType splitType : values()) {
 			if (splitType.getType() == typeId) {
 				return splitType;
 			}

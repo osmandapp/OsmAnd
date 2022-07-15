@@ -192,9 +192,9 @@ public class ColorDialogs {
 
 	public static int getColorName(@ColorInt int color) {
 		int colorName = R.string.custom_color;
-		for (int i = 0; i < ColorDialogs.pallette.length; i++) {
-			if (ColorDialogs.pallette[i] == color) {
-				colorName = ColorDialogs.paletteColors[i];
+		for (int i = 0; i < pallette.length; i++) {
+			if (pallette[i] == color) {
+				colorName = paletteColors[i];
 				break;
 			}
 		}
@@ -203,8 +203,8 @@ public class ColorDialogs {
 
 	public static boolean isPaletteColor(@ColorInt int color) {
 		boolean isPaletteColor = false;
-		for (int i = 0; i < ColorDialogs.pallette.length; i++) {
-			if (ColorDialogs.pallette[i] == color) {
+		for (int i = 0; i < pallette.length; i++) {
+			if (pallette[i] == color) {
 				isPaletteColor = true;
 				break;
 			}

@@ -1686,10 +1686,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (baseZoom < getMinZoom()) {
 			return false;
 		}
-		if (baseZoom < getMinZoom() + 1 && dz < -1) {
-			return false;
-		}
-		return true;
+		return baseZoom >= getMinZoom() + 1 || !(dz < -1);
 	}
 
 	private void notifyLocationListeners(double lat, double lon) {
@@ -1770,10 +1767,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					return true;
 				}
 			}
-			if (onClickListener != null && onClickListener.onPressEvent(point)) {
-				return true;
-			}
-			return false;
+			return onClickListener != null && onClickListener.onPressEvent(point);
 		}
 	}
 

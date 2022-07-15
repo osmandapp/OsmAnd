@@ -192,7 +192,7 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
-		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
+		return createCheckedColorStateList(ctx, nightMode,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
@@ -258,7 +258,7 @@ public class AndroidUtils {
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
 		Spannable spannable = new SpannableString(text);
 		for (String entry : chars) {
-			int i = text.indexOf(entry, 0);
+			int i = text.indexOf(entry);
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
@@ -334,8 +334,8 @@ public class AndroidUtils {
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {
-		long size = AndroidUtils.getAvailableSpace(dir);
-		return AndroidUtils.formatSize(ctx, size);
+		long size = getAvailableSpace(dir);
+		return formatSize(ctx, size);
 	}
 
 	public static View findParentViewById(View view, int id) {
@@ -504,7 +504,7 @@ public class AndroidUtils {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		} else if (view instanceof FrameLayout) {
-			((FrameLayout) view).setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
+			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
 	}
 
@@ -883,7 +883,7 @@ public class AndroidUtils {
 
 	public static void setTextHorizontalGravity(@NonNull TextView tv, int hGravity) {
 		if (tv.getContext() != null) {
-			boolean isLayoutRtl = AndroidUtils.isLayoutRtl(tv.getContext());
+			boolean isLayoutRtl = isLayoutRtl(tv.getContext());
 			int gravity = Gravity.LEFT;
 			if (isLayoutRtl && (hGravity == Gravity.START)
 					|| !isLayoutRtl && hGravity == Gravity.END) {

@@ -182,8 +182,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									OsmEditsUploadListenerHelper
-											.showUploadItemsProgressDialog(
+									showUploadItemsProgressDialog(
 													UploadingMultipleErrorDialogFragment.this,
 													points);
 								}
@@ -260,8 +259,8 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 				row = inflater.inflate(layoutResourceId, parent, false);
 
 				holder = new PointHolder();
-				holder.checkedUncheckedImageView = (ImageView) row.findViewById(R.id.iconImageView);
-				holder.pointNameTextView = (TextView) row.findViewById(R.id.nameTextView);
+				holder.checkedUncheckedImageView = row.findViewById(R.id.iconImageView);
+				holder.pointNameTextView = row.findViewById(R.id.nameTextView);
 
 				row.setTag(holder);
 			} else {

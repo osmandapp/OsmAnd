@@ -23,7 +23,7 @@ public class WrapContentHeightViewPager extends ViewPager {
 
 	public interface ViewAtPositionInterface {
 
-		public View getViewAtPosition(int position);
+		View getViewAtPosition(int position);
 	}
 
 	public WrapContentHeightViewPager(Context context) {

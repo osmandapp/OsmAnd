@@ -25,7 +25,7 @@ public enum SimulationMode {
 
 	@Nullable
 	public static SimulationMode getMode(String key) {
-		for (SimulationMode mode : SimulationMode.values()) {
+		for (SimulationMode mode : values()) {
 			if (mode.key.equals(key)) {
 				return mode;
 			}

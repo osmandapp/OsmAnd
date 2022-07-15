@@ -125,7 +125,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	                           @NonNull SegmentActionsListener actionsListener,
 	                           boolean nightMode,
 	                           boolean showEmptyAltitudeTab) {
-		super();
 		this.app = app;
 		this.gpxItem = gpxItem;
 		this.displayHelper = displayHelper;

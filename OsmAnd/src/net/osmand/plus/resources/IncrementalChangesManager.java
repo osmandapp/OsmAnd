@@ -188,10 +188,7 @@ public class IncrementalChangesManager {
 
 		public boolean isPreferrableLimitForDayUpdates(String monthYearPart, List<IncrementalUpdate> dayUpdates) {
 			List<RegionUpdate> lst = updateFiles.dayUpdates.get(monthYearPart);
-			if (lst == null || lst.size() < 10) {
-				return true;
-			}
-			return false;
+			return lst == null || lst.size() < 10;
 		}
 
 		@Nullable
@@ -254,10 +251,7 @@ public class IncrementalChangesManager {
 
 		public boolean isDayUpdateApplicable() {
 			boolean inLimits = dayUpdates.size() > 0 && dayUpdates.size() < 4;
-			if (!inLimits) {
-				return false;
-			}
-			return true;
+			return inLimits;
 		}
 
 		public List<IncrementalUpdate> getMonthUpdate() {

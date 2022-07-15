@@ -110,7 +110,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity = (DownloadActivity) getActivity();
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
-		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar = view.findViewById(R.id.toolbar);
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(activity));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -132,7 +132,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			banner = null;
 			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
 		}
-		listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
@@ -185,7 +185,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (!openAsDialog() ) {
 			searchView = activity.getLayoutInflater().inflate(R.layout.simple_list_menu_item, null);
 			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
-			TextView title = (TextView) searchView.findViewById(R.id.title);
+			TextView title = searchView.findViewById(R.id.title);
 			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.search_map_hint);
 			searchView.setOnClickListener(v -> {
@@ -399,13 +399,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
 				String uniqueId = DownloadResourceGroup.DownloadResourceGroupType.getVoiceTTSId();
-				final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-						.createInstance(uniqueId);
+				final DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			}
 		} else if (filterGroup != null) {
-			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-					.createInstance(filterGroup);
+			final DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		}
 	}
@@ -483,8 +481,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		Object child = listAdapter.getChild(groupPosition, childPosition);
 		if (child instanceof DownloadResourceGroup) {
 			String uniqueId = ((DownloadResourceGroup) child).getUniqueId();
-			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-					.createInstance(uniqueId);
+			final DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (child instanceof CustomIndexItem) {

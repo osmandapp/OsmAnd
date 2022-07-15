@@ -146,10 +146,10 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		view = inflater.inflate(R.layout.search_poi_filter, container, false);
 
-		TextView description = (TextView) view.findViewById(R.id.description);
+		TextView description = view.findViewById(R.id.description);
 		description.setText(filter.getName());
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightTheme);
 		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, colorId);
 		toolbar.setNavigationIcon(icClose);
@@ -163,7 +163,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, !isLightTheme));
 
-		ImageButton moreButton = (ImageButton) view.findViewById(R.id.moreButton);
+		ImageButton moreButton = view.findViewById(R.id.moreButton);
 		moreButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -215,11 +215,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			}
 		});
 
-		listView = (ListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		View editTextView = inflater.inflate(R.layout.poi_filter_list_item, listView, false);
-		editText = (EditText) editTextView.findViewById(R.id.editText);
+		editText = editTextView.findViewById(R.id.editText);
 		editTextView.findViewById(R.id.divider).setVisibility(View.GONE);
 		editText.setText(nameFilterText);
 		editText.addTextChangedListener(new TextWatcher() {
@@ -241,7 +241,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		});
 
 		editText.setVisibility(View.VISIBLE);
-		final ImageView textEditIcon = (ImageView) editTextView.findViewById(R.id.icon);
+		final ImageView textEditIcon = editTextView.findViewById(R.id.icon);
 		textEditIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 		textEditIcon.setVisibility(View.VISIBLE);
 		editTextView.findViewById(R.id.titleBold).setVisibility(View.GONE);
@@ -273,7 +273,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 							}
 							break;
 						case CHECKBOX_ITEM:
-							CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkboxItem);
+							CheckBox checkBox = view.findViewById(R.id.checkboxItem);
 							adapter.toggleCheckbox(item, checkBox, !checkBox.isChecked());
 							break;
 						case BUTTON_ITEM:
@@ -288,7 +288,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		});
 
 		applyFilterButtonShadow = view.findViewById(R.id.bottomButtonShadow);
-		applyFilterButton = (TextView) view.findViewById(R.id.bottomButton);
+		applyFilterButton = view.findViewById(R.id.bottomButton);
 		applyFilterButton.setText(app.getString(R.string.apply_filters));
 		applyFilterButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -799,13 +799,13 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				return view;
 			}
 
-			final ImageView icon = (ImageView) view.findViewById(R.id.icon);
-			final TextViewEx titleRegular = (TextViewEx) view.findViewById(R.id.titleRegular);
-			final TextViewEx titleBold = (TextViewEx) view.findViewById(R.id.titleBold);
-			final TextViewEx titleButton = (TextViewEx) view.findViewById(R.id.titleButton);
-			final SwitchCompat switchItem = (SwitchCompat) view.findViewById(R.id.switchItem);
-			final CheckBox checkBoxItem = (CheckBox) view.findViewById(R.id.checkboxItem);
-			final ImageView expandItem = (ImageView) view.findViewById(R.id.expandItem);
+			final ImageView icon = view.findViewById(R.id.icon);
+			final TextViewEx titleRegular = view.findViewById(R.id.titleRegular);
+			final TextViewEx titleBold = view.findViewById(R.id.titleBold);
+			final TextViewEx titleButton = view.findViewById(R.id.titleButton);
+			final SwitchCompat switchItem = view.findViewById(R.id.switchItem);
+			final CheckBox checkBoxItem = view.findViewById(R.id.checkboxItem);
+			final ImageView expandItem = view.findViewById(R.id.expandItem);
 			final View divider = view.findViewById(R.id.divider);
 
 			if (item != null) {

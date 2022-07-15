@@ -193,10 +193,10 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
 		try {
-			if (fm.findFragmentByTag(SendAnalyticsBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
 				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, SendAnalyticsBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 
 				OsmandSettings settings = app.getSettings();
 				int numberOfStarts = app.getAppInitializer().getNumberOfStarts();

@@ -67,7 +67,7 @@ public class MapMarkersCard extends MapBaseCard {
 	@SuppressLint("DefaultLocale")
 	@Override
 	protected void updateContent() {
-		LinearLayout root = (LinearLayout) view.findViewById(R.id.items);
+		LinearLayout root = view.findViewById(R.id.items);
 		root.removeAllViews();
 
 		int minCardHeight = getDimen(R.dimen.route_info_card_item_height);
@@ -96,7 +96,7 @@ public class MapMarkersCard extends MapBaseCard {
 			((TextView) v.findViewById(R.id.waypoint_text)).setTextColor(mainFontColor);
 			((TextView) v.findViewById(R.id.date_group_text)).setTextColor(descriptionColor);
 
-			ImageView arrow = (ImageView) v.findViewById(R.id.direction);
+			ImageView arrow = v.findViewById(R.id.direction);
 			Drawable arrowIcon = arrow.getDrawable();
 			if (arrowIcon instanceof DirectionDrawable) {
 				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, ColorUtilities.getActiveColorId(nightMode));

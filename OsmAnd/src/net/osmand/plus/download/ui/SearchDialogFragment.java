@@ -131,7 +131,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		}
 
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -140,7 +140,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		banner = new BannerAndDownloadFreeVersion(view, getDownloadActivity(), false);
 
 		LinearLayout ll = (LinearLayout) view;
-		ExpandableListView expandablelistView = (ExpandableListView) view.findViewById(android.R.id.list);
+		ExpandableListView expandablelistView = view.findViewById(android.R.id.list);
 		ll.removeView(expandablelistView);
 
 		listView = new ListView(themedContext);
@@ -158,14 +158,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
 
-		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
 		searchEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
 		int hintColorId = nightMode ? R.color.searchbar_tab_inactive_dark : R.color.inactive_item_orange;
 		searchEditText.setHintTextColor(ContextCompat.getColor(app, hintColorId));
 
-		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
-		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		progressBar = view.findViewById(R.id.searchProgressBar);
+		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setColorFilter(ContextCompat.getColor(app, iconColorResId));
 		clearButton.setVisibility(View.GONE);
 

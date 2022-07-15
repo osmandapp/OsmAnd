@@ -76,7 +76,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			}
 		});
 
-		LinearLayout container = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
+		LinearLayout container = mainView.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		if (removeDefaultMode) {
 			modes.remove(ApplicationMode.DEFAULT);
@@ -115,7 +115,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 				@Override
 				public void onShow(DialogInterface dialogInterface) {
 					BottomSheetDialog dialog = (BottomSheetDialog) dialogInterface;
-					FrameLayout bottomSheet = (FrameLayout) dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+					FrameLayout bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
 					BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
 				}
 			});

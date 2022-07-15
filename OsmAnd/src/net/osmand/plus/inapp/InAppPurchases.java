@@ -719,7 +719,7 @@ public abstract class InAppPurchases {
 
 			@NonNull
 			public static SubscriptionState getByStateStr(@NonNull String stateStr) {
-				for (SubscriptionState state : SubscriptionState.values()) {
+				for (SubscriptionState state : values()) {
 					if (state.stateStr.equals(stateStr)) {
 						return state;
 					}

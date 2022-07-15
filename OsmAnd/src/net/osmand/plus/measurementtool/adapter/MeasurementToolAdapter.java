@@ -162,13 +162,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 		MeasureToolItemVH(View view) {
 			super(view);
-			iconReorder = (ImageView) view.findViewById(R.id.measure_point_reorder_icon);
-			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
-			title = (TextView) view.findViewById(R.id.measure_point_title);
-			descr = (TextView) view.findViewById(R.id.measure_point_descr);
-			elevation = (TextView) view.findViewById(R.id.measure_point_ele);
-			speed = (TextView) view.findViewById(R.id.measure_point_speed);
-			deleteBtn = (ImageButton) view.findViewById(R.id.measure_point_remove_image_button);
+			iconReorder = view.findViewById(R.id.measure_point_reorder_icon);
+			icon = view.findViewById(R.id.measure_point_icon);
+			title = view.findViewById(R.id.measure_point_title);
+			descr = view.findViewById(R.id.measure_point_descr);
+			elevation = view.findViewById(R.id.measure_point_ele);
+			speed = view.findViewById(R.id.measure_point_speed);
+			deleteBtn = view.findViewById(R.id.measure_point_remove_image_button);
 		}
 	}
 

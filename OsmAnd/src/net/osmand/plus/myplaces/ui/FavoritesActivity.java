@@ -266,10 +266,10 @@ public class FavoritesActivity extends TabActivity {
 			return;
 		}
 		try {
-			ImageView cancelIcon = (ImageView) searchView.findViewById(R.id.search_close_btn);
+			ImageView cancelIcon = searchView.findViewById(R.id.search_close_btn);
 			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
 			//styling search hint icon and text
-			SearchView.SearchAutoComplete searchEdit = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
+			SearchView.SearchAutoComplete searchEdit = searchView.findViewById(R.id.search_src_text);
 			searchEdit.setTextColor(activity.getColor(R.color.color_white));
 			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
 			float rawTextSize = searchEdit.getTextSize();

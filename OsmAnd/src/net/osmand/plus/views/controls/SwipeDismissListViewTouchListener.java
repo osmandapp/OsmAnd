@@ -363,7 +363,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 		// Initialize undo popup
 		LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View undoView = inflater.inflate(R.layout.undo_popup, null);
-		mUndoButton = (Button) undoView.findViewById(R.id.undo);
+		mUndoButton = undoView.findViewById(R.id.undo);
 		mUndoButton.setOnClickListener(new UndoClickListener());
 		mUndoButton.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -374,7 +374,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				return false;
 			}
 		});
-		mUndoPopupTextView = (TextView) undoView.findViewById(R.id.text);
+		mUndoPopupTextView = undoView.findViewById(R.id.text);
 
 		mUndoPopup = new PopupWindow(undoView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
 		mUndoPopup.setAnimationStyle(R.style.Animations_PopUpMenu_Fade);

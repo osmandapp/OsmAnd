@@ -305,11 +305,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		long now = System.currentTimeMillis();
 		// changeset is idle for more than 30 minutes (1 hour according specification)
-		if (now - changeSetTimeStamp > 30 * 60 * 1000) {
-			return true;
-		}
-
-		return false;
+		return now - changeSetTimeStamp > 30 * 60 * 1000;
 	}
 
 	@Override
@@ -391,10 +387,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	public EntityInfo loadEntity(Entity n) {
 		long entityId = n.getId(); // >> 1;
-		boolean isWay = false;
-		if (n instanceof Way) { // check if entity is a way
-			isWay = true;
-		}
+		boolean isWay = n instanceof Way; // check if entity is a way
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
@@ -478,7 +471,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new EntityId(type, entityId);
-				Entity entity = (Entity) st.getRegisteredEntities().get(id);
+				Entity entity = st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				entityInfoId = id;
 				if (entity != null) {

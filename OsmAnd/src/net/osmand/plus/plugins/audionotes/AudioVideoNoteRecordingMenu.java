@@ -54,7 +54,7 @@ public class AudioVideoNoteRecordingMenu {
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		initView(mapActivity);
-		viewfinder = (LinearLayout) view.findViewById(R.id.viewfinder);
+		viewfinder = view.findViewById(R.id.viewfinder);
 		showViewfinder = true;
 
 		screenHeight = AndroidUtils.getScreenHeight(mapActivity);
@@ -135,11 +135,11 @@ public class AudioVideoNoteRecordingMenu {
 		CurrentRecording recording = plugin.getCurrentRecording();
 		UiUtilities iconsCache = requireMapActivity().getMyApplication().getUIUtilities();
 
-		ImageView leftButtonIcon = (ImageView) view.findViewById(R.id.leftButtonIcon);
+		ImageView leftButtonIcon = view.findViewById(R.id.leftButtonIcon);
 		View leftButtonView = view.findViewById(R.id.leftButtonView);
 		if (recording.getType() != AVActionType.REC_AUDIO) {
 			leftButtonIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_minimize));
-			TextView showHideText = (TextView) view.findViewById(R.id.leftButtonText);
+			TextView showHideText = view.findViewById(R.id.leftButtonText);
 			showHideText.setText(showViewfinder ?
 					view.getResources().getString(R.string.shared_string_hide) : view.getResources().getString(R.string.shared_string_show));
 			leftButtonView.setVisibility(View.VISIBLE);
@@ -151,8 +151,8 @@ public class AudioVideoNoteRecordingMenu {
 		leftButtonView.setOnClickListener(v -> showHideViewfinder());
 
 		View centerButtonView = view.findViewById(R.id.centerButtonView);
-		ImageView recIcon = (ImageView) view.findViewById(R.id.centerButtonIcon);
-		TextView recText = (TextView) view.findViewById(R.id.centerButtonText);
+		ImageView recIcon = view.findViewById(R.id.centerButtonIcon);
+		TextView recText = view.findViewById(R.id.centerButtonText);
 		View timeView = view.findViewById(R.id.timeView);
 		switch (recording.getType()) {
 			case REC_AUDIO:
@@ -191,7 +191,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void updateDuration() {
 		if (plugin.getCurrentRecording() != null) {
-			TextView timeText = (TextView) view.findViewById(R.id.timeText);
+			TextView timeText = view.findViewById(R.id.timeText);
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
 			timeText.setText(Algorithms.formatDuration(duration, requireMapActivity().getMyApplication().accessibilityEnabled()));
 		}
@@ -213,7 +213,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void showHideViewfinder() {
 		showViewfinder = !showViewfinder;
-		TextView showHideText = (TextView) view.findViewById(R.id.leftButtonText);
+		TextView showHideText = view.findViewById(R.id.leftButtonText);
 		showHideText.setText(showViewfinder ? view.getResources().getString(R.string.shared_string_hide) : view.getResources().getString(R.string.shared_string_show));
 		applyViewfinderVisibility();
 	}

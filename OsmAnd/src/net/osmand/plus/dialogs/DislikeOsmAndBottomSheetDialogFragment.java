@@ -87,9 +87,9 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {
-			if (fm.findFragmentByTag(DislikeOsmAndBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				DislikeOsmAndBottomSheetDialogFragment fragment = new DislikeOsmAndBottomSheetDialogFragment();
-				fragment.show(fm, DislikeOsmAndBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

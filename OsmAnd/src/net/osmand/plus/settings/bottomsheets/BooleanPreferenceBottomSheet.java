@@ -173,7 +173,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 									@Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
 									boolean profileDependent) {
 		try {
-			if (fm.findFragmentByTag(BooleanPreferenceBottomSheet.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 
@@ -184,7 +184,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				fragment.setApplyQueryType(applyQueryType);
 				fragment.setTargetFragment(target, 0);
 				fragment.setProfileDependent(profileDependent);
-				fragment.show(fm, BooleanPreferenceBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

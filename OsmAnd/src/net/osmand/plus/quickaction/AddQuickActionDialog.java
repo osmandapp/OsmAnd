@@ -81,6 +81,6 @@ public class AddQuickActionDialog extends MenuBottomSheetDialogFragment {
     public static void showInstance(FragmentManager fm, boolean usedOnMap) {
         AddQuickActionDialog fragment = new AddQuickActionDialog();
         fragment.setUsedOnMap(usedOnMap);
-        fragment.show(fm, AddQuickActionDialog.TAG);
+        fragment.show(fm, TAG);
     }
 }

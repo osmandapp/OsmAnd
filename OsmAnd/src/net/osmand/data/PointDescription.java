@@ -326,14 +326,11 @@ public class PointDescription {
 		if (obj == null || getClass() != obj.getClass())
 			return false;
 		PointDescription other = (PointDescription) obj;
-		if (Algorithms.objectEquals(other.name, name) 
+		return Algorithms.objectEquals(other.name, name)
 				&& Algorithms.objectEquals(other.type, type)
 				&& Algorithms.objectEquals(other.lat, lat)
 				&& Algorithms.objectEquals(other.lon, lon)
-				&& Algorithms.objectEquals(other.typeName, typeName)) {
-			return true;
-		}
-		return false;
+				&& Algorithms.objectEquals(other.typeName, typeName);
 	}
 	
 	

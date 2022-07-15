@@ -28,15 +28,15 @@ public class MapMarkerDialogHelper {
 										   boolean nightMode,
 										   int screenOrientation,
 										   final MapMarker marker) {
-		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
-		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
-		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		ImageView arrow = (ImageView) localView.findViewById(R.id.direction);
-		ImageView waypointIcon = (ImageView) localView.findViewById(R.id.waypoint_icon);
-		TextView waypointDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
-		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
-		final CheckBox checkBox = (CheckBox) localView.findViewById(R.id.checkbox);
-		TextView dateGroupText = (TextView) localView.findViewById(R.id.date_group_text);
+		TextView text = localView.findViewById(R.id.waypoint_text);
+		TextView textShadow = localView.findViewById(R.id.waypoint_text_shadow);
+		TextView textDist = localView.findViewById(R.id.waypoint_dist);
+		ImageView arrow = localView.findViewById(R.id.direction);
+		ImageView waypointIcon = localView.findViewById(R.id.waypoint_icon);
+		TextView waypointDeviation = localView.findViewById(R.id.waypoint_deviation);
+		TextView descText = localView.findViewById(R.id.waypoint_desc_text);
+		final CheckBox checkBox = localView.findViewById(R.id.checkbox);
+		TextView dateGroupText = localView.findViewById(R.id.date_group_text);
 
 		if (text == null || textDist == null || arrow == null || waypointIcon == null
 				|| waypointDeviation == null || descText == null) {

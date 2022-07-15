@@ -191,9 +191,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 				List<BinaryMapDataObject> queriedResults = getResults();
 				if (queriedData != null && queriedData.containsTileBox(newBox) && queriedData.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-					if (queriedResults != null && (queriedResults.isEmpty() || Math.abs(queriedData.getZoom() - newBox.getZoom()) <= 1)) {
-						return true;
-					}
+					return queriedResults != null && (queriedResults.isEmpty() || Math.abs(queriedData.getZoom() - newBox.getZoom()) <= 1);
 				}
 				return false;
 			}
@@ -713,12 +711,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					WorldRegion wr = osmandRegions.getRegionData(fullName);
 					if (wr != null) {
 						selectedRegions.add(wr);
-						if (downloadedRegions.contains(wr)) {
-							downloadedRegions.remove(wr);
-						}
-						if (backupedRegions.contains(wr)) {
-							backupedRegions.remove(wr);
-						}
+						downloadedRegions.remove(wr);
+						backupedRegions.remove(wr);
 					}
 				}
 			}

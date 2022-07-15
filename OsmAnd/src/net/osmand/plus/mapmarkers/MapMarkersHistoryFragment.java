@@ -81,7 +81,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 		}
 
 		final View mainView = UiUtilities.getInflater(mapActivity, night).inflate(R.layout.fragment_map_markers_history, container, false);
-		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
+		final EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

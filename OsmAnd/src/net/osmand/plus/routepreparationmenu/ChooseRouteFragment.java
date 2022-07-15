@@ -222,7 +222,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				}
 			}
 		});
-		this.pagesView = (ViewGroup) view.findViewById(R.id.pages_control);
+		this.pagesView = view.findViewById(R.id.pages_control);
 		buildPagesControl(view);
 		buildZoomButtons(view);
 		buildMenuButtons(view);
@@ -450,8 +450,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private void buildMenuButtons(@NonNull View view) {
 		OsmandApplication app = requireMyApplication();
-		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
-		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
+		AppCompatImageView backButton = view.findViewById(R.id.back_button);
+		AppCompatImageButton backButtonFlow = view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = v -> {
 			dismiss(true);
 		};
@@ -496,8 +496,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		saveRoute.setOnClickListener(saveOnClick);
 		saveRouteFlow.setOnClickListener(saveOnClick);
 
-		ImageView shareRoute = (ImageView) view.findViewById(R.id.share_as_gpx);
-		ImageView shareRouteFlow = (ImageView) view.findViewById(R.id.share_as_gpx_flow);
+		ImageView shareRoute = view.findViewById(R.id.share_as_gpx);
+		ImageView shareRouteFlow = view.findViewById(R.id.share_as_gpx_flow);
 		Drawable shareIcon = getIcon(R.drawable.ic_action_gshare_dark, ColorUtilities.getSecondaryTextColorId(nightMode));
 		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
 		shareRoute.setImageDrawable(shareIcon);

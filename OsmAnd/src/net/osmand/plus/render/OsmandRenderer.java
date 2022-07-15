@@ -84,7 +84,7 @@ public class OsmandRenderer {
 		double area;
 		int objectType;
 		int orderByDenisty;
-	};
+	}
 
 	private static class IconDrawInfo {
 		float x;

@@ -107,7 +107,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 					getMyApplication().getSettings(), ROW_NUMBER_TAG);
 		}
 
-		LinearLayout osmLayout = (LinearLayout) mainView.findViewById(R.id.items);
+		LinearLayout osmLayout = mainView.findViewById(R.id.items);
 		osmLayout.removeAllViews();
 
 		for (final OsmPoint point : dataPoints) {
@@ -115,7 +115,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			View view = inflater.inflate(R.layout.note, null, false);
 
 			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
-			ImageButton send = (ImageButton) view.findViewById(R.id.play);
+			ImageButton send = view.findViewById(R.id.play);
 			send.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_export));
 			send.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();

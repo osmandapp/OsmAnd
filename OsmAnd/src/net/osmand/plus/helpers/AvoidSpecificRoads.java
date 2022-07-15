@@ -118,7 +118,7 @@ public class AvoidSpecificRoads {
 				String name = item != null ? item.name : app.getString(R.string.shared_string_road);
 				((TextView) v.findViewById(R.id.waypoint_dist)).setText(getDist(mapLocation, latLon));
 				((TextView) v.findViewById(R.id.waypoint_text)).setText(name);
-				ImageButton remove = (ImageButton) v.findViewById(R.id.info_close);
+				ImageButton remove = v.findViewById(R.id.info_close);
 				remove.setVisibility(View.VISIBLE);
 				remove.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {

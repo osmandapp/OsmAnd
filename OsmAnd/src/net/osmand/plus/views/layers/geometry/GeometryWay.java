@@ -131,7 +131,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	protected void updateWay(@NonNull GeometryWayProvider locationProvider, @Nullable Map<Integer, GeometryWayStyle<?>> styleMap, @NonNull RotatedTileBox tb) {
 		this.locationProvider = locationProvider;
-		this.styleMap = styleMap == null ? Collections.<Integer, GeometryWayStyle<?>>emptyMap() : styleMap;
+		this.styleMap = styleMap == null ? Collections.emptyMap() : styleMap;
 		this.mapDensity = tb.getMapDensity();
 		this.zooms = new TreeMap<>();
 	}
@@ -142,7 +142,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	public void updateWay(@NonNull List<Location> locations, @Nullable Map<Integer, GeometryWayStyle<?>> styleMap, @NonNull RotatedTileBox tb) {
 		this.locationProvider = new GeometryWayLocationProvider(locations);
-		this.styleMap = styleMap == null ? Collections.<Integer, GeometryWayStyle<?>>emptyMap() : styleMap;
+		this.styleMap = styleMap == null ? Collections.emptyMap() : styleMap;
 		this.mapDensity = tb.getMapDensity();
 		this.zooms = new TreeMap<>();
 	}

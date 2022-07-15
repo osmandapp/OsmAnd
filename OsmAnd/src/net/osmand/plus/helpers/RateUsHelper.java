@@ -148,7 +148,7 @@ public class RateUsHelper {
 				case IGNORED:
 				case DISLIKED_WITH_MESSAGE:
 				case DISLIKED_WITHOUT_MESSAGE:
-					return currentState == INITIAL_STATE ? requiredState : RateUsState.DISLIKED_OR_IGNORED_AGAIN;
+					return currentState == INITIAL_STATE ? requiredState : DISLIKED_OR_IGNORED_AGAIN;
 			}
 			return requiredState;
 		}

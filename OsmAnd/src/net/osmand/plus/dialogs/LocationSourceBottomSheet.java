@@ -120,7 +120,7 @@ public class LocationSourceBottomSheet extends MenuBottomSheetDialogFragment {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			LocationSourceBottomSheet fragment = new LocationSourceBottomSheet();
 			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, LocationSourceBottomSheet.TAG);
+			fragment.show(manager, TAG);
 		}
 	}
 }

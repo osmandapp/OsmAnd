@@ -124,11 +124,11 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	private View createCheckboxItem(final CommonPreference<Boolean> pref, int text, int description) {
 		final View view = LayoutInflater.from(context).inflate(
 				R.layout.show_dashboard_on_start_dialog_item, null, false);
-		final TextView textView = (TextView) view.findViewById(R.id.text);
-		final TextView subtextView = (TextView) view.findViewById(R.id.subtext);
+		final TextView textView = view.findViewById(R.id.text);
+		final TextView subtextView = view.findViewById(R.id.subtext);
 		textView.setText(text);
 		subtextView.setText(description);
-		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
+		final CompoundButton compoundButton = view.findViewById(R.id.toggle_item);
 		compoundButton.setChecked(pref.get());
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -252,9 +252,9 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		public DashViewHolder(DashFragmentAdapter dashFragmentAdapter, View view, Context ctx) {
 			this.view = view;
 			this.dashFragmentAdapter = dashFragmentAdapter;
-			this.numberOfRowsTextView = (TextView) view.findViewById(R.id.numberOfRowsTextView);
-			this.textView = (TextView) view.findViewById(R.id.text);
-			this.compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
+			this.numberOfRowsTextView = view.findViewById(R.id.numberOfRowsTextView);
+			this.textView = view.findViewById(R.id.text);
+			this.compoundButton = view.findViewById(R.id.toggle_item);
 
 			TypedValue typedValue = new TypedValue();
 			Theme theme = ctx.getTheme();

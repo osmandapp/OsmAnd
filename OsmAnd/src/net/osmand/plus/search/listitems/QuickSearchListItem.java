@@ -442,7 +442,7 @@ public class QuickSearchListItem {
 				Amenity a = (Amenity) object;
 				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(a));
+				pointDescription.setIconName(getAmenityIconName(a));
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
@@ -453,7 +453,7 @@ public class QuickSearchListItem {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-						pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(amenity));
+						pointDescription.setIconName(getAmenityIconName(amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
 					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
@@ -476,13 +476,13 @@ public class QuickSearchListItem {
 			case VILLAGE:
 			case CITY:
 				String cityName = searchResult.localeName;
-				String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
+				String typeNameCity = getTypeName(app, searchResult);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameCity, cityName);
 				pointDescription.setIconName("ic_action_building_number");
 				break;
 			case STREET:
 				String streetName = searchResult.localeName;
-				String typeNameStreet = QuickSearchListItem.getTypeName(app, searchResult);
+				String typeNameStreet = getTypeName(app, searchResult);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameStreet, streetName);
 				pointDescription.setIconName("ic_action_street_name");
 				break;
@@ -507,12 +507,12 @@ public class QuickSearchListItem {
 				pointDescription.setIconName("ic_action_world_globe");
 				break;
 			case STREET_INTERSECTION:
-				String typeNameIntersection = QuickSearchListItem.getTypeName(app, searchResult);
+				String typeNameIntersection = getTypeName(app, searchResult);
 				if (Algorithms.isEmpty(typeNameIntersection)) {
 					typeNameIntersection = null;
 				}
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
-						typeNameIntersection, QuickSearchListItem.getName(app, searchResult));
+						typeNameIntersection, getName(app, searchResult));
 				pointDescription.setIconName("ic_action_intersection");
 				break;
 			case WPT:

@@ -126,8 +126,8 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 					.setText(item.getVisibleName(app, app.getRegions(), false));
 			((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
 
-			ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);
-			Button buttonAction = (Button) view.findViewById(R.id.button_action);
+			ImageView iconAction = view.findViewById(R.id.icon_action);
+			Button buttonAction = view.findViewById(R.id.button_action);
 			if (item.isDownloaded()) {
 				iconAction.setVisibility(View.GONE);
 				buttonAction.setVisibility(View.GONE);
@@ -151,7 +151,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 				}
 			}
 
-			ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+			ProgressBar progressBar = view.findViewById(R.id.progress_bar);
 			progressBar.setVisibility(downloading ? View.VISIBLE : View.GONE);
 			if (currentDownloading) {
 				int progress = downloadThread.getCurrentDownloadingItemProgress();

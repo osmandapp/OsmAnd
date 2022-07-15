@@ -1300,7 +1300,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private CollapsableView getCollapsableTransportStopRoutesView(@NonNull Context context, TransportStopRoute transportStopRoute, final List<TransportStop> stops) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, false);
+		LinearLayout view = buildCollapsableContentView(context, false);
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 		for (int i = 0; i < stops.size(); i++) {
@@ -1381,8 +1381,8 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			String routeRef = transportStopRoute.route.getAdjustedRouteRef(true);
 			int bgColor = transportStopRoute.getColor(app, isNightMode());
 
-			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
-			ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
+			TextView transportStopRouteTextView = convertView.findViewById(R.id.transport_stop_route_text);
+			ImageView transportStopRouteImageView = convertView.findViewById(R.id.transport_stop_route_icon);
 
 			int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(mapActivity, bgColor, true)));

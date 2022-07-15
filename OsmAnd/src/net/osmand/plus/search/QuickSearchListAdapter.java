@@ -400,7 +400,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private LinearLayout bindSelectAllItem(final int position,
 										   @Nullable View convertView) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.select_all_list_item);
-		final CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
+		final CheckBox ch = view.findViewById(R.id.toggle_item);
 		ch.setVisibility(View.VISIBLE);
 		ch.setChecked(selectAll);
 		ch.setOnClickListener(new View.OnClickListener() {
@@ -468,10 +468,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		DownloadIndexesThread thread = app.getDownloadThread();
 
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
-		TextView tvName = (TextView) view.findViewById(R.id.title);
-		TextView tvDesc = (TextView) view.findViewById(R.id.description);
-		ImageView ivButton = (ImageView) view.findViewById(R.id.secondaryIcon);
-		ProgressBar pbProgress = (ProgressBar) view.findViewById(R.id.progressBar);
+		TextView tvName = view.findViewById(R.id.title);
+		TextView tvDesc = view.findViewById(R.id.description);
+		ImageView ivButton = view.findViewById(R.id.secondaryIcon);
+		ProgressBar pbProgress = view.findViewById(R.id.progressBar);
 
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		int defaultIconColorId = ColorUtilities.getDefaultIconColorId(nightMode);
@@ -620,7 +620,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private void setupCheckBox(final int position,
 							   @NonNull View rootView,
 							   @NonNull QuickSearchListItem listItem) {
-		final CheckBox ch = (CheckBox) rootView.findViewById(R.id.toggle_item);
+		final CheckBox ch = rootView.findViewById(R.id.toggle_item);
 		if (selectionMode) {
 			ch.setVisibility(View.VISIBLE);
 			ch.setChecked(selectedItems.contains(listItem));
@@ -712,8 +712,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private void updateDistanceDirection(View view, QuickSearchListItem listItem) {
-		TextView distanceText = (TextView) view.findViewById(R.id.distance);
-		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+		TextView distanceText = view.findViewById(R.id.distance);
+		ImageView direction = view.findViewById(R.id.direction);
 		SearchPhrase phrase = listItem.getSearchResult().requiredSearchPhrase;
 		updateLocationViewCache.specialFrom = null;
 		if (phrase != null && useMapCenter) {

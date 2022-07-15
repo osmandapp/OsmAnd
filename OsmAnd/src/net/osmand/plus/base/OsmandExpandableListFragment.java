@@ -29,7 +29,7 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		View v = createView(inflater, container);
-		listView = (ExpandableListView) v.findViewById(android.R.id.list);
+		listView = v.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);

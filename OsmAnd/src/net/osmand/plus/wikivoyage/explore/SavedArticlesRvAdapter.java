@@ -233,8 +233,8 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 		HeaderVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
 		}
 	}
 
@@ -251,12 +251,12 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 		ItemVH(final View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			content = (TextView) itemView.findViewById(R.id.content);
-			partOf = (TextView) itemView.findViewById(R.id.part_of);
-			icon = (ImageView) itemView.findViewById(R.id.icon);
-			leftButton = (TextView) itemView.findViewById(R.id.left_button);
-			rightButton = (TextView) itemView.findViewById(R.id.right_button);
+			title = itemView.findViewById(R.id.title);
+			content = itemView.findViewById(R.id.content);
+			partOf = itemView.findViewById(R.id.part_of);
+			icon = itemView.findViewById(R.id.icon);
+			leftButton = itemView.findViewById(R.id.left_button);
+			rightButton = itemView.findViewById(R.id.right_button);
 			divider = itemView.findViewById(R.id.divider);
 			shadow = itemView.findViewById(R.id.shadow);
 

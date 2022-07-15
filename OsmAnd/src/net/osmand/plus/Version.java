@@ -147,9 +147,9 @@ public class Version {
 	}
 
 	public static String getVersionForTracker(OsmandApplication ctx) {
-		String v = Version.getAppName(ctx);
-		if(Version.isProductionVersion(ctx)){
-			v = Version.getFullVersion(ctx);
+		String v = getAppName(ctx);
+		if(isProductionVersion(ctx)){
+			v = getFullVersion(ctx);
 		} else {
 			v +=" test";
 		}

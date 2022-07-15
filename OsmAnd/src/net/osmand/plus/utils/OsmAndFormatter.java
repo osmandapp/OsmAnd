@@ -120,7 +120,7 @@ public class OsmAndFormatter {
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
 				return getFormattedDate(app, lastUploadedTimems);
 			} else {
-				String formattedDuration = OsmAndFormatter.getFormattedDuration((int) duration, app);
+				String formattedDuration = getFormattedDuration((int) duration, app);
 				if (Algorithms.isEmpty(formattedDuration)) {
 					return app.getString(R.string.duration_moment_ago);
 				} else {
@@ -189,8 +189,8 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, boolean forceTrailingZeros) {
-		double roundedDist = OsmAndFormatter.calculateRoundedDist(interval, app);
-		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
+		double roundedDist = calculateRoundedDist(interval, app);
+		return getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
@@ -254,9 +254,9 @@ public class OsmAndFormatter {
 		if (digits == 0) {
 			return (int) (meters / mainUnitInMeters + 0.5) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
 		} else if (digits == 1) {
-			return fixed1.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
+			return fixed1.format(meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		} else {
-			return fixed2.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
+			return fixed2.format(meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		}
 	}
 

@@ -689,7 +689,7 @@ public class ExternalApiHelper {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
 							MapActivity activity = mapActivityRef.get();
 							if (activity != null && !routingHelper.isFollowingMode()) {
-								ExternalApiHelper.startNavigation(activity, gpxFile, checkLocationPermission);
+								startNavigation(activity, gpxFile, checkLocationPermission);
 							}
 						});
 					} else {

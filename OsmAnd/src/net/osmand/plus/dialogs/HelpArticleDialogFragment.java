@@ -55,7 +55,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 							 Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_help_article, container, false);
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 		String assetName = getArguments().getString(ASSET_NAME);
 		String url = getArguments().getString(URL);
-		webView = (WebView) view.findViewById(R.id.webView);
+		webView = view.findViewById(R.id.webView);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setDisplayZoomControls(false);

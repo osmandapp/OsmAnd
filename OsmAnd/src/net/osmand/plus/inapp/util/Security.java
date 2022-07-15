@@ -58,8 +58,8 @@ public class Security {
             return false;
         }
 
-        PublicKey key = Security.generatePublicKey(base64PublicKey);
-        return Security.verify(key, signedData, signature);
+        PublicKey key = generatePublicKey(base64PublicKey);
+        return verify(key, signedData, signature);
     }
 
     /**

@@ -1096,7 +1096,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void sendCrashLog() {
-		File file = getAppPath(OsmandApplication.EXCEPTION_PATH);
+		File file = getAppPath(EXCEPTION_PATH);
 		sendCrashLog(file);
 	}
 

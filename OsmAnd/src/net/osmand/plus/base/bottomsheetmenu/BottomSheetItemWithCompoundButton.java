@@ -93,7 +93,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
+		compoundButton = view.findViewById(R.id.compound_button);
 		if (compoundButton != null) {
 			compoundButton.setChecked(checked);
 			compoundButton.setOnCheckedChangeListener(onCheckedChangeListener);

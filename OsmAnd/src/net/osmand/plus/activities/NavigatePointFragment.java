@@ -180,7 +180,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 				view.findViewById(R.id.lon_row).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrs_row).setVisibility(View.VISIBLE);
 
-				final EditText mgrsEdit = ((EditText) view.findViewById(R.id.MGRSEdit));
+				final EditText mgrsEdit = view.findViewById(R.id.MGRSEdit);
 				MGRSPoint pnt = new MGRSPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
 				mgrsEdit.setText(pnt.toFlavoredString(5));
 				break;
@@ -223,7 +223,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	
 	public void initUI(double latitude, double longitude){
 		showCurrentFormat(new LatLon(latitude, longitude));
-		final Spinner format = ((Spinner)view.findViewById(R.id.Format));
+		final Spinner format = view.findViewById(R.id.Format);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new String[] {
 				PointDescription.formatToHumanString(this.getContext(), PointDescription.FORMAT_DEGREES),
 				PointDescription.formatToHumanString(this.getContext(), PointDescription.FORMAT_MINUTES),
@@ -273,8 +273,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	}
 
 	protected void addPasteListeners() {
-		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
-		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
+		final EditText latEdit = view.findViewById(R.id.LatitudeEdit);
+		final EditText lonEdit = view.findViewById(R.id.LongitudeEdit);
 		TextWatcher textWatcher = new TextWatcher() {
 			String pasteString;
 			@Override

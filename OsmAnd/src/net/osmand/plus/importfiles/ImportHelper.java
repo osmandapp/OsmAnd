@@ -363,7 +363,7 @@ public class ImportHelper {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			try {
-				Intent intent = ImportHelper.getImportTrackIntent();
+				Intent intent = getImportTrackIntent();
 				ActivityResultListener listener = getImportFileResultListener(importType, callback);
 				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 				mapActivity.registerActivityResultListener(listener);

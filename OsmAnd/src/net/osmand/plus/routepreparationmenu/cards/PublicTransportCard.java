@@ -127,8 +127,8 @@ public class PublicTransportCard extends MapBaseCard {
 			view.findViewById(R.id.badges_padding).setVisibility(View.GONE);
 		}
 
-		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
-		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
+		TextView fromLine = view.findViewById(R.id.from_line);
+		TextView wayLine = view.findViewById(R.id.way_line);
 		TextView intervalLine = view.findViewById(R.id.interval_line);
 
 		fromLine.setText(getFirstLineDescrSpan());
@@ -282,7 +282,7 @@ public class PublicTransportCard extends MapBaseCard {
 
 	private void createRouteBadges(List<TransportRouteResultSegment> segments, boolean badgesRowClickable) {
 		int itemsSpacing = AndroidUtils.dpToPx(app, 6);
-		FlowLayout routesBadges = (FlowLayout) view.findViewById(R.id.routes_badges);
+		FlowLayout routesBadges = view.findViewById(R.id.routes_badges);
 		routesBadges.removeAllViews();
 
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
@@ -347,8 +347,8 @@ public class PublicTransportCard extends MapBaseCard {
 		String routeRef = segment.route.getAdjustedRouteRef(true);
 		int bgColor = transportStopRoute.getColor(app, nightMode);
 
-		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
-		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
+		TextView transportStopRouteTextView = bageView.findViewById(R.id.transport_stop_route_text);
+		ImageView transportStopRouteImageView = bageView.findViewById(R.id.transport_stop_route_icon);
 
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(app, bgColor, true)));
@@ -387,8 +387,8 @@ public class PublicTransportCard extends MapBaseCard {
 		LinearLayout bageView = (LinearLayout) getMapActivity().getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		int activeColor = getActiveColor();
 
-		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
-		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
+		TextView transportStopRouteTextView = bageView.findViewById(R.id.transport_stop_route_text);
+		ImageView transportStopRouteImageView = bageView.findViewById(R.id.transport_stop_route_icon);
 
 		Drawable icPedestrian = getActiveIcon(R.drawable.ic_action_pedestrian_dark);
 		transportStopRouteImageView.setImageDrawable(AndroidUtils.getDrawableForDirection(app, icPedestrian));

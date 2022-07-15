@@ -510,8 +510,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		boolean refresh = isCurrentType(type) && !appModeChanged;
 		previousAppMode = currentAppMode;
 		visibleType = type;
-		DashboardOnMap.staticVisible = visible;
-		DashboardOnMap.staticVisibleType = type;
+		staticVisible = visible;
+		staticVisibleType = type;
 		mapActivity.enableDrawer();
 		removeFragment(ConfigureMapFragment.TAG);
 		removeFragment(MapillaryFiltersFragment.TAG);

@@ -142,7 +142,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 				PluginDisabledBottomSheet dialog = new PluginDisabledBottomSheet();
 				dialog.setArguments(args);
 				dialog.setUsedOnMap(usedOnMap);
-				dialog.show(fm, PluginDisabledBottomSheet.TAG);
+				dialog.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

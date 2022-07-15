@@ -88,7 +88,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
-		monthReportsSpinner = (Spinner) view.findViewById(R.id.monthReportsSpinner);
+		monthReportsSpinner = view.findViewById(R.id.monthReportsSpinner);
 		final View monthButton = view.findViewById(R.id.monthButton);
 		monthReportsSpinner.setOnTouchListener((v, event) -> {
 			event.offsetLocation(AndroidUtils.dpToPx(getActivity(), 48f), 0);
@@ -135,7 +135,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		selectedCountryItem = countrySelectionFragment.getCountryItems().get(0);
 		
 
-		countryNameTextView = (TextView) regionReportsButton.findViewById(android.R.id.text1);
+		countryNameTextView = regionReportsButton.findViewById(android.R.id.text1);
 		countryNameTextView.setText(selectedCountryItem.getLocalName());
 
 		setThemedDrawable(view, R.id.calendarImageView, R.drawable.ic_action_data);
@@ -143,11 +143,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		setThemedDrawable(view, R.id.regionIconImageView, R.drawable.ic_world_globe_dark);
 		setThemedDrawable(view, R.id.countryDropDownIcon, R.drawable.ic_action_arrow_drop_down);
 
-		numberOfContributorsIcon = (ImageView) view.findViewById(R.id.numberOfContributorsIcon);
-		numberOfEditsIcon = (ImageView) view.findViewById(R.id.numberOfEditsIcon);
-		numberOfRecipientsIcon = (ImageView) view.findViewById(R.id.numberOfRecipientsIcon);
-		donationsIcon = (ImageView) view.findViewById(R.id.donationsIcon);
-		donationsTotalIcon = (ImageView) view.findViewById(R.id.donationsTotalIcon);
+		numberOfContributorsIcon = view.findViewById(R.id.numberOfContributorsIcon);
+		numberOfEditsIcon = view.findViewById(R.id.numberOfEditsIcon);
+		numberOfRecipientsIcon = view.findViewById(R.id.numberOfRecipientsIcon);
+		donationsIcon = view.findViewById(R.id.donationsIcon);
+		donationsTotalIcon = view.findViewById(R.id.donationsTotalIcon);
 		setThemedDrawable(numberOfContributorsIcon, R.drawable.ic_action_group2);
 		setThemedDrawable(numberOfRecipientsIcon, R.drawable.ic_group);
 		setThemedDrawable(donationsIcon, R.drawable.ic_action_bitcoin);
@@ -155,21 +155,21 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		setThemedDrawable(numberOfEditsIcon, R.drawable.ic_map);
 		
 		
-		numberOfContributorsTitle = (TextView) view.findViewById(R.id.numberOfContributorsTitle);
-		numberOfEditsTitle = (TextView) view.findViewById(R.id.numberOfEditsTitle);
-		donationsTitle = (TextView) view.findViewById(R.id.donationsTitle);
-		numberOfRecipientsTitle = (TextView) view.findViewById(R.id.numberOfRecipientsTitle);
-		donationsTotalLayout = (LinearLayout) view.findViewById(R.id.donationsTotal);
-		donationsTotalTitle = (TextView) view.findViewById(R.id.donationsTotalTitle);
-		donationsTotalTextView = (TextView) view.findViewById(R.id.donationsTotalTextView);
+		numberOfContributorsTitle = view.findViewById(R.id.numberOfContributorsTitle);
+		numberOfEditsTitle = view.findViewById(R.id.numberOfEditsTitle);
+		donationsTitle = view.findViewById(R.id.donationsTitle);
+		numberOfRecipientsTitle = view.findViewById(R.id.numberOfRecipientsTitle);
+		donationsTotalLayout = view.findViewById(R.id.donationsTotal);
+		donationsTotalTitle = view.findViewById(R.id.donationsTotalTitle);
+		donationsTotalTextView = view.findViewById(R.id.donationsTotalTextView);
 
 		
-		progressBar = (ProgressBar) view.findViewById(R.id.progress);
+		progressBar = view.findViewById(R.id.progress);
 
-		contributorsTextView = (TextView) view.findViewById(R.id.contributorsTextView);
-		editsTextView = (TextView) view.findViewById(R.id.editsTextView);
-		donationsTextView = (TextView) view.findViewById(R.id.donationsTextView);
-		recipientsTextView = (TextView) view.findViewById(R.id.recipientsTextView);
+		contributorsTextView = view.findViewById(R.id.contributorsTextView);
+		editsTextView = view.findViewById(R.id.editsTextView);
+		donationsTextView = view.findViewById(R.id.donationsTextView);
+		recipientsTextView = view.findViewById(R.id.recipientsTextView);
 
 		requestAndUpdateUi();
 

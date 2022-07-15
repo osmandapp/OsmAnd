@@ -472,7 +472,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				if (time == 0) {
 					speed = 0;
 				} else {
-					speed = ((float) d * 1000) / time;
+					speed = (d * 1000) / time;
 				}
 				// Be aware only for emulator ! code is incorrect in case of airplane
 				if (speed > 100) {
@@ -632,10 +632,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if ((System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
 			return true;
 		}
-		if (isRunningOnEmulator()) {
-			return true;
-		}
-		return false;
+		return isRunningOnEmulator();
 	}
 
 	private void stopLocationRequests() {
@@ -1003,7 +1000,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (!isLocationPermissionAvailable(activity)) {
 			ActivityCompat.requestPermissions(activity,
 					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+					REQUEST_LOCATION_PERMISSION);
 		}
 	}
 }

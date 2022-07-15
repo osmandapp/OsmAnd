@@ -34,7 +34,7 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 
 	public MoveFilesTask(OsmandActionBarActivity activity, File from, File to) {
 		this.activity = new WeakReference<>(activity);
-		this.context = new WeakReference<>((Context) activity);
+		this.context = new WeakReference<>(activity);
 		this.from = from;
 		this.to = to;
 	}

@@ -80,10 +80,10 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 		final View titleView = UiUtilities.getInflater(ctx, nightMode)
 				.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
-		TextView textView = (TextView) titleView.findViewById(R.id.title);
+		TextView textView = titleView.findViewById(R.id.title);
 		textView.setText(R.string.show_along_the_route);
 
-		Toolbar toolbar = (Toolbar) titleView.findViewById(R.id.toolbar);
+		Toolbar toolbar = titleView.findViewById(R.id.toolbar);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(ctx));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -276,7 +276,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					}
 				});
 
-				final ImageButton remove = (ImageButton) convertView.findViewById(R.id.info_close);
+				final ImageButton remove = convertView.findViewById(R.id.info_close);
 				remove.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -330,12 +330,12 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			if (convertView == null) {
 				convertView = UiUtilities.getInflater(context, nightMode).inflate(R.layout.along_the_route_category_item, parent, false);
 			}
-			TextView lblListHeader = (TextView) convertView.findViewById(R.id.title);
+			TextView lblListHeader = convertView.findViewById(R.id.title);
 			lblListHeader.setText(getHeader(group.type, mapActivity));
 
 			adjustIndicator(app, groupPosition, isExpanded, convertView, !nightMode);
 
-			final CompoundButton compoundButton = (CompoundButton) convertView.findViewById(R.id.compound_button);
+			final CompoundButton compoundButton = convertView.findViewById(R.id.compound_button);
 			compoundButton.setChecked(enabled);
 			compoundButton.setEnabled(true);
 			compoundButton.setOnClickListener(new View.OnClickListener() {
@@ -414,7 +414,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 		private View createInfoItem(LayoutInflater themedInflater) {
 			View view = themedInflater.inflate(R.layout.show_along_the_route_info_item, null);
-			TextView titleTv = (TextView) view.findViewById(R.id.title);
+			TextView titleTv = view.findViewById(R.id.title);
 			titleTv.setText(getText(R.string.waiting_for_route_calculation));
 
 			return view;

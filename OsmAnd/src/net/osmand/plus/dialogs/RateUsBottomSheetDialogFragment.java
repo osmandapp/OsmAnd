@@ -86,9 +86,9 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {
-			if (fm.findFragmentByTag(RateUsBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				RateUsBottomSheetDialogFragment fragment = new RateUsBottomSheetDialogFragment();
-				fragment.show(fm, RateUsBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

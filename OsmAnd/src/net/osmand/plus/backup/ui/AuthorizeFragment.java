@@ -520,7 +520,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		private AppBarLayout appBar;
 
 		public FixScrollingFooterBehaviour() {
-			super();
 		}
 
 		public FixScrollingFooterBehaviour(Context context, AttributeSet attrs) {

@@ -65,11 +65,11 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
-		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);
-		TextView titleTv = (TextView) mainView.findViewById(R.id.save_as_track_title);
+		LinearLayout contentLayout = mainView.findViewById(R.id.content_linear_layout);
+		TextView titleTv = mainView.findViewById(R.id.save_as_track_title);
 		titleTv.setText(openFromCoordinateInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
 		titleTv.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
-		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
+		TextView descriptionTv = mainView.findViewById(R.id.save_as_track_description);
 		descriptionTv.setText(openFromCoordinateInput
 				? getString(R.string.coord_input_save_as_track_descr, String.valueOf(number))
 				: getString(R.string.marker_save_as_track_descr));

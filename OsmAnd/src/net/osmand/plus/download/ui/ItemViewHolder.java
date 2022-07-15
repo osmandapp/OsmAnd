@@ -98,12 +98,12 @@ public class ItemViewHolder {
 	public ItemViewHolder(View view, DownloadActivity context) {
 		this.context = context;
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
-		progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-		rightButton = (Button) view.findViewById(R.id.rightButton);
-		leftImageView = (ImageView) view.findViewById(R.id.icon);
-		descrTextView = (TextView) view.findViewById(R.id.description);
-		rightImageButton = (ImageView) view.findViewById(R.id.secondaryIcon);
-		nameTextView = (TextView) view.findViewById(R.id.title);
+		progressBar = view.findViewById(R.id.progressBar);
+		rightButton = view.findViewById(R.id.rightButton);
+		leftImageView = view.findViewById(R.id.icon);
+		descrTextView = view.findViewById(R.id.description);
+		rightImageButton = view.findViewById(R.id.secondaryIcon);
+		nameTextView = view.findViewById(R.id.title);
 
 		ViewCompat.setAccessibilityDelegate(view, context.getAccessibilityAssistant());
 		ViewCompat.setAccessibilityDelegate(rightButton, context.getAccessibilityAssistant());
@@ -345,7 +345,7 @@ public class ItemViewHolder {
 	@SuppressLint("DefaultLocale")
 	public RightButtonAction getClickAction(final DownloadItem item) {
 		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
-		if (item.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
+		if (item.getBasename().equalsIgnoreCase(DownloadResources.WORLD_SEAMARKS_KEY)
 				&& nauticalPluginDisabled) {
 			clickAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
 		} else if ((item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE

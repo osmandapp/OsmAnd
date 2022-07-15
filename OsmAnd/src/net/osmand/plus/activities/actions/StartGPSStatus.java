@@ -123,7 +123,7 @@ public class StartGPSStatus extends OsmAndAction {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				View v = mapActivity.getLayoutInflater().inflate(layout, null);
-				TextView tv = (TextView) v.findViewById(R.id.title);
+				TextView tv = v.findViewById(R.id.title);
 				tv.setPadding(dp12, 0, dp24, 0);
 				tv.setText(getItem(position).stringRes);
 				v.findViewById(R.id.toggle_item).setVisibility(View.INVISIBLE);

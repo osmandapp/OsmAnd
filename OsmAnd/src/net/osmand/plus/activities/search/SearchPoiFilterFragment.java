@@ -68,8 +68,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		((ImageView) v.findViewById(R.id.search_icon)).setImageDrawable(
 				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 
-		setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
-		setupOptions((ImageView) v.findViewById(R.id.options));
+		setupSearchEditText(v.findViewById(R.id.searchEditText));
+		setupOptions(v.findViewById(R.id.options));
 		v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
 		return v;
 	}
@@ -284,8 +284,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.searchpoifolder_list, parent, false);
 			}
-			TextView label = (TextView) row.findViewById(R.id.folder_label);
-			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
+			TextView label = row.findViewById(R.id.folder_label);
+			ImageView icon = row.findViewById(R.id.folder_icon);
 			Object item = getItem(position);
 			String name;
 			if (item instanceof PoiUIFilter) {

@@ -305,7 +305,7 @@ public class RendererRegistry {
 		if (storage == null) {
 			return "";
 		}
-		return RendererRegistry.getRendererName(app, storage.getName());
+		return getRendererName(app, storage.getName());
 	}
 
 	public static String getRendererName(@NonNull Context ctx, @NonNull String name) {

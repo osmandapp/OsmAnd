@@ -151,7 +151,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	private CollapsableView getCollapsableWaypointsView(final Context context, boolean collapsed, @NonNull final GPXUtilities.GPXFile gpxFile, WptPt selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPoints();
 		String selectedCategory = selectedPoint != null && selectedPoint.category != null ? selectedPoint.category : "";

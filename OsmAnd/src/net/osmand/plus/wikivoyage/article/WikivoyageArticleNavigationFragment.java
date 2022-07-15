@@ -215,7 +215,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				convertView = LayoutInflater.from(context)
 						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
-			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
+			TextView txtListChild = convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childTitle);
 			if (selected) {
 				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
@@ -240,7 +240,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				convertView = LayoutInflater.from(context)
 						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
-			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
+			TextView lblListHeader = convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(groupTitle);
 			if (selected) {
 				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
@@ -251,7 +251,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
-			ImageView indicator = (ImageView) convertView.findViewById(R.id.explicit_indicator);
+			ImageView indicator = convertView.findViewById(R.id.explicit_indicator);
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

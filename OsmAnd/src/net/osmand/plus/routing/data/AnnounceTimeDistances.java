@@ -55,7 +55,7 @@ public class AnnounceTimeDistances {
 		locationProvider = app.getLocationProvider();
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// keep it as minimum 30 km/h for voice announcement
-			DEFAULT_SPEED = (float) Math.max(8, appMode.getDefaultSpeed());
+			DEFAULT_SPEED = Math.max(8, appMode.getDefaultSpeed());
 		} else {
 			// minimal is 1 meter for turn now
 			DEFAULT_SPEED = (float) Math.max(0.3, appMode.getDefaultSpeed());

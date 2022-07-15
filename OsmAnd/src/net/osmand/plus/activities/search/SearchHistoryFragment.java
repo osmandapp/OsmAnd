@@ -62,7 +62,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.search_history, container, false);
-		clearButton = (Button) view.findViewById(R.id.clearAll);
+		clearButton = view.findViewById(R.id.clearAll);
 		clearButton.setText(R.string.shared_string_clear_all);
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override

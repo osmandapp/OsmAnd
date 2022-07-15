@@ -174,7 +174,7 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		fragment.setArguments(args);
 		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setUsedOnMap(usedOnMap);
-		fragment.show(mapActivity.getSupportFragmentManager(), SelectMultipleProfilesBottomSheet.TAG);
+		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 	}
 
 }

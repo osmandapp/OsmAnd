@@ -67,14 +67,14 @@ public class DashNavigationFragment extends DashBaseFragment {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}
 		final MapActivity map =  (MapActivity) getActivity();
-		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
+		LinearLayout favorites = mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View view = inflater.inflate(R.layout.dash_navigation, null, false);			
-		TextView name = (TextView) view.findViewById(R.id.name);
-		ImageView icon = (ImageView) view.findViewById(R.id.icon);
-		ImageView cancel = (ImageView) view.findViewById(R.id.cancel);
-		ImageView play = (ImageView) view.findViewById(R.id.play);
+		TextView name = view.findViewById(R.id.name);
+		ImageView icon = view.findViewById(R.id.icon);
+		ImageView cancel = view.findViewById(R.id.cancel);
+		ImageView play = view.findViewById(R.id.play);
 		name.setText(routingHelper.getGeneralRouteInformation());
 		icon.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, 
 				R.color.color_myloc_distance));

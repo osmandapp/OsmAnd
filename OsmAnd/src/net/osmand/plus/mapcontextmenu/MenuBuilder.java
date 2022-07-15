@@ -1169,7 +1169,7 @@ public class MenuBuilder {
 	}
 
 	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, boolean collapsed, boolean isNearbyRoutes) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, false);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, false);
 		List<TransportStopRoute> localTransportStopRoutes = mapContextMenu.getLocalTransportStopRoutes();
 		List<TransportStopRoute> nearbyTransportStopRoutes = mapContextMenu.getNearbyTransportStopRoutes();
 		if (!isNearbyRoutes) {

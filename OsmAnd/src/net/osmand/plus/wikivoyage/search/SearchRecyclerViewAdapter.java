@@ -158,7 +158,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 		HeaderVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
+			title = itemView.findViewById(R.id.title);
 		}
 	}
 
@@ -173,10 +173,10 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 		ItemVH(View itemView) {
 			super(itemView);
-			icon = (ImageView) itemView.findViewById(R.id.icon);
-			title = (TextView) itemView.findViewById(R.id.title);
-			leftDescr = (TextView) itemView.findViewById(R.id.left_description);
-			rightDescr = (TextView) itemView.findViewById(R.id.right_description);
+			icon = itemView.findViewById(R.id.icon);
+			title = itemView.findViewById(R.id.title);
+			leftDescr = itemView.findViewById(R.id.left_description);
+			rightDescr = itemView.findViewById(R.id.right_description);
 			divider = itemView.findViewById(R.id.divider);
 			shadow = itemView.findViewById(R.id.shadow);
 		}

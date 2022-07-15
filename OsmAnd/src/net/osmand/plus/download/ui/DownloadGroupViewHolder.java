@@ -25,7 +25,7 @@ public class DownloadGroupViewHolder {
 
 	public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
 		this.ctx = ctx;
-		textView = (TextView) v.findViewById(R.id.title);
+		textView = v.findViewById(R.id.title);
 	}
 
 	private boolean isParentWorld(DownloadResourceGroup group) {

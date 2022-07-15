@@ -343,7 +343,7 @@ public class WikiArticleHelper {
 	@Nullable
 	public static String getFirstParagraph(String descriptionHtml) {
 		if (descriptionHtml != null) {
-			String firstParagraph = WikiArticleHelper.getPartialContent(descriptionHtml);
+			String firstParagraph = getPartialContent(descriptionHtml);
 			if (!Algorithms.isEmpty(firstParagraph)) {
 				return firstParagraph;
 			}

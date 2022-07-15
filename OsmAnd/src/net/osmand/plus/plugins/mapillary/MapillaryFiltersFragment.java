@@ -91,7 +91,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         toggleRow.setOnClickListener(v -> toggle.setChecked(!toggle.isChecked()));
         UiUtilities.setupCompoundButton(nightMode, currentModeColor, toggle);
 
-        final Button reloadTile = (Button) view.findViewById(R.id.button_reload_tile);
+        final Button reloadTile = view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(v -> {
             ResourceManager manager = app.getResourceManager();
             manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
@@ -108,7 +108,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 .setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
         final DelayAutoCompleteTextView textView =
-                (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
+                view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion));
         String selectedUsername = plugin.MAPILLARY_FILTER_USERNAME.get();
         if (!selectedUsername.isEmpty() && plugin.USE_MAPILLARY_FILTER.get()) {

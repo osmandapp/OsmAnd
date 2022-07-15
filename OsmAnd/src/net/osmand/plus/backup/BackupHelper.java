@@ -272,7 +272,7 @@ public class BackupHelper {
 		String fileName;
 		if (item instanceof FileSettingsItem) {
 			FileSettingsItem fileItem = (FileSettingsItem) item;
-			fileName = BackupHelper.getFileItemName(fileItem);
+			fileName = getFileItemName(fileItem);
 		} else {
 			fileName = item.getFileName();
 			if (Algorithms.isEmpty(fileName)) {
@@ -318,7 +318,7 @@ public class BackupHelper {
 	public List<File> collectItemFilesForUpload(@NonNull FileSettingsItem item) {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
-		if (!BackupHelper.isLimitedFilesCollectionItem(item)
+		if (!isLimitedFilesCollectionItem(item)
 				&& info != null && !Algorithms.isEmpty(info.filesToUpload)) {
 			for (LocalFile localFile : info.filesToUpload) {
 				File file = localFile.file;
@@ -686,7 +686,7 @@ public class BackupHelper {
 					return super.isInterrupted();
 				}
 			};
-			progress.startWork((int) (remoteFile.getFilesize() / 1024));
+			progress.startWork(remoteFile.getFilesize() / 1024);
 			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, progress);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
@@ -721,7 +721,7 @@ public class BackupHelper {
 				List<SettingsItem> localItems = getLocalItems();
 				operationLog.log("getLocalItems");
 				for (SettingsItem item : localItems) {
-					String fileName = BackupHelper.getItemFileName(item);
+					String fileName = getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
 						FileSettingsItem fileItem = (FileSettingsItem) item;
 						File file = fileItem.getFile();

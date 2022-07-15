@@ -27,8 +27,8 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 
 	public AudioVideoNoteRecordingMenuFullScreen(AudioVideoNotesPlugin plugin, double lat, double lon) {
 		super(plugin, lat, lon);
-		imageview = (ImageView) view.findViewById(R.id.imageview);
-		progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+		imageview = view.findViewById(R.id.imageview);
+		progressBar = view.findViewById(R.id.progressBar);
 	}
 
 	protected void initView(MapActivity mapActivity) {

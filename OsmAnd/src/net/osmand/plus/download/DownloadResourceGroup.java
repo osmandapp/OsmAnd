@@ -63,7 +63,7 @@ public class DownloadResourceGroup {
 
 		final int resId;
 
-		private DownloadResourceGroupType(int resId) {
+		DownloadResourceGroupType(int resId) {
 			this.resId = resId;
 		}
 

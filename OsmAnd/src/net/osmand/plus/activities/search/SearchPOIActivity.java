@@ -193,7 +193,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = (Toolbar) findViewById(R.id.poiSplitbar);
+		final Toolbar tb = findViewById(R.id.poiSplitbar);
 		tb.setTitle(null);
 		tb.getMenu().clear();
 		tb.setVisibility(visible ? View.VISIBLE : View.GONE);
@@ -231,7 +231,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 		setListAdapter(amenityAdapter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
-		searchFilter = (EditText) findViewById(R.id.searchEditText);
+		searchFilter = findViewById(R.id.searchEditText);
 		accessibilityAssistant = new AccessibilityAssistant(this);
 		navigationInfo = new NavigationInfo(app);
 		searchFilter.addTextChangedListener(new TextWatcher() {
@@ -294,7 +294,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				runNewSearchQuery(location, NEW_SEARCH_INIT);
 			}
 		} else {
-			amenityAdapter.setNewModel(Collections.<Amenity>emptyList());
+			amenityAdapter.setNewModel(Collections.emptyList());
 			finish();
 		}
 	}
@@ -334,8 +334,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		amenityAdapter.getFilter().filter(queue);
 		String cfilter = filter == null || filter.getFilterByName() == null ? "" :
 				filter.getFilterByName().toLowerCase();
-		if (!isNameSearch() && !queue.toString().toLowerCase().startsWith(cfilter)) {
-			filter.setFilterByName(queue.toString());
+		if (!isNameSearch() && !queue.toLowerCase().startsWith(cfilter)) {
+			filter.setFilterByName(queue);
 			runNewSearchQuery(location, SEARCH_AGAIN);
 		}
 		updateButtonState(false);
@@ -748,12 +748,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.searchpoi_list, parent, false);
 			}
-			TextView label = (TextView) row.findViewById(R.id.poi_label);
-			TextView distanceText = (TextView) row.findViewById(R.id.distance);
-			TextView timeText = (TextView) row.findViewById(R.id.time);
-			ImageView direction = (ImageView) row.findViewById(R.id.poi_direction);
-			ImageView timeIcon = (ImageView) row.findViewById(R.id.time_icon);
-			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
+			TextView label = row.findViewById(R.id.poi_label);
+			TextView distanceText = row.findViewById(R.id.distance);
+			TextView timeText = row.findViewById(R.id.time);
+			ImageView direction = row.findViewById(R.id.poi_direction);
+			ImageView timeIcon = row.findViewById(R.id.time_icon);
+			ImageView icon = row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
 			if (amenity.getOpeningHours() != null) {
 				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());

@@ -67,7 +67,7 @@ import java.util.List;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
-		MapControlsThemeInfoProvider, OnSegmentSelectedListener {
+		OnSegmentSelectedListener {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 

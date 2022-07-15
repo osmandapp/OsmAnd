@@ -149,7 +149,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 
 		View itemLiveUpdate = getCustomButtonView(app, null, localUpdatePreference.get(), nightMode);
 		View itemLiveUpdateButton = itemLiveUpdate.findViewById(R.id.button_container);
-		CompoundButton button = (CompoundButton) itemLiveUpdateButton.findViewById(R.id.compound_button);
+		CompoundButton button = itemLiveUpdateButton.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(button, nightMode, TOOLBAR);
 		itemLiveUpdateButton.setMinimumHeight(getDimen(R.dimen.bottom_sheet_selected_item_title_height));
 		itemSwitchLiveUpdate = new BottomSheetItemWithCompoundButton.Builder()

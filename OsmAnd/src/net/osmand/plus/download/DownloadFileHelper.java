@@ -41,7 +41,7 @@ public class DownloadFileHelper {
 	
 	public interface DownloadFileShowWarning {
 		
-		public void showWarning(String warning);
+		void showWarning(String warning);
 	}
 	
 	public static boolean isInterruptedException(IOException e) {
@@ -261,7 +261,7 @@ public class DownloadFileHelper {
 
 	private void unzipFile(IndexItem.DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
 		CountingMultiInputStream fin = new CountingMultiInputStream(is);
-		int len = (int) fin.available();
+		int len = fin.available();
 		int mb = (int) (len / (1024f*1024f));
 		if(mb == 0) {
 			mb = 1;
@@ -302,7 +302,7 @@ public class DownloadFileHelper {
 							// cut version
 							int i = name.indexOf('.', ind);
 							if (i > 0) {
-								name = name.substring(0, ind) + name.substring(i, name.length());
+								name = name.substring(0, ind) + name.substring(i);
 							}
 						}
 						fs = new File(de.fileToDownload.getParent(), name);

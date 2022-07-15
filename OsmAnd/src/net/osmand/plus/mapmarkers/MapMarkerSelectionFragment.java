@@ -80,7 +80,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		nightMode = !app.getSettings().isLightContent();
 
 		View view = inflater.inflate(R.layout.map_marker_selection_fragment, container, false);
-		ImageButton closeButton = (ImageButton) view.findViewById(R.id.closeButton);
+		ImageButton closeButton = view.findViewById(R.id.closeButton);
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app));
 		closeButton.setImageDrawable(icBack);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		ListView listView = view.findViewById(android.R.id.list);
 		final ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
 		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getMapMarkers();
 		if (markers.size() > 0) {

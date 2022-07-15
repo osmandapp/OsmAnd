@@ -54,7 +54,7 @@ public class WikivoyageUtils {
 
 	public static WptPt findNearestPoint(@NonNull List<WptPt> points, @NonNull String coordinates) {
 		double lat = Algorithms.parseDoubleSilently(coordinates.substring(0, coordinates.indexOf(",")), 0);
-		double lon = Algorithms.parseDoubleSilently(coordinates.substring(coordinates.indexOf(",") + 1), 0);;
+		double lon = Algorithms.parseDoubleSilently(coordinates.substring(coordinates.indexOf(",") + 1), 0);
 		for (WptPt point : points) {
 			if (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), lat, lon) < ROUNDING_ERROR) {
 				return point;

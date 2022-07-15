@@ -31,7 +31,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_simple_list, container, false);
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		ListView listView = view.findViewById(android.R.id.list);
 		final ArrayAdapter<Object> adapter = new ListAdapter(getListItemIcon());
 		String url = getArguments().getString(URL_REQUEST);
 		//String reg = getArguments().getString(REGION_NAME);
@@ -74,7 +74,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 		}
 		listView.setAdapter(adapter);
-		ImageButton clearButton = (ImageButton) view.findViewById(R.id.closeButton);
+		ImageButton clearButton = view.findViewById(R.id.closeButton);
 		//setThemedDrawable(clearButton, R.drawable.ic_action_remove_dark);
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -118,8 +118,8 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 			if (v == null) {
 				v = getActivity().getLayoutInflater().inflate(android.R.layout.simple_list_item_2, parent, false);
 			}
-			TextView text1 = (TextView) v.findViewById(android.R.id.text1);
-			TextView text2 = (TextView) v.findViewById(android.R.id.text2);
+			TextView text1 = v.findViewById(android.R.id.text1);
+			TextView text2 = v.findViewById(android.R.id.text2);
 			text1.setTextColor(textColor);
 			text2.setTextColor(textSecondaryColor);
 			text1.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);

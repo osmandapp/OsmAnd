@@ -207,15 +207,15 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 				row = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorites_list_item, parent, false);
 			}
 
-			TextView name = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceText = (TextView) row.findViewById(R.id.distance);
-			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
-			ImageView direction = (ImageView) row.findViewById(R.id.direction);
-			ImageView giImage = (ImageView) row.findViewById(R.id.group_image);
+			TextView name = row.findViewById(R.id.favourite_label);
+			TextView distanceText = row.findViewById(R.id.distance);
+			ImageView icon = row.findViewById(R.id.favourite_icon);
+			ImageView direction = row.findViewById(R.id.direction);
+			ImageView giImage = row.findViewById(R.id.group_image);
 			direction.setVisibility(View.VISIBLE);
 			final FavouritePoint favorite = getItem(position);
 			if (shouldShowMenuButton) {
-				ImageButton options = (ImageButton) row.findViewById(R.id.options);
+				ImageButton options = row.findViewById(R.id.options);
 				options.setFocusable(false);
 				options.setImageDrawable(((OsmandApplication) activity.getApplication()).getUIUtilities()
 						.getThemedIcon(R.drawable.ic_overflow_menu_white));
@@ -241,7 +241,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude());
 			name.setText(getName(favorite));
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
+			final CheckBox ch = row.findViewById(R.id.toggle_item);
 			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
 			if (activity instanceof SearchActivity)

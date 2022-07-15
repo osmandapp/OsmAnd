@@ -361,12 +361,9 @@ public class TextRenderer {
 					if (name != null && name.trim().length() > 0) {
 						boolean isName = tag == obj.getMapIndex().nameEncodingType;
 						String nameTag = isName ? "" : obj.getMapIndex().decodeType(tag).tag;
-						boolean skip = false;
+						boolean skip = isName && !rc.preferredLocale.isEmpty() &&
+								map.containsKey(obj.getMapIndex().nameEnEncodingType);
 						// not completely correct we should check "name"+rc.preferredLocale
-						if (isName && !rc.preferredLocale.isEmpty() &&
-								map.containsKey(obj.getMapIndex().nameEnEncodingType)) {
-							skip = true;
-						}
 //						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
 //							skip = true;
 //						}

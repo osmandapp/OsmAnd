@@ -2083,20 +2083,20 @@ public class GpxUiHelper {
 		switch (type) {
 			case ALTITUDE: {
 				if (analysis.hasElevationData) {
-					dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+					dataSet = createGPXElevationDataSet(app, chart,
 							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 				break;
 			}
 			case SLOPE:
 				if (analysis.hasElevationData) {
-					dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+					dataSet = createGPXSlopeDataSet(app, chart,
 							analysis, GPXDataSetAxisType.DISTANCE, null, useRightAxis, true, calcWithoutGaps);
 				}
 				break;
 			case SPEED: {
 				if (analysis.hasSpeedData) {
-					dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+					dataSet = createGPXSpeedDataSet(app, chart,
 							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 				break;

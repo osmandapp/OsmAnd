@@ -50,14 +50,14 @@ public class SecUtils {
 
 	public static String encodeKey(String algo, PublicKey pk) {
 		if (algo.equals(KEY_BASE64)) {
-			return SecUtils.KEY_BASE64 + ":" + pk.getFormat() + ":" + encodeBase64(pk.getEncoded());
+			return KEY_BASE64 + ":" + pk.getFormat() + ":" + encodeBase64(pk.getEncoded());
 		}
 		throw new UnsupportedOperationException("Algorithm is not supported: " + algo);
 	}
 
 	public static String encodeKey(String algo, PrivateKey pk) {
 		if (algo.equals(KEY_BASE64)) {
-			return SecUtils.KEY_BASE64 + ":" + pk.getFormat() + ":" + encodeBase64(pk.getEncoded());
+			return KEY_BASE64 + ":" + pk.getFormat() + ":" + encodeBase64(pk.getEncoded());
 		}
 		throw new UnsupportedOperationException("Algorithm is not supported: " + algo);
 	}

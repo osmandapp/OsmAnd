@@ -169,7 +169,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.getPoints();
 		for (int i = 0; i < points.size() && i < 10; i++) {

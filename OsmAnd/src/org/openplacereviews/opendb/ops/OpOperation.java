@@ -203,11 +203,8 @@ public class OpOperation extends OpObject {
 		} else if (!editedObjects.equals(other.editedObjects))
 			return false;
 		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
+			return other.type == null;
+		} else return type.equals(other.type);
 	}
 
 	// OSMAND ANDROID CHANGE BEGIN:
@@ -250,14 +247,14 @@ public class OpOperation extends OpObject {
 			if(createdObjs != null) {
 				JsonArray ar = createdObjs.getAsJsonArray();
 				for(int i = 0; i < ar.size(); i++) {
-					op.addCreated((OpObject) context.deserialize(ar.get(i), OpObject.class));
+					op.addCreated(context.deserialize(ar.get(i), OpObject.class));
 				}
 			}
 
 			JsonElement editedObjs = jsonObj.remove(F_EDIT);
 			if (editedObjs != null) {
 				for (JsonElement editElem : editedObjs.getAsJsonArray()) {
-					op.addEdited((OpObject) context.deserialize(editElem, OpObject.class));
+					op.addEdited(context.deserialize(editElem, OpObject.class));
 				}
 			}
 

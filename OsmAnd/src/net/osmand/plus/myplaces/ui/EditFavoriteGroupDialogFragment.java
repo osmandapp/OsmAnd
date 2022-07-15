@@ -205,6 +205,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		Bundle args = new Bundle();
 		args.putString(GROUP_NAME_KEY, groupName);
 		f.setArguments(args);
-		f.show(fragmentManager, EditFavoriteGroupDialogFragment.TAG);
+		f.show(fragmentManager, TAG);
 	}
 }

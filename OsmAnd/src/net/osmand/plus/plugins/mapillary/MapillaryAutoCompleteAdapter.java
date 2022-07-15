@@ -26,7 +26,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
+public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> {
 
 	private static final String TAG = MapillaryAutoCompleteAdapter.class.getSimpleName();
 
@@ -123,8 +123,8 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
 			LayoutInflater inflater = LayoutInflater.from(getContext());
 			convertView = inflater.inflate(R.layout.auto_complete_suggestion, parent, false);
 		}
-		TextView nameTv = (TextView) convertView.findViewById(R.id.title);
-		ImageView iconIv = (ImageView) convertView.findViewById(R.id.icon);
+		TextView nameTv = convertView.findViewById(R.id.title);
+		ImageView iconIv = convertView.findViewById(R.id.icon);
 
 		nameTv.setText(names.get(position));
 		if (wrong) {

@@ -66,19 +66,19 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	public interface CustomTabProvider {
-		public View getCustomTabView(@NonNull ViewGroup parent, int position);
+		View getCustomTabView(@NonNull ViewGroup parent, int position);
 
-		public void select(View tab);
+		void select(View tab);
 
-		public void deselect(View tab);
+		void deselect(View tab);
 
-		public void tabStylesUpdated(View tabsContainer, int currentPosition);
+		void tabStylesUpdated(View tabsContainer, int currentPosition);
 	}
 
 	public interface OnTabReselectedListener {
-		public void onTabSelected(int position);
+		void onTabSelected(int position);
 
-		public void onTabReselected(int position);
+		void onTabReselected(int position);
 	}
 
 	// @formatter:off
@@ -309,7 +309,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	private void addTab(final int position, CharSequence title, View tabView) {
-		TextView textView = (TextView) tabView.findViewById(R.id.tab_title);
+		TextView textView = tabView.findViewById(R.id.tab_title);
 		if (textView != null) {
 			if (title != null) textView.setText(title);
 		}

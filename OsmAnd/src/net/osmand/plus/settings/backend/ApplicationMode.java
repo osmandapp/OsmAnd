@@ -99,11 +99,11 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_pedestrian_dark)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
-	public static final ApplicationMode TRUCK = create(ApplicationMode.CAR, R.string.app_mode_truck, "truck")
+	public static final ApplicationMode TRUCK = create(CAR, R.string.app_mode_truck, "truck")
 			.icon(R.drawable.ic_action_truck_dark)
 			.description(R.string.app_mode_truck).reg();
 
-	public static final ApplicationMode MOTORCYCLE = create(ApplicationMode.CAR, R.string.app_mode_motorcycle, "motorcycle")
+	public static final ApplicationMode MOTORCYCLE = create(CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
 
@@ -627,7 +627,7 @@ public class ApplicationMode {
 	private static void saveCustomAppModesToSettings(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
+		Iterator<ApplicationMode> it = getCustomValues().iterator();
 		while (it.hasNext()) {
 			stringBuilder.append(it.next().getStringKey());
 			if (it.hasNext()) {
@@ -640,7 +640,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
-		ApplicationMode mode = ApplicationMode.valueOfStringKey(builder.applicationMode.stringKey, null);
+		ApplicationMode mode = valueOfStringKey(builder.applicationMode.stringKey, null);
 		if (mode != null) {
 			mode.setParentAppMode(builder.applicationMode.parentAppMode);
 			mode.setIconResName(builder.iconResName);
@@ -722,8 +722,8 @@ public class ApplicationMode {
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
-		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(ApplicationMode.values(app));
-		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
+		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
+		StringBuilder vls = new StringBuilder(DEFAULT.getStringKey() + ",");
 		if (allPossibleValues().contains(mode)) {
 			OsmandSettings settings = app.getSettings();
 			if (isSelected) {

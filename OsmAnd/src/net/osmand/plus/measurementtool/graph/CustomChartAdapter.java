@@ -124,7 +124,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 			View view = inflater.inflate(R.layout.route_details_legend, bottomInfoContainer, false);
 			int segmentColor = segment.getColor();
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segmentColor);
-			ImageView legendIcon = (ImageView) view.findViewById(R.id.legend_icon_color);
+			ImageView legendIcon = view.findViewById(R.id.legend_icon_color);
 			legendIcon.setImageDrawable(circle);
 			double contrastRatio = ColorUtils.calculateContrast(segmentColor,
 					AndroidUtils.getColorFromAttr(themedCtx, R.attr.card_and_list_background_basic));
@@ -135,7 +135,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 			String name = AndroidUtils.getRenderingStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
 			boolean selected = segment.getPropertyName().equals(propertyNameToFullSpan);
 			Spannable text = getSpanLegend(name, segment, selected);
-			TextView legend = (TextView) view.findViewById(R.id.legend_text);
+			TextView legend = view.findViewById(R.id.legend_text);
 			legend.setText(text);
 
 			bottomInfoContainer.addView(view);

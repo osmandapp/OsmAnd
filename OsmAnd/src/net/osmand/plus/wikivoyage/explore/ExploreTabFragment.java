@@ -77,7 +77,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		nightMode = !app.getSettings().isLightContent();
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
-		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		final RecyclerView rv = mainView.findViewById(R.id.recycler_view);
 
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);

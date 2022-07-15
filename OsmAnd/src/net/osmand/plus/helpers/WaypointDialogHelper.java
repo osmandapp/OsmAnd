@@ -470,7 +470,7 @@ public class WaypointDialogHelper {
 						public void onClick(View v) {
 							MapActivity mapActivity = getMapActivity();
 							if (mapActivity != null) {
-								WaypointDialogHelper.sortAllTargets(
+								sortAllTargets(
 										mapActivity.getMyApplication(),
 										mapActivity,
 										mapActivity.getDashboard().getWaypointDialogHelper()
@@ -510,7 +510,7 @@ public class WaypointDialogHelper {
 							public void onClick(View v) {
 								MapActivity mapActivity = getMapActivity();
 								if (mapActivity != null) {
-									WaypointDialogHelper.reverseAllPoints(
+									reverseAllPoints(
 											app,
 											mapActivity,
 											mapActivity.getDashboard().getWaypointDialogHelper()
@@ -549,7 +549,7 @@ public class WaypointDialogHelper {
 						public void onClick(View v) {
 							MapActivity mapActivity = getMapActivity();
 							if (mapActivity != null) {
-								WaypointDialogHelper.clearAllIntermediatePoints(
+								clearAllIntermediatePoints(
 										mapActivity,
 										mapActivity.getMyApplication().getTargetPointsHelper(),
 										mapActivity.getDashboard().getWaypointDialogHelper()

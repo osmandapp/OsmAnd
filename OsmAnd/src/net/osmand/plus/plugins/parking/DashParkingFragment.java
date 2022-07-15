@@ -42,7 +42,7 @@ public class DashParkingFragment extends DashLocationFragment {
 				}
 			};
 	static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(
-			DashParkingFragment.TAG, DashParkingFragment.class,
+			TAG, DashParkingFragment.class,
 			SHOULD_SHOW_FUNCTION, 50, null);
 
 	@Override

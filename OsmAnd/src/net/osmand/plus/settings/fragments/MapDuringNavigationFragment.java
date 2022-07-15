@@ -28,10 +28,10 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_never);
 		for (int i = 1; i < entryValues.length; i++) {
-			entries[i] = (int) entryValues[i] + " " + getString(R.string.int_seconds);
+			entries[i] = entryValues[i] + " " + getString(R.string.int_seconds);
 		}
 
-		ListPreferenceEx autoFollowRoute = (ListPreferenceEx) findPreference(settings.AUTO_FOLLOW_ROUTE.getId());
+		ListPreferenceEx autoFollowRoute = findPreference(settings.AUTO_FOLLOW_ROUTE.getId());
 		autoFollowRoute.setEntries(entries);
 		autoFollowRoute.setEntryValues(entryValues);
 	}
@@ -60,7 +60,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 			selectedIndex = 0;
 		}
 
-		ListPreferenceEx autoZoomMapPref = (ListPreferenceEx) findPreference(settings.AUTO_ZOOM_MAP.getId());
+		ListPreferenceEx autoZoomMapPref = findPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMapPref.setEntries(entries);
 		autoZoomMapPref.setEntryValues(entryValues);
 		autoZoomMapPref.setValue(selectedIndex);
@@ -68,7 +68,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	}
 
 	private void setupSnapToRoadPref() {
-		SwitchPreferenceEx snapToRoad = (SwitchPreferenceEx) findPreference(settings.SNAP_TO_ROAD.getId());
+		SwitchPreferenceEx snapToRoad = findPreference(settings.SNAP_TO_ROAD.getId());
 		snapToRoad.setTitle(getString(R.string.snap_to_road));
 		snapToRoad.setDescription(getString(R.string.snap_to_road_descr));
 	}
@@ -89,7 +89,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 				names[i] = valuesMph[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
 		}
-		ListPreferenceEx switchMapDirectionToCompass = (ListPreferenceEx) findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.getId());
+		ListPreferenceEx switchMapDirectionToCompass = findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.getId());
 		switchMapDirectionToCompass.setDescription(R.string.map_orientation_change_in_accordance_with_speed_descr);
 		switchMapDirectionToCompass.setEntries(names);
 		switchMapDirectionToCompass.setEntryValues(valuesKmh);

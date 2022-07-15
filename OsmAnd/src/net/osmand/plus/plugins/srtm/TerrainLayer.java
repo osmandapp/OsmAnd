@@ -190,8 +190,8 @@ public class TerrainLayer extends MapTileLayer {
 			
 			public boolean isLocked() {
 				return false;
-			};
-			
+			}
+
 			List<String> getTileSource(int x, int y, int zoom) {
 				ArrayList<String> ls = new ArrayList<>();
 				int z = (zoom - ZOOM_BOUNDARY);

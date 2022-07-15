@@ -81,7 +81,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
 		}
 
-		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
+		final EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
@@ -308,7 +308,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				openAddGroupMenu();
 			}
 		});
-		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
 		} else {

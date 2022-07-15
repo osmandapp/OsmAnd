@@ -123,10 +123,10 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		final View titleView = themedInflater.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
-		TextView textView = (TextView) titleView.findViewById(R.id.title);
+		TextView textView = titleView.findViewById(R.id.title);
 		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
-		Toolbar toolbar = (Toolbar) titleView.findViewById(R.id.toolbar);
+		Toolbar toolbar = titleView.findViewById(R.id.toolbar);
 		int icBackResId = AndroidUtils.getNavigationIconResId(app);
 		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -165,7 +165,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			populateImpassableRoadsObjects();
 
 			final View buttonView = themedInflater.inflate(R.layout.bottom_sheet_item_btn, null);
-			TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
+			TextView buttonDescription = buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
 			buttonDescription.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
 
@@ -226,11 +226,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				}
 			});
 
-			TextView titleTv = (TextView) view.findViewById(R.id.title);
+			TextView titleTv = view.findViewById(R.id.title);
 			titleTv.setText(name);
 			titleTv.setTextColor(activeColor);
 
-			ImageView icon = (ImageView) view.findViewById(R.id.icon);
+			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 
 			counter++;

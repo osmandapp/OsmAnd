@@ -56,9 +56,9 @@ public class NumberPickerDialogFragment extends DialogFragment {
 		if (subHeaderText != null) {
 			View titleView = LayoutInflater.from(getActivity())
 					.inflate(R.layout.number_picker_dialog_title, null);
-			TextView titleTextView = (TextView) titleView.findViewById(R.id.titleTextView);
+			TextView titleTextView = titleView.findViewById(R.id.titleTextView);
 			titleTextView.setText(headerText);
-			TextView subtitleTextView = (TextView) titleView.findViewById(R.id.subtitleTextView);
+			TextView subtitleTextView = titleView.findViewById(R.id.subtitleTextView);
 			subtitleTextView.setText(subHeaderText);
 			builder.setCustomTitle(titleView);
 		} else {

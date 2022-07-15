@@ -420,7 +420,7 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
 				if (allowableDeviation <= 0) {
-					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
+					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
 				// 2. Analyze if we need to recalculate route

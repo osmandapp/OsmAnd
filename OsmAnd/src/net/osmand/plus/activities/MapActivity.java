@@ -173,7 +173,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
-		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
+		IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDrawMapListener,
 		OsmAndAppCustomizationListener, LockUIAdapter, OnPreferenceStartFragmentCallback,
 		OnScrollEventListener, OsmandMapListener {

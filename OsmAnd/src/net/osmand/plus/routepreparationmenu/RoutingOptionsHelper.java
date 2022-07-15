@@ -375,7 +375,7 @@ public class RoutingOptionsHelper {
 					v = UiUtilities.getInflater(mapActivity, nightMode).inflate(layout, parent, false);
 				}
 				final ContextMenuItem item = adapter.getItem(position);
-				AppCompatCheckedTextView tv = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+				AppCompatCheckedTextView tv = v.findViewById(R.id.text1);
 				tv.setText(item.getTitle());
 				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

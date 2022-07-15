@@ -910,13 +910,8 @@ public class WaypointHelper {
 			}
 			LocationPointWrapper other = (LocationPointWrapper) obj;
 			if (point == null) {
-				if (other.point != null) {
-					return false;
-				}
-			} else if (!point.equals(other.point)) {
-				return false;
-			}
-			return true;
+				return other.point == null;
+			} else return point.equals(other.point);
 		}
 
 	}

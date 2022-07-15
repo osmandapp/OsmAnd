@@ -46,8 +46,8 @@ public class HeaderTravelCard extends BaseTravelCard {
 
 		public HeaderTravelVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
 		}
 	}
 

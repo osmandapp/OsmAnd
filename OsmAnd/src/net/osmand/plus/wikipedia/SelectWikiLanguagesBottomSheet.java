@@ -310,6 +310,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 									boolean usedOnMap) {
 		SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
 		fragment.setUsedOnMap(usedOnMap);
-		fragment.show(mapActivity.getSupportFragmentManager(), SelectWikiLanguagesBottomSheet.TAG);
+		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 	}
 }

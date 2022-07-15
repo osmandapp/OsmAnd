@@ -85,13 +85,13 @@ public final class ScrollUtils {
      * @return mixed color value in ARGB. Alpha is fixed value (255).
      */
     public static int mixColors(int fromColor, int toColor, float toAlpha) {
-        float[] fromCmyk = ScrollUtils.cmykFromRgb(fromColor);
-        float[] toCmyk = ScrollUtils.cmykFromRgb(toColor);
+        float[] fromCmyk = cmykFromRgb(fromColor);
+        float[] toCmyk = cmykFromRgb(toColor);
         float[] result = new float[4];
         for (int i = 0; i < 4; i++) {
             result[i] = Math.min(1, fromCmyk[i] * (1 - toAlpha) + toCmyk[i] * toAlpha);
         }
-        return 0xff000000 + (0x00ffffff & ScrollUtils.rgbFromCmyk(result));
+        return 0xff000000 + (0x00ffffff & rgbFromCmyk(result));
     }
 
     /**

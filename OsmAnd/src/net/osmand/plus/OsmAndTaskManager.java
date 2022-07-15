@@ -59,11 +59,11 @@ public class OsmAndTaskManager {
 	
 	public interface OsmAndTask<Params, Progress, Result> {
 		
-		public boolean isCancelled();
+		boolean isCancelled();
 		
-		public boolean cancel(boolean mayInterruptDuringRun);
+		boolean cancel(boolean mayInterruptDuringRun);
 		
-		public void executeWithParams(Params... params);
+		void executeWithParams(Params... params);
 		
 	}
 	

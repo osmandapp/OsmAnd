@@ -51,10 +51,10 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 		public StartEditingTravelVH(final View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
-			button = (TextView) itemView.findViewById(R.id.bottom_button_text);
-			backgroundImage = (ImageView) itemView.findViewById(R.id.background_image);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
+			button = itemView.findViewById(R.id.bottom_button_text);
+			backgroundImage = itemView.findViewById(R.id.background_image);
 		}
 	}
 

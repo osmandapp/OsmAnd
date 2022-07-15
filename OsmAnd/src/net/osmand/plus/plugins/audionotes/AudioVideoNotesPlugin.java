@@ -389,9 +389,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				Class exClass = Class.forName("android.media.ExifInterface");
 
-				Constructor c = exClass.getConstructor(new Class[] {String.class});
+				Constructor c = exClass.getConstructor(String.class);
 				Object exInstance = c.newInstance(file.getAbsolutePath());
-				Method setAttribute = exClass.getMethod("setAttribute", new Class[] {String.class, String.class});
+				Method setAttribute = exClass.getMethod("setAttribute", String.class, String.class);
 				setAttribute.invoke(exInstance, "GPSLatitude", convertDegToExifRational(lat));
 				setAttribute.invoke(exInstance, "GPSLatitudeRef", lat > 0 ? "N" : "S");
 				setAttribute.invoke(exInstance, "GPSLongitude", convertDegToExifRational(lon));
@@ -414,7 +414,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					setAttribute.invoke(exInstance, "GPSAltitude", altString);
 					setAttribute.invoke(exInstance, "GPSAltitudeRef", alt < 0 ? "1" : "0");
 				}
-				Method saveAttributes = exClass.getMethod("saveAttributes", new Class[] {});
+				Method saveAttributes = exClass.getMethod("saveAttributes");
 				saveAttributes.invoke(exInstance);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
@@ -426,9 +426,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			int orientation = 0;
 			try {
 				Class exClass = Class.forName("android.media.ExifInterface");
-				Constructor c = exClass.getConstructor(new Class[] {String.class});
+				Constructor c = exClass.getConstructor(String.class);
 				Object exInstance = c.newInstance(file.getAbsolutePath());
-				Method getAttributeInt = exClass.getMethod("getAttributeInt", new Class[] {String.class, Integer.TYPE});
+				Method getAttributeInt = exClass.getMethod("getAttributeInt", String.class, Integer.TYPE);
 				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", 1);
 				orientation = it;
 			} catch (Exception e) {

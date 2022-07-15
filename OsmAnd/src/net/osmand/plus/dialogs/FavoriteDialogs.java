@@ -109,11 +109,11 @@ public class FavoriteDialogs {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final FavouritePoint point = new FavouritePoint(lat, lon, name, app.getSettings().LAST_FAV_CATEGORY_ENTERED.get());
 		args.putSerializable(KEY_FAVORITE, point);
-		final EditText editText = (EditText) dialog.findViewById(R.id.Name);
+		final EditText editText = dialog.findViewById(R.id.Name);
 		editText.setText(point.getName());
 		editText.selectAll();
 		editText.requestFocus();
-		final AutoCompleteTextView cat = (AutoCompleteTextView) dialog.findViewById(R.id.Category);
+		final AutoCompleteTextView cat = dialog.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
 		AndroidUtils.softKeyboardDelayed(activity, editText);
 	}
@@ -127,9 +127,9 @@ public class FavoriteDialogs {
 		final View v = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_edit_dialog, null, false);
 		final FavouritesHelper helper = app.getFavoritesHelper();
 		builder.setView(v);
-		final EditText editText = (EditText) v.findViewById(R.id.Name);
-		final EditText description = (EditText) v.findViewById(R.id.description);
-		final AutoCompleteTextView cat = (AutoCompleteTextView) v.findViewById(R.id.Category);
+		final EditText editText = v.findViewById(R.id.Name);
+		final EditText description = v.findViewById(R.id.description);
+		final AutoCompleteTextView cat = v.findViewById(R.id.Category);
 		List<FavoriteGroup> gs = helper.getFavoriteGroups();
 		final String[] list = new String[gs.size()];
 		for (int i = 0; i < list.length; i++) {
@@ -137,7 +137,7 @@ public class FavoriteDialogs {
 		}
 		cat.setAdapter(new ArrayAdapter<>(activity, R.layout.list_textview, list));
 		if (app.accessibilityEnabled()) {
-			final TextView textButton = (TextView) v.findViewById(R.id.TextButton);
+			final TextView textButton = v.findViewById(R.id.TextButton);
 			textButton.setClickable(true);
 			textButton.setFocusable(true);
 			textButton.setOnClickListener(view -> {

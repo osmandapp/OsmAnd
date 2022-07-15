@@ -29,7 +29,7 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.MARKERS;
+		return MARKERS;
 	}
 
 	public static ItineraryType findTypeForName(String typeName) {
@@ -38,6 +38,6 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.MARKERS;
+		return MARKERS;
 	}
 }
