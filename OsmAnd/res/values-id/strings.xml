@@ -4064,4 +4064,31 @@
     <string name="settings_preset_descr">Tampilan peta dan pengaturan navigasi diingat per profil penggunaan. Tetapkan profil bawaan Anda di sini.</string>
     <string name="auto_follow_location_enabled">Tampilan peta tengah otomatis sedang digunakan.</string>
     <string name="animate_routing_route_not_calculated">Harap hitung rute terlebih dahulu</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Tampilkan jalur MTB IMBA</string>
+    <string name="auto_25_chars_route_tu_kr">Putar balik dan tetap ke kanan</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Tampilkan jalur yang dirancang khusus untuk bersepeda gunung</string>
+    <string name="auto_25_chars_route_tl_kl">Belok kiri dan tetap kiri</string>
+    <string name="auto_25_chars_route_tl_kr">Belok kiri dan tetap kanan</string>
+    <string name="auto_25_chars_route_tr_kl">Belok kanan dan tetap kiri</string>
+    <string name="auto_25_chars_route_tr_kr">Belok kanan dan tetap kanan</string>
+    <string name="auto_25_chars_route_tu_kl">Putar balikkan U dan tetap di kiri</string>
+    <string name="attach_roads_warning">Anda dapat melampirkan ke jalan hanya trek yang direkam</string>
+    <string name="auto_25_chars_route_roundabout_kl">Ambil jalan keluar %1$d dan tetap kiri</string>
+    <string name="auto_25_chars_route_roundabout_kr">Ambil jalan keluar %1$d dan tetap kanan</string>
+    <string name="av_notes_photo_widget_desc">Mengetuk widget memungkinkan untuk mengambil foto.</string>
+    <string name="av_notes_video_widget_desc">Mengetuk widget memungkinkan untuk memulai perekaman video.</string>
+    <string name="av_notes_audio_widget_desc">Mengetuk widget memungkinkan untuk membuat catatan audio.</string>
+    <string name="trip_recording_duration_widget_desc">Menunjukkan waktu perekaman trek, durasi dalam menit/jam dari perjalanan yang sedang direkam.</string>
+    <string name="download_tiles">Unduh ubin</string>
+    <string name="connect_with_straight_line">Hubungkan dengan garis lurus</string>
+    <string name="attach_roads_descr">Apakah Anda ingin memperkirakan trek Anda dengan rute yang valid yang terpasang pada peta luring\? Dalam hal ini Anda akan memiliki ketinggian jalan yang dibenarkan, informasi jalan dan belokan yang bisa digunakan nanti dalam navigasi.</string>
+    <string name="auto_backup_title">Pencadangan otomatis</string>
+    <string name="without_profiles_changing">Tanpa perubahan profil</string>
+    <string name="shared_string_only_missing">Hanya hilang</string>
+    <string name="auto_backup_preference_desc">Secara bawaan Android menyimpan cadangan favorit, token peta dan pengaturan OsmAnd untuk memulihkannya pada perangkat baru atau setelah instalasi ulang. Cadangan ini dibatasi hingga 25 MB.
+\nJika Anda menggunakan OsmAnd Cloud, hal ini dapat menyebabkan kesalahpahaman setelah penginstalan ulang.</string>
+    <string name="duplacate_widget_added_snackbar">Widget duplikat ditambahkan berikutnya dalam daftar.</string>
+    <string name="shared_string_duplicate">Duplikat</string>
+    <string name="trip_recording_downhill_widget_desc">Menunjukkan jumlah semua turunan dari perjalanan yang direkam saat ini.</string>
+    <string name="trip_recording_uphill_widget_desc">Menunjukkan jumlah semua pendakian dari perjalanan yang sedang direkam.</string>
 </resources>
