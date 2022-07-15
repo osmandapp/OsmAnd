@@ -1,6 +1,5 @@
 package net.osmand.util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -67,7 +66,7 @@ public class GeoPointParserUtil {
 				if (keyValue.length == 1)
 					map.put(keyValue[0], "");
 				else if (keyValue.length > 1)
-					map.put(keyValue[0], decode(keyValue[1]));
+					map.put(keyValue[0], URLDecoder.decode(keyValue[1]));
 			}
 		}
 		return map;
@@ -501,7 +500,7 @@ public class GeoPointParserUtil {
 			final Pattern namePattern = Pattern.compile("[\\+\\s]*\\((.*)\\)[\\+\\s]*$");
 			final Matcher nameMatcher = namePattern.matcher(schemeSpecific);
 			if (nameMatcher.find()) {
-				name = decode(nameMatcher.group(1));
+				name = URLDecoder.decode(nameMatcher.group(1));
 				if (name != null) {
 					schemeSpecific = schemeSpecific.substring(0, nameMatcher.start());
 				}
@@ -546,7 +545,7 @@ public class GeoPointParserUtil {
 				if ("z".equals(paramName) && paramValue != null) {
 					zoom = (int) Float.parseFloat(paramValue);
 				} else if ("q".equals(paramName) && paramValue != null) {
-					searchRequest = decode(paramValue);
+					searchRequest = URLDecoder.decode(paramValue);
 				}
 			}
 
@@ -635,7 +634,7 @@ public class GeoPointParserUtil {
 				return new GeoParsedPoint(lat, lon, zoom);
 			}
 		}
-		return new GeoParsedPoint(decode(opath));
+		return new GeoParsedPoint(URLDecoder.decode(opath));
 	}
 
 	private static String[] silentSplit(String vl, String split) {
@@ -677,26 +676,6 @@ public class GeoPointParserUtil {
 		} catch (NumberFormatException e) {
 		}
 		return 0;
-	}
-
-	private static String encode(String text) {
-		String res = null;
-		try {
-			res = StringUtils.encode(text);
-		} catch (UnsupportedEncodingException e) {
-			// ignored
-		}
-		return res;
-	}
-
-	private static String decode(String text) {
-		String res = null;
-		try {
-			res = StringUtils.decode(text);
-		} catch (UnsupportedEncodingException e) {
-			// ignored
-		}
-		return res;
 	}
 
 	public static class GeoParsedPoint {
@@ -823,10 +802,10 @@ public class GeoPointParserUtil {
 				if (zoom != NO_ZOOM)
 					map.put("z", String.valueOf(zoom));
 				if (query != null)
-					map.put("q", encode(query));
+					map.put("q", URLEncoder.encode(query));
 				if (label != null)
 					if (query == null)
-						map.put("q", latlon + "(" + encode(label) + ")");
+						map.put("q", latlon + "(" + URLEncoder.encode(label) + ")");
 				if (map.size() > 0)
 					uriString += "?";
 				int i = 0;
@@ -844,7 +823,7 @@ public class GeoPointParserUtil {
 					uriString += "?";
 					if (zoom != NO_ZOOM)
 						uriString += "z=" + zoom + "&";
-					uriString += "q=" + encode(query);
+					uriString += "q=" + URLEncoder.encode(query);
 				}
 				return uriString;
 			}

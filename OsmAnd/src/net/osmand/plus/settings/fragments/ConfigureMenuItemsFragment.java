@@ -223,8 +223,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		ImageButton toolbarButton = toolbar.findViewById(R.id.close_button);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(ctx, nightMode));
-		toolbarTitle.setTextColor(getColor(
-				nightMode ? R.color.text_color_primary_dark : R.color.list_background_color_dark));
+		toolbarTitle.setTextColor(getColor(nightMode ? R.color.text_color_primary_dark : R.color.list_background_color_dark));
 		toolbarButton.setImageDrawable(getPaintedContentIcon(
 				AndroidUtils.getNavigationIconResId(app),
 				getColor(R.color.text_color_secondary_light)));

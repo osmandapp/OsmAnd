@@ -147,8 +147,8 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			R.string.north_west,
 			R.string.north_north_west};
 
-	private final long HAPTIC_INCLINATION_LEFT[] = { 0, 60 };
-	private final long HAPTIC_INCLINATION_RIGHT[] = { 0, 20, 80, 20 };
+	private final long[] HAPTIC_INCLINATION_LEFT = { 0, 60 };
+	private final long[] HAPTIC_INCLINATION_RIGHT = { 0, 20, 80, 20 };
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;

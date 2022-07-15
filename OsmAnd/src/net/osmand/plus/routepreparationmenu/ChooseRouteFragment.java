@@ -1,5 +1,13 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -21,6 +29,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -70,27 +91,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
@@ -449,7 +449,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
-		OsmandApplication app = getMyApplication();
+		OsmandApplication app = requireMyApplication();
 		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
 		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = v -> {
@@ -474,8 +474,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		OnClickListener saveOnClick = v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				OsmandApplication app1 = mapActivity.getMyApplication();
-				GPXRouteParamsBuilder paramsBuilder = app1.getRoutingHelper().getCurrentGPXRoute();
+				GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 
 				String fileName = null;
 				if (paramsBuilder != null && paramsBuilder.getFile() != null) {
@@ -488,7 +487,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				}
 				if (Algorithms.isEmpty(fileName)) {
 					String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-					fileName = FileUtils.createUniqueFileName(app1, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
+					fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
 				}
 				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						ChooseRouteFragment.this, null, fileName, null, false, true);
@@ -506,12 +505,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		OnClickListener shareOnClick = v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				OsmandApplication app12 = (OsmandApplication) activity.getApplication();
-				RoutingHelper routingHelper = app12.getRoutingHelper();
+				RoutingHelper routingHelper = app.getRoutingHelper();
 				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
 				final GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-				final Uri fileUri = AndroidUtils.getUriForFile(app12, new File(gpx.path));
-				File dir = new File(app12.getCacheDir(), "share");
+				final Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
+				File dir = new File(app.getCacheDir(), "share");
 				if (!dir.exists()) {
 					dir.mkdir();
 				}
@@ -526,7 +524,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 							routingHelper.getGeneralRouteInformation()).toString()));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app12, dst));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
 					sendIntent.setType("text/plain");
 					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					AndroidUtils.startActivityIfSafe(activity, sendIntent);
@@ -556,7 +554,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
 			if (file != null && file.exists()) {
 				Uri uri = AndroidUtils.getUriForFile(app, file);
-				// Use Android Print Framework
 				Intent intent = new Intent(getActivity(), PrintDialogActivity.class)
 						.setDataAndType(uri, "text/html")
 						.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

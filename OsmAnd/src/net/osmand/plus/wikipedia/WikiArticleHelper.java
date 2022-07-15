@@ -29,7 +29,6 @@ import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 import net.osmand.util.Algorithms;
-import net.osmand.util.StringUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -264,7 +263,7 @@ public class WikiArticleHelper {
 					.replaceAll("_", " ");
 		}
 		try {
-			articleName = StringUtils.decode(articleName);
+			articleName = URLDecoder.decode(articleName, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			Log.w(TAG, e.getMessage(), e);
 		}
@@ -355,7 +354,7 @@ public class WikiArticleHelper {
 	public static String buildTravelUrl(String url, String lang) {
 		String title = url.replace(" ", "_");
 		try {
-			title = StringUtils.encode(title);
+			title = URLEncoder.encode(title, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println(e.getMessage());
 		}
@@ -367,7 +366,7 @@ public class WikiArticleHelper {
 		try {
 			if (!Algorithms.isEmpty(url)) {
 				title = url.replace("_", " ");
-				title = StringUtils.decode(title);
+				title = URLDecoder.decode(title, "UTF-8");
 			}
 		} catch (UnsupportedEncodingException e) {
 			System.err.println(e.getMessage());

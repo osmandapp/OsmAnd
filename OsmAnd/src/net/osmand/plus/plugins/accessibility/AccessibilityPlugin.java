@@ -4,7 +4,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ACCESSIBILI
 
 import android.app.Activity;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.SoundPool;
 
 import androidx.annotation.NonNull;

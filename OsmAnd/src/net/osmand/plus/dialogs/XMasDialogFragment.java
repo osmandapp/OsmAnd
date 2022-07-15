@@ -14,7 +14,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.util.DateUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,8 +30,8 @@ public class XMasDialogFragment extends DialogFragment {
 		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
 		if (numberOfStarts > 2) {
 			Date now = new Date();
-			Date start = DateUtils.createDateInCurrentYear(Calendar.DECEMBER, 5, 0, 0);
-			Date end = DateUtils.createDateInCurrentYear(Calendar.DECEMBER, 25, 23, 59);
+			Date start = createDateInCurrentYear(Calendar.DECEMBER, 5, 0, 0);
+			Date end = createDateInCurrentYear(Calendar.DECEMBER, 25, 23, 59);
 			int firstShownX = app.getSettings().NUMBER_OF_STARTS_FIRST_XMAS_SHOWN.get();
 			if (now.after(start) && now.before(end)) {
 				if (firstShownX == 0 || numberOfStarts - firstShownX == 3 || numberOfStarts - firstShownX == 10) {
@@ -52,6 +51,15 @@ public class XMasDialogFragment extends DialogFragment {
 			return false;
 		}
 		return true;
+	}
+
+	private static Date createDateInCurrentYear(int month, int date, int hour, int minute) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DATE, date);
+		calendar.set(Calendar.HOUR, hour);
+		calendar.set(Calendar.MINUTE, minute);
+		return calendar.getTime();
 	}
 
 	@NonNull

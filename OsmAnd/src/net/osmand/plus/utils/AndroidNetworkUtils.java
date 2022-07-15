@@ -17,7 +17,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
-import net.osmand.util.StringUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -275,7 +274,7 @@ public class AndroidNetworkUtils {
 				boolean firstPrm = !url.contains("?");
 				StringBuilder sb = new StringBuilder(url);
 				for (Entry<String, String> entry : params.entrySet()) {
-					sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(StringUtils.encode(entry.getValue()));
+					sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 					firstPrm = false;
 				}
 				String res = downloadFile(sb.toString(), file, true, progress);
@@ -340,7 +339,7 @@ public class AndroidNetworkUtils {
 						boolean firstPrm = !url.contains("?");
 						StringBuilder sb = new StringBuilder(url);
 						for (Entry<String, String> entry : params.entrySet()) {
-							sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(StringUtils.encode(entry.getValue()));
+							sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 							firstPrm = false;
 						}
 						String res = downloadFile(sb.toString(), file, true, progress);
@@ -415,7 +414,7 @@ public class AndroidNetworkUtils {
 					if (sb.length() > 0) {
 						sb.append("&");
 					}
-					sb.append(entry.getKey()).append("=").append(StringUtils.encode(entry.getValue()));
+					sb.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				}
 				params = sb.toString();
 			}
@@ -623,7 +622,7 @@ public class AndroidNetworkUtils {
 			boolean firstPrm = !urlText.contains("?");
 			StringBuilder sb = new StringBuilder(urlText);
 			for (Entry<String, String> entry : additionalParams.entrySet()) {
-				sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(StringUtils.encode(entry.getValue()));
+				sb.append(firstPrm ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstPrm = false;
 			}
 			urlText = sb.toString();

@@ -16,7 +16,6 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.util.Algorithms;
-import net.osmand.util.StringUtils;
 
 import org.apache.commons.logging.Log;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -81,7 +80,7 @@ public class OpenDBAPI {
 		String url;
 		try {
 			url = baseUrl + checkLoginEndpoint + "purpose=" + PURPOSE + "&name=" + username +
-					"&privateKey=" + StringUtils.encode(privateKey);
+					"&privateKey=" + URLEncoder.encode(privateKey, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			return false;
 		}

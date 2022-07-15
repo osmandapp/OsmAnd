@@ -22,7 +22,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
-import net.osmand.util.StringUtils;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -163,13 +162,13 @@ public class TravelArticle {
 	public static String getImageUrl(@NonNull String imageTitle, boolean thumbnail) {
 		imageTitle = imageTitle.replace(" ", "_");
 		try {
-			imageTitle = StringUtils.decode(imageTitle);
+			imageTitle = URLDecoder.decode(imageTitle, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println(e.getMessage());
 		}
 		String[] hash = getHash(imageTitle);
 		try {
-			imageTitle = StringUtils.encode(imageTitle);
+			imageTitle = URLEncoder.encode(imageTitle, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println(e.getMessage());
 		}

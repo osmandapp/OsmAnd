@@ -7,7 +7,6 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.util.Algorithms;
-import net.osmand.util.StringUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -304,7 +303,7 @@ public class IncrementalChangesManager {
 
 	private List<IncrementalUpdate> getIncrementalUpdates(String file, long timestamp) throws IOException,
 			XmlPullParserException {
-		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + StringUtils.encode(file);
+		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + URLEncoder.encode(file);
 
 		HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 		conn.setUseCaches(false);

@@ -10,7 +10,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.StringUtils;
 import net.osmand.util.TransliterationHelper;
 
 import org.apache.commons.logging.Log;
@@ -103,10 +102,10 @@ public class NominatimPoiFilter extends PoiUIFilter {
 			String urlq ;
 			if(addressQuery) {
 				urlq = NOMINATIM_API + "?format=xml&addressdetails=0&accept-language="+ Locale.getDefault().getLanguage() 
-						+ "&q=" + StringUtils.encode(getFilterByName());
+						+ "&q=" + URLEncoder.encode(getFilterByName());	
 			} else {
 				urlq = NOMINATIM_API + "?format=xml&addressdetails=1&limit=" + LIMIT
-						+ "&bounded=1&" + viewbox + "&q=" + StringUtils.encode(getFilterByName());
+						+ "&bounded=1&" + viewbox + "&q=" + URLEncoder.encode(getFilterByName());
 			}
 			log.info(urlq);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$

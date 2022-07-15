@@ -745,7 +745,7 @@ public class DynamicListView extends ObservableListView {
 			for (int i = 0; i < viewGroup.getChildCount(); i++) {
 				View c = viewGroup.getChildAt(i);
 
-				int loc[] = new int[2];
+				int[] loc = new int[2];
 				c.getLocationOnScreen(loc);
 
 				if ((x >= loc[0] && (x <= (loc[0] + c.getWidth()))) && (y >= loc[1] && (y <= (loc[1] + c.getHeight())))) {

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.util.StringUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -119,7 +118,7 @@ public class Version {
 
 	public static String getVersionAsURLParam(OsmandApplication ctx) {
 		try {
-			return "osmandver=" + StringUtils.encode(getVersionForTracker(ctx));
+			return "osmandver=" + URLEncoder.encode(getVersionForTracker(ctx), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalStateException(e);
 		}

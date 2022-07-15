@@ -13,11 +13,6 @@ import net.osmand.plus.R;
 public class ColorUtilities {
 
 	@ColorInt
-	public static int getColor(@NonNull Context ctx, @ColorRes int colorId) {
-		return ContextCompat.getColor(ctx, colorId);
-	}
-
-	@ColorInt
 	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {
 		// Counting the perceptive luminance - human eye favors green color...
 		double luminance = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
@@ -64,26 +59,31 @@ public class ColorUtilities {
 	@ColorInt
 	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount) {
 		final byte ALPHA_CHANNEL = 24;
-		final byte RED_CHANNEL   = 16;
-		final byte GREEN_CHANNEL =  8;
-		final byte BLUE_CHANNEL  =  0;
+		final byte RED_CHANNEL = 16;
+		final byte GREEN_CHANNEL = 8;
+		final byte BLUE_CHANNEL = 0;
 
 		final float inverseAmount = 1.0f - amount;
 
-		int a = ((int)(((float)(color1 >> ALPHA_CHANNEL & 0xff )*amount) +
-				((float)(color2 >> ALPHA_CHANNEL & 0xff )*inverseAmount))) & 0xff;
-		int r = ((int)(((float)(color1 >> RED_CHANNEL & 0xff )*amount) +
-				((float)(color2 >> RED_CHANNEL & 0xff )*inverseAmount))) & 0xff;
-		int g = ((int)(((float)(color1 >> GREEN_CHANNEL & 0xff )*amount) +
-				((float)(color2 >> GREEN_CHANNEL & 0xff )*inverseAmount))) & 0xff;
-		int b = ((int)(((float)(color1 & 0xff )*amount) +
-				((float)(color2 & 0xff )*inverseAmount))) & 0xff;
+		int a = ((int) (((float) (color1 >> ALPHA_CHANNEL & 0xff) * amount) +
+				((float) (color2 >> ALPHA_CHANNEL & 0xff) * inverseAmount))) & 0xff;
+		int r = ((int) (((float) (color1 >> RED_CHANNEL & 0xff) * amount) +
+				((float) (color2 >> RED_CHANNEL & 0xff) * inverseAmount))) & 0xff;
+		int g = ((int) (((float) (color1 >> GREEN_CHANNEL & 0xff) * amount) +
+				((float) (color2 >> GREEN_CHANNEL & 0xff) * inverseAmount))) & 0xff;
+		int b = ((int) (((float) (color1 & 0xff) * amount) +
+				((float) (color2 & 0xff) * inverseAmount))) & 0xff;
 
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
 
 	/********************************* Basic colors *********************************/
+
+	@ColorInt
+	public static int getColor(@NonNull Context ctx, @ColorRes int colorId) {
+		return ContextCompat.getColor(ctx, colorId);
+	}
 
 	@ColorInt
 	public static int getActiveColor(@NonNull Context ctx, boolean nightMode) {

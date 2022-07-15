@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
-import net.osmand.util.StringUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -292,7 +291,7 @@ public class DownloadActivityType {
 
 	protected String encode(String fileName) {
 		try {
-			return StringUtils.encode(fileName);
+			return URLEncoder.encode(fileName, "UTF-8");
 		} catch (IOException e) {
 			return fileName;
 		}

@@ -38,7 +38,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             int nsize = rs.points.size();
             if (nsize > 0) {
-                boolean survivor[] = new boolean[nsize];
+                boolean[] survivor = new boolean[nsize];
                 cullRamerDouglasPeucer(survivor, 0, nsize - 1);
                 if (!isCancelled()) {
                     culled = new ArrayList<>();
@@ -53,7 +53,7 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
             return null;
         }
 
-        private void cullRamerDouglasPeucer(boolean survivor[], int start, int end) {
+        private void cullRamerDouglasPeucer(boolean[] survivor, int start, int end) {
 
             double dmax = Double.NEGATIVE_INFINITY;
             int index = -1;
