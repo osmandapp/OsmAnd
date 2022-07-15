@@ -9,8 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,14 +33,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -59,7 +54,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -79,6 +73,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	private AudioVideoNotesPlugin plugin;
 	private NotesAdapter listAdapter;
 	private final Set<Recording> selected = new HashSet<>();
+
+	private ShareRecordingsTask shareRecordingsTask;
 
 	private View footerView;
 	private View emptyView;
@@ -446,59 +442,15 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 				.show();
 	}
 
-	private void shareItems(Set<Recording> selected) {
+	private void shareItems(@NonNull Set<Recording> selected) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			ArrayList<Uri> uris = new ArrayList<>();
-			for (Recording rec : selected) {
-				File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
-				if (file != null) {
-					uris.add(AndroidUtils.getUriForFile(activity, file));
-				}
+			if (shareRecordingsTask != null && shareRecordingsTask.getStatus() == AsyncTask.Status.RUNNING) {
+				shareRecordingsTask.cancel(false);
 			}
-
-			Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-			intent.setType("*/*");
-			intent.putExtra(Intent.EXTRA_STREAM, uris);
-			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			if (Build.VERSION.SDK_INT > 18) {
-				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-			}
-			Intent chooserIntent = Intent.createChooser(intent, getString(R.string.share_note));
-			AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
+			shareRecordingsTask = new ShareRecordingsTask(activity, plugin, selected);
+			shareRecordingsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-	}
-
-	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
-		if (selected.size() == 1 && selected.contains(SHARE_LOCATION_FILE)) {
-			return new HashSet<>(plugin.getAllRecordings());
-		}
-		return selected;
-	}
-
-	private File generateGPXForRecordings(Set<Recording> selected) {
-		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
-		tmpFile.getParentFile().mkdirs();
-		GPXFile file = new GPXFile(Version.getFullVersion(getMyApplication()));
-		for (Recording r : getRecordingsForGpx(selected)) {
-			if (r != SHARE_LOCATION_FILE) {
-				String desc = r.getDescriptionName(r.getFileName());
-				if (desc == null) {
-					desc = r.getFileName();
-				}
-				WptPt wpt = new WptPt();
-				wpt.lat = r.getLatitude();
-				wpt.lon = r.getLongitude();
-				wpt.name = desc;
-				wpt.link = r.getFileName();
-				wpt.time = r.getFile().lastModified();
-				wpt.category = r.getSearchHistoryType();
-				wpt.desc = r.getTypeWithDuration(getContext());
-				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
-			}
-		}
-		GPXUtilities.writeGpxFile(tmpFile, file);
-		return tmpFile;
 	}
 
 	private ItemMenuFragmentListener createItemMenuFragmentListener() {
