@@ -8,20 +8,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,7 +27,6 @@ import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -46,6 +35,13 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
@@ -277,40 +273,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
 			((SaveAsNewTrackFragmentListener) targetFragment)
 					.onSaveAsNewTrack(folderName, destFileName, showOnMap, simplifiedTrack);
-		} else {
-			renameFile();
 		}
 		dismiss();
-	}
-
-	private void renameFile() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			File source = getFile(app, sourceFolderName, sourceFileName);
-			File dest = getFile(app, folderName, destFileName);
-			if (!source.equals(dest)) {
-				if (dest.exists()) {
-					Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
-				} else {
-					if (source.renameTo(dest)) {
-						app.getGpxDbHelper().rename(source, dest);
-					} else {
-						Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
-					}
-				}
-			}
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(dest);
-			if (gpxFile.error != null) {
-				return;
-			}
-			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
-			if (showOnMap) {
-				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
-			} else {
-				params.hideFromMap();
-			}
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
-		}
 	}
 
 	private File getFile(OsmandApplication app, String folderName, String fileName) {

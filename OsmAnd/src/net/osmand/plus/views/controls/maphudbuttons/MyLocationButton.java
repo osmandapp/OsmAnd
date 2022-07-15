@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MultiTouchSupport;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
@@ -19,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 public class MyLocationButton extends MapButton {
 
 	private final OsmandMapTileView mapView;
+	private final AnimateDraggingMapThread animateDraggingMapThread;
 	private final boolean contextMenuAllowed;
 
 	private final OnClickListener backToLocationListener = v -> moveBackToLocation(false);
@@ -30,14 +32,13 @@ public class MyLocationButton extends MapButton {
 		super(mapActivity, view, id);
 		this.contextMenuAllowed = contextMenuAllowed;
 		this.mapView = mapActivity.getMapView();
+		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			mapView.setElevationAngle(mapView.getMinAllowedElevationAngle());
-			mapView.setLatLon(mapView.getLatitude(), mapView.getLongitude());
+			animateDraggingMapThread.animateElevationAngleChange(mapView.getMinAllowedElevationAngle());
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
-			mapView.setElevationAngle(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
-			mapView.setLatLon(mapView.getLatitude(), mapView.getLongitude());
+			animateDraggingMapThread.animateElevationAngleChange(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 			mapView.refreshMap();
 		};
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);

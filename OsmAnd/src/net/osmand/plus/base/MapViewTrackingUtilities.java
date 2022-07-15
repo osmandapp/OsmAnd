@@ -421,9 +421,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
 		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get())
-				? zoom
-				: mapView.getZoom();
+		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom	: mapView.getZoom();
 		movingToMyLocation = true;
 		Runnable startAnimationCallback = () -> {
 			if (!isMapLinkedToLocation) {
@@ -431,7 +429,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		};
 		thread.startMoving(location.getLatitude(), location.getLongitude(),
-				fZoom, false, startAnimationCallback, () -> movingToMyLocation = false);
+				fZoom, false, true, startAnimationCallback, () -> movingToMyLocation = false);
 	}
 
 	private void backToLocationWithDelay(int delay) {

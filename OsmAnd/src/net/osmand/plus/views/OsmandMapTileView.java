@@ -543,7 +543,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setLatLon(double latitude, double longitude, boolean useShiftedCenter, boolean notify) {
-		animatedDraggingThread.stopAnimating();
+		if (!animatedDraggingThread.isAnimatingMapTilt()) {
+			animatedDraggingThread.stopAnimating();
+		}
 		setLatLonImpl(latitude, longitude, useShiftedCenter);
 		refreshMap();
 		if (notify) {
