@@ -49,7 +49,7 @@ public class RoutePlannerFrontEnd {
 	
 	public static class GpxRouteApproximation {
 		// ! MAIN parameter to approximate (35m good for custom recorded tracks) 
-		public double MINIMUM_POINT_APPROXIMATION = 50; // 35 m good for small deviations
+		public double MINIMUM_POINT_APPROXIMATION = 200; // 35 m good for small deviations
 		// This parameter could speed up or slow down evaluation (better to make bigger for long routes and smaller for short)
 		public double MAXIMUM_STEP_APPROXIMATION = 3000;
 		// don't search subsegments shorter than specified distance (also used to step back for car turns)

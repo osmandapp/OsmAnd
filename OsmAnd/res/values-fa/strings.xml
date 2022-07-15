@@ -3977,7 +3977,6 @@
     <string name="activity_type_car_name">خودرو</string>
     <string name="temporary_conditional_routing_descr">محدودیت‌های جاده که اکنون روی نقشه فعال هستند را لحاظ کن</string>
     <string name="routing_attr_driving_style_description">هدف رانندگی را انتخاب نمایید تا مسیری کوتاه‌تر، سریع‌تر یا ایمن‌تر دریافت کنید</string>
-    <string name="map_orientation_threshold_descr">اگر سرعت پایین‌تر از مقدار زیر بود، نمای نقشه را نچرخان</string>
     <string name="shared_strings_all_regions">همهٔ مناطق</string>
     <string name="delete_number_files_question">%1$d پرونده را حذف می‌کنید؟</string>
     <string name="track_recording_stop_without_saving">توقف بدون ذخیره‌سازی</string>

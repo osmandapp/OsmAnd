@@ -630,7 +630,7 @@ public class ConfigureMapMenu {
 					}
 				}
 				refreshableItem.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
-				refreshableItem.setDescription(ConfigureMapUtils.getDescription(prefs));
+				refreshableItem.setDescription(ConfigureMapUtils.getDescription(settings, prefs));
 			});
 			item.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			OsmandPreference<?>[] prefArray = new OsmandPreference[prefs.size()];

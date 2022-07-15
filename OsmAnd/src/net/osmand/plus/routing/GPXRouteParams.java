@@ -6,7 +6,6 @@ import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -107,14 +106,13 @@ public class GPXRouteParams {
 				addMissingTurns = true;
 			}
 		} else {
-			// first of all check tracks
-			if (!useIntermediatePointsRTE) {
-				RouteProvider.collectSegmentPointsFromGpx(file, points, segmentEndpoints, selectedSegment);
-			} else if (points.isEmpty() && file.routes.size() > selectedRoute) {
-				Route rte = file.routes.get(selectedRoute);
-				for (WptPt pt : rte.points) {
+			if (useIntermediatePointsRTE) {
+				List<WptPt> rtePoints = selectedRoute == -1 ? file.getRoutePoints() : file.getRoutePoints(selectedRoute);
+				for (WptPt pt : rtePoints) {
 					points.add(RouteProvider.createLocation(pt));
 				}
+			} else {
+				RouteProvider.collectSegmentPointsFromGpx(file, points, segmentEndpoints, selectedSegment);
 			}
 			if (reverse) {
 				Collections.reverse(points);
@@ -144,6 +142,15 @@ public class GPXRouteParams {
 		public GPXRouteParamsBuilder(@NonNull GPXFile file, @NonNull OsmandSettings settings) {
 			this.file = file;
 			this.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			updateIntermediateRtePoints();
+		}
+
+		private void updateIntermediateRtePoints() {
+			if (selectedRoute == -1) {
+				useIntermediateRtePoints = file.hasRtePt() && !file.hasTrkPt();
+			} else {
+				useIntermediateRtePoints = file.routes.size() > selectedRoute && file.routes.get(selectedRoute).points.isEmpty();
+			}
 		}
 
 		public boolean isReverse() {
@@ -196,7 +203,7 @@ public class GPXRouteParams {
 
 		public void setSelectedRoute(int selectedRoute) {
 			this.selectedRoute = selectedRoute;
-			useIntermediateRtePoints = selectedRoute != -1;
+			updateIntermediateRtePoints();
 		}
 
 		public boolean shouldUseIntermediateRtePoints() {
@@ -241,6 +248,24 @@ public class GPXRouteParams {
 				locationList.add(new SimulatedLocation(l));
 			}
 			return locationList;
+		}
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "GPXRouteParamsBuilder{" +
+					"calculateOsmAndRoute=" + calculateOsmAndRoute +
+					", file=" + file.path +
+					", leftSide=" + leftSide +
+					", reverse=" + reverse +
+					", passWholeRoute=" + passWholeRoute +
+					", calculateOsmAndRouteParts=" + calculateOsmAndRouteParts +
+					", calculatedRouteTimeSpeed=" + calculatedRouteTimeSpeed +
+					", connectPointsStraightly=" + connectPointsStraightly +
+					", useIntermediateRtePoints=" + useIntermediateRtePoints +
+					", selectedSegment=" + selectedSegment +
+					", selectedRoute=" + selectedRoute +
+					'}';
 		}
 	}
 }

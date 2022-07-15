@@ -1673,26 +1673,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile);
 		} else if (!Algorithms.isEmpty(path)) {
-			final ProgressDialog[] progress = new ProgressDialog[1];
-			if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-				String title = app.getString(R.string.loading_smth, "");
-				progress[0] = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
-			}
-			final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-			GpxFileLoaderTask gpxFileLoaderTask = new GpxFileLoaderTask(new File(path), gpx -> {
+			GpxFileLoaderTask.loadGpxFile(new File(path), mapActivity, gpx -> {
 				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap()
 						.syncGroup().selectedByUser().addToHistory().addToMarkers().saveSelection();
 				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 				if (sf != null) {
 					callback.processResult(sf);
 				}
-				MapActivity activity = mapActivityRef.get();
-				if (progress[0] != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress[0].dismiss();
-				}
 				return true;
 			});
-			gpxFileLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

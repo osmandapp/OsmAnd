@@ -1,11 +1,5 @@
 package net.osmand.plus.myplaces.ui;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,14 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
+import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.GPXUtilities;
@@ -81,6 +68,7 @@ import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
@@ -117,6 +105,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
 		RenameCallback, UploadGpxListener {
@@ -126,6 +128,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private static final int SEARCH_ID = -1;
 
 	private OsmandApplication app;
+	private OsmandSettings settings;
 	private GpxSelectionHelper selectedGpxHelper;
 	private GpxDisplayHelper gpxDisplayHelper;
 
@@ -175,9 +178,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
-		this.app = (OsmandApplication) activity.getApplicationContext();
-		nightMode = !app.getSettings().isLightContent();
-		sortByMode = app.getSettings().TRACKS_SORT_BY_MODE.get();
+		app = (OsmandApplication) activity.getApplicationContext();
+		settings = app.getSettings();
+		nightMode = !settings.isLightContent();
+		sortByMode = settings.TRACKS_SORT_BY_MODE.get();
 		currentRecording = new GpxInfo(app.getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
@@ -259,7 +263,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			return;
 		}
 
-		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
+		final boolean isRecording = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 
 		ImageView icon = currentGpxView.findViewById(R.id.icon);
 		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.monitoring_rec_big));
@@ -600,7 +604,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private void updateTracksSort(TracksSortByMode sortByMode) {
 		this.sortByMode = sortByMode;
-		app.getSettings().TRACKS_SORT_BY_MODE.set(sortByMode);
+		settings.TRACKS_SORT_BY_MODE.set(sortByMode);
 		reloadTracks();
 	}
 
@@ -826,21 +830,31 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
-		info.setGpx(GPXUtilities.loadGPXFile(info.file));
-		boolean e = true;
-		if (info.gpx != null) {
-			WptPt loc = info.gpx.findPointToShow();
-			OsmandApplication app = requireMyApplication();
-			OsmandSettings settings = app.getSettings();
-			if (loc != null) {
-				settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
-				e = false;
-				app.getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
-				MapActivity.launchMapActivityMoveToTop(getActivity(), storeState());
+		getGpxFile(info, gpxFile -> {
+			info.setGpx(gpxFile);
+			Activity activity = getActivity();
+			if (activity != null) {
+				WptPt loc = info.gpx.findPointToShow();
+				if (loc != null) {
+					settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
+					app.getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
+					MapActivity.launchMapActivityMoveToTop(getActivity(), storeState());
+				} else {
+					app.showToastMessage(R.string.gpx_file_is_empty);
+				}
 			}
-		}
-		if (e) {
-			app.showToastMessage(app.getString(R.string.gpx_file_is_empty));
+			return true;
+		});
+	}
+
+	private void getGpxFile(@NonNull GpxInfo gpxInfo, @NonNull CallbackWithObject<GPXFile> callback) {
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByName(gpxInfo.getFileName());
+		if (gpxInfo.gpx != null) {
+			callback.processResult(gpxInfo.gpx);
+		} else if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+			callback.processResult(selectedGpxFile.getGpxFile());
+		} else {
+			GpxFileLoaderTask.loadGpxFile(gpxInfo.file, getActivity(), callback);
 		}
 	}
 
@@ -1170,13 +1184,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			ImageView icon = v.findViewById(R.id.icon);
 			ImageButton options = v.findViewById(R.id.options);
-			options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-			options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openPopUpMenu(v, child);
-				}
-			});
+			options.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
+			options.setOnClickListener(v1 -> openPopUpMenu(v1, child));
 
 			final CheckBox checkbox = v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
@@ -1437,7 +1446,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				if (list.size() > 0) {
 					gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 				}
-				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
 						settings.getLastKnownMapZoom(),
 						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
@@ -1455,12 +1463,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_show_on_map))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						showGpxOnMap(gpxInfo);
-					}
-				})
+				.setOnClickListener(view -> showGpxOnMap(gpxInfo))
 				.create()
 		);
 
@@ -1737,15 +1740,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			this.gpx = gpx;
 		}
 
-
+		@NonNull
 		public String getFileName() {
 			if (fileName != null) {
 				return fileName;
-			}
-			if (file == null) {
+			} else if (file == null) {
 				return "";
+			} else {
+				fileName = file.getName();
+				return fileName;
 			}
-			return fileName = file.getName();
 		}
 	}
 

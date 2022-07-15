@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class FavouritesHelper {
@@ -43,9 +44,9 @@ public class FavouritesHelper {
 	private final OsmandApplication app;
 	private final FavouritesFileHelper fileHelper;
 
-	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
 	private final List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private final Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
+	private final List<FavouritePoint> cachedFavoritePoints = new CopyOnWriteArrayList<>();
 
 	private final Set<FavoritesListener> listeners = new HashSet<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
@@ -573,21 +574,15 @@ public class FavouritesHelper {
 	}
 
 	private void addFavouritePoint(@NonNull FavouritePoint point) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
-		favouritePoints.add(point);
-		this.cachedFavoritePoints = favouritePoints;
+		cachedFavoritePoints.add(point);
 	}
 
 	private void removeFavouritePoint(@NonNull FavouritePoint point) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
-		favouritePoints.remove(point);
-		this.cachedFavoritePoints = favouritePoints;
+		cachedFavoritePoints.remove(point);
 	}
 
 	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(this.cachedFavoritePoints);
-		favouritePoints.removeAll(points);
-		this.cachedFavoritePoints = favouritePoints;
+		cachedFavoritePoints.removeAll(points);
 	}
 
 	public void recalculateCachedFavPoints() {
@@ -595,7 +590,8 @@ public class FavouritesHelper {
 		for (FavoriteGroup f : favoriteGroups) {
 			allPoints.addAll(f.getPoints());
 		}
-		cachedFavoritePoints = allPoints;
+		cachedFavoritePoints.clear();
+		cachedFavoritePoints.addAll(allPoints);
 	}
 
 	public void sortAll() {
@@ -606,9 +602,7 @@ public class FavouritesHelper {
 		for (FavoriteGroup g : favoriteGroups) {
 			Collections.sort(g.getPoints(), favoritesComparator);
 		}
-		if (cachedFavoritePoints != null) {
-			Collections.sort(cachedFavoritePoints, favoritesComparator);
-		}
+		Collections.sort(cachedFavoritePoints, favoritesComparator);
 	}
 
 	public static Comparator<FavouritePoint> getComparator() {

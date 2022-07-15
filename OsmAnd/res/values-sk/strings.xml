@@ -3989,7 +3989,6 @@
     <string name="segments_count">Úsek %1$d</string>
     <string name="temporary_conditional_routing_descr">Použiť cestné obmedzenia, ktoré sú teraz aktívne na mape</string>
     <string name="routing_attr_driving_style_description">Zvoľte účel jazdy pre získanie kratšej, rýchlejšej alebo bezpečnejšej trasy</string>
-    <string name="map_orientation_threshold_descr">Neotáčať mapu, ak je rýchlosť nižšia ako hranica</string>
     <string name="restart">Reštartovať</string>
     <string name="shared_strings_all_regions">Všetky oblasti</string>
     <string name="delete_number_files_question">Zmazať %1$d súborov\?</string>
@@ -4680,7 +4679,6 @@
     <string name="average_speed_skip_stops">Zohľadniť zastavenia</string>
     <string name="map_widget_average_speed">Priemerná rýchlosť</string>
     <string name="lang_sat">Santali</string>
-    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
     <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>
@@ -4757,4 +4755,14 @@
     <string name="compass_always_visible">Vždy zobrazený</string>
     <string name="next_turn_widget_desc">Nástroj zobrazuje informácie o nasledujúcom zabočení s obrázkom manévra a vzdialenosti k nemu.</string>
     <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobraziť trasy pre horské bicykle</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobraziť trasy určené pre horské bicykle</string>
+    <string name="auto_25_chars_route_tl_kl">Zahnite doľava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tl_kr">Zahnite doľava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tr_kl">Zahnite doprava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tr_kr">Zahnite doprava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tu_kl">Otočte sa naspäť a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tu_kr">Otočte sa naspäť a držte sa vpravo</string>
+    <string name="auto_25_chars_route_roundabout_kl">Choďte cez %1$d výjazd a držte sa vľavo</string>
+    <string name="auto_25_chars_route_roundabout_kr">Choďte cez %1$d výjazd a držte sa vpravo</string>
 </resources>

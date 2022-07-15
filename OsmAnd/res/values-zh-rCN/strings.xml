@@ -3498,7 +3498,6 @@
     <string name="temporary_conditional_routing_descr">使用地图上有效的道路限制</string>
     <string name="routing_attr_short_way_description">优化的更短路线（节能）</string>
     <string name="routing_attr_driving_style_description">选择驾驶目的，以获得更短、更快或更安全的路线</string>
-    <string name="map_orientation_threshold_descr">如果速度低于阈值，不要旋转地图视图</string>
     <string name="restart">重新启动</string>
     <string name="shared_strings_all_regions">所有区域</string>
     <string name="delete_number_files_question">删除 %1$d 个文件？</string>
@@ -4274,7 +4273,6 @@
     <string name="distance_circles">距离-圆圈</string>
     <string name="elevation_profile_widget_desc">小部件显示当前路线的高程和坡度剖面。</string>
     <string name="average_speed_skip_stops">考虑到停顿</string>
-    <string name="average_speed_skip_stops_desc">小于%1$s的速度将不被计算在内，也不影响平均速度。</string>
     <string name="average_speed_time_interval_desc">指定测量平均速度的时间间隔。</string>
     <string name="average_speed_widget_desc">显示当前骑行的平均速度。</string>
     <string name="map_widget_time_to_intermediate">到达中继点的时间</string>

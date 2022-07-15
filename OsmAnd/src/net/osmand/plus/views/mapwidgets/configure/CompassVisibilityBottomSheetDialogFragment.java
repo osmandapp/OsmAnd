@@ -72,34 +72,14 @@ public class CompassVisibilityBottomSheetDialogFragment extends MenuBottomSheetD
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		View view = inflater.inflate(R.layout.fragment_compass_visibility_bottom_sheet_dialog, null);
 
-		CompassVisibilityUpdateListener callback = selectedVisibility -> {
-			CompassVisibility previousVisibility = settings.COMPASS_VISIBILITY.getModeValue(appMode);
-			settings.COMPASS_VISIBILITY.setModeValue(appMode, selectedVisibility);
-
-			if (previousVisibility == selectedVisibility) {
-				return;
-			}
-
-			for (CompassVisibility visibility : CompassVisibility.values()) {
-				if (visibility != selectedVisibility) {
-					CompoundButton compoundButton = view
-							.findViewById(visibility.containerId)
-							.findViewById(R.id.compound_button);
-					compoundButton.setChecked(false);
-				}
-			}
-		};
-
-		setupVisibilityItem(CompassVisibility.ALWAYS_VISIBLE, view, callback);
-		setupVisibilityItem(CompassVisibility.ALWAYS_HIDDEN, view, callback);
-		setupVisibilityItem(CompassVisibility.VISIBLE_IF_MAP_ROTATED, view, callback);
+		setupVisibilityItem(CompassVisibility.ALWAYS_VISIBLE, view);
+		setupVisibilityItem(CompassVisibility.ALWAYS_HIDDEN, view);
+		setupVisibilityItem(CompassVisibility.VISIBLE_IF_MAP_ROTATED, view);
 
 		return view;
 	}
 
-	private void setupVisibilityItem(@NonNull CompassVisibility itemVisibility,
-	                                 @NonNull View view,
-	                                 @NonNull CompassVisibilityUpdateListener callback) {
+	private void setupVisibilityItem(@NonNull CompassVisibility itemVisibility, @NonNull View view) {
 		boolean selected = itemVisibility == settings.COMPASS_VISIBILITY.getModeValue(appMode);
 
 		View container = view.findViewById(itemVisibility.containerId);
@@ -117,18 +97,15 @@ public class CompassVisibilityBottomSheetDialogFragment extends MenuBottomSheetD
 
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 		compoundButton.setChecked(selected);
-		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			if (isChecked) {
-				callback.onCompassVisibilityUpdated(itemVisibility);
-				Fragment target = getTargetFragment();
-				if (target instanceof CompassVisibilityUpdateListener) {
-					((CompassVisibilityUpdateListener) target).onCompassVisibilityUpdated(itemVisibility);
-				}
-			}
-			ivIcon.setImageDrawable(getIconForVisibility(itemVisibility));
-		});
 
-		container.setOnClickListener(v -> compoundButton.setChecked(true));
+		container.setOnClickListener(v -> {
+			settings.COMPASS_VISIBILITY.setModeValue(appMode, itemVisibility);
+			Fragment target = getTargetFragment();
+			if (target instanceof CompassVisibilityUpdateListener) {
+				((CompassVisibilityUpdateListener) target).onCompassVisibilityUpdated(itemVisibility);
+			}
+			dismiss();
+		});
 		container.setBackground(UiUtilities.getColoredSelectableDrawable(app, ColorUtilities.getActiveColor(app, nightMode)));
 	}
 

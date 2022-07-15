@@ -3280,7 +3280,7 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
-    <string name="rendering_value_thick_name">Espesor</string>
+    <string name="rendering_value_thick_name">Grueso</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Más detallado.</string>
     <string name="select_navigation_icon">Icono de la ubicación mientras se mueve</string>
     <string name="select_map_icon">Icono de la ubicación en reposo</string>
@@ -3998,7 +3998,6 @@
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
     <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
-    <string name="map_orientation_threshold_descr">No girar la vista del mapa si la velocidad es inferior a un umbral</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
     <string name="delete_number_files_question">¿Borrar %1$d archivos\?</string>
@@ -4703,7 +4702,6 @@
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para el que se medirá la velocidad media.</string>
     <string name="average_speed_widget_desc">Muestra la velocidad media del recorrido actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
-    <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s no serán contadas y afectará a la velocidad media.</string>
     <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
     <string name="transport_hazmat_yes_desc">Debes elegir la categoría adecuada.</string>
@@ -4768,8 +4766,8 @@
     <string name="compass_always_visible">Siempre visible</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
-    <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar, esta copia de seguridad está limitada a 25 MB.
-\nSi estás usando la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
+    <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
+\nSi usas la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
@@ -4778,4 +4776,14 @@
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
     <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
+    <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tr_kl">Gira a la derecha y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tr_kr">Gira a la derecha y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tu_kl">Gira en U y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tu_kr">Gira en U y quédate en la derecha</string>
+    <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y quédate en la izquierda</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos específicamente diseñados para el ciclismo de montaña</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
 </resources>

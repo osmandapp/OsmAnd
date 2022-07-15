@@ -127,16 +127,16 @@ public class MenuBuilder {
 	private boolean showNearestPoi = false;
 	private boolean showOnlinePhotos = true;
 
-	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
+	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
 
 	private CollapseExpandListener collapseExpandListener;
 
-	private String preferredMapLang;
+	private final String preferredMapLang;
 	private String preferredMapAppLang;
-	private boolean transliterateNames;
+	private final boolean transliterateNames;
 	private View photoButton;
 
 	private String[] placeId = new String[0];
@@ -281,7 +281,7 @@ public class MenuBuilder {
 		this.light = light;
 	}
 
-	public void build(ViewGroup view) {
+	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		firstRow = true;
 		hidden = false;
 		buildTopInternal(view);
@@ -294,14 +294,14 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		buildInternal(view);
+		buildPluginRows(view, object);
+
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
 		}
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
-		buildPluginRows(view);
-//		buildAfter(view);
 	}
 
 	private boolean showTransportRoutes() {
@@ -347,9 +347,9 @@ public class MenuBuilder {
 		return true;
 	}
 
-	protected void buildPluginRows(View view) {
+	protected void buildPluginRows(@NonNull View view,@Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuRows(this, view);
+			plugin.buildContextMenuRows(this, view, object);
 		}
 	}
 
@@ -555,10 +555,6 @@ public class MenuBuilder {
 		} else {
 			POIMapLayer.showPlainDescriptionDialog(ctx, app, description, title);
 		}
-	}
-
-	protected void buildAfter(View view) {
-		buildRowDivider(view);
 	}
 
 	public boolean isFirstRow() {

@@ -368,8 +368,16 @@ public abstract class OsmandMapLayer {
 		return getTextScale(getApplication());
 	}
 
+	public float getOriginalTextScale() {
+		return getOriginalTextScale(getApplication());
+	}
+
 	public static float getTextScale(@NonNull OsmandApplication app) {
 		return app.getOsmandMap().getTextScale();
+	}
+
+	public static float getOriginalTextScale(@NonNull OsmandApplication app) {
+		return app.getOsmandMap().getOriginalTextScale();
 	}
 
 	public float getMapDensity() {

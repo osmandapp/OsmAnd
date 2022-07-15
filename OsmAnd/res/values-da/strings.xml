@@ -1435,7 +1435,7 @@
     <string name="shared_string_save">Gem</string>
     <string name="shared_string_rename">Omdøb</string>
     <string name="shared_string_delete">Slet</string>
-    <string name="shared_string_delete_all">Slet alle</string>
+    <string name="shared_string_delete_all">Slet alt</string>
     <string name="shared_string_share">Del</string>
     <string name="shared_string_add">Tilføj</string>
     <string name="shared_string_apply">Anvend</string>
@@ -3905,7 +3905,6 @@
     <string name="rename_track">Omdøb spor</string>
     <string name="announcement_time_off_route">Uden for ruten</string>
     <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardnavigationshastigheden.</string>
-    <string name="map_orientation_threshold_descr">Roter ikke kortvisningen, hvis hastigheden er under en vis grænseværdi</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
     <string name="profile_type_user_string">Brugerprofil</string>
     <string name="reverse_all_points">Vend alle punkter</string>
@@ -4690,7 +4689,6 @@
     <string name="shared_string_mode">Tilstand</string>
     <string name="lang_sat">Santali</string>
     <string name="average_speed_widget_desc">Viser gennemsnitshastigheden for den aktuelle tur.</string>
-    <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil ikke blive talt med og påvirker ikke gennemsnitshastigheden.</string>
     <string name="average_speed_skip_stops">Tag højde for stop</string>
     <string name="average_speed_time_interval_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles.</string>
     <string name="map_widget_average_speed">Gennemsnitshastighed</string>
@@ -4762,9 +4760,20 @@
     <string name="rendering_attr_depthContourColorScheme_name">Farvesætning for dybdekonturlinjer</string>
     <string name="rendering_attr_depthContourWidth_description">Dybdekonturlinjers bredde</string>
     <string name="rendering_attr_depthContourWidth_name">Dybdekonturlinjers bredde</string>
-    <string name="auto_backup_preference_desc">Android gemmer som standard sikkerhedskopier af favoritter, kort-tokens og OsmAnd-indstillinger for at gendanne dem på nye enheder eller efter geninstallation, men denne sikkerhedskopi er begrænset til 25 MB.
+    <string name="auto_backup_preference_desc">Android gemmer som standard sikkerhedskopier af favoritter, kort-tokens og OsmAnd-indstillinger for at gendanne dem på nye enheder eller efter geninstallation. Denne sikkerhedskopi er begrænset til 25 MB.
 \nHvis du bruger OsmAnd Cloud, kan dette føre til misforståelser efter geninstallation.</string>
     <string name="compass_always_visible">Altid synlig</string>
     <string name="compass_always_hidden">Altid skjult</string>
-    <string name="compass_click_desc">Klik på kompas for at skifte måden hvorpå kortet er orienteret.</string>
+    <string name="compass_click_desc">Tryk på kompas for at skifte måden hvorpå kortet er orienteret.</string>
+    <string name="auto_25_chars_route_tr_kl">Drej til højre og hold til venstre</string>
+    <string name="auto_25_chars_route_tr_kr">Drej til højre og hold til højre</string>
+    <string name="auto_25_chars_route_tu_kl">Foretag U-vending og hold til venstre</string>
+    <string name="auto_25_chars_route_tu_kr">Foretag U-vending og hold til højre</string>
+    <string name="auto_25_chars_route_roundabout_kl">Tag %1$d afkørsel og hold til venstre</string>
+    <string name="auto_25_chars_route_roundabout_kr">Tag %1$d afkørsel og hold til højre</string>
+    <string name="auto_25_chars_route_tl_kl">Drej til venstre og hold til venstre</string>
+    <string name="auto_25_chars_route_tl_kr">Drej til venstre og hold til højre</string>
+    <string name="trip_recording_duration_widget_desc">Viser tidspunktet for sporoptagelse, varigheden i minutter/timer af den aktuelt optagede tur.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier specielt designet til mountainbiking</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
 </resources>

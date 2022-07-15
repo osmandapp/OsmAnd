@@ -29,6 +29,7 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -100,12 +101,7 @@ public class RoutingHelper {
 		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
 
-		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
-			@Override
-			public void onOsmAndSettingsCustomized() {
-				settings = app.getSettings();
-			}
-		};
+		OsmAndAppCustomizationListener customizationListener = () -> settings = app.getSettings();
 		app.getAppCustomization().addListener(customizationListener);
 	}
 
@@ -149,9 +145,10 @@ public class RoutingHelper {
 		return routeRecalculationHelper.getLastRouteCalcErrorShort();
 	}
 
-	public void setPauseNavigation(boolean b) {
-		this.isPauseNavigation = b;
-		if (b) {
+	public void setPauseNavigation(boolean pause) {
+		app.logRoutingEvent("setPauseNavigation pause " + pause);
+		this.isPauseNavigation = pause;
+		if (pause) {
 			if (app.getNavigationService() != null) {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
 			} else {
@@ -168,6 +165,7 @@ public class RoutingHelper {
 	}
 
 	public void setFollowingMode(boolean follow) {
+		app.logRoutingEvent("setFollowingMode follow " + follow);
 		isFollowingMode = follow;
 		isPauseNavigation = false;
 		if (!follow) {
@@ -191,6 +189,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation) {
+		app.logRoutingEvent("setFinalAndCurrentLocation finalLocation " + finalLocation + " intermediatePoints " + intermediatePoints + " currentLocation " + currentLocation);
 		RoutingHelperUtils.checkAndUpdateStartLocation(app, currentLocation, false);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
@@ -199,6 +198,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
+		app.logRoutingEvent("clearCurrentRoute newFinalLocation " + newFinalLocation + " newIntermediatePoints " + newIntermediatePoints);
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
@@ -240,6 +240,7 @@ public class RoutingHelper {
 	}
 
 	private synchronized void finishCurrentRoute() {
+		app.logRoutingEvent("finishCurrentRoute");
 		routeWasFinished = true;
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -259,6 +260,7 @@ public class RoutingHelper {
 	}
 
 	void newRouteCalculated(final boolean newRoute, final RouteCalculationResult res) {
+		app.logRoutingEvent("newRouteCalculated newRoute " + newRoute + " res " + res);
 		app.runInUIThread(() -> {
 			ValueHolder<Boolean> showToast = new ValueHolder<>();
 			showToast.value = true;
@@ -291,6 +293,7 @@ public class RoutingHelper {
 	}
 
 	public void setGpxParams(GPXRouteParamsBuilder params) {
+		app.logRoutingEvent("setGpxParams params " + params);
 		currentGPXRoute = params;
 	}
 
@@ -334,44 +337,28 @@ public class RoutingHelper {
 	}
 
 	public void addRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, true);
+		updateListeners = Algorithms.updateWeakReferencesList(updateListeners, listener, true);
 	}
 
 	public void removeRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, false);
+		updateListeners = Algorithms.updateWeakReferencesList(updateListeners, listener, false);
 	}
 
 	public void addRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, true);
+		settingsListeners = Algorithms.updateWeakReferencesList(settingsListeners, listener, true);
 	}
 
 	public void removeRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, false);
+		settingsListeners = Algorithms.updateWeakReferencesList(settingsListeners, listener, false);
 	}
 
 	public void addListener(@NonNull IRouteInformationListener l) {
-		listeners = updateListeners(new ArrayList<>(listeners), l, true);
+		listeners = Algorithms.updateWeakReferencesList(listeners, l, true);
 		transportRoutingHelper.addListener(l);
 	}
 
 	public void removeListener(@NonNull IRouteInformationListener lt) {
-		listeners = updateListeners(new ArrayList<>(listeners), lt, false);
-	}
-
-	private <T> List<WeakReference<T>> updateListeners(List<WeakReference<T>> copyList,
-													   T listener, boolean isNewListener) {
-		Iterator<WeakReference<T>> it = copyList.iterator();
-		while (it.hasNext()) {
-			WeakReference<T> ref = it.next();
-			T l = ref.get();
-			if (l == null || l == listener) {
-				it.remove();
-			}
-		}
-		if (isNewListener) {
-			copyList.add(new WeakReference<>(listener));
-		}
-		return copyList;
+		listeners = Algorithms.updateWeakReferencesList(listeners, lt, false);
 	}
 
 	public void updateLocation(Location currentLocation) {
@@ -696,8 +683,6 @@ public class RoutingHelper {
 	public static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode) {
 		return getDefaultAllowedDeviation(settings, mode, getPosTolerance(0));
 	}
-
-
 
 	private void fireRoutingDataUpdateEvent() {
 		if (!updateListeners.isEmpty()) {

@@ -220,7 +220,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private final List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
-	private boolean intentLocation = false;
 
 	private final DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
@@ -478,7 +477,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (atlasMapRendererView == null) {
 				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 				atlasMapRendererView.setAzimuth(0);
-				float elevationAngle = mapView.normalizeElevationAngle(app.getSettings().getLastKnownMapElevation());
+				float elevationAngle = mapView.normalizeElevationAngle(app.getSettings().LAST_KNOWN_MAP_ELEVATION.get());
 				atlasMapRendererView.setElevationAngle(elevationAngle);
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}
@@ -784,6 +783,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
+				settings.LAST_KNOWN_MAP_ROTATION.setModeValue(prevAppMode, getMapRotate());
+				settings.LAST_KNOWN_MAP_ELEVATION.setModeValue(prevAppMode, getMapElevationAngle());
 				MapActivity.this.updateApplicationModeSettings();
 			}
 		});
@@ -802,12 +803,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getLocationProvider().resumeAllUpdates();
 
 		OsmandMapTileView mapView = getMapView();
-		if (settings.isLastKnownMapLocation() && !intentLocation) {
+		if (settings.isLastKnownMapLocation()) {
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setIntZoom(settings.getLastKnownMapZoom());
-		} else {
-			intentLocation = false;
+			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
+				mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+			}
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
@@ -1269,6 +1271,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getMapView().getRotate();
 	}
 
+	public float getMapElevationAngle() {
+		return getMapView().getElevationAngle();
+	}
+
 	// Duplicate methods to OsmAndApplication
 	public TargetPoint getPointToNavigate() {
 		return app.getTargetPointsHelper().getPointToNavigate();
@@ -1321,7 +1327,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
-		settings.setLastKnownMapElevation(mapView.getElevationAngle());
+		settings.LAST_KNOWN_MAP_ROTATION.set(mapView.getRotate());
+		settings.LAST_KNOWN_MAP_ELEVATION.set(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);

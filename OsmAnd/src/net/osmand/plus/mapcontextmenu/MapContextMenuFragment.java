@@ -1353,7 +1353,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void buildBottomView() {
 		if (view != null) {
-			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
+			ViewGroup bottomView = view.findViewById(R.id.context_menu_bottom_view);
 			if (menu.isExtended()) {
 				menu.build(bottomView);
 			}

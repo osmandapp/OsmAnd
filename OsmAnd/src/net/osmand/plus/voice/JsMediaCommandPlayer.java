@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * That class represents command player.
@@ -35,7 +36,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 
 	private MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
-	private final List<String> filesToPlay = Collections.synchronizedList(new ArrayList<>());
+	private final List<String> filesToPlay = new CopyOnWriteArrayList<>();
 
 	protected JsMediaCommandPlayer(@NonNull OsmandApplication app,
 	                               @NonNull ApplicationMode applicationMode,

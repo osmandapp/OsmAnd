@@ -441,11 +441,11 @@
     <string name="send_location">Skicka plats</string>
     <string name="context_menu_item_share_location">Dela ut platsen</string>
     <string name="add_waypoint_dialog_added">GPX-vägpunkten \"{0}\" tillagd</string>
-    <string name="add_waypoint_dialog_title">Lägg till waypoint i inspelade GPX-spår</string>
+    <string name="add_waypoint_dialog_title">Lägg till vägpunkt i inspelade GPX-spår</string>
     <string name="amenity_type_administrative">Administrativt</string>
     <string name="amenity_type_barrier">Hinder</string>
     <string name="amenity_type_education">Utbildning</string>
-    <string name="amenity_type_emergency">Olycksfall</string>
+    <string name="amenity_type_emergency">Nödsituationer</string>
     <string name="amenity_type_entertainment">Underhållning</string>
     <string name="amenity_type_finance">Finans</string>
     <string name="amenity_type_geocache">Geocaching</string>
@@ -1913,7 +1913,7 @@
     <string name="use_osm_live_routing_description">Aktivera navigering för OsmAnd Live-förändringar.</string>
     <string name="use_osm_live_routing">OsmAnd Live-navigering</string>
     <string name="lang_kn">Kannada</string>
-    <string name="lang_en_gb">Engelska (UK)</string>
+    <string name="lang_en_gb">Engelska (Storbritannien)</string>
     <string name="lang_be_by">Vitryska (latinsk)</string>
     <string name="lang_hu_formal">Ungerska (formell)</string>
     <string name="lang_es_us">Spanska (amerikansk)</string>
@@ -2340,12 +2340,12 @@
     <string name="one_tap_active_descr">Tryck på en markör på kartan för att flytta den till toppen av de aktiva markörerna utan att öppna sammanhangsmenyn.</string>
     <string name="one_tap_active">\'Ett tryck\' aktiv</string>
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller foto-notering för varje punkt på kartan med hjälp av widgeten eller menyn.</string>
-    <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess waypoints till markörer.</string>
+    <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess vägpunkter bland markörerna.</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori att lägga till i markörerna.</string>
     <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
-    <string name="add_group_descr">Importera grupper från favoriter eller GPX-waypoints.</string>
+    <string name="add_group_descr">Importera grupper från favoriter eller GPX-punkter.</string>
     <string name="empty_state_markers_active">Skapa kartmarkörer!</string>
     <string name="empty_state_markers_active_desc">Tryck långt eller kort på \'Platser\', tryck sedan på flaggknappen.</string>
     <string name="empty_state_markers_groups">Importera grupper</string>
@@ -2697,7 +2697,7 @@
     <string name="mappilary_no_internet_desc">Foton från Mapillary är bara tillgängliga online.</string>
     <string name="add_route_points">Lägg till ruttpunkter</string>
     <string name="add_waypoint">Lägg till vägpunkt</string>
-    <string name="add_line">Lägg till rad</string>
+    <string name="add_line">Lägg till linje</string>
     <string name="save_gpx_waypoint">Spara GPX-vägpunkt</string>
     <string name="save_route_point">Spara ruttpunkt</string>
     <string name="waypoint_one">Vägpunkt 1</string>
@@ -2771,7 +2771,7 @@
     <string name="show_more">Visa mer</string>
     <string name="tracks_on_map">Visade spår</string>
     <string name="previous_route">Föregående rutt</string>
-    <string name="add_home">Lägg till bostad</string>
+    <string name="add_home">Lägg till hem</string>
     <string name="add_work">Lägg till arbetsplats</string>
     <string name="work_button">Arbetsplats</string>
     <string name="cubic_m">m³</string>
@@ -2943,7 +2943,7 @@
     <string name="screen_alerts">Skärmvarningar</string>
     <string name="route_parameters_descr">Konfigurera ruttparametrar</string>
     <string name="route_parameters">Ruttparametrar</string>
-    <string name="application_profile_changed">Appprofil ändrat till \"%s\"</string>
+    <string name="application_profile_changed">App-profil ändrat till \"%s\"</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="plugins_settings">Inställningar för insticksmoduler</string>
     <string name="app_mode_utv">Sida vid sida</string>
@@ -3006,8 +3006,8 @@
     <string name="export_not_enough_space">Det finns inte tillräckligt med lagringsutrymme</string>
     <string name="select_items_for_import">Välj vilka föremål som skall importeras.</string>
     <string name="select_groups_for_import">Välj vilka grupper som skall importeras.</string>
-    <string name="add_to_mapillary">Lägg till Mapillary</string>
-    <string name="add_to_opr">Lägg till ÖppnaPlattsRecensioner (OPR)</string>
+    <string name="add_to_mapillary">Lägg till i Mapillary</string>
+    <string name="add_to_opr">Lägg till i OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Byt till att använda dev.openstreetmap.org istället för openstreetmap.org för att testa uppladdning av OSM Anteckningar / Sevärdheter / GPX.</string>
     <string name="use_dev_url">Använd dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Mindre flyplan</string>
@@ -3024,7 +3024,7 @@
     <string name="clear_confirmation_msg">Rensa %1$s\?</string>
     <string name="new_plugin_added">Nytt insticksprogram tillagd</string>
     <string name="shared_string_turn_off">Stäng av</string>
-    <string name="added_profiles_descr">Profiler tillaggda av insticksprogram</string>
+    <string name="added_profiles_descr">Profiler tillagda av insticksmoduler</string>
     <string name="added_profiles">Tillagda profiler</string>
     <string name="suggested_maps_descr">Dessa kartor erfordras av insticksprogrammet.</string>
     <string name="suggested_maps">Föreslagna kartor</string>
@@ -3156,7 +3156,7 @@
     <string name="route_between_points_add_track_desc">Välj en spårfil som du vill lägga till det nya segmentet till.</string>
     <string name="in_case_of_reverse_direction">Vid omvänd riktning</string>
     <string name="shared_string_save_as_gpx">Spara som ny spårfil</string>
-    <string name="add_segment_to_the_track">Lägg till en spårfil</string>
+    <string name="add_segment_to_the_track">Lägg till i spårfil</string>
     <string name="shared_string_gpx_files">Spår</string>
     <string name="layer_gpx_layer">Spår</string>
     <string name="show_gpx">Spår</string>
@@ -3201,7 +3201,7 @@
 \n
 \nAnvänd OAuth-metoden eller ditt användarnamn och lösenord.</string>
     <string name="gpx_upload_public_visibility_descr">\"Offentligt\" betyder att spårningen visas offentligt i dina GPS-spår, i offentliga GPS-spårningar och i den offentliga spårningslistan med tidsstämplar i råform. Data som visas via API hänvisar inte till din spårningssida. Tracepoint-tidsstämplar är inte tillgängliga via det offentliga GPS-API:et och spårpunkter är inte kronologiskt ordnade.</string>
-    <string name="add_online_routing_engine">Lägg till online-dirigeringsmotorn</string>
+    <string name="add_online_routing_engine">Lägg till online-ruttplanerare</string>
     <string name="edit_online_routing_engine">Redigera online-dirigeringsmotorn</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="shared_string_vehicle">Fordon</string>
@@ -3282,18 +3282,17 @@
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_racing_name">Racing</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
-    <string name="activity_type_cycling_name">Cyckling</string>
+    <string name="activity_type_cycling_name">Cykling</string>
     <string name="activity_type_hiking_name">Vandring</string>
     <string name="activity_type_running_name">Löpning</string>
     <string name="activity_type_walking_name">Gående</string>
     <string name="activity_type_offroad_name">Offroad</string>
-    <string name="activity_type_motorbike_name">Motorcyckel</string>
+    <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
     <string name="temporary_conditional_routing_descr">Använd vägbegränsningar som är aktiva nu på kartan</string>
     <string name="routing_attr_short_way_description">Optimerad kortare rutt (energibesparing)</string>
     <string name="routing_attr_driving_style_description">Välj körsyfte för att få kortare, snabbare eller säkrare rutt</string>
     <string name="snap_to_road_descr">Ikonen för aktuell plats kommer att fästa mot den aktuella navigeringsvägen</string>
-    <string name="map_orientation_threshold_descr">Rotera inte kartvyn om hastigheten är mindre än en tröskelvärde</string>
     <string name="restart">Omstart</string>
     <string name="shared_strings_all_regions">Alla regioner</string>
     <string name="delete_number_files_question">Ta bort %1$d filer\?</string>
@@ -3963,7 +3962,7 @@
     <string name="rendering_attr_showRunningRoutes_name">Rutter för löpning</string>
     <string name="rendering_attr_showRunningRoutes_description">Visa löprutter</string>
     <string name="routing_attr_prefer_horse_routes_description">Föredra hästvägar</string>
-    <string name="add_page">Addera sida</string>
+    <string name="add_page">Lägg till sida</string>
     <string name="apply_only_to_new_favorites">Applicera bara till nya favoriter</string>
     <string name="change_default_appearance">Ändra standard utseende</string>
     <string name="routeInfo_horse_scale_name">Svårigheter av häst spår</string>
@@ -4011,7 +4010,6 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Göm militärområden</string>
     <string name="battery_widget_desc">Visar din enhets batterinivå.</string>
     <string name="transport_hazmat_no_desc">På vissa vägar och i vissa tunnlar är transport av farligt gods förbjudet.</string>
-    <string name="average_speed_skip_stops_desc">Hastighet mindre än %1$s kommer inte att räknas eller påverka medelhastigheten.</string>
     <string name="time_to_go_desc">Tid i minuter eller timmar för att nå din destination.</string>
     <string name="arrival_time_widget_desc">Ankomsttid till destinationen.</string>
     <string name="list_of_groups">Lista över grupper</string>
@@ -4080,4 +4078,13 @@
     <string name="routing_attr_avoid_4wd_only_name">Undvik 4WD-vägar</string>
     <string name="routing_attr_avoid_4wd_only_description">Undvik vägar lämpliga endast för fordon med fyrhjulsdrift (4WD)</string>
     <string name="lang_ckb">Sorani</string>
+    <string name="accessibility_mode_disabled">Tillgänglighetsläge är avstängt i dina Androidinställningar.</string>
+    <string name="add_group_to_markers">Lägg till grupp i markörlista</string>
+    <string name="add_destination_query">Lägg till destinationen först</string>
+    <string name="lang_sat">Santali</string>
+    <string name="lang_de_casual">Tyska (informell)</string>
+    <string name="accessibility_2d_view_off">2,5D-vy av</string>
+    <string name="accessibility_2d_view_on">2,5D-vy på</string>
+    <string name="add_custom_category">Lägg till skräddarsydd kategori</string>
+    <string name="altitude_correction">Höjdrättning</string>
 </resources>

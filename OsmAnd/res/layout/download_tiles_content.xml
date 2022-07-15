@@ -7,49 +7,15 @@
 	android:orientation="vertical"
 	android:background="?attr/list_background_color">
 
-	<LinearLayout
+	<include
 		android:id="@+id/map_source_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:minHeight="@dimen/setting_list_item_group_height"
-		android:orientation="horizontal"
-		android:gravity="center_vertical"
-		android:background="?attr/selectableItemBackground">
+		layout="@layout/download_tiles_settings_item" />
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:layout_width="@dimen/standard_icon_size"
-			android:layout_height="@dimen/standard_icon_size"
-			android:layout_marginStart="@dimen/content_padding"
-			osmand:srcCompat="@drawable/ic_world_globe_dark"
-			osmand:tint="?attr/default_icon_color" />
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/local_size_height"
-			android:layout_marginTop="@dimen/content_padding_small"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:layout_marginBottom="@dimen/content_padding_small"
-			android:orientation="vertical">
-
-			<net.osmand.plus.widgets.TextViewEx
-				style="@style/TitleStyle"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/map_source"
-				android:textColor="?android:textColorPrimary" />
-
-			<net.osmand.plus.widgets.TextViewEx
-				style="@style/DescStyle"
-				android:id="@+id/selected_map_source"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="?android:textColorSecondary"
-				tools:text="Microsoft Earth" />
-
-		</LinearLayout>
-
-	</LinearLayout>
+	<include
+		android:id="@+id/tiles_to_download_container"
+		layout="@layout/download_tiles_settings_item"
+		android:visibility="gone"
+		tools:visibility="visible" />
 
 	<FrameLayout
 		android:layout_width="match_parent"

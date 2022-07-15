@@ -808,7 +808,7 @@
 \n- Nombre limité de téléchargements
 \n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne.
 \n
-\nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheté la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
+\nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheter la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions)
 \n
 \nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal.
@@ -1392,9 +1392,9 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurez le proxy HTTP pour toutes les requêtes réseau.</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
-    <string name="proxy_host_descr">Configurez le serveur mandataire (Proxy). Par exemple : 127.0.0.1</string>
+    <string name="proxy_host_descr">Paramétrez le serveur mandataire, proxy, (par exemple : 127.0.0.1).</string>
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
-    <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118</string>
+    <string name="proxy_port_descr">Paramétrez le numéro de port de votre mandataire (Proxy). Par exemple : 8118.</string>
     <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
@@ -1451,7 +1451,7 @@
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
-    <string name="shared_string_currently_recording_track">Enregistrement d\'itinéraire en cours</string>
+    <string name="shared_string_currently_recording_track">Trace en cours d’enregistrement</string>
     <string name="back_to_map">Retour à la carte</string>
     <string name="shared_string_selected">Sélectionné</string>
     <string name="track_points">Points de la trace</string>
@@ -1781,7 +1781,7 @@
     <string name="av_video_quality_low">Qualité la plus basse</string>
     <string name="av_video_quality_high">Qualité la plus élevée</string>
     <string name="av_video_quality">Qualité de la sortie vidéo</string>
-    <string name="av_video_quality_descr">Sélectionnez la qualité de la vidéo</string>
+    <string name="av_video_quality_descr">Sélectionnez la qualité de la vidéo.</string>
     <string name="av_audio_format">Format de la sortie audio</string>
     <string name="av_audio_format_descr">Sélectionnez le format de sortie audio.</string>
     <string name="av_audio_bitrate">Bitrate audio</string>
@@ -1798,7 +1798,7 @@
     <string name="no_location_permission">Autoriser l\'accès aux données de localisation.</string>
     <string name="no_camera_permission">Autoriser l\'accès à l\'appareil photo.</string>
     <string name="no_microphone_permission">Autoriser l\'accès au microphone.</string>
-    <string name="impassable_road_desc">Sélectionnez les routes à éviter</string>
+    <string name="impassable_road_desc">Sélectionnez les routes à éviter.</string>
     <string name="shared_string_sound">Son</string>
     <string name="select_voice_provider">Sélectionnez la voix de guidage</string>
     <string name="select_voice_provider_descr">Sélectionnez ou téléchargez le guidage vocal pour votre langue.</string>
@@ -2958,7 +2958,7 @@
     <string name="profile_alert_duplicate_name_title">Nom déjà existant</string>
     <string name="profile_alert_duplicate_name_msg">Il existe déjà un profil avec ce nom</string>
     <string name="select_nav_profile_dialog_title">Sélectionnez le type de navigation</string>
-    <string name="routing_profile_geocoding">Geocoding</string>
+    <string name="routing_profile_geocoding">Géocodage</string>
     <string name="routing_profile_straightline">Ligne droite</string>
     <string name="osmand_default_routing">Routage OsmAnd</string>
     <string name="routing_attr_piste_type_skitour_description">Itinéraires de randonnée à ski.</string>
@@ -3175,7 +3175,7 @@
     <string name="rendering_attr_piste_type_sled_name">Luge</string>
     <string name="rendering_attr_piste_type_hike_name">Randonnée</string>
     <string name="rendering_attr_piste_type_connection_name">Liaison</string>
-    <string name="rendering_attr_piste_type_skitour_name">Skitour</string>
+    <string name="rendering_attr_piste_type_skitour_name">Ski de randonnée</string>
     <string name="rendering_attr_piste_type_downhill_name">Descente</string>
     <string name="rendering_attr_piste_type_nordic_name">Nordique</string>
     <string name="routeInfo_piste_type_name">Type de piste</string>
@@ -3213,7 +3213,7 @@
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
-    <string name="update_all_maps_q">Tout mettre à jour \? (%1$d) cartes)</string>
+    <string name="update_all_maps_q">Mettre à jour %1$d cartes \?</string>
     <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier \'rec\' ou dans des dossiers mensuels ou journaliers.</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
@@ -3993,7 +3993,6 @@
     <string name="track_recording_description">Arrêter l\'enregistrement \?
 \nToutes les données non enregistrées seront perdues.</string>
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
-    <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
     <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes pentes.</string>
@@ -4025,7 +4024,7 @@
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
-    <string name="snap_to_road_descr">L’icône de positionnement se déplacera sur le trajet en cours.</string>
+    <string name="snap_to_road_descr">L’icône de positionnement s\'accrochera à l\'itinéraire en cours.</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
     <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
@@ -4514,8 +4513,8 @@
     <string name="shared_string_reading_file">Lecture du fichier…</string>
     <string name="all_groups">Tous les groupes</string>
     <string name="list_of_groups">Liste des groupes</string>
-    <string name="points_selection_descr">Fermer \? (vos modifications seront perdues)</string>
-    <string name="exit_import_descr">Quitter \? (vos modifications ne seront pas enregistrées)</string>
+    <string name="points_selection_descr">Fermer et annuler toutes les modifications \?</string>
+    <string name="exit_import_descr">Quitter sans enregistrer les modifications \?</string>
     <string name="exit_import">Quitter \?</string>
     <string name="import_tracks">Importer des traces</string>
     <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces à importer.</string>
@@ -4612,7 +4611,7 @@
 \n</string>
     <string name="turn_on_public_transport_description">Activez pour afficher les itinéraires de transports en commun sur la carte.</string>
     <string name="widget_secondary_desc_part_of">Fait partie de l\'extension %1$s.</string>
-    <string name="av_notes_choose_action_widget_desc">Choisissez l\'action</string>
+    <string name="av_notes_choose_action_widget_desc">Sélectionnez l\'action.</string>
     <string name="coordinates_widget_secondary_desc">Le format des coordonnées pourrait être modifié en %1$s - %2$s - %3$s.</string>
     <string name="parking_widget_desc">Widget qui indique la distance séparant le centre de votre écran du lieu de stationnement.</string>
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
@@ -4672,7 +4671,7 @@
     <string name="map_widget_trip_recording_duration">Durée</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Aucune restriction)</string>
     <string name="map_widget_trip_recording_downhill">Descente</string>
-    <string name="routing_attr_hazmat_category_name">Catégorie matières dangereuses</string>
+    <string name="routing_attr_hazmat_category_name">Catégorie des matières dangereuses</string>
     <string name="map_widget_true_bearing">Relèvement vrai</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
@@ -4686,7 +4685,6 @@
     <string name="lang_sat">Santali</string>
     <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
-    <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera ignorée et n\'affectera pas le calcul de la vitesse moyenne.</string>
     <string name="average_speed_widget_desc">Indique la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
     <string name="transport_hazmat_yes_desc">Vous devez sélectionner une catégorie.</string>
@@ -4732,7 +4730,7 @@
     <string name="auto_backup_title">Backup automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
-    <string name="compass_click_desc">Cliquez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Appuyez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
     <string name="rendering_attr_depthContourColorScheme_name">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">En tapant sur le gadget, vous pouvez prendre une photo.</string>
@@ -4753,13 +4751,16 @@
     <string name="true_bearing_wdiget_desc">Angle entre le Nord vrai et la destination depuis votre position.</string>
     <string name="relative_bearing_widget_desc">Affiche l\'angle entre la direction de votre déplacement et la destination.</string>
     <string name="next_turn_widget_desc">Le gadget illustre la prochaine bifurcation avec une image et vous indique la distance qui vous en sépare.</string>
-    <string name="trip_recording_uphill_widget_desc">Affiche la somme de toutes les montées pour le trajet en cours d\'enregistrement.</string>
+    <string name="trip_recording_uphill_widget_desc">Affiche le dénivelé positif cumulé du trajet en cours d\'enregistrement.</string>
     <string name="second_next_turn_widget_desc">Le gadget vous informe de la seconde bifurcation à venir et s\'active à l\'approche de cette bifurcation.</string>
-    <string name="duplacate_widget_added_snackbar">Un gadget doublon sera ensuite ajouté dans la liste.</string>
-    <string name="second_marker_widget_desc">Vous pouvez configurer le gadget pour afficher la distance ou l\'heure d\'arrivée estimée restante pour le deuxième marqueur de carte.</string>
-    <string name="first_marker_widget_desc">Vous pouvez configurer le gadget pour afficher la distance ou l\'heure d\'arrivée estimée restante pour le premier marqueur de carte.</string>
-    <string name="time_to_intermediate_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"L\'heure de départ\" pour le premier point intermédiaire. Le temps est constamment mis à jour durant le guidage et est égal au temps de l\'itinéraire depuis la position actuelle.</string>
-    <string name="distance_to_destination_widget_desc">Le gadget affiche la distance restante jusqu\'au dernier point de l\'arrivée.</string>
-    <string name="time_to_destination_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"L\'heure de départ\" pour le dernier point de l\'arrivée. Le temps est constamment mis à jour durant le guidage et est égal au temps de l\'itinéraire depuis la position actuelle.</string>
-    <string name="distance_to_intermediate_widget_desc">Le gadget affiche la distance restante jusqu\'au premier point intermédiaire. Une fois les points intermédiaires dépassés, la distance sera mise à jour jusqu\'au point intermédiaire suivant.</string>
+    <string name="duplacate_widget_added_snackbar">Une copie du gadget sera ajoutée à la liste.</string>
+    <string name="second_marker_widget_desc">Vous pouvez paramétrer le gadget pour afficher la Distance restante ou l\'Heure estimée d’arrivée jusqu\'au second marqueur.</string>
+    <string name="first_marker_widget_desc">Vous pouvez paramétrer le gadget pour afficher la Distance restante ou l\'Heure estimée d\'arrivée jusqu’au premier marqueur.</string>
+    <string name="time_to_intermediate_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"La durée restante\" jusqu\'au prochain point intermédiaire. Ces informations sont actualisées pendant le guidage et une fois ce point intermédiaire atteint, les informations seront calculées pour le point intermédiaire suivant.</string>
+    <string name="distance_to_destination_widget_desc">Le gadget affiche la distance restante jusqu\'à l’arrivée (dernier point).</string>
+    <string name="time_to_destination_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"La durée restante\" jusqu\'à l\'arrivée. Ces informations sont actualisées pendant le guidage et calculées à partir de votre position actuelle.</string>
+    <string name="distance_to_intermediate_widget_desc">Le gadget affiche la distance restante jusqu\'au premier point intermédiaire. Une fois ce point intermédiaire atteint, la distance sera calculée jusqu\'au point intermédiaire suivant.</string>
+    <string name="trip_recording_duration_widget_desc">Affiche la durée du trajet en cours d\'enregistrement.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Afficher les chemins tracés pour les VTT</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Afficher la difficulté des chemins VTT IMBA</string>
 </resources>

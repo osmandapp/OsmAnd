@@ -466,6 +466,15 @@ public class ResourceManager {
 		}
 	}
 
+	public void downloadTileForMapSync(@NonNull ITileSource map, int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		if (cache != null) {
+			String tileId = calculateTileId(map, x, y, zoom);
+			long time = System.currentTimeMillis();
+			cache.getTileForMap(tileId, map, x, y, zoom, true, true, true, time);
+		}
+	}
+
 	public void clearCacheAndTiles(@NonNull ITileSource map) {
 		map.deleteTiles(new File(dirWithTiles, map.getName()).getAbsolutePath());
 		TilesCache<?> cache = getTilesCache(map);

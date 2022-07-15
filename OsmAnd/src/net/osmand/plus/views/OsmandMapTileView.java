@@ -74,6 +74,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -150,7 +151,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private List<IMapLocationListener> locationListeners = new ArrayList<>();
+	private List<IMapLocationListener> locationListeners = new CopyOnWriteArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -255,12 +256,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		LatLon ll = settings.getLastKnownMapLocation();
-		currentViewport = new RotatedTileBoxBuilder().
-				setLocation(ll.getLatitude(), ll.getLongitude()).setZoom(settings.getLastKnownMapZoom()).
-				setPixelDimensions(w, h).build();
+		currentViewport = new RotatedTileBoxBuilder()
+				.setLocation(ll.getLatitude(), ll.getLongitude())
+				.setZoom(settings.getLastKnownMapZoom())
+				.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get())
+				.setPixelDimensions(w, h)
+				.build();
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
-		elevationAngle = settings.getLastKnownMapElevation();
+		elevationAngle = settings.LAST_KNOWN_MAP_ELEVATION.get();
 	}
 
 	@Nullable
@@ -539,7 +543,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setLatLon(double latitude, double longitude, boolean useShiftedCenter, boolean notify) {
-		animatedDraggingThread.stopAnimating();
+		if (!animatedDraggingThread.isAnimatingMapTilt()) {
+			animatedDraggingThread.stopAnimating();
+		}
 		setLatLonImpl(latitude, longitude, useShiftedCenter);
 		refreshMap();
 		if (notify) {
@@ -588,15 +594,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
-		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
-		listeners.add(listener);
-		this.locationListeners = listeners;
+		locationListeners.add(listener);
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
-		listeners.remove(listener);
-		this.locationListeners = listeners;
+		locationListeners.remove(listener);
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {

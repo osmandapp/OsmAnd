@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1240,5 +1241,21 @@ public class Algorithms {
 			}
 		}
 		return stringPalette.toString();
+	}
+
+	public static <T> List<WeakReference<T>> updateWeakReferencesList(List<WeakReference<T>> list, T item, boolean isNew) {
+		List<WeakReference<T>> copy = new ArrayList<>(list);
+		Iterator<WeakReference<T>> it = copy.iterator();
+		while (it.hasNext()) {
+			WeakReference<T> ref = it.next();
+			T object = ref.get();
+			if (object == null || object == item) {
+				it.remove();
+			}
+		}
+		if (isNew) {
+			copy.add(new WeakReference<>(item));
+		}
+		return copy;
 	}
 }
