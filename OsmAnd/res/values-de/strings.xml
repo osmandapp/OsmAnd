@@ -4774,4 +4774,7 @@
     <string name="time_to_destination_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit ab dem aktuellen Standort.</string>
     <string name="time_to_intermediate_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert. Sobald ein Zwischenpunkt passiert ist, wird die Zeit bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="compass_always_visible">Immer sichtbar</string>
+    <string name="download_tiles">Kacheln herunterladen</string>
+    <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
+    <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden berücksichtigt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
 </resources>
