@@ -7,9 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -21,9 +19,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BackupExecutor extends ThreadPoolExecutor {
 
 	private final OsmandApplication app;
-	private List<BackupExecutorListener> listeners = new CopyOnWriteArrayList<>();
 	private final AtomicInteger aState = new AtomicInteger(State.IDLE.ordinal());
 	private final List<BackupCommand> activeCommands = new CopyOnWriteArrayList<>();
+	private final List<BackupExecutorListener> listeners = new CopyOnWriteArrayList<>();
 
 	public enum State {
 		IDLE,
@@ -116,12 +114,12 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	}
 
 	private void updateActiveCommands() {
-		Set<BackupCommand> remove = new HashSet<>();
+		Set<BackupCommand> commandsToRemove = new HashSet<>();
 		for (BackupCommand command : activeCommands) {
 			if (command.getStatus() == AsyncTask.Status.FINISHED) {
-				remove.add(command);
+				commandsToRemove.add(command);
 			}
 		}
-		activeCommands.removeAll(remove);
+		activeCommands.removeAll(commandsToRemove);
 	}
 }

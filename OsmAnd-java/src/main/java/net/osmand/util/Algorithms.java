@@ -1238,14 +1238,13 @@ public class Algorithms {
 		return stringPalette.toString();
 	}
 
-	public static <T> List<WeakReference<T>> safeUpdateList(List<WeakReference<T>> original,
-	                                                        T item, boolean isNew) {
-		List<WeakReference<T>> copy = new ArrayList<>(original);
+	public static <T> List<WeakReference<T>> updateWeakReferencesList(List<WeakReference<T>> list, T item, boolean isNew) {
+		List<WeakReference<T>> copy = new ArrayList<>(list);
 		Iterator<WeakReference<T>> it = copy.iterator();
 		while (it.hasNext()) {
 			WeakReference<T> ref = it.next();
-			T _item = ref.get();
-			if (_item == null || _item == item) {
+			T object = ref.get();
+			if (object == null || object == item) {
 				it.remove();
 			}
 		}

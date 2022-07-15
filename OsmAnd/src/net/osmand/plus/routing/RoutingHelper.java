@@ -337,28 +337,28 @@ public class RoutingHelper {
 	}
 
 	public void addRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = Algorithms.safeUpdateList(updateListeners, listener, true);
+		updateListeners = Algorithms.updateWeakReferencesList(updateListeners, listener, true);
 	}
 
 	public void removeRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = Algorithms.safeUpdateList(updateListeners, listener, false);
+		updateListeners = Algorithms.updateWeakReferencesList(updateListeners, listener, false);
 	}
 
 	public void addRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = Algorithms.safeUpdateList(settingsListeners, listener, true);
+		settingsListeners = Algorithms.updateWeakReferencesList(settingsListeners, listener, true);
 	}
 
 	public void removeRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = Algorithms.safeUpdateList(settingsListeners, listener, false);
+		settingsListeners = Algorithms.updateWeakReferencesList(settingsListeners, listener, false);
 	}
 
 	public void addListener(@NonNull IRouteInformationListener l) {
-		listeners = Algorithms.safeUpdateList(listeners, l, true);
+		listeners = Algorithms.updateWeakReferencesList(listeners, l, true);
 		transportRoutingHelper.addListener(l);
 	}
 
 	public void removeListener(@NonNull IRouteInformationListener lt) {
-		listeners = Algorithms.safeUpdateList(listeners, lt, false);
+		listeners = Algorithms.updateWeakReferencesList(listeners, lt, false);
 	}
 
 	public void updateLocation(Location currentLocation) {

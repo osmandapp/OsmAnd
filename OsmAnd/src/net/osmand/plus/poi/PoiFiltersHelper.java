@@ -421,13 +421,14 @@ public class PoiFiltersHelper {
 			return false;
 		}
 		helper.deleteFilter(helper.getWritableDatabase(), filter, true);
-		Set<PoiUIFilter> remove = new HashSet<>();
+
+		Set<PoiUIFilter> filtersToRemove = new HashSet<>();
 		for (PoiUIFilter f : cacheTopStandardFilters) {
 			if (f.getFilterId().equals(filter.getFilterId())) {
-				remove.add(f);
+				filtersToRemove.add(f);
 			}
 		}
-		cacheTopStandardFilters.removeAll(remove);
+		cacheTopStandardFilters.removeAll(filtersToRemove);
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
 			addTopPoiFilter(filter);
