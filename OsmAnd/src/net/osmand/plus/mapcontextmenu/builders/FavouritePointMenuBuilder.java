@@ -39,7 +39,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private final FavouritePoint fav;
 	private Object originObject;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull FavouritePoint fav) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull final FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
 		setShowNearestWiki(true);

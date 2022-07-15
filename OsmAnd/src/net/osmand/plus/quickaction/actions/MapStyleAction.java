@@ -34,7 +34,7 @@ import java.util.Map;
 public class MapStyleAction extends SwitchableAction<String> {
 
 
-	private final static String KEY_STYLES = "styles";
+	private static final String KEY_STYLES = "styles";
 	public static final QuickActionType TYPE = new QuickActionType(14,
 			"mapstyle.change", MapStyleAction.class).
 			nameRes(R.string.quick_action_map_style).iconRes(R.drawable.ic_map).

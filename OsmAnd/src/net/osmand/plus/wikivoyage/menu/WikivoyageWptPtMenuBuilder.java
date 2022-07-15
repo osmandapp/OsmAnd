@@ -14,12 +14,12 @@ import java.util.HashMap;
 
 public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 
-	private final static String KEY_PHONE = "Phone: ";
-	private final static String KEY_EMAIL = "Email: ";
-	private final static String KEY_WORKING_HOURS = "Working hours: ";
-	private final static String KEY_PRICE = "Price: ";
-	private final static String KEY_DIRECTIONS = "Directions: ";
-	private final static String KEY_DESCRIPTION = "Description";
+	private static final String KEY_PHONE = "Phone: ";
+	private static final String KEY_EMAIL = "Email: ";
+	private static final String KEY_WORKING_HOURS = "Working hours: ";
+	private static final String KEY_PRICE = "Price: ";
+	private static final String KEY_DIRECTIONS = "Directions: ";
+	private static final String KEY_DESCRIPTION = "Description";
 
 	private HashMap<String, String> descTokens;
 

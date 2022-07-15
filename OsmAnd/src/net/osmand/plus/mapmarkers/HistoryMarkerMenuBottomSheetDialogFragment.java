@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
+	public static final String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
 
 	public static final String MARKER_POSITION = "marker_position";
 	public static final String MARKER_NAME = "marker_name";

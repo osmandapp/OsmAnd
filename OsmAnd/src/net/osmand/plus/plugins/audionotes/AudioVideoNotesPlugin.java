@@ -194,7 +194,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private Recording recordingPlaying;
 	private Timer playerTimer;
 
-	private final static char SPLIT_DESC = ' ';
+	private static final char SPLIT_DESC = ' ';
 
 	private double actionLat;
 	private double actionLon;
@@ -1805,7 +1805,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void playRecording(final @NonNull Context ctx, final @NonNull Recording r) {
+	public void playRecording(@NonNull final Context ctx, @NonNull final Recording r) {
 		if (r.isVideo() || r.isPhoto()) {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			String type = r.isVideo() ? "video/*" : "image/*";

@@ -542,7 +542,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 	 * @param state One of {@link #STATE_COLLAPSED}, {@link #STATE_EXPANDED}, or
 	 *              {@link #STATE_HIDDEN}.
 	 */
-	public final void setState(final @State int state) {
+	public final void setState(@State final int state) {
 		if (state == mState) {
 			return;
 		}

@@ -81,7 +81,7 @@ public class BackupHelper {
 
 	private final BackupExecutor executor;
 
-	public final static String INFO_EXT = ".info";
+	public static final String INFO_EXT = ".info";
 
 	public static final String SERVER_URL = "https://osmand.net";
 
@@ -97,12 +97,12 @@ public class BackupHelper {
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
 
-	public final static int STATUS_SUCCESS = 0;
-	public final static int STATUS_PARSE_JSON_ERROR = 1;
-	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
-	public final static int STATUS_SERVER_ERROR = 3;
-	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
-	public final static int STATUS_EXECUTION_ERROR = 5;
+	public static final int STATUS_SUCCESS = 0;
+	public static final int STATUS_PARSE_JSON_ERROR = 1;
+	public static final int STATUS_EMPTY_RESPONSE_ERROR = 2;
+	public static final int STATUS_SERVER_ERROR = 3;
+	public static final int STATUS_NO_ORDER_ID_ERROR = 4;
+	public static final int STATUS_EXECUTION_ERROR = 5;
 	public static final int STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR = 6;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;

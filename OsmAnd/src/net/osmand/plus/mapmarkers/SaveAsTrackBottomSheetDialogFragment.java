@@ -36,7 +36,7 @@ import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POI
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "SaveAsTrackBottomSheetDialogFragment";
+	public static final String TAG = "SaveAsTrackBottomSheetDialogFragment";
 	public static final String COORDINATE_INPUT_MODE_KEY = "coordinate_input_mode_key";
 
 	private boolean portrait;

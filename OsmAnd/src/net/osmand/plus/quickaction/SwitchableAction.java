@@ -378,16 +378,16 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		return ContextCompat.getColor(app, colorRes);
 	}
 
-	protected abstract
 	@StringRes
+	protected abstract
 	int getAddBtnText();
 
-	protected abstract
 	@StringRes
+	protected abstract
 	int getDiscrHint();
 
-	protected abstract
 	@StringRes
+	protected abstract
 	int getDiscrTitle();
 
 	protected abstract String getListKey();

@@ -94,7 +94,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
-	private final static Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
 
 	private OsmandApplication app;
 	private OsmandSettings settings;

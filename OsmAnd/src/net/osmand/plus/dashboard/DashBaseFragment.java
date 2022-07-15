@@ -55,8 +55,8 @@ public abstract class DashBaseFragment extends Fragment {
 
 	@NonNull
 	@Override
-	final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-								   @Nullable Bundle savedInstanceState) {
+	public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+	                               @Nullable Bundle savedInstanceState) {
 		View childView = initView(inflater, container, savedInstanceState);
 		FrameLayout.LayoutParams layoutParams =
 				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

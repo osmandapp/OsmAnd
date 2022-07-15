@@ -29,9 +29,9 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
-	private final static int LOGO_ID = 1001;
-	private final static int TEXT_ID = 1002;
-	private final static int OSM_TEXT_ID = 1003;
+	private static final int LOGO_ID = 1001;
+	private static final int TEXT_ID = 1002;
+	private static final int OSM_TEXT_ID = 1003;
 	
 	public static final String TAG = "SecondSplashScreenFragment";
 	public static final int MIN_SCREEN_WIDTH_TABLET_DP = 600;

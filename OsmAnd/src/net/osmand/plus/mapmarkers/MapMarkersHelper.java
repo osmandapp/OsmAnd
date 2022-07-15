@@ -256,19 +256,19 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void sortMarkers(final @MapMarkersSortByDef int sortByMode, LatLon location) {
+	public void sortMarkers(@MapMarkersSortByDef final int sortByMode, LatLon location) {
 		sortMarkers(getMapMarkers(), false, sortByMode, location);
 		saveGroups(false);
 	}
 
-	private void sortMarkers(List<MapMarker> markers, final boolean visited, final @MapMarkersSortByDef int sortByMode) {
+	private void sortMarkers(List<MapMarker> markers, final boolean visited, @MapMarkersSortByDef final int sortByMode) {
 		sortMarkers(markers, visited, sortByMode, null);
 	}
 
 	private void sortMarkers(List<MapMarker> markers,
-							 final boolean visited,
-							 final @MapMarkersSortByDef int sortByMode,
-							 @Nullable final LatLon location) {
+	                         final boolean visited,
+	                         @MapMarkersSortByDef final int sortByMode,
+	                         @Nullable final LatLon location) {
 		Collections.sort(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
@@ -301,7 +301,7 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public void runSynchronization(final @NonNull MapMarkersGroup group) {
+	public void runSynchronization(@NonNull final MapMarkersGroup group) {
 		ctx.runInUIThread(() -> new SyncGroupTask(ctx, group, syncListeners).executeOnExecutor(executorService));
 	}
 

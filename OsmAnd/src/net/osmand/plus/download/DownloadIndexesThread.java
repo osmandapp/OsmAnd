@@ -46,7 +46,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
 
-	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
+	private static final Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 
 	private final OsmandApplication app;
 

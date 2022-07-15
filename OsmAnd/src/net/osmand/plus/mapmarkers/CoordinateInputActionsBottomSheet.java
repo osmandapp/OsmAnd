@@ -12,7 +12,7 @@ import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 
 public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "CoordinateInputActionsBottomSheet";
+	public static final String TAG = "CoordinateInputActionsBottomSheet";
 
 	private CoordinateInputActionsListener listener;
 

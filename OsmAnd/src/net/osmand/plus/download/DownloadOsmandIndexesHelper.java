@@ -32,7 +32,7 @@ import java.util.zip.GZIPInputStream;
 
 public class DownloadOsmandIndexesHelper {
 
-	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
+	private static final Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
 
 	public static class IndexFileList implements Serializable {
 		private static final long serialVersionUID = 1L;

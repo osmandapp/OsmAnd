@@ -12,7 +12,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "SelectionMarkersGroupBottomSheetDialogFragment";
+	public static final String TAG = "SelectionMarkersGroupBottomSheetDialogFragment";
 
 	private AddMarkersGroupFragmentListener listener;
 

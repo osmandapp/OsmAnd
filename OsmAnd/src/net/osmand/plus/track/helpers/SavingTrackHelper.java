@@ -43,32 +43,32 @@ import java.util.Map;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
-	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
-	public final static int DATABASE_VERSION = 7;
+	public static final String DATABASE_NAME = "tracks"; //$NON-NLS-1$
+	public static final int DATABASE_VERSION = 7;
 
-	public final static String TRACK_NAME = "track"; //$NON-NLS-1$
-	public final static String TRACK_COL_DATE = "date"; //$NON-NLS-1$
-	public final static String TRACK_COL_LAT = "lat"; //$NON-NLS-1$
-	public final static String TRACK_COL_LON = "lon"; //$NON-NLS-1$
-	public final static String TRACK_COL_ALTITUDE = "altitude"; //$NON-NLS-1$
-	public final static String TRACK_COL_SPEED = "speed"; //$NON-NLS-1$
-	public final static String TRACK_COL_HDOP = "hdop"; //$NON-NLS-1$
-	public final static String TRACK_COL_HEADING = "heading"; //$NON-NLS-1$
+	public static final String TRACK_NAME = "track"; //$NON-NLS-1$
+	public static final String TRACK_COL_DATE = "date"; //$NON-NLS-1$
+	public static final String TRACK_COL_LAT = "lat"; //$NON-NLS-1$
+	public static final String TRACK_COL_LON = "lon"; //$NON-NLS-1$
+	public static final String TRACK_COL_ALTITUDE = "altitude"; //$NON-NLS-1$
+	public static final String TRACK_COL_SPEED = "speed"; //$NON-NLS-1$
+	public static final String TRACK_COL_HDOP = "hdop"; //$NON-NLS-1$
+	public static final String TRACK_COL_HEADING = "heading"; //$NON-NLS-1$
 
-	public final static String POINT_NAME = "point"; //$NON-NLS-1$
-	public final static String POINT_COL_DATE = "date"; //$NON-NLS-1$
-	public final static String POINT_COL_LAT = "lat"; //$NON-NLS-1$
-	public final static String POINT_COL_LON = "lon"; //$NON-NLS-1$
-	public final static String POINT_COL_NAME = "pname"; //$NON-NLS-1$
-	public final static String POINT_COL_CATEGORY = "category"; //$NON-NLS-1$
-	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
-	public final static String POINT_COL_COLOR = "color"; //$NON-NLS-1$
-	public final static String POINT_COL_ICON = "icon"; //$NON-NLS-1$
-	public final static String POINT_COL_BACKGROUND = "background"; //$NON-NLS-1$
+	public static final String POINT_NAME = "point"; //$NON-NLS-1$
+	public static final String POINT_COL_DATE = "date"; //$NON-NLS-1$
+	public static final String POINT_COL_LAT = "lat"; //$NON-NLS-1$
+	public static final String POINT_COL_LON = "lon"; //$NON-NLS-1$
+	public static final String POINT_COL_NAME = "pname"; //$NON-NLS-1$
+	public static final String POINT_COL_CATEGORY = "category"; //$NON-NLS-1$
+	public static final String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
+	public static final String POINT_COL_COLOR = "color"; //$NON-NLS-1$
+	public static final String POINT_COL_ICON = "icon"; //$NON-NLS-1$
+	public static final String POINT_COL_BACKGROUND = "background"; //$NON-NLS-1$
 
-	public final static float NO_HEADING = -1.0f;
+	public static final float NO_HEADING = -1.0f;
 
-	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
+	public static final Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
 	private long lastTimeUpdated = 0;
 	private final OsmandApplication ctx;

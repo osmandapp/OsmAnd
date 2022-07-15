@@ -36,12 +36,12 @@ import java.util.Map;
 
 public class TerrainLayer extends MapTileLayer {
 
-	private final static Log log = PlatformUtil.getLog(TerrainLayer.class);
+	private static final Log log = PlatformUtil.getLog(TerrainLayer.class);
 	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<>();
-	private final static String HILLSHADE_CACHE = "hillshade.cache";
-	private final static String SLOPE_CACHE = "slope.cache";
-	private final static int ZOOM_BOUNDARY = 15;
-	private final static int DEFAULT_ALPHA = 100;
+	private static final String HILLSHADE_CACHE = "hillshade.cache";
+	private static final String SLOPE_CACHE = "slope.cache";
+	private static final int ZOOM_BOUNDARY = 15;
+	private static final int DEFAULT_ALPHA = 100;
 	private final SRTMPlugin srtmPlugin;
 	private final TerrainMode mode;
 

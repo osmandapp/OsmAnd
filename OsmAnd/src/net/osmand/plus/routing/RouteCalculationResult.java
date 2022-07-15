@@ -35,7 +35,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class RouteCalculationResult {
-	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
+	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
 	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
 	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;

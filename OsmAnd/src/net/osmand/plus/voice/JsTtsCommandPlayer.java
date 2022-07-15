@@ -33,7 +33,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 
 	private static final Log log = PlatformUtil.getLog(JsTtsCommandPlayer.class);
 
-	private final static String PEBBLE_ALERT = "PEBBLE_ALERT";
+	private static final String PEBBLE_ALERT = "PEBBLE_ALERT";
 
 	private static TextToSpeech mTts;
 

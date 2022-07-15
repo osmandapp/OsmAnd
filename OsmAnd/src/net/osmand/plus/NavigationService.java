@@ -44,7 +44,7 @@ public class NavigationService extends Service {
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public static int USED_BY_CAR_APP = 4;
-	public final static String USAGE_INTENT = "SERVICE_USED_BY";
+	public static final String USAGE_INTENT = "SERVICE_USED_BY";
 
 	private final NavigationServiceBinder binder = new NavigationServiceBinder();
 

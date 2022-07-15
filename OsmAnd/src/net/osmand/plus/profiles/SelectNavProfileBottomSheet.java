@@ -46,8 +46,8 @@ import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHI
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
-	private final static String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
-	private final static String DIALOG_TYPE = "dialog_type";
+	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
+	private static final String DIALOG_TYPE = "dialog_type";
 
 	private RoutingDataUtils dataUtils;
 

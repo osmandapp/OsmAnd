@@ -2179,29 +2179,29 @@ public class OsmandSettings {
 	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
 	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
-	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
-	public final static int NAVIGATE = 1;
-	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
-	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
-	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
-	public final static String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
+	public static final int NAVIGATE = 1;
+	public static final String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
+	public static final String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
+	public static final String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
+	public static final String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
 
-	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
 
-	public final static String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
-	public final static String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
-	public final static String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
-	public final static String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
-	public final static String MY_LOC_POINT_LAT = "my_loc_point_lat";
-	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
-	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
+	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
+	public static final String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
+	public static final String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
+	public static final String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+	public static final String MY_LOC_POINT_LAT = "my_loc_point_lat";
+	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
+	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
 	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";

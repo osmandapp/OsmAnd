@@ -59,7 +59,7 @@ public class Renderable {
         THREAD_POOL_EXECUTOR = threadPoolExecutor;
     }
 
-    public static abstract class RenderableSegment {
+    public abstract static class RenderableSegment {
 
         private static final boolean DRAW_BORDER = true;
 

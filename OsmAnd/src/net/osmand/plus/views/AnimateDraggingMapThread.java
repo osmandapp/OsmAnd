@@ -28,12 +28,12 @@ public class AnimateDraggingMapThread {
 
 	protected static final Log log = PlatformUtil.getLog(AnimateDraggingMapThread.class);
 
-	private final static float DRAGGING_ANIMATION_TIME = 1200f;
-	private final static float ZOOM_ANIMATION_TIME = 250f;
-	private final static float ZOOM_MOVE_ANIMATION_TIME = 350f;
-	private final static float MOVE_MOVE_ANIMATION_TIME = 900f;
-	private final static float NAV_ANIMATION_TIME = 1000f;
-	private final static int DEFAULT_SLEEP_TO_REDRAW = 15;
+	private static final float DRAGGING_ANIMATION_TIME = 1200f;
+	private static final float ZOOM_ANIMATION_TIME = 250f;
+	private static final float ZOOM_MOVE_ANIMATION_TIME = 350f;
+	private static final float MOVE_MOVE_ANIMATION_TIME = 900f;
+	private static final float NAV_ANIMATION_TIME = 1000f;
+	private static final int DEFAULT_SLEEP_TO_REDRAW = 15;
 
 	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
 	private static final float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;

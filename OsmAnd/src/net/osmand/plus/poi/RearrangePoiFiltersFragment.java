@@ -609,7 +609,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		@SuppressLint("ClickableViewAccessibility")
 		@Override
-		public void onBindViewHolder(final @NonNull RecyclerView.ViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
 			ListItem item = items.get(position);
 			boolean nightMode = isNightMode(app, usedOnMap);
 			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);

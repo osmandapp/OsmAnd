@@ -190,7 +190,7 @@ public class AvoidSpecificRoads {
 		removeImpassableRoad(getLocation(obj));
 	}
 
-	public void showDialog(@NonNull final MapActivity mapActivity, final @Nullable ApplicationMode mode) {
+	public void showDialog(@NonNull final MapActivity mapActivity, @Nullable final ApplicationMode mode) {
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);

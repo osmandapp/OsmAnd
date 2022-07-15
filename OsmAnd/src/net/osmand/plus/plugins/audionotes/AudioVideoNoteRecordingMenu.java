@@ -254,7 +254,7 @@ public class AudioVideoNoteRecordingMenu {
 		return res;
 	}
 
-	public void rec(final @NonNull MapActivity mapActivity, final boolean restart) {
+	public void rec(@NonNull final MapActivity mapActivity, final boolean restart) {
 		stopCounter();
 		final CurrentRecording recording = plugin.getCurrentRecording();
 		int delay;
@@ -277,7 +277,7 @@ public class AudioVideoNoteRecordingMenu {
 		}, delay);
 	}
 
-	public void recExternal(final @NonNull MapActivity mapActivity) {
+	public void recExternal(@NonNull final MapActivity mapActivity) {
 		stopCounter();
 		handler.postDelayed(() -> {
 			CurrentRecording recording = plugin.getCurrentRecording();

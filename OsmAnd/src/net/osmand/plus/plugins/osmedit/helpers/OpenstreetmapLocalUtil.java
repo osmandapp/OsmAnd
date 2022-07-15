@@ -32,7 +32,7 @@ import java.util.Set;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
-	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
+	public static final Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	private OsmEditingPlugin plugin;
 

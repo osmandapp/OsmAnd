@@ -24,7 +24,7 @@ import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = WikivoyageOptionsBottomSheetDialogFragment.class.getSimpleName();
+	public static final String TAG = WikivoyageOptionsBottomSheetDialogFragment.class.getSimpleName();
 
 	public static final int DOWNLOAD_IMAGES_CHANGED = 1;
 	public static final int CACHE_CLEARED = 2;

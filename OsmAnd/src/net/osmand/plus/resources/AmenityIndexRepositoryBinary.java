@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
-	private final static Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
+	private static final Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
 	private BinaryMapReaderResource resource;
 	private MapPoiTypes poiTypes;
 	private Map<String, List<String>> deltaPoiCategories = new HashMap<>();

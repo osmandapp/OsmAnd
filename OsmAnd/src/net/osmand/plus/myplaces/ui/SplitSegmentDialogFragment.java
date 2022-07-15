@@ -58,7 +58,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class SplitSegmentDialogFragment extends DialogFragment {
 
-	public final static String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
+	public static final String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
 
 	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;

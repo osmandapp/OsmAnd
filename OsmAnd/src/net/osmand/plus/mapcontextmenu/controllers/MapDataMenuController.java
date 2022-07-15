@@ -58,7 +58,7 @@ public class MapDataMenuController extends MenuController {
 
 	private DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull DownloadMapObject mapObject) {
+	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final DownloadMapObject mapObject) {
 		super(new MapDataMenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();

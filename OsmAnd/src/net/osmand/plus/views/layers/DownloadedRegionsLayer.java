@@ -344,7 +344,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 	}
 
-	private void showDownloadMapToolbar(final @NonNull IndexItem indexItem, final @NonNull String regionName) {
+	private void showDownloadMapToolbar(@NonNull final IndexItem indexItem, @NonNull final String regionName) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
 			app.runInUIThread(() -> {

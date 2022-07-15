@@ -494,8 +494,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void showTestResults(final boolean resultOk,
-								 final @NonNull String message,
-								 final @NonNull ExampleLocation location) {
+	                             @NonNull final String message,
+	                             @NonNull final ExampleLocation location) {
 		app.runInUIThread(() -> {
 			testResultsContainer.setVisibility(View.VISIBLE);
 			ImageView ivImage = testResultsContainer.findViewById(R.id.icon);

@@ -35,7 +35,7 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 		return shouldShowFunction.getTitleId() != -1;
 	}
 
-	public static abstract class ShouldShowFunction {
+	public abstract static class ShouldShowFunction {
 		public abstract boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag);
 
 		public int getTitleId() {

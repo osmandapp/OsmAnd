@@ -50,11 +50,11 @@ import java.util.TreeSet;
 
 public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
-	public final static String STD_PREFIX = "std_";
-	public final static String USER_PREFIX = "user_";
-	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
-	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
-	public final static int INVALID_ORDER = -1;
+	public static final String STD_PREFIX = "std_";
+	public static final String USER_PREFIX = "user_";
+	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
+	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
+	public static final int INVALID_ORDER = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();

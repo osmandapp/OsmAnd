@@ -52,7 +52,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 	public static final String TAG = SharedStorageWarningFragment.class.getSimpleName();
 
-	public final static String STORAGE_MIGRATION = "storage_migration";
+	public static final String STORAGE_MIGRATION = "storage_migration";
 	private static final int FOLDER_ACCESS_REQUEST = 1009;
 
 	private OsmandApplication app;

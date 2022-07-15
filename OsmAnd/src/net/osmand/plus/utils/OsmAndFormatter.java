@@ -49,12 +49,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class OsmAndFormatter {
-	public final static float METERS_IN_KILOMETER = 1000f;
-	public final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
-	public final static float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
+	public static final float METERS_IN_KILOMETER = 1000f;
+	public static final float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
+	public static final float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
 
-	public final static float YARDS_IN_ONE_METER = 1.0936f;
-	public final static float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+	public static final float YARDS_IN_ONE_METER = 1.0936f;
+	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");

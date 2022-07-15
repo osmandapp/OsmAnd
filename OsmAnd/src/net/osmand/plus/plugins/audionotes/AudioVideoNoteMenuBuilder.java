@@ -25,7 +25,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
 	private final Recording recording;
 
-	public AudioVideoNoteMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Recording recording) {
+	public AudioVideoNoteMenuBuilder(@NonNull MapActivity mapActivity, @NonNull final Recording recording) {
 		super(mapActivity);
 		this.recording = recording;
 	}

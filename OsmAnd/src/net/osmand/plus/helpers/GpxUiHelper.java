@@ -708,11 +708,11 @@ public class GpxUiHelper {
 		}
 	}
 
-	public static void updateGpxInfoView(final @NonNull OsmandApplication app,
-	                                     final @NonNull View v,
-	                                     final @NonNull String itemTitle,
-	                                     final @Nullable Drawable iconDrawable,
-	                                     final @NonNull GPXInfo info) {
+	public static void updateGpxInfoView(@NonNull final OsmandApplication app,
+	                                     @NonNull final View v,
+	                                     @NonNull final String itemTitle,
+	                                     @Nullable final Drawable iconDrawable,
+	                                     @NonNull final GPXInfo info) {
 		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {

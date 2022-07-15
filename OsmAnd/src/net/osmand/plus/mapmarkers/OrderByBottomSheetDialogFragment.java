@@ -15,7 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "OrderByBottomSheetDialogFragment";
+	public static final String TAG = "OrderByBottomSheetDialogFragment";
 
 	private OrderByFragmentListener listener;
 

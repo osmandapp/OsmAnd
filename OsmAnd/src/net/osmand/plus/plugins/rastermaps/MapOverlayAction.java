@@ -32,8 +32,8 @@ import java.util.Map;
 
 public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
-	private final static String KEY_OVERLAYS = "overlays";
-	private final static String KEY_NO_OVERLAY = "no_overlay";
+	private static final String KEY_OVERLAYS = "overlays";
+	private static final String KEY_NO_OVERLAY = "no_overlay";
 
 	public static final QuickActionType TYPE = new QuickActionType(15,
 			"mapoverlay.change", MapOverlayAction.class).

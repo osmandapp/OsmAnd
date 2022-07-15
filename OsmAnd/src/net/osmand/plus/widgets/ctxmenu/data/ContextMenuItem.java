@@ -25,21 +25,26 @@ public class ContextMenuItem {
 	private final String id;
 	private int tag;
 
-	private @LayoutRes int layout = INVALID_ID;
+	@LayoutRes
+	private int layout = INVALID_ID;
 	private boolean isCategory;
 	private boolean hideCompoundButton;
 	private boolean hideDivider;
 	private boolean clickable = true;
 	private int minHeight;
 
-	private @StringRes int titleId;
+	@StringRes
+	private int titleId;
 	private String description;
 	private String title;
 
 	private boolean useNaturalIconColor;
-	private @ColorInt Integer color = null;
-	private @DrawableRes int icon = INVALID_ID;
-	private @DrawableRes int secondaryIcon = INVALID_ID;
+	@ColorInt
+	private Integer color = null;
+	@DrawableRes
+	private int icon = INVALID_ID;
+	@DrawableRes
+	private int secondaryIcon = INVALID_ID;
 
 	private Boolean selected = null;
 	private int progress = INVALID_ID;

@@ -16,9 +16,12 @@ public class QuickActionType {
 	private final int id;
 	private final String stringId;
 	private boolean actionEditable;
-	private @StringRes int nameRes;
-	private @StringRes int nameActionRes;
-	private @DrawableRes int iconRes;
+	@StringRes
+	private int nameRes;
+	@StringRes
+	private int nameActionRes;
+	@DrawableRes
+	private int iconRes;
 	private Class<? extends QuickAction> cl;
 	private int category;
 

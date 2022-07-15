@@ -758,10 +758,10 @@ public class ResourceManager {
 		}
 	}
 
-	private final static String ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall = "alwaysCopyOnFirstInstall";
-	private final static String ASSET_COPY_MODE__overwriteOnlyIfExists = "overwriteOnlyIfExists";
-	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
-	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
+	private static final String ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall = "alwaysCopyOnFirstInstall";
+	private static final String ASSET_COPY_MODE__overwriteOnlyIfExists = "overwriteOnlyIfExists";
+	private static final String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
+	private static final String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 
 	private void unpackBundledAssets(@NonNull AssetManager assetManager, @NonNull File appDataDir,
 	                                 boolean firstInstall,

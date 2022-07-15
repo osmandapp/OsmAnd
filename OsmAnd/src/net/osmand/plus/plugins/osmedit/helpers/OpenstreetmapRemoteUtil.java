@@ -60,7 +60,7 @@ import gnu.trove.list.array.TLongArrayList;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
-	private final static Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
+	private static final Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
 
 	private static final long NO_CHANGESET_ID = -1;
 

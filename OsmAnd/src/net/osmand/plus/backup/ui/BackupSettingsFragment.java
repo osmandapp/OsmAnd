@@ -45,7 +45,7 @@ import java.util.Map;
 public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDeleteFilesListener,
 		OnConfirmDeletionListener, OnPrepareBackupListener {
 
-	private final static Log log = PlatformUtil.getLog(BackupSettingsFragment.class);
+	private static final Log log = PlatformUtil.getLog(BackupSettingsFragment.class);
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;

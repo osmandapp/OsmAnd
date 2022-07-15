@@ -19,7 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "WikipediaOptionsBottomSheetDialogFragment";
+	public static final String TAG = "WikipediaOptionsBottomSheetDialogFragment";
 
 	public static final int REQUEST_CODE = 0;
 	public static final int SHOW_PICTURES_CHANGED_REQUEST_CODE = 1;

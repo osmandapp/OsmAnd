@@ -34,7 +34,7 @@ import java.util.Map;
 
 class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair<String, Long>>> {
 
-	public final static Log log = PlatformUtil.getLog(StorageMigrationAsyncTask.class);
+	public static final Log log = PlatformUtil.getLog(StorageMigrationAsyncTask.class);
 
 	private final OsmandApplication app;
 	private final StorageItem selectedStorage;

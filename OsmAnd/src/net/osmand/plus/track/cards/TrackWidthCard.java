@@ -36,9 +36,9 @@ import java.util.List;
 
 public class TrackWidthCard extends MapBaseCard {
 
-	private final static String CUSTOM_WIDTH = "custom_width";
-	private final static int CUSTOM_WIDTH_MIN = 1;
-	private final static int CUSTOM_WIDTH_MAX = 24;
+	private static final String CUSTOM_WIDTH = "custom_width";
+	private static final int CUSTOM_WIDTH_MIN = 1;
+	private static final int CUSTOM_WIDTH_MAX = 24;
 
 	private final TrackDrawInfo trackDrawInfo;
 	private final OnNeedScrollListener onNeedScrollListener;

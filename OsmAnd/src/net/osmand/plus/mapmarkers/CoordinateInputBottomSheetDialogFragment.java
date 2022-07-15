@@ -23,7 +23,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
+	public static final String TAG = "CoordinateInputBottomSheetDialogFragment";
 
 	private CoordinateInputFormatChangeListener listener;
 

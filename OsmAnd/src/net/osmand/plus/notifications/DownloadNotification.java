@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DownloadNotification extends OsmandNotification {
 
-	public final static String GROUP_NAME = "DOWNLOAD";
+	public static final String GROUP_NAME = "DOWNLOAD";
 
 	public DownloadNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);

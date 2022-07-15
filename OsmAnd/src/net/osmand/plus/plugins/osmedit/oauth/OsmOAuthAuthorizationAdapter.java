@@ -33,7 +33,7 @@ import java.util.concurrent.ExecutionException;
 
 public class OsmOAuthAuthorizationAdapter {
 
-    private final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
+    private static final Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
     private static final int THREAD_ID = 10101;
 
     private final OsmandApplication app;

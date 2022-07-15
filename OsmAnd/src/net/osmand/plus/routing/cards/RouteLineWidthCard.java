@@ -38,8 +38,8 @@ import java.util.List;
 
 public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 
-	private final static int CUSTOM_WIDTH_MIN = 1;
-	private final static int CUSTOM_WIDTH_MAX = 36;
+	private static final int CUSTOM_WIDTH_MIN = 1;
+	private static final int CUSTOM_WIDTH_MAX = 36;
 
 	private PreviewRouteLineInfo previewRouteLineInfo;
 	private OnNeedScrollListener onNeedScrollListener;

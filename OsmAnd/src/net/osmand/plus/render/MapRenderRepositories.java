@@ -71,11 +71,11 @@ public class MapRenderRepositories {
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
 	public static boolean checkForDuplicateObjectIds = true;
 	
-	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
+	private static final Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
-	private final static int zoomOnlyForBasemaps = 11;
-	private final static int zoomToOverviewLocalNames = 6;
-	private final static Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
+	private static final int zoomOnlyForBasemaps = 11;
+	private static final int zoomToOverviewLocalNames = 6;
+	private static final Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
 			Arrays.asList("ru", "uk", "be", "bg", "mk", "sr")
 	);
 

@@ -20,9 +20,9 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "OptionsBottomSheetDialogFragment";
-	public final static String GROUPS_MARKERS_MENU = "groups_markers_menu";
-	public final static String HISTORY_MARKERS_MENU = "history_markers_menu";
+	public static final String TAG = "OptionsBottomSheetDialogFragment";
+	public static final String GROUPS_MARKERS_MENU = "groups_markers_menu";
+	public static final String HISTORY_MARKERS_MENU = "history_markers_menu";
 
 	private MarkerOptionsFragmentListener listener;
 	private boolean disableSortBy;

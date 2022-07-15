@@ -31,7 +31,7 @@ import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
 public class WikivoyageUtils {
 
-	private final static Log LOG = PlatformUtil.getLog(WikivoyageUtils.class);
+	private static final Log LOG = PlatformUtil.getLog(WikivoyageUtils.class);
 
 	private static final String GEO_PARAMS = "?lat=";
 	public static final String ARTICLE_TITLE = "article_title";

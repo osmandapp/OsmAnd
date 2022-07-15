@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class RoutingDataUtils {
 
-	private final static Log LOG = PlatformUtil.getLog(RoutingDataUtils.class);
+	private static final Log LOG = PlatformUtil.getLog(RoutingDataUtils.class);
 
 	public static final String DOWNLOAD_ENGINES_URL = "https://osmand.net/online-routing-providers.json";
 

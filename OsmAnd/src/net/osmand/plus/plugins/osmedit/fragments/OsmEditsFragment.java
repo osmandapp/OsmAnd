@@ -104,8 +104,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 	private static final String EXPORT_TYPE_KEY = "export_type";
 
-	private final static int MODE_DELETE = 100;
-	private final static int MODE_UPLOAD = 101;
+	private static final int MODE_DELETE = 100;
+	private static final int MODE_UPLOAD = 101;
 
 	private OsmandApplication app;
 	private OsmEditingPlugin plugin;

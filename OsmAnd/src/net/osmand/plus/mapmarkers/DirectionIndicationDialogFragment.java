@@ -44,7 +44,7 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPEN
 
 public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
 
-	public final static String TAG = DirectionIndicationDialogFragment.class.getSimpleName();
+	public static final String TAG = DirectionIndicationDialogFragment.class.getSimpleName();
 
 	private View mainView;
 

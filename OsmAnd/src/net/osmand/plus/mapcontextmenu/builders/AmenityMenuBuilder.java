@@ -72,13 +72,13 @@ import java.util.Set;
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private static final String WIKI_LINK = ".wikipedia.org/w";
-	public final static Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
-	private final static DecimalFormat DF = new DecimalFormat("#.##");
+	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	private static final DecimalFormat DF = new DecimalFormat("#.##");
 	private final MetricsConstants metricSystem;
 	private final Amenity amenity;
 
 
-	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
+	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull final Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
 		setAmenity(amenity);

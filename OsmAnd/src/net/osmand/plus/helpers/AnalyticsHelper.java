@@ -33,39 +33,39 @@ import java.util.concurrent.Future;
 
 public class AnalyticsHelper extends SQLiteOpenHelper {
 
-	private final static Log LOG = PlatformUtil.getLog(AnalyticsHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(AnalyticsHelper.class);
 
-	private final static String ANALYTICS_UPLOAD_URL = "https://osmand.net/api/submit_analytics";
-	private final static String ANALYTICS_FILE_NAME = "analytics.json";
+	private static final String ANALYTICS_UPLOAD_URL = "https://osmand.net/api/submit_analytics";
+	private static final String ANALYTICS_FILE_NAME = "analytics.json";
 
-	private final static int ROUTING_DATA_PARCEL_SIZE = 10; // 10 events
-	private final static int DATA_PARCEL_SIZE = 500; // 500 events
-	private final static int SUBMIT_DATA_INTERVAL = 60 * 60 * 1000; // 1 hour
+	private static final int ROUTING_DATA_PARCEL_SIZE = 10; // 10 events
+	private static final int DATA_PARCEL_SIZE = 500; // 500 events
+	private static final int SUBMIT_DATA_INTERVAL = 60 * 60 * 1000; // 1 hour
 
-	private final static String PARAM_OS = "os";
-	private final static String PARAM_START_DATE = "startDate";
-	private final static String PARAM_FINISH_DATE = "finishDate";
-	private final static String PARAM_FIRST_INSTALL_DAYS = "nd";
-	private final static String PARAM_NUMBER_OF_STARTS = "ns";
-	private final static String PARAM_USER_ID = "aid";
-	private final static String PARAM_VERSION = "version";
-	private final static String PARAM_LANG = "lang";
-	private final static String PARAM_EVENTS = "events";
+	private static final String PARAM_OS = "os";
+	private static final String PARAM_START_DATE = "startDate";
+	private static final String PARAM_FINISH_DATE = "finishDate";
+	private static final String PARAM_FIRST_INSTALL_DAYS = "nd";
+	private static final String PARAM_NUMBER_OF_STARTS = "ns";
+	private static final String PARAM_USER_ID = "aid";
+	private static final String PARAM_VERSION = "version";
+	private static final String PARAM_LANG = "lang";
+	private static final String PARAM_EVENTS = "events";
 
-	private final static String JSON_DATE = "date";
-	private final static String JSON_EVENT = "event";
+	private static final String JSON_DATE = "date";
+	private static final String JSON_EVENT = "event";
 
-	private final static String DATABASE_NAME = "analytics";
-	private final static int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME = "analytics";
+	private static final int DATABASE_VERSION = 1;
 
-	private final static String TABLE_NAME = "app_events";
-	private final static String COL_DATE = "date";
-	private final static String COL_TYPE = "event_type";
-	private final static String COL_EVENT = "event";
+	private static final String TABLE_NAME = "app_events";
+	private static final String COL_DATE = "date";
+	private static final String COL_TYPE = "event_type";
+	private static final String COL_EVENT = "event";
 
-	public final static int EVENT_TYPE_APP_USAGE = 1;
-	public final static int EVENT_TYPE_MAP_DOWNLOAD = 2;
-	public final static int EVENT_TYPE_ROUTING = 3;
+	public static final int EVENT_TYPE_APP_USAGE = 1;
+	public static final int EVENT_TYPE_MAP_DOWNLOAD = 2;
+	public static final int EVENT_TYPE_ROUTING = 3;
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({EVENT_TYPE_APP_USAGE, EVENT_TYPE_MAP_DOWNLOAD, EVENT_TYPE_ROUTING})

@@ -56,9 +56,9 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
-	protected final static float BEARING_SPEED_THRESHOLD = 0.1f;
-	protected final static int MIN_ZOOM = 3;
-	protected final static int RADIUS = 7;
+	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
+	protected static final int MIN_ZOOM = 3;
+	protected static final int RADIUS = 7;
 
 	private Paint headingPaint;
 	private Paint bitmapPaint;

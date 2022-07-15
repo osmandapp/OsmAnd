@@ -32,7 +32,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
-	private final static String BULLET = "   •   ";
+	private static final String BULLET = "   •   ";
 
 	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;

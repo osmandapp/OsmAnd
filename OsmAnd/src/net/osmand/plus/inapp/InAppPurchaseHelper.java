@@ -333,7 +333,7 @@ public abstract class InAppPurchaseHelper {
 		return false;
 	}
 
-	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
+	protected void exec(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppCommand command) {
 		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei() && !Version.isAmazon())) {
 			notifyDismissProgress(taskType);
 			stop(true);

@@ -64,11 +64,11 @@ import java.util.ArrayList;
 
 public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 
-	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
-	public final static int UI_REFRESH_TIME_MS = 500;
+	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
+	public static final int UI_REFRESH_TIME_MS = 500;
 
-	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
-	private final static String OSMAND_USAGE = "osmand_usage";
+	private static final String CHANGE_DIRECTORY_BUTTON = "change_directory";
+	private static final String OSMAND_USAGE = "osmand_usage";
 
 	private OsmandApplication app;
 	private ArrayList<MemoryItem> memoryItems;

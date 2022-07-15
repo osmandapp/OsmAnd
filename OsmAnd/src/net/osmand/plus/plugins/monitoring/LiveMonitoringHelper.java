@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class LiveMonitoringHelper {
 
-	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
+	private static final Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
 
 	private OsmandApplication app;
 

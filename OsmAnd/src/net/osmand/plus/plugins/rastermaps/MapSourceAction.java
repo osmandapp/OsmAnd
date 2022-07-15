@@ -40,7 +40,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 			nameRes(R.string.quick_action_map_source).iconRes(R.drawable.ic_world_globe_dark).
 			category(QuickActionType.CONFIGURE_MAP);
 
-	private final static String KEY_SOURCE = "source";
+	private static final String KEY_SOURCE = "source";
 
 	public MapSourceAction() {
 		super(TYPE);

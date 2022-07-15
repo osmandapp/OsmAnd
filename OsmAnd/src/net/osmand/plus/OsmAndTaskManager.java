@@ -67,7 +67,7 @@ public class OsmAndTaskManager {
 		
 	}
 	
-	public static abstract class OsmAndTaskRunnable<Params, Progress, Result> {
+	public abstract static class OsmAndTaskRunnable<Params, Progress, Result> {
 		
 		public OsmAndTask<Params, Progress, Result> exec;
 		

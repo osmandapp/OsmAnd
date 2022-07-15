@@ -36,7 +36,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 
-	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull WptPt wpt) {
+	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull final WptPt wpt) {
 		super(mapActivity);
 		this.wpt = wpt;
 		setShowNearestWiki(true);

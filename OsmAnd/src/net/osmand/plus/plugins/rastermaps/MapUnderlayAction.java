@@ -33,8 +33,8 @@ import java.util.Map;
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
-	private final static String KEY_UNDERLAYS = "underlays";
-	private final static String KEY_NO_UNDERLAY = "no_underlay";
+	private static final String KEY_UNDERLAYS = "underlays";
+	private static final String KEY_NO_UNDERLAY = "no_underlay";
 	public static final QuickActionType TYPE = new QuickActionType(16,
 			"mapunderlay.change", MapUnderlayAction.class).
 			nameRes(R.string.quick_action_map_underlay).iconRes(R.drawable.ic_layer_bottom).

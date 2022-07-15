@@ -674,9 +674,9 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static abstract class InAppSubscription extends InAppPurchase {
+	public abstract static class InAppSubscription extends InAppPurchase {
 
-		private final static int MIN_SHOWN_DISCOUNT_PERCENT = 10;
+		private static final int MIN_SHOWN_DISCOUNT_PERCENT = 10;
 
 		private final Map<String, InAppSubscription> upgrades = new ConcurrentHashMap<>();
 		private final String skuNoVersion;
@@ -992,7 +992,7 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static abstract class InAppPurchaseDepthContours extends InAppPurchase {
+	public abstract static class InAppPurchaseDepthContours extends InAppPurchase {
 
 		protected InAppPurchaseDepthContours(int featureId, String sku) {
 			super(featureId, sku);
@@ -1004,7 +1004,7 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	public static abstract class InAppPurchaseContourLines extends InAppPurchase {
+	public abstract static class InAppPurchaseContourLines extends InAppPurchase {
 
 		protected InAppPurchaseContourLines(int featureId, String sku) {
 			super(featureId, sku);
@@ -1016,7 +1016,7 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	protected static abstract class InAppPurchaseMonthlySubscription extends InAppSubscription {
+	protected abstract static class InAppPurchaseMonthlySubscription extends InAppSubscription {
 
 		InAppPurchaseMonthlySubscription(int featureId, String skuNoVersion, int version) {
 			super(featureId, skuNoVersion, version);
@@ -1077,7 +1077,7 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	protected static abstract class InAppPurchaseQuarterlySubscription extends InAppSubscription {
+	protected abstract static class InAppPurchaseQuarterlySubscription extends InAppSubscription {
 
 		InAppPurchaseQuarterlySubscription(int featureId, String skuNoVersion, int version) {
 			super(featureId, skuNoVersion, version);
@@ -1131,7 +1131,7 @@ public abstract class InAppPurchases {
 		}
 	}
 
-	protected static abstract class InAppPurchaseAnnualSubscription extends InAppSubscription {
+	protected abstract static class InAppPurchaseAnnualSubscription extends InAppSubscription {
 
 		InAppPurchaseAnnualSubscription(int featureId, String skuNoVersion, int version) {
 			super(featureId, skuNoVersion, version);

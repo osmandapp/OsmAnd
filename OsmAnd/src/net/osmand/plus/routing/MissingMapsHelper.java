@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MissingMapsHelper {
-	private final static Log LOG = PlatformUtil.getLog(MissingMapsHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(MissingMapsHelper.class);
 
 	private static final int MIN_STRAIGHT_DIST = 20000;
 	private final RouteCalculationParams params;

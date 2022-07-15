@@ -55,7 +55,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MeasurementEditingContext.class);
-	public final static ApplicationMode DEFAULT_APP_MODE = ApplicationMode.DEFAULT;
+	public static final ApplicationMode DEFAULT_APP_MODE = ApplicationMode.DEFAULT;
 
 	private final OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();

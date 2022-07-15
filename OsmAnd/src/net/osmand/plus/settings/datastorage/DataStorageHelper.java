@@ -41,19 +41,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataStorageHelper {
-	public final static String INTERNAL_STORAGE = "internal_storage";
-	public final static String EXTERNAL_STORAGE = "external_storage";
-	public final static String SHARED_STORAGE = "shared_storage";
-	public final static String MULTIUSER_STORAGE = "multiuser_storage";
-	public final static String MANUALLY_SPECIFIED = "manually_specified";
+	public static final String INTERNAL_STORAGE = "internal_storage";
+	public static final String EXTERNAL_STORAGE = "external_storage";
+	public static final String SHARED_STORAGE = "shared_storage";
+	public static final String MULTIUSER_STORAGE = "multiuser_storage";
+	public static final String MANUALLY_SPECIFIED = "manually_specified";
 
-	public final static String MAPS_MEMORY = "maps_memory_used";
-	public final static String TRAVEL_MEMORY = "travel_memory_used";
-	public final static String TERRAIN_MEMORY = "terrain_memory_used";
-	public final static String TRACKS_MEMORY = "tracks_memory_used";
-	public final static String NOTES_MEMORY = "notes_memory_used";
-	public final static String TILES_MEMORY = "tiles_memory_used";
-	public final static String OTHER_MEMORY = "other_memory_used";
+	public static final String MAPS_MEMORY = "maps_memory_used";
+	public static final String TRAVEL_MEMORY = "travel_memory_used";
+	public static final String TERRAIN_MEMORY = "terrain_memory_used";
+	public static final String TRACKS_MEMORY = "tracks_memory_used";
+	public static final String NOTES_MEMORY = "notes_memory_used";
+	public static final String TILES_MEMORY = "tiles_memory_used";
+	public static final String OTHER_MEMORY = "other_memory_used";
 
 	private OsmandApplication app;
 	private ArrayList<StorageItem> storageItems = new ArrayList<>();

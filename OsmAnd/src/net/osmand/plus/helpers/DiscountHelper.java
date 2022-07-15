@@ -544,7 +544,7 @@ public class DiscountHelper {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	private static abstract class Condition {
+	private abstract static class Condition {
 
 		protected OsmandApplication app;
 
@@ -558,7 +558,7 @@ public class DiscountHelper {
 
 	}
 
-	private static abstract class InAppPurchaseCondition extends Condition {
+	private abstract static class InAppPurchaseCondition extends Condition {
 
 		InAppPurchases inAppPurchases;
 
@@ -568,7 +568,7 @@ public class DiscountHelper {
 		}
 	}
 
-	private static abstract class SubscriptionCondition extends Condition {
+	private abstract static class SubscriptionCondition extends Condition {
 
 		InAppSubscriptionList liveUpdates;
 

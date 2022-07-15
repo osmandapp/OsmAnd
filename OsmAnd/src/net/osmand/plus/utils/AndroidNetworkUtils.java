@@ -245,10 +245,10 @@ public class AndroidNetworkUtils {
 		}
 	}
 
-	public static Map<File, String> downloadFiles(final @NonNull String url,
-												  final @NonNull List<File> files,
-												  final @NonNull Map<String, String> parameters,
-												  final @Nullable OnFilesDownloadCallback callback) {
+	public static Map<File, String> downloadFiles(@NonNull final String url,
+	                                              @NonNull final List<File> files,
+	                                              @NonNull final Map<String, String> parameters,
+	                                              @Nullable final OnFilesDownloadCallback callback) {
 		Map<File, String> errors = new HashMap<>();
 		for (final File file : files) {
 			final int[] progressValue = {0};
@@ -296,18 +296,18 @@ public class AndroidNetworkUtils {
 		return errors;
 	}
 
-	public static void downloadFilesAsync(final @NonNull String url,
-										  final @NonNull List<File> files,
-										  final @NonNull Map<String, String> parameters,
-										  final @Nullable OnFilesDownloadCallback callback) {
+	public static void downloadFilesAsync(@NonNull final String url,
+	                                      @NonNull final List<File> files,
+	                                      @NonNull final Map<String, String> parameters,
+	                                      @Nullable final OnFilesDownloadCallback callback) {
 		downloadFilesAsync(url, files, parameters, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void downloadFilesAsync(final @NonNull String url,
-										  final @NonNull List<File> files,
-										  final @NonNull Map<String, String> parameters,
-										  final @Nullable OnFilesDownloadCallback callback,
-										  final Executor executor) {
+	public static void downloadFilesAsync(@NonNull final String url,
+	                                      @NonNull final List<File> files,
+	                                      @NonNull final Map<String, String> parameters,
+	                                      @Nullable final OnFilesDownloadCallback callback,
+	                                      final Executor executor) {
 
 		new AsyncTask<Void, Object, Map<File, String>>() {
 
@@ -703,22 +703,22 @@ public class AndroidNetworkUtils {
 		return new NetworkResult(response, error);
 	}
 
-	public static void uploadFilesAsync(final @NonNull String url,
-										final @NonNull List<File> files,
-										final boolean gzip,
-										final @NonNull Map<String, String> parameters,
-										final @Nullable Map<String, String> headers,
-										final OnFilesUploadCallback callback) {
+	public static void uploadFilesAsync(@NonNull final String url,
+	                                    @NonNull final List<File> files,
+	                                    final boolean gzip,
+	                                    @NonNull final Map<String, String> parameters,
+	                                    @Nullable final Map<String, String> headers,
+	                                    final OnFilesUploadCallback callback) {
 		uploadFilesAsync(url, files, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void uploadFilesAsync(final @NonNull String url,
-										final @NonNull List<File> files,
-										final boolean gzip,
-										final @NonNull Map<String, String> parameters,
-										final @Nullable Map<String, String> headers,
-										final OnFilesUploadCallback callback,
-										final Executor executor) {
+	public static void uploadFilesAsync(@NonNull final String url,
+	                                    @NonNull final List<File> files,
+	                                    final boolean gzip,
+	                                    @NonNull final Map<String, String> parameters,
+	                                    @Nullable final Map<String, String> headers,
+	                                    final OnFilesUploadCallback callback,
+	                                    final Executor executor) {
 
 		new AsyncTask<Void, Object, Map<File, String>>() {
 
@@ -782,32 +782,32 @@ public class AndroidNetworkUtils {
 		}.executeOnExecutor(executor, (Void) null);
 	}
 
-	public static UploadFileTask uploadFileAsync(final @NonNull String url,
-	                                             final @NonNull File file,
-	                                             final @NonNull String fileName,
+	public static UploadFileTask uploadFileAsync(@NonNull final String url,
+	                                             @NonNull final File file,
+	                                             @NonNull final String fileName,
 	                                             final boolean gzip,
-	                                             final @NonNull Map<String, String> parameters,
-	                                             final @Nullable Map<String, String> headers,
+	                                             @NonNull final Map<String, String> parameters,
+	                                             @Nullable final Map<String, String> headers,
 	                                             final OnFileUploadCallback callback) throws IOException {
 		return uploadFileAsync(url, new FileInputStream(file), fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static UploadFileTask uploadFileAsync(final @NonNull String url,
-	                                             final @NonNull InputStream inputStream,
-	                                             final @NonNull String fileName,
+	public static UploadFileTask uploadFileAsync(@NonNull final String url,
+	                                             @NonNull final InputStream inputStream,
+	                                             @NonNull final String fileName,
 	                                             final boolean gzip,
-	                                             final @NonNull Map<String, String> parameters,
-	                                             final @Nullable Map<String, String> headers,
+	                                             @NonNull final Map<String, String> parameters,
+	                                             @Nullable final Map<String, String> headers,
 	                                             final OnFileUploadCallback callback) {
 		return uploadFileAsync(url, inputStream, fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static UploadFileTask uploadFileAsync(final @NonNull String url,
-	                                             final @NonNull InputStream inputStream,
-	                                             final @NonNull String fileName,
+	public static UploadFileTask uploadFileAsync(@NonNull final String url,
+	                                             @NonNull final InputStream inputStream,
+	                                             @NonNull final String fileName,
 	                                             final boolean gzip,
-	                                             final @NonNull Map<String, String> parameters,
-	                                             final @Nullable Map<String, String> headers,
+	                                             @NonNull final Map<String, String> parameters,
+	                                             @Nullable final Map<String, String> headers,
 	                                             final OnFileUploadCallback callback,
 	                                             final Executor executor) {
 
@@ -820,22 +820,22 @@ public class AndroidNetworkUtils {
 		return uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, executor);
 	}
 
-	public static UploadFileTask uploadFileAsync(final @NonNull String url,
-	                                             final @NonNull StreamWriter streamWriter,
-	                                             final @NonNull String fileName,
+	public static UploadFileTask uploadFileAsync(@NonNull final String url,
+	                                             @NonNull final StreamWriter streamWriter,
+	                                             @NonNull final String fileName,
 	                                             final boolean gzip,
-	                                             final @NonNull Map<String, String> parameters,
-	                                             final @Nullable Map<String, String> headers,
+	                                             @NonNull final Map<String, String> parameters,
+	                                             @Nullable final Map<String, String> headers,
 	                                             final OnFileUploadCallback callback) {
 		return uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static UploadFileTask uploadFileAsync(final @NonNull String url,
-	                                             final @NonNull StreamWriter streamWriter,
-	                                             final @NonNull String fileName,
+	public static UploadFileTask uploadFileAsync(@NonNull final String url,
+	                                             @NonNull final StreamWriter streamWriter,
+	                                             @NonNull final String fileName,
 	                                             final boolean gzip,
-	                                             final @NonNull Map<String, String> parameters,
-	                                             final @Nullable Map<String, String> headers,
+	                                             @NonNull final Map<String, String> parameters,
+	                                             @Nullable final Map<String, String> headers,
 	                                             final OnFileUploadCallback callback,
 	                                             final Executor executor) {
 		UploadFileTask uploadFileTask = new UploadFileTask(url, streamWriter, fileName, gzip, parameters, headers, callback);

@@ -27,7 +27,7 @@ import java.util.zip.ZipInputStream;
 
 public class DownloadFileHelper {
 	
-	private final static Log log = PlatformUtil.getLog(DownloadFileHelper.class);
+	private static final Log log = PlatformUtil.getLog(DownloadFileHelper.class);
 	private static final int BUFFER_SIZE = 32256;
 	protected static final int TRIES_TO_DOWNLOAD = 15;
 	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;

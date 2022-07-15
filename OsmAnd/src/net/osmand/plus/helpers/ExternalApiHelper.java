@@ -771,22 +771,22 @@ public class ExternalApiHelper {
 		mapContextMenu.show(new LatLon(lat, lon), pointDescription, object);
 	}
 
-	static public void startNavigation(MapActivity mapActivity, @NonNull GPXFile gpx, boolean checkLocationPermission) {
+	public static void startNavigation(MapActivity mapActivity, @NonNull GPXFile gpx, boolean checkLocationPermission) {
 		startNavigation(mapActivity, gpx, null, null, null, null, null, checkLocationPermission);
 	}
 
-	static public void startNavigation(MapActivity mapActivity,
-									   @Nullable LatLon from, @Nullable PointDescription fromDesc,
-									   @Nullable LatLon to, @Nullable PointDescription toDesc,
-									   @NonNull ApplicationMode mode, boolean checkLocationPermission) {
+	public static void startNavigation(MapActivity mapActivity,
+	                                   @Nullable LatLon from, @Nullable PointDescription fromDesc,
+	                                   @Nullable LatLon to, @Nullable PointDescription toDesc,
+	                                   @NonNull ApplicationMode mode, boolean checkLocationPermission) {
 		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode, checkLocationPermission);
 	}
 
-	static private void startNavigation(MapActivity mapActivity,
-										GPXFile gpx,
-										LatLon from, PointDescription fromDesc,
-										LatLon to, PointDescription toDesc,
-										ApplicationMode mode, boolean checkLocationPermission) {
+	private static void startNavigation(MapActivity mapActivity,
+	                                    GPXFile gpx,
+	                                    LatLon from, PointDescription fromDesc,
+	                                    LatLon to, PointDescription toDesc,
+	                                    ApplicationMode mode, boolean checkLocationPermission) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -817,10 +817,10 @@ public class ExternalApiHelper {
 		}
 	}
 
-	static public void searchAndNavigate(@NonNull MapActivity mapActivity, @NonNull final LatLon searchLocation,
-										 @Nullable final LatLon from, @Nullable final PointDescription fromDesc,
-										 @NonNull final ApplicationMode mode, @NonNull final String searchQuery,
-										 final boolean showSearchResults, final boolean checkLocationPermission) {
+	public static void searchAndNavigate(@NonNull MapActivity mapActivity, @NonNull final LatLon searchLocation,
+	                                     @Nullable final LatLon from, @Nullable final PointDescription fromDesc,
+	                                     @NonNull final ApplicationMode mode, @NonNull final String searchQuery,
+	                                     final boolean showSearchResults, final boolean checkLocationPermission) {
 
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -873,9 +873,9 @@ public class ExternalApiHelper {
 		}
 	}
 
-	static public void runSearch(final OsmandApplication app, String searchQuery, int searchType,
-								 double latitude, double longitude, int radiusLevel,
-								 int totalLimit, final OsmandAidlApi.SearchCompleteCallback callback) {
+	public static void runSearch(final OsmandApplication app, String searchQuery, int searchType,
+	                             double latitude, double longitude, int radiusLevel,
+	                             int totalLimit, final OsmandAidlApi.SearchCompleteCallback callback) {
 		if (radiusLevel < 1) {
 			radiusLevel = 1;
 		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {

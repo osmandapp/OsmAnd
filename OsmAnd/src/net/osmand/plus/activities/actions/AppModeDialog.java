@@ -202,7 +202,7 @@ public class AppModeDialog {
 		}
 	}
 
-	static public View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, @LayoutRes int layoutId, LinearLayout layout, ApplicationMode mode, boolean useMapTheme) {
+	public static View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, @LayoutRes int layoutId, LinearLayout layout, ApplicationMode mode, boolean useMapTheme) {
 		int metricsX = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(layoutId, null);

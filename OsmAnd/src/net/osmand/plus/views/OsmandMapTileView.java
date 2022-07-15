@@ -216,7 +216,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void init(final @NonNull Context ctx, int w, int h) {
+	public void init(@NonNull final Context ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
 
