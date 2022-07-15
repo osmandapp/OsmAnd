@@ -1552,7 +1552,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					OnClickListener listener = v -> {
 						FragmentManager fragmentManager = getFragmentManager();
 						if (fragmentManager != null) {
-							SearchHistorySettingsFragment.showInstance(getFragmentManager(), QuickSearchDialogFragment.this);
+							SearchHistorySettingsFragment.showInstance(getFragmentManager(), this);
 						}
 					};
 					rows.add(new QuickSearchDisabledHistoryItem(app, listener));

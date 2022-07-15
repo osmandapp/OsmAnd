@@ -459,7 +459,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				OptionsBottomSheetDialogFragment.showInstance(manager, MeasurementToolFragment.this);
+				OptionsBottomSheetDialogFragment.showInstance(manager, this);
 			}
 		});
 
@@ -602,7 +602,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		configBtn.setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				RouteOptionsBottomSheet.showInstance(activity, MeasurementToolFragment.this,
+				RouteOptionsBottomSheet.showInstance(activity, this,
 						DialogMode.PLAN_ROUTE, editingCtx.getAppMode().getStringKey());
 			}
 		});

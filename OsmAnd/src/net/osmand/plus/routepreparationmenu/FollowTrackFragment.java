@@ -201,7 +201,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			} else {
 				sortButton.setVisibility(View.GONE);
 				SelectedTrackToFollowCard selectedTrackToFollowCard =
-						new SelectedTrackToFollowCard(mapActivity, FollowTrackFragment.this, gpxFile);
+						new SelectedTrackToFollowCard(mapActivity, this, gpxFile);
 				getCardsContainer().addView(selectedTrackToFollowCard.build(mapActivity));
 			}
 		}
@@ -215,8 +215,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				tracksCard = new TracksToFollowCard(mapActivity, FollowTrackFragment.this, list, defaultCategory);
-				tracksCard.setListener(FollowTrackFragment.this);
+				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
+				tracksCard.setListener(this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 				sortButton.setVisibility(View.VISIBLE);
 			}

@@ -468,7 +468,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	public void refreshMap() {
-		if (view != null && view.getLayers().contains(OsmBugsLayer.this)) {
+		if (view != null && view.getLayers().contains(this)) {
 			view.refreshMap();
 		}
 	}

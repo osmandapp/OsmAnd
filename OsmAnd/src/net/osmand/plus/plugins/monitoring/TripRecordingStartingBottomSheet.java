@@ -103,7 +103,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, R.string.shared_string_show_on_map,
-				TripRecordingStartingBottomSheet.this, nightMode, new Runnable() {
+				this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -147,7 +147,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 			if (mapActivity != null) {
 				hide();
 				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
-						null, new Bundle(), TripRecordingStartingBottomSheet.this);
+						null, new Bundle(), this);
 			}
 		});
 	}

@@ -110,7 +110,7 @@ public class SegmentsCard extends MapBaseCard {
 		boolean showEmptyRoutes = items.isEmpty() && !selectedGpxFile.isShowCurrentTrack();
 		AndroidUiHelper.updateVisibility(noRoutesContainer, showEmptyRoutes);
 		AndroidUiHelper.updateVisibility(recyclerView, !showEmptyRoutes);
-		createRoutesButton.setOnClickListener(v -> SegmentsCard.this.notifyButtonPressed(EDIT_BUTTON_INDEX));
+		createRoutesButton.setOnClickListener(v -> notifyButtonPressed(EDIT_BUTTON_INDEX));
 	}
 
 	private void updateLocationOnMap(@NonNull List<GpxDisplayItem> displayItems) {

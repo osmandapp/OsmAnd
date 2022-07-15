@@ -218,7 +218,7 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		slider.setValue(speedValue - min);
 		slider.addOnChangeListener((s, val, fromUser) -> {
 			float value = min + val;
-			title.setText(SimulationNavigationSettingFragment.this.getString(R.string.ltr_or_rtl_combine_via_colon,
+			title.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
 					getString(titleRes), getFormattedSpeed(value, app)));
 			settings.simulateNavigationSpeed = value;
 		});

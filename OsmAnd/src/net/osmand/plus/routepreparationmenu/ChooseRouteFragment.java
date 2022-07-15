@@ -490,7 +490,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
 				}
 				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						ChooseRouteFragment.this, null, fileName, null, false, true);
+						this, null, fileName, null, false, true);
 			}
 		};
 		saveRoute.setOnClickListener(saveOnClick);

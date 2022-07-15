@@ -877,7 +877,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 getString(R.string.delete_all_actions_message_q),
                 actionsToDelete.size());
         ConfirmationBottomSheet.showInstance(ma.getSupportFragmentManager(),
-                QuickActionListFragment.this,
+                this,
                 getString(R.string.shared_string_delete_all_q),
                 message, R.string.shared_string_delete, false);
     }

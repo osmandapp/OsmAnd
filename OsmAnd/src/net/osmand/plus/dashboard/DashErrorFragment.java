@@ -61,7 +61,7 @@ public class DashErrorFragment extends DashBaseFragment {
 			if (dashboardActivity != null) {
 				dashboardActivity.getSupportFragmentManager()
 						.beginTransaction()
-						.remove(DashErrorFragment.this)
+						.remove(this)
 						.commitAllowingStateLoss();
 			}
 		});

@@ -654,7 +654,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		OnClickListener listener = view -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && getDisplayGroupsHolder().getTotalTrackGroupsNumber() > 0) {
-				DisplayGroupsBottomSheet.showInstance(mapActivity, TrackMenuFragment.this, true);
+				DisplayGroupsBottomSheet.showInstance(mapActivity, this, true);
 			}
 		};
 		displayGroupsButton.setOnClickListener(listener);
@@ -1337,7 +1337,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				updateMainViewLayout(overviewInitialPosY);
 			}
 			animateMainView(overviewInitialPosY, false, getCurrentMenuState(), getCurrentMenuState());
-			updateMapControlsPos(TrackMenuFragment.this, overviewInitialPosY, true);
+			updateMapControlsPos(this, overviewInitialPosY, true);
 		});
 	}
 

@@ -548,7 +548,7 @@ public class TransportRoutingHelper {
 			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 
 			float currentDistanceFromBegin =
-					RouteRecalculationTask.this.params.calculationProgress.distanceFromBegin +
+					this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
 
 			RouteCalculationParams params = new RouteCalculationParams();

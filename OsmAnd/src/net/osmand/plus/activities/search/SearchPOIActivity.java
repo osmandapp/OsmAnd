@@ -203,7 +203,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private boolean search() {
 		String query = searchFilter.getText().toString().trim();
 		if (query.length() < 2 && isNameSearch()) {
-			Toast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG)
+			Toast.makeText(this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG)
 					.show();
 			return true;
 		}

@@ -779,7 +779,7 @@ public class AppInitializer implements IProgress {
 
 	public void notifyStart() {
 		for (AppInitializeListener listener : listeners) {
-			listener.onStart(AppInitializer.this);
+			listener.onStart(this);
 		}
 	}
 

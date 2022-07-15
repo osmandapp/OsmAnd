@@ -159,7 +159,7 @@ public class TargetPointsHelper {
 		readFromSettings();
 
 		OsmAndAppCustomizationListener customizationListener = () -> {
-			settings = TargetPointsHelper.this.ctx.getSettings();
+			settings = this.ctx.getSettings();
 			readFromSettings();
 			updateRouteAndRefresh(true);
 		};

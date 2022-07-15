@@ -196,7 +196,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private void calculateLayout() {
 		runLayoutListener(() -> {
-			updateMapControlsPos(RouteLineAppearanceFragment.this, getViewY(), true);
+			updateMapControlsPos(this, getViewY(), true);
 			initVisibleRect();
 		});
 	}

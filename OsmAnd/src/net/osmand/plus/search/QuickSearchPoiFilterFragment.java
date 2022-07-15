@@ -384,7 +384,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				app.getSearchUICore().refreshCustomPoiFilters();
 				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
 				((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
-				QuickSearchPoiFilterFragment.this.dismiss();
+				dismiss();
 			}
 		});
 		builder.create().show();

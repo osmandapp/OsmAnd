@@ -176,7 +176,7 @@ public class DayNightHelper implements SensorEventListener {
 		if (event.values.length > 0) {
 			float lux = event.values[0];
 			//			log.debug("lux value:" + lux + " setting to day: " + (lux > SensorManager.LIGHT_CLOUDY)); //$NON-NLS-1$ //$NON-NLS-2$
-			boolean nightMode = lux > SensorManager.LIGHT_CLOUDY ? false : true;
+			boolean nightMode = !(lux > SensorManager.LIGHT_CLOUDY);
 			if (nightMode != lastNightMode) {
 				if (System.currentTimeMillis() - lastTime > 10000) {
 					lastTime = System.currentTimeMillis();

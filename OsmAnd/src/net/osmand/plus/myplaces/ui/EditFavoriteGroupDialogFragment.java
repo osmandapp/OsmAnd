@@ -168,7 +168,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					.setOnClickListener(view -> {
 						FavoritesTreeFragment fragment = getFavoritesTreeFragment();
 						if (fragment != null) {
-							fragment.shareFavorites(EditFavoriteGroupDialogFragment.this.group);
+							fragment.shareFavorites(group);
 						}
 						dismiss();
 					})

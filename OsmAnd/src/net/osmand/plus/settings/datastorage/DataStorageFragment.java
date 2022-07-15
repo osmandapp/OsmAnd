@@ -211,7 +211,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						confirm(app, activity, newDataStorage, false);
 					} else {
 						ChangeDataStorageBottomSheet.showInstance(getFragmentManager(), key,
-								currentDataStorage, newDataStorage, DataStorageFragment.this, false);
+								currentDataStorage, newDataStorage, this, false);
 					}
 				}
 			}
@@ -286,7 +286,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						color = activeColor;
 						tvMemory.setOnClickListener(v -> {
 							calculateTilesBtnPressed = true;
-							calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
+							calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(this);
 							updateAllSettings();
 						});
 					} else {
@@ -429,7 +429,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		StorageItem manuallySpecified = dataStorageHelper.getManuallySpecified();
 		if (manuallySpecified != null) {
 			SelectFolderBottomSheet.showInstance(getFragmentManager(), manuallySpecified.getKey(),
-					manuallySpecified.getDirectory(), DataStorageFragment.this,
+					manuallySpecified.getDirectory(), this,
 					getString(R.string.storage_directory_manual), getString(R.string.paste_Osmand_data_folder_path),
 					getString(R.string.shared_string_select_folder), false);
 		}

@@ -198,19 +198,19 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Set<PoiUIFilter> collectFilters() {
 		Set<PoiUIFilter> calculatedFilters = new TreeSet<>(filters);
 		if (showTravel) {
-			boolean routeArticleFilterEnabled = POIMapLayer.this.routeArticleFilterEnabled;
-			PoiUIFilter routeArticleFilter = POIMapLayer.this.routeArticleFilter;
+			boolean routeArticleFilterEnabled = this.routeArticleFilterEnabled;
+			PoiUIFilter routeArticleFilter = this.routeArticleFilter;
 			if (routeArticleFilterEnabled && routeArticleFilter != null) {
 				calculatedFilters.add(routeArticleFilter);
 			}
-			boolean routeArticlePointsFilterEnabled = POIMapLayer.this.routeArticlePointsFilterEnabled;
-			PoiUIFilter routeArticlePointsFilter = POIMapLayer.this.routeArticlePointsFilter;
+			boolean routeArticlePointsFilterEnabled = this.routeArticlePointsFilterEnabled;
+			PoiUIFilter routeArticlePointsFilter = this.routeArticlePointsFilter;
 			if (routeArticlePointsFilterEnabled && routeArticlePointsFilter != null
 					&& !Algorithms.isEmpty(routeArticlePointsFilter.getFilterByName())) {
 				calculatedFilters.add(routeArticlePointsFilter);
 			}
-			boolean routeTrackAsPoiFilterEnabled = POIMapLayer.this.routeTrackAsPoiFilterEnabled;
-			PoiUIFilter routeTrackFilter = POIMapLayer.this.routeTrackFilter;
+			boolean routeTrackAsPoiFilterEnabled = this.routeTrackAsPoiFilterEnabled;
+			PoiUIFilter routeTrackFilter = this.routeTrackFilter;
 			if (routeTrackAsPoiFilterEnabled && routeTrackFilter != null) {
 				calculatedFilters.add(routeTrackFilter);
 			}

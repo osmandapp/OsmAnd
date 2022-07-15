@@ -404,7 +404,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 						String selected = changedProfile.parent != null ?
 								changedProfile.parent.getStringKey() : null;
 						SelectBaseProfileBottomSheet.showInstance(
-								getActivity(),ProfileAppearanceFragment.this,
+								getActivity(), this,
 								getSelectedAppMode(), selected, false);
 					}
 				}

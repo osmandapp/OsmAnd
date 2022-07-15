@@ -144,7 +144,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				LogoutBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+				LogoutBottomSheet.showInstance(fragmentManager, this);
 			}
 		});
 		setupSelectableBackground(container);

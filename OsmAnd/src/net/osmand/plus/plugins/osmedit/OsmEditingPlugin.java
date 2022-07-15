@@ -488,7 +488,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener((uiAdapter, view, item, isChecked) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
 								R.drawable.ic_action_upload_to_openstreetmap, items ->
-										OsmEditingPlugin.this.sendGPXFiles(activity, f,
+										sendGPXFiles(activity, f,
 												items.toArray(new GpxInfo[0])));
 						return true;
 					}));

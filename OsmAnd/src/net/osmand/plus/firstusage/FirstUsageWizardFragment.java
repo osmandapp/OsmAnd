@@ -362,7 +362,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		if (loc != null) {
 			app.runInUIThread(() -> {
 				cancelLocationSearchTimer();
-				app.getLocationProvider().removeLocationListener(FirstUsageWizardFragment.this);
+				app.getLocationProvider().removeLocationListener(this);
 				if (location == null) {
 					location = new Location(loc);
 					showSearchMapFragment(getActivity());
@@ -594,7 +594,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		if (activity != null) {
 			activity.getSupportFragmentManager()
 					.beginTransaction()
-					.remove(FirstUsageWizardFragment.this)
+					.remove(this)
 					.commitAllowingStateLoss();
 			location = null;
 			mapDownloadRegion = null;
@@ -668,7 +668,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					if (activity != null) {
 						Bundle args = new Bundle();
 						args.putBoolean(FIRST_USAGE, true);
-						BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
+						BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, this);
 					}
 				});
 			}

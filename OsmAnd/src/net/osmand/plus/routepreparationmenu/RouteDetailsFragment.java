@@ -1050,7 +1050,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	protected void updateDestinationStreetName(LatLon latLon) {
 		OsmandApplication app = requireMyApplication();
-		WeakReference<RouteDetailsFragment> fragmentRef = new WeakReference<>(RouteDetailsFragment.this);
+		WeakReference<RouteDetailsFragment> fragmentRef = new WeakReference<>(this);
 		GeocodingLookupService.AddressLookupRequest addressLookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
 			public void geocodingDone(String address) {

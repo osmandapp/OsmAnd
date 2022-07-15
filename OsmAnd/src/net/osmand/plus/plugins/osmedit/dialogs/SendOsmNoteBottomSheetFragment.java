@@ -107,7 +107,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
-						SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
+						this, usedOnMap, null);
 			}
 		});
 		updateSignIn(uploadAnonymously.isChecked());

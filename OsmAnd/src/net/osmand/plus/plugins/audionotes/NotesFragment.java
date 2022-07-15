@@ -171,7 +171,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 
 		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
 		item.setOnMenuItemClickListener(menuItem -> {
-			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), NotesFragment.this);
+			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), this);
 			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);

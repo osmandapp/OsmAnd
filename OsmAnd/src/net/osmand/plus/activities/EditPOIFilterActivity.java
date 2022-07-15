@@ -108,7 +108,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	
 	
 	private void showDialog(PoiCategory poiCategory) {
-		ListView lv = EditPOIFilterActivity.this.getListView();
+		ListView lv = getListView();
 		int index = lv.getFirstVisiblePosition();
 		View v = lv.getChildAt(0);
 		int top = (v == null) ? 0 : v.getTop();
@@ -148,7 +148,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				selected[i] = acceptedCategories.contains(subcategory);
 			}
 		}
-		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -173,7 +173,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			}
 		});
 	
-		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ListView lv = selectAllFromCategory(poiCategory);

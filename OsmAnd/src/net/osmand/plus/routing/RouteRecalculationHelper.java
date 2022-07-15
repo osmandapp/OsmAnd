@@ -376,7 +376,7 @@ class RouteRecalculationHelper {
 		public boolean startMissingMapsOnlineSearch() {
 			if (missingMapsOnlineSearchTask == null) {
 				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps ->
-						RouteRecalculationTask.this.missingMaps = missingMaps);
+						this.missingMaps = missingMaps);
 				missingMapsOnlineSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				return true;
 			}

@@ -294,7 +294,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				openPluginsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						PluginsFragment.showInstance(activity.getSupportFragmentManager(), ConfigureProfileFragment.this);
+						PluginsFragment.showInstance(activity.getSupportFragmentManager(), this);
 					}
 				});
 			}

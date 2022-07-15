@@ -513,7 +513,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
 			Bundle args = new Bundle();
 			args.putString(FavouritesBottomSheetMenuFragment.POINT_TYPE_KEY, pointType.name());
-			fragment.setTargetFragment(AddPointBottomSheetDialog.this, ADD_FAVORITE_TO_ROUTE_REQUEST_CODE);
+			fragment.setTargetFragment(this, ADD_FAVORITE_TO_ROUTE_REQUEST_CODE);
 			fragment.setArguments(args);
 			fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
 		}

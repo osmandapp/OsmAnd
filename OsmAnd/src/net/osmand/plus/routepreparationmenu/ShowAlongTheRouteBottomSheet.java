@@ -431,7 +431,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				TextView radiusEx = v.findViewById(R.id.descriptionEx);
 				radiusEx.setText(descEx);
 				v.findViewById(R.id.secondCellContainer).setOnClickListener(view -> mapActivity.getMapLayers()
-						.showSingleChoicePoiFilterDialog(mapActivity, () -> enableType(type, true)));
+						.showSingleChoicePoiFilterDialog(mapActivity, () -> enableType(WaypointHelper.POI, true)));
 				TextView radius = v.findViewById(R.id.description);
 				radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
 				v.findViewById(R.id.firstCellContainer).setOnClickListener(view -> selectDifferentRadius(type));

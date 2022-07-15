@@ -167,7 +167,7 @@ public class NavigationService extends Service {
 		app.getNotificationHelper().removeNotifications(false);
 		if (app.getNavigationService() != null &&
 				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
-			NavigationService.this.stopSelf();
+			stopSelf();
 		}
 	}
 

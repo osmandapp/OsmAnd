@@ -78,7 +78,7 @@ public class QuickAction {
 	}
 
     public boolean isActionEditable() {
-        return actionType == null ? false : actionType.isActionEditable();
+        return actionType != null && actionType.isActionEditable();
     }
 
     public boolean isActionEnable(OsmandApplication app) {

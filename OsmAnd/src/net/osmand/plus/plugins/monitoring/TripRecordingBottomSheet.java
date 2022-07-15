@@ -157,7 +157,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
-				TripRecordingBottomSheet.this, nightMode, new Runnable() {
+				this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -242,7 +242,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		optionsButton.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
+				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, this);
 			}
 		});
 	}

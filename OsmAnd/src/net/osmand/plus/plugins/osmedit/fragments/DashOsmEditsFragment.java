@@ -127,11 +127,10 @@ public class DashOsmEditsFragment extends DashBaseFragment
 					if (requireMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
 						SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 					} else {
-						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
-								DashOsmEditsFragment.this);
+						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
 					}
 				} else {
-					SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
+					SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);

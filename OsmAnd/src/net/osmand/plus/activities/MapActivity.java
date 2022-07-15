@@ -299,7 +299,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		mapView.setTrackBallDelegate(e -> {
 			showAndHideMapPosition();
-			return MapActivity.this.onTrackballEvent(e);
+			return onTrackballEvent(e);
 		});
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
 		getMapViewTrackingUtilities().setMapView(mapView);
@@ -462,7 +462,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.FOLLOW_THE_ROUTE.get()
 				&& !app.getRoutingHelper().isRouteCalculated()
 				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-			FailSafeFunctions.restoreRoutingMode(MapActivity.this);
+			FailSafeFunctions.restoreRoutingMode(this);
 		}
 	}
 
@@ -785,7 +785,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
 				settings.LAST_KNOWN_MAP_ROTATION.setModeValue(prevAppMode, getMapRotate());
 				settings.LAST_KNOWN_MAP_ELEVATION.setModeValue(prevAppMode, getMapElevationAngle());
-				MapActivity.this.updateApplicationModeSettings();
+				updateApplicationModeSettings();
 			}
 		});
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
@@ -1620,7 +1620,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
 					int drawerWidth = AndroidUtils.dpToPx(this, 280);
-					int screenWidth = AndroidUtils.getScreenWidth(MapActivity.this);
+					int screenWidth = AndroidUtils.getScreenWidth(this);
 					boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 					if ((!isLayoutRtl && event.getRawX() > drawerWidth)
 							|| (isLayoutRtl && event.getRawX() <= screenWidth - drawerWidth)) {

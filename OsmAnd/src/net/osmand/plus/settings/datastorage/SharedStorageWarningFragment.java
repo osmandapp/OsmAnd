@@ -320,7 +320,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.remove(SharedStorageWarningFragment.this)
+					.remove(this)
 					.commitAllowingStateLoss();
 		}
 	}
