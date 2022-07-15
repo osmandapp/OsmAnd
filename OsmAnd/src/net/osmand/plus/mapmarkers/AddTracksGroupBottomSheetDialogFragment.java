@@ -11,20 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
+import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
-import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -110,10 +108,9 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			File gpx = dataItem.getFile();
 			if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
 				GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
-					GPXFile res = GPXUtilities.loadGPXFile(gpx);
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().selectedAutomatically().saveSelection();
-					selectionHelper.selectGpxFile(res, params);
+					selectionHelper.selectGpxFile(gpxFile, params);
 					app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 					return true;
 				});

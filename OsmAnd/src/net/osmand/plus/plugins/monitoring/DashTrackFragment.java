@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -38,9 +41,6 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * Created by Denis
@@ -85,14 +85,14 @@ public class DashTrackFragment extends DashBaseFragment {
 		});
 		return view;
 	}
-	
+
 	@Override
 	public void onOpenDash() {
 		updateEnable = true;
 		setupGpxFiles();
 	}
-	
-	
+
+
 	@Override
 	public void onCloseDash() {
 		updateEnable = false;
@@ -102,15 +102,15 @@ public class DashTrackFragment extends DashBaseFragment {
 		View mainView = getView();
 		final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final OsmandApplication app = getMyApplication();
-		if(app == null) {
+		if (app == null) {
 			return;
 		}
-		
-		final List<String> list  = new ArrayList<String>();
-		for(SelectedGpxFile sg :  app.getSelectedGpxHelper().getSelectedGPXFiles() ) {
-			if(!sg.isShowCurrentTrack()) {
+
+		final List<String> list = new ArrayList<String>();
+		for (SelectedGpxFile sg : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
+			if (!sg.isShowCurrentTrack()) {
 				GPXFile gpxFile = sg.getGpxFile();
-				if(gpxFile != null) {
+				if (gpxFile != null) {
 					list.add(gpxFile.path);
 				}
 			}
@@ -118,22 +118,22 @@ public class DashTrackFragment extends DashBaseFragment {
 		// 10 is the maximum length of the list. The actual length is determined later by
 		// DashboardOnMap.handleNumberOfRows()
 		int totalCount = 10;
-		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-			totalCount --;
+		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+			totalCount--;
 		}
-		if(list.size() < totalCount) {
+		if (list.size() < totalCount) {
 			final List<GPXInfo> res = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
-			for(GPXInfo r : res) {
+			for (GPXInfo r : res) {
 				String name = r.getFileName();
-				if(!list.contains(name)) {
+				if (!list.contains(name)) {
 					list.add(name);
-					if(list.size() >= totalCount) {
+					if (list.size() >= totalCount) {
 						break;
 					}
 				}
 			}
 		}
-		
+
 		if (list.size() == 0 && !OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
@@ -166,7 +166,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			info.file = file;
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 			AvailableGPXFragment.updateGpxInfoView(itemView, info, app, true, null);
-			
+
 			itemView.setOnClickListener(v -> openGpxContextMenu(file));
 			ImageButton showOnMap = itemView.findViewById(R.id.show_on_map);
 			showOnMap.setVisibility(View.VISIBLE);
@@ -206,8 +206,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			public void onClick(View v) {
 				if (isRecording) {
 					plugin.stopRecording();
-				} else
-				if (app.getLocationProvider().checkGPSEnabled(ctx)) {
+				} else if (app.getLocationProvider().checkGPSEnabled(ctx)) {
 					plugin.startGPXMonitoring(ctx);
 				}
 			}
@@ -251,7 +250,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	private void updateShowOnMap(final OsmandApplication app, final File f, final View pView, final ImageButton showOnMap) {
 		final GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
 		final SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
-		if(selected != null) {
+		if (selected != null) {
 			showOnMap.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_show_on_map, R.color.color_distance));
 			showOnMap.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -278,7 +277,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void showOnMap(@NonNull Activity activity,@NonNull GPXFile gpxFile) {
+	private void showOnMap(@NonNull Activity activity, @NonNull GPXFile gpxFile) {
 		if (gpxFile.isEmpty()) {
 			app.showToastMessage(R.string.gpx_file_is_empty);
 			return;

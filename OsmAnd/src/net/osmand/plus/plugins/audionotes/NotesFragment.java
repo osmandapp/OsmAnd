@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +24,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
@@ -50,17 +61,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 
 public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
 
@@ -445,7 +445,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	private void shareItems(@NonNull Set<Recording> selected) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			if (shareRecordingsTask != null) {
+			if (shareRecordingsTask != null && shareRecordingsTask.getStatus() == AsyncTask.Status.RUNNING) {
 				shareRecordingsTask.cancel(false);
 			}
 			shareRecordingsTask = new ShareRecordingsTask(activity, plugin, selected);

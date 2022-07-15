@@ -1,10 +1,14 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.plugins.audionotes.NotesFragment.SHARE_LOCATION_FILE;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -22,10 +26,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.plugins.audionotes.NotesFragment.SHARE_LOCATION_FILE;
 
 class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 
@@ -121,7 +121,7 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 			progressDialog.dismiss();
 		}
 
-		if (!isCancelled() && !Algorithms.isEmpty(uris)) {
+		if (!Algorithms.isEmpty(uris)) {
 			Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
 			intent.setType("*/*");
 			intent.putExtra(Intent.EXTRA_STREAM, new ArrayList<>(uris));

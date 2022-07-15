@@ -2,7 +2,6 @@ package net.osmand.plus.track.helpers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

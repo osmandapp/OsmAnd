@@ -2,9 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
@@ -45,7 +42,6 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	private final Set<String> selectedCategories = new HashSet<>();
 	private final List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
 
-	private boolean waitingGpxFile;
 	private boolean isUpdateMode = false;
 
 	@Override
@@ -58,7 +54,6 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (gpxFile == null) {
-			waitingGpxFile = true;
 			return;
 		}
 		int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
@@ -176,7 +171,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			} else {
 				GpxFileLoaderTask.loadGpxFile(new File(filePath), getActivity(), result -> {
 					gpxFile = result;
-					if (waitingGpxFile && AndroidUtils.isActivityNotDestroyed(getActivity())) {
+					if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
 						updateMenuItems();
 					}
 					return true;

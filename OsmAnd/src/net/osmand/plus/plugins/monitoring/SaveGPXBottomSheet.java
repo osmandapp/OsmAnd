@@ -1,8 +1,9 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,7 +13,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import net.osmand.GPXUtilities;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -34,14 +41,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -215,7 +214,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void showOnMap(@NonNull FragmentActivity activity, @NonNull File file) {
 		GpxFileLoaderTask.loadGpxFile(file, activity, gpxFile -> {
-			GPXUtilities.WptPt loc = gpxFile.findPointToShow();
+			WptPt loc = gpxFile.findPointToShow();
 			if (loc != null) {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 				if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
