@@ -284,7 +284,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark,
-						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
+						R.color.color_osm_edit_delete))
 				.setTitle(getString(R.string.shared_string_delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -376,12 +376,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 		double elevation = pt.ele;
 		if (!Double.isNaN(elevation)) {
-			description.append("  ").append((getString(R.string.altitude)).substring(0, 1)).append(": ");
+			description.append("  ").append((getString(R.string.altitude)).charAt(0)).append(": ");
 			description.append(OsmAndFormatter.getFormattedAlt(elevation, app));
 		}
 		float speed = (float) pt.speed;
 		if (speed != 0) {
-			description.append("  ").append((getString(R.string.shared_string_speed)).substring(0, 1)).append(": ");
+			description.append("  ").append((getString(R.string.shared_string_speed)).charAt(0)).append(": ");
 			description.append(OsmAndFormatter.getFormattedSpeed(speed, app));
 		}
 		return description.toString();

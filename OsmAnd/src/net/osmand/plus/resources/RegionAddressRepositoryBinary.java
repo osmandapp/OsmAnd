@@ -38,15 +38,15 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private static final Log log = PlatformUtil.getLog(RegionAddressRepositoryBinary.class);
 
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
-	private int POSTCODE_MIN_QUERY_LENGTH = 2;
-	private int ZOOM_QTREE = 10;
-	private QuadTree<City> citiesQtree = new QuadTree<City>(new QuadRect(0, 0, 1 << (ZOOM_QTREE + 1),
+	private final int POSTCODE_MIN_QUERY_LENGTH = 2;
+	private final int ZOOM_QTREE = 10;
+	private final QuadTree<City> citiesQtree = new QuadTree<City>(new QuadRect(0, 0, 1 << (ZOOM_QTREE + 1),
 			1 << (ZOOM_QTREE + 1)), 8, 0.55f);
 	private final Map<String, City> postCodes;
 	private final Collator collator;
-	private OsmandPreference<String> langSetting;
-	private OsmandPreference<Boolean> transliterateSetting;
-	private BinaryMapReaderResource resource;
+	private final OsmandPreference<String> langSetting;
+	private final OsmandPreference<Boolean> transliterateSetting;
+	private final BinaryMapReaderResource resource;
 
 
 	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapReaderResource resource ) {
@@ -188,10 +188,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return searchMapObjectsByName(name, resultMatcher, null);
 	}
 
-	private List<City> fillWithCities(String name, final ResultMatcher<City> resultMatcher, final List<Integer> typeFilter) throws IOException {
+	private List<City> fillWithCities(String name, ResultMatcher<City> resultMatcher, List<Integer> typeFilter) throws IOException {
 		List<City> result = new ArrayList<City>();
 		ResultMatcher<MapObject> matcher = new ResultMatcher<MapObject>() {
-			List<City> cache = new ArrayList<City>();
+			final List<City> cache = new ArrayList<City>();
 
 			@Override
 			public boolean publish(MapObject o) {
@@ -235,7 +235,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 	@Override
-	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
+	public synchronized List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<>(cities.values());
 		try {
 			citiesToFill.addAll(fillWithCities(name, resultMatcher, getCityTypeFilter(name, searchVillages)));
@@ -302,7 +302,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 	@Override
-	public City getCityById(final long id, String name) {
+	public City getCityById(long id, String name) {
 		if (id == -1) {
 			// do not preload cities for that case
 			return null;
@@ -310,14 +310,14 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		if (id < -1 && name != null) {
 			name = name.toUpperCase();
 		}
-		final String cmpName = name;
+		String cmpName = name;
 		preloadCities(null);
 		if (!cities.containsKey(id)) {
 			try {
 				BinaryMapIndexReader reader = getOpenFile();
 				if (reader != null) {
 					reader.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
-						boolean canceled = false;
+						boolean canceled;
 
 						@Override
 						public boolean isCancelled() {
@@ -332,7 +332,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 									canceled = true;
 								}
 							} else if (object.getId() != null && object.getId().longValue() == id) {
-								addCityToPreloadedList((City) object);
+								addCityToPreloadedList(object);
 								canceled = true;
 							}
 							return false;

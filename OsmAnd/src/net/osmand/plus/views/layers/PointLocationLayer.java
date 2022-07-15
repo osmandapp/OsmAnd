@@ -56,9 +56,9 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
-	protected final static float BEARING_SPEED_THRESHOLD = 0.1f;
-	protected final static int MIN_ZOOM = 3;
-	protected final static int RADIUS = 7;
+	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
+	protected static final int MIN_ZOOM = 3;
+	protected static final int RADIUS = 7;
 
 	private Paint headingPaint;
 	private Paint bitmapPaint;
@@ -66,7 +66,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private Paint aroundArea;
 
 	private ApplicationMode appMode;
-	private boolean carView = false;
+	private boolean carView;
 	private float textScale = 1f;
 	@ColorInt
 	private int profileColor;
@@ -91,7 +91,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private CoreMapMarker navigationMarkerWithHeading;
 
 	private boolean markersInvalidated = true;
-	private boolean showHeadingCached = false;
+	private boolean showHeadingCached;
 	private Location lastKnownLocationCached;
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = MarkerState.Stay;
@@ -316,7 +316,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
 
-		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
+		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
 		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
 		if (radius > RADIUS * box.getDensity()) {
 			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);

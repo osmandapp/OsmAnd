@@ -36,7 +36,7 @@ import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POI
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "SaveAsTrackBottomSheetDialogFragment";
+	public static final String TAG = "SaveAsTrackBottomSheetDialogFragment";
 	public static final String COORDINATE_INPUT_MODE_KEY = "coordinate_input_mode_key";
 
 	private boolean portrait;
@@ -49,7 +49,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		boolean openFromCoordinateInput = false;
 		int number = 0;
 		Bundle args = getArguments();
@@ -60,16 +60,16 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			}
 		}
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final boolean nightMode = !app.getSettings().isLightContent();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
+		boolean nightMode = !app.getSettings().isLightContent();
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
-		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);
-		TextView titleTv = (TextView) mainView.findViewById(R.id.save_as_track_title);
+		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
+		LinearLayout contentLayout = mainView.findViewById(R.id.content_linear_layout);
+		TextView titleTv = mainView.findViewById(R.id.save_as_track_title);
 		titleTv.setText(openFromCoordinateInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
 		titleTv.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
-		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
+		TextView descriptionTv = mainView.findViewById(R.id.save_as_track_description);
 		descriptionTv.setText(openFromCoordinateInput
 				? getString(R.string.coord_input_save_as_track_descr, String.valueOf(number))
 				: getString(R.string.marker_save_as_track_descr));
@@ -91,7 +91,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		String suggestedName = app.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
 		String uniqueFileName = FileUtils.createUniqueFileName(app, suggestedName, dirName, IndexConstants.GPX_FILE_EXT);
 
-		final EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
+		EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(uniqueFileName);
 		nameEditText.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
 
@@ -112,9 +112,9 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			}
 		});
 
-		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
-		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
+		int screenHeight = AndroidUtils.getScreenHeight(getActivity());
+		int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -123,7 +123,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			@Override
 			public void onGlobalLayout() {
 				if (!dimensSet) {
-					final View scrollView = mainView.findViewById(R.id.marker_save_as_track_scroll_view);
+					View scrollView = mainView.findViewById(R.id.marker_save_as_track_scroll_view);
 					int scrollViewHeight = scrollView.getHeight();
 					int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 					int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
@@ -146,7 +146,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 					dimensSet = true;
 				}
 
-				final Window window = getDialog().getWindow();
+				Window window = getDialog().getWindow();
 				WindowManager.LayoutParams params = window.getAttributes();
 				params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
 				params.gravity = Gravity.BOTTOM;
@@ -161,7 +161,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	public void onStart() {
 		super.onStart();
 		if (!portrait) {
-			final Window window = getDialog().getWindow();
+			Window window = getDialog().getWindow();
 			WindowManager.LayoutParams params = window.getAttributes();
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);

@@ -26,12 +26,12 @@ public class TurnDrawable extends Drawable {
 	protected Paint paintRouteDirection;
 	protected Path pathForTurn = new Path();
 	protected Path pathForTurnOutlay = new Path();
-	protected TurnType turnType = null;
+	protected TurnType turnType;
 	protected int turnImminent;
 	protected boolean deviatedFromRoute;
-	private Context ctx;
-	private boolean mini;
-	private PointF centerText;
+	private final Context ctx;
+	private final boolean mini;
+	private final PointF centerText;
 	private TextPaint textPaint;
 	private int clr;
 
@@ -83,13 +83,13 @@ public class TurnDrawable extends Drawable {
 		this.turnImminent = turnImminent;
 		this.deviatedFromRoute = deviatedFromRoute;
 		if (deviatedFromRoute) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
 		} else if (turnImminent > 0) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow));
 		} else if (turnImminent == 0) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_imminent));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_imminent));
 		} else {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
 		}
 		invalidateSelf();
 	}

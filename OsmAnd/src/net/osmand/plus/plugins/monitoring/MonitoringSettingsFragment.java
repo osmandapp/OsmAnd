@@ -54,7 +54,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
-	boolean showSwitchProfile = false;
+	boolean showSwitchProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -110,20 +110,20 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupShowStartDialog() {
-		SwitchPreferenceEx showStartDialog = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_START_DIALOG.getId());
+		SwitchPreferenceEx showStartDialog = findPreference(settings.SHOW_TRIP_REC_START_DIALOG.getId());
 		showStartDialog.setDescription(getString(R.string.trip_recording_show_start_dialog_setting));
 		showStartDialog.setIcon(getPersistentPrefIcon(R.drawable.ic_action_dialog));
 	}
 
 	private void setupSaveTrackToGpxPref() {
-		SwitchPreferenceCompat saveTrackToGpx = (SwitchPreferenceCompat) findPreference(settings.SAVE_TRACK_TO_GPX.getId());
+		SwitchPreferenceCompat saveTrackToGpx = findPreference(settings.SAVE_TRACK_TO_GPX.getId());
 		saveTrackToGpx.setSummary(getString(R.string.save_track_to_gpx_descrp));
 		saveTrackToGpx.setIcon(getPersistentPrefIcon(R.drawable.ic_action_gdirections_dark));
 	}
 
 	private void setupSaveTrackIntervalPref() {
 		HashMap<Object, String> entry = getTimeValues();
-		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_INTERVAL.getId());
+		ListPreferenceEx saveTrackInterval = findPreference(settings.SAVE_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		saveTrackInterval.setIcon(getActiveIcon(R.drawable.ic_action_time_span));
@@ -133,7 +133,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	private void setupSaveGlobalTrackIntervalPref() {
 		HashMap<Object, String> entry = getTimeValues();
-		ListPreferenceEx saveTrackInterval = (ListPreferenceEx) findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
+		ListPreferenceEx saveTrackInterval = findPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL.getId());
 		saveTrackInterval.setEntries(entry.values().toArray(new String[0]));
 		saveTrackInterval.setEntryValues(entry.keySet().toArray());
 		ApplicationMode selectedAppMode = getSelectedAppMode();
@@ -154,14 +154,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackMinDistancePref() {
-		Float[] entryValues = new Float[] {0.f, 2.0f, 5.0f, 10.0f, 20.0f, 30.0f, 50.0f};
+		Float[] entryValues = {0.f, 2.0f, 5.0f, 10.0f, 20.0f, 30.0f, 50.0f};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_not_selected);
 		for (int i = 1; i < entryValues.length; i++) {
 			entries[i] = entryValues[i].intValue() + " " + getString(R.string.m);
 		}
 
-		ListPreferenceEx saveTrackMinDistance = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_MIN_DISTANCE.getId());
+		ListPreferenceEx saveTrackMinDistance = findPreference(settings.SAVE_TRACK_MIN_DISTANCE.getId());
 		saveTrackMinDistance.setEntries(entries);
 		saveTrackMinDistance.setEntryValues(entryValues);
 
@@ -175,14 +175,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackPrecisionPref() {
-		Float[] entryValues = new Float[] {0.f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 50.0f, 100.0f};
+		Float[] entryValues = {0.f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 50.0f, 100.0f};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_not_selected);
 		for (int i = 1; i < entryValues.length; i++) {
 			entries[i] = entryValues[i].intValue() + " " + getString(R.string.m) + "  (" + Math.round(entryValues[i] / 0.3048f) + " " + getString(R.string.foot) + ")";
 		}
 
-		ListPreferenceEx saveTrackPrecision = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_PRECISION.getId());
+		ListPreferenceEx saveTrackPrecision = findPreference(settings.SAVE_TRACK_PRECISION.getId());
 		saveTrackPrecision.setEntries(entries);
 		saveTrackPrecision.setEntryValues(entryValues);
 
@@ -198,7 +198,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupSaveTrackMinSpeedPref() {
-		Float[] entryValues = new Float[] {0.f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
+		Float[] entryValues = {0.f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_not_selected);
 		entries[1] = "> 0"; // This option for the GPS chipset motion detection
@@ -207,7 +207,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 			entryValues[i] = entryValues[i] / 3.6f;
 		}
 
-		ListPreferenceEx saveTrackMinSpeed = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_MIN_SPEED.getId());
+		ListPreferenceEx saveTrackMinSpeed = findPreference(settings.SAVE_TRACK_MIN_SPEED.getId());
 		saveTrackMinSpeed.setEntries(entries);
 		saveTrackMinSpeed.setEntryValues(entryValues);
 
@@ -223,34 +223,34 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupAutoSplitRecordingPref() {
-		SwitchPreferenceEx autoSplitRecording = (SwitchPreferenceEx) findPreference(settings.AUTO_SPLIT_RECORDING.getId());
+		SwitchPreferenceEx autoSplitRecording = findPreference(settings.AUTO_SPLIT_RECORDING.getId());
 		autoSplitRecording.setDescription(getString(R.string.auto_split_recording_descr));
 	}
 
 	private void setupDisableRecordingOnceAppKilledPref() {
-		SwitchPreferenceEx disableRecordingOnceAppKilled = (SwitchPreferenceEx) findPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED.getId());
+		SwitchPreferenceEx disableRecordingOnceAppKilled = findPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED.getId());
 		disableRecordingOnceAppKilled.setDescription(getString(R.string.disable_recording_once_app_killed_descrp));
 	}
 
 	private void setupSaveHeadingToGpxPref() {
-		SwitchPreferenceEx saveHeadingToGpx = (SwitchPreferenceEx) findPreference(settings.SAVE_HEADING_TO_GPX.getId());
+		SwitchPreferenceEx saveHeadingToGpx = findPreference(settings.SAVE_HEADING_TO_GPX.getId());
 		saveHeadingToGpx.setDescription(getString(R.string.save_heading_descr));
 	}
 
 	private void setupShowTripRecNotificationPref() {
-		SwitchPreferenceEx showTripRecNotification = (SwitchPreferenceEx) findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
+		SwitchPreferenceEx showTripRecNotification = findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
 		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings_desc));
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void setupTrackStorageDirectoryPref() {
-		Integer[] entryValues = new Integer[] {REC_DIRECTORY, MONTHLY_DIRECTORY};
+		Integer[] entryValues = {REC_DIRECTORY, MONTHLY_DIRECTORY};
 		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.store_tracks_in_rec_directory);
 		entries[1] = getString(R.string.store_tracks_in_monthly_directories);
 //		entries[2] = getString(R.string.store_tracks_in_daily_directories);
 
-		ListPreferenceEx trackStorageDirectory = (ListPreferenceEx) findPreference(settings.TRACK_STORAGE_DIRECTORY.getId());
+		ListPreferenceEx trackStorageDirectory = findPreference(settings.TRACK_STORAGE_DIRECTORY.getId());
 		trackStorageDirectory.setEntries(entries);
 		trackStorageDirectory.setEntryValues(entryValues);
 		trackStorageDirectory.setDescription(R.string.track_storage_directory_descrp);
@@ -262,7 +262,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		Drawable enabled = getActiveIcon(R.drawable.ic_world_globe_dark);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceEx liveMonitoring = (SwitchPreferenceEx) findPreference(settings.LIVE_MONITORING.getId());
+		SwitchPreferenceEx liveMonitoring = findPreference(settings.LIVE_MONITORING.getId());
 		liveMonitoring.setDescription(getString(R.string.live_monitoring_m_descr));
 		liveMonitoring.setIcon(icon);
 	}

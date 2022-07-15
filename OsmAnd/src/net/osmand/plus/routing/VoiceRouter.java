@@ -7,6 +7,7 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 import android.content.res.AssetFileDescriptor;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
@@ -68,23 +69,23 @@ public class VoiceRouter {
 	private AnnounceTimeDistances atd;
 
 	private int currentStatus = STATUS_UNKNOWN;
-	private boolean playedAndArriveAtTarget = false;
-	private float playGoAheadDist = 0;
-	private long lastAnnouncedSpeedLimit = 0;
-	private long waitAnnouncedSpeedLimit = 0;
-	private long lastAnnouncedOffRoute = 0;
-	private long waitAnnouncedOffRoute = 0;
-	private boolean suppressDest = false;
-	private boolean announceBackOnRoute = false;
+	private boolean playedAndArriveAtTarget;
+	private float playGoAheadDist;
+	private long lastAnnouncedSpeedLimit;
+	private long waitAnnouncedSpeedLimit;
+	private long lastAnnouncedOffRoute;
+	private long waitAnnouncedOffRoute;
+	private boolean suppressDest;
+	private boolean announceBackOnRoute;
 	// private long lastTimeRouteRecalcAnnounced = 0;
 	// Remember when last announcement was made
-	private long lastAnnouncement = 0;
+	private long lastAnnouncement;
 
 
 	private SoundPool soundPool;
 	private int soundClick = -1;
 
-	private VoiceCommandPending pendingCommand = null;
+	private VoiceCommandPending pendingCommand;
 	private RouteDirectionInfo nextRouteDirection;
 
 
@@ -125,7 +126,11 @@ public class VoiceRouter {
 
 	private void loadCameraSound() {
 		if (soundPool == null) {
-			soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+			AudioAttributes attr = new AudioAttributes.Builder()
+					.setUsage(AudioAttributes.USAGE_NOTIFICATION)
+					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+					.build();
+			soundPool = new SoundPool.Builder().setAudioAttributes(attr).setMaxStreams(5).build();
 		}
 		if (soundClick == -1) {
 			try {
@@ -380,10 +385,10 @@ public class VoiceRouter {
 	}
 
 	private boolean needsInforming() {
-		final Integer repeat = settings.KEEP_INFORMING.get();
+		Integer repeat = settings.KEEP_INFORMING.get();
 		if (repeat == null || repeat == 0) return false;
 
-		final long notBefore = lastAnnouncement + repeat * 60 * 1000L;
+		long notBefore = lastAnnouncement + repeat * 60 * 1000L;
 
 		return System.currentTimeMillis() > notBefore;
 	}

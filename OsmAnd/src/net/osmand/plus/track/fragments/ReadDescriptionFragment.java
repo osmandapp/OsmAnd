@@ -114,7 +114,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		edit.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				EditDescriptionFragment.showInstance(activity, mContent, ReadDescriptionFragment.this);
+				EditDescriptionFragment.showInstance(activity, mContent, this);
 			}
 		});
 
@@ -231,7 +231,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		editBtn.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				EditDescriptionFragment.showInstance(activity, mContent, ReadDescriptionFragment.this);
+				EditDescriptionFragment.showInstance(activity, mContent, this);
 			}
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,

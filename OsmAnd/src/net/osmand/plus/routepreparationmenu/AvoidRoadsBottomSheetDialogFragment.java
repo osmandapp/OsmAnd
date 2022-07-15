@@ -74,7 +74,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	private boolean hideImpassableRoads;
 	@ColorInt
-	private Integer compoundButtonColor = null;
+	private Integer compoundButtonColor;
 	private ApplicationMode appMode;
 
 	public void setHideImpassableRoads(boolean hideImpassableRoads) {
@@ -122,11 +122,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		}
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		final View titleView = themedInflater.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
-		TextView textView = (TextView) titleView.findViewById(R.id.title);
+		View titleView = themedInflater.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
+		TextView textView = titleView.findViewById(R.id.title);
 		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
-		Toolbar toolbar = (Toolbar) titleView.findViewById(R.id.toolbar);
+		Toolbar toolbar = titleView.findViewById(R.id.toolbar);
 		int icBackResId = AndroidUtils.getNavigationIconResId(app);
 		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -137,12 +137,12 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 		});
 
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);
 
-		final SimpleBottomSheetItem descriptionItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem descriptionItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setTitle(!hideImpassableRoads ? getString(R.string.avoid_roads_descr) : getString(R.string.avoid_pt_types_descr))
 				.setLayoutId(R.layout.bottom_sheet_item_title_long)
 				.create();
@@ -156,7 +156,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(stylesContainer).create());
 
 		if (!hideImpassableRoads) {
-			for (final LatLon routeDataObject : app.getAvoidSpecificRoads().getImpassableRoads().keySet()) {
+			for (LatLon routeDataObject : app.getAvoidSpecificRoads().getImpassableRoads().keySet()) {
 				if (removedImpassableRoads.contains(routeDataObject)) {
 					continue;
 				}
@@ -164,8 +164,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 			populateImpassableRoadsObjects();
 
-			final View buttonView = themedInflater.inflate(R.layout.bottom_sheet_item_btn, null);
-			TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
+			View buttonView = themedInflater.inflate(R.layout.bottom_sheet_item_btn, null);
+			TextView buttonDescription = buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
 			buttonDescription.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
 
@@ -211,7 +211,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
 
 		int counter = 0;
-		for (final LatLon routeDataObject : avoidSpecificRoads.getImpassableRoads().keySet()) {
+		for (LatLon routeDataObject : avoidSpecificRoads.getImpassableRoads().keySet()) {
 			if (removedImpassableRoads.contains(routeDataObject)) {
 				continue;
 			}
@@ -226,11 +226,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				}
 			});
 
-			TextView titleTv = (TextView) view.findViewById(R.id.title);
+			TextView titleTv = view.findViewById(R.id.title);
 			titleTv.setText(name);
 			titleTv.setTextColor(activeColor);
 
-			ImageView icon = (ImageView) view.findViewById(R.id.icon);
+			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 
 			counter++;
@@ -239,7 +239,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	private void populateImpassableRoadsTypes() {
 		for (Map.Entry<String, Boolean> entry : routingParametersMap.entrySet()) {
-			final String parameterId = entry.getKey();
+			String parameterId = entry.getKey();
 			boolean selected = entry.getValue();
 			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
 			String defValue = "";
@@ -248,7 +248,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 			String parameterName = AndroidUtils.getRoutingStringPropertyName(app, parameterId, defValue);
 
-			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setCompoundButtonColor(compoundButtonColor)
 					.setChecked(selected)
@@ -283,7 +283,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), false);
 
-				final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+				BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 				item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 						.setChecked(enabled)
 						.setTitle(name)

@@ -23,10 +23,10 @@ import static net.osmand.plus.NavigationService.USED_BY_GPX;
 
 public class GpxNotification extends OsmandNotification {
 
-	public final static String OSMAND_SAVE_GPX_SERVICE_ACTION = "OSMAND_SAVE_GPX_SERVICE_ACTION";
-	public final static String OSMAND_START_GPX_SERVICE_ACTION = "OSMAND_START_GPX_SERVICE_ACTION";
-	public final static String OSMAND_STOP_GPX_SERVICE_ACTION = "OSMAND_STOP_GPX_SERVICE_ACTION";
-	public final static String GROUP_NAME = "GPX";
+	public static final String OSMAND_SAVE_GPX_SERVICE_ACTION = "OSMAND_SAVE_GPX_SERVICE_ACTION";
+	public static final String OSMAND_START_GPX_SERVICE_ACTION = "OSMAND_START_GPX_SERVICE_ACTION";
+	public static final String OSMAND_STOP_GPX_SERVICE_ACTION = "OSMAND_STOP_GPX_SERVICE_ACTION";
+	public static final String GROUP_NAME = "GPX";
 
 	private boolean wasNoDataDismissed;
 	private boolean lastBuiltNoData;
@@ -41,7 +41,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
 				}
@@ -52,7 +52,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
 					plugin.updateWidgets();
@@ -64,7 +64,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.stopRecording();
 					plugin.updateWidgets();
@@ -122,7 +122,7 @@ public class GpxNotification extends OsmandNotification {
 		ongoing = true;
 		lastBuiltNoData = false;
 		if (isGpxRecording) {
-			color = app.getResources().getColor(R.color.osmand_orange);
+			color = app.getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "
 					+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true) + " • "
 					+ OsmAndFormatter.getFormattedDistance(recordedDistance, app);
@@ -142,13 +142,13 @@ public class GpxNotification extends OsmandNotification {
 				lastBuiltNoData = true;
 			}
 		}
-		notificationText = notificationText + "  (" + Integer.toString(app.getSavingTrackHelper().getTrkPoints()) + ")";
+		notificationText = notificationText + "  (" + app.getSavingTrackHelper().getTrkPoints() + ")";
 
 		if ((wasNoDataDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder(wearable)
+		Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText));
 

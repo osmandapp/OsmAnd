@@ -149,7 +149,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
 	}
 
-	protected abstract void showPopupLangMenu(View view, final String langSelected);
+	protected abstract void showPopupLangMenu(View view, String langSelected);
 
 	protected abstract void populateArticle();
 

@@ -11,7 +11,7 @@ import com.github.mikephil.charting.renderer.HorizontalBarChartRenderer;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class CustomBarChartRenderer extends HorizontalBarChartRenderer {
-	private float highlightHalfWidth;
+	private final float highlightHalfWidth;
 
 	public CustomBarChartRenderer(@NonNull BarChart chart) {
 		this(chart, AndroidUtils.dpToPx(chart.getContext(), 2f) / 2f);

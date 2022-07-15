@@ -59,7 +59,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private CommonPreference<Boolean> useHeightPref;
 
 	private BottomSheetItemWithCompoundButton useHeightButton;
-	private List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
+	private final List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
 
 	private int selectedEntryIndex = -1;
 
@@ -167,7 +167,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private void createReliefFactorButtons(Context context) {
 		for (int i = 0; i < parameters.size(); i++) {
 			RoutingParameter parameter = parameters.get(i);
-			final BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
 					.setButtonTintList(createColorStateList(context, nightMode))
@@ -254,12 +254,12 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(FragmentManager fm, ApplicationMode appMode, Fragment target, boolean usedOnMap) {
 		try {
-			if (!fm.isStateSaved() && fm.findFragmentByTag(ElevationDateBottomSheet.TAG) == null) {
+			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ElevationDateBottomSheet fragment = new ElevationDateBottomSheet();
 				fragment.appMode = appMode;
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, ElevationDateBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

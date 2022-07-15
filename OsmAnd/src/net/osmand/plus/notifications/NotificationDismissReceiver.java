@@ -15,7 +15,7 @@ public class NotificationDismissReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		final NotificationHelper helper = ((OsmandApplication) context.getApplicationContext()).getNotificationHelper();
+		NotificationHelper helper = ((OsmandApplication) context.getApplicationContext()).getNotificationHelper();
 		String notificationTypeStr = intent.getExtras().getString(NOTIFICATION_TYPE_KEY_NAME);
 		if (!Algorithms.isEmpty(notificationTypeStr)) {
 			try {

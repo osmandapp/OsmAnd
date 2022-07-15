@@ -19,7 +19,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
 	private final boolean forceReadData;
-	private boolean needRestart = false;
+	private boolean needRestart;
 
 	ImportBackupItemsTask(@NonNull OsmandApplication app,
 						  @NonNull BackupImporter importer,

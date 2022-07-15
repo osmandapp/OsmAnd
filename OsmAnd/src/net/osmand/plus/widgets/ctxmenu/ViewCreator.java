@@ -57,7 +57,8 @@ public class ViewCreator {
 	private final boolean nightMode;
 
 	private OnDataChangeUiAdapter uiAdapter;
-	private @LayoutRes int defLayoutId = R.layout.list_menu_item_native;
+	@LayoutRes
+	private int defLayoutId = R.layout.list_menu_item_native;
 	private Integer customControlsColor;
 
 	public ViewCreator(@NonNull Activity ctx, boolean nightMode) {

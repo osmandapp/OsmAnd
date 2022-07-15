@@ -374,7 +374,7 @@ public class QuickActionRegistry {
 					qa.setId(obj.get("id").getAsLong());
 				}
 				if (obj.has("params")) {
-					qa.setParams((Map<String, String>) context.deserialize(obj.get("params"),
+					qa.setParams(context.deserialize(obj.get("params"),
 							new TypeToken<HashMap<String, String>>() {
 							}.getType())
 					);

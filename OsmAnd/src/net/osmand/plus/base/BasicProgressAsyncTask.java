@@ -16,7 +16,7 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	protected int work;
 	protected String message = ""; //$NON-NLS-1$
 	protected OsmandApplication ctx;
-	protected boolean interrupted = false;
+	protected boolean interrupted;
 	protected Tag tag;
 	private Handler uiHandler;
 
@@ -72,7 +72,7 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 		}
 	}
 	
-	private void updProgress(final boolean updateOnlyProgress) {
+	private void updProgress(boolean updateOnlyProgress) {
 		if(uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
 			Message msg = Message.obtain(uiHandler, new Runnable() {
 				@Override

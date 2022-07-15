@@ -39,7 +39,7 @@ public class ArticleWebViewClient extends WebViewClient {
 	private final GPXFile gpxFile;
 	private final View view;
 	private final boolean usedOnMap;
-	private WikiArticleHelper wikiArticleHelper;
+	private final WikiArticleHelper wikiArticleHelper;
 
 	public ArticleWebViewClient(@NonNull ReadDescriptionFragment fragment,
 	                            @NonNull FragmentActivity activity,

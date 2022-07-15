@@ -30,19 +30,19 @@ public class DialogListItemAdapter extends BaseAdapter {
 	private final LayoutInflater inflater;
 
 	public static DialogListItemAdapter createSingleChoiceAdapter(String[] mData, boolean nightMode, int selected, OsmandApplication app,
-	                                                              @ColorInt int compoundButtonColor, int themeRes, final View.OnClickListener listener) {
+	                                                              @ColorInt int compoundButtonColor, int themeRes, View.OnClickListener listener) {
 
 		return new DialogListItemAdapter(mData, selected, null, nightMode, app, compoundButtonColor, themeRes, listener, false);
 	}
 
 	public static DialogListItemAdapter createMultiChoiceAdapter(String[] mData, boolean nightMode, boolean[] checkedItems, OsmandApplication app,
-	                                                             @ColorInt int compoundButtonColor, int themeRes, final View.OnClickListener listener) {
+	                                                             @ColorInt int compoundButtonColor, int themeRes, View.OnClickListener listener) {
 
 		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app, compoundButtonColor, themeRes, listener, true);
 	}
 
 	private DialogListItemAdapter(String[] mData, int selected, boolean[] checkedItems, boolean nightMode, OsmandApplication app,
-	                              int compoundButtonColor, int themeRes, final View.OnClickListener listener, boolean multiChoice) {
+	                              int compoundButtonColor, int themeRes, View.OnClickListener listener, boolean multiChoice) {
 		this.mData = mData;
 		this.selected = selected;
 		this.checkedItems = checkedItems;
@@ -73,7 +73,7 @@ public class DialogListItemAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 		View view;
 		if (convertView == null) {
 			view = inflater.inflate(R.layout.dialog_list_item_with_compound_button, null);
@@ -82,7 +82,7 @@ public class DialogListItemAdapter extends BaseAdapter {
 		}
 		View button = view.findViewById(R.id.button);
 		button.setTag(position);
-		final CompoundButton cb;
+		CompoundButton cb;
 		if (multiChoice) {
 			cb = view.findViewById(R.id.checkbox);
 			view.findViewById(R.id.radio).setVisibility(View.INVISIBLE);

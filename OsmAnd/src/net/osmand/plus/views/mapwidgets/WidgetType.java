@@ -213,7 +213,7 @@ public enum WidgetType {
 
 	@Nullable
 	public static WidgetType getById(@NonNull String id) {
-		for (WidgetType widget : WidgetType.values()) {
+		for (WidgetType widget : values()) {
 			String defaultId = getDefaultWidgetId(id);
 			if (widget.id.equals(defaultId)) {
 				return widget;

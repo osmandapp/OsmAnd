@@ -60,7 +60,7 @@ public class OsmAndLocationSimulation {
 //		}
 //	}
 
-	public void startStopRouteAnimation(@Nullable Activity activity, boolean useGpx, final Runnable runnable) {
+	public void startStopRouteAnimation(@Nullable Activity activity, boolean useGpx, Runnable runnable) {
 		if (!isRouteAnimating()) {
 			if (useGpx) {
 				if (activity == null) {
@@ -77,10 +77,10 @@ public class OsmAndLocationSimulation {
 				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 				builder.setTitle(R.string.animate_route);
 
-				final View view = activity.getLayoutInflater().inflate(R.layout.animate_route, null);
+				View view = activity.getLayoutInflater().inflate(R.layout.animate_route, null);
 				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
 				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
-				final Slider speedup = view.findViewById(R.id.Speedup);
+				Slider speedup = view.findViewById(R.id.Speedup);
 				speedup.setValueTo(3);
 				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
 				builder.setView(view);
@@ -125,8 +125,8 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(activity, true, null);
 	}
 
-	private void startAnimationThread(final OsmandApplication app, List<SimulatedLocation> directions,
-	                                  final boolean locTime, final float coeff) {
+	private void startAnimationThread(OsmandApplication app, List<SimulatedLocation> directions,
+	                                  boolean locTime, float coeff) {
 		final float time = 1.5f;
 		float simSpeed = app.getSettings().simulateNavigationSpeed;
 		SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
@@ -178,7 +178,7 @@ public class OsmAndLocationSimulation {
 						}
 					}
 					current.setTime(System.currentTimeMillis());
-					final Location toset = current;
+					Location toset = current;
 					if (realistic) {
 						addNoise(toset);
 					}

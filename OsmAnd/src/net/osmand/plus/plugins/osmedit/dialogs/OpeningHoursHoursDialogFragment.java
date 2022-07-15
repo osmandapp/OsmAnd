@@ -31,14 +31,14 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		Bundle args = getArguments();
-		final boolean isStart = args.getBoolean(IS_START);
-		final OpeningHoursParser.BasicOpeningHourRule item = (OpeningHoursParser.BasicOpeningHourRule)
+		boolean isStart = args.getBoolean(IS_START);
+		OpeningHoursParser.BasicOpeningHourRule item = (OpeningHoursParser.BasicOpeningHourRule)
 				args.getSerializable(BASIC_OPENING_HOUR_RULE);
-		final int rulePosition = args.getInt(RULE_POSITION);
-		final int timePosition = args.getInt(TIME_POSITION);
+		int rulePosition = args.getInt(RULE_POSITION);
+		int timePosition = args.getInt(TIME_POSITION);
 
-		final boolean newTimeSpan = timePosition == item.timesSize();
-		final boolean createNew = rulePosition == -1 || newTimeSpan;
+		boolean newTimeSpan = timePosition == item.timesSize();
+		boolean createNew = rulePosition == -1 || newTimeSpan;
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		int time;
@@ -50,10 +50,10 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		int hour = time / 60;
 		int minute = time - hour * 60;
 
-		final TimePicker timePicker = new TimePicker(getActivity());
+		TimePicker timePicker = new TimePicker(getActivity());
 		timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
-		timePicker.setCurrentHour(hour);
-		timePicker.setCurrentMinute(minute);
+		timePicker.setHour(hour);
+		timePicker.setMinute(minute);
 
 		builder.setView(timePicker)
 				.setPositiveButton(isStart && createNew ? R.string.next_proceed
@@ -70,8 +70,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 								}
 								if (isStart && createNew) {
 									item.setStartTime(time, timePosition);
-									OpeningHoursHoursDialogFragment
-											.createInstance(item, rulePosition, false, timePosition)
+									createInstance(item, rulePosition, false, timePosition)
 											.show(getFragmentManager(), "TimePickerDialogFragment");
 								} else {
 									if (isStart) {
@@ -84,13 +83,10 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 								}
 							}
 						})
-				.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						BasicEditPoiFragment editPoiFragment = ((BasicEditPoiFragment) getParentFragment());
-						if (editPoiFragment != null) {
-							editPoiFragment.removeUnsavedOpeningHours();
-						}
+				.setNegativeButton(R.string.shared_string_cancel, (dialog, which) -> {
+					BasicEditPoiFragment editPoiFragment = ((BasicEditPoiFragment) getParentFragment());
+					if (editPoiFragment != null) {
+						editPoiFragment.removeUnsavedOpeningHours();
 					}
 				});
 
@@ -98,7 +94,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		float density = getActivity().getResources().getDisplayMetrics().density;
 		int paddingInPx = (int) (paddingInDp * density);
 
-		final TypedValue textColorTypedValue = new TypedValue();
+		TypedValue textColorTypedValue = new TypedValue();
 		getActivity().getTheme().resolveAttribute(android.R.attr.textColorPrimary,
 				textColorTypedValue, true);
 		int textColor = textColorTypedValue.data;

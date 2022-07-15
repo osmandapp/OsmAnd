@@ -19,13 +19,13 @@ import net.osmand.plus.download.IndexItem;
 
 public class DownloadGroupViewHolder {
 
-	private DownloadActivity ctx;
+	private final DownloadActivity ctx;
 
-	private TextView textView;
+	private final TextView textView;
 
 	public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
 		this.ctx = ctx;
-		textView = (TextView) v.findViewById(R.id.title);
+		textView = v.findViewById(R.id.title);
 	}
 
 	private boolean isParentWorld(DownloadResourceGroup group) {

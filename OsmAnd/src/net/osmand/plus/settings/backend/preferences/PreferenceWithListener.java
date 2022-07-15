@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
-	private List<WeakReference<StateChangedListener<T>>> l = null;
+	private List<WeakReference<StateChangedListener<T>>> l;
 
 	@Override
 	public synchronized void addListener(StateChangedListener<T> listener) {

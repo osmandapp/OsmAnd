@@ -99,10 +99,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		items.add(createDeleteGroupItem());
 	}
 
-	private BaseBottomSheetItem createShowOnMapItem(final SelectedGpxFile selectedGpxFile) {
+	private BaseBottomSheetItem createShowOnMapItem(SelectedGpxFile selectedGpxFile) {
 		boolean checked = !selectedGpxFile.isGroupHidden(group.getName());
-		final ApplicationMode mode = app.getSettings().getApplicationMode();
-		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColor(mode.getProfileColor(nightMode))
 				.setChecked(checked)
@@ -154,9 +154,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.create();
 	}
 
-	private BaseBottomSheetItem createCopyToMarkersItem(final GPXFile gpxFile) {
+	private BaseBottomSheetItem createCopyToMarkersItem(GPXFile gpxFile) {
 		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
-		final boolean synced = markersGroup != null && (Algorithms.isEmpty(markersGroup.getWptCategories())
+		boolean synced = markersGroup != null && (Algorithms.isEmpty(markersGroup.getWptCategories())
 				|| markersGroup.getWptCategories().contains(group.getName()));
 
 		return new SimpleBottomSheetItem.Builder()

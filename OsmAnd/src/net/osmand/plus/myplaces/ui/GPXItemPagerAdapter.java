@@ -98,10 +98,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private final boolean nightMode;
 	private boolean chartClicked;
-	private boolean showEmptyAltitudeTab;
+	private final boolean showEmptyAltitudeTab;
 	private boolean hideStatistics;
 	private boolean hideJoinGapsBottomButtons;
-	private int chartHMargin = 0;
+	private int chartHMargin;
 
 	public void setChartHMargin(int chartHMargin) {
 		this.chartHMargin = chartHMargin;
@@ -125,7 +125,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	                           @NonNull SegmentActionsListener actionsListener,
 	                           boolean nightMode,
 	                           boolean showEmptyAltitudeTab) {
-		super();
 		this.app = app;
 		this.gpxItem = gpxItem;
 		this.displayHelper = displayHelper;
@@ -364,7 +363,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 	}
 
-	private void setupOptionsPopupMenu(TextView overflowMenu, final boolean confirmDeletion) {
+	private void setupOptionsPopupMenu(TextView overflowMenu, boolean confirmDeletion) {
 		overflowMenu.setVisibility(View.VISIBLE);
 		overflowMenu.setOnClickListener(view ->
 				actionsListener.showOptionsPopupMenu(view, getTrkSegment(), confirmDeletion, gpxItem));
@@ -496,7 +495,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		((TextView) container.findViewById(R.id.end_date_text)).setText(dateFormat.format(end));
 	}
 
-	private void setupChart(final View view, final LineChart chart) {
+	private void setupChart(View view, LineChart chart) {
 		if (chart == null) {
 			return;
 		}

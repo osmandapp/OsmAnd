@@ -3,8 +3,8 @@ package net.osmand.plus.download;
 import net.osmand.data.Amenity;
 
 public class CityItem {
-	private String name;
-	private Amenity amenity;
+	private final String name;
+	private final Amenity amenity;
 	private IndexItem indexItem;
 
 	public CityItem(String name, Amenity amenity, IndexItem indexItem) {

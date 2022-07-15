@@ -12,7 +12,7 @@ import net.osmand.plus.notifications.OsmandNotification;
 
 public class CarAppNotification extends OsmandNotification {
 
-	private final static String GROUP_NAME = "CAR_APP";
+	private static final String GROUP_NAME = "CAR_APP";
 
 	public CarAppNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);

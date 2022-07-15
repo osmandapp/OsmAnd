@@ -37,8 +37,8 @@ public class ContourLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
-		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+	public void execute(@NonNull MapActivity mapActivity) {
+		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());
 			plugin.toggleContourLines(mapActivity, !enabled, new Runnable() {
@@ -47,7 +47,7 @@ public class ContourLinesAction extends QuickAction {
 					OsmandApplication app = mapActivity.getMyApplication();
 					RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 					if (contourLinesProp != null) {
-						final CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
+						CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
 						if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
 							OsmandPlugin.enablePluginIfNeeded(mapActivity, app, plugin, true);
 						}

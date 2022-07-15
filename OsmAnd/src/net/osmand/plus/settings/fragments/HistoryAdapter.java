@@ -112,7 +112,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof HeaderViewHolder) {
 			Integer dateHeader = (Integer) getItem(position);
 			bindHeaderItem((HeaderViewHolder) holder, dateHeader, position);
@@ -320,9 +320,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	public static String getMonth(int month) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
-		Date date = new Date();
-		date.setMonth(month);
-		String monthStr = dateFormat.format(date);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, month);
+		String monthStr = dateFormat.format(calendar);
 		if (monthStr.length() > 1) {
 			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
 		}
@@ -336,7 +336,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		final View shadowDivider;
 		final CompoundButton compoundButton;
 
-		public HeaderViewHolder(final View itemView) {
+		public HeaderViewHolder(View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			divider = itemView.findViewById(R.id.divider);

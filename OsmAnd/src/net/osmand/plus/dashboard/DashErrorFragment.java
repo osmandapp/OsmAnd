@@ -40,12 +40,12 @@ public class DashErrorFragment extends DashBaseFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_error_fragment, container, false);
 		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		ImageView iv = ((ImageView) view.findViewById(R.id.error_icon));
+		ImageView iv = view.findViewById(R.id.error_icon);
 		iv.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_crashlog));
-		TextView message = ((TextView) view.findViewById(R.id.error_header));
+		TextView message = view.findViewById(R.id.error_header);
 		message.setTypeface(typeface);
 		message.setText(msg);
-		Button errorBtn = ((Button) view.findViewById(R.id.error_btn));
+		Button errorBtn = view.findViewById(R.id.error_btn);
 		errorBtn.setTypeface(typeface);
 		errorBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -54,14 +54,14 @@ public class DashErrorFragment extends DashBaseFragment {
 			}
 		});
 
-		Button cancelBtn = ((Button) view.findViewById(R.id.error_cancel));
+		Button cancelBtn = view.findViewById(R.id.error_cancel);
 		cancelBtn.setTypeface(typeface);
 		cancelBtn.setOnClickListener(view1 -> {
 			OsmandActionBarActivity dashboardActivity = ((OsmandActionBarActivity) getActivity());
 			if (dashboardActivity != null) {
 				dashboardActivity.getSupportFragmentManager()
 						.beginTransaction()
-						.remove(DashErrorFragment.this)
+						.remove(this)
 						.commitAllowingStateLoss();
 			}
 		});
@@ -79,10 +79,10 @@ public class DashErrorFragment extends DashBaseFragment {
 	}
 
 	private static class ErrorDismissListener implements DismissListener {
-		private View parentView;
-		private DashboardOnMap dashboardOnMap;
-		private String fragmentTag;
-		private View fragmentView;
+		private final View parentView;
+		private final DashboardOnMap dashboardOnMap;
+		private final String fragmentTag;
+		private final View fragmentView;
 
 		public ErrorDismissListener(View parentView, DashboardOnMap dashboardOnMap,
 									String fragmentTag, View fragmentView) {

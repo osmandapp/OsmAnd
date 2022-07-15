@@ -22,7 +22,7 @@ public class EmptyStateRecyclerView extends RecyclerView {
 		super(context, attrs, defStyle);
 	}
 
-	private AdapterDataObserver emptyStateObserver = new AdapterDataObserver() {
+	private final AdapterDataObserver emptyStateObserver = new AdapterDataObserver() {
 		@Override
 		public void onChanged() {
 			checkIfEmpty();
@@ -41,7 +41,7 @@ public class EmptyStateRecyclerView extends RecyclerView {
 
 	@Override
 	public void setAdapter(Adapter adapter) {
-		final Adapter oldAdapter = getAdapter();
+		Adapter oldAdapter = getAdapter();
 		if (oldAdapter != null) {
 			oldAdapter.unregisterAdapterDataObserver(emptyStateObserver);
 		}

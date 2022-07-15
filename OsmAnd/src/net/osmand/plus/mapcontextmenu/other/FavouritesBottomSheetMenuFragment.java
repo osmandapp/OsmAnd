@@ -50,11 +50,11 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		return type % SORT_TYPE_CATEGORY + 1;
 	}
 
-	private List<FavouritePoint> favouritePoints = new ArrayList<>();
+	private final List<FavouritePoint> favouritePoints = new ArrayList<>();
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
 	private int sortByDist = SORT_TYPE_DIST;
-	private boolean isSorted = false;
+	private boolean isSorted;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private PointType pointType;
@@ -64,7 +64,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private FavoritesListener favoritesListener;
 
 	@Override
-	public void createMenuItems(final Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
 			pointType = PointType.valueOf(args.getString(POINT_TYPE_KEY));
@@ -94,12 +94,12 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			});
 		}
 		recyclerView = new RecyclerView(getContext());
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		recyclerView = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.recyclerview, null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		sortFavourites();
-		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
+		BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
 				.setButtonIcons(null, getIconForButton(getNextType(sortByDist)))
 				.setButtonTitle(getTextForButton(getNextType(sortByDist)))
@@ -262,7 +262,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		if (!compassUpdateAllowed) {
 			return;
 		}
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override
@@ -307,9 +307,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void sortFavourites() {
-		final Collator inst = Collator.getInstance();
+		Collator inst = Collator.getInstance();
 		Location stale = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-		final LatLon latLon = stale != null ? new LatLon(stale.getLatitude(), stale.getLongitude()) : 
+		LatLon latLon = stale != null ? new LatLon(stale.getLatitude(), stale.getLongitude()) :
 			getMyApplication().getMapViewTrackingUtilities().getMapLocation();
 
 		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {

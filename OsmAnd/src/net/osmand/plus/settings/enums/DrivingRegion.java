@@ -30,9 +30,9 @@ public enum DrivingRegion {
 	}
 
 	public boolean isAmericanTypeSigns() {
-		return this == DrivingRegion.AUSTRALIA ||
-				this == DrivingRegion.US ||
-				this == DrivingRegion.CANADA;
+		return this == AUSTRALIA ||
+				this == US ||
+				this == CANADA;
 	}
 
 	public String getDescription(Context ctx) {
@@ -44,19 +44,19 @@ public enum DrivingRegion {
 	public static DrivingRegion getDrivingRegionByLocale() {
 		Locale df = Locale.getDefault();
 		if (df == null) {
-			return DrivingRegion.EUROPE_ASIA;
+			return EUROPE_ASIA;
 		}
 		if (df.getCountry().equalsIgnoreCase(Locale.US.getCountry())) {
-			return DrivingRegion.US;
+			return US;
 		} else if (df.getCountry().equalsIgnoreCase(Locale.CANADA.getCountry())) {
-			return DrivingRegion.CANADA;
+			return CANADA;
 		} else if (df.getCountry().equalsIgnoreCase(Locale.JAPAN.getCountry())) {
-			return DrivingRegion.JAPAN;
+			return JAPAN;
 		} else if (df.getCountry().equalsIgnoreCase("au")) {
-			return DrivingRegion.AUSTRALIA;
+			return AUSTRALIA;
 		} else if (df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
-			return DrivingRegion.UK_AND_OTHERS;
+			return UK_AND_OTHERS;
 		}
-		return DrivingRegion.EUROPE_ASIA;
+		return EUROPE_ASIA;
 	}
 }

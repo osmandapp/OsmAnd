@@ -123,7 +123,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 						getActivity(), this, getSelectedAppMode(), null, false);
 			}
 		} else if (IMPORT_PROFILE.equals(prefId)) {
-			final MapActivity mapActivity = getMapActivity();
+			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, new CallbackWithObject<List<SettingsItem>>() {
 

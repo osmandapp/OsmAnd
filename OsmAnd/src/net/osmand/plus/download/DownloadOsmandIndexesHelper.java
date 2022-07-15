@@ -32,17 +32,17 @@ import java.util.zip.GZIPInputStream;
 
 public class DownloadOsmandIndexesHelper {
 
-	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
+	private static final Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
 
 	public static class IndexFileList implements Serializable {
 		private static final long serialVersionUID = 1L;
 
-		private boolean downloadedFromInternet = false;
+		private boolean downloadedFromInternet;
 		IndexItem basemap;
 		ArrayList<IndexItem> indexFiles = new ArrayList<IndexItem>();
 		private String mapversion;
 
-		private Comparator<IndexItem> comparator = new Comparator<IndexItem>() {
+		private final Comparator<IndexItem> comparator = new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem o1, IndexItem o2) {
 				String object1 = o1.getFileName();
@@ -162,9 +162,9 @@ public class DownloadOsmandIndexesHelper {
 		int next;
 		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
 			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
-				final String source = xmlParser.getAttributeValue(null, "source");
-				final String destination = xmlParser.getAttributeValue(null, "destination");
-				final String combinedMode = xmlParser.getAttributeValue(null, "mode");
+				String source = xmlParser.getAttributeValue(null, "source");
+				String destination = xmlParser.getAttributeValue(null, "destination");
+				String combinedMode = xmlParser.getAttributeValue(null, "mode");
 				assets.add(new AssetEntry(source, destination, combinedMode));
 			}
 		}

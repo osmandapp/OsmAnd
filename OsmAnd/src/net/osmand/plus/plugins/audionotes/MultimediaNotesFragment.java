@@ -68,7 +68,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_NOTES = "open_notes";
 
-	boolean showSwitchProfile = false;
+	boolean showSwitchProfile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -144,14 +144,14 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupExternalPhotoCamPref(Camera cam, AudioVideoNotesPlugin plugin) {
-		SwitchPreferenceEx externalPhotoCam = (SwitchPreferenceEx) findPreference(plugin.AV_EXTERNAL_PHOTO_CAM.getId());
+		SwitchPreferenceEx externalPhotoCam = findPreference(plugin.AV_EXTERNAL_PHOTO_CAM.getId());
 		externalPhotoCam.setDescription(getString(R.string.av_use_external_camera_descr));
 		externalPhotoCam.setIcon(getPersistentPrefIcon(R.drawable.ic_action_photo_dark));
 		externalPhotoCam.setEnabled(cam != null);
 	}
 
 	private void setupCameraPictureSizePref(Camera cam, AudioVideoNotesPlugin plugin) {
-		ListPreferenceEx cameraPictureSize = (ListPreferenceEx) findPreference(plugin.AV_CAMERA_PICTURE_SIZE.getId());
+		ListPreferenceEx cameraPictureSize = findPreference(plugin.AV_CAMERA_PICTURE_SIZE.getId());
 		cameraPictureSize.setDescription(R.string.av_camera_pic_size_descr);
 		cameraPictureSize.setIcon(getPersistentPrefIcon(R.drawable.ic_action_picture_size));
 
@@ -227,7 +227,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupCameraFocusTypePref(Camera cam, AudioVideoNotesPlugin plugin) {
-		ListPreferenceEx cameraFocusType = (ListPreferenceEx) findPreference(plugin.AV_CAMERA_FOCUS_TYPE.getId());
+		ListPreferenceEx cameraFocusType = findPreference(plugin.AV_CAMERA_FOCUS_TYPE.getId());
 		cameraFocusType.setDescription(R.string.av_camera_focus_descr);
 		cameraFocusType.setIcon(getPersistentPrefIcon(R.drawable.ic_action_camera_focus));
 
@@ -286,34 +286,34 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Drawable enabled = getActiveIcon(R.drawable.ic_type_audio);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceEx photoPlaySound = (SwitchPreferenceEx) findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
+		SwitchPreferenceEx photoPlaySound = findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
 		photoPlaySound.setDescription(getString(R.string.av_photo_play_sound_descr));
 		photoPlaySound.setIcon(icon);
 		photoPlaySound.setEnabled(cam != null);
 	}
 
 	private void setupAudioFormatPref(AudioVideoNotesPlugin plugin) {
-		Integer[] entryValues = new Integer[] {MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC};
-		String[] entries = new String[] {getString(R.string.shared_string_default), "AAC"};
+		Integer[] entryValues = {MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC};
+		String[] entries = {getString(R.string.shared_string_default), "AAC"};
 
-		ListPreferenceEx audioFormat = (ListPreferenceEx) findPreference(plugin.AV_AUDIO_FORMAT.getId());
+		ListPreferenceEx audioFormat = findPreference(plugin.AV_AUDIO_FORMAT.getId());
 		audioFormat.setEntries(entries);
 		audioFormat.setEntryValues(entryValues);
 		audioFormat.setDescription(R.string.av_audio_format_descr);
 	}
 
 	private void setupAudioBitratePref(AudioVideoNotesPlugin plugin) {
-		Integer[] entryValues = new Integer[] {AUDIO_BITRATE_DEFAULT, 16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
-		String[] entries = new String[] {getString(R.string.shared_string_default), "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
+		Integer[] entryValues = {AUDIO_BITRATE_DEFAULT, 16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
+		String[] entries = {getString(R.string.shared_string_default), "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
 
-		ListPreferenceEx audioBitrate = (ListPreferenceEx) findPreference(plugin.AV_AUDIO_BITRATE.getId());
+		ListPreferenceEx audioBitrate = findPreference(plugin.AV_AUDIO_BITRATE.getId());
 		audioBitrate.setEntries(entries);
 		audioBitrate.setEntryValues(entryValues);
 		audioBitrate.setDescription(R.string.av_audio_bitrate_descr);
 	}
 
 	private void setupExternalRecorderPref(AudioVideoNotesPlugin plugin) {
-		SwitchPreferenceEx externalRecorder = (SwitchPreferenceEx) findPreference(plugin.AV_EXTERNAL_RECORDER.getId());
+		SwitchPreferenceEx externalRecorder = findPreference(plugin.AV_EXTERNAL_RECORDER.getId());
 		externalRecorder.setDescription(getString(R.string.av_use_external_recorder_descr));
 		externalRecorder.setIcon(getPersistentPrefIcon(R.drawable.ic_action_video_dark));
 	}
@@ -349,7 +349,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		String[] entries = qNames.toArray(new String[0]);
 		Integer[] entryValues = qValues.toArray(new Integer[0]);
 
-		ListPreferenceEx videoQuality = (ListPreferenceEx) findPreference(plugin.AV_VIDEO_QUALITY.getId());
+		ListPreferenceEx videoQuality = findPreference(plugin.AV_VIDEO_QUALITY.getId());
 		videoQuality.setEntries(entries);
 		videoQuality.setEntryValues(entryValues);
 		videoQuality.setDescription(R.string.av_video_quality_descr);
@@ -357,12 +357,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupRecorderSplitPref(AudioVideoNotesPlugin plugin) {
-		SwitchPreferenceEx recorderSplit = (SwitchPreferenceEx) findPreference(plugin.AV_RECORDER_SPLIT.getId());
+		SwitchPreferenceEx recorderSplit = findPreference(plugin.AV_RECORDER_SPLIT.getId());
 		recorderSplit.setDescription(getString(R.string.rec_split_desc));
 	}
 
 	private void setupClipLengthPref(AudioVideoNotesPlugin plugin) {
-		Integer[] entryValues = new Integer[] {1, 2, 3, 4, 5, 7, 10, 15, 20, 25, 30};
+		Integer[] entryValues = {1, 2, 3, 4, 5, 7, 10, 15, 20, 25, 30};
 		String[] entries = new String[entryValues.length];
 		int i = 0;
 		String minStr = getString(R.string.int_min);
@@ -370,14 +370,14 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			entries[i++] = v + " " + minStr;
 		}
 
-		ListPreferenceEx clipLength = (ListPreferenceEx) findPreference(plugin.AV_RS_CLIP_LENGTH.getId());
+		ListPreferenceEx clipLength = findPreference(plugin.AV_RS_CLIP_LENGTH.getId());
 		clipLength.setEntries(entries);
 		clipLength.setEntryValues(entryValues);
 		clipLength.setDescription(R.string.rec_split_clip_length_desc);
 	}
 
 	private void setupStorageSizePref(AudioVideoNotesPlugin plugin) {
-		ListPreferenceEx storageSize = (ListPreferenceEx) findPreference(plugin.AV_RS_STORAGE_SIZE.getId());
+		ListPreferenceEx storageSize = findPreference(plugin.AV_RS_STORAGE_SIZE.getId());
 
 		long size = AndroidUtils.getTotalSpace(app) / (1 << 30);
 		if (size > 0) {

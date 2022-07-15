@@ -19,13 +19,13 @@ import java.io.UnsupportedEncodingException;
 
 class KmlImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
-	private ImportHelper importHelper;
-	private Uri uri;
-	private String name;
+	private final ImportHelper importHelper;
+	private final Uri uri;
+	private final String name;
 	private long fileSize;
 
-	private boolean save;
-	private boolean useImportDir;
+	private final boolean save;
+	private final boolean useImportDir;
 
 	public KmlImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
 						 @NonNull Uri uri, String name, boolean save, boolean useImportDir) {

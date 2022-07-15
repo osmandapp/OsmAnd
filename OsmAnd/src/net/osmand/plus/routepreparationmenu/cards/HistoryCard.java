@@ -51,7 +51,7 @@ public class HistoryCard extends MapBaseCard {
 	@SuppressLint("DefaultLocale")
 	@Override
 	protected void updateContent() {
-		final List<SearchResult> list = new ArrayList<>();
+		List<SearchResult> list = new ArrayList<>();
 		for (SearchResult searchResult : searchResults) {
 			if (searchResult.object instanceof HistoryEntry) {
 				list.add(searchResult);
@@ -113,7 +113,7 @@ public class HistoryCard extends MapBaseCard {
 				ImageView icon = view.findViewById(R.id.imageView);
 				icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
 
-				final HistoryEntry entry = (HistoryEntry) searchResult.object;
+				HistoryEntry entry = (HistoryEntry) searchResult.object;
 				view.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

@@ -67,7 +67,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		if (dialog.haveMenuItems()) {
 			moreButton.setVisibility(View.VISIBLE);
 			moreButton.setOnClickListener(v -> {
-				final PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
+				PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
 				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 				dialog.createMenuItems(optionsMenu.getMenu());
 				optionsMenu.show();

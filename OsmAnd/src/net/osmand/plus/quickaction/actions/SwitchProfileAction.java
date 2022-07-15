@@ -29,7 +29,7 @@ import java.util.List;
 
 public class SwitchProfileAction extends SwitchableAction<String> {
 
-	private final static String KEY_PROFILES = "profiles";
+	private static final String KEY_PROFILES = "profiles";
 
 	public static final QuickActionType TYPE = new QuickActionType(32,
 			"profile.change", SwitchProfileAction.class)
@@ -103,7 +103,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void executeWithParams(@NonNull MapActivity mapActivity, final String params) {
+	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		ApplicationMode appMode = getModeForKey(params);
 		if (appMode != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -205,7 +205,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected View.OnClickListener getOnAddBtnClickListener(final MapActivity activity, final Adapter adapter) {
+	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

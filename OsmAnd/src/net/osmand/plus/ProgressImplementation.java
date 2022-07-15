@@ -21,12 +21,12 @@ public class ProgressImplementation implements IProgress {
 	private int work;
 	private String message = ""; //$NON-NLS-1$
 	
-	private Handler mViewUpdateHandler;
+	private final Handler mViewUpdateHandler;
 	private Thread run;
-	private Context context;
-	private ProgressDialog dialog = null;
-	private ProgressBar progressBar = null;
-	private Runnable finishRunnable = null;
+	private final Context context;
+	private ProgressDialog dialog;
+	private ProgressBar progressBar;
+	private Runnable finishRunnable;
 	private final boolean cancelable;
 	private TextView tv;
 	
@@ -88,7 +88,7 @@ public class ProgressImplementation implements IProgress {
 		return createProgressDialog(ctx, title, message, style, null);
 	}
 	
-	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style, final DialogInterface.OnCancelListener listener) {
+	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style, DialogInterface.OnCancelListener listener) {
 		ProgressDialog dlg = new ProgressDialog(ctx) {
 			@Override
 			public void cancel() {

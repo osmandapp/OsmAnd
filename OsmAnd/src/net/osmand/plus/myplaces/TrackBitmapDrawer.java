@@ -168,9 +168,9 @@ public class TrackBitmapDrawer {
 				rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
 			}
 
-			final DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
-			final ResourceManager resourceManager = app.getResourceManager();
-			final MapRenderRepositories renderer = resourceManager.getRenderer();
+			DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
+			ResourceManager resourceManager = app.getResourceManager();
+			MapRenderRepositories renderer = resourceManager.getRenderer();
 			if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
 				resourceManager.updateRendererMap(rotatedTileBox, interrupted -> app.runInUIThread(() -> {
 					if (isDrawEnabled()) {

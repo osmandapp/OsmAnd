@@ -4,15 +4,15 @@ import net.osmand.aidl.contextmenu.AContextMenuButton;
 
 public class AidlContextMenuButtonWrapper {
 
-	private int buttonId;
+	private final int buttonId;
 
-	private String leftTextCaption;
-	private String rightTextCaption;
-	private String leftIconName;
-	private String rightIconName;
+	private final String leftTextCaption;
+	private final String rightTextCaption;
+	private final String leftIconName;
+	private final String rightIconName;
 
-	private boolean needColorizeIcon;
-	private boolean enabled;
+	private final boolean needColorizeIcon;
+	private final boolean enabled;
 
 	public AidlContextMenuButtonWrapper(AContextMenuButton aContextMenuButton) {
 		buttonId = aContextMenuButton.getButtonId();

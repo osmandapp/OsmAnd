@@ -178,8 +178,8 @@ public class RouteProvider {
 		RouteCalculationResult rcr = params.previousToRecalculate;
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
 		try {
-			int[] startI = new int[]{0};
-			int[] endI = new int[]{locs.size()};
+			int[] startI = {0};
+			int[] endI = {locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
@@ -316,15 +316,15 @@ public class RouteProvider {
 		}
 
 		List<Location> gpxRoute;
-		int[] startI = new int[]{0};
-		int[] endI = new int[]{gpxParams.points.size()};
+		int[] startI = {0};
+		int[] endI = {gpxParams.points.size()};
 		if (calcWholeRoute) {
 			gpxRoute = gpxParams.points;
 		} else {
 			gpxRoute = findStartAndEndLocationsFromRoute(gpxParams.points,
 					routeParams.start, routeParams.end, startI, endI);
 		}
-		final List<RouteDirectionInfo> inputDirections = gpxParams.directions;
+		List<RouteDirectionInfo> inputDirections = gpxParams.directions;
 		List<RouteDirectionInfo> gpxDirections = calcDirections(startI, endI, inputDirections);
 		insertIntermediateSegments(routeParams, gpxRoute, gpxDirections, gpxParams.segmentEndpoints, calculateOsmAndRouteParts);
 		insertInitialSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
@@ -401,7 +401,7 @@ public class RouteProvider {
 	}
 
 	private List<RouteDirectionInfo> calcDirections(int[] startI, int[] endI,
-			final List<RouteDirectionInfo> inputDirections) {
+			List<RouteDirectionInfo> inputDirections) {
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
 		if (inputDirections != null) {
 			for (RouteDirectionInfo info : inputDirections) {
@@ -747,7 +747,7 @@ public class RouteProvider {
 		return new RoutingEnvironment(router, ctx, complexCtx, precalculated);
 	}
 
-	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
 		RoutingEnvironment env = calculateRoutingEnvironment(params, calcGPXRoute, false);
 		if (env == null) {
 			return applicationModeNotSupported(params);
@@ -761,7 +761,7 @@ public class RouteProvider {
 		return calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
 	}
 
-	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
+	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, RouteCalculationParams params, OsmandSettings settings,
 	                                                     GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for (Map.Entry<String, RoutingParameter> e : RoutingHelperUtils.getParametersForDerivedProfile(params.mode, generalRouter).entrySet()) {
@@ -817,9 +817,9 @@ public class RouteProvider {
 		return cf;
 	}
 
-	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
-			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
-			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
+	private RouteCalculationResult calcOfflineRouteImpl(RouteCalculationParams params,
+	                                                    RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
+	                                                    List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
 			List<RouteSegmentResult> result ;
 			if(complexCtx != null) {
@@ -827,7 +827,7 @@ public class RouteProvider {
 					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
 					// discard ctx and replace with calculated
 					ctx = complexCtx;
-				} catch(final RuntimeException e) {
+				} catch(RuntimeException e) {
 					params.ctx.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
@@ -980,7 +980,7 @@ public class RouteProvider {
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
 							} 
-							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
+							last.distance = Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
 					} 
 					// save time as a speed because we don't know distance of the route segment

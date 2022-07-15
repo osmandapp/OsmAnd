@@ -153,13 +153,13 @@ public class DashPluginsFragment extends DashBaseFragment {
 		} else {
 			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
 					new int[]{R.attr.bg_plugin_logo_disabled});
-			logoView.setBackgroundDrawable(attributes.getDrawable(0));
+			logoView.setBackground(attributes.getDrawable(0));
 			logoView.setContentDescription(getString(plugin.isLocked() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
 			attributes.recycle();
 		}
 	}
 
-	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, final OsmandPlugin plugin) {
+	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, OsmandPlugin plugin) {
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
 		view.setOnClickListener(pluginDetailsListener());
 
@@ -179,7 +179,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		container.addView(view);
 	}
 
-	private void setListener(final OsmandPlugin plugin, CompoundButton enableDisableButton, final View pluginView) {
+	private void setListener(OsmandPlugin plugin, CompoundButton enableDisableButton, View pluginView) {
 		enableDisableButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			if (OsmandPlugin.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
 				updatePluginState(pluginView, plugin);

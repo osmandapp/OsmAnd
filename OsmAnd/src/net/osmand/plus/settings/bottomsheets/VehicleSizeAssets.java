@@ -44,7 +44,7 @@ public enum VehicleSizeAssets {
 	}
 
 	public static VehicleSizeAssets getAssets(String parameterName, GeneralRouterProfile routerProfile) {
-		for (VehicleSizeAssets type : VehicleSizeAssets.values()) {
+		for (VehicleSizeAssets type : values()) {
 			if (type.routerParameterName.equals(parameterName) && type.routerProfile == routerProfile) {
 				return type;
 			}

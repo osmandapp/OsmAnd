@@ -26,7 +26,7 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 	private final OsmandPreference<Boolean> arrivalTimeOtherwiseTimeToGoPref;
 
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
-	private int cachedLeftSeconds = 0;
+	private int cachedLeftSeconds;
 
 	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState) {
 		super(mapActivity, widgetState.isIntermediate() ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION);

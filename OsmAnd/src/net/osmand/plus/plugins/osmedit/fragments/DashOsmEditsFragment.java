@@ -107,15 +107,15 @@ public class DashOsmEditsFragment extends DashBaseFragment
 					getMyApplication().getSettings(), ROW_NUMBER_TAG);
 		}
 
-		LinearLayout osmLayout = (LinearLayout) mainView.findViewById(R.id.items);
+		LinearLayout osmLayout = mainView.findViewById(R.id.items);
 		osmLayout.removeAllViews();
 
-		for (final OsmPoint point : dataPoints) {
+		for (OsmPoint point : dataPoints) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
 			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
-			ImageButton send = (ImageButton) view.findViewById(R.id.play);
+			ImageButton send = view.findViewById(R.id.play);
 			send.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_export));
 			send.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
@@ -127,11 +127,10 @@ public class DashOsmEditsFragment extends DashBaseFragment
 					if (requireMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
 						SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 					} else {
-						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(),
-								DashOsmEditsFragment.this);
+						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
 					}
 				} else {
-					SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[]{point});
+					SendOsmNoteBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);

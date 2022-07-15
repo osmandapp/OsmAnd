@@ -79,7 +79,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
-		final View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
+		View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
 		((TextView) sliderView.findViewById(R.id.slider_descr)).setText(sliderDescrRes);
 		TextView dialogDescrTv = sliderView.findViewById(R.id.dialog_descr);
 		if (dialogDescrRes == R.string.map_source_zoom_levels_descr) {
@@ -90,9 +90,9 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else {
 			dialogDescrTv.setText(getString(dialogDescrRes));
 		}
-		final TextView minZoomValue = sliderView.findViewById(R.id.zoom_value_min);
+		TextView minZoomValue = sliderView.findViewById(R.id.zoom_value_min);
 		minZoomValue.setText(String.valueOf(minZoom));
-		final TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
+		TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
 		maxZoomValue.setText(String.valueOf(maxZoom));
 		RangeSlider slider = sliderView.findViewById(R.id.zoom_slider);
 		int colorProfile = app.getSettings().getApplicationMode().getProfileColor(nightMode);
@@ -124,7 +124,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		});
-		final SimpleBottomSheetItem sliderItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem sliderItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sliderView)
 				.create();
 		items.add(sliderItem);

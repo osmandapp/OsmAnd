@@ -168,7 +168,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	private void createWikipediaItem(ContextMenuAdapter adapter,
-	                                 final MapActivity mapActivity) {
+	                                 MapActivity mapActivity) {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
@@ -403,7 +403,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			OsmandMapTileView mv = mapActivity.getMapView();
 			DownloadedRegionsLayer dl = mv.getLayerByClass(DownloadedRegionsLayer.class);
 			String filter = dl.getFilter(new StringBuilder());
-			final Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
+			Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
 			intent.putExtra(DownloadActivity.FILTER_KEY, filter);
 			intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.WIKIPEDIA_FILE.getTag());
 			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
@@ -426,12 +426,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean searchFinished(final QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
 		if (isResultEmpty && isSearchByWiki(phrase)) {
 			if (!Version.isPaidVersion(app)) {
 				searchFragment.addSearchListItem(new QuickSearchFreeBannerListItem(app));
 			} else {
-				final DownloadIndexesThread downloadThread = app.getDownloadThread();
+				DownloadIndexesThread downloadThread = app.getDownloadThread();
 				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 					searchFragment.reloadIndexFiles();
 				} else {
@@ -446,7 +446,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	@Override
 	protected void newDownloadIndexes(Fragment fragment) {
 		if (fragment instanceof QuickSearchDialogFragment) {
-			final QuickSearchDialogFragment f = (QuickSearchDialogFragment) fragment;
+			QuickSearchDialogFragment f = (QuickSearchDialogFragment) fragment;
 			SearchPhrase phrase = app.getSearchUICore().getCore().getPhrase();
 			if (f.isResultEmpty() && isSearchByWiki(phrase)) {
 				addEmptyWikiBanner(f, phrase);
@@ -454,7 +454,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void addEmptyWikiBanner(final QuickSearchDialogFragment fragment, SearchPhrase phrase) {
+	private void addEmptyWikiBanner(QuickSearchDialogFragment fragment, SearchPhrase phrase) {
 		QuickSearchBannerListItem banner = new QuickSearchBannerListItem(app);
 		banner.addButton(QuickSearchListAdapter.getIncreaseSearchButtonTitle(app, phrase),
 				null, QuickSearchBannerListItem.INVALID_ID, v -> fragment.increaseSearchRadius());

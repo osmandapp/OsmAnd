@@ -63,7 +63,7 @@ public class DownloadResourceGroup {
 
 		final int resId;
 
-		private DownloadResourceGroupType(int resId) {
+		DownloadResourceGroupType(int resId) {
 			this.resId = resId;
 		}
 
@@ -357,9 +357,9 @@ public class DownloadResourceGroup {
 		return id;
 	}
 
-	public static Comparator<DownloadItem> getComparator(final OsmandApplication app) {
-		final OsmandRegions osmandRegions = app.getRegions();
-		final Collator collator = OsmAndCollator.primaryCollator();
+	public static Comparator<DownloadItem> getComparator(OsmandApplication app) {
+		OsmandRegions osmandRegions = app.getRegions();
+		Collator collator = OsmAndCollator.primaryCollator();
 		return (firstItem, secondItem) -> {
 			int firstOrder = firstItem.getType().getOrderIndex();
 			int secondOrder = secondItem.getType().getOrderIndex();

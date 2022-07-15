@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -109,7 +110,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity = (DownloadActivity) getActivity();
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
-		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar = view.findViewById(R.id.toolbar);
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(activity));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -131,7 +132,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			banner = null;
 			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
 		}
-		listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
@@ -147,12 +148,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (DownloadActivity.shouldShowFreeVersionBanner(activity.getMyApplication())
 				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
 			subscribeEmailView = activity.getLayoutInflater().inflate(R.layout.subscribe_email_header, null, false);
-			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					subscribe();
-				}
-			});
+			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(v -> subscribe());
 			listView.addHeaderView(subscribeEmailView);
 			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()
@@ -167,12 +163,9 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
 			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
 					getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
-			restorePurchasesView.findViewById(R.id.button).setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-					purchaseHelper.requestInventory(true);
-				}
+			restorePurchasesView.findViewById(R.id.button).setOnClickListener(v -> {
+				restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+				purchaseHelper.requestInventory(true);
 			});
 			listView.addFooterView(restorePurchasesView);
 			listView.setFooterDividersEnabled(false);
@@ -192,14 +185,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (!openAsDialog() ) {
 			searchView = activity.getLayoutInflater().inflate(R.layout.simple_list_menu_item, null);
 			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
-			TextView title = (TextView) searchView.findViewById(R.id.title);
+			TextView title = searchView.findViewById(R.id.title);
 			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.search_map_hint);
-			searchView.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
-				}
+			searchView.setOnClickListener(v -> {
+				getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
 			});
 			listView.addHeaderView(searchView);
 			listView.setHeaderDividersEnabled(true);
@@ -272,36 +262,31 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	private void subscribe() {
 		AlertDialog.Builder b = new AlertDialog.Builder(activity);
 		b.setTitle(R.string.shared_string_email_address);
-		final EditText editText = new EditText(activity);
-		int leftPadding = AndroidUtils.dpToPx(activity, 24f);
-		int topPadding = AndroidUtils.dpToPx(activity, 4f);
-		b.setView(editText, leftPadding, topPadding, leftPadding, topPadding);
+		int hPadding = AndroidUtils.dpToPx(activity, 24f);
+		int vPadding = AndroidUtils.dpToPx(activity, 4f);
+		FrameLayout container = new FrameLayout(activity);
+		container.setPadding(hPadding, vPadding, hPadding, vPadding);
+		EditText editText = new EditText(activity);
+		container.addView(editText);
+		b.setView(container);
 		b.setPositiveButton(R.string.shared_string_ok, null);
 		b.setNegativeButton(R.string.shared_string_cancel, null);
-		final AlertDialog alertDialog = b.create();
-		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-			@Override
-			public void onShow(DialogInterface dialog) {
-				alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-						new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								String email = editText.getText().toString().trim();
-								if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
-									getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
-									return;
-								}
-								doSubscribe(email);
-								alertDialog.dismiss();
-							}
-						});
-			}
-		});
+		AlertDialog alertDialog = b.create();
+		alertDialog.setOnShowListener(dialog -> alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+				v -> {
+					String email = editText.getText().toString().trim();
+					if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
+						getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
+						return;
+					}
+					doSubscribe(email);
+					alertDialog.dismiss();
+				}));
 		alertDialog.show();
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void doSubscribe(final String email) {
+	private void doSubscribe(String email) {
 		new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog dlg;
@@ -414,13 +399,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
 				String uniqueId = DownloadResourceGroup.DownloadResourceGroupType.getVoiceTTSId();
-				final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-						.createInstance(uniqueId);
+				DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			}
 		} else if (filterGroup != null) {
-			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-					.createInstance(filterGroup);
+			DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		}
 	}
@@ -498,8 +481,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		Object child = listAdapter.getChild(groupPosition, childPosition);
 		if (child instanceof DownloadResourceGroup) {
 			String uniqueId = ((DownloadResourceGroup) child).getUniqueId();
-			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-					.createInstance(uniqueId);
+			DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (child instanceof CustomIndexItem) {

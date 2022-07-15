@@ -168,7 +168,7 @@ public class InAppPurchaseCard extends BaseCard {
 			View renewContainer = view.findViewById(R.id.renewContainer);
 			AndroidUiHelper.updateVisibility(renewContainer, true);
 			AndroidUtils.setBackground(activity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-			final String sku = subscription.getSku();
+			String sku = subscription.getSku();
 			renewContainer.setOnClickListener(v -> InAppPurchaseHelper.subscribe(activity, purchaseHelper, sku));
 
 			View renew = view.findViewById(R.id.renew);

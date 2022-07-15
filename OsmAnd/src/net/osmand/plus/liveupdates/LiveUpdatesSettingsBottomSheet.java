@@ -149,7 +149,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 
 		View itemLiveUpdate = getCustomButtonView(app, null, localUpdatePreference.get(), nightMode);
 		View itemLiveUpdateButton = itemLiveUpdate.findViewById(R.id.button_container);
-		CompoundButton button = (CompoundButton) itemLiveUpdateButton.findViewById(R.id.compound_button);
+		CompoundButton button = itemLiveUpdateButton.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(button, nightMode, TOOLBAR);
 		itemLiveUpdateButton.setMinimumHeight(getDimen(R.dimen.bottom_sheet_selected_item_title_height));
 		itemSwitchLiveUpdate = new BottomSheetItemWithCompoundButton.Builder()
@@ -385,7 +385,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 
 	private void lockMaxViewHeight() {
 		Activity activity = getActivity();
-		final View mainView = getView();
+		View mainView = getView();
 		if (activity != null && AndroidUiHelper.isOrientationPortrait(activity) && mainView != null) {
 			View scrollView = mainView.findViewById(R.id.scroll_view);
 			scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -556,22 +556,22 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private OnRadioItemClickListener getFrequencyButtonListener(
-			@NonNull final UpdateFrequency type, final View... timeOfDayLayouts) {
+			@NonNull UpdateFrequency type, View... timeOfDayLayouts) {
 		return new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				final CommonPreference<Integer> frequencyPreference = preferenceUpdateFrequency(fileName, settings);
+				CommonPreference<Integer> frequencyPreference = preferenceUpdateFrequency(fileName, settings);
 				setOnRadioItemClick(frequencyPreference, type.ordinal(), timeOfDayLayouts);
 				return true;
 			}
 		};
 	}
 
-	private OnRadioItemClickListener getTimeOfDayButtonListener(@NonNull final TimeOfDay type) {
+	private OnRadioItemClickListener getTimeOfDayButtonListener(@NonNull TimeOfDay type) {
 		return new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				final CommonPreference<Integer> timeOfDayPreference = preferenceTimeOfDayToUpdate(fileName, settings);
+				CommonPreference<Integer> timeOfDayPreference = preferenceTimeOfDayToUpdate(fileName, settings);
 				setOnRadioItemClick(timeOfDayPreference, type.ordinal());
 				return true;
 			}
@@ -595,7 +595,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void onUpdateStates(Context context) {
-		final OnLiveUpdatesForLocalChange confirmationInterface = (OnLiveUpdatesForLocalChange) getTargetFragment();
+		OnLiveUpdatesForLocalChange confirmationInterface = (OnLiveUpdatesForLocalChange) getTargetFragment();
 		if (confirmationInterface != null) {
 			confirmationInterface.updateList();
 		}

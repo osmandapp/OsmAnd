@@ -13,7 +13,7 @@ public class ColoringTypeAvailabilityCache {
 	private final OsmandApplication app;
 	private final Map<String, Boolean> cache = new HashMap<>();
 
-	private RouteCalculationResult prevRoute = null;
+	private RouteCalculationResult prevRoute;
 
 	public ColoringTypeAvailabilityCache(@NonNull OsmandApplication app) {
 		this.app = app;

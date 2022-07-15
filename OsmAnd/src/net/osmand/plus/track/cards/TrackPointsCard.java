@@ -422,8 +422,8 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-			final GpxDisplayGroup group = getGroup(groupPosition);
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+			GpxDisplayGroup group = getGroup(groupPosition);
 			Context context = view.getContext();
 			View row = convertView;
 			if (row == null) {
@@ -458,7 +458,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			ImageView expandImage = row.findViewById(R.id.expand_image);
 			expandImage.setImageDrawable(getContentIcon(expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down));
 
-			final CheckBox checkBox = row.findViewById(R.id.toggle_item);
+			CheckBox checkBox = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				checkBox.setChecked(selectedGroups.contains(groupPosition));
 				checkBox.setOnClickListener(v -> {
@@ -530,8 +530,8 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				row = inflater.inflate(R.layout.track_points_list_item, parent, false);
 			}
 
-			final GpxDisplayGroup group = getGroup(groupPosition);
-			final GpxDisplayItem gpxItem = getChild(groupPosition, childPosition);
+			GpxDisplayGroup group = getGroup(groupPosition);
+			GpxDisplayItem gpxItem = getChild(groupPosition, childPosition);
 
 			TextView title = row.findViewById(R.id.label);
 			title.setText(gpxItem.name);
@@ -545,7 +545,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			}
 
 			ImageView icon = row.findViewById(R.id.icon);
-			final CheckBox checkBox = row.findViewById(R.id.toggle_item);
+			CheckBox checkBox = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				checkBox.setVisibility(View.VISIBLE);
 				checkBox.setChecked(selectedItems.get(group.getType()) != null && selectedItems.get(group.getType()).contains(gpxItem));

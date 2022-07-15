@@ -31,11 +31,11 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 	private TextView rightBtn;
 
 	@StringRes
-	private int leftBtnTitleRes;
+	private final int leftBtnTitleRes;
 	@StringRes
-	private int rightBtnTitleRes;
+	private final int rightBtnTitleRes;
 	private boolean isLeftBtnSelected;
-	private OnBottomBtnClickListener onBottomBtnClickListener;
+	private final OnBottomBtnClickListener onBottomBtnClickListener;
 	private int bottomBtnBgRadius;
 	private int bottomBtnTextColor;
 	private int activeColor;
@@ -155,11 +155,11 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 			bottomBtnBg.setCornerRadii(new float[]{bottomBtnBgRadius, bottomBtnBgRadius, 0, 0, 0, 0, bottomBtnBgRadius, bottomBtnBgRadius});
 			rightBtnContainer.setBackgroundColor(Color.TRANSPARENT);
 			rightBtn.setTextColor(activeColor);
-			leftBtnContainer.setBackgroundDrawable(bottomBtnBg);
+			leftBtnContainer.setBackground(bottomBtnBg);
 			leftBtn.setTextColor(bottomBtnTextColor);
 		} else {
 			bottomBtnBg.setCornerRadii(new float[]{0, 0, bottomBtnBgRadius, bottomBtnBgRadius, bottomBtnBgRadius, bottomBtnBgRadius, 0, 0});
-			rightBtnContainer.setBackgroundDrawable(bottomBtnBg);
+			rightBtnContainer.setBackground(bottomBtnBg);
 			rightBtn.setTextColor(bottomBtnTextColor);
 			leftBtnContainer.setBackgroundColor(Color.TRANSPARENT);
 			leftBtn.setTextColor(activeColor);

@@ -79,7 +79,7 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private void populateValuesList() {
 		for (int i = 0; i < TileStorageFormat.values().length; i++) {
-			final TileStorageFormat m = TileStorageFormat.values()[i];
+			TileStorageFormat m = TileStorageFormat.values()[i];
 			boolean selected = tileStorageFormat == m;
 			View view = valuesContainer.getChildAt(i);
 			((CompoundButton) view.findViewById(R.id.compound_button)).setChecked(selected);

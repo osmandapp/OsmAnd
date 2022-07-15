@@ -40,14 +40,14 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		CheckBoxPreference degreesPref = (CheckBoxPreference) findPreference(FORMAT_DEGREES);
-		CheckBoxPreference minutesPref = (CheckBoxPreference) findPreference(FORMAT_MINUTES);
-		CheckBoxPreference secondsPref = (CheckBoxPreference) findPreference(FORMAT_SECONDS);
-		CheckBoxPreference utmPref = (CheckBoxPreference) findPreference(UTM_FORMAT);
-		CheckBoxPreference mgrsPref = (CheckBoxPreference) findPreference(MGRS_FORMAT);
-		CheckBoxPreference olcPref = (CheckBoxPreference) findPreference(OLC_FORMAT);
-		CheckBoxPreference swissGridPref = (CheckBoxPreference) findPreference(SWISS_GRID_FORMAT);
-		CheckBoxPreference swissGridPlusPref = (CheckBoxPreference) findPreference(SWISS_GRID_PLUS_FORMAT);
+		CheckBoxPreference degreesPref = findPreference(FORMAT_DEGREES);
+		CheckBoxPreference minutesPref = findPreference(FORMAT_MINUTES);
+		CheckBoxPreference secondsPref = findPreference(FORMAT_SECONDS);
+		CheckBoxPreference utmPref = findPreference(UTM_FORMAT);
+		CheckBoxPreference mgrsPref = findPreference(MGRS_FORMAT);
+		CheckBoxPreference olcPref = findPreference(OLC_FORMAT);
+		CheckBoxPreference swissGridPref = findPreference(SWISS_GRID_FORMAT);
+		CheckBoxPreference swissGridPlusPref = findPreference(SWISS_GRID_PLUS_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 

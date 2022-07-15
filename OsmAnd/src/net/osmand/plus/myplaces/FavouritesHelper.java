@@ -52,7 +52,7 @@ public class FavouritesHelper {
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
 
 	private boolean favoritesLoaded;
-	private long lastModifiedTime = 0;
+	private long lastModifiedTime;
 
 	public FavouritesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -382,7 +382,7 @@ public class FavouritesHelper {
 		return true;
 	}
 
-	public void lookupAddress(@NonNull final FavouritePoint point) {
+	public void lookupAddress(@NonNull FavouritePoint point) {
 		AddressLookupRequest request = addressRequestMap.get(point);
 		double latitude = point.getLatitude();
 		double longitude = point.getLongitude();
@@ -606,7 +606,7 @@ public class FavouritesHelper {
 	}
 
 	public static Comparator<FavouritePoint> getComparator() {
-		final Collator collator = Collator.getInstance();
+		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		return (o1, o2) -> {
 			String s1 = o1.getName();

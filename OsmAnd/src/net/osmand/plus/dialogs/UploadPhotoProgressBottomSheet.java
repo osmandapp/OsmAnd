@@ -114,7 +114,7 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		fragment.setMaxProgress(maxProgress);
 		fragment.setOnDismissListener(listener);
 		fragmentManager.beginTransaction()
-				.add(fragment, UploadPhotoProgressBottomSheet.TAG)
+				.add(fragment, TAG)
 				.commitAllowingStateLoss();
 		return fragment;
 	}

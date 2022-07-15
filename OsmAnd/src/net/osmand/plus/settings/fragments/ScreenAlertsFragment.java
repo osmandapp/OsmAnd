@@ -34,9 +34,9 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 	@Override
 	protected void setupPreferences() {
 		Preference showRoutingAlarmsInfo = findPreference(SHOW_ROUTING_ALARMS_INFO);
-		SwitchPreferenceCompat showTrafficWarnings = (SwitchPreferenceCompat) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
-		SwitchPreferenceCompat showPedestrian = (SwitchPreferenceCompat) findPreference(settings.SHOW_PEDESTRIAN.getId());
-		SwitchPreferenceCompat showTunnels = (SwitchPreferenceCompat) findPreference(settings.SHOW_TUNNELS.getId());
+		SwitchPreferenceCompat showTrafficWarnings = findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
+		SwitchPreferenceCompat showPedestrian = findPreference(settings.SHOW_PEDESTRIAN.getId());
+		SwitchPreferenceCompat showTunnels = findPreference(settings.SHOW_TUNNELS.getId());
 
 		showRoutingAlarmsInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		showTrafficWarnings.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
@@ -83,7 +83,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
 		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
 
-		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
+		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
 		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
@@ -100,8 +100,8 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
 				holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
 			} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
-				ImageView deviceImage = (ImageView) holder.itemView.findViewById(R.id.device_image);
-				ImageView warningIcon = (ImageView) holder.itemView.findViewById(R.id.warning_icon);
+				ImageView deviceImage = holder.itemView.findViewById(R.id.device_image);
+				ImageView warningIcon = holder.itemView.findViewById(R.id.warning_icon);
 
 				deviceImage.setImageDrawable(getDeviceImage());
 				warningIcon.setImageDrawable(getWarningIcon());
@@ -160,7 +160,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 	}
 
 	private void setupShowCamerasPref() {
-		SwitchPreferenceCompat showCameras = (SwitchPreferenceCompat) findPreference(settings.SHOW_CAMERAS.getId());
+		SwitchPreferenceCompat showCameras = findPreference(settings.SHOW_CAMERAS.getId());
 		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}

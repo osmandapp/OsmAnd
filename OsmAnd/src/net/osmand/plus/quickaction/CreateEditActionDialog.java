@@ -78,7 +78,7 @@ public class CreateEditActionDialog extends DialogFragment
 
     public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
     	if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-            CreateEditActionDialog.newInstance(action.id).show(fragmentManager, TAG);
+            newInstance(action.id).show(fragmentManager, TAG);
         }
     }
 
@@ -151,7 +151,7 @@ public class CreateEditActionDialog extends DialogFragment
         setupHeader(view, savedInstanceState);
         setupFooter(view);
 
-        action.drawUI((ViewGroup) getView().findViewById(R.id.container), getMapActivity());
+        action.drawUI(getView().findViewById(R.id.container), getMapActivity());
     }
 
     @Override
@@ -165,7 +165,7 @@ public class CreateEditActionDialog extends DialogFragment
 
     private void setupToolbar(View root) {
 
-        Toolbar toolbar = (Toolbar) root.findViewById(R.id.toolbar);
+        Toolbar toolbar = root.findViewById(R.id.toolbar);
 
         toolbar.setTitle(isNew
                 ? R.string.quick_action_new_action
@@ -207,8 +207,8 @@ public class CreateEditActionDialog extends DialogFragment
     }
 
     private void setupHeader(View root, Bundle savedInstanceState){
-        ImageView image = (ImageView) root.findViewById(R.id.image);
-        EditText nameEditText = (EditText) root.findViewById(R.id.name);
+        ImageView image = root.findViewById(R.id.image);
+        EditText nameEditText = root.findViewById(R.id.name);
         int color = ColorUtilities.getActiveButtonsAndLinksTextColor(getContext(), !isLightContent);
         nameEditText.setTextColor(color);
 
@@ -245,7 +245,7 @@ public class CreateEditActionDialog extends DialogFragment
         image.setImageResource(action.getIconRes(getApplication()));
     }
 
-    private void setupFooter(final View root){
+    private void setupFooter(View root){
 
         root.findViewById(R.id.btnApply).setOnClickListener(new View.OnClickListener() {
             @Override

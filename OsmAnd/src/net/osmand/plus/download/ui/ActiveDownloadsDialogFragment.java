@@ -52,7 +52,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 
 	public static class IndexItemAdapter extends ArrayAdapter<IndexItem> {
 		private final DownloadActivity context;
-		private DialogFragment dlgFragment;
+		private final DialogFragment dlgFragment;
 
 		public IndexItemAdapter(DialogFragment dlgFragment, DownloadActivity context) {
 			super(context, R.layout.two_line_with_images_list_item, new ArrayList<IndexItem>());

@@ -25,16 +25,16 @@ import java.util.List;
 
 public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-	private SubCategoryClickListener listener;
-	private boolean nightMode;
-	private boolean showCategory;
-	private int activeColorRes;
-	private int secondaryColorRes;
-	private int activeIconColorRes;
+	private final OsmandApplication app;
+	private final UiUtilities uiUtilities;
+	private final SubCategoryClickListener listener;
+	private final boolean nightMode;
+	private final boolean showCategory;
+	private final int activeColorRes;
+	private final int secondaryColorRes;
+	private final int activeIconColorRes;
 	private List<PoiType> selectedItems;
-	private List<PoiType> items;
+	private final List<PoiType> items;
 
 	public SubCategoriesAdapter(@NonNull OsmandApplication app,
 								@NonNull List<PoiType> items,
@@ -66,8 +66,8 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 			convertView = UiUtilities.getInflater(app, nightMode)
 					.inflate(R.layout.profile_data_list_item_child, parent, false);
 		}
-		final PoiType poiType = getItem(position);
-		final boolean selected = selectedItems.contains(poiType);
+		PoiType poiType = getItem(position);
+		boolean selected = selectedItems.contains(poiType);
 		int tintColorRes = selected ? activeColorRes : secondaryColorRes;
 		int tintIconColorRes = selected ? activeIconColorRes : secondaryColorRes;
 		if (poiType != null) {
@@ -75,7 +75,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 			title.setMaxLines(Integer.MAX_VALUE);
 			title.setEllipsize(null);
 			title.setText(poiType.getTranslation());
-			final CheckBox checkBox = convertView.findViewById(R.id.check_box);
+			CheckBox checkBox = convertView.findViewById(R.id.check_box);
 			checkBox.setChecked(selected);
 			checkBox.setClickable(false);
 			CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, tintColorRes)));

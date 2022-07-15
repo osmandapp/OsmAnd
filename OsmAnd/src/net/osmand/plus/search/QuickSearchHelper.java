@@ -154,7 +154,7 @@ public class QuickSearchHelper implements ResourceListener {
 		core.setActivePoiFiltersByOrder(filtersHelper.getPoiFilterOrders(true));
 	}
 
-	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
+	public void setRepositoriesForSearchUICore(OsmandApplication app) {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
@@ -684,10 +684,10 @@ public class QuickSearchHelper implements ResourceListener {
 	public void onMapClosed(String fileName) {
 	}
 
-	public static void showPoiFilterOnMap(@NonNull final MapActivity mapActivity,
-										  @NonNull final PoiUIFilter filter,
-										  @Nullable final Runnable action) {
-		final TopToolbarController controller = new PoiFilterBarController();
+	public static void showPoiFilterOnMap(@NonNull MapActivity mapActivity,
+										  @NonNull PoiUIFilter filter,
+										  @Nullable Runnable action) {
+		TopToolbarController controller = new PoiFilterBarController();
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

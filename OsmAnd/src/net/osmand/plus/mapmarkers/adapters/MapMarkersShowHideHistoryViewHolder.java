@@ -14,7 +14,7 @@ public class MapMarkersShowHideHistoryViewHolder extends RecyclerView.ViewHolder
 
 	public MapMarkersShowHideHistoryViewHolder(View itemView) {
 		super(itemView);
-		title = (TextView) itemView.findViewById(R.id.show_hide_history_title);
+		title = itemView.findViewById(R.id.show_hide_history_title);
 		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
 	}
 }

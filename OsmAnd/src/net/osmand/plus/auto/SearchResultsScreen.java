@@ -142,7 +142,7 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
 				obj -> {
 					if (obj != null) {
-						SearchResultsScreen.this.onRouteSelected(sr);
+						onRouteSelected(sr);
 					}
 				});
 	}

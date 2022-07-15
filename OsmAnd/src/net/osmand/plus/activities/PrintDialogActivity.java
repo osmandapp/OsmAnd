@@ -1,6 +1,3 @@
-/**
- *
- */
 package net.osmand.plus.activities;
 
 import android.content.Context;
@@ -30,7 +27,7 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 
 	private OsmandApplication app;
 	private WebView webView;
-	private PrintJobId printJobId = null;
+	private PrintJobId printJobId;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -45,7 +42,7 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);
-		webView = (WebView) findViewById(R.id.printDialogWebview);
+		webView = findViewById(R.id.printDialogWebview);
 
 		Intent intent = getIntent();
 		if (intent != null) {

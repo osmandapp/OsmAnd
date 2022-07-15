@@ -102,12 +102,12 @@ public class StartGPSStatus extends OsmAndAction {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.gps_status);
 		LinearLayout ll = new LinearLayout(activity);
-		final ListView lv = new ListView(activity);
-		final int dp24 = AndroidUtils.dpToPx(mapActivity, 24f);
-		final int dp12 = AndroidUtils.dpToPx(mapActivity, 12f);
-		final int dp8 = AndroidUtils.dpToPx(mapActivity, 8f);
+		ListView lv = new ListView(activity);
+		int dp24 = AndroidUtils.dpToPx(mapActivity, 24f);
+		int dp12 = AndroidUtils.dpToPx(mapActivity, 12f);
+		int dp8 = AndroidUtils.dpToPx(mapActivity, 8f);
 		lv.setPadding(0, dp8, 0, dp8);
-		final AppCompatCheckBox cb = new AppCompatCheckBox(activity);
+		AppCompatCheckBox cb = new AppCompatCheckBox(activity);
 		cb.setText(R.string.shared_string_remember_my_choice);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(lp, dp24, dp8, dp8, dp24);
@@ -119,11 +119,11 @@ public class StartGPSStatus extends OsmAndAction {
 		UiUtilities.setupCompoundButton(isNightMode(), selectedModeColor, cb);
 		
 		final int layout = R.layout.list_menu_item_native;
-		final ArrayAdapter<GpsStatusApps> adapter = new ArrayAdapter<GpsStatusApps>(mapActivity, layout, GpsStatusApps.values()) {
+		ArrayAdapter<GpsStatusApps> adapter = new ArrayAdapter<GpsStatusApps>(mapActivity, layout, GpsStatusApps.values()) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				View v = mapActivity.getLayoutInflater().inflate(layout, null);
-				TextView tv = (TextView) v.findViewById(R.id.title);
+				TextView tv = v.findViewById(R.id.title);
 				tv.setPadding(dp12, 0, dp24, 0);
 				tv.setText(getItem(position).stringRes);
 				v.findViewById(R.id.toggle_item).setVisibility(View.INVISIBLE);
@@ -135,7 +135,7 @@ public class StartGPSStatus extends OsmAndAction {
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(lv);
 		ll.addView(cb);
-		final AlertDialog dlg = builder.create();
+		AlertDialog dlg = builder.create();
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -152,7 +152,7 @@ public class StartGPSStatus extends OsmAndAction {
 		return dlg;
 	}
 
-	private void runChosenGPSStatus(final GpsStatusApps g) {
+	private void runChosenGPSStatus(GpsStatusApps g) {
 		if (g.installed(mapActivity)) {
 			Intent intent = null;
 			PackageManager pm = mapActivity.getPackageManager();

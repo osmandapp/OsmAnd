@@ -92,7 +92,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		f.rightButtonTitle = rightButtonTitle;
 		f.setTargetFragment(targetFragment, 0);
 		f.setUsedOnMap(usedOnMap);
-		f.show(fm, ConfirmationBottomSheet.TAG);
+		f.show(fm, TAG);
 	}
 
 	public interface OnConfirmButtonClickListener {

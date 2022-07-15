@@ -10,7 +10,7 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     private final MapActivity activity;
 
-    public MapAccessibilityActions(final MapActivity activity) {
+    public MapAccessibilityActions(MapActivity activity) {
         this.activity = activity;
     }
 

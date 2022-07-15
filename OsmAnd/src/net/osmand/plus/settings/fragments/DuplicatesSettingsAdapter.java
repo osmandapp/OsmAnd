@@ -50,11 +50,11 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 	private static final int HEADER_TYPE = 0;
 	private static final int ITEM_TYPE = 1;
 
-	private boolean nightMode;
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-	private List<? super Object> items;
-	private int activeColorRes;
+	private final boolean nightMode;
+	private final OsmandApplication app;
+	private final UiUtilities uiUtilities;
+	private final List<? super Object> items;
+	private final int activeColorRes;
 
 	DuplicatesSettingsAdapter(OsmandApplication app, List<? super Object> items, boolean nightMode) {
 		this.app = app;

@@ -24,10 +24,10 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 
 	private static final int DEFAULT_THREAD_POOL_SIZE = 4;
 
-	private boolean interruptOnError = false;
+	private boolean interruptOnError;
 	private final OnThreadPoolTaskExecutorListener<T> listener;
 
-	private boolean cancelled = false;
+	private boolean cancelled;
 	private final Map<Future<?>, T> taskMap = new ConcurrentHashMap<>();
 	private final Map<Future<?>, Throwable> exceptions = new ConcurrentHashMap<>();
 	private AsyncTaskExecutor asyncTask;

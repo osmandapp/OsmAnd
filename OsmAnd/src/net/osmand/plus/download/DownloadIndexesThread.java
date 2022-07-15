@@ -46,7 +46,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
 
-	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
+	private static final Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 
 	private final OsmandApplication app;
 
@@ -55,9 +55,9 @@ public class DownloadIndexesThread {
 	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = new CopyOnWriteArrayList<>();
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
-	private DownloadEvents uiActivity = null;
-	private IndexItem currentDownloadingItem = null;
-	private int currentDownloadingItemProgress = 0;
+	private DownloadEvents uiActivity;
+	private IndexItem currentDownloadingItem;
+	private int currentDownloadingItemProgress;
 	private DownloadResources indexes;
 	private static final int THREAD_ID = 10103;
 

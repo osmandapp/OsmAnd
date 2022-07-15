@@ -25,12 +25,12 @@ import java.util.Map;
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private Map<ExportSettingsType, List<?>> itemsMap;
-	private List<ExportSettingsType> itemsTypes;
-	private UiUtilities uiUtils;
-	private OsmandApplication app;
-	private boolean nightMode;
-	private OnItemClickListener listener;
+	private final Map<ExportSettingsType, List<?>> itemsMap;
+	private final List<ExportSettingsType> itemsTypes;
+	private final UiUtilities uiUtils;
+	private final OsmandApplication app;
+	private final boolean nightMode;
+	private final OnItemClickListener listener;
 
 	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
 								 boolean nightMode, OnItemClickListener listener) {
@@ -53,11 +53,11 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		final ExportSettingsType currentItemType = itemsTypes.get(position);
+		ExportSettingsType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
-		holder.title.setTextColor(app.getResources().getColor(activeColorRes));
+		holder.title.setTextColor(app.getColor(activeColorRes));
 		Typeface typeface = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));
 		if (typeface != null) {
 			holder.title.setTypeface(typeface);
@@ -72,7 +72,7 @@ public class ImportedSettingsItemsAdapter extends
 		holder.subTitle.setText(String.format(
 				app.getString(R.string.ltr_or_rtl_combine_via_colon),
 				app.getString(R.string.items_added),
-				String.valueOf(itemsMap.get(currentItemType).size()))
+				itemsMap.get(currentItemType).size())
 		);
 
 		switch (currentItemType) {

@@ -34,9 +34,9 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	private static final int TYPE_ITEM = 4;
 	private static final int TYPE_COUNT = 5;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private NotesAdapterListener listener;
-	private List<Object> items;
+	private final List<Object> items;
 
 	private boolean selectionMode;
 	private Set<Recording> selected;
@@ -67,11 +67,11 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 	@NonNull
 	@Override
-	public View getView(final int position, View row, @NonNull ViewGroup parent) {
+	public View getView(int position, View row, @NonNull ViewGroup parent) {
 		boolean nightMode = !app.getSettings().isLightContent();
 		Context themedCtx = UiUtilities.getThemedContext(getContext(), nightMode);
 		if (portrait) {
-			final int type = getItemViewType(position);
+			int type = getItemViewType(position);
 			boolean header = type == TYPE_DATE_HEADER
 					|| type == TYPE_AUDIO_HEADER
 					|| type == TYPE_PHOTO_HEADER
@@ -93,7 +93,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			if (header) {
 				setupHeader(type, (HeaderViewHolder) row.getTag());
 			} else {
-				final Object item = getItem(position);
+				Object item = getItem(position);
 				if (item instanceof Recording) {
 					setupItem(position, (Recording) item, (ItemViewHolder) row.getTag());
 				}
@@ -168,7 +168,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return items.get(0) == NotesFragment.SHARE_LOCATION_FILE;
 	}
 
-	private void setupHeader(final int type, final HeaderViewHolder holder) {
+	private void setupHeader(int type, HeaderViewHolder holder) {
 		setupBackground(holder.backgroundView);
 		holder.topDivider.setVisibility(portrait ? View.VISIBLE : View.GONE);
 		holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
@@ -206,7 +206,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return R.string.shared_string_video;
 	}
 
-	private void setupItem(final int position, final Recording recording, final ItemViewHolder holder) {
+	private void setupItem(int position, Recording recording, ItemViewHolder holder) {
 		setupBackground(holder.view);
 		if (recording == NotesFragment.SHARE_LOCATION_FILE) {
 			holder.title.setText(R.string.av_locations);
@@ -319,9 +319,9 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	}
 
 	private boolean isAppropriate(Recording rec, int type) {
-		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
+		if (type == TYPE_AUDIO_HEADER) {
 			return rec.isAudio();
-		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
+		} else if (type == TYPE_PHOTO_HEADER) {
 			return rec.isPhoto();
 		}
 		return rec.isVideo();
@@ -341,8 +341,8 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			topDivider = view.findViewById(R.id.top_divider);
 			backgroundView = view.findViewById(R.id.background_view);
 			headerRow = view.findViewById(R.id.header_row);
-			checkBox = (CheckBox) view.findViewById(R.id.check_box);
-			title = (TextView) view.findViewById(R.id.title_text_view);
+			checkBox = view.findViewById(R.id.check_box);
+			title = view.findViewById(R.id.title_text_view);
 		}
 	}
 
@@ -358,11 +358,11 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 		ItemViewHolder(View view) {
 			this.view = view;
-			icon = (ImageView) view.findViewById(R.id.icon);
-			checkBox = (CheckBox) view.findViewById(R.id.check_box);
-			title = (TextView) view.findViewById(R.id.title);
-			description = (TextView) view.findViewById(R.id.description);
-			options = (ImageButton) view.findViewById(R.id.options);
+			icon = view.findViewById(R.id.icon);
+			checkBox = view.findViewById(R.id.check_box);
+			title = view.findViewById(R.id.title);
+			description = view.findViewById(R.id.description);
+			options = view.findViewById(R.id.options);
 			bottomDivider = view.findViewById(R.id.bottom_divider);
 		}
 	}

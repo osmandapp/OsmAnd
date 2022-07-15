@@ -48,13 +48,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
+public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
-	public final static String STD_PREFIX = "std_";
-	public final static String USER_PREFIX = "user_";
-	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
-	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
-	public final static int INVALID_ORDER = -1;
+	public static final String STD_PREFIX = "std_";
+	public static final String USER_PREFIX = "user_";
+	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
+	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
+	public static final int INVALID_ORDER = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
@@ -69,15 +69,15 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	protected final OsmandApplication app;
 
-	protected int distanceInd = 0;
+	protected int distanceInd;
 	// in kilometers
-	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500};
+	protected double[] distanceToSearchValues = {1, 2, 5, 10, 20, 50, 100, 200, 500};
 
 	private final MapPoiTypes poiTypes;
 
-	protected String filterByName = null;
-	protected String savedFilterByName = null;
-	protected List<Amenity> currentSearchResult = null;
+	protected String filterByName;
+	protected String savedFilterByName;
+	protected List<Amenity> currentSearchResult;
 
 	private boolean deleted;
 
@@ -132,7 +132,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public PoiUIFilter(Set<PoiUIFilter> filtersToMerge, OsmandApplication app) {
 		this(app);
 		combineWithPoiFilters(filtersToMerge);
-		filterId = PoiUIFilter.STD_PREFIX + "combined";
+		filterId = STD_PREFIX + "combined";
 		name = app.getPoiFilters().getFiltersName(filtersToMerge);
 	}
 
@@ -357,7 +357,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-													double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
+													double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this,
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, wrapResultMatcher(matcher));
 	}
@@ -404,8 +404,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	private AmenityNameFilter getNameFilterInternal(
-			final List<String> unknownFilters, final boolean shouldBeAllTime,
-			final boolean shouldBeOpened, final List<PoiType> selectedFilters
+			List<String> unknownFilters, boolean shouldBeAllTime,
+			boolean shouldBeOpened, List<PoiType> selectedFilters
 	) {
 		return new AmenityNameFilter() {
 
@@ -427,11 +427,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					return false;
 				}
 
-				if (!acceptedAnyFilterOfEachCategory(amenity, selectedFilters)) {
-					return false;
-				}
-
-				return true;
+				return acceptedAnyFilterOfEachCategory(amenity, selectedFilters);
 			}
 		};
 	}
@@ -469,7 +465,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			return true;
 		}
 
-		final CollatorStringMatcher sm =
+		CollatorStringMatcher sm =
 				new CollatorStringMatcher(nameFilter.trim(), StringMatcherMode.CHECK_CONTAINS);
 
 		List<String> names = OsmAndFormatter.getPoiStringsWithoutType(
@@ -580,9 +576,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	@Override
-	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
-		final AmenityNameFilter nm = getNameFilter(filterByName);
-		final Set<String> searchedPois = new TreeSet<>();
+	public ResultMatcher<Amenity> wrapResultMatcher(ResultMatcher<Amenity> matcher) {
+		AmenityNameFilter nm = getNameFilter(filterByName);
+		Set<String> searchedPois = new TreeSet<>();
 		return new ResultMatcher<Amenity>() {
 
 			@Override
@@ -593,10 +589,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 						if (!searchedPois.add(poiID)) {
 							return false;
 						}
-						if (a.isClosed()) {
-							return false;
-						}
-						return true;
+						return !a.isClosed();
 					}
 				}
 				return false;
@@ -715,7 +708,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public void updateTypesToAccept(AbstractPoiType pt) {
 		pt.putTypes(acceptedTypes);
-		if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
+		if (pt instanceof PoiType && pt.isAdditional() && ((PoiType) pt).getParentType() != null) {
 			fillPoiAdditionals(((PoiType) pt).getParentType(), true);
 		} else {
 			fillPoiAdditionals(pt, true);
@@ -826,7 +819,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public static void combineStandardPoiFilters(Set<PoiUIFilter> filters, OsmandApplication app) {
 		Set<PoiUIFilter> standardFilters = new TreeSet<>();
 		for (PoiUIFilter filter : filters) {
-			if (((filter.isStandardFilter() && filter.filterId.startsWith(PoiUIFilter.STD_PREFIX))
+			if (((filter.isStandardFilter() && filter.filterId.startsWith(STD_PREFIX))
 					|| filter.isCustomPoiFilter())
 					&& (filter.getFilterByName() == null)
 					&& (filter.getSavedFilterByName() == null)) {
@@ -974,9 +967,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 		if (acceptedTypesOrigin.containsKey(type)) {
 			LinkedHashSet<String> acceptedTypesSet = acceptedTypesOrigin.get(type);
-			if (acceptedTypesSet == null || acceptedTypesSet.contains(subtype)) {
-				return true;
-			}
+			return acceptedTypesSet == null || acceptedTypesSet.contains(subtype);
 		}
 		return false;
 	}

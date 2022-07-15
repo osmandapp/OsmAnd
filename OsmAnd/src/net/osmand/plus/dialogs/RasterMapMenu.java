@@ -37,26 +37,26 @@ import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYG
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
 
-	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
-	                                                   final RasterMapType type) {
+	public static ContextMenuAdapter createListAdapter(MapActivity mapActivity,
+	                                                   RasterMapType type) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}
 
-	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
-	                                      final MapActivity mapActivity,
-	                                      final RasterMapType type) {
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
-		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
+	private static void createLayersItems(ContextMenuAdapter contextMenuAdapter,
+	                                      MapActivity mapActivity,
+	                                      RasterMapType type) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;
-		final CommonPreference<Integer> mapTransparencyPreference;
-		final CommonPreference<String> mapTypePreference;
-		final CommonPreference<String> exMapTypePreference;
-		final LayerTransparencySeekbarMode currentMode = type == RasterMapType.OVERLAY ? OVERLAY : UNDERLAY;
-		@StringRes final int mapTypeString;
-		@StringRes final int mapTypeStringTransparency;
+		CommonPreference<Integer> mapTransparencyPreference;
+		CommonPreference<String> mapTypePreference;
+		CommonPreference<String> exMapTypePreference;
+		LayerTransparencySeekbarMode currentMode = type == RasterMapType.OVERLAY ? OVERLAY : UNDERLAY;
+		@StringRes int mapTypeString;
+		@StringRes int mapTypeStringTransparency;
 		if (type == RasterMapType.OVERLAY) {
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
@@ -81,18 +81,18 @@ public class RasterMapMenu {
 			mapTypeDescr = mapTypeDescr.replaceFirst(".sqlitedb", "");
 		}
 
-		final boolean mapSelected = mapTypeDescr != null;
-		final int toggleActionStringId = mapSelected ? R.string.shared_string_on
+		boolean mapSelected = mapTypeDescr != null;
+		int toggleActionStringId = mapSelected ? R.string.shared_string_on
 				: R.string.shared_string_off;
 
-		final OnMapSelectedCallback onMapSelectedCallback =
+		OnMapSelectedCallback onMapSelectedCallback =
 				canceled -> {
 					mapActivity.getDashboard().refreshContent(true);
 					if (type == RasterMapType.UNDERLAY && !canceled) {
 						mapActivity.refreshMapComplete();
 					}
 				};
-		final MapLayers mapLayers = mapActivity.getMapLayers();
+		MapLayers mapLayers = mapActivity.getMapLayers();
 		OnRowItemClick l = new OnRowItemClick() {
 
 			@Override
@@ -111,7 +111,7 @@ public class RasterMapMenu {
 			@Override
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
 			                                  @Nullable View view, @NotNull ContextMenuItem item,
-			                                  final boolean isChecked) {
+			                                  boolean isChecked) {
 				int itemId = item.getTitleId();
 				if (itemId == toggleActionStringId) {
 					app.runInUIThread(() -> {

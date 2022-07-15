@@ -73,10 +73,10 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
 
-		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		final View showDashboardOnStart = createCheckboxItem(settings.SHOW_DASHBOARD_ON_START, 
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		View showDashboardOnStart = createCheckboxItem(settings.SHOW_DASHBOARD_ON_START,
 				R.string.show_on_start , R.string.show_on_start_description);
-		final View accessFromMap = createCheckboxItem(settings.SHOW_DASHBOARD_ON_MAP_SCREEN, 
+		View accessFromMap = createCheckboxItem(settings.SHOW_DASHBOARD_ON_MAP_SCREEN,
 				R.string.access_from_map, R.string.access_from_map_description); 
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -95,7 +95,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 						boolean[] shouldShow = mAdapter.getCheckedItems();
 						int[] numberOfRows = mAdapter.getNumbersOfRows();
 						for (int i = 0; i < shouldShow.length; i++) {
-							final DashFragmentData fragmentData = mFragmentsData.get(i);
+							DashFragmentData fragmentData = mFragmentsData.get(i);
 							settings.registerBooleanPreference(
 									DashboardOnMap.SHOULD_SHOW + fragmentData.tag, true)
 									.makeGlobal().set(shouldShow[i]);
@@ -113,7 +113,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
-		final AlertDialog dialog = builder.create();
+		AlertDialog dialog = builder.create();
 
 		ListView listView = dialog.getListView();
 		listView.addHeaderView(showDashboardOnStart);
@@ -121,14 +121,14 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		return dialog;
 	}
 
-	private View createCheckboxItem(final CommonPreference<Boolean> pref, int text, int description) {
-		final View view = LayoutInflater.from(context).inflate(
+	private View createCheckboxItem(CommonPreference<Boolean> pref, int text, int description) {
+		View view = LayoutInflater.from(context).inflate(
 				R.layout.show_dashboard_on_start_dialog_item, null, false);
-		final TextView textView = (TextView) view.findViewById(R.id.text);
-		final TextView subtextView = (TextView) view.findViewById(R.id.subtext);
+		TextView textView = view.findViewById(R.id.text);
+		TextView subtextView = view.findViewById(R.id.subtext);
 		textView.setText(text);
 		subtextView.setText(description);
-		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
+		CompoundButton compoundButton = view.findViewById(R.id.toggle_item);
 		compoundButton.setChecked(pref.get());
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -182,8 +182,8 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			final DashViewHolder viewHolder;
+		public View getView(int position, View convertView, ViewGroup parent) {
+			DashViewHolder viewHolder;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context).inflate(R.layout.dashboard_settings_dialog_item,
 						parent, false);
@@ -232,7 +232,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 				String header = getContext().getString(getItem(localViewHolder.position)
 						.shouldShowFunction.getTitleId());
 				String subheader = getContext().getResources().getString(R.string.count_of_lines);
-				final String stringPosition = String.valueOf(localViewHolder.position);
+				String stringPosition = String.valueOf(localViewHolder.position);
 				NumberPickerDialogFragment.createInstance(header, subheader, stringPosition, getNumberOfRows(localViewHolder.position), MAXIMUM_NUMBER_OF_ROWS)
 						.show(getChildFragmentManager(), NumberPickerDialogFragment.TAG);
 			}
@@ -246,15 +246,15 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final CompoundButton compoundButton;
 		final TextView numberOfRowsTextView;
 		private int position;
-		private int colorActive;
-		private DashFragmentAdapter dashFragmentAdapter;
+		private final int colorActive;
+		private final DashFragmentAdapter dashFragmentAdapter;
 
 		public DashViewHolder(DashFragmentAdapter dashFragmentAdapter, View view, Context ctx) {
 			this.view = view;
 			this.dashFragmentAdapter = dashFragmentAdapter;
-			this.numberOfRowsTextView = (TextView) view.findViewById(R.id.numberOfRowsTextView);
-			this.textView = (TextView) view.findViewById(R.id.text);
-			this.compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
+			this.numberOfRowsTextView = view.findViewById(R.id.numberOfRowsTextView);
+			this.textView = view.findViewById(R.id.text);
+			this.compoundButton = view.findViewById(R.id.toggle_item);
 
 			TypedValue typedValue = new TypedValue();
 			Theme theme = ctx.getTheme();

@@ -62,7 +62,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		super.createToolbar(inflater, view);
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
-		((AppBarLayout) view.findViewById(R.id.appbar)).setOutlineProvider(null);
+		view.findViewById(R.id.appbar).setOutlineProvider(null);
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}
 
-	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, final boolean signUp) {
+	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, boolean signUp) {
 		setupDialogButton(isNightMode(), view, buttonType, textId);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override

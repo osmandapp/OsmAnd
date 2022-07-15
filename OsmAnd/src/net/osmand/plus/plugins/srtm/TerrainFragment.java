@@ -373,9 +373,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		if (mapActivity == null) {
 			return;
 		}
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 			if (settings.isInternetConnectionAvailable()) {
 				downloadThread.runReloadIndexFiles();
@@ -399,7 +399,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					downloadContainer.setVisibility(View.VISIBLE);
 					downloadTopDivider.setVisibility(View.VISIBLE);
 					downloadBottomDivider.setVisibility(View.VISIBLE);
-					for (final IndexItem indexItem : terrainItems) {
+					for (IndexItem indexItem : terrainItems) {
 						ContextMenuItem _item = new ContextMenuItem(null)
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))

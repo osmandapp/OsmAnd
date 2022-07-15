@@ -62,7 +62,7 @@ public class TransportRouteController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				final int previousStop = getPreviousStop();
+				int previousStop = getPreviousStop();
 				if (previousStop != -1) {
 					showTransportStop(getTransportRoute().route.getForwardStops().get(previousStop), true);
 				}
@@ -73,7 +73,7 @@ public class TransportRouteController extends MenuController {
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				final int nextStop = getNextStop();
+				int nextStop = getNextStop();
 				if (nextStop != -1) {
 					showTransportStop(getTransportRoute().route.getForwardStops().get(nextStop), true);
 				}
@@ -217,7 +217,7 @@ public class TransportRouteController extends MenuController {
 	private int getCurrentStop() {
 		List<TransportStop> stops = transportRoute.route.getForwardStops();
 		for (int i = 0; i < stops.size(); i++) {
-			final TransportStop stop = stops.get(i);
+			TransportStop stop = stops.get(i);
 			if (stop.getId().equals(transportRoute.stop.getId())) {
 				return i;
 			}
@@ -257,7 +257,7 @@ public class TransportRouteController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -287,7 +287,7 @@ public class TransportRouteController extends MenuController {
 			}
 		}
 		for (int i = startPosition; i < stops.size(); i++) {
-			final TransportStop stop = stops.get(i);
+			TransportStop stop = stops.get(i);
 			String name = useEnglishNames ? stop.getEnName(true) : stop.getName();
 			if (TextUtils.isEmpty(name)) {
 				name = getStopType();

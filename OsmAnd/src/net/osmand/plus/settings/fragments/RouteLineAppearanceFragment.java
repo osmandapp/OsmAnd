@@ -196,7 +196,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private void calculateLayout() {
 		runLayoutListener(() -> {
-			updateMapControlsPos(RouteLineAppearanceFragment.this, getViewY(), true);
+			updateMapControlsPos(this, getViewY(), true);
 			initVisibleRect();
 		});
 	}
@@ -308,7 +308,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void setupScrollListener() {
-		final View scrollView = getBottomScrollView();
+		View scrollView = getBottomScrollView();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
 			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
 			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
@@ -490,7 +490,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);

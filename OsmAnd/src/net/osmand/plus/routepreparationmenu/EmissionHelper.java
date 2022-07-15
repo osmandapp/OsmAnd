@@ -77,7 +77,7 @@ public class EmissionHelper {
 
 		@Nullable
 		public static MotorType getMotorTypeByName(@NonNull String name) {
-			for (MotorType type : MotorType.values()) {
+			for (MotorType type : values()) {
 				if (type.name().equalsIgnoreCase(name)) {
 					return type;
 				}
@@ -86,7 +86,7 @@ public class EmissionHelper {
 		}
 
 		public boolean shouldCheckRegion() {
-			return this == MotorType.ELECTRIC;
+			return this == ELECTRIC;
 		}
 	}
 

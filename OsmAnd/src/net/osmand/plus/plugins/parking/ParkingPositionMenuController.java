@@ -16,11 +16,11 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class ParkingPositionMenuController extends MenuController {
 
-	private ParkingPositionPlugin plugin;
+	private final ParkingPositionPlugin plugin;
 	private String parkingStartDescription = "";
 	private String parkingLeftDescription = "";
 	private String parkingTitle = "";
-	private FavouritePoint fav;
+	private final FavouritePoint fav;
 
 	public ParkingPositionMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription,
 	                                     FavouritePoint fav) {

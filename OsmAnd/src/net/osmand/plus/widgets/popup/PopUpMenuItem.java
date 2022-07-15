@@ -59,7 +59,7 @@ public class PopUpMenuItem {
 	}
 
 	public static class Builder {
-		private Context ctx;
+		private final Context ctx;
 		private CharSequence title;
 		private Drawable icon;
 		private View.OnClickListener onClickListener;

@@ -17,51 +17,51 @@ import java.util.List;
 
 public interface RegionAddressRepository {
 	
-	public String getName();
+	String getName();
 
-	public String getCountryName();
+	String getCountryName();
 
-	public String getFileName() ;
+	String getFileName() ;
 	
-	public String getLang();
+	String getLang();
 	
-	public boolean isTransliterateNames();
+	boolean isTransliterateNames();
 
 	@Nullable
-	public LatLon getEstimatedRegionCenter();
+	LatLon getEstimatedRegionCenter();
 	
 	// is called on low memory
-	public void clearCache();
+	void clearCache();
 	
 	// called to close resources
-	public void close();
+	void close();
 
-	public void preloadCities(ResultMatcher<City> resultMatcher);
+	void preloadCities(ResultMatcher<City> resultMatcher);
 	
-	public void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher);
+	void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher);
 	
-	public void preloadStreets(City o, ResultMatcher<Street> resultMatcher);
+	void preloadStreets(City o, ResultMatcher<Street> resultMatcher);
 	
-	public List<City> getLoadedCities();
+	List<City> getLoadedCities();
 	
 	// Returns city or postcode (if id < 0)
-	public City getCityById(long id, String name);
+	City getCityById(long id, String name);
 	
-	public Street getStreetByName(City cityOrPostcode, String name);
+	Street getStreetByName(City cityOrPostcode, String name);
 	
-	public Building getBuildingByName(Street street, String name);
+	Building getBuildingByName(Street street, String name);
 	
-	public List<Street> getStreetsIntersectStreets(Street st);
+	List<Street> getStreetsIntersectStreets(Street st);
 	
 	void addCityToPreloadedList(City city);
 	
-	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, boolean searchVillagesMode, LatLon currentLocation);
+	List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, boolean searchVillagesMode, LatLon currentLocation);
 	
-	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher);
+	List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher);
 	
-	public static class MapObjectNameDistanceComparator implements Comparator<MapObject> {
+	class MapObjectNameDistanceComparator implements Comparator<MapObject> {
 		
-		private Collator collator = Collator.getInstance();
+		private final Collator collator = Collator.getInstance();
 		private final LatLon location;
 		private final String lang;
 

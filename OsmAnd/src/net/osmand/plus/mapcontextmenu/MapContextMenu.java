@@ -89,12 +89,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private MenuController menuController;
 
 	private LatLon mapCenter;
-	private int mapPosition = 0;
+	private int mapPosition;
 	private boolean centerMarker;
 	private boolean zoomOutOnly;
 	private int mapZoom;
 
-	private boolean inLocationUpdate = false;
+	private boolean inLocationUpdate;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
@@ -1081,7 +1081,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return null;
 	}
 
-	public void showAdditionalActionsFragment(final ContextMenuAdapter adapter, ContextMenuItemClickListener listener) {
+	public void showAdditionalActionsFragment(ContextMenuAdapter adapter, ContextMenuItemClickListener listener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapActions().showAdditionalActionsFragment(adapter, listener);
@@ -1205,7 +1205,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (gpxFile != null) {
 				wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 			} else {
-				final List<SelectedGpxFile> list
+				List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
 					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
@@ -1250,7 +1250,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(final String title, String preselectedIconName) {
+	public void addNewWptToGPXFile(String title, String preselectedIconName) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1599,8 +1599,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void updateLocation(final boolean centerChanged, final boolean locationChanged,
-							   final boolean compassChanged) {
+	public void updateLocation(boolean centerChanged, boolean locationChanged,
+	                           boolean compassChanged) {
 		MapActivity mapActivity = getMapActivity();
 		if (inLocationUpdate || mapActivity == null) {
 			return;

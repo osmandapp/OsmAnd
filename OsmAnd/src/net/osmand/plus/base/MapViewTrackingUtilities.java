@@ -54,18 +54,18 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private MapContextMenu contextMenu;
 	private TrackDetailsMenu detailsMenu;
 
-	private long lastTimeAutoZooming = 0;
-	private long lastTimeManualZooming = 0;
+	private long lastTimeAutoZooming;
+	private long lastTimeManualZooming;
 	private boolean isMapLinkedToLocation = true;
 	private boolean followingMode;
 	private boolean routePlanningMode;
-	private boolean showViewAngle = false;
-	private boolean isUserZoomed = false;
+	private boolean showViewAngle;
+	private boolean isUserZoomed;
 	private String locationProvider;
 	private Location myLocation;
 	private Float heading;
-	private boolean drivingRegionUpdated = false;
-	private boolean movingToMyLocation = false;
+	private boolean drivingRegionUpdated;
+	private boolean movingToMyLocation;
 	private long compassRequest;
 
 	public MapViewTrackingUtilities(OsmandApplication app) {

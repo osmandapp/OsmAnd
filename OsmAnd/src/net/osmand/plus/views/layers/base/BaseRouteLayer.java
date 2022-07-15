@@ -55,7 +55,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected RenderingLineAttributes attrs;
 	protected int routeLineColor;
 	protected Integer directionArrowsColor;
-	protected int customTurnArrowColor = 0;
+	protected int customTurnArrowColor;
 
 	private final Map<String, Float> cachedRouteLineWidth = new HashMap<>();
 

@@ -12,21 +12,21 @@ import net.osmand.render.RenderingRuleSearchRequest;
 public class TextDrawInfo {
 
 	String text;
-	Path drawOnPath = null;
-	QuadRect bounds = null;
-	float vOffset = 0;
-	float centerX = 0;
-	float pathRotate = 0;
-	float centerY = 0;
-	float textSize = 0;
-	float minDistance = 0;
+	Path drawOnPath;
+	QuadRect bounds;
+	float vOffset;
+	float centerX;
+	float pathRotate;
+	float centerY;
+	float textSize;
+	float minDistance;
 	int textColor = Color.BLACK;
-	int textShadow = 0;
-	int textWrap = 0;
-	boolean bold = false;
-	boolean italic = false;
-	String shieldRes = null;
-	String shieldResIcon = null;
+	int textShadow;
+	int textWrap;
+	boolean bold;
+	boolean italic;
+	String shieldRes;
+	String shieldResIcon;
 	int textOrder = 100;
 	int textShadowColor = Color.WHITE;
 

@@ -162,14 +162,14 @@ public class PerformLiveUpdateAsyncTask
 	public static void tryRescheduleDownload(@NonNull Context context,
 											 @NonNull OsmandSettings settings,
 											 @NonNull String localIndexFileName) {
-		final CommonPreference<Integer> updateFrequencyPreference =
+		CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexFileName, settings);
-		final Integer frequencyOrdinal = updateFrequencyPreference.get();
+		Integer frequencyOrdinal = updateFrequencyPreference.get();
 		if (LiveUpdatesHelper.UpdateFrequency.values()[frequencyOrdinal]
 				== LiveUpdatesHelper.UpdateFrequency.HOURLY) {
 			return;
 		}
-		final Integer retriesLeft = settings.LIVE_UPDATES_RETRIES.get();
+		Integer retriesLeft = settings.LIVE_UPDATES_RETRIES.get();
 		if (retriesLeft > 0) {
 			PendingIntent alarmIntent = LiveUpdatesHelper.getPendingIntent(context, localIndexFileName);
 

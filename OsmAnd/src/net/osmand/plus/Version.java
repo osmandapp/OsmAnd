@@ -84,7 +84,7 @@ public class Version {
 		appName = ctx.getString(R.string.app_name);
 	}
 
-	private static Version ver = null;
+	private static Version ver;
 	private static Version getVersion(OsmandApplication ctx){
 		if (ver == null) {
 			ver = new Version(ctx);
@@ -147,9 +147,9 @@ public class Version {
 	}
 
 	public static String getVersionForTracker(OsmandApplication ctx) {
-		String v = Version.getAppName(ctx);
-		if(Version.isProductionVersion(ctx)){
-			v = Version.getFullVersion(ctx);
+		String v = getAppName(ctx);
+		if(isProductionVersion(ctx)){
+			v = getFullVersion(ctx);
 		} else {
 			v +=" test";
 		}

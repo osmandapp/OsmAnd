@@ -44,7 +44,7 @@ import java.util.StringTokenizer;
 
 public class GpxSelectionHelper {
 
-	private final static Log log = PlatformUtil.getLog(GpxSelectionHelper.class);
+	private static final Log log = PlatformUtil.getLog(GpxSelectionHelper.class);
 
 	public static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";

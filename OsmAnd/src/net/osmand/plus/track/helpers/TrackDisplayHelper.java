@@ -24,7 +24,7 @@ public class TrackDisplayHelper {
 
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
-	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
+	private final List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 
 	public TrackDisplayHelper(OsmandApplication app) {
 		this.app = app;
@@ -129,7 +129,7 @@ public class TrackDisplayHelper {
 
 	@NonNull
 	public List<GpxDisplayGroup> getPointsOriginalGroups() {
-		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {
+		GpxDisplayItemType[] filterTypes = {
 				GpxDisplayItemType.TRACK_POINTS,
 				GpxDisplayItemType.TRACK_ROUTE_POINTS
 		};

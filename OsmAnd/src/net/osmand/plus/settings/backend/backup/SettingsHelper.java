@@ -856,7 +856,7 @@ public abstract class SettingsHelper {
 	}
 
 	private void sortLocalFiles(List<File> files) {
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(files, new Comparator<File>() {
 			@Override
 			public int compare(File lhs, File rhs) {

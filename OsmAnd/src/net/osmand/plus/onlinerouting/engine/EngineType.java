@@ -6,10 +6,10 @@ import net.osmand.util.Algorithms;
 
 public class EngineType {
 
-	public final static OnlineRoutingEngine GRAPHHOPPER_TYPE = new GraphhopperEngine(null);
-	public final static OnlineRoutingEngine OSRM_TYPE = new OsrmEngine(null);
-	public final static OnlineRoutingEngine ORS_TYPE = new OrsEngine(null);
-	public final static OnlineRoutingEngine GPX_TYPE = new GpxEngine(null);
+	public static final OnlineRoutingEngine GRAPHHOPPER_TYPE = new GraphhopperEngine(null);
+	public static final OnlineRoutingEngine OSRM_TYPE = new OsrmEngine(null);
+	public static final OnlineRoutingEngine ORS_TYPE = new OrsEngine(null);
+	public static final OnlineRoutingEngine GPX_TYPE = new GpxEngine(null);
 
 	private static OnlineRoutingEngine[] enginesTypes;
 

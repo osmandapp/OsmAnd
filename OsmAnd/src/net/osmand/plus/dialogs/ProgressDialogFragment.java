@@ -29,7 +29,7 @@ public class ProgressDialogFragment extends DialogFragment {
 		int titleId = args.getInt(TITLE_ID);
 		int messageId = args.getInt(MESSAGE_ID);
 		int style = args.getInt(STYLE);
-		final ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
+		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
 				getString(titleId), getString(messageId),
 				style).getDialog();
 
@@ -39,7 +39,7 @@ public class ProgressDialogFragment extends DialogFragment {
 		return dialog;
 	}
 
-	public void setMax(final int max) {
+	public void setMax(int max) {
 		mMax = max;
 		if (getDialog() != null) {
 			getProgressDialog().setMax(mMax);

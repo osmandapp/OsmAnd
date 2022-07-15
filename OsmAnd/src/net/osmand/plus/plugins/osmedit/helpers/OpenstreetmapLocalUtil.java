@@ -32,15 +32,15 @@ import java.util.Set;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
-	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
+	public static final Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
-	private OsmEditingPlugin plugin;
+	private final OsmEditingPlugin plugin;
 
 	public OpenstreetmapLocalUtil(OsmEditingPlugin plugin) {
 		this.plugin = plugin;
 	}
 
-	private List<OnNodeCommittedListener> listeners = new ArrayList<>();
+	private final List<OnNodeCommittedListener> listeners = new ArrayList<>();
 
 	public void addNodeCommittedListener(OnNodeCommittedListener listener) {
 		if (!listeners.contains(listener)) {

@@ -55,9 +55,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class OsmandRenderer {
 	private static final Log log = PlatformUtil.getLog(OsmandRenderer.class);
 
-	private Paint paint;
+	private final Paint paint;
 
-	private Paint paintIcon;
+	private final Paint paintIcon;
 	public static final int DEFAULT_POLYGON_MAX = 11;
 	public static final int DEFAULT_LINE_MAX = 100;
 	public static final int DEFAULT_POINTS_MAX = 200;
@@ -67,15 +67,15 @@ public class OsmandRenderer {
 	private static final int MAX_V = 10;
 	private static final int MAX_V_AREA = 2000;
 
-	private Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
-	private Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
-	private Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
+	private final Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
+	private final Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
+	private final Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
 	private final Context context;
 
-	private DisplayMetrics dm;
+	private final DisplayMetrics dm;
 
-	private TextRenderer textRenderer;
+	private final TextRenderer textRenderer;
 
 	public class MapDataObjectPrimitive {
 		BinaryMapDataObject obj;
@@ -84,11 +84,11 @@ public class OsmandRenderer {
 		double area;
 		int objectType;
 		int orderByDenisty;
-	};
+	}
 
 	private static class IconDrawInfo {
-		float x = 0;
-		float y = 0;
+		float x;
+		float y;
 		String resId_1;
 		String resId;
 		String resId2;
@@ -121,9 +121,9 @@ public class OsmandRenderer {
 		float sinRotateTileSize;
 
 		int shadowLevelMin = 256;
-		int shadowLevelMax = 0;
+		int shadowLevelMax;
 
-		boolean ended = false;
+		boolean ended;
 
 		
 		@Override
@@ -185,21 +185,21 @@ public class OsmandRenderer {
 	 */
 	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
 			NativeSearchResult searchResultHandler, 
-			Bitmap bmp, RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
+			Bitmap bmp, RenderingRuleSearchRequest render, MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
 			rc.cosRotateTileSize = (float) (Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE);
 			rc.sinRotateTileSize = (float) (Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE);
 			try {
 				if(Looper.getMainLooper() != null && library.useDirectRendering()) {
-					final Handler h = new Handler(Looper.getMainLooper());
+					Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, mapTileDownloader, h);
 				}
 				
 				// Native library will decide on it's own best way of rendering
 				// If res.bitmapBuffer is null, it indicates that rendering was done directly to
 				// memory of passed bitmap, but this is supported only on Android >= 2.2
-				final NativeLibrary.RenderingGenerationResult res = library.generateRendering(
+				NativeLibrary.RenderingGenerationResult res = library.generateRendering(
 					rc, searchResultHandler, bmp, bmp.hasAlpha(), render);
 				rc.ended = true;
 				notifyListeners(mapTileDownloader);
@@ -246,7 +246,7 @@ public class OsmandRenderer {
 		}
 	
 	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, 
-				RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
+				RenderingRuleSearchRequest render, MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		// fill area
 		Canvas cv = new Canvas(bmp);
@@ -294,7 +294,7 @@ public class OsmandRenderer {
 		}
 	}
 
-	private void notifyListenersWithDelay(final RenderingContext rc, final MapTileDownloader mapTileDownloader, final Handler h) {
+	private void notifyListenersWithDelay(RenderingContext rc, MapTileDownloader mapTileDownloader, Handler h) {
 		h.postDelayed(new Runnable() {
 			@Override
 			public void run() {

@@ -16,7 +16,6 @@
 
 package com.github.ksoichiro.android.observablescrollview;
 
-import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -38,7 +37,7 @@ public final class ScrollUtils {
      * @param maxValue maximum value. If value is greater than this, maxValue will be returned
      * @return float value limited to the range
      */
-    public static float getFloat(final float value, final float minValue, final float maxValue) {
+    public static float getFloat(float value, float minValue, float maxValue) {
         return Math.min(maxValue, Math.max(minValue, value));
     }
 
@@ -64,16 +63,12 @@ public final class ScrollUtils {
      * @param view     the target view to add global layout listener
      * @param runnable runnable to be executed after the view is laid out
      */
-    public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
+    public static void addOnGlobalLayoutListener(View view, Runnable runnable) {
         ViewTreeObserver vto = view.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 runnable.run();
             }
         });
@@ -90,13 +85,13 @@ public final class ScrollUtils {
      * @return mixed color value in ARGB. Alpha is fixed value (255).
      */
     public static int mixColors(int fromColor, int toColor, float toAlpha) {
-        float[] fromCmyk = ScrollUtils.cmykFromRgb(fromColor);
-        float[] toCmyk = ScrollUtils.cmykFromRgb(toColor);
+        float[] fromCmyk = cmykFromRgb(fromColor);
+        float[] toCmyk = cmykFromRgb(toColor);
         float[] result = new float[4];
         for (int i = 0; i < 4; i++) {
             result[i] = Math.min(1, fromCmyk[i] * (1 - toAlpha) + toCmyk[i] * toAlpha);
         }
-        return 0xff000000 + (0x00ffffff & ScrollUtils.rgbFromCmyk(result));
+        return 0xff000000 + (0x00ffffff & rgbFromCmyk(result));
     }
 
     /**

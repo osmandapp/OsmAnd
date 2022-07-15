@@ -51,7 +51,7 @@ public class ScreenTimeoutBottomSheet extends BooleanPreferenceBottomSheet {
 	                                @Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
 	                                boolean profileDependent) {
 		try {
-			if (fm.findFragmentByTag(ScreenTimeoutBottomSheet.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 
@@ -62,7 +62,7 @@ public class ScreenTimeoutBottomSheet extends BooleanPreferenceBottomSheet {
 				fragment.setApplyQueryType(applyQueryType);
 				fragment.setTargetFragment(target, 0);
 				fragment.setProfileDependent(profileDependent);
-				fragment.show(fm, ScreenTimeoutBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

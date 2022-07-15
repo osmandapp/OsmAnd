@@ -33,10 +33,10 @@ public class PicassoUtils {
 	private static final int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
 	private static PicassoUtils INSTANCE;
 
-	private Cache diskCache;
-	private LruCache memoryCache;
+	private final Cache diskCache;
+	private final LruCache memoryCache;
 
-	private Map<String, Boolean> cached = new HashMap<>();
+	private final Map<String, Boolean> cached = new HashMap<>();
 	
 	private PicassoUtils(OsmandApplication app){
 		File cacheDir = createDefaultCacheDir(app);
@@ -104,13 +104,7 @@ public class PicassoUtils {
 
 		try {
 			StatFs statFs = new StatFs(dir.getAbsolutePath());
-			//noinspection deprecation
-			long blockCount =
-					SDK_INT < JELLY_BEAN_MR2 ? (long) statFs.getBlockCount() : statFs.getBlockCountLong();
-			//noinspection deprecation
-			long blockSize =
-					SDK_INT < JELLY_BEAN_MR2 ? (long) statFs.getBlockSize() : statFs.getBlockSizeLong();
-			long available = blockCount * blockSize;
+			long available = statFs.getBlockCountLong() * statFs.getBlockSizeLong();
 			// Target 2% of the total space.
 			size = available / 50;
 		} catch (IllegalArgumentException e) {

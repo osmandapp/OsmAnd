@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ListStringPreference extends StringPreference {
 
-	private String delimiter;
+	private final String delimiter;
 
 	public ListStringPreference(OsmandSettings osmandSettings, String id, String defaultValue, String delimiter) {
 		super(osmandSettings, id, defaultValue);
@@ -81,7 +81,7 @@ public class ListStringPreference extends StringPreference {
 
 	@Nullable
 	public List<String> getStringsListForProfile(ApplicationMode appMode) {
-		final String listAsString = getModeValue(appMode);
+		String listAsString = getModeValue(appMode);
 		if (listAsString != null) {
 			if (listAsString.contains(delimiter)) {
 				return Arrays.asList(listAsString.split(delimiter));

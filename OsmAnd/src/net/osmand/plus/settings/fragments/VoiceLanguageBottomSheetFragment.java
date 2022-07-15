@@ -76,7 +76,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private List<DownloadItem> voiceItemsRec;
 
 	private InfoType selectedVoiceType = InfoType.TTS;
-	private IndexItem indexToSelectAfterDownload = null;
+	private IndexItem indexToSelectAfterDownload;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
@@ -218,7 +218,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		return description;
 	}
 
-	private TextRadioItem createRadioButton(final InfoType voiceType) {
+	private TextRadioItem createRadioButton(InfoType voiceType) {
 		String title = getString(voiceType.titleRes);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
@@ -251,8 +251,8 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		boolean isTTS = selectedVoiceType == InfoType.TTS;
 
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-		for (final DownloadItem downloadItem : suggestedVoicePrompts) {
-			final IndexItem indexItem = (IndexItem) downloadItem;
+		for (DownloadItem downloadItem : suggestedVoicePrompts) {
+			IndexItem indexItem = (IndexItem) downloadItem;
 
 			View container = createVoiceItemView(indexItem, inflater);
 
@@ -260,12 +260,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), false);
 			String description = getVoiceIndexDescription(indexItem);
 
-			final TextView textDescription = container.findViewById(R.id.description);
-			final ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
-			final ImageView secondaryIcon = container.findViewById(R.id.secondary_icon);
+			TextView textDescription = container.findViewById(R.id.description);
+			ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
+			ImageView secondaryIcon = container.findViewById(R.id.secondary_icon);
 
 			boolean selected = indexItem.getBasename().equals(voiceProvider.getModeValue(getAppMode()));
-			final BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] voiceDownloadedItem = new BottomSheetItemWithCompoundButton[1];
 			voiceDownloadedItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setCompoundButtonColorId(getActiveColorId())
 					.setChecked(selected)

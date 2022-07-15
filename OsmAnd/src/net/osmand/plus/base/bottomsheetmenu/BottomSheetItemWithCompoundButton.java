@@ -20,8 +20,8 @@ import net.osmand.plus.utils.UiUtilities;
 public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescription {
 
 	private boolean checked;
-	private ColorStateList buttonTintList;
-	private OnCheckedChangeListener onCheckedChangeListener;
+	private final ColorStateList buttonTintList;
+	private final OnCheckedChangeListener onCheckedChangeListener;
 	@ColorRes private int compoundButtonColorId;
 	@ColorInt private Integer compoundButtonColor;
 
@@ -93,7 +93,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
+		compoundButton = view.findViewById(R.id.compound_button);
 		if (compoundButton != null) {
 			compoundButton.setChecked(checked);
 			compoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
@@ -113,7 +113,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 		protected ColorStateList buttonTintList;
 		protected OnCheckedChangeListener onCheckedChangeListener;
 		@ColorRes protected int compoundButtonColorId = INVALID_ID;
-		@ColorInt protected Integer compoundButtonColor = null;
+		@ColorInt protected Integer compoundButtonColor;
 
 		public Builder setChecked(boolean checked) {
 			this.checked = checked;

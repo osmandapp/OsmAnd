@@ -59,8 +59,8 @@ public class ApplicationMode {
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
-	private static List<ApplicationMode> defaultValues = new ArrayList<>();
-	private static List<ApplicationMode> values = new ArrayList<>();
+	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
+	private static final List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
 	private static StateChangedListener<String> listener;
@@ -99,11 +99,11 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_pedestrian_dark)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
-	public static final ApplicationMode TRUCK = create(ApplicationMode.CAR, R.string.app_mode_truck, "truck")
+	public static final ApplicationMode TRUCK = create(CAR, R.string.app_mode_truck, "truck")
 			.icon(R.drawable.ic_action_truck_dark)
 			.description(R.string.app_mode_truck).reg();
 
-	public static final ApplicationMode MOTORCYCLE = create(ApplicationMode.CAR, R.string.app_mode_motorcycle, "motorcycle")
+	public static final ApplicationMode MOTORCYCLE = create(CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
 
@@ -189,14 +189,14 @@ public class ApplicationMode {
 
 	private static void initRegVisibility() {
 		// CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, HORSE
-		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN,
+		ApplicationMode[] exceptDefault = {CAR, BICYCLE, PEDESTRIAN,
 				PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[] {};
+		ApplicationMode[] none = {};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
-		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
+		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
+		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(NEXT_TURN.id, navigationSet1);
 		regWidgetVisibility(SMALL_NEXT_TURN.id, navigationSet2);
@@ -559,7 +559,7 @@ public class ApplicationMode {
 		reorderAppModes();
 	}
 
-	private static void initModesParams(final OsmandApplication app) {
+	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
 			iconNameListener = new StateChangedListener<String>() {
@@ -627,7 +627,7 @@ public class ApplicationMode {
 	private static void saveCustomAppModesToSettings(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
+		Iterator<ApplicationMode> it = getCustomValues().iterator();
 		while (it.hasNext()) {
 			stringBuilder.append(it.next().getStringKey());
 			if (it.hasNext()) {
@@ -640,7 +640,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
-		ApplicationMode mode = ApplicationMode.valueOfStringKey(builder.applicationMode.stringKey, null);
+		ApplicationMode mode = valueOfStringKey(builder.applicationMode.stringKey, null);
 		if (mode != null) {
 			mode.setParentAppMode(builder.applicationMode.parentAppMode);
 			mode.setIconResName(builder.iconResName);
@@ -722,8 +722,8 @@ public class ApplicationMode {
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
-		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(ApplicationMode.values(app));
-		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
+		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
+		StringBuilder vls = new StringBuilder(DEFAULT.getStringKey() + ",");
 		if (allPossibleValues().contains(mode)) {
 			OsmandSettings settings = app.getSettings();
 			if (isSelected) {
@@ -884,15 +884,15 @@ public class ApplicationMode {
 		@Expose
 		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose
-		public Integer customIconColor = null;
+		public Integer customIconColor;
 		@Expose
-		public String routingProfile = null;
+		public String routingProfile;
 		@Expose
 		public RouteService routeService = RouteService.OSMAND;
 		@Expose
-		public LocationIcon locIcon = null;
+		public LocationIcon locIcon;
 		@Expose
-		public NavigationIcon navIcon = null;
+		public NavigationIcon navIcon;
 		@Expose
 		public int order = -1;
 		@Expose

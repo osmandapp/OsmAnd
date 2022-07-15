@@ -35,11 +35,11 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	protected static final Log LOG = PlatformUtil.getLog(OnlineRoutingEngine.class);
 
-	public final static String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
-	public final static String PREDEFINED_PREFIX = ONLINE_ROUTING_ENGINE_PREFIX + "predefined_";
+	public static final String ONLINE_ROUTING_ENGINE_PREFIX = "online_routing_engine_";
+	public static final String PREDEFINED_PREFIX = ONLINE_ROUTING_ENGINE_PREFIX + "predefined_";
 
-	public final static VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
-	public final static VehicleType NONE_VEHICLE = new VehicleType("None", R.string.shared_string_none);
+	public static final VehicleType CUSTOM_VEHICLE = new VehicleType("", R.string.shared_string_custom);
+	public static final VehicleType NONE_VEHICLE = new VehicleType("None", R.string.shared_string_none);
 
 	private final Map<String, String> params = new HashMap<>();
 	private final List<VehicleType> allowedVehicles = new ArrayList<>();

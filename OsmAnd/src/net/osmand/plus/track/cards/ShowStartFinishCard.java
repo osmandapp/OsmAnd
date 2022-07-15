@@ -32,7 +32,7 @@ public class ShowStartFinishCard extends MapBaseCard {
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.track_show_start_finish_icons);
 
-		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
+		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(trackDrawInfo.isShowStartFinish());
 
 		view.setOnClickListener(v -> {

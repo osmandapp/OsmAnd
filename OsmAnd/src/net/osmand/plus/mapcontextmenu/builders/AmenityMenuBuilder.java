@@ -72,13 +72,13 @@ import java.util.Set;
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private static final String WIKI_LINK = ".wikipedia.org/w";
-	public final static Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
-	private final static DecimalFormat DF = new DecimalFormat("#.##");
+	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	private static final DecimalFormat DF = new DecimalFormat("#.##");
 	private final MetricsConstants metricSystem;
 	private final Amenity amenity;
 
 
-	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
+	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
 		setAmenity(amenity);
@@ -96,7 +96,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix, String socialMediaUrl,
-	                      boolean collapsable, final CollapsableView collapsableView,
+	                      boolean collapsable, CollapsableView collapsableView,
 	                      int textColor, boolean isWiki, boolean isText, boolean needLinks,
 	                      boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
 		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, socialMediaUrl,
@@ -104,9 +104,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
 	}
 
-	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
-	                        final String socialMediaUrl, boolean collapsable,
-	                        final CollapsableView collapsableView, int textColor, boolean isWiki,
+	protected void buildRow(View view, Drawable icon, String text, String textPrefix,
+	                        String socialMediaUrl, boolean collapsable,
+	                        CollapsableView collapsableView, int textColor, boolean isWiki,
 	                        boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
 	                        boolean matchWidthDivider, int textLinesLimit) {
 
@@ -170,7 +170,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(app.getResources().getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
 			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
@@ -210,7 +210,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textView.setMaxLines(10);
 		}
 		if (textColor > 0) {
-			textView.setTextColor(view.getResources().getColor(textColor));
+			textView.setTextColor(getColor(textColor));
 		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -223,7 +223,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 		llText.addView(textView);
 
-		final ImageView iconViewCollapse = new ImageView(view.getContext());
+		ImageView iconViewCollapse = new ImageView(view.getContext());
 		if (collapsable && collapsableView != null) {
 			// Icon
 			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
@@ -394,7 +394,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						lng = "en";
 					}
 
-					final String langSelected = lng;
+					String langSelected = lng;
 					String content = amenity.getDescription(langSelected);
 					vl = (content != null) ? WikiArticleHelper.getPartialContent(content) : "";
 					vl = vl == null ? "" : vl;
@@ -653,8 +653,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildNearestWiki(ViewGroup viewGroup) {
-		final int position = viewGroup.getChildCount();
-		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+		int position = viewGroup.getChildCount();
+		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
 		buildNearestWikiRow(viewGroup, new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
@@ -686,8 +686,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildNearestPoi(ViewGroup viewGroup) {
-		final int position = viewGroup.getChildCount();
-		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+		int position = viewGroup.getChildCount();
+		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
 		buildNearestPoiRow(new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
@@ -849,15 +849,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		return additionalInfo;
 	}
 
-	private CollapsableView getPoiTypeCollapsableView(final Context context, boolean collapsed,
-	                                                  @NonNull final List<PoiType> categoryTypes,
-	                                                  final boolean poiAdditional, AmenityInfoRow textRow) {
+	private CollapsableView getPoiTypeCollapsableView(Context context, boolean collapsed,
+	                                                  @NonNull List<PoiType> categoryTypes,
+	                                                  boolean poiAdditional, AmenityInfoRow textRow) {
 
-		final List<TextViewEx> buttons = new ArrayList<>();
+		List<TextViewEx> buttons = new ArrayList<>();
 
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
-		for (final PoiType pt : categoryTypes) {
+		for (PoiType pt : categoryTypes) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
 			String name = pt.getTranslation();
 			button.setText(name);
@@ -895,7 +895,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		if (categoryTypes.size() > 4) {
-			final TextViewEx button = buildButtonInCollapsableView(context, false, true);
+			TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
 			button.setOnClickListener(v -> {
 				for (TextViewEx b : buttons) {

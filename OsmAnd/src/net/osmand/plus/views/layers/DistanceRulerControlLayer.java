@@ -71,7 +71,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
 		app = getApplication();
@@ -141,7 +141,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			lineAttrs.updatePaints(app, settings, tb);
 			lineFontAttrs.updatePaints(app, settings, tb);
 			lineFontAttrs.paint.setStyle(Style.FILL);
-			final long currentTime = System.currentTimeMillis();
+			long currentTime = System.currentTimeMillis();
 
 			if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
 				cacheMultiTouchEndTime = view.getMultiTouchEndTime();

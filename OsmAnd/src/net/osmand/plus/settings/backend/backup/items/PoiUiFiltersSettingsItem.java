@@ -146,7 +146,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 				HashMap<String, LinkedHashSet<String>> acceptedTypes = gson.fromJson(acceptedTypesString, type);
 				Map<PoiCategory, LinkedHashSet<String>> acceptedTypesDone = new HashMap<>();
 				for (Map.Entry<String, LinkedHashSet<String>> mapItem : acceptedTypes.entrySet()) {
-					final PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
+					PoiCategory a = poiTypes.getPoiCategoryByName(mapItem.getKey());
 					acceptedTypesDone.put(a, mapItem.getValue());
 				}
 				PoiUIFilter filter = new PoiUIFilter(name, filterId, acceptedTypesDone, app);

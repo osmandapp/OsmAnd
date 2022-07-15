@@ -61,11 +61,11 @@ public class RoutingHelper {
 	private final RouteRecalculationHelper routeRecalculationHelper;
 	private final TransportRoutingHelper transportRoutingHelper;
 
-	private boolean isFollowingMode = false;
-	private boolean isRoutePlanningMode = false;
-	private boolean isPauseNavigation = false;
+	private boolean isFollowingMode;
+	private boolean isRoutePlanningMode;
+	private boolean isPauseNavigation;
 
-	private GPXRouteParamsBuilder currentGPXRoute = null;
+	private GPXRouteParamsBuilder currentGPXRoute;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
 
@@ -75,13 +75,13 @@ public class RoutingHelper {
 	private Location lastFixedLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
-	private boolean deviceHasBearing = false;
+	private boolean deviceHasBearing;
 
-	private boolean isDeviatedFromRoute = false;
-	private long deviateFromRouteDetected = 0;
+	private boolean isDeviatedFromRoute;
+	private long deviateFromRouteDetected;
 	//private long wrongMovementDetected = 0;
-	private boolean voiceRouterStopped = false;
-	private long lastCarNavUpdateTime = 0;
+	private boolean voiceRouterStopped;
+	private long lastCarNavUpdateTime;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
@@ -259,7 +259,7 @@ public class RoutingHelper {
 		});
 	}
 
-	void newRouteCalculated(final boolean newRoute, final RouteCalculationResult res) {
+	void newRouteCalculated(boolean newRoute, RouteCalculationResult res) {
 		app.logRoutingEvent("newRouteCalculated newRoute " + newRoute + " res " + res);
 		app.runInUIThread(() -> {
 			ValueHolder<Boolean> showToast = new ValueHolder<>();
@@ -420,7 +420,7 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
 				if (allowableDeviation <= 0) {
-					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
+					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
 				// 2. Analyze if we need to recalculate route
@@ -858,7 +858,7 @@ public class RoutingHelper {
 		return routeRecalculationHelper.isRouteBeingCalculated();
 	}
 
-	private void showMessage(final String msg) {
+	private void showMessage(String msg) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

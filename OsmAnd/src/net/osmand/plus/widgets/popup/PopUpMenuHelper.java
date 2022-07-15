@@ -19,13 +19,13 @@ import java.util.List;
 
 public class PopUpMenuHelper {
 
-	private View anchorView;
-	private List<PopUpMenuItem> items;
-	private PopUpMenuWidthType widthType;
+	private final View anchorView;
+	private final List<PopUpMenuItem> items;
+	private final PopUpMenuWidthType widthType;
 	@ColorInt
-	private int backgroundColor;
-	private AdapterView.OnItemClickListener listener;
-	private boolean nightMode;
+	private final int backgroundColor;
+	private final AdapterView.OnItemClickListener listener;
+	private final boolean nightMode;
 
 	private PopUpMenuHelper(@NonNull View anchorView,
 	                        @NonNull List<PopUpMenuItem> items,
@@ -73,9 +73,9 @@ public class PopUpMenuHelper {
 
 		PopUpMenuArrayAdapter adapter =
 				new PopUpMenuArrayAdapter(ctx, R.layout.popup_menu_item, items, nightMode);
-		final ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);
+		ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);
 		listPopupWindow.setAnchorView(anchorView);
-		listPopupWindow.setContentWidth((int) (totalWidth));
+		listPopupWindow.setContentWidth(totalWidth);
 		listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
 		listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
 		listPopupWindow.setModal(true);
@@ -102,13 +102,13 @@ public class PopUpMenuHelper {
 	}
 
 	public static class Builder {
-		private View anchorView;
-		private List<PopUpMenuItem> items;
+		private final View anchorView;
+		private final List<PopUpMenuItem> items;
 		@ColorInt
 		private int backgroundColor;
 		private AdapterView.OnItemClickListener listener;
 		private PopUpMenuWidthType widthType = PopUpMenuWidthType.AS_ANCHOR_VIEW;
-		private boolean nightMode;
+		private final boolean nightMode;
 
 		public Builder(View anchorView, List<PopUpMenuItem> items, boolean nightMode) {
 			this.anchorView = anchorView;

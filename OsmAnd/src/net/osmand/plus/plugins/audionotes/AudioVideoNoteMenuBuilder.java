@@ -25,7 +25,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
 	private final Recording recording;
 
-	public AudioVideoNoteMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Recording recording) {
+	public AudioVideoNoteMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Recording recording) {
 		super(mapActivity);
 		this.recording = recording;
 	}
@@ -69,7 +69,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	protected void buildImageRow(final View view, Bitmap bitmap, OnClickListener onClickListener) {
+	protected void buildImageRow(View view, Bitmap bitmap, OnClickListener onClickListener) {
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

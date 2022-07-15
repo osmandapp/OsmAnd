@@ -53,8 +53,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	private Float[] entryValues;
 	private float currentValue;
-	private boolean enabled = false;
-	private boolean sliderPositionChanged = false;
+	private boolean enabled;
+	private boolean sliderPositionChanged;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		getPreferenceStateAndValue();
 
-		final SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
+		SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
 		if (switchPref == null) {
 			return;
 		}
@@ -84,14 +84,14 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 			entryValues = new Float[]{9.1f, 18.3f, 30.5f, 45.7f, 91.5f, 183.0f, 482.0f, 965.0f, 1609.0f};
 		}
 
-		final int appModeColor = appMode.getProfileColor(nightMode);
-		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		int appModeColor = appMode.getProfileColor(nightMode);
+		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
+		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 
 		String title = getString(R.string.recalculate_route_in_deviation);
 		items.add(new TitleItem(title));
 
-		final View sliderView = UiUtilities.getInflater(getContext(), nightMode)
+		View sliderView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
 		slider = sliderView.findViewById(R.id.slider);
 		tvSliderTitle = sliderView.findViewById(android.R.id.title);
@@ -102,9 +102,9 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		slider.setStepSize(1);
 		updateSliderView();
 
-		final String on = getString(R.string.shared_string_enabled);
-		final String off = getString(R.string.shared_string_disabled);
-		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
+		String on = getString(R.string.shared_string_enabled);
+		String off = getString(R.string.shared_string_disabled);
+		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(enabled)
 				.setCompoundButtonColor(appModeColor)

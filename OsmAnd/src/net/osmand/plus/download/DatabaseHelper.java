@@ -20,7 +20,7 @@ public class DatabaseHelper {
     private static final String DOWNLOAD_TABLE_CREATE =   "CREATE TABLE " + DOWNLOADS_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
             HISTORY_COL_NAME + " TEXT, " + HISTORY_COL_COUNT + " long);"; //$NON-NLS-1$ //$NON-NLS-2$
 
-    private OsmandApplication app;
+    private final OsmandApplication app;
 
     public static class HistoryDownloadEntry {
     	int count;

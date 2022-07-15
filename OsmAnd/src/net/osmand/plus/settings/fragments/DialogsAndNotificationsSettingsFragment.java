@@ -20,13 +20,13 @@ public class DialogsAndNotificationsSettingsFragment extends BaseSettingsFragmen
 
 	private void setupShowStartupMessagesPref() {
 		boolean enabled = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get(); // pref ui was inverted
-		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
+		SwitchPreferenceCompat sendAnonymousData = findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
 		sendAnonymousData.setChecked(enabled);
 		sendAnonymousData.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
 	private void setupShowDownloadMapDialogPref() {
-		SwitchPreferenceCompat showDownloadMapDialog = (SwitchPreferenceCompat) findPreference(settings.SHOW_DOWNLOAD_MAP_DIALOG.getId());
+		SwitchPreferenceCompat showDownloadMapDialog = findPreference(settings.SHOW_DOWNLOAD_MAP_DIALOG.getId());
 		showDownloadMapDialog.setIcon(getPersistentPrefIcon(R.drawable.ic_action_import));
 	}
 

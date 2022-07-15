@@ -33,8 +33,8 @@ import java.util.Map;
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
-	private final static String KEY_UNDERLAYS = "underlays";
-	private final static String KEY_NO_UNDERLAY = "no_underlay";
+	private static final String KEY_UNDERLAYS = "underlays";
+	private static final String KEY_NO_UNDERLAY = "no_underlay";
 	public static final QuickActionType TYPE = new QuickActionType(16,
 			"mapunderlay.change", MapUnderlayAction.class).
 			nameRes(R.string.quick_action_map_underlay).iconRes(R.drawable.ic_layer_bottom).
@@ -173,7 +173,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected View.OnClickListener getOnAddBtnClickListener(final MapActivity activity, final Adapter adapter) {
+	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return view -> {
 			OsmandApplication app = activity.getMyApplication();
 
@@ -184,15 +184,15 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
-			final String[] items = new String[entriesMap.size()];
+			ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+			String[] items = new String[entriesMap.size()];
 			int i = 0;
 
 			for (String it : entriesMap.values()) {
 				items[i++] = it;
 			}
 
-			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
+			ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 			arrayAdapter.addAll(items);
 			builder.setAdapter(arrayAdapter, (dialog, i1) -> {
 

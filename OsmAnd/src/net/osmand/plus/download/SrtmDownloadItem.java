@@ -149,7 +149,8 @@ public class SrtmDownloadItem extends DownloadItem {
 	}
 
 	@Override
-	public @Nullable String getAdditionalDescription(Context ctx) {
+	@Nullable
+	public String getAdditionalDescription(Context ctx) {
 		return getAbbreviationInScopes(ctx, this);
 	}
 

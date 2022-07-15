@@ -50,16 +50,16 @@ public class SearchAddressFragment extends Fragment {
 	private Button countryButton;
 	private Button buildingButton;
 	
-	private String region = null;
-	private String city = null;
-	private String postcode = null;
-	private String street = null;
-	private String building = null;
-	private String street2 = null;
+	private String region;
+	private String city;
+	private String postcode;
+	private String street;
+	private String building;
+	private String street2;
 	private boolean radioBuilding = true;
 	
 	private OsmandSettings osmandSettings;
-	private LatLon searchPoint = null;
+	private LatLon searchPoint;
 
 	private View view;
 
@@ -183,7 +183,7 @@ public class SearchAddressFragment extends Fragment {
 		});
 		OsmandApplication app = getApplication();
 		Drawable icon = getApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark);
-		((ImageView)findViewById(R.id.ResetBuilding)).setBackgroundDrawable(icon);
+		findViewById(R.id.ResetBuilding).setBackground(icon);
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -194,7 +194,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
-		((ImageView)findViewById(R.id.ResetStreet)).setBackgroundDrawable(icon);
+		findViewById(R.id.ResetStreet).setBackground(icon);
 		 findViewById(R.id.ResetStreet).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -207,7 +207,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
-		 ((ImageView)findViewById(R.id.ResetCity)).setBackgroundDrawable(icon);
+		 findViewById(R.id.ResetCity).setBackground(icon);
 		 findViewById(R.id.ResetCity).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -222,7 +222,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
-		 ((ImageView)findViewById(R.id.ResetCountry)).setBackgroundDrawable(icon);
+		 findViewById(R.id.ResetCountry).setBackground(icon);
 		 findViewById(R.id.ResetCountry).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {

@@ -23,17 +23,17 @@ public class DoubleTapScaleDetector {
 	private final DoubleTapZoomListener listener;
 	protected final OsmandMapTileView view;
 
-	private int displayHeightPx;
-	private PointF centerScreen;
+	private final int displayHeightPx;
+	private final PointF centerScreen;
 	private PointF zoomCenter;
 
-	private boolean mIsInZoomMode = false;
+	private boolean mIsInZoomMode;
 	private float scale;
 	private MotionEvent firstDown;
 	private MotionEvent firstUp;
 	private MotionEvent secondDown;
-	private int mTouchSlopSquare;
-	private int mDoubleTapSlopSquare;
+	private final int mTouchSlopSquare;
+	private final int mDoubleTapSlopSquare;
 	private boolean mIsDoubleTapping;
 	private boolean mScrolling;
 
@@ -46,7 +46,7 @@ public class DoubleTapScaleDetector {
 		displayHeightPx = tileBox.getPixHeight();
 		zoomCenter = new PointF(centerScreen.x, centerScreen.y);
 
-		final ViewConfiguration configuration = ViewConfiguration.get(view.getMapActivity());
+		ViewConfiguration configuration = ViewConfiguration.get(view.getMapActivity());
 		int touchSlop = configuration.getScaledTouchSlop();
 		mTouchSlopSquare = touchSlop * touchSlop;
 		int doubleTapSlop = (int) (configuration.getScaledDoubleTapSlop() * 0.5);

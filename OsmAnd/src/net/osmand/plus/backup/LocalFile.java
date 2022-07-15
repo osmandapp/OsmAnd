@@ -13,10 +13,10 @@ public class LocalFile {
 	@Nullable
 	public File file;
 	public String fileName;
-	public long uploadTime = 0;
-	public long localModifiedTime = 0;
+	public long uploadTime;
+	public long localModifiedTime;
 
-	private String name = null;
+	private String name;
 	private int sz = -1;
 
 	public SettingsItem item;

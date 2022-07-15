@@ -142,7 +142,7 @@ public class ObservableScrollView extends ScrollView implements Scrollable {
                         }
 
                         // Apps can set the interception target other than the direct parent.
-                        final ViewGroup parent;
+                        ViewGroup parent;
                         if (mTouchInterceptionViewGroup == null) {
                             parent = (ViewGroup) getParent();
                         } else {
@@ -157,7 +157,7 @@ public class ObservableScrollView extends ScrollView implements Scrollable {
                             offsetX += v.getLeft() - v.getScrollX();
                             offsetY += v.getTop() - v.getScrollY();
                         }
-                        final MotionEvent event = MotionEvent.obtainNoHistory(ev);
+                        MotionEvent event = MotionEvent.obtainNoHistory(ev);
                         event.offsetLocation(offsetX, offsetY);
 
                         if (parent.onInterceptTouchEvent(event)) {

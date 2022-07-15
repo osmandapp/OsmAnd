@@ -53,7 +53,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		final MapActivity mapActivity = requireMapActivity();
+		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getTrackDetailsMenu();
 
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -88,7 +88,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 
 		mainView = view.findViewById(R.id.main_view);
 
-		TextView topBarTitle = (TextView) mainView.findViewById(R.id.top_bar_title);
+		TextView topBarTitle = mainView.findViewById(R.id.top_bar_title);
 		if (topBarTitle != null) {
 			if (menu.getGpxItem().group != null) {
 				topBarTitle.setText(menu.getGpxItem().group.getGpxName());
@@ -97,8 +97,8 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			}
 		}
 
-		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
-		ImageButton closeButton = (ImageButton) mainView.findViewById(R.id.top_bar_close_button);
+		ImageButton backButton = mainView.findViewById(R.id.top_bar_back_button);
+		ImageButton closeButton = mainView.findViewById(R.id.top_bar_close_button);
 		if (backButton != null) {
 			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -120,7 +120,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 		}
 
 		MapContextMenu contextMenu = mapActivity.getContextMenu();
-		final boolean forceFitTrackOnMap;
+		boolean forceFitTrackOnMap;
 		if (contextMenu.isActive()) {
 			forceFitTrackOnMap = !(contextMenu.getPointDescription() != null && contextMenu.getPointDescription().isGpxPoint());
 		} else {
@@ -134,11 +134,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			@Override
 			public void onGlobalLayout() {
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
+				obs.removeOnGlobalLayoutListener(this);
 				if (getMapActivity() != null) {
 					updateInfo(forceFitTrackOnMap);
 				}
@@ -190,7 +186,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	@Override
-	public void updateLocation(final Location location) {
+	public void updateLocation(Location location) {
 		if (location != null && !MapUtils.areLatLonEqual(menu.getMyLocation(), location)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
@@ -262,21 +258,21 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			if (!landscapeLayout) {
 				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 			} else {
-				final TypedValue typedValueAttr = new TypedValue();
+				TypedValue typedValueAttr = new TypedValue();
 				int bgAttrId = AndroidUtils.isLayoutRtl(ctx) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 				ctx.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 				mainView.setBackgroundResource(typedValueAttr.resourceId);
 			}
 
-			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);
-			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.x_axis_title), nightMode);
+			AndroidUtils.setTextPrimaryColor(ctx, mainView.findViewById(R.id.y_axis_title), nightMode);
+			AndroidUtils.setTextPrimaryColor(ctx, mainView.findViewById(R.id.x_axis_title), nightMode);
 
-			ImageView yAxisArrow = (ImageView) mainView.findViewById(R.id.y_axis_arrow);
-			ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
+			ImageView yAxisArrow = mainView.findViewById(R.id.y_axis_arrow);
+			ImageView xAxisArrow = mainView.findViewById(R.id.x_axis_arrow);
 			yAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
 			xAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
 
-			ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
+			ImageButton backButton = mainView.findViewById(R.id.top_bar_back_button);
 			if (backButton != null) {
 				Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(ctx), R.color.color_white);
 				backButton.setImageDrawable(icBack);

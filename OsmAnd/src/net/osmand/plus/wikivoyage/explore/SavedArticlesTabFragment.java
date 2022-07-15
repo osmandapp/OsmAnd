@@ -42,10 +42,10 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = requireMyApplication();
+		OsmandApplication app = requireMyApplication();
 		dataHelper = app.getTravelHelper().getBookmarksHelper();
 
-		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
+		View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 
 		adapter = new SavedArticlesRvAdapter(app);
 		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
@@ -66,7 +66,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 			}
 		});
 
-		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		RecyclerView rv = mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 
@@ -121,8 +121,8 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 	private static class SavedArticlesDiffCallback extends DiffUtil.Callback {
 
-		private List<Object> oldItems;
-		private List<Object> newItems;
+		private final List<Object> oldItems;
+		private final List<Object> newItems;
 
 		SavedArticlesDiffCallback(List<Object> oldItems, List<Object> newItems) {
 			this.oldItems = oldItems;

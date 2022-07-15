@@ -64,11 +64,11 @@ public abstract class InAppPurchaseHelper {
 	protected boolean isDeveloperVersion;
 	protected String token = "";
 	protected InAppPurchaseTaskType activeTask;
-	protected boolean processingTask = false;
-	protected boolean inventoryRequestPending = false;
+	protected boolean processingTask;
+	protected boolean inventoryRequestPending;
 
 	protected OsmandApplication ctx;
-	protected InAppPurchaseListener uiActivity = null;
+	protected InAppPurchaseListener uiActivity;
 
 	protected long lastPromoCheckTime;
 	protected boolean promoRequested;
@@ -95,8 +95,8 @@ public abstract class InAppPurchaseHelper {
 
 	static class SubscriptionStateHolder {
 		SubscriptionState state = SubscriptionState.UNDEFINED;
-		long startTime = 0;
-		long expireTime = 0;
+		long startTime;
+		long expireTime;
 	}
 
 	public enum InAppPurchaseTaskType {
@@ -290,7 +290,7 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);
+	public abstract void isInAppPurchaseSupported(@NonNull Activity activity, @Nullable InAppPurchaseInitCallback callback);
 
 	public boolean hasInventory() {
 		return lastValidationCheckTime != 0;
@@ -333,7 +333,7 @@ public abstract class InAppPurchaseHelper {
 		return false;
 	}
 
-	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
+	protected void exec(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command) {
 		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei() && !Version.isAmazon())) {
 			notifyDismissProgress(taskType);
 			stop(true);
@@ -370,7 +370,7 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	protected abstract void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppCommand command);
+	protected abstract void execImpl(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command);
 
 	public boolean needRequestInventory() {
 		return !inventoryRequested && ((isSubscribedToAny(ctx) && Algorithms.isEmpty(ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get()))
@@ -387,16 +387,16 @@ public abstract class InAppPurchaseHelper {
 		new CheckPromoTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	public abstract void purchaseFullVersion(@NonNull final Activity activity) throws UnsupportedOperationException;
+	public abstract void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException;
 
 	public void purchaseSubscription(@NonNull Activity activity, String sku) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 		new SubscriptionPurchaseTask(activity, sku).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	public abstract void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException;
+	public abstract void purchaseDepthContours(@NonNull Activity activity) throws UnsupportedOperationException;
 
-	public abstract void purchaseContourLines(@NonNull final Activity activity) throws UnsupportedOperationException;
+	public abstract void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException;
 
 	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
 
@@ -485,7 +485,7 @@ public abstract class InAppPurchaseHelper {
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 			if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(token)) {
 				logDebug("Launching purchase flow for " + sku + " subscription for userId=" + userId);
-				final String userInfo = userId + " " + token;
+				String userInfo = userId + " " + token;
 				exec(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION, getPurchaseSubscriptionCommand(activity, sku, userInfo));
 			} else {
 				notifyError(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION, "Empty userId");
@@ -494,8 +494,8 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	protected abstract InAppCommand getPurchaseSubscriptionCommand(final WeakReference<Activity> activity,
-																   final String sku, final String userInfo) throws UnsupportedOperationException;
+	protected abstract InAppCommand getPurchaseSubscriptionCommand(WeakReference<Activity> activity,
+	                                                               String sku, String userInfo) throws UnsupportedOperationException;
 
 	@SuppressLint("StaticFieldLeak")
 	private class RequestInventoryTask extends AsyncTask<Void, Void, String[]> {
@@ -718,7 +718,7 @@ public abstract class InAppPurchaseHelper {
 	protected abstract InAppCommand getRequestInventoryCommand(boolean userRequested) throws UnsupportedOperationException;
 
 	protected void onSkuDetailsResponseDone(@NonNull List<PurchaseInfo> purchaseInfoList, boolean userRequested) {
-		final OnRequestResultListener listener = new OnRequestResultListener() {
+		OnRequestResultListener listener = new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
 				notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
@@ -754,9 +754,9 @@ public abstract class InAppPurchaseHelper {
 		InAppPurchase depthContours = getDepthContours();
 		InAppPurchase contourLines = getContourLines();
 		if (subscription != null) {
-			final boolean maps = purchases.isMapsSubscription(subscription);
-			final boolean liveUpdates = purchases.isLiveUpdatesSubscription(subscription);
-			final boolean pro = purchases.isOsmAndProSubscription(subscription);
+			boolean maps = purchases.isMapsSubscription(subscription);
+			boolean liveUpdates = purchases.isLiveUpdatesSubscription(subscription);
+			boolean pro = purchases.isOsmAndProSubscription(subscription);
 			// bought live updates
 			if (maps) {
 				logDebug("Maps subscription purchased.");
@@ -765,7 +765,7 @@ public abstract class InAppPurchaseHelper {
 			} else if (pro) {
 				logDebug("OsmAnd Pro subscription purchased.");
 			}
-			final String sku = subscription.getSku();
+			String sku = subscription.getSku();
 			subscription.setPurchaseState(PurchaseState.PURCHASED);
 			subscription.setPurchaseInfo(ctx, info);
 			subscription.setState(ctx, SubscriptionState.UNDEFINED);
@@ -877,14 +877,14 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	protected void sendTokens(@NonNull final List<PurchaseInfo> purchaseInfoList, final OnRequestResultListener listener) {
-		final String userId = ctx.getSettings().BILLING_USER_ID.get();
-		final String token = ctx.getSettings().BILLING_USER_TOKEN.get();
-		final String email = ctx.getSettings().BILLING_USER_EMAIL.get();
+	protected void sendTokens(@NonNull List<PurchaseInfo> purchaseInfoList, OnRequestResultListener listener) {
+		String userId = ctx.getSettings().BILLING_USER_ID.get();
+		String token = ctx.getSettings().BILLING_USER_TOKEN.get();
+		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
 		try {
 			String url = "https://osmand.net/subscription/purchased";
 			String userOperation = "Sending purchase info...";
-			final List<Request> requests = new ArrayList<>();
+			List<Request> requests = new ArrayList<>();
 			for (PurchaseInfo info : purchaseInfoList) {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("userid", userId);
@@ -919,13 +919,13 @@ public abstract class InAppPurchaseHelper {
 									if (obj.has("error")) {
 										complain("SendToken Error: "
 												+ obj.getString("error")
-												+ " (response=" + result + " google=" + info.toString() + ")");
+												+ " (response=" + result + " google=" + info + ")");
 									}
 								} catch (JSONException e) {
 									logError("SendToken", e);
 									complain("SendToken Error: "
 											+ (e.getMessage() != null ? e.getMessage() : "JSONException")
-											+ " (response=" + result + " google=" + info.toString() + ")");
+											+ " (response=" + result + " google=" + info + ")");
 								}
 							}
 						}
@@ -1010,7 +1010,7 @@ public abstract class InAppPurchaseHelper {
 		showToast(message);
 	}
 
-	protected void showToast(final String message) {
+	protected void showToast(String message) {
 		ctx.showToastMessage(message);
 	}
 

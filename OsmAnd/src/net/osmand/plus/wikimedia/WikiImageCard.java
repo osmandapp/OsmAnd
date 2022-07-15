@@ -9,8 +9,8 @@ import net.osmand.util.Algorithms;
 
 public class WikiImageCard extends ImageCard {
 
-	public WikiImageCard(final MapActivity mapActivity,
-	                     final WikiImage wikiImage) {
+	public WikiImageCard(MapActivity mapActivity,
+	                     WikiImage wikiImage) {
 		super(mapActivity, null);
 
 		if (topIconId == 0) {

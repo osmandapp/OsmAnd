@@ -15,12 +15,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class XMasDialogFragment extends DialogFragment {
 
 	public static final String TAG = "XMasDialogFragment";
-	private static boolean XmasDialogWasProcessed = false;
+	private static boolean XmasDialogWasProcessed;
 
 	public static boolean shouldShowXmasDialog(OsmandApplication app) {
 		if (XmasDialogWasProcessed || app.getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get()) {
@@ -29,8 +30,8 @@ public class XMasDialogFragment extends DialogFragment {
 		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
 		if (numberOfStarts > 2) {
 			Date now = new Date();
-			Date start = new Date(now.getYear(), 11, 5, 0, 0);
-			Date end = new Date(now.getYear(), 11, 25, 23, 59);
+			Date start = createDateInCurrentYear(Calendar.DECEMBER, 5, 0, 0);
+			Date end = createDateInCurrentYear(Calendar.DECEMBER, 25, 23, 59);
 			int firstShownX = app.getSettings().NUMBER_OF_STARTS_FIRST_XMAS_SHOWN.get();
 			if (now.after(start) && now.before(end)) {
 				if (firstShownX == 0 || numberOfStarts - firstShownX == 3 || numberOfStarts - firstShownX == 10) {
@@ -52,14 +53,23 @@ public class XMasDialogFragment extends DialogFragment {
 		return true;
 	}
 
+	private static Date createDateInCurrentYear(int month, int date, int hour, int minute) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DATE, date);
+		calendar.set(Calendar.HOUR, hour);
+		calendar.set(Calendar.MINUTE, minute);
+		return calendar.getTime();
+	}
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		XmasDialogWasProcessed = true;
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 
-		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity, R.style.XmasDialogTheme);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity, R.style.XmasDialogTheme);
 		View titleView = mapActivity.getLayoutInflater().inflate(R.layout.xmas_dialog_title, null);
 		builder.setCustomTitle(titleView);
 		builder.setCancelable(true);
@@ -89,11 +99,11 @@ public class XMasDialogFragment extends DialogFragment {
 			public void onShow(DialogInterface dialog) {
 				// Customize POSITIVE, NEGATIVE and NEUTRAL buttons.
 				Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-				positiveButton.setTextColor(mapActivity.getResources().getColor(R.color.color_white));
+				positiveButton.setTextColor(mapActivity.getColor(R.color.color_white));
 				positiveButton.invalidate();
 
 				Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-				negativeButton.setTextColor(mapActivity.getResources().getColor(R.color.color_white));
+				negativeButton.setTextColor(mapActivity.getColor(R.color.color_white));
 				negativeButton.invalidate();
 			}
 		});

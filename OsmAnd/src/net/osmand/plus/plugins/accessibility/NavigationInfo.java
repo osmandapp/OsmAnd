@@ -52,13 +52,13 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 
 		// The argument must be not null as well as the currentLocation
 		// and currentLocation must have bearing.
-		public RelativeDirection(final Location point) {
+		public RelativeDirection(Location point) {
 			style = settings.DIRECTION_STYLE.get();
 			value = directionTo(point, currentLocation.getBearing());
 		}
 
 		// The first argument must be not null as well as the currentLocation.
-		public RelativeDirection(final Location point, float heading) {
+		public RelativeDirection(Location point, float heading) {
 			style = settings.DIRECTION_STYLE.get();
 			value = directionTo(point, heading);
 		}
@@ -68,14 +68,14 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		}
 
 		// The first argument must be not null as well as the currentLocation.
-		public boolean update(final Location point, float heading) {
+		public boolean update(Location point, float heading) {
 			boolean result = false;
-			final RelativeDirectionStyle newStyle = settings.DIRECTION_STYLE.get();
+			RelativeDirectionStyle newStyle = settings.DIRECTION_STYLE.get();
 			if (style != newStyle) {
 				style = newStyle;
 				result = true;
 			}
-			final int newValue = directionTo(point, heading);
+			int newValue = directionTo(point, heading);
 			if (value != newValue) {
 				value = newValue;
 				result = true;
@@ -85,7 +85,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 
 		// The argument must be not null as well as the currentLocation
 		// and currentLocation must have bearing.
-		public boolean update(final Location point) {
+		public boolean update(Location point) {
 			return update(point, currentLocation.getBearing());
 		}
 
@@ -105,8 +105,8 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		public Integer getInclination() {
 			if (value < 0) // unknown direction
 				return null;
-			final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
-			final int halfRound = nSectors / 2;
+			int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
+			int halfRound = nSectors / 2;
 			if (value == halfRound) // opposite direction
 				return null;
 			if (value > halfRound)
@@ -119,9 +119,9 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		}
 
 		// The first argument must be not null as well as the currentLocation.
-		private int directionTo(final Location point, float heading) {
-			final float bearing = currentLocation.bearingTo(point) - heading;
-			final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
+		private int directionTo(Location point, float heading) {
+			float bearing = currentLocation.bearingTo(point) - heading;
+			int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
 			int sector = Math.round(Math.abs(bearing) * (float) nSectors / FULL_CIRCLE) % nSectors;
 			if ((bearing < 0) && (sector != 0))
 				sector = nSectors - sector;
@@ -147,13 +147,13 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			R.string.north_west,
 			R.string.north_north_west};
 
-	private final long HAPTIC_INCLINATION_LEFT[] = { 0, 60 };
-	private final long HAPTIC_INCLINATION_RIGHT[] = { 0, 20, 80, 20 };
+	private final long[] HAPTIC_INCLINATION_LEFT = { 0, 60 };
+	private final long[] HAPTIC_INCLINATION_RIGHT = { 0, 20, 80, 20 };
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private Location currentLocation;
-	private RelativeDirection lastDirection;
+	private final RelativeDirection lastDirection;
 	private long lastNotificationTime;
 	private volatile boolean autoAnnounce;
 	private volatile boolean targetDirectionFlag;
@@ -173,7 +173,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	}
 
 	// The argument must be not null as well as the currentLocation
-	private String distanceString(final Location point) {
+	private String distanceString(Location point) {
 		return OsmAndFormatter.getFormattedDistance(currentLocation.distanceTo(point), app);
 	}
 
@@ -186,7 +186,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	}
 
 	// Get distance and direction string for specified point
-	public synchronized String getDirectionString(final LatLon apoint, Float heading) {
+	public synchronized String getDirectionString(LatLon apoint, Float heading) {
 		if ((currentLocation != null) && (apoint != null)) {
 			Location point = new Location("");
 			point.setLatitude(apoint.getLatitude());
@@ -249,16 +249,16 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	public synchronized void updateLocation(Location location) {
 		currentLocation = location;
 		if (autoAnnounce && app.accessibilityEnabled()) {
-			final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
+			TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 			if (point != null) {
 				if ((currentLocation != null) && currentLocation.hasBearing() && !MapViewTrackingUtilities.isSmallSpeedForCompass(currentLocation)) {
-					final long now = SystemClock.uptimeMillis();
+					long now = SystemClock.uptimeMillis();
 					if ((now - lastNotificationTime) >= settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
 						Location destination = new Location("map"); //$NON-NLS-1$
 						destination.setLatitude(point.getLatitude());
 						destination.setLongitude(point.getLongitude());
 						if (lastDirection.update(destination) || !settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
-							final String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
+							String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
 							lastNotificationTime = now;
 							app.runInUIThread(new Runnable() {
 								@Override
@@ -275,7 +275,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		}
 	}
 
-	public synchronized void updateTargetDirection(final Location point, float heading) {
+	public synchronized void updateTargetDirection(Location point, float heading) {
 		if ((currentLocation != null) && (point != null)) {
 			RelativeDirection direction = new RelativeDirection(point, heading);
 			Integer inclination = direction.getInclination();
@@ -311,7 +311,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		}
 	}
 
-	public synchronized void updateTargetDirection(final LatLon point, float heading) {
+	public synchronized void updateTargetDirection(LatLon point, float heading) {
 		if (point != null) {
 			Location destination = new Location("map"); //$NON-NLS-1$
 			destination.setLatitude(point.getLatitude());
@@ -337,8 +337,8 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	}
 
 	// Show all available info
-	public void show(final TargetPoint point, Float heading, Context ctx) {
-		final List<String> attributes = new ArrayList<String>();
+	public void show(TargetPoint point, Float heading, Context ctx) {
+		List<String> attributes = new ArrayList<String>();
 		String item;
 
 		item = getDirectionString(point == null ? null : point.point, heading);

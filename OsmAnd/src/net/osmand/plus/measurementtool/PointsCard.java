@@ -15,7 +15,7 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 public class PointsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private MeasurementToolAdapter adapter;
-	private MeasurementToolFragment fragment;
+	private final MeasurementToolFragment fragment;
 
 	public PointsCard(@NonNull MapActivity mapActivity, MeasurementToolFragment fragment) {
 		super(mapActivity);

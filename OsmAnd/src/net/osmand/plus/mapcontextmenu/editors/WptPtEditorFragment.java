@@ -64,7 +64,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void onCreate(final Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		savingTrackHelper = app.getSavingTrackHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
@@ -139,7 +139,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	protected void save(final boolean needDismiss) {
+	protected void save(boolean needDismiss) {
 		MapActivity mapActivity = getMapActivity();
 		WptPtEditor editor = getWptPtEditor();
 		WptPt wpt = getWpt();
@@ -277,10 +277,10 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	protected void delete(final boolean needDismiss) {
+	protected void delete(boolean needDismiss) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			final OsmandApplication app = (OsmandApplication) activity.getApplication();
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
 			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.context_menu_item_delete_waypoint));
@@ -401,7 +401,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return true;
 	}
 
-	private void saveGpx(final OsmandApplication app, final GPXFile gpxFile, final boolean gpxSelected) {
+	private void saveGpx(OsmandApplication app, GPXFile gpxFile, boolean gpxSelected) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {

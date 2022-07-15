@@ -177,7 +177,7 @@ public enum ColoringType {
 
 	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
 	                                         @Nullable String attributeName, boolean route) {
-		if ((isRouteInfoAttribute() && route) || this == ColoringType.SLOPE) {
+		if ((isRouteInfoAttribute() && route) || this == SLOPE) {
 			return InAppPurchaseHelper.isOsmAndProAvailable(app);
 		}
 		return true;

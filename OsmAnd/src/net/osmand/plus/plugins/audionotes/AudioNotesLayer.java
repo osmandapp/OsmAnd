@@ -112,7 +112,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 				float iconSize = getIconSize(app);
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				DataTileManager<Recording> recs = plugin.getRecordings();
-				final QuadRect latlon = tileBox.getLatLonBounds();
+				QuadRect latlon = tileBox.getLatLonBounds();
 				List<Recording> objects = recs.getObjects(latlon.top, latlon.left, latlon.bottom, latlon.right);
 				List<Recording> fullObjects = new ArrayList<>();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();

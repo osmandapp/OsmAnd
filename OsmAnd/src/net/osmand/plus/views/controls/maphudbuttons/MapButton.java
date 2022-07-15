@@ -56,12 +56,12 @@ public abstract class MapButton {
 	private int nightIconColorId = DEFAULT_NIGHT_ICON_COLOR_ID;
 
 	@ColorInt
-	private Integer iconColor = null;
+	private Integer iconColor;
 
-	private boolean nightMode = false;
+	private boolean nightMode;
 	private boolean forceUpdate = true;
 
-	private boolean routeDialogOpened = false;
+	private boolean routeDialogOpened;
 	private boolean showBottomButtons;
 
 	public MapButton(@NonNull MapActivity mapActivity, @NonNull ImageView view, @NonNull String id) {

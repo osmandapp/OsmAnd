@@ -39,13 +39,13 @@ public class AMapPointMenuController extends MenuController {
 
 	private AidlMapPointWrapper point;
 
-	private Drawable pointDrawable;
+	private final Drawable pointDrawable;
 
-	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final AidlMapPointWrapper point) {
+	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull AidlMapPointWrapper point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
 		pointDrawable = getPointDrawable();
-		final OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getMyApplication();
 		Map<String, AidlContextMenuButtonsWrapper> buttonsParamsMap = app.getAidlApi().getContextMenuButtonsParams();
 		if (!buttonsParamsMap.isEmpty()) {
 			additionalButtonsControllers = new ArrayList<>();
@@ -79,7 +79,7 @@ public class AMapPointMenuController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		for (String detail : point.getDetails()) {
 			builder.addPlainMenuItem(R.drawable.ic_action_info_dark, detail, true, false, null);
 		}
@@ -181,7 +181,7 @@ public class AMapPointMenuController extends MenuController {
 		return false;
 	}
 
-	private TitleButtonController createAdditionButtonController(final AidlContextMenuButtonWrapper contextMenuButton, final long callbackId) {
+	private TitleButtonController createAdditionButtonController(AidlContextMenuButtonWrapper contextMenuButton, long callbackId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || contextMenuButton == null) {
 			return null;

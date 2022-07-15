@@ -1,10 +1,6 @@
 package net.osmand.plus.utils;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -96,6 +92,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
 
@@ -166,7 +166,7 @@ public class AndroidUtils {
 		return byteBuffer.array();
 	}
 
-	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+	public static Bitmap createScaledBitmapWithTint(Context ctx, @DrawableRes int drawableId, float scale, int tint) {
 		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
 		if (drawableIcon != null) {
 			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
@@ -192,7 +192,7 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
-		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
+		return createCheckedColorStateList(ctx, nightMode,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
@@ -258,7 +258,7 @@ public class AndroidUtils {
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
 		Spannable spannable = new SpannableString(text);
 		for (String entry : chars) {
-			int i = text.indexOf(entry, 0);
+			int i = text.indexOf(entry);
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
@@ -334,8 +334,8 @@ public class AndroidUtils {
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {
-		long size = AndroidUtils.getAvailableSpace(dir);
-		return AndroidUtils.formatSize(ctx, size);
+		long size = getAvailableSpace(dir);
+		return formatSize(ctx, size);
 	}
 
 	public static View findParentViewById(View view, int id) {
@@ -504,7 +504,7 @@ public class AndroidUtils {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		} else if (view instanceof FrameLayout) {
-			((FrameLayout) view).setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
+			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
 	}
 
@@ -684,29 +684,23 @@ public class AndroidUtils {
 	}
 
 	public static void showNavBar(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && !isNavBarVisible(activity)) {
+		if (!isNavBarVisible(activity)) {
 			switchNavBarVisibility(activity);
 		}
 	}
 
 	public static void hideNavBar(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && isNavBarVisible(activity)) {
+		if (isNavBarVisible(activity)) {
 			switchNavBarVisibility(activity);
 		}
 	}
 
 	public static boolean isNavBarVisible(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19) {
-			int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
-			return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
-		}
-		return true;
+		int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
+		return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
 	}
 
-	public static void switchNavBarVisibility(Activity activity) {
-		if (Build.VERSION.SDK_INT < 19) {
-			return;
-		}
+	public static void switchNavBarVisibility(@NonNull Activity activity) {
 		View decorView = activity.getWindow().getDecorView();
 		int uiOptions = decorView.getSystemUiVisibility();
 		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
@@ -751,7 +745,7 @@ public class AndroidUtils {
 		}
 	}
 
-	private static void requestLayout(final View view) {
+	private static void requestLayout(View view) {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
 			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -759,11 +753,7 @@ public class AndroidUtils {
 				@Override
 				public void onGlobalLayout() {
 					ViewTreeObserver obs = view.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
-						obs.removeGlobalOnLayoutListener(this);
-					}
+					obs.removeOnGlobalLayoutListener(this);
 					view.requestLayout();
 				}
 			});
@@ -786,9 +776,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isScreenOn(Context context) {
-		PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH && powerManager.isInteractive()
-				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH && powerManager.isScreenOn();
+		PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+		return pm.isInteractive();
 	}
 
 	public static boolean isScreenLocked(Context context) {
@@ -894,7 +883,7 @@ public class AndroidUtils {
 
 	public static void setTextHorizontalGravity(@NonNull TextView tv, int hGravity) {
 		if (tv.getContext() != null) {
-			boolean isLayoutRtl = AndroidUtils.isLayoutRtl(tv.getContext());
+			boolean isLayoutRtl = isLayoutRtl(tv.getContext());
 			int gravity = Gravity.LEFT;
 			if (isLayoutRtl && (hGravity == Gravity.START)
 					|| !isLayoutRtl && hGravity == Gravity.END) {
@@ -933,11 +922,7 @@ public class AndroidUtils {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
-					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
-				} else {
-					return (long) (fs.getAvailableBlocks()) * fs.getBlockSize();
-				}
+				return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -949,11 +934,7 @@ public class AndroidUtils {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
-					return fs.getBlockCountLong() * fs.getBlockSizeLong();
-				} else {
-					return (long) (fs.getBlockCount()) * fs.getBlockSize();
-				}
+				return fs.getBlockCountLong() * fs.getBlockSizeLong();
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -965,7 +946,7 @@ public class AndroidUtils {
 		if (dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+				return (float) (fs.getBlockSizeLong()) * fs.getAvailableBlocksLong() / (1 << 30);
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -1100,7 +1081,7 @@ public class AndroidUtils {
 				values.append(split);
 			}
 		}
-		return "INSERT INTO " + tableName + " (" + keys.toString() + ") VALUES (" + values.toString() + ")";
+		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {

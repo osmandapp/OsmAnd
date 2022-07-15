@@ -80,7 +80,7 @@ public abstract class ImageCard extends AbstractCard {
 	protected int buttonColor;
 	protected int buttonTextColor;
 
-	private int defaultCardLayoutId = R.layout.context_menu_card_image;
+	private final int defaultCardLayoutId = R.layout.context_menu_card_image;
 
 	protected Drawable icon;
 	protected Drawable buttonIcon;
@@ -310,12 +310,12 @@ public abstract class ImageCard extends AbstractCard {
 
 	public void update() {
 		if (view != null) {
-			ImageView image = (ImageView) view.findViewById(R.id.image);
-			ImageView iconImageView = (ImageView) view.findViewById(R.id.icon);
-			TextView urlTextView = (TextView) view.findViewById(R.id.url);
-			TextView watermarkTextView = (TextView) view.findViewById(R.id.watermark);
-			ProgressBar progress = (ProgressBar) view.findViewById(R.id.progress);
-			AppCompatButton button = (AppCompatButton) view.findViewById(R.id.button);
+			ImageView image = view.findViewById(R.id.image);
+			ImageView iconImageView = view.findViewById(R.id.icon);
+			TextView urlTextView = view.findViewById(R.id.url);
+			TextView watermarkTextView = view.findViewById(R.id.watermark);
+			ProgressBar progress = view.findViewById(R.id.progress);
+			AppCompatButton button = view.findViewById(R.id.button);
 
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			AndroidUtils.setBackground(getMapActivity(), view.findViewById(R.id.card_background), night,
@@ -396,11 +396,11 @@ public abstract class ImageCard extends AbstractCard {
 
 	public static class GetImageCardsTask extends AsyncTask<Void, Void, List<ImageCard>> {
 
-		private MapActivity mapActivity;
-		private OsmandApplication app;
-		private LatLon latLon;
-		private Map<String, String> params;
-		private GetImageCardsListener listener;
+		private final MapActivity mapActivity;
+		private final OsmandApplication app;
+		private final LatLon latLon;
+		private final Map<String, String> params;
+		private final GetImageCardsListener listener;
 		private List<ImageCard> result;
 		private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 
@@ -426,7 +426,7 @@ public abstract class ImageCard extends AbstractCard {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			ImageCardsHolder holder = new ImageCardsHolder();
 			try {
-				final Map<String, String> pms = new LinkedHashMap<>();
+				Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());
 				pms.put("lon", "" + (float) latLon.getLongitude());
 				Location myLocation = app.getLocationProvider().getLastKnownLocation();
@@ -455,7 +455,7 @@ public abstract class ImageCard extends AbstractCard {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
 									if (!OsmandPlugin.createImageCardForJson(holder, imageObject)) {
-										ImageCard imageCard = ImageCard.createCard(mapActivity, imageObject);
+										ImageCard imageCard = createCard(mapActivity, imageObject);
 										if (imageCard != null) {
 											holder.add(ImageCardType.OTHER, imageCard);
 										}

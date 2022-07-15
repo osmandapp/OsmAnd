@@ -35,7 +35,7 @@ public class RenderingIcons {
 	private static final Map<String, Bitmap> iconsBmp = new LinkedHashMap<>();
 	private static final Map<String, Drawable> iconsDrawable = new LinkedHashMap<>();
 
-	private static Bitmap cacheBmp = null;
+	private static Bitmap cacheBmp;
 
 	public static boolean containsSmallIcon(String s){
 		return smallIcons.containsKey(s);
@@ -85,15 +85,15 @@ public class RenderingIcons {
 			return null;
 		}
 		try {
-			final InputStream inputStream = ctx.getResources().openRawResource(resId);
-			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
-            final byte[] ioBuffer = new byte[1024];
+			InputStream inputStream = ctx.getResources().openRawResource(resId);
+			ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
+            byte[] ioBuffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
 				proxyOutputStream.write(ioBuffer, 0, bytesRead);
 			}
 			inputStream.close();
-			final byte[] bitmapData = proxyOutputStream.toByteArray();
+			byte[] bitmapData = proxyOutputStream.toByteArray();
 			if (isVectorData(bitmapData)) {
 				return getPngFromVectorDrawable(ctx, resId);
 			}
@@ -119,9 +119,9 @@ public class RenderingIcons {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (poiType == null) {
 			return null;
-		} else if (RenderingIcons.containsSmallIcon(poiType.getIconKeyName())) {
+		} else if (containsSmallIcon(poiType.getIconKeyName())) {
 			return poiType.getIconKeyName();
-		} else if (RenderingIcons.containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
 		}
 		return null;

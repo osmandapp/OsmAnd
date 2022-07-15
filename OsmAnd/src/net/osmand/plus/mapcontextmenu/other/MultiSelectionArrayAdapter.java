@@ -36,11 +36,11 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 	@NonNull
 	@Override
-	public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
 			convertView = menu.getMapActivity().getLayoutInflater().inflate(R.layout.menu_obj_list_item, parent, false);
 		}
-		final MenuObject item = getItem(position);
+		MenuObject item = getItem(position);
 		if (item != null) {
 			if (!menu.isLandscapeLayout()) {
 				int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());
@@ -55,8 +55,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 				}
 			});
 			UiUtilities iconsCache = menu.getMapActivity().getMyApplication().getUIUtilities();
-			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
-			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
+			View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
+			ImageView iconView = convertView.findViewById(R.id.context_menu_icon_view);
 			if (item.getPointDescription().isFavorite() || item.getPointDescription().isWpt()) {
 				int iconSize = getContext().getResources().getDimensionPixelSize(R.dimen.favorites_my_places_icon_size);
 				iconView.getLayoutParams().height = iconSize;
@@ -77,13 +77,13 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			}
 
 			// Text line 1
-			TextView line1 = (TextView) convertView.findViewById(R.id.context_menu_line1);
+			TextView line1 = convertView.findViewById(R.id.context_menu_line1);
 			line1.setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), !menu.isLight()));
 			line1.setText(item.getTitleStr());
 
 			// Text line 2
-			TextView line2 = (TextView) convertView.findViewById(R.id.context_menu_line2);
-			((TextView) line2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
+			TextView line2 = convertView.findViewById(R.id.context_menu_line2);
+			line2.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
 			StringBuilder line2Str = new StringBuilder(item.getTypeStr());
 			String streetStr = item.getStreetStr();
 			if (!Algorithms.isEmpty(streetStr) && !item.displayStreetNameInTitle()) {

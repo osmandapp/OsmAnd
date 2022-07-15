@@ -36,12 +36,12 @@ import java.util.Map;
 
 public class TerrainLayer extends MapTileLayer {
 
-	private final static Log log = PlatformUtil.getLog(TerrainLayer.class);
+	private static final Log log = PlatformUtil.getLog(TerrainLayer.class);
 	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<>();
-	private final static String HILLSHADE_CACHE = "hillshade.cache";
-	private final static String SLOPE_CACHE = "slope.cache";
-	private final static int ZOOM_BOUNDARY = 15;
-	private final static int DEFAULT_ALPHA = 100;
+	private static final String HILLSHADE_CACHE = "hillshade.cache";
+	private static final String SLOPE_CACHE = "slope.cache";
+	private static final int ZOOM_BOUNDARY = 15;
+	private static final int DEFAULT_ALPHA = 100;
 	private final SRTMPlugin srtmPlugin;
 	private final TerrainMode mode;
 
@@ -72,7 +72,7 @@ public class TerrainLayer extends MapTileLayer {
 		}
 	}
 
-	private void indexTerrainFiles(final OsmandApplication app) {
+	private void indexTerrainFiles(OsmandApplication app) {
 		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
 			private final String type = mode.name().toLowerCase();
@@ -160,7 +160,7 @@ public class TerrainLayer extends MapTileLayer {
 				cursor.close();
 			}
 
-			private Map<String, SQLiteTileSource> readFiles(final OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
+			private Map<String, SQLiteTileSource> readFiles(OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
 				Map<String, SQLiteTileSource> rs = new LinkedHashMap<>();
 				File[] files = tilesDir.listFiles();
 				if(files != null) {
@@ -190,8 +190,8 @@ public class TerrainLayer extends MapTileLayer {
 			
 			public boolean isLocked() {
 				return false;
-			};
-			
+			}
+
 			List<String> getTileSource(int x, int y, int zoom) {
 				ArrayList<String> ls = new ArrayList<>();
 				int z = (zoom - ZOOM_BOUNDARY);

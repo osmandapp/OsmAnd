@@ -39,7 +39,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 
 	private static final String SHOULD_HIDE_MENU = "should_hide_menu";
 
-	private static boolean shown = false;
+	private static boolean shown;
 
 	private MapActivity mapActivity;
 	private OsmandApplication app;
@@ -73,16 +73,16 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		AndroidUtils.addStatusBarPadding21v(ctx, view);
 		view.setOnClickListener(v -> finishNavigation());
 
-		ImageButton btnClose = (ImageButton) view.findViewById(R.id.closeImageButton);
+		ImageButton btnClose = view.findViewById(R.id.closeImageButton);
 		btnClose.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, !nighMode));
 		btnClose.setOnClickListener(v -> finishNavigation());
 
-		Button btnRemoveDest = (Button) view.findViewById(R.id.removeDestButton);
+		Button btnRemoveDest = view.findViewById(R.id.removeDestButton);
 		btnRemoveDest.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_done, !nighMode), null, null, null);
 		btnRemoveDest.setOnClickListener(v -> finishNavigation());
 
-		Button btnRecalcDest = (Button) view.findViewById(R.id.recalcDestButton);
+		Button btnRecalcDest = view.findViewById(R.id.recalcDestButton);
 		btnRecalcDest.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_gdirections_dark, !nighMode), null, null, null);
 		btnRecalcDest.setOnClickListener(v -> {
@@ -101,7 +101,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 			}
 		});
 
-		Button btnFindParking = (Button) view.findViewById(R.id.findParkingButton);
+		Button btnFindParking = view.findViewById(R.id.findParkingButton);
 
 		ApplicationMode appMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
 

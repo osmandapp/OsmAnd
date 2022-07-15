@@ -221,8 +221,8 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		this.resourceDirName = resourceDirName;
 	}
 
-	private void addPluginItemsFromFile(final File file, final Activity activity) {
-		final ProgressDialog progress = new ProgressDialog(activity);
+	private void addPluginItemsFromFile(File file, Activity activity) {
+		ProgressDialog progress = new ProgressDialog(activity);
 		progress.setTitle(app.getString(R.string.loading_smth, ""));
 		progress.setMessage(app.getString(R.string.loading_data));
 		progress.setIndeterminate(true);
@@ -232,7 +232,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			progress.show();
 		}
 
-		final ImportListener importListener = new ImportListener() {
+		ImportListener importListener = new ImportListener() {
 			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 
@@ -287,7 +287,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void removePluginItemsFromFile(final File file, final PluginItemsListener itemsListener) {
+	private void removePluginItemsFromFile(File file, PluginItemsListener itemsListener) {
 		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
 			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {

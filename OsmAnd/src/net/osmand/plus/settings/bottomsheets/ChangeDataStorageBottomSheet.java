@@ -36,11 +36,11 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil.getLog(ChangeDataStorageBottomSheet.class);
 
-	private final static String CURRENT_DIRECTORY = "current_directory";
-	private final static String NEW_DIRECTORY = "new_directory";
+	private static final String CURRENT_DIRECTORY = "current_directory";
+	private static final String NEW_DIRECTORY = "new_directory";
 
-	public final static String MOVE_DATA = "move_data";
-	public final static String CHOSEN_DIRECTORY = "chosen_storage";
+	public static final String MOVE_DATA = "move_data";
+	public static final String CHOSEN_DIRECTORY = "chosen_storage";
 
 	private StorageItem currentDirectory;
 	private StorageItem newDirectory;

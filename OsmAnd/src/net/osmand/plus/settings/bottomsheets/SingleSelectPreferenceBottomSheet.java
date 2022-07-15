@@ -67,7 +67,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 		String[] entries = listPreference.getEntries();
 
 		for (int i = 0; i < entries.length; i++) {
-			final BaseBottomSheetItem[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
+			BaseBottomSheetItem[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
 					.setButtonTintList(AndroidUtils.createCheckedColorIntStateList(
@@ -145,7 +145,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 
 	private void buildDescriptionItem(Context ctx, String description) {
 		if (collapsibleDescription) {
-			final BottomSheetItemTitleWithDescrAndButton[] preferenceDescription = new BottomSheetItemTitleWithDescrAndButton[1];
+			BottomSheetItemTitleWithDescrAndButton[] preferenceDescription = new BottomSheetItemTitleWithDescrAndButton[1];
 			preferenceDescription[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
 					.setButtonTitle(getString(R.string.shared_string_read_more))
 					.setButtonTextColor(AndroidUtils.resolveAttribute(ctx, R.attr.active_color_basic))

@@ -70,7 +70,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	//OpenGL
 	private OsmBugsTileProvider osmBugsTileProvider;
 	private float textScale = 1f;
-	private boolean showClosed = false;
+	private boolean showClosed;
 
 	public OsmBugsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
 		super(context);
@@ -212,7 +212,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	public int getRadiusBug(RotatedTileBox tb) {
 		int z;
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		if (zoom < startZoom) {
 			z = 0;
 		} else if (zoom <= 12) {
@@ -239,7 +239,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		if (objects != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			final int rad = getScaledTouchRadius(getApplication(), getRadiusBug(tb));
+			int rad = getScaledTouchRadius(getApplication(), getRadiusBug(tb));
 			int radius = rad * 3;
 			int small = rad * 3 / 4;
 			boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
@@ -338,7 +338,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		return bugs;
 	}
 
-	public void openBug(@NonNull MapActivity mapActivity, final double latitude, final double longitude, String message, boolean autofill) {
+	public void openBug(@NonNull MapActivity mapActivity, double latitude, double longitude, String message, boolean autofill) {
 		OpenStreetNote bug = new OpenStreetNote();
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
@@ -350,29 +350,29 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 	}
 
-	public void closeBug(@NonNull MapActivity mapActivity, final OpenStreetNote bug, String txt) {
+	public void closeBug(@NonNull MapActivity mapActivity, OpenStreetNote bug, String txt) {
 		showBugDialog(mapActivity, bug, Action.DELETE, txt);
 	}
 
-	public void reopenBug(@NonNull MapActivity mapActivity, final OpenStreetNote bug, String txt) {
+	public void reopenBug(@NonNull MapActivity mapActivity, OpenStreetNote bug, String txt) {
 		showBugDialog(mapActivity, bug, Action.REOPEN, txt);
 	}
 
-	public void commentBug(@NonNull MapActivity mapActivity, final OpenStreetNote bug, String txt) {
+	public void commentBug(@NonNull MapActivity mapActivity, OpenStreetNote bug, String txt) {
 		showBugDialog(mapActivity, bug, Action.MODIFY, txt);
 	}
 
-	public void modifyBug(@NonNull MapActivity mapActivity, final OsmNotesPoint point) {
+	public void modifyBug(@NonNull MapActivity mapActivity, OsmNotesPoint point) {
 		showBugDialog(mapActivity, point);
 	}
 
-	private void showBugDialog(@NonNull MapActivity mapActivity, final OsmNotesPoint point) {
+	private void showBugDialog(@NonNull MapActivity mapActivity, OsmNotesPoint point) {
 		String text = point.getText();
 		createBugDialog(mapActivity, true, text, R.string.context_menu_item_modify_note, R.string.osn_modify_dialog_title,
 				null, null, point);
 	}
 
-	private void showBugDialog(@NonNull MapActivity mapActivity, final OpenStreetNote bug, final Action action, String text) {
+	private void showBugDialog(@NonNull MapActivity mapActivity, OpenStreetNote bug, Action action, String text) {
 		int posButtonTextId;
 		int titleTextId;
 		if (action == Action.DELETE) {
@@ -390,14 +390,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 
 		OsmBugsUtil util = getOsmBugsUtil(bug);
-		final boolean offline = util instanceof OsmBugsLocalUtil;
+		boolean offline = util instanceof OsmBugsLocalUtil;
 
 		createBugDialog(mapActivity, offline, text, titleTextId, posButtonTextId, action, bug, null);
 	}
 
-	private void createBugDialog(@NonNull MapActivity mapActivity, final boolean offline, String text,
-								 int titleTextId, int posButtonTextId, final Action action,
-								 final OpenStreetNote bug, OsmNotesPoint point) {
+	private void createBugDialog(@NonNull MapActivity mapActivity, boolean offline, String text,
+								 int titleTextId, int posButtonTextId, Action action,
+								 OpenStreetNote bug, OsmNotesPoint point) {
 		if (mapActivity.isFinishing()) {
 			return;
 		}
@@ -463,12 +463,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		};
 	}
 
-	private String getMessageText(final View view) {
+	private String getMessageText(View view) {
 		return ((EditText) view.findViewById(R.id.message_field)).getText().toString();
 	}
 
 	public void refreshMap() {
-		if (view != null && view.getLayers().contains(OsmBugsLayer.this)) {
+		if (view != null && view.getLayers().contains(this)) {
 			view.refreshMap();
 		}
 	}

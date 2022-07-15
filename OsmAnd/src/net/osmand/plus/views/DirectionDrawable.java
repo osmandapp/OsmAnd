@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,7 +26,7 @@ public class DirectionDrawable extends Drawable {
 	private float angle;
 	int resourceId = -1;
 	Drawable arrowImage ;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public DirectionDrawable(OsmandApplication ctx, float width, float height, int resourceId, int clrId) {
 		this(ctx, width, height);
@@ -40,7 +41,7 @@ public class DirectionDrawable extends Drawable {
 		this.height = height;
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Paint.Style.FILL_AND_STROKE);
-		paintRouteDirection.setColor(app.getResources().getColor(R.color.color_unknown));
+		paintRouteDirection.setColor(ColorUtilities.getColor(app, R.color.color_unknown));
 		paintRouteDirection.setAntiAlias(true);
 	}
 	
@@ -65,7 +66,7 @@ public class DirectionDrawable extends Drawable {
 			UiUtilities iconsCache = app.getUIUtilities();
 			arrowImage = iconsCache.getIcon(resourceId, clrId);
 		} else {
-			paintRouteDirection.setColor(app.getResources().getColor(clrId));
+			paintRouteDirection.setColor(ColorUtilities.getColor(app, clrId));
 		}
 	}
 

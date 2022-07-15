@@ -199,7 +199,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean progressBarVisible;
 	private boolean infoExpanded;
 
-	private int modes = 0x0;
+	private int modes;
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -305,7 +305,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return null;
 		}
 
-		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+		MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
 		app.setMeasurementEditingContext(editingCtx);
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
@@ -459,7 +459,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				OptionsBottomSheetDialogFragment.showInstance(manager, MeasurementToolFragment.this);
+				OptionsBottomSheetDialogFragment.showInstance(manager, this);
 			}
 		});
 
@@ -602,7 +602,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		configBtn.setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				RouteOptionsBottomSheet.showInstance(activity, MeasurementToolFragment.this,
+				RouteOptionsBottomSheet.showInstance(activity, this,
 						DialogMode.PLAN_ROUTE, editingCtx.getAppMode().getStringKey());
 			}
 		});
@@ -642,7 +642,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return onBackPressedCallback;
 	}
 
-	private OnRadioItemClickListener getInfoTypeBtnListener(@NonNull final InfoType type) {
+	private OnRadioItemClickListener getInfoTypeBtnListener(@NonNull InfoType type) {
 		return new OnRadioItemClickListener() {
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
@@ -1073,7 +1073,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void runNavigation(final GPXFile gpx, final ApplicationMode appMode) {
+	private void runNavigation(GPXFile gpx, ApplicationMode appMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (app.getRoutingHelper().isFollowingMode()) {
@@ -1405,7 +1405,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private SelectFileListener createAddToTrackFileListener() {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		return new SelectFileListener() {
 			@Override
 			public void selectFileOnCLick(String gpxFileName) {
@@ -1481,7 +1481,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		saveNewGpx(folderName, fileName, showOnMap, simplified, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
 	}
 
-	MeasurementAdapterListener createMeasurementAdapterListener(final ItemTouchHelper touchHelper) {
+	MeasurementAdapterListener createMeasurementAdapterListener(ItemTouchHelper touchHelper) {
 		return new MeasurementAdapterListener() {
 
 			final MapActivity mapActivity = getMapActivity();
@@ -1548,8 +1548,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void updateSnapToRoadControls() {
-		final MapActivity mapActivity = getMapActivity();
-		final ApplicationMode appMode = editingCtx.getAppMode();
+		MapActivity mapActivity = getMapActivity();
+		ApplicationMode appMode = editingCtx.getAppMode();
 		if (mapActivity != null) {
 			Drawable icon;
 			ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
@@ -1614,7 +1614,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void showAddToTrackDialog(final MapActivity mapActivity) {
+	private void showAddToTrackDialog(MapActivity mapActivity) {
 		if (mapActivity != null) {
 			SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 					createAddToTrackFileListener(), ADD_TO_TRACK);
@@ -1865,16 +1865,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		saveGpx(new File(gpx.path), gpx, simplified, addToTrack, finalSaveAction, showOnMap);
 	}
 
-	private void saveGpx(@NonNull final File outFile, @Nullable GPXFile gpxFile, boolean simplified,
-	                     boolean addToTrack, final FinalSaveAction finalSaveAction, final boolean showOnMap) {
+	private void saveGpx(@NonNull File outFile, @Nullable GPXFile gpxFile, boolean simplified,
+	                     boolean addToTrack, FinalSaveAction finalSaveAction, boolean showOnMap) {
 		SaveGpxRouteListener listener = (warning, savedGpxFile, backupFile) -> onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap);
 		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified,
 				addToTrack, showOnMap, listener);
 		saveTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void onGpxSaved(Exception warning, GPXFile savedGpxFile, final File outFile, final File backupFile,
-	                        FinalSaveAction finalSaveAction, final boolean showOnMap) {
+	private void onGpxSaved(Exception warning, GPXFile savedGpxFile, File outFile, File backupFile,
+	                        FinalSaveAction finalSaveAction, boolean showOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -1956,7 +1956,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				}
 				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 					setMode(UNDO_MODE, true);
-					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					showInstance(mapActivity.getSupportFragmentManager(),
 							editingCtx, modes);
 				}
 				return true;
@@ -1964,7 +1964,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} else {
 			setupGpxData(null);
 			setMode(UNDO_MODE, true);
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(),
+			showInstance(mapActivity.getSupportFragmentManager(),
 					editingCtx, modes);
 		}
 	}

@@ -217,7 +217,7 @@ public class ItineraryDataHelper {
 		return GPXUtilities.loadGPXFile(file, getGPXExtensionsReader(groupInfos));
 	}
 
-	public GPXExtensionsReader getGPXExtensionsReader(final List<ItineraryGroupInfo> groupInfos) {
+	public GPXExtensionsReader getGPXExtensionsReader(List<ItineraryGroupInfo> groupInfos) {
 		return new GPXExtensionsReader() {
 			@Override
 			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException {

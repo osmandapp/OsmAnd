@@ -68,7 +68,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final Context context = getContext();
+		Context context = getContext();
 		if (context == null) {
 			return;
 		}
@@ -147,7 +147,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			OsmandMapTileView view = mapActivity.getMapView();
 			OsmandSettings settings = view.getSettings();
 			settings.RENDERER.set(selectedStyle);
-			final CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(PISTE_ROUTES_ATTR);
+			CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(PISTE_ROUTES_ATTR);
 			if (pisteRoutesPref.get()) {
 				pisteRoutesPref.set(settings.RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER));
 			}
@@ -177,7 +177,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@NonNull
 	private TreeMap<String, String> generateStylesMap(Context context) {
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		TreeMap<String, String> res = new TreeMap<>(new Comparator<String>() {
 			@Override
 			public int compare(String string1, String string2) {

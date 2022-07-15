@@ -171,7 +171,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 
 		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
 		item.setOnMenuItemClickListener(menuItem -> {
-			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), NotesFragment.this);
+			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), this);
 			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -345,11 +345,11 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void enterSelectionMode(final int type) {
+	private void enterSelectionMode(int type) {
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
-			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
 				OsmandApplication app = getMyApplication();
 				if (type == MODE_SHARE) {
@@ -423,7 +423,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void deleteItems(final Set<Recording> selected) {
+	private void deleteItems(Set<Recording> selected) {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()))
 				.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
@@ -476,13 +476,13 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 			}
 
 			@Override
-			public void deleteOnClick(final Recording recording) {
+			public void deleteOnClick(Recording recording) {
 				deleteNote(recording);
 			}
 		};
 	}
 
-	private void shareNote(final Recording recording) {
+	private void shareNote(Recording recording) {
 		if (!recording.getFile().exists()) {
 			return;
 		}
@@ -499,7 +499,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 							shareIntent.setType("video/*");
 						}
 						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 						Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
 						AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 					}
@@ -517,11 +517,11 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 				true, recording);
 	}
 
-	private void editNote(final Recording recording) {
+	private void editNote(Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.shared_string_rename);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
-		final EditText editText = v.findViewById(R.id.name);
+		View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
+		EditText editText = v.findViewById(R.id.name);
 		builder.setView(v);
 		editText.setText(recording.getName(getActivity(), true));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -540,7 +540,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		editText.requestFocus();
 	}
 
-	private void deleteNote(final Recording recording) {
+	private void deleteNote(Recording recording) {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(R.string.recording_delete_confirm)
 				.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {

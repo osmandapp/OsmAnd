@@ -22,11 +22,11 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
 
-		final RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
+		RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		adapter = createAdapter();
 		adapter.setAdapterListener(new GroupsAdapter.GroupsAdapterListener() {

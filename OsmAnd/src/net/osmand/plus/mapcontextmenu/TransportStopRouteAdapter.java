@@ -20,9 +20,9 @@ import java.util.List;
 
 public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 
-	private boolean nightMode;
+	private final boolean nightMode;
 	private OnClickListener listener;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public TransportStopRouteAdapter(@NonNull OsmandApplication application, @NonNull List<Object> objects, boolean nightMode) {
 		super(application, 0, objects);
@@ -36,7 +36,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 
 	@NonNull
 	@Override
-	public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.transport_stop_route_item, parent, false);
 		}
@@ -52,7 +52,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 				routeRef = (String) object;
 				bgColor = ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
 			}
-			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
+			TextView transportStopRouteTextView = convertView.findViewById(R.id.transport_stop_route_text);
 			transportStopRouteTextView.setText(routeRef);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
 			gradientDrawableBg.setColor(bgColor);

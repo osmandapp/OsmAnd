@@ -10,8 +10,8 @@ import java.util.List;
 
 public class SetNavDrawerItemsParams implements Parcelable {
 
-	private String appPackage;
-	private List<NavDrawerItem> items;
+	private final String appPackage;
+	private final List<NavDrawerItem> items;
 
 	public SetNavDrawerItemsParams(@NonNull String appPackage, @NonNull List<NavDrawerItem> items) {
 		this.appPackage = appPackage;

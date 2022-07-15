@@ -137,7 +137,7 @@ public class OsmandSettings {
 	private final Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
 
 	// cache variables
-	private long lastTimeInternetConnectionChecked = 0;
+	private final long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 
 	// TODO variable
@@ -395,7 +395,7 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
+	public ApplicationMode LAST_ROUTING_APPLICATION_MODE;
 
 	public boolean setApplicationMode(ApplicationMode appMode) {
 		return setApplicationMode(appMode, true);
@@ -1386,7 +1386,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference(this, "disable_complex_routing", false).makeProfile();
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
-	public boolean simulateNavigation = false;
+	public boolean simulateNavigation;
 	public String simulateNavigationMode = SimulationMode.PREVIEW.getKey();
 	public float simulateNavigationSpeed = SIM_MIN_SPEED;
 
@@ -2179,29 +2179,29 @@ public class OsmandSettings {
 	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
 	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
-	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
-	public final static int NAVIGATE = 1;
-	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
-	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
-	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
-	public final static String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
+	public static final int NAVIGATE = 1;
+	public static final String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
+	public static final String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
+	public static final String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
+	public static final String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
 
-	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
 
-	public final static String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
-	public final static String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
-	public final static String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
-	public final static String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
-	public final static String MY_LOC_POINT_LAT = "my_loc_point_lat";
-	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
-	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
+	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
+	public static final String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
+	public static final String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
+	public static final String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+	public static final String MY_LOC_POINT_LAT = "my_loc_point_lat";
+	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
+	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
 	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
@@ -2642,11 +2642,11 @@ public class OsmandSettings {
 		return result;
 	}
 
-	public void setSelectedPoiFilters(final Set<String> poiFilters) {
+	public void setSelectedPoiFilters(Set<String> poiFilters) {
 		setSelectedPoiFilters(APPLICATION_MODE.get(), poiFilters);
 	}
 
-	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, final Set<String> poiFilters) {
+	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.setModeValue(appMode, android.text.TextUtils.join(",", poiFilters));
 	}
 
@@ -2685,7 +2685,7 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
-	public static final String[] TTS_AVAILABLE_VOICES = new String[] {
+	public static final String[] TTS_AVAILABLE_VOICES = {
 			"de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
 	};
 	// this value string is synchronized with settings_pref.xml preference name

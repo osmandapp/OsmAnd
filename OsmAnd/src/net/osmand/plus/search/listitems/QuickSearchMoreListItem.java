@@ -7,14 +7,14 @@ import net.osmand.plus.R;
 
 public class QuickSearchMoreListItem extends QuickSearchListItem {
 
-	private String name;
-	private SearchMoreItemOnClickListener onClickListener;
+	private final String name;
+	private final SearchMoreItemOnClickListener onClickListener;
 	private boolean emptySearch;
 	private boolean searchMoreAvailable;
 	private boolean interruptedSearch;
-	private String findMore;
-	private String restartSearch;
-	private String increaseRadius;
+	private final String findMore;
+	private final String restartSearch;
+	private final String increaseRadius;
 	private boolean secondaryButtonVisibility;
 
 	public QuickSearchMoreListItem(OsmandApplication app, String name,

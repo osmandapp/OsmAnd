@@ -20,7 +20,7 @@ import java.util.List;
 public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
 
 	private List<DownloadResourceGroup> data = new ArrayList<DownloadResourceGroup>();
-	private DownloadActivity ctx;
+	private final DownloadActivity ctx;
 	private DownloadResourceGroup mainGroup;
 
 
@@ -49,9 +49,9 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 	}
 
 	@Override
-	public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
 	                         View convertView, ViewGroup parent) {
-		final Object child = getChild(groupPosition, childPosition);
+		Object child = getChild(groupPosition, childPosition);
 		if (child instanceof DownloadItem) {
 
 			DownloadItem item = (DownloadItem) child;
@@ -98,14 +98,14 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, final View convertView, final ViewGroup parent) {
+	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 		View v = convertView;
 		String section = getGroup(groupPosition);
 		if (v == null) {
 			LayoutInflater inflater = LayoutInflater.from(ctx);
 			v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 		}
-		TextView nameView = ((TextView) v.findViewById(R.id.title));
+		TextView nameView = v.findViewById(R.id.title);
 		nameView.setText(section);
 		v.setOnClickListener(null);
 		TypedValue typedValue = new TypedValue();

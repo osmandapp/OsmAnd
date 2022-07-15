@@ -182,7 +182,7 @@ public class StorageItem implements Parcelable, Cloneable {
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		return StorageItem.builder()
+		return builder()
 				.setKey(this.key)
 				.setTitle(this.title)
 				.setDescription(this.description)

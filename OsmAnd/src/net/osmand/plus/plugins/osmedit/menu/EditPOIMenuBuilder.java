@@ -23,7 +23,7 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 
 	private final OsmPoint osmPoint;
 
-	public EditPOIMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull OsmPoint osmPoint) {
+	public EditPOIMenuBuilder(@NonNull MapActivity mapActivity, @NonNull OsmPoint osmPoint) {
 		super(mapActivity);
 		this.osmPoint = osmPoint;
 	}

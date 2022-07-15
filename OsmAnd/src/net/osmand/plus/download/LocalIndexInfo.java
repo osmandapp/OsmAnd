@@ -15,8 +15,8 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 	private String name;
 
 	private boolean backupedData;
-	private boolean corrupted = false;
-	private boolean notSupported = false;
+	private boolean corrupted;
+	private boolean notSupported;
 	private boolean loaded;
 	private String subfolder;
 	private String pathToData;

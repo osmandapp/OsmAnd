@@ -120,13 +120,13 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap,
 									@Nullable ApplicationMode appMode, boolean appModeChangeable) {
 		try {
-			if (fm.findFragmentByTag(SelectAppModesBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				SelectAppModesBottomSheetDialogFragment fragment = new SelectAppModesBottomSheetDialogFragment();
 				fragment.setTargetFragment(target, 0);
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setAppMode(appMode);
 				fragment.setAppModeChangeable(appModeChangeable);
-				fragment.show(fm, SelectAppModesBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

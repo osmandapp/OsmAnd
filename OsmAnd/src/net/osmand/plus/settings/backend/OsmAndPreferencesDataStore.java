@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
-	private OsmandSettings osmandSettings;
-	private ApplicationMode appMode;
+	private final OsmandSettings osmandSettings;
+	private final ApplicationMode appMode;
 
 	public OsmAndPreferencesDataStore(OsmandSettings settings, @NonNull ApplicationMode appMode) {
 		this.osmandSettings = settings;

@@ -49,18 +49,18 @@ import java.util.List;
 import java.util.Locale;
 
 public class OsmAndFormatter {
-	public final static float METERS_IN_KILOMETER = 1000f;
-	public final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
-	public final static float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
+	public static final float METERS_IN_KILOMETER = 1000f;
+	public static final float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
+	public static final float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
 
-	public final static float YARDS_IN_ONE_METER = 1.0936f;
-	public final static float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+	public static final float YARDS_IN_ONE_METER = 1.0936f;
+	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
-	private static boolean twelveHoursFormat = false;
+	private static boolean twelveHoursFormat;
 	private static TimeFormatter fullTimeFormatter;
 	private static TimeFormatter shortTimeFormatter;
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
@@ -120,7 +120,7 @@ public class OsmAndFormatter {
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
 				return getFormattedDate(app, lastUploadedTimems);
 			} else {
-				String formattedDuration = OsmAndFormatter.getFormattedDuration((int) duration, app);
+				String formattedDuration = getFormattedDuration((int) duration, app);
 				if (Algorithms.isEmpty(formattedDuration)) {
 					return app.getString(R.string.duration_moment_ago);
 				} else {
@@ -189,8 +189,8 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, boolean forceTrailingZeros) {
-		double roundedDist = OsmAndFormatter.calculateRoundedDist(interval, app);
-		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
+		double roundedDist = calculateRoundedDist(interval, app);
+		return getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
@@ -254,9 +254,9 @@ public class OsmAndFormatter {
 		if (digits == 0) {
 			return (int) (meters / mainUnitInMeters + 0.5) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
 		} else if (digits == 1) {
-			return fixed1.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
+			return fixed1.format(meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		} else {
-			return fixed2.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
+			return fixed2.format(meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
 		}
 	}
 
