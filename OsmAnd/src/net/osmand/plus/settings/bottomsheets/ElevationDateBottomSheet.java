@@ -167,7 +167,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private void createReliefFactorButtons(Context context) {
 		for (int i = 0; i < parameters.size(); i++) {
 			RoutingParameter parameter = parameters.get(i);
-			final BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
 					.setButtonTintList(createColorStateList(context, nightMode))

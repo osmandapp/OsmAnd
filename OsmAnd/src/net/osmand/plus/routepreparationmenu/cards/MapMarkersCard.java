@@ -83,13 +83,13 @@ public class MapMarkersCard extends MapBaseCard {
 
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
-		for (final MapMarker marker : markers) {
+		for (MapMarker marker : markers) {
 			if (showLimitExceeds && i >= 3 && showLimited) {
 				break;
 			}
 			View v = inflater.inflate(R.layout.map_marker_item, root, false);
 			MapMarkerDialogHelper.updateMapMarkerInfo(ctx, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
-			final View remove = v.findViewById(R.id.info_close);
+			View remove = v.findViewById(R.id.info_close);
 			remove.setVisibility(View.GONE);
 
 			((TextView) v.findViewById(R.id.waypoint_dist)).setTextColor(activeColor);

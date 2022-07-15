@@ -120,7 +120,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		RearrangeMenuAdapterItem item = items.get(position);
 		if (holder instanceof DescriptionHolder) {
 			DescriptionHolder h = (DescriptionHolder) holder;
@@ -141,7 +141,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.imageContainer.setPadding(paddingStart, paddingTop, paddingStart, 0);
 			}
 		} else if (holder instanceof ItemHolder) {
-			final ItemHolder h = (ItemHolder) holder;
+			ItemHolder h = (ItemHolder) holder;
 			ContextMenuItem menuItem = (ContextMenuItem) item.value;
 			String id = menuItem.getId();
 			if (DRAWER_DIVIDER_ID.equals(id)) {

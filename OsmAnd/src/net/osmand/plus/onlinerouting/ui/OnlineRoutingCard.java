@@ -123,7 +123,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 
 	public void setSelectionMenu(@NonNull List<ChipItem> items,
 								 @NonNull String selectedId,
-								 @NonNull final CallbackWithObject<ChipItem> callback) {
+								 @NonNull CallbackWithObject<ChipItem> callback) {
 		showElements(chipsView);
 		chipsView.setItems(items);
 		ChipItem selected = chipsView.getChipById(selectedId);

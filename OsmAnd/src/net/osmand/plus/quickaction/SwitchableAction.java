@@ -62,11 +62,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull final MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
 
-		final SwitchCompat showDialog = view.findViewById(R.id.saveButton);
+		SwitchCompat showDialog = view.findViewById(R.id.saveButton);
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
@@ -136,8 +136,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-		final RecyclerView list = root.findViewById(R.id.list);
-		final Adapter adapter = (Adapter) list.getAdapter();
+		RecyclerView list = root.findViewById(R.id.list);
+		Adapter adapter = (Adapter) list.getAdapter();
 
 		boolean hasParams = adapter.itemsList != null && !adapter.itemsList.isEmpty();
 
@@ -217,8 +217,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		@Override
-		public void onBindViewHolder(final Adapter.ItemHolder holder, final int position) {
-			final T item = itemsList.get(position);
+		public void onBindViewHolder(Adapter.ItemHolder holder, int position) {
+			T item = itemsList.get(position);
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
@@ -392,7 +392,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected abstract String getListKey();
 
-	protected abstract View.OnClickListener getOnAddBtnClickListener(MapActivity activity, final Adapter adapter);
+	protected abstract View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter);
 
 	protected void onItemsSelected(Context ctx, List<T> selectedItems) {
 

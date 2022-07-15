@@ -76,7 +76,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	@Override
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
-		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
+		int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
 		String NOMINATIM_API;
 		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
 			NOMINATIM_API = "https://nominatim.openstreetmap.org/search/";

@@ -34,13 +34,13 @@ public class FailSafeFunctions {
 	private static boolean quitRouteRestoreDialog;
 	private static final Log log = PlatformUtil.getLog(FailSafeFunctions.class);
 
-	public static void restoreRoutingMode(final MapActivity ma) {
-		final OsmandApplication app = ma.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
-		final Handler uiHandler = new Handler();
-		final String gpxPath = settings.FOLLOW_THE_GPX_ROUTE.get();
-		final TargetPointsHelper targetPoints = app.getTargetPointsHelper();
-		final TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
+	public static void restoreRoutingMode(MapActivity ma) {
+		OsmandApplication app = ma.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		Handler uiHandler = new Handler();
+		String gpxPath = settings.FOLLOW_THE_GPX_ROUTE.get();
+		TargetPointsHelper targetPoints = app.getTargetPointsHelper();
+		TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode(ma, app);
 		} else {
@@ -52,7 +52,7 @@ public class FailSafeFunctions {
 				@Override
 				public void run() {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ma);
-					final TextView tv = new TextView(ma);
+					TextView tv = new TextView(ma);
 					tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
 					tv.setPadding(7, 5, 7, 5);
 					builder.setView(tv);
@@ -71,7 +71,7 @@ public class FailSafeFunctions {
 							notRestoreRoutingMode(ma, app);
 						}
 					});
-					final AlertDialog dlg = builder.show();
+					AlertDialog dlg = builder.show();
 					dlg.setOnDismissListener(new OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -129,7 +129,7 @@ public class FailSafeFunctions {
 
 						@Override
 						protected void onPostExecute(GPXFile result) {
-							final GPXRouteParamsBuilder gpxRoute;
+							GPXRouteParamsBuilder gpxRoute;
 							if (result != null) {
 								gpxRoute = new GPXRouteParamsBuilder(result, settings);
 								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {

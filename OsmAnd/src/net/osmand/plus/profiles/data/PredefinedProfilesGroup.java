@@ -37,11 +37,11 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 	}
 
 	@Override
-	public CharSequence getDescription(@NonNull final OsmandApplication ctx, boolean nightMode) {
+	public CharSequence getDescription(@NonNull OsmandApplication ctx, boolean nightMode) {
 		String fullDescription = ctx.getString(R.string.provided_by, description);
 		int color = ColorUtilities.getActiveColor(ctx, nightMode);
 		Typeface typeface = FontCache.getRobotoMedium(ctx);
-		final String url = description.toString();
+		String url = description.toString();
 		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, fullDescription, url);
 		int startInd = fullDescription.indexOf(url);
 		spannable.setSpan(new ForegroundColorSpan(color), startInd, startInd + url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

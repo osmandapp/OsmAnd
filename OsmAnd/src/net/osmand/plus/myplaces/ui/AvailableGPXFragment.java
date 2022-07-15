@@ -258,12 +258,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void updateCurrentTrack() {
-		final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (currentGpxView == null || plugin == null) {
 			return;
 		}
 
-		final boolean isRecording = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+		boolean isRecording = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 
 		ImageView icon = currentGpxView.findViewById(R.id.icon);
 		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.monitoring_rec_big));
@@ -330,7 +330,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		((TextView) currentGpxView.findViewById(R.id.distance))
 				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
 
-		final CheckBox checkbox = currentGpxView.findViewById(R.id.check_local_index);
+		CheckBox checkbox = currentGpxView.findViewById(R.id.check_local_index);
 		checkbox.setVisibility(selectionMode && showOnMapMode ? View.VISIBLE : View.GONE);
 		if (selectionMode && showOnMapMode) {
 			checkbox.setChecked(selectedItems.contains(currentRecording));
@@ -524,7 +524,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setListener(listener));
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
-			final MenuItem item;
+			MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
 			item = menu.add(0, contextMenuItem.getTitleId(), j + 1, contextMenuItem.getTitle());
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -559,7 +559,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(final MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
@@ -575,8 +575,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			Activity activity = getActivity();
 			if (activity != null) {
 				View menuSortItemView = getActivity().findViewById(R.id.action_sort);
-				final List<PopUpMenuItem> items = new ArrayList<>();
-				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+				List<PopUpMenuItem> items = new ArrayList<>();
+				for (TracksSortByMode mode : TracksSortByMode.values()) {
 					items.add(new PopUpMenuItem.Builder(app)
 							.setTitleId(mode.getNameId())
 							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
@@ -648,7 +648,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		showOnMapMode = true;
 		selectedItems.clear();
 		selectedGroups.clear();
-		final Set<GpxInfo> originalSelectedItems = allGpxAdapter.getSelectedGpx();
+		Set<GpxInfo> originalSelectedItems = allGpxAdapter.getSelectedGpx();
 		selectedItems.addAll(originalSelectedItems);
 
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
@@ -701,14 +701,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		selectedGpxHelper.runSelection(selectedItemsFileNames, gpxTaskListener);
 	}
 
-	public void openSelectionMode(final int actionResId, int darkIcon, int lightIcon,
-	                              @Nullable final SelectionModeListener listener) {
-		final int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
+	public void openSelectionMode(int actionResId, int darkIcon, int lightIcon,
+	                              @Nullable SelectionModeListener listener) {
+		int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
 		String value = app.getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
 		}
-		final String actionButton = value;
+		String actionButton = value;
 		if (allGpxAdapter.getGroupCount() == 0) {
 			showNoItemsForActionsToast(actionButton);
 			return;
@@ -858,7 +858,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private void moveGpx(final GpxInfo info) {
+	private void moveGpx(GpxInfo info) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(), this, info.file.getAbsolutePath(), false, false);
@@ -977,7 +977,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 			// This file could be sorted in different way for folders
 			// now folders are also sorted by last modified date
-			final Collator collator = OsmAndCollator.primaryCollator();
+			Collator collator = OsmAndCollator.primaryCollator();
 			Arrays.sort(listFiles, new Comparator<File>() {
 				@Override
 				public int compare(File f1, File f2) {
@@ -1075,7 +1075,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		public void refreshSelected() {
 			selected.clear();
 			selected.addAll(getSelectedGpx());
-			final Collator collator = OsmAndCollator.primaryCollator();
+			Collator collator = OsmAndCollator.primaryCollator();
 			Collections.sort(selected, new Comparator<GpxInfo>() {
 				@Override
 				public int compare(GpxInfo i1, GpxInfo i2) {
@@ -1172,10 +1172,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 
 		@Override
-		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
+		public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
 		                         View convertView, ViewGroup parent) {
 			View v = convertView;
-			final GpxInfo child = getChild(groupPosition, childPosition);
+			GpxInfo child = getChild(groupPosition, childPosition);
 			if (v == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
@@ -1187,7 +1187,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			options.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(v1 -> openPopUpMenu(v1, child));
 
-			final CheckBox checkbox = v.findViewById(R.id.check_local_index);
+			CheckBox checkbox = v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			if (selectionMode) {
 				checkbox.setChecked(selectedItems.contains(child));
@@ -1213,7 +1213,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				options.setVisibility(View.VISIBLE);
 			}
 
-			final CompoundButton checkItem = v.findViewById(R.id.toggle_item);
+			CompoundButton checkItem = v.findViewById(R.id.toggle_item);
 			if (isSelectedGroup(groupPosition)) {
 				v.findViewById(R.id.check_item).setVisibility(selectionMode ? View.INVISIBLE : View.VISIBLE);
 				v.findViewById(R.id.options).setVisibility(View.GONE);
@@ -1222,11 +1222,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 
 
-			final boolean isChecked;
+			boolean isChecked;
 			if (child.currentlyRecordingTrack) {
 				isChecked = selectedGpxHelper.getSelectedCurrentRecordingTrack() != null;
 			} else {
-				final SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByName(child.getFileName());
+				SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByName(child.getFileName());
 				isChecked = selectedGpxFile != null;
 			}
 			checkItem.setChecked(isChecked);
@@ -1246,7 +1246,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
 			String group = getGroup(groupPosition);
 			if (v == null) {
@@ -1258,7 +1258,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			v.findViewById(R.id.group_divider).setVisibility(View.VISIBLE);
 
 			if (selectionMode) {
-				final CheckBox ch = v.findViewById(R.id.toggle_item);
+				CheckBox ch = v.findViewById(R.id.toggle_item);
 				// Issue 6187: No selection box for Visible group header
 				//ch.setVisibility(View.VISIBLE);
 				ch.setVisibility((selectionMode && !(groupPosition == 0 && isShowingSelection())) ? View.VISIBLE : View.GONE);
@@ -1280,7 +1280,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 				v.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {
-				final CheckBox ch = v.findViewById(R.id.toggle_item);
+				CheckBox ch = v.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 				if (isSelectedGroup(groupPosition)) {
 					setCategoryIcon(app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), v);
@@ -1456,9 +1456,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
+	private void openPopUpMenu(View v, GpxInfo gpxInfo) {
 		UiUtilities iconsCache = app.getUIUtilities();
-		final List<PopUpMenuItem> items = new ArrayList<>();
+		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)
@@ -1529,7 +1529,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.create()
 		);
 
-		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_export)
@@ -1842,7 +1842,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Nullable
 	public static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull GpxInfo gpxInfo,
 	                                                   @NonNull OsmandApplication app,
-	                                                   @Nullable final GpxInfoViewCallback callback) {
+	                                                   @Nullable GpxInfoViewCallback callback) {
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null && sgpx.isLoaded()) {

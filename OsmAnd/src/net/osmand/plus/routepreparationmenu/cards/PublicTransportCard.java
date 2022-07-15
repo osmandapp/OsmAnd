@@ -339,7 +339,7 @@ public class PublicTransportCard extends MapBaseCard {
 		}
 	}
 
-	private View createRouteBadge(@NonNull final TransportRouteResultSegment segment, boolean badgesRowClickable) {
+	private View createRouteBadge(@NonNull TransportRouteResultSegment segment, boolean badgesRowClickable) {
 		LinearLayout bageView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		TransportRoute transportRoute = segment.route;
 		TransportStopRoute transportStopRoute = TransportStopRoute.getTransportStopRoute(transportRoute, segment.getStart());
@@ -370,7 +370,7 @@ public class PublicTransportCard extends MapBaseCard {
 		return bageView;
 	}
 
-	private View createWalkRouteBadge(@NonNull final RouteCalculationResult result, boolean badgesRowClickable) {
+	private View createWalkRouteBadge(@NonNull RouteCalculationResult result, boolean badgesRowClickable) {
 		View v = createWalkRouteBadge(result.getRoutingTime(), null, null, badgesRowClickable);
 		if (transportCardListener != null && !badgesRowClickable) {
 			v.setOnClickListener(new View.OnClickListener() {
@@ -383,7 +383,7 @@ public class PublicTransportCard extends MapBaseCard {
 		return v;
 	}
 
-	private View createWalkRouteBadge(double walkTime, @Nullable final LatLon start, @Nullable final LatLon end, boolean badgesRowClickable) {
+	private View createWalkRouteBadge(double walkTime, @Nullable LatLon start, @Nullable LatLon end, boolean badgesRowClickable) {
 		LinearLayout bageView = (LinearLayout) getMapActivity().getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		int activeColor = getActiveColor();
 

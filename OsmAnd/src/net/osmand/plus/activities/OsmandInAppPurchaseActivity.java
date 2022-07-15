@@ -60,7 +60,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 			}
 		}
 		if (purchaseHelper != null) {
-			final WeakReference<OsmandInAppPurchaseActivity> activityRef = new WeakReference<>(this);
+			WeakReference<OsmandInAppPurchaseActivity> activityRef = new WeakReference<>(this);
 			purchaseHelper.isInAppPurchaseSupported(this, new InAppPurchaseInitCallback() {
 				@Override
 				public void onSuccess() {
@@ -92,7 +92,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	public static void purchaseFullVersion(@NonNull final Activity activity) {
+	public static void purchaseFullVersion(@NonNull Activity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (app != null && Version.isFreeVersion(app)) {
 			if (app.isPlusVersionInApp()) {
@@ -114,7 +114,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	public static void purchaseDepthContours(@NonNull final Activity activity) {
+	public static void purchaseDepthContours(@NonNull Activity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (app != null) {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
@@ -129,7 +129,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	public static void purchaseContourLines(@NonNull final Activity activity) {
+	public static void purchaseContourLines(@NonNull Activity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (app != null) {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();

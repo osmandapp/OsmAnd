@@ -167,9 +167,9 @@ class RouteRecalculationHelper {
 		return routingHelper.getLastProjection();
 	}
 
-	private void setNewRoute(RouteCalculationResult prevRoute, final RouteCalculationResult res, Location start) {
+	private void setNewRoute(RouteCalculationResult prevRoute, RouteCalculationResult res, Location start) {
 		routingHelper.setRoute(res);
-		final boolean newRoute = !prevRoute.isCalculated();
+		boolean newRoute = !prevRoute.isCalculated();
 		if (isFollowingMode()) {
 			Location lastFixedLocation = getLastFixedLocation();
 			if (lastFixedLocation != null) {
@@ -221,9 +221,9 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	public void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates,
-											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute,
-											 boolean paramsChanged, boolean onlyStartPointChanged) {
+	public void recalculateRouteInBackground(Location start, LatLon end, List<LatLon> intermediates,
+	                                         GPXRouteParamsBuilder gpxRoute, RouteCalculationResult previousRoute,
+	                                         boolean paramsChanged, boolean onlyStartPointChanged) {
 		if (start == null || end == null) {
 			return;
 		}
@@ -234,7 +234,7 @@ class RouteRecalculationHelper {
 				recalculateCountInInterval++;
 			}
 			ApplicationMode mode = getAppMode();
-			final RouteCalculationParams params = new RouteCalculationParams();
+			RouteCalculationParams params = new RouteCalculationParams();
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
@@ -268,7 +268,7 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	void updateProgress(final RouteCalculationParams params) {
+	void updateProgress(RouteCalculationParams params) {
 		List<RouteCalculationProgressListener> listeners = new ArrayList<>();
 		if (params.calculationProgressListener != null) {
 			listeners.add(params.calculationProgressListener);
@@ -387,8 +387,8 @@ class RouteRecalculationHelper {
 			return routingHelper.getSettings();
 		}
 
-		private void showMessage(final String msg) {
-			final OsmandApplication app = routingHelper.getApplication();
+		private void showMessage(String msg) {
+			OsmandApplication app = routingHelper.getApplication();
 			app.runInUIThread(() -> app.showToastMessage(msg));
 		}
 
@@ -400,7 +400,7 @@ class RouteRecalculationHelper {
 			if (params.calculationProgress.isCancelled) {
 				return;
 			}
-			final boolean onlineSourceWithoutInternet = !res.isCalculated() &&
+			boolean onlineSourceWithoutInternet = !res.isCalculated() &&
 					params.mode.getRouteService().isOnline() && !settings.isInternetConnectionAvailable();
 			if (onlineSourceWithoutInternet && settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 				if (params.previousToRecalculate != null && params.previousToRecalculate.isCalculated()) {

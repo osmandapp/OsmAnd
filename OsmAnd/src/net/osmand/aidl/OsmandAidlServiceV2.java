@@ -791,7 +791,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public boolean search(SearchParams params, final IOsmAndAidlCallback callback) {
+		public boolean search(SearchParams params, IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("search");
 				return params != null && api != null && api.search(params.getSearchQuery(), params.getSearchType(),
@@ -912,7 +912,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			}
 		}
 
-		void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
+		void startRemoteUpdates(long updateTimeMS, long callbackId, IOsmAndAidlCallback callback) {
 			try {
 				mHandler.postDelayed(new Runnable() {
 					@Override
@@ -1059,7 +1059,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public boolean registerForOsmandInitListener(final IOsmAndAidlCallback callback) {
+		public boolean registerForOsmandInitListener(IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("registerForOsmandInitListener");
 				return api != null && api.registerForOsmandInitialization(new OsmandAppInitCallback() {
@@ -1079,7 +1079,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public boolean getBitmapForGpx(CreateGpxBitmapParams params, final IOsmAndAidlCallback callback) {
+		public boolean getBitmapForGpx(CreateGpxBitmapParams params, IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("getBitmapForGpx");
 				return params != null && api != null && api.getBitmapForGpx(params.getGpxUri(), params.getDensity(), params.getWidthPixels(), params.getHeightPixels(), params.getColor(), new GpxBitmapCreatedCallback() {
@@ -1114,7 +1114,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public long registerForNavigationUpdates(ANavigationUpdateParams params, final IOsmAndAidlCallback callback) {
+		public long registerForNavigationUpdates(ANavigationUpdateParams params, IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("registerForNavUpdates");
 				if (api != null) {
@@ -1137,7 +1137,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public long registerForKeyEvents(AKeyEventsParams params, final IOsmAndAidlCallback callback) {
+		public long registerForKeyEvents(AKeyEventsParams params, IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("registerForKeyEvents");
 				if (api != null) {
@@ -1160,7 +1160,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public long addContextMenuButtons(ContextMenuButtonsParams params, final IOsmAndAidlCallback callback) {
+		public long addContextMenuButtons(ContextMenuButtonsParams params, IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("addContextMenuButtons");
 				if (api != null && params != null) {
@@ -1237,7 +1237,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) {
+		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("registerForVoiceRouterMessages");
 				if (api != null) {

@@ -57,7 +57,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 
 	public void setupNavigation() {
 		View mainView = getView();
-		final RoutingHelper routingHelper = getMyApplication().getRoutingHelper();
+		RoutingHelper routingHelper = getMyApplication().getRoutingHelper();
 		getActivity();
 		if (!routingHelper.isRouteCalculated() || 
 				(!(getActivity() instanceof MapActivity))) {
@@ -66,7 +66,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 		} else {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}
-		final MapActivity map =  (MapActivity) getActivity();
+		MapActivity map =  (MapActivity) getActivity();
 		LinearLayout favorites = mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -108,7 +108,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 		favorites.addView(view);
 	}
 
-	private void updatePlayButton(final RoutingHelper routingHelper, final MapActivity map, final ImageView play) {
+	private void updatePlayButton(RoutingHelper routingHelper, MapActivity map, ImageView play) {
 		boolean toContinueNavigation = routingHelper.isRoutePlanningMode();
 		play.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(
 						toContinueNavigation ? R.drawable.ic_play_dark : R.drawable.ic_pause)

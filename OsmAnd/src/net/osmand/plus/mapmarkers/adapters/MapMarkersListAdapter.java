@@ -85,7 +85,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	@Override
-	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
+	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 		UiUtilities iconsCache = app.getUIUtilities();
@@ -94,7 +94,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean firstMarkerItem = showLocationItem ? pos == 1 : pos == 0;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
 		boolean start = pos == startPos;
-		final boolean finish = pos == finishPos && startPos != finishPos;
+		boolean finish = pos == finishPos && startPos != finishPos;
 		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
 		boolean roundTripFinishItem = finish && showRoundTripItem;
 

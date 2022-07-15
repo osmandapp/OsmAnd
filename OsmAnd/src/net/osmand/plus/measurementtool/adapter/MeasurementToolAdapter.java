@@ -51,13 +51,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!nightMode) {
 			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
 		}
-		final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
+		int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		view.setBackgroundColor(backgroundColor);
 		return new MeasureToolItemVH(view);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final MeasureToolItemVH holder, int pos) {
+	public void onBindViewHolder(@NonNull MeasureToolItemVH holder, int pos) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		UiUtilities iconsCache = app.getUIUtilities();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));

@@ -86,7 +86,7 @@ public class DiscountHelper {
 	private static final String CHOOSE_PLAN_TYPE_PRO = "osmand-pro";
 	private static final String CHOOSE_PLAN_TYPE_MAPS_PLUS = "osmand-maps-plus";
 
-	public static void checkAndDisplay(final MapActivity mapActivity) {
+	public static void checkAndDisplay(MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
@@ -102,7 +102,7 @@ public class DiscountHelper {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();
-		final Map<String, String> pms = new LinkedHashMap<>();
+		Map<String, String> pms = new LinkedHashMap<>();
 		pms.put("version", Version.getFullVersion(app));
 		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() + "");
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
@@ -247,9 +247,9 @@ public class DiscountHelper {
 		return result;
 	}
 
-	private static void showDiscountBanner(final MapActivity mapActivity, final ControllerData data) {
+	private static void showDiscountBanner(MapActivity mapActivity, ControllerData data) {
 		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
-		final DiscountBarController toolbarController = new DiscountBarController();
+		DiscountBarController toolbarController = new DiscountBarController();
 		if (data.bgColor != -1) {
 			LayerDrawable bgLand = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
 			if (bgLand != null) {
@@ -293,13 +293,13 @@ public class DiscountHelper {
 		mapActivity.showTopToolbar(toolbarController);
 	}
 
-	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
+	private static void showPoiFilter(MapActivity mapActivity, PoiUIFilter poiFilter) {
 		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, () -> mFilterVisible = false);
 		mFilter = poiFilter;
 		mFilterVisible = true;
 	}
 
-	public static void openUrl(final MapActivity mapActivity, String url) {
+	public static void openUrl(MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();

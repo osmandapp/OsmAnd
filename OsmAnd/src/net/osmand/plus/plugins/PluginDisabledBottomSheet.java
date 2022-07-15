@@ -38,7 +38,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		Context context = getContext();
 		if (context == null || app == null) {
 			return;

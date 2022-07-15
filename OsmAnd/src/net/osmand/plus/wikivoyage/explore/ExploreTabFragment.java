@@ -76,8 +76,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		downloadManager = new DownloadValidationManager(app);
 		nightMode = !app.getSettings().isLightContent();
 
-		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
-		final RecyclerView rv = mainView.findViewById(R.id.recycler_view);
+		View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
+		RecyclerView rv = mainView.findViewById(R.id.recycler_view);
 
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
@@ -171,14 +171,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	public void populateData() {
-		final List<BaseTravelCard> items = new ArrayList<>();
-		final FragmentActivity activity = getActivity();
-		final OsmandApplication app = activity != null ? (OsmandApplication) activity.getApplication() : null;
+		List<BaseTravelCard> items = new ArrayList<>();
+		FragmentActivity activity = getActivity();
+		OsmandApplication app = activity != null ? (OsmandApplication) activity.getApplication() : null;
 		if (app != null) {
 			if (!Version.isPaidVersion(app) && !OpenBetaTravelCard.isClosed()) {
 				items.add(new OpenBetaTravelCard(activity, nightMode));
 			}
-			final List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
+			List<TravelArticle> popularArticles = app.getTravelHelper().getPopularArticles();
 			if (!popularArticles.isEmpty()) {
 				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 				for (TravelArticle article : popularArticles) {
@@ -214,7 +214,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			}
 			items.add(new StartEditingTravelCard(activity, nightMode));
 			adapter.setItems(items);
-			final DownloadIndexesThread downloadThread = app.getDownloadThread();
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
 			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 				waitForIndexes = true;
 				downloadThread.runReloadIndexFilesSilent();
@@ -272,7 +272,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void addDownloadUpdateCard() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app != null && !mainIndexItems.isEmpty() && SHOW_TRAVEL_UPDATE_CARD) {
 			boolean outdated = isMapsOutdated();
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, mainIndexItems, !outdated);
@@ -329,7 +329,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void addNeededMapsCard() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app != null && !neededIndexItems.isEmpty() && SHOW_TRAVEL_NEEDED_MAPS_CARD) {
 			neededMapsCard = new TravelNeededMapsCard(app, nightMode, neededIndexItems);
 			neededMapsCard.setListener(new TravelNeededMapsCard.CardListener() {

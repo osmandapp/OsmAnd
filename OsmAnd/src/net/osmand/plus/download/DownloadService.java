@@ -25,13 +25,13 @@ public class DownloadService extends Service {
 	}
 
 	public void stopService(Context ctx) {
-		final Intent serviceIntent = new Intent(ctx, DownloadService.class);
+		Intent serviceIntent = new Intent(ctx, DownloadService.class);
 		ctx.stopService(serviceIntent);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		final OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = (OsmandApplication) getApplication();
 		app.setDownloadService(this);
 
 		Notification notification = app.getNotificationHelper().buildDownloadNotification();
@@ -44,7 +44,7 @@ public class DownloadService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		final OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = (OsmandApplication) getApplication();
 		app.setDownloadService(null);
 
 		// remove notification

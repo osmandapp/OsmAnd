@@ -37,7 +37,7 @@ public class ReverseTrackCard extends MapBaseCard {
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_change_navigation_points));
 
-		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
+		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(parameter.isSelected(app.getSettings()));
 		UiUtilities.setupCompoundButton(nightMode, getActiveColor(), compoundButton);
 

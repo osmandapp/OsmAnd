@@ -54,8 +54,8 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		if (filePath == null) {
 			return;
 		}
-		final File file = new File(filePath);
-		final File fileDir = file.getParentFile();
+		File file = new File(filePath);
+		File fileDir = file.getParentFile();
 
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.select_folder_descr))
@@ -89,13 +89,13 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		dividerItem.setMargins(0, 0, 0, 0);
 		items.add(dividerItem);
 
-		final List<File> dirs = new ArrayList<>();
+		List<File> dirs = new ArrayList<>();
 		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, showAllFolders ? null : fileDir);
 		if (showAllFolders || !Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
 			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
 		}
 		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
-		for (final File dir : dirs) {
+		for (File dir : dirs) {
 			String dirName = dir.getPath();
 			if (dirName.startsWith(gpxDir)) {
 				if (dirName.length() == gpxDir.length()) {
@@ -111,7 +111,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 			} else {
 				description = String.valueOf(files.size());
 			}
-			final BaseBottomSheetItem[] folderItem = new BaseBottomSheetItem[1];
+			BaseBottomSheetItem[] folderItem = new BaseBottomSheetItem[1];
 			folderItem[0] = new BottomSheetItemWithDescription.Builder()
 					.setDescription(description)
 					.setTitle(capitalizeFirstLetter(dirName))

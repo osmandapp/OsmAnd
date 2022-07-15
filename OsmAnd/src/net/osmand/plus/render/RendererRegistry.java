@@ -139,8 +139,8 @@ public class RendererRegistry {
 	}
 	
 	@Nullable
-	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
-			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
+	private RenderingRulesStorage loadRenderer(String name, Map<String, RenderingRulesStorage> loadedRenderers,
+			Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
 		InputStream is = getInputStream(name);
 		if (is == null) {
 			return null;

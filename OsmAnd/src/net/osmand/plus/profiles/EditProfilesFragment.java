@@ -58,7 +58,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
 		if (savedInstanceState != null && savedInstanceState.containsKey(APP_MODES_ORDER_KEY) && savedInstanceState.containsKey(DELETED_APP_MODES_KEY)) {
 			appModesOrders = (HashMap<String, Integer>) savedInstanceState.getSerializable(APP_MODES_ORDER_KEY);
@@ -97,7 +97,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		adapter = new EditProfilesAdapter(app);
 		updateItems();
 
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
+		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 
 		touchHelper.attachToRecyclerView(recyclerView);
 		adapter.setAdapterListener(new ProfilesAdapterListener() {
@@ -357,10 +357,10 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		@SuppressLint("ClickableViewAccessibility")
 		@Override
-		public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int pos) {
+		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int pos) {
 			if (holder instanceof ProfileViewHolder) {
 				ProfileViewHolder profileViewHolder = (ProfileViewHolder) holder;
-				final EditProfileDataObject mode = (EditProfileDataObject) items.get(pos);
+				EditProfileDataObject mode = (EditProfileDataObject) items.get(pos);
 
 				profileViewHolder.title.setText(mode.getName());
 				profileViewHolder.description.setText(mode.getDescription());

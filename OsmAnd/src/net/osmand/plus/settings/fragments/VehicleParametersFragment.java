@@ -224,12 +224,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		app.getRoutingHelper().onSettingsChanged(getSelectedAppMode());
 	}
 
-	private void showSeekbarSettingsDialog(@NonNull Activity activity, final boolean defaultSpeedOnly) {
-		final ApplicationMode mode = getSelectedAppMode();
+	private void showSeekbarSettingsDialog(@NonNull Activity activity, boolean defaultSpeedOnly) {
+		ApplicationMode mode = getSelectedAppMode();
 
 		SpeedConstants units = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
 		String speedUnits = units.toShortString(activity);
-		final float[] ratio = new float[1];
+		float[] ratio = new float[1];
 		switch (units) {
 			case MILES_PER_HOUR:
 				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
@@ -369,12 +369,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				titleId = R.string.default_speed_setting_title;
 				break;
 		}
-		final Slider slider = sliderLayout.findViewById(R.id.speed_slider);
-		final TextView speedTitleTv = sliderLayout.findViewById(R.id.speed_title);
-		final TextView speedMinTv = sliderLayout.findViewById(R.id.speed_seekbar_min_text);
-		final TextView speedMaxTv = sliderLayout.findViewById(R.id.speed_seekbar_max_text);
-		final TextView speedUnitsTv = sliderLayout.findViewById(R.id.speed_units);
-		final TextView selectedSpeedTv = sliderLayout.findViewById(R.id.speed_text);
+		Slider slider = sliderLayout.findViewById(R.id.speed_slider);
+		TextView speedTitleTv = sliderLayout.findViewById(R.id.speed_title);
+		TextView speedMinTv = sliderLayout.findViewById(R.id.speed_seekbar_min_text);
+		TextView speedMaxTv = sliderLayout.findViewById(R.id.speed_seekbar_max_text);
+		TextView speedUnitsTv = sliderLayout.findViewById(R.id.speed_units);
+		TextView selectedSpeedTv = sliderLayout.findViewById(R.id.speed_text);
 
 		speedTitleTv.setText(titleId);
 		speedMinTv.setText(String.valueOf(min));

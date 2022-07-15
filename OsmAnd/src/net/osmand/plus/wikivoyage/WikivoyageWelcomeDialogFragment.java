@@ -26,7 +26,7 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		View mainView = inflate(R.layout.fragment_wikivoyage_welcome_dialog, container);
 

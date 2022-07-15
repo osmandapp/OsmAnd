@@ -284,7 +284,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		Object obj = listAdapter.getItem(position);
 		if (obj instanceof DownloadResourceGroup) {
 			String uniqueId = ((DownloadResourceGroup) obj).getUniqueId();
-			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
+			DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
 					.createInstance(uniqueId);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		} else if (obj instanceof IndexItem) {
@@ -364,8 +364,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			final Object obj = items.get(position);
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Object obj = items.get(position);
 			if (obj instanceof IndexItem || obj instanceof CityItem) {
 
 				ItemViewHolder viewHolder;
@@ -648,9 +648,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					String[] ors = searchRequest.split(",");
 					List<List<String>> conds = new ArrayList<>();
 					for (String or : ors) {
-						final ArrayList<String> cond = new ArrayList<>();
+						ArrayList<String> cond = new ArrayList<>();
 						for (String term : or.split("\\s")) {
-							final String t = term.trim().toLowerCase();
+							String t = term.trim().toLowerCase();
 							if (t.length() > 0) {
 								cond.add(t);
 							}
@@ -663,7 +663,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					DownloadResources indexes = ctx.getDownloadThread().getIndexes();
 					processGroup(indexes, filter, conds);
 
-					final Collator collator = OsmAndCollator.primaryCollator();
+					Collator collator = OsmAndCollator.primaryCollator();
 					Collections.sort(filter, new Comparator<Object>() {
 						@Override
 						public int compare(Object obj1, Object obj2) {

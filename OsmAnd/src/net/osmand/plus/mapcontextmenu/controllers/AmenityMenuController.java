@@ -40,7 +40,7 @@ public class AmenityMenuController extends MenuController {
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
 	                             @NonNull PointDescription pointDescription,
-	                             @NonNull final Amenity amenity) {
+	                             @NonNull Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {

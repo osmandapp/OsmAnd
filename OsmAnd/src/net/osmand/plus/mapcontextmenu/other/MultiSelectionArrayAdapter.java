@@ -36,11 +36,11 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 	@NonNull
 	@Override
-	public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
 			convertView = menu.getMapActivity().getLayoutInflater().inflate(R.layout.menu_obj_list_item, parent, false);
 		}
-		final MenuObject item = getItem(position);
+		MenuObject item = getItem(position);
 		if (item != null) {
 			if (!menu.isLandscapeLayout()) {
 				int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());
@@ -55,8 +55,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 				}
 			});
 			UiUtilities iconsCache = menu.getMapActivity().getMyApplication().getUIUtilities();
-			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
-			final ImageView iconView = convertView.findViewById(R.id.context_menu_icon_view);
+			View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
+			ImageView iconView = convertView.findViewById(R.id.context_menu_icon_view);
 			if (item.getPointDescription().isFavorite() || item.getPointDescription().isWpt()) {
 				int iconSize = getContext().getResources().getDimensionPixelSize(R.dimen.favorites_my_places_icon_size);
 				iconView.getLayoutParams().height = iconSize;

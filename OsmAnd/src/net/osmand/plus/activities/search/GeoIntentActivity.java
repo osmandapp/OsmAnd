@@ -44,11 +44,11 @@ public class GeoIntentActivity extends OsmandListActivity {
 			public void onFinish(AppInitializer init) {
 			}
 		});
-		final Intent intent = getIntent();
+		Intent intent = getIntent();
 		if (intent != null) {
-			final ProgressDialog progress = ProgressDialog.show(GeoIntentActivity.this, getString(R.string.searching),
+			ProgressDialog progress = ProgressDialog.show(GeoIntentActivity.this, getString(R.string.searching),
 					getString(R.string.searching_address));
-			final GeoIntentTask task = new GeoIntentTask(progress, intent);
+			GeoIntentTask task = new GeoIntentTask(progress, intent);
 
 			progress.setOnCancelListener(new OnCancelListener() {
 				@Override
@@ -68,7 +68,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		private final ProgressDialog progress;
 		private final Intent intent;
 
-		private GeoIntentTask(final ProgressDialog progress, final Intent intent) {
+		private GeoIntentTask(ProgressDialog progress, Intent intent) {
 			this.progress = progress;
 			this.intent = intent;
 		}

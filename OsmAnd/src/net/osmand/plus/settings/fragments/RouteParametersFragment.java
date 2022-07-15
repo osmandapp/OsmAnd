@@ -103,7 +103,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	@Override
 	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		final RecyclerView view = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+		RecyclerView view = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
 		//To prevent icons from flashing when the user turns switch on/off
 		view.setItemAnimator(null);
 		view.setLayoutAnimation(null);
@@ -465,12 +465,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private void showSeekbarSettingsDialog(Activity activity, final ApplicationMode mode) {
+	private void showSeekbarSettingsDialog(Activity activity, ApplicationMode mode) {
 		if (activity == null || mode == null) {
 			return;
 		}
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final float[] angleValue = {mode.getStrAngle()};
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		float[] angleValue = {mode.getStrAngle()};
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
@@ -489,13 +489,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		builder.show();
 	}
 
-	private static void setupAngleSlider(final float[] angleValue,
+	private static void setupAngleSlider(float[] angleValue,
 	                                     View sliderView,
-	                                     final boolean nightMode,
-	                                     final int activeColor) {
+	                                     boolean nightMode,
+	                                     int activeColor) {
 
-		final Slider angleBar = sliderView.findViewById(R.id.angle_slider);
-		final TextView angleTv = sliderView.findViewById(R.id.angle_text);
+		Slider angleBar = sliderView.findViewById(R.id.angle_slider);
+		TextView angleTv = sliderView.findViewById(R.id.angle_text);
 
 		angleTv.setText(String.valueOf(angleValue[0]));
 		angleBar.setValue((int) angleValue[0]);

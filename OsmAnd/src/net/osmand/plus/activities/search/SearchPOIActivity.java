@@ -193,7 +193,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = findViewById(R.id.poiSplitbar);
+		Toolbar tb = findViewById(R.id.poiSplitbar);
 		tb.setTitle(null);
 		tb.getMenu().clear();
 		tb.setVisibility(visible ? View.VISIBLE : View.GONE);
@@ -345,9 +345,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void showOptionsMenu(View v) {
 		// Show menu with search all, name finder, name finder poi
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
-		final PopupMenu optionsMenu = new PopupMenu(this, v);
+		PopupMenu optionsMenu = new PopupMenu(this, v);
 
-		final PoiUIFilter f = this.filter;
+		PoiUIFilter f = this.filter;
 		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_edit)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -377,7 +377,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		optionsMenu.show();
 	}
 
-	private void addFilter(PopupMenu optionsMenu, final String value) {
+	private void addFilter(PopupMenu optionsMenu, String value) {
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		MenuItem item = optionsMenu.getMenu().add(getString(R.string.search_poi_filter) + ": " + value)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
@@ -514,9 +514,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (handled) {
 			this.location = location;
 			ListView lv = getListView();
-			final int index = lv.getFirstVisiblePosition();
+			int index = lv.getFirstVisiblePosition();
 			View v = lv.getChildAt(0);
-			final int top = (v == null) ? 0 : v.getTop();
+			int top = (v == null) ? 0 : v.getTop();
 			accessibilityAssistant.lockEvents();
 			amenityAdapter.notifyDataSetChanged();
 			lv.setSelectionFromTop(index, top);
@@ -550,7 +550,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		// msg.what = COMPASS_REFRESH_MSG_ID;
 		// uiHandler.sendMessageDelayed(msg, 100);
 		// }
-		final View selected = accessibilityAssistant.getFocusedView();
+		View selected = accessibilityAssistant.getFocusedView();
 		if (selected != null) {
 			try {
 				int position = getListView().getPositionForView(selected);
@@ -584,9 +584,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		final OsmandSettings settings = app.getSettings();
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
+		OsmandSettings settings = app.getSettings();
 		String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity,
 				app.getSettings().MAP_PREFERRED_LOCALE.get(), 
 				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
@@ -916,7 +916,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	public void savePoiFilter() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.edit_filter_save_as_menu_item);
-		final EditText editText = new EditText(this);
+		EditText editText = new EditText(this);
 		if (filter.isStandardFilter()) {
 			editText.setText((filter.getName() + " " + searchFilter.getText()).trim());
 		} else {

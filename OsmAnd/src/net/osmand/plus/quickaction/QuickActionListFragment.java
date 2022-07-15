@@ -201,7 +201,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     private void setUpToolbar() {
-        final OsmandApplication app = requireMyApplication();
+        OsmandApplication app = requireMyApplication();
         TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
         tvTitle.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
         boolean isWidgetVisibleOnMap = app.getQuickActionRegistry().isQuickActionOn();
@@ -242,9 +242,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     private void updateListItems() {
-        final MapActivity ma = getMapActivity();
-        final OsmandApplication app = ma.getMyApplication();
-        final List<QuickAction> actions = quickActionRegistry.getFilteredQuickActions();
+        MapActivity ma = getMapActivity();
+        OsmandApplication app = ma.getMyApplication();
+        List<QuickAction> actions = quickActionRegistry.getFilteredQuickActions();
 
         updateToolbarActionButton();
         List<ListItem> items = new ArrayList<>();
@@ -352,7 +352,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         }
     }
 
-    private void updateToolbarSwitch(final boolean isChecked) {
+    private void updateToolbarSwitch(boolean isChecked) {
         OsmandApplication app = requireMyApplication();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
         int color = isChecked ? appMode.getProfileColor(nightMode) : ContextCompat.getColor(app, R.color.preference_top_switch_off);
@@ -486,7 +486,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     return new ButtonVH(frame);
                 case BOTTOM_SHADOW:
                     itemView = inflater.inflate(R.layout.card_bottom_divider, parent, false);
-                    final int spaceHeight = getResources()
+                    int spaceHeight = getResources()
                             .getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
                     itemView.setMinimumHeight(spaceHeight);
                     return new BottomShadowVH(itemView);
@@ -496,14 +496,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         }
 
         @Override
-        public void onBindViewHolder(@NotNull final RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NotNull RecyclerView.ViewHolder holder, int position) {
             OsmandApplication app = requireMyApplication();
             ListItem item = items.get(position);
             int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 
             if (holder instanceof QuickActionVH) {
-                final QuickActionVH h = (QuickActionVH) holder;
-                final QuickAction action = (QuickAction) item.value;
+                QuickActionVH h = (QuickActionVH) holder;
+                QuickAction action = (QuickAction) item.value;
 
                 if (screenType == SCREEN_TYPE_REORDER) {
                     h.moveButton.setVisibility(View.VISIBLE);

@@ -148,11 +148,11 @@ public class ItemViewHolder {
 		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
 	}
 
-	public void bindDownloadItem(final DownloadItem downloadItem) {
+	public void bindDownloadItem(DownloadItem downloadItem) {
 		bindDownloadItem(downloadItem, null);
 	}
 
-	public void bindDownloadItem(final DownloadItem downloadItem, final String cityName) {
+	public void bindDownloadItem(DownloadItem downloadItem, String cityName) {
 		initAppStatusVariables();
 		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
 		int progress = -1;
@@ -295,7 +295,7 @@ public class ItemViewHolder {
 		}
 	}
 
-	public void bindDownloadItem(final CityItem cityItem) {
+	public void bindDownloadItem(CityItem cityItem) {
 		if (cityItem.getIndexItem() != null) {
 			bindDownloadItem(cityItem.getIndexItem(), cityItem.getName());
 		} else {
@@ -307,7 +307,7 @@ public class ItemViewHolder {
 		}
 	}
 
-	private boolean checkDisabledAndClickAction(final DownloadItem item) {
+	private boolean checkDisabledAndClickAction(DownloadItem item) {
 		RightButtonAction clickAction = getClickAction(item);
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
 		OnClickListener action = getRightButtonAction(item, clickAction);
@@ -319,7 +319,7 @@ public class ItemViewHolder {
 		} else {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
-			final boolean isDownloading = item.isDownloading(context.getDownloadThread());
+			boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			if (isDownloading) {
 				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
 				rightImageButton.setContentDescription(context.getString(R.string.shared_string_cancel));
@@ -343,7 +343,7 @@ public class ItemViewHolder {
 	}
 
 	@SuppressLint("DefaultLocale")
-	public RightButtonAction getClickAction(final DownloadItem item) {
+	public RightButtonAction getClickAction(DownloadItem item) {
 		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
 		if (item.getBasename().equalsIgnoreCase(DownloadResources.WORLD_SEAMARKS_KEY)
 				&& nauticalPluginDisabled) {
@@ -367,7 +367,7 @@ public class ItemViewHolder {
 		return clickAction;
 	}
 
-	public OnClickListener getRightButtonAction(final DownloadItem item, final RightButtonAction clickAction) {
+	public OnClickListener getRightButtonAction(DownloadItem item, RightButtonAction clickAction) {
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
@@ -406,7 +406,7 @@ public class ItemViewHolder {
 				}
 			};
 		} else {
-			final boolean isDownloading = item.isDownloading(context.getDownloadThread());
+			boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -427,13 +427,13 @@ public class ItemViewHolder {
 	}
 
 	protected void showContextMenu(View v,
-								   final DownloadItem downloadItem,
-								   final DownloadResourceGroup parentOptional) {
+								   DownloadItem downloadItem,
+								   DownloadResourceGroup parentOptional) {
 		OsmandApplication app = context.getMyApplication();
 		PopupMenu optionsMenu = new PopupMenu(context, v);
 		MenuItem item;
 
-		final List<File> downloadedFiles = downloadItem.getDownloadedFiles(app);
+		List<File> downloadedFiles = downloadItem.getDownloadedFiles(app);
 		if (!Algorithms.isEmpty(downloadedFiles)) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_remove)
 					.setIcon(getContentIcon(context, R.drawable.ic_action_remove_dark));
@@ -481,7 +481,7 @@ public class ItemViewHolder {
 		}
 	}
 
-	private void confirmDownload(final DownloadItem item) {
+	private void confirmDownload(DownloadItem item) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(R.string.are_you_sure);
 		builder.setMessage(R.string.confirm_download_roadmaps);
@@ -518,8 +518,8 @@ public class ItemViewHolder {
 		);
 	}
 
-	private void confirmRemove(@NonNull final DownloadItem downloadItem,
-							   @NonNull final List<File> downloadedFiles) {
+	private void confirmRemove(@NonNull DownloadItem downloadItem,
+							   @NonNull List<File> downloadedFiles) {
 		OsmandApplication app = context.getMyApplication();
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 

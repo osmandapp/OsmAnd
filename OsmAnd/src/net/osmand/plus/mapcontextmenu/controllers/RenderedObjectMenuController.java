@@ -97,7 +97,7 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapPoiTypes poiTypes = mapActivity.getMyApplication().getPoiTypes();

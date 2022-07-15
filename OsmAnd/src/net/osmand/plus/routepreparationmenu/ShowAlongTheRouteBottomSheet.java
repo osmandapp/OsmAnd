@@ -78,7 +78,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 		int expandType = args.getInt(EXPAND_TYPE_KEY, -1);
 
-		final View titleView = UiUtilities.getInflater(ctx, nightMode)
+		View titleView = UiUtilities.getInflater(ctx, nightMode)
 				.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
 		TextView textView = titleView.findViewById(R.id.title);
 		textView.setText(R.string.show_along_the_route);
@@ -94,12 +94,12 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			}
 		});
 
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);
 
-		final ContentItem contentItem = getAdapterContentItems();
+		ContentItem contentItem = getAdapterContentItems();
 		if (expandType != -1) {
 			ArrayList<ContentItem> subItems = contentItem.getSubItems();
 			for (int i = 0; i < subItems.size(); i++) {
@@ -138,7 +138,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 	}
 
 	private ContentItem getAdapterContentItems() {
-		final ContentItem contentItem = new ContentItem();
+		ContentItem contentItem = new ContentItem();
 		for (int i = 2; i < WaypointHelper.MAX; i++) {
 			List<WaypointHelper.LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
 			ContentItem headerItem = new PointItem(i);
@@ -248,19 +248,19 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 
 		@Override
-		public View getChildView(int groupPosition, final int childPosition,
+		public View getChildView(int groupPosition, int childPosition,
 		                         boolean isLastChild, View convertView, ViewGroup parent) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 
-			final ContentItem group = contentItem.getSubItems().get(groupPosition);
-			final ContentItem child = group.getSubItems().get(childPosition);
+			ContentItem group = contentItem.getSubItems().get(groupPosition);
+			ContentItem child = group.getSubItems().get(childPosition);
 
 			if (child instanceof RadiusItem) {
 				convertView = createItemForRadiusProximity(themedInflater, group.type);
 			} else if (child instanceof InfoItem) {
 				convertView = createInfoItem(themedInflater);
 			} else if (child instanceof PointItem) {
-				final PointItem item = (PointItem) child;
+				PointItem item = (PointItem) child;
 				convertView = themedInflater.inflate(R.layout.along_the_route_point_item, parent, false);
 				WaypointDialogHelper.updatePointInfoView(app, mapActivity, convertView, item.point, true, nightMode, true, false);
 
@@ -276,7 +276,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					}
 				});
 
-				final ImageButton remove = convertView.findViewById(R.id.info_close);
+				ImageButton remove = convertView.findViewById(R.id.info_close);
 				remove.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -321,11 +321,11 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, final boolean isExpanded,
+		public View getGroupView(int groupPosition, boolean isExpanded,
 		                         View convertView, ViewGroup parent) {
-			final ContentItem group = contentItem.getSubItems().get(groupPosition);
-			final int type = group.type;
-			final boolean enabled = waypointHelper.isTypeEnabled(type);
+			ContentItem group = contentItem.getSubItems().get(groupPosition);
+			int type = group.type;
+			boolean enabled = waypointHelper.isTypeEnabled(type);
 
 			if (convertView == null) {
 				convertView = UiUtilities.getInflater(context, nightMode).inflate(R.layout.along_the_route_category_item, parent, false);
@@ -335,7 +335,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 			adjustIndicator(app, groupPosition, isExpanded, convertView, !nightMode);
 
-			final CompoundButton compoundButton = convertView.findViewById(R.id.compound_button);
+			CompoundButton compoundButton = convertView.findViewById(R.id.compound_button);
 			compoundButton.setChecked(enabled);
 			compoundButton.setEnabled(true);
 			compoundButton.setOnClickListener(new View.OnClickListener() {
@@ -420,7 +420,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			return view;
 		}
 
-		private View createItemForRadiusProximity(LayoutInflater themedInflater, final int type) {
+		private View createItemForRadiusProximity(LayoutInflater themedInflater, int type) {
 			View v;
 			if (type == WaypointHelper.POI) {
 				v = themedInflater.inflate(R.layout.along_the_route_radius_poi, null);
@@ -428,17 +428,17 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 						getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName();
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity) + ":");
 				((TextView) v.findViewById(R.id.titleEx)).setText(getString(R.string.shared_string_type) + ":");
-				final TextView radiusEx = v.findViewById(R.id.descriptionEx);
+				TextView radiusEx = v.findViewById(R.id.descriptionEx);
 				radiusEx.setText(descEx);
 				v.findViewById(R.id.secondCellContainer).setOnClickListener(view -> mapActivity.getMapLayers()
 						.showSingleChoicePoiFilterDialog(mapActivity, () -> enableType(type, true)));
-				final TextView radius = v.findViewById(R.id.description);
+				TextView radius = v.findViewById(R.id.description);
 				radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
 				v.findViewById(R.id.firstCellContainer).setOnClickListener(view -> selectDifferentRadius(type));
 			} else {
 				v = themedInflater.inflate(R.layout.along_the_route_radius_simple, null);
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity));
-				final TextView radius = v.findViewById(R.id.description);
+				TextView radius = v.findViewById(R.id.description);
 				radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
 				v.setOnClickListener(view -> selectDifferentRadius(type));
 			}
@@ -446,7 +446,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 	}
 
-	private void selectPoi(final int type, final boolean enable) {
+	private void selectPoi(int type, boolean enable) {
 		if (!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
 			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity,
 					() -> {
@@ -470,7 +470,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 	}
 
-	protected void selectDifferentRadius(final int type) {
+	protected void selectDifferentRadius(int type) {
 		int length = WaypointHelper.SEARCH_RADIUS_VALUES.length;
 		String[] names = new String[length];
 		int selected = 0;
@@ -504,12 +504,12 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		dialog.show();
 	}
 
-	private void enableType(final int type,
-	                        final boolean enable) {
+	private void enableType(int type,
+	                        boolean enable) {
 		new EnableWaypointsTypeTask(this, type, enable).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void recalculatePoints(final int type) {
+	private void recalculatePoints(int type) {
 		new RecalculatePointsTask(this, type).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

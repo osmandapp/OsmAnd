@@ -254,9 +254,9 @@ public class AudioVideoNoteRecordingMenu {
 		return res;
 	}
 
-	public void rec(@NonNull final MapActivity mapActivity, final boolean restart) {
+	public void rec(@NonNull MapActivity mapActivity, boolean restart) {
 		stopCounter();
-		final CurrentRecording recording = plugin.getCurrentRecording();
+		CurrentRecording recording = plugin.getCurrentRecording();
 		int delay;
 		if (recording != null && recording.getType() == AVActionType.REC_PHOTO) {
 			delay = 200;
@@ -277,7 +277,7 @@ public class AudioVideoNoteRecordingMenu {
 		}, delay);
 	}
 
-	public void recExternal(@NonNull final MapActivity mapActivity) {
+	public void recExternal(@NonNull MapActivity mapActivity) {
 		stopCounter();
 		handler.postDelayed(() -> {
 			CurrentRecording recording = plugin.getCurrentRecording();
@@ -316,7 +316,7 @@ public class AudioVideoNoteRecordingMenu {
 		}
 	}
 
-	public void showFinalPhoto(final byte[] jpeg, long duration) {
+	public void showFinalPhoto(byte[] jpeg, long duration) {
 	}
 
 	public void hideFinalPhoto() {

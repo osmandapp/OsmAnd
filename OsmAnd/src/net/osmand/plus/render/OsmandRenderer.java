@@ -185,21 +185,21 @@ public class OsmandRenderer {
 	 */
 	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
 			NativeSearchResult searchResultHandler, 
-			Bitmap bmp, RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
+			Bitmap bmp, RenderingRuleSearchRequest render, MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
 			rc.cosRotateTileSize = (float) (Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE);
 			rc.sinRotateTileSize = (float) (Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE);
 			try {
 				if(Looper.getMainLooper() != null && library.useDirectRendering()) {
-					final Handler h = new Handler(Looper.getMainLooper());
+					Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, mapTileDownloader, h);
 				}
 				
 				// Native library will decide on it's own best way of rendering
 				// If res.bitmapBuffer is null, it indicates that rendering was done directly to
 				// memory of passed bitmap, but this is supported only on Android >= 2.2
-				final NativeLibrary.RenderingGenerationResult res = library.generateRendering(
+				NativeLibrary.RenderingGenerationResult res = library.generateRendering(
 					rc, searchResultHandler, bmp, bmp.hasAlpha(), render);
 				rc.ended = true;
 				notifyListeners(mapTileDownloader);
@@ -246,7 +246,7 @@ public class OsmandRenderer {
 		}
 	
 	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, 
-				RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
+				RenderingRuleSearchRequest render, MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		// fill area
 		Canvas cv = new Canvas(bmp);
@@ -294,7 +294,7 @@ public class OsmandRenderer {
 		}
 	}
 
-	private void notifyListenersWithDelay(final RenderingContext rc, final MapTileDownloader mapTileDownloader, final Handler h) {
+	private void notifyListenersWithDelay(RenderingContext rc, MapTileDownloader mapTileDownloader, Handler h) {
 		h.postDelayed(new Runnable() {
 			@Override
 			public void run() {

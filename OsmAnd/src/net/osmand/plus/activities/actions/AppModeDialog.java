@@ -31,32 +31,32 @@ public class AppModeDialog {
 
 	//special method for drawer menu
 	//needed because if there's more than 4 items  - the don't fit in drawer
-	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected,
-												boolean useMapTheme, final View.OnClickListener onClickListener) {
+	public static View prepareAppModeDrawerView(Activity a, Set<ApplicationMode> selected,
+												boolean useMapTheme, View.OnClickListener onClickListener) {
 		OsmandApplication app = (OsmandApplication) a.getApplication();
 		OsmandSettings settings = app.getSettings();
-		final List<ApplicationMode> values = new ArrayList<>(ApplicationMode.values(app));
+		List<ApplicationMode> values = new ArrayList<>(ApplicationMode.values(app));
 		selected.add(settings.getApplicationMode());
 		return prepareAppModeView(a, values, selected, null, true, true, useMapTheme, onClickListener);
 	}
 
-	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values, final Set<ApplicationMode> selected,
-										  ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
+	public static View prepareAppModeView(Activity a, List<ApplicationMode> values, Set<ApplicationMode> selected,
+										  ViewGroup parent, boolean singleSelection, boolean useListBg, boolean useMapTheme, View.OnClickListener onClickListener) {
 		boolean nightMode = isNightMode(((OsmandApplication) a.getApplication()), useMapTheme);
 
 		return prepareAppModeView(a, values, selected, parent, singleSelection, useListBg, useMapTheme, onClickListener, nightMode);
 	}
 
-	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values, final Set<ApplicationMode> selected,
-										  ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener, boolean nightMode) {
+	public static View prepareAppModeView(Activity a, List<ApplicationMode> values, Set<ApplicationMode> selected,
+										  ViewGroup parent, boolean singleSelection, boolean useListBg, boolean useMapTheme, View.OnClickListener onClickListener, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) a.getApplication();
-		final View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
+		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		if (useListBg) {
 			AndroidUtils.setListItemBackground(a, ll, nightMode);
 		} else {
 			ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 		}
-		final View[] buttons = new View[values.size()];
+		View[] buttons = new View[values.size()];
 		int k = 0;
 		for (ApplicationMode ma : values) {
 			buttons[k++] = createToggle(a.getLayoutInflater(), app, R.layout.mode_view, ll.findViewById(R.id.app_modes_content), ma, useMapTheme);
@@ -66,7 +66,7 @@ public class AppModeDialog {
 		}
 
 		ApplicationMode activeMode = app.getSettings().getApplicationMode();
-		final int idx = values.indexOf(activeMode);
+		int idx = values.indexOf(activeMode);
 
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
@@ -84,15 +84,15 @@ public class AppModeDialog {
 	}
 
 
-	public static void updateButtonState(final OsmandApplication app, final List<ApplicationMode> visible,
-										 final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
-										 int i, final boolean singleChoice, final boolean useMapTheme, final boolean nightMode) {
+	public static void updateButtonState(OsmandApplication app, List<ApplicationMode> visible,
+	                                     Set<ApplicationMode> selected, View.OnClickListener onClickListener, View[] buttons,
+	                                     int i, boolean singleChoice, boolean useMapTheme, boolean nightMode) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		if (buttons[i] != null) {
 			View tb = buttons[i];
-			final ApplicationMode mode = visible.get(i);
-			final boolean checked = selected.contains(mode);
-			final View selection = tb.findViewById(R.id.selection);
+			ApplicationMode mode = visible.get(i);
+			boolean checked = selected.contains(mode);
+			View selection = tb.findViewById(R.id.selection);
 			ImageView iv = tb.findViewById(R.id.app_mode_icon);
 			if (checked) {
 				iv.setImageDrawable(app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode)));
@@ -137,13 +137,13 @@ public class AppModeDialog {
 		}
 	}
 
-	public static void updateButtonStateForRoute(final OsmandApplication ctx, final List<ApplicationMode> visible,
-												 final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
-												 int i, final boolean singleChoice, final boolean useMapTheme, final boolean nightMode) {
+	public static void updateButtonStateForRoute(OsmandApplication ctx, List<ApplicationMode> visible,
+	                                             Set<ApplicationMode> selected, View.OnClickListener onClickListener, View[] buttons,
+	                                             int i, boolean singleChoice, boolean useMapTheme, boolean nightMode) {
 		if (buttons[i] != null) {
 			View tb = buttons[i];
-			final ApplicationMode mode = visible.get(i);
-			final boolean checked = selected.contains(mode);
+			ApplicationMode mode = visible.get(i);
+			boolean checked = selected.contains(mode);
 			ImageView iv = tb.findViewById(R.id.app_mode_icon);
 			ImageView selection = tb.findViewById(R.id.selection);
 			Drawable drawable = ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));

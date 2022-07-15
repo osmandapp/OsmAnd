@@ -48,7 +48,7 @@ public class DownloadFileHelper {
 		return e != null && e.getMessage().equals("Interrupted");
 	}
 	
-	public InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
+	public InputStream getInputStreamToDownload(URL url, boolean forceWifi) throws IOException {
 		InputStream cis = new InputStream() {
 			final byte[] buffer = new byte[BUFFER_SIZE];
 			int bufLen;
@@ -204,7 +204,7 @@ public class DownloadFileHelper {
 	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress,
 								List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
-			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
+			List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
 			log.info("Url downloading " + de.urlToDownload);
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));

@@ -45,7 +45,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 					.setAcceptsDelayedFocusGain(false)
 					.setOnAudioFocusChangeListener(this)
 					.build();
-			final Object focusLock = new Object();
+			Object focusLock = new Object();
 			int res = mAudioManager.requestAudioFocus(mAudioFocusRequest);
 			synchronized(focusLock) {
 				if (res == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {

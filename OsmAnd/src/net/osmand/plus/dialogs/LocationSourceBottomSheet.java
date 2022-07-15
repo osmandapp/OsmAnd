@@ -75,7 +75,7 @@ public class LocationSourceBottomSheet extends MenuBottomSheetDialogFragment {
 			MarginLayoutParams params = (MarginLayoutParams) compoundButton.getLayoutParams();
 			AndroidUtils.setMargins(params, 0, 0, margin, 0);
 
-			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(selectedSource == source)
 					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorId, activeColorId))

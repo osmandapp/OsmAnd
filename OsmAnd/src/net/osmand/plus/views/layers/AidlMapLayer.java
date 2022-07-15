@@ -436,7 +436,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private int getRadiusPoi(RotatedTileBox tb) {
 		int r;
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		if (zoom < START_ZOOM) {
 			r = 0;
 		} else if (zoom <= 11) {

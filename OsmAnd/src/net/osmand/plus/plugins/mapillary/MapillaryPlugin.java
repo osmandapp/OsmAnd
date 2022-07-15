@@ -237,7 +237,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
 			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
+			List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
 				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible, false);
 			}

@@ -111,9 +111,9 @@ public class ShareMenu extends BaseMenuController {
 		String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
 		lat = lat.substring(0, lat.length() - 1);
 		lon = lon.substring(0, lon.length() - 1);
-		final int zoom = mapActivity.getMapView().getZoom();
-		final String geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-		final String httpUrl = "https://osmand.net/go?lat=" + lat + "&lon=" + lon + "&z=" + zoom;
+		int zoom = mapActivity.getMapView().getZoom();
+		String geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
+		String httpUrl = "https://osmand.net/go?lat=" + lat + "&lon=" + lon + "&z=" + zoom;
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
@@ -212,7 +212,7 @@ public class ShareMenu extends BaseMenuController {
 		AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 	}
 
-	public static void sendQRCode(final Activity activity, String encodeType, Bundle encodeData, String strEncodeData) {
+	public static void sendQRCode(Activity activity, String encodeType, Bundle encodeData, String strEncodeData) {
 		Intent intent = new Intent();
 		intent.addCategory(Intent.CATEGORY_DEFAULT);
 		intent.setAction(ZXING_BARCODE_SCANNER_ACTIVITY);

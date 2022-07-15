@@ -175,8 +175,8 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 	private void updateIntervalValue() {
 		if (intervalSlider != null && intervalContainer != null) {
 			updateIntervalLegend();
-			final int secondsLength = SECONDS.length;
-			final int minutesLength = MINUTES.length;
+			int secondsLength = SECONDS.length;
+			int minutesLength = MINUTES.length;
 			intervalSlider.setValueTo(secondsLength + minutesLength - 1);
 			int currentModeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 			UiUtilities.setupSlider(intervalSlider, nightMode, currentModeColor, true);

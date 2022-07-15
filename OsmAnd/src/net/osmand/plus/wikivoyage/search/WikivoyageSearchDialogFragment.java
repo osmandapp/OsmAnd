@@ -51,10 +51,10 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		searchHelper = new WikivoyageSearchHelper(app);
 
-		final View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
@@ -97,7 +97,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 		clearIb.setOnClickListener(v -> searchEt.setText(""));
 
 		adapter = new SearchRecyclerViewAdapter(app);
-		final RecyclerView rv = mainView.findViewById(R.id.recycler_view);
+		RecyclerView rv = mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 		adapter.setOnItemClickListener(v -> {
@@ -156,7 +156,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 		cancelled = false;
 		searchHelper.search(searchQuery, new ResultMatcher<List<WikivoyageSearchResult>>() {
 			@Override
-			public boolean publish(final List<WikivoyageSearchResult> results) {
+			public boolean publish(List<WikivoyageSearchResult> results) {
 				getMyApplication().runInUIThread(() -> {
 					if (!isCancelled()) {
 						setAdapterItems(results);

@@ -188,7 +188,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return searchMapObjectsByName(name, resultMatcher, null);
 	}
 
-	private List<City> fillWithCities(String name, final ResultMatcher<City> resultMatcher, final List<Integer> typeFilter) throws IOException {
+	private List<City> fillWithCities(String name, ResultMatcher<City> resultMatcher, List<Integer> typeFilter) throws IOException {
 		List<City> result = new ArrayList<City>();
 		ResultMatcher<MapObject> matcher = new ResultMatcher<MapObject>() {
 			final List<City> cache = new ArrayList<City>();
@@ -235,7 +235,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 	@Override
-	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
+	public synchronized List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<>(cities.values());
 		try {
 			citiesToFill.addAll(fillWithCities(name, resultMatcher, getCityTypeFilter(name, searchVillages)));
@@ -302,7 +302,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 	@Override
-	public City getCityById(final long id, String name) {
+	public City getCityById(long id, String name) {
 		if (id == -1) {
 			// do not preload cities for that case
 			return null;
@@ -310,7 +310,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		if (id < -1 && name != null) {
 			name = name.toUpperCase();
 		}
-		final String cmpName = name;
+		String cmpName = name;
 		preloadCities(null);
 		if (!cities.containsKey(id)) {
 			try {

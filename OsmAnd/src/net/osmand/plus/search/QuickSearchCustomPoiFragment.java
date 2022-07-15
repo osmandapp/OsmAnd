@@ -337,7 +337,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		updateCloseSearchIcon(false);
 	}
 
-	private void startSearchSubCategories(final String text) {
+	private void startSearchSubCategories(String text) {
 		updateCloseSearchIcon(true);
 		searchCancelled = false;
 		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
@@ -346,9 +346,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			@Override
 			public boolean publish(SearchResult searchResult) {
 				if (searchResult.objectType == SEARCH_FINISHED) {
-					final List<PoiType> selectedSubCategories = getSelectedSubCategories();
+					List<PoiType> selectedSubCategories = getSelectedSubCategories();
 					SearchResultCollection resultCollection = searchUICore.getCurrentSearchResult();
-					final List<PoiType> results = new ArrayList<>();
+					List<PoiType> results = new ArrayList<>();
 					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
 						Object poiObject = result.object;
 						if (poiObject instanceof PoiType) {
@@ -565,7 +565,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			return (row);
 		}
 
-		private void addRowListener(final PoiCategory category, final SwitchCompat check) {
+		private void addRowListener(PoiCategory category, SwitchCompat check) {
 			check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

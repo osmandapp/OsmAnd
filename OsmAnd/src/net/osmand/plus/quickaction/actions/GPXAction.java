@@ -95,7 +95,7 @@ public class GPXAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		unselectGpxFileIfMissing();
 
 		if (!shouldUseSelectedGpxFile()) {
@@ -144,7 +144,7 @@ public class GPXAction extends QuickAction {
 	private void lookupAddress(@NonNull LatLon latLon,
 	                           @NonNull MapActivity mapActivity,
 	                           @NonNull CallbackWithObject<String> onAddressDetermined) {
-		final Dialog progressDialog = new ProgressDialog(mapActivity);
+		Dialog progressDialog = new ProgressDialog(mapActivity);
 		progressDialog.setCancelable(false);
 		progressDialog.setTitle(R.string.search_address);
 		progressDialog.show();
@@ -157,7 +157,7 @@ public class GPXAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_gpx, parent, false);
 		parent.addView(root);
@@ -229,7 +229,7 @@ public class GPXAction extends QuickAction {
 		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(mapActivity));
 	}
 
-	private void setupGpxTrackInfo(@NonNull final View container, @NonNull final OsmandApplication app) {
+	private void setupGpxTrackInfo(@NonNull View container, @NonNull OsmandApplication app) {
 		String gpxFilePath = getSelectedGpxFilePath(false);
 		if (gpxFilePath == null) {
 			return;
@@ -388,7 +388,7 @@ public class GPXAction extends QuickAction {
 		}
 	}
 
-	private void showPredefineWaypointAppearanceDialog(@NonNull View container, @NonNull final MapActivity mapActivity) {
+	private void showPredefineWaypointAppearanceDialog(@NonNull View container, @NonNull MapActivity mapActivity) {
 		WptPtEditor waypointEditor = mapActivity.getContextMenu().getWptPtPointEditor();
 		if (waypointEditor != null) {
 			WptPt source = hasPredefinedWaypointAppearance()

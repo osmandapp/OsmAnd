@@ -112,7 +112,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof HeaderViewHolder) {
 			Integer dateHeader = (Integer) getItem(position);
 			bindHeaderItem((HeaderViewHolder) holder, dateHeader, position);
@@ -336,7 +336,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		final View shadowDivider;
 		final CompoundButton compoundButton;
 
-		public HeaderViewHolder(final View itemView) {
+		public HeaderViewHolder(View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			divider = itemView.findViewById(R.id.divider);

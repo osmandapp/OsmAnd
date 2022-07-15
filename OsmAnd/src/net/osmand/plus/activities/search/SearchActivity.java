@@ -309,7 +309,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 	
 	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = findViewById(R.id.bottomControls);
+		Toolbar tb = findViewById(R.id.bottomControls);
 		tb.setTitle(null);
 		tb.getMenu().clear();
 		tb.setVisibility(visible? View.VISIBLE : View.GONE);

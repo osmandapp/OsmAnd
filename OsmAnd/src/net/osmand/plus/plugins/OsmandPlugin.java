@@ -335,7 +335,7 @@ public abstract class OsmandPlugin {
 		saveCustomPlugins(app);
 	}
 
-	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
+	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull CustomOsmandPlugin plugin) {
 		allPlugins.remove(plugin);
 		if (plugin.isActive()) {
 			plugin.removePluginItems(() -> Algorithms.removeAllFiles(plugin.getPluginDir()));
@@ -1001,7 +1001,7 @@ public abstract class OsmandPlugin {
 	public static Collection<DashFragmentData> getPluginsCardsList() {
 		HashSet<DashFragmentData> collection = new HashSet<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			final DashFragmentData fragmentData = plugin.getCardFragment();
+			DashFragmentData fragmentData = plugin.getCardFragment();
 			if (fragmentData != null) collection.add(fragmentData);
 		}
 		return collection;

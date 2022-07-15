@@ -29,7 +29,7 @@ public class SliderCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		final TextView thresholdDistanceValue = view.findViewById(R.id.value);
+		TextView thresholdDistanceValue = view.findViewById(R.id.value);
 		thresholdDistanceValue.setText(getStringValueWithMetric(initValue));
 		TextView thresholdDistance = view.findViewById(R.id.title);
 		thresholdDistance.setText(R.string.threshold_distance);

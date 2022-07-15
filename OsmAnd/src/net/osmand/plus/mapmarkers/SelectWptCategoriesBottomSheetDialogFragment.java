@@ -66,7 +66,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		Map<String, PointsGroup> pointsGroups = gpxFile.getPointsGroups();
 
-		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!isUpdateMode || categories != null && categories.size() == pointsGroups.size())
 				.setCompoundButtonColorId(activeColorResId)
@@ -88,7 +88,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		for (Entry<String, PointsGroup> entry : pointsGroups.entrySet()) {
 			String category = entry.getKey();
-			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(!isUpdateMode || (categories != null && categories.contains(category)))
 					.setOnCheckedChangeListener((buttonView, isChecked) -> {

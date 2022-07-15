@@ -54,7 +54,7 @@ public class AvoidSpecificRoads {
 	private final OsmandApplication app;
 	private final Map<LatLon, AvoidRoadInfo> impassableRoads = new LinkedHashMap<>();
 
-	public AvoidSpecificRoads(final OsmandApplication app) {
+	public AvoidSpecificRoads(OsmandApplication app) {
 		this.app = app;
 		loadImpassableRoads();
 	}
@@ -96,20 +96,20 @@ public class AvoidSpecificRoads {
 	}
 
 	private ArrayAdapter<AvoidRoadInfo> createAdapter(MapActivity mapActivity, boolean nightMode) {
-		final ArrayList<AvoidRoadInfo> points = new ArrayList<>(impassableRoads.values());
-		final LatLon mapLocation = mapActivity.getMapLocation();
-		final LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		ArrayList<AvoidRoadInfo> points = new ArrayList<>(impassableRoads.values());
+		LatLon mapLocation = mapActivity.getMapLocation();
+		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 
 		return new ArrayAdapter<AvoidRoadInfo>(themedContext, R.layout.waypoint_reached, R.id.title, points) {
 			@NonNull
 			@Override
-			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 				View v = convertView;
 				if (v == null || v.findViewById(R.id.info_close) == null) {
 					v = inflater.inflate(R.layout.waypoint_reached, parent, false);
 				}
-				final AvoidRoadInfo item = getItem(position);
+				AvoidRoadInfo item = getItem(position);
 				v.findViewById(R.id.all_points).setVisibility(View.GONE);
 				((ImageView) v.findViewById(R.id.waypoint_icon))
 						.setImageDrawable(getIcon(R.drawable.ic_action_road_works_dark));
@@ -190,7 +190,7 @@ public class AvoidSpecificRoads {
 		removeImpassableRoad(getLocation(obj));
 	}
 
-	public void showDialog(@NonNull final MapActivity mapActivity, @Nullable final ApplicationMode mode) {
+	public void showDialog(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
@@ -200,7 +200,7 @@ public class AvoidSpecificRoads {
 			if (impassableRoads.isEmpty()) {
 				builder.setMessage(R.string.avoid_roads_msg);
 			} else {
-				final ArrayAdapter<AvoidRoadInfo> listAdapter = createAdapter(mapActivity, nightMode);
+				ArrayAdapter<AvoidRoadInfo> listAdapter = createAdapter(mapActivity, nightMode);
 				builder.setAdapter(listAdapter, (dialog, which) -> {
 					AvoidRoadInfo point = listAdapter.getItem(which);
 					if (point != null) {
@@ -220,11 +220,11 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	public void selectFromMap(@NonNull final MapActivity mapActivity) {
+	public void selectFromMap(@NonNull MapActivity mapActivity) {
 		selectFromMap(mapActivity, null);
 	}
 
-	public void selectFromMap(@NonNull final MapActivity mapActivity, @Nullable final ApplicationMode mode) {
+	public void selectFromMap(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {
 		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
 		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
 			@Override
@@ -235,17 +235,17 @@ public class AvoidSpecificRoads {
 		});
 	}
 
-	public void addImpassableRoad(@Nullable final MapActivity mapActivity,
-	                              @NonNull final LatLon loc,
-	                              final boolean showDialog,
-	                              final boolean skipWritingSettings,
-	                              @Nullable final String appModeKey) {
-		final Location ll = new Location("");
+	public void addImpassableRoad(@Nullable MapActivity mapActivity,
+	                              @NonNull LatLon loc,
+	                              boolean showDialog,
+	                              boolean skipWritingSettings,
+	                              @Nullable String appModeKey) {
+		Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
 
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
-		final ApplicationMode appMode = appModeKey != null ? ApplicationMode.valueOfStringKey(appModeKey, defaultAppMode) : defaultAppMode;
+		ApplicationMode appMode = appModeKey != null ? ApplicationMode.valueOfStringKey(appModeKey, defaultAppMode) : defaultAppMode;
 
 		List<RouteSegmentResult> roads = app.getMeasurementEditingContext() != null
 				? app.getMeasurementEditingContext().getRoadSegmentData(appMode)
@@ -297,17 +297,17 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	public void replaceImpassableRoad(final MapActivity activity,
-	                                  final AvoidRoadInfo currentObject,
-									  final LatLon newLoc,
-									  final boolean showDialog,
-									  final AvoidSpecificRoadsCallback callback) {
-		final Location ll = new Location("");
+	public void replaceImpassableRoad(MapActivity activity,
+	                                  AvoidRoadInfo currentObject,
+	                                  LatLon newLoc,
+	                                  boolean showDialog,
+	                                  AvoidSpecificRoadsCallback callback) {
+		Location ll = new Location("");
 		ll.setLatitude(newLoc.getLatitude());
 		ll.setLongitude(newLoc.getLongitude());
 
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
-		final ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentObject.appModeKey, defaultAppMode);
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentObject.appModeKey, defaultAppMode);
 
 		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
 
@@ -319,7 +319,7 @@ public class AvoidSpecificRoads {
 						callback.onAddImpassableRoad(false, null);
 					}
 				} else {
-					final LatLon oldLoc = getLocation(currentObject);
+					LatLon oldLoc = getLocation(currentObject);
 					app.getSettings().moveImpassableRoad(oldLoc, newLoc);
 					impassableRoads.remove(oldLoc);
 					for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {

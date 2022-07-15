@@ -215,8 +215,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	@NonNull
 	@Override
-	public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-		final QuickSearchListItem listItem = getItem(position);
+	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+		QuickSearchListItem listItem = getItem(position);
 		QuickSearchListItemType type = listItem.getType();
 
 		LinearLayout view;
@@ -331,7 +331,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout bindSearchMoreItem(@Nullable View convertView,
-											@NonNull final QuickSearchListItem listItem) {
+											@NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_more_list_item);
 
 		if (listItem.getSpannableName() != null) {
@@ -340,7 +340,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
 		}
 
-		final QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
+		QuickSearchMoreListItem searchMoreItem = (QuickSearchMoreListItem) listItem;
 		int emptyDescId = searchMoreItem.isSearchMoreAvailable() ? R.string.nothing_found_descr : R.string.modify_the_search_query;
 		((TextView) view.findViewById(R.id.empty_search_description)).setText(emptyDescId);
 
@@ -397,10 +397,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return view;
 	}
 
-	private LinearLayout bindSelectAllItem(final int position,
-										   @Nullable View convertView) {
+	private LinearLayout bindSelectAllItem(int position,
+	                                       @Nullable View convertView) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.select_all_list_item);
-		final CheckBox ch = view.findViewById(R.id.toggle_item);
+		CheckBox ch = view.findViewById(R.id.toggle_item);
 		ch.setVisibility(View.VISIBLE);
 		ch.setChecked(selectAll);
 		ch.setOnClickListener(new View.OnClickListener() {
@@ -617,10 +617,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return !Algorithms.objectEquals(view.getTag(), layoutId);
 	}
 
-	private void setupCheckBox(final int position,
-							   @NonNull View rootView,
-							   @NonNull QuickSearchListItem listItem) {
-		final CheckBox ch = rootView.findViewById(R.id.toggle_item);
+	private void setupCheckBox(int position,
+	                           @NonNull View rootView,
+	                           @NonNull QuickSearchListItem listItem) {
+		CheckBox ch = rootView.findViewById(R.id.toggle_item);
 		if (selectionMode) {
 			ch.setVisibility(View.VISIBLE);
 			ch.setChecked(selectedItems.contains(listItem));
@@ -634,9 +634,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		view.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
 	}
 
-	private void setupDivider(final int position,
-							  @NonNull View view,
-							  @NonNull QuickSearchListItem listItem) {
+	private void setupDivider(int position,
+	                          @NonNull View view,
+	                          @NonNull QuickSearchListItem listItem) {
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER

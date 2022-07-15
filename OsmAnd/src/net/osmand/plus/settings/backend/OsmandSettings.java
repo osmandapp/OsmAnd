@@ -2642,11 +2642,11 @@ public class OsmandSettings {
 		return result;
 	}
 
-	public void setSelectedPoiFilters(final Set<String> poiFilters) {
+	public void setSelectedPoiFilters(Set<String> poiFilters) {
 		setSelectedPoiFilters(APPLICATION_MODE.get(), poiFilters);
 	}
 
-	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, final Set<String> poiFilters) {
+	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.setModeValue(appMode, android.text.TextUtils.join(",", poiFilters));
 	}
 

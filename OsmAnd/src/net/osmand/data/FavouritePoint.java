@@ -111,7 +111,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		initAltitude(app, null);
 	}
 
-	public void initAltitude(OsmandApplication app, final Runnable callback) {
+	public void initAltitude(OsmandApplication app, Runnable callback) {
 		Location location = new Location("", latitude, longitude);
 		app.getLocationProvider().getRouteSegment(location, null, false,
 				new ResultMatcher<RouteDataObject>() {

@@ -115,8 +115,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			pagerAdapter.addTab(getTabIndicator(R.string.saved_articles, SavedArticlesTabFragment.class));
 		}
 
-		final ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(app, nightMode);
-		final BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+		ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(app, nightMode);
+		BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
 		bottomNav.setOnItemSelectedListener(item -> {
@@ -286,10 +286,10 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		return ContextCompat.getColor(app, colorId);
 	}
 
-	public void populateData(final boolean resetData) {
+	public void populateData(boolean resetData) {
 		switchProgressBarVisibility(true);
 		if (app.isApplicationInitializing()) {
-			final WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
+			WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onStart(AppInitializer init) {

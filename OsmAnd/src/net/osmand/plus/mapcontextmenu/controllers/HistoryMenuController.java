@@ -18,7 +18,7 @@ public class HistoryMenuController extends MenuController {
 	private HistoryEntry entry;
 	private boolean hasTypeInDescription;
 
-	public HistoryMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final HistoryEntry entry) {
+	public HistoryMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull HistoryEntry entry) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.entry = entry;
 		builder.setShowNearestWiki(true);

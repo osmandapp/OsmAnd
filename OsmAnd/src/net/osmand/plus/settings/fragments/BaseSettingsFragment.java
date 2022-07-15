@@ -982,7 +982,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applyPreferenceWithSnackBar(final String prefId, final Serializable newValue) {
+	protected void applyPreferenceWithSnackBar(String prefId, Serializable newValue) {
 		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
 		View containerView = getView();

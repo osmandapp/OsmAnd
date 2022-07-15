@@ -48,7 +48,7 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		return "loc_meta_" + tableLocation;
 	}
 	
-	public boolean initialize(final IProgress progress, File file, int version, String tableLocation, boolean searchX31) {
+	public boolean initialize(IProgress progress, File file, int version, String tableLocation, boolean searchX31) {
 		long start = System.currentTimeMillis();
 		if(db != null){
 			// close previous db

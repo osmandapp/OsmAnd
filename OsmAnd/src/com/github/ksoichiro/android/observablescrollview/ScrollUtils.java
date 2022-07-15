@@ -37,7 +37,7 @@ public final class ScrollUtils {
      * @param maxValue maximum value. If value is greater than this, maxValue will be returned
      * @return float value limited to the range
      */
-    public static float getFloat(final float value, final float minValue, final float maxValue) {
+    public static float getFloat(float value, float minValue, float maxValue) {
         return Math.min(maxValue, Math.max(minValue, value));
     }
 
@@ -63,7 +63,7 @@ public final class ScrollUtils {
      * @param view     the target view to add global layout listener
      * @param runnable runnable to be executed after the view is laid out
      */
-    public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
+    public static void addOnGlobalLayoutListener(View view, Runnable runnable) {
         ViewTreeObserver vto = view.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

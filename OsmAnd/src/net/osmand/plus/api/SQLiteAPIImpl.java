@@ -59,7 +59,7 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 
 		@Override
 		public SQLiteCursor rawQuery(String sql, String[] selectionArgs) {
-			final Cursor c = ds.rawQuery(sql, selectionArgs);
+			Cursor c = ds.rawQuery(sql, selectionArgs);
 			if(c == null) {
 				return null;
 			}
@@ -135,7 +135,7 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 
 		@Override
 		public SQLiteStatement compileStatement(String query) {
-			final android.database.sqlite.SQLiteStatement st = ds.compileStatement(query);
+			android.database.sqlite.SQLiteStatement st = ds.compileStatement(query);
 			if(st == null) {
 				return null;
 			}

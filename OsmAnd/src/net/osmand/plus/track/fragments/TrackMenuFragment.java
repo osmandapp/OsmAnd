@@ -1155,7 +1155,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
 				builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
 				builder.setMessage(R.string.are_you_sure);
-				final String gpxFilePath = gpxFile.path;
+				String gpxFilePath = gpxFile.path;
 				builder.setNegativeButton(R.string.shared_string_cancel, null)
 						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 							if (FileUtils.removeGpxFile(app, new File(gpxFilePath))) {
@@ -1231,7 +1231,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (isPortrait()) {
 			if (animated) {
-				final float toolbarAlpha = getToolbarAlpha(y);
+				float toolbarAlpha = getToolbarAlpha(y);
 				if (toolbarAlpha > 0) {
 					updateVisibility(toolbarContainer, true);
 				}
@@ -1461,7 +1461,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
+	public void showOptionsPopupMenu(View view, TrkSegment segment, boolean confirmDeletion, GpxDisplayItem gpxItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
@@ -1555,7 +1555,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return false;
 	}
 
-	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
+	private void saveGpx(SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -1692,7 +1692,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                @Nullable String returnScreenName,
 	                                @Nullable String callingFragmentTag,
 	                                @Nullable String tabToOpenName) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, selectedGpxFile -> {
 			MapActivity activity = mapActivityRef.get();
 			if (activity != null && selectedGpxFile != null) {

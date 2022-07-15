@@ -112,7 +112,7 @@ public class AnimateDraggingMapThread {
 	public synchronized void startThreadAnimating(@NonNull Runnable runnable) {
 		stopAnimatingSync();
 		stopped = false;
-		final Thread t = new Thread(() -> {
+		Thread t = new Thread(() -> {
 			try {
 				suspendUpdate();
 				runnable.run();
@@ -125,20 +125,20 @@ public class AnimateDraggingMapThread {
 		t.start();
 	}
 
-	public void startMoving(final double finalLat, final double finalLon, final Pair<Integer, Double> finalZoom,
-							final boolean pendingRotation, final Float finalRotation, final boolean notifyListener) {
+	public void startMoving(double finalLat, double finalLon, Pair<Integer, Double> finalZoom,
+	                        boolean pendingRotation, Float finalRotation, boolean notifyListener) {
 		stopAnimatingSync();
 
-		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
 		double startLat = rb.getLatitude();
 		double startLon = rb.getLongitude();
-		final int startZoom = rb.getZoom();
-		final double startZoomFP = rb.getZoomFloatPart();
-		final float startRotation = rb.getRotate();
+		int startZoom = rb.getZoom();
+		double startZoomFP = rb.getZoomFloatPart();
+		float startRotation = rb.getRotate();
 
-		final int zoom;
-		final double zoomFP;
-		final float rotation;
+		int zoom;
+		double zoomFP;
+		float rotation;
 		if (finalZoom != null && finalZoom.first != null && finalZoom.second != null) {
 			zoom = finalZoom.first;
 			zoomFP = finalZoom.second;
@@ -155,8 +155,8 @@ public class AnimateDraggingMapThread {
 		MapRendererView mapRenderer = tileView.getMapRenderer();
 		PointF startPoint = NativeUtilities.getPixelFromLatLon(mapRenderer, rb, startLat, startLon);
 		PointF finalPoint = NativeUtilities.getPixelFromLatLon(mapRenderer, rb, finalLat, finalLon);
-		final float mMoveX = startPoint.x - finalPoint.x;
-		final float mMoveY = startPoint.y - finalPoint.y;
+		float mMoveX = startPoint.x - finalPoint.x;
+		float mMoveY = startPoint.y - finalPoint.y;
 
 		boolean skipAnimation = !NativeUtilities.containsLatLon(mapRenderer, rb, finalLat, finalLon);
 		if (skipAnimation) {
@@ -207,13 +207,13 @@ public class AnimateDraggingMapThread {
 			app.runInUIThread(startAnimationCallback);
 		}
 
-		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
 		double startLat = rb.getLatitude();
 		double startLon = rb.getLongitude();
-		final int startZoom = rb.getZoom();
-		final double startZoomFP = rb.getZoomFloatPart();
+		int startZoom = rb.getZoom();
+		double startZoomFP = rb.getZoomFloatPart();
 		float[] mSt = new float[2];
-		final int moveZoom = calculateMoveZoom(rb, finalLat, finalLon, mSt);
+		int moveZoom = calculateMoveZoom(rb, finalLat, finalLon, mSt);
 		boolean skipAnimation = moveZoom == 0;
 		// check if animation needed
 		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
@@ -227,14 +227,14 @@ public class AnimateDraggingMapThread {
 			return;
 		}
 		MapRendererView mapRenderer = tileView.getMapRenderer();
-		final PointF startPoint = NativeUtilities.getPixelFromLatLon(mapRenderer, rb, startLat, startLon);
-		final PointF finalPoint = NativeUtilities.getPixelFromLatLon(mapRenderer, rb, finalLat, finalLon);
-		final float mMoveX = startPoint.x - finalPoint.x;
-		final float mMoveY = startPoint.y - finalPoint.y;
+		PointF startPoint = NativeUtilities.getPixelFromLatLon(mapRenderer, rb, startLat, startLon);
+		PointF finalPoint = NativeUtilities.getPixelFromLatLon(mapRenderer, rb, finalLat, finalLon);
+		float mMoveX = startPoint.x - finalPoint.x;
+		float mMoveY = startPoint.y - finalPoint.y;
 
-		final boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
+		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
 		float normalizedAnimationLength = (Math.abs(mSt[0]) + Math.abs(mSt[1])) / MAX_OX_OY_SUM_DELTA_TO_ANIMATE;
-		final float animationTime = doNotUseAnimations
+		float animationTime = doNotUseAnimations
 				? 1
 				: Math.max(450, normalizedAnimationLength * MOVE_MOVE_ANIMATION_TIME);
 
@@ -274,7 +274,7 @@ public class AnimateDraggingMapThread {
 		});
 	}
 
-	public int calculateMoveZoom(RotatedTileBox rb, final double finalLat, final double finalLon, float[] mSt) {
+	public int calculateMoveZoom(RotatedTileBox rb, double finalLat, double finalLon, float[] mSt) {
 		if (rb == null) {
 			rb = tileView.getCurrentRotatedTileBox().copy();
 		}
@@ -324,7 +324,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	private void animatingMoveInThread(float moveX, float moveY, float animationTime,
-									   boolean notify, final Runnable finishAnimationCallback) {
+									   boolean notify, Runnable finishAnimationCallback) {
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 
 		float cX = 0;
@@ -351,7 +351,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	private void animatingMoveInThread(int startX31, int startY31, int finalX31, int finalY31,
-	                                   float animationTime, boolean notify, final Runnable finishAnimationCallback) {
+	                                   float animationTime, boolean notify, Runnable finishAnimationCallback) {
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 
 		int moveX = finalX31 - startX31;
@@ -425,9 +425,9 @@ public class AnimateDraggingMapThread {
 		return isAnimatingMapTilt;
 	}
 
-	public void startZooming(final int zoomEnd, final double zoomPart, final boolean notifyListener) {
+	public void startZooming(int zoomEnd, double zoomPart, boolean notifyListener) {
 		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
-		final float animationTime = doNotUseAnimations ? 0 : ZOOM_ANIMATION_TIME;
+		float animationTime = doNotUseAnimations ? 0 : ZOOM_ANIMATION_TIME;
 		startThreadAnimating(() -> {
 			setTargetValues(zoomEnd, zoomPart, tileView.getLatitude(), tileView.getLongitude());
 			RotatedTileBox tb = tileView.getCurrentRotatedTileBox().copy();
@@ -438,9 +438,9 @@ public class AnimateDraggingMapThread {
 	}
 
 
-	public void startDragging(final float velocityX, final float velocityY,
-							  float startX, float startY, final float endX, final float endY,
-							  final boolean notifyListener) {
+	public void startDragging(float velocityX, float velocityY,
+	                          float startX, float startY, float endX, float endY,
+	                          boolean notifyListener) {
 		clearTargetValues();
 		startThreadAnimating(() -> {
 			float curX = endX;
@@ -527,14 +527,14 @@ public class AnimateDraggingMapThread {
 	}
 
 	private void suspendUpdate() {
-		final MapRendererView mapRenderer = tileView.getMapRenderer();
+		MapRendererView mapRenderer = tileView.getMapRenderer();
 		if (mapRenderer != null) {
 			mapRenderer.suspendSymbolsUpdate();
 		}
 	}
 
 	private void resumeUpdate() {
-		final MapRendererView mapRenderer = tileView.getMapRenderer();
+		MapRendererView mapRenderer = tileView.getMapRenderer();
 		if (mapRenderer != null) {
 			while (!mapRenderer.resumeSymbolsUpdate());
 		}
@@ -547,7 +547,7 @@ public class AnimateDraggingMapThread {
 		targetLongitude = lon;
 	}
 
-	public void startRotate(final float rotate) {
+	public void startRotate(float rotate) {
 		if (!isAnimating()) {
 			clearTargetValues();
 			// stopped = false;

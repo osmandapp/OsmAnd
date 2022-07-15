@@ -111,7 +111,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		planRouteContext = markersHelper.getPlanRouteContext();
 		planRouteContext.setListener(new MarkersPlanRouteContext.PlanRouteProgressListener() {
@@ -172,8 +172,8 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
@@ -237,10 +237,10 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				mainView.findViewById(R.id.plan_route_toolbar).setVisibility(View.VISIBLE);
 				mainView.findViewById(R.id.toolbar_divider).setVisibility(View.VISIBLE);
 			} else {
-				final int screenH = AndroidUtils.getScreenHeight(mapActivity);
-				final int statusBarH = AndroidUtils.getStatusBarHeight(mapActivity);
-				final int navBarH = AndroidUtils.getNavBarHeight(mapActivity);
-				final int availableHeight = (screenH - statusBarH - navBarH) / 2;
+				int screenH = AndroidUtils.getScreenHeight(mapActivity);
+				int statusBarH = AndroidUtils.getStatusBarHeight(mapActivity);
+				int navBarH = AndroidUtils.getNavBarHeight(mapActivity);
+				int availableHeight = (screenH - statusBarH - navBarH) / 2;
 
 				mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
@@ -283,7 +283,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		adapter = new MapMarkersListAdapter(mapActivity);
 		adapter.setHasStableIds(true);
 		adapter.setSnappedToRoadPoints(planRouteContext.getSnappedToRoadPoints());
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
+		ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(markersRv);
 		adapter.setAdapterListener(new MapMarkersListAdapter.MapMarkersListAdapterListener() {
 
@@ -408,7 +408,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	public void updateLocation(Location loc) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			boolean newLocation = this.location == null || location == null;
 			boolean locationChanged = this.location != null && location != null
 					&& this.location.getLatitude() != location.getLatitude()
@@ -624,7 +624,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	}
 
 	private void enterPlanRouteMode() {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		MapMarkersLayer markersLayer = getMapMarkersLayer();
 		if (mapActivity != null && markersLayer != null) {
 			markersLayer.setInPlanRouteMode(true);
@@ -660,9 +660,9 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	}
 
 	private void setupAppModesBtn() {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final ImageButton appModesBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
+			ImageButton appModesBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 			appModesBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 			appModesBtn.setImageDrawable(getActiveIcon(planRouteContext.getSnappedMode().getIconRes()));
 			appModesBtn.setOnClickListener(new View.OnClickListener() {
@@ -880,7 +880,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		return false;
 	}
 
-	private void sortSelectedMarkersDoorToDoor(final MapActivity mapActivity, final boolean startFromLoc, final Location myLoc) {
+	private void sortSelectedMarkersDoorToDoor(MapActivity mapActivity, boolean startFromLoc, Location myLoc) {
 		new AsyncTask<Void, Void, List<MapMarker>>() {
 
 			private ProgressDialog dialog;

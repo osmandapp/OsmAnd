@@ -162,9 +162,9 @@ public class DownloadOsmandIndexesHelper {
 		int next;
 		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
 			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
-				final String source = xmlParser.getAttributeValue(null, "source");
-				final String destination = xmlParser.getAttributeValue(null, "destination");
-				final String combinedMode = xmlParser.getAttributeValue(null, "mode");
+				String source = xmlParser.getAttributeValue(null, "source");
+				String destination = xmlParser.getAttributeValue(null, "destination");
+				String combinedMode = xmlParser.getAttributeValue(null, "mode");
 				assets.add(new AssetEntry(source, destination, combinedMode));
 			}
 		}

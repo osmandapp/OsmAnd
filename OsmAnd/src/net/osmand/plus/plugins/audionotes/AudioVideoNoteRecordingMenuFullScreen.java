@@ -93,7 +93,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		return null;
 	}
 
-	public void showFinalPhoto(final byte[] jpeg, long duration) {
+	public void showFinalPhoto(byte[] jpeg, long duration) {
 		if (getMapActivity() != null) {
 			setImage(jpeg);
 			imageview.setVisibility(View.VISIBLE);
@@ -121,7 +121,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		progressBar.setVisibility(View.VISIBLE);
 
 		animatorCompat = ValueAnimator.ofInt(0);
-		final Interpolator interpolator = new LinearInterpolator();
+		Interpolator interpolator = new LinearInterpolator();
 		animatorCompat.setDuration(duration);
 		animatorCompat.setTarget(progressBar);
 		animatorCompat.addUpdateListener(valueAnimator -> {
@@ -136,7 +136,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 			animatorCompat.cancel();
 	}
 
-	private void setImage(final byte[] jpeg) {
+	private void setImage(byte[] jpeg) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Bitmap bmp = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);

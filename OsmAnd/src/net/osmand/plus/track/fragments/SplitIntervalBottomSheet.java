@@ -135,7 +135,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private TextRadioItem createRadioButton(final GpxSplitType splitType, int titleId) {
+	private TextRadioItem createRadioButton(GpxSplitType splitType, int titleId) {
 		String title = app.getString(titleId);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
@@ -239,7 +239,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateSliderTimeInterval() {
-		final List<String> splitOptions = new ArrayList<>(timeSplitOptions.keySet());
+		List<String> splitOptions = new ArrayList<>(timeSplitOptions.keySet());
 		updateSliderMinMaxValues(splitOptions);
 
 		slider.setValue(selectedTimeSplitInterval);
@@ -253,7 +253,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateSliderDistanceInterval() {
-		final List<String> splitOptions = new ArrayList<>(distanceSplitOptions.keySet());
+		List<String> splitOptions = new ArrayList<>(distanceSplitOptions.keySet());
 		updateSliderMinMaxValues(splitOptions);
 
 		slider.setValue(selectedDistanceSplitInterval);

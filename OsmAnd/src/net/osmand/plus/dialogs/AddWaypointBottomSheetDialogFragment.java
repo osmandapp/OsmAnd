@@ -34,9 +34,9 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
-		final LatLon latLon = new LatLon(args.getDouble(LAT_KEY), args.getDouble(LON_KEY));
-		final PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
-		final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+		LatLon latLon = new LatLon(args.getDouble(LAT_KEY), args.getDouble(LON_KEY));
+		PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
+		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 
 		items.add(new TitleItem(getString(R.string.new_destination_point_dialog)));
 

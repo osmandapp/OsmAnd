@@ -329,7 +329,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		ResourceManager mgr = resourceManager;
 		int nzoom = tileBox.getZoom();
-		final QuadRect tilesRect = tileBox.getTileBounds();
+		QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
 		float ellipticTileCorrection  = 0;

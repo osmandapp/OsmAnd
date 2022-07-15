@@ -46,7 +46,7 @@ public class TravelGpxCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof TravelGpxVH) {
-			final TravelGpxVH holder = (TravelGpxVH) viewHolder;
+			TravelGpxVH holder = (TravelGpxVH) viewHolder;
 			holder.title.setText(article.getTitle());
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
@@ -101,10 +101,10 @@ public class TravelGpxCard extends BaseTravelCard {
 				capitalizeFirstLetterAndLowercase(activityType.getName()));
 	}
 
-	private void updateSaveButton(final TravelGpxVH holder) {
+	private void updateSaveButton(TravelGpxVH holder) {
 		if (article != null) {
-			final TravelHelper helper = app.getTravelHelper();
-			final boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
+			TravelHelper helper = app.getTravelHelper();
+			boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			holder.rightButton.setText(saved ? R.string.shared_string_remove : R.string.shared_string_save);
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
@@ -134,7 +134,7 @@ public class TravelGpxCard extends BaseTravelCard {
 		public final View divider;
 		public final View shadow;
 
-		public TravelGpxVH(final View itemView) {
+		public TravelGpxVH(View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			user = itemView.findViewById(R.id.user_name);

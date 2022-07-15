@@ -162,31 +162,31 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected View.OnClickListener getOnAddBtnClickListener(final MapActivity activity, final Adapter adapter) {
+	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				OsmandApplication app = activity.getMyApplication();
 
-				final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
+				LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 
 				entriesMap.put(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
 				entriesMap.putAll(app.getSettings().getTileSourceEntries());
 
-				final List<Map.Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
+				List<Map.Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 
-				final String[] items = new String[entriesMapList.size()];
+				String[] items = new String[entriesMapList.size()];
 				int i = 0;
 
 				for (Map.Entry<String, String> entry : entriesMapList) {
 					items[i++] = entry.getValue();
 				}
 
-				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
+				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 
 				arrayAdapter.addAll(items);
 				builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {

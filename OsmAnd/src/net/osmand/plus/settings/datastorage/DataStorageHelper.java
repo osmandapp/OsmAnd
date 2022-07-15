@@ -336,7 +336,7 @@ public class DataStorageHelper {
 	}
 
 	public static void reloadData(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
-		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
+		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
 
 			private ProgressImplementation progress;

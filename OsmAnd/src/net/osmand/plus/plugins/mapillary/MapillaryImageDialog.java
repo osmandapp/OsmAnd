@@ -214,9 +214,9 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	private View getWebView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.mapillary_web_view, null);
-		final WebView webView = view.findViewById(R.id.webView);
+		WebView webView = view.findViewById(R.id.webView);
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
-		final View noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
+		View noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
 		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
 		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(icWifiOff);
 		view.setScrollContainer(false);
@@ -425,7 +425,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			return;
 		}
 		ResourceManager mgr = getMapActivity().getMyApplication().getResourceManager();
-		final QuadRect tilesRect = tileBox.getTileBounds();
+		QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
 		float ellipticTileCorrection  = 0;

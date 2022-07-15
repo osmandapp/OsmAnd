@@ -514,7 +514,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void setupSortButton(View view) {
-		final ImageButton sortButton = view.findViewById(R.id.sort_button);
+		ImageButton sortButton = view.findViewById(R.id.sort_button);
 		int colorId = ColorUtilities.getInactiveButtonsAndLinksColorId(isNightMode());
 		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
 		sortButton.setImageResource(sortByMode.getIconId());
@@ -523,7 +523,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			@Override
 			public void onClick(View v) {
 				List<PopUpMenuItem> items = new ArrayList<>();
-				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+				for (TracksSortByMode mode : TracksSortByMode.values()) {
 					items.add(new PopUpMenuItem.Builder(app)
 							.setTitleId(mode.getNameId())
 							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))

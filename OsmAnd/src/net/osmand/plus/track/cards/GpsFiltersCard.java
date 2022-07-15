@@ -151,7 +151,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		upDownButton.setImageDrawable(upDownIcon);
 	}
 
-	private void setupSlider(@NonNull final View container, @NonNull final GpsFilter filter) {
+	private void setupSlider(@NonNull View container, @NonNull GpsFilter filter) {
 		boolean range = filter.isRangeSupported();
 		boolean enabled = filter.getMinValue() != filter.getMaxValue();
 		Slider slider = container.findViewById(R.id.filter_slider);

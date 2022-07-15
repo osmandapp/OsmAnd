@@ -166,7 +166,7 @@ public class WaypointHelper {
 		}
 	}
 
-	private void commitPointsRemoval(final boolean[] checkedIntermediates) {
+	private void commitPointsRemoval(boolean[] checkedIntermediates) {
 		int cnt = 0;
 		for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
 			if (!checkedIntermediates[i]) {
@@ -540,7 +540,7 @@ public class WaypointHelper {
 	protected List<LocationPointWrapper> getTargets(List<LocationPointWrapper> points) {
 		List<TargetPoint> wts = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 		for (int k = 0; k < wts.size(); k++) {
-			final int index = wts.size() - k - 1;
+			int index = wts.size() - k - 1;
 			TargetPoint tp = wts.get(index);
 			int routeIndex;
 			if (route == null) {
@@ -584,7 +584,7 @@ public class WaypointHelper {
 			boolean announcePOI = app.getSettings().ANNOUNCE_NEARBY_POI.getModeValue(appMode);
 
 			if ((type == FAVORITES || all)) {
-				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
+				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
 				if (showFavorites) {
 					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
 							announceFavorites);
@@ -592,14 +592,14 @@ public class WaypointHelper {
 				}
 			}
 			if ((type == ALARMS || all)) {
-				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
+				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
 				if (route.getAppMode() != null) {
 					calculateAlarms(route, array, appMode);
 					sortList(array);
 				}
 			}
 			if ((type == WAYPOINTS || all)) {
-				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
+				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
 				if (showWaypoints) {
 					findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
 							announceWaypoints);
@@ -608,7 +608,7 @@ public class WaypointHelper {
 				}
 			}
 			if ((type == POI || all)) {
-				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
+				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
 				if (showPOI) {
 					calculatePoi(route, array, announcePOI);
 					sortList(array);
@@ -621,7 +621,7 @@ public class WaypointHelper {
 		float dist = Float.POSITIVE_INFINITY;
 		// Special iterations because points stored by pairs!
 		for (int i = 1; i < locations.size(); i++) {
-			final double ld = MapUtils.getOrthogonalDistance(
+			double ld = MapUtils.getOrthogonalDistance(
 					l.getLatitude(), l.getLongitude(),
 					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(),
 					locations.get(i).getLatitude(), locations.get(i).getLongitude());
@@ -671,7 +671,7 @@ public class WaypointHelper {
 
 	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints, boolean announcePOI) {
 		if (app.getPoiFilters().isShowingAnyPoi()) {
-			final List<Location> locs = route.getImmutableAllLocations();
+			List<Location> locs = route.getImmutableAllLocations();
 			List<Amenity> amenities = new ArrayList<>();
 			for (PoiUIFilter pf : app.getPoiFilters().getSelectedPoiFilters()) {
 				amenities.addAll(pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius));

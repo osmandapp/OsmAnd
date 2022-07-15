@@ -190,7 +190,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		try {
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
 			if (tileSource.couldBeDownloadedFromInternet()) {
-				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
+				TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
 				try {
 					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,

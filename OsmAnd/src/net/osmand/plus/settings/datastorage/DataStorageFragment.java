@@ -249,7 +249,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 				getString(R.string.shared_string_memory_tb_desc)
 		};
 
-		final View itemView = holder.itemView;
+		View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
 			StorageItem item = dataStorageHelper.getStorage(key);
 			if (item != null) {
@@ -435,7 +435,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
-	private void moveData(final StorageItem currentStorage, final StorageItem newStorage) {
+	private void moveData(StorageItem currentStorage, StorageItem newStorage) {
 		File fromDirectory = new File(currentStorage.getDirectory());
 		File toDirectory = new File(newStorage.getDirectory());
 		@SuppressLint("StaticFieldLeak")

@@ -307,7 +307,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void createMarkersScrollItem() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			List<Object> items = new ArrayList<>();
 			MarkersItemsAdapter adapter = new MarkersItemsAdapter(app, items);
@@ -324,7 +324,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void createSwitchStartAndEndItem() {
-		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
+		View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
 		TextView title = switchStartAndEndView.findViewById(R.id.title);
 
 		String start = getString(R.string.route_start_point);
@@ -374,12 +374,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void createFavoritesScrollItem() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			List<Object> items = new ArrayList<>();
-			final FavoritesItemsAdapter adapter = new FavoritesItemsAdapter(app, items);
+			FavoritesItemsAdapter adapter = new FavoritesItemsAdapter(app, items);
 			adapter.setItemClickListener(getAdapterOnClickListener(items));
-			final FavouritesHelper helper = app.getFavoritesHelper();
+			FavouritesHelper helper = app.getFavoritesHelper();
 			if (helper.isFavoritesLoaded()) {
 				loadFavoritesItems(items, helper);
 			} else {
@@ -417,7 +417,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private OnClickListener getAdapterOnClickListener(final List<Object> items) {
+	private OnClickListener getAdapterOnClickListener(List<Object> items) {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {

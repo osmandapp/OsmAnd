@@ -40,7 +40,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
+	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		AudioAttributes attr = new AudioAttributes.Builder()
 				.setUsage(AudioAttributes.USAGE_ASSISTANCE_ACCESSIBILITY)
 				.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)

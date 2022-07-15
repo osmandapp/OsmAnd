@@ -198,8 +198,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
  
     private void populateTabStrip() {
-        final PagerAdapter adapter = mViewPager.getAdapter();
-        final View.OnClickListener tabClickListener = new TabClickListener();
+        PagerAdapter adapter = mViewPager.getAdapter();
+        View.OnClickListener tabClickListener = new TabClickListener();
  
         for (int i = 0; i < adapter.getCount(); i++) {
             View tabView = null;
@@ -237,7 +237,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
  
     private void scrollToTab(int tabIndex, int positionOffset) {
-        final int tabStripChildCount = mTabStrip.getChildCount();
+        int tabStripChildCount = mTabStrip.getChildCount();
         if (tabStripChildCount == 0 || tabIndex < 0 || tabIndex >= tabStripChildCount) {
             return;
         }

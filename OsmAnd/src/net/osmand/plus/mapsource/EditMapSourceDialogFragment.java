@@ -213,7 +213,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				dismiss();
 			}
 		});
-		final ScrollView scrollView = root.findViewById(R.id.scroll_view);
+		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 			int pastY;
 
@@ -457,7 +457,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	private OnClickListener getClickListener(final ConfigurationItem item) {
+	private OnClickListener getClickListener(ConfigurationItem item) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

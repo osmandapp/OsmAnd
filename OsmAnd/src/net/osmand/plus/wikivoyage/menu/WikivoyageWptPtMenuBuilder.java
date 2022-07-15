@@ -41,7 +41,7 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	}
 
 	@Override
-	protected void prepareDescription(final WptPt wpt, View view) {
+	protected void prepareDescription(WptPt wpt, View view) {
 		String phones = descTokens.get(KEY_PHONE);
 		String emails = descTokens.get(KEY_EMAIL);
 		String workingHours = descTokens.get(KEY_WORKING_HOURS);

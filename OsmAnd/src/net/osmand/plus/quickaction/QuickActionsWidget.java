@@ -214,8 +214,8 @@ public class QuickActionsWidget extends LinearLayout {
         View page = li.inflate(R.layout.quick_action_widget_page, container, false);
         GridLayout gridLayout = page.findViewById(R.id.grid);
 
-        final boolean land = !AndroidUiHelper.isOrientationPortrait((Activity) getContext());
-        final int maxItems = actions.size() == 1 ? 1 : ELEMENT_PER_PAGE;
+        boolean land = !AndroidUiHelper.isOrientationPortrait((Activity) getContext());
+        int maxItems = actions.size() == 1 ? 1 : ELEMENT_PER_PAGE;
 
         for (int i = 0; i < maxItems; i++){
 
@@ -223,7 +223,7 @@ public class QuickActionsWidget extends LinearLayout {
 
             if (i + (position * ELEMENT_PER_PAGE) < actions.size()) {
 
-                final QuickAction action = QuickActionRegistry.produceAction(
+                QuickAction action = QuickActionRegistry.produceAction(
                         actions.get(i + (position * ELEMENT_PER_PAGE)));
 
                 ((ImageView) view.findViewById(imageView))

@@ -93,10 +93,10 @@ public class NavigationService extends Service {
 			setCarContext(null);
 		}
 		if (usedBy == 0) {
-			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
+			Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			final OsmandApplication app = getApp();
+			OsmandApplication app = getApp();
 			app.getNotificationHelper().updateTopNotification();
 			app.getNotificationHelper().refreshNotifications();
 		}
@@ -108,7 +108,7 @@ public class NavigationService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		final OsmandApplication app = getApp();
+		OsmandApplication app = getApp();
 		settings = app.getSettings();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
 
@@ -148,7 +148,7 @@ public class NavigationService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		final OsmandApplication app = getApp();
+		OsmandApplication app = getApp();
 		setCarContext(null);
 		app.setNavigationService(null);
 		usedBy = 0;

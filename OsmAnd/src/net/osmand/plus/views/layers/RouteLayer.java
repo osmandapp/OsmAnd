@@ -157,7 +157,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			int w = tileBox.getPixWidth();
 			int h = tileBox.getPixHeight();
 			Location lastProjection = helper.getLastProjection();
-			final RotatedTileBox cp;
+			RotatedTileBox cp;
 			if (lastProjection != null &&
 					tileBox.containsLatLon(lastProjection.getLatitude(), lastProjection.getLongitude())){
 				cp = tileBox.copy();
@@ -166,8 +166,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				cp = tileBox;
 			}
 
-			final QuadRect latlonRect = cp.getLatLonBounds();
-			final QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
+			QuadRect latlonRect = cp.getLatLonBounds();
+			QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
 
 			drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
 			MapRendererView mapRenderer = getMapRenderer();
@@ -472,10 +472,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			double baDist = route.getDistanceFromPoint(cr - 1) - route.getDistanceFromPoint(cr);
 			Location target = locs.get(locIndex);
 			double dTarget = ll.distanceTo(target);
-			final int aX = box.getPixXFromLonNoRot(loc1.getLongitude());
-			final int aY = box.getPixYFromLatNoRot(loc1.getLatitude());
-			final int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
-			final int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
+			int aX = box.getPixXFromLonNoRot(loc1.getLongitude());
+			int aY = box.getPixYFromLatNoRot(loc1.getLatitude());
+			int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
+			int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
 			if (baDist != 0) {
 				double CF = (dTarget - distLeft) / baDist;
 				double rX = bX - CF * (bX - aX);
@@ -638,7 +638,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private int getRadiusPoi(RotatedTileBox tb) {
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		int r;
 		if (zoom <= 15) {
 			r = 8;
@@ -660,7 +660,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res, @NonNull List<TransportStop> routeTransportStops) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		final int rp = getRadiusPoi(tb);
+		int rp = getRadiusPoi(tb);
 		int radius = rp * 3 / 2;
 		try {
 			for (int i = 0; i < routeTransportStops.size(); i++) {

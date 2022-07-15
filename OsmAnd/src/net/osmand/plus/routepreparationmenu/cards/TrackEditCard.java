@@ -45,7 +45,7 @@ public class TrackEditCard extends MapBaseCard {
 		return R.layout.gpx_track_item;
 	}
 
-	private GpxDataItem getDataItem(final GPXInfo info) {
+	private GpxDataItem getDataItem(GPXInfo info) {
 		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {

@@ -357,7 +357,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-													double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
+													double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this,
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, wrapResultMatcher(matcher));
 	}
@@ -404,8 +404,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	private AmenityNameFilter getNameFilterInternal(
-			final List<String> unknownFilters, final boolean shouldBeAllTime,
-			final boolean shouldBeOpened, final List<PoiType> selectedFilters
+			List<String> unknownFilters, boolean shouldBeAllTime,
+			boolean shouldBeOpened, List<PoiType> selectedFilters
 	) {
 		return new AmenityNameFilter() {
 
@@ -465,7 +465,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			return true;
 		}
 
-		final CollatorStringMatcher sm =
+		CollatorStringMatcher sm =
 				new CollatorStringMatcher(nameFilter.trim(), StringMatcherMode.CHECK_CONTAINS);
 
 		List<String> names = OsmAndFormatter.getPoiStringsWithoutType(
@@ -576,9 +576,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	@Override
-	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
-		final AmenityNameFilter nm = getNameFilter(filterByName);
-		final Set<String> searchedPois = new TreeSet<>();
+	public ResultMatcher<Amenity> wrapResultMatcher(ResultMatcher<Amenity> matcher) {
+		AmenityNameFilter nm = getNameFilter(filterByName);
+		Set<String> searchedPois = new TreeSet<>();
 		return new ResultMatcher<Amenity>() {
 
 			@Override

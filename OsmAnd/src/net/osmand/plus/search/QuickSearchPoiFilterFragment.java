@@ -106,7 +106,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 
 		if (getArguments() != null) {
@@ -168,7 +168,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				UiUtilities iconsCache = app.getUIUtilities();
-				final PopupMenu optionsMenu = new PopupMenu(getContext(), v);
+				PopupMenu optionsMenu = new PopupMenu(getContext(), v);
 				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 				MenuItem item;
 
@@ -241,7 +241,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		});
 
 		editText.setVisibility(View.VISIBLE);
-		final ImageView textEditIcon = editTextView.findViewById(R.id.icon);
+		ImageView textEditIcon = editTextView.findViewById(R.id.icon);
 		textEditIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 		textEditIcon.setVisibility(View.VISIBLE);
 		editTextView.findViewById(R.id.titleBold).setVisibility(View.GONE);
@@ -320,7 +320,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private void deleteFilter() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		builder.setMessage(R.string.edit_filter_delete_dialog_title);
 		builder.setNegativeButton(R.string.shared_string_no, null);
@@ -348,15 +348,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private void saveFilter() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		builder.setTitle(R.string.access_hint_enter_name);
 
-		final EditText editText = new EditText(getContext());
+		EditText editText = new EditText(getContext());
 		editText.setHint(R.string.new_filter);
 		editText.setText(filter.getName());
 
-		final TextView textView = new TextView(getContext());
+		TextView textView = new TextView(getContext());
 		textView.setText(app.getString(R.string.new_filter_desc));
 		textView.setTextAppearance(R.style.TextAppearance_ContextMenuSubtitle);
 		LinearLayout ll = new LinearLayout(getContext());
@@ -776,9 +776,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		@NonNull
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			final PoiFilterListItem item = getItem(position);
-			final PoiFilterListItem nextItem = position < getCount() - 1 ? getItem(position + 1) : null;
+		public View getView(int position, View convertView, ViewGroup parent) {
+			PoiFilterListItem item = getItem(position);
+			PoiFilterListItem nextItem = position < getCount() - 1 ? getItem(position + 1) : null;
 
 			int viewType = getItemViewType(position);
 
@@ -799,14 +799,14 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				return view;
 			}
 
-			final ImageView icon = view.findViewById(R.id.icon);
-			final TextViewEx titleRegular = view.findViewById(R.id.titleRegular);
-			final TextViewEx titleBold = view.findViewById(R.id.titleBold);
-			final TextViewEx titleButton = view.findViewById(R.id.titleButton);
-			final SwitchCompat switchItem = view.findViewById(R.id.switchItem);
-			final CheckBox checkBoxItem = view.findViewById(R.id.checkboxItem);
-			final ImageView expandItem = view.findViewById(R.id.expandItem);
-			final View divider = view.findViewById(R.id.divider);
+			ImageView icon = view.findViewById(R.id.icon);
+			TextViewEx titleRegular = view.findViewById(R.id.titleRegular);
+			TextViewEx titleBold = view.findViewById(R.id.titleBold);
+			TextViewEx titleButton = view.findViewById(R.id.titleButton);
+			SwitchCompat switchItem = view.findViewById(R.id.switchItem);
+			CheckBox checkBoxItem = view.findViewById(R.id.checkboxItem);
+			ImageView expandItem = view.findViewById(R.id.expandItem);
+			View divider = view.findViewById(R.id.divider);
 
 			if (item != null) {
 				if (nextItem != null && nextItem.groupIndex == item.groupIndex) {

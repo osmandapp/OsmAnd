@@ -111,7 +111,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			boolean downloading = downloadThread.isDownloading(item);
 			boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
 			boolean lastItem = i == items.size() - 1;
-			final View view = holder.itemsContainer.getChildAt(i);
+			View view = holder.itemsContainer.getChildAt(i);
 
 			if (item.isDownloaded()) {
 				view.setOnClickListener(null);

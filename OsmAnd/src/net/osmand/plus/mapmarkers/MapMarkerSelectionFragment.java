@@ -91,7 +91,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		});
 
 		ListView listView = view.findViewById(android.R.id.list);
-		final ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
+		ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
 		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getMapMarkers();
 		if (markers.size() > 0) {
 			for (MapMarker marker : markers) {
@@ -131,7 +131,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			}
 			MapMarkerDialogHelper.updateMapMarkerInfo(getContext(), convertView, loc, heading,
 					useCenter, nightMode, screenOrientation, marker);
-			final View remove = convertView.findViewById(R.id.info_close);
+			View remove = convertView.findViewById(R.id.info_close);
 			remove.setVisibility(View.GONE);
 			AndroidUtils.setListItemBackground(getMapActivity(), convertView, nightMode);
 

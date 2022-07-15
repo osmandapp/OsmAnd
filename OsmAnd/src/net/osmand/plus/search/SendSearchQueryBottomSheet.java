@@ -47,8 +47,8 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 		params.put("query", searchQuery);
 		params.put("location", searchLocation);
 		items.add(new TitleItem(getString(R.string.send_search_query)));
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final TextView textView = (TextView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		TextView textView = (TextView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_missing_search_query_tv, null);
 		textView.setText(getString(R.string.send_search_query_description, searchQuery));
 		BaseBottomSheetItem sendSearchQueryDescription = new SimpleBottomSheetItem.Builder().setCustomView(textView)
@@ -64,7 +64,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			if (!app.getSettings().isInternetConnectionAvailable()) {
 				Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();

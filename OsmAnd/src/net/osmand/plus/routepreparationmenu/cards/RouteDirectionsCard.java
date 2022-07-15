@@ -51,11 +51,11 @@ public class RouteDirectionsCard extends MapBaseCard {
 	}
 
 	private static String getTimeDescription(OsmandApplication app, RouteDirectionInfo model) {
-		final int timeInSeconds = model.getExpectedTime();
+		int timeInSeconds = model.getExpectedTime();
 		return Algorithms.formatDuration(timeInSeconds, app.accessibilityEnabled());
 	}
 
-	private View getRouteDirectionView(final int directionInfoIndex, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo) {
+	private View getRouteDirectionView(int directionInfoIndex, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;

@@ -69,7 +69,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.item_info_fragment, container, false);
+		View view = inflater.inflate(R.layout.item_info_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			regionId = savedInstanceState.getString(REGION_ID_DLG_KEY);
@@ -167,9 +167,9 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 		}
 	}
 
-	static void updateActionButtons(final DownloadActivity ctx, DownloadDescriptionInfo descriptionInfo,
-	                                @Nullable final IndexItem indexItem, ViewGroup buttonsContainer,
-	                                @LayoutRes int layoutId, final boolean nightMode) {
+	static void updateActionButtons(DownloadActivity ctx, DownloadDescriptionInfo descriptionInfo,
+	                                @Nullable IndexItem indexItem, ViewGroup buttonsContainer,
+	                                @LayoutRes int layoutId, boolean nightMode) {
 		buttonsContainer.removeAllViews();
 
 		List<ActionButton> actionButtons = descriptionInfo.getActionButtons(ctx);
@@ -177,7 +177,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 			actionButtons.add(new ActionButton(ActionButton.DOWNLOAD_ACTION, ctx.getString(R.string.shared_string_download), null));
 		}
 
-		for (final ActionButton actionButton : actionButtons) {
+		for (ActionButton actionButton : actionButtons) {
 			View buttonView = UiUtilities.getInflater(ctx, nightMode).inflate(layoutId, buttonsContainer, false);
 			View button = buttonView.findViewById(R.id.dismiss_button);
 			if (button != null) {

@@ -37,7 +37,7 @@ public class MissingMapsHelper {
 
 	public boolean isAnyPointOnWater(@NonNull List<Location> points) throws IOException {
 		for (int i = 0; i < points.size(); i++) {
-			final Location point = points.get(i);
+			Location point = points.get(i);
 			List<WorldRegion> downloadRegions = params.ctx.getRegions().getWorldRegionsAt(
 					new LatLon(point.getLatitude(), point.getLongitude()), true);
 			if (downloadRegions.isEmpty()) {

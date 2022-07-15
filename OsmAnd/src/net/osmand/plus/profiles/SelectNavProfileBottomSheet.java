@@ -143,7 +143,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		addToggleButton(selectedItem, offline, online);
 	}
 
-	private TextRadioItem createRadioButton(final DialogMode mode) {
+	private TextRadioItem createRadioButton(DialogMode mode) {
 		String title = getString(mode.titleId);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
@@ -224,7 +224,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	@Override
 	protected void addProfileItem(ProfileDataObject profileDataObject) {
-		final RoutingDataObject profile = (RoutingDataObject) profileDataObject;
+		RoutingDataObject profile = (RoutingDataObject) profileDataObject;
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
 

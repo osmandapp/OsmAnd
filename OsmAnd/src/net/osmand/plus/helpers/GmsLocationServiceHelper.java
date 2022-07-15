@@ -125,7 +125,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable final LocationCallback locationCallback) {
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable LocationCallback locationCallback) {
 		if (locationCallback == null) {
 			return null;
 		}

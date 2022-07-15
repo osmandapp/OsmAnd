@@ -70,7 +70,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	@Override
-	public void onBindViewHolder(final MapMarkerItemViewHolder holder, final int pos) {
+	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
 		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		MapMarker marker = markers.get(pos);
 
@@ -79,7 +79,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
 		int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
-		final boolean displayedInWidget = pos < mapActivity.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		boolean displayedInWidget = pos < mapActivity.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		if (showDirectionEnabled && displayedInWidget) {
 			holder.iconDirection.setVisibility(View.GONE);
 
@@ -147,11 +147,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final int position = holder.getAdapterPosition();
+				int position = holder.getAdapterPosition();
 				if (position < 0) {
 					return;
 				}
-				final MapMarker marker = markers.get(position);
+				MapMarker marker = markers.get(position);
 
 				mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 				changeMarkers();
@@ -213,8 +213,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	@Override
 	public void onItemSwiped(RecyclerView.ViewHolder holder) {
-		final int pos = holder.getAdapterPosition();
-		final MapMarker marker = getItem(pos);
+		int pos = holder.getAdapterPosition();
+		MapMarker marker = getItem(pos);
 		mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 		MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupById(marker.groupKey,
 				ItineraryType.MARKERS);

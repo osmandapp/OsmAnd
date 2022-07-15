@@ -351,7 +351,7 @@ public class DownloadActivityType {
 		if (this == FONT_FILE) {
 			return FileNameTranslationHelper.getFontName(getBasename(downloadItem));
 		}
-		final String basename = getBasename(downloadItem);
+		String basename = getBasename(downloadItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {
 			return FileNameTranslationHelper.getWikiName(ctx, basename);
 		}
@@ -361,18 +361,18 @@ public class DownloadActivityType {
 //		if (this == HILLSHADE_FILE){
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
 //		}
-		final String lc = basename.toLowerCase();
+		String lc = basename.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
 		if (basename.contains("addresses-nationwide")) {
-			final int ind = basename.indexOf("addresses-nationwide");
+			int ind = basename.indexOf("addresses-nationwide");
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
 			return osmandRegions.getLocaleName(downloadName, includeParent) +
 					" " + ctx.getString(R.string.index_item_nation_addresses);
 		} else if (basename.startsWith("Depth_")) {
-			final int extInd = basename.indexOf("osmand_ext");
+			int extInd = basename.indexOf("osmand_ext");
 			String downloadName = extInd == -1 ? basename.substring(6).replace('_', ' ')
 					: basename.substring(6, extInd).replace('_', ' ');
 			return ctx.getString(R.string.download_depth_countours) + " " + Algorithms.capitalizeFirstLetter(downloadName);

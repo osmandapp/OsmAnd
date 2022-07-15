@@ -142,7 +142,7 @@ public class TrackWidthCard extends MapBaseCard {
 				widthSlider.setValue(1);
 			}
 
-			final TextView selectedCustomWidth = view.findViewById(R.id.width_value_tv);
+			TextView selectedCustomWidth = view.findViewById(R.id.width_value_tv);
 			widthSlider.addOnChangeListener(new Slider.OnChangeListener() {
 				@Override
 				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
@@ -205,7 +205,7 @@ public class TrackWidthCard extends MapBaseCard {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
 			AppearanceListItem item = items.get(position);
 			holder.title.setText(item.getLocalizedValue());
 

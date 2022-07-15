@@ -296,13 +296,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	@Override
-	public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		UiUtilities iconsCache = app.getUIUtilities();
 		if (holder instanceof MapMarkerItemViewHolder) {
-			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
-			final MapMarker marker = (MapMarker) getItem(position);
+			MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
+			MapMarker marker = (MapMarker) getItem(position);
 
-			final boolean markerInHistory = marker.history;
+			boolean markerInHistory = marker.history;
 
 			int color;
 			if (marker.history) {
@@ -313,7 +313,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			ImageView markerImageViewToUpdate;
 			int drawableResToUpdate;
 			int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
-			final boolean markerToHighlight = showDirectionMarkers.contains(marker);
+			boolean markerToHighlight = showDirectionMarkers.contains(marker);
 			if (showDirectionEnabled && markerToHighlight) {
 				itemViewHolder.iconDirection.setVisibility(View.GONE);
 
@@ -414,8 +414,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			updateLocationViewCache.arrowColor = markerToHighlight ? color : 0;
 			app.getUIUtilities().updateLocationView(updateLocationViewCache, markerImageViewToUpdate, itemViewHolder.distance, markerLatLon);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
-			final MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
-			final Object header = getItem(position);
+			MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
+			Object header = getItem(position);
 			String headerString;
 			if (header instanceof MarkerGroupItem) {
 				headerViewHolder.icon.setVisibility(View.GONE);
@@ -424,8 +424,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 				headerViewHolder.articleDescription.setVisibility(View.GONE);
 			} else if (header instanceof GroupHeader) {
-				final GroupHeader groupHeader = (GroupHeader) header;
-				final MapMarkersGroup group = groupHeader.getGroup();
+				GroupHeader groupHeader = (GroupHeader) header;
+				MapMarkersGroup group = groupHeader.getGroup();
 				String groupName = group.getName();
 				if (groupName.isEmpty()) {
 					groupName = app.getString(R.string.shared_string_favorites);
@@ -442,9 +442,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
-				final boolean groupIsDisabled = group.isDisabled();
+				boolean groupIsDisabled = group.isDisabled();
 				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
-				final TravelArticle article = group.getWikivoyageArticle();
+				TravelArticle article = group.getWikivoyageArticle();
 				if (article != null && !groupIsDisabled) {
 					headerViewHolder.articleDescription.setVisibility(View.VISIBLE);
 					View.OnClickListener openWikiwoyageArticle = new View.OnClickListener() {
@@ -470,8 +470,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
-						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-						final GPXFile[] gpxFile = new GPXFile[1];
+						MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+						GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
 
 						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
@@ -531,9 +531,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			headerViewHolder.title.setText(headerString);
 			headerViewHolder.bottomShadow.setVisibility(position == getItemCount() - 1 ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
-			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
-			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
-			final boolean showHistory = showHideHistoryButton.showHistory;
+			MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
+			ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
+			boolean showHistory = showHideHistoryButton.showHistory;
 			if (position == getItemCount() - 1) {
 				showHideHistoryViewHolder.bottomShadow.setVisibility(View.VISIBLE);
 			} else {
@@ -549,11 +549,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			});
 		} else if (holder instanceof MapMarkerCategoriesViewHolder) {
-			final MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
-			final Object header = getItem(position);
+			MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
+			Object header = getItem(position);
 			if (header instanceof CategoriesSubHeader) {
-				final CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
-				final MapMarkersGroup group = categoriesSubHeader.getGroup();
+				CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
+				MapMarkersGroup group = categoriesSubHeader.getGroup();
 				View.OnClickListener openChooseCategoriesDialog = new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {

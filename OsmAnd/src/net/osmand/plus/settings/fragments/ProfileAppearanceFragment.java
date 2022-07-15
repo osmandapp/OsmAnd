@@ -492,7 +492,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private View createIconItemView(final int iconRes, ViewGroup rootView) {
+	private View createIconItemView(int iconRes, ViewGroup rootView) {
 		FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_circle_item, rootView, false);
 		ImageView checkMark = iconItemView.findViewById(R.id.checkMark);
@@ -524,7 +524,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		updateProfileButton();
 	}
 
-	private View createLocationIconView(final LocationIcon locationIcon, ViewGroup rootView) {
+	private View createLocationIconView(LocationIcon locationIcon, ViewGroup rootView) {
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		int changedProfileColor = changedProfile.getActualColor();
@@ -566,7 +566,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.locationIcon = locationIcon;
 	}
 
-	private View createNavigationIconView(final NavigationIcon navigationIcon, ViewGroup rootView) {
+	private View createNavigationIconView(NavigationIcon navigationIcon, ViewGroup rootView) {
 		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		LayerDrawable navigationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
@@ -639,7 +639,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private void setVerticalScrollBarEnabled(boolean enabled) {
-		final RecyclerView preferenceListView = getListView();
+		RecyclerView preferenceListView = getListView();
 		if (enabled) {
 			preferenceListView.post(() -> preferenceListView.setVerticalScrollBarEnabled(true));
 		} else {

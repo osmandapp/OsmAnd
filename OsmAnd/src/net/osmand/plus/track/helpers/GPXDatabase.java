@@ -385,7 +385,7 @@ public class GPXDatabase {
 			if (!(obj instanceof GpxDataItem)) {
 				return false;
 			}
-			final GpxDataItem other = (GpxDataItem) obj;
+			GpxDataItem other = (GpxDataItem) obj;
 			if (file == null || other.file == null) {
 				return false;
 			}

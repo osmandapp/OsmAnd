@@ -104,9 +104,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = requireMyApplication();
+		OsmandApplication app = requireMyApplication();
 
-		final boolean nightMode = isNightMode(app, usedOnMap);
+		boolean nightMode = isNightMode(app, usedOnMap);
 
 		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		createToolbar(mainView, nightMode);
@@ -117,7 +117,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		adapter = new EditPoiFiltersAdapter(app, nightMode);
 		initFiltersOrders(app, false);
 
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
+		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		
 		orderModified = app.getSettings().POI_FILTERS_ORDER.get() != null;
@@ -160,11 +160,11 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 			}
 
 			@Override
-			public void onDeleteClicked(final int position) {
-				final ListItem item = items.get(position);
+			public void onDeleteClicked(int position) {
+				ListItem item = items.get(position);
 				if (item.value instanceof PoiUIFilterDataObject) {
 					PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
-					final PoiUIFilter filter = app.getPoiFilters().getFilterById(poiInfo.filterId);
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(poiInfo.filterId);
 					if (filter != null && app.getPoiFilters().removePoiFilter(filter)) {
 						filter.setDeleted(true);
 						filterDeleted = true;
@@ -370,7 +370,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	}
 
 	private void updateItems() {
-		final OsmandApplication app = requireMyApplication();
+		OsmandApplication app = requireMyApplication();
 		List<ListItem> active = getPoiFilters(true);
 		List<ListItem> available = getPoiFilters(false);
 		items.clear();
@@ -609,7 +609,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		@SuppressLint("ClickableViewAccessibility")
 		@Override
-		public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 			ListItem item = items.get(position);
 			boolean nightMode = isNightMode(app, usedOnMap);
 			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);

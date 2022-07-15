@@ -217,7 +217,7 @@ public class CustomRegion extends WorldRegion {
 		return items;
 	}
 
-	public void loadDynamicIndexItems(final OsmandApplication app) {
+	public void loadDynamicIndexItems(OsmandApplication app) {
 		if (dynamicItemsJson == null && dynamicDownloadItems != null
 				&& !Algorithms.isEmpty(dynamicDownloadItems.url)
 				&& app.getSettings().isInternetConnectionAvailable()) {

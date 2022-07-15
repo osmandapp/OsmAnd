@@ -154,7 +154,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 	private void updateCustomWidthSlider() {
 		if (selectedMode == WidthMode.CUSTOM) {
 			Slider slider = view.findViewById(R.id.width_slider);
-			final TextView tvCustomWidth = view.findViewById(R.id.width_value_tv);
+			TextView tvCustomWidth = view.findViewById(R.id.width_value_tv);
 
 			slider.setValueTo(CUSTOM_WIDTH_MAX);
 			slider.setValueFrom(CUSTOM_WIDTH_MIN);
@@ -236,7 +236,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
 			WidthMode item = items.get(position);
 			holder.title.setText(app.getString(item.titleId));
 

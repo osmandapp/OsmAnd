@@ -175,7 +175,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		}
 
 
-		public void updateLocation(final LatLon l) {
+		public void updateLocation(LatLon l) {
 			sort(new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint object1, FavouritePoint object2) {
@@ -213,7 +213,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			ImageView direction = row.findViewById(R.id.direction);
 			ImageView giImage = row.findViewById(R.id.group_image);
 			direction.setVisibility(View.VISIBLE);
-			final FavouritePoint favorite = getItem(position);
+			FavouritePoint favorite = getItem(position);
 			if (shouldShowMenuButton) {
 				ImageButton options = row.findViewById(R.id.options);
 				options.setFocusable(false);
@@ -241,7 +241,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude());
 			name.setText(getName(favorite));
-			final CheckBox ch = row.findViewById(R.id.toggle_item);
+			CheckBox ch = row.findViewById(R.id.toggle_item);
 			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
 			if (activity instanceof SearchActivity)
@@ -250,7 +250,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		}
 
 		public void sortByName() {
-			final Collator inst = Collator.getInstance();
+			Collator inst = Collator.getInstance();
 			sort(new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint o1, FavouritePoint o2) {
@@ -260,7 +260,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			});
 			
 		}
-		public void sortByDistance(final LatLon loc) {
+		public void sortByDistance(LatLon loc) {
 			sort(new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint lhs, FavouritePoint rhs) {
@@ -310,7 +310,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			}
 		}
 		if (activity instanceof SearchActivity) {
-			final View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
+			View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
 			if (selected != null) {
 				try {
 					int position = getListView().getPositionForView(selected);
@@ -328,7 +328,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 
 	public static void showOnMap(FavouritePoint point, Activity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),

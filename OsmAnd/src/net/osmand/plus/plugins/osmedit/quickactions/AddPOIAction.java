@@ -94,7 +94,7 @@ public class AddPOIAction extends QuickAction {
 
 	private MapPoiTypes getPoiTypes(Context context) {
 		if (poiTypes == null) {
-			final OsmandApplication application = (OsmandApplication) (context).getApplicationContext();
+			OsmandApplication application = (OsmandApplication) (context).getApplicationContext();
 			poiTypes = application.getPoiTypes();
 		}
 		return poiTypes;
@@ -128,7 +128,7 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -153,12 +153,12 @@ public class AddPOIAction extends QuickAction {
 				mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
 			}
 
-			final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
+			boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 			Node newNode = new Node(node.getLatitude(), node.getLongitude(), node.getId());
 			Action action = newNode.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 			for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 				if (tag.getKey().equals(POI_TYPE_TAG)) {
-					final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
+					PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
 					if (poiType != null) {
 						newNode.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());
 						if (poiType.getOsmTag2() != null) {
@@ -214,12 +214,12 @@ public class AddPOIAction extends QuickAction {
 
 		OsmandApplication application = mapActivity.getMyApplication();
 		boolean isLightTheme = application.getSettings().isLightContent();
-		final boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
 		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
-		final LinearLayout editTagsLineaLayout = view.findViewById(R.id.editTagsList);
+		LinearLayout editTagsLineaLayout = view.findViewById(R.id.editTagsList);
 
-		final TagAdapterLinearLayoutHack mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getTagsFromParams(), deleteDrawable);
+		TagAdapterLinearLayoutHack mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getTagsFromParams(), deleteDrawable);
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		HashSet<String> tagKeys = new HashSet<>();
 		HashSet<String> valueKeys = new HashSet<>();
@@ -243,12 +243,12 @@ public class AddPOIAction extends QuickAction {
 
 		mAdapter.updateViews();
 
-		final TextInputLayout poiTypeTextInputLayout = view.findViewById(R.id.poiTypeTextInputLayout);
-		final AutoCompleteTextView poiTypeEditText = view.findViewById(R.id.poiTypeEditText);
-		final SwitchCompat showDialog = view.findViewById(R.id.saveButton);
+		TextInputLayout poiTypeTextInputLayout = view.findViewById(R.id.poiTypeTextInputLayout);
+		AutoCompleteTextView poiTypeEditText = view.findViewById(R.id.poiTypeEditText);
+		SwitchCompat showDialog = view.findViewById(R.id.saveButton);
 		showDialog.setChecked(Boolean.parseBoolean(getParams().get(KEY_DIALOG)));
 
-		final String text = getTagsFromParams().get(POI_TYPE_TAG);
+		String text = getTagsFromParams().get(POI_TYPE_TAG);
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -288,8 +288,8 @@ public class AddPOIAction extends QuickAction {
 		poiTypeEditText.setText(text != null ? text : "");
 		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public boolean onTouch(final View v, MotionEvent event) {
-				final EditText editText = (EditText) v;
+			public boolean onTouch(View v, MotionEvent event) {
+				EditText editText = (EditText) v;
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					final int DRAWABLE_END = 2;
 					int expandBtnWidth = AndroidUtils.getCompoundDrawables(editText)[DRAWABLE_END].getBounds().width();
@@ -332,20 +332,20 @@ public class AddPOIAction extends QuickAction {
 			AndroidUtils.startActivityIfSafe(mapActivity, intent);
 		});
 
-		final int activeColor = ColorUtilities.getActiveColor(mapActivity, !isLightTheme);
+		int activeColor = ColorUtilities.getActiveColor(mapActivity, !isLightTheme);
 		onlineDocumentationButton.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
 
 		parent.addView(view);
 	}
 
-	private void setUpAdapterForPoiTypeEditText(final MapActivity activity,
-	                                            final Map<String, PoiType> allTranslatedNames,
-	                                            final AutoCompleteTextView poiTypeEditText) {
-		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
+	private void setUpAdapterForPoiTypeEditText(MapActivity activity,
+	                                            Map<String, PoiType> allTranslatedNames,
+	                                            AutoCompleteTextView poiTypeEditText) {
+		Map<String, PoiType> subCategories = new LinkedHashMap<>();
 		for (Map.Entry<String, PoiType> s : allTranslatedNames.entrySet()) {
 			addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 		}
-		final ArrayAdapter<Object> adapter;
+		ArrayAdapter<Object> adapter;
 		adapter = new ArrayAdapter<>(activity, R.layout.list_textview, subCategories.keySet().toArray());
 		adapter.sort((lhs, rhs) -> lhs.toString().compareTo(rhs.toString()));
 		poiTypeEditText.setAdapter(adapter);
@@ -370,7 +370,7 @@ public class AddPOIAction extends QuickAction {
 		return poiType != null ? poiType.getCategory() : null;
 	}
 
-	private void addMapEntryAdapter(final Map<String, PoiType> subCategories, String key, PoiType v) {
+	private void addMapEntryAdapter(Map<String, PoiType> subCategories, String key, PoiType v) {
 		if (!subCategories.containsKey(key.toLowerCase())) {
 			subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(key), v);
 		}
@@ -419,7 +419,7 @@ public class AddPOIAction extends QuickAction {
 
 			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
 			View deleteButton = convertView.findViewById(R.id.delete_button);
-			final String[] previousTag = {tg};
+			String[] previousTag = {tg};
 			deleteButton.setOnClickListener(v -> {
 				linearLayout.removeView(convertView);
 				tagsData.remove(tagEditText.getText().toString());

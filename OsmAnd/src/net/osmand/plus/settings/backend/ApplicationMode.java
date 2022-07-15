@@ -559,7 +559,7 @@ public class ApplicationMode {
 		reorderAppModes();
 	}
 
-	private static void initModesParams(final OsmandApplication app) {
+	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
 			iconNameListener = new StateChangedListener<String>() {

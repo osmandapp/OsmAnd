@@ -66,7 +66,7 @@ public class MapActions {
 		}
 	}
 
-	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName) {
+	public void enterRoutePlanningMode(LatLon from, PointDescription fromName) {
 		enterRoutePlanningModeGivenGpx(null, from, fromName, true, true);
 	}
 

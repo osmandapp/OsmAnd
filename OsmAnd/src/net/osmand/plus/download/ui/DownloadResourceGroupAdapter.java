@@ -49,9 +49,9 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 	}
 
 	@Override
-	public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
 	                         View convertView, ViewGroup parent) {
-		final Object child = getChild(groupPosition, childPosition);
+		Object child = getChild(groupPosition, childPosition);
 		if (child instanceof DownloadItem) {
 
 			DownloadItem item = (DownloadItem) child;
@@ -98,7 +98,7 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, final View convertView, final ViewGroup parent) {
+	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 		View v = convertView;
 		String section = getGroup(groupPosition);
 		if (v == null) {

@@ -80,7 +80,7 @@ public class TracksToFollowCard extends MapBaseCard {
 	}
 
 	private void setupTracksItems() {
-		final RecyclerView filesRecyclerView = view.findViewById(R.id.track_list);
+		RecyclerView filesRecyclerView = view.findViewById(R.id.track_list);
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 		filesRecyclerView.setNestedScrollingEnabled(false);
 		filesRecyclerView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -182,7 +182,7 @@ public class TracksToFollowCard extends MapBaseCard {
 	}
 
 	public void sortGPXInfoItems(List<GPXInfo> gpxInfoList) {
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
 			@Override
 			public int compare(GPXInfo i1, GPXInfo i2) {

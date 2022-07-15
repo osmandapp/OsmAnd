@@ -46,7 +46,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
 		view.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			}
 		});
 
-		final View mainView = view.findViewById(R.id.main_view);
+		View mainView = view.findViewById(R.id.main_view);
 		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			mainView.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 		}

@@ -166,7 +166,7 @@ public class AndroidUtils {
 		return byteBuffer.array();
 	}
 
-	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+	public static Bitmap createScaledBitmapWithTint(Context ctx, @DrawableRes int drawableId, float scale, int tint) {
 		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
 		if (drawableIcon != null) {
 			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
@@ -745,7 +745,7 @@ public class AndroidUtils {
 		}
 	}
 
-	private static void requestLayout(final View view) {
+	private static void requestLayout(View view) {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
 			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

@@ -618,7 +618,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void setupScrollShadow() {
-		final View scrollView = getBottomScrollView();
+		View scrollView = getBottomScrollView();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
 			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
 			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);

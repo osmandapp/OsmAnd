@@ -32,8 +32,8 @@ public class SelectedGpxMenuController extends MenuController {
 
 	private SelectedGpxPoint selectedGpxPoint;
 
-	public SelectedGpxMenuController(@NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription,
-									 @NonNull final SelectedGpxPoint selectedGpxPoint) {
+	public SelectedGpxMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription,
+	                                 @NonNull SelectedGpxPoint selectedGpxPoint) {
 		super(new SelectedGpxMenuBuilder(mapActivity, selectedGpxPoint), pointDescription, mapActivity);
 		this.selectedGpxPoint = selectedGpxPoint;
 		builder.setShowOnlinePhotos(false);

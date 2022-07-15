@@ -29,14 +29,14 @@ public class AddQuickActionDialog extends MenuBottomSheetDialogFragment {
     @Override
     public void createMenuItems(Bundle savedInstanceState) {
         OsmandApplication app = requiredMyApplication();
-        final FragmentActivity activity = getActivity();
+        FragmentActivity activity = getActivity();
         LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
         QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 
         items.add(new TitleItem(getString(R.string.dialog_add_action_title)));
         List<QuickActionType> actions = quickActionRegistry.produceTypeActionsListWithHeaders();
         boolean firstHeader = true;
-        for (final QuickActionType action : actions) {
+        for (QuickActionType action : actions) {
             if (action.getId() == 0) {
                 View itemView = inflater.inflate(R.layout.quick_action_add_dialog_header,
                         null, false);

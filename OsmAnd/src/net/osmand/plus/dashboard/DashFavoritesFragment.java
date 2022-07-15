@@ -99,7 +99,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	public void setupFavorites() {
 		View mainView = getView();
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (mainView == null || app == null) {
 			return;
 		}
@@ -111,7 +111,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		} else {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), true);
 		}
-		final LatLon loc = getDefaultLocation();
+		LatLon loc = getDefaultLocation();
 		if (loc != null) {
 			Collections.sort(favouritePoints, (left, right) -> {
 				int dist = (int) (MapUtils.getDistance(left.getLatitude(), left.getLongitude(),
@@ -125,7 +125,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		favorites.removeAllViews();
 		DashboardOnMap.handleNumberOfRows(favouritePoints, app.getSettings(), ROW_NUMBER_TAG);
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
-		for (final FavouritePoint point : favouritePoints) {
+		for (FavouritePoint point : favouritePoints) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.favorites_list_item, null, false);
 			TextView name = view.findViewById(R.id.favourite_label);

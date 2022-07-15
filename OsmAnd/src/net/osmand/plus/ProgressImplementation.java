@@ -88,7 +88,7 @@ public class ProgressImplementation implements IProgress {
 		return createProgressDialog(ctx, title, message, style, null);
 	}
 	
-	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style, final DialogInterface.OnCancelListener listener) {
+	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style, DialogInterface.OnCancelListener listener) {
 		ProgressDialog dlg = new ProgressDialog(ctx) {
 			@Override
 			public void cancel() {

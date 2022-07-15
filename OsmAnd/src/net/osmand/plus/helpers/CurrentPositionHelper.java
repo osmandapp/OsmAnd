@@ -91,13 +91,13 @@ public class CurrentPositionHelper {
 		return (storeFound ? 0x2 : 0x0) | (allowEmptyNames ? 0x1 : 0x0);
 	}
 
-	private boolean scheduleRouteSegmentFind(final Location loc,
-											 final boolean storeFound,
-											 final boolean allowEmptyNames,
-											 final boolean cancelPreviousSearch,
-											 @Nullable final ResultMatcher<GeocodingResult> geoCoding,
-											 @Nullable final ResultMatcher<RouteDataObject> result,
-											 @Nullable final ApplicationMode appMode) {
+	private boolean scheduleRouteSegmentFind(Location loc,
+	                                         boolean storeFound,
+	                                         boolean allowEmptyNames,
+	                                         boolean cancelPreviousSearch,
+	                                         @Nullable ResultMatcher<GeocodingResult> geoCoding,
+	                                         @Nullable ResultMatcher<RouteDataObject> result,
+	                                         @Nullable ApplicationMode appMode) {
 		boolean res = false;
 		if (loc != null) {
 			long requestKey = getRequestNumberKey(storeFound, allowEmptyNames);
@@ -106,8 +106,8 @@ public class CurrentPositionHelper {
 				requestNumber = new AtomicInteger();
 				requestNumbersMap.put(requestKey, requestNumber);
 			}
-			final int request = requestNumber.incrementAndGet();
-			final AtomicInteger finalRequestNumber = requestNumber;
+			int request = requestNumber.incrementAndGet();
+			AtomicInteger finalRequestNumber = requestNumber;
 			singleThreadExecutor.submit(new Runnable() {
 				@Override
 				public void run() {
@@ -156,10 +156,10 @@ public class CurrentPositionHelper {
 
 	// single synchronized method
 	private synchronized void processGeocoding(@NonNull Location loc,
-											   @Nullable final ResultMatcher<GeocodingResult> geoCoding,
+											   @Nullable ResultMatcher<GeocodingResult> geoCoding,
 											   boolean storeFound,
 											   boolean allowEmptyNames,
-											   @Nullable final ResultMatcher<RouteDataObject> result,
+											   @Nullable ResultMatcher<RouteDataObject> result,
 											   @Nullable ApplicationMode appMode,
 											   int request,
 											   @NonNull AtomicInteger requestNumber,
@@ -184,7 +184,7 @@ public class CurrentPositionHelper {
 			return;
 		}
 
-		final List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude(),
+		List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude(),
 				geoCoding != null, allowEmptyNames, appMode);
 		if (storeFound) {
 			lastAskedLocation = loc;
@@ -259,7 +259,7 @@ public class CurrentPositionHelper {
 		return res;
 	}
 
-	private void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
+	private void justifyResult(List<GeocodingResult> res, ResultMatcher<GeocodingResult> result) {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
 		if (res != null) {
@@ -318,7 +318,7 @@ public class CurrentPositionHelper {
 			app.runInUIThread(() -> result.publish(null));
 			return;
 		}
-		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
+		GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
 		app.runInUIThread(() -> result.publish(rts));
 	}
 

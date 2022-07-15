@@ -473,8 +473,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void testEngineWork() {
-		final OnlineRoutingEngine requestedEngine = (OnlineRoutingEngine) engine.clone();
-		final ExampleLocation location = selectedLocation;
+		OnlineRoutingEngine requestedEngine = (OnlineRoutingEngine) engine.clone();
+		ExampleLocation location = selectedLocation;
 		new Thread(() -> {
 			StringBuilder errorMessage = new StringBuilder();
 			boolean resultOk = false;
@@ -493,9 +493,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		}).start();
 	}
 
-	private void showTestResults(final boolean resultOk,
-	                             @NonNull final String message,
-	                             @NonNull final ExampleLocation location) {
+	private void showTestResults(boolean resultOk,
+	                             @NonNull String message,
+	                             @NonNull ExampleLocation location) {
 		app.runInUIThread(() -> {
 			testResultsContainer.setVisibility(View.VISIBLE);
 			ImageView ivImage = testResultsContainer.findViewById(R.id.icon);

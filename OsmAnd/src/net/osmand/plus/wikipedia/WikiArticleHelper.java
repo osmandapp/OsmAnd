@@ -105,7 +105,7 @@ public class WikiArticleHelper {
 		protected List<Amenity> doInBackground(Void... voids) {
 			FragmentActivity activity = activityRef.get();
 			OsmandApplication application = (OsmandApplication) activity.getApplication();
-			final List<Amenity> results = new ArrayList<>();
+			List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
 				List<WorldRegion> regions = null;
 				if (articleLatLon != null) {
@@ -276,7 +276,7 @@ public class WikiArticleHelper {
 		}
 	}
 
-	public static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
+	public static void warnAboutExternalLoad(String url, Context context, boolean nightMode) {
 		if (context == null) {
 			return;
 		}

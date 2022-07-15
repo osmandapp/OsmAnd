@@ -54,7 +54,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandSettings settings = getSettings();
+		OsmandSettings settings = getSettings();
 		boolean nightMode = isNightMode(false);
 		
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
@@ -103,7 +103,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 		updateHelpImage();
 
-		final TextView menuTv = mainView.findViewById(R.id.active_markers_text_view);
+		TextView menuTv = mainView.findViewById(R.id.active_markers_text_view);
 		menuTv.setText(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		menuTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 		menuTv.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +116,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				float titleTextWidth = Math.max(paint.measureText(titles[0].toString()), paint.measureText(titles[1].toString()));
 				float itemWidth = titleTextWidth + AndroidUtils.dpToPx(themedContext, 32);
 				float minWidth = AndroidUtils.dpToPx(themedContext, 100);
-				final ListPopupWindow listPopupWindow = new ListPopupWindow(themedContext);
+				ListPopupWindow listPopupWindow = new ListPopupWindow(themedContext);
 				listPopupWindow.setAnchorView(menuTv);
 				listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
 				listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
@@ -137,25 +137,25 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 		updateHelpImage();
 
-		final CompoundButton showArrowsToggle = mainView.findViewById(R.id.show_arrows_switch);
+		CompoundButton showArrowsToggle = mainView.findViewById(R.id.show_arrows_switch);
 		showArrowsToggle.setChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
 		mainView.findViewById(R.id.show_arrows_row).setOnClickListener(view ->
 				updateChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS, showArrowsToggle));
 		UiUtilities.setupCompoundButton(showArrowsToggle, nightMode, PROFILE_DEPENDENT);
 
-		final CompoundButton showLinesToggle = mainView.findViewById(R.id.show_guide_line_switch);
+		CompoundButton showLinesToggle = mainView.findViewById(R.id.show_guide_line_switch);
 		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
 		mainView.findViewById(R.id.show_guide_line_row).setOnClickListener(view ->
 				updateChecked(settings.SHOW_LINES_TO_FIRST_MARKERS, showLinesToggle));
 		UiUtilities.setupCompoundButton(showLinesToggle, nightMode, PROFILE_DEPENDENT);
 
-		final CompoundButton oneTapActiveToggle = mainView.findViewById(R.id.one_tap_active_switch);
+		CompoundButton oneTapActiveToggle = mainView.findViewById(R.id.one_tap_active_switch);
 		oneTapActiveToggle.setChecked(settings.SELECT_MARKER_ON_SINGLE_TAP.get());
 		mainView.findViewById(R.id.one_tap_active_row).setOnClickListener(view ->
 				updateChecked(settings.SELECT_MARKER_ON_SINGLE_TAP, oneTapActiveToggle));
 		UiUtilities.setupCompoundButton(oneTapActiveToggle, nightMode, PROFILE_DEPENDENT);
 
-		final CompoundButton keepPassedToggle = mainView.findViewById(R.id.keep_passed_switch);
+		CompoundButton keepPassedToggle = mainView.findViewById(R.id.keep_passed_switch);
 		keepPassedToggle.setChecked(settings.KEEP_PASSED_MARKERS_ON_MAP.get());
 		mainView.findViewById(R.id.keep_passed_row).setOnClickListener(v ->
 				updateChecked(settings.KEEP_PASSED_MARKERS_ON_MAP, keepPassedToggle));

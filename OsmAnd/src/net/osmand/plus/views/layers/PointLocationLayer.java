@@ -316,7 +316,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
 
-		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
+		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
 		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
 		if (radius > RADIUS * box.getDensity()) {
 			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);

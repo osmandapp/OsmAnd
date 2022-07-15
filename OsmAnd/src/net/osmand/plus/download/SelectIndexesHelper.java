@@ -120,8 +120,8 @@ public class SelectIndexesHelper {
 			}
 		}
 
-		final RadioItem meterBtn = createSrtmRadioBtn(true);
-		final RadioItem feetBtn = createSrtmRadioBtn(false);
+		RadioItem meterBtn = createSrtmRadioBtn(true);
+		RadioItem feetBtn = createSrtmRadioBtn(false);
 		List<RadioItem> radioItems = new ArrayList<>();
 		radioItems.add(meterBtn);
 		radioItems.add(feetBtn);
@@ -157,8 +157,8 @@ public class SelectIndexesHelper {
 	private void showSrtmTypeSelectionDialog() {
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
 
-		final RadioItem meterBtn = createSrtmRadioBtn(true);
-		final RadioItem feetBtn = createSrtmRadioBtn(false);
+		RadioItem meterBtn = createSrtmRadioBtn(true);
+		RadioItem feetBtn = createSrtmRadioBtn(false);
 		List<RadioItem> radioItems = new ArrayList<>();
 		radioItems.add(meterBtn);
 		radioItems.add(feetBtn);
@@ -185,7 +185,7 @@ public class SelectIndexesHelper {
 		dialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
 	}
 
-	private RadioItem createSrtmRadioBtn(final boolean useMeters) {
+	private RadioItem createSrtmRadioBtn(boolean useMeters) {
 		int titleId = useMeters ? R.string.shared_string_meters : R.string.shared_string_feet;
 		String title = Algorithms.capitalizeFirstLetter(app.getString(titleId));
 		RadioItem radioItem = new TextRadioItem(title);

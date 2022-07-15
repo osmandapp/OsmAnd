@@ -1094,7 +1094,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			calculatedPairs = 0;
 			pointsToCalculateSize = pointsToCalculate.size();
 		}
-		final Pair<WptPt, WptPt> currentPair = pointsToCalculate.get(0);
+		Pair<WptPt, WptPt> currentPair = pointsToCalculate.get(0);
 		Location start = new Location("");
 		start.setLatitude(currentPair.first.getLatitude());
 		start.setLongitude(currentPair.first.getLongitude());
@@ -1104,7 +1104,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 
-		final RouteCalculationParams params = new RouteCalculationParams();
+		RouteCalculationParams params = new RouteCalculationParams();
 		params.start = start;
 
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentPair.first.getProfileType(), DEFAULT_APP_MODE);

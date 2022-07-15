@@ -36,7 +36,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 
 	@NonNull
 	@Override
-	public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.transport_stop_route_item, parent, false);
 		}

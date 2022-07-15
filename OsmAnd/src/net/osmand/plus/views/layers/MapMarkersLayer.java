@@ -355,7 +355,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						cy = centerPixel.y;
 						bearing = (float) getAngleBetween(centerPixel, line[1]) - tileBox.getRotate();
 					} else {
-						final QuadPoint cp = tileBox.getCenterPixelPoint();
+						QuadPoint cp = tileBox.getCenterPixelPoint();
 						cx = cp.x;
 						cy = cp.y;
 						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
@@ -560,8 +560,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				|| !settings.SHOW_MAP_MARKERS.get()) {
 			return false;
 		}
-		final MapMarkersHelper helper = getApplication().getMapMarkersHelper();
-		final MapMarker old = helper.getMapMarkers().get(0);
+		MapMarkersHelper helper = getApplication().getMapMarkersHelper();
+		MapMarker old = helper.getMapMarkers().get(0);
 		helper.moveMarkerToTop((MapMarker) o);
 		String title = getContext().getString(R.string.marker_activated, helper.getMapMarkers().get(0).getName(getContext()));
 		Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), title, Snackbar.LENGTH_LONG)

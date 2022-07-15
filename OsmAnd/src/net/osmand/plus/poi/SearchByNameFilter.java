@@ -29,9 +29,9 @@ public class SearchByNameFilter extends PoiUIFilter {
 	
 	@Override
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
+			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
 		currentSearchResult = new ArrayList<Amenity>();
-		final int limit = distanceInd == 0 ? 500 : -1;
+		int limit = distanceInd == 0 ? 500 : -1;
 		List<Amenity> result = Collections.emptyList();
 		if (!Algorithms.isBlank(getFilterByName())) {
 			result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), topLatitude,

@@ -224,7 +224,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 			Object item = getItem(position);
 			if (item instanceof ConnectedApp) {
-				final ConnectedApp app = (ConnectedApp) item;
+				ConnectedApp app = (ConnectedApp) item;
 				active = app.isEnabled();
 				if (!active) {
 					logoContDescId = R.string.shared_string_enable;
@@ -237,7 +237,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				pluginOptions.setOnClickListener(null);
 				view.setTag(app);
 			} else if (item instanceof OsmandPlugin) {
-				final OsmandPlugin plugin = (OsmandPlugin) item;
+				OsmandPlugin plugin = (OsmandPlugin) item;
 				active = plugin.isEnabled();
 				if (!active) {
 					logoContDescId = plugin.isLocked()
@@ -283,8 +283,8 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		}
 	}
 
-	private void showOptionsMenu(View view, final OsmandPlugin plugin) {
-		final PopupMenu optionsMenu = new PopupMenu(view.getContext(), view);
+	private void showOptionsMenu(View view, OsmandPlugin plugin) {
+		PopupMenu optionsMenu = new PopupMenu(view.getContext(), view);
 		MenuItem enableDisableItem = optionsMenu.getMenu().add(
 				plugin.isEnabled() ?
 						R.string.shared_string_disable :
@@ -298,7 +298,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			}
 		});
 
-		final SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
+		SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
 		if (settingsScreenType != null && plugin.isActive()) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
 			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -329,7 +329,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		optionsMenu.show();
 	}
 
-	private void showDeletePluginDialog(final CustomOsmandPlugin plugin) {
+	private void showDeletePluginDialog(CustomOsmandPlugin plugin) {
 		Context context = getContext();
 		if (context != null) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);

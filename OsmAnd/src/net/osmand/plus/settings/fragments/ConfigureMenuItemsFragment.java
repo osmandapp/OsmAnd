@@ -215,7 +215,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		Context ctx = requireContext();
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AppBarLayout appbar = root.findViewById(R.id.appbar);
@@ -263,7 +263,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					}
 				}
 				FragmentManager fm = getFragmentManager();
-				final ContextMenuItemsSettings prefToSave;
+				ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.DRAWER) {
 					prefToSave = new DrawerMenuItemsSettings(hiddenMenuItems, ids);
 				} else if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {

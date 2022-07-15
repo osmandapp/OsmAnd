@@ -271,7 +271,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		b.setView(container);
 		b.setPositiveButton(R.string.shared_string_ok, null);
 		b.setNegativeButton(R.string.shared_string_cancel, null);
-		final AlertDialog alertDialog = b.create();
+		AlertDialog alertDialog = b.create();
 		alertDialog.setOnShowListener(dialog -> alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
 				v -> {
 					String email = editText.getText().toString().trim();
@@ -286,7 +286,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void doSubscribe(final String email) {
+	private void doSubscribe(String email) {
 		new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog dlg;
@@ -399,11 +399,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
 				String uniqueId = DownloadResourceGroup.DownloadResourceGroupType.getVoiceTTSId();
-				final DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
+				DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			}
 		} else if (filterGroup != null) {
-			final DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
+			DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		}
 	}
@@ -481,7 +481,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		Object child = listAdapter.getChild(groupPosition, childPosition);
 		if (child instanceof DownloadResourceGroup) {
 			String uniqueId = ((DownloadResourceGroup) child).getUniqueId();
-			final DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
+			DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (child instanceof CustomIndexItem) {

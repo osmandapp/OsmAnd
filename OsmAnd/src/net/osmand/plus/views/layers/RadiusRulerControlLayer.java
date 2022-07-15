@@ -99,7 +99,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
 		app = getApplication();
@@ -170,7 +170,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
-			final QuadPoint center = tb.getCenterPixelPoint();
+			QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
 			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();

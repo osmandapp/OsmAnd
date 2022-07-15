@@ -47,7 +47,7 @@ public class SelectCopyProfilesMenuAdapter extends AbstractProfileMenuAdapter<Se
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final SelectProfileViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull SelectProfileViewHolder holder, int position) {
 		ApplicationMode appMode = items.get(position);
 		boolean selected = appMode == selectedAppMode;
 

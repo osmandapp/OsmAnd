@@ -266,7 +266,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		return true;
 	}
 
-    private void animateWidget(final boolean show) {
+    private void animateWidget(boolean show) {
 	    if (quickActionsWidget == null) {
 	        return;
         }

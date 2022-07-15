@@ -53,7 +53,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.fragment_help_article, container, false);
+		View view = inflater.inflate(R.layout.fragment_help_article, container, false);
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(getContext()));
@@ -133,7 +133,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		Bundle args = new Bundle();
 		args.putString(ASSET_NAME, assetName);
 		args.putString(NAME, name);
-		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
+		HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;
 	}
@@ -142,7 +142,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		Bundle args = new Bundle();
 		args.putString(URL, url);
 		args.putString(NAME, name);
-		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
+		HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;
 	}

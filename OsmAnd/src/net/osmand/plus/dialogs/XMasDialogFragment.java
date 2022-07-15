@@ -67,9 +67,9 @@ public class XMasDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		XmasDialogWasProcessed = true;
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 
-		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity, R.style.XmasDialogTheme);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity, R.style.XmasDialogTheme);
 		View titleView = mapActivity.getLayoutInflater().inflate(R.layout.xmas_dialog_title, null);
 		builder.setCustomTitle(titleView);
 		builder.setCancelable(true);

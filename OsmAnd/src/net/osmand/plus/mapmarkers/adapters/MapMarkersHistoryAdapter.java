@@ -82,11 +82,11 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		UiUtilities iconsCache = app.getUIUtilities();
 		if (holder instanceof MapMarkerItemViewHolder) {
-			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
-			final MapMarker marker = (MapMarker) getItem(position);
+			MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
+			MapMarker marker = (MapMarker) getItem(position);
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
 
 			int color = ColorUtilities.getDefaultIconColorId(nightMode);
@@ -140,8 +140,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			}
 			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
-			final MapMarkerHeaderViewHolder dateViewHolder = (MapMarkerHeaderViewHolder) holder;
-			final Integer dateHeader = (Integer) getItem(position);
+			MapMarkerHeaderViewHolder dateViewHolder = (MapMarkerHeaderViewHolder) holder;
+			Integer dateHeader = (Integer) getItem(position);
 
 			dateViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			dateViewHolder.title.setText(HistoryAdapter.getDateForHeader(app, dateHeader));
@@ -151,7 +151,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			dateViewHolder.clearButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					final List<MapMarker> group = markerGroups.get(dateHeader);
+					List<MapMarker> group = markerGroups.get(dateHeader);
 					if (group == null) {
 						return;
 					}

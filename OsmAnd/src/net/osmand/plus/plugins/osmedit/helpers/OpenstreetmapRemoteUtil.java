@@ -309,7 +309,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity commitEntityImpl(Action action, final Entity n, EntityInfo info, String comment,
+	public Entity commitEntityImpl(Action action, Entity n, EntityInfo info, String comment,
 	                               boolean closeChangeSet, Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
@@ -545,7 +545,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return entity;
 	}
 
-	private void showWarning(final String msg) {
+	private void showWarning(String msg) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

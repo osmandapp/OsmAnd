@@ -325,7 +325,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerRefreshMapReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver refreshMapReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -339,7 +339,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerSetMapLocationReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver setMapLocationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -376,7 +376,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerAddMapWidgetReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -421,7 +421,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerAddContextMenuButtonsReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addContextMenuButtonsParamsReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -451,7 +451,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerRemoveMapWidgetReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver removeMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -484,7 +484,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerAddMapLayerReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapLayerReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -512,7 +512,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerRemoveMapLayerReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver removeMapLayerReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -535,12 +535,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerTakePhotoNoteReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver takePhotoNoteReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -552,12 +552,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerStartVideoRecordingReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver startVideoRecordingReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -569,12 +569,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerStartAudioRecordingReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver startAudioRecordingReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -586,12 +586,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerStopRecordingReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver stopRecordingReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					plugin.stopRecording(mapActivity, false);
 				}
@@ -601,12 +601,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerNavigateReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				String profileStr = intent.getStringExtra(AIDL_PROFILE);
-				final ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
+				ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
 				boolean validProfile = false;
 				for (ApplicationMode mode : VALID_PROFILES) {
 					if (mode == profile) {
@@ -625,8 +625,8 @@ public class OsmandAidlApi {
 						destName = "";
 					}
 
-					final LatLon start;
-					final PointDescription startDesc;
+					LatLon start;
+					PointDescription startDesc;
 					double startLat = intent.getDoubleExtra(AIDL_START_LAT, 0);
 					double startLon = intent.getDoubleExtra(AIDL_START_LON, 0);
 					if (startLat != 0 && startLon != 0) {
@@ -639,12 +639,12 @@ public class OsmandAidlApi {
 
 					double destLat = intent.getDoubleExtra(AIDL_DEST_LAT, 0);
 					double destLon = intent.getDoubleExtra(AIDL_DEST_LON, 0);
-					final LatLon dest = new LatLon(destLat, destLon);
-					final PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
+					LatLon dest = new LatLon(destLat, destLon);
+					PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
 
-					final RoutingHelper routingHelper = app.getRoutingHelper();
+					RoutingHelper routingHelper = app.getRoutingHelper();
 					boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
-					final boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
+					boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
 							MapActivity mapActivity1 = mapActivityRef.get();
@@ -662,12 +662,12 @@ public class OsmandAidlApi {
 	}
 
 	private void registerNavigateSearchReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateSearchReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				String profileStr = intent.getStringExtra(AIDL_PROFILE);
-				final ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
+				ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
 				boolean validProfile = false;
 				for (ApplicationMode mode : VALID_PROFILES) {
 					if (mode == profile) {
@@ -676,15 +676,15 @@ public class OsmandAidlApi {
 					}
 				}
 				MapActivity mapActivity = mapActivityRef.get();
-				final String searchQuery = intent.getStringExtra(AIDL_SEARCH_QUERY);
+				String searchQuery = intent.getStringExtra(AIDL_SEARCH_QUERY);
 				if (mapActivity != null && validProfile && !Algorithms.isEmpty(searchQuery)) {
 					String startName = intent.getStringExtra(AIDL_START_NAME);
 					if (Algorithms.isEmpty(startName)) {
 						startName = "";
 					}
 
-					final LatLon start;
-					final PointDescription startDesc;
+					LatLon start;
+					PointDescription startDesc;
 					double startLat = intent.getDoubleExtra(AIDL_START_LAT, 0);
 					double startLon = intent.getDoubleExtra(AIDL_START_LON, 0);
 					if (startLat != 0 && startLon != 0) {
@@ -695,7 +695,7 @@ public class OsmandAidlApi {
 						startDesc = null;
 					}
 
-					final LatLon searchLocation;
+					LatLon searchLocation;
 					double searchLat = intent.getDoubleExtra(AIDL_SEARCH_LAT, 0);
 					double searchLon = intent.getDoubleExtra(AIDL_SEARCH_LON, 0);
 					if (searchLat != 0 && searchLon != 0) {
@@ -705,9 +705,9 @@ public class OsmandAidlApi {
 					}
 
 					if (searchLocation != null) {
-						final RoutingHelper routingHelper = app.getRoutingHelper();
+						RoutingHelper routingHelper = app.getRoutingHelper();
 						boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
-						final boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
+						boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
 						if (routingHelper.isFollowingMode() && !force) {
 							mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
 								MapActivity mapActivity1 = mapActivityRef.get();
@@ -728,7 +728,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerNavigateGpxReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver navigateGpxReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -770,7 +770,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerPauseNavigationReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver pauseNavigationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -789,7 +789,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerResumeNavigationReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver resumeNavigationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -807,7 +807,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerStopNavigationReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver stopNavigationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -824,7 +824,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerMuteNavigationReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver muteNavigationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -838,7 +838,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerUnmuteNavigationReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver unmuteNavigationReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -852,7 +852,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerShowSqliteDbFileReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver showSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -875,7 +875,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerHideSqliteDbFileReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver hideSqliteDbFileReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -898,7 +898,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerExecuteQuickActionReceiver(@NonNull MapActivity mapActivity) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver executeQuickActionReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -1278,7 +1278,7 @@ public class OsmandAidlApi {
 
 	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
-		final int col = GpxAppearanceAdapter.parseTrackColor(
+		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
@@ -1290,8 +1290,8 @@ public class OsmandAidlApi {
 				app.getGpxDbHelper().updateColor(item, col);
 			}
 		}
-		final GpxSelectionHelper helper = app.getSelectedGpxHelper();
-		final SelectedGpxFile selectedGpx = helper.getSelectedFileByName(destination.getName());
+		GpxSelectionHelper helper = app.getSelectedGpxHelper();
+		SelectedGpxFile selectedGpx = helper.getSelectedFileByName(destination.getName());
 		if (selectedGpx != null) {
 			if (show) {
 				new AsyncTask<File, Void, GPXFile>() {
@@ -1583,7 +1583,7 @@ public class OsmandAidlApi {
 
 	boolean removeGpx(String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
-			final File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
 			if (f.exists()) {
 				GpxDataItem item = app.getGpxDbHelper().getItem(f);
 				if (item != null && item.isApiImported()) {
@@ -1890,8 +1890,8 @@ public class OsmandAidlApi {
 		return params;
 	}
 
-	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
-	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+	boolean search(String searchQuery, int searchType, double latitude, double longitude,
+	               int radiusLevel, int totalLimit, SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
 		}
@@ -1917,7 +1917,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean registerForOsmandInitialization(final OsmandAppInitCallback callback) {
+	boolean registerForOsmandInitialization(OsmandAppInitCallback callback) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
@@ -1948,7 +1948,7 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().setNavDrawerItems(appPackage, items);
 	}
 
-	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
+	public void registerNavDrawerItems(Activity activity, ContextMenuAdapter adapter) {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
@@ -2078,7 +2078,7 @@ public class OsmandAidlApi {
 	}
 
 	void registerForNavigationUpdates(long id) {
-		final NextDirectionInfo baseNdi = new NextDirectionInfo();
+		NextDirectionInfo baseNdi = new NextDirectionInfo();
 		IRoutingDataUpdateListener listener = () -> {
 			if (aidlCallbackListener != null) {
 				ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
@@ -2289,12 +2289,12 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
-	                        final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	boolean getBitmapForGpx(Uri gpxUri, float density, int widthPixels,
+	                        int heightPixels, int color, GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
-		final TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawerListener() {
+		TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawerListener() {
 			@Override
 			public void onTrackBitmapDrawing() {
 			}
@@ -2337,8 +2337,8 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels,
-	                                    final int heightPixels, final int color, final TrackBitmapDrawerListener drawerListener) {
+	private void createGpxBitmapFromUri(Uri gpxUri, float density, int widthPixels,
+	                                    int heightPixels, int color, TrackBitmapDrawerListener drawerListener) {
 		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, result -> {
 			TracksDrawParams drawParams = new TracksDrawParams(density, widthPixels, heightPixels, color);
 			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, drawParams, null);
@@ -2352,7 +2352,7 @@ public class OsmandAidlApi {
 
 	private final Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
-	public boolean importProfile(final Uri profileUri, String latestChanges, int version) {
+	public boolean importProfile(Uri profileUri, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
@@ -2364,7 +2364,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	public boolean importProfileV2(final Uri profileUri, List<String> settingsTypeKeys, boolean replace,
+	public boolean importProfileV2(Uri profileUri, List<String> settingsTypeKeys, boolean replace,
 	                               boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
@@ -2468,7 +2468,7 @@ public class OsmandAidlApi {
 	}
 
 	public boolean selectProfile(String appModeKey) {
-		final ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (appMode != null) {
 			app.runInUIThread(() -> {
 				if (!ApplicationMode.values(app).contains(appMode)) {
@@ -2685,7 +2685,7 @@ public class OsmandAidlApi {
 		private final CallbackWithObject<GPXFile> callback;
 		private final Uri gpxUri;
 
-		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, final CallbackWithObject<GPXFile> callback) {
+		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, CallbackWithObject<GPXFile> callback) {
 			this.app = app;
 			this.gpxUri = gpxUri;
 			this.callback = callback;
@@ -2707,7 +2707,7 @@ public class OsmandAidlApi {
 				e.printStackTrace();
 			}
 			if (gpxParcelDescriptor != null) {
-				final FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+				FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
 				return GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 			}
 			return null;

@@ -381,7 +381,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			updateSelectionMode(actionMode);
 		} else {
-			final FavouritePoint point = favouritesAdapter.getChild(groupPosition, childPosition);
+			FavouritePoint point = favouritesAdapter.getChild(groupPosition, childPosition);
 			showOnMap(point, groupPosition, childPosition);
 		}
 		return true;
@@ -624,7 +624,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		return preference;
 	}
 
-	public void showOnMap(final FavouritePoint point, int groupPos, int childPos) {
+	public void showOnMap(FavouritePoint point, int groupPos, int childPos) {
 		OsmandSettings settings = requireMyApplication().getSettings();
 		settings.FAVORITES_TAB.set(FAV_TAB);
 		selectedGroupPos = groupPos;
@@ -769,7 +769,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			OsmandApplication app = getMyApplication();
 			boolean light = app.getSettings().isLightContent();
-			final FavoriteGroup model = getGroup(groupPosition);
+			FavoriteGroup model = getGroup(groupPosition);
 			boolean visible = model.isVisible();
 			int enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
@@ -792,7 +792,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			label.setText(model.getName().length() == 0 ? getString(R.string.shared_string_favorites) : model.getDisplayName(app));
 
 			if (selectionMode) {
-				final CheckBox ch = row.findViewById(R.id.toggle_item);
+				CheckBox ch = row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(groupsToDelete.contains(model));
 
@@ -821,11 +821,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				});
 				row.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {
-				final CheckBox ch = row.findViewById(R.id.toggle_item);
+				CheckBox ch = row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 				row.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
 			}
-			final View ch = row.findViewById(R.id.options);
+			View ch = row.findViewById(R.id.options);
 			if (!selectionMode) {
 				if (!model.isPersonal()) {
 					((ImageView) ch).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
@@ -847,7 +847,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 
 		@Override
-		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView,
+		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
 		                         ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
@@ -866,8 +866,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			TextView addressText = row.findViewById(R.id.group_name);
 			ImageView icon = row.findViewById(R.id.favourite_icon);
 
-			final FavouritePoint model = getChild(groupPosition, childPosition);
-			final FavoriteGroup group = getGroup(groupPosition);
+			FavouritePoint model = getChild(groupPosition, childPosition);
+			FavoriteGroup group = getGroup(groupPosition);
 			boolean visible = model.isVisible();
 			row.setTag(model);
 
@@ -909,7 +909,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				direction.setImageDrawable(arrowImageDisabled);
 			}
 
-			final CheckBox ch = row.findViewById(R.id.toggle_item);
+			CheckBox ch = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(favoritesSelected.get(group.getName()) != null && favoritesSelected.get(group.getName()).contains(model));

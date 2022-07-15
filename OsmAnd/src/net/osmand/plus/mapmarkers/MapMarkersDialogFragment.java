@@ -123,7 +123,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		if (optionsFragment != null) {
 			((OptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
 		}
-		final Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
+		Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
 		if (orderByFragment != null) {
 			((OrderByBottomSheetDialogFragment) orderByFragment).setListener(createOrderByFragmentListener());
 		}
@@ -150,7 +150,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		viewPager = mainView.findViewById(R.id.map_markers_view_pager);
 		viewPager.setOffscreenPageLimit(3);
 		viewPager.setSwipeLocked(true);
-		final MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
+		MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(adapter);
 
 		progressBar = mainView.findViewById(R.id.progress_bar);
@@ -401,8 +401,8 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			@Override
 			public void moveAllToHistoryOnClick() {
 				if (mapActivity != null) {
-					final MapMarkersHelper helper = mapActivity.getMyApplication().getMapMarkersHelper();
-					final List<MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
+					MapMarkersHelper helper = mapActivity.getMyApplication().getMapMarkersHelper();
+					List<MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
 					helper.moveAllActiveMarkersToHistory();
 					if (viewPager.getCurrentItem() == ACTIVE_MARKERS_POSITION) {
 						activeFragment.updateAdapter();
@@ -436,8 +436,8 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			final MapActivity mapActivity = getMapActivity();
 
 			@Override
-			public void saveGpx(final String fileName) {
-				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().getDataHelper().saveMarkersToFile(fileName);
+			public void saveGpx(String fileName) {
+				String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().getDataHelper().saveMarkersToFile(fileName);
 				snackbar = Snackbar.make(viewPager, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, view -> TrackMenuFragment.openTrack(mapActivity, new File(gpxPath), null));
 				UiUtilities.setupSnackbar(snackbar, !lightTheme);

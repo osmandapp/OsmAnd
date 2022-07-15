@@ -128,7 +128,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 	}
 
@@ -263,12 +263,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION);
 		} else {
-			final MapContextMenu menu = mapActivity.getContextMenu();
-			final LatLon latLon = menu.getLatLon();
-			final PointDescription pointDescription = menu.getPointDescriptionForTarget();
+			MapContextMenu menu = mapActivity.getContextMenu();
+			LatLon latLon = menu.getLatLon();
+			PointDescription pointDescription = menu.getPointDescriptionForTarget();
 			menu.hide();
 
-			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 				DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
@@ -279,7 +279,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else {
 				AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 				bld.setTitle(R.string.new_directions_point_dialog);
-				final int[] defaultVls = {0};
+				int[] defaultVls = {0};
 				bld.setSingleChoiceItems(new String[] {
 						mapActivity.getString(R.string.clear_intermediate_points),
 						mapActivity.getString(R.string.keep_intermediate_points)
@@ -354,7 +354,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (mapActivity != null) {
 				mapActivity.getContextMenu().close();
 			}
-			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 				targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
@@ -371,7 +371,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
 				mapActivity.getContextMenu().close();
-				final TargetPointsHelper targets = app.getTargetPointsHelper();
+				TargetPointsHelper targets = app.getTargetPointsHelper();
 				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 					targets.navigateToPoint(latLon, true, 0, pointDescription);
 				} else if (targets.getIntermediatePoints().isEmpty()) {
@@ -397,7 +397,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (mapActivity != null) {
 				mapActivity.getContextMenu().close();
 			}
-			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
 			targets.navigateToPoint(latLon, true, -1, pointDescription);
 		} else {
 			addDestination(latLon, pointDescription);
@@ -472,16 +472,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void animateMapControls(final boolean show) {
+	private void animateMapControls(boolean show) {
 		MapActivity mapActivity = requireMapActivity();
-		final View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
-		final View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
-		final View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
-		final View mapHudButtonsQuickActions = mapActivity.findViewById(R.id.MapHudButtonsOverlayQuickActions);
+		View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
+		View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
+		View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
+		View mapHudButtonsQuickActions = mapActivity.findViewById(R.id.MapHudButtonsOverlayQuickActions);
 
-		final float transTopInitial = show ? -mapHudButtonsTop.getHeight() : 0;
-		final float transBottomInitial = show ? mapHudButtonsBottom.getHeight() : 0;
-		final float alphaInitial = show ? 0f : 1f;
+		float transTopInitial = show ? -mapHudButtonsTop.getHeight() : 0;
+		float transBottomInitial = show ? mapHudButtonsBottom.getHeight() : 0;
+		float alphaInitial = show ? 0f : 1f;
 
 		float transTopFinal = show ? 0 : -mapHudButtonsTop.getHeight();
 		float transBottomFinal = show ? 0 : mapHudButtonsBottom.getHeight();
@@ -811,19 +811,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& !routingHelper.isFollowingMode());
 	}
 
-	public static OnLongClickListener getOnClickMagnifierListener(@NonNull final OsmandMapTileView view) {
+	public static OnLongClickListener getOnClickMagnifierListener(@NonNull OsmandMapTileView view) {
 		return new OnLongClickListener() {
 
 			@Override
 			public boolean onLongClick(View notUseCouldBeNull) {
-				final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
-				final AlertDialog.Builder bld = new AlertDialog.Builder(view.requireMapActivity());
+				OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+				AlertDialog.Builder bld = new AlertDialog.Builder(view.requireMapActivity());
 				int p = (int) (mapDensity.get() * 100);
-				final TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
-				final List<String> values = new ArrayList<>();
+				TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+				List<String> values = new ArrayList<>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {
-					final boolean end = k == tlist.size();
+					boolean end = k == tlist.size();
 					if (i == -1) {
 						if ((end || p < tlist.get(k))) {
 							values.add(p + " %");

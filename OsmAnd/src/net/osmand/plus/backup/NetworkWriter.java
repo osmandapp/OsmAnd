@@ -169,7 +169,7 @@ public class NetworkWriter extends AbstractWriter {
 	}
 
 	@NonNull
-	private OnUploadFileListener getUploadFileListener(@NonNull final SettingsItem item) {
+	private OnUploadFileListener getUploadFileListener(@NonNull SettingsItem item) {
 		return new OnUploadFileListener() {
 
 			@Override

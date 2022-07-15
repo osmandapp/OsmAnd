@@ -53,9 +53,9 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
-		final LatLon latLon = getMapLocation(mapActivity);
-		final String title = getParams().get(KEY_NAME);
+	public void execute(@NonNull MapActivity mapActivity) {
+		LatLon latLon = getMapLocation(mapActivity);
+		String title = getParams().get(KEY_NAME);
 		if (title == null || title.isEmpty()) {
 			progressDialog = createProgressDialog(mapActivity, new DialogOnClickListener() {
 				@Override
@@ -90,7 +90,7 @@ public class FavoriteAction extends QuickAction {
 		}
 	}
 
-	private ProgressDialog createProgressDialog(Context context, @NonNull final DialogOnClickListener listener) {
+	private ProgressDialog createProgressDialog(Context context, @NonNull DialogOnClickListener listener) {
 		ProgressDialog dialog = new ProgressDialog(context);
 		dialog.setCancelable(false);
 		dialog.setMessage(context.getString(R.string.search_address));
@@ -126,9 +126,9 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
-		final View root = LayoutInflater.from(parent.getContext())
+		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
 
 		parent.addView(root);

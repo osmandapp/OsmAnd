@@ -46,7 +46,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 		if (Algorithms.isEmpty(jsonStr)) {
 			throw new IllegalArgumentException("Cannot find json body");
 		}
-		final JSONObject json;
+		JSONObject json;
 		try {
 			json = new JSONObject(jsonStr);
 		} catch (JSONException e) {
@@ -55,7 +55,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 		readPreferencesFromJson(json);
 	}
 
-	public void readPreferencesFromJson(final JSONObject json) {
+	public void readPreferencesFromJson(JSONObject json) {
 		settings.getContext().runInUIThread(() -> {
 			Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
 			Iterator<String> iterator = json.keys();

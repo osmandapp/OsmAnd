@@ -81,7 +81,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		});
 	}
 
-	protected void addProfileItem(final ProfileDataObject profile) {
+	protected void addProfileItem(ProfileDataObject profile) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
 
@@ -227,7 +227,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		);
 	}
 
-	protected OnClickListener getItemClickListener(final ProfileDataObject profile) {
+	protected OnClickListener getItemClickListener(ProfileDataObject profile) {
 		return view -> onItemSelected(profile);
 	}
 

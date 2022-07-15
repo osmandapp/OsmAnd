@@ -106,7 +106,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 			mapControlsContainer.setVisibility(View.VISIBLE);
 		} else {
 			mapControlsContainer.setVisibility(View.GONE);
-			final TypedValue typedValueAttr = new TypedValue();
+			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 			getMapActivity().getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			rootView.setBackgroundResource(typedValueAttr.resourceId);

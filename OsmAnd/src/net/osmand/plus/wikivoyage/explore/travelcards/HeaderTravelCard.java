@@ -25,7 +25,7 @@ public class HeaderTravelCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof HeaderTravelVH) {
-			final HeaderTravelVH holder = (HeaderTravelVH) viewHolder;
+			HeaderTravelVH holder = (HeaderTravelVH) viewHolder;
 			holder.title.setText(title);
 			int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 			holder.title.setTextColor(primaryTextColor);

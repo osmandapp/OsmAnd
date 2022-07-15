@@ -115,14 +115,14 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	}
 
 
-	public void collapseTrees(final int count) {
+	public void collapseTrees(int count) {
 		Activity activity = getActivity();
 		if (activity != null) {
 			activity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					synchronized (adapter) {
-						final ExpandableListView expandableListView = getExpandableListView();
+						ExpandableListView expandableListView = getExpandableListView();
 						for (int i = 0; i < adapter.getGroupCount(); i++) {
 							int cp = adapter.getChildrenCount(i);
 							if (cp < count) {

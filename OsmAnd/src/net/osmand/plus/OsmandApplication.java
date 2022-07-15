@@ -698,7 +698,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		@Override
-		public void uncaughtException(@NonNull final Thread thread, @NonNull final Throwable ex) {
+		public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
 			File file = getAppPath(EXCEPTION_PATH);
 			try {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -752,7 +752,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return mapMarkersDbHelper;
 	}
 
-	public void showShortToastMessage(final int msgId, final Object... args) {
+	public void showShortToastMessage(int msgId, Object... args) {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
@@ -763,7 +763,7 @@ public class OsmandApplication extends MultiDexApplication {
 		});
 	}
 
-	public void showShortToastMessage(final String msg) {
+	public void showShortToastMessage(String msg) {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
@@ -774,7 +774,7 @@ public class OsmandApplication extends MultiDexApplication {
 		});
 	}
 
-	public void showToastMessage(final int msgId, final Object... args) {
+	public void showToastMessage(int msgId, Object... args) {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
@@ -810,7 +810,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.postDelayed(run, delay);
 	}
 	
-	public void runMessageInUIThreadAndCancelPrevious(final int messageId, final Runnable run, long delay) {
+	public void runMessageInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
 		Message msg = Message.obtain(uiHandler, new Runnable() {
 			
 			@Override
@@ -953,7 +953,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
 		if (!OsmandPlugin.isActive(AccessibilityPlugin.class)) {
 			return false;
 		}
@@ -988,7 +988,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(int intent) {
-		final Intent serviceIntent = new Intent(this, NavigationService.class);
+		Intent serviceIntent = new Intent(this, NavigationService.class);
 		if (getNavigationService() != null) {
 			intent |= getNavigationService().getUsedBy();
 			getNavigationService().stopSelf();
@@ -1003,7 +1003,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startDownloadService() {
-		final Intent serviceIntent = new Intent(this, DownloadService.class);
+		Intent serviceIntent = new Intent(this, DownloadService.class);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent);

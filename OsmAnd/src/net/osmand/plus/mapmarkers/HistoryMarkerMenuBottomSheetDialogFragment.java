@@ -35,10 +35,10 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		Bundle arguments = getArguments();
 
 		if (arguments != null) {
-			final int pos = arguments.getInt(MARKER_POSITION);
-			final String markerName = arguments.getString(MARKER_NAME);
-			final int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
-			final long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
+			int pos = arguments.getInt(MARKER_POSITION);
+			String markerName = arguments.getString(MARKER_NAME);
+			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
+			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
 
 			Date date = new Date(markerVisitedDate);
 			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);

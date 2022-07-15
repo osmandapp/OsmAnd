@@ -526,7 +526,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
 								 int color, String iconName, String backgroundName) {
-		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
+		WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = name;
 		pt.category = category;
 		pt.desc = description;

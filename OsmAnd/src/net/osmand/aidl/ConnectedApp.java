@@ -140,7 +140,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		}
 	}
 
-	void registerLayerContextMenu(final ContextMenuAdapter menuAdapter, final MapActivity mapActivity) {
+	void registerLayerContextMenu(ContextMenuAdapter menuAdapter, MapActivity mapActivity) {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override

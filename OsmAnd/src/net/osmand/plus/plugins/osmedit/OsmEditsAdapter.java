@@ -89,9 +89,9 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			if (position == 0) {
 				bindHeaderViewHolder((HeaderViewHolder) convertView.getTag());
 			} else {
-				final Object item = getItem(position);
+				Object item = getItem(position);
 				if (item instanceof OsmPoint) {
-					final OsmEditViewHolder holder = (OsmEditViewHolder) convertView.getTag();
+					OsmEditViewHolder holder = (OsmEditViewHolder) convertView.getTag();
 					bindOsmEditViewHolder(holder, (OsmPoint) item, position);
 				}
 			}
@@ -159,7 +159,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		return count;
 	}
 
-	private void bindHeaderViewHolder(final HeaderViewHolder holder) {
+	private void bindHeaderViewHolder(HeaderViewHolder holder) {
 		setupBackground(holder.backgroundView);
 		holder.topDivider.setVisibility(portrait ? View.VISIBLE : View.GONE);
 		holder.title.setText(R.string.your_edits);
@@ -179,7 +179,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		}
 	}
 
-	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, final int position) {
+	private void bindOsmEditViewHolder(OsmEditViewHolder holder, OsmPoint osmEdit, int position) {
 		setupBackground(holder.mainView);
 		holder.titleTextView.setText(OsmEditingPlugin.getTitle(osmEdit, getContext()));
 		holder.descriptionTextView.setText(getDescription(osmEdit));

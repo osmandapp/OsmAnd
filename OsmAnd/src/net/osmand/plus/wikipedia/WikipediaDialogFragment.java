@@ -242,10 +242,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	@Override
-	protected void showPopupLangMenu(View view, final String langSelected) {
+	protected void showPopupLangMenu(View view, String langSelected) {
 		Context context = getContext();
 		if (context != null) {
-			final PopupMenu optionsMenu = new PopupMenu(context, view, Gravity.RIGHT);
+			PopupMenu optionsMenu = new PopupMenu(context, view, Gravity.RIGHT);
 			Set<String> namesSet = amenity.getSupportedContentLocales();
 
 			Map<String, String> names = new HashMap<>();
@@ -269,7 +269,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 					}
 				});
 			}
-			for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
+			for (Map.Entry<String, String> e : sortedNames.entrySet()) {
 				MenuItem item = optionsMenu.getMenu().add(e.getValue());
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override

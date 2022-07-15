@@ -31,8 +31,8 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 			return;
 		}
 
-		final View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.crash_title, null);
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.crash_title, null);
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);

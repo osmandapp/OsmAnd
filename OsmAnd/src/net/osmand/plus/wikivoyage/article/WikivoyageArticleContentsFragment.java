@@ -50,7 +50,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 			return;
 		}
 
-		final WikivoyageContentItem contentItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
+		WikivoyageContentItem contentItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
 		if (contentItem == null) {
 			return;
 		}
@@ -154,7 +154,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		}
 
 		@Override
-		public View getChildView(int groupPosition, final int childPosition,
+		public View getChildView(int groupPosition, int childPosition,
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			String childText = (String) getChild(groupPosition, childPosition);
 			if (convertView == null) {
@@ -196,8 +196,8 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, final boolean isExpanded,
-								 View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded,
+		                         View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)

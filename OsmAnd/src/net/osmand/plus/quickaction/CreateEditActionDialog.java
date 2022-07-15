@@ -245,7 +245,7 @@ public class CreateEditActionDialog extends DialogFragment
         image.setImageResource(action.getIconRes(getApplication()));
     }
 
-    private void setupFooter(final View root){
+    private void setupFooter(View root){
 
         root.findViewById(R.id.btnApply).setOnClickListener(new View.OnClickListener() {
             @Override

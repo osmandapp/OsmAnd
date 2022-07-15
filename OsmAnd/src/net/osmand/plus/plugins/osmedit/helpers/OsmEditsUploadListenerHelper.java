@@ -117,7 +117,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Bundle argument = getArguments();
 			String errorMessage = argument.getString(ERROR_MESSAGE);
-			final OsmPoint point = (OsmPoint) argument.getSerializable(POINT);
+			OsmPoint point = (OsmPoint) argument.getSerializable(POINT);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getResources().getString(R.string.failed_to_upload))
 					.setMessage(MessageFormat.format(
@@ -162,7 +162,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			Bundle arguments = getArguments();
 			String[] pointNames = arguments.getStringArray(POINT_NAMES);
 			boolean[] hasErrors = arguments.getBooleanArray(HAS_ERROR);
-			final OsmPoint[] points = (OsmPoint[]) arguments.getSerializable(POINTS_WITH_ERRORS);
+			OsmPoint[] points = (OsmPoint[]) arguments.getSerializable(POINTS_WITH_ERRORS);
 			int successfulUploads = 0;
 			assert hasErrors != null;
 			for (boolean hasError : hasErrors) {

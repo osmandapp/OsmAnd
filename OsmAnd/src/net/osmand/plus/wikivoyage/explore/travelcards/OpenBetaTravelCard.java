@@ -32,7 +32,7 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof OpenBetaTravelVH) {
-			final OpenBetaTravelVH holder = (OpenBetaTravelVH) viewHolder;
+			OpenBetaTravelVH holder = (OpenBetaTravelVH) viewHolder;
 			holder.title.setText(R.string.welcome_to_open_beta);
 			holder.description.setText(R.string.welcome_to_open_beta_description);
 			holder.backgroundImage.setImageResource(R.drawable.img_help_wikivoyage_articles);
@@ -56,7 +56,7 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 		final TextView button;
 		final ImageView backgroundImage;
 
-		public OpenBetaTravelVH(final View itemView) {
+		public OpenBetaTravelVH(View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			description = itemView.findViewById(R.id.description);

@@ -113,7 +113,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		minMaxSpeedTextBounds = new Rect();
 
 		AppCompatActivity trackActivity = (AppCompatActivity) getActivity();
-		final View view = trackActivity.getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
+		View view = trackActivity.getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
 		Toolbar toolbar = view.findViewById(R.id.split_interval_toolbar);
 		TextView titleTextView = toolbar.findViewById(R.id.title);
@@ -211,7 +211,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void updateHeader() {
-		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
+		View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 
 		if (getGpx() != null && !getGpx().showCurrentTrack && adapter.getCount() > 0) {
 			setupSplitIntervalView(splitIntervalView);
@@ -235,7 +235,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 							.showOnMap().selectedByUser().syncGroup().addToMarkers()
 							.addToHistory().saveSelection();
 					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), params);
-					final List<GpxDisplayGroup> groups = getDisplayGroups();
+					List<GpxDisplayGroup> groups = getDisplayGroups();
 					if (groups.size() > 0) {
 						updateSplit(groups, sf);
 					}
@@ -269,12 +269,12 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void setupSplitIntervalView(@NonNull View view) {
-		final TextView title = view.findViewById(R.id.split_interval_title);
-		final TextView text = view.findViewById(R.id.split_interval_text);
-		final ImageView img = view.findViewById(R.id.split_interval_arrow);
+		TextView title = view.findViewById(R.id.split_interval_title);
+		TextView text = view.findViewById(R.id.split_interval_text);
+		ImageView img = view.findViewById(R.id.split_interval_arrow);
 		boolean nightMode = !app.getSettings().isLightContent();
 		int colorId;
-		final List<GpxDisplayGroup> groups = getDisplayGroups();
+		List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
 			colorId = ColorUtilities.getPrimaryTextColorId(nightMode);
 		} else {
@@ -289,7 +289,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void updateSplitIntervalView(View view) {
-		final TextView text = view.findViewById(R.id.split_interval_text);
+		TextView text = view.findViewById(R.id.split_interval_text);
 		if (selectedSplitInterval == 0) {
 			text.setText(getString(R.string.shared_string_none));
 		} else {
@@ -303,7 +303,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void prepareSplitIntervalAdapterData() {
-		final List<GpxDisplayGroup> groups = getDisplayGroups();
+		List<GpxDisplayGroup> groups = getDisplayGroups();
 
 		options.add(app.getString(R.string.shared_string_none));
 		distanceSplit.add(-1d);

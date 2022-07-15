@@ -110,7 +110,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		LinearLayout osmLayout = mainView.findViewById(R.id.items);
 		osmLayout.removeAllViews();
 
-		for (final OsmPoint point : dataPoints) {
+		for (OsmPoint point : dataPoints) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 

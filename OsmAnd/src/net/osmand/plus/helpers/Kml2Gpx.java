@@ -18,12 +18,12 @@ public class Kml2Gpx {
 	public static final Log LOG = PlatformUtil.getLog(Kml2Gpx.class);
 
 	@TargetApi(8)
-	public static String toGpx(final InputStream kml) {
+	public static String toGpx(InputStream kml) {
 		try {
-			final Source xmlSource = new StreamSource(kml);
-			final Source xsltSource = new StreamSource(Kml2Gpx.class.getResourceAsStream("kml2gpx.xslt"));
+			Source xmlSource = new StreamSource(kml);
+			Source xsltSource = new StreamSource(Kml2Gpx.class.getResourceAsStream("kml2gpx.xslt"));
 
-			final StringWriter sw = new StringWriter();
+			StringWriter sw = new StringWriter();
 
 			TransformerFactory.newInstance().newTransformer(xsltSource).transform(xmlSource, new StreamResult(sw));
 

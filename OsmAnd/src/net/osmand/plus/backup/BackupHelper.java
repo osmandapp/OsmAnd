@@ -455,8 +455,8 @@ public class BackupHelper {
 
 	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type,
-	                  @NonNull StreamWriter streamWriter, final long uploadTime,
-	                  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	                  @NonNull StreamWriter streamWriter, long uploadTime,
+	                  @Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -518,7 +518,7 @@ public class BackupHelper {
 	}
 
 	boolean isObfMapExistsOnServer(@NonNull String name) {
-		final boolean[] exists = new boolean[1];
+		boolean[] exists = new boolean[1];
 
 		Map<String, String> params = new HashMap<>();
 		params.put("name", name);
@@ -557,13 +557,13 @@ public class BackupHelper {
 	}
 
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                 @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                     @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                     @Nullable Executor executor, @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
 			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
@@ -575,14 +575,14 @@ public class BackupHelper {
 		}
 	}
 
-	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileList(@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
-		final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
+		OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 		operationLog.startOperation();
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
 				(resultJson, error, resultCode) -> {
@@ -699,7 +699,7 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
+	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
 		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
 		operationLog.startOperation();
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
@@ -847,10 +847,10 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void generateBackupInfo(@NonNull final Map<String, LocalFile> localFiles,
-							@NonNull final Map<String, RemoteFile> uniqueRemoteFiles,
-							@NonNull final Map<String, RemoteFile> deletedRemoteFiles,
-							@Nullable final OnGenerateBackupInfoListener listener) {
+	void generateBackupInfo(@NonNull Map<String, LocalFile> localFiles,
+							@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
+							@NonNull Map<String, RemoteFile> deletedRemoteFiles,
+							@Nullable OnGenerateBackupInfoListener listener) {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 		operationLog.startOperation();

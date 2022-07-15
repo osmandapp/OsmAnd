@@ -298,7 +298,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public void updateInfo(final View main, boolean forceFitTrackOnMap) {
+	public void updateInfo(View main, boolean forceFitTrackOnMap) {
 		updateView(main, forceFitTrackOnMap);
 	}
 
@@ -554,15 +554,15 @@ public class TrackDetailsMenu {
 		return xAxisPoints;
 	}
 
-	private void updateView(final View parentView, boolean forceFitTrackOnMap) {
+	private void updateView(View parentView, boolean forceFitTrackOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
 			return;
 		}
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final UiUtilities ic = app.getUIUtilities();
-		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		OsmandApplication app = mapActivity.getMyApplication();
+		UiUtilities ic = app.getUIUtilities();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		GPXTrackAnalysis analysis = gpxItem.analysis;
 		if (analysis == null || gpxItem.chartTypes == null) {
 			parentView.setVisibility(View.GONE);
@@ -573,7 +573,7 @@ public class TrackDetailsMenu {
 			return;
 		}
 
-		final LineChart chart = parentView.findViewById(R.id.chart);
+		LineChart chart = parentView.findViewById(R.id.chart);
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
@@ -697,7 +697,7 @@ public class TrackDetailsMenu {
 		ImageView yAxisIcon = parentView.findViewById(R.id.y_axis_icon);
 		TextView yAxisTitle = parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
-		final List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		boolean hasSlopeChart = false;
 		if (analysis.hasElevationData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});

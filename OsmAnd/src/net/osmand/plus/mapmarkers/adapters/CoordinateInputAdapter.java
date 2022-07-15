@@ -60,7 +60,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final MapMarkerItemViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull MapMarkerItemViewHolder holder, int position) {
 		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);

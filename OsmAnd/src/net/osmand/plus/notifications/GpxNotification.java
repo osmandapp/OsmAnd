@@ -41,7 +41,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
 				}
@@ -52,7 +52,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
 					plugin.updateWidgets();
@@ -64,7 +64,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.stopRecording();
 					plugin.updateWidgets();
@@ -148,7 +148,7 @@ public class GpxNotification extends OsmandNotification {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder(wearable)
+		Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText));
 

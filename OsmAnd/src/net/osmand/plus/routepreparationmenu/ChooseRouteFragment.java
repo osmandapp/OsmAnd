@@ -174,7 +174,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			int width = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width) - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
 			solidToolbarView.setVisibility(View.VISIBLE);
-			final TypedValue typedValueAttr = new TypedValue();
+			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(mapActivity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			view.findViewById(R.id.pager_container).setBackgroundResource(typedValueAttr.resourceId);
@@ -182,7 +182,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 		viewPager.setClipToPadding(false);
 		currentMenuState = initialMenuState;
-		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), routesCount);
+		RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), routesCount);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
 		viewPager.setOffscreenPageLimit(1);
@@ -312,7 +312,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
 		OsmandApplication app = requireMyApplication();
-		final OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
 				new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
@@ -506,9 +506,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				RoutingHelper routingHelper = app.getRoutingHelper();
-				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-				final GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-				final Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
+				String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+				GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
+				Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
 				File dir = new File(app.getCacheDir(), "share");
 				if (!dir.exists()) {
 					dir.mkdir();
@@ -518,7 +518,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					FileWriter fw = new FileWriter(dst);
 					GPXUtilities.writeGpx(fw, gpx, null);
 					fw.close();
-					final Intent sendIntent = new Intent();
+					Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);
 					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
 							routingHelper.getGeneralRouteInformation()).toString()));
@@ -713,13 +713,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public void updateToolbars(@NonNull final ContextMenuFragment fragment, int y, boolean animated) {
-		final MapActivity mapActivity = getMapActivity();
+	public void updateToolbars(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final View solidToolbarView = this.solidToolbarView;
+			View solidToolbarView = this.solidToolbarView;
 			if (solidToolbarView != null && portrait) {
 				if (animated) {
-					final float toolbarAlpha = fragment.getToolbarAlpha(y);
+					float toolbarAlpha = fragment.getToolbarAlpha(y);
 					if (toolbarAlpha > 0) {
 						fragment.updateVisibility(solidToolbarView, true);
 					}

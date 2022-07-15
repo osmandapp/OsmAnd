@@ -125,7 +125,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}
 
-	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, final boolean signUp) {
+	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, boolean signUp) {
 		setupDialogButton(isNightMode(), view, buttonType, textId);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override

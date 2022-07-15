@@ -129,13 +129,13 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull final MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = view.findViewById(R.id.list);
 		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
-		final Adapter adapter = new Adapter(poiFilters);
+		Adapter adapter = new Adapter(poiFilters);
 		list.setAdapter(adapter);
 
 		Button addFilter = view.findViewById(R.id.btnAddCategory);
@@ -171,9 +171,9 @@ public class ShowHidePoiAction extends QuickAction {
 		}
 
 		@Override
-		public void onBindViewHolder(final Adapter.Holder holder, final int position) {
+		public void onBindViewHolder(Adapter.Holder holder, int position) {
 
-			final PoiUIFilter filter = filters.get(position);
+			PoiUIFilter filter = filters.get(position);
 
 			Object res = filter.getIconResource();
 			if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
@@ -268,12 +268,12 @@ public class ShowHidePoiAction extends QuickAction {
 		}
 	}
 
-	private void showSingleChoicePoiFilterDialog(final MapActivity mapActivity, final Adapter filtersAdapter) {
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+	private void showSingleChoicePoiFilterDialog(MapActivity mapActivity, Adapter filtersAdapter) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		PoiFiltersHelper poiFilters = app.getPoiFilters();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 
-		final List<PoiUIFilter> list = new ArrayList<>();
+		List<PoiUIFilter> list = new ArrayList<>();
 
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isCustomPoiFilter()) {
@@ -283,7 +283,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
+		ArrayAdapter<ContextMenuItem> listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
@@ -304,7 +304,7 @@ public class ShowHidePoiAction extends QuickAction {
 		builder.setTitle(R.string.show_poi_over_map);
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 
-		final AlertDialog alertDialog = builder.create();
+		AlertDialog alertDialog = builder.create();
 
 		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
 			@Override
@@ -327,9 +327,9 @@ public class ShowHidePoiAction extends QuickAction {
 				: filters.get(0).getName();
 	}
 
-	private void addFilterToList(final ContextMenuAdapter adapter,
-								 final List<PoiUIFilter> list,
-								 final PoiUIFilter f) {
+	private void addFilterToList(ContextMenuAdapter adapter,
+	                             List<PoiUIFilter> list,
+	                             PoiUIFilter f) {
 		list.add(f);
 		ContextMenuItem item = new ContextMenuItem(null);
 

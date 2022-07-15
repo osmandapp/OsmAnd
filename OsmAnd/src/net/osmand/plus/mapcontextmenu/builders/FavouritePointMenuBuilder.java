@@ -39,7 +39,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private final FavouritePoint fav;
 	private Object originObject;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull final FavouritePoint fav) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
 		setShowNearestWiki(true);
@@ -168,12 +168,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		return null;
 	}
 
-	private CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
+	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, @NonNull FavoriteGroup group, FavouritePoint selectedPoint) {
 		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.getPoints();
 		for (int i = 0; i < points.size() && i < 10; i++) {
-			final FavouritePoint point = points.get(i);
+			FavouritePoint point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
 			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 			String name = point.getDisplayName(context);

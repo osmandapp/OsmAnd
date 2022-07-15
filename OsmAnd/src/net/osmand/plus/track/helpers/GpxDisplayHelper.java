@@ -383,7 +383,7 @@ public class GpxDisplayHelper {
 		if (group.isSplitDistance()) {
 			MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-				final double sd = group.getSplitDistance();
+				double sd = group.getSplitDistance();
 				int digits = sd < 100 ? 2 : (sd < 1000 ? 1 : 0);
 				int rem1000 = (int) (metricEnd + 0.5) % 1000;
 				if (rem1000 > 1 && digits < 1) {

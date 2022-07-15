@@ -23,8 +23,8 @@ public class WikivoyageSearchHelper {
 		this.application = application;
 	}
 
-	public void search(final String query, final ResultMatcher<List<WikivoyageSearchResult>> rm) {
-		final int req = requestNumber.incrementAndGet();
+	public void search(String query, ResultMatcher<List<WikivoyageSearchResult>> rm) {
+		int req = requestNumber.incrementAndGet();
 
 		singleThreadExecutor.submit(new Runnable() {
 

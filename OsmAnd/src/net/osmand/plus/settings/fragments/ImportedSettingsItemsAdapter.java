@@ -53,7 +53,7 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		final ExportSettingsType currentItemType = itemsTypes.get(position);
+		ExportSettingsType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 

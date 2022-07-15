@@ -308,7 +308,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		return currentPosition;
 	}
 
-	private void addTab(final int position, CharSequence title, View tabView) {
+	private void addTab(int position, CharSequence title, View tabView) {
 		TextView textView = tabView.findViewById(R.id.tab_title);
 		if (textView != null) {
 			if (title != null) textView.setText(title);
@@ -404,8 +404,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
 
 			View nextTab = tabsContainer.getChildAt(currentPosition + 1);
-			final float nextTabLeft = nextTab.getLeft();
-			final float nextTabRight = nextTab.getRight();
+			float nextTabLeft = nextTab.getLeft();
+			float nextTabRight = nextTab.getRight();
 
 			lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
 			lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
@@ -455,7 +455,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			return;
 		}
 
-		final int height = getHeight();
+		int height = getHeight();
 		// draw underline
 		if (indicatorBgColor != Color.TRANSPARENT) {
 			rectPaint.setColor(indicatorBgColor); // underlineColor
@@ -555,7 +555,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private void updateSelection(int position) {
 		for (int i = 0; i < tabCount; ++i) {
 			View tv = tabsContainer.getChildAt(i);
-			final boolean selected = i == position;
+			boolean selected = i == position;
 			tv.setSelected(selected);
 			if (selected) {
 				selected(tv);

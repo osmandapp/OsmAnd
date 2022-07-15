@@ -152,7 +152,7 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 		OsmandApplication app = getMyApplication();
 		OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+		Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 		favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		app.getSettings().FAVORITES_TAB.set(tab);
 		activity.startActivity(favorites);

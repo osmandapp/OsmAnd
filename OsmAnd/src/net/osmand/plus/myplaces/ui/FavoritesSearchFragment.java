@@ -93,8 +93,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 	@SuppressLint("PrivateResource, ValidFragment")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final Activity activity = getActivity();
-		final View view = inflater.inflate(R.layout.search_favs_fragment, container, false);
+		Activity activity = getActivity();
+		View view = inflater.inflate(R.layout.search_favs_fragment, container, false);
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -229,10 +229,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 		super.onDismiss(dialog);
 	}
 
-	public void showOnMap(final FavouritePoint point) {
+	public void showOnMap(FavouritePoint point) {
 		getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
 
-		final OsmandSettings settings = getMyApplication().getSettings();
+		OsmandSettings settings = getMyApplication().getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
@@ -417,8 +417,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 		@NonNull
 		@Override
-		public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-			final FavouritePoint point = getItem(position);
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+			FavouritePoint point = getItem(position);
 			int type = getItemViewType(position);
 			LinearLayout view;
 			if (type == HEADER_TYPE) {

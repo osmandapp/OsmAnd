@@ -145,7 +145,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 					// request to load
-					final QuadRect latLonBounds = tileBox.getLatLonBounds();
+					QuadRect latLonBounds = tileBox.getLatLonBounds();
 					List<LatLon> fullObjectsLatLon = new ArrayList<>();
 					List<LatLon> smallObjectsLatLon = new ArrayList<>();
 					for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {

@@ -38,8 +38,8 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		rateUsHelper = new RateUsHelper();
 
-		final View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.dislike_title, null);
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.dislike_title, null);
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);

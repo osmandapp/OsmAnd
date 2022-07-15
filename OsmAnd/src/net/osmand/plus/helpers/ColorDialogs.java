@@ -118,8 +118,8 @@ public class ColorDialogs {
 		return 0;
 	}
 
-	public static void setupColorSpinnerEx(final Context ctx, int selectedColor, final Spinner colorSpinner,
-										   final TIntArrayList colors, OnItemSelectedListener listener) {
+	public static void setupColorSpinnerEx(Context ctx, int selectedColor, Spinner colorSpinner,
+	                                       TIntArrayList colors, OnItemSelectedListener listener) {
 		colors.add(pallette);
 		List<String> colorNames = new ArrayList<String>();
 		int selection = -1;
@@ -180,7 +180,7 @@ public class ColorDialogs {
 		return "#" + c; //$NON-NLS-1$
 	}
 
-	private static Drawable getIcon(final Context ctx, int resId, int color) {
+	private static Drawable getIcon(Context ctx, int resId, int color) {
 		Drawable d = AppCompatResources.getDrawable(ctx, resId);
 		if (d != null) {
 			d = DrawableCompat.wrap(d).mutate();

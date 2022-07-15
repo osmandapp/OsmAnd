@@ -316,17 +316,17 @@ public class ResourceManager {
 	}
 
 	public boolean checkIfObjectDownloaded(String downloadName) {
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return indexFileNames.containsKey(regionName) || indexFileNames.containsKey(roadsRegionName);
 	}
 
 	public boolean checkIfObjectBackuped(String downloadName) {
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return backupedFileNames.containsKey(regionName) || backupedFileNames.containsKey(roadsRegionName);
 	}
@@ -1125,8 +1125,8 @@ public class ResourceManager {
 	}
 
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
-		final List<Amenity> amenities = new ArrayList<>();
+	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
 			if (!filter.isEmpty()) {
@@ -1172,7 +1172,7 @@ public class ResourceManager {
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,
 	                                              ResultMatcher<Amenity> matcher) {
 		searchAmenitiesInProgress = true;
-		final List<Amenity> amenities = new ArrayList<>();
+		List<Amenity> amenities = new ArrayList<>();
 		try {
 			if (locations != null && locations.size() > 0) {
 				List<AmenityIndexRepository> repos = new ArrayList<>();

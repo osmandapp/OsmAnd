@@ -66,8 +66,8 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 			convertView = UiUtilities.getInflater(app, nightMode)
 					.inflate(R.layout.profile_data_list_item_child, parent, false);
 		}
-		final PoiType poiType = getItem(position);
-		final boolean selected = selectedItems.contains(poiType);
+		PoiType poiType = getItem(position);
+		boolean selected = selectedItems.contains(poiType);
 		int tintColorRes = selected ? activeColorRes : secondaryColorRes;
 		int tintIconColorRes = selected ? activeIconColorRes : secondaryColorRes;
 		if (poiType != null) {
@@ -75,7 +75,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 			title.setMaxLines(Integer.MAX_VALUE);
 			title.setEllipsize(null);
 			title.setText(poiType.getTranslation());
-			final CheckBox checkBox = convertView.findViewById(R.id.check_box);
+			CheckBox checkBox = convertView.findViewById(R.id.check_box);
 			checkBox.setChecked(selected);
 			checkBox.setClickable(false);
 			CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, tintColorRes)));

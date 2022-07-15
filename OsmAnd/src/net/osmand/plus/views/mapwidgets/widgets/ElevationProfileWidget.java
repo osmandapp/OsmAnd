@@ -385,7 +385,7 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		double fromDistance = minVisibleX * toMetersMultiplier;
 		double toDistance = maxVisibleX * toMetersMultiplier;
-		final List<WptPt> points = this.allPoints;
+		List<WptPt> points = this.allPoints;
 		int firstPointIndex = gpx.getPointIndexByDistance(points, fromDistance);
 		int lastPointIndex = gpx.getPointIndexByDistance(points, toDistance);
 		if (firstVisiblePointIndex == firstPointIndex && lastVisiblePointIndex == lastPointIndex) {

@@ -189,7 +189,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	private void setupScrollListener() {
-		final ScrollView scrollView = view.findViewById(R.id.editor_scroll_view);
+		ScrollView scrollView = view.findViewById(R.id.editor_scroll_view);
 		scrollViewY = scrollView.getScrollY();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
 			if (scrollViewY != scrollView.getScrollY()) {

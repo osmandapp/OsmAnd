@@ -259,7 +259,7 @@ public class RoutingHelper {
 		});
 	}
 
-	void newRouteCalculated(final boolean newRoute, final RouteCalculationResult res) {
+	void newRouteCalculated(boolean newRoute, RouteCalculationResult res) {
 		app.logRoutingEvent("newRouteCalculated newRoute " + newRoute + " res " + res);
 		app.runInUIThread(() -> {
 			ValueHolder<Boolean> showToast = new ValueHolder<>();
@@ -858,7 +858,7 @@ public class RoutingHelper {
 		return routeRecalculationHelper.isRouteBeingCalculated();
 	}
 
-	private void showMessage(final String msg) {
+	private void showMessage(String msg) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

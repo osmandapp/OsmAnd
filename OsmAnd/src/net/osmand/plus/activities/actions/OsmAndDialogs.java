@@ -35,13 +35,13 @@ public class OsmAndDialogs {
 		return null;
 	}
 
-	public static void showVoiceProviderDialog(final MapActivity activity, final ApplicationMode applicationMode, final boolean applyAllModes) {
+	public static void showVoiceProviderDialog(MapActivity activity, ApplicationMode applicationMode, boolean applyAllModes) {
 		OsmandApplication app = activity.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final RoutingOptionsHelper routingOptionsHelper = app.getRoutingOptionsHelper();
-		final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-		final String[] firstSelectedVoiceProvider = new String[1];
+		RoutingOptionsHelper routingOptionsHelper = app.getRoutingOptionsHelper();
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+		String[] firstSelectedVoiceProvider = new String[1];
 
 		View view = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.select_voice_first, null);
 
@@ -50,7 +50,7 @@ public class OsmAndDialogs {
 
 		view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(final View v) {
+			public void onClick(View v) {
 				routingOptionsHelper.selectVoiceGuidance(activity, new CallbackWithObject<String>() {
 					@Override
 					public boolean processResult(String result) {

@@ -58,7 +58,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		Context context = getContext();
 		if (context == null || app == null) {
 			return;
@@ -139,7 +139,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void downloadInProgress() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return;
 		}
@@ -208,7 +208,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	private void createAddedAppModesItems(List<ApplicationMode> addedAppModes) {
-		final OsmandApplication app = requiredMyApplication();
+		OsmandApplication app = requiredMyApplication();
 
 		items.add(new DividerItem(getContext()));
 
@@ -222,8 +222,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(addedAppProfiles);
 
-		for (final ApplicationMode mode : addedAppModes) {
-			final BottomSheetItemWithCompoundButton[] appModeItem = new BottomSheetItemWithCompoundButton[1];
+		for (ApplicationMode mode : addedAppModes) {
+			BottomSheetItemWithCompoundButton[] appModeItem = new BottomSheetItemWithCompoundButton[1];
 			appModeItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(ApplicationMode.values(app).contains(mode))
 					.setDescription(ProfileDataUtils.getAppModeDescription(app, mode))
@@ -244,7 +244,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	private void createSuggestedMapsItems(List<IndexItem> suggestedMaps) {
-		final OsmandApplication app = requiredMyApplication();
+		OsmandApplication app = requiredMyApplication();
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 
 		items.add(new DividerItem(themedCtx));
@@ -259,14 +259,14 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(addedAppProfiles);
 
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
 
-		for (final IndexItem indexItem : suggestedMaps) {
+		for (IndexItem indexItem : suggestedMaps) {
 			View view = UiUtilities.getInflater(themedCtx, nightMode).inflate(R.layout.list_item_icon_and_download, null);
 			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(themedCtx));
 
-			final ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
-			final ProgressBar progressBar = view.findViewById(R.id.ProgressBar);
+			ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
+			ProgressBar progressBar = view.findViewById(R.id.ProgressBar);
 
 			AndroidUiHelper.updateVisibility(secondaryIcon, true);
 			AndroidUiHelper.updateVisibility(progressBar, downloadThread.isDownloading(indexItem));

@@ -159,7 +159,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		}
 	}
 
-	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, final OsmandPlugin plugin) {
+	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, OsmandPlugin plugin) {
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
 		view.setOnClickListener(pluginDetailsListener());
 
@@ -179,7 +179,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		container.addView(view);
 	}
 
-	private void setListener(final OsmandPlugin plugin, CompoundButton enableDisableButton, final View pluginView) {
+	private void setListener(OsmandPlugin plugin, CompoundButton enableDisableButton, View pluginView) {
 		enableDisableButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			if (OsmandPlugin.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
 				updatePluginState(pluginView, plugin);

@@ -267,7 +267,7 @@ public class ExternalApiHelper {
 
 			} else if (API_CMD_NAVIGATE.equals(cmd)) {
 				String profileStr = uri.getQueryParameter(PARAM_PROFILE);
-				final ApplicationMode profile = findNavigationProfile(app, profileStr);
+				ApplicationMode profile = findNavigationProfile(app, profileStr);
 				if (profile == null) {
 					resultCode = RESULT_CODE_ERROR_INVALID_PROFILE;
 				} else {
@@ -280,8 +280,8 @@ public class ExternalApiHelper {
 						destName = "";
 					}
 
-					final LatLon start;
-					final PointDescription startDesc;
+					LatLon start;
+					PointDescription startDesc;
 					String startLatStr = uri.getQueryParameter(PARAM_START_LAT);
 					String startLonStr = uri.getQueryParameter(PARAM_START_LON);
 					if (!Algorithms.isEmpty(startLatStr) && !Algorithms.isEmpty(startLonStr)) {
@@ -296,7 +296,7 @@ public class ExternalApiHelper {
 
 					String destLatStr = uri.getQueryParameter(PARAM_DEST_LAT);
 					String destLonStr = uri.getQueryParameter(PARAM_DEST_LON);
-					final LatLon dest;
+					LatLon dest;
 					if (!Algorithms.isEmpty(destLatStr) && !Algorithms.isEmpty(destLonStr)) {
 						double destLat = Double.parseDouble(destLatStr);
 						double destLon = Double.parseDouble(destLonStr);
@@ -304,12 +304,12 @@ public class ExternalApiHelper {
 					} else {
 						dest = null;
 					}
-					final PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
+					PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
 
 					boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
-					final boolean locationPermission = uri.getBooleanQueryParameter(PARAM_LOCATION_PERMISSION, false);
+					boolean locationPermission = uri.getBooleanQueryParameter(PARAM_LOCATION_PERMISSION, false);
 
-					final RoutingHelper routingHelper = app.getRoutingHelper();
+					RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
@@ -327,9 +327,9 @@ public class ExternalApiHelper {
 
 			} else if (API_CMD_NAVIGATE_SEARCH.equals(cmd)) {
 				String profileStr = uri.getQueryParameter(PARAM_PROFILE);
-				final ApplicationMode profile = findNavigationProfile(app, profileStr);
-				final boolean showSearchResults = uri.getBooleanQueryParameter(PARAM_SHOW_SEARCH_RESULTS, false);
-				final String searchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
+				ApplicationMode profile = findNavigationProfile(app, profileStr);
+				boolean showSearchResults = uri.getBooleanQueryParameter(PARAM_SHOW_SEARCH_RESULTS, false);
+				String searchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
 				if (Algorithms.isEmpty(searchQuery)) {
 					resultCode = RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY;
 				} else if (profile == null) {
@@ -339,8 +339,8 @@ public class ExternalApiHelper {
 					if (Algorithms.isEmpty(startName)) {
 						startName = "";
 					}
-					final LatLon start;
-					final PointDescription startDesc;
+					LatLon start;
+					PointDescription startDesc;
 					String startLatStr = uri.getQueryParameter(PARAM_START_LAT);
 					String startLonStr = uri.getQueryParameter(PARAM_START_LON);
 					if (!Algorithms.isEmpty(startLatStr) && !Algorithms.isEmpty(startLonStr)) {
@@ -352,7 +352,7 @@ public class ExternalApiHelper {
 						start = null;
 						startDesc = null;
 					}
-					final LatLon searchLocation;
+					LatLon searchLocation;
 					String searchLatStr = uri.getQueryParameter(PARAM_SEARCH_LAT);
 					String searchLonStr = uri.getQueryParameter(PARAM_SEARCH_LON);
 					if (!Algorithms.isEmpty(searchLatStr) && !Algorithms.isEmpty(searchLonStr)) {
@@ -367,9 +367,9 @@ public class ExternalApiHelper {
 						resultCode = RESULT_CODE_ERROR_SEARCH_LOCATION_UNDEFINED;
 					} else {
 						boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
-						final boolean locationPermission = uri.getBooleanQueryParameter(PARAM_LOCATION_PERMISSION, false);
+						boolean locationPermission = uri.getBooleanQueryParameter(PARAM_LOCATION_PERMISSION, false);
 
-						final RoutingHelper routingHelper = app.getRoutingHelper();
+						RoutingHelper routingHelper = app.getRoutingHelper();
 						if (routingHelper.isFollowingMode() && !force) {
 							mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
 
@@ -647,9 +647,9 @@ public class ExternalApiHelper {
 		return null;
 	}
 
-	public static void saveAndNavigateGpx(MapActivity mapActivity, final GPXFile gpxFile,
-	                                      final boolean force, final boolean checkLocationPermission) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+	public static void saveAndNavigateGpx(MapActivity mapActivity, GPXFile gpxFile,
+	                                      boolean force, boolean checkLocationPermission) {
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
 		if (Algorithms.isEmpty(gpxFile.path)) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -684,7 +684,7 @@ public class ExternalApiHelper {
 								.addToHistory().saveSelection();
 						helper.selectGpxFile(gpxFile, params);
 					}
-					final RoutingHelper routingHelper = app.getRoutingHelper();
+					RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
 							MapActivity activity = mapActivityRef.get();
@@ -793,7 +793,7 @@ public class ExternalApiHelper {
 		MapViewTrackingUtilities mapViewTrackingUtilities = mapActivity.getMapViewTrackingUtilities();
 		if (gpx == null) {
 			settings.setApplicationMode(mode);
-			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+			TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
 		}
@@ -817,12 +817,12 @@ public class ExternalApiHelper {
 		}
 	}
 
-	public static void searchAndNavigate(@NonNull MapActivity mapActivity, @NonNull final LatLon searchLocation,
-	                                     @Nullable final LatLon from, @Nullable final PointDescription fromDesc,
-	                                     @NonNull final ApplicationMode mode, @NonNull final String searchQuery,
-	                                     final boolean showSearchResults, final boolean checkLocationPermission) {
+	public static void searchAndNavigate(@NonNull MapActivity mapActivity, @NonNull LatLon searchLocation,
+	                                     @Nullable LatLon from, @Nullable PointDescription fromDesc,
+	                                     @NonNull ApplicationMode mode, @NonNull String searchQuery,
+	                                     boolean showSearchResults, boolean checkLocationPermission) {
 
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (showSearchResults) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
@@ -841,13 +841,13 @@ public class ExternalApiHelper {
 			dlg.setTitle("");
 			dlg.setMessage(mapActivity.getString(R.string.searching_address));
 			dlg.show();
-			final WeakReference<ProgressDialog> dlgRef = new WeakReference<>(dlg);
+			WeakReference<ProgressDialog> dlgRef = new WeakReference<>(dlg);
 			runSearch(app, searchQuery, SearchParams.SEARCH_TYPE_ALL,
 					searchLocation.getLatitude(), searchLocation.getLongitude(),
 					1, 1, new OsmandAidlApi.SearchCompleteCallback() {
 						@Override
-						public void onSearchComplete(final List<AidlSearchResultWrapper> resultSet) {
-							final MapActivity mapActivity = mapActivityRef.get();
+						public void onSearchComplete(List<AidlSearchResultWrapper> resultSet) {
+							MapActivity mapActivity = mapActivityRef.get();
 							if (mapActivity != null) {
 								mapActivity.getMyApplication().runInUIThread(new Runnable() {
 									@Override
@@ -857,7 +857,7 @@ public class ExternalApiHelper {
 											dlg.dismiss();
 										}
 										if (resultSet.size() > 0) {
-											final AidlSearchResultWrapper res = resultSet.get(0);
+											AidlSearchResultWrapper res = resultSet.get(0);
 											LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
 											PointDescription toDesc = new PointDescription(
 													PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
@@ -873,9 +873,9 @@ public class ExternalApiHelper {
 		}
 	}
 
-	public static void runSearch(final OsmandApplication app, String searchQuery, int searchType,
+	public static void runSearch(OsmandApplication app, String searchQuery, int searchType,
 	                             double latitude, double longitude, int radiusLevel,
-	                             int totalLimit, final OsmandAidlApi.SearchCompleteCallback callback) {
+	                             int totalLimit, OsmandAidlApi.SearchCompleteCallback callback) {
 		if (radiusLevel < 1) {
 			radiusLevel = 1;
 		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {
@@ -884,9 +884,9 @@ public class ExternalApiHelper {
 		if (totalLimit <= 0) {
 			totalLimit = -1;
 		}
-		final int limit = totalLimit;
+		int limit = totalLimit;
 
-		final SearchUICore core = app.getSearchUICore().getCore();
+		SearchUICore core = app.getSearchUICore().getCore();
 		core.setOnResultsComplete(new Runnable() {
 			@Override
 			public void run() {

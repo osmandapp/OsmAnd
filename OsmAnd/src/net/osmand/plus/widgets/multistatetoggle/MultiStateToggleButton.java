@@ -83,7 +83,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView();
 	}
 
-	private void createBtn(@NonNull final _Radio item) {
+	private void createBtn(@NonNull _Radio item) {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
 				getRadioItemLayoutId(), container, false);

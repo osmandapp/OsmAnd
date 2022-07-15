@@ -221,14 +221,14 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 		@Override
 		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-			final Object currentItem = items.get(position);
+			Object currentItem = items.get(position);
 			if (holder instanceof DescriptionHolder) {
 				DescriptionHolder descriptionHolder = (DescriptionHolder) holder;
 				String plugins = getString(R.string.prefs_plugins);
 				setupClickableText(descriptionHolder.description, (String) currentItem, plugins);
 				descriptionHolder.image.setVisibility(View.GONE);
 			} else {
-				final ScreenType item = (ScreenType) currentItem;
+				ScreenType item = (ScreenType) currentItem;
 				ItemHolder itemHolder = (ItemHolder) holder;
 				Drawable d = app.getUIUtilities().getIcon(item.iconRes, nightMode);
 				itemHolder.icon.setImageDrawable(AndroidUtils.getDrawableForDirection(app, d));

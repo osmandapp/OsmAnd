@@ -93,7 +93,7 @@ public class WikipediaPoiMenu {
 					.setListener(l));
 		}
 
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 			if (settings.isInternetConnectionAvailable()) {
 				downloadThread.runReloadIndexFiles();
@@ -126,7 +126,7 @@ public class WikipediaPoiMenu {
 							.setDescription(app.getString(R.string.wiki_menu_download_descr))
 							.setLayout(R.layout.list_group_title_with_descr));
 					for (int i = 0; i < wikiIndexes.size(); i++) {
-						final IndexItem indexItem = wikiIndexes.get(i);
+						IndexItem indexItem = wikiIndexes.get(i);
 						boolean isLastItem = i == wikiIndexes.size() - 1;
 						ContextMenuItem _item = new ContextMenuItem(null)
 								.setLayout(R.layout.list_item_icon_and_download)
@@ -186,7 +186,7 @@ public class WikipediaPoiMenu {
 		return adapter;
 	}
 
-	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
+	public static ContextMenuAdapter createListAdapter(MapActivity mapActivity) {
 		WikipediaPoiMenu menu = new WikipediaPoiMenu(mapActivity);
 		return menu.createLayersItems();
 	}

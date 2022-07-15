@@ -57,7 +57,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 		LinearLayout tracks = view.findViewById(R.id.items);
 		View item = inflater.inflate(R.layout.dash_simulate_item, null, false);
 		tracks.addView(item);
-		final OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
+		OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
 		OnClickListener listener = new View.OnClickListener() {
 
 			@Override

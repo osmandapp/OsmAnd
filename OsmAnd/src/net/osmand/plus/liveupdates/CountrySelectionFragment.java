@@ -64,7 +64,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
 		View view = inflater.inflate(R.layout.fragment_search_list, container, false);
 		ListView listView = view.findViewById(android.R.id.list);
-		final ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
+		ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
 		if (countryItems.size() > 0) {
 			for (CountryItem item : countryItems) {
 				adapter.add(item);
@@ -78,7 +78,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 				dismiss();
 			}
 		});
-		final EditText searchEditText = view.findViewById(R.id.searchEditText);
+		EditText searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -133,12 +133,12 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 
-	public void initCountries(final OsmandApplication app) {
-		final WorldRegion root = app.getRegions().getWorldRegion();
+	public void initCountries(OsmandApplication app) {
+		WorldRegion root = app.getRegions().getWorldRegion();
 		ArrayList<WorldRegion> groups = new ArrayList<>();
 		groups.add(root);
 		processGroup(root, groups);
-		final Collator collator = Collator.getInstance();
+		Collator collator = Collator.getInstance();
 		Collections.sort(groups, new Comparator<WorldRegion>() {
 			@Override
 			public int compare(WorldRegion lhs, WorldRegion rhs) {

@@ -111,7 +111,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		uiHandler = new UIUpdateHandler();
 		namesFilter = new NamesFilter();
 		addFooterViews();
-		final NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
+		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
 		collator = OsmAndCollator.primaryCollator();
@@ -258,7 +258,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return selectAddress;
 	}
 	
-	private void querySearch(final String filter) {
+	private void querySearch(String filter) {
 		if (!currentFilter.equals(filter) || !initFilter) {
 			currentFilter = filter;
 			initFilter = true;
@@ -321,7 +321,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	public String getShortText(T obj) {
 		return getText(obj);
 	}
-	public void itemSelectedBase(final T obj, View v) {
+	public void itemSelectedBase(T obj, View v) {
 		itemSelected(obj);
 	}
 	public abstract void itemSelected(T obj);
@@ -406,10 +406,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 				updateTextBox(currentFilter, "", null, true);
 			} else if(msg.what == MESSAGE_ADD_ENTITY){
-				final Object obj = msg.obj;
+				Object obj = msg.obj;
 				addObjectToAdapter(currentFilter, (T) obj);
 			} else if (msg.what == MESSAGE_ADD_ENTITIES) {
-				final List<T> objects = (List<T>) msg.obj;
+				List<T> objects = (List<T>) msg.obj;
 				for (T object : objects) {
 					addObjectToAdapter(currentFilter, object);
 				}

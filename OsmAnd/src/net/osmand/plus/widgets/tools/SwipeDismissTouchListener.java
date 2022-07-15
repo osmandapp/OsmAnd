@@ -146,7 +146,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 				}
 				if (dismiss) {
 					// dismiss
-					final boolean finalDismissRight = dismissRight;
+					boolean finalDismissRight = dismissRight;
 					ViewCompat.animate(mView)
 							.translationX(dismissRight ? mViewWidth : -mViewWidth)
 							.alpha(0)

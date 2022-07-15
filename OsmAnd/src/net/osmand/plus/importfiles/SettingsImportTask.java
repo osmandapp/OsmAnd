@@ -73,9 +73,9 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	@Override
 	protected void onPostExecute(String error) {
 		File tempDir = FileUtils.getTempDir(app);
-		final File file = new File(tempDir, name);
+		File file = new File(tempDir, name);
 		if (error == null && file.exists()) {
-			final FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
+			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
 			settingsHelper.collectSettings(file, latestChanges, version, new CollectListener() {
 				@Override
 				public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
@@ -117,7 +117,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		}
 	}
 
-	private CheckDuplicatesListener getDuplicatesListener(final File file, final boolean replace) {
+	private CheckDuplicatesListener getDuplicatesListener(File file, boolean replace) {
 		return new CheckDuplicatesListener() {
 			@Override
 			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
@@ -131,7 +131,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		};
 	}
 
-	private ImportListener getImportListener(final File file) {
+	private ImportListener getImportListener(File file) {
 		return new ImportListener() {
 			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
@@ -172,9 +172,9 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	}
 
 
-	private void handlePluginImport(final PluginSettingsItem pluginItem, final File file) {
+	private void handlePluginImport(PluginSettingsItem pluginItem, File file) {
 		FragmentActivity activity = activityRef.get();
-		final ProgressDialog progress;
+		ProgressDialog progress;
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			progress = new ProgressDialog(activity);
 			progress.setTitle(app.getString(R.string.loading_smth, ""));
@@ -186,7 +186,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			progress = null;
 		}
 
-		final ImportListener importListener = new ImportListener() {
+		ImportListener importListener = new ImportListener() {
 			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 

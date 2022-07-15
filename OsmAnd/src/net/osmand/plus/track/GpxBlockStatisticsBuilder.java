@@ -82,7 +82,7 @@ public class GpxBlockStatisticsBuilder {
 		this.blocksClickable = blocksClickable;
 	}
 
-	public void setBlocksView(final RecyclerView blocksView, boolean isParentExpandable) {
+	public void setBlocksView(RecyclerView blocksView, boolean isParentExpandable) {
 		this.blocksView = blocksView;
 		if (isParentExpandable) {
 			blocksView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -427,7 +427,7 @@ public class GpxBlockStatisticsBuilder {
 
 		@Override
 		public void onBindViewHolder(BlockStatisticsViewHolder holder, int position) {
-			final StatBlock item = items.get(position);
+			StatBlock item = items.get(position);
 			holder.valueText.setText(item.value);
 			holder.valueText.setTextColor(activeColor);
 			holder.titleText.setText(item.title);

@@ -473,7 +473,7 @@ public class OsmAndAppCustomization {
 		}
 	}
 
-	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
+	public void registerNavDrawerItems(Activity activity, ContextMenuAdapter adapter) {
 		PackageManager pm = activity.getPackageManager();
 		for (Map.Entry<String, List<NavDrawerItem>> entry : getNavDrawerItems().entrySet()) {
 			String appPackage = entry.getKey();
@@ -486,7 +486,7 @@ public class OsmAndAppCustomization {
 					if (item.flags != -1) {
 						intent.addFlags(item.flags);
 					}
-					final Intent finalIntent = intent;
+					Intent finalIntent = intent;
 					int iconId = AndroidUtils.getDrawableId(app, item.iconName);
 					adapter.addItem(new ContextMenuItem(item.getId())
 							.setTitle(item.name)

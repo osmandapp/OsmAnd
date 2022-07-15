@@ -69,12 +69,12 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
-		final int profileColor = appMode.getProfileColor(nightMode);
+		int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
+		int profileColor = appMode.getProfileColor(nightMode);
 
-		final int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		final int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		final int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 
 		items.add(new TitleItem(getString(R.string.shared_string_languages)));
 		items.add(new LongDescriptionItem(getString(R.string.some_articles_may_not_available_in_lang)));
@@ -82,7 +82,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		items.add(new LongDescriptionItem(getString(R.string.select_wikipedia_article_langs)));
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		final BottomSheetItemWithCompoundButton[] btnSelectAll = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] btnSelectAll = new BottomSheetItemWithCompoundButton[1];
 		btnSelectAll[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(this.isGlobalWikiPoiEnabled)
 				.setCompoundButtonColor(profileColor)
@@ -103,14 +103,14 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 		languageItems = new ArrayList<>();
 		boolean categoryChanged = false;
-		for (final WikiLanguageItem language : languages) {
+		for (WikiLanguageItem language : languages) {
 			if (!categoryChanged && !language.isTopDefined()) {
 				categoryChanged = true;
 				DividerItem divider = new DividerItem(app);
 				divider.setMargins(contentPadding, 0, 0, 0);
 				items.add(divider);
 			}
-			final BottomSheetItemWithCompoundButton[] languageItem = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] languageItem = new BottomSheetItemWithCompoundButton[1];
 			languageItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(language.isChecked())
 					.setTitle(language.getTitle())
@@ -216,7 +216,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		wikiPlugin.updateWikipediaState();
 	}
 
-	protected void applyPreferenceWithSnackBar(final List<String> localesForSaving, final boolean global) {
+	protected void applyPreferenceWithSnackBar(List<String> localesForSaving, boolean global) {
 		applyPreference(false, localesForSaving, global);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

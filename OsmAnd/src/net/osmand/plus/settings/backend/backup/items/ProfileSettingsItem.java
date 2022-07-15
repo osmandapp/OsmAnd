@@ -267,7 +267,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			}
 
 			@Override
-			public void readPreferencesFromJson(final JSONObject json) {
+			public void readPreferencesFromJson(JSONObject json) {
 				getSettings().getContext().runInUIThread(() -> {
 					OsmandSettings settings = getSettings();
 					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();

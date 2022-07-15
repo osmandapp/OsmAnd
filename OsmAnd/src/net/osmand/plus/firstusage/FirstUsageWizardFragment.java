@@ -188,7 +188,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					}
 				});
 				view.findViewById(R.id.map_download_card).setVisibility(View.VISIBLE);
-				final AppCompatButton searchCountryButton = view.findViewById(R.id.search_country_button);
+				AppCompatButton searchCountryButton = view.findViewById(R.id.search_country_button);
 				searchCountryButton.setVisibility(View.VISIBLE);
 				searchCountryButton.setOnClickListener(v -> searchCountryMap());
 				break;
@@ -197,11 +197,11 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					String mapName = mapIndexItem.getVisibleName(getContext(), app.getRegions(), false);
 					TextView mapNameTextView = view.findViewById(R.id.map_downloading_title);
 					mapNameTextView.setText(mapName);
-					final TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
-					final View progressPadding = view.findViewById(R.id.map_download_padding);
-					final View progressLayout = view.findViewById(R.id.map_download_progress_layout);
+					TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
+					View progressPadding = view.findViewById(R.id.map_download_padding);
+					View progressLayout = view.findViewById(R.id.map_download_progress_layout);
 					mapDescriptionTextView.setText(mapIndexItem.getSizeDescription(getContext()));
-					final ImageButton redownloadButton = view.findViewById(R.id.map_redownload_button);
+					ImageButton redownloadButton = view.findViewById(R.id.map_redownload_button);
 					redownloadButton.setOnClickListener(v -> {
 						if (!downloadThread.isDownloading(mapIndexItem) && !mapIndexItem.isDownloaded()) {
 							validationManager.startDownload(activity, mapIndexItem);
@@ -243,11 +243,11 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void onStart() {
 		super.onStart();
 
-		final OsmandApplication app = requireMyApplication();
+		OsmandApplication app = requireMyApplication();
 		switch (wizardType) {
 			case SEARCH_LOCATION:
 				if (searchLocationByIp) {
-					final Map<String, String> pms = new LinkedHashMap<>();
+					Map<String, String> pms = new LinkedHashMap<>();
 					pms.put("version", Version.getFullVersion(app));
 					try {
 						pms.put("aid", app.getUserAndroidId());
@@ -358,7 +358,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	@Override
-	public void updateLocation(final Location loc) {
+	public void updateLocation(Location loc) {
 		if (loc != null) {
 			app.runInUIThread(() -> {
 				cancelLocationSearchTimer();
@@ -411,7 +411,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				v = getString(R.string.file_size_in_mb, mb);
 			}
 			if (!mapDownloadCancelled) {
-				final TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
+				TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
 				ProgressBar progressBar = view.findViewById(R.id.map_download_progress_bar);
 				mapDescriptionTextView.setText(v);
 				progressBar.setProgress(Math.max(progress, 0));
@@ -440,18 +440,18 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		if (mapIndexItem == null) {
 			return;
 		}
-		final View firstRowLayout = view.findViewById(R.id.map_downloading_layout);
-		final View progressLayout = view.findViewById(R.id.map_download_progress_layout);
-		final ImageButton redownloadButton = view.findViewById(R.id.map_redownload_button);
+		View firstRowLayout = view.findViewById(R.id.map_downloading_layout);
+		View progressLayout = view.findViewById(R.id.map_download_progress_layout);
+		ImageButton redownloadButton = view.findViewById(R.id.map_redownload_button);
 		if (mapIndexItem.isDownloaded()) {
 			if (progressLayout.getVisibility() == View.VISIBLE) {
-				final TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
+				TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
 				mapDescriptionTextView.setText(mapIndexItem.getSizeDescription(getContext()));
 				view.findViewById(R.id.map_download_padding).setVisibility(View.VISIBLE);
 				progressLayout.setVisibility(View.GONE);
 				firstRowLayout.setClickable(true);
-				final LatLon mapCenter = getMapCenter();
-				final int mapZoom = getMapZoom();
+				LatLon mapCenter = getMapCenter();
+				int mapZoom = getMapZoom();
 				firstRowLayout.setOnClickListener(v -> showOnMap(mapCenter, mapZoom));
 			}
 		} else {
@@ -475,7 +475,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	private LatLon getMapCenter() {
-		final LatLon mapCenter;
+		LatLon mapCenter;
 		if (mapDownloadRegion != null) {
 			mapCenter = mapDownloadRegion.getRegionCenter();
 		} else {
@@ -485,7 +485,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	private int getMapZoom() {
-		final int mapZoom;
+		int mapZoom;
 		if (mapDownloadRegion != null) {
 			mapZoom = 13;
 		} else {
@@ -507,7 +507,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		closeWizard();
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			final Intent intent = new Intent(activity, DownloadActivity.class);
+			Intent intent = new Intent(activity, DownloadActivity.class);
 			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 			activity.startActivity(intent);
 		}

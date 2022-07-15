@@ -299,17 +299,17 @@ public class TextRenderer {
 		}
 	}
 
-	private void createTextDrawInfo(final BinaryMapDataObject o, RenderingRuleSearchRequest render,
-	                                RenderingContext rc, TagValuePair pair, final float xMid, float yMid,
-	                                Path path, final PointF[] points, String name, String tagName) {
+	private void createTextDrawInfo(BinaryMapDataObject o, RenderingRuleSearchRequest render,
+	                                RenderingContext rc, TagValuePair pair, float xMid, float yMid,
+	                                Path path, PointF[] points, String name, String tagName) {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, o);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 		render.setStringFilter(render.ALL.R_NAME_TAG, tagName);
 		if (render.search(RenderingRulesStorage.TEXT_RULES)) {
 			if (render.getFloatPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
-				final TextDrawInfo text = new TextDrawInfo(name);
+				TextDrawInfo text = new TextDrawInfo(name);
 				text.fillProperties(rc, render, xMid, yMid);
-				final String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
+				String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
 				if (!Algorithms.isEmpty(tagName2)) {
 					o.getObjectNames().forEachEntry(new TIntObjectProcedure<String>() {
 						@Override
@@ -350,10 +350,10 @@ public class TextRenderer {
 		}
 	}
 
-	public void renderText(final BinaryMapDataObject obj, final RenderingRuleSearchRequest render,
-	                       final RenderingContext rc, final TagValuePair pair, final float xMid,
-	                       final float yMid, final Path path, final PointF[] points) {
-		final TIntObjectHashMap<String> map = obj.getObjectNames();
+	public void renderText(BinaryMapDataObject obj, RenderingRuleSearchRequest render,
+	                       RenderingContext rc, TagValuePair pair, float xMid,
+	                       float yMid, Path path, PointF[] points) {
+		TIntObjectHashMap<String> map = obj.getObjectNames();
 		if (map != null) {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
 				@Override

@@ -73,7 +73,7 @@ public class PopUpMenuHelper {
 
 		PopUpMenuArrayAdapter adapter =
 				new PopUpMenuArrayAdapter(ctx, R.layout.popup_menu_item, items, nightMode);
-		final ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);
+		ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);
 		listPopupWindow.setAnchorView(anchorView);
 		listPopupWindow.setContentWidth(totalWidth);
 		listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);

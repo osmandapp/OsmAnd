@@ -183,7 +183,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		}
 	}
 
-	private void restoreCustomModeFromFile(final File file) {
+	private void restoreCustomModeFromFile(File file) {
 		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
 			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
@@ -233,9 +233,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {
-		final Drawable dividerLight = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_light));
-		final Drawable dividerDark = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_dark));
-		final int pluginDividerHeight = AndroidUtils.dpToPx(app, 3);
+		Drawable dividerLight = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_light));
+		Drawable dividerDark = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_dark));
+		int pluginDividerHeight = AndroidUtils.dpToPx(app, 3);
 
 		return new RecyclerView.ItemDecoration() {
 			@Override
@@ -475,7 +475,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void onDeleteProfileClick() {
-		final ApplicationMode profile = getSelectedAppMode();
+		ApplicationMode profile = getSelectedAppMode();
 		if (getActivity() != null) {
 			if (profile.getParent() != null) {
 				Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());

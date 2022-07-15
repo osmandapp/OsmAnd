@@ -75,7 +75,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 						AlertDialog.Builder b = new AlertDialog.Builder(themedContext);
 						b.setTitle(R.string.favorite_category_name);
-						final EditText nameEditText = new EditText(themedContext);
+						EditText nameEditText = new EditText(themedContext);
 						nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 						nameEditText.setText(group.getName());
 						LinearLayout container = new LinearLayout(themedContext);
@@ -136,10 +136,10 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		if (group.getPoints().size() > 0) {
 			items.add(new DividerHalfItem(getContext()));
 
-			final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			final FavoriteGroup favGroup = this.group;
-			final MapMarkersGroup markersGr = markersHelper.getMarkersGroup(this.group);
-			final boolean synced = markersGr != null;
+			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+			FavoriteGroup favGroup = this.group;
+			MapMarkersGroup markersGr = markersHelper.getMarkersGroup(this.group);
+			boolean synced = markersGr != null;
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_flag))

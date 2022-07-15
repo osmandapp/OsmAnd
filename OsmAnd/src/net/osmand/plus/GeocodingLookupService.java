@@ -120,7 +120,7 @@ public class GeocodingLookupService {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
-	private boolean geocode(final LatLon latLon) {
+	private boolean geocode(LatLon latLon) {
 		Location loc = new Location("");
 		loc.setLatitude(latLon.getLatitude());
 		loc.setLongitude(latLon.getLongitude());
@@ -198,7 +198,7 @@ public class GeocodingLookupService {
 			for (;;) {
 				try {
 					while (!lookupLocations.isEmpty()) {
-						final LatLon latLon;
+						LatLon latLon;
 						synchronized (GeocodingLookupService.this) {
 							latLon = lookupLocations.poll();
 							currentRequestedLocation = latLon;
@@ -229,7 +229,7 @@ public class GeocodingLookupService {
 									counter = 0;
 									synchronized (GeocodingLookupService.this) {
 										List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
-										for (final AddressLookupRequest request : requests) {
+										for (AddressLookupRequest request : requests) {
 											if (request.uiProgressCallback != null) {
 												app.runInUIThread(new Runnable() {
 													@Override
@@ -248,7 +248,7 @@ public class GeocodingLookupService {
 
 						synchronized (GeocodingLookupService.this) {
 							List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
-							for (final AddressLookupRequest request : requests) {
+							for (AddressLookupRequest request : requests) {
 								if (request.uiResultCallback != null) {
 									app.runInUIThread(new Runnable() {
 										@Override

@@ -308,7 +308,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void setupScrollListener() {
-		final View scrollView = getBottomScrollView();
+		View scrollView = getBottomScrollView();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
 			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
 			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);

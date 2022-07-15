@@ -307,7 +307,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void registerMainView() {
-		final Context ctx = getContext();
+		Context ctx = getContext();
 		if (ctx == null) {
 			return;
 		}
@@ -377,7 +377,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						et.requestFocus();
 					}
 				}
-				final View focusedView = getDialog().getCurrentFocus();
+				View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
 					AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 				}
@@ -447,7 +447,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				clearInputs();
 			}
 		});
-		final View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
+		View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
 		keyboardLayout.setBackgroundResource(lightTheme
 				? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
 
@@ -601,7 +601,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (@IdRes int id : itemsIds) {
 			View itemView = keyboardView.findViewById(id);
 			Object item = getItemObjectById(id);
-			final boolean controlItem = id == R.id.keyboard_item_next_field
+			boolean controlItem = id == R.id.keyboard_item_next_field
 					|| id == R.id.keyboard_item_backspace
 					|| id == R.id.keyboard_item_hide;
 
@@ -692,7 +692,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		startLocationUpdate();
 
-		final View focusedView = getDialog().getCurrentFocus();
+		View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
 			if (!isOsmandKeyboardOn()) {
 				AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
@@ -825,7 +825,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		final GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+		GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onDoubleTap(MotionEvent e) {
 				return true;
@@ -869,13 +869,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		View.OnLongClickListener inputEditTextOnLongClickListener = new View.OnLongClickListener() {
 			@Override
-			public boolean onLongClick(final View view) {
+			public boolean onLongClick(View view) {
 				if (isOsmandKeyboardOn()) {
-					final EditText inputEditText = (EditText) view;
+					EditText inputEditText = (EditText) view;
 					PopupMenu popupMenu = new PopupMenu(getContext(), inputEditText);
 					Menu menu = popupMenu.getMenu();
 					popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
-					final ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
+					ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
 					MenuItem pasteMenuItem = menu.findItem(R.id.action_paste);
 					pasteMenuItem.setEnabled(clipboardManager != null && clipboardManager.hasPrimaryClip() &&
 							clipboardManager.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN));
@@ -1015,7 +1015,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeOsmandKeyboardSetting();
 		boolean useOsmandKeyboard = isOsmandKeyboardOn();
 		changeOsmandKeyboardVisibility(useOsmandKeyboard);
-		final View focusedView = getDialog().getCurrentFocus();
+		View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
 			if (useOsmandKeyboard) {
 				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
@@ -1071,7 +1071,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			final OsmandApplication app = getMyApplication();
 
 			@Override
-			public void saveGpx(final String fileName) {
+			public void saveGpx(String fileName) {
 				new SaveGpxAsyncTask(app, getGpx(), fileName, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				hasUnsavedChanges = false;
 				app.getMapMarkersHelper().addOrEnableGroup(getGpx());
@@ -1095,8 +1095,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return new CoordinateInputActionsBottomSheet.CoordinateInputActionsListener() {
 
 			@Override
-			public void removeItem(final int position) {
-				final WptPt wpt = adapter.getItem(position);
+			public void removeItem(int position) {
+				WptPt wpt = adapter.getItem(position);
 				if (selectedWpt == wpt) {
 					dismissEditingMode();
 					clearInputs();
@@ -1300,8 +1300,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void addWptPt() {
-		final String latitude = getStringCoordinate(true);
-		final String longitude = getStringCoordinate(false);
+		String latitude = getStringCoordinate(true);
+		String longitude = getStringCoordinate(false);
 		if (latitude.isEmpty() && longitude.isEmpty()) {
 			Toast.makeText(getContext(), R.string.enter_lat_and_lon, Toast.LENGTH_SHORT).show();
 		} else if (latitude.isEmpty()) {

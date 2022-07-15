@@ -97,7 +97,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	};
 
 	private void setupAppThemePref() {
-		final ListPreferenceEx appTheme =
+		ListPreferenceEx appTheme =
 				findPreference(settings.OSMAND_THEME.getId());
 
 		ArrayList<String> entries = new ArrayList<>();
@@ -131,7 +131,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupRotateMapPref() {
-		final ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
+		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
 		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
 		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 		rotateMap.setIcon(getRotateMapIcon());
@@ -158,7 +158,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupMapScreenOrientationPref() {
-		final ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
+		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
 		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
 		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
@@ -310,7 +310,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		b.setTitle(getString(R.string.driving_region));
 
-		final List<Object> drs = new ArrayList<>();
+		List<Object> drs = new ArrayList<>();
 		drs.add(getString(R.string.driving_region_automatic));
 		drs.addAll(Arrays.asList(DrivingRegion.values()));
 		int sel = -1;
@@ -326,8 +326,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			}
 		}
 
-		final int selected = sel;
-		final ArrayAdapter<Object> singleChoiceAdapter =
+		int selected = sel;
+		ArrayAdapter<Object> singleChoiceAdapter =
 				new ArrayAdapter<Object>(themedContext, R.layout.single_choice_description_item, R.id.text1, drs) {
 					@NonNull
 					@Override

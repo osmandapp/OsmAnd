@@ -47,11 +47,11 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.gpx_track_select_dialog, null);
 
-		final RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
+		RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		adapter = new GpxTrackAdapter(requireContext(), gpxInfoList, showCurrentGpx, true);
 		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {

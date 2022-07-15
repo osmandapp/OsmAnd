@@ -385,10 +385,10 @@ public class VoiceRouter {
 	}
 
 	private boolean needsInforming() {
-		final Integer repeat = settings.KEEP_INFORMING.get();
+		Integer repeat = settings.KEEP_INFORMING.get();
 		if (repeat == null || repeat == 0) return false;
 
-		final long notBefore = lastAnnouncement + repeat * 60 * 1000L;
+		long notBefore = lastAnnouncement + repeat * 60 * 1000L;
 
 		return System.currentTimeMillis() > notBefore;
 	}

@@ -270,8 +270,8 @@ public class MapLayers {
 	}
 
 
-	public AlertDialog showGPXFileLayer(@NonNull List<String> files, final MapActivity mapActivity) {
-		final OsmandSettings settings = app.getSettings();
+	public AlertDialog showGPXFileLayer(@NonNull List<String> files, MapActivity mapActivity) {
+		OsmandSettings settings = app.getSettings();
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		DashboardOnMap dashboard = mapActivity.getDashboard();
 		CallbackWithObject<GPXFile[]> callbackWithObject = result -> {
@@ -298,10 +298,10 @@ public class MapLayers {
 		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());
 	}
 
-	public void showMultiChoicePoiFilterDialog(final MapActivity mapActivity, final DismissListener listener) {
-		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-		final List<PoiUIFilter> list = new ArrayList<>();
+	public void showMultiChoicePoiFilterDialog(MapActivity mapActivity, DismissListener listener) {
+		PoiFiltersHelper poiFilters = app.getPoiFilters();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
 					&& !f.isRoutesFilter()
@@ -319,7 +319,7 @@ public class MapLayers {
 
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		final ListView listView = new ListView(themedContext);
+		ListView listView = new ListView(themedContext);
 		listView.setDivider(null);
 		listView.setClickable(true);
 		listView.setAdapter(listAdapter);
@@ -353,7 +353,7 @@ public class MapLayers {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setNeutralButton(" ", (dialog, which) -> showSingleChoicePoiFilterDialog(mapActivity, listener));
-		final AlertDialog alertDialog = builder.create();
+		AlertDialog alertDialog = builder.create();
 		alertDialog.setOnShowListener(dialog -> {
 			Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 			Drawable drawable = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_singleselect);
@@ -364,13 +364,13 @@ public class MapLayers {
 		alertDialog.show();
 	}
 
-	public void showSingleChoicePoiFilterDialog(final MapActivity mapActivity, final DismissListener listener) {
-		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+	public void showSingleChoicePoiFilterDialog(MapActivity mapActivity, DismissListener listener) {
+		PoiFiltersHelper poiFilters = app.getPoiFilters();
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.addItem(new ContextMenuItem(null)
 				.setTitleId(R.string.shared_string_search, app)
 				.setIcon(R.drawable.ic_action_search_dark));
-		final List<PoiUIFilter> list = new ArrayList<>();
+		List<PoiUIFilter> list = new ArrayList<>();
 		list.add(null);
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
@@ -410,7 +410,7 @@ public class MapLayers {
 		builder.setTitle(R.string.show_poi_over_map);
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 		builder.setNeutralButton(" ", (dialog, which) -> showMultiChoicePoiFilterDialog(mapActivity, listener));
-		final AlertDialog alertDialog = builder.create();
+		AlertDialog alertDialog = builder.create();
 		alertDialog.setOnShowListener(dialog -> {
 			Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 			Drawable drawable = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_multiselect);
@@ -421,9 +421,9 @@ public class MapLayers {
 		alertDialog.show();
 	}
 
-	private void addFilterToList(final ContextMenuAdapter adapter,
-	                             final List<PoiUIFilter> list,
-	                             final PoiUIFilter f,
+	private void addFilterToList(ContextMenuAdapter adapter,
+	                             List<PoiUIFilter> list,
+	                             PoiUIFilter f,
 	                             boolean multiChoice) {
 		list.add(f);
 		ContextMenuItem item = new ContextMenuItem(null);
@@ -501,7 +501,7 @@ public class MapLayers {
 			}
 		}
 
-		final String[] items = new String[entriesMapList.size()];
+		String[] items = new String[entriesMapList.size()];
 		int i = 0;
 		for (Entry<String, String> entry : entriesMapList) {
 			items[i++] = entry.getValue();

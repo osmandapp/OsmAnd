@@ -77,7 +77,7 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 				View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), false);
 
-				final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+				BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 				item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 						.setChecked(enabled)
 						.setTitle(name)

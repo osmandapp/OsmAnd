@@ -232,7 +232,7 @@ public class RoutingDataUtils {
 				engine.getBaseUrl(), engine.getStringKey(), R.drawable.ic_world_globe_dark);
 	}
 
-	public void downloadPredefinedEngines(final CallbackWithObject<String> callback) {
+	public void downloadPredefinedEngines(CallbackWithObject<String> callback) {
 		new Thread(() -> {
 			String content = null;
 			try {
@@ -240,7 +240,7 @@ public class RoutingDataUtils {
 			} catch (IOException e) {
 				LOG.error("Error trying download predefined routing engines list: " + e.getMessage());
 			}
-			final String result = content;
+			String result = content;
 			app.runInUIThread(() -> callback.processResult(result));
 		}).start();
 	}

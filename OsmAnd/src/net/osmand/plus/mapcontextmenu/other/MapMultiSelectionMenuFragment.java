@@ -60,7 +60,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					view.findViewById(R.id.cancel_row), ColorUtilities.getListBgColorId(!menu.isLight()));
 		}
 
-		final ListView listView = view.findViewById(R.id.list);
+		ListView listView = view.findViewById(R.id.list);
 		if (menu.isLandscapeLayout() && Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getActivity(), listView);
 		}
@@ -68,7 +68,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		listAdapter.setListener(this);
 
 		if (!menu.isLandscapeLayout()) {
-			final Context context = getContext();
+			Context context = getContext();
 
 			FrameLayout paddingView = new FrameLayout(context);
 			paddingView.setLayoutParams(new AbsListView.LayoutParams(
@@ -233,7 +233,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	}
 
 	private MultiSelectionArrayAdapter createAdapter() {
-		final List<MenuObject> items = new LinkedList<>(menu.getObjects());
+		List<MenuObject> items = new LinkedList<>(menu.getObjects());
 		return new MultiSelectionArrayAdapter(menu, R.layout.menu_obj_list_item, items);
 	}
 

@@ -76,7 +76,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+				Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
@@ -100,13 +100,13 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	private void setupGpxFiles() {
 		View mainView = getView();
-		final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final OsmandApplication app = getMyApplication();
+		File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return;
 		}
 
-		final List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		for (SelectedGpxFile sg : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
 			if (!sg.isShowCurrentTrack()) {
 				GPXFile gpxFile = sg.getGpxFile();
@@ -122,7 +122,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			totalCount--;
 		}
 		if (list.size() < totalCount) {
-			final List<GPXInfo> res = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
+			List<GPXInfo> res = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
 			for (GPXInfo r : res) {
 				String name = r.getFileName();
 				if (!list.contains(name)) {
@@ -187,12 +187,12 @@ public class DashTrackFragment extends DashBaseFragment {
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
-	public static void updateCurrentTrack(View v, final Activity ctx, final OsmandApplication app) {
-		final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+	public static void updateCurrentTrack(View v, Activity ctx, OsmandApplication app) {
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (v == null || ctx == null || app == null || plugin == null) {
 			return;
 		}
-		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
+		boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 		ImageButton stop = v.findViewById(R.id.stop);
 		if (isRecording) {
 			stop.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_rec_stop));
@@ -247,9 +247,9 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void updateShowOnMap(final OsmandApplication app, final File f, final View pView, final ImageButton showOnMap) {
-		final GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-		final SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
+	private void updateShowOnMap(OsmandApplication app, File f, View pView, ImageButton showOnMap) {
+		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
 		if (selected != null) {
 			showOnMap.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_show_on_map, R.color.color_distance));
 			showOnMap.setOnClickListener(new View.OnClickListener() {
@@ -294,7 +294,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		MapActivity.launchMapActivityMoveToTop(activity);
 	}
 
-	private void startHandler(final View v) {
+	private void startHandler(View v) {
 		Handler updateCurrentRecordingTrack = new Handler();
 		updateCurrentRecordingTrack.postDelayed(new Runnable() {
 			@Override

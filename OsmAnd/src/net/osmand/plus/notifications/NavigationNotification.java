@@ -229,7 +229,7 @@ public class NavigationNotification extends OsmandNotification {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder(wearable)
+		Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
 				.setStyle(new BigTextStyle().bigText(notificationText))

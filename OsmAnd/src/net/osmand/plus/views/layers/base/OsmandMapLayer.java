@@ -303,7 +303,7 @@ public abstract class OsmandMapLayer {
 
 	public static int getDefaultRadiusPoi(@NonNull RotatedTileBox tileBox) {
 		int radius;
-		final double zoom = tileBox.getZoom();
+		double zoom = tileBox.getZoom();
 		if (zoom <= 15) {
 			radius = 10;
 		} else if (zoom <= 16) {
@@ -662,11 +662,11 @@ public abstract class OsmandMapLayer {
 			}
 		}
 
-		public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
+		public boolean queriedBoxContains(RotatedTileBox queriedData, RotatedTileBox newBox) {
 			return queriedData != null && queriedData.containsTileBox(newBox) && Math.abs(queriedData.getZoom() - newBox.getZoom()) <= ZOOM_THRESHOLD;
 		}
 
-		public boolean queriedRequestContains(final TileBoxRequest queriedRequest, final TileBoxRequest newRequest) {
+		public boolean queriedRequestContains(TileBoxRequest queriedRequest, TileBoxRequest newRequest) {
 			return queriedRequest != null && queriedRequest.contains(newRequest) && Math.abs(queriedRequest.getZoom() - newRequest.getZoom()) <= ZOOM_THRESHOLD;
 		}
 
@@ -843,7 +843,7 @@ public abstract class OsmandMapLayer {
 		public boolean updatePaints(OsmandApplication app, DrawSettings settings, RotatedTileBox tileBox) {
 			OsmandRenderer renderer = app.getResourceManager().getRenderer().getRenderer();
 			RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
-			final boolean isNight = settings != null && settings.isNightMode();
+			boolean isNight = settings != null && settings.isNightMode();
 			float density;
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 			density = mapView.isCarView() ? mapView.getCarViewDensity() : tileBox.getDensity();

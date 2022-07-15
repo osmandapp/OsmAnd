@@ -504,7 +504,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	 * @param position    The item position of the item.
 	 * @param toRightSide Whether it should slide out to the right side.
 	 */
-	private void slideOutView(final View view, final View childView, final int position, boolean toRightSide) {
+	private void slideOutView(View view, View childView, int position, boolean toRightSide) {
 
 		// Only start new animation, if this view isn't already animated (too fast swiping bug)
 		synchronized (mAnimationLock) {
@@ -745,10 +745,10 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	 *                        the part, that the user swiped.
 	 * @param dismissPosition The position of the view inside the list.
 	 */
-	private void performDismiss(final View dismissView, final View listItemView, final int dismissPosition) {
+	private void performDismiss(View dismissView, View listItemView, int dismissPosition) {
 
-		final ViewGroup.LayoutParams lp = listItemView.getLayoutParams();
-		final int originalLayoutHeight = lp.height;
+		ViewGroup.LayoutParams lp = listItemView.getLayoutParams();
+		int originalLayoutHeight = lp.height;
 
 		if (android.os.Build.VERSION.SDK_INT < 12) {
 			mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView, listItemView));

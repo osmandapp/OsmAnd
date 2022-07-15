@@ -300,7 +300,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 
-	private boolean loadVectorDataNative(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, 
+	private boolean loadVectorDataNative(QuadRect dataBox, int zoom, RenderingRuleSearchRequest renderingReq,
 			NativeOsmandLibrary library) {
 		int leftX = MapUtils.get31TileNumberX(dataBox.left);
 		int rightX = MapUtils.get31TileNumberX(dataBox.right);
@@ -328,8 +328,8 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	public void checkInitialized(final int zoom, NativeOsmandLibrary library, int leftX, int rightX, int bottomY,
-			int topY) {
+	public void checkInitialized(int zoom, NativeOsmandLibrary library, int leftX, int rightX, int bottomY,
+	                             int topY) {
 		if(library == null) {
 			return;
 		}
@@ -357,13 +357,13 @@ public class MapRenderRepositories {
 	}
 	
 	private void readRouteDataAsMapObjects(SearchRequest<BinaryMapDataObject> sr, BinaryMapIndexReader c, 
-			final ArrayList<BinaryMapDataObject> tempResult, final TLongSet ids) {
-		final boolean basemap = c.isBasemap();
+			ArrayList<BinaryMapDataObject> tempResult, TLongSet ids) {
+		boolean basemap = c.isBasemap();
 		try {
 			for (RouteRegion reg : c.getRoutingIndexes()) {
 				List<RouteSubregion> parent = sr.getZoom() < 15 ? reg.getBaseSubregions() : reg.getSubregions();
 				List<RouteSubregion> searchRouteIndexTree = c.searchRouteIndexTree(sr, parent);
-				final MapIndex nmi = new MapIndex();
+				MapIndex nmi = new MapIndex();
 				c.loadRouteIndexData(searchRouteIndexTree, new ResultMatcher<RouteDataObject>() {
 
 					@Override
@@ -406,7 +406,7 @@ public class MapRenderRepositories {
 						return false;
 					}
 
-					private void registerMissingType(final MapIndex nmi, RouteDataObject r, int type) {
+					private void registerMissingType(MapIndex nmi, RouteDataObject r, int type) {
 						if (!nmi.isRegisteredRule(type)) {
 							RouteTypeRule rr = r.region.quickGetEncodingRule(type);
 							String tag = rr.getTag();
@@ -428,7 +428,7 @@ public class MapRenderRepositories {
 	}
 
 
-	private boolean loadVectorData(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
+	private boolean loadVectorData(QuadRect dataBox, int zoom, RenderingRuleSearchRequest renderingReq) {
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -531,10 +531,10 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	private MapIndex readMapObjectsForRendering(final int zoom, final RenderingRuleSearchRequest renderingReq,
-			ArrayList<BinaryMapDataObject> tempResult, ArrayList<BinaryMapDataObject> basemapResult, 
-			TLongSet ids, int[] count, boolean[] ocean, boolean[] land, List<BinaryMapDataObject> coastLines,
-			List<BinaryMapDataObject> basemapCoastLines, int leftX, int rightX, int bottomY, int topY) {
+	private MapIndex readMapObjectsForRendering(int zoom, RenderingRuleSearchRequest renderingReq,
+	                                            ArrayList<BinaryMapDataObject> tempResult, ArrayList<BinaryMapDataObject> basemapResult,
+	                                            TLongSet ids, int[] count, boolean[] ocean, boolean[] land, List<BinaryMapDataObject> coastLines,
+	                                            List<BinaryMapDataObject> basemapCoastLines, int leftX, int rightX, int bottomY, int topY) {
 		BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
 			@Override
 			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
@@ -716,7 +716,7 @@ public class MapRenderRepositories {
 					return;
 				}
 			}
-			final long searchTime = System.currentTimeMillis() - now;
+			long searchTime = System.currentTimeMillis() - now;
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
 			renderingReq.clearState();
@@ -733,12 +733,12 @@ public class MapRenderRepositories {
 			if(renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
 				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
-			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
+			QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
 			double cfd = MapUtils.getPowZoom(requestedBox.getZoomFloatPart())* requestedBox.getMapDensity();
 			lt.x *= cfd;
 			lt.y *= cfd;
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
-			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / cfd;
+			double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / cfd;
 			
 			currentRenderingContext.leftX = lt.x;
 			currentRenderingContext.topY = lt.y;
@@ -757,7 +757,7 @@ public class MapRenderRepositories {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
 			}
-			final float mapDensity = (float) requestedBox.getMapDensity();
+			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
@@ -835,7 +835,7 @@ public class MapRenderRepositories {
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;
 				}
-				final String msg = timeInfo;
+				String msg = timeInfo;
 				log.info(msg);
 				handler.post(new Runnable() {
 					@Override

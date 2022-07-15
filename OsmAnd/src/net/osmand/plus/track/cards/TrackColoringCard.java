@@ -190,8 +190,8 @@ public class TrackColoringCard extends MapBaseCard {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
-			final TrackAppearanceItem item = items.get(position);
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
+			TrackAppearanceItem item = items.get(position);
 
 			if (item.isActive()) {
 				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,

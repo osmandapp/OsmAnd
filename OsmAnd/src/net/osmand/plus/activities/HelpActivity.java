@@ -236,7 +236,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.help_to_improve_item));
 
-		final File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (exceptionLog.exists()) {
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitle(getString(R.string.send_crash_log))
@@ -306,8 +306,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	private void createPluginsItems(ContextMenuAdapter contextMenuAdapter) {
 		contextMenuAdapter.addItem(createCategory(R.string.plugins_menu_group));
-		for (final OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
-			final String helpFileName = osmandPlugin.getHelpFileName();
+		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
+			String helpFileName = osmandPlugin.getHelpFileName();
 			if (helpFileName != null) {
 				contextMenuAdapter.addItem(createPluginItem(osmandPlugin.getName(), osmandPlugin.getLogoResourceId(),
 						helpFileName));

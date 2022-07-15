@@ -260,8 +260,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		itemsToUpdate = stillUpdate;
 	}
 
-	private Map<String, String> listWithAlternatives(final java.text.DateFormat dateFormat, File file,
-	                                                 final String ext, final Map<String, String> files) {
+	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
+	                                                 String ext, Map<String, String> files) {
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
 				@Override

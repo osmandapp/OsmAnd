@@ -77,7 +77,7 @@ public class BaseBottomSheetItem {
 			return view;
 		}
 		if (layoutId != INVALID_ID) {
-			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+			int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 			return view = LayoutInflater.from(new ContextThemeWrapper(context, themeRes))
 					.inflate(layoutId, parent, false);
 		}

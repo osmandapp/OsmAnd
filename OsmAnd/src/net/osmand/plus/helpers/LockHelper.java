@@ -55,7 +55,7 @@ public class LockHelper implements SensorEventListener {
 		void unlock();
 	}
 
-	public LockHelper(final OsmandApplication app) {
+	public LockHelper(OsmandApplication app) {
 		this.app = app;
 		uiHandler = new Handler();
 		OsmandSettings settings = app.getSettings();
@@ -128,7 +128,7 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void timedUnlock(final long millis) {
+	private void timedUnlock(long millis) {
 		uiHandler.removeCallbacks(lockRunnable);
 		if (wakeLock == null) {
 			uiHandler.post(new Runnable() {

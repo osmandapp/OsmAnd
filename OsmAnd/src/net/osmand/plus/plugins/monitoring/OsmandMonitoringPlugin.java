@@ -251,20 +251,20 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(null, null, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
+	public void saveCurrentTrack(@Nullable Runnable onComplete) {
 		saveCurrentTrack(onComplete, null, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable FragmentActivity activity) {
+	public void saveCurrentTrack(@Nullable Runnable onComplete, @Nullable FragmentActivity activity) {
 		saveCurrentTrack(onComplete, activity, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable FragmentActivity activity,
-	                             final boolean stopRecording, final boolean openTrack) {
+	public void saveCurrentTrack(@Nullable Runnable onComplete, @Nullable FragmentActivity activity,
+	                             boolean stopRecording, boolean openTrack) {
 		if (stopRecording) {
 			stopRecording();
 		}
-		final WeakReference<FragmentActivity> activityRef = activity != null ? new WeakReference<>(activity) : null;
+		WeakReference<FragmentActivity> activityRef = activity != null ? new WeakReference<>(activity) : null;
 
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
@@ -365,12 +365,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return liveMonitoringHelper.isLiveMonitoringEnabled();
 	}
 
-	public void startGPXMonitoring(final Activity activity) {
-		final ValueHolder<Integer> vs = new ValueHolder<>();
-		final ValueHolder<Boolean> choice = new ValueHolder<>();
+	public void startGPXMonitoring(Activity activity) {
+		ValueHolder<Integer> vs = new ValueHolder<>();
+		ValueHolder<Boolean> choice = new ValueHolder<>();
 		vs.value = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
 		choice.value = settings.SAVE_GLOBAL_TRACK_REMEMBER.get();
-		final Runnable runnable = () -> {
+		Runnable runnable = () -> {
 			app.getSavingTrackHelper().startNewSegment();
 			settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);

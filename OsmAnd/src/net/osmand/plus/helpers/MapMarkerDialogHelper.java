@@ -20,14 +20,14 @@ import net.osmand.plus.views.DirectionDrawable;
 
 public class MapMarkerDialogHelper {
 
-	public static void updateMapMarkerInfo(final Context ctx,
-										   View localView,
-										   LatLon loc,
-										   Float heading,
-										   boolean useCenter,
-										   boolean nightMode,
-										   int screenOrientation,
-										   final MapMarker marker) {
+	public static void updateMapMarkerInfo(Context ctx,
+	                                       View localView,
+	                                       LatLon loc,
+	                                       Float heading,
+	                                       boolean useCenter,
+	                                       boolean nightMode,
+	                                       int screenOrientation,
+	                                       MapMarker marker) {
 		TextView text = localView.findViewById(R.id.waypoint_text);
 		TextView textShadow = localView.findViewById(R.id.waypoint_text_shadow);
 		TextView textDist = localView.findViewById(R.id.waypoint_dist);
@@ -35,7 +35,7 @@ public class MapMarkerDialogHelper {
 		ImageView waypointIcon = localView.findViewById(R.id.waypoint_icon);
 		TextView waypointDeviation = localView.findViewById(R.id.waypoint_deviation);
 		TextView descText = localView.findViewById(R.id.waypoint_desc_text);
-		final CheckBox checkBox = localView.findViewById(R.id.checkbox);
+		CheckBox checkBox = localView.findViewById(R.id.checkbox);
 		TextView dateGroupText = localView.findViewById(R.id.date_group_text);
 
 		if (text == null || textDist == null || arrow == null || waypointIcon == null
@@ -72,7 +72,7 @@ public class MapMarkerDialogHelper {
 		arrow.setVisibility(View.VISIBLE);
 		arrow.invalidate();
 
-		final OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 
 		if (!marker.history) {
 			waypointIcon.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));

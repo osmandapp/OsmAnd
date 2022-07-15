@@ -86,7 +86,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
 		DisplayMetrics dm = new DisplayMetrics();
@@ -141,7 +141,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							  List<TransportStop> objects) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		final int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
+		int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
 		int radius = rp * 3 / 2;
 		try {
 			TreeSet<String> ms = new TreeSet<>();
@@ -175,7 +175,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	private int getRadiusPoi(RotatedTileBox tb){
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		int r;
 		if(zoom < startZoomRoute){
 			r = 0;

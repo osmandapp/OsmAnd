@@ -91,7 +91,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			items.add(new ProgressItem());
 			new BuildNavigationTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		} else {
-			final ExpandableListAdapter listAdapter = createNavigationListView(navigationMap);
+			ExpandableListAdapter listAdapter = createNavigationListView(navigationMap);
 			LinearLayout container = new LinearLayout(ctx);
 			container.addView(expListView);
 
@@ -205,7 +205,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		}
 
 		@Override
-		public View getChildView(int groupPosition, final int childPosition,
+		public View getChildView(int groupPosition, int childPosition,
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			WikivoyageSearchResult articleItem = getArticleItem(groupPosition, childPosition);
 			String childTitle = articleItem.getArticleTitle();
@@ -232,8 +232,8 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, final boolean isExpanded,
-								 View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded,
+		                         View convertView, ViewGroup parent) {
 			String groupTitle = ((WikivoyageSearchResult) getGroup(groupPosition)).getArticleTitle();
 			boolean selected = parentsList.contains(groupTitle) || article.getTitle().equals(groupTitle);
 			if (convertView == null) {
@@ -277,10 +277,10 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	private ExpandableListAdapter createNavigationListView(Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
-		final Context ctx = requireContext();
+		Context ctx = requireContext();
 
 		expListView = new ExpandableListView(ctx);
-		final ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
+		ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
 
 		expListView.setAdapter(listAdapter);
 		Drawable transparent = AppCompatResources.getDrawable(ctx, R.color.color_transparent);

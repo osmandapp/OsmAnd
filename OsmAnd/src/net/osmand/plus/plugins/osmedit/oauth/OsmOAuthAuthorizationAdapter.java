@@ -83,7 +83,7 @@ public class OsmOAuthAuthorizationAdapter {
         }
     }
 
-    public void startOAuth(final ViewGroup rootLayout, boolean nightMode) {
+    public void startOAuth(ViewGroup rootLayout, boolean nightMode) {
         new StartOAuthAsyncTask(rootLayout, nightMode).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
     }
 

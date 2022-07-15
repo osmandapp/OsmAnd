@@ -53,7 +53,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		final MapActivity mapActivity = requireMapActivity();
+		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getTrackDetailsMenu();
 
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -120,7 +120,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 		}
 
 		MapContextMenu contextMenu = mapActivity.getContextMenu();
-		final boolean forceFitTrackOnMap;
+		boolean forceFitTrackOnMap;
 		if (contextMenu.isActive()) {
 			forceFitTrackOnMap = !(contextMenu.getPointDescription() != null && contextMenu.getPointDescription().isGpxPoint());
 		} else {
@@ -186,7 +186,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	@Override
-	public void updateLocation(final Location location) {
+	public void updateLocation(Location location) {
 		if (location != null && !MapUtils.areLatLonEqual(menu.getMyLocation(), location)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
@@ -258,7 +258,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			if (!landscapeLayout) {
 				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 			} else {
-				final TypedValue typedValueAttr = new TypedValue();
+				TypedValue typedValueAttr = new TypedValue();
 				int bgAttrId = AndroidUtils.isLayoutRtl(ctx) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 				ctx.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 				mainView.setBackgroundResource(typedValueAttr.resourceId);

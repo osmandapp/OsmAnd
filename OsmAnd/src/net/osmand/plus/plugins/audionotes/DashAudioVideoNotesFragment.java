@@ -87,7 +87,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		notesLayout.removeAllViews();
 		DashboardOnMap.handleNumberOfRows(notes, getMyApplication().getSettings(), ROW_NUMBER_TAG);
 
-		for (final AudioVideoNotesPlugin.Recording recording : notes) {
+		for (AudioVideoNotesPlugin.Recording recording : notes) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
@@ -133,8 +133,8 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		});
 	}
 
-	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
-									   final OsmandApplication ctx) {
+	public static Drawable getNoteView(AudioVideoNotesPlugin.Recording recording, View view,
+	                                   OsmandApplication ctx) {
 		String name = recording.getName(ctx, true);
 		TextView nameText = view.findViewById(R.id.name);
 		nameText.setText(name);

@@ -426,7 +426,7 @@ public abstract class ImageCard extends AbstractCard {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			ImageCardsHolder holder = new ImageCardsHolder();
 			try {
-				final Map<String, String> pms = new LinkedHashMap<>();
+				Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());
 				pms.put("lon", "" + (float) latLon.getLongitude());
 				Location myLocation = app.getLocationProvider().getLastKnownLocation();

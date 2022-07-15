@@ -89,7 +89,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_reports, container, false);
 		monthReportsSpinner = view.findViewById(R.id.monthReportsSpinner);
-		final View monthButton = view.findViewById(R.id.monthButton);
+		View monthButton = view.findViewById(R.id.monthButton);
 		monthReportsSpinner.setOnTouchListener((v, event) -> {
 			event.offsetLocation(AndroidUtils.dpToPx(getActivity(), 48f), 0);
 			monthButton.onTouchEvent(event);
@@ -201,7 +201,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		tryUpdateData(monthUrlString, countryUrlString);
 	}
 
-	private void tryUpdateData(String monthUrlString, final String regionUrlString) {
+	private void tryUpdateData(String monthUrlString, String regionUrlString) {
 		GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse> onResponseListener =
 				new GetJsonAsyncTask.OnResponseListener<Protocol.TotalChangesByMonthResponse>() {
 					@Override

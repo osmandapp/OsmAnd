@@ -70,7 +70,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 		itemsContainer = mainView.findViewById(R.id.items_container);
 
 		View scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
-		final BottomSheetBehavior behavior = BottomSheetBehavior.from(scrollView);
+		BottomSheetBehavior behavior = BottomSheetBehavior.from(scrollView);
 		behavior.setPeekHeight(getPeekHeight());
 
 		LinearLayout buttonsContainer = mainView.findViewById(R.id.buttons_container);

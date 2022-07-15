@@ -60,7 +60,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void onCreate(final Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		favouritesHelper = app.getFavoritesHelper();
 
@@ -188,10 +188,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	protected void save(final boolean needDismiss) {
-		final FavouritePoint favorite = getFavorite();
+	protected void save(boolean needDismiss) {
+		FavouritePoint favorite = getFavorite();
 		if (favorite != null) {
-			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
+			FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
 			point.setDescription(getDescriptionTextValue());
 			point.setAddress(getAddressTextValue());
@@ -288,11 +288,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	protected void delete(final boolean needDismiss) {
+	protected void delete(boolean needDismiss) {
 		FragmentActivity activity = getActivity();
-		final FavouritePoint favorite = getFavorite();
+		FavouritePoint favorite = getFavorite();
 		if (activity != null && favorite != null) {
-			final OsmandApplication app = (OsmandApplication) activity.getApplication();
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
 			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, favorite.getName()));
@@ -455,7 +455,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		showAutoFillInstance(mapActivity, false);
 	}
 
-	public static void showAutoFillInstance(final MapActivity mapActivity, boolean skipConfirmationDialog) {
+	public static void showAutoFillInstance(MapActivity mapActivity, boolean skipConfirmationDialog) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();

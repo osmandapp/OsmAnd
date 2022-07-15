@@ -52,7 +52,7 @@ public class InterceptorLinearLayout extends LinearLayout {
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		boolean handled = false;
-		final int action = ev.getAction();
+		int action = ev.getAction();
 
 		if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
 			mIsScrolling = false;
@@ -67,7 +67,7 @@ public class InterceptorLinearLayout extends LinearLayout {
 					if (mIsScrolling) {
 						handled = true;
 					} else {
-						final int yDiff = calculateDistanceY(ev);
+						int yDiff = calculateDistanceY(ev);
 						if (Math.abs(yDiff) > mTouchSlop) {
 							mIsScrolling = true;
 							handled = true;

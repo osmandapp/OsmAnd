@@ -61,9 +61,9 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, null);
+		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, null);
 
 		AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
@@ -77,7 +77,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		});
 
 		LinearLayout container = mainView.findViewById(R.id.navigation_types_container);
-		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
+		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		if (removeDefaultMode) {
 			modes.remove(ApplicationMode.DEFAULT);
 		}
@@ -138,7 +138,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 	public void onStart() {
 		super.onStart();
 		if (!portrait) {
-			final Window window = getDialog().getWindow();
+			Window window = getDialog().getWindow();
 			WindowManager.LayoutParams params = window.getAttributes();
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);

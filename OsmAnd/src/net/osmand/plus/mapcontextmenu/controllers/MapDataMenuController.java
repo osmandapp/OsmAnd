@@ -58,12 +58,12 @@ public class MapDataMenuController extends MenuController {
 
 	private final DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final DownloadMapObject mapObject) {
+	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull DownloadMapObject mapObject) {
 		super(new MapDataMenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
 		localIndexInfo = mapObject.getLocalIndexInfo();
-		final OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getMyApplication();
 		downloadThread = app.getDownloadThread();
 		if (indexItem != null) {
 			downloaded = indexItem.isDownloaded();
@@ -461,7 +461,7 @@ public class MapDataMenuController extends MenuController {
 		}
 	}
 
-	private void deleteItem(final File file) {
+	private void deleteItem(File file) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();

@@ -145,7 +145,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
+	private boolean performBasicOperation(int resId, LocalIndexInfo info) {
 		if (resId == R.string.shared_string_rename) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -613,20 +613,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private void openSelectionMode(final int actionResId, final int actionIconId,
-	                               final DialogInterface.OnClickListener listener) {
+	private void openSelectionMode(int actionResId, int actionIconId,
+	                               DialogInterface.OnClickListener listener) {
 		DownloadActivity downloadActivity = getDownloadActivity();
 		if (downloadActivity == null) {
 			return;
 		}
 
-		final OsmandApplication app = requireMyApplication();
-		final int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode(false));
+		OsmandApplication app = requireMyApplication();
+		int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode(false));
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
 		}
-		final String actionButton = value;
+		String actionButton = value;
 		if (listAdapter.getGroupCount() == 0) {
 			listAdapter.cancelFilter();
 			expandAllGroups();
@@ -694,7 +694,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	public void localOptionsMenu(final int itemId) {
+	public void localOptionsMenu(int itemId) {
 		if (itemId == R.string.shared_string_refresh) {
 			reloadLocalIndexes();
 		} else if (itemId == R.string.shared_string_delete) {
@@ -762,7 +762,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		public void sortData() {
-			final Collator cl = OsmAndCollator.primaryCollator();
+			Collator cl = OsmAndCollator.primaryCollator();
 			for (List<LocalIndexInfo> i : data.values()) {
 				Collections.sort(i, new Comparator<LocalIndexInfo>() {
 					@Override
@@ -878,7 +878,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		@Override
-		public View getChildView(final int groupPosition, final int childPosition,
+		public View getChildView(int groupPosition, int childPosition,
 		                         boolean isLastChild, View convertView, ViewGroup parent) {
 			LocalIndexInfoViewHolder viewHolder;
 			if (convertView == null) {
@@ -1005,7 +1005,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				checkbox = view.findViewById(R.id.check_local_index);
 			}
 
-			public void bindLocalIndexInfo(final LocalIndexInfo child) {
+			public void bindLocalIndexInfo(LocalIndexInfo child) {
 				options.setImageDrawable(ctx.getMyApplication().getUIUtilities()
 						.getThemedIcon(R.drawable.ic_overflow_menu_white));
 				options.setContentDescription(ctx.getString(R.string.shared_string_more));
@@ -1031,7 +1031,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 				StringBuilder builder = new StringBuilder();
 
-				final String mapDescription = getMapDescription(child);
+				String mapDescription = getMapDescription(child);
 				if (mapDescription.length() > 0) {
 					builder.append(mapDescription);
 				}
@@ -1080,11 +1080,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private void openPopUpMenu(View v, final LocalIndexInfo info) {
+	private void openPopUpMenu(View v, LocalIndexInfo info) {
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		final boolean restore = info.isBackupedData();
+		boolean restore = info.isBackupedData();
 		MenuItem item;
 		if ((info.getType() == LocalIndexType.MAP_DATA) || (info.getType() == LocalIndexType.DEACTIVATED)) {
 			item = optionsMenu.getMenu().add(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
@@ -1122,7 +1122,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			});
 		}
-		final IndexItem update = filesToUpdate.get(info.getFileName());
+		IndexItem update = filesToUpdate.get(info.getFileName());
 		if (update != null) {
 			item = optionsMenu.getMenu().add(R.string.update_tile)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_import));

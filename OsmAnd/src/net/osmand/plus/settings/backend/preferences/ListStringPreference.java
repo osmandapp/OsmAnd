@@ -81,7 +81,7 @@ public class ListStringPreference extends StringPreference {
 
 	@Nullable
 	public List<String> getStringsListForProfile(ApplicationMode appMode) {
-		final String listAsString = getModeValue(appMode);
+		String listAsString = getModeValue(appMode);
 		if (listAsString != null) {
 			if (listAsString.contains(delimiter)) {
 				return Arrays.asList(listAsString.split(delimiter));

@@ -94,8 +94,8 @@ public class RateUsHelper {
 	}
 
 	private static void showInAppRateDialog(FragmentActivity activity) {
-		final ReviewManager reviewManager = ReviewManagerFactory.create(activity);
-		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
+		ReviewManager reviewManager = ReviewManagerFactory.create(activity);
+		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		Task<ReviewInfo> requestReview = reviewManager.requestReviewFlow();
 		requestReview.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
 			@Override
@@ -114,7 +114,7 @@ public class RateUsHelper {
 
 	private static void showInAppRateDialogInternal(ReviewManager reviewManager, FragmentActivity activity, ReviewInfo reviewInfo) {
 		Task<Void> reviewFlow = reviewManager.launchReviewFlow(activity, reviewInfo);
-		final WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
+		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		reviewFlow.addOnCompleteListener(new OnCompleteListener<Void>() {
 			@Override
 			public void onComplete(@NonNull Task<Void> task) {

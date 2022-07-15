@@ -72,7 +72,7 @@ public class TerrainLayer extends MapTileLayer {
 		}
 	}
 
-	private void indexTerrainFiles(final OsmandApplication app) {
+	private void indexTerrainFiles(OsmandApplication app) {
 		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
 			private final String type = mode.name().toLowerCase();
@@ -160,7 +160,7 @@ public class TerrainLayer extends MapTileLayer {
 				cursor.close();
 			}
 
-			private Map<String, SQLiteTileSource> readFiles(final OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
+			private Map<String, SQLiteTileSource> readFiles(OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
 				Map<String, SQLiteTileSource> rs = new LinkedHashMap<>();
 				File[] files = tilesDir.listFiles();
 				if(files != null) {

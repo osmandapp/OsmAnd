@@ -63,7 +63,7 @@ public class ColorUtilities {
 		final byte GREEN_CHANNEL = 8;
 		final byte BLUE_CHANNEL = 0;
 
-		final float inverseAmount = 1.0f - amount;
+		float inverseAmount = 1.0f - amount;
 
 		int a = ((int) (((float) (color1 >> ALPHA_CHANNEL & 0xff) * amount) +
 				((float) (color2 >> ALPHA_CHANNEL & 0xff) * inverseAmount))) & 0xff;

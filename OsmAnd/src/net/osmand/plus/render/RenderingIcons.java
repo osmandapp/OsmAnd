@@ -85,15 +85,15 @@ public class RenderingIcons {
 			return null;
 		}
 		try {
-			final InputStream inputStream = ctx.getResources().openRawResource(resId);
-			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
-            final byte[] ioBuffer = new byte[1024];
+			InputStream inputStream = ctx.getResources().openRawResource(resId);
+			ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
+            byte[] ioBuffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
 				proxyOutputStream.write(ioBuffer, 0, bytesRead);
 			}
 			inputStream.close();
-			final byte[] bitmapData = proxyOutputStream.toByteArray();
+			byte[] bitmapData = proxyOutputStream.toByteArray();
 			if (isVectorData(bitmapData)) {
 				return getPngFromVectorDrawable(ctx, resId);
 			}

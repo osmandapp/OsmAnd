@@ -168,7 +168,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		if (app.getSettings().isInternetConnectionAvailable()) {
 			long collectedRowsCount = getCollectedRowsCount();
 			if (collectedRowsCount > DATA_PARCEL_SIZE) {
-				final List<Integer> allowedTypes = new ArrayList<>();
+				List<Integer> allowedTypes = new ArrayList<>();
 				if (app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
 					allowedTypes.add(EVENT_TYPE_MAP_DOWNLOAD);
 				}

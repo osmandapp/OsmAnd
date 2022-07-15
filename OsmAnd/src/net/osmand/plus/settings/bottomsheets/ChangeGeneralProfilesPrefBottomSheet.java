@@ -45,13 +45,13 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		Bundle args = getArguments();
 		if (app == null || args == null) {
 			return;
 		}
 		int cancelTitleRes = args.getInt(CANCEL_TITLE_RES_KEY);
-		final String prefId = args.getString(PREFERENCE_ID);
+		String prefId = args.getString(PREFERENCE_ID);
 		newValue = args.getSerializable(NEW_VALUE_KEY);
 		if (newValue == null || prefId == null) {
 			return;

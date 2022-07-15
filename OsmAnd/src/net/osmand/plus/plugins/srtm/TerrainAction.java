@@ -31,7 +31,7 @@ public class TerrainAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			plugin.toggleTerrain(mapActivity, !plugin.isTerrainLayerEnabled(), () -> {

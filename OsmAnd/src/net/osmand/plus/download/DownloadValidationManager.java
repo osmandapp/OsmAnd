@@ -36,13 +36,13 @@ public class DownloadValidationManager {
 		this.downloadThread = app.getDownloadThread();
 	}
 
-	public boolean isSpaceEnoughForDownload(final FragmentActivity context, final boolean showAlert,
-	                                        final IndexItem... items) {
+	public boolean isSpaceEnoughForDownload(FragmentActivity context, boolean showAlert,
+	                                        IndexItem... items) {
 		long szChangeLong = 0;
 		long szMaxTempLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
-			final long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+			long szExistingLong = getExistingFileSize(es.getTargetFile(app));
 			long change = es.contentSize - szExistingLong;
 			szChangeLong += change;
 			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
@@ -50,7 +50,7 @@ public class DownloadValidationManager {
 		}
 		for (IndexItem es : items) {
 			if (es != null) {
-				final long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+				long szExistingLong = getExistingFileSize(es.getTargetFile(app));
 				long change = es.contentSize - szExistingLong;
 				szChangeLong += change;
 				if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
@@ -125,7 +125,7 @@ public class DownloadValidationManager {
 		return true;
 	}
 
-	private void downloadFilesCheck_2_Internet(@NonNull final FragmentActivity context, final IndexItem[] items) {
+	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, IndexItem[] items) {
 		if (!settings.isWifiConnected()) {
 			if (settings.isInternetConnectionAvailable()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -141,19 +141,19 @@ public class DownloadValidationManager {
 		}
 	}
 
-	private void downloadFilesCheck_3_ValidateSpace(@NonNull final FragmentActivity context, final IndexItem... items) {
+	private void downloadFilesCheck_3_ValidateSpace(@NonNull FragmentActivity context, IndexItem... items) {
 		long szChangeLong = 0;
 		long szMaxTempLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
-			final long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+			long szExistingLong = getExistingFileSize(es.getTargetFile(app));
 			long change = es.contentSize - szExistingLong;
 			szChangeLong += change;
 			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
 			i++;
 		}
 		for (IndexItem es : items) {
-			final long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+			long szExistingLong = getExistingFileSize(es.getTargetFile(app));
 			long change = es.contentSize - szExistingLong;
 			szChangeLong += change;
 			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
@@ -195,7 +195,7 @@ public class DownloadValidationManager {
 		}
 	}
 
-	public void makeSureUserCancelDownload(FragmentActivity ctx, final DownloadItem item) {
+	public void makeSureUserCancelDownload(FragmentActivity ctx, DownloadItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setTitle(ctx.getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);

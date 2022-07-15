@@ -76,14 +76,14 @@ public class RoutePreferencesMenu {
 		}, routingHelper.getAppMode());
 	}
 
-	public OnItemClickListener getItemClickListener(final ArrayAdapter<?> listAdapter) {
+	public OnItemClickListener getItemClickListener(ArrayAdapter<?> listAdapter) {
 		return new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
 				Object obj = listAdapter.getItem(item);
 				if (obj instanceof LocalRoutingParameterGroup) {
-					final LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) obj;
-					final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+					LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) obj;
+					ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 					int i = 0;
 					int selectedIndex = -1;
 					for (LocalRoutingParameter p : group.getRoutingParameters()) {
@@ -103,16 +103,16 @@ public class RoutePreferencesMenu {
 					final int layout = R.layout.list_menu_item_native_singlechoice;
 
 					List<String> names = CtxMenuUtils.getNames(adapter.getItems());
-					final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1, names) {
+					ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1, names) {
 						@NonNull
 						@Override
-						public View getView(final int position, View convertView, ViewGroup parent) {
+						public View getView(int position, View convertView, ViewGroup parent) {
 							// User super class to create the View
 							View v = convertView;
 							if (v == null) {
 								v = mapActivity.getLayoutInflater().inflate(layout, null);
 							}
-							final ContextMenuItem item = adapter.getItem(position);
+							ContextMenuItem item = adapter.getItem(position);
 							TextView tv = v.findViewById(R.id.text1);
 							tv.setText(item.getTitle());
 							tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
@@ -121,7 +121,7 @@ public class RoutePreferencesMenu {
 						}
 					};
 
-					final int[] selectedPosition = {selectedIndex};
+					int[] selectedPosition = {selectedIndex};
 					builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int position) {
@@ -149,12 +149,12 @@ public class RoutePreferencesMenu {
 
 					builder.create().show();
 				} else if (obj instanceof MuteSoundRoutingParameter) {
-					final CompoundButton btn = view.findViewById(R.id.toggle_item);
+					CompoundButton btn = view.findViewById(R.id.toggle_item);
 					btn.performClick();
 				} else if (obj instanceof VoiceGuidanceRoutingParameter) {
 					doSelectVoiceGuidance();
 				} else if (obj instanceof InterruptMusicRoutingParameter) {
-					final CompoundButton btn = view.findViewById(R.id.toggle_item);
+					CompoundButton btn = view.findViewById(R.id.toggle_item);
 					btn.performClick();
 				} else if (obj instanceof AvoidRoadsRoutingParameter) {
 					routingOptionsHelper.selectRestrictedRoads(mapActivity);
@@ -170,12 +170,12 @@ public class RoutePreferencesMenu {
 		};
 	}
 
-	public ArrayAdapter<LocalRoutingParameter> getRoutePreferencesDrawerAdapter(final boolean nightMode) {
+	public ArrayAdapter<LocalRoutingParameter> getRoutePreferencesDrawerAdapter(boolean nightMode) {
 
 		listAdapter = new ArrayAdapter<LocalRoutingParameter>(mapActivity, R.layout.layers_list_activity_item, R.id.title,
 				routingOptionsHelper.getAllRoutingParameters(routingHelper.getAppMode()/*settings.APPLICATION_MODE.get()*/)) {
 			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
+			public View getView(int position, View convertView, ViewGroup parent) {
 				LocalRoutingParameter parameter = getItem(position);
 				if (parameter instanceof MuteSoundRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.switch_select_list_item, null);
@@ -184,7 +184,7 @@ public class RoutePreferencesMenu {
 					v.findViewById(R.id.select_button).setVisibility(View.GONE);
 					((ImageView) v.findViewById(R.id.icon))
 							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_volume_up, !nightMode));
-					final CompoundButton btn = v.findViewById(R.id.toggle_item);
+					CompoundButton btn = v.findViewById(R.id.toggle_item);
 					btn.setVisibility(View.VISIBLE);
 					btn.setChecked(!routingHelper.getVoiceRouter().isMute());
 					btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -205,7 +205,7 @@ public class RoutePreferencesMenu {
 					((ImageView) v.findViewById(R.id.icon))
 							.setImageDrawable(app.getUIUtilities().getIcon(parameter.getActiveIconId(), !nightMode));
 					v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
-					final TextView btn = v.findViewById(R.id.select_button);
+					TextView btn = v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
 					btn.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -230,7 +230,7 @@ public class RoutePreferencesMenu {
 					v.findViewById(R.id.icon).setVisibility(View.GONE);
 					v.findViewById(R.id.description_text).setVisibility(View.GONE);
 					v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
-					final TextView btn = v.findViewById(R.id.select_button);
+					TextView btn = v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
 					String voiceProvider = settings.VOICE_PROVIDER.get();
 					String voiceProviderStr;
@@ -263,7 +263,7 @@ public class RoutePreferencesMenu {
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					v.findViewById(R.id.select_button).setVisibility(View.GONE);
 					v.findViewById(R.id.icon).setVisibility(View.GONE);
-					final CompoundButton btn = v.findViewById(R.id.toggle_item);
+					CompoundButton btn = v.findViewById(R.id.toggle_item);
 					btn.setVisibility(View.VISIBLE);
 					btn.setChecked(settings.INTERRUPT_MUSIC.get());
 					btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -286,7 +286,7 @@ public class RoutePreferencesMenu {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					AndroidUtils.setTextPrimaryColor(mapActivity, v.findViewById(R.id.title), nightMode);
-					final TextView gpxSpinner = v.findViewById(R.id.description);
+					TextView gpxSpinner = v.findViewById(R.id.description);
 					AndroidUtils.setTextPrimaryColor(mapActivity, gpxSpinner, nightMode);
 					((ImageView) v.findViewById(R.id.dropDownIcon))
 							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
@@ -296,7 +296,7 @@ public class RoutePreferencesMenu {
 				if (parameter instanceof OtherSettingsRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-					final ImageView icon = v.findViewById(R.id.icon);
+					ImageView icon = v.findViewById(R.id.icon);
 					icon.setImageDrawable(app.getUIUtilities().getIcon(parameter.getActiveIconId(), !nightMode));
 					icon.setVisibility(View.VISIBLE);
 					TextView titleView = v.findViewById(R.id.title);
@@ -308,13 +308,13 @@ public class RoutePreferencesMenu {
 				return inflateRoutingParameter(position);
 			}
 
-			private View inflateRoutingParameter(final int position) {
+			private View inflateRoutingParameter(int position) {
 				View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 				AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-				final TextView tv = v.findViewById(R.id.title);
-				final TextView desc = v.findViewById(R.id.description);
-				final CheckBox ch = v.findViewById(R.id.toggle_item);
-				final LocalRoutingParameter rp = getItem(position);
+				TextView tv = v.findViewById(R.id.title);
+				TextView desc = v.findViewById(R.id.description);
+				CheckBox ch = v.findViewById(R.id.toggle_item);
+				LocalRoutingParameter rp = getItem(position);
 				AndroidUtils.setTextPrimaryColor(mapActivity, tv, nightMode);
 				tv.setText(rp.getText(mapActivity));
 				ch.setOnCheckedChangeListener(null);
@@ -360,7 +360,7 @@ public class RoutePreferencesMenu {
 		listAdapter.notifyDataSetChanged();
 	}
 
-	protected void openGPXFileSelection(final TextView gpxSpinner) {
+	protected void openGPXFileSelection(TextView gpxSpinner) {
 		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 
 			@Override
@@ -375,15 +375,15 @@ public class RoutePreferencesMenu {
 		}, app.getDaynightHelper().isNightModeForMapControls());
 	}
 
-	private void updateSpinnerItems(final TextView gpxSpinner) {
+	private void updateSpinnerItems(TextView gpxSpinner) {
 		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		gpxSpinner.setText(rp == null ? mapActivity.getString(R.string.shared_string_none) :
 				new File(rp.getFile().path).getName());
 	}
 
-	private void showOptionsMenu(final TextView gpxSpinner) {
+	private void showOptionsMenu(TextView gpxSpinner) {
 		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		final PopupMenu optionsMenu = new PopupMenu(gpxSpinner.getContext(), gpxSpinner);
+		PopupMenu optionsMenu = new PopupMenu(gpxSpinner.getContext(), gpxSpinner);
 		MenuItem item = optionsMenu.getMenu().add(
 				mapActivity.getString(R.string.shared_string_none));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

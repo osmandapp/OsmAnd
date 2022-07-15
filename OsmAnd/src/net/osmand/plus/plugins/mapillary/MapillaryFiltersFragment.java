@@ -47,17 +47,17 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final MapActivity mapActivity = (MapActivity) requireActivity();
-        final OsmandApplication app = requireMyApplication();
-        final ApplicationMode appMode = app.getSettings().getApplicationMode();
-        final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+        MapActivity mapActivity = (MapActivity) requireActivity();
+        OsmandApplication app = requireMyApplication();
+        ApplicationMode appMode = app.getSettings().getApplicationMode();
+        MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 
-        final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-        final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
-        final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-        final int currentModeColor = appMode.getProfileColor(nightMode);
+        boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+        int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
+        DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+        int currentModeColor = appMode.getProfileColor(nightMode);
 
-        final View view = UiUtilities.getInflater(mapActivity, nightMode)
+        View view = UiUtilities.getInflater(mapActivity, nightMode)
                 .inflate(R.layout.fragment_mapillary_filters, container, false);
 
         boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -65,9 +65,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
-        final View toggleRow = view.findViewById(R.id.toggle_row);
-        final boolean selected = plugin.SHOW_MAPILLARY.get();
-        final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
+        View toggleRow = view.findViewById(R.id.toggle_row);
+        boolean selected = plugin.SHOW_MAPILLARY.get();
+        int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
         int toggleIconColor;
         int toggleIconId;
         if (selected) {
@@ -78,9 +78,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             toggleIconColor = ColorUtilities.getDefaultIconColor(mapActivity, nightMode);
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
-        final Drawable drawable = getPaintedContentIcon(toggleIconId, toggleIconColor);
+        Drawable drawable = getPaintedContentIcon(toggleIconId, toggleIconColor);
         ((AppCompatImageView) toggleRow.findViewById(R.id.toggle_row_icon)).setImageDrawable(drawable);
-        final CompoundButton toggle = toggleRow.findViewById(R.id.toggle_row_toggle);
+        CompoundButton toggle = toggleRow.findViewById(R.id.toggle_row_toggle);
 		toggle.setOnCheckedChangeListener(null);
         toggle.setChecked(selected);
         toggle.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -91,7 +91,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         toggleRow.setOnClickListener(v -> toggle.setChecked(!toggle.isChecked()));
         UiUtilities.setupCompoundButton(nightMode, currentModeColor, toggle);
 
-        final Button reloadTile = view.findViewById(R.id.button_reload_tile);
+        Button reloadTile = view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(v -> {
             ResourceManager manager = app.getResourceManager();
             manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
@@ -99,7 +99,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
+        int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon))
@@ -107,7 +107,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
-        final DelayAutoCompleteTextView textView =
+        DelayAutoCompleteTextView textView =
                 view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion));
         String selectedUsername = plugin.MAPILLARY_FILTER_USERNAME.get();
@@ -147,8 +147,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 getColor(R.color.color_warning)));
 
 
-        final EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);
-        final DatePickerDialog.OnDateSetListener dateFromDialog = (v, year, monthOfYear, dayOfMonth) -> {
+        EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);
+        DatePickerDialog.OnDateSetListener dateFromDialog = (v, year, monthOfYear, dayOfMonth) -> {
             Calendar from = Calendar.getInstance();
             from.set(Calendar.YEAR, year);
             from.set(Calendar.MONTH, monthOfYear);
@@ -168,8 +168,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         dateFromEt.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 
 
-        final EditText dateToEt = view.findViewById(R.id.date_to_edit_text);
-        final DatePickerDialog.OnDateSetListener dateToDialog = (v, year, monthOfYear, dayOfMonth) -> {
+        EditText dateToEt = view.findViewById(R.id.date_to_edit_text);
+        DatePickerDialog.OnDateSetListener dateToDialog = (v, year, monthOfYear, dayOfMonth) -> {
             Calendar to = Calendar.getInstance();
             to.set(Calendar.YEAR, year);
             to.set(Calendar.MONTH, monthOfYear);
@@ -199,8 +199,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             }
         }
 
-        final View rowPano = view.findViewById(R.id.pano_row);
-        final CompoundButton pano = rowPano.findViewById(R.id.pano_row_toggle);
+        View rowPano = view.findViewById(R.id.pano_row);
+        CompoundButton pano = rowPano.findViewById(R.id.pano_row_toggle);
         pano.setOnCheckedChangeListener(null);
         pano.setChecked(plugin.MAPILLARY_FILTER_PANO.get());
         pano.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -212,7 +212,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         UiUtilities.setupCompoundButton(nightMode, currentModeColor, pano);
 
 
-        final Button apply = view.findViewById(R.id.button_apply);
+        Button apply = view.findViewById(R.id.button_apply);
         disableButtonApply(view);
         apply.setOnClickListener(v -> {
             String username = textView.getText().toString();
@@ -240,7 +240,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final Button clear = view.findViewById(R.id.button_clear);
+        Button clear = view.findViewById(R.id.button_clear);
         clear.setOnClickListener(v -> {
             textView.setText("");
             dateFromEt.setText("");

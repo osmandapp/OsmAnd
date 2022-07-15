@@ -119,7 +119,7 @@ public class OsmandMap implements NavigationSessionListener {
 		mapView.refreshMap();
 	}
 
-	public void refreshMap(final boolean updateVectorRendering) {
+	public void refreshMap(boolean updateVectorRendering) {
 		mapView.refreshMap(updateVectorRendering);
 	}
 
@@ -139,8 +139,8 @@ public class OsmandMap implements NavigationSessionListener {
 		// int newZoom = (int) Math.round(curZoom);
 		// double zoomFrac = curZoom - newZoom;
 
-		final int newZoom = mapView.getZoom() + stp;
-		final double zoomFrac = mapView.getZoomFractionalPart();
+		int newZoom = mapView.getZoom() + stp;
+		double zoomFrac = mapView.getZoomFractionalPart();
 		if (newZoom > mapView.getMaxZoom()) {
 			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
 			return;

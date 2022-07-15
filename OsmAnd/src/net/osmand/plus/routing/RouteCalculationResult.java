@@ -1340,7 +1340,7 @@ public class RouteCalculationResult {
 	}
 
 	public int getIndexOfIntermediate(int countFromLast) {
-		final int j = intermediatePoints.length - countFromLast - 1;
+		int j = intermediatePoints.length - countFromLast - 1;
 		if (j < intermediatePoints.length && j >= 0) {
 			int i = intermediatePoints[j];
 			return directions.get(i).routePointOffset;

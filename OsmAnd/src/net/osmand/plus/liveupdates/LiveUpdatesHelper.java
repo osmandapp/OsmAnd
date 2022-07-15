@@ -55,37 +55,37 @@ public class LiveUpdatesHelper {
 
 	public static CommonPreference<Boolean> preferenceForLocalIndex(
 			String fileName, OsmandSettings settings) {
-		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
+		String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
 		return checkPref(settings.registerBooleanPreference(settingId, false));
 	}
 
 	public static CommonPreference<Boolean> preferenceLiveUpdatesOn(
 			String fileName, OsmandSettings settings) {
-		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
+		String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
 		return checkPref(settings.registerBooleanPreference(settingId, false));
 	}
 
 	public static CommonPreference<Boolean> preferenceDownloadViaWiFi(
 			String fileName, OsmandSettings settings) {
-		final String settingId = fileName + DOWNLOAD_VIA_WIFI_POSTFIX;
+		String settingId = fileName + DOWNLOAD_VIA_WIFI_POSTFIX;
 		return checkPref(settings.registerBooleanPreference(settingId, false));
 	}
 
 	public static CommonPreference<Integer> preferenceUpdateFrequency(
 			String fileName, OsmandSettings settings) {
-		final String settingId = fileName + UPDATE_TIMES_POSTFIX;
+		String settingId = fileName + UPDATE_TIMES_POSTFIX;
 		return checkPref(settings.registerIntPreference(settingId, UpdateFrequency.HOURLY.ordinal()));
 	}
 
 	public static CommonPreference<Integer> preferenceTimeOfDayToUpdate(
 			String fileName, OsmandSettings settings) {
-		final String settingId = fileName + TIME_OF_DAY_TO_UPDATE_POSTFIX;
+		String settingId = fileName + TIME_OF_DAY_TO_UPDATE_POSTFIX;
 		return checkPref(settings.registerIntPreference(settingId, TimeOfDay.NIGHT.ordinal()));
 	}
 
 	public static CommonPreference<Long> preferenceLastSuccessfulUpdateCheck(
 			String fileName, OsmandSettings settings) {
-		final String settingId = fileName + LIVE_UPDATES_LAST_SUCCESSFUL_CHECK;
+		String settingId = fileName + LIVE_UPDATES_LAST_SUCCESSFUL_CHECK;
 		return checkPref(settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK));
 	}
 
@@ -168,8 +168,8 @@ public class LiveUpdatesHelper {
 	public static PendingIntent getPendingIntent(@NonNull Context context,
 												 @NonNull String fileName) {
 		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
-		final File file = new File(fileName);
-		final String fileNameNoExt = Algorithms.getFileNameWithoutExtension(file);
+		File file = new File(fileName);
+		String fileNameNoExt = Algorithms.getFileNameWithoutExtension(file);
 		intent.putExtra(LOCAL_INDEX_INFO, fileName);
 		intent.setAction(fileNameNoExt);
 		return PendingIntent.getBroadcast(context, 0, intent, 0);
@@ -245,14 +245,14 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested, @Nullable final Runnable runOnSuccess) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
+	public static void runLiveUpdate(Context context, String fileName, boolean userRequested, @Nullable Runnable runOnSuccess) {
+		String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		PerformLiveUpdateAsyncTask task = new PerformLiveUpdateAsyncTask(context, fileName, userRequested);
 		task.setRunOnSuccess(runOnSuccess);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
 	}
 
-	public static void runLiveUpdate(Context context, boolean userRequested, final LiveUpdateListener listener) {
+	public static void runLiveUpdate(Context context, boolean userRequested, LiveUpdateListener listener) {
 		for (LocalIndexInfo mapToUpdate : listener.getMapsToUpdate()) {
 			runLiveUpdate(context, mapToUpdate.getFileName(), userRequested, new Runnable() {
 				@Override

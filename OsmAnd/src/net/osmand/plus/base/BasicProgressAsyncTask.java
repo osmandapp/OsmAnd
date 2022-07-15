@@ -72,7 +72,7 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 		}
 	}
 	
-	private void updProgress(final boolean updateOnlyProgress) {
+	private void updProgress(boolean updateOnlyProgress) {
 		if(uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
 			Message msg = Message.obtain(uiHandler, new Runnable() {
 				@Override
