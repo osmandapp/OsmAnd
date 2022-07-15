@@ -74,6 +74,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -150,7 +151,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private List<IMapLocationListener> locationListeners = new ArrayList<>();
+	private List<IMapLocationListener> locationListeners = new CopyOnWriteArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -593,15 +594,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
-		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
-		listeners.add(listener);
-		this.locationListeners = listeners;
+		locationListeners.add(listener);
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		List<IMapLocationListener> listeners = new ArrayList<>(this.locationListeners);
-		listeners.remove(listener);
-		this.locationListeners = listeners;
+		locationListeners.remove(listener);
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {

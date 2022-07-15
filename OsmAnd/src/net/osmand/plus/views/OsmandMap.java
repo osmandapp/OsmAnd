@@ -25,6 +25,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMap implements NavigationSessionListener {
 
@@ -36,7 +37,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private List<OsmandMapListener> listeners = new ArrayList<>();
+	private List<OsmandMapListener> listeners = new CopyOnWriteArrayList<>();
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);
@@ -48,16 +49,12 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public void addListener(@NonNull OsmandMapListener listener) {
 		if (!listeners.contains(listener)) {
-			List<OsmandMapListener> listeners = new ArrayList<>(this.listeners);
 			listeners.add(listener);
-			this.listeners = listeners;
 		}
 	}
 
 	public void removeListener(@NonNull OsmandMapListener listener) {
-		List<OsmandMapListener> listeners = new ArrayList<>(this.listeners);
 		listeners.remove(listener);
-		this.listeners = listeners;
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {
