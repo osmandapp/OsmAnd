@@ -10,8 +10,8 @@ import java.util.List;
 
 public class OnLogcatMessageParams extends AidlParams {
 
-	private final static String ARG_FILTER_LEVEL = "filter_level";
-	private final static String ARG_LOGS = "logs";
+	private static final String ARG_FILTER_LEVEL = "filter_level";
+	private static final String ARG_LOGS = "logs";
 
 	private String filterLevel = "";
 	private ArrayList<String> logs = new ArrayList<>();

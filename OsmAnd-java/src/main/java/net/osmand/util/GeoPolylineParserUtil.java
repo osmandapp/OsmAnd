@@ -14,7 +14,7 @@ public class GeoPolylineParserUtil {
 	 * @param encoded The polyline as a String
 	 * @return {@link List<LatLon>}
 	 */
-	public static List<LatLon> parse(final String encoded, double precision) {
+	public static List<LatLon> parse(String encoded, double precision) {
 		List<LatLon> track = new ArrayList<LatLon>();
 		int index = 0;
 		int lat = 0, lng = 0;

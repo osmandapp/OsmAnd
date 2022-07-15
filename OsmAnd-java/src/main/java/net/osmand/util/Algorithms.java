@@ -258,7 +258,7 @@ public class Algorithms {
 					if (!f.equals(exclDir)) {
 						dirs.add(f);
 					}
-					Algorithms.collectDirs(f, dirs);
+					collectDirs(f, dirs);
 				}
 			}
 		}
@@ -673,7 +673,7 @@ public class Algorithms {
 		try {
 			FileInputStream fin = new FileInputStream(src);
 			try {
-				Algorithms.streamCopy(fin, fout);
+				streamCopy(fin, fout);
 			} finally {
 				fin.close();
 			}
@@ -1044,11 +1044,11 @@ public class Algorithms {
 		return (x < y) ? -1 : ((x == y) ? 0 : 1);
 	}
 	
-	public static int compare(final String str1, final String str2) {
+	public static int compare(String str1, String str2) {
 		return compare(str1, str2, false);
 	}
 	
-	public static int compare(final String str1, final String str2, final boolean nullIsLess) {
+	public static int compare(String str1, String str2, boolean nullIsLess) {
         if (str1 == str2) {
             return 0;
         }
@@ -1202,7 +1202,7 @@ public class Algorithms {
 
 	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
 		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
-		if (Algorithms.isBlank(str)) {
+		if (isBlank(str)) {
 			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		String[] arr = str.split(" ");
@@ -1212,7 +1212,7 @@ public class Algorithms {
 		int[] colors = new int[arr.length];
 		try {
 			for (int i = 0; i < arr.length; i++) {
-				colors[i] = Algorithms.parseColor(arr[i]);
+				colors[i] = parseColor(arr[i]);
 			}
 		} catch (IllegalArgumentException e) {
 			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
