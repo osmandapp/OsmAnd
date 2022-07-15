@@ -4763,4 +4763,11 @@
     <string name="auto_25_chars_route_roundabout_kr">Menjen ki a(z) %1$d kijáraton és tartson jobbra</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Kifejezetten MTB-k számára kialakított utak megjelenítése</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA utak megjelenítése</string>
+    <string name="average_speed_skip_stops_desc">%1$s alatti sebesség lesz számolva és ez befolyásolja az átlagsebességet.</string>
+    <string name="download_tiles">Csempék letöltése</string>
+    <string name="without_profiles_changing">Profilok váltása nélkül</string>
+    <string name="attach_roads_warning">Az utakhoz csak rögzített nyomvonalat csatolhat</string>
+    <string name="shared_string_only_missing">Csak hiányzó</string>
+    <string name="connect_with_straight_line">Csatlakoztatás egyenes vonallal</string>
+    <string name="attach_roads_descr">Szeretné megközelíteni a nyomvonalát egy offline térképekhez csatolt érvényes útvonallal\? Ebben az esetben korrigált útmagasság, útinformáció és kanyarodás áll rendelkezésére, amelyeket később a navigáció során használhat fel.</string>
 </resources>
