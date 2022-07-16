@@ -4777,4 +4777,8 @@
     <string name="download_tiles">Kacheln herunterladen</string>
     <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
     <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden berücksichtigt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
+    <string name="attach_roads_descr">Möchten Sie Ihren Track mit einer gültigen, an Offline-Karten hängenden Route annähern\? In diesem Fall verfügen Sie über korrigierte Straßenhöhen, Straßeninformationen und Kurven, die Sie später für die Navigation verwenden können.</string>
+    <string name="attach_roads_warning">Sie können an Straßen nur einen aufgezeichneten Track anhängen</string>
+    <string name="without_profiles_changing">Ohne Profilwechsel</string>
+    <string name="shared_string_only_missing">Nur fehlende</string>
 </resources>
