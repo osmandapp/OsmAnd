@@ -3250,4 +3250,13 @@
     <string name="stop_download">Endirməni dayandır</string>
     <string name="stop_and_exit">Dayandır və çıx</string>
     <string name="estimated_download_size">Təxmini endirmə ölçüsü</string>
+    <string name="shared_string_buttons">Düymələr</string>
+    <string name="navigation_points">Naviqasiya nöqtələri</string>
+    <string name="add_page">Səhifə əlavə et</string>
+    <string name="map_widget_current_speed">Hazırkı sürət</string>
+    <string name="page_number">Səhifə %1$s</string>
+    <string name="shared_string_speed">Sürət</string>
+    <string name="snackbar_page_removed">“Səhifə %1$s” silindi.</string>
+    <string name="top_widgets_panel">Üst panel</string>
+    <string name="bottom_widgets_panel">Alt panel</string>
 </resources>
