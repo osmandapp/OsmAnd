@@ -185,6 +185,7 @@ public abstract class TilesCache<T> {
 			if (isExpired(req)) {
 				cache.remove(req.tileId);
 			} else {
+				android.util.Log.d("1111", "get cached: " + req.xTile + ":" + req.yTile);
 				return cacheObject;
 			}
 		}
@@ -258,6 +259,7 @@ public abstract class TilesCache<T> {
 			return null;
 		}
 		entry.accessTime = accessTime;
+		android.util.Log.d("1111", "get cached: " + key);
 		return entry.tile;
 	}
 

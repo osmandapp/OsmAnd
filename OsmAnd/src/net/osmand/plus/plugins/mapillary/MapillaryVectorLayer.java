@@ -22,7 +22,6 @@ import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapillaryTilesProvider;
-import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -93,22 +92,22 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		MapRendererView mapRenderer = getMapRenderer();
-
 		if (mapRenderer != null) {
 			if (mapillaryTilesProvider == null) {
 				int layerIndex = view.getLayerIndex(this);
 				if (map != null) {
-					mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, drawSettings.mapRefreshTimestamp, tileBox, view.getDensity());
+					mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, tileBox, view.getDensity());
 					mapRenderer.setMapLayerProvider(layerIndex, mapillaryTilesProvider.instantiateProxy(true));
 					mapillaryTilesProvider.swigReleaseOwnership();
 				} else {
 					mapRenderer.resetMapLayerProvider(layerIndex);
 				}
 			} else {
-				mapillaryTilesProvider.setMapRefreshTimestamp(drawSettings.mapRefreshTimestamp);
 				mapillaryTilesProvider.setRenderedTileBox(tileBox);
 				visiblePoints = mapillaryTilesProvider.getVisiblePoints();
 			}
+		} else {
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		}
 	}
 
@@ -142,10 +141,10 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return;
 		} else if (currentZoom < MIN_POINTS_ZOOM) {
 			tileZoom = MAX_SEQUENCE_LAYER_ZOOM;
-			tilesCache.useForMapillarySequenceLayer();
+			tilesCache.useForMapillarySequenceLayer(false);
 		} else {
 			tileZoom = MIN_IMAGE_LAYER_ZOOM;
-			tilesCache.useForMapillaryImageLayer();
+			tilesCache.useForMapillaryImageLayer(false);
 		}
 
 		// recalculate for ellipsoid coordinates
