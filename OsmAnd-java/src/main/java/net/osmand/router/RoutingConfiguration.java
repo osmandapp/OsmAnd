@@ -198,7 +198,7 @@ public class RoutingConfiguration {
 			i.maxStepApproximation = parseSilentFloat(getAttribute(i.router, "maxStepApproximation"), i.maxStepApproximation);
 			i.smoothenPointsNoRoute = parseSilentFloat(getAttribute(i.router, "smoothenPointsNoRoute"), i.smoothenPointsNoRoute);
 
-			i.router.addImpassableRoads(new HashSet<>(impassableRoadLocations));
+			i.router.setImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int memoryLimitMB = memoryLimits.memoryLimitMb;
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
@@ -236,7 +236,11 @@ public class RoutingConfiguration {
 			this.directionPointsBuilder = directionPoints;
 			return this;
 		}
-
+		
+		public void clearImpassableRoadLocations() {
+			impassableRoadLocations.clear();
+		}
+		
 		public Set<Long> getImpassableRoadLocations() {
 			return impassableRoadLocations;
 		}
