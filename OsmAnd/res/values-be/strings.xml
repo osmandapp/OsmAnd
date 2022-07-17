@@ -4106,7 +4106,7 @@
     <string name="audio_video_notes_desc">Віджэт забяспечвае хуткі доступ да пачатку/спынення запісу (аўдыя, відэа ці фота).</string>
     <string name="not_enough_contributions_descr">Каб атрымаць неабмежаваную колькасць абнаўленняў, трэба зрабіць прынамсі %1$s правак за апошнія два месяцы %2$s.</string>
     <string name="routing_attr_allow_private_for_truck_name">Дазволіць прыватны доступ (грузавік)</string>
-    <string name="rendering_attr_weatherPressureContours_name">Ізалініі ціску</string>
+    <string name="rendering_attr_weatherPressureContours_name">Ізабары</string>
     <string name="routing_attr_avoid_highway_name">Пазбягаць аўтамагісрталяў</string>
     <string name="routing_attr_avoid_highway_description">Пазбягаць аўтамагісрталяў</string>
     <string name="map_widget_trip_recording_distance">Адлегласць</string>
@@ -4122,7 +4122,7 @@
     <string name="map_widget_current_speed">Бягучая хуткасць</string>
     <string name="on_with_params">%1$s на %2$s</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Без пераваг</string>
-    <string name="rendering_attr_weatherTempContours_name">Тэмпературныя ізалініі</string>
+    <string name="rendering_attr_weatherTempContours_name">Ізатэрмы</string>
     <string name="map_widget_trip_recording_downhill">Спуск</string>
     <string name="routing_attr_allow_private_for_truck_description">Дазволіць доступ грузавікоў у прыватныя зоны.</string>
     <string name="rendering_attr_horseScale_name">Складанасць конных сцежак</string>
@@ -4778,4 +4778,6 @@
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
+    <string name="without_profiles_changing">Без змены профіляў</string>
+    <string name="shared_string_only_missing">Толькі адсутныя</string>
 </resources>

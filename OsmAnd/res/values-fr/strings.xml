@@ -4763,4 +4763,11 @@
     <string name="trip_recording_duration_widget_desc">Affiche la durée du trajet en cours d\'enregistrement.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Afficher les chemins tracés pour les VTT</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Afficher la difficulté des chemins VTT IMBA</string>
+    <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera comptabilisée et affectera le calcul de la vitesse moyenne.</string>
+    <string name="download_tiles">Télécharger les tuiles</string>
+    <string name="without_profiles_changing">Sans modification des profils</string>
+    <string name="shared_string_only_missing">Manquant seulement</string>
+    <string name="connect_with_straight_line">Connecter par une ligne droite</string>
+    <string name="attach_roads_warning">Vous ne pouvez raccrocher aux routes qu\'une trace déjà enregistrée</string>
+    <string name="attach_roads_descr">Souhaitez-vous rattacher votre trace aux routes existantes sur les cartes hors ligne \? Dans ce cas, vous disposerez d\'une altitude corrigée, d\'informations sur la route et les bifurcations qui pourront être utilisées pendant le guidage.</string>
 </resources>

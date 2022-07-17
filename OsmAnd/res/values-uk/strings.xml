@@ -4771,4 +4771,10 @@
     <string name="auto_25_chars_route_tu_kr">Виконайте розворот і тримайтеся праворуч</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Показати спеціально розроблені маршрути для гірських велосипедів</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Показувати маршрути для MTB IMBA</string>
+    <string name="connect_with_straight_line">З\'єднати прямою лінією</string>
+    <string name="attach_roads_warning">Ви можете прикріпити до дороги лише записаний трек</string>
+    <string name="without_profiles_changing">Без зміни профілів</string>
+    <string name="download_tiles">Завантажити тайли</string>
+    <string name="attach_roads_descr">Бажаєте пов\'язати свій трек з дійсним маршрутом, прикріпленим до офлайн-мап\? У такому випадку ви матимете скориговану висоту дороги, відомості про дорогу та повороти, які можна використовувати пізніше в навігації.</string>
+    <string name="shared_string_only_missing">Лише відсутні</string>
 </resources>
