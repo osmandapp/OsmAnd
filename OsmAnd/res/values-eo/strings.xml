@@ -928,7 +928,7 @@
     <string name="local_openstreetmap_act_title">Modifoj de OSM</string>
     <string name="layer_hillshade">Tavolo de nivelombrumo</string>
     <string name="map_widget_gps_info">GPS-informoj</string>
-    <string name="access_arrival_time">Alvena tempo</string>
+    <string name="access_arrival_time">Tempo de alveno</string>
     <string name="item_checked">markita(j)</string>
     <string name="item_unchecked">nemarkita(j)</string>
     <string name="prefer_motorways">Preferi aŭtovojojn</string>
@@ -1154,7 +1154,7 @@
     <string name="asap">Senprokraste</string>
     <string name="share_route_as_gpx">Kunhavigi kurson kiel GPX-dosieron</string>
     <string name="share_route_subject">Kurso kunhavigita per OsmAnd</string>
-    <string name="route_roundabout">Trafikcirklo: enveturu %1$d-an elveturejon</string>
+    <string name="route_roundabout">Ĉe trafikcirklo elektu %1$d-an elveturejon</string>
     <string name="route_kl">Veturu je maldekstra koridoro</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
     <string name="map_widget_battery">Nivelo de baterio</string>
@@ -2054,7 +2054,7 @@
     <string name="rendering_value_fine_name">Eteta</string>
     <string name="route_calculation">Difinado de kurso</string>
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
-    <string name="route_roundabout_short">Elveturu al %1$d-a elveturejo</string>
+    <string name="route_roundabout_short">Elektu %1$d-an elveturejon</string>
     <string name="search_map_hint">Urbo aŭ regiono</string>
     <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="routing_attr_allow_motorway_name">Uzi aŭtovojojn</string>
@@ -2726,7 +2726,7 @@
     <string name="shared_string_bookmark">Al legosignoj</string>
     <string name="off_road_render_descr">Por ekstervoja veturado, bazita sur la stilo “Topo”, por uzi kun verdaj satelitaj fotoj kiel subtavola mapo. Malpliigita larĝo de ĉefaj vojoj, pliigita larĝo de kampaj vojoj, vojetoj, biciklaj kaj aliaj vojoj.</string>
     <string name="touring_view_render_descr">Detalplena kaj kontrasta stilo por turismo. Inkluzivas ĉiujn agordojn de norma stilo kaj vidigas kiel eble pli da detaloj, precipe ĉiuj ŝoseoj kaj vojetoj kaj aliaj rimedojn por vojaĝi. Klare distingebla vido de diversaj vojoj, simile al paperaj mapoj. Taŭga por taga, nokta kaj eksterdoma uzo.</string>
-    <string name="access_intermediate_arrival_time">Alvena tempo al intercelo</string>
+    <string name="access_intermediate_arrival_time">Tempo de alveno al intercelo</string>
     <string name="map_widget_intermediate_time">Tempo al intercelo</string>
     <string name="unirs_render_descr">Modifo de la norma stilo por pliigi kontraston de piediradaj kaj biciklaj vojoj. Uzas malnovan kolor-skemon de Mapnik.</string>
     <string name="get_osmand_live">Akiru OsmAnd-Live por malŝlosi ĉiujn eblaĵojn: ĉiutagajn map-ĝisdatigojn, senlimigitajn elŝutojn, ĉiujn pagendajn kaj senpagajn kromprogramojn, Vikipedion, Vikivojaĝon kaj pli.</string>
@@ -4186,7 +4186,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Akiru aliron al senlimaj elŝutoj de malkonektaj mapoj de ĉiuj kontinentoj kaj regionoj.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Akiru aliron al pli oftaj ĝisdatigoj de mapoj: ĉiuhoraj, ĉiutagaj aŭ ĉiusemajnaj. Ne necesas reelŝuti la tutan mapon – ĝisdatigoj enhavas nur ŝanĝitajn objektojn.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstalu. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstali. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
     <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
@@ -4725,4 +4725,36 @@
     <string name="accessibility_2d_view_on">2,5-dimensia vido: jes</string>
     <string name="download_complete">Elŝuto finita</string>
     <string name="live_update_frequency_hour_variant">Mapoj estos kontrolitaj pri ĝisdatigoj je ĉiu horo.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Montbiciklaj kursoj IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Montri montbiciklajn kursojn laŭ skalo de IMBA</string>
+    <string name="attach_roads_warning">Vi povas alproksimigi al vojoj nur registritan spuron</string>
+    <string name="without_profiles_changing">Sen ŝanĝi profilon</string>
+    <string name="shared_string_only_missing">Nur mankajn</string>
+    <string name="download_tiles">Elŝuti kahelojn</string>
+    <string name="auto_25_chars_route_tl_kl">Turniĝu maldekstren kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_tr_kl">Turniĝu dekstren kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_tr_kr">Turniĝu dekstren kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_tu_kr">Turniĝu malantaŭen kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_roundabout_kl">Elektu %1$d-an elveturejon kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_roundabout_kr">Elektu %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
+    <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
+    <string name="connect_with_straight_line">Konekti per rekta linio</string>
+    <string name="attach_roads_descr">Elektu por alproksimigi vian spuron al vojoj estantaj sur malkonektaj mapoj. Tiamaniere altitudo estos korektita kaj informoj pri ŝoseoj kaj turniĝoj povos esti uzataj poste por navigi.</string>
+    <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
+\nSe vi uzas OsmAnd-Nubon, tio ĉi povos kaŭzi malkontenton post reinstalado.</string>
+    <string name="auto_backup_title">Aŭtomata sekurkopio</string>
+    <string name="duplacate_widget_added_snackbar">Aldonis duobligaĵon de la fenestraĵo al la listo.</string>
+    <string name="shared_string_duplicate">Duobligi</string>
+    <string name="av_notes_photo_widget_desc">Fenestraĵo ebliganta fari foton.</string>
+    <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri videan noton.</string>
+    <string name="av_notes_audio_widget_desc">Fenestraĵo ebliganta registri sonan noton.</string>
+    <string name="trip_recording_distance_widget_desc">Montras distancon de la nune registrata spuro.</string>
+    <string name="trip_recording_downhill_widget_desc">Montras sumon (horizontale) de ĉiuj malsupreniroj por la nune registrata spuro.</string>
+    <string name="trip_recording_uphill_widget_desc">Montras sumon (horizontale) de ĉiuj supreniroj por la nune registrata spuro.</string>
+    <string name="trip_recording_duration_widget_desc">Montras tempon de registrado de spuro: daŭron en minutoj/horoj de la nune registrata kurso.</string>
+    <string name="true_bearing_wdiget_desc">Angulo inter la vera nordo, via pozicio kaj la alcela loko.</string>
+    <string name="first_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la unua map-marko.</string>
+    <string name="second_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la dua map-marko.</string>
 </resources>
