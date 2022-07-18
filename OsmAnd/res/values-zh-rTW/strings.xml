@@ -4763,4 +4763,11 @@
     <string name="rendering_attr_depthContourWidth_name">等深線寬度</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地腳踏車 IMBA 路徑</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示專為山地腳踏車的路徑</string>
+    <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
+    <string name="connect_with_straight_line">以直線連結</string>
+    <string name="attach_roads_descr">您是否想使用附加到離線地圖的有效路線來預估您的路線。在這種情況下，您將會修正道路高度、道路資訊與轉彎，如此便可稍後在導航中使用。</string>
+    <string name="attach_roads_warning">您只能將紀錄的軌跡附加到道路</string>
+    <string name="without_profiles_changing">不需變更設定檔</string>
+    <string name="shared_string_only_missing">僅遺失</string>
+    <string name="download_tiles">下載圖磚</string>
 </resources>
