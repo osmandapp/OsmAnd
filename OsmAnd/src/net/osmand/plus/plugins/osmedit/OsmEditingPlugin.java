@@ -666,14 +666,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	public static boolean isOsmUrlAvailable(@NonNull MapObject object) {
 		Long id = object.getId();
-		if (id != null && id > 0) {
-			if (object instanceof Amenity) {
-				return id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE;
-			} else {
-				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
-			}
-		}
-		return false;
+		return id != null && id > 0;
 	}
 
 	public static long getOsmObjectId(@NonNull MapObject object) {
