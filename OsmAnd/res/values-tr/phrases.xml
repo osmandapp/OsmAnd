@@ -3505,4 +3505,11 @@
     <string name="poi_bay_filter">Körfez tipi</string>
     <string name="poi_museum_type">Müze konusu</string>
     <string name="poi_post_office_type">Türü</string>
+    <string name="poi_museum_gallery">Galeri</string>
+    <string name="poi_computer_sales">Bilgisayar satışı</string>
+    <string name="poi_computer_repair">Bilgisayar tamiri</string>
+    <string name="poi_computer_parts">Bilgisayar parçaları</string>
+    <string name="poi_laundry_service_filter">Çamaşırhane hizmeti</string>
+    <string name="poi_dry_cleaning_filter">Kuru temizleme</string>
+    <string name="poi_faculty_filter">Fakülte</string>
 </resources>
