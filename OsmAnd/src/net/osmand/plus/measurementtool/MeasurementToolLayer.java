@@ -521,7 +521,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		} else {
 			for (TrkSegment segment : segments) {
 				new StandardTrack(new ArrayList<>(segment.points), 17.2)
-						.drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+						.drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb, getMapRenderer());
 			}
 		}
 	}
@@ -567,7 +567,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				lineAttrs.customColorPaint.setColor(color);
 				for (List<WptPt> points : originalPointsList) {
 					new StandardTrack(new ArrayList<>(points), 17.2).
-							drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
+							drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb, getMapRenderer());
 				}
 			}
 		} else if (mapRenderer != null) {

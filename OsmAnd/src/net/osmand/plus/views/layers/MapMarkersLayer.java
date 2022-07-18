@@ -282,7 +282,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(app, nightMode, tileBox);
 			new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
-					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
+					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox, getMapRenderer());
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer == null) {

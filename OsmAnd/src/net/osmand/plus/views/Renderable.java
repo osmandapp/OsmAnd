@@ -12,10 +12,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.router.RouteSegmentResult;
@@ -142,7 +145,7 @@ public class Renderable {
 
         protected abstract void startCuller(double newZoom);
 
-        protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox, MapRendererView renderer) {
             if (points.size() < 2) {
                 return;
             }
@@ -151,21 +154,21 @@ public class Renderable {
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             if (coloringType.isGradient()) {
                 if (DRAW_BORDER && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
-                    drawSolid(points, borderPaint, canvas, tileBox);
+                    drawSolid(points, borderPaint, canvas, tileBox, renderer);
                 }
-                drawGradient(zoom, points, paint, canvas, tileBox);
+                drawGradient(zoom, points, paint, canvas, tileBox, renderer);
             } else {
-                drawSolid(getPointsForDrawing(), paint, canvas, tileBox);
+                drawSolid(getPointsForDrawing(), paint, canvas, tileBox, renderer);
             }
             canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         }
 
-        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
-            if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
+        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox, MapRendererView renderer) {
+            if (QuadRect.trivialOverlap(getTileBounds(renderer, tileBox), trackBounds)) { // is visible?
                 if (coloringType.isTrackSolid()) {
                     startCuller(zoom);
                 }
-                drawSingleSegment(zoom, p, canvas, tileBox);
+                drawSingleSegment(zoom, p, canvas, tileBox, renderer);
             }
         }
 
@@ -205,8 +208,8 @@ public class Renderable {
         }
 
         protected void drawSolid(@NonNull List<WptPt> pts, @NonNull Paint p,
-                                 @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-            QuadRect tileBounds = tileBox.getLatLonBounds();
+                                 @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, MapRendererView renderer) {
+            QuadRect tileBounds = getTileBounds(renderer, tileBox);
             WptPt lastPt = pts.get(0);
             boolean recalculateLastXY = true;
             Path path = new Path();
@@ -215,16 +218,16 @@ public class Renderable {
                 if (arePointsInsideTile(pt, lastPt, tileBounds) && !arePrimeMeridianPoints(pt, lastPt)) {
                     if (recalculateLastXY) {
                         recalculateLastXY = false;
-                        float lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
-                        float lastY = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
+                        float lastX = getPixXFromLatLon(lastPt.lat, lastPt.lon, tileBox, renderer);
+                        float lastY = getPixYFromLatLon(lastPt.lat, lastPt.lon, tileBox, renderer);
                         if (!path.isEmpty()) {
                             canvas.drawPath(path, p);
                         }
                         path.reset();
                         path.moveTo(lastX, lastY);
                     }
-                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
-                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+                    float x = getPixXFromLatLon(pt.lat, pt.lon, tileBox, renderer);
+                    float y = getPixYFromLatLon(pt.lat, pt.lon, tileBox, renderer);
                     path.lineTo(x, y);
                 } else {
                     recalculateLastXY = true;
@@ -237,12 +240,13 @@ public class Renderable {
         }
 
         protected void drawGradient(double zoom, @NonNull List<WptPt> pts, @NonNull Paint p,
-                                    @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+                                    @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, MapRendererView renderer) {
+            System.out.println("!!! 0=====");
             GradientScaleType scaleType = coloringType.toGradientScaleType();
             if (scaleType == null) {
                 return;
             }
-            QuadRect tileBounds = tileBox.getLatLonBounds();
+            QuadRect tileBounds = getTileBounds(renderer, tileBox);
             boolean drawSegmentBorder = DRAW_BORDER && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
             Path path = new Path();
             boolean recalculateLastXY = true;
@@ -258,15 +262,15 @@ public class Renderable {
             for (int i = 1; i < pts.size(); i++) {
                 WptPt pt = pts.get(i);
                 WptPt nextPt = i + 1 < pts.size() ? pts.get(i + 1) : null;
-                float nextX = nextPt == null ? 0 : tileBox.getPixXFromLatLon(nextPt.lat, nextPt.lon);
-                float nextY = nextPt == null ? 0 : tileBox.getPixYFromLatLon(nextPt.lat, nextPt.lon);
+                float nextX = nextPt == null ? 0 : getPixXFromLatLon(nextPt.lat, nextPt.lon, tileBox, renderer);
+                float nextY = nextPt == null ? 0 : getPixYFromLatLon(nextPt.lat, nextPt.lon, tileBox, renderer);
                 float lastX = 0;
                 float lastY = 0;
                 if (arePointsInsideTile(pt, lastPt, tileBounds) && !arePrimeMeridianPoints(pt, lastPt)) {
                     if (recalculateLastXY) {
                         recalculateLastXY = false;
-                        lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
-                        lastY = tileBox.getPixYFromLatLon(lastPt.lat, lastPt.lon);
+                        lastX = getPixXFromLatLon(lastPt.lat, lastPt.lon, tileBox, renderer);
+                        lastY = getPixYFromLatLon(lastPt.lat, lastPt.lon, tileBox, renderer);
                         if (!path.isEmpty()) {
                             paths.add(new Path(path));
                             gradients.add(createGradient(gradientPoints, gradientColors));
@@ -279,8 +283,8 @@ public class Renderable {
                         gradientPoints.add(new PointF(lastX, lastY));
                         gradientColors.add(lastPt.getColor(scaleType.toColorizationType()));
                     }
-                    float x = tileBox.getPixXFromLatLon(pt.lat, pt.lon);
-                    float y = tileBox.getPixYFromLatLon(pt.lat, pt.lon);
+                    float x = getPixXFromLatLon(pt.lat, pt.lon, tileBox, renderer);
+                    float y = getPixYFromLatLon(pt.lat, pt.lon, tileBox, renderer);
                     path.lineTo(x, y);
                     gradientPoints.add(new PointF(x, y));
                     gradientColors.add(pt.getColor(scaleType.toColorizationType()));
@@ -364,6 +368,36 @@ public class Renderable {
             return Math.max(first.lon, second.lon) == GPXUtilities.PRIME_MERIDIAN
                     && Math.min(first.lon, second.lon) == -GPXUtilities.PRIME_MERIDIAN;
         }
+
+        protected float getPixXFromLatLon(double lat, double lon, RotatedTileBox tileBox, MapRendererView renderer) {
+            if (renderer == null) {
+                return tileBox.getPixXFromLatLon(lat, lon);
+            } else {
+                return NativeUtilities.getPixelFromLatLon(renderer, tileBox, lat, lon).x;
+            }
+        }
+
+        protected float getPixYFromLatLon(double lat, double lon, RotatedTileBox tileBox, MapRendererView renderer) {
+            if (renderer == null) {
+                return tileBox.getPixYFromLatLon(lat, lon);
+            } else {
+                return NativeUtilities.getPixelFromLatLon(renderer, tileBox, lat, lon).y;
+            }
+        }
+
+        protected QuadRect getTileBounds(MapRendererView renderer, RotatedTileBox tileBox) {
+            if (renderer == null) {
+                return tileBox.getLatLonBounds();
+            } else {
+                PointI windowSize = renderer.getState().getWindowSize();
+                PointI tl31 = NativeUtilities.get31FromPixel(renderer, tileBox, 0, 0, true);
+                PointI br31 = NativeUtilities.get31FromPixel(renderer, tileBox, windowSize.getX(), windowSize.getY(), true);
+                return new QuadRect(MapUtils.get31LongitudeX(tl31.getX()),
+                        MapUtils.get31LatitudeY(tl31.getY()),
+                        MapUtils.get31LongitudeX(br31.getX()),
+                        MapUtils.get31LatitudeY(br31.getY()));
+            }
+        }
     }
 
     public static class StandardTrack extends RenderableSegment {
@@ -404,13 +438,13 @@ public class Renderable {
         }
 
         @Override
-        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox, MapRendererView renderer) {
             if (points.size() != pointSize) {
                 int prevSize = pointSize;
                 pointSize = points.size();
                 GPXUtilities.updateBounds(trackBounds, points, prevSize);
             }
-            drawSingleSegment(zoom, p, canvas, tileBox);
+            drawSingleSegment(zoom, p, canvas, tileBox, renderer);
         }
 
         @Override protected void startCuller(double newZoom) {}

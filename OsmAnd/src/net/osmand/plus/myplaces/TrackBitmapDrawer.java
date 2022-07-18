@@ -242,7 +242,7 @@ public class TrackBitmapDrawer {
 			}
 			paint.setColor(color);
 			if (segment.renderer instanceof RenderableSegment) {
-				((RenderableSegment) segment.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+				((RenderableSegment) segment.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox, null);
 			}
 		}
 	}
