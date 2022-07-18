@@ -4672,7 +4672,7 @@
     <string name="compass_visible_if_map_rotated">Sýnilegt ef korti er snúið</string>
     <string name="compass_always_hidden">Alltaf falið</string>
     <string name="compass_always_visible">Alltaf sýnilegt</string>
-    <string name="compass_desc">Sýnir stefnu í norður</string>
+    <string name="compass_desc">Sýnir stefnu í norður.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Litastef dýptarlína</string>
     <string name="rendering_attr_depthContourColorScheme_description">Litastef dýptarlína</string>
     <string name="rendering_attr_depthContourWidth_description">Breidd dýptarlína</string>
@@ -4763,8 +4763,12 @@
     <string name="trip_recording_downhill_widget_desc">Sýnir summu allra lækkana í leiðinni sem verið er að skrá.</string>
     <string name="trip_recording_uphill_widget_desc">Sýnir summu allra hækkana í leiðinni sem verið er að skrá.</string>
     <string name="trip_recording_duration_widget_desc">Birtir tíma upptöku ferils, tímalengd í mínútum/klukkustundum fyrir leiðina sem verið er að skrá.</string>
-    <string name="average_speed_skip_stops_desc">Hraði undir %1$s mun ekki teljast með við útreikning á meðalhraða.</string>
+    <string name="average_speed_skip_stops_desc">Hraði undir %1$s mun teljast með við útreikning á meðalhraða.</string>
     <string name="second_next_turn_widget_desc">Viðmótshlutinn sýnir upplýsingar um þarnæstu beygju sem þú þarft að taka og er virk innan tiltekinnar nálægðar.</string>
     <string name="next_turn_widget_desc">Viðmótshlutinn sýnir upplýsingar um þarnæstu beygju sem þú þarft að taka með mynd af viðeigandi aðgerð og vegalengdinni að henni.</string>
     <string name="includes_osm_changes_until">Innifelur OSM-breytingar gerðar til %1$s.</string>
+    <string name="shared_string_only_missing">Aðeins þar sem vantar</string>
+    <string name="without_profiles_changing">Án breytinga á notkunarsniðum</string>
+    <string name="download_tiles">Sækja kortaflísar</string>
+    <string name="connect_with_straight_line">Tengja með beinni línu</string>
 </resources>
