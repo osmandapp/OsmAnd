@@ -390,7 +390,7 @@
     <string name="filter_existing_indexes">Zobraziť stiahnuté</string>
     <string name="general_settings_descr">Nastaviť zobrazenie a iné spoločné nastavenia aplikácie.</string>
     <string name="general_settings">Všeobecné nastavenia</string>
-    <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa máp na zariadení.</string>
+    <string name="index_settings_descr">Stiahnuť a spravovať mapové súbory na zariadení.</string>
     <string name="index_settings">Spravovať mapové súbory</string>
     <string name="osmand_service">Režim na pozadí</string>
     <string name="osmand_service_descr">OsmAnd beží na pozadí aj počas vypnutej obrazovky.</string>
