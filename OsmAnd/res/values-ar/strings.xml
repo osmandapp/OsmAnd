@@ -4839,4 +4839,8 @@
     <string name="trip_recording_distance_widget_desc">عرض مسافة الرحلة المسجلة حاليا.</string>
     <string name="true_bearing_wdiget_desc">الزاوية بين الشمال الحقيقي ونقطة الهدف التي تم تعيينها من موقعك.</string>
     <string name="relative_bearing_widget_desc">يوضح الزاوية بين اتجاه الحركة إلى الأمام والنقطة المستهدفة.</string>
+    <string name="connect_with_straight_line">وصل بخط مستقيم</string>
+    <string name="attach_roads_descr">هل تريد تقريب مسارك باستخدام مسار صالح مرفق بالخرائط غير المتصلة بالإنترنت. في هذه الحالة، ستكون قد صححت ارتفاع الطريق، معلوماته والمنعطفات التي يمكن استخدامها لاحقا في الملاحة.</string>
+    <string name="without_profiles_changing">دون تغيير الملفات الشخصية</string>
+    <string name="shared_string_only_missing">المفقود فقط</string>
 </resources>
