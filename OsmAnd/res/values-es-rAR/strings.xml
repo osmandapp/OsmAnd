@@ -226,7 +226,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="shared_string_all">Todos</string>
+    <string name="shared_string_all">Todo</string>
     <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
@@ -4501,7 +4501,7 @@
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
     <string name="rendering_attr_seabedDetail_description">Información de texto adicional sobre la calificación de la superficie del fondo marino, los tipos de superficie combinados, la categoría y el taxón de la maleza o la hierba marina</string>
     <string name="rendering_value_category_name">Categoría</string>
-    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_all_name">Todo</string>
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
     <string name="gpx_no_routes_title">Sin rutas</string>
@@ -4789,7 +4789,7 @@
     <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
     <string name="connect_with_straight_line">Conectar con línea recta</string>
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
-    <string name="shared_string_only_missing">Sólo falta</string>
+    <string name="shared_string_only_missing">Sólo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
     <string name="attach_roads_descr">¿Quieres aproximar la traza con una ruta válida adjuntada a los mapas sin conexión\? En ese caso, será corregida la altitud e información del camino y los giros que podrían usarse posteriormente en la navegación.</string>
     <string name="attach_roads_warning">Se puede adjuntar al camino sólo una traza grabada</string>
