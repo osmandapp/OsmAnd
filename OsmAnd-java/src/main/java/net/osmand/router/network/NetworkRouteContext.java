@@ -281,7 +281,8 @@ public class NetworkRouteContext {
 		public void addObject(NetworkRouteSegment obj) {
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
-					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()) {
+					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()
+							&& obj.routeKey == obj2.routeKey) {
 						return;
 					}
 				}
