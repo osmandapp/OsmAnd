@@ -4780,4 +4780,8 @@
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
     <string name="without_profiles_changing">Без змены профіляў</string>
     <string name="shared_string_only_missing">Толькі адсутныя</string>
+    <string name="connect_with_straight_line">Злучыць прамой лініяй</string>
+    <string name="attach_roads_warning">Вы можаце далучыць да дарог толькі запісаны след</string>
+    <string name="download_tiles">Спампаваць фрагменты</string>
+    <string name="attach_roads_descr">Вы жадаеце звязаць свой след з сапраўдным маршрутам, далучаным да пазасеткавых мапаў\? У такім выпадку вы будзеце мець скарэкціраваную вышыню дарогі, інфармацыю аб дарозе і павароты, якія можна выкарыстоўваць пазней у навігацыі.</string>
 </resources>
