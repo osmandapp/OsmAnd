@@ -4762,4 +4762,11 @@
     <string name="compass_desc">Kaže smer proti severu.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Barvna shema izobat</string>
     <string name="rendering_attr_depthContourColorScheme_description">Barvna shema izobat (črt za globino)</string>
+    <string name="connect_with_straight_line">Poveži z ravno črto</string>
+    <string name="attach_roads_warning">Na ceste lahko prilepiš samo posneto sled</string>
+    <string name="without_profiles_changing">Brez spreminjanja profilov</string>
+    <string name="shared_string_only_missing">Samo manjkajoče</string>
+    <string name="download_tiles">Prenesi ploščice</string>
+    <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se upošteva in vpliva na povprečno hitrost.</string>
+    <string name="attach_roads_descr">Ali želiš približati svojo sled z veljavno potjo prilepljeno na zemljevid brez povezave\? V tem primeru boš imel popravljeno nadmorsko višino, informacije o cestah in ovinkih, ki jih lahko pozneje uporabiš pri navigaciji.</string>
 </resources>
