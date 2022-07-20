@@ -185,6 +185,18 @@ public class NativeUtilities {
 		return newTarget31;
 	}
 
+	@Nullable
+	public static PointI normalizeTarget31(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox) {
+		if (tileBox.isCenterShifted()) {
+			PointI windowSize = mapRenderer.getState().getWindowSize();
+			int sx = windowSize.getX() / 2;
+			int sy = windowSize.getY() / 2;
+			return NativeUtilities.get31FromPixel(mapRenderer, tileBox, sx, sy, true);
+		} else {
+			return mapRenderer.getState().getTarget31();
+		}
+	}
+
 	public static boolean containsLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
 	                                     @NonNull LatLon latLon) {
 		return containsLatLon(mapRenderer, tileBox, latLon.getLatitude(), latLon.getLongitude());
