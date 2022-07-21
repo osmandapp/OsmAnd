@@ -1,6 +1,5 @@
 package net.osmand.router.network;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +16,6 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
@@ -26,16 +24,16 @@ import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.MapUtils;
 
 public class NetworkRouteContext {
-	
+
 	private static final int ZOOM_TO_LOAD_TILES = 15;
-	
+
+	private final TLongObjectMap<NetworkRoutePoint> routePoints = new TLongObjectHashMap<>();
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;
 	private final Map<BinaryMapIndexReader, List<RouteSubregion>> readers = new LinkedHashMap<>();
 	private final Map<RouteSubregion, List<RouteDataObject>> loadedSubregions = new HashMap<>();
 	private final boolean routing;
 	private NetworkRouteContextStats stats;
-
 
 	public NetworkRouteContext(BinaryMapIndexReader[] readers, NetworkRouteSelectorFilter filter, boolean routing) {
 		this.filter = filter;
@@ -45,7 +43,7 @@ public class NetworkRouteContext {
 			if (!routing) {
 				this.readers.put(r, null);
 			} else {
-				List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
+				List<RouteSubregion> subregions = new ArrayList<>();
 				for (RouteRegion rInd : r.getRoutingIndexes()) {
 					List<RouteSubregion> subregs = rInd.getSubregions();
 					// create copy to avoid leaks to original structure
@@ -59,7 +57,7 @@ public class NetworkRouteContext {
 	}
 
 	public static long convertPointToLong(int x31, int y31) {
-		return (((long) x31) << 32l) + y31;
+		return (((long) x31) << 32) + y31;
 	}
 
 	public static int getXFromLong(long l) {
@@ -103,7 +101,7 @@ public class NetworkRouteContext {
 		}
 		return map;
 	}
-	
+
 	public List<NetworkRouteSegment> loadNearRouteSegment(int x31, int y31, double radius) throws IOException {
 		List<NetworkRoutePoint> nearPoints = new ArrayList<>();
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
@@ -131,7 +129,7 @@ public class NetworkRouteContext {
 		}
 		return objs;
 	}
-	
+
 	public List<NetworkRouteSegment> loadRouteSegment(int x31, int y31) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
 		NetworkRoutePoint point = osmcRoutesTile.getRouteSegment(x31, y31);
@@ -150,11 +148,10 @@ public class NetworkRouteContext {
 		}
 		return tile;
 	}
-	
+
 	public boolean isRouting() {
 		return routing;
 	}
-	
 
 	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
 		stats.loadedTiles++;
@@ -182,8 +179,8 @@ public class NetworkRouteContext {
 			return loadMapDataTile(req);
 		}
 	}
-	
-	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req ) throws IOException {
+
+	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
 		for (Map.Entry<BinaryMapIndexReader, List<RouteSubregion>> reader : readers.entrySet()) {
 			req.clearSearchResults();
@@ -211,6 +208,7 @@ public class NetworkRouteContext {
 				}
 			}
 		}
+		osmcRoutesTile.routes.compact();
 		return osmcRoutesTile;
 	}
 
@@ -238,14 +236,14 @@ public class NetworkRouteContext {
 		int xShift = (int) (tileId >> (ZOOM_TO_LOAD_TILES + 1));
 		return (xShift + shift) << zmShift; 
 	}
-	
+
 	public static int getY31FromTileId(long tileId, int shift) {
 		int zmShift = (31 - ZOOM_TO_LOAD_TILES);
 		long xShift = tileId >> (ZOOM_TO_LOAD_TILES + 1);
 		int yShift = (int) (tileId - (xShift << (ZOOM_TO_LOAD_TILES + 1)));
 		return (yShift + shift) << zmShift; 
 	}
-	
+
 	public static long getTileId(int x31, int y31) {
 		int zmShift = (31 - ZOOM_TO_LOAD_TILES);
 		return (((long)x31 >> zmShift) << (ZOOM_TO_LOAD_TILES + 1)) + ((long) (y31 >> zmShift));
@@ -254,24 +252,25 @@ public class NetworkRouteContext {
 	public NetworkRouteContextStats getStats() {
 		return stats;
 	}
-	
+
 	public void clearData() {
 		indexedTiles.clear();
 		loadedSubregions.clear();
+		routePoints.clear();
 		stats = new NetworkRouteContextStats();
 	}
-	
+
 	public void clearStats() {
 		stats = new NetworkRouteContextStats();
 	}
-	
+
 	public static class NetworkRoutePoint {
 		public final int x31;
 		public final int y31;
 		public final long id;
 		public final List<NetworkRouteSegment> objects = new ArrayList<>();
 		public double localVar;
-		
+
 		public NetworkRoutePoint(int x31, int y31, long id) {
 			this.x31 = x31;
 			this.y31 = y31;
@@ -282,7 +281,7 @@ public class NetworkRouteContext {
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
 					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()
-							&& obj.routeKey == obj2.routeKey) {
+							&& obj.routeKey.equals(obj2.routeKey)) {
 						return;
 					}
 				}
@@ -297,6 +296,7 @@ public class NetworkRouteContext {
 		public int loadedObjects;
 		public int loadedRoutes;
 		public long loadTimeNs;
+		public int loadedPoints;
 	}
 
 	public static class NetworkRouteSegment {
@@ -403,8 +403,8 @@ public class NetworkRouteContext {
 		}
 	}
 
-	private static class NetworkRoutesTile {
-		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
+	private class NetworkRoutesTile {
+		private final TLongObjectHashMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
 
 		public void add(BinaryMapDataObject obj, RouteKey rk) {
 			int len = obj.getPointsLength();
@@ -434,7 +434,12 @@ public class NetworkRouteContext {
 				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
-					point = new NetworkRoutePoint(x31, y31, id);
+					point = routePoints.get(id);
+					if (point == null) {
+						stats.loadedPoints++;
+						point = new NetworkRoutePoint(x31, y31, id);
+						routePoints.put(id, point);
+					}
 					routes.put(id, point);
 				}
 				if (i > 0) {
