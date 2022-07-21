@@ -24,8 +24,8 @@ public class PointDescription {
 	private String typeName;
 	private String iconName;
 
-	private double lat = 0;
-	private double lon = 0;
+	private double lat;
+	private double lon;
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
@@ -199,7 +199,7 @@ public class PointDescription {
 		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
 
 		int zoom = ctx.getMapView().getZoom();
-		final String httpUrl = "https://osmand.net/go?lat=" + (lat) + "&lon=" + (lon) + "&z=" + zoom;
+		String httpUrl = "https://osmand.net/go?lat=" + (lat) + "&lon=" + (lon) + "&z=" + zoom;
 		results.put(LOCATION_URL, httpUrl);
 
 		int f = settings.COORDINATES_FORMAT.get();
@@ -326,14 +326,11 @@ public class PointDescription {
 		if (obj == null || getClass() != obj.getClass())
 			return false;
 		PointDescription other = (PointDescription) obj;
-		if (Algorithms.objectEquals(other.name, name) 
+		return Algorithms.objectEquals(other.name, name)
 				&& Algorithms.objectEquals(other.type, type)
 				&& Algorithms.objectEquals(other.lat, lat)
 				&& Algorithms.objectEquals(other.lon, lon)
-				&& Algorithms.objectEquals(other.typeName, typeName)) {
-			return true;
-		}
-		return false;
+				&& Algorithms.objectEquals(other.typeName, typeName);
 	}
 	
 	

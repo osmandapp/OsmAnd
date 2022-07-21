@@ -24,14 +24,14 @@ public class TargetPointMenuController extends MenuController {
 		this.targetPoint = targetPoint;
 		builder.setShowNearestWiki(true);
 		OsmandApplication app = mapActivity.getMyApplication();
-		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		final boolean nav = routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode();
+		boolean nav = routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				final MapActivity activity = getMapActivity();
+				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					TargetPoint tp = getTargetPoint();
 					OsmandApplication application = activity.getMyApplication();

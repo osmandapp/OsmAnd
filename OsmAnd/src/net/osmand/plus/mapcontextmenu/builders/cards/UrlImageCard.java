@@ -31,7 +31,7 @@ public class UrlImageCard extends ImageCard {
 	}
 
 	private String getSuitableUrl() {
-		final String url;
+		String url;
 		if (Algorithms.isEmpty(getImageHiresUrl())) {
 			url = getUrl();
 		} else {

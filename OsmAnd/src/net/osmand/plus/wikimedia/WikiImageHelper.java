@@ -144,7 +144,7 @@ public class WikiImageHelper {
 	private static class Claims {
 		@SerializedName("P18")
 		@Expose
-		private List<P18> p18 = null;
+		private final List<P18> p18 = null;
 	}
 
 	private static class P18 {

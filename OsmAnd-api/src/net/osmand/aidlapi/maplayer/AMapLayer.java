@@ -16,10 +16,10 @@ public class AMapLayer extends AidlParams {
 	private String id;
 	private String name;
 	private float zOrder = 5.5f;
-	private Map<String, AMapPoint> points = new ConcurrentHashMap<>();
+	private final Map<String, AMapPoint> points = new ConcurrentHashMap<>();
 
-	private boolean imagePoints = false;
-	private int circlePointMinZoom = 0;
+	private boolean imagePoints;
+	private int circlePointMinZoom;
 	private int circlePointMaxZoom = 6;
 	private int smallPointMinZoom = 7;
 	private int smallPointMaxZoom = 13;

@@ -169,7 +169,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		radioGroup.setSelectedItem(isNightMapTheme ? night : day);
 	}
 
-	private TextRadioItem createMapThemeButton(final boolean isNight) {
+	private TextRadioItem createMapThemeButton(boolean isNight) {
 		TextRadioItem item = new TextRadioItem(app.getString(!isNight ? DAY_TITLE_ID : NIGHT_TITLE_ID));
 		item.setOnClickListener((radioItem, view) -> {
 			isNightMapTheme = isNight;
@@ -360,7 +360,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
 			String coloringTypeName = coloringTypes.get(position);
 			ColoringType coloringType = ColoringType.getRouteColoringTypeByName(coloringTypeName);
 

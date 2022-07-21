@@ -32,8 +32,8 @@ public class SelectedGpxMenuController extends MenuController {
 
 	private SelectedGpxPoint selectedGpxPoint;
 
-	public SelectedGpxMenuController(@NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription,
-									 @NonNull final SelectedGpxPoint selectedGpxPoint) {
+	public SelectedGpxMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription,
+	                                 @NonNull SelectedGpxPoint selectedGpxPoint) {
 		super(new SelectedGpxMenuBuilder(mapActivity, selectedGpxPoint), pointDescription, mapActivity);
 		this.selectedGpxPoint = selectedGpxPoint;
 		builder.setShowOnlinePhotos(false);
@@ -61,13 +61,13 @@ public class SelectedGpxMenuController extends MenuController {
 
 	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxDisplayItem> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
-		private WptPt selectedPoint;
-		private SelectedGpxFile selectedGpxFile;
+		private final WptPt selectedPoint;
+		private final SelectedGpxFile selectedGpxFile;
 
 		private ProgressDialog progressDialog;
-		private WeakReference<MapActivity> activityRef;
+		private final WeakReference<MapActivity> activityRef;
 
 		public OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
 			app = mapActivity.getMyApplication();

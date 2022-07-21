@@ -133,7 +133,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 			args.putString(CONTENT_KEY, description);
 			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
-			fragment.show(fm, EditDescriptionFragment.TAG);
+			fragment.show(fm, TAG);
 		}
 	}
 

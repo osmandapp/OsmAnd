@@ -36,7 +36,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 
-	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull WptPt wpt) {
+	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity);
 		this.wpt = wpt;
 		setShowNearestWiki(true);
@@ -54,7 +54,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildDescription(final View view) {
+	protected void buildDescription(View view) {
 		if (Algorithms.isEmpty(wpt.desc)) {
 			return;
 		}
@@ -109,7 +109,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		buildPlainMenuItems(view);
 	}
 
-	protected void prepareDescription(final WptPt wpt, View view) {
+	protected void prepareDescription(WptPt wpt, View view) {
 
 	}
 
@@ -150,17 +150,17 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		return visit;
 	}
 
-	private CollapsableView getCollapsableWaypointsView(final Context context, boolean collapsed, @NonNull final GPXUtilities.GPXFile gpxFile, WptPt selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+	private CollapsableView getCollapsableWaypointsView(Context context, boolean collapsed, @NonNull GPXUtilities.GPXFile gpxFile, WptPt selectedPoint) {
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPoints();
 		String selectedCategory = selectedPoint != null && selectedPoint.category != null ? selectedPoint.category : "";
 		int showCount = 0;
-		for (final WptPt point : points) {
+		for (WptPt point : points) {
 			String currentCategory = point != null ? point.category : null;
 			if (selectedCategory.equals(currentCategory)) {
 				showCount++;
-				boolean selected = selectedPoint != null && selectedPoint.equals(point);
+				boolean selected = point.equals(selectedPoint);
 				TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 				button.setText(point.name);
 

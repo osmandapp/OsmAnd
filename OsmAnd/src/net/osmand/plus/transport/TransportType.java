@@ -23,7 +23,8 @@ public enum TransportType {
 	}
 
 	private final String attrName;
-	private final @DrawableRes int iconId;
+	@DrawableRes
+	private final int iconId;
 
 	public String getAttrName() {
 		return attrName;

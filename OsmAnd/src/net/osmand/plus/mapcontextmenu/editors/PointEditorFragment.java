@@ -150,7 +150,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			AndroidUiHelper.updateVisibility(deleteAddressIcon, false);
 		});
 
-		final View addressRow = view.findViewById(R.id.address_row);
+		View addressRow = view.findViewById(R.id.address_row);
 		addAddressBtn.setOnClickListener(v -> {
 			if (addressCaption.getVisibility() != View.VISIBLE) {
 				addressCaption.setVisibility(View.VISIBLE);
@@ -467,7 +467,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final GroupsViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull GroupsViewHolder holder, int position) {
 			if (position == items.size()) {
 				holder.groupButton.setOnClickListener(view -> showAddNewCategoryFragment());
 			} else {
@@ -478,7 +478,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(previousSelectedPosition);
 				});
-				final PointsGroup group = items.get(position);
+				PointsGroup group = items.get(position);
 				holder.groupName.setText(group.name);
 				holder.pointsCounter.setText(String.valueOf(group.points.size()));
 				int strokeColor;

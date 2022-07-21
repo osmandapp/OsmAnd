@@ -18,6 +18,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.aidl.AidlMapLayerWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -100,12 +101,12 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	//OpenGL
 	private AidlTileProvider aidlMapLayerProvider;
-	private int pointImagesSize = 0;
-	private boolean nightMode = false;
+	private int pointImagesSize;
+	private boolean nightMode;
 	private int radius;
 	@Nullable
-	private String selectedPointId = null;
-	private int aidlPointsCount = 0;
+	private String selectedPointId;
+	private int aidlPointsCount;
 
 	public AidlMapLayer(@NonNull Context context, @NonNull AidlMapLayerWrapper aidlLayer,
 						@NonNull String packName) {
@@ -126,7 +127,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		boolean night = getApplication().getDaynightHelper().isNightMode();
 
 		pointInnerCircle = new Paint();
-		pointInnerCircle.setColor(res.getColor(R.color.poi_background));
+		pointInnerCircle.setColor(getColor(R.color.poi_background));
 		pointInnerCircle.setStyle(Paint.Style.FILL);
 		pointInnerCircle.setAntiAlias(true);
 
@@ -435,7 +436,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private int getRadiusPoi(RotatedTileBox tb) {
 		int r;
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		if (zoom < START_ZOOM) {
 			r = 0;
 		} else if (zoom <= 11) {

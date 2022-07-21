@@ -48,7 +48,7 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 			}
 		});
 
-		ViewGroup cardsContainer = ((ViewGroup) view.findViewById(R.id.cards_container));
+		ViewGroup cardsContainer = view.findViewById(R.id.cards_container);
 		cardsContainer.removeAllViews();
 
 		TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxFile);

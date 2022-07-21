@@ -45,13 +45,13 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		Bundle args = getArguments();
 		if (app == null || args == null) {
 			return;
 		}
 		int cancelTitleRes = args.getInt(CANCEL_TITLE_RES_KEY);
-		final String prefId = args.getString(PREFERENCE_ID);
+		String prefId = args.getString(PREFERENCE_ID);
 		newValue = args.getSerializable(NEW_VALUE_KEY);
 		if (newValue == null || prefId == null) {
 			return;
@@ -179,7 +179,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 											 @Nullable ApplicationMode appMode,
 											 @Nullable OnChangeSettingListener listener) {
 		try {
-			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 				args.putSerializable(NEW_VALUE_KEY, newValue);
@@ -191,7 +191,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				fragment.setAppMode(appMode);
 				fragment.setTargetFragment(target, 0);
 				fragment.setListener(listener);
-				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

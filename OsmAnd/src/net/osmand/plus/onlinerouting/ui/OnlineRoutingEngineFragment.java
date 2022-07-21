@@ -91,7 +91,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private AppCompatImageView buttonsShadow;
 	private OnGlobalLayoutListener onGlobalLayout;
 	private OnScrollChangedListener onScroll;
-	private boolean isKeyboardShown = false;
+	private boolean isKeyboardShown;
 
 	private OnlineRoutingEngine engine;
 	private OnlineRoutingEngine initEngine;
@@ -473,8 +473,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void testEngineWork() {
-		final OnlineRoutingEngine requestedEngine = (OnlineRoutingEngine) engine.clone();
-		final ExampleLocation location = selectedLocation;
+		OnlineRoutingEngine requestedEngine = (OnlineRoutingEngine) engine.clone();
+		ExampleLocation location = selectedLocation;
 		new Thread(() -> {
 			StringBuilder errorMessage = new StringBuilder();
 			boolean resultOk = false;
@@ -487,15 +487,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 				String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
 				resultOk = requestedEngine.isResultOk(errorMessage, response);
 			} catch (IOException | JSONException e) {
-				errorMessage.append(e.toString());
+				errorMessage.append(e);
 			}
 			showTestResults(resultOk, errorMessage.toString(), location);
 		}).start();
 	}
 
-	private void showTestResults(final boolean resultOk,
-								 final @NonNull String message,
-								 final @NonNull ExampleLocation location) {
+	private void showTestResults(boolean resultOk,
+	                             @NonNull String message,
+	                             @NonNull ExampleLocation location) {
 		app.runInUIThread(() -> {
 			testResultsContainer.setVisibility(View.VISIBLE);
 			ImageView ivImage = testResultsContainer.findViewById(R.id.icon);
@@ -702,7 +702,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	@SuppressLint("ClickableViewAccessibility")
 	private void hideKeyboardOnScroll() {
 		scrollView.setOnTouchListener(new View.OnTouchListener() {
-			int scrollViewY = 0;
+			int scrollViewY;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {

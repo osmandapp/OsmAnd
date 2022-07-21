@@ -19,7 +19,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-final public class TransportLinesMenu {
+public final class TransportLinesMenu {
 
 	public static final String RENDERING_CATEGORY_TRANSPORT = "transport";
 

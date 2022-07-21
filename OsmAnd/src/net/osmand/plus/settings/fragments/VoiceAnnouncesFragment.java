@@ -114,8 +114,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 
 	private void setupSpeedLimitExceedPref() {
 		//array size must be equal!
-		Float[] valuesKmh = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] valuesMph = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+		Float[] valuesKmh = {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] valuesMph = {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
 		String[] names;
 		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
 			names = new String[valuesKmh.length];
@@ -135,7 +135,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	}
 
 	private void setupKeepInformingPref() {
-		Integer[] keepInformingValues = new Integer[]{0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
+		Integer[] keepInformingValues = {0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
 		String[] keepInformingNames = new String[keepInformingValues.length];
 		keepInformingNames[0] = getString(R.string.keep_informing_never);
 		for (int i = 1; i < keepInformingValues.length; i++) {
@@ -148,8 +148,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	}
 
 	private void setupArrivalAnnouncementPref() {
-		Float[] arrivalValues = new Float[]{1.5f, 1f, 0.5f, 0.25f};
-		String[] arrivalNames = new String[]{
+		Float[] arrivalValues = {1.5f, 1f, 0.5f, 0.25f};
+		String[] arrivalNames = {
 				getString(R.string.arrival_distance_factor_early),
 				getString(R.string.arrival_distance_factor_normally),
 				getString(R.string.arrival_distance_factor_late),
@@ -162,14 +162,14 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	}
 
 	private void setupAudioStreamGuidancePref() {
-		String[] streamTypes = new String[]{
+		String[] streamTypes = {
 				getString(R.string.voice_stream_music),
 				getString(R.string.voice_stream_notification),
 				getString(R.string.voice_stream_voice_call)
 		};
 		//getString(R.string.shared_string_default)};
 
-		Integer[] streamIntTypes = new Integer[]{
+		Integer[] streamIntTypes = {
 				AudioManager.STREAM_MUSIC,
 				AudioManager.STREAM_NOTIFICATION,
 				AudioManager.STREAM_VOICE_CALL

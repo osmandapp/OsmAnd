@@ -2,9 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
@@ -16,8 +13,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.io.File;
@@ -36,16 +35,24 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	public static final String UPDATE_CATEGORIES_KEY = "update_categories";
 	public static final String ACTIVE_CATEGORIES_KEY = "active_categories";
 
+	private OsmandApplication app;
+
 	private GPXFile gpxFile;
 
 	private final Set<String> selectedCategories = new HashSet<>();
 	private final List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
 
-	private boolean isUpdateMode = false;
+	private boolean isUpdateMode;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = requiredMyApplication();
+		getGpxFile();
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		gpxFile = getGpxFile();
 		if (gpxFile == null) {
 			return;
 		}
@@ -59,7 +66,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		Map<String, PointsGroup> pointsGroups = gpxFile.getPointsGroups();
 
-		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!isUpdateMode || categories != null && categories.size() == pointsGroups.size())
 				.setCompoundButtonColorId(activeColorResId)
@@ -81,7 +88,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		for (Entry<String, PointsGroup> entry : pointsGroups.entrySet()) {
 			String category = entry.getKey();
-			final BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] categoryItem = new BottomSheetItemWithCompoundButton[1];
 			categoryItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(!isUpdateMode || (categories != null && categories.contains(category)))
 					.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -122,7 +129,6 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	}
 
 	private void updateAddOrEnableGroupWptCategories() {
-		OsmandApplication app = requiredMyApplication();
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 
@@ -156,17 +162,21 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 				.replace("_", " ");
 	}
 
-	@Nullable
-	private GPXFile getGpxFile() {
+	private void getGpxFile() {
 		String filePath = getArguments().getString(GPX_FILE_PATH_KEY);
 		if (filePath != null) {
-			OsmandApplication app = requiredMyApplication();
 			SelectedGpxFile selectedGpx = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 			if (selectedGpx != null && selectedGpx.getGpxFile() != null) {
-				return selectedGpx.getGpxFile();
+				gpxFile = selectedGpx.getGpxFile();
+			} else {
+				GpxFileLoaderTask.loadGpxFile(new File(filePath), getActivity(), result -> {
+					gpxFile = result;
+					if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
+						updateMenuItems();
+					}
+					return true;
+				});
 			}
-			return GPXUtilities.loadGPXFile(new File(filePath));
 		}
-		return null;
 	}
 }

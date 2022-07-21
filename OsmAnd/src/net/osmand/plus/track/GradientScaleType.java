@@ -60,7 +60,7 @@ public enum GradientScaleType {
 
 	@Nullable
 	public static GradientScaleType getGradientTypeByName(@NonNull String name) {
-		for (GradientScaleType scaleType : GradientScaleType.values()) {
+		for (GradientScaleType scaleType : values()) {
 			if (scaleType.name().equalsIgnoreCase(name)) {
 				return scaleType;
 			}

@@ -26,7 +26,7 @@ public class QuickAction {
 
         void onActionSelected(QuickAction action);
     }
-    private static int SEQ = 0;
+    private static int SEQ;
 
     protected long id;
     private String name;
@@ -78,7 +78,7 @@ public class QuickAction {
 	}
 
     public boolean isActionEditable() {
-        return actionType == null ? false : actionType.isActionEditable();
+        return actionType != null && actionType.isActionEditable();
     }
 
     public boolean isActionEnable(OsmandApplication app) {
@@ -178,9 +178,7 @@ public class QuickAction {
             QuickAction action = (QuickAction) o;
 
             if (getType() != action.getType()) return false;
-            if (id != action.id) return false;
-
-            return true;
+	        return id == action.id;
 
         } else return false;
     }

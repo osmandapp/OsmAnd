@@ -97,11 +97,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private int minZoom = MIN_ZOOM;
 	private int maxZoom = MAX_ZOOM;
 	private int expireTimeMinutes = EXPIRE_TIME_NEVER;
-	private boolean elliptic = false;
-	private boolean sqliteDB = false;
+	private boolean elliptic;
+	private boolean sqliteDB;
 	private boolean nightMode;
-	private boolean fromTemplate = false;
-	private boolean wasChanged = false;
+	private boolean fromTemplate;
+	private boolean wasChanged;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 									@Nullable Fragment targetFragment,
@@ -213,9 +213,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				dismiss();
 			}
 		});
-		final ScrollView scrollView = root.findViewById(R.id.scroll_view);
+		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-			int pastY = 0;
+			int pastY;
 
 			@Override
 			public void onScrollChanged() {
@@ -457,7 +457,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	private OnClickListener getClickListener(final ConfigurationItem item) {
+	private OnClickListener getClickListener(ConfigurationItem item) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -530,7 +530,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	class MapSourceTextWatcher implements TextWatcher {
-		private TextInputLayout relatedInputLayout;
+		private final TextInputLayout relatedInputLayout;
 
 		public MapSourceTextWatcher(TextInputLayout textInputLayout) {
 			this.relatedInputLayout = textInputLayout;
@@ -564,7 +564,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	public static class DeleteTilesTask extends AsyncTask<File, Void, Void> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		public DeleteTilesTask(OsmandApplication app) {
 			this.app = app;

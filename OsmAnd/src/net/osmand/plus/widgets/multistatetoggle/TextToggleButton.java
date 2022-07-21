@@ -19,8 +19,8 @@ import java.util.Collection;
 public class TextToggleButton extends MultiStateToggleButton<TextRadioItem> {
 
 	private final boolean forceHeight;
-	private int maxItemHeight = 0;
-	private int resizedItemsCount = 0;
+	private int maxItemHeight;
+	private int resizedItemsCount;
 
 	public TextToggleButton(@NonNull OsmandApplication app,
 	                        @NonNull LinearLayout container,
@@ -83,7 +83,7 @@ public class TextToggleButton extends MultiStateToggleButton<TextRadioItem> {
 	protected void updateItemView(@NonNull ViewGroup view,
 	                              @NonNull TextRadioItem item,
 	                              @ColorInt int color) {
-		TextView tvTitle = (TextView) view.findViewById(R.id.title);
+		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setTextColor(color);
 	}
 

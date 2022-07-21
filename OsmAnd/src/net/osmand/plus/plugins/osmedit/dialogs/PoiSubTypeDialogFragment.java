@@ -25,7 +25,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final PoiCategory a = poiTypes.getPoiCategoryByName((String) getArguments().getSerializable(KEY_POI_CATEGORY));
+		PoiCategory a = poiTypes.getPoiCategoryByName((String) getArguments().getSerializable(KEY_POI_CATEGORY));
 		Set<String> strings = new TreeSet<>();
 		if(a == poiTypes.getOtherPoiCategory()) {
 			for (PoiCategory category : poiTypes.getCategories(false)) {
@@ -36,7 +36,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		} else {
 			addCategory(a, strings);
 		}
-		final String[] subCats = strings.toArray(new String[0]);
+		String[] subCats = strings.toArray(new String[0]);
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -47,7 +47,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	private void addCategory(final PoiCategory a, Set<String> strings) {
+	private void addCategory(PoiCategory a, Set<String> strings) {
 		for (PoiType s : a.getPoiTypes()) {
 			if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
 				strings.add(s.getTranslation());

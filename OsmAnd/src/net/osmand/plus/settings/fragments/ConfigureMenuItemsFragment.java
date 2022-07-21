@@ -86,8 +86,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private OsmandApplication app;
 	private ScreenType screenType;
 	private boolean nightMode;
-	private boolean wasReset = false;
-	private boolean isChanged = false;
+	private boolean wasReset;
+	private boolean isChanged;
 	private FragmentActivity activity;
 	private RecyclerView recyclerView;
 
@@ -215,7 +215,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		Context ctx = requireContext();
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AppBarLayout appbar = root.findViewById(R.id.appbar);
@@ -223,12 +223,10 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		ImageButton toolbarButton = toolbar.findViewById(R.id.close_button);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(ctx, nightMode));
-		toolbarTitle.setTextColor(nightMode
-				? getResources().getColor(R.color.text_color_primary_dark)
-				: getResources().getColor(R.color.list_background_color_dark));
+		toolbarTitle.setTextColor(getColor(nightMode ? R.color.text_color_primary_dark : R.color.list_background_color_dark));
 		toolbarButton.setImageDrawable(getPaintedContentIcon(
 				AndroidUtils.getNavigationIconResId(app),
-				getResources().getColor(R.color.text_color_secondary_light)));
+				getColor(R.color.text_color_secondary_light)));
 		toolbarTitle.setText(screenType.titleRes);
 		toolbarButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -265,7 +263,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					}
 				}
 				FragmentManager fm = getFragmentManager();
-				final ContextMenuItemsSettings prefToSave;
+				ContextMenuItemsSettings prefToSave;
 				if (screenType == ScreenType.DRAWER) {
 					prefToSave = new DrawerMenuItemsSettings(hiddenMenuItems, ids);
 				} else if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {

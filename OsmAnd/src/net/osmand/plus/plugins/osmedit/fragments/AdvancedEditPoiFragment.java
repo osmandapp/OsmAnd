@@ -241,7 +241,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			tagEditText.setThreshold(1);
 			showKeyboard(tagEditText);
 
-			String[] previousTag = new String[] {tag};
+			String[] previousTag = {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
 				if (!hasFocus) {
 					tagFB.hideClearButton();

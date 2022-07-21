@@ -89,19 +89,19 @@ import java.util.TreeSet;
  */
 public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	// Cached ViewConfiguration and system-wide constant values
-	private int mSlop;
-	private int mMinFlingVelocity;
-	private int mMaxFlingVelocity;
-	private long mAnimationTime;
+	private final int mSlop;
+	private final int mMinFlingVelocity;
+	private final int mMaxFlingVelocity;
+	private final long mAnimationTime;
 
 	// Fixed properties
-	private ListView mListView;
-	private DismissCallbacks mCallbacks;
+	private final ListView mListView;
+	private final DismissCallbacks mCallbacks;
 	private int mViewWidth = 1; // 1 and not 0 to prevent dividing by zero
 
 	// Transient properties
 	//private List<PendingDismissData> mPendingDismisses = new ArrayList<PendingDismissData>();
-	private int mDismissAnimationRefCount = 0;
+	private int mDismissAnimationRefCount;
 	private float mDownX;
 	private float mDownY;
 	private boolean mSwiping;
@@ -111,25 +111,25 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private boolean mSwipePaused;
 	private boolean mSwipeCanceled;
 
-	private PopupWindow mUndoPopup;
+	private final PopupWindow mUndoPopup;
 	private int mValidDelayedMsgId;
-	private Handler mHideUndoHandler = new HideUndoPopupHandler();
-	private Button mUndoButton;
+	private final Handler mHideUndoHandler = new HideUndoPopupHandler();
+	private final Button mUndoButton;
 
 	private UndoStyle mUndoStyle = UndoStyle.SINGLE_POPUP;
-	private boolean mTouchBeforeAutoHide = false;
+	private boolean mTouchBeforeAutoHide;
 	private SwipeDirection mSwipeDirection = SwipeDirection.BOTH;
 	private int mUndoHideDelay = 5000;
 	private int mSwipingLayout;
 
 	private final Object[] mAnimationLock = new Object[0];
-	private List<Undoable> mUndoActions = new ArrayList<>();
-	private SortedSet<PendingDismissData> mPendingDismisses = new TreeSet<>();
-	private List<View> mAnimatedViews = new LinkedList<>();
+	private final List<Undoable> mUndoActions = new ArrayList<>();
+	private final SortedSet<PendingDismissData> mPendingDismisses = new TreeSet<>();
+	private final List<View> mAnimatedViews = new LinkedList<>();
 
 	private View mSwipeDownChild;
-	private TextView mUndoPopupTextView;
-	private float mScreenDensity;
+	private final TextView mUndoPopupTextView;
+	private final float mScreenDensity;
 
 	/**
 	 * Defines the direction in which list items can be swiped out to delete them.
@@ -363,7 +363,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 		// Initialize undo popup
 		LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View undoView = inflater.inflate(R.layout.undo_popup, null);
-		mUndoButton = (Button) undoView.findViewById(R.id.undo);
+		mUndoButton = undoView.findViewById(R.id.undo);
 		mUndoButton.setOnClickListener(new UndoClickListener());
 		mUndoButton.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -374,7 +374,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 				return false;
 			}
 		});
-		mUndoPopupTextView = (TextView) undoView.findViewById(R.id.text);
+		mUndoPopupTextView = undoView.findViewById(R.id.text);
 
 		mUndoPopup = new PopupWindow(undoView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
 		mUndoPopup.setAnimationStyle(R.style.Animations_PopUpMenu_Fade);
@@ -504,7 +504,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	 * @param position    The item position of the item.
 	 * @param toRightSide Whether it should slide out to the right side.
 	 */
-	private void slideOutView(final View view, final View childView, final int position, boolean toRightSide) {
+	private void slideOutView(View view, View childView, int position, boolean toRightSide) {
 
 		// Only start new animation, if this view isn't already animated (too fast swiping bug)
 		synchronized (mAnimationLock) {
@@ -745,10 +745,10 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	 *                        the part, that the user swiped.
 	 * @param dismissPosition The position of the view inside the list.
 	 */
-	private void performDismiss(final View dismissView, final View listItemView, final int dismissPosition) {
+	private void performDismiss(View dismissView, View listItemView, int dismissPosition) {
 
-		final ViewGroup.LayoutParams lp = listItemView.getLayoutParams();
-		final int originalLayoutHeight = lp.height;
+		ViewGroup.LayoutParams lp = listItemView.getLayoutParams();
+		int originalLayoutHeight = lp.height;
 
 		if (android.os.Build.VERSION.SDK_INT < 12) {
 			mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView, listItemView));

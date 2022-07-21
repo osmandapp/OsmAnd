@@ -85,7 +85,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
 		}
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		Toolbar toolbar = findViewById(R.id.toolbar);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -105,7 +105,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 		findViewById(R.id.search_button).setOnClickListener(v -> WikivoyageSearchDialogFragment.showInstance(getSupportFragmentManager()));
 
-		viewPager = (LockableViewPager) findViewById(R.id.view_pager);
+		viewPager = findViewById(R.id.view_pager);
 		viewPager.setOffscreenPageLimit(2);
 		viewPager.setSwipeLocked(true);
 		setViewPagerAdapter(viewPager, new ArrayList<>());
@@ -115,11 +115,11 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			pagerAdapter.addTab(getTabIndicator(R.string.saved_articles, SavedArticlesTabFragment.class));
 		}
 
-		final ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(app, nightMode);
-		final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+		ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(app, nightMode);
+		BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
-		bottomNav.setOnNavigationItemSelectedListener(item -> {
+		bottomNav.setOnItemSelectedListener(item -> {
 			int position = -1;
 			int i = item.getItemId();
 			if (i == R.id.action_explore) {
@@ -154,7 +154,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			} else {
 				int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
 				if (currentItem == SAVED_ARTICLES_POSITION) {
-					BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+					BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 					bottomNav.setSelectedItemId(R.id.action_saved_articles);
 				}
 				TravelArticleIdentifier articleId = intent.getParcelableExtra(ARTICLE_ID_KEY);
@@ -286,10 +286,10 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		return ContextCompat.getColor(app, colorId);
 	}
 
-	public void populateData(final boolean resetData) {
+	public void populateData(boolean resetData) {
 		switchProgressBarVisibility(true);
 		if (app.isApplicationInitializing()) {
-			final WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
+			WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onStart(AppInitializer init) {

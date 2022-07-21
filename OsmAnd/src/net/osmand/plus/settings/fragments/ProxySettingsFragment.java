@@ -50,7 +50,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 				enableDisablePreferences(checked);
 			}
 		});
-		TextView title = (TextView) view.findViewById(R.id.switchButtonText);
+		TextView title = view.findViewById(R.id.switchButtonText);
 		title.setTextColor(ContextCompat.getColor(app, ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
@@ -69,10 +69,10 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 
 		View selectableView = view.findViewById(R.id.selectable_item);
 
-		SwitchCompat switchView = (SwitchCompat) selectableView.findViewById(R.id.switchWidget);
+		SwitchCompat switchView = selectableView.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
 
-		TextView title = (TextView) selectableView.findViewById(R.id.switchButtonText);
+		TextView title = selectableView.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
 
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
@@ -80,14 +80,14 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupProxyHostPref() {
-		EditTextPreferenceEx hostPref = (EditTextPreferenceEx) findPreference(settings.PROXY_HOST.getId());
+		EditTextPreferenceEx hostPref = findPreference(settings.PROXY_HOST.getId());
 		hostPref.setPersistent(false);
 		hostPref.setSummary(settings.PROXY_HOST.get());
 		hostPref.setDescription(R.string.proxy_host_descr);
 	}
 
 	private void setupProxyPortPref() {
-		EditTextPreferenceEx portPref = (EditTextPreferenceEx) findPreference(settings.PROXY_PORT.getId());
+		EditTextPreferenceEx portPref = findPreference(settings.PROXY_PORT.getId());
 		portPref.setPersistent(false);
 		portPref.setSummary(String.valueOf(settings.PROXY_PORT.get()));
 		portPref.setDescription(R.string.proxy_port_descr);

@@ -19,15 +19,15 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "WikipediaOptionsBottomSheetDialogFragment";
+	public static final String TAG = "WikipediaOptionsBottomSheetDialogFragment";
 
 	public static final int REQUEST_CODE = 0;
 	public static final int SHOW_PICTURES_CHANGED_REQUEST_CODE = 1;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
-		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
+		OsmandApplication app = getMyApplication();
+		CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
@@ -40,8 +40,8 @@ public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
-						for (final WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
+						PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
+						for (WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
 							MenuItem item = popup.getMenu().add(getString(showImages.name));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override

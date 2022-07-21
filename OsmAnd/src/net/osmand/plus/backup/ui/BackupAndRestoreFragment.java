@@ -71,7 +71,7 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment implements InAp
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.backup_and_restore, container, false);
 		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);

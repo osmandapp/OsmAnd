@@ -4786,4 +4786,11 @@
     <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y quédate en la izquierda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos específicamente diseñados para el ciclismo de montaña</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
+    <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
+    <string name="connect_with_straight_line">Conectar con línea recta</string>
+    <string name="without_profiles_changing">Sin cambios de perfiles</string>
+    <string name="shared_string_only_missing">Sólo falta</string>
+    <string name="download_tiles">Descargar teselas</string>
+    <string name="attach_roads_descr">¿Quieres aproximar la traza con una ruta válida adjuntada a los mapas sin conexión\? En ese caso, será corregida la altitud e información del camino y los giros que podrían usarse posteriormente en la navegación.</string>
+    <string name="attach_roads_warning">Se puede adjuntar al camino sólo una traza grabada</string>
 </resources>

@@ -218,7 +218,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
-	private boolean menuTypeChanged = false;
+	private boolean menuTypeChanged;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
 
@@ -654,7 +654,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		OnClickListener listener = view -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && getDisplayGroupsHolder().getTotalTrackGroupsNumber() > 0) {
-				DisplayGroupsBottomSheet.showInstance(mapActivity, TrackMenuFragment.this, true);
+				DisplayGroupsBottomSheet.showInstance(mapActivity, this, true);
 			}
 		};
 		displayGroupsButton.setOnClickListener(listener);
@@ -1108,7 +1108,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						segment = segments.get(0);
 					}
 				}
-				GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+				GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 				List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 				if (segment != null && !Algorithms.isEmpty(items)) {
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
@@ -1155,7 +1155,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
 				builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
 				builder.setMessage(R.string.are_you_sure);
-				final String gpxFilePath = gpxFile.path;
+				String gpxFilePath = gpxFile.path;
 				builder.setNegativeButton(R.string.shared_string_cancel, null)
 						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 							if (FileUtils.removeGpxFile(app, new File(gpxFilePath))) {
@@ -1231,7 +1231,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (isPortrait()) {
 			if (animated) {
-				final float toolbarAlpha = getToolbarAlpha(y);
+				float toolbarAlpha = getToolbarAlpha(y);
 				if (toolbarAlpha > 0) {
 					updateVisibility(toolbarContainer, true);
 				}
@@ -1292,7 +1292,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
 		bottomNav.setSelectedItemId(menuType.menuItemId);
-		bottomNav.setOnNavigationItemSelectedListener(item -> {
+		bottomNav.setOnItemSelectedListener(item -> {
 			for (TrackMenuTab type : TrackMenuTab.values()) {
 				if (type.menuItemId == item.getItemId()) {
 					TrackMenuTab prevMenuType = menuType;
@@ -1337,7 +1337,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				updateMainViewLayout(overviewInitialPosY);
 			}
 			animateMainView(overviewInitialPosY, false, getCurrentMenuState(), getCurrentMenuState());
-			updateMapControlsPos(TrackMenuFragment.this, overviewInitialPosY, true);
+			updateMapControlsPos(this, overviewInitialPosY, true);
 		});
 	}
 
@@ -1451,7 +1451,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private int getSegmentIndex(@NonNull GpxDisplayItem gpxItem) {
-		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+		GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 		int segmentIndex = items.indexOf(gpxItem);
 		if (segmentIndex == 0 && getGpx().hasGeneralTrack()) {
@@ -1461,7 +1461,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void showOptionsPopupMenu(View view, final TrkSegment segment, final boolean confirmDeletion, final GpxDisplayItem gpxItem) {
+	public void showOptionsPopupMenu(View view, TrkSegment segment, boolean confirmDeletion, GpxDisplayItem gpxItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			IconPopupMenu optionsPopupMenu = new IconPopupMenu(activity, view.findViewById(R.id.overflow_menu));
@@ -1555,7 +1555,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return false;
 	}
 
-	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
+	private void saveGpx(SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
 		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -1646,7 +1646,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording,
+			showInstance((MapActivity) context, path, currentRecording,
 					temporarySelected, returnScreenName, null, tabToOpen.name());
 		} else {
 			Bundle bundle = new Bundle();
@@ -1673,26 +1673,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile);
 		} else if (!Algorithms.isEmpty(path)) {
-			final ProgressDialog[] progress = new ProgressDialog[1];
-			if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-				String title = app.getString(R.string.loading_smth, "");
-				progress[0] = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
-			}
-			final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-			GpxFileLoaderTask gpxFileLoaderTask = new GpxFileLoaderTask(new File(path), gpx -> {
+			GpxFileLoaderTask.loadGpxFile(new File(path), mapActivity, gpx -> {
 				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap()
 						.syncGroup().selectedByUser().addToHistory().addToMarkers().saveSelection();
 				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 				if (sf != null) {
 					callback.processResult(sf);
 				}
-				MapActivity activity = mapActivityRef.get();
-				if (progress[0] != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress[0].dismiss();
-				}
 				return true;
 			});
-			gpxFileLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
@@ -1703,7 +1692,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                @Nullable String returnScreenName,
 	                                @Nullable String callingFragmentTag,
 	                                @Nullable String tabToOpenName) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, selectedGpxFile -> {
 			MapActivity activity = mapActivityRef.get();
 			if (activity != null && selectedGpxFile != null) {

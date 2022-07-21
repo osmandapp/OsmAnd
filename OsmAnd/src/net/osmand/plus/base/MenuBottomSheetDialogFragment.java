@@ -178,26 +178,22 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return ctx != null ? ContextCompat.getColor(ctx, colorId) : 0;
 	}
 
-	protected void setupHeightAndBackground(final View mainView) {
-		final Activity activity = getActivity();
+	protected void setupHeightAndBackground(View mainView) {
+		Activity activity = getActivity();
 		if (activity == null) {
 			return;
 		}
-		final int screenHeight = AndroidUtils.getScreenHeight(activity);
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-		final int contentHeight = getContentHeight(screenHeight - statusBarHeight);
+		int screenHeight = AndroidUtils.getScreenHeight(activity);
+		int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
+		int contentHeight = getContentHeight(screenHeight - statusBarHeight);
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
+				obs.removeOnGlobalLayoutListener(this);
 
-				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
+				View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
 					if (useScrollableItemsContainer() || useExpandableList()) {
 						contentView.getLayoutParams().height = contentHeight;
@@ -225,7 +221,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected void drawTopShadow(boolean showTopShadow) {
-		final Activity activity = getActivity();
+		Activity activity = getActivity();
 		View mainView = getView();
 		if (activity == null || mainView == null) {
 			return;
@@ -475,7 +471,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected LayerDrawable createBackgroundDrawable(@NonNull Context ctx, @DrawableRes int shadowDrawableResId) {
 		Drawable shadowDrawable = ContextCompat.getDrawable(ctx, shadowDrawableResId);
-		Drawable[] layers = new Drawable[] {shadowDrawable, getColoredBg(ctx)};
+		Drawable[] layers = {shadowDrawable, getColoredBg(ctx)};
 		return new LayerDrawable(layers);
 	}
 
@@ -502,7 +498,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	private void setupScrollShadow(View view) {
-		final View scrollView;
+		View scrollView;
 		if (useScrollableItemsContainer()) {
 			scrollView = view.findViewById(R.id.scroll_view);
 		} else {

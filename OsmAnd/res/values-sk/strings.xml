@@ -4755,4 +4755,21 @@
     <string name="compass_always_visible">Vždy zobrazený</string>
     <string name="next_turn_widget_desc">Nástroj zobrazuje informácie o nasledujúcom zabočení s obrázkom manévra a vzdialenosti k nemu.</string>
     <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobraziť trasy pre horské bicykle</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobraziť trasy určené pre horské bicykle</string>
+    <string name="auto_25_chars_route_tl_kl">Zahnite doľava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tl_kr">Zahnite doľava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tr_kl">Zahnite doprava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tr_kr">Zahnite doprava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tu_kl">Otočte sa naspäť a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tu_kr">Otočte sa naspäť a držte sa vpravo</string>
+    <string name="auto_25_chars_route_roundabout_kl">Choďte cez %1$d výjazd a držte sa vľavo</string>
+    <string name="auto_25_chars_route_roundabout_kr">Choďte cez %1$d výjazd a držte sa vpravo</string>
+    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s bude započítaná a ovplyvní priemernú rýchlosť.</string>
+    <string name="attach_roads_warning">K cestám môžete prichytiť len zaznamenanú stopu</string>
+    <string name="without_profiles_changing">Bez zmeny profilov</string>
+    <string name="shared_string_only_missing">Len chýbajúce</string>
+    <string name="download_tiles">Stiahnuť dlaždice</string>
+    <string name="attach_roads_descr">Chcete aproximovať vašu stopu s platnou stopou prichytenou k offline mapám\? V tom prípade získate opravenú nadmorskú výšku cesty, informácie o ceste a zabočenia, ktoré by mohli byť neskôr použité pre navigáciu.</string>
+    <string name="connect_with_straight_line">Spojiť priamou čiarou</string>
 </resources>

@@ -48,7 +48,7 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		return "loc_meta_" + tableLocation;
 	}
 	
-	public boolean initialize(final IProgress progress, File file, int version, String tableLocation, boolean searchX31) {
+	public boolean initialize(IProgress progress, File file, int version, String tableLocation, boolean searchX31) {
 		long start = System.currentTimeMillis();
 		if(db != null){
 			// close previous db
@@ -176,19 +176,13 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 	}
 
 	public boolean checkContains(double latitude, double longitude){
-		if(latitude <= dataTopLatitude && latitude >= dataBottomLatitude && longitude >= dataLeftLongitude && longitude <= dataRightLongitude){
-			return true;
-		}
-		return false;
+		return latitude <= dataTopLatitude && latitude >= dataBottomLatitude && longitude >= dataLeftLongitude && longitude <= dataRightLongitude;
 	}
 	
 	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude){
 		if(rightLongitude < dataLeftLongitude || leftLongitude > dataRightLongitude){
 			return false;
 		}
-		if(topLatitude < dataBottomLatitude || bottomLatitude > dataTopLatitude){
-			return false;
-		}
-		return true;
+		return !(topLatitude < dataBottomLatitude) && !(bottomLatitude > dataTopLatitude);
 	}
 }

@@ -46,7 +46,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		multiSelectBooleanPreference = getListPreference();
 		if (app == null || multiSelectBooleanPreference == null) {
 			return;
@@ -67,8 +67,8 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 			String prefTitle = entries[i].toString();
 			boolean selected = enabledPrefs.contains(prefId);
 
-			final int index = i;
-			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+			int index = i;
+			BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(selected)
 					.setTitle(prefTitle)
@@ -111,7 +111,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 	@Override
 	protected void onRightBottomButtonClick() {
 		if (prefChanged) {
-			final Set<String> values = enabledPrefs;
+			Set<String> values = enabledPrefs;
 			if (multiSelectBooleanPreference.callChangeListener(values)) {
 				multiSelectBooleanPreference.setValues(values);
 

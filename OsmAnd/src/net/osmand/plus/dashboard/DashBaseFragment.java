@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,17 +20,28 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
 public abstract class DashBaseFragment extends Fragment {
 
+	protected OsmandApplication app;
+	protected OsmandSettings settings;
 	protected DashboardOnMap dashboard;
 
 	private DismissListener defaultDismissListener;
 
 	public interface DismissListener {
 		void onDismiss();
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.app = requireMyApplication();
+		this.settings = app.getSettings();
 	}
 
 	@Override
@@ -43,8 +55,8 @@ public abstract class DashBaseFragment extends Fragment {
 
 	@NonNull
 	@Override
-	final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-								   @Nullable Bundle savedInstanceState) {
+	public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+	                               @Nullable Bundle savedInstanceState) {
 		View childView = initView(inflater, container, savedInstanceState);
 		FrameLayout.LayoutParams layoutParams =
 				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -92,11 +104,6 @@ public abstract class DashBaseFragment extends Fragment {
 		return true;
 	}
 
-	@Override
-	public boolean getUserVisibleHint() {
-		return super.getUserVisibleHint();
-	}
-
 	public abstract void onOpenDash();
 
 	public void onCloseDash() {
@@ -133,6 +140,11 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 	}
 
+	@ColorInt
+	protected int getColor(@ColorInt int resId) {
+		return ColorUtilities.getColor(getContext(), resId);
+	}
+
 	protected void startFavoritesActivity(int tab) {
 		Activity activity = getActivity();
 		if (activity == null) {
@@ -140,7 +152,7 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 		OsmandApplication app = getMyApplication();
 		OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+		Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 		favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		app.getSettings().FAVORITES_TAB.set(tab);
 		activity.startActivity(favorites);
@@ -171,10 +183,10 @@ public abstract class DashBaseFragment extends Fragment {
 	}
 
 	public static class DefaultDismissListener implements DismissListener {
-		private View parentView;
-		private DashboardOnMap dashboardOnMap;
-		private String fragmentTag;
-		private View fragmentView;
+		private final View parentView;
+		private final DashboardOnMap dashboardOnMap;
+		private final String fragmentTag;
+		private final View fragmentView;
 
 		public DefaultDismissListener(View parentView, DashboardOnMap dashboardOnMap,
 									  String fragmentTag, View fragmentView) {

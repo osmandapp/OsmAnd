@@ -62,7 +62,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		});
 
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
-			boolean hasTranslated = false;
+			boolean hasTranslated;
 			float highlightDrawX = -1;
 
 			@Override

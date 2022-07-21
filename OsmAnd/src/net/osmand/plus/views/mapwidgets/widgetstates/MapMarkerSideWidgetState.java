@@ -122,7 +122,7 @@ public class MapMarkerSideWidgetState extends WidgetState {
 
 		@NonNull
 		public SideMarkerMode next() {
-			int nextItemIndex = (ordinal() + 1) % SideMarkerMode.values().length;
+			int nextItemIndex = (ordinal() + 1) % values().length;
 			return values()[nextItemIndex];
 		}
 	}

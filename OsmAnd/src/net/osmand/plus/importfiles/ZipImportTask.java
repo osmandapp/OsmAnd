@@ -23,10 +23,10 @@ import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
 
 public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 
-	private ImportHelper importHelper;
-	private Uri uri;
-	private boolean save;
-	private boolean useImportDir;
+	private final ImportHelper importHelper;
+	private final Uri uri;
+	private final boolean save;
+	private final boolean useImportDir;
 
 	public ZipImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
 						 @NonNull Uri uri, boolean save, boolean useImportDir) {

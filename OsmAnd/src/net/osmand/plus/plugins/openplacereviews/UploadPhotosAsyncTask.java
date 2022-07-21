@@ -111,7 +111,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 		}
 	}
 
-	private boolean handleSelectedImage(final Uri uri) {
+	private boolean handleSelectedImage(Uri uri) {
 		boolean success = false;
 		InputStream inputStream = null;
 		int[] imageDimensions = null;

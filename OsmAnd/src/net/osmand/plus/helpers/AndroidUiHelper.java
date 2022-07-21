@@ -125,7 +125,7 @@ public class AndroidUiHelper {
 	}
 
 	public static boolean isOrientationPortrait(@NonNull Activity ctx) {
-		int orientation = AndroidUiHelper.getScreenOrientation(ctx);
+		int orientation = getScreenOrientation(ctx);
 		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}

@@ -16,7 +16,7 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 0;
 
-	private static boolean closed = false;
+	private static boolean closed;
 
 	private final FragmentActivity activity;
 
@@ -32,7 +32,7 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof OpenBetaTravelVH) {
-			final OpenBetaTravelVH holder = (OpenBetaTravelVH) viewHolder;
+			OpenBetaTravelVH holder = (OpenBetaTravelVH) viewHolder;
 			holder.title.setText(R.string.welcome_to_open_beta);
 			holder.description.setText(R.string.welcome_to_open_beta_description);
 			holder.backgroundImage.setImageResource(R.drawable.img_help_wikivoyage_articles);
@@ -56,12 +56,12 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 		final TextView button;
 		final ImageView backgroundImage;
 
-		public OpenBetaTravelVH(final View itemView) {
+		public OpenBetaTravelVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
-			button = (TextView) itemView.findViewById(R.id.bottom_button_text);
-			backgroundImage = (ImageView) itemView.findViewById(R.id.background_image);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
+			button = itemView.findViewById(R.id.bottom_button_text);
+			backgroundImage = itemView.findViewById(R.id.background_image);
 		}
 	}
 

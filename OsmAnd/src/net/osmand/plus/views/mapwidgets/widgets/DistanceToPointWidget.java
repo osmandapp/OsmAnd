@@ -36,7 +36,7 @@ public abstract class DistanceToPointWidget extends TextInfoWidget {
 		setOnClickListener(v -> onClick(view));
 	}
 
-	protected void onClick(final OsmandMapTileView view) {
+	protected void onClick(OsmandMapTileView view) {
 		AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 		LatLon pointToNavigate = getPointToNavigate();
 		if (pointToNavigate != null) {

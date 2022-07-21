@@ -50,7 +50,7 @@ public class TrackColoringCard extends MapBaseCard {
 
 	private TrackColoringAdapter coloringAdapter;
 	private TrackAppearanceItem selectedAppearanceItem;
-	private List<TrackAppearanceItem> appearanceItems;
+	private final List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
 	                         @NonNull SelectedGpxFile selectedGpxFile,
@@ -152,7 +152,7 @@ public class TrackColoringCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 
 		View headerView = view.findViewById(R.id.header_view);
-		headerView.setBackgroundDrawable(null);
+		headerView.setBackground(null);
 
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.shared_string_color);
@@ -190,8 +190,8 @@ public class TrackColoringCard extends MapBaseCard {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
-			final TrackAppearanceItem item = items.get(position);
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
+			TrackAppearanceItem item = items.get(position);
 
 			if (item.isActive()) {
 				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
@@ -307,13 +307,13 @@ public class TrackColoringCard extends MapBaseCard {
 
 	public static class TrackAppearanceItem {
 
-		private String attrName;
-		private String localizedValue;
+		private final String attrName;
+		private final String localizedValue;
 
 		@DrawableRes
-		private int iconId;
+		private final int iconId;
 
-		private boolean isActive;
+		private final boolean isActive;
 
 		public TrackAppearanceItem(String attrName, String localizedValue, int iconId, boolean isActive) {
 			this.attrName = attrName;

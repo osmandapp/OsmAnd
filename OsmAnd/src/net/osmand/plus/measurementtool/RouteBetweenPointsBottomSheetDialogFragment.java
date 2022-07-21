@@ -86,7 +86,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 			defaultDialogMode = (RouteBetweenPointsDialogMode) savedInstanceState.get(DEFAULT_DIALOG_MODE_KEY);
 		}
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final View mainView = UiUtilities.getInflater(getContext(), nightMode)
+		View mainView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
 						null, false);
 		btnDescription = mainView.findViewById(R.id.button_description);

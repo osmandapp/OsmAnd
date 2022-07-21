@@ -9,7 +9,7 @@ public class HorizontalSwipeConfirm implements GestureDetector.OnGestureListener
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
-	private boolean rightToLeftSwipe;
+	private final boolean rightToLeftSwipe;
 
 	public HorizontalSwipeConfirm(boolean rightToLeftSwipe) {
 		this.rightToLeftSwipe = rightToLeftSwipe;

@@ -50,7 +50,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	
 
 	@Override
-	public void onCreate(final Bundle icicle) {
+	public void onCreate(Bundle icicle) {
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
 		helper = ((OsmandApplication) getApplication()).getPoiFilters();
@@ -59,7 +59,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		setContentView(R.layout.update_index);
 		((TextView)findViewById(R.id.header)).setText(R.string.shared_string_select_all);
-		final CheckBox selectAll = (CheckBox) findViewById(R.id.select_all);
+		CheckBox selectAll = findViewById(R.id.select_all);
 		selectAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -107,13 +107,13 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	}	
 	
 	
-	private void showDialog(final PoiCategory poiCategory) {
-		ListView lv = EditPOIFilterActivity.this.getListView();
-		final int index = lv.getFirstVisiblePosition();
+	private void showDialog(PoiCategory poiCategory) {
+		ListView lv = getListView();
+		int index = lv.getFirstVisiblePosition();
 		View v = lv.getChildAt(0);
-		final int top = (v == null) ? 0 : v.getTop();
+		int top = (v == null) ? 0 : v.getTop();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final LinkedHashMap<String, String> subCategories = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> subCategories = new LinkedHashMap<String, String>();
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
 		if (acceptedCategories != null) {
 			for(String s : acceptedCategories) {
@@ -124,8 +124,8 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			subCategories.put(pt.getKeyName(), pt.getTranslation());
 		}
 
-		final String[] array = subCategories.keySet().toArray(new String[0]);
-		final Collator cl = Collator.getInstance();
+		String[] array = subCategories.keySet().toArray(new String[0]);
+		Collator cl = Collator.getInstance();
 		cl.setStrength(Collator.SECONDARY);
 		Arrays.sort(array, 0, array.length, new Comparator<String>() {
 
@@ -136,11 +136,11 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				return cl.compare(v1, v2);
 			}
 		});
-		final String[] visibleNames = new String[array.length];
-		final boolean[] selected = new boolean[array.length];
+		String[] visibleNames = new String[array.length];
+		boolean[] selected = new boolean[array.length];
 		
 		for (int i = 0; i < array.length; i++) {
-			final String subcategory = array[i];
+			String subcategory = array[i];
 			visibleNames[i] = subCategories.get(subcategory);			
 			if (acceptedCategories == null) {
 				selected[i] = true;
@@ -148,7 +148,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				selected[i] = acceptedCategories.contains(subcategory);
 			}
 		}
-		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -167,13 +167,13 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				}
 				helper.editPoiFilter(filter);
 				ListView lv = EditPOIFilterActivity.this.getListView();
-				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
+				AmenityAdapter la = EditPOIFilterActivity.this.getListAdapter();
 				la.notifyDataSetChanged();
 				lv.setSelectionFromTop(index, top);
 			}
 		});
 	
-		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ListView lv = selectAllFromCategory(poiCategory);
@@ -243,10 +243,10 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			}
 			PoiCategory model = getItem(position);
 
-			CheckBox check = (CheckBox) row.findViewById(R.id.filter_poi_check);
+			CheckBox check = row.findViewById(R.id.filter_poi_check);
 			check.setChecked(filter.isTypeAccepted(model));
 
-			TextView text = (TextView) row.findViewById(R.id.filter_poi_label);
+			TextView text = row.findViewById(R.id.filter_poi_label);
 			String textString = model.getTranslation();
 			Set<String> subtypes = filter.getAcceptedSubtypes(model);
 			if(filter.isTypeAccepted(model)) {
@@ -261,7 +261,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			return (row);
 		}
 
-		private void addRowListener(final PoiCategory model, final TextView text, final CheckBox check) {
+		private void addRowListener(PoiCategory model, TextView text, CheckBox check) {
 			text.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {

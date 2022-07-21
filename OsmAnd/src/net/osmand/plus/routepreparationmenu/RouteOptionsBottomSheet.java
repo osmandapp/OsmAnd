@@ -186,7 +186,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		List<LocalRoutingParameter> list = getRoutingParameters(applicationMode);
-		for (final LocalRoutingParameter optionsItem : list) {
+		for (LocalRoutingParameter optionsItem : list) {
 			if (!dialogMode.isAvailableParameter(optionsItem) || !customization.isFeatureEnabled(optionsItem.getKey())) {
 				continue;
 			}
@@ -288,15 +288,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		}
 	}
 
-	private BaseBottomSheetItem createMuteSoundItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createMuteSoundItem(LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
-		final ImageView icon = itemView.findViewById(R.id.icon);
+		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		View basicItem = itemView.findViewById(R.id.basic_item_body);
-		final CompoundButton cb = itemView.findViewById(R.id.compound_button);
+		CompoundButton cb = itemView.findViewById(R.id.compound_button);
 		View voicePromptsBtn = itemView.findViewById(R.id.additional_button);
 		ImageView voicePromptsBtnImage = itemView.findViewById(R.id.additional_button_icon);
 
@@ -347,12 +347,12 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.create();
 	}
 
-	private BaseBottomSheetItem inflateElevationParameter(final LocalRoutingParameter parameter) {
-		final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
-		final boolean active = !useHeightPref.getModeValue(applicationMode);
-		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+	private BaseBottomSheetItem inflateElevationParameter(LocalRoutingParameter parameter) {
+		BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+		boolean active = !useHeightPref.getModeValue(applicationMode);
+		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
-		final SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
+		SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
 		itemsContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -403,8 +403,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		return description;
 	}
 
-	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
-		final BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
+	private BaseBottomSheetItem createTimeConditionalRoutingItem(LocalRoutingParameter optionsItem) {
+		BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
 		timeConditionalRoutingItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColor(selectedModeColor)
 				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode))
@@ -424,7 +424,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		return timeConditionalRoutingItem[0];
 	}
 
-	private BaseBottomSheetItem createShowAlongTheRouteItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createShowAlongTheRouteItem(LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.show_along_the_route))
@@ -449,15 +449,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				}).create();
 	}
 
-	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createRouteSimulationItem(LocalRoutingParameter optionsItem) {
 
-		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
-		final ImageView icon = itemView.findViewById(R.id.icon);
+		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
 		View basicItem = itemView.findViewById(R.id.basic_item_body);
-		final CompoundButton cb = itemView.findViewById(R.id.compound_button);
+		CompoundButton cb = itemView.findViewById(R.id.compound_button);
 		View settingBtn = itemView.findViewById(R.id.additional_button);
 		ImageView settingBtnImage = itemView.findViewById(R.id.additional_button_icon);
 
@@ -495,7 +495,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	}
 
 
-	private BaseBottomSheetItem createAvoidRoadsItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createAvoidRoadsItem(LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.impassable_road))
@@ -516,7 +516,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	}
 
 
-	private BaseBottomSheetItem createAvoidPTTypesItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createAvoidPTTypesItem(LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.avoid_pt_types))
@@ -536,7 +536,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.create();
 	}
 
-	private BaseBottomSheetItem createGpxRoutingItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createGpxRoutingItem(LocalRoutingParameter optionsItem) {
 		GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		String description = null;
 		int descriptionColorId;
@@ -571,7 +571,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.create();
 	}
 
-	private BaseBottomSheetItem createOtherSettingsRoutingItem(final LocalRoutingParameter optionsItem) {
+	private BaseBottomSheetItem createOtherSettingsRoutingItem(LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(optionsItem.getActiveIconId()))
 				.setTitle(getString(R.string.routing_settings_2))
@@ -612,9 +612,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				}).create();
 	}
 
-	private void inflateRoutingParameter(final LocalRoutingParameter parameter) {
+	private void inflateRoutingParameter(LocalRoutingParameter parameter) {
 		if (parameter != null) {
-			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
 			builder.setCompoundButtonColor(selectedModeColor);
 			int iconId = -1;
@@ -623,7 +623,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				iconId = parameter.isSelected(settings) ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 			}
 			if (parameter instanceof LocalRoutingParameterGroup) {
-				final LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
+				LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
 				LocalRoutingParameter selected = group.getSelected(settings);
 				iconId = selected != null ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 				if (selected != null) {

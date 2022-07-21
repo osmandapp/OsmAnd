@@ -14,7 +14,7 @@ import java.util.List;
 public class LocationParser {
 
 	public static class ParsedOpenLocationCode {
-		private String text;
+		private final String text;
 		private String code;
 		private boolean full;
 		private String placeName;
@@ -127,7 +127,7 @@ public class LocationParser {
 			if (Character.isLetter(ch)) {
 				try {
 					String east = combined.substring(0, combined.length() / 2);
-					String north = combined.substring(combined.length() / 2, combined.length());
+					String north = combined.substring(combined.length() / 2);
 					UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
 							.intValue(), ch);
 					LatLonPoint ll = upoint.toLatLonPoint();

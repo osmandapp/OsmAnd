@@ -9,11 +9,11 @@ import androidx.annotation.Nullable;
 public class NavDrawerHeaderParams implements Parcelable {
 
 	@NonNull
-	private String imageUri;
+	private final String imageUri;
 	@NonNull
-	private String packageName;
+	private final String packageName;
 	@Nullable
-	private String intent;
+	private final String intent;
 
 	@NonNull
 	public String getImageUri() {

@@ -40,6 +40,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -56,9 +57,9 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
-	protected final static float BEARING_SPEED_THRESHOLD = 0.1f;
-	protected final static int MIN_ZOOM = 3;
-	protected final static int RADIUS = 7;
+	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
+	protected static final int MIN_ZOOM = 3;
+	protected static final int RADIUS = 7;
 
 	private Paint headingPaint;
 	private Paint bitmapPaint;
@@ -66,7 +67,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private Paint aroundArea;
 
 	private ApplicationMode appMode;
-	private boolean carView = false;
+	private boolean carView;
 	private float textScale = 1f;
 	@ColorInt
 	private int profileColor;
@@ -78,6 +79,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private int headingIconId;
 	private final OsmAndLocationProvider locationProvider;
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
+	private final OsmandSettings settings;
 	private boolean nm;
 	private boolean locationOutdated;
 
@@ -92,6 +94,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	private boolean markersInvalidated = true;
 	private boolean showHeadingCached = false;
+	private PointI lastTarget31Cached;
 	private Location lastKnownLocationCached;
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = MarkerState.Stay;
@@ -151,7 +154,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	public PointLocationLayer(@NonNull Context context) {
 		super(context);
 		this.mapViewTrackingUtilities = getApplication().getMapViewTrackingUtilities();
-		locationProvider = getApplication().getLocationProvider();
+		this.locationProvider = getApplication().getLocationProvider();
+		this.settings = getApplication().getSettings();
 	}
 
 	private void initLegacyRenderer() {
@@ -258,7 +262,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 	}
 
-	private void updateMarkerData(@Nullable Location location, @Nullable Float heading) {
+	private void updateMarkerData(@Nullable Location location, @Nullable PointI target31, @Nullable Float heading) {
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
@@ -274,8 +278,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 		if (locMarker != null && locMarker.marker != null) {
 			if (location != null) {  // location
-				PointI target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
-						MapUtils.get31TileNumberY(location.getLatitude()));
+				if (target31 == null) {
+					target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
+							MapUtils.get31TileNumberY(location.getLatitude()));
+				}
 				locMarker.marker.setPosition(target31);
 				if (locMarker.onSurfaceIconKey != null) {  // bearing
 					locMarker.marker.setOnMapSurfaceIconDirection(locMarker.onSurfaceIconKey, location.getBearing() - 90.0f);
@@ -316,7 +322,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
 
-		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
+		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
 		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
 		if (radius > RADIUS * box.getDensity()) {
 			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
@@ -399,11 +405,24 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					updateMarkerState(showHeading);
 				}
 			}
+			MapRendererView mapRenderer = getMapRenderer();
+			RotatedTileBox tb = view.getRotatedTileBox().copy();
+			PointI lastTarget31 = NativeUtilities.normalizeTarget31(mapRenderer, tb);
+			boolean useMapCenter = this.settings.ANIMATE_MY_LOCATION.get()
+					&& !mapViewTrackingUtilities.isMovingToMyLocation()
+					&& mapViewTrackingUtilities.isMapLinkedToLocation()
+					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(lastKnownLocation)
+					&& lastTarget31 != null;
 			Float heading = locationProvider.getHeading();
 			boolean dataChanged = !MapUtils.areLatLonEqual(lastKnownLocationCached, lastKnownLocation)
 					|| !Algorithms.objectEquals(lastHeadingCached, heading);
+			if (useMapCenter) {
+				dataChanged |= lastTarget31Cached == null || lastTarget31Cached.getX() != lastTarget31.getX()
+						|| lastTarget31Cached.getY() != lastTarget31.getY();
+			}
 			if (markersRecreated || dataChanged) {
-				updateMarkerData(lastKnownLocation, heading);
+				updateMarkerData(lastKnownLocation, useMapCenter ? lastTarget31 : null, heading);
+				lastTarget31Cached = lastTarget31;
 				lastKnownLocationCached = lastKnownLocation;
 				lastHeadingCached = heading;
 			}

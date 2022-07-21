@@ -20,9 +20,9 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "OptionsBottomSheetDialogFragment";
-	public final static String GROUPS_MARKERS_MENU = "groups_markers_menu";
-	public final static String HISTORY_MARKERS_MENU = "history_markers_menu";
+	public static final String TAG = "OptionsBottomSheetDialogFragment";
+	public static final String GROUPS_MARKERS_MENU = "groups_markers_menu";
+	public static final String HISTORY_MARKERS_MENU = "history_markers_menu";
 
 	private MarkerOptionsFragmentListener listener;
 	private boolean disableSortBy;
@@ -46,7 +46,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
 		view.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			}
 		});
 
-		final View mainView = view.findViewById(R.id.main_view);
+		View mainView = view.findViewById(R.id.main_view);
 		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			mainView.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 		}
@@ -166,11 +166,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				}
 
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
+				obs.removeOnGlobalLayoutListener(this);
 			}
 		});
 

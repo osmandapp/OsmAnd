@@ -39,7 +39,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private final FavouritePoint fav;
 	private Object originObject;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull FavouritePoint fav) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
 		setShowNearestWiki(true);
@@ -103,9 +103,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private void buildGroupFavouritesView(View view) {
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(fav);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
-			int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
-			color = favoriteGroup.isVisible() ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
+			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
 					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),
@@ -168,12 +168,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		return null;
 	}
 
-	private CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, @NonNull FavoriteGroup group, FavouritePoint selectedPoint) {
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.getPoints();
 		for (int i = 0; i < points.size() && i < 10; i++) {
-			final FavouritePoint point = points.get(i);
+			FavouritePoint point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
 			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 			String name = point.getDisplayName(context);

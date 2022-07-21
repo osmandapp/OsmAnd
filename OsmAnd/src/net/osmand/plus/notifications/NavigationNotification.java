@@ -47,10 +47,10 @@ import java.util.List;
 
 public class NavigationNotification extends OsmandNotification {
 
-	public final static String OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION = "OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION";
-	public final static String OSMAND_RESUME_NAVIGATION_SERVICE_ACTION = "OSMAND_RESUME_NAVIGATION_SERVICE_ACTION";
-	public final static String OSMAND_STOP_NAVIGATION_SERVICE_ACTION = "OSMAND_STOP_NAVIGATION_SERVICE_ACTION";
-	public final static String GROUP_NAME = "NAVIGATION";
+	public static final String OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION = "OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION";
+	public static final String OSMAND_RESUME_NAVIGATION_SERVICE_ACTION = "OSMAND_RESUME_NAVIGATION_SERVICE_ACTION";
+	public static final String OSMAND_STOP_NAVIGATION_SERVICE_ACTION = "OSMAND_STOP_NAVIGATION_SERVICE_ACTION";
+	public static final String GROUP_NAME = "NAVIGATION";
 
 	private boolean leftSide;
 
@@ -136,7 +136,7 @@ public class NavigationNotification extends OsmandNotification {
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
-			color = app.getResources().getColor(R.color.osmand_orange);
+			color = app.getColor(R.color.osmand_orange);
 
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app);
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
@@ -229,7 +229,7 @@ public class NavigationNotification extends OsmandNotification {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder(wearable)
+		Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
 				.setStyle(new BigTextStyle().bigText(notificationText))

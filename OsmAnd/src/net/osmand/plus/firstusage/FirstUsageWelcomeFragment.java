@@ -53,7 +53,7 @@ public class FirstUsageWelcomeFragment extends Fragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager().beginTransaction()
-					.remove(FirstUsageWelcomeFragment.this)
+					.remove(this)
 					.commitAllowingStateLoss();
 		}
 	}

@@ -22,14 +22,14 @@ import java.util.Map;
 public class SearchHistoryHelper {
 
 	private static final int HISTORY_LIMIT = 1500;
-	private static final int[] DEF_INTERVALS_MIN = new int[]{
+	private static final int[] DEF_INTERVALS_MIN = {
 			5, 60, 60 * 24, 5 * 60 * 24, 10 * 60 * 24, 30 * 60 * 24
 	};
 
-	private static SearchHistoryHelper instance = null;
+	private static SearchHistoryHelper instance;
 
 	private final OsmandApplication context;
-	private List<HistoryEntry> loadedEntries = null;
+	private List<HistoryEntry> loadedEntries;
 	private final Map<PointDescription, HistoryEntry> mp = new HashMap<>();
 
 	public SearchHistoryHelper(OsmandApplication context) {

@@ -72,7 +72,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
 	private int scrollViewY;
-	private int layoutHeightPrevious = 0;
+	private int layoutHeightPrevious;
 
 	protected boolean cancelled;
 	protected boolean nightMode;
@@ -189,7 +189,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	private void setupScrollListener() {
-		final ScrollView scrollView = view.findViewById(R.id.editor_scroll_view);
+		ScrollView scrollView = view.findViewById(R.id.editor_scroll_view);
 		scrollViewY = scrollView.getScrollY();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
 			if (scrollViewY != scrollView.getScrollY()) {

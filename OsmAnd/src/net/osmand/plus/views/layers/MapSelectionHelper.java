@@ -140,7 +140,7 @@ class MapSelectionHelper {
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
 				s.clear();
-				final IContextMenuProvider provider = (IContextMenuProvider) layer;
+				IContextMenuProvider provider = (IContextMenuProvider) layer;
 				provider.collectObjectsFromPoint(point, tileBox, s, unknownLocation);
 				for (Object o : s) {
 					selectedObjects.put(o, provider);

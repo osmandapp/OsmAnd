@@ -35,8 +35,8 @@ public class TransportStopController extends MenuController {
 	public static final int SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS = 400;
 
 	private TransportStop transportStop;
-	private List<TransportStopRoute> routesNearby = new ArrayList<>();
-	private List<TransportStopRoute> routesOnTheSameExit = new ArrayList<>();
+	private final List<TransportStopRoute> routesNearby = new ArrayList<>();
+	private final List<TransportStopRoute> routesOnTheSameExit = new ArrayList<>();
 	private TransportStopType topType;
 
 	public TransportStopController(@NonNull MapActivity mapActivity,

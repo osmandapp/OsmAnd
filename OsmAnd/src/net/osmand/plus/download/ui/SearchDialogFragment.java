@@ -131,7 +131,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		}
 
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -140,7 +140,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		banner = new BannerAndDownloadFreeVersion(view, getDownloadActivity(), false);
 
 		LinearLayout ll = (LinearLayout) view;
-		ExpandableListView expandablelistView = (ExpandableListView) view.findViewById(android.R.id.list);
+		ExpandableListView expandablelistView = view.findViewById(android.R.id.list);
 		ll.removeView(expandablelistView);
 
 		listView = new ListView(themedContext);
@@ -158,14 +158,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
 
-		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
 		searchEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
 		int hintColorId = nightMode ? R.color.searchbar_tab_inactive_dark : R.color.inactive_item_orange;
 		searchEditText.setHintTextColor(ContextCompat.getColor(app, hintColorId));
 
-		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
-		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		progressBar = view.findViewById(R.id.searchProgressBar);
+		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setColorFilter(ContextCompat.getColor(app, iconColorResId));
 		clearButton.setVisibility(View.GONE);
 
@@ -284,7 +284,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		Object obj = listAdapter.getItem(position);
 		if (obj instanceof DownloadResourceGroup) {
 			String uniqueId = ((DownloadResourceGroup) obj).getUniqueId();
-			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
+			DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
 					.createInstance(uniqueId);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		} else if (obj instanceof IndexItem) {
@@ -316,10 +316,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	private class SearchListAdapter extends BaseAdapter implements Filterable {
 
 		private SearchIndexFilter mFilter;
-		private OsmandRegions osmandRegions;
+		private final OsmandRegions osmandRegions;
 
-		private List<Object> items = new LinkedList<>();
-		private DownloadActivity ctx;
+		private final List<Object> items = new LinkedList<>();
+		private final DownloadActivity ctx;
 
 		public SearchListAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
@@ -364,8 +364,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			final Object obj = items.get(position);
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Object obj = items.get(position);
 			if (obj instanceof IndexItem || obj instanceof CityItem) {
 
 				ItemViewHolder viewHolder;
@@ -468,7 +468,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		private final class SearchIndexFilter extends Filter {
 
-			private OsmandRegions osmandRegions;
+			private final OsmandRegions osmandRegions;
 			private final int searchCityLimit = 10000;
 			private final List<String> citySubTypes = Arrays.asList("city", "town");
 			private SearchRequest<Amenity> searchCityRequest;
@@ -564,7 +564,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						Integer.MIN_VALUE, Integer.MAX_VALUE,
 						Integer.MIN_VALUE, Integer.MAX_VALUE,
 						new ResultMatcher<Amenity>() {
-							int count = 0;
+							int count;
 
 							@Override
 							public boolean publish(Amenity amenity) {
@@ -648,9 +648,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					String[] ors = searchRequest.split(",");
 					List<List<String>> conds = new ArrayList<>();
 					for (String or : ors) {
-						final ArrayList<String> cond = new ArrayList<>();
+						ArrayList<String> cond = new ArrayList<>();
 						for (String term : or.split("\\s")) {
-							final String t = term.trim().toLowerCase();
+							String t = term.trim().toLowerCase();
 							if (t.length() > 0) {
 								cond.add(t);
 							}
@@ -663,7 +663,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					DownloadResources indexes = ctx.getDownloadThread().getIndexes();
 					processGroup(indexes, filter, conds);
 
-					final Collator collator = OsmAndCollator.primaryCollator();
+					Collator collator = OsmAndCollator.primaryCollator();
 					Collections.sort(filter, new Comparator<Object>() {
 						@Override
 						public int compare(Object obj1, Object obj2) {

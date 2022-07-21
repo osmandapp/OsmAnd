@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MissingMapsOnlineSearchTask extends AsyncTask<Void, Void, List<WorldRegion>> {
 
-	private final static Log LOG = PlatformUtil.getLog(MissingMapsOnlineSearchTask.class);
+	private static final Log LOG = PlatformUtil.getLog(MissingMapsOnlineSearchTask.class);
 
 	private final RouteCalculationParams params;
 	private final OnlineSearchMissingMapsListener listener;

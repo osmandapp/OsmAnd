@@ -34,8 +34,8 @@ public class TextInfoWidget extends MapWidget {
 	@DrawableRes
 	private int nightIconId;
 
-	private Integer cachedMetricSystem = null;
-	private Integer cachedAngularUnits = null;
+	private Integer cachedMetricSystem;
+	private Integer cachedAngularUnits;
 
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {

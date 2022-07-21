@@ -313,11 +313,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			if (langPref != other.langPref)
 				return false;
 			if (mapStyle == null) {
-				if (other.mapStyle != null)
-					return false;
-			} else if (!mapStyle.equals(other.mapStyle))
-				return false;
-			return true;
+				return other.mapStyle == null;
+			} else return mapStyle.equals(other.mapStyle);
 		}
 	}
 

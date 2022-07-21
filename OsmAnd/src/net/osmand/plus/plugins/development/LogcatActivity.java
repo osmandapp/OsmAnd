@@ -30,7 +30,7 @@ public class LogcatActivity extends BaseLogcatActivity {
 	private static final int LEVEL_ID = 1;
 
 	private LogcatAdapter adapter;
-	private String[] LEVELS = {"D", "I", "W", "E"};
+	private final String[] LEVELS = {"D", "I", "W", "E"};
 	private int filterLevel = 1;
 	private RecyclerView recyclerView;
 
@@ -49,7 +49,7 @@ public class LogcatActivity extends BaseLogcatActivity {
 		}
 
 		adapter = new LogcatAdapter();
-		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		recyclerView = findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
 	}

@@ -27,16 +27,16 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		final OpeningHoursParser.BasicOpeningHourRule item =
+		OpeningHoursParser.BasicOpeningHourRule item =
 				(OpeningHoursParser.BasicOpeningHourRule) getArguments().getSerializable(ITEM);
-		final int positionToAdd = getArguments().getInt(POSITION_TO_ADD);
+		int positionToAdd = getArguments().getInt(POSITION_TO_ADD);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		final boolean createNew = positionToAdd == -1;
+		boolean createNew = positionToAdd == -1;
 		Calendar inst = Calendar.getInstance();
-		final int first = inst.getFirstDayOfWeek();
-		final boolean[] dayToShow = new boolean[7];
+		int first = inst.getFirstDayOfWeek();
+		boolean[] dayToShow = new boolean[7];
 		String[] daysToShow = new String[7];
 		for (int i = 0; i < 7; i++) {
 			int d = (first + i - 1) % 7 + 1;
@@ -45,7 +45,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 			String result = "" + Character.toUpperCase(dayName.charAt(0)) +
 					dayName.subSequence(1, dayName.length());
 			daysToShow[i] = result; //$NON-NLS-1$
-			final int pos = (d + 5) % 7;
+			int pos = (d + 5) % 7;
 			dayToShow[i] = item.getDays()[pos];
 		}
 		builder.setTitle(getResources().getString(R.string.working_days));
@@ -88,8 +88,8 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 	}
 
 	public static OpeningHoursDaysDialogFragment createInstance(
-			@NonNull final OpeningHoursParser.BasicOpeningHourRule item,
-			final int positionToAdd) {
+			@NonNull OpeningHoursParser.BasicOpeningHourRule item,
+			int positionToAdd) {
 		LOG.debug("createInstance(" + "item=" + item + ", positionToAdd=" + positionToAdd + ")");
 		OpeningHoursDaysDialogFragment daysDialogFragment = new OpeningHoursDaysDialogFragment();
 		Bundle bundle = new Bundle();

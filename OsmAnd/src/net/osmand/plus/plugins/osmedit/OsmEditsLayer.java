@@ -68,9 +68,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	private MapTextLayer mapTextLayer;
 
 	//OpenGL
-	private boolean nightMode = false;
+	private boolean nightMode;
 	private float storedTextScale = 1.0f;
-	private boolean poiTypesInitialized = false;
+	private boolean poiTypesInitialized;
 
 	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
 		super(context);

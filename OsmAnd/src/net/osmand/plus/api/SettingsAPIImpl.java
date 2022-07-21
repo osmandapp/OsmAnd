@@ -7,7 +7,7 @@ import android.content.SharedPreferences.Editor;
 
 public class SettingsAPIImpl implements SettingsAPI {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public SettingsAPIImpl(OsmandApplication app) {
 		this.app = app;
@@ -20,7 +20,7 @@ public class SettingsAPIImpl implements SettingsAPI {
 
 	@Override
 	public SettingsEditor edit(Object pref) {
-		final Editor edit = ((SharedPreferences) pref).edit();
+		Editor edit = ((SharedPreferences) pref).edit();
 		return new SettingsEditor() {
 			
 			@Override

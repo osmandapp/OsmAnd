@@ -18,10 +18,10 @@ import java.util.List;
 
 public class ImagesPagerAdapter extends PagerAdapter {
 
-	private OsmandApplication app;
-	private PicassoUtils picassoUtils;
+	private final OsmandApplication app;
+	private final PicassoUtils picassoUtils;
 
-	private List<String> imageUrls;
+	private final List<String> imageUrls;
 
 	public ImagesPagerAdapter(@NonNull OsmandApplication app, List<String> imageUrls) {
 		this.app = app;
@@ -53,10 +53,10 @@ public class ImagesPagerAdapter extends PagerAdapter {
 	}
 
 	private View createImageView(int position) {
-		final ImageView imageView = new ImageView(app);
+		ImageView imageView = new ImageView(app);
 		imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-		final String imageUrl = imageUrls.get(position);
+		String imageUrl = imageUrls.get(position);
 		if (!Algorithms.isEmpty(imageUrl)) {
 			Picasso.get().load(imageUrl).into(imageView, new Callback() {
 				@Override

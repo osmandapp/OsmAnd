@@ -9,11 +9,11 @@ import androidx.annotation.Nullable;
 public class NavDrawerFooterParams implements Parcelable {
 
 	@NonNull
-	private String packageName;
+	private final String packageName;
 	@Nullable
-	private String intent;
+	private final String intent;
 	@Nullable
-	private String appName;
+	private final String appName;
 
 	@NonNull
 	public String getPackageName() {

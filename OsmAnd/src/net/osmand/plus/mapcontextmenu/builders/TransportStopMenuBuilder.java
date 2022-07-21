@@ -13,7 +13,7 @@ public class TransportStopMenuBuilder extends MenuBuilder {
 
 	private final TransportStop transportStop;
 
-	public TransportStopMenuBuilder(MapActivity mapActivity, final TransportStop transportStop) {
+	public TransportStopMenuBuilder(MapActivity mapActivity, TransportStop transportStop) {
 		super(mapActivity);
 		this.transportStop = transportStop;
 	}

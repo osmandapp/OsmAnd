@@ -39,8 +39,8 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 
 		rateUsHelper = new RateUsHelper();
 
-		final View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.rate_us_title, null);
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.rate_us_title, null);
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);
@@ -86,9 +86,9 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {
-			if (fm.findFragmentByTag(RateUsBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				RateUsBottomSheetDialogFragment fragment = new RateUsBottomSheetDialogFragment();
-				fragment.show(fm, RateUsBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

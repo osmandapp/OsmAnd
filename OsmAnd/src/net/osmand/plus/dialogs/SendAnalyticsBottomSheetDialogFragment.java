@@ -47,8 +47,8 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 			return;
 		}
 
-		final View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.make_better_title, null);
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.make_better_title, null);
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);
@@ -65,7 +65,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		} else {
 			sendAnonymousAppUsageData = true;
 		}
-		final BottomSheetItemWithCompoundButton[] downloadedMapsItem = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] downloadedMapsItem = new BottomSheetItemWithCompoundButton[1];
 		downloadedMapsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(sendAnonymousMapDownloadsData)
 				.setTitle(getString(R.string.downloaded_maps))
@@ -87,7 +87,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new SubtitmeListDividerItem(context));
 
-		final BottomSheetItemWithCompoundButton[] visitedScreensItem = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] visitedScreensItem = new BottomSheetItemWithCompoundButton[1];
 		visitedScreensItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(sendAnonymousAppUsageData)
 				.setTitle(getString(R.string.visited_screens))
@@ -193,10 +193,10 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
 		try {
-			if (fm.findFragmentByTag(SendAnalyticsBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
 				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, SendAnalyticsBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 
 				OsmandSettings settings = app.getSettings();
 				int numberOfStarts = app.getAppInitializer().getNumberOfStarts();

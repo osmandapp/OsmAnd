@@ -20,23 +20,23 @@ import net.osmand.plus.views.DirectionDrawable;
 
 public class MapMarkerDialogHelper {
 
-	public static void updateMapMarkerInfo(final Context ctx,
-										   View localView,
-										   LatLon loc,
-										   Float heading,
-										   boolean useCenter,
-										   boolean nightMode,
-										   int screenOrientation,
-										   final MapMarker marker) {
-		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
-		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
-		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		ImageView arrow = (ImageView) localView.findViewById(R.id.direction);
-		ImageView waypointIcon = (ImageView) localView.findViewById(R.id.waypoint_icon);
-		TextView waypointDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
-		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
-		final CheckBox checkBox = (CheckBox) localView.findViewById(R.id.checkbox);
-		TextView dateGroupText = (TextView) localView.findViewById(R.id.date_group_text);
+	public static void updateMapMarkerInfo(Context ctx,
+	                                       View localView,
+	                                       LatLon loc,
+	                                       Float heading,
+	                                       boolean useCenter,
+	                                       boolean nightMode,
+	                                       int screenOrientation,
+	                                       MapMarker marker) {
+		TextView text = localView.findViewById(R.id.waypoint_text);
+		TextView textShadow = localView.findViewById(R.id.waypoint_text_shadow);
+		TextView textDist = localView.findViewById(R.id.waypoint_dist);
+		ImageView arrow = localView.findViewById(R.id.direction);
+		ImageView waypointIcon = localView.findViewById(R.id.waypoint_icon);
+		TextView waypointDeviation = localView.findViewById(R.id.waypoint_deviation);
+		TextView descText = localView.findViewById(R.id.waypoint_desc_text);
+		CheckBox checkBox = localView.findViewById(R.id.checkbox);
+		TextView dateGroupText = localView.findViewById(R.id.date_group_text);
 
 		if (text == null || textDist == null || arrow == null || waypointIcon == null
 				|| waypointDeviation == null || descText == null) {
@@ -72,13 +72,12 @@ public class MapMarkerDialogHelper {
 		arrow.setVisibility(View.VISIBLE);
 		arrow.invalidate();
 
-		final OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 
 		if (!marker.history) {
 			waypointIcon.setImageDrawable(getMapMarkerIcon(app, marker.colorIndex));
 			AndroidUtils.setTextPrimaryColor(ctx, text, nightMode);
-			textDist.setTextColor(ctx.getResources()
-					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
+			textDist.setTextColor(ctx.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		} else {
 			waypointIcon.setImageDrawable(app.getUIUtilities()
 					.getIcon(R.drawable.ic_action_flag, !nightMode));

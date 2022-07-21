@@ -220,7 +220,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
 		ImageView toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
-		toolbarTextView = (TextView) view.findViewById(R.id.context_menu_toolbar_text);
+		toolbarTextView = view.findViewById(R.id.context_menu_toolbar_text);
 		updateVisibility(toolbarContainer, 0);
 		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -231,7 +231,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		toolbarBackButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 
 		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
-		ImageView backButton = (ImageView) view.findViewById(R.id.context_menu_top_back);
+		ImageView backButton = view.findViewById(R.id.context_menu_top_back);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -263,7 +263,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		// Left title button
-		final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+		View leftTitleButtonView = view.findViewById(R.id.title_button_view);
 		leftTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -275,7 +275,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Right title button
-		final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+		View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
 		rightTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -287,7 +287,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Left download button
-		final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+		View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
 		leftDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -299,7 +299,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Right download button
-		final View rightDownloadButtonView = (View) view.findViewById(R.id.download_button_right_view);
+		View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
 		rightDownloadButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -311,7 +311,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Bottom title button
-		final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+		View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
 		bottomTitleButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -323,7 +323,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 
 		// Progress bar
-		final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
+		ImageView progressButton = view.findViewById(R.id.progressButton);
 		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark, R.color.ctx_menu_buttons_icon_color));
 		progressButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -339,7 +339,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		updateButtonsAndProgress();
 
 		if (menu.isLandscapeLayout()) {
-			final TypedValue typedValueAttr = new TypedValue();
+			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
@@ -352,18 +352,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		runLayoutListener();
 
-		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
-		final GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
+		GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
+		GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
 
-		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
+		View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
 			private float mDownY;
 
-			private int minimumVelocity;
-			private int maximumVelocity;
+			private final int minimumVelocity;
+			private final int maximumVelocity;
 			private VelocityTracker velocityTracker;
-			private OverScroller scroller;
+			private final OverScroller scroller;
 
 			private boolean slidingUp;
 			private boolean slidingDown;
@@ -372,7 +372,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			{
 				scroller = new OverScroller(getContext());
-				final ViewConfiguration configuration = ViewConfiguration.get(getContext());
+				ViewConfiguration configuration = ViewConfiguration.get(getContext());
 				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
 				maximumVelocity = configuration.getScaledMaximumFlingVelocity();
 			}
@@ -447,7 +447,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							hasMoved = false;
 							int currentY = getViewY();
 
-							final VelocityTracker velocityTracker = this.velocityTracker;
+							VelocityTracker velocityTracker = this.velocityTracker;
 							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
 							int initialVelocity = (int) velocityTracker.getYVelocity();
 
@@ -510,7 +510,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		AndroidUtils.setBackground(mapActivity, topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
 				R.drawable.bg_map_context_menu_dark);
 
-		((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		mainView.setListener(slideTouchListener);
 		mainView.setOnTouchListener(slideTouchListener);
 
 		buildHeader();
@@ -525,7 +525,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light));
 
 		AndroidUtils.setTextSecondaryColor(mapActivity,
-				(TextView) view.findViewById(R.id.progressTitle), nightMode);
+				view.findViewById(R.id.progressTitle), nightMode);
 
 		// Zoom buttons
 		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
@@ -543,13 +543,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			zoomButtonsView.setVisibility(View.GONE);
 		}
 
-		localTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_routes_grid);
-		nearbyTransportStopRoutesGrid = (GridView) view.findViewById(R.id.transport_stop_nearby_routes_grid);
-		nearbyRoutesWithinTv = (TextView) view.findViewById(R.id.nearby_routes_within_text_view);
-		localRoutesMoreTv = (TextView) view.findViewById(R.id.local_routes_more_text_view);
-		nearbyRoutesLayout = (LinearLayout) view.findViewById(R.id.nearby_routes);
-		routesBadgesContainer = (LinearLayout) view.findViewById(R.id.transport_badges_container);
-		mainRouteBadgeContainer = (LinearLayout) view.findViewById(R.id.main_transport_route_badge);
+		localTransportStopRoutesGrid = view.findViewById(R.id.transport_stop_routes_grid);
+		nearbyTransportStopRoutesGrid = view.findViewById(R.id.transport_stop_nearby_routes_grid);
+		nearbyRoutesWithinTv = view.findViewById(R.id.nearby_routes_within_text_view);
+		localRoutesMoreTv = view.findViewById(R.id.local_routes_more_text_view);
+		nearbyRoutesLayout = view.findViewById(R.id.nearby_routes);
+		routesBadgesContainer = view.findViewById(R.id.transport_badges_container);
+		mainRouteBadgeContainer = view.findViewById(R.id.main_transport_route_badge);
 
 		if (nightMode) {
 			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_dark));
@@ -574,7 +574,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
-		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
 		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -582,7 +582,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				openMenuHalfScreen();
 			}
 		});
-		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
+		TextView directionsButton = view.findViewById(R.id.context_menu_directions_button);
 		int iconResId = R.drawable.ic_action_gdirections_dark;
 		if (menu.navigateInPedestrianMode()) {
 			iconResId = R.drawable.ic_action_pedestrian_dark;
@@ -602,12 +602,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		buildBottomView();
 
-		LockableScrollView bottomScrollView = (LockableScrollView) view.findViewById(R.id.context_menu_bottom_scroll);
+		LockableScrollView bottomScrollView = view.findViewById(R.id.context_menu_bottom_scroll);
 		bottomScrollView.setScrollingEnabled(false);
-		bottomScrollView.setBackgroundColor(getResources()
-				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
-		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getResources()
-				.getColor(nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		bottomScrollView.setBackgroundColor(getColor(
+				nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getColor(
+				nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
@@ -684,11 +684,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private View getActionView(ContextMenuItem contextMenuItem,
-	                           final int position,
-	                           final ContextMenuAdapter mainAdapter,
-	                           final ContextMenuAdapter additionalAdapter,
-	                           final ContextMenuItemClickListener mainListener,
-	                           final ContextMenuItemClickListener additionalListener) {
+	                           int position,
+	                           ContextMenuAdapter mainAdapter,
+	                           ContextMenuAdapter additionalAdapter,
+	                           ContextMenuItemClickListener mainListener,
+	                           ContextMenuItemClickListener additionalListener) {
 		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
 		LayoutInflater inflater = UiUtilities.getInflater(getMyApplication(), nightMode);
 		View view = inflater.inflate(R.layout.context_menu_action_item, null);
@@ -732,7 +732,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (needMoreItem) {
 			items.add(TRANSPORT_BADGE_MORE_ITEM);
 		}
-		final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(app, items, nightMode);
+		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(app, items, nightMode);
 		adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
 			@Override
 			public void onClick(int position) {
@@ -858,8 +858,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void toggleDetailsHideButton() {
 		int menuState = menu.getCurrentMenuState();
-		final boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
-		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
+		boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
+		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
 		detailsButton.setText(showShowHideButton ? R.string.shared_string_collapse : R.string.rendering_category_details);
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -1019,15 +1019,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
-	                       final int previousMenuState, final int newMenuState, int dZoom) {
-		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
+	private void applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust,
+	                       int previousMenuState, int newMenuState, int dZoom) {
+		int posY = getPosY(currentY, needCloseMenu, previousMenuState);
 		if (getViewY() != posY || dZoom != 0) {
 			if (posY < getViewY()) {
 				updateMainViewLayout(posY);
 			}
 
-			final float topButtonAlpha = getTopButtonAlpha(posY);
+			float topButtonAlpha = getTopButtonAlpha(posY);
 			if (topButtonAlpha > 0) {
 				updateVisibility(topButtonContainer, true);
 			}
@@ -1042,7 +1042,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					})
 					.start();
 
-			final float toolbarAlpha = getToolbarAlpha(posY);
+			float toolbarAlpha = getToolbarAlpha(posY);
 			if (toolbarAlpha > 0) {
 				updateVisibility(toolbarContainer, true);
 			}
@@ -1062,7 +1062,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					.setInterpolator(new DecelerateInterpolator())
 					.setListener(new AnimatorListenerAdapter() {
 
-						boolean canceled = false;
+						boolean canceled;
 
 						@Override
 						public void onAnimationCancel(Animator animation) {
@@ -1130,12 +1130,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			// Title buttons
 			boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
-			final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
+			View titleButtonsContainer = view.findViewById(R.id.title_button_container);
 			titleButtonsContainer.setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.GONE);
 
 			// Left title button
-			final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
-			final TextView leftTitleButton = (TextView) leftTitleButtonView.findViewById(R.id.button_text);
+			View leftTitleButtonView = view.findViewById(R.id.title_button_view);
+			TextView leftTitleButton = leftTitleButtonView.findViewById(R.id.button_text);
 			if (leftTitleButtonController != null) {
 				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, createRightTextCaption(leftTitleButtonController));
 				if (leftTitleButtonController.visible) {
@@ -1154,8 +1154,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			// Right title button
-			final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
-			final TextView rightTitleButton = (TextView) rightTitleButtonView.findViewById(R.id.button_text);
+			View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
+			TextView rightTitleButton = rightTitleButtonView.findViewById(R.id.button_text);
 			if (rightTitleButtonController != null) {
 				setupButton(rightTitleButtonView, rightTitleButtonController.enabled, rightTitleButtonController.caption);
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
@@ -1171,8 +1171,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			// Bottom title button
-			final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
-			final TextView bottomTitleButton = (TextView) bottomTitleButtonView.findViewById(R.id.button_text);
+			View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
+			TextView bottomTitleButton = bottomTitleButtonView.findViewById(R.id.button_text);
 			if (bottomTitleButtonController != null) {
 				setupButton(bottomTitleButtonView, bottomTitleButtonController.enabled, bottomTitleButtonController.caption);
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
@@ -1192,12 +1192,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					((leftDownloadButtonController != null && leftDownloadButtonController.visible)
 							|| (rightDownloadButtonController != null && rightDownloadButtonController.visible))
 							&& (titleProgressController == null || !titleProgressController.visible);
-			final View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
+			View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
 			downloadButtonsContainer.setVisibility(showDownloadButtonsContainer ? View.VISIBLE : View.GONE);
 
 			// Left download button
-			final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
-			final TextView leftDownloadButton = (TextView) leftDownloadButtonView.findViewById(R.id.button_text);
+			View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
+			TextView leftDownloadButton = leftDownloadButtonView.findViewById(R.id.button_text);
 			if (leftDownloadButtonController != null) {
 				setupButton(leftDownloadButtonView, leftDownloadButtonController.enabled, leftDownloadButtonController.caption);
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
@@ -1213,8 +1213,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			// Right download button
-			final View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
-			final TextView rightDownloadButton = (TextView) rightDownloadButtonView.findViewById(R.id.button_text);
+			View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
+			TextView rightDownloadButton = rightDownloadButtonView.findViewById(R.id.button_text);
 			if (rightDownloadButtonController != null) {
 				setupButton(rightDownloadButtonView, rightDownloadButtonController.enabled, rightDownloadButtonController.caption);
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
@@ -1229,7 +1229,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
 
-			final LinearLayout additionalButtonsContainer = (LinearLayout) view.findViewById(R.id.additional_buttons_container);
+			LinearLayout additionalButtonsContainer = view.findViewById(R.id.additional_buttons_container);
 			if (additionalButtonsControllers != null && !additionalButtonsControllers.isEmpty()) {
 				additionalButtonsContainer.removeAllViews();
 				for (Pair<TitleButtonController, TitleButtonController> buttonControllers : additionalButtonsControllers) {
@@ -1241,7 +1241,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			// Progress bar
-			final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
+			View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 			if (titleProgressController != null) {
 				titleProgressContainer.setVisibility(titleProgressController.visible ? View.VISIBLE : View.GONE);
 				if (titleProgressController.visible && showTitleButtonsContainer) {
@@ -1251,14 +1251,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					}
 				}
 
-				final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-				final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
+				ProgressBar progressBar = view.findViewById(R.id.progressBar);
+				TextView progressTitle = view.findViewById(R.id.progressTitle);
 				progressTitle.setText(titleProgressController.caption);
 				progressBar.setIndeterminate(titleProgressController.indeterminate);
 				progressBar.setProgress(titleProgressController.progress);
 				progressBar.setVisibility(titleProgressController.progressVisible ? View.VISIBLE : View.GONE);
 
-				final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
+				ImageView progressButton = view.findViewById(R.id.progressButton);
 				progressButton.setVisibility(titleProgressController.buttonVisible ? View.VISIBLE : View.GONE);
 			} else {
 				titleProgressContainer.setVisibility(View.GONE);
@@ -1268,25 +1268,25 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	private void attachButtonsRow(ViewGroup container, final TitleButtonController leftButtonController, final TitleButtonController rightButtonController) {
+	private void attachButtonsRow(ViewGroup container, TitleButtonController leftButtonController, TitleButtonController rightButtonController) {
 		ContextThemeWrapper ctx = new ContextThemeWrapper(getMapActivity(), !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
 		View view = inflater.inflate(R.layout.context_menu_buttons, container, false);
 
 		// Left button
-		final View leftButtonView = view.findViewById(R.id.additional_button_left_view);
-		final TextView leftButton = (TextView) leftButtonView.findViewById(R.id.button_text);
+		View leftButtonView = view.findViewById(R.id.additional_button_left_view);
+		TextView leftButton = leftButtonView.findViewById(R.id.button_text);
 		fillButtonInfo(leftButtonController, leftButtonView, leftButton);
 
 		// Right button
-		final View rightButtonView = view.findViewById(R.id.additional_button_right_view);
-		final TextView rightButton = (TextView) rightButtonView.findViewById(R.id.button_text);
+		View rightButtonView = view.findViewById(R.id.additional_button_right_view);
+		TextView rightButton = rightButtonView.findViewById(R.id.button_text);
 		fillButtonInfo(rightButtonController, rightButtonView, rightButton);
 
 		container.addView(view);
 	}
 
-	private void fillButtonInfo(final TitleButtonController buttonController, View buttonView, TextView buttonText) {
+	private void fillButtonInfo(TitleButtonController buttonController, View buttonView, TextView buttonText) {
 		if (buttonController != null) {
 			setupButton(buttonView, buttonController.enabled, createRightTextCaption(buttonController));
 			buttonView.setVisibility(buttonController.visible ? View.VISIBLE : View.INVISIBLE);
@@ -1325,7 +1325,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void buildHeader() {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
-			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
+			ImageView iconView = view.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = menu.getRightIcon();
 			int iconId = menu.getRightIconId();
 			int sizeId = menu.isBigRightIcon() ? R.dimen.context_menu_big_icon_size : R.dimen.standard_icon_size;
@@ -1424,7 +1424,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (app != null && view != null) {
 			buildHeader();
 
-			LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
+			LinearLayout bottomLayout = view.findViewById(R.id.context_menu_bottom_view);
 			bottomLayout.removeAllViews();
 			buildBottomView();
 
@@ -1468,8 +1468,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				String routeRef = transportStopRoute.route.getAdjustedRouteRef(true);
 				int bgColor = transportStopRoute.getColor(app, nightMode);
 
-				TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
-				ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
+				TextView transportStopRouteTextView = convertView.findViewById(R.id.transport_stop_route_text);
+				ImageView transportStopRouteImageView = convertView.findViewById(R.id.transport_stop_route_icon);
 
 				int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 				transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(mapActivity, bgColor, true)));
@@ -1488,7 +1488,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		TransportRouteResult activeRoute = app.getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
 		if (localRoutesSize > 0 && activeRoute != null) {
 			for (int i = 0; i < localTransportStopRoutes.size(); i++) {
-				final TransportStopRoute stopRoute = localTransportStopRoutes.get(i);
+				TransportStopRoute stopRoute = localTransportStopRoutes.get(i);
 				if (activeRoute.isRouteStop(stopRoute.stop)) {
 					View routeBadge = createRouteBadge(stopRoute);
 					mainRouteBadgeContainer.addView(routeBadge);
@@ -1614,11 +1614,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 					if (view != null) {
 						ViewTreeObserver obs = view.getViewTreeObserver();
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							obs.removeOnGlobalLayoutListener(this);
-						} else {
-							obs.removeGlobalOnLayoutListener(this);
-						}
+						obs.removeOnGlobalLayoutListener(this);
 
 						if (getActivity() == null) {
 							return;
@@ -1631,8 +1627,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 						int dy = 0;
 						if (!menu.isLandscapeLayout()) {
-							TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-							TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+							TextView line1 = view.findViewById(R.id.context_menu_line1);
+							TextView line2 = view.findViewById(R.id.context_menu_line2);
 							int line2LineCount = 0;
 							int line2LineHeight = 0;
 							int line2MeasuredHeight = 0;
@@ -1826,7 +1822,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				}
 			}
 
-			TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
+			TextView line3 = view.findViewById(R.id.context_menu_line3);
 			CharSequence subtypeStr = menu.getSubtypeStr();
 			if (TextUtils.isEmpty(subtypeStr)) {
 				line3.setVisibility(View.GONE);
@@ -1839,8 +1835,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				line3.setCompoundDrawablePadding(dpToPx(5f));
 			}
 
-			ImageView additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
-			TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+			ImageView additionalInfoImageView = view.findViewById(R.id.additional_info_image_view);
+			TextView additionalInfoTextView = view.findViewById(R.id.additional_info_text_view);
 			CharSequence additionalInfoStr = menu.getAdditionalInfo();
 			boolean showAdditionalImage = false;
 			boolean showAdditionalInfo = !TextUtils.isEmpty(additionalInfoStr);
@@ -1914,8 +1910,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		OsmandApplication app = getMyApplication();
 		FragmentActivity activity = getActivity();
 		if (app != null && activity != null && view != null) {
-			TextView distanceText = (TextView) view.findViewById(R.id.distance);
-			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			TextView distanceText = view.findViewById(R.id.distance);
+			ImageView direction = view.findViewById(R.id.direction);
 			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
 		}
 	}
@@ -1964,11 +1960,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return getPosY(CURRENT_Y_UNDEFINED, false);
 	}
 
-	private int getPosY(final int currentY, boolean needCloseMenu) {
+	private int getPosY(int currentY, boolean needCloseMenu) {
 		return getPosY(currentY, needCloseMenu, 0);
 	}
 
-	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
+	private int getPosY(int currentY, boolean needCloseMenu, int previousState) {
 		if (needCloseMenu) {
 			return screenHeight;
 		}
@@ -2193,8 +2189,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
-	                                   final boolean centered) {
+	public static boolean showInstance(MapContextMenu menu, MapActivity mapActivity,
+	                                   boolean centered) {
 		if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
 			return false;
 		}

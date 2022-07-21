@@ -77,7 +77,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 		items.add(new TitleItem(getString(R.string.upload_osm_note)));
 
-		final View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+		View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_osm_note_fragment, null);
 		sendOsmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
@@ -107,12 +107,12 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
-						SendOsmNoteBottomSheetFragment.this, usedOnMap, null);
+						this, usedOnMap, null);
 			}
 		});
 		updateSignIn(uploadAnonymously.isChecked());
 		uploadAnonymously.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
-		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
 		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -136,7 +136,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			}
 			dismiss();
 		});
-		final SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendOsmNoteView)
 				.create();
 		items.add(bottomSheetItem);

@@ -12,14 +12,14 @@ import java.util.List;
 
 public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
-	private OsmandApplication app;
-	private GpxSplitType gpxSplitType;
-	private List<GpxDisplayGroup> groups;
-	private SplitTrackListener splitTrackListener;
+	private final OsmandApplication app;
+	private final GpxSplitType gpxSplitType;
+	private final List<GpxDisplayGroup> groups;
+	private final SplitTrackListener splitTrackListener;
 
-	private boolean joinSegments;
-	private int timeSplitInterval;
-	private double distanceSplitInterval;
+	private final boolean joinSegments;
+	private final int timeSplitInterval;
+	private final double distanceSplitInterval;
 
 	public SplitTrackAsyncTask(@NonNull OsmandApplication app,
 	                           @NonNull GpxSplitType gpxSplitType,

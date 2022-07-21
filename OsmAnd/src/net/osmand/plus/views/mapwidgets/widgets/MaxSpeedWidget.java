@@ -17,7 +17,7 @@ public class MaxSpeedWidget extends TextInfoWidget {
 
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 
-	private float cachedMaxSpeed = 0;
+	private float cachedMaxSpeed;
 
 	public MaxSpeedWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, MAX_SPEED);

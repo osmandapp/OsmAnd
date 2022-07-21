@@ -42,12 +42,12 @@ public class PublicTransportCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int SHOW_BUTTON_INDEX = 1;
 
-	private LatLon startLocation;
-	private LatLon endLocation;
-	private TransportRouteResult routeResult;
+	private final LatLon startLocation;
+	private final LatLon endLocation;
+	private final TransportRouteResult routeResult;
 	private PublicTransportCardListener transportCardListener;
 
-	private int routeId;
+	private final int routeId;
 	private String showButtonCustomTitle;
 	private boolean routeInfoVisible = true;
 	private boolean routeButtonsVisible = true;
@@ -127,8 +127,8 @@ public class PublicTransportCard extends MapBaseCard {
 			view.findViewById(R.id.badges_padding).setVisibility(View.GONE);
 		}
 
-		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
-		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
+		TextView fromLine = view.findViewById(R.id.from_line);
+		TextView wayLine = view.findViewById(R.id.way_line);
 		TextView intervalLine = view.findViewById(R.id.interval_line);
 
 		fromLine.setText(getFirstLineDescrSpan());
@@ -144,7 +144,7 @@ public class PublicTransportCard extends MapBaseCard {
 		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
 		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow && showDivider ? View.VISIBLE : View.GONE);
 		if (transparentBackground) {
-			view.findViewById(R.id.routes_info_container).setBackgroundDrawable(null);
+			view.findViewById(R.id.routes_info_container).setBackground(null);
 		}
 	}
 
@@ -282,7 +282,7 @@ public class PublicTransportCard extends MapBaseCard {
 
 	private void createRouteBadges(List<TransportRouteResultSegment> segments, boolean badgesRowClickable) {
 		int itemsSpacing = AndroidUtils.dpToPx(app, 6);
-		FlowLayout routesBadges = (FlowLayout) view.findViewById(R.id.routes_badges);
+		FlowLayout routesBadges = view.findViewById(R.id.routes_badges);
 		routesBadges.removeAllViews();
 
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
@@ -339,7 +339,7 @@ public class PublicTransportCard extends MapBaseCard {
 		}
 	}
 
-	private View createRouteBadge(@NonNull final TransportRouteResultSegment segment, boolean badgesRowClickable) {
+	private View createRouteBadge(@NonNull TransportRouteResultSegment segment, boolean badgesRowClickable) {
 		LinearLayout bageView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		TransportRoute transportRoute = segment.route;
 		TransportStopRoute transportStopRoute = TransportStopRoute.getTransportStopRoute(transportRoute, segment.getStart());
@@ -347,8 +347,8 @@ public class PublicTransportCard extends MapBaseCard {
 		String routeRef = segment.route.getAdjustedRouteRef(true);
 		int bgColor = transportStopRoute.getColor(app, nightMode);
 
-		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
-		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
+		TextView transportStopRouteTextView = bageView.findViewById(R.id.transport_stop_route_text);
+		ImageView transportStopRouteImageView = bageView.findViewById(R.id.transport_stop_route_icon);
 
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(app, bgColor, true)));
@@ -365,12 +365,12 @@ public class PublicTransportCard extends MapBaseCard {
 				}
 			});
 		} else {
-			bageView.findViewById(R.id.button).setBackgroundDrawable(null);
+			bageView.findViewById(R.id.button).setBackground(null);
 		}
 		return bageView;
 	}
 
-	private View createWalkRouteBadge(@NonNull final RouteCalculationResult result, boolean badgesRowClickable) {
+	private View createWalkRouteBadge(@NonNull RouteCalculationResult result, boolean badgesRowClickable) {
 		View v = createWalkRouteBadge(result.getRoutingTime(), null, null, badgesRowClickable);
 		if (transportCardListener != null && !badgesRowClickable) {
 			v.setOnClickListener(new View.OnClickListener() {
@@ -383,12 +383,12 @@ public class PublicTransportCard extends MapBaseCard {
 		return v;
 	}
 
-	private View createWalkRouteBadge(double walkTime, @Nullable final LatLon start, @Nullable final LatLon end, boolean badgesRowClickable) {
+	private View createWalkRouteBadge(double walkTime, @Nullable LatLon start, @Nullable LatLon end, boolean badgesRowClickable) {
 		LinearLayout bageView = (LinearLayout) getMapActivity().getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		int activeColor = getActiveColor();
 
-		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
-		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
+		TextView transportStopRouteTextView = bageView.findViewById(R.id.transport_stop_route_text);
+		ImageView transportStopRouteImageView = bageView.findViewById(R.id.transport_stop_route_icon);
 
 		Drawable icPedestrian = getActiveIcon(R.drawable.ic_action_pedestrian_dark);
 		transportStopRouteImageView.setImageDrawable(AndroidUtils.getDrawableForDirection(app, icPedestrian));
@@ -407,7 +407,7 @@ public class PublicTransportCard extends MapBaseCard {
 				}
 			});
 		} else {
-			bageView.findViewById(R.id.button).setBackgroundDrawable(null);
+			bageView.findViewById(R.id.button).setBackground(null);
 		}
 		return bageView;
 	}

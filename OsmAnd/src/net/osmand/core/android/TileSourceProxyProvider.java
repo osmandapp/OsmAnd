@@ -144,7 +144,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		private final int x;
 		private final int y;
 		private final int zoom;
-		private boolean ready = false;
+		private boolean ready;
 		private final Object sync = new Object();
 
 		public TileReadyCallback(ITileSource tileSource, int x, int y, int zoom) {
@@ -190,7 +190,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		try {
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
 			if (tileSource.couldBeDownloadedFromInternet()) {
-				final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
+				TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
 				try {
 					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,

@@ -108,7 +108,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 		UiUtilities.setupSlider(slider, nightMode, null, true);
 
-		LinearLayout radioGroup = (LinearLayout) view.findViewById(R.id.custom_radio_buttons);
+		LinearLayout radioGroup = view.findViewById(R.id.custom_radio_buttons);
 		setupTypeRadioGroup(radioGroup);
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -135,7 +135,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private TextRadioItem createRadioButton(final GpxSplitType splitType, int titleId) {
+	private TextRadioItem createRadioButton(GpxSplitType splitType, int titleId) {
 		String title = app.getString(titleId);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
@@ -239,7 +239,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateSliderTimeInterval() {
-		final List<String> splitOptions = new ArrayList<>(timeSplitOptions.keySet());
+		List<String> splitOptions = new ArrayList<>(timeSplitOptions.keySet());
 		updateSliderMinMaxValues(splitOptions);
 
 		slider.setValue(selectedTimeSplitInterval);
@@ -253,7 +253,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateSliderDistanceInterval() {
-		final List<String> splitOptions = new ArrayList<>(distanceSplitOptions.keySet());
+		List<String> splitOptions = new ArrayList<>(distanceSplitOptions.keySet());
 		updateSliderMinMaxValues(splitOptions);
 
 		slider.setValue(selectedDistanceSplitInterval);
@@ -322,14 +322,14 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, TrackDrawInfo trackDrawInfo, Fragment target) {
 		try {
-			if (fragmentManager.findFragmentByTag(SplitIntervalBottomSheet.TAG) == null) {
+			if (fragmentManager.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(TRACK_FILE_NAME, trackDrawInfo.getFilePath());
 
 				SplitIntervalBottomSheet splitIntervalBottomSheet = new SplitIntervalBottomSheet();
 				splitIntervalBottomSheet.setArguments(args);
 				splitIntervalBottomSheet.setTargetFragment(target, 0);
-				splitIntervalBottomSheet.show(fragmentManager, SplitIntervalBottomSheet.TAG);
+				splitIntervalBottomSheet.show(fragmentManager, TAG);
 			}
 		} catch (RuntimeException e) {
 			log.error("showInstance", e);

@@ -27,12 +27,12 @@ import java.util.zip.ZipInputStream;
 
 public class DownloadFileHelper {
 	
-	private final static Log log = PlatformUtil.getLog(DownloadFileHelper.class);
+	private static final Log log = PlatformUtil.getLog(DownloadFileHelper.class);
 	private static final int BUFFER_SIZE = 32256;
 	protected static final int TRIES_TO_DOWNLOAD = 15;
 	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
 	private final OsmandApplication ctx;
-	private boolean interruptDownloading = false;
+	private boolean interruptDownloading;
 	
 	
 	public DownloadFileHelper(OsmandApplication ctx){
@@ -41,22 +41,22 @@ public class DownloadFileHelper {
 	
 	public interface DownloadFileShowWarning {
 		
-		public void showWarning(String warning);
+		void showWarning(String warning);
 	}
 	
 	public static boolean isInterruptedException(IOException e) {
 		return e != null && e.getMessage().equals("Interrupted");
 	}
 	
-	public InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
+	public InputStream getInputStreamToDownload(URL url, boolean forceWifi) throws IOException {
 		InputStream cis = new InputStream() {
-			byte[] buffer = new byte[BUFFER_SIZE];
-			int bufLen = 0;
-			int bufRead = 0;
-			int length = 0;
-			int fileread = 0;
+			final byte[] buffer = new byte[BUFFER_SIZE];
+			int bufLen;
+			int bufRead;
+			int length;
+			int fileread;
 			int triesDownload = TRIES_TO_DOWNLOAD;
-			boolean notFound = false;
+			boolean notFound;
 			boolean first = true;
 			private InputStream is;
 			
@@ -204,7 +204,7 @@ public class DownloadFileHelper {
 	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress,
 								List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
-			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
+			List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
 			log.info("Url downloading " + de.urlToDownload);
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
@@ -261,7 +261,7 @@ public class DownloadFileHelper {
 
 	private void unzipFile(IndexItem.DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
 		CountingMultiInputStream fin = new CountingMultiInputStream(is);
-		int len = (int) fin.available();
+		int len = fin.available();
 		int mb = (int) (len / (1024f*1024f));
 		if(mb == 0) {
 			mb = 1;
@@ -272,7 +272,7 @@ public class DownloadFileHelper {
 		if (de.type != null) {
 			taskName.append(" ").append(de.type.getString(ctx));
 		}
-		progress.startTask(String.format(ctx.getString(R.string.shared_string_downloading_formatted), taskName.toString()), len / 1024);
+		progress.startTask(String.format(ctx.getString(R.string.shared_string_downloading_formatted), taskName), len / 1024);
 		if (!de.zipStream) {
 			copyFile(de, progress, fin, len, fin, de.fileToDownload);
 		} else if(de.urlToDownload.contains(".gz")) {
@@ -302,7 +302,7 @@ public class DownloadFileHelper {
 							// cut version
 							int i = name.indexOf('.', ind);
 							if (i > 0) {
-								name = name.substring(0, ind) + name.substring(i, name.length());
+								name = name.substring(0, ind) + name.substring(i);
 							}
 						}
 						fs = new File(de.fileToDownload.getParent(), name);
@@ -350,7 +350,7 @@ public class DownloadFileHelper {
 
 		private final InputStream[] delegate;
 		private int count;
-		private int currentRead = 0;
+		private int currentRead;
 
 		public CountingMultiInputStream(List<InputStream> streams) {
 			this.delegate = streams.toArray(new InputStream[0]);

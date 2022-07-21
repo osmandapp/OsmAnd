@@ -11,19 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	private RecyclerView recyclerView;
 	private TextView lookingForTracksText;
 
-	private GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
+	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
 		@Override
 		public boolean isCancelled() {
 			ProcessGpxTask processor = asyncProcessor;
@@ -59,15 +58,19 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	};
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = requiredMyApplication();
+		dbHelper = app.getGpxDbHelper();
+	}
+
+	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		app = requiredMyApplication();
-		dbHelper = app.getGpxDbHelper();
-
-		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
-		recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
-		lookingForTracksText = (TextView) mainView.findViewById(R.id.looking_for_tracks_text);
+		progressBar = mainView.findViewById(R.id.progress_bar);
+		recyclerView = mainView.findViewById(R.id.groups_recycler_view);
+		lookingForTracksText = mainView.findViewById(R.id.looking_for_tracks_text);
 
 		asyncProcessor = new ProcessGpxTask();
 		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -101,16 +104,17 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			fragment.setUsedOnMap(false);
 			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 		} else {
-			OsmandApplication app = getMyApplication();
-			if (app != null) {
-				GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
-				File gpx = dataItem.getFile();
-				if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
-					GPXFile res = GPXUtilities.loadGPXFile(gpx);
+			GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
+			File gpx = dataItem.getFile();
+			if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
+				GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().selectedAutomatically().saveSelection();
-					selectionHelper.selectGpxFile(res, params);
-				}
+					selectionHelper.selectGpxFile(gpxFile, params);
+					app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
+					return true;
+				});
+			} else {
 				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 			}
 		}

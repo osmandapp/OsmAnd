@@ -27,7 +27,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private Paint paintImg;
 
 	private final RectF destImage = new RectF();
-	private boolean visible = false;
+	private boolean visible;
 	private boolean cachedVisible = true;
 	private int cachedAlpha = -1;
 
@@ -101,7 +101,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	private void updateLayerProviderAlpha(int alpha) {
-		final MapRendererView mapRenderer = getMapRenderer();
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
@@ -169,14 +169,14 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (bmp != null && bmpLoc != null) {
 			float rot = -bmpLoc.getRotate();
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
-			final RotatedTileBox calc = currentViewport.copy();
+			RotatedTileBox calc = currentViewport.copy();
 			calc.setRotate(bmpLoc.getRotate());
 			QuadPointDouble lt = bmpLoc.getLeftTopTile(bmpLoc.getZoom());
 			QuadPointDouble rb = bmpLoc.getRightBottomTile(bmpLoc.getZoom());
-			final float x1 = calc.getPixXFromTile(lt.x, lt.y, bmpLoc.getZoom());
-			final float x2 = calc.getPixXFromTile(rb.x, rb.y, bmpLoc.getZoom());
-			final float y1 = calc.getPixYFromTile(lt.x, lt.y, bmpLoc.getZoom());
-			final float y2 = calc.getPixYFromTile(rb.x, rb.y, bmpLoc.getZoom());
+			float x1 = calc.getPixXFromTile(lt.x, lt.y, bmpLoc.getZoom());
+			float x2 = calc.getPixXFromTile(rb.x, rb.y, bmpLoc.getZoom());
+			float y1 = calc.getPixYFromTile(lt.x, lt.y, bmpLoc.getZoom());
+			float y2 = calc.getPixYFromTile(rb.x, rb.y, bmpLoc.getZoom());
 
 //			LatLon lt = bmpLoc.getLeftTopLatLon();
 //			LatLon rb = bmpLoc.getRightBottomLatLon();

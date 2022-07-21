@@ -32,8 +32,8 @@ public class ShowHideGpxTracksAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
-		final GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication()
+	public void execute(@NonNull MapActivity mapActivity) {
+		GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication()
 			.getSelectedGpxHelper();
 		if (selectedGpxHelper.isAnyGpxFileSelected()) {
 			selectedGpxHelper.clearAllGpxFilesToShow(true);

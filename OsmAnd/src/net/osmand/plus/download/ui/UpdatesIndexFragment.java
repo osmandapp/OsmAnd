@@ -117,15 +117,15 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	public void invalidateListView(@NonNull Context context) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 
-		final OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
+		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, indexItems,
 				!InAppPurchaseHelper.isSubscribedToLiveUpdates(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		listAdapter.sort((indexItem, indexItem2) -> collator.compare(indexItem.getVisibleName(app, osmandRegions),
 				indexItem2.getVisibleName(app, osmandRegions)));
 		setListAdapter(listAdapter);
@@ -133,7 +133,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	private void updateErrorMessage() {
-		final View view = getView();
+		View view = getView();
 		if (view == null) return;
 
 		DownloadResources indexes = getMyApplication().getDownloadThread().getIndexes();
@@ -155,8 +155,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			return;
 		}
 		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
-		final List<IndexItem> indexItems = indexes.getItemsToUpdate();
-		final TextView updateAllButton = view.findViewById(R.id.updateAllButton);
+		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.size() == 0 || indexItems.get(0).getType() == null) {
 			if (!Algorithms.isEmpty(errorMessage)) {
 				updateAllButton.setText(errorMessage);
@@ -176,7 +176,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 					R.string.update_all, String.valueOf(downloadsSize >> 20));
 			updateAllButton.setText(updateAllText);
 			updateAllButton.setOnClickListener(v -> {
-				final DownloadActivity activity = getMyActivity();
+				DownloadActivity activity = getMyActivity();
 				if (indexItems.size() > 3) {
 					AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
 					dialog.setTitle(R.string.update_all_maps);
@@ -224,7 +224,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 				}
 			}
 		} else {
-			final IndexItem e = (IndexItem) getListAdapter().getItem(position);
+			IndexItem e = (IndexItem) getListAdapter().getItem(position);
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
 			ls.onClick(v);
@@ -363,7 +363,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 		@NonNull
 		@Override
-		public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 			View view = convertView;
 			int viewType = getItemViewType(position);
 			if (view == null) {

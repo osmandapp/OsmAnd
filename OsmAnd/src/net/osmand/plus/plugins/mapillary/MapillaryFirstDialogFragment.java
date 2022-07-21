@@ -29,7 +29,7 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 		}
 
 		View view = inflater.inflate(R.layout.mapillary_first_dialog, container, false);
-		final SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
+		SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
 		widgetSwitch.setChecked(showWidget);
 		widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget(isChecked));
 		view.findViewById(R.id.actionButton).setOnClickListener(v -> {

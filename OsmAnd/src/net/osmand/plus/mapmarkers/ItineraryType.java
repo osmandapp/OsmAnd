@@ -7,8 +7,8 @@ public enum ItineraryType {
 	FAVOURITES("favourites", 0),
 	TRACK("track", 1);
 
-	private int typeId;
-	private String typeName;
+	private final int typeId;
+	private final String typeName;
 
 	ItineraryType(@NonNull String typeName, int typeId) {
 		this.typeName = typeName;
@@ -29,7 +29,7 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.MARKERS;
+		return MARKERS;
 	}
 
 	public static ItineraryType findTypeForName(String typeName) {
@@ -38,6 +38,6 @@ public enum ItineraryType {
 				return type;
 			}
 		}
-		return ItineraryType.MARKERS;
+		return MARKERS;
 	}
 }

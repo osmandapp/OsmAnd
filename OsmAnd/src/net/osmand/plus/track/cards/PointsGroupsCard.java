@@ -103,7 +103,7 @@ public class PointsGroupsCard extends MapBaseCard {
 			selectedGroup = (GpxDisplayGroup) chip.tag;
 			CardListener listener = getListener();
 			if (listener != null) {
-				listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
+				listener.onCardButtonPressed(this, SELECT_GROUP_INDEX);
 			}
 			chipsView.smoothScrollTo(chip);
 			return true;

@@ -186,11 +186,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 		if (isNewProfile) {
-			TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 			if (toolbarTitle != null) {
 				toolbarTitle.setText(getString(R.string.new_profile));
 			}
-			TextView toolbarSubtitle = (TextView) view.findViewById(R.id.toolbar_subtitle);
+			TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
 			if (toolbarSubtitle != null) {
 				toolbarSubtitle.setVisibility(View.GONE);
 			}
@@ -404,7 +404,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 						String selected = changedProfile.parent != null ?
 								changedProfile.parent.getStringKey() : null;
 						SelectBaseProfileBottomSheet.showInstance(
-								getActivity(),ProfileAppearanceFragment.this,
+								getActivity(), this,
 								getSelectedAppMode(), selected, false);
 					}
 				}
@@ -492,7 +492,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private View createIconItemView(final int iconRes, ViewGroup rootView) {
+	private View createIconItemView(int iconRes, ViewGroup rootView) {
 		FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_circle_item, rootView, false);
 		ImageView checkMark = iconItemView.findViewById(R.id.checkMark);
@@ -524,7 +524,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		updateProfileButton();
 	}
 
-	private View createLocationIconView(final LocationIcon locationIcon, ViewGroup rootView) {
+	private View createLocationIconView(LocationIcon locationIcon, ViewGroup rootView) {
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		int changedProfileColor = changedProfile.getActualColor();
@@ -566,7 +566,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.locationIcon = locationIcon;
 	}
 
-	private View createNavigationIconView(final NavigationIcon navigationIcon, ViewGroup rootView) {
+	private View createNavigationIconView(NavigationIcon navigationIcon, ViewGroup rootView) {
 		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		LayerDrawable navigationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
@@ -639,7 +639,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private void setVerticalScrollBarEnabled(boolean enabled) {
-		final RecyclerView preferenceListView = getListView();
+		RecyclerView preferenceListView = getListView();
 		if (enabled) {
 			preferenceListView.post(() -> preferenceListView.setVerticalScrollBarEnabled(true));
 		} else {
@@ -964,10 +964,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	class ApplicationProfileObject {
 		String stringKey;
-		ApplicationMode parent = null;
+		ApplicationMode parent;
 		String name;
 		ProfileIconColors color;
-		Integer customColor = null;
+		Integer customColor;
 		int iconRes;
 		String routingProfile;
 		RouteService routeService;

@@ -91,23 +91,23 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void createMenuItems(final Bundle savedInstanceState) {
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	public void createMenuItems(Bundle savedInstanceState) {
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		Context context = requireContext();
-		final OsmandApplication app = requiredMyApplication();
+		OsmandApplication app = requiredMyApplication();
 		mainView = View.inflate(new ContextThemeWrapper(context, themeRes),
 				R.layout.bottom_sheet_plan_route_select_file, null);
 		TextView titleView = mainView.findViewById(R.id.title);
 		titleView.setText(fragmentMode.title);
-		final TextView descriptionView = mainView.findViewById(R.id.description);
+		TextView descriptionView = mainView.findViewById(R.id.description);
 		descriptionView.setText(fragmentMode.description);
-		final RecyclerView filesRecyclerView = mainView.findViewById(R.id.gpx_track_list);
+		RecyclerView filesRecyclerView = mainView.findViewById(R.id.gpx_track_list);
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 		if (fragmentMode == Mode.OPEN_TRACK) {
 			titleView.setText(AndroidUtils.addColon(app, fragmentMode.title));
 			updateDescription(descriptionView);
 		}
-		final ImageButton sortButton = mainView.findViewById(R.id.sort_button);
+		ImageButton sortButton = mainView.findViewById(R.id.sort_button);
 		int backgroundColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
 		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, backgroundColorId);
 		AndroidUtils.setBackground(sortButton, background);
@@ -116,8 +116,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		sortButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final List<PopUpMenuItem> items = new ArrayList<>();
-				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+				List<PopUpMenuItem> items = new ArrayList<>();
+				for (TracksSortByMode mode : TracksSortByMode.values()) {
 					items.add(new PopUpMenuItem.Builder(app)
 							.setTitleId(mode.getNameId())
 							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
@@ -142,13 +142,13 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 
-		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 
 		allFilesFolder = context.getString(R.string.shared_string_all);
 		if (savedInstanceState == null) {
 			selectedFolder = allFilesFolder;
 		}
-		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(gpxDir, null, false);
+		List<GPXInfo> allGpxList = getSortedGPXFilesInfo(gpxDir, null, false);
 		currentlyRecording = new GPXInfo(getString(R.string.shared_string_currently_recording_track), 0, 0);
 		if (isShowCurrentGpx()) {
 			allGpxList.add(0, currentlyRecording);
@@ -239,7 +239,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void sortFolderList() {
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(folders, new Comparator<File>() {
 			@Override
 			public int compare(File i1, File i2) {
@@ -269,7 +269,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public void sortSelected(List<GPXInfo> gpxInfoList) {
 		boolean hasRecording = gpxInfoList.remove(currentlyRecording);
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
 			@Override
 			public int compare(GPXInfo i1, GPXInfo i2) {

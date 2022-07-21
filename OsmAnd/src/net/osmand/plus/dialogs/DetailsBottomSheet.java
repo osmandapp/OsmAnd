@@ -84,7 +84,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 			for (RenderingRuleProperty pr : customRules) {
 				if (UI_CATEGORY_DETAILS.equals(pr.getCategory()) && pr.isBoolean()) {
 					properties.add(pr);
-					final CommonPreference<Boolean> pref = app.getSettings()
+					CommonPreference<Boolean> pref = app.getSettings()
 							.getCustomRenderBooleanProperty(pr.getAttrName());
 					preferences.add(pref);
 				}
@@ -120,11 +120,11 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 			RenderingRuleProperty streetLightNightProp = getStreetLightNightProp();
 			for (int i = 0; i < properties.size(); i++) {
 				RenderingRuleProperty property = properties.get(i);
-				final CommonPreference<Boolean> pref = preferences.get(i);
-				final String propertyName = AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName());
+				CommonPreference<Boolean> pref = preferences.get(i);
+				String propertyName = AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName());
 				if (STREET_LIGHTING.equals(property.getAttrName()) && streetLightNightProp != null) {
-					final CommonPreference<Boolean> streetLightsNightPref = preferences.get(properties.indexOf(streetLightNightProp));
-					final BottomSheetItemTwoChoicesButton[] item = new BottomSheetItemTwoChoicesButton[1];
+					CommonPreference<Boolean> streetLightsNightPref = preferences.get(properties.indexOf(streetLightNightProp));
+					BottomSheetItemTwoChoicesButton[] item = new BottomSheetItemTwoChoicesButton[1];
 					item[0] = (BottomSheetItemTwoChoicesButton) new BottomSheetItemTwoChoicesButton.Builder()
 							.setLeftBtnSelected(!streetLightsNightPref.get())
 							.setLeftBtnTitleRes(R.string.shared_string_always)
@@ -146,7 +146,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 							.create();
 					items.add(item[0]);
 				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName())) {
-					final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+					BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 					item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 							.setCompoundButtonColor(selectedProfileColor)
 							.setChecked(pref.get())

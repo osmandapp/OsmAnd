@@ -29,8 +29,8 @@ import java.util.Map;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 
 public class DownloadActivityType {
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
-	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+	private static final Map<String, DownloadActivityType> byTag = new HashMap<>();
 
 	public static final DownloadActivityType NORMAL_FILE =
 			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
@@ -64,8 +64,8 @@ public class DownloadActivityType {
 	private final int stringResource;
 	private final int iconResource;
 
-	private String tag;
-	private int orderIndex;
+	private final String tag;
+	private final int orderIndex;
 
 	public DownloadActivityType(int stringResource, int iconResource, String tag, int orderIndex) {
 		this.stringResource = stringResource;
@@ -102,9 +102,7 @@ public class DownloadActivityType {
 	public static boolean isCountedInDownloads(IndexItem es) {
 		DownloadActivityType tp = es.getType();
 		if (tp == NORMAL_FILE || tp == ROADS_FILE) {
-			if (!es.extra) {
-				return true;
-			}
+			return !es.extra;
 		}
 		return false;
 	}
@@ -353,7 +351,7 @@ public class DownloadActivityType {
 		if (this == FONT_FILE) {
 			return FileNameTranslationHelper.getFontName(getBasename(downloadItem));
 		}
-		final String basename = getBasename(downloadItem);
+		String basename = getBasename(downloadItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {
 			return FileNameTranslationHelper.getWikiName(ctx, basename);
 		}
@@ -363,19 +361,19 @@ public class DownloadActivityType {
 //		if (this == HILLSHADE_FILE){
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
 //		}
-		final String lc = basename.toLowerCase();
+		String lc = basename.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
 		if (basename.contains("addresses-nationwide")) {
-			final int ind = basename.indexOf("addresses-nationwide");
+			int ind = basename.indexOf("addresses-nationwide");
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
 			return osmandRegions.getLocaleName(downloadName, includeParent) +
 					" " + ctx.getString(R.string.index_item_nation_addresses);
 		} else if (basename.startsWith("Depth_")) {
-			final int extInd = basename.indexOf("osmand_ext");
-			String downloadName = extInd == -1 ? basename.substring(6, basename.length()).replace('_', ' ')
+			int extInd = basename.indexOf("osmand_ext");
+			String downloadName = extInd == -1 ? basename.substring(6).replace('_', ' ')
 					: basename.substring(6, extInd).replace('_', ' ');
 			return ctx.getString(R.string.download_depth_countours) + " " + Algorithms.capitalizeFirstLetter(downloadName);
 		}

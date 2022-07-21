@@ -55,7 +55,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
 			Class<?> contributionVersionActivityClass = null;
 			try {
@@ -71,7 +71,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 						.setTitleId(R.string.version_settings, mapActivity)
 						.setIcon(R.drawable.ic_action_apk)
 						.setListener((uiAdapter, view, item, isChecked) -> {
-							final Intent mapIntent = new Intent(mapActivity, activityClass);
+							Intent mapIntent = new Intent(mapActivity, activityClass);
 							mapActivity.startActivityForResult(mapIntent, 0);
 							return true;
 						}));

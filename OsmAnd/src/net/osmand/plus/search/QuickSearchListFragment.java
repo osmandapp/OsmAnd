@@ -248,7 +248,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			dialogFragment.getAccessibilityAssistant().lockEvents();
 			listAdapter.notifyDataSetChanged();
 			dialogFragment.getAccessibilityAssistant().unlockEvents();
-			final View selected = dialogFragment.getAccessibilityAssistant().getFocusedView();
+			View selected = dialogFragment.getAccessibilityAssistant().getFocusedView();
 			if (selected != null) {
 				try {
 					int position = getListView().getPositionForView(selected);

@@ -293,11 +293,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
-	                                          final double latitude,
-	                                          final double longitude,
+	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
+	                                          double latitude,
+	                                          double longitude,
 	                                          ContextMenuAdapter adapter,
-	                                          final Object selectedObj, boolean configureMenu) {
+	                                          Object selectedObj, boolean configureMenu) {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
@@ -317,7 +317,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					EditPoiDialogFragment.showEditInstance((MapObject) selectedObj, mapActivity);
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
-				final Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
+				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
 				EditPoiDialogFragment.createInstance(entity, false)
 						.show(mapActivity.getSupportFragmentManager(), EditPoiDialogFragment.TAG);
 			}
@@ -331,7 +331,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			} else {
 				amenity = ((TransportStop) selectedObj).getAmenity();
 			}
-			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
 			isEditable = isOsmUrlAvailable((MapObject) selectedObj);
@@ -478,9 +478,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void optionsMenuFragment(final FragmentActivity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 		if (fragment instanceof AvailableGPXFragment) {
-			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
+			AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
@@ -488,7 +488,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener((uiAdapter, view, item, isChecked) -> {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
 								R.drawable.ic_action_upload_to_openstreetmap, items ->
-										OsmEditingPlugin.this.sendGPXFiles(activity, f,
+										sendGPXFiles(activity, f,
 												items.toArray(new GpxInfo[0])));
 						return true;
 					}));
@@ -526,7 +526,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean sendGPXFiles(final FragmentActivity activity, Fragment fragment, GpxInfo... info) {
+	public boolean sendGPXFiles(FragmentActivity activity, Fragment fragment, GpxInfo... info) {
 		String name = OSM_USER_NAME_OR_EMAIL.get();
 		String pwd = OSM_USER_PASSWORD.get();
 		String authToken = OSM_USER_ACCESS_TOKEN.get();
@@ -666,14 +666,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	public static boolean isOsmUrlAvailable(@NonNull MapObject object) {
 		Long id = object.getId();
-		if (id != null && id > 0) {
-			if (object instanceof Amenity) {
-				return id % 2 == 0 || (id >> 1) < Integer.MAX_VALUE;
-			} else {
-				return id % 2 == AMENITY_ID_RIGHT_SHIFT || (id >> NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE;
-			}
-		}
-		return false;
+		return id != null && id > 0;
 	}
 
 	public static long getOsmObjectId(@NonNull MapObject object) {
@@ -710,7 +703,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Nullable
 	public static String getOsmUrlForId(@NonNull MapObject mapObject) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
+		EntityType type = getOsmEntityType(mapObject);
 		if (type != null) {
 			long osmId = getOsmObjectId(mapObject);
 			return "https://www.openstreetmap.org/" + type.name().toLowerCase(Locale.US) + "/" + osmId;

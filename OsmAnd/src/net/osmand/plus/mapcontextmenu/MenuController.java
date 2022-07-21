@@ -285,9 +285,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	protected void addSpeedToPlainItems() {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasSpeed() && l.getSpeed() > 0f) {
 				String speed = OsmAndFormatter.getFormattedSpeed(l.getSpeed(), app);
@@ -297,9 +297,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	protected void addAltitudeToPlainItems() {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAltitude()) {
 				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
@@ -309,9 +309,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	protected void addPrecisionToPlainItems() {
-		final MapActivity mapActivity = getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAccuracy()) {
 				String acc;
@@ -555,8 +555,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (openingHoursInfo != null) {
-				int colorOpen = mapActivity.getResources().getColor(R.color.ctx_menu_amenity_opened_text_color);
-				int colorClosed = mapActivity.getResources().getColor(R.color.ctx_menu_amenity_closed_text_color);
+				int colorOpen = mapActivity.getColor(R.color.ctx_menu_amenity_opened_text_color);
+				int colorClosed = mapActivity.getColor(R.color.ctx_menu_amenity_closed_text_color);
 				return getSpannableOpeningHours(openingHoursInfo, colorOpen, colorClosed);
 			} else if (shouldShowMapSize()) {
 				return mapActivity.getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
@@ -714,9 +714,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public abstract class TitleButtonController {
 		public String caption = "";
-		public int startIconId = 0;
-		public int endIconId = 0;
-		public boolean needRightText = false;
+		public int startIconId;
+		public int endIconId;
+		public boolean needRightText;
 		public String rightTextCaption = "";
 		public boolean visible = true;
 		public boolean tintIcon = true;
@@ -774,7 +774,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public abstract static class TitleProgressController {
 		public String caption = "";
-		public int progress = 0;
+		public int progress;
 		public boolean indeterminate;
 		public boolean visible;
 		public boolean progressVisible;
@@ -858,7 +858,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		}
 	}
 
-	public void requestMapDownloadInfo(final LatLon latLon) {
+	public void requestMapDownloadInfo(LatLon latLon) {
 		MapActivity mapActivity = getMapActivity();
 		OsmandMapTileView mapView = mapActivity != null ? mapActivity.getMapView() : null;
 		if (mapView != null) {

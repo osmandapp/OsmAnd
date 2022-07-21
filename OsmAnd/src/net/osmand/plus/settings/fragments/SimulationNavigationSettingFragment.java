@@ -156,7 +156,7 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		if (key == null) {
 			return;
 		}
-		final View itemView = holder.itemView;
+		View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
 			SimulationMode mode = SimulationMode.getMode(key);
 			if (mode != null) {
@@ -205,10 +205,10 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		}
 		float speedValue = settings.simulateNavigationSpeed;
 		speedValue = Math.min(speedValue, max);
-		final Slider slider = itemView.findViewById(R.id.slider);
-		final TextView title = itemView.findViewById(android.R.id.title);
-		final TextView minSpeed = itemView.findViewById(R.id.min);
-		final TextView maxSpeed = itemView.findViewById(R.id.max);
+		Slider slider = itemView.findViewById(R.id.slider);
+		TextView title = itemView.findViewById(android.R.id.title);
+		TextView minSpeed = itemView.findViewById(R.id.min);
+		TextView maxSpeed = itemView.findViewById(R.id.max);
 
 		minSpeed.setText(getFormattedSpeed(min, app));
 		maxSpeed.setText(getFormattedSpeed(max, app));
@@ -218,7 +218,7 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		slider.setValue(speedValue - min);
 		slider.addOnChangeListener((s, val, fromUser) -> {
 			float value = min + val;
-			title.setText(SimulationNavigationSettingFragment.this.getString(R.string.ltr_or_rtl_combine_via_colon,
+			title.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
 					getString(titleRes), getFormattedSpeed(value, app)));
 			settings.simulateNavigationSpeed = value;
 		});

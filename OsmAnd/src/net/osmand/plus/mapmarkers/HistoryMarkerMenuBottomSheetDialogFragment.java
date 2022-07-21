@@ -9,7 +9,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
@@ -18,7 +17,7 @@ import java.util.Locale;
 
 public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
+	public static final String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
 
 	public static final String MARKER_POSITION = "marker_position";
 	public static final String MARKER_NAME = "marker_name";
@@ -36,10 +35,10 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		Bundle arguments = getArguments();
 
 		if (arguments != null) {
-			final int pos = arguments.getInt(MARKER_POSITION);
-			final String markerName = arguments.getString(MARKER_NAME);
-			final int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
-			final long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
+			int pos = arguments.getInt(MARKER_POSITION);
+			String markerName = arguments.getString(MARKER_NAME);
+			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
+			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
 
 			Date date = new Date(markerVisitedDate);
 			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);

@@ -12,7 +12,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 public class AltitudeWidget extends TextInfoWidget {
 
-	private int cachedAltitude = 0;
+	private int cachedAltitude;
 
 	public AltitudeWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, ALTITUDE);

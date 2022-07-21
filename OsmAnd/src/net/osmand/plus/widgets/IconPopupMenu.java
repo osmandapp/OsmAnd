@@ -20,10 +20,10 @@ import androidx.appcompat.view.menu.SubMenuBuilder;
  * @since 5:00 PM - 1/27/14
  */
 public class IconPopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
-	private Context mContext;
-	private MenuBuilder mMenu;
-	private View mAnchor;
-	private MenuPopupHelper mPopup;
+	private final Context mContext;
+	private final MenuBuilder mMenu;
+	private final View mAnchor;
+	private final MenuPopupHelper mPopup;
 	private OnMenuItemClickListener mMenuItemClickListener;
 	private OnDismissListener mDismissListener;
 

@@ -54,7 +54,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication());
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.bottom_sheet_plan_route_start, null);
 
@@ -110,7 +110,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 		items.add(new DividerItem(getContext()));
 
-		final RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
+		RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
@@ -126,7 +126,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 						? -1 : (lhs.getLastModified() == rhs.getLastModified() ? 0 : 1);
 			}
 		});
-		final List<GPXInfo> gpxTopList = gpxList.subList(0, Math.min(5, gpxList.size()));
+		List<GPXInfo> gpxTopList = gpxList.subList(0, Math.min(5, gpxList.size()));
 		adapter = new GpxTrackAdapter(requireContext(), gpxTopList, false, true);
 		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override

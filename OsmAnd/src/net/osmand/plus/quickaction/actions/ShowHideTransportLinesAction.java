@@ -32,7 +32,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
 		boolean selected = transportLinesMenu.isShowAnyTransport();

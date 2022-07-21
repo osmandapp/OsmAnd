@@ -104,8 +104,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 	private static final String EXPORT_TYPE_KEY = "export_type";
 
-	private final static int MODE_DELETE = 100;
-	private final static int MODE_UPLOAD = 101;
+	private static final int MODE_DELETE = 100;
+	private static final int MODE_UPLOAD = 101;
 
 	private OsmandApplication app;
 	private OsmEditingPlugin plugin;
@@ -124,8 +124,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	private int exportType;
 
 	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
-		TextView viewName = ((TextView) v.findViewById(R.id.name));
-		ImageView icon = (ImageView) v.findViewById(R.id.icon);
+		TextView viewName = v.findViewById(R.id.name);
+		ImageView icon = v.findViewById(R.id.icon);
 		String name = OsmEditingPlugin.getEditName(child);
 		viewName.setText(name);
 		if (child.getGroup() == Group.POI) {
@@ -134,7 +134,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note_add, R.color.color_distance));
 		}
 
-		TextView descr = (TextView) v.findViewById(R.id.description);
+		TextView descr = v.findViewById(R.id.description);
 		if (child.getAction() == OsmPoint.Action.CREATE) {
 			descr.setText(R.string.action_create);
 		} else if (child.getAction() == OsmPoint.Action.MODIFY) {
@@ -159,7 +159,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
-		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
 		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
@@ -291,7 +291,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
-			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).setIcon(R.drawable.ic_action_export);
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -347,7 +347,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
-			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				MenuItem item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -411,7 +411,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		return null;
 	}
 
-	private void deleteItems(final ArrayList<OsmPoint> points) {
+	private void deleteItems(ArrayList<OsmPoint> points) {
 		DeleteOsmEditsConfirmDialogFragment.createInstance(points).show(getChildFragmentManager(), DeleteOsmEditsConfirmDialogFragment.TAG);
 	}
 
@@ -500,8 +500,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		return items;
 	}
 
-	private void showBugDialog(final OsmNotesPoint point) {
-		final View view = LayoutInflater.from(getActivity()).inflate(R.layout.open_bug, null);
+	private void showBugDialog(OsmNotesPoint point) {
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.open_bug, null);
 		view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
 		view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
 		view.findViewById(R.id.password_field).setVisibility(View.GONE);
@@ -511,7 +511,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			((EditText) view.findViewById(R.id.message_field)).setText(text);
 		}
 
-		final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.shared_string_commit);
 		builder.setView(view);
 		builder.setPositiveButton(R.string.osn_modify_dialog_title, new DialogInterface.OnClickListener() {
@@ -537,7 +537,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		});
 	}
 
-	private void openPopUpMenu(final OsmPoint info) {
+	private void openPopUpMenu(OsmPoint info) {
 		OsmEditOptionsBottomSheetDialogFragment optionsFragment = new OsmEditOptionsBottomSheetDialogFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(OsmEditOptionsBottomSheetDialogFragment.OSM_POINT, info);
@@ -564,7 +564,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			@Override
 			public void onModifyOsmChangeClick(OsmPoint osmPoint) {
 				OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(osmPoint);
-				final Entity entity = i.getEntity();
+				Entity entity = i.getEntity();
 				refreshId = entity.getId();
 				EditPoiDialogFragment.createInstance(entity, false).show(getActivity().getSupportFragmentManager(), "edit_poi");
 			}
@@ -647,7 +647,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		return info;
 	}
 
-	private void uploadItems(final OsmPoint[] points) {
+	private void uploadItems(OsmPoint[] points) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			if (hasPoiGroup(points)) {
@@ -751,9 +751,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			final OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
-			final OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
-			@SuppressWarnings("unchecked") final ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
+			OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
+			OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+			@SuppressWarnings("unchecked") ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			assert points != null;

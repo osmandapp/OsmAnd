@@ -87,7 +87,7 @@ public enum ExportSettingsType {
 
 	@Nullable
 	public static ExportSettingsType getExportSettingsTypeForItem(@NonNull SettingsItem item) {
-		for (ExportSettingsType exportType : ExportSettingsType.values()) {
+		for (ExportSettingsType exportType : values()) {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
@@ -105,7 +105,7 @@ public enum ExportSettingsType {
 		if (remoteFile.item != null) {
 			return getExportSettingsTypeForItem(remoteFile.item);
 		}
-		for (ExportSettingsType exportType : ExportSettingsType.values()) {
+		for (ExportSettingsType exportType : values()) {
 			String type = remoteFile.getType();
 			if (exportType.getItemName().equals(type)) {
 				if (SettingsItemType.FILE.name().equals(type)) {
@@ -123,33 +123,33 @@ public enum ExportSettingsType {
 
 	public static ExportSettingsType getExportSettingsTypeFileSubtype(@NonNull FileSubtype subtype) {
 		if (subtype == FileSubtype.RENDERING_STYLE) {
-			return ExportSettingsType.CUSTOM_RENDER_STYLE;
+			return CUSTOM_RENDER_STYLE;
 		} else if (subtype == FileSubtype.ROUTING_CONFIG) {
-			return ExportSettingsType.CUSTOM_ROUTING;
+			return CUSTOM_ROUTING;
 		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
-			return ExportSettingsType.MULTIMEDIA_NOTES;
+			return MULTIMEDIA_NOTES;
 		} else if (subtype == FileSubtype.GPX) {
-			return ExportSettingsType.TRACKS;
+			return TRACKS;
 		} else if (subtype.isMap()) {
-			return ExportSettingsType.OFFLINE_MAPS;
+			return OFFLINE_MAPS;
 		} else if (subtype == FileSubtype.TTS_VOICE) {
-			return ExportSettingsType.TTS_VOICE;
+			return TTS_VOICE;
 		} else if (subtype == FileSubtype.VOICE) {
-			return ExportSettingsType.VOICE;
+			return VOICE;
 		}
 		return null;
 	}
 
 	public static List<ExportSettingsType> getEnabledTypes() {
-		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(ExportSettingsType.values()));
+		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(values()));
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin == null) {
-			result.remove(ExportSettingsType.OSM_EDITS);
-			result.remove(ExportSettingsType.OSM_NOTES);
+			result.remove(OSM_EDITS);
+			result.remove(OSM_NOTES);
 		}
 		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		if (avNotesPlugin == null) {
-			result.remove(ExportSettingsType.MULTIMEDIA_NOTES);
+			result.remove(MULTIMEDIA_NOTES);
 		}
 		return result;
 	}

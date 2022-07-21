@@ -89,9 +89,9 @@ public class DownloadDescriptionInfo {
 
 		public static final String DOWNLOAD_ACTION = "download";
 
-		private String actionType;
-		private String name;
-		private String url;
+		private final String actionType;
+		private final String name;
+		private final String url;
 
 		public ActionButton(String actionType, String name, String url) {
 			this.actionType = actionType;

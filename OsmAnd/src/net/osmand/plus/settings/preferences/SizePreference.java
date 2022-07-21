@@ -94,7 +94,7 @@ public class SizePreference extends DialogPreference {
 		}
 		if (!isPersistedStringEqualsZero(persistedString)) {
 			try {
-				final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
+				DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
 				persistedString = df.format(Double.parseDouble(persistedString) + 0.01d);
 				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
 						persistedString, getContext().getString(assets.getMetricShortRes()));

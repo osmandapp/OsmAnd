@@ -164,7 +164,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	private static final int DRAWER_MODE_SWITCH_PROFILE = 1;
 
 	// make static
-	private static Bundle dialogBundle = new Bundle();
+	private static final Bundle dialogBundle = new Bundle();
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -203,13 +203,13 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		openIntermediatePointsDialog();
 	}
 
-	private Dialog createAddWaypointDialog(final Bundle args) {
+	private Dialog createAddWaypointDialog(Bundle args) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.add_gpx_point_dialog, null);
-		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
+		EditText editText = view.findViewById(android.R.id.edit);
 		builder.setView(view);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
@@ -225,7 +225,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 				dialog.dismiss();
 			}
 		});
-		final AlertDialog alertDialog = builder.create();
+		AlertDialog alertDialog = builder.create();
 		editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -241,7 +241,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		return mapActivity.getString(res);
 	}
 
-	protected void showToast(final String msg) {
+	protected void showToast(String msg) {
 		mapActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -255,15 +255,15 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	}
 
 	public static Dialog createSaveDirections(Activity activity, RoutingHelper routingHelper) {
-		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		final File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final Dialog dlg = new Dialog(activity);
+		OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		Dialog dlg = new Dialog(activity);
 		dlg.setTitle(R.string.shared_string_save_as_gpx);
 		dlg.setContentView(R.layout.save_directions_dialog);
-		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
+		EditText edit = dlg.findViewById(R.id.FileNameEdit);
 
-		final GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
-		final String editText;
+		GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
+		String editText;
 		if (rp == null || rp.getFile() == null || rp.getFile().path == null) {
 			editText = "_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_";
 		} else {
@@ -348,11 +348,11 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		}
 	}
 
-	public void addActionsToAdapter(final double latitude,
-									final double longitude,
-									final ContextMenuAdapter adapter,
-									Object selectedObj,
-									boolean configureMenu) {
+	public void addActionsToAdapter(double latitude,
+	                                double longitude,
+	                                ContextMenuAdapter adapter,
+	                                Object selectedObj,
+	                                boolean configureMenu) {
 		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 
 		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_ADD_ID)
@@ -431,7 +431,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(latitude, longitude, adapter));
 	}
 
-	public void showAdditionalActionsFragment(final ContextMenuAdapter adapter, AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
+	public void showAdditionalActionsFragment(ContextMenuAdapter adapter, AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
 		AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
 		actionsBottomSheetDialogFragment.setAdapter(adapter, listener);
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
@@ -476,7 +476,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		};
 	}
 
-	public void enterDirectionsFromPoint(final double latitude, final double longitude) {
+	public void enterDirectionsFromPoint(double latitude, double longitude) {
 		mapActivity.getContextMenu().hide();
 		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			enterRoutePlanningMode(new LatLon(latitude, longitude), mapActivity.getContextMenu().getPointDescription());
@@ -518,7 +518,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		app.initVoiceCommandPlayer(mapActivity, mode, null, true, false, false, showMenu);
 	}
 
-	public void contextMenuPoint(final double latitude, final double longitude) {
+	public void contextMenuPoint(double latitude, double longitude) {
 		contextMenuPoint(latitude, longitude, null, null);
 	}
 
@@ -581,7 +581,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		String modeDescription;
 
 		RoutingProfilesHolder profiles = routingDataUtils.getRoutingProfiles();
-		for (final ApplicationMode appMode : activeModes) {
+		for (ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
 				modeDescription = getProfileDescription(app, appMode, profiles, getString(R.string.profile_type_user_string));
 			} else {
@@ -617,7 +617,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		return adapter;
 	}
 
-	private ContextMenuAdapter createNormalOptionsMenu(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
+	private ContextMenuAdapter createNormalOptionsMenu(OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
 
 		createProfilesController(app, optionsMenuHelper, nightMode, false);
 
@@ -831,7 +831,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	private void createProfilesController(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode, boolean listExpanded) {
+	private void createProfilesController(OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode, boolean listExpanded) {
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
@@ -843,7 +843,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		}
 
 		int icArrowResId = listExpanded ? R.drawable.ic_action_arrow_drop_up : R.drawable.ic_action_arrow_drop_down;
-		final int nextMode = listExpanded ? DRAWER_MODE_NORMAL : DRAWER_MODE_SWITCH_PROFILE;
+		int nextMode = listExpanded ? DRAWER_MODE_NORMAL : DRAWER_MODE_SWITCH_PROFILE;
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_SWITCH_PROFILE_ID)
 				.setLayout(R.layout.main_menu_drawer_btn_switch_profile)
 				.setIcon(currentMode.getIconRes())
@@ -937,7 +937,7 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	}
 
 	public void whereAmIDialog() {
-		final List<String> items = new ArrayList<>();
+		List<String> items = new ArrayList<>();
 		items.add(getString(R.string.show_location));
 		items.add(getString(R.string.shared_string_show_details));
 		AlertDialog.Builder menu = new AlertDialog.Builder(mapActivity);

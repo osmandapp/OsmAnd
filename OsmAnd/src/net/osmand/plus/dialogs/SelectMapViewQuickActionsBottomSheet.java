@@ -170,7 +170,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			}
 		} else if (action instanceof SwitchProfileAction) {
 			SwitchProfileAction switchProfileAction = (SwitchProfileAction) action;
-			List<String> profilesKeys = (List<String>) switchProfileAction.loadListFromParams();
+			List<String> profilesKeys = switchProfileAction.loadListFromParams();
 			for (String key : profilesKeys) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(key, null);
 				if (appMode != null) {
@@ -200,14 +200,14 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		view.setTag(tag);
 		view.setOnClickListener(getOnClickListener());
 
-		TextView titleTv = (TextView) view.findViewById(R.id.title);
+		TextView titleTv = view.findViewById(R.id.title);
 		titleTv.setText(text);
 		titleTv.setTextColor(getStyleTitleColor(selected));
 
-		RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
+		RadioButton rb = view.findViewById(R.id.compound_button);
 		rb.setChecked(selected);
 		CompoundButtonCompat.setButtonTintList(rb, rbColorList);
-		ImageView imageView = (ImageView) view.findViewById(R.id.icon);
+		ImageView imageView = view.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
 	}
 

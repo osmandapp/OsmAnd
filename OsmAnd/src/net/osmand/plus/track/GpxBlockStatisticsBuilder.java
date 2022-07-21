@@ -62,11 +62,11 @@ public class GpxBlockStatisticsBuilder {
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
 	private boolean blocksClickable = true;
-	private GPXTabItemType tabItem = null;
+	private GPXTabItemType tabItem;
 
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
-	private boolean updateRunning = false;
+	private boolean updateRunning;
 
 	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile, boolean nightMode) {
 		this.app = app;
@@ -82,7 +82,7 @@ public class GpxBlockStatisticsBuilder {
 		this.blocksClickable = blocksClickable;
 	}
 
-	public void setBlocksView(final RecyclerView blocksView, boolean isParentExpandable) {
+	public void setBlocksView(RecyclerView blocksView, boolean isParentExpandable) {
 		this.blocksView = blocksView;
 		if (isParentExpandable) {
 			blocksView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -90,11 +90,7 @@ public class GpxBlockStatisticsBuilder {
 				public void onGlobalLayout() {
 					if (blocksView.getHeight() != 0) {
 						ViewTreeObserver obs = blocksView.getViewTreeObserver();
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							obs.removeOnGlobalLayoutListener(this);
-						} else {
-							obs.removeGlobalOnLayoutListener(this);
-						}
+						obs.removeOnGlobalLayoutListener(this);
 						blocksView.setMinimumHeight(blocksView.getHeight());
 					}
 				}
@@ -392,7 +388,7 @@ public class GpxBlockStatisticsBuilder {
 		ITEM_SPEED,
 		ITEM_TIME,
 		ITEM_TIME_SPAN,
-		ITEM_TIME_MOVING;
+		ITEM_TIME_MOVING
 	}
 
 	private class BlockStatisticsAdapter extends RecyclerView.Adapter<BlockStatisticsViewHolder> {
@@ -431,7 +427,7 @@ public class GpxBlockStatisticsBuilder {
 
 		@Override
 		public void onBindViewHolder(BlockStatisticsViewHolder holder, int position) {
-			final StatBlock item = items.get(position);
+			StatBlock item = items.get(position);
 			holder.valueText.setText(item.value);
 			holder.valueText.setTextColor(activeColor);
 			holder.titleText.setText(item.title);

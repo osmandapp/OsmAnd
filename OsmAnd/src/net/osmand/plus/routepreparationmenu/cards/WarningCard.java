@@ -57,9 +57,9 @@ public abstract class WarningCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		ImageView icon = (ImageView) view.findViewById(R.id.warning_img);
-		TextView warningTitle = (TextView) view.findViewById(R.id.warning_title);
-		TextView warningLink = (TextView) view.findViewById(R.id.warning_link);
+		ImageView icon = view.findViewById(R.id.warning_img);
+		TextView warningTitle = view.findViewById(R.id.warning_title);
+		TextView warningLink = view.findViewById(R.id.warning_link);
 
 		if (imageDrawable != null) {
 			icon.setImageDrawable(imageDrawable);

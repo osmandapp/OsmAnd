@@ -59,7 +59,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 				LatLon latLon = getSelectedLatLon();
 				WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 				if (editor != null) {
-					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
+					editor.setOnDismissListener(this);
 					editor.setNewGpxPointProcessing();
 					editor.add(gpx, latLon, titleText);
 				}

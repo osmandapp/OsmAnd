@@ -31,8 +31,8 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 			return;
 		}
 
-		final View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.crash_title, null);
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.crash_title, null);
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);
@@ -59,9 +59,9 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {
-			if (fm.findFragmentByTag(CrashBottomSheetDialogFragment.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				CrashBottomSheetDialogFragment fragment = new CrashBottomSheetDialogFragment();
-				fragment.show(fm, CrashBottomSheetDialogFragment.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

@@ -23,7 +23,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
+	public static final String TAG = "CoordinateInputBottomSheetDialogFragment";
 
 	private CoordinateInputFormatChangeListener listener;
 
@@ -33,8 +33,8 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final Context context = getContext();
-		final OsmandSettings settings = getMyApplication().getSettings();
+		Context context = getContext();
+		OsmandSettings settings = getMyApplication().getSettings();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 		BaseBottomSheetItem editItem = new SimpleBottomSheetItem.Builder()

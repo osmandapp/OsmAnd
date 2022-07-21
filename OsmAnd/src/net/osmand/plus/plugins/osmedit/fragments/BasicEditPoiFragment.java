@@ -65,7 +65,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 	private EditText descriptionEditText;
 	private OpeningHoursAdapter openingHoursAdapter;
 
-	private boolean basicTagsInitialized = false;
+	private boolean basicTagsInitialized;
 
 	@Nullable
 	@Override
@@ -76,7 +76,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
-		InputFilter[] lengthLimit = new InputFilter[] {
+		InputFilter[] lengthLimit = {
 				new LengthFilter(AMENITY_TEXT_LENGTH)
 		};
 		streetEditText = view.findViewById(R.id.streetEditText);
@@ -130,7 +130,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 		return view;
 	}
 
-	protected void addTextWatcher(final String tag, final EditText e) {
+	protected void addTextWatcher(String tag, EditText e) {
 		e.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -273,8 +273,8 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 			}
 		}
 
-		private View getView(final int position) {
-			final View view = LayoutInflater.from(linearLayout.getContext())
+		private View getView(int position) {
+			View view = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.open_time_list_item, null, false);
 
 			ImageView clockIconImageView = view.findViewById(R.id.clockIconImageView);
@@ -287,7 +287,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 			Button addTimeSpanButton = view.findViewById(R.id.addTimeSpanButton);
 
 			if (openingHours.getRules().get(position) instanceof BasicOpeningHourRule) {
-				final BasicOpeningHourRule rule = (BasicOpeningHourRule) openingHours.getRules().get(position);
+				BasicOpeningHourRule rule = (BasicOpeningHourRule) openingHours.getRules().get(position);
 				StringBuilder stringBuilder = new StringBuilder();
 				rule.appendDaysString(stringBuilder);
 
@@ -301,8 +301,8 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 					}
 				});
 
-				final TIntArrayList startTimes = rule.getStartTimes();
-				final TIntArrayList endTimes = rule.getEndTimes();
+				TIntArrayList startTimes = rule.getStartTimes();
+				TIntArrayList endTimes = rule.getEndTimes();
 				for (int i = 0; i < startTimes.size(); i++) {
 					View timeFromToLayout = LayoutInflater.from(linearLayout.getContext())
 							.inflate(R.layout.time_from_to_layout, timeListContainer, false);
@@ -334,7 +334,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 					ImageButton deleteTimeSpanImageButton = timeFromToLayout
 							.findViewById(R.id.deleteTimespanImageButton);
 					deleteTimeSpanImageButton.setImageDrawable(deleteDrawable);
-					final int timeSpanPosition = i;
+					int timeSpanPosition = i;
 					deleteTimeSpanImageButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {

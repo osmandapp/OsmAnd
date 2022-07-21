@@ -34,7 +34,7 @@ public class HorizontalRecyclerBottomSheetItem extends BaseBottomSheetItem {
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		recyclerView = ((RecyclerView) view.findViewById(R.id.recycler_view));
+		recyclerView = view.findViewById(R.id.recycler_view);
 		if (recyclerView != null && adapter != null) {
 			recyclerView.setAdapter(adapter);
 		}

@@ -68,8 +68,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) getActivity();
-		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		MapActivity mapActivity = (MapActivity) getActivity();
+		boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		mainView = UiUtilities.getInflater(mapActivity, night).inflate(R.layout.fragment_map_markers_groups, container, false);
 
 		Fragment selectionMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(SelectionMarkersGroupBottomSheetDialogFragment.TAG);
@@ -81,7 +81,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
 		}
 
-		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
+		EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
@@ -98,16 +98,16 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		textPaint.setFakeBoldText(true);
 		textPaint.setAntiAlias(true);
 
-		final String delStr = getString(R.string.shared_string_delete).toUpperCase();
-		final String moveToHistoryStr = getString(R.string.move_to_history).toUpperCase();
-		final Rect bounds = new Rect();
+		String delStr = getString(R.string.shared_string_delete).toUpperCase();
+		String moveToHistoryStr = getString(R.string.move_to_history).toUpperCase();
+		Rect bounds = new Rect();
 
 		textPaint.getTextBounds(delStr, 0, delStr.length(), bounds);
-		final int delStrWidth = bounds.width();
-		final int textHeight = bounds.height();
+		int delStrWidth = bounds.width();
+		int textHeight = bounds.height();
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
+			private final float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private boolean iconHidden;
 
 			@Override
@@ -185,11 +185,11 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 
 			@Override
-			public void onSwiped(RecyclerView.ViewHolder viewHolder, final int direction) {
-				final int pos = viewHolder.getAdapterPosition();
+			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+				int pos = viewHolder.getAdapterPosition();
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					final MapMarker marker = (MapMarker) item;
+					MapMarker marker = (MapMarker) item;
 					int snackbarStringRes;
 					if (direction == ItemTouchHelper.RIGHT) {
 						app.getMapMarkersHelper().moveMapMarkerToHistory((MapMarker) item);
@@ -301,14 +301,14 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 
-		final View emptyView = mainView.findViewById(R.id.empty_view);
+		View emptyView = mainView.findViewById(R.id.empty_view);
 		mainView.findViewById(R.id.import_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				openAddGroupMenu();
 			}
 		});
-		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
 		} else {
@@ -475,7 +475,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		if (!compassUpdateAllowed) {
 			return;
 		}
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override

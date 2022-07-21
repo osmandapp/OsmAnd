@@ -53,7 +53,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		Activity activity = requireActivity();
 		nightMode = requiredMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		availableScreenH = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity);
 		if (portrait) {
 			availableScreenH -= AndroidUtils.getNavBarHeight(activity);
@@ -90,7 +90,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		};
 
 		if (adapter != null) {
-			LinearLayout itemsLinearLayout = (LinearLayout) mainView.findViewById(R.id.context_menu_items_container);
+			LinearLayout itemsLinearLayout = mainView.findViewById(R.id.context_menu_items_container);
 			LinearLayout row = (LinearLayout) View.inflate(context, R.layout.grid_menu_row, null);
 			int itemsAdded = 0;
 			for (int i = 0; i < adapter.length(); i++) {
@@ -119,7 +119,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 			}
 		}
 
-		final ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(scrollView);
+		ExtendedBottomSheetBehavior behavior = ExtendedBottomSheetBehavior.from(scrollView);
 		behavior.setBottomSheetCallback(new BottomSheetCallback() {
 			@Override
 			public void onStateChanged(@NonNull View bottomSheet, int newState) {

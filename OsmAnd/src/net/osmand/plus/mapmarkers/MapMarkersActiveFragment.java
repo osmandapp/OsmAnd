@@ -44,13 +44,13 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) getActivity();
-		final View mainView = inflater.inflate(R.layout.fragment_map_markers_active, container, false);
-		final EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
+		MapActivity mapActivity = (MapActivity) getActivity();
+		View mainView = inflater.inflate(R.layout.fragment_map_markers_active, container, false);
+		EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		adapter = new MapMarkersActiveAdapter(mapActivity);
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(mapActivity, adapter));
+		ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(mapActivity, adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		adapter.setAdapterListener(new MapMarkersActiveAdapterListener() {
 
@@ -125,7 +125,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 
-		final View emptyView = mainView.findViewById(R.id.empty_view);
+		View emptyView = mainView.findViewById(R.id.empty_view);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent()
 				? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
@@ -204,7 +204,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		if (!compassUpdateAllowed) {
 			return;
 		}
-		final MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(() -> {
 				if (location == null) {

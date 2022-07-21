@@ -28,8 +28,8 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 		}
 		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
-		final OsmandApplication application = (OsmandApplication) context.getApplicationContext();
-		final OsmandSettings settings = application.getSettings();
+		OsmandApplication application = (OsmandApplication) context.getApplicationContext();
+		OsmandSettings settings = application.getSettings();
 
 		if (!preferenceDownloadViaWiFi(localIndexInfoFile, settings).get() || wifi.isWifiEnabled()) {
 			new PerformLiveUpdateAsyncTask(context, localIndexInfoFile, false)

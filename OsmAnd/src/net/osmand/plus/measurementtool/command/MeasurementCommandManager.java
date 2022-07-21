@@ -13,7 +13,7 @@ public class MeasurementCommandManager {
 	private final Deque<MeasurementModeCommand> undoCommands = new LinkedList<>();
 	private final Deque<MeasurementModeCommand> redoCommands = new LinkedList<>();
 
-	private int changesCounter = 0;
+	private int changesCounter;
 
 	public boolean hasChanges() {
 		return changesCounter != 0;

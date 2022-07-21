@@ -52,7 +52,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		}
 	}
 
-	private void setupPassWholeRoute(final View parameterView) {
+	private void setupPassWholeRoute(View parameterView) {
 		AndroidUiHelper.updateVisibility(parameterView, true);
 
 		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
@@ -112,7 +112,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		rightButton.setText(appMode.toHumanString());
 	}
 
-	private void setupParameterView(final View parameterView, LocalRoutingParameter parameter) {
+	private void setupParameterView(View parameterView, LocalRoutingParameter parameter) {
 		AndroidUiHelper.updateVisibility(parameterView, true);
 
 		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);

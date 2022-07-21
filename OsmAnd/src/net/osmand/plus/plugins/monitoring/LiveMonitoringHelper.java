@@ -25,15 +25,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class LiveMonitoringHelper {
 
-	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
+	private static final Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
+	private final ConcurrentLinkedQueue<LiveMonitoringData> queue;
 
 	private LatLon lastPoint;
 	private long lastTimeUpdated;
-	private boolean started = false;
+	private boolean started;
 
 	public LiveMonitoringHelper(OsmandApplication app) {
 		this.app = app;
@@ -169,7 +169,7 @@ public class LiveMonitoringHelper {
 					}
 					is.close();
 				}
-				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
+				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody);
 			}
 
 			urlConnection.disconnect();

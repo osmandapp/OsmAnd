@@ -1451,7 +1451,7 @@
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
-    <string name="shared_string_currently_recording_track">Enregistrement d\'itinéraire en cours</string>
+    <string name="shared_string_currently_recording_track">Trace en cours d’enregistrement</string>
     <string name="back_to_map">Retour à la carte</string>
     <string name="shared_string_selected">Sélectionné</string>
     <string name="track_points">Points de la trace</string>
@@ -3213,7 +3213,7 @@
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
-    <string name="update_all_maps_q">Mettre à jour les %1$d cartes \?</string>
+    <string name="update_all_maps_q">Mettre à jour %1$d cartes \?</string>
     <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier \'rec\' ou dans des dossiers mensuels ou journaliers.</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
@@ -4763,4 +4763,11 @@
     <string name="trip_recording_duration_widget_desc">Affiche la durée du trajet en cours d\'enregistrement.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Afficher les chemins tracés pour les VTT</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Afficher la difficulté des chemins VTT IMBA</string>
+    <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera comptabilisée et affectera le calcul de la vitesse moyenne.</string>
+    <string name="download_tiles">Télécharger les tuiles</string>
+    <string name="without_profiles_changing">Sans modification des profils</string>
+    <string name="shared_string_only_missing">Manquant seulement</string>
+    <string name="connect_with_straight_line">Connecter par une ligne droite</string>
+    <string name="attach_roads_warning">Vous ne pouvez raccrocher aux routes qu\'une trace déjà enregistrée</string>
+    <string name="attach_roads_descr">Souhaitez-vous rattacher votre trace aux routes existantes sur les cartes hors ligne \? Dans ce cas, vous disposerez d\'une altitude corrigée, d\'informations sur la route et les bifurcations qui pourront être utilisées pendant le guidage.</string>
 </resources>

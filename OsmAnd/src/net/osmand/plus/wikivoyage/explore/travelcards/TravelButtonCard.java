@@ -26,7 +26,7 @@ public class TravelButtonCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof TravelButtonVH) {
-			final TravelButtonVH holder = (TravelButtonVH) viewHolder;
+			TravelButtonVH holder = (TravelButtonVH) viewHolder;
 			UiUtilities.setupDialogButton(nightMode, holder.button, UiUtilities.DialogButtonType.SECONDARY, R.string.show_more);
 			holder.button.setOnClickListener(new View.OnClickListener() {
 				@Override

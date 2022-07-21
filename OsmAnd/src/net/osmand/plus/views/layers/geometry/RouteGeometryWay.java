@@ -92,7 +92,7 @@ public class RouteGeometryWay extends
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
 		return coloringType.isGradient()
-				? super.getGradientWayStyle()
+				? getGradientWayStyle()
 				: getArrowWayStyle(customColor);
 	}
 

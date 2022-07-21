@@ -111,8 +111,8 @@ public class UploadPhotosHelper {
 							ImageCardsHolder holder = new ImageCardsHolder();
 							if (OsmandPlugin.createImageCardForJson(holder, new JSONObject(response))) {
 								ImageCard imageCard = holder.getFirstItem();
-								if (imageCard != null && UploadPhotosHelper.this.listener != null) {
-									UploadPhotosHelper.this.listener.imageCardCreated(imageCard);
+								if (imageCard != null && this.listener != null) {
+									this.listener.imageCardCreated(imageCard);
 								}
 							}
 						} catch (JSONException e) {

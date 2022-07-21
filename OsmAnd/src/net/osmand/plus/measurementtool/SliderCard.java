@@ -14,7 +14,7 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 
 public class SliderCard extends MapBaseCard {
 
-	private int initValue;
+	private final int initValue;
 	private SliderCardListener listener;
 
 	public SliderCard(MapActivity mapActivity, int initValue) {
@@ -29,7 +29,7 @@ public class SliderCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		final TextView thresholdDistanceValue = view.findViewById(R.id.value);
+		TextView thresholdDistanceValue = view.findViewById(R.id.value);
 		thresholdDistanceValue.setText(getStringValueWithMetric(initValue));
 		TextView thresholdDistance = view.findViewById(R.id.title);
 		thresholdDistance.setText(R.string.threshold_distance);
@@ -70,7 +70,7 @@ public class SliderCard extends MapBaseCard {
 
 	private String getStringValueWithMetric(int value) {
 		return String.format(view.getContext().getString(R.string.ltr_or_rtl_combine_via_space),
-				String.valueOf(value), view.getContext().getString(R.string.m));
+				value, view.getContext().getString(R.string.m));
 	}
 
 	interface SliderCardListener {

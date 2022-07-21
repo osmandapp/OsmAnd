@@ -26,7 +26,6 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 
 	private RoutingDataUtils dataUtils;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
-	;
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,

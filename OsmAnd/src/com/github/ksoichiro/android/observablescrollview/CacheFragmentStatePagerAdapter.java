@@ -39,8 +39,8 @@ public abstract class CacheFragmentStatePagerAdapter extends FragmentStatePagerA
     private static final String STATE_PAGE_INDEX_PREFIX = "pageIndex:";
     private static final String STATE_PAGE_KEY_PREFIX = "page:";
 
-    private FragmentManager mFm;
-    private SparseArray<Fragment> mPages;
+    private final FragmentManager mFm;
+    private final SparseArray<Fragment> mPages;
 
     public CacheFragmentStatePagerAdapter(FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

@@ -31,8 +31,8 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -143,7 +143,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void registerAllControls(@NonNull MapActivity mapActivity) {
-		rulerWidgets = new ArrayList<>();
+		rulerWidgets = new CopyOnWriteArrayList<>();
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -199,10 +199,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void removeRulerWidgets(List<RulerWidget> rulers) {
-		List<RulerWidget> widgetList = new ArrayList<>(rulerWidgets);
-		widgetList.removeAll(rulers);
-		rulerWidgets = widgetList;
+	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
+		rulerWidgets.removeAll(rulers);
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {

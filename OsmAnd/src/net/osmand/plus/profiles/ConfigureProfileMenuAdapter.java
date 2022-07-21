@@ -32,8 +32,8 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureProfileMenuAdapter.class);
 
-	private List<Object> items = new ArrayList<>();
-	private Set<ApplicationMode> selectedItems;
+	private final List<Object> items = new ArrayList<>();
+	private final Set<ApplicationMode> selectedItems;
 
 	@Nullable
 	private ProfileSelectedListener profileSelectedListener;
@@ -41,10 +41,10 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 	@ColorInt
 	private int selectedIconColor;
 	private boolean bottomButton;
-	private String bottomButtonText;
+	private final String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
 
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	public ConfigureProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
 	                                   OsmandApplication app, String bottomButtonText, boolean nightMode) {
@@ -95,7 +95,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final ConfigureProfileViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull ConfigureProfileViewHolder holder, int position) {
 		Object obj = items.get(position);
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		holder.dividerUp.setVisibility(View.INVISIBLE);
@@ -105,7 +105,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			holder.descr.setVisibility(View.VISIBLE);
 			holder.compoundButton.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.VISIBLE);
-			final ApplicationMode item = (ApplicationMode) obj;
+			ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString());
 			holder.descr.setText(ProfileDataUtils.getAppModeDescription(app, item));
 
@@ -114,7 +114,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			holder.initSwitcher = false;
 			updateViewHolder(holder, item);
 		} else {
-			final String title = (String) obj;
+			String title = (String) obj;
 			if (title.equals(BUTTON_ITEM)) {
 				holder.dividerBottom.setVisibility(View.INVISIBLE);
 			}
@@ -173,7 +173,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 					if (pos != RecyclerView.NO_POSITION && profileSelectedListener != null && !initSwitcher) {
 						Object o = items.get(pos);
 						if (o instanceof ApplicationMode) {
-							final ApplicationMode item = (ApplicationMode) o;
+							ApplicationMode item = (ApplicationMode) o;
 							if (isChecked) {
 								selectedItems.add(item);
 							} else {

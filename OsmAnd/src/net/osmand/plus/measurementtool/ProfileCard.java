@@ -39,7 +39,7 @@ public class ProfileCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
+		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		modes.remove(ApplicationMode.DEFAULT);
 		Iterator<ApplicationMode> iterator = modes.iterator();
 		while (iterator.hasNext()) {

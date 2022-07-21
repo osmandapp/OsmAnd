@@ -107,12 +107,12 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		private final MapTileDownloader tileDownloader;
 		private final IMapDownloaderCallback tileDownloadCallback;
 
-		private int activeRequests = 0;
-		private long availableTiles = 0;
-		private long totalTilesBytes = 0;
+		private int activeRequests;
+		private long availableTiles;
+		private long totalTilesBytes;
 		private final List<String> recentlyDownloadedTilesIds = new ArrayList<>();
 
-		private boolean cancelled = false;
+		private boolean cancelled;
 
 		public DownloadTilesTask(@NonNull OsmandApplication app,
 		                         int minZoom,

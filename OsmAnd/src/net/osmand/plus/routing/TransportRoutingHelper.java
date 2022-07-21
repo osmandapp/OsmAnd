@@ -79,7 +79,7 @@ public class TransportRoutingHelper {
 
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
-	private long lastTimeEvaluatedRoute = 0;
+	private long lastTimeEvaluatedRoute;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
@@ -239,16 +239,16 @@ public class TransportRoutingHelper {
 		this.progressRoute = progressRoute;
 	}
 
-	private void startProgress(final TransportRouteCalculationParams params) {
-		final TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
+	private void startProgress(TransportRouteCalculationParams params) {
+		TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
 			progressRoute.start();
 		}
 		setCurrentRoute(-1);
 	}
 
-	private void updateProgress(final TransportRouteCalculationParams params) {
-		final TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
+	private void updateProgress(TransportRouteCalculationParams params) {
+		TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
 			app.runInUIThread(new Runnable() {
 
@@ -292,7 +292,7 @@ public class TransportRoutingHelper {
 		}
 	}
 
-	private void setNewRoute(final List<TransportRouteResult> res) {
+	private void setNewRoute(List<TransportRouteResult> res) {
 		app.logRoutingEvent("setNewRoute res " + res);
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -536,7 +536,7 @@ public class TransportRoutingHelper {
 		private RouteCalculationParams getWalkingRouteParams() {
 			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
 
-			final WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
+			WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
 			if (walkingRouteSegment == null) {
 				return null;
 			}
@@ -547,11 +547,11 @@ public class TransportRoutingHelper {
 			start.setLongitude(walkingRouteSegment.start.getLongitude());
 			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 
-			final float currentDistanceFromBegin =
-					RouteRecalculationTask.this.params.calculationProgress.distanceFromBegin +
+			float currentDistanceFromBegin =
+					this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
 
-			final RouteCalculationParams params = new RouteCalculationParams();
+			RouteCalculationParams params = new RouteCalculationParams();
 			params.inPublicTransportMode = true;
 			params.start = start;
 			params.end = end;
@@ -648,8 +648,8 @@ public class TransportRoutingHelper {
 			}
 		}
 
-		private void showMessage(final String msg) {
-			final OsmandApplication app = routingHelper.getApplication();
+		private void showMessage(String msg) {
+			OsmandApplication app = routingHelper.getApplication();
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {

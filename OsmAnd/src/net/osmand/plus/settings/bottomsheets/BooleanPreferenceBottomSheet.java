@@ -44,11 +44,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return;
 		}
-		final SwitchPreferenceEx switchPreference = getSwitchPreferenceEx();
+		SwitchPreferenceEx switchPreference = getSwitchPreferenceEx();
 		if (switchPreference == null) {
 			return;
 		}
@@ -61,18 +61,18 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
 
-		final BooleanPreference pref = (BooleanPreference) preference;
+		BooleanPreference pref = (BooleanPreference) preference;
 		CharSequence summaryOn = switchPreference.getSummaryOn();
 		CharSequence summaryOff = switchPreference.getSummaryOff();
-		final String on = summaryOn == null || summaryOn.toString().isEmpty()
+		String on = summaryOn == null || summaryOn.toString().isEmpty()
 				? getString(R.string.shared_string_enabled) : summaryOn.toString();
-		final String off = summaryOff == null || summaryOff.toString().isEmpty()
+		String off = summaryOff == null || summaryOff.toString().isEmpty()
 				? getString(R.string.shared_string_disabled) : summaryOff.toString();
-		final int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		final int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
+		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		boolean checked = switchPreference.isChecked();
 
-		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(checked)
 				.setTitle(checked ? on : off)
@@ -173,7 +173,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 									@Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
 									boolean profileDependent) {
 		try {
-			if (fm.findFragmentByTag(BooleanPreferenceBottomSheet.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 
@@ -184,7 +184,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				fragment.setApplyQueryType(applyQueryType);
 				fragment.setTargetFragment(target, 0);
 				fragment.setProfileDependent(profileDependent);
-				fragment.show(fm, BooleanPreferenceBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

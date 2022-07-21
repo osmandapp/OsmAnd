@@ -20,7 +20,7 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 	public static final String TAG = "ConfigureAppModesBottomSheetDialogFragment";
 
 	private List<ApplicationMode> allModes = new ArrayList<>();
-	private Set<ApplicationMode> selectedModes = new HashSet<>();
+	private final Set<ApplicationMode> selectedModes = new HashSet<>();
 	
 	@Override
 	public void onResume() {

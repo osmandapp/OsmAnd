@@ -10,7 +10,7 @@ import java.util.Objects;
 class ChipsDataHolder {
 
 	private List<ChipItem> items = new ArrayList<>();
-	private ChipItem selected = null;
+	private ChipItem selected;
 
 	public void setItems(@NonNull List<ChipItem> items) {
 		this.items = items;

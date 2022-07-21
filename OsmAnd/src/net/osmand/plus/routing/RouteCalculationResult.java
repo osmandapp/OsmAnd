@@ -35,7 +35,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class RouteCalculationResult {
-	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
+	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
 	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
 	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;
@@ -71,13 +71,13 @@ public class RouteCalculationResult {
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
-	protected int currentDirectionInfo = 0;
-	protected int currentRoute = 0;
-	protected int nextIntermediate = 0;
-	protected int currentWaypointGPX = 0;
-	protected int lastWaypointGPX = 0;
+	protected int currentDirectionInfo;
+	protected int currentRoute;
+	protected int nextIntermediate;
+	protected int currentWaypointGPX;
+	protected int lastWaypointGPX;
 	protected int currentStraightAngleRoute = -1;
-	protected Location currentStraightAnglePoint = null;
+	protected Location currentStraightAnglePoint;
 
 
 	public RouteCalculationResult(String errorMessage) {
@@ -938,7 +938,7 @@ public class RouteCalculationResult {
 		if (listDistance.length > 0) {
 			listDistance[locations.size() - 1] = 0;
 			for (int i = locations.size() - 1; i > 0; i--) {
-				listDistance[i - 1] = (int) Math.round(locations.get(i - 1).distanceTo(locations.get(i)));
+				listDistance[i - 1] = Math.round(locations.get(i - 1).distanceTo(locations.get(i)));
 				listDistance[i - 1] += listDistance[i];
 			}
 		}
@@ -1340,7 +1340,7 @@ public class RouteCalculationResult {
 	}
 
 	public int getIndexOfIntermediate(int countFromLast) {
-		final int j = intermediatePoints.length - countFromLast - 1;
+		int j = intermediatePoints.length - countFromLast - 1;
 		if (j < intermediatePoints.length && j >= 0) {
 			int i = intermediatePoints[j];
 			return directions.get(i).routePointOffset;

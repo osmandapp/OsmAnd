@@ -55,12 +55,12 @@ public class MultipleSelectionBottomSheet<T> extends SelectionBottomSheet<T> {
 	}
 
 	@Override
-	protected void updateItemView(final SelectableItem<T> item, View view) {
+	protected void updateItemView(SelectableItem<T> item, View view) {
 		boolean checked = selectedItems.contains(item);
 		ImageView imageView = view.findViewById(R.id.icon);
 		TextView title = view.findViewById(R.id.title);
 		TextView description = view.findViewById(R.id.description);
-		final CheckBox checkBox = view.findViewById(R.id.compound_button);
+		CheckBox checkBox = view.findViewById(R.id.compound_button);
 		AndroidUiHelper.setVisibility(View.VISIBLE, imageView, title, description, checkBox);
 
 		checkBox.setChecked(checked);

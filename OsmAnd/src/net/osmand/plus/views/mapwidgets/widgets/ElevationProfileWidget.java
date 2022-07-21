@@ -72,13 +72,13 @@ public class ElevationProfileWidget extends MapWidget {
 	private Location myLocation;
 	private List<WptPt> allPoints;
 
-	private boolean showSlopes = false;
+	private boolean showSlopes;
 	private RouteCalculationResult route;
 	private int firstVisiblePointIndex = -1;
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
 
-	private boolean movedToLocation = false;
+	private boolean movedToLocation;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
@@ -190,7 +190,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}
@@ -207,7 +207,7 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		segment = TrackDetailsMenu.getTrackSegment(chart, gpxItem);
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
-			boolean hasTranslated = false;
+			boolean hasTranslated;
 			float highlightDrawX = -1;
 
 			@Override
@@ -385,7 +385,7 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		double fromDistance = minVisibleX * toMetersMultiplier;
 		double toDistance = maxVisibleX * toMetersMultiplier;
-		final List<WptPt> points = this.allPoints;
+		List<WptPt> points = this.allPoints;
 		int firstPointIndex = gpx.getPointIndexByDistance(points, fromDistance);
 		int lastPointIndex = gpx.getPointIndexByDistance(points, toDistance);
 		if (firstVisiblePointIndex == firstPointIndex && lastVisiblePointIndex == lastPointIndex) {

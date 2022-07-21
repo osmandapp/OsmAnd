@@ -20,7 +20,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	@ColorRes
 	private int descriptionColorId = INVALID_ID;
 	private int descriptionMaxLines = INVALID_VALUE;
-	private boolean descriptionLinksClickable = false;
+	private boolean descriptionLinksClickable;
 
 	private TextView descriptionTv;
 
@@ -107,7 +107,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		@ColorRes
 		protected int descriptionColorId = INVALID_ID;
 		protected int descriptionMaxLines = INVALID_POSITION;
-		protected boolean descriptionLinksClickable = false;
+		protected boolean descriptionLinksClickable;
 
 		public Builder setDescription(CharSequence description) {
 			this.description = description;

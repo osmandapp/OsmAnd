@@ -34,9 +34,9 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	private static final int TYPE_ITEM = 1;
 	private static final int TYPE_COUNT = 2;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private List<Object> items;
+	private final List<Object> items;
 	private boolean selectionMode;
 	private List<OsmPoint> selectedOsmEdits;
 	private boolean portrait;
@@ -89,9 +89,9 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			if (position == 0) {
 				bindHeaderViewHolder((HeaderViewHolder) convertView.getTag());
 			} else {
-				final Object item = getItem(position);
+				Object item = getItem(position);
 				if (item instanceof OsmPoint) {
-					final OsmEditViewHolder holder = (OsmEditViewHolder) convertView.getTag();
+					OsmEditViewHolder holder = (OsmEditViewHolder) convertView.getTag();
 					bindOsmEditViewHolder(holder, (OsmPoint) item, position);
 				}
 			}
@@ -159,7 +159,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		return count;
 	}
 
-	private void bindHeaderViewHolder(final HeaderViewHolder holder) {
+	private void bindHeaderViewHolder(HeaderViewHolder holder) {
 		setupBackground(holder.backgroundView);
 		holder.topDivider.setVisibility(portrait ? View.VISIBLE : View.GONE);
 		holder.title.setText(R.string.your_edits);
@@ -179,7 +179,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 		}
 	}
 
-	private void bindOsmEditViewHolder(final OsmEditViewHolder holder, final OsmPoint osmEdit, final int position) {
+	private void bindOsmEditViewHolder(OsmEditViewHolder holder, OsmPoint osmEdit, int position) {
 		setupBackground(holder.mainView);
 		holder.titleTextView.setText(OsmEditingPlugin.getTitle(osmEdit, getContext()));
 		holder.descriptionTextView.setText(getDescription(osmEdit));
@@ -310,8 +310,8 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			mainView = view;
 			topDivider = view.findViewById(R.id.top_divider);
 			backgroundView = view.findViewById(R.id.background_view);
-			checkBox = (CheckBox) view.findViewById(R.id.check_box);
-			title = (TextView) view.findViewById(R.id.title_text_view);
+			checkBox = view.findViewById(R.id.check_box);
+			title = view.findViewById(R.id.title_text_view);
 		}
 	}
 
@@ -326,11 +326,11 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 
 		OsmEditViewHolder(View view) {
 			mainView = view;
-			icon = (ImageView) view.findViewById(R.id.icon);
-			selectCheckBox = (CheckBox) view.findViewById(R.id.check_box);
-			optionsImageButton = (ImageButton) view.findViewById(R.id.options);
-			titleTextView = (TextView) view.findViewById(R.id.title);
-			descriptionTextView = (TextView) view.findViewById(R.id.description);
+			icon = view.findViewById(R.id.icon);
+			selectCheckBox = view.findViewById(R.id.check_box);
+			optionsImageButton = view.findViewById(R.id.options);
+			titleTextView = view.findViewById(R.id.title);
+			descriptionTextView = view.findViewById(R.id.description);
 			bottomDivider = view.findViewById(R.id.bottom_divider);
 		}
 	}

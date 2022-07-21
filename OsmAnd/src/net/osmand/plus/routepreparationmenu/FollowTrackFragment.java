@@ -67,7 +67,7 @@ import java.util.List;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
-		MapControlsThemeInfoProvider, OnSegmentSelectedListener {
+		OnSegmentSelectedListener {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 
@@ -201,7 +201,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			} else {
 				sortButton.setVisibility(View.GONE);
 				SelectedTrackToFollowCard selectedTrackToFollowCard =
-						new SelectedTrackToFollowCard(mapActivity, FollowTrackFragment.this, gpxFile);
+						new SelectedTrackToFollowCard(mapActivity, this, gpxFile);
 				getCardsContainer().addView(selectedTrackToFollowCard.build(mapActivity));
 			}
 		}
@@ -215,8 +215,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				tracksCard = new TracksToFollowCard(mapActivity, FollowTrackFragment.this, list, defaultCategory);
-				tracksCard.setListener(FollowTrackFragment.this);
+				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
+				tracksCard.setListener(this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 				sortButton.setVisibility(View.VISIBLE);
 			}
@@ -502,7 +502,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
@@ -514,7 +514,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void setupSortButton(View view) {
-		final ImageButton sortButton = view.findViewById(R.id.sort_button);
+		ImageButton sortButton = view.findViewById(R.id.sort_button);
 		int colorId = ColorUtilities.getInactiveButtonsAndLinksColorId(isNightMode());
 		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
 		sortButton.setImageResource(sortByMode.getIconId());
@@ -523,7 +523,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			@Override
 			public void onClick(View v) {
 				List<PopUpMenuItem> items = new ArrayList<>();
-				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+				for (TracksSortByMode mode : TracksSortByMode.values()) {
 					items.add(new PopUpMenuItem.Builder(app)
 							.setTitleId(mode.getNameId())
 							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
