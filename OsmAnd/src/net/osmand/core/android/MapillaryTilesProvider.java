@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -37,11 +38,14 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_ImageMapLayerProvider;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.QuadPointDouble;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryVectorLayer;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -50,7 +54,9 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,24 +76,22 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 	private final float density;
 
 	private final GeometryTilesCache tilesCache;
-	private final ConcurrentHashMap<QuadPointDouble, Map<?, ?>> visiblePoints = new ConcurrentHashMap<>();
-	private RotatedTileBox renderedTileBox;
+	private QuadTree<MapillaryImage> visiblePoints;
+	private AreaI storedVisibleBBox31;
 	public static final int MAX_SEQUENCE_LAYER_ZOOM = MapillaryVectorLayer.MAX_SEQUENCE_LAYER_ZOOM;
 	public static final int MIN_IMAGE_LAYER_ZOOM = MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
 	public static final int MIN_POINTS_ZOOM = MapillaryVectorLayer.MIN_POINTS_ZOOM;
 	public static final double EXTENT = MapillaryVectorLayer.EXTENT;
 
-	public MapillaryTilesProvider(OsmandApplication app, @NonNull ITileSource tileSource,
-	                              RotatedTileBox tileBox, float density) {
+	public MapillaryTilesProvider(OsmandApplication app, @NonNull ITileSource tileSource, float density) {
 		this.tileSource = tileSource;
 		this.rm = app.getResourceManager();
 		this.settings = app.getSettings();
 		this.tilesCache = rm.getMapillaryVectorTilesCache();
-		this.renderedTileBox = tileBox;
 		this.plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 		this.paintPoint = new Paint();
 		this.density = density;
-
+		this.visiblePoints = new QuadTree<>(new QuadRect(-180f, 90f, 180f, -90f), 12, 0.55f);
 		Drawable drawablePoint = ResourcesCompat.getDrawable(app.getResources(), R.drawable.map_mapillary_photo_dot, null);
 		// TODO: resize for Android auto
 		if (drawablePoint != null) {
@@ -196,10 +200,7 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 				if (currentZoom >= MIN_POINTS_ZOOM) {
 					bitmapHalfSize = bitmapPoint.getWidth() / 2.0d;
 					tileBBox31Enlarged = Utilities.tileBoundingBox31(request.getTileId(), zoom).getEnlargedBy((int)(bitmapHalfSize * px31Size));
-					Map<QuadPointDouble, Map<?, ?>> drawnPoints = drawPoints(canvas, shiftedTile, queryController, geometries,
-							tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31);
-					points = drawnPoints.size();
-					//visiblePoints.putAll(drawnPoints);
+					drawPoints(canvas, shiftedTile, queryController, geometries,							tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31);
 				}
 				Log.d("2222", "draw tile " + request.getTileId().getX() + ":" + request.getTileId().getY() + ":" + zoom
 						+ " points=" + points + " in " + (System.currentTimeMillis() - drawTimestamp) + " all = " + (System.currentTimeMillis() - requestTimestamp));
@@ -293,17 +294,35 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		return AlphaChannelPresence.Present;
 	}
 
-	public void setRenderedTileBox(RotatedTileBox tileBox) {
-		if (renderedTileBox.getZoom() != tileBox.getZoom()) {
-			visiblePoints.clear();
+	public void setVisibleBBox31(AreaI visibleBBox31, int zoom) {
+		if (zoom < MIN_POINTS_ZOOM) {
+			return;
 		}
-		/*if (!renderedTileBox.getCenterLatLon().equals(tileBox.getCenterLatLon())) {
-			visiblePoints.clear();
-		}*/
-		renderedTileBox = tileBox;
+		PointI topLeft = visibleBBox31.getTopLeft();
+		PointI bottomRight = visibleBBox31.getBottomRight();
+		if (storedVisibleBBox31 != null &&  storedVisibleBBox31.getTopLeft().getX() == visibleBBox31.getTopLeft().getX()
+				&& storedVisibleBBox31.getTopLeft().getY() == visibleBBox31.getTopLeft().getY()) {
+			return;
+		}
+		double left = MapUtils.get31LongitudeX(topLeft.getX());
+		double top = MapUtils.get31LatitudeY(topLeft.getY());
+		double right = MapUtils.get31LongitudeX(bottomRight.getX());
+		double bottom = MapUtils.get31LatitudeY(bottomRight.getY());
+		QuadRect rect = new QuadRect(left, top, right, bottom);
+		List<MapillaryImage> resultPoints = new ArrayList<>();
+		visiblePoints.queryInBox(rect, resultPoints);
+		visiblePoints.clear();
+		for (MapillaryImage image : resultPoints) {
+			if (image != null) {
+//				int x = MapUtils.get31TileNumberX(image.getLongitude());
+//				int y = MapUtils.get31TileNumberY(image.getLatitude());
+				visiblePoints.insert(image, (float) image.getLongitude(), (float) image.getLatitude());
+			}
+		}
+		storedVisibleBBox31 = visibleBBox31;
 	}
 
-	public Map<QuadPointDouble, Map<?, ?>> getVisiblePoints() {
+	public QuadTree<MapillaryImage> getVisiblePoints() {
 		return visiblePoints;
 	}
 
@@ -406,11 +425,10 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		}
 	}
 
-	private Map<QuadPointDouble, Map<?, ?>> drawPoints(Canvas canvas, TileId tileId, IQueryController queryController, List<Geometry> geometries,
+	private void drawPoints(Canvas canvas, TileId tileId, IQueryController queryController, List<Geometry> geometries,
 	                                                   AreaI tileBBox31, AreaI tileBBox31Enlarged, int mult, int zoomShift, int tileSize, double tileSize31) {
-		Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 		if (queryController != null && queryController.isAborted()) {
-			return visiblePoints;
+			return;
 		}
 		double bitmapHalfSize = bitmapPoint.getWidth() / 2.0d;
 		PointI topLeft = tileBBox31.getTopLeft();
@@ -431,15 +449,20 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 				double tileX = ((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
 				double tileY = ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
+				double lat = MapUtils.get31LatitudeY((int) tileY);
+				double lon = MapUtils.get31LongitudeX((int) tileX);
 
 				if (tileBBox31Enlarged.contains((int) tileX, (int) tileY) && !filtered(userData)) {
 					double x = ((tileX - tileBBox31Left) / tileSize31) * tileSize - bitmapHalfSize;
 					double y = ((tileY - tileBBox31Top) / tileSize31) * tileSize - bitmapHalfSize;
 					canvas.drawBitmap(bitmapPoint, (float) x, (float) y, paintPoint);
-					//visiblePoints.put(new QuadPointDouble(tileX + px, tileY + py), userData);
+					MapillaryImage img = new MapillaryImage(lat, lon);
+					if (img.setData(userData)) {
+						//visiblePoints.insert(img, (int) tileX, (int) tileY);
+						visiblePoints.insert(img, (float) lon, (float) lat);
+					}
 				}
 			}
 		}
-		return visiblePoints;
 	}
 }

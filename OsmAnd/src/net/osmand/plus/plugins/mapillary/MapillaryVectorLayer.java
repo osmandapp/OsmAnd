@@ -22,11 +22,13 @@ import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapillaryTilesProvider;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.R;
@@ -41,6 +43,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,15 +99,14 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			if (mapillaryTilesProvider == null) {
 				int layerIndex = view.getLayerIndex(this);
 				if (map != null) {
-					mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, tileBox, view.getDensity());
+					mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, view.getDensity());
 					mapRenderer.setMapLayerProvider(layerIndex, mapillaryTilesProvider.instantiateProxy(true));
 					mapillaryTilesProvider.swigReleaseOwnership();
 				} else {
 					mapRenderer.resetMapLayerProvider(layerIndex);
 				}
 			} else {
-				mapillaryTilesProvider.setRenderedTileBox(tileBox);
-				visiblePoints = mapillaryTilesProvider.getVisiblePoints();
+				mapillaryTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
 		} else {
 			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
@@ -429,6 +431,68 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && mapillaryTilesProvider != null) {
+			getImagesFromPointOpenGL(tb, point, images);
+		} else {
+			getImagesFromPointCanvas(tb, point, images);
+		}
+	}
+
+	private void getImagesFromPointOpenGL(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		final int radius = getRadius(tb) / 2;
+		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getVisiblePoints();
+//		PointI topLeft31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x - radius, (int) point.y - radius);
+//		PointI bottomRight31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x + radius, (int) point.y + radius);
+//		PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
+		LatLon topLeft = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x - radius, point.y - radius);
+		LatLon bottomRight = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x + radius, point.y + radius);
+		LatLon center = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x, point.y);
+//		if (topLeft31 == null || bottomRight31 == null || center31 == null) {
+//			return;
+//		}
+//		int left = topLeft31.getX();
+//		int top = topLeft31.getY();
+//		int right = bottomRight31.getX();
+//		int bottom = bottomRight31.getY();
+		double left = topLeft.getLongitude();
+		double top = topLeft.getLatitude();
+		double right = bottomRight.getLongitude();
+		double bottom = bottomRight.getLatitude();
+		QuadRect rect = new QuadRect(left, top, right, bottom);
+		List<MapillaryImage> res = new ArrayList<>();
+		quadTree.queryInBox(rect, res);
+		if (res.isEmpty()) {
+			return;
+		}
+
+//		double dist = MapUtils.measuredDist31(left, top, right, bottom);
+		double dist = MapUtils.getDistance(topLeft, bottomRight);
+		MapillaryImage img = null;
+		for (MapillaryImage image : res) {
+			if (image == null)
+				continue;
+
+//			int x = MapUtils.get31TileNumberX(image.getLongitude());
+//			int y = MapUtils.get31TileNumberY(image.getLatitude());
+			double d = MapUtils.getDistance(center, image.getLatitude(), image.getLongitude());
+//			double d = MapUtils.measuredDist31(x, y, center31.getX(), center31.getY());
+			if (d < dist) {
+				img = image;
+				dist = d;
+			}
+		}
+		if (img == null) {
+			img = res.get(0);
+		}
+		images.add(img);
+	}
+
+	private void getImagesFromPointCanvas(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
 		Map<QuadPointDouble, Map<?, ?>> points = this.visiblePoints;
 		float ex = point.x;
 		float ey = point.y;
