@@ -343,6 +343,7 @@ public class OsmAndAppCustomization {
 		setFeaturesCustomized();
 	}
 
+	@NonNull
 	public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
 		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
 		widgetsVisibilityMap.put(widgetId, set);
@@ -350,6 +351,7 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
+	@NonNull
 	public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
 		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
 		widgetsAvailabilityMap.put(widgetId, set);
@@ -357,7 +359,7 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
-	public void setMapMargins(int left, int top, int right, int bottom, List<String> appModeKeys) {
+	public void setMapMargins(int left, int top, int right, int bottom, @Nullable List<String> appModeKeys) {
 		marginLeft = left;
 		marginTop = top;
 		marginRight = right;
@@ -365,7 +367,7 @@ public class OsmAndAppCustomization {
 		marginAppModeUsage.addAll(getAppModesSet(appModeKeys));
 	}
 
-	public void updateMapMargins(MapActivity mapActivity) {
+	public void updateMapMargins(@NonNull MapActivity mapActivity) {
 		if (isMapMarginAvailable()) {
 			mapActivity.setMargins(marginLeft, marginTop, marginRight, marginBottom);
 		} else {
@@ -377,7 +379,7 @@ public class OsmAndAppCustomization {
 		return marginAppModeUsage.contains(app.getSettings().getApplicationMode());
 	}
 
-	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
+	public boolean isWidgetVisible(@NonNull String key, @NonNull ApplicationMode appMode) {
 		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
 		if (set == null) {
 			return false;
@@ -385,7 +387,7 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean isWidgetAvailable(@NonNull String widgetId, ApplicationMode appMode) {
+	public boolean isWidgetAvailable(@NonNull String widgetId, @NonNull ApplicationMode appMode) {
 		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(widgetId);
 		if (availableForModes == null) {
 			return true;

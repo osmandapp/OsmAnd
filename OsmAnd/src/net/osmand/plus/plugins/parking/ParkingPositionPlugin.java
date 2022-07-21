@@ -79,7 +79,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public ParkingPositionPlugin(OsmandApplication app) {
 		super(app);
 		OsmandSettings set = app.getSettings();
-		ApplicationMode.regWidgetVisibility(PARKING.id, (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility(PARKING, (ApplicationMode[]) null);
 		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal().makeShared();
 		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal().makeShared();
 		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal().makeShared();

@@ -100,6 +100,10 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return widget.getWidgetType();
 	}
 
+	public boolean isExternal() {
+		return widget.isExternal();
+	}
+
 	@NonNull
 	public String getTitle(@NonNull Context ctx) {
 		String message = getMessage();
