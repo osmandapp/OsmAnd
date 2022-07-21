@@ -96,12 +96,7 @@ public class FavoriteDialogs {
 
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, (dialog, which) -> {
-			// Don't use showDialog because it is impossible to refresh favorite items list
-			Dialog dlg = createReplaceFavouriteDialog(activity, args);
-			if (dlg != null) {
-				dlg.show();
-			}
-			// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
+			SelectFavouriteToReplaceBottomSheet.showInstance(activity, args);
 		});
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override

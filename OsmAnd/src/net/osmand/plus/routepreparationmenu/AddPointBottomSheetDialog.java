@@ -49,7 +49,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
+import net.osmand.plus.mapcontextmenu.other.SelectFavouriteToGoBottomSheet;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
@@ -429,7 +429,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				}
 				Object item = items.get(position);
 				if (item.equals(FAVORITES)) {
-					openFavoritesDialog();
+					SelectFavouriteToGoBottomSheet.showInstance(mapActivity, AddPointBottomSheetDialog.this, pointType);
 				} else if (item.equals(MARKERS)) {
 					MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
 					menu.selectMapMarker(-1, pointType);
@@ -504,19 +504,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			}
 		}
 		return new Pair<>(ll, name);
-	}
-
-	private void openFavoritesDialog() {
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null) {
-			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
-			Bundle args = new Bundle();
-			args.putString(FavouritesBottomSheetMenuFragment.POINT_TYPE_KEY, pointType.name());
-			fragment.setTargetFragment(this, ADD_FAVORITE_TO_ROUTE_REQUEST_CODE);
-			fragment.setArguments(args);
-			fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
-		}
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, PointType pointType) {

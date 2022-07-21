@@ -107,7 +107,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			FavoriteDialogs.createReplaceFavouriteDialog(activity, args);
+			SelectFavouriteToReplaceBottomSheet.showInstance(activity, args);
 		}
 	}
 
