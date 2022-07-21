@@ -1,16 +1,13 @@
 package net.osmand.core.android;
 
-import android.util.Log;
+import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import android.util.Log;
 
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
+import net.osmand.core.jni.ITileSqliteDatabasesCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -22,15 +19,24 @@ import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
+import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.TileSqliteDatabasesCollection;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Context container and utility class for MapRendererView and derivatives. 
@@ -227,6 +233,19 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 	}
 
+	public void recreateHeightmapProvider() {
+		if (mapRendererView != null) {
+			File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
+			if (!heightMapDir.exists()) {
+				heightMapDir.mkdir();
+			}
+			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
+			heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
+			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(heightsCollection,
+					mapRendererView.getElevationDataTileSize()));
+		}
+	}
+
 	private void updateObfMapRasterLayerProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// Create new OBF map raster layer provider
 		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
@@ -273,6 +292,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			if (obfMapSymbolsProvider != null) {
 				mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
 			}
+			// Heightmap
+			recreateHeightmapProvider();
 		}
 	}
 
