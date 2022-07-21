@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,16 +19,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.plus.mapcontextmenu.editors.SelectFavouriteToReplaceBottomSheet;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.myplaces.FavouritesHelper;
@@ -38,7 +34,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteDialogs {
@@ -132,6 +127,7 @@ public class FavoriteDialogs {
 		return builder.create();
 	}
 
+	@NonNull
 	public static AlertDialog showFavoritesDialog(
 			Context uiContext,
 			FavouritesAdapter favouritesAdapter, OnItemClickListener click,
