@@ -45,6 +45,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 	private void onApplyReplacement(@NonNull FavouritePoint favourite) {
 		FavouritePoint point = (FavouritePoint) getArguments().getSerializable(KEY_FAVORITE);
 		FavouritesHelper helper = mApp.getFavoritesHelper();
+		favourite.setAddress(point.getAddress()); // Use address from the new point
 		if (point != null && helper.editFavourite(favourite, point.getLatitude(), point.getLongitude())) {
 			helper.deleteFavourite(point);
 			Activity activity = getActivity();
