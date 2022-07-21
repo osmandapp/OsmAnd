@@ -29,23 +29,23 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 		showConfirmationDialog(favourite);
 	}
 
-	private void showConfirmationDialog(@NonNull FavouritePoint fp) {
+	private void showConfirmationDialog(@NonNull FavouritePoint favourite) {
 		boolean nightMode = isNightMode(mApp);
 		Context themedContext = UiUtilities.getThemedContext(getContext(), nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		builder.setTitle(R.string.update_existing);
-		builder.setMessage(getString(R.string.replace_favorite_confirmation, fp.getName()));
+		builder.setMessage(getString(R.string.replace_favorite_confirmation, favourite.getName()));
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-			onApplyReplacement(fp);
+			onApplyReplacement(favourite);
 		});
 		builder.show();
 	}
 
-	private void onApplyReplacement(@NonNull FavouritePoint fp) {
+	private void onApplyReplacement(@NonNull FavouritePoint favourite) {
 		FavouritePoint point = (FavouritePoint) getArguments().getSerializable(KEY_FAVORITE);
 		FavouritesHelper helper = mApp.getFavoritesHelper();
-		if (point != null && helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
+		if (point != null && helper.editFavourite(favourite, point.getLatitude(), point.getLongitude())) {
 			helper.deleteFavourite(point);
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
@@ -57,7 +57,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 				}
 				dismiss();
 				MapContextMenu contextMenu = mapActivity.getContextMenu();
-				contextMenu.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
+				contextMenu.show(new LatLon(point.getLatitude(), point.getLongitude()), favourite.getPointDescription(activity), favourite);
 				mapActivity.refreshMap();
 			}
 		}
