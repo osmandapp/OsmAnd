@@ -403,6 +403,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				showHeadingCached = showHeading;
 				if (!stateUpdated) {
 					updateMarkerState(showHeading);
+					stateUpdated = true;
 				}
 			}
 			MapRendererView mapRenderer = getMapRenderer();
@@ -420,7 +421,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				dataChanged |= lastTarget31Cached == null || lastTarget31Cached.getX() != lastTarget31.getX()
 						|| lastTarget31Cached.getY() != lastTarget31.getY();
 			}
-			if (markersRecreated || dataChanged) {
+			if (markersRecreated || stateUpdated || dataChanged) {
 				updateMarkerData(lastKnownLocation, useMapCenter ? lastTarget31 : null, heading);
 				lastTarget31Cached = lastTarget31;
 				lastKnownLocationCached = lastKnownLocation;
