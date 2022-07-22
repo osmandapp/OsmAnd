@@ -5,67 +5,67 @@ import java.util.Map;
 
 public interface ITileSource {
 
-	public int getMaximumZoomSupported();
+	int getMaximumZoomSupported();
 
-	public String getName();
+	String getName();
 
-	public int getTileSize();
+	int getTileSize();
 
-	public String getUrlToLoad(int x, int y, int zoom);
+	String getUrlToLoad(int x, int y, int zoom);
 
-	public String getUrlTemplate();
+	String getUrlTemplate();
 
-	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException;
+	byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException;
 
-	public int getMinimumZoomSupported();
+	int getMinimumZoomSupported();
 
-	public String getTileFormat();
+	String getTileFormat();
 
-	public int getBitDensity();
+	int getBitDensity();
 
-	public boolean isEllipticYTile();
+	boolean isEllipticYTile();
 
-	public boolean couldBeDownloadedFromInternet();
+	boolean couldBeDownloadedFromInternet();
 
-	public long getExpirationTimeMillis();
+	long getExpirationTimeMillis();
 
-	public int getExpirationTimeMinutes();
+	int getExpirationTimeMinutes();
 
-	public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles);
+	long getTileModifyTime(int x, int y, int zoom, String dirWithTiles);
 
-	public String getReferer();
+	String getReferer();
 
-	public String getUserAgent();
+	String getUserAgent();
 
-	public void deleteTiles(String path);
+	void deleteTiles(String path);
 
-	public int getAvgSize();
+	int getAvgSize();
 
-	public String getRule();
+	String getRule();
 
-	public String getRandoms();
+	String getRandoms();
 
-	public boolean isInvertedYTile();
+	boolean isInvertedYTile();
 
-	public boolean isTimeSupported();
+	boolean isTimeSupported();
 
-	public boolean getInversiveZoom();
+	boolean getInversiveZoom();
 
-	public ParameterType getParamType();
+	ParameterType getParamType();
 
-	public long getParamMin();
+	long getParamMin();
 
-	public long getParamStep();
+	long getParamStep();
 
-	public long getParamMax();
+	long getParamMax();
 
-	public Map<String, String> getUrlParameters();
+	Map<String, String> getUrlParameters();
 
-	public String getUrlParameter(String name);
+	String getUrlParameter(String name);
 
-	public void setUrlParameter(String name, String value);
+	void setUrlParameter(String name, String value);
 
-	public void resetUrlParameter(String name);
+	void resetUrlParameter(String name);
 
-	public void resetUrlParameters();
+	void resetUrlParameters();
 }

@@ -489,26 +489,14 @@ public class SQLiteTileSource implements ITileSource {
 			return null;
 		} finally {
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
-					+ " ms ");
+				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts) + " ms ");
 			}
 		}
 	}
-	
+
 	@Override
 	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
 		return getBytes(x, y, zoom, dirWithTiles, null);
-	}
-	
-	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
-		byte[] blob;
-		try {
-			blob = getBytes(x, y, zoom, null, timeHolder);
-		} catch (IOException e) {
-			return null;
-		}
-		String[] params = getTileDbParams(x, y, zoom);
-		return blob != null ? getImage(blob, params) : null;
 	}
 
 	@Nullable
