@@ -177,7 +177,7 @@
     <string name="gps_points">GPS точки</string>
     <string name="shared_string_sent">Надіслати</string>
     <string name="average_altitude">Середня висота</string>
-    <string name="average_speed">Рекомендована швидкість</string>
+    <string name="average_speed">Середня швидкість</string>
     <string name="open_in_osmand">Показати в OsmAnd</string>
     <string name="end_date">Дата завершення</string>
     <string name="start_date">Дата початку</string>

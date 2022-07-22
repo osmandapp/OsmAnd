@@ -4775,4 +4775,10 @@
     <string name="auto_25_chars_route_tu_kr">Faça inversão de marcha e mantenha-se na direita</string>
     <string name="auto_25_chars_route_roundabout_kl">Saia na %1$d saída e mantenha-se na esquerda</string>
     <string name="auto_25_chars_route_roundabout_kr">Saia na %1$d saída e mantenha-se na direita</string>
+    <string name="connect_with_straight_line">Conectar com uma linha reta</string>
+    <string name="download_tiles">Descarregar mosaicos</string>
+    <string name="without_profiles_changing">Sem alteração de perfis</string>
+    <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s será contada e afetará a velocidade média.</string>
+    <string name="attach_roads_descr">Ativar para aproximar o trilho a uma rota válida anexada a mapas offline. Desta forma será corrigida a altitude da estrada, a informação da estrada e as curvas que poderão ser utilizadas mais tarde na navegação.</string>
+    <string name="attach_roads_warning">Pode anexar apenas uma pista registada às estradas</string>
 </resources>

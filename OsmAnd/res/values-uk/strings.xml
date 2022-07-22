@@ -2172,7 +2172,7 @@
     <string name="track_points_category_name">Маршрутні точки, точки інтересу та іменовані об\'єкти</string>
     <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">Максимальна швидкість</string>
-    <string name="average_speed">Рекомендована швидкість</string>
+    <string name="average_speed">Середня швидкість</string>
     <string name="shared_string_time_moving">Час у дорозі</string>
     <string name="shared_string_time_span">Час</string>
     <string name="shared_string_max">Макс.</string>
