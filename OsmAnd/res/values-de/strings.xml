@@ -630,7 +630,7 @@
     <string name="route_head">Geradeaus</string>
     <string name="first_time_continue">Weiter</string>
     <string name="first_time_download">Offline-Daten herunterladen</string>
-    <string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Laden Sie regionale Daten für die Offline-Verwendung über \'Einstellungen → Kartenverwaltung\' herunter, um Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
+    <string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Laden Sie regionale Daten für die Offline-Verwendung über \'Menü\' → \'Karten herunterladen\' herunter, um Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
     <string name="search_poi_location">Warte auf Signal …</string>
     <string name="search_near_map">Suche in der Nähe</string>
     <string name="search_nearby">Suche um Aufenthaltsort</string>
