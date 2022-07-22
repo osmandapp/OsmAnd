@@ -2130,7 +2130,7 @@
     <string name="show_number_pad">Näytä numeronäppäimistö</string>
     <string name="shared_string_paste">Liitä</string>
     <string name="go_to_next_field">Seuraava kenttä</string>
-    <string name="rename_marker">Uudelleennimeä markkeri</string>
+    <string name="rename_marker">Nimeä markkeri uudelleen</string>
     <string name="tap_on_map_to_hide_interface_descr">Kartan napauttaminen näyttää/piilottaa painikkeet ja widgetit.</string>
     <string name="tap_on_map_to_hide_interface">Kokoruututila</string>
     <string name="mark_passed">Merkkaa ohitetuksi</string>
