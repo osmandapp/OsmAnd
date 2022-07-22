@@ -986,8 +986,8 @@
     <string name="rendering_category_transport">Kulkuväline</string>
     <string name="map_widget_magnetic_bearing">Magneettinen suunta</string>
     <string name="map_widget_bearing">Suhteellinen suunta</string>
-    <string name="anonymous_user_hint">Anonyymi käyttäjä ei voi:
-\n- luoda ryhmiä; 
+    <string name="anonymous_user_hint">Anonyymit käyttäjät eivät voi:
+\n- luoda ryhmiä;
 \n- synkronoida ryhmiä ja laitteita palvelimen kanssa;
 \n- hallita ryhmiä ja laitteita henkilökohtaisella hallintapaneelilla websivustolla.</string>
     <string name="osm_user_stat">Muokkauksia %1$s, sijoitus %2$s, muokkaukset yhteensä %3$s</string>
@@ -2668,7 +2668,7 @@
     <string name="open_street_map_login_mode">Sinun pitää kirjautua lähettääksesi uusia tai päivittääksesi tekemäsi muutokset. 
 \n
 \nVoit kirjautua turvallisella OAuth-tavalla tai kirjautua salasanalla.</string>
-    <string name="use_login_password">Käytä kirjautumista ja salasanaa</string>
+    <string name="use_login_password">Käytä käyttäjätunnusta ja salasanaa</string>
     <string name="login_account">Tili</string>
     <string name="subscription_payment_issue_title">Napauta painiketta korjataksesi tilauksesi maksutavan Google Playssä.</string>
     <string name="user_login">Kirjaudu</string>
@@ -2809,11 +2809,9 @@
     <string name="select_segments_description">%1$s sisältää useamman kuin yhden segmentin, sinun on määriteltävä navigointiin käytettävä osa.</string>
     <string name="segments_count">Segmentti %1$d</string>
     <string name="hillshade_slope_contour_lines">Kukkulavarjostus / rinne / korkeuskäyrät</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews on yhteisölähtöinen projekti julkisista paikoista, kuten ravintoloista, hotelleista, museoista ja väyläpisteistä. Se kerää kaikki julkiset tiedot niistä, kuten valokuvat, arvostelut, linkit muihin järjestelmiin, kuten OpenStreetMapiin ja Wikipediaan.
+    <string name="open_place_reviews_plugin_description">Lähetä valokuvia, arvosteluja ja linkkejä julkisista paikoista, kuten ravintoloista, hotelleista, museoista ja väyläpisteistä avoimena datana https://openplacereviews.org/data/.
 \n
-\nKaikki OpenPlaceReview-tiedot ovat avoimia ja kaikkien saatavilla: https://openplacereviews.org/data.
-\n
-\nVoit lukea lisää osoitteessa: https://openplacereviews.org</string>
+\nLue lisää osoitteessa: https://openplacereviews.org</string>
     <string name="temporary_conditional_routing_descr">Käytä tierajoituksia, jotka ovat nyt aktiivisia kartalla</string>
     <string name="routing_attr_short_way_description">Optimoitu lyhyempi reitti (energiansäästö)</string>
     <string name="routing_attr_driving_style_description">Valitse ajotarkoitus saadaksesi lyhyemmän, nopeamman tai turvallisemman reitin</string>
@@ -2938,7 +2936,7 @@
     <string name="last_time_checked">Viimeksi tarkistettu: %s</string>
     <string name="update_frequency">Päivitystiheys</string>
     <string name="delete_updates">Poista päivitykset</string>
-    <string name="live_update_delete_updates_msg">Haluatko varmasti poistaa kaikki %s live-päivitykset\?</string>
+    <string name="live_update_delete_updates_msg">Poistetaanko kaikki %s live-päivitykset\?</string>
     <string name="purchases">Ostot</string>
     <string name="copy_poi_name">Kopioi KP:n nimi</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Piilota luonnonsuojelualueiden, suojelualueiden ja kansallispuistojen rajat.</string>
@@ -3040,7 +3038,7 @@
     <string name="osmand_cloud_authorize_descr">Älä koskaan menetä tietojasi, varmuuskopioi ja palauta kaikki tiedot ongelmitta.</string>
     <string name="local_backup">Paikallinen varmuuskopio</string>
     <string name="local_backup_descr">Varmuuskopioi tai palauta tietoja paikallisesta tiedostosta.</string>
-    <string name="backup_into_file">Varmuuskopioi tiedostoon</string>
+    <string name="backup_into_file">Varmuuskopioi tiedostona</string>
     <string name="restore_from_file">Palauta tiedostosta</string>
     <string name="osmand_cloud_help_descr">Tarvitsetko apua\? Ota meihin yhteyttä osoitteessa %1$s</string>
     <string name="osmand_cloud_create_account_descr">Anna sähköpostiosoitteesi, kaikki tietosi yhdistetään siihen.
@@ -3052,7 +3050,7 @@
     <string name="cloud_email_already_registered">Tällä sähköpostilla on jo rekisteröity tili.</string>
     <string name="resend_verification_code">Lähetä uudelleen</string>
     <string name="verification_code_missing">En saanut vahvistuskoodia</string>
-    <string name="verification_code_missing_description">Koodin odotusaika voi olla 10 minuuttia, voit myös tarkistaa roskapostikansiosi. Jos se ei auta, käytä alla olevaa painiketta.</string>
+    <string name="verification_code_missing_description">Voi kestää 10 minuuttia. Käytä alla olevaa painiketta, jos se ei ole roskapostikansiossasi.</string>
     <string name="loading_list_of_routing_services">Ladataan luettelo käytettävissä olevista reitityspalveluista</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
@@ -3099,7 +3097,7 @@
     <string name="choose_what_to_restore">Valitse mitä palautetaan.</string>
     <string name="restore_selected_data">Palauta valittu data</string>
     <string name="receiving_data_from_server">Vastaanotetaan tietoa palvelimelta…</string>
-    <string name="restore_complete">Palautus valmis</string>
+    <string name="restore_complete">Palautettu</string>
     <string name="backup_version_history">Versiohistoria</string>
     <string name="osm_live_payment_renews_quarterly">Uusiutuu neljännesvuosittain</string>
     <string name="import_track_descr">Valitse jälkitiedosto jota seurata tai tuo se laitteeltasi.</string>
@@ -3723,7 +3721,7 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Väritä reitit niiden yksilöllisen paikallisen värin (jos se on OpenStreetMapissa) ja vaellussymbolin mukaan.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Väritä reitit niiden solmuvälin tyypin mukaan (kansainvälinen, alueellinen, paikallinen).</string>
     <string name="walking_route_osmc_description">Värireitit niiden yksilöllisen paikallisen värin mukaan (jos ne ovat OpenStreetMapissa) ja tyypin (kansainvälinen, alueellinen, paikallinen).</string>
-    <string name="enough_contributions_descr">Onnittelut, olet antanut tarpeeksi lahjoituksia OpenStreetMapiin ja voit nyt nauttia rajoittamattomasta OsmAnd -karttapäivityksestä!</string>
+    <string name="enough_contributions_descr">Onnittelut, olet antanut tarpeeksi OpenStreetMap-avustuksia ja voit nyt nauttia rajoittamattomasta OsmAnd -karttapäivityksestä!</string>
     <string name="unlimited_map_downloads">Rajoittamattomat karttalataukset</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia ja Wikivoyage offline-tilassa</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Maastokartat: ääriviivat, mäkikartat, rinne</string>
@@ -3813,10 +3811,10 @@
     <string name="setting_supported_by_style">Tämän asetuksen tarjoaa karttatyyli \'%1$s\'</string>
     <string name="map_updates_for_mappers">Kartan päivitykset kartoittajille</string>
     <string name="benefits_for_contributors">Hyödyt aktiivisille OSM-osallistujille</string>
-    <string name="benefits_for_contributors_primary_descr">Saatat olla oikeutettu rajoittamattomiin tunneittain karttapäivityksiin, mikäli olet aktiivinen OpenStreetMap.orgissa.</string>
+    <string name="benefits_for_contributors_primary_descr">OpenStreetMap.orgin aktiiviset avustajat saattavat olla oikeutettuja rajoittamattomiin tunnittaisiin karttapäivityksiin.</string>
     <string name="benefits_for_contributors_secondary_descr">Kirjaudu OpenStreetMap palveluun tarkistaaksesi oletko oikeutettu rajoittamattomiin kuukausittain ja tunneittain karttapäivityksiin.</string>
     <string name="available_until">Saatavilla kunnes %1$s</string>
-    <string name="grey_color_undefined">Harmaata väriä käytetään osiin, joissa ei ole tietoja.</string>
+    <string name="grey_color_undefined">Osat, joissa ei ole tietoja, ovat harmaita.</string>
     <string name="osm_live_payment_subscription_management_amz">Maksu veloitetaan Amazon-tililtäsi oston vahvistamisen yhteydessä.
 \n
 \nSe uusitaan, ellei sitä peruuteta ennen valittua uusimisjaksoa.
@@ -3844,7 +3842,7 @@
     <string name="map_updates_are_unavailable_yet">Karttapäivityksiä ei vielä saatavilla. :-(</string>
     <string name="connect_track_points_as">Yhdistä reittipisteet</string>
     <string name="purchases_restored">Ostokset palautettu</string>
-    <string name="cancel_anytime_in_amazon_app">Keskeytä se koska vain Amazon sovelluksessa</string>
+    <string name="cancel_anytime_in_amazon_app">Peruuta se milloin tahansa Amazon-sovelluksen kautta</string>
     <string name="empty_category_name">Tyhjä kategorian nimi</string>
     <string name="no_activity_for_intent">Tarvittavaa sovellusta ei löytynyt.</string>
     <string name="indexing_transport">Indeksoidaan liikennettä…</string>
@@ -3881,7 +3879,7 @@
     <string name="shared_string_files">Tiedostot</string>
     <string name="start_editing_card_image_text">Ilmainen maailmanlaajuinen matkaopas, jota kuka tahansa voi muokata.</string>
     <string name="gpx_no_routes_title">Ei reittejä</string>
-    <string name="gpx_no_routes_descr">Voit käyttää \"%1$s\" työkalua lisätäksesi reitin tiedostoon.</string>
+    <string name="gpx_no_routes_descr">Voit lisätä reitin tiedostoon \"%1$s\" -työkalulla.</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vesiväylien tunnelit</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Älä piilota vesiväylien tunneleita</string>
     <string name="turn_arrows">Kääntymisnuolet</string>
@@ -3973,4 +3971,27 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Näytä huomautustunnisteet</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Näytä fixme tunnisteet</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Huomautustunnisteet</string>
+    <string name="rendering_attr_showRunningRoutes_description">Näytä juoksureitit</string>
+    <string name="live_update_frequency_week_variant">Karttapäivitykset tarkistetaan viikoittain.</string>
+    <string name="rendering_attr_showRunningRoutes_name">Juoksureitit</string>
+    <string name="rendering_attr_showTramRoutes_name">Raitiovaunureitit</string>
+    <string name="rendering_attr_showTrainRoutes_name">Junareitit</string>
+    <string name="shared_string_complete">valmis</string>
+    <string name="map_widget_current_speed">Nykyinen nopeus</string>
+    <string name="top_widgets_panel">Yläpaneeli</string>
+    <string name="bottom_widgets_panel">Alapaneeli</string>
+    <string name="av_def_action_choose">Pyynnöstä</string>
+    <string name="estimated_download_size">Latauksen arviotu koko</string>
+    <string name="stop_and_exit">Lopeta ja poistu</string>
+    <string name="shared_string_shape">Muoto</string>
+    <string name="page_number">Sivu %1$s</string>
+    <string name="speed_mode">Nopeustila</string>
+    <string name="add_page">Lisää sivu</string>
+    <string name="shared_string_buttons">Painikkeet</string>
+    <string name="rendering_attr_showFitnessTrails_name">Kuntopolut</string>
+    <string name="stop_download">Lopeta lataaminen</string>
+    <string name="default_appearance">Oletusulkonäkö</string>
+    <string name="rendering_attr_showFitnessTrails_description">Näytä kuntopolut</string>
+    <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan päivittäin.</string>
+    <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan tunnin välein.</string>
 </resources>
