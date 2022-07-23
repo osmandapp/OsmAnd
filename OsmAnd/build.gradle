@@ -176,7 +176,7 @@ android {
 			jniDebuggable false
 			buildConfigField "boolean", "USE_DEBUG_LIBRARIES", "false"
 			minifyEnabled true
-			shrinkResources true
+			shrinkResources false
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 		release {
