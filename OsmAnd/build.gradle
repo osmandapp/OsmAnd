@@ -175,9 +175,9 @@ android {
 			debuggable false
 			jniDebuggable false
 			buildConfigField "boolean", "USE_DEBUG_LIBRARIES", "false"
-			minifyEnabled true
-			shrinkResources false
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			// minifyEnabled true
+			// shrinkResources false
+			// proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 		release {
 			signingConfig signingConfigs.publishing
