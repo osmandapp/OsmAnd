@@ -117,7 +117,7 @@
     <string name="user_password">Jelszó</string>
     <string name="osmand_service">Háttérmód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut kikapcsolt kijelzővel.</string>
-    <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Beállításokban (Térképfájlok kezelése), vagy váltson át az Online térképek bővítményre.</string>
+    <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Menüben (Térképek letöltése), vagy váltson át az Online térképek bővítményre.</string>
     <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
     <string name="download_files_question_space">Letölt {0} fájlt\?
 \nEhhez {1} MB-ra lesz szükség (a jelenlegi {2} MB-ból).</string>
@@ -436,7 +436,7 @@
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Régiók letöltése</string>
-    <string name="first_time_msg">Köszönjük, hogy az OsmAndot használja! Regionális adatokat offline használatra a \'Beállítások\' → \'Térképek kezelése\' menüben tölthet le. Ezt követően tud majd térképet nézni, címre, POI-ra keresni, útvonalat tervezni.</string>
+    <string name="first_time_msg">Köszönjük, hogy az OsmAndot használja! Regionális adatokat offline használatra a \'Menü\' → \'Térképek letöltése\' menüben tölthet le. Ezt követően tud majd térképet nézni, címre, POI-ra keresni, útvonalat tervezni.</string>
     <string name="search_poi_location">Várakozás jelre…</string>
     <string name="search_near_map">Keresés a jelenlegi térképközéppont közelében</string>
     <string name="search_nearby">Keresés a közelben</string>

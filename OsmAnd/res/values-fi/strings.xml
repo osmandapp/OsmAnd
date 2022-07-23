@@ -2616,7 +2616,7 @@
     <string name="save_as_new_track">Tallenna uutena jälkenä</string>
     <string name="reverse_route">Päinvastainen reitti</string>
     <string name="route_between_points_whole_track_button_desc">Koko jälki lasketaan uudelleen käyttäen valittua profiilia.</string>
-    <string name="plan_route_exit_dialog_descr">Haluatko varmasti menettää kaikki muutokset suunnitellusta reitistä\?</string>
+    <string name="plan_route_exit_dialog_descr">Hylkäätkö kaikki suunnitellun reitin muutokset\?</string>
     <string name="marker_save_as_track">Tallenna jälkitiedostona</string>
     <string name="follow_track">Seuraa jälkeä</string>
     <string name="follow_track_descr">Valitse seurattava jälkitiedosto</string>
