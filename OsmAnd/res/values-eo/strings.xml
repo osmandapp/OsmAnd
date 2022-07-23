@@ -4750,7 +4750,7 @@
     <string name="av_notes_photo_widget_desc">Fenestraĵo ebliganta fari foton.</string>
     <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri videan noton.</string>
     <string name="av_notes_audio_widget_desc">Fenestraĵo ebliganta registri sonan noton.</string>
-    <string name="trip_recording_distance_widget_desc">Montras distancon de la nune registrata spuro.</string>
+    <string name="trip_recording_distance_widget_desc">Montras longon de la nune registrata spuro.</string>
     <string name="trip_recording_downhill_widget_desc">Montras sumon (horizontale) de ĉiuj malsupreniroj por la nune registrata spuro.</string>
     <string name="trip_recording_uphill_widget_desc">Montras sumon (horizontale) de ĉiuj supreniroj por la nune registrata spuro.</string>
     <string name="trip_recording_duration_widget_desc">Montras tempon de registrado de spuro: daŭron en minutoj/horoj de la nune registrata kurso.</string>
