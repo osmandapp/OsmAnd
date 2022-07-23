@@ -62,7 +62,7 @@
     <string name="user_password">Mot de passe</string>
     <string name="osmand_service">Mode arrière-plan</string>
     <string name="osmand_service_descr">OsmAnd s\'exécute en arrière-plan, écran éteint.</string>
-    <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors-ligne pour ce lieu (depuis « Paramètres » &gt; « Gérer les cartes ») ou utilisez l\'extension « cartes en ligne ».</string>
+    <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors-ligne pour ce lieu (depuis le menu principal \'Télécharger les cartes\') ou utilisez l\'extension \'Cartes en ligne\'.</string>
     <string name="download_files_not_enough_space">Il n\'y a pas suffisamment d\'espace pour télécharger %1$s Mo (disponible : %2$s).</string>
     <string name="download_files_question_space">Télécharger {0} fichier(s) \?
 \n{1} Mo (sur {2} Mo) seront utilisés.</string>
@@ -379,7 +379,7 @@
     <string name="route_head">Avancez</string>
     <string name="first_time_continue">Plus tard</string>
     <string name="first_time_download">Téléchargement des régions</string>
-    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données régionales pour une utilisation hors-ligne via \'Paramètres\' → \'Données hors-ligne\'. Ces données vous permettront d\'afficher des cartes, de rechercher une adresse, un point d\'intérêt ou un transport en commun et bien plus encore.</string>
+    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données de la région pour une utilisation hors-ligne via le menu \'Télécharger les cartes\'. Vous pourrez ainsi afficher des cartes, rechercher une adresse, un point d\'intérêt ou un transport en commun, calculer et suivre des itinéraires et bien plus encore, sans utiliser vos données mobiles.</string>
     <string name="search_poi_location">Recherche du signal…</string>
     <string name="search_near_map">Rechercher autour du centre de la carte</string>
     <string name="search_nearby">Rechercher à proximité</string>
