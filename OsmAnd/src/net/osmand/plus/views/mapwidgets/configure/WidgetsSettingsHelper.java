@@ -136,7 +136,7 @@ public class WidgetsSettingsHelper {
 
 	@Nullable
 	private MapWidgetInfo createDuplicateWidgetInfo(@NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
-		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType.id);
+		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType);
 		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType);
 		if (duplicateWidget != null) {
 			settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);

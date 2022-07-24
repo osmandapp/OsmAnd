@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
@@ -217,6 +218,8 @@ public class ImportHelper {
 			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true);
 		} else if (fileName.endsWith(SQLITE_CHART_FILE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName.replace(SQLITE_CHART_FILE_EXT, SQLITE_EXT));
+		} else if (fileName.endsWith(HEIGHTMAP_SQLITE_EXT)) {
+			handleSqliteHeightmapImport(intentUri, fileName);
 		} else {
 			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false);
 		}
@@ -275,6 +278,10 @@ public class ImportHelper {
 
 	protected void handleSqliteTileImport(Uri uri, String name) {
 		executeImportTask(new SqliteTileImportTask(activity, uri, name));
+	}
+
+	protected void handleSqliteHeightmapImport(Uri uri, String name) {
+		executeImportTask(new SqliteHeightmapImportTask(activity, uri, name));
 	}
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {

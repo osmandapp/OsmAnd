@@ -117,7 +117,7 @@
     <string name="user_password">Jelszó</string>
     <string name="osmand_service">Háttérmód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut kikapcsolt kijelzővel.</string>
-    <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Beállításokban (Térképfájlok kezelése), vagy váltson át az Online térképek bővítményre.</string>
+    <string name="switch_to_raster_map_to_see">Erre a területre letölthet offline vektoros térképet a Menüben (Térképek letöltése), vagy váltson át az Online térképek bővítményre.</string>
     <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
     <string name="download_files_question_space">Letölt {0} fájlt\?
 \nEhhez {1} MB-ra lesz szükség (a jelenlegi {2} MB-ból).</string>
@@ -436,7 +436,7 @@
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Régiók letöltése</string>
-    <string name="first_time_msg">Köszönjük, hogy az OsmAndot használja! Regionális adatokat offline használatra a \'Beállítások\' → \'Térképek kezelése\' menüben tölthet le. Ezt követően tud majd térképet nézni, címre, POI-ra keresni, útvonalat tervezni.</string>
+    <string name="first_time_msg">Köszönjük, hogy az OsmAndot használja! Regionális adatokat offline használatra a \'Menü\' → \'Térképek letöltése\' menüben tölthet le. Ezt követően tud majd térképet nézni, címre, POI-ra keresni, útvonalat tervezni.</string>
     <string name="search_poi_location">Várakozás jelre…</string>
     <string name="search_near_map">Keresés a jelenlegi térképközéppont közelében</string>
     <string name="search_nearby">Keresés a közelben</string>
@@ -1940,8 +1940,8 @@
     <string name="access_direction_haptic_feedback">Rezgő irányjelzés</string>
     <string name="access_direction_haptic_feedback_descr">Rezgéssel jelölje a célpont irányát.</string>
     <string name="access_smart_autoannounce">Intelligens automatikus bemondás</string>
-    <string name="access_smart_autoannounce_descr">Figyelmeztetés, csak ha a célpont iránya megváltozott.</string>
-    <string name="access_autoannounce_period">Bemondások gyakorisága</string>
+    <string name="access_smart_autoannounce_descr">Figyelmeztetés csak akkor, ha a célpont iránya megváltozott.</string>
+    <string name="access_autoannounce_period">Automatikus bemondások gyakorisága</string>
     <string name="access_autoannounce_period_descr">A bemondások közötti legkisebb időköz.</string>
     <string name="lang_hu_formal">magyar (magázó)</string>
     <string name="current_track">Jelenlegi nyomvonal</string>
@@ -3028,7 +3028,7 @@
     <string name="vehicle_parameters_descr">Tömeg, magasság, hossz, sebesség</string>
     <string name="vehicle_parameters">Jármű paraméterei</string>
     <string name="voice_announces_info">A hangbemondások csak navigáció közben kerülnek lejátszásra.</string>
-    <string name="voice_announces_descr">Navigációs utasítások és bemondások</string>
+    <string name="voice_announces_descr">Navigációs utasítások és hangbemondások</string>
     <string name="voice_announces">Hangutasítások</string>
     <string name="screen_alerts">Képernyő riasztások</string>
     <string name="route_parameters_descr">Útvonal-paraméterek beállítása</string>
@@ -3929,7 +3929,7 @@
     <string name="shared_string_sec">mp.</string>
     <string name="announcement_time_passing">Túlhaladás</string>
     <string name="announcement_time_approach">Megközelítés</string>
-    <string name="announcement_time_prepare_long">Hosszú felkészülés</string>
+    <string name="announcement_time_prepare_long">Felkészülés (távoli)</string>
     <string name="announcement_time_prepare">Felkészülés</string>
     <string name="announcement_time_off_route">Letérés az útvonalról</string>
     <string name="announcement_time_arrive">Érkezés a célponthoz</string>
@@ -4056,12 +4056,12 @@
     <string name="next_billing_date">Következő számla dátuma: %1$s</string>
     <string name="osmand_live_cancelled">Törölve</string>
     <string name="renew_subscription">Előfizetés megújítása</string>
-    <string name="in_grace_period">Türelmi időszakban</string>
+    <string name="in_grace_period">Kipróbálási időszakban</string>
     <string name="on_hold">Várakoztatva</string>
     <string name="expired">Lejárt</string>
     <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
     <string name="exit_number">Kijárat száma</string>
-    <string name="announce_when_exceeded">Értesítés túllépéskor</string>
+    <string name="announce_when_exceeded">Bemondás túlhaladáskor</string>
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Teljesítmény</string>
     <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
@@ -4445,7 +4445,7 @@
     <string name="exit_without_saving_warning">Kilép mentés nélkül\?</string>
     <string name="shared_string_precision">Pontosság</string>
     <string name="shared_string_statistics">Statisztika</string>
-    <string name="gps_filter_hdop_desc">A legnagyobb elfogadott érték beállítása a HDOP számára.
+    <string name="gps_filter_hdop_desc">A legnagyobb elfogadott vízszintes pontossághígulási érték beállítása (HDOP, horizontal dilution of precision).
 \nA nagyobb értékű pontok el lesznek rejtve.</string>
     <string name="gps_filter_precision">GPS pontossága</string>
     <string name="gps_filter_smoothing">Simítás</string>
@@ -4660,7 +4660,7 @@
     <string name="rendering_attr_horseScale_name">Lovas utak nehézségi foka</string>
     <string name="routing_attr_allow_private_for_truck_name">Behajtás magánterületre (tehergépjármű)</string>
     <string name="rendering_attr_weatherPressureContours_name">Légnyomás izobár vonalak</string>
-    <string name="routing_attr_avoid_highway_name">Autópályák elkerülése</string>
+    <string name="routing_attr_avoid_highway_name">Főutak elkerülése</string>
     <string name="routing_attr_avoid_highway_description">Autópályák elkerülése</string>
     <string name="routing_attr_hazmat_category_description">Veszélyes anyagok kategória / A kategóriára vonatkozó behajtási tilalmak figyelembevétele</string>
     <string name="routing_attr_hazmat_category_name">Veszélyes anyag kategória</string>
@@ -4761,13 +4761,13 @@
     <string name="auto_25_chars_route_tu_kr">Forduljon meg, és tartson jobbra</string>
     <string name="auto_25_chars_route_roundabout_kl">Menjen ki a(z) %1$d kijáraton és tartson balra</string>
     <string name="auto_25_chars_route_roundabout_kr">Menjen ki a(z) %1$d kijáraton és tartson jobbra</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Kifejezetten MTB-k számára kialakított utak megjelenítése</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA utak megjelenítése</string>
-    <string name="average_speed_skip_stops_desc">%1$s alatti sebesség lesz számolva és ez befolyásolja az átlagsebességet.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Kifejezetten hegyi kerékpározásra (MTB) kialakított utak megjelenítése</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Az IMBA MTB-útvonalainak megjelenítése</string>
+    <string name="average_speed_skip_stops_desc">A(z) %1$s alatti sebesség be lesz számítva, és befolyásolja az átlagsebességet.</string>
     <string name="download_tiles">Csempék letöltése</string>
-    <string name="without_profiles_changing">Profilok váltása nélkül</string>
+    <string name="without_profiles_changing">Profilváltás nélkül</string>
     <string name="attach_roads_warning">Az utakhoz csak rögzített nyomvonalat csatolhat</string>
     <string name="shared_string_only_missing">Csak hiányzó</string>
-    <string name="connect_with_straight_line">Csatlakoztatás egyenes vonallal</string>
-    <string name="attach_roads_descr">Szeretné megközelíteni a nyomvonalát egy offline térképekhez csatolt érvényes útvonallal\? Ebben az esetben korrigált útmagasság, útinformáció és kanyarodás áll rendelkezésére, amelyeket később a navigáció során használhat fel.</string>
+    <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
+    <string name="attach_roads_descr">Szeretné egy offline térképekhez csatolt, érvényes útvonallal megközelíteni a nyomvonalát\? Ebben az esetben korrigált útmagasság, útinformációk és kanyarodási információk fognak rendelkezésére állni, amelyeket később a navigáció során használhat fel.</string>
 </resources>

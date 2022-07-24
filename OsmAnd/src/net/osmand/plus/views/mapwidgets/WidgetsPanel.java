@@ -173,6 +173,14 @@ public enum WidgetsPanel {
 		return widgetsOrder;
 	}
 
+	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings) {
+		return contains(widgetId, settings, settings.getApplicationMode());
+	}
+
+	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings, @NonNull ApplicationMode appMode) {
+		return getWidgetOrder(appMode, widgetId, settings) != DEFAULT_ORDER;
+	}
+
 	public boolean isPagingAllowed() {
 		return this == LEFT || this == RIGHT;
 	}

@@ -2103,7 +2103,7 @@
     <string name="quick_action_add_favorite">Дадаць ва ўлюбёныя</string>
     <string name="dialog_add_action_title">Дадаць дзеянне</string>
     <string name="quick_actions_delete">Выдаліць дзеянне</string>
-    <string name="quick_actions_delete_text">Сапраўды выдаліць дзеянне \"%s\"\?</string>
+    <string name="quick_actions_delete_text">Выдаліць дзеянне \"%s\"\?</string>
     <string name="favorite_empty_place_name">Месца</string>
     <string name="quick_action_poi_show">Паказаць %1$s</string>
     <string name="quick_action_poi_hide">Схаваць %1$s</string>
@@ -3841,9 +3841,9 @@
     <string name="login_open_street_map">Увайсці ў OpenStreetMap</string>
     <string name="login_open_street_map_org">Увайсці ў OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Увайсці праз OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Вам неабходна ўвайсці ў сістэму, каб адправіць змены.
+    <string name="open_street_map_login_mode">Спачатку ўвайдзіце ў сістэму, каб адправіць змены.
 \n
-\nВы можаце ўвайсці з дапамогай OAuth або лагіна і пароля.</string>
+\nВыкарыстоўвайце метад OAuth або ваша імя карыстальніка і пароль OSM.</string>
     <string name="use_login_password">Выкарыстоўваць імя карыстальніка і пароль</string>
     <string name="login_account">Акаўнт</string>
     <string name="user_login">Увайсці</string>
@@ -4391,7 +4391,7 @@
     <string name="history_actions_descr">Вы можаце экспартаваць гісторыю ў файл.</string>
     <string name="no_items_of_type_message">У вас няма элементаў гэтага тыпу</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Карты рэльефу: контурныя лініі, рэльеф, схілы</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Афарбоўка паводле прыналежнасці сеткі</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Афарбоўка паводле сеткавай прыналежнасці.</string>
     <string name="route_line_use_map_style_width">Выкарыстоўваць прадвызначаную шырыню стылю мапы (%1$s).</string>
     <string name="shared_storage_last_step">Пасля гэтага вы можаце ўказаць новы каталог з данымі.</string>
     <string name="select_another_colorization">Калі ласка, абярыце іншы тып афарбоўкі.</string>
@@ -4780,4 +4780,8 @@
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
     <string name="without_profiles_changing">Без змены профіляў</string>
     <string name="shared_string_only_missing">Толькі адсутныя</string>
+    <string name="connect_with_straight_line">Злучыць прамой лініяй</string>
+    <string name="attach_roads_warning">Вы можаце далучыць да дарог толькі запісаны след</string>
+    <string name="download_tiles">Спампаваць фрагменты</string>
+    <string name="attach_roads_descr">Вы жадаеце звязаць свой след з сапраўдным маршрутам, далучаным да пазасеткавых мапаў\? У такім выпадку вы будзеце мець скарэкціраваную вышыню дарогі, інфармацыю аб дарозе і павароты, якія можна выкарыстоўваць пазней у навігацыі.</string>
 </resources>

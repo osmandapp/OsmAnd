@@ -83,7 +83,8 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
+		WidgetType widgetType = widgetInfo.getWidgetType();
 		if (isMarkerWidget(widgetType) && widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
 			addWidget(widgetInfo, widgetType);
 		}
@@ -91,7 +92,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 
 	@Override
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
-		WidgetType widgetType = widgetInfo.widget.getWidgetType();
+		WidgetType widgetType = widgetInfo.getWidgetType();
 		if (isMarkerWidget(widgetType)) {
 			if (widgetInfo.isEnabledForAppMode(settings.getApplicationMode())) {
 				addWidget(widgetInfo, widgetType);

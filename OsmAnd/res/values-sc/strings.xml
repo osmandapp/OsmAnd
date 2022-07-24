@@ -4624,4 +4624,24 @@
     <string name="trip_recording_duration_widget_desc">Ammustrat sa longària de sa registratzione de sa rasta, sa durada in minutos/oras de su biàgiu in registratzione in cussu momentu.</string>
     <string name="trip_recording_distance_widget_desc">Ammustrat sa distàntzia de su biàgiu in registratzione.</string>
     <string name="true_bearing_wdiget_desc">Àngulu intre su nord beru e su puntu de destinatzione bidu dae sa positzione tua.</string>
+    <string name="routing_attr_goods_restrictions_name">Intrega de mertzes</string>
+    <string name="marker_1st">Primu marcadore</string>
+    <string name="marker_2nd">Segundu marcadore</string>
+    <string name="distance_to_intermediate_widget_desc">Su widget ammustrat sa distàntzia chi mancat pro arribbare a su primu puntu de coladòrgiu. A pustis de àere coladu unu puntu de coladòrgiu sa distàntzia s\'at a carculare pro su puntu de coladòrgiu imbeniente.</string>
+    <string name="compass_visible_if_map_rotated_desc">Cuadu cando su Nord est in artu</string>
+    <string name="widget_with_dot">Widget.</string>
+    <string name="compass_always_hidden">Semper cuadu</string>
+    <string name="distance_to_destination_widget_desc">Su widget ammustrat sa distàntzia chi mancat pro arribbare a s\'ùrtimu puntu de destinatzione.</string>
+    <string name="next_turn_widget_desc">Su widget ammustrat informatziones subra de sa bortada imbeniente tua cun un\'immàgine de sa manovra e sa distàntzia finas a ie.</string>
+    <string name="compass_visible_if_map_rotated">Visìbile si sa mapa est rodeada</string>
+    <string name="compass_always_visible">Semper visìbile</string>
+    <string name="compass_click_desc">Toca in sa bùssola pro colare dae una modalidade de orientamentu a s\'àtera.</string>
+    <string name="compass_desc">Ammustrat sa diretzione pro su nord.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Ischema de colores de sas curvas de livellu de profundidade</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Ischema de colores de sas curvas de livellu de profundidade</string>
+    <string name="rendering_attr_depthContourWidth_description">Largària de sas curvas de livellu de profundidade</string>
+    <string name="rendering_attr_depthContourWidth_name">Largària de sas curvas de livellu de profundidade</string>
+    <string name="accessibility_2d_view_off">Vista 2.5 istudada</string>
+    <string name="accessibility_2d_view_on">Vista 2.5 alluta</string>
+    <string name="download_complete">Iscarrigamentu agabbadu</string>
 </resources>

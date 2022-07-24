@@ -17,7 +17,6 @@ import java.util.List;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 
@@ -56,19 +55,17 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	@Override
 	public WidgetsPanel getUpdatedPanel() {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
-		WidgetType widgetType = WidgetType.getById(key);
+		WidgetType widgetType = getWidgetType();
 		if (widgetType != null) {
-			if (widgetType.defaultPanel == LEFT
-					&& RIGHT.getWidgetOrder(key, settings) != DEFAULT_ORDER) {
+			if (widgetType.defaultPanel == LEFT && RIGHT.contains(key, settings)) {
 				widgetPanel = RIGHT;
-			} else if (widgetType.defaultPanel == RIGHT
-					&& LEFT.getWidgetOrder(key, settings) != DEFAULT_ORDER) {
+			} else if (widgetType.defaultPanel == RIGHT && LEFT.contains(key, settings)) {
 				widgetPanel = LEFT;
 			} else {
 				widgetPanel = widgetType.defaultPanel;
 			}
 		} else {
-			widgetPanel = LEFT.getWidgetOrder(key, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
+			widgetPanel = LEFT.contains(key, settings) ? LEFT : RIGHT;
 		}
 		return widgetPanel;
 	}

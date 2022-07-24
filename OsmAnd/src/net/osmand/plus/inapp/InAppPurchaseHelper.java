@@ -44,7 +44,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public abstract class InAppPurchaseHelper {
@@ -624,14 +623,16 @@ public abstract class InAppPurchaseHelper {
 		}
 
 		private boolean checkPromoSubscription(@NonNull String orderId) {
-			Entry<String, SubscriptionStateHolder> entry = getSubscriptionStateByOrderId(orderId);
-			if (entry != null) {
-				SubscriptionStateHolder stateHolder = entry.getValue();
-				if ("promo_website".equals(entry.getKey())) {
-					ctx.getSettings().BACKUP_PROMOCODE_STATE.set(stateHolder.state);
-					ctx.getSettings().BACKUP_PROMOCODE_START_TIME.set(stateHolder.startTime);
-					ctx.getSettings().BACKUP_PROMOCODE_EXPIRE_TIME.set(stateHolder.expireTime);
-					return stateHolder.state.isActive();
+			Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
+			if (!Algorithms.isEmpty(subscriptionStates)) {
+				for (Map.Entry<String, SubscriptionStateHolder> entry : subscriptionStates.entrySet()) {
+					if ("promo_website".equals(entry.getKey())) {
+						SubscriptionStateHolder stateHolder = entry.getValue();
+						ctx.getSettings().BACKUP_PROMOCODE_STATE.set(stateHolder.state);
+						ctx.getSettings().BACKUP_PROMOCODE_START_TIME.set(stateHolder.startTime);
+						ctx.getSettings().BACKUP_PROMOCODE_EXPIRE_TIME.set(stateHolder.expireTime);
+						return stateHolder.state.isActive();
+					}
 				}
 			}
 			return false;
@@ -665,12 +666,14 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	private boolean checkSubscriptionByOrderId(@NonNull String orderId) {
-		Entry<String, SubscriptionStateHolder> entry = getSubscriptionStateByOrderId(orderId);
-		if (entry != null) {
-			SubscriptionStateHolder stateHolder = entry.getValue();
-			return stateHolder.state.isActive();
+		boolean active = false;
+		Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
+		if (!Algorithms.isEmpty(subscriptionStates)) {
+			for (SubscriptionStateHolder stateHolder : subscriptionStates.values()) {
+				active |= stateHolder.state.isActive();
+			}
 		}
-		return false;
+		return active;
 	}
 
 	private String getOrderIdByDeviceIdAndToken() {
@@ -700,17 +703,14 @@ public abstract class InAppPurchaseHelper {
 		return orderId[0];
 	}
 
-	private Entry<String, SubscriptionStateHolder> getSubscriptionStateByOrderId(@NonNull String orderId) {
+	private Map<String, SubscriptionStateHolder> getSubscriptionStatesByOrderId(@NonNull String orderId) {
 		Map<String, String> params = new HashMap<>();
 		params.put("orderId", orderId);
 		String subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/api/subscriptions/get",
 				params, "Requesting promo subscription state", false, false);
 
 		if (subscriptionsState != null) {
-			Set<Entry<String, SubscriptionStateHolder>> stateHolders = parseSubscriptionStates(subscriptionsState).entrySet();
-			if (!Algorithms.isEmpty(stateHolders)) {
-				return stateHolders.iterator().next();
-			}
+			return parseSubscriptionStates(subscriptionsState);
 		}
 		return null;
 	}

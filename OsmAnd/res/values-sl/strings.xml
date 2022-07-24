@@ -499,7 +499,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
     <string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
     <string name="native_rendering">Izvorno izrisovanje</string>
-    <string name="switch_to_raster_map_to_see">Prenesi vektorski zemljevid brez povezave za to mesto v »Nastavitvah« (»Upravljanje datotek zemljevidov«) ali preklopi na vtičnik »Spletni zemljevidi«.</string>
+    <string name="switch_to_raster_map_to_see">Prenesi vektorski zemljevid brez povezave za to mesto v »Meni« → »Prejmi zemljevide« ali preklopi na vtičnik »Spletni zemljevidi«.</string>
     <string name="gpx_tags_txt">Oznake</string>
     <string name="shared_string_description">Opis</string>
     <string name="default_buttons_support">Podpora</string>
@@ -522,7 +522,7 @@
     <string name="osb_comment_dialog_success">Opomba je dodana</string>
     <string name="osb_comment_dialog_error">Opombe ni mogoče dodati.</string>
     <string name="route_descr_lat_lon">ZD (λ) %1$.3f; ZŠ (β) %2$.3f</string>
-    <string name="first_time_msg">Zahvaljujemo se vam za uporabo programa OsmAnd. Za pregled zemljevidov, iskanje naslovov in krajev, javnih prevozov in drugih podatkov prejmite krajevne datoteke z izbiro možnosti med \'Nastavitvami\' → \'Upravljanje s podatki\'.</string>
+    <string name="first_time_msg">Zahvaljujemo se ti za uporabo programa OsmAnd. Za pregled zemljevidov, iskanje naslovov in krajev, javnih prevozov in drugih podatkov prejmi krajevne datoteke z izbiro možnosti med »Meni« → »Prejmi zemljevide«.</string>
     <string name="local_indexes_cat_tile">Spletni in shranjeni zemljevidi</string>
     <string name="map_online_data">Spletni in shranjeni zemljevidi</string>
     <string name="shared_string_clear">Počisti</string>
@@ -4762,4 +4762,11 @@
     <string name="compass_desc">Kaže smer proti severu.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Barvna shema izobat</string>
     <string name="rendering_attr_depthContourColorScheme_description">Barvna shema izobat (črt za globino)</string>
+    <string name="connect_with_straight_line">Poveži z ravno črto</string>
+    <string name="attach_roads_warning">Na ceste lahko prilepiš samo posneto sled</string>
+    <string name="without_profiles_changing">Brez spreminjanja profilov</string>
+    <string name="shared_string_only_missing">Samo manjkajoče</string>
+    <string name="download_tiles">Prenesi ploščice</string>
+    <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se upošteva in vpliva na povprečno hitrost.</string>
+    <string name="attach_roads_descr">Ali želiš približati svojo sled z veljavno potjo prilepljeno na zemljevid brez povezave\? V tem primeru boš imel popravljeno nadmorsko višino, informacije o cestah in ovinkih, ki jih lahko pozneje uporabiš pri navigaciji.</string>
 </resources>
