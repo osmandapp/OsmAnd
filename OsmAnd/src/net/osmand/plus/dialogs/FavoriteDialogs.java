@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,16 +19,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.plus.mapcontextmenu.editors.SelectFavouriteToReplaceBottomSheet;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.myplaces.FavouritesHelper;
@@ -38,67 +34,11 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteDialogs {
 
 	public static final String KEY_FAVORITE = "favorite";
-
-	public static Dialog createReplaceFavouriteDialog(Activity activity, Bundle args) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		FavouritesHelper helper = app.getFavoritesHelper();
-		List<FavouritePoint> points = new ArrayList<>(helper.getFavouritePoints());
-		FavouritesAdapter favouritesAdapter = new FavouritesAdapter(activity, points, false);
-		Dialog[] dlgHolder = new Dialog[1];
-		OnItemClickListener click = (parent, view, position, id) -> confirmReplace(activity, args, helper, favouritesAdapter, dlgHolder, position);
-		favouritesAdapter.sortByDefault(true);
-
-		if (points.size() == 0) {
-			Toast.makeText(themedContext, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-			return null;
-		}
-		return showFavoritesDialog(themedContext, favouritesAdapter, click, null, dlgHolder, true);
-	}
-
-	private static void confirmReplace(Activity activity, Bundle args, FavouritesHelper helper,
-	                                   FavouritesAdapter favouritesAdapter, Dialog[] dlgHolder, int position) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		builder.setTitle(R.string.update_existing);
-		FavouritePoint fp = favouritesAdapter.getItem(position);
-		builder.setMessage(activity.getString(R.string.replace_favorite_confirmation, fp.getName()));
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (dlgHolder != null && dlgHolder.length > 0 && dlgHolder[0] != null) {
-					dlgHolder[0].dismiss();
-				}
-				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				if (point != null && helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
-					helper.deleteFavourite(point);
-					if (activity instanceof MapActivity) {
-						MapActivity mapActivity = (MapActivity) activity;
-						Fragment fragment = mapActivity.getSupportFragmentManager()
-								.findFragmentByTag(FavoritePointEditor.TAG);
-						if (fragment instanceof FavoritePointEditorFragment) {
-							((FavoritePointEditorFragment) fragment).exitEditing();
-						}
-						mapActivity.getContextMenu()
-								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
-						mapActivity.refreshMap();
-					}
-				}
-			}
-		});
-		builder.show();
-	}
 
 	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, PointDescription desc) {
 		Resources resources = activity.getResources();
@@ -151,12 +91,7 @@ public class FavoriteDialogs {
 
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, (dialog, which) -> {
-			// Don't use showDialog because it is impossible to refresh favorite items list
-			Dialog dlg = createReplaceFavouriteDialog(activity, args);
-			if (dlg != null) {
-				dlg.show();
-			}
-			// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
+			SelectFavouriteToReplaceBottomSheet.showInstance(activity, args);
 		});
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
@@ -192,6 +127,7 @@ public class FavoriteDialogs {
 		return builder.create();
 	}
 
+	@NonNull
 	public static AlertDialog showFavoritesDialog(
 			Context uiContext,
 			FavouritesAdapter favouritesAdapter, OnItemClickListener click,

@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.myplaces.DefaultFavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
@@ -71,18 +72,10 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		if (helper.isFavoritesLoaded()) {
 			setupFavorites();
 		} else {
-			helper.addListener(favoritesListener = new FavoritesListener() {
+			helper.addListener(favoritesListener = new DefaultFavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					setupFavorites();
-				}
-
-				@Override
-				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
-				}
-
-				@Override
-				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

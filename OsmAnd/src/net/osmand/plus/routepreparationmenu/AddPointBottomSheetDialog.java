@@ -19,11 +19,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.SpecialPointType;
-import net.osmand.plus.myplaces.FavoritesListener;
+import net.osmand.plus.myplaces.DefaultFavoritesListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
@@ -49,7 +48,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
+import net.osmand.plus.mapcontextmenu.other.SelectFavouriteToGoBottomSheet;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
@@ -384,7 +383,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				loadFavoritesItems(items, helper);
 			} else {
 				addMainScrollItems(items);
-				helper.addListener(new FavoritesListener() {
+				helper.addListener(new DefaultFavoritesListener() {
 
 					private void reloadFavoritesItems() {
 						MapActivity mapActivity = (MapActivity) getActivity();
@@ -402,10 +401,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 						reloadFavoritesItems();
-					}
-
-					@Override
-					public void onFavoritePropertiesUpdated() {
 					}
 				});
 			}
@@ -429,7 +424,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				}
 				Object item = items.get(position);
 				if (item.equals(FAVORITES)) {
-					openFavoritesDialog();
+					SelectFavouriteToGoBottomSheet.showInstance(mapActivity, AddPointBottomSheetDialog.this, pointType);
 				} else if (item.equals(MARKERS)) {
 					MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
 					menu.selectMapMarker(-1, pointType);
@@ -504,19 +499,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			}
 		}
 		return new Pair<>(ll, name);
-	}
-
-	private void openFavoritesDialog() {
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null) {
-			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
-			Bundle args = new Bundle();
-			args.putString(FavouritesBottomSheetMenuFragment.POINT_TYPE_KEY, pointType.name());
-			fragment.setTargetFragment(this, ADD_FAVORITE_TO_ROUTE_REQUEST_CODE);
-			fragment.setArguments(args);
-			fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
-		}
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, PointType pointType) {

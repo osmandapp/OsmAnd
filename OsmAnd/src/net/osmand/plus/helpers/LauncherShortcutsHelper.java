@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import net.osmand.plus.myplaces.DefaultFavoritesListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
@@ -54,18 +55,10 @@ public class LauncherShortcutsHelper {
 
 	public LauncherShortcutsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.favoritesListener = new FavoritesListener() {
+		this.favoritesListener = new DefaultFavoritesListener() {
 			@Override
 			public void onFavoritesLoaded() {
 				updateLauncherShortcuts();
-			}
-
-			@Override
-			public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
-			}
-
-			@Override
-			public void onFavoritePropertiesUpdated() {
 			}
 		};
 		app.getFavoritesHelper().addListener(favoritesListener);

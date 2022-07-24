@@ -19,7 +19,9 @@ public class GpsInfoWidget extends TextInfoWidget {
 		super(mapActivity, GPS_INFO);
 		setIcons(GPS_INFO);
 		setText(null, null);
-		setOnClickListener(v -> new StartGPSStatus(mapActivity).run());
+		setOnClickListener(v -> {
+			new StartGPSStatus(mapActivity).run();
+		});
 	}
 
 	@Override

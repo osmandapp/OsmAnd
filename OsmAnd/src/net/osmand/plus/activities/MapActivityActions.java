@@ -135,7 +135,7 @@ import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CONTROL_BUTTO
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_NORMAL_PROFILE_TAG;
 
 
-public class MapActivityActions extends MapActions implements DialogProvider {
+public class MapActivityActions extends MapActions {
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
 
@@ -154,17 +154,8 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	public static final int MEASURE_DISTANCE_ITEM_ORDER = 13000;
 	public static final int AVOID_ROAD_ITEM_ORDER = 14000;
 
-	private static final int DIALOG_ADD_FAVORITE = 100;
-	private static final int DIALOG_REPLACE_FAVORITE = 101;
-	private static final int DIALOG_ADD_WAYPOINT = 102;
-
-	private static final int DIALOG_SAVE_DIRECTIONS = 106;
-
 	private static final int DRAWER_MODE_NORMAL = 0;
 	private static final int DRAWER_MODE_SWITCH_PROFILE = 1;
-
-	// make static
-	private static final Bundle dialogBundle = new Bundle();
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -203,105 +194,14 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 		openIntermediatePointsDialog();
 	}
 
-	private Dialog createAddWaypointDialog(Bundle args) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
-		builder.setTitle(R.string.add_waypoint_dialog_title);
-
-		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.add_gpx_point_dialog, null);
-		EditText editText = view.findViewById(android.R.id.edit);
-		builder.setView(view);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				double latitude = args.getDouble(KEY_LATITUDE);
-				double longitude = args.getDouble(KEY_LONGITUDE);
-				String name = editText.getText().toString();
-				SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), null, name, null, 0);
-				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
-						.show();
-				dialog.dismiss();
-			}
-		});
-		AlertDialog alertDialog = builder.create();
-		editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-				}
-			}
-		});
-		return alertDialog;
-	}
-
 	protected String getString(int res) {
 		return mapActivity.getString(res);
 	}
 
 	protected void showToast(String msg) {
-		mapActivity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
-			}
+		mapActivity.runOnUiThread(() -> {
+			Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 		});
-	}
-
-	public void saveDirections() {
-		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
-	}
-
-	public static Dialog createSaveDirections(Activity activity, RoutingHelper routingHelper) {
-		OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		Dialog dlg = new Dialog(activity);
-		dlg.setTitle(R.string.shared_string_save_as_gpx);
-		dlg.setContentView(R.layout.save_directions_dialog);
-		EditText edit = dlg.findViewById(R.id.FileNameEdit);
-
-		GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
-		String editText;
-		if (rp == null || rp.getFile() == null || rp.getFile().path == null) {
-			editText = "_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_";
-		} else {
-			editText = new File(rp.getFile().path).getName();
-		}
-		edit.setText(editText);
-
-		dlg.findViewById(R.id.Save).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String name = edit.getText().toString();
-				//noinspection ResultOfMethodCallIgnored
-				fileDir.mkdirs();
-				File toSave = fileDir;
-				if (name.length() > 0) {
-					if (!name.endsWith(GPX_FILE_EXT)) {
-						name += GPX_FILE_EXT;
-					}
-					toSave = new File(fileDir, name);
-				}
-				if (toSave.exists()) {
-					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);
-				} else {
-					dlg.dismiss();
-					new SaveDirectionsAsyncTask(app, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
-				}
-			}
-		});
-
-		dlg.findViewById(R.id.Cancel).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dlg.dismiss();
-			}
-		});
-
-
-		return dlg;
 	}
 
 	public static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GPXFile> {
@@ -520,44 +420,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 
 	public void contextMenuPoint(double latitude, double longitude) {
 		contextMenuPoint(latitude, longitude, null, null);
-	}
-
-	@Override
-	public Dialog onCreateDialog(int id) {
-		Bundle args = dialogBundle;
-		switch (id) {
-			case DIALOG_ADD_FAVORITE:
-				return FavoriteDialogs.createAddFavouriteDialog(mapActivity, args);
-			case DIALOG_REPLACE_FAVORITE:
-				return FavoriteDialogs.createReplaceFavouriteDialog(mapActivity, args);
-			case DIALOG_ADD_WAYPOINT:
-				return createAddWaypointDialog(args);
-			case DIALOG_SAVE_DIRECTIONS:
-				return createSaveDirections(mapActivity, mapActivity.getRoutingHelper());
-		}
-		return OsmAndDialogs.createDialog(id, mapActivity, args);
-	}
-
-	@Override
-	public void onPrepareDialog(int id, Dialog dialog) {
-		Bundle args = dialogBundle;
-		switch (id) {
-			case DIALOG_ADD_FAVORITE:
-				FavoriteDialogs.prepareAddFavouriteDialog(mapActivity, dialog, args,
-						args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),
-						new PointDescription(PointDescription.POINT_TYPE_FAVORITE, args.getString(KEY_NAME)));
-				break;
-			case DIALOG_ADD_WAYPOINT:
-				EditText v = dialog.getWindow().findViewById(android.R.id.edit);
-				v.setPadding(5, 0, 5, 0);
-				if (args.getString(KEY_NAME) != null) {
-					v.setText(args.getString(KEY_NAME));
-					v.selectAll();
-				} else {
-					v.setText("");
-				}
-				break;
-		}
 	}
 
 	public ContextMenuAdapter createMainOptionsMenu() {
