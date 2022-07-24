@@ -12,6 +12,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,9 +54,13 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 		Bitmap bitmap = null;
 		try {
 			long[] timeHolder = new long[1];
-			bitmap = tileSource.getImage(request.xTile, request.yTile, request.zoom, timeHolder);
+			byte[] blob = tileSource.getBytes(request.xTile, request.yTile, request.zoom,null, timeHolder);
+			if (blob != null) {
+				String[] params = tileSource.getTileDbParams(request.xTile, request.yTile, request.zoom);
+				bitmap = tileSource.getImage(blob, params);
+			}
 			if (bitmap != null) {
-				updateTilesSizes(tileSource.getName(), request.zoom, bitmap.getByteCount());
+				updateTilesSizes(tileSource.getName(), request.zoom, blob.length);
 			}
 			if (timeHolder[0] != 0) {
 				downloadIfExpired(request, timeHolder[0]);
@@ -63,6 +68,8 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 		} catch (OutOfMemoryError e) {
 			log.error("Out of memory error", e);
 			clearTiles();
+		} catch (IOException e) {
+			log.error("Failed to get tile bytes", e);
 		}
 		return bitmap;
 	}
