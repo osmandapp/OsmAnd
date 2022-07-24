@@ -23,7 +23,6 @@ import androidx.annotation.StringRes;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.DEFAULT_ORDER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
@@ -182,9 +181,9 @@ public enum WidgetType {
 		if (defaultPanel == TOP || defaultPanel == BOTTOM) {
 			return defaultPanel;
 		} else if (defaultPanel == LEFT) {
-			return RIGHT.getWidgetOrder(mode, widgetId, settings) != DEFAULT_ORDER ? RIGHT : LEFT;
+			return RIGHT.contains(widgetId, settings, mode) ? RIGHT : LEFT;
 		} else if (defaultPanel == RIGHT) {
-			return LEFT.getWidgetOrder(mode, widgetId, settings) != DEFAULT_ORDER ? LEFT : RIGHT;
+			return LEFT.contains(widgetId, settings, mode) ? LEFT : RIGHT;
 		}
 		throw new IllegalStateException("Unsupported panel");
 	}
@@ -229,10 +228,12 @@ public enum WidgetType {
 	@NonNull
 	public static String getDefaultWidgetId(@NonNull String widgetId) {
 		int index = widgetId.indexOf(DELIMITER);
-		if (index != -1) {
-			widgetId = widgetId.substring(0, index);
-		}
-		return widgetId;
+		return index != -1 ? widgetId.substring(0, index) : widgetId;
+	}
+
+	@NonNull
+	public static String getDuplicateWidgetId(@NonNull WidgetType widgetType) {
+		return getDuplicateWidgetId(widgetType.id);
 	}
 
 	@NonNull

@@ -120,7 +120,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 		if (widgetInfo == null) {
 			throw new IllegalStateException("Failed to find widget by id: " + widgetId);
 		}
-		widgetType = WidgetType.getById(widgetInfo.key);
+		widgetType = widgetInfo.getWidgetType();
 		widgetGroup = widgetType == null ? null : widgetType.group;
 		panel = widgetInfo.widgetPanel;
 	}
@@ -277,7 +277,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 			return null;
 		}
 
-		String duplicateId = WidgetType.getDuplicateWidgetId(widgetType.id);
+		String duplicateId = WidgetType.getDuplicateWidgetId(widgetType);
 
 		settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateId);
 		WidgetState widgetState = widgetInfo.getWidgetState();

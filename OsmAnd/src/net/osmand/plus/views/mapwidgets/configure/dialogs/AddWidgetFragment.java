@@ -49,10 +49,11 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_WIDGET_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_GROUP_NAME;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
-import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGET_ID;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGET_TYPE;
 
 public class AddWidgetFragment extends BaseOsmAndFragment {
 
@@ -386,7 +387,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
-		args.putString(KEY_WIDGET_ID, widgetType.id);
+		args.putString(KEY_WIDGET_TYPE, widgetType.name());
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
@@ -407,7 +408,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
-		args.putString(KEY_WIDGET_ID, widgetId);
+		args.putString(KEY_EXTERNAL_WIDGET_ID, widgetId);
 		args.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
 		AddWidgetFragment fragment = new AddWidgetFragment();
