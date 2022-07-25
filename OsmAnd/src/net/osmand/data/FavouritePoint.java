@@ -52,6 +52,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private long visitedDate;
 	private long pickupDate;
 	private boolean calendarEvent;
+	private Amenity amenity;
 
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
@@ -287,6 +288,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return category;
 	}
 
+	public Amenity getAmenity() {
+		return amenity;
+	}
+
+	public void setAmenity(Amenity amenity) {
+		this.amenity = amenity;
+	}
+
 	public String getCategoryDisplayName(@NonNull Context ctx) {
 		return FavoriteGroup.getDisplayName(ctx, category);
 	}
@@ -434,6 +443,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		BackgroundType backgroundType = BackgroundType.getByTypeName(wptPt.getBackgroundType(), null);
 		point.setBackgroundType(backgroundType);
+		point.amenity = wptPt.getAmenity();
 		return point;
 	}
 
@@ -476,6 +486,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (getOriginObjectName().length() > 0) {
 			point.comment = getOriginObjectName();
 		}
+		point.setAmenity(getAmenity());
 		return point;
 	}
 }

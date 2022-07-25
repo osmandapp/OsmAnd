@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
@@ -152,7 +153,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			if (editor.isProcessingTemplate()) {
 				doAddWaypointTemplate(name, address, category, description);
 			} else if (editor.isNew()) {
-				doAddWpt(name, category, description);
+				doAddWpt(name, category, description, wpt.getAmenity());
 				wpt = getWpt();
 			} else {
 				doUpdateWpt(name, category, description);
@@ -212,7 +213,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	private void doAddWpt(String name, String category, String description) {
+	private void doAddWpt(String name, String category, String description, Amenity amenity) {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
 		if (wpt != null && editor != null) {
@@ -226,6 +227,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			}
 			wpt.setBackgroundType(getBackgroundType().getTypeName());
 			wpt.setIconName(getIconName());
+			wpt.setAmenity(amenity);
 
 			GPXFile gpx = editor.getGpxFile();
 			if (gpx != null) {
@@ -236,7 +238,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						gpxSelectionHelper.setGpxFileToDisplay(gpx);
 					}
 				} else {
-					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
+					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName(), amenity);
 					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
@@ -245,11 +247,11 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	protected void addWpt(GPXFile gpx, String description, String name, String category, int color, String iconName,
-	                      String backgroundType) {
+	                      String backgroundType, Amenity amenity) {
 		WptPt wpt = getWpt();
 		if (wpt != null) {
 			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(),
-					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType);
+					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType, amenity);
 			gpx.addPoint(wpt);
 		}
 	}

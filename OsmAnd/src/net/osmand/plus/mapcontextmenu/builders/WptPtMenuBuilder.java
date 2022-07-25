@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -35,11 +36,29 @@ import java.util.List;
 public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
+	private Object originObject;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity);
 		this.wpt = wpt;
 		setShowNearestWiki(true);
+
+		originObject = wpt.getAmenity();
+		if (originObject == null) {
+			String originObjectName = wpt.comment;
+			originObject = findAmenityObject(originObjectName, wpt.lat, wpt.lon);
+		}
+	}
+
+	public Object getOriginObject() {
+		return originObject;
+	}
+
+	@Override
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
+		if (originObject == null || !(originObject instanceof Amenity)) {
+			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
+		}
 	}
 
 	@Override
@@ -104,6 +123,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					false, null, true, 10, false, null, false);
 			rowc.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(rowc.getContext(),
 					app, wpt.comment, rowc.getResources().getString(R.string.poi_dialog_comment)));
+		}
+
+		if (originObject != null && originObject instanceof Amenity) {
+			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
+			builder.setLatLon(getLatLon());
+			builder.setLight(light);
+			builder.buildInternal(view);
 		}
 
 		buildPlainMenuItems(view);
