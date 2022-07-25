@@ -20,27 +20,27 @@
     <string name="delete_target_point">删除目的地</string>
     <string name="shared_string_target_points">目的地</string>
     <string name="map_widget_intermediate_distance">中转点</string>
-    <string name="poi_filter_parking">停車</string>
+    <string name="poi_filter_parking">停车</string>
     <string name="poi_filter_emergency">紧急救助</string>
     <string name="poi_filter_public_transport">公共交通</string>
-    <string name="poi_filter_entertainment">娛樂</string>
+    <string name="poi_filter_entertainment">娱乐</string>
     <string name="poi_filter_accomodation">住宿</string>
-    <string name="poi_filter_restaurants">餐廳</string>
-    <string name="poi_filter_sightseeing">遊覽</string>
-    <string name="poi_filter_car_aid">汽車援助</string>
-    <string name="poi_filter_food_shop">快餐店</string>
-    <string name="poi_filter_for_tourists">對於遊客</string>
+    <string name="poi_filter_restaurants">餐厅</string>
+    <string name="poi_filter_sightseeing">观光</string>
+    <string name="poi_filter_car_aid">汽车援助</string>
+    <string name="poi_filter_food_shop">食品店</string>
+    <string name="poi_filter_for_tourists">对于游客</string>
     <string name="poi_filter_fuel">燃料</string>
-    <string name="use_compass_navigation">使用指南針</string>
-    <string name="avoid_motorway">避開高速路</string>
+    <string name="use_compass_navigation">使用指南针</string>
+    <string name="avoid_motorway">无高速公路</string>
     <string name="auto_zoom_map">自动缩放地图</string>
-    <string name="recalculate_route_to_your_location">運輸方式：</string>
+    <string name="recalculate_route_to_your_location">运输方式：</string>
     <string name="select_navigation_mode">运输模式：</string>
     <string name="map_widget_renderer">地图风格</string>
-    <string name="map_widget_fluorescent">熒光路線</string>
-    <string name="map_widget_show_ruler">統治者</string>
-    <string name="map_widget_view_direction">觀察方向</string>
-    <string name="map_widget_top_text">街道名稱</string>
+    <string name="map_widget_fluorescent">荧光路线</string>
+    <string name="map_widget_show_ruler">标尺</string>
+    <string name="map_widget_view_direction">观察方向</string>
+    <string name="map_widget_top_text">街道名称</string>
     <string name="map_widget_gps_info">GPS信息</string>
     <string name="access_arrival_time">到达时间</string>
     <string name="item_checked">已查</string>
@@ -63,11 +63,11 @@
     <string name="enable_plugin_monitoring_services">启用跟踪插件使用日志位置服务（GPX记录，网上查询）</string>
     <string name="gps_not_available">请在设置中启用GPS</string>
     <string name="show_lanes">车道</string>
-    <string name="avoid_unpaved">无未铺设道路</string>
+    <string name="avoid_unpaved">无非铺装道路</string>
     <string name="avoid_ferries">避开轮渡</string>
-    <string name="avoid_in_routing_title">避让…</string>
+    <string name="avoid_in_routing_title">避开…</string>
     <string name="int_continuosly">连续</string>
-    <string name="screen_is_locked">要解锁屏幕按锁图标</string>
+    <string name="screen_is_locked">点击锁图标以解锁</string>
     <string name="map_widget_config">配置屏幕</string>
     <string name="map_widget_lock_screen">锁定</string>
     <string name="map_widget_back_to_loc">我在哪里</string>
@@ -471,8 +471,10 @@
     <string name="map_widget_vector_attributes">渲染属性</string>
     <string name="layer_map_appearance">配置屏幕</string>
     <string name="map_widget_transparent">透明皮肤</string>
-    <string name="bg_service_sleep_mode_off">打开\n 睡眠模式</string>
-    <string name="bg_service_sleep_mode_on">停止\n 睡眠模式</string>
+    <string name="bg_service_sleep_mode_off">运行
+\n 应用位于后台</string>
+    <string name="bg_service_sleep_mode_on">停止
+\n 在后台运行</string>
     <string name="map_widget_next_turn_small">下一个转弯(小)</string>
     <string name="map_widget_next_next_turn">再下一个转弯</string>
     <string name="map_widget_mini_route">路线小地图</string>
@@ -1923,7 +1925,7 @@
     <string name="context_menu_item_intermediate_point">添加为中转点</string>
     <string name="show_warnings_descr">设置交通警告（限速、强制停车、减速带、隧道）、测速摄像头警告和车道信息。</string>
     <string name="use_compass_navigation_descr">没有检测到朝向的时候使用罗盘。</string>
-    <string name="auto_zoom_map_descr">根据你的速度（地图与当前的位置同步）自动缩放地图。</string>
+    <string name="auto_zoom_map_descr">缩放级别将根据你的速度而定（当地图与当前的位置同步时）。</string>
     <string name="snap_to_road_descr">当前位置图标将与当前导航路径对齐</string>
     <string name="osmand_long_description_1000_chars">OsmAnd(OSM自动导航方向)
 \n
@@ -1969,7 +1971,7 @@
 \n - 分享你的位置，让你的朋友可以找到你。
 \n - 将您最重要的地方保存在 \"收藏夹 \"中。
 \n - 允许您选择如何在地图上显示名称。用英文、本地或音标拼写
-\n - 显示专门的在线磁贴，卫星视图（来自Bing），不同的覆盖，如旅游/导航GPX轨迹和附加层，可自定义透明度。
+\n - 显示专门的在线瓦片，卫星视图（来自Bing），不同的覆盖，如旅游/导航GPX轨迹和附加层，可自定义透明度。
 \n</string>
     <string name="osmand_extended_description_part4">滑雪
 \n OsmAnd 滑雪地图插件可以让你看到滑雪道和复杂程度，以及一些额外的信息，比如缆车和其他设施的位置。</string>
@@ -1992,19 +1994,19 @@
 \n• 增加 POI 并直接将其上传到 OSM（或如果脱机则之后上传）
 \n</string>
     <string name="osmand_extended_description_part8">OsmAnd是积极开发的开源软件。每个人都可以通过报告错误、改进翻译或编码新功能来为应用程序做出贡献。此外，该项目还依靠财政捐款来资助新功能的代码和测试。
-\n 近似的地图覆盖范围和质量。
-\n - 西欧。****
-\n - 东欧。***
-\n - 俄罗斯。***
-\n - 北美洲。***
-\n - 南美洲。**
-\n - 亚洲：****
-\n - 日本和韩国。***
-\n - 中东地区。**
-\n - 非洲：****
-\n - 南极洲。*
-\n 全球大部分国家的导航仪都可以下载!
-\n 获得一个可靠的导航仪在你的国家 - 无论是法国，德国，墨西哥，英国，西班牙，荷兰，美国，俄罗斯，巴西或任何其他。</string>
+\n大致的地图覆盖范围和质量：
+\n - 西欧：****
+\n - 东欧：***
+\n - 俄罗斯：***
+\n - 北美洲：***
+\n - 南美洲：**
+\n - 亚洲：**
+\n - 日本和韩国：***
+\n - 中东地区：**
+\n - 非洲：**
+\n - 南极洲：*
+\n 全球大部分国家都可以下载！
+\n 在你的国家获得一个可靠的导航仪 - 无论是法国，德国，墨西哥，英国，西班牙，荷兰，美国，俄罗斯，巴西或其他任何一个。</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM自动导航方向)
 \n
 \n OsmAnd+是一款开源软件导航应用，可以访问各种全球OSM数据。所有的地图数据（矢量图或磁贴图）都可以存储在手机存储卡上，供离线使用。还提供离线和在线路线功能，包括逐个转弯的语音引导。
@@ -2715,7 +2717,7 @@
     <string name="tracks_on_map">已显示的路径</string>
     <string name="time_of_day">当前时间</string>
     <string name="by_transport_type">乘坐 %1$s</string>
-    <string name="step_by_step">逐步</string>
+    <string name="step_by_step">路线转向规划</string>
     <string name="routeInfo_road_types_name">道路类型</string>
     <string name="exit_at">在该站下车</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地图上显示或隐藏所选轨迹的按钮。</string>
@@ -4333,4 +4335,16 @@
     <string name="use_latin_name_if_missing">若缺失，使用拉丁名</string>
     <string name="routing_attr_allow_expert_description">极其困难的路线，有危险的障碍物和周边环境。</string>
     <string name="import_track_desc">文件 %1$s 不含有路点，是否将其作为轨迹导入？</string>
+    <string name="start_editing_card_description">你可以而且应该编辑Wikivoyage上的任何文章。分享知识、经验、才能和你的注意力。</string>
+    <string name="rate_dialog_descr">请在Google Play上分享您的反馈并为我们的作品评分。</string>
+    <string name="auto_backup_preference_desc">默认情况下，安卓系统会保存收藏夹、地图标记和OsmAnd设置的备份，以便在新设备或重新安装后恢复它们。这个备份被限制在25MB。
+\n如果你正在使用OsmAnd云，这可能会导致重新安装后的误解。</string>
+    <string name="altitude_correction">高度校正</string>
+    <string name="no_altitude_data_desc">您可以将轨迹附加到道路上以获取%1$s数据或进行在线计算。</string>
+    <string name="routing_attr_motor_type_name">引擎使用的燃料（motor）</string>
+    <string name="make_osmand_better_descr">允许OsmAnd收集和处理匿名的应用使用数据。不会收集关于你的位置或你在地图上查看的位置的数据。
+\n
+\n在\'设置\'→\'隐私和安全\'中随时进行配置。</string>
+    <string name="reset_all_settings_desc">你确定要将所有的设定重置为默认值吗？</string>
+    <string name="routing_attr_motor_type_description">选择你的车辆引擎使用的燃料类型，以计算二氧化碳排放量。</string>
 </resources>

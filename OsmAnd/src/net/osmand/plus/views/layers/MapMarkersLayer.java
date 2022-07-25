@@ -755,8 +755,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		VectorLineBuilder outlineBuilder = new VectorLineBuilder();
 		VectorDouble outlinePattern = new VectorDouble();
-		outlinePattern.add(95 / getMapDensity());
-		outlinePattern.add(35 / getMapDensity());
+		outlinePattern.add(75 / getMapDensity());
+		outlinePattern.add(55 / getMapDensity());
 		FColorARGB outlineColor = new FColorARGB(1.0f, 1.0f, 1.0f, 1.0f);
 		double strokeWidth = 20.0d;
 		int outlineId = isLast ? 20 : 10;
@@ -772,9 +772,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		VectorLineBuilder inlineBuilder = new VectorLineBuilder();
 		VectorDouble inlinePattern = new VectorDouble();
-		inlinePattern.add(-strokeWidth / getMapDensity());
-		inlinePattern.add((95 - strokeWidth * 1.5) / getMapDensity());
-		inlinePattern.add((35 + strokeWidth * 1.5) / getMapDensity());
+		inlinePattern.add(-strokeWidth / 2 / getMapDensity());
+		inlinePattern.add((75 - strokeWidth) / getMapDensity());
+		inlinePattern.add((55 + strokeWidth) / getMapDensity());
 		inlineBuilder.setBaseOrder(getBaseOrder() + lineId)
 				.setIsHidden(false)
 				.setLineId(lineId)

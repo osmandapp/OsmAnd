@@ -218,7 +218,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private boolean landscapeLayout;
 
-	private final List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 
 	private final DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
@@ -328,7 +327,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				setMapInitialLatLon(mapView, location);
 			}
 		}
-		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
 		importHelper = new ImportHelper(this, getMyApplication());
 		if (System.currentTimeMillis() - tm > 50) {
@@ -1172,30 +1170,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getApplication());
-	}
-
-	public void addDialogProvider(DialogProvider dp) {
-		dialogProviders.add(dp);
-	}
-
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		Dialog dialog = null;
-		for (DialogProvider dp : dialogProviders) {
-			dialog = dp.onCreateDialog(id);
-			if (dialog != null) {
-				return dialog;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		super.onPrepareDialog(id, dialog);
-		for (DialogProvider dp : dialogProviders) {
-			dp.onPrepareDialog(id, dialog);
-		}
 	}
 
 	@Override

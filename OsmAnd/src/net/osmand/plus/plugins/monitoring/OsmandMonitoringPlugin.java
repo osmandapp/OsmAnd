@@ -99,7 +99,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private void registerWidgetsVisibility() {
 		for (WidgetType widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
 			ApplicationMode[] appModes = widget == TRIP_RECORDING_DISTANCE ? null : new ApplicationMode[] {};
-			ApplicationMode.regWidgetVisibility(widget.id, appModes);
+			ApplicationMode.regWidgetVisibility(widget, appModes);
 		}
 	}
 

@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
@@ -19,8 +18,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.Algorithms;
 
@@ -214,21 +213,6 @@ public class TerrainLayer extends MapTileLayer {
 				}
 				return false;
 			}
-			
-			@Override
-			public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
-				List<String> ts = getTileSource(x, y, zoom);
-				for (String t : ts) {
-					SQLiteTileSource sqLiteTileSource = resources.get(t);
-					if (sqLiteTileSource != null) {
-						Bitmap bmp = sqLiteTileSource.getImage(x, y, zoom, timeHolder);
-						if (bmp != null) {
-							return sqLiteTileSource.getImage(x, y, zoom, timeHolder);
-						}
-					}
-				}
-				return null;
-			}
 
 			@Override
 			public byte[] getBytes(int x, int y, int zoom, String dirWithTiles, long[] timeHolder) throws IOException {
@@ -245,7 +229,6 @@ public class TerrainLayer extends MapTileLayer {
 				return null;
 			}
 
-			
 			@Override
 			public int getBitDensity() {
 				return 32;

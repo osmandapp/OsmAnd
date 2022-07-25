@@ -50,6 +50,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.DefaultFavoritesListener;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.myplaces.FavouritesHelper;
@@ -118,7 +119,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (helper.isFavoritesLoaded()) {
 			favouritesAdapter.synchronizeGroups();
 		} else {
-			helper.addListener(favoritesListener = new FavoritesListener() {
+			helper.addListener(favoritesListener = new DefaultFavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					favouritesAdapter.synchronizeGroups();
@@ -127,10 +128,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				@Override
 				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 					favouritesAdapter.notifyDataSetChanged();
-				}
-
-				@Override
-				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

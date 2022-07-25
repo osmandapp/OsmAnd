@@ -23,6 +23,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class NetworkRouteContext {
@@ -85,9 +86,6 @@ public class NetworkRouteContext {
 					Iterator<NetworkRouteSegment> segments = pnt.objects.iterator();
 					while (segments.hasNext()) {
 						NetworkRouteSegment segment = segments.next();
-						if (segment.start != 0) {
-							continue;
-						}
 						if (rKey != null && !segment.routeKey.equals(rKey)) {
 							continue;
 						}
@@ -95,6 +93,9 @@ public class NetworkRouteContext {
 						if (lst == null) {
 							lst = new ArrayList<>();
 							map.put(segment.routeKey, lst);
+						}
+						if (segment.start != 0) {
+							continue;
 						}
 						lst.add(segment);
 					}
@@ -282,7 +283,7 @@ public class NetworkRouteContext {
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
 					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()
-							&& obj.routeKey.equals(obj2.routeKey)) {
+							&& Algorithms.objectEquals(obj.routeKey, obj2.routeKey)) {
 						return;
 					}
 				}
@@ -440,6 +441,9 @@ public class NetworkRouteContext {
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
+				if (getTileId(x31, y31) != tileId) {
+					continue;
+				}
 				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
@@ -460,6 +464,9 @@ public class NetworkRouteContext {
 		}
 
 		public NetworkRoutePoint getRouteSegment(int x31, int y31) {
+			if (getTileId(x31, y31) != tileId) {
+				System.err.println(String.format("Wrong tile id !!! %d != %d", getTileId(x31, y31), tileId));
+			}			
 			return routes.get(convertPointToLong(x31, y31));
 		}
 

@@ -198,44 +198,51 @@ public class ApplicationMode {
 		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
-		regWidgetVisibility(NEXT_TURN.id, navigationSet1);
-		regWidgetVisibility(SMALL_NEXT_TURN.id, navigationSet2);
-		regWidgetVisibility(SECOND_NEXT_TURN.id, navigationSet1);
-		regWidgetAvailability(NEXT_TURN.id, exceptDefault);
-		regWidgetAvailability(SMALL_NEXT_TURN.id, exceptDefault);
-		regWidgetAvailability(SECOND_NEXT_TURN.id, exceptDefault);
+		regWidgetVisibility(NEXT_TURN, navigationSet1);
+		regWidgetVisibility(SMALL_NEXT_TURN, navigationSet2);
+		regWidgetVisibility(SECOND_NEXT_TURN, navigationSet1);
+		regWidgetAvailability(NEXT_TURN, exceptDefault);
+		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
+		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
 
 		// right
-		regWidgetVisibility(INTERMEDIATE_DESTINATION.id, all);
-		regWidgetVisibility(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetVisibility(TIME_TO_INTERMEDIATE.id, all);
-		regWidgetVisibility(TIME_TO_DESTINATION.id, all);
-		regWidgetVisibility(CURRENT_SPEED.id, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
+		regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
+		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
+		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
+		regWidgetVisibility(TIME_TO_DESTINATION, all);
+		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
 				MOTORCYCLE, HORSE);
-		regWidgetVisibility(MAX_SPEED.id, CAR, TRUCK, MOTORCYCLE);
-		regWidgetVisibility(ALTITUDE.id, PEDESTRIAN, BICYCLE);
-		regWidgetAvailability(INTERMEDIATE_DESTINATION.id, all);
-		regWidgetAvailability(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetAvailability(TIME_TO_INTERMEDIATE.id, all);
-		regWidgetAvailability(TIME_TO_DESTINATION.id, all);
-		regWidgetAvailability(CURRENT_SPEED.id, all);
-		regWidgetAvailability(MAX_SPEED.id, all);
-		regWidgetAvailability(AVERAGE_SPEED.id, all);
-		regWidgetAvailability(ALTITUDE.id, all);
+		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
+		regWidgetVisibility(ALTITUDE, PEDESTRIAN, BICYCLE);
+		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
+		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
+		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);
+		regWidgetAvailability(TIME_TO_DESTINATION, all);
+		regWidgetAvailability(CURRENT_SPEED, all);
+		regWidgetAvailability(MAX_SPEED, all);
+		regWidgetAvailability(AVERAGE_SPEED, all);
+		regWidgetAvailability(ALTITUDE, all);
 
 		// all = null everything
-		regWidgetAvailability(SIDE_MARKER_1.id, all);
-		regWidgetAvailability(SIDE_MARKER_2.id, all);
-		regWidgetAvailability(GPS_INFO.id, all);
-		regWidgetAvailability(BATTERY.id, all);
-		regWidgetAvailability(RELATIVE_BEARING.id, all);
-		regWidgetAvailability(MAGNETIC_BEARING.id, all);
-		regWidgetAvailability(TRUE_BEARING.id, all);
-		regWidgetAvailability(RADIUS_RULER.id, all);
-		regWidgetAvailability(CURRENT_TIME.id, all);
+		regWidgetAvailability(SIDE_MARKER_1, all);
+		regWidgetAvailability(SIDE_MARKER_2, all);
+		regWidgetAvailability(GPS_INFO, all);
+		regWidgetAvailability(BATTERY, all);
+		regWidgetAvailability(RELATIVE_BEARING, all);
+		regWidgetAvailability(MAGNETIC_BEARING, all);
+		regWidgetAvailability(TRUE_BEARING, all);
+		regWidgetAvailability(RADIUS_RULER, all);
+		regWidgetAvailability(CURRENT_TIME, all);
+	}
+
+	@NonNull
+	public static Set<ApplicationMode> regWidgetVisibility(@NonNull WidgetType widgetType,
+	                                                       @Nullable ApplicationMode... appModes) {
+		return regWidgetVisibility(widgetType.id, appModes);
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
+	@NonNull
 	public static Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId,
 	                                                       @Nullable ApplicationMode... appModes) {
 		HashSet<ApplicationMode> set = new HashSet<>();
@@ -262,6 +269,13 @@ public class ApplicationMode {
 		return widgetsVisibility != null && widgetsVisibility.contains(this);
 	}
 
+	@NonNull
+	public static Set<ApplicationMode> regWidgetAvailability(@NonNull WidgetType widgetType,
+	                                                         @Nullable ApplicationMode... appModes) {
+		return regWidgetAvailability(widgetType.id, appModes);
+	}
+
+	@NonNull
 	public static Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId,
 	                                                         @Nullable ApplicationMode... appModes) {
 		HashSet<ApplicationMode> set = new HashSet<>();
@@ -280,11 +294,10 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String widgetId) {
+	public boolean isWidgetAvailable(@NonNull String widgetId) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
 		}
-
 		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
 		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
 		return availableForModes == null || availableForModes.contains(this);

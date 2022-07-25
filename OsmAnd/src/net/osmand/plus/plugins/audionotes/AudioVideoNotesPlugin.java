@@ -550,10 +550,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
-		ApplicationMode.regWidgetVisibility(AV_NOTES_ON_REQUEST.id, noAppMode);
-		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_AUDIO.id, noAppMode);
-		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_VIDEO.id, noAppMode);
-		ApplicationMode.regWidgetVisibility(AV_NOTES_TAKE_PHOTO.id, noAppMode);
+		ApplicationMode.regWidgetVisibility(AV_NOTES_ON_REQUEST, noAppMode);
+		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_AUDIO, noAppMode);
+		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_VIDEO, noAppMode);
+		ApplicationMode.regWidgetVisibility(AV_NOTES_TAKE_PHOTO, noAppMode);
 
 		AV_EXTERNAL_RECORDER = registerBooleanPreference("av_external_recorder", false);
 		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference("av_external_cam", true);

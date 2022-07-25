@@ -109,6 +109,10 @@ public abstract class MapWidget {
 		return widgetType;
 	}
 
+	public boolean isExternal() {
+		return getWidgetType() == null;
+	}
+
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		// Not implemented
 	}
