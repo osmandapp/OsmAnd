@@ -3512,4 +3512,12 @@
     <string name="poi_laundry_service_filter">Çamaşırhane hizmeti</string>
     <string name="poi_dry_cleaning_filter">Kuru temizleme</string>
     <string name="poi_faculty_filter">Fakülte</string>
+    <string name="poi_greenery">Sera</string>
+    <string name="poi_club_youth_movement">Gençlik hareketi</string>
+    <string name="poi_club_amateur_radio">Amatör radyo kulübü</string>
+    <string name="poi_club_dog">Köpek kulübü</string>
+    <string name="poi_flow_rate">Akış hızı</string>
+    <string name="poi_first_aid_kit">İlk yardım çantası</string>
+    <string name="poi_club_bicycle">Bisiklet kulübü</string>
+    <string name="poi_club_aviation">Havacılık kulübü</string>
 </resources>
