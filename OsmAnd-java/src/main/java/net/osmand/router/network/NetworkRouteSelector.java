@@ -112,15 +112,15 @@ public class NetworkRouteSelector {
 		return res;
 	}
 
-	public List<NetworkRouteSegment> getFirstSegments(QuadRect rect, RouteKey selected, double searchDistance) throws IOException {
-		int y31T = MapUtils.get31TileNumberY(Math.max(rect.bottom, rect.top));
-		int y31B = MapUtils.get31TileNumberY(Math.min(rect.bottom, rect.top));
-		int x31L = MapUtils.get31TileNumberX(rect.left);
-		int x31R = MapUtils.get31TileNumberX(rect.right);
+	public List<NetworkRouteSegment> getFirstSegments(QuadRect bBox, RouteKey selected, double searchDistance) throws IOException {
+		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
+		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
+		int x31L = MapUtils.get31TileNumberX(bBox.left);
+		int x31R = MapUtils.get31TileNumberX(bBox.right);
 
 		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
 
-		LatLon latLon = new LatLon(rect.centerY(), rect.centerX());
+		LatLon latLon = new LatLon(bBox.centerY(), bBox.centerX());
 		List<NetworkRouteSegment> networkRouteSegmentList = new ArrayList<>();
 		for (RouteKey key : res.keySet()) {
 			if (selected != null && !selected.equals(key)) {
@@ -587,9 +587,9 @@ public class NetworkRouteSelector {
 			int bottom = NetworkRouteContext.getY31FromTileId(tile, 1);
 			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(left, top, right - 1, bottom - 1, rkey);
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
-			int sz = loaded == null ? 0 : loaded.size();
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
-			if (sz == 0) {
+			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
+			if (loaded == null) {
 				continue;
 			}
 			for (NetworkRouteSegment s : loaded) {
