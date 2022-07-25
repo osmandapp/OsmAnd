@@ -23,6 +23,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class NetworkRouteContext {
@@ -282,7 +283,7 @@ public class NetworkRouteContext {
 			if (obj.getId() > 0) {
 				for (NetworkRouteSegment obj2 : objects) {
 					if (obj.getId() == obj2.getId() && obj.direction() == obj2.direction()
-							&& obj.routeKey.equals(obj2.routeKey)) {
+							&& Algorithms.objectEquals(obj.routeKey, obj2.routeKey)) {
 						return;
 					}
 				}
