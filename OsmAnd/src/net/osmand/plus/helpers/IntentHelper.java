@@ -342,7 +342,8 @@ public class IntentHelper {
 	public void parseContentIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null) {
-			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+			String action = intent.getAction();
+			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
 					String scheme = data.getScheme();
