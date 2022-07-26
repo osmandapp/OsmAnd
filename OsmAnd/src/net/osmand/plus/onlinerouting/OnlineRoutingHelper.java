@@ -13,6 +13,7 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -95,21 +96,24 @@ public class OnlineRoutingHelper {
 	}
 
 	@Nullable
-	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey, @NonNull List<LatLon> path, @Nullable Float startBearing,
-	                                                  boolean leftSideNavigation, boolean initialCalculation) throws IOException, JSONException {
+	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey, @NonNull List<LatLon> path,
+	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
+	                                                  @Nullable RouteCalculationProgress calculationProgress) throws IOException, JSONException {
 		OnlineRoutingEngine engine = getEngineByKey(stringKey);
-		return engine != null ? calculateRouteOnline(engine, path, startBearing, leftSideNavigation, initialCalculation) : null;
+		return engine != null ? calculateRouteOnline(engine, path, startBearing, leftSideNavigation,
+				initialCalculation, calculationProgress) : null;
 	}
 
 	@Nullable
-	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path, @Nullable Float startBearing,
-													  boolean leftSideNavigation, boolean initialCalculation) throws IOException, JSONException {
+	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path,
+	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
+													  @Nullable RouteCalculationProgress calculationProgress) throws IOException, JSONException {
 		String url = engine.getFullUrl(path, startBearing);
 		String method = engine.getHTTPMethod();
 		String body = engine.getRequestBody(path, startBearing);
 		Map<String, String> headers = engine.getRequestHeaders();
 		String content = makeRequest(url, method, body, headers);
-		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation);
+		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation, calculationProgress);
 	}
 
 	@NonNull
