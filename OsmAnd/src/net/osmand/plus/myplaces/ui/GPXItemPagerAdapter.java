@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.plus.helpers.GpxUiHelper.CHART_LABEL_COUNT;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
@@ -74,8 +75,6 @@ import java.util.List;
 import java.util.Map;
 
 public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
-
-	private static final int CHART_LABEL_COUNT = 4;
 
 	private static final int[] SINGLE_TAB_LAYOUT_ID = {R.layout.center_button_container};
 	private static final int[] DOUBLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.right_button_container};
@@ -502,15 +501,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) chart.getLayoutParams();
 		AndroidUtils.setMargins(params, chartHMargin, params.topMargin, chartHMargin, params.bottomMargin);
 		chart.setHighlightPerDragEnabled(chartClicked);
-		chart.setOnClickListener(new View.OnClickListener() {
-			@SuppressLint("ClickableViewAccessibility")
-			@Override
-			public void onClick(View view) {
-				if (!chartClicked) {
-					chartClicked = true;
-					if (selectedWpt != null) {
-						actionsListener.onPointSelected(segment, selectedWpt.lat, selectedWpt.lon);
-					}
+		chart.setOnClickListener(v -> {
+			if (!chartClicked) {
+				chartClicked = true;
+				if (selectedWpt != null) {
+					actionsListener.onPointSelected(segment, selectedWpt.lat, selectedWpt.lon);
 				}
 			}
 		});
