@@ -41,7 +41,7 @@ public abstract class SettingsItem {
 	protected long lastModifiedTime;
 	private boolean fromJson;
 
-	protected boolean shouldReplace = false;
+	protected boolean shouldReplace;
 
 	protected List<String> warnings;
 
@@ -265,7 +265,7 @@ public abstract class SettingsItem {
 	}
 
 	@NonNull
-	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull final GPXFile gpxFile) {
+	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull GPXFile gpxFile) {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {

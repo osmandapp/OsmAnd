@@ -24,10 +24,10 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 	private List<WptPt> newPoints;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> oldRoadSegmentData;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> newRoadSegmentData;
-	private ApplicationMode oldMode;
-	private ApplicationMode newMode;
-	private ChangeRouteType changeRouteType;
-	private int pointIndex;
+	private final ApplicationMode oldMode;
+	private final ApplicationMode newMode;
+	private final ChangeRouteType changeRouteType;
+	private final int pointIndex;
 
 	public enum ChangeRouteType {
 		LAST_SEGMENT,

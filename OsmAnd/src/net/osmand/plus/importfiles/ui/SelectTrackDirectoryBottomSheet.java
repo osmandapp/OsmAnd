@@ -91,7 +91,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-								suggestedDirName, SelectTrackDirectoryBottomSheet.this, usedOnMap);
+								suggestedDirName, this, usedOnMap);
 					}
 				})
 				.setCustomView(view)

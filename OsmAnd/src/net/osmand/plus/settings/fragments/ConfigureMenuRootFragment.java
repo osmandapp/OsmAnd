@@ -109,13 +109,11 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		ImageButton toolbarButton = root.findViewById(R.id.close_button);
 		RecyclerView recyclerView = root.findViewById(R.id.list);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(ctx, nightMode));
-		toolbarTitle.setTextColor(nightMode
-				? getResources().getColor(R.color.text_color_primary_dark)
-				: getResources().getColor(R.color.list_background_color_dark));
-		toolbarSubTitle.setTextColor(getResources().getColor(R.color.text_color_secondary_light));
+		toolbarTitle.setTextColor(getColor(nightMode ? R.color.text_color_primary_dark : R.color.list_background_color_dark));
+		toolbarSubTitle.setTextColor(getColor(R.color.text_color_secondary_light));
 		toolbarButton.setImageDrawable(getPaintedContentIcon(
 				AndroidUtils.getNavigationIconResId(app),
-				getResources().getColor(R.color.text_color_secondary_light)));
+				getColor(R.color.text_color_secondary_light)));
 		toolbarButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -191,8 +189,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		private static final int DESCRIPTION_TYPE = 0;
 		private static final int ITEM_TYPE = 1;
 
-		private List<Object> items;
-		private OnCustomizationItemClickListener listener;
+		private final List<Object> items;
+		private final OnCustomizationItemClickListener listener;
 
 		CustomizationItemsAdapter(List<Object> items, OnCustomizationItemClickListener listener) {
 			this.items = items;
@@ -223,14 +221,14 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 		@Override
 		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-			final Object currentItem = items.get(position);
+			Object currentItem = items.get(position);
 			if (holder instanceof DescriptionHolder) {
 				DescriptionHolder descriptionHolder = (DescriptionHolder) holder;
 				String plugins = getString(R.string.prefs_plugins);
 				setupClickableText(descriptionHolder.description, (String) currentItem, plugins);
 				descriptionHolder.image.setVisibility(View.GONE);
 			} else {
-				final ScreenType item = (ScreenType) currentItem;
+				ScreenType item = (ScreenType) currentItem;
 				ItemHolder itemHolder = (ItemHolder) holder;
 				Drawable d = app.getUIUtilities().getIcon(item.iconRes, nightMode);
 				itemHolder.icon.setImageDrawable(AndroidUtils.getDrawableForDirection(app, d));

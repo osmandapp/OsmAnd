@@ -64,7 +64,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
-	private TransportStopRoute stopRoute = null;
+	private TransportStopRoute stopRoute;
 
 	private final CommonPreference<Boolean> showTransportStops;
 
@@ -72,22 +72,21 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	//OpenGL
 	private float textScale = 1.0f;
-	private boolean nightMode = false;
+	private boolean nightMode;
 	private TransportStopsTileProvider transportStopsTileProvider;
 	private VectorLinesCollection vectorLinesCollection;
-	private int stopRouteDist = 0;
-	private TransportStopType stopRouteType = null;
-	private boolean mapsInitialized = false;
+	private int stopRouteDist;
+	private TransportStopType stopRouteType;
+	private boolean mapsInitialized;
 
-	public TransportStopsLayer(@NonNull Context context, int baseOrder) {
+	public TransportStopsLayer(@NonNull Context context) {
 		super(context);
 		OsmandSettings settings = getApplication().getSettings();
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
-		this.baseOrder = baseOrder;
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
 		DisplayMetrics dm = new DisplayMetrics();
@@ -142,7 +141,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							  List<TransportStop> objects) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		final int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
+		int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
 		int radius = rp * 3 / 2;
 		try {
 			TreeSet<String> ms = new TreeSet<>();
@@ -176,7 +175,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	private int getRadiusPoi(RotatedTileBox tb){
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		int r;
 		if(zoom < startZoomRoute){
 			r = 0;
@@ -410,7 +409,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							.setLineWidth(attrs.defaultWidth * 1.5d)
 							.setFillColor(NativeUtilities.createFColorARGB(color))
 							.setApproximationEnabled(false)
-							.setBaseOrder(baseOrder);
+							.setBaseOrder(getBaseOrder());
 					builder.buildAndAddToCollection(vectorLinesCollection);
 				}
 			}
@@ -460,7 +459,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return;
 		}
 		if (transportStopsTileProvider == null) {
-			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, baseOrder, getTextScale());
+			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getBaseOrder(), getTextScale());
 			transportStopsTileProvider.drawSymbols(mapRenderer);
 		}
 	}

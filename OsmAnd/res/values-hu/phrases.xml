@@ -311,7 +311,7 @@
     <string name="poi_bus_station">Buszállomás</string>
     <string name="poi_railway_station">Vasútállomás</string>
     <string name="poi_railway_platform">Vasúti peron;Vonat peron</string>
-    <string name="poi_halt">Vasúti megállóhely</string>
+    <string name="poi_halt">Vasúti megállóhely;Vonatmegálló;Vasútállomás;Vonatállomás;Állomás</string>
     <string name="poi_railway_buffer_stop">Ütközőbak</string>
     <string name="poi_helipad">Helikopter-leszállóhely</string>
     <string name="poi_aerialway_station">Kötélpályásfelvonó-állomás</string>
@@ -3621,7 +3621,7 @@
     <string name="poi_community_gender_mixed">Közösség neme: vegyes</string>
     <string name="poi_grave">Sír</string>
     <string name="poi_snowmobile_filter">Használat hójáróval</string>
-    <string name="poi_access_bus">Használat helyi busszal</string>
+    <string name="poi_access_bus">Használat menetrend szerinti busszal</string>
     <string name="poi_access_caravan">Használat lakókocsival</string>
     <string name="poi_access_motorhome">Használat lakóautóval</string>
     <string name="poi_access_trailer">Használat pótkocsival</string>
@@ -3976,7 +3976,7 @@
     <string name="poi_authentication_contactless_yes">Van</string>
     <string name="poi_authentication_contactless_no">Érintésmentes azonosítás nincs</string>
     <string name="poi_internet_access_ssid">SSID</string>
-    <string name="poi_access_motorcar">Személyautóval használható</string>
+    <string name="poi_access_motorcar">Használat személyautóval</string>
     <string name="poi_authentication_none">Azonosítás nem szükséges</string>
     <string name="poi_authentication_short_message">Azonosítás SMS-sel</string>
     <string name="poi_authentication_phone_call">Azonosítás telefonhívással</string>
@@ -3984,9 +3984,9 @@
     <string name="poi_authentication_key">Azonosítás kulccsal</string>
     <string name="poi_authentication_chip_card">Azonosítás chipkártyával</string>
     <string name="poi_authentication_contactless">Érintésmentes azonosítás</string>
-    <string name="poi_access_bicycle">Kerékpárral használható</string>
-    <string name="poi_access_general">Általánosan használható</string>
-    <string name="poi_access_scooter">Rollerrel használható</string>
+    <string name="poi_access_bicycle">Használat kerékpárral</string>
+    <string name="poi_access_general">Használat</string>
+    <string name="poi_access_scooter">Használat rollerrel</string>
     <string name="poi_direction_southwest">Délnyugati irány</string>
     <string name="poi_direction_southeast">Délkeleti irány</string>
     <string name="poi_direction_northwest">Északnyugati irány</string>
@@ -4341,4 +4341,5 @@
     <string name="poi_club_aviation">Repülőklub</string>
     <string name="poi_club_doityourself">Barkácsklub</string>
     <string name="poi_club_bicycle">Kerékpáros klub</string>
+    <string name="poi_first_aid_kit">Elsősegélykészlet</string>
 </resources>

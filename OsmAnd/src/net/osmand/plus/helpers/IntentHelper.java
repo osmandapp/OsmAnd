@@ -4,6 +4,7 @@ import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizat
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.content.Intent;
@@ -316,7 +317,7 @@ public class IntentHelper {
 				if (!name.endsWith(IndexConstants.GPX_FILE_EXT)) {
 					name += IndexConstants.GPX_FILE_EXT;
 				}
-				final String fileName = name;
+				String fileName = name;
 				AndroidNetworkUtils.downloadFileAsync(url, app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName),
 						new CallbackWithObject<String>() {
 							@Override
@@ -339,14 +340,14 @@ public class IntentHelper {
 	}
 
 	public void parseContentIntent() {
-		final Intent intent = mapActivity.getIntent();
+		Intent intent = mapActivity.getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-				final Uri data = intent.getData();
+				Uri data = intent.getData();
 				if (data != null) {
-					final String scheme = data.getScheme();
+					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
-						final String path = data.getPath();
+						String path = data.getPath();
 						if (path != null) {
 							mapActivity.getImportHelper().handleFileImport(data, new File(path).getName(), intent.getExtras(), true);
 						}
@@ -426,7 +427,8 @@ public class IntentHelper {
 				String name = intent.getStringExtra(RETURN_SCREEN_NAME);
 				String tabName = intent.getStringExtra(OPEN_TAB_NAME);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null, tabName);
+				boolean temporarySelected = intent.getBooleanExtra(TEMPORARY_SELECTED, false);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, temporarySelected, name, null, tabName);
 				mapActivity.setIntent(null);
 			}
 			if (intent.getExtras() != null) {
@@ -456,9 +458,9 @@ public class IntentHelper {
 	private void parseNavigationIntent(Intent intent) {
 		Uri data = intent.getData();
 		if (data != null) {
-			final String schemeSpecificPart = data.getSchemeSpecificPart();
+			String schemeSpecificPart = data.getSchemeSpecificPart();
 
-			final Matcher matcher = Pattern.compile("(?:q|ll)=([\\-0-9.]+),([\\-0-9.]+)(?:.*)").matcher(schemeSpecificPart);
+			Matcher matcher = Pattern.compile("(?:q|ll)=([\\-0-9.]+),([\\-0-9.]+)(?:.*)").matcher(schemeSpecificPart);
 			if (matcher.matches()) {
 				try {
 					double lat = Double.parseDouble(matcher.group(1));

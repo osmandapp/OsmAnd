@@ -1,8 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -15,12 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -45,6 +36,7 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
@@ -53,6 +45,15 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -348,6 +349,10 @@ public class StreetNameWidget extends MapWidget {
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
 		if (updatedVisibility) {
+			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateTopWidgetsPanel();
+			}
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;
@@ -355,7 +360,7 @@ public class StreetNameWidget extends MapWidget {
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
-		ViewGroup specialContainer = mapActivity.findViewById(R.id.street_name_widget_special_container);
+		ViewGroup specialContainer = getSpecialContainer();
 		boolean specialPosition = specialContainer != null;
 		if (specialPosition) {
 			specialContainer.removeAllViews();
@@ -373,6 +378,21 @@ public class StreetNameWidget extends MapWidget {
 		} else {
 			container.addView(view, order);
 		}
+	}
+
+	@Override
+	public void detachView() {
+		super.detachView();
+		// Clear in case link to previous view of StreetNameWidget is lost
+		ViewGroup specialContainer = getSpecialContainer();
+		if (specialContainer != null) {
+			specialContainer.removeAllViews();
+		}
+	}
+
+	@Nullable
+	private ViewGroup getSpecialContainer() {
+		return mapActivity.findViewById(R.id.street_name_widget_special_container);
 	}
 
 	private static class StreetNameWidgetParams {

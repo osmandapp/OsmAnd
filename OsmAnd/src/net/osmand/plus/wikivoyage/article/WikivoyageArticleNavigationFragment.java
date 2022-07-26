@@ -91,7 +91,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			items.add(new ProgressItem());
 			new BuildNavigationTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		} else {
-			final ExpandableListAdapter listAdapter = createNavigationListView(navigationMap);
+			ExpandableListAdapter listAdapter = createNavigationListView(navigationMap);
 			LinearLayout container = new LinearLayout(ctx);
 			container.addView(expListView);
 
@@ -146,13 +146,13 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Context context;
+		private final Context context;
 
-		private Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap;
-		private List<WikivoyageSearchResult> headers;
+		private final Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap;
+		private final List<WikivoyageSearchResult> headers;
 
-		private Drawable itemGroupIcon;
-		private Drawable itemChildIcon;
+		private final Drawable itemGroupIcon;
+		private final Drawable itemChildIcon;
 
 		ExpandableListAdapter(Context context, Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
 			this.context = context;
@@ -205,7 +205,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		}
 
 		@Override
-		public View getChildView(int groupPosition, final int childPosition,
+		public View getChildView(int groupPosition, int childPosition,
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			WikivoyageSearchResult articleItem = getArticleItem(groupPosition, childPosition);
 			String childTitle = articleItem.getArticleTitle();
@@ -215,7 +215,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				convertView = LayoutInflater.from(context)
 						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
-			TextView txtListChild = (TextView) convertView.findViewById(R.id.item_label);
+			TextView txtListChild = convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childTitle);
 			if (selected) {
 				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
@@ -232,15 +232,15 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		}
 
 		@Override
-		public View getGroupView(final int groupPosition, final boolean isExpanded,
-								 View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded,
+		                         View convertView, ViewGroup parent) {
 			String groupTitle = ((WikivoyageSearchResult) getGroup(groupPosition)).getArticleTitle();
 			boolean selected = parentsList.contains(groupTitle) || article.getTitle().equals(groupTitle);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
 						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
-			TextView lblListHeader = (TextView) convertView.findViewById(R.id.item_label);
+			TextView lblListHeader = convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(groupTitle);
 			if (selected) {
 				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
@@ -251,7 +251,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
-			ImageView indicator = (ImageView) convertView.findViewById(R.id.explicit_indicator);
+			ImageView indicator = convertView.findViewById(R.id.explicit_indicator);
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -277,10 +277,10 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	private ExpandableListAdapter createNavigationListView(Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
-		final Context ctx = requireContext();
+		Context ctx = requireContext();
 
 		expListView = new ExpandableListView(ctx);
-		final ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
+		ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
 
 		expListView.setAdapter(listAdapter);
 		Drawable transparent = AppCompatResources.getDrawable(ctx, R.color.color_transparent);

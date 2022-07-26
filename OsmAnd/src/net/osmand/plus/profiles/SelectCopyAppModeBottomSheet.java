@@ -115,7 +115,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap,
 	                                @NonNull ApplicationMode currentMode) {
 		try {
-			if (fm.findFragmentByTag(SelectCopyAppModeBottomSheet.TAG) == null) {
+			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(CURRENT_APP_MODE_KEY, currentMode.getStringKey());
 
@@ -123,7 +123,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 				fragment.setTargetFragment(target, 0);
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setArguments(args);
-				fragment.show(fm, SelectCopyAppModeBottomSheet.TAG);
+				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

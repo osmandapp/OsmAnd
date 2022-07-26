@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -23,13 +24,13 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 	public static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	public static final int LONG_KEYPRESS_DELAY = 500;
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
-	private MapActivityActions mapActions;
-	private OsmandSettings settings;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
+	private final MapActivityActions mapActions;
+	private final OsmandSettings settings;
 	// handler to show/hide trackball position and to link map with delay
-	private Handler uiHandler = new Handler();
-	private ScrollHelper mapScrollHelper;
+	private final Handler uiHandler = new Handler();
+	private final ScrollHelper mapScrollHelper;
 
 	public MapActivityKeyListener(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -125,7 +126,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				String callingApp = "wunderlinq://datagrid";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(callingApp));
-				mapActivity.startActivity(intent);
+				AndroidUtils.startActivityIfSafe(mapActivity, intent);
 				return true;
 			}
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {

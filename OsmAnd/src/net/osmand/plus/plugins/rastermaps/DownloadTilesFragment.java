@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,14 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.util.Pair;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
@@ -33,6 +28,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTilesInfo;
+import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
+import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -43,17 +42,30 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 
+import java.text.MessageFormat;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getApproxTilesSizeMb;
+import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getTilesNumber;
 
 public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
+	private static final String KEY_DOWNLOAD_TYPE = "download_type";
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
+	private DownloadTilesHelper downloadTilesHelper;
 	private boolean nightMode;
 
 	private UpdateTilesHandler handler;
@@ -64,8 +76,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private View view;
 	private View mapWindow;
-	private boolean mapWindowTouched = false;
+	private boolean mapWindowTouched;
 	private boolean wasDrawerDisabled;
+
+	private TextView tvDownloadTilesDesc;
 
 	private AppCompatImageView minZoomPreviewImage;
 	private AppCompatImageView maxZoomPreviewImage;
@@ -81,8 +95,16 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private TextView tilesNumberText;
 	private TextView estimatedDownloadSizeText;
 
+	private View downloadButton;
+
 	private int selectedMinZoom;
 	private int selectedMaxZoom;
+
+	private DownloadType downloadType;
+	private MissingTilesInfo missingTilesInfo;
+	private CalculateMissingTilesTask calculateMissingTilesTask;
+
+	private SelectTilesDownloadTypeAlertDialog alertDialog;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,6 +112,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 		app = requireMyApplication();
 		settings = requireSettings();
+		downloadTilesHelper = app.getDownloadTilesHelper();
 		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
@@ -102,11 +125,17 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (savedInstanceState != null) {
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
+			downloadType = DownloadType.valueOf(savedInstanceState.getString(KEY_DOWNLOAD_TYPE));
 		} else {
 			ITileSource tileSource = settings.getMapTileSource(false);
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
 			selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
+
+			Bundle args = getArguments();
+			if (args != null) {
+				downloadType = DownloadType.valueOf(args.getString(KEY_DOWNLOAD_TYPE));
+			}
 		}
 	}
 
@@ -134,6 +163,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		estimatedDownloadSizeText = view.findViewById(R.id.estimated_download_size);
 
 		mapView.rotateToAnimate(0);
+		mapView.setElevationAngle(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 
 		setupToolbar();
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -159,6 +189,12 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		backButton.setOnClickListener(v -> dismiss());
 		UiUtilities.rotateImageByLayoutDirection(backButton);
 
+		TextView tvTitle = toolbar.findViewById(R.id.title);
+		int titleId = downloadType != DownloadType.ALL
+				? R.string.context_menu_item_update_map
+				: R.string.shared_string_download_map;
+		tvTitle.setText(titleId);
+
 		View helpButton = toolbar.findViewById(R.id.help_button);
 		helpButton.setOnClickListener(v -> {
 			Context context = getContext();
@@ -183,6 +219,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private void updateTileSourceContent() {
 		setupMapSourceSetting();
+		if (downloadType != DownloadType.ALL) {
+			setupTilesToDownloadSetting();
+		}
 		updateDownloadContent(mapView.getZoom());
 	}
 
@@ -204,6 +243,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 						int currentZoom = mapView.getZoom();
 						selectedMaxZoom = tileSource.getMaximumZoomSupported();
 						selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
+						if (downloadType == DownloadType.ONLY_MISSING) {
+							missingTilesInfo = null;
+							calculateMissingTiles();
+						}
 						updateTileSourceContent();
 					} else {
 						app.showToastMessage(R.string.maps_could_not_be_downloaded);
@@ -214,10 +257,71 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			}
 		});
 
-		TextView selectedMapSourceText = view.findViewById(R.id.selected_map_source);
+		ImageView ivIcon = mapSourceContainer.findViewById(R.id.icon);
+		TextView tvMapSource = mapSourceContainer.findViewById(R.id.title);
+		TextView tvSelectedMapSource = mapSourceContainer.findViewById(R.id.desc);
+
+		ivIcon.setImageResource(R.drawable.ic_world_globe_dark);
+		tvMapSource.setText(R.string.map_source);
 		String selectedMapSource = tileSource.getName()
 				.replace(IndexConstants.SQLITE_EXT, "");
-		selectedMapSourceText.setText(selectedMapSource);
+		tvSelectedMapSource.setText(selectedMapSource);
+	}
+
+	private void setupTilesToDownloadSetting() {
+		View container = view.findViewById(R.id.tiles_to_download_container);
+		container.setOnClickListener(v -> {
+			Activity activity = getActivity();
+			if (activity == null) {
+				return;
+			}
+
+			alertDialog = new SelectTilesDownloadTypeAlertDialog(app, nightMode,
+					downloadType == DownloadType.FORCE_ALL, selectedDownloadType -> {
+				downloadType = selectedDownloadType;
+				updateTileSourceContent();
+				enableDisableDownloadButton();
+				alertDialog = null;
+			});
+			if (missingTilesInfo == null) {
+				alertDialog.updateData(getAllTilesCount(), -1, false);
+			} else {
+				alertDialog.updateData(getAllTilesCount(), missingTilesInfo.getMissingTiles(), missingTilesInfo.isApproximate());
+			}
+			alertDialog.show(activity);
+		});
+		AndroidUiHelper.updateVisibility(container, true);
+
+		ImageView ivIcon = container.findViewById(R.id.icon);
+		TextView tvDownloadTiles = container.findViewById(R.id.title);
+		tvDownloadTilesDesc = container.findViewById(R.id.desc);
+
+		ivIcon.setImageResource(R.drawable.ic_action_map_update);
+		tvDownloadTiles.setText(R.string.download_tiles);
+		updateDownloadTilesDesc();
+	}
+
+	private void updateDownloadTilesDesc() {
+		String desc;
+		if (downloadType == DownloadType.ONLY_MISSING) {
+			String onlyMissingStr = getString(R.string.shared_string_only_missing);
+			if (missingTilesInfo == null) {
+				desc = onlyMissingStr;
+			} else {
+				String formattedTilesCount = formatNumber(missingTilesInfo.getMissingTiles(),
+						0, false);
+				if (missingTilesInfo.isApproximate()) {
+					formattedTilesCount = MessageFormat.format("~{0}", formattedTilesCount);
+				}
+				desc = getString(R.string.ltr_or_rtl_combine_via_comma, onlyMissingStr, formattedTilesCount);
+			}
+		} else {
+			String allStr = getString(R.string.shared_string_all);
+			long allTilesCount = getAllTilesCount();
+			String formattedTilesCount = formatNumber(allTilesCount, 0, false);
+			desc = getString(R.string.ltr_or_rtl_combine_via_comma, allStr, formattedTilesCount);
+		}
+		tvDownloadTilesDesc.setText(desc);
 	}
 
 	private void setupSlider(int currentZoom) {
@@ -237,6 +341,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				List<Float> minMax = slider.getValues();
 				selectedMinZoom = minMax.get(0).intValue();
 				selectedMaxZoom = minMax.get(1).intValue();
+				if (downloadType == DownloadType.ONLY_MISSING) {
+					calculateMissingTiles();
+				}
 				updateTilesPreviewZooms();
 				setupMinMaxZoom();
 				setupTilesDownloadInfo();
@@ -256,38 +363,82 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	@SuppressLint("StringFormatMatches")
 	private void setupTilesDownloadInfo() {
-		QuadRect latLonRect = getLatLonRectOfMapWindow();
-		boolean ellipticYTile = tileSource.isEllipticYTile();
+		if (downloadType == DownloadType.ONLY_MISSING && missingTilesInfo == null) {
+			tilesNumberText.setText("—");
+			estimatedDownloadSizeText.setText("—");
+		} else {
+			boolean approximate;
+			long tilesNumber;
+			float estimatedDownloadSizeMB;
 
-		long tilesNumber = DownloadTilesHelper.getTilesNumber(selectedMinZoom, selectedMaxZoom, latLonRect, ellipticYTile);
-		float estimatedDownloadSizeMB = DownloadTilesHelper.getApproxTilesSizeMb(selectedMinZoom,
-				selectedMaxZoom, latLonRect, tileSource, app.getResourceManager().getBitmapTilesCache());
+			if (downloadType == DownloadType.ONLY_MISSING) {
+				approximate = missingTilesInfo.isApproximate();
+				tilesNumber = missingTilesInfo.getMissingTiles();
+				estimatedDownloadSizeMB = missingTilesInfo.getApproxMissingSizeMb();
+			} else {
+				BitmapTilesCache bitmapTilesCache = app.getResourceManager().getBitmapTilesCache();
+				QuadRect latLonRect = getLatLonRectOfMapWindow();
 
-		String formattedTilesNumber = OsmAndFormatter.formatValue(tilesNumber, "",
-				false, 0, app).value;
-		String formattedSize = OsmAndFormatter.formatValue(estimatedDownloadSizeMB, "",
-				false, 2, app).value;
-		String formattedSizeWithUnit = getString(R.string.shared_string_memory_mb_desc, formattedSize);
-		String formattedDownloadSize = app.getString(R.string.ltr_or_rtl_combine_via_space, "~",
-				formattedSizeWithUnit);
+				approximate = false;
+				tilesNumber = getAllTilesCount();
+				estimatedDownloadSizeMB = getApproxTilesSizeMb(selectedMinZoom, selectedMaxZoom, latLonRect,
+						tileSource, bitmapTilesCache);
+			}
 
-		tilesNumberText.setText(formattedTilesNumber);
-		estimatedDownloadSizeText.setText(formattedDownloadSize);
+			String formattedSize = formatNumber(estimatedDownloadSizeMB, 2, approximate || tilesNumber > 0);
+			String sizeWithUnit = getString(R.string.shared_string_memory_mb_desc, formattedSize);
+
+			tilesNumberText.setText(formatNumber(tilesNumber, 0, approximate));
+			estimatedDownloadSizeText.setText(sizeWithUnit);
+		}
+	}
+
+	@NonNull
+	private String formatNumber(float number, int decimalPlacesNumber, boolean approximate) {
+		String formatted = OsmAndFormatter.formatValue(number, "", false, decimalPlacesNumber, app).value;
+		return approximate
+				? getString(R.string.ltr_or_rtl_combine_via_space, "~", formatted)
+				: formatted;
 	}
 
 	private void setupDownloadButton() {
-		View downloadButton = view.findViewById(R.id.dismiss_button);
+		downloadButton = view.findViewById(R.id.dismiss_button);
 		UiUtilities.setupDialogButton(nightMode, downloadButton, DialogButtonType.PRIMARY,
 				R.string.shared_string_download);
 		downloadButton.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				QuadRect latLonRect = getLatLonRectOfMapWindow();
-				TilesDownloadProgressFragment.showInstance(fragmentManager, selectedMinZoom, selectedMaxZoom,
-						latLonRect);
+				showDownloadFragment(mapActivity);
 			}
 		});
+		enableDisableDownloadButton();
+	}
+
+	private void enableDisableDownloadButton() {
+		boolean hasMissingTiles = missingTilesInfo == null
+				|| missingTilesInfo.isApproximate()
+				|| missingTilesInfo.getMissingTiles() > 0;
+		downloadButton.setEnabled(downloadType != DownloadType.ONLY_MISSING || hasMissingTiles);
+	}
+
+	private void showDownloadFragment(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+
+		QuadRect latLonRect = getLatLonRectOfMapWindow();
+		Bundle args = new Bundle();
+		args.putDouble(TilesDownloadProgressFragment.KEY_LEFT_LON, latLonRect.left);
+		args.putDouble(TilesDownloadProgressFragment.KEY_TOP_LAT, latLonRect.top);
+		args.putDouble(TilesDownloadProgressFragment.KEY_RIGHT_LON, latLonRect.right);
+		args.putDouble(TilesDownloadProgressFragment.KEY_BOTTOM_LAT, latLonRect.bottom);
+		args.putInt(TilesDownloadProgressFragment.KEY_MIN_ZOOM, selectedMinZoom);
+		args.putInt(TilesDownloadProgressFragment.KEY_MAX_ZOOM, selectedMaxZoom);
+		args.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
+		if (downloadType == DownloadType.ONLY_MISSING && missingTilesInfo != null) {
+			args.putLong(TilesDownloadProgressFragment.KEY_MISSING_TILES, missingTilesInfo.getMissingTiles());
+			args.putFloat(TilesDownloadProgressFragment.KEY_MISSING_SIZE_MB, missingTilesInfo.getApproxMissingSizeMb());
+		}
+
+		TilesDownloadProgressFragment.showInstance(fragmentManager, args);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -326,6 +477,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		}
 		mapView.removeMapLocationListener(this);
 		handler.stopUpdates();
+
+		if (downloadType != DownloadType.ALL) {
+			downloadTilesHelper.setListener(null);
+		}
 	}
 
 	@Override
@@ -333,6 +488,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_SELECTED_MIN_ZOOM, selectedMinZoom);
 		outState.putInt(KEY_SELECTED_MAX_ZOOM, selectedMaxZoom);
+		outState.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
 	}
 
 	@Override
@@ -391,6 +547,12 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				selectedMinZoom = currentZoom;
 			}
 
+			if (downloadType != DownloadType.ALL) {
+				updateDownloadTilesDesc();
+				if (downloadType == DownloadType.ONLY_MISSING) {
+					calculateMissingTiles();
+				}
+			}
 			updateTilesPreview();
 			updateDownloadContent(currentZoom);
 		});
@@ -403,6 +565,31 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 		minZoomPreviewImage.setImageBitmap(bitmaps.first);
 		maxZoomPreviewImage.setImageBitmap(bitmaps.second);
+	}
+
+	private void calculateMissingTiles() {
+		if (calculateMissingTilesTask != null) {
+			calculateMissingTilesTask.cancel();
+		}
+		calculateMissingTilesTask = new CalculateMissingTilesTask(app, tileSource, selectedMinZoom,
+				selectedMaxZoom, getLatLonRectOfMapWindow(), (missingTilesInfo) -> {
+			if (!AndroidUtils.isActivityNotDestroyed(getActivity())) {
+				return true;
+			}
+
+			this.missingTilesInfo = missingTilesInfo;
+			updateDownloadTilesDesc();
+			enableDisableDownloadButton();
+			if (alertDialog != null) {
+				alertDialog.updateData(getAllTilesCount(), missingTilesInfo.getMissingTiles(), missingTilesInfo.isApproximate());
+			}
+			return true;
+		});
+		calculateMissingTilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private long getAllTilesCount() {
+		return getTilesNumber(selectedMinZoom, selectedMaxZoom, getLatLonRectOfMapWindow(), tileSource.isEllipticYTile());
 	}
 
 	@Override
@@ -428,9 +615,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return mapTileLayer != null && mapTileLayer.isVisible() && tileSource.couldBeDownloadedFromInternet();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DownloadTilesFragment fragment = new DownloadTilesFragment();
+			Bundle args = new Bundle();
+			DownloadType downloadType = updateTiles ? DownloadType.ONLY_MISSING : DownloadType.ALL;
+			args.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
+			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)

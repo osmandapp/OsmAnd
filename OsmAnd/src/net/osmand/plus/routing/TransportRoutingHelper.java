@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
+
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -8,20 +10,20 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
-import net.osmand.data.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.ValueHolder;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
@@ -52,15 +54,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
-
 public class TransportRoutingHelper {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(TransportRoutingHelper.class);
 
 	public static final String PUBLIC_TRANSPORT_KEY = "public_transport";
 
-	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
+	private final List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 
 	private final OsmandApplication app;
 	private ApplicationMode applicationMode = ApplicationMode.PUBLIC_TRANSPORT;
@@ -79,7 +79,7 @@ public class TransportRoutingHelper {
 
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
-	private long lastTimeEvaluatedRoute = 0;
+	private long lastTimeEvaluatedRoute;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
@@ -88,7 +88,7 @@ public class TransportRoutingHelper {
 		this.app = app;
 	}
 
-	public void setRoutingHelper(RoutingHelper routingHelper) {
+	public void setRoutingHelper(@NonNull RoutingHelper routingHelper) {
 		this.routingHelper = routingHelper;
 	}
 
@@ -204,6 +204,7 @@ public class TransportRoutingHelper {
 	}
 
 	private void recalculateRouteInBackground(LatLon start, LatLon end) {
+		app.logRoutingEvent("recalculateRouteInBackground start " + start + " end " + end);
 		if (start == null || end == null) {
 			return;
 		}
@@ -238,16 +239,16 @@ public class TransportRoutingHelper {
 		this.progressRoute = progressRoute;
 	}
 
-	private void startProgress(final TransportRouteCalculationParams params) {
-		final TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
+	private void startProgress(TransportRouteCalculationParams params) {
+		TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
 			progressRoute.start();
 		}
 		setCurrentRoute(-1);
 	}
 
-	private void updateProgress(final TransportRouteCalculationParams params) {
-		final TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
+	private void updateProgress(TransportRouteCalculationParams params) {
+		TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
 			app.runInUIThread(new Runnable() {
 
@@ -291,7 +292,8 @@ public class TransportRoutingHelper {
 		}
 	}
 
-	private void setNewRoute(final List<TransportRouteResult> res) {
+	private void setNewRoute(List<TransportRouteResult> res) {
+		app.logRoutingEvent("setNewRoute res " + res);
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -322,6 +324,7 @@ public class TransportRoutingHelper {
 	}
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
+		app.logRoutingEvent("clearCurrentRoute newFinalLocation " + newFinalLocation);
 		currentRoute = -1;
 		routes = null;
 		walkingRouteSegments = null;
@@ -346,6 +349,7 @@ public class TransportRoutingHelper {
 	}
 
 	private void setCurrentLocation(LatLon currentLocation) {
+		app.logRoutingEvent("setCurrentLocation currentLocation " + currentLocation + " endLocation " + endLocation);
 		if (endLocation == null || currentLocation == null) {
 			return;
 		}
@@ -452,7 +456,7 @@ public class TransportRoutingHelper {
 		private final TransportRouteCalculationParams params;
 
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
-		private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
+		private final Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
 		private final NativeLibrary lib;
 
@@ -500,14 +504,14 @@ public class TransportRoutingHelper {
 					Boolean bool = pref.getModeValue(params.mode);
 					vl = bool ? "true" : null;
 				} else {
-					vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
+					vl = settings.getCustomRoutingProperty(key, pr.getDefaultString()).getModeValue(params.mode);
 				}
 				if (vl != null && vl.length() > 0) {
 					params.params.put(key, vl);
 				}
 			}
 			if (!Algorithms.isEmpty(derivedProfile)) {
-				params.params.put("profile_"+ derivedProfile, String.valueOf(true));
+				params.params.put("profile_" + derivedProfile, String.valueOf(true));
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
@@ -532,7 +536,7 @@ public class TransportRoutingHelper {
 		private RouteCalculationParams getWalkingRouteParams() {
 			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
 
-			final WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
+			WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
 			if (walkingRouteSegment == null) {
 				return null;
 			}
@@ -543,11 +547,11 @@ public class TransportRoutingHelper {
 			start.setLongitude(walkingRouteSegment.start.getLongitude());
 			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 
-			final float currentDistanceFromBegin =
-					RouteRecalculationTask.this.params.calculationProgress.distanceFromBegin +
+			float currentDistanceFromBegin =
+					this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
 
-			final RouteCalculationParams params = new RouteCalculationParams();
+			RouteCalculationParams params = new RouteCalculationParams();
 			params.inPublicTransportMode = true;
 			params.start = start;
 			params.end = end;
@@ -644,8 +648,8 @@ public class TransportRoutingHelper {
 			}
 		}
 
-		private void showMessage(final String msg) {
-			final OsmandApplication app = routingHelper.getApplication();
+		private void showMessage(String msg) {
+			OsmandApplication app = routingHelper.getApplication();
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {

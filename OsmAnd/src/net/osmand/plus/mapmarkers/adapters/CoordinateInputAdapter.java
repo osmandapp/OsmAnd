@@ -24,12 +24,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
 	private GPXFile gpx;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private UiUtilities uiUtilities;
-	private UpdateLocationViewCache updateViewCache;
+	private final UiUtilities uiUtilities;
+	private final UpdateLocationViewCache updateViewCache;
 
-	private boolean nightTheme;
+	private final boolean nightTheme;
 
 	private View.OnClickListener listener;
 	private View.OnClickListener actionsListener;
@@ -60,7 +60,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final MapMarkerItemViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull MapMarkerItemViewHolder holder, int position) {
 		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);

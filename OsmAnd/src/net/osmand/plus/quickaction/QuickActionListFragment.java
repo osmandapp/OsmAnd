@@ -85,7 +85,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private QuickActionAdapter adapter;
     private ItemTouchHelper touchHelper;
     private QuickActionRegistry quickActionRegistry;
-    private ArrayList<Long> actionsToDelete = new ArrayList<>();
+    private final ArrayList<Long> actionsToDelete = new ArrayList<>();
     private int screenType = SCREEN_TYPE_REORDER;
     private boolean nightMode;
 
@@ -131,8 +131,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         View view = UiUtilities.getInflater(getContext(), nightMode)
                 .inflate(R.layout.quick_action_list, container, false);
 
-        rv = (RecyclerView) view.findViewById(R.id.recycler_view);
-        fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
+        rv = view.findViewById(R.id.recycler_view);
+        fab = view.findViewById(R.id.fabButton);
         fab.setOnClickListener(v -> showAddQuickActionDialog());
 
         AndroidUtils.addStatusBarPadding21v(requireContext(), view);
@@ -164,7 +164,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
         quickActionRegistry = requireMyApplication().getQuickActionRegistry();
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.toolbar);
         navigationIcon = toolbar.findViewById(R.id.close_button);
         deleteIconContainer = toolbar.findViewById(R.id.action_button);
         toolbarSwitchContainer = toolbar.findViewById(R.id.toolbar_switch_container);
@@ -201,7 +201,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     private void setUpToolbar() {
-        final OsmandApplication app = requireMyApplication();
+        OsmandApplication app = requireMyApplication();
         TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
         tvTitle.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
         boolean isWidgetVisibleOnMap = app.getQuickActionRegistry().isQuickActionOn();
@@ -242,9 +242,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     private void updateListItems() {
-        final MapActivity ma = getMapActivity();
-        final OsmandApplication app = ma.getMyApplication();
-        final List<QuickAction> actions = quickActionRegistry.getFilteredQuickActions();
+        MapActivity ma = getMapActivity();
+        OsmandApplication app = ma.getMyApplication();
+        List<QuickAction> actions = quickActionRegistry.getFilteredQuickActions();
 
         updateToolbarActionButton();
         List<ListItem> items = new ArrayList<>();
@@ -346,13 +346,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 String title = String.format(
                         getString(R.string.ltr_or_rtl_combine_via_colon),
                         getString(R.string.shared_string_selected),
-                        String.valueOf(selectedCount));
+                        selectedCount);
                 tvTitle.setText(title);
             }
         }
     }
 
-    private void updateToolbarSwitch(final boolean isChecked) {
+    private void updateToolbarSwitch(boolean isChecked) {
         OsmandApplication app = requireMyApplication();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
         int color = isChecked ? appMode.getProfileColor(nightMode) : ContextCompat.getColor(app, R.color.preference_top_switch_off);
@@ -486,7 +486,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     return new ButtonVH(frame);
                 case BOTTOM_SHADOW:
                     itemView = inflater.inflate(R.layout.card_bottom_divider, parent, false);
-                    final int spaceHeight = getResources()
+                    int spaceHeight = getResources()
                             .getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
                     itemView.setMinimumHeight(spaceHeight);
                     return new BottomShadowVH(itemView);
@@ -496,14 +496,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         }
 
         @Override
-        public void onBindViewHolder(@NotNull final RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NotNull RecyclerView.ViewHolder holder, int position) {
             OsmandApplication app = requireMyApplication();
             ListItem item = items.get(position);
             int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 
             if (holder instanceof QuickActionVH) {
-                final QuickActionVH h = (QuickActionVH) holder;
-                final QuickAction action = (QuickAction) item.value;
+                QuickActionVH h = (QuickActionVH) holder;
+                QuickAction action = (QuickAction) item.value;
 
                 if (screenType == SCREEN_TYPE_REORDER) {
                     h.moveButton.setVisibility(View.VISIBLE);
@@ -725,16 +725,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             public QuickActionVH(View itemView) {
                 super(itemView);
                 OsmandApplication app = requireMyApplication();
-                title = (TextView) itemView.findViewById(R.id.title);
-                subTitle = (TextView) itemView.findViewById(R.id.subtitle);
-                icon = (ImageView) itemView.findViewById(R.id.imageView);
+                title = itemView.findViewById(R.id.title);
+                subTitle = itemView.findViewById(R.id.subtitle);
+                icon = itemView.findViewById(R.id.imageView);
                 itemDivider = itemView.findViewById(R.id.item_divider);
                 longDivider = itemView.findViewById(R.id.long_divider);
                 deleteBtn = itemView.findViewById(R.id.action_button);
-                deleteIcon = (ImageView) itemView.findViewById(R.id.action_icon);
+                deleteIcon = itemView.findViewById(R.id.action_icon);
                 moveButton = itemView.findViewById(R.id.move_button);
-                moveIcon = (ImageView) itemView.findViewById(R.id.move_icon);
-                checkbox = (CompoundButton) itemView.findViewById(R.id.checkbox);
+                moveIcon = itemView.findViewById(R.id.move_icon);
+                checkbox = itemView.findViewById(R.id.checkbox);
                 itemContainer = itemView.findViewById(R.id.searchListItemLayout);
 
                 deleteIcon.setImageDrawable(app.getUIUtilities()
@@ -752,7 +752,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
             public QuickActionHeaderVH(View itemView) {
                 super(itemView);
-                headerName = (TextView) itemView.findViewById(R.id.header);
+                headerName = itemView.findViewById(R.id.header);
             }
 
 	        @Override
@@ -764,7 +764,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         private class DescriptionVH extends RecyclerView.ViewHolder
                 implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-            private TextView tvDescription;
+            private final TextView tvDescription;
 
             public DescriptionVH(View itemView) {
                 super(itemView);
@@ -806,10 +806,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         private class ButtonVH extends RecyclerView.ViewHolder
                 implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-            private View container;
-            private ImageView icon;
-            private TextView title;
-            private View divider;
+            private final View container;
+            private final ImageView icon;
+            private final TextView title;
+            private final View divider;
 
             public ButtonVH(View itemView) {
                 super(itemView);
@@ -850,9 +850,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     protected static class ControlButton {
-        private String title;
-        private int iconRes;
-        private View.OnClickListener listener;
+        private final String title;
+        private final int iconRes;
+        private final View.OnClickListener listener;
 
         public ControlButton(String title, int iconRes, View.OnClickListener listener) {
             this.title = title;
@@ -877,7 +877,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 getString(R.string.delete_all_actions_message_q),
                 actionsToDelete.size());
         ConfirmationBottomSheet.showInstance(ma.getSupportFragmentManager(),
-                QuickActionListFragment.this,
+                this,
                 getString(R.string.shared_string_delete_all_q),
                 message, R.string.shared_string_delete, false);
     }

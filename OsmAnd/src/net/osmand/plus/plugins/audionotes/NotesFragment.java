@@ -9,8 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,14 +33,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -59,7 +54,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -79,6 +73,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	private AudioVideoNotesPlugin plugin;
 	private NotesAdapter listAdapter;
 	private final Set<Recording> selected = new HashSet<>();
+
+	private ShareRecordingsTask shareRecordingsTask;
 
 	private View footerView;
 	private View emptyView;
@@ -174,8 +170,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		((ActionBarProgressActivity) activity).updateListViewFooter(footerView);
 
 		MenuItem item = menu.add(R.string.shared_string_sort).setIcon(R.drawable.ic_action_list_sort);
-		item.setOnMenuItemClickListener(item13 -> {
-			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), NotesFragment.this);
+		item.setOnMenuItemClickListener(menuItem -> {
+			SortByMenuBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), this);
 			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -183,14 +179,14 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		Drawable shareIcon = AndroidUtils.getDrawableForDirection(activity,
 				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark));
 		item = menu.add(R.string.shared_string_share).setIcon(shareIcon);
-		item.setOnMenuItemClickListener(item1 -> {
+		item.setOnMenuItemClickListener(menuItem -> {
 			enterSelectionMode(MODE_SHARE);
 			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
-		item.setOnMenuItemClickListener(item12 -> {
+		item.setOnMenuItemClickListener(menuItem -> {
 			enterSelectionMode(MODE_DELETE);
 			return true;
 		});
@@ -349,11 +345,11 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void enterSelectionMode(final int type) {
+	private void enterSelectionMode(int type) {
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
-			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
 				OsmandApplication app = getMyApplication();
 				if (type == MODE_SHARE) {
@@ -427,7 +423,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void deleteItems(final Set<Recording> selected) {
+	private void deleteItems(Set<Recording> selected) {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()))
 				.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
@@ -446,59 +442,15 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 				.show();
 	}
 
-	private void shareItems(Set<Recording> selected) {
+	private void shareItems(@NonNull Set<Recording> selected) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			ArrayList<Uri> uris = new ArrayList<>();
-			for (Recording rec : selected) {
-				File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
-				if (file != null) {
-					uris.add(AndroidUtils.getUriForFile(activity, file));
-				}
+			if (shareRecordingsTask != null && shareRecordingsTask.getStatus() == AsyncTask.Status.RUNNING) {
+				shareRecordingsTask.cancel(false);
 			}
-
-			Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-			intent.setType("*/*");
-			intent.putExtra(Intent.EXTRA_STREAM, uris);
-			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			if (Build.VERSION.SDK_INT > 18) {
-				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-			}
-			Intent chooserIntent = Intent.createChooser(intent, getString(R.string.share_note));
-			AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
+			shareRecordingsTask = new ShareRecordingsTask(activity, plugin, selected);
+			shareRecordingsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-	}
-
-	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
-		if (selected.size() == 1 && selected.contains(SHARE_LOCATION_FILE)) {
-			return new HashSet<>(plugin.getAllRecordings());
-		}
-		return selected;
-	}
-
-	private File generateGPXForRecordings(Set<Recording> selected) {
-		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
-		tmpFile.getParentFile().mkdirs();
-		GPXFile file = new GPXFile(Version.getFullVersion(getMyApplication()));
-		for (Recording r : getRecordingsForGpx(selected)) {
-			if (r != SHARE_LOCATION_FILE) {
-				String desc = r.getDescriptionName(r.getFileName());
-				if (desc == null) {
-					desc = r.getFileName();
-				}
-				WptPt wpt = new WptPt();
-				wpt.lat = r.getLatitude();
-				wpt.lon = r.getLongitude();
-				wpt.name = desc;
-				wpt.link = r.getFileName();
-				wpt.time = r.getFile().lastModified();
-				wpt.category = r.getSearchHistoryType();
-				wpt.desc = r.getTypeWithDuration(getContext());
-				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
-			}
-		}
-		GPXUtilities.writeGpxFile(tmpFile, file);
-		return tmpFile;
 	}
 
 	private ItemMenuFragmentListener createItemMenuFragmentListener() {
@@ -524,13 +476,13 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 			}
 
 			@Override
-			public void deleteOnClick(final Recording recording) {
+			public void deleteOnClick(Recording recording) {
 				deleteNote(recording);
 			}
 		};
 	}
 
-	private void shareNote(final Recording recording) {
+	private void shareNote(Recording recording) {
 		if (!recording.getFile().exists()) {
 			return;
 		}
@@ -547,7 +499,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 							shareIntent.setType("video/*");
 						}
 						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 						Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
 						AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 					}
@@ -565,11 +517,11 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 				true, recording);
 	}
 
-	private void editNote(final Recording recording) {
+	private void editNote(Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.shared_string_rename);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
-		final EditText editText = v.findViewById(R.id.name);
+		View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
+		EditText editText = v.findViewById(R.id.name);
 		builder.setView(v);
 		editText.setText(recording.getName(getActivity(), true));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -588,7 +540,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		editText.requestFocus();
 	}
 
-	private void deleteNote(final Recording recording) {
+	private void deleteNote(Recording recording) {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(R.string.recording_delete_confirm)
 				.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {

@@ -76,6 +76,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -120,8 +121,8 @@ public class AppInitializer implements IProgress {
 	private final OsmandApplication app;
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
 
-	private boolean initSettings = false;
-	private boolean activityChangesShowed = false;
+	private boolean initSettings;
+	private boolean activityChangesShowed;
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
@@ -239,7 +240,7 @@ public class AppInitializer implements IProgress {
 	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
 		initVariables();
 		long size = activity.getPreferences(Context.MODE_PRIVATE).getLong(EXCEPTION_FILE_SIZE, 0);
-		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !isFirstTime()) {
 				if (writeFileSize) {
@@ -281,7 +282,7 @@ public class AppInitializer implements IProgress {
 			app.poiTypes.init();
 		}
 
-		final Resources resources = app.getLocaleHelper().getLocalizedResources("en");
+		Resources resources = app.getLocaleHelper().getLocalizedResources("en");
 
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
@@ -423,6 +424,7 @@ public class AppInitializer implements IProgress {
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
+		app.gpxDisplayHelper = startupInit(new GpxDisplayHelper(app), GpxDisplayHelper.class);
 		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
@@ -523,7 +525,7 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	public static void loadRoutingFiles(@NonNull final OsmandApplication app, @Nullable final LoadRoutingFilesCallback callback) {
+	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {
 		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
 
 			@Override
@@ -581,14 +583,14 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(@NonNull final Context context,
-	                                                        @NonNull final ApplicationMode applicationMode,
-	                                                        @NonNull final String voiceProvider,
-	                                                        @Nullable final Runnable onFinishInitialization,
+	public synchronized void initVoiceDataInDifferentThread(@NonNull Context context,
+	                                                        @NonNull ApplicationMode applicationMode,
+	                                                        @NonNull String voiceProvider,
+	                                                        @Nullable Runnable onFinishInitialization,
 	                                                        boolean showProgress) {
 		String progressTitle = app.getString(R.string.loading_data);
 		String progressMessage = app.getString(R.string.voice_data_initializing);
-		final ProgressDialog progressDialog = showProgress && context instanceof Activity
+		ProgressDialog progressDialog = showProgress && context instanceof Activity
 				? ProgressDialog.show(context, progressTitle, progressMessage)
 				: null;
 
@@ -696,7 +698,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void restoreBackupForFavoritesFiles() {
-		final File appDir = app.getAppPath(null);
+		File appDir = app.getAppPath(null);
 		File save = new File(appDir, FavouritesFileHelper.FILE_TO_SAVE);
 		File bak = new File(appDir, FavouritesFileHelper.FILE_TO_BACKUP);
 		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
@@ -777,7 +779,7 @@ public class AppInitializer implements IProgress {
 
 	public void notifyStart() {
 		for (AppInitializeListener listener : listeners) {
-			listener.onStart(AppInitializer.this);
+			listener.onStart(this);
 		}
 	}
 
@@ -790,7 +792,7 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	public void notifyEvent(final InitEvents event) {
+	public void notifyEvent(InitEvents event) {
 		if (event != InitEvents.TASK_CHANGED) {
 			long time = System.currentTimeMillis();
 			System.out.println("Initialized " + event + " in " + (time - startBgTime) + " ms");
@@ -854,7 +856,7 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	private boolean applicationBgInitializing = false;
+	private boolean applicationBgInitializing;
 
 
 	public synchronized void startApplication() {
@@ -892,7 +894,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private String getLocalClassName(String cls) {
-		final String pkg = app.getPackageName();
+		String pkg = app.getPackageName();
 		int packageLen = pkg.length();
 		if (!cls.startsWith(pkg) || cls.length() <= packageLen
 				|| cls.charAt(packageLen) != '.') {

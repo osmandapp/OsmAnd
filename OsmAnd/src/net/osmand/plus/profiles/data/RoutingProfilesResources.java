@@ -37,7 +37,7 @@ public enum RoutingProfilesResources {
 	private static final List<String> rpValues = new ArrayList<>();
 
 	static {
-		for (RoutingProfilesResources rpr : RoutingProfilesResources.values()) {
+		for (RoutingProfilesResources rpr : values()) {
 			rpValues.add(rpr.name());
 		}
 	}

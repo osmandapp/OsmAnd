@@ -14,7 +14,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWithDescription {
 
-	private int minHeight;
+	private final int minHeight;
 
 	public BottomSheetItemWithDescriptionDifHeight(View customView,
 	                                               @LayoutRes int layoutId,
@@ -57,7 +57,7 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 		super.inflate(context, container, nightMode);
 		if (minHeight != INVALID_VALUE) {
 			if (view instanceof TextView) {
-				((TextView) view).setMinimumHeight(minHeight);
+				view.setMinimumHeight(minHeight);
 				((TextView) view).setMinHeight(minHeight);
 			} else {
 				view.setMinimumHeight(minHeight);

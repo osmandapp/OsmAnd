@@ -32,8 +32,8 @@ import java.util.Map;
 
 public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
-	private final static String KEY_OVERLAYS = "overlays";
-	private final static String KEY_NO_OVERLAY = "no_overlay";
+	private static final String KEY_OVERLAYS = "overlays";
+	private static final String KEY_NO_OVERLAY = "no_overlay";
 
 	public static final QuickActionType TYPE = new QuickActionType(15,
 			"mapoverlay.change", MapOverlayAction.class).
@@ -172,7 +172,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected View.OnClickListener getOnAddBtnClickListener(final MapActivity activity, final Adapter adapter) {
+	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -182,15 +182,15 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-				final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
-				final String[] items = new String[entriesMap.size()];
+				ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+				String[] items = new String[entriesMap.size()];
 				int i = 0;
 
 				for (String it : entriesMap.values()) {
 					items[i++] = it;
 				}
 
-				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
+				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 				arrayAdapter.addAll(items);
 				builder.setAdapter(arrayAdapter, (dialog, index) -> {
 					Pair<String, String> layer = new Pair<>(keys.get(index), items[index]);

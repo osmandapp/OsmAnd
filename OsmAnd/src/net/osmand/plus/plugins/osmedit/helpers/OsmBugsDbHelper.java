@@ -44,7 +44,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 	private static final String OSMBUGS_DB_LAST_MODIFIED_NAME = "osmbugs";
 
 	private final Context context;
-	List<OsmNotesPoint> cache = null;
+	List<OsmNotesPoint> cache;
 
 	public OsmBugsDbHelper(@NonNull Context context) {
 		super(context, OSMBUGS_DB_NAME, null, DATABASE_VERSION);

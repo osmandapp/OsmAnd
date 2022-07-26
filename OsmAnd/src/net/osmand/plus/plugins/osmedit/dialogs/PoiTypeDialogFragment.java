@@ -23,7 +23,7 @@ public class PoiTypeDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final List<PoiCategory> categories = new ArrayList<PoiCategory>();
+		List<PoiCategory> categories = new ArrayList<PoiCategory>();
 		ArrayList<String> vals = new ArrayList<>();
 		for (PoiCategory category : poiTypes.getCategories(false)) {
 			if (!category.isNotEditableOsm()) {

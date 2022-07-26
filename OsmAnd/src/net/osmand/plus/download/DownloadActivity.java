@@ -79,8 +79,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
-		OnRequestPermissionsResultCallback {
+public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents {
 
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 
@@ -104,7 +103,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String REGION_TO_SEARCH = "search_region";
 
 
-	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP = false;
+	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP;
 
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;
@@ -136,7 +135,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		setContentView(R.layout.download);
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_map);
-		final View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
+		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
 		downloadProgressLayout.setVisibility(View.VISIBLE);
 		updateDescriptionTextWithSize(this, downloadProgressLayout);
 		int currentTab = DOWNLOAD_TAB_NUMBER;
@@ -151,8 +150,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 		}
 
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+		viewPager = findViewById(R.id.pager);
+		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
 
 
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
@@ -189,7 +188,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			visibleBanner.updateFreeVersionBanner();
 		}
 
-		final Intent intent = getIntent();
+		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
 			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
@@ -367,7 +366,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public static boolean isDownlodingPermitted(OsmandSettings settings) {
-		final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
+		Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 		int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
 		return Math.max(downloadsLeft, 0) > 0;
 	}
@@ -384,9 +383,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		private final TextView downloadsLeftTextView;
 		private final ProgressBar downloadsLeftProgressBar;
 		
-		private DownloadActivity ctx;
+		private final DownloadActivity ctx;
 
-		private OnClickListener onCollapseListener = new OnClickListener() {
+		private final OnClickListener onCollapseListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE
@@ -399,12 +398,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 		};
 		
-		public FreeVersionBanner(View view, final DownloadActivity ctx) {
+		public FreeVersionBanner(View view, DownloadActivity ctx) {
 			this.ctx = ctx;
 			freeVersionBanner = view.findViewById(R.id.freeVersionBanner);
-			downloadsLeftTextView = (TextView) freeVersionBanner.findViewById(R.id.downloadsLeftTextView);
-			downloadsLeftProgressBar = (ProgressBar) freeVersionBanner.findViewById(R.id.downloadsLeftProgressBar);
-			freeVersionDescriptionTextView = (TextView) freeVersionBanner
+			downloadsLeftTextView = freeVersionBanner.findViewById(R.id.downloadsLeftTextView);
+			downloadsLeftProgressBar = freeVersionBanner.findViewById(R.id.downloadsLeftProgressBar);
+			freeVersionDescriptionTextView = freeVersionBanner
 					.findViewById(R.id.freeVersionDescriptionTextView);
 			freeVersionBannerTitle = freeVersionBanner.findViewById(R.id.freeVersionBannerTitle);
 		}
@@ -429,14 +428,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			freeVersionDescriptionTextView.setText(ctx.getString(R.string.free_version_message,
 					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + ""));
 
-			LinearLayout marksLinearLayout = (LinearLayout) freeVersionBanner.findViewById(R.id.marksLinearLayout);
+			LinearLayout marksLinearLayout = freeVersionBanner.findViewById(R.id.marksLinearLayout);
 			Space spaceView = new Space(ctx);
 			LinearLayout.LayoutParams layoutParams =
 					new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
 			spaceView.setLayoutParams(layoutParams);
 			marksLinearLayout.addView(spaceView);
 			int markWidth = (int) (1 * ctx.getResources().getDisplayMetrics().density);
-			int colorBlack = ctx.getResources().getColor(R.color.color_black);
+			int colorBlack = ctx.getColor(R.color.color_black);
 			for (int i = 1; i < DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS; i++) {
 				View markView = new View(ctx);
 				layoutParams = new LinearLayout.LayoutParams(markWidth, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -463,7 +462,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 			setMinimizedFreeVersionBanner(false);
 			OsmandSettings settings = ctx.getMyApplication().getSettings();
-			final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
+			Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			downloadsLeftProgressBar.setProgress(mapsDownloaded);
 			int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
 			downloadsLeft = Math.max(downloadsLeft, 0);
@@ -483,7 +482,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		private void updateAvailableDownloads() {
 			int activeTasks = ctx.getDownloadThread().getCountedDownloads();
 			OsmandSettings settings = ctx.getMyApplication().getSettings();
-			final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get() + activeTasks;
+			Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get() + activeTasks;
 			downloadsLeftProgressBar.setProgress(mapsDownloaded);
 		}
 	}
@@ -497,18 +496,18 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		private final DownloadActivity ctx;
 		
-		private boolean showSpace;
-		private FreeVersionBanner freeVersionBanner;
+		private final boolean showSpace;
+		private final FreeVersionBanner freeVersionBanner;
 
-		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx, boolean showSpace) {
+		public BannerAndDownloadFreeVersion(View view, DownloadActivity ctx, boolean showSpace) {
 			this.ctx = ctx;
 			this.showSpace = showSpace;
 			freeVersionBanner = new FreeVersionBanner(view, ctx);
 			
 			downloadProgressLayout = view.findViewById(R.id.downloadProgressLayout);
-			progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-			leftTextView = (TextView) view.findViewById(R.id.leftTextView);
-			rightTextView = (TextView) view.findViewById(R.id.rightTextView);
+			progressBar = view.findViewById(R.id.progressBar);
+			leftTextView = view.findViewById(R.id.leftTextView);
+			rightTextView = view.findViewById(R.id.rightTextView);
 
 			freeVersionBanner.initFreeVersionBanner();
 			updateBannerInProgress();
@@ -520,7 +519,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		public void updateBannerInProgress() {
 			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
-			final boolean isFinished = basicProgressAsyncTask == null
+			boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
 				downloadProgressLayout.setOnClickListener(null);
@@ -633,9 +632,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@SuppressWarnings("deprecation")
 	public static void updateDescriptionTextWithSize(DownloadActivity activity, View view) {
-		TextView descriptionText = (TextView) view.findViewById(R.id.rightTextView);
-		TextView messageTextView = (TextView) view.findViewById(R.id.leftTextView);
-		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.progressBar);
+		TextView descriptionText = view.findViewById(R.id.rightTextView);
+		TextView messageTextView = view.findViewById(R.id.leftTextView);
+		ProgressBar sizeProgress = view.findViewById(R.id.progressBar);
 
 		File dir = activity.getMyApplication().getAppPath(null);
 		String size = "";
@@ -643,8 +642,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				size = AndroidUtils.formatSize(activity, ((long) fs.getAvailableBlocks()) * fs.getBlockSize());
-				percent = 100 - (int) ((long) fs.getAvailableBlocks() * 100 / fs.getBlockCount());
+				size = AndroidUtils.formatSize(activity, (fs.getAvailableBlocksLong()) * fs.getBlockSizeLong());
+				percent = 100 - (int) (fs.getAvailableBlocksLong() * 100 / fs.getBlockCountLong());
 			} catch (IllegalIcuArgumentException e) {
 				LOG.error(e);
 			}
@@ -703,7 +702,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			((ImageView) view.findViewById(R.id.titleIconImageView))
 					.setImageDrawable(getIcon(R.drawable.ic_map, R.color.osmand_orange));
 
-			Button actionButtonOk = (Button) view.findViewById(R.id.actionButtonOk);
+			Button actionButtonOk = view.findViewById(R.id.actionButtonOk);
 
 			String titleText = null;
 			String descriptionText = null;
@@ -726,7 +725,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 						.setText(descriptionText);
 			}
 
-			final ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
+			ImageButton closeImageButton = view.findViewById(R.id.closeImageButton);
 			closeImageButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 			closeImageButton.setOnClickListener(new OnClickListener() {
 				@Override
@@ -793,7 +792,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			((TextView) view.findViewById(R.id.descriptionTextView))
 					.setText(getActivity().getString(R.string.map_downloaded_descr, regionName));
 
-			final ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
+			ImageButton closeImageButton = view.findViewById(R.id.closeImageButton);
 			closeImageButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 			closeImageButton.setOnClickListener(new OnClickListener() {
 				@Override

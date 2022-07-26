@@ -28,7 +28,7 @@ public class MapillaryContributeCard extends ImageCard {
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			MapActivity ctx = getMapActivity();
 			AndroidUtils.setBackgroundColor(ctx, view, ColorUtilities.getListBgColorId(night));
-			AndroidUtils.setTextPrimaryColor(ctx, (TextView) view.findViewById(R.id.title), night);
+			AndroidUtils.setTextPrimaryColor(ctx, view.findViewById(R.id.title), night);
 			AndroidUtils.setBackground(ctx, view.findViewById(R.id.card_background), night,
 					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);
 			view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {

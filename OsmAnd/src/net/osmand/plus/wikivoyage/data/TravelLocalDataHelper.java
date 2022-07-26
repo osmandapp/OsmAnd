@@ -301,7 +301,7 @@ public class TravelLocalDataHelper {
 				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_TRAVEL_BOOK + " TEXT");
 				String selectedTravelBookName = context.getTravelHelper().getSelectedTravelBookName();
 				if (selectedTravelBookName != null) {
-					Object[] args = new Object[] {selectedTravelBookName};
+					Object[] args = {selectedTravelBookName};
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
 					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
 				}
@@ -471,12 +471,12 @@ public class TravelLocalDataHelper {
 			return count > 0;
 		}
 
-		void addSavedArticle(@NonNull final TravelArticle article) {
-			final String travelBook = article.getTravelBook(context);
+		void addSavedArticle(@NonNull TravelArticle article) {
+			String travelBook = article.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
-			final TravelHelper travelHelper = context.getTravelHelper();
+			TravelHelper travelHelper = context.getTravelHelper();
 			travelHelper.getArticleById(article.generateIdentifier(), article.lang, true, new GpxReadCallback() {
 				@Override
 				public void onGpxFileReading() {
@@ -516,12 +516,12 @@ public class TravelLocalDataHelper {
 			});
 		}
 
-		void removeSavedArticle(@NonNull final TravelArticle article) {
-			final String travelBook = article.getTravelBook(context);
+		void removeSavedArticle(@NonNull TravelArticle article) {
+			String travelBook = article.getTravelBook(context);
 			if (travelBook == null) {
 				return;
 			}
-			final TravelHelper travelHelper = context.getTravelHelper();
+			TravelHelper travelHelper = context.getTravelHelper();
 			travelHelper.getArticleById(article.generateIdentifier(), article.lang, true, new GpxReadCallback() {
 				@Override
 				public void onGpxFileReading() {

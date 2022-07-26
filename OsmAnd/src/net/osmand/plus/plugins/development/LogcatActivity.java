@@ -10,17 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-
-import org.apache.commons.logging.Log;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+
+import org.apache.commons.logging.Log;
 
 public class LogcatActivity extends BaseLogcatActivity {
 
@@ -30,7 +30,7 @@ public class LogcatActivity extends BaseLogcatActivity {
 	private static final int LEVEL_ID = 1;
 
 	private LogcatAdapter adapter;
-	private String[] LEVELS = {"D", "I", "W", "E"};
+	private final String[] LEVELS = {"D", "I", "W", "E"};
 	private int filterLevel = 1;
 	private RecyclerView recyclerView;
 
@@ -49,17 +49,21 @@ public class LogcatActivity extends BaseLogcatActivity {
 		}
 
 		adapter = new LogcatAdapter();
-		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		recyclerView = findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
+	}
 
-//		int colorResId = AndroidUtils.resolveAttribute(app, R.attr.divider_color_basic);
-//		if (colorResId != 0) {
-//			DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-//			dividerItemDecoration.setDrawable(new ColorDrawable(ContextCompat.getColor(app, colorResId)));
-//
-//			recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-//		}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		startLogcatAsyncTask();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		stopLogcatAsyncTask();
 	}
 
 	@Override

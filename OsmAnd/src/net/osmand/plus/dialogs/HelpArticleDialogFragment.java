@@ -32,13 +32,13 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	private static final String NAME = "name";
 	private static final String URL = "url";
 	private WebView webView;
-	private static String HEADER_INNER= "<html><head>\n"+
+	private static final String HEADER_INNER= "<html><head>\n"+
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"file:///android_asset/style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
 			"</head><body>\n" +
 			"<div class=\"main\">\n";
-	private static String FOOTER_INNER= "</div></body></html>"; 
+	private static final String FOOTER_INNER= "</div></body></html>";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +53,9 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.fragment_help_article, container, false);
+		View view = inflater.inflate(R.layout.fragment_help_article, container, false);
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 		String assetName = getArguments().getString(ASSET_NAME);
 		String url = getArguments().getString(URL);
-		webView = (WebView) view.findViewById(R.id.webView);
+		webView = view.findViewById(R.id.webView);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setDisplayZoomControls(false);
@@ -133,7 +133,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		Bundle args = new Bundle();
 		args.putString(ASSET_NAME, assetName);
 		args.putString(NAME, name);
-		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
+		HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;
 	}
@@ -142,7 +142,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		Bundle args = new Bundle();
 		args.putString(URL, url);
 		args.putString(NAME, name);
-		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
+		HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;
 	}

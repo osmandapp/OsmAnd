@@ -104,12 +104,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(DashboardOnMap.class);
 	private static final String TAG = "DashboardOnMap";
 
-	public static boolean staticVisible = false;
+	public static boolean staticVisible;
 	public static DashboardType staticVisibleType = DASHBOARD;
 	public static final String SHOULD_SHOW = "should_show";
 
 
-	private final DashFragmentData[] fragmentsData = new DashFragmentData[] {
+	private final DashFragmentData[] fragmentsData = {
 			new DashFragmentData(DashDashboardOrDrawerFragment.TAG, DashDashboardOrDrawerFragment.class,
 					DashDashboardOrDrawerFragment.SHOULD_SHOW_FUNCTION, 5, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
@@ -134,7 +134,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener adapterClickListener;
 
-	private boolean visible = false;
+	private boolean visible;
 	private DashboardType visibleType;
 	private DashboardType previousVisibleType;
 	private ApplicationMode previousAppMode;
@@ -144,7 +144,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private float heading;
 	private boolean mapLinkedToLocation;
 	private float mapRotation;
-	private boolean inLocationUpdate = false;
+	private boolean inLocationUpdate;
 	private ObservableListView listView;
 	private View listBackgroundView;
 	private Toolbar toolbar;
@@ -226,7 +226,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
-		final View.OnClickListener listener = new View.OnClickListener() {
+		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
@@ -285,7 +285,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void updateListBackgroundHeight() {
 		if (listBackgroundView != null) {
-			final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+			View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
 			ViewTreeObserver vto = contentView.getViewTreeObserver();
 			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -407,7 +407,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = v -> {
 			hideDashboard();
-			mapActivity.getMapLayers().getMapControlsLayer().doRoute(false);
+			mapActivity.getMapLayers().getMapControlsLayer().doRoute();
 		};
 
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);
@@ -510,8 +510,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		boolean refresh = isCurrentType(type) && !appModeChanged;
 		previousAppMode = currentAppMode;
 		visibleType = type;
-		DashboardOnMap.staticVisible = visible;
-		DashboardOnMap.staticVisibleType = type;
+		staticVisible = visible;
+		staticVisibleType = type;
 		mapActivity.enableDrawer();
 		removeFragment(ConfigureMapFragment.TAG);
 		removeFragment(MapillaryFiltersFragment.TAG);
@@ -536,7 +536,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				if (isCurrentType(CONFIGURE_MAP)) {
 					int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
 					compassButton = mapActivity.getMapLayers().getMapControlsLayer()
-							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx), nightMode);
+							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx));
 				}
 			}
 			updateDownloadBtn();
@@ -615,7 +615,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void applyDayNightMode() {
-		final int backgroundColor;
+		int backgroundColor;
 		backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		Drawable dividerDrawable = new ColorDrawable(ColorUtilities.getDividerColor(mapActivity, nightMode));
 
@@ -816,10 +816,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		btn.setText(txt);
 		btn.setVisibility(filter == null ? View.GONE : View.VISIBLE);
-		final String f = filter;
+		String f = filter;
 		btn.setOnClickListener(v -> {
 			hideDashboard(false);
-			final Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+			Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 					.getDownloadIndexActivity());
 			if (f != null && !f.equals("basemap")) {
 				intent.putExtra(DownloadActivity.FILTER_KEY, f);
@@ -862,9 +862,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	private void animateDashboard(final boolean show) {
-		final View content = dashboardView.findViewById(R.id.animateContent);
-		final View toolbar = dashboardView.findViewById(R.id.toolbar);
+	private void animateDashboard(boolean show) {
+		View content = dashboardView.findViewById(R.id.animateContent);
+		View toolbar = dashboardView.findViewById(R.id.toolbar);
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 		if (animationCoordinates != null) {
@@ -885,7 +885,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			Animator circleAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, initialRadius, finalRadius);
 			animators.add(circleAnimator);
 		}
-		final float initialValueScale = show ? 0f : 1f;
+		float initialValueScale = show ? 0f : 1f;
 		float finalValueScale = show ? 1f : 0f;
 		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_X, initialValueScale, finalValueScale));
 		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_Y, initialValueScale, finalValueScale));
@@ -928,7 +928,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void hide(boolean animation) {
 		if (compassButton != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton(nightMode);
+			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton();
 			compassButton = null;
 		}
 		if (!animation) {
@@ -995,8 +995,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	public void updateLocation(final boolean centerChanged, final boolean locationChanged,
-							   final boolean compassChanged) {
+	public void updateLocation(boolean centerChanged, boolean locationChanged,
+	                           boolean compassChanged) {
 		if (inLocationUpdate) {
 			return;
 		}
@@ -1137,7 +1137,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateMapShadowColor(malpha);
 			if (t < 1) {
 				//noinspection deprecation
-				toolbar.setBackgroundDrawable(gradientToolbar);
+				toolbar.setBackground(gradientToolbar);
 			} else {
 				toolbar.setBackgroundColor(0xff000000 | baseColor);
 			}

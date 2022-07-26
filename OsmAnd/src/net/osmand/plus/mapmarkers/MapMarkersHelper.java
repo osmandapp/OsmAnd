@@ -16,7 +16,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -24,7 +23,7 @@ import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
@@ -43,6 +42,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -70,14 +70,17 @@ public class MapMarkersHelper {
 
 	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-	private List<MapMarker> mapMarkers = new ArrayList<>();
-	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
-	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
+	private List<MapMarker> mapMarkers = new CopyOnWriteArrayList<>();
+	private final List<MapMarker> mapMarkersHistory = new CopyOnWriteArrayList<>();
+	private List<MapMarkersGroup> mapMarkersGroups = new CopyOnWriteArrayList<>();
 
 	private final List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private final Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
 
 	private final MarkersPlanRouteContext planRouteContext;
+
+	private long favoriteMarkersModifiedTime;
+	private long trackMarkersModifiedTime;
 
 	public List<MapMarker> getMapMarkers() {
 		return mapMarkers;
@@ -138,20 +141,57 @@ public class MapMarkersHelper {
 
 	public void syncAllGroups() {
 		Pair<Map<String, MapMarkersGroup>, Map<String, MapMarker>> pair = dataHelper.loadGroupsAndOrder();
-		mapMarkers = new ArrayList<>(pair.second.values());
-		mapMarkersGroups = new ArrayList<>(pair.first.values());
+		mapMarkers = new CopyOnWriteArrayList<>(pair.second.values());
+		mapMarkersGroups = new CopyOnWriteArrayList<>(pair.first.values());
 
+		boolean hasFavoriteGroup = false;
+		boolean hasTrackGroup = false;
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			updateGroup(group);
 			runGroupSynchronization(group);
+			if (group.getType() == ItineraryType.FAVOURITES) {
+				hasFavoriteGroup = true;
+			} else if (group.getType() == ItineraryType.TRACK) {
+				hasTrackGroup = true;
+			}
 		}
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		sortGroups();
-		saveGroups();
+		saveGroups(false);
 		lookupAddressAll();
+		if (hasFavoriteGroup) {
+			updateFavoriteMarkersModifiedTime();
+		}
+		if (hasTrackGroup) {
+			updateTrackMarkersModifiedTime();
+		}
 	}
 
-	protected void saveGroups() {
+	public long getFavoriteMarkersModifiedTime() {
+		return favoriteMarkersModifiedTime;
+	}
+
+	public long getTrackMarkersModifiedTime() {
+		return trackMarkersModifiedTime;
+	}
+
+	private void updateFavoriteMarkersModifiedTime() {
+		favoriteMarkersModifiedTime = System.currentTimeMillis();
+	}
+
+	private void updateTrackMarkersModifiedTime() {
+		trackMarkersModifiedTime = System.currentTimeMillis();
+	}
+
+	void updateLastModifiedTime(@NonNull MapMarkersGroup group) {
+		if (group.getType() == ItineraryType.FAVOURITES) {
+			updateFavoriteMarkersModifiedTime();
+		} else if (group.getType() == ItineraryType.TRACK) {
+			updateTrackMarkersModifiedTime();
+		}
+	}
+
+	public void saveGroups(boolean notify) {
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			if (!group.isDisabled()) {
@@ -159,6 +199,9 @@ public class MapMarkersHelper {
 			}
 		}
 		dataHelper.saveGroups(markersGroups, mapMarkers);
+		if (notify) {
+			notifyMarkersChanged();
+		}
 	}
 
 	public ItineraryDataHelper getDataHelper() {
@@ -178,22 +221,19 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void lookupAddress(final MapMarker mapMarker) {
+	private void lookupAddress(MapMarker mapMarker) {
 		if (mapMarker != null && mapMarker.getOriginalPointDescription().isSearchingAddress(ctx)) {
 			cancelPointAddressRequests(mapMarker.point);
 			AddressLookupRequest lookupRequest = new AddressLookupRequest(mapMarker.point,
-					new GeocodingLookupService.OnAddressLookupResult() {
-						@Override
-						public void geocodingDone(String address) {
-							PointDescription pointDescription = mapMarker.getOriginalPointDescription();
-							if (Algorithms.isEmpty(address)) {
-								pointDescription.setName(PointDescription.getAddressNotFoundStr(ctx));
-							} else {
-								pointDescription.setName(address);
-							}
-							markersDbHelper.updateMarker(mapMarker);
-							refreshMarker(mapMarker);
+					address -> {
+						PointDescription pointDescription = mapMarker.getOriginalPointDescription();
+						if (Algorithms.isEmpty(address)) {
+							pointDescription.setName(PointDescription.getAddressNotFoundStr(ctx));
+						} else {
+							pointDescription.setName(address);
 						}
+						markersDbHelper.updateMarker(mapMarker);
+						notifyMarkerChanged(mapMarker);
 					}, null);
 			ctx.getGeocodingLookupService().lookupAddress(lookupRequest);
 		}
@@ -216,23 +256,19 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void saveMarkersOrder() {
-		saveGroups();
-	}
-
-	public void sortMarkers(final @MapMarkersSortByDef int sortByMode, LatLon location) {
+	public void sortMarkers(@MapMarkersSortByDef int sortByMode, LatLon location) {
 		sortMarkers(getMapMarkers(), false, sortByMode, location);
-		saveMarkersOrder();
+		saveGroups(false);
 	}
 
-	private void sortMarkers(List<MapMarker> markers, final boolean visited, final @MapMarkersSortByDef int sortByMode) {
+	private void sortMarkers(List<MapMarker> markers, boolean visited, @MapMarkersSortByDef int sortByMode) {
 		sortMarkers(markers, visited, sortByMode, null);
 	}
 
 	private void sortMarkers(List<MapMarker> markers,
-							 final boolean visited,
-							 final @MapMarkersSortByDef int sortByMode,
-							 @Nullable final LatLon location) {
+	                         boolean visited,
+	                         @MapMarkersSortByDef int sortByMode,
+	                         @Nullable LatLon location) {
 		Collections.sort(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
@@ -265,7 +301,7 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public void runSynchronization(final @NonNull MapMarkersGroup group) {
+	public void runSynchronization(@NonNull MapMarkersGroup group) {
 		ctx.runInUIThread(() -> new SyncGroupTask(ctx, group, syncListeners).executeOnExecutor(executorService));
 	}
 
@@ -326,7 +362,7 @@ public class MapMarkersHelper {
 	private void addGroupInternally(MapMarkersGroup group) {
 		addHistoryMarkersToGroup(group);
 		addToGroupsList(group);
-		saveGroups();
+		saveGroups(false);
 	}
 
 	private void updateGpxShowAsMarkers(File file) {
@@ -350,7 +386,8 @@ public class MapMarkersHelper {
 		if (group != null) {
 			removeGroupActiveMarkers(group, false);
 			removeFromGroupsList(group);
-			saveGroups();
+			saveGroups(false);
+			updateLastModifiedTime(group);
 		}
 	}
 
@@ -358,14 +395,14 @@ public class MapMarkersHelper {
 		String id = group.getId();
 		if (id != null) {
 			group.setDisabled(disabled);
-			saveGroups();
+			saveGroups(false);
 		}
 	}
 
 	public void updateGroupWptCategories(@NonNull MapMarkersGroup group, Set<String> wptCategories) {
 		if (group.getId() != null && !Algorithms.objectEquals(group.getWptCategories(), wptCategories)) {
 			group.setWptCategories(wptCategories);
-			saveGroups();
+			saveGroups(false);
 		}
 	}
 
@@ -377,8 +414,7 @@ public class MapMarkersHelper {
 				group.setMarkers(group.getHistoryMarkers());
 				updateGroup(group);
 			}
-			saveMarkersOrder();
-			refresh();
+			saveGroups(true);
 		}
 	}
 
@@ -409,7 +445,7 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			addMarkerToGroup(marker);
 		}
-		saveGroups();
+		saveGroups(false);
 	}
 
 	private void addMarkerToGroup(@NonNull MapMarker marker) {
@@ -442,13 +478,10 @@ public class MapMarkersHelper {
 
 	private void sortGroups() {
 		if (mapMarkersGroups.size() > 0) {
-			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
-				@Override
-				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
-					long t1 = group1.getCreationDate();
-					long t2 = group2.getCreationDate();
-					return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
-				}
+			Collections.sort(mapMarkersGroups, (group1, group2) -> {
+				long t1 = group1.getCreationDate();
+				long t2 = group2.getCreationDate();
+				return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
 			});
 		}
 	}
@@ -548,7 +581,7 @@ public class MapMarkersHelper {
 	@Nullable
 	public MapMarker getMapMarker(@NonNull LatLon latLon) {
 		for (MapMarker marker : getAllMarkers()) {
-			if (marker.point != null && marker.point.equals(latLon)) {
+			if (latLon.equals(marker.point)) {
 				return marker;
 			}
 		}
@@ -592,10 +625,9 @@ public class MapMarkersHelper {
 			markersDbHelper.moveMarkerToHistory(marker);
 			removeFromMapMarkersList(marker);
 			addToMapMarkersHistoryList(marker);
-			saveMarkersOrder();
 			sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 			syncPassedPoints();
-			refresh();
+			saveGroups(true);
 		}
 	}
 
@@ -607,10 +639,9 @@ public class MapMarkersHelper {
 				sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 			} else {
 				addToMapMarkersList(marker);
-				saveMarkersOrder();
 			}
 			addMarkerToGroup(marker);
-			refresh();
+			saveGroups(true);
 		}
 	}
 
@@ -620,10 +651,9 @@ public class MapMarkersHelper {
 			removeFromMapMarkersHistoryList(marker);
 			marker.history = false;
 			addToMapMarkersList(position, marker);
-			saveMarkersOrder();
 			sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 			syncPassedPoints();
-			refresh();
+			saveGroups(true);
 		}
 	}
 
@@ -635,11 +665,10 @@ public class MapMarkersHelper {
 			}
 			removeFromMapMarkersHistoryList(markers);
 			addToMapMarkersList(markers);
-			saveMarkersOrder();
 			sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 			updateGroups();
 			syncPassedPoints();
-			refresh();
+			saveGroups(true);
 		}
 	}
 
@@ -651,10 +680,10 @@ public class MapMarkersHelper {
 		for (MapMarker marker : mapMarkers) {
 			removeMarker(marker, false);
 		}
-		refresh();
+		saveGroups(true);
 	}
 
-	private void removeMarker(MapMarker marker, boolean refresh) {
+	private void removeMarker(MapMarker marker, boolean save) {
 		if (marker != null) {
 			markersDbHelper.removeMarker(marker);
 			if (marker.history) {
@@ -663,8 +692,8 @@ public class MapMarkersHelper {
 				removeFromMapMarkersList(marker);
 			}
 			removeMarkerFromGroup(marker);
-			if (refresh) {
-				refresh();
+			if (save) {
+				saveGroups(true);
 			}
 		}
 	}
@@ -725,10 +754,9 @@ public class MapMarkersHelper {
 		if (markersToRemove.size() != markers.size()) {
 			return;
 		}
-
 		removeFromMapMarkersList(markersToRemove);
 		addToMapMarkersList(0, markers);
-		saveMarkersOrder();
+		saveGroups(false);
 	}
 
 	public List<LatLon> getSelectedMarkersLatLon() {
@@ -744,7 +772,7 @@ public class MapMarkersHelper {
 	public void reverseActiveMarkersOrder() {
 		cancelAddressRequests();
 		Collections.reverse(mapMarkers);
-		saveMarkersOrder();
+		saveGroups(false);
 	}
 
 	public void moveAllActiveMarkersToHistory() {
@@ -756,11 +784,11 @@ public class MapMarkersHelper {
 			marker.history = true;
 		}
 		addToMapMarkersHistoryList(mapMarkers);
-		mapMarkers = new ArrayList<>();
+		mapMarkers = new CopyOnWriteArrayList<>();
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		updateGroups();
 		syncPassedPoints();
-		refresh();
+		saveGroups(true);
 	}
 
 	public void addMapMarker(@NonNull LatLon point,
@@ -814,11 +842,11 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void updateMapMarker(MapMarker marker, boolean refresh) {
+	public void updateMapMarker(MapMarker marker, boolean save) {
 		if (marker != null) {
 			markersDbHelper.updateMarker(marker);
-			if (refresh) {
-				refresh();
+			if (save) {
+				saveGroups(true);
 			}
 		}
 	}
@@ -828,8 +856,7 @@ public class MapMarkersHelper {
 		if (i != -1 && mapMarkers.size() > 1) {
 			removeFromMapMarkersList(marker);
 			addToMapMarkersList(0, marker);
-			saveMarkersOrder();
-			refresh();
+			saveGroups(true);
 		}
 	}
 
@@ -842,8 +869,7 @@ public class MapMarkersHelper {
 			}
 			marker.point = point;
 			markersDbHelper.updateMarker(marker);
-			saveMarkersOrder();
-			refresh();
+			saveGroups(true);
 			lookupAddress(marker);
 		}
 	}
@@ -866,27 +892,20 @@ public class MapMarkersHelper {
 		listeners.remove(l);
 	}
 
-	private void refreshMarker(final MapMarker marker) {
-		ctx.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				for (MapMarkerChangedListener l : listeners) {
-					l.onMapMarkerChanged(marker);
-				}
+	private void notifyMarkerChanged(MapMarker marker) {
+		ctx.runInUIThread(() -> {
+			for (MapMarkerChangedListener l : listeners) {
+				l.onMapMarkerChanged(marker);
 			}
 		});
 	}
 
-	private void refresh() {
-		ctx.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				for (MapMarkerChangedListener l : listeners) {
-					l.onMapMarkersChanged();
-				}
+	private void notifyMarkersChanged() {
+		ctx.runInUIThread(() -> {
+			for (MapMarkerChangedListener l : listeners) {
+				l.onMapMarkersChanged();
 			}
 		});
-		saveGroups();
 	}
 
 	private void syncPassedPoints() {
@@ -899,6 +918,9 @@ public class MapMarkersHelper {
 		}
 		for (GPXFile gpxFile : gpxFiles) {
 			GpxUiHelper.saveGpx(gpxFile, null);
+		}
+		if (!gpxFiles.isEmpty()) {
+			updateTrackMarkersModifiedTime();
 		}
 	}
 
@@ -951,9 +973,7 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.add(position, marker);
-		mapMarkers = copyList;
+		mapMarkers.add(position, marker);
 	}
 
 	private void addToMapMarkersList(List<MapMarker> markers) {
@@ -961,61 +981,43 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.addAll(position, markers);
-		mapMarkers = copyList;
+		mapMarkers.addAll(position, markers);
 	}
 
 	private void removeFromMapMarkersList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.remove(marker);
-		mapMarkers = copyList;
+		mapMarkers.remove(marker);
 	}
 
 	private void removeFromMapMarkersList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.removeAll(markers);
-		mapMarkers = copyList;
+		mapMarkers.removeAll(markers);
 	}
 
 	// accessors to history markers:
 
 	private void addToMapMarkersHistoryList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.add(marker);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.add(marker);
 	}
 
 	private void addToMapMarkersHistoryList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.addAll(markers);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.addAll(markers);
 	}
 
 	private void removeFromMapMarkersHistoryList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.remove(marker);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.remove(marker);
 	}
 
 	private void removeFromMapMarkersHistoryList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.removeAll(markers);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.removeAll(markers);
 	}
 
 	// accessors to markers groups:
 
 	private void addToGroupsList(MapMarkersGroup group) {
-		List<MapMarkersGroup> copyList = new ArrayList<>(mapMarkersGroups);
-		copyList.add(group);
-		mapMarkersGroups = copyList;
+		mapMarkersGroups.add(group);
 	}
 
 	private void removeFromGroupsList(MapMarkersGroup group) {
-		List<MapMarkersGroup> copyList = new ArrayList<>(mapMarkersGroups);
-		copyList.remove(group);
-		mapMarkersGroups = copyList;
+		mapMarkersGroups.remove(group);
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -1135,15 +1137,15 @@ public class MapMarkersHelper {
 
 	private void removeOldMarkersIfPresent(List<MapMarker> markers) {
 		if (!markers.isEmpty()) {
-			boolean needRefresh = false;
+			boolean save = false;
 			for (MapMarker marker : markers) {
 				if (!marker.history) {
 					removeMarker(marker, false);
-					needRefresh = true;
+					save = true;
 				}
 			}
-			if (needRefresh) {
-				refresh();
+			if (save) {
+				saveGroups(true);
 			}
 		}
 	}

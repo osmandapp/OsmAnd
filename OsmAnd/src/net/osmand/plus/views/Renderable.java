@@ -59,7 +59,7 @@ public class Renderable {
         THREAD_POOL_EXECUTOR = threadPoolExecutor;
     }
 
-    public static abstract class RenderableSegment {
+    public abstract static class RenderableSegment {
 
         private static final boolean DRAW_BORDER = true;
 
@@ -75,18 +75,18 @@ public class Renderable {
 
         protected QuadRect trackBounds;
         protected double zoom = -1;
-        protected AsynchronousResampler culler = null;       // The currently active resampler
-        protected Paint paint = null;                        // MUST be set by 'updateLocalPaint' before use
+        protected AsynchronousResampler culler;       // The currently active resampler
+        protected Paint paint;                        // MUST be set by 'updateLocalPaint' before use
         protected Paint borderPaint;
         protected int color;
         protected String width;
 
         @NonNull
         protected ColoringType coloringType = ColoringType.TRACK_SOLID;
-        protected String routeInfoAttribute = null;
+        protected String routeInfoAttribute;
 
         protected GpxGeometryWay geometryWay;
-        protected boolean drawArrows = false;
+        protected boolean drawArrows;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;

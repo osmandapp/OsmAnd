@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.data.FavouritePoint.SpecialPointType;
+import net.osmand.data.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -106,7 +106,7 @@ class AppVersionUpgradeOnInit {
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private int prevAppVersion;
 	private boolean appVersionChanged;
 	private boolean firstTime;

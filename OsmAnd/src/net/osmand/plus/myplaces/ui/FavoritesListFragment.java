@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -55,8 +56,9 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 
 	float lastHeading ; 
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(@NonNull Activity activity) {
 		super.onAttach(activity);
 		Intent intent = activity.getIntent();
 		OsmandApplication app = getApplication();
@@ -158,10 +160,10 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	}
 
 	public static class FavouritesAdapter extends ArrayAdapter<FavouritePoint> {
-		private Activity activity;
-		private OsmandApplication app;
-		private boolean shouldShowMenuButton;
-		private UpdateLocationViewCache cache;
+		private final Activity activity;
+		private final OsmandApplication app;
+		private final boolean shouldShowMenuButton;
+		private final UpdateLocationViewCache cache;
 
 		public FavouritesAdapter(Activity activity, List<FavouritePoint> list,
 								 boolean shouldShowMenuButton) {
@@ -173,7 +175,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		}
 
 
-		public void updateLocation(final LatLon l) {
+		public void updateLocation(LatLon l) {
 			sort(new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint object1, FavouritePoint object2) {
@@ -205,15 +207,15 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 				row = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorites_list_item, parent, false);
 			}
 
-			TextView name = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceText = (TextView) row.findViewById(R.id.distance);
-			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
-			ImageView direction = (ImageView) row.findViewById(R.id.direction);
-			ImageView giImage = (ImageView) row.findViewById(R.id.group_image);
+			TextView name = row.findViewById(R.id.favourite_label);
+			TextView distanceText = row.findViewById(R.id.distance);
+			ImageView icon = row.findViewById(R.id.favourite_icon);
+			ImageView direction = row.findViewById(R.id.direction);
+			ImageView giImage = row.findViewById(R.id.group_image);
 			direction.setVisibility(View.VISIBLE);
-			final FavouritePoint favorite = getItem(position);
+			FavouritePoint favorite = getItem(position);
 			if (shouldShowMenuButton) {
-				ImageButton options = (ImageButton) row.findViewById(R.id.options);
+				ImageButton options = row.findViewById(R.id.options);
 				options.setFocusable(false);
 				options.setImageDrawable(((OsmandApplication) activity.getApplication()).getUIUtilities()
 						.getThemedIcon(R.drawable.ic_overflow_menu_white));
@@ -234,12 +236,12 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
 			icon.setImageDrawable(PointImageDrawable.getFromFavorite(activity, app.getFavoritesHelper().getColorWithCategory(favorite,
-					app.getResources().getColor(R.color.color_favorite)), false, favorite));
+					app.getColor(R.color.color_favorite)), false, favorite));
 			 
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude());
 			name.setText(getName(favorite));
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
+			CheckBox ch = row.findViewById(R.id.toggle_item);
 			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
 			if (activity instanceof SearchActivity)
@@ -248,7 +250,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		}
 
 		public void sortByName() {
-			final Collator inst = Collator.getInstance();
+			Collator inst = Collator.getInstance();
 			sort(new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint o1, FavouritePoint o2) {
@@ -258,7 +260,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			});
 			
 		}
-		public void sortByDistance(final LatLon loc) {
+		public void sortByDistance(LatLon loc) {
 			sort(new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint lhs, FavouritePoint rhs) {
@@ -308,7 +310,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			}
 		}
 		if (activity instanceof SearchActivity) {
-			final View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
+			View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
 			if (selected != null) {
 				try {
 					int position = getListView().getPositionForView(selected);
@@ -326,7 +328,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 
 	public static void showOnMap(FavouritePoint point, Activity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),

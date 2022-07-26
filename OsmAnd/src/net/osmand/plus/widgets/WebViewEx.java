@@ -30,11 +30,6 @@ public class WebViewEx extends WebView {
 		fixWebViewResetsLocaleToUserDefault(context);
 	}
 
-	public WebViewEx(Context context, AttributeSet attrs, int defStyleAttr, boolean privateBrowsing) {
-		super(context, attrs, defStyleAttr, privateBrowsing);
-		fixWebViewResetsLocaleToUserDefault(context);
-	}
-
 	public void fixWebViewResetsLocaleToUserDefault(Context ctx) {
 		// issue details: https://issuetracker.google.com/issues/37113860
 		// also see: https://gist.github.com/amake/0ac7724681ac1c178c6f95a5b09f03ce

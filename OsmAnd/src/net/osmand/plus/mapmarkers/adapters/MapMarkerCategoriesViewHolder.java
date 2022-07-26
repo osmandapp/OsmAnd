@@ -16,8 +16,8 @@ public class MapMarkerCategoriesViewHolder extends RecyclerView.ViewHolder {
 
 	public MapMarkerCategoriesViewHolder(View itemView) {
 		super(itemView);
-		title = (TextView) itemView.findViewById(R.id.title);
-		button = (TextView) itemView.findViewById(R.id.categories_button);
+		title = itemView.findViewById(R.id.title);
+		button = itemView.findViewById(R.id.categories_button);
 		divider = itemView.findViewById(R.id.divider);
 	}
 }

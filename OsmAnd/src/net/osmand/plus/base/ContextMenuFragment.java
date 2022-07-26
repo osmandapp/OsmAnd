@@ -306,7 +306,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 
 		ViewConfiguration vc = ViewConfiguration.get(context);
-		final int touchSlop = vc.getScaledTouchSlop();
+		int touchSlop = vc.getScaledTouchSlop();
 
 		if (getTopViewId() != 0) {
 			topView = view.findViewById(getTopViewId());
@@ -315,7 +315,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		if (!portrait) {
 			currentMenuState = MenuState.FULL_SCREEN;
 			if (isSingleFragment()) {
-				final TypedValue typedValueAttr = new TypedValue();
+				TypedValue typedValueAttr = new TypedValue();
 				int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 				mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 				mainView.setBackgroundResource(typedValueAttr.resourceId);
@@ -328,18 +328,18 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		processScreenHeight(container);
 		minHalfY = getMinHalfY(mapActivity);
 
-		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
-		final GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
+		GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
+		GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
 
-		final OnTouchListener slideTouchListener = new OnTouchListener() {
+		OnTouchListener slideTouchListener = new OnTouchListener() {
 			private float dy;
 			private float dyMain;
 			private float mDownY;
 
-			private int minimumVelocity;
-			private int maximumVelocity;
+			private final int minimumVelocity;
+			private final int maximumVelocity;
 			private VelocityTracker velocityTracker;
-			private OverScroller scroller;
+			private final OverScroller scroller;
 
 			private boolean slidingUp;
 			private boolean slidingDown;
@@ -349,7 +349,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 			{
 				OsmandApplication app = requireMyApplication();
 				scroller = new OverScroller(app);
-				final ViewConfiguration configuration = ViewConfiguration.get(app);
+				ViewConfiguration configuration = ViewConfiguration.get(app);
 				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
 				maximumVelocity = configuration.getScaledMaximumFlingVelocity();
 			}
@@ -419,7 +419,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 							hasMoved = false;
 							int currentY = getViewY();
 							int fullScreenTopPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
-							final VelocityTracker velocityTracker = this.velocityTracker;
+							VelocityTracker velocityTracker = this.velocityTracker;
 							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
 							int initialVelocity = (int) velocityTracker.getYVelocity();
 							if ((Math.abs(initialVelocity) > minimumVelocity) && currentY != fullScreenTopPosY) {
@@ -824,7 +824,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 
-	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
+	private int getPosY(int currentY, boolean needCloseMenu, int previousState) {
 		if (needCloseMenu && isHideable()) {
 			return screenHeight;
 		}
@@ -877,9 +877,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 	}
 
-	protected int applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
-							 final int previousMenuState, final int newMenuState, int dZoom, final boolean animated) {
-		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
+	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust,
+	                        int previousMenuState, int newMenuState, int dZoom, boolean animated) {
+		int posY = getPosY(currentY, needCloseMenu, previousMenuState);
 		if (getViewY() != posY || dZoom != 0) {
 			if (posY < getViewY()) {
 				updateMainViewLayout(posY);
@@ -905,10 +905,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		return posY;
 	}
 
-	protected void animateMainView(final int posY, final boolean needCloseMenu, final int previousMenuState, final int newMenuState) {
+	protected void animateMainView(int posY, boolean needCloseMenu, int previousMenuState, int newMenuState) {
 		animateView(mainView, posY, new AnimatorListenerAdapter() {
 
-			boolean canceled = false;
+			boolean canceled;
 
 			@Override
 			public void onAnimationCancel(Animator animation) {
@@ -953,7 +953,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	protected void runLayoutListener(final Runnable runnable) {
+	protected void runLayoutListener(Runnable runnable) {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
 			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -961,11 +961,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 				public void onGlobalLayout() {
 					if (view != null) {
 						ViewTreeObserver obs = view.getViewTreeObserver();
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							obs.removeOnGlobalLayoutListener(this);
-						} else {
-							obs.removeGlobalOnLayoutListener(this);
-						}
+						obs.removeOnGlobalLayoutListener(this);
 
 						if (getActivity() == null) {
 							return;
@@ -999,7 +995,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	private void doLayoutMenu() {
-		final int posY = getPosY(initLayout ? CURRENT_Y_UNDEFINED : getViewY(), false, getCurrentMenuState());
+		int posY = getPosY(initLayout ? CURRENT_Y_UNDEFINED : getViewY(), false, getCurrentMenuState());
 		setViewY(posY, true, !initLayout);
 		updateMainViewLayout(posY);
 	}

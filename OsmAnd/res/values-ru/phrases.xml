@@ -724,7 +724,7 @@
     <string name="poi_military_landuse">Военная зона</string>
     <string name="poi_entertainment">Досуг</string>
     <string name="poi_wine">Винный магазин</string>
-    <string name="poi_halt">Железнодорожная остановка;ЖД остановка;Остановка поезда;Полустанок</string>
+    <string name="poi_halt">Железнодорожная остановка;ЖД остановка;Железнодорожная станция;ЖД станция;Остановка поезда;Полустанок;Перон;Станция;Платформа</string>
     <string name="poi_emergency">Экстренные службы</string>
     <string name="poi_transportation">Транспорт</string>
     <string name="poi_healthcare">Здоровье</string>
@@ -4339,4 +4339,5 @@
     <string name="poi_club_doityourself">Клуб сделай сам;DIY клуб</string>
     <string name="poi_club_bicycle">Велоклуб;Велосипедный клуб</string>
     <string name="poi_club_aviation">Авиаклуб;Авиационный клуб</string>
+    <string name="poi_first_aid_kit">Аптечка первой помощи</string>
 </resources>

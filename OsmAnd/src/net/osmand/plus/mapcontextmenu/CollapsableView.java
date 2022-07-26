@@ -9,8 +9,8 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 
 public class CollapsableView {
 
-	private View contentView;
-	private MenuBuilder menuBuilder;
+	private final View contentView;
+	private final MenuBuilder menuBuilder;
 
 	private OsmandPreference<Boolean> collapsedPref;
 	private CollapseExpandListener collapseExpandListener;

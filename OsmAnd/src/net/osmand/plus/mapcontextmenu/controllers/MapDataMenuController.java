@@ -50,20 +50,20 @@ import java.util.Map;
 public class MapDataMenuController extends MenuController {
 	private DownloadMapObject mapObject;
 	private List<IndexItem> otherIndexItems;
-	private LocalIndexInfo localIndexInfo;
+	private final LocalIndexInfo localIndexInfo;
 	private List<LocalIndexInfo> otherLocalIndexInfos;
-	private boolean srtmDisabled;
-	private boolean srtmNeedsInstallation;
+	private final boolean srtmDisabled;
+	private final boolean srtmNeedsInstallation;
 	private boolean backuped;
 
-	private DownloadIndexesThread downloadThread;
+	private final DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull DownloadMapObject mapObject) {
+	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull DownloadMapObject mapObject) {
 		super(new MapDataMenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
 		localIndexInfo = mapObject.getLocalIndexInfo();
-		final OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getMyApplication();
 		downloadThread = app.getDownloadThread();
 		if (indexItem != null) {
 			downloaded = indexItem.isDownloaded();
@@ -105,7 +105,8 @@ public class MapDataMenuController extends MenuController {
 						if (srtmNeedsInstallation) {
 							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 							if (plugin != null) {
-								activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+								Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+								AndroidUtils.startActivityIfSafe(activity, intent);
 							} else {
 								Toast.makeText(activity.getApplicationContext(),
 										activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
@@ -460,7 +461,7 @@ public class MapDataMenuController extends MenuController {
 		}
 	}
 
-	private void deleteItem(final File file) {
+	private void deleteItem(File file) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -535,9 +536,9 @@ public class MapDataMenuController extends MenuController {
 
 	private static class DeleteFileTask extends AsyncTask<Void, Void, Void> {
 
-		private File file;
-		private WeakReference<MapActivity> mapActivityRef;
-		private OsmandApplication app;
+		private final File file;
+		private final WeakReference<MapActivity> mapActivityRef;
+		private final OsmandApplication app;
 
 		DeleteFileTask(@NonNull MapActivity mapActivity, @NonNull File file) {
 			this.file = file;
@@ -574,8 +575,8 @@ public class MapDataMenuController extends MenuController {
 
 	private static class RestoreFromBackupTask extends AsyncTask<Void, Void, Void> {
 
-		private WeakReference<MapActivity> mapActivityRef;
-		private OsmandApplication app;
+		private final WeakReference<MapActivity> mapActivityRef;
+		private final OsmandApplication app;
 
 		private LocalIndexInfo localIndexInfo;
 		private IndexItem indexItem;

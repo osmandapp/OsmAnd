@@ -22,14 +22,14 @@ import android.graphics.Canvas;
 
 public class YandexTrafficAdapter  extends MapTileAdapter {
 
-	private final static Log log = PlatformUtil.getLog(MapTileLayer.class);
-	private final static String YANDEX_PREFFIX = ".YandexTraffic_";
-	private final static String YANDEX_BASE_URL = "https://core-jams-rdr.maps.yandex.net";
+	private static final Log log = PlatformUtil.getLog(MapTileLayer.class);
+	private static final String YANDEX_PREFFIX = ".YandexTraffic_";
+	private static final String YANDEX_BASE_URL = "https://core-jams-rdr.maps.yandex.net";
 	private static final long DELTA = 10 * 60 * 1000;
 	
 	private long lastTimestampUpdated;
-	private String mTimestamp = null;
-	private boolean updateThreadRan = false;
+	private String mTimestamp;
+	private boolean updateThreadRan;
 	
 	
 	@Override

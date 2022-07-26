@@ -35,8 +35,10 @@ class SyncGroupTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		app.getMapMarkersHelper().runGroupSynchronization(group);
-		app.getMapMarkersHelper().saveGroups();
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		helper.runGroupSynchronization(group);
+		helper.saveGroups(false);
+		helper.updateLastModifiedTime(group);
 		return null;
 	}
 

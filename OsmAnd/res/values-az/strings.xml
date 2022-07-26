@@ -3025,7 +3025,6 @@
     <string name="routing_attr_length_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin uzunluğunu təyin edin.</string>
     <string name="voice_announcements">Səsli göstərişlər</string>
     <string name="live_monitoring_descr">Səfər qeydindən istifadə edərək hazırkı məkanı paylaşmağa imkan verir.</string>
-    <string name="map_orientation_threshold_descr">Sürət hədddən azdırsa, xəritə görünüşünü döndərmə</string>
     <string name="shared_strings_all_regions">Bütün regionlar</string>
     <string name="wikivoyage_travel_guide">Səyahət Bələdçiləri</string>
     <string name="travel_card_update_descr">Yeni Vikisəyahət məlumatları mövcuddur, zövq almaq üçün yeniləyin.</string>
@@ -3251,4 +3250,13 @@
     <string name="stop_download">Endirməni dayandır</string>
     <string name="stop_and_exit">Dayandır və çıx</string>
     <string name="estimated_download_size">Təxmini endirmə ölçüsü</string>
+    <string name="shared_string_buttons">Düymələr</string>
+    <string name="navigation_points">Naviqasiya nöqtələri</string>
+    <string name="add_page">Səhifə əlavə et</string>
+    <string name="map_widget_current_speed">Hazırkı sürət</string>
+    <string name="page_number">Səhifə %1$s</string>
+    <string name="shared_string_speed">Sürət</string>
+    <string name="snackbar_page_removed">“Səhifə %1$s” silindi.</string>
+    <string name="top_widgets_panel">Üst panel</string>
+    <string name="bottom_widgets_panel">Alt panel</string>
 </resources>

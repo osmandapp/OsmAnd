@@ -150,7 +150,7 @@
     <string name="poi_public_transport_station">Stanica hromadnej dopravy</string>
     <string name="poi_railway_station">Železničná stanica</string>
     <string name="poi_railway_platform">Železničné nástupište</string>
-    <string name="poi_halt">Železničná zastávka</string>
+    <string name="poi_halt">Železničná zastávka;Železničná stanica;Stanica</string>
     <string name="poi_bus_station">Autobusová stanica</string>
     <string name="poi_subway_entrance">Vchod do metra</string>
     <string name="poi_subway_station">Áno;Stanica metra</string>
@@ -4118,4 +4118,11 @@
     <string name="poi_club_youth_movement">Mládežnícke hnutie</string>
     <string name="poi_club_amateur_radio">Klub rádioamatérov</string>
     <string name="poi_club_religion">Náboženský klub</string>
+    <string name="poi_club_dog">Klub psíčkarov</string>
+    <string name="poi_board_title">Nadpis tabule</string>
+    <string name="poi_short_name">Krátky názov</string>
+    <string name="poi_club_aviation">Letecký klub</string>
+    <string name="poi_club_bicycle">Cyklistický klub</string>
+    <string name="poi_club_doityourself">Klub kutilov</string>
+    <string name="poi_first_aid_kit">Lekárnička</string>
 </resources>

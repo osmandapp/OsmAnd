@@ -215,7 +215,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.header_divider), selected);
 	}
 
-	private TextRadioItem createRadioButton(final TravelType type) {
+	private TextRadioItem createRadioButton(TravelType type) {
 		TextRadioItem item = new TextRadioItem(app.getString(type.titleRes));
 		item.setOnClickListener((radioItem, v) -> {
 			travelType = type;

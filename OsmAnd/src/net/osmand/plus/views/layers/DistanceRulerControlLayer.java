@@ -71,7 +71,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
 		app = getApplication();
@@ -141,7 +141,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			lineAttrs.updatePaints(app, settings, tb);
 			lineFontAttrs.updatePaints(app, settings, tb);
 			lineFontAttrs.paint.setStyle(Style.FILL);
-			final long currentTime = System.currentTimeMillis();
+			long currentTime = System.currentTimeMillis();
 
 			if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
 				cacheMultiTouchEndTime = view.getMultiTouchEndTime();
@@ -188,10 +188,12 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private void drawTwoFingersDistance(Canvas canvas, RotatedTileBox tb, LatLon firstTouch,
 										LatLon secondTouch, boolean nightMode) {
-		float x1 = tb.getPixXFromLatLon(firstTouch.getLatitude(), firstTouch.getLongitude());
-		float y1 = tb.getPixYFromLatLon(firstTouch.getLatitude(), firstTouch.getLongitude());
-		float x2 = tb.getPixXFromLatLon(secondTouch.getLatitude(), secondTouch.getLongitude());
-		float y2 = tb.getPixYFromLatLon(secondTouch.getLatitude(), secondTouch.getLongitude());
+		PointF firstScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, firstTouch.getLatitude(), firstTouch.getLongitude());
+		PointF secondScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, secondTouch.getLatitude(), secondTouch.getLongitude());
+		float x1 = firstScreenPoint.x;
+		float y1 = firstScreenPoint.y;
+		float x2 = secondScreenPoint.x;
+		float y2 = secondScreenPoint.y;
 
 		Path path = new Path();
 		path.moveTo(x1, y1);
@@ -238,10 +240,12 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
-		float x = tb.getPixXFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
-		float y = tb.getPixYFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
-		float currX = tb.getPixXFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
-		float currY = tb.getPixYFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
+		PointF firstScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+		PointF secondScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, currLoc.getLatitude(), currLoc.getLongitude());
+		float x = firstScreenPoint.x;
+		float y = firstScreenPoint.y;
+		float currX = secondScreenPoint.x;
+		float currY = secondScreenPoint.y;
 
 		linePath.reset();
 		tx.clear();

@@ -22,7 +22,7 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 public class SplitIntervalCard extends MapBaseCard {
 
-	private TrackDrawInfo trackDrawInfo;
+	private final TrackDrawInfo trackDrawInfo;
 
 	public SplitIntervalCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);

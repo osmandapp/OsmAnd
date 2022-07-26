@@ -28,7 +28,6 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		public boolean paint = true;
 
 		public DashLocationView(ImageView arrow, TextView txt, LatLon loc) {
-			super();
 			this.arrow = arrow;
 			this.txt = txt;
 			this.loc = loc;

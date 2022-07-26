@@ -43,8 +43,8 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 
 	private final Fragment targetFragment;
 
-	private ApplicationMode appMode;
-	private ListStringPreference colorsListPreference;
+	private final ApplicationMode appMode;
+	private final ListStringPreference colorsListPreference;
 
 	private final List<Integer> colors;
 	private final List<Integer> customColors;
@@ -146,7 +146,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		}
 	}
 
-	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView, boolean customColor) {
+	private View createColorItemView(@ColorInt int color, FlowLayout rootView, boolean customColor) {
 		View colorItemView = createCircleView(rootView);
 
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);

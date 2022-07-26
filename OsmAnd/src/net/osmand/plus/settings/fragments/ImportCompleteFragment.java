@@ -105,7 +105,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
 		TextView btnClose = root.findViewById(R.id.button_close);
-		final ViewGroup buttonContainer = root.findViewById(R.id.button_container);
+		ViewGroup buttonContainer = root.findViewById(R.id.button_container);
 		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.import_complete_description), sourceName),
@@ -132,11 +132,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				ViewTreeObserver vts = buttonContainer.getViewTreeObserver();
 				int height = buttonContainer.getMeasuredHeight();
 				recyclerView.setPadding(0, 0, 0, height);
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					vts.removeOnGlobalLayoutListener(this);
-				} else {
-					vts.removeGlobalOnLayoutListener(this);
-				}
+				vts.removeOnGlobalLayoutListener(this);
 			}
 		});
 		return root;

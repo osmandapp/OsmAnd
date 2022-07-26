@@ -78,8 +78,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			accountName.setText(plugin.OSM_USER_NAME_OR_EMAIL.get());
 		}
 
-		final TextView visibilityName = sendGpxView.findViewById(R.id.visibility_name);
-		final TextView visibilityDescription = sendGpxView.findViewById(R.id.visibility_description);
+		TextView visibilityName = sendGpxView.findViewById(R.id.visibility_name);
+		TextView visibilityDescription = sendGpxView.findViewById(R.id.visibility_description);
 		visibilityName.setText(selectedUploadVisibility.getTitleId());
 		visibilityDescription.setText(selectedUploadVisibility.getDescriptionId());
 

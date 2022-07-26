@@ -310,7 +310,7 @@ public class UiUtilities {
 							textColorSet = R.color.icon_color_default_light;
 						}
 					}
-					txt.setTextColor(app.getResources().getColor(textColorSet));
+					txt.setTextColor(ColorUtilities.getColor(app, textColorSet));
 				}
 				txt.setText(OsmAndFormatter.getFormattedDistance(mes[0], app));
 			} else {
@@ -359,8 +359,8 @@ public class UiUtilities {
 		}
 		View view = snackbar.getView();
 		Context ctx = view.getContext();
-		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
-		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
+		TextView tvMessage = view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView tvAction = view.findViewById(com.google.android.material.R.id.snackbar_action);
 		if (messageColor == null) {
 			messageColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		}
@@ -381,8 +381,8 @@ public class UiUtilities {
 	public static void setupSnackbarVerticalLayout(Snackbar snackbar) {
 		View view = snackbar.getView();
 		Context ctx = view.getContext();
-		TextView messageView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
-		TextView actionView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
+		TextView messageView = view.findViewById(com.google.android.material.R.id.snackbar_text);
+		TextView actionView = view.findViewById(com.google.android.material.R.id.snackbar_action);
 		ViewParent parent = actionView.getParent();
 		if (parent instanceof SnackbarContentLayout) {
 			((SnackbarContentLayout) parent).removeView(actionView);
@@ -437,7 +437,7 @@ public class UiUtilities {
 
 			endButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			endButtonText.setTextColor(activeColor);
-			startButtonContainer.setBackgroundDrawable(background);
+			startButtonContainer.setBackground(background);
 			startButtonText.setTextColor(textColor);
 
 			if (centerButtonContainer != null) {
@@ -447,7 +447,7 @@ public class UiUtilities {
 			}
 		} else if (buttonType == CustomRadioButtonType.CENTER) {
 			background.setCornerRadii(new float[] {0, 0, 0, 0, 0, 0, 0, 0});
-			centerButtonContainer.setBackgroundDrawable(background);
+			centerButtonContainer.setBackground(background);
 			AndroidUiHelper.updateVisibility(centerButtonContainer, true);
 
 			TextView centerButtonText = centerButtonContainer.findViewById(R.id.center_button);
@@ -472,7 +472,7 @@ public class UiUtilities {
 			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
 			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
 
-			endButtonContainer.setBackgroundDrawable(background);
+			endButtonContainer.setBackground(background);
 			endButtonText.setTextColor(textColor);
 			startButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			startButtonText.setTextColor(activeColor);
@@ -487,7 +487,7 @@ public class UiUtilities {
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ColorUtilities.getDefaultIconColor(ctx, nightMode);
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {-android.R.attr.state_checked},
 				new int[] {android.R.attr.state_checked}
 		};
@@ -533,7 +533,7 @@ public class UiUtilities {
 		if (background != null) {
 			int highlightColor = ContextCompat.getColor(app, nightMode ?
 					highlightColorNight : highlightColorDay);
-			int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+			int strokedColor = AndroidUtils.getColorFromAttr(getThemedContext(app, nightMode),
 					R.attr.stroked_buttons_and_links_outline);
 			background = (GradientDrawable) background.mutate();
 			if (checked) {
@@ -553,20 +553,20 @@ public class UiUtilities {
 		if (compoundButton == null) {
 			return;
 		}
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {-android.R.attr.state_enabled},
 				new int[] {-android.R.attr.state_checked},
 				new int[] {android.R.attr.state_checked}
 		};
 		if (compoundButton instanceof SwitchCompat) {
-			int[] thumbColors = new int[] {inactiveColorPrimary, inactiveColorPrimary, activeColor};
-			int[] trackColors = new int[] {inactiveColorSecondary, inactiveColorSecondary, inactiveColorSecondary};
+			int[] thumbColors = {inactiveColorPrimary, inactiveColorPrimary, activeColor};
+			int[] trackColors = {inactiveColorSecondary, inactiveColorSecondary, inactiveColorSecondary};
 
 			SwitchCompat sc = (SwitchCompat) compoundButton;
 			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getThumbDrawable()), new ColorStateList(states, thumbColors));
 			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getTrackDrawable()), new ColorStateList(states, trackColors));
 		} else if (compoundButton instanceof TintableCompoundButton) {
-			int[] colors = new int[] {inactiveColorPrimary, inactiveColorPrimary, activeColor};
+			int[] colors = {inactiveColorPrimary, inactiveColorPrimary, activeColor};
 			ColorStateList csl = new ColorStateList(states, colors);
 			((TintableCompoundButton) compoundButton).setSupportButtonTintList(csl);
 		}
@@ -604,7 +604,7 @@ public class UiUtilities {
 		ctx = new ContextThemeWrapper(ctx, themeId);
 
 		// colors
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {android.R.attr.state_enabled},
 				new int[] {-android.R.attr.state_enabled}
 		};
@@ -645,7 +645,7 @@ public class UiUtilities {
 		ctx = new ContextThemeWrapper(ctx, themeId);
 
 		// colors
-		int[][] states = new int[][] {
+		int[][] states = {
 				new int[] {android.R.attr.state_enabled},
 				new int[] {-android.R.attr.state_enabled}
 		};

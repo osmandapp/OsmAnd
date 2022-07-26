@@ -84,6 +84,14 @@
 		android:title="@string/location_source"
 		tools:icon="@drawable/ic_action_device_location" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="auto_backup_enabled"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/auto_backup_title"
+		tools:icon="@drawable/ic_action_android" />
+
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />

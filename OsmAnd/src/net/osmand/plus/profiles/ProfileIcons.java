@@ -50,10 +50,10 @@ public enum ProfileIcons {
 	LIGHT_AIRCRAFT(R.drawable.ic_action_light_aircraft, R.string.app_mode_light_aircraft, "ic_action_light_aircraft");
 
 	@DrawableRes
-	private int resId;
+	private final int resId;
 	@StringRes
-	private int titleId;
-	private String resStringId;
+	private final int titleId;
+	private final String resStringId;
 
 	ProfileIcons(@DrawableRes int resId, @StringRes int titleId, @NonNull String resStringId) {
 		this.resId = resId;

@@ -51,7 +51,7 @@ public class ContourLinesMenu {
 	private static final Log LOG = PlatformUtil.getLog(ContourLinesMenu.class);
 	private static final String TAG = "ContourLinesMenu";
 
-	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
+	public static ContextMenuAdapter createListAdapter(MapActivity mapActivity) {
 		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
@@ -59,24 +59,24 @@ public class ContourLinesMenu {
 		return adapter;
 	}
 
-	private static void createLayersItems(final ContextMenuAdapter contextMenuAdapter,
-										  final MapActivity mapActivity) {
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
-		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		final boolean srtmEnabled = OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app);
+	private static void createLayersItems(ContextMenuAdapter contextMenuAdapter,
+	                                      MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		boolean srtmEnabled = OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app);
 
-		final RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
-		final RenderingRuleProperty colorSchemeProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_SCHEME_ATTR);
+		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
+		RenderingRuleProperty colorSchemeProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_SCHEME_ATTR);
 		if (plugin == null || contourLinesProp == null || colorSchemeProp == null) {
 			return;
 		}
 
-		final String contourWidthName;
-		final String contourDensityName;
-		final CommonPreference<String> widthPref;
-		final CommonPreference<String> densityPref;
-		final RenderingRuleProperty contourWidthProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_WIDTH_ATTR);
+		String contourWidthName;
+		String contourDensityName;
+		CommonPreference<String> widthPref;
+		CommonPreference<String> densityPref;
+		RenderingRuleProperty contourWidthProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_WIDTH_ATTR);
 		if (contourWidthProp != null) {
 			contourWidthName = AndroidUtils.getRenderingStringPropertyName(app, contourWidthProp.getAttrName(),
 					contourWidthProp.getName());
@@ -85,7 +85,7 @@ public class ContourLinesMenu {
 			contourWidthName = null;
 			widthPref = null;
 		}
-		final RenderingRuleProperty contourDensityProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_DENSITY_ATTR);
+		RenderingRuleProperty contourDensityProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_DENSITY_ATTR);
 		if (contourDensityProp != null) {
 			contourDensityName = AndroidUtils.getRenderingStringPropertyName(app, contourDensityProp.getAttrName(),
 					contourDensityProp.getName());
@@ -95,11 +95,11 @@ public class ContourLinesMenu {
 			densityPref = null;
 		}
 
-		final CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
-		final CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
+		CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+		CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
-		final boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
+		boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+		int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 
@@ -227,7 +227,7 @@ public class ContourLinesMenu {
 					.setDescription(app.getString(R.string.shared_string_plugin))
 					.setListener(l));
 		} else {
-			final DownloadIndexesThread downloadThread = app.getDownloadThread();
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
 			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 				if (settings.isInternetConnectionAvailable()) {
 					downloadThread.runReloadIndexFiles();

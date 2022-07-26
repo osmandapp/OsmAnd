@@ -166,7 +166,7 @@ public class AndroidUtils {
 		return byteBuffer.array();
 	}
 
-	public static Bitmap createScaledBitmapWithTint(final Context ctx, @DrawableRes int drawableId, float scale, int tint) {
+	public static Bitmap createScaledBitmapWithTint(Context ctx, @DrawableRes int drawableId, float scale, int tint) {
 		Drawable drawableIcon = AppCompatResources.getDrawable(ctx, drawableId);
 		if (drawableIcon != null) {
 			DrawableCompat.setTint(DrawableCompat.wrap(drawableIcon), tint);
@@ -176,16 +176,14 @@ public class AndroidUtils {
 			bitmap = scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
 		}
-
 		return bitmap;
 	}
 
-	public static Bitmap createScaledBitmap(Drawable drawable, float scale) {
+	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, float scale) {
 		int width = (int) (drawable.getIntrinsicWidth() * scale);
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
 		width += width % 2 == 1 ? 1 : 0;
 		height += height % 2 == 1 ? 1 : 0;
-
 		return createScaledBitmap(drawable, width, height);
 	}
 
@@ -194,21 +192,17 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
-		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
+		return createCheckedColorStateList(ctx, nightMode,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
 
-	public static String addColon(OsmandApplication app, @StringRes int stringRes) {
+	public static String addColon(@NonNull OsmandApplication app, @StringRes int stringRes) {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
 	}
 
-	public static Uri getUriForFile(Context context, File file) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-			return Uri.fromFile(file);
-		} else {
-			return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
-		}
+	public static Uri getUriForFile(@NonNull Context context, @NonNull File file) {
+		return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
 	}
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
@@ -217,10 +211,11 @@ public class AndroidUtils {
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
 		try {
+			Intent selectedIntent = chooserIntent != null ? chooserIntent : intent;
 			if (!(context instanceof Activity)) {
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				selectedIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			}
-			context.startActivity(chooserIntent != null ? chooserIntent : intent);
+			context.startActivity(selectedIntent);
 			return true;
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e);
@@ -263,7 +258,7 @@ public class AndroidUtils {
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
 		Spannable spannable = new SpannableString(text);
 		for (String entry : chars) {
-			int i = text.indexOf(entry, 0);
+			int i = text.indexOf(entry);
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
@@ -339,8 +334,8 @@ public class AndroidUtils {
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {
-		long size = AndroidUtils.getAvailableSpace(dir);
-		return AndroidUtils.formatSize(ctx, size);
+		long size = getAvailableSpace(dir);
+		return formatSize(ctx, size);
 	}
 
 	public static View findParentViewById(View view, int id) {
@@ -362,8 +357,8 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createCheckedColorStateList(Context ctx, boolean night,
-															 @ColorRes int lightNormal, @ColorRes int lightChecked,
-															 @ColorRes int darkNormal, @ColorRes int darkChecked) {
+	                                                         @ColorRes int lightNormal, @ColorRes int lightChecked,
+	                                                         @ColorRes int darkNormal, @ColorRes int darkChecked) {
 		return createColorStateList(ctx, night, android.R.attr.state_checked,
 				lightNormal, lightChecked, darkNormal, darkChecked);
 	}
@@ -509,7 +504,7 @@ public class AndroidUtils {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		} else if (view instanceof FrameLayout) {
-			((FrameLayout) view).setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
+			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
 	}
 
@@ -558,13 +553,13 @@ public class AndroidUtils {
 		return (int) paint.measureText(text);
 	}
 
-	public static int getTextHeight(Paint paint) {
+	public static int getTextHeight(@NonNull Paint paint) {
 		Paint.FontMetrics fm = paint.getFontMetrics();
 		float height = fm.bottom - fm.top;
 		return (int) height;
 	}
 
-	public static int dpToPx(Context ctx, float dp) {
+	public static int dpToPx(@NonNull Context ctx, float dp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,
@@ -573,7 +568,18 @@ public class AndroidUtils {
 		);
 	}
 
-	public static int spToPx(Context ctx, float sp) {
+	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		float scaleCoef = app.getOsmandMap().getCarDensityScaleCoef();
+		Resources r = ctx.getResources();
+		return (int) (TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		) * scaleCoef);
+	}
+
+	public static int spToPx(@NonNull Context ctx, float sp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_SP,
@@ -678,29 +684,23 @@ public class AndroidUtils {
 	}
 
 	public static void showNavBar(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && !isNavBarVisible(activity)) {
+		if (!isNavBarVisible(activity)) {
 			switchNavBarVisibility(activity);
 		}
 	}
 
 	public static void hideNavBar(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19 && isNavBarVisible(activity)) {
+		if (isNavBarVisible(activity)) {
 			switchNavBarVisibility(activity);
 		}
 	}
 
 	public static boolean isNavBarVisible(Activity activity) {
-		if (Build.VERSION.SDK_INT >= 19) {
-			int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
-			return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
-		}
-		return true;
+		int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
+		return !((uiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == uiOptions);
 	}
 
-	public static void switchNavBarVisibility(Activity activity) {
-		if (Build.VERSION.SDK_INT < 19) {
-			return;
-		}
+	public static void switchNavBarVisibility(@NonNull Activity activity) {
 		View decorView = activity.getWindow().getDecorView();
 		int uiOptions = decorView.getSystemUiVisibility();
 		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
@@ -745,7 +745,7 @@ public class AndroidUtils {
 		}
 	}
 
-	private static void requestLayout(final View view) {
+	private static void requestLayout(View view) {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
 			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -753,11 +753,7 @@ public class AndroidUtils {
 				@Override
 				public void onGlobalLayout() {
 					ViewTreeObserver obs = view.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
-						obs.removeGlobalOnLayoutListener(this);
-					}
+					obs.removeOnGlobalLayoutListener(this);
 					view.requestLayout();
 				}
 			});
@@ -780,9 +776,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isScreenOn(Context context) {
-		PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH && powerManager.isInteractive()
-				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH && powerManager.isScreenOn();
+		PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+		return pm.isInteractive();
 	}
 
 	public static boolean isScreenLocked(Context context) {
@@ -888,7 +883,7 @@ public class AndroidUtils {
 
 	public static void setTextHorizontalGravity(@NonNull TextView tv, int hGravity) {
 		if (tv.getContext() != null) {
-			boolean isLayoutRtl = AndroidUtils.isLayoutRtl(tv.getContext());
+			boolean isLayoutRtl = isLayoutRtl(tv.getContext());
 			int gravity = Gravity.LEFT;
 			if (isLayoutRtl && (hGravity == Gravity.START)
 					|| !isLayoutRtl && hGravity == Gravity.END) {
@@ -927,11 +922,7 @@ public class AndroidUtils {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
-					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
-				} else {
-					return (long) (fs.getAvailableBlocks()) * fs.getBlockSize();
-				}
+				return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -943,11 +934,7 @@ public class AndroidUtils {
 		if (dir != null && dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
-					return fs.getBlockCountLong() * fs.getBlockSizeLong();
-				} else {
-					return (long) (fs.getBlockCount()) * fs.getBlockSize();
-				}
+				return fs.getBlockCountLong() * fs.getBlockSizeLong();
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -959,7 +946,7 @@ public class AndroidUtils {
 		if (dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+				return (float) (fs.getBlockSizeLong()) * fs.getAvailableBlocksLong() / (1 << 30);
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
 			}
@@ -1094,7 +1081,7 @@ public class AndroidUtils {
 				values.append(split);
 			}
 		}
-		return "INSERT INTO " + tableName + " (" + keys.toString() + ") VALUES (" + values.toString() + ")";
+		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {

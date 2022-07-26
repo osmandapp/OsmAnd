@@ -3988,7 +3988,6 @@ Lon %2$s</string>
     <string name="opr_use_dev_url">Empregar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sesión ao OpenPlaceReviews</string>
     <string name="snap_to_road_descr">A icona da posición actual será axustada á ruta de navegación actual</string>
-    <string name="map_orientation_threshold_descr">Non xirar a vista do mapa se a velocidade é inferior a un limiar</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as rexións</string>
     <string name="delete_number_files_question">Eliminar %1$d ficheiros\?</string>

@@ -119,7 +119,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 				long amenityId = am.getId() >> 1;
 				String baseUrl = OPRConstants.getBaseUrl(app);
 				String url = baseUrl + "api/objects-by-index?type=opr.place&index=osmid&key=" + amenityId;
-				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
+				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.emptyMap(),
 						"Requesting location images...", false, false);
 				if (response != null) {
 					getPicturesForPlace(holder, response);

@@ -7,6 +7,6 @@ import net.osmand.data.RotatedTileBox;
 // to be performed in touch exploration mode. Implementations
 // should do nothing and return false when accessibility is disabled.
 public interface AccessibilityActionsProvider {
-    public boolean onClick(PointF point, RotatedTileBox tileBox);
-    public boolean onLongClick(PointF point, RotatedTileBox tileBox);
+    boolean onClick(PointF point, RotatedTileBox tileBox);
+    boolean onLongClick(PointF point, RotatedTileBox tileBox);
 }

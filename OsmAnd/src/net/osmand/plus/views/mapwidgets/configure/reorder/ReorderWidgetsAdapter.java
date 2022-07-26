@@ -128,7 +128,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 				return new PageViewHolder(itemView);
 			case ADDED_WIDGET:
 				itemView = inflater.inflate(R.layout.configure_screen_list_item_widget_reorder, parent, false);
-				return new AddedWidgetViewHolder(itemView, ReorderWidgetsAdapter.this);
+				return new AddedWidgetViewHolder(itemView, this);
 			case ADD_PAGE_BUTTON:
 				itemView = inflater.inflate(R.layout.configure_screen_list_item_add_page, parent, false);
 				return new AddPageButtonViewHolder(itemView, profileColor);

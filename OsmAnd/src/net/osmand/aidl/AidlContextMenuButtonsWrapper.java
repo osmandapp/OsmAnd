@@ -10,13 +10,13 @@ public class AidlContextMenuButtonsWrapper {
 	private AidlContextMenuButtonWrapper leftButton;
 	private AidlContextMenuButtonWrapper rightButton;
 
-	private String id;
-	private String appPackage;
-	private String layerId;
+	private final String id;
+	private final String appPackage;
+	private final String layerId;
 
 	private long callbackId;
 
-	private List<String> pointsIds;
+	private final List<String> pointsIds;
 
 	public AidlContextMenuButtonsWrapper(ContextMenuButtonsParams params) {
 		id = params.getId();

@@ -6,10 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 
 import java.io.File;
@@ -27,7 +24,7 @@ public class TrackDisplayHelper {
 
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
-	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
+	private final List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 
 	public TrackDisplayHelper(OsmandApplication app) {
 		this.app = app;
@@ -114,16 +111,16 @@ public class TrackDisplayHelper {
 
 	public void updateDisplayGroups() {
 		modifiedTime = gpxFile.modifiedTime;
-		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
 		displayGroups = filteredGpxFile != null
-				? selectedGpxHelper.collectDisplayGroups(filteredGpxFile)
-				: selectedGpxHelper.collectDisplayGroups(gpxFile);
+				? displayHelper.collectDisplayGroups(filteredGpxFile)
+				: displayHelper.collectDisplayGroups(gpxFile);
 		originalGroups.clear();
 		for (GpxDisplayGroup g : displayGroups) {
 			originalGroups.add(g.cloneInstance());
 		}
 		if (file != null) {
-			SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+			SelectedGpxFile sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 			if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
 				displayGroups = sf.getDisplayGroups(app);
 			}
@@ -132,7 +129,7 @@ public class TrackDisplayHelper {
 
 	@NonNull
 	public List<GpxDisplayGroup> getPointsOriginalGroups() {
-		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {
+		GpxDisplayItemType[] filterTypes = {
 				GpxDisplayItemType.TRACK_POINTS,
 				GpxDisplayItemType.TRACK_ROUTE_POINTS
 		};

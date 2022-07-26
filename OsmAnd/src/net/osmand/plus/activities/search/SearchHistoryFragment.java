@@ -62,7 +62,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.search_history, container, false);
-		clearButton = (Button) view.findViewById(R.id.clearAll);
+		clearButton = view.findViewById(R.id.clearAll);
 		clearButton.setText(R.string.shared_string_clear_all);
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -188,7 +188,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		selectModel(model);
 	}
 
-	private void selectModel(final HistoryEntry model) {
+	private void selectModel(HistoryEntry model) {
 		PointDescription name = model.getName();
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 
@@ -202,8 +202,8 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
-	private void selectModelOptions(final HistoryEntry model, View v) {
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+	private void selectModelOptions(HistoryEntry model, View v) {
+		PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		MenuItem item = optionsMenu.getMenu().add(
 				R.string.shared_string_remove).setIcon(
 				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_delete_dark));
@@ -230,13 +230,13 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
 			}
-			final HistoryEntry historyEntry = getItem(position);
+			HistoryEntry historyEntry = getItem(position);
 			updateHistoryItem(historyEntry, row, location, getMyApplication());
 			TextView distanceText = row.findViewById(R.id.distance);
 			ImageView direction = row.findViewById(R.id.direction);
@@ -337,7 +337,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			}
 		}
 		if (activity instanceof SearchActivity) {
-			final View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
+			View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
 			if (selected != null) {
 				try {
 					int position = getListView().getPositionForView(selected);

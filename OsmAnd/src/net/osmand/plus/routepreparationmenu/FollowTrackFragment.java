@@ -50,7 +50,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -67,7 +67,7 @@ import java.util.List;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
-		MapControlsThemeInfoProvider, OnSegmentSelectedListener {
+		OnSegmentSelectedListener {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 
@@ -201,7 +201,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			} else {
 				sortButton.setVisibility(View.GONE);
 				SelectedTrackToFollowCard selectedTrackToFollowCard =
-						new SelectedTrackToFollowCard(mapActivity, FollowTrackFragment.this, gpxFile);
+						new SelectedTrackToFollowCard(mapActivity, this, gpxFile);
 				getCardsContainer().addView(selectedTrackToFollowCard.build(mapActivity));
 			}
 		}
@@ -215,8 +215,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
-				tracksCard = new TracksToFollowCard(mapActivity, FollowTrackFragment.this, list, defaultCategory);
-				tracksCard.setListener(FollowTrackFragment.this);
+				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
+				tracksCard.setListener(this);
 				getCardsContainer().addView(tracksCard.build(mapActivity));
 				sortButton.setVisibility(View.VISIBLE);
 			}
@@ -374,10 +374,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				importTrack();
 			} else if (card instanceof AttachTrackToRoadsCard) {
 				openPlanRoute(true);
-				close();
 			} else if (card instanceof TrackEditCard) {
 				openPlanRoute(false);
-				close();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
 			} else if (card instanceof ReverseTrackCard
@@ -424,12 +422,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean checkForSegments) {
+	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
 		this.gpxFile = gpxFile;
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, checkForSegments);
+			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, showSelectionDialog);
 		}
 	}
 
@@ -487,8 +485,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
-			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
+			editingContext.setSelectedSegment(app.getSettings().GPX_SEGMENT_INDEX.get());
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
+			close();
 		}
 	}
 
@@ -503,7 +502,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
@@ -515,7 +514,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void setupSortButton(View view) {
-		final ImageButton sortButton = view.findViewById(R.id.sort_button);
+		ImageButton sortButton = view.findViewById(R.id.sort_button);
 		int colorId = ColorUtilities.getInactiveButtonsAndLinksColorId(isNightMode());
 		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
 		sortButton.setImageResource(sortByMode.getIconId());
@@ -524,7 +523,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			@Override
 			public void onClick(View v) {
 				List<PopUpMenuItem> items = new ArrayList<>();
-				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+				for (TracksSortByMode mode : TracksSortByMode.values()) {
 					items.add(new PopUpMenuItem.Builder(app)
 							.setTitleId(mode.getNameId())
 							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
@@ -592,11 +591,24 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	@Override
 	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
-		app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+		app.getSettings().GPX_SEGMENT_INDEX.set(selectedSegment);
 		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (paramsBuilder != null) {
 			paramsBuilder.setSelectedSegment(selectedSegment);
+			app.getRoutingHelper().onSettingsChanged(true);
+		}
+		updateSelectionMode(false);
+	}
+
+
+	@Override
+	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+		app.getSettings().GPX_ROUTE_INDEX.set(selectedRoute);
+		selectTrackToFollow(gpxFile, false);
+		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedRoute(selectedRoute);
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		updateSelectionMode(false);

@@ -16,7 +16,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 
 public class OsmBugMenuController extends MenuController {
 
-	private OsmEditingPlugin plugin;
+	private final OsmEditingPlugin plugin;
 	private OpenStreetNote bug;
 
 	public OsmBugMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OpenStreetNote bug) {

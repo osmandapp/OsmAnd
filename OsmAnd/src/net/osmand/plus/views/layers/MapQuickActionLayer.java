@@ -260,13 +260,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		} else {
 		    enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
 		    quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
-		    quickActionRegistry.addUpdatesListener(MapQuickActionLayer.this);
-		    quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
+		    quickActionRegistry.addUpdatesListener(this);
+		    quickActionsWidget.setSelectionListener(this);
 		}
 		return true;
 	}
 
-    private void animateWidget(final boolean show) {
+    private void animateWidget(boolean show) {
 	    if (quickActionsWidget == null) {
 	        return;
         }

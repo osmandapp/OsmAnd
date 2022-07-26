@@ -5,14 +5,14 @@ import java.util.List;
 
 public class AidlSearchResultWrapper {
 
-	private double latitude;
-	private double longitude;
+	private final double latitude;
+	private final double longitude;
 
-	private String localName;
-	private String localTypeName;
+	private final String localName;
+	private final String localTypeName;
 
-	private String alternateName;
-	private List<String> otherNames = new ArrayList<>();
+	private final String alternateName;
+	private final List<String> otherNames = new ArrayList<>();
 
 	public AidlSearchResultWrapper(double latitude, double longitude, String localName, String localTypeName,
 	                               String alternateName, List<String> otherNames) {

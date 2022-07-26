@@ -12,7 +12,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -177,7 +177,7 @@ public enum ColoringType {
 
 	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
 	                                         @Nullable String attributeName, boolean route) {
-		if ((isRouteInfoAttribute() && route) || this == ColoringType.SLOPE) {
+		if ((isRouteInfoAttribute() && route) || this == SLOPE) {
 			return InAppPurchaseHelper.isOsmAndProAvailable(app);
 		}
 		return true;

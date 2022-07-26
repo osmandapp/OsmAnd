@@ -7,103 +7,140 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.TrackSelectSegmentAdapter.ItemViewHolder;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
-public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHolder> {
+	private static final int ROUTE_TYPE = 0;
+	private static final int SEGMENT_TYPE = 1;
 
 	private final OsmandApplication app;
-	private final LayoutInflater themedInflater;
 	private final UiUtilities iconsCache;
-	private final List<TitledSegment> titledSegments;
-	private OnItemClickListener onItemClickListener;
+	private final LayoutInflater themedInflater;
+	private final List<GpxItem> gpxItems;
 
-	public TrackSelectSegmentAdapter(Context ctx, GPXFile gpxFile) {
+	private OnItemClickListener listener;
+
+	public TrackSelectSegmentAdapter(@NonNull Context ctx, @NonNull GPXFile gpxFile) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
 		iconsCache = app.getUIUtilities();
-		this.titledSegments = getTitledSegments(gpxFile);
+		this.gpxItems = getGpxItems(gpxFile);
+	}
+
+	public void setAdapterListener(@NonNull OnItemClickListener listener) {
+		this.listener = listener;
 	}
 
 	@NonNull
-	private List<TitledSegment> getTitledSegments(GPXFile gpxFile) {
-		List<TitledSegment> titledSegments = new ArrayList<>();
-		for (Track track : gpxFile.tracks) {
-			if (track.generalTrack) {
-				continue;
-			}
+	private List<GpxItem> getGpxItems(@NonNull GPXFile gpxFile) {
+		List<GpxItem> gpxItems = new ArrayList<>();
+
+		int segmentIndex = 0;
+		for (Track track : gpxFile.getTracks(false)) {
 			for (TrkSegment segment : track.segments) {
-				String trackSegmentTitle = GpxSelectionHelper.buildTrackSegmentName(gpxFile, track, segment, app);
-				titledSegments.add(new TitledSegment(segment, trackSegmentTitle));
+				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, app);
+				gpxItems.add(new SegmentItem(segment, trackSegmentTitle, segmentIndex));
+				segmentIndex++;
 			}
 		}
-		return titledSegments;
+
+		for (int i = 0; i < gpxFile.routes.size(); i++) {
+			Route route = gpxFile.routes.get(i);
+			String title = GpxDisplayHelper.getRouteTitle(route, i, app);
+			gpxItems.add(new RouteItem(route, title, i));
+		}
+		return gpxItems;
 	}
 
 	@NonNull
 	@Override
-	public TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+	public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = themedInflater.inflate(R.layout.gpx_segment_list_item, parent, false);
 		ImageView distanceIcon = view.findViewById(R.id.distance_icon);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 		ImageView timeIcon = view.findViewById(R.id.time_icon);
 		timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
-		return new TrackViewHolder(view);
+
+		switch (viewType) {
+			case SEGMENT_TYPE:
+				return new SegmentViewHolder(view);
+			case ROUTE_TYPE:
+				return new RouteViewHolder(view);
+			default:
+				throw new IllegalArgumentException("Unsupported view type");
+		}
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final TrackViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 		holder.iconSegment.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 
-		TitledSegment titledSegment = titledSegments.get(position);
+		GpxItem gpxItem = gpxItems.get(position);
+		holder.name.setText(gpxItem.name);
 
-		holder.name.setText(titledSegment.name);
-
-		double distance = getDistance(titledSegment.segment);
-		long time = getSegmentTime(titledSegment.segment);
-		if (time != 1) {
-			holder.timeIcon.setVisibility(View.VISIBLE);
-			holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
-		} else {
-			holder.timeIcon.setVisibility(View.GONE);
-			holder.time.setText("");
+		long time = 0;
+		double distance = 0;
+		if (holder instanceof SegmentViewHolder) {
+			SegmentItem item = (SegmentItem) gpxItem;
+			time = getSegmentTime(item.segment.points);
+			distance = getDistance(item.segment.points);
+		} else if (holder instanceof RouteViewHolder) {
+			RouteItem item = (RouteItem) gpxItem;
+			time = getSegmentTime(item.route.points);
+			distance = getDistance(item.route.points);
 		}
+		String formattedTime = time > 0 ? OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)) : "";
+		holder.time.setText(formattedTime);
 		holder.distance.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
-		holder.itemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onItemClickListener != null) {
-					onItemClickListener.onItemClick(holder.getAdapterPosition());
-				}
+		AndroidUiHelper.updateVisibility(holder.timeIcon, time > 0);
+
+		holder.itemView.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.onItemClick(gpxItems.get(holder.getAdapterPosition()));
 			}
 		});
 	}
 
 	@Override
-	public int getItemCount() {
-		return titledSegments.size();
+	public int getItemViewType(int position) {
+		GpxItem gpxItem = gpxItems.get(position);
+		if (gpxItem instanceof SegmentItem) {
+			return SEGMENT_TYPE;
+		} else if (gpxItem instanceof RouteItem) {
+			return ROUTE_TYPE;
+		} else {
+			throw new IllegalArgumentException("Unsupported view type");
+		}
 	}
 
-	public static long getSegmentTime(TrkSegment segment) {
+	@Override
+	public int getItemCount() {
+		return gpxItems.size();
+	}
+
+	public static long getSegmentTime(@NonNull List<WptPt> points) {
 		long startTime = Long.MAX_VALUE;
 		long endTime = Long.MIN_VALUE;
-		for (int i = 0; i < segment.points.size(); i++) {
-			WptPt point = segment.points.get(i);
+		for (WptPt point : points) {
 			long time = point.time;
 			if (time != 0) {
 				startTime = Math.min(startTime, time);
@@ -113,30 +150,26 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		return endTime - startTime;
 	}
 
-	public static double getDistance(TrkSegment segment) {
+	public static double getDistance(@NonNull List<WptPt> points) {
 		double distance = 0;
 		WptPt prevPoint = null;
-		for (int i = 0; i < segment.points.size(); i++) {
-			WptPt point = segment.points.get(i);
+		for (WptPt point : points) {
 			if (prevPoint != null) {
-				distance += MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(), point.getLatitude(), point.getLongitude());
+				distance += MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(),
+						point.getLatitude(), point.getLongitude());
 			}
 			prevPoint = point;
 		}
 		return distance;
 	}
 
-	public void setAdapterListener(OnItemClickListener onItemClickListener) {
-		this.onItemClickListener = onItemClickListener;
-	}
-
 	public interface OnItemClickListener {
 
-		void onItemClick(int position);
+		void onItemClick(@NonNull GpxItem item);
 
 	}
 
-	static class TrackViewHolder extends RecyclerView.ViewHolder {
+	abstract static class ItemViewHolder extends ViewHolder {
 
 		ImageView iconSegment;
 		ImageView timeIcon;
@@ -144,7 +177,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		TextView distance;
 		TextView time;
 
-		TrackViewHolder(View itemView) {
+		ItemViewHolder(View itemView) {
 			super(itemView);
 			iconSegment = itemView.findViewById(R.id.icon);
 			timeIcon = itemView.findViewById(R.id.time_icon);
@@ -154,14 +187,49 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 		}
 	}
 
-	static class TitledSegment {
+	static class SegmentViewHolder extends ItemViewHolder {
 
-		TrkSegment segment;
-		String name;
+		SegmentViewHolder(View itemView) {
+			super(itemView);
+		}
+	}
 
-		TitledSegment(TrkSegment segment, String name) {
-			this.segment = segment;
+
+	static class RouteViewHolder extends ItemViewHolder {
+
+		RouteViewHolder(View itemView) {
+			super(itemView);
+		}
+	}
+
+	public abstract static class GpxItem {
+
+		final String name;
+		public final int index;
+
+		GpxItem(@NonNull String name, int index) {
 			this.name = name;
+			this.index = index;
+		}
+	}
+
+	public static class SegmentItem extends GpxItem {
+
+		final TrkSegment segment;
+
+		SegmentItem(@NonNull TrkSegment segment, @NonNull String name, int index) {
+			super(name, index);
+			this.segment = segment;
+		}
+	}
+
+	public static class RouteItem extends GpxItem {
+
+		final Route route;
+
+		RouteItem(@NonNull Route route, @NonNull String name, int index) {
+			super(name, index);
+			this.route = route;
 		}
 	}
 }

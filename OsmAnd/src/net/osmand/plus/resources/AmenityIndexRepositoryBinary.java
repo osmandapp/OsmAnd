@@ -33,9 +33,9 @@ import java.util.Map;
 
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
-	private final static Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
-	private BinaryMapReaderResource resource;
-	private MapPoiTypes poiTypes;
+	private static final Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
+	private final BinaryMapReaderResource resource;
+	private final MapPoiTypes poiTypes;
 	private Map<String, List<String>> deltaPoiCategories = new HashMap<>();
 
 	public AmenityIndexRepositoryBinary(BinaryMapReaderResource resource, OsmandApplication app) {
@@ -176,7 +176,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
-													  final SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
+													  SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
 				filter, matcher);
@@ -197,7 +197,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Override
-	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, final SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
+	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		List<Amenity> result = null;
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(locations, radius,

@@ -9,19 +9,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 public class GpxItemMenuBuilder extends MenuBuilder {
-	private GpxDisplayItem item;
+
+	private final GpxDisplayItem item;
 
 	public GpxItemMenuBuilder(@NonNull MapActivity mapActivity, @NonNull GpxDisplayItem item) {
 		super(mapActivity);

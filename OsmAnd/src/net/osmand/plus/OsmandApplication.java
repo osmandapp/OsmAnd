@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
-import android.annotation.SuppressLint;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -16,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -97,6 +98,7 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -127,9 +129,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
-
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -164,6 +163,7 @@ public class OsmandApplication extends MultiDexApplication {
 	FavouritesHelper favoritesHelper;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
+	GpxDisplayHelper gpxDisplayHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	NotificationHelper notificationHelper;
@@ -388,7 +388,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public SavingTrackHelper getSavingTrackHelper() {
 		return savingTrackHelper;
 	}
-	
+
+	public AnalyticsHelper getAnalyticsHelper() {
+		return analyticsHelper;
+	}
+
 	public NotificationHelper getNotificationHelper() {
 		return notificationHelper;
 	}
@@ -407,6 +411,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public GpxSelectionHelper getSelectedGpxHelper() {
 		return selectedGpxHelper;
+	}
+
+	public GpxDisplayHelper getGpxDisplayHelper() {
+		return gpxDisplayHelper;
 	}
 
 	public GpxDbHelper getGpxDbHelper() {
@@ -467,10 +475,6 @@ public class OsmandApplication extends MultiDexApplication {
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
-			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
-			if (Build.VERSION.SDK_INT < 14) {
-				newConfig.locale = preferredLocale;
-			}
 			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
 			Locale.setDefault(preferredLocale);
 		} else {
@@ -694,7 +698,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		@Override
-		public void uncaughtException(final Thread thread, final Throwable ex) {
+		public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
 			File file = getAppPath(EXCEPTION_PATH);
 			try {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -714,9 +718,9 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				msg.append("\n")
 						.append("Exception occured in thread ")
-						.append(thread.toString())
+						.append(thread)
 						.append(" : \n")
-						.append(out.toString());
+						.append(out);
 
 				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
@@ -725,11 +729,7 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					if (Build.VERSION.SDK_INT >= 19) {
-						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					} else {
-						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					}
+					mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
 					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
@@ -752,9 +752,9 @@ public class OsmandApplication extends MultiDexApplication {
 		return mapMarkersDbHelper;
 	}
 
-	public void showShortToastMessage(final int msgId, final Object... args) {
+	public void showShortToastMessage(int msgId, Object... args) {
 		uiHandler.post(() -> {
-			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
 			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
@@ -763,9 +763,9 @@ public class OsmandApplication extends MultiDexApplication {
 		});
 	}
 
-	public void showShortToastMessage(final String msg) {
+	public void showShortToastMessage(String msg) {
 		uiHandler.post(() -> {
-			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
 			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
@@ -774,9 +774,9 @@ public class OsmandApplication extends MultiDexApplication {
 		});
 	}
 
-	public void showToastMessage(final int msgId, final Object... args) {
+	public void showToastMessage(int msgId, Object... args) {
 		uiHandler.post(() -> {
-			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
 			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
@@ -788,7 +788,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public void showToastMessage(@Nullable String text) {
 		if (!Algorithms.isEmpty(text)) {
 			uiHandler.post(() -> {
-				Toast.makeText(OsmandApplication.this, text, Toast.LENGTH_LONG).show();
+				Toast.makeText(this, text, Toast.LENGTH_LONG).show();
 				NavigationSession carNavigationSession = this.carNavigationSession;
 				if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 					CarToast.makeText(carNavigationSession.getCarContext(),
@@ -810,7 +810,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.postDelayed(run, delay);
 	}
 	
-	public void runMessageInUIThreadAndCancelPrevious(final int messageId, final Runnable run, long delay) {
+	public void runMessageInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
 		Message msg = Message.obtain(uiHandler, new Runnable() {
 			
 			@Override
@@ -953,7 +953,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
 		if (!OsmandPlugin.isActive(AccessibilityPlugin.class)) {
 			return false;
 		}
@@ -988,11 +988,10 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(int intent) {
-		final Intent serviceIntent = new Intent(this, NavigationService.class);
+		Intent serviceIntent = new Intent(this, NavigationService.class);
 		if (getNavigationService() != null) {
 			intent |= getNavigationService().getUsedBy();
 			getNavigationService().stopSelf();
-			
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -1004,7 +1003,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startDownloadService() {
-		final Intent serviceIntent = new Intent(this, DownloadService.class);
+		Intent serviceIntent = new Intent(this, DownloadService.class);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent);
@@ -1046,25 +1045,17 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	@SuppressLint("HardwareIds")
 	public String getUserAndroidId() {
 		String userAndroidId = osmandSettings.USER_ANDROID_ID.get();
 		if (!Algorithms.isEmpty(userAndroidId)) {
 			return userAndroidId;
 		}
-		try {
-			userAndroidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-		} catch (Exception e) {
-			// ignore
-		}
-		if (userAndroidId == null || userAndroidId.length() < 16 || userAndroidId.equals("0000000000000000")) {
-			userAndroidId = UUID.randomUUID().toString();
-		}
+		userAndroidId = UUID.randomUUID().toString();
 		osmandSettings.USER_ANDROID_ID.set(userAndroidId);
 		return userAndroidId;
 	}
 
-	public void logEvent(String event) {
+	public void logEvent(@NonNull String event) {
 		try {
 			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_APP_USAGE);
 		} catch (Exception e) {
@@ -1072,7 +1063,15 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logMapDownloadEvent(String event, IndexItem item) {
+	public void logRoutingEvent(@NonNull String event) {
+		try {
+			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_ROUTING);
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+
+	public void logMapDownloadEvent(@NonNull String event, @NonNull IndexItem item) {
 		try {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName(), AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
@@ -1080,7 +1079,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logMapDownloadEvent(String event, IndexItem item, long time) {
+	public void logMapDownloadEvent(@NonNull String event, @NonNull IndexItem item, long time) {
 		try {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec", AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
@@ -1097,7 +1096,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void sendCrashLog() {
-		File file = getAppPath(OsmandApplication.EXCEPTION_PATH);
+		File file = getAppPath(EXCEPTION_PATH);
 		sendCrashLog(file);
 	}
 

@@ -140,11 +140,8 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		if(super.filterObject(obj, filter)){
 			return true;
 		}
-		if(obj.belongsToInterpolation(filter)){
-			return true;
-		}
-		return false;
-		
+		return obj.belongsToInterpolation(filter);
+
 	}
 
 

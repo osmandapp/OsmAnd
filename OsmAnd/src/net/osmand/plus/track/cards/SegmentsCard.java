@@ -23,9 +23,9 @@ import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -37,7 +37,7 @@ import java.util.List;
 public class SegmentsCard extends MapBaseCard {
 
 	private final TrackDisplayHelper displayHelper;
-	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+	private final GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 	private final SegmentActionsListener listener;
 	private final SelectedGpxFile selectedGpxFile;
 	private final SelectedGpxPoint gpxPoint;
@@ -110,7 +110,7 @@ public class SegmentsCard extends MapBaseCard {
 		boolean showEmptyRoutes = items.isEmpty() && !selectedGpxFile.isShowCurrentTrack();
 		AndroidUiHelper.updateVisibility(noRoutesContainer, showEmptyRoutes);
 		AndroidUiHelper.updateVisibility(recyclerView, !showEmptyRoutes);
-		createRoutesButton.setOnClickListener(v -> SegmentsCard.this.notifyButtonPressed(EDIT_BUTTON_INDEX));
+		createRoutesButton.setOnClickListener(v -> notifyButtonPressed(EDIT_BUTTON_INDEX));
 	}
 
 	private void updateLocationOnMap(@NonNull List<GpxDisplayItem> displayItems) {

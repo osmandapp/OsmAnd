@@ -15,14 +15,14 @@ import java.util.Map;
 
 public class CustomIndexItem extends IndexItem {
 
-	private String subfolder;
-	private String downloadUrl;
+	private final String subfolder;
+	private final String downloadUrl;
 
-	private Map<String, String> names;
-	private Map<String, String> firstSubNames;
-	private Map<String, String> secondSubNames;
+	private final Map<String, String> names;
+	private final Map<String, String> firstSubNames;
+	private final Map<String, String> secondSubNames;
 
-	private DownloadDescriptionInfo descriptionInfo;
+	private final DownloadDescriptionInfo descriptionInfo;
 
 	public CustomIndexItem(String fileName,
 	                       String subfolder,

@@ -23,8 +23,10 @@ import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IBillboardMapSymbol;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
+import net.osmand.core.jni.IOnPathMapSymbol;
 import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
+import net.osmand.core.jni.MapSymbol;
 import net.osmand.core.jni.MapSymbolInformationList;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
 import net.osmand.core.jni.ObfMapObject;
@@ -32,6 +34,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.RasterMapSymbol;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
@@ -137,7 +140,7 @@ class MapSelectionHelper {
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
 				s.clear();
-				final IContextMenuProvider provider = (IContextMenuProvider) layer;
+				IContextMenuProvider provider = (IContextMenuProvider) layer;
 				provider.collectObjectsFromPoint(point, tileBox, s, unknownLocation);
 				for (Object o : s) {
 					selectedObjects.put(o, provider);
@@ -231,7 +234,9 @@ class MapSelectionHelper {
 				} else if (isRoute) {
 					addRoute(result, tileBox, point);
 				} else {
-					addRenderedObject(result, renderedObject, searchLatLon);
+					if (!addAmenity(result, renderedObject, searchLatLon)) {
+						result.selectedObjects.put(renderedObject, null);
+					}
 				}
 			}
 		}
@@ -247,11 +252,12 @@ class MapSelectionHelper {
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
-				IBillboardMapSymbol billboardMapSymbol;
+				IBillboardMapSymbol billboardMapSymbol = null;
+				Amenity amenity = null;
+				net.osmand.core.jni.Amenity jniAmenity = null;
 				try {
 					billboardMapSymbol = IBillboardMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-				} catch (Exception eBillboard) {
-					billboardMapSymbol = null;
+				} catch (Exception ignore) {
 				}
 				if (billboardMapSymbol != null) {
 					double lat = Utilities.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
@@ -271,59 +277,104 @@ class MapSelectionHelper {
 						result.objectLatLon = new LatLon(lat, lon);
 					}
 
-					Amenity amenity = null;
-					net.osmand.core.jni.Amenity jniAmenity;
 					try {
 						jniAmenity = AmenitySymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getAmenity();
-					} catch (Exception eAmenity) {
-						jniAmenity = null;
+					} catch (Exception ignore) {
 					}
-					if (jniAmenity != null) {
-						List<String> names = getValues(jniAmenity.getLocalizedNames());
-						names.add(jniAmenity.getNativeName());
-						long id = jniAmenity.getId().getId().longValue() >> 7;
-						amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
-					} else {
-						MapObject mapObject;
+				} else {
+					result.objectLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox, point.x, point.y);
+				}
+				if (jniAmenity != null) {
+					List<String> names = getValues(jniAmenity.getLocalizedNames());
+					names.add(jniAmenity.getNativeName());
+					long id = jniAmenity.getId().getId().longValue() >> 7;
+					amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
+				} else {
+					MapObject mapObject;
+					try {
+						mapObject = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getMapObject();
+					} catch (Exception eMapObject) {
+						mapObject = null;
+					}
+					if (mapObject != null) {
+						ObfMapObject obfMapObject;
 						try {
-							mapObject = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getMapObject();
-						} catch (Exception eMapObject) {
-							mapObject = null;
+							obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
+						} catch (Exception eObfMapObject) {
+							obfMapObject = null;
 						}
-						if (mapObject != null) {
-							ObfMapObject obfMapObject;
-							try {
-								obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
-							} catch (Exception eObfMapObject) {
-								obfMapObject = null;
-							}
-							if (obfMapObject != null) {
-								Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
-								boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
-								if (isRoute) {
-									addRoute(result, tileBox, point);
-								} else {
-									List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
-									names.add(obfMapObject.getCaptionInNativeLanguage());
-									long id = obfMapObject.getId().getId().longValue() >> 7;
-									amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
-									if (amenity != null && mapObject.getPoints31().size() > 1) {
-										QVectorPointI points31 = mapObject.getPoints31();
-										for (int k = 0; k < points31.size(); k++) {
-											amenity.getX().add(points31.get(k).getX());
-											amenity.getY().add(points31.get(k).getY());
-										}
+						if (obfMapObject != null) {
+							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
+							boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
+							if (isRoute) {
+								addRoute(result, tileBox, point);
+							} else {
+								IOnPathMapSymbol onPathMapSymbol = null;
+								try {
+									onPathMapSymbol = IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+								} catch (Exception ignore) {
+								}
+								if (onPathMapSymbol == null) {
+									amenity = getAmenity(result.objectLatLon, obfMapObject);
+									if (amenity == null) {
+										addRenderedObject(result, symbolInfo, obfMapObject);
 									}
 								}
 							}
 						}
 					}
-					if (amenity != null && isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
-						result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
-					}
+				}
+				if (amenity != null && isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
+					result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
 				}
 			}
 		}
+	}
+
+	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
+	                               @NonNull ObfMapObject obfMapObject) {
+		RasterMapSymbol rasterMapSymbol;
+		try {
+			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+		} catch (Exception eRasterMapSymbol) {
+			rasterMapSymbol = null;
+		}
+		if (rasterMapSymbol != null) {
+			RenderedObject renderedObject = new RenderedObject();
+			renderedObject.setId(obfMapObject.getId().getId().longValue());
+			QVectorPointI points31 = obfMapObject.getPoints31();
+			for (int k = 0; k < points31.size(); k++) {
+				PointI pointI = points31.get(k);
+				renderedObject.addLocation(pointI.getX(), pointI.getY());
+			}
+			double lat = MapUtils.get31LatitudeY(obfMapObject.getLabelCoordinateY());
+			double lon = MapUtils.get31LongitudeX(obfMapObject.getLabelCoordinateX());
+			renderedObject.setLabelLatLon(new LatLon(lat, lon));
+
+			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
+				renderedObject.setName(rasterMapSymbol.getContent());
+			}
+			result.selectedObjects.put(renderedObject, null);
+		}
+	}
+
+	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {
+		Amenity amenity;
+		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
+		String caption = obfMapObject.getCaptionInNativeLanguage();
+		if (!caption.isEmpty()) {
+			names.add(caption);
+		}
+		long id = obfMapObject.getId().getId().longValue() >> 7;
+		amenity = findAmenity(app, latLon, names, id, AMENITY_SEARCH_RADIUS);
+		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
+			QVectorPointI points31 = obfMapObject.getPoints31();
+			for (int k = 0; k < points31.size(); k++) {
+				amenity.getX().add(points31.get(k).getX());
+				amenity.getY().add(points31.get(k).getY());
+			}
+		}
+		return amenity;
 	}
 
 	private void addTravelGpx(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @Nullable String filter) {
@@ -374,7 +425,7 @@ class MapSelectionHelper {
 	                                   @NonNull QuadRect rect, double searchDistance) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter);
+		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		List<NetworkRouteSegment> segmentList = new ArrayList<>();
 		try {
 			segmentList.addAll(routeSelector.getFirstSegments(rect, null, searchDistance));
@@ -400,7 +451,7 @@ class MapSelectionHelper {
 		return true;
 	}
 
-	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
+	private boolean addAmenity(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
 		Amenity amenity = findAmenity(app, searchLatLon, object.getOriginalNames(), object.getId() >> 7, AMENITY_SEARCH_RADIUS);
 		if (amenity != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
@@ -410,9 +461,9 @@ class MapSelectionHelper {
 			if (isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
 				result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
 			}
-		} else {
-			result.selectedObjects.put(object, null);
+			return true;
 		}
+		return false;
 	}
 
 	private boolean isUniqueAmenity(@NonNull Set<Object> set, @NonNull Amenity amenity) {

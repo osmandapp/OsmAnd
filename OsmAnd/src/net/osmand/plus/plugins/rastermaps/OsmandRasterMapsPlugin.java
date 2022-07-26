@@ -1,5 +1,12 @@
 package net.osmand.plus.plugins.rastermaps;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -44,18 +51,10 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -112,13 +111,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
-		underlayListener = change -> app.runInUIThread(() -> {
+	public boolean init(@NonNull OsmandApplication app, Activity activity) {
+		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
+		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
+
+		underlayListener = change -> {
 			boolean selected = settings.MAP_UNDERLAY.get() != null;
+			hidePolygonsPref.set(selected);
+			hideWaterPolygonsPref.set(selected);
+
 			if (updateConfigureMapItemCallback != null) {
 				updateConfigureMapItemCallback.processResult(selected);
 			}
-		});
+		};
 		settings.MAP_UNDERLAY.addListener(underlayListener);
 		return true;
 	}
@@ -163,19 +168,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			overlayLayer.setMap(null);
 		}
 		// Underlay
-		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
-		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
 		if (isActive()) {
-			if (updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap)) {
-				boolean selected = settings.MAP_UNDERLAY.get() != null;
-				hidePolygonsPref.set(selected);
-				hideWaterPolygonsPref.set(selected);
-			}
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, ZORDER_UNDERLAY, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
-			if (underlayLayer.getMap() != null) {
-				hidePolygonsPref.set(false);
-				hideWaterPolygonsPref.set(false);
-			}
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
 		}
@@ -215,12 +210,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public void selectMapOverlayLayer(@NonNull final CommonPreference<String> mapPref,
-									  @NonNull final CommonPreference<String> exMapPref,
+	public void selectMapOverlayLayer(@NonNull CommonPreference<String> mapPref,
+									  @NonNull CommonPreference<String> exMapPref,
 									  boolean force,
 									  @NonNull MapActivity mapActivity,
-									  @Nullable final OnMapSelectedCallback callback) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+									  @Nullable OnMapSelectedCallback callback) {
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		if (!force && exMapPref.get() != null) {
 			mapPref.set(exMapPref.get());
 			updateMapLayers(mapActivity, mapActivity, mapPref);
@@ -231,9 +226,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		OsmandSettings settings = app.getSettings();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
-		final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+		ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(mapActivity)));
-		final String[] items = new String[entriesMap.size() + 1];
+		String[] items = new String[entriesMap.size() + 1];
 		int i = 0;
 		for (String it : entriesMap.values()) {
 			items[i++] = it;
@@ -247,9 +242,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			if (which == items.length - 1) {
 				installMapLayers(mapActv, new ResultMatcher<TileSourceTemplate>() {
-					TileSourceTemplate template = null;
-					int count = 0;
-					boolean cancel = false;
+					TileSourceTemplate template;
+					int count;
+					boolean cancel;
 
 					@Override
 					public boolean publish(TileSourceTemplate object) {
@@ -302,7 +297,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
@@ -325,7 +320,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
-			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  @Nullable View view, @NonNull ContextMenuItem item,
 			                                  boolean isChecked) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity == null || mapActivity.isFinishing()) {
@@ -436,38 +431,55 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
-	                                          final double latitude, final double longitude,
+	                                          double latitude, double longitude,
 	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
 		if (configureMenu || mapTileLayer) {
-			ContextMenuItem item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
-					.setTitleId(R.string.shared_string_download_map, mapActivity)
-					.setIcon(R.drawable.ic_action_import)
-					.setOrder(DOWNLOAD_MAP_ITEM_ORDER);
-
-			if (mapTileLayer) {
-				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-				ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
-					MapActivity mapActivity1 = mapActivityRef.get();
-					if (AndroidUtils.isActivityNotDestroyed(mapActivity1)) {
-						OsmandApplication app = mapActivity1.getMyApplication();
-						if (DownloadTilesFragment.shouldShowDialog(app)) {
-							DownloadTilesFragment.showInstance(mapActivity1.getSupportFragmentManager());
-						} else {
-							app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
-						}
-					}
-					return true;
-				};
-				item.setListener(listener);
-			}
-			adapter.addItem(item);
+			adapter.addItem(createMapMenuItem(mapActivity, mapTileLayer, true));
+			adapter.addItem(createMapMenuItem(mapActivity, mapTileLayer, false));
 		}
 	}
 
-	public static void installMapLayers(@NonNull Activity activity, final ResultMatcher<TileSourceTemplate> result) {
-		final WeakReference<Activity> activityRef = new WeakReference<>(activity);
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+	@NonNull
+	private ContextMenuItem createMapMenuItem(@NonNull MapActivity mapActivity,
+	                                          boolean mainMapTileLayer,
+	                                          boolean updateTiles) {
+		ContextMenuItem item;
+		if (updateTiles) {
+			item = new ContextMenuItem(MAP_CONTEXT_MENU_UPDATE_MAP)
+					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
+					.setIcon(R.drawable.ic_action_refresh_dark)
+					.setOrder(UPDATE_MAP_ITEM_ORDER);
+		} else {
+			item = new ContextMenuItem(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
+					.setTitleId(R.string.shared_string_download_map, mapActivity)
+					.setIcon(R.drawable.ic_action_import)
+					.setOrder(DOWNLOAD_MAP_ITEM_ORDER);
+		}
+
+		if (mainMapTileLayer) {
+			WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+			ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
+				MapActivity activity = mapActivityRef.get();
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					OsmandApplication app = activity.getMyApplication();
+					if (DownloadTilesFragment.shouldShowDialog(app)) {
+						DownloadTilesFragment.showInstance(activity.getSupportFragmentManager(), updateTiles);
+					} else {
+						app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
+					}
+				}
+				return true;
+			};
+			item.setListener(listener);
+		}
+
+		return item;
+	}
+
+	public static void installMapLayers(@NonNull Activity activity, ResultMatcher<TileSourceTemplate> result) {
+		WeakReference<Activity> activityRef = new WeakReference<>(activity);
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.isInternetConnectionAvailable(true)) {
 			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
@@ -479,7 +491,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
 			}
 
-			protected void onPostExecute(final java.util.List<TileSourceTemplate> downloaded) {
+			protected void onPostExecute(java.util.List<TileSourceTemplate> downloaded) {
 				Activity activity = activityRef.get();
 				if (activity == null || activity.isFinishing()) {
 					return;
@@ -494,7 +506,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				for (int i = 0; i < names.length; i++) {
 					names[i] = downloaded.get(i).getName();
 				}
-				final boolean[] selected = new boolean[downloaded.size()];
+				boolean[] selected = new boolean[downloaded.size()];
 				boolean nightMode = isNightMode(activity);
 				int themeResId = getThemeRes(activity);
 				int selectedProfileColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
@@ -573,7 +585,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
-		final LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
+		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
 			OsmandRasterMapsPlugin.RasterMapType.OVERLAY
 			? LayerTransparencySeekbarMode.OVERLAY
 			: LayerTransparencySeekbarMode.UNDERLAY;

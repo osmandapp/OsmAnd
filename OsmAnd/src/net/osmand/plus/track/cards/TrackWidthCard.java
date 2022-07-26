@@ -36,9 +36,9 @@ import java.util.List;
 
 public class TrackWidthCard extends MapBaseCard {
 
-	private final static String CUSTOM_WIDTH = "custom_width";
-	private final static int CUSTOM_WIDTH_MIN = 1;
-	private final static int CUSTOM_WIDTH_MAX = 24;
+	private static final String CUSTOM_WIDTH = "custom_width";
+	private static final int CUSTOM_WIDTH_MIN = 1;
+	private static final int CUSTOM_WIDTH_MAX = 24;
 
 	private final TrackDrawInfo trackDrawInfo;
 	private final OnNeedScrollListener onNeedScrollListener;
@@ -107,7 +107,7 @@ public class TrackWidthCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 
 		View headerView = view.findViewById(R.id.header_view);
-		headerView.setBackgroundDrawable(null);
+		headerView.setBackground(null);
 
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.select_track_width);
@@ -142,7 +142,7 @@ public class TrackWidthCard extends MapBaseCard {
 				widthSlider.setValue(1);
 			}
 
-			final TextView selectedCustomWidth = view.findViewById(R.id.width_value_tv);
+			TextView selectedCustomWidth = view.findViewById(R.id.width_value_tv);
 			widthSlider.addOnChangeListener(new Slider.OnChangeListener() {
 				@Override
 				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
@@ -205,7 +205,7 @@ public class TrackWidthCard extends MapBaseCard {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
 			AppearanceListItem item = items.get(position);
 			holder.title.setText(item.getLocalizedValue());
 

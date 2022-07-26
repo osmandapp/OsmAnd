@@ -626,7 +626,7 @@
     <string name="poi_military_landuse">Zone militaire</string>
     <string name="poi_wine">Caviste</string>
     <string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
-    <string name="poi_halt">Gare ferroviaire</string>
+    <string name="poi_halt">Arrêt de chemin de fer ; Arrêt de train ; Gare de chemin de fer ; Gare ferroviaire ; Gare ; Station</string>
     <string name="poi_lodging">Hébergement</string>
     <string name="poi_apartment">Meublé de tourisme</string>
     <string name="poi_internet_access_wlan">Accès Internet : sans-fil</string>
@@ -684,7 +684,7 @@
     <string name="poi_fuel_octane_91">Octane 91</string>
     <string name="poi_fuel_octane_92">Octane 92</string>
     <string name="poi_fuel_octane_95">Sans plomb 95</string>
-    <string name="poi_fuel_octane_98">sans plomb 98</string>
+    <string name="poi_fuel_octane_98">Sans plomb 98</string>
     <string name="poi_fuel_octane_100">Octane 100</string>
     <string name="poi_fuel_ethanol">Éthanol</string>
     <string name="poi_fuel_methanol">Méthanol</string>
@@ -1973,7 +1973,7 @@
     <string name="poi_outdoor_seating">Places assises extérieures</string>
     <string name="poi_smoking">Fumeur</string>
     <string name="poi_delivery">Livraison</string>
-    <string name="poi_drive_in">Drive-in</string>
+    <string name="poi_drive_in">Drive</string>
     <string name="poi_drive_through">Drive</string>
     <string name="poi_takeaway">À emporter</string>
     <string name="poi_cocktails">Cocktails</string>
@@ -2195,7 +2195,7 @@
     <string name="poi_diet_vegetarian_filter_yes">Végétarien</string>
     <string name="poi_diet_halal_filter_yes">Halal</string>
     <string name="poi_diet_lactose_free_filter_yes">Sans lactose</string>
-    <string name="poi_drive_in_yes">Oui ; Drive-in</string>
+    <string name="poi_drive_in_yes">Oui ; Drive</string>
     <string name="poi_drive_through_yes">Oui ; passage en voiture</string>
     <string name="poi_takeaway_filter_yes">Oui ; à emporter</string>
     <string name="poi_delivery_filter_yes">Oui ; livraison</string>
@@ -2337,7 +2337,7 @@
     <string name="poi_diet_kosher_yes">Casher</string>
     <string name="poi_diet_kosher_no">Régime casher : non</string>
     <string name="poi_diet_pescetarian_yes">Pesco-végétarien</string>
-    <string name="poi_drive_in_no">Drive-in : non</string>
+    <string name="poi_drive_in_no">Drive : non</string>
     <string name="poi_payment_icsf_yes">IC Stored Fare</string>
     <string name="poi_payment_icsf_no">Cartes IC Stored Fare non acceptées</string>
     <string name="poi_icao">Code OACI</string>
@@ -4341,4 +4341,5 @@
     <string name="poi_club_aviation">Club d\'aviation</string>
     <string name="poi_club_doityourself">Club de bricolage</string>
     <string name="poi_club_bicycle">Club cycliste</string>
+    <string name="poi_first_aid_kit">Kit de premiers secours</string>
 </resources>

@@ -126,11 +126,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private double markerSizePx;
 
 	//OpenGL
-	private int markersCount = 0;
+	private int markersCount;
 	private VectorLinesCollection vectorLinesCollection;
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
-	private int displayedWidgets = 0;
+	private int displayedWidgets;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -355,7 +355,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						cy = centerPixel.y;
 						bearing = (float) getAngleBetween(centerPixel, line[1]) - tileBox.getRotate();
 					} else {
-						final QuadPoint cp = tileBox.getCenterPixelPoint();
+						QuadPoint cp = tileBox.getCenterPixelPoint();
 						cx = cp.x;
 						cy = cp.y;
 						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
@@ -560,8 +560,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				|| !settings.SHOW_MAP_MARKERS.get()) {
 			return false;
 		}
-		final MapMarkersHelper helper = getApplication().getMapMarkersHelper();
-		final MapMarker old = helper.getMapMarkers().get(0);
+		MapMarkersHelper helper = getApplication().getMapMarkersHelper();
+		MapMarker old = helper.getMapMarkers().get(0);
 		helper.moveMarkerToTop((MapMarker) o);
 		String title = getContext().getString(R.string.marker_activated, helper.getMapMarkers().get(0).getName(getContext()));
 		Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), title, Snackbar.LENGTH_LONG)
@@ -721,7 +721,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean isMoveable = isInMotion(marker);
 
 				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
-						.setBaseOrder(baseOrder)
+						.setBaseOrder(getBaseOrder())
 						.setIsHidden(isMoveable)
 						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
 						.setPosition(pointI)
@@ -755,13 +755,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		VectorLineBuilder outlineBuilder = new VectorLineBuilder();
 		VectorDouble outlinePattern = new VectorDouble();
-		outlinePattern.add(95 / getMapDensity());
-		outlinePattern.add(35 / getMapDensity());
+		outlinePattern.add(75 / getMapDensity());
+		outlinePattern.add(55 / getMapDensity());
 		FColorARGB outlineColor = new FColorARGB(1.0f, 1.0f, 1.0f, 1.0f);
 		double strokeWidth = 20.0d;
 		int outlineId = isLast ? 20 : 10;
 		int lineId = isLast ? 21 : 11;
-		outlineBuilder.setBaseOrder(baseOrder + lineId + 1)
+		outlineBuilder.setBaseOrder(getBaseOrder() + lineId + 1)
 				.setIsHidden(false)
 				.setLineId(outlineId)
 				.setLineWidth(strokeWidth * 1.5)
@@ -772,10 +772,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		VectorLineBuilder inlineBuilder = new VectorLineBuilder();
 		VectorDouble inlinePattern = new VectorDouble();
-		inlinePattern.add(-strokeWidth / getMapDensity());
-		inlinePattern.add((95 - strokeWidth * 1.5) / getMapDensity());
-		inlinePattern.add((35 + strokeWidth * 1.5) / getMapDensity());
-		inlineBuilder.setBaseOrder(baseOrder + lineId)
+		inlinePattern.add(-strokeWidth / 2 / getMapDensity());
+		inlinePattern.add((75 - strokeWidth) / getMapDensity());
+		inlinePattern.add((55 + strokeWidth) / getMapDensity());
+		inlineBuilder.setBaseOrder(getBaseOrder() + lineId)
 				.setIsHidden(false)
 				.setLineId(lineId)
 				.setLineWidth(strokeWidth)

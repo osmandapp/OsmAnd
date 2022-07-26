@@ -29,10 +29,10 @@ public enum SettingsItemType {
 	@Nullable
 	public static SettingsItemType fromName(@NonNull String name) {
 		if (name.equals("QUICK_ACTION")) {
-			return SettingsItemType.QUICK_ACTIONS;
+			return QUICK_ACTIONS;
 		}
 		try {
-			return SettingsItemType.valueOf(name);
+			return valueOf(name);
 		} catch (RuntimeException e) {
 			return null;
 		}

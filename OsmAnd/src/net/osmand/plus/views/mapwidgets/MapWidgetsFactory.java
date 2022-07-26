@@ -87,7 +87,7 @@ public class MapWidgetsFactory {
 			case CURRENT_SPEED:
 				return new CurrentSpeedWidget(mapActivity);
 			case AVERAGE_SPEED:
-				return new AverageSpeedWidget(mapActivity);
+				return new AverageSpeedWidget(mapActivity, customId);
 			case MAX_SPEED:
 				return new MaxSpeedWidget(mapActivity);
 			case ALTITUDE:

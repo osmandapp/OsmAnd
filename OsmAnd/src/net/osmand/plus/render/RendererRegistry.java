@@ -35,25 +35,25 @@ import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 
 public class RendererRegistry {
 
-	private final static Log log = PlatformUtil.getLog(RendererRegistry.class);
+	private static final Log log = PlatformUtil.getLog(RendererRegistry.class);
 	
-	public final static String DEFAULT_RENDER = "OsmAnd"; 
-	public final static String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
-	public final static String TOURING_VIEW = "Touring view (contrast and details)"; 
-	public final static String WINTER_SKI_RENDER = "Winter and ski"; 
-	public final static String NAUTICAL_RENDER = "Nautical"; 
-	public final static String TOPO_RENDER = "Topo"; 
-	public final static String OSM_CARTO_RENDER = "OSM-carto";
-	public final static String OFFROAD_RENDER = "Offroad"; 
-	public final static String LIGHTRS_RENDER = "LightRS"; 
-	public final static String UNIRS_RENDER = "UniRS"; 
-	public final static String DESERT_RENDER = "Desert"; 
-	public final static String SNOWMOBILE_RENDER = "Snowmobile"; 
+	public static final String DEFAULT_RENDER = "OsmAnd";
+	public static final String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
+	public static final String TOURING_VIEW = "Touring view (contrast and details)";
+	public static final String WINTER_SKI_RENDER = "Winter and ski";
+	public static final String NAUTICAL_RENDER = "Nautical";
+	public static final String TOPO_RENDER = "Topo";
+	public static final String OSM_CARTO_RENDER = "OSM-carto";
+	public static final String OFFROAD_RENDER = "Offroad";
+	public static final String LIGHTRS_RENDER = "LightRS";
+	public static final String UNIRS_RENDER = "UniRS";
+	public static final String DESERT_RENDER = "Desert";
+	public static final String SNOWMOBILE_RENDER = "Snowmobile";
 
 	private final OsmandApplication app;
 
-	private RenderingRulesStorage defaultRender = null;
-	private RenderingRulesStorage currentSelectedRender = null;
+	private RenderingRulesStorage defaultRender;
+	private RenderingRulesStorage currentSelectedRender;
 
 	private Map<String, File> externalRenderers = new LinkedHashMap<>();
 	private final Map<String, String> internalRenderers = new LinkedHashMap<>();
@@ -139,8 +139,8 @@ public class RendererRegistry {
 	}
 	
 	@Nullable
-	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
-			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
+	private RenderingRulesStorage loadRenderer(String name, Map<String, RenderingRulesStorage> loadedRenderers,
+			Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
 		InputStream is = getInputStream(name);
 		if (is == null) {
 			return null;
@@ -305,7 +305,7 @@ public class RendererRegistry {
 		if (storage == null) {
 			return "";
 		}
-		return RendererRegistry.getRendererName(app, storage.getName());
+		return getRendererName(app, storage.getName());
 	}
 
 	public static String getRendererName(@NonNull Context ctx, @NonNull String name) {

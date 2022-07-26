@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
@@ -85,16 +85,16 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		helper = app.getSavingTrackHelper();
 		selectedGpxFile = helper.getCurrentTrack();
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-		final FragmentManager fragmentManager = getFragmentManager();
+		FragmentManager fragmentManager = getFragmentManager();
 		int dp16 = getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int dp36 = getResources().getDimensionPixelSize(R.dimen.context_menu_controller_height);
 
 		buttonClear = createItem(inflater, ItemType.CLEAR_DATA, hasDataToSave());
-		final View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
-		final View buttonOnline = createItem(inflater, settings.LIVE_MONITORING.get()
+		View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
+		View buttonOnline = createItem(inflater, settings.LIVE_MONITORING.get()
 				? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
 		buttonSave = createItem(inflater, ItemType.SAVE, hasDataToSave());
-		final View buttonSegment = createItem(inflater, ItemType.START_NEW_SEGMENT, wasTrackMonitored());
+		View buttonSegment = createItem(inflater, ItemType.START_NEW_SEGMENT, wasTrackMonitored());
 
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.shared_string_options))
@@ -152,7 +152,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 					@Override
 					public void onClick(View v) {
 						if (hasDataToSave()) {
-							final GPXFile gpxFile = getGPXFile();
+							GPXFile gpxFile = getGPXFile();
 							new SaveCurrentTrackTask(app, gpxFile, createSaveListener()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 						}
 					}

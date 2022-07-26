@@ -32,7 +32,7 @@ public class NumberPickerDialogFragment extends DialogFragment {
 			throw new RuntimeException("Parent fragment must implement CanAcceptNumber");
 		}
 		Bundle args = getArguments();
-		final String numberTag = args.getString(NUMBER_TAG);
+		String numberTag = args.getString(NUMBER_TAG);
 		String headerText = args.getString(HEADER_TEXT);
 		String subHeaderText = args.getString(SUBHEADER_TEXT);
 		int numberOfItems = args.getInt(NUMBER_OF_ITEMS);
@@ -47,7 +47,7 @@ public class NumberPickerDialogFragment extends DialogFragment {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						final int userChoice =
+						int userChoice =
 								((AlertDialog) dialog).getListView().getCheckedItemPosition() + 1;
 						((CanAcceptNumber) getParentFragment()).acceptNumber(numberTag, userChoice);
 					}
@@ -56,9 +56,9 @@ public class NumberPickerDialogFragment extends DialogFragment {
 		if (subHeaderText != null) {
 			View titleView = LayoutInflater.from(getActivity())
 					.inflate(R.layout.number_picker_dialog_title, null);
-			TextView titleTextView = (TextView) titleView.findViewById(R.id.titleTextView);
+			TextView titleTextView = titleView.findViewById(R.id.titleTextView);
 			titleTextView.setText(headerText);
-			TextView subtitleTextView = (TextView) titleView.findViewById(R.id.subtitleTextView);
+			TextView subtitleTextView = titleView.findViewById(R.id.subtitleTextView);
 			subtitleTextView.setText(subHeaderText);
 			builder.setCustomTitle(titleView);
 		} else {

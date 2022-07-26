@@ -22,7 +22,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -131,11 +131,11 @@ public class OptionsCard extends MapBaseCard {
 
 	private BaseBottomSheetItem createShowOnMapItem() {
 
-		final Drawable showIcon = getActiveIcon(R.drawable.ic_action_view);
-		final Drawable hideIcon = getContentIcon(R.drawable.ic_action_hide);
+		Drawable showIcon = getActiveIcon(R.drawable.ic_action_view);
+		Drawable hideIcon = getContentIcon(R.drawable.ic_action_hide);
 		boolean gpxFileSelected = isGpxFileSelected(app, gpxFile);
 
-		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(gpxFileSelected)
 				.setIcon(gpxFileSelected ? showIcon : hideIcon)
@@ -171,11 +171,11 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createJoinGapsItem() {
-		final Drawable joinGapsEnabledIcon = getActiveIcon(R.drawable.ic_action_join_segments);
-		final Drawable joinGapsDisabledIcon = getContentIcon(R.drawable.ic_action_join_segments);
+		Drawable joinGapsEnabledIcon = getActiveIcon(R.drawable.ic_action_join_segments);
+		Drawable joinGapsDisabledIcon = getContentIcon(R.drawable.ic_action_join_segments);
 		boolean joinSegments = displayHelper.isJoinSegments();
 
-		final BottomSheetItemWithCompoundButton[] joinGapsItem = new BottomSheetItemWithCompoundButton[1];
+		BottomSheetItemWithCompoundButton[] joinGapsItem = new BottomSheetItemWithCompoundButton[1];
 		joinGapsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(joinSegments)
 				.setIcon(joinSegments ? joinGapsEnabledIcon : joinGapsDisabledIcon)

@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -56,18 +55,28 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
+	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
-			helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
-					.setTitleId(R.string.version_settings, mapActivity)
-					.setIcon(R.drawable.ic_action_apk)
-					.setListener((uiAdapter, view, item, isChecked) -> {
-						final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
-						mapActivity.startActivityForResult(mapIntent, 0);
-						return true;
-					}));
+			Class<?> contributionVersionActivityClass = null;
+			try {
+				ClassLoader classLoader = OsmandDevelopmentPlugin.class.getClassLoader();
+				if (classLoader != null) {
+					contributionVersionActivityClass = classLoader.loadClass("net.osmand.plus.activities.ContributionVersionActivity");
+				}
+			} catch (ClassNotFoundException ignore) {
+			}
+			Class<?> activityClass = contributionVersionActivityClass;
+			if (activityClass != null) {
+				helper.addItem(new ContextMenuItem(DRAWER_BUILDS_ID)
+						.setTitleId(R.string.version_settings, mapActivity)
+						.setIcon(R.drawable.ic_action_apk)
+						.setListener((uiAdapter, view, item, isChecked) -> {
+							Intent mapIntent = new Intent(mapActivity, activityClass);
+							mapActivity.startActivityForResult(mapIntent, 0);
+							return true;
+						}));
+			}
 		}
-
 	}
 
 	@Override

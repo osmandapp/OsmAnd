@@ -1,5 +1,22 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,23 +75,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
-
 
 public class RoutingOptionsHelper {
 
@@ -126,17 +126,17 @@ public class RoutingOptionsHelper {
 		settings.INTERRUPT_MUSIC.set(mt);
 	}
 
-	public void selectRestrictedRoads(final MapActivity mapActivity) {
+	public void selectRestrictedRoads(MapActivity mapActivity) {
 		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
 		mapActivity.getMapRouteInfoMenu().hide();
 		mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity, null);
 	}
 
-	public void selectVoiceGuidance(final MapActivity mapActivity, final CallbackWithObject<String> callback, ApplicationMode applicationMode) {
+	public void selectVoiceGuidance(MapActivity mapActivity, CallbackWithObject<String> callback, ApplicationMode applicationMode) {
 		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(app);
 
 		String[] entries;
-		final String[] entrieValues;
+		String[] entrieValues;
 		Set<String> voiceFiles = getVoiceFiles(mapActivity);
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
@@ -176,7 +176,7 @@ public class RoutingOptionsHelper {
 						int which = (int) v.getTag();
 						String value = entrieValues[which];
 						if (MORE_VALUE.equals(value)) {
-							final Intent intent = new Intent(mapActivity, DownloadActivity.class);
+							Intent intent = new Intent(mapActivity, DownloadActivity.class);
 							intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 							intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 							mapActivity.startActivity(intent);
@@ -237,7 +237,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void applyRoutingParameter(LocalRoutingParameter rp, boolean isChecked) {
-		final OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		// if short way that it should set valut to fast mode opposite of current
 		if (rp.routingParameter != null && rp.routingParameter.getId().equals(GeneralRouter.USE_SHORTEST_WAY)) {
@@ -253,7 +253,7 @@ public class RoutingOptionsHelper {
 
 	public void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
 		GPXRouteParamsBuilder rp = app.getRoutingHelper().getCurrentGPXRoute();
-		final OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		boolean selected = gpxParam.isSelected(settings);
 		if (rp != null) {
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
@@ -339,9 +339,9 @@ public class RoutingOptionsHelper {
 		void onClick();
 	}
 
-	public void showLocalRoutingParameterGroupDialog(final LocalRoutingParameterGroup group, final MapActivity mapActivity, final OnClickListener listener) {
+	public void showLocalRoutingParameterGroupDialog(LocalRoutingParameterGroup group, MapActivity mapActivity, OnClickListener listener) {
 		OsmandSettings settings = app.getSettings();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		int i = 0;
 		int selectedIndex = -1;
 		for (LocalRoutingParameter p : group.getRoutingParameters()) {
@@ -357,25 +357,25 @@ public class RoutingOptionsHelper {
 			selectedIndex = 0;
 		}
 
-		final boolean nightMode = isNightMode(app);
+		boolean nightMode = isNightMode(app);
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		final int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
+		int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
 
 		List<String> names = CtxMenuUtils.getNames(adapter.getItems());
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, names) {
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, names) {
 			@NonNull
 			@Override
-			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
 				if (v == null) {
 					v = UiUtilities.getInflater(mapActivity, nightMode).inflate(layout, parent, false);
 				}
-				final ContextMenuItem item = adapter.getItem(position);
-				AppCompatCheckedTextView tv = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+				ContextMenuItem item = adapter.getItem(position);
+				AppCompatCheckedTextView tv = v.findViewById(R.id.text1);
 				tv.setText(item.getTitle());
 				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -386,7 +386,7 @@ public class RoutingOptionsHelper {
 			}
 		};
 
-		final int[] selectedPosition = {selectedIndex};
+		int[] selectedPosition = {selectedIndex};
 		builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int position) {
@@ -509,7 +509,7 @@ public class RoutingOptionsHelper {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
 						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
 			}
-			if (!rparams.useIntermediateRtePoints()) {
+			if (!rparams.shouldUseIntermediateRtePoints()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point,
 						app.getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment,
@@ -700,7 +700,7 @@ public class RoutingOptionsHelper {
 		}
 
 		public boolean isSelected(OsmandSettings settings) {
-			final CommonPreference<Boolean> property =
+			CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 			if (mode != null) {
 				return property.getModeValue(mode);
@@ -710,7 +710,7 @@ public class RoutingOptionsHelper {
 		}
 
 		public void setSelected(OsmandSettings settings, boolean isChecked) {
-			final CommonPreference<Boolean> property =
+			CommonPreference<Boolean> property =
 					settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 			if (mode != null) {
 				property.setModeValue(mode, isChecked);

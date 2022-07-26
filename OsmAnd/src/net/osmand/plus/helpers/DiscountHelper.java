@@ -9,7 +9,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,15 +17,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -39,9 +35,12 @@ import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.util.Algorithms;
 
@@ -87,8 +86,7 @@ public class DiscountHelper {
 	private static final String CHOOSE_PLAN_TYPE_PRO = "osmand-pro";
 	private static final String CHOOSE_PLAN_TYPE_MAPS_PLUS = "osmand-maps-plus";
 
-	@SuppressLint("HardwareIds")
-	public static void checkAndDisplay(final MapActivity mapActivity) {
+	public static void checkAndDisplay(MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
@@ -104,13 +102,13 @@ public class DiscountHelper {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();
-		final Map<String, String> pms = new LinkedHashMap<>();
+		Map<String, String> pms = new LinkedHashMap<>();
 		pms.put("version", Version.getFullVersion(app));
 		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() + "");
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
 		pms.put("lang", app.getLanguage() + "");
 		try {
-			pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
+			pms.put("aid", app.getUserAndroidId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -249,9 +247,9 @@ public class DiscountHelper {
 		return result;
 	}
 
-	private static void showDiscountBanner(final MapActivity mapActivity, final ControllerData data) {
+	private static void showDiscountBanner(MapActivity mapActivity, ControllerData data) {
 		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
-		final DiscountBarController toolbarController = new DiscountBarController();
+		DiscountBarController toolbarController = new DiscountBarController();
 		if (data.bgColor != -1) {
 			LayerDrawable bgLand = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
 			if (bgLand != null) {
@@ -295,13 +293,13 @@ public class DiscountHelper {
 		mapActivity.showTopToolbar(toolbarController);
 	}
 
-	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
+	private static void showPoiFilter(MapActivity mapActivity, PoiUIFilter poiFilter) {
 		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, () -> mFilterVisible = false);
 		mFilter = poiFilter;
 		mFilterVisible = true;
 	}
 
-	public static void openUrl(final MapActivity mapActivity, String url) {
+	public static void openUrl(MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
@@ -546,7 +544,7 @@ public class DiscountHelper {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	private static abstract class Condition {
+	private abstract static class Condition {
 
 		protected OsmandApplication app;
 
@@ -560,7 +558,7 @@ public class DiscountHelper {
 
 	}
 
-	private static abstract class InAppPurchaseCondition extends Condition {
+	private abstract static class InAppPurchaseCondition extends Condition {
 
 		InAppPurchases inAppPurchases;
 
@@ -570,7 +568,7 @@ public class DiscountHelper {
 		}
 	}
 
-	private static abstract class SubscriptionCondition extends Condition {
+	private abstract static class SubscriptionCondition extends Condition {
 
 		InAppSubscriptionList liveUpdates;
 

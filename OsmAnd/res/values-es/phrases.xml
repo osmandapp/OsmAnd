@@ -4330,4 +4330,15 @@
     <string name="poi_water_sports">Tienda de deportes acuáticos</string>
     <string name="poi_flow_rate">Caudal</string>
     <string name="poi_golf_pin">Pin de golf</string>
+    <string name="poi_club_dog">Club de perros</string>
+    <string name="poi_board_title">Título del tablero</string>
+    <string name="poi_short_name">Nombre corto</string>
+    <string name="poi_club_aviation">Club de aviación</string>
+    <string name="poi_club_bicycle">Club de ciclistas</string>
+    <string name="poi_club_doityourself">Club de bricolaje</string>
+    <string name="poi_payment_mir_no">No se aceptan tarjetas Mir</string>
+    <string name="poi_club_amateur_radio">Club de radioaficionados</string>
+    <string name="poi_club_youth_movement">Movimiento de jóvenes</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_religion">Club religioso</string>
 </resources>

@@ -71,11 +71,11 @@ public class MapRenderRepositories {
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
 	public static boolean checkForDuplicateObjectIds = true;
 	
-	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
+	private static final Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
-	private final static int zoomOnlyForBasemaps = 11;
-	private final static int zoomToOverviewLocalNames = 6;
-	private final static Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
+	private static final int zoomOnlyForBasemaps = 11;
+	private static final int zoomToOverviewLocalNames = 6;
+	private static final Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
 			Arrays.asList("ru", "uk", "be", "bg", "mk", "sr")
 	);
 
@@ -89,17 +89,17 @@ public class MapRenderRepositories {
 
 	// lat/lon box of requested vector data
 	private QuadRect cObjectsBox = new QuadRect();
-	private int cObjectsZoom = 0;
+	private int cObjectsZoom;
 	// cached objects in order to render rotation without reloading data from db
 	private List<BinaryMapDataObject> cObjects = new LinkedList<BinaryMapDataObject>();
-	private NativeSearchResult cNativeObjects = null;
+	private NativeSearchResult cNativeObjects;
 
 	// currently rendered box (not the same as already rendered)
 	// this box is checked for interrupted process or
-	private RotatedTileBox requestedBox = null;
+	private RotatedTileBox requestedBox;
 
 	// location of rendered bitmap
-	private RotatedTileBox prevBmpLocation = null;
+	private RotatedTileBox prevBmpLocation;
 	// already rendered bitmap
 	private Bitmap prevBmp;
 	// to track necessity of map download (1 (if basemap) + 2 (if normal map) 
@@ -107,12 +107,12 @@ public class MapRenderRepositories {
 	private RotatedTileBox checkedBox;
 
 	// location of rendered bitmap
-	private RotatedTileBox bmpLocation = null;
+	private RotatedTileBox bmpLocation;
 	// already rendered bitmap
 	private Bitmap bmp;
 	// Field used in C++
-	private boolean interrupted = false;
-	private int renderedState = 0; 	// (1 (if basemap) + 2 (if normal map)
+	private boolean interrupted;
+	private int renderedState; 	// (1 (if basemap) + 2 (if normal map)
 	private RenderingContext currentRenderingContext;
 	private RenderingContext visibleRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
@@ -300,7 +300,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 
-	private boolean loadVectorDataNative(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, 
+	private boolean loadVectorDataNative(QuadRect dataBox, int zoom, RenderingRuleSearchRequest renderingReq,
 			NativeOsmandLibrary library) {
 		int leftX = MapUtils.get31TileNumberX(dataBox.left);
 		int rightX = MapUtils.get31TileNumberX(dataBox.right);
@@ -328,8 +328,8 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	public void checkInitialized(final int zoom, NativeOsmandLibrary library, int leftX, int rightX, int bottomY,
-			int topY) {
+	public void checkInitialized(int zoom, NativeOsmandLibrary library, int leftX, int rightX, int bottomY,
+	                             int topY) {
 		if(library == null) {
 			return;
 		}
@@ -357,13 +357,13 @@ public class MapRenderRepositories {
 	}
 	
 	private void readRouteDataAsMapObjects(SearchRequest<BinaryMapDataObject> sr, BinaryMapIndexReader c, 
-			final ArrayList<BinaryMapDataObject> tempResult, final TLongSet ids) {
-		final boolean basemap = c.isBasemap();
+			ArrayList<BinaryMapDataObject> tempResult, TLongSet ids) {
+		boolean basemap = c.isBasemap();
 		try {
 			for (RouteRegion reg : c.getRoutingIndexes()) {
 				List<RouteSubregion> parent = sr.getZoom() < 15 ? reg.getBaseSubregions() : reg.getSubregions();
 				List<RouteSubregion> searchRouteIndexTree = c.searchRouteIndexTree(sr, parent);
-				final MapIndex nmi = new MapIndex();
+				MapIndex nmi = new MapIndex();
 				c.loadRouteIndexData(searchRouteIndexTree, new ResultMatcher<RouteDataObject>() {
 
 					@Override
@@ -406,7 +406,7 @@ public class MapRenderRepositories {
 						return false;
 					}
 
-					private void registerMissingType(final MapIndex nmi, RouteDataObject r, int type) {
+					private void registerMissingType(MapIndex nmi, RouteDataObject r, int type) {
 						if (!nmi.isRegisteredRule(type)) {
 							RouteTypeRule rr = r.region.quickGetEncodingRule(type);
 							String tag = rr.getTag();
@@ -428,7 +428,7 @@ public class MapRenderRepositories {
 	}
 
 
-	private boolean loadVectorData(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
+	private boolean loadVectorData(QuadRect dataBox, int zoom, RenderingRuleSearchRequest renderingReq) {
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -440,9 +440,9 @@ public class MapRenderRepositories {
 		ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
 		ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
 		
-		int[] count = new int[]{0};
-		boolean[] ocean = new boolean[]{false};
-		boolean[] land = new boolean[]{false};
+		int[] count = {0};
+		boolean[] ocean = {false};
+		boolean[] land = {false};
 		List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
 		List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
 		int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
@@ -493,7 +493,7 @@ public class MapRenderRepositories {
 			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
 		}
 		if (addBasemapCoastlines && mi != null) {
-			int[] coordinates = new int[]{leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
+			int[] coordinates = {leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
 					topY};
 			BinaryMapDataObject o = new BinaryMapDataObject(-1, coordinates, new int[0][],  
 					RenderingRulesStorage.POLYGON_RULES, true,
@@ -531,10 +531,10 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	private MapIndex readMapObjectsForRendering(final int zoom, final RenderingRuleSearchRequest renderingReq,
-			ArrayList<BinaryMapDataObject> tempResult, ArrayList<BinaryMapDataObject> basemapResult, 
-			TLongSet ids, int[] count, boolean[] ocean, boolean[] land, List<BinaryMapDataObject> coastLines,
-			List<BinaryMapDataObject> basemapCoastLines, int leftX, int rightX, int bottomY, int topY) {
+	private MapIndex readMapObjectsForRendering(int zoom, RenderingRuleSearchRequest renderingReq,
+	                                            ArrayList<BinaryMapDataObject> tempResult, ArrayList<BinaryMapDataObject> basemapResult,
+	                                            TLongSet ids, int[] count, boolean[] ocean, boolean[] land, List<BinaryMapDataObject> coastLines,
+	                                            List<BinaryMapDataObject> basemapCoastLines, int leftX, int rightX, int bottomY, int topY) {
 		BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
 			@Override
 			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
@@ -716,7 +716,7 @@ public class MapRenderRepositories {
 					return;
 				}
 			}
-			final long searchTime = System.currentTimeMillis() - now;
+			long searchTime = System.currentTimeMillis() - now;
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
 			renderingReq.clearState();
@@ -733,12 +733,12 @@ public class MapRenderRepositories {
 			if(renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
 				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
-			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
+			QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
 			double cfd = MapUtils.getPowZoom(requestedBox.getZoomFloatPart())* requestedBox.getMapDensity();
 			lt.x *= cfd;
 			lt.y *= cfd;
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
-			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / cfd;
+			double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / cfd;
 			
 			currentRenderingContext.leftX = lt.x;
 			currentRenderingContext.topY = lt.y;
@@ -757,7 +757,7 @@ public class MapRenderRepositories {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
 			}
-			final float mapDensity = (float) requestedBox.getMapDensity();
+			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
@@ -835,7 +835,7 @@ public class MapRenderRepositories {
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;
 				}
-				final String msg = timeInfo;
+				String msg = timeInfo;
 				log.info(msg);
 				handler.post(new Runnable() {
 					@Override

@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -14,19 +17,16 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
 
@@ -62,7 +62,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		});
 
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
-			boolean hasTranslated = false;
+			boolean hasTranslated;
 			float highlightDrawX = -1;
 
 			@Override

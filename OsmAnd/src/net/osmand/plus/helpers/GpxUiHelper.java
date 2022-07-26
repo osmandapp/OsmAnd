@@ -94,10 +94,10 @@ import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -200,7 +200,7 @@ public class GpxUiHelper {
 
 		// 2. Time span
 		if (analysis.timeSpan > 0 && analysis.timeSpan / 1000 != analysis.timeMoving / 1000) {
-			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
+			String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timespan,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}
@@ -212,7 +212,7 @@ public class GpxUiHelper {
 				//description.append(nl).append(app.getString(R.string.gpx_timemoving,
 				//		getColorValue(timeSpanClr, formatDuration0, html)));
 				//description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving0, app), html) + ")");
-			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
+			String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timemoving,
 					getColorValue(timeSpanClr, formatDuration, html)));
 			description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), html) + ")");
@@ -243,15 +243,15 @@ public class GpxUiHelper {
 		return description.toString();
 	}
 
-	public static AlertDialog selectGPXFiles(List<String> selectedGpxList, final Activity activity,
-	                                         final CallbackWithObject<GPXFile[]> callbackWithObject,
+	public static AlertDialog selectGPXFiles(List<String> selectedGpxList, Activity activity,
+	                                         CallbackWithObject<GPXFile[]> callbackWithObject,
 	                                         int dialogThemeRes, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final List<GPXInfo> orderedAllGpxList = listGpxInfo(app, selectedGpxList, false);
+		List<GPXInfo> orderedAllGpxList = listGpxInfo(app, selectedGpxList, false);
 		if (orderedAllGpxList.size() < 2) {
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
-		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(app, orderedAllGpxList, true);
+		ContextMenuAdapter adapter = createGpxContextMenuAdapter(app, orderedAllGpxList, true);
 		return createDialog(activity, true, true, true, callbackWithObject, orderedAllGpxList, adapter, dialogThemeRes, nightMode);
 	}
 
@@ -264,14 +264,14 @@ public class GpxUiHelper {
 		return allGpxList;
 	}
 
-	public static AlertDialog selectGPXFile(final Activity activity, final boolean showCurrentGpx,
-	                                        final boolean multipleChoice,
-	                                        final CallbackWithObject<GPXFile[]> callbackWithObject,
+	public static AlertDialog selectGPXFile(Activity activity, boolean showCurrentGpx,
+	                                        boolean multipleChoice,
+	                                        CallbackWithObject<GPXFile[]> callbackWithObject,
 	                                        boolean nightMode) {
 		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
 		if (list.isEmpty()) {
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
@@ -280,18 +280,18 @@ public class GpxUiHelper {
 				list.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 			}
 
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(app, list, false);
+			ContextMenuAdapter adapter = createGpxContextMenuAdapter(app, list, false);
 			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter, dialogThemeRes, nightMode);
 		}
 		return null;
 	}
 
-	public static void selectSingleGPXFile(final FragmentActivity activity, boolean showCurrentGpx,
-	                                       final CallbackWithObject<GPXFile[]> callbackWithObject) {
+	public static void selectSingleGPXFile(FragmentActivity activity, boolean showCurrentGpx,
+	                                       CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
-		final List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
+		List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
 		if (!OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			showCurrentGpx = false;
 		}
@@ -403,24 +403,24 @@ public class GpxUiHelper {
 		}
 	}
 
-	private static AlertDialog createDialog(final Activity activity,
-	                                        final boolean showCurrentGpx,
-	                                        final boolean multipleChoice,
-	                                        final boolean showAppearanceSetting,
-	                                        final CallbackWithObject<GPXFile[]> callbackWithObject,
-	                                        final List<GPXInfo> gpxInfoList,
-	                                        final ContextMenuAdapter adapter,
-	                                        final int themeRes,
-	                                        final boolean nightMode) {
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+	private static AlertDialog createDialog(Activity activity,
+	                                        boolean showCurrentGpx,
+	                                        boolean multipleChoice,
+	                                        boolean showAppearanceSetting,
+	                                        CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                        List<GPXInfo> gpxInfoList,
+	                                        ContextMenuAdapter adapter,
+	                                        int themeRes,
+	                                        boolean nightMode) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		final int layout = R.layout.gpx_track_item;
-		final Map<String, String> gpxAppearanceParams = new HashMap<>();
-		final DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
+		Map<String, String> gpxAppearanceParams = new HashMap<>();
+		DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
 
 		List<String> modifiableGpxFileNames = CtxMenuUtils.getNames(adapter.getItems());
-		final ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title, modifiableGpxFileNames) {
+		ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title, modifiableGpxFileNames) {
 
 			@Override
 			public int getItemViewType(int position) {
@@ -440,7 +440,7 @@ public class GpxUiHelper {
 
 			@Override
 			@NonNull
-			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
 				boolean checkLayout = getItemViewType(position) == 0;
@@ -468,7 +468,7 @@ public class GpxUiHelper {
 					v.findViewById(R.id.check_local_index).setVisibility(View.GONE);
 				} else {
 					if (checkLayout) {
-						final CheckBox ch = v.findViewById(R.id.check_local_index);
+						CheckBox ch = v.findViewById(R.id.check_local_index);
 						ch.setVisibility(View.VISIBLE);
 						v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 						ch.setOnCheckedChangeListener(null);
@@ -478,7 +478,7 @@ public class GpxUiHelper {
 						});
 						UiUtilities.setupCompoundButton(ch, nightMode, PROFILE_DEPENDENT);
 					} else {
-						final SwitchCompat ch = v.findViewById(R.id.toggle_item);
+						SwitchCompat ch = v.findViewById(R.id.toggle_item);
 						ch.setVisibility(View.VISIBLE);
 						v.findViewById(R.id.toggle_checkbox_item).setVisibility(View.GONE);
 						ch.setOnCheckedChangeListener(null);
@@ -499,9 +499,9 @@ public class GpxUiHelper {
 		builder.setAdapter(alertDialogAdapter, onClickListener);
 		if (multipleChoice) {
 			if (showAppearanceSetting) {
-				final RenderingRuleProperty trackWidthProp;
-				final RenderingRuleProperty trackColorProp;
-				final RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+				RenderingRuleProperty trackWidthProp;
+				RenderingRuleProperty trackColorProp;
+				RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 				if (renderer != null) {
 					trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
 					trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
@@ -512,17 +512,17 @@ public class GpxUiHelper {
 				if (trackWidthProp == null || trackColorProp == null) {
 					builder.setTitle(R.string.show_gpx);
 				} else {
-					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
+					View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
 
-					final CommonPreference<String> prefWidth
+					CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
-					final CommonPreference<String> prefColor
+					CommonPreference<String> prefColor
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
 
 					updateAppearanceTitle(activity, app, trackWidthProp, renderer, apprTitleView, prefWidth.get(), prefColor.get());
 
 					apprTitleView.setOnClickListener(v -> {
-						final ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
+						ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
 						popup.setAnchorView(apprTitleView);
 						popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
 						popup.setModal(true);
@@ -598,10 +598,10 @@ public class GpxUiHelper {
 			}
 		}
 
-		final AlertDialog dlg = builder.create();
+		AlertDialog dlg = builder.create();
 		dlg.setCanceledOnTouchOutside(true);
 		if (gpxInfoList.size() == 0 || showCurrentGpx && gpxInfoList.size() == 1) {
-			final View footerView = activity.getLayoutInflater().inflate(R.layout.no_gpx_files_list_footer, null);
+			View footerView = activity.getLayoutInflater().inflate(R.layout.no_gpx_files_list_footer, null);
 			TextView descTextView = footerView.findViewById(R.id.descFolder);
 			String descPrefix = app.getString(R.string.gpx_no_tracks_title_folder);
 			SpannableString spannableDesc = new SpannableString(descPrefix + ": " + dir.getAbsolutePath());
@@ -669,7 +669,7 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
-	private static void updateSelectedTracksAppearance(final OsmandApplication app, List<String> fileNames, final Map<String, String> params) {
+	private static void updateSelectedTracksAppearance(OsmandApplication app, List<String> fileNames, Map<String, String> params) {
 		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -708,11 +708,11 @@ public class GpxUiHelper {
 		}
 	}
 
-	public static void updateGpxInfoView(final @NonNull OsmandApplication app,
-	                                     final @NonNull View v,
-	                                     final @NonNull String itemTitle,
-	                                     final @Nullable Drawable iconDrawable,
-	                                     final @NonNull GPXInfo info) {
+	public static void updateGpxInfoView(@NonNull OsmandApplication app,
+	                                     @NonNull View v,
+	                                     @NonNull String itemTitle,
+	                                     @Nullable Drawable iconDrawable,
+	                                     @NonNull GPXInfo info) {
 		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -821,7 +821,7 @@ public class GpxUiHelper {
 	private static void addTrack(Activity activity, ArrayAdapter<String> listAdapter,
 	                             ContextMenuAdapter contextMenuAdapter, List<GPXInfo> allGpxFiles) {
 		if (activity instanceof MapActivity) {
-			final MapActivity mapActivity = (MapActivity) activity;
+			MapActivity mapActivity = (MapActivity) activity;
 			OnActivityResultListener listener = (resultCode, resultData) -> {
 				if (resultCode != Activity.RESULT_OK || resultData == null) {
 					return;
@@ -861,7 +861,7 @@ public class GpxUiHelper {
 		}
 	}
 
-	private static void updateGpxDialogAfterImport(final Activity activity,
+	private static void updateGpxDialogAfterImport(Activity activity,
 	                                               ArrayAdapter<String> dialogAdapter,
 	                                               ContextMenuAdapter adapter, List<GPXInfo> allGpxFiles,
 	                                               String importedGpx) {
@@ -916,7 +916,7 @@ public class GpxUiHelper {
 	}
 
 	public static List<GPXInfo> getSortedGPXFilesInfoByDate(File dir, boolean absolutePath) {
-		final List<GPXInfo> list = new ArrayList<>();
+		List<GPXInfo> list = new ArrayList<>();
 		readGpxDirectory(dir, list, "", absolutePath);
 		Collections.sort(list, new Comparator<GPXInfo>() {
 			@Override
@@ -940,8 +940,8 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, final List<String> selectedGpxList, boolean absolutePath) {
-		final List<GPXInfo> allGpxFiles = new ArrayList<>();
+	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, List<String> selectedGpxList, boolean absolutePath) {
+		List<GPXInfo> allGpxFiles = new ArrayList<>();
 		readGpxDirectory(dir, allGpxFiles, "", absolutePath);
 		if (selectedGpxList != null) {
 			for (GPXInfo gpxInfo : allGpxFiles) {
@@ -1029,21 +1029,21 @@ public class GpxUiHelper {
 		}
 	}
 
-	public static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
-	                                         final File dir, final GPXFile currentFile, final String... filename) {
-		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
+	public static void loadGPXFileInDifferentThread(Activity activity, CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                                File dir, GPXFile currentFile, String... filename) {
+		ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				final GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
+				GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
 				int k = 0;
 				String w = "";
 				if (currentFile != null) {
 					result[k++] = currentFile;
 				}
 				for (String fname : filename) {
-					final File f = new File(dir, fname);
+					File f = new File(dir, fname);
 					GPXFile res = GPXUtilities.loadGPXFile(f);
 					if (res.error != null && !Algorithms.isEmpty(res.error.getMessage())) {
 						w += res.error.getMessage() + "\n";
@@ -1053,7 +1053,7 @@ public class GpxUiHelper {
 					result[k++] = res;
 				}
 				dlg.dismiss();
-				final String warn = w;
+				String warn = w;
 				activity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -1213,8 +1213,8 @@ public class GpxUiHelper {
 			}
 		}
 
-		final String formatX = fmt;
-		final String mainUnitX = ctx.getString(mainUnitStr);
+		String formatX = fmt;
+		String mainUnitX = ctx.getString(mainUnitStr);
 
 		axisBase.setGranularity(granularity);
 		axisBase.setValueFormatter((value, axis) -> {
@@ -1229,7 +1229,7 @@ public class GpxUiHelper {
 	}
 
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
-		final boolean useHours = timeSpan / HOUR_IN_MILLIS > 0;
+		boolean useHours = timeSpan / HOUR_IN_MILLIS > 0;
 		xAxis.setGranularity(1f);
 		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) value, useHours));
 		return 1f;
@@ -1412,7 +1412,7 @@ public class GpxUiHelper {
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 		boolean light = settings.isLightContent();
-		final float convEle = useFeet ? 3.28084f : 1.0f;
+		float convEle = useFeet ? 3.28084f : 1.0f;
 
 		float divX;
 		XAxis xAxis = mChart.getXAxis();
@@ -1424,7 +1424,7 @@ public class GpxUiHelper {
 			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
 		}
 
-		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
+		String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
 
 		YAxis yAxis;
 		if (useRightAxis) {
@@ -1503,7 +1503,7 @@ public class GpxUiHelper {
 		SpeedConstants sps = settings.SPEED_SYSTEM.get();
 		float mulSpeed = Float.NaN;
 		float divSpeed = Float.NaN;
-		final String mainUnitY = sps.toShortString(ctx);
+		String mainUnitY = sps.toShortString(ctx);
 		if (sps == SpeedConstants.KILOMETERS_PER_HOUR) {
 			mulSpeed = 3.6f;
 		} else if (sps == SpeedConstants.MILES_PER_HOUR) {
@@ -1583,7 +1583,7 @@ public class GpxUiHelper {
 		if (dataSet.getYMax() < 3) {
 			format = "{0,number,0.#} ";
 		}
-		final String formatY = format;
+		String formatY = format;
 		yAxis.setValueFormatter((value, axis) -> {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
@@ -1660,8 +1660,8 @@ public class GpxUiHelper {
 		boolean light = settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
-		final float convEle = useFeet ? 3.28084f : 1.0f;
-		final float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+		float convEle = useFeet ? 3.28084f : 1.0f;
+		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
 		XAxis xAxis = mChart.getXAxis();
 		float divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
@@ -2083,20 +2083,20 @@ public class GpxUiHelper {
 		switch (type) {
 			case ALTITUDE: {
 				if (analysis.hasElevationData) {
-					dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+					dataSet = createGPXElevationDataSet(app, chart,
 							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 				break;
 			}
 			case SLOPE:
 				if (analysis.hasElevationData) {
-					dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+					dataSet = createGPXSlopeDataSet(app, chart,
 							analysis, GPXDataSetAxisType.DISTANCE, null, useRightAxis, true, calcWithoutGaps);
 				}
 				break;
 			case SPEED: {
 				if (analysis.hasSpeedData) {
-					dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+					dataSet = createGPXSpeedDataSet(app, chart,
 							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 				break;
@@ -2109,7 +2109,7 @@ public class GpxUiHelper {
 	                                                @NonNull ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			GpxDisplayHelper helper = app.getGpxDisplayHelper();
 			String groupName = helper.getGroupName(gpxFile);
 			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		}
@@ -2123,11 +2123,11 @@ public class GpxUiHelper {
 		return null;
 	}
 
-	public static void saveAndShareGpx(@NonNull final Context context, @NonNull final GPXFile gpxFile) {
+	public static void saveAndShareGpx(@NonNull Context context, @NonNull GPXFile gpxFile) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		File tempDir = FileUtils.getTempDir(app);
 		String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
-		final File file = new File(tempDir, fileName);
+		File file = new File(tempDir, fileName);
 		SaveGpxListener listener = new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2144,7 +2144,7 @@ public class GpxUiHelper {
 		new SaveGpxAsyncTask(file, gpxFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void saveAndShareCurrentGpx(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
+	public static void saveAndShareCurrentGpx(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
 		SaveGpxListener saveGpxListener = new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2161,7 +2161,7 @@ public class GpxUiHelper {
 		new SaveCurrentTrackTask(app, gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void saveAndShareGpxWithAppearance(@NonNull final Context context, @NonNull final GPXFile gpxFile) {
+	public static void saveAndShareGpxWithAppearance(@NonNull Context context, @NonNull GPXFile gpxFile) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		GpxDataItem dataItem = getDataItem(app, gpxFile);
 		if (dataItem != null) {
@@ -2207,7 +2207,7 @@ public class GpxUiHelper {
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private static GpxDataItem getDataItem(@NonNull final OsmandApplication app, @NonNull final GPXFile gpxFile) {
+	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
 		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {

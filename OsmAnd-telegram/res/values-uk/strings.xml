@@ -177,7 +177,7 @@
     <string name="gps_points">GPS точки</string>
     <string name="shared_string_sent">Надіслати</string>
     <string name="average_altitude">Середня висота</string>
-    <string name="average_speed">Рекомендована швидкість</string>
+    <string name="average_speed">Середня швидкість</string>
     <string name="open_in_osmand">Показати в OsmAnd</string>
     <string name="end_date">Дата завершення</string>
     <string name="start_date">Дата початку</string>
@@ -235,7 +235,7 @@
     <string name="set_visible_time_for_all">Установити видимий час для всіх</string>
     <string name="visible_time_for_all">Показувати всім впродовж</string>
     <string name="set_time_description">Установіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
-    <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцеположенням.</string>
+    <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцем положення.</string>
     <string name="search_contacts">Пошук контактів</string>
     <string name="search_contacts_descr">Пошук у всіх своїх групах та контактах.</string>
     <string name="type_contact_or_group_name">Введіть назву контакту чи групи</string>

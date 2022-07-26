@@ -129,9 +129,9 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 
 	private void addRouteWalk(TransportRouteResultSegment s1, TransportRouteResultSegment s2,
 							  LatLon start, LatLon end, List<Way> res, List<GeometryWayStyle<?>> styles) {
-		final RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s1, s2);
+		RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s1, s2);
 		if (walkingRouteSegment != null && walkingRouteSegment.getRouteLocations().size() > 0) {
-			final List<Location> routeLocations = walkingRouteSegment.getRouteLocations();
+			List<Location> routeLocations = walkingRouteSegment.getRouteLocations();
 			Way way = new Way(TransportRoutePlanner.GEOMETRY_WAY_ID);
 			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %d m", walkingRouteSegment.getWholeDistance()));
 			for (Location l : routeLocations) {
@@ -316,7 +316,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 
 	public static class GeometryTransportWayStyle extends GeometryWayStyle<PublicTransportGeometryWayContext> {
 
-		private TransportRouteResultSegment segment;
+		private final TransportRouteResultSegment segment;
 		private Drawable stopDrawable;
 		protected Integer pointColor;
 

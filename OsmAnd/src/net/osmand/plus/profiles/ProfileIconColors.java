@@ -15,11 +15,11 @@ public enum ProfileIconColors {
 	MAGENTA(R.string.shared_string_color_magenta, R.color.profile_icon_color_magenta_light, R.color.profile_icon_color_magenta_dark);
 
 	@StringRes
-	private int name;
+	private final int name;
 	@ColorRes
-	private int dayColor;
+	private final int dayColor;
 	@ColorRes
-	private int nightColor;
+	private final int nightColor;
 
 	ProfileIconColors(@StringRes int name, @ColorRes int dayColor, @ColorRes int nightColor) {
 		this.name = name;

@@ -28,7 +28,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		final OsmandApplication app = requireMyApplication();
+		OsmandApplication app = requireMyApplication();
 
 		String appVersion = Version.getAppVersion(app);
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
@@ -84,6 +84,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
+		// return false; // for 4.2.7+ 
 		return app.getAppInitializer().checkAppVersionChanged() && notShown;
 	}
 

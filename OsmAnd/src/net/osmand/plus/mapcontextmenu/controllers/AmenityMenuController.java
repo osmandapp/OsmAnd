@@ -35,12 +35,12 @@ import java.util.List;
 public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
-	private MapMarker marker;
+	private final MapMarker marker;
 	private TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
 	                             @NonNull PointDescription pointDescription,
-	                             @NonNull final Amenity amenity) {
+	                             @NonNull Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
@@ -132,9 +132,7 @@ public class AmenityMenuController extends MenuController {
 	public boolean needStreetName() {
 		if (amenity.getSubType() != null && amenity.getType() != null) {
 			PoiType pt = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			if (pt != null && pt.getOsmTag() != null && pt.getOsmTag().equals("place")) {
-				return false;
-			}
+			return pt == null || pt.getOsmTag() == null || !pt.getOsmTag().equals("place");
 		}
 		return true;
 	}

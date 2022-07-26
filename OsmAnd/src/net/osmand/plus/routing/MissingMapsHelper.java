@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MissingMapsHelper {
-	private final static Log LOG = PlatformUtil.getLog(MissingMapsHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(MissingMapsHelper.class);
 
 	private static final int MIN_STRAIGHT_DIST = 20000;
 	private final RouteCalculationParams params;
@@ -37,7 +37,7 @@ public class MissingMapsHelper {
 
 	public boolean isAnyPointOnWater(@NonNull List<Location> points) throws IOException {
 		for (int i = 0; i < points.size(); i++) {
-			final Location point = points.get(i);
+			Location point = points.get(i);
 			List<WorldRegion> downloadRegions = params.ctx.getRegions().getWorldRegionsAt(
 					new LatLon(point.getLatitude(), point.getLongitude()), true);
 			if (downloadRegions.isEmpty()) {

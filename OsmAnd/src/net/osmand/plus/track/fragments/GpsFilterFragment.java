@@ -24,6 +24,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,7 +42,7 @@ import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -58,6 +59,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	public static final String TAG = GpsFilterFragment.class.getName();
 
 	private static final Log LOG = PlatformUtil.getLog(GpsFilterFragment.class);
+
+	private static final int REFRESH_UI_MESSAGE_ID = OsmAndConstants.UI_HANDLER_GPS_FILTER + 1;
+	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
 
 	private static final String KEY_GPX_FILE_PATH = "gpx_file_path";
 	private static final String KEY_SAVED_GPX_FILE_PATH = "saved_gpx_file_path";
@@ -111,6 +115,10 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
+	public SelectedGpxFile getSelectedGpxFile() {
+		return selectedGpxFile;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -139,9 +147,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		if (!Algorithms.isEmpty(gpxFilePath)) {
 			TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, false, (gpxFile) -> {
 				selectedGpxFile = gpxFile;
-				gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
 				FilteredSelectedGpxFile filteredSelectedGpxFile = setFileToFilter(selectedGpxFile);
-				if (view != null && filteredSelectedGpxFile != null) {
+				if (view != null) {
 					initContent(filteredSelectedGpxFile);
 				}
 				return true;
@@ -160,18 +167,16 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			}
 			if (selectedGpxFile != null) {
 				FilteredSelectedGpxFile filteredSelectedGpxFile = setFileToFilter(selectedGpxFile);
-				if (filteredSelectedGpxFile != null) {
-					initContent(filteredSelectedGpxFile);
-				}
+				initContent(filteredSelectedGpxFile);
 			}
 		}
 		return view;
 	}
 
-	@Nullable
+	@NonNull
 	private FilteredSelectedGpxFile setFileToFilter(@NonNull SelectedGpxFile selectedGpxFile) {
 		FilteredSelectedGpxFile filteredSelectedGpxFile = selectedGpxFile.getFilteredSelectedGpxFile();
-		if (app != null && selectedGpxFile.getFilteredSelectedGpxFile() == null) {
+		if (filteredSelectedGpxFile == null) {
 			filteredSelectedGpxFile = selectedGpxFile.createFilteredSelectedGpxFile(app, null);
 		}
 		return filteredSelectedGpxFile;
@@ -196,7 +201,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		View resetToOriginalButton = toolbar.findViewById(R.id.reset_to_original_button);
 		resetToOriginalButton.setOnClickListener(v -> {
 			FilteredSelectedGpxFile filteredSelectedGpxFile = selectedGpxFile.getFilteredSelectedGpxFile();
-			if (filteredSelectedGpxFile != null && app != null) {
+			if (filteredSelectedGpxFile != null) {
 				filteredSelectedGpxFile.resetFilters(app);
 				gpsFilterScreensAdapter.onResetFilters();
 			}
@@ -289,18 +294,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (selectedGpxFile != null) {
-			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
-		}
 		app.getGpsFilterHelper().addListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (selectedGpxFile != null) {
-			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
-		}
 	}
 
 	@Override
@@ -427,7 +421,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onSaveAsNewTrack(@Nullable String folderName, @NonNull String fileName,
 	                             boolean showOnMap, boolean simplifiedTrack) {
-		if (app != null && selectedGpxFile.getFilteredSelectedGpxFile() != null) {
+		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 			File destFile = app.getAppPath(GPX_INDEX_DIR);
 			if (!Algorithms.isEmpty(folderName) && !destFile.getName().equals(folderName)) {
 				destFile = new File(destFile, folderName);
@@ -463,7 +457,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			} else {
 				params.hideFromMap();
 			}
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+			gpxSelectionHelper.selectGpxFile(gpxFile, params);
 
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			SavedTrackBottomSheetDialogFragment.showInstance(fragmentManager, gpxFile.path, false);
@@ -476,9 +470,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		dismiss();
 
 		boolean isGpxFileExist = new File(selectedGpxFile.getGpxFile().path).exists();
-		if (app != null && !isGpxFileExist) {
+		if (!isGpxFileExist) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance().hideFromMap().syncGroup().saveSelection();
-			app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), params);
+			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), params);
 		}
 		gpsFilterHelper.clearListeners();
 
@@ -496,11 +490,13 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	@Override
 	public void onFinishFiltering(@NonNull GPXFile filteredGpxFile) {
-		gpsFilterScreensAdapter.onFinishFiltering();
-		Fragment target = getTargetFragment();
-		if (target instanceof GpsFilterFragmentLister) {
-			((GpsFilterFragmentLister) target).onFinishFiltering(filteredGpxFile);
-		}
+		app.runMessageInUIThreadAndCancelPrevious(REFRESH_UI_MESSAGE_ID, () -> {
+			gpsFilterScreensAdapter.onFinishFiltering();
+			Fragment target = getTargetFragment();
+			if (target instanceof GpsFilterFragmentLister) {
+				((GpsFilterFragmentLister) target).onFinishFiltering(filteredGpxFile);
+			}
+		}, UI_REFRESH_INTERVAL_MILLIS);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,

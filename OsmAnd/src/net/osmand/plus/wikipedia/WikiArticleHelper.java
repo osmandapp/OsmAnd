@@ -53,9 +53,9 @@ public class WikiArticleHelper {
 	public static final String WIKI_DOMAIN_COM = ".wikipedia.com/wiki/";
 
 	private WikiArticleSearchTask articleSearchTask;
-	private FragmentActivity activity;
+	private final FragmentActivity activity;
 
-	private boolean nightMode;
+	private final boolean nightMode;
 	private static final String P_OPENED = "<p>";
 	private static final String P_CLOSED = "</p>";
 
@@ -72,14 +72,14 @@ public class WikiArticleHelper {
 	public static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 		private ProgressDialog dialog;
-		private WeakReference<FragmentActivity> activityRef;
+		private final WeakReference<FragmentActivity> activityRef;
 
-		private LatLon articleLatLon;
+		private final LatLon articleLatLon;
 		private String regionName;
-		private String url;
+		private final String url;
 		private String lang;
 		private String name;
-		private boolean isNightMode;
+		private final boolean isNightMode;
 
 		WikiArticleSearchTask(@NonNull LatLon articleLatLon,
 		                      @NonNull FragmentActivity activity,
@@ -105,7 +105,7 @@ public class WikiArticleHelper {
 		protected List<Amenity> doInBackground(Void... voids) {
 			FragmentActivity activity = activityRef.get();
 			OsmandApplication application = (OsmandApplication) activity.getApplication();
-			final List<Amenity> results = new ArrayList<>();
+			List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
 				List<WorldRegion> regions = null;
 				if (articleLatLon != null) {
@@ -276,7 +276,7 @@ public class WikiArticleHelper {
 		}
 	}
 
-	public static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
+	public static void warnAboutExternalLoad(String url, Context context, boolean nightMode) {
 		if (context == null) {
 			return;
 		}
@@ -343,7 +343,7 @@ public class WikiArticleHelper {
 	@Nullable
 	public static String getFirstParagraph(String descriptionHtml) {
 		if (descriptionHtml != null) {
-			String firstParagraph = WikiArticleHelper.getPartialContent(descriptionHtml);
+			String firstParagraph = getPartialContent(descriptionHtml);
 			if (!Algorithms.isEmpty(firstParagraph)) {
 				return firstParagraph;
 			}

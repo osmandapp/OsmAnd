@@ -41,7 +41,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	private View view;
 	private MultiSelectionArrayAdapter listAdapter;
 	private MapMultiSelectionMenu menu;
-	private boolean dismissing = false;
+	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
 	@Nullable
@@ -60,7 +60,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					view.findViewById(R.id.cancel_row), ColorUtilities.getListBgColorId(!menu.isLight()));
 		}
 
-		final ListView listView = (ListView) view.findViewById(R.id.list);
+		ListView listView = view.findViewById(R.id.list);
 		if (menu.isLandscapeLayout() && Build.VERSION.SDK_INT >= 21) {
 			AndroidUtils.addStatusBarPadding21v(getActivity(), listView);
 		}
@@ -68,7 +68,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		listAdapter.setListener(this);
 
 		if (!menu.isLandscapeLayout()) {
-			final Context context = getContext();
+			Context context = getContext();
 
 			FrameLayout paddingView = new FrameLayout(context);
 			paddingView.setLayoutParams(new AbsListView.LayoutParams(
@@ -104,7 +104,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
 					int maxHeight = (int) (titleHeight);
 					for (int i = 0; i < 3 && i < listAdapter.getCount(); i++) {
-						View childView = listAdapter.getView(0, null, (ListView) view.findViewById(R.id.list));
+						View childView = listAdapter.getView(0, null, view.findViewById(R.id.list));
 						childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
 								View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 						maxHeight += childView.getMeasuredHeight();
@@ -113,18 +113,14 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					listView.setSelectionFromTop(0, -maxHeight);
 
 					ViewTreeObserver obs = view.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
-						obs.removeGlobalOnLayoutListener(this);
-					}
+					obs.removeOnGlobalLayoutListener(this);
 				}
 			});
 
 			((ObservableListView) listView).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
 
 				boolean initialScroll = true;
-				int minHeight = getResources().getDimensionPixelSize(R.dimen.multi_selection_header_height)
+				final int minHeight = getResources().getDimensionPixelSize(R.dimen.multi_selection_header_height)
 						+ getResources().getDimensionPixelSize(R.dimen.list_item_height);
 
 				@Override
@@ -237,7 +233,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	}
 
 	private MultiSelectionArrayAdapter createAdapter() {
-		final List<MenuObject> items = new LinkedList<>(menu.getObjects());
+		List<MenuObject> items = new LinkedList<>(menu.getObjects());
 		return new MultiSelectionArrayAdapter(menu, R.layout.menu_obj_list_item, items);
 	}
 

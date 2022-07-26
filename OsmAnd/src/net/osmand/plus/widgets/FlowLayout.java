@@ -30,9 +30,9 @@ public class FlowLayout extends ViewGroup {
 		if ((MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED))
 			throw new AssertionError();
 
-		final int width = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
+		int width = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
 		int height = MeasureSpec.getSize(heightMeasureSpec) - getPaddingTop() - getPaddingBottom();
-		final int count = getChildCount();
+		int count = getChildCount();
 		int line_height = 0;
 		int horizontalPosition = getPaddingLeft();
 		int verticalPosition = getPaddingTop();
@@ -45,11 +45,11 @@ public class FlowLayout extends ViewGroup {
 		}
 
 		for (int i = 0; i < count; i++) {
-			final View child = getChildAt(i);
+			View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
-				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
+				LayoutParams lp = (LayoutParams) child.getLayoutParams();
 				child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeightMeasureSpec);
-				final int childWidth = child.getMeasuredWidth();
+				int childWidth = child.getMeasuredWidth();
 				line_height = Math.max(line_height, child.getMeasuredHeight() + lp.verticalSpacing);
 				if (horizontalPosition + childWidth > width) {
 					horizontalPosition = getPaddingLeft();
@@ -82,17 +82,17 @@ public class FlowLayout extends ViewGroup {
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		final int count = getChildCount();
-		final int width = r - l;
+		int count = getChildCount();
+		int width = r - l;
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
 		int horizontalPosition = isLayoutRtl ? width - getPaddingRight() : getPaddingLeft();
 		int verticalPosition = getPaddingTop();
 		for (int i = 0; i < count; i++) {
-			final View child = getChildAt(i);
+			View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
-				final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-				final int childWidth = child.getMeasuredWidth();
-				final int childHeight = child.getMeasuredHeight();
+				LayoutParams lp = (LayoutParams) child.getLayoutParams();
+				int childWidth = child.getMeasuredWidth();
+				int childHeight = child.getMeasuredHeight();
 				int freeSizeSpacing = getFreeSizeSpacing(width, lp, childWidth);
 				if (isLayoutRtl) {
 					if (horizontalPosition - childWidth < getPaddingLeft()) {

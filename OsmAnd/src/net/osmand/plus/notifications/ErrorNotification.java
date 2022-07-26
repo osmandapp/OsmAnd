@@ -14,7 +14,7 @@ import net.osmand.plus.routing.RoutingHelper;
 
 public class ErrorNotification extends OsmandNotification {
 
-	private final static String GROUP_NAME = "ERROR";
+	private static final String GROUP_NAME = "ERROR";
 
 	public ErrorNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);

@@ -68,11 +68,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
 	public static final String SHOW_ONLY_ONE_TAB = "SHOW_ONLY_ONE_TAB"; //$NON-NLS-1$
 
-	private LatLon searchPoint = null;
-	private LatLon reqSearchPoint = null;
-	private boolean searchAroundCurrentLocation = false;
+	private LatLon searchPoint;
+	private LatLon reqSearchPoint;
+	private boolean searchAroundCurrentLocation;
 
-	private static boolean searchOnLine = false;
+	private static boolean searchOnLine;
 	private ArrayAdapter<String> spinnerAdapter;
 	private OsmandSettings settings;
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
@@ -83,7 +83,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 
 	public interface SearchActivityChild {
 		
-		public void locationUpdate(LatLon l);
+		void locationUpdate(LatLon l);
 	}
 
 	@Override
@@ -102,8 +102,8 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		getSupportActionBar().setElevation(0);
 		Integer tab = settings.SEARCH_TAB.get();
 		if (!showOnlyOneTab) {
-			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+			ViewPager mViewPager = findViewById(R.id.pager);
+			PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
 			List<TabItem> mTabs = new ArrayList<TabItem>();
 			mTabs.add(getTabIndicator(R.string.poi, getFragment(POI_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.address, getFragment(ADDRESS_TAB_INDEX)));
@@ -226,13 +226,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 
 	private void setTopSpinner() {
 		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.spinner_item,
-				new ArrayList<String>(Arrays.asList(new String[]{
-						getString(R.string.shared_string_undefined),
+				new ArrayList<String>(Arrays.asList(getString(R.string.shared_string_undefined),
 						getString(R.string.shared_string_my_location) + getString(R.string.shared_string_ellipsis),
 						getString(R.string.search_position_map_view),
 						getString(R.string.search_position_favorites),
-						getString(R.string.search_position_address)
-				}))
+						getString(R.string.search_position_address)))
 				) {
 					@Override
 					public View getDropDownView(int position, View convertView, ViewGroup parent) {
@@ -311,7 +309,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 	
 	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		Toolbar tb = findViewById(R.id.bottomControls);
 		tb.setTitle(null);
 		tb.getMenu().clear();
 		tb.setVisibility(visible? View.VISIBLE : View.GONE);
@@ -351,7 +349,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		super.onResume();
 		if (!showOnlyOneTab) {
 			Integer tab = settings.SEARCH_TAB.get();
-			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+			ViewPager mViewPager = findViewById(R.id.pager);
 			mViewPager.setCurrentItem(Math.min(tab, HISTORY_TAB_INDEX));
 		}
 	}

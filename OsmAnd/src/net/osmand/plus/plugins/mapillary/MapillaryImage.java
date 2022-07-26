@@ -12,8 +12,8 @@ public class MapillaryImage {
 	public static final String IS_PANORAMIC_KEY = "is_pano";
 
 	// Image location
-	private double latitude;
-	private double longitude;
+	private final double latitude;
+	private final double longitude;
 	// Camera heading.  -1 if not found.
 	private double compassAngle = -1;
 	// When the image was captured, expressed as UTC epoch time in milliseconds. Must be non-negative integer;  0 if not found.
@@ -46,10 +46,10 @@ public class MapillaryImage {
 		try {
 			this.capturedAt = ((Number) userData.get(CAPTURED_AT_KEY)).longValue();
 			this.compassAngle = ((Number) userData.get(COMPASS_ANGLE_KEY)).doubleValue();
-			this.imageId = ((Number) userData.get(IMAGE_ID_KEY)).toString();
+			this.imageId = userData.get(IMAGE_ID_KEY).toString();
 			this.sequenceId = (String) userData.get(SEQUENCE_ID_KEY);
 			if (userData.get(ORGANIZATION_ID_KEY) != null) {
-				this.organizationId = ((Number) userData.get(ORGANIZATION_ID_KEY)).toString();
+				this.organizationId = userData.get(ORGANIZATION_ID_KEY).toString();
 			}
 			this.panoramicImage = (boolean) userData.get(IS_PANORAMIC_KEY);
 		} catch (Exception e) {

@@ -1,8 +1,5 @@
 package net.osmand.plus.views;
 
-import static net.osmand.plus.auto.CarSurfaceView.MAP_DENSITY_DIVIDER_160;
-import static net.osmand.plus.auto.CarSurfaceView.TEXT_SCALE_DIVIDER_160;
-
 import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
@@ -12,23 +9,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandApplication.NavigationSessionListener;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMap implements NavigationSessionListener {
 
@@ -40,7 +37,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private final List<OsmandMapListener> listeners = Collections.synchronizedList(new ArrayList<>());
+	private final List<OsmandMapListener> listeners = new CopyOnWriteArrayList<>();
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);
@@ -122,7 +119,7 @@ public class OsmandMap implements NavigationSessionListener {
 		mapView.refreshMap();
 	}
 
-	public void refreshMap(final boolean updateVectorRendering) {
+	public void refreshMap(boolean updateVectorRendering) {
 		mapView.refreshMap(updateVectorRendering);
 	}
 
@@ -142,8 +139,8 @@ public class OsmandMap implements NavigationSessionListener {
 		// int newZoom = (int) Math.round(curZoom);
 		// double zoomFrac = curZoom - newZoom;
 
-		final int newZoom = mapView.getZoom() + stp;
-		final double zoomFrac = mapView.getZoomFractionalPart();
+		int newZoom = mapView.getZoom() + stp;
+		double zoomFrac = mapView.getZoomFractionalPart();
 		if (newZoom > mapView.getMaxZoom()) {
 			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
 			return;
@@ -198,22 +195,24 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public float getTextScale() {
 		float scale = app.getSettings().TEXT_SCALE.get();
-		return scale * getCarScaleCoef(true);
+		return scale * getCarDensityScaleCoef();
+	}
+
+	public float getOriginalTextScale() {
+		return app.getSettings().TEXT_SCALE.get();
 	}
 
 	public float getMapDensity() {
 		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale * getCarScaleCoef(false);
+		return scale * getCarDensityScaleCoef();
 	}
 
-	public float getCarScaleCoef(boolean textScale) {
+	public float getCarDensityScaleCoef() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();
 			float density = mapView.getDensity();
-			if (density >= 2 && carViewDensity == 1) {
-				return textScale ? TEXT_SCALE_DIVIDER_160 : MAP_DENSITY_DIVIDER_160;
-			}
+			return carViewDensity / density;
 		}
 		return 1f;
 	}

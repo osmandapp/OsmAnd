@@ -12,8 +12,8 @@ import androidx.viewpager.widget.ViewPager;
 public class WrapContentHeightViewPager extends ViewPager {
 
 	private boolean swipeable = true;
-	private int height = 0;
-	private int decorHeight = 0;
+	private int height;
+	private int decorHeight;
 	private int widthMeasuredSpec;
 
 	private boolean animateHeight;
@@ -23,7 +23,7 @@ public class WrapContentHeightViewPager extends ViewPager {
 
 	public interface ViewAtPositionInterface {
 
-		public View getViewAtPosition(int position);
+		View getViewAtPosition(int position);
 	}
 
 	public WrapContentHeightViewPager(Context context) {

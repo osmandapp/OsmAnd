@@ -116,7 +116,7 @@ public class ListPreferenceEx extends DialogPreference {
 
 	public void setValue(Object value) {
 		// Always persist/notify the first time.
-		final boolean changed = selectedValue == null || !selectedValue.equals(value);
+		boolean changed = selectedValue == null || !selectedValue.equals(value);
 		if (changed) {
 			selectedValue = value;
 			persistValue(value);

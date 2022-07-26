@@ -19,7 +19,6 @@
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 	<!-- The next 2 seem necessary only for Android < v4.2 (to initialize BT SCO) -->
 	<uses-permission android:name="android.permission.BROADCAST_STICKY" android:maxSdkVersion="18" />
 	<uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="18" />
@@ -333,6 +332,40 @@
 				<data android:pathPattern=".*\\..*\\..*\\.sqlitedb" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.sqlitedb" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.sqlitedb" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern=".*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.sqlite" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="*.sqlite" />
+				<data android:pathPattern=".*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.sqlite" />
 			</intent-filter>
 
 			<intent-filter

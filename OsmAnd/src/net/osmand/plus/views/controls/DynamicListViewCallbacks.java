@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface DynamicListViewCallbacks {
 
-	void onItemsSwapped(final List<Object> items);
-	void onItemSwapping(final int position);
+	void onItemsSwapped(List<Object> items);
+	void onItemSwapping(int position);
 
 	void onWindowVisibilityChanged(int visibility);
 

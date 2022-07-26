@@ -54,17 +54,18 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private MapContextMenu contextMenu;
 	private TrackDetailsMenu detailsMenu;
 
-	private long lastTimeAutoZooming = 0;
+	private long lastTimeAutoZooming;
+	private long lastTimeManualZooming;
 	private boolean isMapLinkedToLocation = true;
 	private boolean followingMode;
 	private boolean routePlanningMode;
-	private boolean showViewAngle = false;
-	private boolean isUserZoomed = false;
+	private boolean showViewAngle;
+	private boolean isUserZoomed;
 	private String locationProvider;
 	private Location myLocation;
 	private Float heading;
-	private boolean drivingRegionUpdated = false;
-	private boolean movingToMyLocation = false;
+	private boolean drivingRegionUpdated;
+	private boolean movingToMyLocation;
 	private long compassRequest;
 
 	public MapViewTrackingUtilities(OsmandApplication app) {
@@ -321,9 +322,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
-
-		if (shouldResetRotation()) {
-			mapView.resetManualRotation();
+		if (mapView != null) {
+			mapView.setElevationAngle(settings.LAST_KNOWN_MAP_ELEVATION.get());
+			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
+				mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+			}
 		}
 	}
 
@@ -368,8 +371,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zdelta += 1;
 				}
 				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
+				long lastZoomTime = Math.max(lastTimeAutoZooming, lastTimeManualZooming);
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
-				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
+				if (now - lastZoomTime > 4500 && (now - lastZoomTime > threshold || !isUserZoomed)) {
 					isUserZoomed = false;
 					lastTimeAutoZooming = now;
 //					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
@@ -399,11 +403,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (!isMapLinkedToLocation()) {
 				setMapLinkedToLocation(true);
 				if (location != null) {
-					AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-					int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom : mapView.getZoom();
-					movingToMyLocation = true;
-					thread.startMoving(location.getLatitude(), location.getLongitude(),
-							fZoom, false, () -> movingToMyLocation = false);
+					animateBackToLocation(location, zoom, forceZoom);
 				}
 				mapView.refreshMap();
 			}
@@ -417,6 +417,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 			}
 		}
+	}
+
+	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
+		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
+		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom	: mapView.getZoom();
+		movingToMyLocation = true;
+		Runnable startAnimationCallback = () -> {
+			if (!isMapLinkedToLocation) {
+				setMapLinkedToLocation(true);
+			}
+		};
+		thread.startMoving(location.getLatitude(), location.getLongitude(),
+				fZoom, false, true, startAnimationCallback, () -> movingToMyLocation = false);
 	}
 
 	private void backToLocationWithDelay(int delay) {
@@ -513,7 +526,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}
-	
+
 	public Float getMapRotate() {
 		if (mapView == null) {
 			return null;
@@ -522,7 +535,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void setZoomTime(long time) {
-		lastTimeAutoZooming = time;
+		lastTimeManualZooming = time;
 		isUserZoomed = true;
+	}
+
+	public long getLastManualZoomTime() {
+		return lastTimeManualZooming;
 	}
 }

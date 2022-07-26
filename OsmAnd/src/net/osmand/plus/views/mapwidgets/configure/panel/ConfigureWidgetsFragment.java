@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.panel;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.getDuplicateWidgetId;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -36,6 +35,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -49,7 +49,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.add.AddWidgetFragment.AddWidgetListener;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
@@ -279,7 +279,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private MapWidgetInfo createDuplicateWidget(@NonNull String widgetId, @NonNull WidgetsPanel panel) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		if (widgetType != null) {
-			String id = widgetId.contains(DELIMITER) ? widgetId : getDuplicateWidgetId(widgetId);
+			String id = widgetId.contains(DELIMITER) ? widgetId : WidgetType.getDuplicateWidgetId(widgetId);
 			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
 				settings.CUSTOM_WIDGETS_KEYS.addValue(id);

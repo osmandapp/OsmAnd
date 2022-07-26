@@ -15,8 +15,8 @@ import java.util.List;
 
 public class HorizontalChipsView extends RecyclerView {
 
-	final private ChipsAdapter adapter;
-	final private ChipsDataHolder holder = new ChipsDataHolder();
+	private final ChipsAdapter adapter;
+	private final ChipsDataHolder holder = new ChipsDataHolder();
 
 	public HorizontalChipsView(@NonNull Context context) {
 		this(context, null);

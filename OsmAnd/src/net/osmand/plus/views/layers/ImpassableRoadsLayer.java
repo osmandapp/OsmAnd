@@ -49,7 +49,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Paint paint;
 
 	//OpenGL
-	private int impassibleRoadsCount = 0;
+	private int impassibleRoadsCount;
 
 	public ImpassableRoadsLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -104,8 +104,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 						continue;
 					}
 				}
-				final double latitude = location.getLatitude();
-				final double longitude = location.getLongitude();
+				double latitude = location.getLatitude();
+				double longitude = location.getLongitude();
 				if (tileBox.containsLatLon(latitude, longitude)) {
 					drawPoint(canvas, tileBox, latitude, longitude, road != null);
 				}
@@ -220,11 +220,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o,
 									   @NonNull LatLon position,
-									   @Nullable final ApplyMovedObjectCallback callback) {
+									   @Nullable ApplyMovedObjectCallback callback) {
 		MapActivity mapActivity = getMapActivity();
 		if (o instanceof AvoidRoadInfo && mapActivity != null) {
-			final AvoidRoadInfo object = (AvoidRoadInfo) o;
-			final OsmandApplication application = getApplication();
+			AvoidRoadInfo object = (AvoidRoadInfo) o;
+			OsmandApplication application = getApplication();
 			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, position, false, new AvoidSpecificRoadsCallback() {
 				@Override
 				public void onAddImpassableRoad(boolean success, AvoidRoadInfo newObject) {
@@ -267,7 +267,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			mapMarkerBuilder
 					.setPosition(pointI)
 					.setIsHidden(isMoveable)
-					.setBaseOrder(baseOrder)
+					.setBaseOrder(getBaseOrder())
 					.setIsAccuracyCircleSupported(false)
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)

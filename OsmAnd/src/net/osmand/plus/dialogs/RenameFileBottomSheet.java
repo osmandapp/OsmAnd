@@ -178,12 +178,12 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
 	                                @NonNull File file, boolean usedOnMap) {
 		if (file.exists() && !fragmentManager.isStateSaved()
-				&& fragmentManager.findFragmentByTag(RenameFileBottomSheet.TAG) == null) {
+				&& fragmentManager.findFragmentByTag(TAG) == null) {
 			RenameFileBottomSheet fragment = new RenameFileBottomSheet();
 			fragment.file = file;
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, RenameFileBottomSheet.TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

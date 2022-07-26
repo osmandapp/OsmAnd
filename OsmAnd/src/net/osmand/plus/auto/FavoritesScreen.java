@@ -100,7 +100,7 @@ public final class FavoritesScreen extends Screen {
 		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, result),
 				obj -> {
 					if (obj != null) {
-						FavoritesScreen.this.onRouteSelected(result);
+						onRouteSelected(result);
 					}
 				});
 		finish();

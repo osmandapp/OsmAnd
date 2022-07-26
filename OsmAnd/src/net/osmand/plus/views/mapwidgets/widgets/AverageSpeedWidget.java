@@ -1,28 +1,57 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import net.osmand.util.Algorithms;
 
 public class AverageSpeedWidget extends TextInfoWidget {
+
+	private static final String MEASURED_INTERVAL_PREF_ID = "average_speed_measured_interval_millis";
+	private static final String SKIP_STOPS_PREF_ID = "average_speed_skip_stops";
 
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
 	private static final String DASH = "—";
 
 	private final AverageSpeedComputer averageSpeedComputer;
 
-	private long lastUpdateTime = 0;
+	private final CommonPreference<Long> measuredIntervalPref;
+	private final CommonPreference<Boolean> skipStopsPref;
 
-	public AverageSpeedWidget(@NonNull MapActivity mapActivity) {
+	private long lastUpdateTime;
+
+	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, WidgetType.AVERAGE_SPEED);
 		averageSpeedComputer = app.getAverageSpeedComputer();
 		setIcons(WidgetType.AVERAGE_SPEED);
+		measuredIntervalPref = registerMeasuredIntervalPref(customId);
+		skipStopsPref = registerSkipStopsPref(customId);
+	}
+
+	@NonNull
+	public Long getMeasuredInterval(@NonNull ApplicationMode appMode) {
+		return measuredIntervalPref.getModeValue(appMode);
+	}
+
+	public void setMeasuredInterval(@NonNull ApplicationMode appMode, long measuredInterval) {
+		measuredIntervalPref.setModeValue(appMode, measuredInterval);
+	}
+
+	@NonNull
+	public Boolean shouldSkipStops(@NonNull ApplicationMode appMode) {
+		return skipStopsPref.getModeValue(appMode);
+	}
+
+	public void setShouldSkipStops(@NonNull ApplicationMode appMode, boolean skipStops) {
+		skipStopsPref.setModeValue(appMode, skipStops);
 	}
 
 	@Override
@@ -35,8 +64,8 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	}
 
 	private void updateAverageSpeed() {
-		long measuredInterval = settings.AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS.get();
-		boolean skipLowSpeed = settings.AVERAGE_SPEED_SKIP_STOPS.get();
+		long measuredInterval = measuredIntervalPref.get();
+		boolean skipLowSpeed = skipStopsPref.get();
 		float averageSpeed = averageSpeedComputer.getAverageSpeed(measuredInterval, skipLowSpeed);
 		if (Float.isNaN(averageSpeed)) {
 			setText(DASH, null);
@@ -44,6 +73,30 @@ public class AverageSpeedWidget extends TextInfoWidget {
 			FormattedValue formattedAverageSpeed = OsmAndFormatter.getFormattedSpeedValue(averageSpeed, app);
 			setText(formattedAverageSpeed.value, formattedAverageSpeed.unit);
 		}
+	}
+
+	@Override
+	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		registerMeasuredIntervalPref(customId).setModeValue(appMode, measuredIntervalPref.getModeValue(appMode));
+		registerSkipStopsPref(customId).setModeValue(appMode, skipStopsPref.getModeValue(appMode));
+	}
+
+	@NonNull
+	private CommonPreference<Long> registerMeasuredIntervalPref(@Nullable String customId) {
+		String prefId = Algorithms.isEmpty(customId)
+				? MEASURED_INTERVAL_PREF_ID
+				: MEASURED_INTERVAL_PREF_ID + customId;
+		return settings.registerLongPreference(prefId, AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS)
+				.makeProfile()
+				.cache();
+	}
+
+	@NonNull
+	private CommonPreference<Boolean> registerSkipStopsPref(@Nullable String customId) {
+		String prefId = Algorithms.isEmpty(customId) ? SKIP_STOPS_PREF_ID : SKIP_STOPS_PREF_ID + customId;
+		return settings.registerBooleanPreference(prefId, true)
+				.makeProfile()
+				.cache();
 	}
 
 	@Override

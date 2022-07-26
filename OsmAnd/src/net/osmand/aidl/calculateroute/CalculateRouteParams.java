@@ -14,8 +14,8 @@ public class CalculateRouteParams implements Parcelable {
 	private String startPointName;
 	private ALatLon endPoint;
 	private String endPointName;
-	private List<ALatLon> intermediatePoints = new ArrayList<>();
-	private List<String> intermediateNames = new ArrayList<>();
+	private final List<ALatLon> intermediatePoints = new ArrayList<>();
+	private final List<String> intermediateNames = new ArrayList<>();
 
 	public CalculateRouteParams(ALatLon startPoint, String startPointName,
 								ALatLon endPoint, String endPointName,

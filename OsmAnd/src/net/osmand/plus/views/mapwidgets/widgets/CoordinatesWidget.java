@@ -1,11 +1,17 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -26,16 +32,11 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
 
 public class CoordinatesWidget extends MapWidget {
 
@@ -105,7 +106,7 @@ public class CoordinatesWidget extends MapWidget {
 					intent.putExtra(Intent.EXTRA_TEXT, coordinates);
 					intent.setType("text/plain");
 					Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_location));
-					AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
+					AndroidUtils.startActivityIfSafe(mapActivity, intent, chooserIntent);
 				});
 		UiUtilities.setupSnackbar(snackbar, isNightMode(), 5);
 		snackbar.show();
@@ -235,6 +236,10 @@ public class CoordinatesWidget extends MapWidget {
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
 		if (updatedVisibility) {
+			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateTopWidgetsPanel();
+			}
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;

@@ -558,7 +558,7 @@
     <string name="search_position_current_location_found">Minha posição (encontrada)</string>
     <string name="search_position_address">Endereço…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="shared_string_undefined">Indefinido</string>
+    <string name="shared_string_undefined">Não definido</string>
     <string name="search_position_map_view">Centro do mapa atual</string>
     <string name="select_search_position">Origem:</string>
     <string name="context_menu_item_search">Pesquisar perto daqui</string>
@@ -1413,7 +1413,7 @@
     <string name="parking_place">Lugar de estacionamento</string>
     <string name="version_settings">Versões de teste</string>
     <string name="navigation_over_track">Iniciar a navegação ao longo do trilho\?</string>
-    <string name="rendering_attr_transportStops_name">Paragens de transporte</string>
+    <string name="rendering_attr_transportStops_name">Paragens de transportes públicos</string>
     <string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em aparelhos muito antigos).</string>
     <string name="wake_on_voice">Ligar o ecrã</string>
     <string name="configure_map">Configurar mapa</string>
@@ -1901,7 +1901,7 @@
     <string name="mapillary_descr">Fotografias online ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Fotografias ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
-    <string name="private_access_routing_req">O seu destino está localizado numa área de acesso privado. Permitir uso de estradas privadas para esta viagem\?</string>
+    <string name="private_access_routing_req">O seu destino está localizado numa área com acesso privado. Permitir a utilização de estradas privadas para esta viagem\?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
     <string name="increase_search_radius">Aumentar raio de pesquisa</string>
     <string name="nothing_found">Não foi encontrado nada</string>
@@ -2587,7 +2587,7 @@
     <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre
 \n• Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
 \n• Navegação e modos de visualização especiais para bicicleta e pedestres
-\n• Paragens de transporte público opcionais (autocarro, elétrico, comboio) incluindo nomes de linhas
+\n• Paragens de transportes públicos opcionais (autocarro, elétrico, comboio) incluindo nomes de linhas
 \n• Gravação opcional de viagem para ficheiro GPX local ou serviço online
 \n• Visualização opcional de velocidade e altitudes
 \n• Visualização de curvas de nível e sombreamento de relevo (com um complemento adicional)</string>
@@ -2950,8 +2950,8 @@
     <string name="osmand_routing_promo">Adicione a sua própria versão alterada do ficheiro \"routing.xml\" em \"..osmand/routing\"</string>
     <string name="app_mode_skiing">Esqui</string>
     <string name="base_profile_descr_ski">Esqui</string>
-    <string name="show_compass_ruler">Mostrar régua de compasso</string>
-    <string name="hide_compass_ruler">Ocultar régua de compasso</string>
+    <string name="show_compass_ruler">Mostrar régua de bússola</string>
+    <string name="hide_compass_ruler">Ocultar régua de bússola</string>
     <string name="select_icon_profile_dialog_title">Selecionar ícone</string>
     <string name="settings_routing_mode_string">Modo: %s</string>
     <string name="settings_derived_routing_mode_string">Modo de utilizador, derivado de: %s</string>
@@ -4001,7 +4001,6 @@
     <string name="activity_type_hiking_name">Caminhada</string>
     <string name="temporary_conditional_routing_descr">Usar restrições da estrada que estejam ativas agora no mapa</string>
     <string name="routing_attr_driving_style_description">Selecione o motivo da condução para obter uma rota mais curta, rápida e segura</string>
-    <string name="map_orientation_threshold_descr">Não rodar a visualização do mapa se a velocidade for inferior ao limite definido</string>
     <string name="latest_openstreetmap_update">Última atualização do OpenStreetMap disponível:</string>
     <string name="updated">Atualizado: %s</string>
     <string name="last_time_checked">Última verificação: %s</string>
@@ -4064,7 +4063,7 @@
     <string name="monthly_subscription">Subscrição mensal</string>
     <string name="three_months_subscription">Subscrição de 3 meses</string>
     <string name="next_billing_date">Próxima faturação: %1$s</string>
-    <string name="in_grace_period">Em período experimental</string>
+    <string name="in_grace_period">Em período de prorrogação para pagamento</string>
     <string name="on_hold">Em espera</string>
     <string name="routing_attr_allow_intermittent_name">Permitir cursos de água sazonais</string>
     <string name="osmand_live_cancelled">Cancelada</string>
@@ -4657,7 +4656,7 @@
     <string name="shared_string_speed">Velocidade</string>
     <string name="app_mode_mountain_bicycle">Bicicleta de montanha</string>
     <string name="lanes_widgets_desc">O widget das vias de trânsito mostra a disposição atual das vias de trânsito na estrada em que se encontra e destaca as vias que deve tomar para seguir a rota ativa.</string>
-    <string name="compass_on_circles">Compasso nos círculos</string>
+    <string name="compass_on_circles">Bússola em círculos</string>
     <string name="distance_circles">Círculos-distância</string>
     <string name="circle_settings">Configurações dos círculos</string>
     <string name="colour_of_circles">Cor dos círculos</string>
@@ -4691,7 +4690,6 @@
     <string name="average_speed_skip_stops">Ter em conta as paragens</string>
     <string name="average_speed_time_interval_desc">Especificar o intervalo de tempo para o qual a velocidade média será medida.</string>
     <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
-    <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s não será contada e afetará a velocidade média.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
     <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
@@ -4699,4 +4697,88 @@
     <string name="import_as_one_track">Importar como um só trilho</string>
     <string name="use_latin_name_if_missing">Usar nome latino se faltar</string>
     <string name="transport_hazmat_no_desc">Em algumas estradas e túneis é proibido o transporte de materiais perigosos.</string>
+    <string name="marker_2nd">2º marcador</string>
+    <string name="marker_1st">1º marcador</string>
+    <string name="map_marker_average_speed_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular o tempo estimado de chegada.</string>
+    <string name="switch_widget_mode_desc">Pode alternar o modo tocando no widget.</string>
+    <string name="side_marker_eta">Hora estimada de chegada</string>
+    <string name="reset_all_settings_desc">Quer mesmo repor todas as configurações de origem\?</string>
+    <string name="goods_delivery_desc_4">Se o peso do seu veículo for superior a 3,5 toneladas, tem de usar o perfil \"Camião\".</string>
+    <string name="goods_delivery_desc_2">Serão evitadas estradas com proibição de entregas de mercadorias.</string>
+    <string name="goods_delivery_desc">Os veículos de transporte de mercadorias podem ter o acesso restrito em algumas estradas.</string>
+    <string name="updated_map_time">Atualizado: %1$s.</string>
+    <string name="includes_osm_changes_until">Inclui alterações no OSM feitas até %1$s.</string>
+    <string name="next_live_update_date_and_time">Próxima atualização: %1$s em %2$s.</string>
+    <string name="live_update_frequency_week_variant">As atualizações do mapa serão feitas todas as semanas.</string>
+    <string name="altitude_correction">Correção de altitude</string>
+    <string name="no_altitude_data_desc">Pode anexar o trilho às estradas para obter dados de %1$s ou calculá-los online.</string>
+    <string name="co2_mission">Emissão de CO2</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_lpg_name">GPL</string>
+    <string name="routing_attr_motor_type_electric_name">Elétrico</string>
+    <string name="routing_attr_motor_type_gas_name">GNV</string>
+    <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
+    <string name="goods_delivery_desc_3">Aplica-se apenas a veículos que transportem mercadorias com pelo menos 4 rodas e peso não superior a 3,5 toneladas.</string>
+    <string name="next_live_update_time">Próxima atualização: em %1$s.</string>
+    <string name="routing_attr_motor_type_petrol_name">Gasolina</string>
+    <string name="routing_attr_goods_restrictions_name">Entrega de mercadorias</string>
+    <string name="calculate_online_altitude_descr">Calcular a altitude online nos servidores do OsmAnd com base em imagens de satélite e modelos digitais de elevação. Pode variar de acordo com a altitude registada pelo dispositivo e pode ser usado como correção de altitude.</string>
+    <string name="live_update_frequency_hour_variant">As atualizações do mapa serão feitas a cada hora.</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_description">Selecione o tipo de combustível usado pelo seu veículo para calcular a emissão de CO2.</string>
+    <string name="lang_ckb">Curdo central</string>
+    <string name="live_update_frequency_day_variant">As atualizações do mapa serão feitas todos os dias.</string>
+    <string name="routing_attr_motor_type_name">Combustível usado pelo motor</string>
+    <string name="accessibility_2d_view_off">Vista 2.5D desligada</string>
+    <string name="accessibility_2d_view_on">Vista 2.5D ligada</string>
+    <string name="download_complete">Descarregar concluído</string>
+    <string name="av_notes_video_widget_desc">Tocar no widget permite começar a gravar um vídeo.</string>
+    <string name="av_notes_audio_widget_desc">Tocar no widget permite gravar notas de áudio.</string>
+    <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas da viagem atual gravada.</string>
+    <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atual gravada.</string>
+    <string name="trip_recording_duration_widget_desc">Mostra a gravação do trilho, a duração em minutos/horas da viagem atualmente gravada.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra a distância da viagem atualmente gravada.</string>
+    <string name="time_to_destination_widget_desc">O widget mostra \"hora de chegada\" ou \"tempo a percorrer\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo de rota da localização atual.</string>
+    <string name="time_to_intermediate_widget_desc">O widget mostra o \"tempo de chegada\" ou \"tempo a percorrer\" até ao primeiro ponto intermédio. O tempo é constantemente atualizado durante a navegação, uma vez passados os pontos intermédios, o tempo será atualizado para o próximo ponto intermédio.</string>
+    <string name="distance_to_destination_widget_desc">O widget mostra a distância que resta até ao último ponto de destino.</string>
+    <string name="second_next_turn_widget_desc">O widget mostra informação sobre a sua segunda curva seguinte que é ativada se a curva estiver a aproximar-se da distância.</string>
+    <string name="next_turn_widget_desc">O widget mostra informação sobre a próxima curva com uma imagem da manobra e distância até ela.</string>
+    <string name="compass_desc">Mostra a direção para norte.</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Esquema de cores das curvas de nível de profundidade</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das curvas de nível de profundidade</string>
+    <string name="rendering_attr_depthContourWidth_name">Largura da curva de nível de profundidade</string>
+    <string name="auto_backup_title">Cópia de segurança automática</string>
+    <string name="shared_string_duplicate">Duplicar</string>
+    <string name="true_bearing_wdiget_desc">Ângulo entre o verdadeiro norte e o ponto alvo observado a partir da sua localização.</string>
+    <string name="compass_always_visible">Sempre visível</string>
+    <string name="auto_backup_preference_desc">Por predefinição, o Android guarda cópias de segurança dos favoritos, tokens de mapas e configurações do OsmAnd para os restaurar noutros dispositivos ou após reinstalação. Essa cópia de segurança é limitada a 25 MB.
+\nSe estiver a utilizar o OsmAnd Cloud, isto pode levar a mal entendidos após a reinstalação.</string>
+    <string name="av_notes_photo_widget_desc">Tocar no widget permite tirar uma fotografia.</string>
+    <string name="distance_to_intermediate_widget_desc">O widget mostra a distância restante até ao primeiro ponto intermédio. Uma vez passados os pontos intermédios, a distância será atualizada para o próximo ponto intermédio.</string>
+    <string name="widget_with_dot">Widget.</string>
+    <string name="relative_bearing_widget_desc">Mostra o ângulo entre a direção do seu movimento para a frente e o ponto alvo.</string>
+    <string name="second_marker_widget_desc">Pode configurar o widget para mostrar a distância ou hora estimada de chegada deixada para o segundo marcador de mapa.</string>
+    <string name="first_marker_widget_desc">Pode configurar o widget para mostrar a distância ou a hora estimada de chegada deixada para o primeiro marcador de mapa.</string>
+    <string name="compass_visible_if_map_rotated">Visível se o mapa estiver rodado</string>
+    <string name="compass_always_hidden">Sempre oculto</string>
+    <string name="compass_visible_if_map_rotated_desc">Oculto quando o Norte está acima</string>
+    <string name="compass_click_desc">Toque na bússola para alternar o modo de orientação do mapa.</string>
+    <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
+    <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT</string>
+    <string name="duplacate_widget_added_snackbar">Um widget duplicado é posicionado na linha seguinte da lista.</string>
+    <string name="auto_25_chars_route_tl_kr">Vire à esquerda e mantenha-se na direita</string>
+    <string name="auto_25_chars_route_tr_kl">Vire à direita e mantenha-se na esquerda</string>
+    <string name="auto_25_chars_route_tr_kr">Vire à direita e mantenha-se na direita</string>
+    <string name="auto_25_chars_route_tu_kl">Faça inversão de marcha e mantenha-se na esquerda</string>
+    <string name="auto_25_chars_route_tu_kr">Faça inversão de marcha e mantenha-se na direita</string>
+    <string name="auto_25_chars_route_roundabout_kl">Saia na %1$d saída e mantenha-se na esquerda</string>
+    <string name="auto_25_chars_route_roundabout_kr">Saia na %1$d saída e mantenha-se na direita</string>
+    <string name="connect_with_straight_line">Conectar com uma linha reta</string>
+    <string name="download_tiles">Descarregar mosaicos</string>
+    <string name="without_profiles_changing">Sem alteração de perfis</string>
+    <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s será contada e afetará a velocidade média.</string>
+    <string name="attach_roads_descr">Ativar para aproximar o trilho a uma rota válida anexada a mapas offline. Desta forma será corrigida a altitude da estrada, a informação da estrada e as curvas que poderão ser utilizadas mais tarde na navegação.</string>
+    <string name="attach_roads_warning">Pode anexar apenas uma pista registada às estradas</string>
 </resources>

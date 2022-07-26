@@ -199,7 +199,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		});
 	}
 
-	public static void setupListView(@NonNull final ListView listView) {
+	public static void setupListView(@NonNull ListView listView) {
 		if (listView.getFooterViewsCount() == 0) {
 			Context context = listView.getContext();
 			int padding = context.getResources().getDimensionPixelSize(R.dimen.toolbar_height_expanded);

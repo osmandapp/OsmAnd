@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +15,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
@@ -27,7 +40,6 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,6 +49,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -44,32 +58,18 @@ import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener {
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
+	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
@@ -95,6 +95,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		mapActivity = (MapActivity) requireMyActivity();
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, selectedAppMode);
 	}
 
 	@Nullable
@@ -249,15 +250,18 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private void setupButtonsCard() {
 		buttonsCard.removeAllViews();
 
-		buttonsCard.addView(createButtonWithSwitch(
-				R.drawable.ic_action_compass,
+		CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(selectedAppMode);
+		buttonsCard.addView(createButtonWithDesc(
+				compassVisibility.iconId,
 				getString(R.string.map_widget_compass),
-				settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode),
-				false,
+				compassVisibility.getTitle(app),
+				true,
 				v -> {
-					boolean enabled = settings.SHOW_COMPASS_ALWAYS.getModeValue(selectedAppMode);
-					settings.SHOW_COMPASS_ALWAYS.setModeValue(selectedAppMode, !enabled);
-					mapActivity.updateApplicationModeSettings();
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						CompassVisibilityBottomSheetDialogFragment.showInstance(fragmentManager, this, selectedAppMode);
+					}
 				}
 		));
 
@@ -298,62 +302,22 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-
-		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, Arrays.asList(WidgetsPanel.values()));
-		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, null, false);
-		}
-		settings.MAP_INFO_CONTROLS.resetModeToDefault(selectedAppMode);
-		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(selectedAppMode);
-
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			panel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
-		}
-
-		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(selectedAppMode);
-		settings.SHOW_COMPASS_ALWAYS.resetModeToDefault(selectedAppMode);
-		settings.SHOW_DISTANCE_RULER.resetModeToDefault(selectedAppMode);
-		settings.QUICK_ACTION.resetModeToDefault(selectedAppMode);
-
+		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.resetConfigureScreenSettings();
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
 	}
 
 	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
-
-		List<WidgetsPanel> centerPanels = Arrays.asList(WidgetsPanel.TOP, WidgetsPanel.BOTTOM);
-		Set<MapWidgetInfo> centerWidgetInfos = widgetRegistry
-				.getWidgetsForPanel(mapActivity, selectedAppMode, 0, centerPanels);
-		for (MapWidgetInfo widgetInfo : centerWidgetInfos) {
-			OsmandPreference<Boolean> visibilityPref = widgetInfo.widget.getWidgetVisibilityPref();
-			if (visibilityPref != null) {
-				widgetInfo.enableDisableForMode(selectedAppMode, visibilityPref.getModeValue(appMode));
-			}
-		}
-		copyPreferenceFromAppMode(settings.MAP_INFO_CONTROLS, appMode);
-		copyPreferenceFromAppMode(settings.CUSTOM_WIDGETS_KEYS, appMode);
-
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			copyPreferenceFromAppMode(panel.getOrderPreference(settings), appMode);
-		}
-
-		copyPreferenceFromAppMode(settings.TRANSPARENT_MAP_THEME, appMode);
-		copyPreferenceFromAppMode(settings.SHOW_COMPASS_ALWAYS, appMode);
-		copyPreferenceFromAppMode(settings.SHOW_DISTANCE_RULER, appMode);
-		copyPreferenceFromAppMode(settings.QUICK_ACTION, appMode);
-
+		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
-	}
-
-	private <T> void copyPreferenceFromAppMode(@NonNull OsmandPreference<T> pref, @NonNull ApplicationMode fromAppMode) {
-		pref.setModeValue(selectedAppMode, pref.getModeValue(fromAppMode));
 	}
 
 	private void recreateControlsCompletely(@NonNull MapActivity mapActivity) {
@@ -369,13 +333,32 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
-		setupWidgetsCard();
+	public void onCompassVisibilityUpdated(@NonNull CompassVisibility visibility) {
+		setupButtonsCard();
+	}
+
+	@Override
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
+		updateWidgetsCountForPanel(widgetInfo.widgetPanel);
+	}
+
+	private void updateWidgetsCountForPanel(@NonNull WidgetsPanel panel) {
+		MapActivity mapActivity = getMapActivity();
+		View panelContainer = widgetsCard.findViewWithTag(panel.name());
+		if (mapActivity != null && panelContainer != null) {
+			int count = getWidgetsCount(mapActivity, panel);
+			updateWidgetsCount(panelContainer, count);
+		}
 	}
 
 	@Override
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
 		setupWidgetsCard();
+	}
+
+	@Override
+	public void onWidgetsCleared() {
+
 	}
 
 	private View createWidgetGroupView(@NonNull WidgetsPanel panel, boolean showShortDivider, boolean showLongDivider) {
@@ -384,13 +367,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+		view.setTag(panel.name());
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		TextView tvTitle = view.findViewById(R.id.title);
-		TextView tvDesc = view.findViewById(R.id.items_count_descr);
 
 		MapActivity mapActivity = requireMapActivity();
-		int filter = ENABLED_MODE | AVAILABLE_MODE;
-		int count = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
+		int count = getWidgetsCount(mapActivity, panel);
 		int iconColor = count > 0 ? activeColor : defColor;
 		Drawable icon = getPaintedContentIcon(panel.getIconId(rtl), iconColor);
 		ivIcon.setImageDrawable(icon);
@@ -398,8 +380,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		String title = getString(panel.getTitleId(rtl));
 		tvTitle.setText(title);
 
-		tvDesc.setVisibility(View.VISIBLE);
-		tvDesc.setText(String.valueOf(count));
+		updateWidgetsCount(view, count);
 
 		if (showShortDivider) {
 			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
@@ -417,6 +398,17 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		});
 		setupListItemBackground(view);
 		return view;
+	}
+
+	private int getWidgetsCount(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel panel) {
+		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		return widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
+	}
+
+	private void updateWidgetsCount(@NonNull View container, int count) {
+		TextView countContainer = container.findViewById(R.id.items_count_descr);
+		countContainer.setText(String.valueOf(count));
+		AndroidUiHelper.updateVisibility(countContainer, true);
 	}
 
 	private View createButtonWithSwitch(int iconId,
@@ -463,7 +455,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private View createButtonWithDesc(int iconId,
 	                                  @NonNull String title,
-	                                  @NonNull String desc,
+	                                  @Nullable String desc,
 	                                  boolean enabled,
 	                                  OnClickListener listener) {
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
@@ -479,8 +471,10 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		tvTitle.setText(title);
 
 		TextView tvDesc = view.findViewById(R.id.description);
-		tvDesc.setVisibility(View.VISIBLE);
-		tvDesc.setText(desc);
+		if (desc != null) {
+			tvDesc.setText(desc);
+			AndroidUiHelper.updateVisibility(tvDesc, true);
+		}
 
 		setupClickListener(view, listener);
 		setupListItemBackground(view);

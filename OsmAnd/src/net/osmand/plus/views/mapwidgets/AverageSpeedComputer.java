@@ -1,7 +1,13 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -10,24 +16,19 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 
 public class AverageSpeedComputer {
 
 	private static final long ADD_POINT_INTERVAL_MILLIS = 1000;
-	private static final long MISSING_POINT_TIME_THRESHOLD = 5000;
+	private static final boolean CALCULATE_UNIFORM_SPEED = true;
 
 	public static final List<Long> MEASURED_INTERVALS;
 	public static final long DEFAULT_INTERVAL_MILLIS = 30 * 60 * 1000L;
@@ -43,14 +44,16 @@ public class AverageSpeedComputer {
 		MEASURED_INTERVALS = Collections.unmodifiableList(modifiableIntervals);
 	}
 
+	private static final long BIGGEST_MEASURED_INTERVAL = MEASURED_INTERVALS.get(MEASURED_INTERVALS.size() - 1);
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
 	private final SegmentsList segmentsList;
+	private final List<Location> locations = new LinkedList<>();
 
-	private LatLon previousLatLon = null;
-	private long previousTime = 0;
-	private boolean previousPointLowSpeed = false;
+	private Location previousLocation;
+	private long previousTime;
 
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -59,22 +62,12 @@ public class AverageSpeedComputer {
 	}
 
 	public void updateLocation(@Nullable Location location) {
-		long time = System.currentTimeMillis();
-
-		boolean recordPaused = previousTime > 0 && time - previousTime > MISSING_POINT_TIME_THRESHOLD;
-		if (recordPaused) {
-			segmentsList.clear();
-			previousLatLon = null;
-			previousTime = 0;
-			previousPointLowSpeed = false;
-		}
-
-		boolean save = location != null
-				&& isEnabled()
-				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
-				&& time - previousTime >= ADD_POINT_INTERVAL_MILLIS;
-		if (save) {
-			saveLocation(location, time);
+		if (location != null) {
+			long time = System.currentTimeMillis();
+			boolean save = isEnabled() && OsmAndLocationProvider.isNotSimulatedLocation(location);
+			if (save) {
+				saveLocation(location, time);
+			}
 		}
 	}
 
@@ -97,17 +90,33 @@ public class AverageSpeedComputer {
 	}
 
 	private void saveLocation(@NonNull Location location, long time) {
-		LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		boolean lowSpeed = !location.hasSpeed() || location.getSpeed() < getSpeedToSkipInMetersPerSecond();
-
-		if (previousLatLon != null && previousTime > 0) {
-			double distance = MapUtils.getDistance(previousLatLon, latLon);
-			segmentsList.addSegment(new Segment(distance, previousTime, time, previousPointLowSpeed || lowSpeed));
+		if (CALCULATE_UNIFORM_SPEED) {
+			if (location.hasSpeed()) {
+				Location loc = new Location(location);
+				loc.setTime(time);
+				locations.add(loc);
+				clearExpiredLocations(locations, BIGGEST_MEASURED_INTERVAL);
+			}
+		} else if (time - previousTime >= ADD_POINT_INTERVAL_MILLIS) {
+			if (previousLocation != null && previousTime > 0) {
+				double distance = MapUtils.getDistance(previousLocation, location);
+				segmentsList.addSegment(new Segment(distance, previousTime, time));
+			}
+			previousLocation = location;
+			previousTime = time;
 		}
+	}
 
-		previousLatLon = latLon;
-		previousTime = time;
-		previousPointLowSpeed = lowSpeed;
+	private void clearExpiredLocations(@NonNull List<Location> locations, long measuredInterval) {
+		long expirationTime = System.currentTimeMillis() - measuredInterval;
+		for (Iterator<Location> iterator = locations.iterator(); iterator.hasNext(); ) {
+			Location location = iterator.next();
+			if (location.getTime() < expirationTime) {
+				iterator.remove();
+			} else {
+				break;
+			}
+		}
 	}
 
 	private float getSpeedToSkipInMetersPerSecond() {
@@ -132,14 +141,44 @@ public class AverageSpeedComputer {
 	 * @return average speed in meters/second or {@link Float#NaN} if average speed cannot be calculated
 	 */
 	public float getAverageSpeed(long measuredInterval, boolean skipLowSpeed) {
+		if (CALCULATE_UNIFORM_SPEED) {
+			return calculateUniformSpeed(measuredInterval, skipLowSpeed);
+		} else {
+			return calculateNonUniformSpeed(measuredInterval, skipLowSpeed);
+		}
+	}
+
+	private float calculateUniformSpeed(long measuredInterval, boolean skipLowSpeed) {
+		List<Location> locationsToUse = new ArrayList<>(locations);
+		clearExpiredLocations(locationsToUse, measuredInterval);
+
+		if (!Algorithms.isEmpty(locationsToUse)) {
+			float totalSpeed = 0;
+			float speedToSkip = getSpeedToSkipInMetersPerSecond();
+
+			int countedLocations = 0;
+			for (Location location : locationsToUse) {
+				if (!skipLowSpeed || location.getSpeed() >= speedToSkip) {
+					totalSpeed += location.getSpeed();
+					countedLocations++;
+				}
+			}
+			return countedLocations != 0 ? totalSpeed / countedLocations : Float.NaN;
+		}
+		return Float.NaN;
+	}
+
+	private float calculateNonUniformSpeed(long measuredInterval, boolean skipLowSpeed) {
 		long intervalStart = System.currentTimeMillis() - measuredInterval;
-		List<Segment> segments = segmentsList.getSegments(intervalStart, MISSING_POINT_TIME_THRESHOLD);
+		List<Segment> segments = segmentsList.getSegments(intervalStart);
 
 		double totalDistance = 0;
 		double totalTimeMillis = 0;
 
+		float speedToSkip = getSpeedToSkipInMetersPerSecond();
+
 		for (Segment segment : segments) {
-			if (!segment.lowSpeed || !skipLowSpeed) {
+			if (!skipLowSpeed || !segment.isLowSpeed(speedToSkip)) {
 				totalDistance += segment.distance;
 				totalTimeMillis += segment.endTime - segment.startTime;
 			}
@@ -167,30 +206,22 @@ public class AverageSpeedComputer {
 
 		private final Segment[] segments;
 
-		private int tailIndex = 0;
-		private int headIndex = 0;
+		private int tailIndex;
+		private int headIndex;
 
 		public SegmentsList() {
-			int size = (int) (MEASURED_INTERVALS.get(MEASURED_INTERVALS.size() - 1) / ADD_POINT_INTERVAL_MILLIS) + 1;
+			int size = (int) (BIGGEST_MEASURED_INTERVAL / ADD_POINT_INTERVAL_MILLIS) + 1;
 			segments = new Segment[size];
 		}
 
 		@NonNull
-		public List<Segment> getSegments(long fromTimeInclusive, long allowedStartTimeGap) {
+		public List<Segment> getSegments(long fromTimeInclusive) {
 			List<Segment> filteredSegments = new ArrayList<>();
 			for (int i = tailIndex; i != headIndex; i = nextIndex(i)) {
 				Segment segment = segments[i];
-				if (segment == null || segment.startTime < fromTimeInclusive) {
-					continue;
+				if (segment != null && segment.startTime >= fromTimeInclusive) {
+					filteredSegments.add(segment);
 				}
-
-				boolean firstSegment = filteredSegments.size() == 0;
-				boolean hugeGap = fromTimeInclusive + allowedStartTimeGap < segment.startTime;
-				if (firstSegment && hugeGap) {
-					return Collections.emptyList();
-				}
-
-				filteredSegments.add(segment);
 			}
 			return filteredSegments;
 		}
@@ -221,12 +252,6 @@ public class AverageSpeedComputer {
 			tailIndex = nextIndex(tailIndex);
 		}
 
-		public void clear() {
-			Arrays.fill(segments, null);
-			tailIndex = 0;
-			headIndex = 0;
-		}
-
 		private int nextIndex(int index) {
 			return (index + 1) % segments.length;
 		}
@@ -237,13 +262,17 @@ public class AverageSpeedComputer {
 		public final double distance;
 		public final long startTime;
 		public final long endTime;
-		public final boolean lowSpeed;
+		public final float speed;
 
-		public Segment(double distance, long startTime, long endTime, boolean lowSpeed) {
+		public Segment(double distance, long startTime, long endTime) {
 			this.distance = distance;
 			this.startTime = startTime;
 			this.endTime = endTime;
-			this.lowSpeed = lowSpeed;
+			this.speed = (float) (distance / ((endTime - startTime) / 1000f));
+		}
+
+		public boolean isLowSpeed(float speedToSkip) {
+			return speed < speedToSkip;
 		}
 	}
 }

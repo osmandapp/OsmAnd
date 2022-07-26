@@ -24,7 +24,7 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
 import net.osmand.util.Algorithms;
@@ -39,7 +39,7 @@ public class WptPtMenuController extends MenuController {
 	private AudioVideoNoteMenuController audioVideoNoteController;
 
 	public WptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull MapActivity mapActivity,
-	                           @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+	                           @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
 		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
 
@@ -201,7 +201,7 @@ public class WptPtMenuController extends MenuController {
 		}
 	}
 
-	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
 		return new WptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
 	}
 }

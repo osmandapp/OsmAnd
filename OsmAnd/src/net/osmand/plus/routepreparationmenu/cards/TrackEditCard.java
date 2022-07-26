@@ -1,20 +1,19 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.GPXUtilities.Route;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -22,6 +21,11 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -41,7 +45,7 @@ public class TrackEditCard extends MapBaseCard {
 		return R.layout.gpx_track_item;
 	}
 
-	private GpxDataItem getDataItem(final GPXInfo info) {
+	private GpxDataItem getDataItem(GPXInfo info) {
 		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -84,36 +88,24 @@ public class TrackEditCard extends MapBaseCard {
 		}
 		String title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(fileName));
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
-			int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
-			int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
-			title = app.getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
+
+		if (routeParams != null) {
+			title = getGpxTitleWithSelectedItem(app, routeParams, title);
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, analysis, app);
 
-		if (gpxFile.getNonEmptySegmentsCount() > 1
-				&& routeParams != null
-				&& routeParams.getSelectedSegment() != -1
-				&& gpxFile.getNonEmptySegmentsCount() > routeParams.getSelectedSegment()) {
-			TextView distanceView = view.findViewById(R.id.distance);
-			TextView timeView = view.findViewById(R.id.time);
-			ImageView timeIcon = view.findViewById(R.id.time_icon);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
-			List<GPXUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-			GPXUtilities.TrkSegment segment = segments.get(routeParams.getSelectedSegment());
-			double distance = TrackSelectSegmentAdapter.getDistance(segment);
-			long time = TrackSelectSegmentAdapter.getSegmentTime(segment);
-			boolean timeAvailable = time != 1;
-			if (timeAvailable) {
-				timeView.setText(Algorithms.formatDuration((int) (time / 1000),
-						app.accessibilityEnabled()));
+		if (routeParams != null) {
+			int selectedRoute = routeParams.getSelectedRoute();
+			int selectedSegment = routeParams.getSelectedSegment();
+			if (selectedSegment != -1 && gpxFile.getNonEmptySegmentsCount() > selectedSegment) {
+				List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+				TrkSegment segment = segments.get(selectedSegment);
+				setupSecondRow(segment.points);
+			} else if (selectedRoute != -1 && gpxFile.routes.size() > selectedRoute) {
+				Route route = gpxFile.routes.get(selectedRoute);
+				setupSecondRow(route.points);
 			}
-			AndroidUiHelper.updateVisibility(timeView, timeAvailable);
-			AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
-			distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
 		}
-
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
 		editButton.setVisibility(View.VISIBLE);
 		editButton.setImageDrawable(getContentIcon(R.drawable.ic_action_edit_dark));
@@ -127,7 +119,40 @@ public class TrackEditCard extends MapBaseCard {
 		AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
 
 		int activeColor = getActiveColor();
-		int bgColor = ColorUtilities.getColorWithAlpha(activeColor, 0.1f);
-		view.setBackgroundDrawable(new ColorDrawable(bgColor));
+		view.setBackgroundColor(ColorUtilities.getColorWithAlpha(activeColor, 0.1f));
+	}
+
+	private void setupSecondRow(@NonNull List<WptPt> points) {
+		TextView timeView = view.findViewById(R.id.time);
+		ImageView timeIcon = view.findViewById(R.id.time_icon);
+		TextView distanceView = view.findViewById(R.id.distance);
+
+		long time = TrackSelectSegmentAdapter.getSegmentTime(points);
+		double distance = TrackSelectSegmentAdapter.getDistance(points);
+
+		boolean timeAvailable = time != 1;
+		if (timeAvailable) {
+			timeView.setText(Algorithms.formatDuration((int) (time / 1000), app.accessibilityEnabled()));
+		}
+		AndroidUiHelper.updateVisibility(timeView, timeAvailable);
+		AndroidUiHelper.updateVisibility(timeIcon, timeAvailable);
+		distanceView.setText(OsmAndFormatter.getFormattedDistance((float) distance, app));
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_icon), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.points_count), false);
+	}
+
+	public static String getGpxTitleWithSelectedItem(@NonNull OsmandApplication app, @NonNull GPXRouteParamsBuilder paramsBuilder, String fileName) {
+		GPXFile gpxFile = paramsBuilder.getFile();
+		int selectedRoute = paramsBuilder.getSelectedRoute();
+		int selectedSegment = paramsBuilder.getSelectedSegment();
+		if (gpxFile.getNonEmptySegmentsCount() > 1 && selectedSegment != -1) {
+			int totalCount = gpxFile.getNonEmptyTrkSegments(false).size();
+			return app.getString(R.string.of, selectedSegment + 1, totalCount) + ", " + fileName;
+		} else if (gpxFile.routes.size() > 1 && selectedRoute != -1) {
+			int totalCount = gpxFile.routes.size();
+			return app.getString(R.string.of, selectedRoute + 1, totalCount) + ", " + fileName;
+		}
+		return fileName;
 	}
 }

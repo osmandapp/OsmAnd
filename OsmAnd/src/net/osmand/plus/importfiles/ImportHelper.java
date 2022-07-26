@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
@@ -13,6 +14,8 @@ import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.PICKUP_DATE;
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
@@ -45,8 +48,8 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -58,7 +61,6 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.importfiles.ui.ImportTracksFragment;
-import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -66,7 +68,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -143,12 +145,12 @@ public class ImportHelper {
 		return gpxImportCompleteListener;
 	}
 
-	public void handleContentImport(final Uri contentUri, Bundle extras, final boolean useImportDir) {
+	public void handleContentImport(Uri contentUri, Bundle extras, boolean useImportDir) {
 		String name = getNameFromContentUri(app, contentUri);
 		handleFileImport(contentUri, name, extras, useImportDir);
 	}
 
-	public void importFavoritesFromGpx(final GPXFile gpxFile, final String fileName) {
+	public void importFavoritesFromGpx(GPXFile gpxFile, String fileName) {
 		importFavoritesImpl(gpxFile, fileName, false);
 	}
 
@@ -156,7 +158,7 @@ public class ImportHelper {
 		handleResult(result, name, fileSize, save, useImportDir, false);
 	}
 
-	public boolean handleGpxImport(final Uri contentUri, OnSuccessfulGpxImport onGpxImport, final boolean useImportDir) {
+	public boolean handleGpxImport(Uri contentUri, OnSuccessfulGpxImport onGpxImport, boolean useImportDir) {
 		String name = getNameFromContentUri(app, contentUri);
 		boolean isOsmandSubDir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubDir && name != null) {
@@ -183,7 +185,7 @@ public class ImportHelper {
 		boolean isFileIntent = "file".equals(scheme);
 		boolean isContentIntent = "content".equals(scheme);
 		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
-		final boolean saveFile = !isFileIntent || !isOsmandSubdir;
+		boolean saveFile = !isFileIntent || !isOsmandSubdir;
 		String fileName = "";
 		if (isFileIntent) {
 			fileName = new File(uri.getPath()).getName();
@@ -216,6 +218,8 @@ public class ImportHelper {
 			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true);
 		} else if (fileName.endsWith(SQLITE_CHART_FILE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName.replace(SQLITE_CHART_FILE_EXT, SQLITE_EXT));
+		} else if (fileName.endsWith(HEIGHTMAP_SQLITE_EXT)) {
+			handleSqliteHeightmapImport(intentUri, fileName);
 		} else {
 			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false);
 		}
@@ -276,6 +280,10 @@ public class ImportHelper {
 		executeImportTask(new SqliteTileImportTask(activity, uri, name));
 	}
 
+	protected void handleSqliteHeightmapImport(Uri uri, String name) {
+		executeImportTask(new SqliteHeightmapImportTask(activity, uri, name));
+	}
+
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {
 		fileName = fileName.replace(IndexConstants.ZIP_EXT, "");
 		if (extras != null
@@ -300,8 +308,8 @@ public class ImportHelper {
 		}
 	}
 
-	protected void handleOsmAndSettingsImport(Uri uri, String name, final List<ExportSettingsType> settingsTypes,
-	                                          final boolean replace, boolean silentImport, String latestChanges, int version,
+	protected void handleOsmAndSettingsImport(Uri uri, String name, List<ExportSettingsType> settingsTypes,
+	                                          boolean replace, boolean silentImport, String latestChanges, int version,
 	                                          CallbackWithObject<List<SettingsItem>> callback) {
 		executeImportTask(new SettingsImportTask(activity, uri, name, settingsTypes, replace, silentImport,
 				latestChanges, version, callback));
@@ -362,7 +370,7 @@ public class ImportHelper {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			try {
-				Intent intent = ImportHelper.getImportTrackIntent();
+				Intent intent = getImportTrackIntent();
 				ActivityResultListener listener = getImportFileResultListener(importType, callback);
 				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 				mapActivity.registerActivityResultListener(listener);
@@ -422,8 +430,8 @@ public class ImportHelper {
 				forceImportFavourites);
 	}
 
-	protected void handleResult(final GPXFile result, final String name, OnSuccessfulGpxImport onGpxImport,
-	                            long fileSize, final boolean save, final boolean useImportDir,
+	protected void handleResult(GPXFile result, String name, OnSuccessfulGpxImport onGpxImport,
+	                            long fileSize, boolean save, boolean useImportDir,
 	                            boolean forceImportFavourites) {
 		if (result != null) {
 			if (result.error != null) {
@@ -458,7 +466,7 @@ public class ImportHelper {
 							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 							Uri uri = Uri.fromParts("package", app.getPackageName(), null);
 							intent.setData(uri);
-							app.startActivity(intent);
+							AndroidUtils.startActivityIfSafe(app, intent);
 							if (gpxImportCompleteListener != null) {
 								gpxImportCompleteListener.onImportComplete(false);
 							}
@@ -486,8 +494,12 @@ public class ImportHelper {
 	                              boolean useImportDir, @Nullable OnSuccessfulGpxImport onSuccessfulGpxImport) {
 		String existingFilePath = getExistingFilePath(app, name, fileSize);
 		if (existingFilePath != null) {
+			if (onSuccessfulGpxImport == OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU) {
+				showGpxContextMenu(existingFilePath);
+			} else {
+				showNeededScreen(onSuccessfulGpxImport, gpxFile);
+			}
 			app.showToastMessage(R.string.file_already_imported);
-			showNeededScreen(onSuccessfulGpxImport, gpxFile);
 		} else {
 			File destinationDir = useImportDir
 					? app.getAppPath(GPX_IMPORT_DIR)
@@ -565,9 +577,9 @@ public class ImportHelper {
 		MeasurementToolFragment.showInstance(fragmentManager, editingContext, mode, false);
 	}
 
-	protected void importGpxOrFavourites(final GPXFile gpxFile, final String fileName, final long fileSize,
-	                                     final boolean save, final boolean useImportDir,
-	                                     final boolean forceImportFavourites, final boolean forceImportGpx) {
+	protected void importGpxOrFavourites(GPXFile gpxFile, String fileName, long fileSize,
+	                                     boolean save, boolean useImportDir,
+	                                     boolean forceImportFavourites, boolean forceImportGpx) {
 		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
@@ -616,7 +628,7 @@ public class ImportHelper {
 				p.name = app.getString(R.string.shared_string_waypoint);
 			}
 			if (!Algorithms.isEmpty(p.name)) {
-				final String fpCat;
+				String fpCat;
 				if (p.category == null) {
 					if (forceImportFavourites) {
 						fpCat = fileName;
@@ -639,8 +651,13 @@ public class ImportHelper {
 					point.setIconIdFromName(iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-				if (!Algorithms.isEmpty(extensions.get(ItineraryDataHelper.CREATION_DATE))) {
-					point.setCreationDate(GPXUtilities.parseTime(extensions.get(ItineraryDataHelper.CREATION_DATE)));
+
+				String time = extensions.get(PICKUP_DATE);
+				if (time == null) {
+					time = extensions.get(CREATION_DATE);
+				}
+				if (!Algorithms.isEmpty(time)) {
+					point.setPickupDate(GPXUtilities.parseTime(time));
 				}
 				favourites.add(point);
 			}
@@ -649,7 +666,7 @@ public class ImportHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <P> void executeImportTask(final AsyncTask<P, ?, ?> importTask, final P... requests) {
+	private <P> void executeImportTask(AsyncTask<P, ?, ?> importTask, P... requests) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override

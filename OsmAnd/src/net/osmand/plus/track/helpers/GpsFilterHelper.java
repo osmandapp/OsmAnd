@@ -17,14 +17,12 @@ import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -43,7 +41,7 @@ public class GpsFilterHelper {
 	private final Set<GpsFilterListener> listeners = new HashSet<>();
 
 	private final Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
-	private GpsFilterTask gpsFilterTask = null;
+	private GpsFilterTask gpsFilterTask;
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -180,7 +178,7 @@ public class GpsFilterHelper {
 			List<GpxDataItem> dataItems = app.getGpxDbHelper().getSplitItems();
 			for (GpxDataItem dataItem : dataItems) {
 				if (dataItem.getFile().getAbsolutePath().equals(gpxFile.path)) {
-					return GpxSelectionHelper.processSplit(app, dataItem, gpxFile);
+					return GpxDisplayHelper.processSplit(app, dataItem, gpxFile);
 				}
 			}
 			return null;
@@ -243,7 +241,7 @@ public class GpsFilterHelper {
 		return copiedTracks;
 	}
 
-	public static abstract class GpsFilter {
+	public abstract static class GpsFilter {
 
 		public static final String TAG_SMOOTHING_THRESHOLD = "smoothing_threshold";
 		public static final String TAG_MIN_FILTER_SPEED = "min_filter_speed";
@@ -361,7 +359,7 @@ public class GpsFilterHelper {
 		@NonNull
 		protected CharSequence styleFilterTitle(@NonNull String title, int boldEndIndex) {
 			SpannableString spannableTitle = new SpannableString(title);
-			spannableTitle.setSpan(blackTextSpan, 0,boldEndIndex, SPAN_FLAGS);
+			spannableTitle.setSpan(blackTextSpan, 0, boldEndIndex, SPAN_FLAGS);
 			spannableTitle.setSpan(boldSpan, 0, boldEndIndex, SPAN_FLAGS);
 			spannableTitle.setSpan(greyTextSpan, boldEndIndex, title.length(), SPAN_FLAGS);
 			return spannableTitle;

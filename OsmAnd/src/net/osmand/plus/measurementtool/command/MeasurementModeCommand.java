@@ -44,6 +44,7 @@ public abstract class MeasurementModeCommand implements Command {
 		APPROXIMATE_POINTS,
 		REVERSE_POINTS,
 		SPLIT_POINTS,
-		JOIN_POINTS
+		JOIN_POINTS,
+		DISABLE_APPROXIMATION_CHECK
 	}
 }

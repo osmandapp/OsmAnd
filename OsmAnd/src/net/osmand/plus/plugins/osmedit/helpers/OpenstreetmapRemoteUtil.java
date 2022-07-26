@@ -60,7 +60,7 @@ import gnu.trove.list.array.TLongArrayList;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
-	private final static Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
+	private static final Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
 
 	private static final long NO_CHANGESET_ID = -1;
 
@@ -305,15 +305,11 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		long now = System.currentTimeMillis();
 		// changeset is idle for more than 30 minutes (1 hour according specification)
-		if (now - changeSetTimeStamp > 30 * 60 * 1000) {
-			return true;
-		}
-
-		return false;
+		return now - changeSetTimeStamp > 30 * 60 * 1000;
 	}
 
 	@Override
-	public Entity commitEntityImpl(Action action, final Entity n, EntityInfo info, String comment,
+	public Entity commitEntityImpl(Action action, Entity n, EntityInfo info, String comment,
 	                               boolean closeChangeSet, Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
@@ -391,10 +387,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	public EntityInfo loadEntity(Entity n) {
 		long entityId = n.getId(); // >> 1;
-		boolean isWay = false;
-		if (n instanceof Way) { // check if entity is a way
-			isWay = true;
-		}
+		boolean isWay = n instanceof Way; // check if entity is a way
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
@@ -463,28 +456,22 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(MapObject object) {
-		Long objectId = object.getId();
-		if (!(objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
-				|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE))) {
+		EntityType type = OsmEditingPlugin.getOsmEntityType(object);
+		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
-		boolean isWay = objectId % 2 == MapObject.WAY_MODULO_REMAINDER;// check if mapObject is a way
-		long entityId;
-		if (object instanceof Amenity) {
-			entityId = objectId >> MapObject.AMENITY_ID_RIGHT_SHIFT;
-		} else {
-			entityId = objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
-		}
+		boolean isWay = type == EntityType.WAY;
+		long entityId = OsmEditingPlugin.getOsmObjectId(object);
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
-					ctx.getString(R.string.loading_poi_obj) + entityId, false); //$NON-NLS-1$ //$NON-NLS-2$
+					ctx.getString(R.string.loading_poi_obj) + entityId, false);
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				EntityId id = new Entity.EntityId(isWay ? EntityType.WAY : EntityType.NODE, entityId);
-				Entity entity = (Entity) st.getRegisteredEntities().get(id);
+				EntityId id = new EntityId(type, entityId);
+				Entity entity = st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				entityInfoId = id;
 				if (entity != null) {
@@ -558,7 +545,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return entity;
 	}
 
-	private void showWarning(final String msg) {
+	private void showWarning(String msg) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

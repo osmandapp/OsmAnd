@@ -37,9 +37,9 @@ import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGro
 public class DownloadResources extends DownloadResourceGroup {
 	private static final String TAG = DownloadResources.class.getSimpleName();
 
-	public boolean isDownloadedFromInternet = false;
-	public boolean downloadFromInternetFailed = false;
-	public boolean mapVersionIsIncreased = false;
+	public boolean isDownloadedFromInternet;
+	public boolean downloadFromInternetFailed;
+	public boolean mapVersionIsIncreased;
 	public OsmandApplication app;
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
@@ -260,8 +260,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		itemsToUpdate = stillUpdate;
 	}
 
-	private Map<String, String> listWithAlternatives(final java.text.DateFormat dateFormat, File file,
-	                                                 final String ext, final Map<String, String> files) {
+	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
+	                                                 String ext, Map<String, String> files) {
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
 				@Override

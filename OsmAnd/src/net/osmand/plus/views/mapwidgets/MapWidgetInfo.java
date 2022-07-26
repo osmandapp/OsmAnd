@@ -96,9 +96,23 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	}
 
 	@NonNull
+	public WidgetType getWidgetType() {
+		return widget.getWidgetType();
+	}
+
+	public boolean isExternal() {
+		return widget.isExternal();
+	}
+
+	@NonNull
 	public String getTitle(@NonNull Context ctx) {
 		String message = getMessage();
 		return message != null ? message : ctx.getString(getMessageId());
+	}
+
+	@NonNull
+	public String getStateIndependentTitle(@NonNull Context context) {
+		return message != null ? message : context.getString(getMessageId());
 	}
 
 	@Nullable

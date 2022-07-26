@@ -21,7 +21,7 @@ public class ReversePointsCommand extends MeasurementModeCommand {
 	private List<WptPt> oldPoints;
 	private List<WptPt> newPoints;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> oldRoadSegmentData;
-	private ApplicationMode oldMode;
+	private final ApplicationMode oldMode;
 
 	public ReversePointsCommand(@NonNull MeasurementToolLayer measurementLayer) {
 		super(measurementLayer);

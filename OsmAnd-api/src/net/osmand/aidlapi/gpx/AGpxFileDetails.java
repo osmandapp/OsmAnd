@@ -11,26 +11,26 @@ import java.util.Set;
 
 public class AGpxFileDetails extends AidlParams {
 
-	private float totalDistance = 0;
-	private int totalTracks = 0;
+	private float totalDistance;
+	private int totalTracks;
 	private long startTime = Long.MAX_VALUE;
 	private long endTime = Long.MIN_VALUE;
-	private long timeSpan = 0;
-	private long timeMoving = 0;
-	private float totalDistanceMoving = 0;
+	private long timeSpan;
+	private long timeMoving;
+	private float totalDistanceMoving;
 
-	private double diffElevationUp = 0;
-	private double diffElevationDown = 0;
-	private double avgElevation = 0;
+	private double diffElevationUp;
+	private double diffElevationDown;
+	private double avgElevation;
 	private double minElevation = 99999;
 	private double maxElevation = -100;
 
 	private float minSpeed = Float.MAX_VALUE;
-	private float maxSpeed = 0;
+	private float maxSpeed;
 	private float avgSpeed;
 
 	private int points;
-	private int wptPoints = 0;
+	private int wptPoints;
 
 	private ArrayList<String> wptCategoryNames = new ArrayList<>();
 

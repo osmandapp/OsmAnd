@@ -1,6 +1,14 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.GPXUtilities.readText;
+import static net.osmand.GPXUtilities.writeNotNullText;
+import static net.osmand.util.MapUtils.createShortLinkString;
+
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXExtensionsReader;
@@ -36,14 +44,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.GPXUtilities.readText;
-import static net.osmand.GPXUtilities.writeNotNullText;
-import static net.osmand.util.MapUtils.createShortLinkString;
 
 public class ItineraryDataHelper {
 
@@ -217,7 +217,7 @@ public class ItineraryDataHelper {
 		return GPXUtilities.loadGPXFile(file, getGPXExtensionsReader(groupInfos));
 	}
 
-	public GPXExtensionsReader getGPXExtensionsReader(final List<ItineraryGroupInfo> groupInfos) {
+	public GPXExtensionsReader getGPXExtensionsReader(List<ItineraryGroupInfo> groupInfos) {
 		return new GPXExtensionsReader() {
 			@Override
 			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -345,7 +345,7 @@ public class ItineraryDataHelper {
 
 		marker.id = getMarkerId(app, marker, group);
 		marker.favouritePoint = point;
-		marker.creationDate = point.getCreationDate();
+		marker.creationDate = point.getTimestamp();
 		marker.visitedDate = point.getVisitedDate();
 		marker.history = marker.visitedDate != 0;
 

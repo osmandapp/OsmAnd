@@ -3,7 +3,6 @@ package net.osmand.plus.backup;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -78,11 +77,11 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	public static boolean DEBUG = false;
+	public static boolean DEBUG;
 
 	private final BackupExecutor executor;
 
-	public final static String INFO_EXT = ".info";
+	public static final String INFO_EXT = ".info";
 
 	public static final String SERVER_URL = "https://osmand.net";
 
@@ -98,12 +97,12 @@ public class BackupHelper {
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
 
-	public final static int STATUS_SUCCESS = 0;
-	public final static int STATUS_PARSE_JSON_ERROR = 1;
-	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
-	public final static int STATUS_SERVER_ERROR = 3;
-	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
-	public final static int STATUS_EXECUTION_ERROR = 5;
+	public static final int STATUS_SUCCESS = 0;
+	public static final int STATUS_PARSE_JSON_ERROR = 1;
+	public static final int STATUS_EMPTY_RESPONSE_ERROR = 2;
+	public static final int STATUS_SERVER_ERROR = 3;
+	public static final int STATUS_NO_ORDER_ID_ERROR = 4;
+	public static final int STATUS_EXECUTION_ERROR = 5;
 	public static final int STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR = 6;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
@@ -186,13 +185,8 @@ public class BackupHelper {
 		return app.getBackupHelper().getDbHelper().getLastModifiedTime(name);
 	}
 
-	@SuppressLint("HardwareIds")
 	public String getAndroidId() {
-		try {
-			return Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
-		} catch (Exception e) {
-			return null;
-		}
+		return app.getUserAndroidId();
 	}
 
 	public static boolean isTokenValid(@NonNull String token) {
@@ -278,7 +272,7 @@ public class BackupHelper {
 		String fileName;
 		if (item instanceof FileSettingsItem) {
 			FileSettingsItem fileItem = (FileSettingsItem) item;
-			fileName = BackupHelper.getFileItemName(fileItem);
+			fileName = getFileItemName(fileItem);
 		} else {
 			fileName = item.getFileName();
 			if (Algorithms.isEmpty(fileName)) {
@@ -324,7 +318,7 @@ public class BackupHelper {
 	public List<File> collectItemFilesForUpload(@NonNull FileSettingsItem item) {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
-		if (!BackupHelper.isLimitedFilesCollectionItem(item)
+		if (!isLimitedFilesCollectionItem(item)
 				&& info != null && !Algorithms.isEmpty(info.filesToUpload)) {
 			for (LocalFile localFile : info.filesToUpload) {
 				File file = localFile.file;
@@ -461,8 +455,8 @@ public class BackupHelper {
 
 	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type,
-	                  @NonNull StreamWriter streamWriter, final long uploadTime,
-	                  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
+	                  @NonNull StreamWriter streamWriter, long uploadTime,
+	                  @Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -480,9 +474,9 @@ public class BackupHelper {
 		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
-					private int work = 0;
-					private int progress = 0;
-					private int deltaProgress = 0;
+					private int work;
+					private int progress;
+					private int deltaProgress;
 
 					@Override
 					public void startWork(int work) {
@@ -524,7 +518,7 @@ public class BackupHelper {
 	}
 
 	boolean isObfMapExistsOnServer(@NonNull String name) {
-		final boolean[] exists = new boolean[1];
+		boolean[] exists = new boolean[1];
 
 		Map<String, String> params = new HashMap<>();
 		params.put("name", name);
@@ -563,13 +557,13 @@ public class BackupHelper {
 	}
 
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                 @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                     @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                     @Nullable Executor executor, @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
 			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
@@ -581,14 +575,14 @@ public class BackupHelper {
 		}
 	}
 
-	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileList(@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
-		final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
+		OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 		operationLog.startOperation();
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
 				(resultJson, error, resultCode) -> {
@@ -660,9 +654,9 @@ public class BackupHelper {
 			}
 			IProgress progress = new AbstractProgress() {
 
-				private int work = 0;
-				private int progress = 0;
-				private int deltaProgress = 0;
+				private int work;
+				private int progress;
+				private int deltaProgress;
 
 				@Override
 				public void startWork(int work) {
@@ -692,7 +686,7 @@ public class BackupHelper {
 					return super.isInterrupted();
 				}
 			};
-			progress.startWork((int) (remoteFile.getFilesize() / 1024));
+			progress.startWork(remoteFile.getFilesize() / 1024);
 			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, progress);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
@@ -705,7 +699,7 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void collectLocalFiles(@Nullable final OnCollectLocalFilesListener listener) {
+	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
 		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
 		operationLog.startOperation();
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
@@ -727,7 +721,7 @@ public class BackupHelper {
 				List<SettingsItem> localItems = getLocalItems();
 				operationLog.log("getLocalItems");
 				for (SettingsItem item : localItems) {
-					String fileName = BackupHelper.getItemFileName(item);
+					String fileName = getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
 						FileSettingsItem fileItem = (FileSettingsItem) item;
 						File file = fileItem.getFile();
@@ -853,10 +847,10 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void generateBackupInfo(@NonNull final Map<String, LocalFile> localFiles,
-							@NonNull final Map<String, RemoteFile> uniqueRemoteFiles,
-							@NonNull final Map<String, RemoteFile> deletedRemoteFiles,
-							@Nullable final OnGenerateBackupInfoListener listener) {
+	void generateBackupInfo(@NonNull Map<String, LocalFile> localFiles,
+							@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
+							@NonNull Map<String, RemoteFile> deletedRemoteFiles,
+							@Nullable OnGenerateBackupInfoListener listener) {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 		operationLog.startOperation();

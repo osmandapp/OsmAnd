@@ -44,13 +44,13 @@ public class TopToolbarController {
 	@DrawableRes
 	int bgDarkLandId = R.drawable.btn_round_night;
 	@Nullable
-	Drawable bgLight = null;
+	Drawable bgLight;
 	@Nullable
-	Drawable bgDark = null;
+	Drawable bgDark;
 	@Nullable
-	Drawable bgLightLand = null;
+	Drawable bgLightLand;
 	@Nullable
-	Drawable bgDarkLand = null;
+	Drawable bgDarkLand;
 
 	@DrawableRes
 	int backBtnIconLightId = R.drawable.ic_arrow_back;
@@ -59,7 +59,7 @@ public class TopToolbarController {
 	@ColorRes
 	int backBtnIconClrLightId = R.color.icon_color_default_light;
 	@ColorRes
-	int backBtnIconClrDarkId = 0;
+	int backBtnIconClrDarkId;
 	@ColorInt
 	int backBtnIconClrLight = -1;
 	@ColorInt
@@ -72,7 +72,7 @@ public class TopToolbarController {
 	@ColorRes
 	int closeBtnIconClrLightId = R.color.icon_color_default_light;
 	@ColorRes
-	int closeBtnIconClrDarkId = 0;
+	int closeBtnIconClrDarkId;
 	boolean closeBtnVisible = true;
 
 	@DrawableRes
@@ -82,13 +82,13 @@ public class TopToolbarController {
 	@ColorRes
 	int refreshBtnIconClrLightId = R.color.icon_color_default_light;
 	@ColorRes
-	int refreshBtnIconClrDarkId = 0;
+	int refreshBtnIconClrDarkId;
 
-	boolean refreshBtnVisible = false;
-	boolean saveViewVisible = false;
-	boolean textBtnVisible = false;
-	protected boolean topBarSwitchVisible = false;
-	protected boolean topBarSwitchChecked = false;
+	boolean refreshBtnVisible;
+	boolean saveViewVisible;
+	boolean textBtnVisible;
+	protected boolean topBarSwitchVisible;
+	protected boolean topBarSwitchChecked;
 
 	@ColorRes
 	int titleTextClrLightId = R.color.text_color_primary_light;
@@ -113,11 +113,11 @@ public class TopToolbarController {
 
 	boolean singleLineTitle = true;
 
-	boolean nightMode = false;
+	boolean nightMode;
 
 	String title = "";
-	String description = null;
-	String textBtnTitle = null;
+	String description;
+	String textBtnTitle;
 
 	int saveViewTextId = -1;
 
@@ -131,11 +131,11 @@ public class TopToolbarController {
 
 	Runnable onCloseToolbarListener;
 
-	View bottomView = null;
+	View bottomView;
 	boolean topViewVisible = true;
 	boolean shadowViewVisible = true;
 
-	private boolean bottomViewAdded = false;
+	private boolean bottomViewAdded;
 
 	public TopToolbarController(TopToolbarControllerType type) {
 		this.type = type;

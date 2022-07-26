@@ -44,13 +44,13 @@ public class NavigationService extends Service {
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public static int USED_BY_CAR_APP = 4;
-	public final static String USAGE_INTENT = "SERVICE_USED_BY";
+	public static final String USAGE_INTENT = "SERVICE_USED_BY";
 
 	private final NavigationServiceBinder binder = new NavigationServiceBinder();
 
 	private OsmandSettings settings;
 
-	protected int usedBy = 0;
+	protected int usedBy;
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
 	private StateChangedListener<LocationSource> locationSourceListener;
@@ -93,10 +93,10 @@ public class NavigationService extends Service {
 			setCarContext(null);
 		}
 		if (usedBy == 0) {
-			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
+			Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			final OsmandApplication app = getApp();
+			OsmandApplication app = getApp();
 			app.getNotificationHelper().updateTopNotification();
 			app.getNotificationHelper().refreshNotifications();
 		}
@@ -108,7 +108,7 @@ public class NavigationService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		final OsmandApplication app = getApp();
+		OsmandApplication app = getApp();
 		settings = app.getSettings();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
 
@@ -148,7 +148,7 @@ public class NavigationService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		final OsmandApplication app = getApp();
+		OsmandApplication app = getApp();
 		setCarContext(null);
 		app.setNavigationService(null);
 		usedBy = 0;
@@ -167,7 +167,7 @@ public class NavigationService extends Service {
 		app.getNotificationHelper().removeNotifications(false);
 		if (app.getNavigationService() != null &&
 				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
-			NavigationService.this.stopSelf();
+			stopSelf();
 		}
 	}
 
@@ -182,7 +182,7 @@ public class NavigationService extends Service {
 	}
 
 	private void removeLocationSourceListener() {
-		settings.LOCATION_SOURCE.removeListener(locationSourceListener);
+		getApp().getSettings().LOCATION_SOURCE.removeListener(locationSourceListener);
 	}
 
 	private void requestLocationUpdates() {
@@ -283,7 +283,7 @@ public class NavigationService extends Service {
 		}
 	}
 
-	public void updateCarNavigation() {
+	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		TripHelper tripHelper = this.tripHelper;
@@ -297,7 +297,7 @@ public class NavigationService extends Service {
 					if (density == 0) {
 						density = 1;
 					}
-					Trip trip = tripHelper.buildTrip(density);
+					Trip trip = tripHelper.buildTrip(currentLocation, density);
 					navigationManager.updateTrip(trip);
 
 					List<Destination> destinations = null;

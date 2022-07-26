@@ -1,5 +1,14 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
+
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
@@ -27,20 +36,11 @@ import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.track.cards.DescriptionCard.getMetadataImageLink;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
 
 public class OverviewCard extends MapBaseCard {
 
@@ -142,7 +142,7 @@ public class OverviewCard extends MapBaseCard {
 		return icon;
 	}
 
-	private void initShowButton(final int iconColorDef, final int iconColorPres) {
+	private void initShowButton(int iconColorDef, int iconColorPres) {
 		initButton(showButton, SHOW_ON_MAP_BUTTON_INDEX, getActiveShowHideIcon(), iconColorDef, iconColorPres);
 	}
 
@@ -158,10 +158,10 @@ public class OverviewCard extends MapBaseCard {
 		initButton(directionsButton, DIRECTIONS_BUTTON_INDEX, R.drawable.ic_action_gdirections_dark, iconColorDef, iconColorPres);
 	}
 
-	private void initButton(View item, final int buttonIndex, @DrawableRes Integer iconResId,
-	                        @ColorRes final int iconColorDef, @ColorRes int iconColorPres) {
-		final AppCompatImageView icon = item.findViewById(R.id.image);
-		final AppCompatImageView filled = item.findViewById(R.id.filled);
+	private void initButton(View item, int buttonIndex, @DrawableRes Integer iconResId,
+	                        @ColorRes int iconColorDef, @ColorRes int iconColorPres) {
+		AppCompatImageView icon = item.findViewById(R.id.image);
+		AppCompatImageView filled = item.findViewById(R.id.filled);
 		filled.setImageResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_topbar_shield_exit_ref);
 		filled.setAlpha(0.1f);
 		setImageDrawable(icon, iconResId, iconColorDef);
@@ -185,7 +185,7 @@ public class OverviewCard extends MapBaseCard {
 
 	private void setupDescription() {
 		GPXFile gpxFile = getGPXFile();
-		final String descriptionHtml = gpxFile.metadata.getDescription();
+		String descriptionHtml = gpxFile.metadata.getDescription();
 		if (Algorithms.isBlank(descriptionHtml)) {
 			AndroidUiHelper.updateVisibility(description, false);
 		} else {
@@ -200,7 +200,7 @@ public class OverviewCard extends MapBaseCard {
 		}
 	}
 
-	private void setOnTouchItem(View item, final ImageView image, final ImageView filled, @DrawableRes final Integer resId, @ColorRes final int colorDef, @ColorRes final int colorPres) {
+	private void setOnTouchItem(View item, ImageView image, ImageView filled, @DrawableRes Integer resId, @ColorRes int colorDef, @ColorRes int colorPres) {
 		item.setOnTouchListener(new View.OnTouchListener() {
 			@SuppressLint("ClickableViewAccessibility")
 			@Override

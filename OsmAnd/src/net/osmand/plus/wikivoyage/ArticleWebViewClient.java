@@ -17,6 +17,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.fragments.ReadDescriptionFragment;
 import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -33,14 +34,14 @@ public class ArticleWebViewClient extends WebViewClient {
 	private static final String PREFIX_TEL = "tel:";
 
 	private final OsmandApplication app;
-	private final ReadGpxDescriptionFragment fragment;
+	private final ReadDescriptionFragment fragment;
 	private final FragmentActivity activity;
 	private final GPXFile gpxFile;
 	private final View view;
 	private final boolean usedOnMap;
-	private WikiArticleHelper wikiArticleHelper;
+	private final WikiArticleHelper wikiArticleHelper;
 
-	public ArticleWebViewClient(@NonNull ReadGpxDescriptionFragment fragment,
+	public ArticleWebViewClient(@NonNull ReadDescriptionFragment fragment,
 	                            @NonNull FragmentActivity activity,
 	                            @NonNull GPXFile gpxFile,
 	                            @NonNull View view,

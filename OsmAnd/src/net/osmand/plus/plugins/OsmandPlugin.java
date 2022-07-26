@@ -105,7 +105,7 @@ public abstract class OsmandPlugin {
 	protected List<OsmandPreference> pluginPreferences = new ArrayList<>();
 
 	private boolean enabled;
-	private String installURL = null;
+	private String installURL;
 
 	public OsmandPlugin(OsmandApplication app) {
 		this.app = app;
@@ -292,7 +292,7 @@ public abstract class OsmandPlugin {
 	/*
 	 * Add menu rows to the map context menu.
 	 */
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
 	}
 
 	/*
@@ -326,7 +326,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void addCustomPlugin(@NonNull OsmandApplication app, @NonNull CustomOsmandPlugin plugin) {
-		OsmandPlugin oldPlugin = OsmandPlugin.getPlugin(plugin.getId());
+		OsmandPlugin oldPlugin = getPlugin(plugin.getId());
 		if (oldPlugin != null) {
 			allPlugins.remove(oldPlugin);
 		}
@@ -335,7 +335,7 @@ public abstract class OsmandPlugin {
 		saveCustomPlugins(app);
 	}
 
-	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
+	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull CustomOsmandPlugin plugin) {
 		allPlugins.remove(plugin);
 		if (plugin.isActive()) {
 			plugin.removePluginItems(() -> Algorithms.removeAllFiles(plugin.getPluginDir()));
@@ -444,7 +444,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
+		for (OsmandPlugin plugin : getMarketPlugins()) {
 			if (plugin.getInstallURL() != null && plugin.isAvailable(app)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
@@ -514,7 +514,7 @@ public abstract class OsmandPlugin {
 			if (plugin.isMarketPlugin() || plugin.isPaid()) {
 				if (plugin.isActive()) {
 					plugin.showInstallDialog(activity);
-				} else if (OsmandPlugin.checkPluginPackage(app, plugin)) {
+				} else if (checkPluginPackage(app, plugin)) {
 					plugin.showDisableDialog(activity);
 				}
 			}
@@ -1001,7 +1001,7 @@ public abstract class OsmandPlugin {
 	public static Collection<DashFragmentData> getPluginsCardsList() {
 		HashSet<DashFragmentData> collection = new HashSet<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			final DashFragmentData fragmentData = plugin.getCardFragment();
+			DashFragmentData fragmentData = plugin.getCardFragment();
 			if (fragmentData != null) collection.add(fragmentData);
 		}
 		return collection;
@@ -1037,7 +1037,7 @@ public abstract class OsmandPlugin {
 		try {
 			installed = ctx.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch (NameNotFoundException e) {
-			LOG.error("Package not found: " + packageInfo, e);
+			LOG.info("Package not found: " + packageInfo);
 		}
 		return installed;
 	}

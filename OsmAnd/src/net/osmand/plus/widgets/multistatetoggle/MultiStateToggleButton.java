@@ -83,7 +83,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView();
 	}
 
-	private void createBtn(@NonNull final _Radio item) {
+	private void createBtn(@NonNull _Radio item) {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
 				getRadioItemLayoutId(), container, false);
@@ -125,9 +125,9 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
 		int radius = AndroidUtils.dpToPx(app, 4);
-		float[] leftBtnRadii = new float[]{radius, radius, 0, 0, 0, 0, radius, radius};
-		float[] rightBtnRadii = new float[]{0, 0, radius, radius, radius, radius, 0, 0};
-		float[] internalBtnRadii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+		float[] leftBtnRadii = {radius, radius, 0, 0, 0, 0, radius, radius};
+		float[] rightBtnRadii = {0, 0, radius, radius, radius, radius, 0, 0};
+		float[] internalBtnRadii = {0, 0, 0, 0, 0, 0, 0, 0};
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
 		showAllDividers();
@@ -154,7 +154,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 					background.setCornerRadii(internalBtnRadii);
 					hideDividers(i - 1, i);
 				}
-				button.setBackgroundDrawable(background);
+				button.setBackground(background);
 				updateItemView(button, item, textColor);
 			} else {
 				button.setBackgroundColor(Color.TRANSPARENT);

@@ -63,10 +63,10 @@ import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListene
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -108,7 +108,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private PromoBannerCard promoCard;
 	private boolean showStartFinishIconsInitialValue;
 
-	private List<BaseCard> cards = new ArrayList<>();
+	private final List<BaseCard> cards = new ArrayList<>();
 
 	private ImageView trackIcon;
 	private View buttonsShadow;
@@ -148,6 +148,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	public TrackDrawInfo getTrackDrawInfo() {
 		return trackDrawInfo;
+	}
+
+	public SelectedGpxFile getSelectedGpxFile() {
+		return selectedGpxFile;
 	}
 
 	public void setSelectedGpxFile(SelectedGpxFile selectedGpxFile) {
@@ -215,7 +219,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void restoreSelectedGpxFile(String gpxFilePath, boolean isCurrentRecording) {
 		TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, isCurrentRecording, (gpxFile) -> {
 			setSelectedGpxFile(gpxFile);
-			gpxSelectionHelper.addTemporallyVisibleTrack(gpxFile);
 			if (view != null) {
 				initContent();
 			}
@@ -318,9 +321,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (selectedGpxFile != null) {
-			gpxSelectionHelper.addTemporallyVisibleTrack(selectedGpxFile);
-		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(trackDrawInfo);
@@ -330,9 +330,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (selectedGpxFile != null) {
-			gpxSelectionHelper.removeTemporallyVisibleTrack(selectedGpxFile);
-		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(null);
@@ -561,7 +558,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
@@ -621,7 +618,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void setupScrollShadow() {
-		final View scrollView = getBottomScrollView();
+		View scrollView = getBottomScrollView();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
 			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
 			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
@@ -670,7 +667,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				gpxDbHelper.updateColor(dataItem, newColor);
 			}
 		}
-		List<SelectedGpxFile> files = gpxSelectionHelper.getVisibleGPXFiles();
+		List<SelectedGpxFile> files = gpxSelectionHelper.getSelectedGPXFiles();
 		for (SelectedGpxFile selectedGpxFile : files) {
 			if (prevColor == selectedGpxFile.getGpxFile().getColor(0)) {
 				selectedGpxFile.getGpxFile().setColor(newColor);
@@ -845,7 +842,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 		if (gpxFile.modifiedTime != modifiedTime) {
 			modifiedTime = gpxFile.modifiedTime;
-			displayGroups = gpxSelectionHelper.collectDisplayGroups(gpxFile);
+			displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpxFile);
 			if (selectedGpxFile.getDisplayGroups(app) != null) {
 				displayGroups = selectedGpxFile.getDisplayGroups(app);
 			}

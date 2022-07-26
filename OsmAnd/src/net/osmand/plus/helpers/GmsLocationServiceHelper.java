@@ -45,7 +45,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app);
 
-		fusedLocationRequest = new LocationRequest()
+		fusedLocationRequest = LocationRequest.create()
 				// Sets the desired interval for active location updates. This interval is inexact. You
 				// may not receive updates at all if no location sources are available, or you may
 				// receive them less frequently than requested. You may also receive updates more
@@ -125,7 +125,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable final LocationCallback locationCallback) {
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable LocationCallback locationCallback) {
 		if (locationCallback == null) {
 			return null;
 		}

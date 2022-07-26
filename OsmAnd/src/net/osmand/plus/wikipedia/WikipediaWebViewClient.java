@@ -21,10 +21,10 @@ public class WikipediaWebViewClient extends WebViewClient {
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 
-	private Context context;
-	private boolean nightMode;
-	private WikiArticleHelper wikiArticleHelper;
-	private Amenity article;
+	private final Context context;
+	private final boolean nightMode;
+	private final WikiArticleHelper wikiArticleHelper;
+	private final Amenity article;
 
 	public WikipediaWebViewClient(FragmentActivity context, Amenity article, boolean nightMode) {
 		this.context = context;

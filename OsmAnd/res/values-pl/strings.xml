@@ -3993,7 +3993,6 @@
     <string name="contact_support_description">W razie jakichkolwiek pytań prosimy o kontakt pod adresem %1$s.</string>
     <string name="empty_purchases_description">Jeśli Twoje zakupy nie są tutaj widoczne, dotknij \"%1$s\" lub skontaktuj się z naszym zespołem wsparcia.</string>
     <string name="snap_to_road_descr">Ikona aktualnej lokalizacji zostanie przyciągnięta do bieżącej trasy nawigacji</string>
-    <string name="map_orientation_threshold_descr">Nie obracaj widoku mapy, jeśli prędkość jest mniejsza niż próg</string>
     <string name="restart">Uruchom ponownie</string>
     <string name="shared_strings_all_regions">Wszystkie regiony</string>
     <string name="delete_number_files_question">Usunąć pliki %1$d\?</string>
@@ -4650,7 +4649,6 @@
     <string name="average_speed_widget_desc">Pokazuje średnią prędkość bieżącej jazdy.</string>
     <string name="map_widget_average_speed">Prędkość średnia</string>
     <string name="transport_hazmat_title">Transport materiałów niebezpiecznych</string>
-    <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s nie będzie liczona i nie będzie miała wpływu na średnią prędkość.</string>
     <string name="average_speed_skip_stops">Uwzględnij przystanki</string>
     <string name="explore_plans">Przegląd planów</string>
     <string name="map_widget_time_to_destination">Czas dojazdu miejsca docelowego</string>
@@ -4663,7 +4661,7 @@
     <string name="lanes_widgets_desc">Widżet Pasy ruchu pokazuje aktualny układ pasów ruchu i podświetla pasy ruchu do jazdy z aktywną nawigacją.</string>
     <string name="gps_info_widget_desc">Pokazuje liczbę satelitów wykrytych i używanych przez urządzenie w danym momencie.</string>
     <string name="parking_widget_desc">Widżet pokazujący odległość od środka ekranu do miejsca parkingowego.</string>
-    <string name="calculate_online_altitude_descr">Dane dotyczące wysokości będą obliczane na serwerze OsmAnd.</string>
+    <string name="calculate_online_altitude_descr">Oblicz wysokość online na serwerach OsmAnd na podstawie zdjęć satelitarnych i cyfrowych modeli wysokości. Może różnić się od wysokości zarejestrowanej przez urządzenie i może być używana jako korekta wysokości.</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="mapillary_widget_desc">Widżet zapewniający szybki dostęp do aplikacji Mapillary w celu dodania zdjęć na poziomie ulicy.</string>
     <string name="radius_rules_widget_desc">Narzędzie promień - linijka pomaga wyznaczyć promień wokół wybranego punktu na mapie, pokazując na mapie okręgi odległości.</string>
@@ -4674,9 +4672,9 @@
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektryczny</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_name">Typ silnika</string>
+    <string name="routing_attr_motor_type_name">Paliwo używane przez silnik</string>
     <string name="co2_mission">Emisja CO2</string>
-    <string name="routing_attr_motor_type_description">Do obliczeń CO2</string>
+    <string name="routing_attr_motor_type_description">Wybierz rodzaj paliwa używanego przez silnik pojazdu, aby obliczyć emisję CO2.</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_petrol_name">Benzyna</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybryda</string>
@@ -4684,4 +4682,27 @@
     <string name="route_maneuvers">Manewry na trasie</string>
     <string name="calculating_altitude">Obliczanie wysokości</string>
     <string name="lang_ckb">Kurdyjski centralny</string>
+    <string name="switch_widget_mode_desc">Tryb można przełączać, stukając widżet.</string>
+    <string name="side_marker_eta">Przewidywany czas przybycia</string>
+    <string name="goods_delivery_desc_4">Jeśli masa pojazdu przekracza 3,5 tony, należy użyć profilu ciężarówki.</string>
+    <string name="goods_delivery_desc_2">Drogi, które zostały zamknięte dla dostaw towarów, zostaną ominięte.</string>
+    <string name="goods_delivery_desc">Pojazdy przewożące towary mogą mieć ograniczony dostęp do niektórych dróg.</string>
+    <string name="updated_map_time">Zaktualizowano: %1$s.</string>
+    <string name="includes_osm_changes_until">Obejmuje zmiany w systemie OSM wprowadzone do momentu %1$s.</string>
+    <string name="next_live_update_time">Następna aktualizacja: w %1$s.</string>
+    <string name="altitude_correction">Korekta wysokości</string>
+    <string name="map_marker_average_speed_desc">Określ przedział czasu, dla którego będzie mierzona średnia prędkość w celu obliczenia szacunkowego czasu przybycia.</string>
+    <string name="reset_all_settings_desc">Czy na pewno chcesz zresetować wszystkie ustawienia do wartości domyślnych\?</string>
+    <string name="goods_delivery_desc_3">Dotyczy tylko pojazdów przewożących towary, które mają co najmniej cztery koła i ważą nie więcej niż 3,5 tony.</string>
+    <string name="next_live_update_date_and_time">Następna aktualizacja: %1$s w %2$s.</string>
+    <string name="no_altitude_data_desc">Możesz dołączyć swój ślad do dróg, aby uzyskać dane %1$s lub obliczyć je online.</string>
+    <string name="audio_video_notes_desc">Widget zapewnia szybki dostęp do startu/zatrzymania nagrywania (audio, wideo lub zdjęcia).</string>
+    <string name="no_altitude_data">Brak danych dotyczących wysokości</string>
+    <string name="live_update_frequency_day_variant">Aktualizacje map będą sprawdzane codziennie.</string>
+    <string name="live_update_frequency_week_variant">Aktualizacje map będą sprawdzane co tydzień.</string>
+    <string name="live_update_frequency_hour_variant">Aktualizacje map będą sprawdzane co godzinę.</string>
+    <string name="routing_attr_goods_restrictions_name">Dostawa towarów</string>
+    <string name="get_altitude_data">Pobierz dane o wysokości</string>
+    <string name="calculate_altitude">Oblicz wysokość</string>
+    <string name="shared_string_symbol">Symbol</string>
 </resources>

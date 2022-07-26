@@ -223,7 +223,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 				worldGlobeIcon.setBackground(worldGlobeDrawable);
 			} else {
-				worldGlobeIcon.setBackgroundDrawable(worldGlobeDrawable);
+				worldGlobeIcon.setBackground(worldGlobeDrawable);
 			}
 		} else {
 			getButton.setVisibility(View.GONE);

@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
@@ -17,10 +17,10 @@ import java.util.Set;
 
 public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 
-	private OsmandApplication app;
-	private GPXFile gpx;
-	private Set<GpxDisplayItem> selectedItems;
-	private WeakReference<OnPointsDeleteListener> listenerRef;
+	private final OsmandApplication app;
+	private final GPXFile gpx;
+	private final Set<GpxDisplayItem> selectedItems;
+	private final WeakReference<OnPointsDeleteListener> listenerRef;
 
 	public DeletePointsTask(OsmandApplication app, GPXFile gpxFile, Set<GpxDisplayItem> selectedItems, OnPointsDeleteListener listener) {
 		this.app = app;

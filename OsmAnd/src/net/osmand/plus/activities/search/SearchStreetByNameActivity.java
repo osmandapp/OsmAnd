@@ -61,7 +61,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 
 	@Override
 	protected void addFooterViews() {
-		final FrameLayout ll = new FrameLayout(this);
+		FrameLayout ll = new FrameLayout(this);
 		searchAllStrets = new Button(this);
 		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.gravity = Gravity.CENTER_HORIZONTAL;
@@ -124,7 +124,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	
 	@Override
 	protected boolean filterLoop(String query, Collection<Street> list) {
-		final boolean[] result = {false};
+		boolean[] result = {false};
 		if (searchWithCity == -1) {
 			filter(query, list);
 		} else if (searchWithCity == 0) {
@@ -140,7 +140,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			}
 		} else {
 			searchWithCity = 0;
-			final List res = region.searchMapObjectsByName(query, new ResultMatcher<MapObject>() {
+			List res = region.searchMapObjectsByName(query, new ResultMatcher<MapObject>() {
 				@Override
 				public boolean publish(MapObject object) {
 					if (object instanceof Street) {

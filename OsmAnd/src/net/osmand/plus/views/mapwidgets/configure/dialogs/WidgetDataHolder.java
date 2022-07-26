@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets.configure.add;
+package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.os.Bundle;
 
@@ -24,7 +24,8 @@ public class WidgetDataHolder {
 
 	public static final String KEY_WIDGETS_PANEL_ID = "widgets_panel_id";
 	public static final String KEY_GROUP_NAME = "group_name";
-	public static final String KEY_WIDGET_ID = "widget_id";
+	public static final String KEY_WIDGET_TYPE = "widget_type_name";
+	public static final String KEY_EXTERNAL_WIDGET_ID = "aidl_widget_id";
 	public static final String KEY_EXTERNAL_PROVIDER_PACKAGE = "external_provider_package";
 
 	private final OsmandApplication app;
@@ -46,7 +47,7 @@ public class WidgetDataHolder {
 		if (bundle.containsKey(KEY_GROUP_NAME)) {
 			widgetGroup = WidgetGroup.valueOf(bundle.getString(KEY_GROUP_NAME));
 		} else if (bundle.containsKey(KEY_EXTERNAL_PROVIDER_PACKAGE)) {
-			aidlWidgetId = bundle.getString(KEY_WIDGET_ID);
+			aidlWidgetId = bundle.getString(KEY_EXTERNAL_WIDGET_ID);
 			externalProviderPackage = bundle.getString(KEY_EXTERNAL_PROVIDER_PACKAGE);
 			connectedApp = app.getAidlApi().getConnectedApp(externalProviderPackage);
 			if (connectedApp != null) {
@@ -54,7 +55,7 @@ public class WidgetDataHolder {
 				aidlWidgetData = connectedApp.getWidgets().get(sourceId);
 			}
 		} else {
-			widgetType = WidgetType.getById(bundle.getString(KEY_WIDGET_ID));
+			widgetType = WidgetType.valueOf(bundle.getString(KEY_WIDGET_TYPE));
 		}
 	}
 
@@ -135,9 +136,9 @@ public class WidgetDataHolder {
 	@Nullable
 	public String getSecondaryDescription() {
 		if (widgetGroup != null) {
-			return widgetGroup.getSecondaryDescriptionId(app);
+			return widgetGroup.getSecondaryDescription(app);
 		} else if (widgetType != null) {
-			return widgetType.getSecondaryDescriptionId(app);
+			return widgetType.getSecondaryDescription(app);
 		}
 		return null;
 	}
@@ -167,9 +168,9 @@ public class WidgetDataHolder {
 		if (widgetGroup != null) {
 			outState.putString(KEY_GROUP_NAME, widgetGroup.name());
 		} else if (widgetType != null) {
-			outState.putString(KEY_WIDGET_ID, widgetType.id);
+			outState.putString(KEY_WIDGET_TYPE, widgetType.name());
 		} else {
-			outState.putString(KEY_WIDGET_ID, aidlWidgetId);
+			outState.putString(KEY_EXTERNAL_WIDGET_ID, aidlWidgetId);
 			outState.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);
 		}
 	}

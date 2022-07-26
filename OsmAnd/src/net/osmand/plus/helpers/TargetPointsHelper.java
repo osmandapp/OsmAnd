@@ -4,6 +4,8 @@ package net.osmand.plus.helpers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -25,8 +27,6 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-
 public class TargetPointsHelper {
 
 	private final OsmandApplication ctx;
@@ -34,11 +34,11 @@ public class TargetPointsHelper {
 	private final RoutingHelper routingHelper;
 
 	private final List<TargetPoint> intermediatePoints = new ArrayList<>();
-	private TargetPoint pointToNavigate = null;
-	private TargetPoint pointToStart = null;
-	private TargetPoint pointToNavigateBackup = null;
-	private TargetPoint pointToStartBackup = null;
-	private TargetPoint myLocationToStart = null;
+	private TargetPoint pointToNavigate;
+	private TargetPoint pointToStart;
+	private TargetPoint pointToNavigateBackup;
+	private TargetPoint pointToStartBackup;
+	private TargetPoint myLocationToStart;
 	private final List<StateChangedListener<Void>> listeners = new ArrayList<>();
 	private final List<TargetPointChangedListener> pointListeners = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class TargetPointsHelper {
 
 	public static class TargetPoint implements LocationPoint {
 		public LatLon point;
-		private PointDescription pointDescription;
+		private final PointDescription pointDescription;
 		public int index;
 		public boolean intermediate;
 		public boolean start;
@@ -152,14 +152,14 @@ public class TargetPointsHelper {
 		
 	}
 
-	public TargetPointsHelper(OsmandApplication ctx){
+	public TargetPointsHelper(@NonNull OsmandApplication ctx){
 		this.ctx = ctx;
 		this.settings = ctx.getSettings();
 		this.routingHelper = ctx.getRoutingHelper();
 		readFromSettings();
 
 		OsmAndAppCustomizationListener customizationListener = () -> {
-			settings = TargetPointsHelper.this.ctx.getSettings();
+			settings = this.ctx.getSettings();
 			readFromSettings();
 			updateRouteAndRefresh(true);
 		};
@@ -168,7 +168,7 @@ public class TargetPointsHelper {
 
 	public void lookupAddressAll() {
 		lookupAddressForPointToNavigate();
-		lookupAddessForStartPoint();
+		lookupAddressForStartPoint();
 		for (TargetPoint targetPoint : intermediatePoints) {
 			lookupAddressForIntermediatePoint(targetPoint);
 		}
@@ -185,7 +185,7 @@ public class TargetPointsHelper {
 		List<LatLon> ips = settings.getIntermediatePoints();
 		List<String> desc = settings.getIntermediatePointDescriptions(ips.size());
 		for(int i = 0; i < ips.size(); i++) {
-			final TargetPoint targetPoint = new TargetPoint(ips.get(i),
+			TargetPoint targetPoint = new TargetPoint(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), i);
 			intermediatePoints.add(targetPoint);
 		}
@@ -201,7 +201,7 @@ public class TargetPointsHelper {
 		}
 	}
 
-	private void lookupAddressForIntermediatePoint(final TargetPoint targetPoint) {
+	private void lookupAddressForIntermediatePoint(TargetPoint targetPoint) {
 		if (targetPoint != null && targetPoint.pointDescription.isSearchingAddress(ctx)) {
 			cancelPointAddressRequests(targetPoint.point);
 			AddressLookupRequest lookupRequest = new AddressLookupRequest(targetPoint.point, new OnAddressLookupResult() {
@@ -223,7 +223,7 @@ public class TargetPointsHelper {
 		}
 	}
 
-	private void lookupAddessForStartPoint() {
+	private void lookupAddressForStartPoint() {
 		if (pointToStart != null && pointToStart.isSearchingAddress(ctx)
 				&& (startPointRequest == null || !startPointRequest.getLatLon().equals(pointToStart.point))) {
 			cancelStartPointAddressRequest();
@@ -437,7 +437,7 @@ public class TargetPointsHelper {
 	}
 
 	public void updateRouteAndRefresh(boolean updateRoute) {
-		if(updateRoute && (routingHelper.isPublicTransportMode() || routingHelper.isRouteBeingCalculated() ||
+		if (updateRoute && (routingHelper.isPublicTransportMode() || routingHelper.isRouteBeingCalculated() ||
 				routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
 		}
@@ -502,6 +502,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearPointToNavigate(boolean updateRoute) {
+		ctx.logRoutingEvent("clearPointToNavigate updateRoute " + updateRoute);
 		cancelTargetPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
 		settings.clearPointToNavigate();
@@ -512,6 +513,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearStartPoint(boolean updateRoute) {
+		ctx.logRoutingEvent("clearStartPoint updateRoute " + updateRoute);
 		cancelStartPointAddressRequest();
 		settings.clearPointToStart();
 		readFromSettings();
@@ -519,6 +521,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearAllIntermediatePoints(boolean updateRoute) {
+		ctx.logRoutingEvent("clearAllIntermediatePoints updateRoute " + updateRoute);
 		cancelAllIntermediatePointsAddressRequests();
 		settings.clearIntermediatePoints();
 		intermediatePoints.clear();
@@ -527,6 +530,7 @@ public class TargetPointsHelper {
 	}
 
 	public void clearAllPoints(boolean updateRoute) {
+		ctx.logRoutingEvent("clearAllPoints updateRoute " + updateRoute);
 		cancelStartPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
 		cancelTargetPointAddressRequest();
@@ -610,9 +614,10 @@ public class TargetPointsHelper {
 		navigateToPoint(point, updateRoute, intermediate, null);
 	}
 
-	public void navigateToPoint(final LatLon point, boolean updateRoute, int intermediate, PointDescription historyName) {
+	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate, PointDescription historyName) {
+		ctx.logRoutingEvent("navigateToPoint point " + point + " updateRoute " + updateRoute + " intermediate " + intermediate + " historyName " + historyName);
 		if (point != null) {
-			final PointDescription pointDescription;
+			PointDescription pointDescription;
 			if (historyName == null) {
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 			} else {
@@ -624,7 +629,7 @@ public class TargetPointsHelper {
 
 			if (intermediate < 0 || intermediate > intermediatePoints.size()) {
 				if(intermediate > intermediatePoints.size()) {
-					final TargetPoint pn = getPointToNavigate();
+					TargetPoint pn = getPointToNavigate();
 					if(pn != null) {
 						settings.insertIntermediatePoint(pn.getLatitude(), pn.getLongitude(), pn.pointDescription,
 								intermediatePoints.size());
@@ -645,9 +650,10 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
-	public void setStartPoint(final LatLon startPoint, boolean updateRoute, PointDescription name) {
+	public void setStartPoint(LatLon startPoint, boolean updateRoute, PointDescription name) {
+		ctx.logRoutingEvent("setStartPoint startPoint " + startPoint + " updateRoute " + updateRoute + " name " + name);
 		if (startPoint != null) {
-			final PointDescription pointDescription;
+			PointDescription pointDescription;
 			if (name == null) {
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 			} else {
@@ -664,9 +670,10 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
-	public void setMyLocationPoint(final LatLon startPoint, boolean updateRoute, PointDescription name) {
+	public void setMyLocationPoint(LatLon startPoint, boolean updateRoute, PointDescription name) {
+		ctx.logRoutingEvent("setMyLocationPoint startPoint " + startPoint + " updateRoute " + updateRoute + " name " + name);
 		if (startPoint != null) {
-			final PointDescription pointDescription;
+			PointDescription pointDescription;
 			if (name == null) {
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 			} else {

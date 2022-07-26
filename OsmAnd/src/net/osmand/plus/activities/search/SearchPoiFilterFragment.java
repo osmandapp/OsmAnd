@@ -57,7 +57,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	public static final int REQUEST_POI_EDIT = 55;
 
 	private EditText searchEditText;
-	private SearchPoiByNameTask currentTask = null;
+	private SearchPoiByNameTask currentTask;
 	private PoiFiltersAdapter poiFitlersAdapter;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,8 +68,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		((ImageView) v.findViewById(R.id.search_icon)).setImageDrawable(
 				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 
-		setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
-		setupOptions((ImageView) v.findViewById(R.id.options));
+		setupSearchEditText(v.findViewById(R.id.searchEditText));
+		setupOptions(v.findViewById(R.id.options));
 		v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
 		return v;
 	}
@@ -114,7 +114,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				boolean handled = false;
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-					final PoiUIFilter poiFilter = getApp().getPoiFilters().getSearchByNamePOIFilter();
+					PoiUIFilter poiFilter = getApp().getPoiFilters().getSearchByNamePOIFilter();
 					poiFilter.setFilterByName(searchEditText.getText().toString());
 					showFilterActivity(poiFilter.getFilterId());
 					handled = true;
@@ -156,7 +156,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			}
 			List<AbstractPoiType> res = app.getPoiTypes().getAllTypesTranslatedNames(
 					new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
-			final Collator inst = Collator.getInstance();
+			Collator inst = Collator.getInstance();
 			Collections.sort(res, new Comparator<AbstractPoiType>() {
 				@Override
 				public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
@@ -205,7 +205,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
-		final Object item = getListAdapter().getItem(position);
+		Object item = getListAdapter().getItem(position);
 		ResourceManager rm = getApp().getResourceManager();
 		if (!rm.containsAmenityRepositoryToSearch(false)) {
 			Toast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
@@ -236,7 +236,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	}
 
 	private void showFilterActivity(String filterId) {
-		final Intent newIntent = new Intent(getActivity(), SearchPOIActivity.class);
+		Intent newIntent = new Intent(getActivity(), SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filterId);
 		newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		updateIntentToLaunch(newIntent);
@@ -284,12 +284,12 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.searchpoifolder_list, parent, false);
 			}
-			TextView label = (TextView) row.findViewById(R.id.folder_label);
-			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
+			TextView label = row.findViewById(R.id.folder_label);
+			ImageView icon = row.findViewById(R.id.folder_icon);
 			Object item = getItem(position);
 			String name;
 			if (item instanceof PoiUIFilter) {
-				final PoiUIFilter model = (PoiUIFilter) item;
+				PoiUIFilter model = (PoiUIFilter) item;
 				if (RenderingIcons.containsBigIcon(model.getIconId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getIconId()));
 				} else if (PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) ||
@@ -324,7 +324,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	private void showOptionsMenu(View v) {
 		// Show menu with search all, name finder, name finder poi
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 
 		MenuItem item = optionsMenu.getMenu().add(R.string.poi_filter_custom_filter)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));

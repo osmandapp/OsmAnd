@@ -123,7 +123,6 @@ public class AsyncLoadingThread extends Thread {
 
 	public static class TileLoadDownloadRequest extends DownloadRequest {
 
-		public final String tileId;
 		public final File dirWithTiles;
 		public final ITileSource tileSource;
 
@@ -131,10 +130,9 @@ public class AsyncLoadingThread extends Thread {
 
 		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId,
 		                               ITileSource source, int tileX, int tileY, int zoom, long timestamp) {
-			super(url, fileToSave, tileX, tileY, zoom);
+			super(url, fileToSave, tileId, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
 			this.tileSource = source;
-			this.tileId = tileId;
 			this.timestamp = timestamp;
 		}
 		
@@ -173,8 +171,8 @@ public class AsyncLoadingThread extends Thread {
 		protected double bottomLatitude;
 		protected double leftLongitude;
 		protected double rightLongitude;
-		protected boolean cancelled = false;
-		protected volatile boolean running = false;
+		protected boolean cancelled;
+		protected volatile boolean running;
 
 		public boolean isContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 			return this.topLatitude >= topLatitude && this.leftLongitude <= leftLongitude

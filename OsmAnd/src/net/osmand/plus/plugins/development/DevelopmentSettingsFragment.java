@@ -98,9 +98,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupSimulateYourLocationPref() {
-		final Preference simulateYourLocation = findPreference(SIMULATE_YOUR_LOCATION);
+		Preference simulateYourLocation = findPreference(SIMULATE_YOUR_LOCATION);
 		simulateYourLocation.setIconSpaceReserved(false);
-		final OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		updateSimulationTitle = new Runnable() {
 			@Override
 			public void run() {

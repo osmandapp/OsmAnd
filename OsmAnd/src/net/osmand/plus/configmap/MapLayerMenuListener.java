@@ -19,7 +19,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -90,8 +90,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 
 	@Override
 	public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
-		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		final PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
 		if (item.getSelected() != null) {
 			item.setColor(mapActivity, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}
@@ -109,7 +109,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.shared_string_favorites) {
 			settings.SHOW_FAVORITES.set(isChecked);
 		} else if (itemId == R.string.layer_gpx_layer) {
-			final GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
+			GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
 			if (selectedGpxHelper.isAnyGpxFileSelected()) {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
@@ -150,8 +150,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 
 	protected void showPoiFilterDialog(OnDataChangeUiAdapter uiAdapter,
 	                                   ContextMenuItem item) {
-		final PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
-		final PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
+		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
+		PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
 		MapLayers.DismissListener dismissListener =
 				() -> {
 					PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();

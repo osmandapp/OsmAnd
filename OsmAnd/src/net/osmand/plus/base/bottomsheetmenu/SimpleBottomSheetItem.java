@@ -67,12 +67,12 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		iconView = ((ImageView) view.findViewById(R.id.icon));
+		iconView = view.findViewById(R.id.icon);
 		if (iconView != null) {
 			iconView.setImageDrawable(icon);
 			iconView.setVisibility(iconHidden ? View.GONE : View.VISIBLE);
 		}
-		titleTv = (TextView) view.findViewById(R.id.title);
+		titleTv = view.findViewById(R.id.title);
 		if (title != null && titleTv != null) {
 			titleTv.setText(title);
 			if (titleColorId != INVALID_ID) {

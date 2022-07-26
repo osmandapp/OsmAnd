@@ -1,13 +1,15 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.NonNull;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -15,10 +17,8 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 public class SelectedTrackToFollowCard extends MapBaseCard {
 
@@ -48,7 +48,7 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 			}
 		});
 
-		ViewGroup cardsContainer = ((ViewGroup) view.findViewById(R.id.cards_container));
+		ViewGroup cardsContainer = view.findViewById(R.id.cards_container);
 		cardsContainer.removeAllViews();
 
 		TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxFile);
@@ -111,7 +111,7 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 
 		NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity,
 				passWholeRoute, navigationType, connectTrackPointStraightly,
-				routeParamsBuilder.useIntermediateRtePoints());
+				routeParamsBuilder.shouldUseIntermediateRtePoints());
 		navigateTrackCard.setListener(target);
 		cardsContainer.addView(navigateTrackCard.build(mapActivity));
 	}

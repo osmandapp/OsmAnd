@@ -70,7 +70,7 @@ public class NetworkWriter extends AbstractWriter {
 
 	@Nullable
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-							   @NonNull String fileName, long uploadTime)
+	                           @NonNull String fileName, long uploadTime)
 			throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
 			return uploadDirWithFiles(itemWriter, fileName, uploadTime);
@@ -136,7 +136,10 @@ public class NetworkWriter extends AbstractWriter {
 	private boolean shouldUseEmptyStreamWriter(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter, @NonNull String fileName) {
 		SettingsItem item = itemWriter.getItem();
 		if (item instanceof FileSettingsItem) {
-			if (((FileSettingsItem) item).getSubtype() == FileSubtype.OBF_MAP) {
+			FileSettingsItem settingsItem = (FileSettingsItem) item;
+			FileSubtype subtype = settingsItem.getSubtype();
+			if (subtype == FileSubtype.OBF_MAP || subtype == FileSubtype.ROAD_MAP || subtype == FileSubtype.WIKI_MAP
+					|| subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TILES_MAP) {
 				return backupHelper.isObfMapExistsOnServer(fileName);
 			}
 		}
@@ -166,7 +169,7 @@ public class NetworkWriter extends AbstractWriter {
 	}
 
 	@NonNull
-	private OnUploadFileListener getUploadFileListener(final @NonNull SettingsItem item) {
+	private OnUploadFileListener getUploadFileListener(@NonNull SettingsItem item) {
 		return new OnUploadFileListener() {
 
 			@Override
@@ -211,9 +214,9 @@ public class NetworkWriter extends AbstractWriter {
 	private OnUploadFileListener getUploadDirListener(@NonNull SettingsItem item, @NonNull String itemFileName, int itemWork) {
 		return new OnUploadFileListener() {
 
-			private int itemProgress = 0;
-			private int deltaProgress = 0;
-			private boolean uploadStarted = false;
+			private int itemProgress;
+			private int deltaProgress;
+			private boolean uploadStarted;
 
 			@Override
 			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {

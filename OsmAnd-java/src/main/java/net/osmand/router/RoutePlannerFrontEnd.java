@@ -49,7 +49,7 @@ public class RoutePlannerFrontEnd {
 	
 	public static class GpxRouteApproximation {
 		// ! MAIN parameter to approximate (35m good for custom recorded tracks) 
-		public double MINIMUM_POINT_APPROXIMATION = 50; // 35 m good for small deviations
+		public double MINIMUM_POINT_APPROXIMATION = 200; // 35 m good for small deviations
 		// This parameter could speed up or slow down evaluation (better to make bigger for long routes and smaller for short)
 		public double MAXIMUM_STEP_APPROXIMATION = 3000;
 		// don't search subsegments shorter than specified distance (also used to step back for car turns)
@@ -962,18 +962,19 @@ public class RoutePlannerFrontEnd {
 					rlist.add(rr);
 				}
 			}
-			runRecalculation = rlist.size() > 0;
+
 			if (rlist.size() > 0) {
 				RouteSegment previous = null;
-				for (int i = 0; i <= rlist.size() - 1; i++) {
+				for (int i = 0; i < rlist.size(); i++) {
 					RouteSegmentResult rr = rlist.get(i);
-					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(), rr.getEndPointIndex());
 					if (previous != null) {
+						RouteSegment segment = new RouteSegment(rr.getObject(), rr.getStartPointIndex(),rr.getEndPointIndex());
 						previous.setParentRoute(segment);
+						previous = segment;
 					} else {
-						recalculationEnd = new RouteSegmentPoint(segment.road, segment.segStart, 0); 
+						recalculationEnd = new RouteSegmentPoint(rr.getObject(), rr.getStartPointIndex(), 0);
+						previous = recalculationEnd;
 					}
-					previous = segment;
 				}
 			}
 		}
@@ -1000,13 +1001,13 @@ public class RoutePlannerFrontEnd {
 		// long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
-		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
+		List<RouteSegmentResult> result = new ArrayList<>(Arrays.asList(res));
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;
 			while (current.getParentRoute() != null) {
 				RouteSegment pr = current.getParentRoute();
-				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentEnd(), pr.getSegmentStart()));
+				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentStart(), pr.getSegmentEnd()));
 				current = pr;
 			}
 		}

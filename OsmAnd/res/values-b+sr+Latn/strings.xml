@@ -4000,7 +4000,6 @@
     <string name="routing_attr_short_way_description">Optimizovani kraći put (ušteda energije)</string>
     <string name="routing_attr_driving_style_description">Odaberite razlog putovanja da dobijete kraći, brži ili sigurniji put</string>
     <string name="snap_to_road_descr">Ikonica trenutne pozicije će biti prilepljena za trenutno navođeni put</string>
-    <string name="map_orientation_threshold_descr">Ne rotiraj kartu ako je brzina ispod donje granice</string>
     <string name="restart">Restart</string>
     <string name="shared_strings_all_regions">Sve regije</string>
     <string name="delete_number_files_question">Obriši %1$d fajlova\?</string>
@@ -4315,7 +4314,6 @@
     <string name="shortcut_navigate_to_work">Idite na „Posao“</string>
     <string name="page_number">Stranica %1$s</string>
     <string name="add_page">Dodaj stranicu</string>
-    <string name="average_speed_skip_stops_desc">Brzina manja od %1$s neće se računati i neće uticati na prosečnu brzinu.</string>
     <string name="average_speed_skip_stops">Uzmi u obzir zaustavljanja</string>
     <string name="average_speed_time_interval_desc">Navedite vremenski interval za koji će se meriti prosečna brzina.</string>
     <string name="average_speed_widget_desc">Prikazuje prosečnu brzinu trenutne vožnje.</string>

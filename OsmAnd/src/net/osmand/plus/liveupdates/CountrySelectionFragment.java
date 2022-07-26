@@ -37,7 +37,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = CountrySelectionFragment.class.getSimpleName();
 
-	private List<CountryItem> countryItems = new ArrayList<>();
+	private final List<CountryItem> countryItems = new ArrayList<>();
 	private OnFragmentInteractionListener mListener;
 
 	public List<CountryItem> getCountryItems() {
@@ -63,8 +63,8 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		}
 
 		View view = inflater.inflate(R.layout.fragment_search_list, container, false);
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		final ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
+		ListView listView = view.findViewById(android.R.id.list);
+		ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
 		if (countryItems.size() > 0) {
 			for (CountryItem item : countryItems) {
 				adapter.add(item);
@@ -78,7 +78,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 				dismiss();
 			}
 		});
-		final EditText searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		EditText searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,7 +93,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 				adapter.getFilter().filter(s);
 			}
 		});
-		ImageButton clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		ImageButton clearButton = view.findViewById(R.id.clearButton);
 		setThemedDrawable(clearButton, R.drawable.ic_action_remove_dark);
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -112,7 +112,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		} else if (getParentFragment() instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) getParentFragment();
 		} else {
-			throw new RuntimeException(context.toString()
+			throw new RuntimeException(context
 					+ " must implement OnFragmentInteractionListener");
 		}
 	}
@@ -133,12 +133,12 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 
-	public void initCountries(final OsmandApplication app) {
-		final WorldRegion root = app.getRegions().getWorldRegion();
+	public void initCountries(OsmandApplication app) {
+		WorldRegion root = app.getRegions().getWorldRegion();
 		ArrayList<WorldRegion> groups = new ArrayList<>();
 		groups.add(root);
 		processGroup(root, groups);
-		final Collator collator = Collator.getInstance();
+		Collator collator = Collator.getInstance();
 		Collections.sort(groups, new Comparator<WorldRegion>() {
 			@Override
 			public int compare(WorldRegion lhs, WorldRegion rhs) {
@@ -203,8 +203,8 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static class CountryItem implements Serializable {
-		private String localName;
-		private String downloadName;
+		private final String localName;
+		private final String downloadName;
 
 		public CountryItem(String localName, String downloadName) {
 			this.localName = localName;

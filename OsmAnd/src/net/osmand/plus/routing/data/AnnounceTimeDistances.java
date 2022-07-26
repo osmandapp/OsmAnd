@@ -19,19 +19,19 @@ public class AnnounceTimeDistances {
 	// We can research if a flexible value like min(12, x * gps-hdop) has advantages over a constant (x could be 2 or so).
 	private static final int POSITIONING_TOLERANCE = 12;
 
-	public final static int STATE_TURN_NOW = 0;
-	public final static int STATE_TURN_IN = 1;
-	public final static int STATE_PREPARE_TURN = 2;
-	public final static int STATE_LONG_PREPARE_TURN = 3;
-	public final static int STATE_SHORT_ALARM_ANNOUNCE = 4;
-	public final static int STATE_LONG_ALARM_ANNOUNCE = 5;
-	public final static int STATE_SHORT_PNT_APPROACH = 6;
-	public final static int STATE_LONG_PNT_APPROACH = 7;
+	public static final int STATE_TURN_NOW = 0;
+	public static final int STATE_TURN_IN = 1;
+	public static final int STATE_PREPARE_TURN = 2;
+	public static final int STATE_LONG_PREPARE_TURN = 3;
+	public static final int STATE_SHORT_ALARM_ANNOUNCE = 4;
+	public static final int STATE_LONG_ALARM_ANNOUNCE = 5;
+	public static final int STATE_SHORT_PNT_APPROACH = 6;
+	public static final int STATE_LONG_PNT_APPROACH = 7;
 
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
 	private float DEFAULT_SPEED = 10;
-	private double voicePromptDelayTimeSec = 0;
+	private double voicePromptDelayTimeSec;
 
 	private float ARRIVAL_DISTANCE;
 	private float OFF_ROUTE_DISTANCE;
@@ -55,7 +55,7 @@ public class AnnounceTimeDistances {
 		locationProvider = app.getLocationProvider();
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// keep it as minimum 30 km/h for voice announcement
-			DEFAULT_SPEED = (float) Math.max(8, appMode.getDefaultSpeed());
+			DEFAULT_SPEED = Math.max(8, appMode.getDefaultSpeed());
 		} else {
 			// minimal is 1 meter for turn now
 			DEFAULT_SPEED = (float) Math.max(0.3, appMode.getDefaultSpeed());

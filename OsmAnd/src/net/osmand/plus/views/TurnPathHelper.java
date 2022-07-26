@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -40,19 +40,19 @@ public class TurnPathHelper {
 		float widthStepInter = 6;
 		float widthArrow = 22;
 		float radArrowTriangle2;
-		private double dfL;
-		private double dfAr2;
-		private double dfStepInter;
-		private double dfAr;
-		private double dfOut;
-		private double dfStepOut;
-		private double dfIn;
-		private double minDelta;
+		private final double dfL;
+		private final double dfAr2;
+		private final double dfStepInter;
+		private final double dfAr;
+		private final double dfOut;
+		private final double dfStepOut;
+		private final double dfIn;
+		private final double minDelta;
 		private double rot;
 		private float cx;
 		private float cy;
-		private float scaleTriangle;
-		
+		private final float scaleTriangle;
+
 		private TurnVariables(boolean leftSide, float turnAngle, int out, int wa, int ha, float scaleTriangle) {
 			this.scaleTriangle = scaleTriangle;
 			widthArrow = widthArrow * scaleTriangle;
@@ -200,7 +200,7 @@ public class TurnPathHelper {
 			pathForTurn.arcTo(innerOval, b == 1 ? -180 : 0, b*  90);
 			tv.drawTriangle(pathForTurn);
 			pathForTurn.arcTo(outerOval, -90, - b *90);
-			pathForTurn.rLineTo(0, h);			
+			pathForTurn.rLineTo(0, h);
 		} else if (TurnType.TSLR == turnTypeId || TurnType.TSLL == turnTypeId) {
 			int b = TurnType.TSLR == turnTypeId ? 1 : -1;
 			float angle = shortArrow ? 65 : 45;
@@ -244,8 +244,7 @@ public class TurnPathHelper {
 			}
 			RectF innerOval = new RectF(centerCircleX - r, centerCircleY - r, centerCircleX + r, centerCircleY + r);
 			pathForTurn.moveTo(centerCircleX + b * tv.widthStepIn / 2, ha - lowMargin);
-			pathForTurn.lineTo(centerCircleX + b * tv.widthStepIn / 2, (float) (centerCircleY +
-					2 * r));
+			pathForTurn.lineTo(centerCircleX + b * tv.widthStepIn / 2, centerCircleY + 2 * r);
 //			pathForTurn.arcTo(innerOval, -90 - b * 90, b * 45);
 			tv.drawTriangle(pathForTurn);
 //			pathForTurn.lineTo(centerCircleX - b * tv.widthStepIn / 2, (float) (centerCircleY - 2 *r));
@@ -308,7 +307,7 @@ public class TurnPathHelper {
 			if(center != null) {
 				center.set(tv.cx, tv.cy);
 			}
-			RectF qrOut = new RectF(tv.cx - tv.radOuterCircle, tv.cy - tv.radOuterCircle, 
+			RectF qrOut = new RectF(tv.cx - tv.radOuterCircle, tv.cy - tv.radOuterCircle,
 					tv.cx + tv.radOuterCircle, tv.cy + tv.radOuterCircle);
 			RectF qrIn = new RectF(tv.cx - tv.radInnerCircle, tv.cy - tv.radInnerCircle, tv.cx + tv.radInnerCircle, tv.cy + tv.radInnerCircle);
 			if(outlay != null && !mini) {
@@ -339,9 +338,9 @@ public class TurnPathHelper {
 					for (int i = 0; i < out - 1; i++) {
 						outlay.arcTo(qrOut, startArcAngle(tv.dfOut + i * (st + tv.dfStepOut)), sweepArcAngle(st));
 						arcLineTo(outlay,
-								tv.dfOut + (i + 1) * (st + tv.dfStepOut) - tv.dfStepOut / 2 - tv.dfStepInter / 2, 
+								tv.dfOut + (i + 1) * (st + tv.dfStepOut) - tv.dfStepOut / 2 - tv.dfStepInter / 2,
 								tv.cx, tv.cy, tv.radStepInter);
-						arcLineTo(outlay, tv.dfOut + (i + 1) * (st + tv.dfStepOut) - tv.dfStepOut / 2 + tv.dfStepInter / 2, 
+						arcLineTo(outlay, tv.dfOut + (i + 1) * (st + tv.dfStepOut) - tv.dfStepOut / 2 + tv.dfStepInter / 2,
 								tv.cx, tv.cy, tv.radStepInter);
 						arcLineTo(outlay, tv.dfOut + (i + 1) * (st + tv.dfStepOut), tv.cx, tv.cy, tv.radOuterCircle);
 						// pathForTurn.arcTo(qr1, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
@@ -351,7 +350,7 @@ public class TurnPathHelper {
 					arcLineTo(outlay, tv.rot - tv.dfIn, tv.cx, tv.cy, tv.radInnerCircle);
 					outlay.arcTo(qrIn, startArcAngle(tv.rot - tv.dfIn), -sweepArcAngle(tv.rot - tv.dfIn - tv.dfIn));
 				}
-			} 
+			}
 //			if(!showSteps) {
 //				// arc
 //				pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
@@ -367,9 +366,7 @@ public class TurnPathHelper {
 			arcLineTo(pathForTurn, -tv.dfL, tv.cx, tv.cy, tv.radBottom);
 			// left
 			arcLineTo(pathForTurn, tv.dfL, tv.cx, tv.cy, tv.radBottom);
-			
-		
-		} 
+		}
 		pathForTurn.close();
 		if(transform != null){
 			pathForTurn.transform(transform);
@@ -387,7 +384,7 @@ public class TurnPathHelper {
 		// rot left - ] 0, 360], right ] -360,0]
 		float rot = leftSide ? (t + 180) : (t - 180) ;
 		if(rot == 0) {
-			rot = leftSide ? 360 : -360; 
+			rot = leftSide ? 360 : -360;
 		}
 		float delta = (float) minDelta;
 		if(rot > 360 - delta && rot <= 360) {
@@ -404,18 +401,18 @@ public class TurnPathHelper {
 			rot = delta;
 			if(out > 2) {
 				rot = 360 - delta;
-			} 
+			}
 		} else if (rot <= 0 && rot > -delta) {
 			rot = -delta;
 			if(out > 2) {
 				rot = -360 + delta;
-			} 
+			}
 		}
 		return rot;
 	}
 	
 	private static void arcLineTo(Path pathForTurn, double angle, float cx, float cy, float radius) {
-		pathForTurn.lineTo(getProjX(angle, cx, cy, radius), getProjY(angle, cx, cy, radius));		
+		pathForTurn.lineTo(getProjX(angle, cx, cy, radius), getProjY(angle, cx, cy, radius));
 	}
 	
 	private static void arcQuadTo(Path pathForTurn, double angle, float radius, double angle2, float radius2,
@@ -437,8 +434,8 @@ public class TurnPathHelper {
 		float Y2 = getProjY(angle2, cx, cy, radius2);
 		float l2 = (float) Math.sqrt((X-X2)*(X-X2) + (Y-Y2)*(Y-Y2));
 		float l0 = (float) Math.sqrt((X-X0)*(X-X0) + (Y-Y0)*(Y-Y0));
-		float proc2 = (float) (dl / l2);
-		float proc = (float) (dl / l0);
+		float proc2 = dl / l2;
+		float proc = dl / l0;
 		pathForTurn.lineTo(X0 * proc + X * (1 - proc), Y0 * proc + Y * (1 - proc));
 		pathForTurn.quadTo(X, Y, X2 * proc2 + X * (1 - proc2), Y2 * proc2 + Y * (1 - proc2));
 	}
@@ -469,27 +466,28 @@ public class TurnPathHelper {
 	private static float sweepArcAngle(double d) {
 		return (float) (d * 180 / Math.PI);
 	}
-	
+
 	public static class RouteDrawable extends Drawable {
+
 		Paint paintRouteDirection;
 		Paint paintRouteDirectionOutlay;
 		Path p = new Path();
 		Path dp = new Path();
 		Path pOutlay = new Path();
 		Path dpOutlay = new Path();
-		private boolean mini;
-		
-		public RouteDrawable(Resources resources, boolean mini){
+		private final boolean mini;
+
+		public RouteDrawable(@NonNull Context ctx, boolean mini) {
 			this.mini = mini;
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
 			paintRouteDirectionOutlay = new Paint();
 			paintRouteDirectionOutlay.setStyle(Style.STROKE);
 			paintRouteDirectionOutlay.setColor(Color.BLACK);
 			paintRouteDirectionOutlay.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini,
+			calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini,
 					false, true, false);
 		}
 
@@ -502,7 +500,7 @@ public class TurnPathHelper {
 		}
 		
 		public void setRouteType(TurnType t){
-			TurnPathHelper.calcTurnPath(p, pOutlay, t, null, null, mini,
+			calcTurnPath(p, pOutlay, t, null, null, mini,
 					false, true, false);
 			onBoundsChange(getBounds());
 		}

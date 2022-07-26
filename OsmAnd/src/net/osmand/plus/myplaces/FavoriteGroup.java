@@ -11,6 +11,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +143,7 @@ public class FavoriteGroup {
 		return pointsGroup;
 	}
 
-	public static FavoriteGroup fromPointsGroup(@NonNull PointsGroup pointsGroup, @NonNull Context ctx) {
+	public static FavoriteGroup fromPointsGroup(@NonNull PointsGroup pointsGroup) {
 		FavoriteGroup favoriteGroup = new FavoriteGroup();
 		favoriteGroup.name = pointsGroup.name;
 		favoriteGroup.color = pointsGroup.color;
@@ -150,7 +151,10 @@ public class FavoriteGroup {
 		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE);
 
 		for (WptPt point : pointsGroup.points) {
-			favoriteGroup.points.add(FavouritePoint.fromWpt(point, ctx));
+			favoriteGroup.points.add(FavouritePoint.fromWpt(point));
+		}
+		if (!Algorithms.isEmpty(favoriteGroup.points)) {
+			favoriteGroup.visible = favoriteGroup.points.get(0).isVisible();
 		}
 		return favoriteGroup;
 	}

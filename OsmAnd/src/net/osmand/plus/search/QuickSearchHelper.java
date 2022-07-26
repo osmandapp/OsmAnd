@@ -39,7 +39,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.search.SearchUICore;
@@ -154,7 +154,7 @@ public class QuickSearchHelper implements ResourceListener {
 		core.setActivePoiFiltersByOrder(filtersHelper.getPoiFilterOrders(true));
 	}
 
-	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
+	public void setRepositoriesForSearchUICore(OsmandApplication app) {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
@@ -684,10 +684,10 @@ public class QuickSearchHelper implements ResourceListener {
 	public void onMapClosed(String fileName) {
 	}
 
-	public static void showPoiFilterOnMap(@NonNull final MapActivity mapActivity,
-										  @NonNull final PoiUIFilter filter,
-										  @Nullable final Runnable action) {
-		final TopToolbarController controller = new PoiFilterBarController();
+	public static void showPoiFilterOnMap(@NonNull MapActivity mapActivity,
+										  @NonNull PoiUIFilter filter,
+										  @Nullable Runnable action) {
+		TopToolbarController controller = new PoiFilterBarController();
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

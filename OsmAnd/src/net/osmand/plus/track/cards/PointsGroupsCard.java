@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -103,7 +103,7 @@ public class PointsGroupsCard extends MapBaseCard {
 			selectedGroup = (GpxDisplayGroup) chip.tag;
 			CardListener listener = getListener();
 			if (listener != null) {
-				listener.onCardButtonPressed(PointsGroupsCard.this, SELECT_GROUP_INDEX);
+				listener.onCardButtonPressed(this, SELECT_GROUP_INDEX);
 			}
 			chipsView.smoothScrollTo(chip);
 			return true;

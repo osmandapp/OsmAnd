@@ -5,22 +5,21 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.OsmandApplication;
 
 import java.util.List;
 
 public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
-	private OsmandApplication app;
-	private GpxSplitType gpxSplitType;
-	private List<GpxDisplayGroup> groups;
-	private SplitTrackListener splitTrackListener;
+	private final OsmandApplication app;
+	private final GpxSplitType gpxSplitType;
+	private final List<GpxDisplayGroup> groups;
+	private final SplitTrackListener splitTrackListener;
 
-	private boolean joinSegments;
-	private int timeSplitInterval;
-	private double distanceSplitInterval;
+	private final boolean joinSegments;
+	private final int timeSplitInterval;
+	private final double distanceSplitInterval;
 
 	public SplitTrackAsyncTask(@NonNull OsmandApplication app,
 	                           @NonNull GpxSplitType gpxSplitType,
@@ -47,7 +46,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		for (GpxSelectionHelper.GpxDisplayGroup model : groups) {
+		for (GpxDisplayGroup model : groups) {
 			if (gpxSplitType == GpxSplitType.NO_SPLIT) {
 				model.noSplit(app);
 			} else if (gpxSplitType == GpxSplitType.DISTANCE && distanceSplitInterval > 0) {

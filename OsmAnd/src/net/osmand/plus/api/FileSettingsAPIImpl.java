@@ -39,7 +39,7 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 	}
 
 	@Override
-	public SettingsEditor edit(final Object pref) {
+	public SettingsEditor edit(Object pref) {
 		return new SettingsEditor() {
 			final Map<String, Object> modified = new LinkedHashMap<String, Object>();
 
@@ -112,7 +112,7 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 				Entry<String, Object> e = it.next();
 				ps.put(e.getKey(), String.valueOf(e.getValue()));
 			}
-			final FileOutputStream fout = new FileOutputStream(file);
+			FileOutputStream fout = new FileOutputStream(file);
 			ps.store(fout, null);
 			fout.close();
 			return true;

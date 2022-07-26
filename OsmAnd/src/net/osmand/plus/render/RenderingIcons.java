@@ -35,7 +35,7 @@ public class RenderingIcons {
 	private static final Map<String, Bitmap> iconsBmp = new LinkedHashMap<>();
 	private static final Map<String, Drawable> iconsDrawable = new LinkedHashMap<>();
 
-	private static Bitmap cacheBmp = null;
+	private static Bitmap cacheBmp;
 
 	public static boolean containsSmallIcon(String s){
 		return smallIcons.containsKey(s);
@@ -45,15 +45,19 @@ public class RenderingIcons {
 		return bigIcons.containsKey(s);
 	}
 
-	public static synchronized Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+	public static synchronized Bitmap getBitmapFromVectorDrawable(@NonNull Context context, int drawableId) {
+		return getBitmapFromVectorDrawable(context, drawableId, 1f);
+	}
+
+	public static synchronized Bitmap getBitmapFromVectorDrawable(@NonNull Context context, int drawableId, float scale) {
 		Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
 		if (drawable == null) {
 			return null;
 		}
-		if (cacheBmp == null || cacheBmp.getWidth() != drawable.getIntrinsicWidth()
-				|| cacheBmp.getHeight() != drawable.getIntrinsicHeight()) {
-			cacheBmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-					drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		if (cacheBmp == null || cacheBmp.getWidth() != width || cacheBmp.getHeight() != height) {
+			cacheBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		}
 		cacheBmp.eraseColor(Color.TRANSPARENT);
 		Canvas canvas = new Canvas(cacheBmp);
@@ -62,7 +66,7 @@ public class RenderingIcons {
 		return cacheBmp;
 	}
 
-	private static synchronized byte[] getPngFromVectorDrawable(Context context, int drawableId) {
+	private static synchronized byte[] getPngFromVectorDrawable(@NonNull Context context, int drawableId) {
 		Bitmap bmp = getBitmapFromVectorDrawable(context, drawableId);
 		if (bmp == null) {
 			return null;
@@ -81,15 +85,15 @@ public class RenderingIcons {
 			return null;
 		}
 		try {
-			final InputStream inputStream = ctx.getResources().openRawResource(resId);
-			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
-            final byte[] ioBuffer = new byte[1024];
+			InputStream inputStream = ctx.getResources().openRawResource(resId);
+			ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
+            byte[] ioBuffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
 				proxyOutputStream.write(ioBuffer, 0, bytesRead);
 			}
 			inputStream.close();
-			final byte[] bitmapData = proxyOutputStream.toByteArray();
+			byte[] bitmapData = proxyOutputStream.toByteArray();
 			if (isVectorData(bitmapData)) {
 				return getPngFromVectorDrawable(ctx, resId);
 			}
@@ -115,9 +119,9 @@ public class RenderingIcons {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (poiType == null) {
 			return null;
-		} else if (RenderingIcons.containsSmallIcon(poiType.getIconKeyName())) {
+		} else if (containsSmallIcon(poiType.getIconKeyName())) {
 			return poiType.getIconKeyName();
-		} else if (RenderingIcons.containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
 		}
 		return null;

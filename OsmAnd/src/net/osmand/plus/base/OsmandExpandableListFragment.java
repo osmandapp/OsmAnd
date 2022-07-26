@@ -29,7 +29,7 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		View v = createView(inflater, container);
-		listView = (ExpandableListView) v.findViewById(android.R.id.list);
+		listView = v.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
@@ -115,14 +115,14 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	}
 
 
-	public void collapseTrees(final int count) {
+	public void collapseTrees(int count) {
 		Activity activity = getActivity();
 		if (activity != null) {
 			activity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					synchronized (adapter) {
-						final ExpandableListView expandableListView = getExpandableListView();
+						ExpandableListView expandableListView = getExpandableListView();
 						for (int i = 0; i < adapter.getGroupCount(); i++) {
 							int cp = adapter.getChildrenCount(i);
 							if (cp < count) {

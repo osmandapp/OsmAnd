@@ -366,7 +366,7 @@
     <string name="poi_bus_station">Estação rodoviária</string>
     <string name="poi_railway_station">Estação ferroviária; Estação de comboios, Estação de caminhos de ferro</string>
     <string name="poi_railway_platform">Plataforma ferroviária;Plataforma de comboios;Plataforma de caminho de ferro;Plataforma de estação;Plataforma de apeadeiro</string>
-    <string name="poi_halt">Apeadeiro ferroviário;Apeadeiro de caminho de ferro;Apeadeiro de comboio;Apeadeiro</string>
+    <string name="poi_halt">Apeadeiro ferroviário;Apeadeiro de caminho de ferro;Apeadeiro de comboio;Apeadeiro;Estação ferroviária;Estação de caminhos de ferro;Estação rodoviária;Rodoviária;Estação de autocarros;Estação</string>
     <string name="poi_subway_entrance">Entrada de metropolitano</string>
     <string name="poi_subway_station">Sim;Estação de metropolitano</string>
     <string name="poi_railway_buffer_stop">Pára-choques de via férrea</string>
@@ -4335,4 +4335,11 @@
     <string name="poi_club_youth_movement">Movimento juvenil</string>
     <string name="poi_club_amateur_radio">Clube de radioamadorismo</string>
     <string name="poi_club_religion">Clube religioso</string>
+    <string name="poi_club_dog">Clube canino</string>
+    <string name="poi_short_name">Nome abreviado</string>
+    <string name="poi_club_aviation">Clube aeronáutico</string>
+    <string name="poi_club_bicycle">Clube de ciclismo</string>
+    <string name="poi_club_doityourself">Clube de bricolagem</string>
+    <string name="poi_board_title">Título do painel</string>
+    <string name="poi_first_aid_kit">Kit de primeiros socorros</string>
 </resources>

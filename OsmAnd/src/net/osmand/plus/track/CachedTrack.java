@@ -4,7 +4,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
@@ -33,7 +33,7 @@ public class CachedTrack {
 	private boolean useFilteredGpx;
 
 	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
-	private Set<String> availableColoringTypes = null;
+	private Set<String> availableColoringTypes;
 
 	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
 
@@ -80,7 +80,7 @@ public class CachedTrack {
 	public List<TrkSegment> getCachedTrackSegments(int zoom, @NonNull GradientScaleType scaleType) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
-		String trackId = zoom + "_" + scaleType.toString();
+		String trackId = zoom + "_" + scaleType;
 
 		if (useFilteredGpx != this.useFilteredGpx || prevModifiedTime != gpxFile.modifiedTime) {
 			this.useFilteredGpx = useFilteredGpx;

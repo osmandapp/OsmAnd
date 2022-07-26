@@ -54,7 +54,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			OPENSTREETMAP_COL_TAGS + " VARCHAR(2048)," +
 			OPENSTREETMAP_COL_ACTION + " TEXT, " + OPENSTREETMAP_COL_COMMENT + " TEXT," +
 			" " + OPENSTREETMAP_COL_CHANGED_TAGS + " TEXT, " + OPENSTREETMAP_COL_ENTITY_TYPE + " TEXT);";
-	List<OpenstreetmapPoint> cache = null;
+	List<OpenstreetmapPoint> cache;
 
 	private static final String OPENSTREETMAP_DB_LAST_MODIFIED_NAME = "openstreetmap";
 

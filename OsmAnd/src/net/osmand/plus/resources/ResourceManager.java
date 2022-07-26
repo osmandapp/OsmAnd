@@ -102,7 +102,7 @@ public class ResourceManager {
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 
-	protected static ResourceManager manager = null;
+	protected static ResourceManager manager;
 
 	protected File dirWithTiles;
 
@@ -133,7 +133,7 @@ public class ResourceManager {
 
 	public static class MapTileLayerSize {
 		final MapTileLayer layer;
-		Long markToGCTimestamp = null;
+		Long markToGCTimestamp;
 		long activeTimestamp;
 		int tiles;
 
@@ -250,9 +250,9 @@ public class ResourceManager {
 
 	private final HandlerThread renderingBufferImageThread;
 
-	protected boolean internetIsNotAccessible = false;
+	protected boolean internetIsNotAccessible;
 	private boolean depthContours;
-	private boolean indexesLoadedOnStart = false;
+	private boolean indexesLoadedOnStart;
 
 	public ResourceManager(OsmandApplication context) {
 		this.context = context;
@@ -316,17 +316,17 @@ public class ResourceManager {
 	}
 
 	public boolean checkIfObjectDownloaded(String downloadName) {
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return indexFileNames.containsKey(regionName) || indexFileNames.containsKey(roadsRegionName);
 	}
 
 	public boolean checkIfObjectBackuped(String downloadName) {
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return backupedFileNames.containsKey(regionName) || backupedFileNames.containsKey(roadsRegionName);
 	}
@@ -463,6 +463,15 @@ public class ResourceManager {
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
 			cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp);
+		}
+	}
+
+	public void downloadTileForMapSync(@NonNull ITileSource map, int x, int y, int zoom) {
+		TilesCache<?> cache = getTilesCache(map);
+		if (cache != null) {
+			String tileId = calculateTileId(map, x, y, zoom);
+			long time = System.currentTimeMillis();
+			cache.getTileForMap(tileId, map, x, y, zoom, true, true, true, time);
 		}
 	}
 
@@ -749,10 +758,10 @@ public class ResourceManager {
 		}
 	}
 
-	private final static String ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall = "alwaysCopyOnFirstInstall";
-	private final static String ASSET_COPY_MODE__overwriteOnlyIfExists = "overwriteOnlyIfExists";
-	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
-	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
+	private static final String ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall = "alwaysCopyOnFirstInstall";
+	private static final String ASSET_COPY_MODE__overwriteOnlyIfExists = "overwriteOnlyIfExists";
+	private static final String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
+	private static final String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 
 	private void unpackBundledAssets(@NonNull AssetManager assetManager, @NonNull File appDataDir,
 	                                 boolean firstInstall,
@@ -1116,8 +1125,8 @@ public class ResourceManager {
 	}
 
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
-		final List<Amenity> amenities = new ArrayList<>();
+	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
 			if (!filter.isEmpty()) {
@@ -1163,7 +1172,7 @@ public class ResourceManager {
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,
 	                                              ResultMatcher<Amenity> matcher) {
 		searchAmenitiesInProgress = true;
-		final List<Amenity> amenities = new ArrayList<>();
+		List<Amenity> amenities = new ArrayList<>();
 		try {
 			if (locations != null && locations.size() > 0) {
 				List<AmenityIndexRepository> repos = new ArrayList<>();

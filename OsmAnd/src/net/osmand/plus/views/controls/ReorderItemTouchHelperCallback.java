@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ReorderItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-	private OnItemMoveCallback itemMoveCallback;
+	private final OnItemMoveCallback itemMoveCallback;
 
 	public ReorderItemTouchHelperCallback(OnItemMoveCallback itemMoveCallback) {
 		this.itemMoveCallback = itemMoveCallback;

@@ -8,11 +8,11 @@ public class LIFOBlockingDeque<T> extends LinkedBlockingDeque<T> {
 
 	@Override
 	 public boolean offer(T t) {
-	  return super.offerFirst(t);
+	  return offerFirst(t);
 	 }
 
 	 @Override
 	 public T remove() {
-	  return super.removeFirst();
+	  return removeFirst();
 	 }
 }

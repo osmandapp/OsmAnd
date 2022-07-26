@@ -11,7 +11,7 @@ public class QuickSearchBannerListItem extends QuickSearchListItem {
 
 	public static final int INVALID_ID = -1;
 
-	private List<ButtonItem> buttons;
+	private final List<ButtonItem> buttons;
 
 	public QuickSearchBannerListItem(OsmandApplication app) {
 		super(app, null);
@@ -32,10 +32,10 @@ public class QuickSearchBannerListItem extends QuickSearchListItem {
 	}
 
 	public static class ButtonItem {
-		private String title;
-		private String description;
-		private int iconId;
-		private View.OnClickListener listener;
+		private final String title;
+		private final String description;
+		private final int iconId;
+		private final View.OnClickListener listener;
 
 		public ButtonItem(String title, String description, int iconId,
 		                  View.OnClickListener listener) {

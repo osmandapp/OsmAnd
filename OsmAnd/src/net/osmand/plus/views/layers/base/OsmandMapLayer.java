@@ -21,10 +21,13 @@ import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -41,6 +44,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -61,14 +65,13 @@ public abstract class OsmandMapLayer {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
-	protected int baseOrder = -1;
 
 	@NonNull
 	private final Context ctx;
 	@Nullable
 	private MapActivity mapActivity;
 	protected OsmandMapTileView view;
-	protected boolean mapActivityInvalidated = false;
+	protected boolean mapActivityInvalidated;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -90,7 +93,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	public int getBaseOrder() {
-		return baseOrder;
+		return (int)((view != null ? view.getZorder(this) : 10f) * -100000f);
 	}
 
 	@NonNull
@@ -143,6 +146,11 @@ public abstract class OsmandMapLayer {
 
 	public String getString(@StringRes int resId, Object... formatArgs) {
 		return ctx.getString(resId, formatArgs);
+	}
+
+	@ColorInt
+	protected int getColor(@ColorRes int resId) {
+		return ColorUtilities.getColor(getContext(), resId);
 	}
 
 	public OsmandMapTileView getMapView() {
@@ -295,7 +303,7 @@ public abstract class OsmandMapLayer {
 
 	public static int getDefaultRadiusPoi(@NonNull RotatedTileBox tileBox) {
 		int radius;
-		final double zoom = tileBox.getZoom();
+		double zoom = tileBox.getZoom();
 		if (zoom <= 15) {
 			radius = 10;
 		} else if (zoom <= 16) {
@@ -332,7 +340,7 @@ public abstract class OsmandMapLayer {
 		return (int) textScale * radiusPoi;
 	}
 
-	public void setMapButtonIcon(ImageView imageView, Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @NonNull Drawable icon) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;
@@ -360,16 +368,20 @@ public abstract class OsmandMapLayer {
 		return getTextScale(getApplication());
 	}
 
+	public float getOriginalTextScale() {
+		return getOriginalTextScale(getApplication());
+	}
+
 	public static float getTextScale(@NonNull OsmandApplication app) {
 		return app.getOsmandMap().getTextScale();
 	}
 
-	public float getMapDensity() {
-		return getApplication().getOsmandMap().getMapDensity();
+	public static float getOriginalTextScale(@NonNull OsmandApplication app) {
+		return app.getOsmandMap().getOriginalTextScale();
 	}
 
-	public float getCarScaleCoef(boolean textScale) {
-		return getApplication().getOsmandMap().getCarScaleCoef(textScale);
+	public float getMapDensity() {
+		return getApplication().getOsmandMap().getMapDensity();
 	}
 
 	/**OpenGL*/
@@ -574,7 +586,7 @@ public abstract class OsmandMapLayer {
 		public class DataReadyCallback {
 			private final TileBoxRequest request;
 			private T results;
-			private boolean ready = false;
+			private boolean ready;
 			private final Object sync = new Object();
 
 			public DataReadyCallback(@NonNull TileBoxRequest request) {
@@ -650,11 +662,11 @@ public abstract class OsmandMapLayer {
 			}
 		}
 
-		public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
+		public boolean queriedBoxContains(RotatedTileBox queriedData, RotatedTileBox newBox) {
 			return queriedData != null && queriedData.containsTileBox(newBox) && Math.abs(queriedData.getZoom() - newBox.getZoom()) <= ZOOM_THRESHOLD;
 		}
 
-		public boolean queriedRequestContains(final TileBoxRequest queriedRequest, final TileBoxRequest newRequest) {
+		public boolean queriedRequestContains(TileBoxRequest queriedRequest, TileBoxRequest newRequest) {
 			return queriedRequest != null && queriedRequest.contains(newRequest) && Math.abs(queriedRequest.getZoom() - newRequest.getZoom()) <= ZOOM_THRESHOLD;
 		}
 
@@ -791,22 +803,22 @@ public abstract class OsmandMapLayer {
 		protected int cachedHash;
 		public Paint paint;
 		public Paint customColorPaint;
-		public int customColor = 0;
-		public float customWidth = 0;
-		public int defaultWidth = 0;
-		public int defaultColor = 0;
+		public int customColor;
+		public float customWidth;
+		public int defaultWidth;
+		public int defaultColor;
 		public boolean isPaint2;
 		public Paint paint2;
-		public int defaultWidth2 = 0;
+		public int defaultWidth2;
 		public boolean isPaint3;
 		public Paint paint3;
-		public int defaultWidth3 = 0;
+		public int defaultWidth3;
 		public Paint shadowPaint;
 		public boolean isShadowPaint;
 		public int defaultShadowWidthExtent = 2;
 		public Paint paint_1;
 		public boolean isPaint_1;
-		public int defaultWidth_1 = 0;
+		public int defaultWidth_1;
 		private final String renderingAttribute;
 
 		public RenderingLineAttributes(String renderingAttribute) {
@@ -819,7 +831,6 @@ public abstract class OsmandMapLayer {
 			shadowPaint = initPaint();
 		}
 
-
 		private Paint initPaint() {
 			Paint paint = new Paint();
 			paint.setStyle(Style.STROKE);
@@ -829,12 +840,14 @@ public abstract class OsmandMapLayer {
 			return paint;
 		}
 
-
 		public boolean updatePaints(OsmandApplication app, DrawSettings settings, RotatedTileBox tileBox) {
 			OsmandRenderer renderer = app.getResourceManager().getRenderer().getRenderer();
 			RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
-			final boolean isNight = settings != null && settings.isNightMode();
-			int hsh = calculateHash(rrs, isNight, tileBox.getDensity());
+			boolean isNight = settings != null && settings.isNightMode();
+			float density;
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			density = mapView.isCarView() ? mapView.getCarViewDensity() : tileBox.getDensity();
+			int hsh = calculateHash(rrs, isNight, density);
 			if (hsh != cachedHash) {
 				cachedHash = hsh;
 				if (rrs != null) {
@@ -842,7 +855,7 @@ public abstract class OsmandMapLayer {
 					req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
 					if (req.searchRenderingAttribute(renderingAttribute)) {
 						RenderingContext rc = new OsmandRenderer.RenderingContext(app);
-						rc.setDensityValue(tileBox.getDensity());
+						rc.setDensityValue(density);
 						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 						renderer.updatePaint(req, paint, 0, false, rc);
 						isPaint2 = renderer.updatePaint(req, paint2, 1, false, rc);
@@ -878,7 +891,6 @@ public abstract class OsmandMapLayer {
 			}
 			return false;
 		}
-
 
 		private void updateDefaultColor(Paint paint, int defaultColor) {
 			if ((paint.getColor() == 0 || paint.getColor() == Color.BLACK) && defaultColor != 0) {

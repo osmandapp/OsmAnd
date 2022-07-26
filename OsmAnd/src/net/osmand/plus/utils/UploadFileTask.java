@@ -23,13 +23,13 @@ public class UploadFileTask extends AsyncTask<Void, Integer, NetworkResult> {
 	private final Map<String, String> headers;
 	private final OnFileUploadCallback callback;
 
-	public UploadFileTask(final @NonNull String url,
-	                      final @NonNull StreamWriter streamWriter,
-	                      final @NonNull String fileName,
-	                      final boolean gzip,
-	                      final @NonNull Map<String, String> parameters,
-	                      final @Nullable Map<String, String> headers,
-	                      final @Nullable OnFileUploadCallback callback) {
+	public UploadFileTask(@NonNull String url,
+	                      @NonNull StreamWriter streamWriter,
+	                      @NonNull String fileName,
+	                      boolean gzip,
+	                      @NonNull Map<String, String> parameters,
+	                      @Nullable Map<String, String> headers,
+	                      @Nullable OnFileUploadCallback callback) {
 		this.url = url;
 		this.streamWriter = streamWriter;
 		this.fileName = fileName;
@@ -49,7 +49,7 @@ public class UploadFileTask extends AsyncTask<Void, Integer, NetworkResult> {
 	@NonNull
 	@Override
 	protected NetworkResult doInBackground(Void... v) {
-		final int[] progressValue = {0};
+		int[] progressValue = {0};
 		publishProgress(0);
 		IProgress progress = null;
 		if (callback != null) {

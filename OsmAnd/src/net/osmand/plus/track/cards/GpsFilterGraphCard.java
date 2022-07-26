@@ -18,7 +18,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -74,7 +74,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	@Nullable
 	private GpxDisplayItem getGpxDisplayItem() {
-		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
+		GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
 		List<GpxDisplayItem> displayItems = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
 		return Algorithms.isEmpty(displayItems) ? null : displayItems.get(0);
 	}

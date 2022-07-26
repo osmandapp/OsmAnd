@@ -26,15 +26,15 @@ public class ChartAdapterHelper {
 	public static final String BIND_GRAPH_ADAPTERS_KEY = "bind_graph_adapters_key";
 	public static final String BIND_TO_MAP_KEY = "bind_to_map_key";
 
-	public static void bindGraphAdapters(final CommonChartAdapter mainGraphAdapter,
-	                                     final List<BaseChartAdapter> otherGraphAdapters,
-	                                     final ViewGroup mainView) {
+	public static void bindGraphAdapters(CommonChartAdapter mainGraphAdapter,
+	                                     List<BaseChartAdapter> otherGraphAdapters,
+	                                     ViewGroup mainView) {
 		if (mainGraphAdapter == null || mainGraphAdapter.getChart() == null
 				|| otherGraphAdapters == null || otherGraphAdapters.size() == 0) {
 			return;
 		}
 
-		final LineChart mainChart = mainGraphAdapter.getChart();
+		LineChart mainChart = mainGraphAdapter.getChart();
 		@SuppressLint("ClickableViewAccessibility")
 		View.OnTouchListener mainChartTouchListener = (v, ev) -> {
 			if (mainView != null) {
@@ -72,7 +72,7 @@ public class ChartAdapterHelper {
 		@SuppressLint("ClickableViewAccessibility")
 		View.OnTouchListener otherChartsTouchListener = (v, ev) -> {
 			if (ev.getSource() != 0) {
-				final MotionEvent event = MotionEvent.obtainNoHistory(ev);
+				MotionEvent event = MotionEvent.obtainNoHistory(ev);
 				event.setSource(0);
 				mainChart.dispatchTouchEvent(event);
 				return true;
@@ -95,14 +95,14 @@ public class ChartAdapterHelper {
 		}
 	}
 
-	public static RefreshMapCallback bindToMap(@NonNull final CommonChartAdapter graphAdapter,
-	                                           @NonNull final MapActivity mapActivity,
-	                                           @NonNull final TrackDetailsMenu detailsMenu) {
-		final RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit) -> {
+	public static RefreshMapCallback bindToMap(@NonNull CommonChartAdapter graphAdapter,
+	                                           @NonNull MapActivity mapActivity,
+	                                           @NonNull TrackDetailsMenu detailsMenu) {
+		RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit, recalculateXAxis) -> {
 			LineChart chart = graphAdapter.getChart();
 			OsmandApplication app = mapActivity.getMyApplication();
 			if (!app.getRoutingHelper().isFollowingMode()) {
-				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit);
+				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);
 				mapActivity.refreshMap();
 			}
 		};
@@ -112,7 +112,7 @@ public class ChartAdapterHelper {
 
 					@Override
 					public void onValueSelected(Entry e, Highlight h) {
-						refreshMapCallback.refreshMap(true, false);
+						refreshMapCallback.refreshMap(true, false, false);
 					}
 
 					@Override
@@ -133,7 +133,7 @@ public class ChartAdapterHelper {
 						lastPerformedGesture == ChartTouchListener.ChartGesture.PINCH_ZOOM ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.DOUBLE_TAP ||
 						lastPerformedGesture == ChartTouchListener.ChartGesture.ROTATE) {
-					refreshMapCallback.refreshMap(true, true);
+					refreshMapCallback.refreshMap(true, true, true);
 				}
 			}
 		});
@@ -142,6 +142,6 @@ public class ChartAdapterHelper {
 	}
 
 	public interface RefreshMapCallback {
-		void refreshMap(boolean fitTrackOnMap, boolean forceFit);
+		void refreshMap(boolean fitTrackOnMap, boolean forceFit, boolean recalculateXAxis);
 	}
 }

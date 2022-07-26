@@ -629,7 +629,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">開始</string>
+    <string name="shared_string_control_start">実行</string>
     <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -3918,7 +3918,6 @@ POIの更新は利用できません</string>
     <string name="temporary_conditional_routing_descr">マップ上で現在有効になっている道路の制限を使用します</string>
     <string name="routing_attr_driving_style_description">運転の目的を選択することで、より短くより速くより安全なルートを取得します</string>
     <string name="snap_to_road_descr">現在地アイコンが現在のナビゲーションルートにスナップされます</string>
-    <string name="map_orientation_threshold_descr">速度がしきい値未満の場合は、マップビューを回転させないでください</string>
     <string name="restart">再起動</string>
     <string name="shared_strings_all_regions">すべての地域</string>
     <string name="delete_number_files_question">%1$d個のファイルを削除しますか？</string>
@@ -4355,7 +4354,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_horse_routes_name">乗馬ルートを優先</string>
     <string name="travel_route_types">ルートタイプ</string>
     <string name="service_is_not_available_please_try_later">サービスは利用できません。後ほどもう一度やり直してください。</string>
-    <string name="start_point">開始</string>
+    <string name="start_point">スタート</string>
     <string name="routeInfo_roadClass_description">道路種別によってルートまたは経路のラインに色を付けます。</string>
     <string name="routeInfo_surface_description">道路/歩道の表面や舗装状態に関する情報を提供します。</string>
     <string name="remove_group_from_markers">マーカーリストからグループを削除</string>
@@ -4561,4 +4560,15 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showFitnessTrails_name">アスレチックコース</string>
     <string name="rendering_attr_showFitnessTrails_description">アスレチックコースを表示します</string>
     <string name="rendering_attr_showRunningRoutes_name">ランニングルート</string>
+    <string name="marker_2nd">2番目のマーカー</string>
+    <string name="routing_attr_goods_restrictions_description">小型商用配達車の通行許可の可否</string>
+    <string name="routing_attr_goods_restrictions_name">小型配達車</string>
+    <string name="marker_1st">1番目のマーカー</string>
+    <string name="routing_attr_motor_type_name">主動力源が使用する燃料</string>
+    <string name="routing_attr_motor_type_description">車両の動力源が使用する燃料種類を選択することで、CO2排出量を計算します。</string>
+    <string name="switch_widget_mode_desc">ウィジェットをタップすることでモードを切り替えることができます。</string>
+    <string name="side_marker_eta">到着予定時刻</string>
+    <string name="map_marker_average_speed_desc">到着予定時刻を計算するために平均速度を測定する時間間隔を指定します。</string>
+    <string name="reset_all_settings_desc">リセットしてすべての設定を初期値に戻してもよろしいですか？</string>
+    <string name="lang_ckb">中央クルド語</string>
 </resources>

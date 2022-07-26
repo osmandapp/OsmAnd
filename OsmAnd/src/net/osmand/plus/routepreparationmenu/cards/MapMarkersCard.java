@@ -25,12 +25,12 @@ import net.osmand.plus.views.DirectionDrawable;
 import java.util.List;
 
 public class MapMarkersCard extends MapBaseCard {
-	private List<MapMarker> markers;
+	private final List<MapMarker> markers;
 	private boolean showLimited = true;
 	private LatLon loc;
 	private Float heading;
 	private boolean useCenter;
-	private int screenOrientation;
+	private final int screenOrientation;
 
 
 	public MapMarkersCard(@NonNull MapActivity mapActivity, @NonNull List<MapMarker> mapMarkers) {
@@ -67,7 +67,7 @@ public class MapMarkersCard extends MapBaseCard {
 	@SuppressLint("DefaultLocale")
 	@Override
 	protected void updateContent() {
-		LinearLayout root = (LinearLayout) view.findViewById(R.id.items);
+		LinearLayout root = view.findViewById(R.id.items);
 		root.removeAllViews();
 
 		int minCardHeight = getDimen(R.dimen.route_info_card_item_height);
@@ -83,20 +83,20 @@ public class MapMarkersCard extends MapBaseCard {
 
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
-		for (final MapMarker marker : markers) {
+		for (MapMarker marker : markers) {
 			if (showLimitExceeds && i >= 3 && showLimited) {
 				break;
 			}
 			View v = inflater.inflate(R.layout.map_marker_item, root, false);
 			MapMarkerDialogHelper.updateMapMarkerInfo(ctx, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
-			final View remove = v.findViewById(R.id.info_close);
+			View remove = v.findViewById(R.id.info_close);
 			remove.setVisibility(View.GONE);
 
 			((TextView) v.findViewById(R.id.waypoint_dist)).setTextColor(activeColor);
 			((TextView) v.findViewById(R.id.waypoint_text)).setTextColor(mainFontColor);
 			((TextView) v.findViewById(R.id.date_group_text)).setTextColor(descriptionColor);
 
-			ImageView arrow = (ImageView) v.findViewById(R.id.direction);
+			ImageView arrow = v.findViewById(R.id.direction);
 			Drawable arrowIcon = arrow.getDrawable();
 			if (arrowIcon instanceof DirectionDrawable) {
 				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, ColorUtilities.getActiveColorId(nightMode));

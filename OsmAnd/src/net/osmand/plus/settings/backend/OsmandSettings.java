@@ -1,6 +1,15 @@
 package net.osmand.plus.settings.backend;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
+import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,6 +42,7 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
@@ -76,8 +86,8 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
@@ -103,18 +113,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
-import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
-
 public class OsmandSettings {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandSettings.class.getName());
@@ -126,7 +124,7 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
-	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
+	public static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
 	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
@@ -139,7 +137,7 @@ public class OsmandSettings {
 	private final Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
 
 	// cache variables
-	private long lastTimeInternetConnectionChecked = 0;
+	private final long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 
 	// TODO variable
@@ -397,7 +395,7 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
+	public ApplicationMode LAST_ROUTING_APPLICATION_MODE;
 
 	public boolean setApplicationMode(ApplicationMode appMode) {
 		return setApplicationMode(appMode, true);
@@ -764,42 +762,14 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public final CommonPreference<Boolean> SHOW_COMPASS_ALWAYS = new BooleanPreference(this, "show_compass_always", false) {
+	public final CommonPreference<CompassVisibility> COMPASS_VISIBILITY = new EnumStringPreference<CompassVisibility>(this, "compass_visibility", CompassVisibility.VISIBLE_IF_MAP_ROTATED, CompassVisibility.values()) {
 
 		@Override
-		public Boolean getModeValue(ApplicationMode mode) {
-			boolean defaultValue = mode.isWidgetVisibleByDefault(WIDGET_COMPASS);
-			List<String> widgetsVisibility = getWidgetsVisibilityInfo(mode);
-			if (widgetsVisibility.contains(WIDGET_COMPASS)) {
-				return true;
-			} else if (widgetsVisibility.contains(HIDE_PREFIX + WIDGET_COMPASS)) {
-				return false;
-			}
-			return defaultValue;
+		public CompassVisibility getModeValue(ApplicationMode mode) {
+			CompassVisibility customizationValue = CompassVisibility.getFromCustomization(ctx, mode);
+			return isSetForMode(mode) || customizationValue == null ? super.getModeValue(mode) : customizationValue;
 		}
-
-		@Override
-		public boolean setModeValue(ApplicationMode mode, Boolean obj) {
-			List<String> widgetsVisibilityInfo = getWidgetsVisibilityInfo(mode);
-			if (obj != null && obj) {
-				widgetsVisibilityInfo.remove(HIDE_PREFIX + WIDGET_COMPASS);
-				widgetsVisibilityInfo.add(WIDGET_COMPASS);
-			} else {
-				widgetsVisibilityInfo.remove(WIDGET_COMPASS);
-				widgetsVisibilityInfo.add(HIDE_PREFIX + WIDGET_COMPASS);
-			}
-			StringBuilder widgetsVisibilityString = new StringBuilder();
-			for (String widgetVisibility : widgetsVisibilityInfo) {
-				widgetsVisibilityString.append(widgetVisibility).append(SETTINGS_SEPARATOR);
-			}
-			return MAP_INFO_CONTROLS.setModeValue(mode, widgetsVisibilityString.toString());
-		}
-
-		@NonNull
-		private List<String> getWidgetsVisibilityInfo(ApplicationMode appMode) {
-			return new ArrayList<>(Arrays.asList(MAP_INFO_CONTROLS.getModeValue(appMode).split(SETTINGS_SEPARATOR)));
-		}
-	};
+	}.makeProfile().cache();
 
 	public final OsmandPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
@@ -1319,6 +1289,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
 	public final OsmandPreference<String> ITINERARY_LAST_CALCULATED_MD5 = new StringPreference(this, "itinerary_last_calculated_md5", "").makeGlobal();
 
+	public final OsmandPreference<Boolean> AUTO_BACKUP_ENABLED = new BooleanPreference(this, OsmandBackupAgent.AUTO_BACKUP_ENABLED, true).makeGlobal().makeShared();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = new EnumStringPreference<>(this, "daynight_mode", DayNightMode.DAY, DayNightMode.values());
 
@@ -1414,7 +1386,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference(this, "disable_complex_routing", false).makeProfile();
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
-	public boolean simulateNavigation = false;
+	public boolean simulateNavigation;
 	public String simulateNavigationMode = SimulationMode.PREVIEW.getKey();
 	public float simulateNavigationSpeed = SIM_MIN_SPEED;
 
@@ -1513,7 +1485,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference(this, "gpx_routing_calculate_osmand_route", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference(this, "calc_gpx_route", false).makeGlobal().makeShared().cache();
-	public final OsmandPreference<Integer> GPX_ROUTE_SEGMENT = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Integer> GPX_SEGMENT_INDEX = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Integer> GPX_ROUTE_INDEX = new IntPreference(this, "gpx_route_index", -1).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference(this, "avoid_toll_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference(this, "avoid_motorway", false).makeProfile().cache();
@@ -1523,9 +1496,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PREFER_MOTORWAYS = new BooleanPreference(this, "prefer_motorways", false).makeProfile().cache();
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
-
-	public final OsmandPreference<Long> AVERAGE_SPEED_MEASURED_INTERVAL_MILLIS = new LongPreference(this, "average_speed_measured_interval_millis", AverageSpeedComputer.DEFAULT_INTERVAL_MILLIS).makeProfile().cache();
-	public final OsmandPreference<Boolean> AVERAGE_SPEED_SKIP_STOPS = new BooleanPreference(this, "average_speed_skip_stops", true).makeProfile().cache();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
@@ -2097,7 +2067,6 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_ELEVATION = "last_known_map_elevation"; //$NON-NLS-1$
 
 	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
@@ -2207,37 +2176,32 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
 	}
 
-	public float getLastKnownMapElevation() {
-		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_ELEVATION, 90);
-	}
+	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
-	public void setLastKnownMapElevation(float elevation) {
-		settingsAPI.edit(globalPreferences).putFloat(LAST_KNOWN_MAP_ELEVATION, elevation).commit();
-	}
+	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
+	public static final int NAVIGATE = 1;
+	public static final String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
+	public static final String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
+	public static final String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
+	public static final String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
 
-	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
-	public final static int NAVIGATE = 1;
-	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
-	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
-	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
-	public final static String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
 
-	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
-
-	public final static String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
-	public final static String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
-	public final static String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
-	public final static String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
-	public final static String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
-	public final static String MY_LOC_POINT_LAT = "my_loc_point_lat";
-	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
-	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
+	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
+	public static final String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
+	public static final String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
+	public static final String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+	public static final String MY_LOC_POINT_LAT = "my_loc_point_lat";
+	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
+	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
 	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
@@ -2678,11 +2642,11 @@ public class OsmandSettings {
 		return result;
 	}
 
-	public void setSelectedPoiFilters(final Set<String> poiFilters) {
+	public void setSelectedPoiFilters(Set<String> poiFilters) {
 		setSelectedPoiFilters(APPLICATION_MODE.get(), poiFilters);
 	}
 
-	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, final Set<String> poiFilters) {
+	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.setModeValue(appMode, android.text.TextUtils.join(",", poiFilters));
 	}
 
@@ -2721,7 +2685,7 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
-	public static final String[] TTS_AVAILABLE_VOICES = new String[] {
+	public static final String[] TTS_AVAILABLE_VOICES = {
 			"de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
 	};
 	// this value string is synchronized with settings_pref.xml preference name

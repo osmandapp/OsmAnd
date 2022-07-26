@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 
 import java.util.ArrayList;
 import java.util.List;

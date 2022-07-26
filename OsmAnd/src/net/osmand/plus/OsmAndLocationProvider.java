@@ -92,17 +92,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private final AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
 
 
-	private long lastTimeGPSLocationFixed = 0;
-	private long lastTimeLocationFixed = 0;
+	private long lastTimeGPSLocationFixed;
+	private long lastTimeLocationFixed;
 	private boolean gpsSignalLost;
-	private SimulationProvider simulatePosition = null;
+	private SimulationProvider simulatePosition;
 
-	private long cachedLocationTimeFix = 0;
-	private long timeToNotUseOtherGPS = 0;
+	private long cachedLocationTimeFix;
+	private long timeToNotUseOtherGPS;
 	private net.osmand.Location cachedLocation;
 	private net.osmand.Location customLocation;
 
-	private boolean sensorRegistered = false;
+	private boolean sensorRegistered;
 	private final float[] mGravs = new float[3];
 	private final float[] mGeoMags = new float[3];
 	private float previousCorrectionValue = 360;
@@ -110,17 +110,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final boolean USE_KALMAN_FILTER = true;
 	private static final float KALMAN_COEFFICIENT = 0.04f;
 
-	float avgValSin = 0;
-	float avgValCos = 0;
-	float lastValSin = 0;
-	float lastValCos = 0;
+	float avgValSin;
+	float avgValCos;
+	float lastValSin;
+	float lastValCos;
 	private final float[] previousCompassValuesA = new float[50];
 	private final float[] previousCompassValuesB = new float[50];
-	private int previousCompassIndA = 0;
-	private int previousCompassIndB = 0;
-	private boolean inUpdateValue = false;
+	private int previousCompassIndA;
+	private int previousCompassIndB;
+	private boolean inUpdateValue;
 
-	private Float heading = null;
+	private Float heading;
 
 	// Current screen orientation
 	private int currentScreenOrientation;
@@ -132,7 +132,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private final OsmAndLocationSimulation locationSimulation;
 	private LocationServiceHelper locationServiceHelper;
 
-	private net.osmand.Location location = null;
+	private net.osmand.Location location;
 
 	private final GPSInfo gpsInfo = new GPSInfo();
 
@@ -252,7 +252,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 
 		if (isLocationPermissionAvailable(app)) {
-			final LocationManager locationService = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
+			LocationManager locationService = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 			registerGpsStatusListener(locationService);
 			try {
 				locationServiceHelper.requestLocationUpdates(new LocationServiceHelper.LocationCallback() {
@@ -289,7 +289,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	public void redownloadAGPS() {
 		try {
-			final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
+			LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 			// Issue 6410: Test not forcing cold start here
 			//service.sendExtraCommand(LocationManager.GPS_PROVIDER,"delete_aiding_data", null);
 			Bundle bundle = new Bundle();
@@ -303,7 +303,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	@SuppressLint("MissingPermission")
-	private void registerGpsStatusListener(@NonNull final LocationManager service) {
+	private void registerGpsStatusListener(@NonNull LocationManager service) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 			gpsStatusListener = new GnssStatus.Callback() {
 
@@ -408,7 +408,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	@Nullable
-	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable final OsmAndLocationListener locationListener) {
+	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable OsmAndLocationListener locationListener) {
 		return isLocationPermissionAvailable(app)
 				? locationServiceHelper.getFirstTimeRunDefaultLocation(locationListener != null ? new LocationServiceHelper.LocationCallback() {
 			@Override
@@ -472,7 +472,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				if (time == 0) {
 					speed = 0;
 				} else {
-					speed = ((float) d * 1000) / time;
+					speed = (d * 1000) / time;
 				}
 				// Be aware only for emulator ! code is incorrect in case of airplane
 				if (speed > 100) {
@@ -632,10 +632,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if ((System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
 			return true;
 		}
-		if (isRunningOnEmulator()) {
-			return true;
-		}
-		return false;
+		return isRunningOnEmulator();
 	}
 
 	private void stopLocationRequests() {
@@ -686,7 +683,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		if (l.hasAltitude() && app != null) {
 			double alt = l.getAltitude();
-			final GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
+			GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
 			if (geo != null) {
 				alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
 				r.setAltitude(alt);
@@ -696,11 +693,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	
-	private void scheduleCheckIfGpsLost(final net.osmand.Location location) {
-		final RoutingHelper routingHelper = app.getRoutingHelper();
+	private void scheduleCheckIfGpsLost(net.osmand.Location location) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
 				&& simulatePosition == null) {
-			final long fixTime = location.getTime();
+			long fixTime = location.getTime();
 			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
 				if (lastKnown != null && lastKnown.getTime() > fixTime) {
@@ -815,7 +812,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		enhanceLocation(location);
 		scheduleCheckIfGpsLost(location);
-		final RoutingHelper routingHelper = app.getRoutingHelper();
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		// 1. Logging services
 		if (location != null) {
 			app.getSavingTrackHelper().updateLocation(location, heading);
@@ -845,7 +842,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void notifyGpsLocationRecovered() {
 		if (gpsSignalLost) {
 			gpsSignalLost = false;
-			final RoutingHelper routingHelper = app.getRoutingHelper();
+			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
 				routingHelper.getVoiceRouter().gpsLocationRecover();
 			}
@@ -879,7 +876,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void emitNavigationHint() {
-		final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
+		TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 		if (point != null) {
 			if (app.getRoutingHelper().isRouteCalculated()) {
 				app.getRoutingHelper().getVoiceRouter().announceCurrentDirection(getLastKnownLocation());
@@ -950,9 +947,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	public static class GPSInfo {
-		public int foundSatellites = 0;
-		public int usedSatellites = 0;
-		public boolean fixed = false;
+		public int foundSatellites;
+		public int usedSatellites;
+		public boolean fixed;
 	}
 
 	public static boolean isNotSimulatedLocation(net.osmand.Location l) {
@@ -964,7 +961,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 
 	
-	public boolean checkGPSEnabled(final Context context) {
+	public boolean checkGPSEnabled(Context context) {
 		LocationManager lm = (LocationManager)app.getSystemService(Context.LOCATION_SERVICE);
 		boolean gpsenabled = false;
 		boolean networkenabled = false;
@@ -1003,7 +1000,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (!isLocationPermissionAvailable(activity)) {
 			ActivityCompat.requestPermissions(activity,
 					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+					REQUEST_LOCATION_PERMISSION);
 		}
 	}
 }

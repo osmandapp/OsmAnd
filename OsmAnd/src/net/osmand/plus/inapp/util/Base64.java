@@ -40,21 +40,21 @@ package net.osmand.plus.inapp.util;
  */
 public class Base64 {
     /** Specify encoding (value is {@code true}). */
-    public final static boolean ENCODE = true;
+    public static final boolean ENCODE = true;
 
     /** Specify decoding (value is {@code false}). */
-    public final static boolean DECODE = false;
+    public static final boolean DECODE = false;
 
     /** The equals sign (=) as a byte. */
-    private final static byte EQUALS_SIGN = (byte) '=';
+    private static final byte EQUALS_SIGN = (byte) '=';
 
     /** The new line character (\n) as a byte. */
-    private final static byte NEW_LINE = (byte) '\n';
+    private static final byte NEW_LINE = (byte) '\n';
 
     /**
      * The 64 valid Base64 values.
      */
-    private final static byte[] ALPHABET =
+    private static final byte[] ALPHABET =
         {(byte) 'A', (byte) 'B', (byte) 'C', (byte) 'D', (byte) 'E', (byte) 'F',
         (byte) 'G', (byte) 'H', (byte) 'I', (byte) 'J', (byte) 'K',
         (byte) 'L', (byte) 'M', (byte) 'N', (byte) 'O', (byte) 'P',
@@ -72,7 +72,7 @@ public class Base64 {
     /**
      * The 64 valid web safe Base64 values.
      */
-    private final static byte[] WEBSAFE_ALPHABET =
+    private static final byte[] WEBSAFE_ALPHABET =
         {(byte) 'A', (byte) 'B', (byte) 'C', (byte) 'D', (byte) 'E', (byte) 'F',
         (byte) 'G', (byte) 'H', (byte) 'I', (byte) 'J', (byte) 'K',
         (byte) 'L', (byte) 'M', (byte) 'N', (byte) 'O', (byte) 'P',
@@ -91,7 +91,7 @@ public class Base64 {
      * Translates a Base64 value to either its 6-bit reconstruction value
      * or a negative number indicating some other meaning.
      **/
-    private final static byte[] DECODABET = {-9, -9, -9, -9, -9, -9, -9, -9, -9, // Decimal  0 -  8
+    private static final byte[] DECODABET = {-9, -9, -9, -9, -9, -9, -9, -9, -9, // Decimal  0 -  8
         -5, -5, // Whitespace: Tab and Linefeed
         -9, -9, // Decimal 11 - 12
         -5, // Whitespace: Carriage Return
@@ -125,7 +125,7 @@ public class Base64 {
     };
 
     /** The web safe decodabet */
-    private final static byte[] WEBSAFE_DECODABET =
+    private static final byte[] WEBSAFE_DECODABET =
         {-9, -9, -9, -9, -9, -9, -9, -9, -9, // Decimal  0 -  8
         -5, -5, // Whitespace: Tab and Linefeed
         -9, -9, // Decimal 11 - 12
@@ -161,9 +161,9 @@ public class Base64 {
         };
 
     // Indicates white space in encoding
-    private final static byte WHITE_SPACE_ENC = -5;
+    private static final byte WHITE_SPACE_ENC = -5;
     // Indicates equals sign in encoding
-    private final static byte EQUALS_SIGN_ENC = -1;
+    private static final byte EQUALS_SIGN_ENC = -1;
 
     /** Defeats instantiation. */
     private Base64() {

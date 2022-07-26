@@ -19,13 +19,13 @@ import static net.osmand.plus.importfiles.KmlImportTask.convertKmlToGpxStream;
 
 class KmzImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
-	private ImportHelper importHelper;
-	private Uri uri;
-	private String name;
+	private final ImportHelper importHelper;
+	private final Uri uri;
+	private final String name;
 	private long fileSize;
 
-	private boolean save;
-	private boolean useImportDir;
+	private final boolean save;
+	private final boolean useImportDir;
 
 	public KmzImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
 						 @NonNull Uri uri, @NonNull String name, boolean save, boolean useImportDir) {

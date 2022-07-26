@@ -27,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.Renderable.CurrentTrack;
 import net.osmand.plus.views.Renderable.RenderableSegment;
@@ -168,9 +168,9 @@ public class TrackBitmapDrawer {
 				rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
 			}
 
-			final DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
-			final ResourceManager resourceManager = app.getResourceManager();
-			final MapRenderRepositories renderer = resourceManager.getRenderer();
+			DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
+			ResourceManager resourceManager = app.getResourceManager();
+			MapRenderRepositories renderer = resourceManager.getRenderer();
 			if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
 				resourceManager.updateRendererMap(rotatedTileBox, interrupted -> app.runInUIThread(() -> {
 					if (isDrawEnabled()) {

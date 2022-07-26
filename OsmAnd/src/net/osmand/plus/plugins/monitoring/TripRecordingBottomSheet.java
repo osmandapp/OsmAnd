@@ -52,8 +52,8 @@ import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -85,7 +85,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public static final String UPDATE_TRACK_ICON = "update_track_icon";
 	public static final String UPDATE_DYNAMIC_ITEMS = "update_dynamic_items";
 	public static final GPXTabItemType[] INIT_TAB_ITEMS =
-			new GPXTabItemType[] {GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
+			{GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -97,7 +97,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	private TrackChartPoints trackChartPoints;
 	private GPXItemPagerAdapter graphsAdapter;
-	private int graphTabPosition = 0;
+	private int graphTabPosition;
 	private ViewGroup segmentsTabs;
 
 	private GpxBlockStatisticsBuilder blockStatisticsBuilder;
@@ -157,7 +157,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
-				TripRecordingBottomSheet.this, nightMode, new Runnable() {
+				this, nightMode, new Runnable() {
 					@Override
 					public void run() {
 						hide();
@@ -197,7 +197,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	private void setupResumePauseButton(View container) {
-		final CardView resumePauseButton = container.findViewById(R.id.button_center_left);
+		CardView resumePauseButton = container.findViewById(R.id.button_center_left);
 		createItem(resumePauseButton, isRecordingTrack() ? ItemType.PAUSE : ItemType.RESUME);
 		resumePauseButton.setOnClickListener(v -> {
 			boolean isRecordingTrack = isRecordingTrack();
@@ -242,7 +242,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		optionsButton.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
+				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, this);
 			}
 		});
 	}
@@ -372,17 +372,17 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	public static void createShowTrackItem(LinearLayout showTrackContainer, AppCompatImageView trackAppearanceIcon,
-	                                       Integer showTrackId, final Fragment target,
-	                                       final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
+	                                       Integer showTrackId, Fragment target,
+	                                       boolean nightMode, Runnable hideOnClickButtonAppearance) {
 		FragmentActivity activity = target.getActivity();
 		if (activity == null) {
 			AndroidUiHelper.updateVisibility(showTrackContainer, false);
 			return;
 		}
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
-		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
+		CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
 
 		TextView showTrackTextView = buttonShowTrack.findViewById(R.id.title);
 		if (showTrackId != null) {
@@ -392,7 +392,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 		boolean showCurrentTrack = gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null;
 
-		final CompoundButton showTrackCompound = buttonShowTrack.findViewById(R.id.compound_button);
+		CompoundButton showTrackCompound = buttonShowTrack.findViewById(R.id.compound_button);
 		showTrackCompound.setChecked(showCurrentTrack);
 		UiUtilities.setupCompoundButton(showTrackCompound, nightMode, GLOBAL);
 
@@ -426,7 +426,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {
 		Drawable background = AppCompatResources.getDrawable(view.getContext(),
 				checked ? getActiveTransparentBackgroundId(nightMode) : getInactiveStrokedBackgroundId(nightMode));
-		view.setBackgroundDrawable(background);
+		view.setBackground(background);
 	}
 
 	private void createItem(View view, ItemType type) {
@@ -511,7 +511,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		} else {
 			UiUtilities.tintDrawable(background, ColorUtilities.getInactiveButtonsAndLinksColor(context, nightMode));
 		}
-		view.setBackgroundDrawable(background);
+		view.setBackground(background);
 	}
 
 	public static void setItemBackgroundActive(Context context, boolean nightMode, View view) {
@@ -702,8 +702,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	@Override
-	protected void setupHeightAndBackground(final View mainView) {
-		final Activity activity = getActivity();
+	protected void setupHeightAndBackground(View mainView) {
+		Activity activity = getActivity();
 		if (activity == null) {
 			return;
 		}
@@ -716,12 +716,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			@Override
 			public void onGlobalLayout() {
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-				final View contentView = mainView.findViewById(R.id.scroll_view);
+				obs.removeOnGlobalLayoutListener(this);
+				View contentView = mainView.findViewById(R.id.scroll_view);
 				contentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
 				contentView.requestLayout();
 				boolean showTopShadow = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity)

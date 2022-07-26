@@ -22,7 +22,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 										 @NonNull AvoidRoadInfo avoidRoadInfo) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.avoidRoadInfo = avoidRoadInfo;
-		final OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getMyApplication();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {

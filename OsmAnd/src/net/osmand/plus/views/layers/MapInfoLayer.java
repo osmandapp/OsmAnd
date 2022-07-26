@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,6 +18,7 @@ import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -26,12 +31,8 @@ import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -39,6 +40,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
+	private final MapLayers mapLayers;
 
 	private ViewGroup topWidgetsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
@@ -62,7 +64,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		app = getApplication();
 		settings = app.getSettings();
-		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		mapLayers = app.getOsmandMap().getMapLayers();
+		widgetRegistry = mapLayers.getMapWidgetRegistry();
 	}
 
 	@Override
@@ -140,7 +143,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void registerAllControls(@NonNull MapActivity mapActivity) {
-		rulerWidgets = new ArrayList<>();
+		rulerWidgets = new CopyOnWriteArrayList<>();
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -153,13 +156,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
-		resetCashedTheme();
+		if (getMapActivity() != null) {
+			resetCashedTheme();
+			ApplicationMode appMode = settings.getApplicationMode();
+			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
+			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
+			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
+			leftWidgetsPanel.update();
+			rightWidgetsPanel.update();
+		}
+	}
+
+	public void recreateTopWidgetsPanel() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-		recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
-		leftWidgetsPanel.update();
-		rightWidgetsPanel.update();
 	}
 
 	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
@@ -188,10 +199,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void removeRulerWidgets(List<RulerWidget> rulers) {
-		List<RulerWidget> widgetList = new ArrayList<>(rulerWidgets);
-		widgetList.removeAll(rulers);
-		rulerWidgets = widgetList;
+	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
+		rulerWidgets.removeAll(rulers);
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
