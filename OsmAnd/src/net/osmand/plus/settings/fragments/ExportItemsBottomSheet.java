@@ -128,7 +128,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new SimpleDividerItem(app));
 
 		for (Object object : allItems) {
-			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			Builder builder = (BottomSheetItemWithCompoundButton.Builder) new Builder()
 					.setChecked(selectedItems.contains(object))
 					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))

@@ -45,7 +45,7 @@ public class LocalIndexHelper {
 	}
 
 	public Date getInstalationDate(File f) {
-		final long t = f.lastModified();
+		long t = f.lastModified();
 		return new Date(t);
 	}
 

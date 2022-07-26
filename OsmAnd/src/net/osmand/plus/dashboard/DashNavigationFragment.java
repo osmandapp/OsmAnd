@@ -57,7 +57,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 
 	public void setupNavigation() {
 		View mainView = getView();
-		final RoutingHelper routingHelper = getMyApplication().getRoutingHelper();
+		RoutingHelper routingHelper = getMyApplication().getRoutingHelper();
 		getActivity();
 		if (!routingHelper.isRouteCalculated() || 
 				(!(getActivity() instanceof MapActivity))) {
@@ -66,15 +66,15 @@ public class DashNavigationFragment extends DashBaseFragment {
 		} else {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}
-		final MapActivity map =  (MapActivity) getActivity();
-		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
+		MapActivity map =  (MapActivity) getActivity();
+		LinearLayout favorites = mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View view = inflater.inflate(R.layout.dash_navigation, null, false);			
-		TextView name = (TextView) view.findViewById(R.id.name);
-		ImageView icon = (ImageView) view.findViewById(R.id.icon);
-		ImageView cancel = (ImageView) view.findViewById(R.id.cancel);
-		ImageView play = (ImageView) view.findViewById(R.id.play);
+		TextView name = view.findViewById(R.id.name);
+		ImageView icon = view.findViewById(R.id.icon);
+		ImageView cancel = view.findViewById(R.id.cancel);
+		ImageView play = view.findViewById(R.id.play);
 		name.setText(routingHelper.getGeneralRouteInformation());
 		icon.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, 
 				R.color.color_myloc_distance));
@@ -108,7 +108,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 		favorites.addView(view);
 	}
 
-	private void updatePlayButton(final RoutingHelper routingHelper, final MapActivity map, final ImageView play) {
+	private void updatePlayButton(RoutingHelper routingHelper, MapActivity map, ImageView play) {
 		boolean toContinueNavigation = routingHelper.isRoutePlanningMode();
 		play.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(
 						toContinueNavigation ? R.drawable.ic_play_dark : R.drawable.ic_pause)

@@ -17,7 +17,7 @@ public class CurrentSpeedWidget extends TextInfoWidget {
 	private static final float UPDATE_THRESHOLD_MPS = .1f;
 	private static final float LOW_SPEED_UPDATE_THRESHOLD_MPS = .015f; // Update more often while walking/running
 
-	private float cachedSpeed = 0;
+	private float cachedSpeed;
 
 	public CurrentSpeedWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, CURRENT_SPEED);

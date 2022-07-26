@@ -21,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
@@ -168,6 +169,11 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getThemedIcon(id) : null;
+	}
+
+	@ColorInt
+	protected int getColor(@ColorInt int resId) {
+		return ColorUtilities.getColor(getContext(), resId);
 	}
 
 	protected void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {

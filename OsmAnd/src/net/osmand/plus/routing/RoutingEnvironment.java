@@ -6,10 +6,10 @@ import net.osmand.router.RoutingContext;
 
 public class RoutingEnvironment {
 
-	private RoutingContext ctx;
-	private RoutingContext complexCtx;
-	private RoutePlannerFrontEnd router;
-	private PrecalculatedRouteDirection precalculated;
+	private final RoutingContext ctx;
+	private final RoutingContext complexCtx;
+	private final RoutePlannerFrontEnd router;
+	private final PrecalculatedRouteDirection precalculated;
 
 	public RoutingEnvironment(RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, PrecalculatedRouteDirection precalculated) {
 		this.router = router;

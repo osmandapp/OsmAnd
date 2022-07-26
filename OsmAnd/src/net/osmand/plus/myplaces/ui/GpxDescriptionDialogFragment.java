@@ -31,7 +31,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		Context ctx = getContext();
 
-		final Toolbar topBar = new Toolbar(ctx);
+		Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(ctx));
 		topBar.setNavigationIcon(icBack);
@@ -41,7 +41,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		topBar.setTitleTextColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor)));
 		topBar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(final View v) {
+			public void onClick(View v) {
 				dismiss();
 			}
 		});

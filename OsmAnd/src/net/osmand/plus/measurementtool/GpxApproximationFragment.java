@@ -177,7 +177,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 		calculateGpxApproximation(true);
 
-		final ScrollView profileView = (ScrollView) getBottomScrollView();
+		ScrollView profileView = (ScrollView) getBottomScrollView();
 		profileView.postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -259,7 +259,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
+				bottomContainer.setBackground(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(),
 						R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
@@ -444,11 +444,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		}
 	}
 
-	private void approximateGpx(@NonNull final GpxApproximator gpxApproximator) {
+	private void approximateGpx(@NonNull GpxApproximator gpxApproximator) {
 		onApproximationStarted();
 		gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxRouteApproximation>() {
 			@Override
-			public boolean publish(final GpxRouteApproximation gpxApproximation) {
+			public boolean publish(GpxRouteApproximation gpxApproximation) {
 				OsmandApplication app = getMyApplication();
 				if (app != null) {
 					app.runInUIThread(() -> {

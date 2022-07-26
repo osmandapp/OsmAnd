@@ -20,11 +20,11 @@ import java.util.*;
 // OSMAND ANDROID CHANGE END
 public class JsonFormatter {
 
-	private Gson gson;
+	private final Gson gson;
 	
-	private Gson gsonOperationHash;
+	private final Gson gsonOperationHash;
 
-	private Gson gsonFullOutput;
+	private final Gson gsonFullOutput;
 
 	public JsonFormatter() {
 		GsonBuilder builder = new GsonBuilder();

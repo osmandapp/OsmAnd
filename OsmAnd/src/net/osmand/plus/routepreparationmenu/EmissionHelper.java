@@ -77,7 +77,7 @@ public class EmissionHelper {
 
 		@Nullable
 		public static MotorType getMotorTypeByName(@NonNull String name) {
-			for (MotorType type : MotorType.values()) {
+			for (MotorType type : values()) {
 				if (type.name().equalsIgnoreCase(name)) {
 					return type;
 				}
@@ -86,7 +86,7 @@ public class EmissionHelper {
 		}
 
 		public boolean shouldCheckRegion() {
-			return this == MotorType.ELECTRIC;
+			return this == ELECTRIC;
 		}
 	}
 
@@ -96,8 +96,7 @@ public class EmissionHelper {
 		if (router != null && mode.getRouteService() == RouteService.OSMAND) {
 			RoutingParameter parameter = getParameterForDerivedProfile(MOTOR_TYPE, mode, router);
 			if (parameter != null) {
-				OsmandPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(),
-						parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				OsmandPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getDefaultString());
 				ListParameters parameters = populateListParameters(app, parameter);
 				int index = parameters.findIndexOfValue(pref.getModeValue(mode));
 				if (index != -1) {
@@ -132,6 +131,7 @@ public class EmissionHelper {
 		String pattern = totalEmissionsKg / 10 > 1 ? "0" : "0.0";
 		String emission = new DecimalFormat(pattern).format(totalEmissionsKg);
 		String text = app.getString(R.string.ltr_or_rtl_combine_via_space, emission, app.getString(R.string.kg));
+		text = app.getString(R.string.ltr_or_rtl_combine_via_space, "~", text);
 		return app.getString(R.string.ltr_or_rtl_combine_via_space, text, app.getString(R.string.co2_mission));
 	}
 

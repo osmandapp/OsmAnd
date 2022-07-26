@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
@@ -2173,7 +2173,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary_image">Vyjava Mapillary</string>
     <string name="mapillary_widget_descr">Dazvaliaje chutki ŭniosak ŭ Mapillary.</string>
     <string name="relief_smoothness_factor_descr">Pieravažny reĺjef: raŭninny ci harysty.</string>
-
     <string name="rendering_attr_depthContours_description">Pakazvać kontury i punkty hlybini.</string>
     <string name="rendering_attr_contourDensity_description">Ščyĺnasć haryzantaliaŭ</string>
     <string name="rendering_attr_contourWidth_description">Taŭščynia haryzantaliaŭ (izahipsy)</string>
@@ -2496,7 +2495,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="routing_attr_avoid_ice_roads_fords_description">Pazbiahać liadovych daroh i brodaŭ.</string>
     <string name="make_round_trip_descr">Dadać kopiju pačatkovaj kropki jak miesca pryznačeńnia.</string>
     <string name="make_round_trip">Zrabić kruhavoje padarožža</string>
-    <string name="osn_modify_dialog_error">Nie atrymalasia zmianić natatku</string>
+    <string name="osn_modify_dialog_error">Nie atrymałasia źmianić natatku.</string>
     <string name="osn_modify_dialog_title">Źmianić natatku</string>
     <string name="context_menu_item_modify_note">Źmianić OSM-natatku</string>
     <string name="rendering_value_darkyellow_name">Ciomna-žoŭty</string>
@@ -2684,7 +2683,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="download_file">Spampavać fajl</string>
     <string name="start_editing_card_image_text">Biasplatny susvietny turystyčny daviednik, jaki moža redahavać kožny.</string>
     <string name="welcome_to_open_beta_description">Turystyčnyja daviedniki ŭ ciapierašni čas bazujucca na asnovie Wikivoyage. Testujcie usie funkcyi biasplatna padčas adkrytaha beta-testavannia.</string>
-    <string name="start_editing_card_description">Vam možna i varta redahavać liuby artykul na Wikivoyage. Dzialiciesia viedami, vopytam, talientam i vašaj ŭvahaj</string>
+    <string name="start_editing_card_description">Vam možna i varta redahavać luby artykuł na Wikivoyage. Dzialiciesia viedami, dośviedam, talentami, i tym, što zaŭvažyli.</string>
     <string name="start_editing">Pačać redahavańnie</string>
     <string name="get_unlimited_access">Atrymać nieabmiežavany dostup</string>
     <string name="welcome_to_open_beta">Vitajem u adkrytym beta-testavanni</string>
@@ -2806,7 +2805,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_swap">Pamianiać</string>
     <string name="show_more">Pakazać boĺš</string>
     <string name="tracks_on_map">Adliustroŭvajemyja sliady</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Nacisk na knopku dziejannia pakaža ci schavaje abranyja GPX-sliady na mapie</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Knopka dla adlustravańnia/havańnia abranych śladoŭ na mapie.</string>
     <string name="add_destination_query">Spačatku dadajcie punkt pryznačennia</string>
     <string name="previous_route">Papiaredni maršrut</string>
     <string name="add_home">Dadać dom</string>

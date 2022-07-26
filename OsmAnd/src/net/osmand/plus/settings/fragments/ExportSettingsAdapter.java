@@ -80,8 +80,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			group = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
 			group.findViewById(R.id.item_container).setMinimumHeight(groupViewHeight);
 		}
-		final ExportSettingsCategory category = itemsTypes.get(groupPosition);
-		final SettingsCategoryItems items = itemsMap.get(category);
+		ExportSettingsCategory category = itemsTypes.get(groupPosition);
+		SettingsCategoryItems items = itemsMap.get(category);
 
 		String title = app.getString(category.getTitleId());
 		TextView titleTv = group.findViewById(R.id.title_tv);
@@ -96,7 +96,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				selectedTypes++;
 			}
 		}
-		final ThreeStateCheckbox checkBox = group.findViewById(R.id.check_box);
+		ThreeStateCheckbox checkBox = group.findViewById(R.id.check_box);
 		if (selectedTypes == 0) {
 			checkBox.setState(UNCHECKED);
 		} else {
@@ -131,16 +131,16 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		View child = convertView;
 		if (child == null) {
 			child = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
 			child.findViewById(R.id.item_container).setMinimumHeight(childViewHeight);
 		}
-		final ExportSettingsCategory category = itemsTypes.get(groupPosition);
-		final SettingsCategoryItems categoryItems = itemsMap.get(category);
-		final ExportSettingsType type = categoryItems.getTypes().get(childPosition);
-		final List<?> items = categoryItems.getItemsForType(type);
+		ExportSettingsCategory category = itemsTypes.get(groupPosition);
+		SettingsCategoryItems categoryItems = itemsMap.get(category);
+		ExportSettingsType type = categoryItems.getTypes().get(childPosition);
+		List<?> items = categoryItems.getItemsForType(type);
 		List<?> selectedItems = selectedItemsMap.get(type);
 
 		TextView titleTv = child.findViewById(R.id.title_tv);
@@ -152,7 +152,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		ImageView icon = child.findViewById(R.id.explicit_indicator);
 		setupIcon(icon, type.getIconRes(), !Algorithms.isEmpty(selectedItems));
 
-		final ThreeStateCheckbox checkBox = child.findViewById(R.id.check_box);
+		ThreeStateCheckbox checkBox = child.findViewById(R.id.check_box);
 		if (selectedItems == null) {
 			checkBox.setState(UNCHECKED);
 		} else if (selectedItems.containsAll(items)) {

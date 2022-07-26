@@ -26,8 +26,8 @@ public class NextTurnBaseWidget extends TextInfoWidget {
 
 	protected boolean horizontalMini;
 
-	protected int deviatedPath = 0;
-	protected int nextTurnDistance = 0;
+	protected int deviatedPath;
+	protected int nextTurnDistance;
 
 	private final ImageView topImageView;
 	private final TextView topTextView;

@@ -61,12 +61,12 @@ public class DynamicListView extends ObservableListView {
 	protected int mDownY = -1;
 	protected int mDownX = -1;
 
-	private int mTotalOffset = 0;
+	private int mTotalOffset;
 
-	private boolean mCellIsMobile = false;
-	private boolean mIsMobileScrolling = false;
-	private int mSmoothScrollAmountAtEdge = 0;
-	private boolean itemsSwapped = false;
+	private boolean mCellIsMobile;
+	private boolean mIsMobileScrolling;
+	private int mSmoothScrollAmountAtEdge;
+	private boolean itemsSwapped;
 
 	protected final int INVALID_ID = -1;
 	private long mAboveItemId = INVALID_ID;
@@ -80,7 +80,7 @@ public class DynamicListView extends ObservableListView {
 	protected final int INVALID_POINTER_ID = -1;
 	private int mActivePointerId = INVALID_POINTER_ID;
 
-	private boolean mIsWaitingForScrollFinish = false;
+	private boolean mIsWaitingForScrollFinish;
 	private int mScrollState = OnScrollListener.SCROLL_STATE_IDLE;
 
 	private GestureDetector singleTapDetector;
@@ -261,30 +261,30 @@ public class DynamicListView extends ObservableListView {
 		if (getDivider() == null && stableAdapter != null && stableAdapter.hasDividers()) {
 			List<Drawable> dividers = stableAdapter.getDividers();
 
-			final int count = getChildCount();
-			final int first = getFirstVisiblePosition();
-			final int headerCount = getHeaderViewsCount();
-			final int itemCount = getCount();
-			final int footerLimit = (itemCount - getFooterViewsCount());
+			int count = getChildCount();
+			int first = getFirstVisiblePosition();
+			int headerCount = getHeaderViewsCount();
+			int itemCount = getCount();
+			int footerLimit = (itemCount - getFooterViewsCount());
 
-			final Rect bounds = new Rect();
+			Rect bounds = new Rect();
 			bounds.left = getPaddingLeft();
 			bounds.right = getRight() - getLeft() - getPaddingRight();
 
-			final int listBottom = getBottom() - getTop() + getScrollY();
+			int listBottom = getBottom() - getTop() + getScrollY();
 			for (int i = 0; i < count; i++) {
-				final int itemIndex = (first + i);
-				final boolean isHeader = (itemIndex < headerCount);
-				final boolean isFooter = (itemIndex >= footerLimit);
+				int itemIndex = (first + i);
+				boolean isHeader = (itemIndex < headerCount);
+				boolean isFooter = (itemIndex >= footerLimit);
 				if (!isHeader && !isFooter && itemIndex < dividers.size()) {
 					Drawable divider = dividers.get(itemIndex - headerCount);
 					if (divider != null) {
-						final View child = getChildAt(i);
+						View child = getChildAt(i);
 						int bottom = child.getBottom();
-						final boolean isLastItem = (i == (count - 1));
+						boolean isLastItem = (i == (count - 1));
 
 						if (bottom < listBottom && !isLastItem) {
-							final int nextIndex = (itemIndex + 1);
+							int nextIndex = (itemIndex + 1);
 							if (nextIndex >= headerCount && nextIndex < footerLimit) {
 								bounds.top = bottom;
 								bounds.bottom = bottom + divider.getIntrinsicHeight();
@@ -393,7 +393,7 @@ public class DynamicListView extends ObservableListView {
                  * in the listview. */
 				pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >>
 						MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-				final int pointerId = event.getPointerId(pointerIndex);
+				int pointerId = event.getPointerId(pointerIndex);
 				if (pointerId == mActivePointerId) {
 					touchEventsEnded();
 				}
@@ -416,8 +416,8 @@ public class DynamicListView extends ObservableListView {
 	 * its new position.
 	 */
 	private void handleCellSwitch() {
-		final int deltaY = mLastEventY - mDownY;
-		final int deltaYTotal = mHoverCellOriginalBounds.top + mTotalOffset + deltaY;
+		int deltaY = mLastEventY - mDownY;
+		int deltaYTotal = mHoverCellOriginalBounds.top + mTotalOffset + deltaY;
 
 		View belowView = getViewForID(mBelowItemId);
 		View mobileView = getViewForID(mMobileItemId);
@@ -428,17 +428,17 @@ public class DynamicListView extends ObservableListView {
 
 		if (isBelow || isAbove) {
 
-			final long switchItemID = isBelow ? mBelowItemId : mAboveItemId;
+			long switchItemID = isBelow ? mBelowItemId : mAboveItemId;
 			View switchView = isBelow ? belowView : aboveView;
-			final int originalItem = getPositionForView(mobileView) - getHeaderViewsCount();
-			final int switchItem = getPositionForView(switchView) - getHeaderViewsCount();
+			int originalItem = getPositionForView(mobileView) - getHeaderViewsCount();
+			int switchItem = getPositionForView(switchView) - getHeaderViewsCount();
 			swapElements(originalItem, switchItem);
 
 			getStableAdapter().notifyDataSetChanged();
 
 			mDownY = mLastEventY;
 
-			final int switchViewStartTop = switchView.getTop();
+			int switchViewStartTop = switchView.getTop();
 
 			if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.KITKAT) {
 				mobileView.setVisibility(View.VISIBLE);
@@ -446,7 +446,7 @@ public class DynamicListView extends ObservableListView {
 			}
 			updateNeighborViewsForID(mMobileItemId);
 
-			final ViewTreeObserver observer = getViewTreeObserver();
+			ViewTreeObserver observer = getViewTreeObserver();
 			observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
 				public boolean onPreDraw() {
 					observer.removeOnPreDrawListener(this);
@@ -498,7 +498,7 @@ public class DynamicListView extends ObservableListView {
 	 * the hover cell back to its correct location.
 	 */
 	private void touchEventsEnded() {
-		final View mobileView = getViewForID(mMobileItemId);
+		View mobileView = getViewForID(mMobileItemId);
 		if (mCellIsMobile || mIsWaitingForScrollFinish) {
 			mCellIsMobile = false;
 			mIsWaitingForScrollFinish = false;
@@ -649,7 +649,7 @@ public class DynamicListView extends ObservableListView {
 	 * scrolling takes place, the listview continuously checks if new cells became visible
 	 * and determines whether they are potential candidates for a cell swap.
 	 */
-	private AbsListView.OnScrollListener mScrollListener = new AbsListView.OnScrollListener() {
+	private final AbsListView.OnScrollListener mScrollListener = new AbsListView.OnScrollListener() {
 
 		private int mPreviousFirstVisibleItem = -1;
 		private int mPreviousVisibleItemCount = -1;
@@ -745,7 +745,7 @@ public class DynamicListView extends ObservableListView {
 			for (int i = 0; i < viewGroup.getChildCount(); i++) {
 				View c = viewGroup.getChildAt(i);
 
-				int loc[] = new int[2];
+				int[] loc = new int[2];
 				c.getLocationOnScreen(loc);
 
 				if ((x >= loc[0] && (x <= (loc[0] + c.getWidth()))) && (y >= loc[1] && (y <= (loc[1] + c.getHeight())))) {

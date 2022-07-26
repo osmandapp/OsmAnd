@@ -45,7 +45,7 @@ public class TrackEditCard extends MapBaseCard {
 		return R.layout.gpx_track_item;
 	}
 
-	private GpxDataItem getDataItem(final GPXInfo info) {
+	private GpxDataItem getDataItem(GPXInfo info) {
 		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -90,7 +90,7 @@ public class TrackEditCard extends MapBaseCard {
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 
 		if (routeParams != null) {
-			title = TrackEditCard.getGpxTitleWithSelectedItem(app, routeParams, title);
+			title = getGpxTitleWithSelectedItem(app, routeParams, title);
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, analysis, app);
 

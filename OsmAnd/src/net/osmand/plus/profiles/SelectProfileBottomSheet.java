@@ -48,12 +48,12 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 
 	public static final String TAG = SelectProfileBottomSheet.class.getSimpleName();
 
-	public final static String SELECTED_KEY = "selected_base";
+	public static final String SELECTED_KEY = "selected_base";
 
-	public final static String PROFILE_KEY_ARG = "profile_key_arg";
-	public final static String USE_LAST_PROFILE_ARG = "use_last_profile_arg";
-	public final static String PROFILES_LIST_UPDATED_ARG = "is_profiles_list_updated";
-	public final static String DERIVED_PROFILE_ARG = "derived_profile";
+	public static final String PROFILE_KEY_ARG = "profile_key_arg";
+	public static final String USE_LAST_PROFILE_ARG = "use_last_profile_arg";
+	public static final String PROFILES_LIST_UPDATED_ARG = "is_profiles_list_updated";
+	public static final String DERIVED_PROFILE_ARG = "derived_profile";
 
 	protected OsmandApplication app;
 	protected String selectedItemKey;
@@ -81,7 +81,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		});
 	}
 
-	protected void addProfileItem(final ProfileDataObject profile) {
+	protected void addProfileItem(ProfileDataObject profile) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
 
@@ -227,7 +227,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		);
 	}
 
-	protected OnClickListener getItemClickListener(final ProfileDataObject profile) {
+	protected OnClickListener getItemClickListener(ProfileDataObject profile) {
 		return view -> onItemSelected(profile);
 	}
 

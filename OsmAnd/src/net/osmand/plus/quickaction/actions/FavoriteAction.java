@@ -53,9 +53,9 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull final MapActivity mapActivity) {
-		final LatLon latLon = getMapLocation(mapActivity);
-		final String title = getParams().get(KEY_NAME);
+	public void execute(@NonNull MapActivity mapActivity) {
+		LatLon latLon = getMapLocation(mapActivity);
+		String title = getParams().get(KEY_NAME);
 		if (title == null || title.isEmpty()) {
 			progressDialog = createProgressDialog(mapActivity, new DialogOnClickListener() {
 				@Override
@@ -90,7 +90,7 @@ public class FavoriteAction extends QuickAction {
 		}
 	}
 
-	private ProgressDialog createProgressDialog(Context context, @NonNull final DialogOnClickListener listener) {
+	private ProgressDialog createProgressDialog(Context context, @NonNull DialogOnClickListener listener) {
 		ProgressDialog dialog = new ProgressDialog(context);
 		dialog.setCancelable(false);
 		dialog.setMessage(context.getString(R.string.search_address));
@@ -126,17 +126,17 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
-		final View root = LayoutInflater.from(parent.getContext())
+		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
 
 		parent.addView(root);
 
-		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) root.findViewById(R.id.category_edit);
-		SwitchCompat showDialog = (SwitchCompat) root.findViewById(R.id.saveButton);
-		ImageView categoryImage = (ImageView) root.findViewById(R.id.category_image);
-		EditText name = (EditText) root.findViewById(R.id.name_edit);
+		AutoCompleteTextViewEx categoryEdit = root.findViewById(R.id.category_edit);
+		SwitchCompat showDialog = root.findViewById(R.id.saveButton);
+		ImageView categoryImage = root.findViewById(R.id.category_image);
+		EditText name = root.findViewById(R.id.name_edit);
 
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
@@ -147,12 +147,12 @@ public class FavoriteAction extends QuickAction {
 			if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
 				categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
-				categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
+				categoryImage.setColorFilter(mapActivity.getColor(R.color.color_favorite));
 			}
 		} else if (helper.getFavoriteGroups().size() > 0) {
 			FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
-			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
+			int color = group.getColor() == 0 ? mapActivity.getColor(R.color.color_favorite) : group.getColor();
 			categoryEdit.setText(group.getDisplayName(mapActivity));
 			categoryImage.setColorFilter(color);
 
@@ -160,7 +160,7 @@ public class FavoriteAction extends QuickAction {
 			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.getColor()));
 		} else {
 			categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
-			categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
+			categoryImage.setColorFilter(mapActivity.getColor(R.color.color_favorite));
 
 			getParams().put(KEY_CATEGORY_NAME, "");
 			getParams().put(KEY_CATEGORY_COLOR, "0");
@@ -188,7 +188,7 @@ public class FavoriteAction extends QuickAction {
 
 	private void fillGroupParams(View root, String name, int color) {
 		if (color == 0)
-			color = root.getContext().getResources().getColor(R.color.color_favorite);
+			color = root.getContext().getColor(R.color.color_favorite);
 
 		((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
 		((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);

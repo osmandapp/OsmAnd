@@ -85,7 +85,7 @@
     <string name="debugging_and_development">Vývoj OsmAndu</string>
     <string name="native_rendering">Natívne vykresľovanie</string>
     <string name="test_voice_prompts">Test hlasových povelov</string>
-    <string name="switch_to_raster_map_to_see">Stiahnite offline vektorovú mapu pre túto oblasť v menu \"Nastavenia\" (\"Stiahnuť mapy\"), alebo prepnite na modul \"Online mapy\".</string>
+    <string name="switch_to_raster_map_to_see">Stiahnite offline vektorovú mapu pre túto oblasť v menu \"Menu\" (\"Stiahnuť mapy\"), alebo prepnite na modul \"Online mapy\".</string>
     <string name="send_files_to_osm">Odoslať GPX súbory do OSM?</string>
     <string name="gpx_visibility_txt">Viditeľnosť</string>
     <string name="gpx_tags_txt">Tagy</string>
@@ -390,7 +390,7 @@
     <string name="filter_existing_indexes">Zobraziť stiahnuté</string>
     <string name="general_settings_descr">Nastaviť zobrazenie a iné spoločné nastavenia aplikácie.</string>
     <string name="general_settings">Všeobecné nastavenia</string>
-    <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa máp na zariadení.</string>
+    <string name="index_settings_descr">Stiahnuť a spravovať mapové súbory na zariadení.</string>
     <string name="index_settings">Spravovať mapové súbory</string>
     <string name="osmand_service">Režim na pozadí</string>
     <string name="osmand_service_descr">OsmAnd beží na pozadí aj počas vypnutej obrazovky.</string>
@@ -496,7 +496,7 @@
     <string name="route_head">Pokračujte rovno</string>
     <string name="first_time_continue">Neskôr</string>
     <string name="first_time_download">Stiahnuť oblasti</string>
-    <string name="first_time_msg">Ďakujeme, že používate OsmAnd. Stiahnite regionálne údaje pre offline použitie cez Menu → \"Stiahnuť mapy\"). Potom budete môcť zobrazovať mapy, vyhľadávať adresy, body záujmu (POI), nájsť hromadnú dopravu a ďalšie.</string>
+    <string name="first_time_msg">Ďakujeme, že používate OsmAnd. Stiahnite regionálne údaje pre offline použitie cez \"Menu\" → \"Stiahnuť mapy\"). Potom budete môcť zobrazovať mapy, vyhľadávať adresy, body záujmu (POI), nájsť hromadnú dopravu a ďalšie.</string>
     <string name="search_poi_location">Čaká sa signál…</string>
     <string name="search_near_map">Hľadať v blízkosti terajšieho stredu mapy</string>
     <string name="search_nearby">Hľadať neďaleko Vás</string>
@@ -3989,7 +3989,6 @@
     <string name="segments_count">Úsek %1$d</string>
     <string name="temporary_conditional_routing_descr">Použiť cestné obmedzenia, ktoré sú teraz aktívne na mape</string>
     <string name="routing_attr_driving_style_description">Zvoľte účel jazdy pre získanie kratšej, rýchlejšej alebo bezpečnejšej trasy</string>
-    <string name="map_orientation_threshold_descr">Neotáčať mapu, ak je rýchlosť nižšia ako hranica</string>
     <string name="restart">Reštartovať</string>
     <string name="shared_strings_all_regions">Všetky oblasti</string>
     <string name="delete_number_files_question">Zmazať %1$d súborov\?</string>
@@ -4680,7 +4679,6 @@
     <string name="average_speed_skip_stops">Zohľadniť zastavenia</string>
     <string name="map_widget_average_speed">Priemerná rýchlosť</string>
     <string name="lang_sat">Santali</string>
-    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s nebude započítaná a neovplyvní priemernú rýchlosť.</string>
     <string name="average_speed_time_interval_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť.</string>
     <string name="average_speed_widget_desc">Zobrazuje priemernú rýchlosť jazdy.</string>
     <string name="routing_attr_goods_restrictions_description">Zohľadniť obmedzenia vjazdu pre ľahké dodávkové vozidlá</string>
@@ -4757,4 +4755,21 @@
     <string name="compass_always_visible">Vždy zobrazený</string>
     <string name="next_turn_widget_desc">Nástroj zobrazuje informácie o nasledujúcom zabočení s obrázkom manévra a vzdialenosti k nemu.</string>
     <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobraziť trasy pre horské bicykle</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobraziť trasy určené pre horské bicykle</string>
+    <string name="auto_25_chars_route_tl_kl">Zahnite doľava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tl_kr">Zahnite doľava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tr_kl">Zahnite doprava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tr_kr">Zahnite doprava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tu_kl">Otočte sa naspäť a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tu_kr">Otočte sa naspäť a držte sa vpravo</string>
+    <string name="auto_25_chars_route_roundabout_kl">Choďte cez %1$d výjazd a držte sa vľavo</string>
+    <string name="auto_25_chars_route_roundabout_kr">Choďte cez %1$d výjazd a držte sa vpravo</string>
+    <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s bude započítaná a ovplyvní priemernú rýchlosť.</string>
+    <string name="attach_roads_warning">K cestám môžete prichytiť len zaznamenanú stopu</string>
+    <string name="without_profiles_changing">Bez zmeny profilov</string>
+    <string name="shared_string_only_missing">Len chýbajúce</string>
+    <string name="download_tiles">Stiahnuť dlaždice</string>
+    <string name="attach_roads_descr">Chcete aproximovať vašu stopu s platnou stopou prichytenou k offline mapám\? V tom prípade získate opravenú nadmorskú výšku cesty, informácie o ceste a zabočenia, ktoré by mohli byť neskôr použité pre navigáciu.</string>
+    <string name="connect_with_straight_line">Spojiť priamou čiarou</string>
 </resources>

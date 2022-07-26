@@ -253,8 +253,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(selectedAppMode);
 		buttonsCard.addView(createButtonWithDesc(
 				compassVisibility.iconId,
+				getString(R.string.map_widget_compass),
 				compassVisibility.getTitle(app),
-				compassVisibility.getDescription(app),
 				true,
 				v -> {
 					FragmentActivity activity = getActivity();
@@ -338,7 +338,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo, @Nullable WidgetType widgetType) {
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
 		updateWidgetsCountForPanel(widgetInfo.widgetPanel);
 	}
 

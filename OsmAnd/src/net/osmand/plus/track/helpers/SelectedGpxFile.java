@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class SelectedGpxFile {
 
-	public boolean notShowNavigationDialog = false;
+	public boolean notShowNavigationDialog;
 	public boolean selectedByUser = true;
 
 	protected GPXFile gpxFile;
@@ -36,7 +36,7 @@ public class SelectedGpxFile {
 	private boolean routePoints;
 	protected boolean joinSegments;
 	private boolean showCurrentTrack;
-	protected boolean splitProcessed = false;
+	protected boolean splitProcessed;
 
 	private FilteredSelectedGpxFile filteredSelectedGpxFile;
 

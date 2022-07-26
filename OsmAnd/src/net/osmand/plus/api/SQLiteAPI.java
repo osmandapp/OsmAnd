@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 public interface SQLiteAPI {
 
-	public interface SQLiteConnection {
+	interface SQLiteConnection {
 		
 		void close();
 		
@@ -23,13 +23,11 @@ public interface SQLiteAPI {
 
 		boolean isReadOnly();
 
-		boolean isDbLockedByOtherThreads();
-
 		boolean isClosed();
 
 	}
 	
-	public interface SQLiteCursor {
+	interface SQLiteCursor {
 		
 		String[] getColumnNames();
 
@@ -58,7 +56,7 @@ public interface SQLiteAPI {
 
 	}
 	
-	public interface SQLiteStatement {
+	interface SQLiteStatement {
 
 		// 1 based argument
 		void bindString(int i, String filterId);

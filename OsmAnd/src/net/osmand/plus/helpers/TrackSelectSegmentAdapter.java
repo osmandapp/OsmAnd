@@ -91,7 +91,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 		holder.iconSegment.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 
 		GpxItem gpxItem = gpxItems.get(position);

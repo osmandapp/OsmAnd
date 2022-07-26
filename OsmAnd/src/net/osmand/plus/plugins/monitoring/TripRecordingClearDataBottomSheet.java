@@ -43,8 +43,8 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
 		String description = getString(R.string.clear_recorded_data_warning)
 				.concat("\n").concat(getString(R.string.lost_data_warning));
-		final View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
-		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
+		View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
+		View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(description)

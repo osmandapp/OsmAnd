@@ -108,7 +108,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			fragment.group = group;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, RenameTrackGroupBottomSheet.TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

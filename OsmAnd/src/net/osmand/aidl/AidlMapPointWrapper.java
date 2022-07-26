@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class AidlMapPointWrapper {
 
-	private String id;
-	private String shortName;
-	private String fullName;
-	private String typeName;
-	private String layerId;
-	private int color;
-	private LatLon location;
-	private List<String> details;
-	private Map<String, String> params;
+	private final String id;
+	private final String shortName;
+	private final String fullName;
+	private final String typeName;
+	private final String layerId;
+	private final int color;
+	private final LatLon location;
+	private final List<String> details;
+	private final Map<String, String> params;
 
 	public AidlMapPointWrapper(AMapPoint aMapPoint) {
 		id = aMapPoint.getId();

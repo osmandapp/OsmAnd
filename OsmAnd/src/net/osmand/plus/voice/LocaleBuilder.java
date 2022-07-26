@@ -29,7 +29,7 @@ public class LocaleBuilder {
 
 	@NonNull
 	public Locale buildLocale() {
-		final String[] params = (localeParams + "____.").split("[\\_\\-]");
+		String[] params = (localeParams + "____.").split("[\\_\\-]");
 		String language = params[0];
 		                        // As per BCP 47:
 		String region = "";     // [a-zA-Z]{2} | [0-9]{3}

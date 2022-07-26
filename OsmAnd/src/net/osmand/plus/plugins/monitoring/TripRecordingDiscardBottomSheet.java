@@ -39,12 +39,12 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		final OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
-		final View buttonDiscard = createItem(inflater, ItemType.STOP);
-		final View buttonCancel = createItem(inflater, ItemType.CANCEL);
+		View buttonDiscard = createItem(inflater, ItemType.STOP);
+		View buttonCancel = createItem(inflater, ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.track_recording_description))

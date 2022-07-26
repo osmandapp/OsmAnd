@@ -27,12 +27,12 @@ public class ArticleTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 2;
 
-	private TravelArticle article;
+	private final TravelArticle article;
 	private final Drawable readIcon;
-	private FragmentManager fragmentManager;
+	private final FragmentManager fragmentManager;
 	private boolean isLastItem;
 
-	private PicassoUtils picasso;
+	private final PicassoUtils picasso;
 
 	public ArticleTravelCard(OsmandApplication app, boolean nightMode, TravelArticle article, FragmentManager fragmentManager) {
 		super(app, nightMode);
@@ -45,8 +45,8 @@ public class ArticleTravelCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof ArticleTravelVH) {
-			final ArticleTravelVH holder = (ArticleTravelVH) viewHolder;
-			final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
+			ArticleTravelVH holder = (ArticleTravelVH) viewHolder;
+			String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
 			Boolean loaded = picasso.isURLLoaded(url);
 
 			RequestCreator rc = Picasso.get()
@@ -90,10 +90,10 @@ public class ArticleTravelCard extends BaseTravelCard {
 		}
 	}
 
-	private void updateSaveButton(final ArticleTravelVH holder) {
+	private void updateSaveButton(ArticleTravelVH holder) {
 		if (article != null) {
-			final TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
-			final boolean saved = helper.isArticleSaved(article);
+			TravelLocalDataHelper helper = app.getTravelHelper().getBookmarksHelper();
+			boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			holder.rightButton.setText(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark);
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
@@ -118,14 +118,14 @@ public class ArticleTravelCard extends BaseTravelCard {
 		final View divider;
 		final View shadow;
 
-		public ArticleTravelVH(final View itemView) {
+		public ArticleTravelVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			content = (TextView) itemView.findViewById(R.id.content);
-			partOf = (TextView) itemView.findViewById(R.id.part_of);
-			icon = (ImageView) itemView.findViewById(R.id.icon);
-			leftButton = (TextView) itemView.findViewById(R.id.left_button);
-			rightButton = (TextView) itemView.findViewById(R.id.right_button);
+			title = itemView.findViewById(R.id.title);
+			content = itemView.findViewById(R.id.content);
+			partOf = itemView.findViewById(R.id.part_of);
+			icon = itemView.findViewById(R.id.icon);
+			leftButton = itemView.findViewById(R.id.left_button);
+			rightButton = itemView.findViewById(R.id.right_button);
 			divider = itemView.findViewById(R.id.divider);
 			shadow = itemView.findViewById(R.id.shadow);
 		}

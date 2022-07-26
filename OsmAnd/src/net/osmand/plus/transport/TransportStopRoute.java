@@ -25,7 +25,7 @@ public class TransportStopRoute {
 	public boolean showWholeRoute;
 	private int cachedColor;
 	private boolean cachedNight;
-	private Map<Pair<String, Boolean>, Integer> cachedRouteColors = new HashMap<>();
+	private final Map<Pair<String, Boolean>, Integer> cachedRouteColors = new HashMap<>();
 
 	public static TransportStopRoute getTransportStopRoute(TransportRoute rs, TransportStop s) {
 		TransportStopType type = TransportStopType.findType(rs.getType());
@@ -79,7 +79,7 @@ public class TransportStopRoute {
 
 	public int getColor(OsmandApplication ctx, boolean nightMode) {
 		if (cachedColor == 0 || cachedNight != nightMode) {
-			cachedColor = ctx.getResources().getColor(R.color.transport_route_line);
+			cachedColor = ctx.getColor(R.color.transport_route_line);
 			cachedNight = nightMode;
 			if (type != null) {
 				RenderingRulesStorage rrs = ctx.getRendererRegistry().getCurrentSelectedRenderer();

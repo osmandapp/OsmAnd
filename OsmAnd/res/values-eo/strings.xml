@@ -544,7 +544,7 @@
     <string name="rendering_attr_subwayMode_name">Metroaj kursoj</string>
     <string name="lock_screen_request_explanation">%1$s bezonas tiun ĉi permeson por malŝalti ekranon por energi-ŝparan funkcion.</string>
     <string name="wake_on_voice">Ŝalti ekranon</string>
-    <string name="wake_on_voice_descr">Ŝalti aparatan ekranon dum proksimigado al kurbiĝo.</string>
+    <string name="wake_on_voice_descr">Ŝalti aparatan ekranon dum proksimigado al turniĝo.</string>
     <string name="impassable_road">Eviti vojojn…</string>
     <string name="rendering_attr_tramRoutes_name">Tramaj kursoj</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Fervojaj kursoj</string>
@@ -643,9 +643,9 @@
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn malkonekte</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
-    <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivelombrumo estas elŝuteblaj aparte post instalado de kromprogramo.)
-\n 
-\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu eblo estas dezirata de atletoj, migrantoj, turistoj kaj ĉiuj scivolaj en reliefa strukturo de tero. (Rimarku, ke datumoj pri nivelkurboj kaj nivelombrumo estas elŝuteblaj aparte post instalado de kromprogramo.)
+\n
+\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM («Shuttle Radar Topography Mission») kaj de la ASTER («Advanced Spaceborne Thermal Emission and Reflection Radiometer»), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
@@ -928,7 +928,7 @@
     <string name="local_openstreetmap_act_title">Modifoj de OSM</string>
     <string name="layer_hillshade">Tavolo de nivelombrumo</string>
     <string name="map_widget_gps_info">GPS-informoj</string>
-    <string name="access_arrival_time">Alvena tempo</string>
+    <string name="access_arrival_time">Tempo de alveno</string>
     <string name="item_checked">markita(j)</string>
     <string name="item_unchecked">nemarkita(j)</string>
     <string name="prefer_motorways">Preferi aŭtovojojn</string>
@@ -1104,9 +1104,9 @@
     <string name="map_widget_reset">Rekomencigi</string>
     <string name="map_widget_parking">Parkumejo</string>
     <string name="map_widget_time">Plua tempo</string>
-    <string name="map_widget_next_turn">Sekva kurbiĝo</string>
-    <string name="map_widget_next_turn_small">Sekva kurbiĝeto</string>
-    <string name="map_widget_next_next_turn">Post-sekva kurbiĝo</string>
+    <string name="map_widget_next_turn">Sekva turniĝo</string>
+    <string name="map_widget_next_turn_small">Sekva turniĝeto</string>
+    <string name="map_widget_next_next_turn">Post-sekva turniĝo</string>
     <string name="bg_service_screen_lock">Ŝlosi ekranon</string>
     <string name="bg_service_screen_unlock">Malŝlosi ekranon</string>
     <string name="bg_service_screen_lock_toast">Ekrano ŝlosita</string>
@@ -1154,7 +1154,7 @@
     <string name="asap">Senprokraste</string>
     <string name="share_route_as_gpx">Kunhavigi kurson kiel GPX-dosieron</string>
     <string name="share_route_subject">Kurso kunhavigita per OsmAnd</string>
-    <string name="route_roundabout">Trafikcirklo: enveturu %1$d-an elveturejon</string>
+    <string name="route_roundabout">Ĉe trafikcirklo elektu %1$d-an elveturejon</string>
     <string name="route_kl">Veturu je maldekstra koridoro</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
     <string name="map_widget_battery">Nivelo de baterio</string>
@@ -1183,7 +1183,7 @@
     <string name="unknown_from_location">Komencpunkto ankoraŭ ne estas precizigita.</string>
     <string name="modify_transparency">Modifi travideblon (0 - travidebla, 255 - maldiafana)</string>
     <string name="confirm_interrupt_download">Ĉu ĉesigi elŝutadon\?</string>
-    <string name="first_time_msg">Dankon al vi por uzi OsmAnd. Elŝutu eksterretajn regionajn datumojn en la menuo “administri map-dosierojn” por esplori mapojn, serĉi adresojn, interesejojn, publikan transporton kaj pli.</string>
+    <string name="first_time_msg">Dankon al vi pro uzi OsmAnd. Vi povas elŝuti regionajn datumojn por malkonekta uzo per malfermi la menuon ≡ kaj sekve elektu “Elŝuti mapojn” por esplori mapojn, serĉi adresojn, interesejojn, publikan transporton kaj pli.</string>
     <string name="basemap_was_selected_to_download">La fundamenta mapo de mondo – bezonata por provizi bazan funkciadon – estas en la elŝut‑vico.</string>
     <string name="plugins_screen">Kromprogramoj</string>
     <string name="local_indexes_cat_tile">Enretaj mapoj kaj kaŝmemorigitaj kaheloj</string>
@@ -1204,7 +1204,7 @@
     <string name="play_commands_of_currently_selected_voice">Elektu voĉon kaj provi ĝin per ludi anoncojn:</string>
     <string name="native_rendering">Indiĝena blldigo</string>
     <string name="test_voice_prompts">Testi voĉajn anoncojn</string>
-    <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per “elŝuti mapojn”, aŭ aktivigu la kromprogramon “enretaj mapoj”.</string>
+    <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per la menuo “Elŝuti mapojn”, aŭ aktivigu la kromprogramon “Enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
     <string name="gpx_visibility_txt">Videblo</string>
@@ -1493,11 +1493,11 @@
     <string name="access_direction_haptic_feedback_descr">Montri direkton al celo per vibrado.</string>
     <string name="lang_ast">Asturia</string>
     <string name="plugin_nautical_name">Mara map-vido</string>
-    <string name="plugin_nautical_descr">Tiu ĉi kromprogramo ebligas uzi marajn mapojn por boatado, velado kaj aliaj akvosportoj. 
-\n 
-\nSpeciala map-aldonaĵo al OsmAnd aldonas navigadajn punktojn kaj markojn por enlanda kaj apudborda navigado. Priskribo por iu ajn navigadpunkto liveras detalojn bezonatajn por identigi ilin kiel: kategorio, formo, koloro, vicsekvo, referenco, ktp. 
-\n 
-\nPor reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝi ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
+    <string name="plugin_nautical_descr">Tiu ĉi kromprogramo ebligas uzi marajn mapojn por boatado, velado kaj aliaj akvosportoj.
+\n
+\nSpeciala map-aldonaĵo al OsmAnd aldonas navigadajn punktojn kaj markojn por enlanda kaj apudborda navigado. Priskribo de ĉiu navigadpunkto liveras detalojn bezonatajn por identigi ilin: kategorion, formon, koloron, vicsekvon, referencon, ktp.
+\n
+\nPor reveni al unu de normaj map-aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝu la agordon “Map-aspekto” per la menuo “Agordi mapon”.</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
     <string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Skiadaj kursoj kaj vojoj estas kolorigitaj laŭ facileco.
 \n
@@ -2054,7 +2054,7 @@
     <string name="rendering_value_fine_name">Eteta</string>
     <string name="route_calculation">Difinado de kurso</string>
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
-    <string name="route_roundabout_short">Elveturu al %1$d-a elveturejo</string>
+    <string name="route_roundabout_short">Elektu %1$d-an elveturejon</string>
     <string name="search_map_hint">Urbo aŭ regiono</string>
     <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="routing_attr_allow_motorway_name">Uzi aŭtovojojn</string>
@@ -2726,7 +2726,7 @@
     <string name="shared_string_bookmark">Al legosignoj</string>
     <string name="off_road_render_descr">Por ekstervoja veturado, bazita sur la stilo “Topo”, por uzi kun verdaj satelitaj fotoj kiel subtavola mapo. Malpliigita larĝo de ĉefaj vojoj, pliigita larĝo de kampaj vojoj, vojetoj, biciklaj kaj aliaj vojoj.</string>
     <string name="touring_view_render_descr">Detalplena kaj kontrasta stilo por turismo. Inkluzivas ĉiujn agordojn de norma stilo kaj vidigas kiel eble pli da detaloj, precipe ĉiuj ŝoseoj kaj vojetoj kaj aliaj rimedojn por vojaĝi. Klare distingebla vido de diversaj vojoj, simile al paperaj mapoj. Taŭga por taga, nokta kaj eksterdoma uzo.</string>
-    <string name="access_intermediate_arrival_time">Alvena tempo al intercelo</string>
+    <string name="access_intermediate_arrival_time">Tempo de alveno al intercelo</string>
     <string name="map_widget_intermediate_time">Tempo al intercelo</string>
     <string name="unirs_render_descr">Modifo de la norma stilo por pliigi kontraston de piediradaj kaj biciklaj vojoj. Uzas malnovan kolor-skemon de Mapnik.</string>
     <string name="get_osmand_live">Akiru OsmAnd-Live por malŝlosi ĉiujn eblaĵojn: ĉiutagajn map-ĝisdatigojn, senlimigitajn elŝutojn, ĉiujn pagendajn kaj senpagajn kromprogramojn, Vikipedion, Vikivojaĝon kaj pli.</string>
@@ -3993,7 +3993,6 @@
     <string name="temporary_conditional_routing_descr">Uzi vojajn limigojn, kiuj estas nun aktivaj sur la mapo</string>
     <string name="routing_attr_driving_style_description">Elekti inter pli mallonga, pli rapida aŭ pli sekura kursoj</string>
     <string name="snap_to_road_descr">Proksimigas emblemon de via pozicio al la nune navigata vojo</string>
-    <string name="map_orientation_threshold_descr">Aŭtomate turni la mapon nur kiam rapido estas pli alta ol la sojlo</string>
     <string name="track_recording_stop_without_saving">Ĉesigi sen konservi</string>
     <string name="track_recording_save_and_stop">Konservi kaj ĉesigi registri</string>
     <string name="track_recording_title">Registrado de spuro ĉesigita</string>
@@ -4187,7 +4186,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Akiru aliron al senlimaj elŝutoj de malkonektaj mapoj de ĉiuj kontinentoj kaj regionoj.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Akiru aliron al pli oftaj ĝisdatigoj de mapoj: ĉiuhoraj, ĉiutagaj aŭ ĉiusemajnaj. Ne necesas reelŝuti la tutan mapon – ĝisdatigoj enhavas nur ŝanĝitajn objektojn.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstalu. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstali. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
     <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
@@ -4657,9 +4656,9 @@
     <string name="compass_on_circles">Kompaso sur cirkloj</string>
     <string name="distance_circles">Distanco sur cirkloj</string>
     <string name="circle_settings">Alĝustigi cirklojn</string>
-    <string name="navigation_points_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva kurbiĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
+    <string name="navigation_points_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva turniĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
     <string name="navigation_points">Navigadpunktoj</string>
-    <string name="route_maneuvers_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva kurbiĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
+    <string name="route_maneuvers_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva turniĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
     <string name="map_widget_true_bearing">Vera direkto</string>
     <string name="route_maneuvers">Manovroj</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ne superstreki armeajn areojn</string>
@@ -4685,7 +4684,6 @@
     <string name="average_speed_widget_desc">Fenestraĵo montranta la mezuman rapidon por la nuna vojaĝo.</string>
     <string name="map_widget_average_speed">Mezuma rapido</string>
     <string name="average_speed_skip_stops">Enkalkuli paŭzojn</string>
-    <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne estos enkalkulita kaj ne efikos sur la mezuma rapido.</string>
     <string name="routing_attr_goods_restrictions_description">Konsideri limigojn por malpezaj (≤ 3,5 Mg) varaŭtomobiloj.</string>
     <string name="import_as_one_track">Enporti kiel unu spuron</string>
     <string name="transport_hazmat_yes_desc">Elektu ĝustan kategorion.</string>
@@ -4727,4 +4725,54 @@
     <string name="accessibility_2d_view_on">2,5-dimensia vido: jes</string>
     <string name="download_complete">Elŝuto finita</string>
     <string name="live_update_frequency_hour_variant">Mapoj estos kontrolitaj pri ĝisdatigoj je ĉiu horo.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Montbiciklaj kursoj IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Montri montbiciklajn kursojn laŭ skalo de IMBA</string>
+    <string name="attach_roads_warning">Vi povas alproksimigi al vojoj nur registritan spuron</string>
+    <string name="without_profiles_changing">Sen ŝanĝi profilon</string>
+    <string name="shared_string_only_missing">Nur mankajn</string>
+    <string name="download_tiles">Elŝuti kahelojn</string>
+    <string name="auto_25_chars_route_tl_kl">Turniĝu maldekstren kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_tr_kl">Turniĝu dekstren kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_tr_kr">Turniĝu dekstren kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_tu_kr">Turniĝu malantaŭen kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_roundabout_kl">Elektu %1$d-an elveturejon kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_roundabout_kr">Elektu %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
+    <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
+    <string name="connect_with_straight_line">Konekti per rekta linio</string>
+    <string name="attach_roads_descr">Elektu por alproksimigi vian spuron al vojoj estantaj sur malkonektaj mapoj. Tiamaniere altitudo estos korektita kaj informoj pri ŝoseoj kaj turniĝoj povos esti uzataj poste por navigi.</string>
+    <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
+\nSe vi uzas OsmAnd-Nubon, tio ĉi povos kaŭzi malkontenton post reinstalado.</string>
+    <string name="auto_backup_title">Aŭtomata sekurkopio</string>
+    <string name="duplacate_widget_added_snackbar">Aldonis duobligaĵon de la fenestraĵo al la listo.</string>
+    <string name="shared_string_duplicate">Duobligi</string>
+    <string name="av_notes_photo_widget_desc">Fenestraĵo ebliganta fari foton.</string>
+    <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri videan noton.</string>
+    <string name="av_notes_audio_widget_desc">Fenestraĵo ebliganta registri sonan noton.</string>
+    <string name="trip_recording_distance_widget_desc">Montras longon de la nune registrata spuro.</string>
+    <string name="trip_recording_downhill_widget_desc">Montras sumon (horizontale) de ĉiuj malsupreniroj por la nune registrata spuro.</string>
+    <string name="trip_recording_uphill_widget_desc">Montras sumon (horizontale) de ĉiuj supreniroj por la nune registrata spuro.</string>
+    <string name="trip_recording_duration_widget_desc">Montras tempon de registrado de spuro: daŭron en minutoj/horoj de la nune registrata kurso.</string>
+    <string name="true_bearing_wdiget_desc">Angulo inter la vera nordo, via pozicio kaj la alcela loko.</string>
+    <string name="first_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la unua map-marko.</string>
+    <string name="second_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la dua map-marko.</string>
+    <string name="compass_click_desc">Frapetu la bildsimbolon de kompaso por ŝanĝi reĝimon de map-turniĝo.</string>
+    <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne enkalkuliĝos al la mezuma rapido.</string>
+    <string name="time_to_intermediate_widget_desc">Montras tempon de alveno kaj pluan tempon al la unua intercelo. Tempo estas senĉese aktualigata dum navigado. Kiam intercelo estos pasigita, la fenestraĵo montros tempon al la sekva intercelo.</string>
+    <string name="distance_to_intermediate_widget_desc">Montras plian distancon al la unua intercelo. Kiam intercelo estos pasigita, la fenestraĵo montros distancon al la sekva intercelo.</string>
+    <string name="time_to_destination_widget_desc">Montras tempon de alveno aŭ pluan tempon al la fina celo. Tempo estas senĉese rekalkulata dum navigado.</string>
+    <string name="distance_to_destination_widget_desc">Montras plian distancon al la fina celo.</string>
+    <string name="second_next_turn_widget_desc">Montras informojn pri via post-sekva turniĝo kaj aktiviĝos dum alproksimiĝi turniĝon.</string>
+    <string name="next_turn_widget_desc">Montras informojn pri via sekva turniĝo, bildsimbolon de manovro kaj distancon al la turniĝo.</string>
+    <string name="widget_with_dot">Fenestraĵo.</string>
+    <string name="compass_visible_if_map_rotated_desc">Kaŝita kiam nordo troviĝas ĉe supro de la mapo</string>
+    <string name="compass_visible_if_map_rotated">Nur kiam mapo turnita</string>
+    <string name="compass_always_hidden">Ĉiam kaŝita</string>
+    <string name="compass_always_visible">Ĉiam videbla</string>
+    <string name="compass_desc">Montras direkton al la nordo.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de maraj profundec-kurboj</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Kolor-skemo de maraj profundec-kurboj</string>
+    <string name="rendering_attr_depthContourWidth_description">Larĝoj de linioj de maraj profundec-kurboj</string>
+    <string name="rendering_attr_depthContourWidth_name">Larĝoj de maraj profundec-kurboj</string>
 </resources>

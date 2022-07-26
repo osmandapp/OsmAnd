@@ -36,7 +36,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 		this.activityRef = new WeakReference<>(activity);
 		this.commonDescription = commonDescription;
 		this.tags = tags;
-		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.PRIVATE.asURLparam();
+		this.visibility = visibility != null ? visibility.asUrlParam() : UploadVisibility.PRIVATE.asUrlParam();
 		this.listener = listener;
 	}
 

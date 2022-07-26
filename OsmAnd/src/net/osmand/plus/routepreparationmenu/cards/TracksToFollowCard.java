@@ -35,14 +35,14 @@ public class TracksToFollowCard extends MapBaseCard {
 
 	private final Fragment target;
 
-	private List<GPXInfo> gpxInfoList;
+	private final List<GPXInfo> gpxInfoList;
 	private Map<String, List<GPXInfo>> gpxInfoCategories;
 
 	private GpxTrackAdapter tracksAdapter;
 	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
-	private String defaultCategory;
-	private String visibleCategory;
+	private final String defaultCategory;
+	private final String visibleCategory;
 	private String selectedCategory;
 
 	public TracksToFollowCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @NonNull List<GPXInfo> gpxInfoList, @NonNull String selectedCategory) {
@@ -80,7 +80,7 @@ public class TracksToFollowCard extends MapBaseCard {
 	}
 
 	private void setupTracksItems() {
-		final RecyclerView filesRecyclerView = view.findViewById(R.id.track_list);
+		RecyclerView filesRecyclerView = view.findViewById(R.id.track_list);
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 		filesRecyclerView.setNestedScrollingEnabled(false);
 		filesRecyclerView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -182,7 +182,7 @@ public class TracksToFollowCard extends MapBaseCard {
 	}
 
 	public void sortGPXInfoItems(List<GPXInfo> gpxInfoList) {
-		final Collator collator = OsmAndCollator.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
 			@Override
 			public int compare(GPXInfo i1, GPXInfo i2) {

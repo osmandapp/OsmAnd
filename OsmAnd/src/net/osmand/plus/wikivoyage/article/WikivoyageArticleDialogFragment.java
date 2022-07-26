@@ -97,12 +97,12 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			}
 		}
 
-		final View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
 
-		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
+		setupToolbar(mainView.findViewById(R.id.toolbar));
 
 		int appBarTextColor = nightMode ? R.color.wikivoyage_app_bar_text_dark : R.color.wikivoyage_app_bar_text_light;
-		articleToolbarText = (TextView) mainView.findViewById(R.id.article_toolbar_text);
+		articleToolbarText = mainView.findViewById(R.id.article_toolbar_text);
 		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), appBarTextColor));
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
@@ -110,7 +110,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				R.color.icon_color_default_dark, R.color.wikivoyage_active_dark
 		);
 
-		selectedLangTv = (TextView) mainView.findViewById(R.id.select_language_text_view);
+		selectedLangTv = mainView.findViewById(R.id.select_language_text_view);
 		selectedLangTv.setTextColor(selectedLangColorStateList);
 		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
 		selectedLangTv.setBackgroundResource(nightMode
@@ -122,7 +122,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			}
 		});
 
-		TextView contentsBtn = (TextView) mainView.findViewById(R.id.contents_button);
+		TextView contentsBtn = mainView.findViewById(R.id.contents_button);
 		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_contents), null, null, null
 		);
@@ -143,7 +143,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			}
 		});
 
-		trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
+		trackButton = mainView.findViewById(R.id.gpx_button);
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_markers_dark), null, null, null
 		);
@@ -171,9 +171,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		gpxProgress = mainView.findViewById(R.id.gpx_progress);
 		gpxProgress.setVisibility(View.GONE);
 
-		saveBtn = (TextView) mainView.findViewById(R.id.save_button);
+		saveBtn = mainView.findViewById(R.id.save_button);
 
-		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
+		contentWebView = mainView.findViewById(R.id.content_web_view);
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
@@ -250,8 +250,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private void updateSaveButton() {
 		if (article != null) {
-			final TravelHelper helper = getMyApplication().getTravelHelper();
-			final boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
+			TravelHelper helper = getMyApplication().getTravelHelper();
+			boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
 			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
@@ -270,15 +270,15 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		if (langs == null) {
 			return;
 		}
-		final PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
+		PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
 		Map<String, String> names = new HashMap<>();
 		for (String n : langs) {
 			names.put(n, FileNameTranslationHelper.getVoiceName(getContext(), n));
 		}
 		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
-		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
-			final String lang = e.getValue();
-			final String langKey = e.getKey();
+		for (Map.Entry<String, String> e : sortedNames.entrySet()) {
+			String lang = e.getValue();
+			String langKey = e.getKey();
 			MenuItem item = popup.getMenu().add(lang);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override

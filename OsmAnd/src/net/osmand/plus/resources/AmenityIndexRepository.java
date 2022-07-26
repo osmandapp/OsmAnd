@@ -9,11 +9,11 @@ import net.osmand.data.Amenity;
 
 public interface AmenityIndexRepository {
 
-	public void close();
+	void close();
 	
-	public boolean checkContains(double latitude, double longitude);
+	boolean checkContains(double latitude, double longitude);
 
-	public boolean checkContainsInt(int top31, int left31, int bottom31, int right31);
+	boolean checkContainsInt(int top31, int left31, int bottom31, int right31);
 
 	/**
 	 * Search amenities in the specified box doesn't cache results 

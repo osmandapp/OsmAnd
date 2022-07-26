@@ -5,8 +5,8 @@ import android.os.Parcelable;
 
 public class PluginParams implements Parcelable {
 
-	private String pluginId;
-	private int newState; //0- off, 1 - on
+	private final String pluginId;
+	private final int newState; //0- off, 1 - on
 
 	public PluginParams(String pluginId, int newState) {
 		this.pluginId = pluginId;

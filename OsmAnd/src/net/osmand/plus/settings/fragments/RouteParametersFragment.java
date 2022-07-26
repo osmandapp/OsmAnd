@@ -103,7 +103,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	@Override
 	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		final RecyclerView view = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+		RecyclerView view = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
 		//To prevent icons from flashing when the user turns switch on/off
 		view.setItemAnimator(null);
 		view.setLayoutAnimation(null);
@@ -224,7 +224,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			straightAngle.setPersistent(false);
 			straightAngle.setKey(settings.ROUTE_STRAIGHT_ANGLE.getId());
 			straightAngle.setTitle(getString(R.string.recalc_angle_dialog_title));
-			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), String.valueOf((int) am.getStrAngle())));
+			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) am.getStrAngle()));
 			straightAngle.setLayoutResource(R.layout.preference_with_descr);
 			straightAngle.setIcon(getRoutingPrefIcon(ROUTING_RECALC_DISTANCE));
 			getPreferenceScreen().addPreference(straightAngle);
@@ -324,7 +324,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			return preference;
 		} else {
 			ListParameters listParameters = populateListParameters(ctx, p);
-			OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+			OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getDefaultString());
 			ListPreferenceEx preference = createListPreferenceEx(ctx, pref.getId(), listParameters.names, listParameters.values, title, R.layout.preference_with_descr);
 			preference.setDescription(description);
 			return preference;
@@ -465,12 +465,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 	}
 
-	private void showSeekbarSettingsDialog(Activity activity, final ApplicationMode mode) {
+	private void showSeekbarSettingsDialog(Activity activity, ApplicationMode mode) {
 		if (activity == null || mode == null) {
 			return;
 		}
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final float[] angleValue = new float[] {mode.getStrAngle()};
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		float[] angleValue = {mode.getStrAngle()};
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
@@ -489,13 +489,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		builder.show();
 	}
 
-	private static void setupAngleSlider(final float[] angleValue,
+	private static void setupAngleSlider(float[] angleValue,
 	                                     View sliderView,
-	                                     final boolean nightMode,
-	                                     final int activeColor) {
+	                                     boolean nightMode,
+	                                     int activeColor) {
 
-		final Slider angleBar = sliderView.findViewById(R.id.angle_slider);
-		final TextView angleTv = sliderView.findViewById(R.id.angle_text);
+		Slider angleBar = sliderView.findViewById(R.id.angle_slider);
+		TextView angleTv = sliderView.findViewById(R.id.angle_text);
 
 		angleTv.setText(String.valueOf(angleValue[0]));
 		angleBar.setValue((int) angleValue[0]);
@@ -613,7 +613,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				pref.addListener(booleanRoutingPrefListener);
 			} else {
-				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getDefaultString());
 				pref.addListener(customRoutingPrefListener);
 			}
 		}
@@ -628,7 +628,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				pref.removeListener(booleanRoutingPrefListener);
 			} else {
-				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getDefaultString());
 				pref.removeListener(customRoutingPrefListener);
 			}
 		}

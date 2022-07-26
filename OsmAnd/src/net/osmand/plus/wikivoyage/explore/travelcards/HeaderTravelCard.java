@@ -15,7 +15,7 @@ public class HeaderTravelCard extends BaseTravelCard {
 	public static final int TYPE = 4;
 
 	private int articleItemCount;
-	private String title;
+	private final String title;
 
 	public HeaderTravelCard(OsmandApplication app, boolean nightMode, String title) {
 		super(app, nightMode);
@@ -25,7 +25,7 @@ public class HeaderTravelCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof HeaderTravelVH) {
-			final HeaderTravelVH holder = (HeaderTravelVH) viewHolder;
+			HeaderTravelVH holder = (HeaderTravelVH) viewHolder;
 			holder.title.setText(title);
 			int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 			holder.title.setTextColor(primaryTextColor);
@@ -46,8 +46,8 @@ public class HeaderTravelCard extends BaseTravelCard {
 
 		public HeaderTravelVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
 		}
 	}
 

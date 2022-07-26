@@ -31,7 +31,7 @@ public class ContextMenuListAdapter extends ArrayAdapter<ContextMenuItem> implem
 
 	@Override
 	public boolean isEnabled(int position) {
-		final ContextMenuItem item = getItem(position);
+		ContextMenuItem item = getItem(position);
 		if (item != null) {
 			return !item.isCategory() && item.isClickable() && item.getLayout() != R.layout.drawer_divider;
 		}

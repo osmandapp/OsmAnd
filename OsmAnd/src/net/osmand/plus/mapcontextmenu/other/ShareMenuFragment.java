@@ -61,6 +61,6 @@ public class ShareMenuFragment extends MenuBottomSheetDialogFragment {
 		ShareMenuFragment fragment = new ShareMenuFragment();
 		fragment.menu = menu;
 		fragment.setUsedOnMap(true);
-		fragment.show(menu.getMapActivity().getSupportFragmentManager(), ShareMenuFragment.TAG);
+		fragment.show(menu.getMapActivity().getSupportFragmentManager(), TAG);
 	}
 }

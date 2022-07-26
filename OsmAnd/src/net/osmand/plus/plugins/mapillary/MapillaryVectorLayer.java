@@ -405,7 +405,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		Map<QuadPointDouble, Map<?, ?>> points = this.visiblePoints;
 		float ex = point.x;
 		float ey = point.y;
-		final int rp = getRadius(tb);
+		int rp = getRadius(tb);
 		int radius = rp * 3 / 2;
 		float x, y;
 		double minSqDist = Double.NaN;
@@ -442,7 +442,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	public int getRadius(RotatedTileBox tb) {
 		int r;
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		if (zoom < MIN_IMAGE_LAYER_ZOOM) {
 			r = 0;
 		} else if (zoom <= 15) {

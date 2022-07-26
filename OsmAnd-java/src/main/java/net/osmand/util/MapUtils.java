@@ -41,7 +41,7 @@ public class MapUtils {
 	 * index values into their "Base64 Alphabet" equivalents as specified
 	 * in Table 1 of RFC 2045.
 	 */
-	private static final char intToBase64[] = {
+	private static final char[] intToBase64 = {
 			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',

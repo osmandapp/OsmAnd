@@ -59,8 +59,8 @@ public class ApplicationMode {
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
-	private static List<ApplicationMode> defaultValues = new ArrayList<>();
-	private static List<ApplicationMode> values = new ArrayList<>();
+	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
+	private static final List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
 	private static StateChangedListener<String> listener;
@@ -99,11 +99,11 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_pedestrian_dark)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
-	public static final ApplicationMode TRUCK = create(ApplicationMode.CAR, R.string.app_mode_truck, "truck")
+	public static final ApplicationMode TRUCK = create(CAR, R.string.app_mode_truck, "truck")
 			.icon(R.drawable.ic_action_truck_dark)
 			.description(R.string.app_mode_truck).reg();
 
-	public static final ApplicationMode MOTORCYCLE = create(ApplicationMode.CAR, R.string.app_mode_motorcycle, "motorcycle")
+	public static final ApplicationMode MOTORCYCLE = create(CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
 
@@ -189,53 +189,60 @@ public class ApplicationMode {
 
 	private static void initRegVisibility() {
 		// CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, HORSE
-		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN,
+		ApplicationMode[] exceptDefault = {CAR, BICYCLE, PEDESTRIAN,
 				PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[] {};
+		ApplicationMode[] none = {};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
-		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
+		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
+		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
-		regWidgetVisibility(NEXT_TURN.id, navigationSet1);
-		regWidgetVisibility(SMALL_NEXT_TURN.id, navigationSet2);
-		regWidgetVisibility(SECOND_NEXT_TURN.id, navigationSet1);
-		regWidgetAvailability(NEXT_TURN.id, exceptDefault);
-		regWidgetAvailability(SMALL_NEXT_TURN.id, exceptDefault);
-		regWidgetAvailability(SECOND_NEXT_TURN.id, exceptDefault);
+		regWidgetVisibility(NEXT_TURN, navigationSet1);
+		regWidgetVisibility(SMALL_NEXT_TURN, navigationSet2);
+		regWidgetVisibility(SECOND_NEXT_TURN, navigationSet1);
+		regWidgetAvailability(NEXT_TURN, exceptDefault);
+		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
+		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
 
 		// right
-		regWidgetVisibility(INTERMEDIATE_DESTINATION.id, all);
-		regWidgetVisibility(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetVisibility(TIME_TO_INTERMEDIATE.id, all);
-		regWidgetVisibility(TIME_TO_DESTINATION.id, all);
-		regWidgetVisibility(CURRENT_SPEED.id, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
+		regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
+		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
+		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
+		regWidgetVisibility(TIME_TO_DESTINATION, all);
+		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
 				MOTORCYCLE, HORSE);
-		regWidgetVisibility(MAX_SPEED.id, CAR, TRUCK, MOTORCYCLE);
-		regWidgetVisibility(ALTITUDE.id, PEDESTRIAN, BICYCLE);
-		regWidgetAvailability(INTERMEDIATE_DESTINATION.id, all);
-		regWidgetAvailability(DISTANCE_TO_DESTINATION.id, all);
-		regWidgetAvailability(TIME_TO_INTERMEDIATE.id, all);
-		regWidgetAvailability(TIME_TO_DESTINATION.id, all);
-		regWidgetAvailability(CURRENT_SPEED.id, all);
-		regWidgetAvailability(MAX_SPEED.id, all);
-		regWidgetAvailability(AVERAGE_SPEED.id, all);
-		regWidgetAvailability(ALTITUDE.id, all);
+		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
+		regWidgetVisibility(ALTITUDE, PEDESTRIAN, BICYCLE);
+		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
+		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
+		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);
+		regWidgetAvailability(TIME_TO_DESTINATION, all);
+		regWidgetAvailability(CURRENT_SPEED, all);
+		regWidgetAvailability(MAX_SPEED, all);
+		regWidgetAvailability(AVERAGE_SPEED, all);
+		regWidgetAvailability(ALTITUDE, all);
 
 		// all = null everything
-		regWidgetAvailability(SIDE_MARKER_1.id, all);
-		regWidgetAvailability(SIDE_MARKER_2.id, all);
-		regWidgetAvailability(GPS_INFO.id, all);
-		regWidgetAvailability(BATTERY.id, all);
-		regWidgetAvailability(RELATIVE_BEARING.id, all);
-		regWidgetAvailability(MAGNETIC_BEARING.id, all);
-		regWidgetAvailability(TRUE_BEARING.id, all);
-		regWidgetAvailability(RADIUS_RULER.id, all);
-		regWidgetAvailability(CURRENT_TIME.id, all);
+		regWidgetAvailability(SIDE_MARKER_1, all);
+		regWidgetAvailability(SIDE_MARKER_2, all);
+		regWidgetAvailability(GPS_INFO, all);
+		regWidgetAvailability(BATTERY, all);
+		regWidgetAvailability(RELATIVE_BEARING, all);
+		regWidgetAvailability(MAGNETIC_BEARING, all);
+		regWidgetAvailability(TRUE_BEARING, all);
+		regWidgetAvailability(RADIUS_RULER, all);
+		regWidgetAvailability(CURRENT_TIME, all);
+	}
+
+	@NonNull
+	public static Set<ApplicationMode> regWidgetVisibility(@NonNull WidgetType widgetType,
+	                                                       @Nullable ApplicationMode... appModes) {
+		return regWidgetVisibility(widgetType.id, appModes);
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
+	@NonNull
 	public static Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId,
 	                                                       @Nullable ApplicationMode... appModes) {
 		HashSet<ApplicationMode> set = new HashSet<>();
@@ -262,6 +269,13 @@ public class ApplicationMode {
 		return widgetsVisibility != null && widgetsVisibility.contains(this);
 	}
 
+	@NonNull
+	public static Set<ApplicationMode> regWidgetAvailability(@NonNull WidgetType widgetType,
+	                                                         @Nullable ApplicationMode... appModes) {
+		return regWidgetAvailability(widgetType.id, appModes);
+	}
+
+	@NonNull
 	public static Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId,
 	                                                         @Nullable ApplicationMode... appModes) {
 		HashSet<ApplicationMode> set = new HashSet<>();
@@ -280,11 +294,10 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String widgetId) {
+	public boolean isWidgetAvailable(@NonNull String widgetId) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
 		}
-
 		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
 		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
 		return availableForModes == null || availableForModes.contains(this);
@@ -559,7 +572,7 @@ public class ApplicationMode {
 		reorderAppModes();
 	}
 
-	private static void initModesParams(final OsmandApplication app) {
+	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
 			iconNameListener = new StateChangedListener<String>() {
@@ -627,7 +640,7 @@ public class ApplicationMode {
 	private static void saveCustomAppModesToSettings(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
+		Iterator<ApplicationMode> it = getCustomValues().iterator();
 		while (it.hasNext()) {
 			stringBuilder.append(it.next().getStringKey());
 			if (it.hasNext()) {
@@ -640,7 +653,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
-		ApplicationMode mode = ApplicationMode.valueOfStringKey(builder.applicationMode.stringKey, null);
+		ApplicationMode mode = valueOfStringKey(builder.applicationMode.stringKey, null);
 		if (mode != null) {
 			mode.setParentAppMode(builder.applicationMode.parentAppMode);
 			mode.setIconResName(builder.iconResName);
@@ -722,8 +735,8 @@ public class ApplicationMode {
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
-		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(ApplicationMode.values(app));
-		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
+		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
+		StringBuilder vls = new StringBuilder(DEFAULT.getStringKey() + ",");
 		if (allPossibleValues().contains(mode)) {
 			OsmandSettings settings = app.getSettings();
 			if (isSelected) {
@@ -884,15 +897,15 @@ public class ApplicationMode {
 		@Expose
 		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose
-		public Integer customIconColor = null;
+		public Integer customIconColor;
 		@Expose
-		public String routingProfile = null;
+		public String routingProfile;
 		@Expose
 		public RouteService routeService = RouteService.OSMAND;
 		@Expose
-		public LocationIcon locIcon = null;
+		public LocationIcon locIcon;
 		@Expose
-		public NavigationIcon navIcon = null;
+		public NavigationIcon navIcon;
 		@Expose
 		public int order = -1;
 		@Expose

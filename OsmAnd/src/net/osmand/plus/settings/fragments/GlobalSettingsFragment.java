@@ -217,7 +217,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		StorageItem currentStorage = holder.getCurrentStorage();
 		long totalUsed = app.getSettings().OSMAND_USAGE_SPACE.get();
 		if (totalUsed > 0) {
-			String[] usedMemoryFormats = new String[] {
+			String[] usedMemoryFormats = {
 					getString(R.string.shared_string_memory_used_kb_desc),
 					getString(R.string.shared_string_memory_used_mb_desc),
 					getString(R.string.shared_string_memory_used_gb_desc),

@@ -1688,7 +1688,7 @@
     <string name="poi_tram_stop">Sporvagnastöð</string>
     <string name="poi_bus_station">Strætóstöð</string>
     <string name="poi_railway_station">Járnbrautarstöð;Lestarstöð</string>
-    <string name="poi_halt">Járnbrautarstopp;Lestarstopp</string>
+    <string name="poi_halt">Járnbrautarstopp;Lestarstopp,Járnbrautarstöð,Brautarstöð,Lestarstöð,Stöð</string>
     <string name="poi_subway_entrance">Inngangur í neðanjarðarlest</string>
     <string name="poi_subway_station">Já;neðanjarðarlestarstöð</string>
     <string name="poi_taxi">Leigubílastaur</string>
@@ -4330,4 +4330,16 @@
     <string name="poi_board_type_planet_walk">Stjörnufræðiskilti</string>
     <string name="poi_board_type_sight">Útsýnisskýringar</string>
     <string name="poi_golf_pin">Golfholuflagg</string>
+    <string name="poi_payment_mir_no">Ekki tekið við Mir-kortum</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_club_amateur_radio">Radíóamatöraklúbbur</string>
+    <string name="poi_club_religion">Trúfélagssamtök</string>
+    <string name="poi_club_youth_movement">Ungliðahreyfing</string>
+    <string name="poi_club_dog">Hundaklúbbur</string>
+    <string name="poi_board_title">Titill spjalds</string>
+    <string name="poi_short_name">Stutt heiti</string>
+    <string name="poi_first_aid_kit">Skyndihjálparpakki</string>
+    <string name="poi_club_aviation">Flugklúbbur</string>
+    <string name="poi_club_bicycle">Hjólaklúbbur</string>
+    <string name="poi_club_doityourself">Föndurklúbbur</string>
 </resources>

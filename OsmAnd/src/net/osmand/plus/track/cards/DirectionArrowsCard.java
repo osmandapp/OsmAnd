@@ -32,7 +32,7 @@ public class DirectionArrowsCard extends MapBaseCard {
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.gpx_direction_arrows);
 
-		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
+		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(trackDrawInfo.isShowArrows());
 
 		view.setOnClickListener(v -> {

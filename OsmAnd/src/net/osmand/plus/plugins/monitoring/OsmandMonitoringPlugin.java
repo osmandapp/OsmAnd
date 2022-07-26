@@ -99,7 +99,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private void registerWidgetsVisibility() {
 		for (WidgetType widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
 			ApplicationMode[] appModes = widget == TRIP_RECORDING_DISTANCE ? null : new ApplicationMode[] {};
-			ApplicationMode.regWidgetVisibility(widget.id, appModes);
+			ApplicationMode.regWidgetVisibility(widget, appModes);
 		}
 	}
 
@@ -151,9 +151,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return "feature_articles/trip-recording-plugin.html";
 	}
 
-	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
-	public static final int[] MINUTES = new int[] {2, 3, 5};
-	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = new int[] {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
+	public static final int[] SECONDS = {0, 1, 2, 3, 5, 10, 15, 20, 30, 60, 90};
+	public static final int[] MINUTES = {2, 3, 5};
+	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
@@ -251,20 +251,20 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(null, null, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
+	public void saveCurrentTrack(@Nullable Runnable onComplete) {
 		saveCurrentTrack(onComplete, null, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable FragmentActivity activity) {
+	public void saveCurrentTrack(@Nullable Runnable onComplete, @Nullable FragmentActivity activity) {
 		saveCurrentTrack(onComplete, activity, true, false);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable FragmentActivity activity,
-	                             final boolean stopRecording, final boolean openTrack) {
+	public void saveCurrentTrack(@Nullable Runnable onComplete, @Nullable FragmentActivity activity,
+	                             boolean stopRecording, boolean openTrack) {
 		if (stopRecording) {
 			stopRecording();
 		}
-		final WeakReference<FragmentActivity> activityRef = activity != null ? new WeakReference<>(activity) : null;
+		WeakReference<FragmentActivity> activityRef = activity != null ? new WeakReference<>(activity) : null;
 
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
@@ -365,12 +365,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return liveMonitoringHelper.isLiveMonitoringEnabled();
 	}
 
-	public void startGPXMonitoring(final Activity activity) {
-		final ValueHolder<Integer> vs = new ValueHolder<>();
-		final ValueHolder<Boolean> choice = new ValueHolder<>();
+	public void startGPXMonitoring(Activity activity) {
+		ValueHolder<Integer> vs = new ValueHolder<>();
+		ValueHolder<Boolean> choice = new ValueHolder<>();
 		vs.value = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
 		choice.value = settings.SAVE_GLOBAL_TRACK_REMEMBER.get();
-		final Runnable runnable = () -> {
+		Runnable runnable = () -> {
 			app.getSavingTrackHelper().startNewSegment();
 			settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);

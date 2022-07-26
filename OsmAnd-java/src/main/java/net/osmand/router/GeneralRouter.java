@@ -758,6 +758,9 @@ public class GeneralRouter implements VehicleRouter {
 		public boolean getDefaultBoolean() {
 			return defaultBoolean;
 		}
+		public String getDefaultString() {
+			return type == RoutingParameterType.NUMERIC ? "0.0" : "-";
+		}
 		public String[] getProfiles() {
 			return profiles;
 		}
@@ -1238,13 +1241,12 @@ public class GeneralRouter implements VehicleRouter {
 		
 	}
 
-	public void addImpassableRoads(Set<Long> impassableRoads) {
+	public void setImpassableRoads(Set<Long> impassableRoads) {
 		if (impassableRoads != null && !impassableRoads.isEmpty()) {
-			if (this.impassableRoads == null) {
-				this.impassableRoads = new TLongHashSet();
-			}
-			this.impassableRoads.addAll(impassableRoads);
-		}		
+			this.impassableRoads = new TLongHashSet(impassableRoads);
+		} else if (this.impassableRoads != null) {
+			this.impassableRoads.clear();
+		}
 	}
 }
 

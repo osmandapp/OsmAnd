@@ -54,7 +54,7 @@ public enum DayNightMode {
 		Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 		boolean isLightSensorEnabled = mLight != null;
 		if (isLightSensorEnabled) {
-			return DayNightMode.values();
+			return values();
 		} else {
 			return new DayNightMode[]{AUTO, DAY, NIGHT};
 		}

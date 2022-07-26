@@ -45,8 +45,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private double longitude;
 	private int color;
 	private boolean visible = true;
-	private SpecialPointType specialPointType = null;
-	private BackgroundType backgroundType = null;
+	private SpecialPointType specialPointType;
+	private BackgroundType backgroundType;
 	private double altitude = Double.NaN;
 	private long timestamp;
 	private long visitedDate;
@@ -111,7 +111,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		initAltitude(app, null);
 	}
 
-	public void initAltitude(OsmandApplication app, final Runnable callback) {
+	public void initAltitude(OsmandApplication app, Runnable callback) {
 		Location location = new Location("", latitude, longitude);
 		app.getLocationProvider().getRouteSegment(location, null, false,
 				new ResultMatcher<RouteDataObject>() {

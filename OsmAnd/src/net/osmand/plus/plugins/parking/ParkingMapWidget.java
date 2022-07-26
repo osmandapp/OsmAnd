@@ -24,7 +24,7 @@ public class ParkingMapWidget extends TextInfoWidget {
 	private final ParkingPositionPlugin plugin;
 
 	private final float[] calculations = new float[1];
-	private int cachedMeters = 0;
+	private int cachedMeters;
 
 	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity) {
 		super(mapActivity, PARKING);

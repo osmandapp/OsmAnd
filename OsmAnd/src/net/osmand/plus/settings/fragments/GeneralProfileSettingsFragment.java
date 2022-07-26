@@ -82,7 +82,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = new CompoundButton.OnCheckedChangeListener() {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+			ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 			if (isChecked) {
 				getPreferenceManager().showDialog(externalInputDevice);
 				buttonView.setChecked(false);
@@ -97,8 +97,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	};
 
 	private void setupAppThemePref() {
-		final ListPreferenceEx appTheme =
-				(ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
+		ListPreferenceEx appTheme =
+				findPreference(settings.OSMAND_THEME.getId());
 
 		ArrayList<String> entries = new ArrayList<>();
 		entries.add(getString(R.string.dark_theme));
@@ -131,7 +131,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupRotateMapPref() {
-		final ListPreferenceEx rotateMap = (ListPreferenceEx) findPreference(settings.ROTATE_MAP.getId());
+		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
 		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
 		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 		rotateMap.setIcon(getRotateMapIcon());
@@ -153,12 +153,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_display_position_center);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceCompat centerPositionOnMap = (SwitchPreferenceCompat) findPreference(settings.CENTER_POSITION_ON_MAP.getId());
+		SwitchPreferenceCompat centerPositionOnMap = findPreference(settings.CENTER_POSITION_ON_MAP.getId());
 		centerPositionOnMap.setIcon(icon);
 	}
 
 	private void setupMapScreenOrientationPref() {
-		final ListPreferenceEx mapScreenOrientation = (ListPreferenceEx) findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
+		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
 		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
 		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
@@ -197,7 +197,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			entryValues[i] = metricsConstants[i].ordinal();
 		}
 
-		ListPreferenceEx unitsOfLength = (ListPreferenceEx) findPreference(settings.METRIC_SYSTEM.getId());
+		ListPreferenceEx unitsOfLength = findPreference(settings.METRIC_SYSTEM.getId());
 		unitsOfLength.setEntries(entries);
 		unitsOfLength.setEntryValues(entryValues);
 		unitsOfLength.setIcon(getActiveIcon(R.drawable.ic_action_ruler_unit));
@@ -227,7 +227,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			}
 		}
 
-		ListPreferenceEx angularUnits = (ListPreferenceEx) findPreference(settings.ANGULAR_UNITS.getId());
+		ListPreferenceEx angularUnits = findPreference(settings.ANGULAR_UNITS.getId());
 		angularUnits.setEntries(entries);
 		angularUnits.setEntryValues(entryValues);
 		angularUnits.setIcon(getActiveIcon(R.drawable.ic_action_angular_unit));
@@ -243,7 +243,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			entryValues[i] = speedConstants[i].ordinal();
 		}
 
-		ListPreferenceEx speedSystem = (ListPreferenceEx) findPreference(settings.SPEED_SYSTEM.getId());
+		ListPreferenceEx speedSystem = findPreference(settings.SPEED_SYSTEM.getId());
 		speedSystem.setEntries(entries);
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
@@ -251,7 +251,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupVolumeButtonsAsZoom() {
-		SwitchPreferenceEx volumeButtonsPref = (SwitchPreferenceEx) findPreference(settings.USE_VOLUME_BUTTONS_AS_ZOOM.getId());
+		SwitchPreferenceEx volumeButtonsPref = findPreference(settings.USE_VOLUME_BUTTONS_AS_ZOOM.getId());
 		volumeButtonsPref.setTitle(getString(R.string.use_volume_buttons_as_zoom));
 		volumeButtonsPref.setDescription(getString(R.string.use_volume_buttons_as_zoom_descr));
 		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_zoom_volume_buttons);
@@ -259,26 +259,26 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupKalmanFilterPref() {
-		SwitchPreferenceEx kalmanFilterPref = (SwitchPreferenceEx) findPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS.getId());
+		SwitchPreferenceEx kalmanFilterPref = findPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS.getId());
 		kalmanFilterPref.setTitle(getString(R.string.use_kalman_filter_compass));
 		kalmanFilterPref.setDescription(getString(R.string.use_kalman_filter_compass_descr));
 	}
 
 	private void setupMagneticFieldSensorPref() {
-		SwitchPreferenceEx useMagneticSensorPref = (SwitchPreferenceEx) findPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.getId());
+		SwitchPreferenceEx useMagneticSensorPref = findPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.getId());
 		useMagneticSensorPref.setTitle(getString(R.string.use_magnetic_sensor));
 		useMagneticSensorPref.setDescription(getString(R.string.use_magnetic_sensor_descr));
 		useMagneticSensorPref.setVisible(app.getLocationProvider().hasOrientationSensor());
 	}
 
 	private void setupMapEmptyStateAllowedPref() {
-		SwitchPreferenceEx mapEmptyStateAllowedPref = (SwitchPreferenceEx) findPreference(settings.MAP_EMPTY_STATE_ALLOWED.getId());
+		SwitchPreferenceEx mapEmptyStateAllowedPref = findPreference(settings.MAP_EMPTY_STATE_ALLOWED.getId());
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.tap_on_map_to_hide_interface));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
 	}
 
 	private void setupExternalInputDevicePref() {
-		ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		externalInputDevice.setSummary(R.string.sett_no_ext_input);
 		externalInputDevice.setEntries(new String[] {
 				getString(R.string.sett_generic_ext_input),
@@ -294,7 +294,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupTrackballForMovementsPref() {
-		SwitchPreferenceEx mapEmptyStateAllowedPref = (SwitchPreferenceEx) findPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS.getId());
+		SwitchPreferenceEx mapEmptyStateAllowedPref = findPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS.getId());
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.use_trackball));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.use_trackball_descr));
 
@@ -310,7 +310,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		b.setTitle(getString(R.string.driving_region));
 
-		final List<Object> drs = new ArrayList<>();
+		List<Object> drs = new ArrayList<>();
 		drs.add(getString(R.string.driving_region_automatic));
 		drs.addAll(Arrays.asList(DrivingRegion.values()));
 		int sel = -1;
@@ -326,8 +326,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			}
 		}
 
-		final int selected = sel;
-		final ArrayAdapter<Object> singleChoiceAdapter =
+		int selected = sel;
+		ArrayAdapter<Object> singleChoiceAdapter =
 				new ArrayAdapter<Object>(themedContext, R.layout.single_choice_description_item, R.id.text1, drs) {
 					@NonNull
 					@Override
@@ -337,8 +337,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 							v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_choice_description_item, parent, false);
 						}
 						Object item = getItem(position);
-						AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
-						TextView desc = (TextView) v.findViewById(R.id.description);
+						AppCompatCheckedTextView title = v.findViewById(R.id.text1);
+						TextView desc = v.findViewById(R.id.description);
 						if (item instanceof DrivingRegion) {
 							DrivingRegion drivingRegion = (DrivingRegion) item;
 							title.setText(app.getString(drivingRegion.name));

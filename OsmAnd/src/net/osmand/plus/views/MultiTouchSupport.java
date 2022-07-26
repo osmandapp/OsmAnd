@@ -52,7 +52,7 @@ public class MultiTouchSupport {
 	private Method getPointerCount;
 	private Method getX;
 	private Method getY;
-	private boolean multiTouchAPISupported = false;
+	private boolean multiTouchAPISupported;
 
 
 	public MultiTouchSupport(@NonNull OsmandApplication app, @NonNull MultiTouchZoomListener listener) {
@@ -85,8 +85,8 @@ public class MultiTouchSupport {
 		}
 	}
 
-	private boolean inZoomMode = false;
-	private boolean inTiltMode = false;
+	private boolean inZoomMode;
+	private boolean inTiltMode;
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();

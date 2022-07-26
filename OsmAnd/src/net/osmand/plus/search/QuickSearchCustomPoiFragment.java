@@ -337,7 +337,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		updateCloseSearchIcon(false);
 	}
 
-	private void startSearchSubCategories(final String text) {
+	private void startSearchSubCategories(String text) {
 		updateCloseSearchIcon(true);
 		searchCancelled = false;
 		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
@@ -346,9 +346,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			@Override
 			public boolean publish(SearchResult searchResult) {
 				if (searchResult.objectType == SEARCH_FINISHED) {
-					final List<PoiType> selectedSubCategories = getSelectedSubCategories();
+					List<PoiType> selectedSubCategories = getSelectedSubCategories();
 					SearchResultCollection resultCollection = searchUICore.getCurrentSearchResult();
-					final List<PoiType> results = new ArrayList<>();
+					List<PoiType> results = new ArrayList<>();
 					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
 						Object poiObject = result.object;
 						if (poiObject instanceof PoiType) {
@@ -498,7 +498,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		CategoryListAdapter(OsmandApplication app, List<PoiCategory> items) {
 			super(app, R.layout.list_item_icon24_and_menu, items);
@@ -515,13 +515,13 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			}
 			PoiCategory category = getItem(position);
 			if (category != null) {
-				AppCompatImageView iconView = (AppCompatImageView) row.findViewById(R.id.icon);
+				AppCompatImageView iconView = row.findViewById(R.id.icon);
 				row.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
-				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
+				AppCompatTextView titleView = row.findViewById(R.id.title);
 				titleView.setMaxLines(Integer.MAX_VALUE);
 				titleView.setEllipsize(null);
-				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
-				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
+				AppCompatTextView descView = row.findViewById(R.id.description);
+				SwitchCompat check = row.findViewById(R.id.toggle_item);
 				UiUtilities.setupCompoundButton(check, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 
 				boolean categorySelected = filter.isTypeAccepted(category);
@@ -565,7 +565,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			return (row);
 		}
 
-		private void addRowListener(final PoiCategory category, final SwitchCompat check) {
+		private void addRowListener(PoiCategory category, SwitchCompat check) {
 			check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

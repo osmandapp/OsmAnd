@@ -46,10 +46,10 @@ public class MapTileLayer extends BaseMapLayer {
 	private static final int SHOWN_MAP_ZOOM_MIN = 1;
 
 	protected final boolean suggestOfflineMap;
-	protected ITileSource map = null;
-	protected MapTileAdapter mapTileAdapter = null;
+	protected ITileSource map;
+	protected MapTileAdapter mapTileAdapter;
 
-	protected Paint paintBitmap = null;
+	protected Paint paintBitmap;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 
@@ -329,7 +329,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		ResourceManager mgr = resourceManager;
 		int nzoom = tileBox.getZoom();
-		final QuadRect tilesRect = tileBox.getTileBounds();
+		QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
 		float ellipticTileCorrection  = 0;

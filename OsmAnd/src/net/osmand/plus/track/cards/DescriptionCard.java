@@ -56,9 +56,9 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Override
 	public void updateContent() {
-		final String title = gpxFile.metadata.getArticleTitle();
-		final String imageUrl = getMetadataImageLink(gpxFile.metadata);
-		final String descriptionHtml = gpxFile.metadata.getDescription();
+		String title = gpxFile.metadata.getArticleTitle();
+		String imageUrl = getMetadataImageLink(gpxFile.metadata);
+		String descriptionHtml = gpxFile.metadata.getDescription();
 
 		setupImage(imageUrl);
 
@@ -82,7 +82,7 @@ public class DescriptionCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(addBtn, true);
 	}
 
-	private void showDescription(final String title, final String imageUrl, final String descriptionHtml) {
+	private void showDescription(String title, String imageUrl, String descriptionHtml) {
 		LinearLayout descriptionContainer = view.findViewById(R.id.description_container);
 		FrameLayout addBtn = view.findViewById(R.id.btn_add);
 
@@ -132,13 +132,13 @@ public class DescriptionCard extends MapBaseCard {
 		AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 	}
 
-	private void setupImage(final String imageUrl) {
+	private void setupImage(String imageUrl) {
 		if (imageUrl == null) {
 			return;
 		}
-		final PicassoUtils picasso = PicassoUtils.getPicasso(app);
+		PicassoUtils picasso = PicassoUtils.getPicasso(app);
 		RequestCreator rc = Picasso.get().load(imageUrl);
-		final AppCompatImageView image = view.findViewById(R.id.main_image);
+		AppCompatImageView image = view.findViewById(R.id.main_image);
 		rc.into(image, new Callback() {
 			@Override
 			public void onSuccess() {

@@ -37,8 +37,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private static final int LOCATION_ITEM_ID = 0;
 	private static final int ROUND_TRIP_FINISH_ITEM_ID = 1;
 
-	private MapActivity mapActivity;
-	private List<Object> items = new LinkedList<>();
+	private final MapActivity mapActivity;
+	private final List<Object> items = new LinkedList<>();
 	private MapMarkersListAdapterListener listener;
 
 	private int startPos = -1;
@@ -48,7 +48,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private boolean showLocationItem;
 	private Location myLoc;
 	private AddressLookupRequest locRequest;
-	private PointDescription locDescription;
+	private final PointDescription locDescription;
 
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
 
@@ -85,7 +85,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	@Override
-	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
+	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 		UiUtilities iconsCache = app.getUIUtilities();
@@ -94,7 +94,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean firstMarkerItem = showLocationItem ? pos == 1 : pos == 0;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
 		boolean start = pos == startPos;
-		final boolean finish = pos == finishPos && startPos != finishPos;
+		boolean finish = pos == finishPos && startPos != finishPos;
 		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
 		boolean roundTripFinishItem = finish && showRoundTripItem;
 

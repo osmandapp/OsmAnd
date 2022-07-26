@@ -64,11 +64,11 @@ import java.util.ArrayList;
 
 public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 
-	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
-	public final static int UI_REFRESH_TIME_MS = 500;
+	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
+	public static final int UI_REFRESH_TIME_MS = 500;
 
-	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
-	private final static String OSMAND_USAGE = "osmand_usage";
+	private static final String CHANGE_DIRECTORY_BUTTON = "change_directory";
+	private static final String OSMAND_USAGE = "osmand_usage";
 
 	private OsmandApplication app;
 	private ArrayList<MemoryItem> memoryItems;
@@ -211,7 +211,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						confirm(app, activity, newDataStorage, false);
 					} else {
 						ChangeDataStorageBottomSheet.showInstance(getFragmentManager(), key,
-								currentDataStorage, newDataStorage, DataStorageFragment.this, false);
+								currentDataStorage, newDataStorage, this, false);
 					}
 				}
 			}
@@ -242,14 +242,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		int activeColor = ColorUtilities.getActiveColor(app, isNightMode());
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, isNightMode());
 
-		String[] memoryUnitsFormats = new String[] {
+		String[] memoryUnitsFormats = {
 				getString(R.string.shared_string_memory_kb_desc),
 				getString(R.string.shared_string_memory_mb_desc),
 				getString(R.string.shared_string_memory_gb_desc),
 				getString(R.string.shared_string_memory_tb_desc)
 		};
 
-		final View itemView = holder.itemView;
+		View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
 			StorageItem item = dataStorageHelper.getStorage(key);
 			if (item != null) {
@@ -286,7 +286,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						color = activeColor;
 						tvMemory.setOnClickListener(v -> {
 							calculateTilesBtnPressed = true;
-							calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
+							calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(this);
 							updateAllSettings();
 						});
 					} else {
@@ -429,13 +429,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		StorageItem manuallySpecified = dataStorageHelper.getManuallySpecified();
 		if (manuallySpecified != null) {
 			SelectFolderBottomSheet.showInstance(getFragmentManager(), manuallySpecified.getKey(),
-					manuallySpecified.getDirectory(), DataStorageFragment.this,
+					manuallySpecified.getDirectory(), this,
 					getString(R.string.storage_directory_manual), getString(R.string.paste_Osmand_data_folder_path),
 					getString(R.string.shared_string_select_folder), false);
 		}
 	}
 
-	private void moveData(final StorageItem currentStorage, final StorageItem newStorage) {
+	private void moveData(StorageItem currentStorage, StorageItem newStorage) {
 		File fromDirectory = new File(currentStorage.getDirectory());
 		File toDirectory = new File(newStorage.getDirectory());
 		@SuppressLint("StaticFieldLeak")
@@ -552,7 +552,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	@Override
 	public void onFinishUpdating(String tag) {
 		updateAllSettings();
-		if (tag != null && tag.equals(TILES_MEMORY)) {
+		if (TILES_MEMORY.equals(tag)) {
 			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
 		}
 	}

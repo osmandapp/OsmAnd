@@ -28,14 +28,14 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 
 	public static final int TYPE = 70;
 
-	private DownloadIndexesThread downloadThread;
-	private List<IndexItem> items;
+	private final DownloadIndexesThread downloadThread;
+	private final List<IndexItem> items;
 
-	private Drawable downloadIcon;
-	private Drawable cancelIcon;
+	private final Drawable downloadIcon;
+	private final Drawable cancelIcon;
 	private WeakReference<NeededMapsVH> ref;
 	private CardListener listener;
-	private View.OnClickListener onItemClickListener;
+	private final View.OnClickListener onItemClickListener;
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
@@ -111,7 +111,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			boolean downloading = downloadThread.isDownloading(item);
 			boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
 			boolean lastItem = i == items.size() - 1;
-			final View view = holder.itemsContainer.getChildAt(i);
+			View view = holder.itemsContainer.getChildAt(i);
 
 			if (item.isDownloaded()) {
 				view.setOnClickListener(null);
@@ -126,8 +126,8 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 					.setText(item.getVisibleName(app, app.getRegions(), false));
 			((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
 
-			ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);
-			Button buttonAction = (Button) view.findViewById(R.id.button_action);
+			ImageView iconAction = view.findViewById(R.id.icon_action);
+			Button buttonAction = view.findViewById(R.id.button_action);
 			if (item.isDownloaded()) {
 				iconAction.setVisibility(View.GONE);
 				buttonAction.setVisibility(View.GONE);
@@ -151,7 +151,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 				}
 			}
 
-			ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+			ProgressBar progressBar = view.findViewById(R.id.progress_bar);
 			progressBar.setVisibility(downloading ? View.VISIBLE : View.GONE);
 			if (currentDownloading) {
 				int progress = downloadThread.getCurrentDownloadingItemProgress();

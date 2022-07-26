@@ -3987,7 +3987,6 @@
     <string name="routing_attr_short_way_description">Geoptimaliseerde kortere route (energiebesparing)</string>
     <string name="routing_attr_driving_style_description">Selecteer een tussenpunt om een kortere, snellere of veiligere route te krijgen</string>
     <string name="snap_to_road_descr">Het huidige locatiepictogram wordt vastgeklikt aan de huidige navigatieroute</string>
-    <string name="map_orientation_threshold_descr">Draai de kaartweergave niet als de snelheid lager is dan een drempelwaarde</string>
     <string name="restart">Herstart</string>
     <string name="shared_strings_all_regions">Alle regio\'s</string>
     <string name="delete_number_files_question">Wis %1$d bestanden\?</string>
@@ -4502,5 +4501,4 @@
     <string name="map_widget_average_speed">Gemiddelde snelheid</string>
     <string name="map_widget_time_to_intermediate">Tijd tot tussenstop</string>
     <string name="map_widget_distance_to_intermediate">Afstand tot tussenstop</string>
-    <string name="average_speed_skip_stops_desc">Snelheden lager dan %1$s worden niet opgenomen en hebben geen invloed op de gemiddelde snelheid.</string>
 </resources>

@@ -102,13 +102,13 @@ public class TravelDbHelper implements TravelHelper {
 
 	private final OsmandApplication application;
 
-	private TravelLocalDataHelper localDataHelper;
+	private final TravelLocalDataHelper localDataHelper;
 	private final Collator collator;
 
-	private SQLiteConnection connection = null;
+	private SQLiteConnection connection;
 
-	private File selectedTravelBook = null;
-	private List<File> existingTravelBooks = new ArrayList<>();
+	private File selectedTravelBook;
+	private final List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<>();
 	
 	
@@ -404,7 +404,7 @@ public class TravelDbHelper implements TravelHelper {
 		return res;
 	}
 
-	private void sortSearchResults(@NonNull final String searchQuery, @NonNull List<WikivoyageSearchResult> list) {
+	private void sortSearchResults(@NonNull String searchQuery, @NonNull List<WikivoyageSearchResult> list) {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
 			public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
@@ -427,7 +427,7 @@ public class TravelDbHelper implements TravelHelper {
 	
 	private void sortPopArticlesByDistance(List<PopularArticle> list) {
 		Location location = application.getLocationProvider().getLastKnownLocation();
-		final LatLon loc ;
+		LatLon loc ;
 		if(location == null) {
 			loc = application.getSettings().getLastKnownMapLocation();
 		} else {
@@ -472,7 +472,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull final TravelArticle article) {
+	public Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(@NonNull TravelArticle article) {
 		String lang = article.getLang();
 		String title = article.getTitle();
 		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
@@ -585,19 +585,19 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	public TravelArticle getArticleByTitle(@NonNull String title, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		return getArticleByTitle(title, new QuadRect(), lang, readGpx, callback);
 	}
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull LatLon latLon, @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	public TravelArticle getArticleByTitle(@NonNull String title, @NonNull LatLon latLon, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		return getArticleByTitle(title, new QuadRect(), lang, readGpx, callback);
 	}
 
 	@Nullable
 	@Override
-	public TravelArticle getArticleByTitle(@NonNull final String title, @NonNull QuadRect rect, @NonNull final String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
+	public TravelArticle getArticleByTitle(@NonNull String title, @NonNull QuadRect rect, @NonNull String lang, boolean readGpx, @Nullable GpxReadCallback callback) {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -727,15 +727,15 @@ public class TravelDbHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public String getGPXName(@NonNull final TravelArticle article) {
+	public String getGPXName(@NonNull TravelArticle article) {
 		return article.getTitle().replace('/', '_').replace('\'', '_')
 				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
 	}
 
 	@NonNull
 	@Override
-	public File createGpxFile(@NonNull final TravelArticle article) {
-		final GPXFile gpx = article.getGpxFile();
+	public File createGpxFile(@NonNull TravelArticle article) {
+		GPXFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		if (!file.exists()) {
 			GPXUtilities.writeGpxFile(file, gpx);

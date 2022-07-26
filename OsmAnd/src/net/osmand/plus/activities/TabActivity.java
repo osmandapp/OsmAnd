@@ -35,7 +35,7 @@ public class TabActivity extends ActionBarProgressActivity {
 
 	public static class OsmandFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-		private List<TabItem> mTabs;
+		private final List<TabItem> mTabs;
 
 		public OsmandFragmentPagerAdapter(FragmentManager fm, List<TabItem> items) {
 			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

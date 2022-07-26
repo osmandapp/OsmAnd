@@ -21,10 +21,10 @@ import java.util.List;
  */
 public final class TransactionBuilder {
 	private static final String TAG = "TransactionBuilder";
-	private FragmentManager manager;
+	private final FragmentManager manager;
 	private final List<DashFragmentData> fragments;
-	private OsmandSettings settings;
-	private MapActivity mapActivity;
+	private final OsmandSettings settings;
+	private final MapActivity mapActivity;
 
 	public TransactionBuilder(FragmentManager manager, OsmandSettings settings,
 							  MapActivity mapActivity) {

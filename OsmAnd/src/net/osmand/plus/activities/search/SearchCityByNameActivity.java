@@ -55,7 +55,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	protected void addFooterViews() {
-		final FrameLayout ll = new FrameLayout(this);
+		FrameLayout ll = new FrameLayout(this);
 		searchVillages = new Button(this);
 		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.gravity = Gravity.CENTER_HORIZONTAL;
@@ -125,7 +125,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	protected boolean filterLoop(String query, Collection<City> list) {
-		final boolean[] result = {false};
+		boolean[] result = {false};
 		redefineSearchVillagesMode(query);
 		if (!initializeTaskIsFinished() || !isVillagesSearchEnabled()) {
 			result[0] = super.filterLoop(query, list);
@@ -153,7 +153,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		return result[0];
 	}
 
-	private void setVillagesSearchEnabled(final boolean enable) {
+	private void setVillagesSearchEnabled(boolean enable) {
 		searchVillagesMode = enable ? 0 : -1;
 		uiHandler.post(new Runnable() {
 			@Override
@@ -227,7 +227,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		private final StringMatcherMode startsWith;
 		private final net.osmand.Collator cs;
 		private final String lang;
-		private boolean transliterate;
+		private final boolean transliterate;
 
 		private CityComparator(StringMatcherMode startsWith, String lang, boolean transliterate) {
 			this.startsWith = startsWith;
@@ -238,7 +238,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 		@Override
 		public int compare(City lhs, City rhs) {
-			final String part = getFilter().toString();
+			String part = getFilter().toString();
 
 			int compare = compareCityType(lhs, rhs);
 			if (compare != 0) {

@@ -106,7 +106,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		View view = convertView;
 		if (view == null) {
 			view = themedInflater.inflate(R.layout.backup_type_item, parent, false);

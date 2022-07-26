@@ -22,7 +22,7 @@ import android.media.AudioManager;
 // [x] Treat LOSS_TRANSIENT_CAN_DUCK like LOSS, ducked speech probably hard to understand.
 
 public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, AudioFocusHelper {
-	public static boolean playbackAuthorized = false;
+	public static boolean playbackAuthorized;
 	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 	RoutingHelper routingHelper;
 
@@ -45,7 +45,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 					.setAcceptsDelayedFocusGain(false)
 					.setOnAudioFocusChangeListener(this)
 					.build();
-			final Object focusLock = new Object();
+			Object focusLock = new Object();
 			int res = mAudioManager.requestAudioFocus(mAudioFocusRequest);
 			synchronized(focusLock) {
 				if (res == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -60,12 +60,13 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 		return playbackAuthorized;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean abandonAudFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		routingHelper = ((OsmandApplication) context.getApplicationContext()).getRoutingHelper();
 		playbackAuthorized = false;
-		if (android.os.Build.VERSION.SDK_INT < 26) {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
 		} else {
 			AudioAttributes mAudioAttributes = new AudioAttributes.Builder()

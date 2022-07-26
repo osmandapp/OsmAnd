@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
@@ -28,9 +31,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -56,26 +56,26 @@ public class SQLiteTileSource implements ITileSource {
 	private final OsmandApplication app;
 
 	private ITileSource base;
-	private String urlTemplate = null;
+	private String urlTemplate;
 	private String name;
-	private SQLiteConnection db = null;
-	private File file = null;
+	private SQLiteConnection db;
+	private File file;
 	private int minZoom = 1;
 	private int maxZoom = 17;
 	private boolean inversiveZoom = true; // BigPlanet
-	private boolean timeSupported = false;
+	private boolean timeSupported;
 	private long expirationTimeMillis = -1; // never
-	private boolean isEllipsoid = false;
-	private boolean invertedY = false;
+	private boolean isEllipsoid;
+	private boolean invertedY;
 	private String randoms;
 	private String[] randomsArray;
-	private String rule = null;
-	private String referer = null;
-	private String userAgent = null;
+	private String rule;
+	private String referer;
+	private String userAgent;
 
 	private int tileSize = 256;
-	private boolean tileSizeSpecified = false;
-	private boolean onlyReadonlyAvailable = false;
+	private boolean tileSizeSpecified;
+	private boolean onlyReadonlyAvailable;
 
 	public SQLiteTileSource(OsmandApplication app, File f, List<TileSourceTemplate> toFindUrl){
 		this.app = app;
@@ -287,7 +287,7 @@ public class SQLiteTileSource implements ITileSource {
 					int expireminutes = list.indexOf(EXPIRE_MINUTES);
 					this.expirationTimeMillis = -1;
 					if(expireminutes != -1) {
-						int minutes = (int) cursor.getInt(expireminutes);
+						int minutes = cursor.getInt(expireminutes);
 						if(minutes > 0) {
 							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
@@ -297,18 +297,18 @@ public class SQLiteTileSource implements ITileSource {
 					int tsColumn = list.indexOf(TILESIZE);
 					this.tileSizeSpecified = tsColumn != -1;
 					if(tileSizeSpecified) {
-						this.tileSize = (int) cursor.getInt(tsColumn);
+						this.tileSize = cursor.getInt(tsColumn);
 					}
 					int ellipsoid = list.indexOf(ELLIPSOID);
 					if(ellipsoid != -1) {
-						int set = (int) cursor.getInt(ellipsoid);
+						int set = cursor.getInt(ellipsoid);
 						if(set == 1){
 							this.isEllipsoid = true;
 						}
 					}
 					int invertedY = list.indexOf(INVERTED_Y);
 					if(invertedY != -1) {
-						int set = (int) cursor.getInt(invertedY);
+						int set = cursor.getInt(invertedY);
 						if(set == 1){
 							this.invertedY = true;
 						}
@@ -322,11 +322,11 @@ public class SQLiteTileSource implements ITileSource {
 					boolean inversiveInfoZoom = inversiveZoom;
 					int mnz = list.indexOf(MIN_ZOOM);
 					if(mnz != -1) {
-						minZoom = (int) cursor.getInt(mnz);
+						minZoom = cursor.getInt(mnz);
 					}
 					int mxz = list.indexOf(MAX_ZOOM);
 					if(mxz != -1) {
-						maxZoom = (int) cursor.getInt(mxz);
+						maxZoom = cursor.getInt(mxz);
 					}
 					if(inversiveInfoZoom) {
 						mnz = minZoom;
@@ -443,11 +443,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public boolean isLocked() {
-		SQLiteConnection db = getDatabase();
-		if (db == null) {
-			return false;
-		}
-		return db.isDbLockedByOtherThreads();
+		return getDatabase() != null;
 	}
 
 	@Override
@@ -493,26 +489,14 @@ public class SQLiteTileSource implements ITileSource {
 			return null;
 		} finally {
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
-					+ " ms ");
+				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts) + " ms ");
 			}
 		}
 	}
-	
+
 	@Override
 	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
 		return getBytes(x, y, zoom, dirWithTiles, null);
-	}
-	
-	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
-		byte[] blob;
-		try {
-			blob = getBytes(x, y, zoom, null, timeHolder);
-		} catch (IOException e) {
-			return null;
-		}
-		String[] params = getTileDbParams(x, y, zoom);
-		return blob != null ? getImage(blob, params) : null;
 	}
 
 	@Nullable
@@ -559,10 +543,10 @@ public class SQLiteTileSource implements ITileSource {
 					new String[0]);
 		}
 		cursor.moveToFirst();
-		int right = (int) (cursor.getInt(0) >> (25 - coordinatesZoom));
-		int left = (int) (cursor.getInt(1) >> (25 - coordinatesZoom));
-		int top = (int) (cursor.getInt(3) >> (25 - coordinatesZoom));
-		int bottom  = (int) (cursor.getInt(2) >> (25 - coordinatesZoom));
+		int right = cursor.getInt(0) >> (25 - coordinatesZoom);
+		int left = cursor.getInt(1) >> (25 - coordinatesZoom);
+		int top = cursor.getInt(3) >> (25 - coordinatesZoom);
+		int bottom  = cursor.getInt(2) >> (25 - coordinatesZoom);
 
 		cursor.close();
 

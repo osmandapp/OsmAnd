@@ -32,16 +32,16 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 
 	private static final Log LOG = PlatformUtil.getLog(SelectProfileMenuAdapter.class);
 
-	private List<Object> items = new ArrayList<>();
+	private final List<Object> items = new ArrayList<>();
 	private final OsmandApplication app;
-	private ApplicationMode appMode;
+	private final ApplicationMode appMode;
 	@ColorInt
 	private int selectedIconColor;
 	private boolean bottomButton;
-	private String bottomButtonText;
+	private final String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
 
-	private boolean nightMode;
+	private final boolean nightMode;
 
 	public SelectProfileMenuAdapter(List<ApplicationMode> items, @NonNull OsmandApplication app,
 	                                String bottomButtonText, boolean nightMode,
@@ -88,7 +88,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final SelectProfileViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull SelectProfileViewHolder holder, int position) {
 		Object obj = items.get(position);
 		if (obj instanceof ApplicationMode) {
 			holder.dividerBottom.setVisibility(View.INVISIBLE);
@@ -97,7 +97,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.descr.setVisibility(View.VISIBLE);
 			holder.compoundButton.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
-			final ApplicationMode item = (ApplicationMode) obj;
+			ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString());
 			holder.descr.setText(ProfileDataUtils.getAppModeDescription(app, item));
 
@@ -116,7 +116,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 
 			updateViewHolder(holder, item);
 		} else {
-			final String title = (String) obj;
+			String title = (String) obj;
 			if (title.equals(BUTTON_ITEM)) {
 				holder.dividerBottom.setVisibility(View.INVISIBLE);
 				holder.dividerUp.setVisibility(View.VISIBLE);

@@ -78,7 +78,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 
 		public static FileSubtype getSubtypeByName(@NonNull String name) {
-			for (FileSubtype subtype : FileSubtype.values()) {
+			for (FileSubtype subtype : values()) {
 				if (name.equals(subtype.subtypeName)) {
 					return subtype;
 				}
@@ -96,7 +96,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 			if (fileName.startsWith(File.separator)) {
 				name = fileName.substring(1);
 			}
-			for (FileSubtype subtype : FileSubtype.values()) {
+			for (FileSubtype subtype : values()) {
 				switch (subtype) {
 					case UNKNOWN:
 					case OTHER:

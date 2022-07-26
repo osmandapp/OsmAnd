@@ -140,11 +140,11 @@ public class GpxApproximator {
 		}
 	}
 
-	public void calculateGpxApproximation(@NonNull final ResultMatcher<GpxRouteApproximation> resultMatcher) {
+	public void calculateGpxApproximation(@NonNull ResultMatcher<GpxRouteApproximation> resultMatcher) {
 		if (gctx != null) {
 			gctx.ctx.calculationProgress.isCancelled = true;
 		}
-		final GpxRouteApproximation gctx = getNewGpxApproximationContext();
+		GpxRouteApproximation gctx = getNewGpxApproximationContext();
 		this.gctx = gctx;
 		startProgress();
 		updateProgress(gctx);
@@ -164,21 +164,21 @@ public class GpxApproximator {
 	}
 
 	private void startProgress() {
-		final GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
+		GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
 		if (approximationProgress != null) {
 			approximationProgress.start(this);
 		}
 	}
 
 	private void finishProgress() {
-		final GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
+		GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
 		if (approximationProgress != null) {
 			approximationProgress.finish(this);
 		}
 	}
 
-	private void updateProgress(@NonNull final GpxRouteApproximation gctx) {
-		final GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
+	private void updateProgress(@NonNull GpxRouteApproximation gctx) {
+		GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
 		if (approximationProgress != null) {
 			ctx.runInUIThread(new Runnable() {
 

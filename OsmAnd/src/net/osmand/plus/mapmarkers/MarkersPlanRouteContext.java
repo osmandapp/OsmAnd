@@ -31,7 +31,7 @@ public class MarkersPlanRouteContext {
 
 	private static final int MAX_DIST_FOR_SNAP_TO_ROAD = 500 * 1000; // 500 km
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
@@ -205,7 +205,7 @@ public class MarkersPlanRouteContext {
 	}
 
 	private RouteCalculationParams getParams() {
-		final Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
+		Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
 
 		Location start = new Location("");
 		start.setLatitude(currentPair.first.getLatitude());
@@ -213,7 +213,7 @@ public class MarkersPlanRouteContext {
 
 		LatLon end = new LatLon(currentPair.second.getLatitude(), currentPair.second.getLongitude());
 
-		final RouteCalculationParams params = new RouteCalculationParams();
+		RouteCalculationParams params = new RouteCalculationParams();
 		params.start = start;
 		params.end = end;
 		RoutingHelper.applyApplicationSettings(params, app.getSettings(), snappedMode);

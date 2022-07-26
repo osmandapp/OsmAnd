@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
-import net.osmand.NativeLibrary;
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
@@ -10,12 +12,13 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.util.Algorithms;
@@ -27,19 +30,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
-	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
+	public static final Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
-	private OsmEditingPlugin plugin;
+	private final OsmEditingPlugin plugin;
 
 	public OpenstreetmapLocalUtil(OsmEditingPlugin plugin) {
 		this.plugin = plugin;
 	}
 
-	private List<OnNodeCommittedListener> listeners = new ArrayList<>();
+	private final List<OnNodeCommittedListener> listeners = new ArrayList<>();
 
 	public void addNodeCommittedListener(OnNodeCommittedListener listener) {
 		if (!listeners.contains(listener)) {
@@ -87,19 +88,16 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(MapObject mapObject) {
-		Long objectId = mapObject.getId();
-		if (!(objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
-				|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE))) {
+		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
+		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
+		boolean isWay = type == EntityType.WAY;
+		long entityId = OsmEditingPlugin.getOsmObjectId(mapObject);
+
 		Amenity amenity = null;
-		long entityId;
-		boolean isWay = objectId % 2 == MapObject.WAY_MODULO_REMAINDER; // check if mapObject is a way
 		if (mapObject instanceof Amenity) {
 			amenity = (Amenity) mapObject;
-			entityId = mapObject.getId() >> MapObject.AMENITY_ID_RIGHT_SHIFT;
-		} else {
-			entityId = mapObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
 		}
 		PoiType poiType = null;
 		if (amenity != null) {
@@ -112,8 +110,8 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		Entity entity;
 		LatLon loc = mapObject.getLocation();
 		if (loc == null) {
-			if (mapObject instanceof NativeLibrary.RenderedObject) {
-				loc = ((NativeLibrary.RenderedObject) mapObject).getLabelLatLon();
+			if (mapObject instanceof RenderedObject) {
+				loc = ((RenderedObject) mapObject).getLabelLatLon();
 			} else if (mapObject instanceof Building) {
 				loc = ((Building) mapObject).getLatLon2();
 			}
@@ -169,5 +167,4 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	public interface OnNodeCommittedListener {
 		void onNoteCommitted();
 	}
-	
 }

@@ -10,10 +10,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AidlMapLayerWrapper {
 
-	private String id;
-	private String name;
-	private float zOrder;
-	private Map<String, AidlMapPointWrapper> points = new ConcurrentHashMap<>();
+	private final String id;
+	private final String name;
+	private final float zOrder;
+	private final Map<String, AidlMapPointWrapper> points = new ConcurrentHashMap<>();
 
 	private boolean imagePoints;
 	private int circlePointMinZoom;

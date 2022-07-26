@@ -4,8 +4,8 @@ import net.osmand.plus.OsmandApplication;
 
 public class QuickSearchHeaderListItem extends QuickSearchListItem {
 
-	private String title;
-	private boolean showTopDivider;
+	private final String title;
+	private final boolean showTopDivider;
 
 	public QuickSearchHeaderListItem(OsmandApplication app, String title, boolean showTopDivider) {
 		super(app, null);

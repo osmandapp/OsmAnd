@@ -51,8 +51,8 @@ public class PointImageDrawable extends Drawable {
 	private final ColorFilter colorFilter;
 	private final ColorFilter grayFilter;
 	private float scale = 1.0f;
-	private int mapIconSize = 0;
-	private int backSize = 0;
+	private int mapIconSize;
+	private int backSize;
 
 	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
 	public static final int ICON_SIZE_VECTOR_PX = 12;
@@ -283,7 +283,7 @@ public class PointImageDrawable extends Drawable {
 		@ColorInt
 		int color;
 		boolean withShadow;
-		boolean synced = false;
+		boolean synced;
 		@DrawableRes
 		int overlayIconId;
 		BackgroundType backgroundType;

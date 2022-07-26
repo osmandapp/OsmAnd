@@ -459,12 +459,12 @@ public class ConfigureMapMenu {
 	}
 
 	private void createRenderingAttributeItems(List<RenderingRuleProperty> customRules,
-	                                           final ContextMenuAdapter adapter, final MapActivity activity,
-	                                           final boolean nightMode) {
-		final OsmandApplication app = activity.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
-		final int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-		final int themeRes = getThemeRes(nightMode);
+	                                           ContextMenuAdapter adapter, MapActivity activity,
+	                                           boolean nightMode) {
+		OsmandApplication app = activity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
+		int themeRes = getThemeRes(nightMode);
 
 		adapter.addItem(new ContextMenuItem(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true)
@@ -586,18 +586,18 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,
-	                                         @StringRes final int strId,
-	                                         @DrawableRes final int icon,
-	                                         final String category,
-	                                         final MapActivity activity,
-	                                         final String id,
-	                                         final boolean nightMode,
-	                                         @ColorInt final int selectedProfileColor) {
+	                                         @StringRes int strId,
+	                                         @DrawableRes int icon,
+	                                         String category,
+	                                         MapActivity activity,
+	                                         String id,
+	                                         boolean nightMode,
+	                                         @ColorInt int selectedProfileColor) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
-		final List<RenderingRuleProperty> ps = new ArrayList<>();
-		final List<CommonPreference<Boolean>> prefs = new ArrayList<>();
+		List<RenderingRuleProperty> ps = new ArrayList<>();
+		List<CommonPreference<Boolean>> prefs = new ArrayList<>();
 		Iterator<RenderingRuleProperty> it = customRules.iterator();
 
 		while (it.hasNext()) {
@@ -630,7 +630,7 @@ public class ConfigureMapMenu {
 					}
 				}
 				refreshableItem.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
-				refreshableItem.setDescription(ConfigureMapUtils.getDescription(prefs));
+				refreshableItem.setDescription(ConfigureMapUtils.getDescription(settings, prefs));
 			});
 			item.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			OsmandPreference<?>[] prefArray = new OsmandPreference[prefs.size()];
@@ -699,7 +699,7 @@ public class ConfigureMapMenu {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(), p.getName());
 			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null);
 		} else {
-			final CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
+			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
 			String descr;
 			if (!Algorithms.isEmpty(pref.get())) {
 				descr = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());

@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 
 public class TransliterationHelper {
 
-	public final static Log LOG = PlatformUtil.getLog(TransliterationHelper.class);
+	public static final Log LOG = PlatformUtil.getLog(TransliterationHelper.class);
 
 	private static boolean japanese;
 

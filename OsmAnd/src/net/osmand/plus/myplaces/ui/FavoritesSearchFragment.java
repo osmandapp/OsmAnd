@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -92,8 +93,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 	@SuppressLint("PrivateResource, ValidFragment")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final Activity activity = getActivity();
-		final View view = inflater.inflate(R.layout.search_favs_fragment, container, false);
+		Activity activity = getActivity();
+		View view = inflater.inflate(R.layout.search_favs_fragment, container, false);
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -106,7 +107,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 			searchQuery = "";
 		}
 
-		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar = view.findViewById(R.id.toolbar);
 		Drawable icBack = app.getUIUtilities().getThemedIcon(AndroidUtils.getNavigationIconResId(activity));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -119,7 +120,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 				}
 		);
 
-		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_favorites);
 		searchEditText.addTextChangedListener(
 				new TextWatcher() {
@@ -142,8 +143,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 				}
 		);
 
-		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
-		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		progressBar = view.findViewById(R.id.searchProgressBar);
+		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(
 				new View.OnClickListener() {
@@ -157,7 +158,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 				}
 		);
 
-		listView = (ListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 
 		return view;
 	}
@@ -228,10 +229,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 		super.onDismiss(dialog);
 	}
 
-	public void showOnMap(final FavouritePoint point) {
+	public void showOnMap(FavouritePoint point) {
 		getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
 
-		final OsmandSettings settings = getMyApplication().getSettings();
+		OsmandSettings settings = getMyApplication().getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
@@ -292,17 +293,17 @@ public class FavoritesSearchFragment extends DialogFragment {
 		}
 	}
 
-	class FavoritesSearchListAdapter extends ArrayAdapter<FavouritePoint> implements Filterable {
+	class FavoritesSearchListAdapter extends ArrayAdapter<FavouritePoint> {
 
 		private static final int FAVORITE_TYPE = 0;
 		private static final int HEADER_SHADOW_TYPE = 1;
 		private static final int HEADER_TYPE = 2;
 		private static final int FOOTER_SHADOW_TYPE = 3;
 
-		private OsmandApplication app;
-		private Activity activity;
+		private final OsmandApplication app;
+		private final Activity activity;
 		private AccessibilityAssistant accessibilityAssistant;
-		private FavouritesHelper helper;
+		private final FavouritesHelper helper;
 
 		private LatLon location;
 
@@ -310,9 +311,9 @@ public class FavoritesSearchFragment extends DialogFragment {
 		Filter myFilter;
 		private Set<?> filter;
 
-		private int enabledColor;
-		private int disabledColor;
-		private int disabledIconColor;
+		private final int enabledColor;
+		private final int disabledColor;
+		private final int disabledIconColor;
 
 		public FavoritesSearchListAdapter(OsmandApplication app, Activity activity) {
 			super(app, R.layout.search_list_item);
@@ -416,8 +417,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 		@NonNull
 		@Override
-		public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-			final FavouritePoint point = getItem(position);
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+			FavouritePoint point = getItem(position);
 			int type = getItemViewType(position);
 			LinearLayout view;
 			if (type == HEADER_TYPE) {
@@ -461,25 +462,25 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 				if (point != null) {
 					boolean visible = point.isVisible();
-					ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-					TextView title = (TextView) view.findViewById(R.id.title);
-					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
+					ImageView imageView = view.findViewById(R.id.imageView);
+					TextView title = view.findViewById(R.id.title);
+					TextView subtitle = view.findViewById(R.id.subtitle);
 					int color = visible
-							? app.getFavoritesHelper().getColorWithCategory(point, getResources().getColor(R.color.color_favorite))
-							: ContextCompat.getColor(app, disabledIconColor);
+							? app.getFavoritesHelper().getColorWithCategory(point, getColor(R.color.color_favorite))
+							: getColor(disabledIconColor);
 					imageView.setImageDrawable(PointImageDrawable.getFromFavorite(activity, color, false, point));
 					title.setText(point.getDisplayName(app));
 					title.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
-					title.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
+					title.setTextColor(getColor(visible ? enabledColor : disabledColor));
 
 					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 							location.getLatitude(), location.getLongitude()));
 					String distance = OsmAndFormatter.getFormattedDistance(dist, app) + "  ";
-					ImageView direction = (ImageView) view.findViewById(R.id.direction);
+					ImageView direction = view.findViewById(R.id.direction);
 					direction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_direction_arrow, visible ? R.color.color_distance : disabledColor));
-					TextView distanceText = (TextView) view.findViewById(R.id.distance);
+					TextView distanceText = view.findViewById(R.id.distance);
 					distanceText.setText(distance);
-					distanceText.setTextColor(visible ? getResources().getColor(enabledColor) : getResources().getColor(disabledColor));
+					distanceText.setTextColor(visible ? getColor(enabledColor) : getColor(disabledColor));
 					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategoryDisplayName(app));
 				}
 			}
@@ -506,6 +507,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 		void setFilterResults(Set<?> values) {
 			this.filter = values;
+		}
+
+		@ColorInt
+		protected int getColor(@ColorInt int resId) {
+			return ColorUtilities.getColor(getContext(), resId);
 		}
 	}
 

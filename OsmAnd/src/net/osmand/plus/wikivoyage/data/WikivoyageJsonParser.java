@@ -65,9 +65,9 @@ public class WikivoyageJsonParser {
 
 	public static class WikivoyageContentItem {
 
-		private String link;
-		private String name;
-		private ArrayList<WikivoyageContentItem> subItems = new ArrayList<>();
+		private final String link;
+		private final String name;
+		private final ArrayList<WikivoyageContentItem> subItems = new ArrayList<>();
 		private WikivoyageContentItem parent;
 
 		private WikivoyageContentItem(String name, String link) {

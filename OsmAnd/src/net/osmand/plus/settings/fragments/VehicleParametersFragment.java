@@ -31,6 +31,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -93,12 +94,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		String parameterId = parameter.getId();
 		String title = AndroidUtils.getRoutingStringPropertyName(app, parameterId, parameter.getName());
-		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId,
-				parameter.getDescription());
-		String defValue = parameter.getType() == RoutingParameterType.NUMERIC
-				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
-		StringPreference pref = (StringPreference) app.getSettings()
-				.getCustomRoutingProperty(parameterId, defValue);
+		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
+		String defValue = parameter.getDefaultString();
+		StringPreference pref = (StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
 		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, profile);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
@@ -207,6 +205,17 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
+		if (MOTOR_TYPE_PREF_ID.equals(prefId)) {
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				activity.getMapRouteInfoMenu().updateMenu();
+			}
+		}
+	}
+
+	@Override
 	public void onPreferenceChanged(String prefId) {
 		recalculateRoute();
 	}
@@ -215,12 +224,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		app.getRoutingHelper().onSettingsChanged(getSelectedAppMode());
 	}
 
-	private void showSeekbarSettingsDialog(@NonNull Activity activity, final boolean defaultSpeedOnly) {
-		final ApplicationMode mode = getSelectedAppMode();
+	private void showSeekbarSettingsDialog(@NonNull Activity activity, boolean defaultSpeedOnly) {
+		ApplicationMode mode = getSelectedAppMode();
 
 		SpeedConstants units = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
 		String speedUnits = units.toShortString(activity);
-		final float[] ratio = new float[1];
+		float[] ratio = new float[1];
 		switch (units) {
 			case MILES_PER_HOUR:
 				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
@@ -360,12 +369,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				titleId = R.string.default_speed_setting_title;
 				break;
 		}
-		final Slider slider = sliderLayout.findViewById(R.id.speed_slider);
-		final TextView speedTitleTv = sliderLayout.findViewById(R.id.speed_title);
-		final TextView speedMinTv = sliderLayout.findViewById(R.id.speed_seekbar_min_text);
-		final TextView speedMaxTv = sliderLayout.findViewById(R.id.speed_seekbar_max_text);
-		final TextView speedUnitsTv = sliderLayout.findViewById(R.id.speed_units);
-		final TextView selectedSpeedTv = sliderLayout.findViewById(R.id.speed_text);
+		Slider slider = sliderLayout.findViewById(R.id.speed_slider);
+		TextView speedTitleTv = sliderLayout.findViewById(R.id.speed_title);
+		TextView speedMinTv = sliderLayout.findViewById(R.id.speed_seekbar_min_text);
+		TextView speedMaxTv = sliderLayout.findViewById(R.id.speed_seekbar_max_text);
+		TextView speedUnitsTv = sliderLayout.findViewById(R.id.speed_units);
+		TextView selectedSpeedTv = sliderLayout.findViewById(R.id.speed_text);
 
 		speedTitleTv.setText(titleId);
 		speedMinTv.setText(String.valueOf(min));

@@ -82,7 +82,7 @@ public class MercatorProjectionBottomSheet extends MenuBottomSheetDialogFragment
 
 	private void populateValuesList() {
 		for (int i = 0; i < MercatorProjection.values().length; i++) {
-			final MercatorProjection m = MercatorProjection.values()[i];
+			MercatorProjection m = MercatorProjection.values()[i];
 			boolean selected = mercatorProjection == m;
 			View view = valuesContainer.getChildAt(i);
 			((CompoundButton) view.findViewById(R.id.compound_button)).setChecked(selected);

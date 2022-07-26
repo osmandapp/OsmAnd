@@ -47,10 +47,10 @@ public class ConfigureMapDialogs {
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		final OsmandMapTileView view = activity.getMapView();
+		OsmandMapTileView view = activity.getMapView();
 		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		bld.setTitle(R.string.daynight);
-		final String[] items = new String[DayNightMode.values().length];
+		String[] items = new String[DayNightMode.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = DayNightMode.values()[i].toHumanString(app);
 		}
@@ -76,15 +76,15 @@ public class ConfigureMapDialogs {
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		final OsmandMapTileView view = activity.getMapView();
-		final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+		OsmandMapTileView view = activity.getMapView();
+		OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		int p = (int) (mapDensity.get() * 100);
-		final TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
-		final List<String> values = new ArrayList<>();
+		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+		List<String> values = new ArrayList<>();
 		int i = -1;
 		for (int k = 0; k <= tlist.size(); k++) {
-			final boolean end = k == tlist.size();
+			boolean end = k == tlist.size();
 			if (i == -1) {
 				if ((end || p < tlist.get(k))) {
 					values.add(p + " %");
@@ -131,13 +131,13 @@ public class ConfigureMapDialogs {
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 
-		final OsmandMapTileView view = activity.getMapView();
+		OsmandMapTileView view = activity.getMapView();
 		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		// test old descr as title
 		b.setTitle(R.string.text_size);
-		final Float[] txtValues = new Float[] {0.33f, 0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
+		Float[] txtValues = {0.33f, 0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
 		int selected = -1;
-		final String[] txtNames = new String[txtValues.length];
+		String[] txtNames = new String[txtValues.length];
 		for (int i = 0; i < txtNames.length; i++) {
 			txtNames[i] = (int) (txtValues[i] * 100) + " %";
 			if (Math.abs(view.getSettings().TEXT_SCALE.get() - txtValues[i]) < 0.1f) {
@@ -168,7 +168,7 @@ public class ConfigureMapDialogs {
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 
-		final OsmandMapTileView view = activity.getMapView();
+		OsmandMapTileView view = activity.getMapView();
 		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 
 		b.setTitle(activity.getString(R.string.map_locale));
@@ -187,9 +187,9 @@ public class ConfigureMapDialogs {
 		selectedLanguageIndex[0] = selected;
 		transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.get();
 
-		final OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
+		OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
 
-		final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
+		ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
 				new ContextThemeWrapper(activity, themeRes), R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
 			@NonNull
 			@Override

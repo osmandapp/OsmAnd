@@ -59,8 +59,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		if (app == null || plugin == null) return;
 
 		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
-		final boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+		boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
+		View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_poi_fragment, null);
 		sendOsmPoiView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 		closeChangeSet = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
@@ -68,13 +68,13 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		String defaultChangeSet = createDefaultChangeSet(app);
 		messageEditText.setText(defaultChangeSet);
 		messageEditText.setSelection(messageEditText.getText().length());
-		final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
+		TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
 
 		String userNameOAuth = plugin.OSM_USER_DISPLAY_NAME.get();
 		String userNameOpenID = plugin.OSM_USER_NAME_OR_EMAIL.get();
 		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
-		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		closeChangeSet.setChecked(true);
 		setCloseChangeSet(isNightMode, paddingSmall);
 		closeChangeSet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -91,7 +91,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			}
 			dismiss();
 		});
-		final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(sendOsmPoiView)
 				.create();
 		items.add(titleItem);

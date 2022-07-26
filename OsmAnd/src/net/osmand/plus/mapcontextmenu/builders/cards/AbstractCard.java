@@ -29,8 +29,8 @@ import net.osmand.plus.widgets.WebViewEx;
 
 public abstract class AbstractCard {
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
 	protected View view;
 
 	public abstract int getCardLayoutId();
@@ -71,14 +71,14 @@ public abstract class AbstractCard {
 			return;
 		}
 
-		final Dialog dialog = new Dialog(ctx,
+		Dialog dialog = new Dialog(ctx,
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme :
 						R.style.OsmandDarkTheme);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
 
-		final Toolbar topBar = new Toolbar(ctx);
+		Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
 		Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark);
 		topBar.setNavigationIcon(back);
@@ -88,12 +88,12 @@ public abstract class AbstractCard {
 		topBar.setTitleTextColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 		topBar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(final View v) {
+			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
 
-		final WebView wv = new WebViewEx(ctx);
+		WebView wv = new WebViewEx(ctx);
 		wv.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {

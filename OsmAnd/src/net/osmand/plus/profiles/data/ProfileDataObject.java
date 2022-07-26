@@ -6,16 +6,16 @@ import androidx.annotation.NonNull;
 
 public class ProfileDataObject implements Comparable<ProfileDataObject> {
 
-	private String name;
-	private String description;
-	private int iconRes;
-	private String stringKey;
+	private final String name;
+	private final String description;
+	private final int iconRes;
+	private final String stringKey;
 	private boolean isSelected;
 	private boolean isEnabled;
 	@ColorInt
-	private Integer iconColorLight;
+	private final Integer iconColorLight;
 	@ColorInt
-	private Integer iconColorDark;
+	private final Integer iconColorDark;
 
 	public ProfileDataObject(String name, String description, String stringKey, int iconRes, boolean isSelected,
 							 @ColorInt Integer iconColorLight, @ColorInt Integer iconColorDark) {

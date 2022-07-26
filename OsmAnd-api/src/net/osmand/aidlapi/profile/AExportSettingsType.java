@@ -7,5 +7,5 @@ public enum AExportSettingsType {
 	MAP_SOURCES,
 	CUSTOM_RENDER_STYLE,
 	CUSTOM_ROUTING,
-	AVOID_ROADS;
+	AVOID_ROADS
 }

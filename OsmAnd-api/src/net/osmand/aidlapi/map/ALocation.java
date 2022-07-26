@@ -8,19 +8,19 @@ import net.osmand.aidlapi.AidlParams;
 
 public class ALocation extends AidlParams {
 
-    private double latitude = 0.0;
-    private double longitude = 0.0;
-    private long time = 0;
-    private boolean hasAltitude = false;
-    private double altitude = 0.0f;
-    private boolean hasSpeed = false;
-    private float speed = 0.0f;
-    private boolean hasBearing = false;
-    private float bearing = 0.0f;
-    private boolean hasAccuracy = false;
-    private float accuracy = 0.0f;
-    private boolean hasVerticalAccuracy = false;
-    private float verticalAccuracy = 0.0f;
+    private double latitude;
+    private double longitude;
+    private long time;
+    private boolean hasAltitude;
+    private double altitude;
+    private boolean hasSpeed;
+    private float speed;
+    private boolean hasBearing;
+    private float bearing;
+    private boolean hasAccuracy;
+    private float accuracy;
+    private boolean hasVerticalAccuracy;
+    private float verticalAccuracy;
 
     private ALocation() {
     }

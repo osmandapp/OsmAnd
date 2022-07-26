@@ -245,7 +245,7 @@
     <string name="poi_public_transport_station">محطة النقل العام</string>
     <string name="poi_bus_station">محطة حافلات</string>
     <string name="poi_railway_platform">منصة محطة السكك الحديدية الشبه حضرية؛محطة السكك الحديدية الحضرية؛منصة القطار</string>
-    <string name="poi_halt">محطة توقف السكك الحديدية الشبه حضرية؛محطة السكك توقف القطار</string>
+    <string name="poi_halt">موقف محطة السكك الحديدية؛ موقف القطار؛ محطة السكك الحديدية؛ محطة السكك الحديدية؛ محطة القطار؛ محطة</string>
     <string name="poi_subway_entrance">مدخل مترو الإنفاق</string>
     <string name="poi_subway_station">نعم;محطة مترو الانفاق</string>
     <string name="poi_taxi">موقف سيارات الأجرة</string>
@@ -4340,4 +4340,6 @@
     <string name="poi_club_aviation">نادي الطيران</string>
     <string name="poi_club_doityourself">نادي DIY</string>
     <string name="poi_club_bicycle">نادي الدراجات الهوائية</string>
+    <string name="poi_board_title">عنوان اللافتة</string>
+    <string name="poi_first_aid_kit">حقيبة الإسعافات الأولية</string>
 </resources>

@@ -2,7 +2,6 @@ package net.osmand.plus.track.helpers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -46,7 +44,7 @@ import java.util.StringTokenizer;
 
 public class GpxSelectionHelper {
 
-	private final static Log log = PlatformUtil.getLog(GpxSelectionHelper.class);
+	private static final Log log = PlatformUtil.getLog(GpxSelectionHelper.class);
 
 	public static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
@@ -85,7 +83,7 @@ public class GpxSelectionHelper {
 				File file = new File(gpxEntry.getKey().path);
 				if (file.exists() && !file.isDirectory()) {
 					if (file.lastModified() > gpxEntry.getValue()) {
-						new GpxFileLoaderTask(file, result -> {
+						new GpxFileLoaderTask(file, null, result -> {
 							if (result != null) {
 								GpxSelectionParams params = GpxSelectionParams.newInstance()
 										.showOnMap().syncGroup().selectedByUser()
@@ -167,9 +165,9 @@ public class GpxSelectionHelper {
 	}
 
 	@Nullable
-	public SelectedGpxFile getSelectedFileByName(String path) {
+	public SelectedGpxFile getSelectedFileByName(String fileName) {
 		for (SelectedGpxFile s : selectedGPXFiles) {
-			if (s.getGpxFile().path.endsWith("/" + path)) {
+			if (s.getGpxFile().path.endsWith("/" + fileName)) {
 				return s;
 			}
 		}
@@ -447,20 +445,10 @@ public class GpxSelectionHelper {
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile.getGpxFileToDisplay());
 		} else {
-			String dialogTitle = app.getString(R.string.loading_smth, "");
-			String dialogMessage = app.getString(R.string.loading_data);
-			ProgressDialog progressDialog = showProgress && AndroidUtils.isActivityNotDestroyed(activity)
-					? ProgressDialog.show(activity, dialogTitle, dialogMessage)
-					: null;
-
-			GpxFileLoaderTask loadGpxTask = new GpxFileLoaderTask(file, gpxFile -> {
-				if (progressDialog != null) {
-					progressDialog.dismiss();
-				}
+			GpxFileLoaderTask.loadGpxFile(file, showProgress ? activity : null, gpxFile -> {
 				callback.processResult(gpxFile);
 				return true;
 			});
-			loadGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

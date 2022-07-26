@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
@@ -30,9 +31,9 @@ import java.util.Date;
 
 public class SelectedGpxMenuBuilder extends MenuBuilder {
 
-	private SelectedGpxPoint selectedGpxPoint;
-	private GPXTrackAnalysis analysis;
-	private WptPt selectedPoint;
+	private final SelectedGpxPoint selectedGpxPoint;
+	private final GPXTrackAnalysis analysis;
+	private final WptPt selectedPoint;
 
 	public SelectedGpxMenuBuilder(@NonNull MapActivity mapActivity, @NonNull SelectedGpxPoint selectedGpxPoint) {
 		super(mapActivity);

@@ -90,7 +90,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private String promoCode;
 	private boolean signIn;
 
-	private long lastTimeCodeSent = 0;
+	private long lastTimeCodeSent;
 	private boolean nightMode;
 
 	@Override
@@ -453,7 +453,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
-				private int previousKeyboardHeight = 0;
+				private int previousKeyboardHeight;
 
 				@Override
 				public void onGlobalLayout() {
@@ -520,7 +520,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		private AppBarLayout appBar;
 
 		public FixScrollingFooterBehaviour() {
-			super();
 		}
 
 		public FixScrollingFooterBehaviour(Context context, AttributeSet attrs) {

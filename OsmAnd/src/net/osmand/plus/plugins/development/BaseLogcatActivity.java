@@ -32,18 +32,6 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity imple
 
 	protected abstract void onLogEntryAdded();
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		startLogcatAsyncTask();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		stopLogcatAsyncTask();
-	}
-
 	protected void startSaveLogsAsyncTask() {
 		SaveLogsAsyncTask saveLogsAsyncTask = new SaveLogsAsyncTask(this, logs);
 		saveLogsAsyncTask.execute();

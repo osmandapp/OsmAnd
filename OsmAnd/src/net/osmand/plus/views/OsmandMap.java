@@ -25,6 +25,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMap implements NavigationSessionListener {
 
@@ -36,7 +37,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private List<OsmandMapListener> listeners = new ArrayList<>();
+	private final List<OsmandMapListener> listeners = new CopyOnWriteArrayList<>();
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);
@@ -48,16 +49,12 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public void addListener(@NonNull OsmandMapListener listener) {
 		if (!listeners.contains(listener)) {
-			List<OsmandMapListener> listeners = new ArrayList<>(this.listeners);
 			listeners.add(listener);
-			this.listeners = listeners;
 		}
 	}
 
 	public void removeListener(@NonNull OsmandMapListener listener) {
-		List<OsmandMapListener> listeners = new ArrayList<>(this.listeners);
 		listeners.remove(listener);
-		this.listeners = listeners;
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {
@@ -122,7 +119,7 @@ public class OsmandMap implements NavigationSessionListener {
 		mapView.refreshMap();
 	}
 
-	public void refreshMap(final boolean updateVectorRendering) {
+	public void refreshMap(boolean updateVectorRendering) {
 		mapView.refreshMap(updateVectorRendering);
 	}
 
@@ -142,8 +139,8 @@ public class OsmandMap implements NavigationSessionListener {
 		// int newZoom = (int) Math.round(curZoom);
 		// double zoomFrac = curZoom - newZoom;
 
-		final int newZoom = mapView.getZoom() + stp;
-		final double zoomFrac = mapView.getZoomFractionalPart();
+		int newZoom = mapView.getZoom() + stp;
+		double zoomFrac = mapView.getZoomFractionalPart();
 		if (newZoom > mapView.getMaxZoom()) {
 			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
 			return;
@@ -199,6 +196,10 @@ public class OsmandMap implements NavigationSessionListener {
 	public float getTextScale() {
 		float scale = app.getSettings().TEXT_SCALE.get();
 		return scale * getCarDensityScaleCoef();
+	}
+
+	public float getOriginalTextScale() {
+		return app.getSettings().TEXT_SCALE.get();
 	}
 
 	public float getMapDensity() {

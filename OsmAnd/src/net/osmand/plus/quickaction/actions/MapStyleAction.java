@@ -34,7 +34,7 @@ import java.util.Map;
 public class MapStyleAction extends SwitchableAction<String> {
 
 
-	private final static String KEY_STYLES = "styles";
+	private static final String KEY_STYLES = "styles";
 	public static final QuickActionType TYPE = new QuickActionType(14,
 			"mapstyle.change", MapStyleAction.class).
 			nameRes(R.string.quick_action_map_style).iconRes(R.drawable.ic_map).
@@ -155,11 +155,11 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected View.OnClickListener getOnAddBtnClickListener(final MapActivity activity, final Adapter adapter) {
+	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final OsmandApplication app = activity.getMyApplication();
+				OsmandApplication app = activity.getMyApplication();
 				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 
@@ -181,13 +181,13 @@ public class MapStyleAction extends SwitchableAction<String> {
 				}
 
 				List<String> visibleNamesList = new ArrayList<>();
-				final List<String> items = new ArrayList<>(renderers.keySet());
+				List<String> items = new ArrayList<>(renderers.keySet());
 				for (String item : items) {
 					String name = RendererRegistry.getRendererName(activity, item);
 					visibleNamesList.add(name);
 				}
 
-				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
+				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
 
 				arrayAdapter.addAll(visibleNamesList);
 				bld.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {

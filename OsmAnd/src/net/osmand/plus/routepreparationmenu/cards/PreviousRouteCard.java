@@ -27,7 +27,7 @@ public class PreviousRouteCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		TextView startTitle = view.findViewById(R.id.start_title);
 		TextView destinationTitle = view.findViewById(R.id.destination_title);
 

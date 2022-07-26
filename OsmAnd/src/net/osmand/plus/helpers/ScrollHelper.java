@@ -15,12 +15,12 @@ import java.util.Map;
 
 public class ScrollHelper {
 
-	private final static int LONG_PRESS_TIME_MS = 250;
-	private final static int MAX_KEY_UP_TIME_MS = 10;
-	private final static int REFRESHING_DELAY_MS = 3;
-	private final static int INVALID_VALUE = -1;
+	private static final int LONG_PRESS_TIME_MS = 250;
+	private static final int MAX_KEY_UP_TIME_MS = 10;
+	private static final int REFRESHING_DELAY_MS = 3;
+	private static final int INVALID_VALUE = -1;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private OnScrollEventListener onScrollEventListener;
 	
 	private final Direction UP = new Direction(KeyEvent.KEYCODE_DPAD_UP);
@@ -29,10 +29,10 @@ public class ScrollHelper {
 	private final Direction RIGHT = new Direction(KeyEvent.KEYCODE_DPAD_RIGHT);
 
 	private final Map<Integer, Direction> availableDirections;
-	private boolean isInContinuousScrolling = false;
+	private boolean isInContinuousScrolling;
 	private long startContinuousScrollingTime = INVALID_VALUE;
 
-	private Runnable scrollingRunnable = new Runnable() {
+	private final Runnable scrollingRunnable = new Runnable() {
 		@Override
 		public void run() {
 			isInContinuousScrolling = true;

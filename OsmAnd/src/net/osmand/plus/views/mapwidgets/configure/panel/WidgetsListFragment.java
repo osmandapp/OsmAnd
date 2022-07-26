@@ -264,7 +264,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			TextView title = view.findViewById(R.id.title);
 			title.setText(widgetInfo.getTitle(app));
 
-			WidgetType widgetType = WidgetType.getById(widgetInfo.key);
+			WidgetType widgetType = widgetInfo.getWidgetType();
 			WidgetGroup widgetGroup = widgetType == null ? null : widgetType.group;
 			if (widgetGroup != null) {
 				TextView description = view.findViewById(R.id.description);
@@ -443,7 +443,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private List<WidgetType> listDefaultWidgets(@NonNull Set<MapWidgetInfo> widgets) {
 		Map<Integer, WidgetType> defaultWidgets = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : widgets) {
-			WidgetType widgetType = WidgetType.getById(widgetInfo.key);
+			WidgetType widgetType = widgetInfo.getWidgetType();
 			if (widgetType != null) {
 				defaultWidgets.put(widgetType.ordinal(), widgetType);
 			}
@@ -455,8 +455,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private List<MapWidgetInfo> listExternalWidgets(@NonNull Set<MapWidgetInfo> widgets) {
 		List<MapWidgetInfo> externalWidgets = new ArrayList<>();
 		for (MapWidgetInfo widgetInfo : widgets) {
-			WidgetType widgetType = WidgetType.getById(widgetInfo.key);
-			if (widgetType == null) {
+			if (widgetInfo.isExternal()) {
 				externalWidgets.add(widgetInfo);
 			}
 		}

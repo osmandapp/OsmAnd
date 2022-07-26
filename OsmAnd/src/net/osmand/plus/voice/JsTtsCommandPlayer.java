@@ -33,7 +33,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 
 	private static final Log log = PlatformUtil.getLog(JsTtsCommandPlayer.class);
 
-	private final static String PEBBLE_ALERT = "PEBBLE_ALERT";
+	private static final String PEBBLE_ALERT = "PEBBLE_ALERT";
 
 	private static TextToSpeech mTts;
 
@@ -48,7 +48,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	 */
 	private static int ttsRequests;
 	private float cSpeechRate = 1;
-	private boolean speechAllowed = false;
+	private boolean speechAllowed;
 
 	// Only for debugging
 	private static String ttsVoiceStatus = "-";
@@ -164,7 +164,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	@NonNull
 	@Override
 	public synchronized List<String> playCommands(@NonNull CommandBuilder builder) {
-		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
+		List<String> execute = builder.execute(); //list of strings, the speech text, play it
 		StringBuilder bld = new StringBuilder();
 		for (String s : execute) {
 			bld.append(s).append(' ');
@@ -205,12 +205,12 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	}
 
 	private void sendAlertToPebble(@NonNull String bld) {
-		final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
-		final Map<String, Object> data = new HashMap<>();
+		Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
+		Map<String, Object> data = new HashMap<>();
 		data.put("title", "Voice");
 		data.put("body", bld);
-		final JSONObject jsonData = new JSONObject(data);
-		final String notificationData = new JSONArray().put(jsonData).toString();
+		JSONObject jsonData = new JSONObject(data);
+		String notificationData = new JSONArray().put(jsonData).toString();
 		i.putExtra("messageType", PEBBLE_ALERT);
 		i.putExtra("sender", "OsmAnd");
 		i.putExtra("notificationData", notificationData);

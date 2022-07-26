@@ -113,7 +113,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		}
 	}
 
-	private void createToolbar(View mainView, final boolean nightMode) {
+	private void createToolbar(View mainView, boolean nightMode) {
 		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
 		View toolbar = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.profile_preference_toolbar_with_icon, appbar, false);
 

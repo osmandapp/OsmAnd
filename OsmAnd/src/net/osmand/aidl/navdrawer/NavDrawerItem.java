@@ -8,10 +8,10 @@ import androidx.annotation.Nullable;
 
 public class NavDrawerItem implements Parcelable {
 
-	private String name;
-	private String uri;
-	private String iconName;
-	private int flags;
+	private final String name;
+	private final String uri;
+	private final String iconName;
+	private final int flags;
 
 	public NavDrawerItem(@NonNull String name, @NonNull String uri, @Nullable String iconName) {
 		this(name, uri, iconName, -1);

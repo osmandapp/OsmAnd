@@ -20,10 +20,10 @@ import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
-	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, 
-			final PointDescription name) {
-		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
-		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
+	public static void directionsToDialogAndLaunchMap(Activity act, double lat, double lon,
+	                                                  PointDescription name) {
+		OsmandApplication ctx = (OsmandApplication) act.getApplication();
+		TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(act);
 			builder.setTitle(R.string.new_directions_point_dialog);
@@ -49,8 +49,8 @@ public class DirectionsDialogs {
 		}
 	}
 
-	public static void addWaypointDialogAndLaunchMap(final AppCompatActivity act, final double lat, final double lon, final PointDescription name) {
-		final TargetPointsHelper targetPointsHelper = ((OsmandApplication) act.getApplication()).getTargetPointsHelper();
+	public static void addWaypointDialogAndLaunchMap(AppCompatActivity act, double lat, double lon, PointDescription name) {
+		TargetPointsHelper targetPointsHelper = ((OsmandApplication) act.getApplication()).getTargetPointsHelper();
 		if (targetPointsHelper.getPointToNavigate() != null) {
 			Bundle args = new Bundle();
 			args.putDouble(AddWaypointBottomSheetDialogFragment.LAT_KEY, lat);

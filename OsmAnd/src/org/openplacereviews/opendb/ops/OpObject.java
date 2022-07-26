@@ -91,11 +91,11 @@ public class OpObject {
 	@SuppressWarnings("unchecked")
 	private Object copyingObjects(Object object, boolean copyCacheFields) {
 		if (object instanceof Number) {
-			return (Number) object;
+			return object;
 		} else if (object instanceof String) {
-			return (String) object;
+			return object;
 		} else if (object instanceof Boolean) {
-			return (Boolean) object;
+			return object;
 		} else if (object instanceof List) {
 			List<Object> copy = new ArrayList<>();
 			List<Object> list = (List<Object>) object;
@@ -495,17 +495,14 @@ public class OpObject {
 			return false;
 		OpObject other = (OpObject) obj;
 		if (fields == null) {
-			if (other.fields != null)
-				return false;
-		} else if (!fields.equals(other.fields))
-			return false;
-		return true;
+			return other.fields == null;
+		} else return fields.equals(other.fields);
 	}
 
 	public static class OpObjectAdapter implements JsonDeserializer<OpObject>,
 			JsonSerializer<OpObject> {
 		
-		private boolean fullOutput;
+		private final boolean fullOutput;
 
 		public OpObjectAdapter(boolean fullOutput) {
 			this.fullOutput = fullOutput;

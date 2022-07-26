@@ -4,7 +4,7 @@ import android.content.Context;
 
 public class DividerSpaceItem extends DividerItem {
 
-	private int verticalSpacePx;
+	private final int verticalSpacePx;
 
 	public DividerSpaceItem(Context context, int verticalSpacePx) {
 		super(context);

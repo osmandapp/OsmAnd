@@ -21,8 +21,8 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	private MapActivity mapActivity;
 	private boolean swipeEnabled = true;
 
-	private Paint backgroundPaint = new Paint();
-	private Paint textPaint = new Paint();
+	private final Paint backgroundPaint = new Paint();
+	private final Paint textPaint = new Paint();
 
 	private float marginSides;
 	private boolean iconHidden;

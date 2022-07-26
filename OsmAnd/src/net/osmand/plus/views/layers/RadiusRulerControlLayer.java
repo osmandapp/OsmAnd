@@ -92,14 +92,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private final int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
 
-	private float cachedHeading = 0;
+	private float cachedHeading;
 
 	public RadiusRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
 
 	@Override
-	public void initLayer(@NonNull final OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
 		app = getApplication();
@@ -170,7 +170,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
-			final QuadPoint center = getCenterPoint(tb);
+			QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
 			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
@@ -370,7 +370,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				continue;
 			}
 
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 			points.add(new QuadPoint(screenPoint.x, screenPoint.y));
 		}
 		if (points.size() > 0) {
@@ -462,7 +462,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 								   QuadPoint center, RenderingLineAttributes attrs) {
 		float radiusLength = radius * circleNumber;
 		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
-		QuadPoint centerPixels = getCenterPoint(tb);
+		QuadPoint centerPixels = tb.getCenterPixelPoint();
 
 		drawCircle(canvas, tb, circleNumber, center, attrs);
 		drawCompassCents(centerPixels, innerRadiusLength, radiusLength, tb, canvas, attrs);
@@ -537,7 +537,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
-			PointF screenPoint = latLonToScreenPoint(latLon, tb);
+			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 			if (arrowArc.isEmpty()) {
 				arrowArc.moveTo(screenPoint.x, screenPoint.y);
 			} else {
@@ -590,43 +590,13 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		canvas.drawPath(redCompassLines, redLinesPaint);
 	}
 
-	private QuadPoint getCenterPoint(RotatedTileBox tb) {
+	private LatLon getCenterLatLon(@NonNull RotatedTileBox tb) {
 		if (hasMapRenderer()) {
-			PointF centerPixels;
-			if (tb.isCenterShifted()) {
-				PointI windowSize = getMapRenderer().getState().getWindowSize();
-				int sx = windowSize.getX() / 2;
-				int sy = windowSize.getY() / 2;
-				PointI center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
-				if (center31 != null) {
-					centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
-					return new QuadPoint(centerPixels.x, centerPixels.y);
-				}
+			PointI center31 = NativeUtilities.normalizeTarget31(getMapRenderer(), tb);
+			if (center31 == null) {
+				center31 = getMapRenderer().getState().getTarget31();
 			}
-
-			PointI center31 = getMapRenderer().getState().getTarget31();
-			centerPixels = NativeUtilities.getPixelFrom31(getMapRenderer(), tb, center31);
-			return new QuadPoint(centerPixels.x, centerPixels.y);
-		} else {
-			return tb.getCenterPixelPoint();
-		}
-	}
-
-	private LatLon getCenterLatLon(RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			PointI center31;
-			if (tb.isCenterShifted()) {
-				PointI windowSize = getMapRenderer().getState().getWindowSize();
-				int sx = windowSize.getX() / 2;
-				int sy = windowSize.getY() / 2;
-				center31 = NativeUtilities.get31FromPixel(getMapRenderer(), tb, sx, sy, true);
-				if (center31 != null) {
-					return point31ToLatLon(center31);
-				}
-			}
-
-			center31 = getMapRenderer().getState().getTarget31();
-			return point31ToLatLon(center31);
+			return center31 != null ? point31ToLatLon(center31) : tb.getCenterLatLon();
 		} else {
 			return tb.getCenterLatLon();
 		}
@@ -634,7 +604,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private PointF screenPointFromPoint(double x, double y, boolean compensateMapRotation, RotatedTileBox tb) {
 		if (hasMapRenderer()) {
-			QuadPoint circleCenterPoint = getCenterPoint(tb);
+			QuadPoint circleCenterPoint = tb.getCenterPixelPoint();
 			double dX = circleCenterPoint.x - x;
 			double dY = circleCenterPoint.y - y;
 			double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
@@ -652,16 +622,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 	}
 
-	private PointF latLonToScreenPoint(LatLon latLon, RotatedTileBox tb) {
-		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
-	}
-
 	private LatLon point31ToLatLon(PointI point31) {
 		double lon = MapUtils.get31LongitudeX(point31.getX());
 		double lat = MapUtils.get31LatitudeY(point31.getY());
 		return new LatLon(lat, lon);
 	}
-
 
 	private float getCompassLineHeight(int index) {
 		if (index % 6 == 0) {

@@ -24,7 +24,7 @@ import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = WikivoyageOptionsBottomSheetDialogFragment.class.getSimpleName();
+	public static final String TAG = WikivoyageOptionsBottomSheetDialogFragment.class.getSimpleName();
 
 	public static final int DOWNLOAD_IMAGES_CHANGED = 1;
 	public static final int CACHE_CLEARED = 2;
@@ -32,13 +32,13 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return;
 		}
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
-		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
+		CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(showImagesPref.get().name))
 				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
@@ -48,8 +48,8 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
-						for (final WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
+						PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
+						for (WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
 							MenuItem item = popup.getMenu().add(getString(showImages.name));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override

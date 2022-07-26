@@ -88,8 +88,8 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, OsmBugsUtil osmBugsUtil, OsmBugsUtil local,
-									String text, int titleTextId, int posButtonTextId, final OsmPoint.Action action,
-									final OsmBugsLayer.OpenStreetNote bug, final OsmNotesPoint point,
+									String text, int titleTextId, int posButtonTextId, OsmPoint.Action action,
+									OsmBugsLayer.OpenStreetNote bug, OsmNotesPoint point,
 									HandleOsmNoteAsyncTask.HandleBugListener handleBugListener) {
 		try {
 			if (!fm.isStateSaved()) {

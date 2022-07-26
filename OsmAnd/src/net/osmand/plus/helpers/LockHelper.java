@@ -33,10 +33,10 @@ public class LockHelper implements SensorEventListener {
 	private static final int SENSOR_SENSITIVITY = 4;
 
 	@Nullable
-	private WakeLock wakeLock = null;
+	private WakeLock wakeLock;
 
-	private Handler uiHandler;
-	private OsmandApplication app;
+	private final Handler uiHandler;
+	private final OsmandApplication app;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
 	private CommonPreference<Boolean> useSystemScreenTimeout;
@@ -45,8 +45,8 @@ public class LockHelper implements SensorEventListener {
 
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
-	private Runnable lockRunnable;
-	private VoiceMessageListener voiceMessageListener;
+	private final Runnable lockRunnable;
+	private final VoiceMessageListener voiceMessageListener;
 
 	public interface LockUIAdapter {
 
@@ -55,7 +55,7 @@ public class LockHelper implements SensorEventListener {
 		void unlock();
 	}
 
-	public LockHelper(final OsmandApplication app) {
+	public LockHelper(OsmandApplication app) {
 		this.app = app;
 		uiHandler = new Handler();
 		OsmandSettings settings = app.getSettings();
@@ -128,7 +128,7 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void timedUnlock(final long millis) {
+	private void timedUnlock(long millis) {
 		uiHandler.removeCallbacks(lockRunnable);
 		if (wakeLock == null) {
 			uiHandler.post(new Runnable() {

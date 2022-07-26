@@ -21,7 +21,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class BackupTypesFragment extends BaseBackupTypesFragment implements OnItemSelectedListener, OnClearTypesListener {
+public class BackupTypesFragment extends BaseBackupTypesFragment {
 
 	public static final String TAG = BackupTypesFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(BackupTypesFragment.class);

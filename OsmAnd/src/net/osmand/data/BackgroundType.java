@@ -46,7 +46,7 @@ public enum BackgroundType {
 	}
 
 	public static BackgroundType getByTypeName(String typeName, BackgroundType defaultValue) {
-		for (BackgroundType type : BackgroundType.values()) {
+		for (BackgroundType type : values()) {
 			if (type.typeName.equals(typeName)) {
 				return type;
 			}

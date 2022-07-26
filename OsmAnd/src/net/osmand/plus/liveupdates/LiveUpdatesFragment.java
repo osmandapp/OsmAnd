@@ -94,7 +94,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
-	private final static Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -116,7 +116,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		}
 	}
 
-	public static void showUpdateDialog(Activity context, FragmentManager fragmentManager, final LiveUpdateListener listener) {
+	public static void showUpdateDialog(Activity context, FragmentManager fragmentManager, LiveUpdateListener listener) {
 		List<LocalIndexInfo> mapsToUpdate = listener.getMapsToUpdate();
 		if (!Algorithms.isEmpty(mapsToUpdate)) {
 			int countEnabled = listener.getMapsToUpdate().size();
@@ -179,7 +179,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			}
 		});
 
-		final SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
+		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
 		int swipeColor = ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
 		swipeRefresh.setColorSchemeColors(swipeColor);
 		swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -304,7 +304,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		updateToolbarSwitch(settings.IS_LIVE_UPDATES_ON.get());
 	}
 
-	private void updateToolbarSwitch(final boolean isChecked) {
+	private void updateToolbarSwitch(boolean isChecked) {
 		int switchColor = ContextCompat.getColor(app,
 				isChecked ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode));
 		AndroidUtils.setBackground(toolbarSwitchContainer, new ColorDrawable(switchColor));
@@ -358,9 +358,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				String fileName = li.getFileName();
 				PendingIntent alarmIntent = getPendingIntent(app, fileName);
 				if (enable) {
-					final CommonPreference<Integer> updateFrequencyPreference =
+					CommonPreference<Integer> updateFrequencyPreference =
 							preferenceUpdateFrequency(fileName, settings);
-					final CommonPreference<Integer> timeOfDayPreference =
+					CommonPreference<Integer> timeOfDayPreference =
 							preferenceTimeOfDayToUpdate(fileName, settings);
 					UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
 					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
@@ -446,7 +446,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		}
 
 		@Override
-		public View getChildView(final int groupPosition, final int childPosition,
+		public View getChildView(int groupPosition, int childPosition,
 		                         boolean isLastChild, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			convertView = inflater.inflate(R.layout.list_item_triple_row_icon_and_menu, parent, false);
@@ -528,7 +528,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			compoundButton = view.findViewById(R.id.compound_button);
 		}
 
-		public void bindLocalIndexInfo(@NonNull final String item) {
+		public void bindLocalIndexInfo(@NonNull String item) {
 			boolean liveUpdateOn = settings.IS_LIVE_UPDATES_ON.get();
 			CommonPreference<Boolean> localUpdateOn = preferenceForLocalIndex(item, settings);
 //			IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
@@ -544,7 +544,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			AndroidUiHelper.updateVisibility(subTitle, localUpdateOn.get());
 			if (localUpdateOn.get()) {
 				int frequencyId = preferenceUpdateFrequency(item, settings).get();
-				final UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
+				UpdateFrequency frequency = UpdateFrequency.values()[frequencyId];
 				String subTitleText = getString(frequency.titleId);
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
@@ -648,13 +648,13 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	}
 
 	@Override
-	public boolean onUpdateLocalIndex(String fileName, boolean newValue, final Runnable callback) {
+	public boolean onUpdateLocalIndex(String fileName, boolean newValue, Runnable callback) {
 		int frequencyId = preferenceUpdateFrequency(fileName, settings).get();
 		int timeOfDateToUpdateId = preferenceTimeOfDayToUpdate(fileName, settings).get();
-		final AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-		final PendingIntent alarmIntent = getPendingIntent(app, fileName);
+		AlarmManager alarmManager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
+		PendingIntent alarmIntent = getPendingIntent(app, fileName);
 
-		final CommonPreference<Boolean> liveUpdatePreference = preferenceForLocalIndex(fileName, settings);
+		CommonPreference<Boolean> liveUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		liveUpdatePreference.set(newValue);
 		if (settings.IS_LIVE_UPDATES_ON.get() && liveUpdatePreference.get()) {
 			runLiveUpdate(getActivity(), fileName, true, callback);
@@ -669,7 +669,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	}
 
 	@Override
-	public void forceUpdateLocal(String fileName, boolean userRequested, final Runnable callback) {
+	public void forceUpdateLocal(String fileName, boolean userRequested, Runnable callback) {
 		if (settings.IS_LIVE_UPDATES_ON.get()) {
 			runLiveUpdate(getActivity(), fileName, userRequested, callback);
 		}

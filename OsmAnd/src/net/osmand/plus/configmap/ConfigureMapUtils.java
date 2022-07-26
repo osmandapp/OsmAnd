@@ -5,6 +5,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
@@ -21,9 +22,13 @@ import java.util.TreeMap;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
+import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
+import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
+import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
+
 public class ConfigureMapUtils {
 
-	public static final String[] MAP_LANGUAGES_IDS = new String[] {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
+	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	@NonNull
 	public static Map<String, String> getSorterMapLanguages(@NonNull OsmandApplication app) {
@@ -97,10 +102,21 @@ public class ConfigureMapUtils {
 		return possibleValuesString;
 	}
 
-	protected static String getDescription(List<CommonPreference<Boolean>> prefs) {
+	protected static String getDescription(@NonNull OsmandSettings settings,
+	                                       @NonNull List<CommonPreference<Boolean>> prefs) {
 		int count = 0;
 		int enabled = 0;
+
+		CommonPreference<Boolean> streetLightingPref = settings.getCustomRenderBooleanProperty(STREET_LIGHTING);
+		boolean hasStreetLightingSwitch = prefs.contains(streetLightingPref);
+		String streetLightingNightModePrefId = RENDERER_PREFERENCE_PREFIX + STREET_LIGHTING_NIGHT;
+
 		for (CommonPreference<Boolean> p : prefs) {
+			boolean skipPref = p.getId().equals(streetLightingNightModePrefId) && hasStreetLightingSwitch;
+			if (skipPref) {
+				continue;
+			}
+
 			count++;
 			if (p.get()) {
 				enabled++;

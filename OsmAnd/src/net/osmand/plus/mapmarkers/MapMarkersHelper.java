@@ -42,6 +42,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -69,17 +70,17 @@ public class MapMarkersHelper {
 
 	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-	private List<MapMarker> mapMarkers = new ArrayList<>();
-	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
-	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
+	private List<MapMarker> mapMarkers = new CopyOnWriteArrayList<>();
+	private final List<MapMarker> mapMarkersHistory = new CopyOnWriteArrayList<>();
+	private List<MapMarkersGroup> mapMarkersGroups = new CopyOnWriteArrayList<>();
 
 	private final List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private final Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
 
 	private final MarkersPlanRouteContext planRouteContext;
 
-	private long favoriteMarkersModifiedTime = 0;
-	private long trackMarkersModifiedTime = 0;
+	private long favoriteMarkersModifiedTime;
+	private long trackMarkersModifiedTime;
 
 	public List<MapMarker> getMapMarkers() {
 		return mapMarkers;
@@ -140,8 +141,8 @@ public class MapMarkersHelper {
 
 	public void syncAllGroups() {
 		Pair<Map<String, MapMarkersGroup>, Map<String, MapMarker>> pair = dataHelper.loadGroupsAndOrder();
-		mapMarkers = new ArrayList<>(pair.second.values());
-		mapMarkersGroups = new ArrayList<>(pair.first.values());
+		mapMarkers = new CopyOnWriteArrayList<>(pair.second.values());
+		mapMarkersGroups = new CopyOnWriteArrayList<>(pair.first.values());
 
 		boolean hasFavoriteGroup = false;
 		boolean hasTrackGroup = false;
@@ -220,7 +221,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void lookupAddress(final MapMarker mapMarker) {
+	private void lookupAddress(MapMarker mapMarker) {
 		if (mapMarker != null && mapMarker.getOriginalPointDescription().isSearchingAddress(ctx)) {
 			cancelPointAddressRequests(mapMarker.point);
 			AddressLookupRequest lookupRequest = new AddressLookupRequest(mapMarker.point,
@@ -255,19 +256,19 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void sortMarkers(final @MapMarkersSortByDef int sortByMode, LatLon location) {
+	public void sortMarkers(@MapMarkersSortByDef int sortByMode, LatLon location) {
 		sortMarkers(getMapMarkers(), false, sortByMode, location);
 		saveGroups(false);
 	}
 
-	private void sortMarkers(List<MapMarker> markers, final boolean visited, final @MapMarkersSortByDef int sortByMode) {
+	private void sortMarkers(List<MapMarker> markers, boolean visited, @MapMarkersSortByDef int sortByMode) {
 		sortMarkers(markers, visited, sortByMode, null);
 	}
 
 	private void sortMarkers(List<MapMarker> markers,
-							 final boolean visited,
-							 final @MapMarkersSortByDef int sortByMode,
-							 @Nullable final LatLon location) {
+	                         boolean visited,
+	                         @MapMarkersSortByDef int sortByMode,
+	                         @Nullable LatLon location) {
 		Collections.sort(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
@@ -300,7 +301,7 @@ public class MapMarkersHelper {
 		});
 	}
 
-	public void runSynchronization(final @NonNull MapMarkersGroup group) {
+	public void runSynchronization(@NonNull MapMarkersGroup group) {
 		ctx.runInUIThread(() -> new SyncGroupTask(ctx, group, syncListeners).executeOnExecutor(executorService));
 	}
 
@@ -580,7 +581,7 @@ public class MapMarkersHelper {
 	@Nullable
 	public MapMarker getMapMarker(@NonNull LatLon latLon) {
 		for (MapMarker marker : getAllMarkers()) {
-			if (marker.point != null && marker.point.equals(latLon)) {
+			if (latLon.equals(marker.point)) {
 				return marker;
 			}
 		}
@@ -783,7 +784,7 @@ public class MapMarkersHelper {
 			marker.history = true;
 		}
 		addToMapMarkersHistoryList(mapMarkers);
-		mapMarkers = new ArrayList<>();
+		mapMarkers = new CopyOnWriteArrayList<>();
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		updateGroups();
 		syncPassedPoints();
@@ -891,7 +892,7 @@ public class MapMarkersHelper {
 		listeners.remove(l);
 	}
 
-	private void notifyMarkerChanged(final MapMarker marker) {
+	private void notifyMarkerChanged(MapMarker marker) {
 		ctx.runInUIThread(() -> {
 			for (MapMarkerChangedListener l : listeners) {
 				l.onMapMarkerChanged(marker);
@@ -972,9 +973,7 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.add(position, marker);
-		mapMarkers = copyList;
+		mapMarkers.add(position, marker);
 	}
 
 	private void addToMapMarkersList(List<MapMarker> markers) {
@@ -982,61 +981,43 @@ public class MapMarkersHelper {
 	}
 
 	private void addToMapMarkersList(int position, List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.addAll(position, markers);
-		mapMarkers = copyList;
+		mapMarkers.addAll(position, markers);
 	}
 
 	private void removeFromMapMarkersList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.remove(marker);
-		mapMarkers = copyList;
+		mapMarkers.remove(marker);
 	}
 
 	private void removeFromMapMarkersList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkers);
-		copyList.removeAll(markers);
-		mapMarkers = copyList;
+		mapMarkers.removeAll(markers);
 	}
 
 	// accessors to history markers:
 
 	private void addToMapMarkersHistoryList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.add(marker);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.add(marker);
 	}
 
 	private void addToMapMarkersHistoryList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.addAll(markers);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.addAll(markers);
 	}
 
 	private void removeFromMapMarkersHistoryList(MapMarker marker) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.remove(marker);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.remove(marker);
 	}
 
 	private void removeFromMapMarkersHistoryList(List<MapMarker> markers) {
-		List<MapMarker> copyList = new ArrayList<>(mapMarkersHistory);
-		copyList.removeAll(markers);
-		mapMarkersHistory = copyList;
+		mapMarkersHistory.removeAll(markers);
 	}
 
 	// accessors to markers groups:
 
 	private void addToGroupsList(MapMarkersGroup group) {
-		List<MapMarkersGroup> copyList = new ArrayList<>(mapMarkersGroups);
-		copyList.add(group);
-		mapMarkersGroups = copyList;
+		mapMarkersGroups.add(group);
 	}
 
 	private void removeFromGroupsList(MapMarkersGroup group) {
-		List<MapMarkersGroup> copyList = new ArrayList<>(mapMarkersGroups);
-		copyList.remove(group);
-		mapMarkersGroups = copyList;
+		mapMarkersGroups.remove(group);
 	}
 
 	// ---------------------------------------------------------------------------------------------

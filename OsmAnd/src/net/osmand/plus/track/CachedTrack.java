@@ -33,7 +33,7 @@ public class CachedTrack {
 	private boolean useFilteredGpx;
 
 	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
-	private Set<String> availableColoringTypes = null;
+	private Set<String> availableColoringTypes;
 
 	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
 
@@ -80,7 +80,7 @@ public class CachedTrack {
 	public List<TrkSegment> getCachedTrackSegments(int zoom, @NonNull GradientScaleType scaleType) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
-		String trackId = zoom + "_" + scaleType.toString();
+		String trackId = zoom + "_" + scaleType;
 
 		if (useFilteredGpx != this.useFilteredGpx || prevModifiedTime != gpxFile.modifiedTime) {
 			this.useFilteredGpx = useFilteredGpx;

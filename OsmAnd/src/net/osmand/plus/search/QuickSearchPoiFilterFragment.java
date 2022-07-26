@@ -81,11 +81,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	private EditText editText;
 	private TextView applyFilterButton;
 	private View applyFilterButtonShadow;
-	private Set<String> selectedPoiAdditionals = new TreeSet<>();
+	private final Set<String> selectedPoiAdditionals = new TreeSet<>();
 	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
-	private ArrayList<String> collapsedCategories = new ArrayList<>();
-	private ArrayList<String> showAllCategories = new ArrayList<>();
-	private Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
+	private final ArrayList<String> collapsedCategories = new ArrayList<>();
+	private final ArrayList<String> showAllCategories = new ArrayList<>();
+	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 	private boolean isLightTheme;
 
 	public QuickSearchPoiFilterFragment() {
@@ -106,7 +106,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 
 		if (getArguments() != null) {
@@ -146,10 +146,10 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		view = inflater.inflate(R.layout.search_poi_filter, container, false);
 
-		TextView description = (TextView) view.findViewById(R.id.description);
+		TextView description = view.findViewById(R.id.description);
 		description.setText(filter.getName());
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightTheme);
 		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, colorId);
 		toolbar.setNavigationIcon(icClose);
@@ -163,12 +163,12 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, !isLightTheme));
 
-		ImageButton moreButton = (ImageButton) view.findViewById(R.id.moreButton);
+		ImageButton moreButton = view.findViewById(R.id.moreButton);
 		moreButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				UiUtilities iconsCache = app.getUIUtilities();
-				final PopupMenu optionsMenu = new PopupMenu(getContext(), v);
+				PopupMenu optionsMenu = new PopupMenu(getContext(), v);
 				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 				MenuItem item;
 
@@ -215,11 +215,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			}
 		});
 
-		listView = (ListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		View editTextView = inflater.inflate(R.layout.poi_filter_list_item, listView, false);
-		editText = (EditText) editTextView.findViewById(R.id.editText);
+		editText = editTextView.findViewById(R.id.editText);
 		editTextView.findViewById(R.id.divider).setVisibility(View.GONE);
 		editText.setText(nameFilterText);
 		editText.addTextChangedListener(new TextWatcher() {
@@ -241,7 +241,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		});
 
 		editText.setVisibility(View.VISIBLE);
-		final ImageView textEditIcon = (ImageView) editTextView.findViewById(R.id.icon);
+		ImageView textEditIcon = editTextView.findViewById(R.id.icon);
 		textEditIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 		textEditIcon.setVisibility(View.VISIBLE);
 		editTextView.findViewById(R.id.titleBold).setVisibility(View.GONE);
@@ -273,7 +273,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 							}
 							break;
 						case CHECKBOX_ITEM:
-							CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkboxItem);
+							CheckBox checkBox = view.findViewById(R.id.checkboxItem);
 							adapter.toggleCheckbox(item, checkBox, !checkBox.isChecked());
 							break;
 						case BUTTON_ITEM:
@@ -288,7 +288,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		});
 
 		applyFilterButtonShadow = view.findViewById(R.id.bottomButtonShadow);
-		applyFilterButton = (TextView) view.findViewById(R.id.bottomButton);
+		applyFilterButton = view.findViewById(R.id.bottomButton);
 		applyFilterButton.setText(app.getString(R.string.apply_filters));
 		applyFilterButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -320,7 +320,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private void deleteFilter() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		builder.setMessage(R.string.edit_filter_delete_dialog_title);
 		builder.setNegativeButton(R.string.shared_string_no, null);
@@ -348,17 +348,17 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private void saveFilter() {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		builder.setTitle(R.string.access_hint_enter_name);
 
-		final EditText editText = new EditText(getContext());
+		EditText editText = new EditText(getContext());
 		editText.setHint(R.string.new_filter);
 		editText.setText(filter.getName());
 
-		final TextView textView = new TextView(getContext());
+		TextView textView = new TextView(getContext());
 		textView.setText(app.getString(R.string.new_filter_desc));
-		textView.setTextAppearance(getContext(), R.style.TextAppearance_ContextMenuSubtitle);
+		textView.setTextAppearance(R.style.TextAppearance_ContextMenuSubtitle);
 		LinearLayout ll = new LinearLayout(getContext());
 		ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -370,24 +370,21 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		builder.setView(ll);
 
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String filterName = editText.getText().toString();
-				PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
-				applyFilterFields();
-				if (!Algorithms.isEmpty(filter.getFilterByName())) {
-					nFilter.setSavedFilterByName(filter.getFilterByName());
-				}
-				if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
-					Toast.makeText(getContext(), 
-						       getContext().getString(R.string.edit_filter_create_message, filterName),
-						       Toast.LENGTH_SHORT).show();
-					app.getSearchUICore().refreshCustomPoiFilters();
-					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
-					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
-					QuickSearchPoiFilterFragment.this.dismiss();
-				}
+		builder.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
+			String filterName = editText.getText().toString();
+			PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
+			applyFilterFields();
+			if (!Algorithms.isEmpty(filter.getFilterByName())) {
+				nFilter.setSavedFilterByName(filter.getFilterByName());
+			}
+			if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
+				Toast.makeText(getContext(),
+					       getContext().getString(R.string.edit_filter_create_message, filterName),
+					       Toast.LENGTH_SHORT).show();
+				app.getSearchUICore().refreshCustomPoiFilters();
+				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
+				((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
+				dismiss();
 			}
 		});
 		builder.create().show();
@@ -726,7 +723,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private class PoiFilterListAdapter extends ArrayAdapter<PoiFilterListItem> {
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		PoiFilterListAdapter(OsmandApplication app, List<PoiFilterListItem> items) {
 			super(app, R.layout.poi_filter_list_item, items);
@@ -779,9 +776,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		@NonNull
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			final PoiFilterListItem item = getItem(position);
-			final PoiFilterListItem nextItem = position < getCount() - 1 ? getItem(position + 1) : null;
+		public View getView(int position, View convertView, ViewGroup parent) {
+			PoiFilterListItem item = getItem(position);
+			PoiFilterListItem nextItem = position < getCount() - 1 ? getItem(position + 1) : null;
 
 			int viewType = getItemViewType(position);
 
@@ -802,14 +799,14 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				return view;
 			}
 
-			final ImageView icon = (ImageView) view.findViewById(R.id.icon);
-			final TextViewEx titleRegular = (TextViewEx) view.findViewById(R.id.titleRegular);
-			final TextViewEx titleBold = (TextViewEx) view.findViewById(R.id.titleBold);
-			final TextViewEx titleButton = (TextViewEx) view.findViewById(R.id.titleButton);
-			final SwitchCompat switchItem = (SwitchCompat) view.findViewById(R.id.switchItem);
-			final CheckBox checkBoxItem = (CheckBox) view.findViewById(R.id.checkboxItem);
-			final ImageView expandItem = (ImageView) view.findViewById(R.id.expandItem);
-			final View divider = view.findViewById(R.id.divider);
+			ImageView icon = view.findViewById(R.id.icon);
+			TextViewEx titleRegular = view.findViewById(R.id.titleRegular);
+			TextViewEx titleBold = view.findViewById(R.id.titleBold);
+			TextViewEx titleButton = view.findViewById(R.id.titleButton);
+			SwitchCompat switchItem = view.findViewById(R.id.switchItem);
+			CheckBox checkBoxItem = view.findViewById(R.id.checkboxItem);
+			ImageView expandItem = view.findViewById(R.id.expandItem);
+			View divider = view.findViewById(R.id.divider);
 
 			if (item != null) {
 				if (nextItem != null && nextItem.groupIndex == item.groupIndex) {
@@ -899,15 +896,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	public static class PoiFilterListItem {
-		private PoiFilterListItemType type;
-		private int iconId;
-		private String text;
-		private int groupIndex;
-		private boolean expandable;
-		private boolean expanded;
+		private final PoiFilterListItemType type;
+		private final int iconId;
+		private final String text;
+		private final int groupIndex;
+		private final boolean expandable;
+		private final boolean expanded;
 		private boolean checked;
-		private String category;
-		private String keyName;
+		private final String category;
+		private final String keyName;
 
 		public PoiFilterListItem(PoiFilterListItemType type, int iconId, String text, int groupIndex,
 								 boolean expandable, boolean expanded, boolean checked, String category,

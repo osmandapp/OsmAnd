@@ -67,19 +67,19 @@ public class OsmAndAppCustomization {
 	protected OsmandApplication app;
 	protected OsmandSettings osmandSettings;
 
-	private Map<String, Bitmap> navDrawerLogos = new HashMap<>();
+	private final Map<String, Bitmap> navDrawerLogos = new HashMap<>();
 
 	private String navDrawerFooterIntent;
 	private String navDrawerFooterAppName;
 	private String navDrawerFooterPackageName;
 
-	private Set<String> featuresEnabledIds = new HashSet<>();
-	private Set<String> featuresDisabledIds = new HashSet<>();
-	private Set<String> featuresEnabledPatterns = new HashSet<>();
-	private Set<String> featuresDisabledPatterns = new HashSet<>();
-	private Set<ApplicationMode> marginAppModeUsage = new HashSet<>();
-	private Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
-	private Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	private final Set<String> featuresEnabledIds = new HashSet<>();
+	private final Set<String> featuresDisabledIds = new HashSet<>();
+	private final Set<String> featuresEnabledPatterns = new HashSet<>();
+	private final Set<String> featuresDisabledPatterns = new HashSet<>();
+	private final Set<ApplicationMode> marginAppModeUsage = new HashSet<>();
+	private final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
+	private final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 	private CustomOsmandSettings customOsmandSettings;
 
 	private int marginLeft;
@@ -90,7 +90,7 @@ public class OsmAndAppCustomization {
 	private boolean featuresCustomized;
 	private boolean widgetsCustomized;
 
-	private List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
+	private final List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
 
 	public interface OsmAndAppCustomizationListener {
 
@@ -98,8 +98,8 @@ public class OsmAndAppCustomization {
 	}
 
 	public static class CustomOsmandSettings {
-		private String sharedPreferencesName;
-		private OsmandSettings settings;
+		private final String sharedPreferencesName;
+		private final OsmandSettings settings;
 
 		CustomOsmandSettings(OsmandApplication app, String sharedPreferencesName, Bundle bundle) {
 			this.sharedPreferencesName = sharedPreferencesName;
@@ -343,6 +343,7 @@ public class OsmAndAppCustomization {
 		setFeaturesCustomized();
 	}
 
+	@NonNull
 	public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
 		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
 		widgetsVisibilityMap.put(widgetId, set);
@@ -350,6 +351,7 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
+	@NonNull
 	public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
 		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
 		widgetsAvailabilityMap.put(widgetId, set);
@@ -357,7 +359,7 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
-	public void setMapMargins(int left, int top, int right, int bottom, List<String> appModeKeys) {
+	public void setMapMargins(int left, int top, int right, int bottom, @Nullable List<String> appModeKeys) {
 		marginLeft = left;
 		marginTop = top;
 		marginRight = right;
@@ -365,7 +367,7 @@ public class OsmAndAppCustomization {
 		marginAppModeUsage.addAll(getAppModesSet(appModeKeys));
 	}
 
-	public void updateMapMargins(MapActivity mapActivity) {
+	public void updateMapMargins(@NonNull MapActivity mapActivity) {
 		if (isMapMarginAvailable()) {
 			mapActivity.setMargins(marginLeft, marginTop, marginRight, marginBottom);
 		} else {
@@ -377,7 +379,7 @@ public class OsmAndAppCustomization {
 		return marginAppModeUsage.contains(app.getSettings().getApplicationMode());
 	}
 
-	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
+	public boolean isWidgetVisible(@NonNull String key, @NonNull ApplicationMode appMode) {
 		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
 		if (set == null) {
 			return false;
@@ -385,7 +387,7 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean isWidgetAvailable(@NonNull String widgetId, ApplicationMode appMode) {
+	public boolean isWidgetAvailable(@NonNull String widgetId, @NonNull ApplicationMode appMode) {
 		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(widgetId);
 		if (availableForModes == null) {
 			return true;
@@ -473,7 +475,7 @@ public class OsmAndAppCustomization {
 		}
 	}
 
-	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
+	public void registerNavDrawerItems(Activity activity, ContextMenuAdapter adapter) {
 		PackageManager pm = activity.getPackageManager();
 		for (Map.Entry<String, List<NavDrawerItem>> entry : getNavDrawerItems().entrySet()) {
 			String appPackage = entry.getKey();
@@ -486,7 +488,7 @@ public class OsmAndAppCustomization {
 					if (item.flags != -1) {
 						intent.addFlags(item.flags);
 					}
-					final Intent finalIntent = intent;
+					Intent finalIntent = intent;
 					int iconId = AndroidUtils.getDrawableId(app, item.iconName);
 					adapter.addItem(new ContextMenuItem(item.getId())
 							.setTitle(item.name)
@@ -634,10 +636,10 @@ public class OsmAndAppCustomization {
 		static final String ICON_NAME_KEY = "icon_name";
 		static final String FLAGS_KEY = "flags";
 
-		private String name;
-		private String uri;
-		private String iconName;
-		private int flags;
+		private final String name;
+		private final String uri;
+		private final String iconName;
+		private final int flags;
 
 		public NavDrawerItem(String name, String uri, String iconName, int flags) {
 			this.name = name;

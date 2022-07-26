@@ -29,30 +29,30 @@ public class OsmNotesMenu {
 
 	private static final Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
 
-	public static ContextMenuAdapter createListAdapter(@NonNull final MapActivity mapActivity) {
+	public static ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
 
-	private static void createLayersItems(@NonNull final ContextMenuAdapter adapter, @NonNull final MapActivity mapActivity) {
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final OsmandSettings settings = app.getSettings();
-		final OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+	private static void createLayersItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
 		if (plugin == null) {
 			return;
 		}
 
-		final boolean nightMode = isNightMode(app);
-		final int themeRes = getThemeRes(app);
-		final int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
+		boolean nightMode = isNightMode(app);
+		int themeRes = getThemeRes(app);
+		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 
 		final int osmNotesStringId = R.string.layer_osm_bugs;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int showClosedNotesStringId = R.string.show_closed_notes;
 
-		final String[] zoomStrings = getZoomStrings(mapActivity);
+		String[] zoomStrings = getZoomStrings(mapActivity);
 
 		OnRowItemClick l = new OnRowItemClick() {
 			@Override

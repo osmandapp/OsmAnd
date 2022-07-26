@@ -48,8 +48,9 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	public static final int NULL_ID = -1;
 
 	public static final String TELEGRAM_CHATS_EXPANDED = "telegram_chats_expanded";
-	// public static final String DIALOG = "dialog";
+	public static final int LOGCAT_READ_MS = 5 * 1000;
 
+	private OsmandApplication app;
 	private ContextMenuListAdapter mAdapter;
 	private boolean telegramChatsExpanded;
 	private ListView listView;
@@ -93,9 +94,9 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 			this.iconId = iconId;
 		}
 
-		private int titleId;
-		private int urlId;
-		private int iconId;
+		private final int titleId;
+		private final int urlId;
+		private final int iconId;
 
 		public String getTitle(Context ctx) {
 			return ctx.getString(titleId);
@@ -124,7 +125,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		getMyApplication().applyTheme(this);
+		app = getMyApplication();
+		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_help_screen);
 		readBundle(savedInstanceState);
@@ -135,7 +137,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private void createItems() {
-		ContextMenuAdapter menu = new ContextMenuAdapter(getMyApplication());
+		ContextMenuAdapter menu = new ContextMenuAdapter(app);
 
 		createBeginWithOsmandItems(menu);
 		createFeaturesItems(menu);
@@ -145,7 +147,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		createDiscussionItems(menu);
 		createSocialNetworksItems(menu);
 
-		boolean lightContent = getMyApplication().getSettings().isLightContent();
+		boolean lightContent = app.getSettings().isLightContent();
 
 		ViewCreator viewCreator = new ViewCreator(this, !lightContent);
 		viewCreator.setDefaultLayoutId(R.layout.two_line_with_images_list_item);
@@ -158,7 +160,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		Drawable dividerDrawable = new ColorDrawable(dividerColor);
 		listView.setDivider(dividerDrawable);
 		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
-		listView.setBackgroundColor(ColorUtilities.getListBgColor(getMyApplication(), !lightContent));
+		listView.setBackgroundColor(ColorUtilities.getListBgColor(app, !lightContent));
 	}
 
 	@Override
@@ -182,10 +184,9 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				this.finish();
-				return true;
+		if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -231,13 +232,11 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private void createHelpUsToImproveItems(ContextMenuAdapter contextMenuAdapter) {
-		final OsmandApplication app = getMyApplication();
-
 		contextMenuAdapter.addItem(createCategory(R.string.help_us_to_improve_menu_group));
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.help_to_improve_item));
 
-		final File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (exceptionLog.exists()) {
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitle(getString(R.string.send_crash_log))
@@ -249,9 +248,28 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitle(getString(R.string.send_logcat_log))
 				.setListener((uiAdapter, view, item, isChecked) -> {
-					startSaveLogsAsyncTask();
+					readAndSaveLogs();
 					return false;
 				}));
+	}
+
+	private void readAndSaveLogs() {
+		logs.clear();
+
+		startLogcatAsyncTask();
+		setSupportProgressBarIndeterminateVisibility(true);
+
+		app.runInUIThread(() -> {
+			stopLogcatAsyncTask();
+			startSaveLogsAsyncTask();
+			setSupportProgressBarIndeterminateVisibility(false);
+		}, LOGCAT_READ_MS);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		stopLogcatAsyncTask();
 	}
 
 	private void createFeaturesItems(ContextMenuAdapter contextMenuAdapter) {
@@ -288,8 +306,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	private void createPluginsItems(ContextMenuAdapter contextMenuAdapter) {
 		contextMenuAdapter.addItem(createCategory(R.string.plugins_menu_group));
-		for (final OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
-			final String helpFileName = osmandPlugin.getHelpFileName();
+		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
+			String helpFileName = osmandPlugin.getHelpFileName();
 			if (helpFileName != null) {
 				contextMenuAdapter.addItem(createPluginItem(osmandPlugin.getName(), osmandPlugin.getLogoResourceId(),
 						helpFileName));
@@ -312,7 +330,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 			releaseDate = ", " + getString(R.string.shared_string_release).toLowerCase() + ": "
 					+ getString(R.string.app_edition);
 		}
-		String version = Version.getFullVersion(getMyApplication()) + releaseDate;
+		String version = Version.getFullVersion(app) + releaseDate;
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", this, version);
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
@@ -334,8 +352,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private ContextMenuItem createItem(@StringRes int titleRes,
-									   @StringRes int descriptionRes,
-									   String path) {
+	                                   @StringRes int descriptionRes,
+	                                   String path) {
 		ContextMenuItem item = new ContextMenuItem(null)
 				.setTitle(getString(titleRes))
 				.setListener(new ShowArticleOnTouchListener(path, this));
@@ -346,8 +364,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private ContextMenuItem createPluginItem(String title,
-											 @DrawableRes int icon,
-											 String path) {
+	                                         @DrawableRes int icon,
+	                                         String path) {
 		return new ContextMenuItem(null)
 				.setTitle(title)
 				.setIcon(icon)
@@ -355,8 +373,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private ContextMenuItem createSocialItem(String title,
-											 String url,
-											 @DrawableRes int icon) {
+	                                         String url,
+	                                         @DrawableRes int icon) {
 		return new ContextMenuItem(null)
 				.setTitle(title)
 				.setDescription(url)

@@ -8,6 +8,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
+import net.osmand.plus.myplaces.DefaultFavoritesListener;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoritesListener;
@@ -38,20 +39,12 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	@Override
 	public GroupsAdapter createAdapter() {
 		if (!favouritesHelper.isFavoritesLoaded()) {
-			favouritesHelper.addListener(listener = new FavoritesListener() {
+			favouritesHelper.addListener(listener = new DefaultFavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					if (adapter != null) {
 						adapter.notifyDataSetChanged();
 					}
-				}
-
-				@Override
-				public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
-				}
-
-				@Override
-				public void onFavoritePropertiesUpdated() {
 				}
 			});
 		}

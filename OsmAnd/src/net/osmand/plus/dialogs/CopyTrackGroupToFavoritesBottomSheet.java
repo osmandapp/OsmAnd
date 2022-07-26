@@ -82,7 +82,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 			fragment.group = group;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, CopyTrackGroupToFavoritesBottomSheet.TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

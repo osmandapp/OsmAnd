@@ -51,7 +51,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		}
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-		final OsmandApplication app = ((OsmandApplication) getApplication());
+		OsmandApplication app = ((OsmandApplication) getApplication());
 		
 		
 		LinearLayout gl = new LinearLayout(this);
@@ -65,7 +65,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		ScrollView sv = new ScrollView(this);
 		gl.addView(sv, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
-		final LinearLayout ll = new LinearLayout(this);
+		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.VERTICAL);
 		sv.addView(ll, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
@@ -77,9 +77,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		selectVoice(ll);
 	}
 
-	private void selectVoice(final LinearLayout ll) {
+	private void selectVoice(LinearLayout ll) {
 		String[] entries;
-		final String[] entrieValues;
+		String[] entrieValues;
 		Set<String> voiceFiles = getMyApplication().getRoutingOptionsHelper().getVoiceFiles(this);
 		entries = new String[voiceFiles.size() ];
 		entrieValues = new String[voiceFiles.size() ];
@@ -97,8 +97,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		bld.setSingleChoiceItems(entrieValues, selected, new DialogInterface.OnClickListener() {
 			
 			@Override
-			public void onClick(DialogInterface dialog, final int which) {
-				final OsmandApplication app = (OsmandApplication) getApplication();
+			public void onClick(DialogInterface dialog, int which) {
+				OsmandApplication app = (OsmandApplication) getApplication();
 				getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
 				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
 				app.initVoiceCommandPlayer(TestVoiceActivity.this,
@@ -152,7 +152,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return v;
 	}
 
-	private void addButtons(final LinearLayout ll, CommandPlayer p) {
+	private void addButtons(LinearLayout ll, CommandPlayer p) {
 		addButton(ll, "Route calculated and number tests:", builder(p));
 		addButton(ll, "\u25BA (1.1)  New route calculated, 150m, 230sec (00:03:50)", builder(p).newRouteCalculated(150, 230));
 		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
@@ -244,7 +244,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		if (!p.supportsStructuredStreetNames()) {
 			return new StreetName();
 		}
-		String[] streetNames = new String[]{"toRef", "toStreetName", "toDest", "fromRef", "fromStreetName", "fromDest"};
+		String[] streetNames = {"toRef", "toStreetName", "toDest", "fromRef", "fromStreetName", "fromDest"};
 		for (int i = 0; i < args.length; i++) {
 			res.put(streetNames[i], args[i]);
 		}
@@ -260,8 +260,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return p.newCommandBuilder();
 	}
 
-	public void addButton(ViewGroup layout, final String description, final CommandBuilder builder) {
-		final Button button = new Button(this);
+	public void addButton(ViewGroup layout, String description, CommandBuilder builder) {
+		Button button = new Button(this);
 		button.setGravity(Gravity.LEFT);
 		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);

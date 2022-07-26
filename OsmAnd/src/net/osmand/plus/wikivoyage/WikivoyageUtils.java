@@ -31,7 +31,7 @@ import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
 public class WikivoyageUtils {
 
-	private final static Log LOG = PlatformUtil.getLog(WikivoyageUtils.class);
+	private static final Log LOG = PlatformUtil.getLog(WikivoyageUtils.class);
 
 	private static final String GEO_PARAMS = "?lat=";
 	public static final String ARTICLE_TITLE = "article_title";
@@ -54,7 +54,7 @@ public class WikivoyageUtils {
 
 	public static WptPt findNearestPoint(@NonNull List<WptPt> points, @NonNull String coordinates) {
 		double lat = Algorithms.parseDoubleSilently(coordinates.substring(0, coordinates.indexOf(",")), 0);
-		double lon = Algorithms.parseDoubleSilently(coordinates.substring(coordinates.indexOf(",") + 1), 0);;
+		double lon = Algorithms.parseDoubleSilently(coordinates.substring(coordinates.indexOf(",") + 1), 0);
 		for (WptPt point : points) {
 			if (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), lat, lon) < ROUNDING_ERROR) {
 				return point;

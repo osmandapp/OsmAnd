@@ -32,7 +32,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final Context ctx = getContext();
+		Context ctx = getContext();
 		if (ctx == null) {
 			return;
 		}

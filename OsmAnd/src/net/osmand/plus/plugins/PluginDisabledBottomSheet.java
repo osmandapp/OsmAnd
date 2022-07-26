@@ -38,7 +38,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		Context context = getContext();
 		if (context == null || app == null) {
 			return;
@@ -142,7 +142,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 				PluginDisabledBottomSheet dialog = new PluginDisabledBottomSheet();
 				dialog.setArguments(args);
 				dialog.setUsedOnMap(usedOnMap);
-				dialog.show(fm, PluginDisabledBottomSheet.TAG);
+				dialog.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);

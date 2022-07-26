@@ -32,7 +32,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
-	private final static String BULLET = "   •   ";
+	private static final String BULLET = "   •   ";
 
 	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
@@ -51,13 +51,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!nightMode) {
 			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
 		}
-		final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
+		int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		view.setBackgroundColor(backgroundColor);
 		return new MeasureToolItemVH(view);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final MeasureToolItemVH holder, int pos) {
+	public void onBindViewHolder(@NonNull MeasureToolItemVH holder, int pos) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		UiUtilities iconsCache = app.getUIUtilities();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
@@ -162,13 +162,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 		MeasureToolItemVH(View view) {
 			super(view);
-			iconReorder = (ImageView) view.findViewById(R.id.measure_point_reorder_icon);
-			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
-			title = (TextView) view.findViewById(R.id.measure_point_title);
-			descr = (TextView) view.findViewById(R.id.measure_point_descr);
-			elevation = (TextView) view.findViewById(R.id.measure_point_ele);
-			speed = (TextView) view.findViewById(R.id.measure_point_speed);
-			deleteBtn = (ImageButton) view.findViewById(R.id.measure_point_remove_image_button);
+			iconReorder = view.findViewById(R.id.measure_point_reorder_icon);
+			icon = view.findViewById(R.id.measure_point_icon);
+			title = view.findViewById(R.id.measure_point_title);
+			descr = view.findViewById(R.id.measure_point_descr);
+			elevation = view.findViewById(R.id.measure_point_ele);
+			speed = view.findViewById(R.id.measure_point_speed);
+			deleteBtn = view.findViewById(R.id.measure_point_remove_image_button);
 		}
 	}
 

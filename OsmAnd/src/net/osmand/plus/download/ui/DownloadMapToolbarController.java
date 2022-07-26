@@ -112,7 +112,7 @@ public class DownloadMapToolbarController extends TopToolbarController {
 
 	private void dismiss() {
 		lastProcessedRegionName = regionName;
-		mapActivity.hideTopToolbar(DownloadMapToolbarController.this);
+		mapActivity.hideTopToolbar(this);
 	}
 
 	@DrawableRes

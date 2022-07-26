@@ -29,6 +29,7 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -60,11 +61,11 @@ public class RoutingHelper {
 	private final RouteRecalculationHelper routeRecalculationHelper;
 	private final TransportRoutingHelper transportRoutingHelper;
 
-	private boolean isFollowingMode = false;
-	private boolean isRoutePlanningMode = false;
-	private boolean isPauseNavigation = false;
+	private boolean isFollowingMode;
+	private boolean isRoutePlanningMode;
+	private boolean isPauseNavigation;
 
-	private GPXRouteParamsBuilder currentGPXRoute = null;
+	private GPXRouteParamsBuilder currentGPXRoute;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
 
@@ -74,13 +75,13 @@ public class RoutingHelper {
 	private Location lastFixedLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
-	private boolean deviceHasBearing = false;
+	private boolean deviceHasBearing;
 
-	private boolean isDeviatedFromRoute = false;
-	private long deviateFromRouteDetected = 0;
+	private boolean isDeviatedFromRoute;
+	private long deviateFromRouteDetected;
 	//private long wrongMovementDetected = 0;
-	private boolean voiceRouterStopped = false;
-	private long lastCarNavUpdateTime = 0;
+	private boolean voiceRouterStopped;
+	private long lastCarNavUpdateTime;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
@@ -258,7 +259,7 @@ public class RoutingHelper {
 		});
 	}
 
-	void newRouteCalculated(final boolean newRoute, final RouteCalculationResult res) {
+	void newRouteCalculated(boolean newRoute, RouteCalculationResult res) {
 		app.logRoutingEvent("newRouteCalculated newRoute " + newRoute + " res " + res);
 		app.runInUIThread(() -> {
 			ValueHolder<Boolean> showToast = new ValueHolder<>();
@@ -336,44 +337,28 @@ public class RoutingHelper {
 	}
 
 	public void addRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, true);
+		updateListeners = Algorithms.updateWeakReferencesList(updateListeners, listener, true);
 	}
 
 	public void removeRouteDataListener(@NonNull IRoutingDataUpdateListener listener) {
-		updateListeners = updateListeners(new ArrayList<>(updateListeners), listener, false);
+		updateListeners = Algorithms.updateWeakReferencesList(updateListeners, listener, false);
 	}
 
 	public void addRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, true);
+		settingsListeners = Algorithms.updateWeakReferencesList(settingsListeners, listener, true);
 	}
 
 	public void removeRouteSettingsListener(@NonNull IRouteSettingsListener listener) {
-		settingsListeners = updateListeners(new ArrayList<>(settingsListeners), listener, false);
+		settingsListeners = Algorithms.updateWeakReferencesList(settingsListeners, listener, false);
 	}
 
 	public void addListener(@NonNull IRouteInformationListener l) {
-		listeners = updateListeners(new ArrayList<>(listeners), l, true);
+		listeners = Algorithms.updateWeakReferencesList(listeners, l, true);
 		transportRoutingHelper.addListener(l);
 	}
 
 	public void removeListener(@NonNull IRouteInformationListener lt) {
-		listeners = updateListeners(new ArrayList<>(listeners), lt, false);
-	}
-
-	private <T> List<WeakReference<T>> updateListeners(List<WeakReference<T>> copyList,
-													   T listener, boolean isNewListener) {
-		Iterator<WeakReference<T>> it = copyList.iterator();
-		while (it.hasNext()) {
-			WeakReference<T> ref = it.next();
-			T l = ref.get();
-			if (l == null || l == listener) {
-				it.remove();
-			}
-		}
-		if (isNewListener) {
-			copyList.add(new WeakReference<>(listener));
-		}
-		return copyList;
+		listeners = Algorithms.updateWeakReferencesList(listeners, lt, false);
 	}
 
 	public void updateLocation(Location currentLocation) {
@@ -435,7 +420,7 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
 				if (allowableDeviation <= 0) {
-					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
+					allowableDeviation = getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
 				// 2. Analyze if we need to recalculate route
@@ -873,7 +858,7 @@ public class RoutingHelper {
 		return routeRecalculationHelper.isRouteBeingCalculated();
 	}
 
-	private void showMessage(final String msg) {
+	private void showMessage(String msg) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

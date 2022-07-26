@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 public class OsmAndTaskManager {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	public OsmAndTaskManager(OsmandApplication app) {
 		this.app = app;
@@ -59,15 +59,15 @@ public class OsmAndTaskManager {
 	
 	public interface OsmAndTask<Params, Progress, Result> {
 		
-		public boolean isCancelled();
+		boolean isCancelled();
 		
-		public boolean cancel(boolean mayInterruptDuringRun);
+		boolean cancel(boolean mayInterruptDuringRun);
 		
-		public void executeWithParams(Params... params);
+		void executeWithParams(Params... params);
 		
 	}
 	
-	public static abstract class OsmAndTaskRunnable<Params, Progress, Result> {
+	public abstract static class OsmAndTaskRunnable<Params, Progress, Result> {
 		
 		public OsmAndTask<Params, Progress, Result> exec;
 		

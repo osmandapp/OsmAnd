@@ -57,8 +57,8 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final boolean night = !app.getSettings().isLightContent();
-		final MapActivity mapActivity = (MapActivity) requireActivity();
+		boolean night = !app.getSettings().isLightContent();
+		MapActivity mapActivity = (MapActivity) requireActivity();
 
 		backgroundPaint.setColor(ColorUtilities.getDividerColor(mapActivity, night));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -67,25 +67,25 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 		textPaint.setFakeBoldText(true);
 		textPaint.setAntiAlias(true);
 
-		final String delStr = getString(R.string.shared_string_delete).toUpperCase();
-		final String activateStr = getString(R.string.local_index_mi_restore).toUpperCase();
+		String delStr = getString(R.string.shared_string_delete).toUpperCase();
+		String activateStr = getString(R.string.local_index_mi_restore).toUpperCase();
 		Rect bounds = new Rect();
 
 		textPaint.getTextBounds(activateStr, 0, activateStr.length(), bounds);
-		final int activateStrWidth = bounds.width();
-		final int textHeight = bounds.height();
+		int activateStrWidth = bounds.width();
+		int textHeight = bounds.height();
 
 		Fragment historyMarkerMenuFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 		if (historyMarkerMenuFragment != null) {
 			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
 		}
 
-		final View mainView = UiUtilities.getInflater(mapActivity, night).inflate(R.layout.fragment_map_markers_history, container, false);
-		final EmptyStateRecyclerView recyclerView = (EmptyStateRecyclerView) mainView.findViewById(R.id.list);
+		View mainView = UiUtilities.getInflater(mapActivity, night).inflate(R.layout.fragment_map_markers_history, container, false);
+		EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
+			private final float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private boolean iconHidden;
 
 			@Override
@@ -153,11 +153,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 			}
 
 			@Override
-			public void onSwiped(RecyclerView.ViewHolder viewHolder, final int direction) {
-				final int pos = viewHolder.getAdapterPosition();
+			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+				int pos = viewHolder.getAdapterPosition();
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					final MapMarker marker = (MapMarker) item;
+					MapMarker marker = (MapMarker) item;
 					int snackbarStringRes;
 					if (direction == ItemTouchHelper.LEFT) {
 						app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);

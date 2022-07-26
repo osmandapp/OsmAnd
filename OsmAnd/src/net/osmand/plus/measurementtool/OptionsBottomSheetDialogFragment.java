@@ -219,7 +219,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark,
-						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
+						R.color.color_osm_edit_delete))
 				.setTitle(getString(R.string.shared_string_clear_all))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {

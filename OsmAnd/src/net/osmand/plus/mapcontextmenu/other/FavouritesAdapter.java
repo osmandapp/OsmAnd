@@ -21,10 +21,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
 	private final List<FavouritePoint> favouritePoints;
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private View.OnClickListener listener;
 
-	private UpdateLocationViewCache cache;
+	private final UpdateLocationViewCache cache;
 
 	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
 		this.app = app;
@@ -79,11 +79,11 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 		public FavouritesViewHolder(View itemView) {
 			super(itemView);
-			favouriteImage = (ImageView) itemView.findViewById(R.id.favourite_icon);
-			title = (TextView) itemView.findViewById(R.id.favourite_title);
-			description = (TextView) itemView.findViewById(R.id.favourite_description);
-			distance = (TextView) itemView.findViewById(R.id.favourite_distance);
-			arrowImage = (ImageView) itemView.findViewById(R.id.favourite_direction_icon);
+			favouriteImage = itemView.findViewById(R.id.favourite_icon);
+			title = itemView.findViewById(R.id.favourite_title);
+			description = itemView.findViewById(R.id.favourite_description);
+			distance = itemView.findViewById(R.id.favourite_distance);
+			arrowImage = itemView.findViewById(R.id.favourite_direction_icon);
 		}
 	}
 }

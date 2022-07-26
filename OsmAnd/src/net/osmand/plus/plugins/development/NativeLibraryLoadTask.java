@@ -10,7 +10,7 @@ import net.osmand.render.RenderingRulesStorage;
 
 class NativeLibraryLoadTask extends BaseLoadAsyncTask<Void, Void, Void> {
 
-	private RenderingRulesStorage storage;
+	private final RenderingRulesStorage storage;
 
 	public NativeLibraryLoadTask(@NonNull FragmentActivity activity, @NonNull RenderingRulesStorage storage) {
 		super(activity);

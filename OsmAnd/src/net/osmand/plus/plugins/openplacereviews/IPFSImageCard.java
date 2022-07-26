@@ -22,9 +22,9 @@ public class IPFSImageCard extends ImageCard {
 		super(mapActivity, imageObject);
 		try {
 			String calcImageUrl = mapActivity.getString(R.string.opr_base_url) + "api/ipfs/image?";
-			calcImageUrl += "cid=" + (String) imageObject.getString("cid");
-			calcImageUrl += "&hash=" + (String) imageObject.getString("hash");
-			calcImageUrl += "&ext=" + (String) imageObject.getString("extension");
+			calcImageUrl += "cid=" + imageObject.getString("cid");
+			calcImageUrl += "&hash=" + imageObject.getString("hash");
+			calcImageUrl += "&ext=" + imageObject.getString("extension");
 			url = calcImageUrl;
 			imageHiresUrl = url;
 			imageUrl = url;

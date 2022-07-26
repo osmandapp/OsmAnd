@@ -80,7 +80,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
-	private CallbackWithObject<LatLon> selectOnMap = null;
+	private CallbackWithObject<LatLon> selectOnMap;
 	private MapQuickActionLayer mapQuickActionLayer;
 
 	private ImageView contextMarker;
@@ -164,7 +164,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		outlinePaint.setAntiAlias(true);
 		outlinePaint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2f));
 		outlinePaint.setStrokeCap(Paint.Cap.ROUND);
-		outlinePaint.setColor(ContextCompat.getColor(context, R.color.osmand_orange));
+		outlinePaint.setColor(getColor(R.color.osmand_orange));
 	}
 
 	private void updateContextMarker() {
@@ -441,7 +441,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean isObjectMoveable(Object o) {
 		if (o != null && selectedObjectContextMenuProvider != null
 				&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
-			final IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
+			IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
 			return l.isObjectMovable(o);
 		}
 		return false;
@@ -450,7 +450,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
 		if (selectedObjectContextMenuProvider != null && !isInAddGpxPointMode()) {
 			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
-				final IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
+				IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
 				if (l.isObjectMovable(o)) {
 					l.applyNewObjectPosition(o, position, callback);
 				}
@@ -470,7 +470,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 		PointF newMarkerPosition = getMovableCenterPoint(tileBox);
-		final LatLon ll = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
+		LatLon ll = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
 				newMarkerPosition.x, newMarkerPosition.y);
 		applyingMarkerLatLon = ll;
 
@@ -509,7 +509,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 		PointF newMarkerPosition = getMovableCenterPoint(tileBox);
-		final LatLon ll = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
+		LatLon ll = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
 				newMarkerPosition.x, newMarkerPosition.y);
 		applyingMarkerLatLon = ll;
 
@@ -730,7 +730,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			LatLon latLon = selectionResult.getObjectLatLon();
 			PointDescription pointDescription = null;
-			final IContextMenuProvider provider = selectedObjects.get(selectedObj);
+			IContextMenuProvider provider = selectedObjects.get(selectedObj);
 			if (provider != null) {
 				if (latLon == null) {
 					latLon = provider.getObjectLocation(selectedObj);

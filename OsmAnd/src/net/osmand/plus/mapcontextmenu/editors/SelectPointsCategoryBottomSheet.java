@@ -108,7 +108,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 	}
 
 	@NonNull
-	protected View createCategoryItem(final PointsGroup pointsGroup, boolean isHidden) {
+	protected View createCategoryItem(PointsGroup pointsGroup, boolean isHidden) {
 		Context context = requireContext();
 		int dp8 = AndroidUtils.dpToPx(context, 8f);
 		int dp16 = AndroidUtils.dpToPx(context, 16f);

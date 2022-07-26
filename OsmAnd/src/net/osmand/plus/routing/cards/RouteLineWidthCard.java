@@ -38,12 +38,12 @@ import java.util.List;
 
 public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 
-	private final static int CUSTOM_WIDTH_MIN = 1;
-	private final static int CUSTOM_WIDTH_MAX = 36;
+	private static final int CUSTOM_WIDTH_MIN = 1;
+	private static final int CUSTOM_WIDTH_MAX = 36;
 
-	private PreviewRouteLineInfo previewRouteLineInfo;
-	private OnNeedScrollListener onNeedScrollListener;
-	private HeaderUiAdapter headerUiAdapter;
+	private final PreviewRouteLineInfo previewRouteLineInfo;
+	private final OnNeedScrollListener onNeedScrollListener;
+	private final HeaderUiAdapter headerUiAdapter;
 
 	private WidthMode selectedMode;
 
@@ -154,7 +154,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 	private void updateCustomWidthSlider() {
 		if (selectedMode == WidthMode.CUSTOM) {
 			Slider slider = view.findViewById(R.id.width_slider);
-			final TextView tvCustomWidth = view.findViewById(R.id.width_value_tv);
+			TextView tvCustomWidth = view.findViewById(R.id.width_value_tv);
 
 			slider.setValueTo(CUSTOM_WIDTH_MAX);
 			slider.setValueFrom(CUSTOM_WIDTH_MIN);
@@ -204,7 +204,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 	private static WidthMode findAppropriateMode(@Nullable String widthKey) {
 		if (widthKey != null) {
 			for (WidthMode mode : WidthMode.values()) {
-				if (mode.widthKey != null && mode.widthKey.equals(widthKey)) {
+				if (widthKey.equals(mode.widthKey)) {
 					return mode;
 				}
 			}
@@ -236,7 +236,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull AppearanceViewHolder holder, int position) {
 			WidthMode item = items.get(position);
 			holder.title.setText(app.getString(item.titleId));
 

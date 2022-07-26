@@ -126,7 +126,7 @@ public class MapMarker implements LocationPoint {
 		pointDescription = marker.pointDescription;
 	}
 
-	private static final int[] colorsIds = new int[] {
+	private static final int[] colorsIds = {
 			R.color.marker_blue,
 			R.color.marker_green,
 			R.color.marker_orange,

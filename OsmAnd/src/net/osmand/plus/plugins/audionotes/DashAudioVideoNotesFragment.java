@@ -83,11 +83,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			sortItemsDescending(notes);
 		}
 
-		LinearLayout notesLayout = (LinearLayout) mainView.findViewById(R.id.items);
+		LinearLayout notesLayout = mainView.findViewById(R.id.items);
 		notesLayout.removeAllViews();
 		DashboardOnMap.handleNumberOfRows(notes, getMyApplication().getSettings(), ROW_NUMBER_TAG);
 
-		for (final AudioVideoNotesPlugin.Recording recording : notes) {
+		for (AudioVideoNotesPlugin.Recording recording : notes) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
@@ -133,14 +133,14 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		});
 	}
 
-	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
-									   final OsmandApplication ctx) {
+	public static Drawable getNoteView(AudioVideoNotesPlugin.Recording recording, View view,
+	                                   OsmandApplication ctx) {
 		String name = recording.getName(ctx, true);
-		TextView nameText = ((TextView) view.findViewById(R.id.name));
+		TextView nameText = view.findViewById(R.id.name);
 		nameText.setText(name);
 		((TextView) view.findViewById(R.id.description)).setText(recording.getSmallDescription(ctx));
 
-		ImageView icon = (ImageView) view.findViewById(R.id.icon);
+		ImageView icon = view.findViewById(R.id.icon);
 		Drawable iconDrawable;
 
 		if (recording.isAudio()) {

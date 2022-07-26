@@ -39,13 +39,13 @@ public class RouteStatisticCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;
 
-	private GPXFile gpx;
-	private GpxDisplayItem gpxItem;
+	private final GPXFile gpx;
+	private final GpxDisplayItem gpxItem;
 	@Nullable
 	private OrderedLineDataSet slopeDataSet;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
-	private OnClickListener onAnalyseClickListener;
+	private final OnClickListener onAnalyseClickListener;
 	private CommonChartAdapter graphAdapter;
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,
@@ -86,7 +86,7 @@ public class RouteStatisticCard extends MapBaseCard {
 		if (spaceIndex != -1) {
 			distanceStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
-		TextView distanceTv = (TextView) view.findViewById(R.id.distance);
+		TextView distanceTv = view.findViewById(R.id.distance);
 		distanceTv.setText(distanceStr);
 
 		int time = routingHelper.getLeftTime();
@@ -96,10 +96,10 @@ public class RouteStatisticCard extends MapBaseCard {
 		if (spaceIndex != -1) {
 			timeStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
-		TextView timeTv = (TextView) view.findViewById(R.id.time);
+		TextView timeTv = view.findViewById(R.id.time);
 		timeTv.setText(timeStr);
 
-		TextView arriveTimeTv = (TextView) view.findViewById(R.id.time_desc);
+		TextView arriveTimeTv = view.findViewById(R.id.time_desc);
 		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTimeShort(time, true));
 		arriveTimeTv.setText(arriveStr);
 
@@ -107,7 +107,7 @@ public class RouteStatisticCard extends MapBaseCard {
 		updateButtons();
 
 		if (isTransparentBackground()) {
-			view.setBackgroundDrawable(null);
+			view.setBackground(null);
 		}
 	}
 
@@ -159,9 +159,9 @@ public class RouteStatisticCard extends MapBaseCard {
 			((ImageView) view.findViewById(R.id.descent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_descent));
 			((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
 
-			TextView analyseButtonDescr = (TextView) view.findViewById(R.id.analyse_button_descr);
+			TextView analyseButtonDescr = view.findViewById(R.id.analyse_button_descr);
 
-			FrameLayout analyseButton = (FrameLayout) view.findViewById(R.id.analyse_button);
+			FrameLayout analyseButton = view.findViewById(R.id.analyse_button);
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 				AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
@@ -203,7 +203,7 @@ public class RouteStatisticCard extends MapBaseCard {
 					GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+					GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}

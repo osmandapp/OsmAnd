@@ -85,10 +85,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
-	private boolean initFilter = false;
+	private boolean initFilter;
 	private String endingText = "";
 	private T endingObject;
-	private StyleSpan previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+	private final StyleSpan previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
 	
 	private static final int NAVIGATE_TO = 3;
@@ -111,14 +111,14 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		uiHandler = new UIUpdateHandler();
 		namesFilter = new NamesFilter();
 		addFooterViews();
-		final NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
+		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
 		collator = OsmAndCollator.primaryCollator();
 
-		progress = (ProgressBar) findViewById(R.id.ProgressBar);
+		progress = findViewById(R.id.ProgressBar);
 			
-		searchText = (EditText) findViewById(R.id.SearchText);
+		searchText = findViewById(R.id.SearchText);
 
 		// ppenguin 2016-03-07: try to avoid full screen input in landscape mode (when softKB too large)
 		searchText.setImeOptions(searchText.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
@@ -223,7 +223,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	
-	private int MAX_VISIBLE_NAME = 18;
+	private final int MAX_VISIBLE_NAME = 18;
 	private boolean selectAddress;
 	
 	public String getCurrentFilter() {
@@ -258,7 +258,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return selectAddress;
 	}
 	
-	private void querySearch(final String filter) {
+	private void querySearch(String filter) {
 		if (!currentFilter.equals(filter) || !initFilter) {
 			currentFilter = filter;
 			initFilter = true;
@@ -321,7 +321,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	public String getShortText(T obj) {
 		return getText(obj);
 	}
-	public void itemSelectedBase(final T obj, View v) {
+	public void itemSelectedBase(T obj, View v) {
 		itemSelected(obj);
 	}
 	public abstract void itemSelected(T obj);
@@ -389,9 +389,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	class UIUpdateHandler extends Handler {
-		private Map<String, Integer> endingMap = new HashMap<>();
+		private final Map<String, Integer> endingMap = new HashMap<>();
 		private int minimalIndex = Integer.MAX_VALUE;
-		private String minimalText = null;
+		private String minimalText;
 		
 		@SuppressWarnings("unchecked")
 		@Override
@@ -406,10 +406,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 				updateTextBox(currentFilter, "", null, true);
 			} else if(msg.what == MESSAGE_ADD_ENTITY){
-				final Object obj = msg.obj;
+				Object obj = msg.obj;
 				addObjectToAdapter(currentFilter, (T) obj);
 			} else if (msg.what == MESSAGE_ADD_ENTITIES) {
-				final List<T> objects = (List<T>) msg.obj;
+				List<T> objects = (List<T>) msg.obj;
 				for (T object : objects) {
 					addObjectToAdapter(currentFilter, object);
 				}
@@ -445,9 +445,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	class NamesFilter extends Filter {
 		
-		protected boolean isCancelled = false;
+		protected boolean isCancelled;
 		private String newFilter;
-		private boolean active = false;
+		private boolean active;
 		private long startTime;
 		
 		protected void cancelPreviousFilter(String newFilter){
@@ -502,14 +502,14 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.searchbyname_list, parent, false);
 			}
-			TextView label = (TextView) row.findViewById(R.id.NameLabel);
+			TextView label = row.findViewById(R.id.NameLabel);
 			String distanceText = getDistanceText(getItem(position));
 			String text = getText(getItem(position));
 			if(distanceText == null) {
 				label.setText(text);
 			} else {
 				label.setText(distanceText + " " + text, BufferType.SPANNABLE);
-				((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0,
+				((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getColor(R.color.color_distance)), 0,
 						distanceText.length(), 0);
 			}
 			return row;

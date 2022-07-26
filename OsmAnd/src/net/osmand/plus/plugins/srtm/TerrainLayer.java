@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
@@ -19,8 +18,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.Algorithms;
 
@@ -36,12 +35,12 @@ import java.util.Map;
 
 public class TerrainLayer extends MapTileLayer {
 
-	private final static Log log = PlatformUtil.getLog(TerrainLayer.class);
+	private static final Log log = PlatformUtil.getLog(TerrainLayer.class);
 	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<>();
-	private final static String HILLSHADE_CACHE = "hillshade.cache";
-	private final static String SLOPE_CACHE = "slope.cache";
-	private final static int ZOOM_BOUNDARY = 15;
-	private final static int DEFAULT_ALPHA = 100;
+	private static final String HILLSHADE_CACHE = "hillshade.cache";
+	private static final String SLOPE_CACHE = "slope.cache";
+	private static final int ZOOM_BOUNDARY = 15;
+	private static final int DEFAULT_ALPHA = 100;
 	private final SRTMPlugin srtmPlugin;
 	private final TerrainMode mode;
 
@@ -72,7 +71,7 @@ public class TerrainLayer extends MapTileLayer {
 		}
 	}
 
-	private void indexTerrainFiles(final OsmandApplication app) {
+	private void indexTerrainFiles(OsmandApplication app) {
 		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
 			private final String type = mode.name().toLowerCase();
@@ -160,7 +159,7 @@ public class TerrainLayer extends MapTileLayer {
 				cursor.close();
 			}
 
-			private Map<String, SQLiteTileSource> readFiles(final OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
+			private Map<String, SQLiteTileSource> readFiles(OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
 				Map<String, SQLiteTileSource> rs = new LinkedHashMap<>();
 				File[] files = tilesDir.listFiles();
 				if(files != null) {
@@ -190,8 +189,8 @@ public class TerrainLayer extends MapTileLayer {
 			
 			public boolean isLocked() {
 				return false;
-			};
-			
+			}
+
 			List<String> getTileSource(int x, int y, int zoom) {
 				ArrayList<String> ls = new ArrayList<>();
 				int z = (zoom - ZOOM_BOUNDARY);
@@ -214,21 +213,6 @@ public class TerrainLayer extends MapTileLayer {
 				}
 				return false;
 			}
-			
-			@Override
-			public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
-				List<String> ts = getTileSource(x, y, zoom);
-				for (String t : ts) {
-					SQLiteTileSource sqLiteTileSource = resources.get(t);
-					if (sqLiteTileSource != null) {
-						Bitmap bmp = sqLiteTileSource.getImage(x, y, zoom, timeHolder);
-						if (bmp != null) {
-							return sqLiteTileSource.getImage(x, y, zoom, timeHolder);
-						}
-					}
-				}
-				return null;
-			}
 
 			@Override
 			public byte[] getBytes(int x, int y, int zoom, String dirWithTiles, long[] timeHolder) throws IOException {
@@ -245,7 +229,6 @@ public class TerrainLayer extends MapTileLayer {
 				return null;
 			}
 
-			
 			@Override
 			public int getBitDensity() {
 				return 32;

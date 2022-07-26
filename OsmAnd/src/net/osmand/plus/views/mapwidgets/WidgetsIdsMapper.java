@@ -50,7 +50,7 @@ public class WidgetsIdsMapper {
 		private final List<String> fromIds;
 		private final String toId;
 
-		private boolean appliedVisible = false;
+		private boolean appliedVisible;
 
 		public Replacement(@NonNull List<String> fromIds, @NonNull String toId) {
 			this.fromIds = fromIds;

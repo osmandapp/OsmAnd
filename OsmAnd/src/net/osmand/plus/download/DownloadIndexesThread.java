@@ -10,8 +10,9 @@ import android.os.AsyncTask.Status;
 import android.view.View;
 import android.widget.Toast;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -23,8 +24,10 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -32,32 +35,29 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
 
-	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
+	private static final Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 
 	private final OsmandApplication app;
 
 	private final DatabaseHelper dbHelper;
 	private final DownloadFileHelper downloadFileHelper;
-	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
+	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = new CopyOnWriteArrayList<>();
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
-	private DownloadEvents uiActivity = null;
-	private IndexItem currentDownloadingItem = null;
-	private int currentDownloadingItemProgress = 0;
+	private DownloadEvents uiActivity;
+	private IndexItem currentDownloadingItem;
+	private int currentDownloadingItemProgress;
 	private DownloadResources indexes;
 	private static final int THREAD_ID = 10103;
 

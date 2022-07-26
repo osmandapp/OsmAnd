@@ -15,7 +15,7 @@ import net.osmand.plus.R;
 
 public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithDescription {
 
-	private View.OnClickListener onButtonClickListener;
+	private final View.OnClickListener onButtonClickListener;
 	private Drawable leftCompoundDrawable;
 	private Drawable rightCompoundDrawable;
 	private String buttonTitle;
@@ -80,7 +80,7 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		textButtonTV = (TextView) view.findViewById(R.id.text_button);
+		textButtonTV = view.findViewById(R.id.text_button);
 		textButtonTV.setOnClickListener(onButtonClickListener);
 		textButtonTV.setCompoundDrawablesWithIntrinsicBounds(leftCompoundDrawable, null, rightCompoundDrawable, null);
 		textButtonTV.setText(buttonTitle);

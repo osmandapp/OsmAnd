@@ -140,7 +140,7 @@ class MapSelectionHelper {
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
 				s.clear();
-				final IContextMenuProvider provider = (IContextMenuProvider) layer;
+				IContextMenuProvider provider = (IContextMenuProvider) layer;
 				provider.collectObjectsFromPoint(point, tileBox, s, unknownLocation);
 				for (Object o : s) {
 					selectedObjects.put(o, provider);
@@ -347,6 +347,10 @@ class MapSelectionHelper {
 				PointI pointI = points31.get(k);
 				renderedObject.addLocation(pointI.getX(), pointI.getY());
 			}
+			double lat = MapUtils.get31LatitudeY(obfMapObject.getLabelCoordinateY());
+			double lon = MapUtils.get31LongitudeX(obfMapObject.getLabelCoordinateX());
+			renderedObject.setLabelLatLon(new LatLon(lat, lon));
+
 			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
 				renderedObject.setName(rasterMapSymbol.getContent());
 			}

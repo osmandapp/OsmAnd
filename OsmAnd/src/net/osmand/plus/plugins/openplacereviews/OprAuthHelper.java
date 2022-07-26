@@ -55,7 +55,7 @@ public class OprAuthHelper {
 		listeners.clear();
 	}
 
-	public void authorize(final String token, final String username) {
+	public void authorize(String token, String username) {
 		CheckOprAuthTask checkOprAuthTask = new CheckOprAuthTask(app, token, username, authorized -> {
 			if (authorized) {
 				OpenPlaceReviewsPlugin plugin = getPlugin();

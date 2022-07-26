@@ -46,14 +46,14 @@ import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHI
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
-	private final static String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
-	private final static String DIALOG_TYPE = "dialog_type";
+	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
+	private static final String DIALOG_TYPE = "dialog_type";
 
 	private RoutingDataUtils dataUtils;
 
 	private List<ProfilesGroup> predefinedGroups;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
-	private boolean triedToDownload = false;
+	private boolean triedToDownload;
 	private DialogMode dialogMode;
 	private String predefinedJson;
 
@@ -143,7 +143,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		addToggleButton(selectedItem, offline, online);
 	}
 
-	private TextRadioItem createRadioButton(final DialogMode mode) {
+	private TextRadioItem createRadioButton(DialogMode mode) {
 		String title = getString(mode.titleId);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
@@ -224,7 +224,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	@Override
 	protected void addProfileItem(ProfileDataObject profileDataObject) {
-		final RoutingDataObject profile = (RoutingDataObject) profileDataObject;
+		RoutingDataObject profile = (RoutingDataObject) profileDataObject;
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
 

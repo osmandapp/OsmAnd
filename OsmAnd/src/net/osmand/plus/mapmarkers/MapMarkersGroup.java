@@ -25,7 +25,7 @@ public class MapMarkersGroup {
 
 	private long creationDate;
 	private boolean visible = true;
-	private boolean wasShown = false;
+	private boolean wasShown;
 	private boolean visibleUntilRestart;
 	private List<MapMarker> markers = new ArrayList<>();
 	private TravelArticle wikivoyageArticle;

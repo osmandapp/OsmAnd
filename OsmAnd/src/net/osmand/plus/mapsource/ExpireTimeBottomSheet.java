@@ -54,7 +54,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.expire_time));
 		items.add(titleItem);
-		final View inputValueLayout = inflater.inflate(R.layout.edit_text_with_descr, null);
+		View inputValueLayout = inflater.inflate(R.layout.edit_text_with_descr, null);
 		((TextView) inputValueLayout.findViewById(R.id.dialog_descr)).setText(R.string.expire_time_descr);
 		editText = inputValueLayout.findViewById(R.id.value_edit_text);
 		if (expireValue > 0) {
@@ -65,7 +65,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
 		TextInputLayout textInputLayout = inputValueLayout.findViewById(R.id.value_input_layout);
 		textInputLayout.setBoxStrokeColor(boxStrokeColor);
-		final SimpleBottomSheetItem editTextItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+		SimpleBottomSheetItem editTextItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(inputValueLayout)
 				.create();
 		items.add(editTextItem);

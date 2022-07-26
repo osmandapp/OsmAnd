@@ -41,7 +41,7 @@ public class GpsFilterHelper {
 	private final Set<GpsFilterListener> listeners = new HashSet<>();
 
 	private final Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
-	private GpsFilterTask gpsFilterTask = null;
+	private GpsFilterTask gpsFilterTask;
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -241,7 +241,7 @@ public class GpsFilterHelper {
 		return copiedTracks;
 	}
 
-	public static abstract class GpsFilter {
+	public abstract static class GpsFilter {
 
 		public static final String TAG_SMOOTHING_THRESHOLD = "smoothing_threshold";
 		public static final String TAG_MIN_FILTER_SPEED = "min_filter_speed";

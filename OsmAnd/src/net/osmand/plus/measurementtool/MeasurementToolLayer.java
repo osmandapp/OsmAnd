@@ -111,7 +111,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private MeasurementEditingContext editingCtx;
 
 	private boolean showPointsMinZoom;
-	private int showPointsZoomCache = 0;
+	private int showPointsZoomCache;
 
 	private TrackChartPoints trackChartPoints;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();

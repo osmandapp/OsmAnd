@@ -32,7 +32,7 @@ public class IncrementalChangesManager {
 	private static final Log LOG = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private static final String URL = "https://osmand.net/check_live";
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(IncrementalChangesManager.class);
-	private ResourceManager resourceManager;
+	private final ResourceManager resourceManager;
 	private final Map<String, RegionUpdateFiles> regions = new ConcurrentHashMap<String, IncrementalChangesManager.RegionUpdateFiles>();
 
 	public IncrementalChangesManager(ResourceManager resourceManager) {
@@ -188,10 +188,7 @@ public class IncrementalChangesManager {
 
 		public boolean isPreferrableLimitForDayUpdates(String monthYearPart, List<IncrementalUpdate> dayUpdates) {
 			List<RegionUpdate> lst = updateFiles.dayUpdates.get(monthYearPart);
-			if (lst == null || lst.size() < 10) {
-				return true;
-			}
-			return false;
+			return lst == null || lst.size() < 10;
 		}
 
 		@Nullable
@@ -254,10 +251,7 @@ public class IncrementalChangesManager {
 
 		public boolean isDayUpdateApplicable() {
 			boolean inLimits = dayUpdates.size() > 0 && dayUpdates.size() < 4;
-			if (!inLimits) {
-				return false;
-			}
-			return true;
+			return inLimits;
 		}
 
 		public List<IncrementalUpdate> getMonthUpdate() {

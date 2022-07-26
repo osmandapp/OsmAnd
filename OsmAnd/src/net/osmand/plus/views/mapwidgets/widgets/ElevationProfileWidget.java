@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
@@ -43,9 +44,11 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -69,13 +72,13 @@ public class ElevationProfileWidget extends MapWidget {
 	private Location myLocation;
 	private List<WptPt> allPoints;
 
-	private boolean showSlopes = false;
+	private boolean showSlopes;
 	private RouteCalculationResult route;
 	private int firstVisiblePointIndex = -1;
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
 
-	private boolean movedToLocation = false;
+	private boolean movedToLocation;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
@@ -170,7 +173,10 @@ public class ElevationProfileWidget extends MapWidget {
 		slopeDataSet = null;
 
 		chart = view.findViewById(R.id.line_chart);
-		Drawable markerIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_location_color);
+		UiUtilities iconsCache = app.getUIUtilities();
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		int profileColor = appMode.getProfileColor(isNightMode());
+		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
 		GpxUiHelper.setupGPXChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
@@ -184,7 +190,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true, false);
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}
@@ -201,7 +207,7 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		segment = TrackDetailsMenu.getTrackSegment(chart, gpxItem);
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
-			boolean hasTranslated = false;
+			boolean hasTranslated;
 			float highlightDrawX = -1;
 
 			@Override
@@ -379,7 +385,7 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		double fromDistance = minVisibleX * toMetersMultiplier;
 		double toDistance = maxVisibleX * toMetersMultiplier;
-		final List<WptPt> points = this.allPoints;
+		List<WptPt> points = this.allPoints;
 		int firstPointIndex = gpx.getPointIndexByDistance(points, fromDistance);
 		int lastPointIndex = gpx.getPointIndexByDistance(points, toDistance);
 		if (firstVisiblePointIndex == firstPointIndex && lastVisiblePointIndex == lastPointIndex) {

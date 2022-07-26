@@ -77,7 +77,7 @@ public abstract class OsmandListActivity extends
 	}
 
 	public ListView getListView() {
-		return (ListView)findViewById(android.R.id.list);
+		return findViewById(android.R.id.list);
 	}
 
 	public ListAdapter getListAdapter() {

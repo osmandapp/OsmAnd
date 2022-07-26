@@ -106,7 +106,7 @@ class AppVersionUpgradeOnInit {
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private int prevAppVersion;
 	private boolean appVersionChanged;
 	private boolean firstTime;

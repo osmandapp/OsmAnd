@@ -60,16 +60,16 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private static final int CATEGORIES_TYPE = 4;
 
 
-	private MapActivity mapActivity;
-	private OsmandApplication app;
+	private final MapActivity mapActivity;
+	private final OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
-	private boolean night;
+	private final boolean night;
 	private boolean showDirectionEnabled;
 	private List<MapMarker> showDirectionMarkers;
 	private Snackbar snackbar;
 
 	private MapMarkersGroupsAdapterListener listener;
-	private UpdateLocationViewCache updateLocationViewCache;
+	private final UpdateLocationViewCache updateLocationViewCache;
 
 	public void setListener(MapMarkersGroupsAdapterListener listener) {
 		this.listener = listener;
@@ -296,13 +296,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	@Override
-	public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		UiUtilities iconsCache = app.getUIUtilities();
 		if (holder instanceof MapMarkerItemViewHolder) {
-			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
-			final MapMarker marker = (MapMarker) getItem(position);
+			MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
+			MapMarker marker = (MapMarker) getItem(position);
 
-			final boolean markerInHistory = marker.history;
+			boolean markerInHistory = marker.history;
 
 			int color;
 			if (marker.history) {
@@ -313,7 +313,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			ImageView markerImageViewToUpdate;
 			int drawableResToUpdate;
 			int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
-			final boolean markerToHighlight = showDirectionMarkers.contains(marker);
+			boolean markerToHighlight = showDirectionMarkers.contains(marker);
 			if (showDirectionEnabled && markerToHighlight) {
 				itemViewHolder.iconDirection.setVisibility(View.GONE);
 
@@ -321,7 +321,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_divider_dark : R.color.markers_top_bar_background));
 				itemViewHolder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.text_color_primary_dark : R.color.color_white));
 				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_divider_color));
-				itemViewHolder.optionsBtn.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, R.drawable.marker_circle_background_on_map_with_inset));
+				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, R.drawable.marker_circle_background_on_map_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, R.color.color_white));
 				itemViewHolder.description.setTextColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_color));
 
@@ -334,7 +334,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
 				itemViewHolder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, night));
 				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
-				itemViewHolder.optionsBtn.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
+				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, actionIconColor));
 				itemViewHolder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, night));
 
@@ -414,8 +414,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			updateLocationViewCache.arrowColor = markerToHighlight ? color : 0;
 			app.getUIUtilities().updateLocationView(updateLocationViewCache, markerImageViewToUpdate, itemViewHolder.distance, markerLatLon);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
-			final MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
-			final Object header = getItem(position);
+			MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
+			Object header = getItem(position);
 			String headerString;
 			if (header instanceof MarkerGroupItem) {
 				headerViewHolder.icon.setVisibility(View.GONE);
@@ -424,8 +424,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 				headerViewHolder.articleDescription.setVisibility(View.GONE);
 			} else if (header instanceof GroupHeader) {
-				final GroupHeader groupHeader = (GroupHeader) header;
-				final MapMarkersGroup group = groupHeader.getGroup();
+				GroupHeader groupHeader = (GroupHeader) header;
+				MapMarkersGroup group = groupHeader.getGroup();
 				String groupName = group.getName();
 				if (groupName.isEmpty()) {
 					groupName = app.getString(R.string.shared_string_favorites);
@@ -442,9 +442,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
-				final boolean groupIsDisabled = group.isDisabled();
+				boolean groupIsDisabled = group.isDisabled();
 				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
-				final TravelArticle article = group.getWikivoyageArticle();
+				TravelArticle article = group.getWikivoyageArticle();
 				if (article != null && !groupIsDisabled) {
 					headerViewHolder.articleDescription.setVisibility(View.VISIBLE);
 					View.OnClickListener openWikiwoyageArticle = new View.OnClickListener() {
@@ -470,8 +470,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
-						final MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-						final GPXFile[] gpxFile = new GPXFile[1];
+						MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+						GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
 
 						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
@@ -531,9 +531,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			headerViewHolder.title.setText(headerString);
 			headerViewHolder.bottomShadow.setVisibility(position == getItemCount() - 1 ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
-			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
-			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
-			final boolean showHistory = showHideHistoryButton.showHistory;
+			MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
+			ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
+			boolean showHistory = showHideHistoryButton.showHistory;
 			if (position == getItemCount() - 1) {
 				showHideHistoryViewHolder.bottomShadow.setVisibility(View.VISIBLE);
 			} else {
@@ -549,11 +549,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			});
 		} else if (holder instanceof MapMarkerCategoriesViewHolder) {
-			final MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
-			final Object header = getItem(position);
+			MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
+			Object header = getItem(position);
 			if (header instanceof CategoriesSubHeader) {
-				final CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
-				final MapMarkersGroup group = categoriesSubHeader.getGroup();
+				CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
+				MapMarkersGroup group = categoriesSubHeader.getGroup();
 				View.OnClickListener openChooseCategoriesDialog = new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -676,7 +676,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public class CategoriesSubHeader {
 
-		private MapMarkersGroup group;
+		private final MapMarkersGroup group;
 
 		public CategoriesSubHeader(MapMarkersGroup group) {
 			this.group = group;

@@ -66,13 +66,13 @@ import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN
 public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-	private boolean nightMode;
+	private final OsmandApplication app;
+	private final UiUtilities uiUtilities;
+	private final boolean nightMode;
 	private List<RearrangeMenuAdapterItem> items;
 	private MenuItemsAdapterListener listener;
-	private int activeColorRes;
-	private int textColorRes;
+	private final int activeColorRes;
+	private final int textColorRes;
 
 
 	public RearrangeMenuItemsAdapter(OsmandApplication app,
@@ -120,7 +120,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		RearrangeMenuAdapterItem item = items.get(position);
 		if (holder instanceof DescriptionHolder) {
 			DescriptionHolder h = (DescriptionHolder) holder;
@@ -141,13 +141,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.imageContainer.setPadding(paddingStart, paddingTop, paddingStart, 0);
 			}
 		} else if (holder instanceof ItemHolder) {
-			final ItemHolder h = (ItemHolder) holder;
+			ItemHolder h = (ItemHolder) holder;
 			ContextMenuItem menuItem = (ContextMenuItem) item.value;
 			String id = menuItem.getId();
 			if (DRAWER_DIVIDER_ID.equals(id)) {
 				h.title.setText(R.string.shared_string_divider);
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
-				h.title.setTextColor(app.getResources().getColor(activeColorRes));
+				h.title.setTextColor(app.getColor(activeColorRes));
 				h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 				h.description.setText(R.string.divider_descr);
 				h.icon.setVisibility(View.GONE);
@@ -178,7 +178,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 						menuItem.getTitle()));
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_regular)));
 				h.title.setText(menuItem.getTitle());
-				h.title.setTextColor(app.getResources().getColor(textColorRes));
+				h.title.setTextColor(app.getColor(textColorRes));
 				h.description.setText(getDescription(menuItem.getId()));
 				h.divider.setVisibility(View.GONE);
 				h.moveButton.setVisibility(View.VISIBLE);
@@ -317,10 +317,10 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	private static class DescriptionHolder extends RecyclerView.ViewHolder
 			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		private ImageView image;
-		private ImageView deviceImage;
-		private TextView description;
-		private FrameLayout imageContainer;
+		private final ImageView image;
+		private final ImageView deviceImage;
+		private final TextView description;
+		private final FrameLayout imageContainer;
 
 		DescriptionHolder(@NonNull View itemView) {
 			super(itemView);
@@ -339,13 +339,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	private static class ItemHolder extends RecyclerView.ViewHolder
 			implements ReorderItemTouchHelperCallback.UnmovableItem {
 
-		private TextView title;
-		private TextView description;
-		private ImageView icon;
-		private ImageView actionIcon;
-		private ImageView moveIcon;
-		private FrameLayout moveButton;
-		private View divider;
+		private final TextView title;
+		private final TextView description;
+		private final ImageView icon;
+		private final ImageView actionIcon;
+		private final ImageView moveIcon;
+		private final FrameLayout moveButton;
+		private final View divider;
 		private boolean movable = true;
 
 		ItemHolder(@NonNull View itemView) {
@@ -382,9 +382,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	private static class HeaderHolder extends RecyclerView.ViewHolder
 			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		private ImageView moveIcon;
-		private TextView title;
-		private TextView description;
+		private final ImageView moveIcon;
+		private final TextView title;
+		private final TextView description;
 		private boolean movable = true;
 
 		HeaderHolder(@NonNull View itemView) {
@@ -402,9 +402,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	private static class ButtonHolder extends RecyclerView.ViewHolder
 			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		private View button;
-		private ImageView icon;
-		private TextView title;
+		private final View button;
+		private final ImageView icon;
+		private final TextView title;
 
 		ButtonHolder(@NonNull View itemView) {
 			super(itemView);
@@ -420,8 +420,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	}
 
 	public static class RearrangeMenuAdapterItem {
-		private AdapterItemType type;
-		private Object value;
+		private final AdapterItemType type;
+		private final Object value;
 
 		public RearrangeMenuAdapterItem(AdapterItemType type, Object value) {
 			this.type = type;
@@ -440,10 +440,10 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	public static class ButtonItem {
 		@StringRes
-		private int titleRes;
+		private final int titleRes;
 		@DrawableRes
-		private int iconRes;
-		private View.OnClickListener listener;
+		private final int iconRes;
+		private final View.OnClickListener listener;
 
 		public ButtonItem(int titleRes, int iconRes, View.OnClickListener listener) {
 			this.titleRes = titleRes;
@@ -454,9 +454,9 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	public static class HeaderItem {
 		@StringRes
-		private int titleRes;
+		private final int titleRes;
 		@StringRes
-		private int descrRes;
+		private final int descrRes;
 
 		public HeaderItem(int titleRes, int descrRes) {
 			this.titleRes = titleRes;

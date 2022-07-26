@@ -44,7 +44,7 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), v);
 
-		Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+		Toolbar toolbar = v.findViewById(R.id.toolbar);
 		int icBackResId = AndroidUtils.getNavigationIconResId(v.getContext());
 		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -135,7 +135,7 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OprStartFragment fragment = new OprStartFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, OprStartFragment.TAG)
+					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}

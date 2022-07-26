@@ -53,7 +53,7 @@ public class NetworkRouteContext {
 	}
 
 	public static long convertPointToLong(int x31, int y31) {
-		return (((long) x31) << 32l) + y31;
+		return (((long) x31) << 32) + y31;
 	}
 
 	public static int getXFromLong(long l) {
@@ -79,9 +79,6 @@ public class NetworkRouteContext {
 					Iterator<NetworkRouteSegment> segments = pnt.objects.iterator();
 					while (segments.hasNext()) {
 						NetworkRouteSegment segment = segments.next();
-						if (segment.start != 0) {
-							continue;
-						}
 						if (rKey != null && !segment.routeKey.equals(rKey)) {
 							continue;
 						}
@@ -89,6 +86,9 @@ public class NetworkRouteContext {
 						if (lst == null) {
 							lst = new ArrayList<>();
 							map.put(segment.routeKey, lst);
+						}
+						if (segment.start != 0) {
+							continue;
 						}
 						lst.add(segment);
 					}
@@ -155,7 +155,7 @@ public class NetworkRouteContext {
 		long tileId = getTileId(x31, y31);
 		NetworkRoutesTile tile = indexedTiles.get(tileId);
 		if (tile == null) {
-			tile = loadTile(x31, y31);
+			tile = loadTile(x31, y31, tileId);
 			indexedTiles.put(tileId, tile);
 		}
 		return tile;
@@ -166,7 +166,7 @@ public class NetworkRouteContext {
 	}
 	
 
-	private NetworkRoutesTile loadTile(int x31, int y31) throws IOException {
+	private NetworkRoutesTile loadTile(int x31, int y31, long tileId) throws IOException {
 		stats.loadedTiles++;
 		int zm = (31 - ZOOM_TO_LOAD_TILES);
 		int tileX = x31 >> zm;
@@ -179,7 +179,7 @@ public class NetworkRouteContext {
 			SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(tileLeft, tileRight,
 					tileTop, tileBottom, null);
 			req.log = false;
-			return loadRoutingDataTile(req);
+			return loadRoutingDataTile(req, tileId);
 		} else {
 			SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight,
 					tileTop, tileBottom, ZOOM_TO_LOAD_TILES, new BinaryMapIndexReader.SearchFilter() {
@@ -189,12 +189,12 @@ public class NetworkRouteContext {
 						}
 					}, null);
 			req.log = false;
-			return loadMapDataTile(req);
+			return loadMapDataTile(req, tileId);
 		}
 	}
-
-	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req) throws IOException {
-		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
+	
+	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req, long tileId) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile(tileId);
 		for (Map.Entry<BinaryMapIndexReader, List<RouteSubregion>> reader : readers.entrySet()) {
 			req.clearSearchResults();
 			long nt = System.nanoTime();
@@ -224,8 +224,8 @@ public class NetworkRouteContext {
 		return osmcRoutesTile;
 	}
 
-	private NetworkRoutesTile loadMapDataTile(BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req ) throws IOException {
-		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile();
+	private NetworkRoutesTile loadMapDataTile(BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> req, long tileId) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile(tileId);
 		for (BinaryMapIndexReader reader : readers.keySet()) {
 			req.clearSearchResults();
 			long nt = System.nanoTime();
@@ -415,12 +415,21 @@ public class NetworkRouteContext {
 
 	private static class NetworkRoutesTile {
 		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
+		private final long tileId;
+
+		public NetworkRoutesTile(long tileId) {
+			this.tileId = tileId;
+
+		}
 
 		public void add(BinaryMapDataObject obj, RouteKey rk) {
 			int len = obj.getPointsLength();
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
+				if (getTileId(x31, y31) != tileId) {
+					continue;
+				}
 				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
@@ -441,6 +450,9 @@ public class NetworkRouteContext {
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
+				if (getTileId(x31, y31) != tileId) {
+					continue;
+				}
 				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
@@ -461,6 +473,9 @@ public class NetworkRouteContext {
 		}
 
 		public NetworkRoutePoint getRouteSegment(int x31, int y31) {
+			if (getTileId(x31, y31) != tileId) {
+				System.err.println(String.format("Wrong tile id !!! %d != %d", getTileId(x31, y31), tileId));
+			}
 			return routes.get(convertPointToLong(x31, y31));
 		}
 

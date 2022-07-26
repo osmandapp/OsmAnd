@@ -85,8 +85,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private POITileProvider poiTileProvider;
 	private float textScale = 1f;
-	private boolean nightMode = false;
-	private boolean textVisible = false;
+	private boolean nightMode;
+	private boolean textVisible;
 
 	private final TravelRendererHelper travelRendererHelper;
 	private boolean showTravel;
@@ -104,7 +104,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private final MapLayerData<List<Amenity>> data;
 
-	public POIMapLayer(@NonNull final Context context) {
+	public POIMapLayer(@NonNull Context context) {
 		super(context);
 		app = (OsmandApplication) context.getApplicationContext();
 		routingHelper = app.getRoutingHelper();
@@ -198,19 +198,19 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Set<PoiUIFilter> collectFilters() {
 		Set<PoiUIFilter> calculatedFilters = new TreeSet<>(filters);
 		if (showTravel) {
-			boolean routeArticleFilterEnabled = POIMapLayer.this.routeArticleFilterEnabled;
-			PoiUIFilter routeArticleFilter = POIMapLayer.this.routeArticleFilter;
+			boolean routeArticleFilterEnabled = this.routeArticleFilterEnabled;
+			PoiUIFilter routeArticleFilter = this.routeArticleFilter;
 			if (routeArticleFilterEnabled && routeArticleFilter != null) {
 				calculatedFilters.add(routeArticleFilter);
 			}
-			boolean routeArticlePointsFilterEnabled = POIMapLayer.this.routeArticlePointsFilterEnabled;
-			PoiUIFilter routeArticlePointsFilter = POIMapLayer.this.routeArticlePointsFilter;
+			boolean routeArticlePointsFilterEnabled = this.routeArticlePointsFilterEnabled;
+			PoiUIFilter routeArticlePointsFilter = this.routeArticlePointsFilter;
 			if (routeArticlePointsFilterEnabled && routeArticlePointsFilter != null
 					&& !Algorithms.isEmpty(routeArticlePointsFilter.getFilterByName())) {
 				calculatedFilters.add(routeArticlePointsFilter);
 			}
-			boolean routeTrackAsPoiFilterEnabled = POIMapLayer.this.routeTrackAsPoiFilterEnabled;
-			PoiUIFilter routeTrackFilter = POIMapLayer.this.routeTrackFilter;
+			boolean routeTrackAsPoiFilterEnabled = this.routeTrackAsPoiFilterEnabled;
+			PoiUIFilter routeTrackFilter = this.routeTrackFilter;
 			if (routeTrackAsPoiFilterEnabled && routeTrackFilter != null) {
 				calculatedFilters.add(routeTrackFilter);
 			}
@@ -249,7 +249,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	public int getRadiusPoi(RotatedTileBox tb) {
 		int r;
-		final double zoom = tb.getZoom();
+		double zoom = tb.getZoom();
 		if (zoom < START_ZOOM) {
 			r = 0;
 		} else if (zoom <= 15) {
@@ -469,7 +469,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	public static void showPlainDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
-		final TextView textView = new TextView(ctx);
+		TextView textView = new TextView(ctx);
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		int textMargin = dpToPx(app, 10f);
 		boolean light = app.getSettings().isLightContent();
@@ -485,7 +485,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	public static void showHtmlDescriptionDialog(Context ctx, OsmandApplication app, String html, String title) {
-		final WebViewEx webView = new WebViewEx(ctx);
+		WebViewEx webView = new WebViewEx(ctx);
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		webView.setLayoutParams(llTextParams);
 		int margin = dpToPx(app, 10f);
@@ -504,23 +504,23 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		showText(ctx, app, webView, title);
 	}
 
-	static int getResIdFromAttribute(final Context ctx, final int attr) {
+	static int getResIdFromAttribute(Context ctx, int attr) {
 		if (attr == 0) {
 			return 0;
 		}
-		final TypedValue typedvalueattr = new TypedValue();
+		TypedValue typedvalueattr = new TypedValue();
 		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
 	}
 
-	private static void showText(final Context ctx, final OsmandApplication app, final View view, String title) {
-		final Dialog dialog = new Dialog(ctx,
+	private static void showText(Context ctx, OsmandApplication app, View view, String title) {
+		Dialog dialog = new Dialog(ctx,
 				app.getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
 
-		final Toolbar topBar = new Toolbar(ctx);
+		Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(ctx));
 		topBar.setNavigationIcon(icBack);

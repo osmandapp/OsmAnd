@@ -48,7 +48,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
 	private String selectedItem;
 	private float currentValue;
-	private int contentHeightPrevious = 0;
+	private int contentHeightPrevious;
 	private EditText text;
 	private int buttonsHeight;
 	private int shadowHeight;
@@ -65,7 +65,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	@SuppressLint("ClickableViewAccessibility")
 	private BaseBottomSheetItem createBottomSheetItem(OsmandApplication app) {
-		final SizePreference preference = (SizePreference) getPreference();
+		SizePreference preference = (SizePreference) getPreference();
 		View mainView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_edit_with_chips_view, null);
 		TextView title = mainView.findViewById(R.id.title);
@@ -78,10 +78,10 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			TextView description = mainView.findViewById(R.id.description);
 			description.setText(app.getString(vehicleSizeAssets.getDescriptionRes()));
 		}
-		final HorizontalChipsView chipsView = mainView.findViewById(R.id.chips_view);
-		final TextView metric = mainView.findViewById(R.id.metric);
+		HorizontalChipsView chipsView = mainView.findViewById(R.id.chips_view);
+		TextView metric = mainView.findViewById(R.id.metric);
 		metric.setText(app.getString(preference.getAssets().getMetricRes()));
-		final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
+		DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
 		text = mainView.findViewById(R.id.text_edit);
 		try {
 			currentValue = Float.parseFloat(preference.getValue());
@@ -159,7 +159,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		final View view = super.onCreateView(inflater, parent, savedInstanceState);
+		View view = super.onCreateView(inflater, parent, savedInstanceState);
 		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		return view;
 	}

@@ -31,7 +31,7 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
-			final OsmPoint osmPoint = (OsmPoint) args.getSerializable(OSM_POINT);
+			OsmPoint osmPoint = (OsmPoint) args.getSerializable(OSM_POINT);
 			String name = OsmEditingPlugin.getName(osmPoint);
 			if (Algorithms.isEmpty(name)) {
 				name = OsmEditingPlugin.getCategory(osmPoint, getContext());

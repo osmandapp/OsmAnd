@@ -46,7 +46,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	private final boolean textVisible;
 	private final TextRasterizer.Style textStyle;
 	private final float textScale;
-	private boolean showClosed = false;
+	private final boolean showClosed;
 	private final int minZoom;
 	private final PointI offset;
 

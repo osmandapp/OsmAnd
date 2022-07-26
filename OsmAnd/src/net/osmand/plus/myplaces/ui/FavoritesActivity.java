@@ -64,7 +64,7 @@ public class FavoritesActivity extends TabActivity {
 
 	private ViewPager viewPager;
 
-	private Bundle intentParams = null;
+	private Bundle intentParams;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -266,11 +266,11 @@ public class FavoritesActivity extends TabActivity {
 			return;
 		}
 		try {
-			ImageView cancelIcon = (ImageView) searchView.findViewById(R.id.search_close_btn);
+			ImageView cancelIcon = searchView.findViewById(R.id.search_close_btn);
 			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
 			//styling search hint icon and text
-			SearchView.SearchAutoComplete searchEdit = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
-			searchEdit.setTextColor(activity.getResources().getColor(R.color.color_white));
+			SearchView.SearchAutoComplete searchEdit = searchView.findViewById(R.id.search_src_text);
+			searchEdit.setTextColor(activity.getColor(R.color.color_white));
 			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
 			float rawTextSize = searchEdit.getTextSize();
 			int textSize = (int) (rawTextSize * 1.25);

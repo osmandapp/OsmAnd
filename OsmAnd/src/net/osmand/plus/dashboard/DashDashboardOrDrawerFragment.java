@@ -28,7 +28,7 @@ public class DashDashboardOrDrawerFragment extends DashBaseFragment {
 		view.findViewById(R.id.useDashboardButton).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final OsmandSettings settings = getMyApplication().getSettings();
+				OsmandSettings settings = getMyApplication().getSettings();
 				settings.SHOW_DASHBOARD_ON_START.set(true);
 				settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
 				settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);
@@ -38,7 +38,7 @@ public class DashDashboardOrDrawerFragment extends DashBaseFragment {
 		view.findViewById(R.id.useDrawerButton).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final OsmandSettings settings = getMyApplication().getSettings();
+				OsmandSettings settings = getMyApplication().getSettings();
 				settings.SHOW_DASHBOARD_ON_START.set(false);
 				settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(false);
 				settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);

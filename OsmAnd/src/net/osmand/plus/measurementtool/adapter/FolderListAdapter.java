@@ -95,7 +95,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final FolderViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull FolderViewHolder holder, int position) {
 		if (holder instanceof AddFolderViewHolder) {
 			bindAddItem(holder);
 		} else {

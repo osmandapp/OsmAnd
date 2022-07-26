@@ -77,8 +77,8 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 	public void onStart() {
 		super.onStart();
 		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			final Activity activity = getActivity();
-			final Window window = getDialog().getWindow();
+			Activity activity = getActivity();
+			Window window = getDialog().getWindow();
 			if (activity != null && window != null) {
 				WindowManager.LayoutParams params = window.getAttributes();
 				params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
@@ -87,19 +87,19 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 		}
 	}
 
-	protected void setupHeightAndBackground(final View mainView) {
-		final Activity activity = getActivity();
+	protected void setupHeightAndBackground(View mainView) {
+		Activity activity = getActivity();
 		if (activity != null) {
-			final int screenHeight = AndroidUtils.getScreenHeight(activity);
-			final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-			final int contentHeight = screenHeight - statusBarHeight
+			int screenHeight = AndroidUtils.getScreenHeight(activity);
+			int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
+			int contentHeight = screenHeight - statusBarHeight
 					- AndroidUtils.getNavBarHeight(activity)
 					- getResources().getDimensionPixelSize(R.dimen.wikivoyage_show_images_dialog_buttons_height);
 
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {
-					final View contentView = mainView.findViewById(R.id.scroll_view);
+					View contentView = mainView.findViewById(R.id.scroll_view);
 					if (contentView.getHeight() > contentHeight) {
 						contentView.getLayoutParams().height = contentHeight;
 						contentView.requestLayout();
@@ -114,11 +114,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 					}
 
 					ViewTreeObserver obs = mainView.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
-						obs.removeGlobalOnLayoutListener(this);
-					}
+					obs.removeOnGlobalLayoutListener(this);
 				}
 			});
 		}

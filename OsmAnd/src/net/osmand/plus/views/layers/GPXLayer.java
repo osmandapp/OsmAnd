@@ -143,7 +143,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Bitmap highlightedPointImage;
 	private TrackDrawInfo trackDrawInfo;
 	private float textScale = 1f;
-	private boolean nightMode = false;
+	private boolean nightMode;
 	private boolean changeMarkerPositionModeCached;
 
 	private ChartPointsHelper chartPointsHelper;
@@ -185,7 +185,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
-	private long trackMarkersChangedTime = 0;
+	private long trackMarkersChangedTime;
 
 	private ContextMenuLayer contextMenuLayer;
 	private NetworkRouteSelectionTask networkRouteSelectionTask;
@@ -656,7 +656,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSplitItems(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                            @NonNull List<GpxDisplayItem> items) {
-		final QuadRect latLonBounds = tileBox.getLatLonBounds();
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		int r = (int) (12 * tileBox.getDensity());
 		paintTextIcon.setTextSize(r);
 		int dr = r * 3 / 2;
@@ -787,7 +787,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			List<LatLon> smallObjectsLatLon = new ArrayList<>();
 			Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 			// request to load
-			final QuadRect latLonBounds = tileBox.getLatLonBounds();
+			QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<Pair<WptPt, MapMarker>> fullObjects = new ArrayList<>();
 				int fileColor = getFileColor(g);
@@ -1725,9 +1725,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o,
 	                                   @NonNull LatLon position,
-	                                   @Nullable final ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	                                   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		if (o instanceof WptPt) {
-			final WptPt objectInMotion = (WptPt) o;
+			WptPt objectInMotion = (WptPt) o;
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();

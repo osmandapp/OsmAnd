@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class LocationServiceHelper {
 
-	public static abstract class LocationCallback {
+	public abstract static class LocationCallback {
 
 		public void onLocationResult(@NonNull List<Location> locations) {
 		}
