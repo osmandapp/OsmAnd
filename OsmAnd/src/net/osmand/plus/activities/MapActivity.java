@@ -9,7 +9,6 @@ import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -73,8 +71,8 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.FailSafeFunctions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -215,6 +213,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
 	private ScrollHelper mapScrollHelper;
+	private RestoreNavigationHelper restoreNavigationHelper;
 
 	private boolean landscapeLayout;
 
@@ -260,6 +259,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new ScrollHelper(app);
+		restoreNavigationHelper = new RestoreNavigationHelper(this);
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -430,7 +430,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						refreshMap();
 					}
 					if (event == InitEvents.ROUTING_CONFIG_INITIALIZED) {
-						checkRestoreRoutingMode();
+						restoreNavigationHelper.checkRestoreRoutingMode();
 					}
 				}
 
@@ -450,17 +450,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMyApplication().checkApplicationIsBeingInitialized(initListener);
 		} else {
 			app.getOsmandMap().setupOpenGLView(true);
-			checkRestoreRoutingMode();
-		}
-	}
-
-	private void checkRestoreRoutingMode() {
-		// This situation could be when navigation suddenly crashed and after restarting
-		// it tries to continue the last route
-		if (settings.FOLLOW_THE_ROUTE.get()
-				&& !app.getRoutingHelper().isRouteCalculated()
-				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-			FailSafeFunctions.restoreRoutingMode(this);
+			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
 	}
 
@@ -1221,7 +1211,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
-		FailSafeFunctions.quitRouteRestoreDialog();
+		restoreNavigationHelper.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();

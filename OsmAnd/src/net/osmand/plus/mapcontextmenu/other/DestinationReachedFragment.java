@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DESTINATION_REACHED_ID;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -197,16 +200,20 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	}
 
 	@Override
-	public void onUpdateCalculationProgress(int progress) { }
+	public void onUpdateCalculationProgress(int progress) {
+	}
 
 	@Override
-	public void onRequestPrivateAccessRouting() { }
+	public void onRequestPrivateAccessRouting() {
+	}
 
 	@Override
-	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) { }
+	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+	}
 
 	@Override
-	public void onCalculationFinish() { }
+	public void onCalculationFinish() {
+	}
 
 	public static boolean wasShown() {
 		return shown;
@@ -216,10 +223,11 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		shown = false;
 	}
 
-	public static void show(MapActivity mapActivity) {
-		if (!shown) {
+	public static void show(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		if (!shown && customization.isFeatureEnabled(FRAGMENT_DESTINATION_REACHED_ID)) {
 			shown = true;
-			OsmandApplication app = mapActivity.getMyApplication();
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 				showInstance(mapActivity);
