@@ -2822,6 +2822,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference(this, "follow_to_route", false).makeGlobal();
 	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference(this, "follow_gpx", null).makeGlobal();
+	public final OsmandPreference<Boolean> SHOW_RESTART_NAVIGATION_DIALOG = new BooleanPreference(this, "show_restart_navigation_dialog", true).makeGlobal().makeShared();
 
 	public final OsmandPreference<String> SELECTED_TRAVEL_BOOK = new StringPreference(this, "selected_travel_book", "").makeGlobal().makeShared();
 
