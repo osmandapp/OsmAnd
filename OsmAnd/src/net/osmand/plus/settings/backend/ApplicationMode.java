@@ -38,6 +38,7 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
@@ -374,7 +375,7 @@ public class ApplicationMode {
 				this.iconRes = iconRes;
 			}
 		} catch (Exception e) {
-//				return R.drawable.map_world_globe_dark;
+//				return R.drawable.ic_world_globe_dark;
 		}
 	}
 
@@ -675,9 +676,11 @@ public class ApplicationMode {
 		return mode;
 	}
 
-	public static ApplicationModeBean fromJson(String json) {
+	public static ApplicationModeBean fromJson(OsmandApplication app, String json) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		return gson.fromJson(json, ApplicationModeBean.class);
+		ApplicationModeBean modeBean = gson.fromJson(json, ApplicationModeBean.class);
+		checkAndReplaceInvalidIconName(app, modeBean);
+		return modeBean;
 	}
 
 	public static ApplicationModeBuilder fromModeBean(OsmandApplication app, ApplicationModeBean modeBean) {
@@ -773,6 +776,18 @@ public class ApplicationMode {
 		ApplicationModeBuilder builder = create(parent, -1, stringKey);
 		builder.getApplicationMode().app = app;
 		return builder;
+	}
+
+	private static void checkAndReplaceInvalidIconName(OsmandApplication app, ApplicationModeBean modeBean) {
+		if (AndroidUtils.getDrawableId(app, modeBean.iconName) == 0) {
+			ApplicationMode appMode = valueOfStringKey(modeBean.stringKey, null);
+			if (appMode == null) {
+				appMode = valueOfStringKey(modeBean.parent, null);
+			}
+			if (appMode != null) {
+				modeBean.iconName = appMode.getIconName();
+			}
+		}
 	}
 
 	public static class ApplicationModeBuilder {
@@ -893,7 +908,7 @@ public class ApplicationMode {
 		@Expose
 		public String parent;
 		@Expose
-		public String iconName = "map_world_globe_dark";
+		public String iconName = "ic_world_globe_dark";
 		@Expose
 		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose

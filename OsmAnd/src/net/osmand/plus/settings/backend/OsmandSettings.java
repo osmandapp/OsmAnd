@@ -84,6 +84,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -1061,7 +1062,16 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(this,
 			"max_speed", 0f).makeProfile().cache();
 
-	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark").makeProfile().cache();
+	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark") {
+		@Override
+		public String getModeValue(ApplicationMode mode) {
+			String iconResName = super.getModeValue(mode);
+			if (AndroidUtils.getDrawableId(getContext(), iconResName) != 0) {
+				return iconResName;
+			}
+			return getProfileDefaultValue(mode);
+		}
+	}.makeProfile().cache();
 
 	{
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.DEFAULT, "ic_world_globe_dark");
