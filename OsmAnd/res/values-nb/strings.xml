@@ -4719,4 +4719,22 @@
     <string name="goods_delivery_desc_4">Bruk lastebil-profilen hvis kjøretøyet ditt veier med enn 3,5 tonn.</string>
     <string name="live_update_frequency_day_variant">Ser etter kartoppdateringer hver dag.</string>
     <string name="lang_ckb">Sorani</string>
+    <string name="auto_25_chars_route_tu_kl">Utfør u-sving og hold til venstre</string>
+    <string name="auto_25_chars_route_tr_kr">Sving til høyre og hold til høyre</string>
+    <string name="shared_string_only_missing">Kun manglende</string>
+    <string name="auto_25_chars_route_tu_kr">Utfør u-sving og hold til høyre</string>
+    <string name="auto_backup_title">Automatisk sikkerhetskopiering</string>
+    <string name="download_tiles">Nedlastede fliser</string>
+    <string name="compass_visible_if_map_rotated">Synlig hvis kartet er rotert</string>
+    <string name="widget_with_dot">Miniprogram.</string>
+    <string name="compass_visible_if_map_rotated_desc">Skjult når nord er opp</string>
+    <string name="download_complete">Nedlasting fullført</string>
+    <string name="average_speed_skip_stops_desc">Hastighet under %1$s tas med og har innvirkning på gjen. hastighet.</string>
+    <string name="compass_always_hidden">Alltid skjult</string>
+    <string name="compass_always_visible">Alltid synlig</string>
+    <string name="compass_click_desc">Trykk på kompasset for å bytte kartretningsmodus.</string>
+    <string name="compass_desc">Viser nord.</string>
+    <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
+    <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
+    <string name="auto_25_chars_route_tr_kl">Sving til høyre og hold til venstre</string>
 </resources>
