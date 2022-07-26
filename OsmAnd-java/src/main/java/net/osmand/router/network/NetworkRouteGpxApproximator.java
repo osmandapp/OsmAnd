@@ -1,17 +1,17 @@
 package net.osmand.router.network;
 
-import static java.lang.Math.abs;
-
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPoint;
+import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
 import net.osmand.router.network.NetworkRouteContext.NetworkRoutePoint;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSegmentChain;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.MapUtils;
@@ -19,15 +19,10 @@ import net.osmand.util.MapUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 
 public class NetworkRouteGpxApproximator {
 
-	GPXFile gpxFile;
-	
 	private static final double GPX_MAX_DISTANCE_POINT_MATCH = 5;
 	private static final double GPX_MAX_INTER_SKIP_DISTANCE = 10;
 	private static final int GPX_SKIP_POINTS_GPX_MAX = 5;
@@ -49,98 +44,14 @@ public class NetworkRouteGpxApproximator {
 		}, null, routing);
 	}
 
-	public GPXFile getGpxFile() {
-		return gpxFile;
-	}
-
-	public void setGpxFile(GPXFile gpxFile) {
-		this.gpxFile = gpxFile;
-	}
-
-	public List<RouteSegmentResult> approximate() throws IOException {
-		Map<RouteKey, GPXFile> res = new HashMap<>();
+	public List<RouteSegmentResult> approximate(GPXFile gpxFile, RoutingContext rCtx) throws IOException {
 		List<NetworkRouteSegment> loaded = loadDataByGPX(gpxFile);
-		List<NetworkRouteSegmentChain> chainList = selector.getNetworkRouteSegmentChains(null, res, loaded);
-		gpxFile = res.values().iterator().next();
-		result = convertToRoadSegmentResultList(chainList, loaded.get(0));
-		return result;
-	}
-
-	List<RouteSegmentResult> convertToRoadSegmentResultList(List<NetworkRouteSegmentChain> chainList,
-	                                                        NetworkRouteSegment start) {
-		List<List<NetworkRouteSegment>> listOfSegmentLists = new ArrayList<>();
-		for (NetworkRouteSegmentChain c : chainList) {
-			List<NetworkRouteSegment> segmentList = new ArrayList<>();
-			segmentList.add(c.start);
-			if (c.connected != null) {
-				segmentList.addAll(c.connected);
-			}
-			listOfSegmentLists.add(segmentList);
-			break; // todo check all chains are needed
-		}
-		List<NetworkRouteSegment> segmentList = fitSegmentsOneByOne(listOfSegmentLists, start);
 		List<RouteSegmentResult> res = new ArrayList<>();
-		for (NetworkRouteSegment segment : segmentList) {
+		for (NetworkRouteSegment segment : loaded) {
 			res.add(new RouteSegmentResult(segment.robj, segment.start, segment.end));
 		}
-		return res;
-	}
-
-	private List<NetworkRouteSegment> fitSegmentsOneByOne(List<List<NetworkRouteSegment>> listOfSegmentLists, NetworkRouteSegment start) {
-		List<NetworkRouteSegment> res = new ArrayList<>();
-		while (listOfSegmentLists.size() > 0) {
-			List<NetworkRouteSegment> list = findNextSegmentList(listOfSegmentLists, start);
-			start = list.get(list.size() - 1);
-			res.addAll(list);
-		}
-		return res;
-	}
-
-	private List<NetworkRouteSegment> findNextSegmentList(List<List<NetworkRouteSegment>> listOfSegmentLists,
-	                                                      NetworkRouteSegment start) {
-		List<NetworkRouteSegment> res = new ArrayList<>();
-		double distanceFromFirst = Double.MAX_VALUE;
-		List<NetworkRouteSegment> nearFromFirstList = null;
-		double distanceFromLast = Double.MAX_VALUE;
-		List<NetworkRouteSegment> nearFromLastList = null;
-		for (List<NetworkRouteSegment> segmentList : listOfSegmentLists) {
-			NetworkRouteSegment first = segmentList.get(0);
-			NetworkRouteSegment last = segmentList.get(segmentList.size() - 1);
-			double distance = getDistance(start, first);
-			if (distance < distanceFromFirst) {
-				distanceFromFirst = distance;
-				nearFromFirstList = segmentList;
-			}
-			distance = getDistance(start, last);
-			if (distance < distanceFromLast) {
-				distanceFromLast = distance;
-				nearFromLastList = segmentList;
-			}
-		}
-		if (distanceFromLast < distanceFromFirst) {
-			listOfSegmentLists.remove(nearFromLastList);
-			nearFromLastList = reverseRoute(nearFromLastList);
-			res = new ArrayList<>(nearFromLastList);
-		} else {
-			if (nearFromFirstList != null) {
-				listOfSegmentLists.remove(nearFromFirstList);
-				res = new ArrayList<>(nearFromFirstList);
-			}
-		}
-		return res;
-	}
-
-	private List<NetworkRouteSegment> reverseRoute(List<NetworkRouteSegment> nearFromLastList) {
-		List<NetworkRouteSegment> res = new ArrayList<>();
-		for (NetworkRouteSegment segment : nearFromLastList) {
-			res.add(segment.inverse());
-		}
-		Collections.reverse(res);
-		return res;
-	}
-
-	private double getDistance(NetworkRouteSegment start, NetworkRouteSegment end) {
-		return MapUtils.getSqrtDistance(start.getEndPointX(), start.getEndPointY(), end.getStartPointX(), end.getStartPointY());
+		new RouteResultPreparation().prepareResult(rCtx, res, true);
+		return result = res;
 	}
 
 	private double getDistance(GpxRoutePoint start, GpxRoutePoint end) {
@@ -177,6 +88,7 @@ public class NetworkRouteGpxApproximator {
 		List<NetworkRoutePoint> passedRoutePoints = new ArrayList<>();
 		int totalDistance = 0;
 		int unmatchedDistance = 0;
+		int unmatchedPoints = 0;
 		for (GPXUtilities.Track t : gpxFile.tracks) {
 			for (GPXUtilities.TrkSegment ts : t.segments) {
 				for (int i = 0; i < ts.points.size() - 1; i++) {
@@ -206,39 +118,39 @@ public class NetworkRouteGpxApproximator {
 				continue;
 			}
 			// 2. skip extra gpx points
-			matchingGpxSegment = getGpxSegmentWithoutExtraGpxPoints(gpxRoutePoints, idx, start);
+			int[] idxa = {idx};
+			matchingGpxSegment = getGpxSegmentWithoutExtraGpxPoints(gpxRoutePoints, idxa, start);
+			idx = idxa[0];
 			if (matchingGpxSegment != null) {
 				res.add(matchingGpxSegment);
 				continue;
 			}
+			nextPoint = gpxRoutePoints.get(idx + 1);
+			res.add(createStraightSegment(start, nextPoint));
 			unmatchedDistance += getDistance(start, nextPoint);
+			unmatchedPoints++;
 		}
-		int pointsSize = gpxRoutePoints.size();
 		int matchingGpxSegmentSize = res.size();
-		System.out.printf(">> GPX approximation (%d route points matched, %d points unmatched) for %d m: %d m umatched\n",
-				matchingGpxSegmentSize, pointsSize - matchingGpxSegmentSize, (int) totalDistance, (int) unmatchedDistance);
-		res = addAbsentPoint(res);
+		System.out.printf(">> GPX approximation (%d route points matched, %d points unmatched) for %d m: %d m unmatched\n",
+				matchingGpxSegmentSize, unmatchedPoints, totalDistance, unmatchedDistance);
 		return res;
 	}
 
-	private List<NetworkRouteSegment> addAbsentPoint(List<NetworkRouteSegment> segmentList) {
-		List<NetworkRouteSegment> res = new ArrayList<>();
-		for (NetworkRouteSegment segment : segmentList) {
-			if (abs(segment.end - segment.start) > 1) {
-				int step = Integer.signum(segment.end - segment.start);
-				for (int idx = segment.start; idx != segment.end; idx += step) {
-					res.add(new NetworkRouteSegment(segment, idx, idx + step));
-				}
-			} else {
-				res.add(segment);
-			}
-		}
-		return res;
+	private NetworkRouteSegment createStraightSegment(GpxRoutePoint startPoint, GpxRoutePoint nextPoint) {
+		BinaryMapRouteReaderAdapter.RouteRegion reg = new BinaryMapRouteReaderAdapter.RouteRegion();
+		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+		RouteDataObject rdo = new RouteDataObject(reg);
+		rdo.pointsX = new int[]{MapUtils.get31TileNumberX(startPoint.lon), MapUtils.get31TileNumberX(nextPoint.lon)};
+		rdo.pointsY = new int[]{MapUtils.get31TileNumberY(startPoint.lat), MapUtils.get31TileNumberY(nextPoint.lat)};
+		rdo.types = new int[]{0};
+		rdo.id = -1;
+		return new NetworkRouteSegment(rdo, null, 0, 1);
 	}
 
-	private NetworkRouteSegment getGpxSegmentWithoutExtraGpxPoints(List<GpxRoutePoint> gpxRoutePoints, int idx,
+	private NetworkRouteSegment getGpxSegmentWithoutExtraGpxPoints(List<GpxRoutePoint> gpxRoutePoints, int[] idxa,
 	                                                               GpxRoutePoint start) {
 		NetworkRouteSegment matchingGpxSegment = null;
+		int idx = idxa[0];
 		int maxSkipGpxPoints = Math.min(gpxRoutePoints.size() - idx, GPX_SKIP_POINTS_GPX_MAX);
 		for (int j = 2; j < maxSkipGpxPoints; j++) {
 			GpxRoutePoint nextPoint = gpxRoutePoints.get(idx + j);
@@ -255,6 +167,7 @@ public class NetworkRouteGpxApproximator {
 					}
 				}
 				if (notFarAway) {
+					idxa[0] = idx + j - 1;
 					break;
 				}
 			}

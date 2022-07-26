@@ -166,12 +166,10 @@ public class GpxEngine extends OnlineRoutingEngine {
 					BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 					NetworkRouteGpxApproximator gpxApproximator = new NetworkRouteGpxApproximator(readers, true);
 					try {
-						gpxApproximator.setGpxFile(gpxFile);
-						gpxApproximator.approximate();
+						gpxApproximator.approximate(gpxFile, env.getCtx());
 					} catch (IOException e) {
-						e.printStackTrace();
+						LOG.error(e.getMessage(), e);
 					}
-					new RouteResultPreparation().prepareResult(env.getCtx(), gpxApproximator.result, true);
 					GpxPoint first = gpxPoints.get(0);
 					first.routeToTarget = gpxApproximator.result;
 					GpxPoint last = gpxPoints.get(gpxPoints.size() - 1);
