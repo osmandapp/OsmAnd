@@ -762,6 +762,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 				if (mapMarkers.size() > 0) {
 					MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
+					mapMarkersCard.setListener(this);
 					menuCards.add(mapMarkersCard);
 				}
 
