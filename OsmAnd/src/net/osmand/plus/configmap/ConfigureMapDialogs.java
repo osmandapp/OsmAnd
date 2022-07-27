@@ -246,9 +246,9 @@ public class ConfigureMapDialogs {
 		b.show();
 	}
 
-	protected static void showRenderingPropertyDialog(MapActivity activity, RenderingRuleProperty p,
-	                                                  CommonPreference<String> pref, ContextMenuItem item,
-	                                                  boolean nightMode) {
+	protected static void showRenderingPropertyDialog(@NonNull MapActivity activity, @NonNull RenderingRuleProperty p,
+	                                                  @NonNull CommonPreference<String> pref, @NonNull ContextMenuItem item,
+	                                                  @NonNull OnDataChangeUiAdapter uiAdapter, boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
@@ -280,6 +280,12 @@ public class ConfigureMapDialogs {
 					activity.refreshMapComplete();
 					String description = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
 					item.setDescription(description);
+					String id = item.getId();
+					if (!Algorithms.isEmpty(id)) {
+						uiAdapter.onRefreshItem(id);
+					} else {
+						uiAdapter.onDataSetChanged();
+					}
 				}
 		);
 		b.setNegativeButton(R.string.shared_string_dismiss, null);

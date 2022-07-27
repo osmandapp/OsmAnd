@@ -711,7 +711,7 @@ public class ConfigureMapMenu {
 					.setTitle(propertyName)
 					.setListener((uiAdapter, view, _item, isChecked) -> {
 						if (AndroidUtils.isActivityNotDestroyed(activity)) {
-							ConfigureMapDialogs.showRenderingPropertyDialog(activity, p, pref, _item, nightMode);
+							ConfigureMapDialogs.showRenderingPropertyDialog(activity, p, pref, _item, uiAdapter, nightMode);
 						}
 						return false;
 					})
