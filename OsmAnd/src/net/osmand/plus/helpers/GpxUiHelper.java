@@ -153,6 +153,8 @@ public class GpxUiHelper {
 	public static final long SECOND_IN_MILLIS = 1000L;
 	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
 
+	public static final int CHART_LABEL_COUNT = 3;
+
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
 		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
 		return getDescription(app, analysis, html);
@@ -1142,7 +1144,7 @@ public class GpxUiHelper {
 		leftYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		leftYAxis.setXOffset(16f);
 		leftYAxis.setYOffset(-6f);
-		leftYAxis.setLabelCount(3, true);
+		leftYAxis.setLabelCount(CHART_LABEL_COUNT, true);
 
 		YAxis rightYAxis = mChart.getAxisRight();
 		rightYAxis.setDrawAxisLine(false);
@@ -1150,7 +1152,7 @@ public class GpxUiHelper {
 		rightYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		rightYAxis.setXOffset(16f);
 		rightYAxis.setYOffset(-6f);
-		rightYAxis.setLabelCount(3, true);
+		rightYAxis.setLabelCount(CHART_LABEL_COUNT, true);
 		rightYAxis.setEnabled(false);
 
 		Legend legend = mChart.getLegend();

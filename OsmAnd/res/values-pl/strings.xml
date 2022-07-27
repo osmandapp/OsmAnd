@@ -4705,4 +4705,19 @@
     <string name="get_altitude_data">Pobierz dane o wysokości</string>
     <string name="calculate_altitude">Oblicz wysokość</string>
     <string name="shared_string_symbol">Symbol</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Pokaż trasy MTB IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Pokaż specjalnie zaprojektowane trasy do jazdy na rowerze górskim</string>
+    <string name="auto_25_chars_route_tl_kl">Skręć w lewo i trzymaj się lewej strony</string>
+    <string name="connect_with_straight_line">Połącz z linią prostą</string>
+    <string name="attach_roads_descr">Czy chcesz przybliżyć swój ślad za pomocą prawidłowej trasy dołączonej do map offline. W takim przypadku będziesz mieć skorygowaną wysokość drogi, informacje o drodze i zakręty, które można później wykorzystać w nawigacji.</string>
+    <string name="attach_roads_warning">Możesz dołączyć do dróg tylko nagrany ślad</string>
+    <string name="without_profiles_changing">Bez zmiany profili</string>
+    <string name="shared_string_only_missing">Brakuje tylko</string>
+    <string name="download_tiles">Pobierz kafelki</string>
+    <string name="auto_25_chars_route_tl_kr">Skręć w lewo i trzymaj się prawej strony</string>
+    <string name="auto_25_chars_route_tr_kl">Skręć w prawo i trzymaj się lewej strony</string>
+    <string name="auto_25_chars_route_tr_kr">Skręć w prawo i trzymaj się prawej strony</string>
+    <string name="auto_25_chars_route_tu_kl">Zawróć i trzymaj się lewej strony</string>
+    <string name="auto_25_chars_route_tu_kr">Zawróć i trzymaj się prawej strony</string>
+    <string name="auto_25_chars_route_roundabout_kl">Zjedź zjazdem %1$d i trzymaj się lewej strony</string>
 </resources>

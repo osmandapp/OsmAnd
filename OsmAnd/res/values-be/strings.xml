@@ -2282,7 +2282,7 @@
     <string name="routing_attr_allow_private_name">Дазволіць прыватны доступ</string>
     <string name="routing_attr_allow_private_description">Дазволіць доступ на прыватную тэрыторыю.</string>
     <string name="hillshade_menu_download_descr">Спампуйце мапу зацянення рэльефу для адлюстравання вертыкальнага зацянення гэтага рэгіёна.</string>
-    <string name="hillshade_purchase_header">Усталюйце убудову \"Контурныя лініі\" для адлюстравання градыентаў вертыкальных абласцей.</string>
+    <string name="hillshade_purchase_header">Усталюйце ўбудову \"Контурныя лініі\" для адлюстравання градыентаў вертыкальных абласцей.</string>
     <string name="hide_from_zoom_level">Схаваць ад узроўню маштабавання</string>
     <string name="srtm_menu_download_descr">Спампуйце мапу \"Контурныя лініі\" для выкарыстання ў гэтым рэгіёне.</string>
     <string name="show_from_zoom_level">Паказваць ад узроўню маштабавання</string>
@@ -3468,7 +3468,7 @@
     <string name="save_track_to_gpx">Аўтаматычна запісваць след падчас навігацыі</string>
     <string name="disable_recording_once_app_killed_descrp">Спыненне запісу GPX падчас прымусовага спынення (праз нядаўнія праграмы). (Значок на прасторы апавяшчэнняў Android пра фонавы рэжым OsmAnd знікне.)</string>
     <string name="save_global_track_interval_descr">Вызначце інтэрвал запісу следу (уключаецца праз віджэт \"Запіс паездкі\" на мапе).</string>
-    <string name="monitoring_control_start">ЗАПІС</string>
+    <string name="monitoring_control_start">Запіс</string>
     <string name="shared_string_done">Завершана</string>
     <string name="shared_string_save_as_gpx">Захаваць як новы файл следу</string>
     <string name="add_segment_to_the_track">Дадаць у файл следу</string>

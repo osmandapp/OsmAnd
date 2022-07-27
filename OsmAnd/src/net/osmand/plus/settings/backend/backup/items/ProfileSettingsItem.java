@@ -122,7 +122,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		super.readFromJson(json);
 		String appModeJson = json.getString("appMode");
-		modeBean = ApplicationMode.fromJson(appModeJson);
+		modeBean = ApplicationMode.fromJson(app, appModeJson);
 		builder = ApplicationMode.fromModeBean(app, modeBean);
 		ApplicationMode appMode = builder.getApplicationMode();
 		if (!appMode.isCustomProfile()) {

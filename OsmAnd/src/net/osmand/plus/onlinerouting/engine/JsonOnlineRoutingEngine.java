@@ -8,6 +8,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.router.RouteCalculationProgress;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,8 @@ public abstract class JsonOnlineRoutingEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation, boolean initialCalculation) throws JSONException {
+	                                           boolean leftSideNavigation, boolean initialCalculation,
+	                                           @Nullable RouteCalculationProgress calculationProgress) throws JSONException {
 		JSONObject root = parseRootResponseObject(content);
 		return root != null ? parseServerResponse(root, app, leftSideNavigation) : null;
 	}

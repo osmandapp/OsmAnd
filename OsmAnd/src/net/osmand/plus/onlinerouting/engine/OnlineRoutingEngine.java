@@ -16,6 +16,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -172,7 +173,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	@Nullable
 	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                                    boolean leftSideNavigation, boolean initialCalculation) throws JSONException;
+	                                                    boolean leftSideNavigation, boolean initialCalculation,
+	                                                    @Nullable RouteCalculationProgress calculationProgress) throws JSONException;
 
 	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                                   @NonNull String content) throws JSONException;
