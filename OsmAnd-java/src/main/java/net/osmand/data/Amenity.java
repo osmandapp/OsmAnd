@@ -455,13 +455,13 @@ public class Amenity extends MapObject {
 		if (map != null && !map.isEmpty())
 		{
 			Amenity amenity = new Amenity();
-			amenity.additionalInfo = new HashMap<>();
+			HashMap additionalInfo = new HashMap<>();
 			boolean isExtensionsFounded = false;
 			for (String key : map.keySet()) {
 				if (key.startsWith(AMENITY_PREFIX + EXTENSIONS_PREFIX)) {
 					isExtensionsFounded = true;
 					String shortKey = key.replace(AMENITY_PREFIX + EXTENSIONS_PREFIX, "");
-					amenity.additionalInfo.put(shortKey, map.get(key));
+					additionalInfo.put(shortKey, map.get(key));
 				} else if (key.startsWith(AMENITY_PREFIX)) {
 					String shortKey = key.replace(AMENITY_PREFIX, "");
 					if (shortKey.equals(SUBTYPE)) {
@@ -473,6 +473,7 @@ public class Amenity extends MapObject {
 					}
 				}
 			}
+			amenity.additionalInfo = additionalInfo;
 			if (amenity.type == null) {
 				amenity.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
 			}
