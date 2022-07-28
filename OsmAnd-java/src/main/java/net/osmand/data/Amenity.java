@@ -476,9 +476,7 @@ public class Amenity extends MapObject {
 			}
 			if (type != null) {
 				Amenity amenity = new Amenity();
-				if (type != null) {
-					amenity.setType(type);
-				}
+				amenity.setType(type);
 				if (subtype != null) {
 					amenity.subType = subtype;
 				}
