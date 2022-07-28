@@ -52,8 +52,7 @@ public class Amenity extends MapObject {
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
-	private static final String AMENITY_PREFIX = "amenity_";
-	private static final String EXTENSIONS_PREFIX = "extensions_";
+	private static final String AMENITY_PREFIX = "osm_poi_";
 	private static final String TYPE = "type";
 	private static final String SUBTYPE = "subtype";
 
@@ -445,7 +444,7 @@ public class Amenity extends MapObject {
 		}
 		if (additionalInfo != null && additionalInfo.size() > 0) {
 			for (Entry<String, String> e : additionalInfo.entrySet()) {
-				result.put(AMENITY_PREFIX + EXTENSIONS_PREFIX + e.getKey(), e.getValue());
+				result.put(AMENITY_PREFIX + e.getKey(), e.getValue());
 			}
 		}
 		return result;
@@ -458,11 +457,7 @@ public class Amenity extends MapObject {
 			HashMap additionalInfo = new HashMap<>();
 			boolean isExtensionsFounded = false;
 			for (String key : map.keySet()) {
-				if (key.startsWith(AMENITY_PREFIX + EXTENSIONS_PREFIX)) {
-					isExtensionsFounded = true;
-					String shortKey = key.replace(AMENITY_PREFIX + EXTENSIONS_PREFIX, "");
-					additionalInfo.put(shortKey, map.get(key));
-				} else if (key.startsWith(AMENITY_PREFIX)) {
+				if (key.startsWith(AMENITY_PREFIX)) {
 					String shortKey = key.replace(AMENITY_PREFIX, "");
 					if (shortKey.equals(SUBTYPE)) {
 						amenity.subType = map.get(key);
@@ -470,6 +465,9 @@ public class Amenity extends MapObject {
 						amenity.setType(MapPoiTypes.getDefault().getPoiCategoryByName(map.get(key)));
 					} else if (shortKey.equals(OPENING_HOURS)) {
 						amenity.openingHours = map.get(key);
+					} else {
+						isExtensionsFounded = true;
+						additionalInfo.put(shortKey, map.get(key));
 					}
 				}
 			}
