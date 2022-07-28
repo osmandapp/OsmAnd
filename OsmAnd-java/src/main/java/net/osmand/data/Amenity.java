@@ -450,12 +450,11 @@ public class Amenity extends MapObject {
 	}
 
 	public static Amenity fromTagValue(Map<String, String> map, String privatePrefix, String osmPrefix){
-		if (!Algorithms.isEmpty(map))
-		{
+		if (!Algorithms.isEmpty(map)) {
 			PoiCategory type = null;
 			String subtype = null;
 			String openingHours = null;
-			HashMap additionalInfo = new HashMap<>();
+			HashMap additionalInfo = new HashMap<String, String>();
 
 			for (Entry<String, String> entry : map.entrySet()) {
 				if (entry.getKey().startsWith(privatePrefix)) {
@@ -475,8 +474,7 @@ public class Amenity extends MapObject {
 					additionalInfo.put(shortKey, entry.getValue());
 				}
 			}
-			if (additionalInfo.size() > 0)
-			{
+			if (type != null || subtype != null || openingHours != null || additionalInfo.size() > 0) {
 				Amenity amenity = new Amenity();
 				if (type != null) {
 					amenity.setType(type);
