@@ -3,12 +3,15 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+
+import java.util.HashMap;
 
 public class FavoritePointEditor extends PointEditor {
 
@@ -41,7 +44,7 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	public void add(LatLon latLon, String title, String address, String originObjectName,
-	                int preselectedIconId, double altitude, long timestamp) {
+					int preselectedIconId, double altitude, long timestamp, Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -57,6 +60,7 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
 		favorite.setIconId(preselectedIconId);
+		favorite.setAmenity(amenity);
 
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}

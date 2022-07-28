@@ -47,13 +47,10 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void acquireOriginObject() {
-		String originObjectName = fav.getOriginObjectName();
-		if (originObjectName.length() > 0) {
-			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
-				originObject = findAmenity(originObjectName, fav.getLatitude(), fav.getLongitude());
-			} else if (originObjectName.startsWith(TransportStop.class.getSimpleName())) {
-				originObject = findTransportStop(originObjectName, fav.getLatitude(), fav.getLongitude());
-			}
+		originObject = fav.getAmenity();
+		if (originObject == null) {
+			String originObjectName = fav.getOriginObjectName();
+			originObject = findAmenityObject(originObjectName, fav.getLatitude(), fav.getLongitude());
 		}
 	}
 
@@ -111,61 +108,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),
 					false, 0, false, null, false);
 		}
-	}
-
-	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		for (Amenity amenity : amenities) {
-			String stringEn = amenity.toStringEn();
-			if (stringEn.equals(nameStringEn)) {
-				return amenity;
-			}
-		}
-		return null;
-	}
-
-	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<TransportStop> res = null;
-		try {
-			res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
-					rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
-
-						@Override
-						public boolean publish(TransportStop object) {
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (res != null) {
-			for (TransportStop stop : res) {
-				String stringEn = stop.toStringEn();
-				if (stringEn.equals(nameStringEn)) {
-					return stop;
-				}
-			}
-		}
-		return null;
 	}
 
 	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, @NonNull FavoriteGroup group, FavouritePoint selectedPoint) {

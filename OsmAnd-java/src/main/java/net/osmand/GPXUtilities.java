@@ -5,6 +5,7 @@ package net.osmand;
 import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
+import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
@@ -58,6 +59,8 @@ public class GPXUtilities {
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
+	public static final String PRIVATE_PREFIX = "amenity_";
+	public static final String OSM_PREFIX = "osm_tag_";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -325,6 +328,23 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
 		}
 
+		public Amenity getAmenity() {
+			Map<String, String> extensionsToRead = getExtensionsToRead();
+			if (!extensionsToRead.isEmpty()) {
+				return Amenity.fromTagValue(extensionsToRead, PRIVATE_PREFIX, OSM_PREFIX);
+			}
+			return null;
+		}
+
+		public void setAmenity(Amenity amenity) {
+			if (amenity != null) {
+				Map<String, String> extensions = amenity.toTagValue(PRIVATE_PREFIX, OSM_PREFIX);
+				if (!extensions.isEmpty()) {
+					getExtensionsToWrite().putAll(extensions);
+				}
+			}
+		}
+
 		public int getColor(ColorizationType type) {
 			if (type == ColorizationType.SPEED) {
 				return speedColor;
@@ -436,7 +456,7 @@ public class GPXUtilities {
 
 		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
 		                                        String name, String category, int color,
-		                                        String iconName, String backgroundType) {
+		                                        String iconName, String backgroundType, Amenity amenity) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			final WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
@@ -452,6 +472,9 @@ public class GPXUtilities {
 			}
 			if (backgroundType != null) {
 				point.setBackgroundType(backgroundType);
+			}
+			if (amenity != null) {
+				point.setAmenity(amenity);
 			}
 			return point;
 		}

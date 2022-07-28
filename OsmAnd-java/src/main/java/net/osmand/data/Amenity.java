@@ -52,7 +52,8 @@ public class Amenity extends MapObject {
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
-
+	private static final String TYPE = "type";
+	private static final String SUBTYPE = "subtype";
 
 	private String subType;
 	private PoiCategory type;
@@ -427,5 +428,65 @@ public class Amenity extends MapObject {
 			}
 		}
 		return a;
+	}
+
+	public Map<String, String> toTagValue(String privatePrefix, String osmPrefix) {
+		Map<String, String> result = new HashMap<String, String>();
+		if (subType != null) {
+			result.put(privatePrefix + SUBTYPE, subType);
+		}
+		if (type != null) {
+			result.put(privatePrefix + TYPE, type.getKeyName());
+		}
+		if (openingHours != null) {
+			result.put(privatePrefix + OPENING_HOURS, openingHours);
+		}
+		if (additionalInfo != null && additionalInfo.size() > 0) {
+			for (Entry<String, String> e : additionalInfo.entrySet()) {
+				result.put(osmPrefix + e.getKey(), e.getValue());
+			}
+		}
+		return result;
+	}
+
+	public static Amenity fromTagValue(Map<String, String> map, String privatePrefix, String osmPrefix){
+		if (!Algorithms.isEmpty(map)) {
+			PoiCategory type = null;
+			String subtype = null;
+			String openingHours = null;
+			HashMap additionalInfo = new HashMap<String, String>();
+
+			for (Entry<String, String> entry : map.entrySet()) {
+				if (entry.getKey().startsWith(privatePrefix)) {
+					String shortKey = entry.getKey().replace(privatePrefix, "");
+					if (shortKey.equals(TYPE)) {
+						type = MapPoiTypes.getDefault().getPoiCategoryByName(entry.getValue());
+						if (type == null) {
+							type = MapPoiTypes.getDefault().getOtherPoiCategory();
+						}
+					} else if (shortKey.equals(SUBTYPE)) {
+						subtype = entry.getValue();
+					} else if (shortKey.equals(OPENING_HOURS)) {
+						openingHours = entry.getValue();
+					}
+				} else if (entry.getKey().startsWith(osmPrefix)) {
+					String shortKey = entry.getKey().replace(osmPrefix, "");
+					additionalInfo.put(shortKey, entry.getValue());
+				}
+			}
+			if (type != null) {
+				Amenity amenity = new Amenity();
+				amenity.setType(type);
+				if (subtype != null) {
+					amenity.subType = subtype;
+				}
+				if (openingHours != null) {
+					amenity.openingHours = openingHours;
+				}
+				amenity.additionalInfo = additionalInfo;
+				return amenity;
+			}
+		}
+		return null;
 	}
 }
