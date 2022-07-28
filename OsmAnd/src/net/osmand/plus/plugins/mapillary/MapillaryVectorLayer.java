@@ -22,6 +22,7 @@ import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapillaryTilesProvider;
+import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
@@ -48,6 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
@@ -444,21 +446,17 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		if (mapRenderer == null) {
 			return;
 		}
+
+		PointI point31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
+		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getQuadTreeByPoint(point31);
+		if (quadTree == null) {
+			return;
+		}
+
 		final int radius = getRadius(tb) / 2;
-		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getVisiblePoints();
-//		PointI topLeft31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x - radius, (int) point.y - radius);
-//		PointI bottomRight31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x + radius, (int) point.y + radius);
-//		PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
 		LatLon topLeft = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x - radius, point.y - radius);
 		LatLon bottomRight = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x + radius, point.y + radius);
 		LatLon center = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x, point.y);
-//		if (topLeft31 == null || bottomRight31 == null || center31 == null) {
-//			return;
-//		}
-//		int left = topLeft31.getX();
-//		int top = topLeft31.getY();
-//		int right = bottomRight31.getX();
-//		int bottom = bottomRight31.getY();
 		double left = topLeft.getLongitude();
 		double top = topLeft.getLatitude();
 		double right = bottomRight.getLongitude();
@@ -470,17 +468,13 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return;
 		}
 
-//		double dist = MapUtils.measuredDist31(left, top, right, bottom);
 		double dist = MapUtils.getDistance(topLeft, bottomRight);
 		MapillaryImage img = null;
 		for (MapillaryImage image : res) {
 			if (image == null)
 				continue;
 
-//			int x = MapUtils.get31TileNumberX(image.getLongitude());
-//			int y = MapUtils.get31TileNumberY(image.getLatitude());
 			double d = MapUtils.getDistance(center, image.getLatitude(), image.getLongitude());
-//			double d = MapUtils.measuredDist31(x, y, center31.getX(), center31.getY());
 			if (d < dist) {
 				img = image;
 				dist = d;

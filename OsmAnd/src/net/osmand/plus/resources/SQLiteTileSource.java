@@ -86,15 +86,23 @@ public class SQLiteTileSource implements ITileSource {
 			i = name.lastIndexOf('.');
 			if (i > 0) {
 				String sourceName = name.substring(i + 1);
-				for (TileSourceTemplate is : toFindUrl) {
-					if (is.getName().equalsIgnoreCase(sourceName)) {
-						base = is;
-						urlTemplate = is.getUrlTemplate();
-						expirationTimeMillis = is.getExpirationTimeMillis();
-						inversiveZoom = is.getInversiveZoom();
-						break;
-					}
-				}
+				setTileSourceTemplate(sourceName,  toFindUrl);
+			} else {
+				setTileSourceTemplate(name, toFindUrl);
+			}
+		}
+	}
+
+	private void setTileSourceTemplate(String sourceName, List<TileSourceTemplate> toFindUrl) {
+		for (TileSourceTemplate is : toFindUrl) {
+			if (is.getName().equalsIgnoreCase(sourceName)) {
+				base = is;
+				urlTemplate = is.getUrlTemplate();
+				expirationTimeMillis = is.getExpirationTimeMillis();
+				minZoom = is.getMinimumZoomSupported();
+				maxZoom = is.getMaximumZoomSupported();
+				inversiveZoom = is.getInversiveZoom();
+				break;
 			}
 		}
 	}
