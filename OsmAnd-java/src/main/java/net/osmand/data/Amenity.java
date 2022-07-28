@@ -474,7 +474,7 @@ public class Amenity extends MapObject {
 					additionalInfo.put(shortKey, entry.getValue());
 				}
 			}
-			if (type != null || subtype != null || openingHours != null || additionalInfo.size() > 0) {
+			if (type != null) {
 				Amenity amenity = new Amenity();
 				if (type != null) {
 					amenity.setType(type);
