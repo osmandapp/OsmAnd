@@ -1,18 +1,12 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
+
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
-import net.osmand.util.Algorithms;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -22,7 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.util.Algorithms;
 
 public abstract class MapButton {
 
@@ -141,7 +142,7 @@ public abstract class MapButton {
 		boolean show = shouldShow();
 		updateVisibility(show);
 
-		if (!show) {
+		if (view.getVisibility() != View.VISIBLE) {
 			return;
 		}
 
