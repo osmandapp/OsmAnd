@@ -432,36 +432,34 @@ public class Amenity extends MapObject {
 
 	public Map<String, String> toTagValue(String privatePrefix, String osmPrefix) {
 		Map<String, String> result = new HashMap<String, String>();
-		String prefix = privatePrefix + osmPrefix;
 		if (subType != null) {
-			result.put(prefix + SUBTYPE, subType);
+			result.put(privatePrefix + SUBTYPE, subType);
 		}
 		if (type != null) {
-			result.put(prefix + TYPE, type.getKeyName());
+			result.put(privatePrefix + TYPE, type.getKeyName());
 		}
 		if (openingHours != null) {
-			result.put(prefix + OPENING_HOURS, openingHours);
+			result.put(privatePrefix + OPENING_HOURS, openingHours);
 		}
 		if (additionalInfo != null && additionalInfo.size() > 0) {
 			for (Entry<String, String> e : additionalInfo.entrySet()) {
-				result.put(prefix + e.getKey(), e.getValue());
+				result.put(osmPrefix + e.getKey(), e.getValue());
 			}
 		}
 		return result;
 	}
 
 	public static Amenity fromTagValue(Map<String, String> map, String privatePrefix, String osmPrefix){
-		if (Algorithms.isEmpty(map))
+		if (!Algorithms.isEmpty(map))
 		{
 			PoiCategory type = null;
 			String subtype = null;
 			String openingHours = null;
 			HashMap additionalInfo = new HashMap<>();
 
-			String prefix = privatePrefix + osmPrefix;
 			for (Entry<String, String> entry : map.entrySet()) {
-				if (entry.getKey().startsWith(prefix)) {
-					String shortKey = entry.getKey().replace(prefix, "");
+				if (entry.getKey().startsWith(privatePrefix)) {
+					String shortKey = entry.getKey().replace(privatePrefix, "");
 					if (shortKey.equals(TYPE)) {
 						type = MapPoiTypes.getDefault().getPoiCategoryByName(entry.getValue());
 						if (type == null) {
@@ -471,9 +469,10 @@ public class Amenity extends MapObject {
 						subtype = entry.getValue();
 					} else if (shortKey.equals(OPENING_HOURS)) {
 						openingHours = entry.getValue();
-					} else {
-						additionalInfo.put(shortKey, entry.getValue());
 					}
+				} else if (entry.getKey().startsWith(osmPrefix)) {
+					String shortKey = entry.getKey().replace(osmPrefix, "");
+					additionalInfo.put(shortKey, entry.getValue());
 				}
 			}
 			if (additionalInfo.size() > 0)

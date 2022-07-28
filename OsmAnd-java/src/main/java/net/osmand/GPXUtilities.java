@@ -59,7 +59,7 @@ public class GPXUtilities {
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
-	public static final String PRIVATE_PREFIX = "private_";
+	public static final String PRIVATE_PREFIX = "amenity_";
 	public static final String OSM_PREFIX = "osm_tag_";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
@@ -340,9 +340,7 @@ public class GPXUtilities {
 			if (amenity != null) {
 				Map<String, String> extensions = amenity.toTagValue(PRIVATE_PREFIX, OSM_PREFIX);
 				if (!extensions.isEmpty()) {
-					for (Entry<String, String> e : extensions.entrySet()) {
-						getExtensionsToWrite().put(e.getKey(), e.getValue());
-					}
+					getExtensionsToWrite().putAll(extensions);
 				}
 			}
 		}
