@@ -52,7 +52,6 @@ public class Amenity extends MapObject {
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
-	private static final String AMENITY_PREFIX = "osm_poi_";
 	private static final String TYPE = "type";
 	private static final String SUBTYPE = "subtype";
 
@@ -431,51 +430,67 @@ public class Amenity extends MapObject {
 		return a;
 	}
 
-	public Map<String, String> toHashMap() {
+	public Map<String, String> toTagValue(String privatePrefix, String osmPrefix) {
 		Map<String, String> result = new HashMap<String, String>();
+		String prefix = privatePrefix + osmPrefix;
 		if (subType != null) {
-			result.put(AMENITY_PREFIX + SUBTYPE, subType);
+			result.put(prefix + SUBTYPE, subType);
 		}
 		if (type != null) {
-			result.put(AMENITY_PREFIX + TYPE, type.getKeyName());
+			result.put(prefix + TYPE, type.getKeyName());
 		}
 		if (openingHours != null) {
-			result.put(AMENITY_PREFIX + OPENING_HOURS, openingHours);
+			result.put(prefix + OPENING_HOURS, openingHours);
 		}
 		if (additionalInfo != null && additionalInfo.size() > 0) {
 			for (Entry<String, String> e : additionalInfo.entrySet()) {
-				result.put(AMENITY_PREFIX + e.getKey(), e.getValue());
+				result.put(prefix + e.getKey(), e.getValue());
 			}
 		}
 		return result;
 	}
 
-	public static Amenity fromHashMap(Map<String, String> map){
-		if (map != null && !map.isEmpty())
+	public static Amenity fromTagValue(Map<String, String> map, String privatePrefix, String osmPrefix){
+		if (Algorithms.isEmpty(map))
 		{
-			Amenity amenity = new Amenity();
+			PoiCategory type = null;
+			String subtype = null;
+			String openingHours = null;
 			HashMap additionalInfo = new HashMap<>();
-			boolean isExtensionsFounded = false;
-			for (String key : map.keySet()) {
-				if (key.startsWith(AMENITY_PREFIX)) {
-					String shortKey = key.replace(AMENITY_PREFIX, "");
-					if (shortKey.equals(SUBTYPE)) {
-						amenity.subType = map.get(key);
-					} else if (shortKey.equals(TYPE)) {
-						amenity.setType(MapPoiTypes.getDefault().getPoiCategoryByName(map.get(key)));
+
+			String prefix = privatePrefix + osmPrefix;
+			for (Entry<String, String> entry : map.entrySet()) {
+				if (entry.getKey().startsWith(prefix)) {
+					String shortKey = entry.getKey().replace(prefix, "");
+					if (shortKey.equals(TYPE)) {
+						type = MapPoiTypes.getDefault().getPoiCategoryByName(entry.getValue());
+						if (type == null) {
+							type = MapPoiTypes.getDefault().getOtherPoiCategory();
+						}
+					} else if (shortKey.equals(SUBTYPE)) {
+						subtype = entry.getValue();
 					} else if (shortKey.equals(OPENING_HOURS)) {
-						amenity.openingHours = map.get(key);
+						openingHours = entry.getValue();
 					} else {
-						isExtensionsFounded = true;
-						additionalInfo.put(shortKey, map.get(key));
+						additionalInfo.put(shortKey, entry.getValue());
 					}
 				}
 			}
-			amenity.additionalInfo = additionalInfo;
-			if (amenity.type == null) {
-				amenity.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
+			if (additionalInfo.size() > 0)
+			{
+				Amenity amenity = new Amenity();
+				if (type != null) {
+					amenity.setType(type);
+				}
+				if (subtype != null) {
+					amenity.subType = subtype;
+				}
+				if (openingHours != null) {
+					amenity.openingHours = openingHours;
+				}
+				amenity.additionalInfo = additionalInfo;
+				return amenity;
 			}
-			return isExtensionsFounded ? amenity : null;
 		}
 		return null;
 	}
