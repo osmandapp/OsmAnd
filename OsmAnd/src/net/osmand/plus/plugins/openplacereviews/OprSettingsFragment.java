@@ -15,7 +15,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class OprSettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, OprAuthorizationListener {
+public class OprSettingsFragment extends BaseSettingsFragment implements OprAuthorizationListener {
 
 	private static final String OPR_LOGOUT = "opr_logout";
 	public static final String OPR_LOGIN_DATA = "opr_login_data";

@@ -32,7 +32,7 @@ import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class AccessibilitySettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String ACCESSIBILITY_OPTIONS = "accessibility_options";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";

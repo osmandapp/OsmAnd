@@ -65,7 +65,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class RouteParametersFragment extends BaseSettingsFragment {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 

@@ -13,7 +13,7 @@ import net.osmand.plus.settings.bottomsheets.WakeTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class TurnScreenOnFragment extends BaseSettingsFragment {
 
 	public static final String TAG = TurnScreenOnFragment.class.getSimpleName();
 

@@ -83,6 +83,7 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.weather.WeatherSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -91,7 +92,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
+		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
@@ -143,7 +144,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OPEN_PLACE_REVIEWS(OprSettingsFragment.class.getName(), false, null, R.xml.open_place_reviews, R.layout.global_preference_toolbar),
 		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
 		BACKUP_AUTHORIZATION(BackupAuthorizationFragment.class.getName(), false, null, R.xml.backup_authorization, R.layout.profile_preference_toolbar),
-		SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch);
+		SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
+		WEATHER(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather, R.layout.profile_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;

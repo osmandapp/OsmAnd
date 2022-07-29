@@ -11,6 +11,15 @@
 	Thx - Hardy
 -->
 
+    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  24h hourly forecast &amp; 7 days forecast each 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_offline_forecast">Offline forecast</string>
+    <string name="weather_online_cache">Online cache</string>
+    <string name="map_settings_weather_temp">Temperature</string>
+    <string name="map_settings_weather_pressure">Pressure</string>
+    <string name="map_settings_weather_wind">Wind</string>
+    <string name="map_settings_weather_cloud">Cloud</string>
+    <string name="map_settings_weather_precip">Precipitation</string>
+    <string name="measurement_units">Measurement units</string>
     <string name="shared_string_weather">Weather</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show specifically designed trails for mountainbiking</string>

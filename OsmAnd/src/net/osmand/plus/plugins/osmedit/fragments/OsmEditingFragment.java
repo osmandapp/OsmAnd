@@ -37,7 +37,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
-public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
+public class OsmEditingFragment extends BaseSettingsFragment implements ValidateOsmLoginListener,
 		OsmAuthorizationListener {
 
 	private static final String OSM_LOGOUT = "osm_logout";

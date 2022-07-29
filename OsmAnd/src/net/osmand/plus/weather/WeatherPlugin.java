@@ -2,14 +2,13 @@ package net.osmand.plus.weather;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 
-import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
 public class WeatherPlugin extends OsmandPlugin {
 
@@ -29,7 +28,13 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public CharSequence getDescription() {
-		return null;
+		return app.getString(R.string.weather_plugin_description);
+	}
+
+	@Override
+	public int getLogoResourceId() {
+//		return R.drawable.img_plugin_weather;
+		return R.drawable.ic_extension_dark;
 	}
 
 	@Override
@@ -40,5 +45,10 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Override
 	public boolean isLocked() {
 		return !Version.isPaidVersion(app);
+	}
+
+	@Override
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.WEATHER;
 	}
 }
