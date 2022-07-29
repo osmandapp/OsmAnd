@@ -1121,9 +1121,9 @@ public abstract class OsmandPlugin {
 		return preference;
 	}
 
-	protected <T extends Enum<?>> CommonPreference<T> registerEnumIntPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
-	                                                                            @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
-		CommonPreference<T> preference = app.getSettings().registerEnumIntPreference(prefId, defaultValue, values, clz);
+	protected <T extends Enum<?>> CommonPreference<T> registerEnumStringPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
+	                                                                               @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
+		CommonPreference<T> preference = app.getSettings().registerEnumStringPreference(prefId, defaultValue, values, clz);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;

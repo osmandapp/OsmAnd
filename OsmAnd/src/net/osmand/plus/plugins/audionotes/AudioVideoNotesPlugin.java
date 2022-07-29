@@ -574,7 +574,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_RS_CLIP_LENGTH = registerIntPreference("av_rs_clip_length", CLIP_LENGTH_DEFAULT);
 		AV_RS_STORAGE_SIZE = registerIntPreference("av_rs_storage_size", STORAGE_SIZE_DEFAULT);
 
-		NOTES_SORT_BY_MODE = registerEnumIntPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
+		NOTES_SORT_BY_MODE = registerEnumStringPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
 	}
 
 	@Override

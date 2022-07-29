@@ -8,6 +8,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class WeatherSettingsFragment extends BaseSettingsFragment {
@@ -25,13 +26,35 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTemperaturePref() {
-		Preference nameAndPasswordPref = findPreference("map_settings_weather_temp");
-		nameAndPasswordPref.setIcon(getActiveIcon(R.drawable.ic_action_thermometer));
+		TemperatureConstants[] temperatureConstants = TemperatureConstants.values();
+		String[] entries = new String[temperatureConstants.length];
+		Integer[] entryValues = new Integer[temperatureConstants.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = temperatureConstants[i].toHumanString(app);
+			entryValues[i] = temperatureConstants[i].ordinal();
+		}
+
+		ListPreferenceEx temperaturePref = findPreference("map_settings_weather_temp");
+		temperaturePref.setEntries(entries);
+		temperaturePref.setEntryValues(entryValues);
+		temperaturePref.setIcon(getActiveIcon(R.drawable.ic_action_thermometer));
 	}
 
 	private void setupPressurePref() {
-		Preference nameAndPasswordPref = findPreference("map_settings_weather_pressure");
-		nameAndPasswordPref.setIcon(getActiveIcon(R.drawable.ic_action_air_pressure));
+		PressureConstants[] preassureConstants = PressureConstants.values();
+		String[] entries = new String[preassureConstants.length];
+		Integer[] entryValues = new Integer[preassureConstants.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = preassureConstants[i].toHumanString(app);
+			entryValues[i] = preassureConstants[i].ordinal();
+		}
+
+		ListPreferenceEx pressurePref = findPreference("map_settings_weather_pressure");
+		pressurePref.setEntries(entries);
+		pressurePref.setEntryValues(entryValues);
+		pressurePref.setIcon(getActiveIcon(R.drawable.ic_action_air_pressure));
 	}
 
 	private void setupWindPref() {

@@ -98,7 +98,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		SLOPE_TRANSPARENCY = registerIntPreference("slope_transparency", 80).makeProfile();
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
-		TERRAIN_MODE = registerEnumIntPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
+		TERRAIN_MODE = registerEnumStringPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 	}
