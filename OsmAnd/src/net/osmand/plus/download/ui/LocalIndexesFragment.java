@@ -373,6 +373,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							if (tWal.exists()) {
 								Algorithms.removeAllFiles(tWal);
 							}
+							removeMapillarySources(info);
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -389,6 +390,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						ITileSource src = (ITileSource) info.getAttachedObject();
 						if (src != null) {
 							src.deleteTiles(info.getPathToData());
+							clearMapillaryTiles(info);
 						}
 					}
 					total++;
@@ -443,6 +445,74 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				a.reloadLocalIndexes();
 			} else {
 				a.onUpdatedIndexesList();
+			}
+		}
+
+		// Removing both Mapillary sources vector tiles and cached raster tile together
+		private void removeMapillarySources(LocalIndexInfo info) {
+			ITileSource src = (ITileSource) info.getAttachedObject();
+			String mapilaryCache = TileSourceManager.getMapillaryCacheSource().getName();
+			String mapilaryVector = TileSourceManager.getMapillaryVectorSource().getName();
+			if (mapilaryVector.equals(src.getName()) || mapilaryCache.equals(src.getName())) {
+				File current = new File(info.getPathToData());
+				File parent = current.getParentFile();
+				if (parent == null) {
+					return;
+				}
+				File[] list = parent.listFiles();
+				if (list == null) {
+					return;
+				}
+				boolean mapillaryCacheRemoved = false;
+				boolean mapillaryVectorRemoved = false;
+				for (File f : list) {
+					String withoutExt = Algorithms.getFileNameWithoutExtension(f);
+					if (withoutExt.equals(mapilaryCache)) {
+						Algorithms.removeAllFiles(f);
+						mapillaryCacheRemoved = true;
+					}
+					if (withoutExt.equals(mapilaryVector)) {
+						Algorithms.removeAllFiles(f);
+						mapillaryVectorRemoved = true;
+					}
+				}
+				if (mapillaryVectorRemoved) {
+					getMyApplication().getResourceManager().closeFile(mapilaryVector);
+				}
+				if (mapillaryCacheRemoved) {
+					getMyApplication().getResourceManager().closeFile(mapilaryCache);
+				}
+			}
+		}
+
+		// Clear tiles for both Mapillary sources together
+		private void clearMapillaryTiles(LocalIndexInfo info) {
+			ITileSource src = (ITileSource) info.getAttachedObject();
+			ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
+			ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
+			if (src == mapilaryVector || src == mapilaryCache) {
+				File current = new File(info.getPathToData());
+				File parent = current.getParentFile();
+				if (parent == null) {
+					return;
+				}
+				File[] list = parent.listFiles();
+				if (list == null) {
+					return;
+				}
+				for (File f : list) {
+					String withoutExt = Algorithms.getFileNameWithoutExtension(f);
+					if (withoutExt.equals(mapilaryCache.getName())) {
+						if (f.isDirectory() || Algorithms.getFileExtension(f).equals(IndexConstants.SQLITE_EXT)) {
+							mapilaryCache.deleteTiles(f.getPath());
+						}
+					}
+					if (withoutExt.equals(mapilaryVector.getName())) {
+						if (f.isDirectory() || Algorithms.getFileExtension(f).equals(IndexConstants.SQLITE_EXT)) {
+							mapilaryVector.deleteTiles(f.getPath());
+						}
+					}
+				}
 			}
 		}
 	}

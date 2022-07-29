@@ -651,6 +651,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		/*There is no sense to downoad and do not save. If needed, check should perform before downlad 
 		  if (exists(x, y, zoom)) {
+
 			return;
 		}*/
 		
@@ -771,5 +772,12 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public void resetUrlParameters() {
+	}
+
+	public boolean isFileExist() {
+		if (file == null) {
+			return false;
+		}
+		return file.exists();
 	}
 }

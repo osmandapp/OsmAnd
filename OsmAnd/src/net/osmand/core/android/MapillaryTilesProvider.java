@@ -656,6 +656,10 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			TileId tileId = request.getTileId();
 			int zoom = request.getZoom().swigValue();
 			try {
+				if (!sqlTileSource.isFileExist()) {
+					//recreate database after removing
+					sqlTileSource.createDataBase();
+				}
 				sqlTileSource.insertImage(tileId.getX(), tileId.getY(), zoom, byteArray);
 			} catch (IOException e) {
 				Log.w("Tile x=" + tileId.getX() + " y=" + tileId.getY() + " z=" + zoom + " couldn't be read", e);
