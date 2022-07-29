@@ -120,6 +120,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_ACCESSIBILITY = "osmand.accessibility";
 	String PLUGIN_WIKIPEDIA = "osmand.wikipedia";
 	String PLUGIN_OPEN_PLACE_REVIEWS = "osmand.openplacereviews";
+	String PLUGIN_WEATHER = "osmand.weather";
 
 	//Settings:
 	String SETTINGS_ID = "settings.";
