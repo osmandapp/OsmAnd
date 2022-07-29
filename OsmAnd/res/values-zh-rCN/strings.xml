@@ -1196,7 +1196,7 @@
     <string name="rendering_attr_showSurfaces_name">显示路面材质</string>
     <string name="map_widget_left">左边栏</string>
     <string name="map_widget_right">右边栏</string>
-    <string name="rendering_attr_showCycleRoutes_name">骑车路线</string>
+    <string name="rendering_attr_showCycleRoutes_name">自行车路线</string>
     <string name="rendering_attr_horseRoutes_name">马匹路线</string>
     <string name="download_wikipedia_maps">维基百科</string>
     <string name="do_not_show_startup_messages_desc">不显示应用折扣和特殊的本地事件消息。</string>
@@ -1640,7 +1640,7 @@
     <string name="shared_string_gpx_points">点</string>
     <string name="navigation_over_track">开始沿着轨迹导航吗？</string>
     <string name="avoid_roads_msg">通过选择要避开的道路来触发替代路线</string>
-    <string name="speak_pedestrian">步行街道</string>
+    <string name="speak_pedestrian">人行横道</string>
     <string name="routing_attr_no_new_routing_name">不用 v1.9 路径规则</string>
     <string name="routing_attr_no_new_routing_description">请不要使用 v1.9 的路径规划规则。</string>
     <string name="rendering_attr_transportStops_name">公交站</string>
@@ -1733,7 +1733,7 @@
     <string name="rendering_attr_hideBuildings_name">建筑</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">非车辆公路</string>
     <string name="rendering_attr_hideText_name">文本</string>
-    <string name="rendering_attr_hideWoodScrubs_name">木材和磨砂</string>
+    <string name="rendering_attr_hideWoodScrubs_name">树木和灌木丛</string>
     <string name="rendering_attr_buildings15zoom_name">15 级缩放建筑物</string>
     <string name="rendering_attr_moreDetailed_name">更多细节</string>
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
@@ -1755,7 +1755,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \n长按在地图上查看"</string>
-    <string name="delay_navigation_start">自动启动转弯指引</string>
+    <string name="delay_navigation_start">自动启动转向指引</string>
     <string name="gpx_info_subtracks">子轨迹：%1$s</string>
     <string name="gpx_info_waypoints">路点：%1$s</string>
     <string name="gpx_info_distance">距离：%1$s（%2$s 个点）</string>
@@ -4447,4 +4447,24 @@
     <string name="second_marker_widget_desc">你可以配置小组件来显示距离或估计到达第二个地图标记的时间。</string>
     <string name="first_marker_widget_desc">你可以配置小组件来显示距离或估计到达第一个地图标记的时间。</string>
     <string name="time_to_destination_widget_desc">该小部件会显示到最后一个目的地点的 \"到达时间 \"或 \"离开时间\"。时间会在导航过程中不断更新，它等于从当前位置出发的路线时间。</string>
+    <string name="shared_string_widget">小工具</string>
+    <string name="current_time_widget_desc">从您的设备显示当前时间。</string>
+    <string name="gps_info_widget_desc">显示设备在那一刻检测到并使用的卫星数量。</string>
+    <string name="av_def_action_choose">根据要求</string>
+    <string name="lanes_widgets_desc">车道小部件显示当前的道路车道布局，并突出显示要通过主动导航行驶的车道。</string>
+    <string name="battery_widget_desc">显示您设备的电池电量。</string>
+    <string name="time_to_go_desc">到达目的地所需的时间（以分钟或小时为单位）。</string>
+    <string name="arrival_time_widget_desc">到达目标地点的时间。</string>
+    <string name="altitude_widget_desc">显示当前地理位置的海拔高度。</string>
+    <string name="max_speed_widget_desc">显示当前行驶道路的速度限制。</string>
+    <string name="map_markers_bar_widget_desc">在顶部栏微件上，您可以看到从当前位置到标记处的距离和方向。可以配置为在小部件中看到 1 或 2 个顶部标记。</string>
+    <string name="audio_video_notes_desc">小工具提供开始/停止录制（音频、视频或照片）的快速访问。</string>
+    <string name="navigation_points_desc">导航小部件在导航期间启用，以显示距离、到达或离开时间、下一个转弯、方位、当前街道名称、车道信息、最大速度、接近警报、POI、航点等信息。</string>
+    <string name="navigation_points">导航点</string>
+    <string name="current_speed_widget_desc">向您显示由GPS 传感器检测到的当前速度。</string>
+    <string name="magnetic_bearing_widget_desc">从您所在位置观察到的磁北与目标点之间的角度。</string>
+    <string name="bearing_desc">方位小部件以角度单位（180 度、360 度、毫弧度）显示与目标的绝对或相对方位。</string>
+    <string name="coordinates_widget_desc">它显示当前地理位置的地理坐标。</string>
+    <string name="street_name_widget_desc">街道名称微件使用直线位置箭头显示当前街道名称，或显示下一个街道名称以及必须完成的操作。</string>
+    <string name="map_markers_desc">在顶栏小组件上，你可以看到从当前位置到标记物的距离和方向。可以配置为在小组件中看到1或2个顶部标记。</string>
 </resources>

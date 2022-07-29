@@ -40,7 +40,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		String description;
 		Drawable icon;
-		boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
+		boolean trackSnappedToRoad = !editingCtx.shouldCheckApproximation() || !editingCtx.isApproximationNeeded();
 		if (trackSnappedToRoad) {
 			ApplicationMode routeAppMode = editingCtx.getAppMode();
 			if (routeAppMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
