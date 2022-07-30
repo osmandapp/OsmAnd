@@ -2157,7 +2157,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	public static boolean openSnapToRoads(@NonNull MapActivity activity, boolean showSnapWarning) {
+	public static boolean showSnapToRoadsDialog(@NonNull MapActivity activity, boolean showSnapWarning) {
 		OsmandApplication app = activity.getMyApplication();
 		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
 		if (gpxFile != null) {

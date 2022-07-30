@@ -27,11 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -1564,7 +1561,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 					break;
 			}
 		} else if (card instanceof AttachTrackToRoadsBannerCard) {
-			if (MeasurementToolFragment.openSnapToRoads(requireMapActivity(), true)) {
+			if (MeasurementToolFragment.showSnapToRoadsDialog(requireMapActivity(), true)) {
 				dismiss();
 			}
 		}

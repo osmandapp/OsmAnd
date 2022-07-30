@@ -31,8 +31,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
-import net.osmand.plus.measurementtool.GpxData;
-import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -61,8 +59,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
@@ -471,7 +467,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	public void openPlanRoute(boolean showSnapWarning) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && MeasurementToolFragment.openSnapToRoads(mapActivity, showSnapWarning)) {
+		if (mapActivity != null && MeasurementToolFragment.showSnapToRoadsDialog(mapActivity, showSnapWarning)) {
 			editingTrack = true;
 			close();
 		}

@@ -860,7 +860,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof AttachTrackToRoadsBannerCard) {
-				if (MeasurementToolFragment.openSnapToRoads(mapActivity, true)) {
+				if (MeasurementToolFragment.showSnapToRoadsDialog(mapActivity, true)) {
 					hide();
 				}
 			}
