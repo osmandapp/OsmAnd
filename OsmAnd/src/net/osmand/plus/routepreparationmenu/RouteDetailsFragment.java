@@ -381,7 +381,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		if (mapActivity == null) {
 			return;
 		}
-		RouteDirectionsCard directionsCard = new RouteDirectionsCard(mapActivity); // todo check
+		RouteDirectionsCard directionsCard = new RouteDirectionsCard(mapActivity);
 		directionsCard.setTransparentBackground(true);
 		directionsCard.setListener(this);
 		menuCards.add(directionsCard);
