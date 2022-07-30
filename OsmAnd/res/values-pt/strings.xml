@@ -4781,4 +4781,5 @@
     <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s será contada e afetará a velocidade média.</string>
     <string name="attach_roads_descr">Ativar para aproximar o trilho a uma rota válida anexada a mapas offline. Desta forma será corrigida a altitude da estrada, a informação da estrada e as curvas que poderão ser utilizadas mais tarde na navegação.</string>
     <string name="attach_roads_warning">Pode anexar apenas uma pista registada às estradas</string>
+    <string name="shared_string_only_missing">Só os que faltam</string>
 </resources>

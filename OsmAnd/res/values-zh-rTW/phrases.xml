@@ -1133,7 +1133,7 @@
     <string name="poi_power_pole">電線桿</string>
     <string name="poi_cooling_tower">冷卻塔</string>
     <string name="poi_lighting_tower">照明架塔</string>
-    <string name="poi_species">種類</string>
+    <string name="poi_species">物種</string>
     <string name="poi_genus">種屬</string>
     <string name="poi_taxon">分類</string>
     <string name="poi_urban">城市</string>
