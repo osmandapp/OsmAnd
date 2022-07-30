@@ -18,6 +18,13 @@
 		android:textSize="@dimen/text_button_text_size"
 		osmand:typeface="@string/font_roboto_medium" />
 
+	<FrameLayout
+		android:id="@+id/attach_to_roads_banner_container"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
 	<LinearLayout
 		android:id="@+id/items"
 		android:layout_width="match_parent"

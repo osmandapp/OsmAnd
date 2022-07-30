@@ -292,6 +292,11 @@ public class RoutingHelper {
 		return currentGPXRoute != null && RouteExporter.OSMAND_ROUTER_V2.equals(currentGPXRoute.getFile().author);
 	}
 
+	@Nullable
+	public GPXFile getCurrentGPX() {
+		return currentGPXRoute != null ? currentGPXRoute.getFile() : null;
+	}
+
 	public void setGpxParams(GPXRouteParamsBuilder params) {
 		app.logRoutingEvent("setGpxParams params " + params);
 		currentGPXRoute = params;

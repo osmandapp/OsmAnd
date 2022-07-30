@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -55,7 +53,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
@@ -64,6 +61,8 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
@@ -151,12 +150,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 			sortButton = view.findViewById(R.id.sort_button);
 			closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
-			closeButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					dismiss();
-				}
-			});
+			closeButton.setOnClickListener(v -> dismiss());
 
 			if (isPortrait()) {
 				updateCardsLayout();
@@ -455,9 +449,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				Uri uri = data.getData();
 				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
 					@Override
-					public void onImportComplete(boolean success) {
-
-					}
+					public void onImportComplete(boolean success) { }
 
 					@Override
 					public void onSaveComplete(boolean success, GPXFile result) {
@@ -479,14 +471,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	public void openPlanRoute(boolean showSnapWarning) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && gpxFile != null) {
+		if (mapActivity != null && MeasurementToolFragment.openSnapToRoads(mapActivity, showSnapWarning)) {
 			editingTrack = true;
-			GpxData gpxData = new GpxData(gpxFile);
-			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
-			editingContext.setGpxData(gpxData);
-			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
-			editingContext.setSelectedSegment(app.getSettings().GPX_SEGMENT_INDEX.get());
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
 			close();
 		}
 	}
@@ -519,30 +505,24 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, colorId);
 		sortButton.setImageResource(sortByMode.getIconId());
 		AndroidUtils.setBackground(sortButton, background);
-		sortButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(mode.getNameId())
-							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									sortByMode = mode;
-									sortButton.setImageResource(mode.getIconId());
-									if (tracksCard != null) {
-										tracksCard.setSortByMode(mode);
-									}
-								}
-							})
-							.setSelected(sortByMode == mode)
-							.create()
-					);
-				}
-				new PopUpMenuHelper.Builder(v, items, isNightMode()).show();
+		sortButton.setOnClickListener(v -> {
+			List<PopUpMenuItem> items = new ArrayList<>();
+			for (TracksSortByMode mode : TracksSortByMode.values()) {
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitleId(mode.getNameId())
+						.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
+						.setOnClickListener(v1 -> {
+							sortByMode = mode;
+							sortButton.setImageResource(mode.getIconId());
+							if (tracksCard != null) {
+								tracksCard.setSortByMode(mode);
+							}
+						})
+						.setSelected(sortByMode == mode)
+						.create()
+				);
 			}
+			new PopUpMenuHelper.Builder(v, items, isNightMode()).show();
 		});
 	}
 
@@ -551,12 +531,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 
 		View cancelButton = view.findViewById(R.id.dismiss_button);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		cancelButton.setOnClickListener(v -> dismiss());
 		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
 	}
 

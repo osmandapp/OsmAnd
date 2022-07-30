@@ -136,6 +136,13 @@
 			android:paddingHorizontal="@dimen/content_padding" />
 
 		<FrameLayout
+			android:id="@+id/attach_to_roads_banner_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingHorizontal="@dimen/content_padding" />
+
+		<FrameLayout
 			android:id="@+id/button_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
