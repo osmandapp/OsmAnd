@@ -2701,7 +2701,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Скриване на военните зони</string>
     <string name="map_widget_trip_recording_distance">Растояние</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без ограничения)</string>
-    <string name="routing_attr_avoid_fords_name">Избягване на брдове</string>
+    <string name="routing_attr_avoid_fords_name">Избягване на бродове</string>
     <string name="map_widget_trip_recording_downhill">Спискане</string>
     <string name="map_widget_trip_recording_duration">Продължителност</string>
     <string name="routing_attr_avoid_highway_description">Избягване на магистрали</string>
@@ -2746,7 +2746,7 @@
     <string name="track_attach_to_the_roads_descr">Трасето ще бъде прикрепено към пътя с помощта на карти за работа извън мрежа, а геометрията му ще бъде променена.</string>
     <string name="private_access_routing_req">Крайната точка се намира на частна територия. Разрешавате ли използване на частни пътища за пътуването\?</string>
     <string name="map_widget_true_bearing">Истинска посока</string>
-    <string name="routing_attr_avoid_fords_description">Избягване на брдове</string>
+    <string name="routing_attr_avoid_fords_description">Избягване на бродове</string>
     <string name="routing_attr_hazmat_category_name">Категория опасни товари</string>
     <string name="app_mode_wheelchair">Инвалиден стол</string>
     <string name="route_maneuvers">Маневри по маршрута</string>
@@ -2775,7 +2775,7 @@
     <string name="route_maneuvers_desc">Навигационните приспособления се включват по време на навигация, за да показват информация като разтояние, време на пристигане или оставащо време, предстоящите завои, посоката на движение, име на текущата улица, информация за лентата на движение, максималната скорост, приближаващи опасности, POI, пътни точки.</string>
     <string name="shared_string_widget">Приспособление</string>
     <string name="routing_attr_carriage_restrictions_description">Отчита правата за достъп на транспортни средства с животинска тяга</string>
-    <string name="routing_attr_avoid_4wd_only_name">Пез пътища за 4WD</string>
+    <string name="routing_attr_avoid_4wd_only_name">Без офроуд пътища</string>
     <string name="fps_widget_desc">Показва колко бързо се показват и опресняват картата и нейните елементи.</string>
     <string name="quick_action_switch_profile_descr">Бутонът за действия превлкючва между избраните профили.</string>
     <string name="selected_profile">Избран профил</string>
