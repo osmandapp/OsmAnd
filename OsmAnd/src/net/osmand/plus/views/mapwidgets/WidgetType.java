@@ -68,6 +68,11 @@ public enum WidgetType {
 	MAPILLARY("mapillary", R.string.mapillary, R.string.mapillary_widget_desc, R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night, R.string.docs_widget_mapillary, null, RIGHT),
 	PARKING("parking", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
+	WX_TEMPERATURE_WIDGET("wx_temperature_widget", R.string.map_settings_weather_temp, R.string.temperature_widget_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, WidgetGroup.WEATHER, RIGHT),
+	WX_PRECIPITATION_WIDGET("wx_precipitation_widget", R.string.map_settings_weather_precip, R.string.precipitation_widget_desc, R.drawable.widget_weather_precipitation_day, R.drawable.widget_weather_precipitation_night, 0, WidgetGroup.WEATHER, RIGHT),
+	WX_WIND_WIDGET("wx_wind_widget", R.string.map_settings_weather_wind, R.string.wind_widget_desc, R.drawable.widget_weather_wind_day, R.drawable.widget_weather_wind_night, 0, WidgetGroup.WEATHER, RIGHT),
+	WX_CLOUDS_WIDGET("wx_clouds_widget", R.string.map_settings_weather_cloud, R.string.clouds_widget_desc, R.drawable.widget_weather_clouds_day, R.drawable.widget_weather_clouds_night, 0, WidgetGroup.WEATHER, RIGHT),
+	WX_AIR_PRESSURE_WIDGET("wx_air_pressure_widget", R.string.map_settings_weather_pressure, R.string.air_pressure_widget_desc, R.drawable.widget_weather_air_pressure_day, R.drawable.widget_weather_air_pressure_night, 0, WidgetGroup.WEATHER, RIGHT),
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
 

@@ -11,6 +11,13 @@
 	Thx - Hardy
 -->
 
+    <string name="weather_widgets_secondary_desc">Measurement units could be changed in Weather plugin settings.</string>
+    <string name="air_pressure_widget_desc">Shows air pressure for current map center.</string>
+    <string name="clouds_widget_desc">Shows clouds for current map center.</string>
+    <string name="wind_widget_desc">Shows wind speed for current map center.</string>
+    <string name="precipitation_widget_desc">Shows precipitation for current map center.</string>
+    <string name="temperature_widget_desc">Shows temperature for current map center.</string>
+    <string name="weather_widget_group_desc">A set of widgets showing a various weather information.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>

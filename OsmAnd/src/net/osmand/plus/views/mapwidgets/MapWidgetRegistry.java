@@ -34,9 +34,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.WX_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WX_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
@@ -49,6 +51,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WX_PRECIPITATION_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
@@ -56,9 +59,11 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WX_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WX_WIND_WIDGET;
 
 public class MapWidgetRegistry {
 

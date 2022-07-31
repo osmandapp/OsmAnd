@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.weather.WeatherPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ public enum WidgetGroup {
 	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_night, R.string.docs_widget_markers),
 	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, R.string.docs_widget_bearing),
 	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
-	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes);
+	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes),
+	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0);
 
 	@StringRes
 	public final int titleId;
@@ -97,13 +99,15 @@ public enum WidgetGroup {
 			return getPartOfPluginDesc(context, OsmandMonitoringPlugin.class);
 		} else if (this == AUDIO_VIDEO_NOTES) {
 			return getPartOfPluginDesc(context, AudioVideoNotesPlugin.class);
+		} else if (this == WEATHER) {
+			return context.getString(R.string.weather_widgets_secondary_desc);
 		}
 		return null;
 	}
 
 	@DrawableRes
 	public int getSecondaryIconId() {
-		if (this == BEARING) {
+		if (this == BEARING || this == WEATHER) {
 			return R.drawable.ic_action_help;
 		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES) {
 			return R.drawable.ic_extension_dark;
