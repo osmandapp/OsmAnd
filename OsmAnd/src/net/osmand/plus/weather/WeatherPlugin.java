@@ -1,5 +1,7 @@
 package net.osmand.plus.weather;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -78,8 +80,14 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public int getLogoResourceId() {
-//		return R.drawable.img_plugin_weather;
-		return R.drawable.ic_extension_dark;
+		return R.drawable.ic_action_umbrella;
+	}
+
+	@Nullable
+	@Override
+	public Drawable getAssetResourceImage() {
+		// todo replace with appropriate resource
+		return super.getAssetResourceImage();
 	}
 
 	@Override
