@@ -107,9 +107,9 @@ public enum WidgetGroup {
 
 	@DrawableRes
 	public int getSecondaryIconId() {
-		if (this == BEARING || this == WEATHER) {
+		if (this == BEARING) {
 			return R.drawable.ic_action_help;
-		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES) {
+		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == WEATHER) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

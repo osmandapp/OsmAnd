@@ -166,7 +166,11 @@ public enum WidgetType {
 		} else if (this == FPS || this == MAPILLARY || this == PARKING) {
 			return R.drawable.ic_extension_dark;
 		} else if (group != null) {
-			return group.getSecondaryIconId();
+			if (group == WidgetGroup.WEATHER) {
+				return R.drawable.ic_action_help;
+			} else {
+				return group.getSecondaryIconId();
+			}
 		}
 		return 0;
 	}
