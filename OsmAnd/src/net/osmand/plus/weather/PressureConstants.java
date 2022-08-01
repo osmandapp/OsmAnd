@@ -9,9 +9,9 @@ import net.osmand.plus.R;
 
 public enum PressureConstants {
 
-	HECTOPASCALS(R.string.weather_preassure_hectopascals, R.string.weather_preassure_hpa),
-	MILLIMETERS_OF_MERCURY(R.string.weather_preassure_millimeters_of_mercury, R.string.weather_preassure_mmhg),
-	INCHES_OF_MERCURY(R.string.weather_preassure_inches_of_mercury, R.string.weather_preassure_inhg);
+	HECTOPASCALS(R.string.weather_pressure_hectopascals, R.string.weather_pressure_hpa),
+	MILLIMETERS_OF_MERCURY(R.string.weather_pressure_millimeters_of_mercury, R.string.weather_pressure_mmhg),
+	INCHES_OF_MERCURY(R.string.weather_pressure_inches_of_mercury, R.string.weather_pressure_inhg);
 
 	@StringRes
 	private final int titleId;

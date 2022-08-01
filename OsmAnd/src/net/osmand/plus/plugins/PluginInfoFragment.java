@@ -38,6 +38,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.weather.WeatherPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 
@@ -164,6 +165,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				if (plugin instanceof SRTMPlugin) {
 					feature = OsmAndFeature.TERRAIN;
 				} else if (plugin instanceof WikipediaPlugin) {
+					feature = OsmAndFeature.WIKIPEDIA;
+				}  else if (plugin instanceof WeatherPlugin) {
 					feature = OsmAndFeature.WIKIPEDIA;
 				} else {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
