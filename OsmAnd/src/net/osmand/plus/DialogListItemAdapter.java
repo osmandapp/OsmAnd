@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +10,13 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 public class DialogListItemAdapter extends BaseAdapter {
@@ -23,32 +29,34 @@ public class DialogListItemAdapter extends BaseAdapter {
 	private int selected = INVALID_ID;
 	private final boolean[] checkedItems;
 	@ColorInt
-	private int compoundButtonColor = INVALID_ID;
+	private int controlsColor = INVALID_ID;
 
 	private AlertDialog dialog;
 	private final View.OnClickListener listener;
 	private final LayoutInflater inflater;
 
-	public static DialogListItemAdapter createSingleChoiceAdapter(String[] mData, boolean nightMode, int selected, OsmandApplication app,
-	                                                              @ColorInt int compoundButtonColor, int themeRes, View.OnClickListener listener) {
-
-		return new DialogListItemAdapter(mData, selected, null, nightMode, app, compoundButtonColor, themeRes, listener, false);
+	@NonNull
+	public static DialogListItemAdapter createSingleChoiceAdapter(@NonNull String[] mData, boolean nightMode, int selected, @NonNull OsmandApplication app,
+	                                                              @ColorInt int controlsColor, int themeRes, @Nullable View.OnClickListener listener) {
+		return new DialogListItemAdapter(mData, selected, null, nightMode, app, controlsColor, themeRes, listener, false);
 	}
 
-	public static DialogListItemAdapter createMultiChoiceAdapter(String[] mData, boolean nightMode, boolean[] checkedItems, OsmandApplication app,
-	                                                             @ColorInt int compoundButtonColor, int themeRes, View.OnClickListener listener) {
-
-		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app, compoundButtonColor, themeRes, listener, true);
+	@NonNull
+	public static DialogListItemAdapter createMultiChoiceAdapter(@NonNull String[] mData, boolean nightMode, @Nullable boolean[] checkedItems,
+	                                                             @NonNull OsmandApplication app, @ColorInt int controlsColor, int themeRes,
+	                                                             @Nullable View.OnClickListener listener) {
+		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app, controlsColor, themeRes, listener, true);
 	}
 
-	private DialogListItemAdapter(String[] mData, int selected, boolean[] checkedItems, boolean nightMode, OsmandApplication app,
-	                              int compoundButtonColor, int themeRes, View.OnClickListener listener, boolean multiChoice) {
+	private DialogListItemAdapter(@NonNull String[] mData, int selected, @NonNull boolean[] checkedItems, boolean nightMode,
+	                              @NonNull OsmandApplication app, int controlsColor, int themeRes,
+	                              @Nullable View.OnClickListener listener, boolean multiChoice) {
 		this.mData = mData;
 		this.selected = selected;
 		this.checkedItems = checkedItems;
 		this.nightMode = nightMode;
 		this.multiChoice = multiChoice;
-		this.compoundButtonColor = compoundButtonColor;
+		this.controlsColor = controlsColor;
 		this.listener = listener;
 		inflater = LayoutInflater.from(new ContextThemeWrapper(app, themeRes));
 	}
@@ -58,6 +66,7 @@ public class DialogListItemAdapter extends BaseAdapter {
 		return mData.length;
 	}
 
+	@NonNull
 	@Override
 	public Object getItem(int position) {
 		return mData[position];
@@ -68,18 +77,20 @@ public class DialogListItemAdapter extends BaseAdapter {
 		return 0;
 	}
 
-	public void setDialog(AlertDialog dialog) {
+	public void setDialog(@NonNull AlertDialog dialog) {
 		this.dialog = dialog;
 	}
 
+	@NonNull
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		View view;
 		if (convertView == null) {
-			view = inflater.inflate(R.layout.dialog_list_item_with_compound_button, null);
+			view = inflater.inflate(R.layout.dialog_list_item_with_compound_button, parent, false);
 		} else {
 			view = convertView;
 		}
+		Context ctx = view.getContext();
 		View button = view.findViewById(R.id.button);
 		button.setTag(position);
 		CompoundButton cb;
@@ -101,8 +112,10 @@ public class DialogListItemAdapter extends BaseAdapter {
 			});
 		}
 		cb.setVisibility(View.VISIBLE);
-		if (compoundButtonColor != INVALID_ID) {
-			UiUtilities.setupCompoundButton(nightMode, compoundButtonColor, cb);
+		if (controlsColor != INVALID_ID) {
+			UiUtilities.setupCompoundButton(nightMode, controlsColor, cb);
+			Drawable selectable = UiUtilities.getColoredSelectableDrawable(ctx, controlsColor, 0.3f);
+			AndroidUtils.setBackground(button, selectable);
 		}
 		TextView text = view.findViewById(R.id.text);
 		text.setText(mData[position]);
