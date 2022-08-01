@@ -1431,7 +1431,7 @@
     <string name="specified_directiory_not_writeable">Ekki var hægt að búa til kort í möppunni sem tiltekin var</string>
     <string name="search_poi_category_hint">Skrifaðu hér til að leita að öllu</string>
     <string name="agps_data_last_downloaded">A-GPS-gögn voru sótt: %1$s</string>
-    <string name="welmode_download_maps">Sækja kort</string>
+    <string name="welmode_download_maps">Sækja landakort</string>
     <string name="mark_to_delete">Merki sem á að eyða</string>
     <string name="confirmation_to_clear_history">Hreinsa breytingaskrána\?</string>
     <string name="osm_edits">OSM-breytingar</string>
@@ -1941,9 +1941,9 @@
     <string name="available_downloads_left">%1$d skrár á eftir að sækja</string>
     <string name="contribution_activity">Setja inn útgáfu</string>
     <string name="local_index_description">Ýttu á eitthvað atriði til að sjá nánari upplýsingar, ýttu og haltu niðri til að gera óvirkt eða eyða því. Núverandi gögn á tækinu (%1$s laust):</string>
-    <string name="first_time_msg">Takk fyrir að nota OsmAnd. Nú þarftu að sækja ýmis ónettengd svæðisbundin gögn, hægt er að gera það með því að fara í \'Stillingar\' → \'Sýsla með kortaskrár\'. Þegar því er lokið geturðu skoðað kort, staðsett heimilisföng, flett upp merkisstöðum og fundið almenningssamgöngur.</string>
+    <string name="first_time_msg">Takk fyrir að nota OsmAnd. Nú þarftu að sækja ýmis ónettengd svæðisbundin gögn, hægt er að gera það með því að fara í \'Stillingar\' → \'Sækja landakort\'. Þegar því er lokið geturðu skoðað kort, staðsett heimilisföng, flett upp merkisstöðum og fundið almenningssamgöngur.</string>
     <string name="map_online_plugin_is_not_installed">Virkjaðu viðbótina fyrir ónettengd kort til að velja önnur kortaupptök</string>
-    <string name="switch_to_raster_map_to_see">Þú getur sótt ónettengt vektorkort fyrir þessa staðsetningu í \'Stillingar\' → \'Sýsla með kortaskrár\', nú eða skipt yfir í viðbótina fyrir ónettengd kort.</string>
+    <string name="switch_to_raster_map_to_see">Þú getur sótt ónettengt vektorkort fyrir þessa staðsetningu í \'Valmynd\' (\'Sækja landakort\'), nú eða skipt yfir í viðbótina fyrir ónettengd kort.</string>
     <string name="support_new_features_descr">Styrktu verkefnið til að fá nýja eiginleika þróaða fyrir forritið.</string>
     <string name="settings_direction_style_descr">Veldu stíl til framsetningar á afstæðum stefnum á meðan verið er á ferð</string>
     <string name="accessibility_preferences_descr">Kjörstillingar sem tengjast aðgengi.</string>
@@ -4771,4 +4771,6 @@
     <string name="without_profiles_changing">Án breytinga á notkunarsniðum</string>
     <string name="download_tiles">Sækja kortaflísar</string>
     <string name="connect_with_straight_line">Tengja með beinni línu</string>
+    <string name="track_attach_to_the_roads_descr">Ferill verður tengdur við veginn með ónettengdum kortum, lögun ferilsins mun breytast.</string>
+    <string name="attach_roads_warning">Þú getur aðeins tengt skráðan feril við vegi</string>
 </resources>

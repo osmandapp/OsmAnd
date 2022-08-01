@@ -4731,4 +4731,5 @@
     <string name="auto_25_chars_route_roundabout_kl">לצאת ביציאה ה־%1$d ולהיצמד לשמאל</string>
     <string name="av_notes_photo_widget_desc">נגיעה בווידג׳ט מאפשרת לצלם תמונה.</string>
     <string name="auto_backup_title">גיבוי אוטומטי</string>
+    <string name="connect_with_straight_line">חיבור בקו ישר</string>
 </resources>
