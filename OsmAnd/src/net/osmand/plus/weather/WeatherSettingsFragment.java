@@ -1,29 +1,36 @@
 package net.osmand.plus.weather;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.weather.units.CloudConstants;
 import net.osmand.plus.weather.units.PrecipConstants;
 import net.osmand.plus.weather.units.PressureConstants;
 import net.osmand.plus.weather.units.TemperatureConstants;
 import net.osmand.plus.weather.units.WindConstants;
+import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_TEMPERATURE;
-import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_PRESSURE;
-import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_WIND;
 import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_CLOUDS;
 import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_PRECIP;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_PRESSURE;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_TEMPERATURE;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_WIND;
 
 public class WeatherSettingsFragment extends BaseSettingsFragment {
 
@@ -76,15 +83,55 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
+	public boolean onPreferenceChange(@NonNull Preference preference, @Nullable Object newValue) {
 		String prefId = preference.getKey();
 		return super.onPreferenceChange(preference, newValue);
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(@NonNull Preference preference) {
 		String prefId = preference.getKey();
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(@NonNull Preference preference) {
+		if (Algorithms.equalsToAny(preference.getKey(), WeatherPlugin.getUnitsPreferencesIds())) {
+			showChooseUnitDialog((ListPreferenceEx) preference);
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
+	}
+
+	private void showChooseUnitDialog(ListPreferenceEx listPreference) {
+		boolean nightMode = isNightMode();
+		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
+		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(listPreference.getTitle());
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+
+		String[] entries = listPreference.getEntries();
+		Integer[] entryValues = (Integer[]) listPreference.getEntryValues();
+		int i = listPreference.getValueIndex();
+
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				entries, nightMode, i, app, profileColor, themeRes, v -> {
+					int selectedEntryIndex = (int) v.getTag();
+					Object value = entryValues[selectedEntryIndex];
+					if (listPreference.callChangeListener(value)) {
+						listPreference.setValue(value);
+					}
+					Fragment target = getTargetFragment();
+					if (target instanceof OnPreferenceChanged) {
+						((OnPreferenceChanged) target).onPreferenceChanged(listPreference.getKey());
+					}
+				}
+		);
+
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
 	}
 
 	@Nullable

@@ -32,7 +32,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WX_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_WIND_WIDGET;
 
 public class WeatherPlugin extends OsmandPlugin {
-	
+
 	public static final String PREFERENCE_ID_TEMPERATURE = "map_settings_weather_temp";
 	public static final String PREFERENCE_ID_PRESSURE = "map_settings_weather_pressure";
 	public static final String PREFERENCE_ID_WIND = "map_settings_weather_wind";
@@ -126,8 +126,20 @@ public class WeatherPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	private WidgetType[] getWidgetTypes() {
-		return new WidgetType[] {
+	@NonNull
+	public static String[] getUnitsPreferencesIds() {
+		return new String[]{
+				PREFERENCE_ID_TEMPERATURE,
+				PREFERENCE_ID_PRESSURE,
+				PREFERENCE_ID_WIND,
+				PREFERENCE_ID_CLOUDS,
+				PREFERENCE_ID_PRECIP
+		};
+	}
+
+	@NonNull
+	private static WidgetType[] getWidgetTypes() {
+		return new WidgetType[]{
 				WX_TEMPERATURE_WIDGET,
 				WX_PRECIPITATION_WIDGET,
 				WX_WIND_WIDGET,
