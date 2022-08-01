@@ -70,7 +70,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	private Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 
 	//OpenGL
-	MapillaryTilesProvider mapillaryTilesProvider;
+	private MapillaryTilesProvider mapillaryTilesProvider;
+	private long filterKey = 0;
 
 	MapillaryVectorLayer(@NonNull Context context) {
 		super(context, false);
@@ -98,15 +99,26 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			if (mapillaryTilesProvider == null) {
-				int layerIndex = view.getLayerIndex(this);
-				if (map != null) {
-					mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, view.getDensity());
-					mapRenderer.setMapLayerProvider(layerIndex, mapillaryTilesProvider.instantiateProxy(true));
-					mapillaryTilesProvider.swigReleaseOwnership();
-				} else {
+			int layerIndex = view.getLayerIndex(this);
+			if (map == null) {
+				if (mapillaryTilesProvider != null) {
 					mapRenderer.resetMapLayerProvider(layerIndex);
+					mapillaryTilesProvider = null;
 				}
+				return;
+			}
+			if (filterKey != getFilterKey()) {
+				if (mapillaryTilesProvider != null) {
+					mapillaryTilesProvider.clearCache();
+					mapRenderer.resetMapLayerProvider(layerIndex);
+					mapillaryTilesProvider = null;
+				}
+				filterKey = getFilterKey();
+			}
+			if (mapillaryTilesProvider == null) {
+				mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, view.getDensity());
+				mapRenderer.setMapLayerProvider(layerIndex, mapillaryTilesProvider.instantiateProxy(true));
+				mapillaryTilesProvider.swigReleaseOwnership();
 			} else {
 				mapillaryTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
@@ -540,5 +552,17 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			r = 18;
 		}
 		return (int) (r * view.getScaleCoefficient());
+	}
+
+	private long getFilterKey() {
+		int hasFilter = plugin.USE_MAPILLARY_FILTER.get() ? 1 : 0;
+		long from = 0;
+		long to = 0;
+		if (hasFilter == 1) {
+			from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
+			to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+		}
+		int pano = plugin.MAPILLARY_FILTER_PANO.get() ? 1 : 0;
+		return (hasFilter << 1) + from + to + pano;
 	}
 }

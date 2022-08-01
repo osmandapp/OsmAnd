@@ -6,7 +6,6 @@ import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
@@ -48,7 +47,6 @@ import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryVectorLayer;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -60,7 +58,6 @@ import net.osmand.util.MapUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +66,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 	private static final int TILE_LOAD_TIMEOUT = 30000;
+	private static final int MAX_GEOMETRY_SIZE = 32000;
 
 	private final ITileSource tileSource;
 	private final ResourceManager rm;
@@ -144,7 +142,6 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		if (queryController != null && queryController.isAborted()) {
 			return SwigUtilities.nullSkImage();
 		}
-		mapillaryBitmapTileCache.checkIsFiltersChanged();
 		if (mapillaryBitmapTileCache.isTileExist(request)) {
 			int x = request.getTileId().getX();
 			int y = request.getTileId().getY();
@@ -187,7 +184,6 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		boolean imgExist = geometryTilesCache.isTileDownloaded(tileId, tileSource, tileX, tileY, tileZoom);
 		long requestTimestamp = System.currentTimeMillis();
 		if (imgExist || useInternet) {
-			//long requestTimestamp = System.currentTimeMillis();
 			do {
 				if (queryController != null && queryController.isAborted()) {
 					return SwigUtilities.nullSkImage();
@@ -204,8 +200,6 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			} while (System.currentTimeMillis() - requestTimestamp < TILE_LOAD_TIMEOUT);
 		}
 		if (tile != null) {
-			Log.d("2222", "get tile " + request.getTileId().getX() + ":" + request.getTileId().getY() + ":" + request.getZoom() + " in " + (System.currentTimeMillis() - requestTimestamp));
-			long drawTimestamp = System.currentTimeMillis();
 			List<Geometry> geometries = tile.getData();
 			if (geometries != null) {
 
@@ -219,18 +213,14 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 				double bitmapHalfSize = (double)tileSize / 10d;
 				AreaI tileBBox31Enlarged = Utilities.tileBoundingBox31(request.getTileId(),
 						zoom).getEnlargedBy((int)(bitmapHalfSize * px31Size));
-
-				if (currentZoom < MIN_POINTS_ZOOM) {
+				if (currentZoom < MIN_POINTS_ZOOM || geometries.size() < MAX_GEOMETRY_SIZE) {
 					drawLines(canvas, shiftedTile, queryController, geometries, tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31);
 				}
-				int points = 0;
 				if (currentZoom >= MIN_POINTS_ZOOM) {
 					bitmapHalfSize = bitmapPoint.getWidth() / 2.0d;
 					tileBBox31Enlarged = Utilities.tileBoundingBox31(request.getTileId(), zoom).getEnlargedBy((int)(bitmapHalfSize * px31Size));
 					drawPoints(canvas, shiftedTile, queryController, geometries, tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31);
 				}
-				Log.d("2222", "draw tile " + request.getTileId().getX() + ":" + request.getTileId().getY() + ":" + zoom
-						+ " points=" + points + " in " + (System.currentTimeMillis() - drawTimestamp) + " all = " + (System.currentTimeMillis() - requestTimestamp));
 				if (!resultTileBitmap.sameAs(emptyBitmap)) {
 					mapillaryBitmapTileCache.saveTile(resultTileBitmap, request);
 				}
@@ -244,31 +234,8 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		return (int) (256 * density);
 	}
 
-	private int test = -1;
-
 	private void drawLines(Canvas canvas, TileId tileId, IQueryController queryController, List<Geometry> geometries,
 	                       AreaI tileBBox31, AreaI tileBBox31Enlarged, int mult, int zoomShift, int tileSize, double tileSize31) {
-		test = test + 1;
-		if (test > 4) {
-			test = -1;
-		}
-		Paint paintLine = new Paint();
-		paintLine.setStyle(Paint.Style.STROKE);
-		paintLine.setAntiAlias(true);
-		if (test <= 0) {
-			paintLine.setColor(Color.RED);
-		} else if (test == 1) {
-			paintLine.setColor(Color.BLUE);
-		} else if (test == 2) {
-			paintLine.setColor(Color.GREEN);
-		} else if (test == 3) {
-			paintLine.setColor(Color.YELLOW);
-		} else if (test >= 4) {
-			paintLine.setColor(Color.MAGENTA);
-		}
-		paintLine.setStrokeWidth(AndroidUtils.dpToPxAuto(rm.getContext(), 2.0f));
-		paintLine.setStrokeCap(Paint.Cap.ROUND);
-
 		for (Geometry geometry : geometries) {
 			if (geometry.isEmpty() || filtered(geometry.getUserData())) {
 				continue;
@@ -431,11 +398,9 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 				{
 					x1 = (float) (((lastTileX - tileBBox31Left) / tileSize31) * tileSize);
 					y1 = (float) (((lastTileY - tileBBox31Top) / tileSize31) * tileSize);
-					path.moveTo(x1, y1);
 					recalculateLastXY = false;
 				}
-				path.lineTo(x2, y2);
-				//canvas.drawLine(x1, y1, x2, y2, paintLine);
+				canvas.drawLine(x1, y1, x2, y2, paintLine);
 				x1 = x2;
 				y1 = y2;
 			}
@@ -446,13 +411,10 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			lastTileX = tileX;
 			lastTileY = tileY;
 		}
-		if (!path.isEmpty()) {
-			canvas.drawPath(path, paintLine);
-		}
 	}
 
 	private void drawPoints(Canvas canvas, TileId tileId, IQueryController queryController, List<Geometry> geometries,
-	                                                   AreaI tileBBox31, AreaI tileBBox31Enlarged, int mult, int zoomShift, int tileSize, double tileSize31) {
+	                        AreaI tileBBox31, AreaI tileBBox31Enlarged, int mult, int zoomShift, int tileSize, double tileSize31) {
 		if (queryController != null && queryController.isAborted()) {
 			return;
 		}
@@ -609,6 +571,12 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		}
 	}
 
+	public void clearCache() {
+		cachedClickMap.clear();
+		clickMap.clear();
+		mapillaryBitmapTileCache.clearCache();
+	}
+
 	private class MapillaryBitmapTileCache {
 		private final SQLiteTileSource sqlTileSource;
 		boolean storedShouldFilter;
@@ -625,14 +593,8 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			storedPano = plugin.MAPILLARY_FILTER_PANO.get();
 		}
 
-		public void checkIsFiltersChanged() {
-			if (storedShouldFilter != plugin.USE_MAPILLARY_FILTER.get() || storedPano != plugin.MAPILLARY_FILTER_PANO.get()) {
-				storedShouldFilter = plugin.USE_MAPILLARY_FILTER.get();
-				storedPano = plugin.MAPILLARY_FILTER_PANO.get();
-				rm.clearCacheAndTiles(sqlTileSource);
-				cachedClickMap.clear();
-				clickMap.clear();
-			}
+		public void clearCache() {
+			rm.clearCacheAndTiles(sqlTileSource);
 		}
 
 		public boolean isTileExist(IMapTiledDataProvider.Request request) {

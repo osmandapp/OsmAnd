@@ -56,7 +56,7 @@ public class TileSourceManager {
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
 					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
 	private static final TileSourceTemplate MAPILLARY_CACHE_SOURCE =
-			new TileSourceTemplate("Mapillary (cache raster tiles)", "", ".png", 21, 13,
+			new TileSourceTemplate("Mapillary (raster tiles)", "", ".png", 21, 13,
 					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
 
 	static {
