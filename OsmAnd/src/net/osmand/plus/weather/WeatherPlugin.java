@@ -15,17 +15,16 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.weather.units.CloudConstants;
+import net.osmand.plus.weather.units.PrecipConstants;
+import net.osmand.plus.weather.units.PressureConstants;
+import net.osmand.plus.weather.units.TemperatureConstants;
+import net.osmand.plus.weather.units.WindConstants;
 import net.osmand.util.Algorithms;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_PRECIPITATION_WIDGET;
@@ -33,6 +32,12 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WX_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_WIND_WIDGET;
 
 public class WeatherPlugin extends OsmandPlugin {
+	
+	public static final String PREFERENCE_ID_TEMPERATURE = "map_settings_weather_temp";
+	public static final String PREFERENCE_ID_PRESSURE = "map_settings_weather_pressure";
+	public static final String PREFERENCE_ID_WIND = "map_settings_weather_wind";
+	public static final String PREFERENCE_ID_CLOUDS = "map_settings_weather_cloud";
+	public static final String PREFERENCE_ID_PRECIP = "map_settings_weather_precip";
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -44,11 +49,11 @@ public class WeatherPlugin extends OsmandPlugin {
 		ApplicationMode.regWidgetVisibility(WX_CLOUDS_WIDGET, noAppMode);
 		ApplicationMode.regWidgetVisibility(WX_AIR_PRESSURE_WIDGET, noAppMode);
 
-		EnumStringPreference weatherTemp = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		EnumStringPreference weatherPressure = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_pressure", PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
-		EnumStringPreference weatherWind = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_wind", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		EnumStringPreference weatherCloud = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_cloud", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		EnumStringPreference weatherPrecipitation = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_precip", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
+		EnumStringPreference weatherTemp = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_TEMPERATURE, TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
+		EnumStringPreference weatherPressure = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_PRESSURE, PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
+		EnumStringPreference weatherWind = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_WIND, WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
+		EnumStringPreference weatherCloud = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_CLOUDS, CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
+		EnumStringPreference weatherPrecipitation = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_PRECIP, PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.weather.units;
 
 import android.content.Context;
 

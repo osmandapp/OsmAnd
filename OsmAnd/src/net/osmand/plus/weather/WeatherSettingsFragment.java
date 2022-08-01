@@ -3,6 +3,9 @@ package net.osmand.plus.weather;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import net.osmand.plus.R;
@@ -10,66 +13,46 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.weather.units.CloudConstants;
+import net.osmand.plus.weather.units.PrecipConstants;
+import net.osmand.plus.weather.units.PressureConstants;
+import net.osmand.plus.weather.units.TemperatureConstants;
+import net.osmand.plus.weather.units.WindConstants;
+
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_TEMPERATURE;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_PRESSURE;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_WIND;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_CLOUDS;
+import static net.osmand.plus.weather.WeatherPlugin.PREFERENCE_ID_PRECIP;
 
 public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		setupTemperaturePref();
-		setupPressurePref();
-		setupWindPref();
-		setupCloudsPref();
-		setupPrecipitationPref();
+		setupUnitsPreference(PREFERENCE_ID_TEMPERATURE);
+		setupUnitsPreference(PREFERENCE_ID_PRESSURE);
+		setupUnitsPreference(PREFERENCE_ID_WIND);
+		setupUnitsPreference(PREFERENCE_ID_CLOUDS);
+		setupUnitsPreference(PREFERENCE_ID_PRECIP);
 
 		setupOfflineForecastPref();
 		setupOnlineCachePref();
 	}
 
-	private void setupTemperaturePref() {
-		TemperatureConstants[] temperatureConstants = TemperatureConstants.values();
-		String[] entries = new String[temperatureConstants.length];
-		Integer[] entryValues = new Integer[temperatureConstants.length];
+	private void setupUnitsPreference(@NonNull String prefId) {
+		Enum<?>[] values = getUnitValues(prefId);
 
+		String[] entries = new String[values.length];
+		Integer[] entryValues = new Integer[values.length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = temperatureConstants[i].toHumanString(app);
-			entryValues[i] = temperatureConstants[i].ordinal();
+			entries[i] = getUnitTypeName(values[i]);
+			entryValues[i] = values[i].ordinal();
 		}
 
-		ListPreferenceEx temperaturePref = findPreference("map_settings_weather_temp");
-		temperaturePref.setEntries(entries);
-		temperaturePref.setEntryValues(entryValues);
-		temperaturePref.setIcon(getActiveIcon(R.drawable.ic_action_thermometer));
-	}
-
-	private void setupPressurePref() {
-		PressureConstants[] preassureConstants = PressureConstants.values();
-		String[] entries = new String[preassureConstants.length];
-		Integer[] entryValues = new Integer[preassureConstants.length];
-
-		for (int i = 0; i < entries.length; i++) {
-			entries[i] = preassureConstants[i].toHumanString(app);
-			entryValues[i] = preassureConstants[i].ordinal();
-		}
-
-		ListPreferenceEx pressurePref = findPreference("map_settings_weather_pressure");
-		pressurePref.setEntries(entries);
-		pressurePref.setEntryValues(entryValues);
-		pressurePref.setIcon(getActiveIcon(R.drawable.ic_action_air_pressure));
-	}
-
-	private void setupWindPref() {
-		Preference nameAndPasswordPref = findPreference("map_settings_weather_wind");
-		nameAndPasswordPref.setIcon(getActiveIcon(R.drawable.ic_action_wind));
-	}
-
-	private void setupCloudsPref() {
-		Preference nameAndPasswordPref = findPreference("map_settings_weather_cloud");
-		nameAndPasswordPref.setIcon(getActiveIcon(R.drawable.ic_action_clouds));
-	}
-
-	private void setupPrecipitationPref() {
-		Preference nameAndPasswordPref = findPreference("map_settings_weather_precip");
-		nameAndPasswordPref.setIcon(getActiveIcon(R.drawable.ic_action_precipitation));
+		ListPreferenceEx preference = findPreference(prefId);
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setIcon(getActiveIcon(getPrefIconId(prefId)));
 	}
 
 	private void setupOfflineForecastPref() {
@@ -102,5 +85,58 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		return super.onPreferenceClick(preference);
+	}
+
+	@Nullable
+	private Enum<?>[] getUnitValues(@NonNull String prefId) {
+		switch (prefId) {
+			case PREFERENCE_ID_TEMPERATURE:
+				return TemperatureConstants.values();
+			case PREFERENCE_ID_PRESSURE:
+				return PressureConstants.values();
+			case PREFERENCE_ID_WIND:
+				return WindConstants.values();
+			case PREFERENCE_ID_CLOUDS:
+				return CloudConstants.values();
+			case PREFERENCE_ID_PRECIP:
+				return PrecipConstants.values();
+			default:
+				return null;
+		}
+	}
+
+	@Nullable
+	private String getUnitTypeName(@NonNull Enum<?> value) {
+		if (value instanceof TemperatureConstants) {
+			return ((TemperatureConstants) value).toHumanString(app);
+		} else if (value instanceof PressureConstants) {
+			return ((PressureConstants) value).toHumanString(app);
+		} else if (value instanceof WindConstants) {
+			return ((WindConstants) value).toHumanString(app);
+		} else if (value instanceof CloudConstants) {
+			return ((CloudConstants) value).getUnit();
+		} else if (value instanceof PrecipConstants) {
+			return ((PrecipConstants) value).toHumanString(app);
+		} else {
+			return null;
+		}
+	}
+
+	@DrawableRes
+	private int getPrefIconId(@NonNull String prefId) {
+		switch (prefId) {
+			case PREFERENCE_ID_TEMPERATURE:
+				return R.drawable.ic_action_thermometer;
+			case PREFERENCE_ID_PRESSURE:
+				return R.drawable.ic_action_air_pressure;
+			case PREFERENCE_ID_WIND:
+				return R.drawable.ic_action_wind;
+			case PREFERENCE_ID_CLOUDS:
+				return R.drawable.ic_action_clouds;
+			case PREFERENCE_ID_PRECIP:
+				return R.drawable.ic_action_precipitation;
+			default:
+				return R.drawable.ic_action_info_dark;
+		}
 	}
 }

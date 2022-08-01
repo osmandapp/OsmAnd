@@ -11,6 +11,18 @@
 	Thx - Hardy
 -->
 
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Inches</string>
+    <string name="weather_precip_milimeters">Milimeters</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Knots</string>
+    <string name="weather_wind_miles_per_hour">Miles per hour</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometers per hour</string>
+    <string name="weather_wind_meters_per_second">Meters/Second</string>
     <string name="weather_widgets_secondary_desc">Measurement units could be changed in Weather plugin settings.</string>
     <string name="air_pressure_widget_desc">Shows air pressure for current map center.</string>
     <string name="clouds_widget_desc">Shows clouds for current map center.</string>

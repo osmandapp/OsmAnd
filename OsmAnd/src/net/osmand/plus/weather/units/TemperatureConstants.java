@@ -1,4 +1,4 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.weather.units;
 
 import android.content.Context;
 
@@ -36,4 +36,5 @@ public enum TemperatureConstants {
 		String title = ctx.getString(titleId);
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
 	}
+
 }
