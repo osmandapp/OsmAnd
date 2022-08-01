@@ -100,7 +100,7 @@ public enum WidgetGroup {
 		} else if (this == AUDIO_VIDEO_NOTES) {
 			return getPartOfPluginDesc(context, AudioVideoNotesPlugin.class);
 		} else if (this == WEATHER) {
-			return context.getString(R.string.weather_widgets_secondary_desc);
+			return getPartOfPluginDesc(context, WeatherPlugin.class);
 		}
 		return null;
 	}

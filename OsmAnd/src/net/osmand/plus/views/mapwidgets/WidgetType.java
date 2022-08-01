@@ -150,7 +150,11 @@ public enum WidgetType {
 		} else if (this == PARKING) {
 			return WidgetGroup.getPartOfPluginDesc(context, ParkingPositionPlugin.class);
 		} else if (group != null) {
-			return group.getSecondaryDescription(context);
+			if (group == WidgetGroup.WEATHER) {
+				return context.getString(R.string.weather_widgets_secondary_desc);
+			} else {
+				return group.getSecondaryDescription(context);
+			}
 		}
 		return null;
 	}
