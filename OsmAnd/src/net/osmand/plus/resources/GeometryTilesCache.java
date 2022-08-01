@@ -60,8 +60,6 @@ public class GeometryTilesCache extends TilesCache<GeometryTile> {
 		if (en.exists()) {
 			try {
 				tile = BinaryVectorTileReader.readTile(en);
-				android.util.Log.d("1111", "readTile: " + req.xTile + ":" + req.yTile);
-
 				downloadIfExpired(req, en.lastModified());
 			} catch (IOException e) {
 				log.error("Cannot read tile", e);
