@@ -86,15 +86,23 @@ public class SQLiteTileSource implements ITileSource {
 			i = name.lastIndexOf('.');
 			if (i > 0) {
 				String sourceName = name.substring(i + 1);
-				for (TileSourceTemplate is : toFindUrl) {
-					if (is.getName().equalsIgnoreCase(sourceName)) {
-						base = is;
-						urlTemplate = is.getUrlTemplate();
-						expirationTimeMillis = is.getExpirationTimeMillis();
-						inversiveZoom = is.getInversiveZoom();
-						break;
-					}
-				}
+				setTileSourceTemplate(sourceName,  toFindUrl);
+			} else {
+				setTileSourceTemplate(name, toFindUrl);
+			}
+		}
+	}
+
+	private void setTileSourceTemplate(String sourceName, List<TileSourceTemplate> toFindUrl) {
+		for (TileSourceTemplate is : toFindUrl) {
+			if (is.getName().equalsIgnoreCase(sourceName)) {
+				base = is;
+				urlTemplate = is.getUrlTemplate();
+				expirationTimeMillis = is.getExpirationTimeMillis();
+				minZoom = is.getMinimumZoomSupported();
+				maxZoom = is.getMaximumZoomSupported();
+				inversiveZoom = is.getInversiveZoom();
+				break;
 			}
 		}
 	}
@@ -627,6 +635,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		/*There is no sense to downoad and do not save. If needed, check should perform before downlad 
 		  if (exists(x, y, zoom)) {
+
 			return;
 		}*/
 		
@@ -747,5 +756,9 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public void resetUrlParameters() {
+	}
+
+	public boolean isFileExist() {
+		return file == null ? false : file.exists();
 	}
 }

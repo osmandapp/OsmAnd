@@ -55,6 +55,9 @@ public class TileSourceManager {
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
 					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
+	private static final TileSourceTemplate MAPILLARY_CACHE_SOURCE =
+			new TileSourceTemplate("Mapillary (raster tiles)", "", ".png", 21, 13,
+					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
 
 	static {
 		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(60 * 24);
@@ -711,6 +714,7 @@ public class TileSourceManager {
 		java.util.List<TileSourceTemplate> list = new ArrayList<>();
 		list.add(getMapnikSource());
 		list.add(getMapillaryVectorSource());
+		list.add(getMapillaryCacheSource());
 		return list;
 	}
 
@@ -720,6 +724,10 @@ public class TileSourceManager {
 
 	public static TileSourceTemplate getMapillaryVectorSource() {
 		return MAPILLARY_VECTOR_SOURCE;
+	}
+
+	public static TileSourceTemplate getMapillaryCacheSource() {
+		return MAPILLARY_CACHE_SOURCE;
 	}
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl, boolean https) {

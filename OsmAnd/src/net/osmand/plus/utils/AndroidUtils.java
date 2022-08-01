@@ -148,6 +148,9 @@ public class AndroidUtils {
 	public static Bitmap scaleBitmap(Bitmap bm, int newWidth, int newHeight, boolean keepOriginalBitmap) {
 		int width = bm.getWidth();
 		int height = bm.getHeight();
+		if (newWidth == width && newHeight == height) {
+			return bm;
+		}
 		float scaleWidth = ((float) newWidth) / width;
 		float scaleHeight = ((float) newHeight) / height;
 		Matrix matrix = new Matrix();
