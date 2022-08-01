@@ -30,8 +30,12 @@ android {
 }
 
 afterEvaluate {
-	android.libraryVariants.all { variant ->
-		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+	android.applicationVariants.all { variant ->
+		if (variant.name.contains('Opengldebug')) {
+			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
+		} else {
+			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+		}
 	}
 }
 
