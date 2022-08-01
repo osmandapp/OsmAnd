@@ -157,10 +157,10 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return;
 		} else if (currentZoom < MIN_POINTS_ZOOM) {
 			tileZoom = MAX_SEQUENCE_LAYER_ZOOM;
-			tilesCache.useForMapillarySequenceLayer(false);
+			tilesCache.useForMapillarySequenceLayer();
 		} else {
 			tileZoom = MIN_IMAGE_LAYER_ZOOM;
-			tilesCache.useForMapillaryImageLayer(false);
+			tilesCache.useForMapillaryImageLayer();
 		}
 
 		// recalculate for ellipsoid coordinates

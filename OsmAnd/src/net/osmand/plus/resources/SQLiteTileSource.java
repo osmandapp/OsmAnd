@@ -775,9 +775,6 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public boolean isFileExist() {
-		if (file == null) {
-			return false;
-		}
-		return file.exists();
+		return file == null ? false : file.exists();
 	}
 }

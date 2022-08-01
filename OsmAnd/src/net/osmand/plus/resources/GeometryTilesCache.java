@@ -16,24 +16,18 @@ public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
 	private static final int MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE = 16;
 	private static final int MAPILLARY_IMAGE_LAYER_CACHE_SIZE = 4;
-	private static final int MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE_OPENGL = 16;
-	private static final int MAPILLARY_IMAGE_LAYER_CACHE_SIZE_OPENGL = 4;
 
 	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
 		super(asyncLoadingThread);
 		this.maxCacheSize = 4;
 	}
 
-	public void useForMapillarySequenceLayer(boolean opengl) {
-		changeMapillaryLayerToCache(opengl
-				? MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE_OPENGL
-				: MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE);
+	public void useForMapillarySequenceLayer() {
+		changeMapillaryLayerToCache(MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE);
 	}
 
-	public void useForMapillaryImageLayer(boolean opengl) {
-		changeMapillaryLayerToCache(opengl
-				? MAPILLARY_IMAGE_LAYER_CACHE_SIZE_OPENGL
-				: MAPILLARY_IMAGE_LAYER_CACHE_SIZE);
+	public void useForMapillaryImageLayer() {
+		changeMapillaryLayerToCache(MAPILLARY_IMAGE_LAYER_CACHE_SIZE);
 	}
 
 	private void changeMapillaryLayerToCache(int maxCacheSize) {
