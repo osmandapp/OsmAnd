@@ -507,6 +507,17 @@ public class SQLiteTileSource implements ITileSource {
 		return getBytes(x, y, zoom, dirWithTiles, null);
 	}
 
+	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
+		byte[] blob;
+		try {
+			blob = getBytes(x, y, zoom, null, timeHolder);
+		} catch (IOException e) {
+			return null;
+		}
+		String[] params = getTileDbParams(x, y, zoom);
+		return blob != null ? getImage(blob, params) : null;
+	}
+
 	@Nullable
 	public synchronized Bitmap getImage(@NonNull byte[] blob, @NonNull String[] params) {
 		Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
