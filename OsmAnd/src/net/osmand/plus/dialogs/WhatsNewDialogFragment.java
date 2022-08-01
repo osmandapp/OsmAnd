@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_WHATS_NEW_ID;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -85,7 +87,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
-		if (app.getAppCustomization().isFeatureEnabled(OsmAndCustomizationConstants.FRAGMENT_WHATS_NEW_ID)) {
+		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_WHATS_NEW_ID)) {
 			return app.getAppInitializer().checkAppVersionChanged() && notShown;
 		}
 		return false;

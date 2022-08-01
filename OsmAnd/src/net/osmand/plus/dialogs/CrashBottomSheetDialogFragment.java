@@ -1,11 +1,14 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -52,9 +55,12 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 		dismiss();
 	}
 
-	public static boolean shouldShow(OsmandSettings settings, MapActivity activity) {
-		return activity.getMyApplication().getAppInitializer()
-				.checkPreviousRunsForExceptions(activity, settings != null);
+	public static boolean shouldShow(@Nullable OsmandSettings settings, @NonNull MapActivity activity) {
+		OsmandApplication app = activity.getMyApplication();
+		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_CRASH_ID)) {
+			return app.getAppInitializer().checkPreviousRunsForExceptions(activity, settings != null);
+		}
+		return false;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {

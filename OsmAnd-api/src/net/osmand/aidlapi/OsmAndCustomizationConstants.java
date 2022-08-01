@@ -177,6 +177,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
 	String FRAGMENT_DESTINATION_REACHED_ID = FRAGMENT_ID + "destination_reached";
 	String FRAGMENT_WHATS_NEW_ID = FRAGMENT_ID + "whats_new";
+	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";
 
 	//Map Context Menu rows:
 	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";
