@@ -734,8 +734,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 							&& CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 						SecondSplashScreenFragment.SHOW = false;
 						CrashBottomSheetDialogFragment.showInstance(fragmentManager);
-					} else if (customization.isFeatureEnabled(FRAGMENT_RATE_US_ID)
-							&& RateUsHelper.shouldShowRateDialog(app)) {
+					} else if (RateUsHelper.shouldShowRateDialog(app)) {
 						SecondSplashScreenFragment.SHOW = false;
 						RateUsHelper.showRateDialog(this);
 					}
