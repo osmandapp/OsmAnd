@@ -1,24 +1,26 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
 
 public class SideWidgetInfo extends MapWidgetInfo {
 
@@ -78,7 +80,7 @@ public class SideWidgetInfo extends MapWidgetInfo {
 		} else if (widgetsVisibility.contains(HIDE_PREFIX + key)) {
 			return false;
 		}
-		return appMode.isWidgetVisibleByDefault(key);
+		return WidgetsAvailabilityHelper.isWidgetVisibleByDefault(getApp(), key, appMode);
 	}
 
 	@Override
@@ -113,7 +115,12 @@ public class SideWidgetInfo extends MapWidgetInfo {
 
 	@NonNull
 	private OsmandSettings getSettings() {
-		return widget.getMyApplication().getSettings();
+		return getApp().getSettings();
+	}
+
+	@NonNull
+	private OsmandApplication getApp() {
+		return widget.getMyApplication();
 	}
 
 	@NonNull

@@ -364,7 +364,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			fragment.setSelectedPanel(panel);
 			fragment.setSelectedAppMode(appMode);
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

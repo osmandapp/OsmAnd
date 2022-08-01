@@ -32,6 +32,7 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -348,7 +349,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
-			if (enabled && !selectedPanel.isDuplicatesAllowed()) {
+			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)
+					|| enabled && !selectedPanel.isDuplicatesAllowed()) {
 				continue;
 			}
 
@@ -469,14 +471,14 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		dataHolder.copyAppModePrefs(app, appMode);
+		dataHolder.copyAppModePrefs(app, selectedAppMode, appMode);
 		List<ListItem> enabledItems = createEnabledWidgetsList(appMode);
 		List<ListItem> availableItems = createAvailableWidgetsList(appMode);
 		updateItems(availableItems, enabledItems);
 	}
 
 	private void resetToDefault() {
-		dataHolder.resetToDefault(selectedAppMode);
+		dataHolder.resetToDefault(app, selectedAppMode);
 		updateItems();
 	}
 

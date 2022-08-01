@@ -1,35 +1,14 @@
 package net.osmand.plus.settings.backend;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -38,27 +17,21 @@ import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class ApplicationMode {
 
 	public static final float FAST_SPEED_THRESHOLD = 10;
-
-	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
-	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
 	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
 	private static final List<ApplicationMode> values = new ArrayList<>();
@@ -66,7 +39,7 @@ public class ApplicationMode {
 
 	private static StateChangedListener<String> listener;
 	private static StateChangedListener<String> iconNameListener;
-	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
+	private static OsmAndAppCustomizationListener customizationListener;
 
 	private OsmandApplication app;
 
@@ -77,14 +50,11 @@ public class ApplicationMode {
 	private ApplicationMode parentAppMode;
 	private int iconRes = R.drawable.ic_world_globe_dark;
 
-	private ApplicationMode(int key, String stringKey) {
+	private ApplicationMode(int key, @NonNull String stringKey) {
 		this.keyName = key;
 		this.stringKey = stringKey;
 	}
 
-	/*
-	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
-	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
 			.icon(R.drawable.ic_world_globe_dark).reg();
 
@@ -188,122 +158,7 @@ public class ApplicationMode {
 		return list;
 	}
 
-	private static void initRegVisibility() {
-		// CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, HORSE
-		ApplicationMode[] exceptDefault = {CAR, BICYCLE, PEDESTRIAN,
-				PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
-		ApplicationMode[] all = null;
-		ApplicationMode[] none = {};
-
-		// left
-		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
-		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
-
-		regWidgetVisibility(NEXT_TURN, navigationSet1);
-		regWidgetVisibility(SMALL_NEXT_TURN, navigationSet2);
-		regWidgetVisibility(SECOND_NEXT_TURN, navigationSet1);
-		regWidgetAvailability(NEXT_TURN, exceptDefault);
-		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
-		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
-
-		// right
-		regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
-		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
-		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
-		regWidgetVisibility(TIME_TO_DESTINATION, all);
-		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
-				MOTORCYCLE, HORSE);
-		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
-		regWidgetVisibility(ALTITUDE, PEDESTRIAN, BICYCLE);
-		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
-		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
-		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);
-		regWidgetAvailability(TIME_TO_DESTINATION, all);
-		regWidgetAvailability(CURRENT_SPEED, all);
-		regWidgetAvailability(MAX_SPEED, all);
-		regWidgetAvailability(AVERAGE_SPEED, all);
-		regWidgetAvailability(ALTITUDE, all);
-
-		// all = null everything
-		regWidgetAvailability(SIDE_MARKER_1, all);
-		regWidgetAvailability(SIDE_MARKER_2, all);
-		regWidgetAvailability(GPS_INFO, all);
-		regWidgetAvailability(BATTERY, all);
-		regWidgetAvailability(RELATIVE_BEARING, all);
-		regWidgetAvailability(MAGNETIC_BEARING, all);
-		regWidgetAvailability(TRUE_BEARING, all);
-		regWidgetAvailability(RADIUS_RULER, all);
-		regWidgetAvailability(CURRENT_TIME, all);
-	}
-
 	@NonNull
-	public static Set<ApplicationMode> regWidgetVisibility(@NonNull WidgetType widgetType,
-	                                                       @Nullable ApplicationMode... appModes) {
-		return regWidgetVisibility(widgetType.id, appModes);
-	}
-
-	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
-	@NonNull
-	public static Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId,
-	                                                       @Nullable ApplicationMode... appModes) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		if (appModes == null) {
-			set.addAll(values);
-		} else {
-			Collections.addAll(set, appModes);
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
-			}
-		}
-		widgetsVisibilityMap.put(widgetId, set);
-		return set;
-	}
-
-	public boolean isWidgetVisibleByDefault(@NonNull String widgetId) {
-		if (app.getAppCustomization().areWidgetsCustomized()) {
-			return app.getAppCustomization().isWidgetVisible(widgetId, this);
-		}
-		Set<ApplicationMode> widgetsVisibility = widgetsVisibilityMap.get(widgetId);
-		return widgetsVisibility != null && widgetsVisibility.contains(this);
-	}
-
-	@NonNull
-	public static Set<ApplicationMode> regWidgetAvailability(@NonNull WidgetType widgetType,
-	                                                         @Nullable ApplicationMode... appModes) {
-		return regWidgetAvailability(widgetType.id, appModes);
-	}
-
-	@NonNull
-	public static Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId,
-	                                                         @Nullable ApplicationMode... appModes) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		if (appModes == null) {
-			set.addAll(values);
-		} else {
-			Collections.addAll(set, appModes);
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
-			}
-		}
-		widgetsAvailabilityMap.put(widgetId, set);
-		return set;
-	}
-
-	public boolean isWidgetAvailable(@NonNull String widgetId) {
-		if (app.getAppCustomization().areWidgetsCustomized()) {
-			return app.getAppCustomization().isWidgetAvailable(widgetId, this);
-		}
-		String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetId);
-		Set<ApplicationMode> availableForModes = widgetsAvailabilityMap.get(defaultWidgetId);
-		return availableForModes == null || availableForModes.contains(this);
-	}
-
 	public String getStringKey() {
 		return stringKey;
 	}
@@ -321,21 +176,24 @@ public class ApplicationMode {
 		return this == mode || getParent() == mode;
 	}
 
+	@Nullable
 	public ApplicationMode getParent() {
 		return parentAppMode;
 	}
 
-	public void setParentAppMode(ApplicationMode parentAppMode) {
+	public void setParentAppMode(@NonNull ApplicationMode parentAppMode) {
 		if (isCustomProfile()) {
 			this.parentAppMode = parentAppMode;
 			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
 		}
 	}
 
+	@StringRes
 	public int getNameKeyResource() {
 		return keyName;
 	}
 
+	@NonNull
 	public String toHumanString() {
 		String userProfileName = getUserProfileName();
 		if (Algorithms.isEmpty(userProfileName)) {
@@ -349,6 +207,7 @@ public class ApplicationMode {
 		}
 	}
 
+	@NonNull
 	public String getDescription() {
 		if (descriptionId != 0) {
 			return app.getString(descriptionId);
@@ -368,14 +227,13 @@ public class ApplicationMode {
 	}
 
 	private void updateAppModeIcon() {
-		String iconResName = app.getSettings().ICON_RES_NAME.getModeValue(this);
 		try {
+			String iconResName = app.getSettings().ICON_RES_NAME.getModeValue(this);
 			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
 			if (iconRes != 0) {
 				this.iconRes = iconRes;
 			}
 		} catch (Exception e) {
-//				return R.drawable.ic_world_globe_dark;
 		}
 	}
 
@@ -389,7 +247,6 @@ public class ApplicationMode {
 		// 2 sec + 7 m: 50 kmh - 35 m, 10 kmh - 12 m, 4 kmh - 9 m, 400 kmh - 230 m
 		return (int) (7 + speed * 2);
 	}
-
 
 	public boolean hasFastSpeed() {
 		return getDefaultSpeed() > FAST_SPEED_THRESHOLD;
@@ -569,7 +426,7 @@ public class ApplicationMode {
 	public static void onApplicationStart(OsmandApplication app) {
 		initCustomModes(app);
 		initModesParams(app);
-		initRegVisibility();
+		WidgetsAvailabilityHelper.initRegVisibility();
 		reorderAppModes();
 	}
 
@@ -669,7 +526,7 @@ public class ApplicationMode {
 			mode.setVersion(builder.version);
 		} else {
 			mode = builder.customReg();
-			initRegVisibility();
+			WidgetsAvailabilityHelper.initRegVisibility();
 		}
 		reorderAppModes();
 		saveCustomAppModesToSettings(app);
@@ -898,32 +755,5 @@ public class ApplicationMode {
 			this.navigationIcon = navIcon;
 			return this;
 		}
-	}
-
-	public static class ApplicationModeBean {
-		@Expose
-		public String stringKey;
-		@Expose
-		public String userProfileName;
-		@Expose
-		public String parent;
-		@Expose
-		public String iconName = "ic_world_globe_dark";
-		@Expose
-		public ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
-		@Expose
-		public Integer customIconColor;
-		@Expose
-		public String routingProfile;
-		@Expose
-		public RouteService routeService = RouteService.OSMAND;
-		@Expose
-		public LocationIcon locIcon;
-		@Expose
-		public NavigationIcon navIcon;
-		@Expose
-		public int order = -1;
-		@Expose
-		public int version = -1;
 	}
 }
