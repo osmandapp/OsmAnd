@@ -167,7 +167,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				} else if (plugin instanceof WikipediaPlugin) {
 					feature = OsmAndFeature.WIKIPEDIA;
 				}  else if (plugin instanceof WeatherPlugin) {
-					feature = OsmAndFeature.WIKIPEDIA;
+					feature = OsmAndFeature.WEATHER;
 				} else {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
 					AndroidUtils.startActivityIfSafe(activity, intent);
