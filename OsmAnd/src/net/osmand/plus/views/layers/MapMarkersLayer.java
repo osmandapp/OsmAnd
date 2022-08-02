@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
@@ -70,6 +71,7 @@ import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -124,7 +126,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Handler handler;
 
 	private ContextMenuLayer contextMenuLayer;
-	private List<Renderable.RenderableSegment> segmentsRenderablesCached = new ArrayList<>();
+	private List<GPXUtilities.WptPt> cachedPoints = null;
+	private Renderable.RenderableSegment cachedRenderer;
 
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
@@ -290,26 +293,33 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(app, nightMode, tileBox);
 			if (mapRenderer != null) {
-				clearCachedSegmentsRenderables();
-				int baseOrder = getBaseOrder() - 10;
-				QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
-				Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
-				route.renderer = renderer;
-				GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
-				GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
-				geometryWay.baseOrder = baseOrder--;
-				renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
-				renderer.setDrawArrows(false);
-				renderer.setGeometryWay(geometryWay);
-				cached.add(renderer);
-				if (renderer != null) {
-					renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
-							planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
+				boolean shouldDraw = shouldDrawPoints();
+				if (shouldDraw) {
+					resetCachedRenderer();
+					int baseOrder = getBaseOrder() - 10;
+					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
+					Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
+					route.renderer = renderer;
+					GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
+					GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
+					geometryWay.baseOrder = baseOrder--;
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setDrawArrows(false);
+					renderer.setGeometryWay(geometryWay);
+					cachedRenderer = renderer;
+					cachedPoints = new ArrayList<>(route.points);
+					if (renderer != null) {
+						renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
+								planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
+					}
 				}
 			} else {
 				new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
 					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 			}
+		} else {
+			resetCachedRenderer();
+			cachedPoints = null;
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer == null) {
@@ -317,18 +327,27 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	private void clearCachedSegmentsRenderables() {
-		clearCachedRenderables(segmentsRenderablesCached);
-		segmentsRenderablesCached = new ArrayList<>();
-	}
-
-	private void clearCachedRenderables(@NonNull List<Renderable.RenderableSegment> cached) {
-		for (Renderable.RenderableSegment renderer : cached) {
-			GpxGeometryWay geometryWay = renderer.getGeometryWay();
+	private void resetCachedRenderer() {
+		if (cachedRenderer != null) {
+			GpxGeometryWay geometryWay = cachedRenderer.getGeometryWay();
 			if (geometryWay != null) {
 				geometryWay.resetSymbolProviders();
 			}
 		}
+	}
+
+    private boolean shouldDrawPoints() {
+		boolean shouldDraw = true;
+		if (cachedPoints != null && cachedPoints.size() == route.points.size()) {
+			shouldDraw = false;
+			for (int i = 0; i < cachedPoints.size(); i++) {
+				if (!route.points.get(i).equals(cachedPoints.get(i))) {
+					shouldDraw = true;
+					break;
+				}
+			}
+		}
+		return shouldDraw;
 	}
 
 	@Nullable
