@@ -2157,6 +2157,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
+	public static boolean showSnapToRoadsDialog(@NonNull MapActivity activity, boolean showSnapWarning) {
+		OsmandApplication app = activity.getMyApplication();
+		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
+		if (gpxFile != null) {
+			GpxData gpxData = new GpxData(gpxFile);
+			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
+			editingContext.setGpxData(gpxData);
+			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
+			editingContext.setSelectedSegment(app.getSettings().GPX_SEGMENT_INDEX.get());
+			MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setInitialPoint(initialPoint);

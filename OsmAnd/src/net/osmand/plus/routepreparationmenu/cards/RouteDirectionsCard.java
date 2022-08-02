@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,9 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -36,6 +39,25 @@ public class RouteDirectionsCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
+		setupAttachToRoadsBanner();
+		setupRouteDirectins();
+	}
+
+	private void setupAttachToRoadsBanner() {
+		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
+		container.removeAllViews();
+		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
+		if (gpxFile != null && !gpxFile.isAttachedToRoads()) {
+			AttachTrackToRoadsBannerCard card = new AttachTrackToRoadsBannerCard(mapActivity);
+			card.setListener(getListener());
+			container.addView(card.build(mapActivity));
+			AndroidUiHelper.updateVisibility(container, true);
+		} else {
+			AndroidUiHelper.updateVisibility(container, false);
+		}
+	}
+
+	private void setupRouteDirectins() {
 		LinearLayout root = view.findViewById(R.id.items);
 		root.removeAllViews();
 		createRouteDirections(root);
