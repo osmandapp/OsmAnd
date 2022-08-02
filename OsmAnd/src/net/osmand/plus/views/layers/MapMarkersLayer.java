@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathEffect;
 import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
@@ -41,6 +42,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -50,6 +52,8 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.render.OsmandDashPathEffect;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -60,6 +64,8 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
+import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.MapUtils;
 
@@ -279,15 +285,43 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			mapActivityInvalidated = false;
 		}
 
+		List<Renderable.RenderableSegment> cached = new ArrayList<>();
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(app, nightMode, tileBox);
-			new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
+			if (mapRenderer != null) {
+				int baseOrder = getBaseOrder() - 10;
+				QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
+				Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
+				route.renderer = renderer;
+				GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
+				GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
+				geometryWay.baseOrder = baseOrder--;
+				renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+				renderer.setDrawArrows(false);
+				renderer.setGeometryWay(geometryWay);
+				if (renderer != null) {
+					renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
+							planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
+				}
+			} else {
+				new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
 					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
+			}
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer == null) {
 			drawLineAndText(canvas, tileBox, nightMode);
 		}
+	}
+
+	@Nullable
+	private float[] getDashPattern(@NonNull Paint paint) {
+		float[] intervals = null;
+		PathEffect pathEffect = paint.getPathEffect();
+		if (pathEffect instanceof OsmandDashPathEffect) {
+			intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
+		}
+		return intervals;
 	}
 
 	@Override
