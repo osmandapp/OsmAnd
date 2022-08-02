@@ -124,6 +124,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Handler handler;
 
 	private ContextMenuLayer contextMenuLayer;
+	private List<Renderable.RenderableSegment> segmentsRenderablesCached = new ArrayList<>();
 
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
@@ -289,6 +290,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(app, nightMode, tileBox);
 			if (mapRenderer != null) {
+				clearCachedSegmentsRenderables();
 				int baseOrder = getBaseOrder() - 10;
 				QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 				Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
@@ -299,6 +301,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
 				renderer.setDrawArrows(false);
 				renderer.setGeometryWay(geometryWay);
+				cached.add(renderer);
 				if (renderer != null) {
 					renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
 							planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
@@ -311,6 +314,20 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer == null) {
 			drawLineAndText(canvas, tileBox, nightMode);
+		}
+	}
+
+	private void clearCachedSegmentsRenderables() {
+		clearCachedRenderables(segmentsRenderablesCached);
+		segmentsRenderablesCached = new ArrayList<>();
+	}
+
+	private void clearCachedRenderables(@NonNull List<Renderable.RenderableSegment> cached) {
+		for (Renderable.RenderableSegment renderer : cached) {
+			GpxGeometryWay geometryWay = renderer.getGeometryWay();
+			if (geometryWay != null) {
+				geometryWay.resetSymbolProviders();
+			}
 		}
 	}
 
