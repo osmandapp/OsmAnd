@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -82,7 +83,9 @@ class MapSelectionHelper {
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int TILE_SIZE = 256;
-	public static final long RELATION_BIT = 1L << 42;
+	public static final int SHIFT_MULTIPOLYGON_IDS = 43;
+	public static final long RELATION_BIT = 1L << SHIFT_MULTIPOLYGON_IDS - 1; //According IndexPoiCreator SHIFT_MULTIPOLYGON_IDS
+	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
@@ -556,7 +559,7 @@ class MapSelectionHelper {
 	@Nullable
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id, int radius) {
-		id = getId(id >> 1);
+		id = getOsmId(id >> 1);
 		SearchPoiTypeFilter filter = new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
@@ -577,9 +580,9 @@ class MapSelectionHelper {
 			if (initAmenityId != null) {
 				long amenityId;
 				if (isIdFromRelation(initAmenityId)) {
-					amenityId = getId(initAmenityId);
+					amenityId = getOsmId(initAmenityId);
 				} else {
-					amenityId = initAmenityId >> 2;
+					amenityId = initAmenityId >> 1;
 				}
 				if (amenityId == id && !amenity.isClosed()) {
 					res = amenity;
@@ -607,8 +610,10 @@ class MapSelectionHelper {
 		return id > 0 && (id & RELATION_BIT) == RELATION_BIT;
 	}
 
-	public static long getId(long id) {
-		return isIdFromRelation(id) ? (id & ~RELATION_BIT) >> 11 : id >> 7;
+	public static long getOsmId(long id) {
+		//According methods assignIdForMultipolygon and genId in IndexPoiCreator
+		id = isIdFromRelation(id) ? (id & ~RELATION_BIT) >> DUPLICATE_SPLIT : id;
+		return id >> SHIFT_ID;
 	}
 
 	static class MapSelectionResult {
