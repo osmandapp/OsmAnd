@@ -31,10 +31,12 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	public static final String TAG = GoodsRestrictionsBottomSheet.class.getSimpleName();
 
 	private static final String SELECTED_KEY = "selected_key";
+	private static final String HAS_CHANGES_TO_APPLY_KEY = "has_changes_to_apply_key";
 
 	private OsmandApplication app;
 
 	private boolean isSelected;
+	private boolean hasChangesToApply = false;
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull Fragment target,
 	                                @NonNull String key, @NonNull ApplicationMode appMode,
@@ -88,6 +90,7 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 		String title = getString(enabled ? R.string.shared_string_yes : R.string.shared_string_no);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
+			hasChangesToApply = true;
 			if (isSelected != enabled) {
 				isSelected = enabled;
 				updateView(requireView());
@@ -110,19 +113,21 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 
 	private void restoreSavedState(@NonNull Bundle bundle) {
 		isSelected = bundle.getBoolean(SELECTED_KEY);
+		hasChangesToApply = bundle.getBoolean(HAS_CHANGES_TO_APPLY_KEY);
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(SELECTED_KEY, isSelected);
+		outState.putBoolean(HAS_CHANGES_TO_APPLY_KEY, hasChangesToApply);
 	}
 
 	@Override
 	public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		Activity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
+		if (hasChangesToApply && activity != null && !activity.isChangingConfigurations()) {
 			onApply();
 		}
 	}
