@@ -15,29 +15,30 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.search.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -58,7 +59,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	private final UpdateLocationViewCache locationViewCache;
 
 	private List<Object> items = new ArrayList<>();
-	private List<?> selectedItems = new ArrayList<>();
+	private Set<?> selectedItems = new HashSet<>();
 	private Map<Integer, List<?>> itemsGroups = new HashMap<>();
 
 	private final LayoutInflater themedInflater;
@@ -80,7 +81,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	public void updateSettingsItems(@NonNull List<Object> items,
 									@NonNull Map<Integer, List<?>> markerGroups,
-									@NonNull List<?> selectedItems) {
+									@NonNull Set<?> selectedItems) {
 		this.items = items;
 		this.itemsGroups = markerGroups;
 		this.selectedItems = selectedItems;
