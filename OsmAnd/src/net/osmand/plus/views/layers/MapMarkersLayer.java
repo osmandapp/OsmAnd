@@ -125,8 +125,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Handler handler;
 
 	private ContextMenuLayer contextMenuLayer;
-	private List<GPXUtilities.WptPt> cachedPoints = null;
-	private Renderable.RenderableSegment cachedRenderer;
 
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
@@ -140,6 +138,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
 	private int displayedWidgets;
+	private List<GPXUtilities.WptPt> cachedPoints = null;
+	private Renderable.RenderableSegment cachedRenderer;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -272,6 +272,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (!settings.SHOW_MAP_MARKERS.get()) {
 			clearMapMarkersCollections();
 			clearVectorLinesCollections();
+			resetCachedRenderer();
 			return;
 		}
 
@@ -288,12 +289,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			mapActivityInvalidated = false;
 		}
 
-		List<Renderable.RenderableSegment> cached = new ArrayList<>();
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(app, nightMode, tileBox);
 			if (mapRenderer != null) {
 				boolean shouldDraw = shouldDrawPoints();
-				if (shouldDraw) {
+				if (shouldDraw || mapActivityInvalidated) {
 					resetCachedRenderer();
 					int baseOrder = getBaseOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
@@ -301,16 +301,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					route.renderer = renderer;
 					GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 					GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
-					geometryWay.baseOrder = baseOrder--;
+					geometryWay.baseOrder = baseOrder;
 					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					cachedRenderer = renderer;
 					cachedPoints = new ArrayList<>(route.points);
-					if (renderer != null) {
-						renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
+					renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
 								planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
-					}
 				}
 			} else {
 				new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
