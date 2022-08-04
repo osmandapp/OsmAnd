@@ -11,6 +11,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -45,11 +46,11 @@ public class WeatherPlugin extends OsmandPlugin {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
-		ApplicationMode.regWidgetVisibility(WX_TEMPERATURE_WIDGET, noAppMode);
-		ApplicationMode.regWidgetVisibility(WX_PRECIPITATION_WIDGET, noAppMode);
-		ApplicationMode.regWidgetVisibility(WX_WIND_WIDGET, noAppMode);
-		ApplicationMode.regWidgetVisibility(WX_CLOUDS_WIDGET, noAppMode);
-		ApplicationMode.regWidgetVisibility(WX_AIR_PRESSURE_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WX_TEMPERATURE_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WX_PRECIPITATION_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WX_WIND_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WX_CLOUDS_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WX_AIR_PRESSURE_WIDGET, noAppMode);
 
 		EnumStringPreference weatherTemp = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_TEMPERATURE, TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
 		EnumStringPreference weatherPressure = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_PRESSURE, PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
