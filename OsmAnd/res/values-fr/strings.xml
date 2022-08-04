@@ -4062,7 +4062,7 @@
     <string name="three_months_subscription">Abonnement pour 3 mois</string>
     <string name="next_billing_date">Prochaine facture le : %1$s</string>
     <string name="osmand_live_cancelled">Annulé</string>
-    <string name="renew_subscription">Renouveler la souscription</string>
+    <string name="renew_subscription">Renouveler l’abonnement</string>
     <string name="on_hold">En attente</string>
     <string name="expired">Expiré</string>
     <string name="user_points">Points utilisateur</string>
