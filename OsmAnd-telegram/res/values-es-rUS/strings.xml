@@ -65,7 +65,7 @@
     <string name="get_telegram_account_first">Necesita una cuenta en Telegram para utilizar la ubicación compartida.</string>
     <string name="get_telegram_description_continue">Instale Telegram y cree una cuenta.</string>
     <string name="get_telegram_after_creating_account">Después podrá utilizar esta aplicación.</string>
-    <string name="shared_string_all">Todos</string>
+    <string name="shared_string_all">Todo</string>
     <string name="shared_string_off">Desactivado</string>
     <string name="already_registered_in_telegram">Necesita una cuenta registrada en Telegram y un número de teléfono</string>
     <string name="do_not_have_telegram">No tengo cuenta de Telegram</string>
