@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -306,12 +308,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			return;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
-		statisticCard = new RouteStatisticCard(mapActivity, gpx, new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openDetails();
-			}
-		});
+		statisticCard = new RouteStatisticCard(mapActivity, gpx, v -> openDetails());
 		statisticCard.setTransparentBackground(true);
 		statisticCard.setListener(this);
 		menuCards.add(statisticCard);
@@ -1562,6 +1559,10 @@ public class RouteDetailsFragment extends ContextMenuFragment
 						listener.onNavigationRequested();
 					}
 					break;
+			}
+		} else if (card instanceof AttachTrackToRoadsBannerCard) {
+			if (MeasurementToolFragment.showSnapToRoadsDialog(requireMapActivity(), true)) {
+				dismiss();
 			}
 		}
 	}

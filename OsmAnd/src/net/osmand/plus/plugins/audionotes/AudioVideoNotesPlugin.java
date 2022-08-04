@@ -1,5 +1,15 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
+
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -55,6 +65,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -92,16 +103,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -550,10 +551,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
-		ApplicationMode.regWidgetVisibility(AV_NOTES_ON_REQUEST, noAppMode);
-		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_AUDIO, noAppMode);
-		ApplicationMode.regWidgetVisibility(AV_NOTES_RECORD_VIDEO, noAppMode);
-		ApplicationMode.regWidgetVisibility(AV_NOTES_TAKE_PHOTO, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_ON_REQUEST, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_RECORD_AUDIO, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_RECORD_VIDEO, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_TAKE_PHOTO, noAppMode);
 
 		AV_EXTERNAL_RECORDER = registerBooleanPreference("av_external_recorder", false);
 		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference("av_external_cam", true);
@@ -721,16 +722,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		MapWidget onRequestWidget = createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(onRequestWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(onRequestWidget, appMode));
 
 		MapWidget audioWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(audioWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(audioWidget, appMode));
 
 		MapWidget videoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(videoWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(videoWidget, appMode));
 
 		MapWidget photoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(photoWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(photoWidget, appMode));
 	}
 
 	@Override

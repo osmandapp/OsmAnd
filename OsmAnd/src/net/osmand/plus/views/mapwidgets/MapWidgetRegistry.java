@@ -1,5 +1,31 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
+
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorRes;
@@ -14,6 +40,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
@@ -26,44 +53,13 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_AIR_PRESSURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_CLOUDS_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_PRECIPITATION_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_TEMPERATURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_WIND_WIDGET;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapWidgetRegistry {
 
@@ -83,7 +79,7 @@ public class MapWidgetRegistry {
 
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
-	private Set<WidgetsRegistryListener> listeners = new HashSet<>();
+	private final List<WidgetsRegistryListener> listeners = new CopyOnWriteArrayList<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
@@ -180,15 +176,11 @@ public class MapWidgetRegistry {
 	}
 
 	public void addWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		Set<WidgetsRegistryListener> listeners = new HashSet<>(this.listeners);
 		listeners.add(listener);
-		this.listeners = listeners;
 	}
 
 	public void removeWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		Set<WidgetsRegistryListener> listeners = new HashSet<>(this.listeners);
 		listeners.remove(listener);
-		this.listeners = listeners;
 	}
 
 	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
@@ -316,7 +308,7 @@ public class MapWidgetRegistry {
 
 				boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode);
 				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode);
-				boolean passAvailable = !availableMode || appMode.isWidgetAvailable(widget.key);
+				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
 
 				if (passDisabled && passEnabled && passAvailable && defaultAvailable) {

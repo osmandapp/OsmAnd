@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,6 +72,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		setupChart();
 		setupInfoRows();
 		setupDetailsButton();
+		setupAttachToRoadsCard();
 		view.findViewById(R.id.route_info_controls).setOnClickListener(v -> notifyCardPressed());
 	}
 
@@ -195,6 +197,20 @@ public class SimpleRouteCard extends MapBaseCard {
 		index = builder.length();
 		builder.append(" ").append(value.unit);
 		setupTextSpans(builder, index);
+	}
+
+	private void setupAttachToRoadsCard() {
+		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
+		container.removeAllViews();
+		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
+		if (gpxFile != null && !gpxFile.isAttachedToRoads()) {
+			AttachTrackToRoadsBannerCard bannerCard = new AttachTrackToRoadsBannerCard(mapActivity);
+			bannerCard.setListener(getListener());
+			container.addView(bannerCard.build(mapActivity));
+			AndroidUiHelper.updateVisibility(container, true);
+		} else {
+			AndroidUiHelper.updateVisibility(container, false);
+		}
 	}
 
 	private void setupTextSpans(@NonNull SpannableStringBuilder builder, int index) {

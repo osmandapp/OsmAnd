@@ -1720,6 +1720,19 @@ public class GPXUtilities {
 			return points;
 		}
 
+		public boolean isAttachedToRoads() {
+			List<WptPt> points = getRoutePoints();
+			if (!Algorithms.isEmpty(points)) {
+				for (WptPt wptPt : points) {
+					if (Algorithms.isEmpty(wptPt.getProfileType())) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
 		public boolean hasRtePt() {
 			for (Route r : routes) {
 				if (r.points.size() > 0) {

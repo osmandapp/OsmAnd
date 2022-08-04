@@ -429,7 +429,7 @@
     <string name="unknown_location">الموقع غير معروف بعد.</string>
     <string name="modify_transparency">تعديل الشفافية (0 - شفاف ، 255 - معتم )</string>
     <string name="confirm_interrupt_download">إلغاء التحميل؟</string>
-    <string name="first_time_msg">نشكرك على استخدام أوسماند. الكثير من مميزات هذا البرنامج بحاجة إلى بعض البيانات الإقليمية التي يمكنك تحميلها عبر \'إعدادات\'← \'إدارة البيانات\'. بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد العناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>
+    <string name="first_time_msg">نشكرك على استخدام أوسماند. الكثير من مميزات وهذا البرنامج بحاجة إلى بعض البيانات الإقليمية التي يمكنك تحميلها عبر \'إعدادات\'← \'إدارة البيانات\'. بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد العناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>
     <string name="basemap_was_selected_to_download">خريطة العالم العامة مطلوبة لعمل التطبيق بشكل سليم، وقد حددت للتحميل.</string>
     <string name="select_index_file_to_download">لم يتم العثور على أي شيء ، ولكن يمكنك صنعه بنفسك (انظر https://osmand.net).</string>
     <string name="auto_zoom_close">إلى مدى قريب \"١٠٠م\"</string>
@@ -4841,6 +4841,9 @@
     <string name="relative_bearing_widget_desc">يوضح الزاوية بين اتجاه الحركة إلى الأمام والنقطة المستهدفة.</string>
     <string name="connect_with_straight_line">وصل بخط مستقيم</string>
     <string name="attach_roads_descr">هل تريد تقريب مسارك باستخدام مسار صالح مرفق بالخرائط غير المتصلة بالإنترنت. في هذه الحالة، ستكون قد صححت ارتفاع الطريق، معلوماته والمنعطفات التي يمكن استخدامها لاحقا في الملاحة.</string>
-    <string name="without_profiles_changing">دون تغيير الملفات الشخصية</string>
+    <string name="without_profiles_changing">دون تغيير البروفايلات</string>
     <string name="shared_string_only_missing">المفقود فقط</string>
+    <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط</string>
+    <string name="download_tiles">تنزيل الطبقات</string>
+    <string name="average_speed_skip_stops_desc">سيتم حساب السرعة الأقل من %1$s وتؤثر على متوسط السرعة.</string>
 </resources>

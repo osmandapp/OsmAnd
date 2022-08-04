@@ -49,6 +49,7 @@
     <string name="map_settings_weather_precip">Precipitation</string>
     <string name="measurement_units">Measurement units</string>
     <string name="shared_string_weather">Weather</string>
+    <string name="attach_to_roads_banner_desc">Attach your track to the roads, to get detailed navigation instructions.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show specifically designed trails for mountainbiking</string>
     <string name="connect_with_straight_line">Connect with straight line</string>

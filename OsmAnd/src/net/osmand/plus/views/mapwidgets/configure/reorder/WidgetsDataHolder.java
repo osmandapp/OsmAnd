@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -66,30 +67,32 @@ public class WidgetsDataHolder {
 		}
 	}
 
-	public void copyAppModePrefs(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+	public void copyAppModePrefs(@NonNull OsmandApplication app, @NonNull ApplicationMode modeTo, @NonNull ApplicationMode modeFrom) {
 		pages.clear();
 		orders.clear();
 
 		OsmandSettings settings = app.getSettings();
-		List<List<String>> widgetsOrder = selectedPanel.getWidgetsOrder(appMode, settings);
+		List<List<String>> widgetsOrder = selectedPanel.getWidgetsOrder(modeFrom, settings);
 		for (int page = 0; page < widgetsOrder.size(); page++) {
 			List<String> pageOrder = widgetsOrder.get(page);
 			for (int order = 0; order < pageOrder.size(); order++) {
 				String widgetId = pageOrder.get(order);
-				addWidgetToPage(widgetId, page);
-				orders.put(widgetId, order);
+				if (WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetId, modeTo)) {
+					addWidgetToPage(widgetId, page);
+					orders.put(widgetId, order);
+				}
 			}
 		}
 	}
 
-	public void resetToDefault(@NonNull ApplicationMode appMode) {
+	public void resetToDefault(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
 		pages.clear();
 		orders.clear();
 
 		List<String> originalOrder = selectedPanel.getOriginalOrder();
 		for (int i = 0; i < originalOrder.size(); i++) {
 			String widgetId = originalOrder.get(i);
-			if (appMode.isWidgetVisibleByDefault(widgetId)) {
+			if (WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetId, appMode)) {
 				addWidgetToPage(widgetId, 0);
 				orders.put(widgetId, i);
 			}

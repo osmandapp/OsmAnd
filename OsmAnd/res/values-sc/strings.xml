@@ -460,7 +460,7 @@
     <string name="avoid_ferries">Perunu traghetu</string>
     <string name="avoid_in_routing_title">Istransi…</string>
     <string name="map_widget_fluorescent">Camineras fluorescentes</string>
-    <string name="map_widget_show_ruler">Righellu</string>
+    <string name="map_widget_show_ruler">Righighedda</string>
     <string name="map_widget_view_direction">Diretzione de sa visuale</string>
     <string name="map_widget_transparent">Butones trasparentes</string>
     <string name="bg_service_sleep_mode_off">Abìlita\n modalidade \"de isfundu\"</string>
@@ -623,7 +623,7 @@
     <string name="validate_gpx_upload_name_pwd">Dislinda su nùmene impreadore tuo e sa crae (password) tua de OSM pro carrigare documentos GPX.</string>
     <string name="default_buttons_support">Sustènne</string>
     <string name="support_new_features">Sustènne caraterìsticas noas</string>
-    <string name="show_ruler_level">Ammustra su righellu</string>
+    <string name="show_ruler_level">Ammustra sa righighedda</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Torra a sa positzione</string>
     <string name="shared_string_help">Agiudu</string>
@@ -2398,7 +2398,7 @@
     <string name="distance_moving">Distàntzia curreta</string>
     <string name="shared_string_permissions">Autorizatziones</string>
     <string name="import_gpx_failed_descr">Importatzione de su documentu fallida. Pro praghere verìfica chi OsmAnd tèngiat su permissu de lu lèghere.</string>
-    <string name="map_widget_ruler_control">Medidura cun su raju</string>
+    <string name="map_widget_ruler_control">Righighedda radiale</string>
     <string name="shared_string_reload">Torra a carrigare</string>
     <string name="mapillary_menu_descr_tile_cache">Torra a carrigare sos tasseddos pro bìdere datos agiornados.</string>
     <string name="mapillary_menu_title_tile_cache">Cache de sos tasseddos</string>
@@ -2945,8 +2945,8 @@
     <string name="osmand_routing_promo">Annanghe sa versione modificada tua de su documentu routing.xml in ..osmand/routing</string>
     <string name="app_mode_skiing">Iscì</string>
     <string name="base_profile_descr_ski">Iscì</string>
-    <string name="show_compass_ruler">Ammustra su righellu de sa bùssola</string>
-    <string name="hide_compass_ruler">Cua su righellu de sa bùssola</string>
+    <string name="show_compass_ruler">Ammustra sa righighedda de sa bùssola</string>
+    <string name="hide_compass_ruler">Cua sa righighedda de sa bùssola</string>
     <string name="select_icon_profile_dialog_title">Ischerta un\'icona</string>
     <string name="settings_routing_mode_string">Modalidade: %s</string>
     <string name="settings_derived_routing_mode_string">Modalidade de s\'impreadore, derivada dae: %s</string>
@@ -3019,24 +3019,24 @@
     <string name="shared_string_crash">Serradura arrepente</string>
     <string name="last_launch_crashed">S\'ùrtima sessione de OsmAnd s\'est serrada. Pro praghere agiuda·nos a megiorare OsmAnd cumpartzende su messàgiu de errore.</string>
     <string name="app_mode_ufo">OVNI (UFO)</string>
-    <string name="release_3_4">• Profilos de s\'aplicatzione: crea unu profilu personalizadu pro sas netzessidades tuas, cun un\'icona e unu colore personalizados 
-\n 
-\n • Como personaliza sas lestresas predefinidas mìnima e màssima de cale si siat profilu 
-\n 
-\n • Annantu unu widget pro sas coordinatas atuales 
-\n 
-\n • Annanta un\'optzione pro ammustrare sa bùssola e unu righellu radiale in sa mapa 
-\n 
-\n • Arrastamentu de sa rasta in s\'isfundu megioradu 
-\n 
-\n • Iscarrigamentu in s\'isfundu de sas mapas megioradu 
-\n 
-\n • Optzione \'Allughe s\'ischermu\' torrada 
-\n 
-\n • Ischertada de sa limba de Wikipedia megiorada 
-\n 
-\n • Cumportamentu de su butone de sa bùssola durante sa navigatzione megioradu 
-\n 
+    <string name="release_3_4">• Profilos de s\'aplicatzione: crea unu profilu personalizadu pro sas netzessidades tuas, cun un\'icona e unu colore personalizados
+\n
+\n • Como personaliza sas lestresas predefinidas mìnima e màssima de cale si siat profilu
+\n
+\n • Annantu unu widget pro sas coordinatas atuales
+\n
+\n • Annanta un\'optzione pro ammustrare sa bùssola e una righighedda radiale in sa mapa
+\n
+\n • Arrastamentu de sa rasta in s\'isfundu megioradu
+\n
+\n • Iscarrigamentu in s\'isfundu de sas mapas megioradu
+\n
+\n • Optzione \'Allughe s\'ischermu\' torrada
+\n
+\n • Ischertada de sa limba de Wikipedia megiorada
+\n
+\n • Cumportamentu de su butone de sa bùssola durante sa navigatzione megioradu
+\n
 \n • Àteros errores acontzados
 \n
 \n</string>
@@ -3548,7 +3548,7 @@
     <string name="tracker_item">Arrastadore de OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Atzione lestra</string>
-    <string name="radius_ruler_item">Medidura cun su raju</string>
+    <string name="radius_ruler_item">Righighedda radiale</string>
     <string name="measure_distance_item">Medi una distàntzia</string>
     <string name="travel_item">Biàgiu (Wikivoyage e Wikipedia)</string>
     <string name="map_markers_item">Marcadores mapa</string>
@@ -3941,7 +3941,7 @@
     <string name="routing_engine_vehicle_type_mtb">MTB (motosilurante)</string>
     <string name="message_server_error">Errore de su serbidore: %1$s</string>
     <string name="message_name_is_already_exists">Su nùmene esistit giai</string>
-    <string name="analyze_by_intervals">Analiza sos intervallos fratzionados</string>
+    <string name="analyze_by_intervals">Analiza pro intervallos</string>
     <string name="upload_to_openstreetmap">Càrriga in OpenStreetMap</string>
     <string name="edit_track">Modìfica sa rasta</string>
     <string name="rename_track">Modìfica su nùmene de sa rasta</string>
@@ -4244,7 +4244,7 @@
 \n
 \n • Diàlogu \"Registratzione de su biàgiu\" agiornadu
 \n
-\n • Distàntzia pro tocu tramudada dae su righellu radiale cara a un\'optzione a banda
+\n • Distàntzia pro tocu tramudada dae sa righighedda radiale cara a un\'optzione a banda
 \n
 \n • Pianificatzione de s\'àndala: como podes cambiare optziones de navigatzione, atzèdere a sas cunfiguratziones de sa mapa e a sa chirca chene essire dae sa pianificatzione de s\'àndala
 \n
@@ -4502,7 +4502,7 @@
     <string name="navigate_point_format_swiss_grid_plus">Grìllia isvìtzera (CH1903+)</string>
     <string name="quick_action_add_route_descr">Unu butone pro incumintzare un\'àndala dae su tzentru de s\'ischermu.</string>
     <string name="please_provide_group_name_message">Dae unu nùmene a su grupu.</string>
-    <string name="gpx_no_routes_descr">Podes impreare s\'aina \"%1$s\" pro sarvare un\'àndala comente archìviu.</string>
+    <string name="gpx_no_routes_descr">Podes impreare s\'aina \"%1$s\" pro annànghere un\'àndala a un\'archìviu.</string>
     <string name="gpx_no_routes_title">Non bi sunt àndalas</string>
     <string name="rendering_attr_seabedDetail_description">Informatziones additzionales subra de sas caraterìsticas de sa superfìtzie de su fundu marinu (surface_qualification), sas castas de superfìtzies cumbinadas, sas categorias e sa tassonomia de s\'erba o de sas algas</string>
     <string name="save_track_to_gpx_descrp">Incumintza in automàticu sa registratzione cando sa navigatzione est in cursu e a pustis sarva in automàticu.</string>
@@ -4644,4 +4644,122 @@
     <string name="accessibility_2d_view_off">Vista 2.5 istudada</string>
     <string name="accessibility_2d_view_on">Vista 2.5 alluta</string>
     <string name="download_complete">Iscarrigamentu agabbadu</string>
+    <string name="side_marker_eta">Ora carculada de arrivu</string>
+    <string name="updated_map_time">Agiornadu: %1$s.</string>
+    <string name="goods_delivery_desc_4">Si su pesu de su veìculu tuo est de prus de 3,5 tonnelladas depes impreare su profilu Càmion.</string>
+    <string name="goods_delivery_desc_3">S\'àplicat petzi a sos veìculos chi trasportant mercantzias chi ant nessi bator rodas e non pesant prus de 3,5 tonnelladas.</string>
+    <string name="goods_delivery_desc_2">S\'ant a evitare sos caminos chi sunt serrados pro sas intregas de mercantzias.</string>
+    <string name="goods_delivery_desc">Sos veìculos chi trasportant mercantzias podent tènnere s\'atzessu limitadu in unos cantos caminos.</string>
+    <string name="includes_osm_changes_until">Incluit sas modìficas de OSM fatas finas a %1$s.</string>
+    <string name="next_live_update_date_and_time">Agiornamentu imbeniente: %1$s in %2$s.</string>
+    <string name="next_live_update_time">Agiornamentu imbeniente: in %1$s.</string>
+    <string name="no_altitude_data_desc">Podes alligare sa rasta tua a sos caminos pro otènnere sos datos de %1$s o los carculare in lìnia.</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_name">Carburante impreadu dae su motore</string>
+    <string name="routing_attr_motor_type_description">Seletziona sa casta impreada dae su motore de su veìculu tuo pro carculare s\'emissione de CO2.</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzina</string>
+    <string name="radius_ruler_mode_desc">Tochende su widget colas a sa modalidade de sa righighedda radiale.</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Cua sas àreas militares</string>
+    <string name="routing_attr_allow_private_for_truck_description">Permite s\'atzessu a sas àreas privadas pro sos càmions.</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Peruna preferèntzia</string>
+    <string name="turn_on_public_transport_description">Allughe·lu pro bìdere sas àndalas de sos trasportos pùblicos in sa mapa.</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Printzipiante</string>
+    <string name="transport_hazmat_no_desc">In unos cantos caminos e gallerias su trasportu de materiales perigulosos est vietadu.</string>
+    <string name="transport_hazmat_title">Trasportu de materiales perigulosos</string>
+    <string name="use_latin_name_if_missing">Imprea su nùmene latinu si mancat</string>
+    <string name="average_speed_skip_stops">Piga in cunsideru sas firmadas</string>
+    <string name="transport_hazmat_yes_desc">Depes isseberare sa categoria adeguada.</string>
+    <string name="map_widget_trip_recording_distance">Distàntzia</string>
+    <string name="routing_attr_hazmat_category_name">Categoria de materiale perigulosu</string>
+    <string name="routing_attr_hazmat_category_description">Categoria de materiales perigulosos / Piga in cunsideru sos permissos de atzessu a sos materiales perigulosos</string>
+    <string name="rendering_attr_weatherTempContours_name">Isolìnias de sa temperadura</string>
+    <string name="map_widget_trip_recording_uphill">Artziada</string>
+    <string name="calculate_online">Càrcula in lìnia</string>
+    <string name="av_notes_choose_action_widget_desc">Issèbera s\'atzione.</string>
+    <string name="altitude_widget_desc">Ammustrat s\'artària subra de su livellu de su mare de sa positzione atuale.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No andes foras de pista</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Petzi si est netzessàriu</string>
+    <string name="routing_attr_freeride_policy_allow_name">Permite</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Peruna restritzione)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Isolìnias de sa pressione</string>
+    <string name="shared_string_speed">Lestresa</string>
+    <string name="map_markers_bar_widget_desc">In su wiget de sa barra superiore dias pòdere bìdere sa distàntzia e sa diretzione finas a su marcadore dae sa positzione atuale. Si podet cunfigurare pro bìdere 1 o 2 marcadores superiores in su widget.</string>
+    <string name="track_attach_to_the_roads_descr">Sa rasta s\'at a alligare a su caminu impreende mapas non in lìnia e sa geometria de sa rasta at a mudare.</string>
+    <string name="calculate_altitude">Càrcula s\'artària</string>
+    <string name="widget_secondary_desc_part_of">Parte de s\'estensione %1$s.</string>
+    <string name="elevation_profile_widget_desc">Su widget ammustrat su profilu de s\'artària e de sa pendèntzia de s\'àndala atuale.</string>
+    <string name="lanes_widgets_desc">Su widget de sas corsias ammustrat sa dispositzione de sas corsias de su caminu atuale e evidèntziat sas corsias de impreare pro sa navigatzione ativa.</string>
+    <string name="route_maneuvers_desc">Sos widgets de navigatzione sunt abilitados durante sa navigatzione pro ammustrare informatziones che a sa distàntzia, s\'ora de arrivu, su tempus chi mancat, sas bortadas imbenientes, su nùmene de sa carrera atuale, sas informatziones de sas corsias, sa lestresa màssima, sos avisos de cosas chi si sunt acurtziende, sos PDI e sos puntos de coladòrgiu.</string>
+    <string name="bearing_desc">Su widget de s\'àngulu ammustrat sa diretzione assoluta o relativa cunfronta a un\'obietivu in unidades angulares (180 grados, 360 grados, millirradiantes).</string>
+    <string name="map_markers_desc">In su wiget de sa barra superiore dias pòdere bìdere sa distàntzia e sa diretzione finas a su marcadore dae sa positzione atuale. Si podet cunfigurare pro bìdere 1 o 2 marcadores superiores in su widget.</string>
+    <string name="app_mode_mountain_bicycle">Bitzicleta de monte</string>
+    <string name="map_widget_true_bearing">Àngulu reale</string>
+    <string name="parking_widget_desc">Widget chi ammustrat sa distàntzia dae su tzentru de s\'ischermu tuo finas a su logu de parchègiu.</string>
+    <string name="map_widget_trip_recording_duration">Durada</string>
+    <string name="map_widget_trip_recording_downhill">Achirrada</string>
+    <string name="distance_circles">Chircos de distàntzia</string>
+    <string name="circle_settings">Impostatziones de sos chircos</string>
+    <string name="mapillary_widget_desc">Widget chi frunit un\'atzessu lestru a s\'aplicatzione de Mapillary pro annànghere immàgines a livellu de su caminu.</string>
+    <string name="max_speed_widget_desc">Ammustrat su lìmite de lestresa pro su caminu impreadu atuale.</string>
+    <string name="current_speed_widget_desc">Ammustrat sa lestresa atuale tua rilevada dae su sensore GPS.</string>
+    <string name="magnetic_bearing_widget_desc">Àngulu intre su nord magnèticu e su puntu de destinatzione bidu dae sa positzione tua.</string>
+    <string name="arrival_time_widget_desc">Ora de arrivu a su puntu de destinatzione.</string>
+    <string name="street_name_widget_desc">Su widget de su nùmenes de sas carreras ammustrat su nùmene de sa carrera atuale cun una fritza de positzione o su nùmene de sa carreta imbeniente cun sa manovra chi b\'at de fàghere.</string>
+    <string name="coordinates_widget_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale.</string>
+    <string name="navigation_points_desc">Sos widgets de navigatzione sunt abilitados durante sa navigatzione pro ammustrare informatziones che a sa distàntzia, s\'ora de arrivu, su tempus chi mancat, sas bortadas imbenientes, su nùmene de sa carrera atuale, sas informatziones de sas corsias, sa lestresa màssima, sos avisos de cosas chi si sunt acurtziende, sos PDI e sos puntos de coladòrgiu.</string>
+    <string name="get_altitude_information">Otene sas informatziones subra de s\'artària</string>
+    <string name="fps_widget_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados.</string>
+    <string name="average_speed_time_interval_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia.</string>
+    <string name="average_speed_widget_desc">Ammustrat sa lestresa mèdia de su biàgiu atuale.</string>
+    <string name="map_widget_average_speed">Lestresa mèdia</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Cua sas àreas militares</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Intermèdiu</string>
+    <string name="reset_all_settings_desc">Ses seguru de chèrrere resetare totu sas impostatziones a sos valores predefinidos\?</string>
+    <string name="live_update_frequency_hour_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada ora.</string>
+    <string name="live_update_frequency_day_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada die.</string>
+    <string name="live_update_frequency_week_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada chida.</string>
+    <string name="altitude_correction">Curretzione de s\'artària</string>
+    <string name="routing_attr_motor_type_lpg_name">GPL</string>
+    <string name="routing_attr_motor_type_hybrid_name">Ìbridu</string>
+    <string name="import_as_one_track">Importa comente una rasta sìngula</string>
+    <string name="average_speed_skip_stops_desc">Una lestresa inferiore a %1$s s\'at a contare e at a influentzare sa lestresa mèdia.</string>
+    <string name="map_widget_time_to_intermediate">Tempus chi mancat finas a su puntu de coladòrgiu</string>
+    <string name="map_widget_time_to_destination">Tempus chi mancat finas a sa destinatzione</string>
+    <string name="map_widget_distance_to_intermediate">Distàntzia finas a su puntu de coladòrgiu</string>
+    <string name="explore_plans">Esplora sos pianos</string>
+    <string name="routing_attr_allow_private_for_truck_name">Permite s\'atzessu privadu (càmion)</string>
+    <string name="routing_attr_avoid_highway_name">Èvita sas autostradas</string>
+    <string name="routing_attr_avoid_highway_description">Èvita sas autostradas</string>
+    <string name="routing_attr_avoid_fords_name">Èvita sos bados</string>
+    <string name="routing_attr_avoid_fords_description">Èvita sos bados</string>
+    <string name="colour_of_circles">Colore de sos chircos</string>
+    <string name="compass_on_circles">Bùssola in sos chircos</string>
+    <string name="bearing_secondary_desc">Podes mudare su formadu de sos datos ammustrados in: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Su formadu de sas coordinadas si podet mudare in %1$s – %2$s – %3$s.</string>
+    <string name="current_time_widget_desc">Ammustrat s\'ora atuale dae su dispositivu tuo.</string>
+    <string name="calculating_altitude">Carculende s\'artària</string>
+    <string name="get_altitude_data">Otene sos datos de s\'artària</string>
+    <string name="no_altitude_data">Perunu datu de artària</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferi su foras de pista</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_electric_name">Elètricu</string>
+    <string name="routing_attr_motor_type_gas_name">Metanu</string>
+    <string name="audio_video_notes_desc">Custu widget frunit un\'atzessu lestru pro fàghere partire/firmare una registratzione (àudio, vìdeu o foto).</string>
+    <string name="calculate_online_altitude_descr">Càrcula s\'artària in lìnia in sos serbidores de OsmAnd in base a sas immàgines satellitares e sos modellos de artària digitale. Diat pòdere variare dae s\'artària registrada dae su dispositivu e si diat pòdere impreare comente curretzione de s\'artària.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Càmbia modalidade tochende su widget.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Èvita sos caminos pro 4x4</string>
+    <string name="routing_attr_avoid_4wd_only_description">Èvita sos caminos adatos petzi a sos veìculos 4x4</string>
+    <string name="battery_widget_desc">Ammustrat su livellu de bateria de su dispositivu tuo.</string>
+    <string name="time_to_go_desc">Tempus in minutos o oras netzessàriu pro arribbare a sa destinatzione tua.</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Avantzadu</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Espertu</string>
+    <string name="second_next_turn_widget_desc">Su widget ammustrat informatziones subra de sa segunda bortada tua chi sunt abilitadas si sa bortada s\'est acurtziende.</string>
+    <string name="switch_widget_mode_desc">Podes mudare modalidade tochende in su widget.</string>
+    <string name="navigation_points">Puntos de navigatzione</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="gps_info_widget_desc">Ammustrat su nùmeru de satèllites chi su dispositivu rilevat e impreat in cussu momentu.</string>
+    <string name="av_def_action_choose">A dimanda</string>
+    <string name="route_maneuvers">Manovras de s\'àndala</string>
+    <string name="lang_ckb">Curdu tzentrale</string>
+    <string name="co2_mission">Emissione de CO2</string>
 </resources>

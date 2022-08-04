@@ -1,8 +1,6 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
@@ -72,7 +70,6 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -91,6 +88,7 @@ import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.RateUsHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -126,7 +124,6 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -728,17 +725,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!dashboardOnMap.isVisible()) {
 				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
-				} else {
-					OsmAndAppCustomization customization = app.getAppCustomization();
-					if (customization.isFeatureEnabled(FRAGMENT_CRASH_ID)
-							&& CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
-						SecondSplashScreenFragment.SHOW = false;
-						CrashBottomSheetDialogFragment.showInstance(fragmentManager);
-					} else if (customization.isFeatureEnabled(FRAGMENT_RATE_US_ID)
-							&& RateUsHelper.shouldShowRateDialog(app)) {
-						SecondSplashScreenFragment.SHOW = false;
-						RateUsHelper.showRateDialog(this);
-					}
+				} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
+					SecondSplashScreenFragment.SHOW = false;
+					CrashBottomSheetDialogFragment.showInstance(fragmentManager);
+				} else if (RateUsHelper.shouldShowRateDialog(app)) {
+					SecondSplashScreenFragment.SHOW = false;
+					RateUsHelper.showRateDialog(this);
 				}
 			} else {
 				dashboardOnMap.updateDashboard();

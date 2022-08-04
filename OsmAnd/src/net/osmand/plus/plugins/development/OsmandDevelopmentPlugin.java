@@ -83,7 +83,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		MapWidget widget = createMapWidgetForParams(mapActivity, FPS);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget, appMode));
 	}
 
 	@Override

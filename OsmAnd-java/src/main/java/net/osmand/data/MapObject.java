@@ -27,10 +27,8 @@ import java.util.zip.GZIPInputStream;
 public abstract class MapObject implements Comparable<MapObject> {
 
 	public static final MapObjectComparator BY_NAME_COMPARATOR = new MapObjectComparator();
-	
+
 	public static final byte AMENITY_ID_RIGHT_SHIFT = 1;
-	public static final byte NON_AMENITY_ID_RIGHT_SHIFT = 7;
-	
 	public static final byte WAY_MODULO_REMAINDER = 1;
 
 	protected String name = null;

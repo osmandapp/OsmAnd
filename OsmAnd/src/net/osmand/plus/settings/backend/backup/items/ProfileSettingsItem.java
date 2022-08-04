@@ -10,7 +10,7 @@ import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;

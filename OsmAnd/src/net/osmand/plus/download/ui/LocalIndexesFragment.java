@@ -373,6 +373,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							if (tWal.exists()) {
 								Algorithms.removeAllFiles(tWal);
 							}
+							clearMapillaryTiles(info);
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -389,6 +390,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						ITileSource src = (ITileSource) info.getAttachedObject();
 						if (src != null) {
 							src.deleteTiles(info.getPathToData());
+							clearMapillaryTiles(info);
 						}
 					}
 					total++;
@@ -443,6 +445,42 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				a.reloadLocalIndexes();
 			} else {
 				a.onUpdatedIndexesList();
+			}
+		}
+
+		// Clear tiles for both Mapillary sources together
+		private void clearMapillaryTiles(LocalIndexInfo info) {
+			ITileSource src = (ITileSource) info.getAttachedObject();
+			ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
+			ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
+			if (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName())) {
+				File current = new File(info.getPathToData());
+				File parent = current.getParentFile();
+				if (parent == null) {
+					return;
+				}
+				File[] list = parent.listFiles();
+				if (list == null) {
+					return;
+				}
+				for (File f : list) {
+					String withoutExt = Algorithms.getFileNameWithoutExtension(f);
+					String sqliteExt = IndexConstants.SQLITE_EXT.replace(".", "");
+					ITileSource cache = null;
+					if (withoutExt.equals(mapilaryCache.getName())) {
+						cache = mapilaryCache;
+					} else if (withoutExt.equals(mapilaryVector.getName())) {
+						cache = mapilaryVector;
+					}
+					if (cache != null) {
+						if (f.isDirectory()) {
+							cache.deleteTiles(f.getPath());
+						} else if (Algorithms.getFileExtension(f).equals(sqliteExt)) {
+							SQLiteTileSource sqlTileSource = new SQLiteTileSource(getMyApplication(), f, TileSourceManager.getKnownSourceTemplates());
+							sqlTileSource.deleteTiles(f.getPath());
+						}
+					}
+				}
 			}
 		}
 	}

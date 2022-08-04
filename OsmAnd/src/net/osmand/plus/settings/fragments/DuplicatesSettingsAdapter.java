@@ -34,7 +34,7 @@ import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
