@@ -4793,4 +4793,5 @@
     <string name="download_tiles">Descargar teselas</string>
     <string name="attach_roads_descr">¿Quieres aproximar la traza con una ruta válida adjuntada a los mapas sin conexión\? En ese caso, será corregida la altitud e información del camino y los giros que podrían usarse posteriormente en la navegación.</string>
     <string name="attach_roads_warning">Se puede adjuntar al camino sólo una traza grabada</string>
+    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos, para obtener instrucciones de navegación detalladas.</string>
 </resources>
