@@ -288,8 +288,9 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED = 2;
 	
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		//for Naismith
+		//for Naismith/Scarf
 		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
+		double defSpeed = ctx.getRouter().getDefaultSpeed();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -307,7 +308,7 @@ public class RouteResultPreparation {
 			int next;
 			double distance = 0;
 
-			//for Naismith
+			//for Naismith/Scarf
 			float prevHeight = -99999.0f;
 			float[] heightDistanceArray = null;
 			if (usePedestrianHeight) {
@@ -326,7 +327,7 @@ public class RouteResultPreparation {
 				}
 				distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
-				//for Naismith
+				//for Naismith/Scarf
 				if (usePedestrianHeight) {
 					int heightIndex = 2 * j + 1;
 					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length) {
@@ -334,8 +335,12 @@ public class RouteResultPreparation {
 						if (prevHeight != -99999.0f) {
 							float heightDiff = height - prevHeight;
 							if (heightDiff > 0) { // ascent only
-								//distOnRoadToPass += heightDiff * 6.0f; // Naismith's rule: add 1 hour per every 600m of ascent
-								distOnRoadToPass += heightDiff * 9.0f; // Use Naismith conservatively: add 1 hour per every 400m of ascent
+								// Naismith's rule: Add 1 hour per every 600m of ascent
+								//distOnRoadToPass += heightDiff * 6.0f;
+								// Conservative Naismith with 1 hour per every 400m (Swiss Alpine Club)
+								//distOnRoadToPass += heightDiff * 9.0f;
+								// Scarf's rule, scales with selected default speed (useful also for runners). (= +1h per 505m at 4km/h).
+								distOnRoadToPass += heightDiff * 7.92f / defSpeed;
 							}
 						}
 						prevHeight = height;
