@@ -1425,8 +1425,8 @@
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_coloredBuildings_name">Colorir edifícios por tipo</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de montanhismo</string>
+    <string name="rendering_attr_alpineHiking_name">Escala de caminhada (SAC)</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhadas</string>
     <string name="rendering_attr_showCycleRoutes_name">Rotas para bicicletas</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rotas de troleicarros</string>
@@ -4552,7 +4552,7 @@
     <string name="rendering_attr_showFunicularRoutes_name">Rotas de funicular</string>
     <string name="shared_string_buttons">Botões</string>
     <string name="routing_attr_carriage_restrictions_description">Considerar permissões de acesso a veículos puxados a cavalo</string>
-    <string name="rendering_attr_showLightRailRoutes_name">Rotas de comboios ligeiros</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Rotas de comboios ligeiros (e alguns metropolitanos)</string>
     <string name="simulation_preview_mode_desc">A velocidade da simulação será a máxima em retas e diminuirá apenas nos cruzamentos.</string>
     <string name="rendering_attr_showRunningRoutes_name">Rotas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas para correr</string>
