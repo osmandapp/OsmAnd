@@ -1,6 +1,7 @@
 package net.osmand.plus.weather;
 
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,11 +10,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -23,24 +30,42 @@ import net.osmand.plus.weather.units.PrecipConstants;
 import net.osmand.plus.weather.units.PressureConstants;
 import net.osmand.plus.weather.units.TemperatureConstants;
 import net.osmand.plus.weather.units.WindConstants;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_PRECIPITATION_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_WIND_WIDGET;
+import static net.osmand.plus.weather.WeatherLayerType.CLOUDS;
+import static net.osmand.plus.weather.WeatherLayerType.PRECIPITATION;
+import static net.osmand.plus.weather.WeatherLayerType.PRESSURE;
+import static net.osmand.plus.weather.WeatherLayerType.TEMPERATURE;
+import static net.osmand.plus.weather.WeatherLayerType.WIND;
 
 public class WeatherPlugin extends OsmandPlugin {
 
-	public static final String PREFERENCE_ID_TEMPERATURE = "map_settings_weather_temp";
-	public static final String PREFERENCE_ID_PRESSURE = "map_settings_weather_pressure";
-	public static final String PREFERENCE_ID_WIND = "map_settings_weather_wind";
-	public static final String PREFERENCE_ID_CLOUDS = "map_settings_weather_cloud";
-	public static final String PREFERENCE_ID_PRECIP = "map_settings_weather_precip";
+	public static int DEFAULT_LAYER_TRANSPARENCY = 50;
+
+	// todo replace with preferences
+	private boolean isWeatherEnabled = false;
+	private WeatherLayerType currentConfigureLayer = null;
+	private Set<WeatherLayerType> enabledLayers = new HashSet<>();
+	private Map<WeatherLayerType, Integer> layersTransparency = new HashMap<>();
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -52,11 +77,11 @@ public class WeatherPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(WX_CLOUDS_WIDGET, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(WX_AIR_PRESSURE_WIDGET, noAppMode);
 
-		EnumStringPreference weatherTemp = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_TEMPERATURE, TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		EnumStringPreference weatherPressure = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_PRESSURE, PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
-		EnumStringPreference weatherWind = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_WIND, WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
-		EnumStringPreference weatherCloud = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_CLOUDS, CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
-		EnumStringPreference weatherPrecipitation = (EnumStringPreference) registerEnumStringPreference(PREFERENCE_ID_PRECIP, PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
+		EnumStringPreference weatherTemp = (EnumStringPreference) registerEnumStringPreference(TEMPERATURE.getUnitsPreferenceId(), TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
+		EnumStringPreference weatherPressure = (EnumStringPreference) registerEnumStringPreference(PRESSURE.getUnitsPreferenceId(), PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
+		EnumStringPreference weatherWind = (EnumStringPreference) registerEnumStringPreference(WIND.getUnitsPreferenceId(), WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
+		EnumStringPreference weatherCloud = (EnumStringPreference) registerEnumStringPreference(CLOUDS.getUnitsPreferenceId(), CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
+		EnumStringPreference weatherPrecipitation = (EnumStringPreference) registerEnumStringPreference(PRECIPITATION.getUnitsPreferenceId(), PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
 	}
 
 	@Override
@@ -135,15 +160,119 @@ public class WeatherPlugin extends OsmandPlugin {
 		return null;
 	}
 
+	@Override
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
+	                                               @NonNull MapActivity mapActivity,
+	                                               @NonNull List<RenderingRuleProperty> customRules) {
+		if (isLocked()) {
+			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WEATHER,
+					WEATHER_ID,
+					R.string.shared_string_weather,
+					R.string.explore_weather_forecast);
+		} else {
+			ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+				DashboardOnMap dashboard = mapActivity.getDashboard();
+				int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
+				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
+				return false;
+			};
+			boolean selected = isWeatherEnabled();
+			adapter.addItem(new ContextMenuItem(WEATHER_ID)
+					.setTitleId(R.string.shared_string_weather, mapActivity)
+					.setDescription(selected ? getEnabledLayersSummary() : null)
+					.setSecondaryDescription(selected ? app.getString(R.string.shared_string_on) : null)
+					.setLayout(R.layout.configure_map_item_with_additional_right_desc)
+					.setSelected(selected)
+					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.setIcon(R.drawable.ic_action_umbrella)
+					.setListener(listener));
+		}
+	}
+
+	@NonNull
+	public String getEnabledLayersSummary() {
+		if (!Algorithms.isEmpty(enabledLayers)) {
+			List<String> titles = new ArrayList<>();
+			for (WeatherLayerType layer : WeatherLayerType.values()) {
+				if (enabledLayers.contains(layer)) {
+					titles.add(app.getString(layer.getTitleId()));
+				}
+			}
+			return TextUtils.join(", ", titles);
+		}
+		return null;
+	}
+
+	@NonNull
+	public String getEnabledContoursSummary() {
+		return "Temperature";
+	}
+
+	public void setWeatherEnabled(boolean isWeatherEnabled) {
+		this.isWeatherEnabled = isWeatherEnabled;
+	}
+
+	public boolean isWeatherEnabled() {
+		return isWeatherEnabled;
+	}
+
+	public boolean isContoursEnabled() {
+		return false;
+	}
+
+	public void setCurrentConfigureLayer(@Nullable WeatherLayerType layer) {
+		this.currentConfigureLayer = layer;
+	}
+
+	@Nullable
+	public WeatherLayerType getCurrentConfigureLayer() {
+		return currentConfigureLayer;
+	}
+
+	public void toggleLayerEnable(@NonNull WeatherLayerType layer, boolean enable) {
+		if (enable) {
+			enabledLayers.add(layer);
+		} else {
+			enabledLayers.remove(layer);
+		}
+	}
+
+	public boolean isLayerEnabled(@NonNull WeatherLayerType layer) {
+		return enabledLayers.contains(layer);
+	}
+
+	public int getLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherLayerType layer) {
+		Integer transparency = layersTransparency.get(layer);
+		return transparency != null ? transparency : DEFAULT_LAYER_TRANSPARENCY;
+	}
+
+	public void setLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherLayerType layer, @NonNull Integer transparency) {
+		if (transparency != null) {
+			layersTransparency.put(layer, transparency);
+		} else {
+			layersTransparency.remove(layer);
+		}
+	}
+
+	@NonNull
+	public Enum<?> getSelectedLayerUnit(@NonNull ApplicationMode appMode, @NonNull WeatherLayerType layer) {
+		OsmandPreference<?> preference = app.getSettings().getPreference(layer.getUnitsPreferenceId());
+		return (Enum<?>) preference.getModeValue(appMode);
+	}
+
+	public void setSelectedLayerUnit(@NonNull ApplicationMode appMode, @NonNull WeatherLayerType layer, @NonNull Enum<?> value) {
+		OsmandPreference<Enum> preference = (OsmandPreference<Enum>) app.getSettings().getPreference(layer.getUnitsPreferenceId());
+		preference.setModeValue(appMode, value);
+	}
+
 	@NonNull
 	public static String[] getUnitsPreferencesIds() {
-		return new String[]{
-				PREFERENCE_ID_TEMPERATURE,
-				PREFERENCE_ID_PRESSURE,
-				PREFERENCE_ID_WIND,
-				PREFERENCE_ID_CLOUDS,
-				PREFERENCE_ID_PRECIP
-		};
+		WeatherLayerType[] layers = WeatherLayerType.values();
+		String[] ids = new String[layers.length];
+		for (int i = 0; i < layers.length; i++) {
+			ids[i] = layers[i].getUnitsPreferenceId();
+		}
+		return ids;
 	}
 
 	@NonNull

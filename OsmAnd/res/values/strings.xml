@@ -11,6 +11,16 @@
 	Thx - Hardy
 -->
 
+    <string name="explore_weather_forecast">Explore Weather forecast.</string>
+    <string name="shared_string_contours">Contours</string>
+    <string name="shared_string_layers">Layers</string>
+    <string name="empty_screen_weather_contours">Turn on to view weather contours on the map.</string>
+    <string name="empty_screen_weather_pressure_layer">Turn on to view pressure layer on the map.</string>
+    <string name="empty_screen_weather_clouds_layer">Turn on to view clouds layer on the map.</string>
+    <string name="empty_screen_weather_wind_layer">Turn on to view wind layer on the map.</string>
+    <string name="empty_screen_weather_precipitation_layer">Turn on to view precipitation layer on the map.</string>
+    <string name="empty_screen_weather_temperature_layer">Turn on to view temperature layer on the map.</string>
+    <string name="empty_screen_view_selected_weather_data">Turn on to view selected weather data on map.</string>
     <string name="weather_precip_in">in</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Inches</string>

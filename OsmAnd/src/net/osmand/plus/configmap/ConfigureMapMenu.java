@@ -117,6 +117,7 @@ public class ConfigureMapMenu {
 		void onClick();
 	}
 
+	@NonNull
 	public ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
