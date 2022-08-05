@@ -408,12 +408,12 @@
     <string name="poi_bailiff">Mübaşir</string>
     <string name="poi_prosecutor">Savcı</string>
     <string name="poi_pension_fund">Emeklilik fonu</string>
-    <string name="poi_migration">Geçiş</string>
+    <string name="poi_migration">Göç</string>
     <string name="poi_tax_inspection">Vergi inceleme</string>
     <string name="poi_customs">Gümrük</string>
     <string name="poi_country">Ülke</string>
     <string name="poi_city">Şehir</string>
-    <string name="poi_capital">Evet</string>
+    <string name="poi_capital">Evet;Başkent</string>
     <string name="poi_town">Kasaba</string>
     <string name="poi_village">Köy</string>
     <string name="poi_hamlet">Küçük köy</string>
