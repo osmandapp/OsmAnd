@@ -4781,4 +4781,5 @@
     <string name="attach_roads_warning">Sie können an Straßen nur einen aufgezeichneten Track anhängen</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
+    <string name="attach_to_roads_banner_desc">Passe den Track an Straßen an um genau Navigationsanweisungen zu erhalten.</string>
 </resources>
