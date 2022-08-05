@@ -290,7 +290,7 @@ public class RouteResultPreparation {
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
 		//for Naismith/Scarf
 		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
-		double defSpeed = ctx.getRouter().getDefaultSpeed();
+		double scarfSeconds = 7.92f / ctx.getRouter().getDefaultSpeed();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -340,7 +340,7 @@ public class RouteResultPreparation {
 								// Conservative Naismith with 1 hour per every 400m (Swiss Alpine Club)
 								//distOnRoadToPass += heightDiff * 9.0f;
 								// Scarf's rule, scales with selected default speed (useful also for runners). (= +1h per 505m at 4km/h).
-								distOnRoadToPass += heightDiff * 7.92f / defSpeed;
+								distOnRoadToPass += heightDiff * scarfSeconds;
 							}
 						}
 						prevHeight = height;
