@@ -168,7 +168,7 @@
     <string name="route_head">Comece em</string>
     <string name="first_time_continue">Continuar</string>
     <string name="first_time_download">Descarregar regiões</string>
-    <string name="first_time_msg">Obrigado por usar OsmAnd. Descarregue dados regionais para a utilização offline em \"Configurações\" → \"Gerir ficheiros de mapas\" para visualizar mapas, localizar endereços, procurar POIs, encontrar transportes públicos e muito mais.</string>
+    <string name="first_time_msg">Obrigado por usar o OsmAnd. Descarregue dados regionais para a utilização offline em \"Menu\" → \"Descarregar mapas\" para visualizar mapas, localizar endereços, procurar POIs, encontrar transportes públicos e muito mais.</string>
     <string name="search_poi_location">A aguardar pelo sinal…</string>
     <string name="search_near_map">Procurar perto do centro atual do mapa</string>
     <string name="search_nearby">Procurar nas proximidades</string>
@@ -316,9 +316,9 @@
     <string name="search_activity">Pesquisar</string>
     <string name="searchpoi_activity">Escolher POI</string>
     <string name="search_POI_level_btn">Encontrar mais</string>
-    <string name="incremental_search_city">Pesquisa progressiva de cidade</string>
-    <string name="incremental_search_street">Pesquisa progressiva das ruas</string>
-    <string name="incremental_search_building">Pesquisa progressiva dos edifícios</string>
+    <string name="incremental_search_city">Pesquisar cidade progressivamente</string>
+    <string name="incremental_search_street">Pesquisar rua progressivamente</string>
+    <string name="incremental_search_building">Pesquisar edifício progressivamente</string>
     <string name="choose_available_region">Selecione a região da lista</string>
     <string name="choose_intersected_street">Selecione a rua transversal</string>
     <string name="Closest_Amenities">Infraestruturas mais próximas</string>
@@ -418,7 +418,7 @@
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
     <string name="native_rendering">Renderização nativa</string>
     <string name="test_voice_prompts">Testar avisos por voz</string>
-    <string name="switch_to_raster_map_to_see">Descarregue um mapa vetorial offline para esta localização em \"Configurações\" (\"Gerir ficheiros de mapa\") ou mude para o complemento \"Mapas online\".</string>
+    <string name="switch_to_raster_map_to_see">Descarregue um mapa vetorial offline para esta localização em \"Menu\" → \"Descarregar mapas\" ou mude para o complemento \"Mapas online\".</string>
     <string name="send_files_to_osm">Enviar ficheiros GPX para o OSM\?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etiquetas</string>
@@ -539,9 +539,9 @@
     <string name="delete_confirmation_msg">Eliminar %1$s\?</string>
     <string name="city_type_suburb">Subúrbio</string>
     <string name="city_type_hamlet">Aldeia / lugar</string>
-    <string name="city_type_village">Sede de freguesia</string>
-    <string name="city_type_town">Sede de concelho</string>
-    <string name="city_type_city">Capital de distrito</string>
+    <string name="city_type_village">Freguesia</string>
+    <string name="city_type_town">Vila</string>
+    <string name="city_type_city">Cidade</string>
     <string name="animate_route_off">Parar simulação</string>
     <string name="animate_route">Iniciar simulação</string>
     <string name="file_can_not_be_renamed">Não foi possível alterar o nome do ficheiro.</string>
@@ -1413,7 +1413,7 @@
     <string name="parking_place">Lugar de estacionamento</string>
     <string name="version_settings">Versões de teste</string>
     <string name="navigation_over_track">Iniciar a navegação ao longo do trilho\?</string>
-    <string name="rendering_attr_transportStops_name">Paragens de transportes públicos</string>
+    <string name="rendering_attr_transportStops_name">Paragens de transporte público</string>
     <string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em aparelhos muito antigos).</string>
     <string name="wake_on_voice">Ligar o ecrã</string>
     <string name="configure_map">Configurar mapa</string>
@@ -1747,7 +1747,7 @@
     <string name="map_marker">Marcador de mapa</string>
     <string name="consider_turning_polygons_off">É recomendável desativar a renderização de polígonos.</string>
     <string name="rendering_attr_showMtbRoutes_name">Rotas de bicicletas BTT</string>
-    <string name="show_polygons">Mostrar áreas do mapa principal</string>
+    <string name="show_polygons">Mostrar áreas preenchidas do mapa base</string>
     <string name="find_parking">Encontrar estacionamento</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar alterações</string>
@@ -1819,8 +1819,8 @@
     <string name="group_will_be_removed_after_restart">O grupo será removido na próxima vez que iniciar a aplicação.</string>
     <string name="show_guide_line">Mostrar linhas para marcadores</string>
     <string name="show_arrows_on_the_map">Mostrar setas para marcadores</string>
-    <string name="show_passed">Mostrar passado</string>
-    <string name="hide_passed">Esconder passado</string>
+    <string name="show_passed">Mostrar descartados</string>
+    <string name="hide_passed">Esconder descartados</string>
     <string name="remove_from_map_markers">Remover dos \"Marcadores do mapa\"</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
@@ -1905,7 +1905,7 @@
     <string name="restart_search">Reiniciar pesquisa</string>
     <string name="increase_search_radius">Aumentar raio de pesquisa</string>
     <string name="nothing_found">Não foi encontrado nada</string>
-    <string name="nothing_found_descr">Altere a pesquisa ou aumente o raio dela.</string>
+    <string name="nothing_found_descr">Altere o texto a pesquisar ou aumente o raio de pesquisa.</string>
     <string name="quick_action_showhide_osmbugs_descr">Botão para mostrar ou ocultar notas do OpenStreetMap no mapa.</string>
     <string name="sorted_by_distance">Ordenar por distância</string>
     <string name="search_favorites">Pesquisar nos favoritos</string>
@@ -2123,14 +2123,14 @@
     <string name="thank_you_for_feedback">Obrigado pelos seus comentários</string>
     <string name="search_street">Procurar rua</string>
     <string name="shared_string_restore">Restaurar</string>
-    <string name="keep_passed_markers_descr">Os marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados como visitado (passado) permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
-    <string name="keep_passed_markers">Manter marcadores visitados</string>
+    <string name="keep_passed_markers_descr">Os marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados como visitados (descartados) permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
+    <string name="keep_passed_markers">Manter marcadores descartados</string>
     <string name="more_transport_on_stop_hint">Outros transportes disponíveis nesta paragem.</string>
     <string name="ask_for_location_permission">Conceda ao OsmAnd o acesso à localização para continuar.</string>
     <string name="markers_remove_dialog_msg">Eliminar o marcador de mapa \"%s\"\?</string>
     <string name="edit_map_marker">Editar marcador de mapa</string>
     <string name="third_party_application">Aplicação de terceiros</string>
-    <string name="start_search_from_city">Pesquisa progressiva cidade&gt;vila&gt;aldeia&gt;nº</string>
+    <string name="start_search_from_city">Pesquisa progressiva local&gt;rua&gt;nº</string>
     <string name="osm_live_plan_pricing">Planos e preços</string>
     <string name="osm_live_payment_monthly_title">Mensalmente</string>
     <string name="osm_live_payment_3_months_title">Trimestralmente</string>
@@ -2219,7 +2219,7 @@
     <string name="use_two_digits_longitude">Usar longitude com 2 dígitos</string>
     <string name="shared_string_travel_guides">Guias de viagem</string>
     <string name="waypoints_removed_from_map_markers">Pontos de rota removidos dos marcadores do mapa</string>
-    <string name="nothing_found_in_radius">Não foi possível encontrar nada:</string>
+    <string name="nothing_found_in_radius">Nada encontrado num raio de:</string>
     <string name="select_waypoints_category_description">Adicionar todos os pontos de rota do trajeto ou selecionar categorias separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
@@ -2285,7 +2285,7 @@
     <string name="empty_state_osm_edits_descr">Crie ou altere POIs do OpenStreetMap, crie ou comente notas e contribua com ficheiros de GPX gravados.</string>
     <string name="shared_string_deleted">Eliminado</string>
     <string name="shared_string_edited">Editado</string>
-    <string name="shared_string_added">Adicionado</string>
+    <string name="shared_string_added">Data de adicionado</string>
     <string name="marker_activated">Marcador %s ativado.</string>
     <string name="one_tap_active_descr">Toque num marcador no mapa para movê-lo para a parte superior dos marcadores ativos sem abrir o menu de contexto.</string>
     <string name="one_tap_active">\"Um toque\" ativo</string>
@@ -2307,7 +2307,7 @@
     <string name="empty_state_markers_active_desc">Faça um toque longo ou rápido no mapa e em seguida toque no botão de bandeira que aparece em baixo para criar um marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Importar grupos de favoritos ou pontos de rota como marcadores.</string>
-    <string name="empty_state_markers_history_desc">Os marcadores assinalados como visitados aparecerão neste ecrã.</string>
+    <string name="empty_state_markers_history_desc">Os marcadores assinalados como descartados aparecerão neste ecrã.</string>
     <string name="shared_string_two">Dois</string>
     <string name="shared_string_one">Um</string>
     <string name="show_guide_line_descr">Mostrar linha direcional desde a sua posição até aos marcadores ativos.</string>
@@ -3605,7 +3605,7 @@
 \n%1$s: o mapa está limitado ao intervalo de nível de ampliação selecionado.
 \n
 \n%2$s são os níveis em que os mosaicos originais serão visíveis, o aumento ou redução de escala ocorrerá fora destes valores.</string>
-    <string name="expire_time_descr">Os mosaicos serão descarregados de novo após este tempo em minutos. Deixe o campo vazio para nunca atualizar os mosaicos desta fonte.
+    <string name="expire_time_descr">Os mosaicos em cache (tiles) serão descarregados de novo após este tempo em minutos. Deixe o campo vazio para nunca atualizar os mosaicos desta fonte.
 \n
 \nUm dia são 1440 minutos, uma semana 10080, um mês 43829.</string>
     <string name="tiles_storage_descr">Escolha como os mosaicos descarregados serão armazenados.</string>
@@ -4123,7 +4123,7 @@
     <string name="failed_loading_predefined_engines">Não foi possível carregar a lista de modelos predefinidos.
 \nVerifique se está ligado à Internet.</string>
     <string name="shared_string_predefined">Predefinido</string>
-    <string name="backup_complete">Cópia de segurança completa</string>
+    <string name="backup_complete">Cópia de segurança completada</string>
     <string name="backup_now">Fazer uma cópia de segurança agora</string>
     <string name="make_backup">Fazer uma cópia de segurança</string>
     <string name="make_backup_descr">Existem muitas alterações neste dispositivo, faça primeiro uma cópia de segurança destes dados para não os perder.</string>
@@ -4151,7 +4151,7 @@
     <string name="select_backup_data_descr">Selecionar dados e pastas para a cópia de segurança.</string>
     <string name="backup_restore_data_descr">Restaurar dados no dispositivo utilizando cópias de segurança online.</string>
     <string name="backup_restore_data">Restaurar dados</string>
-    <string name="restore_from_osmand_cloud">Restaurar de OsmAnd Cloud</string>
+    <string name="restore_from_osmand_cloud">Restaurar do OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Escolher o que restaurar.</string>
     <string name="restore_selected_data">Restaurar dados selecionados</string>
     <string name="receiving_data_from_server">A receber dados do servidor…</string>
@@ -4782,4 +4782,5 @@
     <string name="attach_roads_descr">Ativar para aproximar o trilho a uma rota válida anexada a mapas offline. Desta forma será corrigida a altitude da estrada, a informação da estrada e as curvas que poderão ser utilizadas mais tarde na navegação.</string>
     <string name="attach_roads_warning">Pode anexar apenas uma pista registada às estradas</string>
     <string name="shared_string_only_missing">Só os que faltam</string>
+    <string name="attach_to_roads_banner_desc">Anexe os seus trilhos às estradas para obter instruções de navegação.</string>
 </resources>
