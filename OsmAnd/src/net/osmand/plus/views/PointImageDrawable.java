@@ -325,7 +325,7 @@ public class PointImageDrawable extends Drawable {
 			width = Math.max(width, background.getWidth());
 			width = Math.max(width, listIcon.getWidth());
 		}
-		return width;
+		return scale != 1.0f ? (int) (width * scale) : width;
 	}
 
 	private int getBigMergedBitmapHeight() {
@@ -341,7 +341,7 @@ public class PointImageDrawable extends Drawable {
 			height = Math.max(height, background.getHeight());
 			height = Math.max(height, listIcon.getHeight());
 		}
-		return height;
+		return scale != 1.0f ? (int) (height * scale) : height;
 	}
 
 	@Nullable
@@ -364,7 +364,7 @@ public class PointImageDrawable extends Drawable {
 		width = Math.max(width, mapIconBackgroundBottomSmall.getWidth());
 		width = Math.max(width, mapIconBackgroundCenterSmall.getWidth());
 		width = Math.max(width, mapIconBackgroundTopSmall.getWidth());
-		return width;
+		return scale != 1.0f ? (int) (width * scale) : width;
 	}
 
 	private int getSmallMergedBitmapHeight() {
@@ -372,6 +372,6 @@ public class PointImageDrawable extends Drawable {
 		height = Math.max(height, mapIconBackgroundBottomSmall.getHeight());
 		height = Math.max(height, mapIconBackgroundCenterSmall.getHeight());
 		height = Math.max(height, mapIconBackgroundTopSmall.getHeight());
-		return height;
+		return scale != 1.0f ? (int) (height * scale) : height;
 	}
 }
