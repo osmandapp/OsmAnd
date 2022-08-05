@@ -146,14 +146,46 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			} else {
 				mapillaryTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
-			initMarkersCollection();
 		} else {
 			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		}
 	}
 
+	@Override
+	public void setSelectedImageLocation(LatLon selectedImageLocation) {
+		this.selectedImageLocation = selectedImageLocation;
+		showMarkerIfNeeded();
+	}
+
+	@Override
+	public void setSelectedImageCameraAngle(Float selectedImageCameraAngle) {
+		this.selectedImageCameraAngle = selectedImageCameraAngle;
+		showMarkerIfNeeded();
+	}
+
 	/**OpenGL*/
-	private void initMarkersCollection() {
+	private void showMarkerIfNeeded() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null &&  mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() > 0) {
+			initMarkersCollectionIfNeeded();
+			MapMarker marker = mapMarkersCollection.getMarkers().get(0);
+			if (selectedImageLocation != null) {
+				int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
+				int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
+				PointI pointI = new PointI(x, y);
+				marker.setPosition(pointI);
+				marker.setIsHidden(false);
+			} else {
+				marker.setIsHidden(true);
+			}
+			if (selectedImageCameraAngle != null) {
+				marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
+			}
+		}
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollectionIfNeeded() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null || mapMarkersCollection != null) {
 			return;
@@ -189,38 +221,6 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		if (mapRenderer != null && mapMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
 			mapMarkersCollection = null;
-		}
-	}
-
-	@Override
-	public void setSelectedImageLocation(LatLon selectedImageLocation) {
-		this.selectedImageLocation = selectedImageLocation;
-		updateMarkerState();
-	}
-
-	@Override
-	public void setSelectedImageCameraAngle(Float selectedImageCameraAngle) {
-		this.selectedImageCameraAngle = selectedImageCameraAngle;
-		updateMarkerState();
-	}
-
-	/**OpenGL*/
-	private void updateMarkerState() {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null &&  mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() > 0) {
-			MapMarker marker = mapMarkersCollection.getMarkers().get(0);
-			if (selectedImageLocation != null) {
-				int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
-				int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
-				PointI pointI = new PointI(x, y);
-				marker.setPosition(pointI);
-				marker.setIsHidden(false);
-			} else {
-				marker.setIsHidden(true);
-			}
-			if (selectedImageCameraAngle != null) {
-				marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
-			}
 		}
 	}
 
