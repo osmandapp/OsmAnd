@@ -334,8 +334,8 @@ public class RouteResultPreparation {
 						if (prevHeight != -99999.0f) {
 							float heightDiff = height - prevHeight;
 							if (heightDiff > 0) { // ascent only
-								distOnRoadToPass += heightDiff * 6.0f; // Naismith's rule: add 1 hour per every 600m of
-																		// ascent
+								//distOnRoadToPass += heightDiff * 6.0f; // Naismith's rule: add 1 hour per every 600m of ascent
+								distOnRoadToPass += heightDiff * 9.0f; // Use Naismith conservatively: add 1 hour per every 400m of ascent
 							}
 						}
 						prevHeight = height;
