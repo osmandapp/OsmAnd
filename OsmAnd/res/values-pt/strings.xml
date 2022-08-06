@@ -4076,7 +4076,7 @@
     <string name="shared_string_feet">pés</string>
     <string name="srtm_download_list_help_message">O OsmAnd fornece dados de curvas de nível em metros e pés. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
     <string name="srtm_unit_format">Variante da unidade das curvas de nível</string>
-    <string name="srtm_download_single_help_message">Selecione a variante. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
+    <string name="srtm_download_single_help_message">Selecione a variante. Se a alterar terá de descarregar novamente o ficheiro das curvas de nível.</string>
     <string name="route_line_use_gradient_coloring">A linha da rota é colorida conforme o declive.</string>
     <string name="shared_string_min_height">Altura mínima</string>
     <string name="shared_string_max_height">Altura máxima</string>
