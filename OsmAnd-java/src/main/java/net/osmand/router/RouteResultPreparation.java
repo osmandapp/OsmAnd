@@ -335,11 +335,10 @@ public class RouteResultPreparation {
 						if (prevHeight != -99999.0f) {
 							float heightDiff = height - prevHeight;
 							if (heightDiff > 0) { // ascent only
-								// Naismith's rule: Add 1 hour per every 600m of ascent
+								// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
+								// - Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph
+								// - Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h
 								//distOnRoadToPass += heightDiff * 6.0f;
-								// Conservative Naismith with 1 hour per every 400m (Swiss Alpine Club)
-								//distOnRoadToPass += heightDiff * 9.0f;
-								// Scarf's rule, scales with selected default speed (useful also for runners). (= +1h per 505m at 4km/h).
 								distOnRoadToPass += heightDiff * scarfSeconds;
 							}
 						}
