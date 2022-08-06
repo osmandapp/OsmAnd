@@ -166,20 +166,22 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	/**OpenGL*/
 	private void showMarkerIfNeeded() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null &&  mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() > 0) {
+		if (mapRenderer != null) {
 			initMarkersCollectionIfNeeded();
-			MapMarker marker = mapMarkersCollection.getMarkers().get(0);
-			if (selectedImageLocation != null) {
-				int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
-				int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
-				PointI pointI = new PointI(x, y);
-				marker.setPosition(pointI);
-				marker.setIsHidden(false);
-			} else {
-				marker.setIsHidden(true);
-			}
-			if (selectedImageCameraAngle != null) {
-				marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
+			if (mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() > 0) {
+				MapMarker marker = mapMarkersCollection.getMarkers().get(0);
+				if (selectedImageLocation != null) {
+					int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
+					int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
+					PointI pointI = new PointI(x, y);
+					marker.setPosition(pointI);
+					marker.setIsHidden(false);
+				} else {
+					marker.setIsHidden(true);
+				}
+				if (selectedImageCameraAngle != null) {
+					marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
+				}
 			}
 		}
 	}
