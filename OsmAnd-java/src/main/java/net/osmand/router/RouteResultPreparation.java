@@ -349,9 +349,13 @@ public class RouteResultPreparation {
 
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
-			rr.setSegmentTime((float) distOnRoadToPass);
-			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
+			rr.setSegmentTime((float) distOnRoadToPass);
+			if (usePedestrianHeight && (distOnRoadToPass != 0)) {
+				rr.setSegmentSpeed((float) (distance / distOnRoadToPass));
+			} else {
+				rr.setSegmentSpeed((float) speed);
+			}
 		}
 	}
 
