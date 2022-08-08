@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
     <string name="attach_to_roads_banner_desc">Attach your track to the roads, to get detailed navigation instructions.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show specifically designed trails for mountainbiking</string>
