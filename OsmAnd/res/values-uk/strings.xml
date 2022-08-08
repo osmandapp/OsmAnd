@@ -3491,7 +3491,7 @@
     <string name="wiki_menu_download_descr">Для перегляду точок інтересу з Вікіпедії на мапі потрібні додаткові мапи.</string>
     <string name="ui_customization_description">Налаштування кількості елементів меню \"Бічна панель\", \"Налаштувати мапу\" та \"Контекстне меню\".
 \n
-\nВимкніть непотрібні втулки, щоб приховати їх елементи керування %1$s.</string>
+\nВимкніть непотрібні плагіни, щоб приховати їх елементи керування %1$s.</string>
     <string name="ui_customization_short_descr">Елементи бічної панелі, контекстне меню</string>
     <string name="ui_customization">Налаштування інтерфейсу</string>
     <string name="shared_string_drawer">Бічна панель</string>
