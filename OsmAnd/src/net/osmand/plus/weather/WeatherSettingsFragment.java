@@ -24,14 +24,14 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		for (WeatherLayerType layer : WeatherLayerType.values()) {
+		for (WeatherInfoType layer : WeatherInfoType.values()) {
 			setupUnitsPref(layer);
 		}
 		setupOfflineForecastPref();
 		setupOnlineCachePref();
 	}
 
-	private void setupUnitsPref(@NonNull WeatherLayerType layer) {
+	private void setupUnitsPref(@NonNull WeatherInfoType layer) {
 		Enum<?>[] values = layer.getUnits();
 
 		String[] entries = new String[values.length];
@@ -41,7 +41,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 			entryValues[i] = values[i].ordinal();
 		}
 
-		ListPreferenceEx preference = findPreference(layer.getUnitsPreferenceId());
+		ListPreferenceEx preference = findPreference(layer.getUnitsPrefId());
 		preference.setEntries(entries);
 		preference.setEntryValues(entryValues);
 		preference.setIcon(getActiveIcon(layer.getIconId()));

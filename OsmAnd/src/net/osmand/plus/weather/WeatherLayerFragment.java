@@ -48,7 +48,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	private LayoutInflater themedInflater;
 	private boolean nightMode;
 
-	private WeatherLayerType configureLayer;
+	private WeatherInfoType configureLayer;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		setupTransparencySliderCard();
 		setupMeasurementUnitsBlock();
 
-		updateScreenMode(configureLayer.isEnabled());
+		updateScreenMode(weatherPlugin.isLayerEnabled(appMode, configureLayer));
 		return view;
 	}
 
@@ -82,11 +82,11 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.main_toggle),
 				configureLayer.getIconId(),
 				getString(configureLayer.getTitleId()),
-				configureLayer.isEnabled(),
+				weatherPlugin.isLayerEnabled(appMode, configureLayer),
 				false,
 				v -> {
-					boolean newState = !configureLayer.isEnabled();
-					configureLayer.setEnabled(newState);
+					boolean newState = !weatherPlugin.isLayerEnabled(appMode, configureLayer);
+					weatherPlugin.toggleLayerEnable(appMode, configureLayer, newState);
 					updateScreenMode(newState);
 				});
 	}
@@ -101,13 +101,13 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		((TextView) view.findViewById(R.id.slider_min)).setText(String.valueOf(TRANSPARENCY_MIN));
 		((TextView) view.findViewById(R.id.slider_max)).setText(String.valueOf(TRANSPARENCY_MAX));
 
-		int value = configureLayer.getTransparency(appMode);
+		int value = weatherPlugin.getLayerTransparency(appMode, configureLayer);
 		tvCurrentValue.setText(formatPercent(value));
 		slider.setValue(value);
 
 		slider.addOnChangeListener((slider_, newValue, fromUser) -> {
 			if (fromUser) {
-				configureLayer.setTransparency(appMode, (int) newValue);
+				weatherPlugin.setLayerTransparency(appMode, configureLayer, (int) newValue);
 				tvCurrentValue.setText(formatPercent((int) newValue));
 			}
 		});
@@ -118,7 +118,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	private void setupMeasurementUnitsBlock() {
 		View container = view.findViewById(R.id.measurement_units_block);
-		if (configureLayer != WeatherLayerType.CLOUDS) {
+		if (configureLayer != WeatherInfoType.CLOUDS) {
 			container.setVisibility(View.VISIBLE);
 			View card = container.findViewById(R.id.measurement_units_card);
 			View button = card.findViewById(R.id.measurement_units_button);
@@ -136,7 +136,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		ImageView ivIcon = view.findViewById(R.id.empty_screen_icon);
 		TextView tvDesc = view.findViewById(R.id.empty_screen_description);
 		ivIcon.setImageResource(configureLayer.getIconId());
-		tvDesc.setText(configureLayer.getEmprtyStateDesc(app));
+		tvDesc.setText(getEmprtyStateDesc(app));
 	}
 
 	private void updateScreenMode(boolean enabled) {
@@ -146,7 +146,11 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	private void updateMeasurementUnitsCard() {
 		TextView tvUnitsDesc = view.findViewById(R.id.units_description);
-		tvUnitsDesc.setText(configureLayer.getSelectedUnitName(app, appMode));
+		WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		if (plugin != null) {
+			Enum<?> unit = plugin.getSelectedLayerUnit(appMode, configureLayer);
+			tvUnitsDesc.setText(configureLayer.getUnitName(app, unit));
+		}
 	}
 
 	private void setupToggleButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
@@ -198,7 +202,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		return percent + "%";
 	}
 
-	private void showChooseUnitDialog(WeatherLayerType layer) {
+	private void showChooseUnitDialog(WeatherInfoType layer) {
 		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
 		int profileColor = appMode.getProfileColor(nightMode);
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -209,7 +213,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 		int selectedUnitIndex = 0;
 		Enum<?>[] values = layer.getUnits();
-		Enum<?> selected = layer.getSelectedUnit(appMode);
+		Enum<?> selected = weatherPlugin.getSelectedLayerUnit(appMode, layer);
 		String[] entries = new String[values.length];
 		Integer[] entryValues = new Integer[values.length];
 		for (int i = 0; i < entries.length; i++) {
@@ -222,13 +226,31 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				entries, nightMode, selectedUnitIndex, app, profileColor, themeRes, v -> {
-					layer.setSelectedUnit(appMode, values[(int) v.getTag()]);
+					weatherPlugin.setSelectedLayerUnit(appMode, layer, values[(int) v.getTag()]);
 					updateMeasurementUnitsCard();
 				}
 		);
 
 		builder.setAdapter(adapter, null);
 		adapter.setDialog(builder.show());
+	}
+
+	@Nullable
+	private String getEmprtyStateDesc(@NonNull Context ctx) {
+		switch (configureLayer) {
+			case TEMPERATURE:
+				return ctx.getString(R.string.empty_screen_weather_temperature_layer);
+			case PRECIPITATION:
+				return ctx.getString(R.string.empty_screen_weather_precipitation_layer);
+			case WIND:
+				return ctx.getString(R.string.empty_screen_weather_wind_layer);
+			case CLOUDS:
+				return ctx.getString(R.string.empty_screen_weather_clouds_layer);
+			case PRESSURE:
+				return ctx.getString(R.string.empty_screen_weather_pressure_layer);
+			default:
+				return null;
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

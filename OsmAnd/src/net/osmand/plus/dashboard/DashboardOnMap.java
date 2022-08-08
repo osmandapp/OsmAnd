@@ -82,7 +82,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.weather.WeatherContoursFragment;
 import net.osmand.plus.weather.WeatherLayerFragment;
-import net.osmand.plus.weather.WeatherLayerType;
+import net.osmand.plus.weather.WeatherInfoType;
 import net.osmand.plus.weather.WeatherMainFragment;
 import net.osmand.plus.weather.WeatherPlugin;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -340,7 +340,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.shared_string_weather);
 		} else if (isCurrentType(WEAHTER_LAYER)) {
 			WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
-			WeatherLayerType layer = plugin != null ? plugin.getCurrentConfiguredLayer() : null;
+			WeatherInfoType layer = plugin != null ? plugin.getCurrentConfiguredLayer() : null;
 			if (layer != null) {
 				tv.setText(layer.getTitleId());
 			}

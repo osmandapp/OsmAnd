@@ -45,7 +45,7 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 	private WeatherPlugin weatherPlugin;
 
 	private View view;
-	private Map<WeatherLayerType, View> radioButtons = new HashMap<>();
+	private Map<WeatherInfoType, View> radioButtons = new HashMap<>();
 	private LayoutInflater themedInflater;
 	private boolean nightMode;
 
@@ -67,10 +67,10 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 		view = themedInflater.inflate(R.layout.fragment_weather_contours, container, false);
 
 		setupMainToggle();
-		setupContoursTypesCard();
+		setupContourTypesCard();
 		setupTransparencySliderCard();
 
-		updateScreenMode(weatherPlugin.isContoursEnabled());
+		updateScreenMode(weatherPlugin.isContoursEnabled(appMode));
 		return view;
 	}
 
@@ -79,35 +79,35 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_plugin_srtm,
 				getString(R.string.shared_string_contours),
-				weatherPlugin.isContoursEnabled(),
+				weatherPlugin.isContoursEnabled(appMode),
 				false,
 				v -> {
-					boolean newState = !weatherPlugin.isContoursEnabled();
-					weatherPlugin.setContoursEnabled(newState);
+					boolean newState = !weatherPlugin.isContoursEnabled(appMode);
+					weatherPlugin.setContoursEnabled(appMode, newState);
 					updateScreenMode(newState);
 				});
 	}
 
-	private void setupContoursTypesCard() {
+	private void setupContourTypesCard() {
 		ViewGroup container = view.findViewById(R.id.contours_types_list);
-		WeatherLayerType[] layers = WeatherLayerType.values();
+		WeatherInfoType[] types = WeatherInfoType.values();
 		container.removeAllViews();
 		radioButtons.clear();
-		for (int i = 0; i < layers.length; i++) {
-			WeatherLayerType layer = layers[i];
+		for (int i = 0; i < types.length; i++) {
+			WeatherInfoType type = types[i];
 			View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
-			boolean showDivider = i < layers.length - 1;
+			boolean showDivider = i < types.length - 1;
 			setupRadioButton(
 					view,
-					layer.getIconId(),
-					layer.toHumanString(app),
-					layer == weatherPlugin.getSelectedContoursType(),
+					type.getIconId(),
+					type.toHumanString(app),
+					type == weatherPlugin.getSelectedContoursType(appMode),
 					showDivider,
 					v -> {
-						weatherPlugin.setContoursType(layer);
+						weatherPlugin.setSelectedContoursType(appMode, type);
 					}
 			);
-			radioButtons.put(layer, view);
+			radioButtons.put(type, view);
 			container.addView(view);
 		}
 	}
@@ -216,10 +216,10 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 	private void updateRadioButtons() {
 		int activeColor = appMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		for (WeatherLayerType type : WeatherLayerType.values()) {
+		for (WeatherInfoType type : WeatherInfoType.values()) {
 			View view = radioButtons.get(type);
 			if (view != null) {
-				boolean isChecked = weatherPlugin.getSelectedContoursType() == type;
+				boolean isChecked = weatherPlugin.getSelectedContoursType(appMode) == type;
 				ImageView ivIcon = view.findViewById(R.id.icon);
 				int iconColor = isChecked ? activeColor : defColor;
 				ivIcon.setColorFilter(isChecked ? activeColor : defColor);

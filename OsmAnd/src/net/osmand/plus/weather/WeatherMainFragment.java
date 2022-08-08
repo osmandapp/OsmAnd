@@ -64,7 +64,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 		setupWeatherContours();
 		setupOfflineForecast();
 
-		updateScreenMode(weatherPlugin.isWeatherEnabled());
+		updateScreenMode(weatherPlugin.isWeatherEnabled(appMode));
 		return view;
 	}
 
@@ -73,20 +73,20 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_umbrella,
 				getString(R.string.shared_string_weather),
-				weatherPlugin.isWeatherEnabled(),
+				weatherPlugin.isWeatherEnabled(appMode),
 				false,
 				v -> {
-					boolean newState = !weatherPlugin.isWeatherEnabled();
-					weatherPlugin.setWeatherEnabled(newState);
+					boolean newState = !weatherPlugin.isWeatherEnabled(appMode);
+					weatherPlugin.setWeatherEnabled(appMode, newState);
 					updateScreenMode(newState);
 				});
 	}
 
 	private void setupWeatherLayers() {
 		ViewGroup container = view.findViewById(R.id.weather_layers_list);
-		WeatherLayerType[] layers = WeatherLayerType.values();
+		WeatherInfoType[] layers = WeatherInfoType.values();
 		for (int i = 0; i < layers.length; i++) {
-			WeatherLayerType layer = layers[i];
+			WeatherInfoType layer = layers[i];
 			View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_additional_right_desc, container, false);
 			boolean showDivider = i < layers.length - 1;
 			setupOnOffButton(
@@ -94,7 +94,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 					layer.getIconId(),
 					layer.toHumanString(app),
 					null,
-					layer.isEnabled(),
+					weatherPlugin.isLayerEnabled(appMode, layer),
 					showDivider,
 					v -> {
 						DashboardOnMap dashboard = mapActivity.getDashboard();
@@ -112,8 +112,8 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.weather_contours),
 				R.drawable.ic_plugin_srtm,
 				getString(R.string.shared_string_contours),
-				weatherPlugin.getEnabledContoursSummary(),
-				weatherPlugin.isContoursEnabled(),
+				weatherPlugin.getEnabledContoursSummary(app),
+				weatherPlugin.isContoursEnabled(appMode),
 				false,
 				v -> {
 					DashboardOnMap dashboard = mapActivity.getDashboard();
