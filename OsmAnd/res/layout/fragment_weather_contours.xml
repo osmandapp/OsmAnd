@@ -30,7 +30,7 @@
 
 		</FrameLayout>
 
-		<!--Empty screen, when weather layer disabled-->
+		<!--Empty screen, when weather disabled-->
 		<FrameLayout
 			android:id="@+id/empty_screen"
 			android:layout_width="match_parent"
@@ -47,21 +47,19 @@
 				android:orientation="vertical">
 
 				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/empty_screen_icon"
 					android:layout_width="@dimen/icon_size_double"
 					android:layout_height="@dimen/icon_size_double"
 					android:layout_gravity="center"
 					android:layout_marginVertical="@dimen/content_padding"
-					android:src="@drawable/ic_action_precipitation"
+					android:src="@drawable/ic_plugin_srtm"
 					android:tint="?attr/default_icon_color" />
 
 				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/empty_screen_description"
 					style="@style/DescStyle"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:text="@string/empty_screen_view_selected_weather_data"
+					android:text="@string/empty_screen_weather_contours"
 					android:textColor="?android:textColorSecondary" />
 
 			</LinearLayout>
@@ -74,6 +72,31 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
+
+			<include layout="@layout/list_item_divider" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle.Medium"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:layout_marginVertical="@dimen/content_padding_small"
+					android:text="@string/shared_string_type"
+					android:textColor="?android:textColorPrimary" />
+
+				<LinearLayout
+					android:id="@+id/contours_types_list"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+			</LinearLayout>
 
 			<include layout="@layout/list_item_divider" />
 
@@ -154,50 +177,6 @@
 						tools:text="100%" />
 
 				</LinearLayout>
-
-			</LinearLayout>
-
-			<LinearLayout
-				android:id="@+id/measurement_units_block"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
-
-				<include layout="@layout/list_item_divider" />
-
-				<FrameLayout
-					android:id="@+id/measurement_units_card"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:background="?attr/list_background_color">
-
-					<LinearLayout
-						android:id="@+id/measurement_units_button"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:background="?android:selectableItemBackground"
-						android:orientation="vertical"
-						android:paddingHorizontal="@dimen/content_padding"
-						android:paddingVertical="@dimen/content_padding_small">
-
-						<net.osmand.plus.widgets.TextViewEx
-							style="@style/TitleStyle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:text="@string/measurement_units"
-							android:textColor="?android:textColorPrimary" />
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/units_description"
-							style="@style/DescStyle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:textColor="?android:textColorSecondary"
-							tools:text="Hectopascals (hPa)" />
-
-					</LinearLayout>
-
-				</FrameLayout>
 
 			</LinearLayout>
 

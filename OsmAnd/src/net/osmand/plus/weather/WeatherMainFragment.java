@@ -118,7 +118,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 				v -> {
 					DashboardOnMap dashboard = mapActivity.getDashboard();
 					int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
-					dashboard.setDashboardVisibility(true, DashboardType.WEATHER_CONTOUR, coordinates);
+					dashboard.setDashboardVisibility(true, DashboardType.WEATHER_CONTOURS, coordinates);
 				}
 		);
 	}

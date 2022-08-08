@@ -80,6 +80,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.weather.WeatherContoursFragment;
 import net.osmand.plus.weather.WeatherLayerFragment;
 import net.osmand.plus.weather.WeatherLayerType;
 import net.osmand.plus.weather.WeatherMainFragment;
@@ -187,7 +188,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		TRANSPORT_LINES,
 		WEAHTER,
 		WEAHTER_LAYER,
-		WEATHER_CONTOUR
+		WEATHER_CONTOURS
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -339,10 +340,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.shared_string_weather);
 		} else if (isCurrentType(WEAHTER_LAYER)) {
 			WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
-			WeatherLayerType layer = plugin != null ? plugin.getCurrentConfigureLayer() : null;
+			WeatherLayerType layer = plugin != null ? plugin.getCurrentConfiguredLayer() : null;
 			if (layer != null) {
 				tv.setText(layer.getTitleId());
 			}
+		} else if (isCurrentType(WEATHER_CONTOURS)) {
+			tv.setText(R.string.shared_string_contours);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -559,7 +562,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER)) {
+					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -581,6 +584,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					WeatherMainFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEAHTER_LAYER)) {
 					WeatherLayerFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(WEATHER_CONTOURS)) {
+					WeatherContoursFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				scrollView.scrollTo(0, 0);
@@ -645,7 +650,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listView.setBackgroundColor(backgroundColor);
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
-				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER)) {
+				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -774,6 +779,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(WeatherMainFragment.TAG);
 		} else if (isCurrentType(WEAHTER_LAYER)) {
 			refreshFragment(WeatherLayerFragment.TAG);
+		} else if (isCurrentType(WEATHER_CONTOURS)) {
+			refreshFragment(WeatherContoursFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}

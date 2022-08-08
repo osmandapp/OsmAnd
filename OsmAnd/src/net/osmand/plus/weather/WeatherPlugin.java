@@ -45,7 +45,6 @@ import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WX_PRECIPITATION_WIDGET;
@@ -59,13 +58,16 @@ import static net.osmand.plus.weather.WeatherLayerType.WIND;
 
 public class WeatherPlugin extends OsmandPlugin {
 
-	public static int DEFAULT_LAYER_TRANSPARENCY = 50;
+	public static int DEFAULT_TRANSPARENCY = 50;
 
 	// todo replace with preferences
 	private boolean isWeatherEnabled = false;
 	private WeatherLayerType currentConfigureLayer = null;
 	private Set<WeatherLayerType> enabledLayers = new HashSet<>();
 	private Map<WeatherLayerType, Integer> layersTransparency = new HashMap<>();
+	private boolean contoursEnabled = false;
+	private Integer contoursTranparency;
+	private WeatherLayerType selectedContoursType = TEMPERATURE;
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -217,7 +219,34 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	public boolean isContoursEnabled() {
-		return false;
+		return contoursEnabled;
+	}
+
+	public void setContoursEnabled(boolean enabled) {
+		this.contoursEnabled = enabled;
+	}
+
+	public int getContoursTransparency(@NonNull ApplicationMode appMode) {
+		return contoursTranparency != null ? contoursTranparency : DEFAULT_TRANSPARENCY;
+	}
+
+	public void setContoursTransparency(@NonNull ApplicationMode appMode, @NonNull Integer transparency) {
+		if (transparency != null) {
+			// add
+			contoursTranparency = transparency;
+		} else {
+			// remove
+			contoursTranparency = null;
+		}
+	}
+
+	@NonNull
+	public WeatherLayerType getSelectedContoursType() {
+		return selectedContoursType;
+	}
+
+	public void setContoursType(@NonNull WeatherLayerType contoursType) {
+		this.selectedContoursType = contoursType;
 	}
 
 	public void setCurrentConfigureLayer(@Nullable WeatherLayerType layer) {
@@ -225,7 +254,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Nullable
-	public WeatherLayerType getCurrentConfigureLayer() {
+	public WeatherLayerType getCurrentConfiguredLayer() {
 		return currentConfigureLayer;
 	}
 
@@ -243,7 +272,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public int getLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherLayerType layer) {
 		Integer transparency = layersTransparency.get(layer);
-		return transparency != null ? transparency : DEFAULT_LAYER_TRANSPARENCY;
+		return transparency != null ? transparency : DEFAULT_TRANSPARENCY;
 	}
 
 	public void setLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherLayerType layer, @NonNull Integer transparency) {
