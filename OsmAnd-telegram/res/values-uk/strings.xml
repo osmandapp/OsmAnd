@@ -232,7 +232,7 @@
     <string name="set_time_timeline_descr">Виберіть час для відображення</string>
     <string name="stale_location_desc">Востаннє контакт переміщувався.</string>
     <string name="stale_location">Не рухається</string>
-    <string name="set_visible_time_for_all">Установити видимий час для всіх</string>
+    <string name="set_visible_time_for_all">Установити час показу для всіх</string>
     <string name="visible_time_for_all">Показувати всім впродовж</string>
     <string name="set_time_description">Установіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
     <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцем положення.</string>
