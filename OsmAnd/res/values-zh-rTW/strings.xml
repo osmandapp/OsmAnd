@@ -4770,4 +4770,5 @@
     <string name="without_profiles_changing">不需變更設定檔</string>
     <string name="shared_string_only_missing">僅遺失</string>
     <string name="download_tiles">下載圖磚</string>
+    <string name="attach_to_roads_banner_desc">將您的軌跡貼齊至道路上，以取得詳細的導航說明。</string>
 </resources>

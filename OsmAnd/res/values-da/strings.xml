@@ -4783,4 +4783,5 @@
     <string name="shared_string_only_missing">Kun mangler</string>
     <string name="without_profiles_changing">Uden at profiler ændres</string>
     <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
+    <string name="attach_to_roads_banner_desc">Fastgør dit spor til vejene for at få detaljerede navigationsinstruktioner.</string>
 </resources>

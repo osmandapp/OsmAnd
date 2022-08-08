@@ -41,6 +41,7 @@ import static net.osmand.util.Algorithms.isEmpty;
 
 public class OnlineRoutingHelper {
 
+	private static final int CONNECTION_TIMEOUT = 30000;
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
 
 	private final OsmandApplication app;
@@ -128,6 +129,7 @@ public class OnlineRoutingHelper {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		connection.setRequestMethod(method);
+		connection.setConnectTimeout(CONNECTION_TIMEOUT);
 		// set custom headers
 		if (headers != null) {
 			for (String key :  headers.keySet()) {

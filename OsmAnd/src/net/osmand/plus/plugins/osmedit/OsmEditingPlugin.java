@@ -7,9 +7,9 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
-import static net.osmand.data.MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 
 import android.content.Context;
 import android.content.Intent;
@@ -72,8 +72,10 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -670,20 +672,20 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	public static long getOsmObjectId(@NonNull MapObject object) {
+		long originalId = -1;
 		Long id = object.getId();
 		if (id != null) {
-			long originalId = (id >> 1);
-			long relationShift = 1L << 41;
-			if (originalId > relationShift) {
-				long division = originalId / relationShift;
-				originalId = division > 1 ? originalId / division : originalId;
-				return originalId & ~relationShift >> 10;
+			if (object instanceof RenderedObject) {
+				id >>= 1;
+			}
+			if (MapSelectionHelper.isShiftedID(id)) {
+				originalId = MapSelectionHelper.getOsmId(id);
 			} else {
-				int shift = object instanceof Amenity ? AMENITY_ID_RIGHT_SHIFT : NON_AMENITY_ID_RIGHT_SHIFT;
-				return id >> shift;
+				int shift = object instanceof Amenity ? AMENITY_ID_RIGHT_SHIFT : SHIFT_ID;
+				originalId = id >> shift;
 			}
 		}
-		return -1;
+		return originalId;
 	}
 
 	@Nullable

@@ -177,6 +177,7 @@
 	<string name="poi_post_office_type">Type</string>
 	<string name="poi_laundry_service_filter">Laundry service</string>
 	<string name="poi_dry_cleaning_filter">Dry cleaning</string>
+	<string name="poi_dog">Dogs</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4873,5 +4874,9 @@
 	<string name="poi_club_doityourself">DIY club</string>
 
 	<string name="poi_first_aid_kit">First aid kit</string>
+
+	<string name="poi_dog_leashed">Dogs: leashed only</string>
+	<string name="poi_dog_unleashed">Dogs: don\'t need to be leashed</string>
+	<string name="poi_dog_designated">Designated for dogs</string>
 
 </resources>

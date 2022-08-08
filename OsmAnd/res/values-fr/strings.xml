@@ -4770,4 +4770,5 @@
     <string name="connect_with_straight_line">Connecter par une ligne droite</string>
     <string name="attach_roads_warning">Vous ne pouvez raccrocher aux routes qu\'une trace déjà enregistrée</string>
     <string name="attach_roads_descr">Souhaitez-vous rattacher votre trace aux routes existantes sur les cartes hors ligne \? Dans ce cas, vous disposerez d\'une altitude corrigée, d\'informations sur la route et les bifurcations qui pourront être utilisées pendant le guidage.</string>
+    <string name="attach_to_roads_banner_desc">Déplacez votre trace sur les routes afin d\'obtenir des instructions de guidage détaillées.</string>
 </resources>
