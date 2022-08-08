@@ -310,12 +310,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 			long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
 			description = DATE_FORMAT.format(purchaseTime);
 		}
-		if (!Algorithms.isEmpty(description)) {
-			tvDescription.setVisibility(View.VISIBLE);
-			tvDescription.setText(description);
-		} else {
-			tvDescription.setVisibility(View.GONE);
-		}
+		tvDescription.setText(description);
+		AndroidUiHelper.updateVisibility(tvDescription, !Algorithms.isEmpty(description));
 		view.setEnabled(true);
 	}
 
