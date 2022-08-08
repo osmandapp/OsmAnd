@@ -1513,9 +1513,9 @@ public class GpxUiHelper {
 		} else if (sps == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
 		} else if (sps == SpeedConstants.MINUTES_PER_KILOMETER) {
-			divSpeed = METERS_IN_KILOMETER / 60;
+			divSpeed = METERS_IN_KILOMETER / 60.0f;
 		} else if (sps == SpeedConstants.MINUTES_PER_MILE) {
-			divSpeed = METERS_IN_ONE_MILE / 60;
+			divSpeed = METERS_IN_ONE_MILE / 60.0f;
 		} else {
 			mulSpeed = 1f;
 		}

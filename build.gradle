@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.5.10'
+    ext.kotlin_version = '1.6.10'
     repositories {
         google()
         mavenCentral()
@@ -9,9 +9,8 @@ buildscript {
     }
     dependencies {
         //classpath 'com.android.tools.build:gradle:2.+'
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath 'com.google.gms:google-services:3.0.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {
             classpath 'com.huawei.agconnect:agcp:1.4.1.300'
@@ -31,7 +30,7 @@ allprojects {
         ivy {
             name = "OsmAndBinariesIvy"
             url = "https://builder.osmand.net"
-            layout "pattern", {
+            patternLayout {
                 artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
             }
         }

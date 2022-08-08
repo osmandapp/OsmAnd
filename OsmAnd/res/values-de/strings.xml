@@ -4124,7 +4124,7 @@
     <string name="failed_loading_predefined_engines">Die Liste der vordefinierten Vorlagen konnte nicht geladen werden.
 \nBitte überprüfen Sie Ihre Internetverbindung.</string>
     <string name="shared_string_predefined">Vordefiniert</string>
-    <string name="backup_complete">Sicherung abgeschlossen</string>
+    <string name="backup_complete">Backup abgeschlossen</string>
     <string name="backup_now">Jetzt sichern</string>
     <string name="make_backup">Erstellen Sie eine Sicherung</string>
     <string name="make_backup_descr">Es sind viele Änderungen auf diesem Gerät vorhanden, bitte führen Sie eine Sicherung dieser Daten durch, um sie nicht zu verlieren.</string>
@@ -4781,4 +4781,5 @@
     <string name="attach_roads_warning">Sie können an Straßen nur einen aufgezeichneten Track anhängen</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
+    <string name="attach_to_roads_banner_desc">Passe den Track an Straßen an um genau Navigationsanweisungen zu erhalten.</string>
 </resources>

@@ -1469,7 +1469,7 @@
     <string name="shared_string_action_template">Action {0}</string>
     <string name="shared_string_video">Vidéo</string>
     <string name="shared_string_photo">Photo</string>
-    <string name="shared_string_release">sortit le</string>
+    <string name="shared_string_release">sorti le</string>
     <string name="drawer">Liste simple</string>
     <string name="waypoint_visit_after">Visiter après</string>
     <string name="waypoint_visit_before">Visiter avant</string>
@@ -4770,4 +4770,5 @@
     <string name="connect_with_straight_line">Connecter par une ligne droite</string>
     <string name="attach_roads_warning">Vous ne pouvez raccrocher aux routes qu\'une trace déjà enregistrée</string>
     <string name="attach_roads_descr">Souhaitez-vous rattacher votre trace aux routes existantes sur les cartes hors ligne \? Dans ce cas, vous disposerez d\'une altitude corrigée, d\'informations sur la route et les bifurcations qui pourront être utilisées pendant le guidage.</string>
+    <string name="attach_to_roads_banner_desc">Déplacez votre trace sur les routes afin d\'obtenir des instructions de guidage détaillées.</string>
 </resources>

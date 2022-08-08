@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 
 import android.content.Context;
@@ -78,13 +79,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class MapSelectionHelper {
+public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int TILE_SIZE = 256;
 	public static final int SHIFT_MULTIPOLYGON_IDS = 43;
+	public static final int SHIFT_NON_SPLIT_EXISTING_IDS = 41;
 	public static final long RELATION_BIT = 1L << SHIFT_MULTIPOLYGON_IDS - 1; //According IndexPoiCreator SHIFT_MULTIPOLYGON_IDS
+	public static final long SPLIT_BIT = 1L << SHIFT_NON_SPLIT_EXISTING_IDS - 1; //According IndexVectorMapCreator
 	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
 
 	private final OsmandApplication app;
@@ -579,10 +582,10 @@ class MapSelectionHelper {
 			Long initAmenityId = amenity.getId();
 			if (initAmenityId != null) {
 				long amenityId;
-				if (isIdFromRelation(initAmenityId)) {
+				if (isShiftedID(initAmenityId)) {
 					amenityId = getOsmId(initAmenityId);
 				} else {
-					amenityId = initAmenityId >> 1;
+					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
 				}
 				if (amenityId == id && !amenity.isClosed()) {
 					res = amenity;
@@ -610,10 +613,19 @@ class MapSelectionHelper {
 		return id > 0 && (id & RELATION_BIT) == RELATION_BIT;
 	}
 
+	public static boolean isIdFromSplit(long id) {
+		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
+	}
+
 	public static long getOsmId(long id) {
 		//According methods assignIdForMultipolygon and genId in IndexPoiCreator
-		id = isIdFromRelation(id) ? (id & ~RELATION_BIT) >> DUPLICATE_SPLIT : id;
+		long clearBits = RELATION_BIT | SPLIT_BIT;
+		id = isShiftedID(id) ? (id & ~clearBits) >> DUPLICATE_SPLIT : id;
 		return id >> SHIFT_ID;
+	}
+
+	public static boolean isShiftedID(long id) {
+		return isIdFromRelation(id) || isIdFromSplit(id);
 	}
 
 	static class MapSelectionResult {

@@ -4737,4 +4737,33 @@
     <string name="auto_25_chars_route_tu_kr">Fai inversione a U e tieni la destra</string>
     <string name="auto_25_chars_route_roundabout_kl">Prendi la %1$d uscita e tieni la sinistra</string>
     <string name="auto_25_chars_route_roundabout_kr">Prendi la %1$d uscita e tieni la destra</string>
+    <string name="trip_recording_duration_widget_desc">Mostra il tempo della registrazione della traccia, la durata in minuti/ore della traccia in corso di registrazione.</string>
+    <string name="no_altitude_data_desc">Puoi ancorare la tua traccia alle strade per ottenere il dato %1$s o calcolarlo online.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostra percorsi MTB IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra percorsi specificamente progettati per il mountainbiking</string>
+    <string name="routing_attr_goods_restrictions_name">Distribuzione beni</string>
+    <string name="without_profiles_changing">Senza modifiche del profilo</string>
+    <string name="av_notes_video_widget_desc">Il tap sul wigdet permette di iniziare la registrazione di un video.</string>
+    <string name="first_marker_widget_desc">Puoi configurare il widget per visualizzare la distanza o il tempo stimato dell\'arrivo al primo marcatore della mappa.</string>
+    <string name="attach_roads_warning">Puoi ancorare alle strade solo una traccia registrata</string>
+    <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla svolta successiva alla prossima che è abilitata se la svolta è a una distanza inferiore a quella di approccio.</string>
+    <string name="next_turn_widget_desc">Il widget mostra le informazioni sulla prossima svolta con una immagine e la distanza che manca.</string>
+    <string name="attach_to_roads_banner_desc">Blocca la traccia sulle strade per avere indicazioni di navigazione dettagliate.</string>
+    <string name="attach_roads_descr">Vuoi approssimare la tua traccia a un valido percorso ancorato alle mappe offline\? In questo caso otterrai la correzione dell\'altitudine, informazioni sulle strade e svolte che potranno essere utilizzati in seguito nella navigazione.</string>
+    <string name="second_marker_widget_desc">Puoi configurare il widget per visualizzare la distanza o il tempo stimato dell\'arrivo al secondo marcatore della mappa.</string>
+    <string name="time_to_intermediate_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" al primo punto intermedio. Il tempo è costantemente aggiornato durante la navigazione, quando il punto intermedio viene raggiunto, il tempo verrà aggiornato al successivo punto intermedio.</string>
+    <string name="distance_to_intermediate_widget_desc">Il widget mostra la distanza al primo punto intermedio. Quando il punto intermedio viene raggiunto, la distanza verrà aggiornata al successivo punto intermedio.</string>
+    <string name="switch_widget_mode_desc">Puoi cambiare la modalità tappando sul widget.</string>
+    <string name="side_marker_eta">Tempo stimato di arrivo</string>
+    <string name="reset_all_settings_desc">Sei sicuro di volere reimpostare tutte le impostazioni a quelle di fabbrica\?</string>
+    <string name="goods_delivery_desc_4">Se il peso del tuo veicolo è superiore alle 3.5 tonnellate devi utilizzare il profilo Camion.</string>
+    <string name="duplacate_widget_added_snackbar">Un widget duplicato è aggiunto successivamente nella lista.</string>
+    <string name="av_notes_photo_widget_desc">Il tap sul wigdet permette di scattare una foto.</string>
+    <string name="auto_backup_preference_desc">Per preimpostazione Android registra i backup dei favoriti, i token delle mappe e le impostazioni di OsmAnd per ripristinarli successivamente nei nuovi dispositivi dopo la reinstallazione. Questo backup è limitato a 25 MB.
+\nSe stai utilizzando OsmAnd Cloud, dopo la reinstallazione questo può portare a fraintendimenti.</string>
+    <string name="av_notes_audio_widget_desc">Il tap sul wigdet permette di registrare una nota audio.</string>
+    <string name="goods_delivery_desc_3">Si applica solo a veicoli che trasportano merci che hanno al massimo quattro ruote e pesano meno di 3.5 tonnellate.</string>
+    <string name="goods_delivery_desc_2">Le strade chiuse per il trasporto di merci saranno evitate.</string>
+    <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
+    <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
 </resources>

@@ -4770,4 +4770,5 @@
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
     <string name="attach_roads_descr">Szeretné egy offline térképekhez csatolt, érvényes útvonallal megközelíteni a nyomvonalát\? Ebben az esetben korrigált útmagasság, útinformációk és kanyarodási információk fognak rendelkezésére állni, amelyeket később a navigáció során használhat fel.</string>
+    <string name="attach_to_roads_banner_desc">Kapcsolja a nyomvonalát az utakhoz, hogy részletes navigációs utasításokat kaphasson.</string>
 </resources>

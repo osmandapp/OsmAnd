@@ -736,7 +736,7 @@
     <string name="poi_error_info_not_loaded">Informatziones relatas a su nodu non carrigadas</string>
     <string name="poi_error_io_error_template">Errore de I/O durante s’esecutzione de s’atzione {0}.</string>
     <string name="poi_action_succeded_template">Atzione {0} acabbada.</string>
-    <string name="first_time_msg">Gratzias pro s’impreu de OsmAnd. Iscàrriga sos datos regionales pro s\'impreu chene lìnia dae \'Impostatziones\'→\'Amministra sos documentos de sas mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>
+    <string name="first_time_msg">Gratzias pro s’impreu de OsmAnd. Iscàrriga sos datos regionales pro s\'impreu chene lìnia dae \'Menù\'→\'Iscàrriga mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>
     <string name="basemap_was_selected_to_download">Sa mapa de base netzessària pro su funtzionamentu est in sa lista de iscarrigamentu.</string>
     <string name="osmand_development_plugin_description">Impostatziones pro funtzionalidades pro s\'isvilupu e sa puificatzione (debug), che a sa simulatzione de sa navigatzione, sas prestatziones de sa renderizatzione, o s\'interfache vocale. Custas impostatziones sunt pensadas pro sos isvilupadores e non sunt netzessàrias pro s\'impreu normale.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
@@ -751,7 +751,7 @@
     <string name="osm_editing_plugin_description">Permitit de cuntribuire ad OSM creende e modifichende sos PDI de OSM, aberinde e cummentende notas de OSM e imbiende documentos GPX registrados in OsmAnd frunende su nùmene de impreadore e sa crae de intrada tuos. OpenStreetMap.org est unu progetu de domìniu pùblicu de mapadura fatu dae una comunidade globale.</string>
     <string name="play_commands_of_currently_selected_voice">Ischerta una boghe e proa·la riproduinde annùntzios:</string>
     <string name="test_voice_prompts">Proa sos cumandos vocales</string>
-    <string name="switch_to_raster_map_to_see">Iscàrriga una mapa vetoriale pro custa positzione in \'Impostatziones\' (\'Amministra sos documentos de sas mapas\'), o cola a s\'estensione \'Mapas in lìnia\'.</string>
+    <string name="switch_to_raster_map_to_see">Iscàrriga una mapa vetoriale pro custa positzione in \'Menù\' (\'Iscàrriga mapas\'), o cola a s\'estensione \'Mapas in lìnia\'.</string>
     <string name="support_new_features_descr">Faghe una donatzione pro tènnere funtzionalidades noas implementadas in s’aplicatzione.</string>
     <string name="accessibility_default">Basada in supra de sas impostatziones de sistema de Android</string>
     <string name="zoomOut">Ismanniamentu in segus</string>
@@ -2672,8 +2672,8 @@
     <string name="shared_string_contents">Cuntenutu</string>
     <string name="use_two_digits_longitude">Imprea una longitùdine a duas tzìfras</string>
     <string name="index_item_world_wikivoyage">Artìculos mundiales de Wikivoyage</string>
-    <string name="monthly_map_updates">Agiornamentos de sas mapas: cada mese</string>
-    <string name="daily_map_updates">Agiornamentos de sas mapas: cada ora</string>
+    <string name="monthly_map_updates">Agiornamentos mensiles de sas mapas</string>
+    <string name="daily_map_updates">Agiornamentos ora in ora de sas mapas</string>
     <string name="in_app_purchase">Còmporas in intro de s\'aplicatzione</string>
     <string name="in_app_purchase_desc">Pagamentu ùnicu</string>
     <string name="in_app_purchase_desc_ex">A pustis de sa còmpora at a èssere disponìbile pro semper.</string>
@@ -4762,4 +4762,18 @@
     <string name="route_maneuvers">Manovras de s\'àndala</string>
     <string name="lang_ckb">Curdu tzentrale</string>
     <string name="co2_mission">Emissione de CO2</string>
+    <string name="routing_attr_goods_restrictions_description">Piga in cunsideru sos permissos de atzessu pro sos veìculos lèbios de trasportu de mercantzias</string>
+    <string name="map_marker_average_speed_desc">Ispetzìfica s\'intervallu de tempus pro carculare sa lestresa mèdia a manera de pòdere carculare s\'ora de arrivu.</string>
+    <string name="attach_to_roads_banner_desc">Alliga sa rasta tua a sos caminos pro otènnere indicatziones de navigatzione a sa minuda.</string>
+    <string name="release_4_2">• Disinnu nou de sos widgets: aspetu nou, agrupamentu pro pàginas, càmbiu de òrdine e cumbinatzione lìbera.
+\n
+\n • Escursionismu / Tziclismu / Àndalas de biàgiu: toca in su sìmbulu de s\'àndala e retzi totu sas informatziones subra de s\'àndala.
+\n
+\n • Grupos de preferidos: imposta s\'aspetu predefinidu pro sos puntos noos in su grupu
+\n
+\n • Acontzos: agiornamentu automàticu de sas mapas de tasseddos in lìnia
+\n
+\n</string>
+    <string name="lang_sat">Santali</string>
+    <string name="radius_rules_widget_desc">Su traste de sa righighedda radiale agiudat a determinare su raju a fùrriu a unu puntu seletzionadu in sa mapa ammustrende chircos de distàntzia in sa mapa.</string>
 </resources>
