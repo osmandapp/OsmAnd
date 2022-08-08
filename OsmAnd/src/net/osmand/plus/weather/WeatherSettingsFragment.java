@@ -13,6 +13,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -20,18 +21,27 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.weather.WeatherInfoType.CLOUDS;
+import static net.osmand.plus.weather.WeatherInfoType.PRECIPITATION;
+import static net.osmand.plus.weather.WeatherInfoType.PRESSURE;
+import static net.osmand.plus.weather.WeatherInfoType.TEMPERATURE;
+import static net.osmand.plus.weather.WeatherInfoType.WIND;
+
 public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		for (WeatherInfoType layer : WeatherInfoType.values()) {
-			setupUnitsPref(layer);
-		}
+		WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		setupUnitsPref(TEMPERATURE, plugin.WX_UNIT_TEMPERATURE.getId());
+		setupUnitsPref(PRESSURE, plugin.WX_UNIT_PRESSURE.getId());
+		setupUnitsPref(WIND, plugin.WX_UNIT_WIND.getId());
+		setupUnitsPref(CLOUDS, plugin.WX_UNIT_CLOUDS.getId());
+		setupUnitsPref(PRECIPITATION, plugin.WX_UNIT_PRECIPITATION.getId());
 		setupOfflineForecastPref();
 		setupOnlineCachePref();
 	}
 
-	private void setupUnitsPref(@NonNull WeatherInfoType layer) {
+	private void setupUnitsPref(@NonNull WeatherInfoType layer, @NonNull String prefId) {
 		Enum<?>[] values = layer.getUnits();
 
 		String[] entries = new String[values.length];
@@ -41,7 +51,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 			entryValues[i] = values[i].ordinal();
 		}
 
-		ListPreferenceEx preference = findPreference(layer.getUnitsPrefId());
+		ListPreferenceEx preference = findPreference(prefId);
 		preference.setEntries(entries);
 		preference.setEntryValues(entryValues);
 		preference.setIcon(getActiveIcon(layer.getIconId()));
@@ -81,7 +91,8 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public void onDisplayPreferenceDialog(@NonNull Preference preference) {
-		if (Algorithms.equalsToAny(preference.getKey(), WeatherPlugin.getUnitsPreferencesIds())) {
+		WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		if (Algorithms.equalsToAny(preference.getKey(), plugin.getUnitsPreferencesIds())) {
 			showChooseUnitDialog((ListPreferenceEx) preference);
 		} else {
 			super.onDisplayPreferenceDialog(preference);

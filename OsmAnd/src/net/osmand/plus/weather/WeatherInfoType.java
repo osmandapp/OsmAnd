@@ -48,24 +48,6 @@ public enum WeatherInfoType {
 	}
 
 	@Nullable
-	public String getUnitsPrefId() {
-		switch (this) {
-			case TEMPERATURE:
-				return "map_settings_weather_temp";
-			case PRESSURE:
-				return "map_settings_weather_pressure";
-			case WIND:
-				return "map_settings_weather_wind";
-			case CLOUDS:
-				return "map_settings_weather_cloud";
-			case PRECIPITATION:
-				return "map_settings_weather_precip";
-			default:
-				return null;
-		}
-	}
-
-	@Nullable
 	public Enum<?>[] getUnits() {
 		switch (this) {
 			case TEMPERATURE:

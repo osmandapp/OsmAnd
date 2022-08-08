@@ -112,7 +112,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.weather_contours),
 				R.drawable.ic_plugin_srtm,
 				getString(R.string.shared_string_contours),
-				weatherPlugin.getEnabledContoursSummary(app),
+				weatherPlugin.getSelectedContoursType(appMode).toHumanString(app),
 				weatherPlugin.isContoursEnabled(appMode),
 				false,
 				v -> {
