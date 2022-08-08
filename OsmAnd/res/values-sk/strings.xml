@@ -4772,4 +4772,5 @@
     <string name="download_tiles">Stiahnuť dlaždice</string>
     <string name="attach_roads_descr">Chcete aproximovať vašu stopu s platnou stopou prichytenou k offline mapám\? V tom prípade získate opravenú nadmorskú výšku cesty, informácie o ceste a zabočenia, ktoré by mohli byť neskôr použité pre navigáciu.</string>
     <string name="connect_with_straight_line">Spojiť priamou čiarou</string>
+    <string name="attach_to_roads_banner_desc">Pripnite vaše stopy k cestám, aby ste získali podrobné navigačné inštrukcie.</string>
 </resources>

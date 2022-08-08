@@ -1865,7 +1865,7 @@
     <string name="poi_shelter_type_public_transport">Transporte público</string>
     <string name="poi_shelter_type_picnic_shelter">Piquenique</string>
     <string name="poi_shelter_type_weather_shelter">Abrigo de intempéries</string>
-    <string name="poi_shelter_type_lean_to">Galpão</string>
+    <string name="poi_shelter_type_lean_to">Galpão / telheiro / alpendre</string>
     <string name="poi_shelter_type_basic_hut">Cabana básica</string>
     <string name="poi_shelter_type_building">Edifício</string>
     <string name="poi_shelter_type_wildlife_hide">Esconderijo para observar vida silvestre</string>
@@ -2047,7 +2047,7 @@
     <string name="poi_elevator_yes">Com elevador</string>
     <string name="poi_elevator_no">Sem elevador</string>
     <string name="poi_technical_monument">Monumento técnico industrial</string>
-    <string name="poi_office_camping">Escritório do parque de campismo</string>
+    <string name="poi_office_camping">Receção do parque de campismo</string>
     <string name="poi_model_aerodrome">Aeródromo de modelos</string>
     <string name="poi_guide">Guia turístico</string>
     <string name="poi_quango">Organização Governamental quase Autónoma</string>

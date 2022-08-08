@@ -4769,4 +4769,5 @@
     <string name="download_tiles">Prenesi ploščice</string>
     <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se upošteva in vpliva na povprečno hitrost.</string>
     <string name="attach_roads_descr">Ali želiš približati svojo sled z veljavno potjo prilepljeno na zemljevid brez povezave\? V tem primeru boš imel popravljeno nadmorsko višino, informacije o cestah in ovinkih, ki jih lahko pozneje uporabiš pri navigaciji.</string>
+    <string name="attach_to_roads_banner_desc">Za pridobitev podrobnih navodil za navigacijo, pripni svojo sled na ceste.</string>
 </resources>
