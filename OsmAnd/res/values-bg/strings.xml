@@ -1361,7 +1361,7 @@
     <string name="dash_download_manage">Управление</string>
     <string name="map_locale">Език на картата</string>
     <string name="download_tab_downloads">Всички</string>
-    <string name="download_tab_local">Местни</string>
+    <string name="download_tab_local">Изтеглени</string>
     <string name="no_internet_connection">Грешка при изтегляне. Проверете връзката с интернет.</string>
     <string name="everything_up_to_date">Всички файлове са актуални</string>
     <string name="use_opengl_render">OpenGL изчертаване</string>
