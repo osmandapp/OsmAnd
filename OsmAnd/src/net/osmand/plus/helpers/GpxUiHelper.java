@@ -201,8 +201,8 @@ public class GpxUiHelper {
 		}
 
 		// 2. Time span
-		if (analysis.timeSpan > 0 && analysis.timeSpan / 1000 != analysis.timeMoving / 1000) {
-			String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
+		if (analysis.timeSpan > 0 && analysis.timeSpan != analysis.timeMoving) {
+			String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timespan,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}
@@ -210,11 +210,11 @@ public class GpxUiHelper {
 		// 3. Time moving, if any
 		if (analysis.isTimeMoving()) {
 				//Next few lines for Issue 3222 heuristic testing only
-				//final String formatDuration0 = Algorithms.formatDuration((int) (analysis.timeMoving0 / 1000), app.accessibilityEnabled());
+				//final String formatDuration0 = Algorithms.formatDuration((int) (analysis.timeMoving0 / 1000.0f + 0.5), app.accessibilityEnabled());
 				//description.append(nl).append(app.getString(R.string.gpx_timemoving,
 				//		getColorValue(timeSpanClr, formatDuration0, html)));
 				//description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving0, app), html) + ")");
-			String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
+			String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000.0f + 0.5), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timemoving,
 					getColorValue(timeSpanClr, formatDuration, html)));
 			description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), html) + ")");
@@ -793,7 +793,7 @@ public class GpxUiHelper {
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled()) + "");
 			} else {
 				time.setText("");
 			}
@@ -1223,7 +1223,7 @@ public class GpxUiHelper {
 			if (!Algorithms.isEmpty(formatX)) {
 				return MessageFormat.format(formatX + mainUnitX, value);
 			} else {
-				return OsmAndFormatter.formatInteger((int) value, mainUnitX, ctx);
+				return OsmAndFormatter.formatInteger((int) (value +0.5), mainUnitX, ctx);
 			}
 		});
 
@@ -1233,7 +1233,7 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		boolean useHours = timeSpan / HOUR_IN_MILLIS > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) value, useHours));
+		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) (value + 0.5), useHours));
 		return 1f;
 	}
 
@@ -1438,7 +1438,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx));
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx));
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
@@ -1590,7 +1590,7 @@ public class GpxUiHelper {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
 			} else {
-				return OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx);
+				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx);
 			}
 		});
 
@@ -1680,7 +1680,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx));
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx));
 
 		List<Entry> values;
 		if (eleValues == null) {
