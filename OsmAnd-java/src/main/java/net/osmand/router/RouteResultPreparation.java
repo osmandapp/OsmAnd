@@ -351,8 +351,8 @@ public class RouteResultPreparation {
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setDistance((float) distance);
 			rr.setSegmentTime((float) distOnRoadToPass);
-			if (usePedestrianHeight && (distOnRoadToPass != 0)) {
-				rr.setSegmentSpeed((float) (distance / distOnRoadToPass));
+			if (distOnRoadToPass != 0) {
+				rr.setSegmentSpeed((float) (distance / distOnRoadToPass));  //effective segment speed incl. obstacle and height effects
 			} else {
 				rr.setSegmentSpeed((float) speed);
 			}
