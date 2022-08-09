@@ -1807,7 +1807,7 @@
     <string name="road_blocked">Дорога заблокована</string>
     <string name="shared_string_select">Обрати</string>
     <string name="switch_start_finish">Поміняти місцями пункт відправлення і пункт призначення</string>
-    <string name="rendering_attr_hideIcons_name">Значки точок інтересу</string>
+    <string name="rendering_attr_hideIcons_name">Піктограми точок інтересу</string>
     <string name="item_removed">Елемент вилучено</string>
     <string name="n_items_removed">Елементи вилучено</string>
     <string name="shared_string_undo_all">Повернути все</string>
@@ -2949,7 +2949,7 @@
     <string name="base_profile_descr_ski">Лижі</string>
     <string name="show_compass_ruler">Показати компас-лінійку</string>
     <string name="hide_compass_ruler">Сховати компас-лінійку</string>
-    <string name="select_icon_profile_dialog_title">Оберіть значок</string>
+    <string name="select_icon_profile_dialog_title">Оберіть піктограму</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
     <string name="routing_profile_ski">Лижі</string>
@@ -2969,7 +2969,7 @@
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпуровий</string>
-    <string name="shared_string_icon">Значок</string>
+    <string name="shared_string_icon">Піктограма</string>
     <string name="collected_data">Дані зібрано</string>
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
@@ -2981,21 +2981,21 @@
     <string name="shared_string_crash">Збій</string>
     <string name="last_launch_crashed">Під час останнього запуску OsmAnd сталася помилка. Допоможіть нам покращити OsmAnd - надішліть повідомлення про помилку.</string>
     <string name="app_mode_ufo">НЛО</string>
-    <string name="release_3_4">• Профілі застосунку: створюйте власний профіль з довільним значком та кольором для ваших особистих потреб
+    <string name="release_3_4">• Профілі застосунку: створюйте власний профіль з довільною піктограмою та кольором для ваших особистих потреб
 \n
 \n• Налаштуйте типові обмеження мінімальної/максимальної швидкості у профілі
 \n
 \n• Додано віджет з поточними координатами
 \n
-\n• Додано можливість показувати на мапі компас і радіус-лінійку
+\n• Додано можливість показувати на мапі компас і радіусну лінійку
 \n
-\n• Виправлено записування шляху у фоновому режимі
+\n• Виправлено запис треку у фоновому режимі
 \n
-\n• Покращено завантаження мап у фоновому режимі
+\n• Поліпшено завантаження мап у фоновому режимі
 \n
-\n• Повернено параметр \'Увімкнути екран\'
+\n• Повернено параметр «Увімкнути екран»
 \n
-\n• Виправлено вибір мови Wikipedia
+\n• Виправлено вибір мови Вікіпедії
 \n
 \n• Виправлено поведінку кнопки компаса під час навігації
 \n
@@ -3283,15 +3283,15 @@
     <string name="shared_string_downloading_formatted">Завантаження %s</string>
     <string name="rendering_value_thick_name">Товсто</string>
     <string name="desert_render_descr">Для пустель та інших малонаселених ділянок. Докладніше.</string>
-    <string name="select_navigation_icon">Значок положення під час руху</string>
-    <string name="select_map_icon">Позиція значка в стані спокою</string>
+    <string name="select_navigation_icon">Піктограма положення під час руху</string>
+    <string name="select_map_icon">Позиція піктограми в стані спокою</string>
     <string name="delete_profiles_descr">Натискання на \"Застосувати\" вилучить профілі назавжди.</string>
     <string name="master_profile">Основний профіль</string>
     <string name="select_color">Виберіть колір</string>
     <string name="edit_profiles_descr">Типові профілі OsmAnd не вилучено, проте вимкнуто (на попередньому екрані) чи перенесено вниз.</string>
     <string name="edit_profiles">Редагувати профілі</string>
     <string name="profile_appearance">Зовнішній вигляд профілю</string>
-    <string name="choose_icon_color_name">Значок, колір та назва</string>
+    <string name="choose_icon_color_name">Піктограма, колір і назва</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
     <string name="selected_profile">Вибраний профіль</string>
     <string name="reset_confirmation_descr">Торкання %1$s відхилить всі зміни.</string>
@@ -3308,7 +3308,7 @@
     <string name="monitoring_prefs_descr">Навігація, точність запису</string>
     <string name="multimedia_notes_prefs_descr">Розмір зображення, якість звуку та відео</string>
     <string name="osm_editing_prefs_descr">Логін, пароль, редагування в офлайн режимі</string>
-    <string name="accessibility_prefs_descr">Оберіть значок, колір та назву</string>
+    <string name="accessibility_prefs_descr">Оберіть піктограму, колір і назву</string>
     <string name="live_monitoring_descr">Дозволяє поширювати дані про вашу поточну локацію використовуючи функції запису треків.</string>
     <string name="live_monitoring">Онлайн моніторинг</string>
     <string name="save_track_logging_accuracy">Точність запису</string>
@@ -3323,8 +3323,8 @@
     <string name="osm_editing">Редагування OSM</string>
     <string name="osm_edits_view_descr">Перегляньте всі свої ще не надіслані зміни чи OSM-помилки у %1$s. Вже надіслані зміни більше не показуватимуться.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">Значок показується під час навігації чи руху.</string>
-    <string name="select_map_icon_descr">Значок показано в стані спокою.</string>
+    <string name="select_nav_icon_descr">Піктограма показується під час навігації чи руху.</string>
+    <string name="select_map_icon_descr">Піктограма, показувана у стані спокою.</string>
     <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал роботи застосунку</string>
     <string name="search_offline_geo_error">Не вдалося обробити гео: \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
@@ -3370,7 +3370,7 @@
 \n
 \nЯкщо увімкнено, OsmAnd використовуватиме налаштування часу очікування системи.</string>
     <string name="clear_recorded_data">Очистити записані дані</string>
-    <string name="release_3_6">• Профілі: тепер ви можете змінити порядок, встановити значок для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
+    <string name="release_3_6">• Профілі: тепер ви можете змінити порядок, установити піктограму для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
 \n
 \n • Додано нумерацію з\'їздів для навігації
 \n
@@ -3386,7 +3386,7 @@
 \n
 \n • Додано дані про захід та схід сонця для налаштування мапи
 \n
-\n • Додано значки точок Дім/Робота на мапі
+\n • Додано піктограми точок Дім/Робота на мапі
 \n
 \n • Додана підтримка багаторядкового опису в Налаштуваннях
 \n
@@ -3561,9 +3561,9 @@
     <string name="navigation_profiles_item">Профілі навігації</string>
     <string name="release_3_7">• Нові офлайн мапи схилів
 \n
-\n• Налаштування Закладок та маршрутних точок GPX- спеціальні кольори, значки, форми
+\n• Налаштування Закладок та маршрутних точок GPX- спеціальні кольори, піктограми, форми
 \n
-\n• Налаштування порядку елементів меню \"Контекстне меню\", \"Налаштувати мапу\" та \"Бічна панель\"
+\n• Налаштування порядку елементів меню «Контекстне меню», «Налаштувати мапу» та «Бічна панель»
 \n
 \n• Вікіпедія, як окремий шар. У налаштуваннях мапи вибір лише потрібних мов
 \n
@@ -3689,7 +3689,7 @@
     <string name="route_between_points">Маршрут між точками</string>
     <string name="plan_a_route">Планування маршруту</string>
     <string name="add_to_a_track">Додати до треку</string>
-    <string name="track_show_start_finish_icons">Показати значки старту та фінішу</string>
+    <string name="track_show_start_finish_icons">Показати піктограми старту та фінішу</string>
     <string name="select_track_width">Задати ширину</string>
     <string name="gpx_split_interval_descr">Виберіть інтервал, з яким будуть показуватись позначки відстані або часу на треку.</string>
     <string name="gpx_split_interval_none_descr">Виберіть потрібний варіант поділу: за часом або за відстанню.</string>
@@ -3767,7 +3767,7 @@
     <string name="shared_string_redo">Повторити</string>
     <string name="release_3_8">• Оновлено функції планування маршруту: дозволено застосувати різні типи переходів для кожного відрізку та привʼязати будь-який трек до доріг
 \n
-\n• Нове меню вигляду треків: вибір кольору, товщина, вигляд стрілки напрямку, значки старту та фінішу
+\n• Нове меню вигляду треків: вибір кольору, товщина, вигляд стрілки напрямку, піктограми старту та фінішу
 \n
 \n• Удосконалено видимість велосипедних точок
 \n
@@ -3783,7 +3783,7 @@
     <string name="sort_last_modified">Востаннє змінено</string>
     <string name="sort_name_descending">За назвою: Я — А</string>
     <string name="sort_name_ascending">За назвою: А — Я</string>
-    <string name="start_finish_icons">Значки старту та фінішу</string>
+    <string name="start_finish_icons">Піктограми старту та фінішу</string>
     <string name="contour_lines_thanks">Дякуємо за придбання «Ізоліній»</string>
     <string name="what_is_new">Що нового</string>
     <string name="osm_live_payment_desc_hw">Передплата стягується раз на вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
@@ -4349,7 +4349,7 @@
 \n
 \n• Віджет висоти (Pro)
 \n
-\n• Закладки: додана можливість перегляду нещодавно використаних значків
+\n• Закладки: додана можливість перегляду нещодавно використаних піктограм
 \n
 \n• Планування маршруту: вибраний профіль буде використаний після запуску
 \n
@@ -4492,8 +4492,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Показувати теґи fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мапі малого масштабу</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд значків на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на мапі малого масштабу</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
@@ -4523,7 +4523,7 @@
 \nЯкщо дані про місцеположення не точні або ви користуєтеся пристроєм без %2$s, спробуйте перемикнутися на «%3$s»</string>
     <string name="location_source">Джерело даних про місцеположення</string>
     <string name="shared_string_shape">Форма</string>
-    <string name="default_appearance_desc">Типовий колір, значок та форма застосовуватимуться до доданих улюблених точок у групі.</string>
+    <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих улюблених точок у групі.</string>
     <string name="default_appearance">Типовий зовнішній вигляд</string>
     <string name="edit_category">Редагувати категорію</string>
     <string name="zoom_levels_difference_description">Значна різниця між масштабами може призвести до збільшення обсягу завантажених даних.</string>
