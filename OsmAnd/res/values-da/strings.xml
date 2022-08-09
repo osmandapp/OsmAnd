@@ -417,7 +417,7 @@
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
     <string name="shared_string_undefined">Udefineret</string>
-    <string name="search_position_map_view">Nuværende kortcenter</string>
+    <string name="search_position_map_view">Nuværende kortcentrum</string>
     <string name="select_search_position">Udgangspunkt:</string>
     <string name="context_menu_item_search">Søg i nærheden</string>
     <string name="route_successfully_saved_at">Rute gemt som \'%1$s\'.</string>
@@ -4784,4 +4784,6 @@
     <string name="without_profiles_changing">Uden at profiler ændres</string>
     <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
     <string name="attach_to_roads_banner_desc">Fastgør dit spor til vejene for at få detaljerede navigationsinstruktioner.</string>
+    <string name="included_in_your_current_plan">Inkluderet i dit nuværende \"%1$s\" abonnement</string>
+    <string name="available_as_part_of_subscription_plan">Tilgængelig som en del af abonnementet %1$s.</string>
 </resources>
