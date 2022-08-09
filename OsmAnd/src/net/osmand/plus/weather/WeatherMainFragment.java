@@ -108,12 +108,14 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupWeatherContours() {
+		boolean isContoursEnabled = weatherPlugin.isContoursEnabled(appMode);
+		WeatherInfoType selectedType = weatherPlugin.getSelectedContoursType(appMode);
 		setupOnOffButton(
 				view.findViewById(R.id.weather_contours),
 				R.drawable.ic_plugin_srtm,
 				getString(R.string.shared_string_contours),
-				weatherPlugin.getSelectedContoursType(appMode).toHumanString(app),
-				weatherPlugin.isContoursEnabled(appMode),
+				isContoursEnabled ? selectedType.toHumanString(app) : null,
+				isContoursEnabled,
 				false,
 				v -> {
 					DashboardOnMap dashboard = mapActivity.getDashboard();
