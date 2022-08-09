@@ -1706,7 +1706,7 @@
     <string name="successfully_uploaded_pattern">Надіслано {0}/{1}</string>
     <string name="try_again">Спробуйте ще раз</string>
     <string name="error_message_pattern">Помилка: {0}</string>
-    <string name="dahboard_options_dialog_title">Налатування панелі керування</string>
+    <string name="dahboard_options_dialog_title">Налаштування панелі керування</string>
     <string name="shared_string_card_was_hidden">Картку було приховано</string>
     <string name="shared_string_undo">Скасувати</string>
     <string name="shared_string_skip">Пропустити</string>
@@ -4779,5 +4779,5 @@
     <string name="shared_string_only_missing">Лише відсутні</string>
     <string name="attach_to_roads_banner_desc">Прикріпіть свій трек до доріг, щоб отримати докладні інструкції з навігації.</string>
     <string name="included_in_your_current_plan">Включено до поточного плану \"%1$s\"</string>
-    <string name="available_as_part_of_subscription_plan">Доступно в рамках підписки %1$s.</string>
+    <string name="available_as_part_of_subscription_plan">Доступно в рамках передплати %1$s.</string>
 </resources>
