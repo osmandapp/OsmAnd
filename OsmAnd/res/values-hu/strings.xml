@@ -4771,4 +4771,6 @@
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
     <string name="attach_roads_descr">Szeretné egy offline térképekhez csatolt, érvényes útvonallal megközelíteni a nyomvonalát\? Ebben az esetben korrigált útmagasság, útinformációk és kanyarodási információk fognak rendelkezésére állni, amelyeket később a navigáció során használhat fel.</string>
     <string name="attach_to_roads_banner_desc">Kapcsolja a nyomvonalát az utakhoz, hogy részletes navigációs utasításokat kaphasson.</string>
+    <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
+    <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
 </resources>
