@@ -1056,8 +1056,8 @@
     <string name="download_tab_local">على الهاتف</string>
     <string name="no_internet_connection">تعذر التنزيل ، يرجى التحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
-    <string name="use_opengl_render">استخدام OpenGL للتقديم</string>
-    <string name="use_opengl_render_descr">استخدام أداء أوبن جي مسرع (قد لا تعمل على بعض الأجهزة).</string>
+    <string name="use_opengl_render">استخدام عرض الرسومات المفتوحة</string>
+    <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة (قد لا تعمل على بعض الأجهزة).</string>
     <string name="map_update">يوجد تحديثات ل %1$s من الخرائط</string>
     <string name="search_for">البحث عن</string>
     <string name="coordinates">إحداثيات</string>
@@ -4188,7 +4188,7 @@
     <string name="failed_loading_predefined_engines">فشل تحميل قائمة القوالب المحددة مسبقًا.
 \nالرجاء التحقق من اتصال الانترنت الخاص بك.</string>
     <string name="shared_string_predefined">محدد مسبقا</string>
-    <string name="backup_complete">اكتمل النسخ الاحتياطي</string>
+    <string name="backup_complete">النسخ الاحتياطي اكتمل</string>
     <string name="backup_now">النسخ الاحتياطي الآن</string>
     <string name="make_backup">إجراء نسخة احتياطية</string>
     <string name="make_backup_descr">هناك العديد من التغييرات على هذا الجهاز، يرجى إجراء نسخة احتياطية من هذه البيانات حتى لا تفقدها.</string>
@@ -4846,4 +4846,7 @@
     <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط</string>
     <string name="download_tiles">تنزيل الطبقات</string>
     <string name="average_speed_skip_stops_desc">سيتم حساب السرعة الأقل من %1$s وتؤثر على متوسط السرعة.</string>
+    <string name="attach_to_roads_banner_desc">قم بإرفاق مسارك بالطرق ، للحصول على تعليمات ملاحة مفصلة.</string>
+    <string name="available_as_part_of_subscription_plan">متوفر كجزء من اشتراك %1$s.</string>
+    <string name="included_in_your_current_plan">مضمنة في خطتك الحالية \"%1$s\"</string>
 </resources>
