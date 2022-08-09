@@ -135,7 +135,7 @@
     <string name="gpx_monitoring_disabled_warn">Записувати треки використовуючи GPX віджет або вибравши «Запис треку» в Налаштуваннях.</string>
     <string name="show_current_gpx_title">Показувати пройдений шлях</string>
     <string name="free_version_message">%1$s мап для завантаження або оновлення.</string>
-    <string name="free_version_title">Безкоштовна версія</string>
+    <string name="free_version_title">Безплатна версія</string>
     <string name="poi_context_menu_showdescription">Показати подробиці точки інтересу.</string>
     <string name="index_name_north_america">Північна Америка</string>
     <string name="index_name_us">Північна Америка - США</string>
@@ -1738,8 +1738,8 @@
     <string name="value_downloaded_of_max">%1$.1f з %2$.1f МБ</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Оновити все (%1$s МБ)</string>
-    <string name="free_downloads_used">Використано безкоштовних завантажень</string>
-    <string name="free_downloads_used_description">Показує кількість безкоштовних завантажень, що лишилися.</string>
+    <string name="free_downloads_used">Використано безплатних завантажень</string>
+    <string name="free_downloads_used_description">Показує кількість безплатних завантажень, що лишилися.</string>
     <string name="application_dir_description">Виберіть, де Ви будете зберігати мапи та файли даних.</string>
     <string name="enter_country_name">Введіть назву країни</string>
     <string name="new_version">Нова версія</string>
@@ -1775,7 +1775,7 @@
     <string name="number_of_rows_in_dash">Кількість рядків на панелі %1$s</string>
     <string name="recent_places">Нещодавні місця</string>
     <string name="downloading_number_of_files">Завантаження файлу %1$d…</string>
-    <string name="show_free_version_banner">Показати банер безкоштовної версії</string>
+    <string name="show_free_version_banner">Показати банер безплатної версії</string>
     <string name="use_dashboard_btn">Використовувати панель керування</string>
     <string name="use_drawer_btn">Використовувати меню</string>
     <string name="share_osm_edits_subject">OSM правки, надіслані з OsmAnd</string>
@@ -1854,7 +1854,7 @@
     <string name="map_marker">Позначка мапи</string>
     <string name="consider_turning_polygons_off">Рекомендується вимкнути показ полігонів.</string>
     <string name="av_locations_descr">GPX-файл з координатами.</string>
-    <string name="show_free_version_banner_description">Навіть, якщо Ви придбали платну версію, Ви все ще можете бачити банер для безкоштовної версії.</string>
+    <string name="show_free_version_banner_description">Навіть, якщо Ви придбали платну версію, Ви все ще можете бачити банер для безплатної версії.</string>
     <string name="dashboard_or_drawer_description">На вибір пропонується керувати застосунком головним чином за допомогою гнучкої панелі керування або статичного меню. Ваш вибір завжди може бути змінений в налаштуваннях панелі керування.</string>
     <string name="map_marker_1st">Перша позначка мапи</string>
     <string name="map_marker_2nd">Друга позначка мапи</string>
@@ -2343,7 +2343,7 @@
 \n• Відомості високої якості від найкращих спільних проєктів світу
 \n• Дані OSM доступні за країною чи регіоном
 \n• Точки інтересу (POI), цікаві місця з Вікіпедії, чудово підходять для огляду визначних місць
-\n• Необмежена кількість безкоштовних звантажень, прямо у застосунку
+\n• Необмежена кількість безплатних звантажень, прямо у застосунку
 \n• Компактні автономні векторні мапи оновлюються не рідше одного разу на місяць
 \n
 \n• Вибір між повними даними регіону та лише дорожньою мережею (приклад: уся Японія займає 700 МБ та лише 200 МБ займає її дорожня мережа)</string>
@@ -2643,7 +2643,7 @@
     <string name="coord_input_add_point">Додати точку</string>
     <string name="coord_input_save_as_track">Зберегти як трек</string>
     <string name="quick_action_edit_actions">Редагувати дії</string>
-    <string name="get_osmand_live">Отримайте OsmAnd Live, щоб розблокувати всі функції: щоденні оновлення мап з необмеженими завантаженнями, всі платні та безоплатні плагіни, Вікіпедію, Вікімандри та багато іншого.</string>
+    <string name="get_osmand_live">Отримайте OsmAnd Live, щоб розблокувати всі функції: щоденні оновлення мап з необмеженими завантаженнями, всі платні та безплатні плагіни, Вікіпедію, Вікімандри та багато іншого.</string>
     <string name="shared_string_bookmark">Закладка</string>
     <string name="hide_full_description">Приховати повний опис</string>
     <string name="show_full_description">Показати повний опис</string>
@@ -2969,7 +2969,7 @@
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпуровий</string>
-    <string name="shared_string_icon">Піктограма</string>
+    <string name="shared_string_icon">Значок</string>
     <string name="collected_data">Дані зібрано</string>
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
@@ -3108,7 +3108,7 @@
     <string name="years_2_4">Роки</string>
     <string name="years_5">Років</string>
     <string name="months_3">Три місяці</string>
-    <string name="price_free">Безкоштовно</string>
+    <string name="price_free">Безплатно</string>
     <string name="get_discount_title">Отримайте %1$d %2$s зі знижкою %3$s.</string>
     <string name="get_discount_first_part">%1$s за перший %2$s</string>
     <string name="get_discount_first_few_part">%1$s за перші %2$s</string>
@@ -3370,7 +3370,7 @@
 \n
 \nЯкщо увімкнено, OsmAnd використовуватиме налаштування часу очікування системи.</string>
     <string name="clear_recorded_data">Очистити записані дані</string>
-    <string name="release_3_6">• Профілі: тепер ви можете змінити порядок, установити піктограму для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
+    <string name="release_3_6">• Профілі: тепер ви можете змінити порядок, встановити значок для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
 \n
 \n • Додано нумерацію з\'їздів для навігації
 \n
@@ -3386,7 +3386,7 @@
 \n
 \n • Додано дані про захід та схід сонця для налаштування мапи
 \n
-\n • Додано піктограми точок Дім/Робота на мапі
+\n • Додано значки точок Дім/Робота на мапі
 \n
 \n • Додана підтримка багаторядкового опису в Налаштуваннях
 \n
@@ -4492,8 +4492,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Показувати теґи fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на мапі малого масштабу</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд значків на мапі малого масштабу</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
@@ -4523,7 +4523,7 @@
 \nЯкщо дані про місцеположення не точні або ви користуєтеся пристроєм без %2$s, спробуйте перемикнутися на «%3$s»</string>
     <string name="location_source">Джерело даних про місцеположення</string>
     <string name="shared_string_shape">Форма</string>
-    <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих улюблених точок у групі.</string>
+    <string name="default_appearance_desc">Типовий колір, значок та форма застосовуватимуться до доданих улюблених точок у групі.</string>
     <string name="default_appearance">Типовий зовнішній вигляд</string>
     <string name="edit_category">Редагувати категорію</string>
     <string name="zoom_levels_difference_description">Значна різниця між масштабами може призвести до збільшення обсягу завантажених даних.</string>
@@ -4604,7 +4604,7 @@
 \n
 \n• Вибрані групи: встановлюйте типовий зовнішній вигляд для нових точок у групі
 \n
-\n• Виправлення: автооновлення онлайн-плиток мап
+\n• Виправлення: автооновлення онлайнових плиток мап
 \n
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Середня</string>
