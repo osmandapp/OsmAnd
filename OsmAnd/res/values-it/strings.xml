@@ -3309,7 +3309,7 @@
     <string name="login_and_pass">Nome utente e password</string>
     <string name="plugin_global_prefs_info">Queste impostazioni del plugin sono globali e si applicano a tutti i profili</string>
     <string name="osm_editing">Modifica OSM</string>
-    <string name="osm_edits_view_descr">Visualizza tutte le modifiche non caricate o le note OSM in %1$s. I punti caricati non verranno più visualizzati.</string>
+    <string name="osm_edits_view_descr">Visualizza tutte le modifiche non caricate o le note OSM in %1$s. Le modifiche caricate non verranno più visualizzate.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icona visualizzata durante la navigazione o in movimento.</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
@@ -3831,9 +3831,9 @@
     <string name="login_open_street_map">Connettiti a OpenStreetMap</string>
     <string name="login_open_street_map_org">Connettiti a OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Accedi con OpenStreetMap</string>
-    <string name="open_street_map_login_mode">È necessario effettuare l\'accesso per caricare modifiche nuove o modificate.
+    <string name="open_street_map_login_mode">È necessario effettuare l\'accesso per caricare modifiche nuove o cambiamenti.
 \n
-\nÈ possibile accedere utilizzando il metodo sicuro OAuth o utilizzare l\'accesso e la password.</string>
+\nUsa il metodo sicuro OAuth o le tue credenziali OSM.</string>
     <string name="use_login_password">Usa nomeutente e password</string>
     <string name="login_account">Account</string>
     <string name="user_login">Entra</string>
