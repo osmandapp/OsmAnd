@@ -374,7 +374,7 @@
     <string name="daynight_mode_day">День</string>
     <string name="daynight_mode_night">Ніч</string>
     <string name="daynight_mode_auto">Схід/захід сонця</string>
-    <string name="daynight_mode_sensor">Датник освітленості</string>
+    <string name="daynight_mode_sensor">Датчик освітленості</string>
     <string name="daynight_descr">Налаштуйте перемикання між нічним та денним режимами.</string>
     <string name="daynight">Денний/нічний режим</string>
     <string name="download_files_question">Завантажити {0} файл(ів) ({1} MB)?</string>
@@ -1289,7 +1289,7 @@
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішки</string>
-    <string name="record_plugin_description">Цей втулок додає функцію запису та збереження ваших пересувань. Ви можете робити це вручну з допомогою віджету запису GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX.
+    <string name="record_plugin_description">Цей плагін додає функцію запису та збереження ваших пересувань. Ви можете робити це вручну з допомогою віджету запису GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX.
 \n
 \nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для аналізу власних тренувань. Базові можливості аналізу треків наявні безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані треки, також можна проаналізувати за допомогою сторонніх інструментів.</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна увімкнути або вимкнути кнопкою запису GPX на екрані з мапою.</string>
@@ -2025,7 +2025,7 @@
     <string name="skip_map_downloading_desc">У вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
     <string name="search_another_country">Виберіть інший регіон</string>
     <string name="search_map">Пошук мапи…</string>
-    <string name="first_usage_wizard_desc">OsmAnd визначить ваше розташування і запропонує завантажити мапи для цього регіону.</string>
+    <string name="first_usage_wizard_desc">OsmAnd визначить ваше місцеперебування і запропонує завантажити мапи для цього регіону.</string>
     <string name="location_not_found">Неможливо визначити місце розташування</string>
     <string name="no_inet_connection">З’єднання з Інтернетом відсутнє</string>
     <string name="no_inet_connection_desc_map">Необхідно завантажити мапи.</string>
@@ -2284,7 +2284,7 @@
 \n• Показує спеціалізовані онлайн-мапи, супутниковий вид (від Bing), різні накладки на кшталт туристичних/навігаційних GPX-треків та додаткові шари з налаштовуваною прозорістю
 \n</string>
     <string name="osmand_extended_description_part4">Катання на лижах
-\nПлагін для OsmAnd з лижними мапами дозволяє бачити лижні траси разом із їх рівнем складності та деякими додатковими відомостями на зразок розташування витягів та інших об\'єктів.</string>
+\nПлагін для OsmAnd з лижними мапами дає змогу бачити лижні траси разом з їх рівнем складності та деякими додатковими відомостями на зразок розташування витягів та інших об\'єктів.</string>
     <string name="osmand_extended_description_part5">Їзда на велосипеді
 \n • Знаходьте велосипедні доріжки на мапі
 \n • GPS-навігація у велосипедному режимі будує маршрут з використанням велосипедних доріжок
@@ -2969,7 +2969,7 @@
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпуровий</string>
-    <string name="shared_string_icon">Значок</string>
+    <string name="shared_string_icon">Піктограма</string>
     <string name="collected_data">Дані зібрано</string>
     <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
     <string name="shared_string_min_speed">Мінімальна швидкість</string>
@@ -3370,7 +3370,7 @@
 \n
 \nЯкщо увімкнено, OsmAnd використовуватиме налаштування часу очікування системи.</string>
     <string name="clear_recorded_data">Очистити записані дані</string>
-    <string name="release_3_6">• Профілі: тепер Ви можете змінити порядок, встановити значок для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
+    <string name="release_3_6">• Профілі: тепер ви можете змінити порядок, установити піктограму для мапи, змінити всі налаштування основних профілів та відновити їх до типових значень.
 \n
 \n • Додано нумерацію з\'їздів для навігації
 \n
@@ -3386,7 +3386,7 @@
 \n
 \n • Додано дані про захід та схід сонця для налаштування мапи
 \n
-\n • Додано значки точок Дім/Робота на мапі
+\n • Додано піктограми точок Дім/Робота на мапі
 \n
 \n • Додана підтримка багаторядкового опису в Налаштуваннях
 \n
@@ -3401,9 +3401,9 @@
     <string name="please_provide_profile_name_message">Зазначте назву профілю</string>
     <string name="open_settings">Відкрити налаштування</string>
     <string name="plugin_disabled">Плагін вимкнено</string>
-    <string name="plugin_disabled_descr">Цей плагін є окремим застосунком, вимкнення плагіну не призводить до його вилучення.
+    <string name="plugin_disabled_descr">Цей плагін — це окремий застосунок, вимкнення плагіну не призводить до його вилучення.
 \n
-\nВилучити плагін можна в розділі Застосунки вашого пристрою.</string>
+\nВилучити плагін можна в розділі «Програми» вашого пристрою.</string>
     <string name="shared_string_menu">Меню</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Прокладання маршрутів</string>

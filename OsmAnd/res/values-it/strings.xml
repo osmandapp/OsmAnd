@@ -4352,7 +4352,7 @@
 \n • Corretti diversi errori di calcolo del percorso
 \n
 \n</string>
-    <string name="clear_all_history_warning">Cancellare la completa cronologia dell\'app comprese le ricerche, la cronologia di navigazione e i marcatori\?</string>
+    <string name="clear_all_history_warning">Cancellare la completa cronologia dell\'app comprese le ricerche, la cronologia di navigazione e dei marcatori\?</string>
     <string name="clear_all_history">Cancella tutta la cronologia</string>
     <string name="history_actions_descr">Puoi esportare la cronologia in un file.</string>
     <string name="navigation_history">Cronologia di navigazione</string>
@@ -4490,7 +4490,7 @@
     <string name="all_groups">Tutti i gruppi</string>
     <string name="list_of_groups">Lista dei gruppi</string>
     <string name="points_selection_descr">Chiudere perdendo tutte le modifiche\?</string>
-    <string name="exit_import_descr">Uscire senza salvare nessuna modifica\?</string>
+    <string name="exit_import_descr">Uscire senza salvare alcuna modifica\?</string>
     <string name="exit_import">Uscire\?</string>
     <string name="import_tracks">Importa tracce</string>
     <string name="import_tracks_descr">%1$s, contiene %2$s tracce separate. Scegli le tracce da importare.</string>
@@ -4528,8 +4528,8 @@
     <string name="page_number">Pagina %1$s</string>
     <string name="apply_to_existing_points_descr">Applica le modifiche agli esistenti punti nel gruppo o solo ai nuovi\?</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Percorsi del bus-navetta</string>
-    <string name="simulation_constant_mode_desc">La simulazione sarà eseguita alla velocità costante selezionata.</string>
-    <string name="simulation_constant_mode_title">Velocità fissa</string>
+    <string name="simulation_constant_mode_desc">La simulazione verrà effettuata alla velocità costante selezionata.</string>
+    <string name="simulation_constant_mode_title">Velocità costante</string>
     <string name="simulation_preview_mode_title">Modalità anteprima veloce</string>
     <string name="stop_download_desc">Download non completo. Se interrompi il download adesso, solo parte dei riquadri sarà disponibile per la visualizzazione.</string>
     <string name="stop_download">Ferma il download</string>
@@ -4540,12 +4540,12 @@
     <string name="change_default_appearance">Cambia la visualizzazione predefinita</string>
     <string name="map_widget_distance_to_destination">Distanza dalla destinazione</string>
     <string name="apply_only_to_new_favorites">Applica solo ai nuovi preferiti</string>
-    <string name="simulation_preview_mode_desc">La velocità della simulazione sarà massima nelle tratte di strada diritte, e diminuirà solamente per le intersezioni.</string>
+    <string name="simulation_preview_mode_desc">La velocità della simulazione sarà massima nei rettilinei e diminuirà solamente per le intersezioni.</string>
     <string name="add_page">Aggiungi pagina</string>
     <string name="simulation_real_mode_desc">Nei tratti di strada diritti, la velocità sarà approssimata alla massima consentita.
 \nAlle intersezioni la simulazione rallenterà.
 \nVerranno aggiunte penalizzazioni aggiuntive per i vari segnali stradali, gli stop, eccetera.</string>
-    <string name="rendering_attr_showRunningRoutes_name">Itinerari corsa</string>
+    <string name="rendering_attr_showRunningRoutes_name">Percorso attuale</string>
     <string name="location_source_descr">Come preimpostazione, OsmAnd installato da Google Play usa %1$s per determinare la posizione.
 \n
 \nSe tu ottieni posizioni non accurate, oppure usi un dispositivo senza %2$s, prova a passare a \"%3$s\"</string>
@@ -4569,7 +4569,7 @@
     <string name="map_widget_altitude">Altitudine della localizzazione attuale</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Percorsi filobus</string>
     <string name="map_markers_bar">Barra marcatori mappa</string>
-    <string name="rendering_attr_showRunningRoutes_description">Mostra i percorsi da corsa</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostra l\'attuale percorso</string>
     <string name="rendering_attr_showFitnessTrails_name">Percorsi fitness</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostra i percorsi fitness</string>
     <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
@@ -4722,8 +4722,8 @@
     <string name="compass_always_hidden">Sempre nascosto</string>
     <string name="marker_1st">Primo marcatore</string>
     <string name="map_marker_average_speed_desc">Specifica l\'intervallo di tempo a cui verrà valutata la velocità media per calcolare il tempo di arrivo.</string>
-    <string name="auto_backup_title">Auto-salvataggio</string>
-    <string name="shared_string_duplicate">Duplicare</string>
+    <string name="auto_backup_title">Backup Automatico</string>
+    <string name="shared_string_duplicate">Duplicato</string>
     <string name="compass_always_visible">Sempre visibile</string>
     <string name="compass_desc">Mostra la direzione del nord.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Schema di colori linee di profondità</string>
@@ -4743,7 +4743,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra percorsi specificamente progettati per il mountainbiking</string>
     <string name="routing_attr_goods_restrictions_name">Distribuzione beni</string>
     <string name="without_profiles_changing">Senza modifiche del profilo</string>
-    <string name="av_notes_video_widget_desc">Il tap sul wigdet permette di iniziare la registrazione di un video.</string>
+    <string name="av_notes_video_widget_desc">Toccare sul widget permette di iniziare una registrazione video.</string>
     <string name="first_marker_widget_desc">Puoi configurare il widget per visualizzare la distanza o il tempo stimato dell\'arrivo al primo marcatore della mappa.</string>
     <string name="attach_roads_warning">Puoi ancorare alle strade solo una traccia registrata</string>
     <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla svolta successiva alla prossima che è abilitata se la svolta è a una distanza inferiore a quella di approccio.</string>
@@ -4758,12 +4758,13 @@
     <string name="reset_all_settings_desc">Sei sicuro di volere reimpostare tutte le impostazioni a quelle di fabbrica\?</string>
     <string name="goods_delivery_desc_4">Se il peso del tuo veicolo è superiore alle 3.5 tonnellate devi utilizzare il profilo Camion.</string>
     <string name="duplacate_widget_added_snackbar">Un widget duplicato è aggiunto successivamente nella lista.</string>
-    <string name="av_notes_photo_widget_desc">Il tap sul wigdet permette di scattare una foto.</string>
-    <string name="auto_backup_preference_desc">Per preimpostazione Android registra i backup dei favoriti, i token delle mappe e le impostazioni di OsmAnd per ripristinarli successivamente nei nuovi dispositivi dopo la reinstallazione. Questo backup è limitato a 25 MB.
+    <string name="av_notes_photo_widget_desc">Toccare sul widget permette di scattare una foto.</string>
+    <string name="auto_backup_preference_desc">Come predefinito Android salva i backup dei preferiti, token della mappa e le impostazioni di OsmAnd per ripristinarle in un nuovo dispositivo o dopo aver reinstallato, questo backup è limitato a 25 MB.
 \nSe stai utilizzando OsmAnd Cloud, dopo la reinstallazione questo può portare a fraintendimenti.</string>
-    <string name="av_notes_audio_widget_desc">Il tap sul wigdet permette di registrare una nota audio.</string>
+    <string name="av_notes_audio_widget_desc">Toccare sul widget permette di registrare una nota audio.</string>
     <string name="goods_delivery_desc_3">Si applica solo a veicoli che trasportano merci che hanno al massimo quattro ruote e pesano meno di 3.5 tonnellate.</string>
     <string name="goods_delivery_desc_2">Le strade chiuse per il trasporto di merci saranno evitate.</string>
     <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
+    <string name="time_to_destination_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso dalla localizzazione attuale.</string>
 </resources>
