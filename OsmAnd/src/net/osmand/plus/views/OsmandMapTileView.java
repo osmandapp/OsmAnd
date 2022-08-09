@@ -268,6 +268,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	@Nullable
+	public Context getUiContext() {
+		if (mapActivity != null) {
+			return mapActivity;
+		}
+		return view != null ? view.getContext() : null;
+	}
+
+	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
