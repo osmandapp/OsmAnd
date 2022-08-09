@@ -3831,9 +3831,9 @@
     <string name="login_open_street_map">Connettiti a OpenStreetMap</string>
     <string name="login_open_street_map_org">Connettiti a OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Accedi con OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Devi fare il login per inviare nuove modifiche o dei cambiamenti.
+    <string name="open_street_map_login_mode">È necessario effettuare l\'accesso per caricare modifiche nuove o modificate.
 \n
-\nPuoi fare login utilizzando il metodo sicuro OAuth o il nomeutente e password.</string>
+\nÈ possibile accedere utilizzando il metodo sicuro OAuth o utilizzare l\'accesso e la password.</string>
     <string name="use_login_password">Usa nomeutente e password</string>
     <string name="login_account">Account</string>
     <string name="user_login">Entra</string>
