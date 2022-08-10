@@ -4771,4 +4771,6 @@
     <string name="attach_roads_warning">Vous ne pouvez raccrocher aux routes qu\'une trace déjà enregistrée</string>
     <string name="attach_roads_descr">Souhaitez-vous rattacher votre trace aux routes existantes sur les cartes hors ligne \? Dans ce cas, vous disposerez d\'une altitude corrigée, d\'informations sur la route et les bifurcations qui pourront être utilisées pendant le guidage.</string>
     <string name="attach_to_roads_banner_desc">Déplacez votre trace sur les routes afin d\'obtenir des instructions de guidage détaillées.</string>
+    <string name="included_in_your_current_plan">Inclus dans votre abonnement %1$s</string>
+    <string name="available_as_part_of_subscription_plan">Disponible avec l\'abonnement %1$s.</string>
 </resources>
