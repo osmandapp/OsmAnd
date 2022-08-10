@@ -1,5 +1,7 @@
 package net.osmand.plus.onlinerouting.engine;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -28,8 +30,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 
 public class GpxEngine extends OnlineRoutingEngine {
 
@@ -142,11 +142,11 @@ public class GpxEngine extends OnlineRoutingEngine {
 	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
 	                                                              @NonNull GPXFile gpxFile,
 	                                                              @Nullable RouteCalculationProgress calculationProgress) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		ApplicationMode appMode = routingHelper.getAppMode();
+		String oldRoutingProfile = appMode.getRoutingProfile();
 		try {
-			RoutingHelper routingHelper = app.getRoutingHelper();
-			ApplicationMode appMode = routingHelper.getAppMode();
 			String routingProfile = getApproximateRouteProfile();
-			String oldRoutingProfile = appMode.getRoutingProfile();
 			if (routingProfile != null) {
 				appMode.setRoutingProfile(routingProfile);
 			}
@@ -162,11 +162,12 @@ public class GpxEngine extends OnlineRoutingEngine {
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
-				appMode.setRoutingProfile(oldRoutingProfile);
 				return ctx;
 			}
 		} catch (IOException | InterruptedException e) {
 			LOG.error(e.getMessage(), e);
+		} finally {
+			appMode.setRoutingProfile(oldRoutingProfile);
 		}
 		return null;
 	}
