@@ -3543,7 +3543,7 @@
 \nUn giorno corrisponde a 1440 minuti.
 \nUna settimana corrisponde a 10080 minuti.
 \nUn mese corrisponde a 43829 minuti.</string>
-    <string name="tiles_storage_descr">Scegli come le mattonelle scaricate saranno archiviate.</string>
+    <string name="tiles_storage_descr">Scegli come conservare le mattonelle scaricate.</string>
     <string name="default_screen_timeout">Tempo di attivazione salvaschermo predefinito</string>
     <string name="main_actions_descr">Ha solo 4 pulsanti.</string>
     <string name="lang_zhminnan">Min meridionale</string>
@@ -3642,13 +3642,13 @@
     <string name="uninstall_speed_cameras">Disinstalla autovelox</string>
     <string name="shared_string_legal">Legale</string>
     <string name="speed_camera_pois">PDI autovelox</string>
-    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge.
-\n
-\nDevi scegliere in base alle leggi del tuo paese.
-\n
-\nScegliendo %1$s e riceverai gli avvisi della presenza di autovelox.
-\n
-\nScegliendo %2$s. Tutti i dati relativi agli autovelox: avvisi, notifiche, PDI saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
+    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge. 
+\n 
+\nDevi scegliere in base alle leggi del tuo paese. 
+\n 
+\nScegliendo %1$s riceverai gli avvisi della presenza di autovelox. 
+\n 
+\nScegliendo %2$s. tutti i dati relativi agli autovelox (avvisi, notifiche, PDI) saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
     <string name="keep_active">Mantieni attivo</string>
     <string name="shared_string_uninstall">Disinstalla</string>
     <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni Paesi sono proibiti dalla legge.</string>
