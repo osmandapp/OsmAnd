@@ -4782,4 +4782,6 @@
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
     <string name="attach_to_roads_banner_desc">Passe den Track an Straßen an um genau Navigationsanweisungen zu erhalten.</string>
+    <string name="included_in_your_current_plan">In Ihrem aktuellen \"%1$s\"-Plan enthalten</string>
+    <string name="available_as_part_of_subscription_plan">Verfügbar im Rahmen des %1$s Abonnements.</string>
 </resources>

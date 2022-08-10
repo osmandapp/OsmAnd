@@ -2532,8 +2532,8 @@
     <string name="context_menu_read_full_article">Leggi l\'articolo completo</string>
     <string name="context_menu_read_article">Leggi l\'articolo</string>
     <string name="context_menu_points_of_group">Tutti i punti del gruppo</string>
-    <string name="open_from">Aperto da</string>
-    <string name="open_till">Aperto sino</string>
+    <string name="open_from">Aperto dalle</string>
+    <string name="open_till">Aperto sino alle</string>
     <string name="will_close_at">Chiuderà alle</string>
     <string name="will_open_at">Aprirà alle</string>
     <string name="will_open_on">Aprirà alle</string>
@@ -2965,7 +2965,7 @@
     <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Precisione orizzontale: %1$s, verticale: %2$s</string>
     <string name="precision_hdop">Precisione orizzontale: %s</string>
-    <string name="app_mode_ufo">UFO</string>
+    <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Trasportatore personale</string>
     <string name="release_3_4">• Profili applicazione: crea un profilo personalizzato per le tue esigenze con un\'icona e un colore personalizzati
 \n
@@ -3285,7 +3285,7 @@
     <string name="choose_icon_color_name">Icona, colore e nome</string>
     <string name="reorder_profiles">Modifica la lista dei profili</string>
     <string name="selected_profile">Profilo selezionato</string>
-    <string name="reset_confirmation_descr">Cliccando %1$s, tutte le modifiche andranno perse.</string>
+    <string name="reset_confirmation_descr">Toccando %1$s, tutte le modifiche andranno perse.</string>
     <string name="reset_all_profile_settings_descr">Tutte le impostazioni del profilo saranno reimpostate come da prima installazione.</string>
     <string name="reset_all_profile_settings">Reimpostare tutte le impostazioni del profilo\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3312,7 +3312,7 @@
     <string name="osm_edits_view_descr">Visualizza tutte le modifiche non caricate o le note OSM in %1$s. Le modifiche caricate non verranno più visualizzate.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icona visualizzata durante la navigazione o in movimento.</string>
-    <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
+    <string name="logcat_buffer_descr">Controlla e condividi log dettagliati dell\'applicazione</string>
     <string name="permission_is_required">Un permesso è richiesto per usare questa opzione.</string>
     <string name="rearrange_categories">Sistema categorie</string>
     <string name="create_custom_categories_list_promo">Cambia l\'ordinamento della lista, nasconde le categorie. Importa o esporta tutti i cambiamenti con i profili.</string>
@@ -3342,7 +3342,7 @@
     <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: periodi di riposo non sono registrati affatto oppure con un singolo punto. Piccoli (reali) movimenti (es. lateralmente, per marcare un possible spegnimento nel tuo viaggio) possono essere scartati dal filtro. Il file contiene meno informazioni per la post-elaborazione e presenta statistiche peggiori filtrando i punti ovviamente ridondanti al momento della registrazione, mantenendo potenzialmente artefatti causati da cattiva ricezione o effetti del chipset GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: un valore di 5 metri potrebbe funzionare bene se non necessiti di registrare dettagli che hanno una misura inferiore di questo valore e non vuoi chiaramente registrare dati quando sei fermo.</string>
     <string name="live_monitoring_time_buffer">Tempo tampone</string>
-    <string name="live_monitoring_tracking_interval">Intervallo di registrazione</string>
+    <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
     <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con i parametri della sintassi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notifiche</string>
@@ -3352,7 +3352,7 @@
     <string name="reset_plugin_to_default">Reimposta le impostazioni dei componenti aggiuntivi a quelle preimpostate</string>
     <string name="multimedia_rec_split_title">Divisione delle registrazioni</string>
     <string name="multimedia_use_system_camera">Usa l\'app di sistema</string>
-    <string name="multimedia_photo_play_sound">Sono otturatore fotocamera</string>
+    <string name="multimedia_photo_play_sound">Suono otturatore fotocamera</string>
     <string name="osm_authorization_success">L\'autorizzazione è andata a buon fine</string>
     <string name="reset_to_default_category_button_promo">\'Ripristina i predefiniti\' ripristinerà l\'ordine di visualizzazione preimpostato dell\'installazione.</string>
     <string name="accessibility_mode_disabled">La modalità accessibile è disabilitata nel tuo sistema Android.</string>
@@ -3495,17 +3495,17 @@
     <string name="index_item_world_basemap_detailed">Mappa mondiale generale (dettagliata)</string>
     <string name="extra_maps_menu_group">Mappe extra</string>
     <string name="download_unsupported_action">Azione non supportata %1$s</string>
-    <string name="tracker_item">Tracker OsmAnd</string>
+    <string name="tracker_item">OsmAnd tracciatore</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
-    <string name="quick_action_item">Azione veloce</string>
+    <string name="quick_action_item">Azione rapida</string>
     <string name="radius_ruler_item">Righello radiale</string>
     <string name="measure_distance_item">Misura distanza</string>
-    <string name="travel_item">Viaggi (Wikivoyage e Wikipedia)</string>
+    <string name="travel_item">Viaggio (Wikivoyage e Wikipedia)</string>
     <string name="map_markers_item">Marcatori mappa</string>
     <string name="favorites_item">Preferiti</string>
     <string name="subscription_osmandlive_item">Sottoscrizione - OsmAnd Live</string>
     <string name="osmand_purchases_item">Acquisti OsmAnd</string>
-    <string name="legend_item_description">La guida ai simboli della mappa.</string>
+    <string name="legend_item_description">Guida alla simbologia di una mappa</string>
     <string name="navigation_profiles_item">Profili di navigazione</string>
     <string name="unsupported_type_error">Tipo non supportato</string>
     <string name="gpx_parse_error">OsmAnd GPX non è ben formato, contatta il team di supporto per approfondire.</string>
@@ -3526,7 +3526,7 @@
     <string name="pseudo_mercator_projection">Proiezione pseudo-Mercatore</string>
     <string name="one_image_per_tile">Un file immagine per mattonella</string>
     <string name="sqlite_db_file">File SQLiteDB</string>
-    <string name="online_map_name_helper_text">Fornisci u nome per la sorgente della mappe online.</string>
+    <string name="online_map_name_helper_text">Fornisci un nome per la sorgente della mappe online.</string>
     <string name="online_map_url_helper_text">Immetti o incolla l\'URL della sorgente online.</string>
     <string name="edit_online_source">Modifica le sorgenti online</string>
     <string name="expire_time">Tempo di scadenza</string>
@@ -3543,7 +3543,7 @@
 \nUn giorno corrisponde a 1440 minuti.
 \nUna settimana corrisponde a 10080 minuti.
 \nUn mese corrisponde a 43829 minuti.</string>
-    <string name="tiles_storage_descr">Scegli come le mattonelle scaricate saranno archiviate.</string>
+    <string name="tiles_storage_descr">Scegli come conservare le mattonelle scaricate.</string>
     <string name="default_screen_timeout">Tempo di attivazione salvaschermo predefinito</string>
     <string name="main_actions_descr">Ha solo 4 pulsanti.</string>
     <string name="lang_zhminnan">Min meridionale</string>
@@ -3617,7 +3617,7 @@
     <string name="lang_bar">Bavarese</string>
     <string name="lang_an">Aragonese</string>
     <string name="lang_lmo">Lombardo</string>
-    <string name="custom_color">Colori personalizzati</string>
+    <string name="custom_color">Colore personalizzato</string>
     <string name="search_poi_types">Cerca in base al PDI</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puoi esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
     <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
@@ -3642,13 +3642,13 @@
     <string name="uninstall_speed_cameras">Disinstalla autovelox</string>
     <string name="shared_string_legal">Legale</string>
     <string name="speed_camera_pois">PDI autovelox</string>
-    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge.
-\n
-\nDevi scegliere in base alle leggi del tuo paese.
-\n
-\nScegliendo %1$s e riceverai gli avvisi della presenza di autovelox.
-\n
-\nScegliendo %2$s. Tutti i dati relativi agli autovelox: avvisi, notifiche, PDI saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
+    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge. 
+\n 
+\nDevi scegliere in base alle leggi del tuo paese. 
+\n 
+\nScegliendo %1$s riceverai gli avvisi della presenza di autovelox. 
+\n 
+\nScegliendo %2$s. tutti i dati relativi agli autovelox (avvisi, notifiche, PDI) saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
     <string name="keep_active">Mantieni attivo</string>
     <string name="shared_string_uninstall">Disinstalla</string>
     <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni Paesi sono proibiti dalla legge.</string>
@@ -3662,13 +3662,13 @@
     <string name="app_mode_inline_skates">Pattini in linea</string>
     <string name="quick_action_remove_next_destination">Cancella il punto di destinazione più vicino</string>
     <string name="use_volume_buttons_as_zoom_descr">Controllare il livello di zoom della mappa con i pulsanti del volume del dispositivo.</string>
-    <string name="use_volume_buttons_as_zoom">Pulsanti volume come zoom</string>
-    <string name="please_provide_point_name_error">Per favore indica un nome per il punto</string>
+    <string name="use_volume_buttons_as_zoom">Pulsanti del volume come zoom</string>
+    <string name="please_provide_point_name_error">Fornisci un nome per il punto</string>
     <string name="quick_action_remove_next_destination_descr">Elimina la destinazione successiva nel percorso. Se questa è la destinazione finale, la navigazione si fermerà.</string>
-    <string name="search_download_wikipedia_maps">Scarica mappe Wikipedia</string>
+    <string name="search_download_wikipedia_maps">Scarica le mappe di Wikipedia</string>
     <string name="plugin_wikipedia_description">Ottieni informazioni sui punti di interesse da Wikipedia. una guida tascabile offline di articoli sui luoghi e destinazioni.</string>
     <string name="app_mode_enduro_motorcycle">Moto da enduro</string>
-    <string name="app_mode_motor_scooter">Moto scooter</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_wheelchair">Sedia a rotelle</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
@@ -3744,16 +3744,16 @@
     <string name="save_global_track_interval_descr">Specifica l\'intervallo per la registrazione delle tracce (avviata attraverso il pulsante di \'Registrazione del viaggio\' sulla mappa).</string>
     <string name="gpx_monitoring_stop">Sospendi la registrazione del viaggio</string>
     <string name="gpx_monitoring_start">Riprendi la registrazione del viaggio</string>
-    <string name="system_default_theme">Preimpostazioni di sistema</string>
-    <string name="all_next_segments">Tutti i segmenti successivi</string>
-    <string name="previous_segment">Segmento precedente</string>
-    <string name="all_previous_segments">Tutti i segmenti precedenti</string>
-    <string name="only_selected_segment_recalc">Solo il segmento selezionato verrà ricalcolato con il profilo selezionato.</string>
-    <string name="all_next_segments_will_be_recalc">Tutti i segmenti successivi verranno ricalcolati con il profilo selezionato.</string>
-    <string name="all_previous_segments_will_be_recalc">Tutti i segmenti precedenti verranno ricalcolati con il profilo selezionato.</string>
-    <string name="open_saved_track">Apri una traccia salvata</string>
+    <string name="system_default_theme">Predefinito di sistema</string>
+    <string name="all_next_segments">Tutti i prossimi tratti</string>
+    <string name="previous_segment">Tratto precedente</string>
+    <string name="all_previous_segments">Tutti i tratti precedenti</string>
+    <string name="only_selected_segment_recalc">Solo il tratto selezionato verrà ricalcolato con il profilo selezionato.</string>
+    <string name="all_next_segments_will_be_recalc">Tutti i prossimi tratti verranno ricalcolati utilizzando il profilo selezionato.</string>
+    <string name="all_previous_segments_will_be_recalc">Tutti i tratti precedenti saranno ricalcolati utilizzando il profilo selezionato.</string>
+    <string name="open_saved_track">Apri la traccia salvata</string>
     <string name="shared_string_is_saved">è salvato</string>
-    <string name="one_point_error">Per favore aggiungi almeno due punti.</string>
+    <string name="one_point_error">Aggiungi almeno due punti.</string>
     <string name="shared_string_redo">Ripeti</string>
     <string name="release_3_8">• Aggiornata la modalità Pianificazione dell\'Itinerario che permette l\'utilizzo di diversi profili di navigazione per ogni segmento e incolla le tracce alle strade
 \n
@@ -3828,8 +3828,8 @@
     <string name="shared_string_search_history">Cronologia di ricerca</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="app_mode_motorboat">Motoscafo</string>
-    <string name="login_open_street_map">Connettiti a OpenStreetMap</string>
-    <string name="login_open_street_map_org">Connettiti a OpenStreetMap.org</string>
+    <string name="login_open_street_map">Accedi a OpenStreetMap</string>
+    <string name="login_open_street_map_org">Accedi a OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Accedi con OpenStreetMap</string>
     <string name="open_street_map_login_mode">È necessario effettuare l\'accesso per caricare modifiche nuove o cambiamenti.
 \n
@@ -4767,4 +4767,6 @@
     <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
     <string name="time_to_destination_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso dalla localizzazione attuale.</string>
+    <string name="included_in_your_current_plan">Incluso nel tuo piano attuale \"%1$s\"</string>
+    <string name="available_as_part_of_subscription_plan">Disponibile come parte della sottoscrizione di %1$s.</string>
 </resources>
