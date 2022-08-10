@@ -3828,8 +3828,8 @@
     <string name="shared_string_search_history">Cronologia di ricerca</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="app_mode_motorboat">Motoscafo</string>
-    <string name="login_open_street_map">Connettiti a OpenStreetMap</string>
-    <string name="login_open_street_map_org">Connettiti a OpenStreetMap.org</string>
+    <string name="login_open_street_map">Accedi a OpenStreetMap</string>
+    <string name="login_open_street_map_org">Accedi a OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Accedi con OpenStreetMap</string>
     <string name="open_street_map_login_mode">È necessario effettuare l\'accesso per caricare modifiche nuove o cambiamenti.
 \n
