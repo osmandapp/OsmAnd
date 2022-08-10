@@ -4770,4 +4770,6 @@
     <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se upošteva in vpliva na povprečno hitrost.</string>
     <string name="attach_roads_descr">Ali želiš približati svojo sled z veljavno potjo prilepljeno na zemljevid brez povezave\? V tem primeru boš imel popravljeno nadmorsko višino, informacije o cestah in ovinkih, ki jih lahko pozneje uporabiš pri navigaciji.</string>
     <string name="attach_to_roads_banner_desc">Za pridobitev podrobnih navodil za navigacijo, pripni svojo sled na ceste.</string>
+    <string name="included_in_your_current_plan">Vključeno v tvoji trenutni naročnini na »%1$s«</string>
+    <string name="available_as_part_of_subscription_plan">Na voljo kot del naročnine na %1$s.</string>
 </resources>
