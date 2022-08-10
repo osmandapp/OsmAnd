@@ -3505,7 +3505,7 @@
     <string name="favorites_item">Preferiti</string>
     <string name="subscription_osmandlive_item">Sottoscrizione - OsmAnd Live</string>
     <string name="osmand_purchases_item">Acquisti OsmAnd</string>
-    <string name="legend_item_description">Guida alla simbologia di una mappa</string>
+    <string name="legend_item_description">Guida alla simbologia di una mappa.</string>
     <string name="navigation_profiles_item">Profili di navigazione</string>
     <string name="unsupported_type_error">Tipo non supportato</string>
     <string name="gpx_parse_error">OsmAnd GPX non è ben formato, contatta il team di supporto per approfondire.</string>
@@ -4690,7 +4690,7 @@
     <string name="routing_attr_motor_type_petrol_name">Benzina</string>
     <string name="routing_attr_motor_type_hybrid_name">Ibrido</string>
     <string name="routing_attr_motor_type_name">Tipo di motore</string>
-    <string name="routing_attr_motor_type_description">Per il calcolo della CO2</string>
+    <string name="routing_attr_motor_type_description">Seleziona il tipo di combustibile utilizzato dal tuo veicolo , per il calcolo delle emissioni di CO2.</string>
     <string name="lang_ckb">Curdo centrale</string>
     <string name="updated_map_time">Aggiornato: %1$s.</string>
     <string name="includes_osm_changes_until">Include le modifiche di OSM apportate fino a %1$s.</string>
