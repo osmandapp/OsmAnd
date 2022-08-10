@@ -2532,8 +2532,8 @@
     <string name="context_menu_read_full_article">Leggi l\'articolo completo</string>
     <string name="context_menu_read_article">Leggi l\'articolo</string>
     <string name="context_menu_points_of_group">Tutti i punti del gruppo</string>
-    <string name="open_from">Aperto da</string>
-    <string name="open_till">Aperto sino</string>
+    <string name="open_from">Aperto dalle</string>
+    <string name="open_till">Aperto sino alle</string>
     <string name="will_close_at">Chiuderà alle</string>
     <string name="will_open_at">Aprirà alle</string>
     <string name="will_open_on">Aprirà alle</string>
