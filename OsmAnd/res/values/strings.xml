@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
+    <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
     <string name="explore_weather_forecast">Explore Weather forecast.</string>
     <string name="shared_string_contours">Contours</string>
     <string name="shared_string_layers">Layers</string>

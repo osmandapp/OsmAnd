@@ -308,11 +308,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					cachedRenderer = renderer;
 					cachedPoints = new ArrayList<>(route.points);
 					renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
-								planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
+							planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
 				}
 			} else {
 				new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
-					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
+						drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 			}
 		} else {
 			resetCachedRenderer();
@@ -333,7 +333,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-    private boolean shouldDrawPoints() {
+	private boolean shouldDrawPoints() {
 		boolean shouldDraw = true;
 		if (cachedPoints != null && cachedPoints.size() == route.points.size()) {
 			shouldDraw = false;
@@ -550,7 +550,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
-		if (!longTapDetector.onTouchEvent(event)) {
+		if (longTapDetector != null && !longTapDetector.onTouchEvent(event)) {
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					float x = event.getX();
@@ -765,7 +765,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		applyMovableObject(position);
 	}
 
-	/**OpenGL*/
+	/**
+	 * OpenGL
+	 */
 	private void initMarkersCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
@@ -802,7 +804,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		mapRenderer.addSymbolsProvider(mapMarkersCollection);
 	}
 
-	/**OpenGL*/
+	/**
+	 * OpenGL
+	 */
 	private void initVectorLinesCollection(LatLon loc, MapMarker marker, int color, boolean isLast) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null || !needDrawLines) {
@@ -856,7 +860,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	/**OpenGL*/
+	/**
+	 * OpenGL
+	 */
 	protected void clearVectorLinesCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && vectorLinesCollection != null) {
@@ -872,7 +878,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return calculateLineInScreenRect(tileBox, markerPointI, locPointI);
 	}
 
-	/**OpenGL*/
+	/**
+	 * OpenGL
+	 */
 	@Nullable
 	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, PointI markerPointI, PointI locPointI) {
 		MapRendererView mapRenderer = getMapRenderer();
@@ -912,7 +920,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return new PointF[] {l, m};
 	}
 
-	/**OpenGL*/
+	/**
+	 * OpenGL
+	 */
 	private double getAngleBetween(PointF start, PointF end) {
 		double dx = start.x - end.x;
 		double dy = start.y - end.y;

@@ -226,7 +226,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="shared_string_all">Todos</string>
+    <string name="shared_string_all">Todo</string>
     <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
@@ -892,7 +892,7 @@
     <string name="unknown_location">Ubicación desconocida.</string>
     <string name="modify_transparency">Definir transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga\?</string>
-    <string name="first_time_msg">Gracias por usar OsmAnd. Descarga datos regionales sin conexión a través de «Ajustes → Gestionar mapas» para ver los mapas, ubicar direcciones, buscar PDI, encontrar transporte público y más.</string>
+    <string name="first_time_msg">Gracias por usar OsmAnd. Descarga datos regionales sin conexión a través de «Menú → Descargar mapas» para ver los mapas, ubicar direcciones, buscar PDI, encontrar transporte público y más.</string>
     <string name="basemap_was_selected_to_download">El mapa base necesario para proporcionar la funcionalidad básica, está en la cola de descarga.</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
@@ -908,7 +908,7 @@
     <string name="play_commands_of_currently_selected_voice">Elige una voz y reproduce pruebas de los avisos:</string>
     <string name="native_rendering">Dibujo nativo</string>
     <string name="test_voice_prompts">Probar indicaciones por voz</string>
-    <string name="switch_to_raster_map_to_see">Descargar un mapa vectorial sin conexión de esta ubicación en «Ajustes → Gestionar mapas», o cambiar al complemento «Mapas en línea».</string>
+    <string name="switch_to_raster_map_to_see">Descarga un mapa vectorial sin conexión de esta ubicación en «Menú → Descargar mapas», o cambia al complemento de «Mapas en línea».</string>
     <string name="send_files_to_osm">¿Enviar archivos GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilidad</string>
     <string name="gpx_tags_txt">Etiquetas</string>
@@ -2921,8 +2921,8 @@
     <string name="rate_dialog_descr">Por favor, comparte tus comentarios y califica nuestro trabajo en Google Play.</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">Ayúdanos a mejorar OsmAnd</string>
-    <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ve en el mapa. 
-\n 
+    <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ves en el mapa.
+\n
 \nPuedes cambiar esto en cualquier momento en «Ajustes → Privacidad y seguridad».</string>
     <string name="choose_data_to_share">Elige los tipos de datos a compartir:</string>
     <string name="downloaded_maps">Mapas descargados</string>
@@ -2980,7 +2980,7 @@
     <string name="custom_routing">Perfil de navegación personalizado</string>
     <string name="special_routing_type">Navegación especial</string>
     <string name="third_party_routing_type">Navegación de terceros</string>
-    <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
+    <string name="application_profiles_descr">Perfiles visibles en la aplicación.</string>
     <string name="application_profiles">Perfiles de la aplicación</string>
     <string name="quick_action_need_to_add_item_to_list">Añadir al menos un elemento a la lista en los ajustes de «Acción rápida»</string>
     <string name="routing_attr_piste_type_downhill_name">Esquí alpino y de descenso</string>
@@ -3124,7 +3124,7 @@
     <string name="apply_to_current_profile">Aplicar sólo a «%1$s»</string>
     <string name="apply_to_all_profiles">Aplicar a todos los perfiles</string>
     <string name="start_up_message_pref">Mensaje de inicio</string>
-    <string name="analytics_pref_title">Análisis</string>
+    <string name="analytics_pref_title">Análisis de datos</string>
     <string name="turn_screen_on_info">Mostrar el mapa en la pantalla de bloqueo durante la navegación.</string>
     <string name="route_parameters_info">Ajustes para la navegación del perfil elegido «%1$s».</string>
     <string name="wake_time">Tiempo de espera al encender</string>
@@ -3279,7 +3279,7 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
-    <string name="rendering_value_thick_name">Espesor</string>
+    <string name="rendering_value_thick_name">Grueso</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Más detallado.</string>
     <string name="select_navigation_icon">Icono de la ubicación mientras se mueve</string>
     <string name="select_map_icon">Icono de la ubicación en reposo</string>
@@ -3856,7 +3856,7 @@
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="shared_string_search_history">Historial de búsqueda</string>
     <string name="shared_string_resources">Recursos</string>
-    <string name="select_data_to_export">Marca los datos que serán exportados al archivo.</string>
+    <string name="select_data_to_export">Marca los datos a exportar al archivo.</string>
     <string name="file_size_needed_for_import">Necesario para importar</string>
     <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, libera algo de espacio o desmarca algunos elementos a exportar.</string>
     <string name="export_not_enough_space">Sin espacio suficiente</string>
@@ -3872,8 +3872,8 @@
     <string name="use_dev_url_descr">Cambia a la versión para desarrolladores «dev.openstreetmap.org» en lugar de openstreetmap.org para probar la carga de PDI, notas de OSM y archivos GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
     <string name="select_picture">Elegir imagen</string>
-    <string name="select_items_for_import">Marca los elementos que serán importados.</string>
-    <string name="select_groups_for_import">Marca los grupos que serán importados.</string>
+    <string name="select_items_for_import">Marca los elementos a importar.</string>
+    <string name="select_groups_for_import">Marca los grupos a importar.</string>
     <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
     <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios»
 \n
@@ -4499,7 +4499,7 @@
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Información de texto adicional sobre la calificación de la superficie del fondo marino, los tipos de superficie combinados, la categoría y el taxón de la maleza o la hierba marina</string>
     <string name="rendering_value_category_name">Categoría</string>
-    <string name="rendering_value_all_name">Todos</string>
+    <string name="rendering_value_all_name">Todo</string>
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
     <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
@@ -4739,4 +4739,58 @@
     <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
     <string name="lang_ckb">Kurdo central</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
+    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos, para obtener instrucciones de navegación detalladas.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos específicamente diseñados para el ciclismo de montaña</string>
+    <string name="connect_with_straight_line">Conectar con línea recta</string>
+    <string name="attach_roads_descr">¿Quieres aproximar la traza con una ruta válida adjuntada a los mapas sin conexión\? En ese caso, será corregida la altitud e información del camino y los giros que podrían usarse posteriormente en la navegación.</string>
+    <string name="attach_roads_warning">Se puede adjuntar al camino sólo una traza grabada</string>
+    <string name="without_profiles_changing">Sin cambios de perfiles</string>
+    <string name="shared_string_only_missing">Sólo faltantes</string>
+    <string name="download_tiles">Descargar teselas</string>
+    <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tr_kl">Gira a la derecha y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tr_kr">Gira a la derecha y quédate en la derecha</string>
+    <string name="auto_25_chars_route_tu_kl">Gira en U y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_tu_kr">Gira en U y quédate en la derecha</string>
+    <string name="shared_string_duplicate">Duplicar</string>
+    <string name="av_notes_photo_widget_desc">Pulsa el widget para tomar una foto.</string>
+    <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
+    <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar notas de audio.</string>
+    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
+    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
+    <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación de la traza (en minutos/horas) del viaje registrado actual.</string>
+    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
+    <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
+    <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
+    <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
+    <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
+    <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
+    <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
+    <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
+    <string name="download_complete">Descarga completa</string>
+    <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
+    <string name="auto_backup_title">Copia de seguridad automática</string>
+    <string name="duplacate_widget_added_snackbar">Se ha añadido un widget duplicado en la siguiente lista.</string>
+    <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y quédate en la izquierda</string>
+    <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y quédate en la derecha</string>
+    <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
+\nSi usas la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
+    <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
+    <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
+    <string name="distance_to_destination_widget_desc">Muestra la distancia que queda hasta el último punto de destino.</string>
+    <string name="second_next_turn_widget_desc">Muestra la información sobre el segundo próximo giro, que se activa al aproximarse a este giro.</string>
+    <string name="next_turn_widget_desc">Muestra información sobre el próximo giro con una imagen de la maniobra y la distancia hasta ella.</string>
+    <string name="widget_with_dot">Widget.</string>
+    <string name="compass_visible_if_map_rotated_desc">Se oculta cuando el Norte se encuentra arriba</string>
+    <string name="compass_visible_if_map_rotated">Visible al girar el mapa</string>
+    <string name="compass_always_hidden">Siempre oculto</string>
+    <string name="compass_always_visible">Siempre visible</string>
+    <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_desc">Muestra la dirección hacia el norte.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
 </resources>

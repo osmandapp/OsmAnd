@@ -31,6 +31,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
+import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner.WidgetData;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
@@ -151,7 +153,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 
 	private void setupContent() {
 		setupWidgetDescription();
-		setupSelectableItem();
+		setupWidgetItem();
 		setupSecondaryDescription();
 		setupActions();
 	}
@@ -173,6 +175,14 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 		AndroidUiHelper.updateVisibility(tvDesc, false);
 	}
 
+	private void setupWidgetItem() {
+		if (widgetType != null && !widgetType.isPurchased(app)) {
+			setupPromoBanner();
+		} else {
+			setupSelectableItem();
+		}
+	}
+
 	private void setupSelectableItem() {
 		View container = view.findViewById(R.id.widget_item);
 		ImageView ivIcon = container.findViewById(R.id.icon);
@@ -182,8 +192,24 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 		container.setSelected(true);
 		container.setOnClickListener(v -> {}); // Empty listener to have pressed state
 		setWidgetIcon(ivIcon);
+		container.setVisibility(View.VISIBLE);
 		ivName.setText(widgetInfo.getTitle(app));
-		AndroidUiHelper.updateVisibility(compoundButton, false);
+
+		View bannerContainer = view.findViewById(R.id.promo_banner_container);
+		AndroidUiHelper.setVisibility(View.GONE, compoundButton, bannerContainer);
+	}
+
+	private void setupPromoBanner() {
+		MapActivity activity = getMapActivity();
+		ViewGroup bannerContainer = view.findViewById(R.id.promo_banner_container);
+		View widgetContainer = view.findViewById(R.id.widget_item);
+		bannerContainer.setVisibility(View.VISIBLE);
+		widgetContainer.setVisibility(View.GONE);
+		bannerContainer.removeAllViews();
+
+		WidgetData widgetData = new WidgetData(widgetType.titleId, widgetType.dayIconId, widgetType.nightIconId);
+		WidgetPromoBanner banner = new WidgetPromoBanner(getMapActivity(), widgetData, false);
+		bannerContainer.addView(banner.build(activity));
 	}
 
 	private void setupSecondaryDescription() {
@@ -203,7 +229,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 	private void setupActions() {
 		for (Action action : Action.values()) {
 			View container = view.findViewById(action.containerId);
-			if (action.isAvailable(widgetInfo)) {
+			if (action.isAvailable(widgetInfo, app)) {
 				View pressableContainer = container.findViewById(R.id.pressable_container);
 				ImageView ivIcon = container.findViewById(R.id.icon);
 				TextView tvTitle = container.findViewById(R.id.title);
@@ -245,7 +271,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 	}
 
 	private void openSettingsFragment() {
-		WidgetSettingsBaseFragment settingsFragment = widgetType == null ? null : widgetType.getSettingsFragment();
+		WidgetSettingsBaseFragment settingsFragment = widgetType == null ? null : widgetType.getSettingsFragment(app);
 		if (settingsFragment == null) {
 			throw new IllegalStateException("Widget has no available settings");
 		}
@@ -363,7 +389,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 
 	@Override
 	public void onWidgetsConfigurationChanged() {
-		setupSelectableItem();
+		setupWidgetItem();
 		notifyTarget();
 	}
 
@@ -423,13 +449,13 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 			this.containerId = containerId;
 		}
 
-		public boolean isAvailable(@NonNull MapWidgetInfo widgetInfo) {
+		public boolean isAvailable(@NonNull MapWidgetInfo widgetInfo, @NonNull Context ctx) {
 			WidgetType widgetType = widgetInfo.widget.getWidgetType();
 			switch (this) {
 				case SETTINGS:
-					return widgetType != null && widgetType.getSettingsFragment() != null;
+					return widgetType != null && widgetType.getSettingsFragment(ctx) != null;
 				case DUPLICATE:
-					return widgetType != null && widgetType.defaultPanel.isDuplicatesAllowed();
+					return widgetType != null && widgetType.isPurchased(ctx) && widgetType.defaultPanel.isDuplicatesAllowed();
 				case REMOVE:
 					return true;
 				default:

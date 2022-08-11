@@ -24,6 +24,14 @@
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginVertical="@dimen/content_padding" />
 
+	<FrameLayout
+		android:id="@+id/promo_banner_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding"
+		android:visibility="gone"/>
+
 	<LinearLayout
 		android:id="@+id/secondary_desc_container"
 		android:layout_width="match_parent"

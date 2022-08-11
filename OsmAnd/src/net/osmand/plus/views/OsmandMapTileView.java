@@ -268,6 +268,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	@Nullable
+	public Context getUiContext() {
+		if (mapActivity != null) {
+			return mapActivity;
+		}
+		return view != null ? view.getContext() : null;
+	}
+
+	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
@@ -275,30 +283,38 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		if (mapActivity != null) {
-			gestureDetector = new GestureDetector(mapActivity, new MapTileViewOnGestureListener());
-			multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
-			doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
-			twoFingersTapDetector = new TwoFingerTapDetector() {
-				@Override
-				public void onTwoFingerTap() {
-					//afterTwoFingersTap = true;
-					if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
-						return;
-					}
-					if (isZoomingAllowed(getZoom(), -1.1f)) {
-						getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
-						if (wasMapLinkedBeforeGesture) {
-							application.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
-						}
+			setupTouchDetectors(mapActivity);
+		} else {
+			clearTouchDetectors();
+		}
+	}
+
+	public void setupTouchDetectors(@NonNull Context ctx) {
+		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
+		multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
+		twoFingersTapDetector = new TwoFingerTapDetector() {
+			@Override
+			public void onTwoFingerTap() {
+				//afterTwoFingersTap = true;
+				if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+					return;
+				}
+				if (isZoomingAllowed(getZoom(), -1.1f)) {
+					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
+					if (wasMapLinkedBeforeGesture) {
+						application.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
 					}
 				}
-			};
-		} else {
-			gestureDetector = null;
-			multiTouchSupport = null;
-			doubleTapScaleDetector = null;
-			twoFingersTapDetector = null;
-		}
+			}
+		};
+	}
+
+	public void clearTouchDetectors() {
+		gestureDetector = null;
+		multiTouchSupport = null;
+		doubleTapScaleDetector = null;
+		twoFingersTapDetector = null;
 	}
 
 	@NonNull
@@ -1289,12 +1305,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
-							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
 		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0);
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
-							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
+	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		double border = 0.8;
 		int dx = 0;
@@ -1356,7 +1372,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitLocationToMap(double clat, double clon, int zoom,
-								 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
+	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
 		RotatedTileBox tb = currentViewport.copy();
 		int dy = 0;
 

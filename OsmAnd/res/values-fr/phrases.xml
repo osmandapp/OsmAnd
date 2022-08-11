@@ -4342,4 +4342,8 @@
     <string name="poi_club_doityourself">Club de bricolage</string>
     <string name="poi_club_bicycle">Club cycliste</string>
     <string name="poi_first_aid_kit">Kit de premiers secours</string>
+    <string name="poi_dog">Chiens</string>
+    <string name="poi_dog_leashed">Chiens : tenus en laisse uniquement</string>
+    <string name="poi_dog_unleashed">Chiens : sans laisse acceptés</string>
+    <string name="poi_dog_designated">Désigné pour les chiens</string>
 </resources>

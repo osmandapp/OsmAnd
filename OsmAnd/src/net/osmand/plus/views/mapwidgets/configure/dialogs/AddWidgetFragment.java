@@ -35,6 +35,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
+import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner.WidgetData;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
@@ -49,8 +51,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_WIDGET_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_WIDGET_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_GROUP_NAME;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGET_TYPE;
@@ -85,7 +87,7 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 			initFromBundle(savedInstanceState);
 		} else if (args != null) {
 			initFromBundle(args);
-			selectSingleWidgetByDefault();
+			selectWidgetByDefault();
 		}
 	}
 
@@ -193,16 +195,23 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		WidgetGroup group = widgetsDataHolder.getWidgetGroup();
+		MapActivity activity = requireMapActivity();
 
 		for (WidgetType widget : widgets) {
-			int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
-			View view = inflater.inflate(layoutId, container, false);
-			String title = getString(widget.titleId);
-			int descId = group != null ? widget.getGroupDescriptionId() : widget.descId;
-			String desc = descId == 0 ? null : getString(descId);
-			Drawable icon = getIcon(widget.getIconId(nightMode));
-			setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
-			container.addView(view);
+			if (widget.isPurchased(app)) {
+				int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
+				View view = inflater.inflate(layoutId, container, false);
+				String title = getString(widget.titleId);
+				int descId = group != null ? widget.getGroupDescriptionId() : widget.descId;
+				String desc = descId == 0 ? null : getString(descId);
+				Drawable icon = getIcon(widget.getIconId(nightMode));
+				setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
+				container.addView(view);
+			} else {
+				WidgetData widgetData = new WidgetData(widget.titleId, widget.dayIconId, widget.nightIconId);
+				WidgetPromoBanner banner = new WidgetPromoBanner(activity, widgetData, false);
+				container.addView(banner.build(activity));
+			}
 		}
 	}
 
@@ -282,14 +291,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		return OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
 	}
 
-	private void selectSingleWidgetByDefault() {
-		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
+	private void selectWidgetByDefault() {
+		WidgetType widget = widgetsDataHolder.getMainWidget();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
-		if (!Algorithms.isEmpty(widgets)) {
-			WidgetType widget = widgetsDataHolder.getWidgetsList().get(0);
-			if (widgets.size() == 1 || widget.isMainWidgetOfGroup()) {
-				updateWidgetSelection(widget.getDefaultOrder(), widget.id, true);
-			}
+		if (widget != null) {
+			updateWidgetSelection(widget.getDefaultOrder(), widget.id, widget.isPurchased(app));
 		} else if (aidlWidgetData != null) {
 			updateWidgetSelection(0, getAidlWidgetId(aidlWidgetData), true);
 		}
