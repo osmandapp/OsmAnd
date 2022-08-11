@@ -4312,7 +4312,7 @@
     <string name="remove_group_from_markers">Вилучити групу зі списку позначок</string>
     <string name="start_point">Старт</string>
     <string name="mapillary_menu_filter_description_new">Добирати зображення за датою або типом. Працює лише на докладних масштабах.</string>
-    <string name="service_is_not_available_please_try_later">Служба недоступна, повторіть спробу пізніше.</string>
+    <string name="service_is_not_available_please_try_later">Служба недоступна. Повторіть спробу пізніше.</string>
     <string name="shared_string_files">Файли</string>
     <string name="travel_route_types">Типи маршрутів</string>
     <string name="sample_wikivoyage">Приклад Вікімадрів</string>
