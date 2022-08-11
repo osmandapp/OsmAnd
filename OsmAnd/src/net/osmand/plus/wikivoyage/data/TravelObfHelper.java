@@ -263,6 +263,7 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.title = createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
 		travelGpx.lat = amenity.getLocation().getLatitude();
 		travelGpx.lon = amenity.getLocation().getLongitude();
+		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
 		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
