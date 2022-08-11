@@ -140,8 +140,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private OnItemClickListener adapterClickListener;
 
 	private boolean visible;
-	private DashboardType visibleType;
-	private DashboardType previousVisibleType;
+	private DashboardVisibilityStack visibilityStack = new DashboardVisibilityStack();
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
 	private final List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
@@ -481,11 +480,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void hideDashboard() {
-		setDashboardVisibility(false, visibleType);
+		setDashboardVisibility(false, visibilityStack.getCurrent());
 	}
 
 	public void hideDashboard(boolean animation) {
-		setDashboardVisibility(false, visibleType, animation);
+		setDashboardVisibility(false, visibilityStack.getCurrent(), animation);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
@@ -494,15 +493,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, int[] animationCoordinates) {
 		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animate, animationCoordinates);
+		setDashboardVisibility(visible, type, animate, animationCoordinates);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation) {
 		setDashboardVisibility(visible, type, animation, null);
-	}
-
-	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animation, animationCoordinates);
 	}
 
 	public void refreshDashboardFragments() {
@@ -514,20 +509,19 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return R.color.status_bar_transparent_gradient;
 	}
 
-	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation, int[] animationCoordinates) {
+	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
 		if (visible == this.visible && isCurrentType(type) || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		this.previousVisibleType = prevItem;
 		this.visible = visible;
+		updateVisibilityStack(type, visible);
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
 		boolean appModeChanged = currentAppMode != previousAppMode;
 
 		boolean refresh = isCurrentType(type) && !appModeChanged;
 		previousAppMode = currentAppMode;
-		visibleType = type;
 		staticVisible = visible;
 		staticVisibleType = type;
 		mapActivity.enableDrawer();
@@ -548,7 +542,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			mapActivity.disableDrawer();
 			dashboardView.setVisibility(View.VISIBLE);
 			if (isActionButtonVisible()) {
-				setActionButton(visibleType);
+				setActionButton(visibilityStack.getCurrent());
 				actionButton.setVisibility(View.VISIBLE);
 			} else {
 				hideActionButton();
@@ -631,6 +625,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 		}
 		mapActivity.updateStatusBarColor();
+	}
+
+	private void updateVisibilityStack(@NonNull DashboardType type, boolean visible) {
+		if (visible) {
+			visibilityStack.add(type);
+		} else {
+			visibilityStack.clear();
+		}
 	}
 
 	public void updateDashboard() {
@@ -999,7 +1001,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentType(@NonNull DashboardType ... types) {
 		for (DashboardType type : types) {
-			if (visibleType == type) {
+			if (visibilityStack.getCurrent() == type) {
 				return true;
 			}
 		}
@@ -1065,12 +1067,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void backPressed() {
-		if (previousVisibleType != null && isNoCurrentType(previousVisibleType)) {
+		DashboardType previous = visibilityStack.getPrevious();
+		if (previous != null) {
 			if (isCurrentType(MAPILLARY)) {
 				hideKeyboard();
 			}
-			visibleType = null;
-			setDashboardVisibility(true, previousVisibleType);
+			visibilityStack.pop(); // Remove current visible type.
+			visibilityStack.pop(); // Also remove previous type. It will be set later.
+			setDashboardVisibility(true, previous);
 		} else {
 			hideDashboard();
 			mapActivity.backToConfigureProfileFragment();
