@@ -4783,4 +4783,6 @@
     <string name="connect_with_straight_line">Соединить прямой линией</string>
     <string name="attach_roads_descr">Хотите ли вы аппроксимировать свой путь с помощью действующего маршрута, прикрепленного к офлайн-картам\? В этом случае у вас будет скорректированная высота над уровнем моря, информация о дорогах и поворотах, которую в дальнейшем можно будет использовать в навигации.</string>
     <string name="attach_to_roads_banner_desc">Прикрепите свой трек к дорогам, чтобы получить подробные инструкции по навигации.</string>
+    <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
+    <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
 </resources>
