@@ -4773,4 +4773,6 @@
     <string name="connect_with_straight_line">Tengja með beinni línu</string>
     <string name="track_attach_to_the_roads_descr">Ferill verður tengdur við veginn með ónettengdum kortum, lögun ferilsins mun breytast.</string>
     <string name="attach_roads_warning">Þú getur aðeins tengt skráðan feril við vegi</string>
+    <string name="available_as_part_of_subscription_plan">Í boði sem hluti af %1$s-áskriftinni.</string>
+    <string name="included_in_your_current_plan">Innifalið í \"%1$s\" áskriftinni þinni</string>
 </resources>
