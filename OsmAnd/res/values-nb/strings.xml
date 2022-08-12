@@ -4737,4 +4737,8 @@
     <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
     <string name="auto_25_chars_route_tr_kl">Sving til høyre og hold til venstre</string>
+    <string name="accessibility_2d_view_on">2,5D-visning på</string>
+    <string name="goods_delivery_desc">Kjøretøy som transporterer varer kan ha begrenset tilgang til noen veier.</string>
+    <string name="included_in_your_current_plan">Inkludert i din nåværende «%1$s»-plan</string>
+    <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
 </resources>
