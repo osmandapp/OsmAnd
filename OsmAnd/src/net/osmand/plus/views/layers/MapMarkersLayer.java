@@ -140,6 +140,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private int displayedWidgets;
 	private List<GPXUtilities.WptPt> cachedPoints = null;
 	private Renderable.RenderableSegment cachedRenderer;
+	private Location savedLoc;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -961,9 +962,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		}
 		if (myLoc == null) {
+			clearVectorLinesCollections();
 			return;
 		}
 
+		if (savedLoc != null && !isEquals(myLoc, savedLoc)) {
+			clearVectorLinesCollections();
+		}
+		savedLoc = myLoc;
 		OsmandSettings settings = app.getSettings();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
@@ -1064,5 +1070,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
+	}
+
+	private boolean isEquals(@NonNull Location loc1, @NonNull Location loc2) {
+		double maxDist = 0.0001;//less 10 meters
+		double dlon = Math.abs(loc1.getLongitude() - loc2.getLongitude());
+		double dlat = Math.abs(loc1.getLatitude() - loc2.getLatitude());
+		return dlon < maxDist && dlat < maxDist;
 	}
 }
