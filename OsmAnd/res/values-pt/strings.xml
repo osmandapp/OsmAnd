@@ -1377,7 +1377,7 @@
     <string name="shared_string_disable">Desativar</string>
     <string name="shared_string_enabled">Ativado</string>
     <string name="shared_string_disabled">Desativado</string>
-    <string name="shared_string_selected">Selecionado(s)</string>
+    <string name="shared_string_selected">Selecionado</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar tudo</string>
     <string name="shared_string_export">Exportar</string>
@@ -4783,4 +4783,6 @@
     <string name="attach_roads_warning">Pode anexar apenas uma pista registada às estradas</string>
     <string name="shared_string_only_missing">Só os que faltam</string>
     <string name="attach_to_roads_banner_desc">Anexe os seus trilhos às estradas para obter instruções de navegação.</string>
+    <string name="available_as_part_of_subscription_plan">Disponível como parte da subscrição %1$s.</string>
+    <string name="included_in_your_current_plan">Incluído no seu plano \"%1$s\" atual</string>
 </resources>
