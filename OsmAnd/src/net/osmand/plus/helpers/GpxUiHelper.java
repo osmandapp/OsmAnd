@@ -1914,6 +1914,7 @@ public class GpxUiHelper {
 		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
 		                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
 			super(yVals, label);
+			setHighlightLineWidth(1);
 			this.dataSetType = dataSetType;
 			this.dataSetAxisType = dataSetAxisType;
 			this.leftAxis = leftAxis;
