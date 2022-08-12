@@ -1073,7 +1073,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				hideKeyboard();
 			}
 			visibleTypes.pop(); // Remove current visible type.
-			visibleTypes.pop(); // Also remove previous type. It will be set later.
+			visibleTypes.pop(); // Also remove previous type. It will be add later.
 			setDashboardVisibility(true, previous);
 		} else {
 			hideDashboard();
