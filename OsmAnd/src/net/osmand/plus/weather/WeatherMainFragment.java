@@ -64,7 +64,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 		setupWeatherContours();
 		setupOfflineForecast();
 
-		updateScreenMode(weatherPlugin.isWeatherEnabled(appMode));
+		updateScreenMode(weatherPlugin.isAnyDataVisible(appMode));
 		return view;
 	}
 
@@ -73,10 +73,10 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_umbrella,
 				getString(R.string.shared_string_weather),
-				weatherPlugin.isWeatherEnabled(appMode),
+				weatherPlugin.isAnyDataVisible(appMode),
 				false,
 				v -> {
-					boolean newState = !weatherPlugin.isWeatherEnabled(appMode);
+					boolean newState = !weatherPlugin.isAnyDataVisible(appMode);
 					weatherPlugin.setWeatherEnabled(appMode, newState);
 					updateScreenMode(newState);
 				});

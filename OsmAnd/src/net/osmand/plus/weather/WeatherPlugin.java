@@ -194,7 +194,7 @@ public class WeatherPlugin extends OsmandPlugin {
 				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
 				return false;
 			};
-			boolean selected = isWeatherEnabled(appMode);
+			boolean selected = isAnyDataVisible(appMode);
 			adapter.addItem(new ContextMenuItem(WEATHER_ID)
 					.setTitleId(R.string.shared_string_weather, mapActivity)
 					.setDescription(selected ? getWeatherTypesSummary(getEnabledLayers(appMode)) : null)
@@ -227,6 +227,12 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public boolean isWeatherEnabled(@NonNull ApplicationMode appMode) {
 		return WX_ENABLED.getModeValue(appMode);
+	}
+
+	public boolean isAnyDataVisible(@NonNull ApplicationMode appMode) {
+		boolean isAnyLayerEnabled = !Algorithms.isEmpty(getEnabledLayers(appMode));
+		boolean isContoursEnabled = isContoursEnabled(appMode);
+		return isWeatherEnabled(appMode) && (isAnyLayerEnabled || isContoursEnabled);
 	}
 
 	public boolean isContoursEnabled(@NonNull ApplicationMode appMode) {
