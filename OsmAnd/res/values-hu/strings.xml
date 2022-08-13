@@ -711,8 +711,7 @@
     <string name="osmand_parking_pm">du.</string>
     <string name="osmand_parking_am">de.</string>
     <string name="osmand_parking_position_name">Parkolóhely</string>
-    <string name="osmand_parking_plugin_description">Lehetővé teszi az autója parkolási helyének elmentését, beleértve a hátralévő parkolási időt is.
-\nA parkolási hely és idő egyaránt látható az irányítópulton, valamint térkép-widgeten. Értesítés adható hozzá az Android naptárhoz.</string>
+    <string name="osmand_parking_plugin_description">Lehetővé teszi, hogy a térképen beállítson egy pontot, ahol az autóját az utcán hagyta, és értesítse a naptárán keresztül, amikor a parkolási idő elkezdődik. A bővítmény segít nyomon követni az autó parkolási idejét és helyét. A jelölés elhelyezéséhez válasszon egy helyet a térképen, majd lépjen a Műveletekre és nyomja meg a \"Megjelölés parkolási helyként\" gombot.</string>
     <string name="osmand_parking_plugin_name">Parkolási pozíció</string>
     <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
     <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
@@ -1284,9 +1283,9 @@
     <string name="rendering_value_car_name">Személyautó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
-    <string name="record_plugin_description">Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha megnyomja a GPX naplózó gombot a térképképernyőn, valamint képes minden navigációs útvonalat automatikusan egy GPX-fájlba naplózni.
-\n 
-\nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség stb., és természetesen a nyomvonalak később harmadik féltől származó elemzőeszközökkel is elemezhetők.</string>
+    <string name="record_plugin_description">Lehetővé teszi az edzés- vagy mozgásadatok, például a sebesség és útvonal domborzati viszonyainak rögzítését, mentését és elemzését, amelyeket aztán újra felhasználhat, javíthat, kiegészíthet vagy a barátaival megoszthat.
+\n
+\nÚtmutató - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="record_plugin_name">Utazás felvétele</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
@@ -1495,14 +1494,11 @@
 \nNem szükséges speciális térképet letölteni, a nézet a szabványos térképeinkből kerül előállításra. 
 \n 
 \nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
-    <string name="plugin_nautical_descr">Ez a bővítmény az OsmAnd térképet és a navigációs alkalmazást gazdagítja hajózási térképek készítésével csónakázáshoz, vitorlázáshoz és a vízi sportok egyéb típusaihoz. 
-\n 
-\nEgy speciális térkép-kiegészítő az OsmAnd alkalmazáshoz biztosítani fogja az összes hajózási navigációs jelzést és szimbólumot a belvízi, valamint a partközeli navigációhoz. Minden egyes navigációs jelzés leírása olyan részleteket biztosít, amely azok azonosításához és a jelentésükhöz szükségesek (kategória, alak, szín, sorozat, hivatkozás, stb.). 
-\n 
-\nAz OsmAnd hagyományos térképstílusainak egyikéhez való visszatéréshez egyszerűen kapcsolja ki ezen bővítmény aktiválást újra, vagy változtassa meg a „Térképstílust” a „Térkép beállítása” alatt igény szerint.</string>
-    <string name="plugin_ski_descr">Az OsmAnd ezen bővítménye a kezedbe adja a globális lesikló pályák, a sífutópályák, az alpesi síutak, kabinok és sífelvonók minden részletét. Az utak és a pályák nehézség szerinti színkódokkal vannak megjelenítve, és egy speciális „Téli” térképstílussal vannak ábrázolva hószínű alapon. 
-\n 
-\nA nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre”, megjelenítve a táj minden elemét a téli körülmények szerint. Ez a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
+    <string name="plugin_nautical_descr">Kapcsolja be, hogy a térképet a hajózási útvonalakra, a navigációs fényekre, a veszélyzónákra, a hajózási vagy kikötési tilalmi övezetekre stb. vonatkozó információkkal gazdagítsa. A használathoz töltsön le Hajózási térképeket és engedélyezze a \"Hajózási térkép\" típust a Térkép beállítása menüpont alatt.
+\n
+\n
+\nÚtmutató - https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="plugin_ski_descr">Navigáció a téli sporthelyszíneken való navigációra tervezve. Figyelje a sípályákat, a sífelvonójelzőket és a pályák nehézségét jelző színes vonalakat. Használathoz az engedélyezés után lépjen be a Térkép beállítása menüpontba és a térképstílusnál válassza a \"Tél és síelés\"-t.</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépeljen az összes kereséséhez</string>
     <string name="specified_directiory_not_writeable">Nem sikerült létrehozni a térképeket a megadott könyvtárban</string>
@@ -2262,7 +2258,7 @@
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
     <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, dolgozzon együtt másokkal, örökítse meg a világot.</string>
-    <string name="plugin_mapillary_descr">Utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, vegyen benne részt, örökítse meg a világot.</string>
+    <string name="plugin_mapillary_descr">Utcaszintű fényképeket kínál. Ahol hiányoznak a képek, ott Ön is egyszerűen hozzáadhatja őket, hogy mások is felhasználhassák. A Mapillary réteg engedélyezéséhez kapcsolja be az \"utcaszintű képek\" opciót a Térkép beállítása menüpont alatt.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
@@ -3966,9 +3962,9 @@
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
     <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
-    <string name="open_place_reviews_plugin_description">Küldjön fényképeket, értékeléseket és linkeket nyilvános helyekről (pl. éttermekről, szállodákról, múzeumokról és útpontokról) nyílt adatként: https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Lehetővé teszi, hogy hozzájáruljon az OpenPlaceReviews projekthez. Például fényképekkel, értékelésekkel, linkekkel nyilvános helyekről, mint éttermekről, szállodákról, múzeumokról és útvonalakról.
 \n
-\nTovábbi információ: https://openplacereviews.org</string>
+\nA hozzájárulás módjára vonatkozó útmutatást megtalálja a weboldalunkon - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">A test.openplacereviews.org használata</string>
     <string name="login_open_place_reviews">Bejelentkezés az OpenPlaceReviews-ba</string>
@@ -4187,7 +4183,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Havi frissítés az offline térképekhez.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Az összes kontinens és régió offline térképeinek korlátlan számú letöltése.</string>
     <string name="purchases_feature_desc_combined_wiki">Fedezze fel a Wikipédia szócikkeit útközben, internetkapcsolat nélkül. Offline adatok országok szerinti bontásban, minden nyelven.</string>
-    <string name="purchases_feature_desc_wikipedia">Fedezze fel a Wikipédiát offline. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
+    <string name="purchases_feature_desc_wikipedia">Az offline Wikipédia segítségével többet tudhat meg a meglátogatott helyekről. Minden nyelven elérhető offline, és a Wikipédia szócikkeit a térképen az érdekes helyekhez kapcsolódóan mutatja. Ne felejtsd el letölteni a Wikipedia térképeket a kiválasztott régióhoz.</string>
     <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikönyvet offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
     <string name="purchases_feature_desc_terrain">Szintvonalak, teljes domborzati térkép domborzatárnyékolással és lejtőtérképek színekkel a csúcsok és síkságok megjelenítésére.</string>
     <string name="purchases_feature_desc_nautical">Hozzáférés a tengeri mélységadatokhoz</string>

@@ -843,9 +843,9 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">Questo plugin fornisce sia le curve di livello che lo strato di ombreggiatura (dei rilievi) che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, escursionisti, e tutti coloro che sono interessati all\'orografia del paesaggio. (Per favore notare che le linee isoipse e i dati di elevazione sono separati, una volta attivato il componente aggiuntivo saranno disponibili altri file da scaricare.)
-\n 
-\nI dati globali (fra i 70° nord e 70° sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento per raccogliere immagini a bordo di Terra, il satellite fiore all\'occhiello del Sistema di Osservazione della Terra della NASA. ASTER è un lavoro di cooperazione tra NASA, il Ministero dell\'Economia, Commercio e Industria del Giappone (METI) e il Sistema Spaziale Giapponese (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii. aiuta a valutare la forma della superficie del terreno, considerando le curvature, estremità, pendenze, punti alla medesima altitudine e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, linee alla stessa altitudine per le salite e le discese, e il colorazione della devizione della pendenza rispetto al terreno pianeggiante. Dati forniti da SRTM e ASTER.
+\n
+\nHow to - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Il componente aggiuntivo note Audio/video fornisce la funzionalità per prendere note audio/video/foto durante il viaggio, usando il pulsante nella mappa, oppure direttamente nel menù contestuale per ogni posizione sulla mappa.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
@@ -1236,9 +1236,9 @@
     <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutti</string>
-    <string name="record_plugin_description">Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nella mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX. 
+    <string name="record_plugin_description">Permette di registrare e salvare e analizzare i tuoi allenamenti o dati degli spostamenti come velocità, ascese discese o percorsi di svago, che possono essere riutilizzati, migliorati, integrati o condivisi con gli amici.
 \n
-\n Le tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni.</string>
+\nHow to - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>

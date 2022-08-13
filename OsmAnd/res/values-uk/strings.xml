@@ -1289,9 +1289,9 @@
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішки</string>
-    <string name="record_plugin_description">Цей плагін додає функцію запису та збереження ваших пересувань. Ви можете робити це вручну з допомогою віджету запису GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX.
+    <string name="record_plugin_description">Дозволяє записувати, зберігати та аналізувати дані про тренування або пересування, такі як швидкість, підйоми, спуски або рельєф маршруту, які потім можна використовувати повторно, покращувати, доповнювати або ділитися з друзями.
 \n
-\nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для аналізу власних тренувань. Базові можливості аналізу треків наявні безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані треки, також можна проаналізувати за допомогою сторонніх інструментів.</string>
+\nЯк це зробити - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна увімкнути або вимкнути кнопкою запису GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал запису</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та маршруток</string>
@@ -2387,7 +2387,7 @@
     <string name="mapillary_widget">Віджет Mapillary</string>
     <string name="mapillary_widget_descr">Дозволяє швидко поширювати світлини в Mapillary.</string>
     <string name="mapillary_descr">Світлини вулиць в мережі для всіх. Відкрийте для себе нові місця, співпрацюйте та знімайте світ.</string>
-    <string name="plugin_mapillary_descr">Вуличні світлини для всіх. Відкривайте для себе місцевість, співпрацюйте, робіть знімки навкруги.</string>
+    <string name="plugin_mapillary_descr">Додає огляд вулиць. Там, де зображення відсутні, ви можете додати їх самостійно, щоб інші могли ними переглядати їх. Щоб увімкнути шар Mapillary, увімкніть «Зображення вулиць» в меню «Налаштувати мапу».</string>
     <string name="online_photos">Онлайн зображення</string>
     <string name="no_photos_descr">Тут нема світлин.</string>
     <string name="open_mapillary">Відкрити Mapillary</string>
@@ -3970,9 +3970,9 @@
     <string name="uploaded_count">Надіслано %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для надсилання</string>
     <string name="hillshade_slope_contour_lines">Рельєф / Схили / Ізолінії</string>
-    <string name="open_place_reviews_plugin_description">Надсилайте світлини, відгуки та посилання про громадські місця, як-от ресторани, готелі, музеї та маршрутні точки у вигляді відкритих даних https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Дозволяє робити внески у проєкт OpenPlaceReviews. Наприклад, світлини, огляди, посилання на громадські місця, такі як ресторани, готелі, музеї та маршрутні точки.
 \n
-\nДізнайтеся більше на https://openplacereviews.org</string>
+\nНастанови, як зробити внесок, ви можете переглянути на нашому вебсайті - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Використовувати test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увійти до OpenPlaceReviews</string>
@@ -4164,7 +4164,7 @@
     <string name="purchases_feature_desc_nautical">Отримайте доступ до даних про морські глибини</string>
     <string name="purchases_feature_desc_terrain">Ізолінії рельєфу, повноколірна відмивка рельєфу з темними відтінками та мапами схилів в кольорах для показу піків та низин.</string>
     <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікімандри в офлайн режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
-    <string name="purchases_feature_desc_wikipedia">Переглядайте Вікіпедію в офлайн режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
+    <string name="purchases_feature_desc_wikipedia">Офлайн-Вікіпедія під час подорожі допоможе вам дізнатися більше про місця, які ви відвідуєте. Вона доступна у режимі офлайн і показує статті Вікіпедії про визначні місця прямо на мапі. Не забудьте завантажити мапи Вікіпедії для обраного регіону.</string>
     <string name="purchases_feature_desc_combined_wiki">Переглядайте статті Вікіпедії в дорозі, без з’єднання з Інтернетом. Офлайнові дані, розділені за країнами та доступні всіма мовами.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>

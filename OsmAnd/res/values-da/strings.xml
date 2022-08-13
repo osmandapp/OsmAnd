@@ -36,9 +36,9 @@
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Udvidelsen giver både en højdekurve-overlejring og et lag med terrænskygger, der vises ovenpå OsmAnds standardkort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller terrænskyggelag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.)
+    <string name="srtm_plugin_description">Terrænoplysninger, f.eks. højdekurver, terrænskygger og skråninger, hjælper dig med at vurdere jordoverfladens beskaffenhed visuelt med hensyn til krumning, ekstremer, stejlhed, punkter med samme højde og meget mere. Topografiske oplysninger på et kort kan repræsenteres ved skravering af skråninger, konturlinjer for op- og nedstigninger og farven på hældningsvinklens afvigelse fra det flade. Data fra SRTM og ASTER.
 \n
-\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
+\nVejledning -http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -198,8 +198,7 @@
     <string name="osmand_parking_position_description_add">Afhent køretøj:</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkeringsplads</string>
-    <string name="osmand_parking_plugin_description">Registrer hvor din bil er parkeret, inklusiv hvor meget parkeringstid der er tilbage.
-\nBåde placering og tid er synlige på betjeningspanel samt i et modul på kortet. En alarm kan tilføjes til Android-kalenderen, som en påmindelse.</string>
+    <string name="osmand_parking_plugin_description">Aktivér for at kunne angive et punkt på kortet, hvor din bil står parkeret, og give din kalender besked, når parkeringstiden begynder. Udvidelsen hjælper med at holde styr på parkeringstiden og placeringen af din bil. For at placere en markør skal du vælge et sted på kortet, gå til Handlinger og tryk på \"Tilføj parkering\".</string>
     <string name="osmand_parking_plugin_name">Parkeringsplacering</string>
     <string name="context_menu_item_add_parking_point">Markér som parkeringssted</string>
     <string name="context_menu_item_delete_parking_point">Slet parkeringsmarkør</string>
@@ -256,11 +255,13 @@
 \nEthvert af disse kort kan enten bruges som det vigtigste (basis) kort, der skal vises på skærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s standard offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
 \n
 \nKortfliser kan downloades direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd-datamappen) som en SQLite database, som kan fremstilles ved hjælp af en række tredjeparts kortværktøjer.</string>
-    <string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller gengivelsesydeevne, eller talevejledning. Indstillinger er beregnet til udviklere og er ikke nødvendig for den almindelige app-bruger.</string>
+    <string name="osmand_development_plugin_description">Gør det muligt at konfigurere OsmAnd til test: simulere navigationsruter, kontrollere skærmens gengivelse osv. Udvidelse er ikke påkrævet for normal brug af applikationen.</string>
     <string name="plugins_screen">Udvidelser</string>
     <string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet,.</string>
     <string name="prefs_plugins">Udvidelser</string>
-    <string name="osm_editing_plugin_description">Lav OSM-bidrag såsom at oprette eller ændre OSM-interessepunkter (IP), åbne eller kommentere OSM-noter og bidrage med optagede GPX-filer i OsmAnd ved at oplyse dit brugernavn og adgangskode. OpenStreetMap.org er et fælles drevet, globalt kortlægningsprojekt.</string>
+    <string name="osm_editing_plugin_description">Giver dig mulighed for at bidrage til OpenStreetMap, et globalt fællesskab, der har til formål at skabe et omfattende kort over verden og stille ajourførte open source-data til rådighed for alle brugere.
+\n
+\nDu kan finde en vejledning i, hvordan du redigerer kortet, på vores websted https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
     <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille meddelelser:</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
@@ -1254,9 +1255,9 @@
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optagelse af tur</string>
-    <string name="record_plugin_description">Udvidelsen aktiverer funktionalitet til at optage og gemme spor ved at klikke på GPX-logningsmodulet på kortet, eller også for automatisk at logge alle dine navigationsruter til en GPX-fil.
+    <string name="record_plugin_description">Giver dig mulighed for at registrere, gemme og analysere dine trænings- eller bevægelsesdata, f.eks. hastighed, stigninger, nedkørsler eller rutehøjdekurve, som derefter kan genbruges, forbedres, suppleres eller deles med venner.
 \n
-\nOptagede spor kan deles med venner eller anvendes til OSM-bidrag. Sportsfolk kan bruge optagede spor til at overvåge deres træning. En vis grundlæggende sporanalyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv., og spor kan selvfølgelig også senere analyseres i særlige tredjeparts analyseværktøjer.</string>
+\nVejledning - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
     <string name="save_track_interval_globally">Logningsinterval</string>
     <string name="save_track_to_gpx_globally_descr">Generel positionslogning til en GPX-fil kan slås til eller fra med GPX-logningsmodulet på kortet.</string>
@@ -1375,14 +1376,10 @@
     <string name="watch">Vis</string>
     <string name="share_note">Del note</string>
     <string name="plugin_touringview_name">Touring kortvisning</string>
-    <string name="plugin_nautical_descr">Udvidelsen giver mulighed for at vise maritime kort til sejlsport, sejlads og andre former for vandsport.
+    <string name="plugin_nautical_descr">Slå til for at tilføje dit kort oplysninger om sejlruter, navigationslys, farezoner, zoner, hvor det er tilladt eller forbudt at sejle eller lægge til kaj osv. For at bruge det skal du downloade Søkort og aktivere Søkort-typen i Konfigurer kort.
 \n
-\nEn særlig korttilføjelse til OsmAnd vil angive alle maritime sømærker og søkortsymboler, for indre farvande såvel som kystnær navigation. Beskrivelsen af hvert sømærke giver de oplysninger, der er nødvendige for at identificere dem og deres betydning (kategori, form, farve, sekvens, reference, osv.).
-\n
-\nHvis du vil vende tilbage til et af OsmAnds almindelige kortstil, skal du enten deaktivere denne udvidelse igen eller ændre kortformat under \'Konfigurer kort\'.</string>
-    <string name="plugin_ski_descr">Udvidelsen viser detaljerne for globale skiløjper, langrendsruter, alpine skiruter, svævebaner og skilifte. Ruter og pister vises farvekodede efter sværhedsgrad, og vises i et særligt \'Vinter\'-kortstil som et snefarvet vinterlandskab.
-\n
-\nAktivering ændrer kortformat til \'Vinter og ski\', som viser alle landskabstræk under vinterlige forhold. Visningen kan altid nulstilles ved enten at deaktivere denne udvidelse igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
+\nVejledning - https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="plugin_ski_descr">Designet til at navigere på vintersportssteder. Se skiløjper, skiliftmarkører og farvede linjer, der angiver kompleksiteten af hvert spor. For at bruge det skal du efter aktivering gå til Konfigurer kort og vælge korttypen \"Skikort\".</string>
     <string name="plugin_touringview_descr">Aktivering ændrer kortstil til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører. 
 \n 
 \nVisning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker). 
@@ -2395,7 +2392,7 @@
     <string name="mapillary_descr">Online-fotos på gadeniveau for alle. Oplev steder, samarbejd, indfang verden.</string>
     <string name="shared_string_add_photos">Tilføj fotos</string>
     <string name="mapillary_action_descr">Del dit eget gadeperspektiv via Mapillary.</string>
-    <string name="plugin_mapillary_descr">Fotos på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
+    <string name="plugin_mapillary_descr">Giver billedvisning på gadeniveau. Hvis der mangler billeder, kan du selv tilføje dem, så andre kan gøre brug af dem. For at aktivere Mapillary-laget skal du slå \"Billeder på gadeniveau\" til i menuen Konfigurer kort.</string>
     <string name="online_photos">Online-fotos</string>
     <string name="no_photos_descr">Ingen billeder her.</string>
     <string name="shared_string_install">Installer</string>
@@ -3453,7 +3450,7 @@
     <string name="shared_string_transparency">Gennemsigtighed</string>
     <string name="shared_string_zoom_levels">Zoomniveauer</string>
     <string name="shared_string_legend">Tegnforklaring</string>
-    <string name="terrain_empty_state_text">Viser terrænskygger eller hældninger på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
+    <string name="terrain_empty_state_text">Viser terrænskygger eller skråninger på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
     <string name="shared_string_hillshade">Terrænskygge</string>
     <string name="import_complete_description">Alle data fra %1$s er importeret. Brug knapperne nedenfor til at åbne den nødvendige del af appen for at håndtere det.</string>
     <string name="items_added">Poster tilføjet</string>
@@ -3964,7 +3961,7 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Farvelæg ruterne efter deres individuelle lokale farve (hvis de findes på OpenStreetMap) og symbolet for vandreskjoldet.</string>
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrænkort: højdekurver, terrænskygger, hældning</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrænkort: højdekurver, terrænskygger, skråning</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="terrain_maps">Terrænkort</string>
@@ -3998,7 +3995,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller udløbet token</string>
     <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
-    <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, hældning</string>
+    <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, skråning</string>
     <string name="approximate_route_description">Fastgør ruten til veje på kortet for at få alle sving og yderligere data, som glathed, vejtyper osv.</string>
     <string name="duration_moment_ago">for et øjeblik siden</string>
     <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
@@ -4036,9 +4033,9 @@
     <string name="shared_string_server_url">Server-URL</string>
     <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
     <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
-    <string name="open_place_reviews_plugin_description">Send fotos, anmeldelser og links om offentlige steder som restauranter, hoteller, museer og rutepunkter som åbne data https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Giver dig mulighed for at bidrage til OpenPlaceReviews-projektet med f.eks. fotos, anmeldelser, links om offentlige steder som restauranter, hoteller, museer og waypoints.
 \n
-\nLæs mere på https://openplacereviews.org</string>
+\nDu kan finde vejledning om, hvordan du bidrager, på vores websted - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="routing_attr_height_obstacles_description">Ruteberegning kan undgå kraftige stigninger.</string>
     <string name="release_4_0_beta">- Tilføjet mulighed for at downloade højdekurver i fod
 \n
@@ -4118,7 +4115,7 @@
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
     <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt terrænskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
-    <string name="purchases_feature_desc_wikipedia">Udforsk Wikipedia offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
+    <string name="purchases_feature_desc_wikipedia">Hvis du har offline Wikipedia med på din rejse, kan du lære mere om de steder, du besøger. Den er tilgængelig offline og viser Wikipedia-artikler tilknyttet interessepunkter direkte på kortet. Glem ikke at downloade Wikipedia-kort for den valgte region.</string>
     <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Få ubegrænset download af offline kort for alle kontinenter og regioner.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Få adgang til regelmæssige månedlige opdateringer af offlinekort.</string>
