@@ -1481,7 +1481,7 @@
     <string name="share_note">Notiz mitteilen</string>
     <string name="days_behind">Tage alt</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_selected">Ausgewählt</string>
+    <string name="shared_string_selected">Ausgewählte</string>
     <string name="shared_string_selected_lowercase">ausgewählt</string>
     <string name="shared_string_is_open">Jetzt offen</string>
     <string name="rendering_attr_hideHouseNumbers_name">Hausnummern</string>
