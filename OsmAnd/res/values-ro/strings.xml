@@ -163,8 +163,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Loc de parcare</string>
-    <string name="osmand_parking_plugin_description">Vă permite să înregistrați locul în care este parcată mașina dumneavoastră, inclusiv timpul de parcare rămas.
-\n Atât locația, cât și timpul sunt vizibile pe tabloul de bord, precum și într-un widget de hartă. Se poate adăuga un memento de alarmă în calendarul Android.</string>
+    <string name="osmand_parking_plugin_description">Permiteți să setați un punct de pe hartă în care mașina dvs. este lăsată pe stradă și să vă anunțați calendarul când începe timpul de parcare. Plugin-ul ajută la urmărirea timpului de parcare și a locației mașinii dumneavoastră. Pentru a plasa un marcaj, alegeți un loc pe hartă, apoi mergeți la Acțiuni și apăsați \"Adăugare parcare\".</string>
     <string name="osmand_parking_plugin_name">poziție parcare</string>
     <string name="context_menu_item_add_parking_point">Marcați ca loc de parcare</string>
     <string name="context_menu_item_delete_parking_point">Ștergeți marcajul de parcare</string>
@@ -216,11 +215,13 @@
 \n Descărcați hărțile de tip tile direct online sau le-ați pregătit pentru utilizare offline (copiate manual în dosarul de date al OsmAnd) sub forma unei baze de date SQLite care poate fi produsă de o varietate de instrumente de pregătire a hărților de la terți.</string>
     <string name="osmand_background_plugin_description">Afișează setările pentru activarea urmăririi și navigației în fundal prin trezirea periodică a dispozitivului GPS (cu ecranul închis).</string>
     <string name="osmand_accessibility_description">Face ca funcțiile de accesibilitate ale dispozitivului să fie disponibile direct în OsmAnd. Aceasta facilitează, de exemplu, ajustarea ratei de vorbire pentru vocile text-to-speech, configurarea navigației prin D-pad, utilizarea unui trackball pentru controlul zoom-ului sau feedback text-to-speech, de exemplu pentru a vă anunța automat poziția.</string>
-    <string name="osmand_development_plugin_description">Setări pentru caracteristicile de dezvoltare și de depanare, cum ar fi simularea navigației, performanța de redare sau solicitarea vocală. Destinate dezvoltatorilor, nu sunt necesare pentru utilizarea normală a aplicației.</string>
+    <string name="osmand_development_plugin_description">Permite configurarea OsmAnd pentru testare: simulare de rute de navigare, verificarea performanțelor de redare a ecranului, etc. Plugin-ul nu este necesar pentru utilizarea normală a aplicației.</string>
     <string name="plugins_screen">Manager de plugin-uri</string>
     <string name="prefs_plugins_descr">Pluginurile activează setări avansate și funcționalități suplimentare.</string>
     <string name="prefs_plugins">Manager de plugin-uri</string>
-    <string name="osm_editing_plugin_description">Contribuții OSM, cum ar fi crearea sau modificarea obiectelor POI OSM, deschiderea sau comentarea notelor OSM și contribuția la fișierele GPX înregistrate în OsmAnd, furnizând numele de utilizator și parola. OpenStreetMap.org este un proiect de cartografiere a domeniului public global, condus de comunitate.</string>
+    <string name="osm_editing_plugin_description">Vă permite să contribuiți la OpenStreetMap, o comunitate globală care are ca scop crearea unei hărți cuprinzătoare a lumii și furnizarea de date open-source actualizate pentru fiecare utilizator.
+\n
+\nPuteți găsi instrucțiuni despre cum să editați harta pe site-ul https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Hărțile vectoriale se afișează mai rapid de regulă. Posibil să nu funcționeze bine pe anumite dispozitive.</string>
     <string name="play_commands_of_currently_selected_voice">Selectează o voce și testează redând anunțuri:</string>
     <string name="debugging_and_development">Dezvoltare OsmAnd</string>
@@ -1131,7 +1132,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nApăsați lung pentru a vizualiza pe hartă"</string>
-    <string name="shared_string_selected">Selectat</string>
+    <string name="shared_string_selected">Selectată</string>
     <string name="shared_string_selected_lowercase">selectat</string>
     <string name="delay_navigation_start">Porniți ghidarea asistată automat</string>
     <string name="gpx_info_subtracks">Subtrack-uri: %1$s</string>
@@ -1143,9 +1144,9 @@
     <string name="gpx_info_maximum_speed">Viteza maximă: %1$s</string>
     <string name="gpx_info_avg_altitude">Altitudinea medie: %1$s</string>
     <string name="gpx_selection_segment_title">Segmentul</string>
-    <string name="record_plugin_description">Acest plugin activează funcționalitatea de înregistrare și salvare a traseelor prin atingerea manuală a widget-ului de înregistrare GPX de pe hartă sau, de asemenea, de înregistrare automată a tuturor traseelor de navigație într-un fișier GPX.
+    <string name="record_plugin_description">Vă permite să înregistrați, să salvați și să analizați datele de antrenament sau de mișcare, cum ar fi viteza, urcările, coborârile sau reliefarea traseului, care pot fi apoi reutilizate, îmbunătățite, completate sau împărtășite cu prietenii.
 \n
-\n Urmele înregistrate pot fi partajate cu prietenii dvs. sau pot fi utilizate pentru contribuții OSM. Sportivii pot utiliza trasee înregistrate pentru a-și monitoriza antrenamentele. Unele analize de bază ale traseelor pot fi efectuate direct în OsmAnd, cum ar fi timpii pe tur, viteza medie etc., iar traseele pot fi, bineînțeles, analizate ulterior și în instrumente speciale de analiză de la terțe părți.</string>
+\nCum se utilizează - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="av_camera_focus">Tip de focalizare al camerei</string>
     <string name="av_camera_focus_descr">Mod focalizare cameră:</string>
     <string name="av_camera_focus_auto">Autofocalizare</string>
@@ -2981,7 +2982,7 @@
     <string name="purchases_feature_desc_nautical">Obțineți acces la informații privind adâncimea nautică</string>
     <string name="purchases_feature_desc_terrain">Liniile de contur ale terenului, harta completă a dealurilor cu nuanțe întunecate și hărți de pantă cu culori pentru a arăta vârfurile și zonele joase.</string>
     <string name="purchases_feature_desc_wikivoyage">Explorați Wikivoyage offline. Articole împărțite pe țări și regiuni și disponibile în toate limbile.</string>
-    <string name="purchases_feature_desc_wikipedia">Explorați Wikipedia offline. Articolele sunt împărțite pe țări și regiuni și sunt disponibile în toate limbile.</string>
+    <string name="purchases_feature_desc_wikipedia">Având Wikipedia offline în timpul călătoriei, vă ajută să aflați mai multe despre locurile pe care le vizitați. Aceasta este disponibilă offline și afișează articolele Wikipedia în legătură cu punctele de interes chiar pe hartă. Nu uitați să descărcați hărțile Wikipedia pentru regiunea aleasă.</string>
     <string name="purchases_feature_desc_combined_wiki">Explorați articolele din Wikipedia din mers, fără conexiune la internet. Date offline împărțite pe țări și disponibile în toate limbile.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obțineți descărcări nelimitate pentru toate hărțile offline ale continentelor și regiunilor.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obțineți acces la actualizări lunare regulate pentru hărțile offline.</string>
@@ -3224,9 +3225,9 @@
     <string name="icon_group_service">Serviciul</string>
     <string name="icon_group_symbols">Simboluri</string>
     <string name="hillshade_slope_contour_lines">Umbrire de teren / Pante / Contururi</string>
-    <string name="open_place_reviews_plugin_description">Trimiteți fotografii, recenzii și link-uri despre locuri publice, cum ar fi restaurante, hoteluri, muzee și puncte de reper ca date deschise https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Vă permite să aduceți contribuții la proiectul OpenPlaceReviews. Cum ar fi fotografii, recenzii, link-uri despre locuri publice, cum ar fi restaurante, hoteluri, muzee și puncte de orientare.
 \n
-\nCitiți mai multe la https://openplacereviews.org</string>
+\nPuteți găsi instrucțiuni despre cum să contribuiți pe site-ul nostru - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceRecenzii</string>
     <string name="opr_use_dev_url">Utilizați test.openplacereviews.org</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
@@ -3626,15 +3627,11 @@
     <string name="world_ski_missing">Descărcați harta specială offline pentru a afișa facilitățile de schi.</string>
     <string name="rendering_attr_pisteGrooming_name">Amenajare pistă</string>
     <string name="osmand_distance_planning_plugin_description">Creați trasee prin atingerea hărții sau prin utilizarea sau modificarea fișierelor GPX existente, pentru a planifica o călătorie și a măsura distanța dintre puncte. Rezultatul poate fi salvat ca fișier GPX pentru a fi utilizat ulterior pentru orientare.</string>
-    <string name="plugin_ski_descr">Acest plugin pentru OsmAnd vă pune la îndemână detalii despre pârtiile de schi alpin la nivel mondial, pârtiile de schi fond, traseele de schi alpin, telecabinele și teleschiurile. Rutele și pistele sunt afișate în funcție de dificultate, codificate prin culoare, și reprezentate într-un stil de hartă special \"Winter\", care asimilează un peisaj de iarnă în culoarea zăpezii.
-\n
-\nActivarea acestei vizualizări schimbă stilul hărții în \"Winter and ski\", prezentând toate caracteristicile peisajului în condiții de iarnă. Această vizualizare poate fi inversată fie prin dezactivarea ei din nou aici, fie prin modificarea \"Stilului hărții\" în \"Configurarea hărții\", după cum doriți.</string>
+    <string name="plugin_ski_descr">Conceput pentru a naviga în locațiile de sporturi de iarnă. Urmăriți pistele de schi, marcajele teleschiurilor și liniile colorate care indică complexitatea fiecărei piste. Pentru a o utiliza după activare, accesați Configurare hartă și alegeți tipul de hartă \"Winter and ski\".</string>
     <string name="plugin_ski_name">Vedere harta de schi</string>
-    <string name="plugin_nautical_descr">Acest plugin îmbogățește aplicația de hărți și navigație OsmAnd pentru a produce, de asemenea, hărți nautice pentru plimbări cu barca, navigație și alte tipuri de sporturi nautice.
+    <string name="plugin_nautical_descr">Activați această funcție pentru a vă îmbogăți harta cu informații despre rutele de navigație, luminile de navigație, zonele periculoase, zonele în care este permisă sau interzisă navigarea sau acostarea etc. Pentru a utiliza descărcați hărți nautice și activați tipul \" Harta nautică\" în Configurare hartă.
 \n
-\nUn add-on special de hărți pentru OsmAnd va furniza toate semnele de navigație nautică și simbolurile hărților, atât pentru navigația în interiorul uscatului, cât și pentru navigația în apropiere de țărm. Descrierea fiecărui marcaj de navigație oferă detaliile necesare pentru a le identifica și semnificația lor (categorie, formă, culoare, secvență, referință etc.).
-\n
-\nPentru a reveni la unul dintre stilurile de hartă convenționale ale OsmAnd, este suficient fie să dezactivați din nou acest plugin, fie să modificați \'Stilul hărții\' în \'Configurați harta\', după cum doriți.</string>
+\nCum se utilizează - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="plugin_nautical_name">Vedere harta nautică</string>
     <string name="plugin_touringview_descr">Activarea acestei vizualizări schimbă stilul hărții OsmAnd în \"Touring view\", aceasta fiind o vizualizare specială, cu multe detalii, pentru călătorii și șoferii profesioniști.
 \n
@@ -3648,9 +3645,9 @@
 \n
 \nAceastă vizualizare poate fi revenită fie prin dezactivarea ei din nou aici, fie prin modificarea \'Stilului hărții\' în \'Configurați harta\', după cum doriți.</string>
     <string name="plugin_touringview_name">Vizualizare hartă turistică</string>
-    <string name="srtm_plugin_description">Acest plugin oferă atât o suprapunere a curbelor de nivel, cât și un strat de umbră (în relief) pentru a fi afișate peste hărțile standard ale OsmAnd. Această funcționalitate va fi foarte apreciată de sportivi, drumeți, drumeții și oricine este interesat de structura de relief a unui peisaj. (Vă rugăm să rețineți că datele privind curbele de nivel și/sau relieful sunt descărcări separate, suplimentare, disponibile după activarea plugin-ului).
+    <string name="srtm_plugin_description">Informațiile privind terenul, cum ar fi curbele de nivel, pantele și pantele, vă ajută să evaluați vizual forma suprafeței terenului, luând în considerare curbura, extremele, abruptul, punctele de înălțime egală și multe altele. Informațiile topografice de pe o hartă pot fi reprezentate prin umbrirea pantei, curbele de nivel pentru urcare și coborâre, precum și prin culoarea abaterii unghiului de pantă față de plat. Date din SRTM și ASTER.
 \n
-\nDatele globale (între 70 ° nord și 70 ° sud) se bazează pe măsurătorile efectuate de SRTM (Shuttle Radar Topography Mission) și ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de imagistică aflat la bordul Terra, satelitul emblematic al sistemului de observare a Pământului al NASA. ASTER este un efort de cooperare între NASA, Ministerul Economiei, Comerțului și Industriei din Japonia (METI) și Japan Space Systems (J-spacesystems).</string>
+\nCum se utilizează - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="lang_ber">Berberă</string>
     <string name="lang_kab">Cabila</string>
     <string name="lang_hsb">Sorabă (Superioară)</string>
@@ -3772,7 +3769,7 @@
     <string name="show_from_zoom_level">Afișare începând de la nivelul de zoom</string>
     <string name="srtm_purchase_header">Cumpărați și instalați plugin-ul \"Contour lines\" pentru a afișa zonele verticale gradate.</string>
     <string name="srtm_menu_download_descr">Descărcați harta \"Contour line\" pentru utilizare în această regiune.</string>
-    <string name="plugin_mapillary_descr">Fotografii la nivel de stradă pentru toată lumea. Descoperiți locuri, colaborați, surprindeți lumea.</string>
+    <string name="plugin_mapillary_descr">Oferă vedere la nivelul străzii. Acolo unde lipsesc imaginile, le puteți adăuga dumneavoastră pentru ca alții să le poată folosi. Pentru a activa stratul Mapillary activați \" Imagine la nivel de stradă\" în meniul Configurare hartă.</string>
     <string name="mapillary_menu_title_pano">Afișați numai imagini la 360°</string>
     <string name="mapillary_menu_descr_tile_cache">Reîncărcați dalele pentru a vedea date actualizate.</string>
     <string name="marker_moved_to_active">Indicator de hartă mutat la activ</string>
@@ -4785,4 +4782,6 @@
     <string name="compass_visible_if_map_rotated">Vizibil dacă harta este rotită</string>
     <string name="accessibility_2d_view_on">Vedere 2.5D Pe</string>
     <string name="download_complete">Descărcare completă</string>
+    <string name="available_as_part_of_subscription_plan">Disponibil ca parte a abonamentului %1$s.</string>
+    <string name="included_in_your_current_plan">Inclus în planul dumneavoastră actual \"%1$s\"</string>
 </resources>
