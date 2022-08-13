@@ -661,11 +661,13 @@
 \nA csempés térképek letölthetők internetes forrásokból, vagy előkészíthetők kapcsolat nélküli használathoz (kézzel átmásolva az OsmAnd adatmappájába) SQLite adatbázisként, amely különféle harmadik féltől származó térkép-előkészítő eszközökkel állítható elő.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
     <string name="osmand_accessibility_description">Elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAndban. Ez megkönnyíti például a szövegfelolvasó (TTS) hangok beszédsebességének állítását, az irányítógombok konfigurálását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bemondásánál.</string>
-    <string name="osmand_development_plugin_description">Beállítások fejlesztői és hibakeresési szolgáltatásokhoz, mint például navigáció szimulálása, a megjelenítés teljesítménye vagy hangutasítások. Fejlesztőknek szánt funkciók, nem szükségesek a normál használathoz.</string>
+    <string name="osmand_development_plugin_description">Lehetővé teszi az OsmAnd konfigurálását teszteléshez, mint pl. navigációs útvonalak szimulálása, a képernyő megjelenítési teljesítményének ellenőrzése stb. A bővítmény nem szükséges az alkalmazás normál használatához.</string>
     <string name="plugins_screen">Bővítmények</string>
     <string name="prefs_plugins_descr">A bővítmények speciális beállításokat és kiegészítő funkciókat aktiválnak.</string>
     <string name="prefs_plugins">Bővítmények</string>
-    <string name="osm_editing_plugin_description">OSM hozzájárulások beküldése, mint például OSM POI objektumok létrehozása vagy módosítása, OSM-jegyzetek nyitása vagy ezekhez hozzászólások beküldése, illetve a rögzített GPX fájlok közreadása az OsmAndon belül a felhasználóneve és jelszava megadásával. Az OpenStreetMap.org egy közösségi, globális, közkincs térképező projekt.</string>
+    <string name="osm_editing_plugin_description">Lehetővé teszi, hogy hozzájáruljon az OpenStreetMap-hoz, egy globális közösséghez, amelynek célja a világ átfogó térképének létrehozása és naprakész, nyílt forráskódú adatok biztosítása minden felhasználó számára.
+\n
+\nA térkép szerkesztésére vonatkozó utasításokat a https://osmand.net/docs/user/plugins/osm-editing weboldalon találja</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
     <string name="play_commands_of_currently_selected_voice">Hang kijelölése és tesztelése bemondások lejátszásával:</string>
     <string name="debugging_and_development">OsmAnd fejlesztés</string>
@@ -876,9 +878,9 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
-    <string name="srtm_plugin_description">Ez a bővítmény egy szintvonal-fedvényt és egy domborzatárnyékolás fedőréteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel. (Vegye figyelembe, hogy a szintvonalak és a domborzatárnyékolás külön, további letöltés után érhető el a bővítmény engedélyezése után.)
+    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolások, lejtők segítenek vizuálisan értékelni a földfelszín alakját, figyelembe véve a görbületet, a szélsőségeket, a meredekséget, az azonos magasságú pontokat és egyebeket. A térképen a topográfiai információk lejtőárnyékolással, kontúrvonalakkal a felfelé ill. lefelé vezető útvonalakhoz, valamint a különböző színű lejtési szögekkel ábrázolhatók. Adatok az SRTM-től és az ASTER-től.
 \n
-\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
+\nÚtmutató - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="recording_is_recorded">Hang-/videofelvétel. Leállításhoz koppintson az A/V widgetre.</string>
     <string name="recording_playing">A megadott felvétel egyik hangfájljának a lejátszása elindult.
 \n%1$s</string>
@@ -1495,7 +1497,6 @@
 \n 
 \nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
     <string name="plugin_nautical_descr">Kapcsolja be, hogy a térképet a hajózási útvonalakra, a navigációs fényekre, a veszélyzónákra, a hajózási vagy kikötési tilalmi övezetekre stb. vonatkozó információkkal gazdagítsa. A használathoz töltsön le Hajózási térképeket és engedélyezze a \"Hajózási térkép\" típust a Térkép beállítása menüpont alatt.
-\n
 \n
 \nÚtmutató - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="plugin_ski_descr">Navigáció a téli sporthelyszíneken való navigációra tervezve. Figyelje a sípályákat, a sífelvonójelzőket és a pályák nehézségét jelző színes vonalakat. Használathoz az engedélyezés után lépjen be a Térkép beállítása menüpontba és a térképstílusnál válassza a \"Tél és síelés\"-t.</string>
@@ -3962,7 +3963,7 @@
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
     <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
-    <string name="open_place_reviews_plugin_description">Lehetővé teszi, hogy hozzájáruljon az OpenPlaceReviews projekthez. Például fényképekkel, értékelésekkel, linkekkel nyilvános helyekről, mint éttermekről, szállodákról, múzeumokról és útvonalakról.
+    <string name="open_place_reviews_plugin_description">Lehetővé teszi, hogy hozzájáruljon az OpenPlaceReviews projekthez. Például fényképekkel, értékelésekkel, linkekkel nyilvános helyekről, mint éttermek, szállodák, múzeumok és útvonalak.
 \n
 \nA hozzájárulás módjára vonatkozó útmutatást megtalálja a weboldalunkon - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -4183,7 +4184,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Havi frissítés az offline térképekhez.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Az összes kontinens és régió offline térképeinek korlátlan számú letöltése.</string>
     <string name="purchases_feature_desc_combined_wiki">Fedezze fel a Wikipédia szócikkeit útközben, internetkapcsolat nélkül. Offline adatok országok szerinti bontásban, minden nyelven.</string>
-    <string name="purchases_feature_desc_wikipedia">Az offline Wikipédia segítségével többet tudhat meg a meglátogatott helyekről. Minden nyelven elérhető offline, és a Wikipédia szócikkeit a térképen az érdekes helyekhez kapcsolódóan mutatja. Ne felejtsd el letölteni a Wikipedia térképeket a kiválasztott régióhoz.</string>
+    <string name="purchases_feature_desc_wikipedia">Az offline Wikipédia segítségével többet tudhat meg a meglátogatott helyekről. Minden nyelven elérhető offline, és a Wikipédia szócikkeit a térképen az érdekes helyekhez kapcsolódóan mutatja. Ne felejtse el letölteni a Wikipedia térképeket a kiválasztott régióhoz.</string>
     <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikönyvet offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
     <string name="purchases_feature_desc_terrain">Szintvonalak, teljes domborzati térkép domborzatárnyékolással és lejtőtérképek színekkel a csúcsok és síkságok megjelenítésére.</string>
     <string name="purchases_feature_desc_nautical">Hozzáférés a tengeri mélységadatokhoz</string>
