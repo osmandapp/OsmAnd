@@ -48,7 +48,9 @@
     <string name="plugins_screen">Плагіни</string>
     <string name="prefs_plugins_descr">Плагіни надають додаткові налаштування та можливості.</string>
     <string name="prefs_plugins">Плагіни</string>
-    <string name="osm_editing_plugin_description">Зробіть свій внесок в OSM, створюючи чи змінюючи точки інтересу в OSM, створюючи нотатки чи залишаючи коментарі до них, надсилаючи записані треки GPX з OsmAnd, для цього потрібні облікові дані OSM. OpenStreetMap.org – всесвітній проєкт зі створення вільних відкритих мап, який керуються спільнотою учасників проєкту.</string>
+    <string name="osm_editing_plugin_description">Дає змогу робити внески до OpenStreetMap, глобальної спільноти, мета якої — створення повної мапи світу та надання актуальних відкритих даних кожному користувачеві.
+\n
+\nВи можете переглянути інструкції про редагування мапи на нашому вебсайті https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи показуються швидше. Підтримуються не всіма пристроями.</string>
     <string name="play_commands_of_currently_selected_voice">Відтворити оголошення вибраним голосом:</string>
     <string name="debugging_and_development">Налагодження і розробка OsmAnd</string>
@@ -711,8 +713,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Місце стоянки</string>
-    <string name="osmand_parking_plugin_description">Дозволяє записувати, де ви залишили вашу автівку, а також, скільки часу залишилось до кінця стоянки.
-\n Місце розташування та час видно на приладовій панелі, а також у віджеті мапи. Нагадування можна додати в календар Android.</string>
+    <string name="osmand_parking_plugin_description">Увімкніть, щоб установити точку на мапі, де ви залишили авто, і додайте у свій календар час початку паркування. Плагін допомагає стежити за часом паркування та місця перебування вашого авто. Щоб поставити позначку, оберіть місце на мапі, потім перейдіть до Дії та натисніть «Додати місце стоянки».</string>
     <string name="osmand_parking_plugin_name">Місце стоянки</string>
     <string name="context_menu_item_add_parking_point">Позначити як місце паркування</string>
     <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
@@ -817,9 +818,9 @@
     <string name="audionotes_plugin_name">Аудіо/відео примітки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Ізолінії</string>
-    <string name="srtm_plugin_description">Цей плагін показує як шар ізоліній, так і шар рельєфу поверх типових мап OsmAnd. Вони стануть в пригоді спортсменам, туристам, мандрівникам та будь-кому, хто цікавиться структурою рельєфу місцевості. (Зверніть увагу, що дані про ізолінії є окремими від даних про рельєф; їх можна завантажити після увімкнення плагіну.)
+    <string name="srtm_plugin_description">Дані про рельєф, наприклад ізолінії, відтінки пагорби та схили, допомагає візуально оцінити форму поверхні землі, враховуючи кривина, екстремуми, крутість, точки рівної висоти тощо. Топографічні дані на мапі можуть бути представлені затемненням схилів, ізолініями підйомів і спусків, а також кольором відхилення кута схилу від плаского. Дані з SRTM і ASTER.
 \n
-\nВсесвітні дані (між 70° на півночі й 70° на півдні) засновано на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту спостереження за рельєфом на борту Terra, флагманського супутника спостереження Землі від NASA. ASTER — це підсумок спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі та промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
+\nЯк це зробити - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="srtm_plugin_name">Ізолінії</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
@@ -1427,11 +1428,9 @@
     <string name="shared_string_disable">Вимкнути</string>
     <string name="plugin_install_needs_network">Для встановлення цього плагіну вам потрібне з\'єднання з Інтернетом.</string>
     <string name="shared_string_get">Отримати</string>
-    <string name="plugin_nautical_descr">Цей плагін збагачує OsmAnd морськими мапами для човнів, вітрильного спорту та інших водних видів спорту.
+    <string name="plugin_nautical_descr">Увімкніть, щоб доповнити вашу мапу даними про вітрильні маршрути, навігаційні вогні, небезпечні зони, зони, де дозволено або заборонено плавати чи причалювати тощо. Щоб використовувати завантажені морські мапи та ввімкніть «Морську мапу» у меню «Налаштувати мапу».
 \n
-\nСпеціальне розширення-мапа для OsmAnd надасть усі навігаційні знаки, як для плавання у внутрішніх водах, так і для прибережної навігації. Опис кожного навігаційного знаку містить подробиці, необхідні для їх ідентифікації, а також їх значення (категорія, форма, колір, послідовність, номер та інше).
-\n
-\nЩоб повернутися до одного зі звичайних стилів OsmAnd, просто вимкніть цей плагін або змініть «Стиль мапи» у розділі «Налаштування мапи» на потрібний.</string>
+\nЯк це зробити - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="osmand_parking_overdue">застаріло</string>
     <string name="action_create">Створити дію</string>
     <string name="action_modify">Змінити дію</string>
