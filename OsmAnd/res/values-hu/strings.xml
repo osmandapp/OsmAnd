@@ -4100,7 +4100,7 @@
     <string name="local_backup_descr">Biztonsági mentés vagy visszaállítás helyi fájl segítségével.</string>
     <string name="duration_ago">Ennyi idővel ezelőtt: %1$s</string>
     <string name="last_backup">Legutóbbi biztonsági mentés</string>
-    <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
+    <string name="backup_and_restore">Biztonsági másolat és visszaállítás</string>
     <string name="select_nav_profile_dialog_message">A „Navigáció típusával” jelölheti ki az útvonal kiszámításának módját a rendelkezésre álló offline és online útvonaltervezők közül.</string>
     <string name="delete_all_confirmation">Igen, törlődjék minden</string>
     <string name="backup_delete_old_data">Régi változatok eltávolítása</string>
