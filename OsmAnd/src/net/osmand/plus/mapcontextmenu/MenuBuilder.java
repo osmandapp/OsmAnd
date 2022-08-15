@@ -1496,9 +1496,7 @@ public class MenuBuilder {
 		} else {
 			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
 			if (gpxAmenity != null && mapAmenity != null) {
-
-				//TODO: uncomment
-//				gpxAmenity.updateWithAmenity((Amenity) mapAmenity);
+				gpxAmenity.updateWithAmenity((Amenity) mapAmenity);
 				return gpxAmenity;
 			} else if (gpxAmenity != null) {
 				return gpxAmenity;
