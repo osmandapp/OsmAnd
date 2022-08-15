@@ -155,8 +155,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">停車地點</string>
-    <string name="osmand_parking_plugin_description">讓您記錄您的車停在哪以及還剩多少停車時間。
-\n 位置與時間均可在儀表板與地圖小工具上看到。並可新增提醒到 Android 日曆中。</string>
+    <string name="osmand_parking_plugin_description">啟用以在地圖上設定您的汽車停在街道上的點，並在停車時間開始時通知您的日曆。外掛程式有助於追蹤您的汽車的停車時間與位置。要放置標記，請在地圖上選擇一個地點，然後跳至「動作」並按「新增停車位」。</string>
     <string name="osmand_parking_plugin_name">停車地點</string>
     <string name="context_menu_item_add_parking_point">標記為停車位置</string>
     <string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -208,11 +207,13 @@
 \n 可以直接線上下載圖磚，或是可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖製作工具產生。</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景（螢幕關閉）顯示設定，以開啟追蹤與導航。</string>
     <string name="osmand_accessibility_description">讓裝置的無障礙功能在 OsmAnd 可以直接使用，例如調整文字轉語音的語音速率、設定 D-pad 導航、使用軌跡球來控制縮放，或文字轉語音的回應，例如自動告知您的位置。</string>
-    <string name="osmand_development_plugin_description">供開發與除錯功能的設定，如導航模擬、算圖效能或語音通知等。適用於開發者，一般應用程式使用並不需要。</string>
+    <string name="osmand_development_plugin_description">允許設定 OsmAnd 進行測試：模擬導航路線，檢查螢幕繪製效能等。正常應用程式使用不需要此外掛程式。</string>
     <string name="plugins_screen">外掛元件管理</string>
     <string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能。</string>
     <string name="prefs_plugins">外掛元件管理</string>
-    <string name="osm_editing_plugin_description">讓 OSM 貢獻者可以在 OsmAnd 中提供使用者名稱與密碼來建立或修改 OSM POI 物件、開啟或評論 OSM 註記，並貢獻已錄製好的 GPX 檔案。OpenStreetMap.org 是一個社群驅動、全球公有領域的製圖專案。</string>
+    <string name="osm_editing_plugin_description">讓您可以對 OpenStreetMap 做出貢獻，這是一個旨在製作世界綜合地圖並向每位使用者提供最新開放原始碼資料的全球社群。
+\n
+\n您可以在網站 https://osmand.net/docs/user/plugins/osm-editing 上找到關於如何編輯地圖的說明</string>
     <string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
     <string name="play_commands_of_currently_selected_voice">選擇一個語音並以播放測試：</string>
     <string name="debugging_and_development">OsmAnd 開發</string>
@@ -968,9 +969,9 @@
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">中轉地點到目的地的路途中已最佳化排列。</string>
     <string name="audionotes_location_not_defined">輕點「使用位置……」以新增註記到地點。</string>
-    <string name="srtm_plugin_description">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。） 
-\n 
-\n全球圖資（在 70 ° 以北和 70 ° 以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。</string>
+    <string name="srtm_plugin_description">地形資訊（例如等高線、地形陰影與坡度）可協助您直觀地評估地表的形狀，同時考慮曲率、極值、斜度、等高點等。地圖上的地形資訊可透過地形陰影、上坡與下坡的等高線以及坡度角偏離平面的顏色來表示。來自 SRTM 和 ASTER 的資料。
+\n
+\n如何使用 - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="av_camera_focus">相機對焦類型</string>
     <string name="av_camera_focus_descr">相機對焦模式：</string>
@@ -1251,9 +1252,9 @@
     <string name="speak_poi">附近的 POI</string>
     <string name="shared_string_all">所有</string>
     <string name="index_tours">旅遊</string>
-    <string name="record_plugin_description">此外掛程式可啟用在地圖上手動點擊 GPX 記錄小工具來記錄並儲存您的軌跡的功能，或是記錄您所有的導航路徑到 GPX 檔案中。
-\n 
-\n記錄好的軌跡可以用來與您的朋友分享或用於 OSM 貢獻。運動員可以使用記錄好的軌跡來監視他們的訓練。某些基本的軌跡也可以直接在 OsmAnd 執行，如單圈時間、平均速度等等，而軌跡當然也可以在稍後由第三方分析工具來分析。</string>
+    <string name="record_plugin_description">允許您錄製、儲存與分析您的訓練或移動資料，如速度、上升、下降或其他路線相關的資訊，然後您就可以重複使用、改進、補充或與朋友分享。
+\n
+\n如何使用 - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="record_plugin_name">旅程錄製</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
@@ -1377,14 +1378,10 @@
     <string name="online_map">線上地圖</string>
     <string name="share_note">分享註解</string>
     <string name="plugin_touringview_name">旅遊地圖檢視</string>
-    <string name="plugin_nautical_descr">這個外掛元件豐富了 OsmAnd 地圖和導航應用，也為了划船、帆船、與其他類型的水上運動，產生了航海地圖。 
-\n 
-\n一個為 OsmAnd 附加的特有地圖，將提供用於所有內陸近岸航行的航海導航標誌和圖表符號。每個導航標誌描述提供需識別出它們和它們含義的詳細資訊（類別、形狀、顏色、序列、參考等）。 
-\n 
-\n要返回到 OsmAnd 慣用的地圖模式，再次取消這個外掛元件的啟動，或 \'組態地圖\' 下的 \'地圖樣式\'，在這兩者中的任何一個的更改都可輕易的回復。</string>
-    <string name="plugin_ski_descr">此外掛元件為 OsmAnd 所安置，讓您在全球滑雪斜坡、越野滑雪、阿爾卑斯山的滑雪路線、纜車和滑雪纜車上的詳細資訊瞭若指掌。以顏色編碼顯示路線和滑雪道的困難度，並且在特殊的 \'冬季\' 地圖樣式描畫出，哪個在冬季景觀變成雪色。 
-\n 
-\n啟動此檢視，會更改地圖樣式到 \'冬季和滑雪 \'，顯示出冬季的條件下，所有的景觀特徵。此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。</string>
+    <string name="plugin_nautical_descr">開啟以豐富您的地圖，包含關於航行路線、導航燈、危險區域、允許或禁止航行或停靠的區域等資訊。要使用，下載航海地圖並在「設定地圖」中啟用「航海地圖」。
+\n
+\n如何使用 - https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="plugin_ski_descr">設計用於在冬季運動場所導航。檢視滑雪道、滑雪纜車標記與指示每條賽道複雜性的彩色線條。要在啟用後使用，請到「設定地圖」並選擇「冬季和滑雪」地圖類型。</string>
     <string name="plugin_touringview_descr">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。 
 \n 
 \n此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。 
@@ -2381,7 +2378,7 @@
     <string name="mapillary_descr">把線上街道平面照片給每個人。發覺地點、協作、抓取世界。</string>
     <string name="shared_string_add_photos">新增照片</string>
     <string name="mapillary_action_descr">透過 Mapillary 分享您的街景照片。</string>
-    <string name="plugin_mapillary_descr">將街道平面照片給每個人。發覺地點、協作、抓取世界。</string>
+    <string name="plugin_mapillary_descr">帶來街景。在缺少照片的地方，您可以自行新增，讓其他人可以使用它。要啟用 Mapillary 圖層，請在「設定地圖」選單中開啟「街道級照片」。</string>
     <string name="online_photos">線上照片</string>
     <string name="no_photos_descr">這裡沒有照片。</string>
     <string name="shared_string_install">安裝</string>
@@ -3966,9 +3963,9 @@
     <string name="select_segments">選取線段</string>
     <string name="select_segments_description">%1$s 包含了多於一段，您必須指定導航的部份。</string>
     <string name="segments_count">線段 %1$d</string>
-    <string name="open_place_reviews_plugin_description">將如餐廳、飯店、博物館與航點等公共場所的照片、評論與連結作為開放資料 (https://openplacereviews.org/data/) 傳送。
+    <string name="open_place_reviews_plugin_description">允許您為 OpenPlaceReviews 專案做出貢獻。例如關於餐廳、飯店、博物館與航點等公共場所的照片、評論、連結。
 \n
-\n在 https://openplacereviews.org 閱讀更多資訊</string>
+\n您可以在網站上找到關於如何貢獻的說明 - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
     <string name="login_open_place_reviews">登入至 OpenPlaceReviews</string>
@@ -4157,7 +4154,7 @@
     <string name="purchases_feature_desc_nautical">取得航海深度資訊</string>
     <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
     <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基導遊。文章按國家與區域劃分，並以所有語言提供。</string>
-    <string name="purchases_feature_desc_wikipedia">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
+    <string name="purchases_feature_desc_wikipedia">在旅途中使用離線維基百科可以協助您更了解您所造訪的地方。其可以離線使用，並在地圖上顯示與興趣點相關的維基百科文章。不要忘記下載所選地區的維基百科地圖。</string>
     <string name="purchases_feature_desc_combined_wiki">隨時瀏覽維基百科，不需要網際網路連線。離線資料按國家劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_unlimited_map_download">取得所有大洲與區域的無限制下載離線地圖。</string>
     <string name="purchases_feature_desc_monthly_map_updates">取得每月定期更新的離線地圖。</string>

@@ -1841,7 +1841,7 @@
     <string name="rendering_attr_hideUnderground_name">Objets souterrains</string>
     <string name="shared_string_read_more">En savoir plus</string>
     <string name="shared_string_email_address">Adresse courriel</string>
-    <string name="shared_string_status">Status</string>
+    <string name="shared_string_status">État</string>
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
     <string name="show_polygons">Afficher les polygones</string>
     <string name="find_parking">Rechercher un stationnement</string>
