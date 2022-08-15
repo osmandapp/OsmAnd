@@ -161,15 +161,7 @@ public class SelectedGpxMenuController extends MenuController {
 	public String getCommonTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-
-			String description = gpxFile.metadata.getDescription();
-			if (Algorithms.isEmpty(description)) {
-				return mapActivity.getString(R.string.shared_string_gpx_track);
-			} else {
-				return description;
-			}
+			return mapActivity.getString(R.string.shared_string_gpx_track);
 		} else {
 			return "";
 		}
