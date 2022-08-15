@@ -564,17 +564,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.bottom_sheet_item_with_descr_56dp, viewGroup, false);
 			view.setOnClickListener(listener);
-			Activity activity = getActivity();
-			if (activity != null) {
-				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
-				if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
-				} else {
-					// 11.5dp is the shadow width
-					layoutParams.width = (int) ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2.5) - AndroidUtils.dpToPx(activity, 11.5f));
-				}
-				view.setLayoutParams(layoutParams);
-			}
 			ItemViewHolder viewHolder = new ItemViewHolder(view);
 			view.setTag(viewHolder);
 
@@ -626,10 +615,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder favoriteViewHolder = (ItemViewHolder) holder;
+				int itemsSize = super.getItems().size();
 				if (item.equals(FAVORITES)) {
 					bindFavoritesButton(favoriteViewHolder);
+					setItemWidth(favoriteViewHolder.itemView, true, itemsSize);
 				} else if (item instanceof FavouritePoint) {
 					bindFavoritePoint(favoriteViewHolder, (FavouritePoint) item);
+					setItemWidth(favoriteViewHolder.itemView, true, itemsSize);
 				}
 			}
 		}
@@ -686,16 +678,39 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder markerViewHolder = (ItemViewHolder) holder;
+				int itemsSize = super.getItems().size();
 				if (item.equals(MARKERS)) {
 					markerViewHolder.title.setText(R.string.shared_string_markers);
 					markerViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_flag));
+					setItemWidth(markerViewHolder.itemView, true, itemsSize);
 				} else {
 					MapMarker marker = (MapMarker) getItem(position);
 					markerViewHolder.title.setText(marker.getName(getContext()));
 					markerViewHolder.icon.setImageDrawable(MapMarkerDialogHelper.getMapMarkerIcon(app, marker.colorIndex));
+					setItemWidth(markerViewHolder.itemView, false, itemsSize);
 				}
 				markerViewHolder.description.setVisibility(View.GONE);
 			}
+		}
+	}
+
+	private void setItemWidth(View itemView, boolean isTitleItem, int itemsSize){
+		Activity activity = getActivity();
+		if (activity != null) {
+			RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
+			if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+				layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
+			} else {
+				// 11.5dp is the shadow width
+				if(isTitleItem){
+					layoutParams.width = itemsSize > 1
+							? ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2) - AndroidUtils.dpToPx(activity, 11.5f))
+							: ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width)) - AndroidUtils.dpToPx(activity, 11.5f));
+				}else{
+					layoutParams.width = (int) ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2.2) - AndroidUtils.dpToPx(activity, 11.5f));
+				}
+			}
+			itemView.setLayoutParams(layoutParams);
 		}
 	}
 }
