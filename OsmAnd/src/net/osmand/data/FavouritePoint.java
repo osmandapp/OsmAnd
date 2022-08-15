@@ -43,6 +43,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	protected int iconId;
 	private String amenityOriginName = null;
 	private String transportStopOriginName = null;
+	private String comment = "";
 	private double latitude;
 	private double longitude;
 	private int color;
@@ -299,6 +300,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return category;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	public Amenity getAmenity() {
 		if (!this.extensions.isEmpty()) {
 			Amenity amenity = Amenity.fromTagValue(this.extensions, GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX);
@@ -446,6 +455,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, categoryName, wptPt.ele, wptPt.time);
 		point.extensions = wptPt.getExtensionsToRead();
 		point.setDescription(wptPt.desc);
+		point.setComment(wptPt.comment);
 		if (wptPt.getAmenityOriginName() != null) {
 			point.setAmenityOriginName(wptPt.getAmenityOriginName());
 		}
@@ -486,6 +496,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.lon = getLongitude();
 		point.ele = getAltitude();
 		point.time = getTimestamp();
+		point.comment = getComment();
 
 		Map<String, String> extensions = point.getExtensionsToWrite();
 		extensions.putAll(this.extensions);

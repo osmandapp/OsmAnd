@@ -21,6 +21,7 @@ import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -66,6 +67,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	public void buildInternal(View view) {
 		if (fav != null && fav.getTimestamp() != 0) {
 			buildDateRow(view, fav.getTimestamp());
+		}
+		if (!Algorithms.isEmpty(fav.getComment())) {
+			View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, fav.getComment(), 0,
+					false, null, true, 10, false, null, false);
+			rowc.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(rowc.getContext(),
+					app, fav.getComment(), rowc.getResources().getString(R.string.poi_dialog_comment)));
 		}
 		if (originObject != null) {
 			if (originObject instanceof Amenity) {
