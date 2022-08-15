@@ -27,7 +27,6 @@ import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -370,12 +369,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateGpxTitle() {
+		GPXFile gpxFile = getGpx();
 		if (isCurrentRecordingTrack()) {
 			gpxTitle = app.getString(R.string.shared_string_currently_recording_track);
-		} else if (!Algorithms.isBlank(getGpx().getArticleTitle())) {
-			gpxTitle = getGpx().getArticleTitle();
+		} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle())) {
+			String description = gpxFile.metadata.getDescription();
+			gpxTitle = Algorithms.isEmpty(description) ? gpxFile.getArticleTitle() : description;
 		} else {
-			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
+			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.path));
 		}
 	}
 
