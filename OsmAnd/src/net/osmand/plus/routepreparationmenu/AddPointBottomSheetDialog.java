@@ -582,6 +582,28 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		void setItemClickListener(OnClickListener listener) {
 			this.listener = listener;
 		}
+
+		protected void setItemWidth(View itemView, boolean isTitleItem, int itemsSize) {
+			Activity activity = getActivity();
+			int bottomSheetWidth = (getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width));
+			if (activity != null) {
+				// 11.5dp is the shadow width
+				int shadowWidth = AndroidUtils.dpToPx(activity, 11.5f);
+				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
+				if (AndroidUiHelper.isOrientationPortrait(activity)) {
+					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
+				} else {
+					if (isTitleItem) {
+						layoutParams.width = itemsSize > 1
+								? (bottomSheetWidth / 2 - shadowWidth)
+								: (bottomSheetWidth - shadowWidth);
+					} else {
+						layoutParams.width = (int) (bottomSheetWidth / 2.2 - shadowWidth);
+					}
+				}
+				itemView.setLayoutParams(layoutParams);
+			}
+		}
 	}
 
 	private class FavoritesItemsAdapter extends ScrollItemsAdapter {
@@ -615,14 +637,15 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder favoriteViewHolder = (ItemViewHolder) holder;
-				int itemsSize = super.getItems().size();
+				int itemsSize = getItemCount();
+				boolean isTitleItem = false;
 				if (item.equals(FAVORITES)) {
+					isTitleItem = true;
 					bindFavoritesButton(favoriteViewHolder);
-					setItemWidth(favoriteViewHolder.itemView, true, itemsSize);
 				} else if (item instanceof FavouritePoint) {
 					bindFavoritePoint(favoriteViewHolder, (FavouritePoint) item);
-					setItemWidth(favoriteViewHolder.itemView, true, itemsSize);
 				}
+				setItemWidth(favoriteViewHolder.itemView, isTitleItem, itemsSize);
 			}
 		}
 
@@ -678,39 +701,20 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder markerViewHolder = (ItemViewHolder) holder;
-				int itemsSize = super.getItems().size();
+				int itemsSize = getItemCount();
+				boolean isTitleItem = false;
 				if (item.equals(MARKERS)) {
+					isTitleItem = true;
 					markerViewHolder.title.setText(R.string.shared_string_markers);
 					markerViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_flag));
-					setItemWidth(markerViewHolder.itemView, true, itemsSize);
 				} else {
 					MapMarker marker = (MapMarker) getItem(position);
 					markerViewHolder.title.setText(marker.getName(getContext()));
 					markerViewHolder.icon.setImageDrawable(MapMarkerDialogHelper.getMapMarkerIcon(app, marker.colorIndex));
-					setItemWidth(markerViewHolder.itemView, false, itemsSize);
 				}
+				setItemWidth(markerViewHolder.itemView, isTitleItem, itemsSize);
 				markerViewHolder.description.setVisibility(View.GONE);
 			}
-		}
-	}
-
-	private void setItemWidth(View itemView, boolean isTitleItem, int itemsSize){
-		Activity activity = getActivity();
-		if (activity != null) {
-			RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
-			if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-				layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
-			} else {
-				// 11.5dp is the shadow width
-				if(isTitleItem){
-					layoutParams.width = itemsSize > 1
-							? ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2) - AndroidUtils.dpToPx(activity, 11.5f))
-							: ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width)) - AndroidUtils.dpToPx(activity, 11.5f));
-				}else{
-					layoutParams.width = (int) ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2.2) - AndroidUtils.dpToPx(activity, 11.5f));
-				}
-			}
-			itemView.setLayoutParams(layoutParams);
 		}
 	}
 }
