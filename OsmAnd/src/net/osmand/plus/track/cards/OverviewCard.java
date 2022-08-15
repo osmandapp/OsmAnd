@@ -189,11 +189,10 @@ public class OverviewCard extends MapBaseCard {
 		if (Algorithms.isBlank(descriptionHtml)) {
 			AndroidUiHelper.updateVisibility(description, false);
 		} else {
-			description.setText(getFirstParagraph(descriptionHtml));
+			String title = gpxFile.getArticleTitle();
+			description.setText(Algorithms.isEmpty(title) ? getFirstParagraph(descriptionHtml) : title);
 			description.setOnClickListener(v -> {
-				GPXFile gpx = getGPXFile();
-				String title = gpx.metadata.getArticleTitle();
-				String imageUrl = getMetadataImageLink(gpx.metadata);
+				String imageUrl = getMetadataImageLink(gpxFile.metadata);
 				ReadGpxDescriptionFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			});
 			AndroidUiHelper.updateVisibility(description, true);
