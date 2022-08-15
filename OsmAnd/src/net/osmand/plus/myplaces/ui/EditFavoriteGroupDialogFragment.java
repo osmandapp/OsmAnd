@@ -185,7 +185,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
 				.setTitle(UiUtilities.createCustomFontSpannable(typeface, delete, delete))
-				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
 					Activity activity = getActivity();
 					Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
@@ -195,8 +195,8 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					b.setNegativeButton(R.string.shared_string_cancel, null);
 					b.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
 						helper.deleteGroup(group);
-						dismiss();
 						updateParentFragment();
+						dismiss();
 					});
 					b.show();
 				})
