@@ -64,7 +64,7 @@ public class GPXUtilities {
 			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,  PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
 			AMENITY_ORIGIN_EXTENSION, TRANSPORT_STOP_ORIGIN_EXTENSION, "trkpt_idx", "creation_date",
 			"route", "types", "speed", "show_arrows", "show_start_finish", "coloring_type",
-			"split_interval", "split_type", "width");
+			"split_interval", "split_type", "width", "points_groups");
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
