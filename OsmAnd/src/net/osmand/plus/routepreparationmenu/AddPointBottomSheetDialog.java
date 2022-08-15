@@ -21,24 +21,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.data.SpecialPointType;
-import net.osmand.plus.myplaces.DefaultFavoritesListener;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -47,12 +40,19 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.SelectFavouriteToGoBottomSheet;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.DefaultFavoritesListener;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -223,7 +223,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private void createMyLocItem() {
 		BaseBottomSheetItem myLocationItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(OsmAndLocationProvider.isLocationPermissionAvailable(getActivity())
-					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost, 0))
+						? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost, 0))
 				.setTitle(getString(R.string.shared_string_my_location))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.setOnClickListener(new OnClickListener() {
@@ -271,8 +271,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								}
 							} else if (activity != null) {
 								ActivityCompat.requestPermissions(activity,
-									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-									OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+										new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+										OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 							}
 						}
 						dismiss();
@@ -585,10 +585,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		protected void setItemWidth(View itemView, boolean isTitleItem, int itemsSize) {
 			Activity activity = getActivity();
-			int bottomSheetWidth = (getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width));
 			if (activity != null) {
 				// 11.5dp is the shadow width
 				int shadowWidth = AndroidUtils.dpToPx(activity, 11.5f);
+				int bottomSheetWidth = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+
 				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
 					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
@@ -637,15 +638,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder favoriteViewHolder = (ItemViewHolder) holder;
-				int itemsSize = getItemCount();
-				boolean isTitleItem = false;
-				if (item.equals(FAVORITES)) {
-					isTitleItem = true;
+				boolean titleItem = item.equals(FAVORITES);
+				if (titleItem) {
 					bindFavoritesButton(favoriteViewHolder);
 				} else if (item instanceof FavouritePoint) {
 					bindFavoritePoint(favoriteViewHolder, (FavouritePoint) item);
 				}
-				setItemWidth(favoriteViewHolder.itemView, isTitleItem, itemsSize);
+				setItemWidth(favoriteViewHolder.itemView, titleItem, getItemCount());
 			}
 		}
 
@@ -701,10 +700,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder markerViewHolder = (ItemViewHolder) holder;
-				int itemsSize = getItemCount();
-				boolean isTitleItem = false;
-				if (item.equals(MARKERS)) {
-					isTitleItem = true;
+				boolean titleItem = item.equals(MARKERS);
+				if (titleItem) {
 					markerViewHolder.title.setText(R.string.shared_string_markers);
 					markerViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_flag));
 				} else {
@@ -712,7 +709,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					markerViewHolder.title.setText(marker.getName(getContext()));
 					markerViewHolder.icon.setImageDrawable(MapMarkerDialogHelper.getMapMarkerIcon(app, marker.colorIndex));
 				}
-				setItemWidth(markerViewHolder.itemView, isTitleItem, itemsSize);
+				setItemWidth(markerViewHolder.itemView, titleItem, getItemCount());
 				markerViewHolder.description.setVisibility(View.GONE);
 			}
 		}
