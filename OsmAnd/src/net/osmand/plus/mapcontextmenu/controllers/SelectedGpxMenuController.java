@@ -6,14 +6,9 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -22,6 +17,11 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -161,7 +161,15 @@ public class SelectedGpxMenuController extends MenuController {
 	public String getCommonTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return mapActivity.getString(R.string.shared_string_gpx_track);
+			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+
+			String description = gpxFile.metadata.getDescription();
+			if (Algorithms.isEmpty(description)) {
+				return mapActivity.getString(R.string.shared_string_gpx_track);
+			} else {
+				return description;
+			}
 		} else {
 			return "";
 		}
