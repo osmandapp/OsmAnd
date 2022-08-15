@@ -523,7 +523,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		private LiveMapsViewHolder(View view) {
 			statusIcon = view.findViewById(R.id.icon);
 			title = view.findViewById(R.id.title);
-			title.setMaxLines(2);
 			subTitle = view.findViewById(R.id.sub_title);
 			description = view.findViewById(R.id.description);
 			compoundButton = view.findViewById(R.id.compound_button);
