@@ -1035,27 +1035,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 							amenity = stop.getAmenity();
 							amenityOriginName = amenity.toStringEn();
 							transportStopOriginName = stop.toStringEn();
-//
-//							amenity = ((TransportStop) object).getAmenity();
-//							amenityOriginName = ((TransportStop) object).toStringEn();
 						}
 						if (object instanceof WptPt) {
 							altitude = ((WptPt) object).ele;
 						}
 					}
-
-//					if (object instanceof Amenity && pointDescription.isPoi()) {
-//						amenity = (Amenity) object;
-//						int preselectedIconId = getPreselectedIconId(((Amenity) object));
-//						preselectedIconName = RenderingIcons.getBigIconName(preselectedIconId);
-//						amenityOriginName = amenity.toStringEn();
-//					}  else if (object instanceof TransportStop) {
-//						TransportStop stop = ((TransportStop) object);
-//						amenity = stop.getAmenity();
-//						amenityOriginName = amenity.toStringEn();
-//						transportStopOriginName = stop.toStringEn();
-//					}
-
 					FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 					if (favoritePointEditor != null) {
 						favoritePointEditor.add(getLatLon(), title, getStreetStr(), amenityOriginName,
