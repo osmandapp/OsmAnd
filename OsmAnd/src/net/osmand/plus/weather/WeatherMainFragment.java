@@ -129,6 +129,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 		// todo implement offline forecast card
 		View offlineForecastBlock = view.findViewById(R.id.offline_forecast_block);
 		ViewGroup container = view.findViewById(R.id.offline_forecast_downloads_list);
+		offlineForecastBlock.setVisibility(View.GONE);
 	}
 
 	private void updateScreenMode(boolean enabled) {
