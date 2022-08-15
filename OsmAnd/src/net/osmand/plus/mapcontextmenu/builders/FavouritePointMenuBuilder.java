@@ -5,31 +5,25 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
-import java.io.IOException;
 import java.util.List;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
@@ -47,11 +41,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void acquireOriginObject() {
-		originObject = fav.getAmenity();
-		if (originObject == null) {
-			String originObjectName = fav.getOriginObjectName();
-			originObject = findAmenityObject(originObjectName, fav.getLatitude(), fav.getLongitude());
-		}
+		originObject = findAmenityObject(fav.getAmenity(), fav.getAmenityOriginName(),
+				fav.getTransportStopOriginName(), fav.getLatitude(), fav.getLongitude());
 	}
 
 	public Object getOriginObject() {
@@ -76,11 +67,18 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (fav != null && fav.getTimestamp() != 0) {
 			buildDateRow(view, fav.getTimestamp());
 		}
-		if (originObject != null && originObject instanceof Amenity) {
-			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-			builder.setLatLon(getLatLon());
-			builder.setLight(light);
-			builder.buildInternal(view);
+		if (originObject != null) {
+			if (originObject instanceof Amenity) {
+				AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
+				builder.setLatLon(getLatLon());
+				builder.setLight(light);
+				builder.buildInternal(view);
+			} else if (originObject instanceof TransportStop) {
+				TransportStopMenuBuilder builder = new TransportStopMenuBuilder(mapActivity, (TransportStop)originObject);
+				builder.setLatLon(getLatLon());
+				builder.setLight(light);
+				builder.buildInternal(view);
+			}
 		}
 	}
 

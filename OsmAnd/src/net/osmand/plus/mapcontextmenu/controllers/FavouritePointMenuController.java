@@ -60,10 +60,11 @@ public class FavouritePointMenuController extends MenuController {
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
-		if (getObject() instanceof TransportStop) {
-			TransportStop stop = (TransportStop) getObject();
-			transportStopController = new TransportStopController(mapActivity, pointDescription, stop);
-			transportStopController.processRoutes();
+
+		TransportStop transportStop = builder.getUpdatedTransportStop(fav.getAmenity(), fav.getAmenityOriginName(),
+				fav.getTransportStopOriginName(), fav.getLatitude(), fav.getLongitude());
+		if (transportStop != null) {
+			transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
 		}
 
 		Object originObject = getBuilder().getOriginObject();

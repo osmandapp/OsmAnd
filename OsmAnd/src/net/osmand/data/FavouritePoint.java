@@ -21,6 +21,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -40,7 +41,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	protected String category = "";
 	protected String address = "";
 	protected int iconId;
-	private String originObjectName = "";
+	private String amenityOriginName = null;
+	private String transportStopOriginName = null;
 	private double latitude;
 	private double longitude;
 	private int color;
@@ -52,7 +54,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private long visitedDate;
 	private long pickupDate;
 	private boolean calendarEvent;
-	private Amenity amenity;
+	private Map<String, String> extensions = new HashMap<String, String>();
 
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
@@ -87,7 +89,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.color = point.color;
 		this.description = point.description;
 		this.visible = point.visible;
-		this.originObjectName = point.originObjectName;
+		this.amenityOriginName = point.amenityOriginName;
+		this.transportStopOriginName = point.transportStopOriginName;
 		this.address = point.address;
 		this.iconId = point.iconId;
 		this.backgroundType = point.backgroundType;
@@ -213,12 +216,20 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.visible = visible;
 	}
 
-	public String getOriginObjectName() {
-		return originObjectName;
+	public String getAmenityOriginName() {
+		return amenityOriginName;
 	}
 
-	public void setOriginObjectName(String originObjectName) {
-		this.originObjectName = originObjectName;
+	public void setAmenityOriginName(String amenityOriginName) {
+		this.amenityOriginName = amenityOriginName;
+	}
+
+	public String getTransportStopOriginName() {
+		return transportStopOriginName;
+	}
+
+	public void setTransportStopOriginName(String transportStopOriginName) {
+		this.transportStopOriginName = transportStopOriginName;
 	}
 
 	public int getOverlayIconId(Context ctx) {
@@ -289,11 +300,23 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public Amenity getAmenity() {
-		return amenity;
+		if (!this.extensions.isEmpty()) {
+			Amenity amenity = Amenity.fromTagValue(this.extensions, GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX);
+			if (amenity != null) {
+				amenity.setLocation(getLatitude(), getLongitude());
+			}
+			return amenity;
+		}
+		return null;
 	}
 
 	public void setAmenity(Amenity amenity) {
-		this.amenity = amenity;
+		if (amenity != null) {
+			Map<String, String> extensions = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX);
+			if (!extensions.isEmpty()) {
+				this.extensions.putAll(extensions);
+			}
+		}
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {
@@ -371,10 +394,16 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		} else if (!description.equals(fp.description))
 			return false;
 
-		if (originObjectName == null) {
-			if (fp.originObjectName != null)
+		if (amenityOriginName == null) {
+			if (fp.amenityOriginName != null)
 				return false;
-		} else if (!originObjectName.equals(fp.originObjectName))
+		} else if (!amenityOriginName.equals(fp.amenityOriginName))
+			return false;
+
+		if (transportStopOriginName == null) {
+			if (fp.transportStopOriginName != null)
+				return false;
+		} else if (!transportStopOriginName.equals(fp.transportStopOriginName))
 			return false;
 
 		return (this.latitude == fp.latitude)
@@ -398,7 +427,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((originObjectName == null) ? 0 : originObjectName.hashCode());
+		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
+		result = prime * result + ((transportStopOriginName == null) ? 0 : transportStopOriginName.hashCode());
 		return result;
 	}
 
@@ -414,9 +444,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			name = "";
 		}
 		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, categoryName, wptPt.ele, wptPt.time);
+		point.extensions = wptPt.getExtensionsToRead();
 		point.setDescription(wptPt.desc);
-		if (wptPt.comment != null) {
-			point.setOriginObjectName(wptPt.comment);
+		if (wptPt.getAmenityOriginName() != null) {
+			point.setAmenityOriginName(wptPt.getAmenityOriginName());
+		}
+		if (wptPt.getTransportStopOriginName() != null) {
+			point.setTransportStopOriginName(wptPt.getTransportStopOriginName());
 		}
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
@@ -443,7 +477,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		BackgroundType backgroundType = BackgroundType.getByTypeName(wptPt.getBackgroundType(), null);
 		point.setBackgroundType(backgroundType);
-		point.amenity = wptPt.getAmenity();
 		return point;
 	}
 
@@ -455,6 +488,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.time = getTimestamp();
 
 		Map<String, String> extensions = point.getExtensionsToWrite();
+		extensions.putAll(this.extensions);
 		if (!isVisible()) {
 			extensions.put(HIDDEN, "true");
 		}
@@ -483,10 +517,12 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.desc = getDescription();
 		if (getCategory().length() > 0)
 			point.category = getCategory();
-		if (getOriginObjectName().length() > 0) {
-			point.comment = getOriginObjectName();
+		if (!Algorithms.isEmpty(getAmenityOriginName())) {
+			point.setAmenityOriginName(getAmenityOriginName());
 		}
-		point.setAmenity(getAmenity());
+		if (!Algorithms.isEmpty(getTransportStopOriginName())) {
+			point.setTransportStopOriginName(getTransportStopOriginName());
+		}
 		return point;
 	}
 }

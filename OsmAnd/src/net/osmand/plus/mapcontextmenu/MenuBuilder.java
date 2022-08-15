@@ -1488,15 +1488,24 @@ public class MenuBuilder {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
-	protected Object findAmenityObject(String originObjectName, double lat, double lon) {
-		if (originObjectName != null && originObjectName.length() > 0) {
-			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
-				return findAmenity(originObjectName, lat, lon);
-			} else if (originObjectName.startsWith(TransportStop.class.getSimpleName())) {
-				return findTransportStop(originObjectName, lat, lon);
+	protected Object findAmenityObject(Amenity gpxAmenity, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
+		TransportStop transportStop = getUpdatedTransportStop(gpxAmenity, amenityOriginName, transportStopOriginName,
+				lat, lon);
+		if (transportStop != null) {
+			return transportStop;
+		} else {
+			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
+			if (gpxAmenity != null && mapAmenity != null) {
+
+				//TODO: uncomment
+//				gpxAmenity.updateWithAmenity((Amenity) mapAmenity);
+				return gpxAmenity;
+			} else if (gpxAmenity != null) {
+				return gpxAmenity;
+			} else {
+				return mapAmenity;
 			}
 		}
-		return null;
 	}
 
 	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
@@ -1521,6 +1530,18 @@ public class MenuBuilder {
 			}
 		}
 		return null;
+	}
+
+	public TransportStop getUpdatedTransportStop(Amenity gpxAmenity, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
+		TransportStop stop = null;
+		if (!Algorithms.isEmpty(transportStopOriginName)) {
+			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
+			if (gpxAmenity != null && mapAmenity != null) {
+				gpxAmenity.updateWithAmenity(mapAmenity);
+			}
+			stop = TransportStopController.findBestTransportStopForAmenity(mapActivity.getMyApplication(), gpxAmenity);
+		}
+		return stop;
 	}
 
 	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {

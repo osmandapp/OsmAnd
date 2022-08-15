@@ -251,7 +251,8 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		WptPt wpt = getWpt();
 		if (wpt != null) {
 			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(),
-					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType, amenity);
+					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType,
+					wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), amenity);
 			gpx.addPoint(wpt);
 		}
 	}

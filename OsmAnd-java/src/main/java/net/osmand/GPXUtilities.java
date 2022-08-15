@@ -54,8 +54,15 @@ public class GPXUtilities {
 
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
+	private static final String COLOR_NAME_EXTENSION = "color";
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
 	private static final String ADDRESS_EXTENSION = "address";
+	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
+	public static final String TRANSPORT_STOP_ORIGIN_EXTENSION = "transport_stop_origin";
+	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
+	public static final List<String> EXTENSIONS_WITH_OSMAND_PREFIX = Arrays.asList(COLOR_NAME_EXTENSION,
+			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,  PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
+			AMENITY_ORIGIN_EXTENSION, TRANSPORT_STOP_ORIGIN_EXTENSION);
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
@@ -331,7 +338,11 @@ public class GPXUtilities {
 		public Amenity getAmenity() {
 			Map<String, String> extensionsToRead = getExtensionsToRead();
 			if (!extensionsToRead.isEmpty()) {
-				return Amenity.fromTagValue(extensionsToRead, PRIVATE_PREFIX, OSM_PREFIX);
+				Amenity amenity = Amenity.fromTagValue(extensionsToRead, PRIVATE_PREFIX, OSM_PREFIX);
+				if (amenity != null) {
+					amenity.setLocation(lat, lon);
+				}
+				return amenity;
 			}
 			return null;
 		}
@@ -343,6 +354,30 @@ public class GPXUtilities {
 					getExtensionsToWrite().putAll(extensions);
 				}
 			}
+		}
+
+		public String getAmenityOriginName() {
+			Map<String, String> extensionsToRead = getExtensionsToRead();
+			if (!extensionsToRead.isEmpty()) {
+				return extensionsToRead.get(AMENITY_ORIGIN_EXTENSION);
+			}
+			return null;
+		}
+
+		public void setAmenityOriginName(String originName) {
+			getExtensionsToWrite().put(AMENITY_ORIGIN_EXTENSION, originName);
+		}
+
+		public String getTransportStopOriginName() {
+			Map<String, String> extensionsToRead = getExtensionsToRead();
+			if (!extensionsToRead.isEmpty()) {
+				return extensionsToRead.get(TRANSPORT_STOP_ORIGIN_EXTENSION);
+			}
+			return null;
+		}
+
+		public void setTransportStopOriginName(String originName) {
+			getExtensionsToWrite().put(TRANSPORT_STOP_ORIGIN_EXTENSION, originName);
 		}
 
 		public int getColor(ColorizationType type) {
@@ -456,7 +491,8 @@ public class GPXUtilities {
 
 		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
 		                                        String name, String category, int color,
-		                                        String iconName, String backgroundType, Amenity amenity) {
+		                                        String iconName, String backgroundType,
+												String originObject, String transportStopObjectName, Amenity amenity) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			final WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
@@ -475,6 +511,12 @@ public class GPXUtilities {
 			}
 			if (amenity != null) {
 				point.setAmenity(amenity);
+			}
+			if (originObject != null) {
+				point.setAmenityOriginName(originObject);
+			}
+			if (transportStopObjectName != null) {
+				point.setTransportStopOriginName(transportStopObjectName);
 			}
 			return point;
 		}
@@ -2397,7 +2439,13 @@ public class GPXUtilities {
 			serializer.startTag(null, "extensions");
 			if (!extensions.isEmpty()) {
 				for (Entry<String, String> s : extensions.entrySet()) {
-					writeNotNullText(serializer, "osmand:" + s.getKey(), s.getValue());
+					String key = s.getKey();
+					if (EXTENSIONS_WITH_OSMAND_PREFIX.contains(key) ||
+						key.startsWith(PRIVATE_PREFIX) ||
+						key.startsWith(OSM_PREFIX)) {
+						key= "osmand:" + key;
+					}
+					writeNotNullText(serializer, key, s.getValue());
 				}
 			}
 			if (extensionsWriter != null) {

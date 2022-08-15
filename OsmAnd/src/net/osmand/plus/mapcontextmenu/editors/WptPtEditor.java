@@ -15,7 +15,6 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WptPtEditor extends PointEditor {
@@ -123,10 +122,11 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title) {
-		add(gpxFile, latLon, title, null, null);
+		add(gpxFile, latLon, title, null, null, null, null);
 	}
 
-	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable String preselectedIconName, Amenity amenity) {
+	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable String preselectedIconName,
+					@Nullable String amenityOriginName, @Nullable String transportStopOriginName, Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -144,6 +144,12 @@ public class WptPtEditor extends PointEditor {
 		wpt.name = title;
 		if (!Algorithms.isEmpty(preselectedIconName)) {
 			wpt.setIconName(preselectedIconName);
+		}
+		if (!Algorithms.isEmpty(amenityOriginName)) {
+			wpt.setAmenityOriginName(amenityOriginName);
+		}
+		if (!Algorithms.isEmpty(transportStopOriginName)) {
+			wpt.setTransportStopOriginName(transportStopOriginName);
 		}
 		wpt.setAmenity(amenity);
 

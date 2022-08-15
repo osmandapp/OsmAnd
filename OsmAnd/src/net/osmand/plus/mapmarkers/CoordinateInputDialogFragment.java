@@ -167,7 +167,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
 				WptPt point = WptPt.createAdjustedPoint(lat, lon, System.currentTimeMillis(),
-						description, name, category, color, null, null, null);
+						description, name, category, color, null, null, null, null, null);
 				gpx.addPoint(point);
 			}
 		}

@@ -11,8 +11,6 @@ import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
-import java.util.HashMap;
-
 public class FavoritePointEditor extends PointEditor {
 
 	public static final String TAG = FavoritePointEditor.class.getSimpleName();
@@ -43,7 +41,7 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title, String address, String originObjectName,
+	public void add(LatLon latLon, String title, String address, String amenityOriginName, String transportStopOriginName,
 					int preselectedIconId, double altitude, long timestamp, Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
@@ -58,14 +56,16 @@ public class FavoritePointEditor extends PointEditor {
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, timestamp);
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
-		favorite.setOriginObjectName(originObjectName);
+		favorite.setAmenityOriginName(amenityOriginName);
+		favorite.setTransportStopOriginName(transportStopOriginName);
 		favorite.setIconId(preselectedIconId);
 		favorite.setAmenity(amenity);
 
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
+	public void add(LatLon latLon, String title, String amenityOriginName, String transportStopOriginName,
+					String categoryName, int categoryColor, boolean autoFill) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -84,7 +84,8 @@ public class FavoritePointEditor extends PointEditor {
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
 		favorite.setAddress("");
-		favorite.setOriginObjectName(originObjectName);
+		favorite.setAmenityOriginName(amenityOriginName);
+		favorite.setTransportStopOriginName(transportStopOriginName);
 		FavoritePointEditorFragment.showAutoFillInstance(mapActivity, autoFill);
 	}
 

@@ -6,7 +6,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
@@ -15,6 +14,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -42,12 +42,12 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		super(mapActivity);
 		this.wpt = wpt;
 		setShowNearestWiki(true);
+		acquireOriginObject();
+	}
 
-		originObject = wpt.getAmenity();
-		if (originObject == null) {
-			String originObjectName = wpt.comment;
-			originObject = findAmenityObject(originObjectName, wpt.lat, wpt.lon);
-		}
+	private void acquireOriginObject() {
+		originObject = findAmenityObject(wpt.getAmenity(), wpt.getAmenityOriginName(),
+				wpt.getTransportStopOriginName(), wpt.getLatitude(), wpt.getLongitude());
 	}
 
 	public Object getOriginObject() {
@@ -127,6 +127,11 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		if (originObject != null && originObject instanceof Amenity) {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
+			builder.setLatLon(getLatLon());
+			builder.setLight(light);
+			builder.buildInternal(view);
+		} else if (originObject instanceof TransportStop) {
+			TransportStopMenuBuilder builder = new TransportStopMenuBuilder(mapActivity, (TransportStop)originObject);
 			builder.setLatLon(getLatLon());
 			builder.setLight(light);
 			builder.buildInternal(view);

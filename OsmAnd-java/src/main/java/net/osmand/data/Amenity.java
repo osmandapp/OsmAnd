@@ -4,6 +4,7 @@ import net.osmand.Location;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.Algorithms;
+import net.osmand.GPXUtilities;
 
 import org.json.JSONObject;
 
@@ -443,7 +444,14 @@ public class Amenity extends MapObject {
 		}
 		if (additionalInfo != null && additionalInfo.size() > 0) {
 			for (Entry<String, String> e : additionalInfo.entrySet()) {
-				result.put(osmPrefix + e.getKey(), e.getValue());
+				String key = e.getKey();
+				if (key.endsWith(OPENING_HOURS)) {
+					continue;
+				}
+				if (!GPXUtilities.HIDING_EXTENSIONS_AMENITY_TAGS.contains(key)) {
+					key = osmPrefix + key;
+				}
+				result.put(key, e.getValue());
 			}
 		}
 		return result;
@@ -472,21 +480,47 @@ public class Amenity extends MapObject {
 				} else if (entry.getKey().startsWith(osmPrefix)) {
 					String shortKey = entry.getKey().replace(osmPrefix, "");
 					additionalInfo.put(shortKey, entry.getValue());
+				} else {
+					List<String> reservedOsmandTags = GPXUtilities.EXTENSIONS_WITH_OSMAND_PREFIX;
+					if (!reservedOsmandTags.contains(entry.getKey())) {
+						additionalInfo.put(entry.getKey(), entry.getValue());
+					}
 				}
 			}
-			if (type != null) {
+			if (additionalInfo.size() > 0 || openingHours != null) {
 				Amenity amenity = new Amenity();
-				amenity.setType(type);
+				if (type != null) {
+					amenity.setType(type);
+				} else {
+					amenity.setType(type = MapPoiTypes.getDefault().getOtherPoiCategory());
+				}
 				if (subtype != null) {
 					amenity.subType = subtype;
 				}
 				if (openingHours != null) {
 					amenity.openingHours = openingHours;
+					additionalInfo.put(OPENING_HOURS, openingHours);
 				}
 				amenity.additionalInfo = additionalInfo;
 				return amenity;
 			}
 		}
 		return null;
+	}
+
+	public void updateWithAmenity(Amenity newAmenity) {
+		if (newAmenity.type != null) {
+			this.type = newAmenity.type;
+		}
+		if (newAmenity.subType != null) {
+			this.subType = newAmenity.subType;
+		}
+		if (newAmenity.openingHours != null) {
+			this.openingHours = newAmenity.openingHours;
+		}
+
+		for (Entry<String, String> entry : newAmenity.additionalInfo.entrySet()) {
+			this.additionalInfo.put(entry.getKey(), entry.getValue());
+		}
 	}
 }
