@@ -110,7 +110,6 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -141,6 +140,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class GpxUiHelper {
@@ -2182,7 +2182,7 @@ public class GpxUiHelper {
 	                                  @NonNull GPXFile gpxFile,
 	                                  @NonNull WptPt selectedPoint,
 	                                  @Nullable GPXTrackAnalysis analyses,
-	                                  @Nullable NetworkRouteSegment routeSegment) {
+	                                  @Nullable RouteKey routeKey) {
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2202,7 +2202,7 @@ public class GpxUiHelper {
 					Bundle bundle = new Bundle();
 					bundle.putBoolean(TrackMenuFragment.ADJUST_MAP_POSITION, false);
 					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							trackAnalysis, routeSegment, bundle);
+							trackAnalysis, routeKey, bundle);
 				} else {
 					LOG.error(errorMessage);
 				}

@@ -1,7 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -12,7 +10,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
@@ -32,17 +29,17 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	private final OsmandApplication app;
 
 	private final QuadRect quadRect;
-	private final NetworkRouteSegment routeSegment;
+	private final RouteKey routeKey;
 	private final CallbackWithObject<GPXFile> callback;
 
 	public NetworkRouteSelectionTask(@NonNull FragmentActivity activity,
-	                                 @NonNull NetworkRouteSegment routeSegment,
+	                                 @NonNull RouteKey routeKey,
 	                                 @NonNull QuadRect quadRect,
 	                                 @Nullable CallbackWithObject<GPXFile> callback) {
 
 		super(activity);
 		this.app = (OsmandApplication) activity.getApplication();
-		this.routeSegment = routeSegment;
+		this.routeKey = routeKey;
 		this.quadRect = quadRect;
 		this.callback = callback;
 	}
@@ -58,7 +55,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(
 				readers, selectorFilter, this::isCancelled);
-		RouteKey routeKey = routeSegment.routeKey;
+		RouteKey routeKey = this.routeKey;
 		if (routeKey != null) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
