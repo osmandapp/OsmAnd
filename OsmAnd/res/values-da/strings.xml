@@ -4783,4 +4783,6 @@
     <string name="attach_to_roads_banner_desc">Fastgør dit spor til vejene for at modtage detaljerede navigationsinstruktioner.</string>
     <string name="included_in_your_current_plan">Inkluderet i dit nuværende \"%1$s\" abonnement</string>
     <string name="available_as_part_of_subscription_plan">Tilgængelig som en del af abonnementet %1$s.</string>
+    <string name="favorite_confirm_delete_group">Er du sikker på, at du ønsker at slette gruppen \"%1$s\" og alle inkluderede punkter (%2$d)</string>
+    <string name="favorite_delete_group">Slet gruppe</string>
 </resources>
