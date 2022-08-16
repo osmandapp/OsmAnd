@@ -966,7 +966,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		if (savedLoc != null && !isEquals(myLoc, savedLoc)) {
+		if (savedLoc != null && !MapUtils.areLatLonEqual(myLoc, savedLoc)) {
 			clearVectorLinesCollections();
 		}
 		savedLoc = myLoc;
@@ -1070,12 +1070,5 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
-	}
-
-	private boolean isEquals(@NonNull Location loc1, @NonNull Location loc2) {
-		double maxDist = 0.0001;//less 10 meters
-		double dlon = Math.abs(loc1.getLongitude() - loc2.getLongitude());
-		double dlat = Math.abs(loc1.getLatitude() - loc2.getLatitude());
-		return dlon < maxDist && dlat < maxDist;
 	}
 }
