@@ -4488,7 +4488,7 @@
     <string name="shared_string_not_used">Sin usar</string>
     <string name="files_with_route_restrictions">Archivos con restricciones de ruta</string>
     <string name="predefined_waypoint_appearance_description">Al pulsar esta acción se guardará automáticamente el punto de referencia con los parámetros predefinidos.</string>
-    <string name="track_file_description">Al pulsar esta acción se mostrará un diálogo para marcar entre todas las trazas disponibles.</string>
+    <string name="track_file_description">Al pulsar esta acción se mostrarán todas las trazas disponibles.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
@@ -4718,9 +4718,9 @@
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
-    <string name="switch_widget_mode_desc">Puedes cambiar el modo pulsando en el widget.</string>
+    <string name="switch_widget_mode_desc">Pulsa el widget para alternar los modos.</string>
     <string name="side_marker_eta">Hora estimada de llegada</string>
-    <string name="goods_delivery_desc_3">Aplica únicamente a vehículos que transportan mercancías, que tienen al menos cuatro ruedas y no pesan más de 3,5 toneladas.</string>
+    <string name="goods_delivery_desc_3">Sólo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
     <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
     <string name="includes_osm_changes_until">Incluye cambios de OSM realizados hasta %1$s.</string>
     <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
@@ -4731,11 +4731,11 @@
     <string name="map_marker_average_speed_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
     <string name="marker_1st">Primer marcador</string>
     <string name="reset_all_settings_desc">¿Restablecer todos los ajustes a los predefinidos\?</string>
-    <string name="goods_delivery_desc_4">Si el peso del vehículo es superior a 3,5 toneladas, debes usar el perfil de camión.</string>
+    <string name="goods_delivery_desc_4">Para vehículos superiores a 3,5 toneladas, debes usar el perfil «Camión».</string>
     <string name="updated_map_time">Actualizado: %1$s.</string>
     <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos de «%1$s» o calcularlo en línea.</string>
     <string name="altitude_correction">Corrección de altitud</string>
-    <string name="goods_delivery_desc">Los vehículos de transporte de mercancías pueden tener restringido el acceso a algunos caminos.</string>
+    <string name="goods_delivery_desc">Los vehículos de reparto pueden estar restringidos en algunos caminos.</string>
     <string name="calculate_online_altitude_descr">Calcula la altitud en línea en los servidores de OsmAnd basándose en las imágenes de satélite y en los modelos digitales de elevación. Podría variar de la altitud registrada por el dispositivo y podría usarse como corrección de altitud.</string>
     <string name="lang_ckb">Kurdo central</string>
     <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
@@ -4744,14 +4744,14 @@
     <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
     <string name="download_complete">Descarga completa</string>
     <string name="auto_backup_title">Copia de seguridad automática</string>
-    <string name="duplacate_widget_added_snackbar">Se ha añadido un widget duplicado en la siguiente lista.</string>
+    <string name="duplacate_widget_added_snackbar">Se va a añadir un widget duplicado a la lista.</string>
     <string name="shared_string_duplicate">Duplicar</string>
     <string name="av_notes_photo_widget_desc">Pulsa el widget para tomar una foto.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar notas de audio.</string>
     <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
     <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
-    <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación de la traza (en minutos/horas) del viaje registrado actual.</string>
+    <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
     <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
     <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
@@ -4767,7 +4767,7 @@
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
-\nSi usas la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
+\nAl usar la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
@@ -4784,16 +4784,16 @@
     <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y quédate en la izquierda</string>
     <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y quédate en la derecha</string>
     <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y quédate en la izquierda</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos específicamente diseñados para el ciclismo de montaña</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos exclusivos para el ciclismo de montaña.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
     <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
     <string name="connect_with_straight_line">Conectar con línea recta</string>
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
     <string name="shared_string_only_missing">Sólo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
-    <string name="attach_roads_descr">¿Quieres aproximar la traza con una ruta válida adjuntada a los mapas sin conexión\? En ese caso, será corregida la altitud e información del camino y los giros que podrían usarse posteriormente en la navegación.</string>
-    <string name="attach_roads_warning">Se puede adjuntar al camino sólo una traza grabada</string>
-    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos, para obtener instrucciones de navegación detalladas.</string>
+    <string name="attach_roads_descr">Aproxima la traza con una ruta usando los mapas sin conexión. Esto proveerá valores de elevación corregidos, detalles del camino y giros usados durante la navegación.</string>
+    <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
+    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos para recibir instrucciones de navegación detalladas.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
 </resources>
