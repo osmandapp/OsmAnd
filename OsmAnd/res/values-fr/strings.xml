@@ -4773,4 +4773,6 @@
     <string name="attach_to_roads_banner_desc">Déplacez votre trace sur les routes afin d\'obtenir des instructions de guidage détaillées.</string>
     <string name="included_in_your_current_plan">Inclus dans votre abonnement %1$s</string>
     <string name="available_as_part_of_subscription_plan">Disponible avec l\'abonnement %1$s.</string>
+    <string name="favorite_delete_group">Supprimer le groupe</string>
+    <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
 </resources>
