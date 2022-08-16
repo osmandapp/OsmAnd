@@ -22,17 +22,17 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +46,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
+		setup3DViewPref();
 		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
@@ -146,6 +147,15 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			default:
 				return getActiveIcon(R.drawable.ic_action_direction_compass);
 		}
+	}
+
+	private void setup3DViewPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_2_5d_view_disabled);
+		Drawable enabled = getActiveIcon(R.drawable.ic_action_2_5d_view_on);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
+
+		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
+		enabled3DView.setIcon(icon);
 	}
 
 	private void setupCenterPositionOnMapPref() {
@@ -390,6 +400,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
+			onPreferenceChanged(prefId);
 		}
 	}
 
@@ -422,6 +433,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 				preference.setIcon(getRotateMapIcon());
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
+			} if (settings.ENABLE_3D_VIEW.getId().equals(prefId)) {
+				app.getMapViewTrackingUtilities().updateMapTilt();
 			}
 		}
 	}

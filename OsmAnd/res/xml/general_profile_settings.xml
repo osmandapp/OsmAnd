@@ -20,6 +20,13 @@
 		android:title="@string/rotate_map_to_bearing" />
 
 	<SwitchPreferenceCompat
+		android:key="enable_3d_view"
+		android:layout="@layout/preference_switch_with_descr"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/accessibility_2_5_d_view" />
+
+	<SwitchPreferenceCompat
 		android:key="center_position_on_map"
 		android:layout="@layout/preference_switch_with_descr"
 		android:summaryOff="@string/shared_string_off"

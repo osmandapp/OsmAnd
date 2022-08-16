@@ -722,8 +722,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
-				settings.LAST_KNOWN_MAP_ROTATION.setModeValue(prevAppMode, getMapRotate());
-				settings.LAST_KNOWN_MAP_ELEVATION.setModeValue(prevAppMode, getMapElevationAngle());
+				settings.setLastKnownMapRotation(prevAppMode, getMapRotate());
+				settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
 				updateApplicationModeSettings();
 			}
 		});
@@ -747,7 +747,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setIntZoom(settings.getLastKnownMapZoom());
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
-				mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+				mapView.setRotate(settings.getLastKnownMapRotation(), true);
 			}
 		}
 
@@ -1242,8 +1242,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
-		settings.LAST_KNOWN_MAP_ROTATION.set(mapView.getRotate());
-		settings.LAST_KNOWN_MAP_ELEVATION.set(mapView.getElevationAngle());
+		settings.setLastKnownMapRotation(mapView.getRotate());
+		settings.setLastKnownMapElevation(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);

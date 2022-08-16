@@ -322,10 +322,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
+		updateMapTilt();
+	}
+
+	public void updateMapTilt() {
 		if (mapView != null) {
-			mapView.setElevationAngle(settings.LAST_KNOWN_MAP_ELEVATION.get());
+			mapView.setElevationAngle(settings.getLastKnownMapElevation());
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
-				mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+				mapView.setRotate(settings.getLastKnownMapRotation(), true);
 			}
 		}
 	}

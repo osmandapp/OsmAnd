@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.MapUtils;
 
@@ -198,6 +199,7 @@ public class MultiTouchSupport {
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {
-		return app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit();
+		OsmandSettings settings = app.getSettings();
+		return settings.USE_OPENGL_RENDER.get() && settings.ENABLE_3D_VIEW.get() && NativeCoreContext.isInit();
 	}
 }
