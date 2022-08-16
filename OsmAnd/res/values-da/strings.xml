@@ -4777,7 +4777,7 @@
     <string name="attach_roads_descr">Tilnærm dit spor en rute ved hjælp af offline-kortet. Dette vil give korrigerede højdeværdier, vejdetaljer og sving til brug ved navigation.</string>
     <string name="attach_roads_warning">Kun et optaget spor kan vedhæftes vejene.</string>
     <string name="download_tiles">Download kortfliser</string>
-    <string name="shared_string_only_missing">Kun mangler</string>
+    <string name="shared_string_only_missing">Kun manglende</string>
     <string name="without_profiles_changing">Uden at profiler ændres</string>
     <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
     <string name="attach_to_roads_banner_desc">Fastgør dit spor til vejene for at modtage detaljerede navigationsinstruktioner.</string>
