@@ -636,7 +636,11 @@ public class MapDataMenuController extends MenuController {
 						parent = app.getAppPath(IndexConstants.MAPS_PATH);
 					}
 				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
-					parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+					if (i.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+						parent = app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+					} else {
+						parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+					}
 				} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
 					parent = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {

@@ -61,7 +61,7 @@ public class DownloadActivityType {
 	public static final DownloadActivityType SQLITE_FILE =
 			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
 	public static final DownloadActivityType HEIGHTMAP_FILE =
-			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_height_limit, "heightmap", 85);
+			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "heightmap", 85);
 
 	private final int stringResource;
 	private final int iconResource;
