@@ -453,7 +453,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			ITileSource src = (ITileSource) info.getAttachedObject();
 			ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
 			ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
-			if (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName())) {
+			if (src != null && (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName()))) {
 				File current = new File(info.getPathToData());
 				File parent = current.getParentFile();
 				if (parent == null) {
