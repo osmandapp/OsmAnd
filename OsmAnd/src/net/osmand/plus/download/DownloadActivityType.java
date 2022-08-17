@@ -201,7 +201,7 @@ public class DownloadActivityType {
 	}
 
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this && SLOPE_FILE != this  && HEIGHTMAP_FILE != this
+		return HILLSHADE_FILE != this && SLOPE_FILE != this && HEIGHTMAP_FILE != this
 				&& SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
 
@@ -416,7 +416,7 @@ public class DownloadActivityType {
 		} else if (this == SLOPE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == HEIGHTMAP_FILE) {
-			return fileName.replace('_', ' ');
+			return fileName.replace('_', ' ').replace(".heightmap", "");
 		} else if (this == SQLITE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == LIVE_UPDATES_FILE) {
@@ -475,7 +475,7 @@ public class DownloadActivityType {
 					.replace(FileNameTranslationHelper.SLOPE + "_", "");
 		}
 		if (this == HEIGHTMAP_FILE) {
-			String heightmapSuffix = ".heightmap"+ IndexConstants.HEIGHTMAP_SQLITE_EXT;
+			String heightmapSuffix = ".heightmap" + IndexConstants.HEIGHTMAP_SQLITE_EXT;
 			return fileName.substring(0, fileName.length() - heightmapSuffix.length())
 					.replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
 		}
