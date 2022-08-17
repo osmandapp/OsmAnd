@@ -475,7 +475,8 @@ public class DownloadActivityType {
 					.replace(FileNameTranslationHelper.SLOPE + "_", "");
 		}
 		if (this == HEIGHTMAP_FILE) {
-			return fileName.substring(0, fileName.length() - IndexConstants.HEIGHTMAP_SQLITE_EXT.length())
+			String heightmapSuffix = ".heightmap"+ IndexConstants.HEIGHTMAP_SQLITE_EXT;
+			return fileName.substring(0, fileName.length() - heightmapSuffix.length())
 					.replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
 		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
