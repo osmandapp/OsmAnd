@@ -4161,7 +4161,7 @@
     <string name="send_logcat_log">Envoyer le journal logcat</string>
     <string name="backup_promocode">Code promo</string>
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_wikipedia">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
+    <string name="purchases_feature_desc_wikipedia">Consultez les articles Wikipédia des lieux de visite sur le trajet, sans connexion Internet. Les articles sont associés aux points d\'intérets de la carte. N\'oubliez pas de télécharger les articles pour les régions de votre choix.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
