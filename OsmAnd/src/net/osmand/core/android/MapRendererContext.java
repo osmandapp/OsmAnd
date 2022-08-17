@@ -7,7 +7,6 @@ import android.util.Log;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.ITileSqliteDatabasesCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -240,7 +239,9 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 				heightMapDir.mkdir();
 			}
 			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
-			heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
+			if (app.getSettings().SHOW_HEIGHTMAPS.get()) {
+				heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
+			}
 			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(heightsCollection,
 					mapRendererView.getElevationDataTileSize()));
 		}

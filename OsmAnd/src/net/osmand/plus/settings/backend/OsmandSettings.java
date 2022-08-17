@@ -2818,11 +2818,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> APPROX_SAFE_MODE = new BooleanPreference(this, "approx_safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",
-			false /*Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH*/
-	).makeGlobal().makeShared().cache();
-
+	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> OPENGL_RENDER_FAILED = new BooleanPreference(this, "opengl_render_failed", false).makeGlobal().cache();
+
+	public final OsmandPreference<Boolean> SHOW_HEIGHTMAPS = new BooleanPreference(this, "show_heightmaps", false).makeGlobal().makeShared().cache();
 
 
 	// this value string is synchronized with settings_pref.xml preference name
