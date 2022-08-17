@@ -147,6 +147,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			return (FileNameTranslationHelper.HILL_SHADE + "_" + getBasename()).replace("_", " ");
 		} else if (type == DownloadActivityType.SLOPE_FILE) {
 			return (FileNameTranslationHelper.SLOPE + "_" + getBasename()).replace('_', ' ');
+		} else if (type == DownloadActivityType.HEIGHTMAP_FILE) {
+			return (FileNameTranslationHelper.HEIGHTMAP + "_" + getBasename()).replace('_', ' ');
 		} else {
 			return getBasename();
 		}
@@ -172,10 +174,9 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return dateFormat.format(new Date(timestamp));
 	}
-	
-	
+
 	private String getLocalDate(@NonNull DateFormat dateFormat) {
-		if(localTimestamp <= 0) {
+		if (localTimestamp <= 0) {
 			return "";
 		}
 		return dateFormat.format(new Date(localTimestamp));
@@ -184,7 +185,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public boolean isOutdated() {
 		return outdated
 				&& getType() != DownloadActivityType.HILLSHADE_FILE
-				&& getType() != DownloadActivityType.SLOPE_FILE;
+				&& getType() != DownloadActivityType.SLOPE_FILE
+				&& getType() != DownloadActivityType.HEIGHTMAP_FILE;
 	}
 
 	public void setOutdated(boolean outdated) {
