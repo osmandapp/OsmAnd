@@ -1575,14 +1575,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
 					boolean successful = FileUtils.removeGpxFile(app, info.file);
-					String folderPath = getFolderPath(info);
-					if (isFolderEmpty(folderPath)) {
-						File directory = new File(folderPath);
-						deleteFolder(directory);
-						isFolderDeleted = true;
-					}
 					total++;
 					if (successful) {
+						String folderPath = getFolderPath(info);
+						if (isFolderEmpty(folderPath)) {
+							File directory = new File(folderPath);
+							deleteFolder(directory);
+							isFolderDeleted = true;
+						}
 						count++;
 						publishProgress(info);
 					}
