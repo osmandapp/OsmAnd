@@ -55,6 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
@@ -72,6 +73,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private OsmandApplication app;
 	private ApplicationMode appMode;
 	private String approxRouteProfile;
+	private String approxDerivedProfile;
 	private MapActivity mapActivity;
 	private OnlineRoutingHelper helper;
 
@@ -271,9 +273,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		setApproximateCardTitle();
 		approximateCard.onClickCheckBox(getString(R.string.approximate_route_description), result -> {
 			if (getActivity() != null) {
-				String selected = approxRouteProfile;
-				SelectOnlineApproxProfileBottomSheet.showInstance(
-						getActivity(), this, appMode, selected, false);
+				SelectOnlineApproxProfileBottomSheet.showInstance(getActivity(), this,
+						appMode, approxRouteProfile, approxDerivedProfile, false);
 			}
 			return false;
 		});
@@ -282,8 +283,13 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void setApproximateCardTitle() {
-		approxRouteProfile = engine.getApproximateRouteProfile();
-		String appModeName = approxRouteProfile != null ? " (" + approxRouteProfile + ")" : "";
+		approxRouteProfile = engine.getApproximationRoutingProfile();
+		approxDerivedProfile = engine.get(EngineParameter.APPROXIMATION_DERIVED_PROFILE);
+		String appModeName = "";
+		if (approxRouteProfile != null) {
+			appModeName = approxDerivedProfile != null ? approxDerivedProfile : approxRouteProfile;
+			appModeName = " (" + appModeName + ")";
+		}
 		String title = getString(R.string.attach_to_the_roads) + appModeName;
 		approximateCard.setHeaderTitle(title);
 		approximateCard.setCheckBox(approxRouteProfile != null);
@@ -525,7 +531,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 				typeCard.setEditedText(engine.getBaseUrl());
 				updateCardVisibility(apiKeyCard, EngineParameter.API_KEY);
 				updateCardVisibility(vehicleCard, EngineParameter.VEHICLE_KEY);
-				updateCardVisibility(approximateCard, EngineParameter.APPROXIMATE_ROUTE);
+				updateCardVisibility(approximateCard, EngineParameter.APPROXIMATION_ROUTING_PROFILE);
 				updateCardVisibility(useExternalTimestampsCard, EngineParameter.USE_EXTERNAL_TIMESTAMPS);
 				updateCardVisibility(routingFallbackCard, EngineParameter.USE_ROUTING_FALLBACK);
 
@@ -806,8 +812,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onProfileSelected(Bundle args) {
-		String profileKey = args.getString(PROFILE_KEY_ARG);
-		engine.put(EngineParameter.APPROXIMATE_ROUTE, String.valueOf(profileKey));
+		engine.put(EngineParameter.APPROXIMATION_ROUTING_PROFILE, args.getString(PROFILE_KEY_ARG));
+		engine.put(EngineParameter.APPROXIMATION_DERIVED_PROFILE, args.getString(DERIVED_PROFILE_ARG));
 		setApproximateCardTitle();
 	}
 }
