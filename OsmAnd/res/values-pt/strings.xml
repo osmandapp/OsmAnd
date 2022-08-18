@@ -4483,10 +4483,10 @@
     <string name="created_on">Criado em</string>
     <string name="turn_arrows">Setas de viragem</string>
     <string name="turn_arrows_descr">Selecione se as setas de viragem estão indicadas na linha de rota.</string>
-    <string name="predefined_waypoint_appearance_description">Ao tocar nesta ação, o ponto de passagem será guardado automaticamente com parâmetros pré-definidos.</string>
-    <string name="always_ask_waypoint_appearance_description">Ao tocar nesta ação, abre-se o ecrã \"Adicionar ponto de passagem\", onde pode alterar o nome e a aparência.</string>
+    <string name="predefined_waypoint_appearance_description">Ao tocar nesta ação será guardado automaticamente o ponto de passagem com parâmetros pré-definidos.</string>
+    <string name="always_ask_waypoint_appearance_description">Ao tocar nesta ação, aparece o ecrã \"Adicionar ponto de passagem\" onde pode alterar o nome e a aparência.</string>
     <string name="waypoint_appearance">Aparência do ponto de passagem</string>
-    <string name="track_file_description">Ao tocar nesta ação, será mostrada uma lista de trilhos disponíveis para selecionar.</string>
+    <string name="track_file_description">Ao tocar nesta ação é mostrada uma lista de trilhos disponíveis.</string>
     <string name="track_file">Ficheiro de trilho</string>
     <string name="waypoint_template">Modelo de pontos de passagem</string>
     <string name="shared_string_used">Usado</string>
@@ -4700,10 +4700,10 @@
     <string name="marker_2nd">2º marcador</string>
     <string name="marker_1st">1º marcador</string>
     <string name="map_marker_average_speed_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular o tempo estimado de chegada.</string>
-    <string name="switch_widget_mode_desc">Pode alternar o modo tocando no widget.</string>
+    <string name="switch_widget_mode_desc">Tocando no widget alterna os modos.</string>
     <string name="side_marker_eta">Hora estimada de chegada</string>
-    <string name="reset_all_settings_desc">Quer mesmo repor todas as configurações de origem\?</string>
-    <string name="goods_delivery_desc_4">Se o peso do seu veículo for superior a 3,5 toneladas, tem de usar o perfil \"Camião\".</string>
+    <string name="reset_all_settings_desc">Repor todas as configurações de origem\?</string>
+    <string name="goods_delivery_desc_4">Para veículos com peso superior a 3,5 toneladas, utilize o perfil \"Camião\".</string>
     <string name="goods_delivery_desc_2">Serão evitadas estradas com proibição de entregas de mercadorias.</string>
     <string name="goods_delivery_desc">Os veículos de transporte de mercadorias podem ter o acesso restrito em algumas estradas.</string>
     <string name="updated_map_time">Atualizado: %1$s.</string>
@@ -4718,7 +4718,7 @@
     <string name="routing_attr_motor_type_electric_name">Elétrico</string>
     <string name="routing_attr_motor_type_gas_name">GNV</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
-    <string name="goods_delivery_desc_3">Aplica-se apenas a veículos que transportem mercadorias com pelo menos 4 rodas e peso não superior a 3,5 toneladas.</string>
+    <string name="goods_delivery_desc_3">Aplica-se apenas a camiões de mercadorias até 3,5 toneladas.</string>
     <string name="next_live_update_time">Próxima atualização: em %1$s.</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina</string>
     <string name="routing_attr_goods_restrictions_name">Entrega de mercadorias</string>
@@ -4736,7 +4736,7 @@
     <string name="av_notes_audio_widget_desc">Tocar no widget permite gravar notas de áudio.</string>
     <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas da viagem atual gravada.</string>
     <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atual gravada.</string>
-    <string name="trip_recording_duration_widget_desc">Mostra a gravação do trilho, a duração em minutos/horas da viagem atualmente gravada.</string>
+    <string name="trip_recording_duration_widget_desc">Mostra o tempo de duração da viagem atualmente gravada.</string>
     <string name="trip_recording_distance_widget_desc">Mostra a distância da viagem atualmente gravada.</string>
     <string name="time_to_destination_widget_desc">O widget mostra \"hora de chegada\" ou \"tempo a percorrer\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo de rota da localização atual.</string>
     <string name="time_to_intermediate_widget_desc">O widget mostra o \"tempo de chegada\" ou \"tempo a percorrer\" até ao primeiro ponto intermédio. O tempo é constantemente atualizado durante a navegação, uma vez passados os pontos intermédios, o tempo será atualizado para o próximo ponto intermédio.</string>
@@ -4751,8 +4751,8 @@
     <string name="shared_string_duplicate">Duplicar</string>
     <string name="true_bearing_wdiget_desc">Ângulo entre o verdadeiro norte e o ponto alvo observado a partir da sua localização.</string>
     <string name="compass_always_visible">Sempre visível</string>
-    <string name="auto_backup_preference_desc">Por predefinição, o Android guarda cópias de segurança dos favoritos, tokens de mapas e configurações do OsmAnd para os restaurar noutros dispositivos ou após reinstalação. Essa cópia de segurança é limitada a 25 MB.
-\nSe estiver a utilizar o OsmAnd Cloud, isto pode levar a mal entendidos após a reinstalação.</string>
+    <string name="auto_backup_preference_desc">Por predefinição, o Android guarda cópias de segurança dos favoritos, tokens de mapas e configurações do OsmAnd para os restaurar noutros dispositivos ou após reinstalação. Esta cópia de segurança é limitada a 25 MB.
+\nAo utilizar o OsmAnd Cloud, isto pode levar a mal entendidos após a reinstalação.</string>
     <string name="av_notes_photo_widget_desc">Tocar no widget permite tirar uma fotografia.</string>
     <string name="distance_to_intermediate_widget_desc">O widget mostra a distância restante até ao primeiro ponto intermédio. Uma vez passados os pontos intermédios, a distância será atualizada para o próximo ponto intermédio.</string>
     <string name="widget_with_dot">Widget.</string>
@@ -4765,9 +4765,9 @@
     <string name="compass_click_desc">Toque na bússola para alternar o modo de orientação do mapa.</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT</string>
-    <string name="duplacate_widget_added_snackbar">Um widget duplicado é posicionado na linha seguinte da lista.</string>
+    <string name="duplacate_widget_added_snackbar">Um widget em duplicado está a ser acrescentado à lista.</string>
     <string name="auto_25_chars_route_tl_kr">Vire à esquerda e mantenha-se na direita</string>
     <string name="auto_25_chars_route_tr_kl">Vire à direita e mantenha-se na esquerda</string>
     <string name="auto_25_chars_route_tr_kr">Vire à direita e mantenha-se na direita</string>
@@ -4775,14 +4775,16 @@
     <string name="auto_25_chars_route_tu_kr">Faça inversão de marcha e mantenha-se na direita</string>
     <string name="auto_25_chars_route_roundabout_kl">Saia na %1$d saída e mantenha-se na esquerda</string>
     <string name="auto_25_chars_route_roundabout_kr">Saia na %1$d saída e mantenha-se na direita</string>
-    <string name="connect_with_straight_line">Conectar com uma linha reta</string>
+    <string name="connect_with_straight_line">Conectar em linha reta</string>
     <string name="download_tiles">Descarregar mosaicos</string>
     <string name="without_profiles_changing">Sem alteração de perfis</string>
     <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s será contada e afetará a velocidade média.</string>
     <string name="attach_roads_descr">Ativar para aproximar o trilho a uma rota válida anexada a mapas offline. Desta forma será corrigida a altitude da estrada, a informação da estrada e as curvas que poderão ser utilizadas mais tarde na navegação.</string>
-    <string name="attach_roads_warning">Pode anexar apenas uma pista registada às estradas</string>
+    <string name="attach_roads_warning">Só se pode anexar um trilho às estradas.</string>
     <string name="shared_string_only_missing">Só os que faltam</string>
-    <string name="attach_to_roads_banner_desc">Anexe os seus trilhos às estradas para obter instruções de navegação.</string>
+    <string name="attach_to_roads_banner_desc">Anexe o seu trilho às estradas para obter instruções de navegação.</string>
     <string name="available_as_part_of_subscription_plan">Disponível como parte da subscrição %1$s.</string>
     <string name="included_in_your_current_plan">Incluído no seu plano \"%1$s\" atual</string>
+    <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)</string>
+    <string name="favorite_delete_group">Eliminar grupo</string>
 </resources>

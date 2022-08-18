@@ -374,7 +374,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			gpxTitle = app.getString(R.string.shared_string_currently_recording_track);
 		} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle())) {
 			String description = gpxFile.metadata.getDescription();
-			gpxTitle = Algorithms.isEmpty(description) ? gpxFile.getArticleTitle() : description;
+			gpxTitle = Algorithms.isEmpty(description) ||  Algorithms.isHtmlText(description)
+					? gpxFile.getArticleTitle()
+					: description;
 		} else {
 			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.path));
 		}

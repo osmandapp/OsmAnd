@@ -4785,4 +4785,6 @@
     <string name="attach_to_roads_banner_desc">Прикрепите свой трек к дорогам, чтобы получить подробные инструкции по навигации.</string>
     <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
+    <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>
+    <string name="favorite_delete_group">Удалить группу</string>
 </resources>

@@ -19,11 +19,14 @@ import java.lang.reflect.Field;
  * on 07.07.2014.
  */
 public class FileNameTranslationHelper {
+
 	private static final Log LOG = PlatformUtil.getLog(FileNameTranslationHelper.class);
+
 	public static final String WIKI_NAME = "_wiki";
 	public static final String WIKIVOYAGE_NAME = "_wikivoyage";
 	public static final String HILL_SHADE = "Hillshade";
 	public static final String SLOPE = "Slope";
+	public static final String HEIGHTMAP = "Heightmap";
 	public static final String SEA_DEPTH = "Depth_";
 
 	public static String getFileNameWithRegion(OsmandApplication app, String fileName) {
@@ -43,6 +46,9 @@ public class FileNameTranslationHelper {
 		} else if (fileName.startsWith(HILL_SHADE)) {
 			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
+		} else if (fileName.startsWith(HEIGHTMAP)) {
+			basename = basename.replace(HEIGHTMAP + " ", "");
+			return getTerrainName(ctx, regions, basename, R.string.download_heightmap_maps);
 		} else if (fileName.startsWith(SLOPE)) {
 			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
@@ -73,7 +79,7 @@ public class FileNameTranslationHelper {
 	}
 
 	public static String getTerrainName(Context ctx, OsmandRegions regions, String basename,
-										int terrainNameRes) {
+	                                    int terrainNameRes) {
 		basename = basename.replace(" ", "_");
 		String terrain = ctx.getString(terrainNameRes);
 		String locName = regions.getLocaleName(basename.trim(), true);

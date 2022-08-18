@@ -306,14 +306,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (mapView != null) {
 			if (isMapLinkedToLocation) {
 				boolean trackDetailsVisible = detailsMenu != null && detailsMenu.isVisible();
-				int positionType;
-				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
-						&& !settings.CENTER_POSITION_ON_MAP.get() && !trackDetailsVisible) {
-					positionType = OsmandSettings.BOTTOM_CONSTANT;
+				int displayPosition;
+				if (settings.CENTER_POSITION_ON_MAP.get() || trackDetailsVisible) {
+					displayPosition = OsmandSettings.CENTER_CONSTANT;
 				} else {
-					positionType = OsmandSettings.CENTER_CONSTANT;
+					displayPosition = OsmandSettings.BOTTOM_CONSTANT;
 				}
-				mapView.setMapPosition(positionType);
+				mapView.setMapPosition(displayPosition);
 			}
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebSettings;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,8 +37,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 
 public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment implements OnSaveDescriptionCallback {
 
@@ -182,7 +179,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 
 	private void setContent(@NonNull String content) {
 		mContent = content;
-		mContentType = isHtmlText(mContent) ? ContentType.HTML : ContentType.PLAIN;
+		mContentType = Algorithms.isHtmlText(mContent) ? ContentType.HTML : ContentType.PLAIN;
 	}
 
 	private void updateContentView() {
@@ -216,10 +213,6 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 
 	private String getColoredContent(@NonNull String content) {
 		return "<body style=\"color:white;\">\n" + content + "</body>\n";
-	}
-
-	private boolean isHtmlText(@NonNull String text) {
-		return text.contains("</");
 	}
 
 	public void setupDependentViews(@NonNull View view) {

@@ -3968,4 +3968,23 @@
     <string name="map_widget_trip_recording_duration">Durada</string>
     <string name="routing_attr_avoid_fords_description">Evita els guals</string>
     <string name="fps_widget_desc">El giny mostra la velocitat de càrrega i actualització del mapa i dels elements auxiliars.</string>
+    <string name="connect_with_straight_line">Connecta amb una línia recta</string>
+    <string name="attach_roads_descr">Ajusta la vostra traça a una ruta que segueixi el mapa local. Això us donarà valors d\'elevació corregits, detalls de la via i els girs realitzats durant la navegació.</string>
+    <string name="without_profiles_changing">Sense canvis als perfils</string>
+    <string name="download_tiles">Baixa les tessel·les</string>
+    <string name="av_notes_photo_widget_desc">Prement el giny us permet fer una foto.</string>
+    <string name="av_notes_video_widget_desc">Prement el giny us permet enregistrar un vídeo.</string>
+    <string name="av_notes_audio_widget_desc">Prement el giny us permet enregistrar una nota d\'àudio.</string>
+    <string name="auto_25_chars_route_tu_kl">Feu un gir en U i mantingueu-vos a l\'esquerra</string>
+    <string name="auto_25_chars_route_tu_kr">Feu un gir en U i manteniu-vos a la dreta</string>
+    <string name="auto_backup_title">Còpia de seguretat automàtica</string>
+    <string name="shared_string_duplicate">Duplicat</string>
+    <string name="duplacate_widget_added_snackbar">S\'està afegint un giny duplicat a la llista.</string>
+    <string name="attach_roads_warning">Només es pot vincular a les vies una traça enregistrada.</string>
+    <string name="auto_25_chars_route_tl_kl">Gireu a l\'esquerra i manteniu-vos a l\'esquerra</string>
+    <string name="auto_25_chars_route_tr_kl">Gireu a la dreta i manteniu-vos a l\'esquerra</string>
+    <string name="auto_25_chars_route_tl_kr">Gireu a l\'esquerra i manteniu-vos a la dreta</string>
+    <string name="auto_25_chars_route_roundabout_kl">Agafeu la sortida %1$d i manteniu-vos a l\'esquerra</string>
+    <string name="auto_25_chars_route_roundabout_kr">Agafeu la sortida %1$d i manteniu-vos a la dreta</string>
+    <string name="auto_25_chars_route_tr_kr">Gireu a la dreta i manteniu-vos a la dreta</string>
 </resources>

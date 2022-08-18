@@ -22,6 +22,8 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.DialogListItemAdapter;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -159,12 +161,44 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupCenterPositionOnMapPref() {
-		Drawable disabled = getContentIcon(R.drawable.ic_action_display_position_bottom);
-		Drawable enabled = getActiveIcon(R.drawable.ic_action_display_position_center);
-		Drawable icon = getPersistentPrefIcon(enabled, disabled);
+		CommonPreference<Boolean> preference = settings.CENTER_POSITION_ON_MAP;
+		boolean isCenterSelected = preference.getModeValue(getSelectedAppMode());
+		Drawable icon = getActiveIcon(isCenterSelected ?
+				R.drawable.ic_action_display_position_center :
+				R.drawable.ic_action_display_position_bottom);
+		String summary = getString(isCenterSelected ?
+				R.string.position_on_map_center :
+				R.string.position_on_map_bottom);
+		Preference displayPosition = findPreference(preference.getId());
+		displayPosition.setIcon(icon);
+		displayPosition.setSummary(summary);
+	}
 
-		SwitchPreferenceCompat centerPositionOnMap = findPreference(settings.CENTER_POSITION_ON_MAP.getId());
-		centerPositionOnMap.setIcon(icon);
+	private void showDisplayPositionDialog(Preference preference) {
+		boolean nightMode = isNightMode();
+		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
+		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(preference.getTitle());
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+
+		String[] entries = new String[] {
+				getString(R.string.position_on_map_center),
+				getString(R.string.position_on_map_bottom),
+		};
+		Boolean[] entryValues = new Boolean[] {true, false};
+		int selected = settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? 0 : 1;
+
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				entries, nightMode, selected, app, profileColor, themeRes, v -> {
+					int selectedEntryIndex = (int) v.getTag();
+					applyPreferenceWithSnackBar(preference.getKey(), entryValues[selectedEntryIndex]);
+				}
+		);
+
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -366,11 +400,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 					}
 				};
 
-		b.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				onConfirmPreferenceChange(settings.DRIVING_REGION.getId(), drs.get(which), ApplyQueryType.BOTTOM_SHEET);
-			}
+		b.setAdapter(singleChoiceAdapter, (dialog, which) -> {
+			onConfirmPreferenceChange(settings.DRIVING_REGION.getId(), drs.get(which), ApplyQueryType.BOTTOM_SHEET);
 		});
 
 		b.setNegativeButton(R.string.shared_string_cancel, null);
@@ -408,6 +439,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
+			return true;
+		} else if (preference.getKey().equals(settings.CENTER_POSITION_ON_MAP.getId())) {
+			showDisplayPositionDialog(preference);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
