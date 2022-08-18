@@ -4799,4 +4799,5 @@
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
+    <string name="download_heightmap_maps">Mapa de alturas</string>
 </resources>
