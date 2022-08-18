@@ -234,14 +234,16 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 
 	public void recreateHeightmapProvider() {
 		if (mapRendererView != null) {
+			if (!app.getSettings().SHOW_HEIGHTMAPS.get()) {
+				mapRendererView.resetElevationDataProvider();
+				return;
+			}
 			File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
 			if (!heightMapDir.exists()) {
 				heightMapDir.mkdir();
 			}
 			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
-			if (app.getSettings().SHOW_HEIGHTMAPS.get()) {
-				heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
-			}
+			heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
 			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(heightsCollection,
 					mapRendererView.getElevationDataTileSize()));
 		}
