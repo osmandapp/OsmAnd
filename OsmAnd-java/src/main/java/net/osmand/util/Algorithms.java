@@ -112,6 +112,10 @@ public class Algorithms {
 		return map == null || map.size() == 0;
 	}
 
+	public static <T> boolean isEmpty(T[] array) {
+		return array == null || array.length == 0;
+	}
+
 	public static String emptyIfNull(String s) {
 		return s == null ? "" : s;
 	}

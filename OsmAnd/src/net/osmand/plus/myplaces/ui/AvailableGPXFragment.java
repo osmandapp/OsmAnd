@@ -1566,7 +1566,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public class DeleteGpxTask extends AsyncTask<GpxInfo, GpxInfo, String> {
-		boolean isFolderDeleted = false;
+
+		private boolean folderDeleted;
 
 		@Override
 		protected String doInBackground(GpxInfo... params) {
@@ -1574,13 +1575,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			int total = 0;
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
-					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					total++;
+					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					if (successful) {
 						File parentFile = info.file.getParentFile();
-						if (parentFile != null && isFolderEmpty(parentFile)) {
-							FileUtils.removeGpxFile(app, parentFile);
-							isFolderDeleted = true;
+						if (parentFile != null && Algorithms.isEmpty(parentFile.listFiles())) {
+							folderDeleted = Algorithms.removeAllFiles(parentFile);
 						}
 						count++;
 						publishProgress(info);
@@ -1607,14 +1607,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		protected void onPostExecute(String result) {
 			hideProgressBar();
 			app.showToastMessage(result);
-			if (isFolderDeleted) {
+
+			if (folderDeleted) {
 				reloadTracks();
 			}
-		}
-
-		private boolean isFolderEmpty(File directory) {
-			File[] contents = directory.listFiles();
-			return (contents != null ? contents.length : 0) == 0;
 		}
 	}
 
