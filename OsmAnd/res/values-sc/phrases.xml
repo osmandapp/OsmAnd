@@ -578,7 +578,7 @@
     <string name="poi_internet_access_service">Atzessu ìnternet: servìtziu</string>
     <string name="poi_wine">Butega de binos</string>
     <string name="poi_public_transport_stop_position">Firmada de su trasportu pùblicu</string>
-    <string name="poi_halt">Firmada de sa ferrovia;Firmada de sos trenos</string>
+    <string name="poi_halt">Firmada de sa ferrovia;Firmada de sos trenos;Istatzione de sa ferrovia;Istatzione de sos trenos;Istatzione</string>
     <string name="poi_railway_buffer_stop">Denegante pro sos trenos</string>
     <string name="poi_baby_hatch">Bàntzigu pro sa bida/Roda de sos espostos</string>
     <string name="poi_apartment">Apartamentu</string>
@@ -4330,4 +4330,20 @@
     <string name="poi_printer_ink">Butega de tinta pro imprenta</string>
     <string name="poi_flow_rate">Portada</string>
     <string name="poi_golf_pin">Ispilla de golf</string>
+    <string name="poi_payment_mir_no">Cartas Mir no atzetadas</string>
+    <string name="poi_payment_mir_yes">Mir</string>
+    <string name="poi_dog_unleashed">Canes: non b\'at bisòngiu de los ligare</string>
+    <string name="poi_dog_leashed">Canes: petzi tentos a traìllia</string>
+    <string name="poi_club_youth_movement">Movimentu de giòvanos</string>
+    <string name="poi_club_amateur_radio">Tzìrculu de radiuamadores</string>
+    <string name="poi_club_religion">Tzìrculu religiosu</string>
+    <string name="poi_dog">Canes</string>
+    <string name="poi_dog_designated">Destinadu a sos canes</string>
+    <string name="poi_club_dog">Tzìrculu caninu</string>
+    <string name="poi_board_title">Tìtulu de su pannellu</string>
+    <string name="poi_short_name">Nùmene curtzu</string>
+    <string name="poi_first_aid_kit">Kit de primu agiudu</string>
+    <string name="poi_club_aviation">Tzìrculu de aviatzione</string>
+    <string name="poi_club_bicycle">Tzìrculu de tziclismu</string>
+    <string name="poi_club_doityourself">Tzìrculu de bricolage</string>
 </resources>
