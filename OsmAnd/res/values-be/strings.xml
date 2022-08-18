@@ -4789,4 +4789,5 @@
     <string name="included_in_your_current_plan">Уключана ў ваш бягучы тарыфны план \"%1$s\"</string>
     <string name="favorite_confirm_delete_group">Вы ўпэўнены, што хочаце выдаліць групу %1$s і ўсе ўключаныя кропкі (%2$d)</string>
     <string name="favorite_delete_group">Выдаліць групу</string>
+    <string name="download_heightmap_maps">Мапа вышынь</string>
 </resources>
