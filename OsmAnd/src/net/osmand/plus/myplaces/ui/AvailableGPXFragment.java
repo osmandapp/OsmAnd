@@ -1577,10 +1577,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					total++;
 					if (successful) {
-						String folderPath = getFolderPath(info);
-						if (isFolderEmpty(folderPath)) {
-							File directory = new File(folderPath);
-							deleteFolder(directory);
+						File parentFile = info.file.getParentFile();
+						if (parentFile != null && isFolderEmpty(parentFile)) {
+							FileUtils.removeGpxFile(app, parentFile);
 							isFolderDeleted = true;
 						}
 						count++;
@@ -1613,23 +1612,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		}
 
-		private String getFolderPath(GpxInfo gpx) {
-			return gpx.file.getAbsolutePath().replace(gpx.fileName, "");
-		}
-
-		private boolean isFolderEmpty(String path) {
-			boolean result = false;
-			File directory = new File(path);
+		private boolean isFolderEmpty(File directory) {
 			File[] contents = directory.listFiles();
-
-			if (contents.length == 0) {
-				result = true;
-			}
-			return result;
-		}
-
-		private void deleteFolder(File directory) {
-			FileUtils.removeGpxFile(app, directory);
+			return (contents != null ? contents.length : 0) == 0;
 		}
 	}
 
