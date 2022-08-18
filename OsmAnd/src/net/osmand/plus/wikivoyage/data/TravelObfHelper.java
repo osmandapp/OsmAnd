@@ -1077,7 +1077,11 @@ public class TravelObfHelper implements TravelHelper {
 				}
 				track.segments.add(trkSegment);
 			}
-			gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+			String description = article.getDescription();
+			if (Algorithms.isEmpty(description)) {
+				description = article.getContent();
+			}
+			gpxFile = new GPXFile(article.getTitle(), article.getLang(), description);
 			if (!Algorithms.isEmpty(article.getImageTitle())) {
 				gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
 			}

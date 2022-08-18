@@ -1475,18 +1475,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name);
 		} else if (o instanceof SelectedGpxPoint) {
 			SelectedGpxFile selectedGpxFile = ((SelectedGpxPoint) o).getSelectedGpxFile();
+			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+
 			String name;
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				name = getContext().getString(R.string.shared_string_currently_recording_track);
+			} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle()) &&
+					!Algorithms.isEmpty(gpxFile.metadata.getDescription())) {
+				name = gpxFile.metadata.getDescription();
 			} else {
-				name = formatName(Algorithms.getFileWithoutDirs(selectedGpxFile.getGpxFile().path));
+				name = formatName(Algorithms.getFileWithoutDirs(gpxFile.path));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		} else if (o instanceof Pair) {
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-				return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
+				String name = Algorithms.isEmpty(travelGpx.getDescription()) ? travelGpx.getTitle() : travelGpx.getDescription();
+				return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 			} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
 				NetworkRouteSegment routeSegment = (NetworkRouteSegment) pair.first;
 				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, routeSegment.getRouteName());

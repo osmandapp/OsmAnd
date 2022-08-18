@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -19,6 +21,7 @@ import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -30,8 +33,21 @@ import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
+	private final StateChangedListener<Boolean> showHeightmapsListener;
+
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
+
+		showHeightmapsListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+				if (mapContext != null && mapContext.isVectorLayerEnabled()) {
+					mapContext.recreateHeightmapProvider();
+				}
+			}
+		};
+		app.getSettings().SHOW_HEIGHTMAPS.addListener(showHeightmapsListener);
 	}
 
 	@Override

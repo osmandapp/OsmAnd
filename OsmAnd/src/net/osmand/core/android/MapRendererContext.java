@@ -7,7 +7,6 @@ import android.util.Log;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.ITileSqliteDatabasesCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -235,6 +234,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 
 	public void recreateHeightmapProvider() {
 		if (mapRendererView != null) {
+			if (!app.getSettings().SHOW_HEIGHTMAPS.get()) {
+				mapRendererView.resetElevationDataProvider();
+				return;
+			}
 			File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
 			if (!heightMapDir.exists()) {
 				heightMapDir.mkdir();

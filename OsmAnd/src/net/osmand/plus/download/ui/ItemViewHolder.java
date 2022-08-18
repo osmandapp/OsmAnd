@@ -568,6 +568,8 @@ public class ItemViewHolder {
 			type = LocalIndexType.TILES_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.SLOPE_FILE) {
 			type = LocalIndexType.TILES_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.HEIGHTMAP_FILE) {
+			type = LocalIndexType.TILES_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.ROADS_FILE) {
 			type = LocalIndexType.MAP_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {

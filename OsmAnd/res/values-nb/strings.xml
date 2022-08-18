@@ -4741,4 +4741,6 @@
     <string name="goods_delivery_desc">Kjøretøy som transporterer varer kan ha begrenset tilgang til noen veier.</string>
     <string name="included_in_your_current_plan">Inkludert i din nåværende «%1$s»-plan</string>
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
+    <string name="favorite_confirm_delete_group">Vil du slette «%1$s»-gruppen og alle dens punkter (%2$d)</string>
+    <string name="favorite_delete_group">Slett gruppe</string>
 </resources>
