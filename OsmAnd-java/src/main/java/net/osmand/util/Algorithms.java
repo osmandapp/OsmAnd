@@ -429,6 +429,10 @@ public class Algorithms {
 		return charAt >= '0' && charAt <= '9';
 	}
 
+	public static boolean isHtmlText(String text) {
+		return text.contains("</");
+	}
+
 	/**
 	 * Determine whether a file is a ZIP File.
 	 */
