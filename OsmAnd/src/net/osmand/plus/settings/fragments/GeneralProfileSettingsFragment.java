@@ -35,6 +35,7 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MultiTouchSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -157,6 +158,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
 		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
+		enabled3DView.setVisible(MultiTouchSupport.isTiltSupported(app));
 		enabled3DView.setIcon(icon);
 	}
 
@@ -431,7 +433,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
-			onPreferenceChanged(prefId);
 		}
 	}
 
@@ -467,8 +468,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 				preference.setIcon(getRotateMapIcon());
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
-			} if (settings.ENABLE_3D_VIEW.getId().equals(prefId)) {
-				app.getMapViewTrackingUtilities().updateMapTilt();
 			}
 		}
 	}

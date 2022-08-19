@@ -2188,17 +2188,23 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
 	}
 
-	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
-	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
 	public float getLastKnownMapRotation() {
 		return getLastKnownMapRotation(getApplicationMode());
 	}
 
 	public float getLastKnownMapRotation(@NonNull ApplicationMode appMode) {
-		return ENABLE_3D_VIEW.getModeValue(appMode) ?
-				LAST_KNOWN_MAP_ROTATION.getModeValue(appMode) :
-				LAST_KNOWN_MAP_ROTATION.getProfileDefaultValue(appMode);
+		return LAST_KNOWN_MAP_ROTATION.getModeValue(appMode);
+	}
+
+	public void setLastKnownMapRotation(float rotation) {
+		setLastKnownMapRotation(getApplicationMode(), rotation);
+	}
+
+	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
+		LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
 	}
 
 	public float getLastKnownMapElevation() {
@@ -2209,16 +2215,6 @@ public class OsmandSettings {
 		return ENABLE_3D_VIEW.getModeValue(appMode) ?
 				LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode) :
 				LAST_KNOWN_MAP_ELEVATION.getProfileDefaultValue(appMode);
-	}
-
-	public void setLastKnownMapRotation(float rotation) {
-		setLastKnownMapRotation(getApplicationMode(), rotation);
-	}
-
-	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
-		if (ENABLE_3D_VIEW.get()) {
-			LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
-		}
 	}
 
 	public void setLastKnownMapElevation(float elevation) {

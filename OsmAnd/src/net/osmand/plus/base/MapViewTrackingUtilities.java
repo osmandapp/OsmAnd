@@ -10,6 +10,7 @@ import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
@@ -53,6 +54,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private DashboardOnMap dashboard;
 	private MapContextMenu contextMenu;
 	private TrackDetailsMenu detailsMenu;
+	private StateChangedListener<Boolean> enable3DViewListener;
 
 	private long lastTimeAutoZooming;
 	private long lastTimeManualZooming;
@@ -76,6 +78,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
 		addMapMarkersListener(app);
+		addEnable3DViewListener();
 		initMapLinkedToLocation();
 	}
 
@@ -89,6 +92,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.refreshMap();
 			}
 		}));
+	}
+
+	private void addEnable3DViewListener() {
+		enable3DViewListener = change -> updateMapTilt();
+		settings.ENABLE_3D_VIEW.addListener(enable3DViewListener);
 	}
 
 	private void addMapMarkersListener(OsmandApplication app) {
