@@ -4773,4 +4773,5 @@
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) \"%1$s\" csoportot és minden benne foglalt pontot (%2$d)</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
+    <string name="display_position">Pozíció megjelenítése</string>
 </resources>
