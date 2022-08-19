@@ -4735,4 +4735,5 @@
     <string name="included_in_your_current_plan">כלול בתוכנית הנוכחית שלך „%1$s”</string>
     <string name="available_as_part_of_subscription_plan">זמין כחלק מהמינוי על %1$s.</string>
     <string name="download_heightmap_maps">מפת גבהים</string>
+    <string name="favorite_delete_group">מחיקת קבוצה</string>
 </resources>
