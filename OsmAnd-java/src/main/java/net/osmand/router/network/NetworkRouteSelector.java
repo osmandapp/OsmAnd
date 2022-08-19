@@ -84,7 +84,7 @@ public class NetworkRouteSelector {
 	}
 	
 	public Map<RouteKey, GPXFile> getRoutes(int x, int y, boolean loadRoutes) throws IOException {
-		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
+		Map<RouteKey, GPXFile> res = new LinkedHashMap<>();
 		for (NetworkRouteSegment segment : rCtx.loadRouteSegment(x, y)) {
 			if (res.containsKey(segment.routeKey)) {
 				continue;
@@ -147,22 +147,22 @@ public class NetworkRouteSelector {
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
 		int x31L = MapUtils.get31TileNumberX(bBox.left);
 		int x31R = MapUtils.get31TileNumberX(bBox.right);
-		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
-		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
-		for (RouteKey key : res.keySet()) {
+		Map<RouteKey, List<NetworkRouteSegment>> routeSegmentTile = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+		Map<RouteKey, GPXFile> res = new LinkedHashMap<>();
+		for (RouteKey key : routeSegmentTile.keySet()) {
 			if (selected != null && !selected.equals(key)) {
 				continue;
 			}
-			List<NetworkRouteSegment> list = res.get(key);
-			if (list.size() > 0) {
+			List<NetworkRouteSegment> routeSegments = routeSegmentTile.get(key);
+			if (routeSegments.size() > 0) {
 				if (!loadRoutes) {
-					r.put(key, null);
+					res.put(key, null);
 				} else {
-					connectAlgorithm(list.get(0), r);
+					connectAlgorithm(routeSegments.get(0), res);
 				}
 			}
 		}
-		return r;
+		return res;
 	}
 
 	public static class NetworkRouteSegmentChain {
@@ -275,14 +275,9 @@ public class NetworkRouteSelector {
 		connectToLongestChain(chains, endChains, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
-		Collection<List<NetworkRouteSegmentChain>> values = new ArrayList<>(chains.values());
-		for (List<NetworkRouteSegmentChain> chainList : values) {
-			NetworkRouteSegmentChain first = chainList.get(0);
-			chainReverse(chains, endChains, first);
-		}
 		List<NetworkRouteSegmentChain> lst = flattenChainStructure(chains);
-		GPXFile fl = createGpxFile(lst);
-		res.put(routeKey, fl);
+		GPXFile gpxFile = createGpxFile(lst);
+		res.put(routeKey, gpxFile);
 		return lst;
 	}
 

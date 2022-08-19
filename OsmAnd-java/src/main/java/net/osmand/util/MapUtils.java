@@ -758,7 +758,7 @@ public class MapUtils {
 	}
 
 	public static double getSqrtDistance(int startX, int startY, int endX, int endY) {
-		return Math.sqrt((long) (endX - startX) * (endX - startX) + (long) (endY - startY) * (endY - startY));
+		return Math.sqrt((double) (endX - startX) * (endX - startX) + (double) (endY - startY) * (endY - startY));
 	}
 
 	public static double getSqrtDistance(float startX, float startY, float endX, float endY) {
