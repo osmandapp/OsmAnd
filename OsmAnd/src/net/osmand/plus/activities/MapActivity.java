@@ -327,11 +327,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.refreshMap(true);
 		app.getOsmandMap().addListener(this);
 
+		drawerLayout = findViewById(R.id.drawer_layout);
+		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
+
 		checkAppInitialization();
 
 		mapActions.updateDrawerMenu();
-		drawerLayout = findViewById(R.id.drawer_layout);
-		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
