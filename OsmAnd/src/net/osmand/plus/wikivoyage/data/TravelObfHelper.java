@@ -32,8 +32,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
@@ -1052,13 +1053,15 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		GPXFile gpxFile = null;
-		boolean hasAltitude = false;
+		String description = article.getDescription();
+		String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
 		if (!segmentList.isEmpty()) {
-			GPXUtilities.Track track = new GPXUtilities.Track();
+			boolean hasAltitude = false;
+			Track track = new Track();
 			for (BinaryMapDataObject segment : segmentList) {
-				GPXUtilities.TrkSegment trkSegment = new GPXUtilities.TrkSegment();
+				TrkSegment trkSegment = new TrkSegment();
 				for (int i = 0; i < segment.getPointsLength(); i++) {
-					GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+					WptPt point = new WptPt();
 					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
 					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
 					trkSegment.points.add(point);
@@ -1077,11 +1080,7 @@ public class TravelObfHelper implements TravelHelper {
 				}
 				track.segments.add(trkSegment);
 			}
-			String description = article.getDescription();
-			if (Algorithms.isEmpty(description)) {
-				description = article.getContent();
-			}
-			gpxFile = new GPXFile(article.getTitle(), article.getLang(), description);
+			gpxFile = new GPXFile(title, article.getLang(), article.getContent());
 			if (!Algorithms.isEmpty(article.getImageTitle())) {
 				gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
 			}
@@ -1092,7 +1091,7 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {
-				gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
+				gpxFile = new GPXFile(title, article.getLang(), article.getContent());
 				if (!Algorithms.isEmpty(article.getImageTitle())) {
 					gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
 				}
