@@ -339,7 +339,7 @@ public class GpxUiHelper {
 		if (gpxTitle.toLowerCase().endsWith(GPX_FILE_EXT)) {
 			gpxTitle = gpxTitle.substring(0, gpxTitle.length() - GPX_FILE_EXT.length());
 		}
-		return gpxTitle.replace('_', ' ');
+		return gpxTitle;
 	}
 
 	@NonNull

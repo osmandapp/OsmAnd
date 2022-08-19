@@ -1480,9 +1480,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			String name;
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				name = getContext().getString(R.string.shared_string_currently_recording_track);
-			} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle()) &&
-					!Algorithms.isEmpty(gpxFile.metadata.getDescription())) {
-				name = gpxFile.metadata.getDescription();
+			} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle())) {
+				name = gpxFile.getArticleTitle();
 			} else {
 				name = formatName(Algorithms.getFileWithoutDirs(gpxFile.path));
 			}

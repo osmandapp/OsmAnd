@@ -9,12 +9,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -28,7 +28,7 @@ public class FileUtils {
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
 	public static void renameFile(@NonNull FragmentActivity activity, @NonNull File file,
-								  @Nullable Fragment target, boolean usedOnMap) {
+	                              @Nullable Fragment target, boolean usedOnMap) {
 		if (file.exists()) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			RenameFileBottomSheet.showInstance(fragmentManager, target, file, usedOnMap);
@@ -36,7 +36,7 @@ public class FileUtils {
 	}
 
 	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
-										RenameCallback callback) {
+	                                    RenameCallback callback) {
 		File dest = checkRenamePossibility(ctx, source, newName, false);
 		if (dest == null) {
 			return null;
@@ -64,7 +64,7 @@ public class FileUtils {
 
 	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File source,
-									 @NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
+	                                 @NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -81,7 +81,7 @@ public class FileUtils {
 	}
 
 	public static File renameFile(@NonNull OsmandApplication app, @NonNull File source,
-								  @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
+	                              @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -151,6 +151,14 @@ public class FileUtils {
 			return null;
 		}
 		return dest;
+	}
+
+	public static boolean isValidFileName(@NonNull String name) {
+		return !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
+	}
+
+	public static boolean isValidDirName(@NonNull String name) {
+		return !ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find();
 	}
 
 	public static String createUniqueFileName(@NonNull OsmandApplication app, String name, String dirName, String extension) {
