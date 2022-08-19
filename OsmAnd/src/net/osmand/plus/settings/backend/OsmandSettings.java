@@ -1669,6 +1669,8 @@ public class OsmandSettings {
 	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
 	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false).makeProfile();
 
+	public final CommonPreference<Boolean> ENABLE_3D_VIEW = new BooleanPreference(this, "enable_3d_view", true).makeProfile();
+
 	public final CommonPreference<Long> LAST_MAP_ACTIVITY_PAUSED_TIME = new LongPreference(this, "last_map_activity_paused_time", 0).makeGlobal().cache();
 	public final CommonPreference<Boolean> MAP_LINKED_TO_LOCATION = new BooleanPreference(this, "map_linked_to_location", true).makeGlobal().cache();
 
@@ -2186,8 +2188,44 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
 	}
 
-	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
-	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
+
+	public float getLastKnownMapRotation() {
+		return getLastKnownMapRotation(getApplicationMode());
+	}
+
+	public float getLastKnownMapRotation(@NonNull ApplicationMode appMode) {
+		return LAST_KNOWN_MAP_ROTATION.getModeValue(appMode);
+	}
+
+	public void setLastKnownMapRotation(float rotation) {
+		setLastKnownMapRotation(getApplicationMode(), rotation);
+	}
+
+	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
+		LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
+	}
+
+	public float getLastKnownMapElevation() {
+		return getLastKnownMapElevation(getApplicationMode());
+	}
+
+	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
+		return ENABLE_3D_VIEW.getModeValue(appMode) ?
+				LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode) :
+				LAST_KNOWN_MAP_ELEVATION.getProfileDefaultValue(appMode);
+	}
+
+	public void setLastKnownMapElevation(float elevation) {
+		setLastKnownMapElevation(getApplicationMode(), elevation);
+	}
+
+	public void setLastKnownMapElevation(@NonNull ApplicationMode appMode, float elevation) {
+		if (ENABLE_3D_VIEW.get()) {
+			LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
+		}
+	}
 
 	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public static final String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$

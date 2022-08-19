@@ -54,7 +54,7 @@ public class MapViewWithLayers extends FrameLayout {
 			if (atlasMapRendererView == null) {
 				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 				atlasMapRendererView.setAzimuth(0);
-				float elevationAngle = mapView.normalizeElevationAngle(app.getSettings().LAST_KNOWN_MAP_ELEVATION.get());
+				float elevationAngle = mapView.normalizeElevationAngle(app.getSettings().getLastKnownMapElevation());
 				atlasMapRendererView.setElevationAngle(elevationAngle);
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}

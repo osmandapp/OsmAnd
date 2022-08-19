@@ -81,7 +81,7 @@ public class MyLocationButton extends MapButton {
 		if (!hasLocation) {
 			setNoLocationState();
 		} else if (linkedToLocation) {
-			if (!MultiTouchSupport.isTiltSupported(app)) {
+			if (!MultiTouchSupport.isTiltSupportEnabled(app)) {
 				setMapLinkedToLocationState();
 			} else if (elevationAngle == OsmandMapTileView.DEFAULT_ELEVATION_ANGLE) {
 				setTiltMapState();

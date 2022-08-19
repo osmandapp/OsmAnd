@@ -19,21 +19,23 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MultiTouchSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +49,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
+		setup3DViewPref();
 		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
@@ -147,6 +150,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			default:
 				return getActiveIcon(R.drawable.ic_action_direction_compass);
 		}
+	}
+
+	private void setup3DViewPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_2_5d_view_disabled);
+		Drawable enabled = getActiveIcon(R.drawable.ic_action_2_5d_view_on);
+		Drawable icon = getPersistentPrefIcon(enabled, disabled);
+
+		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
+		enabled3DView.setVisible(MultiTouchSupport.isTiltSupported(app));
+		enabled3DView.setIcon(icon);
 	}
 
 	private void setupCenterPositionOnMapPref() {

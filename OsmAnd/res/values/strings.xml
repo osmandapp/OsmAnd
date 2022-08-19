@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_2_5_d_view">2.5 D view</string>
     <string name="display_position">Display position</string>
     <string name="download_heightmap_maps">Heightmap</string>
     <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)</string>
