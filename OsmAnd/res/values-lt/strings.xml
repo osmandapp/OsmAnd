@@ -2902,4 +2902,5 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_articles">Straipsniai</string>
     <string name="transparent_status_bar_descr">Rodyti žemėlapį būsenos juostoje</string>
     <string name="transparent_status_bar">Skaidri būsenos juosta</string>
+    <string name="download_heightmap_maps">Aukščio žemėlapis</string>
 </resources>

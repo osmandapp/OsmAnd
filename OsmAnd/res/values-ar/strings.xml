@@ -412,8 +412,7 @@
     <string name="osmand_parking_pm">مساء</string>
     <string name="osmand_parking_am">صباحاً</string>
     <string name="osmand_parking_position_name">مكان للوقوف</string>
-    <string name="osmand_parking_plugin_description">يساعد هذا الملحق بحفظ الأماكن التي ركنت بها سيارتك والوقت المتبقي للركن (في حالة وجود وقت محدد). 
-\nكل من المكان والزمن متواجدان على لوحة التحكم وكذلك في المؤشرات على شاشة الخريطة. يمكن إضافة منبه إلى التقويم للتذكير.</string>
+    <string name="osmand_parking_plugin_description">قم بتمكين هذا الخيار لتعيين نقطة ومكان توقف سيارتك على الخريطة وربط التقويم الخاص بك وقت بدء وقت الوقوف. يساعد هذا الخيار على تتبع موقف السيارة ووقت الوقوف. لتحديد الموقف ، اختر مكانا على الخريطة ، ثم انتقل إلى الإجراءات واضغط على \"إضافة موقف سيارات\".</string>
     <string name="osmand_parking_plugin_name">مكان الموقف</string>
     <string name="context_menu_item_add_parking_point">موقف السيارة</string>
     <string name="context_menu_item_delete_parking_point">احذف علامة وقوف السيارات</string>
@@ -444,10 +443,12 @@
     <string name="auto_zoom_farthest">إلى مدى بعيد \"٥٠٠م\"</string>
     <string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات.</string>
     <string name="osmand_accessibility_description">هذا الملحق يضيف إلى أوسماند ميزة تسهيل الاستخدام/إمكانية الوصول المتاحة في نظامك، فهو على سبيل المثال يسمح لك بضبط معدل الكلام المنطوق من النص ومثل إتاحة التحكم من كرة التحكم بالريموت أو التفاعل عبر خدمة تحويل النص إلى كلام مثل إعلامك صوتيا بمكانك.</string>
-    <string name="osmand_development_plugin_description">هذا الملحق يعرض إعدادات لتطوير وتصحيح الميزات كاختبار أو محاكاة التوجيه، أداء الشاشة، أو الإشعار الصوتي. هذه الإعدادات معدة للمطورين و المستخدم العام لا يحتاجها.</string>
+    <string name="osmand_development_plugin_description">هذا الملحق يعرض إعدادات لتطوير وتصحيح الميزات كاختبار أو محاكاة التوجيه، وأداء الشاشة، أوالإشعار الصوتي. هذه الإعدادات معدة للمطورين ولا يحتاجها المستخدم العام .</string>
     <string name="plugins_screen">الملحقات</string>
     <string name="prefs_plugins_descr">تقوم الملحقات بتفعيل إعدادات متقدمة ووظائف إضافية.</string>
-    <string name="osm_editing_plugin_description">قدم مساهماتك مثل إنشاء أو تعديل عناصر ونقاط خريطة الشارع المفتوحة، وفتح ملاحظات على خريطة الشارع المفتوحة أو التعليق عليها ، كما يمكنك المساهمة برفع ملفات المسارات المسجلة عبر أوسماند بصيغة GPX وذلك من خلال وضعك اسم المستخدم الخاص بك وكلمة المرور التي سجلت بها على OpenStreetMap.org (المشروع العالمي لرسم خرائط بشكل عام ويديره المجتمع).</string>
+    <string name="osm_editing_plugin_description">يمكن استخدام المكون الإضافي لتحرير OSM لتقديم مساهمات OSM مثل إنشاء أو تعديل كائنات POI ، وفتح أو التعليق على OSM Notes ، والمساهمة في ملفات GPX المسجلة. OSM هو مشروع رسم خرائط للمجال العام على مستوى المجتمع. لمزيد من المعلومات ، يرجى الرجوع إلى https://osm.org. يمكن إجراء المساهمات مباشرة من OsmAnd ، إذا قمت بتحديد بيانات اعتماد OSM الخاصة بك في التطبيق.
+\n
+\nيمكنك العثور على تعليمات حول كيفية تحرير الخريطة على الموقع الإلكتروني https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
     <string name="play_commands_of_currently_selected_voice">شغل أوامر الصوت المحدد الحالي:</string>
     <string name="switch_to_raster_map_to_see">لا توجد خرائط توجيه لهذا المكان. قم بتحميل إحدها ، أو التغيير لخرائط الإنترنت (فعّل ملحق خرائط الإنترنت).</string>
@@ -552,9 +553,9 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
-    <string name="srtm_plugin_description">يوفر هذا الملحق خطوط كنتورية وطبقة تضاريس (طبيعية) تظهر على خرائط أوسماند. هذه الوظيفة ستعجب كثيرا الرياضيين، المتجولين، الرحالة، و كل من تهمه بنية التضاريس الطبيعية (يرجى ملاحظة أن بيانات الخطوط الكنتورية/أو المساعدة منفصلة ، وتتوفر تنزيلات إضافية بعد تنشيط الملحق.)
-\nالبيانات العالمية (ما بين 70 درجة شمالاً و70 جنوباً) مبنية على مقاييس SRTM (مكوك رادار البعثة الطبوغرافية) و ASTER (الانبعاث الحراري الفضائي المتقدم والإنعكاس الإشعاعي)، أداة التصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا. 
-\n ASTER هو جهد تعاوني بين كل من وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، ونظم الفضاء اليابانية (J-spacesystems).</string>
+    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ، والحدود القصوى ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح. البيانات من SRTM و ASTER.
+\n
+\nكيف - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلي OSM)
 \n
 \n أوسماند هو تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى مجموعة واسعة من بيانات OpenStreetMap (OSM) العالمية. يمكن تخزين جميع بيانات الخريطة (خرائط التوجيه أو خرائط جانبية) على ذاكرة الهاتف للاستخدام في وضع عدم الاتصال. كما يتم توفير وظائف التوجيه عبر الإنترنت وبدونه ، بما في ذلك التوجيه الصوتي خطوة بخطوة.
@@ -940,7 +941,7 @@
     <string name="shared_string_disable">تعطيل</string>
     <string name="shared_string_enabled">مفعل</string>
     <string name="shared_string_disabled">معطل</string>
-    <string name="shared_string_selected">محدد</string>
+    <string name="shared_string_selected">المحدد</string>
     <string name="shared_string_selected_lowercase">محدد</string>
     <string name="shared_string_never">أبداً</string>
     <string name="shared_string_history">السجلات</string>
@@ -1599,11 +1600,9 @@
     <string name="route_duration">الزمن :</string>
     <string name="route_tr">انعطف يميناً</string>
     <string name="route_tl">انعطف يسارا واذهب</string>
-    <string name="plugin_nautical_descr">هذا الملحق يوفير خرائط بحرية للزوارق والمراكب الشراعية وأنواع أخرى من الرياضات المائية. 
-\n 
-\nخريطة خاصة إضافية للتطبيق ستقدم كل علامات الملاحة البحرية سواء داخلية أو شاطئية وكذلك جدول للرموز. وصف كل وجهة ملاحة يوفر التفاصيل اللازمة للتعرف عليها ومعانيها (الفئة، الشكل، اللون، التسلسل، المرجع...إلخ.). 
-\n 
-\nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
+    <string name="plugin_nautical_descr">تشغيل الخريطة لإثراء خريطتك بمعلومات حول طرق الإبحار وأضواء الملاحة ومناطق الخطر والمناطق التي يسمح أو يحظر فيها الإبحار أو الرسو ، إلخ. لاستخدام تنزيل الخرائط البحرية وتمكين نوع \"الخريطة البحرية\" في تكوين الخريطة.
+\n
+\nكيفية - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه</string>
     <string name="map_markers">التوجيه المباشر</string>
@@ -1884,9 +1883,9 @@
     <string name="shared_string_others">أخرى</string>
     <string name="local_index_action_do">%1$s %2$s عنصر ؟</string>
     <string name="amenity_type_geocache">البيانات الجغرافية المؤقتة</string>
-    <string name="record_plugin_description">هذا الملحق يفعل وظيفة تسجيل وحفظ المسارات الخاصة بك عبر الضغط على نافذة GPX على شاشة الخريطة، أو كذلك تسجيل كافة طرق الملاحة الخاص بك تلقائيا إلى ملف GPX. 
-\n 
-\nالمسارات المسجلة يمكن مشاركتها مع أصدقائك أو استخدامها كمساهمات ل OSM . الرياضيون يمكنهم استخدام المسارات المسجلة لمتابعة تدريباتهم. بعض تحليل المسار الابتدائية يمكن القيام بها مباشرة في التطبيق، مثل توقيت الدورات، ومتوسط السرعة...الخ، و يمكن أيضا تحليل المسارات باستعمال أدوات تحليل جانبية لاحقا.</string>
+    <string name="record_plugin_description">قم بتسجيل المسارات وحفظها يدويا باستخدام الملحق الإضافي لتسجيل الرحلة. قم بتصدير مساراتك كملف gpx أو شاركه أو استخدمه للمساهمة في مشروع خريطة الشارع المفتوح. أداة مفيدة للعدائين والمتنزهين وأي شخص مهتم بتسجيل مساراتهم.
+\n
+\nللمزيد - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="missing_write_external_storage_permission">أوسماند ليس لديه إذن لاستخدام ذاكرة البطاقة</string>
     <string name="save_poi_without_poi_type_message">حفظ موضع الاهتمام بدون نوع؟</string>
     <string name="dashboard_or_drawer_description">هناك خيار جديد لتحكم بشكل مرن بالتطبيق عبر لوحة القياس أو القائمة الثابتة. اختيارك يمكن تغييره دائما في إعدادات لوحة القياس.</string>
@@ -1983,9 +1982,7 @@
     <string name="activate_seamarks_plugin">يرجى تفعيل ملحق المعالم البحرية</string>
     <string name="value_downloaded_of_max">%1$.1f من %2$.1f مب</string>
     <string name="file_size_in_mb">%.1f مب</string>
-    <string name="plugin_ski_descr">يضع هذا الملحق بين يديك تفاصيل منحدرات تزلج عالمية، مسارات تزلج عبر كامل البلاد، التلفريك ومصاعد التزلج. الطرقات والمعابر مبينة بألوان حسب الصعوبة، 
-\n 
-\nومصورة بنمط خريطة مميز \'شتوي\' تمثل مناظر الطبيعة بلون مثلج شتوي.</string>
+    <string name="plugin_ski_descr">خريطة أوسماند للتزلج هي مكون إضافي لتطبيق أوسماند للملاحة وهو مصمم للتنقل في مواقع الرياضات الشتوية. حيث يوفر معلومات حول مسارات التزلج وعلامات رفع التزلج وحتى الخطوط الملونة التي تشير إلى تعقيد كل مسار. يمكنك الحصول على معلومات حول مسارات التزلج نفسها وكذلك البنية التحتية المحيطة بها.تعليمات الاستخدام: قم بتمكين المكون الإضافي في تطبيق أوسماند ، واضغط على زر الخريطة واضبط نوع الخريطة على خرائط التزلج.</string>
     <string name="rendering_attr_hideOverground_name">أشياء فوق سطح الأرض</string>
     <string name="shared_string_change">تغيير</string>
     <string name="get_started">ابدأ</string>
@@ -4039,7 +4036,7 @@
     <string name="uploaded_count">تم رفع %1$d من %2$d</string>
     <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
     <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
-    <string name="open_place_reviews_plugin_description">أرسل صورًا وتعليقات وروابط حول الأماكن العامة مثل المطاعم والفنادق والمتاحف ونقاط الطريق كبيانات مفتوحة https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">أرسل صورا وتعليقات وروابط حول الأماكن العامة مثل المطاعم والفنادق والمتاحف ونقاط الطريق كبيانات مفتوحة https://openplacereviews.org/data/.
 \n
 \nاقرأ المزيد على https://openplacereviews.org</string>
     <string name="open_place_reviews">موقع OpenPlaceReviews</string>
@@ -4804,7 +4801,7 @@
     <string name="auto_25_chars_route_roundabout_kl">خذ مخرج %1$d واحتفظ باليسار</string>
     <string name="auto_backup_preference_desc">بشكل افتراضي ، يحفظ النظام نسخا احتياطية من المفضلة ورموز الخريطة وإعدادات أوسماند لاستعادتها على الجهاز أو أجهزة جديدة . تقتصر هذه النسخة الاحتياطية على 25 ميغابايت.
 \nإذا كنت تستخدم أوسماند كلاود ، فقد يؤدي ذلك إلى خطأ بعد إعادة التثبيت.</string>
-    <string name="trip_recording_duration_widget_desc">عرض وقت تسجيل المسار ، والمدة بالدقائق / الساعات للرحلة المسجلة حاليا.</string>
+    <string name="trip_recording_duration_widget_desc">يظهر الوقت المسجل حاليا.</string>
     <string name="second_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الثانية.</string>
     <string name="time_to_intermediate_widget_desc">يعرض الويدجت وقت الوصول أو وقت الذهاب إلى النقطة الوسيطة الأولى. يتم تحديث الوقت باستمرار أثناء التنقل ، بمجرد تمرير النقاط الوسيطة ، سيتم تحديث الوقت إلى النقطة الوسيطة التالية.</string>
     <string name="first_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الأولى.</string>
@@ -4831,16 +4828,16 @@
     <string name="auto_backup_title">النسخ الاحتياطي التلقائي</string>
     <string name="duplacate_widget_added_snackbar">تتم إضافة الويدجت بعد ذلك في القائمة.</string>
     <string name="shared_string_duplicate">مكرر</string>
-    <string name="av_notes_photo_widget_desc">يسمح التسجيل على الويدجت بالتقاط صورة.</string>
-    <string name="av_notes_video_widget_desc">يسمح التسجيل على الويدجت ببدء تسجيل الفيديو.</string>
-    <string name="av_notes_audio_widget_desc">يسمح التسجيل على الويدجت بتدوين الملاحظات الصوتية.</string>
-    <string name="trip_recording_downhill_widget_desc">عرض مجموع نسب الرحلة المسجلة الحالية.</string>
+    <string name="av_notes_photo_widget_desc">النقرعلى الويدجت يسمح لك بالتقاط صورة.</string>
+    <string name="av_notes_video_widget_desc">النقرعلى الويدجت يسمح لك بالتقاط الفيديو.</string>
+    <string name="av_notes_audio_widget_desc">النقرعلى الويدجت يسمح لك بتدوين الملاحظات الصوتية.</string>
+    <string name="trip_recording_downhill_widget_desc">عرض مجموعة الرحلات المسجلة الحالية.</string>
     <string name="trip_recording_uphill_widget_desc">عرض مجموع عمليات التسلق المسجلة حاليا.</string>
-    <string name="trip_recording_distance_widget_desc">عرض مسافة الرحلة المسجلة حاليا.</string>
+    <string name="trip_recording_distance_widget_desc">يظهر مسافة الرحلة المسجلة حاليا.</string>
     <string name="true_bearing_wdiget_desc">الزاوية بين الشمال الحقيقي ونقطة الهدف التي تم تعيينها من موقعك.</string>
     <string name="relative_bearing_widget_desc">يوضح الزاوية بين اتجاه الحركة إلى الأمام والنقطة المستهدفة.</string>
-    <string name="connect_with_straight_line">وصل بخط مستقيم</string>
-    <string name="attach_roads_descr">هل تريد تقريب مسارك باستخدام مسار صالح مرفق بالخرائط غير المتصلة بالإنترنت. في هذه الحالة، ستكون قد صححت ارتفاع الطريق، معلوماته والمنعطفات التي يمكن استخدامها لاحقا في الملاحة.</string>
+    <string name="connect_with_straight_line">الاتصال بخط مستقيم</string>
+    <string name="attach_roads_descr">تقريب مسارك بمسار باستخدام الخريطة غير المتصلة بالإنترنت. سيوفر هذا قيم الارتفاع المصححة وتفاصيل الطريق والمنعطفات المستخدمة أثناء التنقل.</string>
     <string name="without_profiles_changing">دون تغيير البروفايلات</string>
     <string name="shared_string_only_missing">المفقود فقط</string>
     <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط</string>
@@ -4849,4 +4846,7 @@
     <string name="attach_to_roads_banner_desc">قم بإرفاق مسارك بالطرق ، للحصول على تعليمات ملاحة مفصلة.</string>
     <string name="available_as_part_of_subscription_plan">متوفر كجزء من اشتراك %1$s.</string>
     <string name="included_in_your_current_plan">مضمنة في خطتك الحالية \"%1$s\"</string>
+    <string name="download_heightmap_maps">خريطة الارتفاع</string>
+    <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)</string>
+    <string name="favorite_delete_group">حذف المجموعة</string>
 </resources>

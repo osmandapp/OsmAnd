@@ -4734,4 +4734,5 @@
     <string name="connect_with_straight_line">חיבור בקו ישר</string>
     <string name="included_in_your_current_plan">כלול בתוכנית הנוכחית שלך „%1$s”</string>
     <string name="available_as_part_of_subscription_plan">זמין כחלק מהמינוי על %1$s.</string>
+    <string name="download_heightmap_maps">מפת גבהים</string>
 </resources>

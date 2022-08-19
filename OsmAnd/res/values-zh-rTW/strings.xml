@@ -4772,4 +4772,5 @@
     <string name="included_in_your_current_plan">包含在您目前的「%1$s」方案中</string>
     <string name="favorite_confirm_delete_group">您確定您想要刪除「%1$s」群組與其中所有包含的點 (%2$d)</string>
     <string name="favorite_delete_group">刪除群組</string>
+    <string name="download_heightmap_maps">高度圖</string>
 </resources>

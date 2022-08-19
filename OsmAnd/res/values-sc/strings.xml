@@ -283,9 +283,9 @@
     <string name="audionotes_plugin_name">Estensione notas àudio/vìdeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de livellu</string>
-    <string name="srtm_plugin_description">Custa estensione frunit sas lìnias/curvas de livellu e sas umbraduras de sos rilievos, chi podent èssere ammustradas in supra de sas mapas regulares de OsmAnd. Custa funtzionalidade at a èssere apretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàgiu. (Pro praghere ammentade·bos chi sos datos de sas curvas de livellu e sos de sos rilievos sunt separados, e ant a èssere disponìbiles pro s\'iscarrigamentu a pustis de àere allutu s\'estensione). 
-\n 
-\nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora in subra de Terra, su satèllite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de cooperatzione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giapone, e su sistema ispatziale giaponesu (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Sas informatziones de su terrinu, che a sas curvas de livellu, sas umbraduras de sos rilievos e sas pendèntzias, t\'agiudant a valutare cun sos ogros tuos sa forma de sa superfìtzie de su terrinu, pighende in cunsideru sa curvadura, sos estremos, sas pendèntzias, sos puntos cun sa matessi artària e àteru. Sas informatziones topogràficas in una mapa si podent rapresentare cun s\'umbradura de sas pendèntzias, curvas de livellu pro s\'artziada e s\'achirrada, e su colore de s\'àngulu de deviatzione de sa pendèntzia dae su pranu. Datoa dae su SRTM e dae s\'ASTER.
+\n
+\nGhia de impreu - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="srtm_plugin_name">Curvas de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
     <string name="download_roads_only_item">Caminos ebbia</string>
@@ -574,8 +574,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Logu de parchègiu</string>
-    <string name="osmand_parking_plugin_description">Ti permitet de registrare in ue est istada parchegiada sa màchina tua, e fintzas cantu tempus de parchègiu tenes galu. 
-\n Podes agatare su logu e su tempus de parchègiu in su pannellu de controllu e in unu widget in sa mapa. Podes annànghere notìficas in su calendàriu de Android pro ti l\'ammentare.</string>
+    <string name="osmand_parking_plugin_description">Abìlita custa estensione pro pònnere unu puntu in sa mapa in ue as lassadu sa màchina tua e notificare su calendàriu tuo de cando incumintzat su tempus de parchègiu. S\'estensione agiudat a sighire su tempus de parchègiu e sa positzione de sa màchina tua. Pro pònnere unu marcadore in sa mapa bae a Atziones e incarca \"Annanghe unu parchègiu\".</string>
     <string name="osmand_parking_plugin_name">Positzione parchègiu</string>
     <string name="context_menu_item_add_parking_point">Marca comente logu de parchègiu</string>
     <string name="gpxup_public">Pùblicu</string>
@@ -738,7 +737,7 @@
     <string name="poi_action_succeded_template">Atzione {0} acabbada.</string>
     <string name="first_time_msg">Gratzias pro s’impreu de OsmAnd. Iscàrriga sos datos regionales pro s\'impreu chene lìnia dae \'Menù\'→\'Iscàrriga mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>
     <string name="basemap_was_selected_to_download">Sa mapa de base netzessària pro su funtzionamentu est in sa lista de iscarrigamentu.</string>
-    <string name="osmand_development_plugin_description">Impostatziones pro funtzionalidades pro s\'isvilupu e sa puificatzione (debug), che a sa simulatzione de sa navigatzione, sas prestatziones de sa renderizatzione, o s\'interfache vocale. Custas impostatziones sunt pensadas pro sos isvilupadores e non sunt netzessàrias pro s\'impreu normale.</string>
+    <string name="osmand_development_plugin_description">Ti permitit de cunfigurare OsmAnd pro fàghere proas: simulare àndalas de biàgiu, verificare su rendimentu de sa renderizatzione de s\'ischermu etz. S\'estensione no est netzessària pro s\'impreu normale de s\'aplicatzione.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
     <string name="osmand_parking_warning_text">Una notìfica pro recuperare sa màchina est istada annangada a su tzeravallu/calendàriu tuo, e podet èssere modificada o bogada dae cue.</string>
     <string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu.</string>
@@ -748,7 +747,9 @@
 \nTotu custas mapas podent èssere impreadas siat comente mapa printzipale (de base) de ammustrare in sa mapa siat comente un\'istratu se subrapositzione o de isfundu de un’àtera mapa de base (che a sas mapas regulares non in lìnia de OsmAnd). Unos cantos de sos elementos de sas mapas vetoriales si podent cuare, impreende su menù \'Cunfigura sa mapa\', pro fàghere in manera chi sas mapas de isfundu siant prus visìbiles.
 \n 
 \nIscàrriga sas mapas a tasseddos diretamente in lìnia, o ammaniadas pro s\'impreu chene lìnia (copiadas manualmente in sa cartella de sos datos de OsmAnd) che unu database SQLite chi podet èssere produidu dae medas ainas pro sa creatzione de mapas esternas (third-party maps).</string>
-    <string name="osm_editing_plugin_description">Permitit de cuntribuire ad OSM creende e modifichende sos PDI de OSM, aberinde e cummentende notas de OSM e imbiende documentos GPX registrados in OsmAnd frunende su nùmene de impreadore e sa crae de intrada tuos. OpenStreetMap.org est unu progetu de domìniu pùblicu de mapadura fatu dae una comunidade globale.</string>
+    <string name="osm_editing_plugin_description">Ti permitit de contribuire a OpenStreetMap, una comunidade globale cun sa punna de creare una mapa totale de su mundu e frunire datos a còdighe abertu e annoados a cada impreadore.
+\n
+\nPodes agatare istrutziones subra de comente modificare sa mapa in su situ nostru https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="play_commands_of_currently_selected_voice">Ischerta una boghe e proa·la riproduinde annùntzios:</string>
     <string name="test_voice_prompts">Proa sos cumandos vocales</string>
     <string name="switch_to_raster_map_to_see">Iscàrriga una mapa vetoriale pro custa positzione in \'Menù\' (\'Iscàrriga mapas\'), o cola a s\'estensione \'Mapas in lìnia\'.</string>
@@ -1292,9 +1293,9 @@
     <string name="speak_poi">PDI a curtzu</string>
     <string name="shared_string_all">Totus</string>
     <string name="index_tours">Itineràrios</string>
-    <string name="record_plugin_description">Custa estensione ativat sa funtzionalidade de registratzione de sas rastas tuas carchende su pursante in sa mapa e ammustrat sas impostatziones pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreende unu servìtziu web. 
-\n 
-\nSas rastas registradas podent èssere cumpartzidas cun sos amigos tuos o èssere impreadas pro cuntribuire a OSM. Sos atletas podent impreare sas rastas pro compidare sos allenamentos issoro. Carchi anàlisi de base podet èssere fata deretamente in OsmAnd, comente tempus de giru, lestresa mèdia etc., e sas rastas podent, est craru, èssere analizadas fintzas prus a tardu cun ainas de anàlisi estèrnas.</string>
+    <string name="record_plugin_description">Ti permitit de registrare, sarvare e analizare sos datos tuos de allenamentu o movimentu, che a sa lestresa, sas artziadas e sas achirradas de s\'àndala, chi a pustis s\'ant a pòdere ritziclare, megiorare, integrare cun àteros datos o cumpartzire cun sos amigos.
+\n
+\nGhia de impreu - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="record_plugin_name">Registratzione biàgios</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1427,14 +1428,10 @@
     <string name="share_note">Cumpartzi sa nota</string>
     <string name="shared_string_export">Esporta</string>
     <string name="shared_string_audio">Àudio</string>
-    <string name="plugin_nautical_descr">Allughende custa funtzionalidade s’istile de sa mapa at a divènnere Nàuticu, e at a èssere disponìbile totu sa simbologia pro sa navigatzione. 
-\n 
-\nSa mapa cun totu sa simbologia nàutica globale est disponìbile comente iscarrigamentu ùnicu cun su nùmene \"World seamarks\". 
-\n 
-\nCusta vista podet èssere ripristinada istudende·la torra inoghe o cambiende s’\'Istile mapa\' in \'Cunfigura sa mapa\' comente cheres tue.</string>
-    <string name="plugin_ski_descr">Custa estensione pro OsmAnd ti frunit sas minujas de sas pistas de iscì, de fundu, alpinas e de àtera casta, de sas funivias e de sas isciovias. Sas camineras e sas pistas sunt coloradas pro dificultade, e ammustradas in unu istile de mapa particulare, \'Ierru\', chi s\'assimigiat a unu paesaggiu coloradu dae sa neve de s\'ierru. 
+    <string name="plugin_nautical_descr">Allughe custa funtzionalidade pro arrichire sa mapa tua cun informatziones subra de sas àndalas de navigatzione, sas lughes de navigatziones, sas zonas de perìgulu, sas zonas in ue est permìtidu o proibidu navigare o aprodare etz. Pro l\'impreare iscàrriga s\'estensione Mapas nàuticas e abìlita sa casta \"Mapa nàutica\" in Cunfigura mapa.
 \n
-\nAlluende custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrende totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru. Custa vista podet èssere furriada istudende·la inoghe torra o cambiende s’\'Istile mapa\' in \'Cunfigura mapa\'.</string>
+\nGhia de impreu - https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="plugin_ski_descr">Progetada pro navigare in logos de isports ierriles. Pòmpia sas pistas de iscì, sos marcadores de sas funivias e sas lìnias coloradas chi indicant sa cumplessidade de cada rasta. Pro l\'abilitare bae a Cunfigura mapa e issèbera sa casta de mapa \"Ierru e iscì\".</string>
     <string name="plugin_touringview_descr">Allughende custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas. 
 \n 
 \nCusta vista frunit, pro cada livellu de ismanniamentu (zoom), su màssimu de sos detàllios de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sos caminos e de sas àndalas e sinnos de orientamentu). 
@@ -1452,7 +1449,7 @@
     <string name="plugin_touringview_name">Vista mapa turìstica</string>
     <string name="location_on_map">Positzione:\n Lat %1$s\n Lon %2$s</string>
     <string name="rename_failed">Càmbiu de nùmene fallidu.</string>
-    <string name="shared_string_selected">Ischertadu</string>
+    <string name="shared_string_selected">Seletzionadu</string>
     <string name="track_segments">Segmentos de sa rasta</string>
     <string name="track_points">Puntos de sa rasta</string>
     <string name="action_create">Atzione crea</string>
@@ -2387,7 +2384,7 @@
     <string name="mapillary_descr">Fotografias a livellu de sos caminos in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
     <string name="shared_string_add_photos">Annanghe fotografias</string>
     <string name="mapillary_action_descr">Cumpartzi sas vistas tuas a livellu de su caminu pro mèdiu de Mapillary.</string>
-    <string name="plugin_mapillary_descr">Fotografias a livellu de su caminu pro totus. Iscoberi logos, collàbora, catura su mundu.</string>
+    <string name="plugin_mapillary_descr">Frunit fotografias a livellu de su caminu. In ue sas immàgines mancant, las pòdes annànghere tue matessi a manera chi sos àteros las potzant impreare. Pro abilitare s\'istratu de Mapillary allughe s\'optzione \"Immàgines a livellu de su caminu\" in su menù Cunfigura mapa.</string>
     <string name="online_photos">Fotografias in lìnia</string>
     <string name="no_photos_descr">Inoghe non b\'at peruna foto.</string>
     <string name="open_mapillary">Aberi Mapillary</string>
@@ -3960,9 +3957,9 @@
     <string name="toast_select_edits_for_upload">Ischerta modìficas de carrigare</string>
     <string name="announcement_time_descr">Su tempus de annùntziu de sos annùntzios vocales diferentes dipendet dae sa casta de annùntziu, dae sa lestresa de navigatzione de cussu momentu e dae sa lestresa de navigatzione predefinida.</string>
     <string name="announcement_time_title">Tempus de s\'annùntziu</string>
-    <string name="open_place_reviews_plugin_description">Imbia fotografias, retzensiones e ligàmenes de logos pùblicos che a ristorantes, albergos, museos e puntos de coladòrgios comente datos abertos. https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Ti permitit de contribuire a su progetu de OpenPlaceReviews. Contributziones comente fotografias, retzensiones e ligàmenes de logos pùblicos che a ristorantes, albergos, museos e puntos de coladòrgiu.
 \n
-\nÀteras informatziones inoghe: https://openplacereviews.org</string>
+\nPodes agatare istrutziones subra de comente contribuire in su situ nostru - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="announcement_time_passing">Colende</string>
     <string name="announcement_time_approach">Acùrtzia·ti</string>
     <string name="announcement_time_prepare_long">Ammaniamentu longu</string>
@@ -4162,7 +4159,7 @@
     <string name="purchases_feature_desc_nautical">Otene atzessu a sas informatziones subra de sa profundidade nàutica</string>
     <string name="purchases_feature_desc_terrain">Curvas de livellu, mapa totale de sas umbraduras de sos rilievos cun umbras iscuras e mapas de sas pendèntzias cun colores pro ammustrare cùcuros e pranos.</string>
     <string name="purchases_feature_desc_wikivoyage">Esplora Wikivoyage chene una lìnia ìnternet. Sos artìculos sunt partzidos pro istadu e regione e sunt a disponimentu in totu sas limbas.</string>
-    <string name="purchases_feature_desc_wikipedia">Esplora Wikipedia chene una lìnia ìnternet. Sos artìculos sunt partzidos pro istadu e regione e sunt a disponimentu in totu sas limbas.</string>
+    <string name="purchases_feature_desc_wikipedia">Su de tènnere Wikipedia non in lìnia in su biàgiu tuo t\'agiudat a imparare prus cosas subra de sos logos chi bìsitas. Est a disponimentu chene lìnia e ammustrat artìculos de Wikipedia chi pertocant a sos puntos de interessu chi bi sunt in sa mapa. Non s\'ismèntighes de iscarrigare sas mapas de Wikipedia pro sa regione isseberada.</string>
     <string name="purchases_feature_desc_combined_wiki">Esplora sos artìculos de Wikipedia in totue, chene una connessione a ìnternet. Sos datos non in lìnia sunt partzidos pro istadu e sunt a disponimentu in totu sas limbas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Otene iscarrigamentos chene lìmites de mapas pro totu sos continentes e sas regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Otene atzessu a agiornamentos regulares mensiles pro sas mapas non in lìnia.</string>
@@ -4310,7 +4307,7 @@
     <string name="remove_group_from_markers">Boga su grupu dae sa lista de marcadores</string>
     <string name="start_point">Incumintza</string>
     <string name="mapillary_menu_filter_description_new">Filtra sas immàgines pro data o casta. Ativu petzi a pustis de s\'ismanniamentu.</string>
-    <string name="service_is_not_available_please_try_later">Su servìtziu no a disponimentu. Torra a proare prus a tardu.</string>
+    <string name="service_is_not_available_please_try_later">Su servìtziu no est a disponimentu. Torra a proare prus a tardu.</string>
     <string name="shared_string_files">Documentos</string>
     <string name="travel_route_types">Castas de àndalas</string>
     <string name="sample_wikivoyage">Esèmpiu de Wikivoyage</string>
@@ -4463,7 +4460,7 @@
     <string name="always_ask_waypoint_appearance_description">Tochende custa atzione as a abèrrere s\'ischermada \"Annanghe unu puntu de coladòrgiu\", in ue podes mudare su nùmene e s\'aspetu.</string>
     <string name="waypoint_appearance">Aspetu de su puntu de coladòrgiu</string>
     <string name="predefined_waypoint_appearance_description">Tochende custa atzione as a sarvare in automàticu su puntu de coladòrgiu cun paràmetros predefinidos.</string>
-    <string name="track_file_description">Tochende custa atzione as a fàghere ammustrare unu diàlogu de seletzione de sas rastas a disponimentu.</string>
+    <string name="track_file_description">Tochende custa atzione as a visualizare sas rastas a disponimentu.</string>
     <string name="turn_arrows">Fritzas de bortada</string>
     <string name="created_on">Creadu su</string>
     <string name="use_routing_fallback">Ripiegu de càrculu de s\'àndala non in lìnia</string>
@@ -4590,15 +4587,15 @@
     <string name="snackbar_page_removed">\"Sa pàgina %1$s\" est istada bogada.</string>
     <string name="shared_string_mode">Modalidade</string>
     <string name="auto_backup_preference_desc">Comente impostatzione predefinida Android sarvat còpias de seguresa de sos preferidos, de sos getones de sas mapas e de sas impostatziones de OsmAnd pro las ripristinare in sos dispositivos noos o a pustis de reinstallatzione. Custa còpia de seguresa est limitada a 25 MB.
-\nSi ses impreende OsmAnd Cloud custu podet causare cunflitos a pustis de s\'installatzione noa.</string>
+\nCando impreas OsmAnd Cloud custu podet causare cunflitos a pustis de s\'installatzione noa.</string>
     <string name="rendering_attr_horseScale_name">Dificultade de sas camineras a caddu</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Ammustra sas camineras BDM IMBA</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Ammustra sas camineras progetadas pro sas bitzicletas de monte</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Ammustra sas camineras dedicadas a sas bitzicletas de monte.</string>
     <string name="av_notes_photo_widget_desc">Unu tocu in su widget ti permitit de fàghere una fotografia.</string>
-    <string name="av_notes_video_widget_desc">Unu tocu in su widget ti permitit de incumintzare a registrare unu vìdeu.</string>
+    <string name="av_notes_video_widget_desc">Unu tocu in su widget ti permitit de registrare unu vìdeu.</string>
     <string name="av_notes_audio_widget_desc">Unu tocu in su widget ti permitit de pigare notas sonoras.</string>
     <string name="connect_with_straight_line">Liga cun una lìnia dereta</string>
-    <string name="attach_roads_warning">Podes alligare a sas àndalas petzi una resta registrada</string>
+    <string name="attach_roads_warning">Petzi una resta registrada si podet alligare a sas àndalas.</string>
     <string name="without_profiles_changing">Chene modìficas de sos profilos</string>
     <string name="shared_string_only_missing">Petzi sos chi mancant</string>
     <string name="download_tiles">Iscàrriga sos tasseddos</string>
@@ -4608,20 +4605,20 @@
     <string name="auto_25_chars_route_tr_kr">Borta cara a destra e mantene·ti a destra</string>
     <string name="auto_25_chars_route_tu_kl">Fùrria a U e mantene sa manca</string>
     <string name="auto_25_chars_route_tu_kr">Fùrria a U e mantene sa destra</string>
-    <string name="auto_25_chars_route_roundabout_kr">Piga sa %1$d essida e mantene sa destra</string>
-    <string name="duplacate_widget_added_snackbar">Unu widget duplicadu benit annantu a pustis in sa lista.</string>
+    <string name="auto_25_chars_route_roundabout_kr">Piga sa %1$d essida e mantene·ti a destra</string>
+    <string name="duplacate_widget_added_snackbar">Unu widget duplicadu est in agiunta a sa lista.</string>
     <string name="shared_string_duplicate">Dùplica</string>
     <string name="trip_recording_uphill_widget_desc">Ammustrat sa summa de totu sas artziadas de su biàgiu registradu atuale.</string>
     <string name="first_marker_widget_desc">Podes cunfigurare su widget pro ammustrare sa distàntzia o s\'ora carculada de arrivu a su de unu marcadore de sa mapa.</string>
     <string name="time_to_destination_widget_desc">Su widget ammustrat \"Ora de arrivu\" o \"Tempus chi mancat\" finas a s\'ùrtimu puntu de destinatzione. Custas informatziones s\'agiornant totora durante sa navigatzione e sunt uguales a sa durada de s\'àndala dae sa positzione de cussu momentu.</string>
     <string name="time_to_intermediate_widget_desc">Su widget ammustrat \"Ora de arrivu\" o \"Tempus chi mancat\" finas a su primu puntu de coladòrgiu. Custas informatziones s\'agiornant totora durante sa navigatzione e, a pustis de àere coladu unu puntu de coladòrgiu, s\'ant a carculare pro su puntu de coladòrgiu imbeniente.</string>
-    <string name="attach_roads_descr">Cheres aprossimare sa rasta tua cun un\'àndala vàlida alligada a sas mapas non in lìnia\? In custu casu as a tènnere un\'artària de s\'àndala curreta, informatziones e bortadas de s\'àndala chi s\'ant a pòdere impreare prus a tardu in sa navigatzione.</string>
-    <string name="auto_25_chars_route_roundabout_kl">Piga sa %1$d essida e mantene sa manca</string>
+    <string name="attach_roads_descr">Apròssima sa rasta tua cun un\'àndala impreende sa mapa non in lìnia. Custu at a frunire valores de artària curretos, detàllios de sas àndalas e bortadas impreadas durante sa navigatzione.</string>
+    <string name="auto_25_chars_route_roundabout_kl">Piga sa %1$d essida e mantene·ti a manca</string>
     <string name="trip_recording_downhill_widget_desc">Ammustrat sa summa de totu sas achirradas de su biàgiu registradu atuale.</string>
     <string name="second_marker_widget_desc">Podes cunfigurare su widget pro ammustrare sa distàntzia o su tempus carculadu de arrivu a su de duos marcadore de sa mapa.</string>
     <string name="auto_backup_title">Còpia de seguresa automàtica</string>
     <string name="relative_bearing_widget_desc">Ammustrat s\'àngulu intre su movimentu cara a in antis tuo e su puntu de destinatzione.</string>
-    <string name="trip_recording_duration_widget_desc">Ammustrat sa longària de sa registratzione de sa rasta, sa durada in minutos/oras de su biàgiu in registratzione in cussu momentu.</string>
+    <string name="trip_recording_duration_widget_desc">Ammustrat sa durada de su biàgiu in registratzione.</string>
     <string name="trip_recording_distance_widget_desc">Ammustrat sa distàntzia de su biàgiu in registratzione.</string>
     <string name="true_bearing_wdiget_desc">Àngulu intre su nord beru e su puntu de destinatzione bidu dae sa positzione tua.</string>
     <string name="routing_attr_goods_restrictions_name">Intrega de mertzes</string>
@@ -4646,10 +4643,10 @@
     <string name="download_complete">Iscarrigamentu agabbadu</string>
     <string name="side_marker_eta">Ora carculada de arrivu</string>
     <string name="updated_map_time">Agiornadu: %1$s.</string>
-    <string name="goods_delivery_desc_4">Si su pesu de su veìculu tuo est de prus de 3,5 tonnelladas depes impreare su profilu Càmion.</string>
-    <string name="goods_delivery_desc_3">S\'àplicat petzi a sos veìculos chi trasportant mercantzias chi ant nessi bator rodas e non pesant prus de 3,5 tonnelladas.</string>
+    <string name="goods_delivery_desc_4">Pro veìculos chi pesant prus de 3,5 tonnelladas imprea su profilu Càmion.</string>
+    <string name="goods_delivery_desc_3">S\'àplicat petzi a sos veìculos de intrega chi non pesant prus de 3,5 tonnelladas.</string>
     <string name="goods_delivery_desc_2">S\'ant a evitare sos caminos chi sunt serrados pro sas intregas de mercantzias.</string>
-    <string name="goods_delivery_desc">Sos veìculos chi trasportant mercantzias podent tènnere s\'atzessu limitadu in unos cantos caminos.</string>
+    <string name="goods_delivery_desc">Sos veìculos de intrega diat pòdere tènnere s\'atzessu limitadu in unos cantos caminos.</string>
     <string name="includes_osm_changes_until">Incluit sas modìficas de OSM fatas finas a %1$s.</string>
     <string name="next_live_update_date_and_time">Agiornamentu imbeniente: %1$s in %2$s.</string>
     <string name="next_live_update_time">Agiornamentu imbeniente: in %1$s.</string>
@@ -4714,7 +4711,7 @@
     <string name="map_widget_average_speed">Lestresa mèdia</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Cua sas àreas militares</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermèdiu</string>
-    <string name="reset_all_settings_desc">Ses seguru de chèrrere resetare totu sas impostatziones a sos valores predefinidos\?</string>
+    <string name="reset_all_settings_desc">Resetare totu sas impostatziones a sos valores predefinidos\?</string>
     <string name="live_update_frequency_hour_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada ora.</string>
     <string name="live_update_frequency_day_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada die.</string>
     <string name="live_update_frequency_week_variant">Sos agiornamentos de sa mapa ant a èssere verificados cada chida.</string>
@@ -4754,7 +4751,7 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Avantzadu</string>
     <string name="routing_attr_difficulty_preference_expert_name">Espertu</string>
     <string name="second_next_turn_widget_desc">Su widget ammustrat informatziones subra de sa segunda bortada tua chi sunt abilitadas si sa bortada s\'est acurtziende.</string>
-    <string name="switch_widget_mode_desc">Podes mudare modalidade tochende in su widget.</string>
+    <string name="switch_widget_mode_desc">Tochende in su widget colas dae una modalidade a s\'àtera.</string>
     <string name="navigation_points">Puntos de navigatzione</string>
     <string name="shared_string_widget">Widget</string>
     <string name="gps_info_widget_desc">Ammustrat su nùmeru de satèllites chi su dispositivu rilevat e impreat in cussu momentu.</string>
@@ -4764,7 +4761,7 @@
     <string name="co2_mission">Emissione de CO2</string>
     <string name="routing_attr_goods_restrictions_description">Piga in cunsideru sos permissos de atzessu pro sos veìculos lèbios de trasportu de mercantzias</string>
     <string name="map_marker_average_speed_desc">Ispetzìfica s\'intervallu de tempus pro carculare sa lestresa mèdia a manera de pòdere carculare s\'ora de arrivu.</string>
-    <string name="attach_to_roads_banner_desc">Alliga sa rasta tua a sos caminos pro otènnere indicatziones de navigatzione a sa minuda.</string>
+    <string name="attach_to_roads_banner_desc">Alliga sa rasta tua a sos caminos pro retzire indicatziones de navigatzione a sa minuda.</string>
     <string name="release_4_2">• Disinnu nou de sos widgets: aspetu nou, agrupamentu pro pàginas, càmbiu de òrdine e cumbinatzione lìbera.
 \n
 \n • Escursionismu / Tziclismu / Àndalas de biàgiu: toca in su sìmbulu de s\'àndala e retzi totu sas informatziones subra de s\'àndala.
@@ -4776,4 +4773,9 @@
 \n</string>
     <string name="lang_sat">Santali</string>
     <string name="radius_rules_widget_desc">Su traste de sa righighedda radiale agiudat a determinare su raju a fùrriu a unu puntu seletzionadu in sa mapa ammustrende chircos de distàntzia in sa mapa.</string>
+    <string name="favorite_confirm_delete_group">Ses seguru de bòlere iscantzellare su grupu \"%1$s\" e totu sos puntos incluidos (%2$d)\?</string>
+    <string name="favorite_delete_group">Iscantzella su grupu</string>
+    <string name="download_heightmap_maps">Mapa de sas artàrias</string>
+    <string name="available_as_part_of_subscription_plan">A disponimentu comente parte de s\'abbonamentu %1$s.</string>
+    <string name="included_in_your_current_plan">Incluidu in su pianu currente tuo \"%1$s\"</string>
 </resources>
