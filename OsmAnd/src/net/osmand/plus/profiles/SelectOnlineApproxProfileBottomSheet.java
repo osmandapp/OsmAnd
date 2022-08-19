@@ -24,24 +24,38 @@ import java.util.List;
 
 public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomSheet {
 
+	public static final String SELECTED_DERIVED_PROFILE_KEY = "selected_derived_profile";
+
 	private RoutingDataUtils dataUtils;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
+	private String selectedDerivedProfile;
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
 	                                @Nullable ApplicationMode appMode,
 	                                @Nullable String selectedItemKey,
+									@Nullable String selectedDerivedProfile,
 	                                boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectOnlineApproxProfileBottomSheet fragment = new SelectOnlineApproxProfileBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(SELECTED_KEY, selectedItemKey);
+			args.putString(SELECTED_DERIVED_PROFILE_KEY, selectedDerivedProfile);
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (args != null) {
+			selectedDerivedProfile = args.getString(SELECTED_DERIVED_PROFILE_KEY, null);
 		}
 	}
 
@@ -72,6 +86,21 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 				addDivider();
 			}
 		}
+	}
+
+	@Override
+	protected boolean isSelected(ProfileDataObject profile) {
+		boolean isSelected = super.isSelected(profile);
+		if (isSelected && profile instanceof RoutingDataObject) {
+			RoutingDataObject data = (RoutingDataObject) profile;
+			boolean checkForDerived = !Algorithms.objectEquals(selectedDerivedProfile, "default");
+			if (checkForDerived) {
+				isSelected = Algorithms.objectEquals(selectedDerivedProfile, data.getDerivedProfile());
+			} else {
+				isSelected = data.getDerivedProfile() == null;
+			}
+		}
+		return isSelected;
 	}
 
 	@Override
