@@ -1798,4 +1798,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public boolean isLayoutRtl() {
 		return AndroidUtils.isLayoutRtl(application);
 	}
+
+	@NonNull
+	public LatLon getLatLonFromPixel(float x, float y) {
+		RotatedTileBox tileBox = getCurrentRotatedTileBox();
+		return NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, new PointI((int) x, (int) y));
+	}
 }
