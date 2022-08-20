@@ -81,7 +81,11 @@ public class CompassButton extends MapButton {
 
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			setIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white);
-			setContentDesc(R.string.rotate_map_none_opt);
+			if (mapRotation == 0.0f) {
+				setContentDesc(R.string.rotate_map_none_opt);
+			} else {
+				setContentDesc(R.string.rotate_map_none_rotated_opt);
+			}
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 			setIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white);
 			setContentDesc(R.string.rotate_map_bearing_opt);
