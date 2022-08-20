@@ -569,7 +569,8 @@
     <string name="poi_context_menu_delete">Lösche POI</string>
     <string name="rotate_map_compass_opt">Nach Kompass</string>
     <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-    <string name="rotate_map_none_opt">Keine Rotation (Norden ist immer oben)</string>
+    <string name="rotate_map_none_opt">Fest (Norden ist oben)</string>
+    <string name="rotate_map_none_rotated_opt">Fest (manuell gedreht)</string>
     <string name="rotate_map_to_bearing_descr">Kartenausrichtung:</string>
     <string name="rotate_map_to_bearing">Kartenrotation</string>
     <string name="show_route">Routendetails</string>

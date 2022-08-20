@@ -503,9 +503,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private void switchRotateMapModeImpl() {
 		if (mapView != null) {
-			String rotMode = app.getString(R.string.rotate_map_none_opt);
+			String rotMode = app.getString(R.string.rotate_map_none_rotated_opt);
 			if (shouldResetRotation()) {
 				mapView.resetManualRotation();
+				rotMode = app.getString(R.string.rotate_map_none_opt);
 			} else {
 				int vl = (settings.ROTATE_MAP.get() + 1) % 3;
 				settings.ROTATE_MAP.set(vl);

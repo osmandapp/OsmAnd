@@ -4269,7 +4269,8 @@
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">No rotation (north always upwards)</string>
+    <string name="rotate_map_none_opt">Fixed (north is up)</string>
+    <string name="rotate_map_none_rotated_opt">Fixed (manually rotated)</string>
     <string name="rotate_map_to_bearing_descr">Map alignment:</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
     <string name="show_route">Route details</string>
@@ -4769,6 +4770,4 @@
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-
-
 </resources>
