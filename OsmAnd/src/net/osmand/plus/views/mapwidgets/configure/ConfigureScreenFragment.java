@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,6 +52,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.views.mapwidgets.configure.DistanceByTapFragment.DistanceByTapUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -61,7 +63,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener {
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, DistanceByTapUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -141,6 +143,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStart();
 		app.getQuickActionRegistry().addUpdatesListener(this);
 		widgetRegistry.addWidgetsRegistryListener(this);
+		DistanceByTapFragment.registerListener(this);
 		mapActivity.disableDrawer();
 	}
 
@@ -149,6 +152,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
 		widgetRegistry.removeWidgetsRegistryListener(this);
+		DistanceByTapFragment.unRegisterListener(this);
 		mapActivity.enableDrawer();
 	}
 
@@ -270,15 +274,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				}
 		));
 
-		buttonsCard.addView(createButtonWithSwitch(
+		buttonsCard.addView(createButtonWithState(
 				R.drawable.ic_action_ruler_line,
 				getString(R.string.map_widget_distance_by_tap),
 				settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode),
 				true,
 				v -> {
-					boolean enabled = settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode);
-					settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !enabled);
-					mapActivity.updateApplicationModeSettings();
+					DistanceByTapFragment.showInstance(requireActivity());
 				}
 		));
 
@@ -458,6 +460,38 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		return view;
 	}
 
+	private View createButtonWithState(int iconId,
+	                                   @NonNull String title,
+	                                   boolean enabled,
+	                                   boolean showShortDivider,
+	                                   OnClickListener listener) {
+		int activeColor = selectedAppMode.getProfileColor(nightMode);
+		int inActiveColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		int iconColor = enabled ? activeColor : inActiveColor;
+		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+
+		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		ImageView ivIcon = view.findViewById(R.id.icon);
+		ivIcon.setImageDrawable(icon);
+
+		TextView tvTitle = view.findViewById(R.id.title);
+		tvTitle.setText(title);
+
+		if (showShortDivider) {
+			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
+		}
+
+		TextView stateContainer = view.findViewById(R.id.items_count_descr);
+		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
+		stateContainer.setText(enabled ? getString(R.string.shared_string_on) : getString(R.string.shared_string_off));
+
+		AndroidUiHelper.updateVisibility(stateContainer, true);
+
+		setupClickListener(view, listener);
+		setupListItemBackground(view);
+		return view;
+	}
+
 	private View createButtonWithDesc(int iconId,
 	                                  @NonNull String title,
 	                                  @Nullable String desc,
@@ -540,5 +574,10 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public void onDistanceByTapUpdated() {
+		setupButtonsCard();
 	}
 }

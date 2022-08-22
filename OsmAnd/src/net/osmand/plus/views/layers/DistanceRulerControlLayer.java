@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -34,7 +35,7 @@ import java.util.List;
 public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private static final int VERTICAL_OFFSET = 15;
-	private static final long DRAW_TIME = 2000;
+	private static final long DRAW_TIME = 4000;
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int DISTANCE_TEXT_SIZE = 16;
 
@@ -88,11 +89,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 		lineAttrs = new RenderingLineAttributes("rulerLine");
 
-		float lineTextSize = DISTANCE_TEXT_SIZE * app.getResources().getDisplayMetrics().density;
-
 		lineFontAttrs = new RenderingLineAttributes("rulerLineFont");
-		lineFontAttrs.paint.setTextSize(lineTextSize);
-		lineFontAttrs.paint2.setTextSize(lineTextSize);
 
 		handler = new Handler() {
 			@Override
@@ -211,6 +208,17 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private void drawTextOnCenterOfPath(Canvas canvas, float x1, float x2, Path path, String text) {
 		PathMeasure pm = new PathMeasure(path, false);
+
+		float lineTextSize;
+		DistanceByTapTextSize textSizeSetting = getApplication().getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get();
+		if (textSizeSetting.isLarge()) {
+			lineTextSize = app.getResources().getDimension(getApplication().getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get().getDimenId());
+		} else {
+			lineTextSize = DISTANCE_TEXT_SIZE * app.getResources().getDisplayMetrics().density;
+		}
+		lineFontAttrs.paint.setTextSize(lineTextSize);
+		lineFontAttrs.paint2.setTextSize(lineTextSize);
+
 		Rect bounds = new Rect();
 		lineFontAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 		float hOffset = pm.getLength() / 2 - bounds.width() / 2f;

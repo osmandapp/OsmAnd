@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/global_preferences_toolbar_with_switch" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/descriptionImage"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:adjustViewBounds="true"
+				tools:src="@drawable/img_settings_customize_configure_map_night" />
+
+			<TextView
+				android:id="@+id/titleHint"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				android:letterSpacing="0.02"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				tools:text="How to use" />
+
+			<TextView
+				android:id="@+id/descriptionHint"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:letterSpacing="0.02"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:text="@string/distance_by_tap_use_description" />
+
+			<View
+				android:id="@+id/long_divider2"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginTop="@dimen/content_padding"
+				android:background="?attr/divider_color_basic"
+				android:visibility="visible" />
+
+			<LinearLayout
+				android:id="@+id/linear_layout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" />
+
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

@@ -10,7 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_large">Large</string>
+    <string name="shared_string_normal">Normal</string>
+    <string name="how_to_use">How to use:</string>
+    <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
     <string name="shared_string_2_5_d_view">2.5 D view</string>
     <string name="display_position">Display position</string>
     <string name="download_heightmap_maps">Heightmap</string>
