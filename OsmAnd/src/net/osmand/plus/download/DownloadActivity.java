@@ -26,7 +26,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -518,9 +517,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 
 		public void updateBannerInProgress() {
-			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
-			boolean isFinished = basicProgressAsyncTask == null
-					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
+			BasicProgressAsyncTask<?, ?, ?, ?> progressTask = ctx.getDownloadThread().getCurrentRunningTask();
+			boolean isFinished = progressTask == null || progressTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
 				downloadProgressLayout.setOnClickListener(null);
 				updateDescriptionTextWithSize(ctx, downloadProgressLayout);
@@ -531,17 +529,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				}
 				freeVersionBanner.updateFreeVersionBanner();
 			} else {
-				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
-				String message = basicProgressAsyncTask.getDescription();
-				int percent = basicProgressAsyncTask.getProgressPercentage();
+				boolean indeterminate = progressTask.isIndeterminate();
+				String message = progressTask.getDescription();
+				int percent = (int) Math.floor(progressTask.getDownloadProgress());
 				freeVersionBanner.setMinimizedFreeVersionBanner(true);
 				freeVersionBanner.updateAvailableDownloads();
 				downloadProgressLayout.setVisibility(View.VISIBLE);
-				downloadProgressLayout.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
-					}
+				downloadProgressLayout.setOnClickListener(v -> {
+					new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
 				});
 				progressBar.setIndeterminate(indeterminate);
 				if (indeterminate) {

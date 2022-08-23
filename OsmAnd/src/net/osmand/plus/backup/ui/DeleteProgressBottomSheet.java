@@ -118,7 +118,7 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 	private void updateProgress() {
 		if (isAdded() && progressBar != null && percentage != null) {
 			progressBar.setProgress(progress);
-			percentage.setText(BasicProgressAsyncTask.normalizeProgress(maxProgress != 0 ? progress * 100 / maxProgress : 0) + "%");
+			percentage.setText(BasicProgressAsyncTask.normalizeProgressPercent(maxProgress != 0 ? progress * 100 / maxProgress : 0) + "%");
 		}
 	}
 

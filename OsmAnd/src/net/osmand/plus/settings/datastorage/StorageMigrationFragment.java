@@ -191,7 +191,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		progressBar.setProgress(progress);
 
 		int maxProgress = progressBar.getMax();
-		int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress) : 0;
+		int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 		progressTitle.setText(getString(R.string.progress_complete, percentage + "%"));
 	}
 

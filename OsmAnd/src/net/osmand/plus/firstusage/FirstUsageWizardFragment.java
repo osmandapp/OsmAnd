@@ -402,7 +402,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void downloadInProgress() {
 		IndexItem indexItem = downloadThread.getCurrentDownloadingItem();
 		if (indexItem != null && !indexItem.isDownloaded()) {
-			int progress = downloadThread.getCurrentDownloadingItemProgress();
+			float progress = downloadThread.getCurrentDownloadProgress();
 			double mb = indexItem.getArchiveSizeMB();
 			String v;
 			if (progress != -1) {
@@ -414,7 +414,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				TextView mapDescriptionTextView = view.findViewById(R.id.map_downloading_desc);
 				ProgressBar progressBar = view.findViewById(R.id.map_download_progress_bar);
 				mapDescriptionTextView.setText(v);
-				progressBar.setProgress(Math.max(progress, 0));
+				progressBar.setProgress(Math.max((int) progress, 0));
 			}
 		}
 		updateDownloadedItem();

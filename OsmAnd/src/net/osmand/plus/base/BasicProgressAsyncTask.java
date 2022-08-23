@@ -108,11 +108,8 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 		return work == -1;
 	}
 
-	public int getProgressPercentage() {
-		if (work > 0) {
-			return normalizeProgress((progress * 100) / work);
-		}
-		return normalizeProgress(progress);
+	public float getDownloadProgress() {
+		return normalizeProgress(work > 0 ? (float) (progress * 100) / work : progress);
 	}
 
 	public void setInterrupted(boolean interrupted) {
@@ -133,16 +130,19 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	}
 
 	@Override
-	public void setGeneralProgress(String genProgress) {
+	public void setGeneralProgress(String genProgress) {}
+
+	public static int normalizeProgressPercent(int progress) {
+		return (int) Math.floor(normalizeProgress(progress));
 	}
 
-	public static int normalizeProgress(int progress) {
+	public static float normalizeProgress(float progress) {
 		if (progress < 0) {
 			return 0;
 		} else if (progress <= 100) {
 			return progress;
 		} else {
-			return 99;
+			return 99.9f;
 		}
 	}
 }

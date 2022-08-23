@@ -391,7 +391,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			try {
 				TerrainMode mode = srtmPlugin.getTerrainMode();
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
-				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
+				float currentDownloadingProgress = downloadThread.getCurrentDownloadProgress();
 				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(
 						app, mapActivity.getMapLocation(),
 						mode == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE, false, -1, true);
@@ -445,7 +445,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 						if (indexItem == currentDownloadingItem) {
 							_item.setLoading(true)
-									.setProgress(currentDownloadingProgress)
+									.setProgress((int) currentDownloadingProgress)
 									.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 						} else {
 							_item.setSecondaryIcon(R.drawable.ic_action_import);
@@ -488,7 +488,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 		if (downloadIndexItem != null && listAdapter != null) {
-			int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
+			int downloadProgress = (int) downloadThread.getCurrentDownloadProgress();
 			ArrayAdapter<ContextMenuItem> adapter = listAdapter;
 			for (int i = 0; i < adapter.getCount(); i++) {
 				ContextMenuItem item = adapter.getItem(i);

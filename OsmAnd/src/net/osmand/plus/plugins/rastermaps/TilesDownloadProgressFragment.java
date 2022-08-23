@@ -286,7 +286,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Override
 	public void onTileDownloaded(long tileNumber, long cumulativeTilesSize) {
 		downloadedTilesNumber = tileNumber + 1;
-		progress = BasicProgressAsyncTask.normalizeProgress((int) ((float) downloadedTilesNumber / totalTilesNumber * 100));
+		progress = BasicProgressAsyncTask.normalizeProgressPercent((int) ((float) downloadedTilesNumber / totalTilesNumber * 100));
 		downloadedSizeMb = (float) cumulativeTilesSize / BYTES_TO_MB;
 
 		updateProgress();

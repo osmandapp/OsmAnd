@@ -115,7 +115,7 @@ public class WikipediaPoiMenu {
 		} else {
 			try {
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
-				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
+				float currentDownloadingProgress = downloadThread.getCurrentDownloadProgress();
 				List<IndexItem> wikiIndexes = DownloadResources.findIndexItemsAt(
 						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
 						false, -1, true);
@@ -168,7 +168,7 @@ public class WikipediaPoiMenu {
 
 						if (indexItem == currentDownloadingItem) {
 							_item.setLoading(true)
-									.setProgress(currentDownloadingProgress)
+									.setProgress((int) currentDownloadingProgress)
 									.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 						} else {
 							_item.setSecondaryIcon(R.drawable.ic_action_import);
