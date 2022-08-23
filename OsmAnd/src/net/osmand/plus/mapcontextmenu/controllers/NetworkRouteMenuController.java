@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
@@ -18,14 +18,14 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 public class NetworkRouteMenuController extends MenuController {
 
 	private final OsmandApplication app;
-	private Pair<NetworkRouteSegment, QuadRect> pair;
+	private Pair<RouteKey, QuadRect> pair;
 
 	public NetworkRouteMenuController(@NonNull MapActivity mapActivity,
 	                                  @NonNull PointDescription pointDescription,
 	                                  @NonNull Pair<?, ?> object) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		app = mapActivity.getMyApplication();
-		pair = (Pair<NetworkRouteSegment, QuadRect>) object;
+		pair = (Pair<RouteKey, QuadRect>) object;
 
 		builder.setShowNearestWiki(true);
 	}
@@ -39,8 +39,8 @@ public class NetworkRouteMenuController extends MenuController {
 	protected void setObject(Object object) {
 		if (object instanceof Pair) {
 			Pair<?, ?> pair = (Pair<?, ?>) object;
-			if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
-				this.pair = (Pair<NetworkRouteSegment, QuadRect>) pair;
+			if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
+				this.pair = (Pair<RouteKey, QuadRect>) pair;
 			}
 		}
 	}

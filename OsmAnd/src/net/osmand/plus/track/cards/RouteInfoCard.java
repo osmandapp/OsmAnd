@@ -3,7 +3,6 @@ package net.osmand.plus.track.cards;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
 import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 import android.text.util.Linkify;
@@ -29,11 +28,11 @@ import net.osmand.util.Algorithms;
 
 public class RouteInfoCard extends MapBaseCard {
 
-	private final NetworkRouteSegment routeSegment;
+	private final RouteKey routeKey;
 
-	public RouteInfoCard(@NonNull MapActivity mapActivity, @NonNull NetworkRouteSegment routeSegment) {
+	public RouteInfoCard(@NonNull MapActivity mapActivity, @NonNull RouteKey routeKey) {
 		super(mapActivity);
-		this.routeSegment = routeSegment;
+		this.routeKey = routeKey;
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class RouteInfoCard extends MapBaseCard {
 		LinearLayout container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		RouteKey routeKey = routeSegment.routeKey;
+		RouteKey routeKey = this.routeKey;
 		String tag = routeKey.type.getTag();
 
 		String networkTag = routeKey.getValue("network");

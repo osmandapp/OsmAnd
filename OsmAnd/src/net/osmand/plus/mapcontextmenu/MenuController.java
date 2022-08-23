@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -81,6 +79,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
@@ -228,7 +227,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (pair.second instanceof SelectedGpxPoint) {
 					menuController = new SelectedGpxMenuController(mapActivity, pointDescription,
 							(SelectedGpxPoint) ((Pair<?, ?>) object).second);
-				} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
+				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
 					menuController = new NetworkRouteMenuController(mapActivity, pointDescription, pair);
 				}
 			}

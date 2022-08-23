@@ -24,6 +24,7 @@ import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
 import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
 import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -138,7 +139,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.widgets.IconPopupMenu;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -205,7 +205,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private GPXTabItemType chartTabToOpen;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
-	private NetworkRouteSegment routeSegment;
+	private RouteKey routeKey;
 	private boolean temporarySelected;
 
 	private Float heading;
@@ -407,8 +407,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.temporarySelected = temporarySelected;
 	}
 
-	public void setRouteSegment(NetworkRouteSegment routeSegment) {
-		this.routeSegment = routeSegment;
+	public void setRouteKey(RouteKey routeKey) {
+		this.routeKey = routeKey;
 	}
 
 	public void setGpxPoint(SelectedGpxPoint point) {
@@ -493,7 +493,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuTab.OPTIONS);
 
-		Drawable icon = routeSegment != null ? new NetworkRouteDrawable(app, routeSegment, isNightMode())
+		Drawable icon = routeKey != null ? new NetworkRouteDrawable(app, routeKey, isNightMode())
 				: uiUtilities.getThemedIcon(R.drawable.ic_action_polygom_dark);
 		headerIcon.setImageDrawable(icon);
 	}
@@ -746,11 +746,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
 				}
-				if (routeSegment != null) {
+				if (routeKey != null) {
 					if (routeInfoCard != null && routeInfoCard.getView() != null) {
 						reattachCard(cardsContainer, routeInfoCard);
 					} else {
-						routeInfoCard = new RouteInfoCard(getMapActivity(), routeSegment);
+						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey);
 						cardsContainer.addView(routeInfoCard.build(mapActivity));
 					}
 				}
@@ -1719,7 +1719,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint,
 	                                   @Nullable GPXTrackAnalysis analyses,
-	                                   @Nullable NetworkRouteSegment routeSegment,
+	                                   @Nullable RouteKey routeKey,
 	                                   @Nullable Bundle params) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
@@ -1731,7 +1731,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setAnalysis(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
-			fragment.setRouteSegment(routeSegment);
+			fragment.setRouteKey(routeKey);
 
 			if (params != null) {
 				fragment.setReturnScreenName(params.getString(RETURN_SCREEN_NAME, null));
