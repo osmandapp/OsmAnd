@@ -15,13 +15,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMap.OsmandMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class MapViewWithLayers extends FrameLayout {
 
 	private final OsmandApplication app;
+	private final OsmandMap osmandMap;
 	private final OsmandMapTileView mapView;
 
+	private OsmandMapListener mapListener;
 	private AtlasMapRendererView atlasMapRendererView;
 
 	public MapViewWithLayers(@NonNull Context context) {
@@ -40,7 +43,10 @@ public class MapViewWithLayers extends FrameLayout {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		app = getMyApplication();
-		mapView = app.getOsmandMap().getMapView();
+		osmandMap = app.getOsmandMap();
+		mapView = osmandMap.getMapView();
+
+		osmandMap.addListener(getMapListener());
 		mapView.setupTouchDetectors(getContext());
 
 		boolean nightMode = app.getDaynightHelper().isNightMode();
@@ -107,16 +113,37 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();
-	}
-
-	public void onSetMapElevation(float angle) {
-		if (atlasMapRendererView != null) {
-			atlasMapRendererView.setElevationAngle(angle);
-		}
+		app.getOsmandMap().removeListener(getMapListener());
 	}
 
 	@NonNull
 	private OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getContext().getApplicationContext());
+	}
+
+	@NonNull
+	private OsmandMapListener getMapListener() {
+		if (mapListener == null) {
+			mapListener = new OsmandMapListener() {
+
+				@Override
+				public void onChangeZoom(int stp) {
+					mapView.showAndHideMapPosition();
+				}
+
+				@Override
+				public void onSetMapElevation(float angle) {
+					if (atlasMapRendererView != null) {
+						atlasMapRendererView.setElevationAngle(angle);
+					}
+				}
+
+				@Override
+				public void onSetupOpenGLView(boolean init) {
+					setupOpenGLView(init);
+				}
+			};
+		}
+		return mapListener;
 	}
 }

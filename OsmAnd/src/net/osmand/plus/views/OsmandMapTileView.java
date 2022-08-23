@@ -80,6 +80,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 
+	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
@@ -527,6 +528,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setShowMapPosition(boolean showMapPosition) {
 		this.showMapPosition = showMapPosition;
+	}
+
+	public void showAndHideMapPosition() {
+		setShowMapPosition(true);
+		getApplication().runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
+			if (isShowMapPosition()) {
+				setShowMapPosition(false);
+				refreshMap();
+			}
+		}, 2500);
 	}
 
 	public float getRotate() {
