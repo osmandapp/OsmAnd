@@ -268,36 +268,23 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	@Nullable
-	public Context getUiContext() {
-		if (mapActivity != null) {
-			return mapActivity;
-		}
-		return view != null ? view.getContext() : null;
-	}
-
-	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		if (mapActivity != null) {
-			setupTouchDetectors(mapActivity);
-		} else {
-			clearTouchDetectors();
-		}
 	}
 
 	public void setupTouchDetectors(@NonNull Context ctx) {
 		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
-		doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(this, ctx, new MapTileViewMultiTouchZoomListener());
 		twoFingersTapDetector = new TwoFingerTapDetector() {
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
-				if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+				if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
 					return;
 				}
 				if (isZoomingAllowed(getZoom(), -1.1f)) {

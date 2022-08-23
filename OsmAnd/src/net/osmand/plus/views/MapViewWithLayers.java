@@ -14,11 +14,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class MapViewWithLayers extends FrameLayout {
+
+	private final OsmandApplication app;
+	private final OsmandMapTileView mapView;
 
 	private AtlasMapRendererView atlasMapRendererView;
 
@@ -37,19 +39,21 @@ public class MapViewWithLayers extends FrameLayout {
 	public MapViewWithLayers(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode();
+		app = getMyApplication();
+		mapView = app.getOsmandMap().getMapView();
+		mapView.setupTouchDetectors(getContext());
+
+		boolean nightMode = app.getDaynightHelper().isNightMode();
 		inflate(UiUtilities.getThemedContext(context, nightMode), R.layout.map_view_with_layers, this);
 	}
 
 	public void setupOpenGLView(boolean init) {
-		OsmandApplication app = getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
 		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
 				&& InAppPurchaseHelper.isAndroidAutoAvailable(app);
-		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+
+		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = findViewById(R.id.atlasMapRendererViewStub);
 			if (atlasMapRendererView == null) {
 				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
@@ -102,6 +106,7 @@ public class MapViewWithLayers extends FrameLayout {
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		mapView.clearTouchDetectors();
 	}
 
 	public void onSetMapElevation(float angle) {
