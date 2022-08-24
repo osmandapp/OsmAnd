@@ -7,14 +7,7 @@
 	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
-	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/appbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-
-		<include layout="@layout/global_preferences_toolbar_with_switch" />
-
-	</com.google.android.material.appbar.AppBarLayout>
+	<include layout="@layout/profile_preference_toolbar_with_switch_action" />
 
 	<ScrollView
 		android:id="@+id/scroll_view"
@@ -32,7 +25,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:adjustViewBounds="true"
-				tools:src="@drawable/img_settings_customize_configure_map_night" />
+				tools:src="@drawable/img_distance_by_tap_night" />
 
 			<TextView
 				android:id="@+id/titleHint"

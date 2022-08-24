@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +22,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -61,7 +60,6 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-
 	private boolean nightMode;
 
 	@Override
@@ -74,14 +72,10 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		selectedAppMode = settings.getApplicationMode();
 	}
 
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
 	private void setUpToolbar() {
-		OsmandApplication app = requireMyApplication();
 		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-		tvTitle.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
+		TextView tvSubTitle = toolbar.findViewById(R.id.toolbar_subtitle);
+		tvSubTitle.setVisibility(View.GONE);
 		tvTitle.setText(getString(R.string.map_widget_distance_by_tap));
 
 		ApplicationMode appMode = requireMyApplication().getSettings().getApplicationMode();
@@ -92,13 +86,6 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateToolbarNavigationIcon() {
-		OsmandApplication app = requireMyApplication();
-
-		int activeButtonsColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		Drawable icBack = app.getUIUtilities().getIcon(
-				AndroidUtils.getNavigationIconResId(app),
-				activeButtonsColorResId);
-		navigationIcon.setImageDrawable(icBack);
 		navigationIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -111,14 +98,7 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateToolbarActionButton() {
-		OsmandApplication app = requireMyApplication();
-
-		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
-		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		AppCompatImageButton iconHelp = toolbar.findViewById(R.id.action_button_icon);
-		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, iconColorResId);
-		iconHelp.setImageDrawable(helpDrawable);
-
+		ImageButton iconHelpContainer = toolbar.findViewById(R.id.action_button);
 		iconHelpContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -301,8 +281,8 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), true);
-		return ColorUtilities.getStatusBarColorId(nightMode);
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	@Override
@@ -315,6 +295,10 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	public void onPause() {
 		super.onPause();
 		getMapActivity().enableDrawer();
+	}
+
+	private MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
