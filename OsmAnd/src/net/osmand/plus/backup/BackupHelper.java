@@ -30,6 +30,7 @@ import net.osmand.plus.backup.commands.DeleteFilesCommand;
 import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
 import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -474,27 +475,27 @@ public class BackupHelper {
 		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
-					private int work;
-					private int progress;
-					private int deltaProgress;
+					private ProgressHelper progress;
 
 					@Override
 					public void startWork(int work) {
+						progress = new ProgressHelper(() -> {
+							if (listener != null) {
+								int p = progress.getLastKnownProgress();
+								int dp = progress.getLastKnownDeltaProgress();
+								listener.onFileUploadProgress(type, fileName, p, dp);
+							}
+						});
 						if (listener != null) {
-							this.work = work > 0 ? work : 1;
-							listener.onFileUploadStarted(type, fileName, work);
+							progress.onStartWork(work);
+							listener.onFileUploadStarted(type, fileName, progress.getTotalWork());
 						}
 					}
 
 					@Override
 					public void progress(int deltaWork) {
 						if (listener != null) {
-							deltaProgress += deltaWork;
-							if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-								progress += deltaProgress;
-								listener.onFileUploadProgress(type, fileName, progress, deltaProgress);
-								deltaProgress = 0;
-							}
+							progress.onProgress(deltaWork);
 						}
 					}
 
@@ -654,27 +655,27 @@ public class BackupHelper {
 			}
 			IProgress progress = new AbstractProgress() {
 
-				private int work;
-				private int progress;
-				private int deltaProgress;
+				private ProgressHelper progress;
 
 				@Override
 				public void startWork(int work) {
+					progress = new ProgressHelper(() -> {
+						if (listener != null) {
+							int p = progress.getLastKnownProgress();
+							int dp = progress.getLastKnownDeltaProgress();
+							listener.onFileDownloadProgress(type, fileName, p, dp);
+						}
+					});
 					if (listener != null) {
-						this.work = work > 0 ? work : 1;
-						listener.onFileDownloadStarted(type, fileName, work);
+						progress.onStartWork(work);
+						listener.onFileDownloadStarted(type, fileName, progress.getTotalWork());
 					}
 				}
 
 				@Override
 				public void progress(int deltaWork) {
 					if (listener != null) {
-						deltaProgress += deltaWork;
-						if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-							progress += deltaProgress;
-							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
-							deltaProgress = 0;
-						}
+						progress.onProgress(deltaWork);
 					}
 				}
 

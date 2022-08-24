@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 import net.osmand.IProgress;
+import net.osmand.plus.base.ProgressHelper;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,9 +18,7 @@ public class ProgressImplementation implements IProgress {
 	private static final int HANDLER_START_TASK = OsmAndConstants.UI_HANDLER_PROGRESS + 1;
 	private static final int HADLER_UPDATE_PROGRESS = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
 	private String taskName;
-	private int progress;
-	private int deltaProgress;
-	private int work;
+	private ProgressHelper progress;
 	private String message = ""; //$NON-NLS-1$
 	
 	private final Handler mViewUpdateHandler;
@@ -36,6 +36,10 @@ public class ProgressImplementation implements IProgress {
 		context = ctx;
 		setDialog(dlg);
 
+		progress = new ProgressHelper(() -> {
+			updateProgressMessage(progress.getLastKnownProgress());
+		});
+
 		mViewUpdateHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -50,7 +54,7 @@ public class ProgressImplementation implements IProgress {
 							dialog.setIndeterminate(true);
 						} else {
 							dialog.setIndeterminate(false);
-							dialog.setMax(work);
+							dialog.setMax(progress.getTotalWork());
 						}
 						dialog.show();
 					}
@@ -63,7 +67,7 @@ public class ProgressImplementation implements IProgress {
 							progressBar.setIndeterminate(true);
 						} else {
 							progressBar.setIndeterminate(false);
-							progressBar.setMax(work);
+							progressBar.setMax(progress.getTotalWork());
 						}
 					}
 					break;
@@ -160,14 +164,8 @@ public class ProgressImplementation implements IProgress {
 
 	@Override
 	public void progress(int deltaWork) {
-		if (!isIndeterminate() && dialog != null) {
-			this.deltaProgress += deltaWork;
-			//update only each percent
-			if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-				this.progress += deltaProgress;
-				this.deltaProgress = 0;
-				updateProgressMessage(this.progress);
-			}
+		if (dialog != null) {
+			progress.onProgress(deltaWork);
 		}
 	}
 
@@ -180,13 +178,13 @@ public class ProgressImplementation implements IProgress {
 	
 	@Override
 	public void remaining(int remainingWork) {
-		int newprogress = work - remainingWork;
-		progress(newprogress - this.progress);
+		int newProgress = progress.getTotalWork() - remainingWork;
+		progress(newProgress - progress.getLastKnownProgress());
 	}
 	
 	@Override
-	public boolean isIndeterminate(){
-		return work == -1;
+	public boolean isIndeterminate() {
+		return progress.isIndeterminate();
 	}
 
 	@Override
@@ -202,8 +200,7 @@ public class ProgressImplementation implements IProgress {
 
 	@Override
 	public void finishTask() {
-		work = -1;
-		progress = 0;
+		progress.onFinishTask();
 		if (taskName != null) {
 			Resources resources = context.getResources();
 			message = resources.getString(R.string.ltr_or_rtl_combine_via_colon, resources.getString(R.string.finished_task), taskName);
@@ -225,12 +222,7 @@ public class ProgressImplementation implements IProgress {
 	
 	@Override
 	public void startWork(int work) {
-		this.work = work;
-		if (this.work == 0) {
-			this.work = 1;
-		}
-		progress = 0;
-		deltaProgress = 0;
+		progress.onStartWork(work);
 	}
 
 }
