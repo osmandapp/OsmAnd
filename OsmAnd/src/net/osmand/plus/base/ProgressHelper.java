@@ -10,28 +10,28 @@ public class ProgressHelper {
 	private int totalWork = INDETERMINATE;
 	private int progress;
 	private int deltaProgress;
-	private int sizeRestriction = INDETERMINATE;
-	private int timeRestriction = INDETERMINATE;
+	private int sizeInterval = INDETERMINATE;
+	private int timeInterval = INDETERMINATE;
 	private long lastUpdateTime = INDETERMINATE;
 
 	public ProgressHelper(@NonNull OnUpdateProgress progressUiAdapter) {
 		this.progressUiAdapter = progressUiAdapter;
 	}
 
-	public void setMinimumSizeRestriction(int proposedValue) {
-		if (sizeRestriction != INDETERMINATE) {
-			setSizeRestriction(Math.min(proposedValue, sizeRestriction));
+	public void setMinimumSizeInterval(int proposedValue) {
+		if (sizeInterval != INDETERMINATE) {
+			setSizeInterval(Math.min(proposedValue, sizeInterval));
 		} else {
-			setSizeRestriction(proposedValue);
+			setSizeInterval(proposedValue);
 		}
 	}
 
-	public void setSizeRestriction(int minSizeToUpdate) {
-		this.sizeRestriction = minSizeToUpdate;
+	public void setSizeInterval(int minSizeToUpdate) {
+		this.sizeInterval = minSizeToUpdate;
 	}
 
-	public void setTimeRestriction(int minTimeToUpdate) {
-		this.timeRestriction = minTimeToUpdate;
+	public void setTimeInterval(int minTimeToUpdate) {
+		this.timeInterval = minTimeToUpdate;
 	}
 
 	public void onStartWork(int total) {
@@ -40,7 +40,7 @@ public class ProgressHelper {
 			this.totalWork = 1;
 		}
 		// one percent of total work size
-		setMinimumSizeRestriction(totalWork / 100);
+		setMinimumSizeInterval(totalWork / 100);
 		deltaProgress = 0;
 		progress = 0;
 	}
@@ -48,7 +48,7 @@ public class ProgressHelper {
 	public void onProgress(int deltaWork) {
 		if (!isIndeterminate()) {
 			deltaProgress += deltaWork;
-			if (deltaProgress >= sizeRestriction || isDownloadComplete()) {
+			if (deltaProgress >= sizeInterval || isDownloadComplete()) {
 				progress += deltaProgress;
 				if (shouldUpdateUI()) {
 					lastUpdateTime = System.currentTimeMillis();
@@ -60,9 +60,9 @@ public class ProgressHelper {
 	}
 
 	public boolean shouldUpdateUI() {
-		if (timeRestriction != INDETERMINATE) {
+		if (timeInterval != INDETERMINATE) {
 			long now = System.currentTimeMillis();
-			return (now - lastUpdateTime) > timeRestriction;
+			return (now - lastUpdateTime) > timeInterval;
 		}
 		return true;
 	}

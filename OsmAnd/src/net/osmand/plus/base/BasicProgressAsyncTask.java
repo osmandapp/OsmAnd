@@ -25,8 +25,8 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	public BasicProgressAsyncTask(OsmandApplication app) {
 		this.ctx = app;
 		progress = new ProgressHelper(() -> updProgress(true));
-		progress.setSizeRestriction(UPDATE_SIZE_INTERVAL_KB);
-		progress.setTimeRestriction(UPDATE_TIME_INTERVAL_MS);
+		progress.setSizeInterval(UPDATE_SIZE_INTERVAL_KB);
+		progress.setTimeInterval(UPDATE_TIME_INTERVAL_MS);
 	}
 
 	public String getDescription() {
