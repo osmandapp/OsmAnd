@@ -1667,7 +1667,16 @@ public class OsmandSettings {
 	public static final int MIDDLE_BOTTOM_CONSTANT = 2;
 	public static final int MIDDLE_TOP_CONSTANT = 3;
 	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
-	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false).makeProfile();
+
+	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false) {
+
+		@Override
+		public Boolean getProfileDefaultValue(ApplicationMode mode) {
+			// By default display position shifts to the bottom part of the screen
+			// only if the "Map orientation" was set to "Movement direction".
+			return ROTATE_MAP.getModeValue(mode) != OsmandSettings.ROTATE_MAP_BEARING;
+		}
+	}.makeProfile();
 
 	public final CommonPreference<Boolean> ENABLE_3D_VIEW = new BooleanPreference(this, "enable_3d_view", true).makeProfile();
 
