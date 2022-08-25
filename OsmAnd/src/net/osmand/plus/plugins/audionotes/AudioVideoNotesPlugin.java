@@ -840,12 +840,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityScreenOff(MapActivity activity) {
+	public void mapActivityScreenOff(@NonNull MapActivity activity) {
 		stopRecording(activity, false);
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 		if (Build.VERSION.SDK_INT < 29) {
 			runAction(activity);
@@ -853,7 +853,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 		runAction(activity);
 	}
@@ -866,7 +866,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		if (isRecording()) {
 			if (currentRecording.getType() == AVActionType.REC_PHOTO) {
 				finishPhotoRecording(false);

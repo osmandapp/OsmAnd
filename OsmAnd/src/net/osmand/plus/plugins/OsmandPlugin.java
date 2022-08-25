@@ -44,6 +44,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
@@ -317,6 +318,7 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
+		allPlugins.add(new AntPlusPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
@@ -558,25 +560,24 @@ public abstract class OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 	}
 
-	public void mapActivityCreate(MapActivity activity) {
+	public void mapActivityCreate(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityDestroy(MapActivity activity) {
+	public void mapActivityDestroy(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityScreenOff(MapActivity activity) {
+	public void mapActivityScreenOff(@NonNull MapActivity activity) {
 	}
 
-	@TargetApi(Build.VERSION_CODES.M)
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
 	                                           int[] grantResults) {
 	}
@@ -832,31 +833,31 @@ public abstract class OsmandPlugin {
 		return l;
 	}
 
-	public static void onMapActivityCreate(MapActivity activity) {
+	public static void onMapActivityCreate(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityCreate(activity);
 		}
 	}
 
-	public static void onMapActivityResume(MapActivity activity) {
+	public static void onMapActivityResume(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityResume(activity);
 		}
 	}
 
-	public static void onMapActivityResumeOnTop(MapActivity activity) {
+	public static void onMapActivityResumeOnTop(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityResumeOnTop(activity);
 		}
 	}
 
-	public static void onMapActivityPause(MapActivity activity) {
+	public static void onMapActivityPause(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityPause(activity);
 		}
 	}
 
-	public static void onMapActivityDestroy(MapActivity activity) {
+	public static void onMapActivityDestroy(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityDestroy(activity);
 		}
@@ -868,7 +869,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void onMapActivityScreenOff(MapActivity activity) {
+	public static void onMapActivityScreenOff(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityScreenOff(activity);
 		}

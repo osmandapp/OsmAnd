@@ -167,7 +167,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 		if (showDialogWhenActivityResumed) {
 			showDialogWhenActivityResumed = false;
@@ -176,7 +176,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		this.distanceWidget = null;
 		this.timeWidget = null;
 		this.uphillWidget = null;
