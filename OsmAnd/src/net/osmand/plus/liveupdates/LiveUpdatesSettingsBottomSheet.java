@@ -363,6 +363,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		TextViewEx titleView = (TextViewEx) itemTitle.getView();
 		titleView.setPadding(titleView.getPaddingLeft(), getDimen(R.dimen.content_padding_small),
 				titleView.getPaddingRight(), getDimen(R.dimen.list_item_button_padding));
+		int titleHeight = getDimen(R.dimen.bottom_sheet_descr_height);
+		titleView.setMinimumHeight(titleHeight);
 
 		TextView frequencyHelpMessageView = (TextView) itemFrequencyHelpMessage.getView();
 		frequencyHelpMessageView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
