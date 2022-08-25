@@ -8,7 +8,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
@@ -110,46 +109,6 @@ public class NetworkRouteSelector {
 			}
 		}
 		return res;
-	}
-
-	public List<NetworkRouteSegment> getFirstSegments(QuadRect bBox, RouteKey selected, double searchDistance) throws IOException {
-		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
-		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
-		int x31L = MapUtils.get31TileNumberX(bBox.left);
-		int x31R = MapUtils.get31TileNumberX(bBox.right);
-
-		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
-
-		LatLon latLon = new LatLon(bBox.centerY(), bBox.centerX());
-		List<NetworkRouteSegment> networkRouteSegmentList = new ArrayList<>();
-		for (RouteKey key : res.keySet()) {
-			if (selected != null && !selected.equals(key)) {
-				continue;
-			}
-			List<NetworkRouteSegment> list = res.get(key);
-			if (list.size() > 0 && isSegmentsNearPoint(list, latLon, searchDistance)) {
-				networkRouteSegmentList.add(list.get(0));
-			}
-		}
-		return networkRouteSegmentList;
-	}
-
-	private boolean isSegmentsNearPoint(List<NetworkRouteSegment> list, LatLon latLon, double searchDistance) {
-		for (NetworkRouteSegment segment : list) {
-			RouteDataObject dataObject = segment.robj;
-			if (dataObject != null) {
-				for (int i = 0; i < dataObject.getPointsLength(); i++) {
-					double lon = MapUtils.get31LongitudeX(dataObject.getPoint31XTile(i));
-					double lat = MapUtils.get31LatitudeY(dataObject.getPoint31YTile(i));
-
-					double distance = MapUtils.getDistance(latLon, lat, lon);
-					if (distance <= searchDistance) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadRoutes, RouteKey selected) throws IOException {
@@ -778,6 +737,14 @@ public class NetworkRouteSelector {
 				}
 			}
 			return "";
+		}
+
+		public String getRouteName() {
+			String name = getValue("name");
+			if (name.isEmpty()) {
+				name = getValue("ref");
+			}
+			return name;
 		}
 
 		@Override

@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -13,6 +14,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -75,6 +77,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -418,7 +421,7 @@ public class MapSelectionHelper {
 	}
 
 	private void addRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point) {
-		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, OsmandMapLayer.getDefaultRadiusPoi(tileBox)) * 1.5f);
+		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * 1.5f);
 		LatLon minLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox,
 				point.x - searchRadius, point.y - searchRadius);
 		LatLon maxLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox,
@@ -436,24 +439,24 @@ public class MapSelectionHelper {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
-		List<NetworkRouteSegment> segmentList = new ArrayList<>();
+		Map<RouteKey, GPXUtilities.GPXFile> routes = new LinkedHashMap<>();
 		try {
-			segmentList.addAll(routeSelector.getFirstSegments(rect, null, searchDistance));
+			routes = routeSelector.getRoutes(rect, false, null);
 		} catch (IOException e) {
 			log.error(e);
 		}
-		for (NetworkRouteSegment routeSegment : segmentList) {
-			if (isUniqueRoute(selectedObjects.keySet(), routeSegment)) {
-				selectedObjects.put(new Pair<>(routeSegment, rect), gpxMenuProvider);
+		for (RouteKey routeKey : routes.keySet()) {
+			if (isUniqueRoute(selectedObjects.keySet(), routeKey)) {
+				selectedObjects.put(new Pair<>(routeKey, rect), gpxMenuProvider);
 			}
 		}
 	}
 
-	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull NetworkRouteSegment routeSegment) {
+	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull RouteKey tmpRouteKey) {
 		for (Object selectedObject : set) {
-			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof NetworkRouteSegment) {
-				NetworkRouteSegment rs = (NetworkRouteSegment) ((Pair<?, ?>) selectedObject).first;
-				if (rs.routeKey.equals(routeSegment.routeKey)) {
+			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof RouteKey) {
+				RouteKey routeKey = (RouteKey) ((Pair<?, ?>) selectedObject).first;
+				if (routeKey.equals(tmpRouteKey)) {
 					return false;
 				}
 			}

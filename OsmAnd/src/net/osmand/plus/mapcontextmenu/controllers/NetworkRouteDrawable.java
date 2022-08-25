@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import static net.osmand.plus.render.TextRenderer.DROID_SERIF;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,7 +24,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class NetworkRouteDrawable extends Drawable {
 
 	private final OsmandApplication app;
-	private final NetworkRouteSegment segment;
+	private final RouteKey routeKey;
 
 	private final Paint paint = new Paint();
 
@@ -42,11 +42,11 @@ public class NetworkRouteDrawable extends Drawable {
 
 	private final int defaultIconSize;
 
-	public NetworkRouteDrawable(@NonNull OsmandApplication app, @NonNull NetworkRouteSegment segment, boolean nightMode) {
+	public NetworkRouteDrawable(@NonNull OsmandApplication app, @NonNull RouteKey routeKey, boolean nightMode) {
 		this.app = app;
-		this.segment = segment;
+		this.routeKey = routeKey;
 		backgroundDrawable = createBackgroundIcon();
-		osmcText = segment.routeKey.getValue("osmc_text");
+		osmcText = routeKey.getValue("osmc_text");
 		defaultIconSize = app.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
 		setupTextPaint(nightMode);
 	}
@@ -80,8 +80,8 @@ public class NetworkRouteDrawable extends Drawable {
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			String tag = "route_" + segment.routeKey.type.getTag();
-			String color = segment.routeKey.getValue("osmc_textcolor");
+			String tag = "route_" + routeKey.type.getTag();
+			String color = routeKey.getValue("osmc_textcolor");
 
 			request.setInitialTagValueZoom(tag, null, 14, null);
 			request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
@@ -94,7 +94,7 @@ public class NetworkRouteDrawable extends Drawable {
 	}
 
 	private Drawable getIcon(@NonNull String key, @NonNull String prefix, @NonNull String suffix) {
-		String name = segment.routeKey.getValue(key);
+		String name = routeKey.getValue(key);
 		String iconName = prefix + name + suffix;
 		int iconRes = AndroidUtils.getDrawableId(app, iconName);
 		if (iconRes != 0) {

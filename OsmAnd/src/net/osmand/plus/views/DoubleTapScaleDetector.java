@@ -8,6 +8,8 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -15,7 +17,9 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import org.apache.commons.logging.Log;
 
 public class DoubleTapScaleDetector {
+
 	private static final Log LOG = PlatformUtil.getLog(DoubleTapScaleDetector.class);
+
 	private static final int DOUBLE_TAP_TIMEOUT = ViewConfiguration.getDoubleTapTimeout();
 	private static final int LONG_PRESS_TIMEOUT = ViewConfiguration.getLongPressTimeout();
 	public static final int SCALE_PER_SCREEN = 4;
@@ -37,7 +41,7 @@ public class DoubleTapScaleDetector {
 	private boolean mIsDoubleTapping;
 	private boolean mScrolling;
 
-	public DoubleTapScaleDetector(OsmandMapTileView view, DoubleTapZoomListener listener) {
+	public DoubleTapScaleDetector(@NonNull OsmandMapTileView view, @NonNull Context ctx, @NonNull DoubleTapZoomListener listener) {
 		this.view = view;
 		this.listener = listener;
 
@@ -46,7 +50,7 @@ public class DoubleTapScaleDetector {
 		displayHeightPx = tileBox.getPixHeight();
 		zoomCenter = new PointF(centerScreen.x, centerScreen.y);
 
-		ViewConfiguration configuration = ViewConfiguration.get(view.getUiContext());
+		ViewConfiguration configuration = ViewConfiguration.get(ctx);
 		int touchSlop = configuration.getScaledTouchSlop();
 		mTouchSlopSquare = touchSlop * touchSlop;
 		int doubleTapSlop = (int) (configuration.getScaledDoubleTapSlop() * 0.5);
@@ -69,7 +73,7 @@ public class DoubleTapScaleDetector {
 				handled = true;
 			} else if (secondDown != null) {
 				if (calculateSqaredDistance(secondDown, event) < mDoubleTapSlopSquare
-					&& event.getEventTime() - secondDown.getEventTime() < LONG_PRESS_TIMEOUT) {
+						&& event.getEventTime() - secondDown.getEventTime() < LONG_PRESS_TIMEOUT) {
 					listener.onDoubleTap(event);
 				}
 				handled = true;
@@ -137,7 +141,7 @@ public class DoubleTapScaleDetector {
 	}
 
 	private boolean isConsideredDoubleTap(MotionEvent firstDown, MotionEvent firstUp,
-										  MotionEvent secondDown) {
+	                                      MotionEvent secondDown) {
 		if (firstDown == null || firstUp == null || secondDown == null) {
 			return false;
 		}
@@ -148,7 +152,7 @@ public class DoubleTapScaleDetector {
 	}
 
 	private int calculateSqaredDistance(MotionEvent first,
-										   MotionEvent second) {
+	                                    MotionEvent second) {
 		int deltaXDown = (int) first.getX() - (int) second.getX();
 		int deltaYDown = (int) first.getY() - (int) second.getY();
 		return deltaXDown * deltaXDown + deltaYDown * deltaYDown;

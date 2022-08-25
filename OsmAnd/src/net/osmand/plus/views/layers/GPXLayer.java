@@ -4,7 +4,7 @@ import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -1316,7 +1316,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
-		int r = (int) (getScaledTouchRadius(app, getDefaultRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER);
+		int r = (int) (getScaledTouchRadius(app, tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER);
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		List<SelectedGpxFile> visibleGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
@@ -1336,7 +1336,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res, boolean showTrackPointMenu) {
-		int r = getScaledTouchRadius(app, getDefaultRadiusPoi(tb));
+		int r = getScaledTouchRadius(app, tb.getDefaultRadiusPoi());
 		int mx = (int) point.x;
 		int my = (int) point.y;
 		List<SelectedGpxFile> visibleGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
@@ -1492,9 +1492,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
 				String name = Algorithms.isEmpty(travelGpx.getDescription()) ? travelGpx.getTitle() : travelGpx.getDescription();
 				return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
-			} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
-				NetworkRouteSegment routeSegment = (NetworkRouteSegment) pair.first;
-				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, routeSegment.getRouteName());
+			} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
+				RouteKey routeKey = (RouteKey) pair.first;
+				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, routeKey.getRouteName());
 			}
 		}
 		return null;
@@ -1603,7 +1603,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				WptPt point = ((SelectedGpxPoint) pair.second).getSelectedPoint();
 				return new LatLon(point.lat, point.lon);
-			} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
+			} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
 				QuadRect rect = (QuadRect) pair.second;
 				return new LatLon(rect.centerY(), rect.centerX());
 			}
@@ -1654,9 +1654,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					TravelHelper travelHelper = app.getTravelHelper();
 					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getRouteId(), new LatLon(wptPt.lat, wptPt.lon));
 					return true;
-				} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
+				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
 					QuadRect rect = (QuadRect) pair.second;
-					NetworkRouteSegment routeSegment = (NetworkRouteSegment) pair.first;
+					RouteKey routeSegment = (RouteKey) pair.first;
 					LatLon latLon = getObjectLocation(object);
 					CallbackWithObject<GPXFile> callback = gpxFile -> {
 						networkRouteSelectionTask = null;
