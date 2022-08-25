@@ -14,7 +14,7 @@
     <string name="shared_string_2_5_d_view">2.5 D view</string>
     <string name="display_position">Display position</string>
     <string name="download_heightmap_maps">Heightmap</string>
-    <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)</string>
+    <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
     <string name="favorite_delete_group">Delete Group</string>
     <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
     <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
