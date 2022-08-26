@@ -97,7 +97,7 @@ public class AmenityUIHelper extends MenuBuilder {
     }
 
 	@Override
-    public void buildInternal(View view) {
+	public void buildInternal(View view) {
 		PoiCategory type = null;
 		String typeTag = getAdditionalInfo(GPXUtilities.PRIVATE_PREFIX + Amenity.TYPE);
 		if (!Algorithms.isEmpty(typeTag)) {

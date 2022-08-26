@@ -337,19 +337,6 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
 		}
 
-		//TODO: delete?
-		public Amenity getAmenity() {
-			Map<String, String> extensionsToRead = getExtensionsToRead();
-			if (!extensionsToRead.isEmpty()) {
-				Amenity amenity = Amenity.fromTagValue(extensionsToRead, PRIVATE_PREFIX, OSM_PREFIX);
-				if (amenity != null) {
-					amenity.setLocation(lat, lon);
-				}
-				return amenity;
-			}
-			return null;
-		}
-
 		public void setAmenity(Amenity amenity, MapPoiTypes poiTypes) {
 			if (amenity != null) {
 				Map<String, String> extensions = amenity.toTagValue(PRIVATE_PREFIX, OSM_PREFIX, COLLAPSABLE_PREFIX, poiTypes);
@@ -492,11 +479,7 @@ public class GPXUtilities {
 			return (lat != 0 && lon != 0);
 		}
 
-//		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
-//		                                        String name, String category, int color,
-//		                                        String iconName, String backgroundType,
-//												String originObject, String transportStopObjectName, Amenity amenity) {
-	public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
+		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
 										String name, String category, int color,
 										String iconName, String backgroundType,
 										String originObject, String transportStopObjectName, Map<String, String> extensions) {
@@ -516,9 +499,6 @@ public class GPXUtilities {
 			if (backgroundType != null) {
 				point.setBackgroundType(backgroundType);
 			}
-//			if (amenity != null) {
-//				point.setAmenity(amenity);
-//			}
 			if (extensions != null) {
 				point.getExtensionsToWrite().putAll(extensions);
 			}

@@ -1490,8 +1490,7 @@ public class MenuBuilder {
 	}
 
 	protected Object findAmenityObject(Map<String, String> gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
-		TransportStop transportStop = getUpdatedTransportStop(gpxExtensions, amenityOriginName, transportStopOriginName,
-				lat, lon);
+		TransportStop transportStop = getUpdatedTransportStop(gpxExtensions, amenityOriginName, transportStopOriginName, lat, lon);
 		if (transportStop != null) {
 			return transportStop;
 		} else {
@@ -1554,7 +1553,6 @@ public class MenuBuilder {
 					}
 				}
 			}
-
 		}
 		return stop;
 	}

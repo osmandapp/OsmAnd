@@ -58,7 +58,7 @@ public class Amenity extends MapObject {
 	public static final String TYPE = "type";
 	public static final String SUBTYPE = "subtype";
 	private static final String NAME = "name";
-	public static final String SEPARATOR = ";;";
+	public static final String SEPARATOR = ";";
 
 	private String subType;
 	private PoiCategory type;
@@ -507,73 +507,5 @@ public class Amenity extends MapObject {
 			}
 		}
 		return result;
-	}
-
-
-	//TODO: delete!
-	public static Amenity fromTagValue(Map<String, String> map, String privatePrefix, String osmPrefix){
-		if (!Algorithms.isEmpty(map)) {
-			PoiCategory type = null;
-			String subtype = null;
-			String openingHours = null;
-			HashMap additionalInfo = new HashMap<String, String>();
-
-			for (Entry<String, String> entry : map.entrySet()) {
-				if (entry.getKey().startsWith(privatePrefix)) {
-					String shortKey = entry.getKey().replace(privatePrefix, "");
-					if (shortKey.equals(TYPE)) {
-						type = MapPoiTypes.getDefault().getPoiCategoryByName(entry.getValue());
-						if (type == null) {
-							type = MapPoiTypes.getDefault().getOtherPoiCategory();
-						}
-					} else if (shortKey.equals(SUBTYPE)) {
-						subtype = entry.getValue();
-					} else if (shortKey.equals(OPENING_HOURS)) {
-						openingHours = entry.getValue();
-					}
-				} else if (entry.getKey().startsWith(osmPrefix)) {
-					String shortKey = entry.getKey().replace(osmPrefix, "");
-					additionalInfo.put(shortKey, entry.getValue());
-				} else {
-					List<String> reservedOsmandTags = GPXUtilities.EXTENSIONS_WITH_OSMAND_PREFIX;
-					if (!reservedOsmandTags.contains(entry.getKey())) {
-						additionalInfo.put(entry.getKey(), entry.getValue());
-					}
-				}
-			}
-			if (additionalInfo.size() > 0 || openingHours != null) {
-				Amenity amenity = new Amenity();
-				if (type != null) {
-					amenity.setType(type);
-				} else {
-					amenity.setType(type = MapPoiTypes.getDefault().getOtherPoiCategory());
-				}
-				if (subtype != null) {
-					amenity.subType = subtype;
-				}
-				if (openingHours != null) {
-					amenity.openingHours = openingHours;
-					additionalInfo.put(OPENING_HOURS, openingHours);
-				}
-				amenity.additionalInfo = additionalInfo;
-				return amenity;
-			}
-		}
-		return null;
-	}
-
-	//TODO: delete!
-	public void updateWithAmenity(Amenity newAmenity) {
-		if (newAmenity.type != null) {
-			this.type = newAmenity.type;
-		}
-		if (newAmenity.subType != null) {
-			this.subType = newAmenity.subType;
-		}
-		if (newAmenity.openingHours != null) {
-			this.openingHours = newAmenity.openingHours;
-		}
-
-		this.additionalInfo.putAll(newAmenity.additionalInfo);
 	}
 }
