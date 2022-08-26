@@ -108,7 +108,7 @@ public class WptPtMenuController extends MenuController {
 			}
 		}
 
-		TransportStop transportStop = builder.getUpdatedTransportStop(wpt.getAmenity(), wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), wpt.lat, wpt.lon);
+		TransportStop transportStop = builder.getUpdatedTransportStop(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), wpt.lat, wpt.lon);
 		if (transportStop != null) {
 			transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
 		}

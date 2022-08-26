@@ -1,8 +1,10 @@
 package net.osmand.data;
 
 import net.osmand.Location;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.GPXUtilities;
 
@@ -53,8 +55,10 @@ public class Amenity extends MapObject {
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
-	private static final String TYPE = "type";
-	private static final String SUBTYPE = "subtype";
+	public static final String TYPE = "type";
+	public static final String SUBTYPE = "subtype";
+	private static final String NAME = "name";
+	public static final String SEPARATOR = ";;";
 
 	private String subType;
 	private PoiCategory type;
@@ -93,7 +97,6 @@ public class Amenity extends MapObject {
 	}
 
 	public String getOpeningHours() {
-//		 getAdditionalInfo("opening_hours");
 		return openingHours;
 	}
 
@@ -431,8 +434,13 @@ public class Amenity extends MapObject {
 		return a;
 	}
 
-	public Map<String, String> toTagValue(String privatePrefix, String osmPrefix) {
+	public Map<String, String> toTagValue(String privatePrefix, String osmPrefix, String collapsablePrefix, MapPoiTypes poiTypes) {
 		Map<String, String> result = new HashMap<String, String>();
+		Map<String, List<PoiType>> collectedPoiAdditionalCategories = new HashMap<>();
+
+		if (getName() != null) {
+			result.put(privatePrefix + NAME, getName());
+		}
 		if (subType != null) {
 			result.put(privatePrefix + SUBTYPE, subType);
 		}
@@ -445,6 +453,34 @@ public class Amenity extends MapObject {
 		if (additionalInfo != null && additionalInfo.size() > 0) {
 			for (Entry<String, String> e : additionalInfo.entrySet()) {
 				String key = e.getKey();
+				String vl = e.getValue();
+
+				//collect tags with categories and skip
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+				if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
+					pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
+				}
+				PoiType pType = null;
+				if (pt != null) {
+					pType = (PoiType) pt;
+					if (pType.isFilterOnly()) {
+						continue;
+					}
+				}
+				if (pType != null && !pType.isText()) {
+					String categoryName = pType.getPoiAdditionalCategory();
+					if (!Algorithms.isEmpty(categoryName)) {
+						List<PoiType> poiAdditionalCategoryTypes = collectedPoiAdditionalCategories.get(categoryName);
+						if (poiAdditionalCategoryTypes == null) {
+							poiAdditionalCategoryTypes = new ArrayList<>();
+							collectedPoiAdditionalCategories.put(categoryName, poiAdditionalCategoryTypes);
+						}
+						poiAdditionalCategoryTypes.add(pType);
+						continue;
+					}
+				}
+
+				//save all other values to separate lines
 				if (key.endsWith(OPENING_HOURS)) {
 					continue;
 				}
@@ -453,10 +489,28 @@ public class Amenity extends MapObject {
 				}
 				result.put(key, e.getValue());
 			}
+
+			//join collected tags by category into one string
+			for (Map.Entry<String, List<PoiType>> e : collectedPoiAdditionalCategories.entrySet()) {
+				String categoryName = collapsablePrefix + e.getKey();
+				List<PoiType> categoryTypes = e.getValue();
+				if (categoryTypes.size() > 0) {
+					StringBuilder sb = new StringBuilder();
+					for (PoiType pt : categoryTypes) {
+						if (sb.length() > 0) {
+							sb.append(SEPARATOR);
+						}
+						sb.append(pt.getKeyName());
+					}
+					result.put(categoryName, sb.toString());
+				}
+			}
 		}
 		return result;
 	}
 
+
+	//TODO: delete!
 	public static Amenity fromTagValue(Map<String, String> map, String privatePrefix, String osmPrefix){
 		if (!Algorithms.isEmpty(map)) {
 			PoiCategory type = null;
@@ -508,6 +562,7 @@ public class Amenity extends MapObject {
 		return null;
 	}
 
+	//TODO: delete!
 	public void updateWithAmenity(Amenity newAmenity) {
 		if (newAmenity.type != null) {
 			this.type = newAmenity.type;
@@ -519,8 +574,6 @@ public class Amenity extends MapObject {
 			this.openingHours = newAmenity.openingHours;
 		}
 
-		for (Entry<String, String> entry : newAmenity.additionalInfo.entrySet()) {
-			this.additionalInfo.put(entry.getKey(), entry.getValue());
-		}
+		this.additionalInfo.putAll(newAmenity.additionalInfo);
 	}
 }

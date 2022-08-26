@@ -151,7 +151,9 @@ public class WptPtEditor extends PointEditor {
 		if (!Algorithms.isEmpty(transportStopOriginName)) {
 			wpt.setTransportStopOriginName(transportStopOriginName);
 		}
-		wpt.setAmenity(amenity);
+		if (amenity != null){
+			wpt.setAmenity(amenity, mapActivity.getMyApplication().getPoiTypes());
+		}
 
 		showEditorFragment();
 	}

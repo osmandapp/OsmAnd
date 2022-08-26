@@ -7,6 +7,7 @@ import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -52,24 +53,23 @@ public class GPXUtilities {
 
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 
-	private static final String ICON_NAME_EXTENSION = "icon";
-	private static final String BACKGROUND_TYPE_EXTENSION = "background";
-	private static final String COLOR_NAME_EXTENSION = "color";
-	private static final String PROFILE_TYPE_EXTENSION = "profile";
-	private static final String ADDRESS_EXTENSION = "address";
+	public static final String ICON_NAME_EXTENSION = "icon";
+	public static final String BACKGROUND_TYPE_EXTENSION = "background";
+	public static final String COLOR_NAME_EXTENSION = "color";
+	public static final String PROFILE_TYPE_EXTENSION = "profile";
+	public static final String ADDRESS_EXTENSION = "address";
 	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
 	public static final String TRANSPORT_STOP_ORIGIN_EXTENSION = "transport_stop_origin";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
 	public static final List<String> EXTENSIONS_WITH_OSMAND_PREFIX = Arrays.asList(COLOR_NAME_EXTENSION,
 			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,  PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
-			AMENITY_ORIGIN_EXTENSION, TRANSPORT_STOP_ORIGIN_EXTENSION, "trkpt_idx", "creation_date",
-			"route", "types", "speed", "show_arrows", "show_start_finish", "coloring_type",
-			"split_interval", "split_type", "width", "points_groups");
+			AMENITY_ORIGIN_EXTENSION, TRANSPORT_STOP_ORIGIN_EXTENSION);
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
 	public static final String PRIVATE_PREFIX = "amenity_";
 	public static final String OSM_PREFIX = "osm_tag_";
+	public static final String COLLAPSABLE_PREFIX = "collapsable_";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -337,6 +337,7 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
 		}
 
+		//TODO: delete?
 		public Amenity getAmenity() {
 			Map<String, String> extensionsToRead = getExtensionsToRead();
 			if (!extensionsToRead.isEmpty()) {
@@ -349,10 +350,10 @@ public class GPXUtilities {
 			return null;
 		}
 
-		public void setAmenity(Amenity amenity) {
+		public void setAmenity(Amenity amenity, MapPoiTypes poiTypes) {
 			if (amenity != null) {
-				Map<String, String> extensions = amenity.toTagValue(PRIVATE_PREFIX, OSM_PREFIX);
-				if (!extensions.isEmpty()) {
+				Map<String, String> extensions = amenity.toTagValue(PRIVATE_PREFIX, OSM_PREFIX, COLLAPSABLE_PREFIX, poiTypes);
+				if (extensions != null && !extensions.isEmpty()) {
 					getExtensionsToWrite().putAll(extensions);
 				}
 			}
@@ -491,10 +492,14 @@ public class GPXUtilities {
 			return (lat != 0 && lon != 0);
 		}
 
-		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
-		                                        String name, String category, int color,
-		                                        String iconName, String backgroundType,
-												String originObject, String transportStopObjectName, Amenity amenity) {
+//		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
+//		                                        String name, String category, int color,
+//		                                        String iconName, String backgroundType,
+//												String originObject, String transportStopObjectName, Amenity amenity) {
+	public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
+										String name, String category, int color,
+										String iconName, String backgroundType,
+										String originObject, String transportStopObjectName, Map<String, String> extensions) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			final WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
@@ -511,8 +516,11 @@ public class GPXUtilities {
 			if (backgroundType != null) {
 				point.setBackgroundType(backgroundType);
 			}
-			if (amenity != null) {
-				point.setAmenity(amenity);
+//			if (amenity != null) {
+//				point.setAmenity(amenity);
+//			}
+			if (extensions != null) {
+				point.getExtensionsToWrite().putAll(extensions);
 			}
 			if (originObject != null) {
 				point.setAmenityOriginName(originObject);

@@ -308,24 +308,12 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.comment = comment;
 	}
 
-	public Amenity getAmenity() {
-		if (!this.extensions.isEmpty()) {
-			Amenity amenity = Amenity.fromTagValue(this.extensions, GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX);
-			if (amenity != null) {
-				amenity.setLocation(getLatitude(), getLongitude());
-			}
-			return amenity;
-		}
-		return null;
+	public Map<String, String> getExtensions() {
+		return this.extensions;
 	}
 
-	public void setAmenity(Amenity amenity) {
-		if (amenity != null) {
-			Map<String, String> extensions = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX);
-			if (!extensions.isEmpty()) {
-				this.extensions.putAll(extensions);
-			}
-		}
+	public void setExtensions(Map<String, String> extensions) {
+		this.extensions = extensions;
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {

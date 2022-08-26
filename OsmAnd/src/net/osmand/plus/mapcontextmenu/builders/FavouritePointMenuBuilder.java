@@ -16,7 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
@@ -26,6 +25,7 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.Map;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
@@ -42,7 +42,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void acquireOriginObject() {
-		originObject = findAmenityObject(fav.getAmenity(), fav.getAmenityOriginName(),
+		originObject = findAmenityObject(fav.getExtensions(), fav.getAmenityOriginName(),
 				fav.getTransportStopOriginName(), fav.getLatitude(), fav.getLongitude());
 	}
 
@@ -75,11 +75,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 					app, fav.getComment(), rowc.getResources().getString(R.string.poi_dialog_comment)));
 		}
 		if (originObject != null) {
-			if (originObject instanceof Amenity) {
-				AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-				builder.setLatLon(getLatLon());
-				builder.setLight(light);
-				builder.buildInternal(view);
+			if (originObject instanceof Map) {
+				Map<String, String> additionalInfo = (Map<String, String>)originObject;
+				AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
+				helper.setLight(light);
+				helper.setLatLon(getLatLon());
+				helper.buildInternal(view);
 			} else if (originObject instanceof TransportStop) {
 				TransportStopMenuBuilder builder = new TransportStopMenuBuilder(mapActivity, (TransportStop)originObject);
 				builder.setLatLon(getLatLon());

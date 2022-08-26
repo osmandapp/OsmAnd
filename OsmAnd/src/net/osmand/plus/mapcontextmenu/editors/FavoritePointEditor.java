@@ -3,13 +3,17 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+
+import java.util.Map;
 
 public class FavoritePointEditor extends PointEditor {
 
@@ -54,12 +58,13 @@ public class FavoritePointEditor extends PointEditor {
 			lastCategory = "";
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, timestamp);
+		Map<String, String> extentions = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
+		favorite.setExtensions(extentions);
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setAmenityOriginName(amenityOriginName);
 		favorite.setTransportStopOriginName(transportStopOriginName);
 		favorite.setIconId(preselectedIconId);
-		favorite.setAmenity(amenity);
 
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}

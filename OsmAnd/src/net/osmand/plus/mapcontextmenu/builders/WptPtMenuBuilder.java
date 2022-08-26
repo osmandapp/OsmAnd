@@ -32,6 +32,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class WptPtMenuBuilder extends MenuBuilder {
 
@@ -46,7 +47,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	private void acquireOriginObject() {
-		originObject = findAmenityObject(wpt.getAmenity(), wpt.getAmenityOriginName(),
+		originObject = findAmenityObject(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(),
 				wpt.getTransportStopOriginName(), wpt.getLatitude(), wpt.getLongitude());
 	}
 
@@ -125,11 +126,12 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					app, wpt.comment, rowc.getResources().getString(R.string.poi_dialog_comment)));
 		}
 
-		if (originObject != null && originObject instanceof Amenity) {
-			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-			builder.setLatLon(getLatLon());
-			builder.setLight(light);
-			builder.buildInternal(view);
+		if (originObject instanceof Map) {
+			Map<String, String> additionalInfo = (Map<String, String>)originObject;
+			AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
+			helper.setLight(light);
+			helper.setLatLon(getLatLon());
+			helper.buildInternal(view);
 		} else if (originObject instanceof TransportStop) {
 			TransportStopMenuBuilder builder = new TransportStopMenuBuilder(mapActivity, (TransportStop)originObject);
 			builder.setLatLon(getLatLon());

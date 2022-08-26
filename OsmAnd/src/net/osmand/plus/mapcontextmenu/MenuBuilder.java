@@ -38,6 +38,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -292,12 +293,12 @@ public class MenuBuilder {
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
 		}
+		buildInternal(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
-		buildInternal(view);
 		buildPluginRows(view, object);
 
 		if (needBuildCoordinatesRow()) {
@@ -1488,20 +1489,26 @@ public class MenuBuilder {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
-	protected Object findAmenityObject(Amenity gpxAmenity, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
-		TransportStop transportStop = getUpdatedTransportStop(gpxAmenity, amenityOriginName, transportStopOriginName,
+	protected Object findAmenityObject(Map<String, String> gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
+		TransportStop transportStop = getUpdatedTransportStop(gpxExtensions, amenityOriginName, transportStopOriginName,
 				lat, lon);
 		if (transportStop != null) {
 			return transportStop;
 		} else {
 			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
-			if (gpxAmenity != null && mapAmenity != null) {
-				gpxAmenity.updateWithAmenity((Amenity) mapAmenity);
-				return gpxAmenity;
-			} else if (gpxAmenity != null) {
-				return gpxAmenity;
+			Map<String, String> mapExtensions = null;
+			if (mapAmenity != null) {
+				mapExtensions = mapAmenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
+			}
+
+			if (!Algorithms.isEmpty(gpxExtensions) && !Algorithms.isEmpty(mapExtensions)) {
+				// Join data from gpx file and from map object. Priority to map object
+				gpxExtensions.putAll(mapExtensions);
+				return gpxExtensions;
+			} else if (gpxExtensions != null) {
+				return gpxExtensions;
 			} else {
-				return mapAmenity;
+				return mapExtensions;
 			}
 		}
 	}
@@ -1530,14 +1537,24 @@ public class MenuBuilder {
 		return null;
 	}
 
-	public TransportStop getUpdatedTransportStop(Amenity gpxAmenity, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
+	public TransportStop getUpdatedTransportStop(Map<String, String>  gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
 		TransportStop stop = null;
 		if (!Algorithms.isEmpty(transportStopOriginName)) {
 			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
-			if (gpxAmenity != null && mapAmenity != null) {
-				gpxAmenity.updateWithAmenity(mapAmenity);
+			if (mapAmenity != null) {
+				stop = TransportStopController.findBestTransportStopForAmenity(mapActivity.getMyApplication(), mapAmenity);
+
+				// Join data from gpx file and from map object. Priority to map object
+				if (stop != null && !Algorithms.isEmpty(gpxExtensions) ) {
+					Amenity updatingAmenity = stop.getAmenity();
+					for (Map.Entry e : gpxExtensions.entrySet()) {
+						if (!updatingAmenity.getAdditionalInfoKeys().contains(e.getKey())) {
+							updatingAmenity.setAdditionalInfo((String) e.getKey(), (String) e.getValue());
+						}
+					}
+				}
 			}
-			stop = TransportStopController.findBestTransportStopForAmenity(mapActivity.getMyApplication(), gpxAmenity);
+
 		}
 		return stop;
 	}
