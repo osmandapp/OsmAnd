@@ -4,15 +4,20 @@ import androidx.annotation.NonNull;
 
 public class ProgressHelper {
 
-	private final static int INDETERMINATE = -1;
+	private static final int UPDATE_TIME_INTERVAL_MS = 500;
+	private static final int UPDATE_SIZE_INTERVAL_KB = 300;
+
+	private static final int INDETERMINATE = -1;
+
 	private final OnUpdateProgress progressUiAdapter;
 
 	private int totalWork = INDETERMINATE;
 	private int progress;
 	private int deltaProgress;
-	private int sizeInterval = INDETERMINATE;
-	private int timeInterval = INDETERMINATE;
-	private long lastUpdateTime = INDETERMINATE;
+	private int lastAddedDeltaProgress;
+	private int sizeInterval = UPDATE_SIZE_INTERVAL_KB;
+	private long lastUpdateTime;
+	private boolean notifyOnUpdate = false;
 
 	public ProgressHelper(@NonNull OnUpdateProgress progressUiAdapter) {
 		this.progressUiAdapter = progressUiAdapter;
@@ -28,10 +33,6 @@ public class ProgressHelper {
 
 	public void setSizeInterval(int minSizeToUpdate) {
 		this.sizeInterval = minSizeToUpdate;
-	}
-
-	public void setTimeInterval(int minTimeToUpdate) {
-		this.timeInterval = minTimeToUpdate;
 	}
 
 	public void onStartWork(int total) {
@@ -50,21 +51,22 @@ public class ProgressHelper {
 			deltaProgress += deltaWork;
 			if (deltaProgress >= sizeInterval || isDownloadComplete()) {
 				progress += deltaProgress;
-				if (shouldUpdateUI()) {
-					lastUpdateTime = System.currentTimeMillis();
-					progressUiAdapter.updateProgress();
-				}
+				lastAddedDeltaProgress += deltaProgress;
 				deltaProgress = 0;
+				notifyOnUpdate = true;
+			}
+			if (notifyOnUpdate && isTimeToUpdate()) {
+				notifyOnUpdate = false;
+				lastUpdateTime = System.currentTimeMillis();
+				progressUiAdapter.onProgressUpdated();
+				lastAddedDeltaProgress = 0;
 			}
 		}
 	}
 
-	public boolean shouldUpdateUI() {
-		if (timeInterval != INDETERMINATE) {
-			long now = System.currentTimeMillis();
-			return (now - lastUpdateTime) > timeInterval;
-		}
-		return true;
+	public boolean isTimeToUpdate() {
+		long now = System.currentTimeMillis();
+		return (now - lastUpdateTime) > UPDATE_TIME_INTERVAL_MS;
 	}
 
 	public void onFinishTask() {
@@ -72,8 +74,8 @@ public class ProgressHelper {
 		progress = 0;
 	}
 
-	public int getLastKnownDeltaProgress() {
-		return deltaProgress;
+	public int getLastAddedDeltaProgress() {
+		return lastAddedDeltaProgress;
 	}
 
 	public int getLastKnownProgress() {
@@ -111,7 +113,7 @@ public class ProgressHelper {
 	}
 
 	public interface OnUpdateProgress {
-		void updateProgress();
+		void onProgressUpdated();
 	}
 
 }

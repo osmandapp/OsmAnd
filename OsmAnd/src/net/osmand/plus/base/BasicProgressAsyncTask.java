@@ -11,9 +11,6 @@ import net.osmand.plus.R;
 
 public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> extends AsyncTask<Params, Progress, Result> implements IProgress {
 
-	public static final int UPDATE_TIME_INTERVAL_MS = 500;
-	public static final int UPDATE_SIZE_INTERVAL_KB = 300;
-
 	protected String taskName;
 	protected String message = ""; //$NON-NLS-1$
 	protected OsmandApplication ctx;
@@ -25,8 +22,6 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	public BasicProgressAsyncTask(OsmandApplication app) {
 		this.ctx = app;
 		progress = new ProgressHelper(() -> updProgress(true));
-		progress.setSizeInterval(UPDATE_SIZE_INTERVAL_KB);
-		progress.setTimeInterval(UPDATE_TIME_INTERVAL_MS);
 	}
 
 	public String getDescription() {

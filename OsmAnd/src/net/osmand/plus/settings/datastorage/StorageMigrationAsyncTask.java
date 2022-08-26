@@ -199,7 +199,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {
 				progress = new ProgressHelper(() -> {
-					generalProgress += progress.getLastKnownDeltaProgress();
+					generalProgress += progress.getLastAddedDeltaProgress();
 					publishProgress(generalProgress);
 				});
 				progress.onStartWork((int) size);

@@ -223,7 +223,7 @@ public class NetworkWriter extends AbstractWriter {
 				progress = new ProgressHelper(() -> {
 					if (listener != null) {
 						int p = progress.getLastKnownProgress();
-						int dp = progress.getLastKnownDeltaProgress();
+						int dp = progress.getLastAddedDeltaProgress();
 						listener.onItemUploadProgress(item, itemFileName, p, dp);
 					}
 				});

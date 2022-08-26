@@ -482,7 +482,7 @@ public class BackupHelper {
 						progress = new ProgressHelper(() -> {
 							if (listener != null) {
 								int p = progress.getLastKnownProgress();
-								int dp = progress.getLastKnownDeltaProgress();
+								int dp = progress.getLastAddedDeltaProgress();
 								listener.onFileUploadProgress(type, fileName, p, dp);
 							}
 						});
@@ -662,7 +662,7 @@ public class BackupHelper {
 					progress = new ProgressHelper(() -> {
 						if (listener != null) {
 							int p = progress.getLastKnownProgress();
-							int dp = progress.getLastKnownDeltaProgress();
+							int dp = progress.getLastAddedDeltaProgress();
 							listener.onFileDownloadProgress(type, fileName, p, dp);
 						}
 					});
