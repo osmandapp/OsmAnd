@@ -1657,7 +1657,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							wptPt.lat = latLon.getLatitude();
 							wptPt.lon = latLon.getLongitude();
 							String name = getObjectName(object).getName();
-							String fileName = name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT;
+							String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
 							File file = new File(FileUtils.getTempDir(app), fileName);
 							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeSegment);
 						}
