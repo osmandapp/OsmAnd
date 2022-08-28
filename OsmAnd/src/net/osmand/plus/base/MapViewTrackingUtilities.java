@@ -206,6 +206,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateLocation(Location location) {
+		long movingTime = myLocation != null && location != null ? location.getTime() - myLocation.getTime() : 0;
 		myLocation = location;
 		showViewAngle = false;
 		if (location != null) {
@@ -253,7 +254,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						settings.TURN_SCREEN_ON_TIME_INT.get() == 0) {
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoom,
-							pendingRotation, rotation, false);
+							pendingRotation, rotation, movingTime, false);
 				} else {
 					if (zoom != null && zoom.first != null && zoom.second != null) {
 						mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
