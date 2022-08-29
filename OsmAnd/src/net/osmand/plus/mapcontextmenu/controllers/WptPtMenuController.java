@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
@@ -108,7 +107,7 @@ public class WptPtMenuController extends MenuController {
 			}
 		}
 
-		TransportStop transportStop = builder.getUpdatedTransportStop(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), wpt.lat, wpt.lon);
+		TransportStop transportStop = builder.findUpdatedTransportStop(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), wpt.lat, wpt.lon);
 		if (transportStop != null) {
 			transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
 		}

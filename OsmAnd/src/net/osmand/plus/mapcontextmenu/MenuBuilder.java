@@ -56,7 +56,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
@@ -1492,25 +1491,28 @@ public class MenuBuilder {
 	}
 
 	protected Object findAmenityObject(Map<String, String> gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
-		TransportStop transportStop = getUpdatedTransportStop(gpxExtensions, amenityOriginName, transportStopOriginName, lat, lon);
-		if (transportStop != null) {
-			return transportStop;
+		if (Algorithms.isEmpty(transportStopOriginName)) {
+			return findUpdatedAmenityExtensions(gpxExtensions, amenityOriginName, lat, lon);
 		} else {
-			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
-			Map<String, String> mapExtensions = null;
-			if (mapAmenity != null) {
-				mapExtensions = mapAmenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
-			}
+			return findUpdatedTransportStop(gpxExtensions, amenityOriginName, transportStopOriginName, lat, lon);
+		}
+	}
 
-			if (!Algorithms.isEmpty(gpxExtensions) && !Algorithms.isEmpty(mapExtensions)) {
-				// Join data from gpx file and from map object. Priority to map object
-				gpxExtensions.putAll(mapExtensions);
-				return gpxExtensions;
-			} else if (gpxExtensions != null) {
-				return gpxExtensions;
-			} else {
-				return mapExtensions;
-			}
+	private Map<String, String> findUpdatedAmenityExtensions(Map<String, String>  gpxExtensions, String amenityOriginName, double lat, double lon) {
+		Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
+		Map<String, String> mapExtensions = null;
+		if (mapAmenity != null) {
+			mapExtensions = mapAmenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
+		}
+
+		if (!Algorithms.isEmpty(gpxExtensions) && !Algorithms.isEmpty(mapExtensions)) {
+			// Join data from gpx file and from map object. Priority to map object
+			gpxExtensions.putAll(mapExtensions);
+			return gpxExtensions;
+		} else if (gpxExtensions != null) {
+			return gpxExtensions;
+		} else {
+			return mapExtensions;
 		}
 	}
 
@@ -1538,7 +1540,7 @@ public class MenuBuilder {
 		return null;
 	}
 
-	public TransportStop getUpdatedTransportStop(Map<String, String>  gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
+	public TransportStop findUpdatedTransportStop(Map<String, String>  gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
 		TransportStop stop = null;
 		if (!Algorithms.isEmpty(transportStopOriginName)) {
 			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);

@@ -61,7 +61,7 @@ public class FavouritePointMenuController extends MenuController {
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
 
-		TransportStop transportStop = builder.getUpdatedTransportStop(fav.getExtensions(), fav.getAmenityOriginName(),
+		TransportStop transportStop = builder.findUpdatedTransportStop(fav.getExtensions(), fav.getAmenityOriginName(),
 				fav.getTransportStopOriginName(), fav.getLatitude(), fav.getLongitude());
 		if (transportStop != null) {
 			transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
