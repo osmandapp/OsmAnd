@@ -249,6 +249,19 @@ public class Algorithms {
 		return name;
 	}
 
+	public static String convertToPermittedFileName(String name) {
+		name = name.replace ("\"", "~");
+		name = name.replace ("*", "~");
+		name = name.replace ("/", "~");
+		name = name.replace (":", "~");
+		name = name.replace ("<", "~");
+		name = name.replace (">", "~");
+		name = name.replace ("?", "~");
+		name = name.replace ("\\", "~");
+		name = name.replace ("|", "~");
+		return name;
+	}
+
 	public static List<File> collectDirs(File parentDir, List<File> dirs) {
 		return collectDirs(parentDir, dirs, null);
 	}

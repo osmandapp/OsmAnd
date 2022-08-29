@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import android.graphics.PointF;
 import android.os.SystemClock;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.BaseInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
@@ -126,7 +127,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startMoving(double finalLat, double finalLon, Pair<Integer, Double> finalZoom,
-	                        boolean pendingRotation, Float finalRotation, boolean notifyListener) {
+	                        boolean pendingRotation, Float finalRotation, long movingTime, boolean notifyListener) {
 		stopAnimatingSync();
 
 		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -166,6 +167,7 @@ public class AnimateDraggingMapThread {
 			return;
 		}
 
+		float animationDuration = Math.max(movingTime, NAV_ANIMATION_TIME);
 		startThreadAnimating(() -> {
 			isAnimatingMapMove = true;
 			setTargetValues(zoom, zoomFP, finalLat, finalLon);
@@ -186,9 +188,9 @@ public class AnimateDraggingMapThread {
 				PointI start31 = mapRenderer.getState().getTarget31();
 				PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, rb, finalLat, finalLon, false);
 				animatingMoveInThread(start31.getX(), start31.getY(), finish31.getX(), finish31.getY(),
-						NAV_ANIMATION_TIME, notifyListener, null);
+						animationDuration, notifyListener, null);
 			} else {
-				animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener, null);
+				animatingMoveInThread(mMoveX, mMoveY, animationDuration, notifyListener, null);
 			}
 			isAnimatingMapMove = false;
 		});
@@ -352,7 +354,7 @@ public class AnimateDraggingMapThread {
 
 	private void animatingMoveInThread(int startX31, int startY31, int finalX31, int finalY31,
 	                                   float animationTime, boolean notify, Runnable finishAnimationCallback) {
-		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
+		BaseInterpolator interpolator = new LinearInterpolator();
 
 		int moveX = finalX31 - startX31;
 		int moveY = finalY31 - startY31;
