@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -82,10 +83,13 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 				helper.setLatLon(getLatLon());
 				helper.buildInternal(view);
 			} else if (originObject instanceof TransportStop) {
-				TransportStopMenuBuilder builder = new TransportStopMenuBuilder(mapActivity, (TransportStop)originObject);
-				builder.setLatLon(getLatLon());
-				builder.setLight(light);
-				builder.buildInternal(view);
+				Amenity amenity = ((TransportStop) originObject).getAmenity();
+				Map<String, String> additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX,
+						GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
+				AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
+				helper.setLight(light);
+				helper.setLatLon(getLatLon());
+				helper.buildInternal(view);
 			}
 		}
 	}

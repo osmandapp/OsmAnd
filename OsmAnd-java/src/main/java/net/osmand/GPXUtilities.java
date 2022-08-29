@@ -2462,7 +2462,7 @@ public class GPXUtilities {
 		writeNotNullText(serializer, "desc", p.desc);
 		writeNotNullTextWithAttribute(serializer, "link", "href", p.link);
 		writeNotNullText(serializer, "type", p.category);
-		if (p.comment != null) {
+		if (!Algorithms.isEmpty(p.comment)) {
 			writeNotNullText(serializer, "cmt", p.comment);
 		}
 		if (!Double.isNaN(p.hdop)) {

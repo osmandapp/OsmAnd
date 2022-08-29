@@ -99,6 +99,10 @@ public class AmenityUIHelper extends MenuBuilder {
 		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
     }
 
+	public void setPreferredLang(String lang) {
+		this.preferredLang = lang;
+	}
+
 	@Override
 	public void buildInternal(View view) {
 		PoiCategory type = null;

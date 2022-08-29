@@ -133,10 +133,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			helper.setLatLon(getLatLon());
 			helper.buildInternal(view);
 		} else if (originObject instanceof TransportStop) {
-			TransportStopMenuBuilder builder = new TransportStopMenuBuilder(mapActivity, (TransportStop)originObject);
-			builder.setLatLon(getLatLon());
-			builder.setLight(light);
-			builder.buildInternal(view);
+			Amenity amenity = ((TransportStop) originObject).getAmenity();
+			Map<String, String> additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX,
+					GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
+			AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
+			helper.setLight(light);
+			helper.setLatLon(getLatLon());
+			helper.buildInternal(view);
 		}
 
 		buildPlainMenuItems(view);
