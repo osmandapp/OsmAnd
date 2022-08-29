@@ -1547,8 +1547,13 @@ public class MenuBuilder {
 				if (stop != null && !Algorithms.isEmpty(gpxExtensions) ) {
 					Amenity updatingAmenity = stop.getAmenity();
 					for (Map.Entry e : gpxExtensions.entrySet()) {
-						if (!updatingAmenity.getAdditionalInfoKeys().contains(e.getKey())) {
-							updatingAmenity.setAdditionalInfo((String) e.getKey(), (String) e.getValue());
+						String key = e.getKey().toString();
+						if (key.startsWith(GPXUtilities.PRIVATE_PREFIX)) {
+							continue;
+						}
+						key = key.replace(GPXUtilities.OSM_PREFIX, "");
+						if (!updatingAmenity.getAdditionalInfoKeys().contains(key)) {
+							updatingAmenity.setAdditionalInfo(key, (String) e.getValue());
 						}
 					}
 				}
