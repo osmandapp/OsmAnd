@@ -86,8 +86,11 @@ public class AmenityUIHelper extends MenuBuilder {
 	private String preferredLang;
 	private Amenity wikiAmenity = null;
 	public static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(GPXUtilities.COLOR_NAME_EXTENSION,
-			GPXUtilities.ICON_NAME_EXTENSION, GPXUtilities.BACKGROUND_TYPE_EXTENSION,  GPXUtilities.PROFILE_TYPE_EXTENSION, GPXUtilities.ADDRESS_EXTENSION,
-			GPXUtilities.AMENITY_ORIGIN_EXTENSION, GPXUtilities.TRANSPORT_STOP_ORIGIN_EXTENSION);
+			GPXUtilities.ICON_NAME_EXTENSION, GPXUtilities.BACKGROUND_TYPE_EXTENSION,
+			GPXUtilities.PROFILE_TYPE_EXTENSION, GPXUtilities.ADDRESS_EXTENSION,
+			GPXUtilities.AMENITY_ORIGIN_EXTENSION, GPXUtilities.TRANSPORT_STOP_ORIGIN_EXTENSION,
+			GPXUtilities.PRIVATE_PREFIX + Amenity.NAME, GPXUtilities.PRIVATE_PREFIX + Amenity.TYPE,
+			GPXUtilities.PRIVATE_PREFIX + Amenity.SUBTYPE);
 
     public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang, Map<String, String> additionalInfo) {
         super(mapActivity);

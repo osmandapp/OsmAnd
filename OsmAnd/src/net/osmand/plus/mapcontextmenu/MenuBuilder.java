@@ -56,6 +56,8 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
+import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -1548,7 +1550,7 @@ public class MenuBuilder {
 					Amenity updatingAmenity = stop.getAmenity();
 					for (Map.Entry e : gpxExtensions.entrySet()) {
 						String key = e.getKey().toString();
-						if (key.startsWith(GPXUtilities.PRIVATE_PREFIX)) {
+						if (AmenityUIHelper.HIDDEN_EXTENSIONS.contains(key)) {
 							continue;
 						}
 						key = key.replace(GPXUtilities.OSM_PREFIX, "");

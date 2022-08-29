@@ -57,7 +57,7 @@ public class Amenity extends MapObject {
 	public static final String GPX_ICON = "gpx_icon";
 	public static final String TYPE = "type";
 	public static final String SUBTYPE = "subtype";
-	private static final String NAME = "name";
+	public static final String NAME = "name";
 	public static final String SEPARATOR = ";";
 
 	private String subType;
