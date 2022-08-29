@@ -27,7 +27,7 @@
 				android:adjustViewBounds="true"
 				tools:src="@drawable/img_distance_by_tap_night" />
 
-			<TextView
+			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
 				android:text="@string/how_to_use"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold" />
+				app:typeface="@string/font_roboto_medium" />
 
 			<TextView
 				android:id="@+id/description"
@@ -64,5 +64,7 @@
 				android:orientation="vertical" />
 
 		</LinearLayout>
+
 	</ScrollView>
+
 </LinearLayout>

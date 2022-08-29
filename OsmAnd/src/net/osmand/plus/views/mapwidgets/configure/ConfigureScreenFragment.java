@@ -88,7 +88,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
-	private StateChangedListener<Boolean> distanceByTapUpdateListener;
+	private StateChangedListener<Boolean> distanceByTapListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,8 +99,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, selectedAppMode);
-
-		addTextSizeListener();
 	}
 
 	@Nullable
@@ -140,6 +138,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onResume() {
 		super.onResume();
 		setupWidgetsCard();
+		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
 	}
 
 	@Override
@@ -155,7 +160,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
 		widgetRegistry.removeWidgetsRegistryListener(this);
-		app.getSettings().SHOW_DISTANCE_RULER.removeListener(distanceByTapUpdateListener);
 		mapActivity.enableDrawer();
 	}
 
@@ -476,7 +480,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 		TextView stateContainer = view.findViewById(R.id.items_count_descr);
 		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
-		stateContainer.setText(enabled ? getString(R.string.shared_string_on) : getString(R.string.shared_string_off));
+		stateContainer.setText(enabled ? R.string.shared_string_on: R.string.shared_string_off);
 
 		AndroidUiHelper.updateVisibility(stateContainer, true);
 
@@ -569,15 +573,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		}
 	}
 
-	private void addTextSizeListener() {
-		distanceByTapUpdateListener = change -> {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					setupButtonsCard();
-				}
-			});
-		};
-		app.getSettings().SHOW_DISTANCE_RULER.addListener(distanceByTapUpdateListener);
+	@NonNull
+	private StateChangedListener<Boolean> getDistanceByTapListener() {
+		if (distanceByTapListener == null) {
+			distanceByTapListener = change -> app.runInUIThread(() -> setupButtonsCard());
+		}
+		return distanceByTapListener;
 	}
 }
