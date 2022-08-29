@@ -76,21 +76,18 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 					app, fav.getComment(), rowc.getResources().getString(R.string.poi_dialog_comment)));
 		}
 		if (originObject != null) {
+			Map<String, String> additionalInfo = null;
 			if (originObject instanceof Map) {
-				Map<String, String> additionalInfo = (Map<String, String>)originObject;
-				AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
-				helper.setLight(light);
-				helper.setLatLon(getLatLon());
-				helper.buildInternal(view);
+				additionalInfo = (Map<String, String>)originObject;
 			} else if (originObject instanceof TransportStop) {
 				Amenity amenity = ((TransportStop) originObject).getAmenity();
-				Map<String, String> additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX,
+				additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX,
 						GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
-				AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
-				helper.setLight(light);
-				helper.setLatLon(getLatLon());
-				helper.buildInternal(view);
 			}
+			AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
+			helper.setLight(light);
+			helper.setLatLon(getLatLon());
+			helper.buildInternal(view);
 		}
 	}
 
