@@ -17,6 +17,7 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
@@ -67,6 +68,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private Handler handler;
 
+	private StateChangedListener<DistanceByTapTextSize> textSizeListener;
+
 	public DistanceRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
@@ -98,6 +101,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			}
 		};
 
+		addTextSizeListener();
+		updateTextSize();
 	}
 
 	@Override
@@ -209,16 +214,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private void drawTextOnCenterOfPath(Canvas canvas, float x1, float x2, Path path, String text) {
 		PathMeasure pm = new PathMeasure(path, false);
 
-		float lineTextSize;
-		DistanceByTapTextSize textSizeSetting = getApplication().getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get();
-		if (textSizeSetting.isLarge()) {
-			lineTextSize = app.getResources().getDimension(getApplication().getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get().getDimenId());
-		} else {
-			lineTextSize = DISTANCE_TEXT_SIZE * app.getResources().getDisplayMetrics().density;
-		}
-		lineFontAttrs.paint.setTextSize(lineTextSize);
-		lineFontAttrs.paint2.setTextSize(lineTextSize);
-
 		Rect bounds = new Rect();
 		lineFontAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 		float hOffset = pm.getLength() / 2 - bounds.width() / 2f;
@@ -279,5 +274,18 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	private void addTextSizeListener() {
+		textSizeListener = change -> updateTextSize();
+		app.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.addListener(textSizeListener);
+	}
+
+	private void updateTextSize() {
+		float lineTextSize;
+		lineTextSize = app.getResources().getDimension(app.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get().getDimenId());
+
+		lineFontAttrs.paint.setTextSize(lineTextSize);
+		lineFontAttrs.paint2.setTextSize(lineTextSize);
 	}
 }

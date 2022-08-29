@@ -28,39 +28,37 @@
 				tools:src="@drawable/img_distance_by_tap_night" />
 
 			<TextView
-				android:id="@+id/titleHint"
+				android:id="@+id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginVertical="@dimen/content_padding_small"
 				android:letterSpacing="0.02"
 				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
-				android:textColor="?android:textColorSecondary"
+				android:text="@string/how_to_use"
+				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold"
-				tools:text="How to use" />
+				android:textStyle="bold" />
 
 			<TextView
-				android:id="@+id/descriptionHint"
+				android:id="@+id/description"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:letterSpacing="0.02"
 				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:text="@string/distance_by_tap_use_description"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size"
-				tools:text="@string/distance_by_tap_use_description" />
+				android:textSize="@dimen/default_desc_text_size" />
 
 			<View
-				android:id="@+id/long_divider2"
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
 				android:layout_marginTop="@dimen/content_padding"
-				android:background="?attr/divider_color_basic"
-				android:visibility="visible" />
+				android:background="?attr/divider_color_basic" />
 
 			<LinearLayout
-				android:id="@+id/linear_layout"
+				android:id="@+id/items_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="vertical" />

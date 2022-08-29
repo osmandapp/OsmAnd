@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -52,7 +53,6 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
-import net.osmand.plus.views.mapwidgets.configure.DistanceByTapFragment.DistanceByTapUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -63,7 +63,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, DistanceByTapUpdateListener {
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -88,6 +88,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
+	private StateChangedListener<Boolean> distanceByTapUpdateListener;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -97,6 +99,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, selectedAppMode);
+
+		addTextSizeListener();
 	}
 
 	@Nullable
@@ -143,7 +147,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStart();
 		app.getQuickActionRegistry().addUpdatesListener(this);
 		widgetRegistry.addWidgetsRegistryListener(this);
-		DistanceByTapFragment.registerListener(this);
 		mapActivity.disableDrawer();
 	}
 
@@ -152,7 +155,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onStop();
 		app.getQuickActionRegistry().removeUpdatesListener(this);
 		widgetRegistry.removeWidgetsRegistryListener(this);
-		DistanceByTapFragment.unRegisterListener(this);
+		app.getSettings().SHOW_DISTANCE_RULER.removeListener(distanceByTapUpdateListener);
 		mapActivity.enableDrawer();
 	}
 
@@ -465,17 +468,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	                                   boolean enabled,
 	                                   boolean showShortDivider,
 	                                   OnClickListener listener) {
-		int activeColor = selectedAppMode.getProfileColor(nightMode);
-		int inActiveColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int iconColor = enabled ? activeColor : inActiveColor;
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
-
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
-		ImageView ivIcon = view.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(icon);
-
-		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(title);
+		View view = createButtonWithDesc(iconId, title, null, enabled, listener);
 
 		if (showShortDivider) {
 			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
@@ -576,8 +569,15 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		}
 	}
 
-	@Override
-	public void onDistanceByTapUpdated() {
-		setupButtonsCard();
+	private void addTextSizeListener() {
+		distanceByTapUpdateListener = change -> {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					setupButtonsCard();
+				}
+			});
+		};
+		app.getSettings().SHOW_DISTANCE_RULER.addListener(distanceByTapUpdateListener);
 	}
 }

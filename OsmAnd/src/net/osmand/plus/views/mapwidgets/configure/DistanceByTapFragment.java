@@ -5,7 +5,6 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -43,12 +42,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 
-import java.util.ArrayList;
-
 public class DistanceByTapFragment extends BaseOsmAndFragment {
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
-
-	private static ArrayList<DistanceByTapUpdateListener> listeners = new ArrayList<>();
 
 	private Toolbar toolbar;
 	private View toolbarSwitchContainer;
@@ -78,11 +73,9 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		tvSubTitle.setVisibility(View.GONE);
 		tvTitle.setText(getString(R.string.map_widget_distance_by_tap));
 
-		ApplicationMode appMode = requireMyApplication().getSettings().getApplicationMode();
-
 		updateToolbarNavigationIcon();
 		updateToolbarActionButton();
-		updateToolbarSwitch(settings.SHOW_DISTANCE_RULER.getModeValue(appMode));
+		updateToolbarSwitch(settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode));
 	}
 
 	private void updateToolbarNavigationIcon() {
@@ -105,16 +98,14 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 				Activity activity = getActivity();
 				if (activity != null) {
 					String docsUrl = getString(R.string.docs_widget_distance_by_tap);
-					AndroidUtils.openUrl(activity, Uri.parse(docsUrl), nightMode);
+					AndroidUtils.openUrl(activity, docsUrl, nightMode);
 				}
 			}
 		});
 	}
 
 	private void updateToolbarSwitch(boolean isChecked) {
-		OsmandApplication app = requireMyApplication();
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		int color = isChecked ? appMode.getProfileColor(nightMode) : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		int color = isChecked ? selectedAppMode.getProfileColor(nightMode) : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		AndroidUtils.setBackground(toolbarSwitchContainer, new ColorDrawable(color));
 
 		SwitchCompat switchView = toolbarSwitchContainer.findViewById(R.id.switchWidget);
@@ -125,13 +116,12 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View view) {
 				MapActivity mapActivity = (MapActivity) requireMyActivity();
-				settings.SHOW_DISTANCE_RULER.setModeValue(appMode, !isChecked);
+				settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !isChecked);
 				mapActivity.updateApplicationModeSettings();
 
 				boolean visible = !isChecked;
 				updateToolbarSwitch(visible);
 				setupConfigButtons();
-				updateListeners();
 			}
 		});
 
@@ -152,18 +142,10 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		navigationIcon = toolbar.findViewById(R.id.close_button);
 		toolbarSwitchContainer = toolbar.findViewById(R.id.toolbar_switch_container);
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		buttonsCard = view.findViewById(R.id.linear_layout);
+		buttonsCard = view.findViewById(R.id.items_container);
 
 		AppCompatImageView imageView = view.findViewById(R.id.descriptionImage);
 		imageView.setImageResource(nightMode ? R.drawable.img_distance_by_tap_night : R.drawable.img_distance_by_tap_day);
-
-		TextView hintTitle = view.findViewById(R.id.titleHint);
-		hintTitle.setText(R.string.how_to_use);
-		int textColor = ColorUtilities.getPrimaryTextColorId(nightMode);
-		hintTitle.setTextColor(getResources().getColor(textColor, app.getTheme()));
-
-		TextView hintDescription = view.findViewById(R.id.descriptionHint);
-		hintDescription.setText(R.string.distance_by_tap_use_description);
 
 		setUpToolbar();
 		setupConfigButtons();
@@ -172,29 +154,28 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	}
 
 	protected void showTextSizeDialog(MapActivity activity, int themeRes, boolean nightMode) {
-		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
+		int selectedProfileColor = app.getSettings().APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		OsmandMapTileView view = activity.getMapView();
+		OsmandMapTileView mapView = activity.getMapView();
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		builder.setTitle(R.string.text_size);
 
 		String[] items = new String[DistanceByTapTextSize.values().length];
-		for (int index = 0; index < items.length; index++) {
-			items[index] = DistanceByTapTextSize.values()[index].toHumanString(app);
+		if (app != null) {
+			for (int index = 0; index < items.length; index++) {
+				items[index] = DistanceByTapTextSize.values()[index].toHumanString(app);
+			}
 		}
-		int selected = view.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get().ordinal();
+		int selected = mapView.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get().ordinal();
 
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
 					int which = (int) v.getTag();
-					view.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
+					mapView.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
 					setupConfigButtons();
-					if (view.getMapRenderer() == null) {
+					if (mapView.getMapRenderer() == null) {
 						activity.refreshMapComplete();
 					}
-					updateListeners();
 				}
 		);
 
@@ -216,19 +197,18 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		OsmandMapTileView mapView = activity.getMapView();
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
 
-		int iconColor = enabled
-				? ColorUtilities.getDefaultIconColorId(nightMode)
-				: ColorUtilities.getSecondaryIconColorId(nightMode);
-		Drawable icon = getPaintedContentIcon(iconId, getResources().getColor(iconColor, app.getTheme()));
+
+		Drawable icon = getPaintedContentIcon(iconId, enabled
+				? ColorUtilities.getDefaultIconColor(app, nightMode)
+				: ColorUtilities.getSecondaryIconColor(app, nightMode));
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 
-		int textColor = enabled
-				? ColorUtilities.getPrimaryTextColorId(nightMode)
-				: ColorUtilities.getSecondaryTextColorId(nightMode);
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(title);
-		tvTitle.setTextColor(getResources().getColor(textColor, app.getTheme()));
+		tvTitle.setTextColor(enabled
+				? ColorUtilities.getPrimaryTextColor(app, nightMode)
+				: ColorUtilities.getSecondaryTextColor(app, nightMode));
 
 		if (showShortDivider) {
 			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
@@ -237,16 +217,30 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		TextView stateContainer = view.findViewById(R.id.items_count_descr);
 
 		int selected = mapView.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get().ordinal();
-		String textSize = DistanceByTapTextSize.values()[selected].toHumanString(app);
+		String textSize = "";
+		if (app != null) {
+			textSize = DistanceByTapTextSize.values()[selected].toHumanString(app);
+		}
 
 		stateContainer.setText(textSize);
 		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		AndroidUiHelper.updateVisibility(stateContainer, true);
 
-		setupClickListener(view, listener);
+
+		View button = view.findViewById(R.id.button_container);
+		enableDisableView(button, enabled, listener);
+
 		setupListItemBackground(view);
 		return view;
+	}
+
+	private void enableDisableView(View view, boolean enabled, @Nullable OnClickListener listener) {
+		if (enabled) {
+			view.setOnClickListener(listener);
+		} else {
+			view.setEnabled(enabled);
+		}
 	}
 
 	private void setupListItemBackground(@NonNull View view) {
@@ -256,18 +250,15 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		AndroidUtils.setBackground(button, background);
 	}
 
-	private void setupClickListener(@NonNull View view, @Nullable OnClickListener listener) {
-		View button = view.findViewById(R.id.button_container);
-		button.setOnClickListener(listener);
-	}
 
 	private void setupConfigButtons() {
 		buttonsCard.removeAllViews();
+		boolean distanceByTapEnabled = settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode);
 
 		buttonsCard.addView(createButtonWithState(
 				R.drawable.ic_action_map_text_size,
 				getString(R.string.text_size),
-				settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode),
+				distanceByTapEnabled,
 				false,
 				(MapActivity) requireActivity(),
 				v -> {
@@ -309,38 +300,11 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	                                boolean animate) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			int slideInAnim = 0;
-			int slideOutAnim = 0;
-			OsmandApplication app = ((OsmandApplication) activity.getApplication());
-			if (animate && !app.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			}
-
 			DistanceByTapFragment fragment = new DistanceByTapFragment();
 			fm.beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	private void updateListeners() {
-		for (DistanceByTapUpdateListener listener : listeners) {
-			listener.onDistanceByTapUpdated();
-		}
-	}
-
-	public static void registerListener(DistanceByTapUpdateListener listener) {
-		listeners.add(listener);
-	}
-
-	public static void unRegisterListener(DistanceByTapUpdateListener listener) {
-		listeners.remove(listener);
-	}
-
-	public interface DistanceByTapUpdateListener {
-		void onDistanceByTapUpdated();
 	}
 }
