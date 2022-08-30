@@ -701,7 +701,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 			if (downloadIndexItem != null && listAdapter != null) {
-				int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
+				int downloadProgress = (int) downloadThread.getCurrentDownloadProgress();
 				ArrayAdapter<ContextMenuItem> adapter = (ArrayAdapter<ContextMenuItem>) listAdapter;
 				for (int i = 0; i < adapter.getCount(); i++) {
 					ContextMenuItem item = adapter.getItem(i);

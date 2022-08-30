@@ -432,7 +432,7 @@ public class MapDataMenuController extends MenuController {
 			titleProgressController.setMapDownloadMode();
 			if (downloadThread.getCurrentDownloadingItem() == indexItem) {
 				titleProgressController.indeterminate = false;
-				titleProgressController.progress = downloadThread.getCurrentDownloadingItemProgress();
+				titleProgressController.progress = downloadThread.getCurrentDownloadProgress();
 			} else {
 				titleProgressController.indeterminate = true;
 				titleProgressController.progress = 0;
