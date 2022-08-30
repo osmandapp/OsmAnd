@@ -43,7 +43,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void acquireOriginObject() {
-		originObject = findAmenityObject(fav.getExtensions(), fav.getAmenityOriginName(),
+		originObject = collectUpdatedPointInfo(fav.getExtensions(), fav.getAmenityOriginName(),
 				fav.getTransportStopOriginName(), fav.getLatitude(), fav.getLongitude());
 	}
 

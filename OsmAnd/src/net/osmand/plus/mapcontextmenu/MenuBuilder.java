@@ -1490,7 +1490,7 @@ public class MenuBuilder {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
-	protected Object findAmenityObject(Map<String, String> gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
+	protected Object collectUpdatedPointInfo(Map<String, String> gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
 		if (Algorithms.isEmpty(transportStopOriginName)) {
 			return findUpdatedAmenityExtensions(gpxExtensions, amenityOriginName, lat, lon);
 		} else {

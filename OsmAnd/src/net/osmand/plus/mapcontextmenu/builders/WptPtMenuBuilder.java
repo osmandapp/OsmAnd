@@ -47,7 +47,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	private void acquireOriginObject() {
-		originObject = findAmenityObject(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(),
+		originObject = collectUpdatedPointInfo(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(),
 				wpt.getTransportStopOriginName(), wpt.getLatitude(), wpt.getLongitude());
 	}
 
