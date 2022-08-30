@@ -29,7 +29,6 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-import net.osmand.plus.settings.datastorage.StorageMigrationAsyncTask.StorageMigrationListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -338,4 +337,16 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		}
 		return null;
 	}
+}
+
+interface StorageMigrationListener {
+
+	void onFileCopyStarted(@NonNull String path);
+
+	void onFilesCopyProgress(int progress);
+
+	void onFilesCopyFinished(@NonNull Map<String, Pair<String, Long>> errors, @NonNull List<File> existingFiles);
+
+	void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair);
+
 }

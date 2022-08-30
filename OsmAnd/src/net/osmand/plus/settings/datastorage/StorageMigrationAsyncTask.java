@@ -229,16 +229,4 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 
 		void onFileCopyFinished(@NonNull String fileName, int progress);
 	}
-
-	public interface StorageMigrationListener {
-
-		void onFileCopyStarted(@NonNull String path);
-
-		void onFilesCopyProgress(int progress);
-
-		void onFilesCopyFinished(@NonNull Map<String, Pair<String, Long>> errors, @NonNull List<File> existingFiles);
-
-		void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair);
-
-	}
 }

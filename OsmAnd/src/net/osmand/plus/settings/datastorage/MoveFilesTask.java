@@ -1,13 +1,20 @@
-package net.osmand.plus.settings.datastorage.task;
+package net.osmand.plus.settings.datastorage;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Pair;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.documentfile.provider.DocumentFile;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -15,13 +22,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.List;
 
-public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
+public class MoveFilesTask extends AsyncTask<Void, Object, Boolean> {
 
 	protected WeakReference<OsmandActionBarActivity> activity;
 	private final WeakReference<Context> context;
-	private final File from;
-	private final File to;
+	private final StorageItem from;
+	private final StorageItem to;
 	protected ProgressImplementation progress;
 	private Runnable runOnSuccess;
 	private int movedCount;
@@ -32,11 +40,23 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 	private long failedSize;
 	private String exceptionMessage;
 
-	public MoveFilesTask(OsmandActionBarActivity activity, File from, File to) {
+	private StorageMigrationListener migrationListener;
+
+	private Pair<Long, Long> filesSize;
+	private List<DocumentFile> documentFiles;
+	private int copyProgress;
+
+	public MoveFilesTask(OsmandActionBarActivity activity,
+	                     StorageItem from,
+	                     StorageItem to,
+	                     @NonNull List<DocumentFile> documentFiles,
+	                     @NonNull Pair<Long, Long> filesSize) {
 		this.activity = new WeakReference<>(activity);
 		this.context = new WeakReference<>(activity);
 		this.from = from;
 		this.to = to;
+		this.filesSize = filesSize;
+		this.documentFiles = documentFiles;
 	}
 
 	public void setRunOnSuccess(Runnable runOnSuccess) {
@@ -76,10 +96,19 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 		movedCount = 0;
 		copiedCount = 0;
 		failedCount = 0;
-		progress = ProgressImplementation.createProgressDialog(
+/*		progress = ProgressImplementation.createProgressDialog(
 				ctx, ctx.getString(R.string.copying_osmand_files),
 				ctx.getString(R.string.copying_osmand_files_descr, to.getPath()),
-				ProgressDialog.STYLE_HORIZONTAL);
+				ProgressDialog.STYLE_HORIZONTAL);*/
+
+		FragmentActivity fActivity = activity.get();
+		if (AndroidUtils.isActivityNotDestroyed(fActivity)) {
+			FragmentManager manager = fActivity.getSupportFragmentManager();
+
+			copyProgress = 0;
+			migrationListener = StorageMigrationFragment.showInstance(manager, to, filesSize,
+					copyProgress, documentFiles.size(), true);
+		}
 	}
 
 	@Override
@@ -96,9 +125,9 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 			}
 		}
 		try {
-			if (progress.getDialog().isShowing()) {
-				progress.getDialog().dismiss();
-			}
+/*			if (progress.getDialog().isShowing()) {
+				//progress.getDialog().dismiss();
+			}*/
 		} catch (Exception e) {
 			//ignored
 		}
@@ -110,7 +139,9 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 			return;
 		}
 		if (depth <= 2) {
-			progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), -1);
+			//progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), -1);
+			//migrationListener.onFileCopyStarted(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()));
+			publishProgress(t.getName());
 		}
 		if (f.isDirectory()) {
 			t.mkdirs();
@@ -139,8 +170,12 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 				FileInputStream fin = new FileInputStream(f);
 				FileOutputStream fout = new FileOutputStream(t);
 				try {
-					progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));
-					Algorithms.streamCopy(fin, fout, progress, 1024);
+					//progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));
+					//migrationListener.onFileCopyStarted(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()));
+					publishProgress(t.getName());
+
+					//Algorithms.streamCopy(fin, fout, progress, 1024);
+					Algorithms.streamCopy(fin, fout);
 					copiedCount++;
 					copiedSize += fileSize;
 				} catch (IOException e) {
@@ -154,20 +189,37 @@ public class MoveFilesTask extends AsyncTask<Void, Void, Boolean> {
 			}
 		}
 		if (depth <= 2) {
-			progress.finishTask();
+			//progress.finishTask();
+		}
+	}
+
+	@Override
+	protected void onProgressUpdate(Object... values) {
+		if (migrationListener != null) {
+			for (Object object : values) {
+				if (object instanceof String) {
+					migrationListener.onFileCopyStarted((String) object);
+				} /*else if (object instanceof Integer) {
+					generalProgress = (Integer) object;
+					migrationListener.onFilesCopyProgress(generalProgress);
+				} else if (object instanceof Pair) {
+					migrationListener.onRemainingFilesUpdate((Pair<Integer, Long>) object);
+				}*/
+			}
 		}
 	}
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		to.mkdirs();
+		File fromDirectory = new File(from.getDirectory());
+		File toDirectory = new File(to.getDirectory());
+		fromDirectory.mkdirs();
 		try {
-			movingFiles(from, to, 0);
+			movingFiles(fromDirectory, toDirectory, 0);
 		} catch (IOException e) {
 			exceptionMessage = e.getMessage();
 			return false;
 		}
 		return true;
 	}
-
 }

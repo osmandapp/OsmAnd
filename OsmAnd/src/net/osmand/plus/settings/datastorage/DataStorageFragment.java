@@ -19,9 +19,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.BidiFormatter;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
@@ -47,9 +52,9 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
+import net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
-import net.osmand.plus.settings.datastorage.task.MoveFilesTask;
 import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -57,12 +62,16 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
+public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter, FilesCollectListener {
 
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 	public static final int UI_REFRESH_TIME_MS = 500;
@@ -86,6 +95,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private OsmandActionBarActivity activity;
 	private boolean storageMigration;
 	private boolean firstUsage;
+
+	private DocumentFilesCollectTask collectTask;
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -171,7 +183,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						newDataStorage.setDirectory(directory);
 					}
 					if (moveMaps) {
-						moveData(currentDataStorage, newDataStorage);
+						File fromDirectory = new File(currentDataStorage.getDirectory());
+						Log.e("Uri","Uri.fromFile: " + Uri.fromFile(fromDirectory));
+						updateSelectedFolderFiles(Uri.fromFile(fromDirectory));
+
 					} else {
 						confirm(app, activity, newDataStorage, false);
 					}
@@ -401,6 +416,36 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
+	private void stopCollectFilesTask() {
+		if (collectTask != null) {
+			collectTask.cancel(false);
+		}
+	}
+
+	private void updateSelectedFolderFiles(@NonNull Uri uri) {
+		stopCollectFilesTask();
+		collectTask = new DocumentFilesCollectTask(app, uri, this);
+		collectTask.executeOnExecutor(singleThreadExecutor);
+	}
+
+	@Override
+	public void onFilesCollectingStarted() {
+	}
+
+	@Override
+	public void onFilesCollectingFinished(@Nullable String error,
+	                                      @NonNull DocumentFile folder,
+	                                      @NonNull List<DocumentFile> files,
+	                                      @NonNull Pair<Long, Long> size) {
+		collectTask = null;
+		if (Algorithms.isEmpty(error)) {
+			moveData(currentDataStorage, newDataStorage, files, size);
+		} else {
+			app.showToastMessage(error);
+		}
+	}
+
+
 	@Override
 	public void onDestroy() {
 		if (!activity.isChangingConfigurations()) {
@@ -435,11 +480,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
-	private void moveData(StorageItem currentStorage, StorageItem newStorage) {
-		File fromDirectory = new File(currentStorage.getDirectory());
-		File toDirectory = new File(newStorage.getDirectory());
+	private void moveData(StorageItem currentStorage,
+	                      StorageItem newStorage,
+	                      @NonNull List<DocumentFile> documentFiles,
+	                      @NonNull Pair<Long, Long> filesSize) {
 		@SuppressLint("StaticFieldLeak")
-		MoveFilesTask task = new MoveFilesTask(activity, fromDirectory, toDirectory) {
+		MoveFilesTask task = new MoveFilesTask(activity, currentStorage, newStorage, documentFiles, filesSize) {
 
 
 			@NonNull
